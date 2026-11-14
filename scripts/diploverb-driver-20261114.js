@@ -45,6 +45,7 @@ const REPO = process.env.REPO || path.join(__dirname, '..');
 const { loadGame, setupGame, runDays, quietLog } = require(path.join(REPO, 'scripts', 'sim-harness'));
 const { competent } = require(path.join(REPO, 'scripts', 'policies', 'competent'));
 const { capable, capableSummary } = require(path.join(REPO, 'scripts', 'policies', 'capable'));
+const { createLinkCapture } = require(path.join(REPO, 'scripts', 'linklines-capture'));
 
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : []).filter(Number.isFinite);
 const POLICIES = (process.env.POLICY ? process.env.POLICY.split(',').map(function (s) { return s.trim(); }) : ['competent', 'capable']).filter(Boolean);
@@ -192,8 +193,6 @@ function snapshot(Game, errors) {
   }
 }
 
-const LINK_LINE_RE = /tend|season|polity|realm|trust|tribute|feast|link|bond|accord|court|drift|bow|table|seat|lesser/i;
-
 async function oneRun(seed, policyName) {
   const policy = policyName === 'capable' ? capable : competent;
   if (policyName !== 'competent' && policyName !== 'capable') throw new Error('Unknown policy ' + policyName);
@@ -201,7 +200,12 @@ async function oneRun(seed, policyName) {
   const series = [];
   const events = [];
   const verbEvents = [];
-  const linkLines = [];
+  const linkCap = createLinkCapture({ cap: 150, episodeCap: 60 });
+  const linkLines = linkCap.linkLines;
+  // dissolutionLines: the realm-dissolution episode ring (see
+  // scripts/linklines-capture.js) — survives the 150-line general cap so a
+  // late dissolution is still readable in the villagers' words.
+  const dissolutionLines = linkCap.episodeLines;
   const seatTakes = [];
   const tableChoices = [];
   const errors = [];
@@ -420,9 +424,7 @@ async function oneRun(seed, policyName) {
     Game.say = function () {
       try {
         const arg = arguments.length ? arguments[0] : null;
-        if (typeof arg === 'string' && LINK_LINE_RE.test(String(arg)) && linkLines.length < 150) {
-          linkLines.push({ day: gday(Game), line: String(arg).slice(0, 400) });
-        }
+        if (typeof arg === 'string') linkCap.push(gday(Game), String(arg));
       } catch (e) { errors.push('say-wrap: ' + String(e.message).slice(0, 80)); }
       return origSay.apply(this, arguments);
     };
@@ -497,7 +499,7 @@ async function oneRun(seed, policyName) {
     standingRaw: standingRaw,
     waveKills: Object.assign({}, st.waveKills || {}),
     series: series, events: events, verbEvents: verbEvents,
-    linkLines: linkLines,
+    linkLines: linkLines, dissolutionLines: dissolutionLines,
     seatTakes: seatTakes, tableChoices: tableChoices,
     tableState: tableState ? {
       path: tableState.path || null, branch: tableState.branch || null,

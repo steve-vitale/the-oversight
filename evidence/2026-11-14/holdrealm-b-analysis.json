@@ -1,0 +1,6107 @@
+{
+  "arm": "sim-holdrealm-b",
+  "corpus": "answercourt-confirm-b",
+  "policy": "competent-answercourt-b",
+  "dissolutions": [
+    {
+      "seed": "100201",
+      "dissolved": false,
+      "nationalDay": 62
+    },
+    {
+      "seed": "100202",
+      "dissolved": false,
+      "nationalDay": null
+    },
+    {
+      "seed": "100203",
+      "dissolved": true,
+      "nationalDay": 62,
+      "dissolutionDay": 90,
+      "heldDays": 28,
+      "endReason": "survived",
+      "endDay": 150,
+      "maxWave": 5,
+      "standing": 350,
+      "mechanism": "speaker-death",
+      "mechanismDetail": "Leader/speaker died day 89; the succession haircut pushed a link below the seasoned trust-40 bar the same day.",
+      "evidence": {
+        "speakerDeath": [
+          {
+            "day": 89,
+            "line": "🕯️ Arjun is dead — and the dead hold no treaties. Every link Haven has shakes."
+          },
+          {
+            "day": 89,
+            "line": "The Codex doesn't pause for grief. Marco blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+          }
+        ],
+        "trustSlide": [
+          {
+            "day": 79,
+            "kind": "hostile-event",
+            "line": "🌪️ THE HERALD struck Emberhold in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)"
+          },
+          {
+            "day": 80,
+            "kind": "hostile-event",
+            "line": "🌙 Raid — Stonebridge came in the night from the northeast. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -1"
+          },
+          {
+            "day": 84,
+            "kind": "hostile-event",
+            "line": "🌪️ THE HERALD struck Emberhold in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)"
+          },
+          {
+            "day": 89,
+            "kind": "hostile-event",
+            "line": "🌪️ THE HERALD struck Emberhold in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)"
+          },
+          {
+            "day": 89,
+            "kind": "hostile-event",
+            "line": "🌙 Raid — Stonebridge came in the night from the northeast. They trampled 2 garden plots into mud. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -1"
+          },
+          {
+            "day": 90,
+            "kind": "crossed-below-40",
+            "other": "village_0",
+            "from": 44,
+            "to": 36
+          },
+          {
+            "day": 90,
+            "kind": "crossed-below-40",
+            "other": "village_2",
+            "from": 41,
+            "to": 33
+          }
+        ],
+        "linkBreak": [],
+        "feastMourning": [
+          {
+            "day": 89,
+            "kind": "succession-tribute-press",
+            "line": "Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it. (Trust -8.)"
+          },
+          {
+            "day": 89,
+            "kind": "succession-tribute-press",
+            "line": "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it. (Trust -8.)"
+          },
+          {
+            "day": 89,
+            "kind": "succession-tribute-press",
+            "line": "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it. (Trust -8.)"
+          }
+        ],
+        "pendingStall": []
+      },
+      "links": [
+        {
+          "id": "link_mgpsphv3527",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDisMinus1": 44,
+          "trustAtDis": 36,
+          "trust7dBefore": 53,
+          "minInWindow": 36,
+          "crossedBelow40": [
+            {
+              "day": 90,
+              "from": 44,
+              "to": 36
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpsphx0571",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDisMinus1": 49,
+          "trustAtDis": 41,
+          "trust7dBefore": 48,
+          "minInWindow": 41,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        },
+        {
+          "id": "link_mgpsphyz242",
+          "other": "village_2",
+          "kind": "link",
+          "trustAtDisMinus1": 41,
+          "trustAtDis": 33,
+          "trust7dBefore": 40,
+          "minInWindow": 33,
+          "crossedBelow40": [
+            {
+              "day": 90,
+              "from": 41,
+              "to": 33
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        }
+      ],
+      "seriesWin": [
+        {
+          "d": 76,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 7,
+          "pantry": 14004,
+          "feasts": 0
+        },
+        {
+          "d": 77,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 7,
+          "pantry": 15113,
+          "feasts": 0
+        },
+        {
+          "d": 78,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 16187,
+          "feasts": 0
+        },
+        {
+          "d": 79,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 14033,
+          "feasts": 0
+        },
+        {
+          "d": 80,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 13284,
+          "feasts": 0
+        },
+        {
+          "d": 81,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 10,
+          "pantry": 12820,
+          "feasts": 0
+        },
+        {
+          "d": 82,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 10234,
+          "feasts": 0
+        },
+        {
+          "d": 83,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 12537,
+          "feasts": 0
+        },
+        {
+          "d": 84,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 12468,
+          "feasts": 0
+        },
+        {
+          "d": 85,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 13919,
+          "feasts": 0
+        },
+        {
+          "d": 86,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 11049,
+          "feasts": 0
+        },
+        {
+          "d": 87,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 11271,
+          "feasts": 0
+        },
+        {
+          "d": 88,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 11289,
+          "feasts": 0
+        },
+        {
+          "d": 89,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 10801,
+          "feasts": 0
+        },
+        {
+          "d": 90,
+          "scale": "regional",
+          "nSeasoned": 1,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 6,
+          "pantry": 10649,
+          "feasts": 0
+        },
+        {
+          "d": 91,
+          "scale": "regional",
+          "nSeasoned": 1,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 6,
+          "pantry": 10895,
+          "feasts": 0
+        },
+        {
+          "d": 92,
+          "scale": "regional",
+          "nSeasoned": 1,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 6,
+          "pantry": 10301,
+          "feasts": 0
+        }
+      ],
+      "dissolutionLines": [
+        {
+          "day": 89,
+          "line": "📡 The world feed goes quiet — the summons dies with the realm that earned it. The galaxy watched a fire that is out."
+        },
+        {
+          "day": 89,
+          "line": "◈ The realm came apart — no polity answers to Haven now, and Haven is a free fire again. National no longer describes this village. The climb starts over."
+        }
+      ],
+      "driftLines": [
+        {
+          "day": 89,
+          "line": "⚠️ Emberhold's fire is drifting from ours — their speaker doesn't linger at the gate the way they used to, and nobody over there says why. Bonds don't mend themselves; a tended fire remembers who fed "
+        },
+        {
+          "day": 89,
+          "line": "⚠️ Thornfield's fire is drifting from ours — their speaker doesn't linger at the gate the way they used to, and nobody over there says why. Bonds don't mend themselves; a tended fire remembers who fed"
+        }
+      ],
+      "deathsInWindow": [
+        {
+          "day": 77,
+          "kind": "monster",
+          "who": "bright_idea",
+          "cause": "villager combat",
+          "player": false
+        },
+        {
+          "day": 81,
+          "kind": "monster",
+          "who": "chorus_line",
+          "cause": "villager combat",
+          "player": false
+        },
+        {
+          "day": 82,
+          "kind": "villager",
+          "who": "app_mgpsphve57",
+          "cause": "monster",
+          "player": false
+        },
+        {
+          "day": 84,
+          "kind": "villager",
+          "who": "victor_lopez",
+          "cause": "a wound that wouldn't close",
+          "player": false
+        },
+        {
+          "day": 89,
+          "kind": "villager",
+          "who": "gen_cuzdkcv",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 90,
+          "kind": "villager",
+          "who": "tom_baker",
+          "cause": "monster",
+          "player": false
+        }
+      ],
+      "verbsInWindow": [],
+      "linkLinesCapHit": true,
+      "linkLinesLastDay": 117
+    },
+    {
+      "seed": "100204",
+      "dissolved": true,
+      "nationalDay": 68,
+      "dissolutionDay": 139,
+      "heldDays": 71,
+      "endReason": "village-lost",
+      "endDay": 140,
+      "maxWave": 4,
+      "standing": 199,
+      "mechanism": "trust-slide",
+      "mechanismDetail": "Link(s) crossed below trust 40 in the window: village_0 d139 47->39.",
+      "evidence": {
+        "speakerDeath": [],
+        "trustSlide": [
+          {
+            "day": 139,
+            "kind": "crossed-below-40",
+            "other": "village_0",
+            "from": 47,
+            "to": 39
+          }
+        ],
+        "linkBreak": [],
+        "feastMourning": [],
+        "pendingStall": []
+      },
+      "links": [
+        {
+          "id": "link_mgpsphvk987",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDisMinus1": 53,
+          "trustAtDis": 40,
+          "trust7dBefore": 49,
+          "minInWindow": 40,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        },
+        {
+          "id": "link_mgpsphxe314",
+          "other": "village_3",
+          "kind": "link",
+          "trustAtDisMinus1": 49,
+          "trustAtDis": 41,
+          "trust7dBefore": 49,
+          "minInWindow": 41,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        },
+        {
+          "id": "link_mgpspiwv206",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDisMinus1": 47,
+          "trustAtDis": 39,
+          "trust7dBefore": 47,
+          "minInWindow": 39,
+          "crossedBelow40": [
+            {
+              "day": 139,
+              "from": 47,
+              "to": 39
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        }
+      ],
+      "seriesWin": [
+        {
+          "d": 125,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 3,
+          "pantry": 1600,
+          "feasts": 0
+        },
+        {
+          "d": 126,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 3,
+          "pantry": 778,
+          "feasts": 0
+        },
+        {
+          "d": 127,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 2,
+          "pantry": 1000,
+          "feasts": 0
+        },
+        {
+          "d": 128,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 2,
+          "pantry": 800,
+          "feasts": 0
+        },
+        {
+          "d": 129,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 1,
+          "pantry": 0,
+          "feasts": 0
+        },
+        {
+          "d": 130,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 2,
+          "pantry": 0,
+          "feasts": 0
+        },
+        {
+          "d": 131,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 2,
+          "pantry": 0,
+          "feasts": 0
+        },
+        {
+          "d": 132,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 2,
+          "pantry": 0,
+          "feasts": 0
+        },
+        {
+          "d": 133,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 2,
+          "pantry": 0,
+          "feasts": 0
+        },
+        {
+          "d": 134,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 2,
+          "pantry": 2200,
+          "feasts": 0
+        },
+        {
+          "d": 135,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 2,
+          "pantry": 0,
+          "feasts": 0
+        },
+        {
+          "d": 136,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 2,
+          "pantry": 0,
+          "feasts": 0
+        },
+        {
+          "d": 137,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 2,
+          "pantry": 0,
+          "feasts": 0
+        },
+        {
+          "d": 138,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 68
+          },
+          "nationalLive": true,
+          "pop": 2,
+          "pantry": 0,
+          "feasts": 0
+        },
+        {
+          "d": 139,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 1,
+          "pantry": 0,
+          "feasts": 0
+        },
+        {
+          "d": 140,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 1,
+          "pantry": 0,
+          "feasts": 0
+        }
+      ],
+      "dissolutionLines": [],
+      "driftLines": [],
+      "deathsInWindow": [
+        {
+          "day": 126,
+          "kind": "villager",
+          "who": "aroha_ngata",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 127,
+          "kind": "monster",
+          "who": "chorus_line",
+          "cause": "combat",
+          "player": false
+        },
+        {
+          "day": 128,
+          "kind": "villager",
+          "who": "theo_lindqvist",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 138,
+          "kind": "villager",
+          "who": "gen_0qe3g00",
+          "cause": "the wild",
+          "player": true
+        }
+      ],
+      "verbsInWindow": [],
+      "linkLinesCapHit": true,
+      "linkLinesLastDay": 105
+    },
+    {
+      "seed": "100205",
+      "dissolved": false,
+      "nationalDay": 62
+    },
+    {
+      "seed": "100206",
+      "dissolved": true,
+      "nationalDay": 62,
+      "dissolutionDay": 134,
+      "heldDays": 72,
+      "endReason": "village-lost",
+      "endDay": 137,
+      "maxWave": 5,
+      "standing": 395,
+      "mechanism": "trust-slide",
+      "mechanismDetail": "Link(s) crossed below trust 40 in the window: village_1 d133 47->39; village_3 d133 41->33.",
+      "evidence": {
+        "speakerDeath": [],
+        "trustSlide": [
+          {
+            "day": 133,
+            "kind": "crossed-below-40",
+            "other": "village_1",
+            "from": 47,
+            "to": 39
+          },
+          {
+            "day": 133,
+            "kind": "crossed-below-40",
+            "other": "village_3",
+            "from": 41,
+            "to": 33
+          }
+        ],
+        "linkBreak": [
+          {
+            "other": "village_0",
+            "status": "broken"
+          },
+          {
+            "day": 122,
+            "verb": "breakLink",
+            "other": "village_0"
+          }
+        ],
+        "feastMourning": [],
+        "pendingStall": []
+      },
+      "links": [
+        {
+          "id": "link_mgpsphuy12",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDisMinus1": 39,
+          "trustAtDis": 39,
+          "trust7dBefore": 47,
+          "minInWindow": 39,
+          "crossedBelow40": [
+            {
+              "day": 133,
+              "from": 47,
+              "to": 39
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpsphwf308",
+          "other": "village_2",
+          "kind": "link",
+          "trustAtDisMinus1": 48,
+          "trustAtDis": 43,
+          "trust7dBefore": 56,
+          "minInWindow": 43,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        },
+        {
+          "id": "link_mgpsphzg31",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDisMinus1": 0,
+          "trustAtDis": 0,
+          "trust7dBefore": 0,
+          "minInWindow": 0,
+          "crossedBelow40": [],
+          "statusAtDis": "broken",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpspiae716",
+          "other": "village_3",
+          "kind": "link",
+          "trustAtDisMinus1": 33,
+          "trustAtDis": 33,
+          "trust7dBefore": 46,
+          "minInWindow": 33,
+          "crossedBelow40": [
+            {
+              "day": 133,
+              "from": 41,
+              "to": 33
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        }
+      ],
+      "seriesWin": [
+        {
+          "d": 120,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 30040,
+          "feasts": 1
+        },
+        {
+          "d": 121,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 30262,
+          "feasts": 1
+        },
+        {
+          "d": 122,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 7,
+          "pantry": 27734,
+          "feasts": 1
+        },
+        {
+          "d": 123,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 6,
+          "pantry": 25335,
+          "feasts": 1
+        },
+        {
+          "d": 124,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 24773,
+          "feasts": 1
+        },
+        {
+          "d": 125,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 27023,
+          "feasts": 1
+        },
+        {
+          "d": 126,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 26898,
+          "feasts": 1
+        },
+        {
+          "d": 127,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 26563,
+          "feasts": 1
+        },
+        {
+          "d": 128,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 26286,
+          "feasts": 1
+        },
+        {
+          "d": 129,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 28629,
+          "feasts": 1
+        },
+        {
+          "d": 130,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 26690,
+          "feasts": 1
+        },
+        {
+          "d": 131,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 26205,
+          "feasts": 1
+        },
+        {
+          "d": 132,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 25115,
+          "feasts": 1
+        },
+        {
+          "d": 133,
+          "scale": "national",
+          "nSeasoned": 1,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 62
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 22014,
+          "feasts": 1
+        },
+        {
+          "d": 134,
+          "scale": "regional",
+          "nSeasoned": 1,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 2,
+          "pantry": 18142,
+          "feasts": 1
+        },
+        {
+          "d": 135,
+          "scale": "regional",
+          "nSeasoned": 1,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 2,
+          "pantry": 13116,
+          "feasts": 1
+        },
+        {
+          "d": 136,
+          "scale": "regional",
+          "nSeasoned": 1,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 1,
+          "pantry": 8328,
+          "feasts": 1
+        }
+      ],
+      "dissolutionLines": [],
+      "driftLines": [],
+      "deathsInWindow": [
+        {
+          "day": 120,
+          "kind": "monster",
+          "who": "influencer",
+          "cause": "combat",
+          "player": false
+        },
+        {
+          "day": 121,
+          "kind": "monster",
+          "who": "callback",
+          "cause": "villager combat",
+          "player": false
+        },
+        {
+          "day": 121,
+          "kind": "monster",
+          "who": "buffering",
+          "cause": "villager combat",
+          "player": false
+        },
+        {
+          "day": 122,
+          "kind": "villager",
+          "who": "caleb_jones",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 122,
+          "kind": "villager",
+          "who": "miguel_santos",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 123,
+          "kind": "villager",
+          "who": "app_mgpspjle722",
+          "cause": "a stranger",
+          "player": true
+        },
+        {
+          "day": 129,
+          "kind": "villager",
+          "who": "carlos_diaz",
+          "cause": "monster",
+          "player": false
+        },
+        {
+          "day": 133,
+          "kind": "villager",
+          "who": "aroha_ngata",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 134,
+          "kind": "villager",
+          "who": "devon_okafor",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 134,
+          "kind": "villager",
+          "who": "visjoin_127",
+          "cause": "monster",
+          "player": false
+        }
+      ],
+      "verbsInWindow": [
+        {
+          "day": 122,
+          "verb": "breakLink",
+          "other": "village_0"
+        },
+        {
+          "day": 133,
+          "verb": "tendLink",
+          "other": "village_1"
+        },
+        {
+          "day": 133,
+          "verb": "tendLink",
+          "other": "village_3"
+        }
+      ],
+      "linkLinesCapHit": true,
+      "linkLinesLastDay": 99
+    },
+    {
+      "seed": "100207",
+      "dissolved": false,
+      "nationalDay": 74
+    },
+    {
+      "seed": "100208",
+      "dissolved": true,
+      "nationalDay": 64,
+      "dissolutionDay": 101,
+      "heldDays": 37,
+      "endReason": "village-lost",
+      "endDay": 132,
+      "maxWave": 5,
+      "standing": 452,
+      "mechanism": "speaker-death",
+      "mechanismDetail": "Leader/speaker died day 100; the succession haircut pushed a link below the seasoned trust-40 bar the same day.",
+      "evidence": {
+        "speakerDeath": [
+          {
+            "day": 100,
+            "line": "🕯️ Carlos is dead — and the dead hold no treaties. Every link Haven has shakes."
+          },
+          {
+            "day": 100,
+            "line": "The Codex doesn't pause for grief. Dong blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+          }
+        ],
+        "trustSlide": [
+          {
+            "day": 89,
+            "kind": "hostile-event",
+            "line": "🌪️ THE HERALD struck Stonebridge in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)"
+          },
+          {
+            "day": 92,
+            "kind": "hostile-event",
+            "line": "🌙 Raid — Stonebridge came in the night from the west. They carried off ~800 kcal from the pantry. Nobody's dead, but the message is clear: the ground is theirs too, and they're done asking. (Trust -1"
+          },
+          {
+            "day": 94,
+            "kind": "hostile-event",
+            "line": "🌪️ THE HERALD struck Thornfield in the night. They bled while the coalition talked. (trust −5 — they notice who wasn't there.)"
+          },
+          {
+            "day": 99,
+            "kind": "hostile-event",
+            "line": "🌪️ THE HERALD fed in the night — 0 kcal gone from your stores. It is eating the realm while you deliberate."
+          },
+          {
+            "day": 100,
+            "kind": "crossed-below-40",
+            "other": "village_1",
+            "from": 47,
+            "to": 39
+          }
+        ],
+        "linkBreak": [],
+        "feastMourning": [
+          {
+            "day": 100,
+            "kind": "succession-tribute-press",
+            "line": "Stonebridge watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it. (Trust -8.)"
+          },
+          {
+            "day": 100,
+            "kind": "succession-tribute-press",
+            "line": "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it. (Trust -8.)"
+          },
+          {
+            "day": 100,
+            "kind": "succession-tribute-press",
+            "line": "Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it. (Trust -8.)"
+          }
+        ],
+        "pendingStall": []
+      },
+      "links": [
+        {
+          "id": "link_mgpsphur223",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDisMinus1": 39,
+          "trustAtDis": 39,
+          "trust7dBefore": 46,
+          "minInWindow": 39,
+          "crossedBelow40": [
+            {
+              "day": 100,
+              "from": 47,
+              "to": 39
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpsphwq20",
+          "other": "village_2",
+          "kind": "link",
+          "trustAtDisMinus1": 40,
+          "trustAtDis": 40,
+          "trust7dBefore": 47,
+          "minInWindow": 40,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        },
+        {
+          "id": "link_mgpspizj182",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDisMinus1": 74,
+          "trustAtDis": 74,
+          "trust7dBefore": 77,
+          "minInWindow": 72,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        }
+      ],
+      "seriesWin": [
+        {
+          "d": 87,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 10,
+          "pantry": 11180,
+          "feasts": 0
+        },
+        {
+          "d": 88,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 10,
+          "pantry": 13031,
+          "feasts": 0
+        },
+        {
+          "d": 89,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 10,
+          "pantry": 11363,
+          "feasts": 0
+        },
+        {
+          "d": 90,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 10,
+          "pantry": 14279,
+          "feasts": 0
+        },
+        {
+          "d": 91,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 10,
+          "pantry": 14253,
+          "feasts": 0
+        },
+        {
+          "d": 92,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 10,
+          "pantry": 16973,
+          "feasts": 0
+        },
+        {
+          "d": 93,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 10,
+          "pantry": 15987,
+          "feasts": 0
+        },
+        {
+          "d": 94,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 10,
+          "pantry": 16558,
+          "feasts": 0
+        },
+        {
+          "d": 95,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 10,
+          "pantry": 17248,
+          "feasts": 0
+        },
+        {
+          "d": 96,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 10,
+          "pantry": 10930,
+          "feasts": 0
+        },
+        {
+          "d": 97,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 13134,
+          "feasts": 0
+        },
+        {
+          "d": 98,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 12067,
+          "feasts": 0
+        },
+        {
+          "d": 99,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 9923,
+          "feasts": 0
+        },
+        {
+          "d": 100,
+          "scale": "national",
+          "nSeasoned": 2,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 7,
+          "pantry": 14117,
+          "feasts": 0
+        },
+        {
+          "d": 101,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 7,
+          "pantry": 14136,
+          "feasts": 0
+        },
+        {
+          "d": 102,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 7,
+          "pantry": 14137,
+          "feasts": 0
+        },
+        {
+          "d": 103,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 8,
+          "pantry": 13062,
+          "feasts": 0
+        }
+      ],
+      "dissolutionLines": [
+        {
+          "day": 100,
+          "line": "◈ The realm came apart — no polity answers to Haven now, and Haven is a free fire again. National no longer describes this village. The climb starts over."
+        }
+      ],
+      "driftLines": [
+        {
+          "day": 100,
+          "line": "⚠️ Stonebridge's fire is drifting from ours — their speaker doesn't linger at the gate the way they used to, and nobody over there says why. Bonds don't mend themselves; a tended fire remembers who fe"
+        }
+      ],
+      "deathsInWindow": [
+        {
+          "day": 87,
+          "kind": "monster",
+          "who": "drumbelly_tanuki",
+          "cause": "villager combat",
+          "player": false
+        },
+        {
+          "day": 92,
+          "kind": "monster",
+          "who": "mirrormoth",
+          "cause": "expedition",
+          "player": false
+        },
+        {
+          "day": 95,
+          "kind": "monster",
+          "who": "congregation",
+          "cause": "combat",
+          "player": false
+        },
+        {
+          "day": 96,
+          "kind": "monster",
+          "who": "redactor",
+          "cause": "villager combat",
+          "player": false
+        },
+        {
+          "day": 96,
+          "kind": "villager",
+          "who": "ursula_weber",
+          "cause": "monster",
+          "player": false
+        },
+        {
+          "day": 97,
+          "kind": "monster",
+          "who": "cliffhanger",
+          "cause": "expedition",
+          "player": false
+        },
+        {
+          "day": 98,
+          "kind": "monster",
+          "who": "statickite",
+          "cause": "combat",
+          "player": false
+        },
+        {
+          "day": 98,
+          "kind": "monster",
+          "who": "drumbelly_tanuki",
+          "cause": "expedition",
+          "player": false
+        },
+        {
+          "day": 98,
+          "kind": "villager",
+          "who": "desmond_clarke",
+          "cause": "a wound that wouldn't close",
+          "player": false
+        },
+        {
+          "day": 100,
+          "kind": "villager",
+          "who": "carlos_diaz",
+          "cause": "the wild",
+          "player": true
+        }
+      ],
+      "verbsInWindow": [],
+      "linkLinesCapHit": true,
+      "linkLinesLastDay": 126
+    },
+    {
+      "seed": "100209",
+      "dissolved": false,
+      "nationalDay": null
+    },
+    {
+      "seed": "100210",
+      "dissolved": false,
+      "nationalDay": null
+    },
+    {
+      "seed": "100211",
+      "dissolved": true,
+      "nationalDay": 63,
+      "dissolutionDay": 107,
+      "heldDays": 44,
+      "endReason": "survived",
+      "endDay": 150,
+      "maxWave": 4,
+      "standing": 199,
+      "mechanism": "trust-slide",
+      "mechanismDetail": "Link(s) crossed below trust 40 in the window: village_spl_26_20595 d106 43->36.",
+      "evidence": {
+        "speakerDeath": [],
+        "trustSlide": [
+          {
+            "day": 106,
+            "kind": "crossed-below-40",
+            "other": "village_spl_26_20595",
+            "from": 43,
+            "to": 36
+          }
+        ],
+        "linkBreak": [
+          {
+            "other": "village_3",
+            "status": "broken"
+          }
+        ],
+        "feastMourning": [],
+        "pendingStall": []
+      },
+      "links": [
+        {
+          "id": "link_mgpsphvk326",
+          "other": "village_3",
+          "kind": "link",
+          "trustAtDisMinus1": 3,
+          "trustAtDis": 3,
+          "trust7dBefore": 3,
+          "minInWindow": 3,
+          "crossedBelow40": [],
+          "statusAtDis": "broken",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpsphvl872",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDisMinus1": 69,
+          "trustAtDis": 69,
+          "trust7dBefore": 72,
+          "minInWindow": 69,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        },
+        {
+          "id": "link_mgpsphxg324",
+          "other": "village_2",
+          "kind": "link",
+          "trustAtDisMinus1": 40,
+          "trustAtDis": 40,
+          "trust7dBefore": 47,
+          "minInWindow": 40,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        },
+        {
+          "id": "link_mgpspj0a119",
+          "other": "village_spl_26_20595",
+          "kind": "link",
+          "trustAtDisMinus1": 36,
+          "trustAtDis": 36,
+          "trust7dBefore": 43,
+          "minInWindow": 36,
+          "crossedBelow40": [
+            {
+              "day": 106,
+              "from": 43,
+              "to": 36
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpspjdw681",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDisMinus1": 21,
+          "trustAtDis": 21,
+          "trust7dBefore": 28,
+          "minInWindow": 21,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        }
+      ],
+      "seriesWin": [
+        {
+          "d": 93,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 10839,
+          "feasts": 4
+        },
+        {
+          "d": 94,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 10418,
+          "feasts": 4
+        },
+        {
+          "d": 95,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 12100,
+          "feasts": 4
+        },
+        {
+          "d": 96,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 11548,
+          "feasts": 4
+        },
+        {
+          "d": 97,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 11953,
+          "feasts": 4
+        },
+        {
+          "d": 98,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 10315,
+          "feasts": 4
+        },
+        {
+          "d": 99,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 11960,
+          "feasts": 4
+        },
+        {
+          "d": 100,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 11422,
+          "feasts": 4
+        },
+        {
+          "d": 101,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 7379,
+          "feasts": 4
+        },
+        {
+          "d": 102,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 3213,
+          "feasts": 4
+        },
+        {
+          "d": 103,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 926,
+          "feasts": 4
+        },
+        {
+          "d": 104,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 1321,
+          "feasts": 4
+        },
+        {
+          "d": 105,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 0,
+          "feasts": 4
+        },
+        {
+          "d": 106,
+          "scale": "national",
+          "nSeasoned": 2,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 3,
+          "pantry": 5612,
+          "feasts": 4
+        },
+        {
+          "d": 107,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 3,
+          "pantry": 3674,
+          "feasts": 4
+        },
+        {
+          "d": 108,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 3,
+          "pantry": 1436,
+          "feasts": 4
+        },
+        {
+          "d": 109,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 3,
+          "pantry": 600,
+          "feasts": 4
+        }
+      ],
+      "dissolutionLines": [],
+      "driftLines": [],
+      "deathsInWindow": [
+        {
+          "day": 93,
+          "kind": "monster",
+          "who": "eulogy",
+          "cause": "combat",
+          "player": false
+        },
+        {
+          "day": 106,
+          "kind": "monster",
+          "who": "landlord",
+          "cause": "combat",
+          "player": false
+        },
+        {
+          "day": 106,
+          "kind": "villager",
+          "who": "gen_xsx1ojy",
+          "cause": "the wild",
+          "player": true
+        }
+      ],
+      "verbsInWindow": [],
+      "linkLinesCapHit": true,
+      "linkLinesLastDay": 86
+    },
+    {
+      "seed": "100212",
+      "dissolved": true,
+      "nationalDay": 65,
+      "dissolutionDay": 142,
+      "heldDays": 77,
+      "endReason": "survived",
+      "endDay": 150,
+      "maxWave": 5,
+      "standing": 225,
+      "mechanism": "trust-slide",
+      "mechanismDetail": "Link(s) crossed below trust 40 in the window: village_0 d131 45->37; village_1 d142 47->39; village_2 d142 41->28.",
+      "evidence": {
+        "speakerDeath": [],
+        "trustSlide": [
+          {
+            "day": 131,
+            "kind": "crossed-below-40",
+            "other": "village_0",
+            "from": 45,
+            "to": 37
+          },
+          {
+            "day": 142,
+            "kind": "crossed-below-40",
+            "other": "village_1",
+            "from": 47,
+            "to": 39
+          },
+          {
+            "day": 142,
+            "kind": "crossed-below-40",
+            "other": "village_2",
+            "from": 41,
+            "to": 28
+          }
+        ],
+        "linkBreak": [],
+        "feastMourning": [],
+        "pendingStall": []
+      },
+      "links": [
+        {
+          "id": "link_mgpsphs5190",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDisMinus1": 33,
+          "trustAtDis": 25,
+          "trust7dBefore": 37,
+          "minInWindow": 25,
+          "crossedBelow40": [
+            {
+              "day": 131,
+              "from": 45,
+              "to": 37
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpsphu4577",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDisMinus1": 47,
+          "trustAtDis": 39,
+          "trust7dBefore": 46,
+          "minInWindow": 39,
+          "crossedBelow40": [
+            {
+              "day": 142,
+              "from": 47,
+              "to": 39
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpspisl512",
+          "other": "village_3",
+          "kind": "link",
+          "trustAtDisMinus1": 64,
+          "trustAtDis": 56,
+          "trust7dBefore": 68,
+          "minInWindow": 56,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        },
+        {
+          "id": "link_mgpspjao57",
+          "other": "village_2",
+          "kind": "link",
+          "trustAtDisMinus1": 41,
+          "trustAtDis": 28,
+          "trust7dBefore": 40,
+          "minInWindow": 28,
+          "crossedBelow40": [
+            {
+              "day": 142,
+              "from": 41,
+              "to": 28
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        }
+      ],
+      "seriesWin": [
+        {
+          "d": 128,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 11775,
+          "feasts": 0
+        },
+        {
+          "d": 129,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 10637,
+          "feasts": 0
+        },
+        {
+          "d": 130,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 10796,
+          "feasts": 0
+        },
+        {
+          "d": 131,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 9864,
+          "feasts": 0
+        },
+        {
+          "d": 132,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 9864,
+          "feasts": 0
+        },
+        {
+          "d": 133,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 11152,
+          "feasts": 0
+        },
+        {
+          "d": 134,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 9364,
+          "feasts": 0
+        },
+        {
+          "d": 135,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 10269,
+          "feasts": 0
+        },
+        {
+          "d": 136,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 9304,
+          "feasts": 0
+        },
+        {
+          "d": 137,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 7979,
+          "feasts": 0
+        },
+        {
+          "d": 138,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 7989,
+          "feasts": 0
+        },
+        {
+          "d": 139,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 7162,
+          "feasts": 0
+        },
+        {
+          "d": 140,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 5400,
+          "feasts": 0
+        },
+        {
+          "d": 141,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 109
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 4087,
+          "feasts": 0
+        },
+        {
+          "d": 142,
+          "scale": "regional",
+          "nSeasoned": 1,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 6,
+          "pantry": 2788,
+          "feasts": 0
+        },
+        {
+          "d": 143,
+          "scale": "regional",
+          "nSeasoned": 1,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 6,
+          "pantry": 2796,
+          "feasts": 0
+        },
+        {
+          "d": 144,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 7,
+          "pantry": 5049,
+          "feasts": 0
+        }
+      ],
+      "dissolutionLines": [],
+      "driftLines": [],
+      "deathsInWindow": [
+        {
+          "day": 131,
+          "kind": "villager",
+          "who": "somchai_prasert",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 132,
+          "kind": "monster",
+          "who": "understudy",
+          "cause": "combat",
+          "player": false
+        },
+        {
+          "day": 141,
+          "kind": "monster",
+          "who": "congregation",
+          "cause": "combat",
+          "player": false
+        },
+        {
+          "day": 141,
+          "kind": "villager",
+          "who": "gen_tlh8ge6",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 142,
+          "kind": "monster",
+          "who": "congregation",
+          "cause": "combat",
+          "player": false
+        },
+        {
+          "day": 142,
+          "kind": "villager",
+          "who": "gen_wwgsl3b",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 142,
+          "kind": "monster",
+          "who": "redactor",
+          "cause": "combat",
+          "player": false
+        }
+      ],
+      "verbsInWindow": [],
+      "linkLinesCapHit": true,
+      "linkLinesLastDay": 108
+    },
+    {
+      "seed": "100213",
+      "dissolved": false,
+      "nationalDay": 62
+    },
+    {
+      "seed": "100214",
+      "dissolved": false,
+      "nationalDay": 62
+    },
+    {
+      "seed": "100215",
+      "dissolved": false,
+      "nationalDay": 65
+    },
+    {
+      "seed": "100216",
+      "dissolved": true,
+      "nationalDay": 63,
+      "dissolutionDay": 97,
+      "heldDays": 34,
+      "endReason": "village-lost",
+      "endDay": 105,
+      "maxWave": 4,
+      "standing": 199,
+      "mechanism": "trust-slide",
+      "mechanismDetail": "Link(s) crossed below trust 40 in the window: village_2 d96 41->36.",
+      "evidence": {
+        "speakerDeath": [
+          {
+            "day": 83,
+            "line": "🕯️ Nikos is dead — and the dead hold no treaties. Every link Haven has shakes."
+          },
+          {
+            "day": 83,
+            "line": "The Codex doesn't pause for grief. Elena blinks — and it's already there, overlaying everything, syncing. No pen. No paper. The mantle just... transfers."
+          }
+        ],
+        "trustSlide": [
+          {
+            "day": 96,
+            "kind": "crossed-below-40",
+            "other": "village_2",
+            "from": 41,
+            "to": 36
+          }
+        ],
+        "linkBreak": [],
+        "feastMourning": [
+          {
+            "day": 83,
+            "kind": "succession-tribute-press",
+            "line": "Emberhold watches to see if Haven holds without its dead — and presses the tribute down to 1,688 kcal/week while the chair is empty. They'll test the link. Count on it. (Trust -8.)"
+          },
+          {
+            "day": 83,
+            "kind": "succession-tribute-press",
+            "line": "Thornfield watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it. (Trust -8.)"
+          },
+          {
+            "day": 83,
+            "kind": "succession-tribute-press",
+            "line": "The Red Table watches to see if Haven holds without its dead — and presses the tribute down to 2,250 kcal/week while the chair is empty. They'll test the link. Count on it. (Trust -8.)"
+          }
+        ],
+        "pendingStall": []
+      },
+      "links": [
+        {
+          "id": "link_mgpsphva606",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDisMinus1": 32,
+          "trustAtDis": 32,
+          "trust7dBefore": 34,
+          "minInWindow": 17,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpsphyb132",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDisMinus1": 54,
+          "trustAtDis": 54,
+          "trust7dBefore": 58,
+          "minInWindow": 47,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        },
+        {
+          "id": "link_mgpspigs461",
+          "other": "village_2",
+          "kind": "link",
+          "trustAtDisMinus1": 36,
+          "trustAtDis": 36,
+          "trust7dBefore": 40,
+          "minInWindow": 26,
+          "crossedBelow40": [
+            {
+              "day": 96,
+              "from": 41,
+              "to": 36
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpspilr53",
+          "other": "village_spl_27_1295",
+          "kind": "link",
+          "trustAtDisMinus1": 52,
+          "trustAtDis": 52,
+          "trust7dBefore": 51,
+          "minInWindow": 45,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        }
+      ],
+      "seriesWin": [
+        {
+          "d": 83,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 6,
+          "pantry": 3891,
+          "feasts": 1
+        },
+        {
+          "d": 84,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 6,
+          "pantry": 3362,
+          "feasts": 1
+        },
+        {
+          "d": 85,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 6,
+          "pantry": 8398,
+          "feasts": 1
+        },
+        {
+          "d": 86,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 6,
+          "pantry": 8454,
+          "feasts": 1
+        },
+        {
+          "d": 87,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 6,
+          "pantry": 9274,
+          "feasts": 1
+        },
+        {
+          "d": 88,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 6,
+          "pantry": 7846,
+          "feasts": 1
+        },
+        {
+          "d": 89,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 6,
+          "pantry": 4641,
+          "feasts": 1
+        },
+        {
+          "d": 90,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 6,
+          "pantry": 1583,
+          "feasts": 1
+        },
+        {
+          "d": 91,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 0,
+          "feasts": 1
+        },
+        {
+          "d": 92,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 5548,
+          "feasts": 1
+        },
+        {
+          "d": 93,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 2906,
+          "feasts": 1
+        },
+        {
+          "d": 94,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 1302,
+          "feasts": 1
+        },
+        {
+          "d": 95,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 1098,
+          "feasts": 1
+        },
+        {
+          "d": 96,
+          "scale": "national",
+          "nSeasoned": 2,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 63
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 879,
+          "feasts": 1
+        },
+        {
+          "d": 97,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 5,
+          "pantry": 0,
+          "feasts": 1
+        },
+        {
+          "d": 98,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 6,
+          "pantry": 0,
+          "feasts": 1
+        },
+        {
+          "d": 99,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 5,
+          "pantry": 5550,
+          "feasts": 1
+        }
+      ],
+      "dissolutionLines": [],
+      "driftLines": [],
+      "deathsInWindow": [
+        {
+          "day": 83,
+          "kind": "villager",
+          "who": "nikos_papadopoulos",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 84,
+          "kind": "monster",
+          "who": "nevermore",
+          "cause": "combat",
+          "player": false
+        },
+        {
+          "day": 90,
+          "kind": "villager",
+          "who": "ruth_goldstein",
+          "cause": "thirst",
+          "player": false
+        },
+        {
+          "day": 94,
+          "kind": "monster",
+          "who": "influencer",
+          "cause": "combat",
+          "player": false
+        },
+        {
+          "day": 97,
+          "kind": "monster",
+          "who": "congregation",
+          "cause": "combat",
+          "player": false
+        }
+      ],
+      "verbsInWindow": [],
+      "linkLinesCapHit": true,
+      "linkLinesLastDay": 84
+    }
+  ],
+  "reclimbs": [
+    {
+      "seed": "100203",
+      "dissolutionDay": 90,
+      "endDay": 150,
+      "links": [
+        {
+          "id": "link_mgpsphv3527",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDissolution": 36,
+          "trustAtEnd": 21,
+          "maxAfterDissolution": 36,
+          "everBackAbove40": false,
+          "lastDayAbove40": null,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 0
+        },
+        {
+          "id": "link_mgpsphx0571",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDissolution": 41,
+          "trustAtEnd": 39,
+          "maxAfterDissolution": 49,
+          "everBackAbove40": true,
+          "lastDayAbove40": 142,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 0
+        },
+        {
+          "id": "link_mgpsphyz242",
+          "other": "village_2",
+          "kind": "link",
+          "trustAtDissolution": 33,
+          "trustAtEnd": 22,
+          "maxAfterDissolution": 37,
+          "everBackAbove40": false,
+          "lastDayAbove40": null,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 0
+        }
+      ],
+      "tendOrAnswerAfter": [],
+      "pendingNationalDaysAfter": [],
+      "nationalAfter": false,
+      "blocker": "trust-below-bar",
+      "blockerDetail": "At day 150 these links sit below the seasoned trust-40 bar or inactive: village_0 t=21 st=active; village_1 t=39 st=active; village_2 t=22 st=active. Re-climb needs every polity link back at 40+ (30d seasoned). Only 60 days of horizon remained after the dissolution."
+    },
+    {
+      "seed": "100211",
+      "dissolutionDay": 107,
+      "endDay": 150,
+      "links": [
+        {
+          "id": "link_mgpsphvk326",
+          "other": "village_3",
+          "kind": "link",
+          "trustAtDissolution": 3,
+          "trustAtEnd": 3,
+          "maxAfterDissolution": 3,
+          "everBackAbove40": false,
+          "lastDayAbove40": null,
+          "statusAtEnd": "broken",
+          "seasonedAtEnd": 0
+        },
+        {
+          "id": "link_mgpsphvl872",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDissolution": 69,
+          "trustAtEnd": 76,
+          "maxAfterDissolution": 76,
+          "everBackAbove40": true,
+          "lastDayAbove40": 150,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 1
+        },
+        {
+          "id": "link_mgpsphxg324",
+          "other": "village_2",
+          "kind": "link",
+          "trustAtDissolution": 40,
+          "trustAtEnd": 47,
+          "maxAfterDissolution": 54,
+          "everBackAbove40": true,
+          "lastDayAbove40": 150,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 1
+        },
+        {
+          "id": "link_mgpspj0a119",
+          "other": "village_spl_26_20595",
+          "kind": "link",
+          "trustAtDissolution": 36,
+          "trustAtEnd": 43,
+          "maxAfterDissolution": 50,
+          "everBackAbove40": true,
+          "lastDayAbove40": 150,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 1
+        },
+        {
+          "id": "link_mgpspjdw681",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDissolution": 21,
+          "trustAtEnd": 36,
+          "maxAfterDissolution": 43,
+          "everBackAbove40": true,
+          "lastDayAbove40": 140,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 0
+        }
+      ],
+      "tendOrAnswerAfter": [
+        {
+          "day": 126,
+          "verb": "tendLink",
+          "other": "village_2"
+        },
+        {
+          "day": 126,
+          "verb": "tendLink",
+          "other": "village_spl_26_20595"
+        },
+        {
+          "day": 126,
+          "verb": "tendLink",
+          "other": "village_0"
+        },
+        {
+          "day": 127,
+          "verb": "answerNationalChoice",
+          "other": null
+        },
+        {
+          "day": 133,
+          "verb": "tendLink",
+          "other": "village_0"
+        },
+        {
+          "day": 141,
+          "verb": "tendLink",
+          "other": "village_0"
+        },
+        {
+          "day": 142,
+          "verb": "tendLink",
+          "other": "village_0"
+        },
+        {
+          "day": 143,
+          "verb": "tendLink",
+          "other": "village_0"
+        },
+        {
+          "day": 144,
+          "verb": "tendLink",
+          "other": "village_0"
+        },
+        {
+          "day": 145,
+          "verb": "tendLink",
+          "other": "village_0"
+        },
+        {
+          "day": 146,
+          "verb": "tendLink",
+          "other": "village_0"
+        },
+        {
+          "day": 147,
+          "verb": "tendLink",
+          "other": "village_0"
+        },
+        {
+          "day": 148,
+          "verb": "tendLink",
+          "other": "village_0"
+        },
+        {
+          "day": 149,
+          "verb": "tendLink",
+          "other": "village_0"
+        },
+        {
+          "day": 150,
+          "verb": "tendLink",
+          "other": "village_0"
+        }
+      ],
+      "pendingNationalDaysAfter": [],
+      "nationalAfter": true,
+      "blocker": "none-reclimbed",
+      "blockerDetail": "Scale returned to national after dissolution."
+    },
+    {
+      "seed": "100212",
+      "dissolutionDay": 142,
+      "endDay": 150,
+      "links": [
+        {
+          "id": "link_mgpsphs5190",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDissolution": 25,
+          "trustAtEnd": 25,
+          "maxAfterDissolution": 25,
+          "everBackAbove40": false,
+          "lastDayAbove40": null,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 0
+        },
+        {
+          "id": "link_mgpsphu4577",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDissolution": 39,
+          "trustAtEnd": 43,
+          "maxAfterDissolution": 43,
+          "everBackAbove40": true,
+          "lastDayAbove40": 150,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 1
+        },
+        {
+          "id": "link_mgpspisl512",
+          "other": "village_3",
+          "kind": "link",
+          "trustAtDissolution": 56,
+          "trustAtEnd": 56,
+          "maxAfterDissolution": 56,
+          "everBackAbove40": true,
+          "lastDayAbove40": 150,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 1
+        },
+        {
+          "id": "link_mgpspjao57",
+          "other": "village_2",
+          "kind": "link",
+          "trustAtDissolution": 28,
+          "trustAtEnd": 28,
+          "maxAfterDissolution": 28,
+          "everBackAbove40": false,
+          "lastDayAbove40": null,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 0
+        }
+      ],
+      "tendOrAnswerAfter": [],
+      "pendingNationalDaysAfter": [],
+      "nationalAfter": false,
+      "blocker": "trust-below-bar",
+      "blockerDetail": "At day 150 these links sit below the seasoned trust-40 bar or inactive: village_0 t=25 st=active; village_2 t=28 st=active. Re-climb needs every polity link back at 40+ (30d seasoned). Only 8 days of horizon remained after the dissolution."
+    },
+    {
+      "seed": "100107",
+      "dissolutionDay": 138,
+      "endDay": 150,
+      "links": [
+        {
+          "id": "link_mgpsphue949",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDissolution": 38,
+          "trustAtEnd": 38,
+          "maxAfterDissolution": 38,
+          "everBackAbove40": false,
+          "lastDayAbove40": null,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 0
+        },
+        {
+          "id": "link_mgpsphwg26",
+          "other": "village_3",
+          "kind": "link",
+          "trustAtDissolution": 33,
+          "trustAtEnd": 23,
+          "maxAfterDissolution": 33,
+          "everBackAbove40": false,
+          "lastDayAbove40": null,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 0
+        },
+        {
+          "id": "link_mgpsphyo982",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDissolution": 43,
+          "trustAtEnd": 33,
+          "maxAfterDissolution": 43,
+          "everBackAbove40": true,
+          "lastDayAbove40": 141,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 0
+        },
+        {
+          "id": "link_mgpspj6l959",
+          "other": "village_2",
+          "kind": "link",
+          "trustAtDissolution": 53,
+          "trustAtEnd": 52,
+          "maxAfterDissolution": 57,
+          "everBackAbove40": true,
+          "lastDayAbove40": 150,
+          "statusAtEnd": "active",
+          "seasonedAtEnd": 1
+        }
+      ],
+      "tendOrAnswerAfter": [
+        {
+          "day": 143,
+          "verb": "tendLink",
+          "other": "village_0"
+        },
+        {
+          "day": 143,
+          "verb": "tendLink",
+          "other": "village_3"
+        },
+        {
+          "day": 143,
+          "verb": "tendLink",
+          "other": "village_1"
+        }
+      ],
+      "pendingNationalDaysAfter": [],
+      "nationalAfter": false,
+      "blocker": "trust-below-bar",
+      "blockerDetail": "At day 150 these links sit below the seasoned trust-40 bar or inactive: village_0 t=38 st=active; village_3 t=23 st=active; village_1 t=33 st=active. Re-climb needs every polity link back at 40+ (30d seasoned). Only 12 days of horizon remained after the dissolution."
+    }
+  ],
+  "pilotDissolutions": [
+    {
+      "seed": "100106",
+      "dissolved": true,
+      "nationalDay": 89,
+      "dissolutionDay": 129,
+      "heldDays": 40,
+      "endReason": "village-lost",
+      "endDay": 144,
+      "maxWave": 5,
+      "standing": 365,
+      "mechanism": "trust-slide",
+      "mechanismDetail": "Link(s) crossed below trust 40 in the window: village_spl_32_34621 d128 47->39.",
+      "evidence": {
+        "speakerDeath": [],
+        "trustSlide": [
+          {
+            "day": 128,
+            "kind": "crossed-below-40",
+            "other": "village_spl_32_34621",
+            "from": 47,
+            "to": 39
+          }
+        ],
+        "linkBreak": [
+          {
+            "other": "village_1",
+            "status": "broken"
+          }
+        ],
+        "feastMourning": [],
+        "pendingStall": []
+      },
+      "links": [
+        {
+          "id": "link_mgpspht9258",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDisMinus1": 5,
+          "trustAtDis": 5,
+          "trust7dBefore": 5,
+          "minInWindow": 5,
+          "crossedBelow40": [],
+          "statusAtDis": "broken",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpspj08606",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDisMinus1": 45,
+          "trustAtDis": 45,
+          "trust7dBefore": 52,
+          "minInWindow": 45,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        },
+        {
+          "id": "link_mgpspjfn124",
+          "other": "village_spl_32_34621",
+          "kind": "link",
+          "trustAtDisMinus1": 39,
+          "trustAtDis": 39,
+          "trust7dBefore": 46,
+          "minInWindow": 39,
+          "crossedBelow40": [
+            {
+              "day": 128,
+              "from": 47,
+              "to": 39
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpspjjm687",
+          "other": "village_spl_29_35316",
+          "kind": "link",
+          "trustAtDisMinus1": 52,
+          "trustAtDis": 52,
+          "trust7dBefore": 59,
+          "minInWindow": 52,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        }
+      ],
+      "seriesWin": [
+        {
+          "d": 115,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 7,
+          "pantry": 24607,
+          "feasts": 2
+        },
+        {
+          "d": 116,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 7,
+          "pantry": 21832,
+          "feasts": 2
+        },
+        {
+          "d": 117,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 7,
+          "pantry": 23107,
+          "feasts": 2
+        },
+        {
+          "d": 118,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 3,
+          "pantry": 22825,
+          "feasts": 2
+        },
+        {
+          "d": 119,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 20625,
+          "feasts": 2
+        },
+        {
+          "d": 120,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 26997,
+          "feasts": 2
+        },
+        {
+          "d": 121,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 46138,
+          "feasts": 2
+        },
+        {
+          "d": 122,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 49361,
+          "feasts": 2
+        },
+        {
+          "d": 123,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 46774,
+          "feasts": 2
+        },
+        {
+          "d": 124,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 44976,
+          "feasts": 2
+        },
+        {
+          "d": 125,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 4,
+          "pantry": 67921,
+          "feasts": 2
+        },
+        {
+          "d": 126,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 64287,
+          "feasts": 2
+        },
+        {
+          "d": 127,
+          "scale": "national",
+          "nSeasoned": 3,
+          "nActive": 3,
+          "polity": {
+            "shape": "lead",
+            "size": 4,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 5,
+          "pantry": 60597,
+          "feasts": 2
+        },
+        {
+          "d": 128,
+          "scale": "national",
+          "nSeasoned": 2,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 104
+          },
+          "nationalLive": true,
+          "pop": 2,
+          "pantry": 50643,
+          "feasts": 2
+        },
+        {
+          "d": 129,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 2,
+          "pantry": 43013,
+          "feasts": 2
+        },
+        {
+          "d": 130,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 2,
+          "pantry": 36473,
+          "feasts": 2
+        },
+        {
+          "d": 131,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 3,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 2,
+          "pantry": 35288,
+          "feasts": 2
+        }
+      ],
+      "dissolutionLines": [],
+      "driftLines": [],
+      "deathsInWindow": [
+        {
+          "day": 115,
+          "kind": "monster",
+          "who": "sanjun",
+          "cause": "expedition",
+          "player": false
+        },
+        {
+          "day": 117,
+          "kind": "villager",
+          "who": "mateo_alvarez",
+          "cause": "monster",
+          "player": false
+        },
+        {
+          "day": 117,
+          "kind": "villager",
+          "who": "ethan_hunt",
+          "cause": "monster",
+          "player": false
+        },
+        {
+          "day": 117,
+          "kind": "villager",
+          "who": "ruth_goldstein",
+          "cause": "a wound that wouldn't close",
+          "player": false
+        },
+        {
+          "day": 118,
+          "kind": "villager",
+          "who": "jorge_silva",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 123,
+          "kind": "villager",
+          "who": "visjoin_117",
+          "cause": "monster",
+          "player": false
+        },
+        {
+          "day": 123,
+          "kind": "monster",
+          "who": "suburb",
+          "cause": "villager combat",
+          "player": false
+        },
+        {
+          "day": 128,
+          "kind": "villager",
+          "who": "daniyar_askarov",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 128,
+          "kind": "villager",
+          "who": "app_mgpspjlm54",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 128,
+          "kind": "villager",
+          "who": "visjoin_120",
+          "cause": "the wild",
+          "player": true
+        }
+      ],
+      "verbsInWindow": [
+        {
+          "day": 125,
+          "verb": "hostFeast",
+          "other": null
+        },
+        {
+          "day": 128,
+          "verb": "tendLink",
+          "other": "village_spl_32_34621"
+        },
+        {
+          "day": 129,
+          "verb": "tendLink",
+          "other": "village_spl_32_34621"
+        }
+      ],
+      "linkLinesCapHit": true,
+      "linkLinesLastDay": 111
+    },
+    {
+      "seed": "100107",
+      "dissolved": true,
+      "nationalDay": 71,
+      "dissolutionDay": 138,
+      "heldDays": 67,
+      "endReason": "survived",
+      "endDay": 150,
+      "maxWave": 5,
+      "standing": 345,
+      "mechanism": "trust-slide",
+      "mechanismDetail": "Link(s) crossed below trust 40 in the window: village_0 d138 46->38; village_3 d138 41->33.",
+      "evidence": {
+        "speakerDeath": [],
+        "trustSlide": [
+          {
+            "day": 138,
+            "kind": "crossed-below-40",
+            "other": "village_0",
+            "from": 46,
+            "to": 38
+          },
+          {
+            "day": 138,
+            "kind": "crossed-below-40",
+            "other": "village_3",
+            "from": 41,
+            "to": 33
+          }
+        ],
+        "linkBreak": [],
+        "feastMourning": [],
+        "pendingStall": []
+      },
+      "links": [
+        {
+          "id": "link_mgpsphue949",
+          "other": "village_0",
+          "kind": "link",
+          "trustAtDisMinus1": 46,
+          "trustAtDis": 38,
+          "trust7dBefore": 46,
+          "minInWindow": 38,
+          "crossedBelow40": [
+            {
+              "day": 138,
+              "from": 46,
+              "to": 38
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpsphwg26",
+          "other": "village_3",
+          "kind": "link",
+          "trustAtDisMinus1": 41,
+          "trustAtDis": 33,
+          "trust7dBefore": 46,
+          "minInWindow": 28,
+          "crossedBelow40": [
+            {
+              "day": 138,
+              "from": 41,
+              "to": 33
+            }
+          ],
+          "statusAtDis": "active",
+          "seasonedAtDis": 0
+        },
+        {
+          "id": "link_mgpsphyo982",
+          "other": "village_1",
+          "kind": "link",
+          "trustAtDisMinus1": 51,
+          "trustAtDis": 43,
+          "trust7dBefore": 51,
+          "minInWindow": 43,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        },
+        {
+          "id": "link_mgpspj6l959",
+          "other": "village_2",
+          "kind": "link",
+          "trustAtDisMinus1": 61,
+          "trustAtDis": 53,
+          "trust7dBefore": 61,
+          "minInWindow": 53,
+          "crossedBelow40": [],
+          "statusAtDis": "active",
+          "seasonedAtDis": 1
+        }
+      ],
+      "seriesWin": [
+        {
+          "d": 124,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 12428,
+          "feasts": 1
+        },
+        {
+          "d": 125,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 12745,
+          "feasts": 1
+        },
+        {
+          "d": 126,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 10322,
+          "feasts": 1
+        },
+        {
+          "d": 127,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 9980,
+          "feasts": 1
+        },
+        {
+          "d": 128,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 9586,
+          "feasts": 1
+        },
+        {
+          "d": 129,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 9,
+          "pantry": 9427,
+          "feasts": 1
+        },
+        {
+          "d": 130,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 11192,
+          "feasts": 1
+        },
+        {
+          "d": 131,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 10680,
+          "feasts": 1
+        },
+        {
+          "d": 132,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 8668,
+          "feasts": 1
+        },
+        {
+          "d": 133,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 11644,
+          "feasts": 1
+        },
+        {
+          "d": 134,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 11054,
+          "feasts": 1
+        },
+        {
+          "d": 135,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 11404,
+          "feasts": 1
+        },
+        {
+          "d": 136,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 135
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 11406,
+          "feasts": 1
+        },
+        {
+          "d": 137,
+          "scale": "national",
+          "nSeasoned": 4,
+          "nActive": 4,
+          "polity": {
+            "shape": "lead",
+            "size": 5,
+            "led": true
+          },
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": {
+            "day": 135
+          },
+          "nationalLive": true,
+          "pop": 8,
+          "pantry": 10336,
+          "feasts": 1
+        },
+        {
+          "d": 138,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 7,
+          "pantry": 10611,
+          "feasts": 1
+        },
+        {
+          "d": 139,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 7,
+          "pantry": 9020,
+          "feasts": 1
+        },
+        {
+          "d": 140,
+          "scale": "regional",
+          "nSeasoned": 2,
+          "nActive": 4,
+          "polity": null,
+          "pendingNational": null,
+          "pendingCounter": null,
+          "pendingAccord": null,
+          "pendingGlobal": null,
+          "nationalLive": false,
+          "pop": 8,
+          "pantry": 10539,
+          "feasts": 1
+        }
+      ],
+      "dissolutionLines": [],
+      "driftLines": [],
+      "deathsInWindow": [
+        {
+          "day": 129,
+          "kind": "monster",
+          "who": "redactor",
+          "cause": "combat",
+          "player": false
+        },
+        {
+          "day": 129,
+          "kind": "villager",
+          "who": "tariq_mahmood",
+          "cause": "the wild",
+          "player": true
+        },
+        {
+          "day": 137,
+          "kind": "villager",
+          "who": "gen_hm3glh9",
+          "cause": "the wild",
+          "player": true
+        }
+      ],
+      "verbsInWindow": [],
+      "linkLinesCapHit": true,
+      "linkLinesLastDay": 114
+    }
+  ],
+  "wall": {
+    "armed": {
+      "n": 16,
+      "national": 13,
+      "table": 0,
+      "wins": 0,
+      "wave4": 16,
+      "wave5": 8,
+      "medianSurvival": 122,
+      "maxSurvival": 150
+    },
+    "baseline": {
+      "n": 16,
+      "national": 0,
+      "table": 0,
+      "wins": 0,
+      "wave4": 16,
+      "wave5": 8,
+      "medianSurvival": 125,
+      "maxSurvival": 150
+    }
+  },
+  "deepDive": [
+    {
+      "seed": "100203",
+      "trigger": "speaker-death-verified",
+      "triggerDetail": "Funeral lines captured on the dissolution day: \"🕯️ Arjun is dead — and the dead hold no treaties. Every link Haven has shakes.\"",
+      "polityLossDay": 90,
+      "graceDays": 0,
+      "trustDeltas": {
+        "link_mgpsphx0571": {
+          "other": "village_1",
+          "deltas": [
+            {
+              "day": 77,
+              "from": 44,
+              "to": 48,
+              "delta": 4,
+              "arrears": 0,
+              "tendedWeek": 1
+            },
+            {
+              "day": 90,
+              "from": 49,
+              "to": 41,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 1
+            }
+          ]
+        },
+        "link_mgpsphv3527": {
+          "other": "village_0",
+          "deltas": [
+            {
+              "day": 79,
+              "from": 58,
+              "to": 53,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 1
+            },
+            {
+              "day": 84,
+              "from": 53,
+              "to": 48,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 1
+            },
+            {
+              "day": 89,
+              "from": 49,
+              "to": 44,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 1
+            },
+            {
+              "day": 90,
+              "from": 44,
+              "to": 36,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 1
+            }
+          ]
+        },
+        "link_mgpsphyz242": {
+          "other": "village_2",
+          "deltas": [
+            {
+              "day": 90,
+              "from": 41,
+              "to": 33,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 6
+            }
+          ]
+        }
+      },
+      "simHaircuts": [
+        {
+          "day": 90,
+          "links": [
+            "village_1",
+            "village_0",
+            "village_2"
+          ],
+          "deathsThatDay": [
+            {
+              "day": 89,
+              "who": "gen_cuzdkcv",
+              "cause": "the wild"
+            },
+            {
+              "day": 90,
+              "who": "tom_baker",
+              "cause": "monster"
+            }
+          ]
+        }
+      ],
+      "reclimbPath": null,
+      "postDissolutionTendedWeeks": [
+        "link_mgpsphv3527:1",
+        "link_mgpsphx0571:1",
+        "link_mgpsphyz242:6"
+      ]
+    },
+    {
+      "seed": "100204",
+      "trigger": "probable-succession",
+      "triggerDetail": "Simultaneous -13/-8/-8 drops on village_1, village_3, village_0 d139 with villager death(s) d138 gen_0qe3g00 — the succession-haircut signature (each drop is the -8 haircut, netted with a same-day +1 tribute tick and/or a -5 herald strike), but the funeral lines are NOT captured (linkLines cap already hit), so this is inference from the series, not a voiced line.",
+      "polityLossDay": 139,
+      "graceDays": 0,
+      "trustDeltas": {
+        "link_mgpsphvk987": {
+          "other": "village_1",
+          "deltas": [
+            {
+              "day": 127,
+              "from": 53,
+              "to": 45,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 5
+            },
+            {
+              "day": 132,
+              "from": 45,
+              "to": 49,
+              "delta": 4,
+              "arrears": 0,
+              "tendedWeek": 5
+            },
+            {
+              "day": 137,
+              "from": 49,
+              "to": 53,
+              "delta": 4,
+              "arrears": 0,
+              "tendedWeek": 5
+            },
+            {
+              "day": 139,
+              "from": 53,
+              "to": 40,
+              "delta": -13,
+              "arrears": 0,
+              "tendedWeek": 5
+            }
+          ]
+        },
+        "link_mgpsphxe314": {
+          "other": "village_3",
+          "deltas": [
+            {
+              "day": 127,
+              "from": 57,
+              "to": 49,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 5
+            },
+            {
+              "day": 139,
+              "from": 49,
+              "to": 41,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 5
+            }
+          ]
+        },
+        "link_mgpspiwv206": {
+          "other": "village_0",
+          "deltas": [
+            {
+              "day": 127,
+              "from": 55,
+              "to": 47,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 9
+            },
+            {
+              "day": 139,
+              "from": 47,
+              "to": 39,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 9
+            }
+          ]
+        }
+      },
+      "simHaircuts": [
+        {
+          "day": 127,
+          "links": [
+            "village_1",
+            "village_3",
+            "village_0"
+          ],
+          "deathsThatDay": [
+            {
+              "day": 126,
+              "who": "aroha_ngata",
+              "cause": "the wild"
+            },
+            {
+              "day": 127,
+              "who": "chorus_line",
+              "cause": "combat"
+            }
+          ]
+        },
+        {
+          "day": 139,
+          "links": [
+            "village_3",
+            "village_0"
+          ],
+          "deathsThatDay": [
+            {
+              "day": 138,
+              "who": "gen_0qe3g00",
+              "cause": "the wild"
+            }
+          ]
+        }
+      ],
+      "reclimbPath": null,
+      "postDissolutionTendedWeeks": []
+    },
+    {
+      "seed": "100206",
+      "trigger": "probable-succession",
+      "triggerDetail": "Simultaneous -8/-8/-8 drops on village_1, village_2, village_3 d133 with villager death(s) d133 aroha_ngata — the succession-haircut signature (each drop is the -8 haircut, netted with a same-day +1 tribute tick and/or a -5 herald strike), but the funeral lines are NOT captured (linkLines cap already hit), so this is inference from the series, not a voiced line.",
+      "polityLossDay": 133,
+      "graceDays": 1,
+      "trustDeltas": {
+        "link_mgpsphzg31": {
+          "other": "village_0",
+          "deltas": [
+            {
+              "day": 120,
+              "from": 13,
+              "to": 7,
+              "delta": -6,
+              "arrears": 142500,
+              "tendedWeek": null
+            },
+            {
+              "day": 122,
+              "from": 7,
+              "to": 0,
+              "delta": -7,
+              "arrears": 142500,
+              "tendedWeek": null
+            }
+          ]
+        },
+        "link_mgpsphuy12": {
+          "other": "village_1",
+          "deltas": [
+            {
+              "day": 122,
+              "from": 55,
+              "to": 47,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 5
+            },
+            {
+              "day": 133,
+              "from": 47,
+              "to": 39,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 5
+            }
+          ]
+        },
+        "link_mgpsphwf308": {
+          "other": "village_2",
+          "deltas": [
+            {
+              "day": 122,
+              "from": 64,
+              "to": 56,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 5
+            },
+            {
+              "day": 133,
+              "from": 56,
+              "to": 48,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 5
+            },
+            {
+              "day": 134,
+              "from": 48,
+              "to": 43,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 5
+            }
+          ]
+        },
+        "link_mgpspiae716": {
+          "other": "village_3",
+          "deltas": [
+            {
+              "day": 122,
+              "from": 54,
+              "to": 46,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 5
+            },
+            {
+              "day": 129,
+              "from": 46,
+              "to": 41,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 5
+            },
+            {
+              "day": 133,
+              "from": 41,
+              "to": 33,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 5
+            }
+          ]
+        }
+      },
+      "simHaircuts": [
+        {
+          "day": 122,
+          "links": [
+            "village_1",
+            "village_2",
+            "village_3"
+          ],
+          "deathsThatDay": [
+            {
+              "day": 121,
+              "who": "callback",
+              "cause": "villager combat"
+            },
+            {
+              "day": 121,
+              "who": "buffering",
+              "cause": "villager combat"
+            },
+            {
+              "day": 122,
+              "who": "caleb_jones",
+              "cause": "the wild"
+            },
+            {
+              "day": 122,
+              "who": "miguel_santos",
+              "cause": "the wild"
+            }
+          ]
+        },
+        {
+          "day": 133,
+          "links": [
+            "village_1",
+            "village_2",
+            "village_3"
+          ],
+          "deathsThatDay": [
+            {
+              "day": 133,
+              "who": "aroha_ngata",
+              "cause": "the wild"
+            }
+          ]
+        }
+      ],
+      "reclimbPath": null,
+      "postDissolutionTendedWeeks": []
+    },
+    {
+      "seed": "100208",
+      "trigger": "speaker-death-verified",
+      "triggerDetail": "Funeral lines captured on the dissolution day: \"🕯️ Carlos is dead — and the dead hold no treaties. Every link Haven has shakes.\"",
+      "polityLossDay": 100,
+      "graceDays": 1,
+      "trustDeltas": {
+        "link_mgpsphur223": {
+          "other": "village_1",
+          "deltas": [
+            {
+              "day": 89,
+              "from": 50,
+              "to": 45,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 5
+            },
+            {
+              "day": 100,
+              "from": 47,
+              "to": 39,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 5
+            }
+          ]
+        },
+        "link_mgpspizj182": {
+          "other": "village_0",
+          "deltas": [
+            {
+              "day": 90,
+              "from": 72,
+              "to": 76,
+              "delta": 4,
+              "arrears": 0,
+              "tendedWeek": 8
+            },
+            {
+              "day": 97,
+              "from": 77,
+              "to": 81,
+              "delta": 4,
+              "arrears": 0,
+              "tendedWeek": 8
+            },
+            {
+              "day": 100,
+              "from": 82,
+              "to": 74,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 8
+            }
+          ]
+        },
+        "link_mgpsphwq20": {
+          "other": "village_2",
+          "deltas": [
+            {
+              "day": 94,
+              "from": 52,
+              "to": 47,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 5
+            },
+            {
+              "day": 100,
+              "from": 48,
+              "to": 40,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 5
+            }
+          ]
+        }
+      },
+      "simHaircuts": [
+        {
+          "day": 100,
+          "links": [
+            "village_1",
+            "village_0",
+            "village_2"
+          ],
+          "deathsThatDay": [
+            {
+              "day": 100,
+              "who": "carlos_diaz",
+              "cause": "the wild"
+            }
+          ]
+        }
+      ],
+      "reclimbPath": {
+        "backDay": 113,
+        "daysDown": 12,
+        "verbs": [
+          {
+            "day": 113,
+            "verb": "answerNationalChoice",
+            "other": null
+          }
+        ]
+      },
+      "postDissolutionTendedWeeks": []
+    },
+    {
+      "seed": "100211",
+      "trigger": "probable-succession",
+      "triggerDetail": "Simultaneous -7/-7/-7/-7 drops on village_1, village_2, village_spl_26_20595, village_0 d106 with villager death(s) d106 landlord, d106 gen_xsx1ojy — the succession-haircut signature (each drop is the -8 haircut, netted with a same-day +1 tribute tick and/or a -5 herald strike), but the funeral lines are NOT captured (linkLines cap already hit), so this is inference from the series, not a voiced line.",
+      "polityLossDay": 106,
+      "graceDays": 1,
+      "trustDeltas": {
+        "link_mgpsphvl872": {
+          "other": "village_1",
+          "deltas": [
+            {
+              "day": 105,
+              "from": 72,
+              "to": 76,
+              "delta": 4,
+              "arrears": 0,
+              "tendedWeek": 4
+            },
+            {
+              "day": 106,
+              "from": 76,
+              "to": 69,
+              "delta": -7,
+              "arrears": 0,
+              "tendedWeek": 4
+            }
+          ]
+        },
+        "link_mgpsphxg324": {
+          "other": "village_2",
+          "deltas": [
+            {
+              "day": 106,
+              "from": 47,
+              "to": 40,
+              "delta": -7,
+              "arrears": 0,
+              "tendedWeek": 5
+            }
+          ]
+        },
+        "link_mgpspj0a119": {
+          "other": "village_spl_26_20595",
+          "deltas": [
+            {
+              "day": 106,
+              "from": 43,
+              "to": 36,
+              "delta": -7,
+              "arrears": 0,
+              "tendedWeek": 8
+            }
+          ]
+        },
+        "link_mgpspjdw681": {
+          "other": "village_0",
+          "deltas": [
+            {
+              "day": 106,
+              "from": 28,
+              "to": 21,
+              "delta": -7,
+              "arrears": 0,
+              "tendedWeek": 8
+            }
+          ]
+        }
+      },
+      "simHaircuts": [],
+      "reclimbPath": {
+        "backDay": 127,
+        "daysDown": 20,
+        "verbs": [
+          {
+            "day": 126,
+            "verb": "tendLink",
+            "other": "village_2"
+          },
+          {
+            "day": 126,
+            "verb": "tendLink",
+            "other": "village_spl_26_20595"
+          },
+          {
+            "day": 126,
+            "verb": "tendLink",
+            "other": "village_0"
+          },
+          {
+            "day": 126,
+            "verb": "hostFeast",
+            "other": null
+          },
+          {
+            "day": 127,
+            "verb": "answerNationalChoice",
+            "other": null
+          }
+        ]
+      },
+      "postDissolutionTendedWeeks": [
+        "link_mgpsphvl872:4",
+        "link_mgpsphxg324:5",
+        "link_mgpspj0a119:8",
+        "link_mgpspjdw681:8",
+        "link_mgpsphxg324:18",
+        "link_mgpspj0a119:18",
+        "link_mgpspjdw681:18",
+        "link_mgpspjdw681:19"
+      ]
+    },
+    {
+      "seed": "100212",
+      "trigger": "probable-succession",
+      "triggerDetail": "Simultaneous -8/-8/-8/-13 drops on village_0, village_1, village_3, village_2 d142 with villager death(s) d141 congregation, d141 gen_tlh8ge6, d142 congregation, d142 gen_wwgsl3b, d142 redactor — the succession-haircut signature (each drop is the -8 haircut, netted with a same-day +1 tribute tick and/or a -5 herald strike), but the funeral lines are NOT captured (linkLines cap already hit), so this is inference from the series, not a voiced line.",
+      "polityLossDay": 142,
+      "graceDays": 0,
+      "trustDeltas": {
+        "link_mgpsphs5190": {
+          "other": "village_0",
+          "deltas": [
+            {
+              "day": 131,
+              "from": 45,
+              "to": 37,
+              "delta": -8,
+              "arrears": 2283,
+              "tendedWeek": null
+            },
+            {
+              "day": 139,
+              "from": 37,
+              "to": 32,
+              "delta": -5,
+              "arrears": 2283,
+              "tendedWeek": null
+            },
+            {
+              "day": 142,
+              "from": 33,
+              "to": 25,
+              "delta": -8,
+              "arrears": 2283,
+              "tendedWeek": null
+            }
+          ]
+        },
+        "link_mgpsphu4577": {
+          "other": "village_1",
+          "deltas": [
+            {
+              "day": 131,
+              "from": 50,
+              "to": 42,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": null
+            },
+            {
+              "day": 132,
+              "from": 42,
+              "to": 46,
+              "delta": 4,
+              "arrears": 0,
+              "tendedWeek": null
+            },
+            {
+              "day": 142,
+              "from": 47,
+              "to": 39,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": null
+            },
+            {
+              "day": 144,
+              "from": 39,
+              "to": 43,
+              "delta": 4,
+              "arrears": 0,
+              "tendedWeek": null
+            }
+          ]
+        },
+        "link_mgpspisl512": {
+          "other": "village_3",
+          "deltas": [
+            {
+              "day": 131,
+              "from": 76,
+              "to": 68,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 9
+            },
+            {
+              "day": 137,
+              "from": 68,
+              "to": 63,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 9
+            },
+            {
+              "day": 142,
+              "from": 64,
+              "to": 56,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 9
+            }
+          ]
+        },
+        "link_mgpspjao57": {
+          "other": "village_2",
+          "deltas": [
+            {
+              "day": 131,
+              "from": 53,
+              "to": 45,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 8
+            },
+            {
+              "day": 134,
+              "from": 45,
+              "to": 40,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 8
+            },
+            {
+              "day": 142,
+              "from": 41,
+              "to": 28,
+              "delta": -13,
+              "arrears": 0,
+              "tendedWeek": 8
+            }
+          ]
+        }
+      },
+      "simHaircuts": [
+        {
+          "day": 131,
+          "links": [
+            "village_0",
+            "village_1",
+            "village_3",
+            "village_2"
+          ],
+          "deathsThatDay": [
+            {
+              "day": 131,
+              "who": "somchai_prasert",
+              "cause": "the wild"
+            }
+          ]
+        },
+        {
+          "day": 142,
+          "links": [
+            "village_0",
+            "village_1",
+            "village_3"
+          ],
+          "deathsThatDay": [
+            {
+              "day": 141,
+              "who": "congregation",
+              "cause": "combat"
+            },
+            {
+              "day": 141,
+              "who": "gen_tlh8ge6",
+              "cause": "the wild"
+            },
+            {
+              "day": 142,
+              "who": "congregation",
+              "cause": "combat"
+            },
+            {
+              "day": 142,
+              "who": "gen_wwgsl3b",
+              "cause": "the wild"
+            },
+            {
+              "day": 142,
+              "who": "redactor",
+              "cause": "combat"
+            }
+          ]
+        }
+      ],
+      "reclimbPath": null,
+      "postDissolutionTendedWeeks": [
+        "link_mgpspisl512:9",
+        "link_mgpspjao57:8"
+      ]
+    },
+    {
+      "seed": "100216",
+      "trigger": "succession-wounded-then-erosion",
+      "triggerDetail": "A speaker died d83 (funeral lines captured) — the -8 haircut left the polity wounded (a link below the bar, another at the bar) — but the realm limped on 14 more days before a small push finished it. The death set it up; erosion finished it.",
+      "polityLossDay": 96,
+      "graceDays": 1,
+      "trustDeltas": {
+        "link_mgpsphva606": {
+          "other": "village_1",
+          "deltas": [
+            {
+              "day": 83,
+              "from": 44,
+              "to": 36,
+              "delta": -8,
+              "arrears": 70000,
+              "tendedWeek": null
+            },
+            {
+              "day": 85,
+              "from": 36,
+              "to": 30,
+              "delta": -6,
+              "arrears": 81250,
+              "tendedWeek": null
+            },
+            {
+              "day": 86,
+              "from": 30,
+              "to": 34,
+              "delta": 4,
+              "arrears": 81250,
+              "tendedWeek": null
+            },
+            {
+              "day": 91,
+              "from": 34,
+              "to": 38,
+              "delta": 4,
+              "arrears": 81250,
+              "tendedWeek": null
+            },
+            {
+              "day": 92,
+              "from": 38,
+              "to": 32,
+              "delta": -6,
+              "arrears": 92500,
+              "tendedWeek": null
+            },
+            {
+              "day": 99,
+              "from": 31,
+              "to": 17,
+              "delta": -14,
+              "arrears": 103750,
+              "tendedWeek": null
+            }
+          ]
+        },
+        "link_mgpsphyb132": {
+          "other": "village_0",
+          "deltas": [
+            {
+              "day": 83,
+              "from": 66,
+              "to": 58,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 3
+            },
+            {
+              "day": 93,
+              "from": 59,
+              "to": 54,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 3
+            },
+            {
+              "day": 99,
+              "from": 54,
+              "to": 47,
+              "delta": -7,
+              "arrears": 0,
+              "tendedWeek": 3
+            }
+          ]
+        },
+        "link_mgpspigs461": {
+          "other": "village_2",
+          "deltas": [
+            {
+              "day": 83,
+              "from": 48,
+              "to": 40,
+              "delta": -8,
+              "arrears": 12000,
+              "tendedWeek": 8
+            },
+            {
+              "day": 96,
+              "from": 41,
+              "to": 36,
+              "delta": -5,
+              "arrears": 12000,
+              "tendedWeek": 8
+            },
+            {
+              "day": 99,
+              "from": 36,
+              "to": 26,
+              "delta": -10,
+              "arrears": 14250,
+              "tendedWeek": 8
+            }
+          ]
+        },
+        "link_mgpspilr53": {
+          "other": "village_spl_27_1295",
+          "deltas": [
+            {
+              "day": 83,
+              "from": 59,
+              "to": 51,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 8
+            },
+            {
+              "day": 99,
+              "from": 52,
+              "to": 45,
+              "delta": -7,
+              "arrears": 0,
+              "tendedWeek": 8
+            }
+          ]
+        }
+      },
+      "simHaircuts": [
+        {
+          "day": 83,
+          "links": [
+            "village_1",
+            "village_0",
+            "village_2",
+            "village_spl_27_1295"
+          ],
+          "deathsThatDay": [
+            {
+              "day": 83,
+              "who": "nikos_papadopoulos",
+              "cause": "the wild"
+            }
+          ]
+        }
+      ],
+      "reclimbPath": null,
+      "postDissolutionTendedWeeks": []
+    },
+    {
+      "seed": "100106",
+      "trigger": "probable-succession",
+      "triggerDetail": "Simultaneous -8/-8/-8 drops on village_spl_29_35316, village_0, village_spl_32_34621 d128 with villager death(s) d128 daniyar_askarov, d128 app_mgpspjlm54, d128 visjoin_120 — the succession-haircut signature (each drop is the -8 haircut, netted with a same-day +1 tribute tick and/or a -5 herald strike), but the funeral lines are NOT captured (linkLines cap already hit), so this is inference from the series, not a voiced line.",
+      "polityLossDay": 128,
+      "graceDays": 1,
+      "trustDeltas": {
+        "link_mgpspjjm687": {
+          "other": "village_spl_29_35316",
+          "deltas": [
+            {
+              "day": 121,
+              "from": 55,
+              "to": 59,
+              "delta": 4,
+              "arrears": 0,
+              "tendedWeek": 12
+            },
+            {
+              "day": 128,
+              "from": 60,
+              "to": 52,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 12
+            }
+          ]
+        },
+        "link_mgpspj08606": {
+          "other": "village_0",
+          "deltas": [
+            {
+              "day": 128,
+              "from": 53,
+              "to": 45,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 9
+            },
+            {
+              "day": 130,
+              "from": 45,
+              "to": 49,
+              "delta": 4,
+              "arrears": 0,
+              "tendedWeek": 9
+            }
+          ]
+        },
+        "link_mgpspjfn124": {
+          "other": "village_spl_32_34621",
+          "deltas": [
+            {
+              "day": 128,
+              "from": 47,
+              "to": 39,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 11
+            }
+          ]
+        }
+      },
+      "simHaircuts": [
+        {
+          "day": 128,
+          "links": [
+            "village_spl_29_35316",
+            "village_0",
+            "village_spl_32_34621"
+          ],
+          "deathsThatDay": [
+            {
+              "day": 128,
+              "who": "daniyar_askarov",
+              "cause": "the wild"
+            },
+            {
+              "day": 128,
+              "who": "app_mgpspjlm54",
+              "cause": "the wild"
+            },
+            {
+              "day": 128,
+              "who": "visjoin_120",
+              "cause": "the wild"
+            }
+          ]
+        }
+      ],
+      "reclimbPath": {
+        "backDay": 134,
+        "daysDown": 5,
+        "verbs": [
+          {
+            "day": 130,
+            "verb": "tendLink",
+            "other": "village_spl_32_34621"
+          },
+          {
+            "day": 131,
+            "verb": "tendLink",
+            "other": "village_spl_32_34621"
+          },
+          {
+            "day": 132,
+            "verb": "tendLink",
+            "other": "village_spl_32_34621"
+          },
+          {
+            "day": 134,
+            "verb": "answerNationalChoice",
+            "other": null
+          }
+        ]
+      },
+      "postDissolutionTendedWeeks": []
+    },
+    {
+      "seed": "100107",
+      "trigger": "probable-succession",
+      "triggerDetail": "Simultaneous -8/-8/-8/-8 drops on village_0, village_3, village_1, village_2 d138 with villager death(s) d137 gen_hm3glh9 — the succession-haircut signature (each drop is the -8 haircut, netted with a same-day +1 tribute tick and/or a -5 herald strike), but the funeral lines are NOT captured (linkLines cap already hit), so this is inference from the series, not a voiced line.",
+      "polityLossDay": 138,
+      "graceDays": 0,
+      "trustDeltas": {
+        "link_mgpsphue949": {
+          "other": "village_0",
+          "deltas": [
+            {
+              "day": 125,
+              "from": 58,
+              "to": 53,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 9
+            },
+            {
+              "day": 130,
+              "from": 54,
+              "to": 46,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 9
+            },
+            {
+              "day": 138,
+              "from": 46,
+              "to": 38,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 9
+            }
+          ]
+        },
+        "link_mgpsphwg26": {
+          "other": "village_3",
+          "deltas": [
+            {
+              "day": 130,
+              "from": 54,
+              "to": 46,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 9
+            },
+            {
+              "day": 135,
+              "from": 46,
+              "to": 41,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 9
+            },
+            {
+              "day": 138,
+              "from": 41,
+              "to": 33,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 9
+            },
+            {
+              "day": 140,
+              "from": 33,
+              "to": 28,
+              "delta": -5,
+              "arrears": 0,
+              "tendedWeek": 9
+            }
+          ]
+        },
+        "link_mgpsphyo982": {
+          "other": "village_1",
+          "deltas": [
+            {
+              "day": 130,
+              "from": 59,
+              "to": 51,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 10
+            },
+            {
+              "day": 138,
+              "from": 51,
+              "to": 43,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 10
+            }
+          ]
+        },
+        "link_mgpspj6l959": {
+          "other": "village_2",
+          "deltas": [
+            {
+              "day": 130,
+              "from": 69,
+              "to": 61,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 10
+            },
+            {
+              "day": 138,
+              "from": 61,
+              "to": 53,
+              "delta": -8,
+              "arrears": 0,
+              "tendedWeek": 10
+            }
+          ]
+        }
+      },
+      "simHaircuts": [
+        {
+          "day": 130,
+          "links": [
+            "village_0",
+            "village_3",
+            "village_1",
+            "village_2"
+          ],
+          "deathsThatDay": [
+            {
+              "day": 129,
+              "who": "redactor",
+              "cause": "combat"
+            },
+            {
+              "day": 129,
+              "who": "tariq_mahmood",
+              "cause": "the wild"
+            }
+          ]
+        },
+        {
+          "day": 138,
+          "links": [
+            "village_0",
+            "village_3",
+            "village_1",
+            "village_2"
+          ],
+          "deathsThatDay": [
+            {
+              "day": 137,
+              "who": "gen_hm3glh9",
+              "cause": "the wild"
+            }
+          ]
+        }
+      ],
+      "reclimbPath": null,
+      "postDissolutionTendedWeeks": [
+        "link_mgpsphue949:9",
+        "link_mgpsphwg26:9",
+        "link_mgpsphyo982:10",
+        "link_mgpspj6l959:10"
+      ]
+    }
+  ],
+  "unclassified": [],
+  "go": true
+}
