@@ -95,8 +95,8 @@ abandoned mid-conversation — a second-order path, not a lever.
 
 `git merge-tree aa4f6d54d 203a32775 e44b0206e` (base = the merge's
 first parent): exactly TWO changed-in-both sections
-(src/js/convo-dialogue.js, src/js/convo-wants.js), both at 0 conflict
-markers; ONE added-in-remote section
+(src/js/convo-dialogue.js, src/js/convo-wants.js), both with
+0 conflict markers; ONE added-in-remote section
 (scripts/test-favor-debt-help-coherence-20261108.js) at 0 markers;
 no merged section, no removed section, no DU entry, 0 conflict
 markers in the whole output. Prediction: CLEAN pick.
