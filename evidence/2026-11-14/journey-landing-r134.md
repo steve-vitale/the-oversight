@@ -143,9 +143,13 @@ sibling balance panels); all five pass alone. Gate verdict: **GO**.
 
 ## Landing
 
-- Rebased onto master `fb8b84267` (sim-transplant-round-2115 landed under this
-  run); proof tests re-run on the rebased tip: zero-DMG invariant PASS (7
-  fights, 0 violations), nodloop analyzer LOOP=0 on panel + pilot.
+- Rebased twice as master moved under the run: first onto `fb8b84267`
+  (sim-transplant-round-2115), then onto `afc697d14` (sim-winnability-round-2230,
+  whose landing left a staged-deleted index entry for its own evidence file in
+  the main tree — worktree copy verified byte-identical to the HEAD blob and
+  the index entry restored with the standard ls-tree/update-index repair; no
+  content touched). Proof tests re-run on each rebased tip: zero-DMG invariant
+  PASS (7 fights, 0 violations), nodloop analyzer LOOP=0 on panel + pilot.
 - ff-only merged; fix commit verified an ancestor of the new HEAD.
 - Worktree released (worktree-release.sh merged), worktree removed, branch
   `journey-landing-r134` deleted. Main tree clean.
