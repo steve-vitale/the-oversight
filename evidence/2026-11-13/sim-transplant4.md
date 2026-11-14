@@ -178,17 +178,74 @@ invents canon — this arm changes no game code at all.
 
 ## Results (filled after the cherry-pick)
 
-**VERDICT: UNMEASURED (conflict-STOP) — (to be filled with the live
-cherry-pick record).**
+**VERDICT: UNMEASURED (conflict-STOP).**
 
-- (live cherry-pick outcome, conflict files/hunks, subject-branch state)
+The live cherry-pick reproduced the merge-tree pre-check EXACTLY —
+same three files, same hunks, 3 markers each. No subject was built,
+no sim ran, no survival number exists.
+
+- Subject branch: `transplant-4-subject` — created at the far end
+  `203a327750a223e0a1465dc51f5409787efdfaae` and LEFT there (no subject
+  commit; the cherry-pick was aborted). Never committed to the arm
+  branch.
+- Live pick (`git cherry-pick -m 1 c0a85b17e`, exit 1): 16 of 19
+  family files staged cleanly — all three src/js files
+  (bond-initiation.js M, godpath.js M, person-trust.js A),
+  src/data/godpaths.json M, docs/ONTOLOGY.md M, sw.js M, index.html
+  M, ladder.js M, proof-godhood-rework M, plus the 5 added evidence/
+  script files. Exactly three files conflicted (UU):
+  1. `scripts/balance-proof.json` — live lines 3–9 (merge-tree
+     `@@ -1,7 +1,12 @@`): ours = r167 panel
+     (`evidence/2026-11-10/neutral-r167-adopt.json.gz`,
+     `ff876802…`); theirs = person-trust panel
+     (`evidence/2026-11-08/neutral-person-trust.json.gz`,
+     `b90b3411…`). 3 markers.
+  2. `scripts/godpath/validate.js` — live lines 91–103 (merge-tree
+     `@@ -88,9 +88,19 @@`): ours = single-line `T.ok` over the
+     8-event list; theirs = `okEvent` over the 8 events PLUS
+     `harvest_fed` and `outmatched_kill`, plus the `okDays` check.
+     3 markers.
+  3. `scripts/green-list.txt` — live lines 916–921 (merge-tree
+     `@@ -913,5 +913,9 @@`): ours = `test-pellet-boost-20261108.js
+     quick` + `test-pellet-q4-20261108.js quick`; theirs =
+     `test-person-trust-20261108.js quick` (one line). 3 markers.
+- The pick was aborted immediately (`git cherry-pick --abort`);
+  the subject branch verified back at the far end, the arm branch
+  checked back out clean. No hand-resolution of any file — not
+  even the green-list hunk, because the carve-out covers ONLY a
+  green-list-only conflict and this one is not alone. The two
+  other conflicts are in measurement/validation tooling (a proof
+  pointer and a deed-event validator), not game code — but the
+  prereg does not authorize choosing which panel pointer or which
+  event list the subject carries, so they block exactly as a game-
+  code conflict would.
 
 ## What this means for the H1 transplant program
 
-(to be filled after the cherry-pick: the program's conflict wall
-widens — families 1, 2, 3, and now 4 are all unmeasurable on
-divergence except via the narrowed 2b route, and family 4's
-conflicts sit in measurement/validation tooling, not game code.)
+Family 4 is the FOURTH family in a row unmeasurable on divergence
+(families 1, 2, 3, and now 4 — only the narrowed 2b re-run has ever
+measured). The pattern sharpens with this arm: family 4's conflicts
+sit entirely in scripts/ tooling — a measurement-proof pointer, a
+deed-event validator, a test list — while ALL THREE src/js files
+applied cleanly and the new person-trust.js module added cleanly.
+The game code itself transplants fine; it is the proof/test
+scaffolding around it that diverges. That has two consequences:
+
+1. The transplant method's wall is now demonstrably a scaffolding
+   wall, not (only) a game-code wall. A future coordinator could
+   consider a carve-out for proof-pointer/validator conflicts the
+   same way 2b carved out green-list.txt — but that is a coordinator
+   decision, not this arm's: the prereg as written stops here, and
+   this arm stops here.
+2. The collapse carrier is still unidentified. Family 4's content —
+   a per-villager trust map written from lived events (which UNBLOCKS
+   the bonds drive's trustedAnyone gate) plus a lived solo-kill deed
+   — is survival-relevant on its face (trust gates bonds; bonds gate
+   parties; parties gate wave-4 kills), so it stays interesting as a
+   narrowed re-run candidate IF a scaffolding carve-out is ever
+   granted. Until then it joins families 1–3 on the unmeasured list,
+   and the program's method question (round-2215 §Next blanks #3)
+   gets louder: 4 of 5 cherry-pick attempts are unmeasurable.
 
 ## Sense-testing (SENSE-TESTING LAW)
 
@@ -197,7 +254,26 @@ Nothing to read.
 
 ## Metric review (§14)
 
-(to be filled after the cherry-pick.)
+- The primary metric (survived/8) was never measured — the arm
+  stopped before any sim, per the binding prereg. No re-score, no
+  threshold change proposed. The conflict rule functioned as
+  designed: the merge-tree pre-check (base = first parent, 2215Z
+  method correction) predicted the live conflict exactly — file,
+  hunk, both sides' lines, 3 markers each — for the fourth family
+  running, which keeps validating the pre-check as the program's
+  early-warning instrument.
+- One test lesson, recorded for the next arm: `git merge-tree`
+  emits TWO clean-merge section kinds — `changed in both` (base/
+  our/their) and `merged` (result/our only, diff is ours → result)
+  — and a parser that only tracks `changed in both` silently drops
+  the `merged` files (this arm's stage-1 proof initially missed
+  bond-initiation.js that way; fixed before the stage-1 commit).
+  The 2b test's parser has the same blind spot; its families had no
+  `merged` sections, so nothing was misread there — but any future
+  arm reusing that parser should carry the fix.
+- Telemetry: no corpus exists (nothing measured), so no deviation
+  check was attempted; the recorder-corpus refusal note in the
+  prereg is moot for this arm. Baseline NOT rolled (nothing to roll).
 
 ## Wall numbers
 
@@ -208,12 +284,34 @@ competent verbatim own-policy, fix swapped in.
 
 ## Proof results
 
-- `node scripts/test-transplant4.js`: (stage-1 count to be filled
-  after the stage-1 commit; final count after the conflict record).
-- `node scripts/test-culpritbisect-a.js`: (116/116 expected, re-run
-  on this branch).
-- Host write flap: (to be filled — any EPERM blocks during the run).
-- Heartbeats: (to be filled).
-- Closeout: arm branch `sim-transplant4-a` tip (to be filled);
-  subject branch `transplant-4-subject` LEFT at (to be filled — the
-  far end, no subject commit); worktree verified clean at closeout.
+- `node scripts/test-transplant4.js`: **70 passed, 0 failed**
+  (58/58 at stage 1; +12 live-conflict legs at stage 2 — the
+  clean-tree leg reads FAIL pre-commit only because the stage-2
+  evidence/test edits themselves are uncommitted at that point;
+  it passes on the committed tree, verified by the post-commit
+  re-run below).
+- `node scripts/test-culpritbisect-a.js`: **116 passed, 0 failed**
+  (reused bisect tooling, re-run on this branch; writes nothing).
+- Safe-commit index clobber struck once on the stage-1 commit
+  (e51fd9fae): the two committed files showed staged-as-deleted
+  after a correct commit; repaired with the documented
+  `git ls-tree -r HEAD | git update-index --add --index-info`
+  pipe and verified (status empty, diff HEAD empty, hash-object
+  matches ls-tree for both files).
+- Host write flap: no EPERM failure struck this arm's git or file
+  writes directly. Two heartbeat attempts hung instead (the second
+  `worktree-heartbeat.sh` run blocked >50s and was killed by
+  timeout; an earlier combined command took ~128s): registry
+  heartbeat stays 2026-11-14T01:36:28Z, ~25 min stale at closeout
+  — the tree is DONE, not dead, and the coordinator owns its
+  release; recorded so a stale heartbeat is not misread as a dead
+  run. No flap EPERM was observed; the hangs look like host
+  slowness (slow restat), not a denial.
+- No telemetry deviation check: no corpus exists (nothing
+  measured) — recorded, baseline NOT rolled.
+- Closeout: arm branch `sim-transplant4-a` tip e51fd9fae (stage 1)
+  + the results commit below (this file's tip-hash line itself is
+  record-only); subject branch `transplant-4-subject` LEFT at
+  `203a327750a223e0a1465dc51f5409787efdfaae` (the far end, no subject
+  commit); worktree verified clean at closeout (tracked tree empty,
+  standing.js == HEAD, no swap residue — no swap ever ran).

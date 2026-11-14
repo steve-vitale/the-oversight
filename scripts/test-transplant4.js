@@ -15,13 +15,13 @@
 // other conflicted file -> UNMEASURED, deliverable is the conflict
 // report.
 //
-// OUTCOME — UNMEASURED (conflict-STOP): the merge-tree pre-check
-// (base = first parent, 2215Z method correction) predicts THREE
-// conflicted files — scripts/balance-proof.json,
-// scripts/godpath/validate.js, scripts/green-list.txt — so the
-// prereg already says STOP; the live cherry-pick (stage 2) exists
-// to confirm the prediction exactly. No subject, no sim, no
-// survival number.
+// OUTCOME — UNMEASURED (conflict-STOP): the live cherry-pick
+// reproduced the merge-tree pre-check EXACTLY — the same three
+// files (scripts/balance-proof.json, scripts/godpath/validate.js,
+// scripts/green-list.txt), the same hunks, 3 markers each; the
+// other 16 family files staged cleanly. The pick was aborted; the
+// subject branch is LEFT at the far end (no subject commit). No sim
+// ran, no survival number exists.
 //
 // WHAT THIS TEST PROVES:
 //   1. Family identity — merge c0a85b17e, its parents, the 4-commit
@@ -319,6 +319,36 @@ function mergeTreeConflicts() {
   const stepSrc = fs.readFileSync(path.join(REPO, 'scripts', 'culpritbisect-step.sh'), 'utf8');
   T.ok('step script names the band 190391..190398',
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
+
+  // ---- 7. Live conflict (stage 2) ----
+  T.section('7. Live conflict — pick reproduced the pre-check exactly, then aborted');
+  let subjectTip = null;
+  try { subjectTip = git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectTip = null; }
+  T.ok('subject branch exists', subjectTip !== null && subjectTip.length === 40, subjectTip ? subjectTip.slice(0, 12) : '(missing)');
+  if (subjectTip) {
+    T.ok('subject branch is LEFT at the far end (no subject commit)', subjectTip === FAR_FULL, subjectTip.slice(0, 12));
+  }
+  const ev2 = fs.existsSync(evPath) ? fs.readFileSync(evPath, 'utf8') : '';
+  T.ok('evidence file records the verdict as UNMEASURED (conflict-STOP)', ev2.indexOf('VERDICT: UNMEASURED (conflict-STOP)') !== -1, 'UNMEASURED present');
+  T.ok('evidence file records the live pick (16 of 19 staged cleanly)', ev2.indexOf('16 of 19') !== -1, '16/19 present');
+  let liveOk = true, liveBad = null;
+  for (const frag of ['live lines 3–9', 'live lines 91–103', 'live lines 916–921']) {
+    if (ev2.indexOf(frag) === -1) { liveOk = false; liveBad = frag; break; }
+  }
+  T.ok('evidence file records all three live conflict line ranges', liveOk, liveBad || '3/3 ranges');
+  T.ok('evidence file records the abort (pick aborted, branch back at far end)', ev2.indexOf('cherry-pick --abort') !== -1, 'abort recorded');
+  T.ok('evidence file records that no hand-resolution happened', ev2.indexOf('No hand-resolution') !== -1, 'no hand-resolution recorded');
+  const t4Summary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
+  T.ok('no step summary exists (no sim ran)', !fs.existsSync(t4Summary), STEP);
+  const t4Driver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
+  T.ok('no step driver log exists (no sim ran)', !fs.existsSync(t4Driver), STEP);
+  const headBranch2 = git('rev-parse --abbrev-ref HEAD');
+  T.ok('HEAD is back on the arm branch sim-transplant4-a after the pick', headBranch2 === 'sim-transplant4-a', 'HEAD=' + headBranch2);
+  const dirtyAfter = git('status --porcelain --untracked-files=no');
+  T.ok('tracked tree is clean after the abort', dirtyAfter === '', dirtyAfter.slice(0, 200) || '(clean)');
+  const onDiskStanding2 = sha256(fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'), 'utf8'));
+  const headStanding2 = sha256(gitShow('HEAD', 'src/js/standing.js'));
+  T.ok('on-disk standing.js still byte-identical to HEAD (no swap ever ran)', onDiskStanding2 === headStanding2, onDiskStanding2.slice(0, 12));
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
