@@ -9,7 +9,9 @@
 // eligible-undelivered with all refusals exempt — scored NO-GO under
 // the bug and must score GO with the fix.
 // This test re-scores the COMMITTED r198 corpora (read-only copies under
-// /tmp) with the r203 analyzer and asserts:
+// /tmp, files renamed endgame-r198-* -> endgame-r203-* with the transcript
+// header's run tag rewritten so the r203 analyzer's filename filter and
+// purity regex match; all values unchanged) with the r203 analyzer and asserts:
 //   B: analyzer RC=0 (ALL GO) and the M23 line is GO naming
 //      89705:feast_embassy@d68/FULL, 89704:none, delivered 1/2,
 //      NON-EXEMPT-refused-despite-ready 0.
@@ -37,8 +39,18 @@ function copyCorpus(srcDir, dstDir) {
   fs.rmSync(dstDir, { recursive: true, force: true });
   fs.mkdirSync(dstDir, { recursive: true });
   for (const f of fs.readdirSync(srcDir)) {
-    if (!/^endgame-r198-\d+(\.json|-transcript\.txt)$/.test(f)) continue;
-    fs.copyFileSync(path.join(srcDir, f), path.join(dstDir, f));
+    const m = /^endgame-r198-(\d+)(\.json|-transcript\.txt)$/.exec(f);
+    if (!m) continue;
+    const dst = path.join(dstDir, `endgame-r203-${m[1]}${m[2]}`);
+    if (m[2] === '-transcript.txt') {
+      // Rewrite the header's run tag (values unchanged): the r203
+      // analyzer's purity regex keys on "# journey-endgame r203".
+      const lines = fs.readFileSync(path.join(srcDir, f), 'utf8').split('\n');
+      lines[0] = lines[0].replace('journey-endgame r198', 'journey-endgame r203');
+      fs.writeFileSync(dst, lines.join('\n'));
+    } else {
+      fs.copyFileSync(path.join(srcDir, f), dst);
+    }
   }
 }
 
