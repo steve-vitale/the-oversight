@@ -114,29 +114,40 @@ marker blocks total (transplant118/2b counting method: `+<<<<<<<`,
 `+=======`, `+>>>>>>>`):
 
 - `docs/ONTOLOGY.md` — 2 marker blocks (6 markers):
-  - Hunk 1 (~line 947, godpath `**Provides:**` line): ours vs
-    theirs differ by one inserted function — theirs adds
-    `observeHarvestFeed(game)` to the long Provides line; both
-    sides edited the same line since the divergence.
-  - Hunk 2 (~line 1974–2037): theirs inserts the whole
-    `### villager-brain` ONTOLOGY section (with the new
-    `vbrain_midday_event_only` rule) AND updates the
-    `### villager-objectives` `**Provides:**` line
-    (objRefreshPick / objNeedsEmergencyPick / objDangerBelief /
-    objRallyFreshRaid(vid) + the `midday_repick_event_only` rule);
-    ours has no villager-brain section at that anchor and the old
-    Provides line. (Two adjacent insertions that the merge
-    presents as two conflict blocks in one changed-in-both section.)
+  - Block 1 (~line 1974 in merge-tree coords): theirs inserts the
+    whole `### villager-brain` ONTOLOGY section (with the new
+    `vbrain_midday_event_only` rule); ours has no villager-brain
+    section at that anchor.
+  - Block 2 (~line 2018 in merge-tree coords): the
+    `### villager-objectives` `**Provides:**` line — ours the old
+    line, theirs with objRefreshPick / objNeedsEmergencyPick /
+    objDangerBelief / objRallyFreshRaid(vid) + the
+    `midday_repick_event_only` rule.
+  - The godpath `**Provides:**` hunk (~line 947, theirs adds
+    `observeHarvestFeed(game)`) merges CLEANLY — it is a plain
+    `-`/`+` pair outside any marker block, not a conflict.
 - `scripts/green-list.txt` — 1 marker block (3 markers, ~line 800):
   ours side EMPTY at that anchor; theirs adds 3 lines:
   `scripts/test-villager-brain-dawn.js quick`,
   `scripts/test-dawn-materialize-honesty.js quick`,
   `scripts/test-dawn-midday-repick.js quick`.
 - Clean: `src/js/villager-objectives.js` (changed in both, ZERO
-  markers — auto-merges); `src/js/villager-brain.js` (base+their
-  only, "removed in local" — the far end never touched it since the
-  first parent, clean take-theirs); `scripts/test-dawn-midday-repick.js`
+  markers — auto-merges); `scripts/test-dawn-midday-repick.js`
   (added in remote — clean add).
+
+CORRECTION (recorded after the live pick — the prereg's first draft
+of this section misread two things, and the misread is corrected
+here, not silently fixed): (a) the first draft listed the godpath
+Provides hunk as a conflict — it is not; the two ONTOLOGY conflict
+blocks are the villager-brain section insert and the objectives
+Provides line, as above. (b) The first draft called
+`src/js/villager-brain.js` a "clean take-theirs" — it is not. The
+merge-tree output lists it under `removed in local` (base + their
+blobs only, no `our` line): the file is ABSENT at the far end and
+PRESENT at the first parent, i.e. a delete/modify (DU) conflict,
+not a clean application. The pre-check DID contain the DU signal;
+the arm misread it. The live pick confirms the corrected reading
+exactly (§Cherry-pick conflict).
 
 Consequence recorded BEFORE the pick: the union exception does NOT
 apply even though green-list.txt is conflicted — the exception
@@ -163,11 +174,73 @@ outside the authorized carve-out, so the STOP stands.)
 
 ## Cherry-pick conflict — STOP (no judged sim run)
 
-(to fill after the live cherry-pick)
+`git checkout transplant-6-subject` (from `203a32775`) +
+`git cherry-pick -m 1 f843fab1c` CONFLICTED. Per the transplant prereg
+("On ANY conflict: STOP, report the conflict, do not hand-resolve game
+code") the run STOPPED here. No subject commit was created, no step
+was run, no survival number exists for this family. The cherry-pick
+was aborted (`git cherry-pick --abort`), the arm branch checked back
+out, the tree verified clean. The conflict is reproducible from the
+recorded SHAs alone.
+
+THREE unmerged paths (live `git status` at the conflict, verbatim):
+
+- UU (both modified, content conflict) — 2 files:
+  - `docs/ONTOLOGY.md` — 2 marker blocks, live lines 1977–1995
+    (theirs inserts the whole `### villager-brain` section; ours
+    has nothing at that anchor) and 2040–2044 (the
+    `### villager-objectives` `**Provides:**` line, ours old /
+    theirs with objRefreshPick / objNeedsEmergencyPick /
+    objDangerBelief / objRallyFreshRaid(vid)). The godpath
+    Provides hunk merged cleanly (no markers).
+  - `scripts/green-list.txt` — 1 marker block, live lines 803–808.
+    Ours side EMPTY; theirs adds the 3 test lines
+    (`test-villager-brain-dawn.js`, `test-dawn-materialize-honesty.js`,
+    `test-dawn-midday-repick.js`). No other line touched.
+- DU (deleted by us, modified by them) — 1 file:
+  - `src/js/villager-brain.js` — unmerged stages 1 (base blob
+    `2f99c9e51…`) + 3 (theirs blob `737093b44…`) only, no stage 2.
+    The file is ABSENT at the far end (`git ls-tree 203a32775 --
+    src/js/villager-brain.js` = empty) and PRESENT at the first
+    parent (`230dba219`, blob `2f99c9e51…`). The family modifies a
+    whole brain module the far end never had — the family-1
+    missing-substrate wall in miniature (methods, not a whole file,
+    in family 3's case; here a whole module, as in family 1).
+
+The other two family files staged cleanly (A:
+`scripts/test-dawn-midday-repick.js`; M:
+`src/js/villager-objectives.js`).
+
+Why the union exception does not apply: the exception covers a
+conflict in ONLY `scripts/green-list.txt`. This pick conflicts in
+THREE paths, two of them outside green-list.txt — and one of them
+(`villager-brain.js`) is a game-code file the far end lacks
+entirely. Resolving any of the three by hand would be a
+hand-resolution of family content outside the authorized carve-out.
+The STOP stands; the deliverable is this conflict report +
+UNMEASURED verdict.
+
+What this means for the H1 transplant program: family 6 is the
+fourth cherry-pick in the program to stop on divergence (families 1,
+2, 3 before it; 2b measured only through the narrowed union route).
+The pattern is now the program's dominant outcome, not the
+exception: the origin line's brain-module work (villager-brain.js
+did not exist on the local line at the far end) cannot be
+transplanted onto the far end by cherry-pick at all. A narrowed
+family 6b — the villager-objectives.js hunks alone (which staged
+cleanly) plus the green-list union — is mechanically possible and
+would isolate the mid-day re-pick demotion itself from the missing
+brain module, but that is a NEW family definition needing its own
+prereg and a coordinator decision, not this arm's call. The
+objectives-side change is the survival-relevant half (it is the code
+that stops mid-day re-picks); the brain-side change is the
+gate-keeping around it.
 
 ## Results (filled after the step)
 
-NONE — (to fill; expected UNMEASURED if the pick stops as predicted).
+NONE — the run stopped at the cherry-pick; no step ran, no corpus
+exists, no survival number was measured. The transplant verdict for
+family 6 is UNMEASURED (not CARRIER, not NOT-CARRIER).
 
 ## Sense-testing (SENSE-TESTING LAW)
 
@@ -180,10 +253,22 @@ docs/VILLAGER-BRAIN.md §5 / Seam 9.
 
 ## Metric review (§14)
 
-(to fill after the STOP: the primary metric was never measured; the
-metric itself holds — nothing in the conflict impeaches it; the
-transplant METHOD failed at the mechanical step, as for families 1,
-2, and 3.)
+- The primary metric (survived/8) was never measured: the run
+  stopped before any sim. The metric itself held (nothing in the
+  conflict impeaches it); the transplant METHOD failed at the
+  mechanical step. No re-score, no threshold change proposed.
+- Prereg gap worth carrying forward (extends the 118 arm's note):
+  the merge-tree pre-check must be read as a SUBSTRATE gate, not
+  just a conflict count — a `removed in local` / `added in remote`
+  section for a src/js file is a missing-substrate signal, not a
+  clean application. This arm misread exactly that signal in its
+  first prereg draft and corrected it only after the live pick;
+  the NEXT transplant arm should check, before cutting a step:
+  (a) every file in the family diff exists at the far end
+  (`git ls-tree 203a32775`), (b) `git merge-tree` reports zero
+  content conflicts AND zero `removed in local` / DU entries for
+  src/js files. That check costs seconds and would have caught
+  this stop before the branch was cut.
 
 ## Wall numbers
 
@@ -193,8 +278,37 @@ prereg: far end 203a32775 4/8, merge e4dbe581b 1/8, on seeds
 
 ## Proof results
 
-(to fill after the STOP + proof runs)
+- `node scripts/test-transplant6.js`: **65 passed, 0 failed** (run
+  after the STOP; the merge-tree DU leg + live-conflict legs were
+  added after the pick — the pre-pick run was 48/48).
+- `node scripts/test-culpritbisect-a.js`: **116 passed, 0 failed**
+  (reused bisect tooling, re-run on this branch after the pick).
+- Safe-commit index clobber struck once on the prereg commit
+  (4606b3e93): the files showed staged-as-deleted after a correct
+  commit; repaired with the documented `git ls-tree -r HEAD |
+  git update-index --add --index-info` pipe and verified (status
+  empty, diff HEAD empty, hash-object matches ls-tree).
+- No telemetry deviation check run: no corpus exists to check, and
+  the tool refuses recorder-corpus class anyway — recorded, baseline
+  NOT rolled.
+- Closeout: arm branch `sim-transplant6-a`, tip (to fill: second
+  commit hash — this file's tip-hash line itself is record-only);
+  subject branch `transplant-6-subject` LEFT at the far end
+  `203a32775` (no subject commit); worktree verified clean at
+  closeout (tracked tree empty, standing.js == HEAD, no swap
+  residue — no swap ever ran).
 
 ## Infrastructure
 
-(to fill at closeout)
+- Host write flap: no EPERM failure struck this arm's git or file
+  writes directly, but git operations ran markedly slow during the
+  closeout of the cherry-pick (the `git checkout` + `git status` +
+  `git diff` verification took ~94s, dominated by the full-tree
+  restat) — the same flap-era slowness the 2b arm recorded on its
+  index-clobber repair. Heartbeats succeeded throughout.
+- Safe-commit index clobber: struck on the prereg commit (see §Proof
+  results); repaired with the documented pipe.
+- (to fill at closeout: final heartbeat, tree state)
+- Heartbeats succeeded throughout (run start, pre-pick, post-pick).
+  Final tree state verified clean before the closeout commit (see
+  §Proof results).

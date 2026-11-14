@@ -13,12 +13,17 @@
 // NOT-CARRIER.
 //
 // OUTCOME — UNMEASURED (conflict-STOP, recorded after the live
-// cherry-pick): the merge-tree pre-check predicts TWO conflicted
-// files (docs/ONTOLOGY.md, 2 hunks; scripts/green-list.txt, 1
-// hunk), so the green-list-only union exception does NOT apply;
-// the live cherry-pick reproduces the prediction exactly, the
-// run STOPS, no subject commit exists, no step ran, no survival
-// number was measured.
+// cherry-pick): the merge-tree pre-check predicts TWO content-
+// conflicted files (docs/ONTOLOGY.md, 2 hunks; scripts/green-list.txt,
+// 1 hunk) plus a delete/modify on src/js/villager-brain.js (the file
+// is ABSENT at the far end, PRESENT at the first parent — the
+// family-1 missing-substrate wall); the live cherry-pick reproduces
+// all three unmerged paths exactly, the run STOPS, no subject commit
+// exists, no step ran, no survival number was measured. The prereg's
+// first draft misread the merge-tree output (godpath hunk listed as
+// a conflict; villager-brain.js called a clean take-theirs); the
+// evidence file records the correction, and this test proves the
+// corrected reading.
 //
 // WHAT THIS TEST PROVES:
 //   1. Family identity — merge f843fab1c, its parents, the 1-commit
@@ -29,8 +34,10 @@
 //   2. Merge-tree prediction (read-only) — exactly THREE 'changed
 //      in both' sections: docs/ONTOLOGY.md 6 markers, scripts/
 //      green-list.txt 3 markers, src/js/villager-objectives.js 0
-//      markers; exactly TWO content-conflicted files; villager-
-//      brain.js a clean take-theirs; the test file a clean add.
+//      markers; exactly TWO content-conflicted files; the raw
+//      merge-tree output ALSO carries the villager-brain.js
+//      'removed in local' (delete/modify) signal — the pre-check
+//      contained the DU, and this test proves the signal was there.
 //   3. Green-list readers — only scripts/check.js reads the file;
 //      zero readers under src/ — AND the union exception still
 //      does NOT apply, because ONTOLOGY.md conflicts too (the
@@ -46,12 +53,12 @@
 //   6. Seed-band identity — the step script and the prereg name
 //      exactly seeds 190391–190398.
 //   7. Live conflict record — the subject branch exists at the far
-//      end with NO subject commit; the evidence file records the
-//      live UU files and hunks; the cherry-pick was aborted and
-//      the tree verified clean. (Added after the pick.)
-//   8. No corpus — no step summary or per-seed corpus exists for
-//      STEP t6-f843fab1c, because no judged sim ran. (Added after
-//      the pick.)
+//      end with NO subject commit; villager-brain.js is absent at
+//      the far end and present at the first parent; the evidence
+//      file records the live UU files and hunks, the DU, the
+//      correction, and the UNMEASURED verdict.
+//   8. No corpus — no step summary, driver log, or per-seed corpus
+//      exists for STEP t6-f843fab1c, because no judged sim ran.
 //
 // Usage: node scripts/test-transplant6.js
 'use strict';
@@ -181,9 +188,20 @@ function mergeTreeConflicts() {
   T.ok('the conflicted files are ONTOLOGY.md + green-list.txt',
     JSON.stringify(conflicted) === JSON.stringify(['docs/ONTOLOGY.md', 'scripts/green-list.txt']), conflicted.join(', '));
   T.ok('villager-objectives.js merges cleanly (0 markers)', mt['src/js/villager-objectives.js'] === 0, 'markers=0');
-  // villager-brain.js is a clean take-theirs: base+their only, no 'our'
-  // line, so it never appears in the changed-in-both map at all.
-  T.ok('villager-brain.js is NOT a changed-in-both file (clean take-theirs)', mt['src/js/villager-brain.js'] === undefined, 'absent from map');
+  // villager-brain.js is a delete/modify, NOT a clean take-theirs:
+  // it never appears in the changed-in-both map, but the raw
+  // merge-tree output carries a 'removed in local' section for it
+  // (base + their blobs only, no 'our' line) — the DU signal the
+  // prereg's first draft misread as a clean application.
+  T.ok('villager-brain.js is NOT a changed-in-both file (delete/modify, not a clean merge)', mt['src/js/villager-brain.js'] === undefined, 'absent from map');
+  const mtRaw = execSync('git merge-tree ' + MERGE_BASE + ' ' + FAR + ' ' + MERGE,
+    { cwd: REPO, stdio: 'pipe', maxBuffer: 512 * 1024 * 1024 }).toString('utf8');
+  T.ok("raw merge-tree output carries the 'removed in local' villager-brain.js section (the DU signal)",
+    mtRaw.indexOf('removed in local') !== -1 && mtRaw.indexOf('src/js/villager-brain.js') !== -1, 'DU signal present');
+  T.ok('villager-brain.js is ABSENT at the far end (ls-tree empty)',
+    git('ls-tree ' + FAR + ' -- src/js/villager-brain.js') === '', '(absent)');
+  T.ok('villager-brain.js is PRESENT at the first parent (blob 2f99c9e51...)',
+    git('ls-tree ' + MERGE_BASE + ' -- src/js/villager-brain.js').indexOf('2f99c9e515c9139bb96afaeb15415de566f0a94d') !== -1, 'blob 2f99c9e51');
   // The green-list hunk's theirs-side lines are the three test lines.
   const mergeGreen = gitShow(MERGE, 'scripts/green-list.txt').split('\n');
   let greenOk = true;
@@ -244,6 +262,35 @@ function mergeTreeConflicts() {
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
   T.ok('evidence prereg names the same band', ev.indexOf('190391') !== -1 && ev.indexOf('190398') !== -1, 'band in prereg');
   T.ok('evidence prereg names the STEP id t6-f843fab1c', ev.indexOf('t6-f843fab1c') !== -1, 'STEP id present');
+
+  // ---- 7. Live conflict record ----
+  T.section('7. Live conflict record — three unmerged paths, no subject commit');
+  let subject = null;
+  try { subject = git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subject = null; }
+  T.ok('subject branch exists', subject !== null && subject.length === 40, subject ? subject.slice(0, 12) : '(missing)');
+  if (subject) {
+    T.ok('subject branch points at the far end (no subject commit)', subject === FAR_FULL, subject.slice(0, 12));
+  }
+  T.ok('evidence file records the verdict as UNMEASURED', ev.indexOf('UNMEASURED') !== -1, 'UNMEASURED present');
+  T.ok('evidence file records THREE unmerged paths', ev.indexOf('THREE unmerged paths') !== -1, 'three paths named');
+  T.ok('evidence file records the DU on villager-brain.js', ev.indexOf('DU') !== -1 && ev.indexOf('villager-brain.js') !== -1, 'DU present');
+  T.ok('evidence file records the live ONTOLOGY hunk lines (1977, 2040)', ev.indexOf('1977') !== -1 && ev.indexOf('2040') !== -1, 'hunk lines present');
+  T.ok('evidence file records the live green-list hunk lines (803)', ev.indexOf('803') !== -1, 'hunk line present');
+  T.ok('evidence file records villager-brain.js ABSENT at the far end', ev.indexOf('ABSENT at the far end') !== -1, 'absent recorded');
+  T.ok('evidence file records the pre-check misread correction', ev.indexOf('CORRECTION') !== -1, 'correction present');
+  T.ok('evidence file records that the cherry-pick was aborted and the tree verified clean',
+    ev.indexOf('cherry-pick --abort') !== -1 && ev.indexOf('verified clean') !== -1, 'abort + clean recorded');
+  T.ok('evidence file proposes the narrowed 6b route as a coordinator decision, not this arm\'s call',
+    ev.indexOf('narrowed') !== -1 && ev.indexOf('coordinator decision') !== -1, '6b note present');
+
+  // ---- 8. No corpus ----
+  T.section('8. No corpus — no judged sim ran');
+  const sumPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
+  const logPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
+  const corpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
+  T.ok('no step summary exists for t6-f843fab1c', !fs.existsSync(sumPath), 'absent');
+  T.ok('no driver log exists for t6-f843fab1c', !fs.existsSync(logPath), 'absent');
+  T.ok('no per-seed corpus exists for t6-f843fab1c', !fs.existsSync(corpusDir), 'absent');
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
