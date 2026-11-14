@@ -209,12 +209,23 @@ function classifyTransplant(n) {
   const stepSrc = fs.readFileSync(path.join(REPO, 'scripts', 'culpritbisect-step.sh'), 'utf8');
   T.ok('step script names the band 190391..190398',
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
+  // STAGE 2 (appended after the steps): the judged runs exist now,
+  // so the three "no step ..." legs above are replaced by "step ran"
+  // legs for BOTH STEP ids (t15a-pick1 and the fresh-id re-run
+  // t15a-pick1-r2). The stage-1 form of this file passed 65/65
+  // before any judged sim ran; this form proves the judged runs.
   const t15aSummary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
-  T.ok('no step summary exists for t15a-pick1 (no judged sim ran)', fs.existsSync(t15aSummary) === false, STEP);
+  T.ok('step summary exists for t15a-pick1 (judged sim ran)', fs.existsSync(t15aSummary) === true, STEP);
   const t15aDriver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
-  T.ok('no step driver log exists for t15a-pick1 (no judged sim ran)', fs.existsSync(t15aDriver) === false, STEP);
+  T.ok('step driver log exists for t15a-pick1 (judged sim ran)', fs.existsSync(t15aDriver) === true, STEP);
   const corpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
-  T.ok('no step corpus exists for t15a-pick1 (no judged sim ran)', fs.existsSync(corpusDir) === false, STEP);
+  T.ok('step corpus exists for t15a-pick1 (judged sim ran)', fs.existsSync(corpusDir) === true, STEP);
+  const t15aR2Summary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-r2-summary.json');
+  T.ok('step summary exists for the re-run t15a-pick1-r2 (fresh STEP id)', fs.existsSync(t15aR2Summary) === true, STEP + '-r2');
+  const t15aR2Driver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-r2-driver.log');
+  T.ok('step driver log exists for the re-run t15a-pick1-r2', fs.existsSync(t15aR2Driver) === true, STEP + '-r2');
+  const corpusDirR2 = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP + '-r2');
+  T.ok('step corpus exists for the re-run t15a-pick1-r2', fs.existsSync(corpusDirR2) === true, STEP + '-r2');
   let cherryPickHead = true;
   try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead = false; }
   T.ok('no cherry-pick is in progress', cherryPickHead === false, 'CHERRY_PICK_HEAD absent');
@@ -224,6 +235,122 @@ function classifyTransplant(n) {
     return ln && !allowed.some(function (a) { return ln === a; });
   }).join('\n');
   T.ok('tracked tree is clean apart from this proof + the prereg + the evidence file (uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+
+  // ---- 7. Corpus — both STEP ids, 8/8 parse, driver-log match, identical re-run ----
+  T.section('7. Corpus — 8/8 parse, seeds + STEP + fix, driver-log match, re-run identical');
+  const EXPECTED_DAYS = { 190391: 114, 190392: 115, 190393: 87, 190394: 116, 190395: 139, 190396: 150, 190397: 133, 190398: 150 };
+  const EXPECTED_END = { 190391: 'village-lost', 190392: 'village-lost', 190393: 'village-lost', 190394: 'village-lost', 190395: 'village-lost', 190396: 'survived', 190397: 'village-lost', 190398: 'survived' };
+  const EXPECTED_DEATHS = { 190391: 81, 190392: 64, 190393: 70, 190394: 68, 190395: 87, 190396: 104, 190397: 84, 190398: 90 };
+  const EXPECTED_VETSAYS = { 190391: 27, 190392: 16, 190393: 14, 190394: 24, 190395: 18, 190396: 24, 190397: 63, 190398: 75 };
+  function checkCorpus(stepId, corpusDirPath, driverLogPath) {
+    const logLines = fs.readFileSync(driverLogPath, 'utf8').split('\n').filter(function (l) { return l.indexOf('{') === 0; }).map(function (l) { return JSON.parse(l); });
+    T.ok(stepId + ': driver log has 8 JSON lines', logLines.length === 8, logLines.length + ' lines');
+    let survived = 0;
+    SEEDS.forEach(function (seed) {
+      const file = path.join(corpusDirPath, 'culpritbisect-s' + seed + '-culpritbisect-pilot-fix.json');
+      T.ok(stepId + ' seed ' + seed + ' file exists', fs.existsSync(file), path.basename(file));
+      const j = JSON.parse(fs.readFileSync(file, 'utf8'));
+      T.ok(stepId + ' seed ' + seed + ' parses with matching seed + STEP', j.seed === seed && j.step === stepId, 'step=' + j.step);
+      T.ok(stepId + ' seed ' + seed + ' ran on the subject anchor', j.anchorCommit === '493d7a9753ae', j.anchorCommit);
+      T.ok(stepId + ' seed ' + seed + ' has the fix swapped in', j.standingFix === true && j.standingSha === 'f8fda4295a99' && j.standingSwapped === true, j.standingSha);
+      T.ok(stepId + ' seed ' + seed + ' ran the far-end policy', j.policySha === 'a7ff5c516440', j.policySha);
+      T.ok(stepId + ' seed ' + seed + ' has 0 instrument errors', Array.isArray(j.instrumentErrors) && j.instrumentErrors.length === 0, 'errors=' + j.instrumentErrors.length);
+      T.ok(stepId + ' seed ' + seed + ' days match the evidence table (' + EXPECTED_DAYS[seed] + ')', j.days === EXPECTED_DAYS[seed], 'days=' + j.days);
+      T.ok(stepId + ' seed ' + seed + ' endReason is ' + EXPECTED_END[seed], j.endReason === EXPECTED_END[seed], j.endReason);
+      T.ok(stepId + ' seed ' + seed + ' deaths match the evidence table (' + EXPECTED_DEATHS[seed] + ')', j.deaths.length === EXPECTED_DEATHS[seed], 'deaths=' + j.deaths.length);
+      T.ok(stepId + ' seed ' + seed + ' vetSays match the driver log (' + EXPECTED_VETSAYS[seed] + ')', j.vetSays.length === EXPECTED_VETSAYS[seed], 'vetSays=' + j.vetSays.length);
+      const line = logLines.filter(function (l) { return l.seed === seed; })[0];
+      T.ok(stepId + ' seed ' + seed + ' driver-log line matches the JSON', !!line && line.days === j.days && line.endReason === j.endReason && line.deaths === j.deaths.length && line.vetSays === j.vetSays.length && line.errors === j.instrumentErrors.length, line ? 'days=' + line.days + ' end=' + line.endReason : '(no line)');
+      if (j.endReason === 'survived') survived++;
+    });
+    T.ok(stepId + ' corpus reads 2/8 survived', survived === 2, survived + '/8');
+    const wave5 = SEEDS.filter(function (s) { const j = JSON.parse(fs.readFileSync(path.join(corpusDirPath, 'culpritbisect-s' + s + '-culpritbisect-pilot-fix.json'), 'utf8')); return j.maxWave >= 5; }).length;
+    T.ok(stepId + ' corpus reads wave-5 1/8', wave5 === 1, wave5 + '/8');
+    const won = SEEDS.filter(function (s) { const j = JSON.parse(fs.readFileSync(path.join(corpusDirPath, 'culpritbisect-s' + s + '-culpritbisect-pilot-fix.json'), 'utf8')); return j.won; }).length;
+    T.ok(stepId + ' corpus reads wins 0/8', won === 0, won + '/8');
+    return survived;
+  }
+  const surv1 = checkCorpus(STEP, CORPUS_DIR, DRIVER_LOG);
+  const surv2 = checkCorpus(STEP + '-r2', path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP + '-r2'), path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-r2-driver.log'));
+  T.ok('both runs read the same survived count (2/8)', surv1 === surv2, surv1 + ' vs ' + surv2);
+  // Determinism: the re-run reproduces the first run exactly — the
+  // harness is deterministic per seed, so the re-run is a
+  // reproducibility check, not fresh evidence (evidence §Determinism
+  // note). The proof asserts the identity so the claim is checked,
+  // not assumed.
+  let identical = true;
+  SEEDS.forEach(function (seed) {
+    const a = fs.readFileSync(path.join(CORPUS_DIR, 'culpritbisect-s' + seed + '-culpritbisect-pilot-fix.json'), 'utf8');
+    const b = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP + '-r2', 'culpritbisect-s' + seed + '-culpritbisect-pilot-fix.json'), 'utf8');
+    const ja = JSON.parse(a); const jb = JSON.parse(b);
+    if (ja.days !== jb.days || ja.endReason !== jb.endReason || ja.deaths.length !== jb.deaths.length || ja.vetSays.length !== jb.vetSays.length) identical = false;
+  });
+  T.ok('re-run per-seed days/endReason/deaths/vetSays are identical to the first run (deterministic harness)', identical, identical ? 'identical' : 'differ');
+
+  // ---- 8. Verdict — binding thresholds, corpus reads AMBIGUOUS twice ----
+  T.section('8. Verdict — 2/8 twice classifies AMBIGUOUS, treated as NOT-CARRIER for ordering');
+  T.ok('2/8 classifies AMBIGUOUS', classifyTransplant(2) === 'AMBIGUOUS', 'AMBIGUOUS');
+  const sum1 = JSON.parse(fs.readFileSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json'), 'utf8'));
+  const sum2 = JSON.parse(fs.readFileSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-r2-summary.json'), 'utf8'));
+  T.ok('first summary verdict is AMBIGUOUS', sum1.verdict === 'AMBIGUOUS', sum1.verdict);
+  T.ok('re-run summary verdict is AMBIGUOUS', sum2.verdict === 'AMBIGUOUS', sum2.verdict);
+  T.ok('first summary survived is 2', sum1.survived === 2, 'survived=' + sum1.survived);
+  T.ok('re-run summary survived is 2', sum2.survived === 2, 'survived=' + sum2.survived);
+  T.ok('first summary median is 133d', sum1.wall.medianDays === 133, 'median=' + sum1.wall.medianDays);
+  T.ok('re-run summary median is 133d', sum2.wall.medianDays === 133, 'median=' + sum2.wall.medianDays);
+  T.ok('first summary wave-5 is 1/8', sum1.wall.wave5 === 1, 'wave5=' + sum1.wall.wave5);
+  T.ok('first summary national/table/wins are 0', sum1.wall.national === 0 && sum1.wall.table === 0 && sum1.wall.wins === 0, '0/0/0');
+  const ev = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15a-pick1.md'), 'utf8');
+  T.ok('evidence file states the AMBIGUOUS verdict', ev.indexOf('Verdict: AMBIGUOUS') !== -1, 'AMBIGUOUS present');
+  T.ok('evidence file records 2/8 survived', ev.indexOf('2/8 survived') !== -1, '2/8 present');
+  T.ok('evidence file records the ordering treatment (NOT-CARRIER for ordering, suspect list)',
+    ev.indexOf('treated as NOT-CARRIER for ordering') !== -1 && ev.indexOf('suspect list') !== -1, 'ordering treatment present');
+  const pre2 = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15a-pick1-prereg.md'), 'utf8');
+  T.ok('prereg carries the binding thresholds', pre2.indexOf('≤1/8 CARRIER') !== -1 && pre2.indexOf('≥3/8 NOT-CARRIER') !== -1, 'thresholds present');
+
+  // ---- 9. Standing restored — byte-identical to the far-end native ----
+  T.section('9. Standing restored — byte-identical to the far-end native');
+  // LANDING SHAPE (15C-narrowed precedent): the evidence commits
+  // are rebased --onto master so the landing is evidence-only; the
+  // subject is no longer an ancestor of HEAD. The native-standing
+  // facts are therefore proven against the subject BRANCH (which
+  // pick 1 never touched — the family does not touch standing.js,
+  // §1 leg), and the no-game-code fact against the on-disk file
+  // vs HEAD.
+  const subjectStanding = gitShow(SUBJECT_BRANCH, 'src/js/standing.js');
+  T.ok('subject-branch standing.js sha is 75762cb2...', sha256(subjectStanding) === FAR_NATIVE_STANDING_SHA, sha256(subjectStanding).slice(0, 12));
+  T.ok('subject-branch standing.js equals the far-end blob', subjectStanding === gitShow(FAR, 'src/js/standing.js'), 'byte-identical to far end');
+  const onDisk = fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'), 'utf8');
+  T.ok('on-disk standing.js equals HEAD blob', onDisk === gitShow('HEAD', 'src/js/standing.js'), 'byte-identical to HEAD');
+  T.ok('no src/js file differs from HEAD', git('status --short -- src/js') === '', git('status --short -- src/js') || '(clean)');
+  T.ok('fix file sha is f8fda429...', sha256(gitShow('5157782a4', 'src/js/standing.js')) === FIX_SHA, FIX_SHA.slice(0, 12));
+  // Prereg-commit ancestry resolves by message/subject, not hash
+  // (an adoption rebase rewrites hashes).
+  const armSubjects = git('log --format=%s HEAD');
+  T.ok('prereg commit exists on the arm branch by subject (not hash)',
+    armSubjects.indexOf('sim-transplant15a-pick1-a: prereg') !== -1 && armSubjects.indexOf('STEP t15a-pick1') !== -1, 'prereg subject present');
+
+  // ---- 10. Evidence records ----
+  T.section('10. Evidence records — verdict, table, wall, sense-testing, metric review, telemetry');
+  T.ok('evidence file exists', ev.length > 0, 'evidence/2026-11-14/sim-transplant15a-pick1.md');
+  T.ok('evidence records the per-seed table (114/115/87/116/139/150/133/150)',
+    ev.indexOf('114') !== -1 && ev.indexOf('139') !== -1 && ev.indexOf('190398') !== -1, 'per-seed table present');
+  T.ok('evidence records the wall numbers (national 0, table 0, wins 0, wave-5 1/8, median 133d)',
+    ev.indexOf('national 0') !== -1 && ev.indexOf('wave-5 1/8') !== -1 && ev.indexOf('133d') !== -1, 'wall numbers present');
+  T.ok('evidence records the sense-testing section (transcripts read, people-like)',
+    ev.indexOf('Sense-testing') !== -1 && ev.indexOf('read like people') !== -1, 'sense-testing present');
+  T.ok('evidence records the Blooded beat-vs-flag recurrence (open finding, corroborated)',
+    ev.indexOf('BLOODED BEAT vs FLAG') !== -1 && ev.indexOf('open finding') !== -1, 'blooded flag present');
+  T.ok('evidence records the determinism note (re-run is a reproducibility check, not fresh evidence)',
+    ev.indexOf('Determinism note') !== -1 && ev.indexOf('not fresh evidence') !== -1, 'determinism note present');
+  T.ok('evidence records the metric review (re-run leg vacuous under determinism)',
+    ev.indexOf('Metric review') !== -1 && ev.indexOf('vacuous under a deterministic harness') !== -1, 'metric review present');
+  T.ok('evidence records the telemetry refusal (recorder-corpus class)',
+    ev.indexOf('Telemetry deviation check') !== -1 && ev.indexOf('REFUSED') !== -1, 'telemetry refusal present');
+  T.ok('evidence records the step-script hazard (/tmp copy route)',
+    ev.indexOf('STEP-SCRIPT HAZARD') !== -1 && ev.indexOf('/tmp') !== -1, 'step-script hazard present');
+  T.ok('evidence records the safe-commit index clobber repair',
+    ev.indexOf('INDEX CLOBBER') !== -1 && ev.indexOf('update-index') !== -1, 'clobber repair present');
 
   T.done();
 })();
