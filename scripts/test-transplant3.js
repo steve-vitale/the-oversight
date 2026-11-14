@@ -11,11 +11,13 @@
 //
 // OUTCOME — STOP AT THE CHERRY-PICK (recorded in the evidence file):
 // `git cherry-pick -m 1 c32ff6fa8` onto the far end CONFLICTED on
-// src/js/conversation.js (1 hunk: the teach-as-diegetic-act lines,
-// both lines refactored the same outcome logic differently). Per the
-// prereg the run STOPPED without hand-resolving: no subject commit
-// exists, no step ran, no survival number was measured. The verdict
-// for family 3 is UNMEASURED, not CARRIER and not NOT-CARRIER.
+// src/js/conversation.js (1 hunk: the family's insertion of
+// convoResumeOwnsSitting between convoHasLiveUnfinished and
+// convoUnfinishedEngageLine — two anchor methods the far end never
+// had, so the insertion has no anchor there). Per the prereg the run
+// STOPPED without hand-resolving: no subject commit exists, no step
+// ran, no survival number was measured. The verdict for family 3 is
+// UNMEASURED, not CARRIER and not NOT-CARRIER.
 //
 // WHAT THIS TEST PROVES (for the STOP state):
 //   1. Family identity — merge c32ff6fa8, its parents, the
@@ -25,16 +27,17 @@
 //      far end; the 2 absent files are additions in the family diff
 //      (clean, not DU); merge-tree predicts exactly the one
 //      conversation.js conflict hunk (both the parents'-base and the
-//      true cherry-pick-base dry runs).
+//      first-parent-base dry runs).
 //   2. No subject — the scratch branch transplant-3-subject exists
 //      and still points at the far end (no commit on top of it), and
 //      its tree is identical to the far end (the family diff was NOT
 //      applied).
 //   2b. Conflict reproduced without touching the tree — `git
-//      merge-tree d229b58f5 203a32775 c32ff6fa8` (true cherry-pick
-//      base) reports the conversation.js conflict with exactly 1
-//      marker set and shows villager-agency.js merging cleanly
-//      (0 markers).
+//      merge-tree b41bd6300 203a32775 c32ff6fa8` (the cherry-pick -m 1
+//      base = the merge's FIRST PARENT) reports the conversation.js
+//      conflict with exactly 1 hunk (3 marker lines) whose "their"
+//      side is the unfinished-work methods, and shows
+//      villager-agency.js merging cleanly (0 markers).
 //   3. Conflict recorded — the evidence file states the STOP, names
 //      the conflict file with its UU class and hunk, and records NO
 //      subject hash.
@@ -62,7 +65,8 @@ const FAR = '203a32775';
 const FAR_FULL = '203a327750a223e0a1465dc51f5409787efdfaae';
 const MERGE = 'c32ff6fa8';
 const MERGE_BASE_PARENTS = '0f55a928c';
-const TRUE_BASE = 'd229b58f5';
+const CORRECT_BASE = 'b41bd6300'; // cherry-pick -m 1 base = first parent
+const TREE_BASE = 'd229b58f5'; // merge-base of far end and merge (NOT the cherry-pick base)
 const SUBJECT_BRANCH = 'transplant-3-subject';
 const STEP = 't3-c32ff6fa8';
 const FIX_SHA = 'f8fda4295a99720dcb54d0c69f5fa6836f55cf9d9c8c5d1e51e5f0aa49c43078';
@@ -142,7 +146,8 @@ function mergeTreeConflicts(base) {
   T.ok('far-end policy sha is a7ff5c51...', farPolicy.startsWith('a7ff5c51'), farPolicy.slice(0, 12));
   const totalFiles = git('diff --name-only ' + MERGE + '^1 ' + MERGE).split('\n').length;
   T.ok('family diff is exactly 9 files (3 js + 6 test scripts)', totalFiles === 9, 'files=' + totalFiles);
-  T.ok('true cherry-pick base is d229b58f5 (merge-base of far end and merge)', git('merge-base ' + FAR + ' ' + MERGE).startsWith(TRUE_BASE), git('merge-base ' + FAR + ' ' + MERGE).slice(0, 12));
+  T.ok('merge-base of far end and merge is d229b58f5 (informational — NOT the cherry-pick base)', git('merge-base ' + FAR + ' ' + MERGE).startsWith(TREE_BASE), git('merge-base ' + FAR + ' ' + MERGE).slice(0, 12));
+  T.ok('cherry-pick -m 1 base is the first parent b41bd6300', git('rev-parse ' + MERGE + '^1').startsWith(CORRECT_BASE), git('rev-parse ' + MERGE + '^1').slice(0, 12));
 
   // ---- 1b. Substrate pre-check ----
   T.section('1b. Substrate pre-check — merge-tree dry runs');
@@ -161,6 +166,18 @@ function mergeTreeConflicts(base) {
   const mtParents = mergeTreeConflicts(MERGE_BASE_PARENTS);
   T.ok('parents-base merge-tree predicts exactly the conversation.js conflict (1 hunk, 3 marker lines)', mtParents['src/js/conversation.js'] === 3, 'markers=' + mtParents['src/js/conversation.js']);
   T.ok('parents-base merge-tree shows villager-agency.js merging cleanly (0 markers)', mtParents['src/js/villager-agency.js'] === 0, 'markers=' + mtParents['src/js/villager-agency.js']);
+  // The anchor methods exist at the first parent but NOT at the far end.
+  const farConvo = gitShow(FAR, 'src/js/conversation.js');
+  const parentConvo = gitShow(MERGE + '^1', 'src/js/conversation.js');
+  T.ok('anchor method convoHasLiveUnfinished exists at the first parent', parentConvo.indexOf('convoHasLiveUnfinished(vid)') !== -1, 'present at ' + MERGE + '^1');
+  T.ok('anchor method convoHasLiveUnfinished is ABSENT at the far end', farConvo.indexOf('convoHasLiveUnfinished(vid)') === -1, 'absent at far end');
+  T.ok('anchor method convoUnfinishedEngageLine exists at the first parent', parentConvo.indexOf('convoUnfinishedEngageLine(vid)') !== -1, 'present at ' + MERGE + '^1');
+  T.ok('anchor method convoUnfinishedEngageLine is ABSENT at the far end', farConvo.indexOf('convoUnfinishedEngageLine(vid)') === -1, 'absent at far end');
+  // The lessonOutcome/plantTeachOutcome split is first-parent content, not family content.
+  T.ok('the lessonOutcome split exists at the first parent', parentConvo.indexOf('plantTeachOutcome') !== -1, 'split at ' + MERGE + '^1');
+  const famDiff = git('diff ' + MERGE + '^1 ' + MERGE + ' -- src/js/conversation.js');
+  T.ok('the family diff does NOT contain the lessonOutcome split', famDiff.indexOf('plantTeachOutcome') === -1, 'split not in family diff');
+  T.ok('the family diff DOES insert convoResumeOwnsSitting', famDiff.indexOf('+    convoResumeOwnsSitting(vid)') !== -1, 'insertion in family diff');
 
   // ---- 2. No subject (STOP state) ----
   T.section('2. No subject — branch left at the far end, family NOT applied');
@@ -174,22 +191,43 @@ function mergeTreeConflicts(base) {
   }
 
   // ---- 2b. Conflict reproduced by merge-tree (read-only) ----
-  T.section('2b. Conflict reproduced — git merge-tree dry run (true base)');
-  const mt = mergeTreeConflicts(TRUE_BASE);
+  T.section('2b. Conflict reproduced — git merge-tree dry run (first-parent base)');
+  const mt = mergeTreeConflicts(CORRECT_BASE);
   let mtOk = true, mtBad = null;
   for (const f of Object.keys(EXPECTED_MARKERS)) {
     if (mt[f] !== EXPECTED_MARKERS[f]) { mtOk = false; mtBad = f + ' (got ' + mt[f] + ', want ' + EXPECTED_MARKERS[f] + ')'; break; }
   }
-  T.ok('true-base merge-tree reports the conversation.js conflict with 1 hunk (3 marker lines)', mtOk, mtBad || '1/1 match');
-  T.ok('true-base merge-tree shows villager-agency.js merging cleanly (0 markers)', mt['src/js/villager-agency.js'] === 0, 'markers=' + mt['src/js/villager-agency.js']);
-  T.ok('true-base merge-tree shows convo-beats.js untouched (no section)', mt['src/js/convo-beats.js'] === undefined, 'section=' + mt['src/js/convo-beats.js']);
+  T.ok('first-parent-base merge-tree reports the conversation.js conflict with 1 hunk (3 marker lines)', mtOk, mtBad || '1/1 match');
+  T.ok('first-parent-base merge-tree shows villager-agency.js merging cleanly (0 markers)', mt['src/js/villager-agency.js'] === 0, 'markers=' + mt['src/js/villager-agency.js']);
+  T.ok('first-parent-base merge-tree shows convo-beats.js untouched (no section)', mt['src/js/convo-beats.js'] === undefined, 'section=' + mt['src/js/convo-beats.js']);
+  // The conflict hunk's "their" side is the unfinished-work methods.
+  // Extract the conversation.js 'changed in both' section by its base line.
+  const mtRaw = execSync('git merge-tree ' + CORRECT_BASE + ' ' + FAR + ' ' + MERGE,
+    { cwd: REPO, stdio: 'pipe', maxBuffer: 512 * 1024 * 1024 }).toString('utf8');
+  const mtLines = mtRaw.split('\n');
+  let convoSection = null, inConvo = false;
+  for (let i = 0; i < mtLines.length; i++) {
+    const ln = mtLines[i];
+    if (ln === 'changed in both') { inConvo = false; continue; }
+    if (/^[a-z][a-z ]*$/.test(ln) && ln !== 'changed in both') { if (inConvo) break; continue; }
+    const m = ln.match(/^  base\s+\d+ [0-9a-f]+ (.+)$/);
+    if (m && m[1] === 'src/js/conversation.js') { inConvo = true; convoSection = ''; continue; }
+    if (inConvo) convoSection += ln + '\n';
+  }
+  T.ok('conflict hunk carries convoResumeOwnsSitting as the insertion', convoSection !== null && convoSection.indexOf('convoResumeOwnsSitting') !== -1, 'insertion in hunk');
+  T.ok('conflict hunk carries convoHasLiveUnfinished on the their side', convoSection !== null && convoSection.indexOf('convoHasLiveUnfinished') !== -1, 'anchor method in hunk');
 
-  // ---- 3. Conflict prediction recorded (stage 1; STOP legs added after the cherry-pick) ----
-  T.section('3. Conflict prediction recorded in the evidence file (stage 1)');
+  // ---- 3. Conflict recorded ----
+  T.section('3. Conflict recorded in the evidence file');
   const evPath = path.join(REPO, 'evidence', '2026-11-13', 'sim-transplant3.md');
   const ev = fs.existsSync(evPath) ? fs.readFileSync(evPath, 'utf8') : '';
-  T.ok('evidence file records the merge-tree prediction (conversation.js, 1 hunk)', ev.indexOf('exactly ONE content conflict') !== -1 && ev.indexOf('src/js/conversation.js') !== -1, 'prediction present');
-  T.ok('evidence file marks the subject/conflict sections TBD until the cherry-pick', ev.indexOf('TBD — filled after the cherry-pick attempt') !== -1, 'TBD markers present');
+  T.ok('evidence file states the cherry-pick conflict STOP', ev.indexOf('Cherry-pick conflict — STOP') !== -1, 'STOP section present');
+  T.ok('evidence file records NO subject commit', ev.indexOf('Subject commit: NONE') !== -1, 'NONE recorded');
+  T.ok('evidence file names the conflict file src/js/conversation.js', ev.indexOf('src/js/conversation.js') !== -1, 'conversation.js named');
+  T.ok('evidence file names the inserted method convoResumeOwnsSitting', ev.indexOf('convoResumeOwnsSitting') !== -1, 'method named');
+  T.ok('evidence file records the missing-substrate cause (anchor methods absent at the far end)', ev.indexOf('NONE of the three exists') !== -1, 'cause recorded');
+  T.ok('evidence file records the verdict as UNMEASURED', ev.indexOf('UNMEASURED') !== -1, 'UNMEASURED present');
+  T.ok('evidence file records the pre-check base correction', ev.indexOf('CORRECTION to the pre-check') !== -1, 'correction recorded');
 
   // ---- 4. Verdict mapping ----
   T.section('4. Verdict mapping — transplant thresholds');
