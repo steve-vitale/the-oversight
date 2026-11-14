@@ -1,0 +1,163 @@
+{
+ "variant": "v1b-honest",
+ "steps": [
+  {
+   "id": "audit-said",
+   "ok": true,
+   "detail": "phase=paths"
+  },
+  {
+   "id": "seat-lesser",
+   "ok": true,
+   "detail": "seat=lesser"
+  },
+  {
+   "id": "D1-branch-dark",
+   "ok": true,
+   "detail": "branch=dark dark=7 light=0"
+  },
+  {
+   "id": "path-started",
+   "ok": true,
+   "detail": "phase=conscript"
+  },
+  {
+   "id": "conscript-gate-refused",
+   "ok": true,
+   "detail": "dark walks at day>7 always open with the pods offer; refusing"
+  },
+  {
+   "id": "conscript-refusal-resumed",
+   "ok": true,
+   "detail": "phase=challenge"
+  },
+  {
+   "id": "beat1-offered",
+   "ok": true,
+   "detail": "beat:kill,beat:mercy,beat:fire"
+  },
+  {
+   "id": "beat1-said",
+   "ok": true,
+   "detail": "beat1 effect line present"
+  },
+  {
+   "id": "beat-advanced-1",
+   "ok": true,
+   "detail": "beat=1"
+  },
+  {
+   "id": "trial-offered",
+   "ok": true,
+   "detail": "beat:lean,beat:hold,beat:trial,beat:build"
+  },
+  {
+   "id": "D3-trial-fight-live",
+   "ok": true,
+   "detail": "tbfight=fmgpsphcl_744g5x"
+  },
+  {
+   "id": "trial-finale-present",
+   "ok": true,
+   "detail": "finale hp=2167 kind=monster id=finale"
+  },
+  {
+   "id": "D3-trial-resolved",
+   "ok": true,
+   "detail": "drive calls=1 over=true notes="
+  },
+  {
+   "id": "D3-resume-fired",
+   "ok": true,
+   "detail": "resume line present"
+  },
+  {
+   "id": "D3-loss-branch-voiced",
+   "ok": true,
+   "detail": "loss branch voiced"
+  },
+  {
+   "id": "trial-beat-advanced",
+   "ok": true,
+   "detail": "beat=2 phase=challenge"
+  },
+  {
+   "id": "D1-twist-offered",
+   "ok": true,
+   "detail": "beat:name,beat:refuse"
+  },
+  {
+   "id": "D2-twist-fired",
+   "ok": true,
+   "detail": "Exemplum say line present"
+  },
+  {
+   "id": "D2-meters-moved",
+   "ok": true,
+   "detail": "terror 4->7, horror -2->1"
+  },
+  {
+   "id": "finals-reached",
+   "ok": true,
+   "detail": "phase=finals"
+  },
+  {
+   "id": "final-offered",
+   "ok": true,
+   "detail": "final:example,final:tribute"
+  },
+  {
+   "id": "D4-final-resolved",
+   "ok": true,
+   "detail": "dark final outcome present"
+  },
+  {
+   "id": "D4-ending-recorded",
+   "ok": true,
+   "detail": "table_won events=1"
+  }
+ ],
+ "branch": "dark",
+ "meters": {
+  "terror": 7,
+  "horror": 1,
+  "trial": 1
+ },
+ "weakened": 1,
+ "phase": "done",
+ "path": "feared",
+ "bearerBefore": "gen_qdcf6d4",
+ "bearerAfter": "benoit_lambert",
+ "mantlePassed": true,
+ "gameOver": true,
+ "gameWon": true,
+ "tableEntered": 1,
+ "tableWon": [
+  {
+   "ending": "track:field",
+   "endingKind": "coda",
+   "endingLevel": "track",
+   "moral": "dark",
+   "track": "field",
+   "titanFinale": "none"
+  }
+ ],
+ "pgTable": {
+  "tableDone": true,
+  "endingKey": {
+   "tablePath": "feared",
+   "moral": "dark",
+   "track": "field",
+   "godpath": null,
+   "subclass": null,
+   "god": null,
+   "titanFinale": "none",
+   "key": null,
+   "locked": 90,
+   "doors": [
+    "feared"
+   ]
+  },
+  "doors": 0
+ }
+}
