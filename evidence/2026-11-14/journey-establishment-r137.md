@@ -273,12 +273,13 @@ should it linger in the successor's ledger forever?
   repaired with the `git ls-tree -r HEAD | git update-index --add
   --index-info` pipe, verified: status empty, diff HEAD empty,
   hashes match.
-- Master moved during the run (63c051206 → `e3a5a9053`,
-  sim-rageprecheck-b Stage 2). Branch rebased cleanly onto
-  e3a5a9053; rebased tip `b48fa97f1`. Proof test re-run post-rebase:
-  **37/37**.
+- Master moved twice during the run (63c051206 → `e3a5a9053`
+  sim-rageprecheck-b Stage 2, then → `d3fb7d5fb`
+  sim-winnability-round-0330 recovery). Branch rebased cleanly onto
+  each; final rebased tip `cc1da8df3`. Proof test re-run
+  post-rebase: **37/37** (on the final tip).
 - Merge: `git merge --ff-only journey-establishment` in the main
-  tree; on success master HEAD = `b48fa97f1`. Merged locally,
+  tree; on success master HEAD = `cc1da8df3`. Merged locally,
   pending ship (ship loop owns bump/push/live verification).
-  (This section filled by the addendum commit on the same branch,
+  (This section filled by the addendum commits on the same branch,
   merged ff-only right after.)
