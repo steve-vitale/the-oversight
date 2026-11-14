@@ -1,0 +1,54 @@
+PASS prereg exists
+PASS prereg binds G1 instrument validity
+PASS prereg binds G2 the lever
+PASS prereg binds G3 lever-only
+PASS prereg names the pilot band 93211-93218
+PASS prereg records the 93201-93208 collision
+PASS prereg names the judged gate (hierarchy.js:3950)
+PASS prereg states the change is env-gated, not a default flip
+PASS policy exists (recovered scaleclimb)
+PASS policy byte-identical to 29a794df6 source
+PASS policy tend gate frozen at 20000
+PASS policy propose gate frozen at 12000
+FAIL judged gate reads 10000 (named constant)
+FAIL drive tend uses the named constant
+FAIL no stale 20000 tend gate left in the drive
+PASS tendLink cost unchanged: _removePantryKcal(1500) x3 in hierarchy.js
+PASS tend predicate untouched (no other tendLink change)
+FAIL G3 static: only src/js/hierarchy.js differs from master — (no diff — gate change not yet made)
+PASS answermail-drive test asserts the NEW gate (10000 blocked)
+PASS answermail-drive test asserts 15000 now pays
+PASS driver exists
+PASS driver fails loudly without ANSWERMAIL_DRIVE=1
+PASS driver takes LEG=baseline|armed
+PASS driver loads the scaleclimb policy
+PASS driver wraps tendLink
+PASS driver snapshots the link roll + drive stats
+PASS driver exports oneRun
+PASS analyzer exists
+PASS analyzer exports episodesFor + starvationDeaths
+PASS analyzer tracks dip falls (decrements)
+PASS analyzer tracks held-days + ever-counted
+PASS analyzer tracks gate-window tends
+§1 static: 28 passed, 4 failed
+PASS ON: pantry 25000 pays the tend (above both gates)
+FAIL ON: pantry 15000 pays the tend (NEW gate — FAILS on old code) — {"accordAnswers":0,"tends":0,"tendsBlockedPantry":1,"renegotiationAnswers":0,"demandAnswers":0,"demandKinds":{},"blockedDays":{"noAnswerer":0},"answerers":{},"answererNames":{},"errors":0,"firstAnswerDay":{}}
+PASS ON: pantry 10000 blocks the tend, counted
+PASS ON: pantry 5000 blocks the tend, counted
+PASS OFF: drive off answers nothing, no stats object
+PASS OFF: pending accord survives unanswered
+§2 gate: 5 passed, 1 failed
+PASS smoke-93210: series covers the run (59 days)
+PASS smoke-93210: series days strictly increasing
+PASS smoke-93210: every snapshot carries the required fields
+PASS smoke-93210: 0 instrument errors
+PASS smoke-93210: every link classified (0 UNCLASSIFIED)
+PASS smoke-93210: 0 unattributed rises
+PASS smoke-93210: 0 unattributed falls
+PASS smoke-93210: drive stats recorded (tends + blocked)
+PASS smoke-93210: drive exercised the gate (tends or blocked > 0)
+PASS smoke-93210: policy proposed at least once
+PASS smoke-93210: anchorCommit recorded
+  [smoke 93210] days=60 end=survived dip=102 held=20 links=4 drive tends/blocked=4/126
+§3 recorder: 11 passed, 0 failed
+cheaptend proof: FAILURES PRESENT (static=4 gate=1 recorder=0)

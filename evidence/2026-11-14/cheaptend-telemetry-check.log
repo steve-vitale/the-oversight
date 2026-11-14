@@ -1,0 +1,1 @@
+telemetry-check: refusing recorder-corpus input: all 16 --current rows carry top-level anchorCommit, so they are sweep recorder rows, not runs. Recorder corpora are compared with sweep-compare tables, never against a run baseline here. Pass --allow-recorder-corpus for a same-shape recorder-vs-recorder compare, or --update-baseline to reseed a baseline from these files.

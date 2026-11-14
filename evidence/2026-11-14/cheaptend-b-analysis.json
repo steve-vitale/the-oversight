@@ -1,0 +1,4560 @@
+{
+  "perSeed": {
+    "93211-armed": {
+      "seed": 93211,
+      "policy": "competent-scaleclimb-b",
+      "leg": "armed",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 111,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 377,
+      "dipEnd": 102,
+      "dipAttributed": 102,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 45,
+      "everCounted": true,
+      "driveTends": 19,
+      "driveBlocked": 66,
+      "gateWindowTends": 16,
+      "gateWindowTendsEst": 8,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 4,
+      "linksSeasoned": 3,
+      "linksCounted": 3,
+      "linksBroke": 1,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 3,
+      "tendPolicy": 7,
+      "tendEngine": 23,
+      "tendRefused": 4,
+      "maxSimPrimSeasoned": 3,
+      "polityBarDay": 67,
+      "firstRegionalDay": 33,
+      "firstNationalDay": null,
+      "counterAnswers": 1,
+      "proposeAccepted": 3,
+      "proposeCounter": 1,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 26,
+      "proposeBlockedCap": 23,
+      "proposeBlockedPending": 44,
+      "proposeNotReady": 5,
+      "tendsPaidKcal": 10500,
+      "waveKills": {
+        "1": 21,
+        "2": 21,
+        "3": 8,
+        "4": 3
+      },
+      "accordAnswers": 2,
+      "proposeCalls": 4,
+      "proposeFormed": 3,
+      "feasts": 0,
+      "devotionChannels": 86,
+      "villagerCombatDeaths": 52,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 11,
+          "linkId": "link_mgpsphu3619",
+          "other": "village_2",
+          "via": "answerCounter",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphu4290",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 36,
+          "linkId": "link_mgpspj6t23",
+          "other": "village_1",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 37,
+          "linkId": "link_mgpspj7r520",
+          "other": "village_spl_21_69802",
+          "via": "proposeLink",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphu3619",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "village_2",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "broke-succession",
+          "seasonedDay": null,
+          "countedDay": null,
+          "countedEpisodes": [],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:policy",
+          "endTrust": 0,
+          "endAge": 100,
+          "endStatus": "broken",
+          "maxTrust": 42
+        },
+        {
+          "id": "link_mgpsphu4290",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 67,
+          "countedEpisodes": [
+            {
+              "start": 67,
+              "end": 111
+            }
+          ],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 92,
+          "endAge": 100,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspj6t23",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 36,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 66,
+          "countedDay": 67,
+          "countedEpisodes": [
+            {
+              "start": 67,
+              "end": 111
+            }
+          ],
+          "trust40Day": 42,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 66,
+          "endAge": 75,
+          "endStatus": "active",
+          "maxTrust": 82
+        },
+        {
+          "id": "link_mgpspj7r520",
+          "other": "village_spl_21_69802",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 37,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 67,
+          "countedDay": 67,
+          "countedEpisodes": [
+            {
+              "start": 67,
+              "end": 111
+            }
+          ],
+          "trust40Day": 42,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 76,
+          "endAge": 74,
+          "endStatus": "active",
+          "maxTrust": 92
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 67,
+          "shape": "lead/4"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 67,
+          "gained": 102,
+          "links": [
+            "link_mgpsphu4290",
+            "link_mgpspj6t23",
+            "link_mgpspj7r520"
+          ],
+          "dip": 102
+        }
+      ],
+      "dipFalls": [],
+      "verbs": {
+        "proposeLink:policy": {
+          "calls": 4,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:policy": {
+          "calls": 4,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerCounter:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:policy": {
+          "calls": 1,
+          "dTrust": 10,
+          "crossings": 1,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu3619": 10
+          }
+        },
+        "answerAccord:engine": {
+          "calls": 1,
+          "dTrust": 10,
+          "crossings": 1,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu4290": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 23,
+          "dTrust": 126,
+          "crossings": 0,
+          "refused": 4,
+          "links": {
+            "link_mgpsphu4290": 46,
+            "link_mgpspj6t23": 40,
+            "link_mgpspj7r520": 40
+          }
+        },
+        "tendLink:policy": {
+          "calls": 7,
+          "dTrust": 56,
+          "crossings": 2,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu4290": 8,
+            "link_mgpspj6t23": 24,
+            "link_mgpspj7r520": 24
+          }
+        },
+        "breakLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu3619": 0
+          }
+        }
+      },
+      "seriesDipEnd": 102,
+      "seriesDipDay": 111
+    },
+    "93211-baseline": {
+      "seed": 93211,
+      "policy": "competent-scaleclimb-b",
+      "leg": "baseline",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 132,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 335,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "driveTends": 8,
+      "driveBlocked": 126,
+      "gateWindowTends": 1,
+      "gateWindowTendsEst": 1,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 4,
+      "linksSeasoned": 3,
+      "linksCounted": 0,
+      "linksBroke": 1,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 2,
+      "tendPolicy": 4,
+      "tendEngine": 17,
+      "tendRefused": 7,
+      "maxSimPrimSeasoned": 2,
+      "polityBarDay": null,
+      "firstRegionalDay": 33,
+      "firstNationalDay": null,
+      "counterAnswers": 1,
+      "proposeAccepted": 3,
+      "proposeCounter": 1,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 59,
+      "proposeBlockedCap": 7,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 53,
+      "tendsPaidKcal": 6000,
+      "waveKills": {
+        "1": 38,
+        "2": 33,
+        "3": 10,
+        "4": 3
+      },
+      "accordAnswers": 2,
+      "proposeCalls": 4,
+      "proposeFormed": 3,
+      "feasts": 3,
+      "devotionChannels": 98,
+      "villagerCombatDeaths": 83,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 11,
+          "linkId": "link_mgpsphu3619",
+          "other": "village_2",
+          "via": "answerCounter",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphu4290",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 58,
+          "linkId": "link_mgpspjwu319",
+          "other": "village_1",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 87,
+          "linkId": "link_mgpspkgx819",
+          "other": "village_spl_21_69802",
+          "via": "proposeLink",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphu3619",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "village_2",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 41,
+          "countedDay": null,
+          "countedEpisodes": [],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:policy",
+          "endTrust": 13,
+          "endAge": 121,
+          "endStatus": "broken",
+          "maxTrust": 52
+        },
+        {
+          "id": "link_mgpsphu4290",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 41,
+          "countedDay": null,
+          "countedEpisodes": [],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 81,
+          "endAge": 121,
+          "endStatus": "active",
+          "maxTrust": 93
+        },
+        {
+          "id": "link_mgpspjwu319",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 58,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 88,
+          "countedDay": null,
+          "countedEpisodes": [],
+          "trust40Day": 61,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 46,
+          "endAge": 74,
+          "endStatus": "active",
+          "maxTrust": 82
+        },
+        {
+          "id": "link_mgpspkgx819",
+          "other": "village_spl_21_69802",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 87,
+          "cls": "broke-succession",
+          "seasonedDay": null,
+          "countedDay": null,
+          "countedEpisodes": [],
+          "trust40Day": 92,
+          "crossedVerb": "tendLink:engine",
+          "endTrust": 19,
+          "endAge": 45,
+          "endStatus": "broken",
+          "maxTrust": 49
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipFalls": [],
+      "verbs": {
+        "proposeLink:policy": {
+          "calls": 4,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:policy": {
+          "calls": 4,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerCounter:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:policy": {
+          "calls": 1,
+          "dTrust": 10,
+          "crossings": 1,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu3619": 10
+          }
+        },
+        "answerAccord:engine": {
+          "calls": 1,
+          "dTrust": 10,
+          "crossings": 1,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu4290": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 17,
+          "dTrust": 80,
+          "crossings": 1,
+          "refused": 7,
+          "links": {
+            "link_mgpsphu4290": 56,
+            "link_mgpspjwu319": 8,
+            "link_mgpspkgx819": 16
+          }
+        },
+        "answerDemand:engine": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu3619": 0
+          }
+        },
+        "hostFeast:engine": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 4,
+          "dTrust": 32,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspjwu319": 32
+          }
+        },
+        "answerRenegotiation:engine": {
+          "calls": 5,
+          "dTrust": 40,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspjwu319": 8,
+            "link_mgpspkgx819": 32
+          }
+        },
+        "breakLink:engine": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu3619": 0,
+            "link_mgpspkgx819": 0
+          }
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 132
+    },
+    "93212-armed": {
+      "seed": 93212,
+      "policy": "competent-scaleclimb-b",
+      "leg": "armed",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 382,
+      "dipEnd": 102,
+      "dipAttributed": 102,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 110,
+      "everCounted": true,
+      "driveTends": 51,
+      "driveBlocked": 36,
+      "gateWindowTends": 23,
+      "gateWindowTendsEst": 9,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 3,
+      "linksSeasoned": 3,
+      "linksCounted": 3,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 3,
+      "tendPolicy": 6,
+      "tendEngine": 81,
+      "tendRefused": 30,
+      "maxSimPrimSeasoned": 3,
+      "polityBarDay": 42,
+      "firstRegionalDay": 32,
+      "firstNationalDay": null,
+      "counterAnswers": 0,
+      "proposeAccepted": 3,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 10,
+      "proposeBlockedCap": 39,
+      "proposeBlockedPending": 89,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 9000,
+      "waveKills": {
+        "1": 33,
+        "2": 29,
+        "3": 5,
+        "4": 4
+      },
+      "accordAnswers": 3,
+      "proposeCalls": 3,
+      "proposeFormed": 3,
+      "feasts": 5,
+      "devotionChannels": 124,
+      "villagerCombatDeaths": 78,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphw1341",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphyq919",
+          "other": "village_1",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 12,
+          "linkId": "link_mgpspi16875",
+          "other": "village_2",
+          "via": "proposeLink",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphw1341",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 42,
+          "countedEpisodes": [
+            {
+              "start": 42,
+              "end": 152
+            }
+          ],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 87,
+          "endAge": 142,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpsphyq919",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 42,
+          "countedEpisodes": [
+            {
+              "start": 42,
+              "end": 152
+            }
+          ],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 95,
+          "endAge": 141,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspi16875",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 12,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 42,
+          "countedDay": 42,
+          "countedEpisodes": [
+            {
+              "start": 42,
+              "end": 152
+            }
+          ],
+          "trust40Day": 13,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 92,
+          "endAge": 140,
+          "endStatus": "active",
+          "maxTrust": 100
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 42,
+          "shape": "lead/4"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 42,
+          "gained": 102,
+          "links": [
+            "link_mgpsphw1341",
+            "link_mgpsphyq919",
+            "link_mgpspi16875"
+          ],
+          "dip": 102
+        }
+      ],
+      "dipFalls": [],
+      "verbs": {
+        "_formLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:engine": {
+          "calls": 3,
+          "dTrust": 30,
+          "crossings": 3,
+          "refused": 0,
+          "links": {
+            "link_mgpsphw1341": 10,
+            "link_mgpsphyq919": 10,
+            "link_mgpspi16875": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 81,
+          "dTrust": 203,
+          "crossings": 0,
+          "refused": 30,
+          "links": {
+            "link_mgpsphw1341": 79,
+            "link_mgpsphyq919": 73,
+            "link_mgpspi16875": 51
+          }
+        },
+        "answerRenegotiation:engine": {
+          "calls": 3,
+          "dTrust": 24,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphw1341": 8,
+            "link_mgpsphyq919": 8,
+            "link_mgpspi16875": 8
+          }
+        },
+        "tendLink:policy": {
+          "calls": 6,
+          "dTrust": 48,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphw1341": 16,
+            "link_mgpsphyq919": 16,
+            "link_mgpspi16875": 16
+          }
+        },
+        "hostFeast:engine": {
+          "calls": 5,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 102,
+      "seriesDipDay": 152
+    },
+    "93212-baseline": {
+      "seed": 93212,
+      "policy": "competent-scaleclimb-b",
+      "leg": "baseline",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 507,
+      "standingRaw": 507,
+      "dipEnd": 102,
+      "dipAttributed": 102,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 110,
+      "everCounted": true,
+      "driveTends": 16,
+      "driveBlocked": 245,
+      "gateWindowTends": 0,
+      "gateWindowTendsEst": 0,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 3,
+      "linksSeasoned": 3,
+      "linksCounted": 3,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 3,
+      "tendPolicy": 8,
+      "tendEngine": 18,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 3,
+      "polityBarDay": 42,
+      "firstRegionalDay": 32,
+      "firstNationalDay": null,
+      "counterAnswers": 0,
+      "proposeAccepted": 3,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 0,
+      "proposeBlockedCap": 49,
+      "proposeBlockedPending": 89,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 12000,
+      "waveKills": {
+        "1": 29,
+        "2": 23,
+        "3": 10,
+        "4": 8,
+        "5": 1
+      },
+      "accordAnswers": 3,
+      "proposeCalls": 3,
+      "proposeFormed": 3,
+      "feasts": 5,
+      "devotionChannels": 135,
+      "villagerCombatDeaths": 70,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphw1341",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphyq919",
+          "other": "village_1",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 12,
+          "linkId": "link_mgpspi16875",
+          "other": "village_2",
+          "via": "proposeLink",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphw1341",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 42,
+          "countedEpisodes": [
+            {
+              "start": 42,
+              "end": 151
+            }
+          ],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 92,
+          "endAge": 141,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpsphyq919",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 42,
+          "countedEpisodes": [
+            {
+              "start": 42,
+              "end": 151
+            }
+          ],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 87,
+          "endAge": 140,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspi16875",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 12,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 42,
+          "countedDay": 42,
+          "countedEpisodes": [
+            {
+              "start": 42,
+              "end": 151
+            }
+          ],
+          "trust40Day": 13,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 97,
+          "endAge": 139,
+          "endStatus": "active",
+          "maxTrust": 100
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 42,
+          "shape": "lead/4"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 42,
+          "gained": 102,
+          "links": [
+            "link_mgpsphw1341",
+            "link_mgpsphyq919",
+            "link_mgpspi16875"
+          ],
+          "dip": 102
+        }
+      ],
+      "dipFalls": [],
+      "verbs": {
+        "_formLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:engine": {
+          "calls": 3,
+          "dTrust": 30,
+          "crossings": 3,
+          "refused": 0,
+          "links": {
+            "link_mgpsphw1341": 10,
+            "link_mgpsphyq919": 10,
+            "link_mgpspi16875": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 18,
+          "dTrust": 98,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphw1341": 28,
+            "link_mgpsphyq919": 33,
+            "link_mgpspi16875": 37
+          }
+        },
+        "tendLink:policy": {
+          "calls": 8,
+          "dTrust": 64,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphw1341": 32,
+            "link_mgpsphyq919": 16,
+            "link_mgpspi16875": 16
+          }
+        },
+        "hostFeast:engine": {
+          "calls": 5,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerRenegotiation:engine": {
+          "calls": 3,
+          "dTrust": 24,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphw1341": 8,
+            "link_mgpsphyq919": 8,
+            "link_mgpspi16875": 8
+          }
+        }
+      },
+      "seriesDipEnd": 102,
+      "seriesDipDay": 151
+    },
+    "93213-armed": {
+      "seed": 93213,
+      "policy": "competent-scaleclimb-b",
+      "leg": "armed",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 103,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 227,
+      "dipEnd": 102,
+      "dipAttributed": 102,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 20,
+      "everCounted": true,
+      "driveTends": 30,
+      "driveBlocked": 22,
+      "gateWindowTends": 26,
+      "gateWindowTendsEst": 11,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 1,
+      "linksFormed": 3,
+      "linksSeasoned": 3,
+      "linksCounted": 3,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 3,
+      "tendPolicy": 2,
+      "tendEngine": 49,
+      "tendRefused": 18,
+      "maxSimPrimSeasoned": 3,
+      "polityBarDay": 84,
+      "firstRegionalDay": 32,
+      "firstNationalDay": null,
+      "counterAnswers": 0,
+      "proposeAccepted": 3,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 32,
+      "proposeBlockedCap": 11,
+      "proposeBlockedPending": 19,
+      "proposeNotReady": 29,
+      "tendsPaidKcal": 3000,
+      "waveKills": {
+        "1": 25,
+        "2": 22,
+        "3": 5,
+        "4": 1
+      },
+      "accordAnswers": 2,
+      "proposeCalls": 3,
+      "proposeFormed": 3,
+      "feasts": 0,
+      "devotionChannels": 71,
+      "villagerCombatDeaths": 64,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphsc0",
+          "other": "village_1",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphu5676",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 54,
+          "linkId": "link_mgpspj91812",
+          "other": "village_spl_34_72231",
+          "via": "proposeLink",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphsc0",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 84,
+          "countedEpisodes": [
+            {
+              "start": 84,
+              "end": 103
+            }
+          ],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 92,
+          "endAge": 93,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpsphu5676",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 84,
+          "countedEpisodes": [
+            {
+              "start": 84,
+              "end": 103
+            }
+          ],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 96,
+          "endAge": 92,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspj91812",
+          "other": "village_spl_34_72231",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 54,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 84,
+          "countedDay": 84,
+          "countedEpisodes": [
+            {
+              "start": 84,
+              "end": 103
+            }
+          ],
+          "trust40Day": 56,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 92,
+          "endAge": 49,
+          "endStatus": "active",
+          "maxTrust": 96
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 84,
+          "shape": "lead/4"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 84,
+          "gained": 102,
+          "links": [
+            "link_mgpsphsc0",
+            "link_mgpsphu5676",
+            "link_mgpspj91812"
+          ],
+          "dip": 102
+        }
+      ],
+      "dipFalls": [],
+      "verbs": {
+        "_formLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:engine": {
+          "calls": 2,
+          "dTrust": 20,
+          "crossings": 2,
+          "refused": 0,
+          "links": {
+            "link_mgpsphsc0": 10,
+            "link_mgpsphu5676": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 49,
+          "dTrust": 187,
+          "crossings": 0,
+          "refused": 18,
+          "links": {
+            "link_mgpsphsc0": 78,
+            "link_mgpsphu5676": 53,
+            "link_mgpspj91812": 56
+          }
+        },
+        "tendLink:policy": {
+          "calls": 2,
+          "dTrust": 16,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphsc0": 8,
+            "link_mgpsphu5676": 8
+          }
+        },
+        "answerRenegotiation:engine": {
+          "calls": 3,
+          "dTrust": 24,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphsc0": 8,
+            "link_mgpsphu5676": 8,
+            "link_mgpspj91812": 8
+          }
+        }
+      },
+      "seriesDipEnd": 102,
+      "seriesDipDay": 103
+    },
+    "93213-baseline": {
+      "seed": 93213,
+      "policy": "competent-scaleclimb-b",
+      "leg": "baseline",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 96,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 200,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 8,
+      "everCounted": true,
+      "driveTends": 2,
+      "driveBlocked": 165,
+      "gateWindowTends": 0,
+      "gateWindowTendsEst": 0,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 1,
+      "linksFormed": 3,
+      "linksSeasoned": 3,
+      "linksCounted": 3,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 3,
+      "tendPolicy": 3,
+      "tendEngine": 6,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 3,
+      "polityBarDay": 83,
+      "firstRegionalDay": 32,
+      "firstNationalDay": null,
+      "counterAnswers": 0,
+      "proposeAccepted": 3,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 22,
+      "proposeBlockedCap": 30,
+      "proposeBlockedPending": 12,
+      "proposeNotReady": 19,
+      "tendsPaidKcal": 4500,
+      "waveKills": {
+        "1": 29,
+        "2": 20,
+        "3": 8,
+        "4": 1
+      },
+      "accordAnswers": 2,
+      "proposeCalls": 3,
+      "proposeFormed": 3,
+      "feasts": 0,
+      "devotionChannels": 67,
+      "villagerCombatDeaths": 60,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphsc0",
+          "other": "village_1",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphu5676",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 53,
+          "linkId": "link_mgpspj1t181",
+          "other": "village_spl_34_60159",
+          "via": "proposeLink",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphsc0",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 83,
+          "countedEpisodes": [
+            {
+              "start": 83,
+              "end": 90
+            }
+          ],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 39,
+          "endAge": 86,
+          "endStatus": "active",
+          "maxTrust": 68
+        },
+        {
+          "id": "link_mgpsphu5676",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 83,
+          "countedEpisodes": [
+            {
+              "start": 83,
+              "end": 90
+            }
+          ],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 67,
+          "endAge": 85,
+          "endStatus": "active",
+          "maxTrust": 80
+        },
+        {
+          "id": "link_mgpspj1t181",
+          "other": "village_spl_34_60159",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 53,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 83,
+          "countedDay": 83,
+          "countedEpisodes": [
+            {
+              "start": 83,
+              "end": 90
+            }
+          ],
+          "trust40Day": 56,
+          "crossedVerb": "tendLink:engine",
+          "endTrust": 53,
+          "endAge": 43,
+          "endStatus": "active",
+          "maxTrust": 74
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 83,
+          "shape": "lead/4"
+        },
+        {
+          "day": 91,
+          "shape": null
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 83,
+          "gained": 102,
+          "links": [
+            "link_mgpsphsc0",
+            "link_mgpsphu5676",
+            "link_mgpspj1t181"
+          ],
+          "dip": 102
+        }
+      ],
+      "dipFalls": [
+        {
+          "day": 91,
+          "lost": 102,
+          "links": [
+            "link_mgpsphsc0",
+            "link_mgpsphu5676",
+            "link_mgpspj1t181"
+          ],
+          "dip": 0
+        }
+      ],
+      "verbs": {
+        "_formLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:engine": {
+          "calls": 2,
+          "dTrust": 20,
+          "crossings": 2,
+          "refused": 0,
+          "links": {
+            "link_mgpsphsc0": 10,
+            "link_mgpsphu5676": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 6,
+          "dTrust": 48,
+          "crossings": 1,
+          "refused": 0,
+          "links": {
+            "link_mgpsphsc0": 8,
+            "link_mgpsphu5676": 8,
+            "link_mgpspj1t181": 32
+          }
+        },
+        "tendLink:policy": {
+          "calls": 3,
+          "dTrust": 24,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphsc0": 8,
+            "link_mgpsphu5676": 8,
+            "link_mgpspj1t181": 8
+          }
+        },
+        "answerRenegotiation:engine": {
+          "calls": 4,
+          "dTrust": 32,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphsc0": 8,
+            "link_mgpsphu5676": 8,
+            "link_mgpspj1t181": 16
+          }
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 96
+    },
+    "93214-armed": {
+      "seed": 93214,
+      "policy": "competent-scaleclimb-b",
+      "leg": "armed",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 149,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 360,
+      "standingRaw": 360,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 22,
+      "everCounted": true,
+      "driveTends": 11,
+      "driveBlocked": 187,
+      "gateWindowTends": 5,
+      "gateWindowTendsEst": 3,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 5,
+      "linksSeasoned": 5,
+      "linksCounted": 3,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 5,
+      "tendPolicy": 20,
+      "tendEngine": 46,
+      "tendRefused": 46,
+      "maxSimPrimSeasoned": 3,
+      "polityBarDay": 63,
+      "firstRegionalDay": 33,
+      "firstNationalDay": null,
+      "counterAnswers": 2,
+      "proposeAccepted": 3,
+      "proposeCounter": 2,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 7,
+      "proposeBlockedCap": 30,
+      "proposeBlockedPending": 86,
+      "proposeNotReady": 12,
+      "tendsPaidKcal": 10500,
+      "waveKills": {
+        "1": 43,
+        "2": 35,
+        "3": 6,
+        "4": 6
+      },
+      "accordAnswers": 4,
+      "proposeCalls": 5,
+      "proposeFormed": 3,
+      "feasts": 3,
+      "devotionChannels": 115,
+      "villagerCombatDeaths": 90,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 11,
+          "linkId": "link_mgpsphtx739",
+          "other": "village_2",
+          "via": "answerCounter",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphty349",
+          "other": "village_1",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 13,
+          "linkId": "link_mgpsphy5569",
+          "other": "village_3",
+          "via": "answerCounter",
+          "caller": "policy"
+        },
+        {
+          "day": 29,
+          "linkId": "link_mgpspiny805",
+          "other": "village_spl_26_48185",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 33,
+          "linkId": "link_mgpspis8798",
+          "other": "village_spl_31_49622",
+          "via": "proposeLink",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphtx739",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "village_2",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 41,
+          "countedDay": null,
+          "countedEpisodes": [],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:policy",
+          "endTrust": 0,
+          "endAge": 138,
+          "endStatus": "broken",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpsphty349",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 63,
+          "countedEpisodes": [
+            {
+              "start": 63,
+              "end": 84
+            }
+          ],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 25,
+          "endAge": 138,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpsphy5569",
+          "other": "village_3",
+          "kind": "link",
+          "primary": "village_3",
+          "conquered": false,
+          "formedDay": 13,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 43,
+          "countedDay": null,
+          "countedEpisodes": [],
+          "trust40Day": 13,
+          "crossedVerb": "answerAccord:policy",
+          "endTrust": 0,
+          "endAge": 136,
+          "endStatus": "broken",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspiny805",
+          "other": "village_spl_26_48185",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 29,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 59,
+          "countedDay": 63,
+          "countedEpisodes": [
+            {
+              "start": 63,
+              "end": 84
+            }
+          ],
+          "trust40Day": 30,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 44,
+          "endAge": 120,
+          "endStatus": "active",
+          "maxTrust": 80
+        },
+        {
+          "id": "link_mgpspis8798",
+          "other": "village_spl_31_49622",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 33,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 63,
+          "countedDay": 63,
+          "countedEpisodes": [
+            {
+              "start": 63,
+              "end": 84
+            }
+          ],
+          "trust40Day": 35,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 16,
+          "endAge": 116,
+          "endStatus": "broken",
+          "maxTrust": 66
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 63,
+          "shape": "lead/4"
+        },
+        {
+          "day": 85,
+          "shape": null
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 63,
+          "gained": 102,
+          "links": [
+            "link_mgpsphty349",
+            "link_mgpspiny805",
+            "link_mgpspis8798"
+          ],
+          "dip": 102
+        }
+      ],
+      "dipFalls": [
+        {
+          "day": 85,
+          "lost": 102,
+          "links": [
+            "link_mgpsphty349",
+            "link_mgpspiny805",
+            "link_mgpspis8798"
+          ],
+          "dip": 0
+        }
+      ],
+      "verbs": {
+        "proposeLink:policy": {
+          "calls": 5,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:policy": {
+          "calls": 5,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerCounter:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:policy": {
+          "calls": 2,
+          "dTrust": 20,
+          "crossings": 2,
+          "refused": 0,
+          "links": {
+            "link_mgpsphtx739": 10,
+            "link_mgpsphy5569": 10
+          }
+        },
+        "answerAccord:engine": {
+          "calls": 2,
+          "dTrust": 20,
+          "crossings": 2,
+          "refused": 0,
+          "links": {
+            "link_mgpsphty349": 10,
+            "link_mgpspiny805": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 46,
+          "dTrust": 103,
+          "crossings": 0,
+          "refused": 33,
+          "links": {
+            "link_mgpsphty349": 47,
+            "link_mgpspiny805": 24,
+            "link_mgpspis8798": 32
+          }
+        },
+        "answerDemand:engine": {
+          "calls": 7,
+          "dTrust": 34,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphtx739": 22,
+            "link_mgpsphy5569": 12
+          }
+        },
+        "hostFeast:engine": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 20,
+          "dTrust": 56,
+          "crossings": 1,
+          "refused": 13,
+          "links": {
+            "link_mgpsphty349": 16,
+            "link_mgpspiny805": 24,
+            "link_mgpspis8798": 16
+          }
+        },
+        "breakLink:engine": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspis8798": 0,
+            "link_mgpsphtx739": 0,
+            "link_mgpsphy5569": 0
+          }
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 149
+    },
+    "93214-baseline": {
+      "seed": 93214,
+      "policy": "competent-scaleclimb-b",
+      "leg": "baseline",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 68,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 312,
+      "dipEnd": 102,
+      "dipAttributed": 102,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 5,
+      "everCounted": true,
+      "driveTends": 2,
+      "driveBlocked": 55,
+      "gateWindowTends": 0,
+      "gateWindowTendsEst": 0,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 5,
+      "linksSeasoned": 5,
+      "linksCounted": 3,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 5,
+      "tendPolicy": 12,
+      "tendEngine": 15,
+      "tendRefused": 15,
+      "maxSimPrimSeasoned": 3,
+      "polityBarDay": 64,
+      "firstRegionalDay": 33,
+      "firstNationalDay": null,
+      "counterAnswers": 2,
+      "proposeAccepted": 3,
+      "proposeCounter": 2,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 18,
+      "proposeBlockedCap": 17,
+      "proposeBlockedPending": 4,
+      "proposeNotReady": 15,
+      "tendsPaidKcal": 9000,
+      "waveKills": {
+        "1": 46,
+        "2": 27,
+        "3": 6
+      },
+      "accordAnswers": 3,
+      "proposeCalls": 5,
+      "proposeFormed": 3,
+      "feasts": 3,
+      "devotionChannels": 50,
+      "villagerCombatDeaths": 79,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 11,
+          "linkId": "link_mgpsphtx739",
+          "other": "village_2",
+          "via": "answerCounter",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphty349",
+          "other": "village_1",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 13,
+          "linkId": "link_mgpsphyb390",
+          "other": "village_3",
+          "via": "answerCounter",
+          "caller": "policy"
+        },
+        {
+          "day": 33,
+          "linkId": "link_mgpspirq579",
+          "other": "village_spl_31_63648",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 34,
+          "linkId": "link_mgpspitf178",
+          "other": "village_spl_26_19269",
+          "via": "proposeLink",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphtx739",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "village_2",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 41,
+          "countedDay": null,
+          "countedEpisodes": [],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:policy",
+          "endTrust": 49,
+          "endAge": 57,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpsphty349",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 64,
+          "countedEpisodes": [
+            {
+              "start": 64,
+              "end": 68
+            }
+          ],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 68,
+          "endAge": 57,
+          "endStatus": "active",
+          "maxTrust": 72
+        },
+        {
+          "id": "link_mgpsphyb390",
+          "other": "village_3",
+          "kind": "link",
+          "primary": "village_3",
+          "conquered": false,
+          "formedDay": 13,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 43,
+          "countedDay": null,
+          "countedEpisodes": [],
+          "trust40Day": 13,
+          "crossedVerb": "answerAccord:policy",
+          "endTrust": 46,
+          "endAge": 55,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspirq579",
+          "other": "village_spl_31_63648",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 33,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 63,
+          "countedDay": 64,
+          "countedEpisodes": [
+            {
+              "start": 64,
+              "end": 68
+            }
+          ],
+          "trust40Day": 36,
+          "crossedVerb": "answerRenegotiation:engine",
+          "endTrust": 58,
+          "endAge": 35,
+          "endStatus": "active",
+          "maxTrust": 66
+        },
+        {
+          "id": "link_mgpspitf178",
+          "other": "village_spl_26_19269",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 34,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 64,
+          "countedDay": 64,
+          "countedEpisodes": [
+            {
+              "start": 64,
+              "end": 68
+            }
+          ],
+          "trust40Day": 36,
+          "crossedVerb": "answerRenegotiation:engine",
+          "endTrust": 58,
+          "endAge": 34,
+          "endStatus": "active",
+          "maxTrust": 66
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 64,
+          "shape": "lead/4"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 64,
+          "gained": 102,
+          "links": [
+            "link_mgpsphty349",
+            "link_mgpspirq579",
+            "link_mgpspitf178"
+          ],
+          "dip": 102
+        }
+      ],
+      "dipFalls": [],
+      "verbs": {
+        "proposeLink:policy": {
+          "calls": 5,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:policy": {
+          "calls": 5,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerCounter:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:policy": {
+          "calls": 2,
+          "dTrust": 20,
+          "crossings": 2,
+          "refused": 0,
+          "links": {
+            "link_mgpsphtx739": 10,
+            "link_mgpsphyb390": 10
+          }
+        },
+        "answerAccord:engine": {
+          "calls": 1,
+          "dTrust": 10,
+          "crossings": 1,
+          "refused": 0,
+          "links": {
+            "link_mgpsphty349": 10
+          }
+        },
+        "hostFeast:engine": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 12,
+          "dTrust": 48,
+          "crossings": 0,
+          "refused": 6,
+          "links": {
+            "link_mgpsphty349": 16,
+            "link_mgpspirq579": 16,
+            "link_mgpspitf178": 16
+          }
+        },
+        "tendLink:engine": {
+          "calls": 15,
+          "dTrust": 48,
+          "crossings": 0,
+          "refused": 9,
+          "links": {
+            "link_mgpsphty349": 16,
+            "link_mgpspirq579": 16,
+            "link_mgpspitf178": 16
+          }
+        },
+        "answerDemand:engine": {
+          "calls": 5,
+          "dTrust": 1,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphyb390": 1,
+            "link_mgpsphtx739": 0
+          }
+        },
+        "answerRenegotiation:engine": {
+          "calls": 8,
+          "dTrust": 64,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspirq579": 32,
+            "link_mgpspitf178": 32
+          }
+        }
+      },
+      "seriesDipEnd": 102,
+      "seriesDipDay": 68
+    },
+    "93215-armed": {
+      "seed": 93215,
+      "policy": "competent-scaleclimb-b",
+      "leg": "armed",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 311,
+      "dipEnd": 136,
+      "dipAttributed": 136,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 110,
+      "everCounted": true,
+      "driveTends": 55,
+      "driveBlocked": 156,
+      "gateWindowTends": 52,
+      "gateWindowTendsEst": 15,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 4,
+      "linksSeasoned": 4,
+      "linksCounted": 4,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 4,
+      "tendPolicy": 2,
+      "tendEngine": 103,
+      "tendRefused": 48,
+      "maxSimPrimSeasoned": 4,
+      "polityBarDay": 42,
+      "firstRegionalDay": 32,
+      "firstNationalDay": null,
+      "counterAnswers": 0,
+      "proposeAccepted": 3,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 31,
+      "proposeBlockedCap": 18,
+      "proposeBlockedPending": 89,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 3000,
+      "waveKills": {
+        "1": 23,
+        "2": 14,
+        "3": 6,
+        "4": 1
+      },
+      "accordAnswers": 3,
+      "proposeCalls": 3,
+      "proposeFormed": 3,
+      "feasts": 0,
+      "devotionChannels": 118,
+      "villagerCombatDeaths": 43,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphtl545",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphvj796",
+          "other": "village_2",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 12,
+          "linkId": "link_mgpsphws636",
+          "other": "village_3",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 32,
+          "linkId": "link_mgpspipy711",
+          "other": "village_1",
+          "via": "engine-direct",
+          "caller": "engine"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphtl545",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 42,
+          "countedEpisodes": [
+            {
+              "start": 42,
+              "end": 151
+            }
+          ],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 92,
+          "endAge": 141,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpsphvj796",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 42,
+          "countedEpisodes": [
+            {
+              "start": 42,
+              "end": 151
+            }
+          ],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 96,
+          "endAge": 140,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpsphws636",
+          "other": "village_3",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 12,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 42,
+          "countedDay": 42,
+          "countedEpisodes": [
+            {
+              "start": 42,
+              "end": 151
+            }
+          ],
+          "trust40Day": 13,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 92,
+          "endAge": 139,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspipy711",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 32,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 62,
+          "countedDay": 62,
+          "countedEpisodes": [
+            {
+              "start": 62,
+              "end": 151
+            }
+          ],
+          "trust40Day": 36,
+          "crossedVerb": "tendLink:engine",
+          "endTrust": 91,
+          "endAge": 119,
+          "endStatus": "active",
+          "maxTrust": 99
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 42,
+          "shape": "lead/4"
+        },
+        {
+          "day": 62,
+          "shape": "lead/5"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 42,
+          "gained": 102,
+          "links": [
+            "link_mgpsphtl545",
+            "link_mgpsphvj796",
+            "link_mgpsphws636"
+          ],
+          "dip": 102
+        },
+        {
+          "day": 62,
+          "gained": 34,
+          "links": [
+            "link_mgpspipy711"
+          ],
+          "dip": 136
+        }
+      ],
+      "dipFalls": [],
+      "verbs": {
+        "_formLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:engine": {
+          "calls": 3,
+          "dTrust": 30,
+          "crossings": 3,
+          "refused": 0,
+          "links": {
+            "link_mgpsphtl545": 10,
+            "link_mgpsphvj796": 10,
+            "link_mgpsphws636": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 103,
+          "dTrust": 293,
+          "crossings": 1,
+          "refused": 48,
+          "links": {
+            "link_mgpsphtl545": 80,
+            "link_mgpsphvj796": 57,
+            "link_mgpsphws636": 60,
+            "link_mgpspipy711": 96
+          }
+        },
+        "tendLink:policy": {
+          "calls": 2,
+          "dTrust": 16,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphtl545": 8,
+            "link_mgpsphvj796": 8
+          }
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 136,
+      "seriesDipDay": 151
+    },
+    "93215-baseline": {
+      "seed": 93215,
+      "policy": "competent-scaleclimb-b",
+      "leg": "baseline",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 105,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 281,
+      "dipEnd": 136,
+      "dipAttributed": 136,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 63,
+      "everCounted": true,
+      "driveTends": 12,
+      "driveBlocked": 239,
+      "gateWindowTends": 0,
+      "gateWindowTendsEst": 0,
+      "starvationDeaths": 2,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 4,
+      "linksSeasoned": 4,
+      "linksCounted": 4,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 4,
+      "tendPolicy": 6,
+      "tendEngine": 20,
+      "tendRefused": 8,
+      "maxSimPrimSeasoned": 4,
+      "polityBarDay": 42,
+      "firstRegionalDay": 32,
+      "firstNationalDay": null,
+      "counterAnswers": 0,
+      "proposeAccepted": 3,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 6,
+      "proposeBlockedCap": 43,
+      "proposeBlockedPending": 43,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 9000,
+      "waveKills": {
+        "1": 19,
+        "2": 24,
+        "3": 5,
+        "4": 1
+      },
+      "accordAnswers": 3,
+      "proposeCalls": 3,
+      "proposeFormed": 3,
+      "feasts": 1,
+      "devotionChannels": 80,
+      "villagerCombatDeaths": 56,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphtl545",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphvj796",
+          "other": "village_2",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 12,
+          "linkId": "link_mgpsphws636",
+          "other": "village_3",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 33,
+          "linkId": "link_mgpspirl970",
+          "other": "village_spl_24_53150",
+          "via": "engine-direct",
+          "caller": "engine"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphtl545",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 42,
+          "countedEpisodes": [
+            {
+              "start": 42,
+              "end": 104
+            }
+          ],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 56,
+          "endAge": 94,
+          "endStatus": "active",
+          "maxTrust": 74
+        },
+        {
+          "id": "link_mgpsphvj796",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 42,
+          "countedEpisodes": [
+            {
+              "start": 42,
+              "end": 104
+            }
+          ],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 77,
+          "endAge": 93,
+          "endStatus": "active",
+          "maxTrust": 83
+        },
+        {
+          "id": "link_mgpsphws636",
+          "other": "village_3",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 12,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 42,
+          "countedDay": 42,
+          "countedEpisodes": [
+            {
+              "start": 42,
+              "end": 104
+            }
+          ],
+          "trust40Day": 13,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 64,
+          "endAge": 92,
+          "endStatus": "active",
+          "maxTrust": 82
+        },
+        {
+          "id": "link_mgpspirl970",
+          "other": "village_spl_24_53150",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 33,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 63,
+          "countedDay": 63,
+          "countedEpisodes": [
+            {
+              "start": 63,
+              "end": 104
+            }
+          ],
+          "trust40Day": 42,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 44,
+          "endAge": 71,
+          "endStatus": "active",
+          "maxTrust": 79
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 42,
+          "shape": "lead/4"
+        },
+        {
+          "day": 63,
+          "shape": "lead/5"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 42,
+          "gained": 102,
+          "links": [
+            "link_mgpsphtl545",
+            "link_mgpsphvj796",
+            "link_mgpsphws636"
+          ],
+          "dip": 102
+        },
+        {
+          "day": 63,
+          "gained": 34,
+          "links": [
+            "link_mgpspirl970"
+          ],
+          "dip": 136
+        }
+      ],
+      "dipFalls": [],
+      "verbs": {
+        "_formLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:engine": {
+          "calls": 3,
+          "dTrust": 30,
+          "crossings": 3,
+          "refused": 0,
+          "links": {
+            "link_mgpsphtl545": 10,
+            "link_mgpsphvj796": 10,
+            "link_mgpsphws636": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 20,
+          "dTrust": 96,
+          "crossings": 0,
+          "refused": 8,
+          "links": {
+            "link_mgpsphtl545": 32,
+            "link_mgpsphvj796": 32,
+            "link_mgpsphws636": 24,
+            "link_mgpspirl970": 8
+          }
+        },
+        "answerRenegotiation:engine": {
+          "calls": 4,
+          "dTrust": 32,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphtl545": 8,
+            "link_mgpsphvj796": 8,
+            "link_mgpsphws636": 8,
+            "link_mgpspirl970": 8
+          }
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 6,
+          "dTrust": 48,
+          "crossings": 1,
+          "refused": 0,
+          "links": {
+            "link_mgpsphtl545": 8,
+            "link_mgpsphvj796": 8,
+            "link_mgpsphws636": 8,
+            "link_mgpspirl970": 24
+          }
+        },
+        "hostFeast:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 136,
+      "seriesDipDay": 104
+    },
+    "93216-armed": {
+      "seed": 93216,
+      "policy": "competent-scaleclimb-b",
+      "leg": "armed",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 252,
+      "dipEnd": 102,
+      "dipAttributed": 102,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 43,
+      "everCounted": true,
+      "driveTends": 45,
+      "driveBlocked": 109,
+      "gateWindowTends": 43,
+      "gateWindowTendsEst": 19,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 4,
+      "linksSeasoned": 3,
+      "linksCounted": 3,
+      "linksBroke": 1,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 3,
+      "tendPolicy": 0,
+      "tendEngine": 53,
+      "tendRefused": 8,
+      "maxSimPrimSeasoned": 3,
+      "polityBarDay": 109,
+      "firstRegionalDay": 32,
+      "firstNationalDay": null,
+      "counterAnswers": 1,
+      "proposeAccepted": 3,
+      "proposeCounter": 1,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 75,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 41,
+      "proposeNotReady": 21,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 27,
+        "2": 13,
+        "3": 5,
+        "4": 1
+      },
+      "accordAnswers": 2,
+      "proposeCalls": 4,
+      "proposeFormed": 3,
+      "feasts": 0,
+      "devotionChannels": 129,
+      "villagerCombatDeaths": 53,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphu2943",
+          "other": "village_2",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 13,
+          "linkId": "link_mgpspi1m922",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 35,
+          "linkId": "link_mgpspj15425",
+          "other": "village_spl_30_63935",
+          "via": "answerCounter",
+          "caller": "policy"
+        },
+        {
+          "day": 79,
+          "linkId": "link_mgpspkdr114",
+          "other": "village_1",
+          "via": "proposeLink",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphu2943",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 109,
+          "countedEpisodes": [
+            {
+              "start": 109,
+              "end": 151
+            }
+          ],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 100,
+          "endAge": 141,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspi1m922",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 13,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 43,
+          "countedDay": 109,
+          "countedEpisodes": [
+            {
+              "start": 109,
+              "end": 151
+            }
+          ],
+          "trust40Day": 14,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 100,
+          "endAge": 138,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspj15425",
+          "other": "village_spl_30_63935",
+          "kind": "link",
+          "primary": "village_spl_30_63935",
+          "conquered": false,
+          "formedDay": 35,
+          "cls": "broke-succession",
+          "seasonedDay": null,
+          "countedDay": null,
+          "countedEpisodes": [],
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 11,
+          "endAge": 116,
+          "endStatus": "broken",
+          "maxTrust": 35
+        },
+        {
+          "id": "link_mgpspkdr114",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 79,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 109,
+          "countedDay": 109,
+          "countedEpisodes": [
+            {
+              "start": 109,
+              "end": 151
+            }
+          ],
+          "trust40Day": 86,
+          "crossedVerb": "tendLink:engine",
+          "endTrust": 100,
+          "endAge": 72,
+          "endStatus": "active",
+          "maxTrust": 100
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 109,
+          "shape": "lead/4"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 109,
+          "gained": 102,
+          "links": [
+            "link_mgpsphu2943",
+            "link_mgpspi1m922",
+            "link_mgpspkdr114"
+          ],
+          "dip": 102
+        }
+      ],
+      "dipFalls": [],
+      "verbs": {
+        "_formLink:policy": {
+          "calls": 4,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeLink:policy": {
+          "calls": 4,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:engine": {
+          "calls": 2,
+          "dTrust": 20,
+          "crossings": 2,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu2943": 10,
+            "link_mgpspi1m922": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 53,
+          "dTrust": 229,
+          "crossings": 1,
+          "refused": 8,
+          "links": {
+            "link_mgpsphu2943": 81,
+            "link_mgpspi1m922": 83,
+            "link_mgpspkdr114": 65
+          }
+        },
+        "answerCounter:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerDemand:engine": {
+          "calls": 2,
+          "dTrust": 16,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspj15425": 16
+          }
+        },
+        "breakLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspj15425": 0
+          }
+        }
+      },
+      "seriesDipEnd": 102,
+      "seriesDipDay": 151
+    },
+    "93216-baseline": {
+      "seed": 93216,
+      "policy": "competent-scaleclimb-b",
+      "leg": "baseline",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 275,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 73,
+      "everCounted": true,
+      "driveTends": 3,
+      "driveBlocked": 381,
+      "gateWindowTends": 1,
+      "gateWindowTendsEst": 1,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 3,
+      "linksSeasoned": 3,
+      "linksCounted": 3,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 3,
+      "tendPolicy": 1,
+      "tendEngine": 3,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 3,
+      "polityBarDay": 61,
+      "firstRegionalDay": 32,
+      "firstNationalDay": null,
+      "counterAnswers": 0,
+      "proposeAccepted": 2,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 27,
+      "proposeBlockedCap": 17,
+      "proposeBlockedPending": 89,
+      "proposeNotReady": 6,
+      "tendsPaidKcal": 1500,
+      "waveKills": {
+        "1": 26,
+        "2": 15,
+        "3": 10,
+        "4": 2
+      },
+      "accordAnswers": 3,
+      "proposeCalls": 2,
+      "proposeFormed": 2,
+      "feasts": 0,
+      "devotionChannels": 130,
+      "villagerCombatDeaths": 52,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphu2943",
+          "other": "village_2",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 13,
+          "linkId": "link_mgpspi1m922",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 31,
+          "linkId": "link_mgpspiy0213",
+          "other": "village_1",
+          "via": "engine-direct",
+          "caller": "engine"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphu2943",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 61,
+          "countedEpisodes": [
+            {
+              "start": 61,
+              "end": 110
+            },
+            {
+              "start": 127,
+              "end": 149
+            }
+          ],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 69,
+          "endAge": 140,
+          "endStatus": "active",
+          "maxTrust": 82
+        },
+        {
+          "id": "link_mgpspi1m922",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 13,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 43,
+          "countedDay": 61,
+          "countedEpisodes": [
+            {
+              "start": 61,
+              "end": 110
+            },
+            {
+              "start": 127,
+              "end": 149
+            }
+          ],
+          "trust40Day": 14,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 39,
+          "endAge": 137,
+          "endStatus": "active",
+          "maxTrust": 62
+        },
+        {
+          "id": "link_mgpspiy0213",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 31,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 61,
+          "countedDay": 61,
+          "countedEpisodes": [
+            {
+              "start": 61,
+              "end": 110
+            },
+            {
+              "start": 127,
+              "end": 149
+            }
+          ],
+          "trust40Day": 31,
+          "crossedVerb": "answerAccord:policy",
+          "endTrust": 35,
+          "endAge": 119,
+          "endStatus": "active",
+          "maxTrust": 63
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 61,
+          "shape": "lead/4"
+        },
+        {
+          "day": 111,
+          "shape": null
+        },
+        {
+          "day": 127,
+          "shape": "lead/4"
+        },
+        {
+          "day": 150,
+          "shape": null
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 61,
+          "gained": 102,
+          "links": [
+            "link_mgpsphu2943",
+            "link_mgpspi1m922",
+            "link_mgpspiy0213"
+          ],
+          "dip": 102
+        },
+        {
+          "day": 127,
+          "gained": 102,
+          "links": [
+            "link_mgpsphu2943",
+            "link_mgpspi1m922",
+            "link_mgpspiy0213"
+          ],
+          "dip": 102
+        }
+      ],
+      "dipFalls": [
+        {
+          "day": 111,
+          "lost": 102,
+          "links": [
+            "link_mgpsphu2943",
+            "link_mgpspi1m922",
+            "link_mgpspiy0213"
+          ],
+          "dip": 0
+        },
+        {
+          "day": 150,
+          "lost": 102,
+          "links": [
+            "link_mgpsphu2943",
+            "link_mgpspi1m922",
+            "link_mgpspiy0213"
+          ],
+          "dip": 0
+        }
+      ],
+      "verbs": {
+        "_formLink:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeLink:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:engine": {
+          "calls": 2,
+          "dTrust": 20,
+          "crossings": 2,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu2943": 10,
+            "link_mgpspi1m922": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 3,
+          "dTrust": 24,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu2943": 16,
+            "link_mgpspi1m922": 8
+          }
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:policy": {
+          "calls": 1,
+          "dTrust": 10,
+          "crossings": 1,
+          "refused": 0,
+          "links": {
+            "link_mgpspiy0213": 10
+          }
+        },
+        "tendLink:policy": {
+          "calls": 1,
+          "dTrust": 8,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspiy0213": 8
+          }
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 150
+    },
+    "93217-armed": {
+      "seed": 93217,
+      "policy": "competent-scaleclimb-b",
+      "leg": "armed",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 146,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 567,
+      "standingRaw": 567,
+      "dipEnd": 102,
+      "dipAttributed": 102,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 98,
+      "everCounted": true,
+      "driveTends": 42,
+      "driveBlocked": 51,
+      "gateWindowTends": 25,
+      "gateWindowTendsEst": 11,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 3,
+      "linksSeasoned": 3,
+      "linksCounted": 3,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 3,
+      "tendPolicy": 5,
+      "tendEngine": 111,
+      "tendRefused": 69,
+      "maxSimPrimSeasoned": 3,
+      "polityBarDay": 48,
+      "firstRegionalDay": 32,
+      "firstNationalDay": null,
+      "counterAnswers": 0,
+      "proposeAccepted": 3,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 9,
+      "proposeBlockedCap": 40,
+      "proposeBlockedPending": 84,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 7500,
+      "waveKills": {
+        "1": 30,
+        "2": 14,
+        "3": 14,
+        "4": 5,
+        "5": 1
+      },
+      "accordAnswers": 3,
+      "proposeCalls": 3,
+      "proposeFormed": 3,
+      "feasts": 2,
+      "devotionChannels": 118,
+      "villagerCombatDeaths": 63,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphtj400",
+          "other": "village_1",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphvd943",
+          "other": "village_3",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 18,
+          "linkId": "link_mgpspi8k488",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphtj400",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 48,
+          "countedEpisodes": [
+            {
+              "start": 48,
+              "end": 145
+            }
+          ],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 90,
+          "endAge": 135,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpsphvd943",
+          "other": "village_3",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 48,
+          "countedEpisodes": [
+            {
+              "start": 48,
+              "end": 145
+            }
+          ],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 92,
+          "endAge": 134,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspi8k488",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 18,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 48,
+          "countedDay": 48,
+          "countedEpisodes": [
+            {
+              "start": 48,
+              "end": 145
+            }
+          ],
+          "trust40Day": 19,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 96,
+          "endAge": 127,
+          "endStatus": "active",
+          "maxTrust": 100
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 48,
+          "shape": "lead/4"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 48,
+          "gained": 102,
+          "links": [
+            "link_mgpsphtj400",
+            "link_mgpsphvd943",
+            "link_mgpspi8k488"
+          ],
+          "dip": 102
+        }
+      ],
+      "dipFalls": [],
+      "verbs": {
+        "_formLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:engine": {
+          "calls": 3,
+          "dTrust": 30,
+          "crossings": 3,
+          "refused": 0,
+          "links": {
+            "link_mgpsphtj400": 10,
+            "link_mgpsphvd943": 10,
+            "link_mgpspi8k488": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 111,
+          "dTrust": 260,
+          "crossings": 0,
+          "refused": 69,
+          "links": {
+            "link_mgpsphtj400": 90,
+            "link_mgpsphvd943": 91,
+            "link_mgpspi8k488": 79
+          }
+        },
+        "tendLink:policy": {
+          "calls": 5,
+          "dTrust": 40,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphtj400": 16,
+            "link_mgpsphvd943": 8,
+            "link_mgpspi8k488": 16
+          }
+        },
+        "hostFeast:engine": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 102,
+      "seriesDipDay": 145
+    },
+    "93217-baseline": {
+      "seed": 93217,
+      "policy": "competent-scaleclimb-b",
+      "leg": "baseline",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 149,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 375,
+      "standingRaw": 375,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 47,
+      "everCounted": true,
+      "driveTends": 3,
+      "driveBlocked": 300,
+      "gateWindowTends": 0,
+      "gateWindowTendsEst": 0,
+      "starvationDeaths": 1,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 4,
+      "linksSeasoned": 3,
+      "linksCounted": 3,
+      "linksBroke": 1,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 3,
+      "tendPolicy": 9,
+      "tendEngine": 3,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 3,
+      "polityBarDay": 59,
+      "firstRegionalDay": 32,
+      "firstNationalDay": null,
+      "counterAnswers": 1,
+      "proposeAccepted": 3,
+      "proposeCounter": 1,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 21,
+      "proposeBlockedCap": 16,
+      "proposeBlockedPending": 87,
+      "proposeNotReady": 11,
+      "tendsPaidKcal": 13500,
+      "waveKills": {
+        "1": 26,
+        "2": 16,
+        "3": 14,
+        "4": 3,
+        "5": 1
+      },
+      "accordAnswers": 4,
+      "proposeCalls": 4,
+      "proposeFormed": 3,
+      "feasts": 1,
+      "devotionChannels": 106,
+      "villagerCombatDeaths": 61,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphtj400",
+          "other": "village_1",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphvd943",
+          "other": "village_3",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 13,
+          "linkId": "link_mgpsphzd793",
+          "other": "village_0",
+          "via": "answerCounter",
+          "caller": "policy"
+        },
+        {
+          "day": 29,
+          "linkId": "link_mgpspiri552",
+          "other": "village_2",
+          "via": "proposeLink",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphtj400",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 59,
+          "countedEpisodes": [
+            {
+              "start": 59,
+              "end": 105
+            }
+          ],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 13,
+          "endAge": 139,
+          "endStatus": "active",
+          "maxTrust": 93
+        },
+        {
+          "id": "link_mgpsphvd943",
+          "other": "village_3",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 59,
+          "countedEpisodes": [
+            {
+              "start": 59,
+              "end": 105
+            }
+          ],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 28,
+          "endAge": 138,
+          "endStatus": "active",
+          "maxTrust": 77
+        },
+        {
+          "id": "link_mgpsphzd793",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "village_0",
+          "conquered": false,
+          "formedDay": 13,
+          "cls": "broke-succession",
+          "seasonedDay": null,
+          "countedDay": null,
+          "countedEpisodes": [],
+          "trust40Day": 13,
+          "crossedVerb": "answerAccord:policy",
+          "endTrust": 8,
+          "endAge": 136,
+          "endStatus": "broken",
+          "maxTrust": 49
+        },
+        {
+          "id": "link_mgpspiri552",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 29,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 59,
+          "countedDay": 59,
+          "countedEpisodes": [
+            {
+              "start": 59,
+              "end": 105
+            }
+          ],
+          "trust40Day": 30,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 18,
+          "endAge": 120,
+          "endStatus": "broken",
+          "maxTrust": 66
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 59,
+          "shape": "lead/4"
+        },
+        {
+          "day": 106,
+          "shape": null
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 59,
+          "gained": 102,
+          "links": [
+            "link_mgpsphtj400",
+            "link_mgpsphvd943",
+            "link_mgpspiri552"
+          ],
+          "dip": 102
+        }
+      ],
+      "dipFalls": [
+        {
+          "day": 106,
+          "lost": 102,
+          "links": [
+            "link_mgpsphtj400",
+            "link_mgpsphvd943",
+            "link_mgpspiri552"
+          ],
+          "dip": 0
+        }
+      ],
+      "verbs": {
+        "_formLink:policy": {
+          "calls": 4,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeLink:policy": {
+          "calls": 4,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:engine": {
+          "calls": 3,
+          "dTrust": 30,
+          "crossings": 3,
+          "refused": 0,
+          "links": {
+            "link_mgpsphtj400": 10,
+            "link_mgpsphvd943": 10,
+            "link_mgpspiri552": 10
+          }
+        },
+        "answerCounter:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:policy": {
+          "calls": 1,
+          "dTrust": 10,
+          "crossings": 1,
+          "refused": 0,
+          "links": {
+            "link_mgpsphzd793": 10
+          }
+        },
+        "answerDemand:engine": {
+          "calls": 2,
+          "dTrust": 16,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphzd793": 16
+          }
+        },
+        "tendLink:policy": {
+          "calls": 9,
+          "dTrust": 72,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphtj400": 32,
+            "link_mgpsphvd943": 24,
+            "link_mgpspiri552": 16
+          }
+        },
+        "tendLink:engine": {
+          "calls": 3,
+          "dTrust": 24,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspiri552": 8,
+            "link_mgpsphtj400": 8,
+            "link_mgpsphvd943": 8
+          }
+        },
+        "answerRenegotiation:engine": {
+          "calls": 1,
+          "dTrust": 8,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspiri552": 8
+          }
+        },
+        "breakLink:engine": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphzd793": 0,
+            "link_mgpspiri552": 0
+          }
+        },
+        "hostFeast:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 149
+    },
+    "93218-armed": {
+      "seed": 93218,
+      "policy": "competent-scaleclimb-b",
+      "leg": "armed",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 80,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 361,
+      "dipEnd": 136,
+      "dipAttributed": 136,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 17,
+      "everCounted": true,
+      "driveTends": 11,
+      "driveBlocked": 63,
+      "gateWindowTends": 2,
+      "gateWindowTendsEst": 2,
+      "starvationDeaths": 0,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 4,
+      "linksSeasoned": 4,
+      "linksCounted": 4,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 4,
+      "tendPolicy": 9,
+      "tendEngine": 32,
+      "tendRefused": 17,
+      "maxSimPrimSeasoned": 4,
+      "polityBarDay": 64,
+      "firstRegionalDay": 32,
+      "firstNationalDay": null,
+      "counterAnswers": 0,
+      "proposeAccepted": 3,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 22,
+      "proposeBlockedCap": 30,
+      "proposeBlockedPending": 15,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 13500,
+      "waveKills": {
+        "1": 23,
+        "2": 15,
+        "3": 8,
+        "4": 2
+      },
+      "accordAnswers": 1,
+      "proposeCalls": 3,
+      "proposeFormed": 3,
+      "feasts": 0,
+      "devotionChannels": 59,
+      "villagerCombatDeaths": 47,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphu5150",
+          "other": "village_2",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 33,
+          "linkId": "link_mgpspj52620",
+          "other": "village_3",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 34,
+          "linkId": "link_mgpspj6n273",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 35,
+          "linkId": "link_mgpspj7h604",
+          "other": "village_1",
+          "via": "engine-direct",
+          "caller": "engine"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphu5150",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 64,
+          "countedEpisodes": [
+            {
+              "start": 64,
+              "end": 80
+            }
+          ],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 86,
+          "endAge": 70,
+          "endStatus": "active",
+          "maxTrust": 93
+        },
+        {
+          "id": "link_mgpspj52620",
+          "other": "village_3",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 33,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 63,
+          "countedDay": 64,
+          "countedEpisodes": [
+            {
+              "start": 64,
+              "end": 80
+            }
+          ],
+          "trust40Day": 35,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 67,
+          "endAge": 47,
+          "endStatus": "active",
+          "maxTrust": 74
+        },
+        {
+          "id": "link_mgpspj6n273",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 34,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 64,
+          "countedDay": 64,
+          "countedEpisodes": [
+            {
+              "start": 64,
+              "end": 80
+            }
+          ],
+          "trust40Day": 35,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 79,
+          "endAge": 46,
+          "endStatus": "active",
+          "maxTrust": 79
+        },
+        {
+          "id": "link_mgpspj7h604",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 35,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 65,
+          "countedDay": 65,
+          "countedEpisodes": [
+            {
+              "start": 65,
+              "end": 80
+            }
+          ],
+          "trust40Day": 42,
+          "crossedVerb": "tendLink:engine",
+          "endTrust": 54,
+          "endAge": 45,
+          "endStatus": "active",
+          "maxTrust": 66
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 64,
+          "shape": "lead/4"
+        },
+        {
+          "day": 65,
+          "shape": "lead/5"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 64,
+          "gained": 102,
+          "links": [
+            "link_mgpsphu5150",
+            "link_mgpspj52620",
+            "link_mgpspj6n273",
+            "link_mgpspj7h604"
+          ],
+          "dip": 102
+        },
+        {
+          "day": 65,
+          "gained": 34,
+          "links": [
+            "link_mgpsphu5150",
+            "link_mgpspj52620",
+            "link_mgpspj6n273",
+            "link_mgpspj7h604"
+          ],
+          "dip": 136
+        }
+      ],
+      "dipFalls": [],
+      "verbs": {
+        "_formLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:engine": {
+          "calls": 1,
+          "dTrust": 10,
+          "crossings": 1,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu5150": 10
+          }
+        },
+        "tendLink:engine": {
+          "calls": 32,
+          "dTrust": 120,
+          "crossings": 1,
+          "refused": 17,
+          "links": {
+            "link_mgpsphu5150": 48,
+            "link_mgpspj52620": 24,
+            "link_mgpspj6n273": 24,
+            "link_mgpspj7h604": 24
+          }
+        },
+        "answerRenegotiation:engine": {
+          "calls": 4,
+          "dTrust": 32,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu5150": 8,
+            "link_mgpspj52620": 8,
+            "link_mgpspj6n273": 8,
+            "link_mgpspj7h604": 8
+          }
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 9,
+          "dTrust": 72,
+          "crossings": 2,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu5150": 8,
+            "link_mgpspj52620": 24,
+            "link_mgpspj6n273": 24,
+            "link_mgpspj7h604": 16
+          }
+        }
+      },
+      "seriesDipEnd": 136,
+      "seriesDipDay": 80
+    },
+    "93218-baseline": {
+      "seed": 93218,
+      "policy": "competent-scaleclimb-b",
+      "leg": "baseline",
+      "anchorCommit": "691d8f671b4674cfb8ac85b214bd99f339d33720",
+      "days": 150,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 250,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedRises": 0,
+      "dipUnattributedFalls": 0,
+      "heldDays": 16,
+      "everCounted": true,
+      "driveTends": 2,
+      "driveBlocked": 309,
+      "gateWindowTends": 0,
+      "gateWindowTendsEst": 0,
+      "starvationDeaths": 1,
+      "starvationHungerish": 0,
+      "playerStarvationDeaths": 0,
+      "linksFormed": 4,
+      "linksSeasoned": 4,
+      "linksCounted": 4,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 4,
+      "tendPolicy": 10,
+      "tendEngine": 17,
+      "tendRefused": 17,
+      "maxSimPrimSeasoned": 4,
+      "polityBarDay": 51,
+      "firstRegionalDay": 32,
+      "firstNationalDay": null,
+      "counterAnswers": 0,
+      "proposeAccepted": 3,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 12,
+      "proposeBlockedCap": 37,
+      "proposeBlockedPending": 89,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 12000,
+      "waveKills": {
+        "1": 25,
+        "2": 17,
+        "3": 7,
+        "4": 3
+      },
+      "accordAnswers": 3,
+      "proposeCalls": 3,
+      "proposeFormed": 3,
+      "feasts": 0,
+      "devotionChannels": 113,
+      "villagerCombatDeaths": 56,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphu5150",
+          "other": "village_2",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphwj615",
+          "other": "village_3",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 21,
+          "linkId": "link_mgpspidl2",
+          "other": "village_0",
+          "via": "proposeLink",
+          "caller": "policy"
+        },
+        {
+          "day": 36,
+          "linkId": "link_mgpspixd927",
+          "other": "village_1",
+          "via": "engine-direct",
+          "caller": "engine"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphu5150",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 51,
+          "countedEpisodes": [
+            {
+              "start": 51,
+              "end": 66
+            }
+          ],
+          "trust40Day": 11,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 10,
+          "endAge": 141,
+          "endStatus": "broken",
+          "maxTrust": 69
+        },
+        {
+          "id": "link_mgpsphwj615",
+          "other": "village_3",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 51,
+          "countedEpisodes": [
+            {
+              "start": 51,
+              "end": 66
+            }
+          ],
+          "trust40Day": 12,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 29,
+          "endAge": 140,
+          "endStatus": "active",
+          "maxTrust": 69
+        },
+        {
+          "id": "link_mgpspidl2",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 21,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 51,
+          "countedDay": 51,
+          "countedEpisodes": [
+            {
+              "start": 51,
+              "end": 66
+            }
+          ],
+          "trust40Day": 22,
+          "crossedVerb": "answerAccord:engine",
+          "endTrust": 8,
+          "endAge": 130,
+          "endStatus": "broken",
+          "maxTrust": 60
+        },
+        {
+          "id": "link_mgpspixd927",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 36,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 66,
+          "countedDay": 66,
+          "countedEpisodes": [
+            {
+              "start": 66,
+              "end": 66
+            }
+          ],
+          "trust40Day": 49,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 12,
+          "endAge": 115,
+          "endStatus": "broken",
+          "maxTrust": 48
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 51,
+          "shape": "lead/4"
+        },
+        {
+          "day": 66,
+          "shape": "lead/5"
+        },
+        {
+          "day": 67,
+          "shape": null
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 51,
+          "gained": 102,
+          "links": [
+            "link_mgpsphu5150",
+            "link_mgpsphwj615",
+            "link_mgpspidl2"
+          ],
+          "dip": 102
+        },
+        {
+          "day": 66,
+          "gained": 34,
+          "links": [
+            "link_mgpspixd927"
+          ],
+          "dip": 136
+        }
+      ],
+      "dipFalls": [
+        {
+          "day": 67,
+          "lost": 136,
+          "links": [
+            "link_mgpsphu5150",
+            "link_mgpsphwj615",
+            "link_mgpspidl2",
+            "link_mgpspixd927"
+          ],
+          "dip": 0
+        }
+      ],
+      "verbs": {
+        "_formLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerAccord:engine": {
+          "calls": 3,
+          "dTrust": 30,
+          "crossings": 3,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu5150": 10,
+            "link_mgpsphwj615": 10,
+            "link_mgpspidl2": 10
+          }
+        },
+        "answerRenegotiation:engine": {
+          "calls": 5,
+          "dTrust": 40,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu5150": 8,
+            "link_mgpsphwj615": 8,
+            "link_mgpspixd927": 24
+          }
+        },
+        "tendLink:policy": {
+          "calls": 10,
+          "dTrust": 64,
+          "crossings": 1,
+          "refused": 2,
+          "links": {
+            "link_mgpsphu5150": 16,
+            "link_mgpsphwj615": 16,
+            "link_mgpspidl2": 16,
+            "link_mgpspixd927": 16
+          }
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:engine": {
+          "calls": 17,
+          "dTrust": 16,
+          "crossings": 0,
+          "refused": 15,
+          "links": {
+            "link_mgpsphu5150": 8,
+            "link_mgpsphwj615": 8,
+            "link_mgpspidl2": 0
+          }
+        },
+        "breakLink:engine": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphu5150": 0,
+            "link_mgpspidl2": 0,
+            "link_mgpspixd927": 0
+          }
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 151
+    }
+  },
+  "byPolicy": {
+    "armed": {
+      "n": 8,
+      "wins": 0,
+      "national": 0,
+      "table": 0,
+      "medianDays": 147.5,
+      "medianDipEnd": 102,
+      "medianLinksFormed": 4,
+      "medianLinksSeasoned": 3,
+      "medianLinksCounted": 3,
+      "medianMaxSimSeasoned": 3,
+      "totalTendPolicy": 51,
+      "totalTendEngine": 498,
+      "totalTendRefused": 240,
+      "totalAccord": 20,
+      "totalPropose": 28,
+      "totalBroke": 2,
+      "totalUnclassified": 0,
+      "dipPositiveSeeds": 7,
+      "everCountedSeeds": 8,
+      "medianHeldDays": 44,
+      "pooledHeldDays": 465,
+      "totalDriveTends": 264,
+      "totalDriveBlocked": 690,
+      "totalGateWindowTends": 192,
+      "totalStarvationDeaths": 0,
+      "totalPlayerStarvationDeaths": 1,
+      "polityBarSeeds": 8,
+      "medianMaxSimPrimSeasoned": 3,
+      "medianFirstRegionalDay": 32,
+      "totalVillagerCombatDeaths": 490,
+      "totalCounterAnswers": 4,
+      "totalProposeAccepted": 24,
+      "totalProposeCounter": 4,
+      "totalProposeDeclined": 0,
+      "totalDipUnattributed": 0,
+      "totalDipUnattributedRises": 0,
+      "totalDipUnattributedFalls": 0,
+      "totalErrors": 0,
+      "wave5unlocked": 2,
+      "wave4unlocked": 8
+    },
+    "baseline": {
+      "n": 8,
+      "wins": 0,
+      "national": 0,
+      "table": 0,
+      "medianDays": 140.5,
+      "medianDipEnd": 0,
+      "medianLinksFormed": 4,
+      "medianLinksSeasoned": 3,
+      "medianLinksCounted": 3,
+      "medianMaxSimSeasoned": 3,
+      "totalTendPolicy": 53,
+      "totalTendEngine": 99,
+      "totalTendRefused": 47,
+      "totalAccord": 23,
+      "totalPropose": 27,
+      "totalBroke": 2,
+      "totalUnclassified": 0,
+      "dipPositiveSeeds": 3,
+      "everCountedSeeds": 7,
+      "medianHeldDays": 31.5,
+      "pooledHeldDays": 322,
+      "totalDriveTends": 48,
+      "totalDriveBlocked": 1820,
+      "totalGateWindowTends": 2,
+      "totalStarvationDeaths": 4,
+      "totalPlayerStarvationDeaths": 1,
+      "polityBarSeeds": 7,
+      "medianMaxSimPrimSeasoned": 3,
+      "medianFirstRegionalDay": 32,
+      "totalVillagerCombatDeaths": 517,
+      "totalCounterAnswers": 4,
+      "totalProposeAccepted": 23,
+      "totalProposeCounter": 4,
+      "totalProposeDeclined": 0,
+      "totalDipUnattributed": 0,
+      "totalDipUnattributedRises": 0,
+      "totalDipUnattributedFalls": 0,
+      "totalErrors": 0,
+      "wave5unlocked": 2,
+      "wave4unlocked": 8
+    }
+  }
+}
