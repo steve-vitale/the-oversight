@@ -259,11 +259,18 @@ re-base on a larger panel is still owed, not this run.
   receipt, same as r189/r195), living-garden + one-person-army (120s load
   timeouts in the gate, exit 0 standalone — 76s / 58s). This run changed
   no `src/js` (scripts + evidence only).
-- Commits on branch `journey-scale`: 02cdaa368 (prereg + instruments),
-  8c7b802f1 (R195 SUMMARY label fix), [run-note commit]. Safe-commit
-  index clobber struck both commits (repaired via ls-tree pipe,
+- Commits on branch `journey-scale`: e39f343d8 (prereg + instruments),
+  965542a72 (R195 SUMMARY label fix), e59a00aef (run note + prereg
+  closeout) — rebased clean onto 6a74c1522 (transplant round 0215:
+  narrowed 4b + 5b NOT-CARRIER measured; family 7 UNMEASURED) with the
+  proof re-run 29/29 on the rebased tip before merging. Safe-commit
+  index clobber struck all three commits (repaired via ls-tree pipe,
   verified: status empty, diff HEAD empty, hashes match).
-- Merge/release/rotation: [TO FILL at closeout.]
+- Merge/release/rotation: merged `--ff-only` `6a74c1522..e59a00aef`
+  (HEAD `e59a00aef`); tree released done-merged, worktree removed,
+  branch deleted; rotation-a 3→0; lock deleted; hbloop killed. Merged
+  locally, pending ship. (This section filled by the addendum commit on
+  the same branch, merged ff-only right after.)
 
 ## Carried (not this run's to build)
 
