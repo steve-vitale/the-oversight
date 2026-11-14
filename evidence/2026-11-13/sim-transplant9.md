@@ -101,45 +101,120 @@ first parent): exactly TWO changed-in-both sections
 no merged section, no removed section, no DU entry, 0 conflict
 markers in the whole output. Prediction: CLEAN pick.
 
-## Subject (filled after the pick)
+## Subject
 
-- Subject branch: `transplant-9-subject` — (hash to fill)
-- Pick result: (clean / conflict-STOP with list)
-- Measured family diff verification: (subject-vs-far-end ==
-  family-vs-first-parent on src/js + policies + test file)
+- Subject branch: `transplant-9-subject` — 291934f7e3ac18c6081f8ad5976e17b2c6b9947f
+- Parent: far end 203a32775 (verified: `git rev-parse 291934f7e^` ==
+  203a327750a223e0a1465dc51f5409787efdfaae).
+- Pick result: CLEAN — `git cherry-pick -m 1 e44b0206e` applied with
+  0 conflicts, exactly as the merge-tree pre-check predicted (3
+  files, +263/-8).
+- Measured family diff verification: subject-vs-far-end ==
+  family-vs-first-parent on src/js + policies + the test file,
+  content lines sorted + sha256-compared:
+  3dda5beb0fc9d2d2eb4a4240de76a8ec059b49e8119a82c9eb4bd5a8fbe798ce
+  on BOTH sides (content-identical). Subject standing.js is the
+  far-end native (75762cb2259d...), no conflict markers anywhere in
+  the subject tree.
 
-## Step (filled after the sim)
+## Step
 
-- STEP id: t9-e44b0206e
+- STEP id: t9-e44b0206e, ran 10m36s (STEP-EXIT 0), fix swapped in
+  (f8fda4295a99), native restored sha-verified (75762cb2259d),
+  policy a7ff5c516440 (far-end own policy).
 - Driver log: evidence/2026-11-13/culpritbisect-a-t9-e44b0206e-driver.log
 - Summary: evidence/2026-11-13/culpritbisect-a-t9-e44b0206e-summary.json
 - Corpus: evidence/2026-11-13/perseed-culpritbisect-a-t9-e44b0206e/
+  (8 per-seed JSONs).
 
-## Verdict (filled after the sim)
+## Verdict
 
-- VERDICT: (CARRIER / AMBIGUOUS / NOT-CARRIER / UNMEASURED)
-- Survived: /8 — per-seed days:
-- Wave-5: /8, wave-4: /8, regional: /8, national: , table: , wins:
-- Median: d, deaths: , standing range:
-- Death-cause shares: (to fill from the summary)
+- VERDICT: NOT-CARRIER
+- Survived: 4/8 — per-seed days: 86/144/150/43/150/87/150/150;
+  survivors 190393, 190395, 190397, 190398.
+- Wave-5: 2/8, wave-4: 8/8, regional: 7/8, village: 1/8,
+  national: 0, table: 0, wins: 0.
+- Median: 150d, deaths: 629, standing range: 150–325, blooded: 4/8,
+  tribute-ready: 1/8 (190397 only, all others veterans-short).
+- Death-cause shares: villager combat 267 (42%), combat 130 (21%),
+  expedition 126 (20%), the wild 74 (12%), monster 13 (2%), the rest
+  ≤3 each (ambush, contest, wound, Spool, stranger, arena, night,
+  Big-Eyes, alien, starvation 1). Combat/expedition-dominated, the
+  same profile as the far end and every other bisect step — villages
+  die fighting, not hungry (1 starvation death in 629).
+- THE INERTNESS READ: per-seed days are IDENTICAL to the far-end
+  endpoint days recorded in the bisect prereg (86/144/150/43/150/
+  87/150/150, same survivors, same median). The subject reproduces the far end seed-for-seed:
+  the family does not move survival at all on this band. It is
+  NOT-CARRIER in the strongest sense — not 3/8-near-the-far-end,
+  but byte-for-byte the far end's trajectories.
 
-## Sense-testing (filled after the sim)
+## Sense-testing
 
-(Transcripts read from the step corpus: do villagers act like
-people on the subject — Help presses on unfinished outings naming
-real work, repay wants matching the opener — and what changed
-versus the far end?)
+- The family's new lines NEVER FIRE under the competent policy on
+  this band: 0 mentions of "We still need to get home", 0 of
+  "finish the haul" / "finish the outing", and 0 mentions of the
+  word "favor" at all across all 8 corpora (98,590 sayCount lines,
+  225 vetSays). The bot never opens a Help conversation on an
+  unfinished outing, so the coherence repair has no path to act —
+  the inertness read has a mechanism, not just a count. The verdict
+  therefore says nothing about the fix's quality for a HUMAN player
+  who does press Help mid-outing; it says the fix cannot carry the
+  collapse, because nothing in the sim reaches it.
+- What the villages looked like: coherent, named, consequential.
+  Veteran kills are called on camera with names remembered
+  ("Bessie just put down Spool... on CAMERA. That's a veteran kill,
+  folks. REMEMBER the name." — day 28, 190393; Priya/Linda/Sofia/
+  Oliver/Vasyl the same on 190397). Defense lines name who met the
+  monsters at the door and who came back hurt. 190397's Seo-ah
+  notes a ground-elder stand worth remembering (day 117) and its
+  fruiting (day 140) — a villager noticing and remembering the
+  land, unprompted. The producers name the Nielsen at day 135.
+  Nothing robotic, static, or repeated in the sampled lines; the
+  repeated veteran-kill formula is a broadcast ritual, not a loop.
+- Lost villages still had food in the pantry where it mattered:
+  190393 (survivor) ends with 8,200 kcal, 190397 with 5,798 kcal;
+  the lost seeds end at 0 kcal only because the village is gone,
+  not because it starved — 190391 lost at 86d with the village
+  wiped in combat. 190394 died fastest (43d, village rank, 52
+  deaths) — the early-collapse shape the far end also shows.
 
 ## Metric review
 
-(To fill after the sim: did the pre-registered metric hold, or
-does a metric need revision for the NEXT run?)
+Pre-registered metric (survived/8, thresholds above) judged the
+arm outright: 4/8 is NOT-CARRIER with no re-run leg needed. No
+re-scoring. The metric held; the identical-days read is a bonus
+diagnostic, not a verdict input. One instrument note for the NEXT
+run: the bisect corpus carries no conversation/favor telemetry
+rows (no favor, water_haul, or forage_help mentions at all), so a
+dialogue family's mechanism is uncheckable from survival corpora
+alone — a family like this one can only be exonerated by
+inertness, never confirmed effective by this instrument. That is a
+limitation of the instrument, not of the verdict.
 
 ## Telemetry
 
-(To fill: deviation check attempted; expected REFUSAL,
-recorder-corpus class; baseline NOT rolled.)
+Deviation check attempted; REFUSED by the tool itself
+(recorder-corpus class): "refusing recorder-corpus input: all 8
+--current rows carry top-level anchorCommit, so they are sweep
+recorder rows, not runs." Recorded as the prereg directs; baseline
+NOT rolled. (Same refusal as all prior bisect/transplant arms.)
 
 ## Infrastructure
 
-(To fill: flap windows, safe-commit clobber, rebase/merge notes.)
+- Safe-commit index clobber struck BOTH stage-1 commits (first:
+  both files staged-as-deleted; second: MM on the evidence file) —
+  repaired each time with the documented `git ls-tree -r HEAD --
+  <paths> | git update-index --add --index-info` pipe, verified
+  (status empty, diff empty, hash-object == HEAD blob per file).
+- The step script itself does not exist at the subject commit (the
+  far end predates the Nov 13 bisect tooling), so it was run from a
+  /tmp copy (`git show sim-transplant9:scripts/culpritbisect-step.sh
+  > /tmp/culpritbisect-step-t9.sh`, REPO env) — the route the
+  script's own header documents. Tooling scratch was restored from
+  master as designed.
+- `git checkout sim-transplant9` after the step took ~2 min (96k-
+  file tree restat under load) — slow, not stuck.
+- No flap EPERM hit on this arm's writes. No pushes, no version
+  bumps, no live verification (ship loop owns deploys). Arm branch
+  tip after this run: (to fill at commit time).

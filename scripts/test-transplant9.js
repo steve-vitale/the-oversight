@@ -282,11 +282,118 @@ function mergeTreeConflicts() {
     stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'band literal present');
   let subjectExists = true;
   try { git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectExists = false; }
-  T.ok('subject branch does NOT exist yet (cut after the stage-1 commit)', subjectExists === false, SUBJECT_BRANCH);
+  T.ok('subject branch exists (cut after the stage-1 commit)', subjectExists === true, SUBJECT_BRANCH);
   const t9Summary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
-  T.ok('step summary does NOT exist yet (sim not run)', fs.existsSync(t9Summary) === false, STEP);
+  T.ok('step summary exists (sim ran)', fs.existsSync(t9Summary) === true, STEP);
   const t9Driver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
-  T.ok('step driver log does NOT exist yet (sim not run)', fs.existsSync(t9Driver) === false, STEP);
+  T.ok('step driver log exists (sim ran)', fs.existsSync(t9Driver) === true, STEP);
+
+  // ---- 7. Subject + sim (stage 2) ----
+  T.section('7. Subject built, family diff verified, step measured 4/8 NOT-CARRIER');
+  const SUBJECT = '291934f7e3ac18c6081f8ad5976e17b2c6b9947f';
+  let subjectTip = null;
+  try { subjectTip = git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subjectTip = null; }
+  T.ok('subject branch exists at the recorded commit', subjectTip === SUBJECT, subjectTip ? subjectTip.slice(0, 12) : '(missing)');
+  T.ok('subject parent is the far end 203a32775', git('rev-parse ' + SUBJECT + '^') === FAR_FULL, git('rev-parse ' + SUBJECT + '^').slice(0, 12));
+  T.ok('subject standing.js is the far-end native (swap restored, 75762cb2...)',
+    sha256(gitShow(SUBJECT, 'src/js/standing.js')).startsWith('75762cb2'), sha256(gitShow(SUBJECT, 'src/js/standing.js')).slice(0, 12));
+  // Measured family diff byte-identical: compare CONTENT lines only
+  // (blob hashes + hunk line numbers legitimately differ — the far-end
+  // convo files sit on different bases than the first parent).
+  function diffContentLines(a, b, paths) {
+    const out = execSync('git diff ' + a + ' ' + b + ' -- ' + paths, { cwd: REPO, stdio: 'pipe' }).toString('utf8');
+    return out.split('\n').filter(function (ln) { return /^[-+][^-+]/.test(ln); }).join('\n');
+  }
+  const subjectMeasured = diffContentLines(FAR, SUBJECT, 'src/js scripts/policies ' + TEST_FILE);
+  const familyMeasured = diffContentLines(MERGE + '^1', MERGE, 'src/js scripts/policies ' + TEST_FILE);
+  T.ok('measured family diff (src/js + policies + test file) is content-identical: subject-vs-far-end == family-vs-first-parent',
+    subjectMeasured === familyMeasured, 'content lines match');
+  const subDlg = gitShow(SUBJECT, 'src/js/convo-dialogue.js');
+  T.ok('subject dialogue carries unfinishedOuting + deferredAfterResume',
+    subDlg.indexOf('unfinishedOuting') !== -1 && subDlg.indexOf('deferredAfterResume') !== -1, 'guards present');
+  T.ok('subject dialogue carries the honest unfinished-haul line',
+    subDlg.indexOf('We still need to get home and unload what we have') !== -1, 'honest line present');
+  const subWants = gitShow(SUBJECT, 'src/js/convo-wants.js');
+  T.ok('subject wants carries repay:help:water + repay:help:forage lines',
+    subWants.indexOf('repay:help:water') !== -1 && subWants.indexOf('repay:help:forage') !== -1, 'repay lines present');
+  let subjectMarkers = [];
+  try {
+    subjectMarkers = execSync('git grep -l -E "^(<<<<<<<|=======|>>>>>>>)" ' + SUBJECT + ' -- scripts/ src/', { cwd: REPO, stdio: 'pipe' }).toString().trim().split('\n').filter(Boolean);
+  } catch (e) { subjectMarkers = []; }
+  T.ok('no conflict markers anywhere in the subject tree', subjectMarkers.length === 0, subjectMarkers.join(', ') || '(none)');
+  // Step summary + driver log.
+  const summaryPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
+  T.ok('step summary exists', fs.existsSync(summaryPath), STEP);
+  const summary = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
+  T.ok('summary step id is t9-e44b0206e', summary.step === STEP, summary.step);
+  T.ok('summary survived is 4/8', summary.survived === 4, 'survived=' + summary.survived);
+  T.ok('summary verdict is GOOD', summary.verdict === 'GOOD', summary.verdict);
+  T.ok('4/8 maps to NOT-CARRIER (binding threshold)', classifyTransplant(summary.survived) === 'NOT-CARRIER', classifyTransplant(summary.survived));
+  T.ok('summary rank is REGIONAL_INTACT', summary.rankVerdict === 'REGIONAL_INTACT', summary.rankVerdict);
+  T.ok('summary median is 150d', summary.wall.medianDays === 150, 'median=' + summary.wall.medianDays);
+  T.ok('summary wave-5 is 2/8', summary.wall.wave5 === 2, 'wave5=' + summary.wall.wave5);
+  T.ok('summary wave-4 is 8/8', summary.wall.wave4 === 8, 'wave4=' + summary.wall.wave4);
+  T.ok('summary national/table/wins are 0', summary.wall.national === 0 && summary.wall.table === 0 && summary.wall.wins === 0, '0/0/0');
+  T.ok('summary regional is 7/8, village 1/8', summary.wall.regional === 7 && summary.wall.village === 1, 'regional=' + summary.wall.regional + ' village=' + summary.wall.village);
+  T.ok('summary deaths total 629', summary.wall.deaths === 629, 'deaths=' + summary.wall.deaths);
+  T.ok('summary standing range is 150-325', summary.wall.standingRange[0] === 150 && summary.wall.standingRange[1] === 325, summary.wall.standingRange.join('-'));
+  T.ok('summary blooded is 4/8', summary.wall.blooded === 4, 'blooded=' + summary.wall.blooded);
+  T.ok('summary instrument errors are 0', summary.instrumentErrors === 0, 'errors=' + summary.instrumentErrors);
+  const seedDays = { 190391: 86, 190392: 144, 190393: 150, 190394: 43, 190395: 150, 190396: 87, 190397: 150, 190398: 150 };
+  let seedsOk = true, seedsBad = null;
+  for (const row of summary.perSeed) {
+    if (row.days !== seedDays[row.seed] || row.anchorCommit !== '291934f7e3ac' || row.standingFix !== true || row.standingSha !== 'f8fda4295a99' || row.policySha !== 'a7ff5c516440' || row.errors !== 0) {
+      seedsOk = false; seedsBad = 'seed ' + row.seed; break;
+    }
+  }
+  T.ok('all 8 per-seed legs ran on the subject with the fix swapped in, 0 errors', seedsOk, seedsBad || '8/8 legs clean');
+  const survivors = summary.perSeed.filter(function (r) { return r.endReason === 'survived'; }).map(function (r) { return r.seed; });
+  T.ok('survivors are 190393, 190395, 190397, 190398', JSON.stringify(survivors) === JSON.stringify([190393, 190395, 190397, 190398]), survivors.join(', '));
+  // Inertness read: per-seed days identical to the far-end endpoint
+  // days recorded in the bisect prereg (86/144/150/43/150/87/150/150).
+  const farDays = { 190391: 86, 190392: 144, 190393: 150, 190394: 43, 190395: 150, 190396: 87, 190397: 150, 190398: 150 };
+  let inertOk = true, inertBad = null;
+  for (const row of summary.perSeed) {
+    if (row.days !== farDays[row.seed]) { inertOk = false; inertBad = 'seed ' + row.seed + ' (' + row.days + 'd vs far-end ' + farDays[row.seed] + 'd)'; break; }
+  }
+  T.ok('per-seed days are IDENTICAL to the far-end endpoint days (family inert on this band)', inertOk, inertBad || '8/8 identical');
+  T.ok('tribute-ready on exactly 1/8 (190397)', summary.perSeed.filter(function (r) { return r.tribute && r.tribute.ready; }).map(function (r) { return r.seed; }).join(',') === '190397', '190397 only');
+  const driverLogPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
+  T.ok('step driver log exists', fs.existsSync(driverLogPath), STEP);
+  const driverLog = fs.readFileSync(driverLogPath, 'utf8');
+  T.ok('driver log records the GOOD 4/8 classification', driverLog.indexOf('GOOD (survived 4/8)') !== -1, 'GOOD 4/8 present');
+  // Sense-testing corpus check: the family's new lines never fire
+  // under the competent policy on this band (0 mentions of the new
+  // lines, 0 'favor' mentions at all across all 8 corpora) — the
+  // inertness read has a mechanism, not just a count.
+  const corpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
+  const corpusFiles = fs.readdirSync(corpusDir).filter(function (f) { return f.slice(-5) === '.json'; });
+  T.ok('step corpus holds 8 per-seed JSONs', corpusFiles.length === 8, corpusFiles.length + ' files');
+  let corpusText = '';
+  for (const f of corpusFiles) corpusText += fs.readFileSync(path.join(corpusDir, f), 'utf8');
+  T.ok('new family line "We still need to get home" fires 0 times in the corpus',
+    (corpusText.match(/We still need to get home/g) || []).length === 0, '0 mentions');
+  T.ok('new family lines "finish the haul" / "finish the outing" fire 0 times in the corpus',
+    (corpusText.match(/finish the haul/g) || []).length === 0 && (corpusText.match(/finish the outing/g) || []).length === 0, '0 mentions');
+  T.ok('"favor" is mentioned 0 times anywhere in the corpus (the bot never opens a Help conversation)',
+    (corpusText.toLowerCase().match(/favor/g) || []).length === 0, '0 mentions');
+  // Evidence records the verdict + subject + numbers.
+  const ev2 = fs.existsSync(evPath) ? fs.readFileSync(evPath, 'utf8') : '';
+  T.ok('evidence file records the verdict as NOT-CARRIER', ev2.indexOf('VERDICT: NOT-CARRIER') !== -1, 'NOT-CARRIER present');
+  T.ok('evidence file records the subject commit 291934f7e', ev2.indexOf('291934f7e') !== -1, 'subject hash present');
+  T.ok('evidence file records survived 4/8', ev2.indexOf('4/8') !== -1, '4/8 present');
+  T.ok('evidence file records the telemetry refusal', ev2.indexOf('refusing recorder-corpus') !== -1 || ev2.indexOf('REFUSED') !== -1, 'refusal recorded');
+  T.ok('evidence file records the byte-identical diff verification', ev2.indexOf('content-identical') !== -1, 'verification recorded');
+  T.ok('evidence file records the identical-days inertness read', ev2.indexOf('IDENTICAL to the far-end') !== -1, 'inertness recorded');
+  // Base restored: back on the arm branch, clean, standing.js == HEAD.
+  const headBranch2 = git('rev-parse --abbrev-ref HEAD');
+  T.ok('HEAD is back on the arm branch sim-transplant9 after the step (worktree-only)', worktreeOnly(headBranch2 === 'sim-transplant9'), 'HEAD=' + headBranch2);
+  const dirtyAfter = git('status --porcelain --untracked-files=no');
+  T.ok('tracked tree is clean after the step', dirtyAfter === '', dirtyAfter.slice(0, 200) || '(clean)');
+  const onDiskStanding2 = sha256(fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'), 'utf8'));
+  const headStanding2 = sha256(gitShow('HEAD', 'src/js/standing.js'));
+  T.ok('on-disk standing.js is byte-identical to HEAD (no swap residue)', onDiskStanding2 === headStanding2, onDiskStanding2.slice(0, 12));
+  T.ok('subject branch is LEFT in place (not merged, not deleted)', subjectTip === SUBJECT, subjectTip ? subjectTip.slice(0, 12) : '(missing)');
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
