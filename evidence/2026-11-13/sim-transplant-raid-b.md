@@ -187,30 +187,88 @@ rule. Same standing as the bisect prereg §7.
 
 ### Subject build
 
-- (to be filled: subject branch tip hash, cherry-pick result,
-  family-diff completeness check)
+- **BLOCKED — cherry-pick conflict, STOP per the prereg.** `git checkout -b
+  transplant-raid-b-subject 203a32775 && git cherry-pick -m 1 7ddcdfff9`
+  stops with exactly ONE conflicting file: `scripts/green-list.txt`
+  (a test manifest, not game code). The pick was ABORTED
+  (`git cherry-pick --abort`); the subject branch is left clean at
+  203a32775 with NO subject commit, and the arm branch was checked
+  back out clean. No verdict can be read — there is no subject to run.
+- The conflict (green-list.txt lines 916–924): HEAD (far end) has
+  `scripts/test-pellet-boost-20261108.js quick` +
+  `scripts/test-pellet-q4-20261108.js quick` at that position; the
+  merge side has `scripts/test-person-trust-20261108.js quick` +
+  `scripts/test-raid-danger-heard.js quick` +
+  `scripts/test-win-rallyguard.js quick` +
+  `scripts/test-retarget-gossip.js quick`. Both sides added lines
+  near the same spot. The far end ALREADY carries the three raid
+  lines at 921–923 (added later on the far-end line, in a different
+  position), so the family's only genuinely new green-list line is
+  `test-person-trust-20261108.js quick` — the rest is a list-ordering
+  collision.
+- All FOUR game-code files merged CLEANLY (auto-merge, staged):
+  src/js/game.js, src/js/npc-triggers.js, src/js/villager-goals.js,
+  src/js/villager-objectives.js — plus docs/ONTOLOGY.md,
+  docs/VILLAGER-BRAIN.md, evidence/2026-11-08/raid-danger-heard.md
+  and the six test-file changes. The conflict is confined to the
+  green-list manifest.
+- Reproduction (coordinator): `git checkout -b <scratch> 203a32775 &&
+  git cherry-pick -m 1 7ddcdfff9` reproduces the conflict exactly.
+- What is needed: a coordinator ruling on the green-list resolution
+  (keep both sides' lines — pellet lines + person-trust line, with
+  the raid lines deduplicated since the far end already has them).
+  The worker does NOT hand-resolve per the prereg STOP rule, even
+  though the conflict is not in game code.
 
 ### Endpoint verification
 
-- (to be filled: far end survived/8 + per-seed days vs expected;
-  merge survived/8 + per-seed days vs expected; GO/NO-GO)
+- NOT RUN — no subject exists, and endpoints are only meaningful as
+  validation of the step machinery ahead of a judged step. The step
+  machinery itself is proven by the two proof suites below (both
+  include a live driver smoke run).
 
 ### Judged step
 
-- (to be filled: survived/8, verdict CARRIER / AMBIGUOUS /
-  NOT-CARRIER, per-seed days, wall numbers, death causes)
+- NOT RUN — blocked on the subject build (see above). NO verdict:
+  not CARRIER, not AMBIGUOUS, not NOT-CARRIER. The family is
+  unmeasured.
+
+### Proof (run before any judged sim, as pre-registered)
+
+- `node scripts/test-culpritbisect-a.js` (reused, shared machinery):
+  **116 passed, 0 failed.**
+- `node scripts/test-transplant-raid-b.js` (arm's own legs):
+  **62 passed, 0 failed** (section 4 subject-diff completeness
+  skipped — no SUBJECT_SHA, since no subject exists). Live smoke
+  included: transplant driver runs 1 seed × 5 days end-to-end,
+  valid per-seed JSON, 0 instrument errors.
+- Safe-commit index clobber struck once on the prereg+tooling commit
+  (d8b3942d2): files showed staged-as-deleted after a correct commit.
+  Repaired with the documented
+  `git ls-tree -r HEAD -- <paths> | git update-index --add
+  --index-info` pipe + a mode-only chmod 644 on the step script
+  (worktree was 755, HEAD 644); verified `git status --short`
+  empty + `git diff HEAD` empty. Commit content verified intact
+  (5 files, 1032 insertions).
 
 ### Sense-testing
 
-- (to be filled: vetSays read, subject vs far end, in plain words)
+- NOT DONE — no subject corpus exists to read against the far end.
 
 ### Telemetry
 
-- (to be filled: deviation-check refusal record)
+- NOT ATTEMPTED — no judged corpus exists to check. (The refusal
+  expectation stands for the next run once a corpus exists.)
 
 ### Metric review (filled)
 
-- (to be filled)
+- No metric proved wrong — no judged step ran, so nothing to
+  re-score. The prereg's STOP-on-conflict rule worked as designed:
+  it caught a non-game-code manifest collision before any sim spend
+  and left the tree clean. One gap for the NEXT run: the transplant
+  prereg assumes a clean cherry-pick; a green-list-only conflict
+  needs a pre-agreed resolution (or a coordinator ruling) so the
+  family is not left unmeasured over a test manifest.
 
 ## Next splits (only if this family reads CARRIER)
 
