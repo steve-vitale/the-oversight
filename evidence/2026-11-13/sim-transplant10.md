@@ -104,9 +104,11 @@ the conflict markers are prefixed with `+` (`+<<<<<<< .our`,
 falsely reports a clean prediction — my first grep did exactly that.
 The corrected count (transplant118/2b method: `+<<<<<<<`, `+=======`,
 `+>>>>>>>`) is 3 markers per conflicted file. The live pick
-reproduced the prediction exactly (see §Cherry-pick) — the sixth
-consecutive exact prediction in this program (families 2, 2b, 5, 5b, 7
-before it).
+reproduced the prediction exactly (see §Cherry-pick). (Running-tally
+note: family 8's evidence calls its own prediction the fifth while
+listing five predecessors — an undercount; the checkable sequence of
+exact predictions is 2, 2b, 5, 5b, 7, 8, then this arm. The
+coordinator's round evidence is the tally of record.)
 
 ## 3. Cherry-pick (live) — CONFLICT-STOP
 
@@ -161,9 +163,12 @@ before it).
   NOT this arm's call. No narrowed re-run was attempted.
 
 **VERDICT: UNMEASURED.** Survived/8 was never measured: no step ran,
-no survival number exists for family 10. This is the SIXTH family to
-stop on divergence (families 1, 2, 3, 6, 7 before it; 4 and 5 were
-measured only via narrowed 4b/5b). Unlike family 7 — whose conflicts
+no survival number exists for family 10. This is the SEVENTH family to
+stop on divergence (families 1, 2, 3, 6, 7, 8 before it; 4 and 5 were
+measured only via narrowed 4b/5b; family 8 stopped in the same 0337Z
+run — sim-transplant8, UU conversation.js + convo-dialogue.js — its
+evidence and branch were read, not touched; family 9 is still
+running). Unlike family 7 — whose conflicts
 were game-code DU + docs — family 10's conflicts are tooling-only,
 so the narrowed-10b route is the live next step for the coordinator.
 

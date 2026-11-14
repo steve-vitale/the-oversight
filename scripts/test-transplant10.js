@@ -63,7 +63,7 @@
 //      end with NO subject commit; the evidence file records the
 //      live UU files and hunks, the exact marker lines and stage
 //      blobs, the UNMEASURED verdict, the abort + clean tree, the
-//      narrowed-10b note as a coordinator decision, and the SIXTH
+//      narrowed-10b note as a coordinator decision, and the SEVENTH
 //      family to stop.
 //   8. No corpus — no step summary, driver log, or per-seed corpus
 //      exists for STEP t10-fbb9c53ed, because no judged sim ran.
@@ -382,8 +382,8 @@ function mergeTreeRaw() {
     ev.indexOf('ba5d513845672aac97b038cdc40d6dccd16f6f7c') !== -1, 'stage blobs present');
   T.ok('evidence file records the cherry-pick abort and the tree verified clean',
     ev.indexOf('cherry-pick --abort') !== -1 && ev.indexOf('verified clean') !== -1, 'abort + clean recorded');
-  T.ok('evidence file records this as the SIXTH family to stop on divergence',
-    ev.indexOf('SIXTH family') !== -1, 'sixth recorded');
+  T.ok('evidence file records this as the SEVENTH family to stop on divergence',
+    ev.indexOf('SEVENTH family') !== -1, 'seventh recorded');
   T.ok('evidence file records NO src/js conflict and NO DU',
     ev.indexOf('No src/js conflict, no DU') !== -1, 'clean-staging note present');
 
