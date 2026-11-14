@@ -223,7 +223,7 @@ prereg: far end 203a32775 4/8, merge e4dbe581b 1/8, on seeds
 - No telemetry deviation check run: no corpus exists to check, and
   the tool refuses recorder-corpus class anyway — recorded, baseline
   NOT rolled.
-- Closeout: arm branch `sim-transplant2-a` tip (to be filled at commit
-  time — see the commit below this line in the branch log); subject
-  branch `transplant-2-subject` LEFT at the far end `203a32775`
+- Closeout: arm branch `sim-transplant2-a` tip `524c2bf7f` (2 commits:
+  prereg, conflict-STOP record + proof); subject branch
+  `transplant-2-subject` LEFT at the far end `203a32775`
   (no subject commit); worktree verified clean at closeout.
