@@ -265,9 +265,25 @@ fix item, if any, waits for a panel that actually produces one.
 
 ## Landing
 
-[GATE + LANDING PENDING — fill in at closeout: safe-commit,
-rebase if master moved, merge --ff-only, release, rotation-b
-7->4 (verify), lock deletion, main-tree clean check.]
+- Commits (branch journey2-succession): 77999ccb8 (driver/analyzer/
+  runner + panel evidence, 92 files) + f3870b3c8-after-rebase run
+  note. Note: the run-note commit's hash changed across the rebase
+  (56a8d6385 → f3870b3c8); this landing paragraph is a third commit
+  on the rebased tip.
+- Rebase: master moved during the run (5f83ca93d → a1d201e8e: 7
+  commits — sim-transplant2b corpora/test + journey-establishment
+  r136). No src/ changes in that range (evidence + scripts only),
+  so no game-code drift. Rebasing was clean; the full panel was
+  re-run on the rebased tip (01:43:29Z) and produced BYTE-IDENTICAL
+  outputs — 0 changed files. Proof re-run confirmed.
+- Merge: `git merge --ff-only journey2-succession` in the main
+  tree (READ-ONLY for the merge). [FILL: merge result + new HEAD.]
+- Release: `bash scripts/worktree-release.sh journey2-succession
+  merged`, worktree removed, branch deleted, final reap.
+  [FILL at closeout.]
+- Main tree verified clean after landing. [FILL at closeout.]
+- Merged locally, pending ship — no version bump, no push, no live
+  verification (the ship loop owns those).
 
 ## Rotation
 
