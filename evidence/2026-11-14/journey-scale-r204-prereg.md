@@ -242,5 +242,55 @@ game).
 
 ## CLOSEOUT — run 2026-11-14T174308Z (this run)
 
-(to fill at closeout; see the run note
-`evidence/2026-11-14/journey-scale-r204.md`)
+**Panel (seeds 135401–135404, DAYCAP=140):** 135401 alive d141 (8/8,
+regional, lesser d47, tribute ready d90 undelivered 0/51);
+135402 over d109 (5/5, lesser d58, sickness 6, no healer all run);
+135403 over d102 (5/5, lesser d40, 60 fights, tribute ready d72
+undelivered 0/27); 135404 over d67 (SCATTERED from hunger, 10 alive
+when they walked). Lived-days 419 vs r197 band 526 (-20.3%, HOLD).
+Lesser 4/4. Books close, unattributed 0, teleOnly 0. Wave-5 fights 5,
+kills 0.
+
+**Q1 — NO-GO on the wall, blocker named per seed (informative):** national
+0/4. 135401: LEAD 2/3 (needs 1 more seasoned). 135402: COLLAPSE
+(sickness, healer-less). 135403: COLLAPSE (the wild). 135404: COLLAPSE
+(hunger scatter d67). Wall stands on a fresh band; survival fell to 1/4.
+The binding constraint is still trust held above 40 for a season.
+
+**Q2 — all GO/HOLD (exit 0):** raise 3 talks (2 answered, 1 counter, 0
+defects); vetbar 0 disagreements; trap HOLD (Elif d90-nv mime shown +
+answered — r133 fix re-proven); betrayal HOLD (1 turn-0 offer,
+labeled); **nod-loop HOLD (worst 3x — the r132 thin-out visible in the
+transcript; the old 4–5x shape is gone)**; lived-days HOLD; lesser 4/4.
+
+**Q3 — RECORDED:** daily-play mimes 9, daily accepts proven 0; Elif
+(Turkish-only, trust 89) mime shown + nv:accept taken in the driver
+sitting. Lane decision still owed.
+
+**Q4 — PASS:** all d90/d120 transcripts + all 3 raise talks read in full.
+Senseless 0. Strongest: Oliver on Ruth (d120), Isaac's control-group
+theory. Observations: "left someone behind" line-pool reuse (fourth
+band); formulaic raise closers; Elif flag-emoji opener; "And... scene.
+Good talk." closer. New surfaces (r132 thinning, r201 settle gate) both
+read correctly in live sittings.
+
+**Q5 — census in the run note** (`evidence/2026-11-14/journey-scale-r204.md`).
+
+**The blank filled:** r132 nod-loop fix re-proven on the scale leg
+(worst 3x, mechanism visible) + r201 favor-want gate read (no defect).
+Tribute 0/51 + 0/27 diagnosed as the known M23 shape (readiness counts
+the scholar, delivery needs 2 payable veterans; payable=1 held for 51
+and 27 days) — documented, metric revision still owed.
+
+**Telemetry:** 2 LOUD lines vs the old baseline (fightsTotal -69%, w4
+-75%); investigated (no combat code changed; band composition +
+collapse shape); **baseline ROLLED to 3-band means 241/178/468**
+(backup scale.json.20261114-pre-r204.bak); re-check: w4 -60% still LOUD
+(marginal).
+
+**Verdicts:** reachable YES, fun YES, winnable NO (this leg).
+
+**Gate / landing:** see the run note's Gate/landing section (filled at
+closeout). Full record: `evidence/2026-11-14/journey-scale-r204.md`.
+Corpus: `hidden_files/evidence/2026-11-14/journey-scale-r204-*` (goal
+store).
