@@ -1,0 +1,68 @@
+PROOFS START 2026-11-14T17:25:03Z
+=== test-m23-mixed-r203 ===
+B: GO   M23-capstone: pass A: capstone leg disabled (see pass B)
+FAIL B: analyzer RC=0 (ALL GO after the fix) — rc=1
+PASS B: M23 GO (mixed case: one delivered, one exempt-undelivered) — GO   M23-capstone: pass A: capstone leg disabled (see pass B)
+FAIL B: M23 names 89705 delivered feast_embassy@d68/FULL — GO   M23-capstone: pass A: capstone leg disabled (see pass B)
+FAIL B: M23 names 89704 none (eligible, undelivered, all refusals exempt) — GO   M23-capstone: pass A: capstone leg disabled (see pass B)
+FAIL B: M23 counts delivered 1/2 — GO   M23-capstone: pass A: capstone leg disabled (see pass B)
+FAIL B: M23 counts NON-EXEMPT-refused-despite-ready 0 — GO   M23-capstone: pass A: capstone leg disabled (see pass B)
+C: GO   M23-capstone: pass A: capstone leg disabled (see pass B)
+FAIL C: analyzer RC=0 (ALL GO, unchanged) — rc=1
+FAIL C: M23 GO with delivered 2/2 — GO   M23-capstone: pass A: capstone leg disabled (see pass B)
+A: GO   M23-capstone: pass A: capstone leg disabled (see pass B)
+FAIL A: analyzer RC=0 (ALL GO, unchanged) — rc=1
+test-m23-mixed-r203: 8 failure(s)
+test-m23-mixed-r203 RC:1
+=== test-m23-revision-r203 ===
+smoke: SMOKE seed=89704 plan=forcedrift announceDay=90 satDay=91 seat=lesser path=relay/dark won=true end=over-other alive=8
+PASS smoke wrote the per-seed JSON
+PASS smoke wrote the transcript
+PASS zero over attempts (guard held) — over=0 of 0 attempts
+PASS capstone.refusalVoicing is an array
+PASS one voicing entry per refused-despite-ready attempt — voicing=0 refused=0
+PASS every voicing entry names its day + reason + lines array — []
+PASS no refusals: firstRefusalCapIdx is null — firstRefusalCapIdx=null
+NOTE no refused-despite-ready attempt on this substrate — the window half is vacuous here (the guard half still proved)
+V (r194 pass-B): NO-GO M23-capstone: VACUOUS: 1 eligible, delivered 0/1, every refusal exempt (none-ready 0, exempt-refused 4) — full-seat question unanswered on this pass; M24b carries the verdict — 89704:none
+PASS V: M23 NO-GO with VACUOUS note (scholar+1 only, all refusals exempt) — NO-GO M23-capstone: VACUOUS: 1 eligible, delivered 0/1, every refusal exempt (none-ready 0, exempt-refused 4) — full-seat question unanswered on this pass; M24b carries the verdict — 89704:none
+PASS V: M24b still GO on the same corpus — M24b carries the scholar+1 verdict
+G (r194 pass-C): GO   M23-capstone: 2 eligible: delivered 2/2, none-ready 0, exempt-refused 0, NON-EXEMPT-refused-despite-ready 0, pricedFull 2/2 — 89704:feast_embassy@d69/FULL | 89705:feast_embassy@d72/FULL
+PASS G: M23 GO (deliveries priced full, zero non-exempt refusals) — GO   M23-capstone: 2 eligible: delivered 2/2, none-ready 0, exempt-refused 0, NON-EXEMPT-refused-despite-ready 0, pricedFull 2/2 — 89704:feast_embassy@d69/FULL | 89705:feast_embassy@d72/FULL
+N (mutated pass-B): NO-GO M23-capstone: 1 eligible: delivered 0/1, none-ready 0, exempt-refused 3, NON-EXEMPT-refused-despite-ready 1, pricedFull 0/1 — 89704:none
+PASS N: M23 NO-GO naming a NON-EXEMPT refusal — NO-GO M23-capstone: 1 eligible: delivered 0/1, none-ready 0, exempt-refused 3, NON-EXEMPT-refused-despite-ready 1, pricedFull 0/1 — 89704:none
+test-m23-revision-r203: ALL PASS
+test-m23-revision-r203 RC:0
+=== test-m2c-adopted-refs-r203 ===
+seed 89705 (a-89705): fights=6 distinctOpens=6 callOpens=6 errs=0
+PASS 89705: fights == distinct opens — fights=6 distinct=6
+PASS 89705: censusErrors == 0 — errs=0
+PASS 89705: distinct <= calls — distinct=6 calls=6
+NOTE 89705: no re-entrant double-count on this substrate (calls == distinct)
+seed 89701 (c-89701): fights=8 distinctOpens=8 callOpens=8 errs=0
+PASS 89701: fights == distinct opens — fights=8 distinct=8
+PASS 89701: censusErrors == 0 — errs=0
+PASS 89701: distinct <= calls — distinct=8 calls=8
+NOTE 89701: no re-entrant double-count on this substrate (calls == distinct)
+test-m2c-adopted-refs-r203: ALL PASS
+test-m2c-adopted-refs-r203 RC:0
+=== test-corpus-purity-r203 ===
+clean: GO   CORPUS-PURITY: 2/2 seeds project clean, file set exact
+PASS clean corpus: CORPUS-PURITY GO — GO   CORPUS-PURITY: 2/2 seeds project clean, file set exact
+dirty: NO-GO CORPUS-PURITY: 89702: buyout d41 pantryAfter=10000 != pantry-spent=2000 | 89703: ladder counted header=999 != JSON 45 | unexpected files in /tmp/purity-r203-dirty: probe-diag-stray.json
+PASS dirty corpus: CORPUS-PURITY NO-GO — NO-GO CORPUS-PURITY: 89702: buyout d41 pantryAfter=10000 != pantry-spent=2000 | 89703: ladder counted header=999 != JSON 45 | unexpected files in /tmp/purity-r203-dirty: probe-diag-stray.json
+PASS dirty note names the pantryAfter echo — NO-GO CORPUS-PURITY: 89702: buyout d41 pantryAfter=10000 != pantry-spent=2000 | 89703: ladder counted header=999 != JSON 45 | unexpected files in /tmp/purity-r203-dirty: probe-diag-stray.json
+PASS dirty note names the stray file — NO-GO CORPUS-PURITY: 89702: buyout d41 pantryAfter=10000 != pantry-spent=2000 | 89703: ladder counted header=999 != JSON 45 | unexpected files in /tmp/purity-r203-dirty: probe-diag-stray.json
+PASS dirty note names the ladder mismatch — NO-GO CORPUS-PURITY: 89702: buyout d41 pantryAfter=10000 != pantry-spent=2000 | 89703: ladder counted header=999 != JSON 45 | unexpected files in /tmp/purity-r203-dirty: probe-diag-stray.json
+test-corpus-purity-r203: ALL PASS
+test-corpus-purity-r203 RC:0
+=== test-competent-pin-r203 ===
+PASS pin loads competent-r127.js — {"r127":true,"live":false,"capable":true}
+PASS pin does NOT load live competent.js — {"r127":true,"live":false,"capable":true}
+PASS pin composes capable — {"r127":true,"live":false,"capable":true}
+PASS default loads live competent.js — {"r127":false,"live":true,"capable":true}
+PASS default does NOT load competent-r127.js — {"r127":false,"live":true,"capable":true}
+PASS default composes capable — {"r127":false,"live":true,"capable":true}
+test-competent-pin-r203: 6/6 PASS
+test-competent-pin-r203 RC:0
+PROOFS END 2026-11-14T17:29:54Z
