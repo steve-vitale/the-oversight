@@ -271,27 +271,179 @@ function classifyFresh(subject, baseline) {
   // STAGE 2 (appended after the steps): the judged runs exist now,
   // so the six "no step ..." legs below are replaced by "step ran"
   // legs for BOTH STEP ids (t15a-fresh-base and t15a-fresh-subj).
-  // The stage-1 form of this file passes before any judged sim ran;
-  // this form proves the judged runs.
+  // The stage-1 form of this file passed 84/84 before any judged
+  // sim ran; this form proves the judged runs.
   const baseSummary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP_BASE + '-summary.json');
-  T.ok('no step summary exists yet for t15a-fresh-base (judged sim not run)', fs.existsSync(baseSummary) === false, STEP_BASE);
+  T.ok('step summary exists for t15a-fresh-base (judged sim ran)', fs.existsSync(baseSummary) === true, STEP_BASE);
   const baseDriver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP_BASE + '-driver.log');
-  T.ok('no step driver log exists yet for t15a-fresh-base (judged sim not run)', fs.existsSync(baseDriver) === false, STEP_BASE);
-  T.ok('no step corpus exists yet for t15a-fresh-base (judged sim not run)', fs.existsSync(CORPUS_BASE) === false, STEP_BASE);
+  T.ok('step driver log exists for t15a-fresh-base (judged sim ran)', fs.existsSync(baseDriver) === true, STEP_BASE);
+  T.ok('step corpus exists for t15a-fresh-base (judged sim ran)', fs.existsSync(CORPUS_BASE) === true, STEP_BASE);
   const subjSummary = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP_SUBJ + '-summary.json');
-  T.ok('no step summary exists yet for t15a-fresh-subj (judged sim not run)', fs.existsSync(subjSummary) === false, STEP_SUBJ);
+  T.ok('step summary exists for t15a-fresh-subj (judged sim ran)', fs.existsSync(subjSummary) === true, STEP_SUBJ);
   const subjDriver = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP_SUBJ + '-driver.log');
-  T.ok('no step driver log exists yet for t15a-fresh-subj (judged sim not run)', fs.existsSync(subjDriver) === false, STEP_SUBJ);
-  T.ok('no step corpus exists yet for t15a-fresh-subj (judged sim not run)', fs.existsSync(CORPUS_SUBJ) === false, STEP_SUBJ);
+  T.ok('step driver log exists for t15a-fresh-subj (judged sim ran)', fs.existsSync(subjDriver) === true, STEP_SUBJ);
+  T.ok('step corpus exists for t15a-fresh-subj (judged sim ran)', fs.existsSync(CORPUS_SUBJ) === true, STEP_SUBJ);
   let cherryPickHead = true;
   try { execSync('git rev-parse --verify CHERRY_PICK_HEAD', { cwd: REPO, stdio: 'pipe' }); } catch (e) { cherryPickHead = false; }
   T.ok('no cherry-pick is in progress', cherryPickHead === false, 'CHERRY_PICK_HEAD absent');
   const dirtyTracked = git('diff --name-only HEAD');
-  const allowed = ['scripts/test-transplant15a-fresh.js', 'evidence/2026-11-14/sim-transplant15a-fresh-prereg.md'];
+  const allowed = ['scripts/test-transplant15a-fresh.js', 'evidence/2026-11-14/sim-transplant15a-fresh-prereg.md', 'evidence/2026-11-14/sim-transplant15a-fresh.md'];
   const dirtyOther = dirtyTracked.split('\n').filter(function (ln) {
     return ln && !allowed.some(function (a) { return ln === a; });
   }).join('\n');
-  T.ok('tracked tree is clean apart from this proof + the prereg (uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+  T.ok('tracked tree is clean apart from this proof + the prereg + the evidence file (uncommitted until this proof passes)', dirtyOther === '', dirtyOther.slice(0, 200) || '(only allowed files)');
+
+  // ---- 7. Corpus — both legs, 8/8 parse, fresh-band seeds, fix, driver-log match ----
+  T.section('7. Corpus — 8/8 parse, fresh-band seeds, fix swapped in, driver-log match');
+  const BASE_DAYS = { 190449: 107, 190450: 150, 190451: 109, 190452: 87, 190453: 77, 190454: 88, 190455: 134, 190456: 150 };
+  const BASE_END = { 190449: 'village-lost', 190450: 'survived', 190451: 'village-lost', 190452: 'village-lost', 190453: 'village-lost', 190454: 'village-lost', 190455: 'village-lost', 190456: 'village-lost' };
+  const BASE_DEATHS = { 190449: 78, 190450: 121, 190451: 83, 190452: 64, 190453: 71, 190454: 65, 190455: 71, 190456: 104 };
+  const BASE_VETSAYS = { 190449: 22, 190450: 47, 190451: 25, 190452: 74, 190453: 20, 190454: 14, 190455: 44, 190456: 29 };
+  const BASE_WAVE = { 190449: 4, 190450: 5, 190451: 5, 190452: 4, 190453: 4, 190454: 4, 190455: 5, 190456: 4 };
+  const SUBJ_DAYS = { 190449: 110, 190450: 141, 190451: 116, 190452: 41, 190453: 78, 190454: 104, 190455: 96, 190456: 96 };
+  const SUBJ_DEATHS = { 190449: 69, 190450: 137, 190451: 106, 190452: 41, 190453: 85, 190454: 60, 190455: 74, 190456: 83 };
+  const SUBJ_VETSAYS = { 190449: 14, 190450: 38, 190451: 76, 190452: 67, 190453: 14, 190454: 15, 190455: 45, 190456: 31 };
+  const SUBJ_WAVE = { 190449: 4, 190450: 5, 190451: 5, 190452: 3, 190453: 4, 190454: 4, 190455: 5, 190456: 4 };
+  function checkCorpus(stepId, corpusDirPath, driverLogPath, anchor12, expDays, expEnd, expDeaths, expVetSays, expWave) {
+    const logLines = fs.readFileSync(driverLogPath, 'utf8').split('\n').filter(function (l) { return l.indexOf('{') === 0; }).map(function (l) { return JSON.parse(l); });
+    T.ok(stepId + ': driver log has 8 JSON lines', logLines.length === 8, logLines.length + ' lines');
+    let survived = 0;
+    let wave5 = 0;
+    SEEDS.forEach(function (seed) {
+      const file = path.join(corpusDirPath, 'culpritbisect-s' + seed + '-culpritbisect-pilot-fix.json');
+      T.ok(stepId + ' seed ' + seed + ' file exists', fs.existsSync(file), path.basename(file));
+      const j = JSON.parse(fs.readFileSync(file, 'utf8'));
+      T.ok(stepId + ' seed ' + seed + ' parses with a FRESH-BAND seed + STEP', j.seed === seed && SEEDS.indexOf(j.seed) !== -1 && j.step === stepId, 'step=' + j.step);
+      T.ok(stepId + ' seed ' + seed + ' ran on the ' + (stepId === STEP_BASE ? 'far-end' : 'subject') + ' anchor', j.anchorCommit === anchor12, j.anchorCommit);
+      T.ok(stepId + ' seed ' + seed + ' has the fix swapped in', j.standingFix === true && j.standingSha === 'f8fda4295a99' && j.standingSwapped === true, j.standingSha);
+      T.ok(stepId + ' seed ' + seed + ' ran the far-end policy', j.policySha === 'a7ff5c516440', j.policySha);
+      T.ok(stepId + ' seed ' + seed + ' has 0 instrument errors', Array.isArray(j.instrumentErrors) && j.instrumentErrors.length === 0, 'errors=' + j.instrumentErrors.length);
+      T.ok(stepId + ' seed ' + seed + ' days match the evidence table (' + expDays[seed] + ')', j.days === expDays[seed], 'days=' + j.days);
+      T.ok(stepId + ' seed ' + seed + ' endReason is ' + expEnd[seed], j.endReason === expEnd[seed], j.endReason);
+      T.ok(stepId + ' seed ' + seed + ' maxWave is ' + expWave[seed], j.maxWave === expWave[seed], 'maxWave=' + j.maxWave);
+      T.ok(stepId + ' seed ' + seed + ' deaths match the evidence table (' + expDeaths[seed] + ')', j.deaths.length === expDeaths[seed], 'deaths=' + j.deaths.length);
+      T.ok(stepId + ' seed ' + seed + ' vetSays match the evidence table (' + expVetSays[seed] + ')', j.vetSays.length === expVetSays[seed], 'vetSays=' + j.vetSays.length);
+      const line = logLines.filter(function (l) { return l.seed === seed; })[0];
+      T.ok(stepId + ' seed ' + seed + ' driver-log line matches the JSON', !!line && line.days === j.days && line.endReason === j.endReason && line.deaths === j.deaths.length && line.vetSays === j.vetSays.length && line.errors === j.instrumentErrors.length, line ? 'days=' + line.days + ' end=' + line.endReason : '(no line)');
+      if (j.endReason === 'survived') survived++;
+      if (j.maxWave >= 5) wave5++;
+    });
+    return { survived: survived, wave5: wave5 };
+  }
+  const baseRes = checkCorpus(STEP_BASE, CORPUS_BASE, DRIVER_BASE, '203a327750a2', BASE_DAYS, BASE_END, BASE_DEATHS, BASE_VETSAYS, BASE_WAVE);
+  T.ok('baseline leg reads 1/8 survived', baseRes.survived === 1, baseRes.survived + '/8');
+  T.ok('baseline leg reads wave-5 3/8', baseRes.wave5 === 3, baseRes.wave5 + '/8');
+  const SUBJ_END = { 190449: 'village-lost', 190450: 'village-lost', 190451: 'village-lost', 190452: 'village-lost', 190453: 'village-lost', 190454: 'village-lost', 190455: 'village-lost', 190456: 'village-lost' };
+  const subjRes = checkCorpus(STEP_SUBJ, CORPUS_SUBJ, DRIVER_SUBJ, '493d7a9753ae', SUBJ_DAYS, SUBJ_END, SUBJ_DEATHS, SUBJ_VETSAYS, SUBJ_WAVE);
+  T.ok('subject leg reads 0/8 survived', subjRes.survived === 0, subjRes.survived + '/8');
+  T.ok('subject leg reads wave-5 3/8', subjRes.wave5 === 3, subjRes.wave5 + '/8');
+  // Field-for-field corpus comparison (round-1355 metric review: the
+  // cheap decisive check). Unlike 15F (byte-identical corpora), the
+  // pick is NOT deterministically inert here: days differ on all 8
+  // seeds, deaths and vetSays on all 8 — trajectories diverge
+  // everywhere. Only the survival read stays within one seed.
+  let sameDays = 0, sameDeaths = 0, sameVet = 0, sameEnd = 0, sameWave = 0;
+  SEEDS.forEach(function (seed) {
+    const b = JSON.parse(fs.readFileSync(path.join(CORPUS_BASE, 'culpritbisect-s' + seed + '-culpritbisect-pilot-fix.json'), 'utf8'));
+    const u = JSON.parse(fs.readFileSync(path.join(CORPUS_SUBJ, 'culpritbisect-s' + seed + '-culpritbisect-pilot-fix.json'), 'utf8'));
+    if (b.days === u.days) sameDays++;
+    if (b.deaths.length === u.deaths.length) sameDeaths++;
+    if (b.vetSays.length === u.vetSays.length) sameVet++;
+    if (b.endReason === u.endReason) sameEnd++;
+    if (b.maxWave === u.maxWave) sameWave++;
+  });
+  T.ok('field-for-field: days identical on 0/8 seeds (pick moves trajectories, not inert)', sameDays === 0, sameDays + '/8');
+  T.ok('field-for-field: deaths identical on 0/8 seeds', sameDeaths === 0, sameDeaths + '/8');
+  T.ok('field-for-field: vetSays identical on 0/8 seeds', sameVet === 0, sameVet + '/8');
+  T.ok('field-for-field: endReason identical on 7/8 seeds (only 190450 flips survived->lost)', sameEnd === 7, sameEnd + '/8');
+  T.ok('field-for-field: maxWave identical on 7/8 seeds (only 190452 drops 4->3)', sameWave === 7, sameWave + '/8');
+  // Analyzer adaptation: the repo analyzer hardcodes the collapse
+  // band (it is NOT modified); the summaries were produced by a
+  // scratch copy with only the SEEDS line edited, and carry the
+  // fresh band in their seeds field.
+  const repoAnalyzer = execSync('git show master:scripts/culpritbisect-analyze-20261113.js', { cwd: REPO, stdio: 'pipe' }).toString('utf8');
+  T.ok('repo analyzer (master) still hardcodes the collapse band (scratch-only adaptation, repo untouched)',
+    repoAnalyzer.indexOf('const SEEDS = [190391, 190392, 190393, 190394, 190395, 190396, 190397, 190398];') !== -1, 'collapse band in repo analyzer');
+  const sumBase = JSON.parse(fs.readFileSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP_BASE + '-summary.json'), 'utf8'));
+  const sumSubj = JSON.parse(fs.readFileSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP_SUBJ + '-summary.json'), 'utf8'));
+  T.ok('baseline summary seeds are the fresh band 190449–190456', JSON.stringify(sumBase.seeds) === JSON.stringify(SEEDS), JSON.stringify(sumBase.seeds));
+  T.ok('subject summary seeds are the fresh band 190449–190456', JSON.stringify(sumSubj.seeds) === JSON.stringify(SEEDS), JSON.stringify(sumSubj.seeds));
+  T.ok('baseline summary survived is 1', sumBase.survived === 1, 'survived=' + sumBase.survived);
+  T.ok('subject summary survived is 0', sumSubj.survived === 0, 'survived=' + sumSubj.survived);
+  T.ok('baseline summary median is 109d', sumBase.wall.medianDays === 109, 'median=' + sumBase.wall.medianDays);
+  T.ok('subject summary median is 104d', sumSubj.wall.medianDays === 104, 'median=' + sumSubj.wall.medianDays);
+  T.ok('baseline summary wave-5 is 3/8', sumBase.wall.wave5 === 3, 'wave5=' + sumBase.wall.wave5);
+  T.ok('subject summary wave-5 is 3/8', sumSubj.wall.wave5 === 3, 'wave5=' + sumSubj.wall.wave5);
+  T.ok('both summaries read national/table/wins 0', sumBase.wall.national === 0 && sumBase.wall.table === 0 && sumBase.wall.wins === 0 && sumSubj.wall.national === 0 && sumSubj.wall.table === 0 && sumSubj.wall.wins === 0, '0/0/0 both legs');
+  T.ok('baseline summary deaths total is 657', sumBase.wall.deaths === 657, 'deaths=' + sumBase.wall.deaths);
+  T.ok('subject summary deaths total is 655', sumSubj.wall.deaths === 655, 'deaths=' + sumSubj.wall.deaths);
+  T.ok('baseline summary instrument errors are 0', sumBase.instrumentErrors === 0, 'errors=' + sumBase.instrumentErrors);
+  T.ok('subject summary instrument errors are 0', sumSubj.instrumentErrors === 0, 'errors=' + sumSubj.instrumentErrors);
+
+  // ---- 8. Verdict — BAND-INCONCLUSIVE per the binding fresh-band decision table ----
+  T.section('8. Verdict — baseline 1/8 gates the table: BAND-INCONCLUSIVE, no verdict on the subject');
+  T.ok('classifyFresh(0, 1) is BAND-INCONCLUSIVE (baseline ≤2/8 gates first)', classifyFresh(0, 1) === 'BAND-INCONCLUSIVE', classifyFresh(0, 1));
+  T.ok('classifyFresh(1, 1) would also be BAND-INCONCLUSIVE (the baseline, not the subject, decides)', classifyFresh(1, 1) === 'BAND-INCONCLUSIVE', classifyFresh(1, 1));
+  T.ok('the subject 0/8 is NOT called CARRIER (CARRIER needs baseline ≥3/8)', classifyFresh(0, 4) === 'CARRIER' && classifyFresh(0, 1) !== 'CARRIER', '0/8 on a 1/8 baseline is not CARRIER');
+  T.ok('baseline summary verdict is BAD (bisect classification for ≤1/8)', sumBase.verdict === 'BAD', sumBase.verdict);
+  T.ok('subject summary verdict is BAD (bisect classification for ≤1/8)', sumSubj.verdict === 'BAD', sumSubj.verdict);
+  const ev = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15a-fresh.md'), 'utf8');
+  T.ok('evidence file states the BAND-INCONCLUSIVE verdict', ev.indexOf('BAND-INCONCLUSIVE') !== -1, 'BAND-INCONCLUSIVE present');
+  T.ok('evidence file records baseline 1/8 and subject 0/8', ev.indexOf('1/8') !== -1 && ev.indexOf('0/8') !== -1, '1/8 and 0/8 present');
+  T.ok('evidence file records that 15A stays AMBIGUOUS on the old band (no verdict claimed here)',
+    ev.indexOf('stays AMBIGUOUS') !== -1, 'old-band AMBIGUOUS carried');
+  const pre2 = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-14', 'sim-transplant15a-fresh-prereg.md'), 'utf8');
+  T.ok('prereg carries the binding decision table (baseline gate first)', pre2.indexOf('BAND-INCONCLUSIVE if the baseline itself reads ≤2/8') !== -1, 'decision table present');
+
+  // ---- 9. Standing restored — byte-identical to the far-end native ----
+  T.section('9. Standing restored — byte-identical to the far-end native');
+  // LANDING SHAPE (15C-narrowed precedent): the evidence commits
+  // are rebased --onto master so the landing is evidence-only; the
+  // subject is no longer an ancestor of HEAD. The native-standing
+  // facts are therefore proven against the subject BRANCH (which
+  // pick 1 never touched — the family does not touch standing.js,
+  // §1 leg), and the no-game-code fact against the on-disk file
+  // vs HEAD.
+  const subjectStanding = gitShow(SUBJECT_BRANCH, 'src/js/standing.js');
+  T.ok('subject-branch standing.js sha is 75762cb2...', sha256(subjectStanding) === FAR_NATIVE_STANDING_SHA, sha256(subjectStanding).slice(0, 12));
+  T.ok('subject-branch standing.js equals the far-end blob', subjectStanding === gitShow(FAR, 'src/js/standing.js'), 'byte-identical to far end');
+  const onDisk = fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'), 'utf8');
+  T.ok('on-disk standing.js equals HEAD blob', onDisk === gitShow('HEAD', 'src/js/standing.js'), 'byte-identical to HEAD');
+  T.ok('no src/js file differs from HEAD', git('status --short -- src/js') === '', git('status --short -- src/js') || '(clean)');
+  T.ok('fix file sha is f8fda429...', sha256(gitShow('5157782a4', 'src/js/standing.js')) === FIX_SHA, FIX_SHA.slice(0, 12));
+  // Prereg-commit ancestry resolves by message/subject, not hash
+  // (an adoption rebase rewrites hashes).
+  const armSubjects = git('log --format=%s HEAD');
+  T.ok('prereg commit exists on the arm branch by subject (not hash)',
+    armSubjects.indexOf('sim-transplant15a-fresh-a: prereg') !== -1 && armSubjects.indexOf('STEPs t15a-fresh-base / t15a-fresh-subj') !== -1, 'prereg subject present');
+
+  // ---- 10. Evidence records ----
+  T.section('10. Evidence records — verdict, tables, wall, sense-testing, metric review, telemetry, infra');
+  T.ok('evidence file exists', ev.length > 0, 'evidence/2026-11-14/sim-transplant15a-fresh.md');
+  T.ok('evidence records both per-seed tables (baseline 107/150/109/87/77/88/134/150; subject 110/141/116/41/78/104/96/96)',
+    ev.indexOf('107') !== -1 && ev.indexOf('141') !== -1 && ev.indexOf('190452') !== -1, 'per-seed tables present');
+  T.ok('evidence records the wall numbers (national 0, table 0, wins 0, wave-5 3/8 both legs, medians 109d/104d)',
+    ev.indexOf('national 0') !== -1 && ev.indexOf('wave-5 3/8') !== -1 && ev.indexOf('109d') !== -1 && ev.indexOf('104d') !== -1, 'wall numbers present');
+  T.ok('evidence records the sense-testing section (transcripts read, people-like)',
+    ev.indexOf('Sense-testing') !== -1 && ev.indexOf('read like people') !== -1, 'sense-testing present');
+  T.ok('evidence records the Blooded beat-vs-flag corroboration (beat fires, flag false, on both legs)',
+    ev.indexOf('BLOODED BEAT vs FLAG') !== -1 && ev.indexOf('corroborated') !== -1, 'blooded flag present');
+  T.ok('evidence records the low-trust refusal repeat flag (seed 190452, both legs)',
+    ev.indexOf('low-trust refusal') !== -1 && ev.indexOf('190452') !== -1, 'refusal flag present');
+  T.ok('evidence records the field-for-field comparison (days 0/8 identical, not inert)',
+    ev.indexOf('Field-for-field') !== -1 && ev.indexOf('0/8') !== -1, 'field comparison present');
+  T.ok('evidence records the metric review (fresh band harsher than the collapse band)',
+    ev.indexOf('Metric review') !== -1 && ev.indexOf('harsher') !== -1, 'metric review present');
+  T.ok('evidence records the telemetry refusal (recorder-corpus class)',
+    ev.indexOf('Telemetry deviation check') !== -1 && ev.indexOf('REFUSED') !== -1, 'telemetry refusal present');
+  T.ok('evidence records the step-script hazard (/tmp copy route, SEEDS edit)',
+    ev.indexOf('STEP-SCRIPT HAZARD') !== -1 && ev.indexOf('/tmp') !== -1, 'step-script hazard present');
+  T.ok('evidence records the analyzer hardcode + scratch-only adaptation',
+    ev.indexOf('ANALYZER HARDCODE') !== -1 && ev.indexOf('scratch-only') !== -1, 'analyzer adaptation present');
+  T.ok('evidence records the service-restart recovery (leg 1 interrupted at 1 seed, re-run clean)',
+    ev.indexOf('SERVICE RESTART') !== -1 && ev.indexOf('re-run') !== -1, 'restart recovery present');
+  T.ok('evidence records the safe-commit index clobber repair',
+    ev.indexOf('INDEX CLOBBER') !== -1 && ev.indexOf('update-index') !== -1, 'clobber repair present');
 
   T.done();
 })();
