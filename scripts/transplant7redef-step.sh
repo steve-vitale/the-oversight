@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # transplant7redef-step.sh — run ONE step (sniff, baseline, or subject
-# leg) for the REDEFINED family-7 ablation (arm sim-transplant7redef-a).
+# leg) for the REDEFINED family-7 ablation (arm sim-transplant7redef-a;
+# matched-band rerun arm sim-transplant7redef-match-a).
 #
 # The culpritbisect step script cannot run this arm: it hardcodes
 # SEEDS=190391,...,190398 (the matched band) and restores scratch from
@@ -8,11 +9,15 @@
 # This script is its fresh-band twin: SEEDS from the environment
 # (default the fresh band 190581-190588), the driver + shared analyzer
 # + instrument restored from master, the redefined analyzer restored
-# from the arm branch.
+# from the arm branch. The MATCHED-band rerun passes
+# SEEDS=190391,...,190398 in the environment (see
+# evidence/2026-11-15/sim-transplant7redef-match-prereg.md).
 #
 # Usage: SEEDS=190581,... bash scripts/transplant7redef-step.sh <commit> <step-id>
-#   <commit>  full or short sha to test (e.g. 1ca2c257d, or the subject commit)
-#   <step-id> ep-tip-7redef-sniff | ep-tip-7redef | t7redef-23245d5d6
+#   <commit>  full or short sha to test (e.g. b4343ac9d, or the subject commit)
+#   <step-id> ep-tip-7redef-match-sniff | ep-tip-7redef-match | t7redef-match
+#             (1215Z ids ep-tip-7redef-sniff / ep-tip-7redef /
+#              t7redef-23245d5d6 for the fresh-band run)
 #
 # What it does, in order:
 #   1. Refuses if any TRACKED file is dirty (untracked step corpora
@@ -27,21 +32,22 @@
 #      and the redefined analyzer; logs to
 #      evidence/2026-11-13/culpritbisect-a-<step>-driver.log.
 #   6. Restores the commit's native standing.js byte-identical
-#      (sha-verified), deletes the tooling scratch, verifies the
-#      tracked tree is clean again.
+#      (sha-verified), restores the tooling scratch from the step
+#      commit (finding #2381 fix), verifies the tracked tree is
+#      clean again.
 #   7. Prints the step classification (GOOD / BAD / AMBIGUOUS).
 #
 # It does NOT judge the transplant verdict — the proof
-# (scripts/test-transplant7redef.js §9) applies the subject-minus-
+# (scripts/test-transplant7redef-match.js §9) applies the subject-minus-
 # baseline delta mapping to the two summaries. On ANY failure it
-# restores standing.js + deletes scratch before exiting non-zero.
+# restores standing.js + restores scratch before exiting non-zero.
 # It never commits anything.
 #
 # Run from a /tmp copy with REPO passed in (the detached checkout
 # would otherwise unlink the running script itself).
 set -u
 BRANCH="master"
-ARM_BRANCH="sim-transplant7redef-a"
+ARM_BRANCH="${ARM_BRANCH:-sim-transplant7redef-match-a}"
 FIX_SHA="f8fda4295a99720dcb54d0c69f5fa6836f55cf9d9c8c5d1e51e5f0aa49c43078"
 SEEDS="${SEEDS:-190581,190582,190583,190584,190585,190586,190587,190588}"
 
@@ -57,13 +63,21 @@ REPO="${REPO:-$(cd "$(dirname "$0")/.." && pwd)}"
 cd "$REPO" || exit 2
 
 restore() {
-  # Restore native standing.js for $COMMIT (exact bytes) and delete
-  # tooling scratch. Never fails the run further — best effort, then
-  # the caller verifies.
+  # Restore native standing.js for $COMMIT (exact bytes) and restore
+  # tooling scratch from the step commit. The scratch files are TRACKED
+  # at the step commit (driver + shared analyzer + instrument on
+  # master; redefined analyzer on the arm branch), so deleting them
+  # leaves the tree dirty and fails the script's own clean-tree check
+  # (finding #2381 — struck twice on the 1215Z arm, sniff + baseline).
+  # Restore from HEAD (the detached step commit after a successful
+  # checkout, the arm branch if the checkout failed); fall back to
+  # delete only for a file the commit does not carry.
   if [ -n "${COMMIT:-}" ]; then
     git show "$COMMIT:src/js/standing.js" > src/js/standing.js 2>/dev/null || true
   fi
-  rm -f scripts/culpritbisect-driver-20261113.js scripts/masterregress-analyze-20261113.js scripts/vetfirst-instrument-20261111.js scripts/transplant7redef-analyze.js
+  for f in scripts/culpritbisect-driver-20261113.js scripts/masterregress-analyze-20261113.js scripts/vetfirst-instrument-20261111.js scripts/transplant7redef-analyze.js; do
+    git checkout HEAD -- "$f" 2>/dev/null || rm -f "$f"
+  done
 }
 fail() {
   echo "TRANSPLANT7REDEF STEP FAIL ($STEP @ $COMMIT): $1" >&2
@@ -126,7 +140,9 @@ if [ "$ANALYZER_RC" -ne 0 ]; then
   echo "step $STEP: WARNING analyzer exited $ANALYZER_RC (instrument errors or unclassifiable read — see $LOG)" >&2
 fi
 
-# 6. Restore native standing.js byte-identical; delete scratch; verify.
+# 6. Restore native standing.js byte-identical; restore scratch from
+# the step commit (finding #2381 fix — never delete tracked scratch);
+# verify the tracked tree is clean again.
 restore
 NOW_SHA="$(sha256sum src/js/standing.js | cut -d' ' -f1)"
 [ "$NOW_SHA" = "$NATIVE_SHA" ] || fail "standing.js restore mismatch (have ${NOW_SHA:0:12}, want ${NATIVE_SHA:0:12})"
