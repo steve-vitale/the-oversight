@@ -246,7 +246,7 @@ function stage2() {
   check('evidence file exists', fs.existsSync(EVIDENCE));
   if (fs.existsSync(EVIDENCE)) {
     const ev = fs.readFileSync(EVIDENCE, 'utf8');
-    check('evidence has metric review section', ev.indexOf('metric review') !== -1);
+    check('evidence has metric review section', /metric review/i.test(ev));
     check('evidence names the verdict', /PARITY-(FAIL|OK)|AMBIGUOUS|WITHHELD/.test(ev));
     check('evidence reports wall numbers', ev.indexOf('Wall numbers') !== -1 || ev.indexOf('wall numbers') !== -1);
   }

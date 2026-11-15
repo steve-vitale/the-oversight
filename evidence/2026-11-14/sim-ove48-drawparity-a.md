@@ -329,10 +329,14 @@ DOCUMENTED (open, for the coordinator / next arm):
 
 - 7ebf3777c — prereg + drawparity instrument/driver/analyzer/step
   + proof test (stage-1 22/22)
-- (this run) — judged corpora (base + subj, 8 seeds each) +
+- 2bdca6de3 — judged corpora (base + subj, 8 seeds each) +
   determinism re-runs (2 seeds each leg) + driver logs +
-  comparison JSON + this evidence file + driver setupDraws fix +
-  proof-test check (stage-2 counts in the report)
+  comparison JSON (PARITY-OK) + this evidence file + driver
+  setupDraws fix + proof-test check. Stage-2 proof:
+  `node scripts/test-ove48-drawparity.js --stage2` 23/23 (after
+  the metric-review case fix below); stage-1 re-run 23/23.
+- (this run) — proof-test metric-review case fix + this commit
+  list (stage-2 23/23).
 - Note: the first safe-commit of this run hit the known
   index-clobber (AGENTS.md 2026-10-22): after commit 7ebf3777c the
   main index showed the 6 committed files staged-as-deleted. The
