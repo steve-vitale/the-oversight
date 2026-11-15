@@ -247,7 +247,7 @@ prior bisect / transplant arms.
   strings, policy + standing match the far end); §9 takes the
   GATE-STOP branch after the baseline leg (baseline 1/8 ≤ 2, no
   subject summary/log/corpus, evidence records UNMEASURED). Final
-  re-run count recorded below.
+  re-run after the evidence commit: 122 passed, 0 failed.
 - `scripts/test-transplant8c-dlgmore.js` — far-end control FAIL
   (both cases, exit 1) before the subject; subject PASS (both cases,
   exit 0) after.
