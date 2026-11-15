@@ -124,6 +124,13 @@ const ARM_FILES = [
   'scripts/test-alignstep-a.js',
   'evidence/2026-11-15/sim-alignstep-a.md',
 ];
+// Step outputs this arm may leave uncommitted (baseline leg corpora —
+// committed with the evidence file, per the guardablate-fresh precedent).
+const STEP_OUTPUTS = [
+  'evidence/2026-11-13/culpritbisect-a-ep-tip-alignstep-driver.log',
+  'evidence/2026-11-13/culpritbisect-a-ep-tip-alignstep-summary.json',
+  'evidence/2026-11-13/perseed-culpritbisect-a-ep-tip-alignstep/',
+];
 
 function sha256(text) { return crypto.createHash('sha256').update(text).digest('hex'); }
 function git(args) {
@@ -308,8 +315,8 @@ function finishLotteryBlock(srcText) {
   // a fixed slice by one).
   const rawStatus = execSync('git status --porcelain', { cwd: REPO, stdio: 'pipe' }).toString();
   const dirty = rawStatus.split('\n').filter(Boolean).map(function (ln) { return ln.slice(3); });
-  T.ok('only the arm files may be uncommitted (prereg, this proof, evidence)',
-    dirty.every(function (f) { return ARM_FILES.indexOf(f) !== -1; }),
+  T.ok('only the arm files and step outputs may be uncommitted (prereg, this proof, evidence, baseline corpora)',
+    dirty.every(function (f) { return ARM_FILES.indexOf(f) !== -1 || STEP_OUTPUTS.indexOf(f) !== -1; }),
     dirty.length === 0 ? 'clean' : dirty.join(', '));
 
   T.section('5. Seed-band identity — matched band, reused by design');
