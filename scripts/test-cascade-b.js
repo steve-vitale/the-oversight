@@ -21,8 +21,8 @@
 // process per case and aggregates; exit 1 if any case fails. Each case
 // prints one JSON line.
 //   static          guard text present inside monsterTurn; only
-//                   src/js/game.js differs vs HEAD among src files;
-//                   competent.js + competent-answercourt-b.js
+//                   src/js/game.js differs in the commit that introduced
+//                   the guard; competent.js + competent-answercourt-b.js
 //                   unmodified; no flee/toughness/damage code touched.
 //   unit-lingering  real harness, seed 100207, staged scenarios on one
 //                   Game: (1) lingering raider adjacent to the scholar
@@ -86,21 +86,22 @@ if (kase === 'static') {
   const mtBody = raw.slice(mtIdx, mtEnd < 0 ? mtIdx + 8000 : mtEnd);
   if (!/if \(m\.lingering\) return;/.test(mtBody)) fail('static', 'lingering guard not inside monsterTurn');
   if (!/CASCADE \(sim-cascade-b/.test(mtBody)) fail('static', 'guard comment missing in monsterTurn');
-  // STATIC (gorgeprice2-b fix 2026-11-15): the original check diffed the
-  // worktree against HEAD, which only works while the lever is
-  // uncommitted. The lever is now committed, so diff against the
-  // merge-base with master instead — the intent is unchanged: the
-  // game.js change vs master is exactly the guard hunk.
-  let base = '';
-  try { base = execSync('git merge-base HEAD master', { cwd: repo, encoding: 'utf8' }).trim(); } catch (e) { fail('static', 'git merge-base failed: ' + e.message); }
+  // MERGE-AWARE (2026-11-15): merge-base with master is HEAD once the lever
+  // lands, so the diff is empty and the check fails vacuously on master.
+  // Locate the commit that introduced the guard string instead and diff
+  // ITS parent..it — the same assertion, valid on a branch and on master.
+  let lever = '';
+  try { lever = execSync("git log --format=%H -S 'if (m.lingering) return;' -- src/js/game.js | tail -1", { cwd: repo, encoding: 'utf8' }).trim(); } catch (e) { fail('static', 'lever-commit lookup failed: ' + e.message); }
+  if (!lever) fail('static', 'no commit introduces the lingering guard');
+  const base = lever + '^';
   let changed = [];
-  try { changed = execSync('git diff ' + base + ' --name-only', { cwd: repo, encoding: 'utf8' }).trim().split('\n').filter(Boolean); } catch (e) { fail('static', 'git diff failed: ' + e.message); }
+  try { changed = execSync('git diff ' + base + ' ' + lever + ' --name-only', { cwd: repo, encoding: 'utf8' }).trim().split('\n').filter(Boolean); } catch (e) { fail('static', 'git diff failed: ' + e.message); }
   if (changed.indexOf('scripts/policies/competent.js') >= 0) fail('static', 'competent.js modified');
   if (changed.indexOf('scripts/policies/competent-answercourt-b.js') >= 0) fail('static', 'competent-answercourt-b.js modified');
   const srcChanged = changed.filter(function (f) { return f.indexOf('src/') === 0; });
   if (srcChanged.length !== 1 || srcChanged[0] !== 'src/js/game.js') fail('static', 'src change must be exactly src/js/game.js, got: ' + srcChanged.join(','));
   let diff = '';
-  try { diff = execSync('git diff ' + base + ' -- src/js/game.js', { cwd: repo, encoding: 'utf8' }); } catch (e) { fail('static', 'git diff game.js failed: ' + e.message); }
+  try { diff = execSync('git diff ' + base + ' ' + lever + ' -- src/js/game.js', { cwd: repo, encoding: 'utf8' }); } catch (e) { fail('static', 'git diff game.js failed: ' + e.message); }
   if (/tbBarrierExit|tbPlayerEndTurn|fleeRepair/i.test(diff)) fail('static', 'diff touches flee code');
   if (/tbDamage\(|maxHealth\(\)|damage\s*[:=]/i.test(diff)) fail('static', 'diff touches damage/toughness code');
   const hunks = (diff.match(/^@@/gm) || []).length;
