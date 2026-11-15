@@ -192,8 +192,8 @@ day has a job.
 | Survived /8 | 3/8 | 0/8 |
 | Median survival | 129d | 134d |
 | Wins / national / table | 0 / 0 / 0 | 0 / 0 / 0 |
-| Wave 5 reached /8 | 0/8 | 4/8 |
-| Wave 4 reached /8 | 7/8 | 8/8 |
+| Wave-5 reached /8 | 0/8 | 4/8 |
+| Wave-4 reached /8 | 7/8 | 8/8 |
 | Deaths (all seeds) | 533 | 635 |
 | Standing range | 0–199 | 175–470 |
 | Scale rank | regional 7, village 1 | regional 8 |
