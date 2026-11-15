@@ -368,12 +368,17 @@ stable across two bands.
   measurement-pair failures were adjudicated from their error text +
   attribution, not re-run — both are staleness classes, not flakes.
   **Gate: GO after adjudication (0 attributable).**
-- Commits on branch `journey-scale`: prereg + instruments (043109b99),
-  run note + prereg closeout [hash at closeout].
+- Commits on branch `journey-scale`: prereg + instruments (bdbccc17f
+  after rebase; originally 043109b99), run note + prereg closeout
+  (a4b8fb0b0 after rebase; originally b8a98d3e6).
 - Master moved during the run (9fa74d252 → 0116c16e7, four
-  evidence-only H1 transplant 7brain commits). Rebased onto 0116c16e7,
-  analyzer proof re-run green, then merged ff-only.
-- Merge/release/rotation: [to fill at closeout].
+  evidence-only H1 transplant 7brain commits). Rebased onto 0116c16e7
+  clean (2/2 picks, no stops), analyzer proof re-run green (47/47),
+  then merged ff-only.
+- Merge/release/rotation: merged locally, pending ship (no version tag;
+  the ship job reports the tag when it goes live). Worktree released,
+  branch deleted, final reap run, main tree verified clean. Rotation
+  written 3→0.
 
 ## Carried (not this run's to build)
 
