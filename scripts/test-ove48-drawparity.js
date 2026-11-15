@@ -197,6 +197,11 @@ function stage1() {
       ['--baseR2', path.join(tmp, 'base-r2'), '--subjR2', path.join(tmp, 'subj-r2-bad')]);
     check('analyzer WITHHELD on r2 mismatch', out.indexOf('verdict: WITHHELD') !== -1, out.split('\n').slice(0, 2).join(' | '));
   } catch (e) { check('analyzer synthetic verdicts', false, String((e.stdout || '') + (e.message || '')).slice(-300)); }
+  // Post-judgment setupDraws fix: the driver zeroes the counters
+  // before loadGame so setup draws are clean (see the driver comment).
+  const drv = fs.readFileSync(DRIVER, 'utf8');
+  check('driver zeroes counters before loadGame (setupDraws fix)',
+    drv.indexOf('DP.resetRun()') !== -1 && drv.indexOf('DP.resetRun()') < drv.indexOf('loadGame({'));
   // Zero src/js changes on this branch vs its merge-base with master
   // (pure object-DB read — no worktree scan, which is slow on this tree).
   try {

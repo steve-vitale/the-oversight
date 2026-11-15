@@ -173,8 +173,21 @@ function shadowOldCount(Game, minWave) {
 
 async function oneRun(seed) {
   const policy = competent;
-  const { Game } = await loadGame({ seed: seed, mode: 'competent-drawparity', fullTelemetry: false });
   const errors = [];
+  // POST-JUDGMENT FIX (2026-11-15, after the judged legs): zero the
+  // counters BEFORE loadGame. Without this, the setupDraws recorded
+  // by the post-setup resetRun() include the previous seed's whole
+  // run total (the counter is process-global and seeds run in one
+  // process), so setupDraws for seeds 2–8 read hundreds of thousands
+  // too high and differ spuriously between legs. The judged legs ran
+  // with the pre-fix driver; the fix changes ONLY the setupDraws
+  // bookkeeping — the run-phase reset point (after setupGame) is
+  // unchanged, so totalDraws, daySeries, picks, and deaths are
+  // unaffected. Corrected setup draws for the judged legs were
+  // recovered arithmetically in the evidence (recorded setupDraws
+  // minus the previous seed's totalDraws) and match exactly on 8/8.
+  try { DP.resetRun(); } catch (e) { errors.push('draw-prereset: ' + String(e.message).slice(0, 80)); }
+  const { Game } = await loadGame({ seed: seed, mode: 'competent-drawparity', fullTelemetry: false });
 
   // Draw instrument: method wraps installed after loadGame, before
   // setupGame. Pure observers — no draws, no state writes.

@@ -1,0 +1,609 @@
+{
+  "arm": "ove48-drawparity",
+  "verdict": "PARITY-OK",
+  "medianDelta": 16254.5,
+  "totalDelta": 187831,
+  "nPositive": 5,
+  "nNegative": 3,
+  "nZero": 0,
+  "bucketDelta": {
+    "dawn": 0,
+    "selectWant": 540,
+    "talk": 712,
+    "other": 186579
+  },
+  "localization": {
+    "verdict": "n/a (verdict PARITY-OK)",
+    "bucketShares": {
+      "dawn": 0,
+      "selectWant": 0.0028749247994207558,
+      "talk": 0.003790641587384404,
+      "other": 0.9933344336131948
+    },
+    "carrying": []
+  },
+  "timing": {
+    "precedesCount": 6,
+    "of": 8,
+    "perSeed": [
+      {
+        "seed": 190457,
+        "drawDivDay": 5,
+        "deathDivDay": 6,
+        "deathDivExpected": 6,
+        "precedes": true
+      },
+      {
+        "seed": 190458,
+        "drawDivDay": 9,
+        "deathDivDay": 11,
+        "deathDivExpected": 11,
+        "precedes": true
+      },
+      {
+        "seed": 190459,
+        "drawDivDay": 9,
+        "deathDivDay": 11,
+        "deathDivExpected": 11,
+        "precedes": true
+      },
+      {
+        "seed": 190460,
+        "drawDivDay": 5,
+        "deathDivDay": 6,
+        "deathDivExpected": 6,
+        "precedes": true
+      },
+      {
+        "seed": 190461,
+        "drawDivDay": 6,
+        "deathDivDay": 6,
+        "deathDivExpected": 6,
+        "precedes": false
+      },
+      {
+        "seed": 190462,
+        "drawDivDay": 10,
+        "deathDivDay": 14,
+        "deathDivExpected": 14,
+        "precedes": true
+      },
+      {
+        "seed": 190463,
+        "drawDivDay": 2,
+        "deathDivDay": 4,
+        "deathDivExpected": 4,
+        "precedes": true
+      },
+      {
+        "seed": 190464,
+        "drawDivDay": 4,
+        "deathDivDay": 4,
+        "deathDivExpected": 4,
+        "precedes": false
+      }
+    ]
+  },
+  "deathDivMatch": "8/8",
+  "setupMismatch": [
+    {
+      "seed": 190458,
+      "base": 544648,
+      "subj": 487955
+    },
+    {
+      "seed": 190459,
+      "base": 364611,
+      "subj": 373990
+    },
+    {
+      "seed": 190460,
+      "base": 532889,
+      "subj": 377605
+    },
+    {
+      "seed": 190461,
+      "base": 446792,
+      "subj": 475754
+    },
+    {
+      "seed": 190462,
+      "base": 471461,
+      "subj": 494591
+    },
+    {
+      "seed": 190463,
+      "base": 595324,
+      "subj": 473943
+    },
+    {
+      "seed": 190464,
+      "base": 81390,
+      "subj": 464532
+    }
+  ],
+  "validity": {
+    "V1": {
+      "baseOpens": 875,
+      "subjOpens": 935,
+      "pass": true
+    },
+    "V2": {
+      "daysMatch": true,
+      "survivedBase": 3,
+      "survivedSubj": 0,
+      "pass": true
+    },
+    "V3": {
+      "baseDawnCalls": 0,
+      "subjDawnCalls": 569,
+      "pass": true
+    },
+    "V4": {
+      "instrumentErrors": 0,
+      "pass": true
+    },
+    "V5": {
+      "pass": true,
+      "mismatches": []
+    },
+    "notes": []
+  },
+  "determinism": {
+    "checked": true,
+    "pass": true,
+    "mismatches": []
+  },
+  "wall": {
+    "survivedBase": 3,
+    "survivedSubj": 0,
+    "medianDaysBase": 126.5,
+    "medianDaysSubj": 131.5,
+    "maxWaveBase": 4,
+    "maxWaveSubj": 5,
+    "wonBase": 0,
+    "wonSubj": 0
+  },
+  "perSeed": [
+    {
+      "seed": 190457,
+      "baseDays": 150,
+      "subjDays": 134,
+      "baseEnd": "survived",
+      "subjEnd": "village-lost",
+      "baseTotalDraws": 536984,
+      "subjTotalDraws": 480291,
+      "delta": -56693,
+      "baseByBucket": {
+        "dawn": 0,
+        "selectWant": 870,
+        "talk": 714,
+        "other": 535400
+      },
+      "subjByBucket": {
+        "dawn": 0,
+        "selectWant": 730,
+        "talk": 829,
+        "other": 478732
+      },
+      "baseSetupDraws": 7435,
+      "subjSetupDraws": 7435,
+      "basePicks": {
+        "opens": 157,
+        "weightedPicks": 87,
+        "weightedPickDraws": 870,
+        "meanDrawsPerPick": 5.54140127388535,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 87,
+          "seed": 70
+        }
+      },
+      "subjPicks": {
+        "opens": 127,
+        "weightedPicks": 73,
+        "weightedPickDraws": 730,
+        "meanDrawsPerPick": 5.748031496062992,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 73,
+          "seed": 54
+        }
+      },
+      "baseDawnCalls": 0,
+      "subjDawnCalls": 73,
+      "baseErrors": 0,
+      "subjErrors": 0,
+      "drawDivDay": 5,
+      "deathDivDay": 6,
+      "deathDivExpected": 6,
+      "deathDivMatch": true,
+      "drawPrecedesDeath": true
+    },
+    {
+      "seed": 190458,
+      "baseDays": 101,
+      "subjDays": 108,
+      "baseEnd": "village-lost",
+      "subjEnd": "village-lost",
+      "baseTotalDraws": 356924,
+      "subjTotalDraws": 366303,
+      "delta": 9379,
+      "baseByBucket": {
+        "dawn": 0,
+        "selectWant": 570,
+        "talk": 572,
+        "other": 355782
+      },
+      "subjByBucket": {
+        "dawn": 0,
+        "selectWant": 730,
+        "talk": 749,
+        "other": 364824
+      },
+      "baseSetupDraws": 544648,
+      "subjSetupDraws": 487955,
+      "basePicks": {
+        "opens": 101,
+        "weightedPicks": 57,
+        "weightedPickDraws": 570,
+        "meanDrawsPerPick": 5.643564356435643,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 57,
+          "seed": 44
+        }
+      },
+      "subjPicks": {
+        "opens": 109,
+        "weightedPicks": 73,
+        "weightedPickDraws": 730,
+        "meanDrawsPerPick": 6.697247706422019,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 73,
+          "seed": 36
+        }
+      },
+      "baseDawnCalls": 0,
+      "subjDawnCalls": 73,
+      "baseErrors": 0,
+      "subjErrors": 0,
+      "drawDivDay": 9,
+      "deathDivDay": 11,
+      "deathDivExpected": 11,
+      "deathDivMatch": true,
+      "drawPrecedesDeath": true
+    },
+    {
+      "seed": 190459,
+      "baseDays": 150,
+      "subjDays": 109,
+      "baseEnd": "survived",
+      "subjEnd": "village-lost",
+      "baseTotalDraws": 525275,
+      "subjTotalDraws": 369991,
+      "delta": -155284,
+      "baseByBucket": {
+        "dawn": 0,
+        "selectWant": 690,
+        "talk": 651,
+        "other": 523934
+      },
+      "subjByBucket": {
+        "dawn": 0,
+        "selectWant": 580,
+        "talk": 702,
+        "other": 368709
+      },
+      "baseSetupDraws": 364611,
+      "subjSetupDraws": 373990,
+      "basePicks": {
+        "opens": 113,
+        "weightedPicks": 69,
+        "weightedPickDraws": 690,
+        "meanDrawsPerPick": 6.106194690265487,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 69,
+          "seed": 44
+        }
+      },
+      "subjPicks": {
+        "opens": 95,
+        "weightedPicks": 58,
+        "weightedPickDraws": 580,
+        "meanDrawsPerPick": 6.105263157894737,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 58,
+          "seed": 37
+        }
+      },
+      "baseDawnCalls": 0,
+      "subjDawnCalls": 58,
+      "baseErrors": 0,
+      "subjErrors": 0,
+      "drawDivDay": 9,
+      "deathDivDay": 11,
+      "deathDivExpected": 11,
+      "deathDivMatch": true,
+      "drawPrecedesDeath": true
+    },
+    {
+      "seed": 190460,
+      "baseDays": 124,
+      "subjDays": 129,
+      "baseEnd": "village-lost",
+      "subjEnd": "village-lost",
+      "baseTotalDraws": 439575,
+      "subjTotalDraws": 468537,
+      "delta": 28962,
+      "baseByBucket": {
+        "dawn": 0,
+        "selectWant": 680,
+        "talk": 830,
+        "other": 438065
+      },
+      "subjByBucket": {
+        "dawn": 0,
+        "selectWant": 800,
+        "talk": 693,
+        "other": 467044
+      },
+      "baseSetupDraws": 532889,
+      "subjSetupDraws": 377605,
+      "basePicks": {
+        "opens": 122,
+        "weightedPicks": 68,
+        "weightedPickDraws": 680,
+        "meanDrawsPerPick": 5.573770491803279,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 68,
+          "seed": 54
+        }
+      },
+      "subjPicks": {
+        "opens": 128,
+        "weightedPicks": 80,
+        "weightedPickDraws": 800,
+        "meanDrawsPerPick": 6.25,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 80,
+          "seed": 48
+        }
+      },
+      "baseDawnCalls": 0,
+      "subjDawnCalls": 80,
+      "baseErrors": 0,
+      "subjErrors": 0,
+      "drawDivDay": 5,
+      "deathDivDay": 6,
+      "deathDivExpected": 6,
+      "deathDivMatch": true,
+      "drawPrecedesDeath": true
+    },
+    {
+      "seed": 190461,
+      "baseDays": 129,
+      "subjDays": 135,
+      "baseEnd": "village-lost",
+      "subjEnd": "village-lost",
+      "baseTotalDraws": 463896,
+      "subjTotalDraws": 487026,
+      "delta": 23130,
+      "baseByBucket": {
+        "dawn": 0,
+        "selectWant": 710,
+        "talk": 557,
+        "other": 462629
+      },
+      "subjByBucket": {
+        "dawn": 0,
+        "selectWant": 710,
+        "talk": 744,
+        "other": 485572
+      },
+      "baseSetupDraws": 446792,
+      "subjSetupDraws": 475754,
+      "basePicks": {
+        "opens": 119,
+        "weightedPicks": 71,
+        "weightedPickDraws": 710,
+        "meanDrawsPerPick": 5.966386554621849,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 71,
+          "seed": 48
+        }
+      },
+      "subjPicks": {
+        "opens": 125,
+        "weightedPicks": 71,
+        "weightedPickDraws": 710,
+        "meanDrawsPerPick": 5.68,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 71,
+          "seed": 54
+        }
+      },
+      "baseDawnCalls": 0,
+      "subjDawnCalls": 71,
+      "baseErrors": 0,
+      "subjErrors": 0,
+      "drawDivDay": 6,
+      "deathDivDay": 6,
+      "deathDivExpected": 6,
+      "deathDivMatch": true,
+      "drawPrecedesDeath": false
+    },
+    {
+      "seed": 190462,
+      "baseDays": 150,
+      "subjDays": 123,
+      "baseEnd": "survived",
+      "subjEnd": "village-lost",
+      "baseTotalDraws": 587985,
+      "subjTotalDraws": 466604,
+      "delta": -121381,
+      "baseByBucket": {
+        "dawn": 0,
+        "selectWant": 780,
+        "talk": 603,
+        "other": 586602
+      },
+      "subjByBucket": {
+        "dawn": 0,
+        "selectWant": 650,
+        "talk": 589,
+        "other": 465365
+      },
+      "baseSetupDraws": 471461,
+      "subjSetupDraws": 494591,
+      "basePicks": {
+        "opens": 129,
+        "weightedPicks": 78,
+        "weightedPickDraws": 780,
+        "meanDrawsPerPick": 6.046511627906977,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 78,
+          "seed": 51
+        }
+      },
+      "subjPicks": {
+        "opens": 100,
+        "weightedPicks": 65,
+        "weightedPickDraws": 650,
+        "meanDrawsPerPick": 6.5,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 65,
+          "seed": 35
+        }
+      },
+      "baseDawnCalls": 0,
+      "subjDawnCalls": 65,
+      "baseErrors": 0,
+      "subjErrors": 0,
+      "drawDivDay": 10,
+      "deathDivDay": 14,
+      "deathDivExpected": 14,
+      "deathDivMatch": true,
+      "drawPrecedesDeath": true
+    },
+    {
+      "seed": 190463,
+      "baseDays": 23,
+      "subjDays": 138,
+      "baseEnd": "village-lost",
+      "subjEnd": "village-lost",
+      "baseTotalDraws": 73854,
+      "subjTotalDraws": 456996,
+      "delta": 383142,
+      "baseByBucket": {
+        "dawn": 0,
+        "selectWant": 150,
+        "talk": 171,
+        "other": 73533
+      },
+      "subjByBucket": {
+        "dawn": 0,
+        "selectWant": 650,
+        "talk": 838,
+        "other": 455508
+      },
+      "baseSetupDraws": 595324,
+      "subjSetupDraws": 473943,
+      "basePicks": {
+        "opens": 21,
+        "weightedPicks": 15,
+        "weightedPickDraws": 150,
+        "meanDrawsPerPick": 7.142857142857143,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 15,
+          "seed": 6
+        }
+      },
+      "subjPicks": {
+        "opens": 107,
+        "weightedPicks": 65,
+        "weightedPickDraws": 650,
+        "meanDrawsPerPick": 6.074766355140187,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 65,
+          "seed": 42
+        }
+      },
+      "baseDawnCalls": 0,
+      "subjDawnCalls": 65,
+      "baseErrors": 0,
+      "subjErrors": 0,
+      "drawDivDay": 2,
+      "deathDivDay": 4,
+      "deathDivExpected": 4,
+      "deathDivMatch": true,
+      "drawPrecedesDeath": true
+    },
+    {
+      "seed": 190464,
+      "baseDays": 115,
+      "subjDays": 142,
+      "baseEnd": "village-lost",
+      "subjEnd": "village-lost",
+      "baseTotalDraws": 393793,
+      "subjTotalDraws": 470369,
+      "delta": 76576,
+      "baseByBucket": {
+        "dawn": 0,
+        "selectWant": 700,
+        "talk": 936,
+        "other": 392157
+      },
+      "subjByBucket": {
+        "dawn": 0,
+        "selectWant": 840,
+        "talk": 602,
+        "other": 468927
+      },
+      "baseSetupDraws": 81390,
+      "subjSetupDraws": 464532,
+      "basePicks": {
+        "opens": 113,
+        "weightedPicks": 70,
+        "weightedPickDraws": 700,
+        "meanDrawsPerPick": 6.1946902654867255,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 70,
+          "seed": 43
+        }
+      },
+      "subjPicks": {
+        "opens": 144,
+        "weightedPicks": 84,
+        "weightedPickDraws": 840,
+        "meanDrawsPerPick": 5.833333333333333,
+        "meanDrawsPerWeightedPick": 10,
+        "bySource": {
+          "weighted-pick": 84,
+          "seed": 60
+        }
+      },
+      "baseDawnCalls": 0,
+      "subjDawnCalls": 84,
+      "baseErrors": 0,
+      "subjErrors": 0,
+      "drawDivDay": 4,
+      "deathDivDay": 4,
+      "deathDivExpected": 4,
+      "deathDivMatch": true,
+      "drawPrecedesDeath": false
+    }
+  ]
+}
