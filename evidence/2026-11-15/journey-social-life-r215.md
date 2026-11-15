@@ -364,7 +364,15 @@ Proof tests for the carried instruments re-run green in the worktree
 
 ## Landing
 
-[LANDING]
+Evidence commit 97bc35f83 (14 files; safe-commit index clobber struck once,
+repaired via ls-tree -r + index-info, status/diff-HEAD verified empty),
+rebased clean onto master e577ef5f8 as 6f9ea63ef (single-commit rebase, no
+conflicts, no stop-at-pick quirk), proof tests re-run post-rebase GREEN
+(threetimes 11/11, invite-small 2/2). Merged ff-only; worktree released,
+branch deleted, rotation-b written 5 -> 6 (crisis next), lock deleted.
+Merged locally, pending ship — no version tag. Telemetry baseline NOT
+rolled (schema drift, see above). Pristine scratch dir
+~/workspace/scratch/smoke-r215 kept (smoke JSON only, outside the repo).
 
 ## Reachable / fun / winnable
 
