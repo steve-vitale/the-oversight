@@ -6945,6 +6945,54 @@
           // falls through to the generic resume line and never engages.
           // Other threads never touch the want.
           if (akey === 'want' && beat && typeof this.convoWantEngage === 'function') this.convoWantEngage(vid, 'engage');
+          // WANT-QUESTION RE-POSE (journey-landing r137 2026-11-15): the
+          // beat is null for a deflected question-want — curious engageBeat
+          // returns null by the r121 first-reveal guard (no answer in this
+          // sitting), so the handler used to fall through to the generic
+          // acknowledgment and the thread died there (Liam 1144-d6, Yara
+          // 1142-d5, r136 corpus: "About needing to be alone — yeah, we
+          // never did get back to that." and nothing more). The player
+          // picked the thread back up by name — re-hang THE SAME question
+          // (from c.want.qid / seedQid — the intra-sitting shape keeps it
+          // on the live want; a fresh opener pick would hang a DIFFERENT
+          // question, the r14 defect) via convoQuestionDef +
+          // convoAcceptWantQuestion, the machinery the 'request' branch
+          // already uses, and speak the question itself, bare (r215
+          // stutter ruling: a resume asks the question, it never prefixes
+          // "About X —"). The want reopens (stage 3 -> 1, resolution
+          // cleared) so a later answer can engage it — the turn tail only
+          // engages answers while stage < 3. Scoped to question-wants
+          // (def.answerEngages — today only curious) with a known,
+          // unanswered qid; the label check guards the cross-sitting
+          // shape where the seed expired but the thread outlived it (a
+          // fresh want's different question must never wear the planted
+          // thread's name). Everything else falls through to the generic
+          // line unchanged; the HEED-ENGAGE path above (beat non-null) is
+          // untouched. The re-posed line rides the same structural
+          // exemption as the generic fallback it replaces (beat null ->
+          // structuralTurn true): a deliberate re-ask at the player's
+          // explicit request, not a ledger slip.
+          let reposeLine = null;
+          if (akey === 'want' && !beat) {
+            try {
+              const w = c.want;
+              if (w && w.def && w.def.answerEngages && !c.pendingQ) {
+                const qid = (w.qid || w.seedQid) || null;
+                const answered = !!(qid && c.answered && (qid in c.answered) && c.answered[qid] !== 'honest_pass');
+                if (qid && !answered && typeof this.convoQuestionDef === 'function' &&
+                    typeof this.convoAcceptWantQuestion === 'function') {
+                  const qd = this.convoQuestionDef(qid);
+                  const topic = (typeof this.convoQuestionTopic === 'function') ? this.convoQuestionTopic(qid) : null;
+                  const labelMismatch = !!(topic && o && o.label && topic !== o.label);
+                  if (qd && qd.q && !labelMismatch) {
+                    this.convoAcceptWantQuestion(vid, { question: { id: qd.id, answers: qd.answers || [] } });
+                    w.stage = 1; w.resolution = null;
+                    reposeLine = (typeof this.voiceLine === 'function') ? this.voiceLine(vid, qd.q) : qd.q;
+                  }
+                }
+              }
+            } catch (e) {}
+          }
           // SPENT (journey-succession 2026-10-12): resumed once — the
           // thread is live now; the subject-change replant must not re-offer
           // the identical "we never finished" line this sitting.
@@ -6961,7 +7009,7 @@
           // 2026-10-14 sociallife-r1 run). Naming the thread keeps each
           // resume distinct in the ledger AND reads like a person picking
           // up the actual thread instead of a menu.
-          const resumeLine = beat || (predT
+          const resumeLine = reposeLine || beat || (predT
             ? `"About ${label} — that was ${predT}'s thread. We never did get back to that."`
             : `"About ${label} — yeah, we never did get back to that."`);
           // R17: the generic fallback is structural grammar (exempt from the
