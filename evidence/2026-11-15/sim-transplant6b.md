@@ -320,13 +320,13 @@ to check, and the tool refuses recorder-corpus class anyway).
 - No telemetry deviation check run: no corpus exists (see above) —
   recorded, baseline NOT rolled.
 - Closeout: arm branch `sim-transplant6b-a`, proof-verified tip
-  931300dd0 + the evidence + proof-amendment commits below (final tip
-  recorded in the commit line itself); subject branch
-  `transplant-6b-subject` LEFT at the far end `203a32775` (no subject
-  commit); worktree verified clean at closeout (tracked tree empty,
-  standing.js == HEAD, no swap residue — no swap ever ran). One
-  record-only commit follows the proof-verified tip (this file's
-  tip-hash line itself).
+  553c44b8b (rebased onto master 8b77f0f40 at closeout; pre-rebase
+  tip 8583cc456, stage-1 tip 931300dd0 — same trees, proofs re-run
+  after the rebase); subject branch `transplant-6b-subject` LEFT at
+  the far end `203a32775` (no subject commit); worktree verified
+  clean at closeout (tracked tree empty, standing.js == HEAD, no swap
+  residue — no swap ever ran). This line is the record-only commit
+  that follows the proof-verified tip.
 
 ## Infrastructure
 
