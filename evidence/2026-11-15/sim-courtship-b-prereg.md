@@ -86,9 +86,16 @@ built by a visit and a gift, not a farmed number:
    village is unlinked, so trust does not move; famine ends if
    their pantry passes 6,000 kcal). 2,000 kcal is the game's own
    first-gesture gift size (answerAccord 'gift'). Pantry gate:
-   Haven pantry > 20,000 kcal at the moment of giving — the same
-   affordability gate as tend — so the gift never drops the pantry
-   below the propose gate (20,000 − 2,000 = 18,000 > 12,000).
+   Haven pantry > 12,000 kcal at the moment of giving — the propose
+   gate itself, the engine's own affordability line for courtship
+   (the covenant policy only proposes above 12,000). The gift
+   (2,000) leaves the pantry above 10,000; the cost bar judges any
+   starvation the spend causes. (AMENDED pre-build, before any sim:
+   as first written the gate was 20,000, the tend gate — which fired
+   on only 2/8 onlylead2 seeds. A lever that fires on ~2/8 seeds
+   cannot move a ≥3/8 staging bar. The 12,000 gate is the courtship
+   affordability line, not a loosening of the tend gate, which stays
+   at 20,000. No judged numbers have been seen; no sim has run.)
    Maximum lever spend: 3 villages × 2,000 kcal = 6,000 kcal per
    run, all of it real food out of Haven's pantry.
 
