@@ -79,7 +79,11 @@ if (kase === 'static') {
   // then, the recorder-only tree has no lever to check; record that
   // explicitly instead of failing vacuously. The lever is the wild-fight
   // seed in resolveWildMonsterEncounter (src/js/game.js), so the pick
-  // searches game.js for the PRODUCERPARTY marker.
+  // searches game.js for the PRODUCERPARTY marker. NOTE (pilot NO-GO):
+  // the lever commit a02156ca was REVERTED after the pilot NO-GO, so
+  // the live tree carries no lever; this check validates the HISTORICAL
+  // lever commit's diff shape (exactly src/js/game.js, seed call,
+  // vFlee gate, no standing/gate/table touch), which stays true.
   let lever = '';
   try { lever = execSync("git log --format=%H -S 'PRODUCERPARTY' -- src/js/game.js | tail -1", { cwd: repo, encoding: 'utf8' }).trim(); } catch (e) { lever = ''; }
   if (!lever) {
