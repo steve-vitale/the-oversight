@@ -40,10 +40,14 @@
 //      vs +4/-0 (family-diff) distinction is stated in the prereg.
 //   3. Merge-tree prediction (read-only) — the four conflicted
 //      hunks carry ALL 12 markers (3 + 9) with the exact
-//      ours/theirs line counts per region (6/8, 3/22, 1/23, 1/24);
+//      ours/theirs line counts per region (9/8, 3/22, 1/23, 1/24);
 //      the four clean hunks are marker-free; the test file is
 //      'added in remote' (clean addition); NO merged sections, NO
-//      delete/modify (DU) entries.
+//      delete/modify (DU) entries. NOTE: the merge-tree display
+//      ELIDES unchanged middle lines of a long ours span (hunk 1
+//      shows only 6 of its 9 ours lines), so region contents are
+//      derived from the files by anchor lines (REGIONS below),
+//      not from the merge-tree display.
 //   4. Mechanism analysis — reference counts at the far end vs
 //      the merge for every name the hunks touch; secretOutcome
 //      def+use inside the region; convoWouldBlock EXISTS at the far
@@ -81,13 +85,14 @@
 //   9. Live subject state — the subject branch does not exist yet
 //      at prereg stage; once cut it asserts the branch's parent is
 //      the far end, the subject diff is exactly the four hunks'
-//      theirs-content (+8/-6 one hunk, +69/-5 three hunks,
-//      per-file added/removed lines equal to the merge-tree
-//      theirs/ours lines), the test file is ABSENT from the
-//      subject, NONE of the 8b/8c-only strings are present, all
-//      four-hunk theirs-strings ARE present, subject policy ==
-//      far-end policy, subject native standing == far-end standing,
-//      and both subject files parse (vm.Script syntax check).
+//      theirs-content (+8/-9 one hunk, +69/-5 three hunks,
+//      each conflicted region's subject text equal to the merge's
+//      region text by anchor-delimited comparison), the test file
+//      is ABSENT from the subject, NONE of the 8b/8c-only strings
+//      are present, all four-hunk theirs-strings ARE present,
+//      subject policy == far-end policy, subject native standing
+//      == far-end standing, and both subject files parse (vm.Script
+//      syntax check).
 //  10. Step corpora — state-aware WITH the 1116Z guard: every
 //      summary read is preceded by an fs.existsSync check on the
 //      SAME path in the SAME branch, and the intermediate state
@@ -167,13 +172,49 @@ const EXPECTED_MARKERS = {
 };
 // Ours/theirs line counts per conflicted region, in file order
 // (conversation.js hunk 1; convo-dialogue.js hunks A, B, C).
+// Derived from the FAR-END and MERGE files by anchor lines (see
+// REGIONS), NOT from the merge-tree display — the display elides
+// hunk 1's three middle ours lines (context-window elision).
 const EXPECTED_REGION_COUNTS = {
-  'src/js/conversation.js': [{ ours: 6, theirs: 8 }],
+  'src/js/conversation.js': [{ ours: 9, theirs: 8 }],
   'src/js/convo-dialogue.js': [{ ours: 3, theirs: 22 }, { ours: 1, theirs: 23 }, { ours: 1, theirs: 24 }],
 };
+// Anchor-delimited conflict regions: [startAnchor, endAnchor] are
+// CONTEXT lines (present identically in the far end, the merge, and
+// the subject — each verified unique in all three files). The region
+// is the lines strictly between them. This is immune to the
+// merge-tree display's context elision.
+const REGIONS = [
+  { file: 'src/js/conversation.js',
+    start: "      const inviteOutcome = choiceId === 'invite_party';",
+    end: '      // WANT ARC (convo rebuild 2026-10-11): answering their question engages',
+    far: 9, merge: 8 },
+  { file: 'src/js/convo-dialogue.js',
+    start: '        c.transcript.push({ who: \'you\', text: \'"How can I help?"\' });',
+    end: "          const line = '\"It\\'s already handled. Thank you for asking.\"';",
+    far: 3, merge: 22 },
+  { file: 'src/js/convo-dialogue.js',
+    start: '        const composed = this.convoComposeDlg(vid, favorLine, choiceId);',
+    end: '        // BLOCKED REPEAT (dialog-ui-fix 2026-10-11, defect 6; cycling',
+    far: 1, merge: 23 },
+  { file: 'src/js/convo-dialogue.js',
+    start: '        // the claimed line from the transcript.',
+    end: '          const dup = this.convoSelfRepeatLine(vid) || \'"I just said — did you miss it?"\';',
+    far: 1, merge: 24 },
+];
+// regionText(text, start, end): lines strictly between the first
+// occurrence of `start` and the first occurrence of `end` after it.
+// Returns null when either anchor is missing or out of order.
+function regionText(text, start, end) {
+  const lines = text.split('\n');
+  const si = lines.indexOf(start);
+  const ei = lines.indexOf(end, si + 1);
+  if (si === -1 || ei === -1 || ei <= si) return null;
+  return lines.slice(si + 1, ei);
+}
 // Expected subject diff vs the far end, per file (added/removed).
 const EXPECTED_SUBJECT_NUMSTAT = {
-  'src/js/conversation.js': '8\t6\tsrc/js/conversation.js',
+  'src/js/conversation.js': '8\t9\tsrc/js/conversation.js',
   'src/js/convo-dialogue.js': '69\t5\tsrc/js/convo-dialogue.js',
 };
 // The one file the far end and the first parent both lack, added
@@ -490,7 +531,7 @@ function countOccurrencesRaw(raw, s) {
     prereg.indexOf("|| choiceId === 'teach'") !== -1 && prereg.indexOf('SECRET REPLIES') !== -1, 'discard stated');
   T.ok('prereg states the hunk-A distinction (+22/-3, NOT +4/-0)',
     prereg.indexOf('+22') !== -1 && prereg.indexOf('NOT +4/−0') !== -1, 'distinction present');
-  T.ok('prereg states the expected subject diff (+8/-6 and +69/-5)',
+  T.ok('prereg states the expected subject diff (+8/-9 and +69/-5)',
     prereg.indexOf('+8') !== -1 && prereg.indexOf('+69') !== -1, 'expected diff present');
   T.ok('prereg states NO test file in the subject (game code only)',
     prereg.indexOf('NO test file in the subject') !== -1, 'no-test-file rule present');
@@ -539,12 +580,40 @@ function countOccurrencesRaw(raw, s) {
     const got = mt.regions.filter(function (r) { return r.file === f; });
     T.ok(f + ' carries exactly the expected conflict spans (' + EXPECTED_REGION_COUNTS[f].length + ')',
       got.length === EXPECTED_REGION_COUNTS[f].length, 'spans=' + got.length);
-    got.forEach(function (r, i) {
-      T.ok(f + ' span ' + (i + 1) + ' ours/theirs counts are ' + EXPECTED_REGION_COUNTS[f][i].ours + '/' + EXPECTED_REGION_COUNTS[f][i].theirs,
-        r.ours.length === EXPECTED_REGION_COUNTS[f][i].ours && r.theirs.length === EXPECTED_REGION_COUNTS[f][i].theirs,
-        'ours=' + r.ours.length + ' theirs=' + r.theirs.length);
-    });
   }
+  // Anchor-delimited region contents (immune to the merge-tree
+  // display's context elision — see the prereg correction note).
+  // For each region: the merge file's region has exactly the
+  // expected length and equals the merge-tree theirs lines (the
+  // theirs side is shown complete); the far-end file's region has
+  // exactly the expected length and CONTAINS the merge-tree ours
+  // lines (the display shows only the 6 of hunk 1's 9 ours lines
+  // adjacent to the markers).
+  const farConv0 = gitShow(FAR, 'src/js/conversation.js');
+  const farDlg0 = gitShow(FAR, 'src/js/convo-dialogue.js');
+  const mergeConv0 = gitShow(MERGE, 'src/js/conversation.js');
+  const mergeDlg0 = gitShow(MERGE, 'src/js/convo-dialogue.js');
+  REGIONS.forEach(function (rg, idx) {
+    const farText = rg.file === 'src/js/conversation.js' ? farConv0 : farDlg0;
+    const mergeText = rg.file === 'src/js/conversation.js' ? mergeConv0 : mergeDlg0;
+    const farRegion = regionText(farText, rg.start, rg.end);
+    const mergeRegion = regionText(mergeText, rg.start, rg.end);
+    T.ok('region ' + (idx + 1) + ' anchors are unique in the far-end file',
+      countOccurrences(farText, rg.start) === 1 && countOccurrences(farText, rg.end) === 1, '1/1');
+    T.ok('region ' + (idx + 1) + ' anchors are unique in the merge file',
+      countOccurrences(mergeText, rg.start) === 1 && countOccurrences(mergeText, rg.end) === 1, '1/1');
+    T.ok('region ' + (idx + 1) + ' far-end region has exactly ' + rg.far + ' lines',
+      farRegion !== null && farRegion.length === rg.far, farRegion === null ? 'null' : 'lines=' + farRegion.length);
+    T.ok('region ' + (idx + 1) + ' merge region has exactly ' + rg.merge + ' lines',
+      mergeRegion !== null && mergeRegion.length === rg.merge, mergeRegion === null ? 'null' : 'lines=' + mergeRegion.length);
+    const span = mt.regions[idx];
+    T.ok('region ' + (idx + 1) + ' merge region equals the merge-tree theirs lines',
+      mergeRegion !== null && span !== undefined && JSON.stringify(mergeRegion.slice().sort()) === JSON.stringify(span.theirs.slice().sort()),
+      mergeRegion === null ? 'null' : 'merge=' + mergeRegion.length + ' theirs=' + (span ? span.theirs.length : '?'));
+    T.ok('region ' + (idx + 1) + ' far-end region contains all merge-tree ours lines (display elides the rest)',
+      farRegion !== null && span !== undefined && span.ours.every(function (l) { return farRegion.indexOf(l) !== -1; }),
+      span ? 'ours shown=' + span.ours.length + ' of far=' + (farRegion === null ? '?' : farRegion.length) : 'no span');
+  });
   T.ok('conversation.js span ours lines carry the teach + SECRET REPLIES block',
     mt.regions[0].ours.some(function (l) { return l.indexOf("|| choiceId === 'teach'") !== -1; }) &&
     mt.regions[0].ours.some(function (l) { return l.indexOf('SECRET REPLIES') !== -1; }) &&
@@ -737,9 +806,6 @@ function countOccurrencesRaw(raw, s) {
       T.ok('subject diff ' + f + ' is exactly ' + EXPECTED_SUBJECT_NUMSTAT[f].split('\t').slice(0, 2).join('/'),
         subStat === EXPECTED_SUBJECT_NUMSTAT[f], subStat);
     }
-    // Exact theirs-content: per file, the subject diff's added lines
-    // must equal the merge-tree theirs lines and its removed lines
-    // must equal the merge-tree ours lines (sorted multisets).
     for (const f of EXPECTED_JS) {
       const subDiff = execSync('git diff ' + FAR + ' ' + SUBJECT_BRANCH + ' -- ' + f,
         { cwd: REPO, stdio: 'pipe' }).toString('utf8');
@@ -747,20 +813,26 @@ function countOccurrencesRaw(raw, s) {
       const wantHunks = f === 'src/js/conversation.js' ? 1 : 3;
       T.ok('subject diff ' + f + ' carries exactly ' + wantHunks + ' hunk(s)',
         subHeaders.length === wantHunks, subHeaders.join(' | '));
-      const subAll = diffLines(subDiff);
-      const wantTheirs = [];
-      const wantOurs = [];
-      for (const r of mt.regions) {
-        if (r.file === f) { wantTheirs.push.apply(wantTheirs, r.theirs); wantOurs.push.apply(wantOurs, r.ours); }
-      }
-      wantTheirs.sort(); wantOurs.sort();
-      T.ok('subject added lines ' + f + ' are exactly the merge-tree theirs lines',
-        JSON.stringify(subAll.added) === JSON.stringify(wantTheirs),
-        'subject +' + subAll.added.length + ' vs theirs +' + wantTheirs.length);
-      T.ok('subject removed lines ' + f + ' are exactly the merge-tree ours lines',
-        JSON.stringify(subAll.removed) === JSON.stringify(wantOurs),
-        'subject -' + subAll.removed.length + ' vs ours -' + wantOurs.length);
     }
+    // Exact theirs-content: per region, the subject file's region
+    // text must equal the MERGE file's region text exactly (same
+    // anchors, same lines, same order). Together with the numstat
+    // counts above (which pin the diff to exactly these four
+    // regions), this proves the subject diff is exactly the four
+    // hunks' theirs-content and nothing else. (A merge-tree
+    // multiset comparison is NOT used: the display elides hunk 1's
+    // middle ours lines, so it cannot serve as the ours oracle.)
+    REGIONS.forEach(function (rg, idx) {
+      const mergeText = gitShow(MERGE, rg.file);
+      const subjectText = gitShow(SUBJECT_BRANCH, rg.file);
+      const mergeRegion = regionText(mergeText, rg.start, rg.end);
+      const subjectRegion = regionText(subjectText, rg.start, rg.end);
+      T.ok('region ' + (idx + 1) + ' anchors are unique in the subject file',
+        countOccurrences(subjectText, rg.start) === 1 && countOccurrences(subjectText, rg.end) === 1, '1/1');
+      T.ok('region ' + (idx + 1) + ' subject region equals the merge region exactly (' + rg.merge + ' lines)',
+        mergeRegion !== null && subjectRegion !== null && JSON.stringify(subjectRegion) === JSON.stringify(mergeRegion),
+        subjectRegion === null ? 'null' : 'subject=' + subjectRegion.length + ' merge=' + (mergeRegion === null ? '?' : mergeRegion.length));
+    });
     T.ok('test file is ABSENT from the subject (8fam carries no test file)',
       git('ls-tree ' + SUBJECT_BRANCH + ' -- ' + ADDED_CLEAN) === '', '(absent)');
     let incOk = true, incBad = null;

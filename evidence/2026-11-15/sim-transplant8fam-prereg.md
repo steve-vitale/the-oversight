@@ -85,18 +85,20 @@ Include ONLY these four hunks, resolved per the CONFLICT-RESOLUTION RULE
 below. Hunk headers are cited in MERGE-TREE numbering (far-end/result side,
 from `git merge-tree 9f388a524 203a32775 713eb7545`); the family-diff
 numbering for the same hunks is given in parentheses. Ours/theirs line
-counts are the merge-tree conflict-region contents (verified by this arm
-from the merge-tree output saved at /tmp/mt8fam.txt during prereg work —
-the proof re-runs merge-tree live and re-derives them).
+counts are the merge-tree conflict-region contents, EXCEPT hunk 1's
+ours side (see the correction note below — the merge-tree display
+elides its three middle comment lines; the true ours count is read
+from the far-end file). The proof re-runs merge-tree live and derives
+every region from the files by anchor lines.
 
 - **Hunk 1 — lesson-outcome / diegetic-act**, `src/js/conversation.js`,
   merge-tree `@@ -7167,6 +7246,16 @@` (family-diff
-  `@@ -7017,7 +7095,13 @@`): ours 6 lines, theirs 8 lines.
+  `@@ -7017,7 +7095,13 @@`): ours 9 lines, theirs 8 lines.
   Theirs: `lessonOutcome` WITHOUT `teach` + the PLANT TEACH comment
   (5 lines) + `plantTeachOutcome = choiceId === 'teach'` + the
   `diegeticAct: inviteOutcome || lessonOutcome || plantTeachOutcome`
   sayLine call. Ours (discarded by the rule): `lessonOutcome` WITH
-  `|| choiceId === 'teach'` + the SECRET REPLIES comment block (3 lines)
+  `|| choiceId === 'teach'` + the SECRET REPLIES comment block (6 lines)
   + `secretOutcome = choiceId.indexOf('secret:') === 0` + the sayLine
   call with `diegeticAct: ... || secretOutcome`.
 - **Hunk A — favor settlement**, `src/js/convo-dialogue.js`, merge-tree
@@ -124,9 +126,25 @@ the proof re-runs merge-tree live and re-derives them).
   `if (!said) {`.
 
 Expected subject diff vs the far end (derived, not assumed — the proof
-checks it line-for-line): `src/js/conversation.js` +8/−6 (exactly 1
+checks it line-for-line): `src/js/conversation.js` +8/−9 (exactly 1
 hunk); `src/js/convo-dialogue.js` +69/−5 (exactly 3 hunks:
 +22/−3, +23/−1, +24/−1). Two files, four hunks, nothing else.
+
+CORRECTION — hunk-1 ours count (recorded 2026-11-15 ~13:20Z, BEFORE any
+judged sim; the subject was already cut and committed as b6ec3c7d1 with
+the CORRECT content — only the prereg's count was wrong): the prereg
+as first committed said ours 6 / subject +8/−6 for hunk 1. The true
+ours side is 9 lines: the SECRET REPLIES comment is 6 lines, not 3.
+The miscount came from reading the merge-tree display literally —
+`git merge-tree` shows a conflict as a diff, and with 3 lines of
+context it ELIDES unchanged middle lines of a long ours span (the
+three middle SECRET-comment lines sit between the two marker
+insertions and appear in neither hunk). The theirs side (8 lines, all
+additions) is shown complete; only the ours side is elided. The proof
+was corrected in the same commit to derive region contents from the
+far-end/merge files by anchor lines, immune to the display elision.
+No judged sim ran before this correction; the subject content is
+unchanged (its diff already read +8/−9).
 
 NOTE on hunk A (recorded so the subject diff is not misread as a
 five-hunk family): the family-diff hunk A is only +4/−0 (the
@@ -202,6 +220,13 @@ proof re-runs it live):
   `PLANT TEACH`, `plantTeachOutcome`, `settledFavor`, `pinnedFavor`,
   `unfinishedOuting`, `liveUnfinished`, `helpStructural`,
   `_sayFellBack`, `UNFINISHED HELP BLOCKED`).
+- DISPLAY ELISION CAVEAT (see the correction note in the definition
+  above): the merge-tree display shows only 6 of hunk 1's 9 ours lines
+  — the three middle SECRET-comment lines are elided as unchanged
+  context between the two marker insertions. Ours/theirs counts for
+  hunk 1 must be read from the far-end file (9) and the merge file (8),
+  not from the merge-tree display. The proof derives every region from
+  the files by anchor lines.
 
 PREDICTED OUTCOME — MEASURABLE BY THEIRS-RESOLUTION: the live
 `git cherry-pick -m 1 713eb7545` onto the far end conflicts in exactly
@@ -310,8 +335,9 @@ re-checks the key counts live):
 
 - Subject branch `transplant-8fam-subject` left in place, never landed;
   subject commit hash recorded in evidence. Measured diff (src/js)
-  verified line-identical to the merge-tree theirs/ours regions:
-  conversation.js +8/−6 (1 hunk), convo-dialogue.js +69/−5 (3 hunks);
+  verified line-identical to the four theirs-regions (anchor-delimited
+  region comparison): conversation.js +8/−9 (1 hunk),
+  convo-dialogue.js +69/−5 (3 hunks);
   the test file ABSENT from the subject; subject policy == far-end
   policy `a7ff5c51…`; subject native standing == far-end standing
   `75762cb2…`.
@@ -417,9 +443,11 @@ transplant-8fam-subject, /tmp-copy mechanism for the running script
 only — NO band edit, the committed tooling already carries the
 matched band), live subject state (§9: state-aware — before the
 subject cut it asserts the branch does not exist; after the cut it
-asserts parent is the far end, diff exactly +8/−6 and +69/−5 with
-per-file added/removed lines equal to the merge-tree theirs/ours
-lines, test file absent, no 8b/8c-only strings, all four-hunk
+asserts parent is the far end, diff exactly +8/−9 and +69/−5 with
+each conflicted region's subject text equal to the merge's region text
+(anchor-delimited region comparison — see the correction note; NOT a
+merge-tree multiset comparison, which elides hunk 1's middle ours
+lines), test file absent, no 8b/8c-only strings, all four-hunk
 theirs-strings present, policy + standing match the far end,
 `node --check` passes on both subject files), step corpora (§10:
 state-aware — see the §10 guard note below).
