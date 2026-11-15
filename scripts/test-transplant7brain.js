@@ -56,10 +56,11 @@
 //      question here is live only in the collapsed regime);
 //      subjectVerdict maps the subject-minus-baseline delta
 //      (>=+2 CARRIER, -1..+1 NOT-CARRIER, <=-2 INVERTED).
-//   5. Base state — HEAD is back on sim-transplant7brain-a at the master
-//      tip, no src/js file differs from HEAD, on-disk standing.js is
-//      byte-identical to HEAD, and only the arm's own files may be
-//      uncommitted.
+//   5. Base state — HEAD is on sim-transplant7brain-a, based on the
+//      master tip (tip is an ancestor of HEAD; every commit above the tip
+//      is this arm's own work), no src/js file differs from HEAD, on-disk
+//      standing.js is byte-identical to HEAD, and only the arm's own files
+//      may be uncommitted.
 //   6. Seed-band identity — the step script and the prereg name exactly
 //      seeds 190391–190398; the prereg records the matched band as
 //      REUSED BY DESIGN (not claimed fresh) with the search scope and
@@ -385,14 +386,22 @@ function alignFunctionText(srcText) {
   T.section('5. Base state — arm branch at master tip, only arm files uncommitted');
   T.ok('HEAD is the arm branch sim-transplant7brain-a',
     git('branch --show-current') === ARM_BRANCH, git('branch --show-current'));
-  T.ok('HEAD is master tip 7251dcb4f',
-    git('rev-parse HEAD') === MASTER_TIP_FULL, MASTER_TIP_FULL.slice(0, 12));
+  T.ok('arm branch is based on master tip 7251dcb4f (tip is an ancestor of HEAD)',
+    isAncestor(MASTER_TIP, 'HEAD'), 'tip ancestor of HEAD');
+  T.ok('every commit above the tip on this branch is this arm\'s own work',
+    git('log --format=%s ' + MASTER_TIP + '..HEAD').split('\n').filter(Boolean)
+      .every(function (s) { return s.indexOf('H1 transplant 7brain') === 0; }),
+    git('log --oneline ' + MASTER_TIP + '..HEAD').split('\n').filter(Boolean).join(' | ') || 'at tip');
   T.ok('no src/js file differs from HEAD',
     git('status --porcelain -- src/js') === '', 'src/js clean');
   T.ok('on-disk standing.js is byte-identical to HEAD',
     sha256(fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'))) ===
     sha256(gitShow('HEAD', 'src/js/standing.js')), 'standing.js == HEAD');
-  const dirty = git('status --porcelain').split('\n').filter(Boolean).map(function (ln) { return ln.slice(3); });
+  // Porcelain lines are XY + space + path; use the RAW output (git()
+  // trims, which eats the first line's leading status-space and shifts
+  // a fixed slice by one).
+  const rawStatus = execSync('git status --porcelain', { cwd: REPO, stdio: 'pipe' }).toString();
+  const dirty = rawStatus.split('\n').filter(Boolean).map(function (ln) { return ln.slice(3); });
   T.ok('only the arm files may be uncommitted (prereg, this proof, evidence)',
     dirty.every(function (f) { return ARM_FILES.indexOf(f) !== -1; }),
     dirty.length === 0 ? 'clean' : dirty.join(', '));
