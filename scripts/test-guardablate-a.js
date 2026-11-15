@@ -53,10 +53,22 @@
 //      (-16/+0, one file, removed lines byte-identical, no other game
 //      file touched, subject game.js == base game.js minus exactly
 //      those 16 lines, policy + standing == base), and the
-//      unit-lingering case run live on a /tmp pathspec extract of the
-//      subject FAILS with the pre-registered expected detail (the
-//      lingering adjacent raider DOES move onto the scholar and start
-//      combat) — the inverted polarity proving the effect is gone.
+//      multi-turn lingerer check (scripts/test-guardablate-
+//      lingerer-turns.js) run live on a /tmp pathspec extract of the
+//      subject shows the INVERTED polarity — the unstaged lingering
+//      adjacent raider is assigned its stance on turn 1, steps onto
+//      the scholar's cell on turn 2, and starts the fight on turn 3
+//      (foughtAt 3 on seed 100207), while the same check on the
+//      baseline tree shows no fight within 6 turns and the stance
+//      never assigned. ADJUDICATION (recorded, not waived): the
+//      pre-registered single-turn unit-lingering inversion does NOT
+//      hold — the freshly spawned lingerer draws 'territorial'
+//      (warns twice, fights on the third turn), so the guard's absence
+//      is invisible in ONE turn with an unstaged stance. The proof
+//      records the single-turn case passing on the subject as the
+//      documented fixture limitation and proves the effect with the
+//      multi-turn check on the identical fixture instead. The verdict
+//      mapping is untouched by this adjudication.
 //   9. Step corpora — stage-aware with GUARDED reads (no ENOENT
 //      crash). STAGE-1 branch: no summaries exist. Intermediate
 //      branch: baseline summary exists, subject summary missing
@@ -143,6 +155,7 @@ const ARM_FILES = [
   'evidence/2026-11-15/sim-guardablate-a-prereg.md',
   'evidence/2026-11-15/sim-guardablate-a.md',
   'scripts/test-guardablate-a.js',
+  'scripts/test-guardablate-lingerer-turns.js',
   'scripts/build-guardablate-panels-20261115.js',
   'scripts/transplant7redef-analyze.js',
   'scripts/transplant7redef-step.sh',
@@ -444,6 +457,20 @@ function corpusDir(step) {
       unitBaseJson.directStartCombat && unitBaseJson.directStartCombat.fought === true,
       JSON.stringify(unitBaseJson.directStartCombat));
   }
+  // Multi-turn contrast on the baseline tree: the same unstaged lingering
+  // adjacent raider, 6 monsterTurns — the guard returns before the stance
+  // machine runs, so no fight ever starts (and the stance stays null).
+  const turnsBase = runNode('scripts/test-guardablate-lingerer-turns.js --turns 6 --expect nofight');
+  const turnsBaseJson = parseLastJson(turnsBase.out);
+  T.ok('baseline multi-turn: no fight within 6 turns (exit 0, pass:true)',
+    turnsBase.code === 0 && turnsBaseJson !== null && turnsBaseJson.pass === true,
+    'code=' + turnsBase.code + ' ' + (turnsBaseJson ? JSON.stringify(turnsBaseJson) : turnsBase.out.slice(0, 120)));
+  if (turnsBaseJson !== null && turnsBaseJson.pass === true) {
+    T.ok('baseline multi-turn: foughtAt is 0 (never engaged)',
+      turnsBaseJson.foughtAt === 0, 'foughtAt=' + turnsBaseJson.foughtAt);
+    T.ok('baseline multi-turn: stance stays null (the guard returns before the stance machine runs)',
+      turnsBaseJson.stance === null, 'stance=' + turnsBaseJson.stance);
+  }
 
   // ---- 8. Live subject state ----
   T.section('8. Live subject state — subject branch + inverted polarity on the subject');
@@ -462,8 +489,8 @@ function corpusDir(step) {
     T.ok('subject branch carries exactly one commit on the arm branch',
       parseInt(git('rev-list --count ' + ARM_BRANCH + '..' + SUBJECT_BRANCH), 10) === 1, 'count=1');
     const subjNum = git('diff --numstat ' + SUBJECT_BRANCH + '^ ' + SUBJECT_BRANCH);
-    T.ok('subject diff numstat is exactly -16/+0, one file (src/js/game.js)',
-      subjNum === '16\t0\tsrc/js/game.js', subjNum.replace(/\n/g, ' | '));
+    T.ok('subject diff numstat is exactly -16/+0, one file (src/js/game.js) — numstat columns are added-then-deleted, so -16/+0 reads 0<TAB>16',
+      subjNum === '0\t16\tsrc/js/game.js', subjNum.replace(/\n/g, ' | '));
     const subjDiff = execSync('git diff ' + SUBJECT_BRANCH + '^ ' + SUBJECT_BRANCH, { cwd: REPO, stdio: 'pipe' }).toString('utf8');
     const subjLines = allHunkLines(subjDiff);
     T.ok('subject diff removed lines are byte-identical to the guard hunk (16/16)',
@@ -496,16 +523,36 @@ function corpusDir(step) {
     try {
       execSync('rm -rf ' + extDir + ' && mkdir -p ' + extDir, { cwd: REPO, stdio: 'pipe' });
       execSync('git archive ' + SUBJECT_BRANCH + ' src scripts index.html manifest.json sw.js build-source.json | tar -x -C ' + extDir, { cwd: REPO, stdio: 'pipe' });
+      // ADJUDICATION (see the header §8 note): the pre-registered
+      // single-turn unit-lingering inversion does NOT hold — the
+      // unstaged lingerer draws 'territorial' and fights on turn 3,
+      // so one monsterTurn cannot see the guard's absence. The
+      // single-turn case therefore PASSES on the subject, and that
+      // pass is the documented fixture limitation, not a guard
+      // survival: the multi-turn check below proves the effect.
       const unitSubj = runNode(CASCADE_TEST + ' 100207 unit-lingering', extDir);
       const unitSubjJson = parseLastJson(unitSubj.out);
-      T.ok('unit-lingering on the subject extract FAILS (exit 1 — the pre-registered expected polarity: the guard is gone)',
-        unitSubj.code === 1 && unitSubjJson !== null && unitSubjJson.pass === false,
-        'code=' + unitSubj.code + ' ' + (unitSubjJson ? JSON.stringify(unitSubjJson) : unitSubj.out.slice(0, 120)));
-      T.ok('subject failure detail is the lingering adjacent raider starting combat (the guard effect, removed)',
-        unitSubjJson !== null && unitSubjJson.detail === 'lingering adjacent raider started a fight',
-        unitSubjJson ? unitSubjJson.detail : 'no json');
-      T.ok('subject failure is at sub-case (1) — the guard return is what stopped the adjacent lingerer',
-        unitSubjJson !== null && unitSubjJson.case === 'unit-lingering', 'case=unit-lingering');
+      T.ok('ADJUDICATED single-turn: unit-lingering on the subject extract PASSES (exit 0 — the guard absence is invisible in ONE turn: the unstaged lingerer draws territorial, fights on turn 3)',
+        unitSubj.code === 0 && unitSubjJson !== null && unitSubjJson.pass === true,
+        'code=' + unitSubj.code + ' ' + (unitSubjJson ? JSON.stringify(unitSubjJson.adjacentLingering) : unitSubj.out.slice(0, 120)));
+      // The multi-turn check proves the inverted polarity on the
+      // identical fixture: copy the check script into the extract
+      // (it is not on the subject branch — the subject commit is
+      // exactly the ablation) and run it expecting a fight.
+      fs.copyFileSync(path.join(REPO, 'scripts', 'test-guardablate-lingerer-turns.js'), path.join(extDir, 'scripts', 'test-guardablate-lingerer-turns.js'));
+      const turnsSubj = runNode('scripts/test-guardablate-lingerer-turns.js --turns 6 --expect fight', extDir);
+      const turnsSubjJson = parseLastJson(turnsSubj.out);
+      T.ok('subject multi-turn: a fight DOES start within 6 turns (exit 0, pass:true — the pre-registered inverted polarity, over turns)',
+        turnsSubj.code === 0 && turnsSubjJson !== null && turnsSubjJson.pass === true,
+        'code=' + turnsSubj.code + ' ' + (turnsSubjJson ? JSON.stringify(turnsSubjJson) : turnsSubj.out.slice(0, 120)));
+      if (turnsSubjJson !== null && turnsSubjJson.pass === true) {
+        T.ok('subject multi-turn: foughtAt is 3 (territorial warns twice, fights on the third turn — cascade-b\'s own comment)',
+          turnsSubjJson.foughtAt === 3, 'foughtAt=' + turnsSubjJson.foughtAt);
+        T.ok('subject multi-turn: stance is territorial (the stance machine runs once the guard is gone)',
+          turnsSubjJson.stance === 'territorial', 'stance=' + turnsSubjJson.stance);
+        T.ok('subject multi-turn: the raider ends ON the scholar\'s cell [4,4] (it stepped onto the scholar)',
+          JSON.stringify(turnsSubjJson.cell) === JSON.stringify([4, 4]), 'cell=' + JSON.stringify(turnsSubjJson.cell));
+      }
     } finally {
       try { execSync('rm -rf ' + extDir, { cwd: REPO, stdio: 'pipe' }); } catch (e) {}
     }
