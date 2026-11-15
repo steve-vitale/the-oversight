@@ -1,8 +1,8 @@
 // test-transplant8fam.js — proof test for the H1 TRANSPLANT, family
 // 8fam: the four CONFLICTED PR #22 hunks, theirs-resolved (arm
-// sim-transplant8fam-a).
+// sim-transplant8fam-match-a — the MATCHED-BAND rerun).
 //
-// THE QUESTION (evidence/2026-11-15/sim-transplant8fam-prereg.md,
+// THE QUESTION (evidence/2026-11-15/sim-transplant8fam-match-prereg.md,
 // committed before any judged leg): land origin family 8's four
 // CONFLICTED hunks — lesson-outcome/diegetic-act, favor settlement,
 // favor-line sayLine, blocked-repeat — theirs-resolved onto the far
@@ -11,14 +11,15 @@
 // transplant-8fam-subject, commit b6ec3c7d1, built by the dead 1215Z
 // run and verified hunk-by-hunk by this arm — NOT re-cut).
 //
-// SNIFF + GATE (fresh band 190589-190596): a 4-seed sniff leg
-// (ep-far-8fam-sniff, seeds 190589-190592) reads 0/4 -> STOP,
-// UNMEASURED-band-health; >=1/4 -> PROCEED to the full 8-seed
-// baseline leg (ep-far-8fam-fresh), which must read >=3/8 or the run
-// stops (UNMEASURED, no subject leg). Subject leg t8fam: <=1/8
-// CARRIER, 2/8 AMBIGUOUS (re-run once; 2/8 again -> recorded
-// AMBIGUOUS, treated as NOT-CARRIER for ordering, kept on the
-// suspect list), >=3/8 NOT-CARRIER.
+// MATCHED BAND, NO SNIFF (190391-190398, deliberate reuse authorized
+// by the 1415Z coordinator decision (2)): the baseline leg
+// (ep-far-8fam-match) must read >=3/8 or the run stops (UNMEASURED,
+// no subject leg). Subject leg t8fam-match: <=1/8 CARRIER, 2/8
+// AMBIGUOUS (re-run once; 2/8 again -> recorded AMBIGUOUS, treated
+// as NOT-CARRIER for ordering, kept on the suspect list), >=3/8
+// NOT-CARRIER. The 1425Z fresh-band run (sniff 0/4, UNMEASURED-sniff)
+// is NOT re-measured here; its sniff corpus stays on master,
+// untouched.
 //
 // WHAT THIS TEST PROVES:
 //   1. Family identity — merge 713eb7545, its parents, the 1-commit
@@ -51,29 +52,31 @@
 //      far-end `secretOutcome` is present (removed by the
 //      theirs-resolution); the dry pool returns null past 9 uses
 //      (the only null-with-flag path).
-//   5. Conflict-STOP / adoption rule + verdict mapping + sniff
-//      mapping + gate polarity — subjectAdoptionVerdict maps the
-//      hunk-by-hunk verification: verified -> ADOPTED, any failure
-//      -> UNMEASURED (no hand-resolution, no re-cut); the gate
+//   5. Conflict-STOP / adoption rule + verdict mapping + gate
+//      polarity — subjectAdoptionVerdict maps the hunk-by-hunk
+//      verification: verified -> ADOPTED, any failure ->
+//      UNMEASURED (no hand-resolution, no re-cut); the gate
 //      polarity is >=3/8 PROCEED (far end is the healthy baseline);
 //      classifyTransplant maps every survived count to CARRIER /
-//      AMBIGUOUS / NOT-CARRIER / UNCLASSIFIABLE; sniffVerdict maps
-//      0/4 -> STOP-BAND-HEALTH, >=1/4 -> PROCEED.
-//   6. Base state — HEAD is on sim-transplant8fam-a in the worktree
-//      (or master at the merged tip — branch-identity legs are
-//      worktree-aware per the 0215 coordinator note, so the proof
-//      stays green on master), no src/js file differs from HEAD,
-//      on-disk standing.js is byte-identical to HEAD, and the
-//      step-script tooling source (master) still carries all four
-//      scratch files.
-//   7. Seed-band identity — the prereg names the FRESH band
-//      190589-190596 (zero prior use, verified at run start), the
-//      sniff STEP id ep-far-8fam-sniff (first 4 seeds), the baseline
-//      STEP id ep-far-8fam-fresh, the subject STEP id t8fam, the
-//      subject branch transplant-8fam-subject, and the /tmp-copy band
-//      mechanism (the committed step script + analyzer hardcode
-//      the matched band, so both run from /tmp copies with the
-//      band edited in the copy only).
+//      AMBIGUOUS / NOT-CARRIER / UNCLASSIFIABLE. (sniffVerdict is
+//      retained as a pure-function mapping check only — this run
+//      has no sniff leg; the sniff was a fresh-band tripwire.)
+//   6. Base state — HEAD is on sim-transplant8fam-match-a in the
+//      worktree (or master at the merged tip — branch-identity legs
+//      are worktree-aware per the 0215 coordinator note, so the
+//      proof stays green on master), no src/js file differs from
+//      HEAD, on-disk standing.js is byte-identical to HEAD, and
+//      the step-script tooling source (master) still carries all
+//      four scratch files.
+//   7. Seed-band identity — the prereg names the MATCHED band
+//      190391-190398 (deliberate reuse, authorized by the 1415Z
+//      coordinator decision (2) — the freshness check WILL hit the
+//      band in prior preregs, which is the expected matched reuse),
+//      the baseline STEP id ep-far-8fam-match, the subject STEP id
+//      t8fam-match, the subject branch transplant-8fam-subject, and
+//      the as-is tooling mechanism (the committed step script +
+//      analyzer already hardcode the matched band — NO /tmp-copy
+//      band edit).
 //   8. Live subject state — state-aware: the adopted subject branch
 //      exists (it predates the prereg — built by the 1215Z run);
 //      its parent is the far end, its diff is exactly the four
@@ -85,12 +88,13 @@
 //   9. Step corpora — state-aware: the settled matched-band baseline
 //      (4/8, fixed days) still anchors the far end (read from
 //      master — this arm's far-end base predates it); the 1215Z
-//      run's incomplete ep-far-8fam leg is recorded as recovered
-//      (2 complete per-seed files, 6 zero-byte .tmp files, log-line
-//      days exactly the settled days, analyzer INCOMPLETE); the
-//      sniff / baseline / subject legs take the sniff-STOP /
-//      gate-STOP / full-legs branch according to what ran, and the
-//      evidence file records the matching verdict.
+//      run's incomplete ep-far-8fam leg is read CONDITIONALLY
+//      (files present -> verify them; absent -> assert the merged
+//      1425Z evidence records them — the files went with the
+//      released 1215Z worktree); the baseline / subject legs take
+//      the gate-STOP / full-legs branch according to what ran, and
+//      the evidence file records the matching verdict. NO sniff
+//      branch in this run.
 //
 // Usage: node scripts/test-transplant8fam.js
 'use strict';
@@ -110,13 +114,11 @@ const MERGE_BASE = '9f388a524';
 const SECOND_FULL = '10724c18ddc5a7ebdc376aef3248cd318a9674f7';
 const SUBJECT_BRANCH = 'transplant-8fam-subject';
 const SUBJECT_COMMIT = 'b6ec3c7d1c700c3cab26c6bd578074588f7901f5';
-const STEP = 't8fam';
-const BASELINE_STEP = 'ep-far-8fam-fresh';
-const SNIFF_STEP = 'ep-far-8fam-sniff';
+const STEP = 't8fam-match';
+const BASELINE_STEP = 'ep-far-8fam-match';
 const RECOVERED_STEP = 'ep-far-8fam';
 const FIX_SHA = 'f8fda4295a99720dcb54d0c69f5fa6836f55cf9d9c8c5d1e51e5f0aa49c43078';
-const SEEDS = [190589, 190590, 190591, 190592, 190593, 190594, 190595, 190596];
-const SNIFF_SEEDS = [190589, 190590, 190591, 190592];
+const SEEDS = [190391, 190392, 190393, 190394, 190395, 190396, 190397, 190398];
 const EXPECTED_BASELINE_DAYS = [86, 144, 150, 43, 150, 87, 150, 150];
 const EXPECTED_JS = [
   'src/js/conversation.js', 'src/js/convo-dialogue.js',
@@ -424,7 +426,7 @@ function countOccurrences(raw, s) {
       const names = ['lesson-outcome', 'favor settlement', 'favor-line sayLine', 'blocked-repeat'];
       return names.every(function (n) { return true; });
     })(), '8b §Family 8b definition names all four');
-  const preregPath = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant8fam-prereg.md');
+  const preregPath = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant8fam-match-prereg.md');
   const prereg = fs.existsSync(preregPath) ? fs.readFileSync(preregPath, 'utf8') : '';
   T.ok('8fam prereg file exists', prereg !== '', preregPath);
   T.ok('prereg names the four conflicted hunks (family-diff numbering)',
@@ -436,9 +438,9 @@ function countOccurrences(raw, s) {
     prereg.indexOf('b6ec3c7d1') !== -1 && prereg.indexOf('ADOPTED, not re-cut') !== -1, 'adoption present');
   T.ok('prereg records the conflict-STOP / adoption rule (verification failure -> UNMEASURED, no hand-resolution)',
     prereg.indexOf('CONFLICT-STOP RULE') !== -1 && prereg.indexOf('UNMEASURED') !== -1 && prereg.indexOf('hand-resolution') !== -1, 'STOP rule present');
-  T.ok('prereg records the sniff rule (0/4 STOP, >=1/4 PROCEED) and the baseline gate (>=3/8 PROCEED)',
-    prereg.indexOf('SNIFF LEG FIRST') !== -1 && prereg.indexOf('STOP, report UNMEASURED-band-health') !== -1 &&
-    prereg.indexOf('Gate (pre-registered, PROCEED/STOP polarity') !== -1, 'sniff + gate present');
+  T.ok('prereg records the baseline gate (>=3/8 PROCEED) and that there is NO sniff leg in this run',
+    prereg.indexOf('NO sniff pre-check') !== -1 &&
+    prereg.indexOf('Gate (pre-registered, PROCEED/STOP polarity') !== -1, 'gate present, no sniff');
   T.ok('prereg records the theirs-resolution side effects (secretOutcome removal; favor-region reintroduction)',
     prereg.indexOf('secretOutcome') !== -1 && prereg.indexOf('theirs-resolution side effects') !== -1, 'side effects present');
 
@@ -528,7 +530,7 @@ function countOccurrences(raw, s) {
     farConv.indexOf('const diegeticAct = inviteAct || !!(opts && opts.diegeticAct);') !== -1, 'diegeticAct gate present');
 
   // ---- 5. Conflict-STOP / adoption rule + verdict mapping + sniff + gate ----
-  T.section('5. Adoption rule + verdict mapping + sniff mapping + gate polarity');
+  T.section('5. Adoption rule + verdict mapping + gate polarity (sniffVerdict retained as a pure-function check only)');
   T.ok('subjectAdoptionVerdict: verified -> ADOPTED', subjectAdoptionVerdict(true) === 'ADOPTED', subjectAdoptionVerdict(true));
   T.ok('subjectAdoptionVerdict: failed verification -> UNMEASURED (no hand-resolution, no re-cut)',
     subjectAdoptionVerdict(false) === 'UNMEASURED', subjectAdoptionVerdict(false));
@@ -548,18 +550,18 @@ function countOccurrences(raw, s) {
   // ---- 6. Base state ----
   T.section('6. Base state — arm branch, clean tree, no swap residue');
   const headBranch = git('rev-parse --abbrev-ref HEAD');
-  T.ok('HEAD is on the arm branch sim-transplant8fam-a (worktree) or master (merged tip)',
-    headBranch === 'sim-transplant8fam-a' || headBranch === 'master', 'HEAD=' + headBranch);
+  T.ok('HEAD is on the arm branch sim-transplant8fam-match-a (worktree) or master (merged tip)',
+    headBranch === 'sim-transplant8fam-match-a' || headBranch === 'master', 'HEAD=' + headBranch);
   if (headBranch === 'master') {
     T.ok('on master: the arm evidence file is present at HEAD (merged tip)',
-      git('ls-tree HEAD -- evidence/2026-11-15/sim-transplant8fam.md') !== '', 'merged');
+      git('ls-tree HEAD -- evidence/2026-11-15/sim-transplant8fam-match.md') !== '', 'merged');
     T.ok('on master: the arm proof test is present at HEAD (merged tip)',
       git('ls-tree HEAD -- scripts/test-transplant8fam.js') !== '', 'merged');
     T.ok('on master: the subject branch still points at its subject commit (left in place)',
       (function () { try { return git('rev-parse ' + SUBJECT_BRANCH) === SUBJECT_COMMIT; } catch (e) { return false; } })(), 'branch kept');
   }
-  if (headBranch === 'sim-transplant8fam-a') {
-    T.ok('in the worktree: HEAD is on the arm branch sim-transplant8fam-a', true, 'HEAD=sim-transplant8fam-a');
+  if (headBranch === 'sim-transplant8fam-match-a') {
+    T.ok('in the worktree: HEAD is on the arm branch sim-transplant8fam-match-a', true, 'HEAD=sim-transplant8fam-match-a');
   }
   const dirtyJs = git('status --porcelain --untracked-files=no -- src/js');
   T.ok('no src/js file differs from HEAD', dirtyJs === '', dirtyJs.slice(0, 200) || '(clean)');
@@ -572,24 +574,25 @@ function countOccurrences(raw, s) {
   }
   T.ok('step-script tooling source (master) still carries all four scratch files', toolingOk, toolingOk ? '4/4' : 'missing');
   const stepSrcMaster = gitShow('master', 'scripts/culpritbisect-step.sh');
-  T.ok('the committed step script (master) hardcodes the matched band (hence the /tmp copy)',
+  T.ok('the committed step script (master) hardcodes the matched band (hence NO /tmp copy — run as-is)',
     stepSrcMaster.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'matched-band literal present');
 
   // ---- 7. Seed-band identity ----
-  T.section('7. Seed-band identity — fresh band 190589-190596');
-  T.ok('prereg names the fresh band 190589-190596', prereg.indexOf('190589') !== -1 && prereg.indexOf('190596') !== -1, 'band in prereg');
-  T.ok('prereg records the freshness verdict (zero hits, no collision)',
-    prereg.indexOf('FRESH') !== -1 && prereg.indexOf('ZERO hits') !== -1, 'freshness verdict present');
-  T.ok('prereg names the sniff STEP id ep-far-8fam-sniff (first 4 seeds)', prereg.indexOf('ep-far-8fam-sniff') !== -1, 'sniff STEP id present');
-  T.ok('prereg names the baseline STEP id ep-far-8fam-fresh', prereg.indexOf('ep-far-8fam-fresh') !== -1, 'baseline STEP id present');
-  T.ok('prereg names the subject STEP id t8fam', prereg.indexOf('t8fam') !== -1, 'subject STEP id present');
+  T.section('7. Seed-band identity — MATCHED band 190391-190398 (deliberate reuse)');
+  T.ok('prereg names the matched band 190391-190398', prereg.indexOf('190391') !== -1 && prereg.indexOf('190398') !== -1, 'band in prereg');
+  T.ok('prereg records the matched-reuse authorization (1415Z coordinator decision (2))',
+    prereg.indexOf('MATCHED-BAND REUSE') !== -1 && prereg.indexOf('1415Z coordinator decision') !== -1, 'authorization present');
+  T.ok('prereg records the freshness verdict (94 prereg hits = expected matched reuse, NOT a collision)',
+    prereg.indexOf('94 prereg files hit') !== -1 && prereg.indexOf('NOT treated as a collision') !== -1, 'freshness verdict present');
+  T.ok('prereg names the baseline STEP id ep-far-8fam-match', prereg.indexOf('ep-far-8fam-match') !== -1, 'baseline STEP id present');
+  T.ok('prereg names the subject STEP id t8fam-match', prereg.indexOf('t8fam-match') !== -1, 'subject STEP id present');
   T.ok('prereg names the subject branch transplant-8fam-subject', prereg.indexOf('transplant-8fam-subject') !== -1, 'branch name present');
-  T.ok('prereg documents the /tmp-copy band mechanism for the step script + analyzer',
-    prereg.indexOf('/tmp copies') !== -1, '/tmp-copy mechanism present');
-  T.ok('prereg names the sniff rule (0/4 STOP) and the baseline gate (>=3/8 PROCEED)',
-    prereg.indexOf('0/4') !== -1 && (prereg.indexOf('>=3/8') !== -1 || prereg.indexOf('≥3/8') !== -1), 'sniff + gate present');
-  T.ok('prereg names the forbidden bands it avoids (matched, 8c, sibling 7redef)',
-    prereg.indexOf('190391–190398') !== -1 && prereg.indexOf('190581–190588') !== -1, 'forbidden bands named');
+  T.ok('prereg documents the as-is tooling mechanism (committed script hardcodes the matched band, NO /tmp copy)',
+    prereg.indexOf('NO /tmp copy') !== -1, 'as-is mechanism present');
+  T.ok('prereg names the baseline gate (>=3/8 PROCEED) and that there is no sniff leg',
+    prereg.indexOf('NO sniff pre-check') !== -1 && (prereg.indexOf('>=3/8') !== -1 || prereg.indexOf('≥3/8') !== -1), 'gate present, no sniff');
+  T.ok('prereg names the fresh band it does NOT reuse (1425Z band 190589-190596, closed by the sniff STOP)',
+    prereg.indexOf('190589') !== -1 && prereg.indexOf('190596') !== -1, 'closed fresh band named');
 
   // ---- 8. Live subject state (state-aware: adopted subject) ----
   T.section('8. Live subject state — transplant-8fam-subject (adopted, verified)');
@@ -673,7 +676,7 @@ function countOccurrences(raw, s) {
     T.ok('subject policy sha equals the far-end policy sha (no policy drift)', subPolicy === farPolicy, subPolicy.slice(0, 12));
     const subStanding = sha256(gitShow(SUBJECT_BRANCH, 'src/js/standing.js'));
     T.ok('subject native standing.js sha equals the far-end standing sha', subStanding === farStanding, subStanding.slice(0, 12));
-    const evPath = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant8fam.md');
+    const evPath = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant8fam-match.md');
     const ev = fs.existsSync(evPath) ? fs.readFileSync(evPath, 'utf8') : '';
     T.ok('evidence file records the subject commit hash (once the evidence file exists)',
       ev === '' || ev.indexOf(subject) !== -1, ev === '' ? '(evidence not written yet)' : 'subject hash present');
@@ -693,101 +696,89 @@ function countOccurrences(raw, s) {
     JSON.stringify(settledDays) === JSON.stringify(EXPECTED_BASELINE_DAYS), JSON.stringify(settledDays));
   // The recovered 1215Z leg: step ep-far-8fam, matched band, incomplete
   // (flap window). Recorded as recovered, never adopted as a judged leg.
+  // The files went with the released 1215Z worktree — present in
+  // neither this tree nor master. CONDITIONAL read: verify them when
+  // present, else assert the merged 1425Z evidence records them.
   const recDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + RECOVERED_STEP);
   const recLogPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + RECOVERED_STEP + '-driver.log');
   const recLog = fs.existsSync(recLogPath) ? fs.readFileSync(recLogPath, 'utf8') : '';
-  T.ok('recovered 1215Z driver log exists in the worktree (untracked, left alone)',
-    recLog !== '', 'present');
-  const recDays = [];
-  const recLineRe = /\{"seed":(\d+),"leg":"bisect","step":"ep-far-8fam","mode":"fix","standingFix":true,"standingSha":"f8fda4295a99","standingSwapped":true,"policySha":"a7ff5c516440","days":(\d+),"endReason":"([^"]+)","won":false,"maxWave":\d+,"standing":\d+,"scaleRank":"[^"]+","endPantryKcal":\d+,"killCalls":\d+,"snapshots":\d+,"vetSays":\d+,"deaths":\d+,"errors":0/g;
-  let m;
-  while ((m = recLineRe.exec(recLog)) !== null) recDays.push({ seed: parseInt(m[1], 10), days: parseInt(m[2], 10), end: m[3] });
-  T.ok('recovered log carries all 8 per-seed completion lines (errors 0, fix standing, policy a7ff5c51)',
-    recDays.length === 8, recDays.length + '/8 lines');
-  T.ok('recovered log per-seed days are exactly the settled baseline days (4/8 survived, in-process)',
-    JSON.stringify(recDays.map(function (r) { return r.days; })) === JSON.stringify(EXPECTED_BASELINE_DAYS), JSON.stringify(recDays.map(function (r) { return r.days; })));
-  T.ok('recovered leg survived 4/8 in-process (log lines, not a corpus — corroboration only)',
-    recDays.filter(function (r) { return r.end === 'survived'; }).length === 4, 'survived=4');
-  const recComplete = [190391, 190392].every(function (s) {
-    return fs.existsSync(path.join(recDir, 'culpritbisect-s' + s + '-culpritbisect-pilot-fix.json'));
-  });
-  T.ok('recovered leg has exactly 2 complete per-seed files (190391, 190392)',
-    recComplete, '2/2 present');
-  const recTmp = [190393, 190394, 190395, 190396, 190397, 190398].every(function (s) {
-    const f = path.join(recDir, 'culpritbisect-s' + s + '-culpritbisect-pilot-fix.json.tmp-6927');
-    return fs.existsSync(f) && fs.statSync(f).size === 0;
-  });
-  T.ok('recovered leg has 6 zero-byte .tmp-6927 files (flap window, seeds 190393-190398)',
-    recTmp, '6/6 zero-byte');
-  T.ok('recovered leg has NO summary JSON (analyzer INCOMPLETE — not a judged leg)',
-    !fs.existsSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + RECOVERED_STEP + '-summary.json')), 'absent');
-  // This run's legs: sniff -> baseline -> subject, with STOP branches.
-  const sniffSumPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + SNIFF_STEP + '-summary.json');
+  if (recLog === '') {
+    const ev1425 = gitShow('master', 'evidence/2026-11-15/sim-transplant8fam.md');
+    T.ok('recovered 1215Z driver log is ABSENT in this tree (files went with the released worktree)', true, '(absent)');
+    T.ok('the merged 1425Z evidence records the recovered leg (2 complete + 6 zero-byte .tmp, days = settled)',
+      ev1425.indexOf('ep-far-8fam') !== -1 && ev1425.indexOf('86/144/150/43/150/87/150/150') !== -1 && ev1425.indexOf('tmp-6927') !== -1, 'recorded in merged evidence');
+    T.ok('recovered leg has NO summary JSON in this tree (analyzer INCOMPLETE — not a judged leg)',
+      !fs.existsSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + RECOVERED_STEP + '-summary.json')), 'absent');
+  } else {
+    const recDays = [];
+    const recLineRe = /\{"seed":(\d+),"leg":"bisect","step":"ep-far-8fam","mode":"fix","standingFix":true,"standingSha":"f8fda4295a99","standingSwapped":true,"policySha":"a7ff5c516440","days":(\d+),"endReason":"([^"]+)","won":false,"maxWave":\d+,"standing":\d+,"scaleRank":"[^"]+","endPantryKcal":\d+,"killCalls":\d+,"snapshots":\d+,"vetSays":\d+,"deaths":\d+,"errors":0/g;
+    let m;
+    while ((m = recLineRe.exec(recLog)) !== null) recDays.push({ seed: parseInt(m[1], 10), days: parseInt(m[2], 10), end: m[3] });
+    T.ok('recovered log carries all 8 per-seed completion lines (errors 0, fix standing, policy a7ff5c51)',
+      recDays.length === 8, recDays.length + '/8 lines');
+    T.ok('recovered log per-seed days are exactly the settled baseline days (4/8 survived, in-process)',
+      JSON.stringify(recDays.map(function (r) { return r.days; })) === JSON.stringify(EXPECTED_BASELINE_DAYS), JSON.stringify(recDays.map(function (r) { return r.days; })));
+    T.ok('recovered leg survived 4/8 in-process (log lines, not a corpus — corroboration only)',
+      recDays.filter(function (r) { return r.end === 'survived'; }).length === 4, 'survived=4');
+    const recComplete = [190391, 190392].every(function (s) {
+      return fs.existsSync(path.join(recDir, 'culpritbisect-s' + s + '-culpritbisect-pilot-fix.json'));
+    });
+    T.ok('recovered leg has exactly 2 complete per-seed files (190391, 190392)',
+      recComplete, '2/2 present');
+    const recTmp = [190393, 190394, 190395, 190396, 190397, 190398].every(function (s) {
+      const f = path.join(recDir, 'culpritbisect-s' + s + '-culpritbisect-pilot-fix.json.tmp-6927');
+      return fs.existsSync(f) && fs.statSync(f).size === 0;
+    });
+    T.ok('recovered leg has 6 zero-byte .tmp-6927 files (flap window, seeds 190393-190398)',
+      recTmp, '6/6 zero-byte');
+    T.ok('recovered leg has NO summary JSON (analyzer INCOMPLETE — not a judged leg)',
+      !fs.existsSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + RECOVERED_STEP + '-summary.json')), 'absent');
+  }
+  // This run's legs: baseline first, then subject — NO sniff leg.
   const baseSumPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + BASELINE_STEP + '-summary.json');
   const baseLogPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + BASELINE_STEP + '-driver.log');
   const baseCorpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + BASELINE_STEP);
   const sumPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
   const logPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
   const corpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
-  const evPath9 = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant8fam.md');
+  const evPath9 = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant8fam-match.md');
   const ev9 = fs.existsSync(evPath9) ? fs.readFileSync(evPath9, 'utf8') : '';
-  if (!fs.existsSync(sniffSumPath)) {
-    T.ok('no sniff summary exists yet for ep-far-8fam-sniff (no judged leg ran)', true, '(not run)');
-    T.ok('no fresh baseline summary exists yet', !fs.existsSync(baseSumPath), 'absent');
+  if (!fs.existsSync(baseSumPath)) {
+    T.ok('no matched baseline summary exists yet (no judged leg ran)', true, '(not run)');
     T.ok('no subject step summary exists yet', !fs.existsSync(sumPath), 'absent');
   } else {
-    const sniff = JSON.parse(fs.readFileSync(sniffSumPath, 'utf8'));
-    const sniffSeeds = (sniff.perSeed || []).map(function (p) { return p.seed; });
-    T.ok('sniff leg ran exactly the sniff seeds 190589-190592',
-      JSON.stringify(sniffSeeds) === JSON.stringify(SNIFF_SEEDS), JSON.stringify(sniffSeeds));
-    if (sniff.survived === 0) {
-      // SNIFF-STOP path (prereg): the band is catastrophically
-      // unhealthy — the run STOPPED, no baseline or subject leg ran.
-      T.ok('sniff leg read 0/4 survived (tripwire fired — STOP)', sniff.survived === 0, 'survived=0');
-      T.ok('NO fresh baseline summary exists (STOP — no baseline leg cut)', !fs.existsSync(baseSumPath), 'absent');
+    T.ok('matched baseline step summary exists (ep-far-8fam-match)', true, 'present');
+    const base = JSON.parse(fs.readFileSync(baseSumPath, 'utf8'));
+    const baseSeeds = (base.perSeed || []).map(function (p) { return p.seed; });
+    T.ok('matched baseline leg ran exactly the matched band 190391-190398',
+      JSON.stringify(baseSeeds) === JSON.stringify(SEEDS), JSON.stringify(baseSeeds));
+    T.ok('matched baseline driver log exists', fs.existsSync(baseLogPath), 'present');
+    T.ok('matched baseline per-seed corpus exists', fs.existsSync(baseCorpusDir), 'present');
+    if (base.survived <= 2 && !fs.existsSync(sumPath)) {
+      // GATE-STOP path (prereg): the matched baseline did not
+      // reproduce far-end health — the run STOPPED, no subject leg.
+      T.ok('matched baseline leg read <=2/8 survived (gate FAILED — STOP)', base.survived <= 2, 'survived=' + base.survived);
       T.ok('NO subject step summary exists (STOP — no subject leg cut)', !fs.existsSync(sumPath), 'absent');
-      T.ok('evidence file exists and records the STOP (UNMEASURED-band-health, sniff 0/4)',
-        ev9 !== '' && ev9.indexOf('UNMEASURED') !== -1 && ev9.indexOf('0/4') !== -1, 'UNMEASURED present');
+      T.ok('NO subject driver log exists', !fs.existsSync(logPath), 'absent');
+      T.ok('NO subject per-seed corpus exists', !fs.existsSync(corpusDir), 'absent');
+      T.ok('evidence file exists and records the STOP (UNMEASURED, baseline gate)',
+        ev9 !== '' && ev9.indexOf('UNMEASURED') !== -1, 'UNMEASURED present');
+      T.ok('evidence file records the matched baseline survived count',
+        ev9.indexOf('survived ' + base.survived + '/8') !== -1, 'survived ' + base.survived + '/8 present');
+      T.ok('evidence file records the family-test leg (conflicted script)',
+        ev9.indexOf('test-transplant8fam-conflicted') !== -1, 'conflicted leg present');
     } else {
-      T.ok('sniff leg read >=1/4 survived (tripwire clear — PROCEED)', sniff.survived >= 1, 'survived=' + sniff.survived);
-      if (!fs.existsSync(baseSumPath)) {
-        // Intermediate state (1116Z guard): sniff done, baseline leg
-        // not yet run — a passing branch, never a crash.
-        T.ok('fresh baseline summary not yet run (intermediate state: sniff done, baseline pending)', true, '(pending)');
-        T.ok('no subject step summary exists yet (baseline pending)', !fs.existsSync(sumPath), 'absent');
+      T.ok('matched baseline leg read >=3/8 survived (gate holds)', base.survived >= 3, 'survived=' + base.survived);
+      if (!fs.existsSync(sumPath)) {
+        // Intermediate state (1116Z guard): baseline done, subject
+        // leg not yet run — a passing branch, never a crash.
+        T.ok('subject step summary not yet run (intermediate state: baseline done, subject pending)', true, '(pending)');
       } else {
-      T.ok('fresh baseline step summary exists (ep-far-8fam-fresh)', true, 'present');
-      const base = JSON.parse(fs.readFileSync(baseSumPath, 'utf8'));
-      const baseSeeds = (base.perSeed || []).map(function (p) { return p.seed; });
-      T.ok('fresh baseline leg ran exactly the fresh band 190589-190596',
-        JSON.stringify(baseSeeds) === JSON.stringify(SEEDS), JSON.stringify(baseSeeds));
-      T.ok('fresh baseline driver log exists', fs.existsSync(baseLogPath), 'present');
-      T.ok('fresh baseline per-seed corpus exists', fs.existsSync(baseCorpusDir), 'present');
-      if (base.survived <= 2 && !fs.existsSync(sumPath)) {
-        // GATE-STOP path (prereg): the fresh baseline did not
-        // reproduce far-end health — the run STOPPED, no subject leg.
-        T.ok('fresh baseline leg read <=2/8 survived (gate FAILED — STOP)', base.survived <= 2, 'survived=' + base.survived);
-        T.ok('NO subject step summary exists (STOP — no subject leg cut)', !fs.existsSync(sumPath), 'absent');
-        T.ok('NO subject driver log exists', !fs.existsSync(logPath), 'absent');
-        T.ok('NO subject per-seed corpus exists', !fs.existsSync(corpusDir), 'absent');
-        T.ok('evidence file exists and records the STOP (UNMEASURED, baseline gate)',
-          ev9 !== '' && ev9.indexOf('UNMEASURED') !== -1, 'UNMEASURED present');
-        T.ok('evidence file records the fresh baseline survived count',
-          ev9.indexOf('survived ' + base.survived + '/8') !== -1, 'survived ' + base.survived + '/8 present');
-        T.ok('evidence file records the family-test leg (conflicted script)',
-          ev9.indexOf('test-transplant8fam-conflicted') !== -1, 'conflicted leg present');
-      } else {
-        T.ok('fresh baseline leg read >=3/8 survived (gate holds)', base.survived >= 3, 'survived=' + base.survived);
-        if (!fs.existsSync(sumPath)) {
-          // Intermediate state (1116Z guard): baseline done, subject
-          // leg not yet run — a passing branch, never a crash.
-          T.ok('subject step summary not yet run (intermediate state: baseline done, subject pending)', true, '(pending)');
-        } else {
         T.ok('subject step summary exists', true, 'present');
         const sub = JSON.parse(fs.readFileSync(sumPath, 'utf8'));
         T.ok('subject summary carries a survived count 0..8', typeof sub.survived === 'number' && sub.survived >= 0 && sub.survived <= 8, 'survived=' + sub.survived);
         const subSeeds = (sub.perSeed || []).map(function (p) { return p.seed; });
-        T.ok('subject leg ran exactly the fresh band 190589-190596',
+        T.ok('subject leg ran exactly the matched band 190391-190398',
           JSON.stringify(subSeeds) === JSON.stringify(SEEDS), JSON.stringify(subSeeds));
         const verdict = base.survived >= 3 ? classifyTransplant(sub.survived) : 'UNCLASSIFIABLE';
         T.ok('subject summary verdict maps from the survived count (' + verdict + ')',
@@ -798,15 +789,14 @@ function countOccurrences(raw, s) {
           ev9 !== '' && ev9.indexOf(verdict) !== -1, verdict + ' present');
         T.ok('evidence file records the subject survived count',
           ev9.indexOf('survived ' + sub.survived + '/8') !== -1, 'survived ' + sub.survived + '/8 present');
-        T.ok('evidence file records the fresh baseline survived count',
+        T.ok('evidence file records the matched baseline survived count',
           ev9.indexOf('survived ' + base.survived + '/8') !== -1, 'baseline survived ' + base.survived + '/8 present');
         T.ok('evidence file records the family-test leg (conflicted script)',
           ev9.indexOf('test-transplant8fam-conflicted') !== -1, 'conflicted leg present');
-        } // guard-B else (subject pending) — close
-      } // gate if/else — close
-      } // guard-A else (baseline pending) — close
-    } // sniff-survived if/else — close
-  } // sniff-exists if/else — close
+      } // guard-B else (subject pending) — close
+    } // gate if/else — close
+  } // base-exists if/else — close
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
+
