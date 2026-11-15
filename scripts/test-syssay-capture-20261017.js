@@ -35,9 +35,14 @@ function check(name, cond, detail) {
   if (typeof _say === 'function') Game.say = function (...a) { cap(a[0]); };
   // r8 fix: sysSay was left as the loadGame no-op — capture it too, in the
   // same display format sysSay would have used (game.js:31871).
+  // r211: the replica mirrors game.js sysSay's quote fix — one leading 📺,
+  // one leading "SYSTEM: " and one redundant quote at EACH edge are
+  // stripped for display only, then wrapped in exactly one pair.
   if (typeof Game.sysSay === 'function') {
     Game.sysSay = function (...a) {
-      const t = String(a[0] == null ? '' : a[0]).replace(/^📺\s*/, '');
+      let t = String(a[0] == null ? '' : a[0]).replace(/^📺\s*/, '').replace(/^SYSTEM:\s*/, '');
+      if (t.startsWith('"')) t = t.slice(1);
+      if (t.endsWith('"')) t = t.slice(0, -1);
       cap(`📺 SYSTEM: "${t}"`);
     };
   }
@@ -57,6 +62,12 @@ function check(name, cond, detail) {
   //    bypass it because the harness forces arrival for the test, same as
   //    the game does for pre-arrival play)
   check('capture has exactly the two test lines', capture.length === 2, `got ${capture.length}`);
+
+  // 4. r211: an already-quoted sysSay input renders ONE pair of quotes
+  //    (the r198-(c) doubled-quote defect, fixed in game.js + the probe).
+  Game.sysSay('"Ooh. A DELEGATOR! No leading emoji here."');
+  const deleg = capture.filter(s => /DELEGATOR/.test(s));
+  check('quoted sysSay renders single quotes', deleg.length === 1 && deleg[0] === '📺 SYSTEM: "Ooh. A DELEGATOR! No leading emoji here."', deleg[0] ? deleg[0].slice(0, 60) : 'missing');
 
   console.log(failures === 0 ? '\nALL GREEN' : `\n${failures} FAILURES`);
   process.exit(failures === 0 ? 0 : 1);

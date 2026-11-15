@@ -29987,7 +29987,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`\u2728 SYNERGY DISCOVERED: ${syn.name}!`);
         if (syn.flavor) this.say(syn.flavor);
         const discovery = syn.discovery || 'Oh! OH! That combination! The audience did NOT see that coming!';
-        if (this.state.systemArrived) this.say(`📺 SYSTEM: "${discovery}"`);
+        // r211: discovery goes through sysSay, not a hand-built wrapper —
+        // the synergies.json discovery strings already carry their own
+        // quotes ("The SCREAM! ... IMPALING SCREAM!"), so the old
+        // `say('📺 SYSTEM: "${discovery}"')` rendered 📺 SYSTEM: ""..."".
+        // sysSay strips the redundant edge quotes (display only).
+        if (this.state.systemArrived) this.sysSay(discovery);
         else this.say(discovery);
       }
       this.recomputeActiveSynergies();
@@ -37405,9 +37410,21 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // SINGLE-PREFIX (journey-establishment r10 2026-10-16): the "📺 SYSTEM:"
       // wrapper already marks the voice — a leading 📺 in the text doubled it
       // (the pilot episode rendered as 📺 SYSTEM: "📺 Ahem. Testing...").
-      // Strip one leading 📺 for display only; the voice lookup below still
-      // receives the original text so pre-generated MP3 matching is unchanged.
-      const shown = String(text == null ? '' : text).replace(/^📺\s*/, '');
+      // QUOTE FIX (journey-endgame r211 2026-11-15): the same doubling
+      // applied to quotes — nearly every call site already passes text
+      // wrapped in "...", and some pass their own "SYSTEM: " prefix, so
+      // transcripts rendered as 📺 SYSTEM: ""..."" (r198 finding (c),
+      // recurred r203: 36 hits on 89701-c, 89 on 89704-c). Strip one
+      // leading 📺, one leading "SYSTEM: ", and one redundant quote at
+      // EACH edge — a call site may quote only its opening exclamation
+      // ("THE PARTY WINS!!" The crowd...) or only its closing sentence
+      // (...flickers: "A stranger...") — then wrap in exactly one pair.
+      // Display only; the voice lookup below still receives the original
+      // text so pre-generated MP3 matching is unchanged (and the lookup
+      // normalizes quote styles away in any case).
+      let shown = String(text == null ? '' : text).replace(/^📺\s*/, '').replace(/^SYSTEM:\s*/, '');
+      if (shown.startsWith('"')) shown = shown.slice(1);
+      if (shown.endsWith('"')) shown = shown.slice(0, -1);
       this.say(`📺 SYSTEM: "${shown}"`);
       // SYSTEM VOICE (Steve 2026-10-12): the System's fixed ElevenLabs line
       // plays when this exact text has a pre-generated MP3. Fire-and-forget:

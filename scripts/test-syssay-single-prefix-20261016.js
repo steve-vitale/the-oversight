@@ -7,6 +7,13 @@
 //
 // RED: run against the pre-fix game.js to see the doubled prefix.
 // GREEN: exactly one 📺 (the SYSTEM wrapper's) in the said line.
+//
+// R211 UPDATE (journey-endgame r211 2026-11-15): case 2's expectation
+// changed ON PURPOSE — already-quoted input used to render doubled
+// quotes (📺 SYSTEM: ""Ooh...""), the r198-finding-(c) defect. sysSay
+// now strips one redundant outer quote pair, so the same input renders
+// a single pair. The old assertion is kept below as a comment so the
+// change of intent is visible, not silent.
 
 const { loadGame, setupGame } = require('./sim-harness');
 
@@ -44,9 +51,11 @@ const SEED = parseInt(process.env.SEED || '61', 10);
   const c1 = (said[0].match(/📺/g) || []).length;
   ok(c1 === 1, `prefixed text renders single 📺 (got ${c1}): ${said[0].slice(0, 60)}`);
   ok(said[0].indexOf('📺 SYSTEM: "Ahem. Testing.') === 0, 'wrapper intact, text stripped: ' + said[0].slice(0, 50));
-  // 2. unprefixed input -> unchanged behavior (one 📺 from wrapper)
+  // 2. already-quoted input -> single pair of quotes (r211: was doubled
+  // ""Ooh..."", the r198-(c) defect; the old expectation is retired here)
   const c2 = (said[1].match(/📺/g) || []).length;
-  ok(c2 === 1 && said[1].indexOf('📺 SYSTEM: ""Ooh. A DELEGATOR!') === 0, 'unprefixed text unchanged: ' + said[1].slice(0, 50));
+  ok(c2 === 1 && said[1].indexOf('📺 SYSTEM: "Ooh. A DELEGATOR!') === 0, 'quoted text renders single quotes: ' + said[1].slice(0, 50));
+  ok(said[1].indexOf('""Ooh') === -1, 'no doubled quotes in quoted input');
   // 3. no-space variant also stripped
   const c3 = (said[2].match(/📺/g) || []).length;
   ok(c3 === 1 && said[2].indexOf('📺 SYSTEM: "Pardon the jank') === 0, 'no-space 📺 stripped: ' + said[2].slice(0, 50));

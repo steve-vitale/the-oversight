@@ -1562,7 +1562,7 @@
         var per = this.apPersona(pid);
         // DEAD (break-it r12): the dead are not "overheard saying" things.
         if (per && per.disposition === 'sadistic' && ap.met[pid].encounters > 0 && !this.apIsDead(pid)) {
-          msgs.push('"' + per.name.toUpperCase() + ' was overheard saying the human is "still interesting. For now." Your people just felt the room turn against them."');
+          msgs.push('"' + per.name.toUpperCase() + ' was overheard saying the human is \'still interesting. For now.\' Your people just felt the room turn against them."');
           msgPids.push(pid);
         }
       }
@@ -1576,7 +1576,7 @@
         msgs.push('"Your fan club is GROWING. There\'s fan art. It\'s... surprisingly good. The System is confused but supportive."'); msgPids.push(null);
         msgs.push('"Betting pools favor you 3-to-1 now. The smart money says you\'re learning faster than the monsters."'); msgPids.push(null);
       } else if (favor <= -30) {
-        msgs.push('"The crowd is getting restless. "BORING," says the feed. The sadistic ones are smiling."'); msgPids.push(null);
+        msgs.push('"The crowd is getting restless. \'BORING,\' says the feed. The sadistic ones are smiling."'); msgPids.push(null);
         msgs.push('"Your approval rating just dropped. Someone in the audience threw a tomato. Through the screen. How."'); msgPids.push(null);
       } else {
         msgs.push('"The audience is watching. The gamblers are watching. Everyone\'s watching. No pressure."'); msgPids.push(null);
@@ -1590,7 +1590,7 @@
         if (this.apFanLane('fight') >= 25) { msgs.push('"The fight clubs are making banners. Your name, in fire. The sadistic ones are taking it personally."'); msgPids.push(null); }
         if (this.apFanLane('survival') >= 25) { msgs.push('"The long-haul fans are sending trail mix. Actual trail mix. Through the screen. Nobody knows how."'); msgPids.push(null); }
         if (this.apFanLane('social') >= 25) { msgs.push('"The moot crowd has a chant for you now. It rhymes. It\'s devastating in debates."'); msgPids.push(null); }
-        if (this.apFanLane('showbiz') >= 25) { msgs.push('"Your showbiz fans voted you "most watchable human" three weeks running. The trophy is a small moon."'); msgPids.push(null); }
+        if (this.apFanLane('showbiz') >= 25) { msgs.push('"Your showbiz fans voted you \'most watchable human\' three weeks running. The trophy is a small moon."'); msgPids.push(null); }
       } catch (e) {}
 
       // Benevolent whispers (deniable)
