@@ -1754,12 +1754,29 @@
         const oi = L.open.findIndex(o => o.tid === tid);
         if (oi !== -1) {
           const was = L.open.splice(oi, 1)[0];
-          L.lastClosed = { tid, label: was.label || label || tid, day, convo: c.count };
+          // WANT-LABEL FRESHNESS (journey-crisis r208): the `want`
+          // thread is labeled by the favor it names, and the favor can
+          // change between planting and circling back (Hank d10 forage
+          // -> d34 wound care). The stored label names the OLD favor;
+          // the caller passes the live label (convoTopicLabel), which
+          // names the favor this sitting actually discussed. Prefer it
+          // for want threads, so the closing beat names the sitting's
+          // subject and the r201 favor-want gate (which matches the
+          // thread label against the current favor) cannot be bypassed
+          // by a stale label. Every other thread keeps its stored label.
+          const fresh = (tid === 'want' || tid === 'request')
+            ? (label || was.label || tid) : (was.label || label || tid);
+          L.lastClosed = { tid, label: fresh, day, convo: c.count };
         }
         const li = (L.lapsed || []).findIndex(o => o.tid === tid);
         if (li !== -1) {
           const was = L.lapsed.splice(li, 1)[0];
-          L.lastLapsed = { tid, label: was.label || label || tid, day, convo: c.count };
+          // Same freshness rule as lastClosed above: a lapsed `want`
+          // thread re-discussed under a new favor earns its "circled
+          // back" nod under the NEW favor's name, never the old one.
+          const fresh = (tid === 'want' || tid === 'request')
+            ? (label || was.label || tid) : (was.label || label || tid);
+          L.lastLapsed = { tid, label: fresh, day, convo: c.count };
         }
       } catch (e) {}
     },
