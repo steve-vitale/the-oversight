@@ -248,9 +248,21 @@ async function stage1() {
 
 function stage2() {
   const AN = require(path.join(REPO, 'scripts', 'ove48-conv-analyze-20261114'));
+  // The repo analyzer's loadCorpus hardcodes RUN ove48-conv-pilot,
+  // so it cannot see this arm's ove48-freshband-pilot files — load
+  // the fresh-band corpus directly (same shape, fresh RUN).
+  function loadFreshCorpus(step) {
+    const rows = [], missing = [];
+    for (const seed of FRESH) {
+      const f = path.join(REPO, 'evidence', '2026-11-14', 'perseed-ove48-conv-' + step, 'ove48conv-s' + seed + '-ove48-freshband-pilot-fix.json');
+      if (!fs.existsSync(f)) { missing.push(seed); continue; }
+      rows.push(JSON.parse(fs.readFileSync(f, 'utf8')));
+    }
+    return { rows: rows, missing: missing, complete: missing.length === 0 && rows.length === FRESH.length };
+  }
   const ev = fs.readFileSync(path.join(REPO, 'evidence', '2026-11-14', 'sim-ove48-freshband-a.md'), 'utf8');
   // 1. Baseline corpus + summary.
-  const baseCorpus = AN.loadCorpus(FRESH, BASE_STEP);
+  const baseCorpus = loadFreshCorpus(BASE_STEP);
   check('baseline corpus 8/8 complete', baseCorpus.complete, 'missing: ' + (baseCorpus.missing || []).join(','));
   const baseErrs = baseCorpus.rows.reduce(function (n, r) { return n + ((r.instrumentErrors || []).length); }, 0);
   check('baseline 0 instrument errors', baseErrs === 0, 'errors=' + baseErrs);
@@ -270,7 +282,7 @@ function stage2() {
     check('no subject corpus was cut on a failed gate', !fs.existsSync(subjDir));
   } else {
     check('baseline gate passed (>=3/8)', baseSurvived >= 3, 'base survived=' + baseSurvived);
-    const subjCorpus = AN.loadCorpus(FRESH, SUBJ_STEP);
+    const subjCorpus = loadFreshCorpus(SUBJ_STEP);
     check('subject corpus 8/8 complete', subjCorpus.complete, 'missing: ' + (subjCorpus.missing || []).join(','));
     const subjErrs = subjCorpus.rows.reduce(function (n, r) { return n + ((r.instrumentErrors || []).length); }, 0);
     check('subject 0 instrument errors', subjErrs === 0, 'errors=' + subjErrs);

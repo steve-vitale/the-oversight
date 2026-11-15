@@ -1,0 +1,43 @@
+{"seed":190561,"leg":"ove48conv","step":"t-ove48-freshband-base","mode":"fix","standingFix":true,"standingSha":"f8fda4295a99","standingSwapped":true,"policySha":"a7ff5c516440","days":95,"endReason":"village-lost","won":false,"maxWave":4,"standing":199,"scaleRank":"regional","endPantryKcal":5170,"killCalls":62,"snapshots":91,"vetSays":50,"convoOpens":98,"convoDawnReads":0,"deaths":74,"errors":0,"file":"evidence/2026-11-14/perseed-ove48-conv-t-ove48-freshband-base/ove48conv-s190561-ove48-freshband-pilot-fix.json"}
+{"seed":190562,"leg":"ove48conv","step":"t-ove48-freshband-base","mode":"fix","standingFix":true,"standingSha":"f8fda4295a99","standingSwapped":true,"policySha":"a7ff5c516440","days":150,"endReason":"survived","won":false,"maxWave":4,"standing":199,"scaleRank":"regional","endPantryKcal":11132,"killCalls":122,"snapshots":149,"vetSays":28,"convoOpens":135,"convoDawnReads":0,"deaths":144,"errors":0,"file":"evidence/2026-11-14/perseed-ove48-conv-t-ove48-freshband-base/ove48conv-s190562-ove48-freshband-pilot-fix.json"}
+{"seed":190563,"leg":"ove48conv","step":"t-ove48-freshband-base","mode":"fix","standingFix":true,"standingSha":"f8fda4295a99","standingSwapped":true,"policySha":"a7ff5c516440","days":99,"endReason":"village-lost","won":false,"maxWave":5,"standing":225,"scaleRank":"regional","endPantryKcal":0,"killCalls":69,"snapshots":98,"vetSays":27,"convoOpens":60,"convoDawnReads":0,"deaths":79,"errors":0,"file":"evidence/2026-11-14/perseed-ove48-conv-t-ove48-freshband-base/ove48conv-s190563-ove48-freshband-pilot-fix.json"}
+{"seed":190564,"leg":"ove48conv","step":"t-ove48-freshband-base","mode":"fix","standingFix":true,"standingSha":"f8fda4295a99","standingSwapped":true,"policySha":"a7ff5c516440","days":82,"endReason":"village-lost","won":false,"maxWave":4,"standing":199,"scaleRank":"regional","endPantryKcal":0,"killCalls":79,"snapshots":79,"vetSays":40,"convoOpens":82,"convoDawnReads":0,"deaths":84,"errors":0,"file":"evidence/2026-11-14/perseed-ove48-conv-t-ove48-freshband-base/ove48conv-s190564-ove48-freshband-pilot-fix.json"}
+{"seed":190565,"leg":"ove48conv","step":"t-ove48-freshband-base","mode":"fix","standingFix":true,"standingSha":"f8fda4295a99","standingSwapped":true,"policySha":"a7ff5c516440","days":81,"endReason":"village-lost","won":false,"maxWave":4,"standing":195,"scaleRank":"regional","endPantryKcal":7448,"killCalls":47,"snapshots":79,"vetSays":31,"convoOpens":84,"convoDawnReads":0,"deaths":63,"errors":0,"file":"evidence/2026-11-14/perseed-ove48-conv-t-ove48-freshband-base/ove48conv-s190565-ove48-freshband-pilot-fix.json"}
+{"seed":190566,"leg":"ove48conv","step":"t-ove48-freshband-base","mode":"fix","standingFix":true,"standingSha":"f8fda4295a99","standingSwapped":true,"policySha":"a7ff5c516440","days":103,"endReason":"village-lost","won":false,"maxWave":4,"standing":199,"scaleRank":"regional","endPantryKcal":0,"killCalls":84,"snapshots":102,"vetSays":75,"convoOpens":91,"convoDawnReads":0,"deaths":102,"errors":0,"file":"evidence/2026-11-14/perseed-ove48-conv-t-ove48-freshband-base/ove48conv-s190566-ove48-freshband-pilot-fix.json"}
+{"seed":190567,"leg":"ove48conv","step":"t-ove48-freshband-base","mode":"fix","standingFix":true,"standingSha":"f8fda4295a99","standingSwapped":true,"policySha":"a7ff5c516440","days":132,"endReason":"village-lost","won":false,"maxWave":4,"standing":199,"scaleRank":"regional","endPantryKcal":0,"killCalls":72,"snapshots":131,"vetSays":16,"convoOpens":122,"convoDawnReads":0,"deaths":84,"errors":0,"file":"evidence/2026-11-14/perseed-ove48-conv-t-ove48-freshband-base/ove48conv-s190567-ove48-freshband-pilot-fix.json"}
+{"seed":190568,"leg":"ove48conv","step":"t-ove48-freshband-base","mode":"fix","standingFix":true,"standingSha":"f8fda4295a99","standingSwapped":true,"policySha":"a7ff5c516440","days":110,"endReason":"village-lost","won":false,"maxWave":4,"standing":199,"scaleRank":"regional","endPantryKcal":0,"killCalls":76,"snapshots":108,"vetSays":24,"convoOpens":102,"convoDawnReads":0,"deaths":87,"errors":0,"file":"evidence/2026-11-14/perseed-ove48-conv-t-ove48-freshband-base/ove48conv-s190568-ove48-freshband-pilot-fix.json"}
+analyzer scratch patched (SEEDS + RUN + step ids + V5-not-applicable)
+30,31c30,31
+< const SEEDS = [190457, 190458, 190459, 190460, 190461, 190462, 190463, 190464];
+< const RUN = 'ove48-conv-pilot';
+---
+> const SEEDS = [190561, 190562, 190563, 190564, 190565, 190566, 190567, 190568];
+> const RUN = 'ove48-freshband-pilot';
+197c197
+<   if (!b3) { out.mismatches.push('no band-3 mapping for step ' + step); return out; }
+---
+>   if (!b3) { return out; } // fresh band: V5 does not apply (no band-3 counterpart on fresh seeds); band3Step stays null
+226,227c226,227
+<   const isSubj = step === 't-ove48-conv-subj';
+<   const isBase = step === 't-ove48-conv-base';
+---
+>   const isSubj = step === 't-ove48-freshband-subj';
+>   const isBase = step === 't-ove48-freshband-base';
+ove48-conv t-ove48-freshband-base: VALID-INSTRUMENT (survived 1/8)
+  wall: wins 0, national 0, table 0, wave5 1/8, wave4 8/8, median 103d, deaths 717, standing 195–225
+  death causes (717): {"villager combat":290,"monster":21,"combat":99,"expedition":197,"the arena":3,"lockjaw":2,"the wild":83,"ambush":2,"The Congregation":1,"contest":3,"the expedition":1,"Big-Eyes":1,"a stranger":2,"starvation":2,"a wound that wouldn't close":4,"sickness":2,"the night":1,"Big Big":1,"The Callback":1,"The Reunion":1}
+  instrument errors: 0
+  convo: opens 774, classified 100.0%, dawnReads 0, weighted-pick 443, aligned 31.2% (n=443)
+  convo: wantDist {"curious":343,"seek_comfort":63,"ask_favor":310,"seek_taken":51,"share_news":4,"just_company":3} sourceDist {"weighted-pick":443,"seed":331}
+  convo: dawnPresent 100.0%, openerProduced 100.0%, stageClose {"0":203,"1":442,"2":129}
+  convo: lines 361 (dawn 0, commitment 0, want 0), pickDawn agree null (n=0)
+  replication vs band-3 null: checked 0 seeds, mismatches 0
+  seed 190561: 95d village-lost standing 199 scale regional maxWave 4 deaths 74 errors 0
+  seed 190562: 150d survived standing 199 scale regional maxWave 4 deaths 144 errors 0
+  seed 190563: 99d village-lost standing 225 scale regional maxWave 5 deaths 79 errors 0
+  seed 190564: 82d village-lost standing 199 scale regional maxWave 4 deaths 84 errors 0
+  seed 190565: 81d village-lost standing 195 scale regional maxWave 4 deaths 63 errors 0
+  seed 190566: 103d village-lost standing 199 scale regional maxWave 4 deaths 102 errors 0
+  seed 190567: 132d village-lost standing 199 scale regional maxWave 4 deaths 84 errors 0
+  seed 190568: 110d village-lost standing 199 scale regional maxWave 4 deaths 87 errors 0
+  summary: evidence/2026-11-14/ove48-conv-t-ove48-freshband-base-summary.json
