@@ -977,15 +977,26 @@ async function runSeed(seed) {
         convoLines.push('FULL-TRANSCRIPT (' + ft.length + ' entries):');
         for (const e of ft) convoLines.push('  [' + (e.who || '?') + '] ' + (e.text || ''));
         // R217 Q1 REVISED: closing beats = them-entries endConvo spoke
-        // AFTER the last printed THEM line (match the printed THEM lines
-        // — opening + each turn — in order against the transcript).
-        let ptr = 0, lastMatchIdx = -1;
-        for (let i = 0; i < ft.length; i++) {
-          if (ft[i] && ft[i].who === 'them' && ptr < printedThem.length && ft[i].text === printedThem[ptr]) { ptr++; lastMatchIdx = i; }
+        // AFTER the last printed THEM line (the grace beat), anchored by
+        // reverse search. Sequential matching OVERCOUNTS: a mid-sitting
+        // line reworded in the transcript (e.g. foreign-language glosses
+        // replace the printed line) stalls the pointer and everything
+        // after it counts as "after" (pilot Valeria read 7 instead of 1).
+        // If the anchor is absent from the transcript, beatsAfter is null
+        // (unknown — the analyzer flags it for a human read, never a CUT).
+        let lastMatchIdx = -1;
+        const anchor = printedThem.length ? printedThem[printedThem.length - 1] : null;
+        if (anchor != null) {
+          for (let i = ft.length - 1; i >= 0; i--) {
+            if (ft[i] && ft[i].who === 'them' && ft[i].text === anchor) { lastMatchIdx = i; break; }
+          }
         }
-        let beatsAfter = 0; const beatTexts = [];
-        for (let i = lastMatchIdx + 1; i < ft.length; i++) {
-          if (ft[i] && ft[i].who === 'them') { beatsAfter++; beatTexts.push(ft[i].text); }
+        let beatsAfter = null; const beatTexts = [];
+        if (lastMatchIdx >= 0) {
+          beatsAfter = 0;
+          for (let i = lastMatchIdx + 1; i < ft.length; i++) {
+            if (ft[i] && ft[i].who === 'them') { beatsAfter++; beatTexts.push(ft[i].text); }
+          }
         }
         sittingCloses.push({ name: nm, vid: String(vid), endedByEngine, closingLine: (end && end.line) || null,
           lastThem: printedThem.length ? printedThem[printedThem.length - 1] : null,

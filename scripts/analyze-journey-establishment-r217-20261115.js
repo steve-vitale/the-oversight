@@ -182,7 +182,9 @@ for (const seed of seeds) {
     for (const sc of closes) {
       totalSittings++;
       const who = `${sc.name || '?'} (${sc.vid || '?'})`;
-      if (sc.endedByEngine && (sc.beatsAfterLastThem || 0) === 0 && !sc.closingLine) {
+      if (sc.beatsAfterLastThem === null || sc.beatsAfterLastThem === undefined) {
+        noCloseOther++; engineCutDetail.push(`seed ${seed}: UNKNOWN-BEATS — ${who} (anchor not found in transcript; read in full, never a CUT)`);
+      } else if (sc.endedByEngine && sc.beatsAfterLastThem === 0 && !sc.closingLine) {
         engineCut++; engineCutDetail.push(`seed ${seed}: CUT — ${who} (engine-ended, 0 closing beats after last THEM: "${(sc.lastThem || '').slice(0, 80)}")`);
       } else if (sc.endedByEngine) engineCutWithClosing++;
       else if (!sc.closingLine) { noCloseOther++; engineCutDetail.push(`seed ${seed}: NO-CLOSE (other) — ${who}`); }
