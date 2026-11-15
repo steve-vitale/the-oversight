@@ -6997,6 +6997,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // CURIOSITY (Steve 2026-10-09): curious foragers examine as they work.
         // See villagerCuriousExamine — attention is cheap, knowledge isn't free.
         try { this.villagerCuriousExamine(vid); } catch (e) {}
+        // PRACTICE (establishment r139 2026-11-14: the spotter blank):
+        // foraging IS handling plants — the forager's hands learn the
+        // ground they work. One foodXp['spotter'] rep per forage
+        // resolution, first-per-day (foodXpDay.spotter, the r131 cook
+        // cap): a daily forager reaches skill 1 in ~5 days, skill 2 in
+        // ~25, skill 3 in ~55, so it cannot race inside the leg. The
+        // r131 "no fake progress" guard is retired by design: the
+        // threshold benefit in bumpPlantFamiliarity (below) now gives
+        // spotter skill a live effect — faster recognition, never
+        // field identification (KNOWLEDGE.md: identification happens
+        // BACK AT CAMP).
+        try {
+          const _sp = (this.getPerson ? this.getPerson(vid) : null) || vp;
+          const _sday = (this.state.scholar || {}).day || 1;
+          if (_sp) {
+            _sp.foodXpDay = _sp.foodXpDay || {};
+            if (_sp.foodXpDay.spotter !== _sday) { _sp.foodXpDay.spotter = _sday; this.grantFoodXpCredit(_sp, 'spotter', 1); }
+          }
+        } catch (e) {}
         this.say(`🌿 ${first} returns with foraged food: +${kcal} kcal to the pantry.${landNote}${learned}`);
         this.bumpTrust(vid, 2, 'hauled foraged food to the pantry');
         // PARITY (2026-10-14): the player's forage deed, same n and cap.
@@ -27464,6 +27483,26 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (occupation.includes('hunter') || occupation.includes('cook') || occupation.includes('chef')) threshold = 2;
       if (occupation.includes('nurse') && plant.medicinal) threshold = 2;
       if (occupation.includes('bus driver') || occupation.includes('accountant') || occupation.includes('dropout')) threshold = 4;
+      // SPOTTER (establishment r139 2026-11-14: the spotter blank) — the
+      // "(future: faster ID)" the food.js table promises, wired: a
+      // spotter's hands read the ground faster, so the recognition
+      // threshold drops by 1 (floor 1). Recognition only — this never
+      // names a plant (KNOWLEDGE.md: identification happens BACK AT
+      // CAMP). The threshold is fixed at first encounter (existing
+      // shape), so the benefit applies to plants first met after the
+      // skill is earned. Handling also teaches: one foodXp['spotter']
+      // rep, first per day (foodXpDay.spotter, the r131 cook cap) —
+      // this is the single funnel for field handling (forage sweep +
+      // examine paths), so the grant fires on any field handling.
+      try {
+        const _me = (this.getPerson ? this.getPerson(this.villagerId) : null) || villager;
+        if (_me) {
+          if (this.specialistSkill && this.specialistSkill(_me, 'spotter') >= 1) threshold = Math.max(1, threshold - 1);
+          const _sday = (this.state.scholar || {}).day || 1;
+          _me.foodXpDay = _me.foodXpDay || {};
+          if (_me.foodXpDay.spotter !== _sday) { _me.foodXpDay.spotter = _sday; this.grantFoodXpCredit(_me, 'spotter', 1); }
+        }
+      } catch (e) {}
       this.state.codex.encounters = this.state.codex.encounters || {};
       const enc = this.state.codex.encounters[pid] || 0;
       const newEnc = enc === 0 && isLocal ? 1 : enc + 1;

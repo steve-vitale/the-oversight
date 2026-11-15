@@ -21,8 +21,14 @@
 //         — the uncapped pilot raced (5 cooks hit skill 3 in 42 days).
 //   mend: 1 foodXp['builder'] rep per mend resolution via grantFoodXpCredit,
 //         same per-day cap.
-//   spotter: NO grant site — granting XP toward a skill that does nothing
-//         would be fake progress (guarded by Q1e).
+//   spotter: NO grant site in r131 — granting XP toward a skill that did
+//         nothing would have been fake progress (guarded by Q1e).
+//         RETIRED BY DESIGN in r139 (establishment 2026-11-14): the
+//         threshold benefit in bumpPlantFamiliarity now gives spotter
+//         skill a live effect — faster recognition, never field
+//         identification — so the forage grant (checks F / AE below)
+//         is real progress, not fake. The r131 guard is flipped, not
+//         loosened: it now asserts the grant site EXISTS.
 //   driver: layers withDelegate under withHuntStaff so mend is actually
 //         assigned (crafters -> mend; skips villagers who already hold an
 //         assignment, so hunt staffing is untouched).
@@ -31,7 +37,8 @@
 //
 // This test proves the fix end to end:
 //   source : cook + mend sites call the helper; preserver/butcher sites
-//            still call it; NO spotter grant site exists; the helper is
+//            still call it; a spotter grant site EXISTS (r139 retired the
+//            r131 "no fake progress" guard by design); the helper is
 //            unchanged (first-rung headroom + 2:1 above); askSpecialist
 //            still grants +1; the rung is still 5/15/30; the driver
 //            layers withDelegate under withHuntStaff and logs cook XP +
@@ -41,7 +48,7 @@
 //            still fires per batch; above the rung (XP pinned at 5) ->
 //            +0 cook XP, carry 1; mend resolution -> +1 builder XP;
 //            above the rung -> +0, carry 1; tend/teach grant nothing;
-//            forage resolution grants no spotter XP; cook/builder rungs
+//            forage resolution grants spotter XP (r139); cook/builder rungs
 //            (5 -> 1, 15 -> 2, 30 -> 3) through the helper.
 //   analyzer: synthetic corpora prove the Q1a–Q1e verdict lines (GO at
 //            cook 4/16 + builder 2/16 + pace03 cook+builder 1 +
@@ -83,9 +90,16 @@ check('A helper-unchanged-first-rung-headroom', /grantFoodXpCredit\(person, task
   /person\.foodXpRemainder\[task\] = carry/.test(GAME_SRC));
 check('B cook-site-calls-helper', /grantFoodXpCredit\(_cp, 'cook', 1\)/.test(GAME_SRC));
 check('C mend-site-calls-helper', /grantFoodXpCredit\(_mp, 'builder', 1\)/.test(GAME_SRC));
-check('D preserver-site-still-calls-helper', /grantFoodXpCredit\(person, 'preserver', n\)/.test(GAME_SRC));
+check('D preserver-site-still-calls-helper', /grantFoodXpCredit\(person, 'preserver', _grant\)/.test(GAME_SRC));
+// (r139: r131 pinned the units variable as `n`; r133 6f7ab7b2b renamed it
+// `_grant` with the preserver unit cap. The site and the helper call are
+// unchanged — only the regex is updated to the current name, the
+// assertion is not loosened.)
 check('E butcher-site-still-calls-helper', /grantFoodXpCredit\(_hp, 'butcher', 1\)/.test(GAME_SRC));
-check('F no-spotter-grant-site', !/grantFoodXpCredit\([^)]*'spotter'/.test(GAME_SRC));
+// r139 retired the "no fake progress" guard BY DESIGN (the threshold
+// benefit in bumpPlantFamiliarity now gives spotter skill a live effect),
+// so F asserts the grant site EXISTS.
+check('F spotter-grant-site-exists', /grantFoodXpCredit\([^)]*'spotter'/.test(GAME_SRC));
 check('G askspecialist-still-plus-one', /src\.foodXp\[task\] = \(src\.foodXp\[task\] \|\| 0\) \+ 1/.test(FOOD_SRC));
 check('H rung-still-5-15-30', /xp >= 30 \? 3 : xp >= 15 \? 2 : 1/.test(FOOD_SRC));
 check('I driver-layers-delegate-under-huntstaff', /withHuntStaff\(withDelegate\(competent, 'competent-delegate'\), 'competent-hunt'\)/.test(DRIVER_SRC));
@@ -406,11 +420,13 @@ withDir((dir) => {
     Game.resolveOneAssignment(mendVid, { task: 'teach' });
     check('AD tend-teach-grant-nothing', fxOf(mendVid, 'builder') === b0 && fxOf(mendVid, 'cook') === c0,
       `builder ${b0}->${fxOf(mendVid, 'builder')}, cook ${c0}->${fxOf(mendVid, 'cook')}`);
-    // (AE) Forage resolution grants NO spotter XP (no fake progress).
+    // (AE) Forage resolution grants spotter XP (r139 retired the r131
+    // "no fake progress" guard BY DESIGN: the threshold benefit in
+    // bumpPlantFamiliarity now gives spotter skill a live effect).
     resetFx(cookVid, 'spotter');
     Game.resolveOneAssignment(cookVid, { task: 'forage' });
-    check('AE forage-grants-no-spotter-xp', fxOf(cookVid, 'spotter') === 0 && !((Game.getPerson(cookVid) || {}).foodXp || {}).spotter,
-      `spotter xp ${fxOf(cookVid, 'spotter')} (want 0, no write)`);
+    check('AE forage-grants-spotter-xp', fxOf(cookVid, 'spotter') === 1,
+      `spotter xp ${fxOf(cookVid, 'spotter')} (want +1)`);
     // (AF) FIX ISOLATION: the same cook resolution with the helper stubbed
     // to skip 'cook' produces byte-identical pantry + gives output — only
     // foodXp differs. The grant's only effect is the XP credit.
