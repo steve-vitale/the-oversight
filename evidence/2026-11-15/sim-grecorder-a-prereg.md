@@ -154,6 +154,20 @@ Recorder corpora are compared with sweep-compare tables, never
 against a run baseline. If `scripts/telemetry-check.js` REFUSES the
 corpus, record the refusal; never roll the baseline.
 
+## Correction 1 (2026-11-15, before any judged leg — proof-found)
+
+Proof item 3's snapshot-agreement rule gains the **born-dead
+exception**: a `veteran=true` death whose vid never appears in any
+`vetsW4` snapshot is AGREEMENT (not a failure) iff the vetfirst-side
+log's earliest wave-4+ kill day for the vid equals the death day.
+The victim became a veteran in the fight that killed them, after
+that day's snapshot — this is the vetfirst instrument's own
+born-dead case (DIAG §3: 2 pyrrhic veterans never appear in any
+snapshot). Confirmed in the proof run: Grace Obi, seed 100541, day
+141, cause "the wild" — flagged veteran, never in a snapshot, first
+w4+ kill on day 141. The proof test implements the exception and is
+34/34 green.
+
 ## Metric review (placeholder — filled in the evidence file)
 
 - Whether the ≥90% per-class bar was the right bar.
