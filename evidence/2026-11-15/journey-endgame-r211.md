@@ -338,8 +338,13 @@ Pass-A sums: uw 21, won 4/5, peakVet per-seed maxes within regime
   across three runs on two tips, none in code the branch touches.
 - Master moved during the gate: Lane A deepening r213 landed at
   df361def5 (5 files: 2 evidence + 3 scripts, NO src changes, no balance
-  inputs). Second rebase onto df361def5 + targeted proof re-runs owed
-  before merge (body: rebase + re-run proofs when another lane lands
-  first).
-- Landing: [TBD — rebase-2, targeted gate, merge ff-only, release,
-  rotation 4→5 after gate].
+  inputs). Second rebase onto df361def5: clean, 8/8 picks, no quirk.
+- Targeted gate on the FINAL tip (19:30Z): all 5 r211 proof tests GREEN
+  again; balance-proof-update re-validation RC 0 (pointer unchanged —
+  r213's scripts are outside the manifest); measurement-proof-update 9/9
+  + measurement-workflow 9/9; Lane A r213 analyzer proof 20/20 on the
+  merged tree. Full checkquick (336/4, 0 attributable) stands from the
+  5453f710e tip; r213 changed no game code, so no re-run of the full
+  suite is owed.
+- Landing: merged ff-only this run (see main-session record); worktree
+  released; rotation-b 4→5 (social life next).
