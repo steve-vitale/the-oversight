@@ -314,7 +314,12 @@ function analyze(records) {
       proposeDeclined: sc.proposeDeclined | 0, proposeShut: sc.proposeShut | 0,
       proposeBlockedPantry: sc.proposeBlockedPantry | 0, proposeBlockedCap: sc.proposeBlockedCap | 0,
       proposeBlockedPending: sc.proposeBlockedPending | 0, proposeNotReady: sc.proposeNotReady | 0,
-      tendsPaidKcal: sc.tendsPaidKcal | 0, waveKills: waveKills,
+      // COURTSHIP-REWORK (sim-courtship-b metric review #7): the
+      // courtship driver's capSummary nests the covenant counters
+      // under .covenant, so the top-level tendsPaidKcal reads 0 on
+      // the courtship leg while the driver paid 43,500 kcal / 29
+      // tends. Fall back to the nested covenant figure.
+      tendsPaidKcal: (sc.tendsPaidKcal | 0) || ((sc.covenant && sc.covenant.tendsPaidKcal) | 0), waveKills: waveKills,
       accordAnswers: ((at.verbs['answerAccord:policy'] || {}).calls | 0) + ((at.verbs['answerAccord:engine'] || {}).calls | 0),
       proposeCalls: ((at.verbs['proposeLink:policy'] || {}).calls | 0) + ((at.verbs['proposeLink:engine'] || {}).calls | 0),
       proposeFormed: at.formations.filter(function (f) { return f.via === 'proposeLink'; }).length,

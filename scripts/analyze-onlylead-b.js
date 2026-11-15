@@ -293,7 +293,32 @@ function analyze(records) {
       courtshipDeeds[k] = (courtshipDeeds[k] || 0) + 1;
     }
   }
-  return Object.assign(base, { shapes: shapes, byPolicyShapes: byPolicy, verbCallers: verbCallers, foreignMax: foreignMax, opinionFirst10: opinionFirst10, opinionMax: opinionMax, courtshipDeeds: courtshipDeeds });
+  // COURTSHIP-REWORK: pilgrimage stall rollup, read off the driver's
+  // per-day scholar position + pilgrim state (pos / pilgrim fields):
+  // pilgrimDays = series days with a pilgrimage in progress;
+  // zeroMoveDays = pilgrim days where the scholar's position is
+  // unchanged from the previous series day (the 100604 stall read
+  // 156/156 — the rework must drive this to ~0); maxZeroMoveRun =
+  // the longest run of consecutive zero-movement pilgrim days.
+  const pilgrim = {};
+  for (const rec of records) {
+    let days = 0, zero = 0, run = 0, maxRun = 0, prevPos = null;
+    for (const sn of (rec.series || [])) {
+      const pos = sn.pos || null;
+      const pg = sn.pilgrim || null;
+      if (pg) {
+        days++;
+        // The start day never walks by design (the pilgrimage is
+        // only SET that day), so it never counts as zero-movement:
+        // only continuation days (day > start day) can stall.
+        if (pg.day < sn.d && prevPos && pos && prevPos.x === pos.x && prevPos.y === pos.y) { zero++; run++; if (run > maxRun) maxRun = run; }
+        else run = 0;
+      } else run = 0;
+      if (pos) prevPos = pos;
+    }
+    pilgrim[rec.seed + '-' + rec.policy] = { pilgrimDays: days, zeroMoveDays: zero, maxZeroMoveRun: maxRun };
+  }
+  return Object.assign(base, { shapes: shapes, byPolicyShapes: byPolicy, verbCallers: verbCallers, foreignMax: foreignMax, opinionFirst10: opinionFirst10, opinionMax: opinionMax, courtshipDeeds: courtshipDeeds, pilgrim: pilgrim });
 }
 
 if (require.main === module) (async function () {
@@ -327,6 +352,7 @@ if (require.main === module) (async function () {
   }
   console.log('verbCallers (peer/raid): ' + JSON.stringify(out.verbCallers));
   console.log('courtshipDeeds (aid/study): ' + JSON.stringify(out.courtshipDeeds));
+  console.log('pilgrim (days/zeroMove/maxRun): ' + JSON.stringify(out.pilgrim));
   console.log('foreignMax: ' + JSON.stringify(out.foreignMax));
   console.log('UNCLASSIFIED total: ' + out.shapes.unclassified);
   console.log('wrote ' + path.relative(REPO, outPath));

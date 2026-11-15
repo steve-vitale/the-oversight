@@ -299,6 +299,10 @@ function snapshot(Game, errors) {
       road: { nPrimSeas: nPrimSeas, nConq: nConq, nConqSeas: nConqSeas, nCovFormed: nCovFormed, nCovSeas: nCovSeas, nTradeFormed: nTradeFormed, nTradeSeas: nTradeSeas, bestBelong: bestBelong },
       rungDay: rungDay, rungMet: day >= rungDay && !!st.networkLive,
       // COURTSHIP: daily opinion read on the judged leg (see above).
+      // COURTSHIP-REWORK: scholar position on every snapshot, so the
+      // re-pilot corpus can prove the stall fix directly
+      // (zero-movement pilgrim days must go to ~0). Pure read.
+      pos: { x: (Game.map || {}).px, y: (Game.map || {}).py },
       maxOpinion: maxOpinion, opinions: opinions,
       scaleRefused: !!st.scaleRefused, exiled: !!((st.scholar || {}).exiled),
       pendingCounter: st.pendingCounter ? { target: st.pendingCounter.targetId || null, day: st.pendingCounter.day | 0 } : null,
@@ -363,6 +367,14 @@ async function oneRun(seed, policyName, opts) {
     if (!sn) return;
     if (sn.d === lastDay) return; // one snapshot per game day
     lastDay = sn.d;
+    // COURTSHIP-REWORK: pilgrim state on the snapshot, from the
+    // harness ctx the policy closes over (pure reads of ctx fields).
+    try {
+      if (capturedCtx) {
+        sn.pilgrim = capturedCtx._pilgrim ? { vid: capturedCtx._pilgrim.vid, day: capturedCtx._pilgrim.day | 0 } : null;
+        sn.returning = !!capturedCtx._returning;
+      }
+    } catch (e) {}
     series.push(sn);
   }
 
@@ -719,6 +731,12 @@ if (require.main === module) (async function () {
     // (control), armed is covenant + courtship deeds (on). Older RUNs
     // keep the scaleclimb→control mapping.
     if (RUN === 'courtship-b') {
+      return path.join(REPO, 'evidence', '2026-11-15',
+        pol === 'competent-covenant-b' ? stem + '-control' : stem + '-on');
+    }
+    // COURTSHIP-REWORK (RUN=courtship-rework-b): same two legs, own
+    // corpora dirs (perseed-courtship-rework-b-control / -on).
+    if (RUN === 'courtship-rework-b') {
       return path.join(REPO, 'evidence', '2026-11-15',
         pol === 'competent-covenant-b' ? stem + '-control' : stem + '-on');
     }

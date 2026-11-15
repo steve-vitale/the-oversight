@@ -1,6 +1,43 @@
 // competent-courtship-b — the COURTSHIP-DEEDS lever (arm sim-courtship-b,
 // run fleshout-loop-b-20261115T1330Z, axis winnability chain).
 //
+// REWORK (arm sim-courtship-rework-b, run fleshout-loop-b-20261115T1810Z,
+// prereg evidence/2026-11-15/sim-courtship-rework-b-prereg.md).
+// Diagnosis of the 1630Z PILOT NO-GO, from the committed corpora +
+// live probes (scripts/probe-pilgrim-b.js … probe-pilgrim4-b.js):
+//   (a) STARVATION IS TRAJECTORY, NOT SPEND. The 5 starvation deaths
+//   sit 8–43 days after the last aid (100604 d12 with 10,100 kcal
+//   still in the pantry; 100606 d38/d83, 100607 d84, 100608 d118 —
+//   all in endgame pantry-collapse troughs 30+ days post-aid), and
+//   the three seeds that paid the full 6,000 kcal starved 0. The aid
+//   price is UNCHANGED (2,000 kcal, pantry gate 12,000). The stall
+//   fix below IS the cost fix: it removes up to 156 days of scholar
+//   absence — the trajectory distortion that moved the legs apart.
+//   (b) THE STALL IS ONE RUBBLE TILE + A GREEDY WALK. On seed
+//   100604 the scholar NEVER MOVED on 196 pilgrim-days: walkTo
+//   picked the minimum-distance offered target (a 2–3 tile jump
+//   straight at the village) and travelTo refused it because the
+//   intermediate tile (4,6) carries rubble — 146 days inter-blocked,
+//   50 days dest-blocked, ALL rubble@(4,6), tbfight false every day,
+//   a passing detour ((5,4) → (5,5) → (5,6)) open every day. The
+//   villages are 3 tiles away, not far; distance was never the cause,
+//   so the stale window is NOT scaled (14 days is ~7× the honest
+//   walk). Splinter villages sit at (parent.x+1, parent.y) — on the
+//   9x9 board too (villageAgency.js _vaMakeSplinterVillage).
+// THE REWORK (policy-side, zero src/js):
+//   1. walkTo tries EVERY offered target nearest-first with a
+//      pure-read blockage pre-check (destination + intermediates,
+//      the same scan travelTo runs) and takes the first step that
+//      moves the scholar — never stepping AWAY from the village, so
+//      it cannot oscillate. A refused jump routes around the rubble
+//      instead of stranding the scholar.
+//   2. A stale drop walks the scholar HOME (ctx._returning) instead
+//      of restarting in place, and a village that goes stale TWICE
+//      is never re-pilgrimaged (the aid can still court it).
+//   3. The pilgrimage is VOICED — played lines for start / stale
+//      turn-home / return (the study already voices itself through
+//      the engine's keeper line). No more silent months on the road.
+//
 // POLICY-SIDE ONLY. ZERO src/js changes, zero default flips, no changes
 // to any existing policy file. This is a measurement instrument, not a
 // play recommendation: it composes onto the FROZEN covenant-road policy
@@ -66,23 +103,35 @@ const AID_KCAL = 2000;
 const AID_PANTRY = 12000;
 const COV_CAP = 3;
 const PILGRIM_STALE_DAYS = 14;
+const PILGRIM_MAX_STALE_DROPS = 2;
 const PILGRIM_MIN_HP = 0.7;
 const HAVEN_X = 4, HAVEN_Y = 4;
 
 const STATS = { aids: 0, aidsPaidKcal: 0, aidsBlockedPantry: 0,
   aidsBlockedPending: 0, aidsBlockedCap: 0, aidsNoCandidate: 0,
   studies: 0, pilgrimages: 0, pilgrimDays: 0,
+  walkRefusals: 0, staleDrops: 0,
   nationalPendingDays: 0, errors: 0, events: [] };
 function resetCourtshipStats() {
   STATS.aids = 0; STATS.aidsPaidKcal = 0; STATS.aidsBlockedPantry = 0;
   STATS.aidsBlockedPending = 0; STATS.aidsBlockedCap = 0; STATS.aidsNoCandidate = 0;
   STATS.studies = 0; STATS.pilgrimages = 0; STATS.pilgrimDays = 0;
+  STATS.walkRefusals = 0; STATS.staleDrops = 0;
   STATS.nationalPendingDays = 0; STATS.errors = 0;
   STATS.events = [];
 }
 function courtshipStats() { return JSON.parse(JSON.stringify(STATS)); }
 
 function dayOf(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; } catch (e) { return 0; } }
+function villageName(Game, vid) {
+  try {
+    var v = ((Game.state || {}).otherVillages || []).find(function (x) { return x && x.id === vid; });
+    return (v && v.name) || vid;
+  } catch (e) { return vid; }
+}
+function sayLine(Game, text) {
+  try { if (Game.say) Game.say(text); } catch (e) { STATS.errors += 1; }
+}
 function pantryKcal(Game) {
   try {
     return ((Game.state.village || {}).pantry || [])
@@ -111,24 +160,92 @@ function event(day, kind, village, outcome, extra) {
   if (STATS.events.length > 400) STATS.events.splice(0, STATS.events.length - 400);
 }
 
-// walkTo (scalecourt.js, verbatim): hop-by-hop honest walk toward
-// (hx,hy) — one travelTo per hop, no force, bounded.
+// pathBlocked (REWORK): the pure-read half of Game.travelTo's
+// refusal logic — destination blockage + the intermediate-tile scan
+// on every shortest path (game.js travelTo, same bounding box,
+// same entry-side rule). Returns the blocking {kind, blockType,
+// x, y} or null. PURE reads only (travelBlockage / tileAt): calling
+// travelTo speculatively would SAY the blockage line on every
+// refusal, flooding the log. Off-board intermediates that are not
+// yet generated are treated as open — every village target (and
+// Haven) sits on the 9x9 board, so the scan never needs to
+// generate ground; travelTo still makes the final call.
+function pathBlocked(Game, x, y) {
+  try {
+    var px0 = Game.map.px, py0 = Game.map.py;
+    var dest = null;
+    try { dest = Game.travelBlockage ? Game.travelBlockage(x, y) : null; } catch (e) {}
+    if (dest) return dest;
+    var dTot = Math.abs(x - px0) + Math.abs(y - py0);
+    if (dTot > 1) {
+      var bx0 = Math.min(px0, x) - 1, bx1 = Math.max(px0, x) + 1;
+      var by0 = Math.min(py0, y) - 1, by1 = Math.max(py0, y) + 1;
+      for (var ty = by0; ty <= by1; ty++) for (var tx = bx0; tx <= bx1; tx++) {
+        if ((tx === px0 && ty === py0) || (tx === x && ty === y)) continue;
+        var dS = Math.abs(tx - px0) + Math.abs(ty - py0);
+        var dT = Math.abs(x - tx) + Math.abs(y - ty);
+        if (dS === 0 || dS + dT !== dTot) continue; // not on a shortest path
+        for (var oi = 0; oi < 4; oi++) {
+          var o = [[1, 0], [-1, 0], [0, 1], [0, -1]][oi];
+          var ex = tx + o[0], ey = ty + o[1];
+          if (ex < bx0 || ex > bx1 || ey < by0 || ey > by1) continue;
+          var dE = Math.abs(ex - px0) + Math.abs(ey - py0);
+          if (dE !== dS - 1 || dE + 1 + dT !== dTot) continue; // entry not on a shortest path
+          // Ungenerated off-board intermediates read as open (see above).
+          var t = null;
+          try { t = Game.tileAt ? Game.tileAt(tx, ty) : null; } catch (e) {}
+          if (!t && (tx < 0 || tx > 8 || ty < 0 || ty > 8)) continue;
+          var ib = null;
+          try { ib = Game.travelBlockage ? Game.travelBlockage(tx, ty, ex, ey) : null; } catch (e) {}
+          if (ib) return ib;
+        }
+      }
+    }
+    return null;
+  } catch (e) { return null; }
+}
+
+// walkTo (REWORKED — the stall fix): hop-by-hop honest walk toward
+// (hx,hy) — one travelTo per hop, no force, bounded. The old walk
+// picked ONLY the minimum-distance offered target and broke on the
+// first refusal: on seed 100604 a rubble tile at (4,6) vetoed every
+// 3-tile jump to (5,6) for 14 days while a one-step detour stood
+// open, and the scholar never moved. The new walk tries EVERY
+// offered target nearest-first (deterministic order), pre-checking
+// each with pathBlocked, and takes the first step that moves the
+// scholar — never stepping AWAY from the destination (dist-to-target
+// never grows), so it routes around a blocked tile instead of
+// stranding, and cannot oscillate. It stops only when NO offered
+// step moves the scholar (genuinely walled in) or a fight goes live.
 function walkTo(Game, hx, hy) {
   try {
     var guard = 0;
     while ((Game.map.px !== hx || Game.map.py !== hy) && guard++ < 10 && !Game.over && !Game.tbfight) {
-      var best = null, bd = 1e9;
+      if (Game.inCombat && Game.inCombat()) break; // mid-fight: the barrier is the way out
       var targets = [];
       try { targets = (Game.travelTargets && Game.travelTargets()) || []; } catch (e) {}
+      var dNow = Math.abs(hx - Game.map.px) + Math.abs(hy - Game.map.py);
+      targets.sort(function (a, b) {
+        var da = Math.abs(a.x - hx) + Math.abs(a.y - hy);
+        var db = Math.abs(b.x - hx) + Math.abs(b.y - hy);
+        if (da !== db) return da - db;
+        if (a.x !== b.x) return a.x - b.x;
+        return a.y - b.y;
+      });
+      var moved = false;
       for (var ti = 0; ti < targets.length; ti++) {
         var tt = targets[ti];
-        var d = Math.abs(tt.x - hx) + Math.abs(tt.y - hy);
-        if (d < bd) { bd = d; best = tt; }
+        // Never step away from the destination (no oscillation), and
+        // never re-try a step the pre-check already vetoes.
+        if (Math.abs(tt.x - hx) + Math.abs(tt.y - hy) > dNow) continue;
+        if (pathBlocked(Game, tt.x, tt.y)) { STATS.walkRefusals += 1; continue; }
+        var px0 = Game.map.px, py0 = Game.map.py;
+        try { Game.travelTo(tt.x, tt.y); } catch (e) { STATS.walkRefusals += 1; continue; }
+        if (Game.map.px !== px0 || Game.map.py !== py0) { moved = true; break; }
+        STATS.walkRefusals += 1;
+        if (Game.inCombat && Game.inCombat()) break; // the step started a fight
       }
-      if (!best) break;
-      var px0 = Game.map.px, py0 = Game.map.py;
-      try { Game.travelTo(best.x, best.y); } catch (e) { break; }
-      if (Game.map.px === px0 && Game.map.py === py0) break; // refused: stay put, safely
+      if (!moved) break; // genuinely stuck: no offered step moves
     }
   } catch (e) {}
 }
@@ -150,8 +267,24 @@ function courtshipStep(Game, ctx) {
       var tv = null;
       try { tv = ((st.otherVillages || []).find(function (v) { return v && v.id === pg.vid; })) || null; } catch (e) {}
       var px = (Game.map || {}).px, py = (Game.map || {}).py;
-      if (!tv || isLinked(Game, pg.vid) || day - pg.day > PILGRIM_STALE_DAYS || Game.over || Game.tbfight) {
-        ctx._pilgrim = null; // done, linked, stale, or interrupted — drop it
+      if (!tv || isLinked(Game, pg.vid) || Game.over || Game.tbfight) {
+        ctx._pilgrim = null; // done, linked, or interrupted — drop it
+      } else if (day - pg.day > PILGRIM_STALE_DAYS) {
+        // REWORK: a stale trip WALKS HOME instead of restarting in
+        // place (the old code dropped the trip and the start logic in
+        // the same call re-picked the same village — the 15-day loop).
+        // The stall is voiced, not silent, and a village that goes
+        // stale twice is never re-pilgrimaged — the road to it does
+        // not open on foot, and the scholar stops wasting seasons
+        // on it (the aid gift can still court it).
+        var staleN = ((ctx._ctStale && ctx._ctStale[pg.vid]) || 0) + 1;
+        try { ctx._ctStale = ctx._ctStale || {}; ctx._ctStale[pg.vid] = staleN; } catch (e) {}
+        STATS.staleDrops += 1;
+        event(day, 'pilgrimage-stale', pg.vid, 'turn-home', { staleCount: staleN });
+        sayLine(Game, 'The road to ' + villageName(Game, pg.vid) + '\'s fire will not open — fourteen days of refused paths. You turn for home; their codex stays unread.');
+        ctx._pilgrim = null;
+        ctx._returning = true;
+        ctx._returningFrom = pg.vid;
       } else {
         STATS.pilgrimDays += 1;
         var dist = Math.abs((tv.x || HAVEN_X) - px) + Math.abs((tv.y || HAVEN_Y) - py);
@@ -166,16 +299,23 @@ function courtshipStep(Game, ctx) {
           event(day, 'study', pg.vid, 'codex', { opinionBefore: opBefore, opinionAfter: (tv.opinion | 0) });
           ctx._pilgrim = null;
           ctx._returning = true;
+          ctx._returningFrom = pg.vid;
           return 'took-day';
         }
         walkTo(Game, tv.x || HAVEN_X, tv.y || HAVEN_Y);
         return 'took-day';
       }
     }
-    // Walk home after a study.
+    // Walk home after a study (or a stale turn-home).
     if (ctx._returning) {
       walkTo(Game, HAVEN_X, HAVEN_Y);
-      if (Game.map.px === HAVEN_X && Game.map.py === HAVEN_Y) ctx._returning = false;
+      if (Game.map.px === HAVEN_X && Game.map.py === HAVEN_Y) {
+        ctx._returning = false;
+        if (ctx._returningFrom) {
+          sayLine(Game, 'You walk back into Haven, ' + villageName(Game, ctx._returningFrom) + '\'s codex still open in your head.');
+          ctx._returningFrom = null;
+        }
+      }
       return 'took-day';
     }
     // Start a pilgrimage: nearest below-bar, unstudied candidate we
@@ -198,6 +338,10 @@ function courtshipStep(Game, ctx) {
             if ((v.opinion || 0) >= 10) continue;
             if (v._codexOpinionGiven) continue;
             if (ctx._ctStudied && ctx._ctStudied[v.id]) continue;
+            // REWORK: a village that went stale twice is unreachable
+            // on foot — never re-pilgrimage it (the aid can still
+            // court it). Without this the stall restarts forever.
+            if (ctx._ctStale && (ctx._ctStale[v.id] || 0) >= PILGRIM_MAX_STALE_DROPS) continue;
             needy.push(v);
           }
         } catch (e) { STATS.errors += 1; }
@@ -212,6 +356,7 @@ function courtshipStep(Game, ctx) {
           ctx._pilgrim = { vid: nt.id, day: day };
           STATS.pilgrimages += 1;
           event(day, 'pilgrimage-start', nt.id, 'walk', { opinion: (nt.opinion | 0) });
+          sayLine(Game, 'You set out on the pilgrimage road to ' + (nt.name || nt.id) + '\'s fire — their codex waits, and the covenant road is walked, not wished.');
           return 'took-day';
         }
       }
@@ -281,5 +426,7 @@ module.exports = { courtshipPolicy: courtshipPolicy,
   resetCourtshipStats: resetCourtshipStats, courtshipStats: courtshipStats,
   resetCovenantStats: resetCovenantStats, covenantStats: covenantStats,
   courtshipStep: courtshipStep, aidStep: aidStep, walkTo: walkTo,
+  pathBlocked: pathBlocked,
   AID_KCAL: AID_KCAL, AID_PANTRY: AID_PANTRY, COV_CAP: COV_CAP,
-  PILGRIM_STALE_DAYS: PILGRIM_STALE_DAYS, PILGRIM_MIN_HP: PILGRIM_MIN_HP };
+  PILGRIM_STALE_DAYS: PILGRIM_STALE_DAYS,
+  PILGRIM_MAX_STALE_DROPS: PILGRIM_MAX_STALE_DROPS, PILGRIM_MIN_HP: PILGRIM_MIN_HP };
