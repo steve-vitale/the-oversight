@@ -232,4 +232,57 @@ staged game).
 
 ## CLOSEOUT — run 2026-11-15T1100Z (this run)
 
-[To fill at closeout: panel table, Q1–Q5 verdicts, telemetry, gate/landing.]
+**Panel (seeds 135601–135604, DAYCAP=140):** 135601 over d84 (0/0,
+extinct, the wild 12, lesser d52); 135602 over d127 (0/0, extinct, the
+wild 19, tribute ready d97 undelivered 0/6, 9 wave-5 fights 0 kills);
+135603 over d136 (0/0, extinct, eleven death causes, lesser d38,
+herald flood 121 lines / 98 gorge-nights, 1 herald kill); 135604 over
+d114 (0/0, extinct, the wild 12 incl. a 6-death day, tribute ready d64
+undelivered 0/14, 22 wave-5 fights 0 kills). Lived-days 461 vs 3-band
+rolling mean 500 (-7.8%, HOLD). Lesser 4/4. Books close, unattributed 0,
+teleOnly 0. Wave-5 fights 31, kills 0.
+
+**Q1 — NO-GO on the wall, blocker named per seed (informative):** national
+0/4, survived 0/4. All four COLLAPSE before national (the wild 12/19/5/12).
+Wall stands on a fresh band; survival fell to 0/4 after two bands at 1–2/4.
+
+**Q2 — all GO/HOLD:** raise 6 talks (4 answered, 2 counter, 0 defects);
+vetbar 0 disagreements; trap HOLD (1 mime answered); betrayal HOLD (0
+offers); nod-loop HOLD (worst 3x, 7/9 sittings — the r132 thin-out
+visible); lived-days HOLD (-7.8% vs the new 500 control — the re-base
+works on first use); lesser 4/4.
+
+**Q3 — RECORDED:** daily-play mimes 17, daily accepts proven 0; three
+comm-'none' villagers (Sanne, Saad, Elif); Elif's mime answered in a
+driver sitting. Lane decision still owed.
+
+**Q4 — PASS:** all 9 transcripts + all 6 raise talks read in full.
+Senseless 0. Strongest: Galym's kept secret (the blank, proven live),
+Tariq on trust, Elif's thinking spot. New surfaces: Rufina opener
+stutter; nonverbal closing pool thin; "Don't tell the others. Everyone
+needs one place." sixth band running; raise closers formulaic ×6.
+
+**Q5 — census in the run note** (`evidence/2026-11-15/journey-scale-r207.md`).
+Spotter skill NOT MEASURABLE from this corpus — end-only snapshot on a
+0/4-survival band returns empty rosters; a d90 snapshot is owed to the
+next run.
+
+**The blanks filled:** secret:* picker LANDED + PROVEN LIVE (Galym d90
+kept confidence); spotter snapshot LANDED as an instrument but UNREADABLE
+on this band (timing, not wiring — d90 snapshot owed next run). Plus the
+wave-5 linger finding: Editor/Spoiler pace at the boundary, 31 fights,
+0 kills — the r206 herald shape, one wave up.
+
+**Telemetry:** 1 LOUD line (fightsByWave.4 -60%: 178 → 71); investigated
+(band composition + collapse-heavy band, no combat code changed);
+**baseline NOT rolled** (5-band sequence shows the metric is
+noise-dominated; rolling would chase noise). fightsTotal QUIET (-37%),
+maxGameDay QUIET (-1.5%).
+
+**Verdicts:** reachable YES, fun PARTIAL (wave-5 is a 31-fight treadmill
+with 0 kills; every village dies before d140), winnable NO (this leg).
+
+**Gate / landing:** see the run note's Gate/landing section (filled at
+closeout). Full record: `evidence/2026-11-15/journey-scale-r207.md`.
+Corpus: `hidden_files/evidence/2026-11-15/journey-scale-r207-*` (goal
+store).
