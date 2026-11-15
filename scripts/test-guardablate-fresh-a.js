@@ -688,7 +688,7 @@ function corpusDir(step) {
     T.ok('evidence records the verdict ' + verdict,
       evidenceFlat.indexOf(verdict) !== -1, 'verdict recorded');
     T.ok('evidence records the baseline gate outcome',
-      evidenceText.indexOf('Gate') !== -1 && (evidenceFlat.indexOf('gate') !== -1), 'gate recorded');
+      evidenceFlat.indexOf('gate PROCEED') !== -1 || evidenceFlat.indexOf('STOP UNMEASURED') !== -1, 'gate recorded');
     T.ok('evidence records the telemetry refusal (recorder-corpus, baseline NOT rolled)',
       evidenceFlat.indexOf('REFUSED') !== -1 && evidenceFlat.indexOf('baseline NOT rolled') !== -1, 'refusal recorded');
     T.ok('evidence carries a metric-review section',
