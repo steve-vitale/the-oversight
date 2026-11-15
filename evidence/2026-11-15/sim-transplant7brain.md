@@ -184,11 +184,12 @@ table 0, wins 0) and merge 1/8.
   the newline) had read hunk 4 CLEAN. Fixed by terminating the patch
   (append '\n'); re-run 56/56. The failure was in the proof's patch
   construction, not in the verdicts.
-- DOCUMENTED: safe-commit.sh index clobber struck 1× this run (prereg +
-  proof commit 694a094ea) — both files showed staged-as-deleted after a
-  correct commit; repaired with the documented `ls-tree -r HEAD --
-  <paths> | git update-index --add --index-info` pipe; both worktree
-  hashes verified == HEAD blobs before continuing.
+- DOCUMENTED: safe-commit.sh index clobber struck 2× this run (prereg +
+  proof commit 694a094ea AND evidence commit 649f7b64c — the second
+  strike also left the proof script MM) — both repaired with the
+  documented `ls-tree -r HEAD -- <paths> | git update-index --add
+  --index-info` pipe; every affected file's worktree hash verified ==
+  HEAD blob before continuing.
 - DOCUMENTED: a host write flap blocked all writes for ~56 min mid-run
   (see §Infrastructure).
 
@@ -258,7 +259,24 @@ the prior arms recorded would apply to any future t7brain corpus.)
   Note the earlier flap the task brief mentioned (~08:18–08:21Z, ~3 min)
   is a SEPARATE, earlier window from this one — two flap windows hit
   this run's morning.
-- SAFE-COMMIT CLOBBER: struck 1× (prereg + proof commit) — repaired with
-  the documented pipe, hashes verified (see §Blanks).
+- SECOND FLAP WINDOW (~09:58–10:01Z, ~3–4 min): the flap RETURNED while
+  committing the clobber-count correction — safe-commit.sh printed
+  "Committed d9c8c004..." but the branch-ref update failed with EPERM
+  (`couldn't write '.../refs/heads/sim-transplant7brain-a.lock'`),
+  leaving the commit object d9c8c0044d25be2085ef423f9576f73ca74ecb41
+  orphaned (HEAD stayed at 649f7b64c) and the evidence file still
+  uncommitted. Flap-watch log confirms FLAP? at 10:01:12Z. The arm
+  STOPPED and probed once a minute (round 6); a runtime restart
+  interrupted the probe loop after 3 attempts (all EPERM, 09:59–10:01Z)
+  — its final result is unconfirmed, but a fresh probe succeeded at
+  10:01:53Z, so the loop's outcome is moot. The orphan commit's tree
+  was verified byte-identical to the worktree file (blob 53069f52... on
+  both sides); the correction was re-committed through the normal
+  safe-commit flow after the clear, not by adopting the orphan by hand.
+  THREE flap windows hit this run's morning in total (~08:18–08:21Z,
+  ~08:52–09:48Z, ~09:58–10:01Z).
+- SAFE-COMMIT CLOBBER: struck 2× (prereg + proof commit, then evidence
+  commit — the second strike also left the proof script MM) — repaired
+  with the documented pipe, hashes verified (see §Blanks).
 - No other infrastructure issues. Worktree clean at end of run except
   this evidence file pre-commit (verified by the proof's §5 legs).
