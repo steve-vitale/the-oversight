@@ -1904,8 +1904,13 @@
     // gets the beat OR the mend, never both — beat-pending links are
     // skipped here (their beat is their repair). Counters live at
     // state.village.funeralMendStats, created only on this path.
+    // PARTIAL VOICE (journey-crisis r216 2026-11-15): a thin pantry buys
+    // back only part of the -8 (600 kcal -> +3), so the public line must
+    // not claim the full -8 on a partial mend — it states the true total
+    // gain instead. The full claim stays verbatim when every mended link
+    // got the whole +8.
     _funeralMend(nm, shaken) {
-      var mended = [], shorted = [], spent = 0;
+      var mended = [], shorted = [], spent = 0, gainTotal = 0, gainFull = true;
       for (var i = 0; i < shaken.length; i++) {
         var link = shaken[i];
         if (!link || link.status !== 'active' || link.pendingRenegotiation) continue;
@@ -1919,6 +1924,8 @@
         if (got > 0) {
           mended.push(link);
           spent += paid;
+          gainTotal += got;
+          if (got < 8) gainFull = false;
           this._linkNote(link, 'funeral-mend', 'Funeral feast fed this fire (' + paid.toLocaleString() + ' kcal, trust +' + got + ') — the -8 bought back with grain.');
           try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'funeral-mend:' + this._linkOther(link, HOME)); } catch (e) {}
         } else {
@@ -1933,10 +1940,15 @@
         var v = this.state.village || {};
         var fm = v.funeralMendStats || (v.funeralMendStats = { funerals: 0, linksMended: 0, kcalSpent: 0 });
         fm.funerals += 1; fm.linksMended += mended.length; fm.kcalSpent += spent;
+        // r216: the trust claim follows the actual gain — a partial mend
+        // never claims the full -8 (see the PARTIAL VOICE note above).
+        var claim = gainFull
+          ? '(Trust mended — the -8 bought back with grain.)'
+          : '(Trust +' + gainTotal + ' — the feast could not buy back the full -8.)';
         if (!shorted.length) {
-          this.say(`🕯️ ${nm}'s funeral feast: ${spent.toLocaleString()} kcal from the pantry, and every shaken fire is fed — ${names(mended)}. The village mourns together, and the links hold because the dead are honored, not because the grief was forgotten. (Trust mended — the -8 bought back with grain.)`);
+          this.say(`🕯️ ${nm}'s funeral feast: ${spent.toLocaleString()} kcal from the pantry, and every shaken fire is fed — ${names(mended)}. The village mourns together, and the links hold because the dead are honored, not because the grief was forgotten. ${claim}`);
         } else {
-          this.say(`🕯️ ${nm}'s funeral feast: ${spent.toLocaleString()} kcal from the pantry feeds ${names(mended)} — the village mourns together, and those links hold because the dead are honored. (Trust mended — the -8 bought back with grain.)`);
+          this.say(`🕯️ ${nm}'s funeral feast: ${spent.toLocaleString()} kcal from the pantry feeds ${names(mended)} — the village mourns together, and those links hold because the dead are honored. ${claim}`);
           this.say(`The pantry could not feed ${names(shorted)}'s fire — no grain to spare for the feast. The mend waits; the grief does not. (Trust stays shaken.)`);
         }
       } else if (shorted.length) {
