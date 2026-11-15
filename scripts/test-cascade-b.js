@@ -86,17 +86,28 @@ if (kase === 'static') {
   const mtBody = raw.slice(mtIdx, mtEnd < 0 ? mtIdx + 8000 : mtEnd);
   if (!/if \(m\.lingering\) return;/.test(mtBody)) fail('static', 'lingering guard not inside monsterTurn');
   if (!/CASCADE \(sim-cascade-b/.test(mtBody)) fail('static', 'guard comment missing in monsterTurn');
+  // STATIC (gorgeprice2-b fix 2026-11-15): the original check diffed the
+  // worktree against HEAD, which only works while the lever is
+  // uncommitted. The lever is now committed, so diff against the
+  // merge-base with master instead — the intent is unchanged: the
+  // game.js change vs master is exactly the guard hunk.
+  let base = '';
+  try { base = execSync('git merge-base HEAD master', { cwd: repo, encoding: 'utf8' }).trim(); } catch (e) { fail('static', 'git merge-base failed: ' + e.message); }
   let changed = [];
-  try { changed = execSync('git diff HEAD --name-only', { cwd: repo, encoding: 'utf8' }).trim().split('\n').filter(Boolean); } catch (e) { fail('static', 'git diff failed: ' + e.message); }
+  try { changed = execSync('git diff ' + base + ' --name-only', { cwd: repo, encoding: 'utf8' }).trim().split('\n').filter(Boolean); } catch (e) { fail('static', 'git diff failed: ' + e.message); }
   if (changed.indexOf('scripts/policies/competent.js') >= 0) fail('static', 'competent.js modified');
   if (changed.indexOf('scripts/policies/competent-answercourt-b.js') >= 0) fail('static', 'competent-answercourt-b.js modified');
   const srcChanged = changed.filter(function (f) { return f.indexOf('src/') === 0; });
   if (srcChanged.length !== 1 || srcChanged[0] !== 'src/js/game.js') fail('static', 'src change must be exactly src/js/game.js, got: ' + srcChanged.join(','));
   let diff = '';
-  try { diff = execSync('git diff HEAD -- src/js/game.js', { cwd: repo, encoding: 'utf8' }); } catch (e) { fail('static', 'git diff game.js failed: ' + e.message); }
+  try { diff = execSync('git diff ' + base + ' -- src/js/game.js', { cwd: repo, encoding: 'utf8' }); } catch (e) { fail('static', 'git diff game.js failed: ' + e.message); }
   if (/tbBarrierExit|tbPlayerEndTurn|fleeRepair/i.test(diff)) fail('static', 'diff touches flee code');
   if (/tbDamage\(|maxHealth\(\)|damage\s*[:=]/i.test(diff)) fail('static', 'diff touches damage/toughness code');
-  pass('static', { changedTracked: changed.length, srcChanged: srcChanged });
+  const hunks = (diff.match(/^@@/gm) || []).length;
+  if (hunks !== 1) fail('static', 'game.js diff must be exactly 1 hunk (the guard), got ' + hunks);
+  const added = (diff.match(/^\+[^+]/gm) || []).length;
+  if (added !== 16) fail('static', 'guard hunk must add exactly 16 lines, got ' + added);
+  pass('static', { base: base.slice(0, 12), changedTracked: changed.length, srcChanged: srcChanged, hunks: hunks, addedLines: added });
 }
 
 if (kase === 'unit-lingering') (async function () {
