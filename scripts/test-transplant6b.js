@@ -80,25 +80,32 @@
 //      no /tmp copies needed, unlike 8c's fresh band).
 //   9. Live subject state — state-aware: before the subject is
 //      cut it asserts the subject branch does NOT exist yet
-//      (prereg preceded the subject); once it exists it asserts
-//      the branch's parent is the far end, the subject diff is
-//      exactly the 6b set (objectives +63/-8 byte-identical
-//      added/removed lines, test file blob-identical, green-list
-//      +1/-0 the one union line), NO brain/ONTOLOGY content, the
-//      6b strings ARE present, subject policy == far-end policy,
-//      subject native standing == far-end standing.
+//      (prereg preceded the subject); once it exists with a subject
+//      commit it asserts the branch's parent is the far end, the
+//      subject diff is exactly the 6b set (objectives +63/-8
+//      byte-identical added/removed lines, test file blob-identical,
+//      green-list +1/-0 the one union line), NO brain/ONTOLOGY
+//      content, the 6b strings ARE present, subject policy ==
+//      far-end policy, subject native standing == far-end standing.
+//      On the CONFLICT-STOP path (plain git apply failed on the two
+//      header-comment hunks) it instead asserts the STOP state: the
+//      branch exists AT the far end (no subject commit), the diff
+//      vs the far end is empty, and the evidence file records the
+//      conflict + UNMEASURED.
 //  10. Step corpora — state-aware: before the steps run it
 //      asserts no ep-far-6b / t6b-f843fab1c summary, log, or corpus
-//      exists; once they exist it asserts the settled matched-band
-//      baseline (4/8, fixed days) still anchors the far end, the
-//      baseline leg read >=3/8 on seeds 190391-190398, the subject
-//      summary exists with a survived count on the same seeds, and
-//      the evidence file records the matching verdict. On the
-//      GATE-STOP path (baseline <=2/8 — the prereg gate fired)
-//      it instead asserts the STOP state: baseline summary exists
-//      with survived <=2, NO subject summary/log/corpus exists (no
-//      subject leg was cut), and the evidence file records the
-//      UNMEASURED stop with the baseline count.
+//      exists (and, once the evidence file exists on the
+//      conflict-STOP path, that it records the STOP); once they
+//      exist it asserts the settled matched-band baseline (4/8,
+//      fixed days) still anchors the far end, the baseline leg read
+//      >=3/8 on seeds 190391-190398, the subject summary exists
+//      with a survived count on the same seeds, and the evidence
+//      file records the matching verdict. On the GATE-STOP path
+//      (baseline <=2/8 — the prereg gate fired) it instead asserts
+//      the STOP state: baseline summary exists with survived <=2, NO
+//      subject summary/log/corpus exists (no subject leg was cut),
+//      and the evidence file records the UNMEASURED stop with the
+//      baseline count.
 //
 // Usage: node scripts/test-transplant6b.js
 'use strict';
@@ -202,6 +209,14 @@ const UNION_BELOW = 'scripts/test-villager-gear-20261009.js';
 const FAMILY7_LINES = [
   'scripts/test-villager-brain-dawn.js quick',
   'scripts/test-dawn-materialize-honesty.js quick',
+];
+// The two objectives hunks that FAIL plain `git apply` onto the far
+// end (header-comment context drift — the far end stripped the
+// brain-module references from the comment block). Recorded here so
+// the conflict-STOP legs can name them exactly.
+const CONFLICT_HUNKS = [
+  '@@ -5,6 +5,8 @@',
+  '@@ -15,6 +17,7 @@',
 ];
 
 function sha256(text) { return crypto.createHash('sha256').update(text).digest('hex'); }
@@ -598,6 +613,27 @@ function gitGrepAt(commit, pattern) {
   if (!subject) {
     T.ok('subject branch does NOT exist yet (prereg preceded the subject)', true, '(not cut)');
     T.ok('no subject commit exists yet', true, '(not cut)');
+  } else if (subject === FAR_FULL) {
+    // CONFLICT-STOP path: the branch was cut at the far end, plain
+    // `git apply` of the filtered objectives patch failed on the two
+    // header-comment hunks, no subject commit was created.
+    T.ok('subject branch exists AT the far end (conflict-STOP — no subject commit)', true, 'branch=' + subject.slice(0, 12));
+    T.ok('subject branch diff vs the far end is empty (nothing applied)',
+      git('diff --name-only ' + FAR + ' ' + SUBJECT_BRANCH) === '', '(empty)');
+    const evStopPath = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant6b.md');
+    const evStop = fs.existsSync(evStopPath) ? fs.readFileSync(evStopPath, 'utf8') : '';
+    T.ok('evidence file exists and records the STOP (UNMEASURED, conflict)',
+      evStop !== '' && evStop.indexOf('UNMEASURED') !== -1, 'UNMEASURED present');
+    T.ok('evidence file names both failing hunks (@@ -5 and @@ -15)',
+      evStop.indexOf(CONFLICT_HUNKS[0]) !== -1 && evStop.indexOf(CONFLICT_HUNKS[1]) !== -1, 'both hunk anchors present');
+    T.ok('evidence file records the plain-apply failure (patch failed)',
+      evStop.indexOf('patch failed') !== -1, 'patch failed present');
+    T.ok('evidence file records the --3way diagnostic (3-way merge clean, not used)',
+      evStop.indexOf('--3way') !== -1, '--3way diagnostic present');
+    T.ok('evidence file records the subject branch left at the far end',
+      evStop.indexOf('LEFT at the far end') !== -1, 'branch disposition present');
+    T.ok('evidence file records the per-hunk table (5 code hunks clean, 2 comment hunks fail)',
+      evStop.indexOf('hunks 2–6') !== -1 || evStop.indexOf('hunks 2-6') !== -1, 'per-hunk table present');
   } else {
     T.ok('subject branch exists', subject.length === 40, subject.slice(0, 12));
     const subjectParent = git('rev-parse ' + SUBJECT_BRANCH + '^1');
@@ -677,6 +713,13 @@ function gitGrepAt(commit, pattern) {
     T.ok('no subject step summary exists yet', true, '(not run)');
     T.ok('no subject driver log exists yet', !fs.existsSync(logPath), 'absent');
     T.ok('no subject per-seed corpus exists yet', !fs.existsSync(corpusDir), 'absent');
+    // On the conflict-STOP path the evidence file exists and records
+    // the STOP instead of any step corpus; before it is written these
+    // legs pass vacuously.
+    T.ok('evidence file (if written) records the conflict-STOP (UNMEASURED)',
+      ev10 === '' || ev10.indexOf('UNMEASURED') !== -1, ev10 === '' ? '(evidence not written yet)' : 'UNMEASURED present');
+    T.ok('evidence file (if written) records the plain-apply failure',
+      ev10 === '' || ev10.indexOf('patch failed') !== -1, ev10 === '' ? '(evidence not written yet)' : 'patch failed present');
   } else {
     T.ok('baseline step summary exists (ep-far-6b)', fs.existsSync(baseSumPath), 'present');
     const base = JSON.parse(fs.readFileSync(baseSumPath, 'utf8'));
