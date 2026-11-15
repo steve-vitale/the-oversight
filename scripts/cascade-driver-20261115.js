@@ -16,6 +16,14 @@
 // write on a transient object — the judged fields (series, deaths,
 // standing, waveKills) must reproduce the successorcaution fresh
 // control exactly (Stage 0, 3 seeds) before this driver judges anything.
+// (sim-grecorder-a, 2026-11-15): deaths rows also carry victim
+// identity (vid, name, veteran flag + w4/w5 kill counts at death,
+// from the final waveKillLog — see annotateDeathVictims below) and
+// the per-seed output carries the final waveKillLog, so the
+// vetattrition residue (23/69 G drops unresolvable for lack of a
+// victim id) cannot recur. Additive fields only; judged values
+// (series, deaths day/kind/who/cause/player, standing, waveKills)
+// are untouched.
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -66,6 +74,60 @@ function writeRobust(filePath, data) {
 
 function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; } catch (e) { return 0; } }
 function safe(fn, fallback) { try { const v = fn(); return v === undefined ? fallback : v; } catch (e) { return fallback; } }
+// G-RECORDER VICTIM IDENTITY (sim-grecorder-a, 2026-11-15; closes the
+// vetattrition DIAG residue, evidence/2026-11-15/sim-vetattrition-a.md
+// §12(c)): every deaths row carries the victim's vid plus whether they
+// were a living wave-4+ veteran at death, with their wave-kill counts.
+// Derived POST-HOC from the run's final waveKillLog (pure read; the log
+// is append-only in-run, capped at 1000 entries, ~60 in a 150d run, and
+// a dead villager makes no later kills — so kill-day <= death-day is
+// exactly "veteran at death", including pyrrhic kills whose entry day
+// equals the death day). No game code, no shared harness change; the
+// existing deaths fields keep their exact values (annotation only
+// ADDS fields, so old analyzers keep working).
+function personNameFor(Game, vid) {
+  try {
+    if (typeof Game.getPerson === 'function') {
+      const p = Game.getPerson(vid);
+      if (p) return p.name || p.displayName || vid;
+    }
+  } catch (e) {}
+  try {
+    const v = ((Game.data || {}).villagers || []).find(function (x) { return x && x.id === vid; })
+      || ((Game.data || {}).background_survivors || []).find(function (x) { return x && x.id === vid; });
+    if (v) return v.name || vid;
+  } catch (e) {}
+  return vid;
+}
+
+function annotateDeathVictims(deaths, Game) {
+  let log = [];
+  try { log = ((Game.state || {}).waveKillLog || []).slice(); } catch (e) { log = []; }
+  return (deaths || []).map(function (d) {
+    const base = { day: d.day, kind: d.kind || null, who: d.who || null, cause: d.cause || null, player: !!d.player };
+    if (base.kind !== 'villager' && base.kind !== 'person') {
+      base.vid = null; base.name = null; base.veteran = null;
+      base.w4kills = null; base.w5kills = null; base.maxWave = null;
+      return base;
+    }
+    const vid = base.who || null;
+    let w4 = 0, w5 = 0, maxW = null;
+    for (const e of log) {
+      if (!e || e.by !== vid) continue;
+      if ((e.d | 0) > (base.day | 0)) continue;
+      const w = e.w | 0;
+      if (w >= 4) w4++;
+      if (w >= 5) w5++;
+      if (maxW === null || w > maxW) maxW = w;
+    }
+    base.vid = vid;
+    base.name = vid ? personNameFor(Game, vid) : null;
+    base.veteran = w4 > 0;
+    base.w4kills = w4; base.w5kills = w5; base.maxWave = maxW;
+    return base;
+  });
+}
+
 function pantryKcal(Game) {
   try {
     return ((Game.state.village || {}).pantry || [])
@@ -714,9 +776,8 @@ async function oneRun(seed, policyName) {
   let tableState = null, earnedPaths = null;
   try { tableState = Game.tableState ? Game.tableState() : null; } catch (e) {}
   try { earnedPaths = Game.tableEarnedPaths ? Game.tableEarnedPaths() : null; } catch (e) {}
-  const deaths = ((result && result.samples && result.samples.deaths) || []).map(function (d) {
-    return { day: d.day, kind: d.kind || null, who: d.who || null, cause: d.cause || null, player: !!d.player };
-  });
+  const deaths = annotateDeathVictims((result && result.samples && result.samples.deaths) || [], Game);
+  try { if (((Game.state || {}).waveKillLog || []).length >= 1000) errors.push('waveKillLog-capped: veteran flags are lower bounds'); } catch (e) {}
   const villagerCombatDeaths = deaths.filter(function (d) { return !d.player; }).length;
   let driveEnd = null;
   try { driveEnd = st.answermailDrive ? JSON.parse(JSON.stringify(st.answermailDrive)) : null; } catch (e) {}
@@ -730,6 +791,9 @@ async function oneRun(seed, policyName) {
     maxWave: result.maxWaveUnlocked || 1, standing: standingGated,
     standingRaw: standingRaw,
     waveKills: Object.assign({}, st.waveKills || {}),
+    waveKillLog: ((st.waveKillLog || []).map(function (e) {
+      return { d: e.d | 0, mid: e.mid || null, w: e.w | 0, by: e.by || null, via: e.via || 'unknown', trick: e.trick || null };
+    })),
     series: series, events: events, verbEvents: verbEvents,
     linkLines: linkLines,
     dissolutionLines: cap.episodeLines,
@@ -780,4 +844,4 @@ if (require.main === module) (async function () {
   }
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 
-module.exports = { oneRun: oneRun };
+module.exports = { oneRun: oneRun, annotateDeathVictims: annotateDeathVictims };
