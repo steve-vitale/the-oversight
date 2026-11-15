@@ -38,6 +38,26 @@
 //      turn-home / return (the study already voices itself through
 //      the engine's keeper line). No more silent months on the road.
 //
+// REWORK ROUND 2 (arm sim-courtship-rework2-b, run
+// fleshout-loop-b-20261115T1930Z, prereg
+// evidence/2026-11-15/sim-courtship-rework2-b-prereg.md).
+// Diagnosis of the 1810Z PILOT NO-GO, from the committed corpus +
+// live map probe (/tmp/probe-646-map.js): the stall narrowed to ONE
+// seed (100646, 54 zero-move days) — a creek + rubble pocket, not a
+// rubble tile. village_2 (1,4) and village_3 (1,2) ARE reachable
+// (BFS (4,4)->(4,3)->(3,3)->(2,3)->(1,3)->(1,4)), but the first
+// step moves AWAY (Manhattan 3->4) and the round-1 never-steps-away
+// guard vetoed exactly that step. THE FIX: BFS pathfinding in the
+// policy (bfsNextStep, travelBlockage as oracle, orthogonal-only
+// over the 9x9 home board) — chosen over a bounded step-away
+// allowance because BFS is complete (any walk that exists is
+// found), cannot oscillate (every step strictly decreases
+// BFS-distance), and is canon's "go around" way (docs/MAP.md).
+// The greedy nearest-first step survives as the fallback for a
+// missing path / off-board destination. ALSO (round-1 sense-testing
+// polish): the return line now distinguishes a completed study
+// ("codex now read") from a stale turn-home ("codex stays unread").
+//
 // POLICY-SIDE ONLY. ZERO src/js changes, zero default flips, no changes
 // to any existing policy file. This is a measurement instrument, not a
 // play recommendation: it composes onto the FROZEN covenant-road policy
@@ -205,47 +225,138 @@ function pathBlocked(Game, x, y) {
   } catch (e) { return null; }
 }
 
-// walkTo (REWORKED — the stall fix): hop-by-hop honest walk toward
-// (hx,hy) — one travelTo per hop, no force, bounded. The old walk
-// picked ONLY the minimum-distance offered target and broke on the
-// first refusal: on seed 100604 a rubble tile at (4,6) vetoed every
-// 3-tile jump to (5,6) for 14 days while a one-step detour stood
-// open, and the scholar never moved. The new walk tries EVERY
-// offered target nearest-first (deterministic order), pre-checking
-// each with pathBlocked, and takes the first step that moves the
-// scholar — never stepping AWAY from the destination (dist-to-target
-// never grows), so it routes around a blocked tile instead of
-// stranding, and cannot oscillate. It stops only when NO offered
-// step moves the scholar (genuinely walled in) or a fight goes live.
+// walkTo (REWORKED ROUND 2 — BFS pathfinding, arm
+// sim-courtship-rework2-b, prereg
+// evidence/2026-11-15/sim-courtship-rework2-b-prereg.md): the
+// round-1 walk could not take a detour whose first step moves AWAY
+// from the destination — on seed 100646 the creek at (3,4) + rubble
+// at (3,5)/(2,6) force the first step (4,4)->(4,3), Manhattan
+// distance 3->4, and the never-steps-away guard vetoed exactly that
+// step, stranding the scholar 54 zero-move days. The new walk
+// plans a real path: bfsNextStep runs an orthogonal BFS over the
+// 9x9 home board with Game.travelBlockage as the passability
+// oracle for each single step (the same rule travelTo applies to
+// a d==1 hop, entry side included), and walkTo takes the first
+// step of the shortest path. Every BFS step strictly decreases
+// BFS-distance to the target, so the walk cannot oscillate — the
+// property the never-steps-away guard protected, now exact rather
+// than greedy. A bounded step-away allowance was rejected: it can
+// still stall in a pocket deeper than the allowance and can
+// oscillate at the allowance boundary. Canon (docs/MAP.md):
+// blockages offer "cut, clear, bridge, swim, or go around" —
+// BFS is the "go around" way. When BFS finds no path (genuinely
+// walled in) or the destination is off-board, one greedy
+// nearest-first step is tried (the round-1 body, kept as
+// greedyStep) so an off-board destination still walks closer.
+// The walk stops when no step moves, or a fight goes live.
+function bfsNextStep(Game, hx, hy) {
+  try {
+    var sx = Game.map.px, sy = Game.map.py;
+    if (sx === hx && sy === hy) return null;
+    // BFS is a home-board walk: villages and Haven sit on the
+    // 9x9 (round-1 diagnosis). An off-board destination falls
+    // back to the greedy step below.
+    if (hx < 0 || hx > 8 || hy < 0 || hy > 8) return null;
+    if (sx < 0 || sx > 8 || sy < 0 || sy > 8) return null;
+    var key = function (x, y) { return x + ',' + y; };
+    var prev = {};
+    var seen = {};
+    seen[key(sx, sy)] = true;
+    var q = [{ x: sx, y: sy }];
+    var found = false;
+    while (q.length && !found) {
+      var cur = q.shift();
+      var dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+      for (var i = 0; i < 4; i++) {
+        var nx = cur.x + dirs[i][0], ny = cur.y + dirs[i][1];
+        if (nx < 0 || nx > 8 || ny < 0 || ny > 8) continue;
+        var k = key(nx, ny);
+        if (seen[k]) continue;
+        // Passability = the engine's own entry oracle from the
+        // step's origin. PURE read (travelBlockage / tileAt):
+        // planning never narrates and never moves.
+        var blocked = null;
+        try { blocked = Game.travelBlockage ? Game.travelBlockage(nx, ny, cur.x, cur.y) : null; } catch (e) {}
+        if (blocked) continue;
+        seen[k] = true;
+        prev[k] = cur;
+        if (nx === hx && ny === hy) { found = true; break; }
+        q.push({ x: nx, y: ny });
+      }
+    }
+    if (!found) return null;
+    // Walk the predecessor chain back from the destination to
+    // the first step (guarded: a broken chain returns null
+    // instead of spinning).
+    var step = { x: hx, y: hy };
+    var guard = 0;
+    while (guard++ < 100) {
+      var p = prev[key(step.x, step.y)];
+      if (!p) return null;
+      if (p.x === sx && p.y === sy) return step;
+      step = p;
+    }
+    return null;
+  } catch (e) { return null; }
+}
+
+// greedyStep (ROUND 1 body, kept as the fallback): one
+// nearest-first hop toward (hx,hy), pre-checked with
+// pathBlocked, never stepping away from the destination.
+// Returns true when the scholar moved. Used only when BFS
+// finds no path or the destination is off-board.
+function greedyStep(Game, hx, hy) {
+  try {
+    if (Game.inCombat && Game.inCombat()) return false;
+    var targets = [];
+    try { targets = (Game.travelTargets && Game.travelTargets()) || []; } catch (e) {}
+    var dNow = Math.abs(hx - Game.map.px) + Math.abs(hy - Game.map.py);
+    targets.sort(function (a, b) {
+      var da = Math.abs(a.x - hx) + Math.abs(a.y - hy);
+      var db = Math.abs(b.x - hx) + Math.abs(b.y - hy);
+      if (da !== db) return da - db;
+      if (a.x !== b.x) return a.x - b.x;
+      return a.y - b.y;
+    });
+    for (var ti = 0; ti < targets.length; ti++) {
+      var tt = targets[ti];
+      // Never step away from the destination (no oscillation), and
+      // never re-try a step the pre-check already vetoes.
+      if (Math.abs(tt.x - hx) + Math.abs(tt.y - hy) > dNow) continue;
+      if (pathBlocked(Game, tt.x, tt.y)) { STATS.walkRefusals += 1; continue; }
+      var px0 = Game.map.px, py0 = Game.map.py;
+      try { Game.travelTo(tt.x, tt.y); } catch (e) { STATS.walkRefusals += 1; continue; }
+      if (Game.map.px !== px0 || Game.map.py !== py0) return true;
+      STATS.walkRefusals += 1;
+      if (Game.inCombat && Game.inCombat()) return false;
+    }
+    return false;
+  } catch (e) { return false; }
+}
+
 function walkTo(Game, hx, hy) {
   try {
     var guard = 0;
     while ((Game.map.px !== hx || Game.map.py !== hy) && guard++ < 10 && !Game.over && !Game.tbfight) {
       if (Game.inCombat && Game.inCombat()) break; // mid-fight: the barrier is the way out
-      var targets = [];
-      try { targets = (Game.travelTargets && Game.travelTargets()) || []; } catch (e) {}
-      var dNow = Math.abs(hx - Game.map.px) + Math.abs(hy - Game.map.py);
-      targets.sort(function (a, b) {
-        var da = Math.abs(a.x - hx) + Math.abs(a.y - hy);
-        var db = Math.abs(b.x - hx) + Math.abs(b.y - hy);
-        if (da !== db) return da - db;
-        if (a.x !== b.x) return a.x - b.x;
-        return a.y - b.y;
-      });
+      var step = bfsNextStep(Game, hx, hy);
       var moved = false;
-      for (var ti = 0; ti < targets.length; ti++) {
-        var tt = targets[ti];
-        // Never step away from the destination (no oscillation), and
-        // never re-try a step the pre-check already vetoes.
-        if (Math.abs(tt.x - hx) + Math.abs(tt.y - hy) > dNow) continue;
-        if (pathBlocked(Game, tt.x, tt.y)) { STATS.walkRefusals += 1; continue; }
+      if (step) {
         var px0 = Game.map.px, py0 = Game.map.py;
-        try { Game.travelTo(tt.x, tt.y); } catch (e) { STATS.walkRefusals += 1; continue; }
-        if (Game.map.px !== px0 || Game.map.py !== py0) { moved = true; break; }
-        STATS.walkRefusals += 1;
-        if (Game.inCombat && Game.inCombat()) break; // the step started a fight
+        try { Game.travelTo(step.x, step.y); } catch (e) { STATS.walkRefusals += 1; break; }
+        if (Game.map.px !== px0 || Game.map.py !== py0) { moved = true; }
+        else {
+          // BFS said the step was open but travelTo refused it:
+          // count it and stop — do not spin on a step the engine
+          // will not take.
+          STATS.walkRefusals += 1;
+          if (Game.inCombat && Game.inCombat()) break;
+          break;
+        }
+      } else {
+        moved = greedyStep(Game, hx, hy);
       }
-      if (!moved) break; // genuinely stuck: no offered step moves
+      if (!moved) break; // genuinely stuck: no step moves
     }
   } catch (e) {}
 }
@@ -285,6 +396,7 @@ function courtshipStep(Game, ctx) {
         ctx._pilgrim = null;
         ctx._returning = true;
         ctx._returningFrom = pg.vid;
+        ctx._returningStudied = false;
       } else {
         STATS.pilgrimDays += 1;
         var dist = Math.abs((tv.x || HAVEN_X) - px) + Math.abs((tv.y || HAVEN_Y) - py);
@@ -300,6 +412,11 @@ function courtshipStep(Game, ctx) {
           ctx._pilgrim = null;
           ctx._returning = true;
           ctx._returningFrom = pg.vid;
+          // ROUND 2: the return line distinguishes a completed study
+          // from a stale turn-home (round-1 sense-testing: the old
+          // line said "codex still open in your head" even when the
+          // study had just been completed and the codex was read).
+          ctx._returningStudied = true;
           return 'took-day';
         }
         walkTo(Game, tv.x || HAVEN_X, tv.y || HAVEN_Y);
@@ -312,8 +429,16 @@ function courtshipStep(Game, ctx) {
       if (Game.map.px === HAVEN_X && Game.map.py === HAVEN_Y) {
         ctx._returning = false;
         if (ctx._returningFrom) {
-          sayLine(Game, 'You walk back into Haven, ' + villageName(Game, ctx._returningFrom) + '\'s codex still open in your head.');
+          // ROUND 2: a completed study reads differently from a
+          // turn-home — the codex is read now, not "still open in
+          // your head"; a stale turn-home leaves it unread.
+          if (ctx._returningStudied) {
+            sayLine(Game, 'You walk back into Haven, ' + villageName(Game, ctx._returningFrom) + '\'s codex now read — the road was worth walking.');
+          } else {
+            sayLine(Game, 'You walk back into Haven, ' + villageName(Game, ctx._returningFrom) + '\'s fire behind you — their codex stays unread.');
+          }
           ctx._returningFrom = null;
+          ctx._returningStudied = false;
         }
       }
       return 'took-day';
@@ -426,6 +551,7 @@ module.exports = { courtshipPolicy: courtshipPolicy,
   resetCourtshipStats: resetCourtshipStats, courtshipStats: courtshipStats,
   resetCovenantStats: resetCovenantStats, covenantStats: covenantStats,
   courtshipStep: courtshipStep, aidStep: aidStep, walkTo: walkTo,
+  bfsNextStep: bfsNextStep, greedyStep: greedyStep,
   pathBlocked: pathBlocked,
   AID_KCAL: AID_KCAL, AID_PANTRY: AID_PANTRY, COV_CAP: COV_CAP,
   PILGRIM_STALE_DAYS: PILGRIM_STALE_DAYS,

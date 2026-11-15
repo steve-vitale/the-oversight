@@ -175,7 +175,13 @@ function sectionStaticWalk() {
     walkTo(G, 5, 6);
     check('walkTo routes around rubble@(4,6) and arrives', G.map.px === 5 && G.map.py === 6, G.map);
     check('walkTo took the detour through (5,5)', G.calls.travel.some(function (t) { return t[0] === 5 && t[1] === 5; }), G.calls.travel);
-    check('walkTo counted the refused jumps', courtshipStats().walkRefusals >= 1, courtshipStats().walkRefusals);
+    // ROUND 2 (design change on purpose — prereg
+    // sim-courtship-rework2-b-prereg.md G3): BFS plans around the
+    // rubble, so the walk takes ZERO refused jumps by design — the
+    // old assertion (walkRefusals >= 1) encoded the round-1 walk,
+    // which counted travelTo refusals on jumps BFS never attempts.
+    // Every travel call the new walk makes must land.
+    check('BFS plans around the rubble with zero refused travelTo calls', courtshipStats().walkRefusals === 0 && G.calls.travel.length > 0, { refusals: courtshipStats().walkRefusals, travelCalls: G.calls.travel });
   }
   // (b) The walk never steps AWAY from the village: every hop in
   // (a) keeps distance-to-target at or below the starting 3.

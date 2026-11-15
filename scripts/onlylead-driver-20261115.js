@@ -740,6 +740,13 @@ if (require.main === module) (async function () {
       return path.join(REPO, 'evidence', '2026-11-15',
         pol === 'competent-covenant-b' ? stem + '-control' : stem + '-on');
     }
+    // COURTSHIP-REWORK2 (RUN=courtship-rework2-b, arm
+    // sim-courtship-rework2-b): BFS walk rework, same two legs, own
+    // corpora dirs (perseed-courtship-rework2-b-control / -on).
+    if (RUN === 'courtship-rework2-b') {
+      return path.join(REPO, 'evidence', '2026-11-15',
+        pol === 'competent-covenant-b' ? stem + '-control' : stem + '-on');
+    }
     return path.join(REPO, 'evidence', '2026-11-15',
       pol === 'competent-scaleclimb-b' ? stem + '-control' : stem + '-on');
   }
