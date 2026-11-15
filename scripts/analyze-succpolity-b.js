@@ -316,7 +316,7 @@ if (require.main === module) (async function () {
   const baseline = loadDir(corpusDir);
   const out = analyze(records, baseline);
   const outPath = path.join(REPO, 'evidence', '2026-11-14', 'succpolity-b-analysis.json');
-  fs.writeFileSync(outPath, JSON.stringify(out, null, 2) + '\n');
+  // Summary FIRST (always visible even if the write falls back to stdout).
   console.log('== BASELINE (corpus armed leg): ' + JSON.stringify(out.baseline.wall));
   for (const leg of Object.keys(out.legs).sort()) {
     const L = out.legs[leg];
@@ -336,7 +336,21 @@ if (require.main === module) (async function () {
         ' blocker=' + (s.reclimbBlocker || '-') + ' errors=' + s.errors);
     }
   }
-  console.log('wrote ' + path.relative(REPO, outPath));
+  // Write (flap-tolerant): retry the write, then fall back to printing
+  // the JSON so the numbers are never lost to a flap window.
+  const payload = JSON.stringify(out, null, 2) + '\n';
+  let wrote = false;
+  for (let i = 0; i < 480 && !wrote; i++) {
+    try {
+      fs.writeFileSync(outPath, payload);
+      const back = fs.readFileSync(outPath, 'utf8');
+      if (back.length === payload.length) wrote = true;
+    } catch (e) {
+      if (i === 479) { console.log('@@ANALYSIS-FALLBACK ' + outPath + '\n' + payload); break; }
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 250);
+    }
+  }
+  if (wrote) console.log('wrote ' + path.relative(REPO, outPath));
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 
 module.exports = { dissolutionEvents: dissolutionEvents, reclimbEvents: reclimbEvents,
