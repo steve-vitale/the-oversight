@@ -59,24 +59,6 @@
 //     1,500 pantry kcal per tended link per week; stand-down costs
 //     -5 trust per allied link and abandons the titan road for the
 //     run. No gate, threshold, or price changes.
-//   - winplan_holdbuild_upkeep (sim-holdbuild-b 2026-11-14): the bonds
-//     tick KEEPS tending while national is live (the old early return
-//     switched the whole drive off the day the realm was won, so a
-//     realm's bonds got no maintenance — see sim-holdrealm-b). Cap 55
-//     while national, 50 otherwise; every other gate unchanged.
-//     Default ON; HOLDBUILD_UPKEEP=0 restores the old early return.
-//     Counts upkeepTends in winPlanStats. (code: winPlanBondsTick)
-//   - winplan_holdbuild_reclimb (sim-holdbuild-b 2026-11-14): a link
-//     below the seasoned trust bar (trust < 40) in a village that is
-//     NOT national is a re-climb link — the village is trying to win
-//     its realm back. When no plan-holder is home to tend it, the
-//     available representative tends it instead (best-standing living
-//     member who can walk out, never the player — the same actor the
-//     answermail drive uses), and the pantry-days gate is 1, not 3,
-//     for those tends. The grain is still real (1,500 kcal via
-//     tendLink, partial from a thin pantry). Default ON;
-//     HOLDBUILD_RECLIMB=0 disables the fallback and the lowered gate.
-//     Counts reclimbTends in winPlanStats. (code: winPlanBondsTick)
 //   - winplan_no_second_join: party formation feeds the existing (code: winPlanDepart)
 //     villagerFightAllies / fieldFight opts path. This module launches
 //     companions on the same expedition target so the engine can find
@@ -105,21 +87,6 @@
   var PARTY_WAIT_DAYS = 3;
   var VETERAN_GUARD_DAYS = 7;
 
-  // HOLDBUILD flags (sim-holdbuild-b 2026-11-14): the two hold components
-  // are DEFAULT-ON live behavior — a component is off only when its env
-  // flag is explicitly '0' (the measurement legs set '0' to attribute
-  // each component; in the browser `process` is undefined, so shipped
-  // play always runs the build). Read at call time, so tests can flip
-  // them around a single tick call.
-  function holdbuildUpkeepOn() {
-    try { if (typeof process !== 'undefined' && process.env && process.env.HOLDBUILD_UPKEEP === '0') return false; } catch (e) {}
-    return true;
-  }
-  function holdbuildReclimbOn() {
-    try { if (typeof process !== 'undefined' && process.env && process.env.HOLDBUILD_RECLIMB === '0') return false; } catch (e) {}
-    return true;
-  }
-
   function stateOf(self) {
     var v = self.state && self.state.village;
     if (!v) return null;
@@ -129,13 +96,10 @@
       avoidances: 0, seekContacts: 0, standingContacts: 0,
       veteranGuardHolds: 0, partyFights: 0, planSeeds: 0, stageAdvances: 0,
       bondTends: 0, musterStanddowns: 0, trickHolds: 0,
-      upkeepTends: 0, reclimbTends: 0,
     };
     if (v.winPlanStats.trickHolds == null) v.winPlanStats.trickHolds = 0;
     if (v.winPlanStats.bondTends == null) v.winPlanStats.bondTends = 0;
     if (v.winPlanStats.musterStanddowns == null) v.winPlanStats.musterStanddowns = 0;
-    if (v.winPlanStats.upkeepTends == null) v.winPlanStats.upkeepTends = 0;
-    if (v.winPlanStats.reclimbTends == null) v.winPlanStats.reclimbTends = 0;
     return v;
   }
   function bump(self, key) {
@@ -586,65 +550,28 @@
     winPlanBondsTick(hx, hy) {
     try {
       var st = this.state || {};
-      // UPKEEP (sim-holdbuild-b): the old early return switched the whole
-      // drive off the day the realm was won. With the flag on (default)
-      // the drive keeps tending while national is live; with it off the
-      // old return stands exactly. The muster tick keeps its own return.
-      if (!holdbuildUpkeepOn() && (st.nationalLive || st.pendingNational)) return null;
+      if (st.nationalLive || st.pendingNational) return null;
       var prims = ownPrimaryLinks(this);
       if (prims.length < 2) return null;
       var actors = planActorsAtHaven(this, hx, hy);
+      if (!actors.length) return null;
       var pd = pantryDays(this);
+      if (pd == null || pd < 3) return null;
       var week = weekOf(this);
       var day = 0;
       try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
-      // RECLIMB (sim-holdbuild-b): a link below the seasoned trust bar
-      // (trust < 40) in a village that is NOT national is a re-climb
-      // link. When no plan-holder is home to tend it, the available
-      // representative tends it instead, and the pantry-days gate for
-      // the run is 1, not 3. The grain is still real (tendLink).
-      var reclimbMode = false;
-      if (holdbuildReclimbOn() && !st.nationalLive) {
-        for (var ri = 0; ri < prims.length; ri++) {
-          if ((prims[ri].trust || 0) < 40) { reclimbMode = true; break; }
-        }
-      }
-      var actor = null;
-      var actorIsRep = false;
-      var minPd = reclimbMode ? 1 : 3;
-      if (actors.length) { actor = actors[0]; }
-      else if (reclimbMode) {
-        var rep = null;
-        try { rep = (typeof this._availableRepresentative === 'function') ? this._availableRepresentative() : null; } catch (e) { rep = null; }
-        if (rep && rep.id) { actor = rep.id; actorIsRep = true; }
-      }
-      if (!actor) return null;
-      if (pd == null || pd < minPd) return null;
-      // Tend cap 55 while national (banks 15 headroom above the 40 bar —
-      // the tenddrive sizing for 12-point loss dips), 50 otherwise.
-      var cap = st.nationalLive ? 55 : 50;
       var tended = [];
       for (var i = 0; i < prims.length; i++) {
         var l = prims[i];
-        var trustBefore = (l.trust || 0);
-        if (trustBefore >= cap) continue;
+        if ((l.trust || 0) >= 50) continue;
         if (l.tendedWeek === week) continue;
         if (l.mourningUntil && day < l.mourningUntil) continue;
         if (typeof this.tendLink !== 'function') continue;
         var paid = 0;
         try { paid = this.tendLink(l.id); } catch (e) { paid = 0; }
-        if (paid > 0) {
-          tended.push(l.id); bump(this, 'bondTends');
-          // Attribution: every tend while national is upkeep-caused (the
-          // old code never tended while national). A tend is
-          // reclimb-caused when the village is not national, the link
-          // sat below the bar, and the old code could not have made it
-          // (fallback actor, or the lowered pantry gate).
-          if (st.nationalLive) bump(this, 'upkeepTends');
-          else if (trustBefore < 40 && (actorIsRep || pd < 3)) bump(this, 'reclimbTends');
-        }
+        if (paid > 0) { tended.push(l.id); bump(this, 'bondTends'); }
       }
-      return { tended: tended, actor: actor };
+      return { tended: tended, actor: actors[0] };
     } catch (e) { return null; }
     },
     winPlanMusterTick(hx, hy) {
