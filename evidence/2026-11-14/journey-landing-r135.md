@@ -188,13 +188,24 @@ garbled menu label that haunted the last three panels is gone.
 
 ## Gate (r135 branch)
 
-[PENDING — check.js --quick on the r135 branch tip; the branch adds only
-the probe driver, the panel driver, and evidence (no src/js changes past
-the landed r129 fix).]
+`node scripts/check.js --quick` in the worktree: **330 passed, 10 failed
+in 1328s** (log `evidence/2026-11-14/journey-landing-r135-gate-r135.log`).
+Adjudication — 0 attributable:
+- `test-measurement-proof-update.js` + `test-measurement-workflow.js` —
+  staleness pair (standing set; the r129 src/js change staled it).
+- `test-phone-frame-proof.js` — phone receipt staleness (standing set).
+- `test-measurement-cache-flags.js` — "both actual CLI configurations
+  complete valid neutral panels" in the parallel run; **PASS standalone
+  (4/4)** — the documented box-load artifact (r187), not the change.
+- Six 120s timeouts in the parallel run (box load avg 7+ during the gate):
+  living-garden, one-person-army, occupation-panels,
+  trust-observer-neutrality, synergy-stall, capable-bot — **all PASS
+  standalone (exit 0)**; occupation-panels 25/25. Load artifacts.
+- Gate verdict: **GO**.
 
 ## Landing (r135 branch)
 
-[PENDING.]
+[PENDING — merge follows the gate verdict above.]
 
 ## Metric review
 
