@@ -209,3 +209,62 @@ Pass-A sums: uw 21, won 4/5, peakVet per-seed maxes within regime
 - Fun: PARTIAL (the endgame plays — audit, finale choices, Reunion fights —
   but wave 5 is a wall nobody opens and the full seat never answers).
 - Winnable: NO (this leg; full seat 0/5 on every pass, deed gate never ok).
+
+## Adoption addendum (09:00 CST occurrence — this run)
+
+- Chain3 read in full: v3-full PASS RC 0, analyzer v3 RC 0 (PRIMARY-BINDINGS
+  GO | PRIMARY GO | ALL GO); C-wide pass RC 0, analyzer C-wide RC 1
+  (PRIMARY-BINDINGS VACUOUS-UNANSWERED | PRIMARY NO-GO | ALL NO-GO — the
+  NO-GO is the VACUOUS M23 only, same shape as B/C).
+- **v3 full-panel verification (this occurrence, not taken on faith): all 5
+  v3 JSONs byte-identical to pass A (cmp); 0 doubled-quote hits across all
+  5 v3 transcripts.** The sysSay fix is live-verified on the full panel.
+- **C-wide complete (89722-89729): 6/8 sat lesser, 2 village-lost (89723,
+  89728), 0 full seats, ROAD-TALLY 0/0, M23 VACUOUS** (no seed reached
+  deedGateReady ok; deedGate ends all "no"). 89722 won with a bundle bought
+  d37; 89726 vetFights 61, the busiest fighter on the band. Endgame stays
+  reachable, full seat stays unanswered on every band so far.
+- **NEW FINDING — same defect, two more paths (C-wide corpus): 7 doubled-
+  quote hits** that the 5-seed pilot never reached:
+  - Relic enhancement systemCommentary (`game.js` chooseRelicEnhancement
+    wrapped data that already carries quotes — 15/51 relicEnhancements
+    values): `""Encounter probability down...""`, `""Task completion
+    velocity up 15%...""`, `""Waste ratio approaching zero...""` (89724,
+    89727, 89728).
+  - Callback mimicry (`sigW3c.js` quoted face.line, but face.line comes
+    from convLineLog keys — real village lines, some already quoted via
+    characterGen "deeper"): `""Under my breath, when I'm working...""`
+    in the speak / funeral / dissolve lines (89728, Olivia Bennett).
+  - Data census: 12/461 ability/evolution flavor strings also carry edge
+    quotes (abilities.json/evolutions.json).
+- **Fix (this occurrence, same branch): all seven sites now use the
+  existing `Game.quoteWrap` helper** (conversation.js — strip, then wrap,
+  exactly once; the choice UI already renders systemCommentary through it,
+  so the transcript now matches the UI): game.js chooseRelicEnhancement
+  (systemCommentary), chooseAbility + chooseEvolution (choice.flavor);
+  sigW3c.js cbEnsureFace, cbSpeak, dissolve tick, tbPlayerFuneral
+  (face.line). Display-only; no data touched; voice lookup untouched.
+- **Proof:** new `scripts/test-quote-wrap-r211.js` — 20/20 ALL GREEN
+  (quoteWrap units; live relic + ability paths; live Callback fight:
+  speak/funeral/dissolve lines; global net: 0 doubled quotes in 40
+  captured lines). Re-run of the 3 affected C-wide seeds with the fix:
+  **0 doubled-quote hits (was 7), all 3 JSONs byte-identical** to the
+  pre-fix run (display-only confirmed at corpus level).
+- **Pre-existing failure found, NOT fixed (out of scope):**
+  `test-sig-callback-20261010.js` 31/32 — "the naming wounds it (15):
+  19 dealt". Verified identical on committed HEAD code (swap test) — the
+  engine deals 19 for a flat `tbDamage(..., 15, 'the naming', ...)` call,
+  so +4 comes from tbDamage modifiers, not from this fix. Needs its own
+  look at what adds the +4; test expectation vs engine, not a quote issue.
+- Heartbeat: the 08:00 occurrence's hbloop (pid 21888) died between
+  15:01:49Z and 15:11:32Z (cause unknown — no VM replacement in that
+  window); restarted 15:11Z (pid 3605), registry heartbeat verified fresh
+  (15:11:48Z). The reaper never touched the tree (heartbeat <4h stale).
+- Landing: rebase onto master HEAD a9d85e32c (10 commits since branch base
+  c6343a839, none touching game.js/alienPlayers.js/sigW3c.js — clean
+  rebase), proof re-runs + `check.js --quick`, merge ff-only, release,
+  rotation 4→5. Telemetry vs r188 baseline below.
+
+## Telemetry (09:00 occurrence)
+
+`telemetry-check.js` vs r188 baseline (endgame.json): [filled at landing]
