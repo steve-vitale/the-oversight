@@ -431,7 +431,75 @@ combat survival while national, not the realm falling apart.
 
 ## Final checks
 
-- `scripts/test-funeral-mend-b.js`: 7/7 (on the branch tip; re-run after
-  the final rebase — see below).
-- `node scripts/check.js --quick`: once at the end on the branch (see
-  below).
+- `scripts/test-funeral-mend-b.js`: 7/7 on the branch tip (re-run after
+  the rebase — see below).
+- `node scripts/check.js --quick`: 335 passed, 5 failed in 743s on the
+  branch tip. Attribution:
+  - `godpath/test-measurement-proof-update.js` + `godpath/
+    test-measurement-workflow.js` — ATTRIBUTABLE TO THIS BRANCH
+    (proof-freshness, not behavior): the retained neutrality proof's
+    manifest hashes every `.js`/`.json` under `src/` (plus
+    `scripts/policies`, `index.html`, `sim-harness.js`,
+    `sweep-compare.js`), and this branch changes `src/js/hierarchy.js`,
+    so the retained proof predates the current Game inputs. Any
+    game-code change invalidates it the same way (holdbuild hit the
+    same pair for its policy files). The maintenance proof must be
+    refreshed with a real neutral panel at merge — a separate
+    maintenance action, not done in this arm. (The batch ship's
+    `index.html` version stamp also moves the manifest, so the proof
+    needs the refresh regardless.)
+  - `godpath/test-phone-frame-proof.js` — NOT attributable: the retained
+    phone receipt is stale vs `index.html` + data files, none of which
+    this branch touches (src/js change only). The staleness comes from
+    the batch ship's `index.html` bump on master.
+  - `godpath/test-living-garden-deed-attainment.js` +
+    `godpath/test-one-person-army-deed-attainment.js` — 120s timeouts
+    under the concurrent sweep load (the same two tests timed out in
+    holdbuild's check run the same way). Re-run standalone, one at a
+    time: both PASS (exit 0) — load timeouts, not branch failures.
+    (The first standalone re-run attempt was interrupted by a VM
+    restart with no output; the re-run after the restart is the one
+    that passed.)
+- Telemetry deviation check (BODY step 10): `node
+  scripts/telemetry-check.js --baseline
+  hidden_files/telemetry-baselines/scale-wall.json --current
+  'evidence/2026-11-14/perseed-funeralmend-b-on/*.json' --metrics
+  national,table,wins,exiled` — the tool first refuses recorder-corpus
+  input (anchorCommit rows); with `--allow-recorder-corpus` it fires
+  three LOUD lines (national 12→0, table 16→0, wins 16→0). Investigated
+  same-run: the baseline's own `_regime.note` documents this exact
+  comparison as invalid — it is a "winseat — full win-side win stack,
+  ~100%-win suite" regime, and it says "DO NOT compare pre-seat /
+  courtship / readiness substrates against this baseline — wins are
+  structurally ~0 there and telemetry-check will fire a spurious LOUD
+  'wins disappeared'". This arm is a pre-seat substrate (wins
+  structurally 0 on both legs); the national/table lines are the same
+  mapping artifact (the check reads a `national` count field the
+  recorder rows do not carry — the measured national-ever is 14/16 ON).
+  The LOUD lines are the documented regime artifact, not a regression;
+  no action taken, no baseline re-seeded (re-labeling the baseline is a
+  separate maintenance decision, not this arm's).
+
+## Rebase (master moved mid-run)
+
+Master moved 7ba58d326 → 542c6ecc2 during the run (batch ship version
+bump 5aa0863e2 + journey-scale r206 + fighterhold DIAG; the only src/
+change is the version stamp in src/js/build.js and `?v=` cache-busters
+in index.html — no game-behavior change, no hierarchy.js/win-plan.js
+change). The branch was rebased onto 542c6ecc2 (tip 54fccf105, 6
+commits, each exactly once). The rebase stop-at-pick quirk struck once
+(pick 4a3c0cfd0 in both done and todo, worktree clean, pick unapplied
+— verified with `git diff <pick>` non-empty + FUNERALMEND absent);
+`git rebase --continue` sailed through the remaining picks. After the
+rebase: proof test 7/7 green on the new tip, and Stage 0 re-verified
+3/3 (100201/100203/100212, FUNERALMEND=0, zero field diffs vs corpus).
+The judged legs were run on the pre-rebase tip; the rebase touched no
+game behavior (version stamp only), and the Stage-0 re-verification on
+the new tip confirms the baseline is unmoved.
+
+The rebase commit (this one) also carries the ONTOLOGY.md sync: the
+check run materialized the `funeral_mend` ontology line from the
+feature's code block in hierarchy.js into docs/ONTOLOGY.md (one added
+line, exact match to the code entry). `validate-ontology.js` passes
+("All 138 systems validated. Ontology matches code. Release
+permitted.").
