@@ -282,11 +282,13 @@ none tuned after the pilot runs:
    separate substrate probe: the pilot itself measures when the
    gate opens, on the leg being judged.
 4. DRIVER LINK_LINE_RE FIX (onlylead2 metric review #7) —
-   LINK_LINE_RE gains `covenant|charter|handshake|codex` terms so
-   the played courtship lines (the 454 refusals' copy, the codex
-   study line, the aid line) reach the corpus. One-line
-   instrument change; the pilot's judged numbers do not depend
-   on linkLines.
+   LINK_LINE_RE gains `covenant|charter|handshake|codex|runner`
+   terms so the played courtship lines (the 454 refusals' copy, the
+   codex keeper line, the aid runner line) reach the corpus.
+   One-line instrument change; the pilot's judged numbers do not
+   depend on linkLines. ('runner' added pre-pilot on the smoke's
+   finding — the aid line carries no covenant/codex term — before
+   any judged run; no judged numbers have been seen.)
 5. ANALYZER RUNG NAMING (onlylead2 metric review #4) — in
    `classifyShape`'s NEVER-QUALIFIED branch, when the shape's
    road state is ONE LINK SHORT of qualifying AND the rung day
