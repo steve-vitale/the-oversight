@@ -328,3 +328,27 @@ unlockedWave()==5), so taking the minimum cannot predate the true
 unlock; the derived day cannot predate it either (conditions hold only
 once the gate is open), so the minimum is the tightest available
 estimate.
+
+## Correction 2 (2026-11-15, before the judged classifier re-run)
+
+**C2 — firstW5SpawnDay / firstW4SpawnDay count only wave-gated spawn
+callers.** Correction 1b's "a w5 spawn proves the gate was open" is
+FALSE for two spawn callers that place scripted monsters bypassing the
+wave-unlock gate: `titanPlace` and `Object.finaleCampaignPlace`.
+Evidence (read-only probes of the v2 output + raw spawn rows): 7 seeds
+across 4 T legs have a "first w5 spawn" only from those callers while
+maxWave is 4 and unlockedWave is 4 — wave 5 never unlocked there
+(7redef-match 190392/190395/190397, guardablate 190392/190393,
+tguardablate 190395, 2b-fresh-subject 190627; all `nielsen` via
+`titanPlace`). Across all T corpora the wave≥4 spawn callers are:
+checkEncounter 383+39, maintainWorldMonsters 105+29 (both wave-gated
+via castMonster / the wave pool), titanPlace 37+8, finaleCampaignPlace
+10 (w5 only). Rule now: firstW5SpawnDay and firstW4SpawnDay are the
+first spawn with wave 5 / 4 AND caller in {`Object.checkEncounter`,
+`Object.maintainWorldMonsters`}; non-gated w5 spawns are counted per
+seed as a diagnostic (`nonGatedW5Spawns`) and never imply unlock.
+Effect on the v2 read (superseded): T unlocked counts fall back to the
+evidence files' maxWave-5 counts (7redef 7→4, guardablate 6→4,
+tguardablate 2→1, 2b-subject 4→3, 2b-baseline unchanged 3). The G class
+is unaffected (unlock day comes from `unlockedWave` events, not
+spawns). The GO bar is unchanged.

@@ -74,14 +74,20 @@ function analyzeTFile(d, monsters) {
   fights.forEach(function (f) { noteFight(f.day, monsters.waveById[f.mid]); });
   killCalls.forEach(function (k) { noteFight(k.day, k.wave); });
 
-  const firstW4SpawnDay = spawns.filter(function (s) { return s.wave === 4; })
+  // Wave-gated spawn callers only (Correction 2): titanPlace and
+  // finaleCampaignPlace place scripted monsters bypassing the wave-unlock
+  // gate, so they never imply unlock. Gated: checkEncounter + maintainWorldMonsters.
+  const GATED_SPAWN_CALLERS = new Set(['Object.checkEncounter', 'Object.maintainWorldMonsters']);
+  const gatedSpawns = spawns.filter(function (s) { return GATED_SPAWN_CALLERS.has(s.caller); });
+  const nonGatedW5Spawns = spawns.filter(function (s) { return s.wave === 5 && !GATED_SPAWN_CALLERS.has(s.caller); }).length;
+  const firstW4SpawnDay = gatedSpawns.filter(function (s) { return s.wave === 4; })
     .reduce(function (a, s) { return a === null || s.day < a ? s.day : a; }, null);
   const firstW4KillDay = killCalls.filter(function (k) { return k.wave === 4; })
     .reduce(function (a, k) { return a === null || k.day < a ? k.day : a; }, null);
   const firstW4Day = firstW4SpawnDay !== null && firstW4KillDay !== null
     ? Math.min(firstW4SpawnDay, firstW4KillDay)
     : (firstW4SpawnDay !== null ? firstW4SpawnDay : firstW4KillDay);
-  const firstW5SpawnDay = spawns.filter(function (s) { return s.wave === 5; })
+  const firstW5SpawnDay = gatedSpawns.filter(function (s) { return s.wave === 5; })
     .reduce(function (a, s) { return a === null || s.day < a ? s.day : a; }, null);
 
   // Standing time series: [[day, value], ...]
@@ -229,6 +235,7 @@ function analyzeTFile(d, monsters) {
     unlocked: unlockDay !== null, unlockDay: unlockDay,
     derivedUnlockDay: derivedUnlockDay, unlockLag: unlockLag,
     firstW4Day: firstW4Day, firstW5SpawnDay: firstW5SpawnDay,
+    nonGatedW5Spawns: nonGatedW5Spawns,
     vet5AtUnlock: vet5AtUnlock, vet5AtEnd: vet5AtEnd, vet4AtEnd: vet4AtEnd,
     entries: entries.length, exitsTotal: exits.length,
     exits: exits, bornDead: bornDead,
