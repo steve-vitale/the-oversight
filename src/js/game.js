@@ -24144,6 +24144,22 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.havenTier && this.havenTier() >= 2) return;
       const m = this.playerMonster();
       if (!m || m.mx === undefined) return;
+      // CASCADE (sim-cascade-b, Stage 1 proven): a lingering raider holds
+      // the treeline — it is a siege, answered by sortie or endurance
+      // (design call #8, Steve 2026-10-16), not a duel. The sortie code
+      // itself says a lone villager against a treeline monster is a
+      // funeral, not a sortie. But monsterTurn has no safe-tile check,
+      // so the besieger steps onto the scholar — inside the hall, on
+      // the Haven tile — and starts a turn-based fight it always wins
+      // solo; on 'lost' tbEnd restores it wounded and it kills the next
+      // bearer <redacted> same way (10 repeat instances, 38/88 scholar deaths
+      // in the control pilot). It does not move onto the scholar or
+      // start combat on contact. The scholar may still walk up and press
+      // Fight (startCombat untouched), the sortie still fights it
+      // (fieldFight, not monsterTurn), the nightly gorge and the ~6-night
+      // drift valve are untouched, and non-lingering intruders still
+      // breach exactly as before. Nothing despawns.
+      if (m.lingering) return;
       const px = s.mx ?? 4, py = s.my ?? 4;
       const mDist = Math.max(Math.abs(px - m.mx), Math.abs(py - m.my));
       // GLASSWING TRAP TRIGGER (Steve 2026-10-05): when it spots you (within 5),
