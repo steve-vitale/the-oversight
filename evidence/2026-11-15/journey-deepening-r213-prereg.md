@@ -25,7 +25,7 @@
 
 **The question.** (a) Does the adopted third branch behave as designed on synthetic inputs — the r212 panel shape reads WATCH-CONTINUES, a stuck-in-one-sitting shape still reads REPETITIVE, and the carried (11)–(14) controls still discriminate? (b) On a fresh 8-seed panel, what do the FAVORBLOCK, PARTNERBLOCK, and AWAY panel lines read under the NEW bar?
 
-**Instrument change (this run's build, committed BEFORE any judged sim):** clone the r212 analyzer → r213 with ONLY the third-branch change in `summarizeFavorBlock`, `summarizePartnerBlock`, and `summarizeAwayLineVariety`, plus the Q2 `summarizeWave5` and Q4 `summarizeParting` additions, plus the r212 analyzer proof cloned → r213 with 7 new checks (15)–(21). Driver cloned r212 → r213 with ONLY the seed band, run tag, and EVIDIR date. Proof must be green (21/21) before the panel runs.
+**Instrument change (this run's build, committed BEFORE any judged sim):** clone the r212 analyzer → r213 with ONLY the third-branch change in `summarizeFavorBlock`, `summarizePartnerBlock`, and `summarizeAwayLineVariety`, plus the Q2 `summarizeWave5` and Q4 `summarizeParting` additions, plus the r212 analyzer proof cloned → r213 with 6 new assertions (15)–(18), (20), (21) ((19) is the red-control invocation). Driver cloned r212 → r213 with ONLY the seed band, run tag, and EVIDIR date. Proof must be green (20/20) before the panel runs.
 
 **The third branch (FROZEN).** Each summarizer already returns `detail` rows per sitting (`{seed, day, vid, total, patternCounts, maxRepeat}`). From them compute, for the dominant (max-pooled) pattern:
 - `share` = dominant pooled count / total.
@@ -50,7 +50,7 @@ Verdict order (blocks; AWAY keeps its total < 3 floor):
 - (19) RED CONTROL: run the proof with `ANALYZER=./analyze-journey-deepening-r212-20261115.js` — (15)/(17)/(18) FAIL (r212 reads REPETITIVE), (16) passes, carried (11)–(14) behave as the r212 proof documents. The AWAY floor stays total < 3: the r212 note "whether the floor extends to AWAY" is answered NO — the third branch applies to AWAY, the floor does not move.
 - (20) W5 id set: the frozen set in the analyzer still matches `src/data/monsters.json` wave-5 roster exactly (loadWave5Ids re-read).
 - (21) Parting synthetic: transcripts — one closing with each plain-pool line → PLAIN-PARTING; one with no closing line → NO-CLOSE.
-- Carried (1)–(14) must stay green under the r213 analyzer. Total: 21 checks.
+- Carried (1)–(14) must stay green under the r213 analyzer. Total: 20 assertions ((15)–(18), (20), (21) new; (19) is the red-control invocation, not an assertion — the prereg's earlier "21 checks" count was off by one and is corrected here before the panel).
 
 **Pre-registered decision (reads straight off the analyzer's panel lines under the NEW bar — no re-scoring):**
 - `THIN-PROBE` → watch CONTINUES unjudged on that block this run — carry, no verdict, no fix.
@@ -116,7 +116,7 @@ Full transcripts read: every block-repeat sitting (Q1), every NO-CLOSE sitting (
 
 ## Shape
 
-prereg (committed BEFORE any judged sim) → instrument clone (driver + analyzer + proof test, proof green 21/21 + red control (19) before the panel) → 8-seed panel (single-seed processes, 2 waves of 4) → analyzer verdicts (fresh panel + full-transcript reads of block repeats + NO-CLOSE sittings + wrinkle sweep) → run note → telemetry check → gate → rebase onto current master → merge. Heartbeat loop: 10-min cadence, setsid PID 65764.
+prereg (committed BEFORE any judged sim) → instrument clone (driver + analyzer + proof test, proof green 20/20 + red control (19) before the panel) → 8-seed panel (single-seed processes, 2 waves of 4) → analyzer verdicts (fresh panel + full-transcript reads of block repeats + NO-CLOSE sittings + wrinkle sweep) → run note → telemetry check → gate → rebase onto current master → merge. Heartbeat loop: 10-min cadence, setsid PID 65764.
 
 ## Amendment A1 (Q2 instrument correction — before any judged sim)
 
