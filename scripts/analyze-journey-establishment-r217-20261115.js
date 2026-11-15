@@ -177,7 +177,9 @@ for (const seed of seeds) {
     // promise. The driver records beatsAfterLastThem per sitting; the
     // open-question half is a human read (the analyzer flags the
     // sitting; the run note adjudicates). Engine-ended sittings WITH
-    // closing beats are closes, not cuts.
+    // closing beats are closes, not cuts — and so is any sitting with
+    // >= 1 closing beat even when endConvo returned no closing line
+    // (the want-close beat speaks into the transcript instead).
     const closes = d.sittingCloses || [];
     for (const sc of closes) {
       totalSittings++;
@@ -187,7 +189,7 @@ for (const seed of seeds) {
       } else if (sc.endedByEngine && sc.beatsAfterLastThem === 0 && !sc.closingLine) {
         engineCut++; engineCutDetail.push(`seed ${seed}: CUT — ${who} (engine-ended, 0 closing beats after last THEM: "${(sc.lastThem || '').slice(0, 80)}")`);
       } else if (sc.endedByEngine) engineCutWithClosing++;
-      else if (!sc.closingLine) { noCloseOther++; engineCutDetail.push(`seed ${seed}: NO-CLOSE (other) — ${who}`); }
+      else if (!sc.closingLine && (sc.beatsAfterLastThem || 0) === 0) { noCloseOther++; engineCutDetail.push(`seed ${seed}: NO-CLOSE (other) — ${who}`); }
     }
     if (!closes.length) {
       // Fallback: legacy txt-shape scoring (driver without sittingCloses).
