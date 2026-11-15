@@ -41,6 +41,7 @@ function analyzeLeg(dir, w5set) {
   const seeds = [];
   const departs = [];
   const wpEnds = [];
+  const brainEnds = [];
   let parseErrors = 0;
   for (const f of files) {
     let d;
@@ -52,6 +53,7 @@ function analyzeLeg(dir, w5set) {
     for (const s of (d.w5seeds || [])) seeds.push(Object.assign({ seed: d.seed }, s));
     for (const p of (d.w5departs || [])) departs.push(Object.assign({ seed: d.seed }, p));
     if (d.wpEnd) wpEnds.push(Object.assign({ seed: d.seed }, d.wpEnd));
+    if (d.brainEnd) brainEnds.push(Object.assign({ seed: d.seed }, d.brainEnd));
     // Attach the raw per-seed fields the wall/cost reads need.
     const rec = perSeed[perSeed.length - 1];
     rec.scaleRank = d.scaleRank || null;
@@ -134,6 +136,15 @@ function analyzeLeg(dir, w5set) {
     const bs = w.byStage || {};
     for (const st of Object.keys(bs)) wpByStage[st] = (wpByStage[st] || 0) + bs[st];
   }
+  // Brain-commit tally (pooled): did the dawn scorer ever commit a
+  // win-plan action (party_launch / party_wait / gear_hold)?
+  const brainSum = { totalCommits: 0, winPlanCommits: 0, byAction: {}, byOverride: {} };
+  for (const b of brainEnds) {
+    brainSum.totalCommits += (b.totalCommits | 0);
+    brainSum.winPlanCommits += (b.winPlanCommits | 0);
+    for (const k of Object.keys(b.byAction || {})) brainSum.byAction[k] = (brainSum.byAction[k] || 0) + b.byAction[k];
+    for (const k of Object.keys(b.byOverride || {})) brainSum.byOverride[k] = (brainSum.byOverride[k] || 0) + b.byOverride[k];
+  }
   // Wall numbers.
   const national = perSeed.filter(function (s) { return s.scaleRank === 'national' || s.scaleRank === 'global'; }).length;
   const table = perSeed.filter(function (s) { return s.tableTaken; }).length;
@@ -167,6 +178,7 @@ function analyzeLeg(dir, w5set) {
     seeds: { w5n: w5seedRows.length, byOutcome: seedByOutcome },
     departs: { n: departs.length, byResult: departByResult, byStage: departByStage },
     winplan: { sum: wpSum, byStage: wpByStage },
+    brain: brainSum,
   };
 }
 

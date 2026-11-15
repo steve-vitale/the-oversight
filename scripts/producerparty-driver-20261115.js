@@ -429,6 +429,35 @@ async function oneRun(seed, policyName) {
       };
     } else errors.push('winPlanDepart-wrap: not a function');
   } catch (e) { errors.push('winPlanDepart-wrap-install: ' + String(e.message).slice(0, 80)); }
+  // BRAIN DEPARTURES (producerparty diagnostic): the brain owns dawn
+  // (vbrainOwnsDawn() === true), so agencyTick BYPASSES winPlanDepart
+  // — the wrap above sees nothing. The real party launch lives in
+  // vbrainExecuteDepart's party_launch mirror, which bumps NO
+  // winPlanStats counter. Record its hold/launch outcomes here, into
+  // the same w5departs array (source 'brain'), reading the dawn
+  // commit BEFORE the call (the commit is today's; the call may
+  // launch and the commit object itself is not rewritten by it).
+  try {
+    const origBrainDepart = Game.vbrainExecuteDepart;
+    if (typeof origBrainDepart === 'function') {
+      Game.vbrainExecuteDepart = function (vid, hx, hy, playerAtHaven) {
+        let commit = null;
+        try { commit = (typeof this.vbrainCommit === 'function') ? this.vbrainCommit(vid) : null; } catch (e) {}
+        const ret = origBrainDepart.apply(this, arguments);
+        try {
+          const plan = planOf(vid);
+          if ((ret === 'hold' || ret === 'launch') && commit && commit.winPlanAction) {
+            w5departs.push({ day: gday(Game), vid: vid, result: ret, source: 'brain',
+              winPlanAction: commit.winPlanAction, companion: commit.companion || null,
+              stage: plan ? plan.stage : null, target: plan ? plan.target : null,
+              party: (plan && plan.party) ? plan.party.slice() : [],
+              targetWave: plan ? (plan.needWave || null) : null });
+          }
+        } catch (e) { errors.push('w5braindepart-log: ' + String(e.message).slice(0, 80)); }
+        return ret;
+      };
+    } else errors.push('vbrainExecuteDepart-wrap: not a function');
+  } catch (e) { errors.push('vbrainExecuteDepart-wrap-install: ' + String(e.message).slice(0, 80)); }
   try {
     const origFF = Game.fieldFight;
     if (typeof origFF === 'function') {
@@ -982,6 +1011,28 @@ async function oneRun(seed, policyName) {
       } catch (e) { return null; }
     })(),
     capSummary: capSummary, ctxCounters: ctxCounters,
+    // BRAIN-COMMIT TALLY (producerparty diagnostic, pure read of the
+    // dawn log at end of run): why do win-plan departures stay 0?
+    // Tally commits by winPlanAction + override reason. vbrainLogs()
+    // returns a slice copy — no state write, no RNG.
+    brainEnd: (function () {
+      try {
+        if (typeof Game.vbrainLogs !== 'function') return null;
+        const logs = Game.vbrainLogs() || [];
+        const byAction = {}, byOverride = {};
+        let winPlanCommits = 0, totalCommits = 0;
+        for (const e of logs) {
+          if (!e || e.mode !== 'lottery') continue;
+          totalCommits += 1;
+          if (e.winPlanAction) {
+            winPlanCommits += 1;
+            byAction[e.winPlanAction] = (byAction[e.winPlanAction] || 0) + 1;
+          }
+          if (e.override) byOverride[e.override] = (byOverride[e.override] || 0) + 1;
+        }
+        return { totalCommits, winPlanCommits, byAction, byOverride, logN: logs.length };
+      } catch (e) { return null; }
+    })(),
     driveEnd: driveEnd,
     instrumentErrors: errors,
     samples: result.samples || null,
