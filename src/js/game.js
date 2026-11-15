@@ -20932,6 +20932,25 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (rec.allyVid) this.objNoteMonsterSighting(rec.allyVid, m.id, m.tx, m.ty);
         }
       } catch (e) {}
+      // PRODUCERPARTY (sim-producerparty-b): a villager who FLED a hard
+      // beast seeds a win-plan for that species and ground — the same
+      // seed expeditionMonster makes (villager-agency.js, 'fled'), so
+      // the re-engagement party can go back after it together. The
+      // wild path never seeded before, so a faced Producer produced no
+      // plan, no target, no hunt; the launch chain (brain party_launch
+      // to the plan's node, winPlanFightGate SEEK when the trick is
+      // known and the party is 3 armed+armored) only ever carried
+      // expedition targets. Wave-gated inside winPlanSeedFromFight
+      // (wave >= 3). Raids and aid fights excluded, like the sighting
+      // block's raid exclusion: defence at the haven door is not a
+      // place to return to. No seed on vKill (winPlanNoteKill), mFlee
+      // (the expedition path does not seed it), vDie (the dead hold no
+      // plan), or alreadyDead/evade (no fight).
+      try {
+        if (!opts.raid && !wViaAid && rec && rec.outcome === 'vFlee' && this.winPlanSeedFromFight) {
+          this.winPlanSeedFromFight(vid, mdef, 'fled');
+        }
+      } catch (e) {}
       if (rec.outcome === 'alreadyDead') {
         // BREAK-IT combat 2026-10-09: the world kept a 0-hp monster (vFlee
         // coinciding with the lead falling). It's a corpse, not a fight —

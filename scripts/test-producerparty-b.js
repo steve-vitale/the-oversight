@@ -2,7 +2,8 @@
 // scripts/test-producerparty-b.js — sim-producerparty-b proof: the
 // per-encounter recorder (scripts/producerparty-driver-20261115.js),
 // the judge arithmetic (scripts/analyze-producerparty-b.js), and the
-// Producer re-engagement party lever (src/js/win-plan.js).
+// Producer re-engagement party lever (src/js/game.js
+// resolveWildMonsterEncounter — the wild-fight seed).
 //
 // Cases (one fixture, one process per case — harness rule: never two
 // harnesses in one node process at once). The 'all' runner spawns one
@@ -11,7 +12,7 @@
 //   static        recorder wiring present in the driver (four wraps +
 //                 w5 output fields); the frozen wave-5 id set matches
 //                 src/data/monsters.json exactly; the lever static
-//                 check (win-plan.js diff is the lever hunks only —
+//                 check (game.js diff is the lever hunks only —
 //                 runs once the lever commit exists; skipped with a
 //                 note before then).
 //   judge         judge() on synthetic pooled summaries: the GO shape
@@ -76,9 +77,11 @@ if (kase === 'static') {
   if (JSON.stringify(live) !== JSON.stringify(frozen)) fail('static', 'wave-5 id set drifted: live ' + JSON.stringify(live) + ' vs frozen ' + JSON.stringify(frozen));
   // 3. Lever static check — runs once the lever commit exists. Before
   // then, the recorder-only tree has no lever to check; record that
-  // explicitly instead of failing vacuously.
+  // explicitly instead of failing vacuously. The lever is the wild-fight
+  // seed in resolveWildMonsterEncounter (src/js/game.js), so the pick
+  // searches game.js for the PRODUCERPARTY marker.
   let lever = '';
-  try { lever = execSync("git log --format=%H -S 'producerparty' -- src/js/win-plan.js | tail -1", { cwd: repo, encoding: 'utf8' }).trim(); } catch (e) { lever = ''; }
+  try { lever = execSync("git log --format=%H -S 'PRODUCERPARTY' -- src/js/game.js | tail -1", { cwd: repo, encoding: 'utf8' }).trim(); } catch (e) { lever = ''; }
   if (!lever) {
     pass('static', { recorderWraps: true, w5ids: live, lever: 'not-built-yet' });
   }
@@ -86,11 +89,13 @@ if (kase === 'static') {
   let changed = [];
   try { changed = execSync('git diff ' + base + ' ' + lever + ' --name-only', { cwd: repo, encoding: 'utf8' }).trim().split('\n').filter(Boolean); } catch (e) { fail('static', 'git diff failed: ' + e.message); }
   const srcChanged = changed.filter(function (f) { return f.indexOf('src/') === 0; });
-  if (srcChanged.length !== 1 || srcChanged[0] !== 'src/js/win-plan.js') fail('static', 'lever src change must be exactly src/js/win-plan.js, got: ' + srcChanged.join(','));
+  if (srcChanged.length !== 1 || srcChanged[0] !== 'src/js/game.js') fail('static', 'lever src change must be exactly src/js/game.js, got: ' + srcChanged.join(','));
   let diff = '';
-  try { diff = execSync('git diff ' + base + ' ' + lever + ' -- src/js/win-plan.js', { cwd: repo, encoding: 'utf8' }); } catch (e) { fail('static', 'git diff win-plan.js failed: ' + e.message); }
+  try { diff = execSync('git diff ' + base + ' ' + lever + ' -- src/js/game.js', { cwd: repo, encoding: 'utf8' }); } catch (e) { fail('static', 'git diff game.js failed: ' + e.message); }
   if (/villageStandingTotal|deedGateReady|waveCombatReadiness|standingCfg/.test(diff)) fail('static', 'lever diff touches standing/gate numbers');
   if (/tableTakeSeat|chooseTableOption/.test(diff)) fail('static', 'lever diff touches the table');
+  if (diff.indexOf('winPlanSeedFromFight') < 0) fail('static', 'lever diff must call winPlanSeedFromFight');
+  if (diff.indexOf('vFlee') < 0) fail('static', 'lever diff must gate on the vFlee outcome');
   pass('static', { recorderWraps: true, w5ids: live, lever: lever.slice(0, 12), srcChanged: srcChanged });
 }
 
