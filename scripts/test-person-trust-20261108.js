@@ -56,6 +56,12 @@ function ok(name, cond, detail) {
 // ±25% admits only exactly 1 — any single-errand flip fails the test. The
 // bar shape (tolerance for small counts) is a metric-review item, not
 // changed here.
+// Bar shape ADOPTED 2026-11-15 (journey-landing r136, per the r135 metric
+// review): a baseline count of 1 under ±25% admits only exactly 1, so any
+// single-errand flip fails the test. Baseline counts under 4 now allow ±1
+// absolute (the r129 flip — FORAGE 2 vs 1 — passes under the new rule;
+// a 2-errand flip at count 1, 3 vs 1, still fails). Baselines themselves
+// do not move; counts ≥ 4 stay ±25%; zero baseline still allows +2.
 const BASELINE = {
   seed: 84101,
   days: 30,
@@ -66,15 +72,29 @@ const BASELINE = {
 };
 const NON_AIMED = ['WATER', 'FORAGE', 'TRAPS', 'EAT', 'SEEK', 'LEAVE', 'HUNT', 'HAUL'];
 const TOLERANCE = 0.25; // ±25% of baseline count; zero-baseline allows +2 absolute
-
+// r136 bar shape: baseline counts under 4 allow ±1 absolute instead of
+// ±25% (a count of 1 under ±25% admits only exactly 1 — any single-errand
+// flip fails the test; see the header comment + r136 prereg).
 function withinTol(got, want) {
+  if (want === 0) return got <= 2;
+  if (want < 4) return got >= want - 1 && got <= want + 1;
+  const lo = want * (1 - TOLERANCE);
+  const hi = want * (1 + TOLERANCE);
+  return got >= lo && got <= hi;
+}
+// Old rule, kept for the bar-shape proof test: the r129 flip (2 vs 1)
+// fails under ±25% and passes under the adopted rule.
+function withinTolOld(got, want) {
   if (want === 0) return got <= 2;
   const lo = want * (1 - TOLERANCE);
   const hi = want * (1 + TOLERANCE);
   return got >= lo && got <= hi;
 }
+module.exports = { withinTol, withinTolOld, BASELINE, NON_AIMED };
 
-(async () => {
+// Main block runs only when executed directly; the bar-shape proof test
+// requires this file for withinTol. (r136.)
+if (require.main === module) { (async () => {
   const { Game } = await loadGame({ seed: 7, mode: 'herald', fullTelemetry: false });
   await setupGame(Game);
 
@@ -188,4 +208,4 @@ function withinTol(got, want) {
 
   console.log(fail ? ('FAIL ' + fail + ' / pass ' + pass) : ('PASS all ' + pass));
   process.exit(fail ? 1 : 0);
-})().catch(e => { console.error(e && e.stack || e); process.exit(1); });
+})().catch(e => { console.error(e && e.stack || e); process.exit(1); }); }

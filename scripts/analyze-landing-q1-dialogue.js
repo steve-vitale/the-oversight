@@ -8,6 +8,15 @@
 //         while [dlg:heed]/[dlg:details] are offered >=3 times and never taken
 //         (legacy watch since r131: a long dodging sitting whose want properly
 //         engaged is a dodging player, not a stuck want).
+//   HEED-V (r136) — the verbatim-weighted HEED: a legacy-HEED sitting counts
+//         as a REAL filler loop only if some non-warning THEM line (>=20
+//         chars) is delivered verbatim 2+ times in that sitting. The r135
+//         Dauletkhan sitting (1150 d6) reads HEED=1 / HEED-V=0 — every
+//         brush-off a different line, want engaged (stage 3) — so the
+//         discriminator is the verbatim repeat, not the offer count.
+//         Warning lines are excluded (D2 already covers warning repeats).
+//         HEED-V ⊆ HEED by construction; both print side by side. HEED-V
+//         is a proposal in r136 and binds from r137 if it discriminates.
 //   WARNED-UNRESOLVED (r131 gate) — a warning line was delivered but the want
 //         ends unresolved/abandoned: content delivered, want never engaged.
 //   D1  — garbled personal-thread label "We never finished — themselves."
@@ -23,7 +32,7 @@ const WARN_LINES = [
   "Something's been moving out past the treeline. I can't name it, but I can feel it. Don't go out alone.",
   "The woods don't feel empty tonight. They haven't for a while. Stay close to the fire.",
 ];
-let d2 = [], d3 = [], heed = [], warnedUnresolved = [], d1 = 0, d1Files = [];
+let d2 = [], d3 = [], heed = [], heedV = [], warnedUnresolved = [], d1 = 0, d1Files = [];
 let warnSittings = 0, warnStuck10 = 0;
 // Distinctive phrases from the full convoWantWarning pool (generic +
 // recent-attack + known-monster variants; monster-named lines carry a
@@ -81,6 +90,25 @@ for (const f of files) {
   const detailsTaken = (text.match(/YOU: \[dlg:details\]/g) || []).length;
   if (turnCount >= 10 && (heedOffered + detailsOffered) >= 3 && heedTaken === 0 && detailsTaken === 0) {
     heed.push({ file: f, turns: turnCount, heedOffered, detailsOffered, heedTaken, detailsTaken });
+    // HEED-V (r136): verbatim-weighted — a real filler loop repeats the
+    // same brush-off line. Count non-warning THEM lines (>=20 chars);
+    // a verbatim repeat (same full line 2+ times) makes it a real loop.
+    const themCounts = {};
+    for (const l of lines) {
+      if (!l.startsWith('THEM:')) continue;
+      const body = l.slice(5).trim();
+      if (body.length < 20) continue;
+      if (WARN_LINES.some(wl => body.includes(wl))) continue;
+      if (WARN_SUBSTRS.some(s => body.includes(s))) continue;
+      themCounts[body] = (themCounts[body] || 0) + 1;
+    }
+    let worst = null, worstN = 0;
+    for (const [body, n] of Object.entries(themCounts)) {
+      if (n > worstN) { worst = body; worstN = n; }
+    }
+    if (worstN >= 2) {
+      heedV.push({ file: f, turns: turnCount, line: worst.slice(0, 100), n: worstN });
+    }
   }
   // STAGE AT CLOSE (r131 fix): the LAST "(want=warn_you stage=N)" line is
   // the stage the sitting ended at — the r130 version counted any stage-1
@@ -106,6 +134,8 @@ console.log('D3 injured question answered with tension line: ' + d3.length);
 d3.forEach(r => console.log('  D3 ' + r.file + ' :: ' + r.answer));
 console.log('HEED filler loop (>=10 turns, heed/details offered >=3x, never taken): ' + heed.length + ' [legacy watch since r131]');
 heed.forEach(r => console.log('  HEED ' + r.file + ' turns=' + r.turns + ' heedOffered=' + r.heedOffered + ' detailsOffered=' + r.detailsOffered));
+console.log('HEED-V verbatim filler loop (legacy HEED + a non-warning THEM line >=20 chars delivered verbatim 2+ times): ' + heedV.length + ' [r136 proposal, binds from r137]');
+heedV.forEach(r => console.log('  HEED-V ' + r.file + ' turns=' + r.turns + ' x' + r.n + ' :: ' + r.line));
 console.log('WARNED-BUT-UNRESOLVED (warning delivered, want ends unresolved/abandoned): ' + warnedUnresolved.length + ' [r131 gate]');
 warnedUnresolved.forEach(r => console.log('  WARN-UNRES ' + r.file + ' turns=' + r.turns + ' final=' + r.finalRes));
 console.log('warn_you sittings >=10 turns ending stage 1: ' + warnStuck10);
