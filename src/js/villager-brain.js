@@ -26,6 +26,7 @@
 //   - vbrain_duty_combat_social: hunt/patrol/teach/scout DUTY ads honor vbrainDisableCombatSocialDuty failing control; same duty_top_score / gardenKeeper / assign_standing seams as survival DUTY (code: dutyFeedCands, VILLAGER-BRAIN Phase 6)
 //   - vbrain_assign_standing: obeyed standing assignTask / conversation orders feed as ASSIGN extras and win the dawn commitment (assign_standing); scorer honors the order — not a parallel decider; obedience gate unchanged (code: assignFeedCand, vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
 //   - vbrain_commitment: the dawn pick writes a commitment record the same day so midday agency honors it instead of rolling again (code: vbrainScorePick, vbrainCommit)
+//   - vbrain_full_party: a wave-4+ win-plan bids party_launch only with two companions (fighter + 2 = the party of 3 the fight gate demands); with one it bids party_wait for its second ranger. The commit carries companion2 + companionsAvailable + needsFull; execute launches both on one shared target and records only companions who actually departed (code: winPlanCands, writeCommit, vbrainExecuteDepart)
 //   - vbrain_materialize_matches_commit: when an aimed override wins, objPick aligns the live objective kind to the commitment after core chore/facing draws (code: vbrainAlignObjective)
 //   - vbrain_midday_event_only: mid-day idle/done refresh runs only when commit day/part is stale or a perception flag fired; dawn still force-refreshes (code: vbrainShouldRefresh, vbrainMarkPerception)
 //   - vbrain_chain_safe: missing feeders fail silent; agency falls back to the old chance roll only when vbrainOwnsDawn is absent (code: vbrainFeedExtras)
@@ -126,7 +127,9 @@
   }
   // Party-path companion pick: eligibility stays local; ranking is the
   // shared companionScore (OVE-54). Do not fold bond-candidate ads here.
-  function findCompanion(self, vid, hx, hy) {
+  // `exclude` (optional array of vids) skips already-picked companions
+  // — the second pick for a full party (PRODUCERGATE half B).
+  function findCompanion(self, vid, hx, hy, exclude) {
     try {
       var v = villageOf(self);
       if (!v) return null;
@@ -137,6 +140,7 @@
       for (var i = 0; i < roster.length; i++) {
         var cid = roster[i];
         if (!cid || cid === vid || cid === self.villagerId) continue;
+        if (exclude && exclude.indexOf(cid) !== -1) continue;
         try { var p = self.getPerson ? self.getPerson(cid) : null; if (p && p.dead) continue; } catch (e) {}
         if (away[cid]) continue;
         if (((trust[cid] === undefined) ? 10 : trust[cid]) < 15) continue;
@@ -171,6 +175,33 @@
       for (var i = 0; i < ks.length; i++) if ((ks[i].w | 0) >= w) return true;
     } catch (e) {}
     return false;
+  }
+  // PRODUCERGATE half B (sim-producergate-b): does this plan target
+  // wave 4+ — so the launch must bring TWO companions, because the
+  // fight gate demands a party of 3 (armed + armored) for wave-4+
+  // beasts? Mirrors win-plan.js planNeedsFullParty: the plan's own
+  // needWave, the target species' wave, or the wave-5 readiness hold
+  // naming veterans (the village lacks a wave-4 kill).
+  function planNeedsFullParty(self, plan) {
+    try {
+      if (!plan) return false;
+      if ((plan.needWave | 0) >= 4) return true;
+      if (plan.target) {
+        var ms = (self.data && self.data.monsters) || [];
+        for (var i = 0; i < ms.length; i++) {
+          if (ms[i] && ms[i].id === plan.target) return ((ms[i].wave | 0) >= 4);
+        }
+        return false;
+      }
+      try {
+        var beat = (self.state && self.state._standingDeferBeat) || {};
+        if (beat[5] != null && self.waveUnlockReady) {
+          var r5 = self.waveUnlockReady(5);
+          if (r5 && (r5.short || []).indexOf('veterans') !== -1) return true;
+        }
+      } catch (e) {}
+      return false;
+    } catch (e) { return false; }
   }
   // Deterministic [0,1) roll from villager+day — no shared Math.random, so
   // the core objective lottery's RNG stream stays byte-identical.
@@ -212,7 +243,17 @@
         });
         return out;
       }
+      // PRODUCERGATE half B: a wave-4+ plan bids party_launch only
+      // when TWO companions are available at Haven — the launch must
+      // arrive at the fight gate as 3. With one companion it bids
+      // party_wait instead (any launch stage): the plan holds at
+      // Haven for its second ranger rather than launching short into
+      // an outmatched meeting.
+      var needsFull = planNeedsFullParty(self, plan);
       var companion = findCompanion(self, vid, hx, hy);
+      var companion2 = null;
+      if (needsFull && companion) companion2 = findCompanion(self, vid, hx, hy, [companion]);
+      var companionsAvailable = (companion ? 1 : 0) + (companion2 ? 1 : 0);
       if (stage === 'table' && hasKillWaveAtLeast(self, vid, 4) && !companion) {
         out.push({
           kind: 'HAVEN_CHORE', w: 5.5, chore: 'repair',
@@ -224,22 +265,26 @@
         });
         return out;
       }
-      if ((stage === 'party' || stage === 'hunt' || stage === 'standing' || stage === 'table') && companion) {
+      if ((stage === 'party' || stage === 'hunt' || stage === 'standing' || stage === 'table') && companion && (!needsFull || companion2)) {
         out.push({
-          kind: 'EXPEDITION', w: 5.0, companion: companion,
+          kind: 'EXPEDITION', w: 5.0, companion: companion, companion2: companion2,
+          companionsAvailable: companionsAvailable, needsFull: needsFull,
           vbrainSrc: 'win_plan', winPlanAction: 'party_launch',
           considerations: [
             { id: 'win_plan_stage', raw: 1, note: stage },
             { id: 'companion', raw: 1, note: String(companion) },
+            { id: 'companions', raw: companionsAvailable, note: needsFull ? 'full party (2 companions)' : 'party (1 companion)' },
           ],
         });
-      } else if (stage === 'party' && !companion) {
+      } else if ((stage === 'party' && !companion) || (needsFull && companion && !companion2)) {
         out.push({
           kind: 'HAVEN_CHORE', w: 4.0, chore: 'fire',
           vbrainSrc: 'win_plan', winPlanAction: 'party_wait',
+          companion: companion, companion2: null,
+          companionsAvailable: companionsAvailable, needsFull: needsFull,
           considerations: [
             { id: 'win_plan_stage', raw: 1, note: 'party' },
-            { id: 'waiting_companion', raw: 1, note: 'none at haven' },
+            { id: 'waiting_companion', raw: 1, note: companion ? 'second ranger' : 'none at haven' },
           ],
         });
       }
@@ -600,6 +645,9 @@
       vbrainSrc: c.vbrainSrc || null,
       winPlanAction: c.winPlanAction || null,
       companion: c.companion || null,
+      companion2: c.companion2 || null,
+      companionsAvailable: (c.companionsAvailable != null ? c.companionsAvailable : null),
+      needsFull: !!c.needsFull,
       bondAct: c.bondAct || null,
       considerations: considerations,
     };
@@ -620,6 +668,9 @@
       vbrainSrc: chosen.vbrainSrc || null,
       winPlanAction: chosen.winPlanAction || null,
       companion: chosen.companion || null,
+      companion2: chosen.companion2 || null,
+      companionsAvailable: (chosen.companionsAvailable != null ? chosen.companionsAvailable : null),
+      needsFull: !!chosen.needsFull,
       logIndex: br.logs.length - 1,
     };
     // A real re-score consumes the perception event that authorized it.
@@ -1020,6 +1071,14 @@
       if (c.winPlanAction === 'party_launch' && c.companion && typeof this.startExpedition === 'function') {
         // Mirror winPlanDepart's shared-target party launch, owned by the
         // dawn commitment rather than a midday re-decide.
+        // PRODUCERGATE half B: a wave-4+ plan launches its SECOND
+        // companion too (commit.companion2), on the same shared
+        // target, so the party arrives at the fight gate as 3. Each
+        // companion is re-checked right before launch — still at
+        // Haven, not already out — because another dawn commit may
+        // have taken them first; a taken companion is skipped, never
+        // double-booked. plan.party records only the companions who
+        // actually departed.
         var tx = null, ty = null, dur = 0;
         try {
           var plan = this.winPlanOf ? this.winPlanOf(vid) : null;
@@ -1041,12 +1100,35 @@
           var a2 = this.agencyState ? this.agencyState() : null;
           if (!a2 || !a2.exped[vid]) return 'hold';
         } catch (e) {}
-        this.startExpedition(c.companion, hx, hy, false, opts);
+        var launched = [];
+        var tryCompanion = function (cid) {
+          if (!cid) return;
+          try {
+            var st = this.agencyState ? this.agencyState() : null;
+            if (st && st.exped && st.exped[cid]) return;
+            var vv = this.state && this.state.village;
+            if (vv && vv.away && vv.away[cid]) return;
+          } catch (e) {}
+          this.startExpedition(cid, hx, hy, false, opts);
+          try {
+            var a3 = this.agencyState ? this.agencyState() : null;
+            if (a3 && a3.exped && a3.exped[cid]) launched.push(cid);
+          } catch (e) {}
+        }.bind(this);
+        tryCompanion(c.companion);
+        tryCompanion(c.companion2);
         try {
           var plan2 = this.winPlanOf ? this.winPlanOf(vid) : null;
-          if (plan2) { plan2.stage = 'hunt'; plan2.party = [c.companion]; }
-          var cplan = this.winPlanOf ? this.winPlanOf(c.companion) : null;
-          if (cplan) { cplan.stage = 'hunt'; cplan.party = [vid]; }
+          if (plan2) { plan2.stage = 'hunt'; plan2.party = launched.slice(); }
+          for (var li = 0; li < launched.length; li++) {
+            var lc = launched[li];
+            var cplan = this.winPlanOf ? this.winPlanOf(lc) : null;
+            if (cplan) {
+              cplan.stage = 'hunt';
+              cplan.party = [vid].concat(launched.filter(function (x) { return x !== lc; }));
+              if (plan2) { cplan.target = plan2.target; cplan.node = plan2.node; }
+            }
+          }
         } catch (e) {}
         return 'launch';
       }
