@@ -296,6 +296,10 @@ guardrails.pantryKcal, c3.starvationDeaths):
   prices or deed gates touched.
 
 ## Closeout
-- Commit via safe-commit.sh (worktree), merge --ff-only to master,
-  release, rotation 1→2 with read-back, lock deleted.
-- [TO FILL: commit hash, merge result, rotation read-back]
+- Committed baee20952 in the worktree; master moved during the run
+  (b4343ac9d, evidence-only), so the branch was rebased onto the new
+  master and proofs re-run clean (r214 10/10, spotter 35/35).
+  Rebased r214 commit: c89ac24b3.
+- Merge --ff-only to master, release, rotation 1→2 with read-back,
+  lock deleted — recorded in the 2026-11-15 memory log and the run's
+  final message (they happen after this note is committed).
