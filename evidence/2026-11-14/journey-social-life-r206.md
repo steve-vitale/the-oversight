@@ -354,7 +354,15 @@ worktree (invite-small 2/2, threetimes 11/11).
 
 ## Landing
 
-[TO UPDATE — rebase / merge / release / rotation.]
+Adoption r207 (2026-11-15 ~01:55Z): evidence commit 1015c7f65 (18 files;
+safe-commit index clobber struck once, repaired via ls-tree -r + index-info,
+status/diff-HEAD verified empty), rebased clean onto master 910bff7f4 as
+365b17d7d (single-commit rebase, no conflicts), proof tests re-run
+post-rebase GREEN (invite-small 2/2, threetimes 11/11). Merged ff-only;
+worktree released, branch deleted, rotation-b written 5 -> 6 (crisis next),
+lock deleted. Merged locally, pending ship — no version tag. Telemetry
+baseline NOT rolled (schema drift, see above). Pristine scratch dir
+~/workspace/scratch/pristine-r206base removed at closeout.
 
 ## Reachable / fun / winnable
 
