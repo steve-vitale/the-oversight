@@ -268,3 +268,78 @@ Pass-A sums: uw 21, won 4/5, peakVet per-seed maxes within regime
 ## Telemetry (09:00 occurrence)
 
 `telemetry-check.js` vs r188 baseline (endgame.json): [filled at landing]
+
+## Adoption addendum (13:00 CST occurrence — r211a3, this run)
+
+- Stale-lock recovery: lock run `oversight-playtest-loop-2-20261115T165900Z`
+  (11:00 CST occurrence), created 16:59:00Z; registry heartbeat for
+  journey2-endgame frozen 17:57:32Z (59 min stale at the 18:56Z check), no
+  live hbloop/process, last tree write 17:57Z — DEAD per the guard (also
+  past the 90-min lock fallback). Lock deleted, own lock
+  `oversight-playtest-loop-2-20261115T190000Z` written. The 11:00 run's
+  work survived in the tree as uncommitted files; recovered, not redone.
+- Pre-flight: main tree clean, disk 44%. Reaper ran clean (exit 0, removed
+  nothing, 14/16 active, all dirty trees held incl. journey2-endgame).
+- Worktree adopted in place; heartbeat re-established 18:59:54Z + setsid
+  loop `journey2-endgame-hbloop-r211a3.sh`, registry verified fresh.
+- 11:00 adoption outputs recovered + committed (f958649f7, pre-rebase SHA):
+  balance-panel refresh (neutral-r211, 4 cases), checkquick adopt2
+  (interrupted mid-run, no summary; superseded by adopt2b) + adopt2b
+  (336/4 in 809s), heartbeat log. Safe-commit index clobber repaired per
+  the known pattern (`ls-tree -r` + `update-index --add --index-info`);
+  status verified empty afterwards.
+- Checkquick attribution (adopt2b, pre-rebase tip): the 4 failures are NOT
+  the r211 fix. (1) Phone-frame proof — stale receipt vs current
+  index.html (master drift; r211 touches no boot input). (2) Living-garden
+  deed attainment — TIMEOUT at 300s; slowest test in both checkquick runs
+  (120s kill in run 1, 300s kill in run 2, 10 long seeds) — panel
+  completion under the spawn/timeout budget, a load artifact. (3)
+  Ladder-bundle ambient-raid control — PASSED in run 1 (335/5), FAILED in
+  run 2 (336/4); the branch touches no raid-delivery code; flip reads as
+  flaky/load. (4) Person-trust HAUL:3 vs 0 — same run-1→run-2 flip; the
+  branch does not touch that test or errand code (its 26-line diff is
+  master-side). The two measurement-workflow failures from run 1
+  (neutrality proof stale) were FIXED by the 11:00 balance refresh and
+  pass in adopt2b.
+- Rebase: the branch fork was 7a4353f68 (not c6343a839 as the 08:00 note
+  claimed — that was the sim substrate, not the git base), 14 commits
+  behind master 5453f710e. No master commit in range touched game.js /
+  alienPlayers.js / sigW3c.js / conversation.js. Rebase hit the known
+  stop-at-pick quirk on pick 1 (cff59bbce in both done + todo, tree
+  clean, pick verified unapplied via `git diff`, 43 lines) —
+  `git rebase --continue` sailed through; all 7 commits replayed exactly
+  once (new SHAs c0c9093ca…34ba3c98e). Rebased source diff verified: only
+  the r211 fix (game.js 38, alienPlayers.js 6, sigW3c.js 8) + 3 proof
+  tests.
+- Proof re-runs on the rebased tip: test-sysay-quotes-r211,
+  test-quote-wrap-r211, test-analyzer-revisions-r211,
+  test-syssay-capture-20261017, test-syssay-single-prefix-20261016 —
+  ALL GREEN.
+- Balance-proof re-validation FAILED on the rebased tip ("Proof source
+  inputs are not current"): master drift since the 11:00 panel — build.js
+  + index.html hashes moved, new policy
+  scripts/policies/competent-courtship-b.js landed. Observer/contract
+  digests matched (observer unchanged). Regenerated the panel on the
+  rebased tip (`balance-panel.js --out .balance-neutral-new --n 1`, 199s,
+  4 cases, 0 cached, RC 0), retained as neutral-r211-rebased.json.gz,
+  balance-proof-update.js re-validated RC 0 (panel c015d348…). The 11:00
+  panel is kept as neutral-r211.json.gz.
+- Telemetry (this run): telemetry-check.js vs r188 endgame.json baseline
+  on the committed pass-A corpora — QUIET (5 files, 3 metrics, no large
+  deviations). Baseline NOT rolled.
+- Gate: `check.js --quick --timeout 300` on the rebased tip — DONE 19:27Z:
+  **336 passed, 4 failed in 733s** — the SAME 4 as adopt2b, identically:
+  phone-frame proof (stale receipt), living-garden deed attainment
+  (TIMEOUT 300s), ladder-bundle ambient-raid control (0 fires),
+  person-trust HAUL:3 vs 0. The two measurement-workflow failures from
+  run 1 now PASS (balance-proof refresh worked). Log:
+  `journey-endgame-r211-checkquick-r211a3.log`. Gate verdict: GO with 0
+  attributable — the 4 failures are pre-existing/master-drift, stable
+  across three runs on two tips, none in code the branch touches.
+- Master moved during the gate: Lane A deepening r213 landed at
+  df361def5 (5 files: 2 evidence + 3 scripts, NO src changes, no balance
+  inputs). Second rebase onto df361def5 + targeted proof re-runs owed
+  before merge (body: rebase + re-run proofs when another lane lands
+  first).
+- Landing: [TBD — rebase-2, targeted gate, merge ff-only, release,
+  rotation 4→5 after gate].
