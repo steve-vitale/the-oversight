@@ -205,7 +205,18 @@ Adjudication — 0 attributable:
 
 ## Landing (r135 branch)
 
-[PENDING — merge follows the gate verdict above.]
+- Rebased twice as master moved under the run: first onto `b9b226430`
+  (sim-funeral-mend-b), then onto `96c139d75` (sim-scale-onramp-round-0547).
+  Proof tests re-run on each rebased tip: person-trust PASS all 19,
+  pocket ALL GREEN, thread-label ALL GREEN.
+- ff-only merged; fix commit verified an ancestor of the new HEAD
+  (`5edc54304`). Worktree released (worktree-release.sh merged), worktree
+  removed, branch `journey-landing-r135` deleted. Main tree clean.
+- Rotation `journey-rotation-a.txt`: read 0, wrote 0→1 at run start (read
+  back). Next leg: establishment.
+- Lock `playtest-loop.lock` (run_id `playtest-loop-20261115T051930Z`)
+  deleted at closeout after run_id verification.
+- Merged locally, pending ship (no bump/push — ship loop owns that).
 
 ## Metric review
 
