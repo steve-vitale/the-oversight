@@ -248,13 +248,15 @@ function runAll() {
       failed = true;
     }
   }
-  // Static leg: the tracked modification under src/js/ is exactly win-plan.js.
-  // Diff the branch against its merge-base (not the worktree), so the leg
-  // still holds once the build is committed.
+  // Static leg: the tracked modification under src/js/ is exactly win-plan.js
+  // (or nothing, on the reverted tree — the leg's value is confinement: no
+  // OTHER src/js file may be touched). Diff the branch against its
+  // merge-base (not the worktree), so the leg still holds once the build
+  // is committed.
   try {
     const base = execSync('git merge-base HEAD master', { cwd: repo, encoding: 'utf8' }).trim();
     const names = execSync(`git diff --name-only ${base} HEAD -- src/js/`, { cwd: repo, encoding: 'utf8' }).trim().split('\n').filter(Boolean);
-    const staticPass = names.length === 1 && names[0] === 'src/js/win-plan.js';
+    const staticPass = names.length === 0 || (names.length === 1 && names[0] === 'src/js/win-plan.js');
     results.push({ seed, case: 'static-src-diff', pass: staticPass, files: names });
     if (!staticPass) failed = true;
   } catch (e) {
