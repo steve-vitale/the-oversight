@@ -43,14 +43,80 @@
 
 ## Owed-check (run before the panel, on base b9b226430)
 
-- (to be filled: proof-update FAIL exit 1 "Proof source inputs are
-  not current"; workflow 8/9 with the staleness leg failing;
-  B.manifest vs the retained b19 panel's sources — keys only in tip
-  + keys differ, named; observer/contract digests; stale-input
-  negatives b19, b18, b13, b12; pre-regeneration
-  test-proofrefresh-b20.js legs before the ENOENT crash.)
-- **Verdict of the owed-check: (to be filled: OWED or NOT-OWED).**
-  If NOT-OWED, stop — do not regenerate a good proof.
+- Before: `node scripts/godpath/test-measurement-proof-update.js` FAILS on
+  b9b226430 with `Error: Proof source inputs are not current`
+  (`scripts/balance-proof-update.js:8`), exit 1 — confirmed in the worktree
+  before the panel run.
+  `test-measurement-workflow.js` standalone: **8 passed, 1 failed** —
+  the failing leg is exactly "retained neutrality proof covers the
+  current Game/controller/harness inputs" (the staleness failure; the
+  same leg the b11/b12/b13/b19 adoptions recorded as 8/9 on their stale
+  landing tips).
+- `B.manifest('.')` vs the retained b19 panel's `sources`
+  (`evidence/2026-11-14/neutral-proofrefresh-b19.json.gz`, sha256
+  `8ea3a8bdcb8b72d6988a2fb7bf181623480eecca1f104f9c6241439fa5266e8e`):
+  tip 529 keys, panel 529 keys — **0 keys only in the tip + 6 keys
+  differ**:
+
+  - `src/js/build.js` — batch-ship version bump (panel `002759da082a…`,
+    tip `cf40fec40e13…`)
+  - `src/js/conversation.js` — funeral-mend landing (panel
+    `7bf28860b363…`, tip `af4d10c25eee…`)
+  - `src/js/convo-scene.js` — funeral-mend landing (panel
+    `039e3737f4e9…`, tip `d2c6e5d9b6b9…`)
+  - `src/js/game.js` — funeral-mend landing (panel `f3d10e7bece6…`,
+    tip `e0d7dee980e1…`)
+  - `src/js/hierarchy.js` — funeral-mend landing (panel
+    `03cd67034447…`, tip `446b7141eb83…`)
+  - `index.html` — batch-ship version bump (panel `e35cc1619c6a…`,
+    tip `6e54b11025a4…`)
+
+  Observer and contract digests still match the b19 panel (observer
+  f37e5ce0…, contract 37bbb0fa…). The staleness is the source manifest
+  only: 5 funeral-mend game-code changes + 2 version stamps (build.js
+  + index.html).
+- `B.manifest('.')` vs the retained b18 panel's `sources`
+  (`evidence/2026-11-14/neutral-proofrefresh-b18.json.gz`): tip 529
+  keys, panel 526 keys — the same 3 new policy files (competent-
+  answercourt-b, competent-scaleclimb-b, competent-succpolity-b, from
+  the 0155Z merges, already in b19) + **7 keys differ** (betrayal.js,
+  build.js, conversation.js, convo-scene.js, game.js, hierarchy.js,
+  index.html). Observer and contract digests still match the b18 panel.
+- `B.manifest('.')` vs the retained b17 panel: 3 new policy files +
+  **8 keys differ** (adds partyTactics.js). Vs b13 and b12 panels
+  (`evidence/2026-11-13/neutral-proofrefresh-b13.json.gz`,
+  `evidence/2026-11-12/neutral-proofrefresh-b12.json.gz`): 3 new
+  policy files + **10 keys differ** each (adds abilityActions.js,
+  contests.js). Observer and contract digests match all four.
+- Stale-input negatives verified on this tip (validate() FAILS with
+  "Proof source inputs are not current" on all five): b19, b18, b17,
+  b13, b12. The brief's b19/b18 negatives hold, and so do b13/b12.
+- Cache-flags anomaly in the owed-check: `test-measurement-cache-
+  flags.js` scored **0/4** on this tip (all four legs FAIL), where
+  round 19 scored 4/4. Discriminating probe, same tip, same minute:
+  a single 1-day zero-policy panel build via the real CLI completes
+  fine (exit 0, 1 case) but takes **35.4s wall for ~3s CPU** — over
+  the test's 30s spawn timeout. Box load average was 25.47 at the
+  time (a parallel test sweep running in other trees: garden/relay
+  suites + journey-landing-r135). This is the 2026-11-12 load
+  artifact, not a code failure: no panel/cache code changed in this
+  arm (only evidence + test files committed so far; the funeral-mend
+  base did not touch balance-panel.js or the cache logic). Leg (c)
+  is re-run at closeout; if the box is still loaded it is judged by
+  the A/B (same-tip quiet-box rerun), per the prereg.
+- Pre-regeneration `test-proofrefresh-b20.js`: crashes at leg (d)
+  with ENOENT — `evidence/2026-11-15/neutral-proofrefresh-b20.json.gz`
+  does not exist yet (the panel has not been generated or re-pointed).
+  Legs before the crash: validate FAIL (ENOENT on the new panel),
+  proof-update FAIL exit 1, workflow 8/9, cache-flags 3/4 (one leg
+  failed — the load artifact again: 0/4 standalone minutes earlier,
+  3/4 inside this run as the parallel sweep wound down; scores move
+  with box load, not with any code change), ontology exit 0
+  ("All 138 systems validated", ONTOLOGY.md 2198 lines).
+- `validate-ontology.js` standalone: exit 0, "All 138 systems
+  validated", ONTOLOGY.md 2198 lines.
+- **Verdict of the owed-check: OWED.** Panels at b19 and earlier are
+  superseded; the re-point target is the NEW panel only.
 
 ## Panel (to be filled after the run)
 
