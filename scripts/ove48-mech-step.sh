@@ -53,13 +53,25 @@ REPO="${REPO:-$(cd "$(dirname "$0")/.." && pwd)}"
 cd "$REPO" || exit 2
 
 restore() {
-  # Restore native standing.js for $COMMIT (exact bytes) and delete
-  # tooling scratch. Never fails the run further — best effort, then
-  # the caller verifies.
+  # Restore native standing.js for $COMMIT (exact bytes) and remove
+  # tooling scratch. On old trees the scratch files do not exist in
+  # the commit (plain rm is correct); on newer trees (e.g. master
+  # tip) vetfirst-instrument / masterregress-analyze ARE tracked, so
+  # restore them from the commit instead of deleting them — the
+  # kind leg failed its final clean check on exactly this (2026-11-14:
+  # D scripts/masterregress-analyze-20261113.js +
+  # D scripts/vetfirst-instrument-20261111.js). Never fails the run
+  # further — best effort, then the caller verifies.
   if [ -n "${COMMIT:-}" ]; then
     git show "$COMMIT:src/js/standing.js" > src/js/standing.js 2>/dev/null || true
   fi
-  rm -f scripts/ove48-mech-driver-20261114.js scripts/ove48-mech-analyze-20261114.js scripts/ove48-mech-instrument-20261114.js scripts/ove48-mech-causal-20261114.js scripts/vetfirst-instrument-20261111.js scripts/masterregress-analyze-20261113.js
+  for f in scripts/ove48-mech-driver-20261114.js scripts/ove48-mech-analyze-20261114.js scripts/ove48-mech-instrument-20261114.js scripts/ove48-mech-causal-20261114.js scripts/vetfirst-instrument-20261111.js scripts/masterregress-analyze-20261113.js; do
+    if [ -n "${COMMIT:-}" ] && git cat-file -e "$COMMIT:$f" 2>/dev/null; then
+      git show "$COMMIT:$f" > "$f" 2>/dev/null || true
+    else
+      rm -f "$f"
+    fi
+  done
 }
 fail() {
   echo "OVE48MECH STEP FAIL ($STEP @ $COMMIT): $1" >&2
