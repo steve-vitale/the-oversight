@@ -604,8 +604,10 @@ function corpusDir(step) {
       JSON.stringify(subjSummary.seeds) === JSON.stringify(SEEDS), 'seeds=' + subjSummary.seeds.join(','));
     T.ok('subject per-seed anchorCommit is the subject commit',
       (function () {
-        const subjShort = git('rev-parse --short ' + SUBJECT_BRANCH);
-        return subjSummary.perSeed.every(function (r) { return r.anchorCommit === subjShort; });
+        // The driver records a 12-char anchor; `git rev-parse --short`
+        // returns 9 chars in this repo — compare the 12-char prefix.
+        const subjShort12 = git('rev-parse ' + SUBJECT_BRANCH).slice(0, 12);
+        return subjSummary.perSeed.every(function (r) { return r.anchorCommit === subjShort12; });
       })(), '8/8 rows subject');
     T.ok('subject rows carry the fix standing + base policy',
       subjSummary.perSeed.every(function (r) { return r.standingFix === true && r.standingSha === FIX_SHORT && r.policySha === POLICY_SHORT; }), 'fix + policy');
