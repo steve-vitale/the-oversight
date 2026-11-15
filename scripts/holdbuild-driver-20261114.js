@@ -3,7 +3,9 @@
 // ed6df749e). ADAPTATIONS (instrument-only, no game-behavior change):
 // RUN/OUTDIR defaults renamed; per-seed filename prefix holdbuild-b-s;
 // FOUR ADDITIVE snapshot fields (pd = pantryDaysEstimate, wpHolders =
-// win-plan holder count, wpUpkeep/wpReclimb = winPlanStats counters);
+// win-plan holder count, wpUpkeep/wpReclimb = winPlanStats counters read
+// RAW from state — never via Game.winPlanStats(), whose stateOf() creates
+// village.winPlan and would diverge the run);
 // the dissolution-episode ring from scripts/linklines-capture.js feeds
 // an additive `dissolutionLines` field (general 600-line buffer
 // untouched). The answercourt driver file itself stays byte-identical.
@@ -153,12 +155,16 @@ function snapshot(Game, errors) {
       pendingNational: st.pendingNational ? { shape: st.pendingNational.shape || null, primary: st.pendingNational.primary || null, day: st.pendingNational.day | 0 } : null,
       pendingGlobal: st.pendingGlobal ? { viewership: st.pendingGlobal.viewership | 0, day: st.pendingGlobal.day | 0 } : null,
       nationalLive: !!st.nationalLive,
-      // HOLDBUILD additive fields (pure reads): pantry-days at the
-      // morning read, win-plan holder count, upkeep/reclimb tend counts.
+      // HOLDBUILD additive fields (pure RAW reads — NEVER through
+      // Game.winPlanStats(): that method calls stateOf(), which CREATES
+      // village.winPlan/winPlanStats, and winPlanHavenTick returns early
+      // while winPlan is undefined — so creating it from the recorder
+      // seeds plans days early and diverges the run (100201 pilot-off:
+      // w1 1->2 by day 5, rep Carmen->Liam by day 10). Raw reads only.
       pd: safe(function () { return (typeof Game.pantryDaysEstimate === 'function') ? Game.pantryDaysEstimate() : null; }, null),
       wpHolders: (function () { try { return Object.keys(((st.village || {}).winPlan) || {}).length; } catch (e) { return null; } })(),
-      wpUpkeep: safe(function () { var w = (typeof Game.winPlanStats === 'function') ? (Game.winPlanStats() || {}) : {}; return w.upkeepTends | 0; }, 0),
-      wpReclimb: safe(function () { var w = (typeof Game.winPlanStats === 'function') ? (Game.winPlanStats() || {}) : {}; return w.reclimbTends | 0; }, 0),
+      wpUpkeep: (function () { try { return ((((st.village || {}).winPlanStats || {}).upkeepTends) | 0); } catch (e) { return 0; } })(),
+      wpReclimb: (function () { try { return ((((st.village || {}).winPlanStats || {}).reclimbTends) | 0); } catch (e) { return 0; } })(),
       drive: ds ? {
         tends: ds.tends | 0, tendsBlocked: ds.tendsBlockedPantry | 0,
         accordAnswers: ds.accordAnswers | 0,
