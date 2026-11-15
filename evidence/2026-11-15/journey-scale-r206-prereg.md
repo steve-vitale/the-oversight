@@ -232,7 +232,59 @@ proof uses synthetic corpora, no staged game).
 
 ## CLOSEOUT — run 2026-11-15T0417Z (this run)
 
-[TO FILL AT CLOSEOUT — panel table, Q1–Q5, blank, telemetry, verdicts,
-gate/landing. Full record: `evidence/2026-11-15/journey-scale-r206.md`.
+**Panel (seeds 135501–135504, DAYCAP=140):** 135501 over d137 (0/0,
+extinct, the wild 12, lesser d72); 135502 over d136 (0/0, extinct, the
+wild 12, 191 fights / 167 herald, tribute ready d115 undelivered 0/9);
+135503 alive d141 (9/9, lesser d46, tribute DELIVERED d108, wave-5
+spoiler killed d122); 135504 alive d141 (8/8, lesser d48, tribute ready
+d120 undelivered 0/1, wave-5 editor killed d129). Lived-days 555 vs
+r204 band 419 (+32.5%, BREACH — see run note §Metric review). Lesser
+4/4. Books close, unattributed 0, teleOnly 0. Wave-5 fights 5, kills 2.
+
+**Q1 — NO-GO on the wall, blocker named per seed (informative):** national
+0/4. 135501: COLLAPSE (the wild, d136 six-death day). 135502: COLLAPSE
+(the wild + herald flood). 135503: LEAD 0/3 seasoned (2 active).
+135504: LEAD 0/3 seasoned (1 active), belong not good (trust 20,
+arrears 67,500). Wall stands on a fresh band; survival rose to 2/4.
+
+**Q2 — one BREACH (lived-days), the rest GO/HOLD:** raise 8 talks
+(6 answered, 1 counter, 0 defects); vetbar 0 disagreements; trap HOLD
+(2 mimes answered); betrayal HOLD (1 turn-0 offer, labeled); nod-loop
+HOLD (worst 3x in 7/7 -nv sittings — the r132 thin-out visible);
+lived-days BREACH (+32.5%, long side — NO-GO per §14, not re-scored);
+lesser 4/4.
+
+**Q3 — RECORDED:** daily-play mimes 46, daily accepts proven 0; five
+comm-'none' villagers (Yuki, Isaac, Stepan, Tashi, Sophie); Isaac +
+Sophie mimes answered in driver sittings. Lane decision still owed.
+
+**Q4 — PASS:** all 15 transcripts + all 8 raise talks read in full.
+Senseless 0. Strongest: Ursula the mortician, Gina on leadership,
+Mateo on having hurt someone, Salvador's cache + taken kin. New
+surfaces: no invite double-serve (Lane B r206 fix reads clean);
+driver picker has no secret:* handling (Omar d120 walk-away — fix
+proposed for the next run); just_company filler loop (Ray d90);
+flag-emoji openers now systematic in all -nv sittings.
+
+**Q5 — census in the run note** (`evidence/2026-11-15/journey-scale-r206.md`).
+Spotter skill NOT MEASURABLE from this corpus (no foodXp snapshot;
+owed to the next run's driver).
+
+**The blank filled:** M23 tribute-payability metric revision LANDED as
+an instrument (analyzer section + proof cases 15–17; all three states
+exercised this band: READY-UNPAYABLE ×2, DELIVERED ×1, NEVER-READY
+×1). Plus the herald finding characterized: wave-4 variety collapses
+to herald on the fighting seeds (167 + 96 fights, 1 kill each),
+nightly gorge tax, carried as a spawn/encounter question.
+
+**Telemetry:** 2 LOUD lines (fightsTotal +66%, w4 +86%); investigated
+(band composition + herald flood, no combat code changed);
+**baseline NOT rolled** (4-band sequence shows the metric is
+noise-dominated; rolling would chase noise). maxGameDay QUIET.
+
+**Verdicts:** reachable YES, fun YES, winnable NO (this leg).
+
+**Gate / landing:** see the run note's Gate/landing section (filled at
+closeout). Full record: `evidence/2026-11-15/journey-scale-r206.md`.
 Corpus: `hidden_files/evidence/2026-11-15/journey-scale-r206-*` (goal
-store).]
+store).
