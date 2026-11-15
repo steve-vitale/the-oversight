@@ -83,7 +83,12 @@
 //      (4/8, fixed days) still anchors the far end, the fresh
 //      baseline leg read >=3/8 on seeds 190541-190548, the subject
 //      summary exists with a survived count on the same seeds, and
-//      the evidence file records the matching verdict.
+//      the evidence file records the matching verdict. On the
+//      GATE-STOP path (fresh baseline <=2/8 — the prereg gate fired)
+//      it instead asserts the STOP state: baseline summary exists
+//      with survived <=2, NO subject summary/log/corpus exists (no
+//      subject leg was cut), and the evidence file records the
+//      UNMEASURED stop with the baseline count.
 //
 // Usage: node scripts/test-transplant8c.js
 'use strict';
@@ -596,31 +601,46 @@ function countOccurrences(raw, s) {
   } else {
     T.ok('fresh baseline step summary exists (ep-far-8c)', fs.existsSync(baseSumPath), 'present');
     const base = JSON.parse(fs.readFileSync(baseSumPath, 'utf8'));
-    T.ok('fresh baseline leg read >=3/8 survived (gate holds)', base.survived >= 3, 'survived=' + base.survived);
     const baseSeeds = (base.perSeed || []).map(function (p) { return p.seed; });
     T.ok('fresh baseline leg ran exactly the fresh band 190541-190548',
       JSON.stringify(baseSeeds) === JSON.stringify(SEEDS), JSON.stringify(baseSeeds));
     T.ok('fresh baseline driver log exists', fs.existsSync(baseLogPath), 'present');
     T.ok('fresh baseline per-seed corpus exists', fs.existsSync(baseCorpusDir), 'present');
-    T.ok('subject step summary exists', fs.existsSync(sumPath), 'present');
-    const sub = JSON.parse(fs.readFileSync(sumPath, 'utf8'));
-    T.ok('subject summary carries a survived count 0..8', typeof sub.survived === 'number' && sub.survived >= 0 && sub.survived <= 8, 'survived=' + sub.survived);
-    const subSeeds = (sub.perSeed || []).map(function (p) { return p.seed; });
-    T.ok('subject leg ran exactly the fresh band 190541-190548',
-      JSON.stringify(subSeeds) === JSON.stringify(SEEDS), JSON.stringify(subSeeds));
-    const verdict = base.survived >= 3 ? classifyTransplant(sub.survived) : 'UNCLASSIFIABLE';
-    T.ok('subject summary verdict maps from the survived count (' + verdict + ')',
-      verdict === 'CARRIER' || verdict === 'AMBIGUOUS' || verdict === 'NOT-CARRIER', verdict);
-    T.ok('subject driver log exists', fs.existsSync(logPath), 'present');
-    T.ok('subject per-seed corpus exists', fs.existsSync(corpusDir), 'present');
-    T.ok('evidence file exists and records the subject verdict ' + verdict,
-      ev9 !== '' && ev9.indexOf(verdict) !== -1, verdict + ' present');
-    T.ok('evidence file records the subject survived count',
-      ev9.indexOf('survived ' + sub.survived + '/8') !== -1, 'survived ' + sub.survived + '/8 present');
-    T.ok('evidence file records the fresh baseline survived count',
-      ev9.indexOf('survived ' + base.survived + '/8') !== -1, 'baseline survived ' + base.survived + '/8 present');
-    T.ok('evidence file records the family-test leg (dlgmore script)',
-      ev9.indexOf('test-transplant8c-dlgmore') !== -1, 'dlgmore leg present');
+    if (base.survived <= 2 && !fs.existsSync(sumPath)) {
+      // GATE-STOP path (prereg): the fresh baseline did not reproduce
+      // far-end health — the run STOPPED, no subject leg was cut.
+      T.ok('fresh baseline leg read <=2/8 survived (gate FAILED — STOP)', base.survived <= 2, 'survived=' + base.survived);
+      T.ok('NO subject step summary exists (STOP — no subject leg cut)', !fs.existsSync(sumPath), 'absent');
+      T.ok('NO subject driver log exists', !fs.existsSync(logPath), 'absent');
+      T.ok('NO subject per-seed corpus exists', !fs.existsSync(corpusDir), 'absent');
+      T.ok('evidence file exists and records the STOP (UNMEASURED, baseline gate)',
+        ev9 !== '' && ev9.indexOf('UNMEASURED') !== -1, 'UNMEASURED present');
+      T.ok('evidence file records the fresh baseline survived count',
+        ev9.indexOf('survived ' + base.survived + '/8') !== -1, 'survived ' + base.survived + '/8 present');
+      T.ok('evidence file records the family-test leg (dlgmore script)',
+        ev9.indexOf('test-transplant8c-dlgmore') !== -1, 'dlgmore leg present');
+    } else {
+      T.ok('fresh baseline leg read >=3/8 survived (gate holds)', base.survived >= 3, 'survived=' + base.survived);
+      T.ok('subject step summary exists', fs.existsSync(sumPath), 'present');
+      const sub = JSON.parse(fs.readFileSync(sumPath, 'utf8'));
+      T.ok('subject summary carries a survived count 0..8', typeof sub.survived === 'number' && sub.survived >= 0 && sub.survived <= 8, 'survived=' + sub.survived);
+      const subSeeds = (sub.perSeed || []).map(function (p) { return p.seed; });
+      T.ok('subject leg ran exactly the fresh band 190541-190548',
+        JSON.stringify(subSeeds) === JSON.stringify(SEEDS), JSON.stringify(subSeeds));
+      const verdict = base.survived >= 3 ? classifyTransplant(sub.survived) : 'UNCLASSIFIABLE';
+      T.ok('subject summary verdict maps from the survived count (' + verdict + ')',
+        verdict === 'CARRIER' || verdict === 'AMBIGUOUS' || verdict === 'NOT-CARRIER', verdict);
+      T.ok('subject driver log exists', fs.existsSync(logPath), 'present');
+      T.ok('subject per-seed corpus exists', fs.existsSync(corpusDir), 'present');
+      T.ok('evidence file exists and records the subject verdict ' + verdict,
+        ev9 !== '' && ev9.indexOf(verdict) !== -1, verdict + ' present');
+      T.ok('evidence file records the subject survived count',
+        ev9.indexOf('survived ' + sub.survived + '/8') !== -1, 'survived ' + sub.survived + '/8 present');
+      T.ok('evidence file records the fresh baseline survived count',
+        ev9.indexOf('survived ' + base.survived + '/8') !== -1, 'baseline survived ' + base.survived + '/8 present');
+      T.ok('evidence file records the family-test leg (dlgmore script)',
+        ev9.indexOf('test-transplant8c-dlgmore') !== -1, 'dlgmore leg present');
+    }
   }
 
   T.done();
