@@ -1,0 +1,57 @@
+PASS g1join prereg exists
+PASS g1join prereg names the false positive (youngAnswers=6)
+PASS g1join prereg states the non-re-scoring rule
+PASS g1join prereg fixes GO bars (a)-(d)
+PASS g1join prereg records the day-loop mechanism
+PASS analyzer exists
+PASS analyzer reads succgrace-answer policy events
+PASS analyzer builds staged from pr transitions (lapsed-beat read)
+PASS analyzer keeps the prSg legacy fallback
+PASS analyzer reports a policy/analyzer cross-check
+PASS analyzer still reads dissolutions from scaleRank transitions
+PASS analyzer still writes the 0155Z analysis file (CLI default)
+PASS old proof test still asserts the prSg-visible fixtures verbatim
+PASS old proof test unmodified in this worktree
+PASS G3 static: no src/js files differ from master
+PASS analyzer module loads
+PASS RED PIN 1: same-day genuine answer NOT flagged young
+PASS RED PIN 1: same-day genuine answer counts as answered
+PASS RED PIN 1: policy-derived staged beat closes the accounting
+PASS RED PIN 1: cross-check agrees (policy 1 answer / 1 beat seen)
+PASS RED PIN 2: young-link answer still flagged
+PASS RED PIN 2: no staged beat invented for a young answer
+PASS GUARD: prSg-visible genuine beat still genuine (fallback)
+PASS GUARD: prSg-visible beat staged from the series
+PASS GUARD: unanswered young beat lapses (staged = lapsed)
+PASS GUARD: young sightings (7) vs distinct young beats (1) reported, not conflated
+PASS GUARD: lingering succgrace beat counted once (dedup)
+PASS GUARD: beat still pending at end is pending, not lapsed
+PASS §3 analyzer module loads
+PASS §3 re-judgment runs (3 legs, 8 seeds each)
+PASS §3 committed 0155Z analysis JSON present for the (d) comparison
+PASS §3 bar (a) succpolity-a: youngAnswers=0
+PASS §3 bar (a) succpolity-a: 0 unaccounted beats
+PASS §3 bar (a) succpolity-a: 0 instrument errors
+PASS §3 bar (a) succpolity-a: policy/analyzer cross-check agrees on every seed
+PASS §3 bar (a) succpolity-a: staged accounting closes on every seed
+PASS §3 bar (d) succpolity-a: wall/pilot/verdict identical to 0155Z (G2 unaffected)
+PASS §3 bar (d) succpolity-a: per-seed non-succgrace fields identical to 0155Z
+PASS §3 bar (a) succpolity-b: youngAnswers=0
+PASS §3 bar (a) succpolity-b: 0 unaccounted beats
+PASS §3 bar (a) succpolity-b: 0 instrument errors
+PASS §3 bar (a) succpolity-b: policy/analyzer cross-check agrees on every seed
+PASS §3 bar (a) succpolity-b: staged accounting closes on every seed
+PASS §3 bar (d) succpolity-b: wall/pilot/verdict identical to 0155Z (G2 unaffected)
+PASS §3 bar (d) succpolity-b: per-seed non-succgrace fields identical to 0155Z
+PASS §3 bar (a) succpolity-c: youngAnswers=0
+PASS §3 bar (a) succpolity-c: 0 unaccounted beats
+PASS §3 bar (a) succpolity-c: 0 instrument errors
+PASS §3 bar (a) succpolity-c: policy/analyzer cross-check agrees on every seed
+PASS §3 bar (a) succpolity-c: staged accounting closes on every seed
+PASS §3 bar (d) succpolity-c: wall/pilot/verdict identical to 0155Z (G2 unaffected)
+PASS §3 bar (d) succpolity-c: per-seed non-succgrace fields identical to 0155Z
+PASS §3 bar (a) leg (b): 6 genuine answers total
+PASS §3 bar (a) leg (b): 6 distinct succgrace beats staged
+PASS §3 bar (a) leg (b): 0 young answers total
+PASS §3 bar (a) leg (b): all 6 answers blessed via policy events
+test-succpolity-g1join-b: 56 passed, 0 failed

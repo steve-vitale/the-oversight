@@ -10,8 +10,11 @@
 //     alongside reads (required as a module, not copied);
 //   - re-climbs (regional->national after a dissolution);
 //   - succgrace-beat accounting (staged / answered / lapsed /
-//     pending-at-end, from the prSg series + verbEvents + policy
-//     stats; young-link answers are a G1 violation);
+//     pending-at-end, from the policy succgrace-answer events +
+//     pr-series transitions + verbEvents, with prSg as a secondary
+//     read for lapsed beats only; young-link answers are a G1
+//     violation) — corrected join, sim-succpolity-g1join-b: the old
+//     prSg-only join was a false positive on same-day answers;
 //   - wall numbers + cost bar (starvation deaths, median survival).
 // Usage: node scripts/analyze-succpolity-b.js [perSeedDir] [corpusDir]
 //   writes evidence/2026-11-14/succpolity-b-analysis.json and prints a
@@ -77,61 +80,144 @@ function reclimbEvents(rec) {
   return out;
 }
 
-// Succgrace-beat accounting for one record.
-// staged: prSg 0->1 transitions per link in the series.
-// answered: answerRenegotiation verb events whose link showed prSg=1
-//   on the answer day or the day before (the beat stages during a
-//   day's play and is answered at the next daily, before that day's
-//   snapshot — so the staging day's snapshot carries prSg=1).
-// youngAnswers: answerRenegotiation events with prSg=0 on both days —
-//   a young-link beat answered, which the policy must never do (G1).
-// lapsed: staged beats whose prSg returned to 0 with no answer (the
-//   7-day expiry, or the link breaking with the beat pending).
-// pendingAtEnd: prSg=1 on the last snapshot (beat still open when the
-//   run ended — neither answered nor lapsed).
+// Succgrace-beat accounting for one record — CORRECTED JOIN
+// (sim-succpolity-g1join-b, 2026-11-15). The old prSg-only join was a
+// false positive: a beat staged and answered the same day never appears
+// as prSg=1 in any snapshot. The policy answers at the start of daily
+// (runDays calls policy.daily at the END of the day's play, before
+// sleep) and the driver snapshots AFTER each daily, and
+// answerRenegotiation clears pendingRenegotiation first — so the
+// snapshot after the answering daily shows nothing. Both patterns occur
+// in the corpus (100203 staged d89 / answered d90; 100208 staged d100
+// / answered d100). Young-link beats DO survive to snapshots (the
+// policy leaves them alone): pr=1, prSg=0 for their 7-day window.
+// staged: UNION of (a) pr 0->1 transitions per link in the series —
+//   any beat that survived to a snapshot; and (b) one entry per
+//   succgrace-answer policy event in capSummary.succpolity.events —
+//   a beat answered before any snapshot could record it (staged that
+//   day or the day before; the policy event is the authoritative
+//   observation). A policy-derived entry is dropped when a pr-derived
+//   succgrace entry for the same link staged within the 7 days before
+//   the answer (the retry case: answer delayed past a snapshot).
+// answered: answerRenegotiation verb events. GENUINE iff a matching
+//   succgrace-answer policy event exists (same linkId, same day) OR
+//   prSg=1 on the answer day or the day before (legacy fallback for
+//   records without policy events). Otherwise YOUNG (G1 violation).
+//   A young-answered beat's staged entry still lands in `lapsed` (its
+//   pr cleared) while the violation is counted in `youngAnswers`.
+// lapsed: staged beats with no genuine answer whose pr returned to 0
+//   (the 7-day expiry, or the link breaking with the beat pending).
+// pendingAtEnd: pr=1 on the last snapshot (beat still open when the
+//   run ended). Policy-derived entries are answered by construction
+//   (the event is only logged after a successful answerRenegotiation
+//   call); if the driver's verb wrap missed the call, the beat is
+//   still counted answered and the cross-check flags the discrepancy.
+// crossCheck: policy stats vs analyzer counts (informational —
+//   beatsSeen counts daily SIGHTINGS, staged counts DISTINCT beats;
+//   they agree when every beat is answered at first sighting).
 function succgraceAccounting(rec) {
   const series = rec.series || [];
+  const prByLinkDay = {}; // linkId -> { day: pr }
   const prSgByLinkDay = {}; // linkId -> { day: prSg }
-  const staged = []; // { linkId, other, day }
-  const prev = {};
+  const prStaged = []; // { linkId, other, day, via: 'pr', succgrace }
+  const prevPr = {};
   for (const sn of series) {
     for (const l of (sn.linksRoll || [])) {
       if (!l || !l.id) continue;
+      const pr = l.pr ? 1 : 0;
       const sg = l.prSg ? 1 : 0;
+      if (!prByLinkDay[l.id]) prByLinkDay[l.id] = {};
       if (!prSgByLinkDay[l.id]) prSgByLinkDay[l.id] = {};
+      prByLinkDay[l.id][sn.d] = pr;
       prSgByLinkDay[l.id][sn.d] = sg;
-      if (sg === 1 && prev[l.id] !== 1) staged.push({ linkId: l.id, other: l.o || null, day: sn.d });
-      prev[l.id] = sg;
+      if (pr === 1 && prevPr[l.id] !== 1) {
+        prStaged.push({ linkId: l.id, other: l.o || null, day: sn.d, via: 'pr', succgrace: sg === 1 });
+      }
+      prevPr[l.id] = pr;
     }
   }
+  const policyStats = (rec.capSummary && rec.capSummary.succpolity) || null;
+  const policyEvents = (policyStats && Array.isArray(policyStats.events)) ? policyStats.events : [];
+  const sgAnswerEvents = policyEvents.filter(function (e) { return e && e.kind === 'succgrace-answer' && e.linkId; });
+  // The verb event carries the other-village name the policy event lacks.
+  function verbOther(linkId, day) {
+    for (const ev of (rec.verbEvents || [])) {
+      if (ev.verb === 'answerRenegotiation' && ev.linkId === linkId && ev.day === day) return ev.other || null;
+    }
+    return null;
+  }
+  // Dedup: a policy-derived staged entry is the same beat as a
+  // pr-derived succgrace entry staged within the 7 days before the
+  // answer (answer delayed past a snapshot — the retry case). Keep
+  // the pr-derived entry (its day is observed, not inferred).
+  const consumedPr = {};
+  const policyStaged = [];
+  for (const ev of sgAnswerEvents) {
+    let dup = -1;
+    for (let i = 0; i < prStaged.length; i++) {
+      const s = prStaged[i];
+      if (s.linkId === ev.linkId && s.succgrace && s.day <= ev.day && s.day >= ev.day - 7 && !consumedPr[i]) { dup = i; break; }
+    }
+    if (dup !== -1) { consumedPr[dup] = true; continue; }
+    policyStaged.push({ linkId: ev.linkId, other: verbOther(ev.linkId, ev.day), day: ev.day,
+      via: 'policy', succgrace: true, stagedDayInferred: true });
+  }
+  const staged = prStaged.concat(policyStaged).sort(function (a, b) {
+    return (a.day - b.day) || (a.linkId < b.linkId ? -1 : (a.linkId > b.linkId ? 1 : 0));
+  });
   const answers = [];
   const youngAnswers = [];
   for (const ev of (rec.verbEvents || [])) {
     if (ev.verb !== 'answerRenegotiation' || !ev.linkId) continue;
     const byDay = prSgByLinkDay[ev.linkId] || {};
     const sgHere = (byDay[ev.day] === 1) || (byDay[ev.day - 1] === 1);
+    const policyHere = sgAnswerEvents.some(function (pe) { return pe.linkId === ev.linkId && pe.day === ev.day; });
     const entry = { day: ev.day, linkId: ev.linkId, other: ev.other || null,
-      caller: ev.caller, result: ev.result, dTrust: ev.dTrust };
-    if (sgHere) answers.push(entry);
+      caller: ev.caller, result: ev.result, dTrust: ev.dTrust,
+      via: policyHere ? 'policy-event' : 'prSg' };
+    if (policyHere || sgHere) answers.push(entry);
     else youngAnswers.push(entry);
   }
-  // A staged beat is answered if some answer event names its link on a
-  // day >= the staging day and <= staging day + 7 (the expiry window).
+  // A staged beat is answered if some genuine answer names its link on
+  // a day >= the staging day and <= staging day + 7 (the expiry
+  // window). Policy-derived entries carry their own answer day (the
+  // policy event IS the answer record); if the driver's verb wrap
+  // missed the call, the beat still counts answered and the
+  // cross-check below flags the discrepancy.
   const answeredStaged = [];
   const lapsed = [];
   const pendingAtEnd = [];
   const lastDay = series.length ? series[series.length - 1].d : 0;
   for (const s of staged) {
-    const hit = answers.find(function (a) { return a.linkId === s.linkId && a.day >= s.day && a.day <= s.day + 7; });
+    let hit = null;
+    if (s.via === 'policy') {
+      hit = answers.find(function (a) { return a.linkId === s.linkId && a.day === s.day; });
+      if (!hit) hit = { day: s.day, linkId: s.linkId, other: s.other || null, caller: 'policy',
+        result: 'policy-event-only', dTrust: null, via: 'policy-event' };
+    } else {
+      hit = answers.find(function (a) { return a.linkId === s.linkId && a.day >= s.day && a.day <= s.day + 7; });
+    }
     if (hit) { answeredStaged.push({ staged: s, answer: hit }); continue; }
-    const days = prSgByLinkDay[s.linkId] || {};
-    const lastSgDay = Math.max.apply(null, Object.keys(days).filter(function (d) { return days[d] === 1; }).map(Number).concat([-1]));
-    if (lastSgDay === lastDay) pendingAtEnd.push(s);
+    const days = prByLinkDay[s.linkId] || {};
+    const lastPrDay = Math.max.apply(null, Object.keys(days).filter(function (d) { return days[d] === 1; }).map(Number).concat([-1]));
+    if (lastPrDay === lastDay) pendingAtEnd.push(s);
     else lapsed.push(s);
   }
-  const policyStats = (rec.capSummary && rec.capSummary.succpolity) || null;
+  const stagedSuccgraceCount = staged.filter(function (s) { return s.succgrace; }).length;
+  const youngStagedCount = staged.length - stagedSuccgraceCount;
+  const crossCheck = policyStats ? {
+    policySuccgraceAnswers: policyStats.succgraceAnswers | 0,
+    analyzerAnswered: answers.length,
+    answersMatch: (policyStats.succgraceAnswers | 0) === answers.length,
+    policySuccgraceBeatsSeen: policyStats.succgraceBeatsSeen | 0,
+    analyzerStagedSuccgrace: stagedSuccgraceCount,
+    beatsSeenMatch: (policyStats.succgraceBeatsSeen | 0) === stagedSuccgraceCount,
+    policyYoungBeatsSeen: policyStats.youngBeatsSeen | 0,
+    analyzerYoungStaged: youngStagedCount,
+  } : null;
   return {
     staged: staged, stagedCount: staged.length,
+    stagedSuccgraceCount: stagedSuccgraceCount, youngStagedCount: youngStagedCount,
     answered: answers, answeredCount: answers.length,
     answeredStagedCount: answeredStaged.length,
     youngAnswers: youngAnswers, youngAnswersCount: youngAnswers.length,
@@ -141,6 +227,7 @@ function succgraceAccounting(rec) {
     policySuccgraceAnswers: policyStats ? (policyStats.succgraceAnswers | 0) : null,
     policySuccgraceBeatsSeen: policyStats ? (policyStats.succgraceBeatsSeen | 0) : null,
     policyYoungBeatsSeen: policyStats ? (policyStats.youngBeatsSeen | 0) : null,
+    crossCheck: crossCheck,
   };
 }
 
@@ -322,6 +409,8 @@ if (require.main === module) (async function () {
     const L = out.legs[leg];
     console.log('\n== LEG ' + leg + ': wall ' + JSON.stringify(L.wall));
     console.log('   G1: errors=' + L.g1.errors + ' unaccountedBeats=' + L.g1.unaccountedBeats + ' youngAnswers=' + L.g1.youngAnswers + ' GO=' + L.g1.go);
+    const xbad = L.seeds.filter(function (s) { const x = s.succgrace.crossCheck; return x && (!x.answersMatch || !x.beatsSeenMatch); });
+    if (xbad.length) console.log('   XCHK MISMATCH: ' + xbad.map(function (s) { const x = s.succgrace.crossCheck; return 'seed ' + s.seed + ' policyAns=' + x.policySuccgraceAnswers + '/analyzerAns=' + x.analyzerAnswered + ' policySeen=' + x.policySuccgraceBeatsSeen + '/stagedSg=' + x.analyzerStagedSuccgrace; }).join('; '));
     console.log('   PILOT: ' + JSON.stringify(L.pilot));
     console.log('   VERDICT: ' + JSON.stringify(L.verdict));
     for (const s of L.seeds) {
