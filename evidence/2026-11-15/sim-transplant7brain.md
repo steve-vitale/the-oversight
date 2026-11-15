@@ -184,12 +184,14 @@ table 0, wins 0) and merge 1/8.
   the newline) had read hunk 4 CLEAN. Fixed by terminating the patch
   (append '\n'); re-run 56/56. The failure was in the proof's patch
   construction, not in the verdicts.
-- DOCUMENTED: safe-commit.sh index clobber struck 2× this run (prereg +
-  proof commit 694a094ea AND evidence commit 649f7b64c — the second
-  strike also left the proof script MM) — both repaired with the
-  documented `ls-tree -r HEAD -- <paths> | git update-index --add
-  --index-info` pipe; every affected file's worktree hash verified ==
-  HEAD blob before continuing.
+- DOCUMENTED: safe-commit.sh index clobber struck 3× this run (prereg +
+  proof commit 694a094ea, evidence commit 649f7b64c — the second strike
+  also left the proof script MM — and the correction commit 38c1c1d34,
+  which left the evidence file MM) — all repaired with the documented
+  `ls-tree -r HEAD -- <paths> | git update-index --add --index-info`
+  pipe; every affected file's worktree hash verified == HEAD blob before
+  continuing. Count is as of the final correction commit; the strike
+  recurs on nearly every safe-commit on this tree.
 - DOCUMENTED: a host write flap blocked all writes for ~56 min mid-run
   (see §Infrastructure).
 
@@ -275,8 +277,9 @@ the prior arms recorded would apply to any future t7brain corpus.)
   safe-commit flow after the clear, not by adopting the orphan by hand.
   THREE flap windows hit this run's morning in total (~08:18–08:21Z,
   ~08:52–09:48Z, ~09:58–10:01Z).
-- SAFE-COMMIT CLOBBER: struck 2× (prereg + proof commit, then evidence
-  commit — the second strike also left the proof script MM) — repaired
-  with the documented pipe, hashes verified (see §Blanks).
+- SAFE-COMMIT CLOBBER: struck 3× (prereg + proof commit, evidence
+  commit — the second strike also left the proof script MM — and the
+  correction commit, which left the evidence file MM) — repaired with
+  the documented pipe, hashes verified (see §Blanks).
 - No other infrastructure issues. Worktree clean at end of run except
   this evidence file pre-commit (verified by the proof's §5 legs).
