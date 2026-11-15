@@ -66,13 +66,13 @@ Verdict order (blocks; AWAY keeps its total < 3 floor):
 **Instrument (analyzer addition, committed BEFORE any judged sim):** `summarizeWave5(seedJSONs)` in the r213 analyzer, reading the journey seed JSONs (no driver change): frozen W5 id set `cancellation, editor, rerun, spoiler, timeslot, nielsen, finale, finale_crew, finale_opening, network_note` (re-verified against `src/data/monsters.json` in the proof — check (20)). Per seed:
 - unlocked: `finalWave >= 5` (waveLog reaches wave 5); unlock day = first waveLog day with wave 5.
 - `facedDistinct`: count of W5 ids present in `wavesFaced`.
-- `w5kills`: sum of `villageSlain[w5id]` at the LAST waveLog entry.
-- `w5fights`: `wildFightTable` entries with a wave-5 monster — count, partySize distribution, scholar-present count (party has `kind: 'player'`), result won/lost.
-- `deathsW5`: `deaths` filtered by the W5 set on `who`, split scholar (`x.player`) vs villager.
+- `w5kills`: total wave-5 monsters in `wildFightTable` fights with `result === 'won'` (see Amendment A1 — NOT villageSlain, whose snapshots stop at day 60).
+- `w5fights`: `wildFightTable` entries with a wave-5 monster — count, partySize distribution, scholar-present count (party has `kind: 'player'`), result won/lost/fled. Guard: count must equal `fightsByWave["5"]`.
+- `deathsW5`: `deaths` filtered by the W5 set on `who`, total only (see Amendment A1 — no scholar split; the journey corpus carries no `player` flag).
 - class per unlocked seed (same as wave5kill-b): `NEVER-FACED` (faced 0) / `FACED-NOT-KILLED` (faced > 0, kills 0) / `KILLED` (kills > 0).
 - Pooled: kills per unlocked village, kill:death ratio, FACED-NOT-KILLED share among unlocked, scholar fight/death share.
 
-**Pre-registered decision:** instrument GO = 0 unclassified seeds (every unlocked seed lands in exactly one class, no field contradictions). The diagnostic comparison is against wave5kill-b (5/10 FACED-NOT-KILLED, 1.1 kills/unlocked, 0.92 kill:death, 150d answercourt corpora). This panel runs a different policy (competent) and horizon (100d), so NO lever verdict is judged here — the verdict is the class split + whether the faced-not-killed shape and the absent-scholar shape recur. If FACED-NOT-KILLED is the majority class among unlocked seeds AND the scholar fights in 0 wave-5 fights, the wave5kill-b blocker is CONFIRMED on competent/100d; carry to the re-engagement-party lever design. If KILLED dominates, report the split as the new datum (no re-scoring of wave5kill-b).
+**Pre-registered decision:** instrument GO = 0 unclassified seeds (every unlocked seed lands in exactly one class, no field contradictions) AND the w5fights guard holds on every seed (count equals `fightsByWave["5"]`). The diagnostic comparison is against wave5kill-b (5/10 FACED-NOT-KILLED, 1.1 kills/unlocked, 0.92 kill:death, 150d answercourt corpora). This panel runs a different policy (competent) and horizon (100d), so NO lever verdict is judged here — the verdict is the class split + whether the faced-not-killed shape recurs. If FACED-NOT-KILLED is the majority class among unlocked seeds, the wave5kill-b blocker is CONFIRMED on competent/100d; carry to the re-engagement-party lever design. If KILLED dominates, report the split as the new datum (no re-scoring of wave5kill-b). Scholar party-presence in wave-5 fights is reported separately (see Amendment A1).
 
 ## Q3 (SECONDARY) — CARRIED-WRINKLE SWEEP
 
@@ -117,6 +117,12 @@ Full transcripts read: every block-repeat sitting (Q1), every NO-CLOSE sitting (
 ## Shape
 
 prereg (committed BEFORE any judged sim) → instrument clone (driver + analyzer + proof test, proof green 21/21 + red control (19) before the panel) → 8-seed panel (single-seed processes, 2 waves of 4) → analyzer verdicts (fresh panel + full-transcript reads of block repeats + NO-CLOSE sittings + wrinkle sweep) → run note → telemetry check → gate → rebase onto current master → merge. Heartbeat loop: 10-min cadence, setsid PID 65764.
+
+## Amendment A1 (Q2 instrument correction — before any judged sim)
+
+- `w5kills` is redefined: total wave-5 monsters in `wildFightTable` fights with `result === 'won'` (per-encounter, full horizon). The prereg's first definition (sum of `villageSlain[w5id]` at the LAST waveLog entry) is WRONG: waveLog snapshots stop at day 60 (days 2/10/25/43/60), so it misses late kills — verified on r212 seed 100091, whose last waveLog villageSlain shows {} for wave 5 while 3 wave-5 fights were won on days 74/79/93. Consistency guard: the w5fights count must equal `fightsByWave["5"]` (r212 seed 100091: 4 = 4); a mismatch is an instrument error, not a verdict.
+- `deathsW5` scholar split DROPPED: the journey corpus carries no `player` flag on deaths (verified 0 flagged across all 509 deaths in r212's 8 seed JSONs). Scholar share is read from w5fights party composition (party has `kind: 'player'`), not from deaths. `deathsW5` is reported as a total only.
+- Q2 decision correction: the "scholar fights in 0 wave-5 fights" confirmation condition is DROPPED. The r212 corpus already shows the scholar IN all 4 wave-5 fights on seed 100091 (party kinds include 'player' in every one), so the absent-scholar shape does not hold on the competent journey policy — the wave5kill-b corpora used a different policy (competent-answercourt-b). Blocker confirmation rests on the FACED-NOT-KILLED class majority alone, with scholar party-presence reported separately; if the scholar fights in wave-5 fights yet villages still don't kill, that is a sharper datum, not a contradiction.
 
 ## Metric review (to fill at closeout)
 
