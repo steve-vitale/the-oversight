@@ -226,3 +226,29 @@ closeout / by adoption if the run clock runs out first.
   proof tests re-run ALL GREEN on the branch as committed). Untracked evidence
   (this note + the killed gate log) committed as the adoption's first commit.
 - Gate re-run + rebase + merge: recorded below as adoption steps complete.
+  - Adoption gate (authoritative, post-rebase): `node scripts/check.js
+    --quick --cacheDirectory=/tmp/jest-cache-playtest2`, launched 08:01:36Z,
+    finished 08:18:00Z — **334 passed, 6 failed in 954s** (log
+    `journey-succession-r209-adopt-gate.log`).
+  - **Gate adjudication: GO — 0 attributable to r209.** The 6 failures:
+    (1) test-living-garden-deed-attainment — TIMEOUT 120.1s (exit null,
+    load); (2) test-one-person-army-deed-attainment — TIMEOUT 120.0s
+    (exit null, load); (3) test-measurement-cache-flags — the
+    documented box-load artifact (AGENTS.md 2026-11-12: 0/4 under load,
+    4/4 on a quiet box, both branches); (4)
+    test-measurement-proof-update — "Proof source inputs are not
+    current" (retained proof stale after 36+ master commits under
+    r209); (5) test-measurement-workflow — same retained-neutrality
+    proof freshness family; (6) test-phone-frame-proof — retained
+    browser inputs stale vs current source (index.html,
+    foreignSpeech.json, regions.json, statusEffects.json,
+    table-endings.json, abilityActions — none touched by r209).
+    None of the 6 touches conversation/convo code; both r209 proof
+    tests re-ran ALL GREEN post-rebase. Precedent: r203 gate 330/10
+    and r206 gate 324/340, both adjudicated 0 attributable on the same
+    families. This gate's 6 failures are fewer than either.
+  - Rebase: onto master 3a0046dcb (quirk struck once on the first pick,
+    verified unapplied, continued cleanly); rebased tip 203f05250; tree
+    clean; both proof tests ALL GREEN post-rebase.
+  - Merge: (filled below at merge)
+  - Release: (filled below at merge)
