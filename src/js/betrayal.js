@@ -641,11 +641,35 @@
         // characterful smallness
         outcome = 'small';
         inviteTrust(3, 'invite:small');
-        line = pick([
+        // NO-VERBATIM-PARROT (journey-social r206 2026-11-14): the
+        // 'small' pool is picked by raw RNG, and the accept outcome
+        // rides the diegeticAct exemption through sayLine — so taking
+        // the invite twice in one sitting can serve the identical
+        // scene line twice (transcript-caught on the r206 panel:
+        // Saud, seed 44504, "Saud shows you where they go to think"
+        // twice in one sitting; reproduced on seed 8 pre-fix). Skip
+        // lines already spoken in THIS sitting (the per-sitting
+        // ledger sayLine maintains); fall back to the first pool
+        // line when all three were said. Reward/wild lines are
+        // untouched — their lines carry granted rewards / trauma,
+        // not pure flavor.
+        const smallPool = [
           `You walk to ${def.spot} with ${first}. Nothing much there — but they talk the whole way, and you learn the shape of them a little better.`,
           `It's quiet at ${def.spot}. ${first} doesn't say much. Sometimes that's the whole point.`,
           `${first} shows you where they go to think. "Don't tell the others. Everyone needs one place."`,
-        ]);
+        ];
+        let smallLine = null;
+        try {
+          const c = (typeof this.convoGet === 'function') ? this.convoGet(vid) : null;
+          const said = (c && c.saidLinesConvo) || [];
+          const key = (s) => {
+            const ch = (typeof this.convoSplitBeats === 'function') ? this.convoSplitBeats(s) : [s];
+            return String((ch && ch[0]) || s).trim();
+          };
+          const fresh = smallPool.filter(l => said.indexOf(key(l)) === -1);
+          smallLine = fresh.length ? pick(fresh) : smallPool[0];
+        } catch (e) { smallLine = null; }
+        line = smallLine || pick(smallPool);
       } else if (roll < 0.90) {
         // real reward
         outcome = 'reward';
