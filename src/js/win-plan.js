@@ -63,13 +63,6 @@
 //     villagerFightAllies / fieldFight opts path. This module launches
 //     companions on the same expedition target so the engine can find
 //     them; it never builds a second join trigger.
-//   - winplan_full_party: a wave-4+ plan launches with two companions (code: winPlanDepart)
-//     (fighter + 2 = the party of 3 the fight gate demands), both
-//     picked at Haven before anyone departs, on one shared target so
-//     the gate senses three at the meeting. With fewer than two the
-//     plan waits at Haven (party_wait) instead of launching short
-//     into an outmatched meeting. Brain mirror: winPlanCands /
-//     vbrainExecuteDepart in villager-brain.js.
 // ============ WIN PLAN ============
 // Why villagers kept losing the long game: they had breadth (a rule for
 // every situation) but no sequence — a villager could be geared, alone,
@@ -176,36 +169,12 @@
     } catch (e) {}
     return null;
   }
-  // PRODUCERGATE half B (sim-producergate-b): does this plan target
-  // wave 4+ — so the launch must bring TWO companions, because the
-  // fight gate demands a party of 3 (armed + armored) for wave-4+
-  // beasts and a party of 2 is turned away outmatched? Sources, in
-  // order: the plan's own needWave (set by the seed), the target
-  // species' wave from the roster, the wave-5 readiness hold naming
-  // veterans (the village lacks a wave-4 kill). A plan with no
-  // target and no needWave hunts nothing hard — one companion, as
-  // before.
-  function planNeedsFullParty(self, plan) {
-    try {
-      if (!plan) return false;
-      if ((plan.needWave | 0) >= 4) return true;
-      if (plan.target) {
-        var ms = (self.data && self.data.monsters) || [];
-        for (var i = 0; i < ms.length; i++) {
-          if (ms[i] && ms[i].id === plan.target) return ((ms[i].wave | 0) >= 4);
-        }
-        return false;
-      }
-      return needWave(self) === 4;
-    } catch (e) { return false; }
-  }
   // A trusted villager this villager can SEE at Haven, willing and able
   // to walk: same node, trust floor shared with party-wiring (15),
   // alive, not engaged, not already out, a ranger by profile.
   // Ranking among eligibles is shared companionScore (OVE-54) — not
-  // roster-first match. `exclude` (optional array of vids) skips
-  // already-picked companions — the second pick for a full party.
-  function findCompanion(self, vid, hx, hy, exclude) {
+  // roster-first match.
+  function findCompanion(self, vid, hx, hy) {
     try {
       var v = self.state && self.state.village;
       if (!v) return null;
@@ -216,7 +185,6 @@
       for (var i = 0; i < roster.length; i++) {
         var cid = roster[i];
         if (!cid || cid === vid || cid === self.villagerId) continue;
-        if (exclude && exclude.indexOf(cid) !== -1) continue;
         if (!alive(self, cid)) continue;
         if (away[cid]) continue;
         if (((trust[cid] === undefined) ? 10 : trust[cid]) < 15) continue;
@@ -387,27 +355,26 @@
         var day = 0;
         try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
         var self = this;
-        // Companion launchability (PRODUCERGATE half B: extracted
-        // verbatim from launchParty's inline block so the second
-        // companion gets the identical gate). LAUNCHABILITY (checked
-        // BEFORE the inviter launches): the companion must be able
-        // to leave under the same gates startExpedition applies —
-        // hurt with no medicine and no healer sits out, the sick
-        // stay home, no range means no expedition. This is a pure
-        // read, not a second heal call: calling villagerHealCheck
-        // here would spend medicine (or a healer's care) twice, once
-        // here and once inside startExpedition. Getting this order
-        // wrong leaves the inviter out solo — the 180-day smoke
-        // caught it: 2 invites, 0 departures, inviter solo, because
-        // a hurt companion's startExpedition returned early after
-        // the inviter left. The companion must be willing AND
-        // geared: gear them first (their own stash / the deposited
-        // armory / whittle, exactly what departure would do), then
-        // judge what they carry.
-        var companionLaunchable = function (cid) {
+        var launchParty = function () {
+          var cid = findCompanion(self, vid, hx, hy);
+          if (!cid) return false;
+          // The companion must be willing AND geared: gear them first
+          // (their own stash / the deposited armory / whittle, exactly
+          // what departure would do), then judge what they carry.
           try { if (self.villagerGearUp) self.villagerGearUp(cid, true); } catch (e) {}
           var cg = gearOf(self, cid);
           if (!cg.armed && !cg.armored) return false;
+          // LAUNCHABILITY (checked BEFORE the inviter launches): the
+          // companion must be able to leave under the same gates
+          // startExpedition applies — hurt with no medicine and no
+          // healer sits out, the sick stay home, no range means no
+          // expedition. This is a pure read, not a second heal call:
+          // calling villagerHealCheck here would spend medicine (or a
+          // healer's care) twice, once here and once inside
+          // startExpedition. Getting this order wrong leaves the
+          // inviter out solo — the 180-day smoke caught it: 2 invites,
+          // 0 departures, inviter solo, because a hurt companion's
+          // startExpedition returned early after the inviter left.
           try { if ((self.state.village.sick || {})[cid]) return false; } catch (e) {}
           try { if (self.npcMaxDist && self.npcMaxDist(cid) < 1) return false; } catch (e) {}
           try {
@@ -439,26 +406,6 @@
               if (!canHeal) return false;
             }
           } catch (e) {}
-          return true;
-        };
-        var launchParty = function () {
-          // PRODUCERGATE half B: a wave-4+ plan launches with TWO
-          // companions (fighter + 2 = the party of 3 the fight gate
-          // demands), both picked before anyone departs so both are
-          // at Haven and share the target. With fewer than two
-          // launchable companions the plan does not launch here —
-          // the party-wait logic below holds it at Haven until a
-          // second ranger is home.
-          var needsFull = planNeedsFullParty(self, plan);
-          var cid = findCompanion(self, vid, hx, hy);
-          if (!cid) return false;
-          var cid2 = null;
-          if (needsFull) {
-            cid2 = findCompanion(self, vid, hx, hy, [cid]);
-            if (!cid2) return false;
-          }
-          if (!companionLaunchable(cid)) return false;
-          if (cid2 && !companionLaunchable(cid2)) return false;
           // One shared target, so the legs stay together and the fight
           // engine can find the party: the plan's known node when there
           // is one, else a fresh ranging target in the usual shape.
@@ -481,36 +428,15 @@
           } catch (e) {}
           bump(self, 'partyInvites');
           self.startExpedition(cid, hx, hy, false, { tx: tx, ty: ty, duration: dur });
-          var launched = [];
           try {
             var a2 = self.agencyState ? self.agencyState() : null;
-            if (a2 && a2.exped[cid]) launched.push(cid);
+            if (a2 && !a2.exped[cid]) return false;
           } catch (e) {}
-          if (!launched.length) return false;
-          if (cid2) {
-            // Second companion, same shared target — best-effort:
-            // if their startExpedition fails (taken, hurt, blocked)
-            // the party of 2 still launches; the gate will turn it
-            // away at a wave-4+ meeting, as before. The wait for a
-            // second ranger happens at the dawn bid, not here.
-            self.startExpedition(cid2, hx, hy, false, { tx: tx, ty: ty, duration: dur });
-            try {
-              var a3 = self.agencyState ? self.agencyState() : null;
-              if (a3 && a3.exped[cid2]) launched.push(cid2);
-            } catch (e) {}
-          }
           plan.stage = 'hunt';
-          plan.party = launched.slice();
+          plan.party = [cid];
           try {
-            for (var li = 0; li < launched.length; li++) {
-              var lc = launched[li];
-              var cplan = self.winPlanOf ? self.winPlanOf(lc) : null;
-              if (cplan) {
-                cplan.stage = 'hunt';
-                cplan.party = [vid].concat(launched.filter(function (x) { return x !== lc; }));
-                cplan.target = plan.target; cplan.node = plan.node;
-              }
-            }
+            var cplan = self.winPlanOf ? self.winPlanOf(cid) : null;
+            if (cplan) { cplan.stage = 'hunt'; cplan.party = [vid]; cplan.target = plan.target; cplan.node = plan.node; }
           } catch (e) {}
           bump(self, 'partyDepartures');
           return true;
