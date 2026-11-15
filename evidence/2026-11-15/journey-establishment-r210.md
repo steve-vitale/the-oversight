@@ -74,6 +74,13 @@ Two sittings from seed 5504, read in full. People with wants, consequences, and 
 - **Fun:** yes — the transcripts read like people (Honore taking the burnt piece, Miguel's Stan-walked-away gossip, the teaching beats landing), and the villages that survived did so with food in the pantry and plants in the Codex.
 - **Winnable:** partial — 5/5 panel villages alive at day 43 with standing to build on, but this leg ends before regional/national; the link-less-standing question stays with the scale leg, and the full seat is still ahead.
 
+## Landing (closeout addendum)
+
+- **Merged locally, pending ship:** `787e1c226` (ff-only onto `5d20452b9`). Commits: `d91852f2e` (prereg + driver/analyzer clones), `787e1c226` (run note). No push, no bump, no live verification — the ship loop owns those.
+- **Rebases (2):** onto `149d99d3f` (Loop A scale-onramp 6b/7b landing — evidence + scripts only, no src change), then onto `5d20452b9` (Lane B succession r209 adoption — src/js `convo-dialogue.js` +8, `convo-wants.js` +27, the lapsed-want naming fix; it does not touch spotter/forage/wedge code, so the panel corpus stands on base `8b77f0f40` and the proof test is the re-verification). Spotter proof re-run green on each final tip: 35/35, 35/35. Commit hashes changed across the rebases (prereg `c8ce90e39` → `d5b0b5fdf` → `d91852f2e`; run note `54d1e8aca` → `f0eefb01b` → `787e1c226`).
+- **Safe-commit index clobber** struck both commits; repaired via the documented ls-tree pipe each time, hashes verified.
+- **Rotation:** `1→2` written at closeout with read-back (deepening next). Lock deleted at closeout. Worktree released, branch deleted, main tree clean.
+
 ## Notes for the next run
 
 - **Rotation:** write `1→2` at closeout with read-back verification. Next leg is deepening (days 40–80).
