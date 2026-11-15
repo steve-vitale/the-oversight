@@ -60,18 +60,17 @@
 //      seeds 190391–190398; the prereg records the matched band as
 //      REUSED BY DESIGN (not claimed fresh) with the search scope and
 //      the reuse rationale.
-//   9. Live subject state — (added after the subject is cut) the subject
-//      branch exists off the far end with exactly one subject commit;
-//      the subject diff is byte-identical to the family's 7b hunks
-//      (+19/−7 one file, +214 test file, +1 green-list line); no
-//      brain-module definition strings; policy + standing match the far
-//      end; the honesty test skips (exit 2) on the subject as
-//      pre-registered.
-//  10. Step corpora — (added after the steps run) the baseline leg
-//      summary + per-seed corpus exist with the settled 4/8 read, or the
-//      GATE-STOP branch is taken (baseline <3/8 -> UNMEASURED, no
-//      subject summary/log/corpus); on the measured path the subject leg
-//      summary + corpus exist and the verdict mapping judges the count.
+//   9. Live subject state — the subject branch exists off the far end
+//      with exactly one subject commit; the subject diff is byte-identical
+//      to the family's 7b hunks (+19/−7 one file, +214 test file, +1
+//      green-list line at the corrected anchor); no brain-module definition
+//      strings; policy + standing match the far end; the honesty test
+//      skips (exit 2) on the subject as pre-registered.
+//  10. Step corpora — the baseline leg summary + per-seed corpus exist
+//      with the settled 4/8 read (gate PROCEED); the subject leg summary +
+//      corpus exist and the verdict mapping judges the count (4/8 ->
+//      NOT-CARRIER); the subject corpus is identical to the baseline corpus
+//      on every judged field.
 //
 // Usage: node scripts/test-transplant7b.js
 // Exit 0 = pass, 1 = fail. No repo writes.
@@ -91,6 +90,7 @@ const MERGE_FULL = '23245d5d6d91b4b5284e2f503345dcfd1621ff0c';
 const MERGE_BASE = '7041e1bfb';
 const MERGE_BASE_FULL = '7041e1bfb7e8b69387bd3203a58eed00115ec8d7';
 const SECOND_FULL = 'a038cf1513c2eaee2e6ab97c9550369467910b50';
+const SUBJECT_FULL = '2a9d936548c3ace6b86fcc0b7fd86accab141332';
 const SUBJECT_BRANCH = 'transplant-7b-subject';
 const STEP = 't7b-23245d5d6';
 const BASELINE_STEP = 'ep-far-7b';
@@ -251,6 +251,21 @@ function mergeTreeConflicts() {
   }
   record();
   return { found: found, removedLocal: removedLocal, addedRemote: addedRemote, raw: out };
+}
+
+// allHunkLines(diffText): ALL added/removed content lines (+/-,
+// excluding +++ / --- headers) across every hunk. Used to compare a
+// subject diff against a family diff when hunk-header line numbers shift
+// with the base (the far end differs from the first parent in the file
+// header region, so subject headers are shifted).
+function allHunkLines(diffText) {
+  const added = [], removed = [];
+  for (const ln of diffText.split('\n')) {
+    if (ln.indexOf('+') === 0 && ln.indexOf('+++') !== 0) added.push(ln.slice(1));
+    else if (ln.indexOf('-') === 0 && ln.indexOf('---') !== 0) removed.push(ln.slice(1));
+  }
+  added.sort(); removed.sort();
+  return { added: added, removed: removed };
 }
 
 (async () => {
@@ -503,6 +518,117 @@ function mergeTreeConflicts() {
     prereg.indexOf('86/144/150/43/') !== -1 && prereg.indexOf('150/87/150/150') !== -1, 'settled baseline present');
   T.ok('expected baseline days are the settled matched-band read',
     JSON.stringify(EXPECTED_BASELINE_DAYS) === JSON.stringify([86, 144, 150, 43, 150, 87, 150, 150]), EXPECTED_BASELINE_DAYS.join('/'));
+
+  // ---- 9. Live subject state ----
+  T.section('9. Live subject state — branch, one commit, byte-identical diff');
+  T.ok('subject branch transplant-7b-subject exists at 2a9d93654...',
+    git('rev-parse ' + SUBJECT_BRANCH) === SUBJECT_FULL, git('rev-parse --short ' + SUBJECT_BRANCH));
+  T.ok('subject branch parent is the far end 203a32775',
+    git('rev-parse ' + SUBJECT_BRANCH + '^') === FAR_FULL, git('rev-parse --short ' + SUBJECT_BRANCH + '^'));
+  T.ok('subject branch carries exactly one commit on the far end',
+    parseInt(git('rev-list --count ' + FAR + '..' + SUBJECT_BRANCH), 10) === 1, 'count=1');
+  const subjStat = git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH);
+  T.ok('subject diff numstat is exactly +1 green-list, +214 test, +19/-7 objectives',
+    subjStat.split('\n').sort().join('\n') === ['1\t0\tscripts/green-list.txt', '214\t0\tscripts/test-dawn-materialize-honesty.js', '19\t7\tsrc/js/villager-objectives.js'].sort().join('\n'), subjStat.replace(/\n/g, ' | '));
+  const subjObjDiff = execSync('git diff ' + FAR + ' ' + SUBJECT_BRANCH + ' -- src/js/villager-objectives.js',
+    { cwd: REPO, stdio: 'pipe' }).toString('utf8');
+  const famObjLines = hunkLines(objDiff, OBJECTIVES_HUNKS);
+  const subjObjLines = allHunkLines(subjObjDiff);
+  T.ok('subject objectives added lines are byte-identical to the family hunks (modulo shifted headers)',
+    JSON.stringify(subjObjLines.added) === JSON.stringify(famObjLines.added), '19/19 added lines match');
+  T.ok('subject objectives removed lines are byte-identical to the family hunks (modulo shifted headers)',
+    JSON.stringify(subjObjLines.removed) === JSON.stringify(famObjLines.removed), '7/7 removed lines match');
+  T.ok('subject test file hash equals the merge blob (77f50489...)',
+    git('rev-parse ' + SUBJECT_BRANCH + ':' + HONESTY_TEST) === HONESTY_BLOB, 'blob 77f50489');
+  T.ok('villager-brain.js is ABSENT from the subject tree (excluded brain module)',
+    git('ls-tree ' + SUBJECT_BRANCH + ' -- src/js/villager-brain.js') === '', '(absent)');
+  const subjObj = gitShow(SUBJECT_BRANCH, 'src/js/villager-objectives.js');
+  T.ok('subject objectives file references the align name ONLY behind the typeof guard (no definition)',
+    subjObj.indexOf("typeof this.vbrainAlignObjective === 'function'") !== -1 &&
+    subjObj.indexOf('function vbrainAlignObjective') === -1 &&
+    subjObj.indexOf('vbrainAlignObjective = function') === -1, 'guard present, definition absent');
+  T.ok('subject policy sha equals the far-end policy sha (a7ff5c51...)',
+    sha256(gitShow(SUBJECT_BRANCH, 'scripts/policies/competent.js')) === farPolicy, 'policy == far end');
+  T.ok('subject native standing sha equals the far-end standing sha (75762cb2...)',
+    sha256(gitShow(SUBJECT_BRANCH, 'src/js/standing.js')) === farStanding, 'standing == far end');
+  const subjGreen = gitShow(SUBJECT_BRANCH, 'scripts/green-list.txt');
+  T.ok('subject green list carries the union line at the corrected anchor (after the smoke line)',
+    (function () {
+      const lines = subjGreen.split('\n');
+      const i = lines.indexOf('scripts/test-village-smoke-20261011.js');
+      return i !== -1 && lines[i + 1] === GREEN_UNION_LINE;
+    })(), 'smoke -> honesty line');
+  T.ok('subject green list does NOT carry the brain-dawn line (excluded test file)',
+    subjGreen.indexOf('scripts/test-villager-brain-dawn.js quick') === -1, 'brain-dawn line absent');
+  const evidencePath = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant7b.md');
+  const evidence = fs.existsSync(evidencePath) ? fs.readFileSync(evidencePath, 'utf8') : '';
+  const evidenceFlat = evidence.replace(/\s+/g, ' ');
+  T.ok('evidence file exists and records the subject commit 2a9d93654',
+    evidence !== '' && evidence.indexOf('2a9d93654') !== -1, evidencePath);
+  T.ok('evidence records the honesty test skipping (exit 2) on both far end and subject',
+    evidenceFlat.indexOf('villager-brain align API missing') !== -1 && evidenceFlat.indexOf('exit 2') !== -1, 'skip recorded');
+  T.ok('evidence records the finishlottery identity (identical picks on both trees)',
+    evidenceFlat.indexOf('IDENTICAL') !== -1 && evidenceFlat.indexOf('finishlottery') !== -1, 'identity recorded');
+
+  // ---- 10. Step corpora ----
+  T.section('10. Step corpora — baseline gate passed, subject 4/8 NOT-CARRIER, identical corpora');
+  const baseSummaryPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + BASELINE_STEP + '-summary.json');
+  const subjSummaryPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
+  T.ok('baseline summary exists', fs.existsSync(baseSummaryPath), baseSummaryPath);
+  T.ok('subject summary exists', fs.existsSync(subjSummaryPath), subjSummaryPath);
+  const baseSummary = JSON.parse(fs.readFileSync(baseSummaryPath, 'utf8'));
+  const subjSummary = JSON.parse(fs.readFileSync(subjSummaryPath, 'utf8'));
+  T.ok('baseline leg reads survived 4/8, verdict GOOD, rank REGIONAL_INTACT, 0 instrument errors',
+    baseSummary.survived === 4 && baseSummary.verdict === 'GOOD' && baseSummary.rankVerdict === 'REGIONAL_INTACT' && baseSummary.instrumentErrors === 0,
+    '4/8 GOOD REGIONAL_INTACT errors 0');
+  const baseDays = baseSummary.perSeed.map(function (r) { return r.days; });
+  T.ok('baseline per-seed days are exactly the settled read (86/144/150/43/150/87/150/150)',
+    JSON.stringify(baseDays) === JSON.stringify(EXPECTED_BASELINE_DAYS), baseDays.join('/'));
+  T.ok('baseline per-seed anchorCommit is the far end, fix swapped in, far-end policy',
+    baseSummary.perSeed.every(function (r) { return r.anchorCommit === '203a327750a2' && r.standingFix === true && r.standingSha === 'f8fda4295a99' && r.policySha === 'a7ff5c516440'; }),
+    '8/8 rows far-end + fix + policy');
+  T.ok('baseline gate verdict is PROCEED (4/8 >= 3/8)',
+    gateStopVerdict(baseSummary.survived) === 'PROCEED', 'gate PROCEED');
+  T.ok('subject leg reads survived 4/8, verdict GOOD, rank REGIONAL_INTACT, 0 instrument errors',
+    subjSummary.survived === 4 && subjSummary.verdict === 'GOOD' && subjSummary.rankVerdict === 'REGIONAL_INTACT' && subjSummary.instrumentErrors === 0,
+    '4/8 GOOD REGIONAL_INTACT errors 0');
+  const subjDays = subjSummary.perSeed.map(function (r) { return r.days; });
+  T.ok('subject per-seed days are identical to the baseline days',
+    JSON.stringify(subjDays) === JSON.stringify(baseDays), subjDays.join('/'));
+  T.ok('subject per-seed anchorCommit is the subject commit, fix swapped in, far-end policy',
+    subjSummary.perSeed.every(function (r) { return r.anchorCommit === '2a9d936548c3' && r.standingFix === true && r.standingSha === 'f8fda4295a99' && r.policySha === 'a7ff5c516440'; }),
+    '8/8 rows subject + fix + policy');
+  T.ok('subject wall is identical to the baseline wall',
+    JSON.stringify(subjSummary.wall) === JSON.stringify(baseSummary.wall), JSON.stringify(subjSummary.wall));
+  T.ok('subject death-cause shares are identical to the baseline shares',
+    JSON.stringify(subjSummary.deathCauses) === JSON.stringify(baseSummary.deathCauses), '629 deaths, same shares');
+  T.ok('subject per-seed rows are identical to the baseline rows on every judged field',
+    (function () {
+      const fields = ['seed', 'days', 'endReason', 'won', 'villageLost', 'scaleRank', 'maxWave', 'unlockedWave', 'standing', 'deaths', 'endPantryKcal', 'blooded', 'ready4', 'ready5', 'ladderVets4', 'errors', 'snapshotCount', 'finalSnapDay'];
+      for (let i = 0; i < 8; i++) {
+        for (const f of fields) {
+          if (JSON.stringify(baseSummary.perSeed[i][f]) !== JSON.stringify(subjSummary.perSeed[i][f])) return false;
+        }
+        if (JSON.stringify(baseSummary.perSeed[i].tribute) !== JSON.stringify(subjSummary.perSeed[i].tribute)) return false;
+      }
+      return true;
+    })(), '8/8 seeds identical');
+  T.ok('verdict mapping judges the subject count 4/8 as NOT-CARRIER',
+    classifyTransplant(subjSummary.survived) === 'NOT-CARRIER', '4 -> NOT-CARRIER');
+  const baseCorpus = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + BASELINE_STEP);
+  const subjCorpus = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
+  T.ok('baseline per-seed corpus holds 8 files',
+    fs.existsSync(baseCorpus) && fs.readdirSync(baseCorpus).length === 8, '8 files');
+  T.ok('subject per-seed corpus holds 8 files',
+    fs.existsSync(subjCorpus) && fs.readdirSync(subjCorpus).length === 8, '8 files');
+  T.ok('baseline driver log exists and records GOOD 4/8',
+    fs.existsSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + BASELINE_STEP + '-driver.log')), 'baseline log present');
+  T.ok('subject driver log exists and records GOOD 4/8',
+    fs.existsSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log')), 'subject log present');
+  T.ok('evidence records the NOT-CARRIER verdict with the identity form',
+    evidenceFlat.indexOf('NOT-CARRIER') !== -1 && evidenceFlat.indexOf('IDENTICAL to the baseline leg') !== -1, 'verdict recorded');
+  T.ok('evidence records the telemetry refusal (recorder-corpus, baseline NOT rolled)',
+    evidenceFlat.indexOf('REFUSED') !== -1 && evidenceFlat.indexOf('baseline NOT rolled') !== -1, 'refusal recorded');
 
   await T.done();
 })().catch(function (e) {
