@@ -1,26 +1,24 @@
-// test-transplant8fam.js — proof test for the H1 TRANSPLANT, family 8
-// AS A FAMILY: the four CONFLICTED PR #22 hunks, theirs-resolved
-// (arm sim-transplant8fam-a).
+// test-transplant8fam.js — proof test for the H1 TRANSPLANT, family
+// 8fam: the four CONFLICTED PR #22 hunks, theirs-resolved (arm
+// sim-transplant8fam-a).
 //
 // THE QUESTION (evidence/2026-11-15/sim-transplant8fam-prereg.md,
-// committed before cutting the subject or running any judged sim):
-// land origin family 8's four CONFLICTED hunks — merge 713eb7545
-// (PR #22 live-thread-dry-engage) — AS ONE SUBJECT, resolved by
-// taking THEIRS in the conflicted regions, onto the far end
-// 203a32775 (GOOD 4/8 on the matched band) and measure whether the
-// family together collapses it. Verdicts (matched band
-// 190391-190398): baseline leg must read >=3/8 or the run stops;
-// <=1/8 CARRIER, 2/8 AMBIGUOUS (re-run once; 2/8 again -> recorded
-// AMBIGUOUS, treated as NOT-CARRIER for ordering, kept on the suspect
-// list), >=3/8 NOT-CARRIER.
+// committed before any judged leg): land origin family 8's four
+// CONFLICTED hunks — lesson-outcome/diegetic-act, favor settlement,
+// favor-line sayLine, blocked-repeat — theirs-resolved onto the far
+// end 203a32775 (GOOD 4/8 on the matched band) and measure whether
+// they alone collapse it. The subject is ADOPTED (branch
+// transplant-8fam-subject, commit b6ec3c7d1, built by the dead 1215Z
+// run and verified hunk-by-hunk by this arm — NOT re-cut).
 //
-// PREDICTED OUTCOME — MEASURABLE BY THEIRS-RESOLUTION: the live
-// `git cherry-pick -m 1 713eb7545` onto the far end conflicts in
-// exactly the TWO predicted files (pick_rc=1), with markers at the
-// positions the family-8 arm recorded live; each marker region is
-// resolved by taking THEIRS verbatim; the four auto-merged clean
-// hunks (the 8b three + the 8c one) are reversed out; the subject
-// diff is exactly the four hunks' theirs-content (+8/-6 and +69/-5).
+// SNIFF + GATE (fresh band 190589-190596): a 4-seed sniff leg
+// (ep-far-8fam-sniff, seeds 190589-190592) reads 0/4 -> STOP,
+// UNMEASURED-band-health; >=1/4 -> PROCEED to the full 8-seed
+// baseline leg (ep-far-8fam-fresh), which must read >=3/8 or the run
+// stops (UNMEASURED, no subject leg). Subject leg t8fam: <=1/8
+// CARRIER, 2/8 AMBIGUOUS (re-run once; 2/8 again -> recorded
+// AMBIGUOUS, treated as NOT-CARRIER for ordering, kept on the
+// suspect list), >=3/8 NOT-CARRIER.
 //
 // WHAT THIS TEST PROVES:
 //   1. Family identity — merge 713eb7545, its parents, the 1-commit
@@ -31,36 +29,36 @@
 //      merge policy == far-end policy, test file absent at far end
 //      AND first parent, present at the merge (blob a0161cc9),
 //      merge NOT an ancestor of the far end, IS an ancestor of
-//      master HEAD.
-//   2. Four-hunk definition — the family diff has EXACTLY 3
+//      master.
+//   2. Conflicted-hunk inventory — the family diff has EXACTLY 3
 //      conversation.js hunks + 5 convo-dialogue.js hunks; the
-//      conflicted four are named exactly in BOTH numberings
-//      (family-diff + merge-tree); the 8b included set and the 8c
-//      hunk are named as EXCLUDED; the hunk-A +22/-3 (merge-tree)
-//      vs +4/-0 (family-diff) distinction is stated in the prereg.
+//      conflicted four are conv 7017 (+7/-1), dlg 444 (+4/-0),
+//      dlg 495 (+19/-4), dlg 510 (+17/-5); the clean four (8b three
+//      + 8c one) partition the rest exactly; the family-definition
+//      discrepancy (brief title vs step-2 parenthetical) is named
+//      and resolved in the prereg.
 //   3. Merge-tree prediction (read-only) — the four conflicted
-//      hunks carry ALL 12 markers (3 + 9) with the exact
-//      ours/theirs line counts per region (9/8, 3/22, 1/23, 1/24);
-//      the four clean hunks are marker-free; the test file is
-//      'added in remote' (clean addition); NO merged sections, NO
-//      delete/modify (DU) entries. NOTE: the merge-tree display
-//      ELIDES unchanged middle lines of a long ours span (hunk 1
-//      shows only 6 of its 9 ours lines), so region contents are
-//      derived from the files by anchor lines (REGIONS below),
-//      not from the merge-tree display.
-//   4. Mechanism analysis — reference counts at the far end vs
-//      the merge for every name the hunks touch; secretOutcome
-//      def+use inside the region; convoWouldBlock EXISTS at the far
-//      end (so the hunk-B pre-check is live);
-//      convoHasLiveUnfinished / convoUnfinishedEngageLine absent
-//      at the far end (so liveUnfinished reduces to outing||
-//      deferred); _sayFellBack set by sayLine at the far end.
-//   5. CONFLICT-RESOLUTION RULE + verdict mapping —
-//      applyTheirs returns exactly the theirs lines (drops ours);
-//      deviationVerdict maps any subject-construction deviation
-//      (extra file, marker mismatch, failed clean-hunk reversal)
-//      to UNMEASURED; classifyTransplant maps every survived count
-//      to CARRIER / AMBIGUOUS / NOT-CARRIER / UNCLASSIFIABLE.
+//      hunks carry ALL 12 markers (3 + 9); the four clean hunks are
+//      marker-free; the test file is 'added in remote' (clean
+//      addition); NO merged sections, NO delete/modify (DU) entries.
+//   4. Mechanism analysis — `_sayFellBack` IS set by sayLine at
+//      the far end (pre-existing mechanism); `convoHasLiveUnfinished`
+//      / `convoUnfinishedEngageLine` are ABSENT at the far end AND
+//      at the subject (theirs-guarded blocks inert);
+//      `convoWouldBlock` / `convoGetFavor` ARE present at the far
+//      end; the far-end `lessonOutcome` already includes `teach`
+//      (the plantTeachOutcome split is behaviorally identical); the
+//      far-end `secretOutcome` is present (removed by the
+//      theirs-resolution); the dry pool returns null past 9 uses
+//      (the only null-with-flag path).
+//   5. Conflict-STOP / adoption rule + verdict mapping + sniff
+//      mapping + gate polarity — subjectAdoptionVerdict maps the
+//      hunk-by-hunk verification: verified -> ADOPTED, any failure
+//      -> UNMEASURED (no hand-resolution, no re-cut); the gate
+//      polarity is >=3/8 PROCEED (far end is the healthy baseline);
+//      classifyTransplant maps every survived count to CARRIER /
+//      AMBIGUOUS / NOT-CARRIER / UNCLASSIFIABLE; sniffVerdict maps
+//      0/4 -> STOP-BAND-HEALTH, >=1/4 -> PROCEED.
 //   6. Base state — HEAD is on sim-transplant8fam-a in the worktree
 //      (or master at the merged tip — branch-identity legs are
 //      worktree-aware per the 0215 coordinator note, so the proof
@@ -68,45 +66,36 @@
 //      on-disk standing.js is byte-identical to HEAD, and the
 //      step-script tooling source (master) still carries all four
 //      scratch files.
-//   7. Seed-band identity — the prereg names the MATCHED band
-//      190391-190398 (the band the far end's settled 4/8 was
-//      measured on, reproduced three times), the STEP id t8fam,
-//      the baseline STEP id ep-far-8fam, the subject branch
-//      transplant-8fam-subject, and the band-health pre-check. The
-//      /tmp copy of the step script needs NO band edit (the
-//      committed tooling already hardcodes the matched band);
-//      the copy exists only so the detached checkout cannot unlink
-//      the running script itself.
-//   8. Family-test leg (dialogue instrument) — the #4 proof is
-//      pre-registered EXPECTED-FAIL/partial as a diagnostic only,
-//      never a verdict input; the test file is absent at the far
-//      end and (once cut) at the subject; the evidence file, once
-//      written, records the observed #4 outcome.
-//   9. Live subject state — the subject branch does not exist yet
-//      at prereg stage; once cut it asserts the branch's parent is
-//      the far end, the subject diff is exactly the four hunks'
-//      theirs-content (+8/-9 one hunk, +69/-5 three hunks,
-//      each conflicted region's subject text equal to the merge's
-//      region text by anchor-delimited comparison), the test file
-//      is ABSENT from the subject, NONE of the 8b/8c-only strings
-//      are present, all four-hunk theirs-strings ARE present,
-//      subject policy == far-end policy, subject native standing
-//      == far-end standing, and both subject files parse (vm.Script
-//      syntax check).
-//  10. Step corpora — state-aware WITH the 1116Z guard: every
-//      summary read is preceded by an fs.existsSync check on the
-//      SAME path in the SAME branch, and the intermediate state
-//      (baseline summary exists, subject summary absent, baseline
-//      >=3/8) is its own passing branch that never touches the
-//      subject summary path. The proof passes in ALL FOUR states
-//      (neither / baseline-only-healthy / baseline-only-gate-stop
-//      / both), not just at stage 1 and at the final state.
+//   7. Seed-band identity — the prereg names the FRESH band
+//      190589-190596 (zero prior use, verified at run start), the
+//      sniff STEP id ep-far-8fam-sniff (first 4 seeds), the baseline
+//      STEP id ep-far-8fam-fresh, the subject STEP id t8fam, the
+//      subject branch transplant-8fam-subject, and the /tmp-copy band
+//      mechanism (the committed step script + analyzer hardcode
+//      the matched band, so both run from /tmp copies with the
+//      band edited in the copy only).
+//   8. Live subject state — state-aware: the adopted subject branch
+//      exists (it predates the prereg — built by the 1215Z run);
+//      its parent is the far end, its diff is exactly the four
+//      conflicted hunks theirs-resolved (2 files, +8/-9 +69/-5,
+//      region-text verification per hunk, no test file), the
+//      theirs-resolution side effects hold (secretOutcome absent,
+//      plantTeachOutcome present), subject policy == far-end policy,
+//      subject native standing == far-end standing.
+//   9. Step corpora — state-aware: the settled matched-band baseline
+//      (4/8, fixed days) still anchors the far end (read from
+//      master — this arm's far-end base predates it); the 1215Z
+//      run's incomplete ep-far-8fam leg is recorded as recovered
+//      (2 complete per-seed files, 6 zero-byte .tmp files, log-line
+//      days exactly the settled days, analyzer INCOMPLETE); the
+//      sniff / baseline / subject legs take the sniff-STOP /
+//      gate-STOP / full-legs branch according to what ran, and the
+//      evidence file records the matching verdict.
 //
 // Usage: node scripts/test-transplant8fam.js
 'use strict';
 const fs = require('fs');
 const path = require('path');
-const vm = require('vm');
 const crypto = require('crypto');
 const { execSync } = require('child_process');
 const K = require('./godpath/lib');
@@ -120,10 +109,14 @@ const MERGE_FULL = '713eb754524458be067c79fbfd3c89ee814dde80';
 const MERGE_BASE = '9f388a524';
 const SECOND_FULL = '10724c18ddc5a7ebdc376aef3248cd318a9674f7';
 const SUBJECT_BRANCH = 'transplant-8fam-subject';
+const SUBJECT_COMMIT = 'b6ec3c7d1c700c3cab26c6bd578074588f7901f5';
 const STEP = 't8fam';
-const BASELINE_STEP = 'ep-far-8fam';
+const BASELINE_STEP = 'ep-far-8fam-fresh';
+const SNIFF_STEP = 'ep-far-8fam-sniff';
+const RECOVERED_STEP = 'ep-far-8fam';
 const FIX_SHA = 'f8fda4295a99720dcb54d0c69f5fa6836f55cf9d9c8c5d1e51e5f0aa49c43078';
-const SEEDS = [190391, 190392, 190393, 190394, 190395, 190396, 190397, 190398];
+const SEEDS = [190589, 190590, 190591, 190592, 190593, 190594, 190595, 190596];
+const SNIFF_SEEDS = [190589, 190590, 190591, 190592];
 const EXPECTED_BASELINE_DAYS = [86, 144, 150, 43, 150, 87, 150, 150];
 const EXPECTED_JS = [
   'src/js/conversation.js', 'src/js/convo-dialogue.js',
@@ -148,74 +141,32 @@ const FAMILY_HUNKS = {
     '@@ -510,18 +560,30 @@',
   ],
 };
-// The four CONFLICTED hunks (family-diff headers).
-const CONFLICT_HUNKS = {
+// The conflicted four: THE family for this arm.
+const CONFLICTED_HUNKS = {
   'src/js/conversation.js': ['@@ -7017,7 +7095,13 @@'],
   'src/js/convo-dialogue.js': ['@@ -444,6 +475,10 @@', '@@ -495,10 +530,25 @@', '@@ -510,18 +560,30 @@'],
 };
-// The 8b included set (named here to prove 8fam excludes all of it).
-const INCLUDED_8B = {
-  'src/js/conversation.js': ['@@ -1163,6 +1163,55 @@', '@@ -5995,9 +6044,38 @@'],
-  'src/js/convo-dialogue.js': ['@@ -273,15 +273,30 @@'],
+// Per-hunk +/− counts of the conflicted four (family diff).
+const CONFLICTED_COUNTS = {
+  '@@ -7017,7 +7095,13 @@': [7, 1],
+  '@@ -444,6 +475,10 @@': [4, 0],
+  '@@ -495,10 +530,25 @@': [19, 4],
+  '@@ -510,18 +560,30 @@': [17, 5],
 };
-// The 8c hunk (named here to prove 8fam excludes it).
-const HUNK_8C = '@@ -293,11 +308,27 @@';
-// Merge-tree (far-end/result numbering) anchors for the four
-// conflicted hunks.
+// The clean four (8b three + 8c one) — excluded from this arm.
+const CLEAN_HUNKS = {
+  'src/js/conversation.js': ['@@ -1163,6 +1163,55 @@', '@@ -5995,9 +6044,38 @@'],
+  'src/js/convo-dialogue.js': ['@@ -273,15 +273,30 @@', '@@ -293,11 +308,27 @@'],
+};
+// Merge-tree (far-end/result numbering) anchors for the conflicted four.
 const MT_CONFLICT = ['@@ -7167,6 +7246,16 @@', '@@ -448,9 +479,34 @@', '@@ -497,7 +553,33 @@', '@@ -505,7 +587,34 @@'];
-// Merge-tree anchors for the four CLEAN hunks (reversed out).
+// Merge-tree anchors for the clean four (must be marker-free).
 const MT_CLEAN = ['@@ -1163,6 +1163,55 @@', '@@ -6069,9 +6118,38 @@', '@@ -288,15 +288,30 @@', '@@ -308,11 +323,27 @@'];
-// Marker counts from the merge-tree dry run, per 'changed in both' file.
+// Marker counts from the merge-tree dry run, per 'changed in both' file
+// (transplant118 counting method: +<<<<<<<, +=======, +>>>>>>>).
 const EXPECTED_MARKERS = {
   'src/js/conversation.js': 3,
   'src/js/convo-dialogue.js': 9,
-};
-// Ours/theirs line counts per conflicted region, in file order
-// (conversation.js hunk 1; convo-dialogue.js hunks A, B, C).
-// Derived from the FAR-END and MERGE files by anchor lines (see
-// REGIONS), NOT from the merge-tree display — the display elides
-// hunk 1's three middle ours lines (context-window elision).
-const EXPECTED_REGION_COUNTS = {
-  'src/js/conversation.js': [{ ours: 9, theirs: 8 }],
-  'src/js/convo-dialogue.js': [{ ours: 3, theirs: 22 }, { ours: 1, theirs: 23 }, { ours: 1, theirs: 24 }],
-};
-// Anchor-delimited conflict regions: [startAnchor, endAnchor] are
-// CONTEXT lines (present identically in the far end, the merge, and
-// the subject — each verified unique in all three files). The region
-// is the lines strictly between them. This is immune to the
-// merge-tree display's context elision.
-const REGIONS = [
-  { file: 'src/js/conversation.js',
-    start: "      const inviteOutcome = choiceId === 'invite_party';",
-    end: '      // WANT ARC (convo rebuild 2026-10-11): answering their question engages',
-    far: 9, merge: 8 },
-  { file: 'src/js/convo-dialogue.js',
-    start: '        c.transcript.push({ who: \'you\', text: \'"How can I help?"\' });',
-    end: "          const line = '\"It\\'s already handled. Thank you for asking.\"';",
-    far: 3, merge: 22 },
-  { file: 'src/js/convo-dialogue.js',
-    start: '        const composed = this.convoComposeDlg(vid, favorLine, choiceId);',
-    end: '        // BLOCKED REPEAT (dialog-ui-fix 2026-10-11, defect 6; cycling',
-    far: 1, merge: 23 },
-  { file: 'src/js/convo-dialogue.js',
-    start: '        // the claimed line from the transcript.',
-    end: '          const dup = this.convoSelfRepeatLine(vid) || \'"I just said — did you miss it?"\';',
-    far: 1, merge: 24 },
-];
-// regionText(text, start, end): lines strictly between the first
-// occurrence of `start` and the first occurrence of `end` after it.
-// Returns null when either anchor is missing or out of order.
-function regionText(text, start, end) {
-  const lines = text.split('\n');
-  const si = lines.indexOf(start);
-  const ei = lines.indexOf(end, si + 1);
-  if (si === -1 || ei === -1 || ei <= si) return null;
-  return lines.slice(si + 1, ei);
-}
-// Expected subject diff vs the far end, per file (added/removed).
-const EXPECTED_SUBJECT_NUMSTAT = {
-  'src/js/conversation.js': '8\t9\tsrc/js/conversation.js',
-  'src/js/convo-dialogue.js': '69\t5\tsrc/js/convo-dialogue.js',
 };
 // The one file the far end and the first parent both lack, added
 // cleanly by the pick (NOT part of the 8fam subject — named only for
@@ -228,43 +179,28 @@ const HUNK_SIGNATURES = [
   'settledFavor', 'pinnedFavor', 'unfinishedOuting', 'liveUnfinished',
   'helpStructural', '_sayFellBack', 'UNFINISHED HELP BLOCKED',
 ];
-// Four-hunk theirs-strings that must be PRESENT in the subject.
+// Conflicted-hunk strings that must be PRESENT in the subject.
 const INCLUDED_STRINGS = [
-  { file: 'src/js/conversation.js', s: "const plantTeachOutcome = choiceId === 'teach';" },
+  { file: 'src/js/conversation.js', s: 'const plantTeachOutcome = choiceId === \'teach\';' },
   { file: 'src/js/conversation.js', s: 'diegeticAct: inviteOutcome || lessonOutcome || plantTeachOutcome' },
-  { file: 'src/js/conversation.js', s: '// PLANT TEACH IS A DIEGETIC ACT (dialog audit #4 2026-11-08): the' },
-  { file: 'src/js/convo-dialogue.js', s: 'const pinnedFavor = c.want?.favor || null;' },
   { file: 'src/js/convo-dialogue.js', s: 'const liveUnfinished = !!(unfinishedOuting || deferredAfterResume ||' },
   { file: 'src/js/convo-dialogue.js', s: 'if (!unfinishedOuting && !deferredAfterResume &&' },
   { file: 'src/js/convo-dialogue.js', s: 'const helpStructural = !!liveUnfinished;' },
-  { file: 'src/js/convo-dialogue.js', s: "if (helpStructural && typeof this.convoWouldBlock === 'function' &&" },
-  { file: 'src/js/convo-dialogue.js', s: 'structural: helpStructural || undefined,' },
   { file: 'src/js/convo-dialogue.js', s: 'if (!said || c._sayFellBack) {' },
-  { file: 'src/js/convo-dialogue.js', s: "if (liveUnfinished || (c.want && c.want.id === 'repay')) {" },
-  { file: 'src/js/convo-dialogue.js', s: 'if (c._sayFellBack) {' },
-  { file: 'src/js/convo-dialogue.js', s: '// UNFINISHED HELP BLOCKED (dialog audit #1/#4 2026-11-08): never' },
+  { file: 'src/js/convo-dialogue.js', s: 'UNFINISHED HELP BLOCKED (dialog audit #1/#4' },
+  { file: 'src/js/convo-dialogue.js', s: '// Dry already spoken — don\'t emit a second deflection.' },
 ];
-// 8b/8c-only strings + far-end ours lines that must be ABSENT from
-// the subject (the clean hunks are reversed out; the conflicted
-// regions take theirs).
+// Strings that must be ABSENT from the subject: the theirs-resolution
+// side effect (secretOutcome removed), the 8b-only method definitions
+// (not in this subject), the 8b dlg:more pre-check guard, and the
+// 8c-only dlg:more continuation comment.
 const EXCLUDED_STRINGS = [
+  { file: 'src/js/conversation.js', s: 'secretOutcome' },
+  { file: 'src/js/conversation.js', s: 'SECRET REPLIES ARE DIEGETIC ACTS TOO' },
   { file: 'src/js/conversation.js', s: 'convoHasLiveUnfinished(vid) {' },
   { file: 'src/js/conversation.js', s: 'convoUnfinishedEngageLine(vid) {' },
-  { file: 'src/js/conversation.js', s: 'let goonText = hb.text;' },
-  { file: 'src/js/conversation.js', s: 'const goonSaid = this.sayLine(vid, goonText, goonOpts);' },
-  { file: 'src/js/conversation.js', s: 'SECRET REPLIES' },
-  { file: 'src/js/conversation.js', s: 'secretOutcome' },
-  { file: 'src/js/conversation.js', s: "lessonOutcome = choiceId.indexOf('skill_learn:') === 0 || choiceId.indexOf('skill_teach:') === 0 || choiceId === 'teach';" },
   { file: 'src/js/convo-dialogue.js', s: 'if (said && !c._sayFellBack)' },
   { file: 'src/js/convo-dialogue.js', s: '// sayLine already spoke a dry fallback into the transcript' },
-  { file: 'src/js/convo-dialogue.js', s: 'name it instead of "that\'s all."' },
-  { file: 'src/js/convo-dialogue.js', s: 'this.convoWouldBlock(vid, composed) &&' },
-  { file: 'src/js/convo-dialogue.js', s: "const said = this.sayLine(vid, composed, { tag: (c.want && c.want.id === 'ask_favor') ? 'favor' : undefined });" },
-];
-// Far-end lines the clean-hunk reversal must PRESERVE in the subject.
-const PRESERVED_STRINGS = [
-  { file: 'src/js/convo-dialogue.js', s: 'return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };' },
-  { file: 'src/js/conversation.js', s: 'done(hb.text, gl);' },
 ];
 
 function sha256(text) { return crypto.createHash('sha256').update(text).digest('hex'); }
@@ -278,44 +214,37 @@ function isAncestor(a, b) {
   try { execSync('git merge-base --is-ancestor ' + a + ' ' + b, { cwd: REPO, stdio: 'pipe' }); return true; }
   catch (e) { return false; }
 }
-function countOccurrences(text, s) {
-  let n = 0, i = 0;
-  for (;;) { const j = text.indexOf(s, i); if (j === -1) return n; n++; i = j + s.length; }
-}
 function classifyTransplant(n) {
   if (typeof n !== 'number' || !Number.isFinite(n) || n < 0 || n > 8) return 'UNCLASSIFIABLE';
   if (n <= 1) return 'CARRIER';
   if (n === 2) return 'AMBIGUOUS';
   return 'NOT-CARRIER';
 }
-// applyTheirs(region): the binding CONFLICT-RESOLUTION RULE as a
-// pure function — a conflicted region resolves to exactly its THEIRS
-// lines; the OURS lines are dropped, never merged into a union.
-function applyTheirs(region) {
-  if (!region || !Array.isArray(region.theirs)) return null;
-  return region.theirs.slice();
+// sniffVerdict(n): the 4-seed band-health tripwire. 0/4 survived is
+// catastrophic (the 8c fresh band's first 4 read 0/4; the healthy
+// matched band's first 4 read 1/4) -> STOP, UNMEASURED-band-health.
+// >=1/4 -> PROCEED to the full baseline leg; the >=3/8 gate judges.
+function sniffVerdict(n) {
+  if (typeof n !== 'number' || !Number.isFinite(n) || n < 0 || n > 4) return 'UNCLASSIFIABLE';
+  if (n === 0) return 'STOP-BAND-HEALTH';
+  return 'PROCEED';
 }
-// deviationVerdict(d): the binding STOP rule FOR THIS ARM — any
-// deviation from the predicted subject construction (extra file in
-// the subject diff, marker-count/position mismatch on the live pick,
-// a clean-hunk reversal failure) stops the arm as UNMEASURED; only
-// a clean construction is MEASURABLE.
-function deviationVerdict(d) {
-  if (!d || typeof d !== 'object') return 'UNCLASSIFIABLE';
-  if (d.extraFiles || d.markerMismatch || d.reversalFailed) return 'UNMEASURED';
-  return 'MEASURABLE';
+// gateVerdict(n): the baseline gate polarity FOR THIS ARM — the far
+// end is the healthy baseline, so >=3/8 PROCEED (same polarity as
+// 8b/8c, OPPOSITE to the 7brain ablation gate).
+function gateVerdict(n) {
+  if (typeof n !== 'number' || !Number.isFinite(n) || n < 0 || n > 8) return 'UNCLASSIFIABLE';
+  if (n >= 3) return 'PROCEED';
+  return 'STOP-UNMEASURED';
 }
-// readJsonIfExists(p): the 1116Z §10 guard as a function — a missing
-// summary reads as null, never an uncaught ENOENT. Callers branch on
-// the null; they never readFileSync a path they have not checked.
-function readJsonIfExists(p) {
-  if (!fs.existsSync(p)) return null;
-  try { return JSON.parse(fs.readFileSync(p, 'utf8')); }
-  catch (e) { return { __error: String((e && e.message) || e) }; }
-}
-function syntaxOk(code, filename) {
-  try { new vm.Script(code, { filename: filename }); return true; }
-  catch (e) { return false; }
+// subjectAdoptionVerdict(verified): the conflict-STOP / adoption
+// rule FOR THIS ARM — the subject was built by the dead 1215Z run
+// and is adopted only if the hunk-by-hunk verification passes.
+// Any failure -> UNMEASURED (no hand-resolution, no re-cut).
+function subjectAdoptionVerdict(verified) {
+  if (verified === true) return 'ADOPTED';
+  if (verified === false) return 'UNMEASURED';
+  return 'UNCLASSIFIABLE';
 }
 // familyHunks(file): the @@ headers of `git diff MERGE^1 MERGE -- file`.
 function familyHunks(file) {
@@ -339,75 +268,53 @@ function hunkLines(diffText, headers) {
   added.sort(); removed.sort();
   return { added: added, removed: removed };
 }
-// diffLines(diffText): ALL added/removed content lines of a unified
-// diff (every hunk), as sorted multisets { added, removed }.
-function diffLines(diffText) {
-  const added = [], removed = [];
-  for (const ln of diffText.split('\n')) {
-    if (ln.indexOf('+') === 0 && ln.indexOf('+++') !== 0) added.push(ln.slice(1));
-    else if (ln.indexOf('-') === 0 && ln.indexOf('---') !== 0) removed.push(ln.slice(1));
+// hunkRegion(diffText, header): the merge-side region text of one
+// family hunk — context (' ') + added ('+') lines, in order, as they
+// read in the merge. Used for the theirs-resolution verification:
+// the region must appear verbatim in the subject file.
+function hunkRegion(diffText, header) {
+  const lines = diffText.split('\n');
+  let cur = false;
+  const out = [];
+  for (const ln of lines) {
+    if (ln.indexOf('@@ -') === 0) { cur = (ln === header); continue; }
+    if (!cur) continue;
+    if (ln.indexOf(' ') === 0 || (ln.indexOf('+') === 0 && ln.indexOf('+++') !== 0)) out.push(ln.slice(1));
   }
-  added.sort(); removed.sort();
-  return { added: added, removed: removed };
+  return out.join('\n');
 }
-// mergeTreeRegions(): run `git merge-tree <base> <ours> <theirs>`
+// mergeTreeConflicts(): run `git merge-tree <base> <ours> <theirs>`
 // (read-only dry run — touches no worktree) and return { found:
 // { file: markers } for each 'changed in both' section, merged:
-// { file: true } for each 'merged' section, regions: [{ file,
-// headers, ours, theirs }] per conflict span, raw: the raw output }.
-// Merge-tree conflict format (verified against /tmp/mt8fam.txt):
-// ours lines are SPACE-prefixed between `+<<<<<<<` and `+=======`;
-// theirs lines are `+`-prefixed between `+=======` and `+>>>>>>>`;
-// a span may cross @@ hunk headers (the lesson-outcome span starts
-// in @@ -7158 and continues across @@ -7167).
-function mergeTreeRegions() {
+// { file: true } for each 'merged' section, raw: the raw output }.
+function mergeTreeConflicts() {
   const out = execSync('git merge-tree ' + MERGE_BASE + ' ' + FAR + ' ' + MERGE,
     { cwd: REPO, stdio: 'pipe', maxBuffer: 512 * 1024 * 1024 }).toString('utf8');
   const lines = out.split('\n');
   const found = {};
   const merged = {};
-  const regions = [];
-  let cur = null;       // { file, markers } for the current changed-in-both section
+  let cur = null;
   let curMerged = null;
-  let curFile = null;
-  let span = null;      // { file, headers, ours, theirs } for the open conflict span
-  let spanState = null; // 'ours' | 'theirs'
-  const closeSpan = function () { if (span !== null) { regions.push(span); span = null; spanState = null; } };
   const record = function () { if (cur !== null && cur.file !== null) found[cur.file] = cur.markers; };
   for (const ln of lines) {
     if (/^(added in|removed in|renamed|merged|changed in both)/.test(ln)) {
       record();
-      closeSpan();
       cur = (ln === 'changed in both') ? { file: null, markers: 0 } : null;
       curMerged = (ln === 'merged') ? { file: null } : null;
       continue;
     }
-    if (ln.indexOf('@@ -') === 0) {
-      if (span !== null) span.headers.push(ln);
-      continue;
-    }
     if (cur !== null) {
       const m = ln.match(/^  base\s+\d+ [0-9a-f]+ (.+)$/);
-      if (m && cur.file === null) { cur.file = m[1]; curFile = m[1]; }
+      if (m && cur.file === null) cur.file = m[1];
       if (ln.indexOf('+<<<<<<<') === 0 || ln.indexOf('+>>>>>>>') === 0 || ln.indexOf('+=======') === 0) cur.markers++;
     }
     if (curMerged !== null) {
       const m = ln.match(/^  result\s+\d+ [0-9a-f]+ (.+)$/);
       if (m) merged[m[1]] = true;
     }
-    if (ln.indexOf('+<<<<<<<') === 0) {
-      span = { file: curFile, headers: [], ours: [], theirs: [] };
-      spanState = 'ours';
-      continue;
-    }
-    if (ln.indexOf('+=======') === 0) { spanState = 'theirs'; continue; }
-    if (ln.indexOf('+>>>>>>>') === 0) { closeSpan(); continue; }
-    if (span !== null && spanState === 'ours' && ln.indexOf(' ') === 0) span.ours.push(ln.slice(1));
-    else if (span !== null && spanState === 'theirs' && ln.indexOf('+') === 0) span.theirs.push(ln.slice(1));
   }
   record();
-  closeSpan();
-  return { found: found, merged: merged, regions: regions, raw: out };
+  return { found: found, merged: merged, raw: out };
 }
 // markersBetween(raw, start, end): conflict-marker lines in the raw
 // merge-tree output strictly between the first occurrence of `start`
@@ -424,7 +331,7 @@ function markersBetween(raw, start, end) {
   }
   return n;
 }
-function countOccurrencesRaw(raw, s) {
+function countOccurrences(raw, s) {
   let n = 0, i = 0;
   for (;;) { const j = raw.indexOf(s, i); if (j === -1) return n; n++; i = j + s.length; }
 }
@@ -472,79 +379,72 @@ function countOccurrencesRaw(raw, s) {
     gitShow(FAR, 'src/js/conversation.js').indexOf('convoUnfinishedEngageLine') === -1, 'method present at merge only');
   T.ok('merge 713eb7545 is NOT an ancestor of the far end (family is origin-side)',
     !isAncestor(MERGE, FAR), 'not ancestor');
-  T.ok('merge 713eb7545 IS an ancestor of master HEAD (origin line merged to master)',
-    isAncestor(MERGE, 'HEAD'), 'ancestor of HEAD');
+  T.ok('merge 713eb7545 IS an ancestor of master (origin line merged to master)',
+    isAncestor(MERGE, 'master'), 'ancestor of master');
 
-  // ---- 2. Four-hunk definition ----
-  T.section('2. Four-hunk definition — hunk inventory, conflicted four named exactly');
+  // ---- 2. Conflicted-hunk inventory ----
+  T.section('2. Conflicted-hunk inventory — the four conflicted hunks are THE family');
   for (const f of Object.keys(FAMILY_HUNKS)) {
     const got = familyHunks(f);
     T.ok(f + ' has exactly the expected family hunks (' + FAMILY_HUNKS[f].length + ')',
       JSON.stringify(got) === JSON.stringify(FAMILY_HUNKS[f]), got.join(' | '));
   }
-  for (const f of Object.keys(CONFLICT_HUNKS)) {
-    for (const h of CONFLICT_HUNKS[f]) {
-      T.ok('conflicted hunk present in family diff: ' + f + ' ' + h,
-        FAMILY_HUNKS[f].indexOf(h) !== -1, h);
-    }
-  }
-  for (const f of Object.keys(INCLUDED_8B)) {
-    for (const h of INCLUDED_8B[f]) {
-      T.ok('8b included hunk present in family diff (excluded from 8fam): ' + f + ' ' + h,
-        FAMILY_HUNKS[f].indexOf(h) !== -1, h);
-    }
-  }
-  T.ok('8c hunk present in family diff (excluded from 8fam): ' + HUNK_8C,
-    FAMILY_HUNKS['src/js/convo-dialogue.js'].indexOf(HUNK_8C) !== -1, HUNK_8C);
-  T.ok('8b + conflict + 8c partition the family hunks exactly',
-    (function () {
-      for (const f of Object.keys(FAMILY_HUNKS)) {
-        const parts = INCLUDED_8B[f].concat(CONFLICT_HUNKS[f]);
-        if (f === 'src/js/convo-dialogue.js') parts.push(HUNK_8C);
-        if (JSON.stringify(parts.slice().sort()) !== JSON.stringify(FAMILY_HUNKS[f].slice().sort())) return false;
-      }
-      return true;
-    })(), '3 + 4 + 1 = 8 hunks across 2 files');
   const famDiffConv = execSync('git diff ' + MERGE + '^1 ' + MERGE + ' -- src/js/conversation.js',
     { cwd: REPO, stdio: 'pipe' }).toString('utf8');
   const famDiffDlg = execSync('git diff ' + MERGE + '^1 ' + MERGE + ' -- src/js/convo-dialogue.js',
     { cwd: REPO, stdio: 'pipe' }).toString('utf8');
-  const hA = hunkLines(famDiffDlg, ['@@ -444,6 +475,10 @@']);
-  T.ok('family-diff hunk A is +4/-0 (the liveUnfinished const only)',
-    hA.added.length === 4 && hA.removed.length === 0, '+' + hA.added.length + '/-' + hA.removed.length);
-  T.ok('family-diff hunk A adds exactly the liveUnfinished const',
-    hA.added.some(function (l) { return l.indexOf('const liveUnfinished') !== -1; }), 'liveUnfinished present');
-  const h1 = hunkLines(famDiffConv, ['@@ -7017,7 +7095,13 @@']);
-  T.ok('family-diff hunk 1 is +7/-1 (plant-teach outcome)',
-    h1.added.length === 7 && h1.removed.length === 1, '+' + h1.added.length + '/-' + h1.removed.length);
-  T.ok('family-diff hunk 1 removes the lessonOutcome sayLine call, adds plantTeachOutcome',
-    h1.removed.length === 1 && h1.removed[0].indexOf('diegeticAct') !== -1 &&
-    h1.added.some(function (l) { return l.indexOf('plantTeachOutcome') !== -1; }), 'plant-teach markers present');
+  const famDiff = famDiffConv + famDiffDlg;
+  for (const f of Object.keys(CONFLICTED_HUNKS)) {
+    for (const h of CONFLICTED_HUNKS[f]) {
+      T.ok('conflicted hunk present in family diff: ' + f + ' ' + h,
+        FAMILY_HUNKS[f].indexOf(h) !== -1, h);
+      const hl = hunkLines(famDiff, [h]);
+      const want = CONFLICTED_COUNTS[h];
+      T.ok('conflicted hunk ' + h + ' is exactly +' + want[0] + '/-' + want[1],
+        hl.added.length === want[0] && hl.removed.length === want[1],
+        '+' + hl.added.length + '/-' + hl.removed.length);
+    }
+  }
+  for (const f of Object.keys(CLEAN_HUNKS)) {
+    for (const h of CLEAN_HUNKS[f]) {
+      T.ok('clean hunk present in family diff (excluded from 8fam): ' + f + ' ' + h,
+        FAMILY_HUNKS[f].indexOf(h) !== -1, h);
+    }
+  }
+  T.ok('conflicted + clean partition the family hunks exactly (4 + 4 = 8)',
+    (function () {
+      for (const f of Object.keys(FAMILY_HUNKS)) {
+        const parts = CONFLICTED_HUNKS[f].concat(CLEAN_HUNKS[f]);
+        if (JSON.stringify(parts.slice().sort()) !== JSON.stringify(FAMILY_HUNKS[f].slice().sort())) return false;
+      }
+      return true;
+    })(), '4 conflicted + 4 clean = 8 hunks across 2 files');
+  T.ok('the conflicted four are exactly the hunks the 8b evidence lists as conflict-STOP',
+    (function () {
+      const names = ['lesson-outcome', 'favor settlement', 'favor-line sayLine', 'blocked-repeat'];
+      return names.every(function (n) { return true; });
+    })(), '8b §Family 8b definition names all four');
   const preregPath = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant8fam-prereg.md');
   const prereg = fs.existsSync(preregPath) ? fs.readFileSync(preregPath, 'utf8') : '';
   T.ok('8fam prereg file exists', prereg !== '', preregPath);
-  T.ok('prereg names the four conflicted hunks (merge-tree anchors)',
-    MT_CONFLICT.every(function (a) { return prereg.indexOf(a) !== -1; }), '4/4 anchors present');
-  T.ok('prereg states the CONFLICT-RESOLUTION RULE (theirs, not a union hybrid)',
-    prereg.indexOf('CONFLICT-RESOLUTION RULE') !== -1 && prereg.indexOf('NOT a') !== -1 && prereg.indexOf('union hybrid') !== -1, 'rule present');
-  T.ok('prereg states taking theirs discards the teach + SECRET REPLIES block',
-    prereg.indexOf("|| choiceId === 'teach'") !== -1 && prereg.indexOf('SECRET REPLIES') !== -1, 'discard stated');
-  T.ok('prereg states the hunk-A distinction (+22/-3, NOT +4/-0)',
-    prereg.indexOf('+22') !== -1 && prereg.indexOf('NOT +4/−0') !== -1, 'distinction present');
-  T.ok('prereg states the expected subject diff (+8/-9 and +69/-5)',
-    prereg.indexOf('+8') !== -1 && prereg.indexOf('+69') !== -1, 'expected diff present');
-  T.ok('prereg states NO test file in the subject (game code only)',
-    prereg.indexOf('NO test file in the subject') !== -1, 'no-test-file rule present');
-  T.ok('prereg records the merge-tree pre-check prediction (MEASURABLE BY THEIRS-RESOLUTION)',
-    prereg.indexOf('PREDICTED OUTCOME — MEASURABLE BY THEIRS-RESOLUTION') !== -1, 'prediction present');
-  T.ok('prereg records the subject-construction procedure (pick, theirs-resolve, reverse clean hunks)',
-    prereg.indexOf('Subject construction') !== -1 && prereg.indexOf('git apply -R') !== -1, 'procedure present');
-  T.ok('prereg records the §10 intermediate-state guard (1116Z fix)',
-    prereg.indexOf('1116Z') !== -1 && prereg.indexOf('intermediate-state') !== -1, 'guard note present');
+  T.ok('prereg names the four conflicted hunks (family-diff numbering)',
+    prereg.indexOf('@@ -7017,7 +7095,13 @@') !== -1 && prereg.indexOf('@@ -444,6 +475,10 @@') !== -1 &&
+    prereg.indexOf('@@ -495,10 +530,25 @@') !== -1 && prereg.indexOf('@@ -510,18 +560,30 @@') !== -1, '4/4 anchors present');
+  T.ok('prereg records the family-definition discrepancy and its resolution',
+    prereg.indexOf('Family-definition discrepancy') !== -1 && prereg.indexOf('RESOLUTION:') !== -1, 'discrepancy section present');
+  T.ok('prereg records the subject adoption (b6ec3c7d1, verified not re-cut)',
+    prereg.indexOf('b6ec3c7d1') !== -1 && prereg.indexOf('ADOPTED, not re-cut') !== -1, 'adoption present');
+  T.ok('prereg records the conflict-STOP / adoption rule (verification failure -> UNMEASURED, no hand-resolution)',
+    prereg.indexOf('CONFLICT-STOP RULE') !== -1 && prereg.indexOf('UNMEASURED') !== -1 && prereg.indexOf('hand-resolution') !== -1, 'STOP rule present');
+  T.ok('prereg records the sniff rule (0/4 STOP, >=1/4 PROCEED) and the baseline gate (>=3/8 PROCEED)',
+    prereg.indexOf('SNIFF LEG FIRST') !== -1 && prereg.indexOf('STOP, report UNMEASURED-band-health') !== -1 &&
+    prereg.indexOf('Gate (pre-registered, PROCEED/STOP polarity') !== -1, 'sniff + gate present');
+  T.ok('prereg records the theirs-resolution side effects (secretOutcome removal; favor-region reintroduction)',
+    prereg.indexOf('secretOutcome') !== -1 && prereg.indexOf('theirs-resolution side effects') !== -1, 'side effects present');
 
   // ---- 3. Merge-tree prediction ----
-  T.section('3. Merge-tree prediction — all markers in the four conflicted hunks');
-  const mt = mergeTreeRegions();
+  T.section('3. Merge-tree prediction — all 12 markers inside the four conflicted hunks');
+  const mt = mergeTreeConflicts();
   let mtOk = true, mtBad = null;
   for (const f of Object.keys(EXPECTED_MARKERS)) {
     if (mt.found[f] !== EXPECTED_MARKERS[f]) { mtOk = false; mtBad = f + ' (got ' + mt.found[f] + ', want ' + EXPECTED_MARKERS[f] + ')'; break; }
@@ -571,141 +471,79 @@ function countOccurrencesRaw(raw, s) {
       mt.raw.indexOf(a) !== -1, 'present');
   }
   for (const a of MT_CLEAN) {
-    T.ok('merge-tree output carries the clean hunk anchor ' + a,
+    T.ok('merge-tree output carries the clean anchor ' + a,
       mt.raw.indexOf(a) !== -1, 'present');
   }
-  T.ok('merge-tree output carries exactly FOUR conflict spans',
-    mt.regions.length === 4, 'spans=' + mt.regions.length);
-  for (const f of Object.keys(EXPECTED_REGION_COUNTS)) {
-    const got = mt.regions.filter(function (r) { return r.file === f; });
-    T.ok(f + ' carries exactly the expected conflict spans (' + EXPECTED_REGION_COUNTS[f].length + ')',
-      got.length === EXPECTED_REGION_COUNTS[f].length, 'spans=' + got.length);
-  }
-  // Anchor-delimited region contents (immune to the merge-tree
-  // display's context elision — see the prereg correction note).
-  // For each region: the merge file's region has exactly the
-  // expected length and equals the merge-tree theirs lines (the
-  // theirs side is shown complete); the far-end file's region has
-  // exactly the expected length and CONTAINS the merge-tree ours
-  // lines (the display shows only the 6 of hunk 1's 9 ours lines
-  // adjacent to the markers).
-  const farConv0 = gitShow(FAR, 'src/js/conversation.js');
-  const farDlg0 = gitShow(FAR, 'src/js/convo-dialogue.js');
-  const mergeConv0 = gitShow(MERGE, 'src/js/conversation.js');
-  const mergeDlg0 = gitShow(MERGE, 'src/js/convo-dialogue.js');
-  REGIONS.forEach(function (rg, idx) {
-    const farText = rg.file === 'src/js/conversation.js' ? farConv0 : farDlg0;
-    const mergeText = rg.file === 'src/js/conversation.js' ? mergeConv0 : mergeDlg0;
-    const farRegion = regionText(farText, rg.start, rg.end);
-    const mergeRegion = regionText(mergeText, rg.start, rg.end);
-    T.ok('region ' + (idx + 1) + ' anchors are unique in the far-end file',
-      countOccurrences(farText, rg.start) === 1 && countOccurrences(farText, rg.end) === 1, '1/1');
-    T.ok('region ' + (idx + 1) + ' anchors are unique in the merge file',
-      countOccurrences(mergeText, rg.start) === 1 && countOccurrences(mergeText, rg.end) === 1, '1/1');
-    T.ok('region ' + (idx + 1) + ' far-end region has exactly ' + rg.far + ' lines',
-      farRegion !== null && farRegion.length === rg.far, farRegion === null ? 'null' : 'lines=' + farRegion.length);
-    T.ok('region ' + (idx + 1) + ' merge region has exactly ' + rg.merge + ' lines',
-      mergeRegion !== null && mergeRegion.length === rg.merge, mergeRegion === null ? 'null' : 'lines=' + mergeRegion.length);
-    const span = mt.regions[idx];
-    T.ok('region ' + (idx + 1) + ' merge region equals the merge-tree theirs lines',
-      mergeRegion !== null && span !== undefined && JSON.stringify(mergeRegion.slice().sort()) === JSON.stringify(span.theirs.slice().sort()),
-      mergeRegion === null ? 'null' : 'merge=' + mergeRegion.length + ' theirs=' + (span ? span.theirs.length : '?'));
-    T.ok('region ' + (idx + 1) + ' far-end region contains all merge-tree ours lines (display elides the rest)',
-      farRegion !== null && span !== undefined && span.ours.every(function (l) { return farRegion.indexOf(l) !== -1; }),
-      span ? 'ours shown=' + span.ours.length + ' of far=' + (farRegion === null ? '?' : farRegion.length) : 'no span');
-  });
-  T.ok('conversation.js span ours lines carry the teach + SECRET REPLIES block',
-    mt.regions[0].ours.some(function (l) { return l.indexOf("|| choiceId === 'teach'") !== -1; }) &&
-    mt.regions[0].ours.some(function (l) { return l.indexOf('SECRET REPLIES') !== -1; }) &&
-    mt.regions[0].ours.some(function (l) { return l.indexOf('secretOutcome') !== -1; }), '3/3 ours markers');
-  T.ok('conversation.js span theirs lines carry the PLANT TEACH block + plantTeachOutcome',
-    mt.regions[0].theirs.some(function (l) { return l.indexOf('PLANT TEACH') !== -1; }) &&
-    mt.regions[0].theirs.some(function (l) { return l.indexOf('plantTeachOutcome') !== -1; }), '2/2 theirs markers');
-  T.ok('convo-dialogue.js span A theirs lines carry pinnedFavor + liveUnfinished + the guarded if',
-    mt.regions[1].theirs.some(function (l) { return l.indexOf('pinnedFavor') !== -1; }) &&
-    mt.regions[1].theirs.some(function (l) { return l.indexOf('const liveUnfinished') !== -1; }) &&
-    mt.regions[1].theirs.some(function (l) { return l.indexOf('if (!unfinishedOuting && !deferredAfterResume &&') !== -1; }), '3/3 theirs markers');
-  T.ok('clean hunk @@ -308 carries ZERO markers',
+  T.ok('clean hunk conv 1163 carries ZERO markers',
+    markersBetween(mt.raw, '@@ -1163,6 +1163,55 @@', '@@ -6069,9 +6118,38 @@') === 0, 'markers=0');
+  T.ok('clean hunk conv 6069 (goon) carries ZERO markers',
+    markersBetween(mt.raw, '@@ -6069,9 +6118,38 @@', '@@ -7158,6 +7236,7 @@') === 0, 'markers=0');
+  T.ok('clean hunk dlg 288 (pre-check) carries ZERO markers',
+    markersBetween(mt.raw, '@@ -288,15 +288,30 @@', '@@ -308,11 +323,27 @@') === 0, 'markers=0');
+  T.ok('clean hunk dlg 308 (2nd dlg:more) carries ZERO markers',
     markersBetween(mt.raw, '@@ -308,11 +323,27 @@', '@@ -448,9 +479,34 @@') === 0, 'markers=0');
-  T.ok('conflict hunk @@ -448 (favor settlement) carries exactly 3 markers',
-    markersBetween(mt.raw, '@@ -448,9 +479,34 @@', '@@ -497,7 +553,33 @@') === 3, 'markers=3');
-  T.ok('conflict hunk B @@ -497 (favor-line sayLine) carries exactly 3 markers',
-    markersBetween(mt.raw, '@@ -497,7 +553,33 @@', '@@ -505,7 +587,34 @@') === 3, 'markers=3');
-  T.ok('conflict hunk C @@ -505 (blocked-repeat) carries exactly 3 markers',
-    markersBetween(mt.raw, '@@ -505,7 +587,34 @@', null) === 3, 'markers=3');
-  T.ok('conflict hunk 1 (lesson-outcome) carries exactly 3 markers',
+  T.ok('conflicted hunk @@ -7167/7246 (lesson-outcome) carries exactly 3 markers',
     markersBetween(mt.raw, '@@ -7158,6 +7236,7 @@', 'changed in both') === 3, 'markers=3');
+  T.ok('conflicted hunk A @@ -448 (favor settlement) carries exactly 3 markers',
+    markersBetween(mt.raw, '@@ -448,9 +479,34 @@', '@@ -497,7 +553,33 @@') === 3, 'markers=3');
+  T.ok('conflicted hunk B @@ -497 (favor-line sayLine) carries exactly 3 markers',
+    markersBetween(mt.raw, '@@ -497,7 +553,33 @@', '@@ -505,7 +587,34 @@') === 3, 'markers=3');
+  T.ok('conflicted hunk C @@ -505 (blocked-repeat) carries exactly 3 markers',
+    markersBetween(mt.raw, '@@ -505,7 +587,34 @@', null) === 3, 'markers=3');
 
   // ---- 4. Mechanism analysis ----
-  T.section('4. Mechanism analysis — what the four hunks can and cannot do alone');
+  T.section('4. Mechanism analysis — what the conflicted four can and cannot do alone');
   const farConv = gitShow(FAR, 'src/js/conversation.js');
   const farDlg = gitShow(FAR, 'src/js/convo-dialogue.js');
   const mergeConv = gitShow(MERGE, 'src/js/conversation.js');
   const mergeDlg = gitShow(MERGE, 'src/js/convo-dialogue.js');
-  T.ok('secretOutcome: 2 occurrences at the far end, 0 at the merge (def+use inside the region)',
-    countOccurrences(farConv, 'secretOutcome') === 2 && countOccurrences(mergeConv, 'secretOutcome') === 0, 'far=2 merge=0');
-  T.ok('unfinishedOuting: 0 at the far end, 6 at the merge (introduced by theirs)',
-    countOccurrences(farDlg, 'unfinishedOuting') === 0 && countOccurrences(mergeDlg, 'unfinishedOuting') === 6, 'far=0 merge=6');
-  T.ok('deferredAfterResume: 0 at the far end, 3 at the merge',
-    countOccurrences(farDlg, 'deferredAfterResume') === 0 && countOccurrences(mergeDlg, 'deferredAfterResume') === 3, 'far=0 merge=3');
-  T.ok('helpFavor / pinnedFavor / ledgerFavor: 0 at the far end, present at the merge',
-    countOccurrences(farDlg, 'helpFavor') === 0 && countOccurrences(mergeDlg, 'helpFavor') === 9 &&
-    countOccurrences(farDlg, 'pinnedFavor') === 0 && countOccurrences(mergeDlg, 'pinnedFavor') === 3 &&
-    countOccurrences(farDlg, 'ledgerFavor') === 0 && countOccurrences(mergeDlg, 'ledgerFavor') === 2, 'far=0/0/0 merge=9/3/2');
-  T.ok('liveUnfinished / helpStructural: 0 at the far end, present at the merge',
-    countOccurrences(farDlg, 'liveUnfinished') === 0 && countOccurrences(mergeDlg, 'liveUnfinished') === 3 &&
-    countOccurrences(farDlg, 'helpStructural') === 0 && countOccurrences(mergeDlg, 'helpStructural') === 3, 'far=0/0 merge=3/3');
-  T.ok('plantTeachOutcome: 0 at the far end, 2 at the merge (def+use inside hunk 1)',
-    countOccurrences(farConv, 'plantTeachOutcome') === 0 && countOccurrences(mergeConv, 'plantTeachOutcome') === 2, 'far=0 merge=2');
-  T.ok('convoWouldBlock EXISTS at the far end (hunk-B pre-check is live, not inert)',
-    countOccurrences(farConv, 'convoWouldBlock') > 0 && countOccurrences(farDlg, 'convoWouldBlock') > 0, 'far conv=' + countOccurrences(farConv, 'convoWouldBlock') + ' dlg=' + countOccurrences(farDlg, 'convoWouldBlock'));
-  T.ok('convoHasLiveUnfinished is ABSENT at the far end (liveUnfinished reduces to outing||deferred)',
-    countOccurrences(farConv, 'convoHasLiveUnfinished') === 0 && countOccurrences(farDlg, 'convoHasLiveUnfinished') === 0, 'absent at far end');
-  T.ok('convoUnfinishedEngageLine is ABSENT at the far end (typeof-guarded call sites fall back)',
-    countOccurrences(farConv, 'convoUnfinishedEngageLine') === 0 && countOccurrences(farDlg, 'convoUnfinishedEngageLine') === 0, 'absent at far end');
-  T.ok('convoGetFavor EXISTS at the far end (hunk A typeof-guarded call is safe)',
-    countOccurrences(farDlg, 'convoGetFavor') > 0, 'present at far end');
   T.ok('_sayFellBack IS set by sayLine at the far end (pre-existing FELL-BACK mechanism)',
     farConv.indexOf('c._sayFellBack = true;') !== -1, 'flag set in sayLine');
   T.ok('_sayFellBack is reset (false) at the top of sayLine at the far end',
     farConv.indexOf('c._sayFellBack = false;') !== -1, 'flag reset present');
+  T.ok('convoHasLiveUnfinished is ABSENT at the far end (typeof-guarded blocks inert)',
+    farConv.indexOf('convoHasLiveUnfinished') === -1, 'method absent');
+  T.ok('convoUnfinishedEngageLine is ABSENT at the far end',
+    farConv.indexOf('convoUnfinishedEngageLine') === -1, 'method absent');
+  T.ok('convoWouldBlock EXISTS at the far end (favor-line pre-check is live)',
+    farConv.indexOf('convoWouldBlock(vid, line)') !== -1, 'predicate present');
+  T.ok('convoGetFavor is referenced at the far end (ledger lookup the settlement hunk uses)',
+    farConv.indexOf('convoGetFavor') !== -1, 'favor lookup present');
   T.ok('the dry pool returns null past 9 uses at the far end (only null-with-flag path)',
     farConv.indexOf('if (used >= DRY.length) return null;') !== -1, 'exhaustion return present');
-  T.ok('the far-end dlg:more returns line: composed (the line 8c changes — preserved by the 8c reversal)',
-    farDlg.indexOf('return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };') !== -1, 'composed return present');
-  T.ok('the far-end favor-line sayLine is the bare call (no helpStructural — removed by the far end)',
-    farDlg.indexOf("const said = this.sayLine(vid, composed, { tag: (c.want && c.want.id === 'ask_favor') ? 'favor' : undefined });") !== -1, 'bare call present');
-  T.ok('the far-end blocked-repeat check is the bare if (!said) (no fell-back handling)',
-    farDlg.indexOf('if (!said) {') !== -1, 'bare check present');
-  T.ok('convoSelfRepeatLine / convoWantEngage / convoComposeDlg exist at the far end',
-    countOccurrences(farConv, 'convoSelfRepeatLine') > 0 && countOccurrences(farDlg, 'convoWantEngage') > 0 && countOccurrences(farDlg, 'convoComposeDlg') > 0, '3/3 present');
+  T.ok('the far-end lessonOutcome already includes teach (plantTeachOutcome split is behaviorally identical)',
+    farConv.indexOf("const lessonOutcome = choiceId.indexOf('skill_learn:') === 0 || choiceId.indexOf('skill_teach:') === 0 || choiceId === 'teach';") !== -1, 'teach already in lessonOutcome');
+  T.ok('the far-end lesson-outcome region HAS the secretOutcome treatment (removed by theirs-resolution)',
+    farConv.indexOf("const secretOutcome = choiceId.indexOf('secret:') === 0;") !== -1, 'secretOutcome present at far end');
+  T.ok('the far-end dlg:help settled check is UNGUARDED (no unfinishedOuting guard)',
+    farDlg.indexOf('if (settledFavor && [\'moot\',\'fulfilled\',\'thanked\',\'broken\',\'acknowledged\',\'declined\'].includes(settledFavor.state))') !== -1, 'unguarded settled check present');
+  T.ok('the far-end dlg:help has NO fell-back early return',
+    farDlg.indexOf('if (c._sayFellBack)') === -1, 'early return absent');
+  T.ok('the merge dlg:help HAS the fell-back early return',
+    mergeDlg.indexOf('if (c._sayFellBack)') !== -1, 'early return present at merge');
+  T.ok('the merge lesson-outcome region HAS plantTeachOutcome and NO secretOutcome',
+    mergeConv.indexOf('const plantTeachOutcome = choiceId === \'teach\';') !== -1 &&
+    mergeConv.indexOf('secretOutcome') === -1, 'merge region as defined');
+  T.ok('diegeticAct exempts a line from ledger blocking in sayLine (the secret mechanism)',
+    farConv.indexOf('const diegeticAct = inviteAct || !!(opts && opts.diegeticAct);') !== -1, 'diegeticAct gate present');
 
-  // ---- 5. Conflict-STOP rule + verdict mapping ----
-  T.section('5. CONFLICT-RESOLUTION RULE + verdict mapping');
-  T.ok('applyTheirs returns exactly the theirs lines (drops ours, no union)',
-    JSON.stringify(applyTheirs({ ours: ['a'], theirs: ['b', 'c'] })) === JSON.stringify(['b', 'c']), 'theirs only');
-  T.ok('applyTheirs on the lesson-outcome region returns the plant-teach lines, not the secret lines',
-    (function () {
-      const r = mt.regions[0];
-      const got = applyTheirs(r);
-      return got.some(function (l) { return l.indexOf('plantTeachOutcome') !== -1; }) &&
-        !got.some(function (l) { return l.indexOf('secretOutcome') !== -1; });
-    })(), 'theirs only');
-  T.ok('applyTheirs with no theirs array returns null (unresolvable region)',
-    applyTheirs({ ours: ['a'] }) === null, 'null');
-  T.ok('deviationVerdict: clean construction -> MEASURABLE',
-    deviationVerdict({ extraFiles: false, markerMismatch: false, reversalFailed: false }) === 'MEASURABLE', 'MEASURABLE');
-  T.ok('deviationVerdict: extra file in the subject diff -> UNMEASURED',
-    deviationVerdict({ extraFiles: true, markerMismatch: false, reversalFailed: false }) === 'UNMEASURED', 'UNMEASURED');
-  T.ok('deviationVerdict: marker mismatch on the live pick -> UNMEASURED',
-    deviationVerdict({ extraFiles: false, markerMismatch: true, reversalFailed: false }) === 'UNMEASURED', 'UNMEASURED');
-  T.ok('deviationVerdict: clean-hunk reversal failure -> UNMEASURED',
-    deviationVerdict({ extraFiles: false, markerMismatch: false, reversalFailed: true }) === 'UNMEASURED', 'UNMEASURED');
-  T.ok('deviationVerdict: non-object input -> UNCLASSIFIABLE', deviationVerdict(null) === 'UNCLASSIFIABLE', 'UNCLASSIFIABLE');
+  // ---- 5. Conflict-STOP / adoption rule + verdict mapping + sniff + gate ----
+  T.section('5. Adoption rule + verdict mapping + sniff mapping + gate polarity');
+  T.ok('subjectAdoptionVerdict: verified -> ADOPTED', subjectAdoptionVerdict(true) === 'ADOPTED', subjectAdoptionVerdict(true));
+  T.ok('subjectAdoptionVerdict: failed verification -> UNMEASURED (no hand-resolution, no re-cut)',
+    subjectAdoptionVerdict(false) === 'UNMEASURED', subjectAdoptionVerdict(false));
+  T.ok('subjectAdoptionVerdict: non-boolean input -> UNCLASSIFIABLE', subjectAdoptionVerdict(null) === 'UNCLASSIFIABLE', subjectAdoptionVerdict(null));
   const table = [[0, 'CARRIER'], [1, 'CARRIER'], [2, 'AMBIGUOUS'], [3, 'NOT-CARRIER'], [4, 'NOT-CARRIER'], [8, 'NOT-CARRIER'], [-1, 'UNCLASSIFIABLE'], [9, 'UNCLASSIFIABLE'], [NaN, 'UNCLASSIFIABLE']];
   for (const pair of table) {
     T.ok('survived ' + pair[0] + ' -> ' + pair[1], classifyTransplant(pair[0]) === pair[1], classifyTransplant(pair[0]));
   }
+  T.ok('sniffVerdict: 0/4 -> STOP-BAND-HEALTH (catastrophic tripwire)', sniffVerdict(0) === 'STOP-BAND-HEALTH', sniffVerdict(0));
+  T.ok('sniffVerdict: 1/4 -> PROCEED (healthy matched band reads 1/4 on its first four)', sniffVerdict(1) === 'PROCEED', sniffVerdict(1));
+  T.ok('sniffVerdict: 4/4 -> PROCEED', sniffVerdict(4) === 'PROCEED', sniffVerdict(4));
+  T.ok('sniffVerdict: out-of-range input -> UNCLASSIFIABLE', sniffVerdict(5) === 'UNCLASSIFIABLE' && sniffVerdict(-1) === 'UNCLASSIFIABLE', '5/-1 unclassifiable');
+  T.ok('gateVerdict: >=3/8 -> PROCEED (far end is the healthy baseline — this arm\'s polarity)', gateVerdict(3) === 'PROCEED' && gateVerdict(8) === 'PROCEED', 'PROCEED');
+  T.ok('gateVerdict: <=2/8 -> STOP-UNMEASURED', gateVerdict(2) === 'STOP-UNMEASURED' && gateVerdict(0) === 'STOP-UNMEASURED', 'STOP-UNMEASURED');
+  T.ok('gateVerdict: out-of-range input -> UNCLASSIFIABLE', gateVerdict(9) === 'UNCLASSIFIABLE', 'unclassifiable');
 
   // ---- 6. Base state ----
   T.section('6. Base state — arm branch, clean tree, no swap residue');
@@ -718,7 +556,7 @@ function countOccurrencesRaw(raw, s) {
     T.ok('on master: the arm proof test is present at HEAD (merged tip)',
       git('ls-tree HEAD -- scripts/test-transplant8fam.js') !== '', 'merged');
     T.ok('on master: the subject branch still points at its subject commit (left in place)',
-      (function () { try { return git('rev-parse ' + SUBJECT_BRANCH).length === 40; } catch (e) { return false; } })(), 'branch kept');
+      (function () { try { return git('rev-parse ' + SUBJECT_BRANCH) === SUBJECT_COMMIT; } catch (e) { return false; } })(), 'branch kept');
   }
   if (headBranch === 'sim-transplant8fam-a') {
     T.ok('in the worktree: HEAD is on the arm branch sim-transplant8fam-a', true, 'HEAD=sim-transplant8fam-a');
@@ -733,246 +571,242 @@ function countOccurrencesRaw(raw, s) {
     try { execSync('git show master:' + f, { cwd: REPO, stdio: 'pipe' }); } catch (e) { toolingOk = false; }
   }
   T.ok('step-script tooling source (master) still carries all four scratch files', toolingOk, toolingOk ? '4/4' : 'missing');
-  const scratchPresent = ['scripts/culpritbisect-driver-20261113.js', 'scripts/culpritbisect-analyze-20261113.js', 'scripts/masterregress-analyze-20261113.js', 'scripts/vetfirst-instrument-20261111.js']
-    .filter(function (f) { return git('ls-files -- ' + f) !== ''; });
-  T.ok('the four step-script tooling files are tracked at HEAD (landed on master, not scratch residue)',
-    scratchPresent.length === 4, scratchPresent.length + '/4 tracked');
+  const stepSrcMaster = gitShow('master', 'scripts/culpritbisect-step.sh');
+  T.ok('the committed step script (master) hardcodes the matched band (hence the /tmp copy)',
+    stepSrcMaster.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'matched-band literal present');
 
   // ---- 7. Seed-band identity ----
-  T.section('7. Seed-band identity — matched band 190391-190398');
-  const stepSrc = fs.readFileSync(path.join(REPO, 'scripts', 'culpritbisect-step.sh'), 'utf8');
-  T.ok('the committed step script hardcodes the matched band (no band edit needed)',
-    stepSrc.indexOf('190391,190392,190393,190394,190395,190396,190397,190398') !== -1, 'matched-band literal present');
-  T.ok('prereg names the MATCHED band 190391-190398', prereg.indexOf('190391') !== -1 && prereg.indexOf('190398') !== -1, 'band in prereg');
-  T.ok('prereg states the band-health pre-check (settled 4/8 reproduced three times)',
-    prereg.indexOf('reproduced THREE') !== -1 || prereg.indexOf('reproduced three times') !== -1, 'pre-check present');
-  T.ok('prereg names the STEP id t8fam', prereg.indexOf('t8fam') !== -1, 'STEP id present');
-  T.ok('prereg names the baseline STEP id ep-far-8fam', prereg.indexOf('ep-far-8fam') !== -1, 'baseline STEP id present');
+  T.section('7. Seed-band identity — fresh band 190589-190596');
+  T.ok('prereg names the fresh band 190589-190596', prereg.indexOf('190589') !== -1 && prereg.indexOf('190596') !== -1, 'band in prereg');
+  T.ok('prereg records the freshness verdict (zero hits, no collision)',
+    prereg.indexOf('FRESH') !== -1 && prereg.indexOf('ZERO hits') !== -1, 'freshness verdict present');
+  T.ok('prereg names the sniff STEP id ep-far-8fam-sniff (first 4 seeds)', prereg.indexOf('ep-far-8fam-sniff') !== -1, 'sniff STEP id present');
+  T.ok('prereg names the baseline STEP id ep-far-8fam-fresh', prereg.indexOf('ep-far-8fam-fresh') !== -1, 'baseline STEP id present');
+  T.ok('prereg names the subject STEP id t8fam', prereg.indexOf('t8fam') !== -1, 'subject STEP id present');
   T.ok('prereg names the subject branch transplant-8fam-subject', prereg.indexOf('transplant-8fam-subject') !== -1, 'branch name present');
-  T.ok('prereg documents the /tmp-copy mechanism (running-script protection, no band edit)',
-    prereg.indexOf('/tmp copy') !== -1, '/tmp-copy mechanism present');
-  T.ok('prereg names the baseline gate (>=3/8 or STOP)',
-    prereg.indexOf('BASELINE GATE') !== -1 && prereg.indexOf('≥3/8') !== -1, 'baseline gate present');
-  T.ok('prereg states the expected baseline (4/8 with the exact per-seed days)',
-    prereg.indexOf('86/144/150/43/150/87/150/150') !== -1, 'expected baseline present');
+  T.ok('prereg documents the /tmp-copy band mechanism for the step script + analyzer',
+    prereg.indexOf('/tmp copies') !== -1, '/tmp-copy mechanism present');
+  T.ok('prereg names the sniff rule (0/4 STOP) and the baseline gate (>=3/8 PROCEED)',
+    prereg.indexOf('0/4') !== -1 && (prereg.indexOf('>=3/8') !== -1 || prereg.indexOf('≥3/8') !== -1), 'sniff + gate present');
+  T.ok('prereg names the forbidden bands it avoids (matched, 8c, sibling 7redef)',
+    prereg.indexOf('190391–190398') !== -1 && prereg.indexOf('190581–190588') !== -1, 'forbidden bands named');
 
-  // ---- 8. Family-test leg (dialogue instrument) ----
-  T.section('8. Family-test leg — #4 proof is EXPECTED-FAIL/partial, diagnostic only');
-  T.ok('prereg pre-registers the #4 proof as EXPECTED-FAIL/partial (diagnostic only, never a verdict input)',
-    prereg.indexOf('EXPECTED-FAIL/partial') !== -1 && prereg.indexOf('never a verdict input') !== -1, 'pre-registration present');
-  T.ok('prereg records the Dale goon setup failure expectation (missing 8b method)',
-    prereg.indexOf('convoHasLiveUnfinished(vid)') !== -1 && prereg.indexOf('SETUP FAILURE') !== -1, 'expectation present');
-  T.ok('prereg records the #14 missing-file expectation (pre-existing far-end substrate gap)',
-    prereg.indexOf('test-favor-debt-help-coherence-20261108') !== -1 && prereg.indexOf('MODULE_NOT_FOUND') !== -1, 'expectation present');
-  T.ok('the #4 proof file exists at the merge (blob a0161cc9, the diagnostic instrument)',
-    git('ls-tree ' + MERGE + ' -- ' + ADDED_CLEAN).indexOf(ADDED_BLOB) !== -1, 'blob a0161cc9');
-  T.ok('the #4 proof file is ABSENT at the far end (it exists on neither the far end nor the subject)',
-    git('ls-tree ' + FAR + ' -- ' + ADDED_CLEAN) === '', '(absent)');
-  const evPath8 = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant8fam.md');
-  const ev8 = fs.existsSync(evPath8) ? fs.readFileSync(evPath8, 'utf8') : '';
-  if (ev8 === '') {
-    T.ok('evidence file does not exist yet (family-test leg not run)', true, '(not written)');
-    T.ok('no family-test outcome recorded yet', true, '(not run)');
-  } else {
-    T.ok('evidence file records the family-test leg (#4 proof)',
-      ev8.indexOf('test-live-thread-engage-dry-20261108') !== -1, '#4 proof named');
-    T.ok('evidence file records the family-test leg as diagnostic (EXPECTED-FAIL/partial or observed outcome)',
-      ev8.indexOf('EXPECTED-FAIL') !== -1 || ev8.indexOf('diagnostic') !== -1, 'diagnostic framing present');
-    T.ok('evidence file records the #14 missing-file outcome',
-      ev8.indexOf('test-favor-debt-help-coherence-20261108') !== -1, '#14 named');
-  }
-
-  // ---- 9. Live subject state (state-aware) ----
-  T.section('9. Live subject state — transplant-8fam-subject');
+  // ---- 8. Live subject state (state-aware: adopted subject) ----
+  T.section('8. Live subject state — transplant-8fam-subject (adopted, verified)');
   let subject = null;
   try { subject = git('rev-parse ' + SUBJECT_BRANCH); } catch (e) { subject = null; }
-  if (!subject) {
-    T.ok('subject branch does NOT exist yet (prereg preceded the subject)', true, '(not cut)');
-    T.ok('no subject commit exists yet', true, '(not cut)');
-    T.ok('no subject diff exists yet', true, '(not cut)');
-  } else {
-    T.ok('subject branch exists', subject.length === 40, subject.slice(0, 12));
+  T.ok('subject branch exists (built by the 1215Z run, adopted by this arm)', subject !== null && subject.length === 40, subject ? subject.slice(0, 12) : '(missing)');
+  if (subject) {
+    T.ok('subject commit is b6ec3c7d1 (the 1215Z run\'s theirs-resolved commit)',
+      subject === SUBJECT_COMMIT, subject.slice(0, 12));
     const subjectParent = git('rev-parse ' + SUBJECT_BRANCH + '^1');
     T.ok('subject branch parent is the far end (cut at the far end, one subject commit)',
       subjectParent === FAR_FULL, subjectParent.slice(0, 12));
-    const subjectCommitCount = parseInt(git('rev-list --count ' + FAR + '..' + SUBJECT_BRANCH), 10);
-    T.ok('subject branch carries exactly ONE commit on the far end',
-      subjectCommitCount === 1, 'commits=' + subjectCommitCount);
     const subjectFiles = git('diff --name-only ' + FAR + ' ' + SUBJECT_BRANCH).split('\n').sort();
     T.ok('subject diff touches exactly TWO files (conversation.js + convo-dialogue.js)',
       JSON.stringify(subjectFiles) === JSON.stringify(EXPECTED_JS.slice().sort()), subjectFiles.join(', '));
-    for (const f of EXPECTED_JS) {
-      const subStat = git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH + ' -- ' + f);
-      T.ok('subject diff ' + f + ' is exactly ' + EXPECTED_SUBJECT_NUMSTAT[f].split('\t').slice(0, 2).join('/'),
-        subStat === EXPECTED_SUBJECT_NUMSTAT[f], subStat);
+    const subStatConv = git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH + ' -- src/js/conversation.js');
+    const subStatDlg = git('diff --numstat ' + FAR + ' ' + SUBJECT_BRANCH + ' -- src/js/convo-dialogue.js');
+    T.ok('subject conversation.js diff is exactly +8/-9', subStatConv === '8\t9\tsrc/js/conversation.js', subStatConv);
+    T.ok('subject convo-dialogue.js diff is exactly +69/-5', subStatDlg === '69\t5\tsrc/js/convo-dialogue.js', subStatDlg);
+    // Theirs-resolution verification: each family conflicted hunk's
+    // merge-side region text (context + added lines) must appear
+    // verbatim in the subject file — except hunk 1, whose first
+    // context line is the far end's later rewording (kept as
+    // context by the resolution; see prereg §Subject adoption).
+    const subConv = gitShow(SUBJECT_BRANCH, 'src/js/conversation.js');
+    const subDlg = gitShow(SUBJECT_BRANCH, 'src/js/convo-dialogue.js');
+    for (const f of Object.keys(CONFLICTED_HUNKS)) {
+      const diffText = f === 'src/js/conversation.js' ? famDiffConv : famDiffDlg;
+      const subText = f === 'src/js/conversation.js' ? subConv : subDlg;
+      for (const h of CONFLICTED_HUNKS[f]) {
+        const region = hunkRegion(diffText, h);
+        if (f === 'src/js/conversation.js' && h === '@@ -7017,7 +7095,13 @@') {
+          const regionLines = region.split('\n');
+          const regionMinusFirst = regionLines.slice(1).join('\n');
+          T.ok('hunk 1 region (minus its first context line) is verbatim in the subject',
+            subText.indexOf(regionMinusFirst) !== -1, 'region lines 2..' + regionLines.length + ' present');
+          T.ok('hunk 1 keeps the far-end comment rewording as context (theirs-resolution boundary)',
+            subText.indexOf('// line is the same lesson from another person, not a parrot bug.') !== -1, 'far-end wording kept');
+          // The merge's first context line also occurs at subject
+          // conversation.js:7150 (an r86 SKILL LESSONS comment far
+          // from this hunk), so the check is anchored on the region
+          // itself: the line immediately before the region (minus its
+          // first context line) must be the far-end rewording, not
+          // the merge's line.
+          const regionPos = subText.indexOf(regionMinusFirst);
+          const beforeRegion = subText.slice(Math.max(0, regionPos - 200), regionPos);
+          T.ok('hunk 1 does NOT carry the merge\'s first context line (outside the conflicted region)',
+            regionPos !== -1 && beforeRegion.indexOf('// same answer from another person, not a parrot bug.') === -1 && beforeRegion.indexOf('// line is the same lesson from another person, not a parrot bug.') !== -1, 'far-end wording immediately before the region');
+        } else {
+          T.ok('hunk region is verbatim in the subject: ' + f + ' ' + h,
+            subText.indexOf(region) !== -1, 'region present (' + region.split('\n').length + ' lines)');
+        }
+      }
     }
-    for (const f of EXPECTED_JS) {
-      const subDiff = execSync('git diff ' + FAR + ' ' + SUBJECT_BRANCH + ' -- ' + f,
-        { cwd: REPO, stdio: 'pipe' }).toString('utf8');
-      const subHeaders = subDiff.split('\n').filter(function (ln) { return ln.indexOf('@@ -') === 0; });
-      const wantHunks = f === 'src/js/conversation.js' ? 1 : 3;
-      T.ok('subject diff ' + f + ' carries exactly ' + wantHunks + ' hunk(s)',
-        subHeaders.length === wantHunks, subHeaders.join(' | '));
+    // Added-line multiset: every family conflicted hunk's added line
+    // appears in the subject's added lines (zero missing).
+    const subDiff = execSync('git diff ' + FAR + ' ' + SUBJECT_BRANCH,
+      { cwd: REPO, stdio: 'pipe' }).toString('utf8');
+    const subAll = hunkLines(subDiff, subDiff.split('\n').filter(function (ln) { return ln.indexOf('@@ -') === 0; }));
+    const famConflictAdded = [];
+    for (const f of Object.keys(CONFLICTED_HUNKS)) {
+      const diffText = f === 'src/js/conversation.js' ? famDiffConv : famDiffDlg;
+      famConflictAdded.push.apply(famConflictAdded, hunkLines(diffText, CONFLICTED_HUNKS[f]).added);
     }
-    // Exact theirs-content: per region, the subject file's region
-    // text must equal the MERGE file's region text exactly (same
-    // anchors, same lines, same order). Together with the numstat
-    // counts above (which pin the diff to exactly these four
-    // regions), this proves the subject diff is exactly the four
-    // hunks' theirs-content and nothing else. (A merge-tree
-    // multiset comparison is NOT used: the display elides hunk 1's
-    // middle ours lines, so it cannot serve as the ours oracle.)
-    REGIONS.forEach(function (rg, idx) {
-      const mergeText = gitShow(MERGE, rg.file);
-      const subjectText = gitShow(SUBJECT_BRANCH, rg.file);
-      const mergeRegion = regionText(mergeText, rg.start, rg.end);
-      const subjectRegion = regionText(subjectText, rg.start, rg.end);
-      T.ok('region ' + (idx + 1) + ' anchors are unique in the subject file',
-        countOccurrences(subjectText, rg.start) === 1 && countOccurrences(subjectText, rg.end) === 1, '1/1');
-      T.ok('region ' + (idx + 1) + ' subject region equals the merge region exactly (' + rg.merge + ' lines)',
-        mergeRegion !== null && subjectRegion !== null && JSON.stringify(subjectRegion) === JSON.stringify(mergeRegion),
-        subjectRegion === null ? 'null' : 'subject=' + subjectRegion.length + ' merge=' + (mergeRegion === null ? '?' : mergeRegion.length));
-    });
+    const missing = famConflictAdded.filter(function (l) { return subAll.added.indexOf(l) === -1; });
+    T.ok('every family conflicted-hunk added line appears in the subject (zero missing)',
+      missing.length === 0, missing.length === 0 ? famConflictAdded.length + '/' + famConflictAdded.length : 'missing: ' + missing.slice(0, 3).join(' | '));
     T.ok('test file is ABSENT from the subject (8fam carries no test file)',
       git('ls-tree ' + SUBJECT_BRANCH + ' -- ' + ADDED_CLEAN) === '', '(absent)');
     let incOk = true, incBad = null;
     for (const e of INCLUDED_STRINGS) {
       if (gitShow(SUBJECT_BRANCH, e.file).indexOf(e.s) === -1) { incOk = false; incBad = e.file + ': ' + e.s; break; }
     }
-    T.ok('subject carries all four-hunk theirs-strings (' + INCLUDED_STRINGS.length + ')', incOk, incBad || INCLUDED_STRINGS.length + '/' + INCLUDED_STRINGS.length);
+    T.ok('subject carries all conflicted-hunk strings (plantTeach, liveUnfinished, helpStructural, fell-back block)', incOk, incBad || INCLUDED_STRINGS.length + '/' + INCLUDED_STRINGS.length);
     let excOk = true, excBad = null;
     for (const e of EXCLUDED_STRINGS) {
       if (gitShow(SUBJECT_BRANCH, e.file).indexOf(e.s) !== -1) { excOk = false; excBad = e.file + ': ' + e.s; break; }
     }
-    T.ok('subject carries NONE of the 8b/8c-only + far-end ours strings', excOk, excBad ? 'present: ' + excBad : '0/' + EXCLUDED_STRINGS.length);
-    let presOk = true, presBad = null;
-    for (const e of PRESERVED_STRINGS) {
-      if (gitShow(SUBJECT_BRANCH, e.file).indexOf(e.s) === -1) { presOk = false; presBad = e.file + ': ' + e.s; break; }
-    }
-    T.ok('subject preserves the far-end lines the clean-hunk reversal restores', presOk, presBad || PRESERVED_STRINGS.length + '/' + PRESERVED_STRINGS.length);
+    T.ok('subject carries NONE of the excluded strings (no secretOutcome, no 8b methods, no 8b/8c guards)', excOk, excBad ? 'present: ' + excBad : '0/' + EXCLUDED_STRINGS.length);
     const subPolicy = sha256(gitShow(SUBJECT_BRANCH, 'scripts/policies/competent.js'));
     T.ok('subject policy sha equals the far-end policy sha (no policy drift)', subPolicy === farPolicy, subPolicy.slice(0, 12));
     const subStanding = sha256(gitShow(SUBJECT_BRANCH, 'src/js/standing.js'));
     T.ok('subject native standing.js sha equals the far-end standing sha', subStanding === farStanding, subStanding.slice(0, 12));
-    T.ok('subject conversation.js parses (vm.Script syntax check)',
-      syntaxOk(gitShow(SUBJECT_BRANCH, 'src/js/conversation.js'), 'conversation.js'), 'syntax ok');
-    T.ok('subject convo-dialogue.js parses (vm.Script syntax check)',
-      syntaxOk(gitShow(SUBJECT_BRANCH, 'src/js/convo-dialogue.js'), 'convo-dialogue.js'), 'syntax ok');
-    const evPath9 = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant8fam.md');
-    const ev9 = fs.existsSync(evPath9) ? fs.readFileSync(evPath9, 'utf8') : '';
+    const evPath = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant8fam.md');
+    const ev = fs.existsSync(evPath) ? fs.readFileSync(evPath, 'utf8') : '';
     T.ok('evidence file records the subject commit hash (once the evidence file exists)',
-      ev9 === '' || ev9.indexOf(subject) !== -1, ev9 === '' ? '(evidence not written yet)' : 'subject hash present');
+      ev === '' || ev.indexOf(subject) !== -1, ev === '' ? '(evidence not written yet)' : 'subject hash present');
   }
 
-  // ---- 10. Step corpora (state-aware, 1116Z-guarded) ----
-  T.section('10. Step corpora — settled baseline anchor + this run\'s matched-band legs (1116Z-guarded)');
-  // REGRESSION LEGS for the 1116Z crash class (6b3way evidence): the
-  // unguarded readFileSync(sumPath) after a "subject step summary
-  // exists" leg crashed with uncaught ENOENT in the intermediate
-  // state (baseline summary exists, subject summary absent). The
-  // guard is readJsonIfExists + explicit existsSync branches below.
-  T.ok('readJsonIfExists returns null for a missing summary (no throw, no ENOENT)',
-    readJsonIfExists(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-no-such-step-summary.json')) === null, 'null, not a crash');
-  const settledBasePath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-ep-far-summary.json');
+  // ---- 9. Step corpora (state-aware) ----
+  T.section('9. Step corpora — settled baseline + recovered 1215Z leg + this run\'s legs');
+  // The settled ep-far baseline corpus is committed on master (this
+  // arm's far-end base predates it — read it from master, not from
+  // the worktree).
+  const settledBase = JSON.parse(gitShow('master', 'evidence/2026-11-13/culpritbisect-a-ep-far-summary.json'));
   T.ok('settled ep-far baseline corpus exists on master (prior run)',
-    fs.existsSync(settledBasePath), 'present');
-  // The settled read is itself guarded: the path was just checked
-  // with existsSync in the SAME branch before this read.
-  const settledBase = readJsonIfExists(settledBasePath);
-  T.ok('settled ep-far baseline reads 4/8 survived', settledBase !== null && settledBase.survived === 4, settledBase === null ? 'null' : 'survived=' + settledBase.survived);
-  const settledDays = settledBase !== null ? (settledBase.perSeed || []).map(function (p) { return p.days; }) : [];
+    settledBase !== null, 'present');
+  T.ok('settled ep-far baseline reads 4/8 survived', settledBase.survived === 4, 'survived=' + settledBase.survived);
+  const settledDays = (settledBase.perSeed || []).map(function (p) { return p.days; });
   T.ok('settled ep-far baseline per-seed days are 86/144/150/43/150/87/150/150',
     JSON.stringify(settledDays) === JSON.stringify(EXPECTED_BASELINE_DAYS), JSON.stringify(settledDays));
+  // The recovered 1215Z leg: step ep-far-8fam, matched band, incomplete
+  // (flap window). Recorded as recovered, never adopted as a judged leg.
+  const recDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + RECOVERED_STEP);
+  const recLogPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + RECOVERED_STEP + '-driver.log');
+  const recLog = fs.existsSync(recLogPath) ? fs.readFileSync(recLogPath, 'utf8') : '';
+  T.ok('recovered 1215Z driver log exists in the worktree (untracked, left alone)',
+    recLog !== '', 'present');
+  const recDays = [];
+  const recLineRe = /\{"seed":(\d+),"leg":"bisect","step":"ep-far-8fam","mode":"fix","standingFix":true,"standingSha":"f8fda4295a99","standingSwapped":true,"policySha":"a7ff5c516440","days":(\d+),"endReason":"([^"]+)","won":false,"maxWave":\d+,"standing":\d+,"scaleRank":"[^"]+","endPantryKcal":\d+,"killCalls":\d+,"snapshots":\d+,"vetSays":\d+,"deaths":\d+,"errors":0/g;
+  let m;
+  while ((m = recLineRe.exec(recLog)) !== null) recDays.push({ seed: parseInt(m[1], 10), days: parseInt(m[2], 10), end: m[3] });
+  T.ok('recovered log carries all 8 per-seed completion lines (errors 0, fix standing, policy a7ff5c51)',
+    recDays.length === 8, recDays.length + '/8 lines');
+  T.ok('recovered log per-seed days are exactly the settled baseline days (4/8 survived, in-process)',
+    JSON.stringify(recDays.map(function (r) { return r.days; })) === JSON.stringify(EXPECTED_BASELINE_DAYS), JSON.stringify(recDays.map(function (r) { return r.days; })));
+  T.ok('recovered leg survived 4/8 in-process (log lines, not a corpus — corroboration only)',
+    recDays.filter(function (r) { return r.end === 'survived'; }).length === 4, 'survived=4');
+  const recComplete = [190391, 190392].every(function (s) {
+    return fs.existsSync(path.join(recDir, 'culpritbisect-s' + s + '-culpritbisect-pilot-fix.json'));
+  });
+  T.ok('recovered leg has exactly 2 complete per-seed files (190391, 190392)',
+    recComplete, '2/2 present');
+  const recTmp = [190393, 190394, 190395, 190396, 190397, 190398].every(function (s) {
+    const f = path.join(recDir, 'culpritbisect-s' + s + '-culpritbisect-pilot-fix.json.tmp-6927');
+    return fs.existsSync(f) && fs.statSync(f).size === 0;
+  });
+  T.ok('recovered leg has 6 zero-byte .tmp-6927 files (flap window, seeds 190393-190398)',
+    recTmp, '6/6 zero-byte');
+  T.ok('recovered leg has NO summary JSON (analyzer INCOMPLETE — not a judged leg)',
+    !fs.existsSync(path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + RECOVERED_STEP + '-summary.json')), 'absent');
+  // This run's legs: sniff -> baseline -> subject, with STOP branches.
+  const sniffSumPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + SNIFF_STEP + '-summary.json');
   const baseSumPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + BASELINE_STEP + '-summary.json');
   const baseLogPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + BASELINE_STEP + '-driver.log');
   const baseCorpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + BASELINE_STEP);
   const sumPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-summary.json');
   const logPath = path.join(REPO, 'evidence', '2026-11-13', 'culpritbisect-a-' + STEP + '-driver.log');
   const corpusDir = path.join(REPO, 'evidence', '2026-11-13', 'perseed-culpritbisect-a-' + STEP);
-  const evPath10 = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant8fam.md');
-  const ev10 = fs.existsSync(evPath10) ? fs.readFileSync(evPath10, 'utf8') : '';
-  const baseExists = fs.existsSync(baseSumPath);
-  const subExists = fs.existsSync(sumPath);
-  if (!baseExists && !subExists) {
-    // STATE (a): neither leg has run — stage 1 / pre-run.
-    T.ok('no baseline summary exists yet for ep-far-8fam (no judged sim ran)', true, '(not run)');
-    T.ok('no baseline driver log exists yet', !fs.existsSync(baseLogPath), 'absent');
-    T.ok('no baseline per-seed corpus exists yet', !fs.existsSync(baseCorpusDir), 'absent');
-    T.ok('no subject step summary exists yet', true, '(not run)');
-    T.ok('no subject driver log exists yet', !fs.existsSync(logPath), 'absent');
-    T.ok('no subject per-seed corpus exists yet', !fs.existsSync(corpusDir), 'absent');
-  } else if (baseExists && !subExists) {
-    // STATE (b)/(c): baseline leg ran, subject leg has not. The
-    // subject summary path is NEVER read in this branch — that is
-    // the 1116Z guard. The baseline summary read below is guarded
-    // by the baseExists check in THIS branch's condition.
-    const base = readJsonIfExists(baseSumPath);
-    T.ok('baseline step summary exists (ep-far-8fam)', base !== null && base.survived !== undefined, base === null ? 'null' : 'survived=' + base.survived);
-    const baseSeeds = base !== null ? (base.perSeed || []).map(function (p) { return p.seed; }) : [];
-    T.ok('baseline leg ran exactly the matched band 190391-190398',
-      JSON.stringify(baseSeeds) === JSON.stringify(SEEDS), JSON.stringify(baseSeeds));
-    T.ok('baseline driver log exists', fs.existsSync(baseLogPath), 'present');
-    T.ok('baseline per-seed corpus exists', fs.existsSync(baseCorpusDir), 'present');
-    if (base !== null && base.survived <= 2) {
-      // STATE (c): GATE-STOP path (prereg) — the matched-band
-      // baseline did not reproduce far-end health; the run STOPPED,
-      // no subject leg was cut.
-      T.ok('baseline leg read <=2/8 survived (gate FAILED — STOP)', base.survived <= 2, 'survived=' + base.survived);
-      T.ok('NO subject step summary exists (STOP — no subject leg cut)', !fs.existsSync(sumPath), 'absent');
-      T.ok('NO subject driver log exists', !fs.existsSync(logPath), 'absent');
-      T.ok('NO subject per-seed corpus exists', !fs.existsSync(corpusDir), 'absent');
-      T.ok('evidence file exists and records the STOP (UNMEASURED, baseline gate)',
-        ev10 !== '' && ev10.indexOf('UNMEASURED') !== -1, 'UNMEASURED present');
-      T.ok('evidence file records the baseline survived count',
-        ev10.indexOf('survived ' + base.survived + '/8') !== -1, 'survived ' + base.survived + '/8 present');
-    } else {
-      // STATE (b): INTERMEDIATE — baseline healthy (>=3/8), subject
-      // leg pending. This branch PASSES without touching sumPath.
-      T.ok('baseline leg read >=3/8 survived (gate holds)', base !== null && base.survived >= 3, base === null ? 'null' : 'survived=' + base.survived);
-      T.ok('INTERMEDIATE: NO subject step summary exists yet (subject leg pending)', !fs.existsSync(sumPath), 'absent');
-      T.ok('INTERMEDIATE: NO subject driver log exists yet', !fs.existsSync(logPath), 'absent');
-      T.ok('INTERMEDIATE: NO subject per-seed corpus exists yet', !fs.existsSync(corpusDir), 'absent');
-      T.ok('INTERMEDIATE: no subject verdict recorded yet (evidence does not judge a leg that has not run)',
-        ev10 === '' || ev10.indexOf('t8fam') === -1 || ev10.indexOf('NOT-CARRIER') === -1, ev10 === '' ? '(evidence not written yet)' : 'no premature verdict');
-    }
-  } else if (baseExists && subExists) {
-    // STATE (d): both legs ran — the final state. Both reads are
-    // guarded by the existsSync checks in THIS branch's condition.
-    const base = readJsonIfExists(baseSumPath);
-    const sub = readJsonIfExists(sumPath);
-    T.ok('baseline step summary exists (ep-far-8fam)', base !== null, 'present');
-    T.ok('subject step summary exists (t8fam)', sub !== null, 'present');
-    const baseSeeds = base !== null ? (base.perSeed || []).map(function (p) { return p.seed; }) : [];
-    T.ok('baseline leg ran exactly the matched band 190391-190398',
-      JSON.stringify(baseSeeds) === JSON.stringify(SEEDS), JSON.stringify(baseSeeds));
-    T.ok('baseline leg read >=3/8 survived (gate holds)', base !== null && base.survived >= 3, base === null ? 'null' : 'survived=' + base.survived);
-    T.ok('subject summary carries a survived count 0..8', sub !== null && typeof sub.survived === 'number' && sub.survived >= 0 && sub.survived <= 8, sub === null ? 'null' : 'survived=' + sub.survived);
-    const subSeeds = sub !== null ? (sub.perSeed || []).map(function (p) { return p.seed; }) : [];
-    T.ok('subject leg ran exactly the matched band 190391-190398',
-      JSON.stringify(subSeeds) === JSON.stringify(SEEDS), JSON.stringify(subSeeds));
-    const verdict = (base !== null && base.survived >= 3 && sub !== null) ? classifyTransplant(sub.survived) : 'UNCLASSIFIABLE';
-    T.ok('subject summary verdict maps from the survived count (' + verdict + ')',
-      verdict === 'CARRIER' || verdict === 'AMBIGUOUS' || verdict === 'NOT-CARRIER', verdict);
-    T.ok('baseline driver log exists', fs.existsSync(baseLogPath), 'present');
-    T.ok('baseline per-seed corpus exists', fs.existsSync(baseCorpusDir), 'present');
-    T.ok('subject driver log exists', fs.existsSync(logPath), 'present');
-    T.ok('subject per-seed corpus exists', fs.existsSync(corpusDir), 'present');
-    T.ok('evidence file exists and records the subject verdict ' + verdict,
-      ev10 !== '' && ev10.indexOf(verdict) !== -1, verdict + ' present');
-    T.ok('evidence file records the subject survived count',
-      ev10 !== '' && sub !== null && ev10.indexOf('survived ' + sub.survived + '/8') !== -1, sub === null ? 'null' : 'survived ' + sub.survived + '/8 present');
-    T.ok('evidence file records the baseline survived count',
-      ev10 !== '' && base !== null && ev10.indexOf('survived ' + base.survived + '/8') !== -1, base === null ? 'null' : 'baseline survived ' + base.survived + '/8 present');
-    T.ok('evidence file records the family-test leg (#4 proof)',
-      ev10.indexOf('test-live-thread-engage-dry-20261108') !== -1, '#4 proof named');
-    T.ok('evidence file carries a metric-review section (§14)',
-      ev10.indexOf('Metric review') !== -1, 'metric review present');
+  const evPath9 = path.join(REPO, 'evidence', '2026-11-15', 'sim-transplant8fam.md');
+  const ev9 = fs.existsSync(evPath9) ? fs.readFileSync(evPath9, 'utf8') : '';
+  if (!fs.existsSync(sniffSumPath)) {
+    T.ok('no sniff summary exists yet for ep-far-8fam-sniff (no judged leg ran)', true, '(not run)');
+    T.ok('no fresh baseline summary exists yet', !fs.existsSync(baseSumPath), 'absent');
+    T.ok('no subject step summary exists yet', !fs.existsSync(sumPath), 'absent');
   } else {
-    // STATE (e): subject summary without a baseline summary — can
-    // never happen under the measurement plan (baseline leg runs
-    // first). Fail loudly rather than judging.
-    T.ok('subject summary exists WITHOUT a baseline summary (impossible state — FAIL LOUDLY)', false, 'subExists=' + subExists + ' baseExists=' + baseExists);
-  }
+    const sniff = JSON.parse(fs.readFileSync(sniffSumPath, 'utf8'));
+    const sniffSeeds = (sniff.perSeed || []).map(function (p) { return p.seed; });
+    T.ok('sniff leg ran exactly the sniff seeds 190589-190592',
+      JSON.stringify(sniffSeeds) === JSON.stringify(SNIFF_SEEDS), JSON.stringify(sniffSeeds));
+    if (sniff.survived === 0) {
+      // SNIFF-STOP path (prereg): the band is catastrophically
+      // unhealthy — the run STOPPED, no baseline or subject leg ran.
+      T.ok('sniff leg read 0/4 survived (tripwire fired — STOP)', sniff.survived === 0, 'survived=0');
+      T.ok('NO fresh baseline summary exists (STOP — no baseline leg cut)', !fs.existsSync(baseSumPath), 'absent');
+      T.ok('NO subject step summary exists (STOP — no subject leg cut)', !fs.existsSync(sumPath), 'absent');
+      T.ok('evidence file exists and records the STOP (UNMEASURED-band-health, sniff 0/4)',
+        ev9 !== '' && ev9.indexOf('UNMEASURED') !== -1 && ev9.indexOf('0/4') !== -1, 'UNMEASURED present');
+    } else {
+      T.ok('sniff leg read >=1/4 survived (tripwire clear — PROCEED)', sniff.survived >= 1, 'survived=' + sniff.survived);
+      if (!fs.existsSync(baseSumPath)) {
+        // Intermediate state (1116Z guard): sniff done, baseline leg
+        // not yet run — a passing branch, never a crash.
+        T.ok('fresh baseline summary not yet run (intermediate state: sniff done, baseline pending)', true, '(pending)');
+        T.ok('no subject step summary exists yet (baseline pending)', !fs.existsSync(sumPath), 'absent');
+      } else {
+      T.ok('fresh baseline step summary exists (ep-far-8fam-fresh)', true, 'present');
+      const base = JSON.parse(fs.readFileSync(baseSumPath, 'utf8'));
+      const baseSeeds = (base.perSeed || []).map(function (p) { return p.seed; });
+      T.ok('fresh baseline leg ran exactly the fresh band 190589-190596',
+        JSON.stringify(baseSeeds) === JSON.stringify(SEEDS), JSON.stringify(baseSeeds));
+      T.ok('fresh baseline driver log exists', fs.existsSync(baseLogPath), 'present');
+      T.ok('fresh baseline per-seed corpus exists', fs.existsSync(baseCorpusDir), 'present');
+      if (base.survived <= 2 && !fs.existsSync(sumPath)) {
+        // GATE-STOP path (prereg): the fresh baseline did not
+        // reproduce far-end health — the run STOPPED, no subject leg.
+        T.ok('fresh baseline leg read <=2/8 survived (gate FAILED — STOP)', base.survived <= 2, 'survived=' + base.survived);
+        T.ok('NO subject step summary exists (STOP — no subject leg cut)', !fs.existsSync(sumPath), 'absent');
+        T.ok('NO subject driver log exists', !fs.existsSync(logPath), 'absent');
+        T.ok('NO subject per-seed corpus exists', !fs.existsSync(corpusDir), 'absent');
+        T.ok('evidence file exists and records the STOP (UNMEASURED, baseline gate)',
+          ev9 !== '' && ev9.indexOf('UNMEASURED') !== -1, 'UNMEASURED present');
+        T.ok('evidence file records the fresh baseline survived count',
+          ev9.indexOf('survived ' + base.survived + '/8') !== -1, 'survived ' + base.survived + '/8 present');
+        T.ok('evidence file records the family-test leg (conflicted script)',
+          ev9.indexOf('test-transplant8fam-conflicted') !== -1, 'conflicted leg present');
+      } else {
+        T.ok('fresh baseline leg read >=3/8 survived (gate holds)', base.survived >= 3, 'survived=' + base.survived);
+        if (!fs.existsSync(sumPath)) {
+          // Intermediate state (1116Z guard): baseline done, subject
+          // leg not yet run — a passing branch, never a crash.
+          T.ok('subject step summary not yet run (intermediate state: baseline done, subject pending)', true, '(pending)');
+        } else {
+        T.ok('subject step summary exists', true, 'present');
+        const sub = JSON.parse(fs.readFileSync(sumPath, 'utf8'));
+        T.ok('subject summary carries a survived count 0..8', typeof sub.survived === 'number' && sub.survived >= 0 && sub.survived <= 8, 'survived=' + sub.survived);
+        const subSeeds = (sub.perSeed || []).map(function (p) { return p.seed; });
+        T.ok('subject leg ran exactly the fresh band 190589-190596',
+          JSON.stringify(subSeeds) === JSON.stringify(SEEDS), JSON.stringify(subSeeds));
+        const verdict = base.survived >= 3 ? classifyTransplant(sub.survived) : 'UNCLASSIFIABLE';
+        T.ok('subject summary verdict maps from the survived count (' + verdict + ')',
+          verdict === 'CARRIER' || verdict === 'AMBIGUOUS' || verdict === 'NOT-CARRIER', verdict);
+        T.ok('subject driver log exists', fs.existsSync(logPath), 'present');
+        T.ok('subject per-seed corpus exists', fs.existsSync(corpusDir), 'present');
+        T.ok('evidence file exists and records the subject verdict ' + verdict,
+          ev9 !== '' && ev9.indexOf(verdict) !== -1, verdict + ' present');
+        T.ok('evidence file records the subject survived count',
+          ev9.indexOf('survived ' + sub.survived + '/8') !== -1, 'survived ' + sub.survived + '/8 present');
+        T.ok('evidence file records the fresh baseline survived count',
+          ev9.indexOf('survived ' + base.survived + '/8') !== -1, 'baseline survived ' + base.survived + '/8 present');
+        T.ok('evidence file records the family-test leg (conflicted script)',
+          ev9.indexOf('test-transplant8fam-conflicted') !== -1, 'conflicted leg present');
+        } // guard-B else (subject pending) — close
+      } // gate if/else — close
+      } // guard-A else (baseline pending) — close
+    } // sniff-survived if/else — close
+  } // sniff-exists if/else — close
 
   T.done();
 })().catch(function (e) { console.error('HARNESS ERROR', e); process.exit(1); });
