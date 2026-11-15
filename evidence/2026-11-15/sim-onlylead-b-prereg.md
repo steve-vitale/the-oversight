@@ -350,3 +350,201 @@ run's numbers only.
 To be written after the run: did G1/G2 measure the question, or
 did the metric prove wrong (bad proxy, taxonomy artifact, blind
 channel)?
+
+---
+
+# STAGE 2 ADDENDUM — BUILD: the covenant road (DIAG-POLICY-CANDIDATE)
+
+Written 2026-11-15, AFTER the Stage 1 DIAG ran and BEFORE any
+Stage 2 sweep. This addendum freezes the Stage 2 lever and its GO
+bar; nothing below is tuned after the pilot runs.
+
+## DIAG verdict (Stage 1, band 100401–100408, 150d, 16 configs)
+
+- G1 GO: 0 instrument errors both legs; every staged beat
+  classified by shape with sat/unsat (5 lead beats armed, all
+  sat; 5 staged-but-unanswered baseline); UNCLASSIFIED 0 across
+  all 40 shape-seed cells per leg (bar ≤1 per 8 seeds).
+- G2 — DIAG-POLICY-CANDIDATE. Per shape, armed leg (baseline
+  identical — the road state is the same until a beat stages):
+  - lead: staged 5/8; blocked 3/8 (subs-short:2 ×2, rung-gate ×1
+    — 100407's polity stood 19 days, d42–60, and the village
+    died ON the rung day itself, d61).
+  - conquest: `conquest-no-raids` 8/8 — 0 conquered subs ever;
+    the policy never raids.
+  - belong: split — `belong-no-sub-link` 5/8; good-standing
+    failures 3/8 (`belong-arrears:20000`, `belong-arrears:5000`,
+    `belong-trust-short:40`). Belong never qualified on 8/8, but
+    no single blocker reaches the ≥6/8 reproducibility bar — the
+    split itself is the diagnosis (see evidence).
+  - covenant: `covenant-no-peer-links` 8/8 — 0 covenant peer
+    links ever formed; the policy never proposes covenant, and
+    the engine never proposes either (0 proposeCovenant /
+    proposeTrade / raidVillage calls by EITHER caller band-wide;
+    0 _formPeerLink events).
+  - trade: `trade-no-peer-links` 8/8 — same.
+- The G2 ≥6/8 same-blocker bar is met for conquest, covenant and
+  trade (8/8 each) and missed for belong (5/8 top blocker). The
+  dominant diagnosis is POLICY-side: the policy walks only the
+  lead road, and the game would stage the other shapes if the
+  policy walked them. Foreign polities DO reach 4–5 villages on
+  6/8 seeds, so the BELONG precondition is not the blocker — the
+  blocker is Haven never being a subordinate in good standing.
+- The covenant road is chosen as the minimal Stage 2 build:
+  proposeCovenant / _formPeerLink / tendLink-on-peers /
+  answerNationalChoice('pact') are all wired in the engine
+  (hierarchy.js `_proposePeer` ≥55 accept / 35–54 counter /
+  <35 decline; `_judgePeer` base 38 + rep/2 + opinion/2 +
+  allied 15 + equals 10 + R()*20−10; `_formPeerLink` trust 30;
+  `tendLink` accepts peer links, 1,500 kcal → +8 trust weekly;
+  `answerCounter('accept')` forms a peer counter's link). No
+  game-side substrate is missing — the road is unwalked, not
+  unwired. Conquest is NOT chosen (raids carry real casualties
+  and a cost bar of their own — a bigger lever, not the minimal
+  one). Trade is the same shape as covenant with a different
+  answer; covenant goes first. Belong is NOT chosen (its blocker
+  splits, and its lever would be counter-farming, not a road).
+
+## The lever (frozen — do not tune mid-run)
+
+New policy `scripts/policies/competent-covenant-b.js`: the FROZEN
+competent base (`scripts/policies/competent.js`, unmodified) plus
+the covenant road, NOTHING else. It composes onto competent the
+way scaleclimb does — it does NOT compose onto scaleclimb (which
+would propose lead links and shadow the covenant road by
+priority).
+
+Daily, in order, after competent.daily:
+1. Answer a staged national beat FIRST (the answercourt answer
+   map, reused verbatim via `answerNationalBeat` from
+   competent-answercourt-b: lead feast / conquest mercy / belong
+   swear / covenant pact / trade sign; unknown shape never
+   answered; 'refuse'/'walk' never chosen; global beats NOT
+   answered). The covenant leg answers every staged beat so a
+   covenant beat, when it stages, is answered the next morning
+   with 'pact'.
+2. Answer a pending counter: answerCounter('accept') — a peer
+   counter forms the peer link (hierarchy.js answerCounter).
+3. Tend COVENANT links below the seasoned bar: weekly, for each
+   active covenant peer link with age < 30 days OR trust < 40,
+   when pantry > 20,000 kcal: tendLink(link.id) (1,500 kcal →
+   +8 trust). Seasoned links (30+ days AND trust 40+) are NOT
+   tended. Same gates as scaleclimb's lead tend.
+4. Propose COVENANT directly: once per day, from day 10, when no
+   counter/national beat is pending, pantry > 12,000 kcal, and
+   fewer than 3 covenant links stand — the best courtship-ready
+   KNOWN village (deterministic peer judge ≥ 45, opinion ≥ 10 —
+   the engine's own prerequisite, filtered here so the daily
+   propose is never spent on a refused knock — no RNG draw; the
+   engine then adds R()*20−10, so det ≥ 45 guarantees ≥ 35 after
+   the draw, the counter floor, never a cold decline). A declined
+   village is not re-proposed within 7 days. Cap: 3 covenant
+   links.
+   - detJudgePeer (no RNG): 38 + min(20, repStanding/2) +
+     opinion/2 + allied?15 + 10 (equals-at-the-table) — the
+     engine's `_judgePeer` minus its R()*20−10 draw.
+
+WHAT IT DOES NOT DO:
+- No proposeLink (no lead road — lead can never qualify, so it
+  can never shadow covenant by priority). No proposeTrade (trade
+  is the next road, not this arm). No raidVillage (conquest is
+  not this arm). No seat-taking. No banking step, no pack
+  changes, no tribute change. No defense-call / trade-call
+  answers (those exist only after national; not needed to stage
+  the beat). No global-beat answers. No src/js changes.
+- No accord answers: peer links never stage a pendingAccord
+  (`_formPeerLink` stages none — the accord is a `_formLink`
+  first-gesture), and no lead link can ever form on this leg, so
+  no accord can ever be pending. Stated so the absence is not
+  misread as an omission.
+
+BASELINE (the comparator): `scripts/policies/competent-scaleclimb-b.js`
+(the same baseline as the DIAG). The Stage 2 pilot RE-RUNS both
+legs fresh on the same band (per the 2026-11-15 stale-corpus
+finding — no judging against the committed Stage 1 control
+corpus, even though the tip's game code is unchanged).
+
+## Stage 2 primary metric + GO bars (binding, §14)
+
+- G1 INSTRUMENT VALIDITY — GO iff the driver captures a full
+  per-day link roll + shape-candidate roll on all 16 configs,
+  0 instrument errors, EVERY staged beat classified by shape
+  with sat/unsat, and UNCLASSIFIED ≤ 1 per 8 seeds on the
+  covenant leg. Any instrument error, unclassified shape beyond
+  the bar, or staged beat without a shape = NO-GO.
+- G2 THE LEVER — GO iff on the covenant leg, COVENANT BEATS
+  STAGED on ≥3/8 pilot seeds (baseline 0/8 — the DIAG's number
+  on this band; the bar is 3 because the road needs 3 seasoned
+  links plus the rung, and a single staging proves the road
+  opens while 3/8 shows it reproduces) AND every staged
+  covenant beat is answered 'pact' and sat (sat = the engine
+  returns true and sets nationalLive). A miss on either half =
+  NO-GO, never re-scored mid-run. Lead beats staged on the
+  covenant leg are reported (expectation: 0 — the leg proposes
+  no lead links); a lead staging would mean the isolation
+  failed and the pilot is re-examined, not re-scored.
+- G3 LEVER-ONLY — GO iff zero `src/js` changes in the branch
+  diff and the proof test (`scripts/test-covenant-b.js`) is
+  green (static det-judge + fake-Game propose/counter/tend +
+  game smoke + determinism legs).
+
+Cost bar (same as answercourt): starvation deaths pooled
+covenant ≤ baseline + 2 AND median survival covenant ≥ 0.8×
+baseline median. Guardrail (§14c): villager (non-scholar)
+combat deaths are a co-primary read on every seed — the
+evidence names any seed where covenant deaths exceed the before
+leg by >50%.
+
+## Stage 2 method (staged, §§9–12, 14–15)
+
+- STAGE 0 SMOKE (1 seed × 2 policies, 60d): does the covenant
+  policy load, propose, counter-answer, tend? Fix wiring, not
+  thresholds. (National cannot stage before ~day 62, so the 60d
+  smoke is NOT expected to stage a beat — the propose/counter/
+  tend path is proven by the fake-Game unit tests in the proof
+  test.)
+- STAGE 1 PILOT (8 seeds × 2 policies = 16 configs, 150d
+  death-aware, identical seeds, BOTH legs re-run fresh): the
+  judged run. Seeds (exact literals): 100401–100408 (the DIAG
+  band). Policies: competent-scaleclimb-b (baseline) vs
+  competent-covenant-b (covenant road), identical seeds.
+- CONFIRM (16 seeds × 2 policies) ONLY on a pilot GO, on the
+  fresh band 100421–100436 (verified clean in the Stage 1
+  prereg: 0 hits in preregs, filenames, scripts). A borderline
+  pilot is reported as-is; the coordinator decides. Do NOT spend
+  a confirm to rescue a NO-GO.
+- DRIVER: scripts/onlylead-driver-20261115.js (extended to accept
+  the covenant policy; same recorder, same shape-candidate roll).
+  Per-seed JSON to evidence/2026-11-15/perseed-covenant-b-control/
+  (baseline) and evidence/2026-11-15/perseed-covenant-b-on/
+  (covenant). Zero src/js.
+- ANALYZER: scripts/analyze-onlylead-b.js (unchanged — the
+  per-shape classification already covers covenant staging).
+  Writes evidence/2026-11-15/covenant-b-analysis.json.
+- BALANCED PANEL (§15): if the pilot is GO, a pseudo-panel
+  compare is built for the record (answercourt precedent — the
+  real balance-panel.js compare cannot judge a policy contrast);
+  the preregged G2 bar is the judge.
+- ENV: defaults, matching the DIAG legs — COUNTER_ANSWER unset,
+  COMPETENT_FLEE_REPAIR unset, ANSWERMAIL_DRIVE unset. No other
+  env.
+
+## Wall numbers (every run)
+
+National / table / wins, wave 4–5 unlocks, median survival —
+reported for both policies in the evidence file.
+
+## Evidence (Stage 2)
+
+- Amended prereg: this file (Stage 2 addendum above).
+- Policy: scripts/policies/competent-covenant-b.js (new).
+- Driver: scripts/onlylead-driver-20261115.js (extended: accepts
+  the covenant policy).
+- Proof: scripts/test-covenant-b.js (new; static + game).
+- Per-seed JSON: evidence/2026-11-15/perseed-covenant-b-control/
+  (8 files) and evidence/2026-11-15/perseed-covenant-b-on/
+  (8 files).
+- Analysis: evidence/2026-11-15/covenant-b-analysis.json.
+- Panel (pilot GO only): evidence/2026-11-15/covenant-panel.*
+- Evidence: evidence/2026-11-15/sim-onlylead-b.md (DIAG + Stage 2
+  verdict in one file).
