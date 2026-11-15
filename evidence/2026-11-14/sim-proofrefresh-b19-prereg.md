@@ -103,8 +103,25 @@
 ## Panel (to be filled after the run)
 
 - Command: `node scripts/balance-panel.js --out .proofrefresh-b19-panel --n 16 --days 150`
+- Single attempt, started 03:19:12Z, finished 03:59:58Z:
+  `Saved .proofrefresh-b19-panel; 64 cases, 0 cached jobs. PANEL_EXIT=0`.
+  ~41 min wall.
 - The `cases/` cache in `.proofrefresh-b19-panel/` is NOT committed
   (deleted at closeout; the retained .gz is the artifact).
+- `sourceHeadStart == sourceHeadEnd == 92a619524` (prereg/owed-check
+  commit, on base a4d0b2038).
+- Panel sha256
+  `8ea3a8bdcb8b72d6988a2fb7bf181623480eecca1f104f9c6241439fa5266e8e`.
+- Verification (read-only): the generated panel's `sources` vs the
+  branch-tip manifest: **0 keys differ**;
+  `validity.sourcesStable` true; 64 rows; neutrality 4/4 match, warnings
+  0, tuple identical to the b18 panel AND the b17 panel (regeneration
+  moved no verdict). Observer/contract digests match the tip and the b18
+  panel. 0 rows with warnings/observer/gear problems (read on the OUTER
+  panel rows).
+- Staleness on the tip (measured, `B.manifest` vs panel `sources`):
+  **b19-new 0 stale**; **b18 7 stale** (3 new policy files + 4 changed
+  keys); **b17 8 stale**.
 - Copy the regenerated panel to
   `evidence/2026-11-14/neutral-proofrefresh-b19.json.gz` (NEW file — do
   NOT overwrite b18/b17/b13/b12), then `node
