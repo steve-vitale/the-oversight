@@ -118,16 +118,42 @@
 - **Verdict of the owed-check: OWED.** Panels at b19 and earlier are
   superseded; the re-point target is the NEW panel only.
 
-## Panel (to be filled after the run)
+## Panel (filled after the run)
 
 - Command: `node scripts/balance-panel.js --out .proofrefresh-b20-panel --n 16 --days 150`
-- (to be filled: single attempt, start/finish times, 64 cases, 0
-  cached jobs, exit 0, wall time; sourceHeadStart == sourceHeadEnd;
-  panel sha256; verification 0 keys differ, sourcesStable true,
-  neutrality 4/4, warnings 0, tuple identical to b19 AND b18;
-  0/64 rows differ vs b19; staleness counts.)
+- Single attempt, started 06:44:04Z, finished 07:13:08Z:
+  `Saved .proofrefresh-b20-panel; 64 cases, 0 cached jobs. PANEL_EXIT=0`.
+  ~29 min wall (faster than round 19's 41 min — box quieter).
 - The `cases/` cache in `.proofrefresh-b20-panel/` is NOT committed
   (deleted at closeout; the retained .gz is the artifact).
+- `sourceHeadStart == sourceHeadEnd == 72c4dda8629a05210ed2d8124f431708f3a55f8b`
+  (prereg/owed-check commit, on base b9b226430).
+- Panel sha256
+  `d58537cde306ebc9720adccc707a57fda9828fd1a0d9bb594db64164bcce5a4b`.
+- Verification (read-only): the generated panel's `sources` vs the
+  branch-tip manifest: **0 keys differ**;
+  `validity.sourcesStable` true; 64 rows; neutrality 4/4 match, warnings
+  0, tuple identical to the b19 panel AND the b18 panel (regeneration
+  moved no NEUTRALITY verdict). Observer/contract digests match the tip
+  and the b19 panel. 0 rows with warnings/observer/gear problems (read on
+  the OUTER panel rows).
+- ROW MOVEMENT (brief expectation NOT met — see the evidence file):
+  headline-field rows differ **64/64** vs b19 (and vs b18; b18/b19 rows
+  were identical to each other). Per-field: days 60/64, waveReach 21/64,
+  maxRank 13/64, vests 16/64, national 6/64, table 6/64, maxArc 6/64,
+  won 2/64, entered 2/64, endReason 8/64, vestsVillager 7/64.
+  Aggregates b20 vs b19: won 14 vs 16, entered 14 vs 16, national 13
+  vs 11, table 54 vs 56, waveReach>=5 13 vs 13, waveReach>=4 62 vs 63,
+  vests 22 vs 23, vestsVillager 44 vs 39, median days 90 vs 90,
+  survived 4 vs 2, village-lost 46 vs 46. Determinism proven on this
+  tip (capable/seed 7 run twice → byte-identical rows; the single-case
+  re-run row == the full-panel row), so the movement is the
+  funeral-mend game-code change shifting behavior and RNG streams,
+  not panel noise. The neutrality tuple — the proof's binding check —
+  reproduces exactly.
+- Staleness on the tip (measured, `B.manifest` vs panel `sources`):
+  **b20-new 0 stale**; **b19 6 stale** (the 6 differing keys);
+  **b18 10 stale**.
 - Copy the regenerated panel to
   `evidence/2026-11-15/neutral-proofrefresh-b20.json.gz` (NEW file — do
   NOT overwrite b19/b18/b13/b12), then `node
