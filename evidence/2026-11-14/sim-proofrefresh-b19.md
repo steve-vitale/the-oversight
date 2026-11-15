@@ -283,13 +283,35 @@ Final-tip verdict after the rebase onto 7b2192b76 — see Closeout.
 
 ## Commits (branch sim-proofrefresh-b19, base a4d0b2038 → rebased 7b2192b76)
 
-- 5fba70421 — prereg + proof test (round 19, base a4d0b2038, owed-check
-  pending)
-- 92a61952 — prereg owed-check (OWED — b18 stale by 3 new policy files +
-  4 keys)
-- [panel commit] — fresh real neutral panel (REGENERATED on a4d0b2038) +
-  proof re-point + evidence (GO 12/12 on the a4d0b2038 tip; see closeout
-  for the 7b2192b76 re-verification)
+- 9e37cacf5 (was 5fba70421) — prereg + proof test (round 19, base
+  a4d0b2038, owed-check pending)
+- 02bb5b9a8 (was 92a61952) — prereg owed-check (OWED — b18 stale by 3
+  new policy files + 4 keys)
+- 4bfde32cc (was e0a15a69) — fresh real neutral panel (REGENERATED on
+  a4d0b2038) + proof re-point + evidence (GO 12/12 on the a4d0b2038 tip;
+  see closeout for the 7b2192b76 re-verification)
 - [closeout commit] — closeout record (this section)
 
-## Closeout — (to be filled after the rebase onto 7b2192b76)
+## Closeout — REBASED, GO ON FINAL TIP
+
+- Master moved during the run to 7b2192b76 (sim-transplant8c-a +
+  sim-succpolity-g1join-b, evidence + test/analyzer scripts, exactly
+  ZERO manifest files). Branch rebased onto the explicit SHA 7b2192b76
+  (3 picks, clean, no stop-at-pick quirk this time; final log shows each
+  commit exactly once, tip 4bfde32cc).
+- Leg (a) re-verified on the rebased tip: **exit 0, 9 passed**. Panel
+  sources vs the new-tip manifest: **0 keys differ** (529/529) — the
+  master move touched no manifest file, so the regenerated panel stays
+  current on the final tip. Full b19 proof test re-run on the rebased
+  tip: **12/12**.
+- **Verdict on the final tip (7b2192b76): GO.** All six prereg legs pass
+  on the final tip; no re-scoring, no version-stamp-only hazard (the
+  910bff7f4 bump predates the panel — the panel was generated after it,
+  so build.js/index.html are current in the panel).
+- Merge: `git merge --ff-only sim-proofrefresh-b19` in the main tree
+  (no pipe, strict && chain; ancestry verified with
+  `git merge-base --is-ancestor` after). Then release:
+  `worktree-release.sh sim-proofrefresh-b19 merged`, worktree removed,
+  branch deleted, `worktree-reap.sh`, main tree verified clean. No push,
+  no bump, no live verification — the ship loop owns deploys. "Merged
+  locally, pending ship."
