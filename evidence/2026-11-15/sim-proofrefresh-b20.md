@@ -371,16 +371,35 @@ moving, not a proof failure.
 
 ## Commits (branch sim-proofrefresh-b20, base b9b226430 → rebased 3904f2b8f)
 
-- b9c840f8e — prereg + proof test (round 20, base b9b226430, owed-check pending)
-- 72c4dda86 — prereg owed-check (OWED — b19 stale by 6 keys; cache-flags 0/4 is a load artifact, probe 35.4s wall vs 30s cap)
-- 78caee21d — fresh real neutral panel (REGENERATED on b9b226430) + proof re-point + prereg panel section (GO 12/12 on the b9b226430 tip; see closeout for the 3904f2b8f re-verification)
+- 79b2621da (was b9c840f8e) — prereg + proof test (round 20, base b9b226430, owed-check pending)
+- b851c3bba (was 72c4dda86) — prereg owed-check (OWED — b19 stale by 6 keys; cache-flags 0/4 is a load artifact, probe 35.4s wall vs 30s cap)
+- 2c4bf282f (was 78caee21d) — fresh real neutral panel (REGENERATED on b9b226430) + proof re-point + prereg panel section (GO 12/12 on the b9b226430 tip; see closeout for the 3904f2b8f re-verification)
+- a7f870e1e (was 82a7a1839) — evidence (GO 12/12 on panel tip; row movement 64/64 verified as funeral-mend effect, determinism proven)
 - [closeout commit] — closeout record (this section)
 
-## Closeout — (to be filled after the rebase onto 3904f2b8f)
+## Closeout — REBASED, GO ON FINAL TIP
 
-- (to be filled: rebase picks, leg (a) + full 12-leg test re-verification
-  on the rebased tip, panel sources vs new-tip manifest 0 keys differ,
-  cases cache deleted, worktree clean.)
+- Master moved during the run to 3904f2b8f (Loop A ove48-freshband-a +
+  ove48-drawparity-a + journey-landing r135 gate adjudication,
+  evidence + driver/analyzer/test scripts, exactly ZERO manifest
+  files). Branch rebased onto the explicit SHA 3904f2b8f (4 picks,
+  clean, no stop-at-pick quirk; final log shows each commit exactly
+  once, tip a7f870e1e).
+- Leg (a) re-verified on the rebased tip: **exit 0, 9 passed**. Panel
+  sources vs the new-tip manifest: **0 keys differ** (529/529) — the
+  master move touched no manifest file, so the regenerated panel stays
+  current on the final tip. Full b20 proof test re-run on the rebased
+  tip: **12/12** (incl. cache-flags 4/4 on the quiet box).
+- **Verdict on the final tip (3904f2b8f): GO.** All six prereg legs pass
+  on the final tip; no re-scoring, no version-stamp-only hazard (the
+  ship bump predates the panel — the panel was generated after it, so
+  build.js/index.html are current in the panel). The flagged brief
+  deviation stands: headline rows differ 64/64 vs b19, verified as the
+  funeral-mend game-code change (determinism proven; neutrality tuple
+  reproduces exactly).
+- Cases cache deleted at closeout (`.proofrefresh-b20-panel/` removed;
+  the retained .gz is the artifact). Worktree clean except committed
+  work; no uncommitted leftovers.
 - Merge: `git merge --ff-only sim-proofrefresh-b20` in the main tree
   (coordinator's step — no pipe, strict && chain; ancestry verified with
   `git merge-base --is-ancestor` after). Then release:
