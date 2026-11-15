@@ -205,13 +205,16 @@ is unmeasured — the gate stopped before any subject leg.
   expect this and recover the same way — or the step script needs a
   tracked-scratch guard (flagged for the coordinator; not fixed here,
   out of axis).
-- DOCUMENTED: safe-commit.sh index clobber struck 2× this run (prereg +
+- DOCUMENTED: safe-commit.sh index clobber struck 3× this run (prereg +
   proof commit df6866b04 — both files staged-deleted, worktree copies
   untracked; evidence commit c9a387f20 — all 11 files staged-deleted,
-  worktree copies untracked, proof script MM) — repaired each time with
-  the documented `ls-tree -r HEAD -- <paths> | git update-index --add
-  --index-info` pipe; status empty + diff HEAD empty + hash-object ==
-  HEAD blob verified before continuing.
+  worktree copies untracked, proof script MM; correction commit b9bb18d56
+  — evidence file MM) — repaired each time with the documented
+  `ls-tree -r HEAD -- <paths> | git update-index --add --index-info`
+  pipe; status empty + diff HEAD empty + hash-object == HEAD blob
+  verified before continuing. (Count is as of this correction commit;
+  if the clobber strikes this commit too, the coordinator report carries
+  the 4th strike.)
 - DOCUMENTED: a service restart interrupted the first evidence-commit
   attempt mid-command (no commit landed; verified HEAD still df6866b04
   before retrying) — the retry committed cleanly as c9a387f20.
