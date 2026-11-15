@@ -1,0 +1,4907 @@
+{
+  "perSeed": {
+    "100601-competent-covenant-b": {
+      "seed": 100601,
+      "policy": "competent-covenant-b",
+      "days": 104,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 410,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 0,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 0,
+      "totalDeaths": 81,
+      "linksFormed": 3,
+      "linksSeasoned": 1,
+      "linksCounted": 0,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 1,
+      "tendPolicy": 4,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 0,
+      "polityBarDay": null,
+      "firstRegionalDay": 61,
+      "counterAnswers": 0,
+      "proposeAccepted": 2,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 40,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 6000,
+      "waveKills": {
+        "1": 25,
+        "2": 21,
+        "3": 8,
+        "4": 7
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 3,
+      "devotionChannels": 74,
+      "villagerCombatDeaths": 63,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 39,
+          "linkId": "link_mgpspj46399",
+          "other": "village_2",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 45,
+          "linkId": "link_mgpspj9h538",
+          "other": "village_1",
+          "via": "engine-direct",
+          "caller": "engine"
+        },
+        {
+          "day": 82,
+          "linkId": "link_mgpspkag451",
+          "other": "village_spl_29_78228",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpspj46399",
+          "other": "village_2",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 39,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 69,
+          "countedDay": null,
+          "trust40Day": 40,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 98,
+          "endAge": 64,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspj9h538",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 45,
+          "cls": "never-seasoned-trust<34",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 34,
+          "endAge": 58,
+          "endStatus": "active",
+          "maxTrust": 34
+        },
+        {
+          "id": "link_mgpspkag451",
+          "other": "village_spl_29_78228",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 82,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 18,
+          "endAge": 21,
+          "endStatus": "active",
+          "maxTrust": 31
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipDownSteps": [],
+      "verbs": {
+        "proposeCovenant:policy": {
+          "calls": 54,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "hostFeast:engine": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 4,
+          "dTrust": 24,
+          "crossings": 1,
+          "refused": 0,
+          "links": {
+            "link_mgpspj46399": 24
+          }
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 103
+    },
+    "100602-competent-covenant-b": {
+      "seed": 100602,
+      "policy": "competent-covenant-b",
+      "days": 120,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 325,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 0,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 0,
+      "totalDeaths": 104,
+      "linksFormed": 2,
+      "linksSeasoned": 0,
+      "linksCounted": 0,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 0,
+      "tendPolicy": 0,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 0,
+      "polityBarDay": null,
+      "firstRegionalDay": 60,
+      "counterAnswers": 0,
+      "proposeAccepted": 1,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 38,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 48,
+        "2": 33,
+        "3": 7,
+        "4": 6
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 0,
+      "devotionChannels": 81,
+      "villagerCombatDeaths": 95,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 38,
+          "linkId": "link_mgpspj6j159",
+          "other": "village_2",
+          "via": "engine-direct",
+          "caller": "engine"
+        },
+        {
+          "day": 100,
+          "linkId": "link_mgpspkrd178",
+          "other": "village_spl_26_6892",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpspj6j159",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 38,
+          "cls": "never-seasoned-trust<13",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 13,
+          "endAge": 82,
+          "endStatus": "active",
+          "maxTrust": 35
+        },
+        {
+          "id": "link_mgpspkrd178",
+          "other": "village_spl_26_6892",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 100,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": 105,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 55,
+          "endAge": 20,
+          "endStatus": "active",
+          "maxTrust": 55
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipDownSteps": [],
+      "verbs": {
+        "proposeCovenant:policy": {
+          "calls": 73,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 120
+    },
+    "100603-competent-covenant-b": {
+      "seed": 100603,
+      "policy": "competent-covenant-b",
+      "days": 170,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "standing": 1125,
+      "standingRaw": 1125,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 0,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 0,
+      "totalDeaths": 161,
+      "linksFormed": 1,
+      "linksSeasoned": 0,
+      "linksCounted": 0,
+      "linksBroke": 1,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 0,
+      "tendPolicy": 0,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 0,
+      "polityBarDay": null,
+      "firstRegionalDay": 53,
+      "counterAnswers": 0,
+      "proposeAccepted": 0,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 29,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 51,
+        "2": 35,
+        "3": 16,
+        "4": 14,
+        "5": 13
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 15,
+      "devotionChannels": 148,
+      "villagerCombatDeaths": 148,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 31,
+          "linkId": "link_mgpspiuj991",
+          "other": "village_3",
+          "via": "engine-direct",
+          "caller": "engine"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpspiuj991",
+          "other": "village_3",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 31,
+          "cls": "broke-succession",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 0,
+          "endAge": 139,
+          "endStatus": "broken",
+          "maxTrust": 30
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipDownSteps": [],
+      "verbs": {
+        "proposeCovenant:policy": {
+          "calls": 131,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "hostFeast:engine": {
+          "calls": 15,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "breakLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspiuj991": 0
+          }
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 170
+    },
+    "100604-competent-covenant-b": {
+      "seed": 100604,
+      "policy": "competent-covenant-b",
+      "days": 176,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 200,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 0,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 0,
+      "totalDeaths": 93,
+      "linksFormed": 4,
+      "linksSeasoned": 3,
+      "linksCounted": 0,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 3,
+      "tendPolicy": 6,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 1,
+      "polityBarDay": null,
+      "firstRegionalDay": 65,
+      "counterAnswers": 0,
+      "proposeAccepted": 3,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 123,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 21,
+      "tendsPaidKcal": 9000,
+      "waveKills": {
+        "1": 37,
+        "2": 29,
+        "3": 7
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 0,
+      "devotionChannels": 134,
+      "villagerCombatDeaths": 82,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 43,
+          "linkId": "link_mgpspil826",
+          "other": "village_0",
+          "via": "engine-direct",
+          "caller": "engine"
+        },
+        {
+          "day": 48,
+          "linkId": "link_mgpspip8375",
+          "other": "village_1",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 49,
+          "linkId": "link_mgpspiqy780",
+          "other": "village_2",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 128,
+          "linkId": "link_mgpspk2i662",
+          "other": "village_spl_29_75270",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpspil826",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 43,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 141,
+          "countedDay": null,
+          "trust40Day": 141,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 64,
+          "endAge": 132,
+          "endStatus": "active",
+          "maxTrust": 64
+        },
+        {
+          "id": "link_mgpspip8375",
+          "other": "village_1",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 48,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 78,
+          "countedDay": null,
+          "trust40Day": 53,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 76,
+          "endAge": 127,
+          "endStatus": "active",
+          "maxTrust": 81
+        },
+        {
+          "id": "link_mgpspiqy780",
+          "other": "village_2",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 49,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 79,
+          "countedDay": null,
+          "trust40Day": 50,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 77,
+          "endAge": 126,
+          "endStatus": "active",
+          "maxTrust": 85
+        },
+        {
+          "id": "link_mgpspk2i662",
+          "other": "village_spl_29_75270",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 128,
+          "cls": "never-seasoned-trust<17",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 17,
+          "endAge": 47,
+          "endStatus": "active",
+          "maxTrust": 30
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipDownSteps": [],
+      "verbs": {
+        "proposeCovenant:policy": {
+          "calls": 22,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 6,
+          "dTrust": 48,
+          "crossings": 1,
+          "refused": 0,
+          "links": {
+            "link_mgpspip8375": 24,
+            "link_mgpspiqy780": 24
+          }
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 175
+    },
+    "100605-competent-covenant-b": {
+      "seed": 100605,
+      "policy": "competent-covenant-b",
+      "days": 108,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 245,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 0,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 0,
+      "totalDeaths": 67,
+      "linksFormed": 3,
+      "linksSeasoned": 0,
+      "linksCounted": 0,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 0,
+      "tendPolicy": 0,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 0,
+      "polityBarDay": null,
+      "firstRegionalDay": 68,
+      "counterAnswers": 0,
+      "proposeAccepted": 2,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 33,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 28,
+        "2": 10,
+        "3": 6,
+        "4": 4
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 1,
+      "devotionChannels": 66,
+      "villagerCombatDeaths": 52,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 46,
+          "linkId": "link_mgpspj52465",
+          "other": "village_0",
+          "via": "engine-direct",
+          "caller": "engine"
+        },
+        {
+          "day": 75,
+          "linkId": "link_mgpspjtu746",
+          "other": "village_1",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 87,
+          "linkId": "link_mgpspk5432",
+          "other": "village_2",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpspj52465",
+          "other": "village_0",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 46,
+          "cls": "never-seasoned-trust<39",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 39,
+          "endAge": 62,
+          "endStatus": "active",
+          "maxTrust": 39
+        },
+        {
+          "id": "link_mgpspjtu746",
+          "other": "village_1",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 75,
+          "cls": "never-seasoned-trust<25",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 25,
+          "endAge": 33,
+          "endStatus": "active",
+          "maxTrust": 30
+        },
+        {
+          "id": "link_mgpspk5432",
+          "other": "village_2",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 87,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 23,
+          "endAge": 21,
+          "endStatus": "active",
+          "maxTrust": 30
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipDownSteps": [],
+      "verbs": {
+        "proposeCovenant:policy": {
+          "calls": 65,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "hostFeast:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 108
+    },
+    "100606-competent-covenant-b": {
+      "seed": 100606,
+      "policy": "competent-covenant-b",
+      "days": 82,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 150,
+      "standingRaw": 150,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 0,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 0,
+      "totalDeaths": 46,
+      "linksFormed": 2,
+      "linksSeasoned": 1,
+      "linksCounted": 0,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 1,
+      "tendPolicy": 0,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 1,
+      "polityBarDay": null,
+      "firstRegionalDay": 56,
+      "counterAnswers": 0,
+      "proposeAccepted": 1,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 49,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 25,
+        "2": 11,
+        "3": 4,
+        "4": 2
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 0,
+      "devotionChannels": 59,
+      "villagerCombatDeaths": 41,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 34,
+          "linkId": "link_mgpspiw4541",
+          "other": "village_1",
+          "via": "engine-direct",
+          "caller": "engine"
+        },
+        {
+          "day": 50,
+          "linkId": "link_mgpspjer132",
+          "other": "village_2",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpspiw4541",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 34,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 64,
+          "countedDay": null,
+          "trust40Day": 43,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 45,
+          "endAge": 48,
+          "endStatus": "active",
+          "maxTrust": 46
+        },
+        {
+          "id": "link_mgpspjer132",
+          "other": "village_2",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 50,
+          "cls": "never-seasoned-trust<24",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 24,
+          "endAge": 32,
+          "endStatus": "active",
+          "maxTrust": 31
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipDownSteps": [],
+      "verbs": {
+        "proposeCovenant:policy": {
+          "calls": 24,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 82
+    },
+    "100607-competent-covenant-b": {
+      "seed": 100607,
+      "policy": "competent-covenant-b",
+      "days": 85,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 175,
+      "standingRaw": 175,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 0,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 0,
+      "totalDeaths": 74,
+      "linksFormed": 2,
+      "linksSeasoned": 1,
+      "linksCounted": 0,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 1,
+      "tendPolicy": 1,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 1,
+      "polityBarDay": null,
+      "firstRegionalDay": 59,
+      "counterAnswers": 0,
+      "proposeAccepted": 1,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 10,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 1500,
+      "waveKills": {
+        "1": 22,
+        "2": 15,
+        "3": 7
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 0,
+      "devotionChannels": 62,
+      "villagerCombatDeaths": 64,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 37,
+          "linkId": "link_mgpspj3e698",
+          "other": "village_spl_27_39200",
+          "via": "engine-direct",
+          "caller": "engine"
+        },
+        {
+          "day": 74,
+          "linkId": "link_mgpspk6a984",
+          "other": "village_2",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpspj3e698",
+          "other": "village_spl_27_39200",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 37,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 67,
+          "countedDay": null,
+          "trust40Day": 59,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 46,
+          "endAge": 48,
+          "endStatus": "active",
+          "maxTrust": 46
+        },
+        {
+          "id": "link_mgpspk6a984",
+          "other": "village_2",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 74,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 25,
+          "endAge": 11,
+          "endStatus": "active",
+          "maxTrust": 39
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipDownSteps": [],
+      "verbs": {
+        "proposeCovenant:policy": {
+          "calls": 65,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 1,
+          "dTrust": 8,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspk6a984": 8
+          }
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 85
+    },
+    "100608-competent-covenant-b": {
+      "seed": 100608,
+      "policy": "competent-covenant-b",
+      "days": 149,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 340,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 0,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 0,
+      "totalDeaths": 71,
+      "linksFormed": 4,
+      "linksSeasoned": 1,
+      "linksCounted": 0,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 1,
+      "tendPolicy": 0,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 1,
+      "polityBarDay": null,
+      "firstRegionalDay": 48,
+      "counterAnswers": 0,
+      "proposeAccepted": 3,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 36,
+      "proposeBlockedCap": 3,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 11,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 20,
+        "2": 24,
+        "3": 8,
+        "4": 6
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 3,
+      "devotionChannels": 128,
+      "villagerCombatDeaths": 59,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 26,
+          "linkId": "link_mgpsping695",
+          "other": "village_2",
+          "via": "engine-direct",
+          "caller": "engine"
+        },
+        {
+          "day": 101,
+          "linkId": "link_mgpspkw2143",
+          "other": "village_spl_25_14997",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 128,
+          "linkId": "link_mgpspl7u189",
+          "other": "village_spl_27_50529",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 129,
+          "linkId": "link_mgpspl85482",
+          "other": "village_spl_35_69527",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsping695",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 26,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 56,
+          "countedDay": null,
+          "trust40Day": 43,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 32,
+          "endAge": 123,
+          "endStatus": "active",
+          "maxTrust": 48
+        },
+        {
+          "id": "link_mgpspkw2143",
+          "other": "village_spl_25_14997",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 101,
+          "cls": "never-seasoned-trust<22",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 22,
+          "endAge": 48,
+          "endStatus": "active",
+          "maxTrust": 30
+        },
+        {
+          "id": "link_mgpspl7u189",
+          "other": "village_spl_27_50529",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 128,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 23,
+          "endAge": 21,
+          "endStatus": "active",
+          "maxTrust": 32
+        },
+        {
+          "id": "link_mgpspl85482",
+          "other": "village_spl_35_69527",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 129,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 23,
+          "endAge": 20,
+          "endStatus": "active",
+          "maxTrust": 32
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipDownSteps": [],
+      "verbs": {
+        "proposeCovenant:policy": {
+          "calls": 90,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "hostFeast:engine": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 149
+    },
+    "100601-competent-courtship-b": {
+      "seed": 100601,
+      "policy": "competent-courtship-b",
+      "days": 168,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 370,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 0,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 0,
+      "totalDeaths": 147,
+      "linksFormed": 4,
+      "linksSeasoned": 2,
+      "linksCounted": 0,
+      "linksBroke": 1,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 2,
+      "tendPolicy": 7,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 0,
+      "polityBarDay": null,
+      "firstRegionalDay": 51,
+      "counterAnswers": 0,
+      "proposeAccepted": 0,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 0,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 68,
+        "2": 43,
+        "3": 15,
+        "4": 4
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 1,
+      "devotionChannels": 63,
+      "villagerCombatDeaths": 132,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 29,
+          "linkId": "link_mgpspidx531",
+          "other": "village_2",
+          "via": "engine-direct",
+          "caller": "engine"
+        },
+        {
+          "day": 40,
+          "linkId": "link_mgpspir6969",
+          "other": "village_0",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 41,
+          "linkId": "link_mgpspisl756",
+          "other": "village_1",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 147,
+          "linkId": "link_mgpspkqz623",
+          "other": "village_2",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpspidx531",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 29,
+          "cls": "broke-succession",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 18,
+          "endAge": 139,
+          "endStatus": "broken",
+          "maxTrust": 36
+        },
+        {
+          "id": "link_mgpspir6969",
+          "other": "village_0",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 40,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 70,
+          "countedDay": null,
+          "trust40Day": 41,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 100,
+          "endAge": 128,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspisl756",
+          "other": "village_1",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 41,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 71,
+          "countedDay": null,
+          "trust40Day": 42,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 100,
+          "endAge": 127,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspkqz623",
+          "other": "village_2",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 147,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": 149,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 57,
+          "endAge": 21,
+          "endStatus": "active",
+          "maxTrust": 57
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipDownSteps": [],
+      "verbs": {
+        "aidVillage:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "studyVillageCodex:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeCovenant:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 7,
+          "dTrust": 45,
+          "crossings": 2,
+          "refused": 0,
+          "links": {
+            "link_mgpspir6969": 16,
+            "link_mgpspisl756": 13,
+            "link_mgpspkqz623": 16
+          }
+        },
+        "breakLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspidx531": 0
+          }
+        },
+        "hostFeast:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 168
+    },
+    "100602-competent-courtship-b": {
+      "seed": 100602,
+      "policy": "competent-courtship-b",
+      "days": 155,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "national",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 402,
+      "dipEnd": 102,
+      "dipAttributed": 102,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 102,
+      "dipTotalDown": 0,
+      "nationalEver": true,
+      "firstNationalDay": 62,
+      "nationalHeldDays": 93,
+      "heldDays": 113,
+      "everCounted": true,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 1,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 1,
+        "diedAloud": 0,
+        "total": 1
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 1,
+      "globalPendingDays": 92,
+      "starvationDeaths": 0,
+      "totalDeaths": 111,
+      "linksFormed": 4,
+      "linksSeasoned": 4,
+      "linksCounted": 3,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 4,
+      "tendPolicy": 5,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 1,
+      "polityBarDay": null,
+      "firstRegionalDay": 32,
+      "counterAnswers": 0,
+      "proposeAccepted": 0,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 0,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 45,
+        "2": 36,
+        "3": 8,
+        "4": 6
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 0,
+      "devotionChannels": 107,
+      "villagerCombatDeaths": 93,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 10,
+          "linkId": "link_mgpsphw2909",
+          "other": "village_0",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 11,
+          "linkId": "link_mgpsphya333",
+          "other": "village_2",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 12,
+          "linkId": "link_mgpspi08197",
+          "other": "village_3",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 35,
+          "linkId": "link_mgpspj2156",
+          "other": "village_1",
+          "via": "engine-direct",
+          "caller": "engine"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphw2909",
+          "other": "village_0",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 10,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 40,
+          "countedDay": 42,
+          "trust40Day": 22,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 96,
+          "endAge": 144,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpsphya333",
+          "other": "village_2",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 11,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 41,
+          "countedDay": 42,
+          "trust40Day": 22,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 96,
+          "endAge": 143,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspi08197",
+          "other": "village_3",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 12,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 42,
+          "countedDay": 42,
+          "trust40Day": 25,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 100,
+          "endAge": 142,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspj2156",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 35,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 66,
+          "countedDay": null,
+          "trust40Day": 58,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 48,
+          "endAge": 119,
+          "endStatus": "active",
+          "maxTrust": 48
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 42,
+          "shape": "covenant/4"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 42,
+          "gained": 102,
+          "links": [
+            "link_mgpsphw2909",
+            "link_mgpsphya333",
+            "link_mgpspi08197"
+          ],
+          "dip": 102,
+          "unattributed": 0
+        }
+      ],
+      "dipDownSteps": [],
+      "verbs": {
+        "studyVillageCodex:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "aidVillage:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeCovenant:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 5,
+          "dTrust": 40,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpsphw2909": 16,
+            "link_mgpsphya333": 16,
+            "link_mgpspi08197": 8
+          }
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerNationalChoice:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 102,
+      "seriesDipDay": 154
+    },
+    "100603-competent-courtship-b": {
+      "seed": 100603,
+      "policy": "competent-courtship-b",
+      "days": 124,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 175,
+      "standingRaw": 175,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 0,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 0,
+      "totalDeaths": 103,
+      "linksFormed": 4,
+      "linksSeasoned": 2,
+      "linksCounted": 0,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 2,
+      "tendPolicy": 1,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 1,
+      "polityBarDay": null,
+      "firstRegionalDay": 35,
+      "counterAnswers": 0,
+      "proposeAccepted": 0,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 0,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 60,
+        "2": 23,
+        "3": 8
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 0,
+      "devotionChannels": 33,
+      "villagerCombatDeaths": 93,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 13,
+          "linkId": "link_mgpsphy269",
+          "other": "village_1",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 25,
+          "linkId": "link_mgpspigt282",
+          "other": "village_3",
+          "via": "engine-direct",
+          "caller": "engine"
+        },
+        {
+          "day": 104,
+          "linkId": "link_mgpspkdb640",
+          "other": "village_spl_25_88357",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 115,
+          "linkId": "link_mgpspkol491",
+          "other": "village_2",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphy269",
+          "other": "village_1",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 13,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 43,
+          "countedDay": null,
+          "trust40Day": 20,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 100,
+          "endAge": 111,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpspigt282",
+          "other": "village_3",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 25,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 87,
+          "countedDay": null,
+          "trust40Day": 87,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 59,
+          "endAge": 99,
+          "endStatus": "active",
+          "maxTrust": 59
+        },
+        {
+          "id": "link_mgpspkdb640",
+          "other": "village_spl_25_88357",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 104,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": 118,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 58,
+          "endAge": 20,
+          "endStatus": "active",
+          "maxTrust": 58
+        },
+        {
+          "id": "link_mgpspkol491",
+          "other": "village_2",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 115,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": 121,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 36,
+          "endAge": 9,
+          "endStatus": "active",
+          "maxTrust": 46
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipDownSteps": [],
+      "verbs": {
+        "studyVillageCodex:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeCovenant:policy": {
+          "calls": 4,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "aidVillage:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 1,
+          "dTrust": 8,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspkdb640": 8
+          }
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 124
+    },
+    "100604-competent-courtship-b": {
+      "seed": 100604,
+      "policy": "competent-courtship-b",
+      "days": 200,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 3,
+      "standing": 75,
+      "standingRaw": 75,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 0,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 1,
+      "totalDeaths": 31,
+      "linksFormed": 4,
+      "linksSeasoned": 1,
+      "linksCounted": 0,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 1,
+      "tendPolicy": 5,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 1,
+      "polityBarDay": null,
+      "firstRegionalDay": 138,
+      "counterAnswers": 0,
+      "proposeAccepted": 0,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 0,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 14,
+        "2": 10,
+        "3": 3
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 0,
+      "devotionChannels": 18,
+      "villagerCombatDeaths": 28,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 116,
+          "linkId": "link_mgpspiq3726",
+          "other": "village_1",
+          "via": "engine-direct",
+          "caller": "engine"
+        },
+        {
+          "day": 189,
+          "linkId": "link_mgpspj1z310",
+          "other": "village_0",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 190,
+          "linkId": "link_mgpspj26441",
+          "other": "village_2",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 191,
+          "linkId": "link_mgpspj2e853",
+          "other": "village_spl_24_39244",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpspiq3726",
+          "other": "village_1",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 116,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 183,
+          "countedDay": null,
+          "trust40Day": 183,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 42,
+          "endAge": 85,
+          "endStatus": "active",
+          "maxTrust": 42
+        },
+        {
+          "id": "link_mgpspj1z310",
+          "other": "village_0",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 189,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": 197,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 48,
+          "endAge": 12,
+          "endStatus": "active",
+          "maxTrust": 48
+        },
+        {
+          "id": "link_mgpspj26441",
+          "other": "village_2",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 190,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 37,
+          "endAge": 11,
+          "endStatus": "active",
+          "maxTrust": 38
+        },
+        {
+          "id": "link_mgpspj2e853",
+          "other": "village_spl_24_39244",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 191,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 39,
+          "endAge": 10,
+          "endStatus": "active",
+          "maxTrust": 39
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipDownSteps": [],
+      "verbs": {
+        "aidVillage:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "studyVillageCodex:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeCovenant:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 5,
+          "dTrust": 40,
+          "crossings": 0,
+          "refused": 0,
+          "links": {
+            "link_mgpspj1z310": 16,
+            "link_mgpspj26441": 16,
+            "link_mgpspj2e853": 8
+          }
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 201
+    },
+    "100605-competent-courtship-b": {
+      "seed": 100605,
+      "policy": "competent-courtship-b",
+      "days": 138,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "national",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 302,
+      "dipEnd": 102,
+      "dipAttributed": 102,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 102,
+      "dipTotalDown": 0,
+      "nationalEver": true,
+      "firstNationalDay": 65,
+      "nationalHeldDays": 74,
+      "heldDays": 91,
+      "everCounted": true,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 1,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 1,
+        "diedAloud": 0,
+        "total": 1
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 1,
+      "globalPendingDays": 73,
+      "starvationDeaths": 0,
+      "totalDeaths": 86,
+      "linksFormed": 3,
+      "linksSeasoned": 3,
+      "linksCounted": 3,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 3,
+      "tendPolicy": 0,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 0,
+      "polityBarDay": null,
+      "firstRegionalDay": 35,
+      "counterAnswers": 1,
+      "proposeAccepted": 0,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 0,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 30,
+        "2": 25,
+        "3": 7,
+        "4": 1
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 0,
+      "devotionChannels": 107,
+      "villagerCombatDeaths": 73,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 13,
+          "linkId": "link_mgpsphuf112",
+          "other": "village_0",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 14,
+          "linkId": "link_mgpsphw8697",
+          "other": "village_1",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 16,
+          "linkId": "link_mgpsphzx788",
+          "other": "village_2",
+          "via": "answerCounter",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphuf112",
+          "other": "village_0",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 13,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 43,
+          "countedDay": 48,
+          "trust40Day": 32,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 91,
+          "endAge": 125,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpsphw8697",
+          "other": "village_1",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 14,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 44,
+          "countedDay": 48,
+          "trust40Day": 32,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 78,
+          "endAge": 124,
+          "endStatus": "active",
+          "maxTrust": 100
+        },
+        {
+          "id": "link_mgpsphzx788",
+          "other": "village_2",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 16,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 48,
+          "countedDay": 48,
+          "trust40Day": 48,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 71,
+          "endAge": 122,
+          "endStatus": "active",
+          "maxTrust": 100
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 48,
+          "shape": "covenant/4"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 48,
+          "gained": 102,
+          "links": [
+            "link_mgpsphuf112",
+            "link_mgpsphw8697",
+            "link_mgpsphzx788"
+          ],
+          "dip": 102,
+          "unattributed": 0
+        }
+      ],
+      "dipDownSteps": [],
+      "verbs": {
+        "aidVillage:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "studyVillageCodex:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeCovenant:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerCounter:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerNationalChoice:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 102,
+      "seriesDipDay": 138
+    },
+    "100606-competent-courtship-b": {
+      "seed": 100606,
+      "policy": "competent-courtship-b",
+      "days": 85,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 100,
+      "standingRaw": 100,
+      "dipEnd": 0,
+      "dipAttributed": 0,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 0,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 0,
+      "everCounted": false,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 2,
+      "totalDeaths": 37,
+      "linksFormed": 4,
+      "linksSeasoned": 0,
+      "linksCounted": 0,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 0,
+      "tendPolicy": 2,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 0,
+      "polityBarDay": null,
+      "firstRegionalDay": 64,
+      "counterAnswers": 0,
+      "proposeAccepted": 0,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 0,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 14,
+        "2": 11,
+        "3": 4
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 0,
+      "devotionChannels": 51,
+      "villagerCombatDeaths": 32,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 42,
+          "linkId": "link_mgpspios808",
+          "other": "village_2",
+          "via": "engine-direct",
+          "caller": "engine"
+        },
+        {
+          "day": 51,
+          "linkId": "link_mgpspiv0148",
+          "other": "village_0",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 54,
+          "linkId": "link_mgpspix727",
+          "other": "village_1",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 56,
+          "linkId": "link_mgpspiyc274",
+          "other": "village_3",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpspios808",
+          "other": "village_2",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 42,
+          "cls": "never-seasoned-trust<38",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 38,
+          "endAge": 43,
+          "endStatus": "active",
+          "maxTrust": 38
+        },
+        {
+          "id": "link_mgpspiv0148",
+          "other": "village_0",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 51,
+          "cls": "never-seasoned-trust<35",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": 71,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 35,
+          "endAge": 34,
+          "endStatus": "active",
+          "maxTrust": 43
+        },
+        {
+          "id": "link_mgpspix727",
+          "other": "village_1",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 54,
+          "cls": "never-seasoned-trust<35",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": 75,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 35,
+          "endAge": 31,
+          "endStatus": "active",
+          "maxTrust": 43
+        },
+        {
+          "id": "link_mgpspiyc274",
+          "other": "village_3",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 56,
+          "cls": "still-young-at-end",
+          "seasonedDay": null,
+          "countedDay": null,
+          "trust40Day": null,
+          "crossedVerb": null,
+          "endTrust": 27,
+          "endAge": 29,
+          "endStatus": "active",
+          "maxTrust": 30
+        }
+      ],
+      "polityDays": [],
+      "dipSteps": [],
+      "dipDownSteps": [],
+      "verbs": {
+        "aidVillage:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "studyVillageCodex:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeCovenant:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 2,
+          "dTrust": 16,
+          "crossings": 2,
+          "refused": 0,
+          "links": {
+            "link_mgpspiv0148": 8,
+            "link_mgpspix727": 8
+          }
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 85
+    },
+    "100607-competent-courtship-b": {
+      "seed": 100607,
+      "policy": "competent-courtship-b",
+      "days": 86,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 152,
+      "standingRaw": 152,
+      "dipEnd": 102,
+      "dipAttributed": 102,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 102,
+      "dipTotalDown": 0,
+      "nationalEver": false,
+      "firstNationalDay": null,
+      "nationalHeldDays": 0,
+      "heldDays": 14,
+      "everCounted": true,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0,
+        "total": 0
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 0,
+      "globalPendingDays": 0,
+      "starvationDeaths": 1,
+      "totalDeaths": 45,
+      "linksFormed": 4,
+      "linksSeasoned": 4,
+      "linksCounted": 3,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 4,
+      "tendPolicy": 0,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 1,
+      "polityBarDay": null,
+      "firstRegionalDay": 63,
+      "counterAnswers": 0,
+      "proposeAccepted": 0,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 0,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 15,
+        "2": 11,
+        "3": 2
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 0,
+      "devotionChannels": 42,
+      "villagerCombatDeaths": 41,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 41,
+          "linkId": "link_mgpspizn552",
+          "other": "village_2",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 41,
+          "linkId": "link_mgpspj07243",
+          "other": "village_3",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 42,
+          "linkId": "link_mgpspj1h30",
+          "other": "village_0",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 49,
+          "linkId": "link_mgpspjar617",
+          "other": "village_spl_27_37524",
+          "via": "engine-direct",
+          "caller": "engine"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpspizn552",
+          "other": "village_2",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 41,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 71,
+          "countedDay": 72,
+          "trust40Day": 51,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 69,
+          "endAge": 45,
+          "endStatus": "active",
+          "maxTrust": 77
+        },
+        {
+          "id": "link_mgpspj07243",
+          "other": "village_3",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 41,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 71,
+          "countedDay": 72,
+          "trust40Day": 51,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 69,
+          "endAge": 45,
+          "endStatus": "active",
+          "maxTrust": 77
+        },
+        {
+          "id": "link_mgpspj1h30",
+          "other": "village_0",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 42,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 72,
+          "countedDay": 72,
+          "trust40Day": 51,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 69,
+          "endAge": 44,
+          "endStatus": "active",
+          "maxTrust": 77
+        },
+        {
+          "id": "link_mgpspjar617",
+          "other": "village_spl_27_37524",
+          "kind": "link",
+          "primary": "haven",
+          "conquered": false,
+          "formedDay": 49,
+          "cls": "seasoned-but-no-polity",
+          "seasonedDay": 79,
+          "countedDay": null,
+          "trust40Day": 57,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 62,
+          "endAge": 37,
+          "endStatus": "active",
+          "maxTrust": 62
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 72,
+          "shape": "covenant/4"
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 72,
+          "gained": 102,
+          "links": [
+            "link_mgpspizn552",
+            "link_mgpspj07243",
+            "link_mgpspj1h30"
+          ],
+          "dip": 102,
+          "unattributed": 0
+        }
+      ],
+      "dipDownSteps": [],
+      "verbs": {
+        "studyVillageCodex:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeCovenant:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "aidVillage:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formLink:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 102,
+      "seriesDipDay": 86
+    },
+    "100608-competent-courtship-b": {
+      "seed": 100608,
+      "policy": "competent-courtship-b",
+      "days": 155,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "standing": 199,
+      "standingRaw": 395,
+      "dipEnd": 0,
+      "dipAttributed": 102,
+      "dipUnattributed": 0,
+      "dipUnattributedUp": 0,
+      "dipUnattributedDown": 0,
+      "dipTelescopeGap": 0,
+      "dipTotalUp": 102,
+      "dipTotalDown": 102,
+      "nationalEver": true,
+      "firstNationalDay": 119,
+      "nationalHeldDays": 36,
+      "heldDays": 37,
+      "everCounted": true,
+      "nationalAnswers": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 1,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 1,
+        "diedAloud": 0,
+        "total": 1
+      },
+      "globalAnswers": 0,
+      "pendingNationalDays": 1,
+      "globalPendingDays": 35,
+      "starvationDeaths": 1,
+      "totalDeaths": 89,
+      "linksFormed": 3,
+      "linksSeasoned": 3,
+      "linksCounted": 3,
+      "linksBroke": 0,
+      "linksUnclassified": 0,
+      "maxSimSeasoned": 3,
+      "tendPolicy": 9,
+      "tendEngine": 0,
+      "tendRefused": 0,
+      "maxSimPrimSeasoned": 0,
+      "polityBarDay": null,
+      "firstRegionalDay": 35,
+      "counterAnswers": 0,
+      "proposeAccepted": 0,
+      "proposeCounter": 0,
+      "proposeDeclined": 0,
+      "proposeShut": 0,
+      "proposeBlockedPantry": 0,
+      "proposeBlockedCap": 0,
+      "proposeBlockedPending": 0,
+      "proposeNotReady": 0,
+      "tendsPaidKcal": 0,
+      "waveKills": {
+        "1": 31,
+        "2": 24,
+        "3": 10,
+        "4": 7
+      },
+      "accordAnswers": 0,
+      "proposeCalls": 0,
+      "proposeFormed": 0,
+      "feasts": 1,
+      "devotionChannels": 100,
+      "villagerCombatDeaths": 66,
+      "errors": 0,
+      "formations": [
+        {
+          "day": 13,
+          "linkId": "link_mgpsphze145",
+          "other": "village_2",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 87,
+          "linkId": "link_mgpspkte546",
+          "other": "village_0",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        },
+        {
+          "day": 88,
+          "linkId": "link_mgpspkty112",
+          "other": "village_1",
+          "via": "proposeCovenant",
+          "caller": "policy"
+        }
+      ],
+      "linksDetail": [
+        {
+          "id": "link_mgpsphze145",
+          "other": "village_2",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 13,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 43,
+          "countedDay": 118,
+          "trust40Day": 22,
+          "crossedVerb": "tick/other (no verb event ±1d of crossing)",
+          "endTrust": 45,
+          "endAge": 143,
+          "endStatus": "active",
+          "maxTrust": 74
+        },
+        {
+          "id": "link_mgpspkte546",
+          "other": "village_0",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 87,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 117,
+          "countedDay": 118,
+          "trust40Day": 92,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 42,
+          "endAge": 69,
+          "endStatus": "active",
+          "maxTrust": 64
+        },
+        {
+          "id": "link_mgpspkty112",
+          "other": "village_1",
+          "kind": "covenant",
+          "primary": null,
+          "conquered": false,
+          "formedDay": 88,
+          "cls": "seasoned-and-counted",
+          "seasonedDay": 118,
+          "countedDay": 118,
+          "trust40Day": 92,
+          "crossedVerb": "tendLink:policy",
+          "endTrust": 32,
+          "endAge": 68,
+          "endStatus": "active",
+          "maxTrust": 64
+        }
+      ],
+      "polityDays": [
+        {
+          "day": 118,
+          "shape": "covenant/4"
+        },
+        {
+          "day": 155,
+          "shape": null
+        }
+      ],
+      "dipSteps": [
+        {
+          "day": 118,
+          "gained": 102,
+          "links": [
+            "link_mgpsphze145",
+            "link_mgpspkte546",
+            "link_mgpspkty112"
+          ],
+          "dip": 102,
+          "unattributed": 0
+        }
+      ],
+      "dipDownSteps": [
+        {
+          "day": 155,
+          "lost": 102,
+          "links": [
+            "link_mgpsphze145",
+            "link_mgpspkte546",
+            "link_mgpspkty112"
+          ],
+          "dip": 0,
+          "unattributed": 0
+        }
+      ],
+      "verbs": {
+        "studyVillageCodex:policy": {
+          "calls": 8,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "proposeCovenant:policy": {
+          "calls": 4,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "aidVillage:policy": {
+          "calls": 2,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "_formPeerLink:policy": {
+          "calls": 3,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "tendLink:policy": {
+          "calls": 9,
+          "dTrust": 72,
+          "crossings": 4,
+          "refused": 0,
+          "links": {
+            "link_mgpsphze145": 24,
+            "link_mgpspkte546": 24,
+            "link_mgpspkty112": 24
+          }
+        },
+        "hostFeast:engine": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        },
+        "answerNationalChoice:policy": {
+          "calls": 1,
+          "dTrust": 0,
+          "crossings": 0,
+          "refused": 0,
+          "links": {}
+        }
+      },
+      "seriesDipEnd": 0,
+      "seriesDipDay": 156
+    }
+  },
+  "byPolicy": {
+    "competent-covenant-b": {
+      "n": 8,
+      "wins": 0,
+      "national": 0,
+      "table": 0,
+      "medianDays": 114,
+      "medianDipEnd": 0,
+      "medianLinksFormed": 2.5,
+      "medianLinksSeasoned": 1,
+      "medianLinksCounted": 0,
+      "medianMaxSimSeasoned": 1,
+      "totalTendPolicy": 11,
+      "totalTendEngine": 0,
+      "totalTendRefused": 0,
+      "totalAccord": 0,
+      "totalPropose": 0,
+      "totalBroke": 1,
+      "totalUnclassified": 0,
+      "dipPositiveSeeds": 0,
+      "polityBarSeeds": 0,
+      "medianMaxSimPrimSeasoned": 0.5,
+      "medianFirstRegionalDay": 59.5,
+      "totalVillagerCombatDeaths": 604,
+      "totalCounterAnswers": 0,
+      "totalProposeAccepted": 13,
+      "totalProposeCounter": 0,
+      "totalProposeDeclined": 0,
+      "totalDipUnattributed": 0,
+      "totalDipUnattributedUp": 0,
+      "totalDipUnattributedDown": 0,
+      "totalDipTelescopeGap": 0,
+      "nationalEver": 0,
+      "medianHeldDays": 0,
+      "medianNationalHeldDays": 0,
+      "everCounted": 0,
+      "totalNationalAnswers": 0,
+      "nationalAnswersByShape": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 0,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 0,
+        "diedAloud": 0
+      },
+      "totalGlobalAnswers": 0,
+      "totalPendingNationalDays": 0,
+      "totalGlobalPendingDays": 0,
+      "totalStarvationDeaths": 0,
+      "totalDeaths": 697,
+      "medianSurvivalDays": 114,
+      "totalErrors": 0,
+      "wave5unlocked": 1,
+      "wave4unlocked": 8
+    },
+    "competent-courtship-b": {
+      "n": 8,
+      "wins": 0,
+      "national": 2,
+      "table": 0,
+      "medianDays": 146.5,
+      "medianDipEnd": 0,
+      "medianLinksFormed": 4,
+      "medianLinksSeasoned": 2.5,
+      "medianLinksCounted": 1.5,
+      "medianMaxSimSeasoned": 2.5,
+      "totalTendPolicy": 29,
+      "totalTendEngine": 0,
+      "totalTendRefused": 0,
+      "totalAccord": 0,
+      "totalPropose": 0,
+      "totalBroke": 1,
+      "totalUnclassified": 0,
+      "dipPositiveSeeds": 3,
+      "polityBarSeeds": 0,
+      "medianMaxSimPrimSeasoned": 0.5,
+      "medianFirstRegionalDay": 43,
+      "totalVillagerCombatDeaths": 558,
+      "totalCounterAnswers": 1,
+      "totalProposeAccepted": 0,
+      "totalProposeCounter": 0,
+      "totalProposeDeclined": 0,
+      "totalDipUnattributed": 0,
+      "totalDipUnattributedUp": 0,
+      "totalDipUnattributedDown": 0,
+      "totalDipTelescopeGap": 0,
+      "nationalEver": 3,
+      "medianHeldDays": 7,
+      "medianNationalHeldDays": 0,
+      "everCounted": 4,
+      "totalNationalAnswers": 3,
+      "nationalAnswersByShape": {
+        "lead": 0,
+        "conquest": 0,
+        "belong": 0,
+        "covenant": 3,
+        "trade": 0,
+        "unknown": 0,
+        "sat": 3,
+        "diedAloud": 0
+      },
+      "totalGlobalAnswers": 0,
+      "totalPendingNationalDays": 3,
+      "totalGlobalPendingDays": 200,
+      "totalStarvationDeaths": 5,
+      "totalDeaths": 649,
+      "medianSurvivalDays": 146.5,
+      "totalErrors": 0,
+      "wave5unlocked": 0,
+      "wave4unlocked": 7
+    }
+  },
+  "shapes": {
+    "perSeed": {
+      "100601-competent-covenant-b": {
+        "seed": 100601,
+        "policy": "competent-covenant-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:0",
+            "blockers": [
+              "lead-subs-short:0"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-seasoned-short:1-of-2",
+            "blockers": [
+              "covenant-seasoned-short:1-of-2"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100602-competent-covenant-b": {
+        "seed": 100602,
+        "policy": "competent-covenant-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:0",
+            "blockers": [
+              "lead-subs-short:0"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-seasoned-short:0-of-1",
+            "blockers": [
+              "covenant-seasoned-short:0-of-1"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100603-competent-covenant-b": {
+        "seed": 100603,
+        "policy": "competent-covenant-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:0",
+            "blockers": [
+              "lead-subs-short:0"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-no-peer-links",
+            "blockers": [
+              "covenant-no-peer-links"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100604-competent-covenant-b": {
+        "seed": 100604,
+        "policy": "competent-covenant-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:1",
+            "blockers": [
+              "lead-subs-short:1"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-seasoned-short:2-of-3",
+            "blockers": [
+              "covenant-seasoned-short:2-of-3"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100605-competent-covenant-b": {
+        "seed": 100605,
+        "policy": "competent-covenant-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:0",
+            "blockers": [
+              "lead-subs-short:0"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-seasoned-short:0-of-2",
+            "blockers": [
+              "covenant-seasoned-short:0-of-2"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100606-competent-covenant-b": {
+        "seed": 100606,
+        "policy": "competent-covenant-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:1",
+            "blockers": [
+              "lead-subs-short:1"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-seasoned-short:0-of-1",
+            "blockers": [
+              "covenant-seasoned-short:0-of-1"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100607-competent-covenant-b": {
+        "seed": 100607,
+        "policy": "competent-covenant-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:1",
+            "blockers": [
+              "lead-subs-short:1"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-seasoned-short:0-of-1",
+            "blockers": [
+              "covenant-seasoned-short:0-of-1"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100608-competent-covenant-b": {
+        "seed": 100608,
+        "policy": "competent-covenant-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:1",
+            "blockers": [
+              "lead-subs-short:1"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-seasoned-short:0-of-3",
+            "blockers": [
+              "covenant-seasoned-short:0-of-3"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100601-competent-courtship-b": {
+        "seed": 100601,
+        "policy": "competent-courtship-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:0",
+            "blockers": [
+              "lead-subs-short:0"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-seasoned-short:2-of-3",
+            "blockers": [
+              "covenant-seasoned-short:2-of-3"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100602-competent-courtship-b": {
+        "seed": 100602,
+        "policy": "competent-courtship-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:1",
+            "blockers": [
+              "lead-subs-short:1"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 113,
+            "firstQualDay": 42,
+            "stagedDays": [
+              62
+            ],
+            "answers": 1,
+            "sat": 1,
+            "diedAloud": 0,
+            "outcome": "staged",
+            "blocker": null,
+            "blockers": []
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100603-competent-courtship-b": {
+        "seed": 100603,
+        "policy": "competent-courtship-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:1",
+            "blockers": [
+              "lead-subs-short:1"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-seasoned-short:1-of-3",
+            "blockers": [
+              "covenant-seasoned-short:1-of-3"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100604-competent-courtship-b": {
+        "seed": 100604,
+        "policy": "competent-courtship-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:1",
+            "blockers": [
+              "lead-subs-short:1"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-seasoned-short:0-of-3",
+            "blockers": [
+              "covenant-seasoned-short:0-of-3"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100605-competent-courtship-b": {
+        "seed": 100605,
+        "policy": "competent-courtship-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:0",
+            "blockers": [
+              "lead-subs-short:0"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 91,
+            "firstQualDay": 48,
+            "stagedDays": [
+              65
+            ],
+            "answers": 1,
+            "sat": 1,
+            "diedAloud": 0,
+            "outcome": "staged",
+            "blocker": null,
+            "blockers": []
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100606-competent-courtship-b": {
+        "seed": 100606,
+        "policy": "competent-courtship-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:0",
+            "blockers": [
+              "lead-subs-short:0"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-seasoned-short:0-of-3",
+            "blockers": [
+              "covenant-seasoned-short:0-of-3"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100607-competent-courtship-b": {
+        "seed": 100607,
+        "policy": "competent-courtship-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:1",
+            "blockers": [
+              "lead-subs-short:1"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 14,
+            "firstQualDay": 72,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "covenant-rung-gate",
+            "blockers": [
+              "covenant-rung-gate"
+            ]
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      },
+      "100608-competent-courtship-b": {
+        "seed": 100608,
+        "policy": "competent-courtship-b",
+        "shapes": {
+          "lead": {
+            "shape": "lead",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "lead-subs-short:0",
+            "blockers": [
+              "lead-subs-short:0"
+            ]
+          },
+          "conquest": {
+            "shape": "conquest",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "conquest-no-raids",
+            "blockers": [
+              "conquest-no-raids"
+            ]
+          },
+          "belong": {
+            "shape": "belong",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "belong-no-sub-link",
+            "blockers": [
+              "belong-no-sub-link"
+            ]
+          },
+          "covenant": {
+            "shape": "covenant",
+            "qualifiedDays": 37,
+            "firstQualDay": 118,
+            "stagedDays": [
+              119
+            ],
+            "answers": 1,
+            "sat": 1,
+            "diedAloud": 0,
+            "outcome": "staged",
+            "blocker": null,
+            "blockers": []
+          },
+          "trade": {
+            "shape": "trade",
+            "qualifiedDays": 0,
+            "firstQualDay": null,
+            "stagedDays": [],
+            "answers": 0,
+            "sat": 0,
+            "diedAloud": 0,
+            "outcome": "blocked",
+            "blocker": "trade-no-peer-links",
+            "blockers": [
+              "trade-no-peer-links"
+            ]
+          }
+        },
+        "unclassified": 0
+      }
+    },
+    "byShape": {
+      "lead": {
+        "staged": 0,
+        "blockedBy": {
+          "lead-subs-short:0": 8,
+          "lead-subs-short:1": 8
+        },
+        "blockedByAll": {
+          "lead-subs-short:0": 8,
+          "lead-subs-short:1": 8
+        },
+        "unclassified": 0,
+        "qualifiedSeeds": 0
+      },
+      "conquest": {
+        "staged": 0,
+        "blockedBy": {
+          "conquest-no-raids": 16
+        },
+        "blockedByAll": {
+          "conquest-no-raids": 16
+        },
+        "unclassified": 0,
+        "qualifiedSeeds": 0
+      },
+      "belong": {
+        "staged": 0,
+        "blockedBy": {
+          "belong-no-sub-link": 16
+        },
+        "blockedByAll": {
+          "belong-no-sub-link": 16
+        },
+        "unclassified": 0,
+        "qualifiedSeeds": 0
+      },
+      "covenant": {
+        "staged": 3,
+        "blockedBy": {
+          "covenant-seasoned-short:1-of-2": 1,
+          "covenant-seasoned-short:0-of-1": 3,
+          "covenant-no-peer-links": 1,
+          "covenant-seasoned-short:2-of-3": 2,
+          "covenant-seasoned-short:0-of-2": 1,
+          "covenant-seasoned-short:0-of-3": 3,
+          "covenant-seasoned-short:1-of-3": 1,
+          "covenant-rung-gate": 1
+        },
+        "blockedByAll": {
+          "covenant-seasoned-short:1-of-2": 1,
+          "covenant-seasoned-short:0-of-1": 3,
+          "covenant-no-peer-links": 1,
+          "covenant-seasoned-short:2-of-3": 2,
+          "covenant-seasoned-short:0-of-2": 1,
+          "covenant-seasoned-short:0-of-3": 3,
+          "covenant-seasoned-short:1-of-3": 1,
+          "covenant-rung-gate": 1
+        },
+        "unclassified": 0,
+        "qualifiedSeeds": 4
+      },
+      "trade": {
+        "staged": 0,
+        "blockedBy": {
+          "trade-no-peer-links": 16
+        },
+        "blockedByAll": {
+          "trade-no-peer-links": 16
+        },
+        "unclassified": 0,
+        "qualifiedSeeds": 0
+      }
+    },
+    "unclassified": 0
+  },
+  "byPolicyShapes": {
+    "competent-covenant-b": {
+      "n": 8,
+      "shapes": {
+        "lead": {
+          "staged": 0,
+          "blockedBy": {
+            "lead-subs-short:0": 4,
+            "lead-subs-short:1": 4
+          },
+          "blockedByAll": {
+            "lead-subs-short:0": 4,
+            "lead-subs-short:1": 4
+          },
+          "unclassified": 0
+        },
+        "conquest": {
+          "staged": 0,
+          "blockedBy": {
+            "conquest-no-raids": 8
+          },
+          "blockedByAll": {
+            "conquest-no-raids": 8
+          },
+          "unclassified": 0
+        },
+        "belong": {
+          "staged": 0,
+          "blockedBy": {
+            "belong-no-sub-link": 8
+          },
+          "blockedByAll": {
+            "belong-no-sub-link": 8
+          },
+          "unclassified": 0
+        },
+        "covenant": {
+          "staged": 0,
+          "blockedBy": {
+            "covenant-seasoned-short:1-of-2": 1,
+            "covenant-seasoned-short:0-of-1": 3,
+            "covenant-no-peer-links": 1,
+            "covenant-seasoned-short:2-of-3": 1,
+            "covenant-seasoned-short:0-of-2": 1,
+            "covenant-seasoned-short:0-of-3": 1
+          },
+          "blockedByAll": {
+            "covenant-seasoned-short:1-of-2": 1,
+            "covenant-seasoned-short:0-of-1": 3,
+            "covenant-no-peer-links": 1,
+            "covenant-seasoned-short:2-of-3": 1,
+            "covenant-seasoned-short:0-of-2": 1,
+            "covenant-seasoned-short:0-of-3": 1
+          },
+          "unclassified": 0
+        },
+        "trade": {
+          "staged": 0,
+          "blockedBy": {
+            "trade-no-peer-links": 8
+          },
+          "blockedByAll": {
+            "trade-no-peer-links": 8
+          },
+          "unclassified": 0
+        }
+      }
+    },
+    "competent-courtship-b": {
+      "n": 8,
+      "shapes": {
+        "lead": {
+          "staged": 0,
+          "blockedBy": {
+            "lead-subs-short:0": 4,
+            "lead-subs-short:1": 4
+          },
+          "blockedByAll": {
+            "lead-subs-short:0": 4,
+            "lead-subs-short:1": 4
+          },
+          "unclassified": 0
+        },
+        "conquest": {
+          "staged": 0,
+          "blockedBy": {
+            "conquest-no-raids": 8
+          },
+          "blockedByAll": {
+            "conquest-no-raids": 8
+          },
+          "unclassified": 0
+        },
+        "belong": {
+          "staged": 0,
+          "blockedBy": {
+            "belong-no-sub-link": 8
+          },
+          "blockedByAll": {
+            "belong-no-sub-link": 8
+          },
+          "unclassified": 0
+        },
+        "covenant": {
+          "staged": 3,
+          "blockedBy": {
+            "covenant-seasoned-short:2-of-3": 1,
+            "covenant-seasoned-short:1-of-3": 1,
+            "covenant-seasoned-short:0-of-3": 2,
+            "covenant-rung-gate": 1
+          },
+          "blockedByAll": {
+            "covenant-seasoned-short:2-of-3": 1,
+            "covenant-seasoned-short:1-of-3": 1,
+            "covenant-seasoned-short:0-of-3": 2,
+            "covenant-rung-gate": 1
+          },
+          "unclassified": 0
+        },
+        "trade": {
+          "staged": 0,
+          "blockedBy": {
+            "trade-no-peer-links": 8
+          },
+          "blockedByAll": {
+            "trade-no-peer-links": 8
+          },
+          "unclassified": 0
+        }
+      }
+    }
+  },
+  "verbCallers": {
+    "proposeCovenant:policy": 550,
+    "_formPeerLink:policy": 37
+  },
+  "foreignMax": {
+    "100601-competent-covenant-b": 3,
+    "100602-competent-covenant-b": 6,
+    "100603-competent-covenant-b": 6,
+    "100604-competent-covenant-b": 4,
+    "100605-competent-covenant-b": 4,
+    "100606-competent-covenant-b": 3,
+    "100607-competent-covenant-b": 4,
+    "100608-competent-covenant-b": 6,
+    "100601-competent-courtship-b": 3,
+    "100602-competent-courtship-b": 5,
+    "100603-competent-courtship-b": 3,
+    "100604-competent-courtship-b": 3,
+    "100605-competent-courtship-b": 2,
+    "100606-competent-courtship-b": 3,
+    "100607-competent-courtship-b": 3,
+    "100608-competent-courtship-b": 7
+  },
+  "opinionFirst10": {
+    "100601-competent-covenant-b": 39,
+    "100602-competent-covenant-b": 88,
+    "100603-competent-covenant-b": 64,
+    "100604-competent-covenant-b": 48,
+    "100605-competent-covenant-b": 69,
+    "100606-competent-covenant-b": 50,
+    "100607-competent-covenant-b": 74,
+    "100608-competent-covenant-b": 49,
+    "100601-competent-courtship-b": 4,
+    "100602-competent-courtship-b": 8,
+    "100603-competent-courtship-b": 12,
+    "100604-competent-courtship-b": 4,
+    "100605-competent-courtship-b": 4,
+    "100606-competent-courtship-b": 4,
+    "100607-competent-courtship-b": 34,
+    "100608-competent-courtship-b": 12
+  },
+  "opinionMax": {
+    "100601-competent-covenant-b": 38,
+    "100602-competent-covenant-b": 18,
+    "100603-competent-covenant-b": 20,
+    "100604-competent-covenant-b": 42,
+    "100605-competent-covenant-b": 32,
+    "100606-competent-covenant-b": 16,
+    "100607-competent-covenant-b": 13,
+    "100608-competent-covenant-b": 35,
+    "100601-competent-courtship-b": 32,
+    "100602-competent-courtship-b": 59,
+    "100603-competent-courtship-b": 45,
+    "100604-competent-courtship-b": 36,
+    "100605-competent-courtship-b": 34,
+    "100606-competent-courtship-b": 23,
+    "100607-competent-courtship-b": 35,
+    "100608-competent-courtship-b": 41
+  },
+  "courtshipDeeds": {
+    "aidVillage:policy": 18,
+    "studyVillageCodex:policy": 22
+  }
+}

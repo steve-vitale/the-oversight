@@ -1,0 +1,97 @@
+=== NESTED COVENANT STATS (courtship leg) vs BASELINE ===
+control covenant-stats: {"proposeCalls":524,"proposeAccepted":13,"proposeCounter":0,"proposeDeclined":0,"proposeShut":0,"proposePrereq":511,"proposeBlockedPantry":358,"proposeBlockedCap":3,"proposeBlockedPending":0,"proposeBlockedDay":72,"proposeNoCandidate":0,"proposeNotReady":32,"counterAnswers":0,"tends":11,"tendsBlockedPantry":292,"tendsPaidKcal":16500,"nationalPendingDays":0,"errors":0}
+on covenant-stats: {"proposeCalls":26,"proposeAccepted":23,"proposeCounter":1,"proposeDeclined":0,"proposeShut":0,"proposePrereq":2,"proposeBlockedPantry":390,"proposeBlockedCap":187,"proposeBlockedPending":0,"proposeBlockedDay":32,"proposeNoCandidate":0,"proposeNotReady":31,"counterAnswers":1,"tends":29,"tendsBlockedPantry":408,"tendsPaidKcal":43500,"nationalPendingDays":0,"errors":0}
+
+=== PER-SEED COVENANT STATS (courtship leg) ===
+100601: proposeCalls 3 accepted 3 counter 0 prereq 0 blockedPantry 57 tends 7 tendKcal 10500 counterAnswers 0
+100602: proposeCalls 3 accepted 3 counter 0 prereq 0 blockedPantry 77 tends 5 tendKcal 7500 counterAnswers 0
+100603: proposeCalls 4 accepted 3 counter 0 prereq 1 blockedPantry 31 tends 1 tendKcal 1500 counterAnswers 0
+100604: proposeCalls 3 accepted 3 counter 0 prereq 0 blockedPantry 10 tends 5 tendKcal 7500 counterAnswers 0
+100605: proposeCalls 3 accepted 2 counter 1 prereq 0 blockedPantry 82 tends 0 tendKcal 0 counterAnswers 1
+100606: proposeCalls 3 accepted 3 counter 0 prereq 0 blockedPantry 35 tends 2 tendKcal 3000 counterAnswers 0
+100607: proposeCalls 3 accepted 3 counter 0 prereq 0 blockedPantry 30 tends 0 tendKcal 0 counterAnswers 0
+100608: proposeCalls 4 accepted 3 counter 0 prereq 1 blockedPantry 68 tends 9 tendKcal 13500 counterAnswers 0
+
+=== PER-SEED COVENANT STATS (baseline) ===
+100601: proposeCalls 54 accepted 2 counter 0 prereq 52 blockedPantry 40 tends 4 tendKcal 6000
+100602: proposeCalls 73 accepted 1 counter 0 prereq 72 blockedPantry 38 tends 0 tendKcal 0
+100603: proposeCalls 131 accepted 0 counter 0 prereq 131 blockedPantry 29 tends 0 tendKcal 0
+100604: proposeCalls 22 accepted 3 counter 0 prereq 19 blockedPantry 123 tends 6 tendKcal 9000
+100605: proposeCalls 65 accepted 2 counter 0 prereq 63 blockedPantry 33 tends 0 tendKcal 0
+100606: proposeCalls 24 accepted 1 counter 0 prereq 23 blockedPantry 49 tends 0 tendKcal 0
+100607: proposeCalls 65 accepted 1 counter 0 prereq 64 blockedPantry 10 tends 1 tendKcal 1500
+100608: proposeCalls 90 accepted 3 counter 0 prereq 87 blockedPantry 36 tends 0 tendKcal 0
+
+=== PILGRIMAGE FORENSICS (courtship leg events) ===
+100601: pilgrimage-starts 7 studies 2 starts=["d4:village_2","d10:village_1","d25:village_1","d55:village_spl_29_42769","d70:village_spl_29_42769","d85:village_spl_29_42769","d102:village_spl_29_42769"] studies=["d6:village_2","d106:village_spl_29_42769"]
+100602: pilgrimage-starts 1 studies 1 starts=["d3:village_0"] studies=["d5:village_0"]
+100603: pilgrimage-starts 7 studies 3 starts=["d3:village_3","d7:village_1","d14:village_0","d29:village_0","d44:village_spl_25_88357","d57:village_0","d72:village_0"] studies=["d5:village_3","d9:village_1","d46:village_spl_25_88357"]
+100604: pilgrimage-starts 12 studies 1 starts=["d5:village_1","d14:village_0","d29:village_0","d44:village_0","d61:village_0","d76:village_0","d91:village_spl_24_39244","d106:village_spl_24_39244","d121:village_spl_24_39244","d136:village_spl_24_39244","d151:village_spl_24_39244","d166:village_spl_24_39244"] studies=["d7:village_1"]
+100605: pilgrimage-starts 2 studies 2 starts=["d5:village_1","d9:village_2"] studies=["d7:village_1","d11:village_2"]
+100606: pilgrimage-starts 3 studies 3 starts=["d4:village_3","d14:village_0","d27:village_1"] studies=["d6:village_3","d16:village_0","d29:village_1"]
+100607: pilgrimage-starts 4 studies 2 starts=["d3:village_2","d7:village_3","d10:village_0","d25:village_0"] studies=["d5:village_2","d8:village_3"]
+100608: pilgrimage-starts 8 studies 8 starts=["d8:village_2","d35:village_spl_28_4401","d39:village_0","d43:village_spl_34_58183","d47:village_spl_20_79668","d51:village_1","d56:village_3","d80:village_spl_77_35942"] studies=["d10:village_2","d37:village_spl_28_4401","d41:village_0","d45:village_spl_34_58183","d49:village_spl_20_79668","d54:village_1","d58:village_3","d82:village_spl_77_35942"]
+
+=== 100604 EVENT TIMELINE (first 40 courtship events) ===
+d4 aid village_2 first-gift {"day":4,"kind":"aid","village":"village_2","outcome":"first-gift","paid":2000,"detPeer":51.5,"opinionBefore":0,"opinionAfter":10}
+d5 pilgrimage-start village_1 walk {"day":5,"kind":"pilgrimage-start","village":"village_1","outcome":"walk","opinion":0}
+d7 study village_1 codex {"day":7,"kind":"study","village":"village_1","outcome":"codex","opinionBefore":0,"opinionAfter":3}
+d14 pilgrimage-start village_0 walk {"day":14,"kind":"pilgrimage-start","village":"village_0","outcome":"walk","opinion":0}
+d29 pilgrimage-start village_0 walk {"day":29,"kind":"pilgrimage-start","village":"village_0","outcome":"walk","opinion":-2}
+d44 pilgrimage-start village_0 walk {"day":44,"kind":"pilgrimage-start","village":"village_0","outcome":"walk","opinion":0}
+d61 pilgrimage-start village_0 walk {"day":61,"kind":"pilgrimage-start","village":"village_0","outcome":"walk","opinion":4}
+d76 pilgrimage-start village_0 walk {"day":76,"kind":"pilgrimage-start","village":"village_0","outcome":"walk","opinion":8}
+d91 pilgrimage-start village_spl_24_39244 walk {"day":91,"kind":"pilgrimage-start","village":"village_spl_24_39244","outcome":"walk","opinion":-4}
+d106 pilgrimage-start village_spl_24_39244 walk {"day":106,"kind":"pilgrimage-start","village":"village_spl_24_39244","outcome":"walk","opinion":-3}
+d121 pilgrimage-start village_spl_24_39244 walk {"day":121,"kind":"pilgrimage-start","village":"village_spl_24_39244","outcome":"walk","opinion":2}
+d136 pilgrimage-start village_spl_24_39244 walk {"day":136,"kind":"pilgrimage-start","village":"village_spl_24_39244","outcome":"walk","opinion":2}
+d151 pilgrimage-start village_spl_24_39244 walk {"day":151,"kind":"pilgrimage-start","village":"village_spl_24_39244","outcome":"walk","opinion":6}
+d166 pilgrimage-start village_spl_24_39244 walk {"day":166,"kind":"pilgrimage-start","village":"village_spl_24_39244","outcome":"walk","opinion":4}
+
+=== 100604 LINKLINES mentioning blocked/tree/refus/travel ===
+d3 You walk back into Haven. 3 Codex entries. The village is glad to see you.
+d4 You walk back into Haven. 5 Codex entries. The village is glad to see you.
+d7 🌟 JACKPOT: A stranger by the road knows things. They talk for an hour. You learn: Draw Fire, Forage Identification, Shoulder Check. Your Codex overflows.
+d17 🧳 A traveler swears Emberhold, south, is feasting — a whole elk, they say. (They're wrong. Emberhold is starving.)
+d21 📓 Codex: Ibrahim of Emberhold raids Haven's treeline — demands ~2,000 kcal.
+d24 "Your understanding is... deepening! We can see it! Like watching a seed decide to be a tree! Beautiful! Profitable!"
+d30 🌟 JACKPOT: A stranger by the road knows things. They talk for an hour. You learn: Boiling Water, Stalk. Your Codex overflows.
+d51 🌟 JACKPOT: A stranger by the road knows things. They talk for an hour. You learn: Pattern Recognition, Tainted Bait. Your Codex overflows.
+d59 You walk back into Haven. 24 Codex entries. The village is glad to see you.
+d62 🧳 A traveler swears Thornfield, southeast, is feasting — a whole elk, they say. (They're wrong. Thornfield is starving.)
+d81 🌟 JACKPOT: A stranger by the road knows things. They talk for an hour. You learn: Scrounger, Night Hunting, Swimmer. Your Codex overflows.
+d99 🌟 JACKPOT: A stranger by the road knows things. They talk for an hour. You learn: Taught Hands, Haymaker. Your Codex overflows.
+d113 🌟 JACKPOT: A stranger by the road knows things. They talk for an hour. You learn: Field Dressing, Keeping Morale. Your Codex overflows.
+d121 🗣️ Word with the traders: Thornfield sent Stonebridge grain when their stores ran thin — no tribute, no ceremony, just food on the road. That's a thing villages DO now.
+d122 📚 Village knowledge: Ruth taught everyone about Assacu (Sandbox Tree). The Codex grows without you lifting a finger.
+total linkLines: 588
+
+=== HOW DID LINKS SEASON WITHOUT TENDS? (courtship leg link trust trajectory) ===
+100602:
+  village_0 formed d10 trust d10=30 d82=98 d154=96
+  village_2 formed d11 trust d11=30 d83=100 d154=96
+  village_3 formed d12 trust d12=30 d83=100 d154=100
+100605:
+  village_0 formed d13 trust d13=30 d76=97 d138=91
+  village_1 formed d14 trust d14=30 d76=95 d138=78
+  village_2 formed d16 trust d16=30 d77=100 d138=71
+100608:
+  village_2 formed d13 trust d13=30 d88=54 d156=45
+  village_0 formed d87 trust d87=30 d122=60 d156=42
+  village_1 formed d88 trust d88=30 d123=60 d156=32
+
+=== WAVE KILLS PER SEED (w4/w5) ===
+100601: w4 B/A 7/4 w5 B/A 0/0 maxW B/A 4/4
+100602: w4 B/A 6/6 w5 B/A 0/0 maxW B/A 4/4
+100603: w4 B/A 14/0 w5 B/A 13/0 maxW B/A 5/4
+100604: w4 B/A 0/0 w5 B/A 0/0 maxW B/A 4/3
+100605: w4 B/A 4/1 w5 B/A 0/0 maxW B/A 4/4
+100606: w4 B/A 2/0 w5 B/A 0/0 maxW B/A 4/4
+100607: w4 B/A 0/0 w5 B/A 0/0 maxW B/A 4/4
+100608: w4 B/A 6/7 w5 B/A 0/0 maxW B/A 4/4
+
+=== STARVATION DEATH DAYS (courtship leg) ===
+100604: ["d12:gen_2kyfkwz"]
+100606: ["d38:gen_y4ndgyi","d83:gen_dmh21nr"]
+100607: ["d84:jovan_milic"]
+100608: ["d118:visjoin_81"]

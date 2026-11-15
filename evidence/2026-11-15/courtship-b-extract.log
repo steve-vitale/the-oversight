@@ -1,0 +1,83 @@
+=== PER-SEED (B=baseline covenant, A=courtship) ===
+seed | days B/A | end B/A | scale B/A | natEver B/A | firstNat A | natHeld A | starv B/A | deaths B/A | vCombat B/A | maxW B/A | stand B/A | first10 B/A | maxOp B/A
+100601 | 103/168 | village-lost/village-lost | regional/regional | no/no | — | 0 | 0/0 | 81/147 | 63/132 | 4/4 | 199/199 | d39/d4 | 38/32
+100602 | 120/154 | village-lost/village-lost | regional/national | no/yes | 62 | 93 | 0/0 | 104/111 | 95/93 | 4/4 | 199/199 | d88/d8 | 18/59
+100603 | 170/124 | village-lost/village-lost | regional/regional | no/no | — | 0 | 0/0 | 161/103 | 148/93 | 5/4 | 1125/175 | d64/d12 | 20/45
+100604 | 175/201 | village-lost/survived | regional/regional | no/no | — | 0 | 0/1 | 93/31 | 82/28 | 4/3 | 199/75 | d48/d4 | 42/36
+100605 | 108/138 | village-lost/village-lost | regional/national | no/yes | 65 | 74 | 0/0 | 67/86 | 52/73 | 4/4 | 199/199 | d69/d4 | 32/34
+100606 | 82/85 | village-lost/village-lost | regional/regional | no/no | — | 0 | 0/2 | 46/37 | 41/32 | 4/4 | 150/100 | d50/d4 | 16/23
+100607 | 85/86 | village-lost/village-lost | regional/regional | no/no | — | 0 | 0/1 | 74/45 | 64/41 | 4/4 | 175/152 | d74/d34 | 13/35
+100608 | 149/156 | village-lost/village-lost | regional/regional | no/yes | 119 | 36 | 0/1 | 71/89 | 59/66 | 4/4 | 199/199 | d49/d12 | 35/41
+
+=== WALL NUMBERS ===
+control: nationalEver 0/8, nationalEnd 0/8, table 0/8, wins 0/8, wave4 8/8, wave5 1/8, medianSurvival 114d, survivedHorizon 0/8, waveKills w1..w5 256/178/63/39/13, deaths 697, vCombat 604, starvation 0
+on: nationalEver 3/8, nationalEnd 2/8, table 0/8, wins 0/8, wave4 7/8, wave5 0/8, medianSurvival 146d, survivedHorizon 1/8, waveKills w1..w5 277/183/57/18/0, deaths 649, vCombat 558, starvation 5
+
+=== VERB TABLE PER LEG (capSummary) ===
+control: {"proposeCalls":524,"proposeAccepted":13,"proposeCounter":0,"proposeDeclined":0,"proposeShut":0,"proposePrereq":511,"proposeBlockedPantry":358,"proposeBlockedCap":3,"proposeBlockedPending":0,"proposeBlockedDay":72,"proposeNoCandidate":0,"proposeNotReady":32,"counterAnswers":0,"tends":11,"tendsBlockedPantry":292,"tendsPaidKcal":16500,"nationalPendingDays":0,"errors":0}
+on: {"aids":18,"aidsPaidKcal":36000,"aidsBlockedPantry":133,"aidsBlockedPending":0,"aidsBlockedCap":451,"aidsNoCandidate":64,"studies":22,"pilgrimages":44,"pilgrimDays":354,"nationalPendingDays":3,"errors":0}
+
+=== VERB EVENTS PER LEG (proposeCovenant outcomes, forms) ===
+control proposeCovenant outcomes: {"declined-or-blocked":511,"formed:link_mgpspj46399":1,"formed:link_mgpspkag451":1,"formed:link_mgpspkrd178":1,"formed:link_mgpspip8375":1,"formed:link_mgpspiqy780":1,"formed:link_mgpspk2i662":1,"formed:link_mgpspjtu746":1,"formed:link_mgpspk5432":1,"formed:link_mgpspjer132":1,"formed:link_mgpspk6a984":1,"formed:link_mgpspkw2143":1,"formed:link_mgpspl7u189":1,"formed:link_mgpspl85482":1}
+control peer-link forms: ["100601:d39:village_2 via formed via proposeCovenant","100601:d82:village_spl_29_78228 via formed via proposeCovenant","100602:d100:village_spl_26_6892 via formed via proposeCovenant","100604:d48:village_1 via formed via proposeCovenant","100604:d49:village_2 via formed via proposeCovenant","100604:d128:village_spl_29_75270 via formed via proposeCovenant","100605:d75:village_1 via formed via proposeCovenant","100605:d87:village_2 via formed via proposeCovenant","100606:d50:village_2 via formed via proposeCovenant","100607:d74:village_2 via formed via proposeCovenant","100608:d101:village_spl_25_14997 via formed via proposeCovenant","100608:d128:village_spl_27_50529 via formed via proposeCovenant","100608:d129:village_spl_35_69527 via formed via proposeCovenant"]
+on proposeCovenant outcomes: {"formed:link_mgpspir6969":1,"formed:link_mgpspisl756":1,"formed:link_mgpspkqz623":1,"formed:link_mgpsphw2909":1,"formed:link_mgpsphya333":1,"formed:link_mgpspi08197":1,"declined-or-blocked":2,"formed:link_mgpsphy269":1,"formed:link_mgpspkdb640":1,"formed:link_mgpspkol491":1,"formed:link_mgpspj1z310":1,"formed:link_mgpspj26441":1,"formed:link_mgpspj2e853":1,"formed:link_mgpsphuf112":1,"formed:link_mgpsphw8697":1,"counter":1,"formed:link_mgpspiv0148":1,"formed:link_mgpspix727":1,"formed:link_mgpspiyc274":1,"formed:link_mgpspizn552":1,"formed:link_mgpspj07243":1,"formed:link_mgpspj1h30":1,"formed:link_mgpsphze145":1,"formed:link_mgpspkte546":1,"formed:link_mgpspkty112":1}
+on peer-link forms: ["100601:d40:village_0 via formed via proposeCovenant","100601:d41:village_1 via formed via proposeCovenant","100601:d147:village_2 via formed via proposeCovenant","100602:d10:village_0 via formed via proposeCovenant","100602:d11:village_2 via formed via proposeCovenant","100602:d12:village_3 via formed via proposeCovenant","100603:d13:village_1 via formed via proposeCovenant","100603:d104:village_spl_25_88357 via formed via proposeCovenant","100603:d115:village_2 via formed via proposeCovenant","100604:d189:village_0 via formed via proposeCovenant","100604:d190:village_2 via formed via proposeCovenant","100604:d191:village_spl_24_39244 via formed via proposeCovenant","100605:d13:village_0 via formed via proposeCovenant","100605:d14:village_1 via formed via proposeCovenant","100605:d16:village_2 via formed via answerCounter","100606:d51:village_0 via formed via proposeCovenant","100606:d54:village_1 via formed via proposeCovenant","100606:d56:village_3 via formed via proposeCovenant","100607:d41:village_2 via formed via proposeCovenant","100607:d41:village_3 via formed via proposeCovenant","100607:d42:village_0 via formed via proposeCovenant","100608:d13:village_2 via formed via proposeCovenant","100608:d87:village_0 via formed via proposeCovenant","100608:d88:village_1 via formed via proposeCovenant"]
+
+=== AID/STUDY PER SEED (courtship leg) + STARVATION SPLIT ===
+100601: aids 3 aidKcal 6000 studies 2 pilgrimages 7 pilgrimDays 76 starvA 0 starvB 0 tendsA 0 tendKcalA 0
+100602: aids 3 aidKcal 6000 studies 1 pilgrimages 1 pilgrimDays 2 starvA 0 starvB 0 tendsA 0 tendKcalA 0
+100603: aids 2 aidKcal 4000 studies 3 pilgrimages 7 pilgrimDays 62 starvA 0 starvB 0 tendsA 0 tendKcalA 0
+100604: aids 1 aidKcal 2000 studies 1 pilgrimages 12 pilgrimDays 156 starvA 1 starvB 0 tendsA 0 tendKcalA 0
+100605: aids 3 aidKcal 6000 studies 2 pilgrimages 2 pilgrimDays 4 starvA 0 starvB 0 tendsA 0 tendKcalA 0
+100606: aids 2 aidKcal 4000 studies 3 pilgrimages 3 pilgrimDays 6 starvA 2 starvB 0 tendsA 0 tendKcalA 0
+100607: aids 2 aidKcal 4000 studies 2 pilgrimages 4 pilgrimDays 31 starvA 1 starvB 0 tendsA 0 tendKcalA 0
+100608: aids 2 aidKcal 4000 studies 8 pilgrimages 8 pilgrimDays 17 starvA 1 starvB 0 tendsA 0 tendKcalA 0
+
+=== STAGED BEATS (answerNationalChoice events) ===
+on 100602 d62 shape=covenant answer=pact result=sat
+on 100605 d65 shape=covenant answer=pact result=sat
+on 100608 d119 shape=covenant answer=pact result=sat
+
+=== GUARDRAIL: combat deaths >50% over baseline ===
+100601: combat deaths 63 -> 132 (+110%) days 103 -> 168
+100602: ok (95 -> 93)
+100603: ok (148 -> 93)
+100604: ok (82 -> 28)
+100605: ok (52 -> 73)
+100606: ok (41 -> 32)
+100607: ok (64 -> 41)
+100608: ok (59 -> 66)
+
+=== INSTRUMENT: errors + linkLines cap ===
+control: instrumentErrors 0, linkLines at 900 cap: 6/8
+on: instrumentErrors 0, linkLines at 900 cap: 5/8
+
+=== COVENANT SHAPE DETAIL (courtship leg per-seed) ===
+100601: covenant outcome=blocked blocker=covenant-seasoned-short:2-of-3 blockers=["covenant-seasoned-short:2-of-3"] qDays=0 firstQ=null stagedDays=[] sat=0/0
+100602: covenant outcome=staged blocker=null blockers=[] qDays=113 firstQ=42 stagedDays=[62] sat=1/1
+100603: covenant outcome=blocked blocker=covenant-seasoned-short:1-of-3 blockers=["covenant-seasoned-short:1-of-3"] qDays=0 firstQ=null stagedDays=[] sat=0/0
+100604: covenant outcome=blocked blocker=covenant-seasoned-short:0-of-3 blockers=["covenant-seasoned-short:0-of-3"] qDays=0 firstQ=null stagedDays=[] sat=0/0
+100605: covenant outcome=staged blocker=null blockers=[] qDays=91 firstQ=48 stagedDays=[65] sat=1/1
+100606: covenant outcome=blocked blocker=covenant-seasoned-short:0-of-3 blockers=["covenant-seasoned-short:0-of-3"] qDays=0 firstQ=null stagedDays=[] sat=0/0
+100607: covenant outcome=blocked blocker=covenant-rung-gate blockers=["covenant-rung-gate"] qDays=14 firstQ=72 stagedDays=[] sat=0/0
+100608: covenant outcome=staged blocker=null blockers=[] qDays=37 firstQ=118 stagedDays=[119] sat=1/1
+
+=== OPINION TRAJECTORY (courtship leg, checkpoints) ===
+100601: first10=d4 checkpoints={"d4":10,"d10":13,"d20":13,"d30":15,"d60":15,"d90":19,"d120":20,"d150":30,"d200":null}
+100602: first10=d8 checkpoints={"d4":0,"d10":13,"d20":15,"d30":21,"d60":43,"d90":49,"d120":57,"d150":56,"d200":null}
+100603: first10=d12 checkpoints={"d4":0,"d10":3,"d20":13,"d30":15,"d60":19,"d90":43,"d120":45,"d150":null,"d200":null}
+100604: first10=d4 checkpoints={"d4":10,"d10":10,"d20":10,"d30":10,"d60":11,"d90":17,"d120":16,"d150":26,"d200":34}
+100605: first10=d4 checkpoints={"d4":10,"d10":10,"d20":13,"d30":17,"d60":25,"d90":27,"d120":31,"d150":null,"d200":null}
+100606: first10=d4 checkpoints={"d4":10,"d10":10,"d20":10,"d30":10,"d60":17,"d90":null,"d120":null,"d150":null,"d200":null}
+100607: first10=d34 checkpoints={"d4":0,"d10":3,"d20":5,"d30":7,"d60":15,"d90":null,"d120":null,"d150":null,"d200":null}
+100608: first10=d12 checkpoints={"d4":null,"d10":null,"d20":15,"d30":11,"d60":17,"d90":21,"d120":33,"d150":39,"d200":null}
+
+=== BASELINE OPINION TRAJECTORY (checkpoints) ===
+100601: first10=d39 checkpoints={"d30":4,"d60":14,"d90":38,"d120":null,"d150":null,"d180":null,"d200":null}
+100602: first10=d88 checkpoints={"d30":0,"d60":6,"d90":10,"d120":18,"d150":null,"d180":null,"d200":null}
+100603: first10=d64 checkpoints={"d30":4,"d60":8,"d90":12,"d120":14,"d150":16,"d180":null,"d200":null}
+100604: first10=d48 checkpoints={"d30":2,"d60":20,"d90":26,"d120":36,"d150":40,"d180":null,"d200":null}
+100605: first10=d69 checkpoints={"d30":4,"d60":6,"d90":16,"d120":null,"d150":null,"d180":null,"d200":null}
+100606: first10=d50 checkpoints={"d30":4,"d60":12,"d90":null,"d120":null,"d150":null,"d180":null,"d200":null}
+100607: first10=d74 checkpoints={"d30":2,"d60":7,"d90":null,"d120":null,"d150":null,"d180":null,"d200":null}
+100608: first10=d49 checkpoints={"d30":6,"d60":10,"d90":11,"d120":15,"d150":null,"d180":null,"d200":null}
