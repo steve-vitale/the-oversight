@@ -35,13 +35,34 @@ function ok(name, cond, detail) {
 // Cursor's dawn scorer adds DUTY water ads (3.0-5.5+) that win 60/291 picks
 // over light lottery draws while the cistern sits under 2 days' water, so
 // villagers fetch water all morning and eat at dusk. Tolerance stays ±25%.
+// Re-pinned 2026-11-15 (journey-landing r135, r129 terrain-pocket fix):
+// FORAGE 2 -> 1. The movement fix changed the day-22 wild fight's outcome
+// (stacked-spawn half: the first monster no longer spawns on the scholar's
+// tile) — on master Benoit Lambert + Pavel Dubinin die "in the wild" d22
+// and Minh Roth stops picking after d21; on fixed code both live (Benoit
+// dies of dehydration d29 instead) and an extra hushwolf is killed. Two
+// extra survivors shift the errand mix (WATER 198->215, EAT 59->62, picks
+// 291->310) and the shared RNG stream; Chantal Mukendi's picks are
+// byte-identical through d24, then diverge — on fixed code she eats on d28
+// instead of foraging once. No forage site is unreachable and nobody is
+// worse off on fixed code (living 9 vs 8, maxTrust 75 vs 53, trustedOpen
+// 5 vs 2). Honest rebaseline for a deliberate design change (softlock fix),
+// not a loosened assertion: the bar shape is unchanged. Mechanism proven
+// by the errand-level probe (scripts/probe-person-trust-forage-r135.js;
+// traces in goal hidden_files evidence/2026-11-14/landing-r135-probe-
+// {master,fixed}-trace.jsonl). Measured fixed-code panel: {maxTrust:75,
+// entries:54, trustedOpen:5, kinds:{LEAVE:2, WATER:215, EAT:62, VISIT:11,
+// FORAGE:1, SEEK:19}}. NOTE for the next run: a baseline count of 1 under
+// ±25% admits only exactly 1 — any single-errand flip fails the test. The
+// bar shape (tolerance for small counts) is a metric-review item, not
+// changed here.
 const BASELINE = {
   seed: 84101,
   days: 30,
   maxTrust: 56,
   entries: 48,
   trustedOpen: 5,
-  kinds: { LEAVE: 2, WATER: 187, EAT: 59, VISIT: 10, FORAGE: 2, SEEK: 19, HAUL: 0 },
+  kinds: { LEAVE: 2, WATER: 187, EAT: 59, VISIT: 10, FORAGE: 1, SEEK: 19, HAUL: 0 },
 };
 const NON_AIMED = ['WATER', 'FORAGE', 'TRAPS', 'EAT', 'SEEK', 'LEAVE', 'HUNT', 'HAUL'];
 const TOLERANCE = 0.25; // ±25% of baseline count; zero-baseline allows +2 absolute
