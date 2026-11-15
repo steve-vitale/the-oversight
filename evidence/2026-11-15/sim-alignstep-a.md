@@ -205,12 +205,16 @@ is unmeasured — the gate stopped before any subject leg.
   expect this and recover the same way — or the step script needs a
   tracked-scratch guard (flagged for the coordinator; not fixed here,
   out of axis).
-- DOCUMENTED: safe-commit.sh index clobber struck 1× this run (prereg +
+- DOCUMENTED: safe-commit.sh index clobber struck 2× this run (prereg +
   proof commit df6866b04 — both files staged-deleted, worktree copies
-  untracked) — repaired with the documented `ls-tree -r HEAD -- <paths>
-  | git update-index --add --index-info` pipe; status empty + diff HEAD
-  empty + hash-object == HEAD blob verified before continuing.
-- DOCUMENTED: no host write flap hit this run.
+  untracked; evidence commit c9a387f20 — all 11 files staged-deleted,
+  worktree copies untracked, proof script MM) — repaired each time with
+  the documented `ls-tree -r HEAD -- <paths> | git update-index --add
+  --index-info` pipe; status empty + diff HEAD empty + hash-object ==
+  HEAD blob verified before continuing.
+- DOCUMENTED: a service restart interrupted the first evidence-commit
+  attempt mid-command (no commit landed; verified HEAD still df6866b04
+  before retrying) — the retry committed cleanly as c9a387f20.
 - DOCUMENTED: the arm branch was rebased from its registration base
   d073bd656 onto the then-current master tip ce0f28a46 before any arm
   commit (the intervening commit is the journey r137 conversation
