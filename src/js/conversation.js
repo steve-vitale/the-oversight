@@ -1097,7 +1097,17 @@
       // and self-repeat fallbacks are meta-speech, not thread content.
       // Noting them made deflections the thread's "last beat", which the
       // resume opener then quoted as the unfinished topic.
-      try { if (!fellBack) for (const chunk of useChunks) this.convoNoteSpokenBeat(vid, chunk); } catch (e) {}
+      // NO-BEAT (journey-succession r209): interface information spoken
+      // through sayLine — favor-block / requirements lines ("Your partner
+      // is inside the Haven hall. Go through the door to meet them.") —
+      // is direction to the player, never NPC speech about the thread.
+      // Noting it made it the thread's last beat, so a later resume
+      // opener quoted a door direction as the NPC's own memory ("We never
+      // did finish talking about that water haul — ... 'Your partner is
+      // inside the Haven hall...'"). Opt-in only (opts.noBeat); the
+      // transcript, ledger, and voice are untouched — the line is still
+      // spoken and heard, it just never becomes thread content.
+      try { if (!fellBack && !(opts && opts.noBeat)) for (const chunk of useChunks) this.convoNoteSpokenBeat(vid, chunk); } catch (e) {}
       // VOICED DIALOGUE (Steve 2026-10-11): speak each NPC beat in the
       // villager's own deterministic voice (voice-piper.js). Fire-and-forget;
       // mute/unlock/setting/foreign gates live inside convoSpeakLine.

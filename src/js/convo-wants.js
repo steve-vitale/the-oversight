@@ -834,11 +834,36 @@
         // fromSeed/inherited paths are handled there) instead of the hollow
         // "I'm alright right now." If no favor can be stated, the NO HOLLOW
         // FALLBACK below answers honestly.
+        // DEFERRED-ASK BLOCKED (journey-succession r209): the deferred ask
+        // is a templated favor line — water_haul has 9 opener/ask combos
+        // over a village-wide cistern level, so another villager stating
+        // the identical ask recently run-blocks it (seed 34262 d85 Logan:
+        // the cistern line was preRun-blocked and sayLine dry-replaced it
+        // with "...Sorry, lost my train of thought." even though the
+        // opener had just called the water haul back as unfinished
+        // business). Same class as the r147/r151 whyLine guard directly
+        // above: try the three fresh need phrasings in order, and return
+        // null when every one is blocked, so the caller falls back to its
+        // own graceful line (dlg:help's nowant pool) instead of handing
+        // sayLine a line the ledger will refuse — sayLine dry-replaces
+        // and returns the dry line truthy, so the caller's `!said` check
+        // never fires. No RNG: fixed order, pure-read checks only.
         try {
           const w = c && c.want;
           if (w && w.def && typeof w.def.opener === 'function') {
             const line = w.def.opener.call(this, vid);
-            if (line) return line;
+            if (line) {
+              if (typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, line)) {
+                if (typeof this.convoFavorNeedLine === 'function') {
+                  for (let vi = 0; vi < 3; vi++) {
+                    const need = this.convoFavorNeedLine(vid, favor, true, vi);
+                    if (need && !this.convoWouldBlock(vid, need)) return need;
+                  }
+                }
+                return null;
+              }
+              return line;
+            }
           }
         } catch (e) {}
         return null; // no favor statable — the NO HOLLOW FALLBACK answers honestly

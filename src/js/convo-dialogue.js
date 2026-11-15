@@ -264,7 +264,13 @@
           }
           c._favorReqSaid[rawReq] = true;
         }
-        this.sayLine(vid, line, { diegeticAct: true });
+        // NO-BEAT (journey-succession r209): a blocked favor line is
+        // interface information (requirements / door directions — "Your
+        // partner is inside the Haven hall..."), never NPC speech about
+        // the thread. Successful performances keep the current behavior
+        // (they are thread content); only the blocked line opts out of
+        // becoming the thread's last beat / resume memory.
+        this.sayLine(vid, line, { diegeticAct: true, noBeat: !result.ok });
         if (result.ok && !result.incomplete && c.want) { c.want.stage = 3; c.want.resolution = result.promiseMissed ? 'broken' : 'fulfilled'; }
         if (result.ok && result.close) c.windingDown = true;
         c.replyMenu = null;
