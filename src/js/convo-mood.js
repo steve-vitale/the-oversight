@@ -327,6 +327,22 @@
         '"Right. Well." That\'s the whole goodbye.',
       ]) || null;
     }
+    // PLAIN PARTING (journey-establishment r214 2026-11-15): friendly and
+    // neutral sittings had NO mood goodbye — the parting beat only existed
+    // for warm/tense/cool. On an engine-ended sitting the exit line is
+    // already null (goodbye said at winddown, r7 2026-10-12 — a person
+    // says goodbye once), so a neutral sitting with no want-close and no
+    // thread-close ended on its last grace beat with no parting words at
+    // all (panel: seed 100505 Marta — farewell, joke, "Snorts.", silence).
+    // A plain parting closes every sitting; the exit line stays null when
+    // the goodbye was already said, so this never stacks a farewell.
+    if (band === 'friendly' || band === 'neutral') {
+      return this.convoPickCycle(vid, 'mbye:plain', [
+        '"See you around."',
+        '"Take care out there."',
+        '"Same time tomorrow, maybe."',
+      ]) || null;
+    }
     return null;
   };
 
