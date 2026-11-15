@@ -421,6 +421,13 @@ function corpusDir(step) {
     fs.existsSync(path.join(REPO, 'scripts', 'culpritbisect-step-guardablate-fresh-20261115.sh')), 'step script present');
   T.ok('guardablate-fresh panel builder exists on the arm branch',
     fs.existsSync(path.join(REPO, 'scripts', 'build-guardablate-fresh-panels-20261115.js')), 'panel builder present');
+  T.ok('step script restore() never rm-deletes tracked scratch (checkout-from-HEAD for tracked files, rm only for untracked)',
+    (function () {
+      const s = fs.readFileSync(path.join(REPO, 'scripts', 'culpritbisect-step-guardablate-fresh-20261115.sh'), 'utf8');
+      return s.indexOf('git checkout HEAD -- "$f"') !== -1 &&
+        s.indexOf('TRACKED at the step commit') !== -1 &&
+        s.indexOf('rm -f scripts/culpritbisect-driver-20261113.js') === -1;
+    })(), 'restore-from-HEAD present, bulk delete gone');
   T.ok('step script restores the guardablate-fresh driver/analyzer from the ARM branch and shared tooling from master',
     (function () {
       const s = fs.readFileSync(path.join(REPO, 'scripts', 'culpritbisect-step-guardablate-fresh-20261115.sh'), 'utf8');

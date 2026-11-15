@@ -49,7 +49,23 @@ restore() {
   if [ -n "${COMMIT:-}" ]; then
     git show "$COMMIT:src/js/standing.js" > src/js/standing.js 2>/dev/null || true
   fi
-  rm -f scripts/culpritbisect-driver-guardablate-fresh-20261115.js scripts/culpritbisect-analyze-guardablate-fresh-20261115.js scripts/culpritbisect-driver-20261113.js scripts/culpritbisect-analyze-20261113.js scripts/masterregress-analyze-20261113.js scripts/vetfirst-instrument-20261111.js
+  # Scratch files may be TRACKED at the step commit (the 20261113
+  # files are on master, so they are tracked at the tip commit; the
+  # guardablate-fresh files are on the arm branch, which the subject
+  # commit descends from) or UNTRACKED (old step commits predate
+  # them). Never rm a tracked file: restore tracked scratch from
+  # HEAD, rm only untracked scratch. (20261115 fix: the baseline leg
+  # failed its post-restore dirty check because a plain rm -f
+  # deleted the four tracked 20261113 files at the tip commit — the
+  # leg's measurement had completed; the corpus was recovered
+  # intact and the files restored from HEAD.)
+  for f in scripts/culpritbisect-driver-guardablate-fresh-20261115.js scripts/culpritbisect-analyze-guardablate-fresh-20261115.js scripts/culpritbisect-driver-20261113.js scripts/culpritbisect-analyze-20261113.js scripts/masterregress-analyze-20261113.js scripts/vetfirst-instrument-20261111.js; do
+    if git cat-file -e "HEAD:$f" 2>/dev/null; then
+      git checkout HEAD -- "$f" 2>/dev/null || true
+    else
+      rm -f "$f"
+    fi
+  done
 }
 fail() {
   echo "CULPRITBISECT STEP FAIL ($STEP @ $COMMIT): $1" >&2
