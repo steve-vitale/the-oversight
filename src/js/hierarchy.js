@@ -106,6 +106,7 @@
 //   - grief_coalesces: one funeral doesn't become five — a link already grieving (young-link beat staged, or inside the mourning window) takes no new haircut, beat, or leverage grab from a further death; the first death keeps full force. The neglect snap still runs mid-grief. (code: hierarchy.js)
 //   - young_links_get_grace: succession on a link younger than 21 days costs -8 trust (not -15) and never snaps — instead a staged renegotiation beat (link.pendingRenegotiation, answered via answerRenegotiation: gift/visit/wait with real costs, expires aloud in 7 days). Older links still snap when trust craters — deaths hit hard. Grief delays the verdict because they're still deciding what Haven is. (code: hierarchy.js)
 //   - succession_grace_for_sub_bar_links (SUCCGRACE=1, sim-succgrace 2026-10-15, experimental env-gated, default OFF — sim-findings #321): the young-link idiom extended to succession day. In successionCrisis, a Haven-primary link below the seasoned bar (trust < 40) at the funeral that would dissolve the realm aloud gets an answerable renegotiation beat instead of the silent verdict (gift/visit/wait, real costs, expires aloud in 7 days). While pending, _linkSeasoned holds the fire's place; the beat's answers land through the mourning choke (the new speaker's played deeds, like the young-link idiom — mourning itself untouched: ordinary gains stay gagged). Answered, the link follows the beat's normal resolution; unanswered, the realm dissolves aloud exactly as today. Chaos untouched: haircut, tribute moves, neglect snap, 14d proving window. (code: hierarchy.js)
+//   - funeral_mend (FUNERALMEND, sim-funeral-mend-b 2026-11-14, default ON — '0' restores the old funeral exactly): at the funeral, the village mourns together and the shared rite mends every link the funeral shook — the links successionCrisis returned 'shaken' for, 1,500 kcal of funeral feast per link from the pantry (the tend price), regaining the -8 haircut in full when the pantry pays, proportionally from a thin pantry, nothing when it is empty. The gain routes through _trustGain with the mourning window lifted for the rite itself (the SUCCGRACE-beat pattern); mourning, tribute moves and the neglect snap stand. Voiced: the funeral names the dead, the mended fires, and the feast kcal — a shortfall is said aloud, never mended silently. Links with a staged beat (young-link grace, SUCCGRACE), peer-league links (their crisis beat is their repair), grieving links (no new haircut) and broken links are skipped — a link gets the beat OR the mend, never both. Counters live at state.village.funeralMendStats (funerals / linksMended / kcalSpent), created only in the mend path. (code: hierarchy.js)
 //   - the_world_watches: global = national + deed-reactive viewership >= 32 (travel longsim r5 2026-10-12: recalibrated from provisional v1 40 — the 40 bar was set under the old pantry-frozen viewership economy; the earned economy's deed-rich seasons plateau at ~31-38), staged as the played pre-table beat "The Watchers". The table itself is the ending, not this. (code: hierarchy.js)
 //   - national_routes_tribute: when national, subordinate tribute grain arrives at x1.25 via the System's logistics layer — and the arrival line says the true amount. Copy and engine agree. (code: hierarchy.js)
 //   - demand_honor_is_proportional: honoring a tribute demand with a thin pantry grants proportional trust and honest copy, never a free +8 on empty hands; an already-loaned representative extends instead of being clobbered. (code: hierarchy.js)
@@ -318,6 +319,14 @@
     // proceeds exactly as today, byte-identical.
     _succGraceGate() {
       try { return typeof process !== 'undefined' && process.env && process.env.SUCCGRACE === '1'; } catch (e) { return false; }
+    },
+
+    // _funeralMendGate: the funeral-mend lever (sim-funeral-mend-b,
+    // 2026-11-14). FUNERALMEND=0 restores the old funeral exactly (no
+    // mend, no feast, no line, no counter); default ON, including the
+    // browser where process is undefined.
+    _funeralMendGate() {
+      try { return !(typeof process !== 'undefined' && process.env && process.env.FUNERALMEND === '0'); } catch (e) { return true; }
     },
 
     // _succTrustOf: the trust a polity-membership bar reads. The link is
@@ -1853,6 +1862,12 @@
         var nm = 'them';
         try { nm = String(this.displayName(vid)).split(' ')[0]; } catch (e) {}
         this.say(`🕯️ ${nm} is dead — and the dead hold no treaties. Every link Haven has shakes.`);
+        // FUNERALMEND (sim-funeral-mend-b 2026-11-14): the rite mends
+        // every link this funeral shook — the ones successionCrisis
+        // returned 'shaken' for (haircut landed, no beat staged). Beat
+        // links ('grace'), peer-league links (their crisis beat), grieving
+        // links (no new haircut) and broken links are not mend candidates.
+        var _shaken = [];
         for (var i = 0; i < links.length; i++) {
           try {
             var _dl = links[i];
@@ -1867,10 +1882,67 @@
             }
             // peer leagues shake covenant-style, not vassal-style
             if (_dl.kind === 'covenant' || _dl.kind === 'trade') this.covenantCrisis(_dl.id, 'leader-death');
-            else this.successionCrisis(_dl.id);
+            else if (this.successionCrisis(_dl.id) === 'shaken') _shaken.push(_dl);
           } catch (e) {}
         }
+        if (_shaken.length && this._funeralMendGate()) {
+          try { this._funeralMend(nm, _shaken); } catch (e) {}
+        }
       } catch (e) {}
+    },
+
+    // _funeralMend: the funeral rite mends every link the funeral shook
+    // (sim-funeral-mend-b 2026-11-14). The village mourns together: one
+    // feast from the pantry, 1,500 kcal per shaken link (the tend price),
+    // buys the -8 haircut back — in full when the pantry pays, in
+    // proportion from a thin pantry, not at all when it is empty. The
+    // gain routes through _trustGain with the mourning window lifted for
+    // the rite itself (the SUCCGRACE-beat pattern: save, clear, gain,
+    // restore); mourning, the tribute moves and the neglect snap stand.
+    // Voiced: the funeral names the dead, the mended fires and the feast
+    // kcal, and a shortfall is said aloud, never mended silently. A link
+    // gets the beat OR the mend, never both — beat-pending links are
+    // skipped here (their beat is their repair). Counters live at
+    // state.village.funeralMendStats, created only on this path.
+    _funeralMend(nm, shaken) {
+      var mended = [], shorted = [], spent = 0;
+      for (var i = 0; i < shaken.length; i++) {
+        var link = shaken[i];
+        if (!link || link.status !== 'active' || link.pendingRenegotiation) continue;
+        var paid = this._removePantryKcal(1500);
+        if (!(paid > 0)) { shorted.push(link); continue; }
+        var gain = Math.round(8 * Math.min(1, paid / 1500));
+        var mourn = link.mourningUntil || 0;
+        link.mourningUntil = 0;
+        var got = this._trustGain(link, gain);
+        link.mourningUntil = mourn;
+        if (got > 0) {
+          mended.push(link);
+          spent += paid;
+          this._linkNote(link, 'funeral-mend', 'Funeral feast fed this fire (' + paid.toLocaleString() + ' kcal, trust +' + got + ') — the -8 bought back with grain.');
+          try { if (this.ledgerAdd) this.ledgerAdd('hierarchy', 'funeral-mend:' + this._linkOther(link, HOME)); } catch (e) {}
+        } else {
+          shorted.push(link);
+        }
+      }
+      var self = this;
+      var names = function (arr) {
+        return arr.map(function (l) { return self._ovName(self._linkOther(l, HOME)); }).join(', ');
+      };
+      if (mended.length) {
+        var v = this.state.village || {};
+        var fm = v.funeralMendStats || (v.funeralMendStats = { funerals: 0, linksMended: 0, kcalSpent: 0 });
+        fm.funerals += 1; fm.linksMended += mended.length; fm.kcalSpent += spent;
+        if (!shorted.length) {
+          this.say(`🕯️ ${nm}'s funeral feast: ${spent.toLocaleString()} kcal from the pantry, and every shaken fire is fed — ${names(mended)}. The village mourns together, and the links hold because the dead are honored, not because the grief was forgotten. (Trust mended — the -8 bought back with grain.)`);
+        } else {
+          this.say(`🕯️ ${nm}'s funeral feast: ${spent.toLocaleString()} kcal from the pantry feeds ${names(mended)} — the village mourns together, and those links hold because the dead are honored. (Trust mended — the -8 bought back with grain.)`);
+          this.say(`The pantry could not feed ${names(shorted)}'s fire — no grain to spare for the feast. The mend waits; the grief does not. (Trust stays shaken.)`);
+        }
+      } else if (shorted.length) {
+        this.say(`🕯️ ${nm}'s funeral feast: the pantry holds nothing to feed a shaken fire — ${names(shorted)} go unmended. The village mourns together anyway; the links stay shaken. (Trust -8 stands.)`);
+      }
+      return { mended: mended.length, shorted: shorted.length, spent: spent };
     },
 
     // successionCrisis: Haven's speaker is dead — the representative or
