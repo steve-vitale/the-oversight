@@ -276,3 +276,55 @@ a sim to run. No fresh sims are planned at prereg time.
   numbers are recomputed with the kind filter as a correction record;
   its verdict is not re-judged here).
 - No new seed band is consumed unless §Targeted fresh sims fires.
+
+## Correction 1 (2026-11-15, before the judged classifier run)
+
+Two frozen rules were wrong about recorder timing. Both were caught by
+read-only probes of the v1 analyzer output (which is NOT judged output —
+the classifier is re-run after this correction, and v1 is superseded).
+The correction changes the instrument, not the question or the GO bar
+(§DIAG GO criterion unchanged).
+
+**C1a — death windows are left-inclusive, both classes.** The prereg
+froze T windows as (prevSnap.day, exitSnap.day] and G windows as
+(prev.d, cur.d]. Wrong: both recorders snapshot state at the START of
+the day, so a veteran present in the snapshot of day D who dies during
+day D first disappears in the day D+1 snapshot, and the death row
+carries day D — the left edge. Evidence (read-only probes, v1 output):
+T NON-DEATH-EXIT Carlos Diaz (7redef-match 190391, last seen snapshot
+140, exit snapshot 141) has a regDeaths row day 140, cause "the wild",
+player:true; Ashanti Du (190394, 48→49) likewise day 48. G NON-DEATH
+drops show the same pattern in bulk: 100521 control (63→64) has a
+villager death day 63 cause "the wild" player:true and none in-window;
+100524, 100530, 100534, 100535, 100536 control and 100524, 100528,
+100530, 100532 armed repeat it. Windows are now [prevSnap.day,
+exitSnap.day] (T) and [prev.d, cur.d] (G). For T this cannot
+misattribute: a vid has at most one regDeaths row, so widening the
+window cannot match another vid's death. For G it can only move
+UNIQUE→AMBIGUOUS where the wider window holds ≥2 candidates — honest
+ambiguity, and AMBIGUOUS still counts as UNCLASSIFIED for the GO bar.
+The driver code agrees the snapshot is start-of-day: the snapshot fires
+in the wrapped policy.daily `finally`
+(`scripts/culpritbisect-driver-20261113.js`, after the dawn decision,
+before the day's events play out).
+
+**C1b — T unlock day takes the first wave-5 spawn as evidence.** The
+prereg derived unlock day from the first snapshot meeting all gate
+conditions, validated by derived ≤ firstW5SpawnDay. Wrong: the gate
+can open mid-day (a second wave-4 kill during the day) and a wave-5
+monster can spawn the same day, while the next dawn snapshot is the
+first to show the conditions — and snapshot days can be missing
+entirely (daily arrays skip days; 190628 jumps 100→102). Evidence:
+2b-fresh baseline seed 190628: derived 102, first w5 spawn 101, wave-4
+kills day 100 (via wild) and day 101 (via companion) making the second
+veteran mid-day; standing 280→305→330 across days 100–101. Rule now:
+unlockDay = min(derived snapshot day, firstW5SpawnDay) when both
+exist; firstW5SpawnDay alone when the derived day is null (gate opened
+and closed between snapshots); derived day alone when no w5 spawn
+exists; null when neither exists. The validation error is replaced by
+a recorded lag (derived − firstSpawn, in days) as a diagnostic. A w5
+spawn proves the gate was open that day (spawn requires
+unlockedWave()==5), so taking the minimum cannot predate the true
+unlock; the derived day cannot predate it either (conditions hold only
+once the gate is open), so the minimum is the tightest available
+estimate.
