@@ -86,10 +86,24 @@ Include ONLY:
 3. The green-list union line for that test ONLY:
    `scripts/test-dawn-materialize-honesty.js quick` — the merge diff's
    green-list change adds exactly this one line (after the
-   `test-villager-brain-dawn.js quick` line, which already exists at the
-   first parent and at the far end). Resolved by UNION only, and only
-   after verifying that only scripts/check.js reads green-list.txt and
-   zero src/js files do (verified by this arm — see §Green-list readers).
+   `test-villager-brain-dawn.js quick` line). Resolved by UNION only, and
+   only after verifying that only scripts/check.js reads green-list.txt
+   and zero src/js files do (verified by this arm — see §Green-list
+   readers).
+   PREREG CORRECTION (pre-step, recorded before any judged sim — the
+   first draft claimed the brain-dawn line "already exists at the first
+   parent and at the far end"; that is WRONG for the far end): the
+   `test-villager-brain-dawn.js quick` line exists at the first parent
+   and at the merge but is ABSENT at the far end (the far-end green list
+   goes `test-village-smoke-20261011.js` → `test-villager-gear-20261009.js`
+   directly). The union therefore inserts the honesty line after
+   `test-village-smoke-20261011.js` — the merge's preceding SURVIVING
+   line, the same position relative to the neighbors that exist at the
+   far end. The brain-dawn line itself is NOT added (it names the
+   excluded brain test file, which does not exist on the subject). The
+   family definition is unchanged (one line, union); only the anchor
+   description was wrong, and the live subject (commit 2a9d93654) carries
+   the corrected anchor.
 
 EXCLUDED: villager-brain.js (56+/3− — the align function itself),
 docs/ONTOLOGY.md (the brain section + rule), the

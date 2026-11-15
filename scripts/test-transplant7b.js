@@ -438,6 +438,19 @@ function mergeTreeConflicts() {
     gitShow(FAR, 'scripts/green-list.txt').indexOf(GREEN_UNION_LINE) === -1, 'absent at far end');
   T.ok('the union line is present in the merge green list (union source)',
     gitShow(MERGE, 'scripts/green-list.txt').indexOf(GREEN_UNION_LINE) !== -1, 'present at merge');
+  T.ok('the brain-dawn green-list line is ABSENT at the far end (anchor correction: it names the excluded brain test)',
+    gitShow(FAR, 'scripts/green-list.txt').indexOf('scripts/test-villager-brain-dawn.js quick') === -1, 'absent at far end');
+  T.ok('the brain-dawn green-list line is PRESENT at the first parent and at the merge',
+    gitShow(MERGE_BASE, 'scripts/green-list.txt').indexOf('scripts/test-villager-brain-dawn.js quick') !== -1 &&
+    gitShow(MERGE, 'scripts/green-list.txt').indexOf('scripts/test-villager-brain-dawn.js quick') !== -1, 'present at first parent + merge');
+  T.ok('the corrected union anchor (smoke line) is the merge\'s preceding surviving line at the far end',
+    (function () {
+      const far = gitShow(FAR, 'scripts/green-list.txt').split('\n');
+      const i = far.indexOf('scripts/test-village-smoke-20261011.js');
+      return i !== -1 && far[i + 1] === 'scripts/test-villager-gear-20261009.js';
+    })(), 'far end goes smoke -> gear directly');
+  T.ok('prereg records the anchor correction (brain-dawn line absent at the far end)',
+    preregFlat.indexOf('PREREG CORRECTION') !== -1 && preregFlat.indexOf('ABSENT at the far end') !== -1, 'correction present');
 
   // ---- 6. Verdict mapping ----
   T.section('6. Verdict mapping — classify, gate-stop, conflict-stop');
