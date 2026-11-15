@@ -5,7 +5,8 @@ Arm branch: `sim-transplant8fam-match-a` (worktree
 `~/workspace/worktrees/sim-transplant8fam-match-a`, base master
 `b4343ac9d`).
 Binding prereg: evidence/2026-11-15/sim-transplant8fam-match-prereg.md
-(committed 04ed713d9, proof stage 1 green 144/144, BEFORE any judged leg).
+(committed fc8f8e6cf — rebased from 04ed713d9 after master moved to
+84d68a5b5; proof stage 1 green 144/144, BEFORE any judged leg).
 Subject: branch `transplant-8fam-subject`, commit
 `b6ec3c7d1c700c3cab26c6bd578074588f7901f5` (adopted, verified hunk-by-hunk
 at run start — §Subject adoption in the prereg; proof §8 green).
@@ -204,7 +205,7 @@ Censused every vetSays line in both corpora (per-seed: 190391: 29,
 ## Proofs
 
 - `scripts/test-transplant8fam.js`: stage 1 green 144/144 at prereg
-  commit (04ed713d9); re-run after both legs — 157/157 in the
+  commit (fc8f8e6cf); re-run after both legs — 157/157 in the
   full-legs state (153 passed + 4 evidence-file legs at the
   intermediate re-run before this file was written; final 157/157
   re-run after this file was written, before its commit).
@@ -235,7 +236,7 @@ before comparing).
 ## Infrastructure
 
 - SAFE-COMMIT CLOBBER: struck once, on the prereg commit
-  (04ed713d9) — the main index showed the prereg staged-deleted
+  (fc8f8e6cf, pre-rebase 04ed713d9) — the main index showed the prereg staged-deleted
   and the proof MM after a correct commit. Repaired with the
   documented `git ls-tree -r HEAD -- <paths> | git update-index
   --add --index-info` pipe; verified worktree hash == HEAD blob
