@@ -410,3 +410,22 @@ remains living veterans. The guard decides whether villages live long
 enough for veterans to matter; it does not supply the veterans. The
 next question for the scale wall is the veteran pipeline itself, not
 another guard measurement.
+
+## Rebase note (coordinator, 2026-11-15T22:0xZ — added before merge)
+
+The arm branch was rebased onto master `474e6e598` (vetattrition-a
+landing) before merging. Proof on the rebased tip:
+`scripts/test-guardablate-fresh-a.js` **116/117** (was 117/117 on the
+pre-rebase tip). The one failure is the subject-branch lineage check
+("subject branch carries exactly one commit on the arm branch",
+`rev-list --count arm..subject === 1`): the rebase moved the arm
+branch tip, so the subject branch `ab856945d` (cut from the
+pre-rebase tip) now counts extra ancestors. The subject CONTENT is
+unchanged and still verified by the same proof run: its diff vs its
+parent is exactly −16/+0 in `src/js/game.js` only, removed lines
+byte-identical to the guard hunk 16/16, zero added lines. The judged
+legs ran against that exact subject content; the rebase touched no
+game code (vetattrition-a is evidence + analyzer scripts only).
+Adjudicated as a rebase artifact — same class as the 1615Z
+branch-identity adjudications. Verdict CONFIRMED stands; no test
+was edited to go green.
