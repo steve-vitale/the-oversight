@@ -47,7 +47,8 @@ instead, with the driver's kcal figure alongside.
   the pilot tip (base a9d85e32c, where the pilot ran) all proof
   tests were green: test-courtship-b 57/57, test-covenant-b
   33/33, test-onlylead-b 29/29, test-onlylead2-b 25/25. On the
-  rebased tip (base 7a4353f68) two live-smoke checks fail on
+  rebased tip (base 53e7b6a1e, after a second rebase past the
+  batch ship — see Commits) two live-smoke checks fail on
   master game-code drift, instrument unchanged (the rebased
   instrument changeset is byte-identical to the original):
   test-courtship-b 56/57 (the study deed never fires on seed
@@ -732,17 +733,29 @@ instrument pick (the documented stop-at-pick quirk: pick in
 both done and todo lists, worktree clean, pick unapplied —
 verified, then `git rebase --continue`; sailed through). No
 master commit touched this branch's files, so the rebase was
-conflict-free. Rebased hashes: prereg 74c3dc8b2, amendment
-d864fe7bb, amendment 2 f92831766, instrument 303508ce3,
-evidence b54968205, corpora f55bfefbb (tip). Proof tests
-re-run on the rebased tip after this commit: test-courtship-b
-56/57, test-covenant-b 33/33, test-onlylead-b 29/29,
-test-onlylead2-b 24/25 — the two failures are master game-code
-drift in live smokes, bisected to the pre-rebase tip (both
-green there: 57/57 and 25/25; see metric review #10). Zero
-`src/js` in the branch diff vs 7a4353f68 (33 files: scripts/ +
-evidence/ only). The rebased instrument changeset is
-byte-identical to the original ce82eea90.
+conflict-free. Rebased hashes (first rebase): prereg 74c3dc8b2,
+amendment d864fe7bb, amendment 2 f92831766, instrument
+303508ce3, evidence b54968205, corpora f55bfefbb, evidence-note
+793b00b45.
+Second rebase (adoption, ~17:45Z): the batch ship loop landed
+on master mid-run (tip 53e7b6a1e — version bump 493b82c6c +
+scale-onramp coordinator evidence; neither touches this
+branch's files; the only src/js change is a 1-line version
+bump in src/js/build.js), so the branch was rebased again onto
+53e7b6a1e — clean, 7/7, no stop. Final hashes: prereg
+71094751d, amendment 58f1d1e46, amendment 2 bb4107c93,
+instrument 329a95279, evidence 1f68ad72f, corpora 71c1e21aa,
+evidence-note 56713b3cc (tip at second rebase; this note is the
+next commit). Proof tests re-run on the rebased tip after this
+commit: test-courtship-b 56/57, test-covenant-b 33/33,
+test-onlylead-b 29/29, test-onlylead2-b 24/25 — the two
+failures are master game-code drift in live smokes, bisected
+to the pre-rebase tip (both green there: 57/57 and 25/25; see
+metric review #10), and re-confirmed unchanged after the
+second rebase (same single failures, same trajectories).
+Zero `src/js` in the branch diff vs 53e7b6a1e (33 files:
+scripts/ + evidence/ only). The rebased instrument changeset
+is byte-identical to the original ce82eea90.
 
 ## Findings for the backlog (coordinator owns sim-findings.md)
 
