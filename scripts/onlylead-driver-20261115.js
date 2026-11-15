@@ -62,6 +62,10 @@ const { loadGame, setupGame, runDays, quietLog } = require(path.join(REPO, 'scri
 const { scaleclimbPolicy, scaleclimbStats, resetScaleclimbStats } = require(path.join(REPO, 'scripts', 'policies', 'competent-scaleclimb-b'));
 const { answercourtPolicy, answercourtStats, resetAnswercourtStats } = require(path.join(REPO, 'scripts', 'policies', 'competent-answercourt-b'));
 const { covenantPolicy, covenantStats, resetCovenantStats } = require(path.join(REPO, 'scripts', 'policies', 'competent-covenant-b'));
+// COURTSHIP (arm sim-courtship-b, run fleshout-loop-b-20261115T1330Z):
+// the courtship-deeds lever — codex pilgrimage + one 2,000-kcal aid
+// gift per village — composed onto the covenant road.
+const { courtshipPolicy, courtshipStats, resetCourtshipStats } = require(path.join(REPO, 'scripts', 'policies', 'competent-courtship-b'));
 
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : []).filter(Number.isFinite);
 const POLICIES = (process.env.POLICY ? process.env.POLICY.split(',').map(function (s) { return s.trim(); }) : ['competent-scaleclimb-b', 'competent-answercourt-b']).filter(Boolean);
@@ -229,6 +233,25 @@ function snapshot(Game, errors) {
     } catch (e) { errors.push('roadroll: ' + String(e.message).slice(0, 80)); }
     const netDay = st.networkLiveDay | 0;
     const rungDay = netDay + 30;
+    // --- COURTSHIP (arm sim-courtship-b): daily max-known-opinion read
+    // ON the judged leg (onlylead2 metric review #2 — a substrate probe
+    // under the base policy does not predict the judged leg). Pure reads
+    // only, same knowsVillage gate the policy uses.
+    const opinions = {};
+    let maxOpinion = null;
+    try {
+      const ovs = (st.otherVillages || []);
+      for (let i = 0; i < ovs.length; i++) {
+        const v = ovs[i];
+        if (!v || !v.id || v.id === 'haven') continue;
+        let known = false;
+        try { known = (typeof Game.knowsVillage === 'function') ? !!Game.knowsVillage(v) : false; } catch (e) {}
+        if (!known) continue;
+        const op = (v.opinion | 0);
+        opinions[v.id] = op;
+        if (maxOpinion === null || op > maxOpinion) maxOpinion = op;
+      }
+    } catch (e) { errors.push('opinionroll: ' + String(e.message).slice(0, 80)); }
     return {
       d: day,
       arc: pg.arc | 0,
@@ -275,6 +298,8 @@ function snapshot(Game, errors) {
       foreign: foreign,
       road: { nPrimSeas: nPrimSeas, nConq: nConq, nConqSeas: nConqSeas, nCovFormed: nCovFormed, nCovSeas: nCovSeas, nTradeFormed: nTradeFormed, nTradeSeas: nTradeSeas, bestBelong: bestBelong },
       rungDay: rungDay, rungMet: day >= rungDay && !!st.networkLive,
+      // COURTSHIP: daily opinion read on the judged leg (see above).
+      maxOpinion: maxOpinion, opinions: opinions,
       scaleRefused: !!st.scaleRefused, exiled: !!((st.scholar || {}).exiled),
       pendingCounter: st.pendingCounter ? { target: st.pendingCounter.targetId || null, day: st.pendingCounter.day | 0 } : null,
       pendingAccord: st.pendingAccord ? { link: st.pendingAccord.linkId || null } : null,
@@ -294,7 +319,14 @@ function snapshot(Game, errors) {
   }
 }
 
-const LINK_LINE_RE = /tend|season|polity|realm|trust|tribute|feast|link|bond|accord|court|drift|bow|table|seat|lesser/i;
+const LINK_LINE_RE = /tend|season|polity|realm|trust|tribute|feast|link|bond|accord|court|drift|bow|table|seat|lesser|covenant|charter|handshake|codex|runner/i;
+// COURTSHIP (onlylead2 metric review #7): the covenant/charter/
+// handshake/codex terms were missing, so the 454 played prerequisite
+// refusals never reached the corpus. One-line instrument change.
+// AMENDED pre-pilot (smoke finding, no judged numbers seen): 'runner'
+// joins the filter — the aid gift's played line ("A runner leaves
+// Haven with 2,000 kcal for Thornfield…") carries no covenant/codex
+// term, so the gift itself stayed invisible in the smoke corpus.
 // MEAL_LINE_RE (answercourt-b, kept from holdpantry-b): the scaleclimb cap (150 lines) filled by
 // day ~28 with early meal/tribute chatter, so the polity's dissolution had
 // no played line. Filter the meal lines out and raise the cap to 600
@@ -305,10 +337,12 @@ async function oneRun(seed, policyName, opts) {
   opts = opts || {};
   const DAYS_RUN = (opts.days | 0) || DAYS;
   const policy = policyName === 'competent-answercourt-b' ? answercourtPolicy
-    : policyName === 'competent-covenant-b' ? covenantPolicy : scaleclimbPolicy;
-  if (policyName !== 'competent-scaleclimb-b' && policyName !== 'competent-answercourt-b' && policyName !== 'competent-covenant-b') throw new Error('Unknown policy ' + policyName);
+    : policyName === 'competent-covenant-b' ? covenantPolicy
+    : policyName === 'competent-courtship-b' ? courtshipPolicy : scaleclimbPolicy;
+  if (policyName !== 'competent-scaleclimb-b' && policyName !== 'competent-answercourt-b' && policyName !== 'competent-covenant-b' && policyName !== 'competent-courtship-b') throw new Error('Unknown policy ' + policyName);
   if (policyName === 'competent-answercourt-b') { resetAnswercourtStats(); resetScaleclimbStats(); }
   else if (policyName === 'competent-covenant-b') { resetCovenantStats(); resetAnswercourtStats(); }
+  else if (policyName === 'competent-courtship-b') { resetCourtshipStats(); resetCovenantStats(); resetAnswercourtStats(); }
   else resetScaleclimbStats();
   const { Game } = await loadGame({ seed: seed, mode: 'onlylead-' + policyName, fullTelemetry: false });
   const series = [];
@@ -488,6 +522,16 @@ async function oneRun(seed, policyName, opts) {
   });
   wrapVerb('bidForPrimacy', { linkArg: 0 });
   wrapVerb('raidVillage');
+  // COURTSHIP verbs (arm sim-courtship-b): the deeds themselves, by
+  // caller — aidVillage returns false when the pantry cannot spare
+  // it, else undefined on success; studyVillageCodex returns its
+  // played line (or the refusal line when not at the village).
+  wrapVerb('aidVillage', {
+    describe: function (ret) { return ret === false ? 'pantry-bare' : 'sent'; },
+  });
+  wrapVerb('studyVillageCodex', {
+    describe: function (ret) { return (typeof ret === 'string') ? ret.slice(0, 80) : String(ret).slice(0, 80); },
+  });
   wrapVerb('hostFeast', {
     describe: function (ret) {
       try { return JSON.stringify(ret).slice(0, 160); } catch (e) { return String(ret).slice(0, 120); }
@@ -599,6 +643,7 @@ async function oneRun(seed, policyName, opts) {
   try {
     if (policyName === 'competent-answercourt-b' && capturedCtx) capSummary = Object.assign(scaleclimbStats(), { answercourt: answercourtStats() });
     else if (policyName === 'competent-covenant-b' && capturedCtx) capSummary = Object.assign(covenantStats(), { answercourt: answercourtStats() });
+    else if (policyName === 'competent-courtship-b' && capturedCtx) capSummary = Object.assign(courtshipStats(), { covenant: covenantStats(), answercourt: answercourtStats() });
     else if (policyName === 'competent-scaleclimb-b' && capturedCtx) capSummary = scaleclimbStats();
   } catch (e) { errors.push('capSummary: ' + String(e.message).slice(0, 80)); }
   try {
@@ -670,6 +715,13 @@ if (require.main === module) (async function () {
   function dirFor(pol) {
     if (OUTDIR) return path.join(REPO, 'evidence', '2026-11-15', OUTDIR);
     const stem = dirStem(RUN);
+    // COURTSHIP (RUN=courtship-b): baseline is the covenant road itself
+    // (control), armed is covenant + courtship deeds (on). Older RUNs
+    // keep the scaleclimb→control mapping.
+    if (RUN === 'courtship-b') {
+      return path.join(REPO, 'evidence', '2026-11-15',
+        pol === 'competent-covenant-b' ? stem + '-control' : stem + '-on');
+    }
     return path.join(REPO, 'evidence', '2026-11-15',
       pol === 'competent-scaleclimb-b' ? stem + '-control' : stem + '-on');
   }
@@ -695,4 +747,4 @@ if (require.main === module) (async function () {
   }
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 
-module.exports = { oneRun: oneRun, dirStem: dirStem, LINK_LINES_CAP: LINK_LINES_CAP };
+module.exports = { oneRun: oneRun, dirStem: dirStem, LINK_LINES_CAP: LINK_LINES_CAP, LINK_LINE_RE: LINK_LINE_RE };

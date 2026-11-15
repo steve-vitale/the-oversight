@@ -162,6 +162,27 @@ function classifyShape(rec, shape) {
     else blocker = 'trade-seasoned-short:' + maxTradeSeas + '-of-' + maxTradeFormed;
     blockers = [blocker];
   }
+  // COURTSHIP (onlylead2 metric review #4): name the rung alongside
+  // the road-state blocker when the road is ONE LINK SHORT of
+  // qualifying AND the rung day sits past the village's end day
+  // (last series day — death, or the horizon if survived). The
+  // primary `blocker` is UNCHANGED; the rung is appended to
+  // `blockers` only. No regional rung ever set (networkLive never
+  // achieved) means no rung to name — rungDay 30 by default is not
+  // a real rung.
+  try {
+    if (blocker && blockers) {
+      const lastSn = series[series.length - 1];
+      const endDay = lastSn ? (lastSn.d | 0) : 0;
+      const rungDay = lastSn ? (lastSn.rungDay | 0) : 0;
+      const hadRegional = series.some(function (sn) { return (sn.netDay | 0) > 0; });
+      let oneShort = false;
+      if (shape === 'lead') oneShort = maxPrimSeas === 2;
+      else if (shape === 'covenant') oneShort = maxCovFormed === 2 || (maxCovFormed === 3 && maxCovSeas === 2);
+      else if (shape === 'trade') oneShort = maxTradeFormed === 2 || (maxTradeFormed === 3 && maxTradeSeas === 2);
+      if (oneShort && hadRegional && rungDay > endDay) blockers.push(shape + '-rung-past-death:' + rungDay);
+    }
+  } catch (e) {}
   return Object.assign(base, { outcome: blocker ? 'blocked' : 'UNCLASSIFIED', blocker: blocker, blockers: blockers || [] });
 }
 
@@ -244,7 +265,35 @@ function analyze(records) {
     }
     foreignMax[rec.seed + '-' + rec.policy] = m;
   }
-  return Object.assign(base, { shapes: shapes, byPolicyShapes: byPolicy, verbCallers: verbCallers, foreignMax: foreignMax });
+  // COURTSHIP (arm sim-courtship-b): opinion trajectory per record,
+  // read ON the judged leg from the driver's daily maxOpinion roll
+  // (onlylead2 metric review #2) — first day max known opinion >= 10,
+  // and the max ever reached.
+  const opinionFirst10 = {};
+  const opinionMax = {};
+  for (const rec of records) {
+    let first10 = null, mx = null;
+    for (const sn of (rec.series || [])) {
+      const mo = sn.maxOpinion;
+      if (mo === null || mo === undefined) continue;
+      if (mx === null || mo > mx) mx = mo;
+      if (first10 === null && mo >= 10) first10 = sn.d;
+    }
+    opinionFirst10[rec.seed + '-' + rec.policy] = first10;
+    opinionMax[rec.seed + '-' + rec.policy] = mx;
+  }
+  // COURTSHIP deeds rollup: who ever aids or studies a codex —
+  // policy or engine? (The lever's own verbs, like the peer/raid
+  // verbCallers rollup above.)
+  const courtshipDeeds = {};
+  for (const rec of records) {
+    for (const ev of (rec.verbEvents || [])) {
+      if (ev.verb !== 'aidVillage' && ev.verb !== 'studyVillageCodex') continue;
+      const k = ev.verb + ':' + ev.caller;
+      courtshipDeeds[k] = (courtshipDeeds[k] || 0) + 1;
+    }
+  }
+  return Object.assign(base, { shapes: shapes, byPolicyShapes: byPolicy, verbCallers: verbCallers, foreignMax: foreignMax, opinionFirst10: opinionFirst10, opinionMax: opinionMax, courtshipDeeds: courtshipDeeds });
 }
 
 if (require.main === module) (async function () {
@@ -271,9 +320,13 @@ if (require.main === module) (async function () {
       const r = ps.shapes[s];
       return s + ':' + (r.outcome === 'staged' ? 'STAGED(sat ' + r.sat + '/' + r.answers + ')' : (r.outcome === 'blocked' ? (r.blockers || [r.blocker]).join('+') : 'UNCLASSIFIED')) + ' q' + r.qualifiedDays;
     }).join(' | ');
-    console.log(k + ' :: ' + line);
+    // COURTSHIP: opinion trajectory on the judged leg, per record.
+    const f10 = out.opinionFirst10 ? out.opinionFirst10[k] : null;
+    const mx = out.opinionMax ? out.opinionMax[k] : null;
+    console.log(k + ' :: ' + line + ' :: firstOpinion10=' + (f10 === null || f10 === undefined ? 'never' : 'd' + f10) + ' maxOpinion=' + (mx === null || mx === undefined ? '—' : mx));
   }
   console.log('verbCallers (peer/raid): ' + JSON.stringify(out.verbCallers));
+  console.log('courtshipDeeds (aid/study): ' + JSON.stringify(out.courtshipDeeds));
   console.log('foreignMax: ' + JSON.stringify(out.foreignMax));
   console.log('UNCLASSIFIED total: ' + out.shapes.unclassified);
   console.log('wrote ' + path.relative(REPO, outPath));
