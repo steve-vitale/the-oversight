@@ -244,6 +244,33 @@ plus the proven seed call site:
    — the proof test asserts both paths launch a trio the same
    way on a fixture.
 
+## Correction 1 (2026-11-15, before any judged sim — control leg
+not yet run)
+
+**C1 — the second-companion pick judges no gear; the launch does.**
+The prereg froze §2(a) as "geared or gear-up-able: gear them
+first (`villagerGearUp`), then require armed OR armored". Wrong
+about WHERE the gearing happens: `winPlanCands` builds the dawn
+candidate in a read-only pass (its header: "Read-only: never seed
+a plan here"), and gearing a villager up during candidate
+evaluation would spend village gear as a side effect of scoring
+— the same violation the brain's Phase 1 contract forbids.
+Rule now: at PICK time (`winPlanSecondCompanion`, called from
+the dawn candidate and from `winPlanDepart`'s launch path) the
+candidate is judged only by pure reads — alive, at Haven, trust
+≥ 15, not engaged / away / on-expedition, not sick, range ≥ 1 —
+with preference order (1) living wave-3+ killers, (2) currently
+armed villagers, (3) the rest, ranked within tiers by the shared
+`companionRank`. At LAUNCH time the picked second companion is
+geared up first (`villagerGearUp`) and then must clear the same
+armed-OR-armored bar as the first companion; if the gear-up
+cannot arm or armor them, the launch falls back to a pair
+rather than holding. The judged mechanism is unchanged (a trio
+that set out together, judged as a trio); only the pick/launch
+split moves, and the recorder measures the LAUNCHED party size,
+so a pick that fails at launch is counted as the pair it is,
+not the trio it promised. The GO bar is unchanged.
+
 ## What the lever does NOT do
 
 - No readiness-bar, standing, deed-gate, win-price, or table
