@@ -69,6 +69,22 @@ const DAYS = parseInt(process.env.DAYS || '150', 10) || 150;
 const RUN = process.env.RUN || 'onlylead-b';
 const OUTDIR = process.env.OUTDIR || null; // null: per-policy dirs below
 
+// ONLYLEAD2 (run fleshout-loop-b-20261115T1130Z, 200d horizon):
+//   - dirStem(RUN) = 'perseed-' + RUN, so RUN=onlylead2-b writes its own
+//     corpora dirs (perseed-onlylead2-b-control / -on) instead of
+//     colliding with the DIAG's perseed-onlylead-b-* dirs (the analyzer
+//     reads every .json in a dir — a shared dir would mix the DIAG and
+//     this arm's records). RUN=onlylead-b and RUN=covenant-b map
+//     exactly as before.
+//   - LINK_LINES_CAP 600 → 900: the 600-line cap bound 13/16 DIAG
+//     records at 150d; at 200d it would bind harder and could cut the
+//     played Founding Council lines the sense-testing needs (the beat,
+//     when it stages, lands ~day 80–175 — late in the stream). 900
+//     keeps the same per-day line density as the 150d/600 pairing,
+//     with margin. Frozen in sim-onlylead2-b-prereg.md.
+const LINK_LINES_CAP = 900;
+function dirStem(run) { return 'perseed-' + run; }
+
 let ANCHOR = 'unknown';
 try { ANCHOR = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim(); } catch (e) {}
 
@@ -246,7 +262,7 @@ function snapshot(Game, errors) {
       nCounted: links.filter(function (l) { return l.st === 'active' && l.se && l.rp; }).length,
       polity: pol ? { shape: pol.shape || null, size: pol.size | 0, led: !!pol.led } : null,
       havenPolity: hp ? { shape: hp.shape || null, size: hp.size | 0, led: !!hp.led } : null,
-      // ONLYLEAD fields (NEW): shape-candidate roll + road state + rung.
+            // ONLYLEAD fields (NEW): shape-candidate roll + road state + rung.
       // NOTE on `se`: the links roll computes seasoned with the 2-arg
       // _linkSeasoned(l, conquered) call, as in the answercourt driver;
       // the engine's polity predicates pass forPolity=true, which
@@ -281,7 +297,8 @@ function snapshot(Game, errors) {
 const LINK_LINE_RE = /tend|season|polity|realm|trust|tribute|feast|link|bond|accord|court|drift|bow|table|seat|lesser/i;
 // MEAL_LINE_RE (answercourt-b, kept from holdpantry-b): the scaleclimb cap (150 lines) filled by
 // day ~28 with early meal/tribute chatter, so the polity's dissolution had
-// no played line. Filter the meal lines out and raise the cap to 600.
+// no played line. Filter the meal lines out and raise the cap to 600
+// (900 on 200d legs — LINK_LINES_CAP, onlylead2-b).
 const MEAL_LINE_RE = /village meal|cooked for the haven|communal pantry|you keep a day's food|meals stretched/i;
 
 async function oneRun(seed, policyName, opts) {
@@ -547,7 +564,7 @@ async function oneRun(seed, policyName, opts) {
     Game.say = function () {
       try {
         const arg = arguments.length ? arguments[0] : null;
-        if (typeof arg === 'string' && LINK_LINE_RE.test(String(arg)) && !MEAL_LINE_RE.test(String(arg)) && linkLines.length < 600) {
+        if (typeof arg === 'string' && LINK_LINE_RE.test(String(arg)) && !MEAL_LINE_RE.test(String(arg)) && linkLines.length < LINK_LINES_CAP) {
           linkLines.push({ day: gday(Game), line: String(arg).slice(0, 400) });
         }
       } catch (e) { errors.push('say-wrap: ' + String(e.message).slice(0, 80)); }
@@ -652,7 +669,7 @@ if (require.main === module) (async function () {
   // armed -> perseed-onlylead-b-on. OUTDIR env overrides both (single dir).
   function dirFor(pol) {
     if (OUTDIR) return path.join(REPO, 'evidence', '2026-11-15', OUTDIR);
-    const stem = (RUN === 'covenant-b') ? 'perseed-covenant-b' : 'perseed-onlylead-b';
+    const stem = dirStem(RUN);
     return path.join(REPO, 'evidence', '2026-11-15',
       pol === 'competent-scaleclimb-b' ? stem + '-control' : stem + '-on');
   }
@@ -678,4 +695,4 @@ if (require.main === module) (async function () {
   }
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 
-module.exports = { oneRun: oneRun };
+module.exports = { oneRun: oneRun, dirStem: dirStem, LINK_LINES_CAP: LINK_LINES_CAP };
