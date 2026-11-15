@@ -80,7 +80,11 @@ LADDER opens 8/8, mints 5/5, holds 8/8 (strongest ladder read on this leg). SECR
 
 ## Gate
 
-[PENDING — filled after the gate run.]
+`node scripts/check.js --quick` (340 scripts, 4 parallel, 1310s, `--cacheDirectory=/tmp/jest-cache-playtest`): **332 passed, 8 failed — GO after adjudication (0 attributable to this run).** Log `hidden_files/journey-deepening-r212-gate.log`, standalone log `hidden_files/journey-deepening-r212-gate-standalone.log`.
+- The 8 failures: 4× 120s load timeouts under the parallel gate (living-garden, occupation-panels, one-person-army, capable-bot) + measurement-cache-flags (exit 1, 92.3s) + the measurement-proof-update + measurement-workflow staleness pair + phone-frame-proof (stale receipt — index.html, same pre-existing failure as r189/r191/r192/r193; the receipt refresh is a separate owed job, not this run's).
+- Standalone re-runs: ALL 5 GREEN — living-garden rc=0, occupation-panels rc=0, one-person-army rc=0, capable-bot rc=0, cache-flags rc=0 (the AGENTS.md load-artifact reading confirmed again: 0/4 under gate load, green standalone). All 5 are load artifacts, not code failures. Notably ABSENT vs r193: trust-observer-neutrality, synergy-stall, solo-campaign-endings, throttlefeast — all passed this run.
+- **Staleness pair — PRE-EXISTING, not this run's:** "Proof source inputs are not current" — `B.manifest()` hashes all of `src/` + policies + index.html + sim-harness.js + sweep-compare.js, so any src change invalidates the retained proof. Between r192's base (3263ddb1f) and this run's base (7251dcb4f), transplant8b and the r193/r210 landings changed `src/js` (game.js, betrayal.js, build.js, partyTactics.js, hierarchy.js, + Reunion balance). This run changed no `src/js` and no observer file. The refresh (round 21) stays the already-owed job from r192's carried list — not built here.
+- This run changed no `src/js` (scripts + evidence only); the r212 analyzer proof is 14/14 green, and the r212 driver/analyzer/test clones are the only new scripts.
 
 ## Metric review (§14)
 
