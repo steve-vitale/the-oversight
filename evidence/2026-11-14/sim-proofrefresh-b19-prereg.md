@@ -50,21 +50,55 @@
 
 - `node scripts/godpath/test-measurement-proof-update.js` FAILS, exit 1,
   "Proof source inputs are not current"
-  (`scripts/balance-proof-update.js:8`) — to be confirmed in the
-  worktree before the panel run, matching the coordinator's baseline.
+  (`scripts/balance-proof-update.js:8`) — confirmed in the worktree
+  before the panel run, matching the coordinator's baseline.
+  `test-measurement-workflow.js` standalone: **8 passed, 1 failed** —
+  the failing leg is exactly "retained neutrality proof covers the
+  current Game/controller/harness inputs" (the staleness failure; the
+  same leg the b11/b12/b13 adoptions recorded as 8/9 on their stale
+  landing tips).
 - `B.manifest('.')` vs the retained b18 panel's `sources`
   (`evidence/2026-11-14/neutral-proofrefresh-b18.json.gz`, sha256
   `cc38babf2acdff069b86636e21cc4028a7c70bf858b991fbb166e769ba242786`):
-  exact differing keys to be listed here after the check runs (the
-  0155Z merges added `scripts/policies/competent-answercourt-b.js`,
-  `scripts/policies/competent-scaleclimb-b.js`,
-  `scripts/policies/competent-succpolity-b.js` — the expected staleness
-  — plus any version-stamp or game-code keys that moved since the b18
-  panel). The b13 panel
-  (`evidence/2026-11-13/neutral-proofrefresh-b13.json.gz`) is diffed
-  as well, per the brief.
-- Verdict of the owed-check: to be recorded here (OWED iff the proof
-  test fails and the manifest differs from the retained panel).
+  tip 529 keys, panel 526 keys — **3 keys only in the tip + 4 keys
+  differ**:
+
+  - `scripts/policies/competent-answercourt-b.js` — NEW (0155Z merges)
+  - `scripts/policies/competent-scaleclimb-b.js` — NEW (0155Z merges)
+  - `scripts/policies/competent-succpolity-b.js` — NEW (0155Z merges)
+  - `src/js/betrayal.js` — Lane B social life r206 (365b17d7d):
+    invite-small double-serve fix (panel `b702adcd61bd…`, tip
+    `17e1e4c8a638…`)
+  - `src/js/game.js` — journey-establishment r139 (93f88819c):
+    spotter wiring, forage + bumpPlantFamiliarity grants (panel
+    `84a25e80dbb4…`, tip `f3d10e7bece6…`)
+  - `src/js/build.js` — batch-ship version bump 910bff7f4 (version
+    stamp only; panel `4d8491819f2a…`, tip `002759da082a…`)
+  - `index.html` — batch-ship version bump 910bff7f4 (version stamp
+    only; panel `3516fd2cc211…`, tip `e35cc1619c6a…`)
+
+  Observer and contract digests still match the b18 panel (observer
+  f37e5ce0…, contract 37bbb0fa…). The staleness is the source manifest
+  only: 3 new policy files + 2 real game-code changes + 2 version
+  stamps.
+- `B.manifest('.')` vs the retained b13 panel's `sources`
+  (`evidence/2026-11-13/neutral-proofrefresh-b13.json.gz`): tip 529
+  keys, panel 526 keys — the same 3 new policy files + **8 keys
+  differ** (abilityActions.js, betrayal.js, build.js, contests.js,
+  conversation.js, game.js, partyTactics.js, index.html). Observer and
+  contract digests still match the b13 panel.
+- Stale-input negatives verified on this tip (validate() FAILS with
+  "Proof source inputs are not current" on all four): b13, b12, b18,
+  b17. The brief's literal b13/b12 negatives hold, and so do the
+  pattern-faithful b18/b17 negatives the b19 test checks.
+- Pre-regeneration `test-proofrefresh-b19-20261114.js`: crashes at leg
+  (d) with ENOENT — `evidence/2026-11-14/neutral-proofrefresh-b19.json.gz`
+  does not exist yet (the panel has not been generated or re-pointed).
+  Legs before the crash: validate FAIL (ENOENT on the new panel),
+  proof-update FAIL exit 1, workflow 8/9, cache-flags 4/4, ontology
+  exit 0 ("All 138 systems validated", ONTOLOGY.md 2198 lines).
+- **Verdict of the owed-check: OWED.** Panels at b18 and earlier are
+  superseded; the re-point target is the NEW panel only.
 
 ## Panel (to be filled after the run)
 
