@@ -194,19 +194,37 @@ function main() {
   }
   const kcalDelta = (totalOpensS - totalOpensB) * 10;
   const tickDelta = totalOpensS - totalOpensB;
-  // Semantic-cost verdict inputs: (1) kcal delta vs mean pantry,
-  // (2) tick delta vs total tick budget, (3) stipend opens (must be 0
-  // on walk-out legs), (4)+(5) bounded by held opens (must be 0).
+  // Semantic-cost verdict inputs: (1) kcal DELTA vs pantry FLOW
+  // (gross movement through the pantry, sum |daily change| — the
+  // food the village actually moves; the DELTA is what could cause
+  // the survival difference, not the total open cost), (2) tick
+  // delta vs total tick budget, (3) stipend opens (must be 0 on
+  // walk-out legs), (4)+(5) bounded by held opens (must be 0).
+  // NOTE: comparing the kcal delta against the mean pantry LEVEL
+  // would mix units (a run-total against a level); flow is the
+  // budget the prereg names ("kcal vs pantry flow").
+  let totalFlow = 0;
+  for (const seed of SEEDS) {
+    for (const leg of ['base', 'subj']) {
+      const dir = leg === 'base' ? BASE_DIR : SUBJ_DIR;
+      const f = path.join(dir, 'ove48conv-s' + seed + '-ove48-conv-pilot-fix.json');
+      const j = JSON.parse(fs.readFileSync(f, 'utf8'));
+      const pan = seriesMap(j.samples, 'pantry');
+      const ds = Object.keys(pan).map(Number).sort(function (a, b) { return a - b; });
+      for (let i = 1; i < ds.length; i++) totalFlow += Math.abs(pan[ds[i]] - pan[ds[i - 1]]);
+    }
+  }
   const meanPantryAll = mean(perSeed.map(function (r) { return r.meanPantry || 0; }).filter(function (x) { return x > 0; }));
   const totalTickBudget = perSeed.reduce(function (a, r) { return a + r.days.base * 512; }, 0);
-  const kcalShare = meanPantryAll ? kcalDelta / meanPantryAll : null;
+  const kcalShare = totalFlow ? kcalDelta / totalFlow : null;
+  const kcalShareOfMeanPantry = meanPantryAll ? kcalDelta / meanPantryAll : null;
   const tickShare = totalTickBudget ? tickDelta / totalTickBudget : null;
   const totalHeld = perSeed.reduce(function (a, r) { return a + r.stipend.baseHeld + r.stipend.subjHeld; }, 0);
   const semanticSmall = (kcalShare == null || Math.abs(kcalShare) < 0.01) && (tickShare == null || Math.abs(tickShare) < 0.01) && totalHeld === 0;
   let verdict = 'DIAG', why = '';
   if (!semanticSmall) {
     verdict = 'CHAIN-CANDIDATE';
-    why = 'a checklist cost is NOT < 1% of budget (kcal share ' + (kcalShare == null ? 'null' : (kcalShare * 100).toFixed(2) + '%') + ', tick share ' + (tickShare == null ? 'null' : (tickShare * 100).toFixed(2) + '%') + ', held opens ' + totalHeld + ') — a semantic cost channel exists; trace it per seed below.';
+    why = 'a checklist cost is NOT < 1% of budget (kcal delta vs pantry flow ' + (kcalShare == null ? 'null' : (kcalShare * 100).toFixed(2) + '%') + ', tick share ' + (tickShare == null ? 'null' : (tickShare * 100).toFixed(2) + '%') + ', held opens ' + totalHeld + ') — a semantic cost channel exists; trace it per seed below.';
     anySemantic = true;
   } else if (anyStateBeforeDeath) {
     verdict = 'CHAIN-CANDIDATE';
@@ -221,7 +239,8 @@ function main() {
     totals: {
       opens: { base: totalOpensB, subj: totalOpensS, delta: totalOpensS - totalOpensB },
       weightedPick: { base: totalWeightedB, subj: totalWeightedS, delta: totalWeightedS - totalWeightedB },
-      kcalDelta: kcalDelta, kcalShareOfMeanPantry: kcalShare,
+      kcalDelta: kcalDelta, kcalShareOfPantryFlow: kcalShare, totalPantryFlow: totalFlow,
+      kcalShareOfMeanPantryLevel: kcalShareOfMeanPantry,
       tickDelta: tickDelta, tickShareOfBudget: tickShare,
       heldOpensTotal: totalHeld,
       anyStateBeforeDeath: anyStateBeforeDeath,
@@ -233,7 +252,7 @@ function main() {
   console.log('ove48-mech CAUSAL: ' + verdict + ' — ' + why);
   console.log('  opens base ' + totalOpensB + ' subj ' + totalOpensS + ' (delta ' + (totalOpensS - totalOpensB) + ', +' + (totalOpensS - totalOpensB) * 10 + ' kcal, +' + tickDelta + ' ticks over 8 seeds)');
   console.log('  weighted-pick draws base ' + totalWeightedB + ' subj ' + totalWeightedS + ' (delta ' + (totalWeightedS - totalWeightedB) + ' RNG draws)');
-  console.log('  kcal share of mean pantry ' + (kcalShare == null ? 'null' : (kcalShare * 100).toFixed(2) + '%') + ', tick share of budget ' + (tickShare == null ? 'null' : (tickShare * 100).toFixed(3) + '%') + ', held opens ' + totalHeld);
+  console.log('  kcal delta vs pantry flow ' + (kcalShare == null ? 'null' : (kcalShare * 100).toFixed(3) + '%') + ' (flow ' + totalFlow + ' kcal), tick share of budget ' + (tickShare == null ? 'null' : (tickShare * 100).toFixed(3) + '%') + ', held opens ' + totalHeld);
   for (const r of perSeed) {
     console.log('  seed ' + r.seed + ': days ' + r.days.base + '/' + r.days.subj + ' ' + r.endReason.base + '/' + r.endReason.subj + ' opens ' + r.opens.base + '/' + r.opens.subj + ' (' + r.opens.perDayAlive.base + '/' + r.opens.perDayAlive.subj + '/d) deaths ' + r.deaths.base + '/' + r.deaths.subj + ' stateDivs ' + JSON.stringify(r.stateDivs) + ' deathDiv day ' + r.deathDiv + ' stateBeforeDeath ' + r.stateBeforeDeath);
   }

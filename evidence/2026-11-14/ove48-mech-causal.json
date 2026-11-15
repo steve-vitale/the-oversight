@@ -1,0 +1,874 @@
+{
+  "verdict": "PROVEN-NEGATIVE",
+  "verdictWhy": "no downstream state delta attributable to opener choice beyond the pick itself: kcal/tick costs < 1% of budget, 0 held opens (no stipend/mood/favor/teaching channel), and no state series diverges before the first death divergence on any seed. The survival effect is unexplained by this mechanism.",
+  "totals": {
+    "opens": {
+      "base": 875,
+      "subj": 935,
+      "delta": 60
+    },
+    "weightedPick": {
+      "base": 515,
+      "subj": 569,
+      "delta": 54
+    },
+    "kcalDelta": 600,
+    "kcalShareOfPantryFlow": 0.00014382770591453087,
+    "totalPantryFlow": 4171658,
+    "kcalShareOfMeanPantryLevel": 0.023949944615753078,
+    "tickDelta": 60,
+    "tickShareOfBudget": 0.00012440286624203822,
+    "heldOpensTotal": 0,
+    "anyStateBeforeDeath": false
+  },
+  "perSeed": [
+    {
+      "seed": 190457,
+      "days": {
+        "base": 150,
+        "subj": 134
+      },
+      "survived": {
+        "base": true,
+        "subj": false
+      },
+      "endReason": {
+        "base": "survived",
+        "subj": "village-lost"
+      },
+      "opens": {
+        "base": 157,
+        "subj": 127,
+        "perDayAlive": {
+          "base": 1.05,
+          "subj": 0.95
+        }
+      },
+      "weightedPick": {
+        "base": 87,
+        "subj": 73
+      },
+      "kcalCost": {
+        "base": 1570,
+        "subj": 1270,
+        "delta": -300
+      },
+      "kcalShareOfMeanPantry": -0.0097,
+      "tickCost": {
+        "base": 157,
+        "subj": 127,
+        "delta": -30
+      },
+      "tickShareOfBudget": -0.0004,
+      "stipend": {
+        "baseHeld": 0,
+        "subjHeld": 0
+      },
+      "heldBound": {
+        "base": 0,
+        "subj": 0
+      },
+      "fights": {
+        "base": 26,
+        "subj": 23,
+        "baseCasts": 23,
+        "subjCasts": 19,
+        "baseKills": 50,
+        "subjKills": 56
+      },
+      "deaths": {
+        "base": 62,
+        "subj": 64,
+        "first3": {
+          "base": [
+            {
+              "day": 5,
+              "who": "drumbelly_tanuki",
+              "cause": "villager combat"
+            },
+            {
+              "day": 7,
+              "who": "daniyar_askarov",
+              "cause": "ambush"
+            },
+            {
+              "day": 11,
+              "who": "bulldozer",
+              "cause": "villager combat"
+            }
+          ],
+          "subj": [
+            {
+              "day": 5,
+              "who": "drumbelly_tanuki",
+              "cause": "villager combat"
+            },
+            {
+              "day": 6,
+              "who": "daniyar_askarov",
+              "cause": "ambush"
+            },
+            {
+              "day": 8,
+              "who": "hummice",
+              "cause": "villager combat"
+            }
+          ]
+        }
+      },
+      "stateDivs": {
+        "pantry": 28,
+        "trust": 60,
+        "roster": 36,
+        "waveKills": 9,
+        "standing": 60
+      },
+      "earliestStateDiv": 9,
+      "deathDiv": 6,
+      "stateBeforeDeath": false,
+      "meanPantry": 31021
+    },
+    {
+      "seed": 190458,
+      "days": {
+        "base": 101,
+        "subj": 108
+      },
+      "survived": {
+        "base": false,
+        "subj": false
+      },
+      "endReason": {
+        "base": "village-lost",
+        "subj": "village-lost"
+      },
+      "opens": {
+        "base": 101,
+        "subj": 109,
+        "perDayAlive": {
+          "base": 1,
+          "subj": 1.01
+        }
+      },
+      "weightedPick": {
+        "base": 57,
+        "subj": 73
+      },
+      "kcalCost": {
+        "base": 1010,
+        "subj": 1090,
+        "delta": 80
+      },
+      "kcalShareOfMeanPantry": 0.0031,
+      "tickCost": {
+        "base": 101,
+        "subj": 109,
+        "delta": 8
+      },
+      "tickShareOfBudget": 0.0002,
+      "stipend": {
+        "baseHeld": 0,
+        "subjHeld": 0
+      },
+      "heldBound": {
+        "base": 0,
+        "subj": 0
+      },
+      "fights": {
+        "base": 24,
+        "subj": 30,
+        "baseCasts": 15,
+        "subjCasts": 19,
+        "baseKills": 51,
+        "subjKills": 62
+      },
+      "deaths": {
+        "base": 67,
+        "subj": 72,
+        "first3": {
+          "base": [
+            {
+              "day": 4,
+              "who": "gallowdeer",
+              "cause": "villager combat"
+            },
+            {
+              "day": 7,
+              "who": "hummice",
+              "cause": "villager combat"
+            },
+            {
+              "day": 8,
+              "who": "nightcourt",
+              "cause": "villager combat"
+            }
+          ],
+          "subj": [
+            {
+              "day": 4,
+              "who": "gallowdeer",
+              "cause": "villager combat"
+            },
+            {
+              "day": 7,
+              "who": "hummice",
+              "cause": "villager combat"
+            },
+            {
+              "day": 8,
+              "who": "nightcourt",
+              "cause": "villager combat"
+            }
+          ]
+        }
+      },
+      "stateDivs": {
+        "pantry": 14,
+        "trust": 15,
+        "roster": 12,
+        "waveKills": 16,
+        "standing": 36
+      },
+      "earliestStateDiv": 12,
+      "deathDiv": 11,
+      "stateBeforeDeath": false,
+      "meanPantry": 25917
+    },
+    {
+      "seed": 190459,
+      "days": {
+        "base": 150,
+        "subj": 109
+      },
+      "survived": {
+        "base": true,
+        "subj": false
+      },
+      "endReason": {
+        "base": "survived",
+        "subj": "village-lost"
+      },
+      "opens": {
+        "base": 113,
+        "subj": 95,
+        "perDayAlive": {
+          "base": 0.75,
+          "subj": 0.87
+        }
+      },
+      "weightedPick": {
+        "base": 69,
+        "subj": 58
+      },
+      "kcalCost": {
+        "base": 1130,
+        "subj": 950,
+        "delta": -180
+      },
+      "kcalShareOfMeanPantry": -0.0168,
+      "tickCost": {
+        "base": 113,
+        "subj": 95,
+        "delta": -18
+      },
+      "tickShareOfBudget": -0.0002,
+      "stipend": {
+        "baseHeld": 0,
+        "subjHeld": 0
+      },
+      "heldBound": {
+        "base": 0,
+        "subj": 0
+      },
+      "fights": {
+        "base": 17,
+        "subj": 40,
+        "baseCasts": 21,
+        "subjCasts": 15,
+        "baseKills": 44,
+        "subjKills": 63
+      },
+      "deaths": {
+        "base": 54,
+        "subj": 90,
+        "first3": {
+          "base": [
+            {
+              "day": 3,
+              "who": "nightlight_catfish",
+              "cause": "villager combat"
+            },
+            {
+              "day": 4,
+              "who": "sunbasker",
+              "cause": "villager combat"
+            },
+            {
+              "day": 5,
+              "who": "drumbelly_tanuki",
+              "cause": "villager combat"
+            }
+          ],
+          "subj": [
+            {
+              "day": 3,
+              "who": "nightlight_catfish",
+              "cause": "villager combat"
+            },
+            {
+              "day": 4,
+              "who": "sunbasker",
+              "cause": "villager combat"
+            },
+            {
+              "day": 5,
+              "who": "drumbelly_tanuki",
+              "cause": "villager combat"
+            }
+          ]
+        }
+      },
+      "stateDivs": {
+        "pantry": 16,
+        "trust": 25,
+        "roster": 22,
+        "waveKills": 11,
+        "standing": 79
+      },
+      "earliestStateDiv": 11,
+      "deathDiv": 11,
+      "stateBeforeDeath": false,
+      "meanPantry": 10688
+    },
+    {
+      "seed": 190460,
+      "days": {
+        "base": 124,
+        "subj": 129
+      },
+      "survived": {
+        "base": false,
+        "subj": false
+      },
+      "endReason": {
+        "base": "village-lost",
+        "subj": "village-lost"
+      },
+      "opens": {
+        "base": 122,
+        "subj": 128,
+        "perDayAlive": {
+          "base": 0.98,
+          "subj": 0.99
+        }
+      },
+      "weightedPick": {
+        "base": 68,
+        "subj": 80
+      },
+      "kcalCost": {
+        "base": 1220,
+        "subj": 1280,
+        "delta": 60
+      },
+      "kcalShareOfMeanPantry": 0.0015,
+      "tickCost": {
+        "base": 122,
+        "subj": 128,
+        "delta": 6
+      },
+      "tickShareOfBudget": 0.0001,
+      "stipend": {
+        "baseHeld": 0,
+        "subjHeld": 0
+      },
+      "heldBound": {
+        "base": 0,
+        "subj": 0
+      },
+      "fights": {
+        "base": 42,
+        "subj": 35,
+        "baseCasts": 17,
+        "subjCasts": 19,
+        "baseKills": 64,
+        "subjKills": 105
+      },
+      "deaths": {
+        "base": 74,
+        "subj": 112,
+        "first3": {
+          "base": [
+            {
+              "day": 4,
+              "who": "lockpick_raccoon",
+              "cause": "villager combat"
+            },
+            {
+              "day": 5,
+              "who": "sanjun",
+              "cause": "villager combat"
+            },
+            {
+              "day": 7,
+              "who": "hummice",
+              "cause": "villager combat"
+            }
+          ],
+          "subj": [
+            {
+              "day": 4,
+              "who": "lockpick_raccoon",
+              "cause": "villager combat"
+            },
+            {
+              "day": 5,
+              "who": "sanjun",
+              "cause": "villager combat"
+            },
+            {
+              "day": 6,
+              "who": "nevermore",
+              "cause": "expedition"
+            }
+          ]
+        }
+      },
+      "stateDivs": {
+        "pantry": 9,
+        "trust": 60,
+        "roster": 45,
+        "waveKills": 6,
+        "standing": 51
+      },
+      "earliestStateDiv": 6,
+      "deathDiv": 6,
+      "stateBeforeDeath": false,
+      "meanPantry": 40720
+    },
+    {
+      "seed": 190461,
+      "days": {
+        "base": 129,
+        "subj": 135
+      },
+      "survived": {
+        "base": false,
+        "subj": false
+      },
+      "endReason": {
+        "base": "village-lost",
+        "subj": "village-lost"
+      },
+      "opens": {
+        "base": 119,
+        "subj": 125,
+        "perDayAlive": {
+          "base": 0.92,
+          "subj": 0.93
+        }
+      },
+      "weightedPick": {
+        "base": 71,
+        "subj": 71
+      },
+      "kcalCost": {
+        "base": 1190,
+        "subj": 1250,
+        "delta": 60
+      },
+      "kcalShareOfMeanPantry": 0.0037,
+      "tickCost": {
+        "base": 119,
+        "subj": 125,
+        "delta": 6
+      },
+      "tickShareOfBudget": 0.0001,
+      "stipend": {
+        "baseHeld": 0,
+        "subjHeld": 0
+      },
+      "heldBound": {
+        "base": 0,
+        "subj": 0
+      },
+      "fights": {
+        "base": 25,
+        "subj": 30,
+        "baseCasts": 18,
+        "subjCasts": 20,
+        "baseKills": 88,
+        "subjKills": 92
+      },
+      "deaths": {
+        "base": 106,
+        "subj": 97,
+        "first3": {
+          "base": [
+            {
+              "day": 5,
+              "who": "anaconda_empress",
+              "cause": "villager combat"
+            },
+            {
+              "day": 6,
+              "who": "rut_king",
+              "cause": "expedition"
+            },
+            {
+              "day": 6,
+              "who": "hushwolf",
+              "cause": "villager combat"
+            }
+          ],
+          "subj": [
+            {
+              "day": 5,
+              "who": "anaconda_empress",
+              "cause": "villager combat"
+            },
+            {
+              "day": 6,
+              "who": "rut_king",
+              "cause": "expedition"
+            },
+            {
+              "day": 6,
+              "who": "hushwolf",
+              "cause": "villager combat"
+            }
+          ]
+        }
+      },
+      "stateDivs": {
+        "pantry": 10,
+        "trust": 11,
+        "roster": 16,
+        "waveKills": 8,
+        "standing": 81
+      },
+      "earliestStateDiv": 8,
+      "deathDiv": 6,
+      "stateBeforeDeath": false,
+      "meanPantry": 16178
+    },
+    {
+      "seed": 190462,
+      "days": {
+        "base": 150,
+        "subj": 123
+      },
+      "survived": {
+        "base": true,
+        "subj": false
+      },
+      "endReason": {
+        "base": "survived",
+        "subj": "village-lost"
+      },
+      "opens": {
+        "base": 129,
+        "subj": 100,
+        "perDayAlive": {
+          "base": 0.86,
+          "subj": 0.81
+        }
+      },
+      "weightedPick": {
+        "base": 78,
+        "subj": 65
+      },
+      "kcalCost": {
+        "base": 1290,
+        "subj": 1000,
+        "delta": -290
+      },
+      "kcalShareOfMeanPantry": -0.0082,
+      "tickCost": {
+        "base": 129,
+        "subj": 100,
+        "delta": -29
+      },
+      "tickShareOfBudget": -0.0004,
+      "stipend": {
+        "baseHeld": 0,
+        "subjHeld": 0
+      },
+      "heldBound": {
+        "base": 0,
+        "subj": 0
+      },
+      "fights": {
+        "base": 13,
+        "subj": 29,
+        "baseCasts": 22,
+        "subjCasts": 20,
+        "baseKills": 59,
+        "subjKills": 50
+      },
+      "deaths": {
+        "base": 59,
+        "subj": 56,
+        "first3": {
+          "base": [
+            {
+              "day": 9,
+              "who": "anaconda_empress",
+              "cause": "villager combat"
+            },
+            {
+              "day": 11,
+              "who": "gen_jnx8tra",
+              "cause": "ambush"
+            },
+            {
+              "day": 14,
+              "who": "hushwolf",
+              "cause": "villager combat"
+            }
+          ],
+          "subj": [
+            {
+              "day": 9,
+              "who": "anaconda_empress",
+              "cause": "villager combat"
+            },
+            {
+              "day": 11,
+              "who": "gen_jnx8tra",
+              "cause": "ambush"
+            },
+            {
+              "day": 14,
+              "who": "hummice",
+              "cause": "villager combat"
+            }
+          ]
+        }
+      },
+      "stateDivs": {
+        "pantry": 17,
+        "trust": 66,
+        "roster": 17,
+        "waveKills": 15,
+        "standing": 41
+      },
+      "earliestStateDiv": 15,
+      "deathDiv": 14,
+      "stateBeforeDeath": false,
+      "meanPantry": 35493
+    },
+    {
+      "seed": 190463,
+      "days": {
+        "base": 23,
+        "subj": 138
+      },
+      "survived": {
+        "base": false,
+        "subj": false
+      },
+      "endReason": {
+        "base": "village-lost",
+        "subj": "village-lost"
+      },
+      "opens": {
+        "base": 21,
+        "subj": 107,
+        "perDayAlive": {
+          "base": 0.91,
+          "subj": 0.78
+        }
+      },
+      "weightedPick": {
+        "base": 15,
+        "subj": 65
+      },
+      "kcalCost": {
+        "base": 210,
+        "subj": 1070,
+        "delta": 860
+      },
+      "kcalShareOfMeanPantry": 0.0618,
+      "tickCost": {
+        "base": 21,
+        "subj": 107,
+        "delta": 86
+      },
+      "tickShareOfBudget": 0.0073,
+      "stipend": {
+        "baseHeld": 0,
+        "subjHeld": 0
+      },
+      "heldBound": {
+        "base": 0,
+        "subj": 0
+      },
+      "fights": {
+        "base": 2,
+        "subj": 37,
+        "baseCasts": 4,
+        "subjCasts": 23,
+        "baseKills": 16,
+        "subjKills": 67
+      },
+      "deaths": {
+        "base": 25,
+        "subj": 80,
+        "first3": {
+          "base": [
+            {
+              "day": 5,
+              "who": "ducks_in_a_row",
+              "cause": "expedition"
+            },
+            {
+              "day": 5,
+              "who": "drumbelly_tanuki",
+              "cause": "villager combat"
+            },
+            {
+              "day": 7,
+              "who": "hummice",
+              "cause": "villager combat"
+            }
+          ],
+          "subj": [
+            {
+              "day": 4,
+              "who": "lockpick_raccoon",
+              "cause": "villager combat"
+            },
+            {
+              "day": 4,
+              "who": "hummice",
+              "cause": "villager combat"
+            },
+            {
+              "day": 5,
+              "who": "hushwolf",
+              "cause": "villager combat"
+            }
+          ]
+        }
+      },
+      "stateDivs": {
+        "pantry": 9,
+        "trust": 16,
+        "roster": 9,
+        "waveKills": 17,
+        "standing": null
+      },
+      "earliestStateDiv": 9,
+      "deathDiv": 4,
+      "stateBeforeDeath": false,
+      "meanPantry": 13905
+    },
+    {
+      "seed": 190464,
+      "days": {
+        "base": 115,
+        "subj": 142
+      },
+      "survived": {
+        "base": false,
+        "subj": false
+      },
+      "endReason": {
+        "base": "village-lost",
+        "subj": "village-lost"
+      },
+      "opens": {
+        "base": 113,
+        "subj": 144,
+        "perDayAlive": {
+          "base": 0.98,
+          "subj": 1.01
+        }
+      },
+      "weightedPick": {
+        "base": 70,
+        "subj": 84
+      },
+      "kcalCost": {
+        "base": 1130,
+        "subj": 1440,
+        "delta": 310
+      },
+      "kcalShareOfMeanPantry": 0.0117,
+      "tickCost": {
+        "base": 113,
+        "subj": 144,
+        "delta": 31
+      },
+      "tickShareOfBudget": 0.0005,
+      "stipend": {
+        "baseHeld": 0,
+        "subjHeld": 0
+      },
+      "heldBound": {
+        "base": 0,
+        "subj": 0
+      },
+      "fights": {
+        "base": 39,
+        "subj": 33,
+        "baseCasts": 23,
+        "subjCasts": 22,
+        "baseKills": 65,
+        "subjKills": 55
+      },
+      "deaths": {
+        "base": 86,
+        "subj": 64,
+        "first3": {
+          "base": [
+            {
+              "day": 4,
+              "who": "gallowdeer",
+              "cause": "villager combat"
+            },
+            {
+              "day": 6,
+              "who": "ducks_in_a_row",
+              "cause": "villager combat"
+            },
+            {
+              "day": 6,
+              "who": "living_wire",
+              "cause": "villager combat"
+            }
+          ],
+          "subj": [
+            {
+              "day": 5,
+              "who": "hushwolf",
+              "cause": "villager combat"
+            },
+            {
+              "day": 5,
+              "who": "bulldozer",
+              "cause": "expedition"
+            },
+            {
+              "day": 6,
+              "who": "hushwolf",
+              "cause": "combat"
+            }
+          ]
+        }
+      },
+      "stateDivs": {
+        "pantry": 7,
+        "trust": 11,
+        "roster": 8,
+        "waveKills": 12,
+        "standing": 36
+      },
+      "earliestStateDiv": 7,
+      "deathDiv": 4,
+      "stateBeforeDeath": false,
+      "meanPantry": 26496
+    }
+  ]
+}
