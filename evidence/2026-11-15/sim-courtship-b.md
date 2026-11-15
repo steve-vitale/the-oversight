@@ -41,10 +41,27 @@ instead, with the driver's kcal figure alongside.
   36 days before the village died — but the bar is the bar, and
   3/8 meets it. Lead beats staged on the courtship leg: **0**
   (isolation held — the leg proposes no lead links).
-- **G3 LEVER-ONLY — GO.** Zero `src/js` changes in the branch
-  diff; proof tests green (test-courtship-b 57/57;
-  test-covenant-b 33/33 re-verified on the rebased tip;
-  test-onlylead-b 29/29; test-onlylead2-b 25/25 — see Commits).
+- **G3 LEVER-ONLY — GO on the pilot tip, QUALIFIED on the
+  rebased tip (see metric review #10).** Zero `src/js` changes
+  in the branch diff (33 files: scripts/ + evidence/ only). On
+  the pilot tip (base a9d85e32c, where the pilot ran) all proof
+  tests were green: test-courtship-b 57/57, test-covenant-b
+  33/33, test-onlylead-b 29/29, test-onlylead2-b 25/25. On the
+  rebased tip (base 7a4353f68) two live-smoke checks fail on
+  master game-code drift, instrument unchanged (the rebased
+  instrument changeset is byte-identical to the original):
+  test-courtship-b 56/57 (the study deed never fires on seed
+  100601's smoke) and test-onlylead2-b 24/25 (peer links now
+  form on the substrate-negative seed); test-covenant-b 33/33
+  and test-onlylead-b 29/29 stay green. The failures are live
+  200d-trajectory assertions moved by two master src/js changes
+  (convo-mood plain parting + CASCADE lingering change), not by
+  anything this arm changed — and the pilot's judged numbers
+  come from the corpora, generated pre-drift, so the PILOT
+  NO-GO verdict is unaffected. G3 as preregged ("proof tests
+  green") does not literally hold on the rebased tip; it is
+  recorded here as qualified, not re-scored, and the
+  coordinator decides the merge.
 - **COST BAR — FAILS.** Starvation deaths pooled courtship **5**
   vs baseline **0** (bar ≤ baseline + 2 = 2). Median survival
   courtship 146.5d ≥ 0.8× baseline median 114d = 91.2d (passes).
@@ -605,6 +622,38 @@ the road. That's a thing villages DO now."
    anchorCommit — they are sweep recorder rows, not runs). No
    LOUD line; the check does not apply to this corpus shape.
    The §15 panel is the deviation read instead (below).
+10. **LIVE-SMOKE PROOF TESTS REDDEN ON REBASE DRIFT
+    (bisected, not assumed).** After the rebase onto master
+    tip 7a4353f68, test-courtship-b reads 56/57 and
+    test-onlylead2-b 24/25, where both read green on the pilot
+    tip. The two failures are live 200d-trajectory assertions:
+    (a) courtship's study deed never fires on seed 100601's
+    smoke (0 policy studyVillageCodex calls in 200 days,
+    where the pilot corpus has 2 — days 6 and 106); (b)
+    onlylead2's substrate-negative seed now forms 2 peer links
+    (accepted days 134, 135), where the test asserts none form.
+    All static checks pass on both tips. Bisect: both tests
+    were re-run in a scratch worktree at the pre-rebase
+    instrument commit ce82eea90 — 57/57 and 25/25, green. The
+    only delta between the tips in game code is 2 src/js files
+    across 22 master commits: src/js/convo-mood.js (+16, plain
+    parting for friendly/neutral sittings — new RNG draws) and
+    src/js/game.js (+16, CASCADE lingering change — lingering
+    raiders no longer step onto the scholar or start contact
+    fights). The rebased instrument changeset is byte-identical
+    to the original, and no master commit touched this branch's
+    files — so the reddening is master drift moving live
+    trajectories under frozen proof tests, not an instrument
+    defect. The pilot's judged numbers are unaffected (the
+    corpora were generated pre-drift, on the tip where all
+    proofs were green). Lesson for the next arm: live-smoke
+    proof tests are pinned to a game-code tip — a rebase across
+    game changes can redden them without touching the
+    instrument, and the re-verification step must report
+    pre/post numbers instead of assuming green carries. No
+    test was edited to go green; the two failures stand as
+    recorded above and the merge decision is the
+    coordinator's.
 
 ## Balanced panel (§15)
 
@@ -639,11 +688,13 @@ panel is the instrument; G2 is the judge.
   fix + daily opinion read)
 - Analyzer: scripts/analyze-onlylead-b.js (extended: rung naming
   + opinion/deeds rollups)
-- Proof: scripts/test-courtship-b.js (new; 57/57 — static lever
-  checks + 200d game smoke + determinism);
+- Proof: scripts/test-courtship-b.js (new; 57/57 on the pilot
+  tip, 56/57 on the rebased tip — the one failure is master
+  game-code drift in the live smoke, see metric review #10);
   scripts/test-covenant-b.js (33/33, re-verified on the rebased
   tip); scripts/test-onlylead-b.js (29/29);
-  scripts/test-onlylead2-b.js (25/25)
+  scripts/test-onlylead2-b.js (25/25 on the pilot tip, 24/25
+  on the rebased tip — same drift, see #10)
 - Panel builder: scripts/build-courtship-panels-20261115.js (new)
 - Per-seed JSON: evidence/2026-11-15/perseed-courtship-b-control/
   (8 files) and evidence/2026-11-15/perseed-courtship-b-on/
@@ -672,6 +723,26 @@ panel is the instrument; G2 is the judge.
   test 57/57
 - (this commit — pilot corpora + analysis + panel + evidence;
   rebased onto current master before landing — see below)
+
+Rebase (adoption, 2026-11-15 ~17:05Z): branch rebased onto local
+master tip 7a4353f68 (H1 transplant 7redef matched-band; 22
+commits ahead of the creation base a9d85e32c; origin/master
+874d97c00 is an ancestor of it). The rebase stopped once at the
+instrument pick (the documented stop-at-pick quirk: pick in
+both done and todo lists, worktree clean, pick unapplied —
+verified, then `git rebase --continue`; sailed through). No
+master commit touched this branch's files, so the rebase was
+conflict-free. Rebased hashes: prereg 74c3dc8b2, amendment
+d864fe7bb, amendment 2 f92831766, instrument 303508ce3,
+evidence b54968205, corpora f55bfefbb (tip). Proof tests
+re-run on the rebased tip after this commit: test-courtship-b
+56/57, test-covenant-b 33/33, test-onlylead-b 29/29,
+test-onlylead2-b 24/25 — the two failures are master game-code
+drift in live smokes, bisected to the pre-rebase tip (both
+green there: 57/57 and 25/25; see metric review #10). Zero
+`src/js` in the branch diff vs 7a4353f68 (33 files: scripts/ +
+evidence/ only). The rebased instrument changeset is
+byte-identical to the original ce82eea90.
 
 ## Findings for the backlog (coordinator owns sim-findings.md)
 
@@ -727,7 +798,10 @@ panel is the instrument; G2 is the judge.
 
 Courtship-deeds build arm on a 200d horizon — PILOT NO-GO:
 covenant beats staged 3/8 (bar ≥3/8 — G2 GO, exactly at the
-bar); cost bar fails (starvation 5 vs 0, bar ≤2); G1/G3 GO.
+bar); cost bar fails (starvation 5 vs 0, bar ≤2); G1 GO; G3
+qualified on the rebased tip (proofs green on the pilot tip,
+two live-smoke checks reddened by master game-code drift —
+see metric review #10; instrument changeset byte-identical).
 The opinion gate is PROVEN OPEN in live play — opinion 10 by
 day 34 at the latest, median day 6, on all 8 seeds, against a
 baseline median of day 57 — and the covenant road staged 3/8
