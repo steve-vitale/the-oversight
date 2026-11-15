@@ -251,7 +251,25 @@ Adjudication — 0 attributable:
 
 ## Landing (r136 branch)
 
-[PENDING — to be filled by the landing addendum after the ff-only merge.]
+- Master moved during the run: 15 commits landed (sim-onlylead-b,
+  sim-transplant6b3way, sim-gorgeprice-b, sim-winnability-round-1055
+  coordinator evidence) — none touches src/js. Branch rebased onto
+  `1ca2c257d`: the rebase stopped at the first pick with the documented
+  stop-at-pick quirk (pick in both done and todo lists, tree clean,
+  pick unapplied — verified with `git diff d4bbafd5c` at 119 lines);
+  `git rebase --continue` sailed through. New tips `38083f035` (Q1) +
+  `d394863b4` (run note).
+- Proof tests re-run on the rebased tip: bar-shape 18/18, HEED-V 6/6,
+  person-trust 19/19 (panel bit-identical).
+- ff-only merged; new master `d394863b4`. Worktree released
+  (worktree-release.sh merged), worktree removed, branch
+  `journey-landing` deleted. Main tree clean.
+- Rotation `journey-rotation-a.txt`: read 0, wrote 0→1 at closeout
+  (read back). Next leg: establishment.
+- Lock `playtest-loop.lock` (run_id
+  `2026-11-15T11:44:01Z-playtest-loop-a`) deleted at closeout after
+  run_id verification.
+- Merged locally, pending ship (no bump/push — ship loop owns that).
 
 ## Metric review
 
