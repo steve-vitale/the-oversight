@@ -25757,7 +25757,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const realDesc = opt.secret ? (opt.secretDesc || opt.description) : opt.description;
       this.say(`✨ ${rc.itemName} — ${realName}. ${realDesc}`);
       if (opt.secret) this.say(`You had no idea it could become this. That's the point. Nobody told you.`);
-      if (opt.systemCommentary) this.say(`"${opt.systemCommentary}"`);
+      // QUOTE-WRAP (journey-endgame r211 follow-up): systemCommentary data
+      // sometimes carries its own quotes (15/51 relicEnhancements values) —
+      // naive '"'+t+'"' rendered ""..."" on fresh seeds (C-wide 89724/89727/
+      // 89728). quoteWrap strips, then wraps — once — like sysSay.
+      if (opt.systemCommentary) this.say(this.quoteWrap(opt.systemCommentary));
       return null;
     },
 
@@ -25813,7 +25817,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       try { this.checkPlayerGodhoodAscension(); } catch (e2) {}
       s.abilityChoices = null;
       this.say(`✨ Ability gained: ${choice.name} (L1). ${choice.description || choice.desc}`);
-      if (choice.flavor) this.say(`"${choice.flavor}"`);
+      // QUOTE-WRAP (journey-endgame r211 follow-up): 12/461 flavor strings
+      // carry their own quotes (abilities.json/evolutions.json) — naive
+      // '"'+t+'"' doubled them. quoteWrap strips, then wraps — once.
+      if (choice.flavor) this.say(this.quoteWrap(choice.flavor));
       // The "all week" line is the arrival gift's; other offers (contest
       // prizes, aid gifts, poison/pellet offers) get a neutral line.
       if (choice.src === 'arrival') this.say(`"We've been watching you figure things out all week! This one's on us — a head start! But the REAL power? That comes from UNDERSTANDING. Use it! Learn it! The gamblers are watching!"`);
@@ -26367,7 +26374,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       s.evolutionDeferred = false;
       try { this.tele('ability_evolved', { from: rootId, to: evoId, who: 'player' }); } catch (e) {}
       this.say(`🌀 ${choice.name}. ${choice.verb}`);
-      if (choice.flavor) this.say(`"${choice.flavor}"`);
+      if (choice.flavor) this.say(this.quoteWrap(choice.flavor));
       // Evolution flags that need engine hooks are applied here (one-liners).
       this.applyEvolutionFlags(ab);
       this.recomputeActiveSynergies();

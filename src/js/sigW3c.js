@@ -142,7 +142,7 @@
       var face = m.cbFace;
       var subj = game.encSubject ? game.encSubject(m) : 'The Callback';
       game.say(subj + ' wears ' + face.name + '\'s face. The face is too symmetrical. The eyes don\'t track you — they don\'t track anything.');
-      if (face.line) game.say('It speaks — in their voice, saying things they said: "' + face.line + '"');
+      if (face.line) game.say('It speaks — in their voice, saying things they said: ' + game.quoteWrap(face.line));
       else game.say('It speaks — in their voice. Small talk. The kind of nothing people say when they\'re alive.');
       game.say('The wrongness is the telegraph. (The Callback wears the dead. Speak the funeral — or name it as NOT them.)');
       try { game.tbRefreshTelegraphUI(); } catch (e) {}
@@ -154,7 +154,7 @@
     var face = m.cbFace || { name: 'them' };
     var bits = [
       'It says your name the way ' + face.name + ' said it.',
-      face.line ? 'In their voice, half-remembered: "' + face.line + '"' : 'It hums something tuneless. ' + face.name + ' used to hum.',
+      face.line ? 'In their voice, half-remembered: ' + game.quoteWrap(face.line) : 'It hums something tuneless. ' + face.name + ' used to hum.',
       'The mouth smiles. ' + face.name + '\'s smile was never that even.',
     ];
     try { game.audioEvent('callbackRing', {}); } catch (e) {} // the dead are calling (break-it audio 2026-10-11)
@@ -208,7 +208,7 @@
       return true;
     }
     game.say('It falters. The too-symmetrical face sags like wet paper. In ' + face.name + '\'s voice, thinning: ' +
-      (face.line ? '"' + face.line + '" — ' : '') + 'and then, quieter, in something like relief: "thank you."');
+      (face.line ? game.quoteWrap(face.line) + ' — ' : '') + 'and then, quieter, in something like relief: "thank you."');
     var dmg = Math.max(1, Math.ceil((m.hp || 1) / 2));
     game.tbDamage(m.key, dmg, 'coming apart', null, { quiet: true });
     try { game.tbRefreshTelegraphUI(); } catch (e) {}
@@ -548,7 +548,7 @@
       p.acted = true;
       this.say('You look at the too-symmetrical face — at the eyes that don\'t track — and you speak to ' + face.name + ', not to it.');
       this.say('"I know you\'re gone, ' + face.name + '.' +
-        (face.line ? ' You used to say "' + face.line + '" — I remember.' : ' I remember you.') +
+        (face.line ? ' You used to say ' + this.quoteWrap(face.line) + ' — I remember.' : ' I remember you.') +
         ' You don\'t have to wear this anymore. Goodbye."');
       this.say('Something in it breaks — cleanly, like ice going out on a river. It loses coherence.');
       m.cbCoherence = 0;
