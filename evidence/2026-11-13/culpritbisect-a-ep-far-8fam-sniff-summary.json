@@ -1,0 +1,207 @@
+{
+  "step": "ep-far-8fam-sniff",
+  "seeds": [
+    190589,
+    190590,
+    190591,
+    190592
+  ],
+  "run": "culpritbisect-pilot",
+  "endpoints": {
+    "far": {
+      "survived": 4,
+      "base": "203a32775",
+      "days": {
+        "190391": 86,
+        "190392": 144,
+        "190393": 150,
+        "190394": 43,
+        "190395": 150,
+        "190396": 87,
+        "190397": 150,
+        "190398": 150
+      }
+    },
+    "merge": {
+      "survived": 1,
+      "base": "e4dbe581b",
+      "days": {
+        "190391": 103,
+        "190392": 150,
+        "190393": 115,
+        "190394": 140,
+        "190395": 76,
+        "190396": 126,
+        "190397": 115,
+        "190398": 136
+      }
+    }
+  },
+  "perSeed": [
+    {
+      "seed": 190589,
+      "leg": "bisect",
+      "anchorCommit": "203a327750a2",
+      "standingFix": true,
+      "standingSha": "f8fda4295a99",
+      "policySha": "a7ff5c516440",
+      "days": 140,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 5,
+      "unlockedWave": 5,
+      "standing": 200,
+      "deaths": 97,
+      "endPantryKcal": 2360,
+      "blooded": false,
+      "tribute": {
+        "kind": "military_tribute",
+        "ready": false,
+        "veterans": 0,
+        "need": 2,
+        "reason": "veterans-short"
+      },
+      "ready4": 0,
+      "ready5": 0,
+      "ladderVets4": 0,
+      "errors": 0,
+      "snapshotCount": 139,
+      "finalSnapDay": 140
+    },
+    {
+      "seed": 190590,
+      "leg": "bisect",
+      "anchorCommit": "203a327750a2",
+      "standingFix": true,
+      "standingSha": "f8fda4295a99",
+      "policySha": "a7ff5c516440",
+      "days": 65,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 150,
+      "deaths": 68,
+      "endPantryKcal": 0,
+      "blooded": true,
+      "tribute": {
+        "kind": "military_tribute",
+        "ready": false,
+        "veterans": 1,
+        "need": 2,
+        "reason": "veterans-short"
+      },
+      "ready4": 1,
+      "ready5": 1,
+      "ladderVets4": 1,
+      "errors": 0,
+      "snapshotCount": 63,
+      "finalSnapDay": 65
+    },
+    {
+      "seed": 190591,
+      "leg": "bisect",
+      "anchorCommit": "203a327750a2",
+      "standingFix": true,
+      "standingSha": "f8fda4295a99",
+      "policySha": "a7ff5c516440",
+      "days": 150,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "deaths": 128,
+      "endPantryKcal": 0,
+      "blooded": false,
+      "tribute": {
+        "kind": "military_tribute",
+        "ready": false,
+        "veterans": 0,
+        "need": 2,
+        "reason": "veterans-short"
+      },
+      "ready4": 0,
+      "ready5": 0,
+      "ladderVets4": 0,
+      "errors": 0,
+      "snapshotCount": 149,
+      "finalSnapDay": 150
+    },
+    {
+      "seed": 190592,
+      "leg": "bisect",
+      "anchorCommit": "203a327750a2",
+      "standingFix": true,
+      "standingSha": "f8fda4295a99",
+      "policySha": "a7ff5c516440",
+      "days": 121,
+      "endReason": "village-lost",
+      "won": false,
+      "villageLost": true,
+      "scaleRank": "regional",
+      "maxWave": 4,
+      "unlockedWave": 4,
+      "standing": 199,
+      "deaths": 84,
+      "endPantryKcal": 0,
+      "blooded": false,
+      "tribute": {
+        "kind": "military_tribute",
+        "ready": false,
+        "veterans": 0,
+        "need": 2,
+        "reason": "veterans-short"
+      },
+      "ready4": 1,
+      "ready5": 0,
+      "ladderVets4": 0,
+      "errors": 0,
+      "snapshotCount": 119,
+      "finalSnapDay": 121
+    }
+  ],
+  "survived": 0,
+  "verdict": "BAD",
+  "rankVerdict": "RANK_INCONCLUSIVE",
+  "classifiable": true,
+  "wall": {
+    "wins": 0,
+    "national": 0,
+    "table": 0,
+    "regional": 4,
+    "village": 0,
+    "wave5": 1,
+    "wave4": 4,
+    "medianDays": 140,
+    "survived": 0,
+    "deaths": 377,
+    "standingRange": [
+      150,
+      200
+    ],
+    "blooded": 1
+  },
+  "deathCauses": {
+    "total": 377,
+    "counts": {
+      "villager combat": 140,
+      "expedition": 79,
+      "combat": 102,
+      "the wild": 45,
+      "monster": 4,
+      "a wound that wouldn't close": 1,
+      "the arena": 3,
+      "Gavel": 1,
+      "The Strike": 1,
+      "a stranger": 1
+    }
+  },
+  "instrumentErrors": 0
+}
