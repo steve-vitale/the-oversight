@@ -295,4 +295,18 @@ run (the analyzer proof uses synthetic corpora, no staged game).
 
 ## CLOSEOUT — run 2026-11-15T1945Z (this run)
 
-(To fill at closeout.)
+Panel 2/4 survived (135605, 135607 alive d141; 135606 over d131, 135608 over
+d109). Lived-days 522 vs 478 control (+9.2%, HOLD). Lesser 4/4 (d35/41/42/47).
+Tribute DELIVERED 2/4 (135605 d117, 135607 d100) — first deliveries on this
+leg; payable at ready on both. Q1 NATIONAL: NO-GO on the wall — blocker LEAD
+2/3 seasoned on both survivors; collapse on the other two. Q3 vetbar GO (0
+disagreements), lesser HOLD. Q4 trap-line HOLD, nod-loop HOLD (worst 3x),
+betrayal HOLD, spoken-raise GO (3 answered, 1 correct hold). Q5 spotter blank
+FILLED — d90 reads live on 4/4 seeds; W5-INSTANCE UNANSWERED (1 fight in the
+band; live wave-5 entities present for weeks, never fought — needs a
+sortie-taking policy next run). Stutter fixed (conversation.js, curious
+resume + note-echo; proof test 17/17; main67 caught a too-broad first
+version, narrowed, 6/6). Gate 332/8 — 1 attributable (main67, fixed), 7
+adjudicated pre-existing/standing. Telemetry QUIET (w4 183 vs 178 baseline);
+baseline stands. Full run note: evidence/2026-11-15/journey-scale-r215.md.
+Merged locally, pending ship.

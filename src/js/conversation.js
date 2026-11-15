@@ -3478,12 +3478,38 @@
                 opener.line.replace(/^"/, '').replace(/"$/, '') + '"';
             }
           } else {
-            const spoken = /^"([^"]+)([.?!])" ([\s\S]*)$/.exec(opener.line);
-            if (spoken) {
-              seedLine = `"About ${want.seedNote || 'last time'} — ${spoken[1]}${spoken[2]}" ${spoken[3]}`;
+            // CURIOUS-RESUME STUTTER (journey-scale r215 2026-11-15): a
+            // curious seed's opener IS its question, and the note IS that
+            // question's topic — "About your plan here — So what's your
+            // plan here?" (Rufina r207; Heidi/Gabriel/Amara r215, 3/3
+            // curious resumes this band). The prefix restates the topic
+            // the question already asks. A curious resume asks the
+            // question bare, like a fresh ask. Same for any opener whose
+            // spoken part already contains the note verbatim.
+            // SCOPE (main67, same run): only when the seed re-hangs THE
+            // SAME question (seedQid set). A curious seed WITHOUT a qid
+            // picks a FRESH question — the note is the only link to what
+            // was left hanging, so the prefix stays ("About the
+            // storehouse — ..." is how the post-death control names its
+            // unfinished business at all).
+            const _note = want.seedNote || 'last time';
+            const _spokenText = (() => {
+              const m = /^"([^"]+)([.?!])" ([\s\S]*)$/.exec(opener.line);
+              return m ? (m[1] + m[2]) : opener.line.replace(/^"/, '').replace(/"$/, '');
+            })();
+            const _curiousResume = (want.id === 'curious' && !!want.seedQid);
+            const _noteEcho = _note !== 'last time' &&
+              _spokenText.toLowerCase().includes(_note.toLowerCase());
+            if (_curiousResume || _noteEcho) {
+              seedLine = opener.line;
             } else {
-              seedLine = `"About ${want.seedNote || 'last time'} — ` +
-                opener.line.replace(/^"/, '').replace(/"$/, '') + '"';
+              const spoken = /^"([^"]+)([.?!])" ([\s\S]*)$/.exec(opener.line);
+              if (spoken) {
+                seedLine = `"About ${_note} — ${spoken[1]}${spoken[2]}" ${spoken[3]}`;
+              } else {
+                seedLine = `"About ${_note} — ` +
+                  opener.line.replace(/^"/, '').replace(/"$/, '') + '"';
+              }
             }
           }
           // FAVOR FOLLOW-UP (convo favor system 2026-10-11): the favor
