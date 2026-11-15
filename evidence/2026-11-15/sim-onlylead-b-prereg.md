@@ -548,3 +548,85 @@ reported for both policies in the evidence file.
 - Panel (pilot GO only): evidence/2026-11-15/covenant-panel.*
 - Evidence: evidence/2026-11-15/sim-onlylead-b.md (DIAG + Stage 2
   verdict in one file).
+
+---
+
+# STAGE 2 AMENDMENT — SMOKE FINDING: THE OPINION GATE (pre-run correction, §14b)
+
+Written 2026-11-15, AFTER the Stage 2 policy + proof test were
+built and BEFORE any judged Stage 2 pilot ran. This corrects the
+pre-registration on probe evidence; it is not a re-score (no
+judged numbers exist yet).
+
+## The smoke finding (Stage 0)
+
+The covenant policy's 60d smoke on seed 100401 ran clean (0
+instrument errors, determinism holds) but proposed NOTHING:
+`proposeNotReady: 51` — no candidate passed on any of the 51
+days after day 10. A probe of the live state showed why: the
+det scores pass easily from day 12 (detPeer 51–59, all ≥45) and
+the villages are known — but known-village opinion sits at 0–4
+through day 60, far below the engine's opinion-10 prerequisite
+for peer proposals (`_proposePeer`: "barely know Haven's name —
+and a covenant is a relationship, not a handshake").
+
+## The opinion probe (pool sizing, §14b)
+
+Competent-only, 150d, seeds 100401 and 100402 — max known-village
+opinion by day:
+
+| seed | d30 | d60 | d90 | d120 | d150 |
+|------|-----|-----|-----|------|------|
+| 100401 | 2 | 4 | 6 | 8 | 10 |
+| 100402 | 2 | 6 | 3 | 8 | 10 |
+
+Opinion climbs ~2 points per 30 days under competent play and
+reaches 10 only AT the horizon (day 150) on both seeds. So a
+covenant propose can first fire at ~day 145+, the link then needs
+30 days to season (trust 30 → 40+), and the rung (already passed)
+is no obstacle — the first covenant beat is structurally past
+day 175 from a cold start, beyond the 150d horizon. The G2 bar
+(≥3/8 covenant beats staged in 150d) is unachievable on this
+band: the pilot could not have passed regardless of the concept's
+merit.
+
+## The policy fix (pre-run, §14b)
+
+The original design filtered candidates on opinion ≥10 — which
+hid the gate (the policy never attempted the propose, so the
+instrument recorded "no candidate" instead of "engine refused
+on opinion"). Fixed BEFORE the pilot: the opinion filter is
+removed; the policy attempts the propose on the best det
+candidate and lets the engine refuse aloud; a prerequisite
+refusal counts as `proposePrereq` (no decline, no -5, no
+7-day cooldown — the village isn't declining, it just doesn't
+know Haven yet). The proof test was updated to match (33/33
+green, including a live 60d smoke where the attempts fire and
+are all prerequisite refusals). The driver needed no change for
+this fix.
+
+## Verdict: Stage 2 pilot NOT SPENT — build killed as SUBSTRATE-MISSING
+
+- The Stage 2 pilot (8×2, 150d) does NOT run: §14b forbids
+  spending a pilot on a foregone conclusion, and the probe
+  proves the bar is unachievable from a cold start in 150d.
+- Kill classification (§14a): **SUBSTRATE-MISSING** — the engine
+  does not stage what the arm needs within the measurement
+  window (opinion ≥10 known villages don't exist until ~day
+  150; a covenant link then needs 30 more days to season).
+  The concept (walk the covenant road) is NOT dead — the
+  substrate (opinion) is missing in-window. Do not retry this
+  pilot without a new mechanism or a new window.
+- What would unblock it (next arms, coordinator's call):
+  (a) an opinion-building lever first — courtship deeds that
+  raise opinion (visits, gifts, aid, contest wins where the
+  region hears), then the covenant propose on top; or
+  (b) a 200d+ horizon covenant staging arm (first beats
+  possible ~day 175+ for villages that survive that long).
+- The covenant policy + proof test + driver extension are
+  committed as PROVEN instruments (static 33/33, live smoke
+  green, determinism holds) for that future arm — parked, not
+  deleted. No src/js changed. No confirm band spent:
+  100421–100436 stays fresh and unused.
+- G1/G2/G3 for Stage 2 are NOT judged (no pilot ran); the
+  verdict is the kill above, not a NO-GO on the bar.

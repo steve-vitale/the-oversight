@@ -61,6 +61,7 @@ const REPO = process.env.REPO || path.join(__dirname, '..');
 const { loadGame, setupGame, runDays, quietLog } = require(path.join(REPO, 'scripts', 'sim-harness'));
 const { scaleclimbPolicy, scaleclimbStats, resetScaleclimbStats } = require(path.join(REPO, 'scripts', 'policies', 'competent-scaleclimb-b'));
 const { answercourtPolicy, answercourtStats, resetAnswercourtStats } = require(path.join(REPO, 'scripts', 'policies', 'competent-answercourt-b'));
+const { covenantPolicy, covenantStats, resetCovenantStats } = require(path.join(REPO, 'scripts', 'policies', 'competent-covenant-b'));
 
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : []).filter(Number.isFinite);
 const POLICIES = (process.env.POLICY ? process.env.POLICY.split(',').map(function (s) { return s.trim(); }) : ['competent-scaleclimb-b', 'competent-answercourt-b']).filter(Boolean);
@@ -286,9 +287,11 @@ const MEAL_LINE_RE = /village meal|cooked for the haven|communal pantry|you keep
 async function oneRun(seed, policyName, opts) {
   opts = opts || {};
   const DAYS_RUN = (opts.days | 0) || DAYS;
-  const policy = policyName === 'competent-answercourt-b' ? answercourtPolicy : scaleclimbPolicy;
-  if (policyName !== 'competent-scaleclimb-b' && policyName !== 'competent-answercourt-b') throw new Error('Unknown policy ' + policyName);
+  const policy = policyName === 'competent-answercourt-b' ? answercourtPolicy
+    : policyName === 'competent-covenant-b' ? covenantPolicy : scaleclimbPolicy;
+  if (policyName !== 'competent-scaleclimb-b' && policyName !== 'competent-answercourt-b' && policyName !== 'competent-covenant-b') throw new Error('Unknown policy ' + policyName);
   if (policyName === 'competent-answercourt-b') { resetAnswercourtStats(); resetScaleclimbStats(); }
+  else if (policyName === 'competent-covenant-b') { resetCovenantStats(); resetAnswercourtStats(); }
   else resetScaleclimbStats();
   const { Game } = await loadGame({ seed: seed, mode: 'onlylead-' + policyName, fullTelemetry: false });
   const series = [];
@@ -578,6 +581,7 @@ async function oneRun(seed, policyName, opts) {
   let capSummary = null, ctxCounters = null;
   try {
     if (policyName === 'competent-answercourt-b' && capturedCtx) capSummary = Object.assign(scaleclimbStats(), { answercourt: answercourtStats() });
+    else if (policyName === 'competent-covenant-b' && capturedCtx) capSummary = Object.assign(covenantStats(), { answercourt: answercourtStats() });
     else if (policyName === 'competent-scaleclimb-b' && capturedCtx) capSummary = scaleclimbStats();
   } catch (e) { errors.push('capSummary: ' + String(e.message).slice(0, 80)); }
   try {
@@ -648,17 +652,18 @@ if (require.main === module) (async function () {
   // armed -> perseed-onlylead-b-on. OUTDIR env overrides both (single dir).
   function dirFor(pol) {
     if (OUTDIR) return path.join(REPO, 'evidence', '2026-11-15', OUTDIR);
+    const stem = (RUN === 'covenant-b') ? 'perseed-covenant-b' : 'perseed-onlylead-b';
     return path.join(REPO, 'evidence', '2026-11-15',
-      pol === 'competent-scaleclimb-b' ? 'perseed-onlylead-b-control' : 'perseed-onlylead-b-on');
+      pol === 'competent-scaleclimb-b' ? stem + '-control' : stem + '-on');
   }
   for (const pol of POLICIES) fs.mkdirSync(dirFor(pol), { recursive: true });
   for (const seed of SEEDS) for (const pol of POLICIES) {
-    const file = path.join(dirFor(pol), 'onlylead-b-s' + seed + '-' + pol + '-' + RUN + '.json');
+    const file = path.join(dirFor(pol), RUN + '-s' + seed + '-' + pol + '-' + RUN + '.json');
     if (fs.existsSync(file)) { console.error('ONLYLEAD STOP: refusing to overwrite ' + file); process.exit(3); }
   }
   for (const seed of SEEDS) for (const pol of POLICIES) {
     const out = await oneRun(seed, pol);
-    const file = path.join(dirFor(pol), 'onlylead-b-s' + seed + '-' + pol + '-' + RUN + '.json');
+    const file = path.join(dirFor(pol), RUN + '-s' + seed + '-' + pol + '-' + RUN + '.json');
     writeRobust(file, JSON.stringify(out, null, 2) + '\n');
     console.log(JSON.stringify({
       seed: out.seed, policy: out.policy, days: out.days, endReason: out.endReason, won: out.won,
