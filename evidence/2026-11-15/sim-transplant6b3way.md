@@ -298,15 +298,16 @@ recorder-corpus refusal above.)
   ran 11:16Z onward with no flap.) Git operations ran slow at times
   (full-tree restat on checkouts, ~60–110s) — the same flap-era
   slowness prior arms recorded — then ran at normal speed.
-- SAFE-COMMIT CLOBBER: struck 1× on the evidence commit
-  (cccf2ed24) — all 21 committed files showed staged-as-deleted in
-  the main index immediately after a correct commit. Repaired with
-  the documented `git ls-tree -r HEAD -- <paths> | git update-index
+- SAFE-COMMIT CLOBBER: struck 2× on this arm (evidence commit
+  cccf2ed24: all 21 files staged-as-deleted; correction commit
+  9e00777ac: the evidence file MM) — both repaired with the
+  documented `git ls-tree -r HEAD -- <paths> | git update-index
   --add --index-info` pipe; verified afterwards with `git status
-  --short` empty + `git diff HEAD` empty + the commit's file list
-  (21 files, 1,178,221 insertions) intact. The commit was always
-  correct; only the index lied. (This line itself landed in a
-  follow-up evidence-correction commit.)
+  --short` empty + `git diff HEAD` empty + worktree hash == HEAD
+  blob per file. Both commits were always correct; only the index
+  lied. (This line itself landed in a second follow-up
+  evidence-correction commit, after the first correction's own
+  clobber made the 1× count stale.)
 - REAPER: the pre-flight reap was deferred past run start (adoption
   investigation + live Loop B trees + the subject step running) and
   is owed at closeout as the final sweep; recorded here so the
