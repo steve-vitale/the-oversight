@@ -28,23 +28,10 @@
 //     anyone anything: composition comes from the order — each stage's
 //     action is the next stage's precondition — not from a planner.
 //   - winplan_perception_only: party = self + villagerFightAllies(vid) (code: winPlanFightGate)
-//     (co-tasked or co-located, trust-ordered) plus the plan's own
-//     launched party members who are still out on expedition (GATELEVER
-//     sim-gatelever-b: people who set out together count as the party
-//     at the gate, even when the meeting tile does not sense them; the
-//     engine cap stays 3 and the bar stays 3 for wave 4+); a party
-//     member's gear is judged only for those members, never for the
-//     roster; beast strength is judged from the beast in front of them
-//     (its bulk and speed in its def), never from a panel.
-//   - winplan_trick_wait: a hunt/standing plan naming a wave-4+ beast
-//     whose trick the village has not learned waits at Haven (bounded
-//     7 days, once per target) instead of launching trick-blind; the
-//     village-wide trick counter is what releases it (code:
-//     winPlanDepart, winPlanCands).
-//   - winplan_lived_target: a hunt-stage plan names the beast its holder
-//     personally fought and fled (the seed re-points on 'fled'; the gate
-//     accepts know.fought) — never a rumor-born plan (code:
-//     winPlanSeedFromFight, winPlanFightGate).
+//     (co-tasked or co-located, trust-ordered) and nothing else; a
+//     party member's gear is judged only for those sensed members, never
+//     for the roster; beast strength is judged from the beast in front
+//     of them (its bulk and speed in its def), never from a panel.
 //   - winplan_trick_gate: a wave-4 beast whose trick the village has (code: winPlanFightGate)
 //     not learned is never a forced-contact seek: the field fighter opens
 //     with the trick on round 1 only when the village knows it
@@ -99,11 +86,6 @@
   var STAGES = ['gear', 'party', 'hunt', 'standing', 'table'];
   var PARTY_WAIT_DAYS = 3;
   var VETERAN_GUARD_DAYS = 7;
-  // GATELEVER (sim-gatelever-b) part 2: a hunt waits this long for the
-  // trick before the wait expires and the hunt launches anyway (the
-  // gate's trickHolds branch and ordinary encounters can then teach
-  // it). Same bound as the veteran guard.
-  var TRICK_WAIT_DAYS = 7;
 
   function stateOf(self) {
     var v = self.state && self.state.village;
@@ -173,28 +155,6 @@
   // The kill the village was TOLD it lacks, behind an existing beat.
   // Returns a beast wave (3 or 4) or null. A beat with no veterans short
   // names no kill — the villager seeks nothing on its strength.
-  // GATELEVER (sim-gatelever-b) part 2: does this plan's hunt wait
-  // for the trick? Only a hunt/standing plan naming a wave-4+
-  // species whose trick the village has not learned — and only until
-  // the wait already expired for that target. A target-null plan
-  // never waits (no species to wait for). Pure reads except the
-  // wait-clock reset when the trick is learned (the clock belongs to
-  // this target's wait; a learned trick ends it).
-  function trickWaitApplies(self, plan) {
-    try {
-      if (!plan || !plan.target) return false;
-      if (plan.trickWaitedFor === plan.target) return false;
-      var ms = (self.data && self.data.monsters) || [];
-      var w = 0;
-      for (var i = 0; i < ms.length; i++) if (ms[i] && ms[i].id === plan.target) { w = ms[i].wave | 0; break; }
-      if (w < 4) return false;
-      if (self.villageKnowsTrick && self.villageKnowsTrick(plan.target)) {
-        if (plan.trickWaitSinceDay != null) plan.trickWaitSinceDay = -1;
-        return false;
-      }
-      return true;
-    } catch (e) { return false; }
-  }
   function needWave(self) {
     try {
       var beat = deferBeat(self);
@@ -214,9 +174,7 @@
   // alive, not engaged, not already out, a ranger by profile.
   // Ranking among eligibles is shared companionScore (OVE-54) — not
   // roster-first match.
-  // GATELEVER (sim-gatelever-b) part 1A: excludeId skips one id —
-  // the first companion, when seeking a second for the same launch.
-  function findCompanion(self, vid, hx, hy, excludeId) {
+  function findCompanion(self, vid, hx, hy) {
     try {
       var v = self.state && self.state.village;
       if (!v) return null;
@@ -226,7 +184,7 @@
       var elig = [];
       for (var i = 0; i < roster.length; i++) {
         var cid = roster[i];
-        if (!cid || cid === vid || cid === excludeId || cid === self.villagerId) continue;
+        if (!cid || cid === vid || cid === self.villagerId) continue;
         if (!alive(self, cid)) continue;
         if (away[cid]) continue;
         if (((trust[cid] === undefined) ? 10 : trust[cid]) < 15) continue;
@@ -270,20 +228,7 @@
         var v = stateOf(this);
         if (!v) return null;
         var plan = v.winPlan[vid];
-        // GATELEVER (sim-gatelever-b) part 3A: a hunt/standing plan
-        // re-points at the beast actually fled — the lived flee is
-        // the target. Only 'fled' re-points (a sighting or an
-        // avoided meeting is not the fought beast); table plans never
-        // re-point (they do not SEEK).
-        if (plan && plan.stage !== 'gear' && plan.stage !== 'party') {
-          if (outcome === 'fled' && (plan.stage === 'hunt' || plan.stage === 'standing')) {
-            plan.target = mdef.id || null;
-            plan.needWave = (mdef.wave || 1);
-            try { var _nd = this.npcNode ? this.npcNode(vid) : null; if (_nd) plan.node = { nx: _nd.nx, ny: _nd.ny }; } catch (e) {}
-            try { plan.sinceDay = (this.state.scholar || {}).day || 0; } catch (e) {}
-          }
-          return plan;
-        }
+        if (plan && plan.stage !== 'gear' && plan.stage !== 'party') return plan;
         var node = null;
         try { node = this.npcNode ? this.npcNode(vid) : null; } catch (e) {}
         if (!plan) {
@@ -487,48 +432,12 @@
             var a2 = self.agencyState ? self.agencyState() : null;
             if (a2 && !a2.exped[cid]) return false;
           } catch (e) {}
-          // GATELEVER (sim-gatelever-b) part 1A: a second companion
-          // on the same target and duration, when one is free — the
-          // party that sets out is three. Opportunistic, never
-          // waited for: if no second companion is launchable the
-          // launch proceeds with one, exactly as today (producergate
-          // proved waiting does not create companions). The second
-          // companion needs only the light gates here — findCompanion
-          // already filters dead/away/untrusted/absent/engaged/
-          // non-ranger/on-expedition, then gear-up + armed-or-
-          // armored, then the expedition entry itself proves the
-          // launch. The heavy pre-checks (sick/range/hurt-without-
-          // care) protect the FIRST companion's ordering — the
-          // inviter must not leave before knowing the companion can
-          // follow — and do not apply to a second companion whose
-          // failed launch strands nobody (the party is still two).
-          var cid2 = null;
-          try {
-            var _c2 = findCompanion(self, vid, hx, hy, cid);
-            if (_c2) {
-              try { if (self.villagerGearUp) self.villagerGearUp(_c2, true); } catch (e) {}
-              var _cg2 = gearOf(self, _c2);
-              if (_cg2.armed || _cg2.armored) {
-                self.startExpedition(_c2, hx, hy, false, { tx: tx, ty: ty, duration: dur });
-                try {
-                  var _a2b = self.agencyState ? self.agencyState() : null;
-                  if (_a2b && _a2b.exped[_c2]) cid2 = _c2;
-                } catch (e) {}
-              }
-            }
-          } catch (e) {}
           plan.stage = 'hunt';
-          plan.party = cid2 ? [cid, cid2] : [cid];
+          plan.party = [cid];
           try {
             var cplan = self.winPlanOf ? self.winPlanOf(cid) : null;
-            if (cplan) { cplan.stage = 'hunt'; cplan.party = cid2 ? [vid, cid2] : [vid]; cplan.target = plan.target; cplan.node = plan.node; }
+            if (cplan) { cplan.stage = 'hunt'; cplan.party = [vid]; cplan.target = plan.target; cplan.node = plan.node; }
           } catch (e) {}
-          if (cid2) {
-            try {
-              var cplan2 = self.winPlanOf ? self.winPlanOf(cid2) : null;
-              if (cplan2) { cplan2.stage = 'hunt'; cplan2.party = [vid, cid]; cplan2.target = plan.target; cplan2.node = plan.node; }
-            } catch (e) {}
-          }
           bump(self, 'partyDepartures');
           return true;
         };
@@ -551,22 +460,6 @@
           }
           plan.holdSinceDay = -1;
           return 'normal';
-        }
-        // GATELEVER (sim-gatelever-b) part 2: a hunt/standing plan
-        // naming a wave-4+ beast whose trick the village has not
-        // learned waits at Haven instead of launching trick-blind.
-        // Bounded (TRICK_WAIT_DAYS) and once per target: on expiry
-        // the wait is marked done for this target and the hunt
-        // launches anyway, so the gate's trickHolds branch and
-        // ordinary encounters can teach the trick. While waiting the
-        // holder stays home; other villagers still range and can
-        // observe — the village-wide trick counter is what releases
-        // the wait.
-        if ((plan.stage === 'hunt' || plan.stage === 'standing') && trickWaitApplies(this, plan)) {
-          if (plan.trickWaitSinceDay == null || plan.trickWaitSinceDay < 0) plan.trickWaitSinceDay = day;
-          if (day - plan.trickWaitSinceDay < TRICK_WAIT_DAYS) return 'hold';
-          plan.trickWaitedFor = plan.target;
-          plan.trickWaitSinceDay = -1;
         }
         if (plan.stage === 'party' || plan.stage === 'hunt' || plan.stage === 'standing' || plan.stage === 'table') {
           if (launchParty()) return 'launch';
@@ -595,33 +488,15 @@
           var sensed = (typeof this.villagerFightAllies === 'function') ? (this.villagerFightAllies(vid) || []) : [];
           for (var i = 0; i < sensed.length; i++) if (party.indexOf(sensed[i]) === -1) party.push(sensed[i]);
         } catch (e) {}
-        var v = this.state && this.state.village;
-        var plan = (v && v.winPlan) ? v.winPlan[vid] : null;
-        var isVeteran = hasKillWaveAtLeast(this, vid, 4);
-        // GATELEVER (sim-gatelever-b) part 1B: the gate counts the
-        // plan's launched party, not only who is sensed at the
-        // meeting tile — members with a live expedition entry, alive,
-        // up to the engine's cap of 3 (self + 2). Sensed members come
-        // first (physically present); plan members only fill the gap
-        // to 3. The bar is unchanged: still 3 for wave 4+.
-        if (plan && plan.party && plan.party.length && party.length < 3) {
-          try {
-            var _ag = (typeof this.agencyState === 'function') ? this.agencyState() : null;
-            var _ex = (_ag && _ag.exped) || null;
-            for (var _pi = 0; _pi < plan.party.length && party.length < 3; _pi++) {
-              var _pid = plan.party[_pi];
-              if (!_pid || party.indexOf(_pid) !== -1) continue;
-              if (!_ex || !_ex[_pid]) continue;
-              party.push(_pid);
-            }
-          } catch (e) {}
-        }
         var allArmed = true, allArmored = true;
         for (var j = 0; j < party.length; j++) {
           var gj = gearOf(this, party[j]);
           if (!gj.armed) allArmed = false;
           if (!gj.armored) allArmored = false;
         }
+        var v = this.state && this.state.village;
+        var plan = (v && v.winPlan) ? v.winPlan[vid] : null;
+        var isVeteran = hasKillWaveAtLeast(this, vid, 4);
         // GUARD: a table-stage veteran does not risk the veterans bar on
         // a wave-3+ beast without a geared party beside them.
         if (plan && plan.stage === 'table' && isVeteran && wave >= 3 && (party.length < 2 || !allArmed)) {
@@ -646,22 +521,9 @@
         if (plan && (plan.stage === 'hunt' || plan.stage === 'standing')) {
           var need = needWave(this);
           var targetWave = (need != null) ? need : (plan.needWave || null);
-          // GATELEVER (sim-gatelever-b) part 3B: a hunt-stage plan
-          // whose holder personally fought this species names it —
-          // the lived flee is the target, even when the plan's target
-          // field says otherwise (or nothing). Rumor-born plans never
-          // qualify: their holder fought nothing, so know.fought is
-          // empty for the beast in front of them.
-          var _livedFought = false;
-          try {
-            var _ak = (typeof this.agencyState === 'function') ? this.agencyState() : null;
-            var _kn = _ak && _ak.know ? _ak.know[vid] : null;
-            _livedFought = !!(_kn && _kn.fought && _kn.fought.indexOf(mdef.id) !== -1);
-          } catch (e) {}
           var isTarget = (targetWave != null && wave === targetWave) ||
             (plan.target && mdef.id === plan.target) ||
-            (plan.stage === 'standing' && wave >= 3) ||
-            (plan.stage === 'hunt' && _livedFought);
+            (plan.stage === 'standing' && wave >= 3);
           var partyOk = party.length >= 2 && allArmed &&
             (wave >= 4 ? (party.length >= 3 && allArmored) : gearOf(this, vid).armored);
           // TRICK: a wave-4 beast whose trick the village has not learned

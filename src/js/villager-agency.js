@@ -633,18 +633,7 @@
       }
       var _wpSeek = !!(_wpg && _wpg.seek);
       var allyVids = [];
-      // GATELEVER (sim-gatelever-b) part 1: on a SEEK the fight's
-      // allies are the gate's party (the party that set out together,
-      // as the gate judged it — plan-counted members included), not a
-      // re-sensing. Same 2-ally cap, same fight shape: allies still
-      // join through the shout path (allyFromStart is NOT set). On
-      // any other answer the allies are the sensed ones, exactly as
-      // today.
-      if (_wpSeek && _wpg.party) {
-        try { for (var _ai = 0; _ai < _wpg.party.length && allyVids.length < 2; _ai++) { if (_wpg.party[_ai] !== vid) allyVids.push(_wpg.party[_ai]); } } catch (e) {}
-      } else {
-        try { allyVids = this.villagerFightAllies ? this.villagerFightAllies(vid) : []; } catch (e) { allyVids = []; }
-      }
+      try { allyVids = this.villagerFightAllies ? this.villagerFightAllies(vid) : []; } catch (e) { allyVids = []; }
       // POST-FLEE REST: entry HP, so a vFlee below 25% of max can be
       // recognized after the fight's wounds land (max = max(100, entry)).
       var _pfEntryHp = 100;

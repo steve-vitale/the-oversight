@@ -126,9 +126,7 @@
   }
   // Party-path companion pick: eligibility stays local; ranking is the
   // shared companionScore (OVE-54). Do not fold bond-candidate ads here.
-  // GATELEVER (sim-gatelever-b) part 1A: excludeId skips one id —
-  // the first companion, when seeking a second for the same launch.
-  function findCompanion(self, vid, hx, hy, excludeId) {
+  function findCompanion(self, vid, hx, hy) {
     try {
       var v = villageOf(self);
       if (!v) return null;
@@ -138,7 +136,7 @@
       var elig = [];
       for (var i = 0; i < roster.length; i++) {
         var cid = roster[i];
-        if (!cid || cid === vid || cid === excludeId || cid === self.villagerId) continue;
+        if (!cid || cid === vid || cid === self.villagerId) continue;
         try { var p = self.getPerson ? self.getPerson(cid) : null; if (p && p.dead) continue; } catch (e) {}
         if (away[cid]) continue;
         if (((trust[cid] === undefined) ? 10 : trust[cid]) < 15) continue;
@@ -188,37 +186,10 @@
     h ^= h >>> 13; h = Math.imul(h, 1274126177); h ^= h >>> 16;
     return ((h >>> 0) % 10000) / 10000;
   }
-  // GATELEVER (sim-gatelever-b) part 2: does this plan's hunt wait
-  // for the trick? Same rule as win-plan.js trickWaitApplies (the two
-  // modules already duplicate findCompanion/gearOf rather than
-  // sharing): a hunt/standing plan naming a wave-4+ species whose
-  // trick the village has not learned, until the wait already expired
-  // for that target. A target-null plan never waits.
-  function trickWaitApplies(self, plan) {
-    try {
-      if (!plan || !plan.target) return false;
-      if (plan.trickWaitedFor === plan.target) return false;
-      var ms = (self.data && self.data.monsters) || [];
-      var w = 0;
-      for (var i = 0; i < ms.length; i++) if (ms[i] && ms[i].id === plan.target) { w = ms[i].wave | 0; break; }
-      if (w < 4) return false;
-      if (self.villageKnowsTrick && self.villageKnowsTrick(plan.target)) {
-        if (plan.trickWaitSinceDay != null) plan.trickWaitSinceDay = -1;
-        return false;
-      }
-      return true;
-    } catch (e) { return false; }
-  }
-  function trickWaitDay(self) {
-    try { return ((self.state || {}).scholar || {}).day || 0; } catch (e) { return 0; }
-  }
   // Win-plan stage intents as candidates. Same stage reads as winPlanDepart,
   // but they bid in the dawn pass instead of re-deciding at agencyTick.
   // Read-only: never seed a plan here (winPlanOf / HavenTick would engage
   // villagers the feeder merely inspects). Stage advances stay in agencyTick.
-  // GATELEVER exception, recorded in the prereg: the trick-wait candidate
-  // writes ONLY the wait clock (trickWaitSinceDay / trickWaitedFor) on an
-  // existing plan, never seeds one.
   function winPlanCands(self, vid, hx, hy) {
     var out = [];
     try {
@@ -240,32 +211,6 @@
           ],
         });
         return out;
-      }
-      // GATELEVER (sim-gatelever-b) part 2: a hunt/standing plan
-      // naming a wave-4+ beast whose trick the village has not
-      // learned bids a hold instead of a launch — weight 6.0, above
-      // the 5.0 party_launch bid (the gear_hold weight). Bounded 7
-      // days, once per target: on expiry the wait is marked done
-      // for this target and the launch bid resumes, so the gate's
-      // trickHolds branch and ordinary encounters can teach the
-      // trick. The clock lives on the plan (shared with
-      // winPlanDepart's hold, same fields, same bound).
-      if ((stage === 'hunt' || stage === 'standing') && trickWaitApplies(self, plan)) {
-        var _twd = trickWaitDay(self);
-        if (plan.trickWaitSinceDay == null || plan.trickWaitSinceDay < 0) plan.trickWaitSinceDay = _twd;
-        if (_twd - plan.trickWaitSinceDay < 7) {
-          out.push({
-            kind: 'HAVEN_CHORE', w: 6.0, chore: 'fire',
-            vbrainSrc: 'win_plan', winPlanAction: 'trick_wait',
-            considerations: [
-              { id: 'win_plan_stage', raw: 1, note: stage },
-              { id: 'trick_unknown', raw: 1, note: String(plan.target) },
-            ],
-          });
-          return out;
-        }
-        plan.trickWaitedFor = plan.target;
-        plan.trickWaitSinceDay = -1;
       }
       var companion = findCompanion(self, vid, hx, hy);
       if (stage === 'table' && hasKillWaveAtLeast(self, vid, 4) && !companion) {
@@ -848,7 +793,7 @@
       for (i = 0; i < extras.length; i++) {
         var exi = extras[i];
         if (exi.winPlanAction === 'gear_hold' || exi.winPlanAction === 'veteran_guard' ||
-            exi.winPlanAction === 'party_wait' || exi.winPlanAction === 'trick_wait' || exi.winPlanAction === 'party_launch') {
+            exi.winPlanAction === 'party_wait' || exi.winPlanAction === 'party_launch') {
           override = exi; overrideReason = 'win_plan:' + exi.winPlanAction; break;
         }
       }
@@ -956,7 +901,7 @@
       // Win-plan holds: hall chore matching the commit (repair/fire/…).
       // Always overwrite chore — core lottery may have drawn a different tag.
       if (c.winPlanAction === 'gear_hold' || c.winPlanAction === 'veteran_guard' ||
-          c.winPlanAction === 'party_wait' || c.winPlanAction === 'trick_wait') {
+          c.winPlanAction === 'party_wait') {
         o.kind = c.kind || 'HAVEN_CHORE';
         o.purpose = 'chore';
         o.indoor = true;
@@ -1063,8 +1008,7 @@
     vbrainExecuteDepart: function (vid, hx, hy, announce) {
       var c = this.vbrainCommit(vid);
       if (!c || c.day !== dayOf(this)) return 'normal';
-      // GATELEVER (sim-gatelever-b) part 2: the trick wait is a hold.
-      if (c.winPlanAction === 'gear_hold' || c.winPlanAction === 'veteran_guard' || c.winPlanAction === 'party_wait' || c.winPlanAction === 'trick_wait') {
+      if (c.winPlanAction === 'gear_hold' || c.winPlanAction === 'veteran_guard' || c.winPlanAction === 'party_wait') {
         return 'hold';
       }
       if (c.kind !== 'EXPEDITION') return 'normal';
@@ -1098,37 +1042,11 @@
           if (!a2 || !a2.exped[vid]) return 'hold';
         } catch (e) {}
         this.startExpedition(c.companion, hx, hy, false, opts);
-        // GATELEVER (sim-gatelever-b) part 1A: a second companion
-        // on the same target and duration, when one is free —
-        // opportunistic, never waited for (mirror of win-plan.js
-        // launchParty: the same findCompanion filters, the same
-        // light gates — gear-up + armed-or-armored — the same
-        // expedition-entry proof, no heavy pre-checks — a failed
-        // second launch strands nobody, the party is still two).
-        var cid2 = null;
-        try {
-          var _c2 = findCompanion(this, vid, hx, hy, c.companion);
-          if (_c2) {
-            try { if (this.villagerGearUp) this.villagerGearUp(_c2, true); } catch (e) {}
-            var _cg2 = gearRead(this, _c2);
-            if (_cg2.armed || _cg2.armored) {
-              this.startExpedition(_c2, hx, hy, false, opts);
-              try {
-                var _a2b = this.agencyState ? this.agencyState() : null;
-                if (_a2b && _a2b.exped[_c2]) cid2 = _c2;
-              } catch (e) {}
-            }
-          }
-        } catch (e) {}
         try {
           var plan2 = this.winPlanOf ? this.winPlanOf(vid) : null;
-          if (plan2) { plan2.stage = 'hunt'; plan2.party = cid2 ? [c.companion, cid2] : [c.companion]; }
+          if (plan2) { plan2.stage = 'hunt'; plan2.party = [c.companion]; }
           var cplan = this.winPlanOf ? this.winPlanOf(c.companion) : null;
-          if (cplan) { cplan.stage = 'hunt'; cplan.party = cid2 ? [vid, cid2] : [vid]; }
-          if (cid2) {
-            var cplan2 = this.winPlanOf ? this.winPlanOf(cid2) : null;
-            if (cplan2) { cplan2.stage = 'hunt'; cplan2.party = [vid, c.companion]; }
-          }
+          if (cplan) { cplan.stage = 'hunt'; cplan.party = [vid]; }
         } catch (e) {}
         return 'launch';
       }
