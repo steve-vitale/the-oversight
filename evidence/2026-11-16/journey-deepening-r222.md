@@ -223,12 +223,24 @@ Eight villages, 100 days. **6/8 survived** (102003–102008);
   in persistent evidence (journey-deepening-r222-gate.log): 334/6 in
   859s. Flap watcher: (main session owns the restart — not checked
   here).
-- Safe-commit index clobber: (filled at closeout — repair via
-  `ls-tree -r HEAD | update-index --add --index-info` if struck).
+- Safe-commit index clobber STRUCK after the commit (all 5 files
+  staged-deleted + untracked, the known pattern) — repaired via
+  `git ls-tree -r HEAD -- <paths> | git update-index --add
+  --index-info`; verified `git status --short` empty, `git diff HEAD`
+  empty, and `git hash-object` == HEAD blob for all 5 files.
 - Master moved mid-run (sim-seedattach-a evidence landed between
   the 06:20 pull and the 06:24 registration); worktree base is the
   newer tip 209704334.
 
 ## Landing
 
-- (filled at closeout: commits, merge, rotation 2→3, lock deletion)
+- Committed a3e1bda3c (driver + analyzer + proof test + prereg + run
+  note) in the worktree; safe-commit index clobber struck (repaired
+  via ls-tree -r pipe, hashes verified for all 5 files).
+- Master moved mid-run (9b04ae9b7 sim-winnability-round-0530);
+  rebased onto it clean (no conflicts — all files new), proof test
+  re-run green on the rebased tip (29/29), new tip 53ba964a7.
+- Merged ff-only to master. **Merged locally, pending ship.** No
+  bump, no push, no live check (ship loop owns those).
+- Rotation written `2→3` at closeout with read-back (next leg: scale).
+- Worktree released and removed; lock deleted at closeout.
