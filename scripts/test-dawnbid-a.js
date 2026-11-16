@@ -41,8 +41,11 @@ const seedBlockPresent = gameJs.indexOf("VETPARTY (sim-vetparty-a)") !== -1 &&
 check('seed call present iff DAWNBID_SEED_CALL=on (expected ' + SEED_CALL_EXPECTED + ', found ' + (seedBlockPresent ? 'present' : 'absent') + ')',
   (SEED_CALL_EXPECTED === 'on') === seedBlockPresent);
 const srcStatus = gitStatus('src').split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+// The seed-block presence check above is the real assertion; this one
+// only polices that no OTHER src file is dirty (the seed call may be
+// committed already, so an empty status is fine when seed=on).
 const srcOk = srcStatus.every(function (s) { return /src\/js\/game\.js$/.test(s); }) &&
-  (SEED_CALL_EXPECTED === 'on' ? srcStatus.length === 1 : srcStatus.length === 0);
+  (SEED_CALL_EXPECTED === 'off' ? srcStatus.length === 0 : true);
 check('game-code worktree diff is the seed call only (src status: ' + JSON.stringify(srcStatus) + ')', srcOk);
 const scriptsStatus = gitStatus('scripts').split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
 const scriptsOk = scriptsStatus.every(function (s) { return /scripts\/[a-z-]*dawnbid-[a-z0-9.-]+\.js$/.test(s); });
@@ -271,6 +274,16 @@ expectBucket('candidate-not-bid not-scored', baseSeed({
   const insts = classifyOne(j);
   check('same-target re-seed refreshes (1 instance, refreshes=1, non-opening seed ignored)',
     insts.length === 1 && insts[0].refreshes === 1, 'got ' + insts.length + ' instances, refreshes=' + ((insts[0] || {}).refreshes));
+})();
+
+// ---------- 2b. Analyzer summarize shape (regression: files is a count) ----------
+(function () {
+  const one = ANALYZE.classifySeed(baseSeed({ v4seeds: [seedRow(10, 'v1', 'strike', 4, 'party')] }));
+  const leg = { bySeed: { 100861: one }, files: ['a.json'] };
+  const sum = ANALYZE.summarize(leg);
+  check('summarize returns files as a count (not an array)', sum.files === 1, 'got ' + JSON.stringify(sum.files));
+  check('summarize bar2-style comparison uses the count', (leg.files.length === 1) === (sum.files === 1));
+  check('summarize counts the one opened instance', sum.instancesOpened === 1, 'got ' + sum.instancesOpened);
 })();
 
 // ---------- 3. Recorder: live in-memory run (shape + pick neutrality) ----------

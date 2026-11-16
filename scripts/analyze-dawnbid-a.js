@@ -328,7 +328,7 @@ function main() {
   const instErrors = instSummary.perSeed.reduce(function (t, s) { return t + s.instrumentErrors; }, 0);
   const ctrlErrors = ctrlSummary ? ctrlSummary.perSeed.reduce(function (t, s) { return t + s.instrumentErrors; }, 0) : 0;
   const bar1 = instSummary.instancesOpened > 0 && instSummary.classifiedShare >= 0.9 && instSummary.unknown === 0;
-  const bar2 = inst.files.length === 8 && (!ctrlSummary || ctrl.files.length === 8);
+  const bar2 = inst.files.length === 8 && (!ctrlSummary || ctrlSummary.files === 8);
   const bar3 = instErrors === 0 && ctrlErrors === 0;
 
   const out = {
@@ -338,7 +338,7 @@ function main() {
     instrument: instSummary, control: ctrlSummary,
     bars: {
       classification: { pass: bar1, classifiedShare: instSummary.classifiedShare, unknown: instSummary.unknown, instancesOpened: instSummary.instancesOpened },
-      corpus: { pass: bar2, instrumentFiles: inst.files.length, controlFiles: ctrlSummary ? ctrl.files.length : null },
+      corpus: { pass: bar2, instrumentFiles: inst.files.length, controlFiles: ctrlSummary ? ctrlSummary.files : null },
       instrumentErrors: { pass: bar3, instrument: instErrors, control: ctrlErrors },
     },
   };
