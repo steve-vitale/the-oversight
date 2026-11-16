@@ -1,0 +1,1486 @@
+{
+  "arm": "trickteach-b",
+  "run": "fleshout-loop-b-20261116T1530Z",
+  "seeds": [
+    102211,
+    102212,
+    102213,
+    102214,
+    102215,
+    102216,
+    102217,
+    102218
+  ],
+  "policy": "competent",
+  "control": {
+    "sum": {
+      "files": 8,
+      "instrumentErrors": 0,
+      "events": 31,
+      "broadEvents": 15,
+      "strictEvents": 3,
+      "launchedTotal": 5,
+      "launchedClassified": 5,
+      "classificationShare": 1,
+      "kills": 0,
+      "killRate": 0,
+      "wildTotal": 114,
+      "wildKills": 8,
+      "wildKillRate": 0.07017543859649122,
+      "outcomes": {
+        "vFlee": 3,
+        "vDie": 1,
+        "evade": 1
+      },
+      "primaryCounts": {
+        "out-damaged": 1,
+        "fled-early": 1,
+        "died": 1,
+        "evaded": 1,
+        "trick-unknown": 1
+      },
+      "flagCounts": {
+        "trick-unknown": 4,
+        "launched-short": 5,
+        "dry-fighter": 3,
+        "no-working-range": 3,
+        "under-geared": 3,
+        "out-damaged": 3,
+        "mauled": 4,
+        "fled-early": 1,
+        "died": 1,
+        "evaded": 1
+      },
+      "perFight": [
+        {
+          "seed": 102212,
+          "day": 65,
+          "fighter": "Dmitri Sokolov",
+          "fighterVid": "dmitri_sokolov",
+          "monster": "eulogy",
+          "wave": 4,
+          "joinKind": "ally",
+          "ambiguous": true,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": true,
+          "target": "strike",
+          "needWave": 4,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "armed-no-ammo",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": "arrow",
+          "fighterMelee": null,
+          "fighterArmorP": 18,
+          "fighterHpEntry": 80,
+          "allies": [
+            {
+              "name": "Ingrid Reilly",
+              "class": "armed-no-ammo",
+              "ammoN": 0,
+              "armorP": 37,
+              "hpEntry": 97
+            },
+            {
+              "name": "Tariq Mahmood",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 12,
+              "hpEntry": 90
+            }
+          ],
+          "mHpEntry": 675,
+          "mHpMethod": "instance",
+          "mHpEntryRaw": 675,
+          "mHpLeft": 612,
+          "outcome": "vFlee",
+          "rounds": 3,
+          "mDealt": 63,
+          "allyDealt": 20,
+          "dmgPerRound": 21,
+          "dmgFrac": 0.09,
+          "vTaken": 46,
+          "vHpLeft": 34,
+          "gate": null,
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "dry-fighter",
+            "no-working-range",
+            "under-geared",
+            "out-damaged",
+            "mauled"
+          ],
+          "primary": "out-damaged",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102212,
+          "day": 65,
+          "fighter": "Dmitri Sokolov",
+          "fighterVid": "dmitri_sokolov",
+          "monster": "eulogy",
+          "wave": 4,
+          "joinKind": "ally",
+          "ambiguous": true,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": true,
+          "target": "strike",
+          "needWave": 4,
+          "trickBefore": false,
+          "trickAfter": true,
+          "fighterClass": "armed-no-ammo",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": "arrow",
+          "fighterMelee": null,
+          "fighterArmorP": 18,
+          "fighterHpEntry": 34,
+          "allies": [
+            {
+              "name": "Ingrid Reilly",
+              "class": "armed-no-ammo",
+              "ammoN": 0,
+              "armorP": 37,
+              "hpEntry": 97
+            },
+            {
+              "name": "Tariq Mahmood",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 12,
+              "hpEntry": 90
+            }
+          ],
+          "mHpEntry": 612,
+          "mHpMethod": "instance",
+          "mHpEntryRaw": 612,
+          "mHpLeft": 596,
+          "outcome": "vFlee",
+          "rounds": 1,
+          "mDealt": 16,
+          "allyDealt": 0,
+          "dmgPerRound": 16,
+          "dmgFrac": 0.03,
+          "vTaken": 17,
+          "vHpLeft": 17,
+          "gate": null,
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "dry-fighter",
+            "no-working-range",
+            "under-geared",
+            "fled-early",
+            "out-damaged",
+            "mauled"
+          ],
+          "primary": "fled-early",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102212,
+          "day": 65,
+          "fighter": "Dmitri Sokolov",
+          "fighterVid": "dmitri_sokolov",
+          "monster": "eulogy",
+          "wave": 4,
+          "joinKind": "ally",
+          "ambiguous": true,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": true,
+          "target": "strike",
+          "needWave": 4,
+          "trickBefore": true,
+          "trickAfter": true,
+          "fighterClass": "armed-no-ammo",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": "arrow",
+          "fighterMelee": null,
+          "fighterArmorP": 18,
+          "fighterHpEntry": 17,
+          "allies": [
+            {
+              "name": "Ingrid Reilly",
+              "class": "armed-no-ammo",
+              "ammoN": 0,
+              "armorP": 37,
+              "hpEntry": 97
+            },
+            {
+              "name": "Tariq Mahmood",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 12,
+              "hpEntry": 90
+            }
+          ],
+          "mHpEntry": 596,
+          "mHpMethod": "instance",
+          "mHpEntryRaw": 596,
+          "mHpLeft": 596,
+          "outcome": "vDie",
+          "rounds": 1,
+          "mDealt": 0,
+          "allyDealt": 0,
+          "dmgPerRound": 0,
+          "dmgFrac": 0,
+          "vTaken": 17,
+          "vHpLeft": 0,
+          "gate": null,
+          "flags": [
+            "launched-short",
+            "dry-fighter",
+            "no-working-range",
+            "under-geared",
+            "out-damaged",
+            "mauled",
+            "died"
+          ],
+          "primary": "died",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102213,
+          "day": 72,
+          "fighter": "Sam Wilson",
+          "fighterVid": "sam_wilson",
+          "monster": "suburb",
+          "wave": 4,
+          "joinKind": "fighter",
+          "ambiguous": true,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": null,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "phase_blade",
+          "fighterArmorP": 10,
+          "fighterHpEntry": 100,
+          "allies": [
+            {
+              "name": "Sofia Chen",
+              "class": "armed-no-ammo",
+              "ammoN": 0,
+              "armorP": 16,
+              "hpEntry": 100
+            },
+            {
+              "name": "Ethan Hunt",
+              "class": "armed-with-ammo",
+              "ammoN": 6,
+              "armorP": 24,
+              "hpEntry": 43
+            }
+          ],
+          "mHpEntry": 1370,
+          "mHpMethod": "untouched",
+          "mHpEntryRaw": null,
+          "mHpLeft": 1370,
+          "outcome": "evade",
+          "rounds": 0,
+          "mDealt": 0,
+          "allyDealt": 0,
+          "dmgPerRound": null,
+          "dmgFrac": 0,
+          "vTaken": 0,
+          "vHpLeft": 100,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "evaded"
+          ],
+          "primary": "evaded",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102213,
+          "day": 89,
+          "fighter": "Ethan Hunt",
+          "fighterVid": "ethan_hunt",
+          "monster": "congregation",
+          "wave": 4,
+          "joinKind": "fighter",
+          "ambiguous": true,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": 3,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "armed-with-ammo",
+          "fighterAmmo": 4,
+          "fighterAmmoNeed": "stone",
+          "fighterMelee": "hatchet",
+          "fighterArmorP": 24,
+          "fighterHpEntry": 100,
+          "allies": [
+            {
+              "name": "Mara Vasquez",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 17,
+              "hpEntry": 83
+            },
+            {
+              "name": "Farid Ahmed",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 29,
+              "hpEntry": 91
+            }
+          ],
+          "mHpEntry": 941,
+          "mHpMethod": "reconstructed",
+          "mHpEntryRaw": null,
+          "mHpLeft": 409,
+          "outcome": "vFlee",
+          "rounds": 8,
+          "mDealt": 532,
+          "allyDealt": 89,
+          "dmgPerRound": 66.5,
+          "dmgFrac": 0.57,
+          "vTaken": 78,
+          "vHpLeft": 22,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "mauled"
+          ],
+          "primary": "trick-unknown",
+          "classified": true,
+          "missingFields": []
+        }
+      ],
+      "perSeed": [
+        {
+          "seed": 102211,
+          "days": 117,
+          "end": "village-lost",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 24,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102212,
+          "days": 122,
+          "end": "village-lost",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 3,
+          "broadEvents": 3,
+          "strictEvents": 3,
+          "launchedFights": 3,
+          "classified": 3,
+          "kills": 0,
+          "wildFights": 12,
+          "medianDmg": 16,
+          "medianRounds": 1
+        },
+        {
+          "seed": 102213,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 455,
+          "maxWave": 5,
+          "events": 27,
+          "broadEvents": 12,
+          "strictEvents": 0,
+          "launchedFights": 2,
+          "classified": 2,
+          "kills": 0,
+          "wildFights": 28,
+          "medianDmg": 266,
+          "medianRounds": 4
+        },
+        {
+          "seed": 102214,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 0,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102215,
+          "days": 152,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 1,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 6,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102216,
+          "days": 126,
+          "end": "village-lost",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 19,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102217,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 275,
+          "maxWave": 5,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 19,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102218,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 225,
+          "maxWave": 5,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 6,
+          "medianDmg": null,
+          "medianRounds": null
+        }
+      ],
+      "wall": {
+        "wins": 0,
+        "nationalRank": 0,
+        "nationalStanding": 3,
+        "wave4": 8,
+        "wave5": 3,
+        "gameDays": [
+          117,
+          122,
+          151,
+          151,
+          152,
+          126,
+          151,
+          151
+        ],
+        "deaths": 546,
+        "starvation": 5,
+        "scholarDeaths": 64
+      },
+      "medianSurvival": 151,
+      "launchedMedianDmgPerRound": 18.5,
+      "launchedMedianRounds": 1,
+      "launchedMedianDmgFrac": 0.03,
+      "wildMedianDmgPerRound": 15.666666666666666,
+      "wildMedianRounds": 3
+    },
+    "distinctKills": [],
+    "distinctKillCount": 0,
+    "tricksLearned": {
+      "distinctSpecies": [
+        "algorithm",
+        "congregation",
+        "eater",
+        "eulogy",
+        "herald",
+        "influencer",
+        "reunion",
+        "spoiler",
+        "suburb",
+        "timeslot"
+      ],
+      "transitions": 23,
+      "perSeed": {
+        "102211": [
+          {
+            "mid": "algorithm",
+            "day": 94,
+            "wave": 4
+          },
+          {
+            "mid": "eulogy",
+            "day": 96,
+            "wave": 4
+          },
+          {
+            "mid": "herald",
+            "day": 107,
+            "wave": 4
+          },
+          {
+            "mid": "eater",
+            "day": 112,
+            "wave": 4
+          }
+        ],
+        "102212": [
+          {
+            "mid": "eulogy",
+            "day": 65,
+            "wave": 4
+          },
+          {
+            "mid": "influencer",
+            "day": 80,
+            "wave": 4
+          },
+          {
+            "mid": "herald",
+            "day": 101,
+            "wave": 4
+          },
+          {
+            "mid": "congregation",
+            "day": 101,
+            "wave": 4
+          }
+        ],
+        "102213": [
+          {
+            "mid": "herald",
+            "day": 107,
+            "wave": 4
+          },
+          {
+            "mid": "eater",
+            "day": 119,
+            "wave": 4
+          },
+          {
+            "mid": "spoiler",
+            "day": 129,
+            "wave": 5
+          },
+          {
+            "mid": "suburb",
+            "day": 136,
+            "wave": 4
+          },
+          {
+            "mid": "influencer",
+            "day": 143,
+            "wave": 4
+          },
+          {
+            "mid": "timeslot",
+            "day": 146,
+            "wave": 5
+          }
+        ],
+        "102214": [],
+        "102215": [
+          {
+            "mid": "reunion",
+            "day": 81,
+            "wave": 4
+          }
+        ],
+        "102216": [
+          {
+            "mid": "eulogy",
+            "day": 66,
+            "wave": 4
+          },
+          {
+            "mid": "algorithm",
+            "day": 89,
+            "wave": 4
+          },
+          {
+            "mid": "reunion",
+            "day": 100,
+            "wave": 4
+          },
+          {
+            "mid": "suburb",
+            "day": 118,
+            "wave": 4
+          }
+        ],
+        "102217": [
+          {
+            "mid": "eulogy",
+            "day": 72,
+            "wave": 4
+          },
+          {
+            "mid": "eater",
+            "day": 87,
+            "wave": 4
+          },
+          {
+            "mid": "influencer",
+            "day": 109,
+            "wave": 4
+          }
+        ],
+        "102218": [
+          {
+            "mid": "eulogy",
+            "day": 144,
+            "wave": 4
+          }
+        ]
+      },
+      "bySpecies": {
+        "algorithm": {
+          "firstSeed": 102211,
+          "firstDay": 94,
+          "viaLaunched": null
+        },
+        "eulogy": {
+          "firstSeed": 102211,
+          "firstDay": 96,
+          "viaLaunched": null
+        },
+        "herald": {
+          "firstSeed": 102211,
+          "firstDay": 107,
+          "viaLaunched": null
+        },
+        "eater": {
+          "firstSeed": 102211,
+          "firstDay": 112,
+          "viaLaunched": null
+        },
+        "influencer": {
+          "firstSeed": 102212,
+          "firstDay": 80,
+          "viaLaunched": null
+        },
+        "congregation": {
+          "firstSeed": 102212,
+          "firstDay": 101,
+          "viaLaunched": null
+        },
+        "spoiler": {
+          "firstSeed": 102213,
+          "firstDay": 129,
+          "viaLaunched": null
+        },
+        "suburb": {
+          "firstSeed": 102213,
+          "firstDay": 136,
+          "viaLaunched": null
+        },
+        "timeslot": {
+          "firstSeed": 102213,
+          "firstDay": 146,
+          "viaLaunched": null
+        },
+        "reunion": {
+          "firstSeed": 102215,
+          "firstDay": 81,
+          "viaLaunched": null
+        }
+      }
+    },
+    "shares": {
+      "launched": 5,
+      "launchedKnown": 1,
+      "launchedKnownShare": 0.2,
+      "wild": 114,
+      "wildKnown": 48,
+      "wildKnownShare": 0.42105263157894735
+    },
+    "waveKills": {
+      "wave4All": 7,
+      "wave5All": 1,
+      "wave4LaunchedRows": 0,
+      "wave5LaunchedRows": 0
+    },
+    "gates": {
+      "all": {
+        "seek": 0,
+        "avoid": 21,
+        "null": 4,
+        "other": 0,
+        "rows": 25
+      },
+      "launchedFights": {
+        "seek": 0,
+        "avoid": 0,
+        "null": 2,
+        "none": 3
+      }
+    },
+    "trickKnownEnd": {
+      "wave12KnownSpecies": [
+        "alien_tick",
+        "anaconda_empress",
+        "belltoad",
+        "bright_idea",
+        "bulldozer",
+        "cliffhanger",
+        "drumbelly_tanuki",
+        "ducks_in_a_row",
+        "dustboar",
+        "gallowdeer",
+        "giant_mosquito",
+        "glasswing",
+        "heckler",
+        "hummice",
+        "hushwolf",
+        "landlord",
+        "living_wire",
+        "lockpick_raccoon",
+        "memory_projector",
+        "mirror_stag",
+        "mirrormoth",
+        "moderator",
+        "murkcap",
+        "nevermore",
+        "nightcourt",
+        "nightlight_catfish",
+        "paparazzo",
+        "review_drone",
+        "rut_king",
+        "sanjun",
+        "speedbump_turtle",
+        "statickite",
+        "sunback",
+        "sunbasker",
+        "sweeps_week",
+        "understudy",
+        "union_rep",
+        "voice_mimic_radio",
+        "warranty_caller",
+        "white_noise_heron"
+      ],
+      "wave345KnownSpecies": [
+        "ad_break",
+        "algorithm",
+        "buffering",
+        "callback",
+        "congregation",
+        "eater",
+        "eulogy",
+        "focus_group",
+        "gavel",
+        "herald",
+        "influencer",
+        "redactor",
+        "reunion",
+        "spoiler",
+        "spool",
+        "suburb",
+        "timeslot"
+      ],
+      "obsSpeciesRows": 78,
+      "obsTotal": 125
+    },
+    "medianSurvival": 151,
+    "starvation": 5,
+    "deaths": 546
+  },
+  "armed": {
+    "sum": {
+      "files": 8,
+      "instrumentErrors": 0,
+      "events": 25,
+      "broadEvents": 2,
+      "strictEvents": 0,
+      "launchedTotal": 0,
+      "launchedClassified": 0,
+      "classificationShare": null,
+      "kills": 0,
+      "killRate": null,
+      "wildTotal": 202,
+      "wildKills": 11,
+      "wildKillRate": 0.054455445544554455,
+      "outcomes": {},
+      "primaryCounts": {},
+      "flagCounts": {},
+      "perFight": [],
+      "perSeed": [
+        {
+          "seed": 102211,
+          "days": 147,
+          "end": "village-lost",
+          "won": false,
+          "rank": "regional",
+          "standing": 390,
+          "maxWave": 5,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 39,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102212,
+          "days": 83,
+          "end": "village-lost",
+          "won": false,
+          "rank": "regional",
+          "standing": 120,
+          "maxWave": 4,
+          "events": 1,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 0,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102213,
+          "days": 148,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 520,
+          "maxWave": 5,
+          "events": 12,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 44,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102214,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 40,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102215,
+          "days": 152,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 560,
+          "maxWave": 5,
+          "events": 4,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 56,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102216,
+          "days": 82,
+          "end": "village-lost",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 8,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102217,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 5,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102218,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 245,
+          "maxWave": 5,
+          "events": 8,
+          "broadEvents": 2,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 10,
+          "medianDmg": null,
+          "medianRounds": null
+        }
+      ],
+      "wall": {
+        "wins": 0,
+        "nationalRank": 0,
+        "nationalStanding": 4,
+        "wave4": 8,
+        "wave5": 4,
+        "gameDays": [
+          147,
+          83,
+          148,
+          151,
+          152,
+          82,
+          151,
+          151
+        ],
+        "deaths": 597,
+        "starvation": 7,
+        "scholarDeaths": 67
+      },
+      "medianSurvival": 149.5,
+      "launchedMedianDmgPerRound": null,
+      "launchedMedianRounds": null,
+      "launchedMedianDmgFrac": null,
+      "wildMedianDmgPerRound": 10.666666666666666,
+      "wildMedianRounds": 3
+    },
+    "distinctKills": [],
+    "distinctKillCount": 0,
+    "tricksLearned": {
+      "distinctSpecies": [
+        "algorithm",
+        "audit",
+        "congregation",
+        "eater",
+        "editor",
+        "eulogy",
+        "finale_crew",
+        "herald",
+        "influencer",
+        "rerun",
+        "reunion",
+        "spoiler",
+        "strike",
+        "suburb",
+        "timeslot"
+      ],
+      "transitions": 40,
+      "perSeed": {
+        "102211": [
+          {
+            "mid": "herald",
+            "day": 90,
+            "wave": 4
+          },
+          {
+            "mid": "eulogy",
+            "day": 91,
+            "wave": 4
+          },
+          {
+            "mid": "influencer",
+            "day": 94,
+            "wave": 4
+          },
+          {
+            "mid": "congregation",
+            "day": 98,
+            "wave": 4
+          },
+          {
+            "mid": "editor",
+            "day": 125,
+            "wave": 5
+          },
+          {
+            "mid": "rerun",
+            "day": 129,
+            "wave": 5
+          },
+          {
+            "mid": "reunion",
+            "day": 134,
+            "wave": 4
+          },
+          {
+            "mid": "finale_crew",
+            "day": 134,
+            "wave": 5
+          }
+        ],
+        "102212": [],
+        "102213": [
+          {
+            "mid": "reunion",
+            "day": 63,
+            "wave": 4
+          },
+          {
+            "mid": "algorithm",
+            "day": 67,
+            "wave": 4
+          },
+          {
+            "mid": "herald",
+            "day": 83,
+            "wave": 4
+          },
+          {
+            "mid": "suburb",
+            "day": 86,
+            "wave": 4
+          },
+          {
+            "mid": "finale_crew",
+            "day": 108,
+            "wave": 5
+          },
+          {
+            "mid": "timeslot",
+            "day": 112,
+            "wave": 5
+          },
+          {
+            "mid": "eulogy",
+            "day": 117,
+            "wave": 4
+          },
+          {
+            "mid": "eater",
+            "day": 127,
+            "wave": 4
+          },
+          {
+            "mid": "editor",
+            "day": 140,
+            "wave": 5
+          }
+        ],
+        "102214": [
+          {
+            "mid": "herald",
+            "day": 91,
+            "wave": 4
+          },
+          {
+            "mid": "reunion",
+            "day": 95,
+            "wave": 4
+          },
+          {
+            "mid": "suburb",
+            "day": 100,
+            "wave": 4
+          },
+          {
+            "mid": "eulogy",
+            "day": 105,
+            "wave": 4
+          },
+          {
+            "mid": "algorithm",
+            "day": 137,
+            "wave": 4
+          }
+        ],
+        "102215": [
+          {
+            "mid": "algorithm",
+            "day": 69,
+            "wave": 4
+          },
+          {
+            "mid": "herald",
+            "day": 72,
+            "wave": 4
+          },
+          {
+            "mid": "strike",
+            "day": 76,
+            "wave": 4
+          },
+          {
+            "mid": "eulogy",
+            "day": 88,
+            "wave": 4
+          },
+          {
+            "mid": "reunion",
+            "day": 98,
+            "wave": 4
+          },
+          {
+            "mid": "congregation",
+            "day": 127,
+            "wave": 4
+          },
+          {
+            "mid": "audit",
+            "day": 129,
+            "wave": 4
+          },
+          {
+            "mid": "editor",
+            "day": 134,
+            "wave": 5
+          },
+          {
+            "mid": "influencer",
+            "day": 150,
+            "wave": 4
+          }
+        ],
+        "102216": [
+          {
+            "mid": "eulogy",
+            "day": 51,
+            "wave": 4
+          },
+          {
+            "mid": "strike",
+            "day": 61,
+            "wave": 4
+          }
+        ],
+        "102217": [
+          {
+            "mid": "herald",
+            "day": 122,
+            "wave": 4
+          },
+          {
+            "mid": "eulogy",
+            "day": 123,
+            "wave": 4
+          },
+          {
+            "mid": "reunion",
+            "day": 142,
+            "wave": 4
+          }
+        ],
+        "102218": [
+          {
+            "mid": "eater",
+            "day": 105,
+            "wave": 4
+          },
+          {
+            "mid": "herald",
+            "day": 108,
+            "wave": 4
+          },
+          {
+            "mid": "reunion",
+            "day": 118,
+            "wave": 4
+          },
+          {
+            "mid": "spoiler",
+            "day": 148,
+            "wave": 5
+          }
+        ]
+      },
+      "bySpecies": {
+        "herald": {
+          "firstSeed": 102211,
+          "firstDay": 90,
+          "viaLaunched": null
+        },
+        "eulogy": {
+          "firstSeed": 102211,
+          "firstDay": 91,
+          "viaLaunched": null
+        },
+        "influencer": {
+          "firstSeed": 102211,
+          "firstDay": 94,
+          "viaLaunched": null
+        },
+        "congregation": {
+          "firstSeed": 102211,
+          "firstDay": 98,
+          "viaLaunched": null
+        },
+        "editor": {
+          "firstSeed": 102211,
+          "firstDay": 125,
+          "viaLaunched": null
+        },
+        "rerun": {
+          "firstSeed": 102211,
+          "firstDay": 129,
+          "viaLaunched": null
+        },
+        "reunion": {
+          "firstSeed": 102211,
+          "firstDay": 134,
+          "viaLaunched": null
+        },
+        "finale_crew": {
+          "firstSeed": 102211,
+          "firstDay": 134,
+          "viaLaunched": null
+        },
+        "algorithm": {
+          "firstSeed": 102213,
+          "firstDay": 67,
+          "viaLaunched": null
+        },
+        "suburb": {
+          "firstSeed": 102213,
+          "firstDay": 86,
+          "viaLaunched": null
+        },
+        "timeslot": {
+          "firstSeed": 102213,
+          "firstDay": 112,
+          "viaLaunched": null
+        },
+        "eater": {
+          "firstSeed": 102213,
+          "firstDay": 127,
+          "viaLaunched": null
+        },
+        "strike": {
+          "firstSeed": 102215,
+          "firstDay": 76,
+          "viaLaunched": null
+        },
+        "audit": {
+          "firstSeed": 102215,
+          "firstDay": 129,
+          "viaLaunched": null
+        },
+        "spoiler": {
+          "firstSeed": 102218,
+          "firstDay": 148,
+          "viaLaunched": null
+        }
+      }
+    },
+    "shares": {
+      "launched": 0,
+      "launchedKnown": 0,
+      "launchedKnownShare": null,
+      "wild": 202,
+      "wildKnown": 157,
+      "wildKnownShare": 0.7772277227722773
+    },
+    "waveKills": {
+      "wave4All": 11,
+      "wave5All": 0,
+      "wave4LaunchedRows": 0,
+      "wave5LaunchedRows": 0
+    },
+    "gates": {
+      "all": {
+        "seek": 0,
+        "avoid": 8,
+        "null": 5,
+        "other": 0,
+        "rows": 13
+      },
+      "launchedFights": {
+        "seek": 0,
+        "avoid": 0,
+        "null": 0,
+        "none": 0
+      }
+    },
+    "trickKnownEnd": {
+      "wave12KnownSpecies": [
+        "alien_tick",
+        "anaconda_empress",
+        "belltoad",
+        "bright_idea",
+        "bulldozer",
+        "cliffhanger",
+        "drumbelly_tanuki",
+        "ducks_in_a_row",
+        "dustboar",
+        "gallowdeer",
+        "giant_mosquito",
+        "glasswing",
+        "heckler",
+        "hummice",
+        "hushwolf",
+        "landlord",
+        "living_wire",
+        "lockpick_raccoon",
+        "memory_projector",
+        "mirror_stag",
+        "mirrormoth",
+        "moderator",
+        "murkcap",
+        "nevermore",
+        "nightcourt",
+        "nightlight_catfish",
+        "paparazzo",
+        "review_drone",
+        "rut_king",
+        "sanjun",
+        "speedbump_turtle",
+        "statickite",
+        "sunback",
+        "sunbasker",
+        "sweeps_week",
+        "understudy",
+        "union_rep",
+        "voice_mimic_radio",
+        "warranty_caller",
+        "white_noise_heron"
+      ],
+      "wave345KnownSpecies": [
+        "ad_break",
+        "algorithm",
+        "audit",
+        "buffering",
+        "callback",
+        "chorus_line",
+        "congregation",
+        "eater",
+        "editor",
+        "eulogy",
+        "finale_crew",
+        "focus_group",
+        "gavel",
+        "herald",
+        "influencer",
+        "redactor",
+        "rerun",
+        "reunion",
+        "spoiler",
+        "spool",
+        "strike",
+        "suburb",
+        "terms_of_service",
+        "timeslot"
+      ],
+      "obsSpeciesRows": 93,
+      "obsTotal": 93
+    },
+    "medianSurvival": 149.5,
+    "starvation": 7,
+    "deaths": 597
+  },
+  "bars": [
+    {
+      "id": "armed launched wave-4+ kills (distinct) >= 2",
+      "pass": false,
+      "detail": "armed 0 (control 0)"
+    },
+    {
+      "id": "starvation armed <= control + 2",
+      "pass": true,
+      "detail": "armed 7, control 5"
+    },
+    {
+      "id": "median survival armed >= 0.8x control",
+      "pass": true,
+      "detail": "armed 149.5d, control 151d (0.8x = 120.8)"
+    },
+    {
+      "id": "instrument clean (0 errors, 8/8 parse both legs)",
+      "pass": true,
+      "detail": "errors 0, control 8/8, armed 8/8"
+    }
+  ],
+  "go": false,
+  "instrumentErrors": 0
+}
