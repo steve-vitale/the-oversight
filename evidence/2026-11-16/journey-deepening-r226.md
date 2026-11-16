@@ -283,4 +283,14 @@ Eight villages, 100 days. **8/8 survived** (r222: 6/8). 67 living at end
 
 ## Landing
 
-- (pending)
+- Committed c29bdeac (8 files, 8634 insertions) in the worktree; the
+  safe-commit index clobber struck (all 8 files staged-as-deleted
+  after commit) and was repaired via `git ls-tree -r HEAD` +
+  `update-index --add --index-info`, verified status empty + diff
+  HEAD empty + hash-object == HEAD blob on all 8 files.
+- Master moved during the run (sibling sim-seasoning-b landed
+  35686d860); rebased clean onto it, proof tests re-run green
+  (34/34 analyzer, 5/5 picker), merged ff-only as 411527596.
+- **Merged locally, pending ship** — no bump, no push, no live
+  verification (ship loop owns those).
+- Rotation 2→3 written with read-back; lock deleted at closeout.
