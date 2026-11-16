@@ -227,3 +227,19 @@ concurrency, not an analyzer defect.
   buyout road, or does the 0/5 repeat; (2) does the F5 settled-favor
   branch fire in the wild; (3) does a wave-5-facing seed convert to a
   full seat.
+
+## Adoption completion — Lane B 07:00 occurrence (2026-11-16)
+
+The main-session adoption had committed the evidence + gate + clone
+re-run but had NOT rebased or merged when this occurrence adopted the
+tree: heartbeat 10:56:52Z (~2h stale), no live processes, the r225
+lock already gone. This occurrence heartbeated the tree, then sat on
+the host write flap (window started 11:45:53Z, registry + git-ref
+writes EPERM; ~82 min, the longest on record) until writes cleared
+~13:08Z — heartbeat landed 13:08:31Z. Rebased onto master 612bb6994
+(= origin/master at the time): F5 commit 3ba7f0516, evidence commit
+b31ca5988; rebase clean, no conflicts. F5 proof re-run on the rebased
+tip: 22/22 green; the fix is byte-identical across the rebase (0-line
+diff old vs new). Telemetry re-checked on the rebased tip: QUIET vs
+the r188 baseline. Merged ff-only into master from here; worktree
+released, rotation-b 4→5.
