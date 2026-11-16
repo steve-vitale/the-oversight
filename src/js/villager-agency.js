@@ -379,24 +379,7 @@
         // at home: consider departing. Only wanderers/explorers range;
         // foragers use the base forage loop, homebodies stay.
         var prof = this.npcRangeProfile(rid);
-        if (prof !== 'wanderer' && prof !== 'explorer') {
-          // PROFILEGATE (sim-profilegate-a): a bid-and-selected
-          // party_launch plan is a commitment the dawn scorer already
-          // made; the profile gate must not veto it. The holder still
-          // faces every other launch condition downstream (Haven,
-          // night, danger, objectives, and startExpedition's
-          // sick / range-0 / hurt<70 checks) — only the profile
-          // skip is bypassed, and only for today's party_launch
-          // commit. The commit is read only; no new state, no RNG.
-          var _pgLaunch = false;
-          try {
-            if (typeof this.vbrainCommit === 'function') {
-              var _pgc = this.vbrainCommit(rid);
-              _pgLaunch = !!(_pgc && _pgc.day === ((this.state.scholar || {}).day || 0) && _pgc.winPlanAction === 'party_launch');
-            }
-          } catch (e) {}
-          if (!_pgLaunch) continue;
-        }
+        if (prof !== 'wanderer' && prof !== 'explorer') continue;
         var node = null;
         try { node = this.npcNode(rid); } catch (e) { continue; }
         if (!node || node.nx !== hx || node.ny !== hy) continue;
