@@ -60,6 +60,7 @@ const PROBE_VID = process.env.PROBE_VID || null;
 const PROBE_DAYS = (process.env.PROBE_DAYS || '').split(',').map(s => parseInt(s, 10)).filter(n => !isNaN(n));
 const PROBE_SEED = parseInt(process.env.PROBE_SEED || '85003', 10);
 const ARM = (process.env.ARM || 'A').toUpperCase();
+const ARML = ARM.toLowerCase(); // corpus filenames are lowercase (the analyzer reads journey-scale-r227-a|b-...)
 const SORTIE = false; // r227: the sortie step is INERT in BOTH arms (the r219/r223 decision stands — the sortie-gate call is still owed, not made here). The r215-owed W5-INSTANCE blank is read from the monster census, not the sortie ledger.
 const MUSTER = ARM === 'B'; // r227 arm B: the titan-muster lever (the r223-owed blank) — sound the call + commit Haven's own when a located titan's coalition is completable; arm A: control, step inert
 const EVIDIR = process.env.EVIDIR ? path.resolve(process.env.EVIDIR) : path.join(ROOT, '..', '..', 'goals', 'the-scattering-roguelite-survival-game', 'hidden_files', 'evidence', '2026-11-16');
@@ -309,14 +310,14 @@ function musterStep(G, ctx) {
     const hold = (why) => { row.held = why; musterWatch.push(row); };
     // Sanctity (partyfinish.sanctityOk): no fight/encounter/table in flight.
     try {
-      if (G.over) hold('over'); continue;
-      if (G.tbfight && !G.tbfight.over) hold('tbfight'); continue;
-      if (G.pendingEncounter) hold('pendingEncounter'); continue;
-      if (typeof G.tableActive === 'function' && G.tableActive()) hold('tableActive'); continue;
+      if (G.over) { hold('over'); continue; }
+      if (G.tbfight && !G.tbfight.over) { hold('tbfight'); continue; }
+      if (G.pendingEncounter) { hold('pendingEncounter'); continue; }
+      if (typeof G.tableActive === 'function' && G.tableActive()) { hold('tableActive'); continue; }
       const s = (G.state || {}).scholar || {};
-      if (G._sleeping || s.insideTent) hold('sleeping'); continue;
+      if (G._sleeping || s.insideTent) { hold('sleeping'); continue; }
     } catch (e) { hold('sanctity-error'); continue; }
-    if (!t.present) hold('absent'); continue;
+    if (!t.present) { hold('absent'); continue; }
     let ready = false;
     try { ready = (typeof G.titanMusterReady === 'function') ? !!G.titanMusterReady(t.tid) : false; } catch (e) { hold('ready-error:' + String((e && e.message) || e).slice(0, 80)); continue; }
     row.ready = ready;
@@ -336,13 +337,13 @@ function musterStep(G, ctx) {
     }
     let proj = null;
     try { proj = (typeof G.titanCallReadiness === 'function') ? G.titanCallReadiness(t.tid) : null; } catch (e) { hold('projection-error:' + String((e && e.message) || e).slice(0, 80)); continue; }
-    if (!proj || proj.total == null) hold('no-projection'); continue;
+    if (!proj || proj.total == null) { hold('no-projection'); continue; }
     row.council = { total: proj.total, need: proj.need, alliesProj: proj.alliesProj, havenProj: proj.havenProj, ready: !!proj.ready };
     if (proj.total < proj.need) { hold('short:' + (proj.need - proj.total)); continue; }
     // The coalition completes on this call: sound it, then commit
     // Haven's own (two taps, back-to-back in the same step).
     try {
-      if (typeof G.soundTitanCall !== 'function') hold('no-call-fn'); continue;
+      if (typeof G.soundTitanCall !== 'function') { hold('no-call-fn'); continue; }
       G.soundTitanCall(t.tid);
       row.called = true;
     } catch (e) { hold('call-error:' + String((e && e.message) || e).slice(0, 80)); continue; }
@@ -504,7 +505,7 @@ function pickChoice(choices, turn, st) {
   return list.find(x => x && x.id === 'leave') || null;
 }
 function runConversation(day, vid, isNv) {
-  const fp = path.join(EVIDIR, `journey-scale-r227-${ARM}-transcript-${_currentSeed}-day${day}${isNv ? '-nv' : ''}.txt`);
+  const fp = path.join(EVIDIR, `journey-scale-r227-${ARML}-transcript-${_currentSeed}-day${day}${isNv ? '-nv' : ''}.txt`);
   const L = [];
   const log = (s) => L.push(s);
   let gossipPicks = 0; // r70 fix: MUST live outside the try — the try-scoped let was invisible at the post-try log line, throwing ReferenceError and losing every transcript.
@@ -1295,9 +1296,9 @@ async function playSeed(seed) {
     fightsTotal: (liFin.fights || []).length,
     fightsByWave: (() => { const m = {}; for (const f of (liFin.fights || [])) { if (f.wave != null) m[String(f.wave)] = (m[String(f.wave)] | 0) + 1; } return m; })(),
     maxGameDay: c.day }; 
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-trust-${seed}.json`), JSON.stringify(out, null, 1));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-trust-${seed}.json`), JSON.stringify(out, null, 1));
   // r223 arm B: the sortie ledger — one row per lingerer day (called or held).
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-sortie-${seed}.json`), JSON.stringify({ seed, arm: ARM, sortie: SORTIE, rows: sortieWatch }, null, 1));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-sortie-${seed}.json`), JSON.stringify({ seed, arm: ARM, sortie: SORTIE, rows: sortieWatch }, null, 1));
   // r227 Q1 MUSTER corpus: the per-day muster ledger + the engine's own
   // titan end-state (omens, musters, slain, outcomes) + the verb-call log.
   try {
@@ -1312,70 +1313,70 @@ async function playSeed(seed) {
         };
       } catch (e) { return { error: String((e && e.message) || e).slice(0, 120) }; }
     })();
-    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-muster-${seed}.json`), JSON.stringify({ seed, arm: ARM, muster: MUSTER, rows: musterWatch, titanEnd, verbCalls: TITANVERBS.calls, verbErrors: TITANVERBS.errors }, null, 1));
-    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-muster-${seed}.txt`), musterWatch.map(r => `d${r.day} ${r.titan || '-'} stage=${r.stage == null ? '-' : r.stage} present=${r.present ? 1 : 0} ready=${r.ready == null ? '-' : (r.ready ? 1 : 0)} blades=${r.bladesAllied == null ? '-' : r.bladesAllied}+${r.bladesHaven == null ? '-' : r.bladesHaven} called=${r.called ? 1 : 0} committed=${r.committed}${(r.committedVids || []).length ? ' vids=' + r.committedVids.join(',') : ''} held=${r.held || '-'}${r.council ? ' proj=' + r.council.total + '/' + r.council.need : ''}`).join('\n'));
+    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-muster-${seed}.json`), JSON.stringify({ seed, arm: ARM, muster: MUSTER, rows: musterWatch, titanEnd, verbCalls: TITANVERBS.calls, verbErrors: TITANVERBS.errors }, null, 1));
+    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-muster-${seed}.txt`), musterWatch.map(r => `d${r.day} ${r.titan || '-'} stage=${r.stage == null ? '-' : r.stage} present=${r.present ? 1 : 0} ready=${r.ready == null ? '-' : (r.ready ? 1 : 0)} blades=${r.bladesAllied == null ? '-' : r.bladesAllied}+${r.bladesHaven == null ? '-' : r.bladesHaven} called=${r.called ? 1 : 0} committed=${r.committed}${(r.committedVids || []).length ? ' vids=' + r.committedVids.join(',') : ''} held=${r.held || '-'}${r.council ? ' proj=' + r.council.total + '/' + r.council.need : ''}`).join('\n'));
   } catch (e) { console.error('muster write failed:', e && e.message); }
   // r223 PROBE (RAISE_DEBUG=1): the bondChoices ledger for pending raises.
-  if (process.env.RAISE_DEBUG === '1') fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-raisedebug-${seed}.json`), JSON.stringify({ seed, arm: ARM, rows: raiseDebug }, null, 1));
+  if (process.env.RAISE_DEBUG === '1') fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-raisedebug-${seed}.json`), JSON.stringify({ seed, arm: ARM, rows: raiseDebug }, null, 1));
   // R109: one file per raise-answer talk (the r108 blank — the talks were
   // invisible to the instruments). Read by the people check in full.
   try {
     (c.raiseTalks || []).forEach((t, i) => {
       const nm = (() => { try { return vname(t.vid) || t.vid; } catch (e) { return t.vid; } })();
       const lines = (t.lines || []).map(l => `${l.who === 'them' ? 'THEM' : 'YOU'}: ${l.text}`).join('\n');
-      fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-raisetalk-${seed}-${i + 1}.txt`),
+      fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-raisetalk-${seed}-${i + 1}.txt`),
         `=== seed ${seed} day ${t.day} — raise-answer talk with ${nm} (${t.vid}), village ${t.village}, outcome ${t.outcome} ===\n${lines || '(no lines recorded — the conversation opened no transcript)'}\n`);
     });
   } catch (e) { console.log(`  raise-talk emit error seed ${seed}: ${e && e.message}`); }
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-capture-${seed}.txt`), capture.join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-capture-${seed}.txt`), capture.join('\n'));
   const beatLines = capture.filter(s => /lead|subordinate|tribute|national|defense|feast|primary|demand|swear|allegiance|granary|court/i.test(s)).slice(0, 120);
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-beats-${seed}.txt`), beatLines.join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-beats-${seed}.txt`), beatLines.join('\n'));
   const momentLines = capture.filter(s => /governance layer: online|the shared granary opens|species agency: unlocked|one fire was a village|coordination layer: online/i.test(s));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-moments-${seed}.txt`), momentLines.join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-moments-${seed}.txt`), momentLines.join('\n'));
   // R24 table-approach arm: every line that voices the approach (or its absence)
   const tableLines = capture.filter(s => /table is being set|ARC IV|the ledger still wants|lesser seat|full seat|the table has your name|does not come|NO HUNGER ON THE RECORD|THE DEEDS ARE NOT|priced for what you built|the ring of pale light/i.test(s));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-want-${seed}.txt`), tableLines.join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-want-${seed}.txt`), tableLines.join('\n'));
   // R29 governance dump: every classified mechanism line, day-attributed
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-gov-${seed}.txt`), govWatch.map(g => `d${g.day} [${g.cls}] ${g.line}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-gov-${seed}.txt`), govWatch.map(g => `d${g.day} [${g.cls}] ${g.line}`).join('\n'));
   // R103 nat-gate dump: one row per policy day (the staging gates, read-only).
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-natgate-${seed}.txt`), natGateWatch.map(n => `d${n.day} rank=${n.rank} nat=${n.nationalLive} glob=${n.globalLive} netLive=${n.networkLive} netDay=${n.networkLiveDay} rung=${n.rungReady} exiled=${n.exiled} refused=${n.scaleRefused} pend=${n.pendingShape || '-'}@${n.pendingDay == null ? '-' : n.pendingDay} lead=${n.leadSeasoned}/${n.leadActive} cov=${n.covSeasoned}/${n.covActive} trade=${n.tradeSeasoned}/${n.tradeActive} belong=${n.belong ? (n.belong.other + ':t' + n.belong.trust + '/a' + n.belong.arrears + '/age' + n.belong.age + '/realm' + n.belong.realm + '/good' + (n.belong.good ? 1 : 0)) : '-'} foreignMax=${n.foreignMax} polities=${JSON.stringify({ lead: n.leadPolity, belong: n.belongPolity, cov: n.covPolity, trade: n.tradePolity })} defer=${JSON.stringify(n.defer)} view=${n.viewership}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-natgate-${seed}.txt`), natGateWatch.map(n => `d${n.day} rank=${n.rank} nat=${n.nationalLive} glob=${n.globalLive} netLive=${n.networkLive} netDay=${n.networkLiveDay} rung=${n.rungReady} exiled=${n.exiled} refused=${n.scaleRefused} pend=${n.pendingShape || '-'}@${n.pendingDay == null ? '-' : n.pendingDay} lead=${n.leadSeasoned}/${n.leadActive} cov=${n.covSeasoned}/${n.covActive} trade=${n.tradeSeasoned}/${n.tradeActive} belong=${n.belong ? (n.belong.other + ':t' + n.belong.trust + '/a' + n.belong.arrears + '/age' + n.belong.age + '/realm' + n.belong.realm + '/good' + (n.belong.good ? 1 : 0)) : '-'} foreignMax=${n.foreignMax} polities=${JSON.stringify({ lead: n.leadPolity, belong: n.belongPolity, cov: n.covPolity, trade: n.tradePolity })} defer=${JSON.stringify(n.defer)} view=${n.viewership}`).join('\n'));
   // R107 Q1 regional-gate dump: one row per policy day + the per-seed corpus JSON
   // (same shape as the regionalstep corpus — daily rows with .gate — so
   // regionalstep-analyze-20261107.js reads it directly).
   try {
     const _regDaily = ((regInst.t && regInst.t.daily) || []).slice();
-    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-reggate-${seed}.txt`), _regDaily.map(d => `d${d.day} gate=${d.gate || '?'} rank=${d.scale || d.scaleRankSnap || '?'} netLive=${d.networkLive ? 1 : 0} known=${d.knownCount} bestDet=${d.bestDet} bestVill=${d.bestVillageId || '-'} propose=${d.proposeCalls} raisesAcc=${d.acceptLinkRaiseCalls} counters=${d.proposeCounter} links=${d.activeLinks}/${d.everLinks} oldestAge=${d.oldestActiveAge} firstLink=${d.firstLinkDay} accord=${d.firstAccordDay}`).join('\n'));
-    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-regional-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, policy: 'scalecourt', daily: _regDaily, regionalAttempts: (regFin && regFin.regionalAttempts) || [], talkCalls: (regFin && regFin.talkCalls) || [], firstLinkDay: (regFin && regFin.firstLinkDay) || null, firstAccordDay: (regFin && regFin.firstAccordDay) || null, instrumentErrors: ((regInst.t && regInst.t.instrumentErrors) || []).slice() }, null, 1));
+    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-reggate-${seed}.txt`), _regDaily.map(d => `d${d.day} gate=${d.gate || '?'} rank=${d.scale || d.scaleRankSnap || '?'} netLive=${d.networkLive ? 1 : 0} known=${d.knownCount} bestDet=${d.bestDet} bestVill=${d.bestVillageId || '-'} propose=${d.proposeCalls} raisesAcc=${d.acceptLinkRaiseCalls} counters=${d.proposeCounter} links=${d.activeLinks}/${d.everLinks} oldestAge=${d.oldestActiveAge} firstLink=${d.firstLinkDay} accord=${d.firstAccordDay}`).join('\n'));
+    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-regional-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, policy: 'scalecourt', daily: _regDaily, regionalAttempts: (regFin && regFin.regionalAttempts) || [], talkCalls: (regFin && regFin.talkCalls) || [], firstLinkDay: (regFin && regFin.firstLinkDay) || null, firstAccordDay: (regFin && regFin.firstAccordDay) || null, instrumentErrors: ((regInst.t && regInst.t.instrumentErrors) || []).slice() }, null, 1));
     const _gateTally = {};
     _regDaily.forEach(d => { _gateTally[d.gate || '?'] = (_gateTally[d.gate || '?'] | 0) + 1; });
     console.log(`  regGate seed ${seed}: rows=${_regDaily.length} gates=${JSON.stringify(_gateTally)} propose=${(_regDaily.length ? _regDaily[_regDaily.length - 1].proposeCalls : 0)} links=${(_regDaily.length ? _regDaily[_regDaily.length - 1].activeLinks : 0)}/${(_regDaily.length ? _regDaily[_regDaily.length - 1].everLinks : 0)} errors=${(((regInst.t && regInst.t.instrumentErrors) || []).length)}`);
   } catch (e) { console.log(`  regGate seed ${seed}: EMIT-ERROR ${e && e.message}`); }
   // R99 water-refusal dump: every cistern-dry / pack-full fill refusal, day-attributed
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-water-${seed}.txt`), waterWatch.map(w => `d${w.day} [${w.cls}] ${w.line}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-water-${seed}.txt`), waterWatch.map(w => `d${w.day} [${w.cls}] ${w.line}`).join('\n'));
   // R34 trust dump: daily snapshots + engine-book events, human-readable
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-trust-${seed}.txt`), trustWatch.map(t => `d${t.day} ${t.kind} ${t.other} trust=${t.trust} formed=d${t.formedDay} poolLive=${t.poolLive} lastKept=${t.lastKeptDay} mournUntil=${t.mourningUntil} arrears=${t.arrears} pendDef=${t.pendingDefense} pendCrisis=${t.pendingCrisis}`).join('\n'));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-trustevents-${seed}.txt`), trustEvents.map(e => `d${e.day} ${e.kind} ${e.other} [${e.noteKind}] ${e.note}`).join('\n'));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-trustset-${seed}.txt`), trustSetLog.map(e => `d${e.day} ${e.kind} ${e.other} ${e.before}->${e.after} (delta ${e.delta}) :: ${e.stack}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-trust-${seed}.txt`), trustWatch.map(t => `d${t.day} ${t.kind} ${t.other} trust=${t.trust} formed=d${t.formedDay} poolLive=${t.poolLive} lastKept=${t.lastKeptDay} mournUntil=${t.mourningUntil} arrears=${t.arrears} pendDef=${t.pendingDefense} pendCrisis=${t.pendingCrisis}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-trustevents-${seed}.txt`), trustEvents.map(e => `d${e.day} ${e.kind} ${e.other} [${e.noteKind}] ${e.note}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-trustset-${seed}.txt`), trustSetLog.map(e => `d${e.day} ${e.kind} ${e.other} ${e.before}->${e.after} (delta ${e.delta}) :: ${e.stack}`).join('\n'));
   // R39 hunger-window dump: one row per policy day (opening state).
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-morntrace3-${seed}.txt`), mornTrace.map(r => `d${r.day} ${r.stage} at=(${r.px},${r.py}) hyd=${r.hyd} pilgrim=${r.pilgrim || '-'} ret=${r.returning ? 1 : 0} packW=${r.packWater} tile=${r.tileType} tent=${r.insideTent ? 1 : 0} wx=${r.weather} ticks=${r.dayTicks} drank=${r.drank} packKg=${r.packKg} cap=${r.carryCap} cist=${r.cistClean}/${r.cistDirty} top=${r.packTop}` + (r.dThirst != null ? ` dThirst=${r.dThirst} dForage=${r.dForage} dStanding=${r.dStanding} dDetours=${r.dDetours} dDrank=${r.dDrank}` : '')).join('\n'));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-postrace-${seed}.txt`), posTrace.map(r => `d${r.day} ${r.stage} ${r.vid} at=(${r.px},${r.py}) target=(${r.tx},${r.ty}) dist=${r.dist}` + (r.stage === 'walk' ? ` after=(${r.px2},${r.py2}) dist2=${r.dist2}` : '') + (r.reason ? ` reason=${r.reason}` : '')).join('\n'));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-hungerwatch-${seed}.txt`), hungerWatch.map(h => `d${h.day} pantry=${h.pantry} hungryDays=${h.hungryDays} pilgrim=${h.pilgrim ? h.pilgrimVid : '-'} returning=${h.returning} pilg=${h.pilgrimages} studies=${h.climbStudies} propPeer=${h.proposedPeer} courtPoor=${h.courtPoorDays} pool=${h.pool}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-morntrace3-${seed}.txt`), mornTrace.map(r => `d${r.day} ${r.stage} at=(${r.px},${r.py}) hyd=${r.hyd} pilgrim=${r.pilgrim || '-'} ret=${r.returning ? 1 : 0} packW=${r.packWater} tile=${r.tileType} tent=${r.insideTent ? 1 : 0} wx=${r.weather} ticks=${r.dayTicks} drank=${r.drank} packKg=${r.packKg} cap=${r.carryCap} cist=${r.cistClean}/${r.cistDirty} top=${r.packTop}` + (r.dThirst != null ? ` dThirst=${r.dThirst} dForage=${r.dForage} dStanding=${r.dStanding} dDetours=${r.dDetours} dDrank=${r.dDrank}` : '')).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-postrace-${seed}.txt`), posTrace.map(r => `d${r.day} ${r.stage} ${r.vid} at=(${r.px},${r.py}) target=(${r.tx},${r.ty}) dist=${r.dist}` + (r.stage === 'walk' ? ` after=(${r.px2},${r.py2}) dist2=${r.dist2}` : '') + (r.reason ? ` reason=${r.reason}` : '')).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-hungerwatch-${seed}.txt`), hungerWatch.map(h => `d${h.day} pantry=${h.pantry} hungryDays=${h.hungryDays} pilgrim=${h.pilgrim ? h.pilgrimVid : '-'} returning=${h.returning} pilg=${h.pilgrimages} studies=${h.climbStudies} propPeer=${h.proposedPeer} courtPoor=${h.courtPoorDays} pool=${h.pool}`).join('\n'));
   // R39 table-approach dump: one row per policy day (opening seat price).
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-wantwatch-${seed}.txt`), tableWatch.map(t => `d${t.day} seat=${t.seat} arc=${t.arc} wait=${t.tableWaiting} ann=${t.tableAnnounced} done=${t.tableDone} rank=${t.scaleRank} glob=${t.globalLive} ot=${t.overtimeTier} detail=${JSON.stringify(t.detail)}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-wantwatch-${seed}.txt`), tableWatch.map(t => `d${t.day} seat=${t.seat} arc=${t.arc} wait=${t.tableWaiting} ann=${t.tableAnnounced} done=${t.tableDone} rank=${t.scaleRank} glob=${t.globalLive} ot=${t.overtimeTier} detail=${JSON.stringify(t.detail)}`).join('\n'));
   // R39 betrayal dump: accept + daily person snapshots for accepted subjects.
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-betray-${seed}.txt`), betrayWatch.map(b => `d${b.day} ${b.event} ${b.name} (${b.vid})` + (b.event === 'accept' ? ` armed=${b.armed === null ? 'unknown' : (b.armed ? 'armed' : 'ordinary')}` : '') + ` dead=${b.dead} trust=${b.trust} inRoster=${b.inRoster}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-betray-${seed}.txt`), betrayWatch.map(b => `d${b.day} ${b.event} ${b.name} (${b.vid})` + (b.event === 'accept' ? ` armed=${b.armed === null ? 'unknown' : (b.armed ? 'armed' : 'ordinary')}` : '') + ` dead=${b.dead} trust=${b.trust} inRoster=${b.inRoster}`).join('\n'));
   // R52 barrier dump: every sayOncePerFight call, day-attributed.
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-barrier-${seed}.txt`), barrierLog.map(b => `d${b.day} inCombat=${b.inCombat} tbfight=${b.tbfight} over=${b.tbfightOver} msg=${b.msg} :: ${b.stack}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-barrier-${seed}.txt`), barrierLog.map(b => `d${b.day} inCombat=${b.inCombat} tbfight=${b.tbfight} over=${b.tbfightOver} msg=${b.msg} :: ${b.stack}`).join('\n'));
   // R52 armor dump: every capture line mentioning armor/craft/bark, for the
   // armor-move pin (Q1). Read-only extraction from the say capture.
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-armor-${seed}.txt`), capture.filter(s => /armor|bark|craft/i.test(s)).join('\n'));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-duty-${seed}.txt`), dutyWatch.map(d => `d${d.day} roster=${d.roster} atHaven=${d.atHaven} deadfall=[${d.deadfallAssigned.join(',')}] wcd=${JSON.stringify(d.weaponCraftCd)} wc=${JSON.stringify(d.weaponCraft)}`).join('\n'));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-wsplit-${seed}.json`), JSON.stringify(wsplitWatch, null, 1));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-fusion-${seed}.txt`), fusionWatch.map(f => `d${f.day} scholar=${f.scholarVid} installed=${f.installed} onlineFlag=${f.onlineFlag} sinceDay=${f.sinceDay} online=${f.online} hasAbility=${f.hasAbility} holder=${JSON.stringify(f.holder)} abilities=[${(f.abilities || []).join(',')}]`).join('\n'));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-fusionfeast-${seed}.txt`), fusionFeast.map(f => `d${f.day} [${f.cls}] ${f.line}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-armor-${seed}.txt`), capture.filter(s => /armor|bark|craft/i.test(s)).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-duty-${seed}.txt`), dutyWatch.map(d => `d${d.day} roster=${d.roster} atHaven=${d.atHaven} deadfall=[${d.deadfallAssigned.join(',')}] wcd=${JSON.stringify(d.weaponCraftCd)} wc=${JSON.stringify(d.weaponCraft)}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-wsplit-${seed}.json`), JSON.stringify(wsplitWatch, null, 1));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-fusion-${seed}.txt`), fusionWatch.map(f => `d${f.day} scholar=${f.scholarVid} installed=${f.installed} onlineFlag=${f.onlineFlag} sinceDay=${f.sinceDay} online=${f.online} hasAbility=${f.hasAbility} holder=${JSON.stringify(f.holder)} abilities=[${(f.abilities || []).join(',')}]`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-fusionfeast-${seed}.txt`), fusionFeast.map(f => `d${f.day} [${f.cls}] ${f.line}`).join('\n'));
   // R113 Q1 ladder dumps: one daily row per policy day + the wrapper
   // event logs (capstone deliveries, fights with wave attribution).
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-ladder-${seed}.txt`), (liFin.daily || []).map(d => {
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-ladder-${seed}.txt`), (liFin.daily || []).map(d => {
     const tr = d.tracks ? `fight=${d.tracks.fight} forage=${d.tracks.forage} craft=${d.tracks.craft} talk=${d.tracks.talk} explore=${d.tracks.explore}` : 'tracks=-';
     const ct = d.countedTracks ? `cfight=${d.countedTracks.fight} cforage=${d.countedTracks.forage} ccraft=${d.countedTracks.craft} ctalk=${d.countedTracks.talk} cexplore=${d.countedTracks.explore}` : 'ctracks=-';
     const caps = CAPSRENDER.renderCaps(d); // r197: 'delivered' only for the delivered kind; other kinds read 'seat-open'
@@ -1393,41 +1394,41 @@ async function playSeed(seed) {
   // R113 Q1 veteran-attribution corpus: the waveKillLog rows (wave >= 3),
   // the per-channel counters, and the daily scholar-vid map — the
   // analyzer attributes every kill and every killer's fate from this.
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-vetkill-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, waveKillLog: (liFin.waveKillLog || []), waveKillByChannel: (liFin.waveKillByChannel || {}), scholarVidsByDay: (liFin.scholarVidsByDay || {}), deaths: (liFin.deaths || []), finalRoster: (liFin.finalRoster || []), instrumentErrors: (liFin.errors || []).slice() }, null, 1));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-vetkill-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, waveKillLog: (liFin.waveKillLog || []), waveKillByChannel: (liFin.waveKillByChannel || {}), scholarVidsByDay: (liFin.scholarVidsByDay || {}), deaths: (liFin.deaths || []), finalRoster: (liFin.finalRoster || []), instrumentErrors: (liFin.errors || []).slice() }, null, 1));
   // R125 Q2 death-census corpus: the daily context rows, the fallen
   // deaths with causes, the telemetry death rows, joins/leavers, and
   // the reconciliation summary — the analyzer scores the attribution
   // from this.
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-deathcensus-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, daily: (dcFin.daily || []), deaths: (dcFin.deaths || []), teleDeaths: (dcFin.teleDeaths || []), joins: (dcFin.joins || []), leavers: (dcFin.leavers || []), teleOutOfScope: (dcFin.teleOutOfScope || []), summary: (dcFin.summary || {}), instrumentErrors: (dcFin.errors || []).slice() }, null, 1));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-deathcensus-${seed}.txt`), (dcFin.deaths || []).map(d => `d${d.day} ${d.name || d.vid} (${d.vid}) cause=${d.cause || '?'}${d.monsterName ? ' monster=' + d.monsterName : ''}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-deathcensus-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, daily: (dcFin.daily || []), deaths: (dcFin.deaths || []), teleDeaths: (dcFin.teleDeaths || []), joins: (dcFin.joins || []), leavers: (dcFin.leavers || []), teleOutOfScope: (dcFin.teleOutOfScope || []), summary: (dcFin.summary || {}), instrumentErrors: (dcFin.errors || []).slice() }, null, 1));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-deathcensus-${seed}.txt`), (dcFin.deaths || []).map(d => `d${d.day} ${d.name || d.vid} (${d.vid}) cause=${d.cause || '?'}${d.monsterName ? ' monster=' + d.monsterName : ''}`).join('\n'));
   // r130 Q1/Q3 scholar-counts corpus: per-day new vs legacy veteran counts
   // + payable + kill-time samples, with the instrument's own summary.
   try {
     const scSummary = SCINST.summarize(scRows);
-    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-scholarcount-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, summary: scSummary, killTimeSamples: scKillSamples, killTimeErrors: scKillErrors, daily: scRows }, null, 1));
-    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-scholarcount-${seed}.txt`), scRows.map(r => `d${r.day} new=${r.livingVeterans == null ? '-' : r.livingVeterans} legacy=${r.livingVeteransLegacy == null ? '-' : r.livingVeteransLegacy} payable=${r.payable == null ? '-' : r.payable} trib=${(r.deeds && r.deeds.military_tribute) ? (r.deeds.military_tribute.ready ? 'ready' : r.deeds.military_tribute.reason) : '?'} delivered=${r.delivered || '-'}`).join('\n'));
+    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-scholarcount-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, summary: scSummary, killTimeSamples: scKillSamples, killTimeErrors: scKillErrors, daily: scRows }, null, 1));
+    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-scholarcount-${seed}.txt`), scRows.map(r => `d${r.day} new=${r.livingVeterans == null ? '-' : r.livingVeterans} legacy=${r.livingVeteransLegacy == null ? '-' : r.livingVeteransLegacy} payable=${r.payable == null ? '-' : r.payable} trib=${(r.deeds && r.deeds.military_tribute) ? (r.deeds.military_tribute.ready ? 'ready' : r.deeds.military_tribute.reason) : '?'} delivered=${r.delivered || '-'}`).join('\n'));
   } catch (e) { console.error('scholarcount write failed:', e && e.message); }
   // r133 Q2 vetbar corpus: the daily readiness-vs-ladder rows + the
   // shadow old-rule counts. The analyzer scores Q2 from this file alone.
   try {
-    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-vetbar-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, daily: vetbarWatch }, null, 1));
-    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-vetbar-${seed}.txt`), vetbarWatch.map(r => `d${r.day} roster=${r.roster} r4=${r.r4} l3=${r.l3} shadow4=${r.shadow4} r5=${r.r5} l4=${r.l4} shadow5=${r.shadow5} blooded=${r.blooded}`).join('\n'));
+    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-vetbar-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, daily: vetbarWatch }, null, 1));
+    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-vetbar-${seed}.txt`), vetbarWatch.map(r => `d${r.day} roster=${r.roster} r4=${r.r4} l3=${r.l3} shadow4=${r.shadow4} r5=${r.r5} l4=${r.l4} shadow5=${r.shadow5} blooded=${r.blooded}`).join('\n'));
   } catch (e) { console.error('vetbar write failed:', e && e.message); }
   // r223 W5-INSTANCE corpus: the per-fight entity rows (scholar + field),
   // the daily live world-monster census, and the d90 spotter snapshot —
   // the analyzer scores the wave-5 one-vs-successive question from this.
   try {
-    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-w5inst-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, fights: fightInst, monsterDays: monsterWatch, spotterWatch90: spotterWatch90.slice() }, null, 1));
-    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-w5inst-${seed}.txt`), fightInst.map(f => `d${f.day} ${f.via} ${f.monsterId || '?'} w${f.wave == null ? '?' : f.wave} ent=${f.ent ? ((f.ent.key || (f.ent.id + '@' + f.ent.tx + ',' + f.ent.ty + ':' + f.ent.mx + ',' + f.ent.my)) + ' hp' + f.ent.hp + '/' + f.ent.maxHp + (f.ent.veteran ? ' vet' : '')) : '-'}${f.outcome ? ' ' + f.outcome + ' r' + f.rounds : ''}`).join('\n'));
+    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-w5inst-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, fights: fightInst, monsterDays: monsterWatch, spotterWatch90: spotterWatch90.slice() }, null, 1));
+    fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-w5inst-${seed}.txt`), fightInst.map(f => `d${f.day} ${f.via} ${f.monsterId || '?'} w${f.wave == null ? '?' : f.wave} ent=${f.ent ? ((f.ent.key || (f.ent.id + '@' + f.ent.tx + ',' + f.ent.ty + ':' + f.ent.mx + ',' + f.ent.my)) + ' hp' + f.ent.hp + '/' + f.ent.maxHp + (f.ent.veteran ? ' vet' : '')) : '-'}${f.outcome ? ' ' + f.outcome + ' r' + f.rounds : ''}`).join('\n'));
   } catch (e) { console.error('w5inst write failed:', e && e.message); }
   // R113 Q1+Q2 trade-road corpus: the daily trade snapshots, the beat
   // answers, the wild-fight log, and the scholar-vid map — the analyzer
   // scores the trade road and the wild wave-4 question from this.
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-traderoad-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, policy: 'scalecourt-traderoad-r122', daily: (trFin.daily || []), beatAnswers: (trFin.beatAnswers || []), wildFights: (trFin.wildFights || []), scholarVidsByDay: (trFin.scholarVidsByDay || {}), instrumentErrors: (trFin.errors || []).slice() }, null, 1));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-traderoad-${seed}.txt`), (trFin.daily || []).map(d => `d${d.day} subs=${d.subs} trade=${d.trSeasoned}/${d.trN} cov=${d.covN} viable=${d.viable} sealed=${d.sealed} chartered=${d.charteredLinks} cand=${d.candidates} pool=${d.pool == null ? '-' : d.pool} pendCtr=${d.pendingCounter ? 1 : 0} pend=${d.pendingShape || '-'}`).join('\n'));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-wildfights-${seed}.txt`), (trFin.wildFights || []).map(f => `d${f.day} ${f.cls} ${f.vid || '-'} ${f.mid || '?'} w${f.wave == null ? '?' : f.wave} ${f.outcome || '?'} rounds=${f.rounds == null ? '-' : f.rounds}`).join('\n'));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-beatanswers-${seed}.txt`), (trFin.beatAnswers || []).map(b => `d${b.day} ${b.shape || '?'} -> ${b.how} (${b.out || '-'})`).join('\n'));
-  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARM}-ladderevents-${seed}.txt`), [
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-traderoad-${seed}.json`), JSON.stringify({ seed, arm: 'journey-scale-r227-' + ARM, policy: 'scalecourt-traderoad-r122', daily: (trFin.daily || []), beatAnswers: (trFin.beatAnswers || []), wildFights: (trFin.wildFights || []), scholarVidsByDay: (trFin.scholarVidsByDay || {}), instrumentErrors: (trFin.errors || []).slice() }, null, 1));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-traderoad-${seed}.txt`), (trFin.daily || []).map(d => `d${d.day} subs=${d.subs} trade=${d.trSeasoned}/${d.trN} cov=${d.covN} viable=${d.viable} sealed=${d.sealed} chartered=${d.charteredLinks} cand=${d.candidates} pool=${d.pool == null ? '-' : d.pool} pendCtr=${d.pendingCounter ? 1 : 0} pend=${d.pendingShape || '-'}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-wildfights-${seed}.txt`), (trFin.wildFights || []).map(f => `d${f.day} ${f.cls} ${f.vid || '-'} ${f.mid || '?'} w${f.wave == null ? '?' : f.wave} ${f.outcome || '?'} rounds=${f.rounds == null ? '-' : f.rounds}`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-beatanswers-${seed}.txt`), (trFin.beatAnswers || []).map(b => `d${b.day} ${b.shape || '?'} -> ${b.how} (${b.out || '-'})`).join('\n'));
+  fs.writeFileSync(path.join(EVIDIR, `journey-scale-r227-${ARML}-ladderevents-${seed}.txt`), [
     ...((liFin.deliveries || []).map(x => `d${x.day} DELIVER ${x.kind || '?'} ok=${x.ok ? 1 : 0} reason=${x.reason ? String(x.reason).replace(/\s+/g, '_') : 'none'}`)),
     ...((liFin.fights || []).map(x => `d${x.day} FIGHT ${x.monsterId || '?'} wave=${x.wave == null ? '?' : x.wave}`)),
     ...((liFin.errors || []).map(x => `d${x.day} INSTRUMENT-ERROR ${x.where}: ${x.err}`)),
