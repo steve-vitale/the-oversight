@@ -90,24 +90,32 @@ function thresholdChild(envExtra) {
   const env = Object.assign({}, process.env, envExtra || {});
   delete env.TRICKTEACH_RECORDER;
   const script = [
-    "const { loadGame } = require('./scripts/sim-harness');",
+    "const { loadGame, setupGame } = require('./scripts/sim-harness');",
     "(async function () {",
     "  const { Game } = await loadGame({ seed: 102211, mode: 'trickteach-proof', fullTelemetry: false });",
     "  const said = [];",
     "  const origSay = Game.say ? Game.say.bind(Game) : null;",
     "  Game.say = function (s) { said.push(String(s)); try { if (origSay) return origSay(s); } catch (e) {} };",
-    "  Game.state = Game.state || {};",
+    // Full new-game setup: bare loadGame leaves state undefined and a
+    // hand-rolled {} state lacks codex, so monsterDisplayName throws
+    // inside the learn-beat template (swallowed by the function's
+    // try/catch — knowledge lands, narration is lost). setupGame
+    // builds the real state; obs/tricks are reset after it so the
+    // depart cannot pollute the counts.
+    "  await setupGame(Game);",
     "  Game.state.villageCounterObs = {};",
     "  Game.state.villagerTricks = {};",
-    "  Game.state.village = Game.state.village || {};",
-    "  Game.state.village.roster = ['w1', 'w2', 'dead1'];",
+    "  said.length = 0;",
+    "  const roster = ((Game.state.village || {}).roster || []).slice();",
+    "  if (roster.length < 3) { console.log(JSON.stringify({ error: 'roster<3', roster: roster })); return; }",
+    "  const w1 = roster[0], w2 = roster[1], dead1 = roster[2];",
     "  const out = { threshold: null, villager: {}, scholar: {}, witness: {} };",
     "  try { out.threshold = Game.trickLearnThreshold(); } catch (e) { out.threshold = 'ERR:' + e.message; }",
     "  out.villager.knownBefore = Game.villageKnowsTrick('algorithm');",
-    "  Game.noteVillagerTrickObservation('w1', 'algorithm');",
+    "  Game.noteVillagerTrickObservation(w1, 'algorithm');",
     "  out.villager.obsAfter1 = (Game.state.villageCounterObs || {}).algorithm || 0;",
     "  out.villager.knownAfter1 = Game.villageKnowsTrick('algorithm');",
-    "  Game.noteVillagerTrickObservation('w2', 'algorithm');",
+    "  Game.noteVillagerTrickObservation(w2, 'algorithm');",
     "  out.villager.obsAfter2 = (Game.state.villageCounterObs || {}).algorithm || 0;",
     "  out.villager.knownAfter2 = Game.villageKnowsTrick('algorithm');",
     "  out.scholar.knownBefore = Game.villageKnowsTrick('eater');",
@@ -118,10 +126,10 @@ function thresholdChild(envExtra) {
     "  out.scholar.obsAfter2 = (Game.state.villageCounterObs || {}).eater || 0;",
     "  out.scholar.knownAfter2 = Game.villageKnowsTrick('eater');",
     "  out.witness.knownBefore = Game.villageKnowsTrick('reunion');",
-    "  Game.noteNodeWitnessKill('dead1', 'reunion', ['w1']);",
+    "  Game.noteNodeWitnessKill(dead1, 'reunion', [w1]);",
     "  out.witness.obsAfter1 = (Game.state.villageCounterObs || {}).reunion || 0;",
     "  out.witness.knownAfter1 = Game.villageKnowsTrick('reunion');",
-    "  Game.noteNodeWitnessKill('dead1', 'reunion', ['w2']);",
+    "  Game.noteNodeWitnessKill(dead1, 'reunion', [w2]);",
     "  out.witness.obsAfter2 = (Game.state.villageCounterObs || {}).reunion || 0;",
     "  out.witness.knownAfter2 = Game.villageKnowsTrick('reunion');",
     "  out.said = said;",
@@ -162,10 +170,20 @@ check('armed learn beats exist (3 channels, 3 species)', armedLearned.length ===
 check('control learn beats exist (3 channels, 3 species)', controlLearned.length === 3, 'got ' + controlLearned.length);
 check('armed learn beats never say "twice"', armedLearned.every(function (s) { return s.indexOf('twice') === -1; }),
   JSON.stringify(armedLearned).slice(0, 400));
-check('armed learn beats say "one sighting was enough"', armedLearned.every(function (s) { return s.indexOf('one sighting was enough') !== -1; }),
-  JSON.stringify(armedLearned).slice(0, 400));
-check('control learn beats say "twice"', controlLearned.every(function (s) { return s.indexOf('twice') !== -1; }),
-  JSON.stringify(controlLearned).slice(0, 400));
+// The villager + scholar learn beats carry the count language
+// ("twice" at threshold 2, "one sighting was enough" at 1); the
+// witness beat never did — it is framed second-hand ("watched it
+// take …"), so it is asserted on its own wording, not on "twice".
+const armedCounted = armedLearned.filter(function (s) { return s.indexOf('one sighting was enough') !== -1; });
+const controlCounted = controlLearned.filter(function (s) { return s.indexOf('twice') !== -1; });
+check('armed villager+scholar learn beats say "one sighting was enough" (2 of 3)',
+  armedCounted.length === 2, 'got ' + armedCounted.length + ' of ' + armedLearned.length);
+check('control villager+scholar learn beats say "twice" (2 of 3)',
+  controlCounted.length === 2, 'got ' + controlCounted.length + ' of ' + controlLearned.length);
+check('armed + control witness learn beats are framed second-hand ("watched it take")',
+  armedLearned.some(function (s) { return s.indexOf('watched it take') !== -1; }) &&
+  controlLearned.some(function (s) { return s.indexOf('watched it take') !== -1; }),
+  JSON.stringify(armedLearned.concat(controlLearned)).slice(0, 400));
 check('armed: no stale "(1/2" first-sighting line prints',
   armedU.said.every(function (s) { return s.indexOf('(1/2') === -1; }),
   JSON.stringify(armedU.said.filter(function (s) { return s.indexOf('/2') !== -1; })).slice(0, 300));
@@ -208,14 +226,28 @@ async function liveRuns() {
     outLong.trickTeach === true && outLong.trickTeachThreshold === 1,
     'got trickTeach=' + outLong.trickTeach + ' threshold=' + outLong.trickTeachThreshold);
   check('armed run carries killfailFights array', Array.isArray(outLong.killfailFights));
-  const badKf = (outLong.killfailFights || []).find(function (r) {
+  // Row shape is the ANALYZER's classifiability on the JUDGED
+  // population (launched fights): a wild row may carry a null
+  // fighter.hpEntry (a visitor/joiner with no village health
+  // record and no getPerson hit — hpAtEntry's fallbacks all miss),
+  // and the analyzer tolerates wild rows. A launched row must
+  // classify: the killfail bar is >=90% classified among launched.
+  const KA = require(path.join(REPO, 'scripts', 'analyze-killfail-a'));
+  const cls = KA.classifySeed(outLong);
+  check('live 150d armed run: every launched fight classifies (0 unclassified)',
+    cls.unclassified.length === 0,
+    JSON.stringify(cls.unclassified.map(function (r) { return { day: r.fight.day, mid: r.fight.mid, missing: r.classification.missingFields }; })));
+  check('live 150d armed run: launched classification share is 100%',
+    cls.launchedTotal === 0 || cls.launchedClassified === cls.launchedTotal,
+    'got ' + cls.launchedClassified + '/' + cls.launchedTotal);
+  const badKf = (cls.launched || []).map(function (r) { return r.fight; }).find(function (r) {
     return !(r && typeof r.day === 'number' && r.vid && r.mid && (r.wave === 4 || r.wave === 5) &&
       r.fighter && typeof r.fighter.class === 'string' && typeof r.fighter.armorP === 'number' &&
       typeof r.fighter.hpEntry === 'number' && typeof r.trickBefore === 'boolean' &&
       typeof r.outcome === 'string' && typeof r.rounds === 'number' && typeof r.mDealt === 'number' &&
-      typeof r.mHpEntry === 'number' && r.mHpEntry > 0 && Array.isArray(r.log) && Array.isArray(r.allies));
+      KA.effectiveMhp(r).method !== 'none' && Array.isArray(r.log) && Array.isArray(r.allies));
   });
-  check('killfail rows have their full shape (before + after + monster HP)', !badKf,
+  check('launched killfail rows have their full shape (before + after + entry HP by some method)', !badKf,
     badKf ? JSON.stringify(badKf).slice(0, 300) : '');
   check('armed run carries trickKnownEnd wave12/wave345 arrays',
     Array.isArray(outLong.trickKnownEnd.wave12) && Array.isArray(outLong.trickKnownEnd.wave345),
