@@ -240,4 +240,55 @@ synthetic corpora, no staged game).
 
 ## CLOSEOUT — run 2026-11-16T0245Z (this run)
 
-[TO FILL AT CLOSEOUT]
+**Panel complete:** 8 sims (4 fresh seeds × 2 arms), all exit 0.
+Analyzer run once per arm, both exit 0.
+
+**Q1:** national **0/8** — informative, NO-GO on the wall, blocker
+named per seed: 135609 LEAD 1/3 seasoned (needs 2 more); 135610
+collapse d87; 135611 collapse d76; 135612 LEAD 2/3 seasoned (needs
+1 more). **Arm B informative** (second disjunct): 0 sortie calls
+with a named held reason on every one of 99 lingerer days — the
+gates, not the policy, are the blocker (`sumHp` 64×, `minHp` 27×,
+`tbfight` 2×, `pantry` 6×). No overturn (no national, no full seat,
+no wave-5 kill). No survival split between arms.
+
+**Q2:** spoken-raise GO (16 talks, 3 properly-answered, 2 counter,
+11 correct holds, 0 not-offered-spoken, 0 defects); vetbar GO (0
+disagreements); trap-line HOLD (1 answered, 0 defects); betrayal
+HOLD (0 defects); nod-loop HOLD (worst 3x); lived-days HOLD (444 vs
+513, −13.5%); lesser HOLD (4/4).
+
+**Q3:** daily-play mime read-only — 25 daily mimes, 0 daily accepts
+proven; lane decision owed, no build claimed.
+
+**Q4:** 6 transcripts + 16 raise talks read in full (arms
+byte-identical). No stutter recurrence; no r137/r218/r216 regressions
+seen. Observations: Lillian's woods secret dangles (d14); Lada's
+`warn_you` want never surfaced (stage 0); Omar's raise correctly held
+4× (nonverbal villager can't voice it).
+
+**Q5:** census in the run note. Spotter thin (d90: Wei 8 XP on
+135609, Tao 2 XP on 135612; 135610/135611 already over).
+**W5-INSTANCE:** 135609 MIXED (9 fights; ling17 + ling18 recur with
+falling HP, 3 fresh full-HP spawns — both shapes live in one
+village); 135610/135611 UNANSWERED (died before wave 5);
+135612 UNANSWERED (0 fights, live entities 21/140 days).
+
+**Fix landed:** goon ask-tag leak — commit `11b938e8d`
+(`[needs-eyes]`), proof test 27/27 green / 23/27 red without the
+fix. Live-panel proof: d128 raise voiced + offered, d130 correctly
+not-offered (substitute `tag=None`), d138 properly voiced by
+Milagros, d139 link forms as Haven subordinate.
+
+**Telemetry:** 2 LOUD lines per arm (fightsTotal −64% 241→87, w4
+−79% 178→38), maxGameDay QUIET (444 vs 468). Investigated: no
+combat/spawn code changed since r215 (dialogue-only); band
+composition + known ±60–85% band noise. **Baseline NOT rolled**
+(241/178/468 stands).
+
+**Gate:** 332 passed, 8 failed — 0 attributable (7 standing/
+pre-existing + 1 flaky 120s timeout). Proof test re-runs 27/27 on
+committed code.
+
+**Rotation:** 3 → 0 (written at closeout). **Merge:** ff-only to
+master; "merged locally, pending ship".
