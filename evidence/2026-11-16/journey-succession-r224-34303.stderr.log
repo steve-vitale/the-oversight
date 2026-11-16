@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Lucas","t":91},{"id":"Javier","t":90},{"id":"Kathleen","t":90},{"id":"Brigitte","t":90}], roster=12
+INH readable=true scripted=true deadItems=10 distinct=10 transferred=1 vanished=2 keptPlants=22 inheritedPlants=0 keptSkills=9 inheritedSkills=8 succTrustPre=91 succTrustPost=60
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","war_cry"] post=["beast_calm","war_cry"]
+DEATH d41 (the expedition, scripted): Isabella -> Lucas | passed=true lin=true mo=true trust=60 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=6 vanished=2 of 10 distinct dead-bearer items
+  CONVO d+3 with Javier (refused=false)
+  CONVO d+3 with Brigitte (refused=false)
+  STRANGER-PROBE d+3 with Miguel (trust=69 refused=false)
+  CONVO d+7 with Brigitte (refused=false)
+  CONVO d+7 with Ella (refused=false)
+  CONVO d+14 with Ella (refused=false)
+  CONVO d+14 with Javier (refused=false)
+  CONVO d+30 with Javier (refused=false)
+  CONVO d+30 with Kathleen (refused=false)
+  CONVO d+45 with Ella (refused=false)
+  CONVO d+45 with Javier (refused=false)
+  CONVO d+53 with Ella (refused=false)
+  CONVO d+53 with Javier (refused=false)
+  CONVO d+64 with Javier (refused=false)
+  CONVO d+64 with Ella (refused=false)
+  NEWCOMER-PROBE d+66 with Sari (arrived d+66, trust=34 refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=8) echo=2 organicBurial={"respects":false,"bury":false} halfRation=5
+
+MEAL-GATE: audited=70 violations=0 noMealDays=3 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":60,"offerLines":35,"codexPlantsDelta":26,"codexSkillsDelta":16,"codexAbilitiesDelta":12,"xpDelta":36,"any":true} pantry 16740->2900
+TRUST-DIALS: office 60->90 (+30, climb) | villageMean 68.7->63 (-5.7, fall) | ge60 8->4 | movers>=5: [{"id":"Finn","from":4,"to":83,"delta":79},{"id":"Tom","from":49,"to":90,"delta":41},{"id":"Farid","from":66,"to":92,"delta":26},{"id":"Ella","from":81,"to":92,"delta":11},{"id":"Kathleen","from":90,"to":55,"delta":-35}]
+DEED-LEDGER: calls=22 summary={"giveFood":{"calls":22,"ok":22,"deltaSum":48,"deltaN":22,"positive":19,"meanDelta":2.18}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=111 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+70) t2=true(deedCalls=22) trustVerdict={"readable":true,"officeMantle":60,"officeLast":90,"officeDelta":30,"officeClass":"climb","villageMantle":68.7,"villageLast":63,"villageDelta":-5.7,"villageClass":"fall","villageGe60Mantle":8,"villageGe60Last":4,"movers":[{"id":"Finn","from":4,"to":83,"delta":79},{"id":"Tom","from":49,"to":90,"delta":41},{"id":"Farid","from":66,"to":92,"delta":26},{"id":"Ella","from":81,"to":92,"delta":11},{"id":"Kathleen","from":90,"to":55,"delta":-35}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":3,"trustMoves":3} callCheck={"dailyMoveDays":6,"callMoveDays":5,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":3,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":6}

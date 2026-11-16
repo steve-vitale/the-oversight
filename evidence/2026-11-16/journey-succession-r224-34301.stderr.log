@@ -1,0 +1,42 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Thao","t":90},{"id":"Wei","t":90},{"id":"Zoltan","t":90},{"id":"Megan","t":88}], roster=12
+INH readable=true scripted=true deadItems=12 distinct=12 transferred=3 vanished=3 keptPlants=15 inheritedPlants=4 keptSkills=5 inheritedSkills=5 succTrustPre=90 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location"] post=["beast_calm","echo_location"]
+DEATH d41 (the expedition, scripted): Earl -> Thao | passed=true lin=true mo=true trust=62 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=8 vanished=3 of 12 distinct dead-bearer items
+  CONVO d+3 with Wei (refused=false)
+  CONVO d+3 with Zoltan (refused=false)
+  STRANGER-PROBE d+3 with Sari (trust=32 refused=false)
+  BOND-CONVO d+3 with Temiloluwa (depth=3 v=96 refused=false)
+  CONVO d+7 with Wei (refused=false)
+  CONVO d+7 with Megan (refused=false)
+  CONVO d+14 with Wei (refused=false)
+  CONVO d+14 with Megan (refused=false)
+  BOND-CONVO d+14 with Temiloluwa (depth=3 v=96 refused=false)
+  CONVO d+30 with Temiloluwa (refused=false)
+  CONVO d+30 with Wei (refused=false)
+  CONVO d+45 with Farid (refused=false)
+  CONVO d+45 with Luis (refused=false)
+  NEWCOMER-PROBE d+48 with Arshdeep (arrived d+48, trust=25 refused=false)
+  CONVO d+53 with Farid (refused=false)
+  CONVO d+53 with Luis (refused=false)
+  CONVO d+64 with Farid (refused=false)
+  CONVO d+64 with Ingrid (refused=false)
+
+FUNERAL: deathBeat=8 recover=1 vouch=1 (eligible=8) echo=5 organicBurial={"respects":false,"bury":false} halfRation=8
+
+MEAL-GATE: audited=70 violations=0 noMealDays=7 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":70,"offerLines":30,"codexPlantsDelta":31,"codexSkillsDelta":25,"codexAbilitiesDelta":14,"xpDelta":33,"any":true} pantry 13811->17273
+TRUST-DIALS: office 62->90 (+28, climb) | villageMean 72.3->83.4 (+11.1, climb) | ge60 8->6 | movers>=5: [{"id":"Ingrid","from":35,"to":90,"delta":55},{"id":"Sari","from":20,"to":58,"delta":38},{"id":"Benoit","from":66,"to":90,"delta":24},{"id":"Luis","from":69,"to":90,"delta":21},{"id":"Farid","from":82,"to":90,"delta":8}]
+DEED-LEDGER: calls=15 summary={"giveFood":{"calls":2,"ok":2,"deltaSum":1,"deltaN":2,"positive":1,"meanDelta":0.5},"teachPlant":{"calls":11,"ok":11,"deltaSum":0,"deltaN":11,"positive":0,"meanDelta":0},"donateToPantry":{"calls":2,"ok":2,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=4 grief-excluded=2
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=111 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=15) trustVerdict={"readable":true,"officeMantle":62,"officeLast":90,"officeDelta":28,"officeClass":"climb","villageMantle":72.3,"villageLast":83.4,"villageDelta":11.1,"villageClass":"climb","villageGe60Mantle":8,"villageGe60Last":6,"movers":[{"id":"Ingrid","from":35,"to":90,"delta":55},{"id":"Sari","from":20,"to":58,"delta":38},{"id":"Benoit","from":66,"to":90,"delta":24},{"id":"Luis","from":69,"to":90,"delta":21},{"id":"Farid","from":82,"to":90,"delta":8}]}
+E6/CALLCHECK: e6={"callMoves":7,"withCensus":7,"chainHandoffs":4,"trustMoves":3} callCheck={"dailyMoveDays":7,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=7, excludedLoot=1))
+E7/R47: e7={"trustMoves":3,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":2,"both":1,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":7,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":7}

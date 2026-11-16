@@ -1,0 +1,41 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Eli","t":91},{"id":"Didier","t":91},{"id":"LaToya","t":90},{"id":"Duc","t":90}], roster=10
+INH readable=true scripted=true deadItems=21 distinct=20 transferred=2 vanished=2 keptPlants=19 inheritedPlants=3 keptSkills=2 inheritedSkills=8 succTrustPre=90 succTrustPost=54
+PARITY readable=true equal=true inherited=[] pre=["night_eyes","lucky_rock","green_whisper"] post=["night_eyes","lucky_rock","green_whisper"]
+DEATH d41 (the expedition, scripted): Emma -> LaToya | passed=true lin=true mo=true trust=54 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=15 vanished=2 of 20 distinct dead-bearer items
+  CONVO d+3 with Eli (refused=false)
+  CONVO d+3 with Duc (refused=false)
+  STRANGER-PROBE d+3 with Ella (trust=9 refused=false)
+  BOND-CONVO d+3 with Mara (depth=1 v=40 refused=false)
+  CONVO d+7 with Eli (refused=false)
+  CONVO d+7 with Duc (refused=false)
+  CONVO d+14 with Eli (refused=false)
+  CONVO d+14 with Mara (refused=false)
+  CONVO d+30 with Mara (refused=false)
+  CONVO d+30 with Duc (refused=false)
+  CONVO d+45 with Mara (refused=false)
+  CONVO d+45 with Duc (refused=false)
+  CONVO d+53 with Aroha (refused=false)
+  CONVO d+53 with Dmitri (refused=false)
+  NEWCOMER-PROBE d+53 with Grace (arrived d+53, trust=43 refused=false)
+  CONVO d+64 with Aroha (refused=false)
+  CONVO d+64 with Dmitri (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=7) echo=3 organicBurial={"respects":false,"bury":false} halfRation=10
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":39,"offerLines":36,"codexPlantsDelta":34,"codexSkillsDelta":16,"codexAbilitiesDelta":9,"xpDelta":153,"any":true} pantry 92963->28755
+TRUST-DIALS: office 54->96 (+42, climb) | villageMean 68->91.9 (+23.9, climb) | ge60 7->8 | movers>=5: [{"id":"Dmitri","from":62,"to":93,"delta":31},{"id":"Yuki","from":61,"to":91,"delta":30},{"id":"Mara","from":67,"to":90,"delta":23},{"id":"Aroha","from":77,"to":96,"delta":19}]
+DEED-LEDGER: calls=47 summary={"donateToPantry":{"calls":23,"ok":23,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":23,"ok":23,"deltaSum":65,"deltaN":23,"positive":22,"meanDelta":2.83},"teachPlant":{"calls":1,"ok":1,"deltaSum":0,"deltaN":1,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=111 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=47) trustVerdict={"readable":true,"officeMantle":54,"officeLast":96,"officeDelta":42,"officeClass":"climb","villageMantle":68,"villageLast":91.9,"villageDelta":23.9,"villageClass":"climb","villageGe60Mantle":7,"villageGe60Last":8,"movers":[{"id":"Dmitri","from":62,"to":93,"delta":31},{"id":"Yuki","from":61,"to":91,"delta":30},{"id":"Mara","from":67,"to":90,"delta":23},{"id":"Aroha","from":77,"to":96,"delta":19}]}
+E6/CALLCHECK: e6={"callMoves":12,"withCensus":12,"chainHandoffs":1,"trustMoves":11} callCheck={"dailyMoveDays":12,"callMoveDays":12,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":11,"soloOffice":6,"soloOfficeDeltas":[2,2,2,2,2,2],"soloBearerDeltaExact":[2,2,2,2,2,2],"singleMoverBearer":3,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":4,"both":7,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":12}
