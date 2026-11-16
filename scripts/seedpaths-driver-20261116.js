@@ -19,6 +19,10 @@
 // string match over it.
 // SEEDPATHS_RECORDER=off skips installing the wraps (determinism
 // leg D2).
+// SEEDLAND EXTENSION (sim-seedland-b): SEEDLAND=1 widens the
+// fieldFight watch to wave >= 4 and adds `origin` to each encounter
+// row (see fightOrigin). Flag unset = seedpaths behavior
+// byte-identical.
 // RECORDER ROWS (per seed, top-level v4encounters / v4gates /
 // v4seeds / v4departs — as dawnbid — plus dawnbidScores /
 // dawnbidDeparts / dawnbidCensus / dawnbidStarts, plus companionPool):
@@ -48,6 +52,14 @@ const RUN = process.env.RUN || 'seedpaths-b';
 const MODE = process.env.MODE || 'control';
 const OUTDIR = process.env.OUTDIR || ('perseed-seedpaths-b-' + MODE);
 const RECORDER_ON = process.env.SEEDPATHS_RECORDER !== 'off';
+// SEEDLAND (sim-seedland-b): when SEEDLAND=1 the fieldFight watch
+// becomes wave >= 4 (wave-5 encounters are recorded in v4encounters
+// alongside wave-4) and each encounter row carries `origin`, read
+// from the call stack at the wrap with the gatelever driver's
+// fightOrigin taxonomy. Flag unset = seedpaths behavior
+// byte-identical: the watch is wave == 4 only, no `origin` field.
+// Both additions are pure reads (no RNG, no game-state writes).
+const SEEDLAND = process.env.SEEDLAND === '1';
 
 if (MODE !== 'control' && MODE !== 'on') { console.error('SEEDPATHS STOP: MODE must be control|on, got ' + JSON.stringify(MODE)); process.exit(2); }
 
@@ -193,6 +205,40 @@ function classifySeedPath(outcome, stack) {
     return 'unknown-fled-no-caller';
   }
   return 'unknown-outcome:' + String(outcome);
+}
+
+// fightOrigin(stackOverride): the fieldFight caller, read from the
+// call stack at the wrap — the same caller taxonomy as the gatelever
+// driver's fightOrigin (`expedition` | `world-tick` | `patrol` |
+// `aid` | `other:<fn>` | `unclassified`), skipping this driver's own
+// frames (and the sim-harness + the game's own fieldFight deed wrap,
+// which is not a caller). Pure read: no RNG, no game-state writes.
+// Only used when SEEDLAND=1. stackOverride (a stack string) exists
+// for the proof test's fixtures; production calls it with no args.
+function fightOrigin(stackOverride) {
+  try {
+    const st = stackOverride != null ? String(stackOverride) : (new Error().stack || '');
+    const lines = st.split('\n').slice(1);
+    for (const ln of lines) {
+      const m = ln.match(/at\s+(?:[A-Za-z_$][\w$]*\.)?([A-Za-z_$][\w$]*)\s+\(([^)]+)\)/) ||
+                ln.match(/at\s+([^\s(]+)\s+\(([^)]+)\)/);
+      if (!m) continue;
+      const fn = m[1] || '';
+      const file = m[2] || '';
+      if (file.indexOf('seedpaths-driver-20261116.js') !== -1) continue;
+      if (file.indexOf('sim-harness') !== -1) continue;
+      if (file.indexOf('src/js/') === -1 && file.indexOf('src\\js\\') === -1) continue;
+      // The game's own fieldFight deed wrap (progression.js) — not a
+      // caller. Keep walking to the real caller below it.
+      if (fn === 'fieldFight') continue;
+      if (fn === 'expeditionMonster') return 'expedition';
+      if (fn === 'resolveWildMonsterEncounter') return 'world-tick';
+      if (fn === 'resolvePatrol') return 'patrol';
+      if (fn === 'aidFight') return 'aid';
+      return 'other:' + fn;
+    }
+    return 'unclassified';
+  } catch (e) { return 'unclassified'; }
 }
 
 // ---- DAWNBID helpers (pure reads; NEVER call villagerHealCheck —
@@ -558,7 +604,7 @@ async function oneRun(seed) {
     if (RECORDER_ON && typeof origFF === 'function') {
       Game.fieldFight = function (vid, mdef, m, opts) {
         const w = waveOf(mdef);
-        const watch = w === 4 && mdef && mdef.id;
+        const watch = (SEEDLAND ? w >= 4 : w === 4) && mdef && mdef.id;
         let row = null;
         if (watch) {
           const lg = lastGateByVid[vid] || null;
@@ -573,6 +619,11 @@ async function oneRun(seed) {
             outcome: null, rounds: null, vTaken: null, mDealt: null,
             calledHelp: null, allyVid: null, fleeHpFrac: null,
             trickBefore: trickKnownOf(mdef.id), trickAfter: null, lines: [], log: [] };
+          // SEEDLAND=1 only: the fight's origin (expedition /
+          // world-tick / patrol / aid / other:<fn> / unclassified),
+          // read from the call stack at the wrap. Flag unset: no
+          // `origin` key at all — seedpaths output byte-identical.
+          if (SEEDLAND) row.origin = fightOrigin();
         }
         let rec = null;
         try { rec = origFF.apply(this, arguments); }
@@ -850,4 +901,4 @@ if (require.main === module) (async function () {
   }
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 
-module.exports = { oneRun: oneRun, loadWave4Ids: loadWave4Ids, planIsWave4: planIsWave4, deriveLaunchBlock: deriveLaunchBlock, poolReplica: poolReplica, classifySeedPath: classifySeedPath, firstCallerFrame: firstCallerFrame, SEED_PATHS: SEED_PATHS };
+module.exports = { oneRun: oneRun, loadWave4Ids: loadWave4Ids, planIsWave4: planIsWave4, deriveLaunchBlock: deriveLaunchBlock, poolReplica: poolReplica, classifySeedPath: classifySeedPath, firstCallerFrame: firstCallerFrame, fightOrigin: fightOrigin, SEED_PATHS: SEED_PATHS, SEEDLAND: SEEDLAND };
