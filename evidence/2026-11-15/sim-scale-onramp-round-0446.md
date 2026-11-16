@@ -221,5 +221,4 @@ the way an expedition meeting does? (4) companion-pool decomposition per
 dawn (Loop B's second-companion-pool item); (5) family-7 program decision
 (still open); (6) headcount-ceiling, wild-Reunion mirror pack, answercourt
 landing decision, competent seat-taking BUILD (all Steve-calls).
-Claim deleted; lock deleted. Evidence: this file (commit to be recorded
-below).
+Claim deleted; lock deleted. Evidence: this file (commit `ba740cf6a`).
