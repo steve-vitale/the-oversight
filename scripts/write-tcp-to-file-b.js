@@ -27,7 +27,11 @@ const RETRY_MAX = 360; // ~90s: the listener runs as a FOREGROUND exec
 // (yield 120s), so its whole run must finish inside the yield. If it
 // cannot write in 90s, it exits 1 and the caller retries the config
 // with a fresh listener (the sim re-runs, ~20-45s).
-const CONNECT_TIMEOUT_MS = 120000;
+const CONNECT_TIMEOUT_MS = 600000; // 10 min: sims run 35s-2min+ under
+// load and the listener must outlive the sim; the 120s default timed
+// out mid-sim (proven 15:06: sim took ~2min, listener gone, send
+// ECONNREFUSED). The listener still exits on first connection end,
+// so a long timeout costs nothing on the happy path.
 
 function sleepMs(ms) {
   try { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); }
@@ -66,6 +70,9 @@ else if (fs.existsSync(file)) {
     sock.on('data', function (c) { chunks.push(c); });
     sock.on('end', function () {
       srv.close();
+      clearTimeout(connTimer); // do not let the idle timer overwrite
+      // the write verdict: without this, a successful write still
+      // exits 1 when the timer fires (proven 14:56).
       const data = Buffer.concat(chunks).toString('utf8');
       if (!validData(data)) {
         console.error('STOP: received data is not a valid per-seed record. NOT written.');
@@ -99,11 +106,11 @@ else if (fs.existsSync(file)) {
         }
       }
     });
-    sock.on('error', function (e) { console.error('STOP: socket error: ' + e.message); clearReady(file); srv.close(); process.exitCode = 1; });
+    sock.on('error', function (e) { console.error('STOP: socket error: ' + e.message); clearReady(file); clearTimeout(connTimer); srv.close(); process.exitCode = 1; });
   });
-  srv.on('error', function (e) { console.error('STOP: listen error: ' + e.message); clearReady(file); process.exitCode = 1; });
+  srv.on('error', function (e) { console.error('STOP: listen error: ' + e.message); clearReady(file); clearTimeout(connTimer); process.exitCode = 1; });
   srv.listen(port, '127.0.0.1', function () { console.error('LISTENING port=' + port); });
-  setTimeout(function () {
+  const connTimer = setTimeout(function () {
     console.error('STOP: no connection in ' + (CONNECT_TIMEOUT_MS / 1000) + 's; exiting.');
     clearReady(file);
     srv.close();
