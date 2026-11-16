@@ -255,7 +255,7 @@ const LEVER_BUILT = LEVER.seed && LEVER.secondCompanion && LEVER.gateCount && LE
     Object.keys(spec).forEach(function (vid) {
       const s = spec[vid];
       people[vid] = { id: vid, name: vid, dead: !!s.dead, _armorP: s.armorP || 0, _weaponB: s.weaponB || 0,
-        items: s.items || [] };
+        items: s.items || [], node: s.node || null };
     });
     return people;
   }
@@ -298,6 +298,16 @@ const LEVER_BUILT = LEVER.seed && LEVER.secondCompanion && LEVER.gateCount && LE
       winPlanSeedFromFight: function () { return null; },
     };
     ctx._exped = exped;
+    // Fake dawn-commitment + plan accessors the brain mirror calls on
+    // `this` (real Game methods in play; the fake reads the same state).
+    ctx.vbrainCommit = function (vid) {
+      try { var c = ctx.state.village.vbrain.commit; return (c && c[vid]) || null; } catch (e) { return null; }
+    };
+    ctx.winPlanOf = function (vid) {
+      var v = ctx.state.village;
+      if (!v.winPlan[vid]) v.winPlan[vid] = { stage: 'gear', target: null, node: null, party: [], sinceDay: 0, holdSinceDay: -1 };
+      return v.winPlan[vid];
+    };
     return ctx;
   }
 
