@@ -423,6 +423,10 @@ async function oneRun(seed, policyName) {
   const w5gates = [];
   const w5seeds = [];
   const w5departs = [];
+  // AID-GATE (sim-aidgate-b): door-consult rows (winPlanDoorGate) and
+  // the door say lines (SEEK / defense markers) — additive only.
+  const w5doors = [];
+  const w5doorLines = [];
   const lastGateByVid = {};
 
   // ---- GATE-REACHABILITY RECORDER (sim-gatereach-b) ----
@@ -531,6 +535,36 @@ async function oneRun(seed, policyName) {
       };
     } else errors.push('winPlanFightGate-wrap: not a function');
   } catch (e) { errors.push('winPlanFightGate-wrap-install: ' + String(e.message).slice(0, 80)); }
+  // AID-GATE (sim-aidgate-b): record door consults (winPlanDoorGate,
+  // wave 5 only — the method itself returns null without consulting
+  // for other waves). Same row shape as the gate rows, plus no plan
+  // fields: the door consult is plan-free by construction.
+  try {
+    const origDoor = Game.winPlanDoorGate;
+    if (typeof origDoor === 'function') {
+      Game.winPlanDoorGate = function (vid, mdef) {
+        const ret = origDoor.apply(this, arguments);
+        try {
+          const w = w5waveOf(mdef);
+          if (w === 5 && mdef && mdef.id) {
+            let party = [vid];
+            try { const sensed = (typeof this.villagerFightAllies === 'function') ? (this.villagerFightAllies(vid) || []) : []; for (const s of sensed) if (party.indexOf(s) === -1) party.push(s); } catch (e) {}
+            let allArmed = true, allArmored = true;
+            const gear = {};
+            for (const p of party) { const g = gearOfReplica(this, p); gear[p] = { armed: g.armed, armored: g.armored, armorP: g.armorP }; if (!g.armed) allArmed = false; if (!g.armored) allArmored = false; }
+            w5doors.push({ day: gday(Game), vid: vid, mid: mdef.id, wave: w,
+              result: ret ? (ret.avoid ? 'avoid' : (ret.seek ? 'seek' : 'other')) : 'null',
+              reason: (ret && ret.reason) || null, partySize: party.length, party: party.slice(),
+              allArmed: allArmed, allArmored: allArmored, gear: gear,
+              trickKnown: trickKnownOf(mdef.id) });
+          }
+        } catch (e) { errors.push('w5door-log: ' + String(e.message).slice(0, 80)); }
+        return ret;
+      };
+    } // else: no door method — the aid-gate lever was reverted
+    // (sim-aidgate-b pilot NO-GO), so absence is the expected state
+    // and records nothing; the wrap must not cry error over it.
+  } catch (e) { errors.push('winPlanDoorGate-wrap-install: ' + String(e.message).slice(0, 80)); }
   try {
     const origSeed = Game.winPlanSeedFromFight;
     if (typeof origSeed === 'function') {
@@ -660,6 +694,12 @@ async function oneRun(seed, policyName) {
             alliesN: (opts && opts.allies) | 0,
             allyVids: aVids,
             allyFromStart: !!(opts && opts.allyFromStart),
+            // AID-GATE (sim-aidgate-b): the door verdict carried into
+            // the fight ('seek' | 'defense' | null when consulted,
+            // 'not-consulted' otherwise) + the per-fight trick opener.
+            aidGate: (opts && ('aidGate' in opts)) ? opts.aidGate : 'not-consulted',
+            trickOpen: !!(opts && opts.trickOpen),
+            trickLog: [],
             gate: lg ? { result: lg.result, reason: lg.reason,
               partySize: lg.partySize, allArmed: lg.allArmed,
               allArmored: lg.allArmored, trickKnown: lg.trickKnown,
@@ -682,6 +722,7 @@ async function oneRun(seed, policyName) {
             row.allyVid = rec.allyVid || null;
             row.fleeHpFrac = (rec.fleeHpFrac != null ? +rec.fleeHpFrac.toFixed(2) : null);
             row.trickAfter = trickKnownOf(mdef.id);
+            try { row.trickLog = (rec.trickLog || []).slice(); } catch (e) { row.trickLog = []; }
             try { row.log = (rec.log || []).slice(0, 20).map(function (s) { return String(s).slice(0, 400); }); } catch (e) { row.log = []; }
             w5encounters.push(row);
           }
@@ -1110,6 +1151,12 @@ async function oneRun(seed, policyName) {
       try {
         const arg = arguments.length ? arguments[0] : null;
         if (typeof arg === 'string') cap.push(gday(Game), String(arg));
+        // AID-GATE (sim-aidgate-b): the door say lines are said BEFORE
+        // fieldFight, so the encounter row's lines[] never sees them —
+        // capture them here, by their stable markers.
+        if (typeof arg === 'string' && /opens with the trick|cannot walk away from their own door/.test(String(arg))) {
+          w5doorLines.push({ day: gday(Game), line: String(arg).slice(0, 400) });
+        }
         // PRODUCERGATE RECORDER: lines said during a wave-4+ field
         // fight belong to that encounter (e.g. COUNTER LEARNED beats).
         if (typeof arg === 'string' && currentW5Fight && currentW5Fight.lines.length < 20) {
@@ -1210,6 +1257,8 @@ async function oneRun(seed, policyName) {
     cascade: { sessions: cascadeSessions, ends: cascadeEnds, deaths: cascadeDeaths, transitions: cascadeTransitions },
     // PRODUCERGATE RECORDER output (per-encounter instrument).
     w5encounters: w5encounters, w5gates: w5gates, w5seeds: w5seeds, w5departs: w5departs,
+    // AID-GATE (sim-aidgate-b): door-consult rows + door say lines.
+    w5doors: w5doors, w5doorLines: w5doorLines,
     grLaunches: grLaunches,
     w5ids: loadWave5Ids(),
     wpEnd: (function () {
@@ -1285,6 +1334,8 @@ if (require.main === module) (async function () {
       cascadeDeaths: (out.cascade && out.cascade.deaths || []).length,
       w5encounters: (out.w5encounters || []).length,
       w5gates: (out.w5gates || []).length,
+      w5doors: (out.w5doors || []).length,
+      w5doorLines: (out.w5doorLines || []).length,
       grLaunches: (out.grLaunches || []).length,
       w5seeds: (out.w5seeds || []).length,
       w5departs: (out.w5departs || []).length,

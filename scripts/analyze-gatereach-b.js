@@ -179,6 +179,9 @@ function analyzeLeg(dir, w5set) {
   const deathsAll = [];
   const wpEnds = [];
   const brainEnds = [];
+  // AID-GATE (sim-aidgate-b): door-consult rows + door say lines.
+  const doors = [];
+  const doorLines = [];
   let parseErrors = 0;
   let endDay = 0;
   for (const f of files) {
@@ -195,11 +198,25 @@ function analyzeLeg(dir, w5set) {
     // log's killer field misses (producergate §9.1).
     rec0.fieldDeathsW5 = (d.w5encounters || []).filter(function (e) { return e.wave === 5 && e.outcome === 'vDie'; }).length;
     rec0.fieldDeathsW4 = (d.w5encounters || []).filter(function (e) { return e.wave === 4 && e.outcome === 'vDie'; }).length;
+    // AID-GATE (sim-aidgate-b): same-day/same-beast 'villager combat'
+    // deaths for the kill:death bar — a deaths row naming the killed
+    // beast (kind monster, cause 'villager combat') on the same day
+    // as a field kill of that beast on this seed. Corpus check on
+    // the gatereach band: the only such rows ARE the field kills'
+    // own death records (2/2), so the term equals the field-kill
+    // count there; the bar is judged as written.
+    const fk5 = (d.w5encounters || []).filter(function (e) { return e.wave === 5 && e.outcome === 'vKill'; });
+    rec0.vcDeathsW5 = (d.deaths || []).filter(function (x) {
+      if (x.kind !== 'monster' || x.cause !== 'villager combat' || !w5set.has(x.who)) return false;
+      return fk5.some(function (k) { return k.day === x.day && k.mid === x.who; });
+    }).length;
     for (const e of (d.w5encounters || [])) encounters.push(Object.assign({ seed: d.seed }, e));
     for (const g of (d.w5gates || [])) gates.push(Object.assign({ seed: d.seed }, g));
     for (const s of (d.w5seeds || [])) seeds.push(Object.assign({ seed: d.seed }, s));
     for (const p of (d.w5departs || [])) departs.push(Object.assign({ seed: d.seed }, p));
     for (const l of (d.grLaunches || [])) launches.push(Object.assign({ seed: d.seed }, l));
+    for (const dd of (d.w5doors || [])) doors.push(Object.assign({ seed: d.seed }, dd));
+    for (const dl of (d.w5doorLines || [])) doorLines.push(Object.assign({ seed: d.seed }, dl));
     for (const dd of (d.deaths || [])) deathsAll.push(Object.assign({ seed: d.seed }, dd));
     if (d.wpEnd) wpEnds.push(Object.assign({ seed: d.seed }, d.wpEnd));
     if (d.brainEnd) brainEnds.push(Object.assign({ seed: d.seed }, d.brainEnd));
@@ -275,6 +292,37 @@ function analyzeLeg(dir, w5set) {
   for (const g of w5gates) { if (g.trickKnown) trickKnownAtGate.known += 1; else trickKnownAtGate.unknown += 1; }
   const gatePlanStages = {};
   for (const g of w5gates) gatePlanStages[g.planStage || 'no-plan'] = (gatePlanStages[g.planStage || 'no-plan'] || 0) + 1;
+
+  // --- door consults (AID-GATE): result + reason, wave-5 aid fights
+  // split by aidGate verdict, opener firings on SEEK fights ---
+  const doorByResult = {};
+  const doorByReason = {};
+  const doorPartySizes = {};
+  for (const g of doors) {
+    doorByResult[g.result || '?'] = (doorByResult[g.result || '?'] || 0) + 1;
+    doorByReason[g.reason || 'null'] = (doorByReason[g.reason || 'null'] || 0) + 1;
+    doorPartySizes[g.partySize] = (doorPartySizes[g.partySize] || 0) + 1;
+  }
+  // Opener trick types as they appear in trickLog (first entry):
+  // argue / continuity / offscript / inefficient are types;
+  // reunion-novel is a wait, logged as 'wait:reunion-novel'.
+  const OPENER_TYPES = ['argue', 'continuity', 'offscript', 'inefficient', 'wait:reunion-novel'];
+  const aidSplit = {};
+  let openerFired = 0;
+  for (const e of w5enc) {
+    if (e.origin !== 'aid') continue;
+    const k = e.aidGate || 'not-consulted';
+    const b = aidSplit[k] || (aidSplit[k] = { n: 0, vKill: 0, vFlee: 0, mFlee: 0, vDie: 0, evade: 0, other: 0, trickOpen: 0 });
+    b.n += 1;
+    if (e.outcome === 'vKill') b.vKill += 1;
+    else if (e.outcome === 'vFlee') b.vFlee += 1;
+    else if (e.outcome === 'mFlee') b.mFlee += 1;
+    else if (e.outcome === 'vDie') b.vDie += 1;
+    else if (e.outcome === 'evade') b.evade += 1;
+    else b.other += 1;
+    if (e.trickOpen) b.trickOpen += 1;
+    if (e.trickOpen && (e.trickLog || []).length && OPENER_TYPES.indexOf(e.trickLog[0]) !== -1) openerFired += 1;
+  }
 
   // --- launches: holder rows are launches; join to gate + fights ---
   const holderLaunches = launches.filter(function (l) { return l.role === 'holder'; });
@@ -367,6 +415,14 @@ function analyzeLeg(dir, w5set) {
   const fieldDeathsW5 = perSeed.reduce(function (a, s) { return a + (s.fieldDeathsW5 || 0); }, 0);
   const fieldDeathsW4 = perSeed.reduce(function (a, s) { return a + (s.fieldDeathsW4 || 0); }, 0);
   const deathLogW5 = unlocked.reduce(function (a, s) { return a + (s.deathsW5 || 0); }, 0);
+  // AID-GATE (sim-aidgate-b): the kill:death bar's death term and the
+  // per-unlocked rates the GO bar judges. vcDeathsW5 is the
+  // same-day/same-beast 'villager combat' count (see per-seed above).
+  const vcDeathsW5 = perSeed.reduce(function (a, s) { return a + (s.vcDeathsW5 || 0); }, 0);
+  const killDeathDenom = fieldDeathsW5 + vcDeathsW5;
+  const killDeathAidgate = killDeathDenom > 0 ? +(totFieldKills / killDeathDenom).toFixed(2) : null;
+  const tbKillsPerUnlocked = unlocked.length ? +(totTbKills / unlocked.length).toFixed(2) : null;
+  const facedNotKilledShare = unlocked.length ? +(classes['FACED-NOT-KILLED'] / unlocked.length).toFixed(2) : null;
   const instrumentErrors = perSeed.reduce(function (a, s) { return a + s.errors.length; }, 0) + parseErrors;
   const unclassifiedFights = w5enc.length - w5classified;
   const launchUnclassifiedShare = launchedHolders.length ? +(launchUnknown / launchedHolders.length).toFixed(3) : null;
@@ -377,6 +433,9 @@ function analyzeLeg(dir, w5set) {
     unlocked: unlocked.length, classes: classes,
     fieldKills: totFieldKills, tbKills: totTbKills, totalKills: totKills,
     fieldKillsPerUnlocked: unlocked.length ? +(totFieldKills / unlocked.length).toFixed(2) : null,
+    tbKillsPerUnlocked: tbKillsPerUnlocked,
+    facedNotKilledShare: facedNotKilledShare,
+    vcDeathsW5: vcDeathsW5, killDeathAidgate: killDeathAidgate,
     // Field deaths from encounter rows (the honest count) vs the death
     // log's killer-field count (the biased one) — the contrast the
     // next lever's kill:death bar needs.
@@ -406,6 +465,9 @@ function analyzeLeg(dir, w5set) {
     encounters: { w5: w5sum, w4: w4sum, w5byMode: w5byMode },
     gates: { w5n: w5gates.length, byResult: gateByResult, byFail: gateByFail,
       partySizes: gatePartySizes, trickKnown: trickKnownAtGate, planStages: gatePlanStages },
+    doors: { n: doors.length, byResult: doorByResult, byReason: doorByReason,
+      partySizes: doorPartySizes, lines: doorLines.length, rows: doors },
+    aidGate: { split: aidSplit, openerFired: openerFired, doorLines: doorLines },
     seeds: { w5n: w5seedRows.length, byOutcome: seedByOutcome },
     launchesDetail: { holderLaunches: holderLaunches, episodes: ep.episodes },
     winplan: { sum: wpSum, byStage: wpByStage },
@@ -446,17 +508,74 @@ const isMain = require.main === module;
 if (isMain) {
   const dir = process.argv[2];
   if (!dir) {
-    console.error('usage: node scripts/analyze-gatereach-b.js <dir>');
+    console.error('usage: node scripts/analyze-gatereach-b.js <dir> [<control-dir> <lever-dir> for aidgate compare]');
     process.exit(2);
   }
   const monstersPath = path.join(__dirname, '..', 'src', 'data', 'monsters.json');
   const w5set = new Set(w5k.loadWave5Ids(monstersPath));
-  const out = analyzeLeg(dir, w5set);
-  out.judgment = judge(out);
-  console.log(JSON.stringify(out, null, 2));
+  if (process.argv[3]) {
+    // AID-GATE compare: argv[2] = control dir, argv[3] = lever dir.
+    const control = analyzeLeg(dir, w5set);
+    const lever = analyzeLeg(process.argv[3], w5set);
+    const out = { control: control, lever: lever, aidgate: judgeAidgate(control.pooled, lever.pooled) };
+    console.log(JSON.stringify(out, null, 2));
+  } else {
+    const out = analyzeLeg(dir, w5set);
+    out.judgment = judge(out);
+    console.log(JSON.stringify(out, null, 2));
+  }
 }
 
-module.exports = { analyzeLeg: analyzeLeg, judge: judge, med: med,
+// judgeAidgate(controlPooled, leverPooled) — the frozen aidgate GO bar
+// (sim-aidgate-b prereg, copied exactly from gatereach §11). GO iff ALL
+// hold: (1) lever wave-5 FIELD kills per unlocked ≥ 1.00; (2) lever TB
+// kills per unlocked ≥ 0.5× control; (3) lever kill:death ≥ 0.92 where
+// deaths = encounter-row vDie + same-day/same-beast 'villager combat'
+// deaths (pooled killDeathAidgate; null — e.g. zero denominator —
+// fails); (4) lever FACED-NOT-KILLED share among unlocked ≤ 0.20;
+// (5) lever starvation ≤ control + 2 AND lever median survival ≥
+// 0.8× control. The instrument must also be clean on BOTH legs
+// (8/8 files, 0 parse errors, 0 instrument errors, classified share
+// ≥ 0.90) — a GO on a broken instrument is not a GO.
+function judgeAidgate(control, lever) {
+  function num(x) { return typeof x === 'number' && isFinite(x) ? x : null; }
+  const b1v = num(lever.fieldKillsPerUnlocked);
+  const b1 = b1v !== null && b1v >= 1.00;
+  const b2c = num(control.tbKillsPerUnlocked);
+  const b2v = num(lever.tbKillsPerUnlocked);
+  const b2 = b2c !== null && b2v !== null && b2v >= 0.5 * b2c;
+  const b3v = num(lever.killDeathAidgate);
+  const b3 = b3v !== null && b3v >= 0.92;
+  const b4v = num(lever.facedNotKilledShare);
+  const b4 = b4v !== null && b4v <= 0.20;
+  const b5starv = num(lever.starvation) !== null && num(control.starvation) !== null &&
+    lever.starvation <= control.starvation + 2;
+  const b5surv = num(lever.medianSurvivalAll) !== null && num(control.medianSurvivalAll) !== null &&
+    lever.medianSurvivalAll >= 0.8 * control.medianSurvivalAll;
+  const b5 = b5starv && b5surv;
+  const inst = control.instrumentErrors === 0 && lever.instrumentErrors === 0 &&
+    control.seeds === 8 && lever.seeds === 8 && control.files === 8 && lever.files === 8 &&
+    control.parseErrors === 0 && lever.parseErrors === 0 &&
+    typeof control.classifiedShare === 'number' && control.classifiedShare >= 0.90 &&
+    typeof lever.classifiedShare === 'number' && lever.classifiedShare >= 0.90;
+  const go = b1 && b2 && b3 && b4 && b5 && inst;
+  return {
+    fieldKillsPerUnlocked: { value: b1v, bar: '>= 1.00', pass: b1 },
+    tbKillsPerUnlocked: { value: b2v, control: b2c, bar: '>= 0.5x control', pass: b2 },
+    killDeath: { value: b3v, bar: '>= 0.92', pass: b3 },
+    facedNotKilledShare: { value: b4v, bar: '<= 0.20', pass: b4 },
+    costs: { starvation: { value: lever.starvation, control: control.starvation, bar: '<= control + 2', pass: b5starv },
+      medianSurvival: { value: lever.medianSurvivalAll, control: control.medianSurvivalAll, bar: '>= 0.8x control', pass: b5surv },
+      pass: b5 },
+    instrument: { controlErrors: control.instrumentErrors, leverErrors: lever.instrumentErrors,
+      controlSeeds: control.seeds, leverSeeds: lever.seeds,
+      controlClassified: control.classifiedShare, leverClassified: lever.classifiedShare,
+      pass: inst },
+    verdict: go ? 'GO' : 'NO-GO',
+  };
+}
+
+module.exports = { analyzeLeg: analyzeLeg, judge: judge, judgeAidgate: judgeAidgate, med: med,
   isStarvation: isStarvation, classifyStartMode: classifyStartMode,
   gateFailCondition: gateFailCondition, buildWaitEpisodes: buildWaitEpisodes,
   isSecondCompanionWait: isSecondCompanionWait };
