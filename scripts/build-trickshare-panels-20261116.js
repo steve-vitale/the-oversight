@@ -1,0 +1,118 @@
+// build-trickshare-panels-20261116.js — §15 balanced-panel compare
+// for arm sim-trickshare-a. Copied from scripts/build-killfail-panels-20261116.js
+// (panel-building logic UNCHANGED); only leg dirs, file names, seeds,
+// pseudo-policy, origin, and observer digest change. Builds panels in
+// the scripts/balance-panel.js schema from the trickshare per-seed
+// JSONs: before=control leg, after=armed leg (TRICKSHARE=1) — the SAME
+// policy (competent) on IDENTICAL seeds, so the compare is a lever
+// contrast: any material signal is a lever effect (or a cost).
+// PAIRED seeds on the same tip. Case identity is the seed
+// (pseudo-policy 'trickshare-a' in both panels; the corpus label lives
+// in row.corpus), so the scorecard reads OFF->ON deltas per contract
+// metric on paired seeds. The panel is the instrument; the
+// pre-registered bars are the judge.
+// Usage: node scripts/build-trickshare-panels-20261116.js [--out evidence/2026-11-16/trickshare-a-panel]
+//   [--before evidence/2026-11-16/perseed-trickshare-a-control] [--after evidence/2026-11-16/perseed-trickshare-a-armed]
+//   [--seeds 102601,102602,...,102608]
+//   Reads <dir>/trickshare-a-s<seed>-trickshare-a-competent.json per leg.
+'use strict';
+const fs = require('fs');
+const path = require('path');
+const zlib = require('zlib');
+const crypto = require('crypto');
+
+const REPO = path.join(__dirname, '..');
+function argvVal(flag, dflt) {
+  return process.argv.includes(flag) ? process.argv[process.argv.indexOf(flag) + 1] : dflt;
+}
+const BEFORE_DIR = path.join(REPO, argvVal('--before', 'evidence/2026-11-16/perseed-trickshare-a-control'));
+const AFTER_DIR = path.join(REPO, argvVal('--after', 'evidence/2026-11-16/perseed-trickshare-a-armed'));
+const OUT_PREFIX = argvVal('--out', path.join(REPO, 'evidence', '2026-11-16', 'trickshare-a-panel'));
+
+const contractDigest = crypto.createHash('sha256')
+  .update(fs.readFileSync(path.join(REPO, 'scripts', 'balance-metrics.json'))).digest('hex');
+const contract = require('./balance-metrics.json');
+
+const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : null)
+  || (argvVal('--seeds', null) ? argvVal('--seeds', '').split(',').map(function (s) { return parseInt(s.trim(), 10); }) : null)
+  || [102601, 102602, 102603, 102604, 102605, 102606, 102607, 102608];
+const POLICIES = ['trickshare-a']; // pseudo-policy: case identity is the seed (paired design)
+const DAYS = 150;
+const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
+
+function load(dir, leg) {
+  const rows = [];
+  for (const seed of SEEDS) {
+    // Both legs ran LEG=competent, so the filename suffix is
+    // the policy on both sides; the DIR is what distinguishes legs.
+    const fp = path.join(dir, 'trickshare-a-s' + seed + '-trickshare-a-competent.json');
+    if (!fs.existsSync(fp)) throw new Error('missing per-seed file: ' + fp);
+    rows.push({ seed: seed, run: leg, r: JSON.parse(fs.readFileSync(fp, 'utf8')) });
+  }
+  return rows;
+}
+
+function metricsFor(r) {
+  const m = {};
+  for (const spec of contract.metrics) m[spec.id] = null;
+  m.won = r.won ? 1 : 0;
+  m.national = (RANK_ORDER[r.scaleRank] || 0) >= 2 ? 1 : 0;
+  m.survival30 = (r.gameDays || 0) >= 30 ? 1 : 0;
+  m.survival60 = (r.gameDays || 0) >= 60 ? 1 : 0;
+  m.communityLost = ['village-lost', 'village-dead', 'pop-zero'].includes(r.endReason) ? 1 : 0;
+  m.villageDeaths = (r.deaths || []).length;
+  m.villageDeaths100Days = ((r.gameDays || 0) > 0) ? m.villageDeaths * 100 / r.gameDays : null;
+  return m;
+}
+
+function buildPanel(rows) {
+  return {
+    schemaVersion: 1,
+    observerDigest: 'trickshare-a-instrument-v1',
+    contractDigest: contractDigest,
+    sources: {},
+    options: {
+      days: DAYS, policies: POLICIES, seeds: SEEDS, region: null,
+      origin: 'sim-trickshare-a',
+      flags: {},
+      nodeVersion: process.version,
+    },
+    rows: rows.map(function (x) {
+      return {
+        row: { policy: 'trickshare-a', seed: x.seed, corpus: x.run },
+        metrics: metricsFor(x.r),
+        warnings: [], observerErrors: [], gear: { errors: [] },
+      };
+    }),
+    validity: {
+      sourcesStable: true,
+      neutrality: POLICIES.map(function (p) { return { policy: p, seed: SEEDS[0], match: true, warnings: 0 }; }),
+    },
+  };
+}
+
+function main() {
+  const beforeRows = load(BEFORE_DIR, 'main');
+  const afterRows = load(AFTER_DIR, 'replication');
+  const beforePath = OUT_PREFIX + '-before.json.gz';
+  const afterPath = OUT_PREFIX + '-after.json.gz';
+  fs.writeFileSync(beforePath, zlib.gzipSync(JSON.stringify(buildPanel(beforeRows)) + '\n'));
+  fs.writeFileSync(afterPath, zlib.gzipSync(JSON.stringify(buildPanel(afterRows)) + '\n'));
+  const score = require('./lib/balance-scorecard');
+  const read = function (f) { return JSON.parse(zlib.gunzipSync(fs.readFileSync(f), 'utf8')); };
+  const report = score.comparePanels(read(beforePath), read(afterPath));
+  fs.writeFileSync(OUT_PREFIX + '.json', JSON.stringify(report, null, 2) + '\n');
+  fs.writeFileSync(OUT_PREFIX + '.md', score.markdown(report));
+  console.log('compare trickshare-a-control->trickshare-a-lever: decision=' + report.decision);
+  for (const p of report.policies || []) {
+    console.log('  policy ' + p.policy + ': ' + p.decision + ' (' + p.cases + ' cases)');
+    for (const m of p.metrics || []) {
+      if (!['descriptive', 'no_material_signal', 'not_observed', 'insufficient'].includes(m.status)) {
+        console.log('    ' + m.id + ': ' + m.status + ' delta=' + m.delta + ' ci=[' + m.interval95 + ']');
+      }
+    }
+  }
+}
+
+if (require.main === module) main();
+module.exports = { buildPanel: buildPanel, metricsFor: metricsFor };
