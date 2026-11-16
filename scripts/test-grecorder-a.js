@@ -19,6 +19,11 @@
 //       - w4/w5 kill counts and maxWave agree with the vetfirst-side
 //         log-derived counts exactly;
 //       - zero instrument errors on both sides.
+//   §2  analyzer (synthetic G file, no sims): the v4 classification
+//       branches the fresh corpus did not exercise — a mag-2 drop
+//       classified from its 2 veteran deaths (a non-veteran death in
+//       the window ignored), a NON-DEATH-EXIT, an AMBIGUOUS residue,
+//       plus the old-format refusal.
 // Runner sources are generated into /tmp (pid-unique) and spawned as
 // child processes; the judged corpora are written by the driver itself
 // into evidence/, never by this test.
@@ -137,6 +142,59 @@ function logDerivedCounts(daily) {
   // Final snapshot's waveKillLog copy = end-of-run log.
   const last = daily && daily.length ? daily[daily.length - 1] : null;
   return (last && Array.isArray(last.waveKillLog)) ? last.waveKillLog : [];
+}
+
+// ---------------- §2 analyzer: synthetic G file ----------------
+// Fast, no sims: exercises the v4 classification branches the fresh
+// corpus did not (a multi-veteran drop, a NON-DEATH-EXIT, an
+// AMBIGUOUS residue) plus the old-format refusal. Run standalone with
+// ONLY_ANALYZER=1, or as part of the full proof.
+(function () {
+  if (process.env.SKIP_ANALYZER) return;
+  const { loadMonsterWaves, analyzeGFile, poolLeg } = require(path.join(REPO, 'scripts', 'vetattrition-analyze-grecorder-20261115'));
+  const monsters = loadMonsterWaves(path.join(REPO, 'src', 'data', 'monsters.json'));
+  function S(d, vet5, w5) { return { d: d, vet5: vet5, w5: w5 || 0 }; }
+  function D(day, vid, cause, veteran, w4) {
+    return { day: day, kind: 'villager', who: vid, vid: vid, name: vid, cause: cause, player: false, veteran: veteran, w4kills: w4, w5kills: 0, maxWave: veteran ? 4 : null };
+  }
+  const g = {
+    seed: 1, days: 80, endReason: 'survived', maxWave: 5, won: false,
+    waveKills: { 4: 5, 5: 0 },
+    events: [{ kind: 'unlockedWave', wave: 5, day: 10 }],
+    series: [S(1, 0), S(10, 2), S(15, 2, 1), S(20, 0), S(30, 1), S(40, 0), S(50, 2), S(60, 1), S(70, 2), S(80, 1)],
+    deaths: [
+      D(15, 'a', 'monster', true, 1), D(18, 'b', 'the wild', true, 2), D(19, 'c', 'the wild', false, 0),
+      D(35, 'd', 'the wild', false, 0),
+      D(55, 'e', 'the wild', true, 1), D(58, 'f', 'the wild', true, 1),
+      D(75, 'g', 'the wild', true, 1),
+    ],
+    tableChoices: [], seatTakes: [],
+  };
+  // First series row showing a wave-5 facing is day 15, so the
+  // monster-cause veteran death on day 15 is W5-ERA.
+  const out = analyzeGFile(g, monsters);
+  ok(out.dropsTotal === 4, '§2 four drops found', 'got ' + out.dropsTotal);
+  ok(out.errors.length === 0, '§2 no instrument errors', JSON.stringify(out.errors));
+  const byDay = {};
+  out.drops.forEach(function (x) { byDay[x.day] = x; });
+  ok(byDay[20] && byDay[20].causeClasses && eq(byDay[20].causeClasses.slice().sort(), ['W5-ERA', 'WILD']), '§2 mag-2 drop classified from its 2 veteran deaths (non-veteran ignored)', JSON.stringify(byDay[20]));
+  ok(byDay[20] && byDay[20].veteranDeaths.length === 2, '§2 mag-2 drop lists both veteran deaths');
+  ok(byDay[40] && byDay[40].causeClass === 'NON-DEATH-EXIT', '§2 drop with no veteran death is NON-DEATH-EXIT', JSON.stringify(byDay[40]));
+  ok(byDay[60] && byDay[60].causeClass === 'AMBIGUOUS' && byDay[60].veteranDeaths.length === 2, '§2 mag-1 drop with 2 veteran deaths is AMBIGUOUS', JSON.stringify(byDay[60]));
+  ok(byDay[80] && byDay[80].causeClass === 'WILD' && byDay[80].veteranDeaths[0].vid === 'g', '§2 mag-1 drop classified to its single veteran death');
+  ok(out.classified === 2 && out.unclassified === 2, '§2 classified 2/4', JSON.stringify({ c: out.classified, u: out.unclassified }));
+  const pooled = poolLeg([out]);
+  ok(pooled.classifiedShare === 0.5, '§2 pooled share 0.5', 'got ' + pooled.classifiedShare);
+  const old = JSON.parse(JSON.stringify(g));
+  delete old.deaths[0].veteran; delete old.deaths[0].vid; delete old.deaths[0].w4kills;
+  const oldOut = analyzeGFile(old, monsters);
+  ok(oldOut.errors.some(function (e) { return String(e).indexOf('old-format-deaths') === 0; }), '§2 old-format corpus flagged, never scored', JSON.stringify(oldOut.errors));
+})();
+
+if (process.env.ONLY_ANALYZER) {
+  console.log('test-grecorder-a (§2 analyzer only): ' + pass + ' passed, ' + fail + ' failed');
+  if (fail) { console.error('FAILURES:\n' + failures.join('\n')); process.exitCode = 1; }
+  return;
 }
 
 const SMOKE_SEEDS = [100541, 100542];
