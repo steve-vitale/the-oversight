@@ -325,3 +325,29 @@ roll.
   splits refused vs fought authoritatively; if the outcomes log
   proves clean, the next run may re-admit a refused-split fight
   metric to the telemetry check.
+
+## Metric review — closeout (filled 2026-11-16, adoption)
+
+- Q1: NO-GO, honestly judged. The muster completed twice, slain 0, so
+  the rule's NO-GO branch fired. The run note's metric review stands:
+  the GO branch should have counted ENGINE-slain titans only (the
+  outcomes log), since a field mauling (135613's Herald, killed by
+  Nino Kapanadze d114) does not count as slain and nearly fooled the
+  rule. Next prereg says so explicitly.
+- Q2: guards held as written. Lived-days B 556 vs A 559 (−0.5%, inside
+  ±25%); starvation 0 = 0; no B-only collapse (A 135614 collapsed,
+  B survived). The committed-blade death (1, a contest) is inside the
+  cost bar as written but under-counts the muster's trust/pantry cost —
+  a future cost bar should include muster hunger days and trust
+  movement while it stands.
+- Q3/Q4/Q5: as written. Spotter thin (1–2 villagers with any spotter
+  XP at d90/end). W5-INSTANCE: wave-5 entities on B 135614 (5/day max,
+  17 days) and B 135616 (2/day, 10 days); one wave-5 kill, B 135616
+  d136, scholar Ursula Weber vs the timeslot — first wave-5 kill on
+  this band, NOT a lever effect (the muster never called on 135616).
+- Telemetry: maxGameDay only per arm vs scale.json (468) — quiet both
+  arms. Baseline NOT rolled.
+- The ladder "fights" count note stands: refused meetings are
+  conflated with real fights in the ladder count; the analyzer's
+  MUSTER section reads the outcomes log, which splits them
+  authoritatively. Next run may re-admit a refused-split fight metric.
