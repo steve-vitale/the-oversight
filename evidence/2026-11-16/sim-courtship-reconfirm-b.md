@@ -44,7 +44,7 @@ blobs); repaired with `git ls-tree -r HEAD | git update-index --add
 | G1 instrument validity | full series + shape roll + daily opinion + daily pos + pilgrim state on all 32; 0 errors; every staged beat classified; UNCLASSIFIED ≤2 band-wide; pilgrim rollup present | 32/32 complete, 0 errors, UNCLASSIFIED 0, pilgrim rollup on every armed record | **GO** |
 | G2 the lever | covenant staged ≥6/16; every staged beat answered 'pact' and sat (death-day beats excluded); zero-move pilgrim-days band-wide ≤16 AND per-seed ≤8 on every seed; stale drops band-wide ≤8 | staged **14/16**; 16/16 beats answered 'pact' and sat (no beat staged on a death day — the exclusion is moot); zero-move **0** band-wide, **0 on every seed**; stale drops **0** | **GO** |
 | G3 lever-only | zero `src/js`; proof tests green at recorded baselines (REVISED: covenant 40/40, onlylead2 26/26) | 0 `src/js` files in the branch diff; test-courtship-rework2-b **59/59**; test-courtship-rework-b **58/58**; test-courtship-b **57/57**; test-covenant-b **40/40**; test-onlylead-b **29/29**; test-onlylead2-b **26/26** | **GO** |
-| Cost bar (veto) | starvation ≤ baseline+2 AND median survival ≥0.8× baseline | starvation **5 vs 8**; median survival **187.5d vs 179.5d (1.04×)** | **PASS** |
+| Cost bar (veto) | starvation ≤ baseline+2 AND median survival ≥0.8× baseline | starvation **5 vs 8**; median survival **187.5d vs 179.0d (1.05×)** | **PASS** |
 
 ## Per-seed per-shape table (armed leg, competent-courtship-b)
 
@@ -165,7 +165,7 @@ the next run (see metric review #4).
 | | control | armed |
 |---|---|---|
 | Won (table) | 0/16 | 0/16 |
-| National ever | 3/16 | **9/16** |
+| National ever | 6/16 | **14/16** |
 | National final | 3/16 | **9/16** |
 | Table / seat takes | 0 / 0 | 0 / 0 |
 | Wave 4 ever | 16/16 | 16/16 |
@@ -173,13 +173,13 @@ the next run (see metric review #4).
 | Wave-4 kills (total) | 73 | 71 |
 | Wave-5 kills (total) | 23 | 14 |
 | Survived 200d | 7/16 | 7/16 |
-| Median survival | 179.5d | **187.5d** |
+| Median survival | 179.0d | **187.5d** |
 | Starvation deaths | 8 | **5** |
 | Total deaths | 1560 | 1412 |
 | Deaths per 100 days (panel) | 57.3 | 51.7 |
 
-National access triples on the armed leg (9/16 vs 3/16) with
-survival moving the same way (median 187.5d vs 179.5d, deaths/100d
+Final national access triples on the armed leg (9/16 vs 3/16) with
+survival moving the same way (median 187.5d vs 179.0d, deaths/100d
 down). Wins are still 0 everywhere and wave-5 kills fell (14 vs 23)
 while wave-5 facing rose (12/16 vs 11/16) — the same downstream
 pattern as the pilot: more villages reach the wave-5 door, but they
