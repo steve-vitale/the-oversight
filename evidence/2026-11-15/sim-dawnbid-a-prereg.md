@@ -415,6 +415,57 @@ searched. Do not invent fight narrative from kill counts.
   (coordinator evidence — vetparty PILOT NO-GO; next blank #8:
   survivorship needs a lever aimed at launch conditions).
 
+## Correction 2 (2026-11-15, before any judged sim — control leg not yet run)
+
+**C2 — stage advancement is NOT churn; two terminals added.**
+Re-reading `winPlanCands` after freezing: a plan at stage
+`standing` or `table` WITH a companion still bids
+`party_launch` — the stage advance (kill → standing via
+`winPlanNoteKill`; fifth-draft beat + veteran → table via
+`winPlanHavenTick`) does not end the plan's launchability, so
+it must not close the instance. Stage transitions
+(gear→party→standing→table) are recorded as instance history,
+not churn. **Churn kinds are only: holder-died,
+plan-deleted, retargeted.** The `plan-churned-before-dawn`
+bucket keeps its meaning (churn before the first scored dawn
+after seeding) with the narrowed kind list.
+
+Two terminals the frozen definitions missed:
+
+- **`target-killed` (new bucket):** the holder slew the
+  plan's target type outside a party launch (verified via
+  `waveKillLog`: an entry by the holder with mid === target
+  while the instance is open), closing the instance — the
+  plan's purpose is fulfilled without a depart. Expected 0
+  (a wave-4 fleer rarely kills the type solo), but the bucket
+  must exist or such an instance would be `unknown`.
+- **`selected-not-executed` (new sub-reason under
+  `selected-blocked`):** the dawn commit was `party_launch`
+  but `vbrainExecuteDepart` never ran for the holder that day
+  (no depart row — the holder was not in the agency tick
+  loop: away from Haven, night, or the danger gate).
+
+Precedence (amended, first match wins): launched >
+target-killed > selected-blocked > bid-not-selected >
+plan-churned-before-dawn > candidate-not-bid. GO bar (1) now
+reads "six buckets" with the same thresholds (≥90%
+classified, 0% `unknown`). The classifier's proof fixtures
+cover `target-killed` and `selected-not-executed`; the
+stage-advanced fixture becomes a history case (instance stays
+open across a standing transition), not a churn case.
+
+## Correction 3 (2026-11-15, before any judged sim — control leg not yet run)
+
+**C3 — leg anchors clarified (vetparty Stage-0 pattern).** The
+prereg's "control leg on the prereg tip (this commit)" is
+imprecise: the prereg commit carries no driver, so no leg can
+run on it. Frozen rule: **control anchor = the instrument
+commit** (driver + analyzer + proof test, seed call ABSENT);
+**instrument anchor = the seed-call commit** (instrument +
+the 13-line seed call). Both SHAs are recorded in the evidence
+file. The judged comparison is control (recorder only) vs
+instrument (recorder + seed call), identical seeds.
+
 ## Metric review (to be filled in the evidence file)
 
 Pre-registered here: if the decomposition lands mostly in
