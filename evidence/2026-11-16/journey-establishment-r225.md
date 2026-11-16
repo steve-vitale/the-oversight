@@ -314,4 +314,21 @@ and no failing test is a conversation test. Adjudication
   predecessors.) Re-run on the rebased tip at closeout; see below.
 
 ## Closeout
-[CLOSEOUT]
+- Committed a4b8fcbe4 (fix + driver/analyzer/proof test + prereg +
+  run note + gate log; analyzer log committed EMPTY — flap artifact
+  at write time, the redirect truncated the file and the writes
+  never landed) + c705a6dee (analyzer log content, 57 lines).
+  Safe-commit index clobber struck on BOTH commits (first: all 9
+  files staged-as-deleted + MM on the src files; second: MM on the
+  analyzer log) — repaired via the ls-tree -r pipe each time, hashes
+  verified (analyzer.log 532b566c… both sides).
+- Master moved mid-run (Lane B r225: 5eedd695b + 2 commits, incl. an
+  F5 settled-favor change to conversation.js +14 lines); rebased
+  onto it clean (no conflicts — rebase replayed as 83c7dc3c7 +
+  07122c0c9; both changes present in the rebased file, verified by
+  diff + markers). Proof tests re-run green on the rebased tip:
+  r225 stage0-cant 16/16, r214 mood-goodbye 10/10, r139 spotter
+  35/35, r221 want-raise 7/7.
+- Merged ff-only to master. **Merged locally, pending ship.** No
+  bump, no push, no live check (ship loop owns those).
+- Rotation written `1→2` at closeout with read-back.
