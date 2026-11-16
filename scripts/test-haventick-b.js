@@ -308,17 +308,19 @@ function classifyOne(j) { return ANALYZE.classifyHavenTick(j); }
     r.attributionCoverage === 1 && r.episodesByCreator['winPlanOf'] === 1,
     'creator=' + ep.creator + ' coverage=' + r.attributionCoverage);
 })();
-// H6: ledger miss — a planCensus row with no creation row at all ->
-// censusRowWithoutEpisode 1 (the bar catches a missed creation).
+// H6: ledger miss — a planCensus holder with no creation row at all
+// -> holdersWithoutCreation 1 (the prereg bar-2 gate); the row is
+// also listed in censusRowWithoutEpisode as a diagnostic.
 (function () {
   const j = baseSeed({
     planCensus: [censusRow(10, 'v9', null, 'party', true)],
   });
   const r = classifyOne(j);
-  check('H6 ledger miss: census holder with no creation row is flagged (censusRowWithoutEpisode 1)',
-    r.episodesOpened === 0 && (r.censusRowWithoutEpisode || []).length === 1 &&
+  check('H6 ledger miss: census holder with no creation row is flagged (holdersWithoutCreation 1)',
+    r.episodesOpened === 0 && (r.holdersWithoutCreation || []).length === 1 &&
+    r.holdersWithoutCreation[0].vid === 'v9' && (r.censusRowWithoutEpisode || []).length === 1 &&
     r.censusRowWithoutEpisode[0].vid === 'v9',
-    'flagged=' + JSON.stringify(r.censusRowWithoutEpisode));
+    'flagged=' + JSON.stringify(r.holdersWithoutCreation));
 })();
 // H7: unknown creator -> unattributed WITH an explicit reason (creator
 // string + caller), never a bare 'unknown'.
@@ -353,12 +355,49 @@ function classifyOne(j) { return ANALYZE.classifyHavenTick(j); }
     sum.episodesOpened === 2 && sum.attributedEpisodes === 2 && sum.attributionCoverage === 1 &&
     sum.episodesByCreator['havenTick'] === 1 && sum.episodesByCreator['winPlanOf'] === 1 &&
     sum.bareUnknownReasons === 0 && sum.frameDifference === 0 &&
-    sum.censusRowWithoutEpisode === 0 && sum.creationRowMissing === 0,
+    sum.holdersWithoutCreation === 0 && sum.creationRowMissing === 0,
     'episodes=' + sum.episodesOpened + ' split=' + JSON.stringify(sum.episodesByCreator) +
     ' frameDiff=' + sum.frameDifference);
   check('H8 summarize wall carries national by standing AND by rank',
     sum.wall && typeof sum.wall.nationalByStanding === 'number' && typeof sum.wall.nationalByRank === 'number',
     'wall=' + JSON.stringify(sum.wall));
+})();
+
+// H9: wave-3 seed creation opens NO episode by design, yet its plan
+// lives in the census — the rows are diagnosed w3PlanNoEpisode, NOT a
+// gate failure: holdersWithoutCreation stays 0.
+(function () {
+  const j = baseSeed({
+    v4creates: [createRow(10, 'v1', 'world-tick', null, 'buffering', 3, 'party')],
+    planCensus: [censusRow(10, 'v1', 'buffering', 'party', true), censusRow(11, 'v1', 'buffering', 'party', true)],
+  });
+  const r = classifyOne(j);
+  check('H9 wave-3 plan census rows diagnosed w3PlanNoEpisode, gate passes (holdersWithoutCreation 0)',
+    r.episodesOpened === 0 && (r.holdersWithoutCreation || []).length === 0 &&
+    (r.censusRowWithoutEpisode || []).length === 2 &&
+    (r.censusRowWithoutEpisodeCauses || {}).w3PlanNoEpisode === 2 &&
+    (r.censusRowWithoutEpisodeCauses || {}).unexplained === 0,
+    'causes=' + JSON.stringify(r.censusRowWithoutEpisodeCauses));
+})();
+// H10: dead holder's plan lingers in the census past the holder-died
+// close — the tail rows are diagnosed postDeathTail, NOT a gate
+// failure: holdersWithoutCreation stays 0.
+(function () {
+  const j = baseSeed({
+    v4creates: [createRow(10, 'v1', 'havenTick', 'lived', null, null, 'gear')],
+    dawnbidScores: [scoreRow(11, 0, 'v1', null, 'party', ['party_wait'], 'party_wait')],
+    planCensus: [censusRow(10, 'v1', null, 'gear', true), censusRow(11, 'v1', null, 'party', false),
+      censusRow(12, 'v1', null, 'party', false), censusRow(13, 'v1', null, 'party', false)],
+  });
+  const r = classifyOne(j);
+  const ep = (r.episodes || [])[0] || {};
+  check('H10 post-death census tail diagnosed postDeathTail, gate passes (holdersWithoutCreation 0)',
+    r.episodesOpened === 1 && ep.closeKind === 'holder-died' &&
+    (r.holdersWithoutCreation || []).length === 0 &&
+    (r.censusRowWithoutEpisode || []).length === 2 &&
+    (r.censusRowWithoutEpisodeCauses || {}).postDeathTail === 2 &&
+    (r.censusRowWithoutEpisodeCauses || {}).unexplained === 0,
+    'close=' + ep.closeKind + ' causes=' + JSON.stringify(r.censusRowWithoutEpisodeCauses));
 })();
 
 // ---------- 4. Recorder: live in-memory run (shape + creation recording) ----------

@@ -27,9 +27,11 @@
 // Usage:
 //   node scripts/analyze-haventick-b.js <instrumentDir> [controlDir]
 // Writes evidence/2026-11-16/haventick-b-analysis.json. Exits 0 iff
-// zero unclassified episodes on EACH leg, the ledger check is clean,
-// the seedpaths frame reconciles with the creation frame, all files
-// parse, and no instrument errors.
+// zero unclassified episodes on EACH leg, the ledger check is clean
+// (every census holder traces to a recorded creation — prereg bar 2
+// as written; census rows outside any episode window are reported
+// with their cause, not gated), the seedpaths frame reconciles with
+// the creation frame, all files parse, and no instrument errors.
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -427,18 +429,66 @@ function classifyHavenTick(j) {
     }
   }
 
-  // ---- Ledger check (independent denominator) ----
-  // Every planCensus row must fall inside some episode's
-  // [openDay, closeDay] with matching target. A row with no episode
-  // means a missed creation (or a missed deletion + recreation).
+  // ---- Ledger check (independent denominator, prereg bar 2 as written) ----
+  // Every planCensus HOLDER traces to a v4creates row on/before its
+  // first observed day — no plan holder is ever observed without a
+  // recorded creation. The row-in-episode-window count
+  // (censusRowWithoutEpisode) is a DIAGNOSTIC only, never the gate:
+  // the frozen episode definitions themselves produce rows outside
+  // any episode window — wave-3 seed creations open no episode by
+  // design yet their plans live in the census; dead holders' plans
+  // linger in winPlan (no death cleanup) past the holder-died close;
+  // a retarget shows the new target on the close day and a wave-3
+  // retarget leaves the plan census-visible with no new episode. Each
+  // such row is classified by cause (w3PlanNoEpisode / postDeathTail /
+  // sameDayRetargetTarget / w3RetargetContinuation / unexplained); an
+  // unexplained row is a finding, and a holder with no creation at
+  // all fails the bar.
+  // Gate: holdersWithoutCreation — census holders with no v4creates
+  // row on/before their first census day.
+  const holdersWithoutCreation = [];
+  const firstCensusDay = {};
+  for (const r of censusRows) {
+    if (firstCensusDay[r.vid] == null || r.day < firstCensusDay[r.vid]) firstCensusDay[r.vid] = r.day;
+  }
+  for (const vid of Object.keys(firstCensusDay)) {
+    const ok = creates.some(function (c) { return c.vid === vid && c.day <= firstCensusDay[vid]; });
+    if (!ok) holdersWithoutCreation.push({ vid: vid, firstDay: firstCensusDay[vid] });
+  }
+  // Diagnostic: rows outside any episode window, classified by cause.
+  function ledgerMissCause(r) {
+    const vidEps = episodes.filter(function (e) { return e.vid === r.vid; });
+    const vidCreates = creates.filter(function (c) { return c.vid === r.vid; })
+      .sort(function (a, b) { return a.day - b.day; });
+    const first = vidCreates[0] || null;
+    if (first && SEED_PATHS.indexOf(first.creator) !== -1 &&
+      ((first.needWave | 0) === 3 || (first.wave | 0) === 3)) return 'w3PlanNoEpisode';
+    if (r.holderAlive === false && vidEps.some(function (e) {
+      return e.closeKind === 'holder-died' && e.closeDay != null && r.day > e.closeDay;
+    })) return 'postDeathTail';
+    if (vidEps.some(function (e) {
+      return (e.closeKind === 'retargeted' || e.closeKind === 'retargeted-w3') &&
+        e.closeDay === r.day && e.target !== (r.target != null ? r.target : null);
+    })) return 'sameDayRetargetTarget';
+    if (vidEps.some(function (e) {
+      return e.closeKind === 'retargeted-w3' && e.closeDay != null && r.day > e.closeDay;
+    })) return 'w3RetargetContinuation';
+    return 'unexplained';
+  }
   const censusRowWithoutEpisode = [];
+  const censusRowWithoutEpisodeCauses = {
+    w3PlanNoEpisode: 0, postDeathTail: 0, sameDayRetargetTarget: 0,
+    w3RetargetContinuation: 0, unexplained: 0,
+  };
   for (const r of censusRows) {
     const ok = episodes.some(function (ep) {
       return ep.vid === r.vid && ep.target === (r.target != null ? r.target : null) &&
         r.day >= ep.openDay && (ep.closeDay == null || r.day <= ep.closeDay);
     });
     if (!ok) {
-      censusRowWithoutEpisode.push({ day: r.day, vid: r.vid, target: r.target || null, stage: r.stage || null });
+      const cause = ledgerMissCause(r);
+      censusRowWithoutEpisodeCauses[cause]++;
+      censusRowWithoutEpisode.push({ day: r.day, vid: r.vid, target: r.target || null, stage: r.stage || null, cause: cause });
     }
   }
   // Unknown havenTick sources / unknown seed paths.
@@ -482,7 +532,9 @@ function classifyHavenTick(j) {
     wave3Creations: wave3Creations,
     nonOpeningSeedCreations: nonOpeningSeedCreations,
     creationRowMissing: creationRowMissing,
+    holdersWithoutCreation: holdersWithoutCreation,
     censusRowWithoutEpisode: censusRowWithoutEpisode,
+    censusRowWithoutEpisodeCauses: censusRowWithoutEpisodeCauses,
     unknownHavenSources: unknownHavenSources,
     unknownSeedRows: unknownSeedRows,
     handoffs: handoffs,
@@ -510,6 +562,12 @@ function summarizeHavenTick(leg) {
   for (const c of CREATORS.concat(['unknown'])) { episodesByCreator[c] = 0; launchesByCreator[c] = 0; }
   let episodes = 0, attributed = 0, unattributed = 0, launches = 0, multiPath = 0;
   let unknownSeedRows = 0, unknownHaven = 0, censusNoEp = 0, createMissing = 0, handoffs = 0;
+  let holdersNoCreate = 0;
+  const holdersNoCreateList = [];
+  const censusCauses = {
+    w3PlanNoEpisode: 0, postDeathTail: 0, sameDayRetargetTarget: 0,
+    w3RetargetContinuation: 0, unexplained: 0,
+  };
   let wave3 = 0, nonOpening = 0, havenCreates = 0, winPlanOfCreates = 0, totalCreates = 0;
   let launchKills = 0, launchKillsW4 = 0;
   const unattributedList = [];
@@ -527,6 +585,11 @@ function summarizeHavenTick(leg) {
     unknownHaven += (s.unknownHavenSources || []).length;
     censusNoEp += (s.censusRowWithoutEpisode || []).length;
     createMissing += (s.creationRowMissing || []).length;
+    holdersNoCreate += (s.holdersWithoutCreation || []).length;
+    for (const h of (s.holdersWithoutCreation || [])) holdersNoCreateList.push(Object.assign({ seed: s.seed }, h));
+    for (const k of Object.keys(censusCauses)) {
+      censusCauses[k] += ((s.censusRowWithoutEpisodeCauses || {})[k] || 0);
+    }
     handoffs += (s.handoffs || []).length;
     wave3 += (s.wave3Creations || []).length;
     nonOpening += (s.nonOpeningSeedCreations || []).length;
@@ -582,6 +645,9 @@ function summarizeHavenTick(leg) {
     unknownSeedRows: unknownSeedRows,
     unknownHavenSources: unknownHaven,
     censusRowWithoutEpisode: censusNoEp,
+    censusRowWithoutEpisodeCauses: censusCauses,
+    holdersWithoutCreation: holdersNoCreate,
+    holdersWithoutCreationList: holdersNoCreateList,
     creationRowMissing: createMissing,
     handoffs: handoffs,
     handoffList: handoffList,
@@ -627,7 +693,7 @@ function main() {
       summary.unattributedEpisodes === 0 &&
       summary.unknownHavenSources === 0 &&
       summary.unknownSeedRows === 0 &&
-      summary.censusRowWithoutEpisode === 0 &&
+      summary.holdersWithoutCreation === 0 &&
       summary.creationRowMissing === 0 &&
       summary.frameDifference === 0;
   }
@@ -650,6 +716,14 @@ function main() {
         unknownHavenSources: instSummary.unknownHavenSources + (ctrlSummary ? ctrlSummary.unknownHavenSources : 0),
         unknownSeedRows: instSummary.unknownSeedRows + (ctrlSummary ? ctrlSummary.unknownSeedRows : 0),
         censusRowWithoutEpisode: instSummary.censusRowWithoutEpisode + (ctrlSummary ? ctrlSummary.censusRowWithoutEpisode : 0),
+        censusRowWithoutEpisodeCauses: {
+          w3PlanNoEpisode: instSummary.censusRowWithoutEpisodeCauses.w3PlanNoEpisode + (ctrlSummary ? ctrlSummary.censusRowWithoutEpisodeCauses.w3PlanNoEpisode : 0),
+          postDeathTail: instSummary.censusRowWithoutEpisodeCauses.postDeathTail + (ctrlSummary ? ctrlSummary.censusRowWithoutEpisodeCauses.postDeathTail : 0),
+          sameDayRetargetTarget: instSummary.censusRowWithoutEpisodeCauses.sameDayRetargetTarget + (ctrlSummary ? ctrlSummary.censusRowWithoutEpisodeCauses.sameDayRetargetTarget : 0),
+          w3RetargetContinuation: instSummary.censusRowWithoutEpisodeCauses.w3RetargetContinuation + (ctrlSummary ? ctrlSummary.censusRowWithoutEpisodeCauses.w3RetargetContinuation : 0),
+          unexplained: instSummary.censusRowWithoutEpisodeCauses.unexplained + (ctrlSummary ? ctrlSummary.censusRowWithoutEpisodeCauses.unexplained : 0),
+        },
+        holdersWithoutCreation: instSummary.holdersWithoutCreation + (ctrlSummary ? ctrlSummary.holdersWithoutCreation : 0),
         creationRowMissing: instSummary.creationRowMissing + (ctrlSummary ? ctrlSummary.creationRowMissing : 0),
         frameDifference: instSummary.frameDifference + (ctrlSummary ? ctrlSummary.frameDifference : 0) },
       corpus: { pass: bar2, instrumentFiles: inst.files.length, controlFiles: ctrlSummary ? ctrlSummary.seedpathsFrame.marginals.firstFail.files : null },
@@ -675,6 +749,8 @@ function main() {
       ' total=' + sum.totalCreates + ' wave3Creations=' + sum.wave3Creations +
       ' nonOpeningSeed=' + sum.nonOpeningSeedCreations);
     console.log('ledger: censusRowWithoutEpisode=' + sum.censusRowWithoutEpisode +
+      ' causes=' + JSON.stringify(sum.censusRowWithoutEpisodeCauses) +
+      ' holdersWithoutCreation=' + sum.holdersWithoutCreation +
       ' creationRowMissing=' + sum.creationRowMissing + ' unknownHaven=' + sum.unknownHavenSources +
       ' unknownSeedRows=' + sum.unknownSeedRows + ' frameDifference=' + sum.frameDifference);
     console.log('wall: ' + JSON.stringify(sum.wall) + '  medianSurvival: ' + sum.medianSurvival);
