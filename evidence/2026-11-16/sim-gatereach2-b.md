@@ -441,7 +441,9 @@ the launch count.
 - `48af723f9` instrument — control anchor (seed call ABSENT)
 - `a0ce78df0` instrument anchor — seed call re-landed verbatim
 - `4e61160a4` seed-call revert after measurement
-- (pending) evidence + corpora + analysis commit
+- `745a4bff6` evidence + corpora + analysis + prereg Corrections
+  C1–C2 (GO: 56/56 consultations, 98/98 arrivals, D3 CLEAN, proof
+  4/4; SEEK 0 both legs, arrival-gap 0)
 
 Ready to merge, pending ship. The coordinator merges; the batch
 ship job owns all pushes.
