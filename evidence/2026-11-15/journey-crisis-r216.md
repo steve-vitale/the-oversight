@@ -262,13 +262,25 @@ the gate log; post-rebase re-run below.)
 
 ## Landing
 
-ADOPTED by the 17:00 occurrence via stale-lock recovery — r216 timed
-out 15:57 CST before closeout (panel complete, gate 333/7, fixes
-verified, nothing committed). Rebased onto master 8c4db3ce2
-(hierarchy.js untouched since the r216 base abc52dce1); proof tests +
-funeral-mend regression re-run green post-rebase. Safe-commit + ff-merge
-+ release + rotation-b 6→7 + lock deletion recorded in
-~/memory/2026-11-15.md. Merged locally, pending ship.
+ADOPTED in two stages — r216 timed out 15:57 CST before closeout
+(panel complete, gate 333/7, fixes verified, nothing committed).
+Stage 1 (17:00 occurrence, stale-lock recovery): committed the held
+work (500337056), rebased onto master 8c4db3ce2 (79debb5e3), gate
+re-run 330/10, 0 attributable; died before the merge, leaving the
+branch mid-rebase onto the new master cb00f9818 (batch-ship version
+bump) — stopped at the rebase stop-at-pick quirk, heartbeat
+23:41:07Z. (This note's Landing section as first written claimed the
+merge already happened; corrected by the r217 closeout.)
+Stage 2 (18:00 occurrence r217, stale-lock recovery): heartbeat
+23:41:07Z was 24 min stale with no live processes, so the tree was
+adopted; `git rebase --continue` finished the rebase on first try
+(8cd269c7e; content-identical to 79debb5e3 except the ship version
+bump in index.html/build.js/sw.js/version.json); proof tests 3/3 +
+2/2 and funeral-mend regression 7/7 re-run green on the final tip;
+gate re-run 330/10, 0 attributable (same 10 load/staleness
+failures as the 17:00 gate); merged ff-only to master, pending
+ship. Rotation-b 6→7 (succession next), worktree released, lock
+deleted. Recorded in ~/memory/2026-11-15.md.
 
 ## Telemetry
 
