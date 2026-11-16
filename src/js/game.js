@@ -36392,9 +36392,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // noteVillagerTrickObservation(vid, mid): NON-LETHAL KNOWLEDGE (Steve
     // 2026-10-13). A villager who survives an encounter with a trick-bearing
     // beast — fled, drove it off, or saw it in time — brings home an
-    // observation. Observations add up and the village pieces together the
-    // trick: no kill required (two by default; one when TRICKTEACH=1 —
-    // sim-trickteach-b). The dead tell no tales (callers exclude vDie).
+    // observation. Two observations and the village pieces together the
+    // trick: no kill required. The dead tell no tales (callers exclude vDie).
     // Narrated via discoverMonsterCounter / the villagerTricks beat — never
     // silent. The scholar has his own channel (noteScholarTrickObservation);
     // this wrapper keeps the 'player' exclusion so villager behavior is
@@ -36416,16 +36415,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     noteScholarTrickObservation(mid) {
       return this._trickObservation('player', mid, true);
     },
-    // trickLearnThreshold(): TRICKTEACH lever (sim-trickteach-b, 2026-11-16).
-    // How many survived observations teach a trick. Default 2 (canon:
-    // MONSTER-WAVES.md §Monster counters). TRICKTEACH=1 → 1: one sighting
-    // is enough to piece the trick together. Env-gated, default-OFF
-    // (VETSHAPE pattern): unset — including in the browser, where
-    // process.env never exists — the old 2-observation path runs exactly.
-    // The ONLY place the flag is read.
-    trickLearnThreshold() {
-      try { return ((typeof process !== 'undefined' && process.env && process.env.TRICKTEACH) === '1') ? 1 : 2; } catch (e) { return 2; }
-    },
     // _trickObservation(vid, mid, firstPerson): the shared observation core.
     // firstPerson=false reproduces the villager path exactly (same strings,
     // same events); firstPerson=true narrates the scholar's own telling.
@@ -36439,17 +36428,16 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (this.villageKnowsTrick(mid)) return false; // already known
         const obs = this.state.villageCounterObs || (this.state.villageCounterObs = {});
         obs[mid] = (obs[mid] || 0) + 1;
-        const _th = this.trickLearnThreshold();
         try { this.tele('counter_observed', { id: mid, n: obs[mid], vid: vid }); } catch (e) {}
-        if (firstPerson && obs[mid] < _th) {
+        if (firstPerson && obs[mid] < 2) {
           // The scholar's own notebook: a first sighting is never silent.
           // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class):
           // monsterDisplayName keeps coined names' casing ("The Focus Group").
-          this.say(`You lived to tell it — ${this.articlePhrase ? this.articlePhrase(this.monsterDisplayName(mid)) : 'the ' + this.monsterDisplayName(mid)}'s moves are burned into your memory. (${obs[mid]}/${_th} — one more survived encounter and you'll have its trick.)`);
-          try { if (this.journalNote) this.journalNote('monsters', mid, `Sighting ${obs[mid]}/${_th}: survived an encounter.`); } catch (e) {}
+          this.say(`You lived to tell it — ${this.articlePhrase ? this.articlePhrase(this.monsterDisplayName(mid)) : 'the ' + this.monsterDisplayName(mid)}'s moves are burned into your memory. (${obs[mid]}/2 — one more survived encounter and you'll have its trick.)`);
+          try { if (this.journalNote) this.journalNote('monsters', mid, `Sighting ${obs[mid]}/2: survived an encounter.`); } catch (e) {}
         }
-        if (obs[mid] < _th) return false;
-        // Threshold reached: the fire has a theory.
+        if (obs[mid] < 2) return false;
+        // Two survived encounters: the fire has a theory.
         if (mdef.counter) {
           return this.discoverMonsterCounter(mid, firstPerson ? 'scholar-observed' : 'observed');
         }
@@ -36461,10 +36449,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { this.tele('counter_discovered', { id: mid, via: firstPerson ? 'scholar-observed' : 'observed' }); } catch (e) {}
         const t = defs[mid] || {};
         if (firstPerson) {
-          this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${_th === 1 ? 'You lived to tell it — one sighting was enough, and now you see the pattern.' : 'You lived to tell it, twice — and now you see the pattern.'})`);
+          this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (You lived to tell it, twice — and now you see the pattern.)`);
         } else {
           const vName = this.firstRef ? this.firstRef(vid) : 'Someone';
-          this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${vName} lived to tell it${_th === 1 ? ' — one sighting was enough' : ', twice'} — the village pieced it together.)`);
+          this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${vName} lived to tell it, twice — the village pieced it together.)`);
         }
         try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${t.trick} — ${t.reveal}`); } catch (e) {}
         return true;
@@ -36477,7 +36465,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // at the kill, the survivors bring the kill home: ONE observation
     // credit toward the species' trick on the shared villageCounterObs bar
     // (one kill = one story, no matter how many witnesses — the
-    // observation bar stays meaningful). The sim-witnesslearn arm proved
+    // 2-observation bar stays meaningful). The sim-witnesslearn arm proved
     // this mechanism shape (31/31) but its party-wiring witness pool was
     // structurally empty at kill time (0/5 vDie witnessed); this channel
     // wires the pool the engine actually stages — node-mates on the
@@ -36510,7 +36498,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!ours.length) return false;
         const obs = this.state.villageCounterObs || (this.state.villageCounterObs = {});
         obs[mid] = (obs[mid] || 0) + 1;
-        const _th = this.trickLearnThreshold();
         try { this.tele('counter_observed', { id: mid, n: obs[mid], vid: vid, via: 'node-witnessed' }); } catch (e) {}
         // Deterministic narration (seatvoice precedent): no RNG — the
         // reporter is the first roster witness, names via firstRef
@@ -36522,12 +36509,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         let mn = 'the beast';
         try { mn = String(this.monsterNoun ? this.monsterNoun(mid) : (this.monsterDisplayName(mid) || 'the beast')); } catch (e) {}
         const mPhrase = (mn && mn[0] === mn[0].toLowerCase()) ? 'the ' + mn : mn;
-        if (obs[mid] < _th) {
-          this.say(`🗡️ ${wName} came back with ${vName}'s story — watched ${mPhrase} take them, and lived to tell it. The fire listens, and remembers. (${obs[mid]}/${_th})`);
-          try { if (this.journalNote) this.journalNote('monsters', mid, `Witnessed kill ${obs[mid]}/${_th}: ${wName} reported ${vName}'s death.`); } catch (e) {}
+        if (obs[mid] < 2) {
+          this.say(`🗡️ ${wName} came back with ${vName}'s story — watched ${mPhrase} take them, and lived to tell it. The fire listens, and remembers. (${obs[mid]}/2)`);
+          try { if (this.journalNote) this.journalNote('monsters', mid, `Witnessed kill ${obs[mid]}/2: ${wName} reported ${vName}'s death.`); } catch (e) {}
           return false;
         }
-        // Threshold reached: the fire has a theory — framed second-hand.
+        // Two observations: the fire has a theory — framed second-hand.
         if (mdef.counter) {
           return this.discoverMonsterCounter(mid, 'node-witnessed');
         }
