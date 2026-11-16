@@ -343,8 +343,9 @@ clean). Proof re-run in the off shape
 static check "game-code worktree diff is the seed call only", which
 expects an empty `src/` status and sees the uncommitted revert
 itself (`M src/js/game.js`); that check is designed to run after
-the revert is committed. Post-commit re-run: [see commit message /
-follow-up — 62/62 expected].
+the revert is committed. Post-commit re-run
+(`AWAYHAVEN_SEED_CALL=off`, after commit `3baecd01b`): **62/62
+green**.
 
 ## Files
 
