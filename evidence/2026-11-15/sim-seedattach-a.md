@@ -45,8 +45,10 @@ hook and NO src change: `git diff master...HEAD -- src/` is empty. Errors are
 REPORTED into `instrumentErrors` (named, not swallowed — the dawnbid empty-catch
 deviation is not repeated).
 
-**Commits on this branch:** `992ab8f2b` (prereg), `59ea81e79` (instrument, anchor),
-`7aeeace90` (analyzer corpus-bar fix; proof 62/62). Ready to merge, pending ship.
+**Commits on this branch (post-rebase onto master `3853257d6`):** `a8501126d`
+(prereg), `e3f28e079` (instrument, anchor), `dc5f3b7c3` (analyzer corpus-bar
+fix; proof 62/62), `25bc356dd` (evidence + corpora). Pre-rebase hashes were
+`992ab8f2b` / `59ea81e79` / `7aeeace90` / `2cabf0bcb`. Ready to merge, pending ship.
 
 ## Both legs on identical seeds
 
