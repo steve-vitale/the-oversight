@@ -395,8 +395,36 @@ a gate that never says "seek" and is usually never asked.
 
 `scripts/test-trickshare-a.js`: **65/65 GREEN on the lever tip**
 (rebased to master `63fa44d6c`), after the adoption fixes below.
-Post-revert off-mode run: TRICKSHARE_PROOF_MODE=off — [result
-filled after the revert step].
+Post-revert off-mode run: `TRICKSHARE_PROOF_MODE=off node
+scripts/test-trickshare-a.js` — **29/29 GREEN** (static off-mode
+checks + control-child checks + 5-day control live run; armed
+leg and D1/D2 are skipped by design post-revert).
+
+**Instrument defect found and fixed during the post-revert run
+(this worker).** The proof as the 2015Z worker left it could NOT
+go green post-revert — it crashed: the control child called
+`Game.trickShareDawnTick()` and `Game.noteTrickTaught()` directly,
+and those functions do not exist once the lever is reverted
+(`TypeError: Game.trickShareDawnTick is not a function`); and the
+driver pushed `noteTrickTaught-wrap: not a function` /
+`trickShareOffer-wrap: not a function` instrument errors on any
+recorder-ON run once the functions were gone. Both are fixed in
+the instrument, not by loosening any assertion:
+- Test child: the two calls go through `tickShare()` / `taught()`
+  helpers that return `null` when the function is absent and
+  delegate identically when it is present; the parent asserts
+  `null` (absent) in off mode and `false` (present-but-off) on
+  the lever tip for the enabled / dawn-tick / taught-credit
+  checks, and the live control run asserts `trickShareEnabled
+  null` off mode vs `false` on tip.
+- Driver: a missing lever-function wrap target is an instrument
+  error ONLY when the lever is supposed to be active
+  (`TRICKSHARE=1`); absent-by-revert (flag unset, code reverted)
+  is the expected state, not an error.
+- Re-verified after the fix, on a temporary branch with the lever
+  restored (branch deleted afterwards): on-mode proof **65/65
+  GREEN** with the fixed test + driver — no regression. The
+  off-mode run above (29/29) was on the reverted tip.
 
 ## Adoption notes (this worker)
 
@@ -464,10 +492,9 @@ frozen bars above are the judge.
   in src/. The lever is fully gone; the branch's src/ is
   byte-identical to master `63fa44d6c`.
 - Post-revert proof (off mode): `TRICKSHARE_PROOF_MODE=off node
-  scripts/test-trickshare-a.js` — [result filled after the
-  revert commit; the off-mode static checks assert the empty
-  src diff via `git diff master...HEAD -- src/`, so they run
-  after the revert is committed].
+  scripts/test-trickshare-a.js` — **29/29 GREEN** on the reverted
+  tip (see "Proof test" above for the instrument defect this
+  run caught and fixed).
 
 ## Files
 

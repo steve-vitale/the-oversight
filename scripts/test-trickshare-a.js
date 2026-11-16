@@ -113,6 +113,11 @@ function shareChild(envExtra) {
     "  const origSay = Game.say ? Game.say.bind(Game) : null;",
     "  Game.say = function (s) { said.push(String(s)); try { if (origSay) return origSay(s); } catch (e) {} };",
     "  await setupGame(Game);",
+    "  // Post-revert (OFF_MODE) the lever functions do not exist at all:",
+    "  // call them only when present and report null when absent, so",
+    "  // the control child proves the revert instead of crashing on it.",
+    "  var tickShare = (typeof Game.trickShareDawnTick === 'function') ? function () { return Game.trickShareDawnTick(); } : function () { return null; };",
+    "  var taught = (typeof Game.noteTrickTaught === 'function') ? function (m, t, l) { return Game.noteTrickTaught(m, t, l); } : function () { return null; };",
     "  Game.state.villageCounterObs = {};",
     "  Game.state.villagerTricks = {};",
     "  Game.state.monsterCounters = {};",
@@ -137,14 +142,14 @@ function shareChild(envExtra) {
     "  // --- dawn share: teacher at Haven + listeners -> taught learn ---",
     "  said.length = 0;",
     "  out.share = {};",
-    "  out.share.fired = Game.trickShareDawnTick();",
+    "  out.share.fired = tickShare();",
     "  out.share.obsAfter = (Game.state.villageCounterObs || {}).algorithm || 0;",
     "  out.share.knownAfter = Game.villageKnowsTrick('algorithm');",
     "  out.share.pendingAfter = Game.state.trickSharePending ? (Game.state.trickSharePending.algorithm || null) : null;",
     "  out.share.said = said.slice();",
     "  // --- once per dawn: a second tick the same day is a no-op ---",
     "  said.length = 0;",
-    "  out.share.secondTick = Game.trickShareDawnTick();",
+    "  out.share.secondTick = tickShare();",
     "  out.share.secondTickSaid = said.slice();",
     "  // --- teacher away: pending kept, no credit ---",
     "  Game.state.villageCounterObs = {}; Game.state.villagerTricks = {}; Game.state.trickSharePending = {}; delete Game.state.trickShareLastDay; said.length = 0;",
@@ -152,7 +157,7 @@ function shareChild(envExtra) {
     "  try { Game.state.village.away = Game.state.village.away || {}; Game.state.village.away[w2] = true; } catch (e) {}",
     "  out.away = {};",
     "  out.away.pendingBefore = Game.state.trickSharePending ? Game.state.trickSharePending.eater || null : null;",
-    "  out.away.fired = Game.trickShareDawnTick();",
+    "  out.away.fired = tickShare();",
     "  out.away.obsAfter = (Game.state.villageCounterObs || {}).eater || 0;",
     "  out.away.knownAfter = Game.villageKnowsTrick('eater');",
     "  out.away.pendingAfter = Game.state.trickSharePending ? (Game.state.trickSharePending.eater || null) : null;",
@@ -160,7 +165,7 @@ function shareChild(envExtra) {
     "  try { delete Game.state.village.away[w2]; } catch (e) {}",
     "  try { Game.state.scholar.day = (Game.state.scholar.day || 1) + 1; } catch (e) {}",
     "  said.length = 0;",
-    "  out.away.firedNextDay = Game.trickShareDawnTick();",
+    "  out.away.firedNextDay = tickShare();",
     "  out.away.knownNextDay = Game.villageKnowsTrick('eater');",
     "  out.away.saidNextDay = said.slice();",
     "  // --- teacher dead: pending dropped, no credit ---",
@@ -168,7 +173,7 @@ function shareChild(envExtra) {
     "  Game.noteVillagerTrickObservation(w3, 'reunion');",
     "  try { const p = Game.getPerson ? Game.getPerson(w3) : null; if (p) p.dead = true; } catch (e) {}",
     "  out.dead = {};",
-    "  out.dead.fired = Game.trickShareDawnTick();",
+    "  out.dead.fired = tickShare();",
     "  out.dead.obsAfter = (Game.state.villageCounterObs || {}).reunion || 0;",
     "  out.dead.knownAfter = Game.villageKnowsTrick('reunion');",
     "  out.dead.pendingAfter = Game.state.trickSharePending ? (Game.state.trickSharePending.reunion || null) : null;",
@@ -183,7 +188,7 @@ function shareChild(envExtra) {
     "  Game.noteScholarTrickObservation('herald');",
     "  try { Game.state.village.away = {}; for (const r of roster) Game.state.village.away[r] = true; } catch (e) {}",
     "  out.alone = {};",
-    "  out.alone.fired = Game.trickShareDawnTick();",
+    "  out.alone.fired = tickShare();",
     "  out.alone.obsAfter = (Game.state.villageCounterObs || {}).herald || 0;",
     "  out.alone.knownAfter = Game.villageKnowsTrick('herald');",
     "  out.alone.pendingAfter = Game.state.trickSharePending ? (Game.state.trickSharePending.herald || null) : null;",
@@ -212,7 +217,7 @@ function shareChild(envExtra) {
     "  out.w12.obsAfter1 = (Game.state.villageCounterObs || {}).bulldozer || 0;",
     "  out.w12.pending = Game.state.trickSharePending ? (Game.state.trickSharePending.bulldozer || null) : null;",
     "  said.length = 0;",
-    "  out.w12.taught = Game.noteTrickTaught('bulldozer', w1, [w2, w3]);",
+    "  out.w12.taught = taught('bulldozer', w1, [w2, w3]);",
     "  out.w12.knownAfter = Game.villageKnowsTrick('bulldozer');",
     "  out.w12.counterSet = !!((Game.state.monsterCounters || {}).bulldozer);",
     "  out.w12.said = said.slice();",
@@ -227,7 +232,11 @@ const controlU = shareChild({});
 if (!OFF_MODE) {
   check('armed flag reads true (trickShareEnabled)', armedU.enabled === true, 'got ' + JSON.stringify(armedU.enabled));
 }
-check('control flag reads false (trickShareEnabled)', controlU.enabled === false, 'got ' + JSON.stringify(controlU.enabled));
+// Post-revert the helper is ABSENT (null), not merely off (false):
+// the off-mode proof asserts the absence, the on-mode proof the off state.
+check('control flag reads false (trickShareEnabled)' + (OFF_MODE ? ' [off-mode: absent]' : ''),
+  OFF_MODE ? controlU.enabled === null : controlU.enabled === false,
+  'got ' + JSON.stringify(controlU.enabled));
 if (!OFF_MODE) {
   check('armed: Haven population at start includes the teacher + listeners',
     Array.isArray(armedU.havenAtStart) && armedU.havenAtStart.indexOf(armedU.roster[0]) !== -1 && armedU.havenAtStart.length >= 2,
@@ -286,8 +295,8 @@ check('control: first observation records NO pending offer (flag off)',
   controlU.obs1.obsAfter1 === 1 && controlU.obs1.knownAfter1 === false &&
   (controlU.obs1.pending === null || controlU.obs1.pending === undefined),
   JSON.stringify(controlU.obs1));
-check('control: dawn tick fires nothing with the flag off (no share, no learn)',
-  controlU.share.fired === false && controlU.share.obsAfter === 1 && controlU.share.knownAfter === false,
+check('control: dawn tick fires nothing with the flag off (no share, no learn)' + (OFF_MODE ? ' [off-mode: no tick function]' : ''),
+  (OFF_MODE ? controlU.share.fired === null : controlU.share.fired === false) && controlU.share.obsAfter === 1 && controlU.share.knownAfter === false,
   JSON.stringify(controlU.share));
 check('control: second observation still teaches the old way (threshold 2 intact)',
   controlU.clear.knownAfter2 === true && controlU.clear.pendingAfter2 === null,
@@ -295,8 +304,8 @@ check('control: second observation still teaches the old way (threshold 2 intact
 check('control: teach-on-learn line never fires with the flag off',
   controlU.teach.saidAfter2.every(function (s) { return s.indexOf('how it went') === -1; }),
   JSON.stringify(controlU.teach.saidAfter2).slice(0, 300));
-check('control: waves 1-2 taught credit refuses with the flag off (noteTrickTaught false, counter unset)',
-  controlU.w12.taught === false && controlU.w12.knownAfter === false && controlU.w12.counterSet === false,
+check('control: waves 1-2 taught credit refuses with the flag off (noteTrickTaught false, counter unset)' + (OFF_MODE ? ' [off-mode: no taught function]' : ''),
+  (OFF_MODE ? controlU.w12.taught === null : controlU.w12.taught === false) && controlU.w12.knownAfter === false && controlU.w12.counterSet === false,
   JSON.stringify(controlU.w12));
 
 // ---------- 3. Unit: live geared fight produces the first observation ----------
@@ -414,8 +423,10 @@ async function liveRuns() {
   check('live control run policy is competent, sha df9b7dff4de4',
     outControl.policy === 'competent' && outControl.policySha === 'df9b7dff4de4',
     'got ' + outControl.policy + '/' + outControl.policySha);
-  check('control run records trickShare false + trickShareEnabled false',
-    outControl.trickShare === false && outControl.trickShareEnabled === false,
+  // Post-revert the driver records trickShareEnabled null (function
+  // absent); on the lever tip with the flag unset it records false.
+  check('control run records trickShare false + trickShareEnabled ' + (OFF_MODE ? 'null [off-mode: absent]' : 'false'),
+    outControl.trickShare === false && (OFF_MODE ? outControl.trickShareEnabled === null : outControl.trickShareEnabled === false),
     'got trickShare=' + outControl.trickShare + ' enabled=' + outControl.trickShareEnabled);
   check('control run carries trickKnownEnd + trickObsEnd',
     outControl.trickKnownEnd && Array.isArray(outControl.trickKnownEnd.wave12) &&

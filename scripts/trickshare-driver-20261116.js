@@ -959,7 +959,11 @@ async function oneRun(seed) {
         } catch (e) { errors.push('trick-taught-log: ' + String(e.message).slice(0, 80)); }
         return ret;
       };
-    } else if (RECORDER_ON) errors.push('noteTrickTaught-wrap: not a function');
+    } else if (RECORDER_ON && process.env.TRICKSHARE === '1') errors.push('noteTrickTaught-wrap: not a function');
+    // (Post-revert the lever functions are ABSENT by design — the flag
+    // unset, or the code reverted, is the expected state, not an
+    // instrument error. Missing wrap target is an error only when the
+    // lever is supposed to be active: TRICKSHARE=1.)
   } catch (e) { errors.push('noteTrickTaught-wrap-install: ' + String(e.message).slice(0, 80)); }
   try {
     const origOffer = Game.trickShareOffer;
@@ -971,7 +975,8 @@ async function oneRun(seed) {
         } catch (e) { errors.push('trick-offer-log: ' + String(e.message).slice(0, 80)); }
         return ret;
       };
-    } else if (RECORDER_ON) errors.push('trickShareOffer-wrap: not a function');
+    } else if (RECORDER_ON && process.env.TRICKSHARE === '1') errors.push('trickShareOffer-wrap: not a function');
+    // (Same as noteTrickTaught above: absent-by-revert is expected.)
   } catch (e) { errors.push('trickShareOffer-wrap-install: ' + String(e.message).slice(0, 80)); }
   // ---- DAWNBID: startExpedition outcomes (supplementary) ----
   // Records, for a wave-4 plan holder, whether each startExpedition
