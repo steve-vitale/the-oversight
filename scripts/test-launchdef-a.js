@@ -57,7 +57,7 @@ const seedBlockPresent = gameJs.indexOf("VETPARTY (sim-vetparty-a)") !== -1 &&
 check('seed call present iff LAUNCHDEF_SEED_CALL=on (expected ' + SEED_CALL_EXPECTED + ', found ' + (seedBlockPresent ? 'present' : 'absent') + ')',
   (SEED_CALL_EXPECTED === 'on') === seedBlockPresent);
 const agencyJs = fs.readFileSync(path.join(REPO, 'src', 'js', 'villager-agency.js'), 'utf8');
-const gateBlockPresent = agencyJs.indexOf("LAUNCHDEF (sim-launchdef-a)") !== -1 &&
+const gateBlockPresent = agencyJs.indexOf("PROFILEGATE (sim-profilegate-a)") !== -1 &&
   agencyJs.indexOf("winPlanAction === 'party_launch'") !== -1;
 check('gate carve-out present iff LAUNCHDEF_GATE=on (expected ' + GATE_EXPECTED + ', found ' + (gateBlockPresent ? 'present' : 'absent') + ')',
   (GATE_EXPECTED === 'on') === gateBlockPresent);
@@ -482,6 +482,11 @@ async function gateLive() {
   // Case C: holder away on expedition (plan still at party stage) —
   // the Diana Osei case: the recorder must say away-as-companion,
   // on EITHER tip (the expedition branch precedes the profile gate).
+  // NOTE: on the armed tip case B may have LAUNCHED the holder's own
+  // plan (stage -> 'hunt'), which would legitimately read
+  // away-on-expedition — so re-stage the plan at party stage first,
+  // the companion-trip shape this case is about.
+  try { if (v.winPlan && v.winPlan[holder]) v.winPlan[holder].stage = 'party'; } catch (e) {}
   try {
     const a = Game.agencyState ? Game.agencyState() : null;
     if (a) a.exped[holder] = { tx: 6, ty: 6, dist: 2, legs: 0, sinceDay: today, sincePart: 0, duration: 12, finds: [], encounters: [] };
