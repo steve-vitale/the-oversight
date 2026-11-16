@@ -146,9 +146,12 @@ function classifyLaunch(args) {
   if (diedAway) cls = 'died-en-route';
   else if (!everExped && alwaysAtHaven) cls = 'stayed-home-died';
   else cls = 'died-at-home-other';
-  return Object.assign({ cls: cls, deathDay: deathDay, deathCause: deathCause,
+  // NOTE: base goes FIRST — its null death fields must not
+  // overwrite the computed ones (Object.assign applies sources
+  // left to right).
+  return Object.assign({}, base, { cls: cls, deathDay: deathDay, deathCause: deathCause,
     deathPlace: deathPlace, deathPlaceNode: deathPlaceNode,
-    deathRowMissing: deathRowMissing }, base);
+    deathRowMissing: deathRowMissing });
 }
 
 // meetingsForLaunch(j, launch): distinct in-window launched-party
