@@ -156,27 +156,37 @@ Verified on this tree before this prereg (`src/js/win-plan.js`,
      BOTH launch paths (win-plan copies the null target;
      the brain mirror leaves the fresh companion plan null).
      Path is recorded as a sub-field (`winplan` vs `brain`
-     vs `census-only`).
-  2. `haven-born-never-seeded` — the plan was created
-     target-null and reached `hunt` with NO seed-set event
-     (target null → non-null) anywhere in its recorded
-     history. Sub-reason from the engagement reads at
-     creation (most informative first): `fought-personally`
-     (`know.fought` non-empty — the villager DID fight a
-     beast, but the plan never named it); `heard-at-fire`
-     (`villageSlain` only — rumor-only, no beast the
-     villager met); `created-by-read` (neither engaged at
-     creation — a lazy `winPlanOf` read created the plan,
-     engagement came later).
-  3. `seeded-then-lost` — a non-null target was observed for
+     vs `census-only`). A companion rumorplan row at hunt
+     stage counts as launch evidence even when the plan left
+     hunt before the next census (Correction 2 note: the
+     launch event itself is the entry proof).
+  2. `seed-created` — the plan was created BY the seed
+     (`winPlanSeedFromFight` creating then immediately
+     setting the target): born targeted from a beast the
+     holder fought. Evidence: a seed-create bounce
+     (stageBefore null, targetAfter non-null) with no
+     earlier creation row for the vid.
+  3. `haven-born` — the plan was created target-null at Haven.
+     Sub-reason from the engagement reads at creation (most
+     informative first): `fought-personally` (`know.fought`
+     non-empty — the villager DID fight a beast, but the plan
+     never named it); `heard-at-fire` (`villageSlain` only —
+     rumor-only, no beast the villager met); `created-by-read`
+     (neither engaged at creation — a lazy `winPlanOf` read
+     created the plan, engagement came later). A
+     `seededBeforeHunt` flag records whether a seed-set event
+     happened before hunt entry (the conversion shape); the
+     seedattach comparison shape is `heard-at-fire` AND NOT
+     `seededBeforeHunt`.
+  4. `seeded-then-lost` — a non-null target was observed for
      the plan in an earlier census or seed event, and a null
      target later. The code says no clearing write exists;
      EXPECTED 0. Any instance here must name the transition
      days in the evidence.
-  4. `unknown` — fits none of the above (analyzer bug). The
+  5. `unknown` — fits none of the above (analyzer bug). The
      bar allows ≤10% unknown, but 0 is expected; any
      instance here is named individually in the evidence.
-- **Rumor-born** = `haven-born-never-seeded` with sub-reason
+- **Rumor-born** = `haven-born` with sub-reason
   `heard-at-fire` (fought `[]`, `villageSlainTotal` > 0 at
   creation) — the 8/10 shape from seedattach.
 - **Conversion (Q1)**: a rumor-born instance has a hunt-stage
@@ -438,14 +448,16 @@ live in-memory runs (no corpus numbers):
   the launch-at-any-stage depart branch).
 - Unit (classifier, synthetic fixtures): one fixture per
   bucket — companion-inherited via win-plan launch AND via
-  brain mirror AND via the census-only fallback; haven-born-
-  never-seeded × each sub-reason (fought-personally,
-  heard-at-fire, created-by-read); seeded-then-lost (census
-  target non-null → null); unknown (no creation, no launch,
-  no history); precedence (companion-inherited beats
-  haven-born when both evidences present; the same-day-launch
-  exclusion); instances that never reach hunt are NOT in the
-  population; repeat bounces group into ONE instance.
+  brain mirror AND via the census-only fallback; seed-created
+  (seed-create bounce, no creation row); haven-born × each
+  sub-reason (fought-personally, heard-at-fire,
+  created-by-read); seeded-then-lost (census target non-null
+  → null); unknown (creation with a target but no matching
+  rule); precedence (companion-inherited beats haven-born
+  when both evidences present; seeded-then-lost beats
+  haven-born; the same-day-launch exclusion); instances that
+  never reach hunt are NOT in the population; repeat bounces
+  group into ONE instance.
 - Unit (lifecycle, synthetic fixtures): a rumor-born instance
   that converts (seed-set at party stage → hunt launch with
   a wave-4 target) is counted converted with the mechanism
@@ -496,6 +508,53 @@ whether they hunt something real or wander.
   DIAG's subject) and `evidence/2026-11-15/sim-seedattach-a-prereg.md`
   (definitions reused; the seed call, the launch conditions,
   the gate bars).
+
+## Correction 1 (2026-11-16, before any judged sim — instrument not yet built)
+
+**C1 — a launch is an expedition START, not a depart-call
+`'launch'`.** Both depart paths return `'launch'` again on later
+days for a villager already out on expedition
+(`villager-brain.js` early return when `a.exped[vid]` is already
+set; `launchParty`'s exped check passes when already exped).
+Counting those repeats as launches would inflate Q2. The driver
+therefore records a `rumorplanLaunches` row ONLY when the call
+STARTS the inviter's expedition (exped false → true; fail-open,
+flagged `expedStart: 'unknown'`, if the expedition state cannot
+be read), one row per participant, with before/after expedition
+states on the row. Q2's unit is the LAUNCHED PLAN (one
+participant row); a launched plan is wave-4+ iff its OWN plan
+satisfies needWave ≥ 4 / target wave-4/5 / instance has a
+wave-4 bounce in its history. The launch-EVENT table (events by
+inviter-plan origin) is reported as secondary. Chance-roll
+expeditions (`villager-agency.js` `R() < chance`
+`startExpedition`, no plan involved) start no plan launch and
+are not counted; the analyzer reports expeditions-without-a-
+launch-row as a secondary residue check. The frozen definitions
+above are otherwise unchanged.
+
+## Correction 2 (2026-11-16, before any judged sim — instrument not yet built)
+
+**C2 — bucket 2 is `haven-born`, not `haven-born-never-seeded`.**
+The frozen population is EVERY hunt-stage instance, including
+ones that reach hunt WITH a target (seeded at party stage — the
+conversion shape itself). A plan born target-null at Haven and
+later seeded is still haven-born by birth; the seedattach
+`never-seeded` qualifier only fit that arm's population
+(target-null AT the bounce, never seeded by construction).
+Changes: (a) bucket 2 is renamed `haven-born` (sub-reasons
+unchanged: `fought-personally` / `heard-at-fire` /
+`created-by-read`, from the creation engagement reads); (b) a
+`seededBeforeHunt` flag on each instance records whether a
+seed-set event (bounce or census-diff, target null →
+non-null) happened before hunt entry — the seedattach
+comparison shape is `heard-at-fire` AND NOT `seededBeforeHunt`;
+(c) precedence reorders to companion-inherited >
+seed-created > seeded-then-lost > haven-born > unknown, so a
+plan that HAD a target and lost it still lands in
+seeded-then-lost rather than haven-born (the lost-target
+evidence is the discriminator). Q1 is unchanged: conversion
+is a rumor-born (`heard-at-fire`) instance with a hunt-stage
+launch whose target is a wave-4+ monster.
 
 ## Metric review (to be filled in the evidence file)
 
