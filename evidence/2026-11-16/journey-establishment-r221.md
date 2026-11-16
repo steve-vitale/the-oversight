@@ -277,4 +277,14 @@ from r213/r217:
   same as its predecessors.)
 
 ## Closeout
-[MERGE-RESULT — filled at closeout]
+- Committed bd4434428 (prereg + driver/analyzer clones + proof
+  test + run note) in the worktree; safe-commit index clobber
+  struck (repaired via ls-tree -r pipe, hashes verified).
+- Master moved mid-run (97ff03342 sim-winnability-round-0430);
+  rebased onto it clean (no conflicts — my files are all new),
+  proof tests re-run green on the rebased tip (want-raise 7/7,
+  mood-goodbye 10/10, spotter 35/35).
+- Merged ff-only to master. **Merged locally, pending ship.** No
+  bump, no push, no live check (ship loop owns those).
+- Rotation written `1→2` at closeout with read-back (r217's write
+  never landed; corrected this run).
