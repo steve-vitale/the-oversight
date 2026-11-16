@@ -250,4 +250,4 @@ Gate log: evidence/2026-11-16/journey-succession-r229-gate.log.
   I/O-bound, 2:10 CPU over 17:37 elapsed). Heartbeat loop (5-min cadence)
   started 22:23Z; no gaps.
 - Rotation-b: 7 → 4. Lock: deleted at closeout.
-- Merge: [PENDING]
+- Merge: ff-only 03f72ca5c (rebased onto 60594bdf6 after vetreengage-a landed; shadow proof re-run byte-identical on the rebased tip; gate 329/11, 0 attributable). Tree released, branch deleted, rotation-b 7 → 4, lock deleted.
