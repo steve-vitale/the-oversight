@@ -220,7 +220,7 @@ function legOf(perSeedList) {
   check('J3 zero-denominator: kills 1, deaths 0, w5 class KILLED',
     r.launchedKills === 1 && r.launchedDeaths === 0 && r.w5class === 'KILLED',
     'kills=' + r.launchedKills + ' deaths=' + r.launchedDeaths + ' cls=' + r.w5class);
-  const ctrl = legOf([baseSeed({ gameDays: 150 })]);
+  const ctrl = legOf([ANALYZE.analyzeSeedlandSeed(baseSeed({ gameDays: 150 }))]);
   const on = legOf([r]);
   const judge = ANALYZE.judgeSeedland(ctrl, on);
   check('J3 judge: zero-denominator kill:death passes (value null)',
@@ -241,7 +241,7 @@ function legOf(perSeedList) {
     locked.w5class === 'LOCKED' && neverFaced.w5class === 'NEVER-FACED' &&
     fnkSeed.w5class === 'FACED-NOT-KILLED' && killed.w5class === 'KILLED',
     [locked.w5class, neverFaced.w5class, fnkSeed.w5class, killed.w5class].join('/'));
-  const ctrl = legOf([baseSeed({ gameDays: 150 })]);
+  const ctrl = legOf([ANALYZE.analyzeSeedlandSeed(baseSeed({ gameDays: 150 }))]);
   const onNoUnlock = legOf([ANALYZE.analyzeSeedlandSeed(baseSeed({ maxWave: 4,
     instances: [launchedInst('v1', 'strike', 10, 20, 'v2', null)],
     v4encounters: [enc(25, 'v2', 'strike', 4, 'expedition', 'vKill')] }))]);
@@ -262,7 +262,7 @@ function legOf(perSeedList) {
       killCalls: [{ day: 60, mid: 'cancellation', wave: 5, by: 'v1', via: 'field', trick: null, dup: false }],
     }));
   }
-  const ctrl = legOf([baseSeed({ seed: 102141, gameDays: 150 }), baseSeed({ seed: 102142, gameDays: 140 })]);
+  const ctrl = legOf([ANALYZE.analyzeSeedlandSeed(baseSeed({ seed: 102141, gameDays: 150 })), ANALYZE.analyzeSeedlandSeed(baseSeed({ seed: 102142, gameDays: 140 }))]);
   const on = legOf([goSeed(102141), goSeed(102142)]);
   const judge = ANALYZE.judgeSeedland(ctrl, on);
   check('J5 full GO fixture: all four bars + instrument pass -> GO',
