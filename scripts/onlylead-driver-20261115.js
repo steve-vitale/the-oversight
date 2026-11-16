@@ -747,6 +747,15 @@ if (require.main === module) (async function () {
       return path.join(REPO, 'evidence', '2026-11-15',
         pol === 'competent-covenant-b' ? stem + '-control' : stem + '-on');
     }
+    // COURTSHIP-CONFIRM (RUN=courtship-confirm-b, arm
+    // sim-courtship-confirm-b): confirm of the rework2 PILOT GO,
+    // same two legs, own corpora dirs
+    // (perseed-courtship-confirm-b-control / -on), fresh band
+    // 100621–100636.
+    if (RUN === 'courtship-confirm-b') {
+      return path.join(REPO, 'evidence', '2026-11-15',
+        pol === 'competent-covenant-b' ? stem + '-control' : stem + '-on');
+    }
     return path.join(REPO, 'evidence', '2026-11-15',
       pol === 'competent-scaleclimb-b' ? stem + '-control' : stem + '-on');
   }
