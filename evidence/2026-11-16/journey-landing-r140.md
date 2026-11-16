@@ -334,8 +334,19 @@ before commit: heed-deepen 11/11, close-budget 14/14, warn-details
 
 ## Landing
 
-PENDING — filled after the gate: commit via safe-commit.sh, ff-only
-merge to master, worktree release, rotation 0→1, lock deletion.
+- Committed `0afdaf969` on base `7bb50f3dc`; sibling landings landed
+  first (sim-winnability-round-2030, sim-stand199-b, sim-seasoning-g1-b,
+  journey-crisis r228 — master moved to `3a1a94700`), so the branch was
+  rebased cleanly to `6436b14c8` (no file overlap with this run's changed
+  files; the r228 dialogue work touched `conversation.js`, not
+  `convo-dialogue.js` or `competent.js`). Proof tests re-run green on
+  the rebased tree: heed-deepen 11/11, close-budget 14/14, warn-details
+  12/12.
+- Merged ff-only to master locally, pending ship — no version bump, no
+  push, no live verification (ship loop owns those).
+- Worktree released, rotation 0→1, lock deleted. [needs-eyes] carried
+  on the commit — the heed deepen is a first-fortnight dialogue feel
+  change Steve should playtest on his phone.
 
 ## Infrastructure notes
 
