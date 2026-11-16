@@ -8,8 +8,10 @@
 // away-while-at-Haven classifier places one fixture per class
 // ((a) linger-after-return, (b) non-spatial absence,
 // (c) recorder/node-read artifact, (d) other-with-evidence,
-// UNRESOLVED with a named missing hook, window widening, and the
-// same-day-return grace), the subject extraction finds the 9 distinct
+// UNRESOLVED with a named missing hook, window widening, the
+// same-day-return grace, multi-trip reads (each flag day against
+// ITS trip), the departure-part guard flicker, and the return-walk
+// clock lag), the subject extraction finds the 9 distinct
 // members / 18 flag rows of the poolmarginals instrument corpus, the
 // recorder rows have their shape, the vbrainScorePick wrap records
 // pool rows without changing the pick, the pool replica runs against
@@ -231,6 +233,63 @@ function awayRec(nx, ny, purpose, sinceDay, duration) {
   check('expedition record vanished before the flag day is recorded in details',
     c.cls === '(b)' && c.details.expedVanished === true,
     'cls=' + c.cls + ' expedVanished=' + c.details.expedVanished);
+})();
+// Multi-trip (emma/adaeze shape): three back-to-back expeditions —
+// two to the Haven tile, then one off-Haven. The classifier must
+// read each flag day against ITS trip, not the merged span.
+(function () {
+  const rows = buildTrace([5, 16], function (d) {
+    if (d === 10 || d === 11) return { away: true, awayRaw: awayRec(4, 4, 'expedition', 10, 13),
+      exped: { tx: 4, ty: 4, dist: 1, legs: (d - 10) * 4, sinceDay: 10, sincePart: 0, duration: 13, encounters: 0, finds: 1 },
+      objective: { kind: 'EXPLORE', state: 'out', purpose: 'expedition', tx: 4, ty: 4, partsLeft: 3, indoor: false, targetVid: null, companion: null } };
+    if (d === 12 || d === 13) return { away: true, awayRaw: awayRec(4, 4, 'expedition', 12, 20),
+      exped: { tx: 4, ty: 4, dist: 1, legs: (d - 12) * 4, sinceDay: 12, sincePart: 0, duration: 20, encounters: 0, finds: 0 },
+      objective: { kind: 'EXPLORE', state: 'out', purpose: 'expedition', tx: 4, ty: 4, partsLeft: 2, indoor: false, targetVid: null, companion: null } };
+    if (d === 14 || d === 15) return { away: true, awayRaw: awayRec(5, 5, 'expedition', 14, 13),
+      exped: { tx: 5, ty: 5, dist: 2, legs: (d - 14) * 4, sinceDay: 14, sincePart: 0, duration: 13, encounters: 0, finds: 0 },
+      node: { nx: 5, ny: 5 },
+      objective: { kind: 'EXPLORE', state: 'out', purpose: 'expedition', tx: 5, ty: 5, partsLeft: 3, indoor: false, targetVid: null, companion: null } };
+    return {};
+  });
+  const c = ANALYZE.classifyMember(rows, [11, 13], HAVEN);
+  check('multi-trip: back-to-back expeditions read per trip, both (b)',
+    c.cls === '(b)' && c.details.trips && c.details.trips.length === 3 &&
+    c.details.coveringTrips.length === 2 &&
+    c.details.perDay.every(function (p) { return p.mechanism === 'to-haven'; }),
+    'cls=' + c.cls + ' trips=' + JSON.stringify(c.details.trips.map(function (t) { return [t.start, t.end]; })) + ' covering=' + JSON.stringify(c.details.coveringTrips));
+})();
+// Departure-part flicker (elena/boris shape): the flag day is the
+// trip's first day — departed at dawn as a guard, node back at the
+// post by end of day.
+(function () {
+  const rows = buildTrace([5, 16], function (d) {
+    if (d === 10 || d === 11) return { away: true, awayRaw: awayRec(5, 4, 'guard', 10, 3),
+      node: { nx: 5, ny: 4 },
+      objective: { kind: 'GUARD', state: 'out', purpose: 'guard', tx: 5, ty: 4, partsLeft: 3, indoor: false, targetVid: 'miguel_santos', companion: 'miguel_santos' } };
+    return {};
+  });
+  const c = ANALYZE.classifyMember(rows, [10], HAVEN);
+  check('(d) departure-part flicker: flag day is the guard trip\'s first day',
+    c.cls === '(d)' && c.details.perDay[0].mechanism === 'departure-flicker' &&
+    c.evidence.indexOf('meander') !== -1,
+    'cls=' + c.cls + ' mechanism=' + (c.details.perDay[0] || {}).mechanism + ' evidence=' + c.evidence);
+})();
+// Return-walk + clock lag (gen_51ydeej shape): the trip's last away
+// day is 11, the node is home on day 12, the flag day is 12 — the
+// clock read 3 parts against a duration of 4 at that dawn.
+(function () {
+  const rows = buildTrace([5, 16], function (d) {
+    if (d === 11) return { away: true,
+      awayRaw: { nx: 5, ny: 5, purpose: 'visit', sinceDay: 11, sincePart: 1, duration: 4 },
+      node: { nx: 5, ny: 5 },
+      objective: { kind: 'VISIT', state: 'out', purpose: 'visit', tx: 5, ty: 5, partsLeft: 4, indoor: false, targetVid: 'gen_j4ldf1z', companion: null } };
+    return {};
+  });
+  const c = ANALYZE.classifyMember(rows, [12], HAVEN);
+  check('(d) return-day with clock lag: flag day is the arrival day, clock 3 < 4 at dawn',
+    c.cls === '(d)' && c.details.perDay[0].mechanism === 'return-day' &&
+    c.evidence.indexOf('3 parts against a duration of 4') !== -1,
+    'cls=' + c.cls + ' mechanism=' + (c.details.perDay[0] || {}).mechanism + ' evidence=' + c.evidence);
 })();
 
 // ---------- 2b. Subject extraction on the real poolmarginals corpus ----------

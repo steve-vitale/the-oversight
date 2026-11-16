@@ -94,26 +94,36 @@ function buildTrace(j, memberId) {
   return rows;
 }
 
-// classifyMember(rows, flagDays, haven): the frozen classification.
-// rows: full trace series for the member. flagDays: sorted dawn days
-// where the pool flagged the member away-at-Haven. haven: {nx, ny}.
-// Returns {cls, evidence, window, spell, details}.
-//   (a) linger-after-return — the node was off-Haven during the away
-//       spell, came back to Haven, and a flag day falls >=1 day after
-//       that node-return day.
-//   (b) non-spatial absence — the node NEVER left Haven during the
-//       spell and the away record's destination IS Haven (departure
-//       to a Haven target / expedition to the Haven tile): the flag
-//       marks a trip whose destination is home, not a spatial absence.
-//   (c) recorder / node-read artifact — no trace spell covers any
-//       flag day and the trace is complete on those days: the pool
-//       row's away read disagrees with the daily record.
-//   (d) other, with evidence — a coherent mechanism visible in the
-//       trace that is neither (a) nor (b) (e.g. departure recorded to
-//       an off-Haven target but the node never moved; expedition
-//       record ended without clearing the away flag).
+// classifyMember(rows, flagDays, haven): the frozen classification,
+// read per TRIP, not per spell. A spell (a maximal run of away===true
+// trace days) merges back-to-back trips — a new away record is a new
+// trip even when the days are adjacent — and it compares a dawn pool
+// read against end-of-day trace rows, which is the wrong clock: the
+// pool reads at part 0 (dawn scoring, after the base travel pass),
+// the trace snapshots at end of day. The trip is identified by the
+// away record itself (sinceDay/sincePart/purpose/nx,ny); each flag
+// day is evaluated against the trip live at that dawn:
+//   (a) linger-after-return — the trip's node left Haven, came back
+//       on arrival day A, and a flag day falls >= A+1 while the trip
+//       is still live at dawn (flag day <= trip end + 1).
+//   (b) non-spatial absence — the trip's destination IS Haven and
+//       the node never left Haven during the trip (expedition to the
+//       Haven tile / objective departure to a Haven target).
+//   (c) recorder / node-read artifact — NO trip covers a flag day
+//       and the trace is complete there (the pool row disagrees with
+//       the daily record), OR the flag day falls strictly inside a
+//       trip whose node is off-Haven on every trace day through it
+//       with no arrival yet (no return walk is possible inside a
+//       continuous trip, so no code path puts the dawn node at Haven).
+//   (d) other, with evidence — return-day (the flag day IS the
+//       arrival day: the return walk lands at dawn and the away
+//       clock expires later that day), departure-part flicker (the
+//       flag day is the trip's first day: departed at dawn and the
+//       at-site meander stepped the node onto Haven before the dawn
+//       scoring), or departure-recorded-never-moved (node Haven on
+//       every trip day though the record points off-Haven).
 //   UNRESOLVED — the trace cannot decide; missingHook names what
-//       would decide it.
+//   would decide it (including flag days split across mechanisms).
 function classifyMember(rows, flagDays, haven) {
   const firstFlag = flagDays[0];
   const lastFlag = flagDays[flagDays.length - 1];
@@ -130,177 +140,242 @@ function classifyMember(rows, flagDays, haven) {
   const missingFlagDays = flagDays.filter(function (d) { return !byDay[d]; });
   if (missingFlagDays.length) {
     return { cls: 'UNRESOLVED', missingHook: 'awayTrace gap on flag day(s) ' + missingFlagDays.join(','),
-      evidence: 'no trace row on the flagged dawn(s); the spell boundaries cannot be read',
+      evidence: 'no trace row on the flagged dawn(s); the trip boundaries cannot be read',
       window: { start: defaultStart, end: defaultEnd, widened: false }, spell: null, details: { missingFlagDays: missingFlagDays } };
   }
-  // Spells: maximal runs of consecutive away===true trace days.
-  const spells = [];
-  let cur = null;
-  for (const r of rows) {
-    if (r.away === true) {
-      if (!cur || r.day !== cur.end + 1) {
-        cur = { start: r.day, end: r.day, days: [r.day] };
-        spells.push(cur);
-      } else { cur.end = r.day; cur.days.push(r.day); }
-    } else cur = null;
+  // TRIPS: away===true trace rows grouped by away-record identity
+  // (sinceDay/sincePart/purpose/nx,ny). A new identity is a new trip
+  // even when the days are adjacent; a missing trace day does not
+  // split a trip — the record identity is the key, not adjacency.
+  function tripKey(r) {
+    const a = r.awayRaw || {};
+    if (a && a.sinceDay != null) return [a.sinceDay, a.sincePart, a.purpose, a.nx, a.ny].join('/');
+    const e = r.exped || {};
+    if (e && e.sinceDay != null) return ['exped', e.sinceDay, e.sincePart, e.tx, e.ty].join('/');
+    return 'unknown/' + r.day;
   }
-  // The spell(s) covering at least one flag day. A flag day one past
-  // a spell's end is a SAME-DAY RETURN: the member was away at dawn
-  // (when the pool read them) and came home during that day, so the
-  // end-of-day trace already shows them home. The spell covers it in
-  // the dawn sense; it is not an artifact.
-  const covering = spells.filter(function (sp) {
-    return flagDays.some(function (d) { return d >= sp.start && d <= sp.end + 1; });
+  const trips = [];
+  let curTrip = null;
+  for (const r of rows) {
+    if (r.away !== true) { curTrip = null; continue; }
+    const k = tripKey(r);
+    if (!curTrip || curTrip.key !== k) {
+      curTrip = { key: k, start: r.day, end: r.day, days: [r.day], rec: r.awayRaw || null };
+      trips.push(curTrip);
+    } else { curTrip.end = r.day; curTrip.days.push(r.day); }
+  }
+  // The trip live at a flag day's dawn: the trip whose trace span
+  // holds the day, or ends the day before it (return-day: away at
+  // dawn, cleared during the day). When two trips touch the day, the
+  // dawn departure (sinceDay == day, sincePart == 0) wins — a part-0
+  // departure overwrites the record before the dawn scoring runs.
+  function coveringTrip(d) {
+    const cands = trips.filter(function (t) { return d >= t.start && d <= t.end + 1; });
+    if (!cands.length) return null;
+    if (cands.length === 1) return cands[0];
+    const dawn = cands.find(function (t) { return t.rec && t.rec.sinceDay === d && (t.rec.sincePart | 0) === 0; });
+    return dawn || cands[0];
+  }
+  // Per-trip trajectory facts. arrivalDay is the first trip day the
+  // node reads Haven AFTER off-Haven days; it can also land the
+  // morning after the last away day (return walk at dawn, clock
+  // expiring later that day), read off the next trace row.
+  function tripFacts(t) {
+    const trows = rows.filter(function (r) { return r.day >= t.start && r.day <= t.end; });
+    let everOff = false, arrivalDay = null;
+    for (const r of trows) {
+      const off = r.node && !atHaven(r.node, haven);
+      if (off) everOff = true;
+      if (arrivalDay == null && everOff && r.node && atHaven(r.node, haven)) arrivalDay = r.day;
+    }
+    if (arrivalDay == null && everOff) {
+      const after = byDay[t.end + 1];
+      if (after && after.away !== true && after.node && atHaven(after.node, haven)) arrivalDay = t.end + 1;
+    }
+    const rec = t.rec || {};
+    const destHaven = rec.nx != null && rec.ny != null && rec.nx === haven.nx && rec.ny === haven.ny;
+    let expedFirstDay = null, expedLastDay = null, expedDestHaven = false;
+    for (const r of trows) {
+      if (r.exped) {
+        if (expedFirstDay == null) expedFirstDay = r.day;
+        expedLastDay = r.day;
+        if (r.exped.tx === haven.nx && r.exped.ty === haven.ny) expedDestHaven = true;
+      }
+    }
+    return { trows: trows, everOff: everOff, arrivalDay: arrivalDay,
+      destHaven: destHaven, expedDestHaven: expedDestHaven,
+      expedFirstDay: expedFirstDay, expedLastDay: expedLastDay };
+  }
+  // Return-clock reading at a flag day's dawn, from the away record:
+  // partsAway = (day - sinceDay)*4 + (0 - sincePart); the flag is
+  // live while partsAway < duration (game.js npcNodeTravel).
+  function clockAtDawn(t, d) {
+    const rec = t.rec || {};
+    if (rec.sinceDay == null || rec.duration == null) return null;
+    const parts = (d - rec.sinceDay) * 4 + (0 - (rec.sincePart | 0));
+    return { parts: parts, duration: rec.duration, expired: parts >= rec.duration };
+  }
+  // Classify one flag day against its covering trip.
+  function classifyFlagDay(d) {
+    const t = coveringTrip(d);
+    if (!t) {
+      return { cls: '(c)', mechanism: 'no-trip',
+        evidence: 'pool row flags the member away-at-Haven at dawn of day ' + d +
+          ' but no away trip covers that dawn in the daily trace (away=false on the flag day and the ' +
+          'nearest trips are ' + JSON.stringify(trips.map(function (x) { return [x.start, x.end]; })) +
+          '); the pool row and the daily record disagree' };
+    }
+    const f = tripFacts(t);
+    const rec = t.rec || {};
+    const flagRow = byDay[d];
+    const purpose = rec.purpose || (flagRow && flagRow.exped ? 'expedition' : 'unknown');
+    const tripName = 'trip ' + t.start + '-' + t.end + ' (' + purpose + ' ->(' +
+      (rec.nx != null ? rec.nx + ',' + rec.ny : '?,?') + '), since ' + rec.sinceDay + '/' + (rec.sincePart | 0) + ', dur ' + rec.duration + ')';
+    // (b) non-spatial absence: the trip's destination IS Haven and
+    // the node never left Haven during the trip.
+    if ((f.destHaven || f.expedDestHaven) && !f.everOff) {
+      return { cls: '(b)', mechanism: 'to-haven',
+        evidence: 'node never left Haven during ' + tripName + '; the trip destination IS Haven (' +
+          (f.expedDestHaven ? 'expedition tx,ty=' + haven.nx + ',' + haven.ny : 'away nx,ny=' + rec.nx + ',' + rec.ny) +
+          ') — the flag marks a trip whose destination is home, not a spatial absence' };
+    }
+    // (a) linger-after-return: arrived home, flag >=1 day after the
+    // arrival, trip still live at dawn (flag day <= trip end + 1).
+    if (f.arrivalDay != null && d >= f.arrivalDay + 1 && d <= t.end + 1) {
+      return { cls: '(a)', mechanism: 'linger',
+        evidence: 'node left Haven during ' + tripName + ', walked back to Haven on day ' + f.arrivalDay +
+          ', and the flag was still set at dawn of day ' + d + ' — ' + (d - f.arrivalDay) +
+          ' day(s) after the return' };
+    }
+    // (d) return-day: the flag day IS the arrival day.
+    if (f.arrivalDay != null && d === f.arrivalDay) {
+      const ck = clockAtDawn(t, d);
+      const clockNote = ck ? (' at dawn the clock read ' + ck.parts + ' parts against a duration of ' + ck.duration +
+        (ck.expired ? ' (expired — the flag should already have cleared)' : ' (unexpired — the flag was still live)')) : '';
+      return { cls: '(d)', mechanism: 'return-day',
+        evidence: 'flag day ' + d + ' is the return day itself: the return walk put the node on Haven at dawn of ' + tripName +
+          ' (node off-Haven on day ' + (f.arrivalDay - 1) + ', Haven from day ' + f.arrivalDay + ')' + clockNote +
+          '; the frozen (a) rule (flag >=1 day after the return) does not fire — the dawn scoring sits in the window between the walk home and the clock expiring' };
+    }
+    // (d) departure-part flicker: the flag day is the trip's first
+    // day — departed at dawn, and the at-site meander stepped the
+    // node onto Haven before the dawn scoring.
+    if (d === t.start && rec.sinceDay === d && !f.destHaven && !f.expedDestHaven &&
+        flagRow && flagRow.node && rec.nx != null && flagRow.node.nx === rec.nx && flagRow.node.ny === rec.ny) {
+      const comp = (flagRow.objective && flagRow.objective.companion) || null;
+      return { cls: '(d)', mechanism: 'departure-flicker',
+        evidence: 'flag day ' + d + ' is the departure day of ' + tripName +
+          (comp ? ' (guard companion ' + comp + ')' : '') +
+          ': the member departed at dawn (objDepart sets the node to the target, villager-objectives.js:1383) and the same travel pass then ran objAwayStep on the member\'s own roster turn — already at the post, the at-site meander (villager-objectives.js:1684, 50% when partsLeft>1) stepped the node onto Haven before the dawn scoring (objTick runs after the base travel, villager-objectives.js:2289); by end of day ' + d + ' the node is back at the post (' + rec.nx + ',' + rec.ny + ')' };
+    }
+    // (d) departure recorded but the node never moved.
+    if (!f.everOff && !f.destHaven && !f.expedDestHaven) {
+      return { cls: '(d)', mechanism: 'never-moved',
+        evidence: 'node never left Haven during ' + tripName + ' yet the away record points off-Haven (nx,ny=' +
+          rec.nx + ',' + rec.ny + ', purpose ' + (rec.purpose || 'unknown') + ') — the departure was recorded but the member never moved in any end-of-day read' };
+    }
+    // (c) node-read: the flag day falls strictly inside the trip, the
+    // node is off-Haven on every trace day through it, and there is no
+    // arrival yet — no code path puts the dawn node at Haven inside a
+    // continuous trip (the return walk ends the trip; the at-site
+    // meander steps only to adjacent tiles).
+    if (d > t.start && d <= t.end && flagRow && flagRow.node && !atHaven(flagRow.node, haven) && (f.arrivalDay == null || f.arrivalDay > d)) {
+      return { cls: '(c)', mechanism: 'node-read',
+        evidence: 'trace shows the node off-Haven for the whole of ' + tripName + ' through flag day ' + d +
+          ' (node ' + flagRow.node.nx + ',' + flagRow.node.ny + ' on the flag day itself) with no arrival yet — no code path puts the dawn node at Haven inside a continuous trip, so the pool row\'s Haven read disagrees with the daily record' };
+    }
+    return { cls: 'UNRESOLVED', mechanism: 'no-branch',
+      missingHook: 'flag day ' + d + ' against ' + tripName + ': no (a)-(d) branch matched (arrivalDay=' + f.arrivalDay + ', everOff=' + f.everOff + ', destHaven=' + f.destHaven + '); need a part-level probe of the dawn pass',
+      evidence: 'trace shape falls outside (a)-(d) as implemented for flag day ' + d };
+  }
+  const perDay = flagDays.map(function (d) {
+    const r = classifyFlagDay(d);
+    return { day: d, cls: r.cls, mechanism: r.mechanism, evidence: r.evidence, missingHook: r.missingHook || null };
   });
-  if (!covering.length) {
-    // No spell covers any flag day: the daily record says the member
-    // was NOT away around those dawns. Same-day depart+return inside
-    // one flag day is still possible in principle — check the away
-    // record's sinceDay on the nearest spell: if a later spell starts
-    // after the last flag day with sinceDay > lastFlag, the flag
-    // predates any departure the trace knows; if an earlier spell
-    // ended before the first flag day, the flag postdates it. Either
-    // way the pool row and the daily record disagree.
-    const flagAway = flagDays.map(function (d) { return { day: d, away: byDay[d].away, node: byDay[d].node }; });
-    return { cls: '(c)', evidence: 'pool row flags the member away-at-Haven on day(s) ' + flagDays.join(',') +
-        ' but the daily trace shows away=false on every flag day (end-of-day) with no away spell covering any of them; ' +
-        'nearest spells: ' + JSON.stringify(spells.map(function (sp) { return [sp.start, sp.end]; })) +
-        '; flag-day trace reads: ' + JSON.stringify(flagAway),
-      window: { start: defaultStart, end: defaultEnd, widened: false }, spell: null,
-      details: { flagAway: flagAway, spells: spells.map(function (sp) { return [sp.start, sp.end]; }) } };
+  const coveringTrips = [];
+  for (const d of flagDays) {
+    const t = coveringTrip(d);
+    if (t && coveringTrips.indexOf(t) === -1) coveringTrips.push(t);
   }
-  // One spell per member in practice; take the spell covering the
-  // FIRST flag day (a second covering spell would be a re-departure
-  // inside the flag run — reported, not merged).
-  const spell = covering[0];
-  const spellRows = rows.filter(function (r) { return r.day >= spell.start && r.day <= spell.end; });
-  const otherCovering = covering.slice(1).map(function (sp) { return [sp.start, sp.end]; });
-  // Flag days covered only by the same-day-return grace (day == end+1).
-  const graceDays = flagDays.filter(function (d) { return d === spell.end + 1; });
-  // Return day: first trace day after the spell with away===false.
-  let returnDay = null;
-  for (const r of rows) {
-    if (r.day > spell.end && r.away !== true) { returnDay = r.day; break; }
-  }
-  // Window: default ±5, widened to cover the whole spell when the
-  // departure or the return falls outside it.
+  const firstTrip = coveringTrips[0] || null;
+  const spell = firstTrip ? [firstTrip.start, firstTrip.end] : null;
+  // Window: default ±5, widened to cover every covering trip.
   let wStart = defaultStart, wEnd = defaultEnd, widened = false, widenNote = null;
-  if (spell.start < wStart) { wStart = spell.start; widened = true; }
-  if (spell.end > wEnd) { wEnd = spell.end; widened = true; }
-  if (widened) widenNote = 'window widened to cover the away spell ' + spell.start + '-' + spell.end;
-  // Node trajectory during the spell.
-  let everOffHaven = false;
-  let nodeReturnDay = null;
-  for (const r of spellRows) {
-    if (r.node && !atHaven(r.node, haven)) everOffHaven = true;
-    if (nodeReturnDay == null && everOffHaven && r.node && atHaven(r.node, haven)) nodeReturnDay = r.day;
+  for (const t of coveringTrips) {
+    if (t.start < wStart) { wStart = t.start; widened = true; }
+    if (t.end > wEnd) { wEnd = t.end; widened = true; }
   }
-  // The away record on the first flag day INSIDE the spell (a grace
-  // flag day is the return day itself — its trace row already shows
-  // the flag cleared, so read the record off the last spell day).
-  const recDay = flagDays.find(function (d) { return d >= spell.start && d <= spell.end; }) || spell.end;
-  const flagRow = byDay[recDay];
-  const awayRec = (flagRow && flagRow.awayRaw) || null;
-  const expedRec = (flagRow && flagRow.exped) || null;
-  const objRec = (flagRow && flagRow.objective) || null;
-  // Did the expedition record exist earlier in the spell but vanish
-  // while the flag stayed set?
+  if (widened) widenNote = 'window widened to cover the away trip(s) ' + coveringTrips.map(function (t) { return t.start + '-' + t.end; }).join(', ');
+  const window = { start: wStart, end: wEnd, widened: widened, widenNote: widenNote };
+  // Details (the keys the proof test reads are kept, plus the trip
+  // decomposition so the evidence can name the covering trip).
+  let returnDay = null;
+  if (coveringTrips.length) {
+    const lastEnd = coveringTrips[coveringTrips.length - 1].end;
+    for (const r of rows) {
+      if (r.day > lastEnd && r.away !== true) { returnDay = r.day; break; }
+    }
+  }
+  const firstFacts = firstTrip ? tripFacts(firstTrip) : null;
+  const graceDays = flagDays.filter(function (d) {
+    return coveringTrips.some(function (t) { return d === t.end + 1; });
+  });
+  const flagInside = flagDays.find(function (d) { const t = coveringTrip(d); return t && d >= t.start && d <= t.end; });
+  const flagRowForDetails = flagInside != null ? byDay[flagInside] : (firstTrip ? byDay[firstTrip.end] : null);
   let expedVanished = false;
-  let expedFirstDay = null, expedLastDay = null;
-  for (const r of spellRows) {
-    if (r.exped) { if (expedFirstDay == null) expedFirstDay = r.day; expedLastDay = r.day; }
+  for (const t of coveringTrips) {
+    const tf = tripFacts(t);
+    if (tf.expedFirstDay != null) {
+      const onFlag = flagDays.some(function (d) { const r = byDay[d]; return r && r.exped; });
+      if (!onFlag) expedVanished = true;
+    }
   }
-  if (expedFirstDay != null && expedRec == null) expedVanished = true;
   const details = {
-    spell: [spell.start, spell.end],
-    otherCoveringSpells: otherCovering,
+    trips: trips.map(function (t) { return { start: t.start, end: t.end, key: t.key,
+      purpose: (t.rec || {}).purpose || null, target: (t.rec && t.rec.nx != null) ? [t.rec.nx, t.rec.ny] : null,
+      sinceDay: (t.rec || {}).sinceDay, sincePart: (t.rec || {}).sincePart, duration: (t.rec || {}).duration }; }),
+    coveringTrips: coveringTrips.map(function (t) { return [t.start, t.end]; }),
+    perDay: perDay,
+    spell: spell,
+    otherCoveringSpells: coveringTrips.slice(1).map(function (t) { return [t.start, t.end]; }),
     graceDays: graceDays,
     returnDay: returnDay,
-    everOffHaven: everOffHaven, nodeReturnDay: nodeReturnDay,
-    awayRec: awayRec, expedOnFlagDay: expedRec, objectiveOnFlagDay: objRec,
-    expedRange: expedFirstDay != null ? [expedFirstDay, expedLastDay] : null,
+    everOffHaven: firstFacts ? firstFacts.everOff : null,
+    nodeReturnDay: firstFacts ? firstFacts.arrivalDay : null,
+    awayRec: firstTrip ? (firstTrip.rec || null) : null,
+    expedOnFlagDay: (flagRowForDetails && flagRowForDetails.exped) || null,
+    objectiveOnFlagDay: (flagRowForDetails && flagRowForDetails.objective) || null,
+    expedRange: (firstFacts && firstFacts.expedFirstDay != null) ? [firstFacts.expedFirstDay, firstFacts.expedLastDay] : null,
     expedVanished: expedVanished,
     flagDays: flagDays.slice(),
   };
-  const window = { start: wStart, end: wEnd, widened: widened, widenNote: widenNote };
-  // (a) linger-after-return: node came back to Haven during the spell
-  // and a flag day falls >=1 day after that node-return day.
-  if (nodeReturnDay != null) {
-    const lateFlags = flagDays.filter(function (d) { return d >= nodeReturnDay + 1; });
-    if (lateFlags.length) {
-      return { cls: '(a)', evidence: 'node left Haven during the away spell (days ' + spell.start + '-' + spell.end +
-          ', purpose ' + ((awayRec && awayRec.purpose) || 'unknown') + '), walked back to Haven on day ' + nodeReturnDay +
-          ', and the flag was still set on flag day(s) ' + lateFlags.join(',') + ' — ' +
-          (lateFlags[0] - nodeReturnDay) + ' day(s) after the return; the flag cleared on day ' +
-          (returnDay != null ? returnDay : ('after ' + spell.end)) + ' when the away clock expired' +
-          (graceDays.length ? '; flag day(s) ' + graceDays.join(',') + ' are same-day returns (away at dawn, home by end of day)' : ''),
-        window: window, spell: [spell.start, spell.end], details: details };
-    }
+  const classes = Array.from(new Set(perDay.map(function (p) { return p.cls; })));
+  if (classes.length === 1 && classes[0] !== 'UNRESOLVED') {
+    return { cls: classes[0],
+      evidence: perDay.map(function (p) { return 'day ' + p.day + ': ' + p.evidence; }).join(' | '),
+      window: window, spell: spell, details: details };
   }
-  // (b) non-spatial absence: the node NEVER left Haven during the
-  // spell, and the away record's destination IS Haven.
-  if (!everOffHaven) {
-    const destHaven = awayRec && awayRec.nx != null && awayRec.ny != null &&
-      awayRec.nx === haven.nx && awayRec.ny === haven.ny;
-    const expedDestHaven = expedRec && expedRec.tx != null && expedRec.ty != null &&
-      expedRec.tx === haven.nx && expedRec.ty === haven.ny;
-    if (destHaven || expedDestHaven) {
-      const state = expedDestHaven ? 'expedition to the Haven tile' :
-        ('objective departure to a Haven target (purpose ' + ((awayRec && awayRec.purpose) || 'unknown') + ')');
-      return { cls: '(b)', evidence: 'node never left Haven during the away spell (days ' + spell.start + '-' + spell.end +
-          '); the away record itself points at Haven (' + state + ', away.nx,ny=' +
-          ((awayRec && awayRec.nx) != null ? awayRec.nx + ',' + awayRec.ny : 'null') +
-          (expedDestHaven ? '; expedition tx,ty=' + expedRec.tx + ',' + expedRec.ty : '') +
-          ') — the flag marks a trip whose destination is home, not a spatial absence',
-        window: window, spell: [spell.start, spell.end], details: details };
-    }
-    if (awayRec && awayRec.nx != null && awayRec.ny != null) {
-      return { cls: '(d)', evidence: 'node never left Haven during the away spell (days ' + spell.start + '-' + spell.end +
-          ') yet the away record points off-Haven (nx,ny=' + awayRec.nx + ',' + awayRec.ny +
-          ', purpose ' + (awayRec.purpose || 'unknown') + ') — the departure was recorded but the member never moved; ' +
-          'the flag is set on a trip that never started walking',
-        window: window, spell: [spell.start, spell.end], details: details };
-    }
-    return { cls: 'UNRESOLVED', missingHook: 'away record unreadable on the flag day (no nx,ny/purpose to name the state)',
-      evidence: 'node never left Haven during the spell, but the away record carries no destination or purpose, so the non-spatial state cannot be named',
-      window: window, spell: [spell.start, spell.end], details: details };
+  if (classes.length === 1) {
+    const p0 = perDay[0];
+    return { cls: 'UNRESOLVED', missingHook: p0.missingHook,
+      evidence: p0.evidence, window: window, spell: spell, details: details };
   }
-  // Node left Haven, came back, but no flag day falls >=1 day after
-  // the node return — the flag days all fall on/before the return.
-  // That is still a linger in the loose sense, but the frozen (a)
-  // rule needs a late flag day; the trace lines force (d).
-  if (everOffHaven && nodeReturnDay != null) {
-    return { cls: '(d)', evidence: 'node left Haven and returned on day ' + nodeReturnDay +
-        ', but every flag day (' + flagDays.join(',') + ') falls on or before the return day — the frozen (a) rule ' +
-        '(flag still set >=1 day after the return) does not fire; the flag days sit on the return itself, ' +
-        'so the dawn read and the return walk share a day (spell ' + spell.start + '-' + spell.end + ')',
-      window: window, spell: [spell.start, spell.end], details: details };
-  }
-  // Node left Haven and never came back within the spell, yet the pool
-  // reads the node at Haven on the flag days: the trace and the pool
-  // row disagree on the node read.
-  if (everOffHaven && nodeReturnDay == null) {
-    return { cls: '(c)', evidence: 'trace shows the node off-Haven for the whole away spell (days ' + spell.start + '-' + spell.end +
-        ', last node read ' + JSON.stringify((spellRows[spellRows.length - 1] || {}).node) +
-        ') while the pool row reads the node at Haven on flag day(s) ' + flagDays.join(',') +
-        ' — the node read, not the flag, is the wrong one (or the node moved between the pool read and the end-of-day trace)',
-      window: window, spell: [spell.start, spell.end], details: details };
-  }
-  return { cls: 'UNRESOLVED', missingHook: 'no branch matched the trace shape',
-    evidence: 'trace shape falls outside (a)-(d) as implemented', window: window,
-    spell: [spell.start, spell.end], details: details };
+  return { cls: 'UNRESOLVED',
+    missingHook: 'flag days split across mechanisms: ' + perDay.map(function (p) { return p.day + '->' + p.cls + '/' + p.mechanism; }).join(', ') + '; need a per-trip ruling for the split',
+    evidence: 'flag days do not share one mechanism: ' + perDay.map(function (p) { return 'day ' + p.day + ': ' + p.evidence; }).join(' | '),
+    window: window, spell: spell, details: details };
 }
-
-// classifyLeg(leg): extract + classify every flagged member on a leg.
-// leg: {bySeed, files} from loadDir, with classifyMarginals applied.
-function classifyLeg(leg) {
-  const perSeed = {};
+// classifyLeg(rawLeg): extract + classify every flagged member on a
+// leg. rawLeg: {bySeed: raw per-seed JSON, files} — extractFlagged
+// classifies each seed internally exactly once; never pre-classify
+// the leg (classifyMarginals' output drops the raw arrays, so a
+// second classification would see no pool rows at all).
+function classifyLeg(rawLeg) {
   const flagged = [];
   let flagRows = 0;
-  for (const k of Object.keys(leg.bySeed).sort()) {
-    const j = leg.bySeed[k];
+  for (const k of Object.keys(rawLeg.bySeed).sort()) {
+    const j = rawLeg.bySeed[k];
     const ext = extractFlagged(j);
-    perSeed[j.seed] = ext.classified;
     for (const f of ext.flagged) {
       flagRows += f.flagDays.length;
       const rows = buildTrace(j, f.id);
@@ -322,9 +397,14 @@ function classifyLeg(leg) {
     unresolved: flagged.filter(function (f) { return f.classification === 'UNRESOLVED'; }).length };
 }
 
-function summarizeLeg(leg) {
-  const summary = PM.summarizeMarginals(leg);
-  const seeds = Object.keys(leg.bySeed).sort().map(function (k) { return leg.bySeed[k]; });
+function summarizeLeg(rawLeg) {
+  // The marginal summary needs classified per-seed objects; the
+  // wave-4 fight / death counts need the RAW per-seed JSONs (the
+  // classified objects drop v4encounters/deaths). Build both.
+  const clsLeg = { bySeed: {}, files: rawLeg.files };
+  for (const k of Object.keys(rawLeg.bySeed)) clsLeg.bySeed[k] = PM.classifyMarginals(rawLeg.bySeed[k]);
+  const summary = PM.summarizeMarginals(clsLeg);
+  const seeds = Object.keys(rawLeg.bySeed).sort().map(function (k) { return rawLeg.bySeed[k]; });
   let w4kills = 0, w4fights = 0, w4flees = 0, w4deaths = 0, w4evades = 0, deaths = 0;
   const deathKinds = {};
   for (const s of seeds) {
@@ -357,13 +437,11 @@ function main() {
   const w4Match = liveW4 && JSON.stringify(liveW4) === JSON.stringify(frozenSorted);
 
   const inst = loadDir(instrumentDir);
-  for (const k of Object.keys(inst.bySeed)) inst.bySeed[k] = PM.classifyMarginals(inst.bySeed[k]);
   const instClass = classifyLeg(inst);
   const instSummary = summarizeLeg(inst);
   let ctrlClass = null, ctrlSummary = null;
   if (controlDir) {
     const ctrl = loadDir(controlDir);
-    for (const k of Object.keys(ctrl.bySeed)) ctrl.bySeed[k] = PM.classifyMarginals(ctrl.bySeed[k]);
     ctrlClass = classifyLeg(ctrl);
     ctrlSummary = summarizeLeg(ctrl);
   }
@@ -425,3 +503,4 @@ function main() {
 if (require.main === module) main();
 module.exports = { extractFlagged: extractFlagged, buildTrace: buildTrace,
   classifyMember: classifyMember, classifyLeg: classifyLeg, summarizeLeg: summarizeLeg };
+
