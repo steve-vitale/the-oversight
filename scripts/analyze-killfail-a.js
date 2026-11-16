@@ -56,10 +56,23 @@ function buildEvents(j) {
     for (const p of ev.participants) if (p.role === 'inviter') { invRow = p; break; }
     if (!invRow) invRow = ev.participants[0];
     ev.launchedPartySize = (invRow && Array.isArray(invRow.partyAfter) ? invRow.partyAfter.length : 0) + 1;
-    ev.targetAfter = invRow ? (invRow.targetAfter || null) : null;
-    ev.needWaveAfter = invRow ? (invRow.needWaveAfter != null ? invRow.needWaveAfter : null) : null;
+    // Prereg legs (a)/(b) are ANY-participant: a companion's named
+    // target or needWave counts, not just the inviter's (e.g. 102047
+    // d69/d80: Carlos invites, companion gen_0sdx1yk carries target
+    // strike, needWave 4 — those are STRICT events). Leg (c), the
+    // v4seeds bounce, is inviter-only per the prereg.
+    ev.targetAfter = null;
+    ev.needWaveAfter = null;
+    ev.targetNamed = false;
+    for (const p of ev.participants) {
+      const nw = (p.needWaveAfter != null) ? p.needWaveAfter : null;
+      if (nw !== null && (ev.needWaveAfter === null || nw > ev.needWaveAfter)) ev.needWaveAfter = nw;
+      if (p.targetAfter && (W4_SET.has(p.targetAfter) || W5_SET.has(p.targetAfter))) {
+        if (!ev.targetAfter) ev.targetAfter = p.targetAfter;
+        ev.targetNamed = true;
+      }
+    }
     ev.stageAfter = invRow ? (invRow.stageAfter || null) : null;
-    ev.targetNamed = !!(ev.targetAfter && (W4_SET.has(ev.targetAfter) || W5_SET.has(ev.targetAfter)));
     let strict = (ev.needWaveAfter != null && ev.needWaveAfter >= 4) || ev.targetNamed;
     let broad = strict;
     if (!broad) {

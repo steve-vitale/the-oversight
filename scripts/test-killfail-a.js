@@ -371,6 +371,27 @@ function expedCensus(vid, daysOut, returnDay) {
   }));
   check('broad via bounce leg: wave-4 seed history makes the launch broad (strict false)',
     ev3.length === 1 && ev3[0].broad === true && ev3[0].strict === false, JSON.stringify(ev3.map(function (e) { return { broad: e.broad, strict: e.strict }; })));
+  // ANY-participant legs: inviter carries nothing, the COMPANION carries
+  // target strike + needWave 4 -> the event is broad AND strict (prereg
+  // legs (a)/(b) are any-participant; the d69/d80 events on 102047 are
+  // the live shape). Bounce stays inviter-only: a companion's v4seeds
+  // row must NOT make the event broad.
+  const ev4 = ANALYZE.buildEvents(mkSeed({
+    rumorplanLaunches: [
+      rumorLaunch(50, 'v1', 'inviter', 'v1', { targetAfter: null, needWaveAfter: null, partyAfter: ['v2'] }),
+      rumorLaunch(50, 'v2', 'companion', 'v1', { targetAfter: 'strike', needWaveAfter: 4, partyAfter: ['v1'] }),
+    ],
+  }));
+  check('any-participant strict: companion target+needWave makes the event broad AND strict',
+    ev4.length === 1 && ev4[0].broad === true && ev4[0].strict === true && ev4[0].targetAfter === 'strike' && ev4[0].needWaveAfter === 4,
+    JSON.stringify(ev4.map(function (e) { return { broad: e.broad, strict: e.strict, targetAfter: e.targetAfter }; })));
+  const ev5 = ANALYZE.buildEvents(mkSeed({
+    rumorplanLaunches: launchedLaunch(50, 'v1', 'v2', { needWaveAfter: null }),
+    v4seeds: [{ day: 48, vid: 'v2', mid: 'eulogy', wave: 4, outcome: 'fled', stageAfter: 'party', target: null, node: null }],
+  }));
+  check('bounce is inviter-only: a companion v4seeds row does not make the event broad',
+    ev5.length === 1 && ev5[0].broad === false && ev5[0].strict === false,
+    'got ' + ev5.length + ' events, broad=' + (ev5[0] || {}).broad);
   // End-to-end: 2 launched fights (1 killed, 1 fled) + 1 wild fight.
   const r8 = ANALYZE.classifySeed(mkSeed({
     rumorplanLaunches: launchedLaunch(50, 'v1', 'v2'),
