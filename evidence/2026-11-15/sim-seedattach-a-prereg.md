@@ -397,6 +397,17 @@ rows. Do not invent fight narrative from kill counts.
   `evidence/2026-11-15/sim-dawnbid-a-prereg.md` (definitions
   reused; the seed call, the launch conditions, the gate bars).
 
+## Correction 1 (2026-11-16, before any judged sim — instrument not yet built)
+
+**C1 — bounce rows carry `foughtAtBounce` (context only).** The
+frozen sub-reason rule reads engagement at CREATION. A plan created
+by a lazy `winPlanOf` read (`created-by-read`) may have neither
+engagement at creation yet have fought a beast by its first bounce.
+The bounce row therefore also records the holder's `know.fought`
+list at bounce time, as CONTEXT for the evidence file — it never
+changes a bucket or a sub-reason. The frozen definitions above are
+otherwise unchanged.
+
 ## Metric review (to be filled in the evidence file)
 
 Pre-registered here: if the decomposition lands mostly in
