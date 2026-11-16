@@ -256,11 +256,21 @@ function classifyRumor(j) {
     const evts = [];
     for (const r of inst.census) if (r.day >= inst.creation.day && r.day <= scopeDay) evts.push({ day: r.day, target: r.target, src: 'census' });
     for (const b of inst.bounces) if (b.day >= inst.creation.day && b.day <= scopeDay) {
-      evts.push({ day: b.day, target: b.targetBefore, src: 'bounce-before' });
+      // The BEFORE-state of a bounce is not a loss signal: a bounce
+      // that SETS the target has targetBefore null by construction and
+      // sorts on the same day as the set itself. Only a non-null
+      // before is evidence the plan already had a target. The
+      // after-state always counts (a null after a prior target is a
+      // genuine loss observation).
+      if (b.targetBefore != null) evts.push({ day: b.day, target: b.targetBefore, src: 'bounce-before' });
       evts.push({ day: b.day, target: b.targetAfter, src: 'bounce-after' });
     }
     for (const t of inst.targetDiffs) if (t.day >= inst.creation.day && t.day <= scopeDay) {
-      evts.push({ day: t.day, target: t.from, src: 'diff-from' });
+      // Same rule as bounce-before: the diff's FROM is the pre-change
+      // state (a null from paired with a non-null to is the set
+      // itself, not a loss). Only a non-null from is evidence of a
+      // prior target; the TO always counts.
+      if (t.from != null) evts.push({ day: t.day, target: t.from, src: 'diff-from' });
       evts.push({ day: t.day, target: t.to, src: 'diff-to' });
     }
     evts.sort(function (a, b) { return a.day - b.day; });
