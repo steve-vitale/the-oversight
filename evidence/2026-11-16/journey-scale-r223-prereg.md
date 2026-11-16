@@ -235,3 +235,55 @@ for any future multi-band roll; only this run's check drops them.
   live band). W5-INSTANCE: now answered per seed by the monster census
   + fight rows (sortie ledger inert).
 - Telemetry: maxGameDay only (decision above).
+
+## Closeout (2026-11-16, after the panel)
+
+- **Q1 NATIONAL: NO-GO on the wall, blocker named per seed — 0/4
+  national.** 135613 LEAD 2/3 seasoned (needs 1 more — 3rd sub 12d
+  old); 135614 COLLAPSE d137; 135615 LEAD 2/3 (no 3rd sub exists);
+  135616 LEAD 1/3 seasoned (needs 2 more). Informative by the
+  prereg's rule (0/4 with a named per-seed blocker).
+- **Tribute: NEVER-READY 0/4** (0 attempts). Living veterans peak at
+  1 on every seed — the second living veteran never coexists with the
+  first. A step back from r219's ready-but-unpayable.
+- **Wave-4 kills: 9 band total** (7 scholar, 2 villager, 1 living
+  villager at end) vs r219 arm A 14 (11 scholar, 3 villager, 1
+  living). **Bypass secondary: NO downstream movement** — real
+  wave-4 fights ≈ 43 vs r219's 38; the headline 194 counts 151
+  refused Herald meetings (see the run note's instrument note). The
+  launch-level question stays open (no launch recorder).
+- **Wave-5: 0 fights on all seeds; W5-INSTANCE UNANSWERED.** Live
+  wave-5 entities 0 days (135613, 135614), 1 day (135615), 2 days
+  (135616). The door never opened: living veterans peak at 1.
+- **Q2 guards:** spoken-raise GO (9 talks, 7 answered, 2 holds, 0
+  defects); vetbar GO (0 disagreements); trap-line HOLD (1 answered
+  sitting, 0 defects); betrayal HOLD (0 turn-0 offers); nod-loop
+  HOLD (worst 3x); lived-days HOLD (559 vs 476, +17.4%); lesser
+  HOLD (4/4).
+- **Q3 daily-play mime:** 11 daily mimes, **0 daily accepts proven**.
+  Gap carried; lane decision owed.
+- **The run's finding — the Herald muster gate (135614):** 151
+  Herald meetings, 0 fights, 104 refusal lines ("muster 10 allied
+  blades (you have 0)"). The muster verbs exist ("sound the call",
+  `titanCommitOwn`) but the competent policy never drives them; the
+  sortie path is closed by the r219 driver HP gates. Documented as
+  the run's blank; a driver-side muster step is owed to the next
+  scale run's prereg with a cost bar. NOT built this run.
+- **People check:** 12 transcripts + 9 raise talks read in full. No
+  stutter recurrence, no r137/r218/r216 regressions. Harper's
+  food-monologue (want never surfaces — the r222 Onni wart family),
+  the "All right — let's ask them." echo in all 7 accepts, Emma's
+  "Okay. You don't have to have an answer." and Sanne's "Don't tell
+  the others. Everyone needs one place." (both carried line-pool
+  reuse, seen again). Full write-up in the run note.
+- **Telemetry:** QUIET (maxGameDay 559 vs baseline 468, +19.4%).
+  Baseline NOT rolled. The band justifies dropping the fight metrics:
+  the raw fightsTotal would read QUIET while hiding that 151 of the
+  wave-4 count are refused meetings, not fights.
+- **Gate:** 334 passed, 6 failed in 813s — **0 attributable** (the
+  identical standing set as r221/r222; branch modifies zero tracked
+  files).
+- **Fix landed:** none. Instruments (driver + analyzer + proof,
+  70/70) are the landed work.
+- **Rotation:** 3 → 0 at closeout. **Lock deleted at closeout.
+  Heartbeat loop killed at closeout.**

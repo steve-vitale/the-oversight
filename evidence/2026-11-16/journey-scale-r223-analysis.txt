@@ -1,0 +1,90 @@
+=== journey-scale r223 — Q3 GUARD: VETBAR ===
+seed 135613: vetbarRows=140 disagree4=0 disagree5=0 phantomDays4=[] phantomDays5=[] maxR4=5 maxL3=5 maxR5=1 maxL4=1 bloodedDays=30
+seed 135614: vetbarRows=140 disagree4=0 disagree5=0 phantomDays4=[] phantomDays5=[] maxR4=3 maxL3=3 maxR5=1 maxL4=1 bloodedDays=60
+seed 135615: vetbarRows=140 disagree4=0 disagree5=0 phantomDays4=[] phantomDays5=[] maxR4=3 maxL3=3 maxR5=1 maxL4=1 bloodedDays=32
+seed 135616: vetbarRows=140 disagree4=0 disagree5=0 phantomDays4=[] phantomDays5=[] maxR4=2 maxL3=2 maxR5=1 maxL4=1 bloodedDays=51
+Q3 VETBAR GUARD: GO (total disagreements 0)
+
+=== journey-scale r223 — Q3 TRAJECTORY SHAPE ===
+lived-days total 559 vs 3-band rolling mean 476 (17.4%; guardrail +/-25%)
+Q3 lived-days guardrail: HOLD
+lesser seat priced: 4/4 (bar >=3/4): HOLD
+
+=== journey-scale r223 — Q1 NATIONAL ON-RAMP (measurement, not a gate) ===
+seed 135613: national days=0 maxRank=regional lastDay=d140 lead=2/3 cov=0/2 trade=2/2 belongGood=0 pend=-@- — BLOCKER: closest road LEAD 2/3 seasoned (3 active) — needs 1 more seasoned
+seed 135614: national days=0 maxRank=regional lastDay=d137 lead=1/3 cov=0/1 trade=1/1 belongGood=0 pend=-@- — BLOCKER: COLLAPSE — village over d137 before national (final: LEAD 1/3 seasoned, COV 0/3, TRADE 1/3)
+seed 135615: national days=0 maxRank=regional lastDay=d140 lead=2/2 cov=0/0 trade=1/3 belongGood=0 pend=-@- — BLOCKER: closest road LEAD 2/3 seasoned (2 active) — needs 1 more seasoned
+seed 135616: national days=0 maxRank=regional lastDay=d140 lead=1/5 cov=0/0 trade=0/1 belongGood=0 pend=-@- — BLOCKER: closest road LEAD 1/3 seasoned (5 active) — needs 2 more seasoned
+Q1 NATIONAL: NO-GO on the wall, blocker named per seed (interesting — the finding is the blocker)
+
+=== journey-scale r223 — Q5 CENSUS ===
+seed 135613: days=140 over=false won=false pop=8/8 rank=regional peakStage=3 stage3=d31 lesser=d47 full=- ready={"trade_charter":null,"feast_embassy":null,"military_tribute":null} delivered=- fights=19 byWave={"1":4,"2":6,"3":7,"4":2} deaths=4 byCause={"the wild":2,"a wound that wouldn't close":1,"Big Ugly":1} booksClose=true unattributed=0 teleOnly=0
+seed 135614: days=137 over=true won=false pop=4/4 rank=regional peakStage=3 stage3=d44 lesser=d34 full=- ready={"trade_charter":null,"feast_embassy":null,"military_tribute":null} delivered=- fights=178 byWave={"1":4,"2":5,"3":4,"4":165} deaths=14 byCause={"ambush":1,"the wild":10,"monster":1,"a wound that wouldn't close":1,"contest":1} booksClose=true unattributed=0 teleOnly=0
+seed 135615: days=141 over=false won=false pop=4/4 rank=regional peakStage=3 stage3=d33 lesser=d50 full=- ready={"trade_charter":null,"feast_embassy":null,"military_tribute":null} delivered=- fights=34 byWave={"1":6,"2":2,"3":7,"4":19} deaths=11 byCause={"a stranger":1,"monster":3,"the wild":7} booksClose=true unattributed=0 teleOnly=0
+seed 135616: days=141 over=false won=false pop=9/9 rank=regional peakStage=3 stage3=d40 lesser=d39 full=- ready={"trade_charter":null,"feast_embassy":null,"military_tribute":null} delivered=- fights=29 byWave={"1":4,"2":7,"3":10,"4":8} deaths=5 byCause={"the wild":2,"thirst":1,"a stranger":2} booksClose=true unattributed=0 teleOnly=0
+
+=== journey-scale r223 — Q1 SPOKEN-RAISE (not-offered split) ===
+raise talks: 9 (properly-answered 7, counter 0, not-offered-spoken 0 [DEFECT], not-offered-unspoken 2 [correct hold], failed/error 0, defect 0)
+Q1 SPOKEN-RAISE VERDICT: GO (zero not-offered-spoken AND >=1 properly-answered talk)
+
+=== journey-scale r223 — Q4 GUARD: TRAP-LINE (r133 fix still live) ===
+  journey-scale-r223-transcript-135616-day90-nv.txt: mime shown, offered=yes, answered=yes
+trap-line sittings (driver transcripts): 1 (answered 1, defect 0); mimes anywhere in the say-capture: 12
+Q4 TRAP-LINE GUARD: HOLD (zero defect sittings AND >=1 answered sitting)
+
+=== journey-scale r223 — Q2 DAILY-PLAY MIME (read-only) ===
+daily-play mimes (capture minus driver sittings with mimes): 11 (capture 12, driver sittings with mimes 1)
+driver-sitting accepts (betray watch): 3; accept events on non-driver days: 0
+resolveInvite walk lines in capture: 2; daily-play accept LOWER bound (walk lines minus driver accepts): 0
+comm-'none' villagers seen in driver transcripts: 2
+  Daniyar (daniyar_askarov): mime shown=no, answered=no
+  Sanne (sanne_bakker): mime shown=yes, answered=yes
+Q2 DAILY-PLAY MIME: RECORDED (read-only — daily mimes 11, daily accepts proven 0 by the capture lower bound, 0 off-day events in the betray watch; lane decision owed: teach the shared chooser to take betrayal:accept + nv:accept when offered, or keep proving fixes only where the driver looks)
+
+=== journey-scale r223 — Q4 GUARD: BETRAYAL SIBLING (invite label in the opening) ===
+betrayal turn-0 offers: 0 (defect 0)
+Q4 BETRAYAL GUARD: HOLD (no live defect; Thabo verdict stands)
+
+=== journey-scale r223 — Q2 GUARD: NOD-LOOP (r132 fix re-proof) ===
+  journey-scale-r223-transcript-135613-day120.txt: max identical nv: react streak=0
+  journey-scale-r223-transcript-135613-day90.txt: max identical nv: react streak=0
+  journey-scale-r223-transcript-135614-day120.txt: max identical nv: react streak=0
+  journey-scale-r223-transcript-135614-day90.txt: max identical nv: react streak=0
+  journey-scale-r223-transcript-135615-day120-nv.txt: max identical nv: react streak=3 (nv:nod)
+  journey-scale-r223-transcript-135615-day120.txt: max identical nv: react streak=0
+  journey-scale-r223-transcript-135615-day90-nv.txt: max identical nv: react streak=3 (nv:nod)
+  journey-scale-r223-transcript-135615-day90.txt: max identical nv: react streak=0
+  journey-scale-r223-transcript-135616-day120-nv.txt: max identical nv: react streak=3 (nv:nod)
+  journey-scale-r223-transcript-135616-day120.txt: max identical nv: react streak=0
+  journey-scale-r223-transcript-135616-day90-nv.txt: max identical nv: react streak=3 (nv:nod)
+  journey-scale-r223-transcript-135616-day90.txt: max identical nv: react streak=0
+Q2 NOD-LOOP GUARD: HOLD (0 sittings with a >=4 identical nv: react streak; worst 3x)
+
+=== journey-scale r223 — TRIBUTE PAYABILITY (M23 metric revision, measurement only) ===
+seed 135613: tribute NEVER-READY (ready=- payableAtReady=- attempts=0 delivered=0 reasons={})
+seed 135614: tribute NEVER-READY (ready=- payableAtReady=- attempts=0 delivered=0 reasons={})
+seed 135615: tribute NEVER-READY (ready=- payableAtReady=- attempts=0 delivered=0 reasons={})
+seed 135616: tribute NEVER-READY (ready=- payableAtReady=- attempts=0 delivered=0 reasons={})
+
+=== journey-scale r223 — Q5 SPOTTER (r139 wiring — d90 + end reads, measurement only) ===
+seed 135613 d90: roster 10 (alive 10) — foodXp.spotter>0: 2 (Sophia:24, Marcus:3); spotter skill>=1: 4 (Sophia, Wei, Dalila, Nair)
+seed 135613 end: roster 8 (alive 8) — foodXp.spotter>0: 1 (Esmeralda:6); spotter skill>=1: 4 (Esmeralda, Wei, Dalila, Nair)
+seed 135614 d90: roster 8 (alive 8) — foodXp.spotter>0: 1 (Ella:6); spotter skill>=1: 1 (Ella)
+seed 135614 end: roster 4 (alive 4) — foodXp.spotter>0: 1 (Yara:1); spotter skill>=1: 1 (Liam)
+seed 135615 d90: roster 7 (alive 7) — foodXp.spotter>0: 1 (Diana:6); spotter skill>=1: 1 (Diana)
+seed 135615 end: roster 4 (alive 4) — foodXp.spotter>0: 1 (Linda:2); spotter skill>=1: 0
+seed 135616 d90: roster 10 (alive 10) — foodXp.spotter>0: 1 (Zoe:9); spotter skill>=1: 2 (Gianna, Zoe)
+seed 135616 end: roster 9 (alive 9) — foodXp.spotter>0: 1 (Sanne:7); spotter skill>=1: 2 (Gianna, Sanne)
+
+=== journey-scale r223 — SORTIE (r215-owed: the sortie ledger — measurement only) ===
+seed 135613: arm=A lingerer days=0 (wave-5 seen on 0) sorties called=0 cleared=0 broke=0 held={}
+seed 135614: arm=A lingerer days=0 (wave-5 seen on 0) sorties called=0 cleared=0 broke=0 held={}
+seed 135615: arm=A lingerer days=0 (wave-5 seen on 0) sorties called=0 cleared=0 broke=0 held={}
+seed 135616: arm=A lingerer days=0 (wave-5 seen on 0) sorties called=0 cleared=0 broke=0 held={}
+SORTIE band: lingerer days=0 (wave-5 seen on 0) sorties called=0 held={}
+
+=== journey-scale r223 — W5-INSTANCE (r207-owed: one Editor or successive Editors — measurement only) ===
+seed 135613: wave-5 fights 0 — UNANSWERED (no wave-5 fights; live wave-5 entities: max 0/day on 0/140 days)
+seed 135614: wave-5 fights 0 — UNANSWERED (no wave-5 fights; live wave-5 entities: max 0/day on 0/140 days)
+seed 135615: wave-5 fights 0 — UNANSWERED (no wave-5 fights; live wave-5 entities: max 1/day on 1/140 days)
+seed 135616: wave-5 fights 0 — UNANSWERED (no wave-5 fights; live wave-5 entities: max 1/day on 2/140 days)
