@@ -2746,7 +2746,7 @@
       try {
         if (vid && vid !== 'player' && this.noteVillagerTrickObservation &&
             (rec.outcome === 'vFlee' || rec.outcome === 'mFlee' || rec.outcome === 'evade')) {
-          this.noteVillagerTrickObservation(vid, mdef.id, (opts && opts.allyVids) || null);
+          this.noteVillagerTrickObservation(vid, mdef.id);
         }
       } catch (e) {}
       // NODE-MATE/DEFENDER WITNESS CHANNEL (2026-10-16, sim-nodewitness,

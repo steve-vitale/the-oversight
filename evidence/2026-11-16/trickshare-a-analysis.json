@@ -1,0 +1,2975 @@
+{
+  "arm": "trickshare-a",
+  "run": "fleshout-20261116T2015Z",
+  "seeds": [
+    102601,
+    102602,
+    102603,
+    102604,
+    102605,
+    102606,
+    102607,
+    102608
+  ],
+  "policy": "competent",
+  "control": {
+    "sum": {
+      "files": 8,
+      "instrumentErrors": 0,
+      "events": 120,
+      "broadEvents": 45,
+      "strictEvents": 3,
+      "launchedTotal": 6,
+      "launchedClassified": 6,
+      "classificationShare": 1,
+      "kills": 0,
+      "killRate": 0,
+      "wildTotal": 183,
+      "wildKills": 8,
+      "wildKillRate": 0.04371584699453552,
+      "outcomes": {
+        "vFlee": 3,
+        "vDie": 1,
+        "evade": 2
+      },
+      "primaryCounts": {
+        "out-damaged": 2,
+        "died": 1,
+        "evaded": 2,
+        "fled-early": 1
+      },
+      "flagCounts": {
+        "trick-unknown": 5,
+        "launched-short": 6,
+        "out-damaged": 4,
+        "mauled": 3,
+        "party-short": 2,
+        "dry-fighter": 2,
+        "no-working-range": 4,
+        "died": 1,
+        "evaded": 2,
+        "fled-early": 1,
+        "under-geared": 1
+      },
+      "perFight": [
+        {
+          "seed": 102604,
+          "day": 48,
+          "fighter": "Diana Osei",
+          "fighterVid": "diana_osei",
+          "monster": "congregation",
+          "wave": 4,
+          "joinKind": "fighter",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": null,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "hunting_spear",
+          "fighterArmorP": 12,
+          "fighterHpEntry": 63,
+          "allies": [
+            {
+              "name": "Easton Melnyk",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 27,
+              "hpEntry": 76
+            },
+            {
+              "name": "Jayden Peters",
+              "class": "armed-with-ammo",
+              "ammoN": 6,
+              "armorP": 11,
+              "hpEntry": 95
+            }
+          ],
+          "mHpEntry": 907,
+          "mHpMethod": "reconstructed",
+          "mHpEntryRaw": null,
+          "mHpLeft": 835,
+          "outcome": "vFlee",
+          "rounds": 3,
+          "mDealt": 72,
+          "allyDealt": 9,
+          "dmgPerRound": 24,
+          "dmgFrac": 0.08,
+          "vTaken": 73,
+          "vHpLeft": 10,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "out-damaged",
+            "mauled"
+          ],
+          "primary": "out-damaged",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102604,
+          "day": 97,
+          "fighter": "Rafael Torres",
+          "fighterVid": "rafael_torres",
+          "monster": "eulogy",
+          "wave": 4,
+          "joinKind": "ally",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 2,
+          "targetNamed": false,
+          "target": null,
+          "needWave": 3,
+          "trickBefore": false,
+          "trickAfter": true,
+          "fighterClass": "armed-no-ammo",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": "arrow",
+          "fighterMelee": "sharpened_stick",
+          "fighterArmorP": 24,
+          "fighterHpEntry": 54,
+          "allies": [
+            {
+              "name": "Diana Osei",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 12,
+              "hpEntry": 61
+            }
+          ],
+          "mHpEntry": 900,
+          "mHpMethod": "instance",
+          "mHpEntryRaw": 900,
+          "mHpLeft": 831,
+          "outcome": "vFlee",
+          "rounds": 3,
+          "mDealt": 69,
+          "allyDealt": 24,
+          "dmgPerRound": 23,
+          "dmgFrac": 0.08,
+          "vTaken": 26,
+          "vHpLeft": 28,
+          "gate": {
+            "result": "avoid",
+            "reason": "outmatched",
+            "partySize": 2
+          },
+          "flags": [
+            "trick-unknown",
+            "party-short",
+            "launched-short",
+            "dry-fighter",
+            "no-working-range",
+            "out-damaged"
+          ],
+          "primary": "out-damaged",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102604,
+          "day": 97,
+          "fighter": "Rafael Torres",
+          "fighterVid": "rafael_torres",
+          "monster": "eulogy",
+          "wave": 4,
+          "joinKind": "ally",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 2,
+          "targetNamed": false,
+          "target": null,
+          "needWave": 3,
+          "trickBefore": true,
+          "trickAfter": true,
+          "fighterClass": "armed-no-ammo",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": "arrow",
+          "fighterMelee": "sharpened_stick",
+          "fighterArmorP": 24,
+          "fighterHpEntry": 28,
+          "allies": [
+            {
+              "name": "Diana Osei",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 12,
+              "hpEntry": 35
+            }
+          ],
+          "mHpEntry": 831,
+          "mHpMethod": "instance",
+          "mHpEntryRaw": 831,
+          "mHpLeft": 831,
+          "outcome": "vDie",
+          "rounds": 2,
+          "mDealt": 0,
+          "allyDealt": 0,
+          "dmgPerRound": 0,
+          "dmgFrac": 0,
+          "vTaken": 29,
+          "vHpLeft": 0,
+          "gate": {
+            "result": "avoid",
+            "reason": "outmatched",
+            "partySize": 2
+          },
+          "flags": [
+            "party-short",
+            "launched-short",
+            "dry-fighter",
+            "no-working-range",
+            "out-damaged",
+            "mauled",
+            "died"
+          ],
+          "primary": "died",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102605,
+          "day": 109,
+          "fighter": "Shanshan Guo",
+          "fighterVid": "visjoin_102",
+          "monster": "audit",
+          "wave": 4,
+          "joinKind": "fighter",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": true,
+          "target": "reunion",
+          "needWave": 4,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "hunting_spear",
+          "fighterArmorP": 10,
+          "fighterHpEntry": 73,
+          "allies": [
+            {
+              "name": "Boris Kowalski",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 27,
+              "hpEntry": 100
+            },
+            {
+              "name": "Mia Andersson",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 10,
+              "hpEntry": 83
+            }
+          ],
+          "mHpEntry": 1115,
+          "mHpMethod": "untouched",
+          "mHpEntryRaw": null,
+          "mHpLeft": 1115,
+          "outcome": "evade",
+          "rounds": 0,
+          "mDealt": 0,
+          "allyDealt": 0,
+          "dmgPerRound": null,
+          "dmgFrac": 0,
+          "vTaken": 0,
+          "vHpLeft": 73,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "no-working-range",
+            "evaded"
+          ],
+          "primary": "evaded",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102605,
+          "day": 112,
+          "fighter": "Mia Andersson",
+          "fighterVid": "mia_andersson",
+          "monster": "network_note",
+          "wave": 5,
+          "joinKind": "fighter",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": true,
+          "target": "reunion",
+          "needWave": 4,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "hatchet",
+          "fighterArmorP": 10,
+          "fighterHpEntry": 49,
+          "allies": [
+            {
+              "name": "Boris Kowalski",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 27,
+              "hpEntry": 93
+            },
+            {
+              "name": "Ursula Weber",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 12,
+              "hpEntry": 100
+            }
+          ],
+          "mHpEntry": 1019,
+          "mHpMethod": "reconstructed",
+          "mHpEntryRaw": null,
+          "mHpLeft": 967,
+          "outcome": "vFlee",
+          "rounds": 2,
+          "mDealt": 52,
+          "allyDealt": 0,
+          "dmgPerRound": 26,
+          "dmgFrac": 0.05,
+          "vTaken": 42,
+          "vHpLeft": 7,
+          "gate": null,
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "no-working-range",
+            "fled-early",
+            "out-damaged",
+            "mauled"
+          ],
+          "primary": "fled-early",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102608,
+          "day": 98,
+          "fighter": "Aki Tanaka",
+          "fighterVid": "aki_tanaka",
+          "monster": "influencer",
+          "wave": 4,
+          "joinKind": "fighter",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": null,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "trailblazer_machete",
+          "fighterArmorP": 9,
+          "fighterHpEntry": 52,
+          "allies": [
+            {
+              "name": "Devon Okafor",
+              "class": "armed-with-ammo",
+              "ammoN": 5,
+              "armorP": 18,
+              "hpEntry": 100
+            },
+            {
+              "name": "Boris Kowalski",
+              "class": "armed-with-ammo",
+              "ammoN": 7,
+              "armorP": 21,
+              "hpEntry": 100
+            }
+          ],
+          "mHpEntry": 957,
+          "mHpMethod": "untouched",
+          "mHpEntryRaw": null,
+          "mHpLeft": 957,
+          "outcome": "evade",
+          "rounds": 0,
+          "mDealt": 0,
+          "allyDealt": 0,
+          "dmgPerRound": null,
+          "dmgFrac": 0,
+          "vTaken": 0,
+          "vHpLeft": 52,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "under-geared",
+            "evaded"
+          ],
+          "primary": "evaded",
+          "classified": true,
+          "missingFields": []
+        }
+      ],
+      "perSeed": [
+        {
+          "seed": 102601,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 385,
+          "maxWave": 5,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 48,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102602,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 190,
+          "maxWave": 4,
+          "events": 13,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 5,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102603,
+          "days": 149,
+          "end": "village-lost",
+          "won": false,
+          "rank": "regional",
+          "standing": 315,
+          "maxWave": 5,
+          "events": 7,
+          "broadEvents": 1,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 19,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102604,
+          "days": 107,
+          "end": "village-lost",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 30,
+          "broadEvents": 14,
+          "strictEvents": 0,
+          "launchedFights": 3,
+          "classified": 3,
+          "kills": 0,
+          "wildFights": 15,
+          "medianDmg": 69,
+          "medianRounds": 3
+        },
+        {
+          "seed": 102605,
+          "days": 123,
+          "end": "village-lost",
+          "won": false,
+          "rank": "regional",
+          "standing": 375,
+          "maxWave": 5,
+          "events": 3,
+          "broadEvents": 3,
+          "strictEvents": 3,
+          "launchedFights": 2,
+          "classified": 2,
+          "kills": 0,
+          "wildFights": 32,
+          "medianDmg": 26,
+          "medianRounds": 1
+        },
+        {
+          "seed": 102606,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 425,
+          "maxWave": 5,
+          "events": 37,
+          "broadEvents": 16,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 21,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102607,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 16,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102608,
+          "days": 150,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 30,
+          "broadEvents": 11,
+          "strictEvents": 0,
+          "launchedFights": 1,
+          "classified": 1,
+          "kills": 0,
+          "wildFights": 27,
+          "medianDmg": 0,
+          "medianRounds": 0
+        }
+      ],
+      "wall": {
+        "wins": 0,
+        "nationalRank": 0,
+        "nationalStanding": 4,
+        "wave4": 8,
+        "wave5": 4,
+        "gameDays": [
+          151,
+          151,
+          149,
+          107,
+          123,
+          151,
+          151,
+          150
+        ],
+        "deaths": 746,
+        "starvation": 4,
+        "scholarDeaths": 69
+      },
+      "medianSurvival": 150.5,
+      "launchedMedianDmgPerRound": 23.5,
+      "launchedMedianRounds": 2,
+      "launchedMedianDmgFrac": 0.025,
+      "wildMedianDmgPerRound": 12.166666666666668,
+      "wildMedianRounds": 3
+    },
+    "distinctKills": [],
+    "distinctKillCount": 0,
+    "tricksLearned": {
+      "distinctSpecies": [
+        "algorithm",
+        "audit",
+        "congregation",
+        "eater",
+        "eulogy",
+        "finale_crew",
+        "herald",
+        "network_note",
+        "reunion",
+        "spoiler",
+        "strike",
+        "suburb"
+      ],
+      "transitions": 29,
+      "perSeed": {
+        "102601": [
+          {
+            "mid": "suburb",
+            "day": 94,
+            "wave": 4
+          },
+          {
+            "mid": "herald",
+            "day": 95,
+            "wave": 4
+          },
+          {
+            "mid": "algorithm",
+            "day": 105,
+            "wave": 4
+          },
+          {
+            "mid": "eulogy",
+            "day": 107,
+            "wave": 4
+          },
+          {
+            "mid": "network_note",
+            "day": 135,
+            "wave": 5
+          },
+          {
+            "mid": "strike",
+            "day": 138,
+            "wave": 4
+          },
+          {
+            "mid": "spoiler",
+            "day": 138,
+            "wave": 5
+          }
+        ],
+        "102602": [
+          {
+            "mid": "reunion",
+            "day": 146,
+            "wave": 4
+          }
+        ],
+        "102603": [
+          {
+            "mid": "reunion",
+            "day": 114,
+            "wave": 4
+          },
+          {
+            "mid": "network_note",
+            "day": 126,
+            "wave": 5
+          },
+          {
+            "mid": "finale_crew",
+            "day": 142,
+            "wave": 5
+          },
+          {
+            "mid": "audit",
+            "day": 145,
+            "wave": 4
+          }
+        ],
+        "102604": [
+          {
+            "mid": "eulogy",
+            "day": 97,
+            "wave": 4
+          },
+          {
+            "mid": "reunion",
+            "day": 101,
+            "wave": 4
+          }
+        ],
+        "102605": [
+          {
+            "mid": "eulogy",
+            "day": 83,
+            "wave": 4
+          },
+          {
+            "mid": "congregation",
+            "day": 92,
+            "wave": 4
+          },
+          {
+            "mid": "herald",
+            "day": 95,
+            "wave": 4
+          },
+          {
+            "mid": "spoiler",
+            "day": 119,
+            "wave": 5
+          }
+        ],
+        "102606": [
+          {
+            "mid": "herald",
+            "day": 114,
+            "wave": 4
+          },
+          {
+            "mid": "reunion",
+            "day": 120,
+            "wave": 4
+          },
+          {
+            "mid": "eulogy",
+            "day": 127,
+            "wave": 4
+          },
+          {
+            "mid": "eater",
+            "day": 144,
+            "wave": 4
+          }
+        ],
+        "102607": [
+          {
+            "mid": "congregation",
+            "day": 112,
+            "wave": 4
+          },
+          {
+            "mid": "eulogy",
+            "day": 140,
+            "wave": 4
+          }
+        ],
+        "102608": [
+          {
+            "mid": "herald",
+            "day": 82,
+            "wave": 4
+          },
+          {
+            "mid": "eulogy",
+            "day": 110,
+            "wave": 4
+          },
+          {
+            "mid": "audit",
+            "day": 131,
+            "wave": 4
+          },
+          {
+            "mid": "reunion",
+            "day": 136,
+            "wave": 4
+          },
+          {
+            "mid": "suburb",
+            "day": 141,
+            "wave": 4
+          }
+        ]
+      },
+      "bySpecies": {
+        "suburb": {
+          "firstSeed": 102601,
+          "firstDay": 94,
+          "viaLaunched": null
+        },
+        "herald": {
+          "firstSeed": 102601,
+          "firstDay": 95,
+          "viaLaunched": null
+        },
+        "algorithm": {
+          "firstSeed": 102601,
+          "firstDay": 105,
+          "viaLaunched": null
+        },
+        "eulogy": {
+          "firstSeed": 102601,
+          "firstDay": 107,
+          "viaLaunched": null
+        },
+        "network_note": {
+          "firstSeed": 102601,
+          "firstDay": 135,
+          "viaLaunched": null
+        },
+        "strike": {
+          "firstSeed": 102601,
+          "firstDay": 138,
+          "viaLaunched": null
+        },
+        "spoiler": {
+          "firstSeed": 102601,
+          "firstDay": 138,
+          "viaLaunched": null
+        },
+        "reunion": {
+          "firstSeed": 102602,
+          "firstDay": 146,
+          "viaLaunched": null
+        },
+        "finale_crew": {
+          "firstSeed": 102603,
+          "firstDay": 142,
+          "viaLaunched": null
+        },
+        "audit": {
+          "firstSeed": 102603,
+          "firstDay": 145,
+          "viaLaunched": null
+        },
+        "congregation": {
+          "firstSeed": 102605,
+          "firstDay": 92,
+          "viaLaunched": null
+        },
+        "eater": {
+          "firstSeed": 102606,
+          "firstDay": 144,
+          "viaLaunched": null
+        }
+      }
+    },
+    "shares": {
+      "launched": 6,
+      "launchedKnown": 1,
+      "launchedKnownShare": 0.16666666666666666,
+      "wild": 183,
+      "wildKnown": 88,
+      "wildKnownShare": 0.4808743169398907
+    },
+    "waveKills": {
+      "wave4All": 8,
+      "wave5All": 0,
+      "wave4LaunchedRows": 0,
+      "wave5LaunchedRows": 0
+    },
+    "waveKillsReal": {
+      "wave4": 5,
+      "wave5": 0,
+      "wave4Rows": 8,
+      "wave5Rows": 0,
+      "wave4ZeroRound": 3,
+      "wave5ZeroRound": 0,
+      "rows": [
+        {
+          "seed": 102601,
+          "day": 104,
+          "vid": "nadia_khoury",
+          "mid": "herald",
+          "wave": 4,
+          "rounds": 3,
+          "launched": false
+        },
+        {
+          "seed": 102601,
+          "day": 127,
+          "vid": "vasyl_shevchenko",
+          "mid": "algorithm",
+          "wave": 4,
+          "rounds": 8,
+          "launched": false
+        },
+        {
+          "seed": 102605,
+          "day": 101,
+          "vid": "ava_garcia",
+          "mid": "herald",
+          "wave": 4,
+          "rounds": 5,
+          "launched": false
+        },
+        {
+          "seed": 102607,
+          "day": 135,
+          "vid": "visjoin_131",
+          "mid": "herald",
+          "wave": 4,
+          "rounds": 5,
+          "launched": false
+        },
+        {
+          "seed": 102608,
+          "day": 88,
+          "vid": "ines_duarte",
+          "mid": "herald",
+          "wave": 4,
+          "rounds": 2,
+          "launched": false
+        }
+      ]
+    },
+    "gates": {
+      "all": {
+        "seek": 0,
+        "avoid": 49,
+        "null": 14,
+        "other": 0,
+        "rows": 63
+      },
+      "launchedFights": {
+        "seek": 0,
+        "avoid": 2,
+        "null": 3,
+        "none": 1
+      }
+    },
+    "trickKnownEnd": {
+      "wave12KnownSpecies": [
+        "alien_tick",
+        "anaconda_empress",
+        "belltoad",
+        "bright_idea",
+        "bulldozer",
+        "cliffhanger",
+        "drumbelly_tanuki",
+        "ducks_in_a_row",
+        "dustboar",
+        "gallowdeer",
+        "giant_mosquito",
+        "glasswing",
+        "heckler",
+        "hummice",
+        "hushwolf",
+        "landlord",
+        "living_wire",
+        "lockpick_raccoon",
+        "memory_projector",
+        "mirror_stag",
+        "mirrormoth",
+        "moderator",
+        "murkcap",
+        "nevermore",
+        "nightcourt",
+        "nightlight_catfish",
+        "paparazzo",
+        "review_drone",
+        "rut_king",
+        "sanjun",
+        "statickite",
+        "sunback",
+        "sunbasker",
+        "sweeps_week",
+        "understudy",
+        "union_rep",
+        "voice_mimic_radio",
+        "warranty_caller",
+        "white_noise_heron"
+      ],
+      "wave345KnownSpecies": [
+        "ad_break",
+        "algorithm",
+        "audit",
+        "buffering",
+        "callback",
+        "congregation",
+        "eater",
+        "eulogy",
+        "finale_crew",
+        "herald",
+        "network_note",
+        "redactor",
+        "reunion",
+        "spoiler",
+        "spool",
+        "strike",
+        "suburb",
+        "terms_of_service"
+      ],
+      "obsSpeciesRows": 97,
+      "obsTotal": 147
+    },
+    "share": {
+      "taught": 0,
+      "taughtW45": 0,
+      "taughtLearns": 0,
+      "taughtLearnsW45": 0,
+      "offers": 0,
+      "taughtBySpecies": {},
+      "offersBySpecies": {},
+      "delays": [],
+      "pendingEnd": {}
+    },
+    "gateKnown": {
+      "rows": 63,
+      "known": 1,
+      "rate": 0.015873015873015872
+    },
+    "deathsPer100d": {
+      "deaths": 746,
+      "days": 1130,
+      "per100d": 66.01769911504425
+    },
+    "medianSurvival": 150.5,
+    "starvation": 4,
+    "deaths": 746
+  },
+  "armed": {
+    "sum": {
+      "files": 8,
+      "instrumentErrors": 0,
+      "events": 78,
+      "broadEvents": 32,
+      "strictEvents": 3,
+      "launchedTotal": 11,
+      "launchedClassified": 11,
+      "classificationShare": 1,
+      "kills": 0,
+      "killRate": 0,
+      "wildTotal": 144,
+      "wildKills": 9,
+      "wildKillRate": 0.0625,
+      "outcomes": {
+        "vDie": 2,
+        "evade": 5,
+        "vFlee": 4
+      },
+      "primaryCounts": {
+        "died": 2,
+        "evaded": 5,
+        "out-damaged": 4
+      },
+      "flagCounts": {
+        "trick-unknown": 10,
+        "launched-short": 11,
+        "out-damaged": 6,
+        "mauled": 6,
+        "died": 2,
+        "evaded": 5,
+        "no-working-range": 6,
+        "under-geared": 2
+      },
+      "perFight": [
+        {
+          "seed": 102601,
+          "day": 56,
+          "fighter": "Zoe Adams",
+          "fighterVid": "zoe_adams",
+          "monster": "eater",
+          "wave": 4,
+          "joinKind": "fighter",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": true,
+          "target": "audit",
+          "needWave": 4,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "hunting_spear",
+          "fighterArmorP": 14,
+          "fighterHpEntry": 64,
+          "allies": [
+            {
+              "name": "Wei Chen",
+              "class": "armed-with-ammo",
+              "ammoN": 6,
+              "armorP": 12,
+              "hpEntry": 77
+            },
+            {
+              "name": "Mara Vasquez",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 21,
+              "hpEntry": 65
+            }
+          ],
+          "mHpEntry": 1105,
+          "mHpMethod": "reconstructed",
+          "mHpEntryRaw": null,
+          "mHpLeft": 1058,
+          "outcome": "vDie",
+          "rounds": 2,
+          "mDealt": 47,
+          "allyDealt": 0,
+          "dmgPerRound": 23.5,
+          "dmgFrac": 0.04,
+          "vTaken": 67,
+          "vHpLeft": 0,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "out-damaged",
+            "mauled",
+            "died"
+          ],
+          "primary": "died",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102601,
+          "day": 57,
+          "fighter": "Emma Larsen",
+          "fighterVid": "emma_larsen",
+          "monster": "suburb",
+          "wave": 4,
+          "joinKind": "fighter",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": true,
+          "target": "audit",
+          "needWave": 4,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "crowbar",
+          "fighterArmorP": 37,
+          "fighterHpEntry": 84,
+          "allies": [
+            {
+              "name": "Wei Chen",
+              "class": "armed-with-ammo",
+              "ammoN": 6,
+              "armorP": 12,
+              "hpEntry": 80
+            },
+            {
+              "name": "Mohammed Al-Nami",
+              "class": "armed-with-ammo",
+              "ammoN": 9,
+              "armorP": 15,
+              "hpEntry": 81
+            }
+          ],
+          "mHpEntry": 1409,
+          "mHpMethod": "untouched",
+          "mHpEntryRaw": null,
+          "mHpLeft": 1409,
+          "outcome": "evade",
+          "rounds": 0,
+          "mDealt": 0,
+          "allyDealt": 0,
+          "dmgPerRound": null,
+          "dmgFrac": 0,
+          "vTaken": 0,
+          "vHpLeft": 84,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "evaded"
+          ],
+          "primary": "evaded",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102602,
+          "day": 48,
+          "fighter": "Theo Lindqvist",
+          "fighterVid": "theo_lindqvist",
+          "monster": "strike",
+          "wave": 4,
+          "joinKind": "fighter",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": null,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "hatchet",
+          "fighterArmorP": 24,
+          "fighterHpEntry": 100,
+          "allies": [
+            {
+              "name": "Christian Mensah",
+              "class": "armed-no-ammo",
+              "ammoN": 0,
+              "armorP": 42,
+              "hpEntry": 100
+            },
+            {
+              "name": "Tobias Strand",
+              "class": "armed-no-ammo",
+              "ammoN": 0,
+              "armorP": 5,
+              "hpEntry": 100
+            }
+          ],
+          "mHpEntry": 1120,
+          "mHpMethod": "untouched",
+          "mHpEntryRaw": null,
+          "mHpLeft": 1120,
+          "outcome": "evade",
+          "rounds": 0,
+          "mDealt": 0,
+          "allyDealt": 0,
+          "dmgPerRound": null,
+          "dmgFrac": 0,
+          "vTaken": 0,
+          "vHpLeft": 100,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "no-working-range",
+            "evaded"
+          ],
+          "primary": "evaded",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102602,
+          "day": 54,
+          "fighter": "Theo Lindqvist",
+          "fighterVid": "theo_lindqvist",
+          "monster": "algorithm",
+          "wave": 4,
+          "joinKind": "fighter",
+          "ambiguous": true,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": null,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "hatchet",
+          "fighterArmorP": 24,
+          "fighterHpEntry": 80,
+          "allies": [
+            {
+              "name": "Christian Mensah",
+              "class": "armed-no-ammo",
+              "ammoN": 0,
+              "armorP": 42,
+              "hpEntry": 100
+            },
+            {
+              "name": "Tobias Strand",
+              "class": "armed-no-ammo",
+              "ammoN": 0,
+              "armorP": 5,
+              "hpEntry": 100
+            }
+          ],
+          "mHpEntry": 1125,
+          "mHpMethod": "untouched",
+          "mHpEntryRaw": null,
+          "mHpLeft": 1125,
+          "outcome": "evade",
+          "rounds": 0,
+          "mDealt": 0,
+          "allyDealt": 0,
+          "dmgPerRound": null,
+          "dmgFrac": 0,
+          "vTaken": 0,
+          "vHpLeft": 80,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "no-working-range",
+            "evaded"
+          ],
+          "primary": "evaded",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102602,
+          "day": 54,
+          "fighter": "Theo Lindqvist",
+          "fighterVid": "theo_lindqvist",
+          "monster": "algorithm",
+          "wave": 4,
+          "joinKind": "fighter",
+          "ambiguous": true,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": null,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "hatchet",
+          "fighterArmorP": 24,
+          "fighterHpEntry": 80,
+          "allies": [
+            {
+              "name": "Christian Mensah",
+              "class": "armed-no-ammo",
+              "ammoN": 0,
+              "armorP": 42,
+              "hpEntry": 100
+            },
+            {
+              "name": "Tobias Strand",
+              "class": "armed-no-ammo",
+              "ammoN": 0,
+              "armorP": 5,
+              "hpEntry": 100
+            }
+          ],
+          "mHpEntry": 1027,
+          "mHpMethod": "untouched",
+          "mHpEntryRaw": null,
+          "mHpLeft": 1027,
+          "outcome": "evade",
+          "rounds": 0,
+          "mDealt": 0,
+          "allyDealt": 0,
+          "dmgPerRound": null,
+          "dmgFrac": 0,
+          "vTaken": 0,
+          "vHpLeft": 80,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "no-working-range",
+            "evaded"
+          ],
+          "primary": "evaded",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102602,
+          "day": 72,
+          "fighter": "Theo Lindqvist",
+          "fighterVid": "theo_lindqvist",
+          "monster": "strike",
+          "wave": 4,
+          "joinKind": "ally",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": null,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "hatchet",
+          "fighterArmorP": 24,
+          "fighterHpEntry": 86,
+          "allies": [
+            {
+              "name": "Meera Reddy",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 21,
+              "hpEntry": 100
+            },
+            {
+              "name": "Zoe Adams",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 14,
+              "hpEntry": 90
+            }
+          ],
+          "mHpEntry": 1052,
+          "mHpMethod": "untouched",
+          "mHpEntryRaw": null,
+          "mHpLeft": 1052,
+          "outcome": "evade",
+          "rounds": 0,
+          "mDealt": 0,
+          "allyDealt": 0,
+          "dmgPerRound": null,
+          "dmgFrac": 0,
+          "vTaken": 0,
+          "vHpLeft": 86,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "no-working-range",
+            "evaded"
+          ],
+          "primary": "evaded",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102602,
+          "day": 87,
+          "fighter": "Theo Lindqvist",
+          "fighterVid": "theo_lindqvist",
+          "monster": "audit",
+          "wave": 4,
+          "joinKind": "ally",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": null,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "hatchet",
+          "fighterArmorP": 24,
+          "fighterHpEntry": 100,
+          "allies": [
+            {
+              "name": "Tanya Weber",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 39,
+              "hpEntry": 100
+            },
+            {
+              "name": "Zoe Adams",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 24,
+              "hpEntry": 76
+            }
+          ],
+          "mHpEntry": 1215,
+          "mHpMethod": "reconstructed",
+          "mHpEntryRaw": null,
+          "mHpLeft": 1127,
+          "outcome": "vFlee",
+          "rounds": 4,
+          "mDealt": 88,
+          "allyDealt": 23,
+          "dmgPerRound": 22,
+          "dmgFrac": 0.07,
+          "vTaken": 60,
+          "vHpLeft": 40,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "no-working-range",
+            "out-damaged",
+            "mauled"
+          ],
+          "primary": "out-damaged",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102604,
+          "day": 48,
+          "fighter": "Diana Osei",
+          "fighterVid": "diana_osei",
+          "monster": "congregation",
+          "wave": 4,
+          "joinKind": "fighter",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": null,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "hunting_spear",
+          "fighterArmorP": 12,
+          "fighterHpEntry": 63,
+          "allies": [
+            {
+              "name": "Easton Melnyk",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 27,
+              "hpEntry": 76
+            },
+            {
+              "name": "Jayden Peters",
+              "class": "armed-with-ammo",
+              "ammoN": 6,
+              "armorP": 11,
+              "hpEntry": 95
+            }
+          ],
+          "mHpEntry": 907,
+          "mHpMethod": "reconstructed",
+          "mHpEntryRaw": null,
+          "mHpLeft": 835,
+          "outcome": "vFlee",
+          "rounds": 3,
+          "mDealt": 72,
+          "allyDealt": 9,
+          "dmgPerRound": 24,
+          "dmgFrac": 0.08,
+          "vTaken": 73,
+          "vHpLeft": 10,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "out-damaged",
+            "mauled"
+          ],
+          "primary": "out-damaged",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102604,
+          "day": 87,
+          "fighter": "Rafael Torres",
+          "fighterVid": "rafael_torres",
+          "monster": "reunion",
+          "wave": 4,
+          "joinKind": "ally",
+          "ambiguous": false,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": null,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "armed-with-ammo",
+          "fighterAmmo": 5,
+          "fighterAmmoNeed": "arrow",
+          "fighterMelee": "sharpened_stick",
+          "fighterArmorP": 24,
+          "fighterHpEntry": 93,
+          "allies": [
+            {
+              "name": "Javier Cusi",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 5,
+              "hpEntry": 64
+            },
+            {
+              "name": "Florencia Miranda",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 5,
+              "hpEntry": 84
+            }
+          ],
+          "mHpEntry": 1292,
+          "mHpMethod": "reconstructed",
+          "mHpEntryRaw": null,
+          "mHpLeft": 1150,
+          "outcome": "vFlee",
+          "rounds": 3,
+          "mDealt": 142,
+          "allyDealt": 23,
+          "dmgPerRound": 47.3,
+          "dmgFrac": 0.11,
+          "vTaken": 58,
+          "vHpLeft": 35,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "out-damaged",
+            "mauled"
+          ],
+          "primary": "out-damaged",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102604,
+          "day": 88,
+          "fighter": "Javier Cusi",
+          "fighterVid": "app_mgpsphqv26",
+          "monster": "herald",
+          "wave": 4,
+          "joinKind": "ally",
+          "ambiguous": true,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": 3,
+          "trickBefore": true,
+          "trickAfter": true,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "hunting_spear",
+          "fighterArmorP": 5,
+          "fighterHpEntry": 77,
+          "allies": [
+            {
+              "name": "Carlos Diaz",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 25,
+              "hpEntry": 86
+            },
+            {
+              "name": "Diana Osei",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 12,
+              "hpEntry": 67
+            }
+          ],
+          "mHpEntry": 621,
+          "mHpMethod": "instance",
+          "mHpEntryRaw": 621,
+          "mHpLeft": 559,
+          "outcome": "vFlee",
+          "rounds": 3,
+          "mDealt": 62,
+          "allyDealt": 0,
+          "dmgPerRound": 20.7,
+          "dmgFrac": 0.1,
+          "vTaken": 56,
+          "vHpLeft": 21,
+          "gate": null,
+          "flags": [
+            "launched-short",
+            "no-working-range",
+            "under-geared",
+            "out-damaged",
+            "mauled"
+          ],
+          "primary": "out-damaged",
+          "classified": true,
+          "missingFields": []
+        },
+        {
+          "seed": 102604,
+          "day": 93,
+          "fighter": "Florencia Miranda",
+          "fighterVid": "app_mgpsphyo18",
+          "monster": "eulogy",
+          "wave": 4,
+          "joinKind": "ally",
+          "ambiguous": true,
+          "launchedPartySize": 2,
+          "contactPartySize": 3,
+          "targetNamed": false,
+          "target": null,
+          "needWave": 3,
+          "trickBefore": false,
+          "trickAfter": false,
+          "fighterClass": "unarmed",
+          "fighterAmmo": 0,
+          "fighterAmmoNeed": null,
+          "fighterMelee": "crowbar",
+          "fighterArmorP": 5,
+          "fighterHpEntry": 73,
+          "allies": [
+            {
+              "name": "Diana Osei",
+              "class": "unarmed",
+              "ammoN": 0,
+              "armorP": 12,
+              "hpEntry": 79
+            },
+            {
+              "name": "Miguel Santos",
+              "class": "armed-with-ammo",
+              "ammoN": 9,
+              "armorP": 60,
+              "hpEntry": 95
+            }
+          ],
+          "mHpEntry": 789,
+          "mHpMethod": "instance",
+          "mHpEntryRaw": 789,
+          "mHpLeft": 763,
+          "outcome": "vDie",
+          "rounds": 2,
+          "mDealt": 26,
+          "allyDealt": 0,
+          "dmgPerRound": 13,
+          "dmgFrac": 0.03,
+          "vTaken": 75,
+          "vHpLeft": 0,
+          "gate": {
+            "result": "null",
+            "reason": null,
+            "partySize": 3
+          },
+          "flags": [
+            "trick-unknown",
+            "launched-short",
+            "under-geared",
+            "out-damaged",
+            "mauled",
+            "died"
+          ],
+          "primary": "died",
+          "classified": true,
+          "missingFields": []
+        }
+      ],
+      "perSeed": [
+        {
+          "seed": 102601,
+          "days": 126,
+          "end": "village-lost",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 3,
+          "broadEvents": 3,
+          "strictEvents": 3,
+          "launchedFights": 2,
+          "classified": 2,
+          "kills": 0,
+          "wildFights": 22,
+          "medianDmg": 23.5,
+          "medianRounds": 1
+        },
+        {
+          "seed": 102602,
+          "days": 149,
+          "end": "village-lost",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 18,
+          "broadEvents": 10,
+          "strictEvents": 0,
+          "launchedFights": 5,
+          "classified": 5,
+          "kills": 0,
+          "wildFights": 18,
+          "medianDmg": 0,
+          "medianRounds": 0
+        },
+        {
+          "seed": 102603,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 8,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 15,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102604,
+          "days": 124,
+          "end": "village-lost",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 29,
+          "broadEvents": 15,
+          "strictEvents": 0,
+          "launchedFights": 4,
+          "classified": 4,
+          "kills": 0,
+          "wildFights": 5,
+          "medianDmg": 67,
+          "medianRounds": 3
+        },
+        {
+          "seed": 102605,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 1,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102606,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 425,
+          "maxWave": 5,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 49,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102607,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 199,
+          "maxWave": 4,
+          "events": 0,
+          "broadEvents": 0,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 8,
+          "medianDmg": null,
+          "medianRounds": null
+        },
+        {
+          "seed": 102608,
+          "days": 151,
+          "end": "survived",
+          "won": false,
+          "rank": "regional",
+          "standing": 325,
+          "maxWave": 5,
+          "events": 20,
+          "broadEvents": 4,
+          "strictEvents": 0,
+          "launchedFights": 0,
+          "classified": 0,
+          "kills": 0,
+          "wildFights": 26,
+          "medianDmg": null,
+          "medianRounds": null
+        }
+      ],
+      "wall": {
+        "wins": 0,
+        "nationalRank": 0,
+        "nationalStanding": 2,
+        "wave4": 8,
+        "wave5": 2,
+        "gameDays": [
+          126,
+          149,
+          151,
+          124,
+          151,
+          151,
+          151,
+          151
+        ],
+        "deaths": 619,
+        "starvation": 2,
+        "scholarDeaths": 60
+      },
+      "medianSurvival": 151,
+      "launchedMedianDmgPerRound": 22.75,
+      "launchedMedianRounds": 2,
+      "launchedMedianDmgFrac": 0.03,
+      "wildMedianDmgPerRound": 13.11111111111111,
+      "wildMedianRounds": 3
+    },
+    "distinctKills": [],
+    "distinctKillCount": 0,
+    "tricksLearned": {
+      "distinctSpecies": [
+        "algorithm",
+        "audit",
+        "eater",
+        "editor",
+        "eulogy",
+        "herald",
+        "influencer",
+        "network_note",
+        "reunion",
+        "strike",
+        "suburb"
+      ],
+      "transitions": 23,
+      "perSeed": {
+        "102601": [
+          {
+            "mid": "reunion",
+            "day": 63,
+            "wave": 4
+          },
+          {
+            "mid": "strike",
+            "day": 103,
+            "wave": 4
+          },
+          {
+            "mid": "audit",
+            "day": 104,
+            "wave": 4
+          },
+          {
+            "mid": "herald",
+            "day": 111,
+            "wave": 4
+          },
+          {
+            "mid": "influencer",
+            "day": 117,
+            "wave": 4
+          }
+        ],
+        "102602": [
+          {
+            "mid": "strike",
+            "day": 109,
+            "wave": 4
+          },
+          {
+            "mid": "audit",
+            "day": 127,
+            "wave": 4
+          },
+          {
+            "mid": "eulogy",
+            "day": 144,
+            "wave": 4
+          }
+        ],
+        "102603": [
+          {
+            "mid": "herald",
+            "day": 126,
+            "wave": 4
+          },
+          {
+            "mid": "eulogy",
+            "day": 135,
+            "wave": 4
+          },
+          {
+            "mid": "algorithm",
+            "day": 145,
+            "wave": 4
+          }
+        ],
+        "102604": [
+          {
+            "mid": "herald",
+            "day": 88,
+            "wave": 4
+          }
+        ],
+        "102605": [],
+        "102606": [
+          {
+            "mid": "eulogy",
+            "day": 91,
+            "wave": 4
+          },
+          {
+            "mid": "suburb",
+            "day": 95,
+            "wave": 4
+          },
+          {
+            "mid": "herald",
+            "day": 98,
+            "wave": 4
+          },
+          {
+            "mid": "eater",
+            "day": 119,
+            "wave": 4
+          },
+          {
+            "mid": "network_note",
+            "day": 132,
+            "wave": 5
+          }
+        ],
+        "102607": [
+          {
+            "mid": "algorithm",
+            "day": 148,
+            "wave": 4
+          },
+          {
+            "mid": "eulogy",
+            "day": 149,
+            "wave": 4
+          }
+        ],
+        "102608": [
+          {
+            "mid": "herald",
+            "day": 93,
+            "wave": 4
+          },
+          {
+            "mid": "algorithm",
+            "day": 110,
+            "wave": 4
+          },
+          {
+            "mid": "audit",
+            "day": 131,
+            "wave": 4
+          },
+          {
+            "mid": "editor",
+            "day": 136,
+            "wave": 5
+          }
+        ]
+      },
+      "bySpecies": {
+        "reunion": {
+          "firstSeed": 102601,
+          "firstDay": 63,
+          "viaLaunched": null
+        },
+        "strike": {
+          "firstSeed": 102601,
+          "firstDay": 103,
+          "viaLaunched": null
+        },
+        "audit": {
+          "firstSeed": 102601,
+          "firstDay": 104,
+          "viaLaunched": null
+        },
+        "herald": {
+          "firstSeed": 102601,
+          "firstDay": 111,
+          "viaLaunched": null
+        },
+        "influencer": {
+          "firstSeed": 102601,
+          "firstDay": 117,
+          "viaLaunched": null
+        },
+        "eulogy": {
+          "firstSeed": 102602,
+          "firstDay": 144,
+          "viaLaunched": null
+        },
+        "algorithm": {
+          "firstSeed": 102603,
+          "firstDay": 145,
+          "viaLaunched": null
+        },
+        "suburb": {
+          "firstSeed": 102606,
+          "firstDay": 95,
+          "viaLaunched": null
+        },
+        "eater": {
+          "firstSeed": 102606,
+          "firstDay": 119,
+          "viaLaunched": null
+        },
+        "network_note": {
+          "firstSeed": 102606,
+          "firstDay": 132,
+          "viaLaunched": null
+        },
+        "editor": {
+          "firstSeed": 102608,
+          "firstDay": 136,
+          "viaLaunched": null
+        }
+      }
+    },
+    "shares": {
+      "launched": 11,
+      "launchedKnown": 1,
+      "launchedKnownShare": 0.09090909090909091,
+      "wild": 144,
+      "wildKnown": 91,
+      "wildKnownShare": 0.6319444444444444
+    },
+    "waveKills": {
+      "wave4All": 8,
+      "wave5All": 1,
+      "wave4LaunchedRows": 0,
+      "wave5LaunchedRows": 0
+    },
+    "waveKillsReal": {
+      "wave4": 5,
+      "wave5": 1,
+      "wave4Rows": 8,
+      "wave5Rows": 1,
+      "wave4ZeroRound": 3,
+      "wave5ZeroRound": 0,
+      "rows": [
+        {
+          "seed": 102602,
+          "day": 116,
+          "vid": "aroha_ngata",
+          "mid": "herald",
+          "wave": 4,
+          "rounds": 12,
+          "launched": false
+        },
+        {
+          "seed": 102602,
+          "day": 118,
+          "vid": "aroha_ngata",
+          "mid": "strike",
+          "wave": 4,
+          "rounds": 1,
+          "launched": false
+        },
+        {
+          "seed": 102603,
+          "day": 128,
+          "vid": "app_mgpspldl663",
+          "mid": "herald",
+          "wave": 4,
+          "rounds": 5,
+          "launched": false
+        },
+        {
+          "seed": 102606,
+          "day": 111,
+          "vid": "fatima_hassan",
+          "mid": "herald",
+          "wave": 4,
+          "rounds": 1,
+          "launched": false
+        },
+        {
+          "seed": 102606,
+          "day": 143,
+          "vid": "katarina_novak",
+          "mid": "network_note",
+          "wave": 5,
+          "rounds": 2,
+          "launched": false
+        },
+        {
+          "seed": 102608,
+          "day": 145,
+          "vid": "dmitri_sokolov",
+          "mid": "algorithm",
+          "wave": 4,
+          "rounds": 9,
+          "launched": false
+        }
+      ]
+    },
+    "gates": {
+      "all": {
+        "seek": 0,
+        "avoid": 30,
+        "null": 14,
+        "other": 0,
+        "rows": 44
+      },
+      "launchedFights": {
+        "seek": 0,
+        "avoid": 0,
+        "null": 10,
+        "none": 1
+      }
+    },
+    "trickKnownEnd": {
+      "wave12KnownSpecies": [
+        "alien_tick",
+        "anaconda_empress",
+        "belltoad",
+        "bright_idea",
+        "bulldozer",
+        "cliffhanger",
+        "drumbelly_tanuki",
+        "ducks_in_a_row",
+        "dustboar",
+        "gallowdeer",
+        "giant_mosquito",
+        "heckler",
+        "hummice",
+        "hushwolf",
+        "landlord",
+        "living_wire",
+        "lockpick_raccoon",
+        "memory_projector",
+        "mirror_stag",
+        "mirrormoth",
+        "moderator",
+        "murkcap",
+        "nevermore",
+        "nightcourt",
+        "nightlight_catfish",
+        "paparazzo",
+        "review_drone",
+        "rut_king",
+        "sanjun",
+        "speedbump_turtle",
+        "statickite",
+        "sunback",
+        "sunbasker",
+        "sweeps_week",
+        "understudy",
+        "union_rep",
+        "voice_mimic_radio",
+        "warranty_caller",
+        "white_noise_heron"
+      ],
+      "wave345KnownSpecies": [
+        "ad_break",
+        "algorithm",
+        "audit",
+        "buffering",
+        "callback",
+        "chorus_line",
+        "congregation",
+        "eater",
+        "editor",
+        "eulogy",
+        "finale_crew",
+        "focus_group",
+        "herald",
+        "influencer",
+        "network_note",
+        "redactor",
+        "rerun",
+        "reunion",
+        "spoiler",
+        "spool",
+        "strike",
+        "suburb",
+        "terms_of_service"
+      ],
+      "obsSpeciesRows": 85,
+      "obsTotal": 166
+    },
+    "share": {
+      "taught": 65,
+      "taughtW45": 25,
+      "taughtLearns": 65,
+      "taughtLearnsW45": 25,
+      "offers": 85,
+      "taughtBySpecies": {
+        "lockpick_raccoon": 5,
+        "anaconda_empress": 1,
+        "focus_group": 2,
+        "buffering": 4,
+        "audit": 4,
+        "terms_of_service": 1,
+        "eulogy": 5,
+        "spool": 5,
+        "influencer": 2,
+        "understudy": 1,
+        "ad_break": 3,
+        "strike": 1,
+        "chorus_line": 3,
+        "callback": 4,
+        "redactor": 3,
+        "eater": 2,
+        "reunion": 2,
+        "review_drone": 1,
+        "suburb": 1,
+        "congregation": 1,
+        "voice_mimic_radio": 1,
+        "herald": 2,
+        "living_wire": 1,
+        "mirrormoth": 2,
+        "murkcap": 1,
+        "network_note": 1,
+        "spoiler": 1,
+        "landlord": 1,
+        "finale_crew": 1,
+        "speedbump_turtle": 1,
+        "editor": 1,
+        "rerun": 1
+      },
+      "offersBySpecies": {
+        "lockpick_raccoon": 5,
+        "anaconda_empress": 1,
+        "focus_group": 3,
+        "buffering": 4,
+        "terms_of_service": 2,
+        "audit": 4,
+        "reunion": 4,
+        "callback": 7,
+        "eulogy": 6,
+        "spool": 5,
+        "strike": 2,
+        "herald": 6,
+        "influencer": 2,
+        "understudy": 1,
+        "redactor": 4,
+        "ad_break": 3,
+        "chorus_line": 3,
+        "eater": 2,
+        "algorithm": 3,
+        "review_drone": 1,
+        "suburb": 2,
+        "congregation": 1,
+        "voice_mimic_radio": 1,
+        "living_wire": 1,
+        "mirrormoth": 2,
+        "hushwolf": 1,
+        "murkcap": 1,
+        "network_note": 1,
+        "spoiler": 1,
+        "gallowdeer": 1,
+        "landlord": 1,
+        "finale_crew": 1,
+        "speedbump_turtle": 1,
+        "editor": 1,
+        "rerun": 1
+      },
+      "delays": [
+        {
+          "seed": 102601,
+          "mid": "lockpick_raccoon",
+          "wave": 1,
+          "offerDay": 6,
+          "learnDay": 8,
+          "delay": 2
+        },
+        {
+          "seed": 102601,
+          "mid": "anaconda_empress",
+          "wave": 1,
+          "offerDay": 20,
+          "learnDay": 22,
+          "delay": 2
+        },
+        {
+          "seed": 102601,
+          "mid": "focus_group",
+          "wave": 3,
+          "offerDay": 35,
+          "learnDay": 36,
+          "delay": 1
+        },
+        {
+          "seed": 102601,
+          "mid": "buffering",
+          "wave": 3,
+          "offerDay": 44,
+          "learnDay": 45,
+          "delay": 1
+        },
+        {
+          "seed": 102601,
+          "mid": "audit",
+          "wave": 4,
+          "offerDay": 49,
+          "learnDay": 50,
+          "delay": 1
+        },
+        {
+          "seed": 102601,
+          "mid": "terms_of_service",
+          "wave": 3,
+          "offerDay": 48,
+          "learnDay": 50,
+          "delay": 2
+        },
+        {
+          "seed": 102601,
+          "mid": "eulogy",
+          "wave": 4,
+          "offerDay": 74,
+          "learnDay": 80,
+          "delay": 6
+        },
+        {
+          "seed": 102601,
+          "mid": "spool",
+          "wave": 3,
+          "offerDay": 82,
+          "learnDay": 83,
+          "delay": 1
+        },
+        {
+          "seed": 102601,
+          "mid": "influencer",
+          "wave": 4,
+          "offerDay": 116,
+          "learnDay": 117,
+          "delay": 1
+        },
+        {
+          "seed": 102602,
+          "mid": "understudy",
+          "wave": 2,
+          "offerDay": 13,
+          "learnDay": 14,
+          "delay": 1
+        },
+        {
+          "seed": 102602,
+          "mid": "spool",
+          "wave": 3,
+          "offerDay": 29,
+          "learnDay": 32,
+          "delay": 3
+        },
+        {
+          "seed": 102602,
+          "mid": "ad_break",
+          "wave": 3,
+          "offerDay": 50,
+          "learnDay": 69,
+          "delay": 19
+        },
+        {
+          "seed": 102602,
+          "mid": "audit",
+          "wave": 4,
+          "offerDay": 87,
+          "learnDay": 90,
+          "delay": 3
+        },
+        {
+          "seed": 102602,
+          "mid": "strike",
+          "wave": 4,
+          "offerDay": 108,
+          "learnDay": 109,
+          "delay": 1
+        },
+        {
+          "seed": 102602,
+          "mid": "chorus_line",
+          "wave": 3,
+          "offerDay": 118,
+          "learnDay": 120,
+          "delay": 2
+        },
+        {
+          "seed": 102603,
+          "mid": "callback",
+          "wave": 3,
+          "offerDay": 29,
+          "learnDay": 30,
+          "delay": 1
+        },
+        {
+          "seed": 102603,
+          "mid": "ad_break",
+          "wave": 3,
+          "offerDay": 29,
+          "learnDay": 31,
+          "delay": 2
+        },
+        {
+          "seed": 102603,
+          "mid": "redactor",
+          "wave": 3,
+          "offerDay": 35,
+          "learnDay": 36,
+          "delay": 1
+        },
+        {
+          "seed": 102603,
+          "mid": "lockpick_raccoon",
+          "wave": 1,
+          "offerDay": 65,
+          "learnDay": 66,
+          "delay": 1
+        },
+        {
+          "seed": 102603,
+          "mid": "eater",
+          "wave": 4,
+          "offerDay": 126,
+          "learnDay": 128,
+          "delay": 2
+        },
+        {
+          "seed": 102603,
+          "mid": "eulogy",
+          "wave": 4,
+          "offerDay": 131,
+          "learnDay": 134,
+          "delay": 3
+        },
+        {
+          "seed": 102603,
+          "mid": "spool",
+          "wave": 3,
+          "offerDay": 141,
+          "learnDay": 146,
+          "delay": 5
+        },
+        {
+          "seed": 102603,
+          "mid": "reunion",
+          "wave": 4,
+          "offerDay": 150,
+          "learnDay": 151,
+          "delay": 1
+        },
+        {
+          "seed": 102604,
+          "mid": "lockpick_raccoon",
+          "wave": 1,
+          "offerDay": 21,
+          "learnDay": 28,
+          "delay": 7
+        },
+        {
+          "seed": 102604,
+          "mid": "review_drone",
+          "wave": 2,
+          "offerDay": 28,
+          "learnDay": 31,
+          "delay": 3
+        },
+        {
+          "seed": 102604,
+          "mid": "buffering",
+          "wave": 3,
+          "offerDay": 25,
+          "learnDay": 34,
+          "delay": 9
+        },
+        {
+          "seed": 102604,
+          "mid": "suburb",
+          "wave": 4,
+          "offerDay": 44,
+          "learnDay": 46,
+          "delay": 2
+        },
+        {
+          "seed": 102604,
+          "mid": "audit",
+          "wave": 4,
+          "offerDay": 46,
+          "learnDay": 47,
+          "delay": 1
+        },
+        {
+          "seed": 102604,
+          "mid": "congregation",
+          "wave": 4,
+          "offerDay": 48,
+          "learnDay": 49,
+          "delay": 1
+        },
+        {
+          "seed": 102604,
+          "mid": "voice_mimic_radio",
+          "wave": 2,
+          "offerDay": 75,
+          "learnDay": 77,
+          "delay": 2
+        },
+        {
+          "seed": 102604,
+          "mid": "redactor",
+          "wave": 3,
+          "offerDay": 81,
+          "learnDay": 85,
+          "delay": 4
+        },
+        {
+          "seed": 102604,
+          "mid": "herald",
+          "wave": 4,
+          "offerDay": 82,
+          "learnDay": 87,
+          "delay": 5
+        },
+        {
+          "seed": 102604,
+          "mid": "living_wire",
+          "wave": 1,
+          "offerDay": 99,
+          "learnDay": 100,
+          "delay": 1
+        },
+        {
+          "seed": 102605,
+          "mid": "lockpick_raccoon",
+          "wave": 1,
+          "offerDay": 7,
+          "learnDay": 9,
+          "delay": 2
+        },
+        {
+          "seed": 102605,
+          "mid": "mirrormoth",
+          "wave": 1,
+          "offerDay": 7,
+          "learnDay": 9,
+          "delay": 2
+        },
+        {
+          "seed": 102605,
+          "mid": "chorus_line",
+          "wave": 3,
+          "offerDay": 46,
+          "learnDay": 48,
+          "delay": 2
+        },
+        {
+          "seed": 102605,
+          "mid": "murkcap",
+          "wave": 1,
+          "offerDay": 66,
+          "learnDay": 67,
+          "delay": 1
+        },
+        {
+          "seed": 102605,
+          "mid": "reunion",
+          "wave": 4,
+          "offerDay": 141,
+          "learnDay": 143,
+          "delay": 2
+        },
+        {
+          "seed": 102606,
+          "mid": "lockpick_raccoon",
+          "wave": 1,
+          "offerDay": 20,
+          "learnDay": 21,
+          "delay": 1
+        },
+        {
+          "seed": 102606,
+          "mid": "spool",
+          "wave": 3,
+          "offerDay": 34,
+          "learnDay": 38,
+          "delay": 4
+        },
+        {
+          "seed": 102606,
+          "mid": "chorus_line",
+          "wave": 3,
+          "offerDay": 49,
+          "learnDay": 50,
+          "delay": 1
+        },
+        {
+          "seed": 102606,
+          "mid": "eulogy",
+          "wave": 4,
+          "offerDay": 69,
+          "learnDay": 70,
+          "delay": 1
+        },
+        {
+          "seed": 102606,
+          "mid": "influencer",
+          "wave": 4,
+          "offerDay": 104,
+          "learnDay": 105,
+          "delay": 1
+        },
+        {
+          "seed": 102606,
+          "mid": "ad_break",
+          "wave": 3,
+          "offerDay": 110,
+          "learnDay": 115,
+          "delay": 5
+        },
+        {
+          "seed": 102606,
+          "mid": "callback",
+          "wave": 3,
+          "offerDay": 114,
+          "learnDay": 117,
+          "delay": 3
+        },
+        {
+          "seed": 102606,
+          "mid": "eater",
+          "wave": 4,
+          "offerDay": 117,
+          "learnDay": 118,
+          "delay": 1
+        },
+        {
+          "seed": 102606,
+          "mid": "network_note",
+          "wave": 5,
+          "offerDay": 120,
+          "learnDay": 122,
+          "delay": 2
+        },
+        {
+          "seed": 102606,
+          "mid": "spoiler",
+          "wave": 5,
+          "offerDay": 135,
+          "learnDay": 136,
+          "delay": 1
+        },
+        {
+          "seed": 102607,
+          "mid": "spool",
+          "wave": 3,
+          "offerDay": 31,
+          "learnDay": 32,
+          "delay": 1
+        },
+        {
+          "seed": 102607,
+          "mid": "callback",
+          "wave": 3,
+          "offerDay": 35,
+          "learnDay": 38,
+          "delay": 3
+        },
+        {
+          "seed": 102607,
+          "mid": "buffering",
+          "wave": 3,
+          "offerDay": 39,
+          "learnDay": 41,
+          "delay": 2
+        },
+        {
+          "seed": 102607,
+          "mid": "landlord",
+          "wave": 2,
+          "offerDay": 121,
+          "learnDay": 123,
+          "delay": 2
+        },
+        {
+          "seed": 102607,
+          "mid": "herald",
+          "wave": 4,
+          "offerDay": 146,
+          "learnDay": 147,
+          "delay": 1
+        },
+        {
+          "seed": 102607,
+          "mid": "eulogy",
+          "wave": 4,
+          "offerDay": 147,
+          "learnDay": 148,
+          "delay": 1
+        },
+        {
+          "seed": 102607,
+          "mid": "focus_group",
+          "wave": 3,
+          "offerDay": 148,
+          "learnDay": 149,
+          "delay": 1
+        },
+        {
+          "seed": 102608,
+          "mid": "mirrormoth",
+          "wave": 1,
+          "offerDay": 9,
+          "learnDay": 10,
+          "delay": 1
+        },
+        {
+          "seed": 102608,
+          "mid": "callback",
+          "wave": 3,
+          "offerDay": 37,
+          "learnDay": 38,
+          "delay": 1
+        },
+        {
+          "seed": 102608,
+          "mid": "buffering",
+          "wave": 3,
+          "offerDay": 47,
+          "learnDay": 48,
+          "delay": 1
+        },
+        {
+          "seed": 102608,
+          "mid": "redactor",
+          "wave": 3,
+          "offerDay": 57,
+          "learnDay": 59,
+          "delay": 2
+        },
+        {
+          "seed": 102608,
+          "mid": "eulogy",
+          "wave": 4,
+          "offerDay": 95,
+          "learnDay": 96,
+          "delay": 1
+        },
+        {
+          "seed": 102608,
+          "mid": "finale_crew",
+          "wave": 5,
+          "offerDay": 121,
+          "learnDay": 123,
+          "delay": 2
+        },
+        {
+          "seed": 102608,
+          "mid": "speedbump_turtle",
+          "wave": 1,
+          "offerDay": 127,
+          "learnDay": 129,
+          "delay": 2
+        },
+        {
+          "seed": 102608,
+          "mid": "audit",
+          "wave": 4,
+          "offerDay": 129,
+          "learnDay": 131,
+          "delay": 2
+        },
+        {
+          "seed": 102608,
+          "mid": "editor",
+          "wave": 5,
+          "offerDay": 133,
+          "learnDay": 134,
+          "delay": 1
+        },
+        {
+          "seed": 102608,
+          "mid": "rerun",
+          "wave": 5,
+          "offerDay": 143,
+          "learnDay": 145,
+          "delay": 2
+        }
+      ],
+      "pendingEnd": {}
+    },
+    "gateKnown": {
+      "rows": 44,
+      "known": 3,
+      "rate": 0.06818181818181818
+    },
+    "deathsPer100d": {
+      "deaths": 619,
+      "days": 1150,
+      "per100d": 53.826086956521735
+    },
+    "medianSurvival": 151,
+    "starvation": 2,
+    "deaths": 619
+  },
+  "bars": [
+    {
+      "id": "(a) taught observations > 0 on the armed leg",
+      "pass": true,
+      "detail": "armed 65 taught rows (25 wave-4/5), control 0"
+    },
+    {
+      "id": "(b) gate trick-known rises vs control",
+      "pass": true,
+      "detail": "armed 3/44 (6.8%), control 1/63 (1.6%)"
+    },
+    {
+      "id": "(c) PRIMARY all-origins wave-4 kills (distinct, rounds>=1) armed > control",
+      "pass": false,
+      "detail": "armed 5 (rows 8, 0-round 3), control 5 (rows 8, 0-round 3)"
+    },
+    {
+      "id": "cost: starvation armed <= control + 2",
+      "pass": true,
+      "detail": "armed 2, control 4"
+    },
+    {
+      "id": "cost: median survival armed >= 0.8x control",
+      "pass": true,
+      "detail": "armed 151d, control 150.5d (0.8x = 120.4)"
+    },
+    {
+      "id": "cost: deaths/100d not a panel regression_signal (panel verdict read separately)",
+      "pass": true,
+      "detail": "panel deaths/100d signal: no_material_signal (armed 53.83/100d, control 66.02/100d)"
+    },
+    {
+      "id": "instrument clean (0 errors, 8/8 parse both legs)",
+      "pass": true,
+      "detail": "errors 0, control 8/8, armed 8/8"
+    }
+  ],
+  "go": false,
+  "instrumentErrors": 0
+}

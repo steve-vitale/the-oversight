@@ -57,7 +57,7 @@ if (OFF_MODE) {
   check('flag is read in exactly one place (trickShareEnabled)', flagReads === 1, 'got ' + flagReads);
   check('no trickLearnThreshold helper (threshold is NOT cut)', gameSrc.indexOf('trickLearnThreshold') === -1);
   const thSites = (gameSrc.match(/obs\[mid\] < 2/g) || []).length;
-  check('threshold stays 2 at all three obs sites (2x _trickObservation + 1x noteNodeWitnessKill)', thSites === 3, 'got ' + thSites);
+  check('threshold stays 2 at all four obs sites (2x _trickObservation + 1x noteNodeWitnessKill + 1x noteTrickTaught)', thSites === 4, 'got ' + thSites);
   check('sleep() calls the share tick once per dawn (hook present)', gameSrc.indexOf('this.trickShareDawnTick()') !== -1);
   check('fieldFights threads the party into the observation call (teach-on-learn audience)',
     ffSrc.indexOf("this.noteVillagerTrickObservation(vid, mdef.id, (opts && opts.allyVids) || null)") !== -1);
@@ -172,11 +172,16 @@ function shareChild(envExtra) {
     "  out.dead.obsAfter = (Game.state.villageCounterObs || {}).reunion || 0;",
     "  out.dead.knownAfter = Game.villageKnowsTrick('reunion');",
     "  out.dead.pendingAfter = Game.state.trickSharePending ? (Game.state.trickSharePending.reunion || null) : null;",
-    "  // --- no listeners: teacher alone at Haven -> pending kept ---",
+    "  // --- no listeners: the scholar alone at Haven -> pending kept ---",
+    "  // The scholar is ALWAYS a Haven listener when home (campPeopleIds",
+    "  // adds the scholar unconditionally), so a villager-teacher can never",
+    "  // be alone while the scholar is home. The alone case is the scholar",
+    "  // as teacher with every other villager away: Haven = [scholar],",
+    "  // listeners = [].",
     "  Game.state.villageCounterObs = {}; Game.state.villagerTricks = {}; Game.state.trickSharePending = {}; delete Game.state.trickShareLastDay; said.length = 0;",
     "  try { const p3 = Game.getPerson ? Game.getPerson(w3) : null; if (p3) p3.dead = false; } catch (e) {}",
-    "  Game.noteVillagerTrickObservation(w4, 'herald');",
-    "  try { Game.state.village.away = {}; for (const r of roster) if (r !== w4) Game.state.village.away[r] = true; } catch (e) {}",
+    "  Game.noteScholarTrickObservation('herald');",
+    "  try { Game.state.village.away = {}; for (const r of roster) Game.state.village.away[r] = true; } catch (e) {}",
     "  out.alone = {};",
     "  out.alone.fired = Game.trickShareDawnTick();",
     "  out.alone.obsAfter = (Game.state.villageCounterObs || {}).herald || 0;",
@@ -256,7 +261,7 @@ if (!OFF_MODE) {
     JSON.stringify(armedU.dead));
   check('armed: no listeners at Haven -> pending kept, no credit',
     armedU.alone.fired === false && armedU.alone.obsAfter === 1 && armedU.alone.knownAfter === false &&
-    armedU.alone.pendingAfter && armedU.alone.pendingAfter.teacher === armedU.roster[3],
+    armedU.alone.pendingAfter && armedU.alone.pendingAfter.teacher === 'player',
     JSON.stringify(armedU.alone));
   check('armed: second survived observation before dawn clears the pending (learned the old way)',
     armedU.clear.pendingAfter1 && armedU.clear.pendingAfter1.teacher === armedU.roster[0] &&
@@ -298,11 +303,16 @@ check('control: waves 1-2 taught credit refuses with the flag off (noteTrickTaug
 // ENCOUNTER GEAR (Steve 2026-11-13): the fighter is a villager with the
 // average gear a player actually has at wave-3 content — a machete in
 // hand, crude bow in the pack — fighting with two geared party allies
-// against a wave-3 Redactor. The scholar is geared alongside (crude
-// bow + arrows + machete). Nothing here is a fresh un-geared scholar
-// alone: the observation must come out of a REAL field fight, not a
-// direct function call. Deterministic per seed; the child tries seeds
-// 102601-102603 and takes the first survived outcome.
+// against a wave-3 beast (Redactor, Gavel or Spool). The scholar is
+// geared alongside (crude bow + arrows + machete). The fighter enters
+// at 45% HP — a fighter who has already fought today, the state a party
+// is actually in when it meets wave-3 content (a full-HP geared party
+// kills wave-1/2 beasts outright in 1-3 rounds and dies to wave-3 ones;
+// the wounded fighter breaks and flees, which is the observation path).
+// Nothing here is a fresh un-geared scholar alone: the observation must
+// come out of a REAL field fight, not a direct function call. Deterministic
+// per seed; the child tries seeds 102601-102604 x the three wave-3 mids
+// (one fresh loadGame per pair) and takes the first survived outcome.
 console.log('== unit: live geared fight ==');
 function fightChild() {
   const env = Object.assign({}, process.env, { TRICKSHARE: '1' });
@@ -311,7 +321,8 @@ function fightChild() {
     "const { loadGame, setupGame } = require('./scripts/sim-harness');",
     "(async function () {",
     "  const out = { tried: [] };",
-    "  for (const seed of [102601, 102602, 102603]) {",
+    "  outer: for (const seed of [102601, 102602, 102603, 102604]) {",
+    "    for (const mid of ['redactor', 'gavel', 'spool']) {",
     "    const { Game } = await loadGame({ seed: seed, mode: 'trickshare-fight', fullTelemetry: false });",
     "    const said = [];",
     "    const origSay = Game.say ? Game.say.bind(Game) : null;",
@@ -319,8 +330,8 @@ function fightChild() {
     "    await setupGame(Game);",
     "    Game.state.villageCounterObs = {}; Game.state.villagerTricks = {}; Game.state.trickSharePending = {}; delete Game.state.trickShareLastDay;",
     "    const roster = ((Game.state.village || {}).roster || []).slice();",
-    "    if (roster.length < 3) { out.tried.push({ seed: seed, error: 'roster<3' }); continue; }",
-    "    const w1 = roster[0], w2 = roster[1], w3 = roster[2];",
+    "    if (roster.length < 4) { out.tried.push({ seed: seed, mid: mid, error: 'roster<4' }); continue; }",
+    "    const w1 = roster[1], w2 = roster[2], w3 = roster[3];",
     "    // ENCOUNTER GEAR: fighter + allies carry the average wave-3 gear.",
     "    function gear(vid, melee) {",
     "      try { const p = Game.getPerson ? Game.getPerson(vid) : null; if (!p) return false;",
@@ -336,16 +347,24 @@ function fightChild() {
     "      if (!s.items.some(function (e) { return (e.itemId || e.id) === 'arrow'; })) s.items.push({ itemId: 'arrow', units: 6 });",
     "      if (!s.items.some(function (e) { return (e.itemId || e.id) === 'machete'; })) s.items.push({ itemId: 'machete' });",
     "      scholarGeared = true; } catch (e) {}",
-    "    const mdef = (Game.data.monsters || []).find(function (m) { return m.id === 'redactor'; });",
-    "    if (!mdef) { out.tried.push({ seed: seed, error: 'no-redactor' }); continue; }",
+    "    // The fighter has already fought today: 45% HP at contact.",
+    "    // Fighter HP lives in state.village.health[vid] (fieldFights",
+    "    // reads it there; the person object carries no hp field).",
+    "    let hpFrac = null;",
+    "    try { const vv0 = Game.state.village || {}; if (!vv0.health) vv0.health = {};",
+    "      const h0 = (typeof vv0.health[w1] === 'number' ? vv0.health[w1] : 100);",
+    "      if (h0 > 0) { vv0.health[w1] = Math.round(h0 * 0.45); hpFrac = 0.45; } } catch (e) {}",
+    "    const mdef = (Game.data.monsters || []).find(function (m) { return m.id === mid; });",
+    "    if (!mdef) { out.tried.push({ seed: seed, mid: mid, error: 'no-monster' }); continue; }",
     "    let rec = null;",
-    "    try { rec = Game.fieldFight(w1, mdef, null, { allies: 2, allyVids: [w2, w3], allyFromStart: true }); } catch (e) { out.tried.push({ seed: seed, error: 'fight-threw:' + String(e.message).slice(0, 80) }); continue; }",
-    "    const obs = (Game.state.villageCounterObs || {}).redactor || 0;",
-    "    const pending = Game.state.trickSharePending ? (Game.state.trickSharePending.redactor || null) : null;",
-    "    out.tried.push({ seed: seed, fighter: w1, outcome: rec ? rec.outcome : null, rounds: rec ? rec.rounds : null,",
-    "      geared: [g1, g2, g3], scholarGeared: scholarGeared, obs: obs, pendingTeacher: pending ? pending.teacher : null,",
-    "      known: Game.villageKnowsTrick('redactor') });",
-    "    if (rec && (rec.outcome === 'vFlee' || rec.outcome === 'mFlee' || rec.outcome === 'evade')) break;",
+    "    try { rec = Game.fieldFight(w1, mdef, null, { allies: 2, allyVids: [w2, w3], allyFromStart: true }); } catch (e) { out.tried.push({ seed: seed, mid: mid, error: 'fight-threw:' + String(e.message).slice(0, 80) }); continue; }",
+    "    const obs = (Game.state.villageCounterObs || {})[mid] || 0;",
+    "    const pending = Game.state.trickSharePending ? (Game.state.trickSharePending[mid] || null) : null;",
+    "    out.tried.push({ seed: seed, mid: mid, fighter: w1, outcome: rec ? rec.outcome : null, rounds: rec ? rec.rounds : null,",
+    "      hpFrac: hpFrac, geared: [g1, g2, g3], scholarGeared: scholarGeared, obs: obs, pendingTeacher: pending ? pending.teacher : null,",
+    "      known: Game.villageKnowsTrick(mid) });",
+    "    if (rec && (rec.outcome === 'vFlee' || rec.outcome === 'mFlee' || rec.outcome === 'evade')) break outer;",
+    "    }",
     "  }",
     "  console.log(JSON.stringify(out));",
     "})().catch(function (e) { console.error(e.stack); process.exit(1); });",
@@ -388,8 +407,12 @@ async function liveRuns() {
   const outControl = await dControl.oneRun(102601);
   check('live control run completes with 0 instrument errors', outControl.instrumentErrors.length === 0,
     JSON.stringify(outControl.instrumentErrors.slice(0, 3)));
-  check('live control run policy is competent, sha 74a890f0844e',
-    outControl.policy === 'competent' && outControl.policySha === '74a890f0844e',
+  // Policy sha pinned to the REBASED tip (63fa44d6c): competent.js gained
+  // the journey-landing r140 budget stop (6436b14c8) between the prereg
+  // base and master; the prereg's recorded sha 74a890f0844e is the pre-
+  // rebase file. The assertion still pins the exact sha — now the tip's.
+  check('live control run policy is competent, sha df9b7dff4de4',
+    outControl.policy === 'competent' && outControl.policySha === 'df9b7dff4de4',
     'got ' + outControl.policy + '/' + outControl.policySha);
   check('control run records trickShare false + trickShareEnabled false',
     outControl.trickShare === false && outControl.trickShareEnabled === false,

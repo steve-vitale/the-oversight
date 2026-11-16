@@ -21529,11 +21529,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!this.over) this.say('You wake with a start — something is wrong.');
         return this.status();
       }
-      // HEARTHSIDE TRICK TEACHING (sim-trickshare-a, TRICKSHARE=1): you
-      // slept through to dawn — the villagers at Haven tell last
-      // night's stories at the fire. Chain-safe: a share bug can
-      // never break sleep (and the tick is a no-op with the flag off).
-      try { if (this.trickShareDawnTick) this.trickShareDawnTick(); } catch (e) {}
       // You slept through to dawn. endDay already ran: meals eaten, metabolism
       // burned, the land regrew. Now the body's accounting.
       const lost = startKcal - Math.round(s.kcal || 0);
@@ -36420,9 +36415,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // silent. The scholar has his own channel (noteScholarTrickObservation);
     // this wrapper keeps the 'player' exclusion so villager behavior is
     // byte-identical.
-    noteVillagerTrickObservation(vid, mid, allies) {
+    noteVillagerTrickObservation(vid, mid) {
       if (vid === 'player') return false;
-      return this._trickObservation(vid, mid, false, allies || null);
+      return this._trickObservation(vid, mid, false);
     },
     // noteScholarTrickObservation(mid): SCHOLAR PARITY (lever scholartrick,
     // Steve's VILLAGER COUNTER PARITY 2026-10-13, symmetric half). The
@@ -36437,12 +36432,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     noteScholarTrickObservation(mid) {
       return this._trickObservation('player', mid, true);
     },
-    // _trickObservation(vid, mid, firstPerson, allies): the shared observation core.
+    // _trickObservation(vid, mid, firstPerson): the shared observation core.
     // firstPerson=false reproduces the villager path exactly (same strings,
     // same events); firstPerson=true narrates the scholar's own telling.
-    // allies (optional): villager ids who were WITH the observer in the
-    // fight — the teach-on-learn audience (sim-trickshare-a).
-    _trickObservation(vid, mid, firstPerson, allies) {
+    _trickObservation(vid, mid, firstPerson) {
       try {
         if (!mid) return false;
         const mdef = (this.data.monsters || []).find(m => m.id === mid);
@@ -36453,12 +36446,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const obs = this.state.villageCounterObs || (this.state.villageCounterObs = {});
         obs[mid] = (obs[mid] || 0) + 1;
         try { this.tele('counter_observed', { id: mid, n: obs[mid], vid: vid }); } catch (e) {}
-        // HEARTHSIDE TRICK TEACHING (sim-trickshare-a, TRICKSHARE=1): a
-        // first observation is an untold story — offer it at the next
-        // dawn's fire. The offer changes nothing by itself (no RNG, no
-        // learn); the dawn share credits the telling as the second
-        // observation. The first observation itself stays silent, as today.
-        try { if (obs[mid] === 1) this.trickShareOffer(mid, vid); } catch (e) {}
         if (firstPerson && obs[mid] < 2) {
           // The scholar's own notebook: a first sighting is never silent.
           // SENTENCE-SAFE (playtest deepening r18 2026-10-18, #542 class):
@@ -36467,13 +36454,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           try { if (this.journalNote) this.journalNote('monsters', mid, `Sighting ${obs[mid]}/2: survived an encounter.`); } catch (e) {}
         }
         if (obs[mid] < 2) return false;
-        // Two survived encounters: the fire has a theory. The story is
-        // told now — no pending share is owed for this species.
-        try { this.trickShareClear(mid); } catch (e) {}
+        // Two survived encounters: the fire has a theory.
         if (mdef.counter) {
-          const learned = this.discoverMonsterCounter(mid, firstPerson ? 'scholar-observed' : 'observed');
-          try { if (learned) this.trickShareTeachOnLearn(vid, mid, firstPerson, allies); } catch (e) {}
-          return learned;
+          return this.discoverMonsterCounter(mid, firstPerson ? 'scholar-observed' : 'observed');
         }
         // Wave-3 signature: knowledge lives on villagerTricks (NOT the
         // ledger convention — scoring stays the signature workers' call).
@@ -36489,7 +36472,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${vName} lived to tell it, twice — the village pieced it together.)`);
         }
         try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${t.trick} — ${t.reveal}`); } catch (e) {}
-        try { this.trickShareTeachOnLearn(vid, mid, firstPerson, allies); } catch (e) {}
         return true;
       } catch (e) { return false; }
     },
@@ -36534,9 +36516,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const obs = this.state.villageCounterObs || (this.state.villageCounterObs = {});
         obs[mid] = (obs[mid] || 0) + 1;
         try { this.tele('counter_observed', { id: mid, n: obs[mid], vid: vid, via: 'node-witnessed' }); } catch (e) {}
-        // HEARTHSIDE TRICK TEACHING (sim-trickshare-a): the first witness
-        // brings home a story to tell at the fire, same as a survivor.
-        try { if (obs[mid] === 1) this.trickShareOffer(mid, ours[0]); } catch (e) {}
         // Deterministic narration (seatvoice precedent): no RNG — the
         // reporter is the first roster witness, names via firstRef
         // (knowledge-gated), the monster via monsterNoun (sentence-safe;
@@ -36553,8 +36532,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           return false;
         }
         // Two observations: the fire has a theory — framed second-hand.
-        // The story is told now — no pending share is owed for this species.
-        try { this.trickShareClear(mid); } catch (e) {}
         if (mdef.counter) {
           return this.discoverMonsterCounter(mid, 'node-witnessed');
         }
@@ -36566,175 +36543,6 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${wName} watched it take ${vName} — the village pieced it together from the death.)`);
         try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${t.trick} — ${t.reveal}`); } catch (e) {}
         return true;
-      } catch (e) { return false; }
-    },
-
-    // === HEARTHSIDE TRICK TEACHING (sim-trickshare-a, TRICKSHARE=1) ===
-    // The taught channel, fired instead of cutting a threshold.
-    // Canon: "Told at Haven — the village learns together"
-    // (docs/MONSTER-WAVES.md §Monster counters). The bar stays the
-    // shared 2-observation bar: one survived observation PLUS one
-    // told story at the fire teaches the trick. The story is told
-    // only by someone who lived it, only at Haven at dawn, only to
-    // villagers who are actually there to hear it (co-presence at
-    // the fire IS the perception — never a roster scan). No RNG
-    // anywhere on this path: the teacher, the listeners, and the
-    // order are all read live, deterministically.
-    //   Env-gate: TRICKSHARE=1. Unset, every method below is inert
-    // (trickShareEnabled false; offers never recorded, the dawn
-    // tick returns immediately, noteTrickTaught refuses).
-    trickShareEnabled() {
-      try {
-        return ((typeof process !== 'undefined' && process.env && process.env.TRICKSHARE) === '1');
-      } catch (e) { return false; }
-    },
-    // trickShareOffer(mid, teacherVid): record that the teacher has a
-    // story to tell — called when an observation leaves the shared
-    // bar at exactly 1. One pending per species; a newer offer
-    // replaces an older one. Returns false when nothing was offered.
-    trickShareOffer(mid, teacherVid) {
-      try {
-        if (!this.trickShareEnabled() || !mid || !teacherVid) return false;
-        if (this.villageKnowsTrick(mid)) return false;
-        const obs = (this.state.villageCounterObs || {})[mid] || 0;
-        if (obs !== 1) return false;
-        const pending = this.state.trickSharePending || (this.state.trickSharePending = {});
-        pending[mid] = { teacher: teacherVid, day: ((this.state.scholar || {}).day || 0) };
-        return true;
-      } catch (e) { return false; }
-    },
-    trickShareClear(mid) {
-      try { const p = this.state.trickSharePending; if (p && mid) delete p[mid]; } catch (e) {}
-      return true;
-    },
-    // trickShareNameList(vids, cap): deterministic "A, B and 2 more" naming.
-    trickShareNameList(vids, cap) {
-      try {
-        const names = [];
-        for (const v of (vids || [])) {
-          if (!v || names.indexOf(v) >= 0) continue;
-          const n = this.firstRef ? this.firstRef(v) : 'Someone';
-          names.push(n);
-          if (names.length >= (cap || 3)) break;
-        }
-        const extra = (vids || []).length - names.length;
-        if (!names.length) return 'the fire';
-        if (names.length === 1) return extra > 0 ? names[0] + ', and ' + extra + ' more' : names[0];
-        if (extra > 0) return names.join(', ') + ', and ' + extra + ' more';
-        if (names.length === 2) return names[0] + ' and ' + names[1];
-        return names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1];
-      } catch (e) { return 'the fire'; }
-    },
-    // trickShareTeachOnLearn(vid, mid, firstPerson, allies): when a
-    // trick is learned through the observation path, the learner tells
-    // whoever was WITH them in the fight. Voice only — the knowledge
-    // is already village-shared. Allies are roster-checked and
-    // living; the scholar path carries no allies and says nothing.
-    trickShareTeachOnLearn(vid, mid, firstPerson, allies) {
-      try {
-        if (!this.trickShareEnabled() || firstPerson) return false;
-        if (!allies || !allies.length) return false;
-        const roster = ((this.state.village || {}).roster) || [];
-        const heard = [];
-        for (const a of allies) {
-          if (!a || a === vid || a === 'player') continue;
-          if (roster.indexOf(a) < 0) continue;
-          let person = null;
-          try { person = this.getPerson ? this.getPerson(a) : null; } catch (e) {}
-          if (!person || person.dead) continue;
-          if (heard.indexOf(a) < 0) heard.push(a);
-        }
-        if (!heard.length) return false;
-        const vName = this.firstRef ? this.firstRef(vid) : 'Someone';
-        this.say(`🗣️ ${vName} told ${this.trickShareNameList(heard, 3)} how it went — they were there when it happened.`);
-        return true;
-      } catch (e) { return false; }
-    },
-    // noteTrickTaught(mid, teacherVid, listenerVids): the taught
-    // observation credit — the telling itself counts as the second
-    // observation on the shared bar. Returns true iff an observation
-    // was credited (whether or not it completed the lesson).
-    // Waves 1–2 learn through discoverMonsterCounter(mid, 'taught');
-    // waves 3–5 learn through the villagerTricks set, with the
-    // hearthside learn beat naming teacher + listeners.
-    noteTrickTaught(mid, teacherVid, listenerVids) {
-      try {
-        if (!this.trickShareEnabled() || !mid) return false;
-        const mdef = (this.data.monsters || []).find(m => m.id === mid);
-        if (!mdef) return false;
-        const defs = this.villagerTrickDefs();
-        if (!mdef.counter && !defs[mid]) return false; // no trick to learn
-        if (this.villageKnowsTrick(mid)) return false; // already known
-        const obs = this.state.villageCounterObs || (this.state.villageCounterObs = {});
-        obs[mid] = (obs[mid] || 0) + 1;
-        try { this.tele('counter_observed', { id: mid, n: obs[mid], vid: teacherVid, via: 'taught' }); } catch (e) {}
-        const tName = teacherVid === 'player' ? 'You' : (this.firstRef ? this.firstRef(teacherVid) : 'Someone');
-        const listeners = (listenerVids || []).filter(Boolean);
-        if (obs[mid] < 2) {
-          // Told, but the fire needs one more telling — the caller
-          // keeps the pending so the story can be told again.
-          this.say(`🔥 ${tName} told the fire about ${this.monsterDisplayName(mid)} — what it did, how it moved. (${obs[mid]}/2 — one more telling and the village will have its trick.)`);
-          try { if (this.journalNote) this.journalNote('monsters', mid, `Told at the fire ${obs[mid]}/2: ${tName} told the village.`); } catch (e) {}
-          return true;
-        }
-        // The telling completes the lesson.
-        try { this.trickShareClear(mid); } catch (e) {}
-        if (mdef.counter) {
-          this.discoverMonsterCounter(mid, 'taught');
-          return true;
-        }
-        const vt = this.state.villagerTricks || (this.state.villagerTricks = {});
-        if (vt[mid]) return true;
-        vt[mid] = true;
-        try { this.tele('counter_discovered', { id: mid, via: 'taught' }); } catch (e) {}
-        const t = defs[mid] || {};
-        const heard = listeners.length ? this.trickShareNameList(listeners, 3) : 'the fire';
-        this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (At the fire, ${tName} told ${heard} how it moves — the village pieced it together.)`);
-        try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${t.trick} — ${t.reveal}`); } catch (e) {}
-        return true;
-      } catch (e) { return false; }
-    },
-    // trickShareDawnTick(): once per slept-through dawn, every pending
-    // story is told at Haven — if the teacher is there, alive, and
-    // someone is there to hear it. Called from sleep() after the
-    // woke-check (dawn reached). Pending offers survive a missed dawn
-    // (teacher away, nobody home); they die only when the trick is
-    // learned another way or the teacher dies.
-    trickShareDawnTick() {
-      try {
-        if (!this.trickShareEnabled()) return false;
-        const day = ((this.state.scholar || {}).day || 0);
-        if (this.state.trickShareLastDay === day) return false; // once per dawn
-        this.state.trickShareLastDay = day;
-        const pending = this.state.trickSharePending || {};
-        const mids = Object.keys(pending).sort();
-        if (!mids.length) return false;
-        let haven = [];
-        try { haven = this.campPeopleIds ? this.campPeopleIds('haven') : []; } catch (e) { haven = []; }
-        const scholarId = this.villagerId || null;
-        let fired = false;
-        for (const mid of mids) {
-          const offer = pending[mid];
-          if (!offer) continue;
-          try { if (this.villageKnowsTrick(mid)) { this.trickShareClear(mid); continue; } } catch (e) {}
-          const teacher = offer.teacher;
-          let teacherDead = false;
-          try {
-            if (teacher && teacher !== 'player') {
-              const person = this.getPerson ? this.getPerson(teacher) : null;
-              teacherDead = !!(person && person.dead);
-            }
-          } catch (e) {}
-          if (teacherDead) { this.trickShareClear(mid); continue; }
-          const teacherKey = teacher === 'player' ? scholarId : teacher;
-          if (!teacherKey || haven.indexOf(teacherKey) < 0) continue; // away — the tale waits
-          const listeners = haven.filter(function (id) { return id && id !== teacherKey; });
-          if (!listeners.length) continue; // nobody home to tell
-          let credited = false;
-          try { credited = this.noteTrickTaught(mid, teacher, listeners); } catch (e) { credited = false; }
-          if (credited) { this.trickShareClear(mid); fired = true; }
-        }
-        return fired;
       } catch (e) { return false; }
     },
 
