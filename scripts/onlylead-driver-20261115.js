@@ -756,6 +756,17 @@ if (require.main === module) (async function () {
       return path.join(REPO, 'evidence', '2026-11-15',
         pol === 'competent-covenant-b' ? stem + '-control' : stem + '-on');
     }
+    // COURTSHIP-RECONFIRM (RUN=courtship-reconfirm-b, arm
+    // sim-courtship-reconfirm-b): re-confirm of the rework2 PILOT
+    // GO after the 2330Z confirm stopped on G3 tip drift with the
+    // band unspent; same two legs, own corpora dirs under
+    // evidence/2026-11-16 (perseed-courtship-reconfirm-b-control
+    // / -on), same reserved band 100621–100636. The 2330Z mapping
+    // above is NOT overwritten.
+    if (RUN === 'courtship-reconfirm-b') {
+      return path.join(REPO, 'evidence', '2026-11-16',
+        pol === 'competent-covenant-b' ? stem + '-control' : stem + '-on');
+    }
     return path.join(REPO, 'evidence', '2026-11-15',
       pol === 'competent-scaleclimb-b' ? stem + '-control' : stem + '-on');
   }
