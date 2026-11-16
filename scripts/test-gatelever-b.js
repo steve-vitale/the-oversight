@@ -60,7 +60,15 @@ const repo = path.join(__dirname, '..');
 const seed = Number(process.argv[2] || '102101');
 const kase = process.argv[3] || 'all';
 const MODE = process.env.GATELEVER_MODE || 'lever';
-const BASE = '9b04ae9b7';
+// BASE is the commit this branch was rebased onto for landing
+// (2fd2dad1f, journey-scale r223). The pilot ran on the original base
+// 9b04ae9b7; after the rebase the static check must diff against the
+// rebase base, or sibling landings between the two bases (Loop A's
+// launchdef bypass in villager-agency.js, journey r223 in
+// conversation.js) read as this branch's own src/ change. The
+// assertion itself is unchanged: post-revert the branch's src/ diff
+// vs its base must be 0. (Coordinator fix, 2026-11-16.)
+const BASE = '2fd2dad1f';
 
 function out(o) { console.log(JSON.stringify(o)); }
 function fail(k, detail, extra) { out(Object.assign({ case: k, pass: false, detail: detail }, extra || {})); process.exit(1); }

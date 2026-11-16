@@ -8,7 +8,9 @@ first launched-party wave-4 kills, wave 5 unlocked on 3 of 8 seeds
 bars: kill:death 0.67 against a 0.92 bar, and faced-not-killed 0.67
 against a 0.20 bar. Per the prereg the pilot NO-GO kills the lever:
 all game code (the three gate changes plus the vetparty seed call)
-is reverted on this branch in commit `a1e3d9378`, and this evidence,
+is reverted on this branch in commit `1c9ba8439` (rebased from
+`a1e3d9378`; the branch was rebased onto `2fd2dad1f` for landing —
+see "Files and commits"), and this evidence,
 the instrument, and both corpora land as evidence-only. No 12–16
 seed confirm runs on an invisible-or-losing effect.
 
@@ -22,11 +24,15 @@ overall: 645 villager deaths against 559 on the control leg.
 ## Prereg header
 
 - Prereg: `evidence/2026-11-16/sim-gatelever-b-prereg.md`
-  (commits `807381e36`, Correction C1 `50947b150`). GO bar:
+  (commits `0ace5b1f7`, Correction C1 `b8db67a84`; pre-rebase
+  `807381e36` / `50947b150`). GO bar:
   gatereach2 §8, binding, frozen definitions in the prereg.
 - Design: control leg = the vetparty seed call only (re-landed
-  verbatim, 13 lines, commit `aaf9d13b6`); lever leg = seed call +
-  the three gate changes (commit `757b3be05`).
+  verbatim, 13 lines, commit `aaf9d13b6` pre-rebase — the seed-call
+  pair was dropped by the rebase onto `2fd2dad1f` as already-upstream,
+  Loop A's 0645Z landing holding the identical 13 lines + revert);
+  lever leg = seed call +
+  the three gate changes (commit `957ad644a`, pre-rebase `757b3be05`).
   - Part 1 — the launched party arrives as three: a second
     companion joins a launch when one is free (never waited for),
     and the gate counts the plan's own launched party, not only
@@ -46,17 +52,24 @@ overall: 645 villager deaths against 559 on the control leg.
   Horizon 150 days, death-aware. Policy: competent verbatim,
   sha256 `74a890f0844ebc19fce2ac24da360f114b1f366fdb33a185a122f891dc2f0456`
   (matches the dawnbid/gatereach2 policy).
-- Base: master tip `9b04ae9b7`. Control leg ran on the seed-call-only
+- Base: master tip `9b04ae9b7` at pilot time; rebased onto
+  `2fd2dad1f` for landing (the proof test's `BASE` pointer was
+  updated to the rebase base by the coordinator — the static
+  check diffs against the branch's landing base, or sibling
+  landings between the two bases read as this branch's own
+  src/ change). Control leg ran on the seed-call-only
   tip; lever leg on the lever tip. Proof test
   `scripts/test-gatelever-b.js` green on the lever tip (static,
   judge, recorder, determinism D1+D2 identical at 150d, seed
   102101) and green post-revert (`GATELEVER_MODE=off`: static
-  src diff 0, seed call absent).
+  src diff 0, seed call absent) — both verified pre-rebase, and
+  the post-revert proof re-run green on the rebased tip and on
+  merged master after the `BASE` update.
 - Instrument: `scripts/gatelever-driver-20261116.js`,
   `scripts/analyze-gatelever-b.js`,
   `scripts/gatelever-drift-check.js`,
-  `scripts/build-gatelever-panels-20261116.js` (commit `4bc64f062`
-  + panel builder, this landing). Analysis:
+  `scripts/build-gatelever-panels-20261116.js` (commit `df57443d8`
+  + panel builder, this landing; pre-rebase `4bc64f062`). Analysis:
   `evidence/2026-11-16/gatelever-b-analysis.json`. Corpora:
   `evidence/2026-11-16/perseed-gatelever-b-control/` and
   `perseed-gatelever-b-lever/` (8 files each, 0 instrument
@@ -328,8 +341,9 @@ no files with this arm.
 ## What happens next
 
 - **Revert done.** Game code on this branch is byte-identical
-  to base `9b04ae9b7` (commit `a1e3d9378`; `git diff
-  9b04ae9b7 -- src/` empty; zero lever/seed markers). The
+  to the landing base `2fd2dad1f` (revert `1c9ba8439`, pre-rebase
+  `a1e3d9378`; `git diff 2fd2dad1f HEAD -- src/` empty; zero
+  lever/seed markers). The pilot ran on base `9b04ae9b7`. The
   branch lands evidence-only: instrument, corpora, analysis,
   panel, and this note.
 - **Open for the coordinator / Steve, in plain words:**
@@ -359,16 +373,35 @@ no files with this arm.
 
 ## Files and commits
 
-- Branch `sim-gatelever-b`, base `9b04ae9b7`.
-- `807381e36` prereg; `50947b150` Correction C1;
-  `4bc64f062` instrument (driver, analyzer, drift check,
-  proof test); `aaf9d13b6` seed call re-landed verbatim;
-  `757b3be05` the lever (+ determinism-d2 sync-write fix);
-  `a1e3d9378` REVERT (pilot NO-GO).
+- Branch `sim-gatelever-b`, pilot base `9b04ae9b7`, rebased onto
+  `2fd2dad1f` for landing. The seed-call tip (`aaf9d13b6`) and its
+  revert were dropped by the rebase as already-upstream (Loop A's
+  0645Z landing holds the identical 13-line seed call + revert);
+  the branch's net `src/` diff is unchanged (0 lines). The
+  rebase stopped once on the lever pick (the documented
+  stop-at-pick quirk: pick in both done and todo, worktree clean,
+  lever unapplied — verified with `git diff <pick>` + marker grep);
+  recovered with `git rebase --continue`, which sailed through.
+- `0ace5b1f7` prereg (`807381e36` pre-rebase); `b8db67a84`
+  Correction C1 (`50947b150`); `df57443d8` instrument (driver,
+  analyzer, drift check, proof test; `4bc64f062` pre-rebase);
+  `957ad644a` the lever (+ determinism-d2 sync-write fix;
+  `757b3be05` pre-rebase); `1c9ba8439` REVERT (pilot NO-GO;
+  `a1e3d9378` pre-rebase — its message names base `9b04ae9b7`,
+  the pilot base; the rebased revert restores the lever files
+  to the landing base `2fd2dad1f`).
 - Evidence + corpora + analysis + panel + panel builder:
   committed with this note (see the landing commit).
-- Proof test: green on the lever tip and green post-revert.
-  Two proof-test findings, both fixed in `757b3be05`: the
+- Proof test: green on the lever tip and green post-revert
+  (pre-rebase). Post-rebase the static check's hardcoded `BASE`
+  was stale (`9b04ae9b7`): it read Loop A's launchdef bypass and
+  journey r223 as this branch's src/ change. Coordinator fix:
+  `BASE` now points at the rebase base `2fd2dad1f` (assertion
+  unchanged); the post-revert proof re-runs green on the rebased
+  tip and on merged master. The lever-tip static mode is not
+  re-runnable post-rebase (its 4-file expectation assumes the
+  deduped seed call) — it stands as verified pre-rebase.
+  Two proof-test findings, both fixed in `957ad644a`: the
   static check reads the committed diff (lever must be
   committed before the proof runs), and the determinism-d2
   child truncated its ~200KB key line on `process.exit(0)`
