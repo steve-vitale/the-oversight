@@ -121,7 +121,7 @@ All four candidates end naturally. Villagers want things, ask for them, remember
 
 ## Landing
 
-PENDING — commit, rebase onto current master (3322fb0df, r221 establishment), re-verify the two fixed proofs + person-trust on the rebased tip, merge ff-only, release worktree, rotation-b 5 → 6.
+Adopted from the timed-out 23:00 Lane B occurrence by the main session: gate re-run on the worktree tip (334/6, 0 attributable — see Gate), committed `0d1b75e09`, rebased clean onto `3322fb0df` (r221 establishment) → tip `7047de26f`, re-verified confessguard 17/17 + confesswrap 5/5 + person-trust PASS (HAUL:3) on the rebased tip. ff-merged to master; worktree released (done-merged), branch deleted; rotation-b 5 → 6; lock `loop2-20261116T045552Z` deleted after verifying run_id. Telemetry: 5 LOUD "disappeared" lines = known schema drift (see Telemetry), baseline NOT rolled.
 
 ## Reachable / fun / winnable
 
