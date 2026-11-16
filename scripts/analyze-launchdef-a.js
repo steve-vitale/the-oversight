@@ -504,7 +504,7 @@ function main() {
       instrumentErrors: { pass: bar3, instrument: instErrors, control: ctrlErrors },
     },
   };
-  const outFile = path.join(REPO, 'evidence', '2026-11-15', 'launchdef-a-analysis.json');
+  const outFile = path.join(REPO, 'evidence', '2026-11-16', 'launchdef-a-analysis.json');
   fs.mkdirSync(path.dirname(outFile), { recursive: true });
   fs.writeFileSync(outFile, JSON.stringify(out, null, 2) + '\n');
 
