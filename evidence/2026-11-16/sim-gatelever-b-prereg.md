@@ -288,6 +288,9 @@ sim):
    with kind `monster`, cause `villager combat`, naming the killed
    beast, on the same day as one of the bar-2 kills — the
    analyzer's existing `vcDeaths` shape, extended to wave 4+).
+   CLARIFIED by Correction C1 below: those rows are the killed
+   beasts' own death records, not villager deaths, so the term
+   contributes 0 and the denominator is the `vDie` count alone.
    If the denominator is 0 and the numerator is ≥ 1, bar 3
    PASSES (no deaths to count against; the bar guards against
    death-heavy kills — the producergate precedent, §9.1, where
@@ -325,6 +328,30 @@ sim):
 - Pilot 8 seeds before any confirm spend. If the pilot NO-GOs,
   the lever is KILLED (revert game code on the branch, land
   evidence-only) — no 12–16 seed confirm on an invisible effect.
+
+## Correction (2026-11-16, BEFORE any judged sim — no corpus exists yet)
+
+**C1 — bar 3's second denominator term is the killed beasts' own
+death records, not villager deaths, so it contributes 0.** Bar 3 as
+frozen says deaths count "encounter-row `vDie` PLUS same-day/
+same-beast 'villager combat' deaths". Verified on the gatereach2
+corpora (both legs, 16 files): the death log carries NO villager
+death row with cause `'villager combat'` (0 of 219 villager-kind
+rows; villager deaths carry kind `'villager'` with cause = the
+monster's name). All 537 `'villager combat'` rows are kind
+`'monster'` — the KILLED BEASTS' own death records, one per kill.
+Counting those as "deaths" would put one row per kill in the
+denominator (the producergate 5-kills/5-counted-deaths 1.00 was
+that artifact: its one wave-5 field vDie never entered the count).
+So the bar-3 denominator is the encounter-row `vDie` on
+launched-party wave-4+ meetings ONLY (distinct meetings); the
+`'villager combat'` term contributes 0 by construction. The
+zero-denominator pass rule stands (denominator 0 with numerator
+≥ 1 passes). The analyzer reports the monster-record
+`vcDeaths` count as a secondary for comparability with the
+inherited `judgeAidgate`, never in the bar. The bars are
+unchanged; only the denominator's second term is clarified to
+what the death log actually contains.
 
 ## Instrument (frozen)
 
