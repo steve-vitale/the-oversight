@@ -7157,7 +7157,20 @@
             if (c.want && c.want.id === 'ask_favor' && wf &&
                 (wf.state === 'moot' || wf.state === 'thanked' ||
                  wf.state === 'acknowledged' || wf.state === 'fulfilled')) {
-              wline = '"No, really — it\'s handled. Thanks for asking, though."';
+              // SETTLED-FAVOR VARIANTS (journey-endgame r225, F5): the old
+              // single fixed line parroted verbatim every re-ask, so the
+              // 48-entry run ledger blocked it on the second ask and the
+              // turn dried ("...Sorry, lost my train of thought.") at
+              // trust 90 (r224 panel: 34301 d105 Farid — "It's already
+              // handled" then a blank two turns later). Three honest
+              // phrasings, cycled like every other pool (F4c class); the
+              // cycle skips the ledger-blocked variant, so the re-ask
+              // speaks a fresh phrasing instead of drying or deflecting.
+              wline = this.convoPickCycle(vid, 'settledfavor:handled', [
+                '"No, really — it\'s handled. Thanks for asking, though."',
+                '"It\'s taken care of, I swear. You don\'t need to worry about that one anymore."',
+                '"Honestly? It\'s done. Finished. Thank you for checking — it means something that you did."',
+              ]) || '"No, really — it\'s handled. Thanks for asking, though."';
             } else if (c.want && c.want.def && (c.want.stage || 0) >= 1 && (c.want.stage || 0) < 3 &&
                        typeof c.want.def.engageBeat === 'function') {
               // WANT RESUME (journey crisis r8 2026-10-14): the want is already
