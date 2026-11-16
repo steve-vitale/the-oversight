@@ -70,7 +70,7 @@ check('game-code worktree diff is the seed call + the gate only (src status: ' +
 const scriptsStatus = gitStatus('scripts').split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
 const scriptsOk = scriptsStatus.every(function (s) { return /scripts\/[a-z-]*launchdef-[a-z0-9.-]+\.js$/.test(s); });
 check('scripts worktree diff is launchdef-* files only (' + JSON.stringify(scriptsStatus) + ')', scriptsOk);
-const driverSrc = fs.readFileSync(path.join(REPO, 'scripts', 'launchdef-driver-20261115.js'), 'utf8');
+const driverSrc = fs.readFileSync(path.join(REPO, 'scripts', 'launchdef-driver-20261116.js'), 'utf8');
 for (const w of ['vbrainScorePick', 'vbrainExecuteDepart', 'winPlanSeedFromFight', 'startExpedition', 'agencyTick', 'installSkipRecorder', 'dawnbidScores', 'dawnbidDeparts', 'dawnbidCensus', 'dawnbidStarts', 'launchdefSkips', 'commitKindOf', 'tableseatNowait']) {
   check('driver wraps/defines ' + w, driverSrc.indexOf(w) !== -1);
 }
@@ -160,11 +160,11 @@ expectBucket('launched', baseSeed({
     dawnbidDeparts: [departRow(11, 'v1', 'launch', 'party_launch', true, true, null, null, 'mid-day part-1')],
     dawnbidCensus: [censusRow(10, 'v1', 'strike', 'party', true), censusRow(11, 'v1', 'strike', 'hunt', true)],
   });
-  const anyCommit = ANALYZE.classifySeed(j);
+  const anyCommit = ANALYZE.classifySeed(j).instances;
   check('any-commit: mid-day launch -> launched:companion:v2:mid-day part-1',
     anyCommit.length === 1 && anyCommit[0].bucket === 'launched' && anyCommit[0].sub === 'companion:v2:mid-day part-1',
     'got ' + (anyCommit[0] || {}).bucket + ':' + (anyCommit[0] || {}).sub);
-  const dawnOnly = ANALYZE.classifySeed(j, { launchDefinition: 'dawn-only' });
+  const dawnOnly = ANALYZE.classifySeed(j, { launchDefinition: 'dawn-only' }).instances;
   check('dawn-only: same fixture -> selected-blocked:selected-not-executed (the 0446Z miss)',
     dawnOnly.length === 1 && dawnOnly[0].bucket === 'selected-blocked' && dawnOnly[0].sub === 'selected-not-executed',
     'got ' + (dawnOnly[0] || {}).bucket + ':' + (dawnOnly[0] || {}).sub);

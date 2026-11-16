@@ -1,4 +1,4 @@
-// build-launchdef-panels-20261115.js — §15 balanced-panel compare
+// build-launchdef-panels-20261116.js — §15 balanced-panel compare
 // for arm sim-launchdef-a. Copied from scripts/build-vetparty-panels-20261115.js
 // (panel-building logic UNCHANGED); only leg dirs, file names, seeds,
 // pseudo-policy, origin, and observer digest change. Builds panels in
@@ -14,7 +14,7 @@
 // share one policy file — the policy is identical on both legs and
 // the driver code path is identical, so the paired-seed deltas are
 // the lever's effect, read through one instrument.
-// Usage: node scripts/build-launchdef-panels-20261115.js [--out evidence/2026-11-15/launchdef-a-panel]
+// Usage: node scripts/build-launchdef-panels-20261116.js [--out evidence/2026-11-16/launchdef-a-panel]
 //   [--before evidence/2026-11-16/perseed-launchdef-a-control] [--after evidence/2026-11-16/perseed-launchdef-a-on]
 //   [--seeds 102011,102012,...,102018]
 //   Reads <dir>/launchdef-a-s<seed>-launchdef-a-<control|on>.json per leg.
