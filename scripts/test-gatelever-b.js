@@ -328,7 +328,11 @@ if (kase === 'determinism-d2') {
       maxWave: r.maxWave, scaleRank: r.scaleRank, won: r.won,
       waveKills: r.waveKills, series: r.series,
     });
-    out({ case: 'determinism-d2', pass: true, seed: seed, recorderOn: r.recorderOn, key: key, errors: (r.instrumentErrors || []).length });
+    // Synchronous write: the key line is ~200KB and console.log to a
+    // pipe is async — process.exit(0) right after it truncated the
+    // line (parent saw "Unterminated string in JSON" at ~146KB).
+    // fs.writeSync(1, ...) flushes before the exit.
+    try { fs.writeSync(1, JSON.stringify({ case: 'determinism-d2', pass: true, seed: seed, recorderOn: r.recorderOn, key: key, errors: (r.instrumentErrors || []).length }) + '\n'); } catch (e) {}
     process.exit(0);
   })().catch(function (e) { fail('determinism-d2', 'threw: ' + (e && e.stack || e)); });
 }
