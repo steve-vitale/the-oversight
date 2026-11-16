@@ -1974,6 +1974,16 @@
       if (/^(As|Like) I said —\s*(we'?re still on|we started on|we were talking about)/i.test(s)) return true;
       // Wind-down filler that is only stage direction (convo-dialogue wind pools).
       if (/^Anyway\.\s*A small smile\.?$/i.test(s)) return true;
+      // DRIFT NOTES (journey-crisis r223 2026-11-16): convoDriftNote fires
+      // one short stage-direction beat when a drift channel crosses >=2 —
+      // "{Name} has an edge today — something curdled." and its four
+      // siblings. The beat is narration about the NPC, never spoken memory,
+      // but it wears a proper-name subject, so none of the patterns above
+      // catch it (transcript-caught: crisis r223 seed 14475 d11 Tamika —
+      // the resume opener quoted the bitterness drift note as the grief
+      // thread's memory). Match the five template tails verbatim from
+      // convoDriftNote; no spoken content uses these phrasings.
+      if (/\b(looks hollowed out — grief's been sitting heavy|has an edge today — something curdled|keeps glancing past you — braced for something|seems lighter — something good landed recently|looks weathered — the hard days are showing)\b/i.test(s)) return true;
       return false;
     },
     // convoSnippetIsHook (journey-deepening r13 2026-10-18): a teaser /
