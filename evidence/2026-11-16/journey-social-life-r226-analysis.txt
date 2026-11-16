@@ -1,0 +1,802 @@
+SEEDS: 45701 d138, 45702 d140, 45703 d108, 45704 d103
+
+seed 45701: days=138 endReason=survived fullConvs=145 naturalEnds=128 feasts=19 moots=2
+  scattering: {"scattered":false,"hungryDays":0,"aliveEnd":8,"endReason":"survived"}
+  decisions: {"lure:decline":153,"bond:accept":3,"lure:accept":162,"bond:decline":5,"party:accept":7,"party:decline":1}
+  BOND lure-by-inviter (scholar=Chris initialBearer=Gabriel): {"NPC:lure:decline":153,"NPC:bond:accept":3,"NPC:lure:accept":162,"NPC:bond:decline":5,"player:party:accept":7,"player:party:decline":1}
+  BOND successions: [{"day":58,"from":"Gabriel","to":"Morgan"},{"day":78,"from":"Morgan","to":"Esteban"},{"day":92,"from":"Esteban","to":"Sanne"},{"day":107,"from":"Sanne","to":"Ivy"},{"day":135,"from":"Ivy","to":"Chris"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=4 {"proposeLink:engine":4}
+  COUNTER proposeLink=4 counter=0 fresh=4 freshCounter=0 blocked=0 blockedCounter=0 unknownPending=0 answerWrapped=true
+  COUNTER settles=0 linkFormed=0 failed=0 unknown=0 answers=0 byHow={} answersLinkFormed=0 minPantryAtSettle=null tributes=[] pendingCounterEnd=null
+    PROPOSE d10 proposeLink targetId=village_0 pendingBefore=false result={"id":"link_mgpspis7478","primary":"haven","subordinate":"village_0","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":10,"kind":"
+    PROPOSE d15 proposeLink targetId=village_2 pendingBefore=false result={"id":"link_mgpspjk9214","primary":"haven","subordinate":"village_2","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":15,"kind":"
+    PROPOSE d24 proposeLink targetId=village_1 pendingBefore=false result={"id":"link_mgpsplbp308","primary":"haven","subordinate":"village_1","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":24,"kind":"
+    PROPOSE d92 proposeLink targetId=village_spl_28_90273 pendingBefore=false result={"id":"link_mgpspx5a618","primary":"haven","subordinate":"village_spl_28_90273","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+  CONFESS confrontWrapped={"confrontDoubt":true,"confrontTheft":true} total=35 confessed=6 byOutcome={"deflected":25,"confessed":6,"already-confessed":2,"attacked":2} sittingsWithConfession=6 singleSittings=6 doubleSittings=0 outsideSittingConfessed=0
+  RECAP maxPresses=3 totalPresses=133 offeredAfterCap=0 capFailures=0
+  BOND proposed=34 byInitiatorKind={"villager":34} byKind={"person":18,"link":16} byOutcome={"accepted":9,"staged":13,"expired":7,"refused":5} villagerPerson=18 villagerPersonAccepted=5 linkRaises=16 linkAccepted=4 maxPerInitiator=8
+    PROPOSED d8 Esteban(villager)->Aroha kind=person outcome=accepted chance=79
+    PROPOSED d9 Vito(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d10 Vito(villager)->village_0 kind=link outcome=accepted chance=null
+    PROPOSED d11 Esteban(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d12 David(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d13 Vito(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d14 Esteban(villager)->village_2 kind=link outcome=expired chance=null
+    PROPOSED d15 Vito(villager)->village_2 kind=link outcome=accepted chance=null
+    PROPOSED d15 David(villager)->village_2 kind=link outcome=expired chance=null
+    PROPOSED d18 Ivy(villager)->Gabriel kind=person outcome=staged chance=null
+    PROPOSED d19 Ivy(villager)->Gabriel kind=person outcome=accepted chance=null
+    PROPOSED d19 Morgan(villager)->Aroha kind=person outcome=refused chance=72
+    PROPOSED d23 Vito(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d24 Vito(villager)->village_1 kind=link outcome=accepted chance=null
+    PROPOSED d43 Daniyar(villager)->Gabriel kind=person outcome=staged chance=null
+    PROPOSED d45 Sanne(villager)->Chris kind=person outcome=refused chance=0
+    PROPOSED d46 Daniyar(villager)->Gabriel kind=person outcome=expired chance=null
+    PROPOSED d51 Esteban(villager)->Gabriel kind=person outcome=staged chance=null
+    PROPOSED d54 Esteban(villager)->Gabriel kind=person outcome=expired chance=null
+    PROPOSED d78 Nina(villager)->Esteban kind=person outcome=staged chance=null
+    PROPOSED d79 Nina(villager)->Esteban kind=person outcome=accepted chance=null
+    PROPOSED d86 Nora(villager)->Nina kind=person outcome=refused chance=57
+    PROPOSED d87 Daniyar(villager)->village_spl_28_90273 kind=link outcome=staged chance=null
+    PROPOSED d89 Vito(villager)->village_spl_28_90273 kind=link outcome=staged chance=null
+    PROPOSED d90 Daniyar(villager)->village_spl_28_90273 kind=link outcome=expired chance=null
+    PROPOSED d91 Nora(villager)->village_spl_28_90273 kind=link outcome=staged chance=null
+    PROPOSED d92 Nora(villager)->village_spl_28_90273 kind=link outcome=accepted chance=null
+    PROPOSED d92 Vito(villager)->village_spl_28_90273 kind=link outcome=expired chance=null
+    PROPOSED d98 Nina(villager)->Sanne kind=person outcome=staged chance=null
+    PROPOSED d101 Nina(villager)->Sanne kind=person outcome=expired chance=null
+    PROPOSED d107 Nora(villager)->Daniyar kind=person outcome=refused chance=0
+    PROPOSED d125 Luis(villager)->Chris kind=person outcome=accepted chance=48
+    PROPOSED d134 Leo(villager)->Daniyar kind=person outcome=refused chance=48
+    PROPOSED d135 Nora(villager)->Leo kind=person outcome=accepted chance=57
+  BOND end bonds=108 sample={"key":"gen_ebikpah|gen_qp1yplb","val":"{\"v\":100,\"depth\":3,\"day\":76,\"dayGain\":3}"}
+  armWrapped=true springWrapped=true
+  expireWrapped=true expiredEvents=0
+  village fallen: 11 by cause: {"contest":1,"a stranger":1,"the wild":5,"monster":4}
+  death clusters (>=3/day): none
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 87 — NOT village deaths)
+  census: seed 45701, day 138, alive 8 | - Chris (crossing_guard, ?) trust=90 mood=neutral npcAbilities=0
+  M6 nightlyNews: strandedDays=27 burst=82 settle=39 witness=6 tale=29 | emitted-AWAY(strict on-tile) burst=24 settle=5 witness=0 tale=0 | emitted-AWAY-GATE(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=41 settled=40 queuedAtEnd=0
+  M4 transcripts=140 naturalEnds=128 nearDupFlags=60
+  M4 FLAG jaccard>=0.5 [A-day1-nudge ivy_wang] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [A-day1-nudge ivy_wang] :: Get to your partner's side of the Haven door and stand next to them — then you can help. || We're going in circles — Get to your partner's side of the Haven door and stand next to them — then you can help. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [A-day1-nudge ivy_wang] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG same-opening [D-talk-request ivy_wang] :: You show them Wild Ginger — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Ghost Pipe — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG same-opening [D-talk-request ivy_wang] :: You show them Wild Ginger — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Goldenrod — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks.
+  M4 FLAG same-opening [D-talk-request ivy_wang] :: You show them Wild Ginger — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Lamb's Quarters — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know.
+  M4 FLAG same-opening [D-talk-request ivy_wang] :: You show them Ghost Pipe — where it grows, how to tell it apart. Their eyes widen. "I never knew that. || You show them Goldenrod — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks.
+  M4 FLAG same-opening [D-talk-request ivy_wang] :: You show them Ghost Pipe — where it grows, how to tell it apart. Their eyes widen. "I never knew that. || You show them Lamb's Quarters — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know.
+  M4 FLAG same-opening [D-talk-request ivy_wang] :: You show them Goldenrod — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks. || You show them Lamb's Quarters — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_qp1yplb] :: What's the kindest thing someone's done for you out here? || we're still on the kindest thing someone's done for you.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_qp1yplb] :: we're still on the kindest thing someone's done for you. || We're going in circles — still on the kindest thing someone's done for you. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request aroha_ngata] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request aroha_ngata] :: Your partner is inside the Haven hall. Go through the door to meet them. || We're going in circles — Your partner is inside the Haven hall. Go through the door to meet them. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request gen_qp1yplb] :: You show them Wild Ginger — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know. || You show them Ghost Pipe — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG jaccard>=0.5 [C-friendship sanne_bakker] :: Your partner is inside the Haven hall. Go through the door to meet them. || We're going in circles — Your partner is inside the Haven hall. Go through the door to meet them. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_4l1e9iu] :: What do you make of all this? Really. || we're still on what you make of all this.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_4l1e9iu] :: we're still on what you make of all this. || We're going in circles — still on what you make of all this. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request ivy_wang] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request ivy_wang] :: Move next to your partner, on the same side of the Haven door. || We're going in circles — Move next to your partner, on the same side of the Haven door. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship sanne_bakker] :: Your partner is inside the Haven hall. Go through the door to meet them. || We're going in circles — Your partner is inside the Haven hall. Go through the door to meet them. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_dgi5ih5] :: What's the kindest thing someone's done for you out here? || we're still on the kindest thing someone's done for you.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_dgi5ih5] :: we're still on the kindest thing someone's done for you. || We're going in circles — still on the kindest thing someone's done for you. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request gen_dgi5ih5] :: You show them Wild Ginger — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know. || You show them Ghost Pipe — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_dgi5ih5] :: About that question — yeah, we never did get back to that. || About what's been happening — yeah, we never did get back to that.
+  M4 FLAG jaccard>=0.5 [D-talk-request ivy_wang] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request ivy_wang] :: You need to be right next to your partner, same side of the Haven door, to help. || We're going in circles — You need to be right next to your partner, same side of the Haven door, to help. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request ivy_wang] :: We're going in circles — You need to be right next to your partner, same side of the Haven door, to help. Ask me something else if you want. || We're going in circles — still on that foraging help. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_4l1e9iu] :: Spend about half an hour providing basic care. No magic or medical ability is required; this is not an instant cure. || We're going in circles — Spend about half an hour providing basic care. No magic or medical ability is required; this is not an instant cure. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request ivy_wang] :: Huh. Let me think about that." "I've said all I know. The rest is just guessing. || Huh. Let me think about that." "Morgan? I'd trust Morgan with my pack. That's the highest compliment I have.
+  M4 FLAG same-opening [D-talk-request ivy_wang] :: You asked me that before. It's a different question now." "Since Gabriel died... I keep expecting to see Gabriel at the fire. Stupid. || You asked me that before. It's a different question now." "Nora? I'd trust Nora with my pack. That's the highest compliment I have.
+  M4 FLAG same-opening [D-talk-request aroha_ngata] :: You show them Wild Ginger — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Ghost Pipe — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks.
+  M4 FLAG same-opening [D-talk-request aroha_ngata] :: You show them Wild Ginger — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Goldenrod — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG same-opening [D-talk-request aroha_ngata] :: You show them Ghost Pipe — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks. || You show them Goldenrod — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG jaccard>=0.5 [D-talk-request sanne_bakker] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request sanne_bakker] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request sanne_bakker] :: Move next to your partner, on the same side of the Haven door. || We're going in circles — Move next to your partner, on the same side of the Haven door. Ask me something else if you want.
+  M4 FLAG same-opening [C-friendship gen_qp1yplb] :: You asked me that before. It's a different question now." "They say the table's coming. For us. I keep thinking about what we'd even bring to it. || You asked me that before. It's a different question now." "Chris? I'd trust Chris with my pack. That's the highest compliment I have.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_bxlfcy5] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_bxlfcy5] :: Accept the creek request first. Meet at Haven at dawn on the following day. || We're going in circles — Accept the creek request first. Meet at Haven at dawn on the following day. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_qp1yplb] :: Stand beside them first — same side of the Haven door — then help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_qp1yplb] :: Stand beside them first — same side of the Haven door — then help. || We're going in circles — Stand beside them first — same side of the Haven door — then help. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_qp1yplb] :: You need to be right next to them, same side of the Haven door, to help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_qp1yplb] :: You need to be right next to them, same side of the Haven door, to help. || Get to their side of the Haven door and stand next to them — then you can help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_4l1e9iu] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_bxlfcy5] :: Stand beside them first — same side of the Haven door — then help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_bxlfcy5] :: Get to their side of the Haven door and stand next to them — then you can help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_bxlfcy5] :: Move next to them, on the same side of the Haven door, to help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship ivy_wang] :: About grief — yeah, we never did get back to that. || About what's been happening — yeah, we never did get back to that.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_bxlfcy5] :: You need edible, unspoiled food in your pack. Food in the pantry must be collected first. || We're going in circles — You need edible, unspoiled food in your pack. Food in the pantry must be collected first. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [B-first-meeting luis_fernandez] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request david_kim] :: You need edible, unspoiled food in your pack. Food in the pantry must be collected first. || We're going in circles — You need edible, unspoiled food in your pack. Food in the pantry must be collected first. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_bxlfcy5] :: You need edible, unspoiled food in your pack. Food in the pantry must be collected first. || We're going in circles — You need edible, unspoiled food in your pack. Food in the pantry must be collected first. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request nina_petrova] :: You show them Yarrow — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know. || You show them Mugwort — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG same-opening [D-talk-request nina_petrova] :: You show them Yarrow — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know. || You show them Bracken Fiddlehead — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one.
+  M4 FLAG same-opening [D-talk-request nina_petrova] :: You show them Mugwort — where it grows, how to tell it apart. Their eyes widen. "I never knew that. || You show them Bracken Fiddlehead — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one.
+  M4 FLAG jaccard>=0.5 [C-friendship leo_martin] :: Move next to them, on the same side of the Haven door, to help. || Stand beside them first — same side of the Haven door — then help.
+  M4 FLAG jaccard>=0.5 [C-friendship leo_martin] :: Move next to them, on the same side of the Haven door, to help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship leo_martin] :: Get to their side of the Haven door and stand next to them — then you can help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship mia_andersson] :: What do you make of all this? Really. || we're still on what you make of all this.
+  M4 FLAG jaccard>=0.5 [C-friendship mia_andersson] :: we're still on what you make of all this. || We're going in circles — still on what you make of all this. Ask me something else if you want.
+  M11 recap-empty flags=0 of 60 (bar: >=10 panel-wide lands the job-B1 pool fix)
+  M12 door-req flags=28 of 60 (r189 anchor 86/143) maxDoorServesInSitting=9 [D-talk-request gen_qp1yplb turns=11] totalDoorServes=100
+  M12-native threeTimes total=15 maxPerSitting=1 sittings2plus=0 exits=59 [worst A-day1-nudge ivy_wang turns=9]
+  B5 funeral: lines=5 stats={"funerals":5,"linksMended":20,"kcalSpent":30000}
+    FUNERAL d58 [narration] 🕯️ Gabriel's funeral feast: 4,500 kcal from the pantry, and every shaken fire is fed — Emberhold, Thornfield, Stonebridge. The village mourns together, and the links hold because the dead are honored, not because the gr
+    FUNERAL d77 [narration] 🕯️ Morgan's funeral feast: 6,000 kcal from the pantry, and every shaken fire is fed — Emberhold, Thornfield, Stonebridge, The Bloodied. The village mourns together, and the links hold because the dead are honored, not b
+    FUNERAL d92 [narration] 🕯️ Esteban's funeral feast: 6,000 kcal from the pantry, and every shaken fire is fed — Emberhold, Thornfield, Stonebridge, The Bloodied. The village mourns together, and the links hold because the dead are honored, not 
+    FUNERAL d106 [narration] 🕯️ Sanne's funeral feast: 6,000 kcal from the pantry, and every shaken fire is fed — Emberhold, Thornfield, Stonebridge, The Bloodied. The village mourns together, and the links hold because the dead are honored, not be
+    FUNERAL d135 [narration] 🕯️ Ivy's funeral feast: 7,500 kcal from the pantry, and every shaken fire is fed — Emberhold, Thornfield, Stonebridge, The Bloodied, The Red Table. The village mourns together, and the links hold because the dead are ho
+  M4 CANDIDATE [D-talk-request david_kim turns=10 naturalEnd=true]:
+    NPC: "We never finished talking about the talking-to-strangers part — we left it mid-thought. 'Let me sit with all that. We'll pick it up later.' Just my read."
+    YOU: "Go on."
+    NPC: "This is nice. Just — being around people. I forget how much I need it."
+    YOU: "That doesn't quite add up."
+    NPC: "...Sorry, lost my train of thought."
+    YOU: "Can I ask you something else?"
+    NPC: "...Never mind me. What were you going to say?"
+    YOU: "I've been watching. Things don't add up. Talk to me."
+    NARR: They go very still. Not relaxed-still. Held-still.
+    NARR: *The deflect is a move you know now. It works when what you have is thin. Make it thick.*
+    YOU: "I need to ask you something."
+    NPC: "You're wrong." Too fast. David looks away. "Just... drop it, okay?"
+    YOU: "That doesn't quite add up."
+    NPC: "Hm. Never mind — go on."
+    YOU: "Can I ask you something else?"
+    NPC: "That can wait — it isn't going anywhere. What's on your mind?"
+    YOU: "I've been watching. Things don't add up. Talk to me."
+    NARR: Something crosses their face — quick, then gone. The practiced expression clicks back into place.
+    NARR: *They deflected you last time, and what you have hasn't grown since. One more thread before you speak, or they'll slip away again.*
+    YOU: "I need to ask you something."
+    NPC: "That's not — that's not what happened." David's hands won't stop moving. "You're twisting things."
+    YOU: "That doesn't quite add up."
+    NPC: "...Actually, forget it."
+    YOU: "Wait, what? Go on —"
+    NPC: "I should go. Before I overthink this conversation too."
+    NPC: "Thanks for the company. Really."
+    NPC: They nod, already turning away.
+
+seed 45702: days=140 endReason=survived fullConvs=162 naturalEnds=145 feasts=20 moots=2
+  scattering: {"scattered":false,"hungryDays":0,"aliveEnd":8,"endReason":"survived"}
+  decisions: {"lure:decline":97,"lure:accept":96,"bond:accept":2,"party:decline":4,"party:accept":6,"bond:decline":5}
+  BOND lure-by-inviter (scholar=Samuel initialBearer=Luna): {"NPC:lure:decline":97,"NPC:lure:accept":96,"NPC:bond:accept":2,"player:party:decline":4,"player:party:accept":6,"NPC:bond:decline":5}
+  BOND successions: [{"day":45,"from":"Luna","to":"Adriano"},{"day":52,"from":"Adriano","to":"Nadia"},{"day":56,"from":"Nadia","to":"Kwame"},{"day":119,"from":"Kwame","to":"Monique"},{"day":136,"from":"Monique","to":"Samuel"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=5 {"proposeLink:engine":5}
+  COUNTER proposeLink=5 counter=0 fresh=5 freshCounter=0 blocked=0 blockedCounter=0 unknownPending=0 answerWrapped=true
+  COUNTER settles=0 linkFormed=0 failed=0 unknown=0 answers=0 byHow={} answersLinkFormed=0 minPantryAtSettle=null tributes=[] pendingCounterEnd=null
+    PROPOSE d15 proposeLink targetId=village_1 pendingBefore=false result={"id":"link_mgpspjk2871","primary":"haven","subordinate":"village_1","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":15,"kind":"
+    PROPOSE d19 proposeLink targetId=village_0 pendingBefore=false result={"id":"link_mgpspk5w270","primary":"haven","subordinate":"village_0","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":19,"kind":"
+    PROPOSE d31 proposeLink targetId=village_2 pendingBefore=false result={"id":"link_mgpspm22542","primary":"haven","subordinate":"village_2","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":31,"kind":"
+    PROPOSE d68 proposeLink targetId=village_spl_29_60255 pendingBefore=false result={"id":"link_mgpspryg455","primary":"haven","subordinate":"village_spl_29_60255","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+    PROPOSE d92 proposeLink targetId=village_spl_48_68679 pendingBefore=false result={"id":"link_mgpspul1655","primary":"haven","subordinate":"village_spl_48_68679","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+  CONFESS confrontWrapped={"confrontDoubt":true,"confrontTheft":true} total=2 confessed=1 byOutcome={"confessed":1,"already-confessed":1} sittingsWithConfession=1 singleSittings=1 doubleSittings=0 outsideSittingConfessed=0
+  RECAP maxPresses=3 totalPresses=117 offeredAfterCap=0 capFailures=0
+  BOND proposed=42 byInitiatorKind={"villager":42} byKind={"link":28,"person":14} byOutcome={"staged":18,"expired":9,"accepted":10,"refused":5} villagerPerson=14 villagerPersonAccepted=5 linkRaises=28 linkAccepted=5 maxPerInitiator=10
+    PROPOSED d9 Sanne(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d11 Ines(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d12 Sanne(villager)->village_2 kind=link outcome=expired chance=null
+    PROPOSED d12 Adriano(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d13 Sanne(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d14 Ines(villager)->village_2 kind=link outcome=expired chance=null
+    PROPOSED d15 Sanne(villager)->village_1 kind=link outcome=accepted chance=null
+    PROPOSED d15 Adriano(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d15 Monique(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d16 Adriano(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d18 Monique(villager)->village_2 kind=link outcome=expired chance=null
+    PROPOSED d18 Sanne(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d19 Sanne(villager)->village_0 kind=link outcome=accepted chance=null
+    PROPOSED d19 Kwame(villager)->Monique kind=person outcome=accepted chance=73
+    PROPOSED d19 Adriano(villager)->village_0 kind=link outcome=expired chance=null
+    PROPOSED d26 Sanne(villager)->Luna kind=person outcome=staged chance=null
+    PROPOSED d27 Sanne(villager)->Luna kind=person outcome=accepted chance=null
+    PROPOSED d27 Sanne(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d29 Ines(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d30 Sanne(villager)->village_2 kind=link outcome=expired chance=null
+    PROPOSED d31 Ines(villager)->village_2 kind=link outcome=accepted chance=null
+    PROPOSED d43 Monique(villager)->Luna kind=person outcome=staged chance=null
+    PROPOSED d44 Monique(villager)->Luna kind=person outcome=accepted chance=null
+    PROPOSED d45 Elena(villager)->Caleb kind=person outcome=refused chance=43
+    PROPOSED d61 Monique(villager)->village_spl_29_60255 kind=link outcome=staged chance=null
+    PROPOSED d64 Monique(villager)->village_spl_29_60255 kind=link outcome=expired chance=null
+    PROPOSED d64 Ines(villager)->village_spl_29_60255 kind=link outcome=staged chance=null
+    PROPOSED d66 Vito(villager)->village_spl_29_60255 kind=link outcome=staged chance=null
+    PROPOSED d67 Ines(villager)->village_spl_29_60255 kind=link outcome=expired chance=null
+    PROPOSED d68 Vito(villager)->village_spl_29_60255 kind=link outcome=accepted chance=null
+    PROPOSED d86 Ines(villager)->Vito kind=person outcome=refused chance=47
+    PROPOSED d89 Ines(villager)->village_spl_48_68679 kind=link outcome=staged chance=null
+    PROPOSED d91 Vito(villager)->village_spl_48_68679 kind=link outcome=staged chance=null
+    PROPOSED d92 Ines(villager)->village_spl_48_68679 kind=link outcome=accepted chance=null
+    PROPOSED d94 Vito(villager)->village_spl_48_68679 kind=link outcome=expired chance=null
+    PROPOSED d107 Elena(villager)->Nikolai kind=person outcome=accepted chance=38
+    PROPOSED d108 Carlos(villager)->Kwame kind=person outcome=staged chance=null
+    PROPOSED d109 Carlos(villager)->Kwame kind=person outcome=accepted chance=null
+    PROPOSED d134 Carlos(villager)->Benoit kind=person outcome=refused chance=27
+    PROPOSED d135 Elena(villager)->Benoit kind=person outcome=refused chance=17
+    PROPOSED d138 Nikolai(villager)->Samuel kind=person outcome=staged chance=null
+    PROPOSED d139 Vito(villager)->Benoit kind=person outcome=refused chance=27
+  BOND end bonds=89 sample={"key":"gen_nfvmbxl|gen_vgd40ta","val":"{\"v\":100,\"depth\":3,\"day\":119,\"dayGain\":2,\"proposed\":true,\"proposedDay\":19,\"proposer\":\"gen_nfvmbxl\"}"}
+  plot plot_1 d7 leader=Monique inviter=Caleb target=Valeria sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d7 plot_1 Monique->Valeria inviter=Caleb motive={"score":56.36,"reasons":["grievance","ambition"]} gT->L=39.2 gL->T=39.2 accMotives=[{"who":"Caleb","score":0,"reasons":[],"grievance":0},{"who":"Sanne","score":12,"reasons":["prove"],"grievance":0}] trust={"leader":16,"Caleb":30,"Sanne":52} goal=lead
+  SPRING d7 plot_1 Monique->Valeria outcome=killed case=case_2 endCase=case_2 charge=murder status=acquitted heardDay=9 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=1
+  expireWrapped=true expiredEvents=0
+  village fallen: 12 by cause: {"ambush":1,"the wild":5,"the arena":1,"contest":2,"monster":3}
+  death clusters (>=3/day): none
+  ambush-caused fallen: [{"who":"Valeria","day":7,"cause":"ambush"}]
+  (samples.deaths, all recorded incl. outsiders: 64 — NOT village deaths)
+  census: seed 45702, day 140, alive 8 | - Samuel (midwife, ?) trust=92 mood=warm npcAbilities=0
+  M6 nightlyNews: strandedDays=5 burst=72 settle=36 witness=10 tale=24 | emitted-AWAY(strict on-tile) burst=4 settle=0 witness=0 tale=0 | emitted-AWAY-GATE(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=37 settled=37 queuedAtEnd=0
+  M4 transcripts=161 naturalEnds=145 nearDupFlags=50
+  M4 FLAG jaccard>=0.5 [A-day1-nudge sanne_bakker] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [B-first-meeting gen_qvtd75v] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request sanne_bakker] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request sanne_bakker] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request valeria_quispe] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_e8ctgui] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship sanne_bakker] :: What's the kindest thing someone's done for you out here? || we're still on the kindest thing someone's done for you.
+  M4 FLAG jaccard>=0.5 [C-friendship sanne_bakker] :: What's the kindest thing someone's done for you out here? || Good — the kindest thing someone's done for you, settled. Feels better said out loud.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_vgd40ta] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_vgd40ta] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_vgd40ta] :: You need to be right next to your partner, same side of the Haven door, to help. || We're going in circles — You need to be right next to your partner, same side of the Haven door, to help. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_qvtd75v] :: Stand beside your partner first — same side of the Haven door — then help. || We're going in circles — Stand beside your partner first — same side of the Haven door — then help. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_qvtd75v] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship elena_petrova] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship ines_duarte] :: Your partner is inside the Haven hall. Go through the door to meet them. || We're going in circles — Your partner is inside the Haven hall. Go through the door to meet them. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request elena_petrova] :: Stand beside your partner first — same side of the Haven door — then help. || We're going in circles — Stand beside your partner first — same side of the Haven door — then help. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request elena_petrova] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_e8ctgui] :: we're still on wanting to keep a record of everything. || We're going in circles — still on wanting to keep a record of everything. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_qvtd75v] :: Stand beside them first — same side of the Haven door — then help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_qvtd75v] :: Move next to them, on the same side of the Haven door, to help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_qvtd75v] :: You need to be right next to them, same side of the Haven door, to help. || Get to their side of the Haven door and stand next to them — then you can help.
+  M4 FLAG jaccard>=0.5 [C-friendship elena_petrova] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [C-friendship elena_petrova] :: You need to be right next to your partner, same side of the Haven door, to help. || We're going in circles — You need to be right next to your partner, same side of the Haven door, to help. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request ines_duarte] :: You say nothing. Neither do they, for a while — and it's fine. || You say nothing. They read it as an answer.
+  M4 FLAG jaccard>=0.5 [D-talk-request ines_duarte] :: Accept the forage request first. Meet at Haven at dawn on the following day. || We're going in circles — Accept the forage request first. Meet at Haven at dawn on the following day. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship ines_duarte] :: Accept the forage request first. Meet at Haven at dawn on the following day. || We're going in circles — Accept the forage request first. Meet at Haven at dawn on the following day. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_m8ys6t6] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_m8ys6t6] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship app_mgpspio9116] :: Move next to them, on the same side of the Haven door, to help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship app_mgpspio9116] :: Move next to them, on the same side of the Haven door, to help. || Stand beside them first — same side of the Haven door — then help.
+  M4 FLAG jaccard>=0.5 [C-friendship app_mgpspio9116] :: You need to be right next to them, same side of the Haven door, to help. || Get to their side of the Haven door and stand next to them — then you can help.
+  M4 FLAG jaccard>=0.5 [C-friendship benoit_lambert] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG same-opening [D-talk-request elena_petrova] :: I still need help with the pantry run. || I still need a hand with the pantry run.
+  M4 FLAG jaccard>=0.5 [D-talk-request elena_petrova] :: I still need help with the pantry run. || The pantry run isn't going away — I need help.
+  M4 FLAG jaccard>=0.5 [D-talk-request elena_petrova] :: Get to your partner's side of the Haven door and stand next to them — then you can help. || We're going in circles — Get to your partner's side of the Haven door and stand next to them — then you can help. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request elena_petrova] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request elena_petrova] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request elena_petrova] :: Move next to your partner, on the same side of the Haven door. || We're going in circles — Move next to your partner, on the same side of the Haven door. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request app_mgpspio9116] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship carlos_diaz] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request carlos_diaz] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request carlos_diaz] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request carlos_diaz] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request app_mgpspio9116] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship carlos_diaz] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_m8ys6t6] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_m8ys6t6] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request benoit_lambert] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request benoit_lambert] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_m8ys6t6] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M11 recap-empty flags=0 of 50 (bar: >=10 panel-wide lands the job-B1 pool fix)
+  M12 door-req flags=42 of 50 (r189 anchor 86/143) maxDoorServesInSitting=6 [C-friendship ines_duarte turns=9] totalDoorServes=157
+  M12-native threeTimes total=20 maxPerSitting=1 sittings2plus=0 exits=34 [worst D-talk-request sanne_bakker turns=7]
+  B5 funeral: lines=4 stats={"funerals":4,"linksMended":17,"kcalSpent":25500}
+    FUNERAL d44 [narration] 🕯️ Luna's funeral feast: 3,000 kcal from the pantry, and every shaken fire is fed — Stonebridge, Emberhold. The village mourns together, and the links hold because the dead are honored, not because the grief was forgott
+    FUNERAL d52 [narration] 🕯️ Adriano's funeral feast: 4,500 kcal from the pantry, and every shaken fire is fed — Stonebridge, Emberhold, Thornfield. The village mourns together, and the links hold because the dead are honored, not because the gr
+    FUNERAL d119 [narration] 🕯️ Kwame's funeral feast: 9,000 kcal from the pantry, and every shaken fire is fed — Stonebridge, Emberhold, Thornfield, The Red Table, The Red Table II, The Bloodied. The village mourns together, and the links hold bec
+    FUNERAL d135 [narration] 🕯️ Monique's funeral feast: 9,000 kcal from the pantry, and every shaken fire is fed — Stonebridge, Emberhold, Thornfield, The Red Table, The Red Table II, The Bloodied. The village mourns together, and the links hold b
+  M4 CANDIDATE [D-talk-request gen_vgd40ta turns=11 naturalEnd=true]:
+    NPC: "You said the most useful thing you learned is being hungry and going anyway. Still the lesson?"
+    NPC: There's an ease between you now — the kind that takes weeks to build.
+    YOU: (listen)
+    NPC: They nod slowly, not quite done, not quite continuing.
+    YOU: (listen)
+    NPC: "So." They look at the fire for a moment.
+    YOU: "Wait — what were we talking about?"
+    NPC: "As I said — we're still on that personal stuff."
+    YOU: "Go on."
+    NPC: They nod — and keep their distance, for now.
+    YOU: "Go on."
+    NPC: A pause. When they speak again, it's about something else entirely.
+    YOU: "Go on."
+    NPC: "What's the kindest thing someone's done for you out here?"
+    YOU: "I've watched people share food they couldn't spare. Quiet. No performance. Just... did it."
+    NPC: "Here's the thing: That's the good stuff. Quiet generosity. It's holding this whole thing together."
+    YOU: "Go on."
+    NPC: "Someone saved me the last of the stew once. Didn't say anything, just put the bowl down and walked off. I think about that bowl more than I think about the monsters."
+    YOU: "What do you think it means?"
+    YOU: "What do you think is actually going on here?"
+    NPC: "The light changed yesterday. Not the sun — the other light, the one behind it. It's getting closer. Or brighter. Something's shifting."
+    YOU: "Yeah?"
+    NPC: "Okay. We'll pick this up later."
+    YOU: "..."
+    NPC: A comfortable quiet settles. They smile a little, and let it be.
+    NPC: "Good talk. I feel like I know you a little better now."
+    NPC: They're smiling as you go. "Come back anytime."
+
+seed 45703: days=108 endReason=village-lost fullConvs=89 naturalEnds=81 feasts=15 moots=4
+  scattering: {"scattered":true,"hungryDays":3,"aliveEnd":5,"endReason":"village-lost"}
+  decisions: {"lure:accept":65,"lure:decline":72,"party:accept":4,"bond:decline":3,"party:decline":2}
+  BOND lure-by-inviter (scholar=Eduardo initialBearer=Luz): {"NPC:lure:accept":65,"NPC:lure:decline":72,"player:party:accept":4,"NPC:bond:decline":3,"player:party:decline":2}
+  BOND successions: [{"day":8,"from":"Luz","to":"Natalie"},{"day":43,"from":"Natalie","to":"James"},{"day":64,"from":"James","to":"Jack"},{"day":85,"from":"Jack","to":"Ines"},{"day":92,"from":"Ines","to":"Victor"},{"day":96,"from":"Victor","to":"Eduardo"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=5 {"proposeLink:engine":5}
+  COUNTER proposeLink=5 counter=1 fresh=5 freshCounter=1 blocked=0 blockedCounter=0 unknownPending=0 answerWrapped=true
+  COUNTER settles=1 linkFormed=1 failed=0 unknown=0 answers=1 byHow={"accept":1} answersLinkFormed=1 minPantryAtSettle=14737 tributes=[5000] pendingCounterEnd=null
+    SETTLE d17 target=village_2 tribute=5000 pantry=14737 linkFormed=true result={"id":"link_mgpspjp2934","primary":"village_2","subordinate":"haven","trust":30,"tributeKcalPerWeek":5000,"tributePaidWe
+    PROPOSE d17 proposeLink targetId=village_2 pendingBefore=false result="counter"
+    PROPOSE d31 proposeLink targetId=village_1 pendingBefore=false result={"id":"link_mgpspll5396","primary":"haven","subordinate":"village_1","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":31,"kind":"
+    PROPOSE d36 proposeLink targetId=village_spl_26_90680 pendingBefore=false result=null
+    PROPOSE d54 proposeLink targetId=village_spl_25_96745 pendingBefore=false result={"id":"link_mgpspoc9681","primary":"haven","subordinate":"village_spl_25_96745","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+    PROPOSE d62 proposeLink targetId=village_spl_33_16803 pendingBefore=false result={"id":"link_mgpspp7x736","primary":"haven","subordinate":"village_spl_33_16803","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+  CONFESS confrontWrapped={"confrontDoubt":true,"confrontTheft":true} total=20 confessed=3 byOutcome={"cleared":1,"attacked":2,"deflected":13,"confessed":3,"already-confessed":1} sittingsWithConfession=3 singleSittings=3 doubleSittings=0 outsideSittingConfessed=0
+  RECAP maxPresses=3 totalPresses=52 offeredAfterCap=0 capFailures=0
+  BOND proposed=36 byInitiatorKind={"villager":36} byKind={"link":26,"person":10} byOutcome={"staged":17,"expired":8,"accepted":8,"refused":3} villagerPerson=10 villagerPersonAccepted=3 linkRaises=26 linkAccepted=5 maxPerInitiator=11
+    PROPOSED d5 Onni(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d8 Jack(villager)->Natalie kind=person outcome=staged chance=null
+    PROPOSED d8 Onni(villager)->village_0 kind=link outcome=expired chance=null
+    PROPOSED d9 Jack(villager)->Natalie kind=person outcome=accepted chance=null
+    PROPOSED d9 Onni(villager)->village_3 kind=link outcome=staged chance=null
+    PROPOSED d11 Ji(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d12 Onni(villager)->village_3 kind=link outcome=expired chance=null
+    PROPOSED d12 Jack(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d14 Ji(villager)->village_2 kind=link outcome=expired chance=null
+    PROPOSED d15 Jack(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d15 Jack(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d16 James(villager)->village_2 kind=link outcome=staged chance=null
+    PROPOSED d17 Jack(villager)->village_2 kind=link outcome=accepted chance=null
+    PROPOSED d19 Jack(villager)->Ji kind=person outcome=refused chance=28
+    PROPOSED d19 James(villager)->village_2 kind=link outcome=expired chance=null
+    PROPOSED d30 Jack(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d31 Jack(villager)->village_1 kind=link outcome=accepted chance=null
+    PROPOSED d31 Victor(villager)->village_spl_26_90680 kind=link outcome=staged chance=null
+    PROPOSED d32 Eduardo(villager)->village_spl_26_90680 kind=link outcome=staged chance=null
+    PROPOSED d33 James(villager)->Natalie kind=person outcome=staged chance=null
+    PROPOSED d33 Ji(villager)->village_spl_26_90680 kind=link outcome=staged chance=null
+    PROPOSED d34 Victor(villager)->village_spl_26_90680 kind=link outcome=expired chance=null
+    PROPOSED d35 James(villager)->Natalie kind=person outcome=accepted chance=null
+    PROPOSED d35 Eduardo(villager)->village_spl_26_90680 kind=link outcome=expired chance=null
+    PROPOSED d35 Jack(villager)->village_spl_26_90680 kind=link outcome=staged chance=null
+    PROPOSED d36 Ji(villager)->village_spl_26_90680 kind=link outcome=accepted chance=null
+    PROPOSED d38 Jack(villager)->village_spl_26_90680 kind=link outcome=expired chance=null
+    PROPOSED d45 Ines(villager)->Ji kind=person outcome=refused chance=18
+    PROPOSED d51 Eduardo(villager)->James kind=person outcome=staged chance=null
+    PROPOSED d52 Eduardo(villager)->James kind=person outcome=accepted chance=null
+    PROPOSED d53 Eduardo(villager)->village_spl_25_96745 kind=link outcome=staged chance=null
+    PROPOSED d54 Eduardo(villager)->village_spl_25_96745 kind=link outcome=accepted chance=null
+    PROPOSED d61 Ji(villager)->village_spl_33_16803 kind=link outcome=staged chance=null
+    PROPOSED d62 Ji(villager)->village_spl_33_16803 kind=link outcome=accepted chance=null
+    PROPOSED d86 Eduardo(villager)->Soichiro kind=person outcome=refused chance=37
+    PROPOSED d108 Nena(villager)->Eduardo kind=person outcome=staged chance=null
+  BOND end bonds=80 sample={"key":"gen_4ociqrp|gen_o1brz3c","val":"{\"v\":100,\"depth\":3,\"day\":84,\"dayGain\":6}"}
+  plot plot_1 d8 leader=Onni inviter=Ines target=James sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d34 leader=Eduardo inviter=Eduardo target=Natalie sprung=false gT->L=0 gT->I=0 gA->Tmax=14 gI->T=28
+  armWrapped=true springWrapped=true
+  ARM d8 plot_1 Onni->James inviter=Ines motive={"score":37.120000000000005,"reasons":["grievance"]} gT->L=46.400000000000006 gL->T=46.400000000000006 accMotives=[{"who":"Catalina","score":0,"reasons":[],"grievance":0},{"who":"Ines","score":0,"reasons":[],"grievance":0}] trust={"leader":22,"Catalina":22,"Ines":35} goal=belong
+  ARM d34 plot_3 Eduardo->Natalie inviter=Eduardo motive={"score":47.400000000000006,"reasons":["grievance","ambition"]} gT->L=0 gL->T=28 accMotives=[{"who":"Victor","score":0,"reasons":[],"grievance":0},{"who":"Raj","score":11.200000000000001,"reasons":[],"grievance":14}] trust={"leader":90,"Victor":38,"Raj":19} goal=lead
+  SPRING d9 plot_1 Onni->James outcome=escaped case=case_2 endCase=case_2 charge=ambush status=resolved heardDay=10 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=2
+  expireWrapped=true expiredEvents=1
+  EXPIRED d39 plot_3 Eduardo->Natalie armedD34 linesNamingPairAfterExpiry=0
+  village fallen: 12 by cause: {"monster":4,"the wild":3,"a stranger":3,"a wound that wouldn't close":2}
+  death clusters (>=3/day): none
+  ambush-caused fallen: []
+  (samples.deaths, all recorded incl. outsiders: 58 — NOT village deaths)
+  census: seed 45703, day 108, alive 5 | - Eduardo (rail_conductor, ?) trust=82 mood=neutral npcAbilities=0
+  M6 nightlyNews: strandedDays=3 burst=56 settle=28 witness=8 tale=22 | emitted-AWAY(strict on-tile) burst=6 settle=0 witness=0 tale=0 | emitted-AWAY-GATE(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=28 settled=28 queuedAtEnd=0
+  M4 transcripts=88 naturalEnds=81 nearDupFlags=26
+  M4 FLAG jaccard>=0.5 [C-friendship gen_4ociqrp] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request james_okonkwo] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_o1brz3c] :: Stand beside them first — same side of the Haven door — then help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_o1brz3c] :: You need to be right next to them, same side of the Haven door, to help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG same-opening [D-talk-request ines_duarte] :: I still need help with the pantry run. || I still need a hand with the pantry run.
+  M4 FLAG jaccard>=0.5 [D-talk-request ines_duarte] :: I still need help with the pantry run. || The pantry run isn't going away — I need help.
+  M4 FLAG jaccard>=0.5 [D-talk-request ines_duarte] :: Accept the forage request first. Meet at Haven at dawn on the following day. || We're going in circles — Accept the forage request first. Meet at Haven at dawn on the following day. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship ines_duarte] :: Accept the forage request first. Meet at Haven at dawn on the following day. || We're going in circles — Accept the forage request first. Meet at Haven at dawn on the following day. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request victor_lopez] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request victor_lopez] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [D-talk-request james_okonkwo] :: You need to be right next to them, same side of the Haven door, to help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request james_okonkwo] :: You need to be right next to them, same side of the Haven door, to help. || Get to their side of the Haven door and stand next to them — then you can help.
+  M4 FLAG jaccard>=0.5 [D-talk-request james_okonkwo] :: Stand beside them first — same side of the Haven door — then help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship ines_duarte] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [C-friendship victor_lopez] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [C-friendship victor_lopez] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG same-opening [D-talk-request raj_patel] :: I still need help with the creek water run. || I still need a hand with the creek water run.
+  M4 FLAG jaccard>=0.5 [D-talk-request raj_patel] :: I still need help with the creek water run. || The creek water run isn't going away — I need help.
+  M4 FLAG jaccard>=0.5 [D-talk-request raj_patel] :: Move next to your partner, on the same side of the Haven door. || You need to be right next to your partner, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship ines_duarte] :: Accept the creek request first. Meet at Haven at dawn on the following day. || We're going in circles — Accept the creek request first. Meet at Haven at dawn on the following day. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request app_mgpspofe605] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [C-friendship victor_lopez] :: You need to be right next to your partner, same side of the Haven door, to help. || Move next to your partner, on the same side of the Haven door.
+  M4 FLAG jaccard>=0.5 [C-friendship ines_duarte] :: Your partner is inside the Haven hall. Go through the door to meet them. || We're going in circles — Your partner is inside the Haven hall. Go through the door to meet them. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request app_mgpspofe605] :: Get to their side of the Haven door and stand next to them — then you can help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [D-talk-request app_mgpspofe605] :: Move next to them, on the same side of the Haven door, to help. || Stand beside them first — same side of the Haven door — then help.
+  M4 FLAG jaccard>=0.5 [D-talk-request app_mgpspofe605] :: Move next to them, on the same side of the Haven door, to help. || You need to be right next to them, same side of the Haven door, to help.
+  M11 recap-empty flags=0 of 26 (bar: >=10 panel-wide lands the job-B1 pool fix)
+  M12 door-req flags=19 of 26 (r189 anchor 86/143) maxDoorServesInSitting=6 [D-talk-request raj_patel turns=9] totalDoorServes=73
+  M12-native threeTimes total=11 maxPerSitting=1 sittings2plus=0 exits=12 [worst D-talk-request gen_danfsgp turns=7]
+  B5 funeral: lines=5 stats={"funerals":4,"linksMended":14,"kcalSpent":20380}
+    FUNERAL d43 [narration] 🕯️ Natalie's funeral feast: 1,500 kcal from the pantry, and every shaken fire is fed — Thornfield. The village mourns together, and the links hold because the dead are honored, not because the grief was forgotten. (Trus
+    FUNERAL d63 [narration] 🕯️ James's funeral feast: 4,500 kcal from the pantry, and every shaken fire is fed — Thornfield, Stonebridge, The Red Table II. The village mourns together, and the links hold because the dead are honored, not because t
+    FUNERAL d85 [narration] 🕯️ Jack's funeral feast: 6,880 kcal from the pantry, and every shaken fire is fed — Thornfield, Stonebridge, The Red Table II, The Red Table, The Hungry Road II. The village mourns together, and the links hold because t
+    FUNERAL d92 [narration] 🕯️ Ines's funeral feast: 7,500 kcal from the pantry, and every shaken fire is fed — Thornfield, Stonebridge, The Red Table II, The Red Table, The Hungry Road II. The village mourns together, and the links hold because t
+    FUNERAL d103 [narration] 🕯️ Soichiro's funeral feast: the pantry holds nothing to feed a shaken fire — Thornfield, Stonebridge, The Red Table II, The Red Table, The Hungry Road II go unmended. The village mourns together anyway; the links stay 
+  M4 CANDIDATE [C-friendship raj_patel turns=9 naturalEnd=true]:
+    NPC: I was a pharmacist in Ahmedabad, India. Say it back to me sometime. I need to hear it stays true.
+    YOU: "Go on."
+    NPC: "I had a life. A name people knew. I need to hold the shape of it."
+    YOU: "I've been watching. Things don't add up. Talk to me."
+    NARR: Something crosses their face — quick, then gone. The practiced expression clicks back into place.
+    NARR: *You've watched them deflect before — the same smooth sidestep. Thin evidence won't hold them. Gather one more thread first.*
+    YOU: "I need to ask you something."
+    NPC: "What? No — I mean —" Raj stumbles. "It's... it's complicated. Can we not do this right now?"
+    YOU: "I've been watching. Things don't add up. Talk to me."
+    NARR: They glance toward the fire, toward the others — checking who's listening.
+    NARR: *They deflected you last time, and what you have hasn't grown since. One more thread before you speak, or they'll slip away again.*
+    YOU: "I need to ask you something."
+    NPC: "I — I don't remember saying that." A beat. "People hear what they want to hear."
+    YOU: "I've been watching. Things don't add up. Talk to me."
+    NARR: They go very still. Not relaxed-still. Held-still.
+    YOU: "I need to ask you something."
+    NPC: "Oh." A long pause. "I didn't think it was anyone's. It's gone — I ate it days ago. I'm sorry."
+    YOU: "Tell me more."
+    NPC: "Memory is the only luggage that matters. I'm packing carefully."
+    YOU: "I’m listening."
+    NPC: "I keep a list of names. When I forget one, I carve it somewhere so the forgetting has to work for it."
+    YOU: "Go on."
+    NPC: "Memory's a muscle. I exercise mine. The past is the only country I'm a citizen of."
+    YOU: "Take your time."
+    NPC: "Alright — I should get back to it."
+    NPC: "...Think about it? I'll be around."
+    NPC: They're smiling as you go. "Come back anytime."
+
+seed 45704: days=103 endReason=village-lost fullConvs=112 naturalEnds=84 feasts=14 moots=2
+  scattering: {"scattered":true,"hungryDays":3,"aliveEnd":2,"endReason":"village-lost"}
+  decisions: {"lure:decline":24,"lure:accept":34,"party:accept":5,"bond:decline":2,"bond:accept":1}
+  BOND lure-by-inviter (scholar=Olivia initialBearer=Oliver): {"NPC:lure:decline":24,"NPC:lure:accept":34,"player:party:accept":5,"NPC:bond:decline":2,"NPC:bond:accept":1}
+  BOND successions: [{"day":34,"from":"Oliver","to":"Marco"},{"day":36,"from":"Marco","to":"Emma"},{"day":42,"from":"Emma","to":"Daniela"},{"day":45,"from":"Daniela","to":"Chanchal"},{"day":57,"from":"Chanchal","to":"Ines"},{"day":88,"from":"Ines","to":"Thabo"},{"day":93,"from":"Thabo","to":"Alfredo"},{"day":99,"from":"Alfredo","to":"Olivia"}]
+  BOND proposeWrapped={"proposeLink":true,"proposeCovenant":true,"proposeTrade":true} proposeCalls=5 {"proposeLink:engine":5}
+  COUNTER proposeLink=5 counter=0 fresh=5 freshCounter=0 blocked=0 blockedCounter=0 unknownPending=0 answerWrapped=true
+  COUNTER settles=0 linkFormed=0 failed=0 unknown=0 answers=0 byHow={} answersLinkFormed=0 minPantryAtSettle=null tributes=[] pendingCounterEnd=null
+    PROPOSE d8 proposeLink targetId=village_1 pendingBefore=false result={"id":"link_mgpspig3119","primary":"haven","subordinate":"village_1","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":8,"kind":"f
+    PROPOSE d25 proposeLink targetId=village_0 pendingBefore=false result={"id":"link_mgpspl29717","primary":"haven","subordinate":"village_0","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":25,"kind":"
+    PROPOSE d62 proposeLink targetId=village_spl_23_86170 pendingBefore=false result={"id":"link_mgpspqdk962","primary":"haven","subordinate":"village_spl_23_86170","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":0,"obligations":["tribute","aid"],"history":[{"day":
+    PROPOSE d65 proposeLink targetId=village_1 pendingBefore=false result=null
+    PROPOSE d69 proposeLink targetId=village_1 pendingBefore=false result={"id":"link_mgpspr6f971","primary":"haven","subordinate":"village_1","trust":30,"tributeKcalPerWeek":4000,"tributePaidWeek":-1,"arrears":9750,"obligations":["tribute","aid"],"history":[{"day":69,"kind
+  CONFESS confrontWrapped={"confrontDoubt":true,"confrontTheft":true} total=13 confessed=2 byOutcome={"deflected":10,"confessed":2,"already-confessed":1} sittingsWithConfession=2 singleSittings=2 doubleSittings=0 outsideSittingConfessed=0
+  RECAP maxPresses=3 totalPresses=173 offeredAfterCap=0 capFailures=0
+  BOND proposed=21 byInitiatorKind={"villager":21} byKind={"link":16,"person":5} byOutcome={"staged":9,"accepted":6,"refused":2,"expired":4} villagerPerson=5 villagerPersonAccepted=1 linkRaises=16 linkAccepted=5 maxPerInitiator=6
+    PROPOSED d5 Leo(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d8 Leo(villager)->village_1 kind=link outcome=accepted chance=null
+    PROPOSED d16 Ines(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d19 Daniela(villager)->Emma kind=person outcome=refused chance=62
+    PROPOSED d19 Ines(villager)->village_0 kind=link outcome=expired chance=null
+    PROPOSED d22 Chanchal(villager)->Olivia kind=person outcome=refused chance=69
+    PROPOSED d23 Alfredo(villager)->village_0 kind=link outcome=staged chance=null
+    PROPOSED d25 Alfredo(villager)->village_0 kind=link outcome=accepted chance=null
+    PROPOSED d26 Emma(villager)->Oliver kind=person outcome=staged chance=null
+    PROPOSED d29 Emma(villager)->Oliver kind=person outcome=expired chance=null
+    PROPOSED d45 Alfredo(villager)->Ines kind=person outcome=accepted chance=58
+    PROPOSED d61 Olivia(villager)->village_spl_23_86170 kind=link outcome=staged chance=null
+    PROPOSED d62 Olivia(villager)->village_spl_23_86170 kind=link outcome=accepted chance=null
+    PROPOSED d64 Alfredo(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d65 Alfredo(villager)->village_1 kind=link outcome=accepted chance=null
+    PROPOSED d66 Daniyar(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d68 Olivia(villager)->village_1 kind=link outcome=staged chance=null
+    PROPOSED d69 Olivia(villager)->village_1 kind=link outcome=accepted chance=null
+    PROPOSED d69 Daniyar(villager)->village_1 kind=link outcome=expired chance=null
+    PROPOSED d92 Olivia(villager)->village_spl_30_75043 kind=link outcome=staged chance=null
+    PROPOSED d95 Olivia(villager)->village_spl_30_75043 kind=link outcome=expired chance=null
+  BOND end bonds=88 sample={"key":"gen_gvmdqo2|gen_u4dql9d","val":"{\"v\":14,\"depth\":0,\"day\":13,\"dayGain\":2}"}
+  plot plot_1 d6 leader=Leo inviter=Elijah target=Elena sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_3 d9 leader=Leo inviter=Elijah target=Elena sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_5 d12 leader=Leo inviter=Elijah target=Elena sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  plot plot_7 d14 leader=Leo inviter=Elijah target=Elena sprung=true gT->L=0 gT->I=0 gA->Tmax=0 gI->T=0
+  armWrapped=true springWrapped=true
+  ARM d6 plot_1 Leo->Elena inviter=Elijah motive={"score":60.2,"reasons":["grievance","ambition"]} gT->L=44 gL->T=44 accMotives=[{"who":"Mara","score":0,"reasons":[],"grievance":0},{"who":"Elijah","score":0,"reasons":[],"grievance":0}] trust={"leader":41,"Mara":17,"Elijah":32} goal=lead
+  ARM d9 plot_3 Leo->Elena inviter=Elijah motive={"score":58.28,"reasons":["grievance","ambition"]} gT->L=41.6 gL->T=41.6 accMotives=[{"who":"Mara","score":0,"reasons":[],"grievance":0},{"who":"Elijah","score":0,"reasons":[],"grievance":0}] trust={"leader":19,"Mara":21,"Elijah":34} goal=lead
+  ARM d12 plot_5 Leo->Elena inviter=Elijah motive={"score":56.36,"reasons":["grievance","ambition"]} gT->L=39.2 gL->T=39.2 accMotives=[{"who":"Mara","score":0,"reasons":[],"grievance":0},{"who":"Elijah","score":0,"reasons":[],"grievance":0}] trust={"leader":12,"Mara":7,"Elijah":23} goal=lead
+  ARM d14 plot_7 Leo->Elena inviter=Elijah motive={"score":59.56,"reasons":["grievance","ambition"]} gT->L=43.2 gL->T=43.2 accMotives=[{"who":"Mara","score":0,"reasons":[],"grievance":0},{"who":"Elijah","score":0,"reasons":[],"grievance":0}] trust={"leader":16,"Mara":18,"Elijah":28} goal=lead
+  SPRING d6 plot_1 Leo->Elena outcome=escaped case=case_2 endCase=case_2 charge=ambush status=acquitted heardDay=8 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=4
+  SPRING d11 plot_3 Leo->Elena outcome=escaped case=case_4 endCase=case_4 charge=ambush status=resolved heardDay=12 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=4
+  SPRING d13 plot_5 Leo->Elena outcome=escaped case=case_6 endCase=case_6 charge=ambush status=resolved heardDay=15 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=4
+  SPRING d14 plot_7 Leo->Elena outcome=killed case=case_8 endCase=case_8 charge=murder status=resolved heardDay=15 heardPassed=true surfaced=true surfacedSnapDay=30 ambushLinesNaming=4
+  expireWrapped=true expiredEvents=0
+  village fallen: 17 by cause: {"ambush":1,"the arena":1,"the wild":6,"monster":7,"starvation":1,"betrayal":1}
+  death clusters (>=3/day): none
+  ambush-caused fallen: [{"who":"Elena","day":14,"cause":"ambush"}]
+  (samples.deaths, all recorded incl. outsiders: 54 — NOT village deaths)
+  census: seed 45704, day 103, alive 2 | - Olivia (social_worker, ?) trust=61 mood=warm npcAbilities=0
+  M6 nightlyNews: strandedDays=4 burst=54 settle=26 witness=8 tale=18 | emitted-AWAY(strict on-tile) burst=14 settle=0 witness=0 tale=0 | emitted-AWAY-GATE(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=27 settled=26 queuedAtEnd=0
+  M4 transcripts=111 naturalEnds=84 nearDupFlags=32
+  M4 FLAG jaccard>=0.5 [A-day1-nudge gen_u4dql9d] :: we're still on what you think happened to us. || We're going in circles — still on what you think happened to us. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request gen_u4dql9d] :: You show them Wood Sorrel — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks. || You show them American Hazelnut — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_fgw6vuk] :: What's the kindest thing someone's done for you out here? || we're still on the kindest thing someone's done for you.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_fgw6vuk] :: we're still on the kindest thing someone's done for you. || We're going in circles — still on the kindest thing someone's done for you. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_eph37bf] :: Your partner is inside the Haven hall. Go through the door to meet them. || We're going in circles — Your partner is inside the Haven hall. Go through the door to meet them. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request gen_fgw6vuk] :: You show them Serviceberry — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them American Hazelnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_eph37bf] :: Meet at Haven at dawn on day 34. Each of you will carry two liters back. || We're going in circles — Meet at Haven at dawn on day 34. Each of you will carry two liters back. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request gen_eph37bf] :: You show them Dandelion — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Staghorn Sumac — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know.
+  M4 FLAG jaccard>=0.5 [B-first-meeting app_mgpspigw284] :: Stand beside them first — same side of the Haven door — then help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [B-first-meeting app_mgpspigw284] :: You need to be right next to them, same side of the Haven door, to help. || Get to their side of the Haven door and stand next to them — then you can help.
+  M4 FLAG jaccard>=0.5 [B-first-meeting app_mgpspigw284] :: You need to be right next to them, same side of the Haven door, to help. || Move next to them, on the same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship olivia_bennett] :: Your partner is inside the Haven hall. Go through the door to meet them. || We're going in circles — Your partner is inside the Haven hall. Go through the door to meet them. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request olivia_bennett] :: You show them Wood Sorrel — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them American Hazelnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG same-opening [D-talk-request olivia_bennett] :: You show them Wood Sorrel — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Dandelion — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks.
+  M4 FLAG same-opening [D-talk-request olivia_bennett] :: You show them American Hazelnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that. || You show them Dandelion — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_fgw6vuk] :: Move next to them, on the same side of the Haven door, to help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG jaccard>=0.5 [C-friendship gen_fgw6vuk] :: Get to their side of the Haven door and stand next to them — then you can help. || You need to be right next to them, same side of the Haven door, to help.
+  M4 FLAG same-opening [D-talk-request olivia_bennett] :: You show them Elderberry — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know. || You show them Stinging Nettle — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one.
+  M4 FLAG same-opening [D-talk-request olivia_bennett] :: You show them Elderberry — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know. || You show them Senegal Date Palm — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG same-opening [D-talk-request olivia_bennett] :: You show them Elderberry — where it grows, how to tell it apart. They nod slowly, committing it to memory. "Good to know. Really good to know. || You show them Purslane — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks.
+  M4 FLAG same-opening [D-talk-request olivia_bennett] :: You show them Stinging Nettle — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Senegal Date Palm — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG same-opening [D-talk-request olivia_bennett] :: You show them Stinging Nettle — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Purslane — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks.
+  M4 FLAG same-opening [D-talk-request olivia_bennett] :: You show them Senegal Date Palm — where it grows, how to tell it apart. Their eyes widen. "I never knew that. || You show them Purslane — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks.
+  M4 FLAG jaccard>=0.5 [D-talk-request gen_fgw6vuk] :: You need edible, unspoiled food in your pack. Food in the pantry must be collected first. || We're going in circles — You need edible, unspoiled food in your pack. Food in the pantry must be collected first. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request olivia_bennett] :: Back home nobody noticed me. Here — here I could be someone. I need that to be true. || Back home I was invisible. Here, someone might actually see me. I need that to be true.
+  M4 FLAG jaccard>=0.5 [D-talk-request olivia_bennett] :: You need edible, unspoiled food in your pack. Food in the pantry must be collected first. || We're going in circles — You need edible, unspoiled food in your pack. Food in the pantry must be collected first. Ask me something else if you want.
+  M4 FLAG same-opening [D-talk-request olivia_bennett] :: You asked me that before. It's a different question now." "They say the table's coming. For us. I keep thinking about what we'd even bring to it. || You asked me that before. It's a different question now." "Alfredo keeps me sane. Everyone needs one person who'd notice if they stopped showing up.
+  M4 FLAG same-opening [D-talk-request thabo_maseko] :: You show them Wood Sorrel — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks. || You show them American Hazelnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one.
+  M4 FLAG same-opening [D-talk-request thabo_maseko] :: You show them Wood Sorrel — where it grows, how to tell it apart. A short laugh. "And I've been walking past it for weeks. || You show them Water Chestnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG same-opening [D-talk-request thabo_maseko] :: You show them American Hazelnut — where it grows, how to tell it apart. "Huh." They turn it over in their mind. "I'll remember that one. || You show them Water Chestnut — where it grows, how to tell it apart. Their eyes widen. "I never knew that.
+  M4 FLAG jaccard>=0.5 [D-talk-request olivia_bennett] :: Wound care requires an untreated wound below 70 health and no current illness. || We're going in circles — Wound care requires an untreated wound below 70 health and no current illness. Ask me something else if you want.
+  M4 FLAG jaccard>=0.5 [D-talk-request olivia_bennett] :: You need edible, unspoiled food in your pack. Food in the pantry must be collected first. || We're going in circles — You need edible, unspoiled food in your pack. Food in the pantry must be collected first. Ask me something else if you want.
+  M11 recap-empty flags=0 of 32 (bar: >=10 panel-wide lands the job-B1 pool fix)
+  M12 door-req flags=7 of 32 (r189 anchor 86/143) maxDoorServesInSitting=6 [C-friendship gen_eph37bf turns=9] totalDoorServes=19
+  M12-native threeTimes total=10 maxPerSitting=1 sittings2plus=0 exits=67 [worst C-friendship gen_eph37bf turns=9]
+  B5 funeral: lines=5 stats={"funerals":4,"linksMended":5,"kcalSpent":7047}
+    FUNERAL d34 [narration] 🕯️ Oliver's funeral feast: 1,500 kcal from the pantry, and every shaken fire is fed — Stonebridge. The village mourns together, and the links hold because the dead are honored, not because the grief was forgotten. (Trus
+    FUNERAL d42 [narration] 🕯️ Emma's funeral feast: 1,497 kcal from the pantry, and every shaken fire is fed — Stonebridge. The village mourns together, and the links hold because the dead are honored, not because the grief was forgotten. (Trust 
+    FUNERAL d57 [narration] 🕯️ Chanchal's funeral feast: 1,500 kcal from the pantry, and every shaken fire is fed — Emberhold. The village mourns together, and the links hold because the dead are honored, not because the grief was forgotten. (Trus
+    FUNERAL d87 [narration] 🕯️ Ines's funeral feast: 2,550 kcal from the pantry, and every shaken fire is fed — Emberhold, The Hungry Road. The village mourns together, and the links hold because the dead are honored, not because the grief was for
+    FUNERAL d98 [narration] 🕯️ Alfredo's funeral feast: the pantry holds nothing to feed a shaken fire — Stonebridge go unmended. The village mourns together anyway; the links stay shaken. (Trust -8 stands.)
+  M4 CANDIDATE [D-talk-request olivia_bennett turns=10 naturalEnd=true]:
+    NPC: "We never finished talking about what they confided — we left it mid-thought. 'Alright, love. Go do what you need to do.'"
+    NPC: "Walk my trap line with me? Extra hands, extra eyes."
+    YOU: "All right. Let's go."
+    NPC: "Here. I made an extra." Olivia presses something into your hand — a decent tool, oiled and kept. (Useful. Keep it.)
+    YOU: "That stays between us."
+    NPC: "Thank you. I needed someone to know, and now someone does. Please keep it there."
+    YOU: "You said something odd the other day. Let's talk about it."
+    NARR: Something crosses their face — quick, then gone. The practiced expression clicks back into place.
+    NARR: *You've seen the smooth deflect before — it buys them time, not truth. Thin evidence gets deflected. Bring one more thread before you go again.*
+    YOU: "I need to ask you something."
+    NPC: "Okay." Olivia looks down. "Okay, you got me. I'm not from Denver. I'm from Melbourne, Australia. The truth felt small. The lie felt like someone worth keeping around." Their voice is small.
+    YOU: "You said something odd the other day. Let's talk about it."
+    NPC: "You're really going to make me say it again?" Olivia rubs their face. "Fine — but it's the same truth as last time."
+    YOU: "What do you want to know? Ask me anything."
+    NPC: "Do you believe in anything? Now, I mean. After everything."
+    YOU: "Yes."
+    NPC: "I see." They take a moment to think about your answer.
+    YOU: "Wait — what were we talking about?"
+    NPC: "Still on that question."
+    YOU: "Wait — what were we talking about?"
+    NPC: "Like I said — we're still on that question."
+    YOU: "Wait — what were we talking about?"
+    NPC: "We're going in circles — still on that question. Ask me something else if you want."
+    NPC: "I could talk all day, but — go on. We'll talk more."
+    YOU: "..."
+    NPC: A comfortable quiet settles. They smile a little, and let it be.
+    NPC: "Good talk. I feel like I know you a little better now."
+    NPC: They're smiling as you go. "Come back anytime."
+
+PANEL lure/party decisions: {"lure:decline":346,"bond:accept":6,"lure:accept":357,"bond:decline":15,"party:accept":22,"party:decline":7}
+PANEL lure-by-inviter: {"NPC:lure:decline":346,"NPC:bond:accept":6,"NPC:lure:accept":357,"NPC:bond:decline":15,"player:party:accept":22,"player:party:decline":7}
+PANEL successions: [{"day":58,"from":"Gabriel","to":"Morgan","seed":45701},{"day":78,"from":"Morgan","to":"Esteban","seed":45701},{"day":92,"from":"Esteban","to":"Sanne","seed":45701},{"day":107,"from":"Sanne","to":"Ivy","seed":45701},{"day":135,"from":"Ivy","to":"Chris","seed":45701},{"day":45,"from":"Luna","to":"Adriano","seed":45702},{"day":52,"from":"Adriano","to":"Nadia","seed":45702},{"day":56,"from":"Nadia","to":"Kwame","seed":45702},{"day":119,"from":"Kwame","to":"Monique","seed":45702},{"day":136,"from":"Monique","to":"Samuel","seed":45702},{"day":8,"from":"Luz","to":"Natalie","seed":45703},{"day":43,"from":"Natalie","to":"James","seed":45703},{"day":64,"from":"James","to":"Jack","seed":45703},{"day":85,"from":"Jack","to":"Ines","seed":45703},{"day":92,"from":"Ines","to":"Victor","seed":45703},{"day":96,"from":"Victor","to":"Eduardo","seed":45703},{"day":34,"from":"Oliver","to":"Marco","seed":45704},{"day":36,"from":"Marco","to":"Emma","seed":45704},{"day":42,"from":"Emma","to":"Daniela","seed":45704},{"day":45,"from":"Daniela","to":"Chanchal","seed":45704},{"day":57,"from":"Chanchal","to":"Ines","seed":45704},{"day":88,"from":"Ines","to":"Thabo","seed":45704},{"day":93,"from":"Thabo","to":"Alfredo","seed":45704},{"day":99,"from":"Alfredo","to":"Olivia","seed":45704}]
+PANEL propose* calls: 19 {"proposeLink:engine":19}
+PANEL bond_proposed: total=133 byInitiatorKind={"villager":133} byKind={"person":47,"link":86} byOutcome={"accepted":33,"staged":57,"expired":28,"refused":15} byKindOutcome={"person:accepted":14,"link:staged":43,"link:accepted":19,"link:expired":24,"person:staged":14,"person:refused":15,"person:expired":4}
+PANEL bond_proposed: villagerPerson=47 villagerPersonAccepted=14 scholarPerson=0 linkRaises=86 linkAccepted=19 maxPerInitiator=13 maxPerInitiatorPerson=4 personPerInitiator={"villager:Esteban":3,"villager:Ivy":2,"villager:Morgan":1,"villager:Daniyar":2,"villager:Sanne":3,"villager:Nina":4,"villager:Nora":3,"villager:Luis":1,"villager:Leo":1,"villager:Kwame":1,"villager:Monique":2,"villager:Elena":3,"villager:Ines":2,"villager:Carlos":3,"villager:Nikolai":1,"villager:Vito":1,"villager:Jack":3,"villager:James":2,"villager:Eduardo":3,"villager:Nena":1,"villager:Daniela":1,"villager:Chanchal":1,"villager:Emma":2,"villager:Alfredo":1} perInitiator={"villager:Esteban":5,"villager:Vito":13,"villager:David":2,"villager:Ivy":2,"villager:Morgan":1,"villager:Daniyar":6,"villager:Sanne":11,"villager:Nina":4,"villager:Nora":5,"villager:Luis":1,"villager:Leo":3,"villager:Ines":12,"villager:Adriano":4,"villager:Monique":6,"villager:Kwame":1,"villager:Elena":3,"villager:Carlos":3,"villager:Nikolai":1,"villager:Onni":4,"villager:Jack":11,"villager:Ji":6,"villager:James":4,"villager:Victor":2,"villager:Eduardo":7,"villager:Nena":1,"villager:Daniela":1,"villager:Chanchal":1,"villager:Alfredo":5,"villager:Emma":2,"villager:Olivia":6}
+PANEL bond_proposed verdict: ANSWERED — ≥1 villager-initiated bond proposal in the wild
+PANEL end bonds per seed: [108,89,80,88]
+PANEL bond initiator recorded by engine: YES (see samples above)
+PANEL M2 rate watch: proposals=133 livedDays=489 perVillageDay=0.272 (r195 0.328, r200 0.177; watch only, no bar)
+PANEL plots: 7 (late d30+: 1)
+PANEL plots with grievanceTargetToLeader > 0: 0 | either-direction grievance-linked: 4 of 7
+PANEL grievance-holder -> later leader cases: 3
+  {"seed":45703,"plot":"plot_3","leader":"Eduardo","plotDay":34,"grievances":["voted_for_petitioners->Natalie d26 sev14"]}
+  {"seed":45704,"plot":"plot_5","leader":"Leo","plotDay":12,"grievances":["voted_guilty->Oliver d10 sev22"]}
+  {"seed":45704,"plot":"plot_7","leader":"Leo","plotDay":14,"grievances":["voted_guilty->Oliver d10 sev22"]}
+PANEL arms: 7 (late d30+: 1) grievanceTargetToLeader>0: 6 grievance-linked at arming: 7 reasons grievance-linked: 7/7 (reasons bar is the binding judge)
+PANEL vendetta: maxUnordered=4 maxDirected=4 topUnordered=[{"pair":"Elena<->Leo","n":4},{"pair":"Monique<->Valeria","n":1},{"pair":"James<->Onni","n":1},{"pair":"Eduardo<->Natalie","n":1}] topDirected=[{"pair":"Leo->Elena","n":4},{"pair":"Monique->Valeria","n":1},{"pair":"Onni->James","n":1},{"pair":"Eduardo->Natalie","n":1}]
+  VENDETTA pair=Elena<->Leo arms=4 d6-d14 span=8d
+PANEL springs: 6 outcomes: {"killed":2,"escaped":4}
+PANEL escaped springs: 4
+PANEL expired plots: 1
+PANEL villages past d100: 4/4
+PANEL M6 haven-news: strandedDays=39 deliveredAtHaven burst=264 settle=129 witness=32 tale=93 | emittedAway(strict on-tile) burst=48 settle=5 witness=0 tale=0 | emittedAwayGate(radius-1) burst=0 settle=0 witness=0 tale=0 debatesKicked=133 namesSettled=131
+PANEL M6 verdict (RE-ALIGNED, gate definition): GO — no naming-beat line was emitted beyond radius-1 of Haven, debates alive
+PANEL M6 strict-definition note: strict on-tile away total=53 — reported as the known metric/gate definition discrepancy, does NOT fail M6 this run (prereg).
+PANEL M4: transcripts=500 nearDupFlags=168 candidatesPrinted=4/4 — verdict in run note from the printed candidates above
+PANEL M11: recap-empty flags=0 of 168 near-dup flags (0.00% of 500 conversations) (r181 anchor 19; bar >= 10 lands the job-B1 pool fix)
+PANEL M12: door-req flags=96 of 168 near-dup flags (19.20% of 500 conversations) (r189 anchor 86/143) worstSitting={"max":9,"tag":"D-talk-request","vid":"gen_qp1yplb","turns":11,"total":100,"seed":45701}
+PANEL M12-native: threeTimes total=56 maxPerSitting=1 sittings2plus=0 exits=172 (11.20% of 500 conversations) (revised bar: max<=1, 0 sittings 2+, exits>=1)
+PANEL B5 funeral: lines=19 perSeed=[{"seed":45701,"lines":5,"stats":{"funerals":5,"linksMended":20,"kcalSpent":30000}},{"seed":45702,"lines":4,"stats":{"funerals":4,"linksMended":17,"kcalSpent":25500}},{"seed":45703,"lines":5,"stats":{"funerals":4,"linksMended":14,"kcalSpent":20380}},{"seed":45704,"lines":5,"stats":{"funerals":4,"linksMended":5,"kcalSpent":7047}}]
+PANEL goal-thread offers: moreOffered=0 reactOffered=3398 (agree=0 joke=0 silence=3398) followGoalOffered=0 longestContinuerRun=4
+PANEL COUNTER: proposeLink=19 counter=1 fresh=19 freshCounter=1 blocked=0 blockedCounter=0 settles=1 linkFormed=1 failed=0 pendingCounterEnd=[null,null,null,null]
+PANEL COUNTER re-raises after a link-forming settle (BLOCKED): 0 []
+PANEL COUNTER fresh re-links after a link-forming settle: 0 []
+PANEL M8 verdict: SETTLED — ≥1 link formed via a driver settle, no BLOCKED re-raise after it
+PANEL CONFESS: total=70 confessed=12 byOutcome={"deflected":48,"confessed":12,"already-confessed":5,"attacked":4,"cleared":1} sittingsWithConfession=12 singleSittings=12 doubleSittings=0 outsideSittingConfessed=0
+PANEL RE-OFFER: conversations=508 withReoffer=496 panelMax=12 panelMaxFurnitureFree=12
+  RE-OFFER [A-day1-nudge ivy_wang] max=9 id=leave maxFF=8 idFF=dlg:favor_requirements perId={"dlg:favor_requirements":8,"dlg:details":1,"dlg:cant":8,"dlg:commit":8,"goon":3,"dlg:subject":8,"leave":9,"silence":9}
+  RE-OFFER [A-day1-nudge ivy_wang] max=9 id=leave maxFF=8 idFF=dlg:subject perId={"dlg:favor_requirements":6,"dlg:details":1,"dlg:cant":7,"dlg:commit":7,"goon":3,"dlg:subject":8,"leave":9,"silence":9,"recap":1}
+  RE-OFFER [B-first-meeting gen_ebikpah] max=6 id=leave maxFF=4 idFF=dlg:subject perId={"ans:q_laugh_memory:a_deflect":1,"deflect_q":1,"ans:q_laugh_memory:a_tell":1,"ans:q_laugh_memory:a_vague":1,"ans:q_laugh_memory:honest_pass":1,"leave":6,"silence":6,"recap":3,"goon":3,"dlg:subject":4}
+  RE-OFFER [D-talk-request ivy_wang] max=9 id=leave maxFF=8 idFF=dlg:react perId={"dlg:more":6,"dlg:react":8,"teach":1,"goon":8,"dlg:subject":8,"leave":9,"silence":9,"recap":7}
+  RE-OFFER [B-first-meeting gen_bxlfcy5] max=9 id=leave maxFF=6 idFF=goon perId={"ans:q_laugh:a_story":1,"ans:q_laugh:a_nothing":1,"ans:q_laugh:a_dark":1,"leave":9,"silence":9,"recap":3,"goon":6,"dlg:subject":6,"ans:q_skill:a_deflect":1,"ans:q_skill:a_tell":1,"ans:q_skill:a_vague":1,"ans:q_skill:honest_pass":1}
+  RE-OFFER [D-talk-request ivy_wang] max=9 id=leave maxFF=6 idFF=dlg:subject perId={"deflect_q":2,"ans:q_name_day:a_count":1,"ans:q_name_day:a_lost":1,"ans:q_name_day:a_guess":1,"ans:q_name_day:honest_pass":1,"leave":9,"silence":9,"recap":3,"goon":4,"dlg:subject":6,"ans:q_guilty:a_deflect":1,"ans:q_guilty:a_tell":1,"ans:q_guilty:a_vague":1}
+  RE-OFFER [D-talk-request ivy_wang] max=8 id=leave maxFF=7 idFF=teach perId={"teach":7,"dlg:subject":7,"leave":8,"silence":8,"recap":3,"goon":4}
+  RE-OFFER [D-talk-request ivy_wang] max=11 id=leave maxFF=8 idFF=dlg:subject perId={"dlg:subject":8,"leave":11,"silence":11,"alive:event:tension":1,"alive:thread:goal":2,"alive:memory:deflected":2,"alive:memory:gift":2,"alive:want:warn_you":2,"menu:more":2,"dlg:more":6,"recap":6,"goon":3,"dlg:react":5,"ask:goal":1}
+  RE-OFFER [C-friendship gen_qp1yplb] max=8 id=leave maxFF=5 idFF=dlg:subject perId={"ans:q_kindness:a_tell":1,"ans:q_kindness:a_vague":1,"ans:q_kindness:honest_pass":1,"leave":8,"silence":8,"recap":3,"goon":4,"dlg:subject":5,"betrayal:accept":1,"betrayal:decline":1,"alive:event:tension":1,"ask:goal":1,"ask:others":1,"ask:gossip":1,"ask:spread_rumor":1,"menu:more":1}
+  RE-OFFER [D-talk-request aroha_ngata] max=10 id=leave maxFF=9 idFF=dlg:favor_requirements perId={"dlg:favor_requirements":9,"dlg:details":1,"dlg:cant":9,"dlg:commit":9,"dlg:subject":9,"leave":10,"silence":10,"goon":2}
+  RE-OFFER [D-talk-request aroha_ngata] max=10 id=leave maxFF=9 idFF=dlg:subject perId={"dlg:favor_requirements":7,"dlg:details":1,"dlg:cant":8,"dlg:commit":8,"dlg:subject":9,"leave":10,"silence":10,"goon":2,"recap":1}
+  RE-OFFER [C-friendship gen_ebikpah] max=8 id=leave maxFF=7 idFF=dlg:more perId={"dlg:more":7,"dlg:react":7,"dlg:doubt":2,"dlg:subject":6,"confront:d_14o9dfc":3,"leave":8,"silence":3,"party_name":7,"menu:more":3,"confront:d_d40fpea":1,"recap":3,"goon":2}
+PANEL DROPPED-THREAD: conversations=508 drops=21
+  DROP [D-talk-request ivy_wang] :: "...Sorry, lost my train of thought."
+    ctx NPC: "We never finished talking about that plant lesson — we left it mid-thought. 'Okay. We'll pick this up later.'"
+    ctx YOU: "That doesn't quite add up."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=2]:
+      NPC: "People are smiling. I forgot what that looked like."
+      YOU: "Hold on, back up. Then what?"
+      NPC: "...I should say, I trade in what I know. My knowledge for yours. Or food, if you're short on secrets."
+  DROP [D-talk-request david_kim] :: "...Sorry, lost my train of thought."
+    ctx NPC: "This is nice. Just — being around people. I forget how much I need it."
+    ctx YOU: "That doesn't quite add up."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=8]:
+      NPC: "Where are you from — originally? Before all this."
+      YOU: (change the subject)
+      NPC: "Right." They look away, and the question dies where it stood.
+  DROP [D-talk-request gen_dgi5ih5] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Alright, I'm listening. What's next?"
+    ctx YOU: "What do you want to know? Ask me anything."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=9]:
+      NPC: "About that question — What do you miss most? From before."
+      YOU: (change the subject)
+      NPC: "Okay." Something shutters, just slightly.
+  DROP [D-talk-request elena_petrova] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Thank you. I needed someone to know, and now someone does. Please keep it there."
+    ctx YOU: "Want some company? No agenda."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=8]:
+      NPC: "The pantry's nearly bare. Will you forage with me tomorrow? Two pairs of eyes, twice the ground."
+      YOU: "Tell me why you need this."
+      NPC: "Another day like today and we're choosing who eats. Meet me at the east treeline and we'll fill packs before dark."
+  DROP [D-talk-request raj_patel] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Well." A breath. "That's where things stand."
+    ctx YOU: "Sure. Sit."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=2]:
+      NPC: "We never finished talking about that visit — we wandered off it. '...Never mind me. What were you going to say, as it were?'"
+      YOU: "I've been watching. Things don't add up. Talk to me."
+      NARR: Something crosses their face — quick, then gone. The practiced expression clicks back into place.
+  DROP [C-friendship ines_duarte] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Right. Sorry, I go on about it. What did you want?"
+    ctx YOU: "What do you want to know? Ask me anything."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [C-friendship turns=9]:
+      NPC: "About staying close tonight — I hate to ask twice, but it's still open. Will you?"
+      YOU: "Tell me why you need this."
+      NPC: "The dark's full of sounds tonight and my head keeps turning them into something. I don't need talking — just someone near."
+  DROP [D-talk-request gen_fgw6vuk] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Anyway — that's my cross to carry. What's on your mind?"
+    ctx YOU: "What do you want to know? Ask me anything."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=11]:
+      NPC: "We never finished talking about who you left behind — we wandered off it. 'The moment passes without landing. Not yet.' We still owe wanting to make the System
+      YOU: "Go on."
+      NPC: "I wish there was more to tell. That's it."
+  DROP [D-talk-request gen_fgw6vuk] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Right — go on, I'm listening."
+    ctx YOU: "I owe you. Let me make it right — what do you need?"
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=12]:
+      NPC: "Hey. The day's been long. Yours too, probably. Talk to me."
+      NPC: Alfredo has an edge today — something curdled.
+      YOU: "Wait — what were we talking about?"
+  DROP [D-talk-request gen_fgw6vuk] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Go ahead — you've got my attention."
+    ctx YOU: "I owe you. Let me make it right — what do you need?"
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=11]:
+      NPC: "So what's your plan here? Just... get through it?"
+      YOU: "One day at a time."
+      NPC: "Honest. I can work with honest."
+  DROP [D-talk-request olivia_bennett] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Good times. What did you want to talk about?"
+    ctx YOU: "I owe you. Let me make it right — what do you need?"
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=12]:
+      NPC: "Can we talk?" Olivia shifts their weight. "I need something to do. Anything. Please."
+      NPC: "Come see what I found. You won't believe it."
+      YOU: "All right. Let's go."
+  DROP [D-talk-request olivia_bennett] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Go ahead — you've got my attention."
+    ctx YOU: "I owe you. Let me make it right — what do you need?"
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=12]:
+      NPC: "You said something took us. Something big. I keep watching the sky since you said it."
+      NPC: They grin when they spot you — unguarded, for once.
+      YOU: (listen)
+  DROP [D-talk-request olivia_bennett] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Well." A breath. "That's where things stand."
+    ctx YOU: "We're square."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=11]:
+      NPC: "Ha. You again. I don't mind this."
+      YOU: (listen)
+      NPC: "So." They look at the fire for a moment.
+  DROP [D-talk-request olivia_bennett] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Sure — what's on your mind?"
+    ctx YOU: "I owe you. Let me make it right — what do you need?"
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=12]:
+      NPC: Olivia: "I've heard good things about Stonebridge. We should link with them — we'd be stronger together."
+      NPC: "Walk with me? I want another pair of eyes on something."
+      YOU: "All right. Let's ask them."
+  DROP [D-talk-request olivia_bennett] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Alright, I'm listening. What's next?"
+    ctx YOU: "I owe you. Let me make it right — what do you need?"
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [C-friendship turns=10]:
+      NPC: "Hey. The day's been long. Yours too, probably. Talk to me."
+      NPC: "Walk with me? I want another pair of eyes on something."
+      YOU: "All right. Let's go."
+  DROP [C-friendship olivia_bennett] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Right — go on, I'm listening."
+    ctx YOU: "I owe you. Let me make it right — what do you need?"
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [C-friendship turns=7]:
+      NPC: "About the food I needed — I still haven't found anyone. Any chance?"
+      YOU: "Tell me why you need this."
+      NPC: "I haven't eaten right in days. I can't pull my weight like this. Anything you can spare, I'll make it stretch."
+  DROP [D-talk-request olivia_bennett] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Well." A breath. "That's where things stand."
+    ctx YOU: "Don't mention it."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=12]:
+      NPC: "We never finished talking about the others — we got cut off. 'Okay. We'll pick this up later.'"
+      YOU: (listen)
+      NPC: "So." They look at the fire for a moment.
+  DROP [D-talk-request olivia_bennett] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Yeah? What's up?"
+    ctx YOU: "I owe you. Let me make it right — what do you need?"
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=12]:
+      NPC: "You said you're still figuring everyone out. Figure anything out yet? Anyone you're watching?"
+      YOU: (listen)
+      NPC: They nod slowly, not quite done, not quite continuing.
+  DROP [D-talk-request olivia_bennett] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Go ahead — you've got my attention."
+    ctx YOU: "I owe you. Let me make it right — what do you need?"
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=12]:
+      NPC: "We never finished talking about the others — we wandered off it. 'So. They look at the fire for a moment.' How are you holding up, though?"
+      YOU: "Honestly? Not great."
+      NPC: "Thank you for saying it straight. Most people perform. I'm tired of performances." You feel oddly steadier.
+  DROP [D-talk-request olivia_bennett] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Right — go on, I'm listening."
+    ctx YOU: "What do you want to know? Ask me anything."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [C-friendship turns=11]:
+      NPC: "We never finished talking about what's been happening — we wandered off it, 2 days back. 'That's the whole of it. Sorry.' We still owe whether you've hurt some
+      NPC: "Come get air with me. I need to think out loud."
+      YOU: "All right. Let's go."
+  DROP [C-friendship gen_fgw6vuk] :: "...Sorry, lost my train of thought."
+    ctx NPC: "Alright, I'm listening. What's next?"
+    ctx YOU: "What do you want to know? Ask me anything."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting: NONE (no later conversation with this villager in the seed)
+  DROP [D-talk-request olivia_bennett] :: "...Sorry, lost my train of thought."
+    ctx NPC: "...Never mind me. What were you going to say?"
+    ctx YOU: "Is there something you need? Really."
+    ctx NPC: "...Sorry, lost my train of thought."
+    next sitting [D-talk-request turns=11]:
+      NPC: "Please — tell me you've got food to spare. I'm past hungry here. I can't keep going like this."
+      YOU: "Tell me why you need this."
+      NPC: "It's been too long since a real meal. I need food before I can't work at all."
+PANEL RECAP: maxPresses=3 totalPresses=475 offeredAfterCap=0 capFailures=0
+PANEL M9 verdict: HOLDS — recap cap fires in the wild
+PANEL NARR-DUP: conversations=508 verbatimRepeats=0 coachVerbatim=0 faceVerbatim=0 panelMaxSameNarr=1 nearDupFlags=0
+PANEL M10 verdict: HOLDS — no NARR coach line repeats verbatim inside one sitting
+PANEL FACE verdict: HOLDS — no accuseFace line repeats verbatim inside one sitting (r179 face guard holds)
+PANEL SCATTERING: villages ended scattered=2/4 [{"seed":45703,"day":108,"hungryDays":3,"aliveEnd":5,"endReason":"village-lost"},{"seed":45704,"day":103,"hungryDays":3,"aliveEnd":2,"endReason":"village-lost"}]
