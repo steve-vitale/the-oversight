@@ -113,6 +113,7 @@ let spotterWatch90 = []; // r219 Q5 (r207-owed): the d90 spotter/foodXp snapshot
 let monsterWatch = []; // r219 Q5/W5-INSTANCE (r207-owed): daily worldMonsters() snapshot {day, monsters:[{id,wave,tx,ty,mx,my,hp,maxHp,veteran,lingerKey}]} — the live wave-5 entity census, so the analyzer can tell one wounded Editor fought again from fresh full-HP spawns. READ-ONLY.
 let fightInst = []; // r219 W5-INSTANCE (r207-owed): per-fight entity identity rows (scholar startCombat + villager fieldFight). READ-ONLY wrappers, forward exactly.
 let sortieWatch = []; // r219 arm B (r215-owed W5-INSTANCE): one row per day with lingerers — {day, seen, minHp, sumHp, held, called, cleared, broke} — plus a 'none' row is never written (absence of a row IS the no-lingerer day). Arm A: always empty.
+let raiseDebug = []; // r219 PROBE (RAISE_DEBUG=1): bondChoices calls where a link raise is pending — the flag state + offered choices + THEM lines so far. Read-only logging, no game effect.
 
 // R27 dedup instrument (journey-scale r27 2026-10-24): day-attributed capture
 // of the two BIGGER-STAGE beat classes — game.js Beat 4 (scalePointerW4) vs
@@ -611,7 +612,7 @@ async function playSeed(seed) {
   natGateWatch = []; // R103: reset per seed like every other watch (r103 fix — the first panel run accumulated rows across seeds)
   scRows = []; scKillSamples = []; scKillErrors = []; // r130: scholar-counts census reset per seed
   vetbarWatch = []; // r133: vetbar reset per seed
-  spotterWatch90 = []; monsterWatch = []; fightInst = []; sortieWatch = []; _sortieLastDay = null; // r219: d90 spotter + world-monster census + fight-instance rows + sortie rows reset per seed
+  spotterWatch90 = []; monsterWatch = []; fightInst = []; sortieWatch = []; raiseDebug = []; _sortieLastDay = null; // r219: d90 spotter + world-monster census + fight-instance rows + sortie rows + raise-debug rows reset per seed
   console.log(`\n===== SEED ${seed} (trade road — charter pursuit) =====`);
   const { Game } = await loadGame({ seed, mode: 'journey-scale-r219-want-arm' + ARM });
   _G = Game;
@@ -685,6 +686,44 @@ async function playSeed(seed) {
         } catch (e) {}
         return rec;
       };
+    }
+  } catch (e) {}
+  // r219 PROBE (RAISE_DEBUG=1, read-only): wrap bondChoices to log every
+  // call where a link raise is pending for that villager — the
+  // linkRaiseSpoken flag, whether a convo record exists, the offered
+  // choice ids, and the THEM lines spoken so far. Answers HOW link:accept
+  // can be offered in a sitting where the raise was never voiced (the
+  // Felipe d130 Claudete shape). No RNG, no state mutation: the wrapper
+  // forwards exactly and only appends to raiseDebug.
+  // ALSO (same flag): wrap convoRecordSpokenBeat to log every flag-setting
+  // call while a raise is pending — the exact call that flips
+  // linkRaiseSpoken, with its tag + line. The flag can only be set here
+  // (or reset in startConvo), so this closes the mechanism question.
+  try {
+    if (process.env.RAISE_DEBUG === '1' && typeof Game.bondChoices === 'function') {
+      const _bc = Game.bondChoices.bind(Game);
+      Game.bondChoices = function (vid) {
+        const out = _bc(vid);
+        try {
+          const pend = (typeof Game.pendingLinkRaise === 'function') ? Game.pendingLinkRaise(vid) : null;
+          if (pend) {
+            const c = (typeof Game.convoGet === 'function') ? Game.convoGet(vid) : null;
+            const tr = (c && Array.isArray(c.transcript)) ? c.transcript : [];
+            raiseDebug.push({ day: gday(), vid, village: pend.villageId || null, linkRaiseSpoken: c ? !!c.linkRaiseSpoken : null, convoExists: !!c, convoActive: c ? !!c.active : null, offered: (out || []).map(o => o.id), them: tr.filter(e => e && e.who === 'them').map(e => String(e.text || '').slice(0, 100)) });
+          }
+        } catch (e) {}
+        return out;
+      };
+      if (typeof Game.convoRecordSpokenBeat === 'function') {
+        const _rsb = Game.convoRecordSpokenBeat.bind(Game);
+        Game.convoRecordSpokenBeat = function (vid, line, opts) {
+          try {
+            const pend = (typeof Game.pendingLinkRaise === 'function') ? Game.pendingLinkRaise(vid) : null;
+            if (pend) raiseDebug.push({ day: gday(), vid, flagCall: true, tag: (opts && opts.tag) || null, line: String(line || '').slice(0, 100) });
+          } catch (e) {}
+          return _rsb(vid, line, opts);
+        };
+      }
     }
   } catch (e) {}
   let regLastSnapDay = -1;
@@ -1095,6 +1134,8 @@ async function playSeed(seed) {
   fs.writeFileSync(path.join(EVIDIR, `journey-scale-r219-trust-${seed}.json`), JSON.stringify(out, null, 1));
   // r219 arm B: the sortie ledger — one row per lingerer day (called or held).
   fs.writeFileSync(path.join(EVIDIR, `journey-scale-r219-sortie-${seed}.json`), JSON.stringify({ seed, arm: SORTIE ? 'B' : 'A', sortie: SORTIE, rows: sortieWatch }, null, 1));
+  // r219 PROBE (RAISE_DEBUG=1): the bondChoices ledger for pending raises.
+  if (process.env.RAISE_DEBUG === '1') fs.writeFileSync(path.join(EVIDIR, `journey-scale-r219-raisedebug-${seed}.json`), JSON.stringify({ seed, arm: SORTIE ? 'B' : 'A', rows: raiseDebug }, null, 1));
   // R109: one file per raise-answer talk (the r108 blank — the talks were
   // invisible to the instruments). Read by the people check in full.
   try {
@@ -1238,7 +1279,7 @@ async function playSeed(seed) {
       results.push({ seed, crash: String(e && e.message || e) });
     }
   }
-  console.log('\n===== R215 SUMMARY =====');
+  console.log('\n===== R219 SUMMARY =====');
   for (const r of results) {
     if (r.crash) { console.log(`seed ${r.seed}: CRASH ${r.crash}`); continue; }
     console.log(`seed ${r.seed}: day=${r.day} over=${r.over} won=${r.won} pop=${r.popAlive}/${r.popTotal} lead=${r.leadActive}/${r.leadSeasoned} rank=${r.scaleRank} natV=${r.nationalVoiced} globV=${r.globalVoiced} proposed=${r.proposedLead} lr=${r.linkraise ? (r.linkraise.raisesAnswered + '/' + r.linkraise.raisesSeen + ' err' + r.linkraise.errors) : '-'} lrTalks=${(r.raiseTalks||[]).length} tended=${r.tended} defense=${r.defenseCalls} seat=${r.tableSeat} arc=${r.arcNow} tW=${r.tableWaiting} sit=${r.sitStats ? (r.sitStats.taken + '/' + r.sitStats.previewSeen) : '-'} door=${r.modalStats ? ((r.modalStats.doors||[]).map(d=>d.door).join(',')||'-') : '-'} gAns=${(r.globalNotes||[]).length}`);

@@ -6660,6 +6660,21 @@
             catch (e) { alt = null; }
             if (alt && !this.convoWouldBlock(vid, alt)) {
               goonText = alt;
+              // JOURNEY-SCALE R219 (2026-11-16): the substituted text is a
+              // thread beat, NOT the held ask — the ask's tag must not
+              // travel with it. Keeping the linkraise/bondproposal tag here
+              // set linkRaiseSpoken (or bondProposalSpoken) for a line that
+              // never voiced the proposal, offering link:accept for a
+              // proposal never heard — the Felipe d130 blind-accept shape
+              // ("Huh. I wouldn't have guessed that about you." spoken
+              // with tag 'linkraise' because the held raise line was
+              // run-blocked, having been spoken on d128). The held ask
+              // stays pending for a later sitting; this turn speaks only
+              // the thread beat, so its tag is the thread's own. (The
+              // else branch below already resets the opts for its
+              // fallback line — this branch was the only one leaking the
+              // tag onto substitute text.)
+              goonOpts = {};
             } else {
               goonText = (typeof this.convoUnfinishedEngageLine === 'function')
                 ? this.convoUnfinishedEngageLine(vid)
