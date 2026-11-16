@@ -407,11 +407,21 @@ async function determinism() {
   // 150d live run: the path-coverage check — on the instrument tip the
   // world-tick call is ON, so all four paths can fire; every recorded
   // row must carry a named path, and at least one row must exist.
+  // In the OFF (post-revert) shape the world-tick call is ABSENT, so
+  // the >=1-row assertion does not apply: seed 102131 records 0 seed
+  // rows without the call (the control leg shows the same 0), and the
+  // check is that the run completes clean with every recorded row —
+  // if any — named. The >=1 assertion encodes the ON shape only.
   const long = childRun(150, {});
   const p150 = pathsNamed(long.full);
   const byPath = {};
   for (const r of (long.full.v4seeds || [])) byPath[r.path] = (byPath[r.path] || 0) + 1;
-  check('150d live run records >=1 seed row', p150.count >= 1, 'recorded ' + p150.count);
+  if (SEED_CALL_EXPECTED === 'on') {
+    check('150d live run records >=1 seed row', p150.count >= 1, 'recorded ' + p150.count);
+  } else {
+    check('150d live run (off shape): 0 seed rows on 102131, as the control leg shows (no world-tick call)',
+      p150.count === 0, 'recorded ' + p150.count);
+  }
   check('150d live run: every recorded seed row carries a NAMED path',
     !p150.bad, p150.bad ? JSON.stringify(p150.bad).slice(0, 300) : '');
   console.log('  info: 150d run seed rows by path ' + JSON.stringify(byPath) +

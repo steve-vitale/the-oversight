@@ -372,7 +372,14 @@ substitute here, and it is clean.
   102135 (diverges day 130, first world-tick seed day 129) and
   102131 (diverges day 42, first world-tick seed day 39).
 - **Proof:** 60/60 on the instrument tip, 60/60 in the off shape
-  after the revert.
+  after the revert. (Proof-test shape fix, committed after the
+  revert: the 150d path-coverage check asserted ">=1 seed row", which
+  only holds with the seed call ON — seed 102131 records 0 rows
+  without it, as the control leg shows. The check now branches on
+  `SEEDPATHS_SEED_CALL`: >=1 row when ON, 0 rows expected when OFF.
+  The ON-shape assertion is unchanged, so the instrument-tip 60/60
+  stands; the first off-shape run caught the bug at 59/60, the fix
+  re-runs 60/60.)
 
 ## Telemetry deviation check
 
