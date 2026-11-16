@@ -96,11 +96,8 @@
       avoidances: 0, seekContacts: 0, standingContacts: 0,
       veteranGuardHolds: 0, partyFights: 0, planSeeds: 0, stageAdvances: 0,
       bondTends: 0, musterStanddowns: 0, trickHolds: 0,
-      partyTrios: 0, partyDissolved: 0,
     };
     if (v.winPlanStats.trickHolds == null) v.winPlanStats.trickHolds = 0;
-    if (v.winPlanStats.partyTrios == null) v.winPlanStats.partyTrios = 0;
-    if (v.winPlanStats.partyDissolved == null) v.winPlanStats.partyDissolved = 0;
     if (v.winPlanStats.bondTends == null) v.winPlanStats.bondTends = 0;
     if (v.winPlanStats.musterStanddowns == null) v.winPlanStats.musterStanddowns = 0;
     return v;
@@ -214,54 +211,6 @@
     return null;
   }
 
-  // Launchability for a party companion, checked BEFORE the inviter
-  // launches (or before a second companion is added): gear them first
-  // (their own stash / the deposited armory / whittle, exactly what
-  // departure would do), then judge what they carry; the sick stay
-  // home, no range means no expedition, and hurt with no medicine and
-  // no healer sits out. Call only at launch time, never during dawn
-  // scoring — the gear-up itself spends village gear.
-  function companionLaunchable(self, cid) {
-    try { if (self.villagerGearUp) self.villagerGearUp(cid, true); } catch (e) {}
-    var cg = gearOf(self, cid);
-    if (!cg.armed && !cg.armored) return false;
-    // LAUNCHABILITY (checked BEFORE the inviter launches): a hurt
-    // villager cannot set off on an expedition. The sick stay home.
-    // Range-0 villagers (never leave) can't be put on an expedition.
-    try { if ((self.state.village.sick || {})[cid]) return false; } catch (e) {}
-    try { if (self.npcMaxDist && self.npcMaxDist(cid) < 1) return false; } catch (e) {}
-    try {
-      var ch = ((self.state.village.health || {})[cid] !== undefined) ? self.state.village.health[cid] : 100;
-      if (ch < 70) {
-        var canHeal = false;
-        try {
-          var st = self.stashState ? self.stashState() : null;
-          var meds = (st && st.medicine) || [];
-          var defs = {};
-          var items = self.data ? self.data.items : [];
-          for (var mi = 0; mi < items.length; mi++) if (items[mi]) defs[items[mi].id] = items[mi];
-          for (var mj = 0; mj < meds.length; mj++) {
-            var me = meds[mj];
-            if (((me.units != null ? me.units : 1) <= 0) || (me.doses != null && me.doses <= 0)) continue;
-            if (((defs[me.itemId || me.id] || {}).healAmount || 0) > 0) { canHeal = true; break; }
-          }
-        } catch (e2) {}
-        if (!canHeal) {
-          try {
-            var place = null;
-            try {
-              if (self.campPeopleIds && self.campPeopleIds('haven').indexOf(cid) !== -1) place = 'haven';
-              else if (self.campPeopleIds && self.campPeopleIds().indexOf(cid) !== -1) place = 'here';
-            } catch (e3) {}
-            if (place && self.campHealerId && self.campHealerId(place)) canHeal = true;
-          } catch (e2) {}
-        }
-        if (!canHeal) return false;
-      }
-    } catch (e) {}
-    return true;
-  }
-
   var methods = {
     winPlanOf(vid) {
       var v = stateOf(this);
@@ -373,24 +322,6 @@
             return null;
           }
         } catch (e) {}
-        // VETPARTY (sim-vetparty-a): the party persists until the type
-        // is killed or a member dies. A dead recorded party member
-        // dissolves the hunting party back to re-formation (stage
-        // 'party', party cleared) so the next launch re-forms from the
-        // living. Standing / table stages are not dissolved — their
-        // purpose is already banked, and the kill of the target type
-        // already advances hunt/party to standing via winPlanNoteKill.
-        if ((plan.stage === 'party' || plan.stage === 'hunt') && plan.party && plan.party.length) {
-          var deadMember = false;
-          for (var di = 0; di < plan.party.length; di++) {
-            if (!alive(this, plan.party[di])) { deadMember = true; break; }
-          }
-          if (deadMember) {
-            plan.party = [];
-            plan.stage = 'party';
-            bump(this, 'partyDissolved');
-          }
-        }
         if (plan.stage === 'gear') {
           try { if (this.villagerGearUp) this.villagerGearUp(vid, true); } catch (e) {}
           var g = gearOf(this, vid);
@@ -429,15 +360,52 @@
           if (!cid) return false;
           // The companion must be willing AND geared: gear them first
           // (their own stash / the deposited armory / whittle, exactly
-          // what departure would do), then judge what they carry. The
-          // launchability gates are shared with the second-companion
-          // path (companionLaunchable) — the order is the same: checked
-          // BEFORE the inviter launches, so a blocked companion never
-          // leaves the inviter out solo (the 180-day smoke caught it:
-          // 2 invites, 0 departures, inviter solo, because a hurt
-          // companion's startExpedition returned early after the
-          // inviter left).
-          if (!companionLaunchable(self, cid)) return false;
+          // what departure would do), then judge what they carry.
+          try { if (self.villagerGearUp) self.villagerGearUp(cid, true); } catch (e) {}
+          var cg = gearOf(self, cid);
+          if (!cg.armed && !cg.armored) return false;
+          // LAUNCHABILITY (checked BEFORE the inviter launches): the
+          // companion must be able to leave under the same gates
+          // startExpedition applies — hurt with no medicine and no
+          // healer sits out, the sick stay home, no range means no
+          // expedition. This is a pure read, not a second heal call:
+          // calling villagerHealCheck here would spend medicine (or a
+          // healer's care) twice, once here and once inside
+          // startExpedition. Getting this order wrong leaves the
+          // inviter out solo — the 180-day smoke caught it: 2 invites,
+          // 0 departures, inviter solo, because a hurt companion's
+          // startExpedition returned early after the inviter left.
+          try { if ((self.state.village.sick || {})[cid]) return false; } catch (e) {}
+          try { if (self.npcMaxDist && self.npcMaxDist(cid) < 1) return false; } catch (e) {}
+          try {
+            var ch = ((self.state.village.health || {})[cid] !== undefined) ? self.state.village.health[cid] : 100;
+            if (ch < 70) {
+              var canHeal = false;
+              try {
+                var st = self.stashState ? self.stashState() : null;
+                var meds = (st && st.medicine) || [];
+                var defs = {};
+                var items = self.data ? self.data.items : [];
+                for (var mi = 0; mi < items.length; mi++) if (items[mi]) defs[items[mi].id] = items[mi];
+                for (var mj = 0; mj < meds.length; mj++) {
+                  var me = meds[mj];
+                  if (((me.units != null ? me.units : 1) <= 0) || (me.doses != null && me.doses <= 0)) continue;
+                  if (((defs[me.itemId || me.id] || {}).healAmount || 0) > 0) { canHeal = true; break; }
+                }
+              } catch (e2) {}
+              if (!canHeal) {
+                try {
+                  var place = null;
+                  try {
+                    if (self.campPeopleIds && self.campPeopleIds('haven').indexOf(cid) !== -1) place = 'haven';
+                    else if (self.campPeopleIds && self.campPeopleIds().indexOf(cid) !== -1) place = 'here';
+                  } catch (e3) {}
+                  if (place && self.campHealerId && self.campHealerId(place)) canHeal = true;
+                } catch (e2) {}
+              }
+              if (!canHeal) return false;
+            }
+          } catch (e) {}
           // One shared target, so the legs stay together and the fight
           // engine can find the party: the plan's known node when there
           // is one, else a fresh ranging target in the usual shape.
@@ -464,44 +432,11 @@
             var a2 = self.agencyState ? self.agencyState() : null;
             if (a2 && !a2.exped[cid]) return false;
           } catch (e) {}
-          var launched = [cid];
-          // VETPARTY (sim-vetparty-a): a wave-4-target plan goes out as
-          // a trio, because the gate demands three for wave-4+ fights
-          // and a launched pair can never pass it (the producerparty
-          // pilot proved it: SEEK 0, all avoid:outmatched). The second
-          // companion comes from the Haven-idle pool — no recalling
-          // foragers or workers — and is geared up and judged by the
-          // same launchability bar as the first. If nobody is free or
-          // launchable, the pair still goes: no extra waiting beyond
-          // the existing PARTY_WAIT_DAYS cap (the producergate pilot
-          // proved waiting never converts a second companion).
-          if ((plan.needWave | 0) >= 4) {
-            var cid2 = null;
-            try { cid2 = self.winPlanSecondCompanion ? self.winPlanSecondCompanion(vid, hx, hy, cid) : null; } catch (e) { cid2 = null; }
-            if (cid2 && companionLaunchable(self, cid2)) {
-              self.startExpedition(cid2, hx, hy, false, { tx: tx, ty: ty, duration: dur });
-              var ok2 = false;
-              try {
-                var a3 = self.agencyState ? self.agencyState() : null;
-                ok2 = !!(a3 && a3.exped && a3.exped[cid2]);
-              } catch (e) {}
-              if (ok2) launched.push(cid2);
-            }
-          }
           plan.stage = 'hunt';
-          plan.party = launched.slice();
+          plan.party = [cid];
           try {
             var cplan = self.winPlanOf ? self.winPlanOf(cid) : null;
-            if (cplan) {
-              cplan.stage = 'hunt';
-              cplan.party = [vid].concat(launched.filter(function (x) { return x !== cid; }));
-              cplan.target = plan.target; cplan.node = plan.node;
-            }
-            if (launched.length > 1) {
-              var cplan2 = self.winPlanOf ? self.winPlanOf(launched[1]) : null;
-              if (cplan2) { cplan2.stage = 'hunt'; cplan2.party = [vid, cid]; cplan2.target = plan.target; cplan2.node = plan.node; }
-              bump(self, 'partyTrios');
-            }
+            if (cplan) { cplan.stage = 'hunt'; cplan.party = [vid]; cplan.target = plan.target; cplan.node = plan.node; }
           } catch (e) {}
           bump(self, 'partyDepartures');
           return true;
@@ -541,70 +476,6 @@
         return 'normal';
       } catch (e) { return 'normal'; }
     },
-    // VETPARTY (sim-vetparty-a): pick a SECOND companion for a
-    // wave-4-target plan, from the Haven-idle pool. Wave-4-target plans
-    // only (plan.needWave >= 4); everyone else gets null. PURE READ —
-    // no gear-up, no state writes, no RNG — so the dawn candidate pass
-    // can call it safely: gearing during scoring would spend village
-    // gear as a side effect. Preference: (1) living wave-3+ killers,
-    // (2) currently armed villagers, (3) the rest; within each tier
-    // the shared companionRank order (formula untouched). Eligibility
-    // mirrors findCompanion's willingness bars and the pool stays
-    // Haven-idle (no recalling foragers or workers): alive, not the
-    // scholar, not engaged/away/on-expedition, not sick, trust >= 15,
-    // range >= 1. Whether the pick can actually go is decided at
-    // LAUNCH time by companionLaunchable (gear-up + armed-or-armored
-    // bar); a blocked pick falls back to a pair launch.
-    winPlanSecondCompanion(vid, hx, hy, firstCid) {
-      try {
-        var plan = null;
-        try {
-          var vv = this.state && this.state.village;
-          plan = (vv && vv.winPlan) ? vv.winPlan[vid] : null;
-        } catch (e) {}
-        if (!plan || (plan.needWave | 0) < 4) return null;
-        var v = this.state && this.state.village;
-        if (!v) return null;
-        var roster = v.roster || [];
-        var trust = v.trust || {};
-        var away = v.away || {};
-        var sick = v.sick || {};
-        var killers = [], armed = [], rest = [];
-        for (var i = 0; i < roster.length; i++) {
-          var cid = roster[i];
-          if (!cid || cid === vid || cid === firstCid || cid === this.villagerId) continue;
-          if (!alive(this, cid)) continue;
-          if (away[cid]) continue;
-          if (((trust[cid] === undefined) ? 10 : trust[cid]) < 15) continue;
-          if (!atHaven(this, cid, hx, hy)) continue;
-          try { if (this.isEngaged && this.isEngaged(cid)) continue; } catch (e) {}
-          try {
-            var a = this.agencyState ? this.agencyState() : null;
-            if (a && a.exped && a.exped[cid]) continue;
-          } catch (e) {}
-          if (sick[cid]) continue;
-          try { if (this.npcMaxDist && this.npcMaxDist(cid) < 1) continue; } catch (e) {}
-          if (hasKillWaveAtLeast(this, cid, 3)) killers.push(cid);
-          else {
-            var g = gearOf(this, cid);
-            if (g.armed) armed.push(cid);
-            else rest.push(cid);
-          }
-        }
-        var self = this;
-        var pickFrom = function (list) {
-          if (!list.length) return null;
-          try {
-            if (self.companionRank) {
-              var ranked = self.companionRank(vid, list, { context: 'party' });
-              return (ranked[0] && ranked[0].id) || null;
-            }
-          } catch (e) {}
-          return list[0];
-        };
-        return pickFrom(killers) || pickFrom(armed) || pickFrom(rest);
-      } catch (e) { return null; }
-    },
     // Pre-fight gate for expeditionMonster. Returns null (old path),
     // {avoid:true} (no fight; plan falls back to gathering help), or
     // {seek:true} (walk in on purpose — awareness evade skipped).
@@ -616,37 +487,6 @@
         try {
           var sensed = (typeof this.villagerFightAllies === 'function') ? (this.villagerFightAllies(vid) || []) : [];
           for (var i = 0; i < sensed.length; i++) if (party.indexOf(sensed[i]) === -1) party.push(sensed[i]);
-        } catch (e) {}
-        // VETPARTY (sim-vetparty-a): count co-tasked plan members. The
-        // plan's party set out together on one shared target (same
-        // tx/ty, same duration) — they are the travelling party even
-        // when the encounter instant finds them a leg apart, because
-        // villagerFightAllies only sees same/adjacent nodes at that
-        // instant. The gate judges the party that set out, not the
-        // earshot snapshot. Only members alive and on an expedition to
-        // the SAME target as the fighter count. The fight itself still
-        // starts with the sensed allies only — counted members are
-        // never injected into fieldFight.
-        var countedSize = 0;
-        try {
-          var v0 = this.state && this.state.village;
-          var plan0 = (v0 && v0.winPlan) ? v0.winPlan[vid] : null;
-          if (plan0 && plan0.party && plan0.party.length) {
-            var a0 = this.agencyState ? this.agencyState() : null;
-            var myExped = (a0 && a0.exped) ? a0.exped[vid] : null;
-            if (myExped) {
-              for (var k = 0; k < plan0.party.length; k++) {
-                var pid = plan0.party[k];
-                if (!pid || party.indexOf(pid) !== -1) continue;
-                if (!alive(this, pid)) continue;
-                var pExped = a0.exped[pid];
-                if (pExped && pExped.tx === myExped.tx && pExped.ty === myExped.ty) {
-                  party.push(pid);
-                  countedSize += 1;
-                }
-              }
-            }
-          }
         } catch (e) {}
         var allArmed = true, allArmored = true;
         for (var j = 0; j < party.length; j++) {
