@@ -402,14 +402,301 @@ function analyze(records) {
   return { perSeed: perSeed, byPolicy: byPolicy, band: band, wall: wall, d3: d3, shapes: shapes, unknown: unknown };
 }
 
+// ---------- PHASE-CORRECTED CLASSIFIER (sim-seasoning-g1-b) ---------- //
+// Metric-review items 1–3 + 5 of sim-seasoning-b.md, implemented
+// ADDITIVELY: every frozen export above keeps frozen semantics (the
+// frozen proof stays 59/59 and the frozen CLI output stays
+// byte-identical to seasoning-b-analysis.json). The corrected layer
+// below re-reads the same records and re-judges G1 under the
+// phase-corrected definitions:
+//
+//   * The driver snapshots AFTER policy.daily(); _checkNational runs
+//     inside sleep()'s endDay, before the day increments. The day-D
+//     snapshot therefore shows the pre-boundary state, while the
+//     staging is recorded the same day in the Codex channel
+//     ("National beat staged: covenant" linkLine, dated the
+//     qualification day on 8/8 staged seeds) and answered the next
+//     day (answerNationalChoice verbEvent, uncapped channel).
+//   * A should-stage day (frozen 'unclassified': covenant candidate
+//     present, rung met, nothing pending/live/refused/exiled, no
+//     higher shape — or 3+ seasoned with the candidate null) is a
+//     STAGED-PRECURSOR when staging follows within one boundary
+//     (answer/pending on day d or d+1, nationalLive on the d+1
+//     snapshot, or a staging linkLine dated day d). The linkLine is
+//     supporting evidence only (capped channel, item 4 — the cap is
+//     LEFT as-is, never raised on the shared harness); the verbEvents
+//     answer is authoritative.
+//   * A should-stage day counts as UNKNOWN only when the qualified
+//     candidate survives a boundary unstaged: it follows another
+//     should-stage day with no staging between them AND no staging
+//     follows within one boundary of it. The first day of such a run
+//     is QUALIFIED-FIRST (not counted); a lone should-stage day whose
+//     qualification lapses the next day is neither precursor nor
+//     unknown — the engine did not fail to stage, the state changed.
+//   * daysLost is measured to the QUALIFICATION day (first precursor
+//     day), not the answer day; the frozen figure rides alongside.
+//   * The decisive-blocker flip window compares the qualification day
+//     against the day before it (item 3), not the answer day.
+//   * The wall carries the raw-standing read (standingRaw >= 200)
+//     alongside the gated read and scaleRank (item 5).
+//
+// A staged seed with no precursor day (candidate and staging visible
+// in the same snapshot — pendingNational on the qualification day
+// itself) falls back to qualificationDay = answerDay, recorded as
+// qualificationSource 'answer-fallback'; daysLost then equals the
+// frozen figure.
+
+// Days carrying a "National beat staged: covenant" Codex line.
+function stagingLineDaysOf(rec) {
+  const s = new Set();
+  try {
+    for (const l of (rec.linkLines || [])) {
+      if (l && typeof l.line === 'string' && l.line.indexOf('National beat staged: covenant') !== -1) s.add(l.day | 0);
+    }
+  } catch (e) {}
+  return s;
+}
+// Answer/pending days for the covenant shape (same set the frozen
+// analyzer uses for stagedDay).
+function stagedDaysOf(rec) {
+  const s = new Set();
+  for (const ev of (rec.verbEvents || [])) {
+    if (ev.verb === 'answerNationalChoice' && ev.shape === 'covenant') s.add(ev.day | 0);
+  }
+  for (const sn of (rec.series || [])) {
+    if (sn.pendingNational && sn.pendingNational.shape === 'covenant') s.add(sn.d | 0);
+  }
+  return s;
+}
+// The frozen 'unclassified' gate for one day, or null when the day is
+// not a should-stage day.
+function shouldStageGate(sn, stagedToday) {
+  const c = classifySeasoningDay(sn, stagedToday);
+  return c.cls === 'unclassified' ? c.gate : null;
+}
+
+// Corrected classification of ONE day. ctx: { stagingFollows(day),
+// prevShouldStage }. cls is one of the frozen four plus
+// 'staged-precursor' | 'qualified-first' | 'unknown'.
+function classifySeasoningDayCorrected(sn, stagedToday, ctx) {
+  const base = classifySeasoningDay(sn, stagedToday);
+  if (base.cls !== 'unclassified') return base;
+  const d = sn.d | 0;
+  if (ctx.stagingFollows(d)) return { cls: 'staged-precursor', gate: 'precursor:' + base.gate, blockers: [] };
+  if (ctx.prevShouldStage) return { cls: 'unknown', gate: 'survived-boundary:' + base.gate, blockers: [] };
+  return { cls: 'qualified-first', gate: 'qualified-first:' + base.gate, blockers: [] };
+}
+
+// Corrected per-seed analysis. Returns the frozen per-seed record
+// plus the corrected fields (corrected values unprefixed where they
+// supersede, frozen values kept under *Frozen names).
+function analyzeSeasoningCorrected(rec) {
+  const frozen = analyzeSeasoning(rec);
+  const series = rec.series || [];
+  const stagedDays = stagedDaysOf(rec);
+  const stagingLines = stagingLineDaysOf(rec);
+  const byDay = {};
+  for (const sn of series) byDay[sn.d | 0] = sn;
+  const shouldGate = {};
+  for (const sn of series) shouldGate[sn.d | 0] = shouldStageGate(sn, stagedDays.has(sn.d | 0));
+  function stagingFollows(d) {
+    if (stagedDays.has(d) || stagedDays.has(d + 1)) return true;
+    if (stagingLines.has(d)) return true;
+    const nx = byDay[d + 1];
+    if (nx && nx.nationalLive) return true;
+    return false;
+  }
+  const dayCls = [];
+  let prevShould = false;
+  for (const sn of series) {
+    const d = sn.d | 0;
+    const c = classifySeasoningDayCorrected(sn, stagedDays.has(d), {
+      stagingFollows: stagingFollows,
+      prevShouldStage: prevShould,
+    });
+    dayCls.push({ day: d, cls: c.cls, gate: c.gate, blockers: c.blockers });
+    prevShould = shouldGate[d] !== null;
+  }
+  const precursorDays = dayCls.filter(function (dc) { return dc.cls === 'staged-precursor'; }).map(function (dc) { return dc.day; });
+  const unknownDays = dayCls.filter(function (dc) { return dc.cls === 'unknown'; }).map(function (dc) { return dc.day; });
+  const qualifiedFirstDays = dayCls.filter(function (dc) { return dc.cls === 'qualified-first'; }).map(function (dc) { return dc.day; });
+  const answerDay = frozen.stagedDay;
+  const qualificationDay = precursorDays.length ? precursorDays[0] : (answerDay !== null ? answerDay : null);
+  const qualificationSource = precursorDays.length ? 'precursor' : (answerDay !== null ? 'answer-fallback' : null);
+  const reStagePrecursors = precursorDays.filter(function (d) { return answerDay !== null && d > answerDay; });
+  let firstOpp = null;
+  for (const dc of dayCls) {
+    if (dc.cls === 'seasoning-blocked' || dc.cls === 'staged-precursor' || dc.cls === 'staged') { firstOpp = dc.day; break; }
+  }
+  const endDay = frozen.endDay;
+  const daysLost = firstOpp === null ? null
+    : (answerDay !== null ? qualificationDay - firstOpp : endDay - firstOpp + 1);
+  // Decisive blocker (item 3): the se flip on the QUALIFICATION day
+  // vs the day before it. Null by design when seasoning was already
+  // met before staging (rung-gated seeds) or when the qualification
+  // day fell back to the answer day.
+  let decisive = null;
+  if (qualificationDay !== null && qualificationSource === 'precursor') {
+    const today = byDay[qualificationDay];
+    const prev = byDay[qualificationDay - 1] || null;
+    const prevSe = {};
+    if (prev) for (const l of (prev.linksRoll || [])) if (l && l.id) prevSe[l.id] = !!l.se;
+    if (today) {
+      for (const l of (today.linksRoll || [])) {
+        if (!l || l.k !== 'covenant' || l.st !== 'active' || !l.se) continue;
+        if (prev && prevSe[l.id] === false) {
+          decisive = { other: l.o || null, id: l.id || null, formedDay: l.f | 0, age: l.age | 0, trust: l.t | 0, seasonedDay: qualificationDay };
+        }
+      }
+    }
+  }
+  // Corrected verdict: staged wins; otherwise unknown only on
+  // corrected unknown days; otherwise the frozen verdict — except a
+  // frozen 'unknown' verdict that rested only on days now classified
+  // as precursors / qualified-firsts is recomputed from the frozen
+  // fields (seasoning-blocked when the final day is seasoning-blocked
+  // or blocked days exist, else other-blocked).
+  let verdict, verdictGate = null;
+  if (answerDay !== null) { verdict = 'staged'; }
+  else if (unknownDays.length > 0) { verdict = 'unknown'; verdictGate = 'unclassified-days:' + unknownDays.slice(0, 5).join(','); }
+  else if (frozen.verdict === 'unknown') {
+    if (frozen.seasoningBlockedDays > 0) { verdict = 'seasoning-blocked'; verdictGate = 'seasoned-short'; }
+    else { verdict = 'other-blocked'; verdictGate = frozen.verdictGate; }
+  } else { verdict = frozen.verdict; verdictGate = frozen.verdictGate; }
+
+  const out = Object.assign({}, frozen, {
+    stagedDay: answerDay, answerDay: answerDay,
+    qualificationDay: qualificationDay, qualificationSource: qualificationSource,
+    precursorDays: precursorDays, reStagePrecursors: reStagePrecursors,
+    qualifiedFirstDays: qualifiedFirstDays,
+    firstOpportunityDay: firstOpp, firstOpportunityDayFrozen: frozen.firstOpportunityDay,
+    daysLost: daysLost, daysLostFrozen: frozen.daysLost,
+    decisive: decisive, decisiveFrozen: frozen.decisive,
+    unclassifiedDays: unknownDays.length, unclassifiedList: unknownDays,
+    unclassifiedDaysFrozen: frozen.unclassifiedDays, unclassifiedListFrozen: frozen.unclassifiedList,
+    unknown: (verdict === 'unknown' || unknownDays.length > 0) ? 1 : 0,
+    unknownFrozen: frozen.unknown,
+    verdict: verdict, verdictGate: verdictGate,
+    verdictFrozen: frozen.verdict, verdictGateFrozen: frozen.verdictGate,
+    standing: rec.standing | 0, standingRaw: rec.standingRaw | 0,
+  });
+  return out;
+}
+
+// Corrected band analysis: same aggregation shape as analyze(), over
+// corrected per-seed records, plus the raw-standing wall read.
+function analyzeCorrected(records) {
+  const perSeed = {};
+  const byPolicy = {};
+  let unknown = 0, precursorDaysTotal = 0, unknownDaysTotal = 0;
+  for (const rec of records) {
+    const r = analyzeSeasoningCorrected(rec);
+    perSeed[rec.seed + '-' + rec.policy] = r;
+    if (r.unknown) unknown++;
+    precursorDaysTotal += r.precursorDays.length;
+    unknownDaysTotal += r.unclassifiedDays;
+    if (!byPolicy[rec.policy]) {
+      byPolicy[rec.policy] = { n: 0, staged: 0, seasoningBlocked: 0, otherBlocked: 0, unknown: 0, seasoningBound: 0, blockedDays: 0, daysLostStaged: [], daysLostStagedFrozen: [], daysLostCensored: [], ageOnlyDays: 0, trustOnlyDays: 0, bothDays: 0, multiDays: 0 };
+    }
+    const b = byPolicy[rec.policy];
+    b.n++;
+    if (r.verdict === 'staged') { b.staged++; if (r.daysLost !== null) b.daysLostStaged.push(r.daysLost); if (r.daysLostFrozen !== null) b.daysLostStagedFrozen.push(r.daysLostFrozen); }
+    else if (r.verdict === 'seasoning-blocked') b.seasoningBlocked++;
+    else if (r.verdict === 'other-blocked') b.otherBlocked++;
+    else b.unknown++;
+    if (r.seasoningBound) b.seasoningBound++;
+    b.blockedDays += r.seasoningBlockedDays;
+    if (r.verdict !== 'staged' && r.daysLost !== null) b.daysLostCensored.push(r.daysLost);
+    b.ageOnlyDays += r.ageOnlyDays; b.trustOnlyDays += r.trustOnlyDays;
+    b.bothDays += r.bothDays; b.multiDays += r.multiDays;
+  }
+  for (const pol of Object.keys(byPolicy)) {
+    const b = byPolicy[pol];
+    const nonStaged = b.n - b.staged;
+    b.nonStaged = nonStaged;
+    b.seasoningShareOfNonStages = nonStaged ? b.seasoningBlocked / nonStaged : null;
+    const boundNonStaged = records.filter(function (r) {
+      if (r.policy !== pol) return false;
+      const ps = perSeed[r.seed + '-' + r.policy];
+      return ps && ps.verdict !== 'staged' && ps.seasoningBound;
+    }).length;
+    b.seasoningBoundShareOfNonStages = nonStaged ? boundNonStaged / nonStaged : null;
+    b.medianDaysLostStaged = med(b.daysLostStaged);
+    b.medianDaysLostStagedFrozen = med(b.daysLostStagedFrozen);
+    b.medianDaysLostCensored = med(b.daysLostCensored);
+  }
+  const band = { n: records.length, staged: 0, seasoningBlocked: 0, otherBlocked: 0, unknown: unknown };
+  for (const pol of Object.keys(byPolicy)) {
+    band.staged += byPolicy[pol].staged;
+    band.seasoningBlocked += byPolicy[pol].seasoningBlocked;
+    band.otherBlocked += byPolicy[pol].otherBlocked;
+  }
+  band.nonStaged = band.n - band.staged;
+  band.seasoningShareOfNonStages = band.nonStaged ? band.seasoningBlocked / band.nonStaged : null;
+  const bandBoundNonStaged = records.filter(function (r) {
+    const ps = perSeed[r.seed + '-' + r.policy];
+    return ps && ps.verdict !== 'staged' && ps.seasoningBound;
+  }).length;
+  band.seasoningBoundShareOfNonStages = band.nonStaged ? bandBoundNonStaged / band.nonStaged : null;
+  band.precursorDaysTotal = precursorDaysTotal;
+  band.unknownDaysTotal = unknownDaysTotal;
+  // Wall: frozen wall (gated standing + scaleRank) plus the raw
+  // standing read (item 5) per leg.
+  const frozenOut = analyze(records);
+  const wall = frozenOut.wall;
+  for (const pol of Object.keys(wall)) {
+    const recs = records.filter(function (r) { return r.policy === pol; });
+    wall[pol].nationalStandingRaw200 = recs.filter(function (r) { return (r.standingRaw | 0) >= 200; }).length;
+  }
+  return { perSeed: perSeed, byPolicy: byPolicy, band: band, wall: wall, d3: frozenOut.d3, shapes: frozenOut.shapes, unknown: unknown };
+}
+
 if (require.main === module) (async function () {
-  const controlDir = process.argv[2] || path.join(REPO, 'evidence', '2026-11-16', 'perseed-seasoning-b-control');
-  const onDir = process.argv[3] || path.join(REPO, 'evidence', '2026-11-16', 'perseed-seasoning-b-on');
-  const outPath = process.argv[4] || path.join(REPO, 'evidence', '2026-11-16', 'seasoning-b-analysis.json');
+  const CORRECTED = process.argv.indexOf('--corrected') !== -1;
+  const args = process.argv.slice(2).filter(function (a) { return a !== '--corrected'; });
+  const controlDir = args[0] || path.join(REPO, 'evidence', '2026-11-16', 'perseed-seasoning-b-control');
+  const onDir = args[1] || path.join(REPO, 'evidence', '2026-11-16', 'perseed-seasoning-b-on');
+  const outPath = args[2] || path.join(REPO, 'evidence', '2026-11-16', CORRECTED ? 'seasoning-g1-b-analysis.json' : 'seasoning-b-analysis.json');
   const records = [];
   for (const dir of [controlDir, onDir]) {
     const files = fs.readdirSync(dir).filter(function (f) { return f.slice(-5) === '.json'; }).sort();
     for (const f of files) records.push(JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')));
+  }
+  if (CORRECTED) {
+    const out = analyzeCorrected(records);
+    fs.writeFileSync(outPath, JSON.stringify(out, null, 2) + '\n');
+    for (const pol of Object.keys(out.byPolicy)) {
+      const b = out.byPolicy[pol];
+      console.log(pol + ': n=' + b.n + ' staged=' + b.staged + ' seasoning-blocked=' + b.seasoningBlocked +
+        ' other-blocked=' + b.otherBlocked + ' unknown=' + b.unknown +
+        ' nonStaged=' + b.nonStaged +
+        ' seasoningShare=' + (b.seasoningShareOfNonStages === null ? 'n/a' : (b.seasoningShareOfNonStages * 100).toFixed(0) + '%') +
+        ' blockedDays=' + b.blockedDays +
+        ' medianDaysLost(staged, corrected)=' + b.medianDaysLostStaged +
+        ' medianDaysLost(staged, frozen)=' + b.medianDaysLostStagedFrozen +
+        ' medianDaysLost(censored)=' + b.medianDaysLostCensored);
+    }
+    console.log('band (corrected): staged=' + out.band.staged + ' seasoning-blocked=' + out.band.seasoningBlocked +
+      ' other-blocked=' + out.band.otherBlocked + ' unknown=' + out.band.unknown +
+      ' seasoningShare=' + (out.band.seasoningShareOfNonStages === null ? 'n/a' : (out.band.seasoningShareOfNonStages * 100).toFixed(0) + '%') +
+      ' precursorDays=' + out.band.precursorDaysTotal + ' unknownDays=' + out.band.unknownDaysTotal);
+    console.log('D3 engine-agreement (frozen, unchanged): blockedDays=' + out.d3.blockedDays + ' candidate-null=' + out.d3.blockedCandidateNull +
+      ' stagedDays=' + out.d3.stagedDays + ' candidate-seen=' + out.d3.stagedCandidateSeen + ' misses=' + JSON.stringify(out.d3.misses));
+    console.log('wall (raw read added): ' + JSON.stringify(out.wall));
+    for (const k of Object.keys(out.perSeed).sort()) {
+      const r = out.perSeed[k];
+      console.log(k + ' :: ' + r.verdict + ' (frozen ' + r.verdictFrozen + ')' +
+        ' qualDay=' + (r.qualificationDay === null ? '—' : 'd' + r.qualificationDay + ' [' + r.qualificationSource + ']') +
+        ' answerDay=' + (r.answerDay === null ? '—' : 'd' + r.answerDay) +
+        ' firstOpp=' + (r.firstOpportunityDay === null ? '—' : 'd' + r.firstOpportunityDay) + ' (frozen ' + (r.firstOpportunityDayFrozen === null ? '—' : 'd' + r.firstOpportunityDayFrozen) + ')' +
+        ' blockedDays=' + r.seasoningBlockedDays +
+        ' daysLost=' + (r.daysLost === null ? '—' : r.daysLost + (r.censored ? ' (censored)' : '')) + ' (frozen ' + (r.daysLostFrozen === null ? '—' : r.daysLostFrozen) + ')' +
+        ' decisive=' + JSON.stringify(r.decisive) + ' (frozen ' + JSON.stringify(r.decisiveFrozen) + ')' +
+        ' precursors=' + JSON.stringify(r.precursorDays) + ' reStage=' + JSON.stringify(r.reStagePrecursors));
+    }
+    console.log('UNKNOWN total (corrected): ' + out.unknown);
+    console.log('wrote ' + path.relative(REPO, outPath));
+    return;
   }
   const out = analyze(records);
   fs.writeFileSync(outPath, JSON.stringify(out, null, 2) + '\n');
@@ -443,4 +730,4 @@ if (require.main === module) (async function () {
   console.log('wrote ' + path.relative(REPO, outPath));
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 
-module.exports = { classifySeasoningDay: classifySeasoningDay, blockerLinks: blockerLinks, analyzeSeasoning: analyzeSeasoning, engineAgreement: engineAgreement, analyze: analyze };
+module.exports = { classifySeasoningDay: classifySeasoningDay, blockerLinks: blockerLinks, analyzeSeasoning: analyzeSeasoning, engineAgreement: engineAgreement, analyze: analyze, classifySeasoningDayCorrected: classifySeasoningDayCorrected, analyzeSeasoningCorrected: analyzeSeasoningCorrected, analyzeCorrected: analyzeCorrected, stagingLineDaysOf: stagingLineDaysOf, stagedDaysOf: stagedDaysOf, shouldStageGate: shouldStageGate };
