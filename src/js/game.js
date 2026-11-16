@@ -20932,6 +20932,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (rec.allyVid) this.objNoteMonsterSighting(rec.allyVid, m.id, m.tx, m.ty);
         }
       } catch (e) {}
+      // VETREENGAGE (sim-vetreengage-a): a villager who FACED a wave-4+ beast
+      // and lived — fought it and fled — now knows the type is real,
+      // where it is, and that they survived it. That lived knowledge
+      // seeds a win-plan re-engagement: go back after that type, with
+      // a party. Only vFlee seeds: a kill already advances the plan
+      // through winPlanNoteKill, a death ends the villager, a fleeing
+      // monster was never faced, and raids/aid fights are defence, not
+      // a place to return to. Wave-gated inside the seed (wave >= 3).
+      // Env-gated: the lever is OFF unless VETREENGAGE=1 (node sims
+      // only; in the browser process is undefined, so this never fires).
+      try {
+        var _vreSeed = false;
+        try { _vreSeed = (typeof process !== 'undefined' && process.env && process.env.VETREENGAGE === '1'); } catch (e2) {}
+        if (_vreSeed && !opts.raid && !wViaAid && rec && rec.outcome === 'vFlee' && this.winPlanSeedFromFight) {
+          this.winPlanSeedFromFight(vid, mdef, 'fled');
+        }
+      } catch (e) {}
       if (rec.outcome === 'alreadyDead') {
         // BREAK-IT combat 2026-10-09: the world kept a 0-hp monster (vFlee
         // coinciding with the lead falling). It's a corpse, not a fight —

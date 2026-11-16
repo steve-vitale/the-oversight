@@ -225,14 +225,28 @@
         return out;
       }
       if ((stage === 'party' || stage === 'hunt' || stage === 'standing' || stage === 'table') && companion) {
-        out.push({
+        var cand = {
           kind: 'EXPEDITION', w: 5.0, companion: companion,
           vbrainSrc: 'win_plan', winPlanAction: 'party_launch',
           considerations: [
             { id: 'win_plan_stage', raw: 1, note: stage },
             { id: 'companion', raw: 1, note: String(companion) },
           ],
-        });
+        };
+        // VETREENGAGE (sim-vetreengage-a): a second companion for wave-4-target
+        // plans, so the launch can go out as a trio. Pure read — the
+        // pick gears nobody and writes nothing; launch-time gates in
+        // the depart mirror decide whether the second companion can go.
+        // Env-gated: no second companion is picked unless VETREENGAGE=1.
+        var _vreC2 = false;
+        try { _vreC2 = (typeof process !== 'undefined' && process.env && process.env.VETREENGAGE === '1'); } catch (e2) {}
+        try {
+          if (_vreC2 && plan && (plan.needWave | 0) >= 4 && typeof self.winPlanSecondCompanion === 'function') {
+            var c2 = self.winPlanSecondCompanion(vid, hx, hy, companion);
+            if (c2) cand.companion2 = c2;
+          }
+        } catch (e) {}
+        out.push(cand);
       } else if (stage === 'party' && !companion) {
         out.push({
           kind: 'HAVEN_CHORE', w: 4.0, chore: 'fire',
@@ -1042,11 +1056,38 @@
           if (!a2 || !a2.exped[vid]) return 'hold';
         } catch (e) {}
         this.startExpedition(c.companion, hx, hy, false, opts);
+        // VETREENGAGE (sim-vetreengage-a): launch the second companion on the
+        // same shared target when the dawn candidate carried one. Only
+        // a started expedition counts — a blocked second companion
+        // falls back to a pair launch, never a solo inviter. (The
+        // pre-existing mirror gap stays as-is: this mirror does not
+        // re-check the first companion's expedition the way
+        // winPlanDepart does; fixing that is out of scope.)
+        // Env-gated: the second companion launches only when VETREENGAGE=1.
+        var _vreC2m = false;
+        try { _vreC2m = (typeof process !== 'undefined' && process.env && process.env.VETREENGAGE === '1'); } catch (e2) {}
+        var launched = [c.companion];
+        if (_vreC2m && c.companion2) {
+          this.startExpedition(c.companion2, hx, hy, false, opts);
+          var ok2 = false;
+          try {
+            var a3 = this.agencyState ? this.agencyState() : null;
+            ok2 = !!(a3 && a3.exped && a3.exped[c.companion2]);
+          } catch (e) {}
+          if (ok2) launched.push(c.companion2);
+        }
         try {
           var plan2 = this.winPlanOf ? this.winPlanOf(vid) : null;
-          if (plan2) { plan2.stage = 'hunt'; plan2.party = [c.companion]; }
+          if (plan2) { plan2.stage = 'hunt'; plan2.party = launched.slice(); }
           var cplan = this.winPlanOf ? this.winPlanOf(c.companion) : null;
-          if (cplan) { cplan.stage = 'hunt'; cplan.party = [vid]; }
+          if (cplan) { cplan.stage = 'hunt'; cplan.party = [vid].concat(launched.filter(function (x) { return x !== c.companion; })); }
+          if (launched.length > 1) {
+            var cplan2 = this.winPlanOf ? this.winPlanOf(c.companion2) : null;
+            if (cplan2) {
+              cplan2.stage = 'hunt'; cplan2.party = [vid, c.companion];
+              cplan2.target = plan2 ? plan2.target : null; cplan2.node = plan2 ? plan2.node : null;
+            }
+          }
         } catch (e) {}
         return 'launch';
       }
