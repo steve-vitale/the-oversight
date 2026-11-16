@@ -59,7 +59,15 @@ const RECORDER_ON = process.env.SEEDPATHS_RECORDER !== 'off';
 // fightOrigin taxonomy. Flag unset = seedpaths behavior
 // byte-identical: the watch is wave == 4 only, no `origin` field.
 // Both additions are pure reads (no RNG, no game-state writes).
-const SEEDLAND = process.env.SEEDLAND === '1';
+// LAUNCHSURVIVE (sim-launchsurvive-a): when LAUNCHSURVIVE=1 the
+// per-day launch tracker runs (v4launchTrack rows — holder /
+// companion nodes, last-known tile, target persistence; see
+// recordLaunchTrack below) AND the SEEDLAND semantics apply even
+// when SEEDLAND is unset, so a tracker run can never be
+// misconfigured into an unjudgeable corpus. Flag unset = no tracker
+// rows at all (no `v4launchTrack` key on the output).
+const LAUNCHSURVIVE = process.env.LAUNCHSURVIVE === '1';
+const SEEDLAND = process.env.SEEDLAND === '1' || LAUNCHSURVIVE;
 
 if (MODE !== 'control' && MODE !== 'on') { console.error('SEEDPATHS STOP: MODE must be control|on, got ' + JSON.stringify(MODE)); process.exit(2); }
 
@@ -239,6 +247,37 @@ function fightOrigin(stackOverride) {
     }
     return 'unclassified';
   } catch (e) { return 'unclassified'; }
+}
+
+// targetPersistence(Game, target, tile): the live world-monster
+// read for the launch tracker (sim-launchsurvive-a). Returns
+// { nearDist, nearCount, aliveCount } for live world monsters of
+// type `target` (m.id is the type id — game.js:27078 filters the
+// same way) vs `tile` ({nx, ny}, node coords): nearDist is the
+// minimum Chebyshev distance from any live target-type monster to
+// the tile (null when no live monster of that type or no tile),
+// nearCount is how many sit within Chebyshev distance <= 2 (the
+// frozen persistence radius), aliveCount is how many of the type
+// are alive anywhere. When the world-monster list itself is
+// unreadable all three are null (explicit, never a silent zero).
+// Pure read; never throws into the caller.
+function targetPersistence(Game, target, tile) {
+  try {
+    if (!target) return { nearDist: null, nearCount: null, aliveCount: null };
+    const list = (Game.worldMonsters && typeof Game.worldMonsters === 'function') ? Game.worldMonsters() : null;
+    if (!Array.isArray(list)) return { nearDist: null, nearCount: null, aliveCount: null };
+    let aliveCount = 0, nearDist = null, nearCount = 0;
+    for (const m of list) {
+      if (!m || m.id !== target) continue;
+      aliveCount++;
+      if (!tile || tile.nx == null || tile.ny == null) continue;
+      const dist = Math.max(Math.abs((m.tx | 0) - tile.nx), Math.abs((m.ty | 0) - tile.ny));
+      if (nearDist == null || dist < nearDist) nearDist = dist;
+      if (dist <= 2) nearCount++;
+    }
+    if (!tile || tile.nx == null || tile.ny == null) return { nearDist: null, nearCount: 0, aliveCount: aliveCount };
+    return { nearDist: nearDist, nearCount: nearCount, aliveCount: aliveCount };
+  } catch (e) { return { nearDist: null, nearCount: null, aliveCount: null }; }
 }
 
 // ---- DAWNBID helpers (pure reads; NEVER call villagerHealCheck —
@@ -443,6 +482,12 @@ async function oneRun(seed) {
   const dawnbidStarts = [];
   // ---- COMPANIONPOOL CAPTURE ----
   const companionPool = [];
+  // ---- LAUNCHSURVIVE TRACKER (sim-launchsurvive-a) ----
+  // One row per live wave-4 plan holder per day (recorded in the
+  // daily snapshot block alongside dawnbidCensus). LAUNCHSURVIVE=1
+  // only; flag unset = this array stays empty and no
+  // `v4launchTrack` key is written on the output.
+  const v4launchTrack = [];
   const lastGateByVid = {};
   function waveOf(mdef) { try { return (mdef && mdef.wave) | 0; } catch (e) { return 0; } }
   function trickKnownOf(mid) { try { return !!(Game.villageKnowsTrick && Game.villageKnowsTrick(mid)); } catch (e) { return false; } }
@@ -799,6 +844,64 @@ async function oneRun(seed) {
                 }
               } catch (e) { errors.push('dawnbid-census: ' + String(e.message).slice(0, 80)); }
             }
+            // LAUNCHSURVIVE tracker: one row per live wave-4 plan
+            // holder per day — holder/companion nodes, last-known
+            // tile, target persistence. Same population + cadence
+            // as the census (end of day). Pure reads.
+            if (RECORDER_ON && LAUNCHSURVIVE) {
+              try {
+                const wp = ((Game.state || {}).village || {}).winPlan || {};
+                const vil = (Game.state || {}).village || {};
+                const hx = (vil.px != null ? vil.px : 4), hy = (vil.py != null ? vil.py : 4);
+                const sightings = vil.monsterSightings || {};
+                for (const pvid of Object.keys(wp)) {
+                  const pl = wp[pvid];
+                  if (!planIsWave4(Game, pl)) continue;
+                  let alive = true;
+                  try { const p = Game.getPerson ? Game.getPerson(pvid) : null; if (p && p.dead) alive = false; } catch (e) {}
+                  let node = null;
+                  try { const n = Game.npcNode ? Game.npcNode(pvid) : null; if (n) node = { nx: n.nx, ny: n.ny }; } catch (e) {}
+                  let exped = false;
+                  try { const a = Game.agencyState ? Game.agencyState() : null; exped = !!(a && a.exped && a.exped[pvid]); } catch (e) {}
+                  let sick = false, health = 100;
+                  try { sick = !!((vil.sick || {})[pvid]); } catch (e) {}
+                  try { const h = (vil.health || {})[pvid]; if (h !== undefined) health = h; } catch (e) {}
+                  const partyNodes = {};
+                  try {
+                    for (const pid of (pl.party || [])) {
+                      let pn = null;
+                      try { const n = Game.npcNode ? Game.npcNode(pid) : null; if (n) pn = { nx: n.nx, ny: n.ny }; } catch (e) {}
+                      partyNodes[pid] = pn;
+                    }
+                  } catch (e) { errors.push('launch-track-partynodes: ' + String(e.message).slice(0, 80)); }
+                  let planNode = null;
+                  try { if (pl.node) planNode = { nx: pl.node.nx, ny: pl.node.ny }; } catch (e) {}
+                  let sightingTile = null;
+                  try {
+                    const list = sightings[pvid] || [];
+                    for (let i = list.length - 1; i >= 0; i--) {
+                      const s = list[i];
+                      if (s && s.mid === pl.target) { sightingTile = { tx: s.tx, ty: s.ty, day: s.day }; break; }
+                    }
+                  } catch (e) {}
+                  let lastKnownTile = null, lastKnownSource = null;
+                  if (sightingTile) { lastKnownTile = { nx: sightingTile.tx, ny: sightingTile.ty }; lastKnownSource = 'sighting'; }
+                  else if (planNode) { lastKnownTile = planNode; lastKnownSource = 'planNode'; }
+                  const tp = targetPersistence(Game, pl.target, lastKnownTile);
+                  v4launchTrack.push({ day: d, vid: pvid, target: pl.target || null,
+                    needWave: (pl.needWave != null ? pl.needWave : null),
+                    stage: pl.stage || null, party: (pl.party || []).slice(),
+                    holderAlive: alive, holderNode: node, holderExped: exped,
+                    holderSick: sick, holderHealth: health,
+                    haven: { nx: hx, ny: hy },
+                    partyNodes: partyNodes, planNode: planNode,
+                    sightingTile: sightingTile,
+                    lastKnownTile: lastKnownTile, lastKnownSource: lastKnownSource,
+                    targetNearDist: tp.nearDist, targetNearCount: tp.nearCount,
+                    targetAliveCount: tp.aliveCount });
+                }
+              } catch (e) { errors.push('launch-track: ' + String(e.message).slice(0, 80)); }
+            }
           }
         } catch (e) { errors.push('snapshot: ' + String(e.message).slice(0, 80)); }
       }
@@ -852,6 +955,11 @@ async function oneRun(seed) {
     companionPool: companionPool,
     wave4Ids: loadWave4Ids(),
   };
+  // LAUNCHSURVIVE=1 only: the launch tracker array + flag. Flag
+  // unset = no `v4launchTrack` key at all (the seedland no-origin-
+  // key pattern), so flag-unset corpora stay byte-identical to
+  // seedpaths/seedland output.
+  if (LAUNCHSURVIVE) { out.v4launchTrack = v4launchTrack; out.launchTrackOn = true; }
   if (vf) {
     out.killCalls = vf.t.killCalls;
     out.pyrrhicCalls = vf.t.pyrrhicCalls;
@@ -895,10 +1003,11 @@ if (require.main === module) (async function () {
       dawnbidScores: out.dawnbidScores.length, dawnbidDeparts: out.dawnbidDeparts.length,
       dawnbidCensus: out.dawnbidCensus.length, dawnbidStarts: out.dawnbidStarts.length,
       companionPool: out.companionPool.length,
+      launchTrack: out.v4launchTrack ? out.v4launchTrack.length : 0,
       errors: out.instrumentErrors.length,
       file: path.relative(REPO, file),
     }));
   }
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 
-module.exports = { oneRun: oneRun, loadWave4Ids: loadWave4Ids, planIsWave4: planIsWave4, deriveLaunchBlock: deriveLaunchBlock, poolReplica: poolReplica, classifySeedPath: classifySeedPath, firstCallerFrame: firstCallerFrame, fightOrigin: fightOrigin, SEED_PATHS: SEED_PATHS, SEEDLAND: SEEDLAND };
+module.exports = { oneRun: oneRun, loadWave4Ids: loadWave4Ids, planIsWave4: planIsWave4, deriveLaunchBlock: deriveLaunchBlock, poolReplica: poolReplica, classifySeedPath: classifySeedPath, firstCallerFrame: firstCallerFrame, fightOrigin: fightOrigin, targetPersistence: targetPersistence, SEED_PATHS: SEED_PATHS, SEEDLAND: SEEDLAND, LAUNCHSURVIVE: LAUNCHSURVIVE };
