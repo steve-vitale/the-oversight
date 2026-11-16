@@ -1665,7 +1665,19 @@
         // mechanism: first telling records the fact; repeats acknowledge it.
         try {
           if (this.convoFactRecalled && this.convoFactRecalled(vid, 'taken-story')) {
-            return `"Still nothing on ${first}. I told you about the pods -- I keep thinking about them. The humming. Some nights I'm sure it's a dream. Other nights I'm sure it's not."`;
+            // REPEAT-ACK VARIANTS (journey-succession r224, F4c): the old
+            // single fixed line parroted verbatim every sitting after the
+            // first telling, so the 48-entry run ledger blocked the re-ask
+            // whenever two seek_taken helps fell close together (r218
+            // panel: Carl d105 went dry on it). Three honest phrasings,
+            // all keeping "still nothing" + the pods + the first name,
+            // cycled like every other pool. The dlg:help guard is the
+            // backstop for the residual collision.
+            return this.convoPickCycle(vid, 'taken:repeatack', [
+              `"Still nothing on ${first}. I told you about the pods -- I keep thinking about them. The humming. Some nights I'm sure it's a dream. Other nights I'm sure it's not."`,
+              `"Still nothing on ${first}. The pods, the humming — I told you. Some nights I hear it in my sleep and wake up sure they're still in there."`,
+              `"No word on ${first}. I keep going back to the pods in my head — the humming, the rows. I told you all that already, I know. It doesn't leave me alone."`,
+            ]) || `"Still nothing on ${first}. I told you about the pods -- I keep thinking about them. The humming. Some nights I'm sure it's a dream. Other nights I'm sure it's not."`;
           }
           if (this.convoSaidFact) this.convoSaidFact(vid, 'taken-story', first);
         } catch (e) {}
@@ -3080,8 +3092,20 @@
       };
       let askedAny = [];
       try { askedAny = this.villageAskedQs ? this.villageAskedQs() : []; } catch (e) {}
+      // LEDGER-AWARE PICK (journey-succession r224, F4a): a question whose
+      // line was recently spoken (run ledger — e.g. the singleton
+      // q_teach_me, asked in an earlier sitting) would go dry if picked
+      // again ("...Sorry, lost my train of thought."). Skip blocked
+      // questions and pick another; a real person with a blocked question
+      // asks a different one. Applies to BOTH branches: the village-wide
+      // pool and the per-villager fallback (whose by-design repeats are
+      // only honest when the line is not still in the ledger window).
+      const blocked = (q) => {
+        try { return this.convoWouldBlock ? this.convoWouldBlock(vid, q.q) : false; }
+        catch (e) { return false; }
+      };
       const pool = (cg.questions || []).filter(q =>
-        (c.askedQs || []).indexOf(q.id) === -1 && askedAny.indexOf(q.id) === -1 && qok(q));
+        (c.askedQs || []).indexOf(q.id) === -1 && askedAny.indexOf(q.id) === -1 && qok(q) && !blocked(q));
       if (pool.length) return pool[Math.floor(Math.random() * pool.length)];
       // VILLAGE-WIDE POOL EXHAUSTED (convo gaps 2026-10-11): with 36
       // questions and village-wide dedup, a busy village drains the shared
@@ -3091,7 +3115,7 @@
       // stranger with no questions at all. (Mirrors the fallback the
       // mid-conversation question path already had.)
       const perVillager = (cg.questions || []).filter(q =>
-        (c.askedQs || []).indexOf(q.id) === -1 && qok(q));
+        (c.askedQs || []).indexOf(q.id) === -1 && qok(q) && !blocked(q));
       if (!perVillager.length) return null;
       return perVillager[Math.floor(Math.random() * perVillager.length)];
     },

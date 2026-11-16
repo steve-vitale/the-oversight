@@ -574,7 +574,21 @@
           '"Honestly? I\'m alright right now. Just good to talk."',
           '"Nothing I can name. Company\'s enough."',
         ]) || '"Honestly? I\'m alright right now."';
-        const composed = this.convoComposeDlg(vid, favorLine, choiceId);
+        // F4c GUARD (journey-succession r224): the want's line may already
+        // have been spoken recently (run ledger) — e.g. the seek_taken
+        // repeat-ack line quoted in this sitting's resume opener. Speaking
+        // it again goes dry ("...Sorry, lost my train of thought."). Fall
+        // to the nowant pool instead — the same graceful line the no-want
+        // path already uses. WouldBlock mirrors sayLine's block decision
+        // exactly for these non-exempt lines.
+        let composed = this.convoComposeDlg(vid, favorLine, choiceId);
+        if (composed && typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, composed)) {
+          const fallback = this.convoPickCycle(vid, 'dlg:help:nowant', [
+            '"Honestly? I\'m alright right now. Just good to talk."',
+            '"Nothing I can name. Company\'s enough."',
+          ]) || '"Honestly? I\'m alright right now."';
+          composed = this.convoComposeDlg(vid, fallback, choiceId);
+        }
         const said = this.sayLine(vid, composed, { tag: (c.want && c.want.id === 'ask_favor') ? 'favor' : undefined });
         // BLOCKED REPEAT (dialog-ui-fix 2026-10-11, defect 6; cycling
         // journey-social 2026-10-12): if sayLine's ledger blocked the line,

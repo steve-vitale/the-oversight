@@ -747,6 +747,12 @@
       // Openers don't lead questions ("I think are you okay?" is broken).
       let useOpen = opens.length && (!closes.length || (!isQ && Math.random() < 0.45));
       if (favorHead) useOpen = false;
+      // RE-ANCHOR GUARD (journey-succession r224, F4b): a "Still on X."
+      // body is itself a re-anchor — a voice opener stacked on it doubles
+      // the discourse marker ("Let me be straight — Still on that
+      // question.", "Between us — Still on what's been happening.").
+      // Never open one; trailing closers still fold.
+      if (/^"Still on /.test(t)) useOpen = false;
       let pool = useOpen ? opens : closes;
       // DISMISSAL CLOSERS (journey endgame 2026-10-11; sim-voicefix1 F9
       // 2026-10-21: DNA's old " — anyway." / " — comedy." dash-tags are gone —
