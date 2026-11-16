@@ -767,6 +767,15 @@ if (require.main === module) (async function () {
       return path.join(REPO, 'evidence', '2026-11-16',
         pol === 'competent-covenant-b' ? stem + '-control' : stem + '-on');
     }
+    // SEASONING (RUN=seasoning-b, arm sim-seasoning-b): the seasoning
+    // gate DIAG — same two legs as the re-confirm (covenant control /
+    // courtship armed), own corpora dirs under evidence/2026-11-16
+    // (perseed-seasoning-b-control / -on), shared band 102201–102208,
+    // 150d. The re-confirm mapping above is NOT overwritten.
+    if (RUN === 'seasoning-b') {
+      return path.join(REPO, 'evidence', '2026-11-16',
+        pol === 'competent-covenant-b' ? stem + '-control' : stem + '-on');
+    }
     return path.join(REPO, 'evidence', '2026-11-15',
       pol === 'competent-scaleclimb-b' ? stem + '-control' : stem + '-on');
   }
