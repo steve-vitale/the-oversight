@@ -1,0 +1,747 @@
+// analyze-gatereach2-b.js — gate-consultation DIAG for
+// sim-gatereach2-b. Reads the gatereach2-driver corpora (per-seed JSONs
+// with w5encounters / w5gates / w5seeds / w5departs / grLaunches /
+// wpEnd) and reports, for every winPlanFightGate consultation, which
+// path consulted it — and for every launched-party arrival, whether
+// the gate was consulted and with what answer. Two legs (control,
+// seed call absent; instrument, seed call on), identical seeds.
+// The bars are INSTRUMENT VALIDITY (prereg):
+//   1. >= 90% of wave-4+ gate consultations classified by path,
+//      unknown 0.
+//   2. >= 90% of launched-party arrivals classified, unknown 0.
+//   3. corpus complete (16/16 files combined, 8/8 per leg, 0 parse
+//      errors).
+//   4. neutrality proven (D1 + D2 in the proof test, D3 drift smoke
+//      in scripts/gatereach2-drift-check.js — reported in evidence).
+//   5. proof test green.
+// GO iff ALL hold. NO-GO otherwise — the revision goes under
+// "metric review" for the NEXT run, never a mid-run re-score.
+// Path classes (frozen in the prereg): expedition-launched /
+// expedition-ordinary / world-tick / aid. `other:<fn>` and `unknown`
+// count as unclassified for the coverage bar. Field-fight deaths are
+// counted from encounter rows (vDie), NOT from the death log's killer
+// field (producergate §9.1). Read-only; prints JSON to stdout.
+// Usage: node scripts/analyze-gatereach2-b.js <dir> [<second-dir>]
+//   one dir: that leg's summary + judgment (corpus bar 8/8).
+//   two dirs: control + instrument summaries, the combined summary,
+//     and the combined judgment (corpus bar 16/16).
+'use strict';
+const fs = require('fs');
+const path = require('path');
+const w5k = require('./analyze-wave5kill-b');
+
+function med(a) {
+  if (!a.length) return null;
+  const s = a.slice().sort(function (x, y) { return x - y; });
+  const m = s.length >> 1;
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+
+function isStarvation(d) {
+  return /starv|hunger/i.test(String((d && d.cause) || '') + ' ' + String((d && d.kind) || ''));
+}
+
+// classifyStartMode(row): same pure function as the driver's export
+// (kept in both places; the proof test asserts they agree on every
+// fixture row). Classified modes are the six named ones; 'other' and
+// 'unclassified' are not classified.
+const CLASSIFIED_MODES = ['expedition-party', 'expedition-solo', 'worldtick-party', 'worldtick-solo', 'patrol-party', 'patrol-solo', 'aid-party', 'aid-solo'];
+function classifyStartMode(r) {
+  if (!r || !r.origin || r.origin === 'unclassified') return 'unclassified';
+  if (r.origin === 'expedition') {
+    if (!r.fighterExped) return 'unclassified';
+    return (r.allyExpedSharedN | 0) >= 1 ? 'expedition-party' : 'expedition-solo';
+  }
+  if (r.origin === 'world-tick') return (r.alliesN | 0) >= 1 ? 'worldtick-party' : 'worldtick-solo';
+  if (r.origin === 'patrol') return (r.alliesN | 0) >= 1 ? 'patrol-party' : 'patrol-solo';
+  if (r.origin === 'aid') return (r.alliesN | 0) >= 1 ? 'aid-party' : 'aid-solo';
+  return 'other';
+}
+function isClassifiedMode(m) { return CLASSIFIED_MODES.indexOf(m) !== -1; }
+
+// classifyGatePath(caller, hasLaunch): the frozen consultation-path
+// taxonomy (prereg) — the same pure function as the driver's export;
+// the analyzer recomputes it from the row's caller + launch and
+// counts any disagreement with the driver's recorded path as an
+// instrument error. Classified paths are the four named ones;
+// 'other:<fn>' and 'unknown' are not classified.
+const GATE_CLASSIFIED_PATHS = ['expedition-launched', 'expedition-ordinary', 'world-tick', 'aid'];
+function classifyGatePath(caller, hasLaunch) {
+  if (caller === 'expeditionMonster') return hasLaunch ? 'expedition-launched' : 'expedition-ordinary';
+  if (caller === 'resolveWildMonsterEncounter') return 'world-tick';
+  if (caller === 'aidFight') return 'aid';
+  if (caller) return 'other:' + caller;
+  return 'unknown';
+}
+function isClassifiedPath(p) { return GATE_CLASSIFIED_PATHS.indexOf(p) !== -1; }
+
+// buildArrivals(launches, gates, encounters): launched-party arrivals
+// (prereg frozen definitions). One row per launched-party arrival:
+//   - one gate row for a launched holder in its launch window =
+//     an arrival with gateConsulted=true (answer, party size at the
+//     gate, trick-known state from the gate row);
+//   - one expedition-origin encounter row for a launched holder in
+//     its window with NO gate row for the same (vid, day, mid) = an
+//     arrival with gateConsulted=false (the gap this DIAG hunts for).
+// A launched holder with neither in its window never arrived: it is
+// counted in the launch→gate arrival rate, NOT in the arrival
+// denominator. Multiple gate rows for one launch are multiple
+// arrivals; one gate row falling in several launches' windows counts
+// once per launch (launch-window counting) — distinctMeetings reports
+// the de-duplicated count alongside.
+function buildArrivals(launches, gates, encounters) {
+  const holders = launches.filter(function (l) { return l.role === 'holder' && l.launched && l.duration != null; });
+  const rows = [];
+  let unknown = 0;
+  const distinctKeys = {};
+  for (const l of holders) {
+    const lo = l.day, hi = l.day + (l.duration | 0);
+    const gs = gates.filter(function (g) {
+      return g.seed === l.seed && g.vid === l.vid && g.day >= lo && g.day <= hi && ((g.wave | 0) >= 4);
+    });
+    for (const g of gs) {
+      distinctKeys[g.seed + '|' + g.vid + '|' + g.day + '|' + g.mid] = true;
+      let enc = null;
+      for (const e of encounters) {
+        if (e.seed === l.seed && e.vid === l.vid && e.day === g.day && e.mid === g.mid) { enc = e; break; }
+      }
+      const ans = g.result === 'avoid' ? 'avoid:' + (g.reason || '-') : (g.result || 'unknown');
+      rows.push({ seed: l.seed, leg: l.leg || null, vid: l.vid, mid: g.mid, wave: g.wave, day: g.day,
+        launchDay: l.day, launchSource: l.source || null,
+        gateConsulted: true, answer: ans, reason: g.reason || null,
+        partySize: g.partySize, trickKnown: !!g.trickKnown,
+        planStage: g.planStage || null,
+        fightOutcome: enc ? (enc.outcome || null) : (g.result === 'avoid' ? 'avoided-no-fight' : 'no-fight'),
+        classification: 'consulted' });
+    }
+    const exps = encounters.filter(function (e) {
+      return e.seed === l.seed && e.vid === l.vid && e.origin === 'expedition' &&
+        e.day >= lo && e.day <= hi && ((e.wave | 0) >= 4);
+    });
+    for (const e of exps) {
+      const hasGate = gs.some(function (g) { return g.day === e.day && g.mid === e.mid; });
+      if (hasGate) continue;
+      distinctKeys[e.seed + '|' + e.vid + '|' + e.day + '|' + e.mid] = true;
+      rows.push({ seed: l.seed, leg: l.leg || null, vid: l.vid, mid: e.mid, wave: e.wave, day: e.day,
+        launchDay: l.day, launchSource: l.source || null,
+        gateConsulted: false, answer: 'unknown', reason: null,
+        partySize: e.partyAtStart != null ? e.partyAtStart : ((e.allyVids || []).length + 1),
+        trickKnown: e.trickBefore != null ? !!e.trickBefore : null,
+        planStage: (e.gate && e.gate.planStage) || null,
+        fightOutcome: e.outcome || null, classification: 'not-consulted' });
+    }
+  }
+  for (const r of rows) {
+    if (r.classification !== 'consulted' && r.classification !== 'not-consulted') unknown += 1;
+  }
+  return { rows: rows, unknown: unknown, distinctMeetings: Object.keys(distinctKeys).length };
+}
+
+// gateFailCondition(g): why a wave-4+ gate row did not SEEK, derived
+// from the recorded row alone (gate order: target, party, trick).
+function gateFailCondition(g) {
+  if (!g) return 'no-gate-row';
+  if (g.result === 'seek') return 'seek';
+  if (g.result === 'avoid') return 'avoid:' + (g.reason || '-');
+  if (g.result !== 'null') return 'other:' + (g.result || '?');
+  const wave = g.wave | 0;
+  const isTarget = (g.needWave != null && wave === g.needWave) ||
+    (g.planTarget && g.mid === g.planTarget) ||
+    (g.planStage === 'standing' && wave >= 3);
+  if (!isTarget) return 'null:not-target';
+  const partyOk = (g.partySize | 0) >= 2 && g.allArmed &&
+    (wave >= 4 ? ((g.partySize | 0) >= 3 && g.allArmored) : true);
+  if (!partyOk) {
+    if ((g.partySize | 0) < 3 && wave >= 4) return 'null:party-short';
+    if (!g.allArmed) return 'null:party-unarmed';
+    if (!g.allArmored) return 'null:party-unarmored';
+    return 'null:party-short';
+  }
+  if (wave >= 4 && !g.trickKnown) return 'null:trick-hold';
+  return 'null:other';
+}
+
+// buildWaitEpisodes(departs, deaths, endDay): group party-wait rows
+// into episodes per (seed, vid, target); close each episode with the
+// first later depart row for that villager, or by death / horizon.
+// Returns { episodes, byEnd, unclassified }.
+function buildWaitEpisodes(departs, deaths, endDay) {
+  const waits = departs.filter(function (p) {
+    if (p.result !== 'hold') return false;
+    if (p.winPlanAction) return p.winPlanAction === 'party_wait';
+    return p.stage === 'party';
+  }).sort(function (a, b) { return (a.day - b.day) || String(a.vid).localeCompare(String(b.vid)); });
+  const closers = departs.filter(function (p) { return p.result === 'launch' || p.result === 'normal'; })
+    .sort(function (a, b) { return (a.day - b.day) || String(a.vid).localeCompare(String(b.vid)); });
+  const deadVids = {};
+  for (const d of (deaths || [])) {
+    if (!d.player && d.who) deadVids[d.seed + '|' + d.who] = true;
+  }
+  const episodes = [];
+  let cur = null;
+  function flush(end, endDayValue) {
+    if (!cur) return;
+    cur.end = end;
+    cur.endDay = endDayValue;
+    episodes.push(cur);
+    cur = null;
+  }
+  for (const w of waits) {
+    const key = w.seed + '|' + w.vid + '|' + (w.target || '-');
+    if (cur && cur.key === key && (w.day - cur.lastDay) <= 3) {
+      cur.waits.push(w);
+      cur.lastDay = w.day;
+      continue;
+    }
+    // Close the open episode before starting a new one: find its end.
+    if (cur) {
+      const end = closeEpisode(cur, closers, deadVids, endDay);
+      flush(end.reason, end.day);
+    }
+    cur = { key: key, seed: w.seed, vid: w.vid, target: w.target || null,
+      firstDay: w.day, lastDay: w.day, waits: [w],
+      secondCompanionWaits: 0, poolEligible: [] };
+    if (isSecondCompanionWait(w)) cur.secondCompanionWaits += 1;
+    if (w.poolCensus) cur.poolEligible.push(w.poolCensus.eligible);
+  }
+  if (cur) {
+    const end = closeEpisode(cur, closers, deadVids, endDay);
+    flush(end.reason, end.day);
+  }
+  // Second-companion counts + pool medians were tallied per first wait
+  // only above; recompute over all waits in each episode.
+  for (const ep of episodes) {
+    ep.secondCompanionWaits = 0;
+    ep.poolEligible = [];
+    for (const w of ep.waits) {
+      if (isSecondCompanionWait(w)) ep.secondCompanionWaits += 1;
+      if (w.poolCensus) ep.poolEligible.push(w.poolCensus.eligible);
+    }
+    ep.medianPoolEligible = med(ep.poolEligible);
+    ep.nWaits = ep.waits.length;
+    delete ep.waits;
+  }
+  const byEnd = {};
+  for (const ep of episodes) byEnd[ep.end] = (byEnd[ep.end] || 0) + 1;
+  const unclassified = episodes.filter(function (e) { return e.end === 'unknown'; }).length;
+  return { episodes: episodes, byEnd: byEnd, unclassified: unclassified };
+}
+
+function isSecondCompanionWait(w) {
+  if (!w.needsFull) return false;
+  if (w.poolCensus && w.poolCensus.eligible === 1) return true;
+  if (w.companionsAvailable === 1) return true;
+  return false;
+}
+
+function closeEpisode(ep, closers, deadVids, endDay) {
+  for (const c of closers) {
+    if (c.seed !== ep.seed || c.vid !== ep.vid) continue;
+    if (c.day < ep.lastDay) continue;
+    if (c.day - ep.lastDay > 30) break;
+    if (c.result === 'launch') return { reason: 'launch', day: c.day };
+    if (c.result === 'normal') {
+      if (c.stage && c.stage !== 'party') return { reason: 'plan-changed', day: c.day };
+      if (c.target !== undefined && ep.target !== null && c.target !== ep.target) return { reason: 'plan-changed', day: c.day };
+      return { reason: 'hold-expired', day: c.day };
+    }
+  }
+  if (deadVids[ep.seed + '|' + ep.vid]) return { reason: 'fighter-died', day: endDay };
+  return { reason: 'horizon', day: endDay };
+}
+
+// analyzeLeg(dir, w5set) — one corpus dir. Returns the full summary.
+// analyzeFiles(fileObjs, w5set) — the same, over an explicit file
+// list ({path, leg}); two-leg combined analysis passes both legs'
+// files with leg tags ('control' / 'instrument').
+function listFiles(dir, leg) {
+  return fs.readdirSync(dir).filter(function (f) { return f.endsWith('.json'); }).sort()
+    .map(function (f) { return { path: path.join(dir, f), leg: leg || null }; });
+}
+function analyzeLeg(dir, w5set) {
+  return analyzeFiles(listFiles(dir, null), w5set);
+}
+function analyzeFiles(fileObjs, w5set) {
+  const files = fileObjs.map(function (fo) { return fo.path; });
+  const perSeed = [];
+  const encounters = [];
+  const gates = [];
+  const seeds = [];
+  const departs = [];
+  const launches = [];
+  const deathsAll = [];
+  const wpEnds = [];
+  const brainEnds = [];
+  // AID-GATE (sim-aidgate-b): door-consult rows + door say lines.
+  const doors = [];
+  const doorLines = [];
+  let parseErrors = 0;
+  let endDay = 0;
+  for (const fo of fileObjs) {
+    const f = fo.path;
+    let d;
+    try { d = JSON.parse(fs.readFileSync(f, 'utf8')); }
+    catch (e) { parseErrors += 1; continue; }
+    const rec0 = w5k.classifySeed(d, w5set);
+    rec0.leg = fo.leg || null;
+    perSeed.push(rec0);
+    rec0.fieldKills = (d.w5encounters || []).filter(function (e) { return e.wave === 5 && e.outcome === 'vKill'; }).length;
+    rec0.tbKills = (rec0.kills || 0) - rec0.fieldKills;
+    if (rec0.tbKills < 0) rec0.errors.push('negative-tb-kills');
+    // FIELD DEATHS FROM ENCOUNTER ROWS (prereg): vDie outcomes on
+    // wave-5 (and wave-4) field fights — the honest count the death
+    // log's killer field misses (producergate §9.1).
+    rec0.fieldDeathsW5 = (d.w5encounters || []).filter(function (e) { return e.wave === 5 && e.outcome === 'vDie'; }).length;
+    rec0.fieldDeathsW4 = (d.w5encounters || []).filter(function (e) { return e.wave === 4 && e.outcome === 'vDie'; }).length;
+    // AID-GATE (sim-aidgate-b): same-day/same-beast 'villager combat'
+    // deaths for the kill:death bar — a deaths row naming the killed
+    // beast (kind monster, cause 'villager combat') on the same day
+    // as a field kill of that beast on this seed. Corpus check on
+    // the gatereach band: the only such rows ARE the field kills'
+    // own death records (2/2), so the term equals the field-kill
+    // count there; the bar is judged as written.
+    const fk5 = (d.w5encounters || []).filter(function (e) { return e.wave === 5 && e.outcome === 'vKill'; });
+    rec0.vcDeathsW5 = (d.deaths || []).filter(function (x) {
+      if (x.kind !== 'monster' || x.cause !== 'villager combat' || !w5set.has(x.who)) return false;
+      return fk5.some(function (k) { return k.day === x.day && k.mid === x.who; });
+    }).length;
+    for (const e of (d.w5encounters || [])) encounters.push(Object.assign({ seed: d.seed, leg: fo.leg || null }, e));
+    for (const g of (d.w5gates || [])) gates.push(Object.assign({ seed: d.seed, leg: fo.leg || null }, g));
+    // GATEREACH2: recompute each gate row's path from its caller +
+    // launch and compare with the driver's recorded path — any
+    // disagreement, or a missing path, is an instrument error.
+    for (const g of (d.w5gates || [])) {
+      if (!g.path) rec0.errors.push('gate-path-missing:' + g.day + ':' + g.vid + ':' + g.mid);
+      else if (g.path !== classifyGatePath(g.caller || null, !!g.launch)) {
+        rec0.errors.push('gate-path-mismatch:' + g.day + ':' + g.vid + ':' + g.mid + ':' + g.path);
+      }
+    }
+    for (const s of (d.w5seeds || [])) seeds.push(Object.assign({ seed: d.seed, leg: fo.leg || null }, s));
+    for (const p of (d.w5departs || [])) departs.push(Object.assign({ seed: d.seed, leg: fo.leg || null }, p));
+    for (const l of (d.grLaunches || [])) launches.push(Object.assign({ seed: d.seed, leg: fo.leg || null }, l));
+    for (const dd of (d.w5doors || [])) doors.push(Object.assign({ seed: d.seed, leg: fo.leg || null }, dd));
+    for (const dl of (d.w5doorLines || [])) doorLines.push(Object.assign({ seed: d.seed, leg: fo.leg || null }, dl));
+    for (const dd of (d.deaths || [])) deathsAll.push(Object.assign({ seed: d.seed, leg: fo.leg || null }, dd));
+    if (d.wpEnd) wpEnds.push(Object.assign({ seed: d.seed, leg: fo.leg || null }, d.wpEnd));
+    if (d.brainEnd) brainEnds.push(Object.assign({ seed: d.seed, leg: fo.leg || null }, d.brainEnd));
+    rec0.scaleRank = d.scaleRank || null;
+    rec0.won = !!d.won;
+    rec0.tableTaken = (d.seatTakes || []).some(function (t) { return t && t.ok; });
+    rec0.starvation = (d.deaths || []).filter(isStarvation).length;
+    rec0.wpEnd = d.wpEnd || null;
+    if ((d.gameDays || 0) > endDay) endDay = d.gameDays || 0;
+    // Instrument errors carried on the per-seed record.
+    if ((d.instrumentErrors || []).length) {
+      for (const e of d.instrumentErrors) rec0.errors.push('driver:' + String(e).slice(0, 80));
+    }
+  }
+  const unlocked = perSeed.filter(function (s) { return s.unlocked; });
+  const classes = { LOCKED: 0, 'NEVER-FACED': 0, 'FACED-NOT-KILLED': 0, KILLED: 0 };
+  perSeed.forEach(function (s) { classes[s.cls] += 1; });
+
+  // --- wave-5 field fights: start-mode classification ---
+  const w5enc = encounters.filter(function (e) { return e.wave === 5; });
+  const w4enc = encounters.filter(function (e) { return e.wave === 4; });
+  function encSummary(list) {
+    const byOutcome = {};
+    const byStartMode = {};
+    const byPartyAtStart = {};
+    let kills = 0, deaths = 0, seeks = 0, joined = 0;
+    for (const e of list) {
+      byOutcome[e.outcome || '?'] = (byOutcome[e.outcome || '?'] || 0) + 1;
+      const sm = e.startMode || classifyStartMode(e);
+      byStartMode[sm] = (byStartMode[sm] || 0) + 1;
+      const ps = (e.partyAtStart != null ? e.partyAtStart : (e.allyVids || []).length + 1);
+      byPartyAtStart[ps] = (byPartyAtStart[ps] || 0) + 1;
+      if (e.outcome === 'vKill') kills += 1;
+      if (e.outcome === 'vDie') deaths += 1;
+      if (e.gate && e.gate.result === 'seek') seeks += 1;
+      if (e.calledHelp) joined += 1;
+    }
+    return { n: list.length, byOutcome: byOutcome, byStartMode: byStartMode,
+      byPartyAtStart: byPartyAtStart, kills: kills, deaths: deaths,
+      seeks: seeks, allyJoinedMidFight: joined };
+  }
+  const w5sum = encSummary(w5enc);
+  const w4sum = encSummary(w4enc);
+  const w5classified = w5enc.filter(function (e) { return isClassifiedMode(e.startMode || classifyStartMode(e)); }).length;
+  const w5classifiedShare = w5enc.length ? +(w5classified / w5enc.length).toFixed(3) : null;
+  // Outcomes by start mode (wave 5): does how the fight starts change
+  // how it ends?
+  const w5byMode = {};
+  for (const e of w5enc) {
+    const sm = e.startMode || classifyStartMode(e);
+    const b = w5byMode[sm] || (w5byMode[sm] = { n: 0, vKill: 0, vFlee: 0, mFlee: 0, vDie: 0, evade: 0, other: 0 });
+    b.n += 1;
+    if (e.outcome === 'vKill') b.vKill += 1;
+    else if (e.outcome === 'vFlee') b.vFlee += 1;
+    else if (e.outcome === 'mFlee') b.mFlee += 1;
+    else if (e.outcome === 'vDie') b.vDie += 1;
+    else if (e.outcome === 'evade') b.evade += 1;
+    else b.other += 1;
+  }
+
+  // --- gate decomposition (wave 5): result + failing condition ---
+  const w5gates = gates.filter(function (g) { return g.wave === 5; });
+  const gateByResult = {};
+  const gateByFail = {};
+  for (const g of w5gates) {
+    gateByResult[g.result || '?'] = (gateByResult[g.result || '?'] || 0) + 1;
+    const fc = gateFailCondition(g);
+    gateByFail[fc] = (gateByFail[fc] || 0) + 1;
+  }
+  const gatePartySizes = {};
+  for (const g of w5gates) gatePartySizes[g.partySize] = (gatePartySizes[g.partySize] || 0) + 1;
+  const trickKnownAtGate = { known: 0, unknown: 0 };
+  for (const g of w5gates) { if (g.trickKnown) trickKnownAtGate.known += 1; else trickKnownAtGate.unknown += 1; }
+  const gatePlanStages = {};
+  for (const g of w5gates) gatePlanStages[g.planStage || 'no-plan'] = (gatePlanStages[g.planStage || 'no-plan'] || 0) + 1;
+
+  // --- door consults (AID-GATE): result + reason, wave-5 aid fights
+  // split by aidGate verdict, opener firings on SEEK fights ---
+  const doorByResult = {};
+  const doorByReason = {};
+  const doorPartySizes = {};
+  for (const g of doors) {
+    doorByResult[g.result || '?'] = (doorByResult[g.result || '?'] || 0) + 1;
+    doorByReason[g.reason || 'null'] = (doorByReason[g.reason || 'null'] || 0) + 1;
+    doorPartySizes[g.partySize] = (doorPartySizes[g.partySize] || 0) + 1;
+  }
+  // Opener trick types as they appear in trickLog (first entry):
+  // argue / continuity / offscript / inefficient are types;
+  // reunion-novel is a wait, logged as 'wait:reunion-novel'.
+  const OPENER_TYPES = ['argue', 'continuity', 'offscript', 'inefficient', 'wait:reunion-novel'];
+  const aidSplit = {};
+  let openerFired = 0;
+  for (const e of w5enc) {
+    if (e.origin !== 'aid') continue;
+    const k = e.aidGate || 'not-consulted';
+    const b = aidSplit[k] || (aidSplit[k] = { n: 0, vKill: 0, vFlee: 0, mFlee: 0, vDie: 0, evade: 0, other: 0, trickOpen: 0 });
+    b.n += 1;
+    if (e.outcome === 'vKill') b.vKill += 1;
+    else if (e.outcome === 'vFlee') b.vFlee += 1;
+    else if (e.outcome === 'mFlee') b.mFlee += 1;
+    else if (e.outcome === 'vDie') b.vDie += 1;
+    else if (e.outcome === 'evade') b.evade += 1;
+    else b.other += 1;
+    if (e.trickOpen) b.trickOpen += 1;
+    if (e.trickOpen && (e.trickLog || []).length && OPENER_TYPES.indexOf(e.trickLog[0]) !== -1) openerFired += 1;
+  }
+
+  // --- launches: holder rows are launches; join to gate + fights ---
+  const holderLaunches = launches.filter(function (l) { return l.role === 'holder'; });
+  const launchedHolders = holderLaunches.filter(function (l) { return l.launched; });
+  const failedDeparts = holderLaunches.filter(function (l) { return !l.launched; });
+  const launchBySource = {};
+  const launchBySize = {};
+  const launchBySizeFull = {};
+  for (const l of launchedHolders) {
+    launchBySource[l.source || '?'] = (launchBySource[l.source || '?'] || 0) + 1;
+    const size = 1 + ((l.partyAfter || []).length);
+    launchBySize[size] = (launchBySize[size] || 0) + 1;
+    if (l.needWave != null && (l.needWave | 0) >= 4) launchBySizeFull[size] = (launchBySizeFull[size] || 0) + 1;
+  }
+  // Gate arrival + fight joined, per launched holder.
+  let gateArrived = 0, gateNotArrived = 0, launchUnknown = 0;
+  const daysToGate = [];
+  let fightsJoined = 0;
+  const arrivalBySource = {};
+  for (const l of launchedHolders) {
+    const src = l.source || '?';
+    const a = arrivalBySource[src] || (arrivalBySource[src] = { launched: 0, arrived: 0, fightsJoined: 0 });
+    a.launched += 1;
+    if (l.duration == null) { launchUnknown += 1; continue; }
+    const lo = l.day, hi = l.day + (l.duration | 0);
+    let firstGate = null;
+    for (const g of gates) {
+      if (g.seed !== l.seed || g.vid !== l.vid) continue;
+      if (g.day < lo || g.day > hi) continue;
+      if (firstGate === null || g.day < firstGate) firstGate = g.day;
+    }
+    if (firstGate !== null) {
+      gateArrived += 1;
+      a.arrived += 1;
+      daysToGate.push(firstGate - lo);
+    } else gateNotArrived += 1;
+    let joined = false;
+    for (const e of encounters) {
+      if (e.seed !== l.seed || e.vid !== l.vid) continue;
+      if (e.origin !== 'expedition') continue;
+      if (e.day < lo || e.day > hi) continue;
+      if ((e.allyExpedSharedN | 0) >= 1) { joined = true; break; }
+    }
+    if (joined) { fightsJoined += 1; a.fightsJoined += 1; }
+  }
+
+  // --- waits + episodes ---
+  const waitRows = departs.filter(function (p) {
+    if (p.result !== 'hold') return false;
+    if (p.winPlanAction) return p.winPlanAction === 'party_wait';
+    return p.stage === 'party';
+  });
+  const ep = buildWaitEpisodes(departs, deathsAll, endDay);
+  const secondWaits = waitRows.filter(isSecondCompanionWait).length;
+  const poolEligibleAtWaits = waitRows.filter(function (w) { return w.poolCensus; }).map(function (w) { return w.poolCensus.eligible; });
+  const poolByReason = { dead: 0, away: 0, trust: 0, notAtHaven: 0, engaged: 0, profile: 0, exped: 0 };
+  for (const w of waitRows) {
+    if (!w.poolCensus) continue;
+    for (const k of Object.keys(poolByReason)) poolByReason[k] += (w.poolCensus.byReason[k] | 0);
+  }
+
+  // --- plan seeds (wave 5) + win-plan sums ---
+  const w5seedRows = seeds.filter(function (s) { return s.wave === 5; });
+  const seedByOutcome = {};
+  for (const s of w5seedRows) seedByOutcome[s.outcome || '?'] = (seedByOutcome[s.outcome || '?'] || 0) + 1;
+  const wpSum = { planSeeds: 0, avoidances: 0, seekContacts: 0, standingContacts: 0, partyDepartures: 0, partyFights: 0, trickHolds: 0, veteranGuardHolds: 0, partyWaits: 0, gearHolds: 0, plansN: 0, w5Targets: 0 };
+  const wpByStage = {};
+  for (const w of wpEnds) {
+    for (const k of Object.keys(wpSum)) wpSum[k] += (w[k] | 0);
+    const bs = w.byStage || {};
+    for (const st of Object.keys(bs)) wpByStage[st] = (wpByStage[st] || 0) + bs[st];
+  }
+  const brainSum = { totalCommits: 0, winPlanCommits: 0, byAction: {}, byOverride: {} };
+  for (const b of brainEnds) {
+    brainSum.totalCommits += (b.totalCommits | 0);
+    brainSum.winPlanCommits += (b.winPlanCommits | 0);
+    for (const k of Object.keys(b.byAction || {})) brainSum.byAction[k] = (brainSum.byAction[k] || 0) + b.byAction[k];
+    for (const k of Object.keys(b.byOverride || {})) brainSum.byOverride[k] = (brainSum.byOverride[k] || 0) + b.byOverride[k];
+  }
+
+  // --- wall numbers + costs ---
+  const national = perSeed.filter(function (s) { return s.scaleRank === 'national' || s.scaleRank === 'global'; }).length;
+  const table = perSeed.filter(function (s) { return s.tableTaken; }).length;
+  const wins = perSeed.filter(function (s) { return s.won; }).length;
+  const w4unlock = perSeed.filter(function (s) { return (s.maxWave || 0) >= 4; }).length;
+  const starvation = perSeed.reduce(function (a, s) { return a + (s.starvation | 0); }, 0);
+  const totFieldKills = unlocked.reduce(function (a, s) { return a + (s.fieldKills || 0); }, 0);
+  const totTbKills = unlocked.reduce(function (a, s) { return a + (s.tbKills || 0); }, 0);
+  const totKills = totFieldKills + totTbKills;
+  const fieldDeathsW5 = perSeed.reduce(function (a, s) { return a + (s.fieldDeathsW5 || 0); }, 0);
+  const fieldDeathsW4 = perSeed.reduce(function (a, s) { return a + (s.fieldDeathsW4 || 0); }, 0);
+  const deathLogW5 = unlocked.reduce(function (a, s) { return a + (s.deathsW5 || 0); }, 0);
+  // AID-GATE (sim-aidgate-b): the kill:death bar's death term and the
+  // per-unlocked rates the GO bar judges. vcDeathsW5 is the
+  // same-day/same-beast 'villager combat' count (see per-seed above).
+  const vcDeathsW5 = perSeed.reduce(function (a, s) { return a + (s.vcDeathsW5 || 0); }, 0);
+  const killDeathDenom = fieldDeathsW5 + vcDeathsW5;
+  const killDeathAidgate = killDeathDenom > 0 ? +(totFieldKills / killDeathDenom).toFixed(2) : null;
+  const tbKillsPerUnlocked = unlocked.length ? +(totTbKills / unlocked.length).toFixed(2) : null;
+  const facedNotKilledShare = unlocked.length ? +(classes['FACED-NOT-KILLED'] / unlocked.length).toFixed(2) : null;
+  const instrumentErrors = perSeed.reduce(function (a, s) { return a + s.errors.length; }, 0) + parseErrors;
+  const unclassifiedFights = w5enc.length - w5classified;
+  const launchUnclassifiedShare = launchedHolders.length ? +(launchUnknown / launchedHolders.length).toFixed(3) : null;
+  const episodeUnclassifiedShare = ep.episodes.length ? +(ep.unclassified / ep.episodes.length).toFixed(3) : null;
+
+  // --- GATEREACH2: gate consultations (wave 4+) by path + answer ---
+  const consults = gates.filter(function (g) { return ((g.wave | 0) >= 4); });
+  const consultW3 = gates.filter(function (g) { return ((g.wave | 0) === 3); });
+  const consultByPath = {};
+  const consultByPathAnswer = {};
+  const consultByWave = {};
+  const consultByLeg = {};
+  let consultUnknown = 0, consultClassified = 0;
+  for (const g of consults) {
+    const p = g.path || classifyGatePath(g.caller || null, !!g.launch);
+    consultByPath[p] = (consultByPath[p] || 0) + 1;
+    const ans = g.result === 'avoid' ? 'avoid:' + (g.reason || '-') : (g.result || 'unknown');
+    const k = p + '|' + ans;
+    consultByPathAnswer[k] = (consultByPathAnswer[k] || 0) + 1;
+    consultByWave[g.wave] = (consultByWave[g.wave] || 0) + 1;
+    if (g.leg) { const lb = consultByLeg[g.leg] || (consultByLeg[g.leg] = { total: 0, classified: 0, unknown: 0 }); lb.total += 1; if (isClassifiedPath(p)) lb.classified += 1; if (p === 'unknown') lb.unknown += 1; }
+    if (p === 'unknown') consultUnknown += 1;
+    if (isClassifiedPath(p)) consultClassified += 1;
+  }
+  const consultShare = consults.length ? +(consultClassified / consults.length).toFixed(3) : null;
+  const gateConsultations = { total: consults.length, wave3n: consultW3.length,
+    classified: consultClassified, unknown: consultUnknown,
+    share: consultShare, byPath: consultByPath,
+    byPathAnswer: consultByPathAnswer, byWave: consultByWave, byLeg: consultByLeg };
+
+  // --- GATEREACH2: launched-party arrivals (gate consulted? answer?) ---
+  const arr = buildArrivals(launches, gates, encounters);
+  const arrByConsult = { consulted: 0, 'not-consulted': 0 };
+  const arrByAnswer = {};
+  const arrByLeg = {};
+  for (const r of arr.rows) {
+    arrByConsult[r.classification] = (arrByConsult[r.classification] || 0) + 1;
+    arrByAnswer[r.answer] = (arrByAnswer[r.answer] || 0) + 1;
+    if (r.leg) {
+      const lb = arrByLeg[r.leg] || (arrByLeg[r.leg] = { total: 0, consulted: 0, 'not-consulted': 0, unknown: 0 });
+      lb.total += 1;
+      lb[r.classification] = (lb[r.classification] || 0) + 1;
+    }
+  }
+  const arrClassified = arr.rows.length - arr.unknown;
+  const arrShare = arr.rows.length ? +(arrClassified / arr.rows.length).toFixed(3) : null;
+  const arrivals = { total: arr.rows.length, classified: arrClassified,
+    unknown: arr.unknown, share: arrShare,
+    distinctMeetings: arr.distinctMeetings,
+    byConsult: arrByConsult, byAnswer: arrByAnswer, byLeg: arrByLeg,
+    rows: arr.rows };
+
+  const pooled = {
+    seeds: perSeed.length, files: files.length, parseErrors: parseErrors,
+    unlocked: unlocked.length, classes: classes,
+    fieldKills: totFieldKills, tbKills: totTbKills, totalKills: totKills,
+    fieldKillsPerUnlocked: unlocked.length ? +(totFieldKills / unlocked.length).toFixed(2) : null,
+    tbKillsPerUnlocked: tbKillsPerUnlocked,
+    facedNotKilledShare: facedNotKilledShare,
+    vcDeathsW5: vcDeathsW5, killDeathAidgate: killDeathAidgate,
+    // Field deaths from encounter rows (the honest count) vs the death
+    // log's killer-field count (the biased one) — the contrast the
+    // next lever's kill:death bar needs.
+    fieldDeathsW5: fieldDeathsW5, fieldDeathsW4: fieldDeathsW4,
+    deathLogW5: deathLogW5,
+    killDeathField: fieldDeathsW5 ? +(totFieldKills / fieldDeathsW5).toFixed(2) : null,
+    medianSurvivalUnlocked: med(unlocked.map(function (s) { return s.days; })),
+    medianSurvivalAll: med(perSeed.map(function (s) { return s.days; })),
+    instrumentErrors: instrumentErrors,
+    w5fights: w5enc.length, w5classified: w5classified,
+    classifiedShare: w5classifiedShare, unclassifiedFights: unclassifiedFights,
+    launches: { holderRows: holderLaunches.length, launched: launchedHolders.length,
+      failedDeparts: failedDeparts.length, bySource: launchBySource, bySize: launchBySize,
+      bySizeFull: launchBySizeFull, gateArrived: gateArrived, gateNotArrived: gateNotArrived,
+      launchUnknown: launchUnknown, launchUnclassifiedShare: launchUnclassifiedShare,
+      daysToGate: daysToGate, medianDaysToGate: med(daysToGate),
+      fightsJoined: fightsJoined, arrivalBySource: arrivalBySource },
+    waits: { rows: waitRows.length, secondCompanionWaits: secondWaits,
+      episodes: ep.episodes.length, byEnd: ep.byEnd,
+      episodeUnclassified: ep.unclassified, episodeUnclassifiedShare: episodeUnclassifiedShare,
+      medianPoolEligible: med(poolEligibleAtWaits), poolByReason: poolByReason },
+    starvation: starvation,
+    wall: { national: national, table: table, wins: wins, wave4: w4unlock, wave5: unlocked.length },
+  };
+  return {
+    perSeed: perSeed, pooled: pooled,
+    encounters: { w5: w5sum, w4: w4sum, w5byMode: w5byMode },
+    gates: { w5n: w5gates.length, byResult: gateByResult, byFail: gateByFail,
+      partySizes: gatePartySizes, trickKnown: trickKnownAtGate, planStages: gatePlanStages },
+    gateConsultations: gateConsultations,
+    arrivals: arrivals,
+    doors: { n: doors.length, byResult: doorByResult, byReason: doorByReason,
+      partySizes: doorPartySizes, lines: doorLines.length, rows: doors },
+    aidGate: { split: aidSplit, openerFired: openerFired, doorLines: doorLines },
+    seeds: { w5n: w5seedRows.length, byOutcome: seedByOutcome },
+    launchesDetail: { holderLaunches: holderLaunches, episodes: ep.episodes },
+    winplan: { sum: wpSum, byStage: wpByStage },
+    brain: brainSum,
+  };
+}
+
+// judge(summary, expectedFiles) — the frozen prereg bars (instrument
+// validity) that the analyzer can compute. Bars 1–3 + instrument
+// errors are judged here; bars 4 (neutrality: D1/D2 in the proof
+// test, D3 in scripts/gatereach2-drift-check.js) and 5 (proof green)
+// are judged in the evidence file from their own runs and reported
+// here as external (pass null = not judged by this script).
+//   1. consultation classification: share of wave-4+ gate
+//      consultations with a classified path >= 0.90, unknown 0.
+//   2. arrival classification: share of launched-party arrivals
+//      classified >= 0.90, unknown 0.
+//   3. corpus complete (expectedFiles files, 0 parse errors) AND
+//      instrument errors = 0.
+function judge(summary, expectedFiles) {
+  const p = summary.pooled;
+  const g = summary.gateConsultations;
+  const a = summary.arrivals;
+  const exp = expectedFiles || 8;
+  const consultBar = g.share != null ? (g.share >= 0.90 && g.unknown === 0) : null;
+  const arrivalBar = a.share != null ? (a.share >= 0.90 && a.unknown === 0) : null;
+  const corpusBar = p.seeds === exp && p.files === exp && p.parseErrors === 0;
+  const errorsBar = p.instrumentErrors === 0;
+  const go = consultBar === true && arrivalBar === true && corpusBar && errorsBar;
+  return {
+    consultationClassification: { value: g.share, classified: g.classified, total: g.total, unknown: g.unknown, bar: '>= 0.90, unknown 0', pass: consultBar },
+    arrivalClassification: { value: a.share, classified: a.classified, total: a.total, unknown: a.unknown, bar: '>= 0.90, unknown 0', pass: arrivalBar },
+    corpusComplete: { seeds: p.seeds, files: p.files, parseErrors: p.parseErrors, expected: exp, bar: exp + '/' + exp + ' files, 0 parse errors', pass: corpusBar },
+    instrumentErrors: { value: p.instrumentErrors, bar: '= 0', pass: errorsBar },
+    neutrality: { note: 'D1/D2 in the proof test, D3 in scripts/gatereach2-drift-check.js — judged in evidence', pass: null },
+    proof: { note: 'scripts/test-gatereach2-b.js — judged in evidence', pass: null },
+    verdict: go ? 'GO' : 'NO-GO',
+  };
+}
+
+const isMain = require.main === module;
+if (isMain) {
+  const dir = process.argv[2];
+  if (!dir) {
+    console.error('usage: node scripts/analyze-gatereach2-b.js <dir> [<second-dir>]');
+    process.exit(2);
+  }
+  const monstersPath = path.join(__dirname, '..', 'src', 'data', 'monsters.json');
+  const w5set = new Set(w5k.loadWave5Ids(monstersPath));
+  if (process.argv[3]) {
+    // Two legs: control (argv[2]) + instrument (argv[3]). Analyze
+    // each leg alone (corpus bar 8/8) and combined (corpus bar
+    // 16/16); the combined judgment is the prereg verdict.
+    const control = analyzeLeg(dir, w5set);
+    control.judgment = judge(control, 8);
+    const instrument = analyzeLeg(process.argv[3], w5set);
+    instrument.judgment = judge(instrument, 8);
+    const combined = analyzeFiles(listFiles(dir, 'control').concat(listFiles(process.argv[3], 'instrument')), w5set);
+    combined.judgment = judge(combined, 16);
+    const out = { control: control, instrument: instrument, combined: combined };
+    console.log(JSON.stringify(out, null, 2));
+  } else {
+    const out = analyzeLeg(dir, w5set);
+    out.judgment = judge(out, 8);
+    console.log(JSON.stringify(out, null, 2));
+  }
+}
+
+// judgeAidgate(controlPooled, leverPooled) — the frozen aidgate GO bar
+// (sim-aidgate-b prereg, copied exactly from gatereach §11). GO iff ALL
+// hold: (1) lever wave-5 FIELD kills per unlocked ≥ 1.00; (2) lever TB
+// kills per unlocked ≥ 0.5× control; (3) lever kill:death ≥ 0.92 where
+// deaths = encounter-row vDie + same-day/same-beast 'villager combat'
+// deaths (pooled killDeathAidgate; null — e.g. zero denominator —
+// fails); (4) lever FACED-NOT-KILLED share among unlocked ≤ 0.20;
+// (5) lever starvation ≤ control + 2 AND lever median survival ≥
+// 0.8× control. The instrument must also be clean on BOTH legs
+// (8/8 files, 0 parse errors, 0 instrument errors, classified share
+// ≥ 0.90) — a GO on a broken instrument is not a GO.
+function judgeAidgate(control, lever) {
+  function num(x) { return typeof x === 'number' && isFinite(x) ? x : null; }
+  const b1v = num(lever.fieldKillsPerUnlocked);
+  const b1 = b1v !== null && b1v >= 1.00;
+  const b2c = num(control.tbKillsPerUnlocked);
+  const b2v = num(lever.tbKillsPerUnlocked);
+  const b2 = b2c !== null && b2v !== null && b2v >= 0.5 * b2c;
+  const b3v = num(lever.killDeathAidgate);
+  const b3 = b3v !== null && b3v >= 0.92;
+  const b4v = num(lever.facedNotKilledShare);
+  const b4 = b4v !== null && b4v <= 0.20;
+  const b5starv = num(lever.starvation) !== null && num(control.starvation) !== null &&
+    lever.starvation <= control.starvation + 2;
+  const b5surv = num(lever.medianSurvivalAll) !== null && num(control.medianSurvivalAll) !== null &&
+    lever.medianSurvivalAll >= 0.8 * control.medianSurvivalAll;
+  const b5 = b5starv && b5surv;
+  const inst = control.instrumentErrors === 0 && lever.instrumentErrors === 0 &&
+    control.seeds === 8 && lever.seeds === 8 && control.files === 8 && lever.files === 8 &&
+    control.parseErrors === 0 && lever.parseErrors === 0 &&
+    typeof control.classifiedShare === 'number' && control.classifiedShare >= 0.90 &&
+    typeof lever.classifiedShare === 'number' && lever.classifiedShare >= 0.90;
+  const go = b1 && b2 && b3 && b4 && b5 && inst;
+  return {
+    fieldKillsPerUnlocked: { value: b1v, bar: '>= 1.00', pass: b1 },
+    tbKillsPerUnlocked: { value: b2v, control: b2c, bar: '>= 0.5x control', pass: b2 },
+    killDeath: { value: b3v, bar: '>= 0.92', pass: b3 },
+    facedNotKilledShare: { value: b4v, bar: '<= 0.20', pass: b4 },
+    costs: { starvation: { value: lever.starvation, control: control.starvation, bar: '<= control + 2', pass: b5starv },
+      medianSurvival: { value: lever.medianSurvivalAll, control: control.medianSurvivalAll, bar: '>= 0.8x control', pass: b5surv },
+      pass: b5 },
+    instrument: { controlErrors: control.instrumentErrors, leverErrors: lever.instrumentErrors,
+      controlSeeds: control.seeds, leverSeeds: lever.seeds,
+      controlClassified: control.classifiedShare, leverClassified: lever.classifiedShare,
+      pass: inst },
+    verdict: go ? 'GO' : 'NO-GO',
+  };
+}
+
+module.exports = { analyzeLeg: analyzeLeg, analyzeFiles: analyzeFiles, listFiles: listFiles,
+  judge: judge, judgeAidgate: judgeAidgate, med: med,
+  isStarvation: isStarvation, classifyStartMode: classifyStartMode,
+  classifyGatePath: classifyGatePath, isClassifiedPath: isClassifiedPath,
+  buildArrivals: buildArrivals,
+  gateFailCondition: gateFailCondition, buildWaitEpisodes: buildWaitEpisodes,
+  isSecondCompanionWait: isSecondCompanionWait };
