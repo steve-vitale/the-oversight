@@ -397,9 +397,16 @@
           // convoThreadAbout, which renders it 'your story'; the menu
           // used the raw ledger label. Same function here, so the menu,
           // the resume line, and the close all agree.
-          const label = (typeof this.convoThreadAbout === 'function')
-            ? this.convoThreadAbout(vid, o.tid, o.label || o.tid)
-            : (o.label || o.tid);
+          // WANT-LABEL FRESHNESS (journey-crisis r228, C3c): a `want`
+          // thread's stored label names the favor it was planted under,
+          // which can change before the menu offers it — route through
+          // convoOpenThreadLabel so the menu, the resume line, and the
+          // close all re-derive the current favor together.
+          const label = (typeof this.convoOpenThreadLabel === 'function')
+            ? this.convoOpenThreadLabel(vid, o)
+            : (typeof this.convoThreadAbout === 'function')
+              ? this.convoThreadAbout(vid, o.tid, o.label || o.tid)
+              : (o.label || o.tid);
           const ago = Math.max(0, day - (o.day || day));
           // Honest timeline: "N days back" for stale threads, no leaked
           // internal "(last time)" note for recent ones.

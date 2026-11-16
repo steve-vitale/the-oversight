@@ -1,0 +1,1074 @@
+seed 7...
+seed 42...
+seed 99...
+seed 1234...
+seed 555...
+seed 777...
+seed 2026...
+seed 31337...
+seed 1...
+seed 2...
+seed 3...
+seed 4...
+seed 5...
+seed 6...
+seed 8...
+seed 9...
+  ok   authored outmatched_kill deed is present on brawler / one_person_army
+  ok   wiring: armed deed blocks synergy proxies on every screening seed
+  ok   failing control: removing the deed opens synergy proxies (would fail if unwired)
+  ok   failing control: stripping finishApexHunt earns no outmatched_kill
+  ok   prepared juggernaut bloodied solo attains One-Person Army on every seed
+  ok   hardness: weaker body, unbloodied kill, and helper each void the deed
+  ok   natural juggernaut lean: short horizon does not complete outmatched_kill on this bank
+
+one-person-army-deed-attainment: 7 passed, 0 failed, 0 todo (phase 0)
+@@ONE_PERSON_ARMY_ATTAIN@@PANEL
+{
+  "panel": "one-person-army-deed-attainment",
+  "date": "2026-11-08",
+  "seeds": [
+    7,
+    42,
+    99,
+    1234,
+    555,
+    777,
+    2026,
+    31337,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "summary": {
+    "seeds": [
+      7,
+      42,
+      99,
+      1234,
+      555,
+      777,
+      2026,
+      31337,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9
+    ],
+    "errors": [],
+    "wiringPass": "16/16",
+    "finishHookPass": "16/16",
+    "preparedPass": "16/16",
+    "hardnessPass": "16/16",
+    "natural": {
+      "complete": 0,
+      "ascended": 0,
+      "observed": 0,
+      "of": 16
+    },
+    "authored": {
+      "event": "outmatched_kill",
+      "afterDawn": false,
+      "path": "brawler",
+      "subclassLean": "juggernaut"
+    }
+  },
+  "sampleWiring": {
+    "armedBlocksSynergyProxy": true,
+    "removalControlOpensSynergy": true,
+    "failingControlWouldFailIfUnwired": true,
+    "restoredBlocksAgain": true
+  },
+  "samplePrepared": {
+    "openingOk": true,
+    "wound": 12,
+    "complete": true,
+    "scene": "tactical",
+    "ascended": true,
+    "className": "juggernaut"
+  },
+  "sampleHardness": {
+    "weakerBodyVoids": true,
+    "unbloodiedVoids": true,
+    "helperVoids": true,
+    "detail": {
+      "weakerBody": {
+        "complete": false,
+        "observed": false
+      },
+      "unbloodied": {
+        "complete": false,
+        "observed": false
+      },
+      "helper": {
+        "complete": false,
+        "observed": false
+      }
+    }
+  },
+  "sampleNatural": {
+    "horizon": 21,
+    "classAtStart": "juggernaut",
+    "classAtEnd": "juggernaut",
+    "fightsInterrupted": 0,
+    "observed": false,
+    "complete": false,
+    "ascended": false,
+    "book": false
+  },
+  "rows": [
+    {
+      "seed": 7,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 42,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 99,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 1234,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 555,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 777,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 2026,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 31337,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 1,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 2,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 3,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 4,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 5,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 6,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 8,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 9,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    }
+  ]
+}

@@ -1961,7 +1961,32 @@
       // Spoken reactions often wrap a beat + dialogue
       // (characterGen: 'They go still. "So it's not just me…"'). Those are
       // real memory; only pure mood/silence narration is stage direction.
-      if (/"/.test(s)) return false;
+      // MIXED FRAGMENT + NARRATION (journey-crisis r228, F2): the deflect
+      // pool and the GQ_ACK yes-pool are built as a SHORT quoted fragment
+      // ("Okay.", "I see.", "Mm.") plus a narration sentence ("Something
+      // shutters, just slightly.", "They take a moment to think about
+      // your answer."). In the sitting the renderer keeps speech and
+      // narration apart, but the resume quote strips the double quotes
+      // and presents the whole snippet as the NPC's own words — the NPC
+      // quotes the narrator about herself (transcript-caught: crisis
+      // r228 seed 14483 d11 Esmeralda, seed 14485 d15 Booker). A mixed
+      // line is quotable only when its quoted speech carries a
+      // proposition (>= 4 words, the real-beat floor — the 'They go
+      // still. "So it's not just me…"' shape above); a fragment plus
+      // narration is stage direction, so the plant walks back to
+      // substance (or plants nothing) and the resume-time guard drops
+      // quotes planted before the fix. A dropped quote is harmless —
+      // the resume still names the thread.
+      if (/["“”]/.test(s)) {
+        const raw = String(sn);
+        const spans = (raw.match(/["“”]([^"“”]*)["“”]/g) || [])
+          .map(q => q.replace(/["“”\s.,!?;:—-]+/g, ' ').trim())
+          .filter(Boolean);
+        const longest = spans.reduce((m, q) => Math.max(m, q.split(/\s+/).filter(Boolean).length), 0);
+        const outside = raw.replace(/["“”][^"“”]*["“”]/g, ' ').replace(/[\s.,!?;:—-]+/g, ' ').trim();
+        if (longest < 4 && /\w/.test(outside)) return true;
+        return false;
+      }
       if (/^(They |A comfortable |A warmth |A tired |Your silence|You say nothing|You don'?t answer|The silence |You show them\b)/i.test(s)) return true;
       if (/\b(glance at the fire|comfortable quiet settles|tired smile|small smile|neither do they, for a while)\b/i.test(s)) return true;
       // Recap / re-anchor meta is grammar, not remembered speech.
@@ -2209,7 +2234,9 @@
       // the opener claimed so Teach/agency pivots stay suppressed until the
       // player leaves it (see convoResumeOwnsSitting).
       c._resumeOwnsTid = o.tid;
-      const label = this.convoThreadAbout(vid, o.tid, o.label || o.tid);
+      const label = (typeof this.convoOpenThreadLabel === 'function')
+        ? this.convoOpenThreadLabel(vid, o)
+        : this.convoThreadAbout(vid, o.tid, o.label || o.tid);
       // COHERENCE (Steve 2026-10-07): the resume must not contradict the
       // timeline — a thread left hanging 12 days ago is not "last time".
       const day = (this.state.scholar || {}).day || 1;
@@ -2340,7 +2367,9 @@
       const others = open.filter(x => x.tid !== o.tid);
       if (others.length && Math.random() < 0.5) {
         const o2 = others[Math.floor(Math.random() * others.length)];
-        const about = this.convoThreadAbout(vid, o2.tid, o2.label || o2.tid);
+        const about = (typeof this.convoOpenThreadLabel === 'function')
+          ? this.convoOpenThreadLabel(vid, o2)
+          : this.convoThreadAbout(vid, o2.tid, o2.label || o2.tid);
         inner += ` We still owe ${about} a proper ending, too.`;
       }
       const line = this.voiceLine(vid, `"${inner}"`);
@@ -2568,6 +2597,56 @@
         if (typeof l === 'string' && l.trim().endsWith('?')) return 'that question';
         return l;
       } catch (e) { return label || tid || 'that'; }
+    },
+
+    // convoOpenThreadLabel: the label an open thread is resumed under —
+    // the resume opener, the resume-offer follow-through, and the alive
+    // menu all name the thread the same way, so they share this one call.
+    // WANT-LABEL FRESHNESS (journey-crisis r228, C3c): a `want` thread is
+    // labeled by the favor it names, and the favor can change between
+    // planting and resuming (r208: Hank d10 forage -> d34 wound care).
+    // The stored label names the OLD favor; re-derive live from the
+    // villager's favor LEDGER (r108's rule, ledger-anchored so it does
+    // not depend on what this sitting's want happens to be): the
+    // ledger's current open favor when its need is still live, else
+    // the live need scan, else the generic 'that favor'. The same r208
+    // freshness rule already applied to close/lapse lines
+    // (convoNoteTopic). SCOPE (r228 correction): only threads whose
+    // stored label names a favor kind re-derive — a question thread
+    // ("that question") or any other want thread keeps its stored
+    // label, because the sitting's current want may be a different
+    // topic entirely and naming it would misattribute the thread.
+    // Every other thread keeps its stored label.
+    convoOpenThreadLabel(vid, o) {
+      if (!o) return 'something';
+      if (o.tid === 'want' || o.tid === 'request') {
+        const favorLabels = {
+          food_share: 'that food share', forage_help: 'that foraging help',
+          sick_help: 'that sickness help', heal_help: 'that wound care',
+          water_haul: 'that water haul', watch_shift: 'that watch shift',
+          stay_close: 'that night together', snare_mend: 'that snare mending',
+        };
+        const storedKind = Object.keys(favorLabels).find(k => favorLabels[k] === o.label);
+        if (storedKind) {
+          try {
+            const fav = (typeof this.convoGetFavor === 'function') ? this.convoGetFavor(vid) : null;
+            if (fav && favorLabels[fav.kind] && (fav.state === 'asked' || fav.state === 'promised') &&
+                typeof this.convoFavorNeedLive === 'function' && this.convoFavorNeedLive(fav)) {
+              return favorLabels[fav.kind];
+            }
+          } catch (e) {}
+          try {
+            if (typeof this.convoFindFavorNeed === 'function') {
+              const need = this.convoFindFavorNeed(vid);
+              if (need && need.kind && favorLabels[need.kind]) return favorLabels[need.kind];
+            }
+          } catch (e) {}
+          return 'that favor';
+        }
+        return o.label || o.tid;
+      }
+      try { return this.convoThreadAbout(vid, o.tid, o.label || o.tid); }
+      catch (e) { return o.label || o.tid; }
     },
 
     // convoCloseLine: a thread that was hanging got discussed this
@@ -7349,7 +7428,7 @@
             const tid = wasGq.resumeTid || c.thread;
             const open = (typeof this.convoOpenThreads === 'function') ? this.convoOpenThreads(vid) : [];
             const o = (open || []).find(x => x && x.tid === tid) || null;
-            const label = (o && o.label) || (typeof this.convoThreadAbout === 'function' ? this.convoThreadAbout(vid, tid) : null) || tid || 'that';
+            const label = (o && typeof this.convoOpenThreadLabel === 'function' ? this.convoOpenThreadLabel(vid, o) : null) || (typeof this.convoThreadAbout === 'function' ? this.convoThreadAbout(vid, tid) : null) || tid || 'that';
             try {
               const led = this.convoTopicLedger(vid);
               led.open = (led.open || []).filter(x => !x || x.tid !== tid);
