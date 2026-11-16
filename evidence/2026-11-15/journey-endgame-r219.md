@@ -152,16 +152,8 @@ NOT rolled. Pass-A sums: uw (unlockedWave maxes 4,4,4,4,5), won
 
 - Pass B (setsid-detached, CAPSTONE=1 BUYOUT=1, seeds 89701–89705,
   outdir perseed-endgame-r219-b, log journey-endgame-r219-passb.log):
-  [PASS-B-STATUS]. When it finishes: run the r219 analyzer with
-  ANALYZEDIR=perseed-endgame-r219-b, fill the Pass B section below,
-  then run pass C (CAPSTONE=1 BUYOUT=1 BUYOUT_EARLY=1, outdir
-  perseed-endgame-r219-c) and the C-wide stretch (same policy, fresh
-  seeds 89730–89737, outdir perseed-endgame-r219-cwide), analyze
-  each, commit each set, run `check.js --quick`, merge ff-only,
-  release, rotation 4→5, delete lock.
-- If Pass B died with the VM again, it is re-runnable from the
-  probe invocation in the prereg (deterministic seeds; finished
-  seeds' outputs reproduce identically).
+  DONE — analyzed, section filled below (PRIMARY NO-GO on the
+  VACUOUS M23 only; M23b 0/5).
 
 ## Pass B verdicts (5 matched seeds, CAPSTONE=1 BUYOUT=1)
 
@@ -198,31 +190,76 @@ only. Log: `journey-endgame-r219-passb-analyzer.log`.
 
 - Pass C (setsid-detached, CAPSTONE=1 BUYOUT=1 BUYOUT_EARLY=1,
   seeds 89701–89705, outdir perseed-endgame-r219-c, log
-  journey-endgame-r219-passc.log): [PASS-C-STATUS]. When it
-  finishes: run the r219 analyzer with ANALYZEDIR=
-  perseed-endgame-r219-c, fill the Pass C section below, then run
-  the C-wide stretch (same policy, fresh seeds 89730–89737, outdir
-  perseed-endgame-r219-cwide), analyze it, commit each set, run
-  `check.js --quick`, merge ff-only, release, rotation 4→5, delete
-  lock.
-- If Pass C died with the VM again, it is re-runnable from the probe
-  invocation in the prereg (deterministic seeds; finished seeds'
-  outputs reproduce identically).
+  journey-endgame-r219-passc.log): DONE — re-run by the adopting
+  occurrence after the original detached node (pid 61060) died with
+  no output; re-run (pid 62319) finished clean, 5/5 seeds, analyzer
+  exit 0, section filled above.
+- Pass C-wide (setsid-detached, same policy, fresh seeds 89730–89737,
+  outdir perseed-endgame-r219-cwide, log
+  journey-endgame-r219-passcwide.log): LAUNCHED by the adopting
+  occurrence (node pid 65745). When it finishes: run the r219
+  analyzer with ANALYZEDIR=perseed-endgame-r219-cwide, fill the Pass
+  C-wide section below, commit, run `check.js --quick`, rebase onto
+  current master (6ca37144b at adoption; covenantsmoke landed during
+  the vetparty closeout), merge ff-only, release, rotation 4→5,
+  delete lock.
 
-## Pass C verdicts
+## Pass C verdicts (5 matched seeds, CAPSTONE=1 BUYOUT=1 BUYOUT_EARLY=1)
 
-[PASS-C]
+Analyzer: `scripts/analyze-endgame-r219-20261115.js` on
+`perseed-endgame-r219-c` — **PRIMARY-BINDINGS GO | PRIMARY GO | ALL GO**
+(exit 0). Log: `journey-endgame-r219-passc-analyzer.log`.
+
+- M23b GATE-OK TALLY: **3/5** — 89702@d62/DELIVERED, 89704@d91/DELIVERED,
+  89705@d83/DELIVERED. (Pass A 0/5, pass B 0/5 — the early-buyout road
+  is what opens the gate.)
+- Per-seed: 89701 sat d114 lesser (bought d41, full never, w5max 0);
+  89702 sat d90 **FULL d63** (w5max 4, uw 5); 89703 sat d111 lesser
+  (bought d41, full never, w5max 0); 89704 sat d97 **FULL d92**
+  (w5max 2, uw 5); 89705 sat d90 **FULL d84** (w5max 2, uw 5).
+- Tally: lesser 2/5, full 3/5, lost 0/5. ROAD-TALLY full-seats
+  earned 3 sat 3.
+- M25c buyout-early: 5/5 bought early — 89701 d41, 89702 d27, 89703
+  d41, 89704 d35, 89705 d34 (all dg-not-ok at buy time, pantries
+  14,913–40,591 at haven; 0 skipped of 5 eligible early-days, 10
+  early attempts). The bundle is bought BEFORE the gate goes ok and
+  the capstone delivers AFTER — that ordering is the road working.
+- M24 tribute-agreement VACUOUS (no military_tribute delivery fired);
+  M24b scholar-plus-one: 89705 covered-by-delivery. CORPUS-PURITY GO
+  5/5. §NO-OVER-ATTEMPT + §REFUSAL-WINDOW hold (0 attempts beyond
+  the road's own).
+- Doubled quotes: 0 `SYSTEM: ""` hits on all 5 pass-C transcripts.
+- Q8 (159-turn Algorithm fight): NOT recurred — longest fight on
+  pass C is 39 turns. Q9 (fastW4 diedInFight gap): not observed —
+  fastW4 empty, same as pass A.
+- **Attribution:** vs r211 pass C (lesser 4/5, full 0/5 sat, 89701
+  LOST d67 with buyout-early implicated, 89704 SAVED). Same re-roll
+  mechanism as passes A/B — the dialogue-code RNG-draw changes
+  re-rolled trajectories — but here the re-roll HELPED: wave-5
+  facings rose on the converting seeds (w5max 4/2/2 on 89702/89704/
+  89705 vs 0/0/1 on passes A/B) and the bought bundle + capstone
+  delivery turned gate-ok into full seats. The two non-converters
+  bought early too but never reached gate-ok (w5max 0 both) — the
+  wave-5 bar is still the binding constraint where it doesn't clear.
+  No table/ladder/waves change landed. The full seat is winnable
+  via the early buy-out road on this substrate — the first full-seat
+  panel on this leg since r203's pass C. Pass C-wide (fresh band)
+  still to run: it decides whether the road holds on unseen seeds.
 
 ## Pass C-wide verdicts
 
 [PASS-CWIDE]
 
-## Verdicts (passes A+B; full-seat question needs pass C/C-wide)
+## Verdicts (passes A+B+C; C-wide decides whether the road holds on unseen seeds)
 
-- Reachable: YES (5/5 sat lesser on passes A and B; table + audit +
-  lesser seat all fire).
-- Fun: PARTIAL (the endgame plays — audit, finale choices, Reunion
-  fights — but wave 5 is a wall nobody opens and the full seat
-  never answers).
-- Winnable: NO (this leg so far; full seat 0/5 on A and B, M23b 0/5
-  gate-ok on both — the door never opened).
+- Reachable: YES (5/5 sat lesser or full on every pass; table + audit +
+  lesser seat all fire; the full seat fired 3/5 on pass C).
+- Fun: PARTIAL→YES on the road (the endgame plays — audit, finale
+  choices, Reunion fights — and pass C shows the full seat actually
+  answering through the early buy-out road; wave 5 is still a wall
+  where the bar doesn't clear).
+- Winnable: YES, via the early buy-out road (pass C: full seat 3/5
+  on matched seeds, M23b 3/5 gate-ok, all delivered; passes A/B
+  0/5 — the road, not the table, is the difference). C-wide on the
+  fresh band 89730–89737 is the confirmation that the road holds
+  beyond these five seeds.
