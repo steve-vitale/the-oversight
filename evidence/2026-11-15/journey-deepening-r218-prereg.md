@@ -24,7 +24,7 @@
 
 **The question.** Is the gorgeprice2 lingerer guard the cause of the r213 wave-4 kill collapse? Same 8 seeds (100221–100228), competent policy, DAYCAP 100 — once with the guard ON (current master) and once with it OFF.
 
-**Instrument change (this run's build, committed BEFORE any judged sim):** clone the r213 driver → r218 with ONLY the seed band, run tag, and the Q2 winddown logging (below). Clone the r213 analyzer → r218 with ONLY the r218 filename regexes, the Q2 `summarizeParting` rewrite, and the new `summarizeWave4`. Clone the r213 proof → r218 with new assertions (22)–(25) (below). Proof must be green (25/25) + red control before the ON panel runs.
+**Instrument change (this run's build, committed BEFORE any judged sim):** clone the r213 driver → r218 with ONLY the seed band, run tag, and the Q2 winddown logging (below). Clone the r213 analyzer → r218 with ONLY the r218 filename regexes, the Q2 `summarizeParting` rewrite, and the new `summarizeWave4`. Clone the r213 proof → r218 with new assertions (22)–(25) (below). Proof must be green (24/24) + red control before the ON panel runs.
 
 **Guard-OFF variant (panel-only, NEVER lands):** in the worktree, comment out the single line `if (m.lingering) return;` (`src/js/game.js:24162`) with a `// R218 A/B ONLY — REVERT BEFORE LANDING` marker. Nothing else changes. After the OFF panel, revert with `git checkout -- src/js/game.js` and verify `git diff -- src/js/game.js` is empty before any further commit. The final branch contains instruments + evidence only — no `src/js` change.
 
@@ -88,7 +88,11 @@ Full transcripts read: every REPETITIVE / WATCH-CONTINUES block sitting (Q3), ev
 
 ## Shape
 
-prereg (committed BEFORE any judged sim) → instrument clone (driver + analyzer + proof test, proof green 25/25 + red control before the panel) → ON panel (8 seeds, single-seed processes, 2 waves of 4) → guard-OFF patch (one line, marked, worktree-only) → OFF panel (same 8 seeds) → revert patch (`git checkout -- src/js/game.js`, diff-empty verification) → analyzer verdicts both arms (ON full read; OFF wave-4 + census lines) → run note → telemetry check → gate → rebase onto current master → merge. Heartbeat loop: 10-min cadence, setsid PID 50165.
+prereg (committed BEFORE any judged sim) → instrument clone (driver + analyzer + proof test, proof green 24/24 + red control before the panel) → ON panel (8 seeds, single-seed processes, 2 waves of 4) → guard-OFF patch (one line, marked, worktree-only) → OFF panel (same 8 seeds) → revert patch (`git checkout -- src/js/game.js`, diff-empty verification) → analyzer verdicts both arms (ON full read; OFF wave-4 + census lines) → run note → telemetry check → gate → rebase onto current master → merge. Heartbeat loop: 10-min cadence, setsid PID 50165.
+
+## Amendment A0 — proof-count correction (before any instrument build or judged sim)
+
+The prereg as first committed says the proof must be green "25/25" in two places. That count is wrong: the r213 proof carries exactly 20 assertions ((1)–(18), (20), (21); (19) is the red-control invocation, not an assertion — verified by counting `ok(` calls in `test-journey-deepening-r213-analyzer-20261115.js`). The r218 proof adds 4 new assertions (22)–(25), so the correct total is **24**. Both "25/25" mentions are corrected to "24/24" here. No other change.
 
 ## Metric review (to fill at closeout)
 
