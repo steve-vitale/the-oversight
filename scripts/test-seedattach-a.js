@@ -243,6 +243,18 @@ expectBucket('companion-inherited census-only fallback', baseSeed({
 })();
 
 // ---------- 2b. Analyzer summarize shape (regression: files is a count) ----------
+// ---------- 2c. Corpus-bar regression (count, not .length — the bar read
+// baseSummary.files.length once and failed with 8/8 files present) ----------
+(function () {
+  check('corpusBarPass: 8/8 main + 8 baseline passes',
+    ANALYZE.corpusBarPass({ files: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] }, { files: 8 }) === true);
+  check('corpusBarPass: 8 main, no baseline passes',
+    ANALYZE.corpusBarPass({ files: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] }, null) === true);
+  check('corpusBarPass: 7 baseline files fails',
+    ANALYZE.corpusBarPass({ files: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] }, { files: 7 }) === false);
+  check('corpusBarPass: 7 main files fails',
+    ANALYZE.corpusBarPass({ files: ['a', 'b', 'c', 'd', 'e', 'f', 'g'] }, { files: 8 }) === false);
+})();
 (function () {
   const one = ANALYZE.classifySeed(baseSeed({
     seedattachLaunches: [launch(10, 'v0', 'winplan', 'v1', null, null, null)],

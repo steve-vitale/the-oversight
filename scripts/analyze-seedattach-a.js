@@ -300,6 +300,10 @@ function summarize(leg) {
   };
 }
 
+function corpusBarPass(mainLoad, baseSummary) {
+  return mainLoad.files.length === 8 && (!baseSummary || baseSummary.files === 8);
+}
+
 function main() {
   const mainDir = process.argv[2];
   const baselineDir = process.argv[3] || null;
@@ -326,7 +330,11 @@ function main() {
   const mainErrors = mainSummary.perSeed.reduce(function (t, s) { return t + s.instrumentErrors; }, 0);
   const baseErrors = baseSummary ? baseSummary.perSeed.reduce(function (t, s) { return t + s.instrumentErrors; }, 0) : 0;
   const bar1 = mainSummary.instancesOpened > 0 && mainSummary.classifiedShare >= 0.9 && mainSummary.unknown === 0;
-  const bar2 = main.files.length === 8 && (!baseSummary || baseSummary.files.length === 8);
+  // NOTE: summarize() returns files as a COUNT (see the dawnbid
+  // summarize-shape regression) — the bar must compare the count, not
+  // read .length off it. (An earlier draft of this line read
+  // baseSummary.files.length and failed the bar with 8/8 files present.)
+  const bar2 = corpusBarPass(main, baseSummary);
   const bar3 = mainErrors === 0 && baseErrors === 0;
 
   const out = {
@@ -336,7 +344,7 @@ function main() {
     main: mainSummary, baseline: baseSummary,
     bars: {
       classification: { pass: bar1, classifiedShare: mainSummary.classifiedShare, unknown: mainSummary.unknown, instancesOpened: mainSummary.instancesOpened },
-      corpus: { pass: bar2, mainFiles: main.files.length, baselineFiles: baseSummary ? baseSummary.files.length : null },
+      corpus: { pass: bar2, mainFiles: main.files.length, baselineFiles: baseSummary ? baseSummary.files : null },
       instrumentErrors: { pass: bar3, main: mainErrors, baseline: baseErrors },
     },
   };
@@ -373,4 +381,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { classifySeed: classifySeed, summarize: summarize, BUCKETS: BUCKETS };
+module.exports = { classifySeed: classifySeed, summarize: summarize, corpusBarPass: corpusBarPass, BUCKETS: BUCKETS };
