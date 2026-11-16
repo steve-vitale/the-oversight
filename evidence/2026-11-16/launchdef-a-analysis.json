@@ -1,0 +1,3269 @@
+{
+  "arm": "launchdef-a",
+  "run": "launchdef-a",
+  "skipReasons": {
+    "instrument": {
+      "not-at-haven": 4,
+      "night": 17,
+      "away-on-expedition": 31,
+      "other": 1
+    },
+    "control": {
+      "not-at-haven": 4,
+      "night": 8,
+      "away-on-expedition": 22,
+      "other": 2,
+      "profile-gate-veto": 39
+    }
+  },
+  "instrumentDir": "perseed-launchdef-a-on",
+  "controlDir": "perseed-launchdef-a-control",
+  "wave4IdsMatch": true,
+  "wave4IdsLive": [
+    "algorithm",
+    "audit",
+    "congregation",
+    "eater",
+    "eulogy",
+    "herald",
+    "influencer",
+    "reunion",
+    "strike",
+    "suburb"
+  ],
+  "wave4IdsFrozen": [
+    "algorithm",
+    "audit",
+    "congregation",
+    "eater",
+    "eulogy",
+    "herald",
+    "influencer",
+    "reunion",
+    "strike",
+    "suburb"
+  ],
+  "instrument": {
+    "files": 8,
+    "seeds": 8,
+    "seedCallsW4": 64,
+    "instancesOpened": 16,
+    "byBucket": {
+      "launched": 6,
+      "target-killed": 0,
+      "selected-blocked": 2,
+      "bid-not-selected": 0,
+      "plan-churned-before-dawn": 2,
+      "candidate-not-bid": 6,
+      "unknown": 0
+    },
+    "bySub": {
+      "launched:companion:maya_singh:dawn": 1,
+      "launched:companion:gen_w3zeqy2:dawn": 1,
+      "candidate-not-bid:no-companion-party": 6,
+      "selected-blocked:inviter-range-0": 1,
+      "launched:companion:zoe_adams:mid-day part-1": 1,
+      "launched:companion:zoe_adams:dawn": 1,
+      "plan-churned-before-dawn:holder-died": 1,
+      "plan-churned-before-dawn:retargeted": 1,
+      "launched:companion:catalina_reyes:dawn": 1,
+      "selected-blocked:no-tick-after-commit": 1,
+      "launched:companion:adaeze_nwosu:dawn": 1
+    },
+    "classifiedShare": 1,
+    "unknown": 0,
+    "survived": 0,
+    "medianSurvival": 90,
+    "wall": {
+      "national": 0,
+      "table": 0,
+      "wins": 7,
+      "wave4": 8,
+      "wave5": 0
+    },
+    "perSeed": [
+      {
+        "seed": 102011,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 12,
+        "nonOpeningSeeds": 23,
+        "instancesOpened": 2,
+        "byBucket": {
+          "launched": 2,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "launched:companion:maya_singh:dawn": 1,
+          "launched:companion:gen_w3zeqy2:dawn": 1
+        },
+        "instances": [
+          {
+            "vid": "jorge_silva",
+            "target": "strike",
+            "needWave": 4,
+            "seedDay": 57,
+            "seedOutcome": "avoided",
+            "refreshes": 0,
+            "lastSeedDay": 57,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 4,
+            "firstScoredDawn": 63,
+            "stageHistory": [
+              "party",
+              "hunt",
+              "party",
+              "hunt",
+              "standing",
+              "hunt"
+            ],
+            "bids": [
+              {
+                "day": 60,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 10
+              },
+              {
+                "day": 61,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 9
+              },
+              {
+                "day": 68,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 8
+              },
+              {
+                "day": 72,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 8
+              },
+              {
+                "day": 76,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 7
+              },
+              {
+                "day": 78,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 7
+              },
+              {
+                "day": 80,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 8
+              },
+              {
+                "day": 85,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 8
+              },
+              {
+                "day": 86,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 8
+              },
+              {
+                "day": 88,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 8
+              },
+              {
+                "day": 89,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 8
+              }
+            ],
+            "selections": [
+              {
+                "day": 60,
+                "companion": "maya_singh",
+                "commitKind": "part-3",
+                "parts": [
+                  3
+                ]
+              },
+              {
+                "day": 61,
+                "companion": "gen_ntb585y",
+                "commitKind": "part-3",
+                "parts": [
+                  3
+                ]
+              },
+              {
+                "day": 68,
+                "companion": "mia_andersson",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 72,
+                "companion": "maya_singh",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 76,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 78,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 80,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 85,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 86,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 88,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "part-3",
+                "parts": [
+                  3
+                ]
+              },
+              {
+                "day": 89,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "no-tick-after-commit",
+                "day": 60,
+                "commitKind": "part-3"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "no-tick-after-commit",
+                "day": 61,
+                "commitKind": "part-3"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 68,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "launched",
+                "day": 72,
+                "companion": "maya_singh",
+                "commitKind": "dawn",
+                "part": 0
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 76,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "other",
+                "day": 78,
+                "commitKind": "mid-day part-1"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 80,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 85,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "launched",
+                "day": 86,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-1",
+                "part": 1
+              },
+              {
+                "outcome": "blocked",
+                "reason": "no-tick-after-commit",
+                "day": 88,
+                "commitKind": "part-3"
+              },
+              {
+                "outcome": "launched",
+                "day": 89,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-1",
+                "part": 1
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "launched",
+            "sub": "companion:maya_singh:dawn",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 4,
+              "bids": 11,
+              "selections": 11
+            }
+          },
+          {
+            "vid": "gen_ntb585y",
+            "target": "eater",
+            "needWave": 4,
+            "seedDay": 58,
+            "seedOutcome": "evaded",
+            "refreshes": 0,
+            "lastSeedDay": 58,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 5,
+            "firstScoredDawn": 60,
+            "stageHistory": [
+              "party",
+              "hunt"
+            ],
+            "bids": [
+              {
+                "day": 60,
+                "w": 5,
+                "score": 5,
+                "rank": 3,
+                "totalCands": 7
+              },
+              {
+                "day": 61,
+                "w": 5,
+                "score": 5,
+                "rank": 3,
+                "totalCands": 6
+              },
+              {
+                "day": 62,
+                "w": 5,
+                "score": 5,
+                "rank": 3,
+                "totalCands": 6
+              },
+              {
+                "day": 66,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 6
+              },
+              {
+                "day": 71,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 7
+              },
+              {
+                "day": 72,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 7
+              },
+              {
+                "day": 76,
+                "w": 5,
+                "score": 5,
+                "rank": 6,
+                "totalCands": 8
+              },
+              {
+                "day": 77,
+                "w": 5,
+                "score": 5,
+                "rank": 6,
+                "totalCands": 8
+              },
+              {
+                "day": 85,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 6
+              },
+              {
+                "day": 90,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 6
+              }
+            ],
+            "selections": [
+              {
+                "day": 60,
+                "companion": "jorge_silva",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 61,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 62,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 66,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 71,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 72,
+                "companion": "maya_singh",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 76,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 77,
+                "companion": "maya_singh",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 85,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 90,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "not-at-haven",
+                "day": 60,
+                "commitKind": "dawn"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 61,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "launched",
+                "day": 62,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "dawn",
+                "part": 0
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 66,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 71,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "launched",
+                "day": 72,
+                "companion": "maya_singh",
+                "commitKind": "dawn",
+                "part": 0
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 76,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "launched",
+                "day": 77,
+                "companion": "maya_singh",
+                "commitKind": "dawn",
+                "part": 0
+              },
+              {
+                "outcome": "launched",
+                "day": 85,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-1",
+                "part": 1
+              },
+              {
+                "outcome": "blocked",
+                "reason": "no-tick-after-commit",
+                "day": 90,
+                "commitKind": "mid-day part-2"
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "launched",
+            "sub": "companion:gen_w3zeqy2:dawn",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 5,
+              "bids": 10,
+              "selections": 10
+            }
+          }
+        ]
+      },
+      {
+        "seed": 102012,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 0,
+        "nonOpeningSeeds": 6,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      },
+      {
+        "seed": 102013,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 3,
+        "nonOpeningSeeds": 10,
+        "instancesOpened": 3,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 1,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 2,
+          "unknown": 0
+        },
+        "bySub": {
+          "candidate-not-bid:no-companion-party": 2,
+          "selected-blocked:inviter-range-0": 1
+        },
+        "instances": [
+          {
+            "vid": "app_mgpsphry558",
+            "target": "eulogy",
+            "needWave": 4,
+            "seedDay": 78,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 78,
+            "closeDay": 87,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 1,
+            "firstScoredDawn": 79,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "candidate-not-bid",
+            "sub": "no-companion-party",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 1,
+              "bids": 0,
+              "selections": 0
+            }
+          },
+          {
+            "vid": "boris_kowalski",
+            "target": "eulogy",
+            "needWave": 4,
+            "seedDay": 78,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 78,
+            "closeDay": 87,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 5,
+            "firstScoredDawn": 80,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 79,
+                "w": 5,
+                "score": 5,
+                "rank": 2,
+                "totalCands": 5
+              },
+              {
+                "day": 80,
+                "w": 5,
+                "score": 5,
+                "rank": 2,
+                "totalCands": 6
+              },
+              {
+                "day": 81,
+                "w": 5,
+                "score": 5,
+                "rank": 2,
+                "totalCands": 5
+              },
+              {
+                "day": 83,
+                "w": 5,
+                "score": 5,
+                "rank": 2,
+                "totalCands": 5
+              },
+              {
+                "day": 84,
+                "w": 5,
+                "score": 5,
+                "rank": 2,
+                "totalCands": 7
+              },
+              {
+                "day": 85,
+                "w": 5,
+                "score": 5,
+                "rank": 2,
+                "totalCands": 5
+              },
+              {
+                "day": 86,
+                "w": 5,
+                "score": 5,
+                "rank": 2,
+                "totalCands": 5
+              }
+            ],
+            "selections": [
+              {
+                "day": 79,
+                "companion": "hannah_kim",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 80,
+                "companion": "hannah_kim",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 81,
+                "companion": "hannah_kim",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 83,
+                "companion": "hannah_kim",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 84,
+                "companion": "hannah_kim",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 85,
+                "companion": "hannah_kim",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 86,
+                "companion": "hannah_kim",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "inviter-range-0",
+                "day": 79,
+                "commitKind": "mid-day part-1"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "inviter-range-0",
+                "day": 80,
+                "commitKind": "dawn"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "inviter-range-0",
+                "day": 81,
+                "commitKind": "dawn"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "inviter-range-0",
+                "day": 83,
+                "commitKind": "dawn"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "inviter-range-0",
+                "day": 84,
+                "commitKind": "dawn"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "inviter-range-0",
+                "day": 85,
+                "commitKind": "mid-day part-1"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "inviter-range-0",
+                "day": 86,
+                "commitKind": "dawn"
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "inviter-range-0",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 5,
+              "bids": 7,
+              "selections": 7
+            }
+          },
+          {
+            "vid": "ella_johnson",
+            "target": "herald",
+            "needWave": 4,
+            "seedDay": 89,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 89,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 1,
+            "firstScoredDawn": 90,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "candidate-not-bid",
+            "sub": "no-companion-party",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 1,
+              "bids": 0,
+              "selections": 0
+            }
+          }
+        ]
+      },
+      {
+        "seed": 102014,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 5,
+        "nonOpeningSeeds": 11,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      },
+      {
+        "seed": 102015,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": false,
+        "maxWave": 4,
+        "villageLost": true,
+        "instrumentErrors": 0,
+        "seedCallsW4": 22,
+        "nonOpeningSeeds": 28,
+        "instancesOpened": 3,
+        "byBucket": {
+          "launched": 2,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 1,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "launched:companion:zoe_adams:mid-day part-1": 1,
+          "launched:companion:zoe_adams:dawn": 1,
+          "plan-churned-before-dawn:holder-died": 1
+        },
+        "instances": [
+          {
+            "vid": "tashi_sherpa",
+            "target": "eulogy",
+            "needWave": 4,
+            "seedDay": 61,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 61,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 11,
+            "firstScoredDawn": 68,
+            "stageHistory": [
+              "party",
+              "hunt"
+            ],
+            "bids": [
+              {
+                "day": 65,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 9
+              },
+              {
+                "day": 88,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 6
+              }
+            ],
+            "selections": [
+              {
+                "day": 65,
+                "companion": "zoe_adams",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 88,
+                "companion": "zoe_adams",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "launched",
+                "day": 65,
+                "companion": "zoe_adams",
+                "commitKind": "mid-day part-1",
+                "part": 1
+              },
+              {
+                "outcome": "launched",
+                "day": 88,
+                "companion": "zoe_adams",
+                "commitKind": "dawn",
+                "part": 0
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "launched",
+            "sub": "companion:zoe_adams:mid-day part-1",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 11,
+              "bids": 2,
+              "selections": 2
+            }
+          },
+          {
+            "vid": "app_mgpspisj582",
+            "target": "eater",
+            "needWave": 4,
+            "seedDay": 70,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 70,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 7,
+            "firstScoredDawn": 71,
+            "stageHistory": [
+              "party",
+              "hunt"
+            ],
+            "bids": [
+              {
+                "day": 71,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 7
+              },
+              {
+                "day": 82,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 7
+              },
+              {
+                "day": 86,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 11
+              }
+            ],
+            "selections": [
+              {
+                "day": 71,
+                "companion": "zoe_adams",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 82,
+                "companion": "zoe_adams",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 86,
+                "companion": "zoe_adams",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "launched",
+                "day": 71,
+                "companion": "zoe_adams",
+                "commitKind": "dawn",
+                "part": 0
+              },
+              {
+                "outcome": "launched",
+                "day": 82,
+                "companion": "zoe_adams",
+                "commitKind": "mid-day part-1",
+                "part": 1
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 86,
+                "commitKind": "mid-day part-2"
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "launched",
+            "sub": "companion:zoe_adams:dawn",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 7,
+              "bids": 3,
+              "selections": 3
+            }
+          },
+          {
+            "vid": "tariq_mahmood",
+            "target": "eater",
+            "needWave": 4,
+            "seedDay": 72,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 72,
+            "closeDay": 73,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 0,
+            "firstScoredDawn": null,
+            "stageHistory": [],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "plan-churned-before-dawn",
+            "sub": "holder-died",
+            "churnedBeforeDawn": true,
+            "tally": {
+              "scoredDawns": 0,
+              "bids": 0,
+              "selections": 0
+            }
+          }
+        ]
+      },
+      {
+        "seed": 102016,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 12,
+        "nonOpeningSeeds": 11,
+        "instancesOpened": 4,
+        "byBucket": {
+          "launched": 1,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 1,
+          "candidate-not-bid": 2,
+          "unknown": 0
+        },
+        "bySub": {
+          "plan-churned-before-dawn:retargeted": 1,
+          "launched:companion:catalina_reyes:dawn": 1,
+          "candidate-not-bid:no-companion-party": 2
+        },
+        "instances": [
+          {
+            "vid": "brian_otieno",
+            "target": "reunion",
+            "needWave": 4,
+            "seedDay": 75,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 75,
+            "closeDay": 76,
+            "closeKind": "retargeted",
+            "history": [],
+            "scoredDawns": 0,
+            "firstScoredDawn": null,
+            "stageHistory": [],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "plan-churned-before-dawn",
+            "sub": "retargeted",
+            "churnedBeforeDawn": true,
+            "tally": {
+              "scoredDawns": 0,
+              "bids": 0,
+              "selections": 0
+            }
+          },
+          {
+            "vid": "brian_otieno",
+            "target": "eulogy",
+            "needWave": 4,
+            "seedDay": 76,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 76,
+            "closeDay": 87,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 4,
+            "firstScoredDawn": 77,
+            "stageHistory": [
+              "party",
+              "hunt"
+            ],
+            "bids": [
+              {
+                "day": 79,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 7
+              }
+            ],
+            "selections": [
+              {
+                "day": 79,
+                "companion": "catalina_reyes",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "launched",
+                "day": 79,
+                "companion": "catalina_reyes",
+                "commitKind": "dawn",
+                "part": 0
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "launched",
+            "sub": "companion:catalina_reyes:dawn",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 4,
+              "bids": 1,
+              "selections": 1
+            }
+          },
+          {
+            "vid": "app_mgpspjva301",
+            "target": "herald",
+            "needWave": 4,
+            "seedDay": 83,
+            "seedOutcome": "fled",
+            "refreshes": 2,
+            "lastSeedDay": 83,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 4,
+            "firstScoredDawn": 85,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "candidate-not-bid",
+            "sub": "no-companion-party",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 4,
+              "bids": 0,
+              "selections": 0
+            }
+          },
+          {
+            "vid": "sanne_bakker",
+            "target": "herald",
+            "needWave": 4,
+            "seedDay": 85,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 85,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 2,
+            "firstScoredDawn": 88,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "candidate-not-bid",
+            "sub": "no-companion-party",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 2,
+              "bids": 0,
+              "selections": 0
+            }
+          }
+        ]
+      },
+      {
+        "seed": 102017,
+        "days": 100,
+        "gameDays": 100,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 3,
+        "nonOpeningSeeds": 3,
+        "instancesOpened": 3,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 1,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 2,
+          "unknown": 0
+        },
+        "bySub": {
+          "selected-blocked:no-tick-after-commit": 1,
+          "candidate-not-bid:no-companion-party": 2
+        },
+        "instances": [
+          {
+            "vid": "elijah_scott",
+            "target": "influencer",
+            "needWave": 4,
+            "seedDay": 87,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 87,
+            "closeDay": 92,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 1,
+            "firstScoredDawn": 92,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 87,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 6
+              },
+              {
+                "day": 88,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 6
+              },
+              {
+                "day": 89,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 5
+              },
+              {
+                "day": 90,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 5
+              },
+              {
+                "day": 91,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 5
+              }
+            ],
+            "selections": [
+              {
+                "day": 87,
+                "companion": "maya_singh",
+                "commitKind": "part-3",
+                "parts": [
+                  3
+                ]
+              },
+              {
+                "day": 88,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 89,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 90,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 91,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "no-tick-after-commit",
+                "day": 87,
+                "commitKind": "part-3"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "inviter-range-0",
+                "day": 88,
+                "commitKind": "mid-day part-1"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "inviter-range-0",
+                "day": 89,
+                "commitKind": "mid-day part-1"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "inviter-range-0",
+                "day": 90,
+                "commitKind": "mid-day part-1"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 91,
+                "commitKind": "mid-day part-2"
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "no-tick-after-commit",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 1,
+              "bids": 5,
+              "selections": 5
+            }
+          },
+          {
+            "vid": "maya_singh",
+            "target": "influencer",
+            "needWave": 4,
+            "seedDay": 87,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 87,
+            "closeDay": 93,
+            "closeKind": "retargeted",
+            "history": [],
+            "scoredDawns": 4,
+            "firstScoredDawn": 88,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "candidate-not-bid",
+            "sub": "no-companion-party",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 4,
+              "bids": 0,
+              "selections": 0
+            }
+          },
+          {
+            "vid": "maya_singh",
+            "target": "strike",
+            "needWave": 4,
+            "seedDay": 93,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 93,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 2,
+            "firstScoredDawn": 99,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "candidate-not-bid",
+            "sub": "no-companion-party",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 2,
+              "bids": 0,
+              "selections": 0
+            }
+          }
+        ]
+      },
+      {
+        "seed": 102018,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 7,
+        "nonOpeningSeeds": 18,
+        "instancesOpened": 1,
+        "byBucket": {
+          "launched": 1,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "launched:companion:adaeze_nwosu:dawn": 1
+        },
+        "instances": [
+          {
+            "vid": "gen_62a4wdd",
+            "target": "congregation",
+            "needWave": 4,
+            "seedDay": 76,
+            "seedOutcome": "evaded",
+            "refreshes": 0,
+            "lastSeedDay": 76,
+            "closeDay": 89,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 4,
+            "firstScoredDawn": 77,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 80,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 9
+              }
+            ],
+            "selections": [
+              {
+                "day": 80,
+                "companion": "adaeze_nwosu",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "launched",
+                "day": 80,
+                "companion": "adaeze_nwosu",
+                "commitKind": "dawn",
+                "part": 0
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "launched",
+            "sub": "companion:adaeze_nwosu:dawn",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 4,
+              "bids": 1,
+              "selections": 1
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "control": {
+    "files": 8,
+    "seeds": 8,
+    "seedCallsW4": 39,
+    "instancesOpened": 16,
+    "byBucket": {
+      "launched": 3,
+      "target-killed": 1,
+      "selected-blocked": 6,
+      "bid-not-selected": 0,
+      "plan-churned-before-dawn": 2,
+      "candidate-not-bid": 4,
+      "unknown": 0
+    },
+    "bySub": {
+      "launched:companion:maya_singh:dawn": 1,
+      "launched:companion:gen_w3zeqy2:dawn": 1,
+      "candidate-not-bid:no-companion-party": 4,
+      "selected-blocked:profile-gate-veto": 4,
+      "launched:companion:zoe_adams:dawn": 1,
+      "plan-churned-before-dawn:retargeted": 1,
+      "plan-churned-before-dawn:holder-died": 1,
+      "selected-blocked:other": 1,
+      "target-killed:day:85": 1,
+      "selected-blocked:no-tick-after-commit": 1
+    },
+    "classifiedShare": 1,
+    "unknown": 0,
+    "survived": 0,
+    "medianSurvival": 90,
+    "wall": {
+      "national": 1,
+      "table": 0,
+      "wins": 6,
+      "wave4": 8,
+      "wave5": 1
+    },
+    "perSeed": [
+      {
+        "seed": 102011,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 12,
+        "nonOpeningSeeds": 23,
+        "instancesOpened": 2,
+        "byBucket": {
+          "launched": 2,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "launched:companion:maya_singh:dawn": 1,
+          "launched:companion:gen_w3zeqy2:dawn": 1
+        },
+        "instances": [
+          {
+            "vid": "jorge_silva",
+            "target": "strike",
+            "needWave": 4,
+            "seedDay": 57,
+            "seedOutcome": "avoided",
+            "refreshes": 0,
+            "lastSeedDay": 57,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 4,
+            "firstScoredDawn": 63,
+            "stageHistory": [
+              "party",
+              "hunt",
+              "party",
+              "hunt",
+              "standing",
+              "hunt"
+            ],
+            "bids": [
+              {
+                "day": 60,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 10
+              },
+              {
+                "day": 61,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 9
+              },
+              {
+                "day": 68,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 8
+              },
+              {
+                "day": 72,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 8
+              },
+              {
+                "day": 76,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 7
+              },
+              {
+                "day": 78,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 7
+              },
+              {
+                "day": 80,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 8
+              },
+              {
+                "day": 85,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 8
+              },
+              {
+                "day": 86,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 8
+              },
+              {
+                "day": 88,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 8
+              },
+              {
+                "day": 89,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 8
+              }
+            ],
+            "selections": [
+              {
+                "day": 60,
+                "companion": "maya_singh",
+                "commitKind": "part-3",
+                "parts": [
+                  3
+                ]
+              },
+              {
+                "day": 61,
+                "companion": "gen_ntb585y",
+                "commitKind": "part-3",
+                "parts": [
+                  3
+                ]
+              },
+              {
+                "day": 68,
+                "companion": "mia_andersson",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 72,
+                "companion": "maya_singh",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 76,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 78,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 80,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 85,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 86,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 88,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "part-3",
+                "parts": [
+                  3
+                ]
+              },
+              {
+                "day": 89,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "no-tick-after-commit",
+                "day": 60,
+                "commitKind": "part-3"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "no-tick-after-commit",
+                "day": 61,
+                "commitKind": "part-3"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 68,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "launched",
+                "day": 72,
+                "companion": "maya_singh",
+                "commitKind": "dawn",
+                "part": 0
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 76,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "other",
+                "day": 78,
+                "commitKind": "mid-day part-1"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 80,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 85,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "launched",
+                "day": 86,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-1",
+                "part": 1
+              },
+              {
+                "outcome": "blocked",
+                "reason": "no-tick-after-commit",
+                "day": 88,
+                "commitKind": "part-3"
+              },
+              {
+                "outcome": "launched",
+                "day": 89,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-1",
+                "part": 1
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "launched",
+            "sub": "companion:maya_singh:dawn",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 4,
+              "bids": 11,
+              "selections": 11
+            }
+          },
+          {
+            "vid": "gen_ntb585y",
+            "target": "eater",
+            "needWave": 4,
+            "seedDay": 58,
+            "seedOutcome": "evaded",
+            "refreshes": 0,
+            "lastSeedDay": 58,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 5,
+            "firstScoredDawn": 60,
+            "stageHistory": [
+              "party",
+              "hunt"
+            ],
+            "bids": [
+              {
+                "day": 60,
+                "w": 5,
+                "score": 5,
+                "rank": 3,
+                "totalCands": 7
+              },
+              {
+                "day": 61,
+                "w": 5,
+                "score": 5,
+                "rank": 3,
+                "totalCands": 6
+              },
+              {
+                "day": 62,
+                "w": 5,
+                "score": 5,
+                "rank": 3,
+                "totalCands": 6
+              },
+              {
+                "day": 66,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 6
+              },
+              {
+                "day": 71,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 7
+              },
+              {
+                "day": 72,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 7
+              },
+              {
+                "day": 76,
+                "w": 5,
+                "score": 5,
+                "rank": 6,
+                "totalCands": 8
+              },
+              {
+                "day": 77,
+                "w": 5,
+                "score": 5,
+                "rank": 6,
+                "totalCands": 8
+              },
+              {
+                "day": 85,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 6
+              },
+              {
+                "day": 90,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 6
+              }
+            ],
+            "selections": [
+              {
+                "day": 60,
+                "companion": "jorge_silva",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 61,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 62,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 66,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 71,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 72,
+                "companion": "maya_singh",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 76,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              },
+              {
+                "day": 77,
+                "companion": "maya_singh",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 85,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 90,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-2",
+                "parts": [
+                  2
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "not-at-haven",
+                "day": 60,
+                "commitKind": "dawn"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 61,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "launched",
+                "day": 62,
+                "companion": "gen_w3zeqy2",
+                "commitKind": "dawn",
+                "part": 0
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 66,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 71,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "launched",
+                "day": 72,
+                "companion": "maya_singh",
+                "commitKind": "dawn",
+                "part": 0
+              },
+              {
+                "outcome": "blocked",
+                "reason": "night",
+                "day": 76,
+                "commitKind": "mid-day part-2"
+              },
+              {
+                "outcome": "launched",
+                "day": 77,
+                "companion": "maya_singh",
+                "commitKind": "dawn",
+                "part": 0
+              },
+              {
+                "outcome": "launched",
+                "day": 85,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-1",
+                "part": 1
+              },
+              {
+                "outcome": "blocked",
+                "reason": "no-tick-after-commit",
+                "day": 90,
+                "commitKind": "mid-day part-2"
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "launched",
+            "sub": "companion:gen_w3zeqy2:dawn",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 5,
+              "bids": 10,
+              "selections": 10
+            }
+          }
+        ]
+      },
+      {
+        "seed": 102012,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 0,
+        "nonOpeningSeeds": 6,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      },
+      {
+        "seed": 102013,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 4,
+        "nonOpeningSeeds": 10,
+        "instancesOpened": 4,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 1,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 3,
+          "unknown": 0
+        },
+        "bySub": {
+          "candidate-not-bid:no-companion-party": 3,
+          "selected-blocked:profile-gate-veto": 1
+        },
+        "instances": [
+          {
+            "vid": "app_mgpsphry558",
+            "target": "eulogy",
+            "needWave": 4,
+            "seedDay": 78,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 78,
+            "closeDay": 83,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 3,
+            "firstScoredDawn": 79,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "candidate-not-bid",
+            "sub": "no-companion-party",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 3,
+              "bids": 0,
+              "selections": 0
+            }
+          },
+          {
+            "vid": "boris_kowalski",
+            "target": "eulogy",
+            "needWave": 4,
+            "seedDay": 78,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 78,
+            "closeDay": 83,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 2,
+            "firstScoredDawn": 80,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 79,
+                "w": 5,
+                "score": 5,
+                "rank": 2,
+                "totalCands": 5
+              }
+            ],
+            "selections": [
+              {
+                "day": 79,
+                "companion": "hannah_kim",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 79,
+                "commitKind": "mid-day part-1"
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "profile-gate-veto",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 2,
+              "bids": 1,
+              "selections": 1
+            }
+          },
+          {
+            "vid": "tashi_sherpa",
+            "target": "eulogy",
+            "needWave": 4,
+            "seedDay": 86,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 86,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 2,
+            "firstScoredDawn": 88,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "candidate-not-bid",
+            "sub": "no-companion-party",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 2,
+              "bids": 0,
+              "selections": 0
+            }
+          },
+          {
+            "vid": "visjoin_86",
+            "target": "herald",
+            "needWave": 4,
+            "seedDay": 88,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 88,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 1,
+            "firstScoredDawn": 90,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "candidate-not-bid",
+            "sub": "no-companion-party",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 1,
+              "bids": 0,
+              "selections": 0
+            }
+          }
+        ]
+      },
+      {
+        "seed": 102014,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 5,
+        "nonOpeningSeeds": 11,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      },
+      {
+        "seed": 102015,
+        "days": 76,
+        "gameDays": 75,
+        "endReason": "village-lost",
+        "standing": 150,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "villageLost": true,
+        "instrumentErrors": 0,
+        "seedCallsW4": 4,
+        "nonOpeningSeeds": 10,
+        "instancesOpened": 1,
+        "byBucket": {
+          "launched": 1,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "launched:companion:zoe_adams:dawn": 1
+        },
+        "instances": [
+          {
+            "vid": "carlos_diaz",
+            "target": "reunion",
+            "needWave": 4,
+            "seedDay": 65,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 65,
+            "closeDay": 70,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 2,
+            "firstScoredDawn": 66,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 67,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 12
+              }
+            ],
+            "selections": [
+              {
+                "day": 67,
+                "companion": "zoe_adams",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "launched",
+                "day": 67,
+                "companion": "zoe_adams",
+                "commitKind": "dawn",
+                "part": 0
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "launched",
+            "sub": "companion:zoe_adams:dawn",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 2,
+              "bids": 1,
+              "selections": 1
+            }
+          }
+        ]
+      },
+      {
+        "seed": 102016,
+        "days": 92,
+        "gameDays": 92,
+        "endReason": "over-other",
+        "standing": 467,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 5,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 11,
+        "nonOpeningSeeds": 8,
+        "instancesOpened": 7,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 1,
+          "selected-blocked": 4,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 2,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "plan-churned-before-dawn:retargeted": 1,
+          "selected-blocked:profile-gate-veto": 3,
+          "plan-churned-before-dawn:holder-died": 1,
+          "selected-blocked:other": 1,
+          "target-killed:day:85": 1
+        },
+        "instances": [
+          {
+            "vid": "sanne_bakker",
+            "target": "eulogy",
+            "needWave": 4,
+            "seedDay": 77,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 77,
+            "closeDay": 77,
+            "closeKind": "retargeted",
+            "history": [],
+            "scoredDawns": 0,
+            "firstScoredDawn": null,
+            "stageHistory": [],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "plan-churned-before-dawn",
+            "sub": "retargeted",
+            "churnedBeforeDawn": true,
+            "tally": {
+              "scoredDawns": 0,
+              "bids": 0,
+              "selections": 0
+            }
+          },
+          {
+            "vid": "sanne_bakker",
+            "target": "suburb",
+            "needWave": 4,
+            "seedDay": 77,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 77,
+            "closeDay": 84,
+            "closeKind": "retargeted",
+            "history": [],
+            "scoredDawns": 1,
+            "firstScoredDawn": 84,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 79,
+                "w": 5,
+                "score": 5,
+                "rank": 3,
+                "totalCands": 7
+              },
+              {
+                "day": 80,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 5
+              }
+            ],
+            "selections": [
+              {
+                "day": 79,
+                "companion": "diana_osei",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 80,
+                "companion": "diana_osei",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 79,
+                "commitKind": "mid-day part-1"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 80,
+                "commitKind": "mid-day part-1"
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "profile-gate-veto",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 1,
+              "bids": 2,
+              "selections": 2
+            }
+          },
+          {
+            "vid": "app_mgpspjxp325",
+            "target": "suburb",
+            "needWave": 4,
+            "seedDay": 80,
+            "seedOutcome": "fled",
+            "refreshes": 1,
+            "lastSeedDay": 85,
+            "closeDay": 90,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 0,
+            "firstScoredDawn": null,
+            "stageHistory": [],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "plan-churned-before-dawn",
+            "sub": "holder-died",
+            "churnedBeforeDawn": true,
+            "tally": {
+              "scoredDawns": 0,
+              "bids": 0,
+              "selections": 0
+            }
+          },
+          {
+            "vid": "gen_8hwccou",
+            "target": "strike",
+            "needWave": 4,
+            "seedDay": 84,
+            "seedOutcome": "evaded",
+            "refreshes": 0,
+            "lastSeedDay": 84,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 0,
+            "firstScoredDawn": null,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 84,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 8
+              }
+            ],
+            "selections": [
+              {
+                "day": 84,
+                "companion": "diana_osei",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "other",
+                "day": 84,
+                "commitKind": "mid-day part-1"
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "other",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 0,
+              "bids": 1,
+              "selections": 1
+            }
+          },
+          {
+            "vid": "sanne_bakker",
+            "target": "eulogy",
+            "needWave": 4,
+            "seedDay": 84,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 84,
+            "closeDay": 86,
+            "closeKind": "retargeted",
+            "history": [],
+            "scoredDawns": 1,
+            "firstScoredDawn": 85,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": 85,
+            "bucket": "target-killed",
+            "sub": "day:85",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 1,
+              "bids": 0,
+              "selections": 0
+            }
+          },
+          {
+            "vid": "brian_otieno",
+            "target": "herald",
+            "needWave": 4,
+            "seedDay": 85,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 85,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 5,
+            "firstScoredDawn": 86,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 90,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 6
+              },
+              {
+                "day": 91,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 5
+              },
+              {
+                "day": 92,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 5
+              }
+            ],
+            "selections": [
+              {
+                "day": 90,
+                "companion": "diana_osei",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 91,
+                "companion": "diana_osei",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 92,
+                "companion": "diana_osei",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 90,
+                "commitKind": "dawn"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 91,
+                "commitKind": "dawn"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 92,
+                "commitKind": "dawn"
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "profile-gate-veto",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 5,
+              "bids": 3,
+              "selections": 3
+            }
+          },
+          {
+            "vid": "sanne_bakker",
+            "target": "herald",
+            "needWave": 4,
+            "seedDay": 86,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 86,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 5,
+            "firstScoredDawn": 87,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 90,
+                "w": 5,
+                "score": 5,
+                "rank": 3,
+                "totalCands": 10
+              },
+              {
+                "day": 91,
+                "w": 5,
+                "score": 5,
+                "rank": 3,
+                "totalCands": 9
+              },
+              {
+                "day": 92,
+                "w": 5,
+                "score": 5,
+                "rank": 3,
+                "totalCands": 9
+              }
+            ],
+            "selections": [
+              {
+                "day": 90,
+                "companion": "diana_osei",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 91,
+                "companion": "diana_osei",
+                "commitKind": "dawn",
+                "parts": [
+                  0
+                ]
+              },
+              {
+                "day": 92,
+                "companion": "diana_osei",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 90,
+                "commitKind": "dawn"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 91,
+                "commitKind": "dawn"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 92,
+                "commitKind": "mid-day part-1"
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "profile-gate-veto",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 5,
+              "bids": 3,
+              "selections": 3
+            }
+          }
+        ]
+      },
+      {
+        "seed": 102017,
+        "days": 95,
+        "gameDays": 95,
+        "endReason": "over-other",
+        "standing": 177,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 2,
+        "nonOpeningSeeds": 3,
+        "instancesOpened": 2,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 1,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 1,
+          "unknown": 0
+        },
+        "bySub": {
+          "selected-blocked:no-tick-after-commit": 1,
+          "candidate-not-bid:no-companion-party": 1
+        },
+        "instances": [
+          {
+            "vid": "elijah_scott",
+            "target": "influencer",
+            "needWave": 4,
+            "seedDay": 87,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 87,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 1,
+            "firstScoredDawn": 91,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 87,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 6
+              },
+              {
+                "day": 88,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 6
+              },
+              {
+                "day": 89,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 5
+              },
+              {
+                "day": 90,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 5
+              },
+              {
+                "day": 93,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 7
+              }
+            ],
+            "selections": [
+              {
+                "day": 87,
+                "companion": "maya_singh",
+                "commitKind": "part-3",
+                "parts": [
+                  3
+                ]
+              },
+              {
+                "day": 88,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 89,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 90,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              },
+              {
+                "day": 93,
+                "companion": "maya_singh",
+                "commitKind": "mid-day part-1",
+                "parts": [
+                  1
+                ]
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "no-tick-after-commit",
+                "day": 87,
+                "commitKind": "part-3"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 88,
+                "commitKind": "mid-day part-1"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 89,
+                "commitKind": "mid-day part-1"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 90,
+                "commitKind": "mid-day part-1"
+              },
+              {
+                "outcome": "blocked",
+                "reason": "profile-gate-veto",
+                "day": 93,
+                "commitKind": "mid-day part-1"
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "no-tick-after-commit",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 1,
+              "bids": 5,
+              "selections": 5
+            }
+          },
+          {
+            "vid": "maya_singh",
+            "target": "influencer",
+            "needWave": 4,
+            "seedDay": 87,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 87,
+            "closeDay": 93,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 4,
+            "firstScoredDawn": 88,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "candidate-not-bid",
+            "sub": "no-companion-party",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 4,
+              "bids": 0,
+              "selections": 0
+            }
+          }
+        ]
+      },
+      {
+        "seed": 102018,
+        "days": 83,
+        "gameDays": 83,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": false,
+        "maxWave": 4,
+        "villageLost": true,
+        "instrumentErrors": 0,
+        "seedCallsW4": 1,
+        "nonOpeningSeeds": 20,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      }
+    ]
+  },
+  "go": {
+    "launchedSeeds": [
+      102011,
+      102015,
+      102016,
+      102018
+    ],
+    "launchedSeedsN": 4,
+    "launchedTotal": 6,
+    "launchedW4Only": 6,
+    "launchedDawnOnly": 5,
+    "launchedDawnSeeds": [
+      102011,
+      102015,
+      102016,
+      102018
+    ],
+    "blockedDays": 27,
+    "bareSelectedNotExecuted": 0,
+    "medianArmed": 90,
+    "medianControl": 90,
+    "medianRatio": 1,
+    "starvArmedTotal": 0,
+    "starvControlTotal": 1,
+    "starvArmedOnly": 0,
+    "starvControlOnly": 1,
+    "nationalEndArmed": 8,
+    "nationalEndControl": 7,
+    "bars": {
+      "launch": true,
+      "median": true,
+      "starvTotals": true,
+      "starvArmOnly": true,
+      "skipCoverage": true
+    },
+    "pass": true
+  },
+  "bars": {
+    "classification": {
+      "pass": true,
+      "classifiedShare": 1,
+      "unknown": 0,
+      "instancesOpened": 16
+    },
+    "corpus": {
+      "pass": true,
+      "instrumentFiles": 8,
+      "controlFiles": 8
+    },
+    "instrumentErrors": {
+      "pass": true,
+      "instrument": 0,
+      "control": 0
+    }
+  }
+}
