@@ -15,12 +15,17 @@
 // TRICKTEACH=1, LEG=competent.
 // Usage:
 //   node scripts/test-trickteach-b.js
+//   TRICKTEACH_PROOF_MODE=off node scripts/test-trickteach-b.js
+//     (post-revert: asserts the lever is fully gone — src diff empty,
+//     no TRICKTEACH read, no threshold helper — and the control
+//     2-observation path still behaves; skips the armed legs.)
 'use strict';
 const fs = require('fs');
 const path = require('path');
 const { execSync, execFileSync } = require('child_process');
 const REPO = path.join(__dirname, '..');
 const ANALYZE = require(path.join(REPO, 'scripts', 'analyze-trickteach-b'));
+const OFF_MODE = process.env.TRICKTEACH_PROOF_MODE === 'off';
 
 let pass = 0, fail = 0;
 const failures = [];
@@ -37,19 +42,26 @@ function gitOut(args) {
 console.log('== static ==');
 const srcDiff = gitOut('diff master...HEAD -- src/');
 const srcFiles = gitOut('diff master...HEAD --name-only -- src/').split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
-check('src diff is game.js only (the lever)', srcFiles.length === 1 && srcFiles[0] === 'src/js/game.js',
-  'got ' + JSON.stringify(srcFiles));
-check('src diff mentions TRICKTEACH (the lever flag)', srcDiff.indexOf('TRICKTEACH') !== -1);
 const gameSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'game.js'), 'utf8');
-const flagReads = (gameSrc.match(/process\.env\.TRICKTEACH/g) || []).length;
-check('flag is read in exactly one place (trickLearnThreshold)', flagReads === 1, 'got ' + flagReads);
-const thSites = (gameSrc.match(/obs\[mid\] < _th/g) || []).length;
-check('three threshold sites, all threshold-aware (obs[mid] < _th)', thSites === 3, 'got ' + thSites);
-check('no stale hardcoded obs[mid] < 2 remains', gameSrc.indexOf('obs[mid] < 2') === -1);
-check('no stale "/2" observation denominator remains in the trick code',
-  (gameSrc.match(/\/2 — one more survived encounter/g) || []).length === 0 &&
-  gameSrc.indexOf('Sighting ${obs[mid]}/2') === -1 &&
-  gameSrc.indexOf('Witnessed kill ${obs[mid]}/2') === -1);
+if (OFF_MODE) {
+  check('OFF MODE: src diff is empty (lever fully reverted)', srcFiles.length === 0, 'got ' + JSON.stringify(srcFiles));
+  check('OFF MODE: no TRICKTEACH read remains in src/', (gameSrc.match(/process\.env\.TRICKTEACH/g) || []).length === 0);
+  check('OFF MODE: no trickLearnThreshold helper remains', gameSrc.indexOf('trickLearnThreshold') === -1);
+  check('OFF MODE: no threshold-aware obs sites remain', (gameSrc.match(/obs\[mid\] < _th/g) || []).length === 0);
+} else {
+  check('src diff is game.js only (the lever)', srcFiles.length === 1 && srcFiles[0] === 'src/js/game.js',
+    'got ' + JSON.stringify(srcFiles));
+  check('src diff mentions TRICKTEACH (the lever flag)', srcDiff.indexOf('TRICKTEACH') !== -1);
+  const flagReads = (gameSrc.match(/process\.env\.TRICKTEACH/g) || []).length;
+  check('flag is read in exactly one place (trickLearnThreshold)', flagReads === 1, 'got ' + flagReads);
+  const thSites = (gameSrc.match(/obs\[mid\] < _th/g) || []).length;
+  check('three threshold sites, all threshold-aware (obs[mid] < _th)', thSites === 3, 'got ' + thSites);
+  check('no stale hardcoded obs[mid] < 2 remains', gameSrc.indexOf('obs[mid] < 2') === -1);
+  check('no stale "/2" observation denominator remains in the trick code',
+    (gameSrc.match(/\/2 — one more survived encounter/g) || []).length === 0 &&
+    gameSrc.indexOf('Sighting ${obs[mid]}/2') === -1 &&
+    gameSrc.indexOf('Witnessed kill ${obs[mid]}/2') === -1);
+}
 const winPlanSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'win-plan.js'), 'utf8');
 check('gate reads villageKnowsTrick (anchor: trickHolds branch)', winPlanSrc.indexOf('villageKnowsTrick') !== -1);
 const ffSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'fieldFights.js'), 'utf8');
@@ -110,7 +122,7 @@ function thresholdChild(envExtra) {
     "  if (roster.length < 3) { console.log(JSON.stringify({ error: 'roster<3', roster: roster })); return; }",
     "  const w1 = roster[0], w2 = roster[1], dead1 = roster[2];",
     "  const out = { threshold: null, villager: {}, scholar: {}, witness: {} };",
-    "  try { out.threshold = Game.trickLearnThreshold(); } catch (e) { out.threshold = 'ERR:' + e.message; }",
+    "  try { out.threshold = (typeof Game.trickLearnThreshold === 'function') ? Game.trickLearnThreshold() : 2; } catch (e) { out.threshold = 'ERR:' + e.message; }",
     "  out.villager.knownBefore = Game.villageKnowsTrick('algorithm');",
     "  Game.noteVillagerTrickObservation(w1, 'algorithm');",
     "  out.villager.obsAfter1 = (Game.state.villageCounterObs || {}).algorithm || 0;",
@@ -139,54 +151,73 @@ function thresholdChild(envExtra) {
   const res = execFileSync('node', ['-e', script], { cwd: REPO, env: env, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
   return JSON.parse(res.trim().split('\n').pop());
 }
-const armedU = thresholdChild({ TRICKTEACH: '1' });
+const armedU = OFF_MODE ? null : thresholdChild({ TRICKTEACH: '1' });
 const controlU = thresholdChild({});
-check('armed threshold is 1', armedU.threshold === 1, 'got ' + JSON.stringify(armedU.threshold));
+if (!OFF_MODE) {
+  check('armed threshold is 1', armedU.threshold === 1, 'got ' + JSON.stringify(armedU.threshold));
+}
 check('control threshold is 2', controlU.threshold === 2, 'got ' + JSON.stringify(controlU.threshold));
-check('armed: one villager observation teaches (algorithm)',
-  armedU.villager.knownBefore === false && armedU.villager.obsAfter1 === 1 && armedU.villager.knownAfter1 === true,
-  JSON.stringify(armedU.villager));
+if (!OFF_MODE) {
+  check('armed: one villager observation teaches (algorithm)',
+    armedU.villager.knownBefore === false && armedU.villager.obsAfter1 === 1 && armedU.villager.knownAfter1 === true,
+    JSON.stringify(armedU.villager));
+}
 check('control: one villager observation does NOT teach (algorithm)',
   controlU.villager.knownBefore === false && controlU.villager.obsAfter1 === 1 && controlU.villager.knownAfter1 === false,
   JSON.stringify(controlU.villager));
 check('control: the second villager observation teaches (algorithm)',
   controlU.villager.obsAfter2 === 2 && controlU.villager.knownAfter2 === true,
   JSON.stringify(controlU.villager));
-check('armed: one scholar observation teaches (eater)',
-  armedU.scholar.obsAfter1 === 1 && armedU.scholar.knownAfter1 === true, JSON.stringify(armedU.scholar));
+if (!OFF_MODE) {
+  check('armed: one scholar observation teaches (eater)',
+    armedU.scholar.obsAfter1 === 1 && armedU.scholar.knownAfter1 === true, JSON.stringify(armedU.scholar));
+}
 check('control: one scholar observation does NOT teach (eater)',
   controlU.scholar.obsAfter1 === 1 && controlU.scholar.knownAfter1 === false, JSON.stringify(controlU.scholar));
 check('control: the second scholar observation teaches (eater)',
   controlU.scholar.obsAfter2 === 2 && controlU.scholar.knownAfter2 === true, JSON.stringify(controlU.scholar));
-check('armed: one witnessed kill teaches (reunion)',
-  armedU.witness.obsAfter1 === 1 && armedU.witness.knownAfter1 === true, JSON.stringify(armedU.witness));
+if (!OFF_MODE) {
+  check('armed: one witnessed kill teaches (reunion)',
+    armedU.witness.obsAfter1 === 1 && armedU.witness.knownAfter1 === true, JSON.stringify(armedU.witness));
+}
 check('control: one witnessed kill does NOT teach (reunion)',
   controlU.witness.obsAfter1 === 1 && controlU.witness.knownAfter1 === false, JSON.stringify(controlU.witness));
 check('control: the second witnessed kill teaches (reunion)',
   controlU.witness.obsAfter2 === 2 && controlU.witness.knownAfter2 === true, JSON.stringify(controlU.witness));
-const armedLearned = armedU.said.filter(function (s) { return s.indexOf('COUNTER LEARNED') !== -1; });
+const armedLearned = OFF_MODE ? [] : armedU.said.filter(function (s) { return s.indexOf('COUNTER LEARNED') !== -1; });
 const controlLearned = controlU.said.filter(function (s) { return s.indexOf('COUNTER LEARNED') !== -1; });
-check('armed learn beats exist (3 channels, 3 species)', armedLearned.length === 3, 'got ' + armedLearned.length);
+if (!OFF_MODE) {
+  check('armed learn beats exist (3 channels, 3 species)', armedLearned.length === 3, 'got ' + armedLearned.length);
+}
 check('control learn beats exist (3 channels, 3 species)', controlLearned.length === 3, 'got ' + controlLearned.length);
-check('armed learn beats never say "twice"', armedLearned.every(function (s) { return s.indexOf('twice') === -1; }),
-  JSON.stringify(armedLearned).slice(0, 400));
+if (!OFF_MODE) {
+  check('armed learn beats never say "twice"', armedLearned.every(function (s) { return s.indexOf('twice') === -1; }),
+    JSON.stringify(armedLearned).slice(0, 400));
+}
 // The villager + scholar learn beats carry the count language
 // ("twice" at threshold 2, "one sighting was enough" at 1); the
 // witness beat never did — it is framed second-hand ("watched it
 // take …"), so it is asserted on its own wording, not on "twice".
 const armedCounted = armedLearned.filter(function (s) { return s.indexOf('one sighting was enough') !== -1; });
 const controlCounted = controlLearned.filter(function (s) { return s.indexOf('twice') !== -1; });
-check('armed villager+scholar learn beats say "one sighting was enough" (2 of 3)',
-  armedCounted.length === 2, 'got ' + armedCounted.length + ' of ' + armedLearned.length);
+if (!OFF_MODE) {
+  check('armed villager+scholar learn beats say "one sighting was enough" (2 of 3)',
+    armedCounted.length === 2, 'got ' + armedCounted.length + ' of ' + armedLearned.length);
+}
 check('control villager+scholar learn beats say "twice" (2 of 3)',
   controlCounted.length === 2, 'got ' + controlCounted.length + ' of ' + controlLearned.length);
-check('armed + control witness learn beats are framed second-hand ("watched it take")',
-  armedLearned.some(function (s) { return s.indexOf('watched it take') !== -1; }) &&
-  controlLearned.some(function (s) { return s.indexOf('watched it take') !== -1; }),
-  JSON.stringify(armedLearned.concat(controlLearned)).slice(0, 400));
-check('armed: no stale "(1/2" first-sighting line prints',
-  armedU.said.every(function (s) { return s.indexOf('(1/2') === -1; }),
-  JSON.stringify(armedU.said.filter(function (s) { return s.indexOf('/2') !== -1; })).slice(0, 300));
+if (!OFF_MODE) {
+  check('armed + control witness learn beats are framed second-hand ("watched it take")',
+    armedLearned.some(function (s) { return s.indexOf('watched it take') !== -1; }) &&
+    controlLearned.some(function (s) { return s.indexOf('watched it take') !== -1; }),
+    JSON.stringify(armedLearned.concat(controlLearned)).slice(0, 400));
+  check('armed: no stale "(1/2" first-sighting line prints',
+    armedU.said.every(function (s) { return s.indexOf('(1/2') === -1; }),
+    JSON.stringify(armedU.said.filter(function (s) { return s.indexOf('/2') !== -1; })).slice(0, 300));
+} else {
+  check('OFF MODE: control witness learn beat is framed second-hand ("watched it take")',
+    controlLearned.some(function (s) { return s.indexOf('watched it take') !== -1; }));
+}
 check('control: the scholar first-sighting line prints "(1/2"',
   controlU.said.some(function (s) { return s.indexOf('(1/2') !== -1; }));
 
@@ -218,6 +249,7 @@ async function liveRuns() {
     outControl.trickKnownEnd && Array.isArray(outControl.trickKnownEnd.wave12) &&
     Array.isArray(outControl.trickKnownEnd.wave345) && outControl.trickObsEnd != null,
     JSON.stringify(outControl.trickKnownEnd));
+  if (OFF_MODE) return; // post-revert: only the control leg is provable; the armed leg is gone
   const dArmed = loadDriverFresh(150, true);
   const outLong = await dArmed.oneRun(102211);
   check('live 150d armed run completes with 0 instrument errors', outLong.instrumentErrors.length === 0,
@@ -287,7 +319,7 @@ async function determinism() {
 (async function () {
   try {
     await liveRuns();
-    await determinism();
+    if (!OFF_MODE) await determinism();
   } catch (e) {
     fail++;
     failures.push('live/determinism threw: ' + (e && e.stack ? e.stack.split('\n')[0] : String(e)));

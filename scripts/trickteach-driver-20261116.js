@@ -1150,7 +1150,7 @@ async function oneRun(seed) {
     seed: seed, arm: 'trickteach-b', run: RUN, mode: LEG, leg: LEG,
     anchorCommit: ANCHOR, standingMarker: STANDING_MARKER,
     recorderOn: RECORDER_ON, trickTeach: process.env.TRICKTEACH === '1',
-    trickTeachThreshold: (function () { try { return (typeof Game.trickLearnThreshold === 'function') ? Game.trickLearnThreshold() : null; } catch (e) { return null; } })(),
+    trickTeachThreshold: (function () { try { return (typeof Game.trickLearnThreshold === 'function') ? Game.trickLearnThreshold() : 2; } catch (e) { return null; } })(),
     policySha: POLICY_SHA, policy: LEG,
     days: result.days, gameDays: (st.scholar && st.scholar.day) || 0,
     endReason: result.endReason, won: !!Game.won, over: !!Game.over,
