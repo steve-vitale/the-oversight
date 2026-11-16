@@ -9,11 +9,18 @@
 // §2 GAME (live 200d smoke on seed 100421, covenant leg, via the
 // onlylead driver): the 200d instrument captures a full per-day series +
 // shape-candidate roll with 0 instrument errors, and a determinism leg
-// (same seed+policy twice → identical series). Seed 100421 is the
-// probe's substrate-negative seed (competent-only: dead d93, max known
-// opinion 8, never 10) — the smoke proves the 200d instrument on a
-// short-lived village WITHOUT prejudging the pilot (no covenant beat
-// can stage there; the pilot's GO count is untouched).
+// (same seed+policy twice → identical series). Seed 100421 was the
+// probe's substrate-negative seed on the PRE-r137 tip (competent-only:
+// dead d93, max known opinion 8, never 10) — on the current tip that
+// status is DEAD (revised 2026-11-15, sim-covenantsmoke-b): opinion-10
+// is first met day 53 and the day-53 propose is ACCEPTED, so a covenant
+// peer link forms and is tended. The smoke still proves the 200d
+// instrument on a short-lived village (lost day 135), and the propose
+// stream now asserts the same opinion-timing split as the 60d smoke
+// (prereq until opinion-10, acceptance after) at the 200d horizon.
+// The "without prejudging the pilot" rationale for this seed is retired
+// with the substrate-negative status — the instrument proof, not the
+// seed's negativity, is what the smoke is for.
 // Shared harness only (scripts/sim-harness.js via the driver) — never
 // copied eval boilerplate; Math.random seeded BEFORE eval by the
 // harness; Game.save never stubbed.
@@ -50,6 +57,41 @@ function mkRec(days, verbEvents) {
   return { seed: 999998, policy: 'competent-covenant-b', days: days.length, series: series, verbEvents: verbEvents || [], instrumentErrors: [] };
 }
 function cand(shape, size) { return { shape: shape, size: size, primary: shape === 'belong' ? 'village_1' : 'haven', led: shape === 'lead' || shape === 'conquest' }; }
+
+// --- opinion-timing judge (revised 2026-11-15, sim-covenantsmoke-b) ------
+// Copy of the judge in test-covenant-b.js (canonical) — keep in sync.
+// Same dead assumption as that file's §2: journey r137 (ce0f28a46)
+// moved opinion-10 from ~day 150 to day 53 on seed 100421, so the old
+// "no peer link formed on the substrate-negative seed" assertion is
+// dead and the propose stream is judged against the day opinion-10 is
+// first met instead: prerequisite refusals until then, an acceptance
+// after (within a week of the opening). See test-covenant-b.js for the
+// full rationale and the §1b controls proving this judge discriminates.
+function judgeCovenantTiming(proposes, op10Day) {
+  const d = { ok: false, reason: null, op10Day: op10Day, prePrereq: 0, preOther: 0, preOtherOutcome: null, firstAcceptDay: null, postAccepts: 0, declines: 0 };
+  if (op10Day === null || op10Day === undefined) { d.reason = 'opinion-10 never met in the smoke window'; return d; }
+  const pre = [];
+  for (const p of (proposes || [])) { if (p.day < op10Day) pre.push(p); }
+  if (pre.length === 0) { d.reason = 'no propose before opinion-10 (nothing refused on the gate)'; return d; }
+  for (const p of pre) {
+    if (p.outcome === 'prereq') d.prePrereq++;
+    else { d.preOther++; if (!d.preOtherOutcome) d.preOtherOutcome = p.outcome; }
+  }
+  if (d.preOther > 0) { d.reason = 'a pre-opinion-10 propose was judged instead of refused (' + d.preOtherOutcome + ')'; return d; }
+  for (const p of (proposes || [])) {
+    if (p.outcome === 'declined' || p.outcome === 'shut') d.declines++;
+    if (p.outcome === 'accepted' && p.day >= op10Day) {
+      d.postAccepts++;
+      if (d.firstAcceptDay === null || p.day < d.firstAcceptDay) d.firstAcceptDay = p.day;
+    }
+  }
+  if (d.declines > 0) { d.reason = 'cold decline/shut in the smoke window'; return d; }
+  if (d.postAccepts === 0) { d.reason = 'no acceptance after opinion-10'; return d; }
+  if (d.firstAcceptDay - op10Day > 7) { d.reason = 'acceptance lagged more than a week after opinion-10'; return d; }
+  d.ok = true;
+  d.reason = 'prereq until opinion-10, accepted within a week of it';
+  return d;
+}
 function road(o) {
   return { nPrimSeas: 0, nConq: 0, nConqSeas: 0, nCovFormed: 0, nCovSeas: 0, nTradeFormed: 0, nTradeSeas: 0, bestBelong: null, ...(o || {}) };
 }
@@ -152,7 +194,22 @@ async function sectionGame() {
   check('covenant road counts present every day', cov.series.every(function (sn) { return sn.road && typeof sn.road.nPrimSeas === 'number' && typeof sn.road.nCovFormed === 'number'; }), null);
   check('covenant death-aware horizon (village lost before 200d)', cov.days < 200 && cov.villageLost === true, { days: cov.days, villageLost: cov.villageLost, endReason: cov.endReason });
   check('covenant linkLines within the 900 cap', (cov.linkLines || []).length <= 900, { linkLines: (cov.linkLines || []).length });
-  check('covenant no peer link formed on the substrate-negative seed', ((cov.capSummary || {}).proposeAccepted | 0) === 0, cov.capSummary);
+  // OPINION TIMING (revised 2026-11-15, sim-covenantsmoke-b — same dead
+  // assumption as test-covenant-b §2): seed 100421's substrate-negative
+  // status died with journey r137. On this tip max-known-opinion first
+  // reaches 10 on DAY 53 and the day-53 propose to village_2 is
+  // ACCEPTED (detPeer 73) — a covenant peer link forms (tended 5x,
+  // trust 33→70+) in a village that used to die at d93 with max
+  // opinion 8. The check now asserts the timing split at the 200d
+  // horizon instead of the absence of a link. Live numbers on this
+  // tip: 84 propose calls, 83 prereq, 1 accepted day 53, 0 declined.
+  const op10 = (cov.series || []).find(function (sn) { return sn.maxOpinion !== null && sn.maxOpinion >= 10; });
+  const op10Day = op10 ? op10.d : null;
+  check('opinion-10 first met inside the 200d window', op10Day !== null, { op10Day: op10Day, opinions: op10 ? op10.opinions : null });
+  const proposes = ((cov.capSummary || {}).events || []).filter(function (e) { return e.kind === 'propose'; })
+    .map(function (e) { return { day: e.day, outcome: e.outcome }; });
+  const timing = judgeCovenantTiming(proposes, op10Day);
+  check('propose stream splits at opinion-10 on the 200d leg', timing.ok, timing);
   const base = await oneRun(100421, 'competent-scaleclimb-b', { days: 200 });
   check('baseline 200d smoke ran', base && base.series && base.series.length > 0, base && base.series && base.series.length);
   check('baseline 0 instrument errors', (base.instrumentErrors || []).length === 0, base.instrumentErrors);

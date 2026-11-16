@@ -8,7 +8,10 @@
 // §2 GAME (live 60d smoke on seed 100401, covenant vs scaleclimb,
 // via the onlylead driver): the policy proposes covenant links in
 // live play, 0 instrument errors, and a determinism leg (same
-// seed+policy twice → identical series).
+// seed+policy twice → identical series). The propose stream is judged
+// against the day max-known-opinion first reaches 10 (day 59 on seed
+// 100401 since journey r137 — see the §2 comment and the §1b judge
+// controls): prerequisite refusals until then, an acceptance after.
 // Shared harness only (scripts/sim-harness.js via the driver) — never
 // copied eval boilerplate; Math.random seeded BEFORE eval by the
 // harness; Game.save never stubbed.
@@ -23,6 +26,53 @@ let PASS = 0, FAIL = 0;
 function check(name, cond, extra) {
   if (cond) { PASS++; console.log('  PASS ' + name); }
   else { FAIL++; console.log('  FAIL ' + name + (extra !== undefined ? ' :: ' + JSON.stringify(extra) : '')); }
+}
+
+// --- opinion-timing judge (revised 2026-11-15, sim-covenantsmoke-b) ------
+// The old §2 assertion ("no acceptance in the 60d smoke window") encoded
+// an opinion-timing assumption that journey r137 (ce0f28a46) falsified:
+// max-known-opinion first reaches 10 on DAY 59 on seed 100401 (was
+// ~day 150 from a cold start), and a covenant proposal is ACCEPTED the
+// same day (village_1, detPeer 73). The road opens inside the smoke
+// window now, so the assertion splits the propose stream AT the day
+// opinion-10 is first met: every propose before that day is a
+// prerequisite refusal (the engine refuses before judging), and at
+// least one propose on/after that day is accepted, within a week of
+// the opening (a lag longer than that means the road opened but the
+// policy could not walk it). A cold decline or a shut anywhere in the
+// window is still a failure, as is any propose before the gate that
+// was judged instead of refused (an acceptance before opinion-10
+// shows up here: the gate did not refuse). The function is pure so
+// §1b can prove it discriminates on synthetic streams.
+// proposes: [{day, outcome}] with outcome in 'prereq' | 'accepted' |
+//   'counter' | 'declined' | 'shut' (the policy's own classification,
+//   capSummary.events kind 'propose').
+// Returns {ok, reason, op10Day, prePrereq, preOther, preOtherOutcome,
+//   firstAcceptDay, postAccepts, declines}.
+function judgeCovenantTiming(proposes, op10Day) {
+  const d = { ok: false, reason: null, op10Day: op10Day, prePrereq: 0, preOther: 0, preOtherOutcome: null, firstAcceptDay: null, postAccepts: 0, declines: 0 };
+  if (op10Day === null || op10Day === undefined) { d.reason = 'opinion-10 never met in the smoke window'; return d; }
+  const pre = [];
+  for (const p of (proposes || [])) { if (p.day < op10Day) pre.push(p); }
+  if (pre.length === 0) { d.reason = 'no propose before opinion-10 (nothing refused on the gate)'; return d; }
+  for (const p of pre) {
+    if (p.outcome === 'prereq') d.prePrereq++;
+    else { d.preOther++; if (!d.preOtherOutcome) d.preOtherOutcome = p.outcome; }
+  }
+  if (d.preOther > 0) { d.reason = 'a pre-opinion-10 propose was judged instead of refused (' + d.preOtherOutcome + ')'; return d; }
+  for (const p of (proposes || [])) {
+    if (p.outcome === 'declined' || p.outcome === 'shut') d.declines++;
+    if (p.outcome === 'accepted' && p.day >= op10Day) {
+      d.postAccepts++;
+      if (d.firstAcceptDay === null || p.day < d.firstAcceptDay) d.firstAcceptDay = p.day;
+    }
+  }
+  if (d.declines > 0) { d.reason = 'cold decline/shut in the smoke window'; return d; }
+  if (d.postAccepts === 0) { d.reason = 'no acceptance after opinion-10'; return d; }
+  if (d.firstAcceptDay - op10Day > 7) { d.reason = 'acceptance lagged more than a week after opinion-10'; return d; }
+  d.ok = true;
+  d.reason = 'prereq until opinion-10, accepted within a week of it';
+  return d;
 }
 
 // --- fake Game ------------------------------------------------------------
@@ -192,6 +242,64 @@ function sectionStatic() {
   }
 }
 
+function sectionTimingJudge() {
+  console.log('§1b static — opinion-timing judge discriminates');
+  function prereqRange(a, b) {
+    const ps = [];
+    for (let d = a; d <= b; d++) ps.push({ day: d, outcome: 'prereq' });
+    return ps;
+  }
+  // (a) Happy path mirroring the live seed-100401 numbers: 49 prereq
+  // d10-58, accepted d59, prereq d60 (a new village, opinion 0),
+  // op10Day 59.
+  {
+    const ps = prereqRange(10, 58);
+    ps.push({ day: 59, outcome: 'accepted' });
+    ps.push({ day: 60, outcome: 'prereq' });
+    const r = judgeCovenantTiming(ps, 59);
+    check('judge accepts the live shape (prereq d10-58, accept d59)', r.ok && r.prePrereq === 49 && r.firstAcceptDay === 59 && r.postAccepts === 1, r);
+  }
+  // (b) NEGATIVE CONTROL 1 — the day-59 acceptance suppressed: same
+  // stream minus the acceptance → must fail (this is what would have
+  // caught a road that opens but never forms a link).
+  {
+    const ps = prereqRange(10, 58);
+    ps.push({ day: 60, outcome: 'prereq' });
+    const r = judgeCovenantTiming(ps, 59);
+    check('judge FAILS when the acceptance is suppressed', !r.ok && r.reason === 'no acceptance after opinion-10', r);
+  }
+  // (c) NEGATIVE CONTROL 2 — the old-timing shape: opinion-10 never
+  // met in the window (the world the dead assertion assumed) → fail.
+  {
+    const ps = prereqRange(10, 60);
+    const r = judgeCovenantTiming(ps, null);
+    check('judge FAILS on the old-timing shape (opinion-10 never met)', !r.ok && r.reason === 'opinion-10 never met in the smoke window', r);
+  }
+  // (d) NEGATIVE CONTROL 3 — an acceptance BEFORE the gate (day 30,
+  // opinion-10 day 59): the gate did not refuse → fail.
+  {
+    const ps = prereqRange(10, 29);
+    ps.push({ day: 30, outcome: 'accepted' });
+    const r = judgeCovenantTiming(ps, 59);
+    check('judge FAILS on an acceptance before opinion-10', !r.ok && r.preOther === 1 && r.preOtherOutcome === 'accepted', r);
+  }
+  // (e) NEGATIVE CONTROL 4 — a cold decline in the window → fail.
+  {
+    const ps = prereqRange(10, 58);
+    ps.push({ day: 59, outcome: 'declined' });
+    const r = judgeCovenantTiming(ps, 59);
+    check('judge FAILS on a cold decline in the window', !r.ok && r.declines === 1, r);
+  }
+  // (f) NEGATIVE CONTROL 5 — the acceptance lags more than a week
+  // after the opening (day 67 vs opinion-10 day 59) → fail.
+  {
+    const ps = prereqRange(10, 59);
+    ps.push({ day: 67, outcome: 'accepted' });
+    const r = judgeCovenantTiming(ps, 59);
+    check('judge FAILS when the acceptance lags >7d after opinion-10', !r.ok && /lagged/.test(r.reason), r);
+  }
+}
+
 async function sectionGame() {
   console.log('§2 game — live 60d smoke, seed 100401, covenant vs scaleclimb');
   const cov = await oneRun(100401, 'competent-covenant-b', { days: 60 });
@@ -200,12 +308,29 @@ async function sectionGame() {
   check('covenant shape-candidate roll present', cov.series.every(function (sn) { return sn.shapeCands && sn.road; }), null);
   const covProposes = (cov.verbEvents || []).filter(function (e) { return e.verb === 'proposeCovenant'; }).length;
   check('covenant proposes in live play', covProposes > 0, { proposeCovenant: covProposes });
-  // No peer link is expected to form in a 60d smoke: the engine's
-  // opinion-10 prerequisite is only met at ~day 150 from a cold start
-  // (probe, 2 seeds — see the Stage 2 addendum), so the smoke proves
-  // the attempt fires and the engine refuses on opinion, not the
-  // formation. Formation is a pilot-horizon question, not a smoke one.
-  check('propose attempts are prerequisite refusals in the smoke window', (cov.capSummary || {}).proposePrereq > 0 && ((cov.capSummary || {}).proposeAccepted | 0) === 0, cov.capSummary);
+  // OPINION TIMING (revised 2026-11-15, sim-covenantsmoke-b — the old
+  // "no acceptance in the window" assertion below is DEAD: journey
+  // r137 (ce0f28a46) re-opens deflected question-wants, more questions
+  // get answered, and max-known-opinion first reaches 10 on DAY 59 on
+  // seed 100401 (was ~day 150 from a cold start) — village_1: 10,
+  // village_0: 7; trajectory 0 at d10, 2 at d20, 8 at d30, 6 at d40-50,
+  // 10 at d59 — and the day-59 propose to village_1 is ACCEPTED
+  // (detPeer 73). The game changed on purpose under the test, so the
+  // test is updated in this commit and says so (repo AGENTS.md). The
+  // new assertion splits the propose stream AT the day opinion-10 is
+  // first met: prerequisite refusals until then, an acceptance after
+  // (within a week of the opening). It still discriminates — §1b
+  // proves it fails if the acceptance is suppressed, on the
+  // old-timing shape, on a pre-gate acceptance, on a cold decline,
+  // and on a >7d lag. It is NOT loosened to go green: on this tip the
+  // live numbers are 51 propose calls, 50 prereq, 1 accepted day 59.
+  const op10 = (cov.series || []).find(function (sn) { return sn.maxOpinion !== null && sn.maxOpinion >= 10; });
+  const op10Day = op10 ? op10.d : null;
+  check('opinion-10 first met inside the smoke window', op10Day !== null, { op10Day: op10Day, opinions: op10 ? op10.opinions : null });
+  const proposes = ((cov.capSummary || {}).events || []).filter(function (e) { return e.kind === 'propose'; })
+    .map(function (e) { return { day: e.day, outcome: e.outcome }; });
+  const timing = judgeCovenantTiming(proposes, op10Day);
+  check('propose stream splits at opinion-10: prereq until, acceptance after', timing.ok, timing);
   const noLead = (cov.verbEvents || []).filter(function (e) { return e.verb === 'proposeLink'; }).length;
   check('no lead proposes on the covenant leg', noLead === 0, { proposeLink: noLead });
   const base = await oneRun(100401, 'competent-scaleclimb-b', { days: 60 });
@@ -218,6 +343,7 @@ async function sectionGame() {
 
 (async function () {
   sectionStatic();
+  sectionTimingJudge();
   await sectionGame();
   console.log('test-covenant-b: ' + PASS + ' passed, ' + FAIL + ' failed');
   process.exitCode = FAIL ? 1 : 0;
