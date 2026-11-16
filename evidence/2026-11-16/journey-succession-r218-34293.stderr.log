@@ -1,0 +1,41 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Milo","t":90},{"id":"Carlos","t":90},{"id":"Rosa","t":90},{"id":"Aria","t":89}], roster=12
+INH readable=true scripted=true deadItems=10 distinct=10 transferred=1 vanished=0 keptPlants=22 inheritedPlants=3 keptSkills=3 inheritedSkills=11 succTrustPre=90 succTrustPost=58
+PARITY readable=true equal=true inherited=[] pre=["the_touch","green_whisper"] post=["the_touch","green_whisper"]
+DEATH d41 (the expedition, scripted): Gilberto -> Milo | passed=true lin=true mo=true trust=58 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=1 vanished=0 of 10 distinct dead-bearer items
+  CONVO d+3 with Carlos (refused=false)
+  CONVO d+3 with Aria (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Luigi (depth=2 v=56 refused=false)
+  CONVO d+7 with Rosa (refused=false)
+  CONVO d+7 with Carl (refused=false)
+  CONVO d+14 with Aria (refused=false)
+  CONVO d+14 with Carl (refused=false)
+  BOND-CONVO d+14 with Luigi (depth=2 v=56 refused=false)
+  CONVO d+30 with Carl (refused=false)
+  CONVO d+30 with Aria (refused=false)
+  CONVO d+45 with Sari (refused=false)
+  CONVO d+45 with Carl (refused=false)
+  CONVO d+53 with Sari (refused=false)
+  CONVO d+53 with Carl (refused=false)
+  CONVO d+64 with Sari (refused=false)
+  CONVO d+64 with Carl (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=8) echo=8 organicBurial={"respects":false,"bury":false} halfRation=15
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":38,"offerLines":16,"codexPlantsDelta":25,"codexSkillsDelta":12,"codexAbilitiesDelta":9,"xpDelta":56,"any":true} pantry 69030->13381
+TRUST-DIALS: office 58->100 (+42, climb) | villageMean 73.2->86.6 (+13.4, climb) | ge60 8->7 | movers>=5: [{"id":"Vasyl","from":57,"to":90,"delta":33},{"id":"Naran","from":66,"to":92,"delta":26},{"id":"Sari","from":74,"to":99,"delta":25},{"id":"Ruth","from":69,"to":91,"delta":22},{"id":"Carl","from":78,"to":95,"delta":17},{"id":"Nicole","from":35,"to":47,"delta":12},{"id":"Luigi","from":84,"to":89,"delta":5}]
+DEED-LEDGER: calls=52 summary={"teachPlant":{"calls":2,"ok":2,"deltaSum":0,"deltaN":2,"positive":0,"meanDelta":0},"giveFood":{"calls":19,"ok":19,"deltaSum":26,"deltaN":19,"positive":19,"meanDelta":1.37},"donateToPantry":{"calls":31,"ok":31,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=8 (convo=8, say=0)) m4=true m5=manual | endDay=110 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+69) t2=true(deedCalls=52) trustVerdict={"readable":true,"officeMantle":58,"officeLast":100,"officeDelta":42,"officeClass":"climb","villageMantle":73.2,"villageLast":86.6,"villageDelta":13.4,"villageClass":"climb","villageGe60Mantle":8,"villageGe60Last":7,"movers":[{"id":"Vasyl","from":57,"to":90,"delta":33},{"id":"Naran","from":66,"to":92,"delta":26},{"id":"Sari","from":74,"to":99,"delta":25},{"id":"Ruth","from":69,"to":91,"delta":22},{"id":"Carl","from":78,"to":95,"delta":17},{"id":"Nicole","from":35,"to":47,"delta":12},{"id":"Luigi","from":84,"to":89,"delta":5}]}
+E6/CALLCHECK: e6={"callMoves":10,"withCensus":10,"chainHandoffs":1,"trustMoves":9} callCheck={"dailyMoveDays":10,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=9 (v2=9, excludedLoot=0))
+E7/R47: e7={"trustMoves":9,"soloOffice":4,"soloOfficeDeltas":[2,1,1,1],"soloBearerDeltaExact":[2,1,1,1],"singleMoverBearer":4,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":4,"both":5,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":8,"v2":9,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":10}

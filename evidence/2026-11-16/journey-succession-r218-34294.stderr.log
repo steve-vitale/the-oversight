@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d15: Irving -> Keisha, topTrust=[{"id":"Brian","t":58},{"id":"June","t":48},{"id":"Binsar","t":47},{"id":"Dale","t":44}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=14 inheritedPlants=0 keptSkills=6 inheritedSkills=0 succTrustPre=65 succTrustPost=32
+PARITY readable=true equal=true inherited=[] pre=["the_touch"] post=["the_touch"]
+DEATH d15 (organic (phase A)): Irving -> Keisha | passed=true lin=true mo=true trust=32 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with June (refused=false)
+  CONVO d+3 with Brian (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Binsar (depth=0 v=24 refused=false)
+  CONVO d+7 with Brian (refused=false)
+  CONVO d+7 with Ellie (refused=false)
+  CONVO d+14 with Ellie (refused=false)
+  CONVO d+14 with Binsar (refused=false)
+  BOND-CONVO d+14 with Elena (depth=0 v=20 refused=false)
+  CONVO d+30 with Ellie (refused=false)
+  CONVO d+30 with Binsar (refused=false)
+  CONVO d+45 with Ellie (refused=false)
+  CONVO d+45 with Binsar (refused=false)
+  CONVO d+53 with Ellie (refused=false)
+  CONVO d+53 with Binsar (refused=false)
+  CONVO d+64 with Ellie (refused=false)
+  CONVO d+64 with Binsar (refused=false)
+
+FUNERAL: deathBeat=7 recover=1 vouch=0 (eligible=0) echo=1 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=70 violations=0 noMealDays=2 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":64,"offerLines":20,"codexPlantsDelta":23,"codexSkillsDelta":16,"codexAbilitiesDelta":12,"xpDelta":55,"any":true} pantry 25572->13237
+TRUST-DIALS: office 32->92 (+60, climb) | villageMean 38.1->89.7 (+51.6, climb) | ge60 0->7 | movers>=5: [{"id":"Meera","from":12,"to":87,"delta":75},{"id":"Yara","from":27,"to":88,"delta":61},{"id":"Wanjiru","from":34,"to":91,"delta":57},{"id":"Lukyan","from":36,"to":91,"delta":55},{"id":"Elena","from":40,"to":90,"delta":50},{"id":"Dale","from":44,"to":91,"delta":47},{"id":"Binsar","from":47,"to":90,"delta":43}]
+DEED-LEDGER: calls=65 summary={"teachPlant":{"calls":11,"ok":11,"deltaSum":0,"deltaN":11,"positive":0,"meanDelta":0},"giveFood":{"calls":26,"ok":26,"deltaSum":120,"deltaN":26,"positive":26,"meanDelta":4.62},"donateToPantry":{"calls":28,"ok":28,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=84 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+69) t2=true(deedCalls=65) trustVerdict={"readable":true,"officeMantle":32,"officeLast":92,"officeDelta":60,"officeClass":"climb","villageMantle":38.1,"villageLast":89.7,"villageDelta":51.6,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":7,"movers":[{"id":"Meera","from":12,"to":87,"delta":75},{"id":"Yara","from":27,"to":88,"delta":61},{"id":"Wanjiru","from":34,"to":91,"delta":57},{"id":"Lukyan","from":36,"to":91,"delta":55},{"id":"Elena","from":40,"to":90,"delta":50},{"id":"Dale","from":44,"to":91,"delta":47},{"id":"Binsar","from":47,"to":90,"delta":43}]}
+E6/CALLCHECK: e6={"callMoves":21,"withCensus":21,"chainHandoffs":3,"trustMoves":18} callCheck={"dailyMoveDays":21,"callMoveDays":20,"convoWindowDays":1,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=2, excludedLoot=0))
+E7/R47: e7={"trustMoves":18,"soloOffice":9,"soloOfficeDeltas":[1,2,1,1,2,1,2,1,1],"soloBearerDeltaExact":[1,2,1,1,2,1,2,1,1],"singleMoverBearer":2,"singleMoverOther":4,"eventClass":{"event-only":0,"deed-only":7,"both":10,"neither":1},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":2,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":21}
