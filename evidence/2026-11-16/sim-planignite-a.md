@@ -68,7 +68,7 @@ On the two dead villages, **no initializer of any kind ever fired in 150 days** 
 
 ## Proof
 
-`scripts/test-planignite-a.js`: **80 passed, 0 failed** (re-run on the rebased landing tip). Instrument: driver `scripts/planignite-driver-20261116.js`, analyzer `scripts/analyze-planignite-a.js` (extends the haventick-b instrument; analyzer validated against the haventick-b corpus before the panel). Corpus: `evidence/2026-11-16/perseed-planignite-a-control/` (8 files), analysis `evidence/2026-11-16/planignite-a-analysis.json`.
+`scripts/test-planignite-a.js`: **80 passed, 0 failed** (re-run on the rebased landing tip; the policy-sha pin was re-pinned 74a890f0844e → df9b7dff4de4 after the landing r140 budget stop changed `scripts/policies/competent.js` — the only policy-file change between the arm base and the landing tip, verified by diff; the arm itself touches no policy file). Instrument: driver `scripts/planignite-driver-20261116.js`, analyzer `scripts/analyze-planignite-a.js` (extends the haventick-b instrument; analyzer validated against the haventick-b corpus before the panel). Corpus: `evidence/2026-11-16/perseed-planignite-a-control/` (8 files), analysis `evidence/2026-11-16/planignite-a-analysis.json`.
 
 ## Metric review
 

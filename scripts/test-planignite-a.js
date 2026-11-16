@@ -319,7 +319,7 @@ async function liveRuns() {
     Array.isArray(out.tickGateChecks) && Array.isArray(out.igniteCensus) && Array.isArray(out.igniteVillage) &&
     out.tickGateTotals && typeof out.tickGateTotals === 'object');
   check('live run carries creation-ledger arrays (v4creates, planCensus)', Array.isArray(out.v4creates) && Array.isArray(out.planCensus));
-  check('live run policy sha is competent verbatim (74a890f0844e)', out.policySha === '74a890f0844e', 'got ' + out.policySha);
+  check('live run policy sha is competent verbatim (df9b7dff4de4)', out.policySha === 'df9b7dff4de4', 'got ' + out.policySha);
   const badCall = (out.havenTickCalls || []).find(function (r) {
     return !(r && typeof r.tick === 'number' && typeof r.day === 'number' && r.vid &&
       (r.profile === 'wanderer' || r.profile === 'explorer' || r.profile === 'forager' || r.profile === 'homebody') &&
