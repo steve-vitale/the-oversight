@@ -1,0 +1,1144 @@
+{
+  "arm": "profilegate-a",
+  "run": "profilegate-a",
+  "instrumentDir": "perseed-profilegate-a-on",
+  "controlDir": "perseed-profilegate-a-control",
+  "wave4IdsMatch": true,
+  "wave4IdsLive": [
+    "algorithm",
+    "audit",
+    "congregation",
+    "eater",
+    "eulogy",
+    "herald",
+    "influencer",
+    "reunion",
+    "strike",
+    "suburb"
+  ],
+  "wave4IdsFrozen": [
+    "algorithm",
+    "audit",
+    "congregation",
+    "eater",
+    "eulogy",
+    "herald",
+    "influencer",
+    "reunion",
+    "strike",
+    "suburb"
+  ],
+  "instrument": {
+    "files": 8,
+    "seeds": 8,
+    "seedCallsW4": 16,
+    "instancesOpened": 3,
+    "byBucket": {
+      "launched": 0,
+      "target-killed": 0,
+      "selected-blocked": 2,
+      "bid-not-selected": 0,
+      "plan-churned-before-dawn": 1,
+      "candidate-not-bid": 0,
+      "unknown": 0
+    },
+    "bySub": {
+      "plan-churned-before-dawn:retargeted": 1,
+      "selected-blocked:selected-not-executed": 2
+    },
+    "classifiedShare": 1,
+    "unknown": 0,
+    "survived": 0,
+    "medianSurvival": 90,
+    "wall": {
+      "national": 1,
+      "table": 0,
+      "wins": 6,
+      "wave4": 8,
+      "wave5": 1
+    },
+    "perSeed": [
+      {
+        "seed": 100871,
+        "days": 89,
+        "gameDays": 89,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "villageLost": true,
+        "instrumentErrors": 0,
+        "seedCallsW4": 0,
+        "nonOpeningSeeds": 0,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      },
+      {
+        "seed": 100872,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 177,
+        "scaleRank": "national",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 0,
+        "nonOpeningSeeds": 5,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      },
+      {
+        "seed": 100873,
+        "days": 111,
+        "gameDays": 111,
+        "endReason": "over-other",
+        "standing": 416,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 5,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 1,
+        "nonOpeningSeeds": 3,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      },
+      {
+        "seed": 100874,
+        "days": 136,
+        "gameDays": 135,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "villageLost": true,
+        "instrumentErrors": 0,
+        "seedCallsW4": 1,
+        "nonOpeningSeeds": 4,
+        "instancesOpened": 1,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 1,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "plan-churned-before-dawn:retargeted": 1
+        },
+        "instances": [
+          {
+            "vid": "visjoin_106",
+            "target": "algorithm",
+            "needWave": 4,
+            "seedDay": 112,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 112,
+            "closeDay": 126,
+            "closeKind": "retargeted",
+            "history": [],
+            "scoredDawns": 0,
+            "firstScoredDawn": null,
+            "stageHistory": [],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "plan-churned-before-dawn",
+            "sub": "retargeted",
+            "churnedBeforeDawn": true,
+            "tally": {
+              "scoredDawns": 0,
+              "bids": 0,
+              "selections": 0
+            }
+          }
+        ]
+      },
+      {
+        "seed": 100875,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 0,
+        "nonOpeningSeeds": 3,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      },
+      {
+        "seed": 100876,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 8,
+        "nonOpeningSeeds": 46,
+        "instancesOpened": 1,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 1,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "selected-blocked:selected-not-executed": 1
+        },
+        "instances": [
+          {
+            "vid": "diana_osei",
+            "target": "audit",
+            "needWave": 4,
+            "seedDay": 48,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 48,
+            "closeDay": 90,
+            "closeKind": "retargeted",
+            "history": [],
+            "scoredDawns": 4,
+            "firstScoredDawn": 55,
+            "stageHistory": [
+              "hunt",
+              "party",
+              "standing",
+              "hunt"
+            ],
+            "bids": [
+              {
+                "day": 55,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 8
+              },
+              {
+                "day": 72,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 10
+              },
+              {
+                "day": 76,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 8
+              },
+              {
+                "day": 87,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 8
+              }
+            ],
+            "selections": [
+              {
+                "day": 55,
+                "companion": "gen_u9jax0c"
+              },
+              {
+                "day": 72,
+                "companion": "gen_7q6rr7f"
+              },
+              {
+                "day": 76,
+                "companion": "gen_7q6rr7f"
+              },
+              {
+                "day": 87,
+                "companion": "gen_7q6rr7f"
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 55
+              },
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 72
+              },
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 76
+              },
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 87
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "selected-not-executed",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 4,
+              "bids": 4,
+              "selections": 4
+            }
+          }
+        ]
+      },
+      {
+        "seed": 100877,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 6,
+        "nonOpeningSeeds": 13,
+        "instancesOpened": 1,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 1,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "selected-blocked:selected-not-executed": 1
+        },
+        "instances": [
+          {
+            "vid": "gen_gmvcrwd",
+            "target": "influencer",
+            "needWave": 4,
+            "seedDay": 57,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 57,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 12,
+            "firstScoredDawn": 59,
+            "stageHistory": [
+              "party",
+              "hunt"
+            ],
+            "bids": [
+              {
+                "day": 70,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 7
+              },
+              {
+                "day": 86,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 6
+              }
+            ],
+            "selections": [
+              {
+                "day": 70,
+                "companion": "gen_r6qd5mu"
+              },
+              {
+                "day": 86,
+                "companion": "zoe_adams"
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 70
+              },
+              {
+                "outcome": "blocked",
+                "reason": "companion-not-started:hurt-no-medicine-no-healer",
+                "day": 86
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "selected-not-executed",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 12,
+              "bids": 2,
+              "selections": 2
+            }
+          }
+        ]
+      },
+      {
+        "seed": 100878,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "national",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 0,
+        "nonOpeningSeeds": 0,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      }
+    ]
+  },
+  "control": {
+    "files": 8,
+    "seeds": 8,
+    "seedCallsW4": 21,
+    "instancesOpened": 7,
+    "byBucket": {
+      "launched": 0,
+      "target-killed": 0,
+      "selected-blocked": 5,
+      "bid-not-selected": 0,
+      "plan-churned-before-dawn": 1,
+      "candidate-not-bid": 1,
+      "unknown": 0
+    },
+    "bySub": {
+      "selected-blocked:selected-not-executed": 5,
+      "candidate-not-bid:no-companion-party": 1,
+      "plan-churned-before-dawn:holder-died": 1
+    },
+    "classifiedShare": 1,
+    "unknown": 0,
+    "survived": 1,
+    "medianSurvival": 91.5,
+    "wall": {
+      "national": 0,
+      "table": 0,
+      "wins": 6,
+      "wave4": 8,
+      "wave5": 0
+    },
+    "perSeed": [
+      {
+        "seed": 100871,
+        "days": 89,
+        "gameDays": 89,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "villageLost": true,
+        "instrumentErrors": 0,
+        "seedCallsW4": 0,
+        "nonOpeningSeeds": 0,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      },
+      {
+        "seed": 100872,
+        "days": 93,
+        "gameDays": 93,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "national",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 0,
+        "nonOpeningSeeds": 0,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      },
+      {
+        "seed": 100873,
+        "days": 95,
+        "gameDays": 95,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 2,
+        "nonOpeningSeeds": 14,
+        "instancesOpened": 1,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 1,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "selected-blocked:selected-not-executed": 1
+        },
+        "instances": [
+          {
+            "vid": "gen_haos60c",
+            "target": "eulogy",
+            "needWave": 4,
+            "seedDay": 58,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 58,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 25,
+            "firstScoredDawn": 59,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 59,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 8
+              },
+              {
+                "day": 68,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 8
+              },
+              {
+                "day": 83,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 6
+              },
+              {
+                "day": 90,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 6
+              }
+            ],
+            "selections": [
+              {
+                "day": 59,
+                "companion": "gen_mizazuu"
+              },
+              {
+                "day": 68,
+                "companion": "gen_mizazuu"
+              },
+              {
+                "day": 83,
+                "companion": "gen_mizazuu"
+              },
+              {
+                "day": 90,
+                "companion": "gen_mizazuu"
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 59
+              },
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 68
+              },
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 83
+              },
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 90
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "selected-not-executed",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 25,
+              "bids": 4,
+              "selections": 4
+            }
+          }
+        ]
+      },
+      {
+        "seed": 100874,
+        "days": 150,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 125,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 6,
+        "nonOpeningSeeds": 8,
+        "instancesOpened": 3,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 1,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 1,
+          "candidate-not-bid": 1,
+          "unknown": 0
+        },
+        "bySub": {
+          "candidate-not-bid:no-companion-party": 1,
+          "plan-churned-before-dawn:holder-died": 1,
+          "selected-blocked:selected-not-executed": 1
+        },
+        "instances": [
+          {
+            "vid": "app_mgpspjwg627",
+            "target": "herald",
+            "needWave": 4,
+            "seedDay": 107,
+            "seedOutcome": "fled",
+            "refreshes": 1,
+            "lastSeedDay": 107,
+            "closeDay": 143,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 2,
+            "firstScoredDawn": 108,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "candidate-not-bid",
+            "sub": "no-companion-party",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 2,
+              "bids": 0,
+              "selections": 0
+            }
+          },
+          {
+            "vid": "james_okonkwo",
+            "target": "algorithm",
+            "needWave": 4,
+            "seedDay": 109,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 109,
+            "closeDay": 112,
+            "closeKind": "holder-died",
+            "history": [],
+            "scoredDawns": 0,
+            "firstScoredDawn": null,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [],
+            "selections": [],
+            "resolved": [],
+            "targetKilledDay": null,
+            "bucket": "plan-churned-before-dawn",
+            "sub": "holder-died",
+            "churnedBeforeDawn": true,
+            "tally": {
+              "scoredDawns": 0,
+              "bids": 0,
+              "selections": 0
+            }
+          },
+          {
+            "vid": "visjoin_138",
+            "target": "nielsen",
+            "needWave": 5,
+            "seedDay": 147,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 147,
+            "closeDay": 151,
+            "closeKind": "plan-deleted",
+            "history": [],
+            "scoredDawns": 2,
+            "firstScoredDawn": 149,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 149,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 10
+              },
+              {
+                "day": 150,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 12
+              }
+            ],
+            "selections": [
+              {
+                "day": 149,
+                "companion": "visjoin_131"
+              },
+              {
+                "day": 150,
+                "companion": "visjoin_131"
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 149
+              },
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 150
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "selected-not-executed",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 2,
+              "bids": 2,
+              "selections": 2
+            }
+          }
+        ]
+      },
+      {
+        "seed": 100875,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 1,
+        "nonOpeningSeeds": 8,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      },
+      {
+        "seed": 100876,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 10,
+        "nonOpeningSeeds": 32,
+        "instancesOpened": 2,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 2,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "selected-blocked:selected-not-executed": 2
+        },
+        "instances": [
+          {
+            "vid": "ruth_goldstein",
+            "target": "audit",
+            "needWave": 4,
+            "seedDay": 87,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 87,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 2,
+            "firstScoredDawn": 89,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 89,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 7
+              },
+              {
+                "day": 90,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 7
+              }
+            ],
+            "selections": [
+              {
+                "day": 89,
+                "companion": "hannah_kim"
+              },
+              {
+                "day": 90,
+                "companion": "hannah_kim"
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 89
+              },
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 90
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "selected-not-executed",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 2,
+              "bids": 2,
+              "selections": 2
+            }
+          },
+          {
+            "vid": "nikolai_volkov",
+            "target": "audit",
+            "needWave": 4,
+            "seedDay": 88,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 88,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 1,
+            "firstScoredDawn": 90,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 90,
+                "w": 5,
+                "score": 5,
+                "rank": 4,
+                "totalCands": 7
+              }
+            ],
+            "selections": [
+              {
+                "day": 90,
+                "companion": "hannah_kim"
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 90
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "selected-not-executed",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 1,
+              "bids": 1,
+              "selections": 1
+            }
+          }
+        ]
+      },
+      {
+        "seed": 100877,
+        "days": 93,
+        "gameDays": 93,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "global",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 2,
+        "nonOpeningSeeds": 8,
+        "instancesOpened": 1,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 1,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "selected-blocked:selected-not-executed": 1
+        },
+        "instances": [
+          {
+            "vid": "gen_gmvcrwd",
+            "target": "influencer",
+            "needWave": 4,
+            "seedDay": 57,
+            "seedOutcome": "fled",
+            "refreshes": 0,
+            "lastSeedDay": 57,
+            "closeDay": null,
+            "closeKind": null,
+            "history": [],
+            "scoredDawns": 16,
+            "firstScoredDawn": 59,
+            "stageHistory": [
+              "party"
+            ],
+            "bids": [
+              {
+                "day": 86,
+                "w": 5,
+                "score": 5,
+                "rank": 5,
+                "totalCands": 7
+              }
+            ],
+            "selections": [
+              {
+                "day": 86,
+                "companion": "zoe_adams"
+              }
+            ],
+            "resolved": [
+              {
+                "outcome": "blocked",
+                "reason": "selected-not-executed",
+                "day": 86
+              }
+            ],
+            "targetKilledDay": null,
+            "bucket": "selected-blocked",
+            "sub": "selected-not-executed",
+            "churnedBeforeDawn": false,
+            "tally": {
+              "scoredDawns": 16,
+              "bids": 1,
+              "selections": 1
+            }
+          }
+        ]
+      },
+      {
+        "seed": 100878,
+        "days": 90,
+        "gameDays": 90,
+        "endReason": "over-other",
+        "standing": 199,
+        "scaleRank": "national",
+        "won": true,
+        "maxWave": 4,
+        "villageLost": false,
+        "instrumentErrors": 0,
+        "seedCallsW4": 0,
+        "nonOpeningSeeds": 0,
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "instances": []
+      }
+    ]
+  },
+  "go": {
+    "launchedSeeds": [],
+    "launchedSeedsN": 0,
+    "launchedTotal": 0,
+    "launchedW4Only": 0,
+    "medianArmed": 90,
+    "medianControl": 91.5,
+    "medianRatio": 0.984,
+    "starvArmedTotal": 0,
+    "starvControlTotal": 1,
+    "starvArmedOnly": 0,
+    "starvControlOnly": 1,
+    "nationalEndArmed": 6,
+    "nationalEndControl": 6,
+    "bars": {
+      "launch": false,
+      "median": true,
+      "starvTotals": true,
+      "starvArmOnly": true
+    },
+    "pass": false
+  },
+  "bars": {
+    "classification": {
+      "pass": true,
+      "classifiedShare": 1,
+      "unknown": 0,
+      "instancesOpened": 3
+    },
+    "corpus": {
+      "pass": true,
+      "instrumentFiles": 8,
+      "controlFiles": 8
+    },
+    "instrumentErrors": {
+      "pass": true,
+      "instrument": 0,
+      "control": 0
+    }
+  }
+}
