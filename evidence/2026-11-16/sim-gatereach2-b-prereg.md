@@ -169,6 +169,21 @@ first wave-4+ `w5seeds` day in the instrument leg. The bars are
 unchanged; only the smoke's input fields change. The verbatim
 vetparty script is NOT run as D3 (its result on these corpora
 would be meaningless); this correction records why.
+
+**C2 — D3's first-lever-day is the first wave-3+ seed, not wave-4+.**
+The frozen D3 above (and Correction C1) said "first wave-4+
+`w5seeds` day". That is wrong about the seed call's own wave gate:
+`winPlanSeedFromFight` wave-gates at wave ≥ 3, and the recorder
+logs wave ≥ 3 — a wave-3 flee seed can retarget an engagement plan
+and diverge the trajectory, so the first possible divergence cause
+is the first wave-3+ seed. This matches the vetparty/dawnbid smoke,
+whose `v4seeds` rows were wave ≥ 3. As first written, the smoke
+misread pre-seed drift on 6/8 seeds (first divergences on days
+26–43 fell before the first wave-4+ seed day but after the first
+wave-3+ seed day on every seed). The fix is in
+`scripts/gatereach2-drift-check.js` (`firstSeedDay` uses all
+`w5seeds` rows); the bars are unchanged. This correction is made
+before any verdict exists (no evidence file written yet).
 - Proof: `scripts/test-gatereach2-b.js` (new; see below). GREEN on
   the instrument tip before the instrument leg runs; GREEN again
   post-revert.
@@ -254,7 +269,7 @@ GO (instrument validity) iff ALL hold:
 4. **Neutrality proven:** D1 (repeat 60d seed 102001 twice,
    identical) + D2 (recorder on vs off, identical trajectories) +
    D3 drift smoke (`scripts/gatereach2-drift-check.js`, first
-   divergence on/after first wave-4+ `w5seeds` day per seed;
+   divergence on/after first wave-3+ `w5seeds` day per seed;
    see Correction C1).
 5. **Proof test `scripts/test-gatereach2-b.js` green.**
 
@@ -349,7 +364,7 @@ is judged, and nothing ships from this arm except the instrument
 - **D3 (drift smoke):** `scripts/gatereach2-drift-check.js` over
   the two corpora (see Correction C1 — gatereach2-native, same
   verdict logic as the vetparty smoke) — first divergence on/after
-  the first wave-4+ `w5seeds` day per seed; NO PRE-SEED DRIFT. (The
+  the first wave-3+ `w5seeds` day per seed; NO PRE-SEED DRIFT. (The
   seed call is the instrument's first possible divergence cause, so
   the smoke's "first lever-action day" is the first `w5seeds` day,
   exactly as in the vetparty/dawnbid arms.)

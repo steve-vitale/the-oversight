@@ -2,10 +2,10 @@
 // did control (seed call absent) and instrument (seed call on)
 // trajectories diverge BEFORE the seed call could act?
 // The seed call's earliest possible effect is the first
-// winPlanSeedFromFight on a wave-4+ flee (first wave-4+ w5seeds row
-// in the instrument leg). Before that day, identical seeds +
-// identical policy + identical substrate must give identical daily
-// snapshots. A divergence on an earlier day proves substrate (tip)
+// winPlanSeedFromFight on a wave-3+ flee (first w5seeds row in the
+// instrument leg — the recorder logs wave >= 3, and the seed's own
+// wave gate is >= 3). Before that day, identical seeds + identical
+// policy + identical substrate must give identical daily snapshots. A divergence on an earlier day proves substrate (tip)
 // drift, not a seed-call effect.
 // NOTE (prereg Correction C1): the verbatim vetparty drift script
 // reads `daily` (T-class fingerprints) and `v4seeds`, which the
@@ -40,7 +40,14 @@ function fp(row) {
   });
 }
 function firstSeedDay(j) {
-  const rows = (j.w5seeds || []).filter(function (s) { return ((s.wave | 0) >= 4); });
+  // ALL w5seeds rows: the recorder logs wave >= 3, and the seed
+  // call's own wave gate is >= 3 (winPlanSeedFromFight) — a wave-3
+  // flee seed can retarget an engagement plan and diverge the
+  // trajectory, so the first lever-action day is the first wave-3+
+  // seed, exactly as the vetparty/dawnbid smoke defined it over
+  // wave>=3 v4seeds rows. Filtering to wave >= 4 here misreads
+  // pre-seed drift on every seed whose first seeds are wave-3.
+  const rows = (j.w5seeds || []);
   if (!rows.length) return null;
   return Math.min.apply(null, rows.map(function (s) { return s.day; }));
 }
