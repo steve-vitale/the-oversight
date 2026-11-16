@@ -50,17 +50,20 @@ bid existed — the analyzer's `agree` check passes on all 171 dawns (unknown 0)
 eligibility-equivalent twin at the depart gate. The decomposition is recorded
 against the brain's definition.
 
-**Anchors.** Control anchor = `e478aaac8` (instrument, seed call ABSENT).
+**Anchors.** Control anchor = `521792bf3` (instrument, seed call ABSENT).
 Instrument anchor = `0f1dc8b80` (seed call re-landed verbatim — the 13-line block
 from revert `7ba893b4b`, blob `a66d45a5e`, in `resolveWildMonsterEncounter`,
 `src/js/game.js`: on `vFlee` vs wave-4+, call
 `winPlanSeedFromFight(vid, mdef, 'fled')`). After measurement the seed call was
 **reverted** (`b9120c1f`); the branch's `src/` is byte-identical to the control
-anchor (`git diff e478aaac8 HEAD -- src/` = 0 lines). Seed-call text is preserved
+anchor (`git diff 521792bf3 HEAD -- src/` = 0 lines). Seed-call text is preserved
 verbatim in the prereg and in git history (`0f1dc8b80`).
 
-**Commits on this branch:** `bd2ae9342` (prereg), `e478aaac8` (instrument, control anchor),
-`0f1dc8b80` (instrument tip, seed call), `b9120c1f` (seed-call revert).
+**Commits on this branch:** `38a2cb678` (prereg), `521792bf3` (instrument, control anchor),
+`f22c72c4a` (evidence + analysis), `1f0a2f80e` (corpora). The seed-call tip
+(`0f1dc8b80`) and its revert (`b9120c1f`) were dropped by the rebase onto
+`2b552433e` as already-upstream (Loop A's 0645Z landing contains the identical
+13-line seed call + revert); the branch's net `src/` diff is unchanged (0 lines).
 Ready to merge, pending ship.
 
 ## Before / after on identical seeds
