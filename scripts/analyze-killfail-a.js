@@ -131,7 +131,29 @@ function joinFight(f, events, windows) {
 }
 
 // ---- fight classification (frozen fields, flags, precedence) ----
-const REQUIRED = ['day', 'vid', 'mid', 'wave', 'alliesN', 'trickBefore', 'fighter', 'allies', 'mHpEntry', 'outcome', 'rounds', 'mDealt', 'vTaken'];
+// effectiveMhp(f): the monster's HP at entry, by the best available
+// read — the game stores NO single entry-HP number for ephemeral
+// meetings (m is null, mdef.hp is a [lo,hi] RANGE), so the analyzer
+// derives it, method named per fight:
+//   instance: m.hp was recorded (world-monster entity) — exact.
+//   untouched: outcome evade, mDealt 0 — mHpLeft IS the entry HP
+//     (fieldFights.js evade path sets mHpLeft = members[0].hp
+//     before any damage lands) — exact.
+//   reconstructed: mHpLeft + mDealt (close HP + damage dealt) —
+//     exact unless the monster healed or grew mid-fight (the Eater
+//     grows; see the evidence caveat).
+//   midpoint: mdef.hp range midpoint — an estimate, last resort.
+//   none: no read at all — the fight is unclassified on mHpEntry.
+function effectiveMhp(f) {
+  if (isNum(f.mHpEntry) && f.mHpEntry > 0) return { value: f.mHpEntry, method: 'instance' };
+  if (f.outcome === 'evade' && isNum(f.mHpLeft) && f.mHpLeft > 0) return { value: f.mHpLeft, method: 'untouched' };
+  if (isNum(f.mHpLeft) && isNum(f.mDealt)) return { value: f.mHpLeft + f.mDealt, method: 'reconstructed' };
+  if (Array.isArray(f.mdefHp) && f.mdefHp.length === 2 && isNum(f.mdefHp[0]) && isNum(f.mdefHp[1])) {
+    return { value: (f.mdefHp[0] + f.mdefHp[1]) / 2, method: 'midpoint' };
+  }
+  return { value: null, method: 'none' };
+}
+const REQUIRED = ['day', 'vid', 'mid', 'wave', 'alliesN', 'trickBefore', 'fighter', 'allies', 'outcome', 'rounds', 'mDealt', 'vTaken'];
 function missingFields(f) {
   const missing = [];
   for (const k of REQUIRED) {
@@ -154,6 +176,7 @@ function missingFields(f) {
     }
   }
   if (f.fighter && f.fighter.class === 'unclassified') missing.push('fighter.unclassified');
+  if (effectiveMhp(f).method === 'none') missing.push('mHpEntry');
   return missing;
 }
 
@@ -175,7 +198,11 @@ function flagsFor(f, launchCtx) {
   subs.unarmed = unarmed;
   if (unarmored || unarmed) flags.push('under-geared');
   if (f.outcome === 'vFlee' && isNum(f.rounds) && f.rounds <= 2) flags.push('fled-early');
-  if (isNum(f.mDealt) && isNum(f.mHpEntry) && f.mHpEntry > 0 && f.mDealt < 0.25 * f.mHpEntry) flags.push('out-damaged');
+  // out-damaged needs a real fight (rounds >= 1): an evade dealt 0
+  // damage to a beast it never touched, which says nothing about
+  // the party's damage. The denominator is the EFFECTIVE entry HP.
+  const eff = effectiveMhp(f);
+  if (isNum(f.rounds) && f.rounds >= 1 && isNum(f.mDealt) && isNum(eff.value) && eff.value > 0 && f.mDealt < 0.25 * eff.value) flags.push('out-damaged');
   if (isNum(f.vTaken) && isNum(fighter.hpEntry) && fighter.hpEntry > 0 && f.vTaken >= 0.5 * fighter.hpEntry) flags.push('mauled');
   if (f.outcome === 'vDie') flags.push('died');
   if (f.outcome === 'evade') flags.push('evaded');
@@ -186,6 +213,10 @@ function flagsFor(f, launchCtx) {
 // Primary mode, frozen precedence (prereg §Frozen definitions).
 function primaryFor(f, fl) {
   if (f.outcome === 'vKill') return 'killed';
+  // alreadyDead is not a fight at all (a corpse, not a beast —
+  // fieldFights.js ALREADY DEAD path); it is neither a kill nor a
+  // failure, and must not fall through to a condition mode.
+  if (f.outcome === 'alreadyDead') return 'already-dead';
   if (f.outcome === 'evade') return 'evaded';
   if (f.outcome === 'vDie') return 'died';
   if (f.outcome === 'vFlee' && isNum(f.rounds) && f.rounds <= 2) return 'fled-early';
@@ -200,13 +231,16 @@ function primaryFor(f, fl) {
 
 function classifyFight(f, launchCtx) {
   const missing = missingFields(f);
+  const eff = effectiveMhp(f);
   if (missing.length) {
-    return { classified: false, missingFields: missing, flags: [], primary: 'unclassified', joinKind: launchCtx ? launchCtx.joinKind : null };
+    return { classified: false, missingFields: missing, flags: [], primary: 'unclassified',
+      mHpEff: eff.value, mHpMethod: eff.method, joinKind: launchCtx ? launchCtx.joinKind : null };
   }
   const fl = flagsFor(f, launchCtx);
   return { classified: true, missingFields: [], flags: fl.flags, subs: fl.subs,
     contactSize: fl.contactSize, anyWorkingRange: fl.anyWorkingRange,
-    primary: primaryFor(f, fl), joinKind: launchCtx ? launchCtx.joinKind : null };
+    primary: primaryFor(f, fl), mHpEff: eff.value, mHpMethod: eff.method,
+    joinKind: launchCtx ? launchCtx.joinKind : null };
 }
 
 // ---- per-seed classification ----
@@ -297,10 +331,10 @@ function summarizeLeg(bySeed) {
         fighterAmmoNeed: f.fighter ? f.fighter.ammoNeed : null, fighterMelee: f.fighter ? f.fighter.meleeWeapon : null,
         fighterArmorP: f.fighter ? f.fighter.armorP : null, fighterHpEntry: f.fighter ? f.fighter.hpEntry : null,
         allies: (f.allies || []).map(function (a) { return { name: a.name, class: a.class, ammoN: a.ammoN, armorP: a.armorP, hpEntry: a.hpEntry }; }),
-        mHpEntry: f.mHpEntry, mHpLeft: f.mHpLeft,
+        mHpEntry: c.mHpEff, mHpMethod: c.mHpMethod, mHpEntryRaw: f.mHpEntry, mHpLeft: f.mHpLeft,
         outcome: f.outcome, rounds: f.rounds, mDealt: f.mDealt, allyDealt: f.allyDealt,
         dmgPerRound: (isNum(f.mDealt) && isNum(f.rounds) && f.rounds > 0) ? +(f.mDealt / f.rounds).toFixed(1) : null,
-        dmgFrac: (isNum(f.mDealt) && isNum(f.mHpEntry) && f.mHpEntry > 0) ? +(f.mDealt / f.mHpEntry).toFixed(2) : null,
+        dmgFrac: (isNum(f.mDealt) && isNum(c.mHpEff) && c.mHpEff > 0) ? +(f.mDealt / c.mHpEff).toFixed(2) : null,
         vTaken: f.vTaken, vHpLeft: f.vHpLeft,
         gate: f.gate ? { result: f.gate.result, reason: f.gate.reason, partySize: f.gate.partySize } : null,
         flags: c.flags, primary: c.primary, classified: c.classified,
@@ -433,4 +467,4 @@ if (require.main === module) main();
 module.exports = { buildEvents: buildEvents, tripWindows: tripWindows, joinFight: joinFight,
   missingFields: missingFields, flagsFor: flagsFor, primaryFor: primaryFor,
   classifyFight: classifyFight, classifySeed: classifySeed, summarizeLeg: summarizeLeg,
-  parseLeg: parseLeg, goCheck: goCheck, median: median, W4: W4, W5: W5, SEEDS: SEEDS };
+  parseLeg: parseLeg, goCheck: goCheck, median: median, effectiveMhp: effectiveMhp, W4: W4, W5: W5, SEEDS: SEEDS };

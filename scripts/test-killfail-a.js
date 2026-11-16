@@ -211,7 +211,7 @@ expectFlags('flags: trick-unknown + dry + party-short all counted at once',
 // Unknown on a missing field (each dropped in turn).
 (function () {
   const cases = [
-    ['mHpEntry', (function (f) { delete f.mHpEntry; return f; })(mkFight())],
+    ['mHpEntry (no HP read anywhere)', (function (f) { delete f.mHpEntry; f.mHpLeft = null; f.mDealt = null; f.mdefHp = null; return f; })(mkFight())],
     ['fighter.hpEntry', (function (f) { f.fighter = mkPerson({ vid: 'v1', hpEntry: null }); return f; })(mkFight())],
     ['trickBefore', (function (f) { delete f.trickBefore; return f; })(mkFight())],
     ['outcome', (function (f) { delete f.outcome; return f; })(mkFight())],
@@ -222,6 +222,43 @@ expectFlags('flags: trick-unknown + dry + party-short all counted at once',
     check('unknown on missing ' + pair[0], c.classified === false && c.primary === 'unclassified' && c.missingFields.length > 0,
       'got classified=' + c.classified + ' missing=' + JSON.stringify(c.missingFields));
   }
+})();
+
+// ---------- 2a. Effective monster-HP derivation fixtures ----------
+console.log('== effectiveMhp fixtures ==');
+(function () {
+  const e1 = ANALYZE.effectiveMhp(mkFight({ mHpEntry: 900 }));
+  check('effectiveMhp: instance HP wins when recorded', e1.value === 900 && e1.method === 'instance', JSON.stringify(e1));
+  const e2 = ANALYZE.effectiveMhp(mkFight({ outcome: 'evade', rounds: 0, mDealt: 0, mHpEntry: null, mHpLeft: 1011 }));
+  check('effectiveMhp: evade uses mHpLeft untouched (exact)', e2.value === 1011 && e2.method === 'untouched', JSON.stringify(e2));
+  const e3 = ANALYZE.effectiveMhp(mkFight({ mHpEntry: null, mHpLeft: 852, mDealt: 28, rounds: 1 }));
+  check('effectiveMhp: reconstructed = mHpLeft + mDealt', e3.value === 880 && e3.method === 'reconstructed', JSON.stringify(e3));
+  const e4 = ANALYZE.effectiveMhp(mkFight({ mHpEntry: null, mHpLeft: null, mDealt: null, mdefHp: [900, 1100] }));
+  check('effectiveMhp: range midpoint as last resort', e4.value === 1000 && e4.method === 'midpoint', JSON.stringify(e4));
+  const e5 = ANALYZE.effectiveMhp(mkFight({ mHpEntry: null, mHpLeft: null, mDealt: null, mdefHp: null }));
+  check('effectiveMhp: nothing anywhere -> none', e5.value === null && e5.method === 'none', JSON.stringify(e5));
+  // A launched fight with mHpEntry null but mHpLeft+mDealt present classifies (reconstructed path).
+  const c = ANALYZE.classifyFight(mkFight({ mHpEntry: null, mHpLeft: 800, mDealt: 200, rounds: 4, outcome: 'vFlee' }),
+    { event: { launchedPartySize: 3 }, joinKind: 'fighter' });
+  check('classifyFight: null mHpEntry classifies via reconstruction (primary out-damaged, 20% dealt)',
+    c.classified && c.primary === 'out-damaged' && c.mHpMethod === 'reconstructed' && c.mHpEff === 1000,
+    'got classified=' + c.classified + ' primary=' + c.primary + ' method=' + c.mHpMethod + ' eff=' + c.mHpEff);
+  // An evade with null mHpEntry classifies via the untouched read and does NOT carry out-damaged.
+  const c2 = ANALYZE.classifyFight(mkFight({ outcome: 'evade', rounds: 0, mDealt: 0, vTaken: 0, mHpEntry: null, mHpLeft: 1011 }),
+    { event: { launchedPartySize: 3 }, joinKind: 'fighter' });
+  check('classifyFight: evade with null mHpEntry classifies (untouched) and carries no out-damaged flag',
+    c2.classified && c2.primary === 'evaded' && c2.mHpMethod === 'untouched' && c2.flags.indexOf('out-damaged') === -1,
+    'got classified=' + c2.classified + ' primary=' + c2.primary + ' flags=' + JSON.stringify(c2.flags));
+  // No HP read anywhere -> unclassified on mHpEntry.
+  const c3 = ANALYZE.classifyFight(mkFight({ mHpEntry: null, mHpLeft: null, mDealt: null, mdefHp: null }),
+    { event: { launchedPartySize: 3 }, joinKind: 'fighter' });
+  check('classifyFight: no HP read anywhere -> unclassified (mHpEntry named)',
+    c3.classified === false && c3.missingFields.indexOf('mHpEntry') !== -1, JSON.stringify(c3.missingFields));
+  // alreadyDead is its own primary, never a condition mode.
+  const c4 = ANALYZE.classifyFight(mkFight({ outcome: 'alreadyDead', rounds: 0, mDealt: 0, vTaken: 0, mHpEntry: 0, mHpLeft: 0, alliesN: 1, allyVids: ['v2'], allies: [mkPerson({ vid: 'v2' })] }),
+    { event: { launchedPartySize: 2 }, joinKind: 'fighter' });
+  check('alreadyDead: primary already-dead, not party-short/under-geared',
+    c4.classified && c4.primary === 'already-dead', 'got primary=' + c4.primary + ' flags=' + JSON.stringify(c4.flags));
 })();
 
 // ---------- 3. Join fixtures ----------
