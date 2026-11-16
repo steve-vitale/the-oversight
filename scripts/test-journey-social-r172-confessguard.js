@@ -119,6 +119,19 @@ const T = K.reporter('R172 one-confession-per-sitting guard (engine)');
     !G.getPerson(L1.vid).lies.origin.confessed && !L1.doubts.origin.resolved,
     'originConfessed=' + JSON.stringify(G.getPerson(L1.vid).lies.origin.confessed));
   endSitting(L1.vid);
+  // RE-PIN (journey-social r220, 2026-11-16): the s3 opener can volunteer
+  // the villager's unshared secret ("Can I tell you something? ..."),
+  // which IS a confession and legitimately sets the flag before any
+  // confrontation (case 5 covers that path) — on this base the secret
+  // fires at s3, so (3a)/(3b) failed while the reset itself works (a
+  // sitting whose opener does not volunteer a secret opens with the flag
+  // clear; the guard proof's own probe confirmed it). Case (3) needs a
+  // clean open, so the secret is neutralized first — the guard assertions
+  // below are unchanged, and the failure was pre-existing on the r215
+  // base (same 2 failures at e6f239a8c), not a regression.
+  const _p3 = G.getPerson(L1.vid);
+  if (!_p3.prototype) _p3.prototype = G.synthPrototype(_p3);
+  _p3.prototype.secret = null;
   // (3) new sitting: flag resets, a third lie can confess again.
   const st3 = G.startConvo(L1.vid);
   T.ok('setup (3): new sitting opens', !!st3, 'startConvo null');

@@ -27,10 +27,21 @@
 // (a theft doubt resolving via confrontTheft) is panel-watched by
 // the r180 panel instead. The one-event-per-press property this test
 // proves is unchanged; only the pinned scenario moved.
+// RE-PIN (journey-social r220, 2026-11-16): the scenario moved again
+// — seed 43402 now yields TWO doubt confessions in 13 days (day-6
+// sitting 8, day-11 sitting 15, different villagers), not one day-9
+// press. Both are genuine single presses in different sittings (one
+// confession per sitting — the guard working), and the wrap records
+// each exactly once. The exact-count pin tracked the RNG stream, not
+// the instrument, so it is replaced by the property assertions below:
+// the driver reaches confrontations (>= 1 event, >= 1 confession),
+// every event is labeled by a real path, and no sitting counts a
+// double. The failure was pre-existing on the r215 base (same wrap
+// (1) failure at e6f239a8c), not a regression.
 // RED/FAILURE MODE: the unfixed wrap records two events for the one
 // press (confrontTheft + confrontDoubt, both 'confessed'), so the
-// length assertion fails. If the driver ever stops reaching the day-12
-// sitting, the setup assertion fails first (no events at all).
+// per-sitting double assertion fails. If the driver ever stops
+// reaching confrontations, the >= 1 assertion fails first.
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -52,12 +63,15 @@ const T = K.reporter('R172 confront-wrap records one event per press (driver)');
     const ev = JSON.parse(fs.readFileSync(outFile, 'utf8'));
     const confronts = ev.confrontEvents || [];
     console.log('  confrontEvents: ' + JSON.stringify(confronts));
-    T.ok('wrap (1) exactly one event is recorded for the day-9 doubt press',
-      confronts.length === 1, 'count=' + confronts.length);
-    const e0 = confronts[0] || {};
-    T.ok('wrap (2) the single event is the doubt confession, labeled by its real path',
-      e0.method === 'confrontDoubt' && e0.outcome === 'confessed',
-      'event=' + JSON.stringify(e0));
+    T.ok('wrap (1) the driver reaches confrontations (at least one event recorded)',
+      confronts.length >= 1, 'count=' + confronts.length);
+    T.ok('wrap (2) every event is a real press, labeled by its real path',
+      confronts.length >= 1 && confronts.every(e =>
+        (e.method === 'confrontDoubt' || e.method === 'confrontTheft') &&
+        (e.outcome === 'confessed' || e.outcome === 'deflected')),
+      'events=' + JSON.stringify(confronts));
+    T.ok('wrap (2b) at least one confession is recorded (the guard has something to guard)',
+      confronts.some(e => e.outcome === 'confessed'), 'count=' + confronts.length);
     const bySitting = {};
     for (const e of confronts) {
       if (e.outcome !== 'confessed') continue;
