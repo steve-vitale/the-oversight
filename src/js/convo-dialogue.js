@@ -613,14 +613,19 @@
         // instead of the decided-want line below. Menu-visible behavior
         // is unchanged: the menu already hides dlg:commit when either
         // gate fails, so menu-faithful players never reach these branches.
+        // (journey-succession r218 F3 2026-11-16: both early returns speak
+        // a REFUSAL reason — a gate verdict, not NPC speech — so they pass
+        // noBeat, the r209 F2 rule: the line is still spoken, ledgered and
+        // voiced, it just never becomes thread content that a resume
+        // opener could quote as the favor's memory.)
         const wantLiveEarly = !!(c.want && (c.want.stage || 0) < 3);
         if (wantLiveEarly && favor?.kind === 'stay_close' && this.companyFavorCommitGate) {
           const gate=this.companyFavorCommitGate(vid,favor);
-          if(!gate.ok){this.sayLine(vid,gate.reason,{diegeticAct:true});this.convoWantEngage(vid,'stated');return{line:gate.reason,choices:this.convoChoices(vid),ended:false,transcript:c.transcript.slice()};}
+          if(!gate.ok){this.sayLine(vid,gate.reason,{diegeticAct:true,noBeat:true});this.convoWantEngage(vid,'stated');return{line:gate.reason,choices:this.convoChoices(vid),ended:false,transcript:c.transcript.slice()};}
         }
         if (wantLiveEarly && favor && this.convoFavorAction(vid, favor).unsupported) {
           const line = this.convoFavorAction(vid, favor).reason;
-          this.sayLine(vid, line, { diegeticAct: true });
+          this.sayLine(vid, line, { diegeticAct: true, noBeat: true });
           this.convoWantEngage(vid, 'stated');
           return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
         }
@@ -692,7 +697,12 @@
         }
         // The obligation was just created: its confirmation must be spoken,
         // even when another villager recently used the same thank-you.
-        this.sayLine(vid, beat, { diegeticAct: true });
+        // (journey-succession r218 F3 2026-11-16: a REFUSED commit's beat
+        // is a refusal reason, not NPC speech — it passes noBeat so it
+        // never becomes thread content a resume opener could quote as the
+        // favor's memory. A real commitment's thank-you beat keeps the
+        // current behavior: noBeat is false, the beat still notes.)
+        this.sayLine(vid, beat, { diegeticAct: true, noBeat: !committed });
         // 'commit' ONLY when a real commitment was made. A blocked favor
         // commit is heard ('stated' via defaultResolution), never 'promised'
         // — 'engaged'/'promised' without an obligation would be the
