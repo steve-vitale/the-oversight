@@ -242,13 +242,15 @@ in the background (see closeout); log `evidence/2026-11-16/journey-succession-r2
 Result recorded at closeout / by adoption if the run clock runs out first.
 
 ## Landing
-- Commits on `journey2-succession` (on top of master 5e0bba6e5):
-  - `e028c5920` — F3 fix + proof test + prereg + panel tooling.
-  - (evidence commit — see closeout)
-- Merge / release / rotation / lock cleanup: recorded at closeout below.
+- Commits on `journey2-succession` (rebased onto master 126382932 by adoption):
+  - `50c86b0b9` — F3 fix + proof test + prereg + panel tooling (was `e028c5920` pre-rebase).
+  - `d98dc26f7` — panel evidence (fresh band 34291–34294 + smoke; MANTLE-FINE PASS, DRY CENSUS 3 other-class, F3 wild 0).
+  - `f8449fdc4` — panel transcripts (71 sittings, 5 seeds).
+  - (closeout commit — see below)
+- Merge: ff-only by adoption after the gate; worktree released, branch deleted, rotation 7→4, lock deleted.
 
 ## Closeout
-- Gate result: (filled at closeout)
-- Merge: (filled at closeout)
+- Gate result: **333/7 GO, 0 attributable to r218** (adoption re-run 02:02–02:17Z, log `journey-succession-r218-gate.log`). The 7: living-garden + one-person-army (120s load timeouts, standing artifact class); measurement-proof-update + measurement-workflow (staleness pair, standing); phone-frame-proof (stale receipt, standing); ladder-bundle (ambient-raid suppression — gorgeprice2 guard side-effect, r213-adjudicated substrate); person-trust (HAUL 3 vs 0 — r214 parting-pool RNG shift, r213-adjudicated substrate). F3 proof + both r209 proofs re-green on the rebased tip.
+- Merge: ff-only by adoption (see timeline entry for the merge SHA).
 - Rotation: `7` → `4` (written at closeout, verified after)
-- Lock deleted: (filled at closeout)
+- Lock deleted: yes, by adoption after release.
