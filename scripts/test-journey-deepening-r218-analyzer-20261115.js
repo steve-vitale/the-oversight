@@ -6,8 +6,9 @@
 // plain-pool line carried only by a winddown line still reads PLAIN-
 // PARTING. (23)/(24) pin OTHER-CLOSE / NO-CLOSE on the winddown lines.
 // RED CONTROL: run with ANALYZER=./analyze-journey-deepening-r213-20261115.js
-// — (22)-(24) FAIL (r213 reads only `closing line:`), (25) FAILS (function
-// absent in r213), (21) passes (the helper still emits a closing line),
+// — (22)-(24) FAIL (r213 reads only `closing line:`), (25)/(26) FAIL
+// (functions absent in r213), (21) passes (the helper still emits a
+// closing line),
 // carried (1)-(20) behave as the r213 proof documents.
 // (11)-(14) CARRIED r212: the A2 floor (total < 6 -> THIN-PROBE) in
 // summarizeFavorBlock / summarizePartnerBlock — thin panels read
@@ -466,6 +467,31 @@ const AWAY_OUTROAD = '"I\'m out on the road, away from Haven — no dawn meet wh
   ok('(25) frozen W4 id set matches src/data/monsters.json wave-4 roster (10 ids)',
     hasFn && idsMatch && n === 10 && A.W4_IDS.indexOf('reunion') !== -1,
     hasFn ? ('frozen=' + JSON.stringify(A.W4_IDS)) : 'loadWave4Ids/W4_IDS missing in this analyzer');
+}
+// (26) NEW r218 (Amendment A1): the w4 guard compares FIGHTS to FIGHTS —
+// a triple-monster pack counts 1 fight in the table and 1 foughtWaves
+// entry, but 3 in fightsByWave. No error, w4fights=1, w4kills=3.
+{
+  const hasFn = typeof A.summarizeWave4 === 'function';
+  let r = null;
+  if (hasFn) {
+    const s = seedJSON({
+      wildFightTable: [{ day: 50, result: 'won', partySize: 3, party: [{ kind: 'player' }],
+        monsters: [{ wave: 4 }, { wave: 4 }, { wave: 4 }] }],
+      foughtWaves: [{ day: 50, waves: [4, 4, 4], result: 'won' }],
+      fightsByWave: { 1: 2, 4: 3 },
+      waveLog: [{ day: 50, wave: 4, villageSlain: { reunion: 3 } }],
+      deaths: [],
+      deathHonesty: { playerDeaths: [{ day: 50, cause: 'the wild' }], mislabels: [] },
+      finalWave: 4,
+    });
+    r = A.summarizeWave4([s]);
+  }
+  ok('(26) wave4 guard: triple pack -> fights=1 kills=3, no mismatch error, banked2, 1 wild playerDeath',
+    hasFn && r.errors.length === 0 && r.totFights === 1 && r.totKills === 3 &&
+    r.perSeed[0].villageSlainW4 === 3 && r.perSeed[0].banked2 === true &&
+    r.totPlayerDeaths === 1 && r.totWildPlayerDeaths === 1,
+    hasFn ? JSON.stringify(r) : 'summarizeWave4 missing in this analyzer');
 }
 console.log(`r218 analyzer proof: ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

@@ -1948,13 +1948,17 @@ function summarizeWave4(seedJSONs) {
       .reduce((a, f) => a + (f.monsters || []).filter(m => m.wave === 4).length, 0);
     const scholarFights = fights.filter(f => (f.party || []).some(p => p.kind === 'player')).length;
     const deathsW4 = (s.deaths || []).filter(x => w4set.has(x.who)).length;
-    const pd = (s.deathHonesty && s.deathHonesty.playerDeaths) || null;
-    if (!pd) errors.push({ seed, kind: 'playerDeaths-missing' });
+    const dh = s.deathHonesty || null;
+    const pd = dh ? dh.playerDeaths : null;
+    if (dh && !Array.isArray(pd)) errors.push({ seed, kind: 'playerDeaths-missing' });
     const playerDeaths = pd ? pd.length : 0;
     const wildPlayerDeaths = pd ? pd.filter(x => x && x.cause === 'the wild').length : 0;
-    const expectedFights = (s.fightsByWave || {})['4'];
-    if (expectedFights != null && fights.length !== expectedFights) {
-      errors.push({ seed, kind: 'w4fights-mismatch', table: fights.length, fightsByWave: expectedFights });
+    // A1: foughtWaves counts FIGHTS (one entry per fight, waves[] lists the
+    // pack); fightsByWave counts MONSTERS (the driver increments per monster).
+    // The guard compares fights to fights; fightsByWave rides along for audit.
+    const expectedFights = (s.foughtWaves || []).filter(e => (e.waves || []).indexOf(4) !== -1).length;
+    if (fights.length !== expectedFights) {
+      errors.push({ seed, kind: 'w4fights-mismatch', table: fights.length, foughtWaves: expectedFights, fightsByWave: (s.fightsByWave || {})['4'] });
     }
     const finalWave = s.finalWave || 0;
     const banked2 = villageSlainW4 >= 2;
