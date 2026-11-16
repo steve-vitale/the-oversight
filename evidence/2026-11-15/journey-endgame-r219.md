@@ -246,20 +246,52 @@ Analyzer: `scripts/analyze-endgame-r219-20261115.js` on
   panel on this leg since r203's pass C. Pass C-wide (fresh band)
   still to run: it decides whether the road holds on unseen seeds.
 
-## Pass C-wide verdicts
+## Pass C-wide verdicts (8 fresh seeds 89730–89737, CAPSTONE=1 BUYOUT=1 BUYOUT_EARLY=1)
 
-[PASS-CWIDE]
+Analyzer: `scripts/analyze-endgame-r219-20261115.js` on
+`perseed-endgame-r219-cwide` — **PRIMARY-BINDINGS NO-GO | PRIMARY NO-GO |
+ALL NO-GO** (exit 1). Log: `journey-endgame-r219-passcwide-analyzer.log`.
 
-## Verdicts (passes A+B+C; C-wide decides whether the road holds on unseen seeds)
+- M23b GATE-OK TALLY: **0/8** — no seed reached deedGateReady ok.
+  M23-capstone VACUOUS on the same ground. ROAD-TALLY full-seats
+  earned 0 sat 0.
+- Per-seed: 89730 village-lost (uw 3, no buy); 89731 sat d101 lesser
+  (bought d53); 89732 village-lost; 89733 village-lost; 89734 sat d91
+  lesser (bought d60); 89735 sat d93 lesser (bought d44); 89736 sat
+  d132 lesser (bought d35 after two refused attempts d27/d34); 89737
+  sat d95 lesser (bought d44). Tally: lesser 5/8, full 0/8, lost 3/8.
+- M25c buyout-early: 7/8 bought (9 eligible early-days, 0 skipped,
+  90 early attempts). The road was taken — it just had nothing to
+  convert: w5max 0 on ALL 8 seeds, uw max 4, NO uw=5 seed anywhere.
+  The W5-question is unanswered on this band (no wave-5 facing at
+  all). M3b-peak NO-GO (0/8), M4-wave5-or-full NO-GO (0/8).
+- M24/M24b VACUOUS (no tribute delivery, no scholar+1 seed).
+  CORPUS-PURITY GO 8/8.
+- **Attribution:** the contrast with pass C (matched 3/5 full) is
+  the whole finding. The early-buyout road converts gate-ok into
+  full seats — but on fresh seeds the gate never goes ok, because
+  wave 5 is never faced. The binding constraint is wave-5 facing /
+  standing, not the buy-out: the bundle was bought on 7/8 villages
+  and sat idle. And 3/8 fresh villages died before the table at
+  all (89730/89732/89733 village-lost, announce never fired) — the
+  fresh band is harsher than the matched five, which all sat. The
+  road is real but narrow: it works where the gate goes ok, and the
+  gate goes ok only where wave 5 is faced. The winnability question
+  moves back to wave-5 facing — the same wall the deepening leg
+  named (r218: the wave-5 door is standing+readiness, not banked
+  kills).
 
-- Reachable: YES (5/5 sat lesser or full on every pass; table + audit +
-  lesser seat all fire; the full seat fired 3/5 on pass C).
-- Fun: PARTIAL→YES on the road (the endgame plays — audit, finale
-  choices, Reunion fights — and pass C shows the full seat actually
-  answering through the early buy-out road; wave 5 is still a wall
-  where the bar doesn't clear).
-- Winnable: YES, via the early buy-out road (pass C: full seat 3/5
-  on matched seeds, M23b 3/5 gate-ok, all delivered; passes A/B
-  0/5 — the road, not the table, is the difference). C-wide on the
-  fresh band 89730–89737 is the confirmation that the road holds
-  beyond these five seeds.
+## Verdicts (all four passes)
+
+- Reachable: YES (every surviving village sat lesser or full; the
+  table + audit + lesser seat fire everywhere; the full seat fired
+  3/5 on matched pass C).
+- Fun: PARTIAL (the endgame plays and the full seat answers through
+  the early buy-out road on matched seeds — but on the fresh band
+  wave 5 is never faced and 3/8 villages die before the table).
+- Winnable: YES, narrowly, via the early buy-out road — AND NO on
+  unseen seeds. Matched pass C: full seat 3/5, M23b 3/5 gate-ok, all
+  delivered. Fresh C-wide: full seat 0/8, M23b 0/8, w5max 0/8. The
+  road converts gate-ok into full seats; the gate goes ok only
+  where wave 5 is faced. The win question is now the wave-5 facing
+  question.
