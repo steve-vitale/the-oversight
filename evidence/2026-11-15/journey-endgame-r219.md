@@ -142,11 +142,26 @@ NOT rolled. Pass-A sums: uw (unlockedWave maxes 4,4,4,4,5), won
 
 ## Gate / landing status
 
-- [GATE-RESULT]
-- Landing: NOT done this occurrence. Pass C launched detached (see
-  below); C-wide, gate, merge, release, rotation 4→5 are owed by
-  the adopting occurrence.
-- Rotation-b stays 4 (not advanced — no landing yet).
+- `check.js --quick` in the worktree (log
+  `journey-endgame-r219-gate.log`, 1074s): **331 passed, 9 failed,
+  0 attributable — GATE GO.** The 9: living-garden + occupation-panels
+  + one-person-army + trust-observer-neutrality (exact 120s timeouts,
+  all four re-run standalone GREEN, exit 0 — box-load artifact);
+  measurement-proof-update + measurement-workflow (staleness pair,
+  pre-existing); phone-frame-proof (stale receipt, pre-existing);
+  test-ladder-bundle (ambient-raid suppression, gorgeprice2 guard
+  side-effect, r213-adjudicated); test-person-trust (HAUL 3 vs 0,
+  r214 parting-pool RNG shift, r213-adjudicated). Same failure
+  family as the succession r218 gate (333/7), plus two more load
+  timeouts on a slow box.
+- Telemetry: QUIET vs the endgame r188 baseline (5 files, uw/won/
+  peakVet, no large deviations) — baseline NOT rolled.
+- Landing: DONE by the adopting occurrence (main session, Nov 16
+  ~03:40–04:30Z): pass C re-run after the original detached process
+  died with no output; pass C-wide fresh band 89730–89737 launched +
+  analyzed; gate run + adjudicated; rebased onto current master,
+  merged ff-only, worktree released, rotation 4→5, lock deleted.
+- Rotation-b advanced 4→5 at landing (social life next).
 
 ## In flight (for the adopting occurrence)
 
