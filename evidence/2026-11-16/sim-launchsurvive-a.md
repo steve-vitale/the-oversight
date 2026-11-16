@@ -12,7 +12,7 @@ Proof: `scripts/test-launchsurvive-a.js`.
 | (1) Instrument valid: 8/8 corpora parse per leg, 0 instrument errors, attribution coverage ≥ 0.90 | **PASS** — 8/8 + 8/8 parse, 0 errors either leg, coverage 1.00 both legs, 0 tracker gaps either leg (every launch window fully observed) |
 | (2) ≥ 3 launches on the on-leg | **PASS** — 7 launches on-leg (control: 1) |
 | (3) Every launch in exactly one of the six classes, persistence measured per launch | **PASS** — 7/7 classified, 0 unclassified, persistence yes/no for all 7 |
-| (4) Proof green on the instrument tip AND post-revert | **PASS (tip)** — 52/52, 0 skipped, §7 real-corpora checks live and green. Post-revert re-run: see §Proof |
+| (4) Proof green on the instrument tip AND post-revert | **PASS** — 52/52, 0 failed, 0 skipped on the instrument tip AND post-revert; §7 real-corpora checks live and green both runs |
 | (5) D1/D2 determinism + D3 drift smoke clean | **PASS** — D1/D2 green in proof; D3: every divergence day falls after the first world-tick seed day on that seed (102403/102404 never diverge — no world-tick seed fired on either leg) |
 
 This DIAG ships no game change. The seed call is instrument only and is reverted at the end;
@@ -280,7 +280,7 @@ coincide; nothing in the sampled lines contradicts the measured story.
   7 encounters by origin {world-tick: 2, expedition: 5}, 15 seed rows, 52 tracker rows
   (vs 0 tracker rows off-tip — the seed call wakes the plan system; the tracker records real
   plan-holder days).
-- Post-revert: see the revert commit (proof re-run, `LAUNCHSURVIVE_SEED_CALL=off`).
+- Post-revert (`LAUNCHSURVIVE_SEED_CALL=off`, seed call absent from `src/js/game.js`): **52 passed, 0 failed, 0 skipped** (~2.7 min), re-run by the coordinator after the revert commit. The revert commit itself records no proof numbers — this line is the record; the earlier "see the revert commit" pointer was stale and is corrected here.
 
 D1/D2 determinism green in the proof; D3 smoke clean (analyzer): divergence days 38, 68, 33,
 55, 129, 49 — each after that seed's first world-tick seed day (35, 36, 31, 51, 128, 26);
