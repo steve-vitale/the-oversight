@@ -1167,10 +1167,24 @@
           ]) || `"${favor.short} — that's still open."`;
         }
         if (favor && favor.state === 'fulfilled') {
-          return this.convoPickCycle(vid, 'repay:help:thanks:' + (favor.kind || 'favor'), [
+          // F6 GUARD (journey-social-life r226): the thanks pool is two
+          // variants cycled per villager with no ledger check — once both
+          // are in the 48-entry run ledger, every re-ask dries (probe:
+          // Olivia d64-d80, the same line 7 times). Try the cycle's pick,
+          // then the other variant; both blocked -> null, so each caller
+          // falls through to its honest line instead of a dry one.
+          const thanks = [
             `"You came through on ${favor.short}. I won't forget it."`,
             `"${favor.short} — you kept your word. Thank you."`,
-          ]) || `"You came through on ${favor.short}. I won't forget it."`;
+          ];
+          const picked = this.convoPickCycle(vid, 'repay:help:thanks:' + (favor.kind || 'favor'), thanks) || thanks[0];
+          if (typeof this.convoWouldBlock === 'function') {
+            if (!this.convoWouldBlock(vid, picked)) return picked;
+            const other = thanks[0] === picked ? thanks[1] : thanks[0];
+            if (!this.convoWouldBlock(vid, other)) return other;
+            return null;
+          }
+          return picked;
         }
         if (favor && favor.state === 'broken') {
           return this.convoPickCycle(vid, 'repay:help:broken:' + (favor.kind || 'favor'), [

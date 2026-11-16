@@ -7163,14 +7163,27 @@
               // turn dried ("...Sorry, lost my train of thought.") at
               // trust 90 (r224 panel: 34301 d105 Farid — "It's already
               // handled" then a blank two turns later). Three honest
-              // phrasings, cycled like every other pool (F4c class); the
-              // cycle skips the ledger-blocked variant, so the re-ask
-              // speaks a fresh phrasing instead of drying or deflecting.
-              wline = this.convoPickCycle(vid, 'settledfavor:handled', [
+              // phrasings, cycled like every other pool (F4c class).
+              // F6 GUARD (journey-social-life r226): the cycle is
+              // per-villager memory, NOT the cross-villager run ledger —
+              // a variant another villager spoke recently can still be
+              // picked and dry (probe: Olivia d97, variant 2). The
+              // r225 comment's claim that the cycle "skips the
+              // ledger-blocked variant" is wrong on that point. Try each
+              // variant in cycle order until one is fresh; all three
+              // blocked keeps the pick (rare — the dry line then, noted
+              // in the run note).
+              const handledPool = [
                 '"No, really — it\'s handled. Thanks for asking, though."',
                 '"It\'s taken care of, I swear. You don\'t need to worry about that one anymore."',
                 '"Honestly? It\'s done. Finished. Thank you for checking — it means something that you did."',
-              ]) || '"No, really — it\'s handled. Thanks for asking, though."';
+              ];
+              wline = this.convoPickCycle(vid, 'settledfavor:handled', handledPool) || handledPool[0];
+              if (typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, wline)) {
+                for (const alt of handledPool) {
+                  if (alt !== wline && !this.convoWouldBlock(vid, alt)) { wline = alt; break; }
+                }
+              }
             } else if (c.want && c.want.def && (c.want.stage || 0) >= 1 && (c.want.stage || 0) < 3 &&
                        typeof c.want.def.engageBeat === 'function') {
               // WANT RESUME (journey crisis r8 2026-10-14): the want is already
@@ -7255,6 +7268,28 @@
                     if (needLine && !this.convoWouldBlock(vid, needLine)) wline = needLine;
                   }
                 }
+              }
+              // F6 GUARD (journey-social-life r226): the stage-0 opener line
+              // may already have been spoken recently (run ledger) — for
+              // EVERY want, not just ask_favor. The ask_favor rungs above try
+              // fresh phrasings first; any want whose opener still blocks
+              // falls to its stale opener (the same escape the startConvo
+              // flow uses: def.staleOpener, else the generic reframe), and
+              // if that is blocked too the handler's default speaks instead
+              // of handing sayLine a line the ledger will refuse (sayLine
+              // dry-replaces it and returns the dry line truthy, so no
+              // caller check can catch it). Panel: 21 dry-line drops, 16
+              // on 45704 — repay's fulfilled-favor opener is a single fixed
+              // line, and a resumed curious question re-hangs unfiltered.
+              if (wline && typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, wline)) {
+                let sline = null;
+                try {
+                  sline = (c.want && c.want.def && typeof c.want.def.staleOpener === 'function')
+                    ? c.want.def.staleOpener.call(this, vid)
+                    : (typeof this.convoWantStaleOpener === 'function' ? this.convoWantStaleOpener(vid, c.want) : null);
+                } catch (e) { sline = null; }
+                if (sline && !this.convoWouldBlock(vid, sline)) wline = sline;
+                else wline = null;
               }
             }
             if (c.want) c.want.stage = Math.max(c.want.stage || 0, 1);
