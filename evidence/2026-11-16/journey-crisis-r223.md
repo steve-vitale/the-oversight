@@ -96,11 +96,16 @@ d41 Tamika opener "Andre and I never did finish talking about that debt — that
 
 ## Gate
 
-`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest2` — started at closeout; result recorded by the adopting run (see Landing). Expect ~330/340 with known standing failures (measurement-proof staleness pair, phone-frame staleness, load-timeout standalones); adjudicate 0 attributable; run standalones for any load timeouts.
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest2` — **334 passed, 6 failed in 702s. 0 attributable — GATE GO.** Adjudication:
+- Measurement-proof staleness pair (`test-measurement-proof-update.js`, `test-measurement-workflow.js`) — pre-existing staleness, not attributable.
+- Phone-frame staleness (`test-phone-frame-proof.js`, 3 sub-checks) — pre-existing staleness, not attributable.
+- Load-timeout standalones (`test-living-garden-deed-attainment.js`, `test-one-person-army-deed-attainment.js` — gate-killed at 120s) — both pass standalone (living-garden exit 0 in ~165s; one-person-army exit 0 in ~53s). Load artifacts, not attributable.
+- `test-ladder-bundle-20261108.js` (78 passed, 1 failed: "control: 200 monster turns WITHOUT delivery fire the ambient raid — fires 0") — reproduces **identically on the pristine base** (sparse `git archive 7d2de26f4` copy, same 78/1), and the test never touches conversations (0 matches for convo/startConvo/resume), so no mechanism connects it to this change. Pre-existing on base, not attributable. Recorded here for the owning lane; out of this leg's scope.
+- Note: the first base-verification attempt filled /tmp (512M tmpfs) with a full `git archive` (the repo's evidence/ is gigabytes); the sparse archive (src/js, scripts, src/data, index.html — 215M) worked. /tmp was cleaned back to 3%.
 
 ## Landing
 
-Merged locally, pending ship (ship loop owns bump/push/live verification). [To be completed by the adopting run: merge ff-only, release, rotation, lock.]
+Gate GO (0 attributable). Rebase onto master 0740ce985 + ff-only merge pending at this writing — base moved while this run worked (sim-launchdef-a + sim-rumorplan-a landed); the new master range touches only src/js/villager-agency.js, no overlap with conversation.js, so a clean rebase is expected. Merged locally, pending ship once the merge lands (ship loop owns bump/push/live verification).
 
 ## Metric review
 
