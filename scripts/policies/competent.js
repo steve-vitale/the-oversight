@@ -2432,6 +2432,12 @@ function closeStep(Game, f, ctx, p, px, py, tmx, tmy) {
   if (!cands.length) return 'none';
   for (const c of cands) {
     if (Game.tbIsPlayerTurn && !Game.tbIsPlayerTurn()) break;
+    // R140 BUDGET STOP (journey-landing r140): a spent movement budget
+    // refuses every tile ("No movement left this turn") — stop trying
+    // tiles at once instead of spamming one refusal per candidate (the
+    // r139 1168-d20 flag: 42 failed moves). A move that fails for another
+    // reason (no path, too far) still tries the next tile.
+    if ((p.moveLeft || 0) <= 0) break;
     try {
       // STEP, DON'T TELEPORT (journey-endgame r6 2026-10-12): tbPlayerMove
       // refuses destinations beyond moveLeft ("Too far"). Step as far
@@ -2492,6 +2498,10 @@ function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
         // broke the loop before the first move in test-capable-bot's stub
         // Game, which has no tbIsPlayerTurn.)
         if (Game.tbIsPlayerTurn && !Game.tbIsPlayerTurn()) break;
+        // R140 BUDGET STOP (journey-landing r140): same shape as
+        // closeStep above — a spent budget refuses every tile, so stop
+        // at once instead of spamming one refusal per candidate.
+        if ((p.moveLeft || 0) <= 0) break;
         // STEP, DON'T TELEPORT (capable bot 2026-10-14): the main strike
         // path got this fix in r6, this one didn't — tbPlayerMove refuses a
         // destination past this turn's movement ("Too far"), so a far trick

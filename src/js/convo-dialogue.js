@@ -753,13 +753,38 @@
         // handler. Engagement, not deflection — they wanted you warned.
         c.transcript.push({ who: 'you', text: '"I\'ll be careful."' });
         try { this.resolveConsequence(vid, { trust: 1, mood: 1, temper: 'kind', name: 'dlg:heed' }); } catch (e) {}
-        const line = this.convoPickCycle(vid, 'dlg:heed:lines', [
-          '"Good. I mean it — watch yourself out there."',
-          '"Promise me that. Please."',
-          '"Thank you. I needed to hear you say it."',
-        ]) || '"Good. I mean it — watch yourself out there."';
-        this.sayLine(vid, line, { tag: 'warning' });
-        this.convoWantEngage(vid, 'engage');
+        const heeds = (c._heedCount = (c._heedCount || 0) + 1);
+        let line;
+        if (heeds >= 4) {
+          // DEEPENING ARC (journey landing r140): heeding on loop used to
+          // cycle the same 3 lines, then go silent once the no-repeat
+          // ledger blocked all three — the want stalling at stage 2, the
+          // player saying "I'll be careful" 6+ times and hearing back 3
+          // (Nino, seed 1175 d12, r140 BEFORE pilot). Now the fourth heed
+          // deepens — the fear gets said out loud — and the want resolves
+          // as 'heeded' instead of looping. Same shape as the dlg:stay
+          // deepen.
+          const raw = this.convoPickCycle(vid, 'dlg:heed:deepen', [
+            '"I mean it. I\'ve watched people walk out sure and not walk back. Don\'t be the next one I have to stop waiting for."',
+            '"...I keep seeing it. Whatever it was, out past the treeline. I don\'t want to be the one telling the fire you didn\'t come back."',
+            '"You hear me, right? Not the words — the part underneath. I\'m scared, and I\'m asking you not to make me watch it happen."',
+            '"Last night I laid awake listening. Every sound was you not coming back. Please. Just — come back."',
+            '"I\'m not trying to fence you in. I\'m trying to still have you here tomorrow. That\'s the whole of it."',
+          ]) || '"I mean it. I\'ve watched people walk out sure and not walk back."';
+          line = raw;
+          this.sayLine(vid, line, { tag: 'warning', fallback: () => this.convoSelfRepeatLine(vid) });
+          // warn_you resolves as 'heeded' — the want's own closeLine
+          // ("Good. Just — be careful. I mean it.") carries the goodbye.
+          this.convoWantEngage(vid, 'commit');
+        } else {
+          line = this.convoPickCycle(vid, 'dlg:heed:lines', [
+            '"Good. I mean it — watch yourself out there."',
+            '"Promise me that. Please."',
+            '"Thank you. I needed to hear you say it."',
+          ]) || '"Good. I mean it — watch yourself out there."';
+          this.sayLine(vid, line, { tag: 'warning', fallback: () => this.convoSelfRepeatLine(vid) });
+          this.convoWantEngage(vid, 'engage');
+        }
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 
