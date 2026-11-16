@@ -890,9 +890,22 @@
         // memory — the NPC mourned a refusal that never happened while the
         // resolution stayed 'promised'. A decided want is not refused by
         // small talk; only a LIVE want's deflectBeat speaks here.)
+        // (journey establishment 2026-11-16 r225: STAGE-0 IS NOT LIVE.
+        // A want that never surfaced (stage 0 — its opener never ran
+        // because a resume/recall/case thread pre-empted the opening)
+        // cannot be refused — the player never heard the ask. The old
+        // `< 3` test treated an unvoiced want as live, so "I can't right
+        // now" (said to the resumed thread) wrote a false 'deflected'
+        // memory, spoke the fresh want's deflectBeat, and closed it at
+        // stage 3 'deflected'. Panel r225: 19/19 favorless sits are this
+        // shape; 3 of the 4 stage-3 closes came through this handler.
+        // Only a surfaced, undecided want (stage 1-2) is live here — the
+        // same live definition convoWantMenu uses (it returns [] at
+        // stage 0). The unvoiced want stays stage 0; the need persists
+        // for a proper ask next sitting.)
         c.transcript.push({ who: 'you', text: '"I can\'t right now."' });
         const w = c.want;
-        const wantLive = !!(w && w.def && (w.stage || 0) < 3);
+        const wantLive = !!(w && w.def && (w.stage || 0) >= 1 && (w.stage || 0) < 3);
         // SCENE (Phase 2): through the resolver — cools mood AND writes
         // the 'deflected' memory (HURT_KINDS slot, wired Phase 1).
         try {
@@ -913,7 +926,12 @@
           '"No — it\'s fine. I shouldn\'t have asked."',
         ]) || '"Oh. ...No, I get it. Thanks for being straight with me."';
         this.sayLine(vid, line, { structural: wantLive });
-        this.convoWantEngage(vid, 'deflect');
+        // (r225: the arc advances only for a LIVE want — a stage-0 want
+        // the player never heard is not refused by this pick; it stays
+        // stage 0 and the need persists for a proper ask next sitting.
+        // The generic line above still speaks as an acknowledgment of
+        // the refusal of the resumed thread.)
+        if (wantLive) this.convoWantEngage(vid, 'deflect');
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
 

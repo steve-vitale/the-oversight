@@ -7972,7 +7972,12 @@
           } else if (/^react:/.test(choiceId || '')) {
             if (wdef.reactEngages) this.convoWantEngage(vid, 'engage');
           } else if (choiceId === 'deflect_q') {
-            this.convoWantEngage(vid, 'deflect');
+            // STAGE-0 IS NOT LIVE (journey-establishment r225): changing
+            // the subject while a want waits unvoiced (stage 0 — its
+            // opener never ran) must not resolve it 'deflected' (Stan
+            // d34 in the r225 panel). Only a surfaced want (stage >= 1)
+            // is refused by the dodge; the unvoiced want stays stage 0.
+            if ((c.want.stage || 0) >= 1) this.convoWantEngage(vid, 'deflect');
           }
         }
       } catch (e) {}
