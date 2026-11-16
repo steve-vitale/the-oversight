@@ -143,8 +143,8 @@ NOT rolled. Pass-A sums: uw (unlockedWave maxes 4,4,4,4,5), won
 ## Gate / landing status
 
 - [GATE-RESULT]
-- Landing: NOT done this occurrence. Pass B in flight (see below);
-  passes C/C-wide, gate, merge, release, rotation 4→5 are owed by
+- Landing: NOT done this occurrence. Pass C launched detached (see
+  below); C-wide, gate, merge, release, rotation 4→5 are owed by
   the adopting occurrence.
 - Rotation-b stays 4 (not advanced — no landing yet).
 
@@ -163,16 +163,66 @@ NOT rolled. Pass-A sums: uw (unlockedWave maxes 4,4,4,4,5), won
   probe invocation in the prereg (deterministic seeds; finished
   seeds' outputs reproduce identically).
 
-## Pass B verdicts
+## Pass B verdicts (5 matched seeds, CAPSTONE=1 BUYOUT=1)
 
-[PASS-B]
+Analyzer: `scripts/analyze-endgame-r219-20261115.js` on
+`perseed-endgame-r219-b` — **PRIMARY-BINDINGS VACUOUS-UNANSWERED |
+PRIMARY NO-GO | ALL NO-GO** (exit 1). The NO-GO is the VACUOUS M23
+only. Log: `journey-endgame-r219-passb-analyzer.log`.
 
-## Verdicts (pass A only; full-seat question needs passes B/C)
+- M23b GATE-OK TALLY: **0/5** — no seed reached deedGateReady ok
+  (r211 pass B had 1: 89703 d87). The deed-gate ends name the
+  blocker: w5 distinct faced 0/0/0/0/1 (need 2), scale global on all
+  5, pantries healthy (11k–25k at end). The wave-5 bar is the binding
+  constraint on every seed.
+- Per-seed: byte-identical trajectories to pass A (verified: only
+  the `buyout`/`capstone` record sections differ; satDay, seat, won,
+  census, fights, veterans, ladder, fullseat, deaths, feast all
+  identical). The capstone/buyout legs fired ZERO events: 0 capstone
+  attempts, 0 deliveries, 0 buyout attempts on all 5 seeds — there
+  was never a ready kind to deliver, and no buyout window opened.
+- Tally: lesser 5/5, full 0/5, lost 0/5. ROAD-TALLY earned 0 sat 0.
+  M24/M24b VACUOUS (no tribute delivery). §NO-OVER-ATTEMPT holds
+  (0 attempts, so 0 'over'); §REFUSAL-WINDOW holds (0 refusals).
+- Doubled quotes: 0 `SYSTEM: ""` hits on all 5 pass-B transcripts.
+- **Attribution:** the gate-ok loss vs r211 is the same re-roll as
+  pass A — trajectories re-rolled by the dialogue-code RNG-draw
+  changes, wave-5 facings fell (r211: w5max 1,1,2,0,0; r219:
+  0,0,0,0,1), and the 2-distinct-wave-5 bar never clears. No
+  table/ladder/waves change landed. The full-seat door didn't just
+  stay closed — on this roll it never became openable. Pass C/C-wide
+  still to run: the early-buyout road is the remaining lever that
+  could open it on these seeds.
 
-- Reachable: YES (5/5 sat lesser on pass A; table + audit + lesser
-  seat all fire).
+## In flight (for the adopting occurrence)
+
+- Pass C (setsid-detached, CAPSTONE=1 BUYOUT=1 BUYOUT_EARLY=1,
+  seeds 89701–89705, outdir perseed-endgame-r219-c, log
+  journey-endgame-r219-passc.log): [PASS-C-STATUS]. When it
+  finishes: run the r219 analyzer with ANALYZEDIR=
+  perseed-endgame-r219-c, fill the Pass C section below, then run
+  the C-wide stretch (same policy, fresh seeds 89730–89737, outdir
+  perseed-endgame-r219-cwide), analyze it, commit each set, run
+  `check.js --quick`, merge ff-only, release, rotation 4→5, delete
+  lock.
+- If Pass C died with the VM again, it is re-runnable from the probe
+  invocation in the prereg (deterministic seeds; finished seeds'
+  outputs reproduce identically).
+
+## Pass C verdicts
+
+[PASS-C]
+
+## Pass C-wide verdicts
+
+[PASS-CWIDE]
+
+## Verdicts (passes A+B; full-seat question needs pass C/C-wide)
+
+- Reachable: YES (5/5 sat lesser on passes A and B; table + audit +
+  lesser seat all fire).
 - Fun: PARTIAL (the endgame plays — audit, finale choices, Reunion
   fights — but wave 5 is a wall nobody opens and the full seat
   never answers).
-- Winnable: NO (this leg so far; full seat 0/5 on pass A, M23b 0/5
-  gate-ok — the door question is unanswered until passes B/C).
+- Winnable: NO (this leg so far; full seat 0/5 on A and B, M23b 0/5
+  gate-ok on both — the door never opened).
