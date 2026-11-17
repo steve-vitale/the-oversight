@@ -187,3 +187,58 @@ establishment-r20-fixes. All five 120s timeouts from the first gate
 passed here (slowest 53s) and standalone — confirmed load artifacts.
 **No lever-attributable failure. Gate adjudicated GO on the rebased
 tree. Wideduty is ready to land.**
+
+## Adoption verification (2026-11-17, run fleshout-20261117T1015Z)
+
+This file and the corpora it judges were stranded: the Nov 9 run had
+finished and committed them (orphaned commits `48c93b22b` — lever +
+evidence — and `4c44e35de` — rebased gate adjudication), but the branch
+was later reset to base `8cee6a8d2`, leaving only uncommitted residue in
+this worktree. This adoption recovered the stranded work from those
+commits and re-verified it independently rather than trusting it:
+
+- **Corpora verified, not blessed.** Every per-seed file in
+  `wideduty-a-corpus/`, `wideduty-a-corpus-after/`,
+  `wideduty-a-confirm-before/`, `wideduty-a-confirm-after/` parses as
+  JSON; file counts now match the orphaned commit exactly (17 / 16 /
+  16 / 13). Four pilot-after bare files (`wideduty-a-bare-s96305`–
+  `s96308`) were missing from the worktree and recovered from
+  `48c93b22b`. The tree's `panel-before/panel.json.gz` was the STALE
+  base-`8cee6a8d2` copy — replaced with the rebuilt one (sourceHead
+  `01540e4c5`, matching panel-after and the G3 account above).
+- **Analyzer reproduced exactly.** `analyze-wideduty-a.js --leg` on the
+  pilot before corpus gives the prereg baseline (342/786 = 43.5%,
+  zeroDutySeeds 3/8, median 97d). `--before/--after` on pilot: GO
+  (70.8%, trained 349, zeroDutySeeds 2/8). On the confirm band
+  (`WIDEDUTY_SEEDS=96901..96912`): GO (88.3%, trained 746/1439,
+  zeroDutySeeds 0/12, median 122d, starvation 1). Both analyzer outputs
+  reproduce `wideduty-a-pilot-analyzer.txt` and
+  `wideduty-a-confirm-analyzer.txt` byte-for-byte (exit 0).
+- **Panel compare verified.** `compare.md` / `compare.json` decision
+  `review_required`, no `regression_signal`; all four policy columns 1
+  paired case, every metric `insufficient`; both panels share
+  sourceHead `01540e4c5`. The `cases/` cache is NOT committed (§15).
+- **Proof test adapted, green.** `node scripts/test-wideduty-a.js`:
+  **7 PASS, 0 FAIL, 4 SKIP**. Legs L0–L3 (the lever spec) SKIP on this
+  tree because the lever is absent — they run again the moment the
+  lever is re-ported. L4–L10 prove the measurement: recorder
+  neutrality, pilot baseline + verdict, confirm verdict, corpus
+  validity, panel compare, byte-exact analyzer reproduction. The
+  pre-adoption baseline run of the unadapted test was 3 PASS / 4 FAIL,
+  the 4 failures all lever legs (`isMedicDutyEligible` undefined).
+- **The lever is NOT in this adoption commit.** This tree's
+  `src/js/game.js` is the unlevered base (`isMedicDutyEligible`
+  count 0); nothing in this commit changes game behavior, so no
+  `[needs-eyes]` flag on this commit — the flag belongs to the lever's
+  landing commit. The lever survives as orphaned commit `48c93b22b`
+  (game.js +66/−20, proof 7/7 on its levered tree, gate 289/11
+  adjudicated GO with no lever-attributable failure). **Landing is the
+  coordinator's call:** the prereg orders this arm to land AFTER the
+  sibling medheadcount-suite arm, whose lever was HELD
+  (`8419eefa4`, NO-GO on landing), and the lever was written against a
+  Nov 9 lineage — it needs a re-port onto current master plus a fresh
+  gate before it can land. The measurement verdict stands on its own:
+  **GO (G1+G2+G3+G4 as measured)**; the landing itself is still owed.
+- **Wall numbers (unchanged by this arm):** confirm band national 0/12,
+  table 0, wins 0, wave-5 reach 5/12 before → 4/12 after, median
+  survival 125d → 122d.

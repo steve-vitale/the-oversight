@@ -210,7 +210,7 @@ cure, or behavior is created.
   pilot + lever + instruments as GO-pilot with the confirm band owed
   (named above), rather than landing an unconfirmed number.
 
-## Metric review (filled at end of run, main-session adoption 2026-11-09)
+## Metric review (filled at end of run, main-session adoption 2026-11-09; re-verified by the 2026-11-17 adoption: analyzer re-runs reproduce pilot + confirm exactly)
 
 - **G1 PRIMARY: PASS.** dutyHeld 88.3% (bar ≥60%, before 61.0%);
   zeroDutySeeds 0/12 (bar ≤2, before 2). Trained holders 51.8% of duty
