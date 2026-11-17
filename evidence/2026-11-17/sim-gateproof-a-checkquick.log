@@ -1,0 +1,31 @@
+check.js: 340 scripts, 4 parallel (quick)
+....................................................................................................................................................F.......................................................................F.......................................................................................................................
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 3.2s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/data/foreignSpeech.json,src/data/regions.json,src/data/statusEffects.json,src/data/table-endings.json,src/js/abilityActions.
+        FAIL all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/test-ladder-bundle-20261108.js (exit 1, 9.4s)
+        ok   embassy delivery records the capstone
+        ok   mercy: tableActive is FALSE before delivery (not vacuous)
+        ok   mercy: charter delivery succeeds in the posttable game
+        ok   mercy: tableActive is TRUE after delivery, before any sitting
+        ok   mercy: 200 monster turns after delivery fire NO ambient raid
+        ok   control: overtimeScaleFight scales when nothing is delivered
+        ok   mercy: charter delivery succeeds for the scaler check
+        ok   mercy: overtimeScaleFight refuses under a delivered capstone
+        FAIL control: 200 monster turns WITHOUT delivery fire the ambient raid — fires 0
+      
+      test-ladder-bundle-20261108: 78 passed, 1 failed, 0 todo (phase 0)
+      failing: control: 200 monster turns WITHOUT delivery fire the ambient raid
+
+  slowest: scripts/godpath/test-living-garden-deed-attainment.js 272s, scripts/godpath/test-one-person-army-deed-attainment.js 183s, scripts/godpath/test-occupation-panels.js 70s
+
+check.js: 338 passed, 2 failed in 712s
