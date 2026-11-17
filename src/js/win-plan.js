@@ -8,7 +8,6 @@
 //   - winPlanDepart(vid, hx, hy, announce)
 //   - winPlanFightGate(vid, mdef)
 //   - winPlanSeedFromFight(vid, mdef, outcome)
-//   - winPlanRumorAttach(vid, atCreation)
 //   - winPlanNoteKill(vid, mdef)
 //   - winPlanNoteFight(vid, allyVids)
 //   - winPlanBondsTick(hx, hy)
@@ -41,13 +40,6 @@
 //     in 83 wild wave-4 fights). The gate withholds SEEK only — ordinary
 //     encounters still happen, and surviving one (flee/evade) teaches
 //     the trick, so no plan strands waiting for knowledge it can never earn.
-//   - winplan_rumor_target: a rumor-born plan (origin 'heard') with no
-//     target takes the beast named in a told killer's tale — teller
-//     alive, tale fresh (<=30d), beast wave 3+ — at creation or on a
-//     later Haven tick (code: winPlanRumorAttach). Env-gated
-//     RUMORTARGET=1, default OFF. The tale is told at Haven's fire
-//     so delivery distance is zero; the kill's location is not in
-//     state, so the plan gets a species, never a node.
 //   - winplan_no_gate_changes: this module never writes standing (code: winPlanStats)
 //     thresholds, deed gates, readiness numbers, or win prices. It reads
 //     the System's broadcast hold beats (state._standingDeferBeat) as
@@ -229,34 +221,6 @@
     try { return typeof process !== 'undefined' && process.env && process.env.VETREENGAGE === '1'; } catch (e) { return false; }
   }
 
-  // RUMORTARGET env gate (sim-rumortarget-a): the rumor-target lever
-  // is OFF unless the process env carries RUMORTARGET=1 (node sims
-  // only; in the browser process is undefined, so the lever is off).
-  function rumortargetOn() {
-    try { return typeof process !== 'undefined' && process.env && process.env.RUMORTARGET === '1'; } catch (e) { return false; }
-  }
-  // RUMORTARGET (sim-rumortarget-a): freshness window for a told
-  // tale, in days. A month-old kill is stale news at the fire.
-  // Prereg choice, not canon — no canon doc gives a number.
-  var RUMOR_TALE_FRESH_DAYS = 30;
-  // Wave lookup for tale beasts, cached per monsters data identity
-  // (the roster is fixed per process; rebuild if the data changes).
-  var _rumorWaveSrc = null;
-  var _rumorWaveById = {};
-  function rumorWaveOf(self, mid) {
-    try {
-      var mons = (self.data && self.data.monsters) || [];
-      if (mons !== _rumorWaveSrc) {
-        _rumorWaveSrc = mons;
-        _rumorWaveById = {};
-        for (var i = 0; i < mons.length; i++) {
-          if (mons[i] && mons[i].id) _rumorWaveById[mons[i].id] = (mons[i].wave || 1);
-        }
-      }
-      return _rumorWaveById[mid] || 0;
-    } catch (e) { return 0; }
-  }
-
   // Launchability for a party companion, checked BEFORE the inviter
   // launches (or before a second companion is added): gear them first
   // (their own stash / the deposited armory / whittle, exactly what
@@ -339,99 +303,6 @@
         return plan;
       } catch (e) { return null; }
     },
-    // RUMORTARGET (sim-rumortarget-a): attach the beast named in a
-    // told killer's tale to a rumor-born plan that names nothing.
-    // The rumor IS the fire talk: a tale the killer told at Haven's
-    // fire (state.killerTales / vetKillerTales, played === true),
-    // naming the beast (mid), the teller (killer), and its age
-    // (day). Gated by the drive brief's rumor rules
-    // (docs/VILLAGER-BRAIN.md §2, §7 phase 1 — trust-in-teller ×
-    // staleness × distance, over heard sightings):
-    //   - source trust: the tale was actually told firsthand
-    //     (played) by a teller ALIVE on the roster now — a dead
-    //     teller's tale is retold, weaker, excluded;
-    //   - staleness: tale day within RUMOR_TALE_FRESH_DAYS;
-    //   - distance: the tale is told at Haven's fire to a villager
-    //     standing at Haven, so delivery distance is zero by
-    //     construction. The kill's LOCATION is not recorded in
-    //     state (waveKillLog / tales carry no coordinates), so no
-    //     location gate is possible without a new write at the
-    //     kill choke point — recorded as a blank, not invented.
-    //     The plan gets a target SPECIES, never a node.
-    //   - wave: the beast is wave 3+ (the seed's own wave gate).
-    // Picks the highest wave among eligible tales, tie-break
-    // freshest, then queue order (deterministic). Returns a rich
-    // result {mid, wave, teller, taleDay, taleAge, atCreation,
-    // considered} for the recorder; the game caller ignores it.
-    // Returns null (with considered populated) when nothing is
-    // eligible, and null immediately when the env gate is off.
-    // Env-gated: no attach unless RUMORTARGET=1. Never throws
-    // into the caller — a rule bug must not break the Haven tick.
-    winPlanRumorAttach(vid, atCreation) {
-      try {
-        if (!rumortargetOn()) return null;
-        var v = stateOf(this);
-        if (!v) return null;
-        var plan = v.winPlan[vid];
-        if (!plan) return null;
-        if (plan.target) return null;
-        if (plan.origin !== 'heard') return null;
-        if (plan.stage !== 'gear' && plan.stage !== 'party' && plan.stage !== 'hunt') return null;
-        var day = 0;
-        try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
-        var roster = [];
-        var fallen = {};
-        try {
-          var vv = this.state && this.state.village;
-          roster = (vv && vv.roster) || [];
-          var fl = (vv && vv.fallen) || [];
-          for (var fi = 0; fi < fl.length; fi++) if (fl[fi] && fl[fi].villagerId) fallen[fl[fi].villagerId] = true;
-        } catch (e) {}
-        var tales = [];
-        try { tales = ((this.state.killerTales || []).concat(this.state.vetKillerTales || [])); } catch (e) {}
-        var considered = [];
-        var best = null;
-        for (var i = 0; i < tales.length; i++) {
-          var t = tales[i];
-          if (!t || !t.mid || !t.killer) continue;
-          var wave = rumorWaveOf(this, t.mid);
-          var age = day - (t.day | 0);
-          var entry = { mid: t.mid, wave: wave, teller: t.killer,
-            taleDay: (t.day | 0), age: age,
-            played: !!t.played, tellerAlive: false,
-            eligible: false, reason: null };
-          if (!t.played) { entry.reason = 'untold'; considered.push(entry); continue; }
-          if (wave < 3) { entry.reason = 'wave<3'; considered.push(entry); continue; }
-          if (age > RUMOR_TALE_FRESH_DAYS) { entry.reason = 'stale'; considered.push(entry); continue; }
-          var tellerAlive = (roster.indexOf(t.killer) !== -1) && !fallen[t.killer];
-          entry.tellerAlive = tellerAlive;
-          if (!tellerAlive) { entry.reason = 'teller-dead'; considered.push(entry); continue; }
-          entry.eligible = true;
-          considered.push(entry);
-          if (!best || wave > best.wave || (wave === best.wave && (t.day | 0) > (best.taleDay | 0))) best = entry;
-        }
-        var result = { mid: null, wave: null, teller: null, taleDay: null,
-          taleAge: null, atCreation: !!atCreation, considered: considered };
-        if (!best) return result;
-        plan.target = best.mid;
-        plan.needWave = best.wave;
-        plan.targetSource = 'tale';
-        plan.targetTeller = best.teller;
-        plan.targetTaleDay = best.taleDay;
-        result.mid = best.mid;
-        result.wave = best.wave;
-        result.teller = best.teller;
-        result.taleDay = best.taleDay;
-        result.taleAge = best.age;
-        try {
-          var holderName = (typeof this.firstRef === 'function' ? this.firstRef(vid) : null) || 'Someone';
-          var tellerName = (typeof this.firstRef === 'function' ? this.firstRef(best.teller) : null) || 'Someone';
-          var beastName = (typeof this.monsterDisplayName === 'function' ? this.monsterDisplayName(best.mid) : null) || 'the beast';
-          this.say(holderName + ' keeps coming back to ' + tellerName + '\u2019s tale of ' + beastName + ' \u2014 and now has a beast to hunt.');
-        } catch (e) {}
-        return result;
-      } catch (e) { return null; }
-    },
     // A fight that started with a plan party beside the fighter: the
     // party formed BEFORE the fight did its job. Called by
     // expeditionMonster right after fieldFight returns.
@@ -481,41 +352,27 @@
         // everyone), starts thinking in gameplan terms: gear first,
         // then party, then hunt. No roster scan: the villager learns
         // only that the village HAS kills, never who or where.
-        // RUMORTARGET (sim-rumortarget-a): stamp which leg engaged,
-        // so the attach rule can tell a rumor-born plan from one
-        // born of lived fighting. 'heard' = fire talk only
-        // (villageSlain, no beast the villager met); 'fought' =
-        // the villager personally fought a beast. A new field no
-        // reader consumes — the only unconditional change on the
-        // OFF path (see the prereg's OFF-path note).
-        var justCreated = false;
         if (!plan) {
           var prof = null;
           try { prof = this.npcRangeProfile ? this.npcRangeProfile(vid) : null; } catch (e) {}
           if (prof !== 'wanderer' && prof !== 'explorer') return null;
-          var foughtEngaged = false, slainEngaged = false;
+          var engaged = false;
           try {
             var a = this.agencyState ? this.agencyState() : null;
             var kn = a && a.know ? a.know[vid] : null;
-            if (kn && kn.fought && kn.fought.length) foughtEngaged = true;
+            if (kn && kn.fought && kn.fought.length) engaged = true;
           } catch (e) {}
-          if (!foughtEngaged) {
+          if (!engaged) {
             try {
               var sl = this.state.villageSlain || {};
-              for (var k in sl) if (sl[k] > 0) { slainEngaged = true; break; }
+              for (var k in sl) if (sl[k] > 0) { engaged = true; break; }
             } catch (e) {}
           }
-          if (!foughtEngaged && !slainEngaged) return null;
-          plan = { stage: 'gear', target: null, node: null, party: [], sinceDay: 0, holdSinceDay: -1,
-            origin: foughtEngaged ? 'fought' : 'heard' };
+          if (!engaged) return null;
+          plan = { stage: 'gear', target: null, node: null, party: [], sinceDay: 0, holdSinceDay: -1 };
           try { plan.sinceDay = (this.state.scholar || {}).day || 0; } catch (e) {}
           v.winPlan[vid] = plan;
           bump(this, 'planSeeds');
-          justCreated = true;
-          // RUMORTARGET: a newborn rumor-born plan takes the beast
-          // named in the rumor at birth, when a fresh told tale
-          // names one. Env-gated inside; a no-op when OFF.
-          try { this.winPlanRumorAttach(vid, true); } catch (e) {}
         }
         try {
           if (typeof this.tableActive === 'function' && this.tableActive()) {
@@ -523,17 +380,6 @@
             return null;
           }
         } catch (e) {}
-        // RUMORTARGET (sim-rumortarget-a): refresh — a rumor-born
-        // plan that still names nothing takes the beast from a
-        // fresh told tale on a later night at Haven. Creation-only
-        // would test a straw man (births are front-loaded before
-        // any wave-4 tale can exist); the rule is one rule at one
-        // site. Env-gated inside; skipped for just-created plans
-        // (the creation call above already ran this tick).
-        if (!justCreated && plan && !plan.target && plan.origin === 'heard' &&
-            (plan.stage === 'gear' || plan.stage === 'party' || plan.stage === 'hunt')) {
-          try { this.winPlanRumorAttach(vid, false); } catch (e) {}
-        }
         // VETREENGAGE (sim-vetreengage-a): the party persists until the type
         // is killed or a member dies. A dead recorded party member
         // dissolves the hunting party back to re-formation (stage
