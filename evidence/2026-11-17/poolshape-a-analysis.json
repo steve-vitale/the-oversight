@@ -1,0 +1,4207 @@
+{
+  "arm": "poolshape-a",
+  "run": "poolshape-a",
+  "vreDir": "perseed-poolshape-a-vre",
+  "offDir": "perseed-poolshape-a-off",
+  "recDir": "perseed-poolshape-a-rec",
+  "rec0Dir": "perseed-poolshape-a-rec0",
+  "replication": {
+    "rowsMatch": true,
+    "poolshapeRows": 87,
+    "launchfunnelRows": 87,
+    "perSeed": {
+      "103411": {
+        "poolshapeRows": 0,
+        "launchfunnelRows": 0,
+        "poolshapeEmpty": 0,
+        "launchfunnelEmpty": 0,
+        "match": true
+      },
+      "103412": {
+        "poolshapeRows": 0,
+        "launchfunnelRows": 0,
+        "poolshapeEmpty": 0,
+        "launchfunnelEmpty": 0,
+        "match": true
+      },
+      "103413": {
+        "poolshapeRows": 25,
+        "launchfunnelRows": 25,
+        "poolshapeEmpty": 22,
+        "launchfunnelEmpty": 22,
+        "match": true
+      },
+      "103414": {
+        "poolshapeRows": 0,
+        "launchfunnelRows": 0,
+        "poolshapeEmpty": 0,
+        "launchfunnelEmpty": 0,
+        "match": true
+      },
+      "103415": {
+        "poolshapeRows": 37,
+        "launchfunnelRows": 37,
+        "poolshapeEmpty": 37,
+        "launchfunnelEmpty": 37,
+        "match": true
+      },
+      "103416": {
+        "poolshapeRows": 25,
+        "launchfunnelRows": 25,
+        "poolshapeEmpty": 22,
+        "launchfunnelEmpty": 22,
+        "match": true
+      },
+      "103417": {
+        "poolshapeRows": 0,
+        "launchfunnelRows": 0,
+        "poolshapeEmpty": 0,
+        "launchfunnelEmpty": 0,
+        "match": true
+      },
+      "103418": {
+        "poolshapeRows": 0,
+        "launchfunnelRows": 0,
+        "poolshapeEmpty": 0,
+        "launchfunnelEmpty": 0,
+        "match": true
+      }
+    },
+    "detail": "103411:0/0 rows,0/0 empty 103412:0/0 rows,0/0 empty 103413:25/25 rows,22/22 empty 103414:0/0 rows,0/0 empty 103415:37/37 rows,37/37 empty 103416:25/25 rows,22/22 empty 103417:0/0 rows,0/0 empty 103418:0/0 rows,0/0 empty"
+  },
+  "census": {
+    "poolRows": 87,
+    "emptyRows": 81,
+    "emptyShare": 0.931,
+    "checks": 620,
+    "coded": 620,
+    "codedShare": 1,
+    "unknown": 0,
+    "shapeBad": 0,
+    "agreeRows": 6,
+    "agreeFalse": 0,
+    "popB": 446,
+    "marginal": {
+      "dead": 0,
+      "away": 241,
+      "trustLow": 37,
+      "notAtHaven": 235,
+      "engaged": 0,
+      "notRanger": 400,
+      "onExped": 32
+    },
+    "alone": {
+      "dead": 0,
+      "away": 0,
+      "trustLow": 0,
+      "notAtHaven": 0,
+      "engaged": 0,
+      "notRanger": 198,
+      "onExped": 0
+    },
+    "combo": {
+      "dead": 0,
+      "away": 241,
+      "trustLow": 37,
+      "notAtHaven": 235,
+      "engaged": 0,
+      "notRanger": 202,
+      "onExped": 32
+    },
+    "marginalShare": {
+      "dead": 0,
+      "away": 0.5404,
+      "trustLow": 0.083,
+      "notAtHaven": 0.5269,
+      "engaged": 0,
+      "notRanger": 0.8969,
+      "onExped": 0.0717
+    },
+    "firstFails": {
+      "away": 241,
+      "notRanger": 198,
+      "eligible": 7
+    },
+    "awayNodeDisagree": 6,
+    "nodeAwayDisagree": 0,
+    "nodeNull": 0,
+    "profiles": {
+      "wanderer": 38,
+      "forager": 346,
+      "homebody": 54,
+      "explorer": 8
+    },
+    "nonRangerProfiles": {
+      "forager": 346,
+      "homebody": 54
+    },
+    "holderSplit": {
+      "ranger": {
+        "dawns": 1,
+        "empty": 0
+      },
+      "nonRanger": {
+        "dawns": 86,
+        "empty": 81
+      },
+      "unknown": {
+        "dawns": 0,
+        "empty": 0
+      }
+    },
+    "stageSplit": {
+      "hunt": 11,
+      "party": 59,
+      "standing": 17
+    },
+    "bidOnEmpty": 0,
+    "bidOnNonEmpty": 6,
+    "nonEmptyNoBid": 0,
+    "dominantTallyEmptyDawns": {
+      "away": 10,
+      "notAtHaven": 10,
+      "notRanger": 75,
+      "trustLow": 1
+    },
+    "dominantAloneTallyEmptyDawns": {
+      "notRanger": 79
+    },
+    "dominantFirstFailTallyEmptyDawns": {
+      "away": 60,
+      "notRanger": 55
+    },
+    "relaxTable": {
+      "relaxProfile": {
+        "meanEligiblePerDawn": 2.36,
+        "dawnsNonEmpty": 85,
+        "dawnsNonEmptyShare": 0.977,
+        "emptyDawnsFilled": 79,
+        "emptyDawnsFilledShare": 0.9753086419753086
+      },
+      "relaxAway": {
+        "meanEligiblePerDawn": 0.08,
+        "dawnsNonEmpty": 6,
+        "dawnsNonEmptyShare": 0.069,
+        "emptyDawnsFilled": 0,
+        "emptyDawnsFilledShare": 0
+      },
+      "relaxNode": {
+        "meanEligiblePerDawn": 0.08,
+        "dawnsNonEmpty": 6,
+        "dawnsNonEmptyShare": 0.069,
+        "emptyDawnsFilled": 0,
+        "emptyDawnsFilledShare": 0
+      },
+      "relaxTrust": {
+        "meanEligiblePerDawn": 0.08,
+        "dawnsNonEmpty": 6,
+        "dawnsNonEmptyShare": 0.069,
+        "emptyDawnsFilled": 0,
+        "emptyDawnsFilledShare": 0
+      },
+      "relaxEngaged": {
+        "meanEligiblePerDawn": 0.08,
+        "dawnsNonEmpty": 6,
+        "dawnsNonEmptyShare": 0.069,
+        "emptyDawnsFilled": 0,
+        "emptyDawnsFilledShare": 0
+      },
+      "relaxOnExped": {
+        "meanEligiblePerDawn": 0.08,
+        "dawnsNonEmpty": 6,
+        "dawnsNonEmptyShare": 0.069,
+        "emptyDawnsFilled": 0,
+        "emptyDawnsFilledShare": 0
+      },
+      "relaxProfileAway": {
+        "meanEligiblePerDawn": 2.43,
+        "dawnsNonEmpty": 85,
+        "dawnsNonEmptyShare": 0.977,
+        "emptyDawnsFilled": 79,
+        "emptyDawnsFilledShare": 0.9753086419753086
+      }
+    },
+    "perDawn": [
+      {
+        "seed": 103413,
+        "day": 82,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "hunt",
+        "holderProfile": "forager",
+        "rosterN": 11,
+        "livingN": 9,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "away",
+          "notAtHaven"
+        ],
+        "dominantMarginalN": 7,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 7,
+        "marginal": {
+          "dead": 0,
+          "away": 7,
+          "trustLow": 0,
+          "notAtHaven": 7,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 3
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 84,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "hunt",
+        "holderProfile": "forager",
+        "rosterN": 11,
+        "livingN": 9,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "away",
+          "notAtHaven",
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 6,
+        "marginal": {
+          "dead": 0,
+          "away": 6,
+          "trustLow": 0,
+          "notAtHaven": 6,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 2
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 86,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "hunt",
+        "holderProfile": "forager",
+        "rosterN": 11,
+        "livingN": 9,
+        "eligibleN": 1,
+        "empty": false,
+        "dominantMarginal": [
+          "away"
+        ],
+        "dominantMarginalN": 7,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 7,
+        "marginal": {
+          "dead": 0,
+          "away": 7,
+          "trustLow": 0,
+          "notAtHaven": 6,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 2
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 1,
+          "relaxNode": 1,
+          "relaxTrust": 1,
+          "relaxEngaged": 1,
+          "relaxOnExped": 1,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 1,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 93,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "hunt",
+        "holderProfile": "forager",
+        "rosterN": 11,
+        "livingN": 9,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "away",
+          "notAtHaven"
+        ],
+        "dominantMarginalN": 7,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 7,
+        "marginal": {
+          "dead": 0,
+          "away": 7,
+          "trustLow": 0,
+          "notAtHaven": 7,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 3
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 94,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "hunt",
+        "holderProfile": "forager",
+        "rosterN": 10,
+        "livingN": 8,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 5,
+        "marginal": {
+          "dead": 0,
+          "away": 5,
+          "trustLow": 0,
+          "notAtHaven": 5,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 1
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 95,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 9,
+        "livingN": 7,
+        "eligibleN": 1,
+        "empty": false,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 5,
+        "marginal": {
+          "dead": 0,
+          "away": 5,
+          "trustLow": 0,
+          "notAtHaven": 5,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 1,
+          "relaxNode": 1,
+          "relaxTrust": 1,
+          "relaxEngaged": 1,
+          "relaxOnExped": 1,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 99,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "hunt",
+        "holderProfile": "forager",
+        "rosterN": 9,
+        "livingN": 7,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 4,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 4,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 0,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 4,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 100,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "hunt",
+        "holderProfile": "forager",
+        "rosterN": 9,
+        "livingN": 7,
+        "eligibleN": 1,
+        "empty": false,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "notRanger",
+          "away"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 0,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 4,
+          "relaxAway": 1,
+          "relaxNode": 1,
+          "relaxTrust": 1,
+          "relaxEngaged": 1,
+          "relaxOnExped": 1,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 105,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 9,
+        "livingN": 7,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 5,
+        "marginal": {
+          "dead": 0,
+          "away": 5,
+          "trustLow": 0,
+          "notAtHaven": 5,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 108,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 4,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 4,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 0,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 4,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 110,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 5,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 5,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 5,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 5
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 113,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 4,
+        "marginal": {
+          "dead": 0,
+          "away": 4,
+          "trustLow": 0,
+          "notAtHaven": 4,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 115,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 5,
+        "marginal": {
+          "dead": 0,
+          "away": 5,
+          "trustLow": 0,
+          "notAtHaven": 5,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 116,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 4,
+        "marginal": {
+          "dead": 0,
+          "away": 4,
+          "trustLow": 0,
+          "notAtHaven": 4,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 120,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "notRanger",
+          "away"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 0,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 122,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "notRanger",
+          "away"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 0,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 123,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 5,
+        "marginal": {
+          "dead": 0,
+          "away": 5,
+          "trustLow": 0,
+          "notAtHaven": 5,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 128,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "notRanger",
+          "away"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 0,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 1,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 129,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "notRanger",
+          "away"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 0,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 130,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "notRanger",
+          "away"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 0,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 1,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 134,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 5,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 5,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 5,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 5
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 135,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 4,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 4,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 0,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 4,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 136,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 4,
+        "marginal": {
+          "dead": 0,
+          "away": 4,
+          "trustLow": 0,
+          "notAtHaven": 4,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 137,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 5,
+        "marginal": {
+          "dead": 0,
+          "away": 5,
+          "trustLow": 0,
+          "notAtHaven": 5,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103413,
+        "day": 138,
+        "vid": "devon_okafor",
+        "target": "eulogy",
+        "stage": "standing",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 4,
+        "marginal": {
+          "dead": 0,
+          "away": 4,
+          "trustLow": 0,
+          "notAtHaven": 4,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 98,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 4,
+        "marginal": {
+          "dead": 0,
+          "away": 4,
+          "trustLow": 1,
+          "notAtHaven": 4,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 99,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 7,
+        "livingN": 5,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 5,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 1,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 5,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 102,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 1,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 106,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 1,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 107,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 5,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 5,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 1,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 5,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 5
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 109,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 4,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 4,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 4,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 110,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 4,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 4,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 4,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 111,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 1,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 112,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 1,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 112,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 1,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 113,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 1,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 113,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 1,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 114,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 1,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 114,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 1,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 118,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 7,
+        "livingN": 5,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 5,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 4,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 4,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 1,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 5,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 4,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 121,
+        "vid": "visjoin_98",
+        "target": "influencer",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 122,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 122,
+        "vid": "visjoin_98",
+        "target": "influencer",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 123,
+        "vid": "visjoin_98",
+        "target": "influencer",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 1,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 125,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 1,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 126,
+        "vid": "visjoin_98",
+        "target": "influencer",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 127,
+        "vid": "visjoin_98",
+        "target": "influencer",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 1,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 128,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 128,
+        "vid": "visjoin_98",
+        "target": "influencer",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 1,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 129,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 129,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 1,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 130,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 130,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 6,
+        "livingN": 4,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 4,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 1,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 4,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 131,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 5,
+        "livingN": 3,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 3,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 3,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 131,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 5,
+        "livingN": 3,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 3,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 3,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 132,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 5,
+        "livingN": 3,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "away",
+          "notAtHaven",
+          "notRanger"
+        ],
+        "dominantMarginalN": 3,
+        "dominantAlone": [],
+        "dominantAloneN": 0,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 1,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 3,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 0,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 0
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 133,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 5,
+        "livingN": 3,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 3,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 1,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 3,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 133,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 5,
+        "livingN": 3,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 3,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 1,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 3,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 134,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 4,
+        "livingN": 2,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 2,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 1,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 2,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 135,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 4,
+        "livingN": 2,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 2,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 1,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 2,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 135,
+        "vid": "visjoin_98",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 4,
+        "livingN": 2,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 2,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 1,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 2,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103415,
+        "day": 136,
+        "vid": "sigrun_eiriksdottir",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 3,
+        "livingN": 1,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "away",
+          "trustLow",
+          "notAtHaven",
+          "notRanger"
+        ],
+        "dominantMarginalN": 1,
+        "dominantAlone": [],
+        "dominantAloneN": 0,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 1,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 1,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 0,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 0
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 44,
+        "vid": "sofia_chen",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 12,
+        "livingN": 10,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "away",
+          "notAtHaven"
+        ],
+        "dominantMarginalN": 8,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 8,
+        "marginal": {
+          "dead": 0,
+          "away": 8,
+          "trustLow": 0,
+          "notAtHaven": 8,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 4
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 45,
+        "vid": "sofia_chen",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 12,
+        "livingN": 10,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "away",
+          "notAtHaven"
+        ],
+        "dominantMarginalN": 7,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 7,
+        "marginal": {
+          "dead": 0,
+          "away": 7,
+          "trustLow": 0,
+          "notAtHaven": 7,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 4
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 46,
+        "vid": "sofia_chen",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 12,
+        "livingN": 10,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "away",
+          "notAtHaven"
+        ],
+        "dominantMarginalN": 8,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 8,
+        "marginal": {
+          "dead": 0,
+          "away": 8,
+          "trustLow": 0,
+          "notAtHaven": 8,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 4
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 47,
+        "vid": "sofia_chen",
+        "target": "eulogy",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 12,
+        "livingN": 10,
+        "eligibleN": 2,
+        "empty": false,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 5,
+        "marginal": {
+          "dead": 0,
+          "away": 5,
+          "trustLow": 0,
+          "notAtHaven": 4,
+          "engaged": 0,
+          "notRanger": 6,
+          "onExped": 2
+        },
+        "relaxElig": {
+          "relaxProfile": 5,
+          "relaxAway": 2,
+          "relaxNode": 2,
+          "relaxTrust": 2,
+          "relaxEngaged": 2,
+          "relaxOnExped": 2,
+          "relaxProfileAway": 6
+        },
+        "awayNodeDisagree": 1,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 55,
+        "vid": "sofia_chen",
+        "target": "eulogy",
+        "stage": "hunt",
+        "holderProfile": "forager",
+        "rosterN": 10,
+        "livingN": 8,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "away",
+          "notAtHaven",
+          "notRanger"
+        ],
+        "dominantMarginalN": 5,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 5,
+        "marginal": {
+          "dead": 0,
+          "away": 5,
+          "trustLow": 0,
+          "notAtHaven": 5,
+          "engaged": 0,
+          "notRanger": 5,
+          "onExped": 2
+        },
+        "relaxElig": {
+          "relaxProfile": 3,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 3
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 56,
+        "vid": "sofia_chen",
+        "target": "eulogy",
+        "stage": "hunt",
+        "holderProfile": "forager",
+        "rosterN": 10,
+        "livingN": 8,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "away",
+          "notAtHaven"
+        ],
+        "dominantMarginalN": 6,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 6,
+        "marginal": {
+          "dead": 0,
+          "away": 6,
+          "trustLow": 0,
+          "notAtHaven": 6,
+          "engaged": 0,
+          "notRanger": 5,
+          "onExped": 2
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 57,
+        "vid": "sofia_chen",
+        "target": "eulogy",
+        "stage": "hunt",
+        "holderProfile": "forager",
+        "rosterN": 10,
+        "livingN": 8,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 5,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 4,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 4,
+        "marginal": {
+          "dead": 0,
+          "away": 4,
+          "trustLow": 0,
+          "notAtHaven": 4,
+          "engaged": 0,
+          "notRanger": 5,
+          "onExped": 2
+        },
+        "relaxElig": {
+          "relaxProfile": 4,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 59,
+        "vid": "sofia_chen",
+        "target": "eulogy",
+        "stage": "hunt",
+        "holderProfile": "forager",
+        "rosterN": 9,
+        "livingN": 7,
+        "eligibleN": 1,
+        "empty": false,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 5,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 3,
+          "trustLow": 0,
+          "notAtHaven": 3,
+          "engaged": 0,
+          "notRanger": 5,
+          "onExped": 1
+        },
+        "relaxElig": {
+          "relaxProfile": 4,
+          "relaxAway": 1,
+          "relaxNode": 1,
+          "relaxTrust": 1,
+          "relaxEngaged": 1,
+          "relaxOnExped": 1,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 64,
+        "vid": "ethan_hunt",
+        "target": "algorithm",
+        "stage": "party",
+        "holderProfile": "explorer",
+        "rosterN": 8,
+        "livingN": 6,
+        "eligibleN": 1,
+        "empty": false,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 5,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 3,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 3,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 0,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 5,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 4,
+          "relaxAway": 1,
+          "relaxNode": 1,
+          "relaxTrust": 1,
+          "relaxEngaged": 1,
+          "relaxOnExped": 1,
+          "relaxProfileAway": 4
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 91,
+        "vid": "david_kim",
+        "target": "editor",
+        "stage": "party",
+        "holderProfile": "homebody",
+        "rosterN": 5,
+        "livingN": 3,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 3,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 3,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 107,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 4,
+        "livingN": 2,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 2,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 2,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 111,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 4,
+        "livingN": 2,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 2,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 2,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 112,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 4,
+        "livingN": 2,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 2,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 2,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 113,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 4,
+        "livingN": 2,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 2,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 2,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 114,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 4,
+        "livingN": 2,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 2,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 2,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 115,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 4,
+        "livingN": 2,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 2,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 2,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 116,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 4,
+        "livingN": 2,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 2,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 2,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 117,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 4,
+        "livingN": 2,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 2,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 2,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 118,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 5,
+        "livingN": 3,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 3,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 3,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 119,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 5,
+        "livingN": 3,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 3,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 3,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 120,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 5,
+        "livingN": 3,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 3,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 3,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 124,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 5,
+        "livingN": 3,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 3,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 2,
+          "trustLow": 0,
+          "notAtHaven": 2,
+          "engaged": 0,
+          "notRanger": 3,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 125,
+        "vid": "visjoin_99",
+        "target": "herald",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 4,
+        "livingN": 2,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 2,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 1,
+        "dominantFirstFail": [
+          "away",
+          "notRanger"
+        ],
+        "dominantFirstFailN": 1,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 2,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 1,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 1
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 147,
+        "vid": "visjoin_137",
+        "target": "suburb",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 5,
+        "livingN": 3,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 3,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 3,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      },
+      {
+        "seed": 103416,
+        "day": 148,
+        "vid": "visjoin_137",
+        "target": "suburb",
+        "stage": "party",
+        "holderProfile": "forager",
+        "rosterN": 5,
+        "livingN": 3,
+        "eligibleN": 0,
+        "empty": true,
+        "dominantMarginal": [
+          "notRanger"
+        ],
+        "dominantMarginalN": 3,
+        "dominantAlone": [
+          "notRanger"
+        ],
+        "dominantAloneN": 2,
+        "dominantFirstFail": [
+          "notRanger"
+        ],
+        "dominantFirstFailN": 2,
+        "marginal": {
+          "dead": 0,
+          "away": 1,
+          "trustLow": 0,
+          "notAtHaven": 1,
+          "engaged": 0,
+          "notRanger": 3,
+          "onExped": 0
+        },
+        "relaxElig": {
+          "relaxProfile": 2,
+          "relaxAway": 0,
+          "relaxNode": 0,
+          "relaxTrust": 0,
+          "relaxEngaged": 0,
+          "relaxOnExped": 0,
+          "relaxProfileAway": 2
+        },
+        "awayNodeDisagree": 0,
+        "nodeAwayDisagree": 0
+      }
+    ]
+  },
+  "topReason": "notRanger",
+  "topReasonEmptyDawns": 75,
+  "topReasonEmptyShare": 0.9259,
+  "wall": {
+    "vre": {
+      "wins": 0,
+      "nationalStanding": 1,
+      "nationalRank": 0,
+      "table": 0,
+      "wave4": 8,
+      "wave5": 1,
+      "medianSurvival": 147.5,
+      "deaths": 517,
+      "starvation": 5
+    },
+    "off": {
+      "wins": 0,
+      "nationalStanding": 1,
+      "nationalRank": 0,
+      "table": 0,
+      "wave4": 7,
+      "wave5": 1,
+      "medianSurvival": 151,
+      "deaths": 460,
+      "starvation": 3
+    },
+    "rec": {
+      "wins": 0,
+      "nationalStanding": 1,
+      "nationalRank": 0,
+      "table": 0,
+      "wave4": 8,
+      "wave5": 1,
+      "medianSurvival": 147.5,
+      "deaths": 517,
+      "starvation": 5
+    },
+    "rec0": {
+      "wins": 0,
+      "nationalStanding": 1,
+      "nationalRank": 0,
+      "table": 0,
+      "wave4": 7,
+      "wave5": 1,
+      "medianSurvival": 151,
+      "deaths": 460,
+      "starvation": 3
+    }
+  },
+  "d2VreVsRec": {
+    "divergences": 0,
+    "seeds": []
+  },
+  "d2OffVsRec0": {
+    "divergences": 0,
+    "seeds": []
+  },
+  "instrumentErrors": {
+    "vre": 0,
+    "off": 0,
+    "rec": 0,
+    "rec0": 0
+  },
+  "bars": {
+    "classification": {
+      "pass": true,
+      "codedShare": 1,
+      "unknown": 0,
+      "shapeBad": 0
+    },
+    "corpusReplication": {
+      "pass": true,
+      "vreFiles": 8,
+      "poolRows": 87,
+      "emptyRows": 81,
+      "rowsMatch": true
+    },
+    "decomposition": {
+      "pass": true,
+      "topReason": "notRanger",
+      "relaxKeys": [
+        "relaxProfile",
+        "relaxAway",
+        "relaxNode",
+        "relaxTrust",
+        "relaxEngaged",
+        "relaxOnExped",
+        "relaxProfileAway"
+      ]
+    },
+    "instrument": {
+      "pass": true,
+      "vreFiles": 8,
+      "offFiles": 8,
+      "recFiles": 8,
+      "rec0Files": 8,
+      "vreErrors": 0,
+      "offErrors": 0,
+      "recErrors": 0,
+      "rec0Errors": 0,
+      "d2VreVsRec": 0,
+      "d2OffVsRec0": 0
+    }
+  },
+  "verdict": "DIAG-GO"
+}
