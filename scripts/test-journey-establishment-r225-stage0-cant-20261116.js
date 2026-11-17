@@ -17,6 +17,23 @@
 // harm is narrower — the stage-3 close with a 'deflected' resolution, no
 // memory write — but the ask is still recorded as refused unheard.)
 // A surfaced (stage-1) want still deflects on the same press (positive control).
+// R231 OVERTURN (2026-11-17, panel evidence): the C section below ORIGINALLY
+// expected dlg:help on a stage-0 want with a settled ledger favor to answer
+// "It's already handled" and leave the want alone. That expectation is
+// overturned. The r230 fix made dlg:help the surfacing verb for a deferred
+// ask (menu offers it, pressing it states the ask, stage 0 -> 2) — but the
+// r231 panel proved the handler's settled-favor short-circuit nullifies
+// that fix in the common case: 10 of 13 residual favorless sits pressed
+// dlg:help into the settled branch while a LIVE need waited unvoiced
+// (including a u4 heal_help). A villager with a live need must not answer
+// "it's handled" about a dead favor when asked how to help. Help now
+// ENGAGES the deferred ask (states it, stage 0 -> 2, favor attached) even
+// with a settled ledger favor; the settled answer survives only when the
+// want's OWN favor is settled (r7 shape) or no live need exists (r231
+// proof test, sections E/F). The r225 spirit is preserved: help ENGAGES
+// (states) the want — it never resolves it as refused unheard — and
+// cant/deflect_q on a still-stage-0 want still leave it alone (D/E below,
+// re-staged so C's engage does not contaminate them).
 // Run: node scripts/test-journey-establishment-r225-stage0-cant-20261116.js
 'use strict';
 
@@ -74,17 +91,10 @@ function seedState(Game, vid, def) {
     (cB.want.stage || 0) === 0 && !cB.want.favor && !!(Game.convoFindFavorNeed(vid) || {}).kind,
     'stage=' + cB.want.stage + ' favor=' + JSON.stringify(cB.want.favor));
 
-  // --- (C) dlg:help on the settled favor: "It's already handled" -----------
-  const help = Game.convoTurn(vid, 'dlg:help');
-  const cC = Game.convoGet(vid);
-  check('C help on settled favor leaves the stage-0 want alone',
-    (cC.want.stage || 0) === 0,
-    'stage=' + cC.want.stage + ' line=' + (help && help.line));
-  check('C2 help speaks the settled-favor line',
-    !!(help && help.line && /already handled/i.test(help.line)),
-    'line=' + (help && help.line));
-
   // --- (D) dlg:cant on the unvoiced want: the defect ----------------------
+  // Runs FIRST on B's staged state: C below now ENGAGES the want, so D
+  // must precede it (a cant after an engage deflects a LIVE want — the
+  // F2 behavior — not the stage-0 guard this section proves).
   const memBeforeD = ((v.memory || {})[vid] || []).filter(m => (m.t || m.type) === 'deflected').length;
   Game.convoTurn(vid, 'dlg:cant');
   const wD = Game.convoGet(vid).want;
@@ -114,6 +124,31 @@ function seedState(Game, vid, def) {
   const memAfterE = ((v.memory || {})[vid] || []).filter(m => (m.t || m.type) === 'deflected').length;
   check('E3 deflect_q on a stage-0 want writes no false deflected memory',
     memAfterE === memBeforeE, 'deflected-memories before=' + memBeforeE + ' after=' + memAfterE);
+  Game.endConvo(vid, 'done');
+
+  // --- (C) dlg:help on the deferred ask: it SURFACES it (r231 overturn) ----
+  // Re-staged fresh (B's state was spent by D/E): stage-0 ask_favor, no
+  // favor, live sick need, settled forage_help favor in the ledger. Help
+  // must state the live ask — stage 0 -> 2, favor attached with the need
+  // kind — not answer "already handled" about the dead favor.
+  Game.startConvo(vid);
+  seedState(Game, vid, def);
+  const cC0 = Game.convoGet(vid);
+  check('C0 deferred-ask state re-staged (stage 0, no favor, live need, settled ledger)',
+    (cC0.want.stage || 0) === 0 && !cC0.want.favor && !!(Game.convoFindFavorNeed(vid) || {}).kind &&
+    Game.convoGetFavor(vid) && Game.convoGetFavor(vid).state === 'acknowledged',
+    'stage=' + cC0.want.stage + ' ledger=' + JSON.stringify(Game.convoGetFavor(vid)));
+  const help = Game.convoTurn(vid, 'dlg:help');
+  const cC = Game.convoGet(vid);
+  check('C help on a deferred ask states the live need (not "already handled")',
+    !!(help && help.line && /feverish|wound fever|help me/i.test(help.line)) && !/already handled/i.test(help.line || ''),
+    'line=' + (help && help.line));
+  check('C2 help moves the deferred ask stage 0 -> 2',
+    (cC.want.stage || 0) === 2,
+    'stage=' + cC.want.stage + ' line=' + (help && help.line));
+  check('C3 help attaches the favor with the need kind',
+    !!(cC.want.favor && cC.want.favor.kind === 'sick_help'),
+    'favor=' + JSON.stringify(cC.want.favor && cC.want.favor.kind));
   Game.endConvo(vid, 'done');
 
   // --- (F) POSITIVE CONTROL: a surfaced want still deflects ----------------

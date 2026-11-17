@@ -750,13 +750,21 @@
         // (The old pool re-stated the ask — the verbatim-repeat vector.)
         const c = this.convoGet(vid);
         const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
-        // DEFERRED AFTER RESUME (dialog audit #1 2026-11-08): a resume opener
-        // can claim unfinished debt/favor while this sitting never pinned a
-        // favor (the ask was preempted). The ledger may still hold an old
-        // settled favor — answering "it's handled" contradicts the opener
-        // (seed 7 Nolan). Skip the settled short-circuit and state the
-        // deferred ask below.
-        const deferredAfterResume = !!(c && c._resumedOnce && !(c.want && c.want.favor) &&
+        // DEFERRED AFTER RESUME (dialog audit #1 2026-11-08), BROADENED
+        // journey-establishment r231: a resume opener can claim unfinished
+        // debt/favor while this sitting never pinned a favor (the ask was
+        // preempted). The ledger may still hold an old settled favor —
+        // answering "it's handled" contradicts the opener (seed 7 Nolan).
+        // Skip the settled short-circuit and state the deferred ask below.
+        // The pre-emptor need not be a resume opener: a secret/trade/
+        // recall thread can pre-empt the opening the same way (r231 panel:
+        // 4 of 13 residual favorless sits have resumedOnce false), and the
+        // ask is deferred whenever the want never got its favor and is
+        // still at stage 0. The picker only selects ask_favor on a live
+        // need, so a stage-0 favorless ask_favor want always has a live
+        // ask to state; if the opener cannot build one, the NO HOLLOW
+        // FALLBACK below answers honestly.
+        const deferredAfterResume = !!(c && !(c.want && c.want.favor) &&
           ((c.want && c.want.stage) || 0) < 1);
         // SETTLED FAVOR (journey establishment r7 2026-10-12): the opener can
         // declare the favor settled mid-conversation — "Never mind the wound,

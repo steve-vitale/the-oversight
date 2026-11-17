@@ -528,7 +528,22 @@
         c.transcript.push({ who: 'you', text: '"How can I help?"' });
         const settledFavor = c.want?.id === 'ask_favor' &&
           (c.want.favor || this.convoGetFavor(vid));
-        if (settledFavor && ['moot','fulfilled','thanked','broken','acknowledged','declined'].includes(settledFavor.state)) {
+        // DEFERRED-ASK GUARD (journey-establishment r231): the settled
+        // answer is honest only when the settled favor IS the thing being
+        // asked about. When the want never got its favor (the opener was
+        // pre-empted, stage 0) and a LIVE need exists, the player is
+        // asking about the live need, not the dead favor — answering
+        // "it's handled" buries the live ask (panel: 10 of 13 residual
+        // favorless sits pressed dlg:help into this branch, every one
+        // carrying a settled ledger favor while the want had none). Fall
+        // through to engageBeat, whose deferred branch states the ask.
+        // The guard needs the live-need read (the need can die between
+        // menu and press); without one, the settled answer still fires.
+        let deferredLiveNeed = null;
+        try { deferredLiveNeed = (typeof this.convoFindFavorNeed === 'function') ? this.convoFindFavorNeed(vid) : null; } catch (e) { deferredLiveNeed = null; }
+        const deferredAsk = c.want?.id === 'ask_favor' && !(c.want && c.want.favor) &&
+          ((c.want && c.want.stage) || 0) < 1 && !!deferredLiveNeed;
+        if (!deferredAsk && settledFavor && ['moot','fulfilled','thanked','broken','acknowledged','declined'].includes(settledFavor.state)) {
           const line = '"It\'s already handled. Thank you for asking."';
           this.sayLine(vid, line, { structural: true });
           // HELP SPEND-OUT (journey-social r35 2026-10-20): a settled favor's
