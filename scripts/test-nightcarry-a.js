@@ -24,6 +24,24 @@
 //   NIGHTCARRY_PROBE=off node scripts/test-nightcarry-a.js     (probe child: control)
 //   NIGHTCARRY_PROBE=bound node scripts/test-nightcarry-a.js   (probe child: companion away)
 //   NIGHTCARRY_PROBE=hunt node scripts/test-nightcarry-a.js    (probe child: hunt-stage plan)
+//
+// MODE-AWARE (sim-proofadapt-a, post-revert): the lever was reverted on
+// landing (INCOMPLETE/unjudged, Loop A fleshout-20261117T0215Z), so on a
+// reverted tree this proof runs its OFF-MODE legs; on a tip where the
+// lever is re-applied (the resume round re-applies it from 00fb5745a)
+// it runs the original lever legs verbatim. The mode is detected at
+// runtime from the source (LEVER_PRESENT below), never from an env
+// flag. LEG MAPPING — lever-present: the 6 static lever checks + the 4
+// armed probe legs + the live driver run + D1/D2 as written (65
+// total). Off-mode counterparts: static lever checks assert the lever
+// strings are ABSENT from villager-brain.js (6); the scripts-diff
+// check allows only the two proofadapt test files (1); the armed probe
+// asserts control behavior (fresh FORAGE pick, no carry, no departure,
+// no carried line) and agrees with the OFF probe (4); the live driver
+// run asserts zero carries + zero carried lines (2 extra); D1 asserts
+// zero carries (1 extra). The classifier fixtures (6), the OFF/BOUND/
+// HUNT probe legs, the anchors and the driver checks run identically
+// in both modes (68 total off-mode).
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -212,12 +230,28 @@ if (PROBE_MODE) {
 // ---------- 1. Static ----------
 console.log('== static ==');
 const brainJs = fs.readFileSync(path.join(REPO, 'src', 'js', 'villager-brain.js'), 'utf8');
-check('NIGHTCARRY gate present (nightcarryOn + env check)', brainJs.indexOf('function nightcarryOn') !== -1 && brainJs.indexOf("process.env.NIGHTCARRY === '1'") !== -1);
-check('carry hook present in vbrainScorePick (night_carry override)', brainJs.indexOf("override: 'night_carry'") !== -1 && brainJs.indexOf('carriedFrom') !== -1);
-check('carried departure line present (yesterday\'s plan)', brainJs.indexOf("yesterday\\'s plan") !== -1);
-check('writeCommit persists carried fields', brainJs.indexOf('carried: !!chosen.carried') !== -1);
-check('carry is one-night-only (never carry a carried commit)', brainJs.indexOf('!_nc0.carried') !== -1);
-check('carry is party-stage-only', brainJs.indexOf("_ncPlan.stage === 'party'") !== -1);
+// MODE DETECTION: the lever is present iff the nightcarryOn gate is
+// defined in villager-brain.js. On a reverted tree this is false and
+// the off-mode legs below run instead of the lever legs.
+const LEVER_PRESENT = brainJs.indexOf('function nightcarryOn') !== -1;
+console.log('mode: ' + (LEVER_PRESENT ? 'LEVER-PRESENT (armed legs)' : 'OFF-MODE (reverted lever)'));
+if (LEVER_PRESENT) {
+  check('NIGHTCARRY gate present (nightcarryOn + env check)', brainJs.indexOf('function nightcarryOn') !== -1 && brainJs.indexOf("process.env.NIGHTCARRY === '1'") !== -1);
+  check('carry hook present in vbrainScorePick (night_carry override)', brainJs.indexOf("override: 'night_carry'") !== -1 && brainJs.indexOf('carriedFrom') !== -1);
+  check('carried departure line present (yesterday\'s plan)', brainJs.indexOf("yesterday\\'s plan") !== -1);
+  check('writeCommit persists carried fields', brainJs.indexOf('carried: !!chosen.carried') !== -1);
+  check('carry is one-night-only (never carry a carried commit)', brainJs.indexOf('!_nc0.carried') !== -1);
+  check('carry is party-stage-only', brainJs.indexOf("_ncPlan.stage === 'party'") !== -1);
+} else {
+  // OFF MODE: every lever string is absent from villager-brain.js —
+  // the revert removed the gate, the hook, the line and the fields.
+  check('off: NIGHTCARRY gate absent (no nightcarryOn, no env read)', brainJs.indexOf('function nightcarryOn') === -1 && brainJs.indexOf("process.env.NIGHTCARRY === '1'") === -1);
+  check('off: no carry hook in vbrainScorePick (no night_carry override, no carriedFrom)', brainJs.indexOf("override: 'night_carry'") === -1 && brainJs.indexOf('carriedFrom') === -1);
+  check('off: no carried departure line (yesterday\'s plan)', brainJs.indexOf("yesterday\\'s plan") === -1);
+  check('off: writeCommit persists no carried fields', brainJs.indexOf('carried: !!chosen.carried') === -1);
+  check('off: no one-night-only guard (never carry a carried commit)', brainJs.indexOf('!_nc0.carried') === -1);
+  check('off: no party-stage-only carry gate', brainJs.indexOf("_ncPlan.stage === 'party'") === -1);
+}
 const agencyJs = fs.readFileSync(path.join(REPO, 'src', 'js', 'villager-agency.js'), 'utf8');
 check('profile-gate bypass untouched (launchdef text intact)',
   agencyJs.indexOf('PROFILEGATE (sim-profilegate-a)') !== -1 &&
@@ -237,7 +271,15 @@ const srcOk = srcStatus.every(function (s) { return /src\/js\/villager-brain\.js
 check('game-code worktree diff is villager-brain.js only (src status: ' + JSON.stringify(srcStatus) + ')', srcOk);
 const scriptsStatus = gitStatus('scripts').split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
 const scriptsOk = scriptsStatus.every(function (s) { return /scripts\/[a-z-]*nightcarry-[a-z0-9.-]+\.js$/.test(s); });
-check('scripts worktree diff is nightcarry-* files only (' + JSON.stringify(scriptsStatus) + ')', scriptsOk);
+if (LEVER_PRESENT) {
+  check('scripts worktree diff is nightcarry-* files only (' + JSON.stringify(scriptsStatus) + ')', scriptsOk);
+} else {
+  // OFF MODE: the proofadapt branch touches both adapted proof tests
+  // and nothing else in scripts/ (the arm's driver/analyzer/panel
+  // files are already committed, so they are not in the status).
+  const scriptsOkOff = scriptsStatus.every(function (s) { return /scripts\/(test-nightcarry-a|test-rumortarget-a)\.js$/.test(s); });
+  check('off: scripts worktree diff is the two proofadapt test files only (' + JSON.stringify(scriptsStatus) + ')', scriptsOkOff);
+}
 const driverSrc = fs.readFileSync(path.join(REPO, 'scripts', 'nightcarry-driver-20261117.js'), 'utf8');
 for (const w of ['vbrainScorePick', 'vbrainExecuteDepart', 'winPlanSeedFromFight', 'startExpedition', 'agencyTick', 'installSkipRecorder', 'dawnbidScores', 'dawnbidDeparts', 'dawnbidCensus', 'dawnbidStarts', 'nightcarrySkips', 'nightcarryCarries', 'commitKindOf', 'competent']) {
   check('driver wraps/defines ' + w, driverSrc.indexOf(w) !== -1);
@@ -315,20 +357,35 @@ check('probe fixtures agree across modes (same holder, companion, commit day)',
 check('night tick: no launch in EITHER leg (commit dies at night in both)',
   armed.nightLaunched === false && off.nightLaunched === false,
   JSON.stringify({ armed: armed.nightLaunched, off: off.nightLaunched }));
-// ARMED: the carry.
-check('armed dawn: the SAME commit is re-issued (carried, same companion, carriedFrom=yesterday)',
-  armed.commitDawn && armed.commitDawn.carried === true && armed.commitDawn.companion === armed.companion &&
-  armed.commitDawn.carriedFrom === armed.day0 && armed.commitDawn.carriedFromPart === 2 &&
-  armed.commitDawn.winPlanAction === 'party_launch',
-  JSON.stringify(armed.commitDawn));
-check('armed dawn: the pick is the carried EXPEDITION, not the fresh FORAGE (no re-roll)',
-  armed.dawnPickKind === 'EXPEDITION' && armed.lastLogMode === 'carry' && armed.lastLogOverride === 'night_carry',
-  JSON.stringify({ pick: armed.dawnPickKind, mode: armed.lastLogMode, override: armed.lastLogOverride }));
-check('armed launch: BOTH expeditions started, plan at hunt',
-  armed.launchHolderExped === true && armed.launchCompanionExped === true && armed.planStageAfter === 'hunt',
-  JSON.stringify({ h: armed.launchHolderExped, c: armed.launchCompanionExped, stage: armed.planStageAfter }));
-check('armed launch: the carried departure line reads as yesterday\'s plan',
-  armed.carriedLine === true, JSON.stringify(armed.carriedLines));
+// ARMED: the carry — or, off-mode, the control behavior: with the
+// lever reverted, NIGHTCARRY=1 cannot conjure a carry, so the armed
+// probe must read exactly like the OFF probe.
+if (LEVER_PRESENT) {
+  check('armed dawn: the SAME commit is re-issued (carried, same companion, carriedFrom=yesterday)',
+    armed.commitDawn && armed.commitDawn.carried === true && armed.commitDawn.companion === armed.companion &&
+    armed.commitDawn.carriedFrom === armed.day0 && armed.commitDawn.carriedFromPart === 2 &&
+    armed.commitDawn.winPlanAction === 'party_launch',
+    JSON.stringify(armed.commitDawn));
+  check('armed dawn: the pick is the carried EXPEDITION, not the fresh FORAGE (no re-roll)',
+    armed.dawnPickKind === 'EXPEDITION' && armed.lastLogMode === 'carry' && armed.lastLogOverride === 'night_carry',
+    JSON.stringify({ pick: armed.dawnPickKind, mode: armed.lastLogMode, override: armed.lastLogOverride }));
+  check('armed launch: BOTH expeditions started, plan at hunt',
+    armed.launchHolderExped === true && armed.launchCompanionExped === true && armed.planStageAfter === 'hunt',
+    JSON.stringify({ h: armed.launchHolderExped, c: armed.launchCompanionExped, stage: armed.planStageAfter }));
+  check('armed launch: the carried departure line reads as yesterday\'s plan',
+    armed.carriedLine === true, JSON.stringify(armed.carriedLines));
+} else {
+  check('off armed dawn: NO carry — a fresh FORAGE pick overwrites the dead commit, as in control',
+    armed.commitDawn && armed.commitDawn.carried !== true && armed.dawnPickKind === 'FORAGE' && armed.lastLogMode !== 'carry',
+    JSON.stringify({ pick: armed.dawnPickKind, mode: armed.lastLogMode, commit: armed.commitDawn }));
+  check('off armed launch: no departure at the daytime tick (the commit died at night, as in control)',
+    armed.launchHolderExped === false && armed.launchCompanionExped === false,
+    JSON.stringify({ h: armed.launchHolderExped, c: armed.launchCompanionExped }));
+  check('off armed launch: no carried departure line', armed.carriedLine === false);
+  check('off armed probe agrees with the OFF probe (same dawn pick + commit shape)',
+    armed.dawnPickKind === off.dawnPickKind && JSON.stringify(armed.commitDawn) === JSON.stringify(off.commitDawn),
+    JSON.stringify({ armed: armed.commitDawn, off: off.commitDawn }));
+}
 // OFF: old-code-fails control — the SAME probe, the commit dies.
 check('OFF dawn: NO carry — a fresh FORAGE pick overwrites the dead commit',
   off.commitDawn && off.commitDawn.carried !== true && off.dawnPickKind === 'FORAGE' && off.lastLogMode !== 'carry',
@@ -370,6 +427,13 @@ async function liveRuns() {
   check('score rows have their shape', !badScore, badScore ? JSON.stringify(badScore).slice(0, 200) : '');
   const badDepart = (out.dawnbidDeparts || []).find(function (r) { return !(r && typeof r.day === 'number' && r.vid && ('vidExped' in r) && ('companionExped' in r) && ('carried' in r)); });
   check('depart rows have their shape + carried flag', !badDepart, badDepart ? JSON.stringify(badDepart).slice(0, 200) : '');
+  if (!LEVER_PRESENT) {
+    // OFF MODE: the control leg can record no carry without the lever.
+    check('off live run: nightcarryCarries is empty (no carry without the lever)', (out.nightcarryCarries || []).length === 0,
+      'carries=' + (out.nightcarryCarries || []).length);
+    check('off live run: carriedSays is empty (no carried departure line without the lever)', (out.carriedSays || []).length === 0,
+      'says=' + (out.carriedSays || []).length);
+  }
   return out;
 }
 
@@ -391,6 +455,10 @@ async function determinism() {
   const b = childFingerprint({});
   check('D1 repeatability: identical full corpus, recorder ON twice (30d)',
     JSON.stringify(a.full) === JSON.stringify(b.full));
+  if (!LEVER_PRESENT) {
+    check('off D1 run: nightcarryCarries is empty (recorder on, lever absent)', (a.full.nightcarryCarries || []).length === 0,
+      'carries=' + (a.full.nightcarryCarries || []).length);
+  }
   const off = childFingerprint({ NIGHTCARRY_RECORDER: 'off' });
   check('D2 wrap neutrality: identical trajectories, recorder ON vs OFF (30d)',
     JSON.stringify(a.fp) === JSON.stringify(off.fp),

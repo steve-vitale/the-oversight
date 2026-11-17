@@ -17,6 +17,25 @@
 // RUMORTARGET=1, LEG=competent.
 // Usage:
 //   node scripts/test-rumortarget-a.js
+//
+// MODE-AWARE (sim-proofadapt-a, post-revert): the lever was reverted on
+// landing (PILOT NO-GO, Loop A fleshout-20261117T0215Z), so on a reverted
+// tree this proof runs its OFF-MODE legs; on a tip where the lever is
+// re-applied it runs the original lever legs verbatim. The mode is
+// detected at runtime from the source (LEVER_PRESENT below), never from
+// an env flag. LEG MAPPING — lever-present: all 12 static lever checks
+// + the 15 attach-fixture legs + the 7 HavenTick legs + D1/D2 as
+// written (67 total). Off-mode counterparts: static lever checks
+// assert the lever strings are ABSENT from win-plan.js (12); the
+// src-diff check asserts an empty src diff (1); the scripts-diff
+// check allows only the two proofadapt test files (1); the attach
+// fixtures assert the method is absent and a fresh told wave-4 tale
+// leaves a plan untouched (5); the HavenTick probe asserts a plan is
+// born target-null with no origin stamp and no attach voice line even
+// with RUMORTARGET=1 (5); D1 asserts the single expected absent-wrap
+// instrument error and zero attach rows (2 extra). The analyzer
+// fixtures (4) and the driver/panel/anchor checks run identically in
+// both modes (56 total off-mode).
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -38,44 +57,90 @@ function gitOut(args) {
 
 // ---------- 1. Static ----------
 console.log('== static ==');
+const winPlanJs = fs.readFileSync(path.join(REPO, 'src', 'js', 'win-plan.js'), 'utf8');
+// MODE DETECTION: the lever is present iff the attach method is
+// defined in win-plan.js. On a reverted tree this is false and the
+// off-mode legs below run instead of the lever legs.
+const LEVER_PRESENT = winPlanJs.indexOf('winPlanRumorAttach(vid, atCreation)') !== -1;
+console.log('mode: ' + (LEVER_PRESENT ? 'LEVER-PRESENT (armed legs)' : 'OFF-MODE (reverted lever)'));
 // The src diff on this branch is the lever, and only the lever:
 // win-plan.js (the attach method + HavenTick wiring + origin stamp).
+// Off-mode counterpart: the src diff is empty — the lever is gone.
 const srcDiffFiles = gitOut('diff master...HEAD --name-only -- src/').split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
-check('src diff on this branch is win-plan.js only', JSON.stringify(srcDiffFiles) === JSON.stringify(['src/js/win-plan.js']), JSON.stringify(srcDiffFiles));
+if (LEVER_PRESENT) {
+  check('src diff on this branch is win-plan.js only', JSON.stringify(srcDiffFiles) === JSON.stringify(['src/js/win-plan.js']), JSON.stringify(srcDiffFiles));
+} else {
+  check('off: src diff is empty (lever fully reverted)', srcDiffFiles.length === 0, JSON.stringify(srcDiffFiles));
+}
 const scriptsStatus = gitOut('status --porcelain -- scripts/').split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
 const scriptsOk = scriptsStatus.every(function (s) {
   return /scripts\/(rumortarget-driver-20261117|analyze-rumortarget-a|test-rumortarget-a|build-rumortarget-panels-20261117)\.js$/.test(s);
 });
-check('scripts worktree diff is rumortarget-* files only (' + JSON.stringify(scriptsStatus) + ')', scriptsOk);
-const winPlanJs = fs.readFileSync(path.join(REPO, 'src', 'js', 'win-plan.js'), 'utf8');
-check('lever: winPlanRumorAttach exists', winPlanJs.indexOf('winPlanRumorAttach(vid, atCreation)') !== -1);
-check('lever: env gate reads RUMORTARGET=1, default OFF',
-  winPlanJs.indexOf("process.env.RUMORTARGET === '1'") !== -1);
-check('lever: third target-write site is the tale attach (plan.target = best.mid)',
-  winPlanJs.indexOf('plan.target = best.mid') !== -1);
-check('lever: attach mirrors the seed (plan.needWave = best.wave)',
-  winPlanJs.indexOf('plan.needWave = best.wave') !== -1);
-check('lever: provenance stamps (targetSource/targetTeller/targetTaleDay)',
-  winPlanJs.indexOf("plan.targetSource = 'tale'") !== -1 &&
-  winPlanJs.indexOf('plan.targetTeller = best.teller') !== -1 &&
-  winPlanJs.indexOf('plan.targetTaleDay = best.taleDay') !== -1);
-check('lever: origin stamp at creation (heard vs fought)',
-  winPlanJs.indexOf("origin: foughtEngaged ? 'fought' : 'heard'") !== -1);
-check('lever: creation + refresh call sites in winPlanHavenTick',
-  winPlanJs.indexOf('this.winPlanRumorAttach(vid, true)') !== -1 &&
-  winPlanJs.indexOf('this.winPlanRumorAttach(vid, false)') !== -1);
-check('lever: freshness window is 30 days (prereg choice, named)',
-  winPlanJs.indexOf('RUMOR_TALE_FRESH_DAYS = 30') !== -1);
-check('lever: played-only tales (untold/moot excluded)',
-  winPlanJs.indexOf("if (!t.played) { entry.reason = 'untold'") !== -1);
-check('lever: teller-alive gate (roster + not fallen)',
-  winPlanJs.indexOf("entry.reason = 'teller-dead'") !== -1);
-check('lever: voice line names the heard beast (monsterDisplayName + firstRef)',
-  winPlanJs.indexOf('this.monsterDisplayName(best.mid)') !== -1 &&
-  winPlanJs.indexOf('this.firstRef(best.teller)') !== -1);
-check('lever: ontology header lists winPlanRumorAttach + the rumor-target rule',
-  winPlanJs.indexOf('winPlanRumorAttach(vid, atCreation)') !== -1 &&
-  winPlanJs.indexOf('winplan_rumor_target') !== -1);
+if (LEVER_PRESENT) {
+  check('scripts worktree diff is rumortarget-* files only (' + JSON.stringify(scriptsStatus) + ')', scriptsOk);
+} else {
+  // OFF MODE: the proofadapt branch touches both adapted proof tests
+  // and nothing else in scripts/ (the arm's driver/analyzer/panel
+  // files are already committed, so they are not in the status).
+  const scriptsOkOff = scriptsStatus.every(function (s) {
+    return /scripts\/(test-rumortarget-a|test-nightcarry-a)\.js$/.test(s);
+  });
+  check('off: scripts worktree diff is the two proofadapt test files only (' + JSON.stringify(scriptsStatus) + ')', scriptsOkOff);
+}
+if (LEVER_PRESENT) {
+  check('lever: winPlanRumorAttach exists', winPlanJs.indexOf('winPlanRumorAttach(vid, atCreation)') !== -1);
+  check('lever: env gate reads RUMORTARGET=1, default OFF',
+    winPlanJs.indexOf("process.env.RUMORTARGET === '1'") !== -1);
+  check('lever: third target-write site is the tale attach (plan.target = best.mid)',
+    winPlanJs.indexOf('plan.target = best.mid') !== -1);
+  check('lever: attach mirrors the seed (plan.needWave = best.wave)',
+    winPlanJs.indexOf('plan.needWave = best.wave') !== -1);
+  check('lever: provenance stamps (targetSource/targetTeller/targetTaleDay)',
+    winPlanJs.indexOf("plan.targetSource = 'tale'") !== -1 &&
+    winPlanJs.indexOf('plan.targetTeller = best.teller') !== -1 &&
+    winPlanJs.indexOf('plan.targetTaleDay = best.taleDay') !== -1);
+  check('lever: origin stamp at creation (heard vs fought)',
+    winPlanJs.indexOf("origin: foughtEngaged ? 'fought' : 'heard'") !== -1);
+  check('lever: creation + refresh call sites in winPlanHavenTick',
+    winPlanJs.indexOf('this.winPlanRumorAttach(vid, true)') !== -1 &&
+    winPlanJs.indexOf('this.winPlanRumorAttach(vid, false)') !== -1);
+  check('lever: freshness window is 30 days (prereg choice, named)',
+    winPlanJs.indexOf('RUMOR_TALE_FRESH_DAYS = 30') !== -1);
+  check('lever: played-only tales (untold/moot excluded)',
+    winPlanJs.indexOf("if (!t.played) { entry.reason = 'untold'") !== -1);
+  check('lever: teller-alive gate (roster + not fallen)',
+    winPlanJs.indexOf("entry.reason = 'teller-dead'") !== -1);
+  check('lever: voice line names the heard beast (monsterDisplayName + firstRef)',
+    winPlanJs.indexOf('this.monsterDisplayName(best.mid)') !== -1 &&
+    winPlanJs.indexOf('this.firstRef(best.teller)') !== -1);
+  check('lever: ontology header lists winPlanRumorAttach + the rumor-target rule',
+    winPlanJs.indexOf('winPlanRumorAttach(vid, atCreation)') !== -1 &&
+    winPlanJs.indexOf('winplan_rumor_target') !== -1);
+} else {
+  // OFF MODE: every lever string is absent from win-plan.js — the
+  // revert removed the method, the gate, the writes and the voice.
+  check('off: winPlanRumorAttach absent from win-plan.js', winPlanJs.indexOf('winPlanRumorAttach(vid, atCreation)') === -1);
+  check('off: no RUMORTARGET read in win-plan.js', winPlanJs.indexOf("process.env.RUMORTARGET === '1'") === -1);
+  check('off: no tale-attach target write (plan.target = best.mid)', winPlanJs.indexOf('plan.target = best.mid') === -1);
+  check('off: no tale-attach needWave write (plan.needWave = best.wave)', winPlanJs.indexOf('plan.needWave = best.wave') === -1);
+  check('off: no tale provenance stamps (targetSource/targetTeller/targetTaleDay)',
+    winPlanJs.indexOf("plan.targetSource = 'tale'") === -1 &&
+    winPlanJs.indexOf('plan.targetTeller = best.teller') === -1 &&
+    winPlanJs.indexOf('plan.targetTaleDay = best.taleDay') === -1);
+  check('off: no heard/fought origin stamp at creation', winPlanJs.indexOf("origin: foughtEngaged ? 'fought' : 'heard'") === -1);
+  check('off: no attach call sites in winPlanHavenTick',
+    winPlanJs.indexOf('this.winPlanRumorAttach(vid, true)') === -1 &&
+    winPlanJs.indexOf('this.winPlanRumorAttach(vid, false)') === -1);
+  check('off: no 30-day freshness window constant', winPlanJs.indexOf('RUMOR_TALE_FRESH_DAYS = 30') === -1);
+  check('off: no played-only tale rejection (untold)', winPlanJs.indexOf("if (!t.played) { entry.reason = 'untold'") === -1);
+  check('off: no teller-dead rejection', winPlanJs.indexOf("entry.reason = 'teller-dead'") === -1);
+  check('off: no attach voice line (monsterDisplayName + firstRef on best)',
+    winPlanJs.indexOf('this.monsterDisplayName(best.mid)') === -1 &&
+    winPlanJs.indexOf('this.firstRef(best.teller)') === -1);
+  check('off: no rumor-target rule in the ontology header',
+    winPlanJs.indexOf('winPlanRumorAttach(vid, atCreation)') === -1 &&
+    winPlanJs.indexOf('winplan_rumor_target') === -1);
+}
 // Anchors that must still hold (the two pre-existing write sites).
 check('anchor: seed writes target only for gear/party (early return present)',
   winPlanJs.indexOf("plan.stage !== 'gear' && plan.stage !== 'party'") !== -1);
@@ -167,6 +232,7 @@ function envOff() { delete process.env.RUMORTARGET; }
 
 async function attachFixtures() {
   await setupLive();
+  if (!LEVER_PRESENT) { await attachFixturesOff(); return; }
   const day = 40;
   setDay(day);
   // 1. Highest wave wins; freshest breaks the wave tie.
@@ -276,9 +342,43 @@ async function attachFixtures() {
   clearPlan(HOLDER);
 }
 
+// OFF MODE counterparts to the attach-rule fixtures: the method does
+// not exist, so a fresh told wave-4 tale changes nothing — the plan
+// object is exactly what the fixture wrote, with no attach, no
+// provenance stamps, and no voice line. The tale itself is staged
+// (killerTales holds it told + played), so the fixture is real; only
+// the attach is gone.
+async function attachFixturesOff() {
+  const day = 40;
+  setDay(day);
+  envOn();
+  setFallen([]);
+  setTales([
+    { mid: 'eater', killer: TELLER, day: day, told: true, played: true }, // wave 4, fresh, told
+  ]);
+  check('off: winPlanRumorAttach is absent from the live Game (not a function)',
+    typeof Game.winPlanRumorAttach !== 'function',
+    'typeof=' + typeof Game.winPlanRumorAttach);
+  check('off: the told wave-4 tale IS staged in state (the fixture is real, only the attach is gone)',
+    (Game.state.killerTales || []).some(function (t) { return t.mid === 'eater' && t.told === true && t.played === true; }),
+    JSON.stringify(Game.state.killerTales));
+  const plan = setPlan(HOLDER, {});
+  SAY_LINES = [];
+  check('off: a heard plan with a fresh told wave-4 tale on offer stays target-null',
+    plan.target === null && plan.needWave === undefined,
+    JSON.stringify({ target: plan.target, needWave: plan.needWave }));
+  check('off: no tale provenance stamps on the plan',
+    plan.targetSource === undefined && plan.targetTeller === undefined && plan.targetTaleDay === undefined,
+    JSON.stringify({ s: plan.targetSource, t: plan.targetTeller, d: plan.targetTaleDay }));
+  check('off: no attach voice line is spoken', SAY_LINES.length === 0, JSON.stringify(SAY_LINES));
+  clearPlan(HOLDER);
+  envOff();
+}
+
 // ---------- 3. Live HavenTick probe (creation + refresh, env ON vs OFF) ----------
 console.log('== live HavenTick probe ==');
 async function havenTickProbe() {
+  if (!LEVER_PRESENT) { await havenTickProbeOff(); return; }
   // Reuse the loaded Game from the fixtures (same process, same state).
   const v = Game.state.village;
   const hx = (v.px != null ? v.px : 4), hy = (v.py != null ? v.py : 4);
@@ -345,6 +445,66 @@ async function havenTickProbe() {
   check('LIVE refresh: the same heard plan takes the fresh tale on a later Haven tick',
     !!refreshed && refreshed.target === 'strike' && refreshed.needWave === 4,
     JSON.stringify(refreshed && { target: refreshed.target, needWave: refreshed.needWave }));
+  clearPlan(holder);
+  envOff();
+}
+
+// OFF MODE counterpart to the live HavenTick probe: with RUMORTARGET=1
+// and a fresh told wave-4 tale on offer, the plan is born exactly as
+// master births it — target-null, no origin stamp — and no later tick
+// attaches anything, because there is no attach.
+async function havenTickProbeOff() {
+  // Reuse the loaded Game from the fixtures (same process, same state).
+  const v = Game.state.village;
+  const hx = (v.px != null ? v.px : 4), hy = (v.py != null ? v.py : 4);
+  const day = (Game.state.scholar || {}).day || 0;
+  setDay(day);
+  // Find a ranger standing at Haven.
+  const roster = v.roster || [];
+  let holder = null;
+  for (const vid of roster) {
+    if (vid === Game.villagerId) continue;
+    let prof = null;
+    try { prof = Game.npcRangeProfile ? Game.npcRangeProfile(vid) : null; } catch (e) {}
+    if (prof !== 'wanderer' && prof !== 'explorer') continue;
+    let node = null;
+    try { node = Game.npcNode ? Game.npcNode(vid) : null; } catch (e) {}
+    if (!node || node.nx !== hx || node.ny !== hy) continue;
+    holder = vid;
+    break;
+  }
+  check('probe setup: a ranger stands at Haven', !!holder, 'roster=' + roster.length + ' haven=(' + hx + ',' + hy + ')');
+  if (!holder) return;
+  // The holder fought nothing (fresh setup: know is empty); the village
+  // has slain a wave-4 beast; its tale was told at the fire by a living
+  // teller. That is the rumor-born creation shape — minus the attach.
+  try {
+    const a = Game.agencyState ? Game.agencyState() : null;
+    const kn = a && a.know ? a.know[holder] : null;
+    if (kn) kn.fought = [];
+  } catch (e) {}
+  Game.state.villageSlain = { eater: 1 };
+  setFallen([]);
+  setTales([{ mid: 'eater', killer: TELLER, day: day, told: true, played: true }]);
+  clearPlan(holder);
+  envOn();
+  SAY_LINES = [];
+  const created = Game.winPlanHavenTick(holder, hx, hy);
+  check('off LIVE creation: HavenTick creates the plan target-null even with RUMORTARGET=1 + a fresh told wave-4 tale',
+    !!created && created.target === null,
+    JSON.stringify(created && { target: created.target }));
+  check('off LIVE creation: no origin stamp on the created plan (the lever stamp is gone)',
+    !!created && created.origin === undefined,
+    JSON.stringify(created && { origin: created.origin }));
+  check('off LIVE creation: no attach voice line names a beast to hunt',
+    SAY_LINES.filter(function (l) { return /beast to hunt/.test(l); }).length === 0,
+    JSON.stringify(SAY_LINES));
+  // Refresh: a later Haven tick with a fresh tale still leaves it null.
+  setTales([{ mid: 'strike', killer: TELLER2, day: day, told: true, played: true }]);
+  const refreshed = Game.winPlanHavenTick(holder, hx, hy);
+  check('off LIVE refresh: a later Haven tick still leaves the plan target-null',
+    !!refreshed && refreshed.target === null,
+    JSON.stringify(refreshed && { target: refreshed.target }));
   clearPlan(holder);
   envOff();
 }
@@ -428,8 +588,21 @@ async function determinism() {
     Array.isArray(a.full.rumortargetAttaches) && a.full.taleSupply &&
     Array.isArray(a.full.taleSupply.killerTales) && Array.isArray(a.full.taleSupply.vetKillerTales),
     'attaches=' + (a.full.rumortargetAttaches || []).length);
-  check('D1 run has 0 instrument errors', (a.full.instrumentErrors || []).length === 0,
-    JSON.stringify((a.full.instrumentErrors || []).slice(0, 3)));
+  if (LEVER_PRESENT) {
+    check('D1 run has 0 instrument errors', (a.full.instrumentErrors || []).length === 0,
+      JSON.stringify((a.full.instrumentErrors || []).slice(0, 3)));
+  } else {
+    // OFF MODE: the driver wraps a method that is not there, so the
+    // one expected instrument error is the absent-wrap notice — and
+    // nothing else. (Verified: exactly this one row on the reverted
+    // tree, 60d seed 103101, RUMORTARGET=1.)
+    check('D1 run has only the expected absent-wrap instrument error [off-mode]',
+      JSON.stringify(a.full.instrumentErrors || []) === JSON.stringify(['winPlanRumorAttach-wrap: not a function']),
+      JSON.stringify(a.full.instrumentErrors || []));
+    check('D1 run carries zero rumortargetAttaches rows (no attach without the lever) [off-mode]',
+      (a.full.rumortargetAttaches || []).length === 0,
+      'attaches=' + (a.full.rumortargetAttaches || []).length);
+  }
   check('D1 run policy is competent, sha df9b7dff4de4',
     a.full.policy === 'competent' && a.full.policySha === 'df9b7dff4de4',
     'got ' + a.full.policy + '/' + a.full.policySha);
