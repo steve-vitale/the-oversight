@@ -878,38 +878,68 @@
       const MAX = 260;
       const t = String(text || '');
       if (t.length <= MAX) return [t];
-      // Split into sentences on . ! ? ; — : followed by space, plus em-dashes.
-      const parts = t.split(/(?<=[.!?;:])\s+|(?<=\u2014)\s+/);
-      const chunks = [];
-      let cur = '';
-      const flush = () => { if (cur) { chunks.push(cur); cur = ''; } };
-      for (const s of parts) {
-        if (!s) continue;
-        if ((cur + (cur ? ' ' : '') + s).length <= MAX) {
-          cur = cur ? cur + ' ' + s : s;
-        } else {
-          flush();
-          if (s.length <= MAX) { cur = s; }
-          else {
-            // Single over-long sentence: split at word boundaries.
-            const words = s.split(/\s+/);
-            let wcur = '';
-            for (const w of words) {
-              if ((wcur + (wcur ? ' ' : '') + w).length <= MAX) {
-                wcur = wcur ? wcur + ' ' + w : w;
-              } else {
-                if (wcur) chunks.push(wcur);
-                // A single word longer than MAX: hard cut (never happens
-                // with real dialogue, but the box must not scroll).
-                while (w.length > MAX) { chunks.push(w.slice(0, MAX)); w = w.slice(MAX); }
-                wcur = w;
-              }
-            }
-            if (wcur) chunks.push(wcur);
-          }
-        }
+      // QUOTE-AWARE (journey-crisis r230): a sentence boundary inside a
+      // single-quoted span must never split the line. The resume opener's
+      // memory quote ('...') is two sentences; pagination broke it across
+      // two transcript entries, so the second chunk read as a new
+      // utterance starting mid-quote (transcript-caught twice: r229
+      // 14494 d28 'Halfway... You do. / NPC: The wild…' and r230
+      // 14503 d85 'Quinn is gone... continues. / NPC: That's the part
+      // I can't stand.'). Split points are sentence boundaries, but a
+      // boundary inside quotes is never taken — the chunk runs over MAX
+      // rather than break a quote in half (a long chunk still renders;
+      // a broken quote reads as a bug). A ' toggles the quote state
+      // unless it is an apostrophe (a word char on both sides: don't,
+      // Sara's). The outer double-quoted speech still splits at sentence
+      // boundaries as before — each chunk is still the NPC speaking;
+      // only the nested single-quoted memory is one quoted unit. A
+      // single over-long sentence falls back to word boundaries outside
+      // quotes; a span with no splittable point outside quotes (one long
+      // quoted memory) stays whole.
+      const isWordCh = ch => !!ch && /[A-Za-z0-9_]/.test(ch);
+      const inQuote = new Array(t.length + 1).fill(false);
+      let q = false;
+      for (let i = 0; i < t.length; i++) {
+        if (t[i] === "'" && !(isWordCh(t[i - 1]) && isWordCh(t[i + 1]))) q = !q;
+        inQuote[i + 1] = q;
       }
-      flush();
+      const bounds = [];
+      const bre = /(?<=[.!?;:])\s+|(?<=\u2014)\s+/g;
+      let bm;
+      while ((bm = bre.exec(t)) !== null) bounds.push(bm.index + bm[0].length);
+      const chunks = [];
+      let start = 0;
+      while (t.length - start > MAX) {
+        let cut = -1;
+        for (const b of bounds) {
+          if (b <= start) continue;
+          if (b - start > MAX) break;
+          if (!inQuote[b]) cut = b;
+        }
+        if (cut > start) {
+          chunks.push(t.slice(start, cut).trimEnd());
+          start = cut;
+          continue;
+        }
+        let wcut = -1, wlen = 0;
+        const wre = /\s+/g;
+        wre.lastIndex = start;
+        let wm;
+        while ((wm = wre.exec(t)) !== null) {
+          if (wm.index - start > MAX) break;
+          if (!inQuote[wm.index]) { wcut = wm.index; wlen = wm[0].length; }
+        }
+        if (wcut > start) {
+          chunks.push(t.slice(start, wcut).trimEnd());
+          start = wcut + wlen;
+          continue;
+        }
+        const next = bounds.find(b => b > start && !inQuote[b]);
+        if (next == null) { chunks.push(t.slice(start).trimEnd()); start = t.length; break; }
+        chunks.push(t.slice(start, next).trimEnd());
+        start = next;
+      }
+      if (start < t.length) chunks.push(t.slice(start).trimEnd());
       return chunks.length ? chunks : [t];
     },
 
