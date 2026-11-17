@@ -423,17 +423,39 @@ for (const seed of seeds) {
   const vanishedIds = startIds.filter(id => !endIds.has(id));
   const depById = Object.fromEntries((d.rosterDepartures || []).map(rd => [String(rd.id), rd]));
   const villDeaths = (d.deaths || []).filter(dt => dt.kind === 'villager' || dt.kind === 'person');
+  // R233 REMOVAL LOG: the removeVillager how for each vanished id
+  // ('killed'/'ambushed' = death; 'fled'/'splinter'/'exiled' = left
+  // alive). Absent on pre-r233 corpora — reported as unknown.
+  const rmById = Object.fromEntries(((d.removalLog || []).map(r => [String(r.vid), r])));
   let unaccounted = 0;
   for (const sid of vanishedIds) {
     const nm = (d.startCensus || []).find(x => String(x.id) === sid);
     const name = nm ? nm.name : sid;
     const dep = depById[sid];
     const deathRec = villDeaths.find(dt => (dt.id && dt.id === sid) || dt.who === name);
-    if (deathRec) lines.push(`  ${name} (${sid}): vanished, death recorded d${deathRec.day} (${deathRec.cause || '?'})`);
-    else if (dep) lines.push(`  ${name} (${sid}): vanished d${dep.day}, NO death record — departure logged (deadAtDeparture=${!!dep.deadAtDeparture})`);
-    else { unaccounted++; lines.push(`  ${name} (${sid}): vanished, NO death record, NO departure record — UNACCOUNTED`); }
+    const rm = rmById[sid];
+    const rmTag = rm ? ` [removal: ${rm.how} d${rm.day}]` : ' [removal: UNKNOWN — pre-r233 corpus]';
+    if (deathRec) lines.push(`  ${name} (${sid}): vanished, death recorded d${deathRec.day} (${deathRec.cause || '?'})${rmTag}`);
+    else if (dep) lines.push(`  ${name} (${sid}): vanished d${dep.day}, NO death record — departure logged (deadAtDeparture=${!!dep.deadAtDeparture})${rmTag}`);
+    else { unaccounted++; lines.push(`  ${name} (${sid}): vanished, NO death record, NO departure record — UNACCOUNTED${rmTag}`); }
   }
   lines.push(`seed ${seed}: roster reconcile start=${startIds.length} end=${(d.census || []).length} vanished=${vanishedIds.length} departuresLogged=${(d.rosterDepartures || []).length} villagerDeaths=${villDeaths.length} UNACCOUNTED=${unaccounted}`);
+  // R233 REMOVAL SUMMARY: non-death departures are the pilot's new
+  // shape — name each one (a villager who leaves alive is a story the
+  // player should hear; the driver records the how, the run note
+  // judges whether the game told it).
+  const rmCounts = {};
+  for (const r of (d.removalLog || [])) rmCounts[r.how] = (rmCounts[r.how] || 0) + 1;
+  const nonDeath = (d.removalLog || []).filter(r => r.how !== 'killed' && r.how !== 'ambushed');
+  lines.push(`  removals by how: ${JSON.stringify(rmCounts)} (log ${d.removalLog ? d.removalLog.length : 0} entries${d.removalLog ? '' : ' — ABSENT, pre-r233 corpus'}); non-death departures: ${nonDeath.length}`);
+  for (const r of nonDeath) lines.push(`  NON-DEATH DEPARTURE d${r.day}: ${r.name} (${r.vid}) — ${r.how}`);
+  // R233 EXILE NARRATION: did the game say the departure aloud? Each
+  // exileLines entry is a dawn SAY line the player would have seen.
+  // A non-death departure with zero exile lines is a SILENT departure.
+  const exLines = (d.exileLines || []);
+  lines.push(`  exile narration lines: ${exLines.length}${d.exileLines ? '' : ' (ABSENT — pre-r233 corpus)'}`);
+  for (const e of exLines.slice(0, 12)) lines.push(`    d${e.day}: ${String(e.line).slice(0, 200)}`);
+  if (exLines.length > 12) lines.push(`    ... +${exLines.length - 12} more`);
 }
 console.log(lines.join('\n'));
 console.log('---');

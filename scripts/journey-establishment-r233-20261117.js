@@ -142,6 +142,22 @@ async function runSeed(seed) {
     };
   } else { dawnCalls.push({ day: null, out: null, note: 'METHOD-MISSING' }); }
 
+  // R233 REMOVAL-LOG INSTRUMENT (pilot 101301: 3 villagers vanished
+  // d10 with no death record and no trace in any driver log — the
+  // roster reconciles by id, but the WHY is invisible): wrap
+  // removeVillager (the one removal choke point, betrayal.js)
+  // read-only — log day, vid, name, and the how
+  // ('fled'/'splinter'/'exiled'/'killed'/'ambushed'/...), call
+  // through unchanged. Never mutates, never consumes RNG.
+  const removalLog = [];
+  if (typeof Game.removeVillager === 'function') {
+    const _rm = Game.removeVillager.bind(Game);
+    Game.removeVillager = function (vid, how) {
+      try { removalLog.push({ day: nowDay(Game), vid: String(vid), name: nameOf(Game, vid), how: String(how || '?') }); } catch (e) {}
+      return _rm(vid, how);
+    };
+  }
+
   // R139 SPOTTER INSTRUMENT (read-only wrap; never mutates, never
   // consumes RNG): log every bumpPlantFamiliarity call with the
   // scholar's spotter skill BEFORE the call (the threshold is set
@@ -1057,6 +1073,13 @@ async function runSeed(seed) {
   // favor-outing.js "noted blocker" lines a player would actually see).
   const dawnOutingLines = [];
   for (const d of Object.keys(dayLines)) for (const ln of dayLines[d]) if (/outing|waited at Haven|Haven this dawn/i.test(ln)) dawnOutingLines.push({ day: parseInt(d, 10), line: ln.replace(/^(SAY|SYS): /, '') });
+  // R233 EXILE LINES (pilot 101301: triple exile d10 — the game says
+  // the vote aloud via say(), but dayLines is otherwise discarded, so
+  // whether the player hears it was unanswerable): keep every dawn
+  // SAY line about exile/freeloading, so the panel can judge whether
+  // a departure was narrated or silent. Read-only filter, no behavior.
+  const exileLines = [];
+  for (const d of Object.keys(dayLines)) for (const ln of dayLines[d]) if (/exile|for exile|Take what you can carry|freeload/i.test(ln)) exileLines.push({ day: parseInt(d, 10), line: ln.replace(/^(SAY|SYS): /, '') });
 
   // People check: 2 held convos at end of run (top cook-ish fallback: first
   // two living non-player villagers in roster order), goon-first, 8 turns.
@@ -1172,8 +1195,8 @@ async function runSeed(seed) {
     waveReached: wave, pantryKcalEnd: Math.round(pantryKcal(Game)),
     deaths, census, daily, dawnCalls, dawnOpportunities: dawnOpps, dawnLedgers, finalFavorLedger: finalLedger, saySignalLines,
     wedgeSits, doorWalkLog, travelOutLog, endLog, jamLog, strandedLog, brokenWaterDawns, pilotBreakVid, endDisabled,
-    foodXpEnd, bumpLog, codexPlantsEnd, sittingCloses,
-    storeLog, commitLog, performLog, dawnOutingLines, jointLedgerEnd: (() => { try { return jointLedger(); } catch (e) { return null; } })(),
+    foodXpEnd, bumpLog, codexPlantsEnd, sittingCloses, removalLog,
+    storeLog, commitLog, performLog, dawnOutingLines, exileLines, jointLedgerEnd: (() => { try { return jointLedger(); } catch (e) { return null; } })(),
     favorTele: (() => { const counts = {}; for (const t of tele) if (t && typeof t.type === 'string' && t.type.includes('favor')) counts[t.type] = (counts[t.type] || 0) + 1; return counts; })() };
   fs.mkdirSync(EVID, { recursive: true });
   writeFileRetry(path.join(EVID, `journey-establishment-r233-seed${seed}.json`), JSON.stringify(out, null, 2));
