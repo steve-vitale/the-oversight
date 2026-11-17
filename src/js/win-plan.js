@@ -306,7 +306,17 @@
     winPlanOnVillagerDeath(vid) {
       try {
         if (!vid) return { deleted: false, purged: 0 };
-        var v = stateOf(this);
+        // NON-CREATING READ (correction, sim-deathcleanup-b): stateOf()
+        // materializes winPlan={} — and winPlanHavenTick gates on the
+        // store's existence (`if (!v.winPlan) return null`), so creating
+        // it here would IGNITE the plan system in villages where it
+        // sleeps. Proven on seed 103237: first death day 15, first plan
+        // day 16, trajectory diverged day 18 with zero cleanups fired.
+        // The cleanup must never be the spark: read the store without
+        // creating it, and touch nothing when it does not exist yet.
+        // (bump() below runs only when something was cleaned — by then
+        // the store exists, so its stateOf is a no-op.)
+        var v = this.state && this.state.village;
         if (!v || !v.winPlan) return { deleted: false, purged: 0 };
         var deleted = false;
         if (v.winPlan[vid]) { delete v.winPlan[vid]; deleted = true; }

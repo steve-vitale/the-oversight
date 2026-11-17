@@ -38,11 +38,9 @@ function gitStatus(dir) {
 // ---------- 1. Static ----------
 console.log('== static ==');
 const srcStatus = gitStatus('src').split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
-check('src diff is exactly win-plan.js + betrayal.js + game.js (' + JSON.stringify(srcStatus) + ')',
-  srcStatus.length === 3 &&
-  srcStatus.some(function (s) { return s.indexOf('src/js/win-plan.js') !== -1; }) &&
-  srcStatus.some(function (s) { return s.indexOf('src/js/betrayal.js') !== -1; }) &&
-  srcStatus.some(function (s) { return s.indexOf('src/js/game.js') !== -1; }),
+const srcAllowed = ['src/js/win-plan.js', 'src/js/betrayal.js', 'src/js/game.js'];
+check('uncommitted src diff touches ONLY win-plan.js + betrayal.js + game.js (' + JSON.stringify(srcStatus) + ')',
+  srcStatus.every(function (s) { return srcAllowed.some(function (f) { return s.indexOf(f) !== -1; }); }),
   JSON.stringify(srcStatus));
 const winPlanJs = fs.readFileSync(path.join(REPO, 'src', 'js', 'win-plan.js'), 'utf8');
 check('win-plan.js provides winPlanOnVillagerDeath',
@@ -56,12 +54,13 @@ check('exactly TWO winPlan-entry deletes exist in src/js now (table-active + dea
     if (hits.length !== 2) return false;
     const first = winPlanJs.indexOf('delete v.winPlan[vid]');
     const second = winPlanJs.indexOf('delete v.winPlan[vid]', first + 1);
-    const ctx1 = winPlanJs.slice(Math.max(0, first - 300), first + 50);
-    const ctx2 = winPlanJs.slice(Math.max(0, second - 300), second + 50);
-    const contexts = [ctx1, ctx2];
-    const hasTable = contexts.some(function (c) { return c.indexOf('tableActive') !== -1; });
-    const hasCleanup = contexts.some(function (c) { return c.indexOf('winPlanOnVillagerDeath') !== -1; });
-    return hasTable && hasCleanup;
+    // Cleanup delete: inside winPlanOnVillagerDeath (signature precedes
+    // it; comment blocks make a fixed proximity window fragile).
+    const sig = winPlanJs.indexOf('winPlanOnVillagerDeath(vid) {');
+    const cleanupOk = sig !== -1 && sig < first && first - sig < 3000;
+    // Table delete: a tableActive mention precedes it closely.
+    const ctx2 = winPlanJs.slice(Math.max(0, second - 900), second + 50);
+    return cleanupOk && ctx2.indexOf('tableActive') !== -1;
   })());
 check('winPlanOnVillagerDeath purges the vid from every holder party + party/hunt fallback to party on empty',
   winPlanJs.indexOf("plan.party = plan.party.filter(function (pid) { return pid !== vid; })") !== -1 &&
@@ -139,6 +138,26 @@ async function unitFixtures() {
   const roster = ((Game.state || {}).village || {}).roster || [];
   const npcs = roster.filter(function (id) { return id && id !== Game.villagerId; });
   check('fixture game has NPC villagers to plan with', npcs.length >= 8, 'npcs=' + npcs.length);
+  // REGRESSION (ignition, sim-deathcleanup-b): the cleanup must NEVER
+  // create the winPlan store. winPlanHavenTick gates on the store's
+  // existence (`if (!v.winPlan) return null`), so materializing it on
+  // a death would ignite the plan system in villages where it sleeps
+  // (seed 103237: first death day 15, first plan day 16, trajectory
+  // diverged day 18 with zero cleanups). Call the method with a bare
+  // village object that has no winPlan key at all.
+  (function () {
+    const bareVillage = {};
+    const r = Game.winPlanOnVillagerDeath.call({ state: { village: bareVillage } }, 'gen_nonexistent_vid');
+    check('cleanup on a village with NO winPlan store is a no-op and creates NOTHING',
+      r.deleted === false && r.purged === 0 &&
+      !('winPlan' in bareVillage) && !('winPlanStats' in bareVillage),
+      JSON.stringify(r) + ' keys=' + Object.keys(bareVillage).join(','));
+    const emptyVillage = { winPlan: {} };
+    const r2 = Game.winPlanOnVillagerDeath.call({ state: { village: emptyVillage } }, 'gen_nonexistent_vid');
+    check('cleanup on an EMPTY winPlan store is a no-op and creates no stats object',
+      r2.deleted === false && r2.purged === 0 && !('winPlanStats' in emptyVillage),
+      JSON.stringify(r2) + ' keys=' + Object.keys(emptyVillage).join(','));
+  })();
   const v1 = npcs[0], v2 = npcs[1], v3 = npcs[2], v4 = npcs[3], v5 = npcs[4], v6 = npcs[5], v7 = npcs[6], v8 = npcs[7];
   // v1 holds a plan; v2's hunt plan names v1; v3's party plan names v1.
   const p1 = Game.winPlanOf(v1);
