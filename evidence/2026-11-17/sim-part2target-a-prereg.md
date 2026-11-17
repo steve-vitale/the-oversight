@@ -535,3 +535,42 @@ with the counts it would have taken. The target-share metric
 binds the run: a 0/x target share on pure master is a GO
 measurement (if the instrument bars pass), never re-scored
 against the seed-enabled corpora's share.
+
+## Addendum — leg (c) decision (written 2026-11-17 ~17:30 UTC, after leg (b) was analyzed, before any leg (c) run)
+
+DECISION: leg (c) is NOT run. The prereg's trigger for (c) was
+"(a)+(b) are targetless on pure master". That trigger did NOT
+fire:
+
+- Leg (a) re-read: part2night-a 0/6 target-carrying (band
+  103411–103418); launchfunnel-a OFF 0/6; VRE (seed-enabled)
+  10/20; launchdef-a control 17/59, ON 21/62.
+- Leg (b) fresh band 103421–103428, 150d, competent, pure
+  master: 80 part-2 commits, **8 target-carrying (10%)** —
+  chorus_line ×2, focus_group ×3, spool ×2, redactor ×1, all
+  wave 3. All 7 target-carrying night-veto deaths have their
+  fates classified and dawn validity measured (7/7 target
+  still valid at dawn; 7/7 counterfactual would-not-launch;
+  1/7 launched at dawn in reality via a fresh commit). One
+  further target-carrying commit launched the same day
+  (gen_19a280j, seed 103428, d63, spool). Verdict: GO
+  (0 UNCLASSIFIED, 0 orphans, 0 instrument errors).
+
+The survey's purpose — find WHERE part-2 commits carry
+targets and what happens to them at the night tick — is
+fulfilled at 150d on this band. A 200d re-run of the fresh
+band or a second fresh band (103431–103438) would add commits
+but cannot change the verdict shape: the population exists,
+its fates are classified, and the hold-to-dawn counterfactual
+is computed for every target-carrying night death. Running
+either leg blindly would spend ~30 min re-proving a found
+population. Neither leg is run; no second band is surveyed
+in this arm.
+
+The seed-enabled option recorded in the prereg (re-landing
+the vetparty seed call on the fresh band to measure the
+target-carrying share with the seed on) is likewise NOT run
+here — it is a follow-up arm's job, as the prereg already
+stated. The open question it would answer (how much of the
+10% is seed-suppressed vs naturally occurring) is reported
+to the coordinator as a backlog item, not measured here.
