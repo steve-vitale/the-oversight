@@ -247,8 +247,17 @@ function driftSmoke(controlFiles, armedFiles) {
     }
     const isDrift = firstDivDay != null && firstLeverDay != null && firstDivDay < firstLeverDay;
     if (isDrift) drift++;
+    // NOTE: when firstLeverDay is null the lever never fired on
+    // either leg, so a firstDivDay cannot be a lever effect. The
+    // known cause is the doubled final-day snapshot (the driver
+    // takes one in the daily loop and one after runDays; the two
+    // differ within a leg, and the aByDay map keeps only the last)
+    // — verified byte-identical across legs on 103244 day 138.
+    const note = firstDivDay == null ? 'IDENTICAL'
+      : firstLeverDay == null ? 'no lever day on either leg; firstDivDay is the doubled final-snapshot artifact'
+      : (isDrift ? 'DRIFT before lever day' : 'diverges on/after lever day');
     perSeed.push({ seed: Number(seed), firstLeverDay: firstLeverDay, firstDivDay: firstDivDay,
-      drift: isDrift, note: firstDivDay == null ? 'IDENTICAL' : (isDrift ? 'DRIFT before lever day' : 'diverges on/after lever day') });
+      drift: isDrift, note: note });
   }
   return { perSeed: perSeed, driftSeeds: drift };
 }
