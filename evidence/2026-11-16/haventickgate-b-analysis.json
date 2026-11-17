@@ -1,0 +1,4742 @@
+{
+  "arm": "haventickgate-b",
+  "run": "haventickgate-b",
+  "onDir": "perseed-haventickgate-b-on",
+  "offDir": "perseed-haventickgate-b-off",
+  "wave4IdsMatch": true,
+  "wave4IdsLive": [
+    "algorithm",
+    "audit",
+    "congregation",
+    "eater",
+    "eulogy",
+    "herald",
+    "influencer",
+    "reunion",
+    "strike",
+    "suburb"
+  ],
+  "wave4IdsFrozen": [
+    "algorithm",
+    "audit",
+    "congregation",
+    "eater",
+    "eulogy",
+    "herald",
+    "influencer",
+    "reunion",
+    "strike",
+    "suburb"
+  ],
+  "classificationTable": [
+    {
+      "seed": 103211,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "days": 151,
+      "standing": 190,
+      "scaleRank": "regional",
+      "creates": 9,
+      "rangerCalls": 105,
+      "rangerDays": 255,
+      "heardFirstDay": 4,
+      "storeGuardBlockedCalls": 37,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 21,
+      "firstInitializerKind": "winPlanNoteKill"
+    },
+    {
+      "seed": 103212,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "days": 151,
+      "standing": 199,
+      "scaleRank": "regional",
+      "creates": 2,
+      "rangerCalls": 119,
+      "rangerDays": 236,
+      "heardFirstDay": 6,
+      "storeGuardBlockedCalls": 100,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 83,
+      "firstInitializerKind": "winPlanSeedFromFight"
+    },
+    {
+      "seed": 103213,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "days": 151,
+      "standing": 199,
+      "scaleRank": "regional",
+      "creates": 5,
+      "rangerCalls": 39,
+      "rangerDays": 149,
+      "heardFirstDay": 4,
+      "storeGuardBlockedCalls": 1,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 5,
+      "firstInitializerKind": "winPlanNoteKill"
+    },
+    {
+      "seed": 103214,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "days": 132,
+      "standing": 160,
+      "scaleRank": "regional",
+      "creates": 3,
+      "rangerCalls": 67,
+      "rangerDays": 131,
+      "heardFirstDay": 5,
+      "storeGuardBlockedCalls": 28,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 30,
+      "firstInitializerKind": "winPlanNoteKill"
+    },
+    {
+      "seed": 103215,
+      "noPlan": true,
+      "blocker": "store-never-initialized",
+      "subBlocker": null,
+      "days": 150,
+      "standing": 295,
+      "scaleRank": "regional",
+      "creates": 0,
+      "rangerCalls": 89,
+      "rangerDays": 185,
+      "heardFirstDay": 4,
+      "storeGuardBlockedCalls": 87,
+      "storeEverInitialized": false,
+      "firstInitializerDay": null,
+      "firstInitializerKind": null
+    },
+    {
+      "seed": 103216,
+      "noPlan": true,
+      "blocker": "store-never-initialized",
+      "subBlocker": null,
+      "days": 146,
+      "standing": 175,
+      "scaleRank": "regional",
+      "creates": 0,
+      "rangerCalls": 203,
+      "rangerDays": 340,
+      "heardFirstDay": 8,
+      "storeGuardBlockedCalls": 187,
+      "storeEverInitialized": false,
+      "firstInitializerDay": null,
+      "firstInitializerKind": null
+    },
+    {
+      "seed": 103217,
+      "noPlan": true,
+      "blocker": "store-never-initialized",
+      "subBlocker": null,
+      "days": 151,
+      "standing": 375,
+      "scaleRank": "regional",
+      "creates": 0,
+      "rangerCalls": 192,
+      "rangerDays": 324,
+      "heardFirstDay": 5,
+      "storeGuardBlockedCalls": 182,
+      "storeEverInitialized": false,
+      "firstInitializerDay": null,
+      "firstInitializerKind": null
+    },
+    {
+      "seed": 103218,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "days": 151,
+      "standing": 199,
+      "scaleRank": "regional",
+      "creates": 3,
+      "rangerCalls": 85,
+      "rangerDays": 178,
+      "heardFirstDay": 10,
+      "storeGuardBlockedCalls": 54,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 95,
+      "firstInitializerKind": "winPlanSeedFromFight"
+    }
+  ],
+  "gateTable": [
+    {
+      "seed": 103211,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "rangerBucketDist": null,
+      "rangerReachedTicks": null,
+      "callOutcomes": {
+        "store-uninitialized": 43,
+        "created": 6,
+        "plan-exists": 56
+      },
+      "storeGuardBlockedCalls": 37,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 21,
+      "firstInitializerKind": "winPlanNoteKill",
+      "storeCrossCheckAgree": true
+    },
+    {
+      "seed": 103212,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "rangerBucketDist": null,
+      "rangerReachedTicks": null,
+      "callOutcomes": {
+        "store-uninitialized": 109,
+        "created": 1,
+        "plan-exists": 9
+      },
+      "storeGuardBlockedCalls": 100,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 83,
+      "firstInitializerKind": "winPlanSeedFromFight",
+      "storeCrossCheckAgree": true
+    },
+    {
+      "seed": 103213,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "rangerBucketDist": null,
+      "rangerReachedTicks": null,
+      "callOutcomes": {
+        "store-uninitialized": 7,
+        "created": 4,
+        "plan-exists": 28
+      },
+      "storeGuardBlockedCalls": 1,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 5,
+      "firstInitializerKind": "winPlanNoteKill",
+      "storeCrossCheckAgree": true
+    },
+    {
+      "seed": 103214,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "rangerBucketDist": null,
+      "rangerReachedTicks": null,
+      "callOutcomes": {
+        "store-uninitialized": 38,
+        "created": 3,
+        "plan-exists": 26
+      },
+      "storeGuardBlockedCalls": 28,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 30,
+      "firstInitializerKind": "winPlanNoteKill",
+      "storeCrossCheckAgree": true
+    },
+    {
+      "seed": 103215,
+      "noPlan": true,
+      "blocker": "store-never-initialized",
+      "subBlocker": null,
+      "rangerBucketDist": null,
+      "rangerReachedTicks": null,
+      "callOutcomes": {
+        "store-uninitialized": 89
+      },
+      "storeGuardBlockedCalls": 87,
+      "storeEverInitialized": false,
+      "firstInitializerDay": null,
+      "firstInitializerKind": null,
+      "storeCrossCheckAgree": true
+    },
+    {
+      "seed": 103216,
+      "noPlan": true,
+      "blocker": "store-never-initialized",
+      "subBlocker": null,
+      "rangerBucketDist": null,
+      "rangerReachedTicks": null,
+      "callOutcomes": {
+        "store-uninitialized": 203
+      },
+      "storeGuardBlockedCalls": 187,
+      "storeEverInitialized": false,
+      "firstInitializerDay": null,
+      "firstInitializerKind": null,
+      "storeCrossCheckAgree": true
+    },
+    {
+      "seed": 103217,
+      "noPlan": true,
+      "blocker": "store-never-initialized",
+      "subBlocker": null,
+      "rangerBucketDist": null,
+      "rangerReachedTicks": null,
+      "callOutcomes": {
+        "store-uninitialized": 192
+      },
+      "storeGuardBlockedCalls": 182,
+      "storeEverInitialized": false,
+      "firstInitializerDay": null,
+      "firstInitializerKind": null,
+      "storeCrossCheckAgree": true
+    },
+    {
+      "seed": 103218,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "rangerBucketDist": null,
+      "rangerReachedTicks": null,
+      "callOutcomes": {
+        "store-uninitialized": 66,
+        "created": 2,
+        "plan-exists": 17
+      },
+      "storeGuardBlockedCalls": 54,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 95,
+      "firstInitializerKind": "winPlanSeedFromFight",
+      "storeCrossCheckAgree": true
+    }
+  ],
+  "blockerTally": {
+    "ignited": 5,
+    "store-never-initialized": 3
+  },
+  "noPlanSeeds": 3,
+  "unclassified": 0,
+  "unexplainedVillages": 0,
+  "perSeed": [
+    {
+      "seed": 103211,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "standing": 190,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 4,
+      "villageLost": false,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "detail": {
+        "firstCreationDay": 21,
+        "firstCreator": "havenTick",
+        "firstSource": "heard",
+        "firstVid": "gen_vx7zthb",
+        "totalCreates": 9,
+        "rangerCalls": 105,
+        "totalCalls": 105,
+        "initializers": {
+          "seedRowsW3": 11,
+          "firstSeedRowDay": 28,
+          "agencyKills": 22,
+          "firstAgencyKillDay": 21,
+          "gateAvoids": 1,
+          "firstGateAvoidDay": 111,
+          "bondTends": 0,
+          "musterStanddowns": 0,
+          "firstInitializerDay": 21,
+          "storeEverInitialized": true
+        },
+        "storeState": {
+          "storeEverInitialized": true,
+          "firstInitializerDay": 21,
+          "firstInitializerKind": "winPlanNoteKill",
+          "storeInitEvents": [
+            {
+              "day": 21,
+              "kind": "winPlanNoteKill",
+              "vid": "gen_0144its",
+              "caller": "winPlanNoteKill"
+            }
+          ],
+          "storeGuardBlockedCalls": 37,
+          "storeGuardFirstDay": 4,
+          "villageFirstStoreDay": 21,
+          "storeCrossCheck": {
+            "agree": true,
+            "reason": "agree",
+            "eventsFirstDay": 21,
+            "villageFirstDay": 21
+          }
+        },
+        "firstCreationOnOrAfterInitializer": true
+      },
+      "creates": 9,
+      "havenTickCalls": 105,
+      "rangerCalls": 105,
+      "rangerDays": 255,
+      "rangers": 9,
+      "villagers": 18,
+      "heardEver": true,
+      "heardFirstDay": 4,
+      "foughtEver": true,
+      "foughtMax": 9,
+      "engagedEver": true,
+      "callOutcomes": {
+        "store-uninitialized": 43,
+        "created": 6,
+        "plan-exists": 56
+      },
+      "unexplainedCalls": 0,
+      "storeGuardBlockedCalls": 37,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 21,
+      "firstInitializerKind": "winPlanNoteKill",
+      "storeCrossCheckAgree": true,
+      "nullTickCalls": 0,
+      "tickGateChecks": 600,
+      "tickGateMismatches": 0,
+      "mismatchList": [],
+      "instrumentErrors": 0,
+      "holdersWithoutCreation": 0,
+      "censusRowWithoutEpisodeUnexplained": 0
+    },
+    {
+      "seed": 103212,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "standing": 199,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 4,
+      "villageLost": false,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "detail": {
+        "firstCreationDay": 83,
+        "firstCreator": "agency-evade",
+        "firstSource": null,
+        "firstVid": "carlos_diaz",
+        "totalCreates": 2,
+        "rangerCalls": 119,
+        "totalCalls": 119,
+        "initializers": {
+          "seedRowsW3": 4,
+          "firstSeedRowDay": 83,
+          "agencyKills": 3,
+          "firstAgencyKillDay": 87,
+          "gateAvoids": 3,
+          "firstGateAvoidDay": 86,
+          "bondTends": 0,
+          "musterStanddowns": 0,
+          "firstInitializerDay": 83,
+          "storeEverInitialized": true
+        },
+        "storeState": {
+          "storeEverInitialized": true,
+          "firstInitializerDay": 83,
+          "firstInitializerKind": "winPlanSeedFromFight",
+          "storeInitEvents": [
+            {
+              "day": 83,
+              "kind": "winPlanSeedFromFight",
+              "vid": "carlos_diaz",
+              "caller": "at Object.expeditionMonster (src/js/villager-agency.js:676:51)"
+            }
+          ],
+          "storeGuardBlockedCalls": 100,
+          "storeGuardFirstDay": 7,
+          "villageFirstStoreDay": 83,
+          "storeCrossCheck": {
+            "agree": true,
+            "reason": "agree",
+            "eventsFirstDay": 83,
+            "villageFirstDay": 83
+          }
+        },
+        "firstCreationOnOrAfterInitializer": true
+      },
+      "creates": 2,
+      "havenTickCalls": 119,
+      "rangerCalls": 119,
+      "rangerDays": 236,
+      "rangers": 6,
+      "villagers": 21,
+      "heardEver": true,
+      "heardFirstDay": 6,
+      "foughtEver": true,
+      "foughtMax": 2,
+      "engagedEver": true,
+      "callOutcomes": {
+        "store-uninitialized": 109,
+        "created": 1,
+        "plan-exists": 9
+      },
+      "unexplainedCalls": 0,
+      "storeGuardBlockedCalls": 100,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 83,
+      "firstInitializerKind": "winPlanSeedFromFight",
+      "storeCrossCheckAgree": true,
+      "nullTickCalls": 0,
+      "tickGateChecks": 600,
+      "tickGateMismatches": 0,
+      "mismatchList": [],
+      "instrumentErrors": 0,
+      "holdersWithoutCreation": 0,
+      "censusRowWithoutEpisodeUnexplained": 0
+    },
+    {
+      "seed": 103213,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "standing": 199,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 4,
+      "villageLost": false,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "detail": {
+        "firstCreationDay": 5,
+        "firstCreator": "havenTick",
+        "firstSource": "heard",
+        "firstVid": "gen_v6er9x9",
+        "totalCreates": 5,
+        "rangerCalls": 39,
+        "totalCalls": 39,
+        "initializers": {
+          "seedRowsW3": 1,
+          "firstSeedRowDay": 31,
+          "agencyKills": 15,
+          "firstAgencyKillDay": 5,
+          "gateAvoids": 0,
+          "firstGateAvoidDay": null,
+          "bondTends": 0,
+          "musterStanddowns": 0,
+          "firstInitializerDay": 5,
+          "storeEverInitialized": true
+        },
+        "storeState": {
+          "storeEverInitialized": true,
+          "firstInitializerDay": 5,
+          "firstInitializerKind": "winPlanNoteKill",
+          "storeInitEvents": [
+            {
+              "day": 5,
+              "kind": "winPlanNoteKill",
+              "vid": "gen_q17iaiy",
+              "caller": "winPlanNoteKill"
+            }
+          ],
+          "storeGuardBlockedCalls": 1,
+          "storeGuardFirstDay": 4,
+          "villageFirstStoreDay": 5,
+          "storeCrossCheck": {
+            "agree": true,
+            "reason": "agree",
+            "eventsFirstDay": 5,
+            "villageFirstDay": 5
+          }
+        },
+        "firstCreationOnOrAfterInitializer": true
+      },
+      "creates": 5,
+      "havenTickCalls": 39,
+      "rangerCalls": 39,
+      "rangerDays": 149,
+      "rangers": 5,
+      "villagers": 17,
+      "heardEver": true,
+      "heardFirstDay": 4,
+      "foughtEver": true,
+      "foughtMax": 7,
+      "engagedEver": true,
+      "callOutcomes": {
+        "store-uninitialized": 7,
+        "created": 4,
+        "plan-exists": 28
+      },
+      "unexplainedCalls": 0,
+      "storeGuardBlockedCalls": 1,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 5,
+      "firstInitializerKind": "winPlanNoteKill",
+      "storeCrossCheckAgree": true,
+      "nullTickCalls": 0,
+      "tickGateChecks": 600,
+      "tickGateMismatches": 0,
+      "mismatchList": [],
+      "instrumentErrors": 0,
+      "holdersWithoutCreation": 0,
+      "censusRowWithoutEpisodeUnexplained": 0
+    },
+    {
+      "seed": 103214,
+      "days": 131,
+      "gameDays": 132,
+      "endReason": "village-lost",
+      "standing": 160,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 4,
+      "villageLost": true,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "detail": {
+        "firstCreationDay": 31,
+        "firstCreator": "havenTick",
+        "firstSource": "both",
+        "firstVid": "gen_wky4uzt",
+        "totalCreates": 3,
+        "rangerCalls": 67,
+        "totalCalls": 67,
+        "initializers": {
+          "seedRowsW3": 0,
+          "firstSeedRowDay": null,
+          "agencyKills": 1,
+          "firstAgencyKillDay": 30,
+          "gateAvoids": 0,
+          "firstGateAvoidDay": null,
+          "bondTends": 0,
+          "musterStanddowns": 0,
+          "firstInitializerDay": 30,
+          "storeEverInitialized": true
+        },
+        "storeState": {
+          "storeEverInitialized": true,
+          "firstInitializerDay": 30,
+          "firstInitializerKind": "winPlanNoteKill",
+          "storeInitEvents": [
+            {
+              "day": 30,
+              "kind": "winPlanNoteKill",
+              "vid": "gen_wky4uzt",
+              "caller": "winPlanNoteKill"
+            }
+          ],
+          "storeGuardBlockedCalls": 28,
+          "storeGuardFirstDay": 6,
+          "villageFirstStoreDay": 30,
+          "storeCrossCheck": {
+            "agree": true,
+            "reason": "agree",
+            "eventsFirstDay": 30,
+            "villageFirstDay": 30
+          }
+        },
+        "firstCreationOnOrAfterInitializer": true
+      },
+      "creates": 3,
+      "havenTickCalls": 67,
+      "rangerCalls": 67,
+      "rangerDays": 131,
+      "rangers": 4,
+      "villagers": 15,
+      "heardEver": true,
+      "heardFirstDay": 5,
+      "foughtEver": true,
+      "foughtMax": 1,
+      "engagedEver": true,
+      "callOutcomes": {
+        "store-uninitialized": 38,
+        "created": 3,
+        "plan-exists": 26
+      },
+      "unexplainedCalls": 0,
+      "storeGuardBlockedCalls": 28,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 30,
+      "firstInitializerKind": "winPlanNoteKill",
+      "storeCrossCheckAgree": true,
+      "nullTickCalls": 0,
+      "tickGateChecks": 524,
+      "tickGateMismatches": 0,
+      "mismatchList": [],
+      "instrumentErrors": 0,
+      "holdersWithoutCreation": 0,
+      "censusRowWithoutEpisodeUnexplained": 0
+    },
+    {
+      "seed": 103215,
+      "days": 150,
+      "gameDays": 150,
+      "endReason": "survived",
+      "standing": 295,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 5,
+      "villageLost": false,
+      "noPlan": true,
+      "blocker": "store-never-initialized",
+      "subBlocker": null,
+      "detail": {
+        "storeGuardBlockedCalls": 87,
+        "storeGuardFirstDay": 4,
+        "blockedCalls": [
+          {
+            "day": 4,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 4,
+            "vid": "quinn_murphy",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 4,
+            "vid": "quinn_murphy",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 5,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 6,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 6,
+            "vid": "quinn_murphy",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 7,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 2
+          },
+          {
+            "day": 8,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 2
+          },
+          {
+            "day": 9,
+            "vid": "quinn_murphy",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 6
+          },
+          {
+            "day": 9,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 6
+          },
+          {
+            "day": 10,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 6
+          },
+          {
+            "day": 10,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 6
+          },
+          {
+            "day": 11,
+            "vid": "quinn_murphy",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 6
+          },
+          {
+            "day": 12,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 12,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 14,
+            "vid": "quinn_murphy",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 15,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 16,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 16,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 16,
+            "vid": "quinn_murphy",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 17,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 17,
+            "vid": "quinn_murphy",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 18,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 18,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 19,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 21,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 21,
+            "vid": "quinn_murphy",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 21,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 23,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 12
+          },
+          {
+            "day": 23,
+            "vid": "quinn_murphy",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 12
+          },
+          {
+            "day": 24,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 14
+          },
+          {
+            "day": 24,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 14
+          },
+          {
+            "day": 25,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 14
+          },
+          {
+            "day": 25,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 14
+          },
+          {
+            "day": 25,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 14
+          },
+          {
+            "day": 27,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 28,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 29,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 29,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 30,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 31,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 32,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 32,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 33,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 33,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 35,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 35,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 37,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 38,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 39,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 41,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 41,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 42,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 42,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 43,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 44,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 47,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 47,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 48,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 49,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 51,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 52,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 52,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 53,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 53,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 57,
+            "vid": "gen_maera0c",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 66,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 23
+          },
+          {
+            "day": 67,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 23
+          },
+          {
+            "day": 68,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 24
+          },
+          {
+            "day": 69,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 24
+          },
+          {
+            "day": 73,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 24
+          },
+          {
+            "day": 76,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 24
+          },
+          {
+            "day": 78,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 24
+          },
+          {
+            "day": 79,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 24
+          },
+          {
+            "day": 84,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 24
+          },
+          {
+            "day": 85,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 87,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 89,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 90,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 93,
+            "vid": "gen_3jxdmx1",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 104,
+            "vid": "liam_davis",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 106,
+            "vid": "liam_davis",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 107,
+            "vid": "liam_davis",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 111,
+            "vid": "liam_davis",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 27
+          },
+          {
+            "day": 112,
+            "vid": "liam_davis",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 27
+          },
+          {
+            "day": 113,
+            "vid": "liam_davis",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 27
+          },
+          {
+            "day": 117,
+            "vid": "liam_davis",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          }
+        ],
+        "rangerCalls": 89,
+        "totalCalls": 89,
+        "callOutcomes": {
+          "store-uninitialized": 89
+        },
+        "initializers": {
+          "seedRowsW3": 0,
+          "firstSeedRowDay": null,
+          "agencyKills": 0,
+          "firstAgencyKillDay": null,
+          "gateAvoids": 0,
+          "firstGateAvoidDay": null,
+          "bondTends": 0,
+          "musterStanddowns": 0,
+          "firstInitializerDay": null,
+          "storeEverInitialized": false
+        },
+        "storeState": {
+          "storeEverInitialized": false,
+          "firstInitializerDay": null,
+          "firstInitializerKind": null,
+          "storeInitEvents": [],
+          "storeGuardBlockedCalls": 87,
+          "storeGuardFirstDay": 4,
+          "villageFirstStoreDay": null,
+          "storeCrossCheck": {
+            "agree": true,
+            "reason": "never-initialized-both"
+          }
+        },
+        "heardFirstDay": 4,
+        "foughtFirstDay": null,
+        "rangerVids": [
+          "gen_3jxdmx1",
+          "gen_maera0c",
+          "quinn_murphy",
+          "liam_davis"
+        ]
+      },
+      "creates": 0,
+      "havenTickCalls": 89,
+      "rangerCalls": 89,
+      "rangerDays": 185,
+      "rangers": 4,
+      "villagers": 18,
+      "heardEver": true,
+      "heardFirstDay": 4,
+      "foughtEver": false,
+      "foughtMax": 0,
+      "engagedEver": true,
+      "callOutcomes": {
+        "store-uninitialized": 89
+      },
+      "unexplainedCalls": 0,
+      "storeGuardBlockedCalls": 87,
+      "storeEverInitialized": false,
+      "firstInitializerDay": null,
+      "firstInitializerKind": null,
+      "storeCrossCheckAgree": true,
+      "nullTickCalls": 0,
+      "tickGateChecks": 599,
+      "tickGateMismatches": 0,
+      "mismatchList": [],
+      "instrumentErrors": 0,
+      "holdersWithoutCreation": 0,
+      "censusRowWithoutEpisodeUnexplained": 0
+    },
+    {
+      "seed": 103216,
+      "days": 146,
+      "gameDays": 146,
+      "endReason": "village-lost",
+      "standing": 175,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 4,
+      "villageLost": true,
+      "noPlan": true,
+      "blocker": "store-never-initialized",
+      "subBlocker": null,
+      "detail": {
+        "storeGuardBlockedCalls": 187,
+        "storeGuardFirstDay": 9,
+        "blockedCalls": [
+          {
+            "day": 9,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 2
+          },
+          {
+            "day": 9,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 2
+          },
+          {
+            "day": 9,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 2
+          },
+          {
+            "day": 10,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 3
+          },
+          {
+            "day": 11,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 3
+          },
+          {
+            "day": 11,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 3
+          },
+          {
+            "day": 12,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 4
+          },
+          {
+            "day": 12,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 4
+          },
+          {
+            "day": 13,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 4
+          },
+          {
+            "day": 14,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 4
+          },
+          {
+            "day": 14,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 4
+          },
+          {
+            "day": 16,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 16,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 16,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 16,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 16,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 17,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 19,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 19,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 20,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 21,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 21,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 21,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 22,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 22,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 23,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 23,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 24,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 26,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 26,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 26,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 27,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 27,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 28,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 28,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 28,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 28,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 28,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 29,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 29,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 29,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 29,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 29,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 30,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 30,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 32,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 32,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 33,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 33,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 33,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 33,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 33,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 34,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 34,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 35,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 36,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 36,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 37,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 37,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 38,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 38,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 38,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 39,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 40,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 40,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 41,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 41,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 41,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 41,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 46,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 47,
+            "vid": "gen_5sx37zv",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 48,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 48,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 49,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 49,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 52,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 52,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 52,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 53,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 54,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 54,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 57,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 58,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 59,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 61,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 62,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 64,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 65,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 65,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 66,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 66,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 68,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 69,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 69,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 70,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 70,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 71,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 72,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 72,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 73,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 73,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 74,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 74,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 77,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 77,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 77,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 78,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 78,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 78,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 80,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 80,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 80,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 81,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 82,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 82,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 83,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 86,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 87,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 87,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 89,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 90,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 91,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 91,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 20
+          },
+          {
+            "day": 91,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 92,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 92,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 92,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 94,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 94,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 94,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 95,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 95,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 97,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 98,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 98,
+            "vid": "katarina_novak",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 99,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 100,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 100,
+            "vid": "aki_tanaka",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 100,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 101,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 101,
+            "vid": "aki_tanaka",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 102,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 103,
+            "vid": "aki_tanaka",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 105,
+            "vid": "gen_gvslr3o",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 106,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 106,
+            "vid": "aki_tanaka",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 107,
+            "vid": "aki_tanaka",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 108,
+            "vid": "aki_tanaka",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 109,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 109,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 110,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 110,
+            "vid": "aki_tanaka",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 112,
+            "vid": "aki_tanaka",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 112,
+            "vid": "jovan_milic",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 113,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 113,
+            "vid": "jovan_milic",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 114,
+            "vid": "nina_petrova",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 115,
+            "vid": "jovan_milic",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 115,
+            "vid": "aki_tanaka",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 115,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 116,
+            "vid": "jovan_milic",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 116,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 117,
+            "vid": "nina_petrova",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 118,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 119,
+            "vid": "jovan_milic",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 120,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 120,
+            "vid": "nina_petrova",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 121,
+            "vid": "nina_petrova",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 121,
+            "vid": "jovan_milic",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 121,
+            "vid": "nina_petrova",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 122,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 122,
+            "vid": "jovan_milic",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 123,
+            "vid": "nina_petrova",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 124,
+            "vid": "jovan_milic",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 124,
+            "vid": "app_mgpspki3646",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 124,
+            "vid": "jovan_milic",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 124,
+            "vid": "nina_petrova",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 125,
+            "vid": "jovan_milic",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 125,
+            "vid": "nina_petrova",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 128,
+            "vid": "jovan_milic",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 132,
+            "vid": "visjoin_130",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 134,
+            "vid": "visjoin_130",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 135,
+            "vid": "visjoin_130",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 23
+          },
+          {
+            "day": 138,
+            "vid": "visjoin_130",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 23
+          },
+          {
+            "day": 139,
+            "vid": "visjoin_130",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 23
+          },
+          {
+            "day": 140,
+            "vid": "visjoin_130",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 23
+          },
+          {
+            "day": 141,
+            "vid": "visjoin_130",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 23
+          }
+        ],
+        "rangerCalls": 203,
+        "totalCalls": 203,
+        "callOutcomes": {
+          "store-uninitialized": 203
+        },
+        "initializers": {
+          "seedRowsW3": 0,
+          "firstSeedRowDay": null,
+          "agencyKills": 0,
+          "firstAgencyKillDay": null,
+          "gateAvoids": 0,
+          "firstGateAvoidDay": null,
+          "bondTends": 0,
+          "musterStanddowns": 0,
+          "firstInitializerDay": null,
+          "storeEverInitialized": false
+        },
+        "storeState": {
+          "storeEverInitialized": false,
+          "firstInitializerDay": null,
+          "firstInitializerKind": null,
+          "storeInitEvents": [],
+          "storeGuardBlockedCalls": 187,
+          "storeGuardFirstDay": 9,
+          "villageFirstStoreDay": null,
+          "storeCrossCheck": {
+            "agree": true,
+            "reason": "never-initialized-both"
+          }
+        },
+        "heardFirstDay": 8,
+        "foughtFirstDay": null,
+        "rangerVids": [
+          "gen_5sx37zv",
+          "gen_gvslr3o",
+          "katarina_novak",
+          "app_mgpspki3646",
+          "aki_tanaka",
+          "jovan_milic",
+          "nina_petrova",
+          "visjoin_130"
+        ]
+      },
+      "creates": 0,
+      "havenTickCalls": 203,
+      "rangerCalls": 203,
+      "rangerDays": 340,
+      "rangers": 8,
+      "villagers": 23,
+      "heardEver": true,
+      "heardFirstDay": 8,
+      "foughtEver": false,
+      "foughtMax": 0,
+      "engagedEver": true,
+      "callOutcomes": {
+        "store-uninitialized": 203
+      },
+      "unexplainedCalls": 0,
+      "storeGuardBlockedCalls": 187,
+      "storeEverInitialized": false,
+      "firstInitializerDay": null,
+      "firstInitializerKind": null,
+      "storeCrossCheckAgree": true,
+      "nullTickCalls": 0,
+      "tickGateChecks": 584,
+      "tickGateMismatches": 0,
+      "mismatchList": [],
+      "instrumentErrors": 0,
+      "holdersWithoutCreation": 0,
+      "censusRowWithoutEpisodeUnexplained": 0
+    },
+    {
+      "seed": 103217,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "standing": 375,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 5,
+      "villageLost": false,
+      "noPlan": true,
+      "blocker": "store-never-initialized",
+      "subBlocker": null,
+      "detail": {
+        "storeGuardBlockedCalls": 182,
+        "storeGuardFirstDay": 6,
+        "blockedCalls": [
+          {
+            "day": 6,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 7,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 7,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 8,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 8,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 8,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 9,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 10,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 10,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 11,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 11,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 11,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 13,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 13,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 1
+          },
+          {
+            "day": 14,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 2
+          },
+          {
+            "day": 14,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 2
+          },
+          {
+            "day": 15,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 4
+          },
+          {
+            "day": 15,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 4
+          },
+          {
+            "day": 16,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 4
+          },
+          {
+            "day": 16,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 4
+          },
+          {
+            "day": 17,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 4
+          },
+          {
+            "day": 18,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 18,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 18,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 19,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 20,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 5
+          },
+          {
+            "day": 21,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 6
+          },
+          {
+            "day": 21,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 6
+          },
+          {
+            "day": 21,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 6
+          },
+          {
+            "day": 22,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 6
+          },
+          {
+            "day": 22,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 6
+          },
+          {
+            "day": 23,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 23,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 23,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 24,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 24,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 24,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 25,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 25,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 25,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 26,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 26,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 26,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 26,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 26,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 28,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 7
+          },
+          {
+            "day": 30,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 8
+          },
+          {
+            "day": 30,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 8
+          },
+          {
+            "day": 31,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 31,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 9
+          },
+          {
+            "day": 32,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 32,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 32,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 32,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 34,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 34,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 35,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 35,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 35,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 36,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 37,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 37,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 38,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 38,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 39,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 11
+          },
+          {
+            "day": 40,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 12
+          },
+          {
+            "day": 40,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 12
+          },
+          {
+            "day": 40,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 12
+          },
+          {
+            "day": 41,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 12
+          },
+          {
+            "day": 41,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 12
+          },
+          {
+            "day": 44,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 12
+          },
+          {
+            "day": 46,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 12
+          },
+          {
+            "day": 47,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 47,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 47,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 48,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 48,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 48,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 49,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 13
+          },
+          {
+            "day": 50,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 50,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 50,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 51,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 51,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 52,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 52,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 52,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 52,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 53,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 53,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 54,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 15
+          },
+          {
+            "day": 56,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 56,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 58,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 58,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 58,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 59,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 59,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 59,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 16
+          },
+          {
+            "day": 62,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 63,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 17
+          },
+          {
+            "day": 64,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 18
+          },
+          {
+            "day": 64,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 18
+          },
+          {
+            "day": 65,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 65,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 21
+          },
+          {
+            "day": 66,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 66,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 22
+          },
+          {
+            "day": 67,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 23
+          },
+          {
+            "day": 67,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 23
+          },
+          {
+            "day": 68,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 68,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 68,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 69,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 69,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 69,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 70,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 71,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 71,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 72,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 73,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 73,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 25
+          },
+          {
+            "day": 74,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 26
+          },
+          {
+            "day": 75,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 26
+          },
+          {
+            "day": 75,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 26
+          },
+          {
+            "day": 75,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 26
+          },
+          {
+            "day": 77,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 26
+          },
+          {
+            "day": 78,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 26
+          },
+          {
+            "day": 79,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 27
+          },
+          {
+            "day": 81,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 27
+          },
+          {
+            "day": 82,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 27
+          },
+          {
+            "day": 82,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 27
+          },
+          {
+            "day": 83,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 27
+          },
+          {
+            "day": 83,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 27
+          },
+          {
+            "day": 83,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 27
+          },
+          {
+            "day": 84,
+            "vid": "gen_pujr0rt",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 28
+          },
+          {
+            "day": 85,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 28
+          },
+          {
+            "day": 85,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 86,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 86,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 89,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 90,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 91,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 92,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 93,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 93,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 94,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 94,
+            "vid": "gen_2t2lvdp",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 95,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 96,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 99,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 100,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 101,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 29
+          },
+          {
+            "day": 105,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 30
+          },
+          {
+            "day": 108,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 31
+          },
+          {
+            "day": 109,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 31
+          },
+          {
+            "day": 113,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 31
+          },
+          {
+            "day": 114,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 115,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 115,
+            "vid": "diana_osei",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 115,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 115,
+            "vid": "diana_osei",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 116,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 120,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 121,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 123,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 124,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 125,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 128,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 129,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 130,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 32
+          },
+          {
+            "day": 133,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 34
+          },
+          {
+            "day": 134,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 34
+          },
+          {
+            "day": 137,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 35
+          },
+          {
+            "day": 137,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 35
+          },
+          {
+            "day": 138,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 35
+          },
+          {
+            "day": 140,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 36
+          },
+          {
+            "day": 142,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 36
+          },
+          {
+            "day": 143,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 36
+          },
+          {
+            "day": 145,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 36
+          },
+          {
+            "day": 147,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 36
+          },
+          {
+            "day": 148,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 36
+          },
+          {
+            "day": 149,
+            "vid": "mateo_alvarez",
+            "lived": false,
+            "heard": true,
+            "foughtN": 0,
+            "slainN": 36
+          }
+        ],
+        "rangerCalls": 192,
+        "totalCalls": 192,
+        "callOutcomes": {
+          "store-uninitialized": 192
+        },
+        "initializers": {
+          "seedRowsW3": 0,
+          "firstSeedRowDay": null,
+          "agencyKills": 0,
+          "firstAgencyKillDay": null,
+          "gateAvoids": 0,
+          "firstGateAvoidDay": null,
+          "bondTends": 0,
+          "musterStanddowns": 0,
+          "firstInitializerDay": null,
+          "storeEverInitialized": false
+        },
+        "storeState": {
+          "storeEverInitialized": false,
+          "firstInitializerDay": null,
+          "firstInitializerKind": null,
+          "storeInitEvents": [],
+          "storeGuardBlockedCalls": 182,
+          "storeGuardFirstDay": 6,
+          "villageFirstStoreDay": null,
+          "storeCrossCheck": {
+            "agree": true,
+            "reason": "never-initialized-both"
+          }
+        },
+        "heardFirstDay": 5,
+        "foughtFirstDay": null,
+        "rangerVids": [
+          "gen_pujr0rt",
+          "gen_2t2lvdp",
+          "mateo_alvarez",
+          "diana_osei"
+        ]
+      },
+      "creates": 0,
+      "havenTickCalls": 192,
+      "rangerCalls": 192,
+      "rangerDays": 324,
+      "rangers": 4,
+      "villagers": 14,
+      "heardEver": true,
+      "heardFirstDay": 5,
+      "foughtEver": false,
+      "foughtMax": 0,
+      "engagedEver": true,
+      "callOutcomes": {
+        "store-uninitialized": 192
+      },
+      "unexplainedCalls": 0,
+      "storeGuardBlockedCalls": 182,
+      "storeEverInitialized": false,
+      "firstInitializerDay": null,
+      "firstInitializerKind": null,
+      "storeCrossCheckAgree": true,
+      "nullTickCalls": 0,
+      "tickGateChecks": 600,
+      "tickGateMismatches": 0,
+      "mismatchList": [],
+      "instrumentErrors": 0,
+      "holdersWithoutCreation": 0,
+      "censusRowWithoutEpisodeUnexplained": 0
+    },
+    {
+      "seed": 103218,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "standing": 199,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 4,
+      "villageLost": false,
+      "noPlan": false,
+      "blocker": "ignited",
+      "subBlocker": null,
+      "detail": {
+        "firstCreationDay": 95,
+        "firstCreator": "agency-evade",
+        "firstSource": null,
+        "firstVid": "diana_osei",
+        "totalCreates": 3,
+        "rangerCalls": 85,
+        "totalCalls": 85,
+        "initializers": {
+          "seedRowsW3": 4,
+          "firstSeedRowDay": 95,
+          "agencyKills": 2,
+          "firstAgencyKillDay": 99,
+          "gateAvoids": 0,
+          "firstGateAvoidDay": null,
+          "bondTends": 0,
+          "musterStanddowns": 0,
+          "firstInitializerDay": 95,
+          "storeEverInitialized": true
+        },
+        "storeState": {
+          "storeEverInitialized": true,
+          "firstInitializerDay": 95,
+          "firstInitializerKind": "winPlanSeedFromFight",
+          "storeInitEvents": [
+            {
+              "day": 95,
+              "kind": "winPlanSeedFromFight",
+              "vid": "diana_osei",
+              "caller": "at Object.expeditionMonster (src/js/villager-agency.js:676:51)"
+            }
+          ],
+          "storeGuardBlockedCalls": 54,
+          "storeGuardFirstDay": 12,
+          "villageFirstStoreDay": 95,
+          "storeCrossCheck": {
+            "agree": true,
+            "reason": "agree",
+            "eventsFirstDay": 95,
+            "villageFirstDay": 95
+          }
+        },
+        "firstCreationOnOrAfterInitializer": true
+      },
+      "creates": 3,
+      "havenTickCalls": 85,
+      "rangerCalls": 85,
+      "rangerDays": 178,
+      "rangers": 5,
+      "villagers": 22,
+      "heardEver": true,
+      "heardFirstDay": 10,
+      "foughtEver": true,
+      "foughtMax": 2,
+      "engagedEver": true,
+      "callOutcomes": {
+        "store-uninitialized": 66,
+        "created": 2,
+        "plan-exists": 17
+      },
+      "unexplainedCalls": 0,
+      "storeGuardBlockedCalls": 54,
+      "storeEverInitialized": true,
+      "firstInitializerDay": 95,
+      "firstInitializerKind": "winPlanSeedFromFight",
+      "storeCrossCheckAgree": true,
+      "nullTickCalls": 0,
+      "tickGateChecks": 600,
+      "tickGateMismatches": 0,
+      "mismatchList": [],
+      "instrumentErrors": 0,
+      "holdersWithoutCreation": 0,
+      "censusRowWithoutEpisodeUnexplained": 0
+    }
+  ],
+  "wall": {
+    "nationalByStanding": 2,
+    "nationalByRank": 0,
+    "table": 0,
+    "wins": 0,
+    "wave4": 8,
+    "wave5": 2
+  },
+  "medianSurvival": 151,
+  "wallOff": {
+    "nationalByStanding": 2,
+    "nationalByRank": 0,
+    "table": 0,
+    "wins": 0,
+    "wave4": 8,
+    "wave5": 2
+  },
+  "medianSurvivalOff": 151,
+  "neutrality": {
+    "identical": 8,
+    "total": 8,
+    "diffs": []
+  },
+  "tickGateMismatches": 0,
+  "instrumentErrors": 0,
+  "offInstrumentErrors": 0,
+  "unexplainedCalls": 0,
+  "nullTickCalls": 0,
+  "unknownSources": 0,
+  "unknownPaths": 0,
+  "storeCrossDisagree": 0,
+  "holdersWithoutCreation": 0,
+  "censusRowWithoutEpisodeUnexplained": 0,
+  "bars": {
+    "corpus": {
+      "pass": true,
+      "onFiles": 8,
+      "offFiles": 8,
+      "instrumentErrors": 0,
+      "offInstrumentErrors": 0,
+      "tickGateMismatches": 0,
+      "nullTickCalls": 0,
+      "unknownSources": 0,
+      "unknownPaths": 0,
+      "holdersWithoutCreation": 0,
+      "censusUnexplained": 0,
+      "storeCrossDisagree": 0
+    },
+    "classificationCoverage": {
+      "pass": true,
+      "noPlanSeeds": 3,
+      "unclassified": 0,
+      "unexplainedVillages": 0
+    },
+    "wallReported": {
+      "pass": true,
+      "wall": {
+        "nationalByStanding": 2,
+        "nationalByRank": 0,
+        "table": 0,
+        "wins": 0,
+        "wave4": 8,
+        "wave5": 2
+      },
+      "medianSurvival": 151,
+      "wallOff": {
+        "nationalByStanding": 2,
+        "nationalByRank": 0,
+        "table": 0,
+        "wins": 0,
+        "wave4": 8,
+        "wave5": 2
+      },
+      "medianSurvivalOff": 151
+    },
+    "neutrality": {
+      "pass": true,
+      "identical": 8,
+      "total": 8,
+      "diffs": []
+    }
+  }
+}
