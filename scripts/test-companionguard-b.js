@@ -40,23 +40,28 @@ function gitStatusWithRetry(args) {
 console.log('== static checks ==');
 // 1. The guard's src/ scope is EXACTLY villager-agency.js (the
 // guard) + villager-brain.js (the mirror's plan-record honesty).
-// Nothing else in src/ may change on this arm.
+// Nothing else in src/ may change on this arm. Measured as the diff
+// against the FROZEN PREREG commit (35ba8eb58), not the worktree
+// status: the arm lands in two commits (guard + proof, then the GO
+// gate removal), and the scope check must pass at both — after the
+// first commit the worktree status is clean, after the gate removal
+// only agency.js is dirty, but the arm's cumulative src/ change is
+// still exactly these two files either way.
 let srcStatus = null, srcErr = null;
-try { srcStatus = gitStatusWithRetry('status --porcelain -- src/'); }
+try { srcStatus = gitStatusWithRetry('diff --name-only 35ba8eb58 -- src/'); }
 catch (e) { srcErr = String((e && e.message) || e).slice(0, 120); }
 check('game-code change touches only villager-agency.js + villager-brain.js', (function () {
   if (srcStatus === null) return false;
-  // NOTE: no trim() on the whole string — trim eats the leading
-  // space of the first porcelain line (" M ..."), shifting slice(3)
-  // by one and mangling the first path. Porcelain is always XY +
-  // space + path, so slice(3) is exact on raw lines.
-  const files = srcStatus.split('\n').filter(Boolean).map(function (l) { return l.slice(3); });
+  const files = srcStatus.split('\n').filter(Boolean);
   return files.length === 2 && files.indexOf('src/js/villager-agency.js') !== -1 &&
     files.indexOf('src/js/villager-brain.js') !== -1;
 })(), srcErr || JSON.stringify(srcStatus));
 const agencySrc = read('src/js/villager-agency.js');
 const brainSrc = read('src/js/villager-brain.js');
-check('guard: startExpedition reads the COMPANIONGUARD env gate', agencySrc.indexOf("process.env.COMPANIONGUARD === '1'") !== -1);
+// GO 2026-11-16: the env gate was REMOVED — the guard ships
+// unconditional. No COMPANIONGUARD env READ may remain in the guard
+// (the arm name may still appear in comments).
+check('guard: startExpedition reads NO COMPANIONGUARD env — the guard ships unconditional', agencySrc.indexOf('process.env.COMPANIONGUARD') === -1);
 check('guard: startExpedition returns early when a live expedition record exists for the villager',
   agencySrc.indexOf('st.exped[vid]') !== -1 &&
   agencySrc.indexOf('companionGuardSkips') !== -1);
@@ -445,10 +450,15 @@ check('starvation: cause starved / kind starvation / kind Starvation count; hung
 // ---------- live runs + determinism legs D1/D2 ----------
 console.log('== live runs + determinism legs D1/D2 ==');
 function childEnv(envExtra) {
-  // D1/D2 + live-shape children run the CONTROL trajectory (guard
-  // off): MODE=off and no COMPANIONGUARD in the env, whatever the
-  // parent process carries — the driver refuses MODE=on without the
-  // guard env, so the mode must be explicit here.
+  // D1/D2 + live-shape children run with MODE=off and no
+  // COMPANIONGUARD in the env, whatever the parent process carries
+  // — the driver refuses MODE=on without the guard env, so the mode
+  // must be explicit here. GO 2026-11-16: the guard ships
+  // UNCONDITIONAL, so these children run the SHIPPED trajectory
+  // (guard on) — MODE=off is now only the driver's corpus label,
+  // not a guard state. D1/D2 stay valid: both sides run the same
+  // (always-on) guard state, so the comparison still isolates the
+  // recorder alone.
   const env = Object.assign({}, process.env, { DAYS: '60', MODE: 'off' }, envExtra || {});
   delete env.COMPANIONGUARD;
   return env;
@@ -464,20 +474,21 @@ function childFingerprint(envExtra) {
   return JSON.parse(out.trim());
 }
 // Live unit scenarios (this arm): direct startExpedition calls on a
-// real game — no driver, no policy run. Guard ON: an already-out
-// villager is skipped by a companion-style directed call in the SAME
-// part (record object identical, legs/since untouched, counter +1).
-// Guard OFF: the same call overwrites (new object, same since key —
-// the same-part collision). Not-out villager: taken either way.
-// Runs in a child — never two harnesses in one process.
+// real game — no driver, no policy run. GO 2026-11-16: the guard
+// ships UNCONDITIONAL (env gate removed), so NO env is set anywhere
+// here — the skip must fire with no COMPANIONGUARD in the env at
+// all. An already-out villager is skipped by a companion-style
+// directed call in the SAME part (record object identical,
+// legs/since untouched, counter +1); a second directed call skips
+// again (counter +2 — no OFF exists anymore). Not-out villager:
+// taken. Runs in a child — never two harnesses in one process.
 function childUnitScenarios() {
   const script = [
     "const { loadGame, setupGame } = require('./scripts/sim-harness.js');",
     "(async function () {",
     "  const res = { launched: null, skipSameObject: null, skipCounter: null, skipSince: null, skipLegs: null,",
-    "    offOverwrote: null, offSameKey: null, notOutTaken: null, counter0: null, finalCounter: null, errors: [] };",
+    "    envFreeSkipSameObject: null, envFreeSkipCounter: null, notOutTaken: null, counter0: null, finalCounter: null, errors: [] };",
     "  try {",
-    "    process.env.COMPANIONGUARD = '1';",
     "    const { Game } = await loadGame({ seed: 103021, mode: 'companionguard-unittest', fullTelemetry: false });",
     "    await setupGame(Game);",
     "    const expedOf = function (vid) { try { return ((((Game.state || {}).village || {}).agency || {}).exped || {})[vid] || null; } catch (e) { return null; } };",
@@ -502,12 +513,10 @@ function childUnitScenarios() {
     "    res.skipCounter = (guardCount() === counter0 + 1);",
     "    res.skipSince = (after && after.sinceDay === sinceDay1 && after.sincePart === sincePart1);",
     "    res.skipLegs = (after && after.legs === legs1);",
-    "    delete process.env.COMPANIONGUARD;",
     "    Game.startExpedition(A, hx, hy, false, { tx: 6, ty: 6, duration: 12 });",
-    "    const afterOff = expedOf(A);",
-    "    res.offOverwrote = (afterOff && afterOff !== ref1);",
-    "    res.offSameKey = (afterOff && afterOff.sinceDay === sinceDay1 && afterOff.sincePart === sincePart1);",
-    "    process.env.COMPANIONGUARD = '1';",
+    "    const afterFree = expedOf(A);",
+    "    res.envFreeSkipSameObject = (afterFree === ref1);",
+    "    res.envFreeSkipCounter = (guardCount() === counter0 + 2);",
     "    let B = null;",
     "    for (let i = 0; i < roster.length; i++) {",
     "      if (roster[i] === A || expedOf(roster[i])) continue;",
@@ -525,8 +534,10 @@ function childUnitScenarios() {
 }
 (async function () {
   try {
-    // 5d live-shape run, control trajectory (guard off) — in a child,
-    // never two harnesses in one process.
+    // 5d live-shape run, MODE=off label — in a child, never two
+    // harnesses in one process. GO 2026-11-16: the guard is
+    // unconditional, so this runs the SHIPPED trajectory; seed 103021
+    // has 0 launches in 5d, hence 0 skips and a 0 counter.
     const shortEnv = childEnv({ DAYS: '5' });
     const shortScript = "const d=require('./scripts/companionguard-driver-20261116.js');" +
       "d.oneRun(103021).then(function(o){console.log(JSON.stringify(o));}).catch(function(e){console.error(e.stack);process.exit(1);});";
@@ -559,7 +570,7 @@ function childUnitScenarios() {
         (r.landed || r.guardSkipped === false));
     });
     check('launch rows carry guard fields (guardSkipped/hadLiveExped/pre/postGuardCount; landed rows never guard-skipped)', !badGuard, badGuard ? JSON.stringify(badGuard).slice(0, 300) : '');
-    check('control 5d run has guardOn false, 0 guard skips, 0 guard counter', shortOut.guardOn === false && shortOut.guardSkips === 0 && shortOut.guardSkipsState === 0,
+    check('5d MODE=off run has guardOn false (env label), 0 guard skips, 0 guard counter (no launches in 5d)', shortOut.guardOn === false && shortOut.guardSkips === 0 && shortOut.guardSkipsState === 0,
       'guardOn=' + shortOut.guardOn + ' guardSkips=' + shortOut.guardSkips + ' state=' + shortOut.guardSkipsState);
 
     // Live unit scenarios: the guard itself, on a real game.
@@ -568,12 +579,12 @@ function childUnitScenarios() {
     check('unit: a villager launches on a direct call (guard on, not out)', !!unit.launched && unit.errors.length === 0, JSON.stringify(unit.errors));
     check('unit: already-out villager SKIPPED by a companion-style directed call in the same part (same record object)',
       unit.skipSameObject === true, JSON.stringify(unit));
-    check('unit: the skip increments the village guard counter by exactly 1',
-      unit.skipCounter === true && unit.finalCounter === unit.counter0 + 1, JSON.stringify(unit));
+    check('unit: the two skips increment the village guard counter by exactly 2 (one per skipped call)',
+      unit.skipCounter === true && unit.envFreeSkipCounter === true && unit.finalCounter === unit.counter0 + 2, JSON.stringify(unit));
     check('unit: the same-part case is preserved (sinceDay/sincePart and legs untouched by the skip)',
       unit.skipSince === true && unit.skipLegs === true, JSON.stringify(unit));
-    check('unit: guard OFF overwrites exactly as before (new record object, same since key — the same-part collision)',
-      unit.offOverwrote === true && unit.offSameKey === true, JSON.stringify(unit));
+    check('unit: the guard fires with NO env set (unconditional — no OFF exists anymore; second skip keeps the same record)',
+      unit.envFreeSkipSameObject === true && unit.envFreeSkipCounter === true, JSON.stringify(unit));
     check('unit: a not-out villager is TAKEN by a directed call with the guard on',
       unit.notOutTaken === true, JSON.stringify(unit));
 
