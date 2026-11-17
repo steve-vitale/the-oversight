@@ -282,12 +282,17 @@ capstone is delivered.
 - **Commits (branch `journey-scale`):** `bb1495b05` prereg + driver/
   analyzer clones + analyzer proof tests (tooling only, 122/122);
   `e0a560b8f` the refusal-once-a-day fix + proof test (25/25, red
-  verified 17/8). Safe-commit index clobber struck on both commits
-  (staged-as-deleted / MM pattern); repaired each time via the
-  `ls-tree -r` pipe, blobs verified against HEAD, tree clean after
-  each repair.
-- [TO FILL at closeout: rebase/merge, release, rotation 3→0,
-  lock deletion, telemetry verdict.]
+  verified 17/8); `bc97d0569` run note; `218cf2763` gate adjudication.
+  Safe-commit index clobber struck on all four commits (staged-as-
+  deleted / MM pattern); repaired each time via the `ls-tree -r` pipe,
+  blobs verified against HEAD, tree clean after each repair.
+- **Closeout (follows this commit):** fetch origin master and verify
+  the base is current, `git merge --ff-only journey-scale` in the main
+  tree (rebase + re-run proof tests first if master moved), release the
+  worktree, remove it and the branch, final reaper sweep, kill the
+  heartbeat loop, write rotation 3→0 with read-back, delete the lock.
+  Merged locally, pending ship — no version bump, no push, no live
+  verification (the ship loop owns those).
 - The r233 panel corpus (per-seed JSONs + convo transcripts + analyzer
   log + gate log) lives under the goal hidden_files evidence dir for
   2026-11-17 (outside the repo, per the journey-lane pattern); the
