@@ -1,0 +1,73 @@
+seed 101201: endDay=43 aliveAt40=12 aliveEnd=12 wave=3 pantryEnd=53462 endAttempts=4 ended=4 trustDrops=0 jamDays=0 strandedDawns=0 strandedRuns=0 brokenWaterDawns=0 endDisabled=false spotter=16 ladder=YES bumpCalls=54 bumpBenefit=44 codexPlants=21
+  Lucas: broken d9, closed d9 — PASS
+  Werner: broken d14, closed d14 — PASS
+  Aria: broken d26, closed d26 — PASS
+  Lucas: broken d35, closed d35 — PASS
+seed 101201: roster reconcile start=12 end=12 vanished=0 departuresLogged=0 villagerDeaths=0 UNACCOUNTED=0
+seed 101202: endDay=42 aliveAt40=11 aliveEnd=11 wave=3 pantryEnd=19398 endAttempts=5 ended=5 trustDrops=0 jamDays=0 strandedDawns=0 strandedRuns=0 brokenWaterDawns=0 endDisabled=false spotter=10 ladder=YES bumpCalls=69 bumpBenefit=47 codexPlants=25
+  Xavier: broken d11, closed d11 — PASS
+  Sofia: broken d15, closed d15 — PASS
+  Moshe: broken d20, closed d20 — PASS
+  Aria: broken d31, closed d31 — PASS
+  Thinh: broken d38, closed d38 — PASS
+  Clarence (gen_k2aata9): vanished, death recorded d20 (the wild)
+seed 101202: roster reconcile start=12 end=11 vanished=1 departuresLogged=1 villagerDeaths=1 UNACCOUNTED=0
+seed 101203: endDay=43 aliveAt40=12 aliveEnd=12 wave=4 pantryEnd=17548 endAttempts=2 ended=2 trustDrops=0 jamDays=0 strandedDawns=0 strandedRuns=0 brokenWaterDawns=0 endDisabled=false spotter=10 ladder=YES bumpCalls=16 bumpBenefit=10 codexPlants=37
+  Diana: broken d7, closed d7 — PASS
+  Diana: broken d16, closed d16 — PASS
+seed 101203: roster reconcile start=12 end=12 vanished=0 departuresLogged=0 villagerDeaths=0 UNACCOUNTED=0
+seed 101204: endDay=43 aliveAt40=11 aliveEnd=11 wave=4 pantryEnd=17844 endAttempts=3 ended=3 trustDrops=0 jamDays=0 strandedDawns=0 strandedRuns=0 brokenWaterDawns=0 endDisabled=false spotter=11 ladder=YES bumpCalls=56 bumpBenefit=34 codexPlants=25
+  Marvin: broken d5, closed d5 — PASS
+  Wei: broken d12, closed d12 — PASS
+  Petra: broken d35, closed d35 — PASS
+  Esmeralda (gen_1n8kowg): vanished, death recorded d17 (contest)
+seed 101204: roster reconcile start=12 end=11 vanished=1 departuresLogged=1 villagerDeaths=1 UNACCOUNTED=0
+seed 101205: endDay=43 aliveAt40=9 aliveEnd=9 wave=4 pantryEnd=16840 endAttempts=1 ended=1 trustDrops=0 jamDays=0 strandedDawns=6 strandedRuns=1 brokenWaterDawns=0 endDisabled=false spotter=3 ladder=no bumpCalls=60 bumpBenefit=37 codexPlants=23
+  Kate: broken d5, closed d5 — PASS
+  Miles (gen_99nign1): vanished, death recorded d36 (the wild)
+  A man, maybe 40s (gen_zm6z8pe): vanished, death recorded d17 (monster)
+  A woman, maybe 60s, with tattooed arms (nino_kapanadze): vanished, death recorded d15 (ambush)
+seed 101205: roster reconcile start=12 end=9 vanished=3 departuresLogged=3 villagerDeaths=3 UNACCOUNTED=0
+---
+SPOTTER BAR (primary): panel foodXp['spotter'] total = 50 (bar: >= 10); seeds with > 0 = 5/5 (bar: every panel seed) — GO iff total >= 10 AND every seed > 0
+LADDER BAR: 4/5 seeds with >= 1 villager at 5+ spotter XP / skill 1 (bar: >= 3/4 panel seeds)
+FASTER-ID BAR: threshold benefit fired on 5/5 seeds (172 benefit plays in 255 bump calls; bar: >= 2/4 seeds; NO-OPPORTUNITY if bumpCalls = 0 on every seed)
+CODEX PLANTS (report-only): 131 plants identified at end across 5 seeds (fieldwork = field-click identifications)
+STRANDED BAR: 6 stranded dawns on 1 runs; worked-on-stranded=0 (must be 0); guard fires=0; social-sit dawns=6/6 (misses=0); new commits after first stranding=1 (NO-OPPORTUNITY if 0 stranded dawns — mechanism then carried by the proof test)
+END BAR: 15/15 broken-live forage opportunities closed within 2 dawns (excluded-tail runs not counted; NO-OPPORTUNITY seeds: 0)
+THREAD BRANCH (carried watch): 0/0 paged (Yara-shape) opportunities closed within 2 dawns; 0/15 end sits paged (NO-OPPORTUNITY if 0 paged ops — mechanism then carried by the proof test)
+TRAVEL BRANCH: 0/0 clearable-blockage (Pablo-shape) opportunities closed within 2 dawns; 0/31 homeward sits hit a clearable blockage or cleared one (NO-OPPORTUNITY if 0 travel ops — mechanism then carried by the proof test)
+TRUST GUARD: 0 trust drops on end presses (must be 0)
+JAM BAR (report-only): 0 jam-days across panel (r84 panel: ~15 on seed 994 alone)
+VILLAGE BAR: 5/5 seeds alive at d40 (bar: >=3/4)
+Q2 SITTING CLOSES (revised, full-transcript bar): 0/10 CUT sittings (engine-ended, 0 closing beats after last THEM, no closing line); 1 engine-ended WITH closing beats; 0 other no-close — GO iff 0 cut; WATCH 1-2 (read each in full); NO-GO >= 3 or an open-question cut
+Q1b WANT-RAISE (r221 Q1, standing guard — villagers must raise wants for the joint-favor wedge to have anything to accept): panel 82/297 social sits raised ask_favor (27.6%); any-want sits 278/297; zero-raise seeds 0/5; zero-raise + no-want seeds 0/5 (defect shape) — GO iff rate >= 10% AND no zero-raise seed; WATCH a zero-raise seed that shows other wants; NO-GO a zero-raise + no-want seed
+  seed 101201: want-raise 10/62 social sits raised ask_favor (any-want sits 57); kinds {"forage_help":10}
+  seed 101202: want-raise 11/48 social sits raised ask_favor (any-want sits 48); kinds {"forage_help":10,"(no-kind)":1}
+  seed 101203: want-raise 25/67 social sits raised ask_favor (any-want sits 63); kinds {"forage_help":14,"food_share":3,"heal_help":4,"(no-kind)":3,"water_haul":1}
+  seed 101204: want-raise 17/54 social sits raised ask_favor (any-want sits 54); kinds {"forage_help":11,"food_share":1,"sick_help":1,"(no-kind)":4}
+  seed 101205: want-raise 19/66 social sits raised ask_favor (any-want sits 56); kinds {"forage_help":12,"sick_help":1,"food_share":1,"(no-kind)":5}
+  ask_favor kinds panel: {"forage_help":57,"(no-kind)":13,"food_share":5,"heal_help":4,"water_haul":1,"sick_help":2}
+Q1 FAVORLESS ASK RE-MEASURE (r231 — re-measure of the r230 dlg:help fix, matched band): 13 favorless sits of 82 raised asks (15.9%; r230: 26/74 = 35.1%, E1 26/26); classes {"E1":13} (A contentless-seed / B seeded-favor-gone / C favor-present-opener-null / D fresh-no-need / E1 opener-never-ran / E2 opener-null / E3 line-blocked / E4 no-probe) — stage-0-deflected 0 (must be 0); stage-0-surfaced 5/13 (same villager kinded ask later, proxy) — GO iff rate < 20% AND 0 stage-0-deflected AND every sit classified; WATCH rate 20-32.8% with residual mechanism named; NO-GO rate >= 32.8% OR any stage-0-deflected OR any class D / unclassified
+  seed 101204: Miriam (gen_qtczs17) favorless d15 (class E1) — kinded ask_favor raised in a later sitting
+  seed 101205: Chantal (chantal_mukendi) favorless d15 (class E1) — kinded ask_favor raised in a later sitting
+  seed 101205: Kate (gen_mfjx1bq) favorless d16 (class E1) — kinded ask_favor raised in a later sitting
+  seed 101205: Kate (gen_mfjx1bq) favorless d26 (class E1) — kinded ask_favor raised in a later sitting
+  seed 101205: Kate (gen_mfjx1bq) favorless d33 (class E1) — kinded ask_favor raised in a later sitting
+  seed 101202 d38: Wei (chen_wei) class E1 — opener NEVER RAN (openThread want, resumedOnce true, need forage_help/u2) (stage max 0, no-seed-after)
+  seed 101203 d22: Liam (liam_davis) class E1 — opener NEVER RAN (openThread want, resumedOnce true, need forage_help/u2) (stage max 0, no-seed-after)
+  seed 101203 d26: Liam (liam_davis) class E1 — opener NEVER RAN (openThread recall, resumedOnce false, need forage_help/u2) (stage max 0, no-seed-after)
+  seed 101203 d36: Victor (gen_jb77prz) class E1 — opener NEVER RAN (openThread want, resumedOnce true, need heal_help/u4) (stage max 0, no-seed-after)
+  seed 101204 d15: Miriam (gen_qtczs17) class E1 — opener NEVER RAN (openThread goal, resumedOnce true, need forage_help/u2) (stage max 0, no-seed-after)
+  seed 101204 d39: Meera (meera_reddy) class E1 — opener NEVER RAN (openThread secret, resumedOnce false, need forage_help/u2) (stage max 1, no-seed-after)
+  seed 101204 d41: Oliver (oliver_moore) class E1 — opener NEVER RAN (openThread lately, resumedOnce true, need water_haul/u3) (stage max 0, no-seed-after)
+  seed 101204 d42: Wei (chen_wei) class E1 — opener NEVER RAN (openThread recall, resumedOnce false, need water_haul/u3) (stage max 0, no-seed-after)
+  seed 101205 d15: Chantal (chantal_mukendi) class E1 — opener NEVER RAN (openThread lately, resumedOnce true, need forage_help/u2) (stage max 0, no-seed-after)
+  seed 101205 d16: Kate (gen_mfjx1bq) class E1 — opener NEVER RAN (openThread want, resumedOnce true, need forage_help/u2) (stage max 0, no-seed-after)
+  seed 101205 d17: Ruth (ruth_goldstein) class E1 — opener NEVER RAN (openThread trade, resumedOnce false, need forage_help/u2) (stage max 0, no-seed-after)
+  seed 101205 d26: Kate (gen_mfjx1bq) class E1 — opener NEVER RAN (openThread secret, resumedOnce false, need forage_help/u2) (stage max 1, no-seed-after)
+  seed 101205 d33: Kate (gen_mfjx1bq) class E1 — opener NEVER RAN (openThread secret, resumedOnce true, need forage_help/u2) (stage max 0, no-seed-after)
+  favorless repeats per villager: {"Wei (chen_wei)":2,"Liam (liam_davis)":2,"Victor (gen_jb77prz)":1,"Miriam (gen_qtczs17)":1,"Meera (meera_reddy)":1,"Oliver (oliver_moore)":1,"Chantal (chantal_mukendi)":1,"Kate (gen_mfjx1bq)":3,"Ruth (ruth_goldstein)":1}; contentless re-seeds after favorless sits: 0/13
+Q3 RECAP PARAPHRASE (report-only, per-sitting presence, R230 revision): distinct=2 of 10 sittings (raw 4) — report-only iff < 6 distinct; OVER-REPRESENTED iff >= 6 distinct (second formulation owed)
+R214 PARTING POOL (report-only, in-the-wild serves, distinct): see=0 care=0 tomorrow=0 (raw see=0 care=0 tomorrow=0)
+Q3 CANNED LINES (report-only, r135 watch, distinct/raw): pod-dream=0/0 recap-stitch=0/0 recap-paraphrase=2/4 slope-reading=0/0 walked-in=0/0 take-it=0/0 stew-bowl=0/0 parting-plain-see=0/0 parting-plain-care=0/0 parting-plain-tomorrow=0/0 pod-dream-open=0 (r210 panel: paraphrase=2 walked-in=0, rest 0 across 5 convo files; r225 distinct: paraphrase=4 walked-in=3; r230 distinct: paraphrase=2 walked-in=0)
