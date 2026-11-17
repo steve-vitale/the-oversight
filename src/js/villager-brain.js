@@ -172,39 +172,6 @@
     } catch (e) {}
     return false;
   }
-  // NIGHTCARRY (sim-nightcarry-a): env gate for the night-tick
-  // carry-over. Default OFF = master behavior. Node sims only; in
-  // the browser process is undefined, so this never fires — same
-  // idiom as VETREENGAGE.
-  function nightcarryOn() {
-    try { return (typeof process !== 'undefined' && process.env && process.env.NIGHTCARRY === '1'); } catch (e) { return false; }
-  }
-  // The COMMITTED companion, re-checked at carry time — never
-  // re-picked from a roster (perception law). Same bars
-  // findCompanion applies, minus the profile check: profiles are
-  // cached in agencyState().profiles and cannot change overnight.
-  function companionStillEligible(self, cid, hx, hy) {
-    try {
-      var v = villageOf(self);
-      if (!v || !cid) return false;
-      if (cid === self.villagerId) return false;
-      var p = null;
-      try { p = self.getPerson ? self.getPerson(cid) : null; } catch (e) {}
-      if (p && p.dead) return false;
-      if ((v.away || {})[cid]) return false;
-      var trust = v.trust || {};
-      if (((trust[cid] === undefined) ? 10 : trust[cid]) < 15) return false;
-      var n = null;
-      try { n = self.npcNode ? self.npcNode(cid) : null; } catch (e) { return false; }
-      if (!n || n.nx !== hx || n.ny !== hy) return false;
-      try { if (self.isEngaged && self.isEngaged(cid)) return false; } catch (e) {}
-      try {
-        var a = self.agencyState ? self.agencyState() : null;
-        if (a && a.exped && a.exped[cid]) return false;
-      } catch (e) {}
-      return true;
-    } catch (e) { return false; }
-  }
   // Deterministic [0,1) roll from villager+day — no shared Math.random, so
   // the core objective lottery's RNG stream stays byte-identical.
   function dawnHashRoll(self, vid, salt) {
@@ -667,9 +634,6 @@
       vbrainSrc: chosen.vbrainSrc || null,
       winPlanAction: chosen.winPlanAction || null,
       companion: chosen.companion || null,
-      carried: !!chosen.carried,
-      carriedFrom: (chosen.carriedFrom != null ? chosen.carriedFrom : null),
-      carriedFromPart: (chosen.carriedFromPart != null ? chosen.carriedFromPart : null),
       logIndex: br.logs.length - 1,
     };
     // A real re-score consumes the perception event that authorized it.
@@ -810,73 +774,6 @@
     // Product-of-curves IAUS formula is intentionally NOT used (for review).
     vbrainScorePick: function (vid, cands, opts) {
       opts = opts || {};
-      // NIGHTCARRY (sim-nightcarry-a): a party_launch commit that died
-      // at the night tick gets ONE morning of grace. Before any
-      // scoring, re-issue yesterday's unexecuted commit verbatim —
-      // same holder, same committed companion (never re-picked from
-      // a roster), same plan — instead of rolling a fresh pick.
-      // The dawn scorer already made this commitment; the clock,
-      // not a decision, broke it. Body-first gates in objPick run
-      // before this scorer, so a spent or hungry holder still eats
-      // or rests instead of carrying. Env-gated, default OFF.
-      try {
-        if (nightcarryOn()) {
-          var _nc0 = null;
-          try { _nc0 = (typeof this.vbrainCommit === 'function') ? this.vbrainCommit(vid) : null; } catch (e) {}
-          var _ncToday = dayOf(this);
-          if (_nc0 && _nc0.kind === 'EXPEDITION' && _nc0.winPlanAction === 'party_launch' &&
-              _nc0.day === _ncToday - 1 && !_nc0.carried && _nc0.companion) {
-            var _ncV = villageOf(this);
-            var _ncHx = (_ncV && _ncV.px != null) ? _ncV.px : 4;
-            var _ncHy = (_ncV && _ncV.py != null) ? _ncV.py : 4;
-            var _ncPlan = (_ncV && _ncV.winPlan) ? _ncV.winPlan[vid] : null;
-            var _ncOk = !!(_ncV && _ncPlan && _ncPlan.stage === 'party');
-            if (_ncOk) {
-              try {
-                var _ncVp = null;
-                try { _ncVp = this.vpOf ? this.vpOf(vid) : null; } catch (e) {}
-                if (_ncVp && _ncVp.dead) _ncOk = false;
-              } catch (e) {}
-              try { if ((_ncV.away || {})[vid]) _ncOk = false; } catch (e) {}
-              try {
-                var _ncA = this.agencyState ? this.agencyState() : null;
-                if (_ncA && _ncA.exped && _ncA.exped[vid]) _ncOk = false;
-              } catch (e) {}
-              try {
-                var _ncN = this.npcNode ? this.npcNode(vid) : null;
-                if (!_ncN || _ncN.nx !== _ncHx || _ncN.ny !== _ncHy) _ncOk = false;
-              } catch (e) { _ncOk = false; }
-              if (_ncOk && !companionStillEligible(this, _nc0.companion, _ncHx, _ncHy)) _ncOk = false;
-            }
-            if (_ncOk) {
-              var _ncEntry = {
-                day: _ncToday, part: partOf(this), vid: vid, mode: 'carry',
-                pick: 'EXPEDITION', override: 'night_carry',
-                winPlanAction: 'party_launch',
-                carriedFrom: _nc0.day,
-                carriedFromPart: (_nc0.part != null ? _nc0.part : null),
-                companion: _nc0.companion,
-                candidates: [{ kind: 'EXPEDITION', score: 1, considerations: [
-                  { id: 'night_carry', raw: 1, note: 'yesterday party_launch, unexecuted' },
-                  { id: 'companion', raw: 1, note: String(_nc0.companion) },
-                ] }],
-              };
-              pushLog(this, _ncEntry);
-              var _ncCand = {
-                kind: 'EXPEDITION', w: 5.0, companion: _nc0.companion,
-                vbrainSrc: _nc0.vbrainSrc || 'win_plan', winPlanAction: 'party_launch',
-                score: (_nc0.scoreAtChoice != null ? _nc0.scoreAtChoice : 5),
-                carried: true, carriedFrom: _nc0.day,
-                carriedFromPart: (_nc0.part != null ? _nc0.part : null),
-              };
-              writeCommit(this, vid, _ncCand, _ncEntry);
-              var _ncBr = ensure(this);
-              if (_ncBr) { _ncBr.stats.nightcarries = (_ncBr.stats.nightcarries || 0) + 1; }
-              return _ncCand;
-            }
-          }
-        }
-      } catch (e) {}
       var list = cands || [];
       var core = [];
       var extras = [];
@@ -1159,21 +1056,6 @@
           if (!a2 || !a2.exped[vid]) return 'hold';
         } catch (e) {}
         this.startExpedition(c.companion, hx, hy, false, opts);
-        // NIGHTCARRY (sim-nightcarry-a): a carried commit that departs
-        // reads as the SAME launch, not a fresh decision — one line,
-        // only when the companion's expedition actually started and
-        // the player is at Haven to hear it.
-        if (c.carried && announce) {
-          try {
-            var _ncA2 = this.agencyState ? this.agencyState() : null;
-            if (_ncA2 && _ncA2.exped && _ncA2.exped[c.companion]) {
-              var _ncHn = 'Someone', _ncCn = 'someone';
-              try { _ncHn = (this.displayName(vid) || 'Someone').split(' ')[0]; } catch (e) {}
-              try { _ncCn = (this.displayName(c.companion) || 'someone').split(' ')[0]; } catch (e) {}
-              this.say(_ncHn + ' is finally setting out — yesterday\'s plan, leaving today with ' + _ncCn + '.');
-            }
-          } catch (e) {}
-        }
         // VETREENGAGE (sim-vetreengage-a): launch the second companion on the
         // same shared target when the dawn candidate carried one. Only
         // a started expedition counts — a blocked second companion
