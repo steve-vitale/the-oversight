@@ -64,6 +64,7 @@ const RUN = process.env.RUN || 'deadplan-b';
 const MODE = process.env.MODE || 'on';
 const OUTDIR = process.env.OUTDIR || ('perseed-deadplan-b-' + MODE);
 const RECORDER_ON = (MODE === 'on') && process.env.DEADPLAN_RECORDER !== 'off';
+const NONDEATH_RECORDER_ON = RECORDER_ON && process.env.NONDEATH_RECORDER === 'on';
 
 if (MODE !== 'off' && MODE !== 'on') { console.error('DEADPLAN STOP: MODE must be off|on, got ' + JSON.stringify(MODE)); process.exit(2); }
 
@@ -1030,6 +1031,32 @@ async function oneRun(seed) {
     else errors.push('vbrainScorePick-wrap: not a function');
   } catch (e) { errors.push('vbrainScorePick-wrap-install: ' + String(e.message).slice(0, 80)); }
 
+  // ---- NONDEATH: removal ledger (sim-nondeathplan-b extension) ----
+  // Opt-in (NONDEATH_RECORDER=on): wraps Game.removeVillager and
+  // records every removal call {day, vid, how} into `removals` — the
+  // exact removal day + how the corpus otherwise never carries
+  // (planCensus holderAlive is a dead-flag read; a leaver reads
+  // alive). Pure reads + driver-local writes, no RNG, no game-state
+  // writes — same class as every other wrap here. When the env is
+  // unset this block does not execute at all (NONDEATH_RECORDER_ON
+  // is false), so deadplan/deathcleanup behavior is byte-identical.
+  // Installed after setupGame like the other wraps; removals during
+  // setup are not expected, and the analyzer's roster-disappearance
+  // derivation covers any removal the wrap misses (e.g. the party.js
+  // direct-roster bypass on the control leg).
+  const removals = [];
+  try {
+    const origRemove = Game.removeVillager;
+    if (NONDEATH_RECORDER_ON && typeof origRemove === 'function') {
+      Game.removeVillager = function (vid, how) {
+        const ret = origRemove.apply(this, arguments);
+        try {
+          removals.push({ day: gday(Game), vid: (vid == null ? null : vid), how: (how == null ? null : how) });
+        } catch (e) { errors.push('nondeath-removal-log: ' + String(e.message).slice(0, 80)); }
+        return ret;
+      };
+    } else if (NONDEATH_RECORDER_ON) errors.push('removeVillager-wrap: not a function');
+  } catch (e) { errors.push('removeVillager-wrap-install: ' + String(e.message).slice(0, 80)); }
   const wrapped = Object.assign({}, policy, {
     daily: function (Gm, ctx) {
       lastCtx = ctx;
@@ -1126,6 +1153,7 @@ async function oneRun(seed) {
     companionPool: companionPool,
     v4creates: v4creates, planCensus: planCensus,
     deadTouches: deadTouches, dawnScored: dawnScored,
+    removals: removals,
     wave4Ids: loadWave4Ids(),
   };
   if (vf) {
@@ -1173,6 +1201,7 @@ if (require.main === module) (async function () {
       companionPool: out.companionPool.length,
       v4creates: out.v4creates.length, planCensus: out.planCensus.length,
       deadTouches: out.deadTouches.length, dawnScored: out.dawnScored.length,
+      removals: (out.removals || []).length,
       errors: out.instrumentErrors.length,
       file: path.relative(REPO, file),
     }));
