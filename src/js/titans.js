@@ -1353,7 +1353,19 @@
           var def = titanDefs()[titanId];
           var have = 0;
           try { have = (titanState().musters[titanId] || { allies: [] }).allies.length; } catch (e) {}
-          Game.say('⛔ ' + def.title + ' does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster ' + def.minAllies + ' allied blades (you have ' + have + '). This is not courage. This is arithmetic.');
+          // REFUSAL SPAM (journey-scale r233, r232-owed): the line is said
+          // ONCE per titan per day — a scholar camped at a lair was
+          // refused 10x in one day (103402) and heard the same line every
+          // time. The outcome is still recorded on EVERY refusal (the log
+          // stays honest for the census); only the spoken line is deduped.
+          // The per-day record lives in titan state (saved with the run);
+          // a missing field on old saves reads as never-said.
+          var _st = titanState();
+          _st.refusalSaidDay = _st.refusalSaidDay || {};
+          if (_st.refusalSaidDay[titanId] !== titanOutcomeDay()) {
+            Game.say('⛔ ' + def.title + ' does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster ' + def.minAllies + ' allied blades (you have ' + have + '). This is not courage. This is arithmetic.');
+            _st.refusalSaidDay[titanId] = titanOutcomeDay();
+          }
           titanRecordOutcome(titanId, 'refused', { gate: 'muster', have: have, need: def.minAllies });
           return null;
         }
