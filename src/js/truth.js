@@ -1482,6 +1482,12 @@
       }
 
       let line, outcome;
+      // STALE-LOOP SPEND (journey-landing r143 F1): set when this press
+      // lands on the already-confessed-this-sitting deflect — the doubt
+      // stays open by design, so without it the menu re-offers the same
+      // confront forever (1213-d11 Mia: 18 verbatim repeats in one
+      // sitting). The wrapper spends the choice on this flag.
+      let alreadyConfessedDeflect = false;
 
       // CACHE THEFT suspicion: the doubt carries the crime, not a lie about
       // backstory. The evidence IS the sighting. Handled on its own path —
@@ -1657,6 +1663,11 @@
         // confessed lie. The accusation still landed (windup above);
         // the doubt stays open and the evidence grows.
         outcome = 'deflected';
+        // STALE-LOOP SPEND (r143 F1): no re-press this sitting can ever
+        // pay off — the sitting flag blocks any confession and the truth
+        // is already told — so the choice is spent (flagged for the
+        // wrapper); the doubt itself stays open for a later sitting.
+        alreadyConfessedDeflect = true;
         line = this.drawTruthLineUnblocked('staleConfessed', vid) ||
           `"That one's told already. Ask me something else."`;
         doubt.evidence.push(`confronted (day ${day()}) — already confessed this sitting`);
@@ -1755,7 +1766,7 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
       this.noteSocialLesson(outcome);
       try { this.audioEvent('liarConfront', { outcome }); } catch (e) {}
       const afterSay = this.accuserPays(vid, outcome);
-      return { ok: true, line, outcome, afterSay };
+      return { ok: true, line, outcome, afterSay, alreadyConfessedDeflect };
     },
 
     // confrontTheft(vid, doubtId): "I know you dug up my cache."
@@ -1796,6 +1807,10 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
       confessP += (trust - 30) / 200;
       const roll = Math.random();
       let line, outcome;
+      // STALE-LOOP SPEND (journey-landing r143 F1): see confrontDoubt —
+      // the same already-confessed-this-sitting deflect, the same loop
+      // (doubt stays open, menu re-offers, pool exhausts to one line).
+      let alreadyConfessedDeflect = false;
 
       // ONE CONFESSION PER SITTING (journey-social r172 2026-11-10): see
       // confrontDoubt — the same sitting flag covers theft confessions,
@@ -1808,6 +1823,11 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
 
       if (confessedThisSitting) {
         outcome = 'deflected';
+        // STALE-LOOP SPEND (r143 F1): see confrontDoubt — same shape, a
+        // theft press after a sitting confession can never pay off this
+        // sitting, so the choice is spent (flagged for the wrapper);
+        // the doubt itself stays open for a later sitting.
+        alreadyConfessedDeflect = true;
         line = this.drawTruthLineUnblocked('staleConfessed', vid) ||
           `"That one's told already. Ask me something else."`;
         doubt.evidence.push(`confronted (day ${day()}) — already confessed this sitting`);
@@ -1872,7 +1892,7 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
       this.noteSocialLesson(outcome);
       try { this.audioEvent('liarConfront', { outcome }); } catch (e) {}
       const afterSay = this.accuserPays(vid, outcome);
-      return { ok: true, line, outcome, afterSay };
+      return { ok: true, line, outcome, afterSay, alreadyConfessedDeflect };
     },
     truthSlip(vid, lie) {
       if (!lie || lie.confessed) return;
@@ -2135,9 +2155,17 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
         // in the post-counter-attack cooldown don't offer confrontation —
         // villager-level now: a second open doubt can't bypass it. Doubts
         // planted after the blowup day are new business (refusalBlocks).
+        // SPENT (journey-landing r143 F1): same class as the betrayal
+        // extras (crisis r85) — this wrapper appends the confront item
+        // AFTER buildMenu's finalizeMenu, so the spent-choices filter
+        // never sees it. A doubt spent this sitting (already-confessed
+        // deflect — the press can never pay off again this sitting)
+        // must not re-offer; filter it here, like the betrayal wrapper
+        // filters its own extras.
         const nowDay = (this.state.scholar || {}).day || 0;
+        const spent = (c && c.spent) || {};
         const doubts = this.getDoubts(vid).filter(d =>
-          !(d.refusedUntil && nowDay < d.refusedUntil) && !this.refusalBlocks(vid, d));
+          !(d.refusedUntil && nowDay < d.refusedUntil) && !this.refusalBlocks(vid, d) && !spent['confront:' + d.id]);
         if (doubts.length && !choices.some(ch => String(ch.id).indexOf('confront:') === 0)) {
           const d = doubts[0];
           const first = this.firstRef(vid);
@@ -2193,6 +2221,15 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
       // choke point or queued beats never die here either.
       try { if (typeof this.convoDropUnspoken === 'function') this.convoDropUnspoken(vid, choiceId); } catch (e) {}
       const r = this.confrontDoubt(vid, doubtId);
+      // STALE-LOOP SPEND (journey-landing r143 F1): an already-confessed
+      // deflect serves the same stale line on every press and the doubt
+      // stays open by design — the menu re-offered it forever (1213-d11
+      // Mia: 18 verbatim repeats in one sitting). A second press in this
+      // sitting can never pay off (the sitting flag blocks any confession),
+      // so spend the choice for the sitting; the doubt stays open and the
+      // option returns tomorrow. Normal deflects (live lie, press again to
+      // mount evidence) are NOT spent — only this flag.
+      if (r && r.ok && r.alreadyConfessedDeflect) { try { this.convoSpendChoice(vid, choiceId); } catch (e) {} }
       const youSaid = '"I need to ask you something."';
       c.transcript.push({ who: 'you', text: youSaid });
       // NO DOUBLE-PUSH (journey-social r26 2026-10-18): sayLine below
