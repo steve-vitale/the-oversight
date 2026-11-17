@@ -1,0 +1,43 @@
+check.js: 14 scripts, 4 parallel (only "fight")
+.........FF..F
+
+  FAIL scripts/test-zombie-fight-20261011.js (exit 2, 4.4s)
+      PROOF ERROR: ReferenceError: Text is not defined
+          at Object.genCharacter (eval at <anonymous> (/home/hatch/workspace/worktrees/sim-fightallycap-b/scripts/test-zombie-fight-20261011.js:63:26), <anonymous>:1046:20)
+          at Game.genCharacter (eval at <anonymous> (/home/hatch/workspace/worktrees/sim-fightallycap-b/scripts/test-zombie-fight-20261011.js:63:26), <anonymous>:602:48)
+          at Object.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/sim-fightallycap-b/scripts/test-zombie-fight-20261011.js:63:26), <anonymous>:1679:25)
+          at G.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/sim-fightallycap-b/scripts/test-zombie-fight-20261011.js:63:26), <anonymous>:829:19)
+          at G.genRoster (eval at <anonymous> (/home/hatch/workspace/worktrees/sim-fightallycap-b/scripts/test-zombie-fight-20261011.js:63:26), <anonymous>:1853:43)
+          at main (/home/hatch/workspace/worktrees/sim-fightallycap-b/scripts/test-zombie-fight-20261011.js:77:8)
+
+  FAIL scripts/test-inffight-class-20261014.js (exit 1, 25.4s)
+      G1: over=true result=lost maxRound=18 leadHp=4 (was 258) scholarHp=-3 comesApart=false
+      FAIL G1 honest: the fight comes apart (existing idiom) -- result=lost comesApart=false
+      FAIL G1 honest: no free win — the lead survives unharmed past the opening -- lead alive=true 258 -> 165 (round 5) -> 4
+      FAIL G1 honest: the scholar lives -- scholarHp=-3
+      G2 bulldozer: over=true result=won rounds=5 php=100 mhp=-22 mdead=null
+      G2 hushwolf: over=true result=routed rounds=2 php=83 mhp=-11 mdead=null
+      G2 mirror_stag: over=true result=won rounds=3 php=100 mhp=-6 mdead=null
+      G3 line: 
+      FAIL G3 sense: the line names what happened (no one in reach, no one chasing)
+      FAIL G3 sense: the line says where they go (melt back into the wilds)
+      
+      10 passed, 5 failed
+
+  FAIL scripts/test-break-monsters3-fieldfights-20261008.js (exit 1, 95.1s)
+        ok wild caller applies the real villager death
+        ok wild caller retains a living wounded monster without a kill award
+        ok wild caller announces the actual death
+        ok captured fatal exchange remains a villager death
+        ok captured lead survives the missing postmortem strike
+        ok fatal replay ends with a monster hit, not a dead villager strike
+        ok replay uses only its recorded random prefix
+      FIELD_TERMINAL_RESULT {"kind":"wild-caller","seed":20261008,"checks":10,"draws":27,"rec":{"outcome":"vDie","rounds":3,"vTaken":103,"mDealt":20,"vHpLeft":0,"mHpLeft":10,"packCount":3,"log":["R1: the wo
+      field terminal proof green: 43 checks
+        PASS shared terminal HP/revival proof executes every contrast
+      
+      24 passed, 2 failed
+
+  slowest: scripts/test-break-monsters3-fieldfights-20261008.js 95s
+
+check.js: 11 passed, 3 failed in 104s

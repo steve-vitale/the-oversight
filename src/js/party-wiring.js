@@ -15,7 +15,9 @@
 //     territory (default 10). Earned standing is what runs toward screams.
 //   - answer_sources: the outdoor crew first (out there together), then
 //     villagers on/adjacent grid nodes (in earshot). Capped at 2 — the
-//     fight engine takes the first two and one answers per fight.
+//     fight engine takes the first two; with FIGHTALLY2=1 both can
+//     answer (second via a second shout), otherwise one answers per
+//     fight (fieldFights.js, sim-fightallycap-b, finding #2496).
 //   - no_self_rescue: the fighter never answers their own call; the player
 //     is excluded (the player's own party system is separate).
 // consumes:

@@ -491,7 +491,7 @@
       var rec = {
         outcome: null, rounds: 0, vTaken: 0, mDealt: 0,
         vHpLeft: 0, mHpLeft: 0, packCount: 1, log: [],
-        allyDealt: 0, calledHelp: false, allyVid: null, fleeHopeless: null, fleeHpFrac: null,
+        allyDealt: 0, ally2Dealt: 0, calledHelp: false, allyVid: null, ally2Vid: null, fleeHopeless: null, fleeHpFrac: null,
         everWinning: false, everHopeless: false, minHpFrac: 1,
         // FIGHTBLEND-B (sim-fightblend-b, 2026-11-08): parallel
         // protection-4 incoming totals (see the monster-phase P4 block
@@ -499,7 +499,7 @@
         // trajectory as if protection were 4; vTakenP4/allyTakenP4 are
         // its accumulators. vHpHypoLeft/allyHpHypoLeft are set at the
         // close (record-only).
-        vTakenP4: 0, allyTakenP4: 0, vHpHypoLeft: null, allyHpHypoLeft: null,
+        vTakenP4: 0, allyTakenP4: 0, ally2TakenP4: 0, vHpHypoLeft: null, allyHpHypoLeft: null, ally2HpHypoLeft: null,
         // TWOBLOW (sim-twoblow-a, 2026-10-31): the committed-finish
         // window's audit fields. committedFinish/ committedRounds are
         // set at the in-round break check; twoblowLastTwo/twoblowSum
@@ -1254,6 +1254,19 @@
       // PARTY-UP (Steve 2026-10-09): when the trajectory turns hopeless and
       // help is near, they shout instead of scattering. One ally answers per
       // fight — a second pair of hands, off-balance, exposed (no armor).
+      // FIGHTALLY2 (sim-fightallycap-b, 2026-11-17, finding #2496): the
+      // second ally slot. The fight engine used to model ONE ally
+      // (allyVid/allyHp) — a 4th party member travelled but could never
+      // join a fight. With FIGHTALLY2=1 a second companion can join and
+      // fight alongside the first, with their own body, gear, and wound
+      // settlement. Env-gated default-OFF: in the browser `process` is
+      // undefined, so the flag is never on there; with it unset every
+      // branch below is unreachable and no new RNG is drawn (off-mode
+      // is byte-identical to the single-ally engine).
+      var ally2On = false;
+      try { ally2On = (typeof process !== 'undefined' && process.env && process.env.FIGHTALLY2 === '1'); } catch (e) { ally2On = false; }
+      var ally2In = false, ally2Hp = 0, ally2Max = 70, ally2Vid = null, ally2Name = 'Someone';
+      var ally2EntryHp = 0, ally2Wb = null, ally2Armor = 0, ally2StrikeMult = 1, ally2Called = false;
       var helpCalled = false, allyIn = false, allyHp = 0;
       // JOINENDLINES (sim-joinendlines-a, 2026-10-29): true only when the
       // hopeless-shout branch below fired this fight — NOT for
@@ -1289,18 +1302,25 @@
       // counter consumption (no harry/birds side effects borrowed
       // from the leader's state).
       var allyWb = null, allyArmor = 0, allyStrikeMult = 1;
+      // FIGHTALLY2: allyGear used to write the single ally's gear into
+      // shared closure vars — a second call would have overwritten the
+      // first ally's numbers. It now RETURNS the gear read ({wb, armor,
+      // strikeMult} or null for a foreign ally / no villager record, who
+      // keeps the old flat strike and no armor), and each join site
+      // assigns it to its own ally's vars. Same reads, same values.
       var allyGear = function (id) {
         try {
-          if ((opts.foreignAllies || {})[id]) return false;
+          if ((opts.foreignAllies || {})[id]) return null;
           if (_G.villagerGearUp) _G.villagerGearUp(id, false);
           var ap = ((_G.data.villagers || []).find(function (x) { return x.id === id; }) ||
                     (_G.data.background_survivors || []).find(function (x) { return x.id === id; })) || null;
-          if (!ap) return false;
+          if (!ap) return null;
+          var _wb = 0, _armor = 0, _mult = 1;
           if (S.equipment && S.equipment.weaponBonusOf)
-            allyWb = Math.round(((S.equipment.weaponBonusOf(ap, _G.data.items, 'melee') || 0) +
+            _wb = Math.round(((S.equipment.weaponBonusOf(ap, _G.data.items, 'melee') || 0) +
                                  (S.equipment.weaponBonusOf(ap, _G.data.items, 'ranged') || 0)) / 2);
-          else allyWb = 0;
-          if (S.equipment && S.equipment.armorOf) allyArmor = S.equipment.armorOf(ap, _G.data.items) || 0;
+          else _wb = 0;
+          if (S.equipment && S.equipment.armorOf) _armor = S.equipment.armorOf(ap, _G.data.items) || 0;
           try {
             var _aAbs = [];
             if (typeof _G.npcHasAbility === 'function')
@@ -1308,11 +1328,24 @@
                 : (((_G.state.village || {}).npcAbilities || {})[id] || []).slice();
             if (GPf && GPf.fieldBegin) {
               var _aGp = GPf.fieldBegin(_G, id, _aAbs);
-              if (_aGp) allyStrikeMult = ((_aGp.strikeMult || 1) * (_aGp.power || 1));
+              if (_aGp) _mult = ((_aGp.strikeMult || 1) * (_aGp.power || 1));
             }
           } catch (e) {}
-          return true;
-        } catch (e) { return false; }
+          return { wb: _wb, armor: _armor, strikeMult: _mult };
+        } catch (e) { return null; }
+      };
+      // anyAllyLive(): FIGHTALLY2 — "someone stands beside them" reads
+      // either slot. Off-mode (ally2On false) this is exactly the old
+      // ally1 check.
+      var anyAllyLive = function () {
+        return (allyIn && allyHp > 0) || (ally2On && ally2In && ally2Hp > 0);
+      };
+      // liveAllyName(): the standing ally's name for the shared-stance
+      // lines (shield wall, rally) — the first slot when it stands.
+      var liveAllyName = function () {
+        if (allyIn && allyHp > 0) return allyName;
+        if (ally2On && ally2In && ally2Hp > 0) return ally2Name;
+        return allyName;
       };
       var allyBody = function (id) {
         try {
@@ -1332,7 +1365,28 @@
         allyVid = allyVids.shift(); allies--;
         var _ab0 = allyBody(allyVid); allyHp = _ab0.entry; allyMax = _ab0.max; allyEntryHp = _ab0.entry;
         rec.allyTakenP4 = 0; // FIGHTBLEND-B: a new ally starts a new P4 total.
-        allyGear(allyVid);
+        var _g0 = allyGear(allyVid);
+        if (_g0) { allyWb = _g0.wb; allyArmor = _g0.armor; allyStrikeMult = _g0.strikeMult; }
+        // FIGHTALLY2: with the second slot on, the second ally at the
+        // door charges in too — same body/gear read, same trust bump,
+        // same "already at the door" line. Off-mode this block never
+        // runs (ally2On false) and the single join above is untouched.
+        if (ally2On && allies > 0 && allyVids.length) {
+          ally2Called = true; ally2In = true;
+          ally2Vid = allyVids.shift(); allies--;
+          var _ab0b = allyBody(ally2Vid); ally2Hp = _ab0b.entry; ally2Max = _ab0b.max; ally2EntryHp = _ab0b.entry;
+          rec.ally2TakenP4 = 0;
+          var _g0b = allyGear(ally2Vid);
+          if (_g0b) { ally2Wb = _g0b.wb; ally2Armor = _g0b.armor; ally2StrikeMult = _g0b.strikeMult; }
+          try {
+            var _fa0b = (opts.foreignAllies || {})[ally2Vid];
+            ally2Name = (_fa0b && _fa0b.name) || opts.allyName || refName(ally2Vid);
+          } catch (e) {}
+          rec.ally2Vid = ally2Vid;
+          rec.ally2Joined = true;
+          rec.log.push(ally2Name + ' is already at the door too — charges in with ' + vName + '!');
+          try { if (this.bumpTrust) this.bumpTrust(ally2Vid, 1); } catch (e) {}
+        }
         try {
           var _fa0 = (opts.foreignAllies || {})[allyVid];
           allyName = (_fa0 && _fa0.name) || opts.allyName || refName(allyVid);
@@ -1379,15 +1433,20 @@
           var _last = rec.roundsDetail[rec.roundsDetail.length - 1];
           if (_last && _last.round === _flStart.round) return;
           var _allyTakenNow = (allyEntryHp > 0) ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0;
+          // FIGHTALLY2: the second ally's per-round taken, same shape.
+          var _ally2TakenNow = (ally2EntryHp > 0) ? Math.max(0, ally2EntryHp - Math.max(0, ally2Hp)) : 0;
           var _mHpTotal = 0;
           for (var _mi = 0; _mi < members.length; _mi++) _mHpTotal += Math.max(0, members[_mi].hp);
           rec.roundsDetail.push({
             round: _flStart.round,
             vHpStart: _flStart.vHp, mHpStart: _flStart.mHp, allyHpStart: _flStart.allyHp,
+            ally2HpStart: _flStart.ally2Hp,
             vHpEnd: Math.max(0, vHp), mHpEnd: Math.max(0, members[0].hp), allyHpEnd: (allyEntryHp > 0 ? allyHp : null),
+            ally2HpEnd: (ally2EntryHp > 0 ? ally2Hp : null),
             mHpTotalEnd: _mHpTotal,
             dealt: rec.mDealt - _flStart.mDealt, taken: rec.vTaken - _flStart.vTaken,
             allyDealt: rec.allyDealt - _flStart.allyDealt, allyTaken: _allyTakenNow - _flStart.allyTaken,
+            ally2Dealt: rec.ally2Dealt - (_flStart.ally2Dealt || 0), ally2Taken: _ally2TakenNow - (_flStart.ally2Taken || 0),
             abilities: (rec.ffFired || []).slice(_flStart.ffN),
             tricks: (rec.trickLog || []).slice(_flStart.trickN),
           });
@@ -1423,7 +1482,7 @@
         var vHpRoundStart = vHp;
         // FINISHLOG: round-open snapshot (before any damage this round).
         try {
-          if (_flOn) _flStart = { round: round, vHp: vHp, mHp: members[0].hp, allyHp: (allyEntryHp > 0 ? allyHp : null), mDealt: rec.mDealt, vTaken: rec.vTaken, allyDealt: rec.allyDealt, allyTaken: (allyEntryHp > 0) ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0, ffN: (rec.ffFired || []).length, trickN: (rec.trickLog || []).length };
+          if (_flOn) _flStart = { round: round, vHp: vHp, mHp: members[0].hp, allyHp: (allyEntryHp > 0 ? allyHp : null), ally2Hp: (ally2EntryHp > 0 ? ally2Hp : null), mDealt: rec.mDealt, vTaken: rec.vTaken, allyDealt: rec.allyDealt, ally2Dealt: rec.ally2Dealt, allyTaken: (allyEntryHp > 0) ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0, ally2Taken: (ally2EntryHp > 0) ? Math.max(0, ally2EntryHp - Math.max(0, ally2Hp)) : 0, ffN: (rec.ffFired || []).length, trickN: (rec.trickLog || []).length };
         } catch (e) { _flStart = null; }
         abRoundTaken = 0;
         vStruckThisRound = false;
@@ -1609,13 +1668,21 @@
               }
               // PARTY-UP: the pack splits its attention — the ally who rushed
               // in draws some of the hits (in their own armor, WINFIELD-DMG).
+              // FIGHTALLY2: the 40% ally share is a TOTAL across the live
+              // allies — a second ally spreads the blows, never deletes
+              // them (the leader still takes 60%). The blow's target is
+              // picked among the live allies only when it lands on one,
+              // so off-mode (one live ally at most) draws no new RNG.
               // TANK — DRAW FIRE (2026-10-12): the taunter makes themselves
               // the problem. The beast's eye stays on them: ally hit share
               // 40% -> 10%. Honest: it doesn't reduce damage, it moves it.
               var _allyShare = 0.4;
-              var _wardAegis = !!(gpF && gpF.aegis > 0), _wardVia = null;
-              if (gpF && allyIn && allyHp > 0) { try { _allyShare = GPf.fieldAllyShare(gpF, _allyShare); } catch (e) { console.warn('[godpath] ally share', e); } }
-              if (vHasAb('draw_fire') && allyIn && allyHp > 0 && !abDrewFire) {
+              var _wardAegis = !!(gpF && gpF.aegis > 0), _wardVia = null, _wardAllyVid = allyVid;
+              var _liveAllies = [];
+              if (allyIn && allyHp > 0) _liveAllies.push(1);
+              if (ally2On && ally2In && ally2Hp > 0) _liveAllies.push(2);
+              if (gpF && _liveAllies.length) { try { _allyShare = GPf.fieldAllyShare(gpF, _allyShare); } catch (e) { console.warn('[godpath] ally share', e); } }
+              if (vHasAb('draw_fire') && _liveAllies.length && !abDrewFire) {
                 abDrewFire = true;
                 ffFired('draw_fire');
                 _allyShare = 0.1;
@@ -1626,10 +1693,21 @@
               // villager who made it. Its next phase ignores the ally
               // entirely (share 0), the draw_fire mirror: attention moved,
               // no damage changed.
-              if (abGoadN > 0 && allyIn && allyHp > 0) _allyShare = 0;
-              var _allyRoll = allyIn && allyHp > 0 ? RR() : 1;
-              var hittingAlly = allyIn && allyHp > 0 && _allyRoll < _allyShare;
-              if (_wardAegis && _allyShare === 0 && _allyRoll < 0.4) _wardVia = 'aegis_link';
+              if (abGoadN > 0 && _liveAllies.length) _allyShare = 0;
+              var _allyRoll = _liveAllies.length ? RR() : 1;
+              var hittingAlly = _liveAllies.length > 0 && _allyRoll < _allyShare;
+              // The blow's target, resolved only when it lands on an ally.
+              var _hitAllyIdx = 0;
+              if (hittingAlly) _hitAllyIdx = _liveAllies.length === 2 ? (RR() < 0.5 ? 1 : 2) : _liveAllies[0];
+              var _hIdx = _hitAllyIdx || 1;
+              var _hVid = _hIdx === 2 ? ally2Vid : allyVid;
+              var _hName = _hIdx === 2 ? ally2Name : allyName;
+              var _hArmor = _hIdx === 2 ? ally2Armor : allyArmor;
+              var _hHp = _hIdx === 2 ? ally2Hp : allyHp;
+              if (_wardAegis && _allyShare === 0 && _allyRoll < 0.4) {
+                _wardVia = 'aegis_link';
+                if (_liveAllies.length) _wardAllyVid = _liveAllies[0] === 2 ? ally2Vid : allyVid;
+              }
               // TANK — BODYGUARD (2026-10-12): once per fight, a blow falling
               // on the ally lands on the guard instead. "Not them."
               if (hittingAlly && vHasAb('bodyguard') && !abBodyguarded) {
@@ -1637,7 +1715,8 @@
                 ffFired('bodyguard');
                 hittingAlly = false;
                 _wardVia = 'bodyguard';
-                rec.log.push(vName + ' steps into the blow meant for ' + allyName + '. Not them.');
+                _wardAllyVid = _hVid;
+                rec.log.push(vName + ' steps into the blow meant for ' + _hName + '. Not them.');
               }
               if (!hittingAlly && gpF && total > 0) {
                 var beamDamage = beamShare > 0 ? Math.min(d, total) : 0;
@@ -1679,15 +1758,15 @@
               // villager wearing T4 armor died to unarmored 50-70 hits
               // in 1-2 rounds. "Villagers wear armor now — the fight
               // must respect it" applies to the second fighter too.
-              if (hittingAlly && allyArmor > 0 && total > 0) {
+              if (hittingAlly && _hArmor > 0 && total > 0) {
                 var pierceA = 0;
                 try { pierceA = (mdef && mdef.pierce) || 0; } catch (e) {}
-                var rA = this.armorReduction(allyArmor, pierceA);
+                var rA = this.armorReduction(_hArmor, pierceA);
                 var absorbedA = Math.min(total - 1, Math.round(total * rA));
                 total = total - absorbedA;
-                rec.log.push(allyName + "'s gear absorbs " + absorbedA + '.');
+                rec.log.push(_hName + "'s gear absorbs " + absorbedA + '.');
               }
-              total = this.wornDamage(hittingAlly ? allyVid : vid, total, { rng: RR, log: rec.log, scene: 'field' });
+              total = this.wornDamage(hittingAlly ? _hVid : vid, total, { rng: RR, log: rec.log, scene: 'field' });
               // BLOODED (sim-wave5kill-a): the incoming half in the
               // field — a Producer's blow lands half as hard on a
               // blooded village's fighters, after armor. Village
@@ -1697,7 +1776,7 @@
               // after the FIGHTBLEND P4 parallel total, which keeps its
               // own pre-armor read — so every downstream split and
               // accounting sees the reduced number, once.
-              if (total > 0 && (mdef && (mdef.wave | 0)) === 5 && !(hittingAlly && (opts.foreignAllies || {})[allyVid]) && this.villageBlooded && this.villageBlooded()) {
+              if (total > 0 && (mdef && (mdef.wave | 0)) === 5 && !(hittingAlly && (opts.foreignAllies || {})[_hVid]) && this.villageBlooded && this.villageBlooded()) {
                 try {
                   var _bim = (typeof this.bloodedCfg === 'function' ? this.bloodedCfg().inMult : 0.75) || 0.75;
                   var _bpre = total;
@@ -1716,43 +1795,53 @@
                 // draw_fire already are in this engine: the stance is
                 // renewed as the fight moves, no separate turn to spend
                 // off-screen.
+                // FIGHTALLY2: the blow lands on the resolved target
+                // (_hIdx/_hVid/_hName/_hHp) — either ally. _hHp is the
+                // target's HP for this block and is written back to
+                // its slot at the block's end.
                 var _leechShare = 0;
                 if (vHasAb('leech') && total > 0) _leechShare = Math.floor(total / 2);
-                allyHp -= (total - _leechShare);
+                _hHp -= (total - _leechShare);
                 if (_leechShare > 0) {
                   vHp -= _leechShare; rec.vTaken += _leechShare; abRoundTaken += _leechShare;
                   if (vHp <= 0) vAlive = false;
                   if (!abLeechTold) { abLeechTold = true; ffFired('leech'); }
-                  rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + allyName + ' for ' + (total - _leechShare) + ' (' + Math.max(0, allyHp) + ' left) — ' + vName + ' takes the other half, ' + _leechShare + ', on their own body. (Leech)');
+                  rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + _hName + ' for ' + (total - _leechShare) + ' (' + Math.max(0, _hHp) + ' left) — ' + vName + ' takes the other half, ' + _leechShare + ', on their own body. (Leech)');
                 } else {
-                  rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + allyName + ' for ' + total + ' (' + Math.max(0, allyHp) + ' left)');
+                  rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + _hName + ' for ' + total + ' (' + Math.max(0, _hHp) + ' left)');
                 }
                 // FIGHTBLEND-B: the P4 parallel total splits with the hit —
                 // leech moves half the blow onto the leader, at the P4 rate,
                 // firing exactly when the mitigated leech split fires.
                 var _p4Leech = (vHasAb('leech') && total > 0) ? Math.floor(_p4Total / 2) : 0;
                 rec.vTakenP4 += _p4Leech;
-                rec.allyTakenP4 += (_p4Total - _p4Leech);
-                if (allyHp <= 0 && gpF) {
+                if (_hIdx === 2) rec.ally2TakenP4 += (_p4Total - _p4Leech);
+                else rec.allyTakenP4 += (_p4Total - _p4Leech);
+                // GOD-PATH HOLD (fieldAllyDown) is singular by design —
+                // it only ever knew the one ally. The second slot
+                // bypasses it (documented in the prereg).
+                if (_hHp <= 0 && gpF && _hIdx === 1) {
                   var _gpLogN2 = rec.log.length;
-                  try { var _gpHold = GPf.fieldAllyDown(gpF, gpC({ round: round })); if (_gpHold) allyHp = _gpHold; } catch (e) { console.warn('[godpath] ally down', e); }
+                  try { var _gpHold = GPf.fieldAllyDown(gpF, gpC({ round: round })); if (_gpHold) _hHp = _gpHold; } catch (e) { console.warn('[godpath] ally down', e); }
                   gpTag(_gpLogN2);
                 }
-                if (allyHp <= 0) {
+                if (_hHp <= 0) {
                   huntOpening.lost = true;
-                  allyIn = false;
-                  rec.log.push(allyName + ' goes down!');
+                  if (_hIdx === 2) ally2In = false; else allyIn = false;
+                  rec.log.push(_hName + ' goes down!');
                   // AID (comms 2026-10-10): a foreign ally's fall lands on the
                   // link — trust, gossip, debt forgiven in blood — not on a
                   // villager record.
                   try {
-                    var _fad = (opts.foreignAllies || {})[allyVid];
-                    if (_fad && this.aidAllyDown) this.aidAllyDown(_fad.villageId, _fad.face, allyName);
-                    else if (allyVid && this.hurtVillager) this.hurtVillager(allyVid, 30, 'monster', this.sealDamageResult({}, [[allyVid, 30]]),
+                    var _fad = (opts.foreignAllies || {})[_hVid];
+                    if (_fad && this.aidAllyDown) this.aidAllyDown(_fad.villageId, _fad.face, _hName);
+                    else if (_hVid && this.hurtVillager) this.hurtVillager(_hVid, 30, 'monster', this.sealDamageResult({}, [[_hVid, 30]]),
                       // HURTID (2026-10-22, #788): the 9th 'monster' site — thread the field-fight monster through damageContext like the game.js cluster.
                       { monsterId: (mdef && mdef.id) || null, monsterName: mName || null });
                   } catch (e) {}
                 }
+                // FIGHTALLY2: write the target's HP back to its slot.
+                if (_hIdx === 2) ally2Hp = _hHp; else allyHp = _hHp;
               } else {
                 // ABILITY — UNBREAKABLE (brace): the player's brace is a 60%
                 // reduction on the next hit, bought with a turn. Off-screen
@@ -1771,18 +1860,18 @@
                 // line braces as one. While an ally stands with them, blows
                 // land softer (-25%, min 1). The wall holds together or not
                 // at all — no ally, no wall.
-                if (vHasAb('shield_wall') && allyIn && allyHp > 0 && total > 0) {
+                if (vHasAb('shield_wall') && anyAllyLive() && total > 0) {
                   var _pre2 = total;
                   total = Math.max(1, Math.round(total * 0.75));
                   // r103: record only where the blow actually softened.
-                  if (total < _pre2) { ffFired('shield_wall'); rec.log.push(vName + ' holds the line with ' + allyName + ' — ' + _pre2 + ' → ' + total + '. (Shield Wall)'); }
+                  if (total < _pre2) { ffFired('shield_wall'); rec.log.push(vName + ' holds the line with ' + liveAllyName() + ' — ' + _pre2 + ' → ' + total + '. (Shield Wall)'); }
                 }
                 vHp -= total; rec.vTaken += total; abRoundTaken += total;
                 // FIGHTBLEND-B: the P4 parallel total lands on the leader.
                 rec.vTakenP4 += _p4Total;
                 vBeamTaken += Math.max(0, Math.min(total, Math.round(total * beamShare)));
-                if (_wardVia && allyVid && total > 0 && mdef.id && !wardCarries.some(x => x.ally === allyVid))
-                  wardCarries.push({ ally: allyVid, via: _wardVia, wound: total, day: day });
+                if (_wardVia && _wardAllyVid && total > 0 && mdef.id && !wardCarries.some(x => x.ally === _wardAllyVid))
+                  wardCarries.push({ ally: _wardAllyVid, via: _wardVia, wound: total, day: day });
                 rec.log.push('R' + round + ': ' + rAtkName + ' hits ' + vName + ' for ' + total + ' (' + Math.max(0, vHp) + ' left)');
               }
             }
@@ -2283,6 +2372,28 @@
                 rec.log.push('R' + round + ': ' + allyName + ' strikes again, louder — ' + _bd + ' (' + Math.max(0, lead.hp) + ' left). (Live Broadcast)');
               }
             }
+            // FIGHTALLY2: the second ally fights too — same tactical
+            // formula on their OWN weapon, same blooded rule, their own
+            // dealt tally (rec.ally2Dealt) feeding the shared
+            // rec.allyDealt total. Live Broadcast stays the first
+            // ally's echo (singular by design, like the god-path hooks).
+            if (ally2On && ally2In && ally2Hp > 0 && lead.hp > 0) {
+              var ad2 = (ally2Wb != null) ? lroll([4 + ally2Wb, 8 + ally2Wb]) : lroll([3, 6]);
+              if (ally2Wb != null && ally2StrikeMult !== 1) ad2 = Math.round(ad2 * ally2StrikeMult);
+              if ((mdef && (mdef.wave | 0)) === 5 && ad2 > 0 && ally2Wb != null && !(opts.foreignAllies || {})[ally2Vid] && this.villageBlooded && this.villageBlooded()) {
+                try {
+                  var _bdm2b = (typeof this.bloodedCfg === 'function' ? this.bloodedCfg().dmgMult : 1.5) || 1.5;
+                  ad2 = Math.round(ad2 * _bdm2b);
+                  if (!rec.bloodedTold) {
+                    rec.bloodedTold = true;
+                    rec.log.push('R' + round + ': ' + this.bloodedLine());
+                  }
+                } catch (e) { console.warn('[blooded] field ally2 strike', e); }
+              }
+              lead.hp -= ad2; rec.mDealt += ad2; rec.allyDealt += ad2; rec.ally2Dealt += ad2;
+              if (lead.hp <= 0) lead.alive = false;
+              rec.log.push('R' + round + ': ' + ally2Name + ' strikes for ' + ad2 + (ally2StrikeMult !== 1 ? ' (x' + ally2StrikeMult.toFixed(1) + ')' : '') + ' (' + Math.max(0, lead.hp) + ' left)');
+            }
           }
         }
         // ---- morale: situational, never a flat roll ----
@@ -2367,9 +2478,21 @@
             // beast's TTK — two bodies, total incoming — not the
             // leader's alone. mDealt already counts party damage, so
             // only the survival side changes. Solo fights are identical.
+            // FIGHTALLY2: the party's survival pool — leader plus each
+            // live ally's hypothetical HP, against the party's total
+            // incoming rate. With only the first ally live this is
+            // algebraically the old formula.
+            var _partyHpHypo = vHpHypo, _partyTakenP4 = rec.vTakenP4;
             if (allyIn && allyHp > 0 && allyEntryHp > 0) {
-              var _allyHpHypo = allyEntryHp - rec.allyTakenP4;
-              rtd = (vHpHypo + _allyHpHypo) / Math.max(1, (rec.vTakenP4 + rec.allyTakenP4) / round);
+              _partyHpHypo += allyEntryHp - rec.allyTakenP4;
+              _partyTakenP4 += rec.allyTakenP4;
+            }
+            if (ally2On && ally2In && ally2Hp > 0 && ally2EntryHp > 0) {
+              _partyHpHypo += ally2EntryHp - rec.ally2TakenP4;
+              _partyTakenP4 += rec.ally2TakenP4;
+            }
+            if (_partyTakenP4 !== rec.vTakenP4) {
+              rtd = _partyHpHypo / Math.max(1, _partyTakenP4 / round);
             }
             hopeless = rtd < rtk * 0.85;              // losing before the lead falls — slow bleeds count (loosened 2026-10-13, was 0.6)
             // COUNTERWIRE (2026-10-16): trick-aware morale. A villager
@@ -2441,7 +2564,8 @@
           allyVid = allyVids.shift(); allies--;
           var _ab1 = allyBody(allyVid); allyHp = _ab1.entry; allyMax = _ab1.max; allyEntryHp = _ab1.entry;
           rec.allyTakenP4 = 0; // FIGHTBLEND-B: a new ally starts a new P4 total.
-          allyGear(allyVid);
+          var _g1 = allyGear(allyVid);
+          if (_g1) { allyWb = _g1.wb; allyArmor = _g1.armor; allyStrikeMult = _g1.strikeMult; }
           // AID (comms 2026-10-10): foreign allies carry their own names.
           try {
             var _fa2 = (opts.foreignAllies || {})[allyVid];
@@ -2471,6 +2595,29 @@
           } catch (e) {}
           // TRUST LEDGER (journey landing r12 2026-10-13): reason attributed.
           try { if (this.bumpTrust) this.bumpTrust(allyVid, 1, 'answered a call for help'); } catch (e) {}
+        } else if (hopeless && helpCalled && ally2On && !ally2Called && allies > 0 && allyVids.length && rec.intent !== 'learn') {
+          // FIGHTALLY2 — THE SECOND SHOUT (finding #2496): the trajectory
+          // is hopeless AGAIN with the first ally already in, and a second
+          // companion is still at hand. The fighter shouts again instead
+          // of running — the second ally charges in on the same terms as
+          // the first (real body, own gear, trust bump). One shout per
+          // ally; when no ally remains, the hopeless-and-alone branch
+          // below decides the flight, exactly as before.
+          ally2Called = true; ally2In = true;
+          ally2Vid = allyVids.shift(); allies--;
+          var _ab2 = allyBody(ally2Vid); ally2Hp = _ab2.entry; ally2Max = _ab2.max; ally2EntryHp = _ab2.entry;
+          rec.ally2TakenP4 = 0; // FIGHTBLEND-B: a new ally starts a new P4 total.
+          var _g2 = allyGear(ally2Vid);
+          if (_g2) { ally2Wb = _g2.wb; ally2Armor = _g2.armor; ally2StrikeMult = _g2.strikeMult; }
+          try {
+            var _fa2b = (opts.foreignAllies || {})[ally2Vid];
+            ally2Name = (_fa2b && _fa2b.name) || opts.allyName || refName(ally2Vid);
+          } catch (e) {}
+          rec.ally2Vid = ally2Vid;
+          rec.ally2Joined = true;
+          rec.shout2Round = round;
+          rec.log.push(vName + ' is still losing — shouts again! ' + ally2Name + ' charges in!');
+          try { if (this.bumpTrust) this.bumpTrust(ally2Vid, 1, 'answered a call for help'); } catch (e) {}
         } else if (hopeless) {
           // HOPELESS AND ALONE (break-it contests r11 2026-10-10): the
           // trajectory is legible (drops long before the lead falls) and no
@@ -2491,10 +2638,10 @@
           // Not volume like war_cry, no stun — they hold because someone is
           // standing with them. Fires instead of fleeing this round; the
           // next round decides again, honestly. "For them."
-          if (!abRallied && vHasAb('rally') && allyIn && allyHp > 0 && !opts.noFlee) {
+          if (!abRallied && vHasAb('rally') && anyAllyLive() && !opts.noFlee) {
             abRallied = true;
             ffFired('rally');
-            rec.log.push(vName + ' looks at ' + allyName + ' standing with them — and does not run. For them. (Rally)');
+            rec.log.push(vName + ' looks at ' + liveAllyName() + ' standing with them — and does not run. For them. (Rally)');
           } else if (!abWarCried && vHasAb('war_cry') && !opts.noFlee) {
             abWarCried = true; abStun = 1;
             ffFired('war_cry');
@@ -2777,6 +2924,8 @@
           }
           try {
             if (helpCalled && allyIn && allyHp > 0 && allyVid && allyVid !== vid && _nw.indexOf(allyVid) < 0) _nw.push(allyVid);
+            // FIGHTALLY2: the second ally stood there too.
+            if (ally2On && helpCalled && ally2In && ally2Hp > 0 && ally2Vid && ally2Vid !== vid && _nw.indexOf(ally2Vid) < 0) _nw.push(ally2Vid);
           } catch (e) {}
           if (_nw.length) this.noteNodeWitnessKill(vid, mdef.id, _nw);
         }
@@ -2791,14 +2940,21 @@
         if (vid && vid !== 'player') {
           var _allyAlive = helpCalled && allyIn && allyHp > 0 && allyVid;
           var _allyDied = helpCalled && !allyIn && allyHp <= 0 && allyVid;
+          // FIGHTALLY2: the second ally's pair-bond with the leader is
+          // its own bond — two pair calls, never a triple (the bond
+          // ledger is pairwise by construction).
+          var _ally2Alive = ally2On && helpCalled && ally2In && ally2Hp > 0 && ally2Vid;
+          var _ally2Died = ally2On && helpCalled && !ally2In && ally2Hp <= 0 && ally2Vid;
           if (rec.outcome === 'vKill' || rec.outcome === 'mFlee' || rec.outcome === 'vFlee') {
             if (_allyAlive && this.noteSharedFight) this.noteSharedFight([vid, allyVid]);
+            if (_ally2Alive && this.noteSharedFight) this.noteSharedFight([vid, ally2Vid]);
             if (this.noteShieldbearerOffer) this.noteShieldbearerOffer(vid);
             if (this.noteVillageBondFight) this.noteVillageBondFight();
           } else if (rec.outcome === 'vDie') {
-            if (this.noteBondGrief) this.noteBondGrief(vid, _allyAlive ? [allyVid] : []);
+            if (this.noteBondGrief) this.noteBondGrief(vid, (_allyAlive ? [allyVid] : []).concat(_ally2Alive ? [ally2Vid] : []));
           }
           if (_allyDied && this.noteBondGrief) this.noteBondGrief(allyVid, [vid]);
+          if (_ally2Died && this.noteBondGrief) this.noteBondGrief(ally2Vid, [vid]);
         }
       } catch (e) {}
       var _gpLogN6 = rec.log.length;
@@ -2807,7 +2963,10 @@
         { id: allyVid, alive: helpCalled && allyIn && allyHp > 0 }); }
       catch (e) { console.warn('[godpath] field protection outcome', e); }
       try { if (GPf && GPf.finishFieldApexHunt) GPf.finishFieldApexHunt(this, vid, huntOpening, rec,
-        { packUsed: !!(gpF && gpF.used.pack_hunt), intact: !helpCalled || (allyIn && allyHp > 0) }); }
+        // FIGHTALLY2: intact means every JOINED ally still stands — a
+        // never-joined second slot is not a casualty. Off-mode
+        // (ally2Vid null) this is exactly the old read.
+        { packUsed: !!(gpF && gpF.used.pack_hunt), intact: !helpCalled || (((!allyVid) || (allyIn && allyHp > 0)) && ((!ally2Vid) || (ally2In && ally2Hp > 0))) }); }
       catch (e) { console.warn('[godpath] field hunt outcome', e); }
       gpTag(_gpLogN6);
       // FIELD-WOUND CARRYOVER (tackle-wound2): the surviving Haven ally's
@@ -2819,20 +2978,33 @@
       // the player, and the lead themselves are excluded (the lead's entry
       // is the one above; the player's wounds travel through scholar.health).
       var allyTaken = 0, allySettles = false;
+      // FIGHTALLY2: the second ally's wounds settle on their own body,
+      // through their own once-only sealed entry — never folded into
+      // the first ally's total, never double-applied.
+      var ally2Taken = 0, ally2Settles = false;
       try {
         var _roster = ((this.state.village || {}).roster || []);
         allyTaken = helpCalled ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0;
         allySettles = !!(helpCalled && allyIn && allyHp > 0 && allyVid && allyVid !== vid &&
           allyVid !== this.villagerId && !(opts.foreignAllies || {})[allyVid] &&
           _roster.indexOf(allyVid) >= 0 && allyTaken > 0);
-      } catch (e) { allySettles = false; }
+        ally2Taken = (ally2On && helpCalled) ? Math.max(0, ally2EntryHp - Math.max(0, ally2Hp)) : 0;
+        ally2Settles = !!(ally2On && helpCalled && ally2In && ally2Hp > 0 && ally2Vid && ally2Vid !== vid &&
+          ally2Vid !== this.villagerId && !(opts.foreignAllies || {})[ally2Vid] &&
+          _roster.indexOf(ally2Vid) >= 0 && ally2Taken > 0);
+      } catch (e) { allySettles = false; ally2Settles = false; }
       rec.allyTaken = helpCalled ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0;
       rec.allyHpLeft = helpCalled ? Math.max(0, allyHp) : null;
       rec.allyEntryHp = helpCalled ? allyEntryHp : null;
+      rec.ally2Taken = (ally2On && helpCalled) ? Math.max(0, ally2EntryHp - Math.max(0, ally2Hp)) : 0;
+      rec.ally2HpLeft = (ally2On && helpCalled) ? Math.max(0, ally2Hp) : null;
+      rec.ally2EntryHp = (ally2On && helpCalled) ? ally2EntryHp : null;
       // FIGHTBLEND-B: record-only — the hypothetical trajectory at the close.
       rec.vHpHypoLeft = Math.max(0, vHpStart - rec.vTakenP4);
       rec.allyHpHypoLeft = helpCalled ? Math.max(0, allyEntryHp - rec.allyTakenP4) : null;
+      rec.ally2HpHypoLeft = (ally2On && helpCalled) ? Math.max(0, ally2EntryHp - rec.ally2TakenP4) : null;
       rec.allyWoundsSettled = allySettles;
+      rec.ally2WoundsSettled = ally2Settles;
       // REAR GUARD (sim-gaps-ghost, 2026-10-29): the mustered fighters
       // who never joined the blows are not ghosts — they marched, and
       // they stood the rear through the fight. allyVids here holds
@@ -2864,9 +3036,13 @@
       var _sealEntries = [[vid, rec.vTaken,
         vid !== 'player' && vid !== this.villagerId ? { start: vHpStart, end: rec.vHpLeft } : null]];
       if (allySettles) _sealEntries.push([allyVid, allyTaken, { start: allyEntryHp, end: Math.max(0, allyHp) }]);
+      if (ally2Settles) _sealEntries.push([ally2Vid, ally2Taken, { start: ally2EntryHp, end: Math.max(0, ally2Hp) }]);
       var _sealed = this.sealDamageResult(rec, _sealEntries);
       if (allySettles) {
         try { this.hurtVillager(allyVid, allyTaken, 'monster', rec, { monsterId: (mdef && mdef.id) || null, monsterName: mName || null }); } catch (e) {}
+      }
+      if (ally2Settles) {
+        try { this.hurtVillager(ally2Vid, ally2Taken, 'monster', rec, { monsterId: (mdef && mdef.id) || null, monsterName: mName || null }); } catch (e) {}
       }
       return _sealed;
     },
