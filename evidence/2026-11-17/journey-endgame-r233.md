@@ -219,8 +219,12 @@ gate → full seat) still has no full seat on this leg.
 ## Closeout
 - Evidence committed via safe-commit.sh (probe instrumentation + all
   logs, analyzers, perseed corpora, this note, gate log).
-- Rebased onto master `e390dff60` (ship bump on planignite PILOT GO);
-  proof re-run on the rebased tip (see closeout commit); ff-merged.
-- Worktree released, branch deleted, lock deleted (run_id verified).
+- Rebased onto master `ed55adddd` (wideduty adoption deltas, landed
+  mid-adoption; deathcleanup-b `1e74e1078` + ship bump `e390dff60`
+  below it); all three analyzer verdicts re-run on the rebased tip
+  `13eb08ac8` and reproduced exactly; ff-merged as `13eb08ac8`
+  (66 files, +405,679).
+- Worktree released, branch deleted, lock deleted (run_id verified
+  `oversight-playtest-loop-2-20261117T095546Z`).
 - Rotation-b: 4 → 5 (social life next).
 - Merged locally, pending ship.
