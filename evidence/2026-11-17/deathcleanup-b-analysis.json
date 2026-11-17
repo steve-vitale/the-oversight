@@ -1,0 +1,5265 @@
+{
+  "arm": "deathcleanup-b",
+  "bars": {
+    "bar1_armedClean": true,
+    "bar1_detail": {
+      "slotHolderDays": 0,
+      "censusDead": 0,
+      "censusTotal": 897,
+      "deathCleanups": 15,
+      "armedVerdict": "NOISE-ONLY",
+      "armedPoolTotal": 0,
+      "armedSlotTotal": 0
+    },
+    "bar2_controlReproduces": true,
+    "bar2_detail": {
+      "slotHolderDays": 21,
+      "censusDead": 495,
+      "censusTotal": 1347,
+      "controlVerdict": "COSTLY",
+      "controlPoolTotal": 0,
+      "controlSlotTotal": 6
+    },
+    "bar3_noRegression": true,
+    "bar3_detail": {
+      "dLaunches": 0,
+      "dWave4Kills": -2,
+      "dStarvationDeaths": -1,
+      "dMedianSurvival": 4,
+      "control": {
+        "launches": 85,
+        "wave4Kills": 21,
+        "starvationDeaths": 6,
+        "medianSurvival": 145.5
+      },
+      "armed": {
+        "launches": 85,
+        "wave4Kills": 19,
+        "starvationDeaths": 5,
+        "medianSurvival": 149.5
+      }
+    },
+    "driftClean": true
+  },
+  "control": {
+    "wall": {
+      "seeds": 8,
+      "nationalByStanding": 2,
+      "nationalByScaleRank": 0,
+      "table": 0,
+      "wins": 0,
+      "wave4Reached": 7,
+      "wave5Reached": 2,
+      "medianSurvival": 145.5,
+      "wave4Kills": 21,
+      "wave5Kills": 4,
+      "deaths": 574
+    },
+    "totals": {
+      "launches": 85,
+      "wave4Kills": 21,
+      "wave5Kills": 4,
+      "starvationDeaths": 6,
+      "deathCleanups": 0,
+      "slotHolderDays": 21,
+      "censusDead": 495,
+      "censusTotal": 1347,
+      "medianSurvival": 145.5,
+      "deaths": 574
+    },
+    "perSeed": [
+      {
+        "seed": 103231,
+        "gameDays": 42,
+        "endReason": "village-lost",
+        "standing": 25,
+        "scaleRank": "village",
+        "won": false,
+        "maxWave": 3,
+        "deaths": 34,
+        "launches": 2,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "starvationDeaths": 2,
+        "deathCleanups": 0,
+        "slotHolderDays": 0,
+        "slotHolders": 0,
+        "censusDead": 63,
+        "censusTotal": 109,
+        "firstDeathDay": 7
+      },
+      {
+        "seed": 103232,
+        "gameDays": 148,
+        "endReason": "survived",
+        "standing": 930,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 5,
+        "deaths": 109,
+        "launches": 39,
+        "wave4Kills": 14,
+        "wave5Kills": 4,
+        "starvationDeaths": 0,
+        "deathCleanups": 0,
+        "slotHolderDays": 1,
+        "slotHolders": 1,
+        "censusDead": 19,
+        "censusTotal": 420,
+        "firstDeathDay": 71
+      },
+      {
+        "seed": 103233,
+        "gameDays": 139,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "deaths": 60,
+        "launches": 0,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "starvationDeaths": 1,
+        "deathCleanups": 0,
+        "slotHolderDays": 0,
+        "slotHolders": 0,
+        "censusDead": 0,
+        "censusTotal": 0,
+        "firstDeathDay": 15
+      },
+      {
+        "seed": 103234,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "deaths": 59,
+        "launches": 0,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "starvationDeaths": 1,
+        "deathCleanups": 0,
+        "slotHolderDays": 0,
+        "slotHolders": 0,
+        "censusDead": 0,
+        "censusTotal": 0,
+        "firstDeathDay": 55
+      },
+      {
+        "seed": 103235,
+        "gameDays": 87,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "deaths": 134,
+        "launches": 36,
+        "wave4Kills": 2,
+        "wave5Kills": 0,
+        "starvationDeaths": 1,
+        "deathCleanups": 0,
+        "slotHolderDays": 8,
+        "slotHolders": 3,
+        "censusDead": 261,
+        "censusTotal": 581,
+        "firstDeathDay": 9
+      },
+      {
+        "seed": 103236,
+        "gameDays": 150,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "deaths": 69,
+        "launches": 7,
+        "wave4Kills": 1,
+        "wave5Kills": 0,
+        "starvationDeaths": 0,
+        "deathCleanups": 0,
+        "slotHolderDays": 9,
+        "slotHolders": 1,
+        "censusDead": 149,
+        "censusTotal": 214,
+        "firstDeathDay": 72
+      },
+      {
+        "seed": 103237,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "deaths": 51,
+        "launches": 0,
+        "wave4Kills": 1,
+        "wave5Kills": 0,
+        "starvationDeaths": 1,
+        "deathCleanups": 0,
+        "slotHolderDays": 0,
+        "slotHolders": 0,
+        "censusDead": 0,
+        "censusTotal": 0,
+        "firstDeathDay": 15
+      },
+      {
+        "seed": 103238,
+        "gameDays": 143,
+        "endReason": "village-lost",
+        "standing": 305,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 5,
+        "deaths": 58,
+        "launches": 1,
+        "wave4Kills": 3,
+        "wave5Kills": 0,
+        "starvationDeaths": 0,
+        "deathCleanups": 0,
+        "slotHolderDays": 3,
+        "slotHolders": 1,
+        "censusDead": 3,
+        "censusTotal": 23,
+        "firstDeathDay": 17
+      }
+    ],
+    "classify": {
+      "verdict": "COSTLY",
+      "poolTotal": 0,
+      "slotTotal": 6,
+      "censusDeadTotal": 495,
+      "censusTotal": 1347,
+      "validityOk": true
+    },
+    "perSeedFull": [
+      {
+        "seed": 103231,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "f560e625b81e6a0923d66371e3f02a8257c450e5",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 42,
+        "endReason": "village-lost",
+        "won": false,
+        "standing": 25,
+        "scaleRank": "village",
+        "maxWave": 3,
+        "unlockedWave": 3,
+        "nationalByStanding": false,
+        "nationalByScaleRank": false,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "deaths": 34,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 109,
+          "censusDead": 63,
+          "share": 0.578,
+          "buckets": {
+            "0-30": {
+              "total": 73,
+              "dead": 39
+            },
+            "31-60": {
+              "total": 36,
+              "dead": 24
+            },
+            "61-90": {
+              "total": 0,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 0,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 0,
+              "dead": 0
+            }
+          },
+          "tails": [
+            {
+              "vid": "gen_7bmbynb",
+              "deadRows": 32,
+              "firstDeadDay": 11,
+              "lastDay": 42,
+              "spanDays": 31,
+              "stage": "hunt",
+              "target": null
+            },
+            {
+              "vid": "gen_67qal0n",
+              "deadRows": 31,
+              "firstDeadDay": 12,
+              "lastDay": 42,
+              "spanDays": 30,
+              "stage": "party",
+              "target": null
+            }
+          ],
+          "longTails": 2,
+          "longestSpan": 31,
+          "distinctDeadHolders": 2
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 6,
+            "winPlanHavenTick": 26,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 6,
+            "winPlanNoteFight": 13,
+            "winPlanNoteKill": 6,
+            "winPlanFightGate": 13,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 168,
+            "winPlanMusterTick": 168,
+            "vbrainExecuteDepart": 26
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [],
+          "holderDays": 0,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 37,
+          "meanInflation": 2.689,
+          "maxInflation": 3,
+          "finalDay": 42,
+          "finalDayIncl": 3,
+          "finalDayExcl": 1,
+          "perDay": {
+            "6": {
+              "incl": 1,
+              "excl": 1
+            },
+            "7": {
+              "incl": 3,
+              "excl": 3
+            },
+            "8": {
+              "incl": 3,
+              "excl": 3
+            },
+            "9": {
+              "incl": 3,
+              "excl": 3
+            },
+            "10": {
+              "incl": 3,
+              "excl": 3
+            },
+            "11": {
+              "incl": 3,
+              "excl": 2
+            },
+            "12": {
+              "incl": 3,
+              "excl": 1
+            },
+            "13": {
+              "incl": 3,
+              "excl": 1
+            },
+            "14": {
+              "incl": 3,
+              "excl": 1
+            },
+            "15": {
+              "incl": 3,
+              "excl": 1
+            },
+            "16": {
+              "incl": 3,
+              "excl": 1
+            },
+            "17": {
+              "incl": 3,
+              "excl": 1
+            },
+            "18": {
+              "incl": 3,
+              "excl": 1
+            },
+            "19": {
+              "incl": 3,
+              "excl": 1
+            },
+            "20": {
+              "incl": 3,
+              "excl": 1
+            },
+            "21": {
+              "incl": 3,
+              "excl": 1
+            },
+            "22": {
+              "incl": 3,
+              "excl": 1
+            },
+            "23": {
+              "incl": 3,
+              "excl": 1
+            },
+            "24": {
+              "incl": 3,
+              "excl": 1
+            },
+            "25": {
+              "incl": 3,
+              "excl": 1
+            },
+            "26": {
+              "incl": 3,
+              "excl": 1
+            },
+            "27": {
+              "incl": 3,
+              "excl": 1
+            },
+            "28": {
+              "incl": 3,
+              "excl": 1
+            },
+            "29": {
+              "incl": 3,
+              "excl": 1
+            },
+            "30": {
+              "incl": 3,
+              "excl": 1
+            },
+            "31": {
+              "incl": 3,
+              "excl": 1
+            },
+            "32": {
+              "incl": 3,
+              "excl": 1
+            },
+            "33": {
+              "incl": 3,
+              "excl": 1
+            },
+            "34": {
+              "incl": 3,
+              "excl": 1
+            },
+            "35": {
+              "incl": 3,
+              "excl": 1
+            },
+            "36": {
+              "incl": 3,
+              "excl": 1
+            },
+            "37": {
+              "incl": 3,
+              "excl": 1
+            },
+            "38": {
+              "incl": 3,
+              "excl": 1
+            },
+            "39": {
+              "incl": 3,
+              "excl": 1
+            },
+            "40": {
+              "incl": 3,
+              "excl": 1
+            },
+            "41": {
+              "incl": 3,
+              "excl": 1
+            },
+            "42": {
+              "incl": 3,
+              "excl": 1
+            }
+          }
+        }
+      },
+      {
+        "seed": 103232,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "f560e625b81e6a0923d66371e3f02a8257c450e5",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 148,
+        "endReason": "survived",
+        "won": false,
+        "standing": 930,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "nationalByStanding": true,
+        "nationalByScaleRank": false,
+        "wave4Kills": 14,
+        "wave5Kills": 4,
+        "deaths": 109,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 420,
+          "censusDead": 19,
+          "share": 0.0452,
+          "buckets": {
+            "0-30": {
+              "total": 0,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 68,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 120,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 120,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 112,
+              "dead": 19
+            }
+          },
+          "tails": [
+            {
+              "vid": "jorge_silva",
+              "deadRows": 10,
+              "firstDeadDay": 139,
+              "lastDay": 148,
+              "spanDays": 9,
+              "stage": "party",
+              "target": "rerun"
+            },
+            {
+              "vid": "gen_y31yrz9",
+              "deadRows": 9,
+              "firstDeadDay": 140,
+              "lastDay": 148,
+              "spanDays": 8,
+              "stage": "standing",
+              "target": "gavel"
+            }
+          ],
+          "longTails": 0,
+          "longestSpan": 9,
+          "distinctDeadHolders": 2
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 130,
+            "winPlanHavenTick": 223,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 136,
+            "winPlanNoteFight": 197,
+            "winPlanNoteKill": 55,
+            "winPlanFightGate": 229,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 591,
+            "winPlanMusterTick": 591,
+            "vbrainExecuteDepart": 223
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [
+            {
+              "vid": "gen_y31yrz9",
+              "firstDeadRefDay": 139,
+              "deadRef": "jorge_silva",
+              "days": 1,
+              "launchedAfter": false
+            }
+          ],
+          "holderDays": 1,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 106,
+          "meanInflation": 1.088,
+          "maxInflation": 2,
+          "finalDay": 148,
+          "finalDayIncl": 4,
+          "finalDayExcl": 2,
+          "perDay": {
+            "43": {
+              "incl": 2,
+              "excl": 2
+            },
+            "44": {
+              "incl": 2,
+              "excl": 2
+            },
+            "45": {
+              "incl": 4,
+              "excl": 4
+            },
+            "46": {
+              "incl": 4,
+              "excl": 4
+            },
+            "47": {
+              "incl": 4,
+              "excl": 4
+            },
+            "48": {
+              "incl": 4,
+              "excl": 4
+            },
+            "49": {
+              "incl": 4,
+              "excl": 4
+            },
+            "50": {
+              "incl": 4,
+              "excl": 4
+            },
+            "51": {
+              "incl": 4,
+              "excl": 4
+            },
+            "52": {
+              "incl": 4,
+              "excl": 4
+            },
+            "53": {
+              "incl": 4,
+              "excl": 4
+            },
+            "54": {
+              "incl": 4,
+              "excl": 4
+            },
+            "55": {
+              "incl": 4,
+              "excl": 4
+            },
+            "56": {
+              "incl": 4,
+              "excl": 4
+            },
+            "57": {
+              "incl": 4,
+              "excl": 4
+            },
+            "58": {
+              "incl": 4,
+              "excl": 4
+            },
+            "59": {
+              "incl": 4,
+              "excl": 4
+            },
+            "60": {
+              "incl": 4,
+              "excl": 4
+            },
+            "61": {
+              "incl": 4,
+              "excl": 4
+            },
+            "62": {
+              "incl": 4,
+              "excl": 4
+            },
+            "63": {
+              "incl": 4,
+              "excl": 4
+            },
+            "64": {
+              "incl": 4,
+              "excl": 4
+            },
+            "65": {
+              "incl": 4,
+              "excl": 4
+            },
+            "66": {
+              "incl": 4,
+              "excl": 4
+            },
+            "67": {
+              "incl": 4,
+              "excl": 4
+            },
+            "68": {
+              "incl": 4,
+              "excl": 4
+            },
+            "69": {
+              "incl": 4,
+              "excl": 4
+            },
+            "70": {
+              "incl": 4,
+              "excl": 4
+            },
+            "71": {
+              "incl": 4,
+              "excl": 4
+            },
+            "72": {
+              "incl": 4,
+              "excl": 4
+            },
+            "73": {
+              "incl": 4,
+              "excl": 4
+            },
+            "74": {
+              "incl": 4,
+              "excl": 4
+            },
+            "75": {
+              "incl": 4,
+              "excl": 4
+            },
+            "76": {
+              "incl": 4,
+              "excl": 4
+            },
+            "77": {
+              "incl": 4,
+              "excl": 4
+            },
+            "78": {
+              "incl": 4,
+              "excl": 4
+            },
+            "79": {
+              "incl": 4,
+              "excl": 4
+            },
+            "80": {
+              "incl": 4,
+              "excl": 4
+            },
+            "81": {
+              "incl": 4,
+              "excl": 4
+            },
+            "82": {
+              "incl": 4,
+              "excl": 4
+            },
+            "83": {
+              "incl": 4,
+              "excl": 4
+            },
+            "84": {
+              "incl": 4,
+              "excl": 4
+            },
+            "85": {
+              "incl": 4,
+              "excl": 4
+            },
+            "86": {
+              "incl": 4,
+              "excl": 4
+            },
+            "87": {
+              "incl": 4,
+              "excl": 4
+            },
+            "88": {
+              "incl": 4,
+              "excl": 4
+            },
+            "89": {
+              "incl": 4,
+              "excl": 4
+            },
+            "90": {
+              "incl": 4,
+              "excl": 4
+            },
+            "91": {
+              "incl": 4,
+              "excl": 4
+            },
+            "92": {
+              "incl": 4,
+              "excl": 4
+            },
+            "93": {
+              "incl": 4,
+              "excl": 4
+            },
+            "94": {
+              "incl": 4,
+              "excl": 4
+            },
+            "95": {
+              "incl": 4,
+              "excl": 4
+            },
+            "96": {
+              "incl": 4,
+              "excl": 4
+            },
+            "97": {
+              "incl": 4,
+              "excl": 4
+            },
+            "98": {
+              "incl": 4,
+              "excl": 4
+            },
+            "99": {
+              "incl": 4,
+              "excl": 4
+            },
+            "100": {
+              "incl": 4,
+              "excl": 4
+            },
+            "101": {
+              "incl": 4,
+              "excl": 4
+            },
+            "102": {
+              "incl": 4,
+              "excl": 4
+            },
+            "103": {
+              "incl": 4,
+              "excl": 4
+            },
+            "104": {
+              "incl": 4,
+              "excl": 4
+            },
+            "105": {
+              "incl": 4,
+              "excl": 4
+            },
+            "106": {
+              "incl": 4,
+              "excl": 4
+            },
+            "107": {
+              "incl": 4,
+              "excl": 4
+            },
+            "108": {
+              "incl": 4,
+              "excl": 4
+            },
+            "109": {
+              "incl": 4,
+              "excl": 4
+            },
+            "110": {
+              "incl": 4,
+              "excl": 4
+            },
+            "111": {
+              "incl": 4,
+              "excl": 4
+            },
+            "112": {
+              "incl": 4,
+              "excl": 4
+            },
+            "113": {
+              "incl": 4,
+              "excl": 4
+            },
+            "114": {
+              "incl": 4,
+              "excl": 4
+            },
+            "115": {
+              "incl": 4,
+              "excl": 4
+            },
+            "116": {
+              "incl": 4,
+              "excl": 4
+            },
+            "117": {
+              "incl": 4,
+              "excl": 4
+            },
+            "118": {
+              "incl": 4,
+              "excl": 4
+            },
+            "119": {
+              "incl": 4,
+              "excl": 4
+            },
+            "120": {
+              "incl": 4,
+              "excl": 4
+            },
+            "121": {
+              "incl": 4,
+              "excl": 4
+            },
+            "122": {
+              "incl": 4,
+              "excl": 4
+            },
+            "123": {
+              "incl": 4,
+              "excl": 4
+            },
+            "124": {
+              "incl": 4,
+              "excl": 4
+            },
+            "125": {
+              "incl": 4,
+              "excl": 4
+            },
+            "126": {
+              "incl": 4,
+              "excl": 4
+            },
+            "127": {
+              "incl": 4,
+              "excl": 4
+            },
+            "128": {
+              "incl": 4,
+              "excl": 4
+            },
+            "129": {
+              "incl": 4,
+              "excl": 4
+            },
+            "130": {
+              "incl": 4,
+              "excl": 4
+            },
+            "131": {
+              "incl": 4,
+              "excl": 4
+            },
+            "132": {
+              "incl": 4,
+              "excl": 4
+            },
+            "133": {
+              "incl": 4,
+              "excl": 4
+            },
+            "134": {
+              "incl": 4,
+              "excl": 4
+            },
+            "135": {
+              "incl": 4,
+              "excl": 4
+            },
+            "136": {
+              "incl": 4,
+              "excl": 4
+            },
+            "137": {
+              "incl": 4,
+              "excl": 4
+            },
+            "138": {
+              "incl": 4,
+              "excl": 4
+            },
+            "139": {
+              "incl": 4,
+              "excl": 3
+            },
+            "140": {
+              "incl": 4,
+              "excl": 2
+            },
+            "141": {
+              "incl": 4,
+              "excl": 2
+            },
+            "142": {
+              "incl": 4,
+              "excl": 2
+            },
+            "143": {
+              "incl": 4,
+              "excl": 2
+            },
+            "144": {
+              "incl": 4,
+              "excl": 2
+            },
+            "145": {
+              "incl": 4,
+              "excl": 2
+            },
+            "146": {
+              "incl": 4,
+              "excl": 2
+            },
+            "147": {
+              "incl": 4,
+              "excl": 2
+            },
+            "148": {
+              "incl": 4,
+              "excl": 2
+            }
+          }
+        }
+      },
+      {
+        "seed": 103233,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "f560e625b81e6a0923d66371e3f02a8257c450e5",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 139,
+        "endReason": "village-lost",
+        "won": false,
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "nationalByStanding": false,
+        "nationalByScaleRank": false,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "deaths": 60,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 0,
+          "censusDead": 0,
+          "share": 0,
+          "buckets": {
+            "0-30": {
+              "total": 0,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 0,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 0,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 0,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 0,
+              "dead": 0
+            }
+          },
+          "tails": [],
+          "longTails": 0,
+          "longestSpan": 0,
+          "distinctDeadHolders": 0
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 0,
+            "winPlanHavenTick": 75,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 0,
+            "winPlanNoteFight": 0,
+            "winPlanNoteKill": 0,
+            "winPlanFightGate": 0,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 556,
+            "winPlanMusterTick": 556,
+            "vbrainExecuteDepart": 75
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [],
+          "holderDays": 0,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 0,
+          "meanInflation": null,
+          "maxInflation": 0,
+          "finalDay": null,
+          "finalDayIncl": 0,
+          "finalDayExcl": 0,
+          "perDay": {}
+        }
+      },
+      {
+        "seed": 103234,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "f560e625b81e6a0923d66371e3f02a8257c450e5",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 151,
+        "endReason": "survived",
+        "won": false,
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "nationalByStanding": false,
+        "nationalByScaleRank": false,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "deaths": 59,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 0,
+          "censusDead": 0,
+          "share": 0,
+          "buckets": {
+            "0-30": {
+              "total": 0,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 0,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 0,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 0,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 0,
+              "dead": 0
+            }
+          },
+          "tails": [],
+          "longTails": 0,
+          "longestSpan": 0,
+          "distinctDeadHolders": 0
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 0,
+            "winPlanHavenTick": 108,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 0,
+            "winPlanNoteFight": 0,
+            "winPlanNoteKill": 0,
+            "winPlanFightGate": 0,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 600,
+            "winPlanMusterTick": 600,
+            "vbrainExecuteDepart": 108
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [],
+          "holderDays": 0,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 0,
+          "meanInflation": null,
+          "maxInflation": 0,
+          "finalDay": null,
+          "finalDayIncl": 0,
+          "finalDayExcl": 0,
+          "perDay": {}
+        }
+      },
+      {
+        "seed": 103235,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "f560e625b81e6a0923d66371e3f02a8257c450e5",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 87,
+        "endReason": "village-lost",
+        "won": false,
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "nationalByStanding": false,
+        "nationalByScaleRank": false,
+        "wave4Kills": 2,
+        "wave5Kills": 0,
+        "deaths": 134,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 581,
+          "censusDead": 261,
+          "share": 0.4492,
+          "buckets": {
+            "0-30": {
+              "total": 157,
+              "dead": 22
+            },
+            "31-60": {
+              "total": 210,
+              "dead": 73
+            },
+            "61-90": {
+              "total": 214,
+              "dead": 166
+            },
+            "91-120": {
+              "total": 0,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 0,
+              "dead": 0
+            }
+          },
+          "tails": [
+            {
+              "vid": "gen_3w4s6vv",
+              "deadRows": 79,
+              "firstDeadDay": 9,
+              "lastDay": 87,
+              "spanDays": 78,
+              "stage": "hunt",
+              "target": null
+            },
+            {
+              "vid": "gen_odr84ku",
+              "deadRows": 51,
+              "firstDeadDay": 37,
+              "lastDay": 87,
+              "spanDays": 50,
+              "stage": "hunt",
+              "target": null
+            },
+            {
+              "vid": "gen_nsvftxv",
+              "deadRows": 46,
+              "firstDeadDay": 42,
+              "lastDay": 87,
+              "spanDays": 45,
+              "stage": "hunt",
+              "target": null
+            },
+            {
+              "vid": "gen_ef9r84k",
+              "deadRows": 21,
+              "firstDeadDay": 67,
+              "lastDay": 87,
+              "spanDays": 20,
+              "stage": "hunt",
+              "target": null
+            },
+            {
+              "vid": "diana_osei",
+              "deadRows": 18,
+              "firstDeadDay": 70,
+              "lastDay": 87,
+              "spanDays": 17,
+              "stage": "hunt",
+              "target": null
+            },
+            {
+              "vid": "app_mgpspi0g441",
+              "deadRows": 18,
+              "firstDeadDay": 70,
+              "lastDay": 87,
+              "spanDays": 17,
+              "stage": "party",
+              "target": null
+            },
+            {
+              "vid": "aki_tanaka",
+              "deadRows": 14,
+              "firstDeadDay": 74,
+              "lastDay": 87,
+              "spanDays": 13,
+              "stage": "hunt",
+              "target": null
+            },
+            {
+              "vid": "emma_larsen",
+              "deadRows": 14,
+              "firstDeadDay": 74,
+              "lastDay": 87,
+              "spanDays": 13,
+              "stage": "hunt",
+              "target": null
+            }
+          ],
+          "longTails": 3,
+          "longestSpan": 78,
+          "distinctDeadHolders": 8
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 109,
+            "winPlanHavenTick": 71,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 104,
+            "winPlanNoteFight": 187,
+            "winPlanNoteKill": 71,
+            "winPlanFightGate": 190,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 348,
+            "winPlanMusterTick": 348,
+            "vbrainExecuteDepart": 71
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [
+            {
+              "vid": "gen_odr84ku",
+              "firstDeadRefDay": 9,
+              "deadRef": "gen_3w4s6vv",
+              "days": 3,
+              "launchedAfter": true
+            },
+            {
+              "vid": "aki_tanaka",
+              "firstDeadRefDay": 37,
+              "deadRef": "gen_odr84ku",
+              "days": 1,
+              "launchedAfter": true
+            },
+            {
+              "vid": "emma_larsen",
+              "firstDeadRefDay": 70,
+              "deadRef": "diana_osei",
+              "days": 4,
+              "launchedAfter": false
+            }
+          ],
+          "holderDays": 8,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 100,
+        "deadHolderLivePartyExamples": [
+          {
+            "day": 9,
+            "holder": "gen_3w4s6vv",
+            "partyVid": "gen_odr84ku"
+          },
+          {
+            "day": 10,
+            "holder": "gen_3w4s6vv",
+            "partyVid": "gen_odr84ku"
+          },
+          {
+            "day": 11,
+            "holder": "gen_3w4s6vv",
+            "partyVid": "gen_odr84ku"
+          },
+          {
+            "day": 12,
+            "holder": "gen_3w4s6vv",
+            "partyVid": "gen_odr84ku"
+          },
+          {
+            "day": 13,
+            "holder": "gen_3w4s6vv",
+            "partyVid": "gen_odr84ku"
+          }
+        ],
+        "censusNoise": {
+          "daysWithCensus": 83,
+          "meanInflation": 1.58,
+          "maxInflation": "all-dead-day",
+          "finalDay": 87,
+          "finalDayIncl": 8,
+          "finalDayExcl": 0,
+          "perDay": {
+            "5": {
+              "incl": 1,
+              "excl": 1
+            },
+            "6": {
+              "incl": 1,
+              "excl": 1
+            },
+            "7": {
+              "incl": 2,
+              "excl": 2
+            },
+            "8": {
+              "incl": 4,
+              "excl": 4
+            },
+            "9": {
+              "incl": 5,
+              "excl": 4
+            },
+            "10": {
+              "incl": 6,
+              "excl": 5
+            },
+            "11": {
+              "incl": 6,
+              "excl": 5
+            },
+            "12": {
+              "incl": 6,
+              "excl": 5
+            },
+            "13": {
+              "incl": 7,
+              "excl": 6
+            },
+            "14": {
+              "incl": 7,
+              "excl": 6
+            },
+            "15": {
+              "incl": 7,
+              "excl": 6
+            },
+            "16": {
+              "incl": 7,
+              "excl": 6
+            },
+            "17": {
+              "incl": 7,
+              "excl": 6
+            },
+            "18": {
+              "incl": 7,
+              "excl": 6
+            },
+            "19": {
+              "incl": 7,
+              "excl": 6
+            },
+            "20": {
+              "incl": 7,
+              "excl": 6
+            },
+            "21": {
+              "incl": 7,
+              "excl": 6
+            },
+            "22": {
+              "incl": 7,
+              "excl": 6
+            },
+            "23": {
+              "incl": 7,
+              "excl": 6
+            },
+            "24": {
+              "incl": 7,
+              "excl": 6
+            },
+            "25": {
+              "incl": 7,
+              "excl": 6
+            },
+            "26": {
+              "incl": 7,
+              "excl": 6
+            },
+            "27": {
+              "incl": 7,
+              "excl": 6
+            },
+            "28": {
+              "incl": 7,
+              "excl": 6
+            },
+            "29": {
+              "incl": 7,
+              "excl": 6
+            },
+            "30": {
+              "incl": 7,
+              "excl": 6
+            },
+            "31": {
+              "incl": 7,
+              "excl": 6
+            },
+            "32": {
+              "incl": 7,
+              "excl": 6
+            },
+            "33": {
+              "incl": 7,
+              "excl": 6
+            },
+            "34": {
+              "incl": 7,
+              "excl": 6
+            },
+            "35": {
+              "incl": 7,
+              "excl": 6
+            },
+            "36": {
+              "incl": 7,
+              "excl": 6
+            },
+            "37": {
+              "incl": 7,
+              "excl": 5
+            },
+            "38": {
+              "incl": 7,
+              "excl": 5
+            },
+            "39": {
+              "incl": 7,
+              "excl": 5
+            },
+            "40": {
+              "incl": 7,
+              "excl": 5
+            },
+            "41": {
+              "incl": 7,
+              "excl": 5
+            },
+            "42": {
+              "incl": 7,
+              "excl": 4
+            },
+            "43": {
+              "incl": 7,
+              "excl": 4
+            },
+            "44": {
+              "incl": 7,
+              "excl": 4
+            },
+            "45": {
+              "incl": 7,
+              "excl": 4
+            },
+            "46": {
+              "incl": 7,
+              "excl": 4
+            },
+            "47": {
+              "incl": 7,
+              "excl": 4
+            },
+            "48": {
+              "incl": 7,
+              "excl": 4
+            },
+            "49": {
+              "incl": 7,
+              "excl": 4
+            },
+            "50": {
+              "incl": 7,
+              "excl": 4
+            },
+            "51": {
+              "incl": 7,
+              "excl": 4
+            },
+            "52": {
+              "incl": 7,
+              "excl": 4
+            },
+            "53": {
+              "incl": 7,
+              "excl": 4
+            },
+            "54": {
+              "incl": 7,
+              "excl": 4
+            },
+            "55": {
+              "incl": 7,
+              "excl": 4
+            },
+            "56": {
+              "incl": 7,
+              "excl": 4
+            },
+            "57": {
+              "incl": 7,
+              "excl": 4
+            },
+            "58": {
+              "incl": 7,
+              "excl": 4
+            },
+            "59": {
+              "incl": 7,
+              "excl": 4
+            },
+            "60": {
+              "incl": 7,
+              "excl": 4
+            },
+            "61": {
+              "incl": 7,
+              "excl": 4
+            },
+            "62": {
+              "incl": 7,
+              "excl": 4
+            },
+            "63": {
+              "incl": 8,
+              "excl": 5
+            },
+            "64": {
+              "incl": 8,
+              "excl": 5
+            },
+            "65": {
+              "incl": 8,
+              "excl": 5
+            },
+            "66": {
+              "incl": 8,
+              "excl": 5
+            },
+            "67": {
+              "incl": 8,
+              "excl": 4
+            },
+            "68": {
+              "incl": 8,
+              "excl": 4
+            },
+            "69": {
+              "incl": 8,
+              "excl": 4
+            },
+            "70": {
+              "incl": 8,
+              "excl": 2
+            },
+            "71": {
+              "incl": 8,
+              "excl": 2
+            },
+            "72": {
+              "incl": 8,
+              "excl": 2
+            },
+            "73": {
+              "incl": 8,
+              "excl": 2
+            },
+            "74": {
+              "incl": 8,
+              "excl": 0
+            },
+            "75": {
+              "incl": 8,
+              "excl": 0
+            },
+            "76": {
+              "incl": 8,
+              "excl": 0
+            },
+            "77": {
+              "incl": 8,
+              "excl": 0
+            },
+            "78": {
+              "incl": 8,
+              "excl": 0
+            },
+            "79": {
+              "incl": 8,
+              "excl": 0
+            },
+            "80": {
+              "incl": 8,
+              "excl": 0
+            },
+            "81": {
+              "incl": 8,
+              "excl": 0
+            },
+            "82": {
+              "incl": 8,
+              "excl": 0
+            },
+            "83": {
+              "incl": 8,
+              "excl": 0
+            },
+            "84": {
+              "incl": 8,
+              "excl": 0
+            },
+            "85": {
+              "incl": 8,
+              "excl": 0
+            },
+            "86": {
+              "incl": 8,
+              "excl": 0
+            },
+            "87": {
+              "incl": 8,
+              "excl": 0
+            }
+          }
+        }
+      },
+      {
+        "seed": 103236,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "f560e625b81e6a0923d66371e3f02a8257c450e5",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 150,
+        "endReason": "village-lost",
+        "won": false,
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "nationalByStanding": false,
+        "nationalByScaleRank": false,
+        "wave4Kills": 1,
+        "wave5Kills": 0,
+        "deaths": 69,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 214,
+          "censusDead": 149,
+          "share": 0.6963,
+          "buckets": {
+            "0-30": {
+              "total": 0,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 34,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 60,
+              "dead": 29
+            },
+            "91-120": {
+              "total": 60,
+              "dead": 60
+            },
+            "121-150": {
+              "total": 60,
+              "dead": 60
+            }
+          },
+          "tails": [
+            {
+              "vid": "gen_5ijxt56",
+              "deadRows": 79,
+              "firstDeadDay": 72,
+              "lastDay": 150,
+              "spanDays": 78,
+              "stage": "party",
+              "target": null
+            },
+            {
+              "vid": "gen_51dopoz",
+              "deadRows": 70,
+              "firstDeadDay": 81,
+              "lastDay": 150,
+              "spanDays": 69,
+              "stage": "hunt",
+              "target": "chorus_line"
+            }
+          ],
+          "longTails": 2,
+          "longestSpan": 78,
+          "distinctDeadHolders": 2
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 21,
+            "winPlanHavenTick": 51,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 18,
+            "winPlanNoteFight": 31,
+            "winPlanNoteKill": 5,
+            "winPlanFightGate": 34,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 600,
+            "winPlanMusterTick": 600,
+            "vbrainExecuteDepart": 51
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [
+            {
+              "vid": "gen_51dopoz",
+              "firstDeadRefDay": 72,
+              "deadRef": "gen_5ijxt56",
+              "days": 9,
+              "launchedAfter": false
+            }
+          ],
+          "holderDays": 9,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 108,
+          "meanInflation": 1.237,
+          "maxInflation": "all-dead-day",
+          "finalDay": 150,
+          "finalDayIncl": 2,
+          "finalDayExcl": 0,
+          "perDay": {
+            "43": {
+              "incl": 1,
+              "excl": 1
+            },
+            "44": {
+              "incl": 1,
+              "excl": 1
+            },
+            "45": {
+              "incl": 2,
+              "excl": 2
+            },
+            "46": {
+              "incl": 2,
+              "excl": 2
+            },
+            "47": {
+              "incl": 2,
+              "excl": 2
+            },
+            "48": {
+              "incl": 2,
+              "excl": 2
+            },
+            "49": {
+              "incl": 2,
+              "excl": 2
+            },
+            "50": {
+              "incl": 2,
+              "excl": 2
+            },
+            "51": {
+              "incl": 2,
+              "excl": 2
+            },
+            "52": {
+              "incl": 2,
+              "excl": 2
+            },
+            "53": {
+              "incl": 2,
+              "excl": 2
+            },
+            "54": {
+              "incl": 2,
+              "excl": 2
+            },
+            "55": {
+              "incl": 2,
+              "excl": 2
+            },
+            "56": {
+              "incl": 2,
+              "excl": 2
+            },
+            "57": {
+              "incl": 2,
+              "excl": 2
+            },
+            "58": {
+              "incl": 2,
+              "excl": 2
+            },
+            "59": {
+              "incl": 2,
+              "excl": 2
+            },
+            "60": {
+              "incl": 2,
+              "excl": 2
+            },
+            "61": {
+              "incl": 2,
+              "excl": 2
+            },
+            "62": {
+              "incl": 2,
+              "excl": 2
+            },
+            "63": {
+              "incl": 2,
+              "excl": 2
+            },
+            "64": {
+              "incl": 2,
+              "excl": 2
+            },
+            "65": {
+              "incl": 2,
+              "excl": 2
+            },
+            "66": {
+              "incl": 2,
+              "excl": 2
+            },
+            "67": {
+              "incl": 2,
+              "excl": 2
+            },
+            "68": {
+              "incl": 2,
+              "excl": 2
+            },
+            "69": {
+              "incl": 2,
+              "excl": 2
+            },
+            "70": {
+              "incl": 2,
+              "excl": 2
+            },
+            "71": {
+              "incl": 2,
+              "excl": 2
+            },
+            "72": {
+              "incl": 2,
+              "excl": 1
+            },
+            "73": {
+              "incl": 2,
+              "excl": 1
+            },
+            "74": {
+              "incl": 2,
+              "excl": 1
+            },
+            "75": {
+              "incl": 2,
+              "excl": 1
+            },
+            "76": {
+              "incl": 2,
+              "excl": 1
+            },
+            "77": {
+              "incl": 2,
+              "excl": 1
+            },
+            "78": {
+              "incl": 2,
+              "excl": 1
+            },
+            "79": {
+              "incl": 2,
+              "excl": 1
+            },
+            "80": {
+              "incl": 2,
+              "excl": 1
+            },
+            "81": {
+              "incl": 2,
+              "excl": 0
+            },
+            "82": {
+              "incl": 2,
+              "excl": 0
+            },
+            "83": {
+              "incl": 2,
+              "excl": 0
+            },
+            "84": {
+              "incl": 2,
+              "excl": 0
+            },
+            "85": {
+              "incl": 2,
+              "excl": 0
+            },
+            "86": {
+              "incl": 2,
+              "excl": 0
+            },
+            "87": {
+              "incl": 2,
+              "excl": 0
+            },
+            "88": {
+              "incl": 2,
+              "excl": 0
+            },
+            "89": {
+              "incl": 2,
+              "excl": 0
+            },
+            "90": {
+              "incl": 2,
+              "excl": 0
+            },
+            "91": {
+              "incl": 2,
+              "excl": 0
+            },
+            "92": {
+              "incl": 2,
+              "excl": 0
+            },
+            "93": {
+              "incl": 2,
+              "excl": 0
+            },
+            "94": {
+              "incl": 2,
+              "excl": 0
+            },
+            "95": {
+              "incl": 2,
+              "excl": 0
+            },
+            "96": {
+              "incl": 2,
+              "excl": 0
+            },
+            "97": {
+              "incl": 2,
+              "excl": 0
+            },
+            "98": {
+              "incl": 2,
+              "excl": 0
+            },
+            "99": {
+              "incl": 2,
+              "excl": 0
+            },
+            "100": {
+              "incl": 2,
+              "excl": 0
+            },
+            "101": {
+              "incl": 2,
+              "excl": 0
+            },
+            "102": {
+              "incl": 2,
+              "excl": 0
+            },
+            "103": {
+              "incl": 2,
+              "excl": 0
+            },
+            "104": {
+              "incl": 2,
+              "excl": 0
+            },
+            "105": {
+              "incl": 2,
+              "excl": 0
+            },
+            "106": {
+              "incl": 2,
+              "excl": 0
+            },
+            "107": {
+              "incl": 2,
+              "excl": 0
+            },
+            "108": {
+              "incl": 2,
+              "excl": 0
+            },
+            "109": {
+              "incl": 2,
+              "excl": 0
+            },
+            "110": {
+              "incl": 2,
+              "excl": 0
+            },
+            "111": {
+              "incl": 2,
+              "excl": 0
+            },
+            "112": {
+              "incl": 2,
+              "excl": 0
+            },
+            "113": {
+              "incl": 2,
+              "excl": 0
+            },
+            "114": {
+              "incl": 2,
+              "excl": 0
+            },
+            "115": {
+              "incl": 2,
+              "excl": 0
+            },
+            "116": {
+              "incl": 2,
+              "excl": 0
+            },
+            "117": {
+              "incl": 2,
+              "excl": 0
+            },
+            "118": {
+              "incl": 2,
+              "excl": 0
+            },
+            "119": {
+              "incl": 2,
+              "excl": 0
+            },
+            "120": {
+              "incl": 2,
+              "excl": 0
+            },
+            "121": {
+              "incl": 2,
+              "excl": 0
+            },
+            "122": {
+              "incl": 2,
+              "excl": 0
+            },
+            "123": {
+              "incl": 2,
+              "excl": 0
+            },
+            "124": {
+              "incl": 2,
+              "excl": 0
+            },
+            "125": {
+              "incl": 2,
+              "excl": 0
+            },
+            "126": {
+              "incl": 2,
+              "excl": 0
+            },
+            "127": {
+              "incl": 2,
+              "excl": 0
+            },
+            "128": {
+              "incl": 2,
+              "excl": 0
+            },
+            "129": {
+              "incl": 2,
+              "excl": 0
+            },
+            "130": {
+              "incl": 2,
+              "excl": 0
+            },
+            "131": {
+              "incl": 2,
+              "excl": 0
+            },
+            "132": {
+              "incl": 2,
+              "excl": 0
+            },
+            "133": {
+              "incl": 2,
+              "excl": 0
+            },
+            "134": {
+              "incl": 2,
+              "excl": 0
+            },
+            "135": {
+              "incl": 2,
+              "excl": 0
+            },
+            "136": {
+              "incl": 2,
+              "excl": 0
+            },
+            "137": {
+              "incl": 2,
+              "excl": 0
+            },
+            "138": {
+              "incl": 2,
+              "excl": 0
+            },
+            "139": {
+              "incl": 2,
+              "excl": 0
+            },
+            "140": {
+              "incl": 2,
+              "excl": 0
+            },
+            "141": {
+              "incl": 2,
+              "excl": 0
+            },
+            "142": {
+              "incl": 2,
+              "excl": 0
+            },
+            "143": {
+              "incl": 2,
+              "excl": 0
+            },
+            "144": {
+              "incl": 2,
+              "excl": 0
+            },
+            "145": {
+              "incl": 2,
+              "excl": 0
+            },
+            "146": {
+              "incl": 2,
+              "excl": 0
+            },
+            "147": {
+              "incl": 2,
+              "excl": 0
+            },
+            "148": {
+              "incl": 2,
+              "excl": 0
+            },
+            "149": {
+              "incl": 2,
+              "excl": 0
+            },
+            "150": {
+              "incl": 2,
+              "excl": 0
+            }
+          }
+        }
+      },
+      {
+        "seed": 103237,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "f560e625b81e6a0923d66371e3f02a8257c450e5",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 151,
+        "endReason": "survived",
+        "won": false,
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "nationalByStanding": false,
+        "nationalByScaleRank": false,
+        "wave4Kills": 1,
+        "wave5Kills": 0,
+        "deaths": 51,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 0,
+          "censusDead": 0,
+          "share": 0,
+          "buckets": {
+            "0-30": {
+              "total": 0,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 0,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 0,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 0,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 0,
+              "dead": 0
+            }
+          },
+          "tails": [],
+          "longTails": 0,
+          "longestSpan": 0,
+          "distinctDeadHolders": 0
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 0,
+            "winPlanHavenTick": 97,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 0,
+            "winPlanNoteFight": 0,
+            "winPlanNoteKill": 0,
+            "winPlanFightGate": 0,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 600,
+            "winPlanMusterTick": 600,
+            "vbrainExecuteDepart": 97
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [],
+          "holderDays": 0,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 0,
+          "meanInflation": null,
+          "maxInflation": 0,
+          "finalDay": null,
+          "finalDayIncl": 0,
+          "finalDayExcl": 0,
+          "perDay": {}
+        }
+      },
+      {
+        "seed": 103238,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "f560e625b81e6a0923d66371e3f02a8257c450e5",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 143,
+        "endReason": "village-lost",
+        "won": false,
+        "standing": 305,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "nationalByStanding": true,
+        "nationalByScaleRank": false,
+        "wave4Kills": 3,
+        "wave5Kills": 0,
+        "deaths": 58,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 23,
+          "censusDead": 3,
+          "share": 0.1304,
+          "buckets": {
+            "0-30": {
+              "total": 0,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 0,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 0,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 0,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 23,
+              "dead": 3
+            }
+          },
+          "tails": [
+            {
+              "vid": "theo_lindqvist",
+              "deadRows": 3,
+              "firstDeadDay": 141,
+              "lastDay": 143,
+              "spanDays": 2,
+              "stage": "hunt",
+              "target": null
+            }
+          ],
+          "longTails": 0,
+          "longestSpan": 2,
+          "distinctDeadHolders": 1
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 3,
+            "winPlanHavenTick": 202,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 6,
+            "winPlanNoteFight": 9,
+            "winPlanNoteKill": 3,
+            "winPlanFightGate": 9,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 572,
+            "winPlanMusterTick": 572,
+            "vbrainExecuteDepart": 202
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [
+            {
+              "vid": "ines_duarte",
+              "firstDeadRefDay": 141,
+              "deadRef": "theo_lindqvist",
+              "days": 3,
+              "launchedAfter": false
+            }
+          ],
+          "holderDays": 3,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 3,
+        "deadHolderLivePartyExamples": [
+          {
+            "day": 141,
+            "holder": "theo_lindqvist",
+            "partyVid": "ines_duarte"
+          },
+          {
+            "day": 142,
+            "holder": "theo_lindqvist",
+            "partyVid": "ines_duarte"
+          },
+          {
+            "day": 143,
+            "holder": "theo_lindqvist",
+            "partyVid": "ines_duarte"
+          }
+        ],
+        "censusNoise": {
+          "daysWithCensus": 9,
+          "meanInflation": 1.167,
+          "maxInflation": 1.5,
+          "finalDay": 143,
+          "finalDayIncl": 3,
+          "finalDayExcl": 2,
+          "perDay": {
+            "135": {
+              "incl": 2,
+              "excl": 2
+            },
+            "136": {
+              "incl": 2,
+              "excl": 2
+            },
+            "137": {
+              "incl": 2,
+              "excl": 2
+            },
+            "138": {
+              "incl": 2,
+              "excl": 2
+            },
+            "139": {
+              "incl": 3,
+              "excl": 3
+            },
+            "140": {
+              "incl": 3,
+              "excl": 3
+            },
+            "141": {
+              "incl": 3,
+              "excl": 2
+            },
+            "142": {
+              "incl": 3,
+              "excl": 2
+            },
+            "143": {
+              "incl": 3,
+              "excl": 2
+            }
+          }
+        }
+      }
+    ]
+  },
+  "armed": {
+    "wall": {
+      "seeds": 8,
+      "nationalByStanding": 2,
+      "nationalByScaleRank": 0,
+      "table": 0,
+      "wins": 0,
+      "wave4Reached": 7,
+      "wave5Reached": 2,
+      "medianSurvival": 149.5,
+      "wave4Kills": 19,
+      "wave5Kills": 4,
+      "deaths": 567
+    },
+    "totals": {
+      "launches": 85,
+      "wave4Kills": 19,
+      "wave5Kills": 4,
+      "starvationDeaths": 5,
+      "deathCleanups": 15,
+      "slotHolderDays": 0,
+      "censusDead": 0,
+      "censusTotal": 897,
+      "medianSurvival": 149.5,
+      "deaths": 567
+    },
+    "perSeed": [
+      {
+        "seed": 103231,
+        "gameDays": 42,
+        "endReason": "village-lost",
+        "standing": 25,
+        "scaleRank": "village",
+        "won": false,
+        "maxWave": 3,
+        "deaths": 34,
+        "launches": 2,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "starvationDeaths": 2,
+        "deathCleanups": 2,
+        "slotHolderDays": 0,
+        "slotHolders": 0,
+        "censusDead": 0,
+        "censusTotal": 46,
+        "firstDeathDay": 7
+      },
+      {
+        "seed": 103232,
+        "gameDays": 148,
+        "endReason": "survived",
+        "standing": 930,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 5,
+        "deaths": 109,
+        "launches": 39,
+        "wave4Kills": 14,
+        "wave5Kills": 4,
+        "starvationDeaths": 0,
+        "deathCleanups": 2,
+        "slotHolderDays": 0,
+        "slotHolders": 0,
+        "censusDead": 0,
+        "censusTotal": 401,
+        "firstDeathDay": 71
+      },
+      {
+        "seed": 103233,
+        "gameDays": 139,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "deaths": 60,
+        "launches": 0,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "starvationDeaths": 1,
+        "deathCleanups": 0,
+        "slotHolderDays": 0,
+        "slotHolders": 0,
+        "censusDead": 0,
+        "censusTotal": 0,
+        "firstDeathDay": 15
+      },
+      {
+        "seed": 103234,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "deaths": 59,
+        "launches": 0,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "starvationDeaths": 1,
+        "deathCleanups": 0,
+        "slotHolderDays": 0,
+        "slotHolders": 0,
+        "censusDead": 0,
+        "censusTotal": 0,
+        "firstDeathDay": 55
+      },
+      {
+        "seed": 103235,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "deaths": 140,
+        "launches": 36,
+        "wave4Kills": 1,
+        "wave5Kills": 0,
+        "starvationDeaths": 0,
+        "deathCleanups": 8,
+        "slotHolderDays": 0,
+        "slotHolders": 0,
+        "censusDead": 0,
+        "censusTotal": 322,
+        "firstDeathDay": 9
+      },
+      {
+        "seed": 103236,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 195,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "deaths": 56,
+        "launches": 7,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "starvationDeaths": 0,
+        "deathCleanups": 2,
+        "slotHolderDays": 0,
+        "slotHolders": 0,
+        "censusDead": 0,
+        "censusTotal": 108,
+        "firstDeathDay": 72
+      },
+      {
+        "seed": 103237,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "deaths": 51,
+        "launches": 0,
+        "wave4Kills": 1,
+        "wave5Kills": 0,
+        "starvationDeaths": 1,
+        "deathCleanups": 0,
+        "slotHolderDays": 0,
+        "slotHolders": 0,
+        "censusDead": 0,
+        "censusTotal": 0,
+        "firstDeathDay": 15
+      },
+      {
+        "seed": 103238,
+        "gameDays": 143,
+        "endReason": "village-lost",
+        "standing": 305,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 5,
+        "deaths": 58,
+        "launches": 1,
+        "wave4Kills": 3,
+        "wave5Kills": 0,
+        "starvationDeaths": 0,
+        "deathCleanups": 1,
+        "slotHolderDays": 0,
+        "slotHolders": 0,
+        "censusDead": 0,
+        "censusTotal": 20,
+        "firstDeathDay": 17
+      }
+    ],
+    "classify": {
+      "verdict": "NOISE-ONLY",
+      "poolTotal": 0,
+      "slotTotal": 0,
+      "censusDeadTotal": 0,
+      "censusTotal": 897,
+      "validityOk": true
+    },
+    "perSeedFull": [
+      {
+        "seed": 103231,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "fcfe23ac8bd801d0f9b40b74a6ae338e81852705",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 42,
+        "endReason": "village-lost",
+        "won": false,
+        "standing": 25,
+        "scaleRank": "village",
+        "maxWave": 3,
+        "unlockedWave": 3,
+        "nationalByStanding": false,
+        "nationalByScaleRank": false,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "deaths": 34,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 46,
+          "censusDead": 0,
+          "share": 0,
+          "buckets": {
+            "0-30": {
+              "total": 34,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 12,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 0,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 0,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 0,
+              "dead": 0
+            }
+          },
+          "tails": [],
+          "longTails": 0,
+          "longestSpan": 0,
+          "distinctDeadHolders": 0
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 6,
+            "winPlanHavenTick": 26,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 6,
+            "winPlanNoteFight": 13,
+            "winPlanNoteKill": 6,
+            "winPlanFightGate": 13,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 168,
+            "winPlanMusterTick": 168,
+            "vbrainExecuteDepart": 26
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [],
+          "holderDays": 0,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 37,
+          "meanInflation": 1,
+          "maxInflation": 1,
+          "finalDay": 42,
+          "finalDayIncl": 1,
+          "finalDayExcl": 1,
+          "perDay": {
+            "6": {
+              "incl": 1,
+              "excl": 1
+            },
+            "7": {
+              "incl": 3,
+              "excl": 3
+            },
+            "8": {
+              "incl": 3,
+              "excl": 3
+            },
+            "9": {
+              "incl": 3,
+              "excl": 3
+            },
+            "10": {
+              "incl": 3,
+              "excl": 3
+            },
+            "11": {
+              "incl": 2,
+              "excl": 2
+            },
+            "12": {
+              "incl": 1,
+              "excl": 1
+            },
+            "13": {
+              "incl": 1,
+              "excl": 1
+            },
+            "14": {
+              "incl": 1,
+              "excl": 1
+            },
+            "15": {
+              "incl": 1,
+              "excl": 1
+            },
+            "16": {
+              "incl": 1,
+              "excl": 1
+            },
+            "17": {
+              "incl": 1,
+              "excl": 1
+            },
+            "18": {
+              "incl": 1,
+              "excl": 1
+            },
+            "19": {
+              "incl": 1,
+              "excl": 1
+            },
+            "20": {
+              "incl": 1,
+              "excl": 1
+            },
+            "21": {
+              "incl": 1,
+              "excl": 1
+            },
+            "22": {
+              "incl": 1,
+              "excl": 1
+            },
+            "23": {
+              "incl": 1,
+              "excl": 1
+            },
+            "24": {
+              "incl": 1,
+              "excl": 1
+            },
+            "25": {
+              "incl": 1,
+              "excl": 1
+            },
+            "26": {
+              "incl": 1,
+              "excl": 1
+            },
+            "27": {
+              "incl": 1,
+              "excl": 1
+            },
+            "28": {
+              "incl": 1,
+              "excl": 1
+            },
+            "29": {
+              "incl": 1,
+              "excl": 1
+            },
+            "30": {
+              "incl": 1,
+              "excl": 1
+            },
+            "31": {
+              "incl": 1,
+              "excl": 1
+            },
+            "32": {
+              "incl": 1,
+              "excl": 1
+            },
+            "33": {
+              "incl": 1,
+              "excl": 1
+            },
+            "34": {
+              "incl": 1,
+              "excl": 1
+            },
+            "35": {
+              "incl": 1,
+              "excl": 1
+            },
+            "36": {
+              "incl": 1,
+              "excl": 1
+            },
+            "37": {
+              "incl": 1,
+              "excl": 1
+            },
+            "38": {
+              "incl": 1,
+              "excl": 1
+            },
+            "39": {
+              "incl": 1,
+              "excl": 1
+            },
+            "40": {
+              "incl": 1,
+              "excl": 1
+            },
+            "41": {
+              "incl": 1,
+              "excl": 1
+            },
+            "42": {
+              "incl": 1,
+              "excl": 1
+            }
+          }
+        }
+      },
+      {
+        "seed": 103232,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "fcfe23ac8bd801d0f9b40b74a6ae338e81852705",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 148,
+        "endReason": "survived",
+        "won": false,
+        "standing": 930,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "nationalByStanding": true,
+        "nationalByScaleRank": false,
+        "wave4Kills": 14,
+        "wave5Kills": 4,
+        "deaths": 109,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 401,
+          "censusDead": 0,
+          "share": 0,
+          "buckets": {
+            "0-30": {
+              "total": 0,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 68,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 120,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 120,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 93,
+              "dead": 0
+            }
+          },
+          "tails": [],
+          "longTails": 0,
+          "longestSpan": 0,
+          "distinctDeadHolders": 0
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 130,
+            "winPlanHavenTick": 223,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 136,
+            "winPlanNoteFight": 197,
+            "winPlanNoteKill": 55,
+            "winPlanFightGate": 229,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 591,
+            "winPlanMusterTick": 591,
+            "vbrainExecuteDepart": 223
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [],
+          "holderDays": 0,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 106,
+          "meanInflation": 1,
+          "maxInflation": 1,
+          "finalDay": 148,
+          "finalDayIncl": 2,
+          "finalDayExcl": 2,
+          "perDay": {
+            "43": {
+              "incl": 2,
+              "excl": 2
+            },
+            "44": {
+              "incl": 2,
+              "excl": 2
+            },
+            "45": {
+              "incl": 4,
+              "excl": 4
+            },
+            "46": {
+              "incl": 4,
+              "excl": 4
+            },
+            "47": {
+              "incl": 4,
+              "excl": 4
+            },
+            "48": {
+              "incl": 4,
+              "excl": 4
+            },
+            "49": {
+              "incl": 4,
+              "excl": 4
+            },
+            "50": {
+              "incl": 4,
+              "excl": 4
+            },
+            "51": {
+              "incl": 4,
+              "excl": 4
+            },
+            "52": {
+              "incl": 4,
+              "excl": 4
+            },
+            "53": {
+              "incl": 4,
+              "excl": 4
+            },
+            "54": {
+              "incl": 4,
+              "excl": 4
+            },
+            "55": {
+              "incl": 4,
+              "excl": 4
+            },
+            "56": {
+              "incl": 4,
+              "excl": 4
+            },
+            "57": {
+              "incl": 4,
+              "excl": 4
+            },
+            "58": {
+              "incl": 4,
+              "excl": 4
+            },
+            "59": {
+              "incl": 4,
+              "excl": 4
+            },
+            "60": {
+              "incl": 4,
+              "excl": 4
+            },
+            "61": {
+              "incl": 4,
+              "excl": 4
+            },
+            "62": {
+              "incl": 4,
+              "excl": 4
+            },
+            "63": {
+              "incl": 4,
+              "excl": 4
+            },
+            "64": {
+              "incl": 4,
+              "excl": 4
+            },
+            "65": {
+              "incl": 4,
+              "excl": 4
+            },
+            "66": {
+              "incl": 4,
+              "excl": 4
+            },
+            "67": {
+              "incl": 4,
+              "excl": 4
+            },
+            "68": {
+              "incl": 4,
+              "excl": 4
+            },
+            "69": {
+              "incl": 4,
+              "excl": 4
+            },
+            "70": {
+              "incl": 4,
+              "excl": 4
+            },
+            "71": {
+              "incl": 4,
+              "excl": 4
+            },
+            "72": {
+              "incl": 4,
+              "excl": 4
+            },
+            "73": {
+              "incl": 4,
+              "excl": 4
+            },
+            "74": {
+              "incl": 4,
+              "excl": 4
+            },
+            "75": {
+              "incl": 4,
+              "excl": 4
+            },
+            "76": {
+              "incl": 4,
+              "excl": 4
+            },
+            "77": {
+              "incl": 4,
+              "excl": 4
+            },
+            "78": {
+              "incl": 4,
+              "excl": 4
+            },
+            "79": {
+              "incl": 4,
+              "excl": 4
+            },
+            "80": {
+              "incl": 4,
+              "excl": 4
+            },
+            "81": {
+              "incl": 4,
+              "excl": 4
+            },
+            "82": {
+              "incl": 4,
+              "excl": 4
+            },
+            "83": {
+              "incl": 4,
+              "excl": 4
+            },
+            "84": {
+              "incl": 4,
+              "excl": 4
+            },
+            "85": {
+              "incl": 4,
+              "excl": 4
+            },
+            "86": {
+              "incl": 4,
+              "excl": 4
+            },
+            "87": {
+              "incl": 4,
+              "excl": 4
+            },
+            "88": {
+              "incl": 4,
+              "excl": 4
+            },
+            "89": {
+              "incl": 4,
+              "excl": 4
+            },
+            "90": {
+              "incl": 4,
+              "excl": 4
+            },
+            "91": {
+              "incl": 4,
+              "excl": 4
+            },
+            "92": {
+              "incl": 4,
+              "excl": 4
+            },
+            "93": {
+              "incl": 4,
+              "excl": 4
+            },
+            "94": {
+              "incl": 4,
+              "excl": 4
+            },
+            "95": {
+              "incl": 4,
+              "excl": 4
+            },
+            "96": {
+              "incl": 4,
+              "excl": 4
+            },
+            "97": {
+              "incl": 4,
+              "excl": 4
+            },
+            "98": {
+              "incl": 4,
+              "excl": 4
+            },
+            "99": {
+              "incl": 4,
+              "excl": 4
+            },
+            "100": {
+              "incl": 4,
+              "excl": 4
+            },
+            "101": {
+              "incl": 4,
+              "excl": 4
+            },
+            "102": {
+              "incl": 4,
+              "excl": 4
+            },
+            "103": {
+              "incl": 4,
+              "excl": 4
+            },
+            "104": {
+              "incl": 4,
+              "excl": 4
+            },
+            "105": {
+              "incl": 4,
+              "excl": 4
+            },
+            "106": {
+              "incl": 4,
+              "excl": 4
+            },
+            "107": {
+              "incl": 4,
+              "excl": 4
+            },
+            "108": {
+              "incl": 4,
+              "excl": 4
+            },
+            "109": {
+              "incl": 4,
+              "excl": 4
+            },
+            "110": {
+              "incl": 4,
+              "excl": 4
+            },
+            "111": {
+              "incl": 4,
+              "excl": 4
+            },
+            "112": {
+              "incl": 4,
+              "excl": 4
+            },
+            "113": {
+              "incl": 4,
+              "excl": 4
+            },
+            "114": {
+              "incl": 4,
+              "excl": 4
+            },
+            "115": {
+              "incl": 4,
+              "excl": 4
+            },
+            "116": {
+              "incl": 4,
+              "excl": 4
+            },
+            "117": {
+              "incl": 4,
+              "excl": 4
+            },
+            "118": {
+              "incl": 4,
+              "excl": 4
+            },
+            "119": {
+              "incl": 4,
+              "excl": 4
+            },
+            "120": {
+              "incl": 4,
+              "excl": 4
+            },
+            "121": {
+              "incl": 4,
+              "excl": 4
+            },
+            "122": {
+              "incl": 4,
+              "excl": 4
+            },
+            "123": {
+              "incl": 4,
+              "excl": 4
+            },
+            "124": {
+              "incl": 4,
+              "excl": 4
+            },
+            "125": {
+              "incl": 4,
+              "excl": 4
+            },
+            "126": {
+              "incl": 4,
+              "excl": 4
+            },
+            "127": {
+              "incl": 4,
+              "excl": 4
+            },
+            "128": {
+              "incl": 4,
+              "excl": 4
+            },
+            "129": {
+              "incl": 4,
+              "excl": 4
+            },
+            "130": {
+              "incl": 4,
+              "excl": 4
+            },
+            "131": {
+              "incl": 4,
+              "excl": 4
+            },
+            "132": {
+              "incl": 4,
+              "excl": 4
+            },
+            "133": {
+              "incl": 4,
+              "excl": 4
+            },
+            "134": {
+              "incl": 4,
+              "excl": 4
+            },
+            "135": {
+              "incl": 4,
+              "excl": 4
+            },
+            "136": {
+              "incl": 4,
+              "excl": 4
+            },
+            "137": {
+              "incl": 4,
+              "excl": 4
+            },
+            "138": {
+              "incl": 4,
+              "excl": 4
+            },
+            "139": {
+              "incl": 3,
+              "excl": 3
+            },
+            "140": {
+              "incl": 2,
+              "excl": 2
+            },
+            "141": {
+              "incl": 2,
+              "excl": 2
+            },
+            "142": {
+              "incl": 2,
+              "excl": 2
+            },
+            "143": {
+              "incl": 2,
+              "excl": 2
+            },
+            "144": {
+              "incl": 2,
+              "excl": 2
+            },
+            "145": {
+              "incl": 2,
+              "excl": 2
+            },
+            "146": {
+              "incl": 2,
+              "excl": 2
+            },
+            "147": {
+              "incl": 2,
+              "excl": 2
+            },
+            "148": {
+              "incl": 2,
+              "excl": 2
+            }
+          }
+        }
+      },
+      {
+        "seed": 103233,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "fcfe23ac8bd801d0f9b40b74a6ae338e81852705",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 139,
+        "endReason": "village-lost",
+        "won": false,
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "nationalByStanding": false,
+        "nationalByScaleRank": false,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "deaths": 60,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 0,
+          "censusDead": 0,
+          "share": 0,
+          "buckets": {
+            "0-30": {
+              "total": 0,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 0,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 0,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 0,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 0,
+              "dead": 0
+            }
+          },
+          "tails": [],
+          "longTails": 0,
+          "longestSpan": 0,
+          "distinctDeadHolders": 0
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 0,
+            "winPlanHavenTick": 75,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 0,
+            "winPlanNoteFight": 0,
+            "winPlanNoteKill": 0,
+            "winPlanFightGate": 0,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 556,
+            "winPlanMusterTick": 556,
+            "vbrainExecuteDepart": 75
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [],
+          "holderDays": 0,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 0,
+          "meanInflation": null,
+          "maxInflation": 0,
+          "finalDay": null,
+          "finalDayIncl": 0,
+          "finalDayExcl": 0,
+          "perDay": {}
+        }
+      },
+      {
+        "seed": 103234,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "fcfe23ac8bd801d0f9b40b74a6ae338e81852705",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 151,
+        "endReason": "survived",
+        "won": false,
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "nationalByStanding": false,
+        "nationalByScaleRank": false,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "deaths": 59,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 0,
+          "censusDead": 0,
+          "share": 0,
+          "buckets": {
+            "0-30": {
+              "total": 0,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 0,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 0,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 0,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 0,
+              "dead": 0
+            }
+          },
+          "tails": [],
+          "longTails": 0,
+          "longestSpan": 0,
+          "distinctDeadHolders": 0
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 0,
+            "winPlanHavenTick": 108,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 0,
+            "winPlanNoteFight": 0,
+            "winPlanNoteKill": 0,
+            "winPlanFightGate": 0,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 600,
+            "winPlanMusterTick": 600,
+            "vbrainExecuteDepart": 108
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [],
+          "holderDays": 0,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 0,
+          "meanInflation": null,
+          "maxInflation": 0,
+          "finalDay": null,
+          "finalDayIncl": 0,
+          "finalDayExcl": 0,
+          "perDay": {}
+        }
+      },
+      {
+        "seed": 103235,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "fcfe23ac8bd801d0f9b40b74a6ae338e81852705",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 151,
+        "endReason": "survived",
+        "won": false,
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "nationalByStanding": false,
+        "nationalByScaleRank": false,
+        "wave4Kills": 1,
+        "wave5Kills": 0,
+        "deaths": 140,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 322,
+          "censusDead": 0,
+          "share": 0,
+          "buckets": {
+            "0-30": {
+              "total": 135,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 137,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 48,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 0,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 2,
+              "dead": 0
+            }
+          },
+          "tails": [],
+          "longTails": 0,
+          "longestSpan": 0,
+          "distinctDeadHolders": 0
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 109,
+            "winPlanHavenTick": 71,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 104,
+            "winPlanNoteFight": 187,
+            "winPlanNoteKill": 71,
+            "winPlanFightGate": 190,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 600,
+            "winPlanMusterTick": 600,
+            "vbrainExecuteDepart": 71
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [],
+          "holderDays": 0,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 71,
+          "meanInflation": 1,
+          "maxInflation": 1,
+          "finalDay": 150,
+          "finalDayIncl": 1,
+          "finalDayExcl": 1,
+          "perDay": {
+            "5": {
+              "incl": 1,
+              "excl": 1
+            },
+            "6": {
+              "incl": 1,
+              "excl": 1
+            },
+            "7": {
+              "incl": 2,
+              "excl": 2
+            },
+            "8": {
+              "incl": 4,
+              "excl": 4
+            },
+            "9": {
+              "incl": 4,
+              "excl": 4
+            },
+            "10": {
+              "incl": 5,
+              "excl": 5
+            },
+            "11": {
+              "incl": 5,
+              "excl": 5
+            },
+            "12": {
+              "incl": 5,
+              "excl": 5
+            },
+            "13": {
+              "incl": 6,
+              "excl": 6
+            },
+            "14": {
+              "incl": 6,
+              "excl": 6
+            },
+            "15": {
+              "incl": 6,
+              "excl": 6
+            },
+            "16": {
+              "incl": 6,
+              "excl": 6
+            },
+            "17": {
+              "incl": 6,
+              "excl": 6
+            },
+            "18": {
+              "incl": 6,
+              "excl": 6
+            },
+            "19": {
+              "incl": 6,
+              "excl": 6
+            },
+            "20": {
+              "incl": 6,
+              "excl": 6
+            },
+            "21": {
+              "incl": 6,
+              "excl": 6
+            },
+            "22": {
+              "incl": 6,
+              "excl": 6
+            },
+            "23": {
+              "incl": 6,
+              "excl": 6
+            },
+            "24": {
+              "incl": 6,
+              "excl": 6
+            },
+            "25": {
+              "incl": 6,
+              "excl": 6
+            },
+            "26": {
+              "incl": 6,
+              "excl": 6
+            },
+            "27": {
+              "incl": 6,
+              "excl": 6
+            },
+            "28": {
+              "incl": 6,
+              "excl": 6
+            },
+            "29": {
+              "incl": 6,
+              "excl": 6
+            },
+            "30": {
+              "incl": 6,
+              "excl": 6
+            },
+            "31": {
+              "incl": 6,
+              "excl": 6
+            },
+            "32": {
+              "incl": 6,
+              "excl": 6
+            },
+            "33": {
+              "incl": 6,
+              "excl": 6
+            },
+            "34": {
+              "incl": 6,
+              "excl": 6
+            },
+            "35": {
+              "incl": 6,
+              "excl": 6
+            },
+            "36": {
+              "incl": 6,
+              "excl": 6
+            },
+            "37": {
+              "incl": 5,
+              "excl": 5
+            },
+            "38": {
+              "incl": 5,
+              "excl": 5
+            },
+            "39": {
+              "incl": 5,
+              "excl": 5
+            },
+            "40": {
+              "incl": 5,
+              "excl": 5
+            },
+            "41": {
+              "incl": 5,
+              "excl": 5
+            },
+            "42": {
+              "incl": 4,
+              "excl": 4
+            },
+            "43": {
+              "incl": 4,
+              "excl": 4
+            },
+            "44": {
+              "incl": 4,
+              "excl": 4
+            },
+            "45": {
+              "incl": 4,
+              "excl": 4
+            },
+            "46": {
+              "incl": 4,
+              "excl": 4
+            },
+            "47": {
+              "incl": 4,
+              "excl": 4
+            },
+            "48": {
+              "incl": 4,
+              "excl": 4
+            },
+            "49": {
+              "incl": 4,
+              "excl": 4
+            },
+            "50": {
+              "incl": 4,
+              "excl": 4
+            },
+            "51": {
+              "incl": 4,
+              "excl": 4
+            },
+            "52": {
+              "incl": 4,
+              "excl": 4
+            },
+            "53": {
+              "incl": 4,
+              "excl": 4
+            },
+            "54": {
+              "incl": 4,
+              "excl": 4
+            },
+            "55": {
+              "incl": 4,
+              "excl": 4
+            },
+            "56": {
+              "incl": 4,
+              "excl": 4
+            },
+            "57": {
+              "incl": 4,
+              "excl": 4
+            },
+            "58": {
+              "incl": 4,
+              "excl": 4
+            },
+            "59": {
+              "incl": 4,
+              "excl": 4
+            },
+            "60": {
+              "incl": 4,
+              "excl": 4
+            },
+            "61": {
+              "incl": 4,
+              "excl": 4
+            },
+            "62": {
+              "incl": 4,
+              "excl": 4
+            },
+            "63": {
+              "incl": 5,
+              "excl": 5
+            },
+            "64": {
+              "incl": 5,
+              "excl": 5
+            },
+            "65": {
+              "incl": 5,
+              "excl": 5
+            },
+            "66": {
+              "incl": 5,
+              "excl": 5
+            },
+            "67": {
+              "incl": 4,
+              "excl": 4
+            },
+            "68": {
+              "incl": 4,
+              "excl": 4
+            },
+            "69": {
+              "incl": 4,
+              "excl": 4
+            },
+            "70": {
+              "incl": 2,
+              "excl": 2
+            },
+            "71": {
+              "incl": 2,
+              "excl": 2
+            },
+            "72": {
+              "incl": 2,
+              "excl": 2
+            },
+            "73": {
+              "incl": 2,
+              "excl": 2
+            },
+            "149": {
+              "incl": 1,
+              "excl": 1
+            },
+            "150": {
+              "incl": 1,
+              "excl": 1
+            }
+          }
+        }
+      },
+      {
+        "seed": 103236,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "fcfe23ac8bd801d0f9b40b74a6ae338e81852705",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 151,
+        "endReason": "survived",
+        "won": false,
+        "standing": 195,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "nationalByStanding": false,
+        "nationalByScaleRank": false,
+        "wave4Kills": 0,
+        "wave5Kills": 0,
+        "deaths": 56,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 108,
+          "censusDead": 0,
+          "share": 0,
+          "buckets": {
+            "0-30": {
+              "total": 0,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 34,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 41,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 30,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 3,
+              "dead": 0
+            }
+          },
+          "tails": [],
+          "longTails": 0,
+          "longestSpan": 0,
+          "distinctDeadHolders": 0
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 21,
+            "winPlanHavenTick": 51,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 18,
+            "winPlanNoteFight": 31,
+            "winPlanNoteKill": 5,
+            "winPlanFightGate": 34,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 600,
+            "winPlanMusterTick": 600,
+            "vbrainExecuteDepart": 51
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [],
+          "holderDays": 0,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 81,
+          "meanInflation": 1,
+          "maxInflation": 1,
+          "finalDay": 123,
+          "finalDayIncl": 1,
+          "finalDayExcl": 1,
+          "perDay": {
+            "43": {
+              "incl": 1,
+              "excl": 1
+            },
+            "44": {
+              "incl": 1,
+              "excl": 1
+            },
+            "45": {
+              "incl": 2,
+              "excl": 2
+            },
+            "46": {
+              "incl": 2,
+              "excl": 2
+            },
+            "47": {
+              "incl": 2,
+              "excl": 2
+            },
+            "48": {
+              "incl": 2,
+              "excl": 2
+            },
+            "49": {
+              "incl": 2,
+              "excl": 2
+            },
+            "50": {
+              "incl": 2,
+              "excl": 2
+            },
+            "51": {
+              "incl": 2,
+              "excl": 2
+            },
+            "52": {
+              "incl": 2,
+              "excl": 2
+            },
+            "53": {
+              "incl": 2,
+              "excl": 2
+            },
+            "54": {
+              "incl": 2,
+              "excl": 2
+            },
+            "55": {
+              "incl": 2,
+              "excl": 2
+            },
+            "56": {
+              "incl": 2,
+              "excl": 2
+            },
+            "57": {
+              "incl": 2,
+              "excl": 2
+            },
+            "58": {
+              "incl": 2,
+              "excl": 2
+            },
+            "59": {
+              "incl": 2,
+              "excl": 2
+            },
+            "60": {
+              "incl": 2,
+              "excl": 2
+            },
+            "61": {
+              "incl": 2,
+              "excl": 2
+            },
+            "62": {
+              "incl": 2,
+              "excl": 2
+            },
+            "63": {
+              "incl": 2,
+              "excl": 2
+            },
+            "64": {
+              "incl": 2,
+              "excl": 2
+            },
+            "65": {
+              "incl": 2,
+              "excl": 2
+            },
+            "66": {
+              "incl": 2,
+              "excl": 2
+            },
+            "67": {
+              "incl": 2,
+              "excl": 2
+            },
+            "68": {
+              "incl": 2,
+              "excl": 2
+            },
+            "69": {
+              "incl": 2,
+              "excl": 2
+            },
+            "70": {
+              "incl": 2,
+              "excl": 2
+            },
+            "71": {
+              "incl": 2,
+              "excl": 2
+            },
+            "72": {
+              "incl": 1,
+              "excl": 1
+            },
+            "73": {
+              "incl": 1,
+              "excl": 1
+            },
+            "74": {
+              "incl": 1,
+              "excl": 1
+            },
+            "75": {
+              "incl": 1,
+              "excl": 1
+            },
+            "76": {
+              "incl": 1,
+              "excl": 1
+            },
+            "77": {
+              "incl": 1,
+              "excl": 1
+            },
+            "78": {
+              "incl": 1,
+              "excl": 1
+            },
+            "79": {
+              "incl": 1,
+              "excl": 1
+            },
+            "80": {
+              "incl": 1,
+              "excl": 1
+            },
+            "81": {
+              "incl": 1,
+              "excl": 1
+            },
+            "82": {
+              "incl": 1,
+              "excl": 1
+            },
+            "83": {
+              "incl": 1,
+              "excl": 1
+            },
+            "84": {
+              "incl": 1,
+              "excl": 1
+            },
+            "85": {
+              "incl": 1,
+              "excl": 1
+            },
+            "86": {
+              "incl": 1,
+              "excl": 1
+            },
+            "87": {
+              "incl": 1,
+              "excl": 1
+            },
+            "88": {
+              "incl": 1,
+              "excl": 1
+            },
+            "89": {
+              "incl": 1,
+              "excl": 1
+            },
+            "90": {
+              "incl": 1,
+              "excl": 1
+            },
+            "91": {
+              "incl": 1,
+              "excl": 1
+            },
+            "92": {
+              "incl": 1,
+              "excl": 1
+            },
+            "93": {
+              "incl": 1,
+              "excl": 1
+            },
+            "94": {
+              "incl": 1,
+              "excl": 1
+            },
+            "95": {
+              "incl": 1,
+              "excl": 1
+            },
+            "96": {
+              "incl": 1,
+              "excl": 1
+            },
+            "97": {
+              "incl": 1,
+              "excl": 1
+            },
+            "98": {
+              "incl": 1,
+              "excl": 1
+            },
+            "99": {
+              "incl": 1,
+              "excl": 1
+            },
+            "100": {
+              "incl": 1,
+              "excl": 1
+            },
+            "101": {
+              "incl": 1,
+              "excl": 1
+            },
+            "102": {
+              "incl": 1,
+              "excl": 1
+            },
+            "103": {
+              "incl": 1,
+              "excl": 1
+            },
+            "104": {
+              "incl": 1,
+              "excl": 1
+            },
+            "105": {
+              "incl": 1,
+              "excl": 1
+            },
+            "106": {
+              "incl": 1,
+              "excl": 1
+            },
+            "107": {
+              "incl": 1,
+              "excl": 1
+            },
+            "108": {
+              "incl": 1,
+              "excl": 1
+            },
+            "109": {
+              "incl": 1,
+              "excl": 1
+            },
+            "110": {
+              "incl": 1,
+              "excl": 1
+            },
+            "111": {
+              "incl": 1,
+              "excl": 1
+            },
+            "112": {
+              "incl": 1,
+              "excl": 1
+            },
+            "113": {
+              "incl": 1,
+              "excl": 1
+            },
+            "114": {
+              "incl": 1,
+              "excl": 1
+            },
+            "115": {
+              "incl": 1,
+              "excl": 1
+            },
+            "116": {
+              "incl": 1,
+              "excl": 1
+            },
+            "117": {
+              "incl": 1,
+              "excl": 1
+            },
+            "118": {
+              "incl": 1,
+              "excl": 1
+            },
+            "119": {
+              "incl": 1,
+              "excl": 1
+            },
+            "120": {
+              "incl": 1,
+              "excl": 1
+            },
+            "121": {
+              "incl": 1,
+              "excl": 1
+            },
+            "122": {
+              "incl": 1,
+              "excl": 1
+            },
+            "123": {
+              "incl": 1,
+              "excl": 1
+            }
+          }
+        }
+      },
+      {
+        "seed": 103237,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "fcfe23ac8bd801d0f9b40b74a6ae338e81852705",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 151,
+        "endReason": "survived",
+        "won": false,
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "unlockedWave": 4,
+        "nationalByStanding": false,
+        "nationalByScaleRank": false,
+        "wave4Kills": 1,
+        "wave5Kills": 0,
+        "deaths": 51,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 0,
+          "censusDead": 0,
+          "share": 0,
+          "buckets": {
+            "0-30": {
+              "total": 0,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 0,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 0,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 0,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 0,
+              "dead": 0
+            }
+          },
+          "tails": [],
+          "longTails": 0,
+          "longestSpan": 0,
+          "distinctDeadHolders": 0
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 0,
+            "winPlanHavenTick": 97,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 0,
+            "winPlanNoteFight": 0,
+            "winPlanNoteKill": 0,
+            "winPlanFightGate": 0,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 600,
+            "winPlanMusterTick": 600,
+            "vbrainExecuteDepart": 97
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [],
+          "holderDays": 0,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 0,
+          "meanInflation": null,
+          "maxInflation": 0,
+          "finalDay": null,
+          "finalDayIncl": 0,
+          "finalDayExcl": 0,
+          "perDay": {}
+        }
+      },
+      {
+        "seed": 103238,
+        "mode": "on",
+        "recorderOn": true,
+        "anchorCommit": "fcfe23ac8bd801d0f9b40b74a6ae338e81852705",
+        "policySha": "df9b7dff4de4",
+        "gameDays": 143,
+        "endReason": "village-lost",
+        "won": false,
+        "standing": 305,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "unlockedWave": 5,
+        "nationalByStanding": true,
+        "nationalByScaleRank": false,
+        "wave4Kills": 3,
+        "wave5Kills": 0,
+        "deaths": 58,
+        "instrumentErrors": 0,
+        "validity": {
+          "badSeed": null,
+          "badCreate": null,
+          "badTouch": null,
+          "unknownErrors": 0
+        },
+        "linger": {
+          "censusTotal": 20,
+          "censusDead": 0,
+          "share": 0,
+          "buckets": {
+            "0-30": {
+              "total": 0,
+              "dead": 0
+            },
+            "31-60": {
+              "total": 0,
+              "dead": 0
+            },
+            "61-90": {
+              "total": 0,
+              "dead": 0
+            },
+            "91-120": {
+              "total": 0,
+              "dead": 0
+            },
+            "121-150": {
+              "total": 20,
+              "dead": 0
+            }
+          },
+          "tails": [],
+          "longTails": 0,
+          "longestSpan": 0,
+          "distinctDeadHolders": 0
+        },
+        "pool": {
+          "b0_dawnScoredDeadN": 0,
+          "b0_dawnScoredDead": [],
+          "b1_dawnbidScoresDeadN": 0,
+          "b1_dawnbidScoresDead": [],
+          "b2_rankedPickDeadN": 0,
+          "b2_rankedPickDead": [],
+          "b3_departsDeadN": 0,
+          "b3_departsDead": [],
+          "b4_touchesDeadByMethod": {
+            "winPlanOf": [],
+            "winPlanHavenTick": [],
+            "winPlanDepart": [],
+            "winPlanSeedFromFight": [],
+            "winPlanNoteFight": [],
+            "winPlanNoteKill": [],
+            "winPlanFightGate": [],
+            "winPlanSecondCompanion": [],
+            "winPlanBondsTick": [],
+            "winPlanMusterTick": [],
+            "vbrainExecuteDepart": []
+          },
+          "b4_touchesDeadTotal": 0,
+          "touchesByMethod": {
+            "winPlanOf": 3,
+            "winPlanHavenTick": 202,
+            "winPlanDepart": 0,
+            "winPlanSeedFromFight": 6,
+            "winPlanNoteFight": 9,
+            "winPlanNoteKill": 3,
+            "winPlanFightGate": 9,
+            "winPlanSecondCompanion": 0,
+            "winPlanBondsTick": 572,
+            "winPlanMusterTick": 572,
+            "vbrainExecuteDepart": 202
+          },
+          "b5_secondPickDeadN": 0,
+          "b5_secondPickDead": [],
+          "b6_winPlanOfDeadN": 0,
+          "b6_winPlanOfDead": [],
+          "winPlanOfCreatedDeadN": 0,
+          "winPlanOfCreatedDead": [],
+          "createsDeadN": 0,
+          "createsDead": []
+        },
+        "slot": {
+          "holders": [],
+          "holderDays": 0,
+          "launchesWithDeadParty": [],
+          "winPlanOfCreatedDead": [],
+          "unknownPartyRefs": 0,
+          "deathDayUnknown": []
+        },
+        "deadHolderLivePartyRefs": 0,
+        "deadHolderLivePartyExamples": [],
+        "censusNoise": {
+          "daysWithCensus": 9,
+          "meanInflation": 1,
+          "maxInflation": 1,
+          "finalDay": 143,
+          "finalDayIncl": 2,
+          "finalDayExcl": 2,
+          "perDay": {
+            "135": {
+              "incl": 2,
+              "excl": 2
+            },
+            "136": {
+              "incl": 2,
+              "excl": 2
+            },
+            "137": {
+              "incl": 2,
+              "excl": 2
+            },
+            "138": {
+              "incl": 2,
+              "excl": 2
+            },
+            "139": {
+              "incl": 3,
+              "excl": 3
+            },
+            "140": {
+              "incl": 3,
+              "excl": 3
+            },
+            "141": {
+              "incl": 2,
+              "excl": 2
+            },
+            "142": {
+              "incl": 2,
+              "excl": 2
+            },
+            "143": {
+              "incl": 2,
+              "excl": 2
+            }
+          }
+        }
+      }
+    ]
+  },
+  "drift": {
+    "perSeed": [
+      {
+        "seed": 103231,
+        "firstLeverDay": 7,
+        "firstDivDay": 42,
+        "drift": false,
+        "note": "diverges on/after lever day"
+      },
+      {
+        "seed": 103232,
+        "firstLeverDay": 71,
+        "firstDivDay": null,
+        "drift": false,
+        "note": "IDENTICAL"
+      },
+      {
+        "seed": 103233,
+        "firstLeverDay": 15,
+        "firstDivDay": null,
+        "drift": false,
+        "note": "IDENTICAL"
+      },
+      {
+        "seed": 103234,
+        "firstLeverDay": 55,
+        "firstDivDay": null,
+        "drift": false,
+        "note": "IDENTICAL"
+      },
+      {
+        "seed": 103235,
+        "firstLeverDay": 9,
+        "firstDivDay": 73,
+        "drift": false,
+        "note": "diverges on/after lever day"
+      },
+      {
+        "seed": 103236,
+        "firstLeverDay": 72,
+        "firstDivDay": 77,
+        "drift": false,
+        "note": "diverges on/after lever day"
+      },
+      {
+        "seed": 103237,
+        "firstLeverDay": 15,
+        "firstDivDay": null,
+        "drift": false,
+        "note": "IDENTICAL"
+      },
+      {
+        "seed": 103238,
+        "firstLeverDay": 17,
+        "firstDivDay": null,
+        "drift": false,
+        "note": "IDENTICAL"
+      }
+    ],
+    "driftSeeds": 0
+  }
+}
