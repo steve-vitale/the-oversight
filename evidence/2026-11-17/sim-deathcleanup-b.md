@@ -205,6 +205,21 @@ of this fix (filed as a finding).
   6/6, capable-bot 40/40, synergy-stall exit 0 (diagnostic script, no
   assertions — it completes rather than timing out). None of the 10
   check-quick failures is attributable to this change.
+- Safe-commit index clobber struck the evidence commit (164 files
+  showed staged-deleted in the worktree index; commit 5f70d5186
+  itself correct, 164 files, +1,777,325 lines) — repaired via
+  `git ls-tree -r HEAD` + `git update-index --add --index-info`;
+  status clean, diff HEAD empty afterwards.
+- Planignite cross-check on the combined tip (1f3187fc2): Loop A's
+  proof test re-run here — all behavioral legs pass; its failures
+  list holds exactly 2 footprint assertions, both expected on a
+  combined branch: 'src diff is win-plan.js only' got
+  [betrayal.js, game.js, win-plan.js] (this arm's hooks), and 'src
+  diff mentions PLANFIX' (the diff is computed vs current master,
+  which already contains planignite, so it shows only this arm's
+  changes). The test's assertions are correct for a planignite-only
+  branch and are NOT modified here — that test belongs to Loop A's
+  arm. No behavioral regression from the rebase.
 - Telemetry deviation check REFUSED recorder-corpus input (all 8 armed
   rows carry top-level anchorCommit — sweep recorder rows, not runs),
   same documented refusal as deadplan and the recent rounds. Baseline
