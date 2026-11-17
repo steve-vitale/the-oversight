@@ -46,9 +46,10 @@ table 0, wins 0, wave-4 8/8, wave-5 3/8, median 150d, wave-4 kills
 ### sim-wave5face-b — DIAG GO (tracker blank #8)
 
 **LANDED `266cc85b0`** (prereg + instrument + Correction 1 + evidence
-+ corpora + sense file; proof 69/69 on the rebased tip — the worker's
++ corpora + sense file; proof 47/47 on the rebased tip —
+`scripts/test-wave5face-b-20261116.js`; the worker's
 log records 42/42 at instrument time; the Correction 1 fixtures raised
-it to 69). Band 102701–102708 reused from stand199, horizon 200d,
+it to 47). Band 102701–102708 reused from stand199, horizon 200d,
 competent verbatim. All 4 frozen bars hold: 8/8 valid corpora, 0
 instrument errors, reconciliation clean; proof green; facing answered
 for 5/5 released seeds; wall numbers both legs. D2 full-band: 0
@@ -141,7 +142,8 @@ expedition clobber).
 - Wave5face-b's worker was cancelled before writing the evidence
   file. The adoption re-ran the analyzer (corrected totals),
   verified the sense file on disk, wrote the evidence file,
-  committed, rebased onto `302640180`, re-ran proof 69/69, merged
+  committed, rebased onto `302640180`, re-ran proof 47/47
+  (`scripts/test-wave5face-b-20261116.js`), merged
   ff-only (`266cc85b0`), released the tree, deleted the branch.
 - Safe-commit index clobber struck the wave5face evidence commit
   (19 files staged-deleted + untracked duplicates) — repaired via

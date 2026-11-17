@@ -147,13 +147,19 @@ kills, not on facing.
    every ON file; reconciliation: recorded engagements ==
    `waveEngaged(5)` on every ON file (`facingReconcileMismatch:
    false` on all 8).
-2. **Proof green** — PASS. `node scripts/test-wave5face-b.js`:
-   **69 passed, 0 failed** on the instrument tip (commit
+2. **Proof green** — PASS. `node scripts/test-wave5face-b-20261116.js`:
+   **47 passed, 0 failed** on the instrument tip (commit
    `c6e9c07aa`). The worker's log records 42/42 at instrument
    time; the Correction 1 commit added fixtures (corrected-outcome
-   + rederive cross-check), raising the count to 69 — verified by
-   the adoption re-run below. D1 determinism + D2 neutrality green
-   inside the proof; D3 analyzer re-derivation green (mismatch 0).
+   + rederive cross-check), raising the count to 47. D1 determinism
+   + D2 neutrality green inside the proof; D3 analyzer re-derivation
+   green (mismatch 0).
+   CORRECTION (Nov 17, adoption): the landed record first cited
+   69/69 from `scripts/test-wave5face-b.js` — the Nov 9 run's proof
+   file, run by mistake in the adoption. This arm's proof is the
+   dated file above, 47/47, verified by the adoption on the master
+   tip (47 passed, 0 failed, exit 0). The verdict is unchanged
+   (proof green); only the file name and count were wrong.
 3. **Facing answered for ≥3 released seeds** — PASS. 5/5 released
    seeds answered (all faced); no seed died before its release day
    among the released set.
@@ -239,8 +245,12 @@ rule.
   disk uncommitted — the worker HAD run the sense leg (trajectory
   identical, 0 diffs). The adoption verified it by reading the
   file, not by re-running it (the script refuses to overwrite).
-- Proof re-run on the pre-rebase tip: **69/69** (see §GO bars).
+- Proof re-run on the pre-rebase tip: **47/47** on
+  `scripts/test-wave5face-b-20261116.js` (see §GO bars).
   The 42/42 in the worker's log was the pre-correction count.
+  (An earlier draft of this note cited 69/69 — that count came from
+  the Nov 9 run's `test-wave5face-b.js`, run by mistake; corrected
+  Nov 17.)
 - `git diff cc0daf6c9 -- src/` empty on the branch — DIAG,
   recorder wraps only. No game change, no lever. Evidence +
   corpora are the deliverable.
