@@ -155,11 +155,11 @@ bookkeeping errors anywhere: every death attributed, every teleport accounted fo
 
 ## Gate and telemetry
 
-- **Gate (`check.js --quick`):** launched after the tooling commit; result recorded at
-  closeout. The run's only commit is tooling + this note (no engine change), so any failure
-  is adjudicated against the r233 gate (329 passed / 11 failed, all pre-existing: 6× 120 s
-  timeouts, measurement-proof staleness ×2, phone-frame staleness, cache-flags box-load
-  artifact, ladder-bundle ambient-raid control).
+- **Gate (`check.js --quick`):** run by the adopting main session on the branch tip (1247s): **331 passed, 9 failed, 0 attributable.** Staleness pair (proof-update + workflow) inherited from the base — this run touches no `src/`; phone-frame (stale receipt) + ladder-bundle (ambient-raid control) standing; cache-flags + four exact-120s timeouts (living-garden, occupation-panels, one-person-army, trust-observer) = load artifacts (sibling gates running). Analyzer proof re-run by the adopter: **129/129**.
+
+## Adoption (main session, 2026-11-17 ~14:13 CST)
+
+The 11:45 Lane A occurrence timed out at closeout with the gate never run (the worker's "gate still running" report was mistaken — the `check.js` processes found in `ps` belonged to the sibling sim-profilegate-b arm; the hbloop was already dead and no gate log existed). Adopted: gate run by me (above), analyzer proof re-run 129/129, commit via safe-commit, rebase onto current master, proof re-run on the rebased tip, ff-merge. Rotation A 3→0, lock deleted after run_id verification, worktree released.
 - **Telemetry:** one LOUD line — maxGameDay swung 124% (baseline 468 → current 1049, n=8).
   Adjudicated as the known file-count artifact: the baseline is a 4-seed-era sum, the current
   figure is an 8-seed sum; per-seed means are ~117 vs 131.1. fightsTotal and fightsByWave.4
