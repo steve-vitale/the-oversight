@@ -1,0 +1,891 @@
+{
+  "arm": "medicduty-b",
+  "run": "medicduty-b",
+  "onDir": "perseed-medicduty-b-on",
+  "offDir": "perseed-medicduty-b-off",
+  "bars": {
+    "classification": {
+      "pass": true,
+      "totalAttempts": 208,
+      "landedLaunches": 198,
+      "blockedAttempts": 10,
+      "blockedByReason": {
+        "medic-duty": 6,
+        "hurt-no-care": 1,
+        "sick": 3
+      },
+      "unknowns": 0,
+      "mismatches": 0,
+      "unknownRows": [],
+      "mismatchRows": []
+    },
+    "corpus": {
+      "pass": true,
+      "onFiles": 8,
+      "offFiles": 8
+    },
+    "instrumentErrors": {
+      "pass": true,
+      "onErrors": 0,
+      "offErrors": 0
+    },
+    "wall": {
+      "pass": true
+    },
+    "measurement": {
+      "pass": true,
+      "medicDutyBlocks": 6,
+      "starvedSeeds": [],
+      "poolOnMedicDutyBlocks": {
+        "n": 6,
+        "withSnapshot": 6,
+        "poolEmpty": 2,
+        "poolNonEmpty": 4,
+        "min": 0,
+        "median": 1,
+        "max": 3
+      }
+    }
+  },
+  "d2FullBand": [],
+  "on": {
+    "trips": 198,
+    "havenTarget": 0,
+    "havenShare": 0,
+    "blockedAttempts": 10,
+    "blockedByReason": {
+      "medic-duty": 6,
+      "hurt-no-care": 1,
+      "sick": 3
+    },
+    "totalAttempts": 208,
+    "attemptTable": [
+      {
+        "seed": 102801,
+        "attempts": 63,
+        "landed": 55,
+        "blockedByReason": {
+          "medic-duty": 4,
+          "hurt-no-care": 1,
+          "sick": 3
+        }
+      },
+      {
+        "seed": 102802,
+        "attempts": 25,
+        "landed": 25,
+        "blockedByReason": {}
+      },
+      {
+        "seed": 102803,
+        "attempts": 0,
+        "landed": 0,
+        "blockedByReason": {}
+      },
+      {
+        "seed": 102804,
+        "attempts": 65,
+        "landed": 65,
+        "blockedByReason": {}
+      },
+      {
+        "seed": 102805,
+        "attempts": 39,
+        "landed": 39,
+        "blockedByReason": {}
+      },
+      {
+        "seed": 102806,
+        "attempts": 0,
+        "landed": 0,
+        "blockedByReason": {}
+      },
+      {
+        "seed": 102807,
+        "attempts": 2,
+        "landed": 0,
+        "blockedByReason": {
+          "medic-duty": 2
+        }
+      },
+      {
+        "seed": 102808,
+        "attempts": 14,
+        "landed": 14,
+        "blockedByReason": {}
+      }
+    ],
+    "blockedShareByReason": {
+      "medic-duty": 0.0288,
+      "hurt-no-care": 0.0048,
+      "sick": 0.0144
+    },
+    "repickTable": [
+      {
+        "seed": 102801,
+        "holderVid": "gen_bt919up",
+        "holderName": "Tanya",
+        "blocks": 4,
+        "days": [
+          24,
+          24,
+          28,
+          28
+        ]
+      },
+      {
+        "seed": 102807,
+        "holderVid": "gen_myf806x",
+        "holderName": "Asher",
+        "blocks": 2,
+        "days": [
+          17,
+          17
+        ]
+      }
+    ],
+    "poolOnMedicDutyBlocks": {
+      "n": 6,
+      "withSnapshot": 6,
+      "poolEmpty": 2,
+      "poolNonEmpty": 4,
+      "min": 0,
+      "median": 1,
+      "max": 3
+    },
+    "starvedSeeds": [],
+    "zeroLaunchSeeds": [
+      102803,
+      102806,
+      102807
+    ],
+    "originXdest": {
+      "vbrain-party_launch x off-home": 198
+    },
+    "havenTrips": [],
+    "havenStats": {
+      "trips": 0,
+      "legs": 0,
+      "finds": 0,
+      "findsKcal": 0,
+      "kills": 0,
+      "evades": 0,
+      "flees": 0,
+      "gaveRoom": 0,
+      "stoodDown": 0,
+      "hurt": 0,
+      "otherEnc": 0,
+      "deaths": 0,
+      "partyDays": 0,
+      "pantryKcal": 0,
+      "xpTracking": 0,
+      "xpSurvival": 0,
+      "xpN": 0,
+      "meatKcal": 0
+    },
+    "homeStats": {
+      "trips": 198,
+      "legs": 2283,
+      "finds": 334,
+      "findsKcal": 371495,
+      "kills": 138,
+      "evades": 252,
+      "flees": 8,
+      "gaveRoom": 36,
+      "stoodDown": 17,
+      "hurt": 17,
+      "otherEnc": 0,
+      "deaths": 3,
+      "partyDays": 602.75,
+      "pantryKcal": 394260,
+      "xpTracking": 0,
+      "xpSurvival": 0,
+      "xpN": 0,
+      "meatKcal": 22765
+    },
+    "havenRates": {
+      "legs": 0,
+      "findsPerLeg": null,
+      "kcalPerLeg": null,
+      "encountersPerLeg": null,
+      "killsPerLeg": null,
+      "monsterPerLeg": null,
+      "deathsPerTrip": null,
+      "partyDaysPerTrip": null,
+      "pantryKcalPerTrip": null
+    },
+    "homeRates": {
+      "legs": 2283,
+      "findsPerLeg": 0.1463,
+      "kcalPerLeg": 162.72,
+      "encountersPerLeg": 0.205,
+      "killsPerLeg": 0.0604,
+      "monsterPerLeg": 0.1975,
+      "deathsPerTrip": 0.0152,
+      "partyDaysPerTrip": 3.04,
+      "pantryKcalPerTrip": 1991.21
+    },
+    "wallDetail": [
+      {
+        "seed": 102801,
+        "standing": 199,
+        "scaleRank": "regional",
+        "nationalByStanding": false,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 4,
+        "gameDays": 151,
+        "villageLost": false,
+        "endReason": "survived"
+      },
+      {
+        "seed": 102802,
+        "standing": 435,
+        "scaleRank": "regional",
+        "nationalByStanding": true,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 5,
+        "gameDays": 150,
+        "villageLost": false,
+        "endReason": "survived"
+      },
+      {
+        "seed": 102803,
+        "standing": 275,
+        "scaleRank": "regional",
+        "nationalByStanding": true,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 5,
+        "gameDays": 150,
+        "villageLost": false,
+        "endReason": "survived"
+      },
+      {
+        "seed": 102804,
+        "standing": 199,
+        "scaleRank": "regional",
+        "nationalByStanding": false,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 4,
+        "gameDays": 151,
+        "villageLost": false,
+        "endReason": "survived"
+      },
+      {
+        "seed": 102805,
+        "standing": 199,
+        "scaleRank": "regional",
+        "nationalByStanding": false,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 4,
+        "gameDays": 107,
+        "villageLost": true,
+        "endReason": "village-lost"
+      },
+      {
+        "seed": 102806,
+        "standing": 175,
+        "scaleRank": "regional",
+        "nationalByStanding": false,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 4,
+        "gameDays": 118,
+        "villageLost": true,
+        "endReason": "village-lost"
+      },
+      {
+        "seed": 102807,
+        "standing": 500,
+        "scaleRank": "regional",
+        "nationalByStanding": true,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 5,
+        "gameDays": 151,
+        "villageLost": false,
+        "endReason": "survived"
+      },
+      {
+        "seed": 102808,
+        "standing": 190,
+        "scaleRank": "regional",
+        "nationalByStanding": false,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 4,
+        "gameDays": 100,
+        "villageLost": true,
+        "endReason": "village-lost"
+      }
+    ],
+    "wall": {
+      "nationalByStanding": 3,
+      "nationalByRank": 0,
+      "nationalOrGlobal": 0,
+      "table": 0,
+      "wins": 0,
+      "wave4": 8,
+      "wave5": 3
+    },
+    "medianSurvival": 150,
+    "deaths": 629,
+    "w4kills": 22,
+    "perSeed": [
+      {
+        "seed": 102801,
+        "days": 150,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "trips": 55,
+        "havenTarget": 0,
+        "attempts": 63,
+        "landedLaunches": 55,
+        "blockedByReason": {
+          "medic-duty": 4,
+          "hurt-no-care": 1,
+          "sick": 3
+        },
+        "deaths": 91,
+        "w4kills": 2
+      },
+      {
+        "seed": 102802,
+        "days": 150,
+        "gameDays": 150,
+        "endReason": "survived",
+        "standing": 435,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 5,
+        "trips": 25,
+        "havenTarget": 0,
+        "attempts": 25,
+        "landedLaunches": 25,
+        "blockedByReason": {},
+        "deaths": 83,
+        "w4kills": 4
+      },
+      {
+        "seed": 102803,
+        "days": 150,
+        "gameDays": 150,
+        "endReason": "survived",
+        "standing": 275,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 5,
+        "trips": 0,
+        "havenTarget": 0,
+        "attempts": 0,
+        "landedLaunches": 0,
+        "blockedByReason": {},
+        "deaths": 44,
+        "w4kills": 3
+      },
+      {
+        "seed": 102804,
+        "days": 150,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "trips": 65,
+        "havenTarget": 0,
+        "attempts": 65,
+        "landedLaunches": 65,
+        "blockedByReason": {},
+        "deaths": 129,
+        "w4kills": 3
+      },
+      {
+        "seed": 102805,
+        "days": 108,
+        "gameDays": 107,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "trips": 39,
+        "havenTarget": 0,
+        "attempts": 39,
+        "landedLaunches": 39,
+        "blockedByReason": {},
+        "deaths": 90,
+        "w4kills": 3
+      },
+      {
+        "seed": 102806,
+        "days": 119,
+        "gameDays": 118,
+        "endReason": "village-lost",
+        "standing": 175,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "trips": 0,
+        "havenTarget": 0,
+        "attempts": 0,
+        "landedLaunches": 0,
+        "blockedByReason": {},
+        "deaths": 59,
+        "w4kills": 3
+      },
+      {
+        "seed": 102807,
+        "days": 150,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 500,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 5,
+        "trips": 0,
+        "havenTarget": 0,
+        "attempts": 2,
+        "landedLaunches": 0,
+        "blockedByReason": {
+          "medic-duty": 2
+        },
+        "deaths": 62,
+        "w4kills": 3
+      },
+      {
+        "seed": 102808,
+        "days": 100,
+        "gameDays": 100,
+        "endReason": "village-lost",
+        "standing": 190,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "trips": 14,
+        "havenTarget": 0,
+        "attempts": 14,
+        "landedLaunches": 14,
+        "blockedByReason": {},
+        "deaths": 71,
+        "w4kills": 1
+      }
+    ]
+  },
+  "off": {
+    "trips": 0,
+    "havenTarget": 0,
+    "havenShare": null,
+    "blockedAttempts": 0,
+    "blockedByReason": {},
+    "totalAttempts": 0,
+    "attemptTable": [
+      {
+        "seed": 102801,
+        "attempts": 0,
+        "landed": 0,
+        "blockedByReason": {}
+      },
+      {
+        "seed": 102802,
+        "attempts": 0,
+        "landed": 0,
+        "blockedByReason": {}
+      },
+      {
+        "seed": 102803,
+        "attempts": 0,
+        "landed": 0,
+        "blockedByReason": {}
+      },
+      {
+        "seed": 102804,
+        "attempts": 0,
+        "landed": 0,
+        "blockedByReason": {}
+      },
+      {
+        "seed": 102805,
+        "attempts": 0,
+        "landed": 0,
+        "blockedByReason": {}
+      },
+      {
+        "seed": 102806,
+        "attempts": 0,
+        "landed": 0,
+        "blockedByReason": {}
+      },
+      {
+        "seed": 102807,
+        "attempts": 0,
+        "landed": 0,
+        "blockedByReason": {}
+      },
+      {
+        "seed": 102808,
+        "attempts": 0,
+        "landed": 0,
+        "blockedByReason": {}
+      }
+    ],
+    "blockedShareByReason": {},
+    "repickTable": [],
+    "poolOnMedicDutyBlocks": {
+      "n": 0,
+      "withSnapshot": 0,
+      "poolEmpty": 0,
+      "poolNonEmpty": 0,
+      "min": null,
+      "median": null,
+      "max": null
+    },
+    "starvedSeeds": [],
+    "zeroLaunchSeeds": [
+      102801,
+      102802,
+      102803,
+      102804,
+      102805,
+      102806,
+      102807,
+      102808
+    ],
+    "originXdest": {},
+    "havenTrips": [],
+    "havenStats": {
+      "trips": 0,
+      "legs": 0,
+      "finds": 0,
+      "findsKcal": 0,
+      "kills": 0,
+      "evades": 0,
+      "flees": 0,
+      "gaveRoom": 0,
+      "stoodDown": 0,
+      "hurt": 0,
+      "otherEnc": 0,
+      "deaths": 0,
+      "partyDays": 0,
+      "pantryKcal": 0,
+      "xpTracking": 0,
+      "xpSurvival": 0,
+      "xpN": 0,
+      "meatKcal": 0
+    },
+    "homeStats": {
+      "trips": 0,
+      "legs": 0,
+      "finds": 0,
+      "findsKcal": 0,
+      "kills": 0,
+      "evades": 0,
+      "flees": 0,
+      "gaveRoom": 0,
+      "stoodDown": 0,
+      "hurt": 0,
+      "otherEnc": 0,
+      "deaths": 0,
+      "partyDays": 0,
+      "pantryKcal": 0,
+      "xpTracking": 0,
+      "xpSurvival": 0,
+      "xpN": 0,
+      "meatKcal": 0
+    },
+    "havenRates": {
+      "legs": 0,
+      "findsPerLeg": null,
+      "kcalPerLeg": null,
+      "encountersPerLeg": null,
+      "killsPerLeg": null,
+      "monsterPerLeg": null,
+      "deathsPerTrip": null,
+      "partyDaysPerTrip": null,
+      "pantryKcalPerTrip": null
+    },
+    "homeRates": {
+      "legs": 0,
+      "findsPerLeg": null,
+      "kcalPerLeg": null,
+      "encountersPerLeg": null,
+      "killsPerLeg": null,
+      "monsterPerLeg": null,
+      "deathsPerTrip": null,
+      "partyDaysPerTrip": null,
+      "pantryKcalPerTrip": null
+    },
+    "wallDetail": [
+      {
+        "seed": 102801,
+        "standing": 199,
+        "scaleRank": "regional",
+        "nationalByStanding": false,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 4,
+        "gameDays": 151,
+        "villageLost": false,
+        "endReason": "survived"
+      },
+      {
+        "seed": 102802,
+        "standing": 435,
+        "scaleRank": "regional",
+        "nationalByStanding": true,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 5,
+        "gameDays": 150,
+        "villageLost": false,
+        "endReason": "survived"
+      },
+      {
+        "seed": 102803,
+        "standing": 275,
+        "scaleRank": "regional",
+        "nationalByStanding": true,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 5,
+        "gameDays": 150,
+        "villageLost": false,
+        "endReason": "survived"
+      },
+      {
+        "seed": 102804,
+        "standing": 199,
+        "scaleRank": "regional",
+        "nationalByStanding": false,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 4,
+        "gameDays": 151,
+        "villageLost": false,
+        "endReason": "survived"
+      },
+      {
+        "seed": 102805,
+        "standing": 199,
+        "scaleRank": "regional",
+        "nationalByStanding": false,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 4,
+        "gameDays": 107,
+        "villageLost": true,
+        "endReason": "village-lost"
+      },
+      {
+        "seed": 102806,
+        "standing": 175,
+        "scaleRank": "regional",
+        "nationalByStanding": false,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 4,
+        "gameDays": 118,
+        "villageLost": true,
+        "endReason": "village-lost"
+      },
+      {
+        "seed": 102807,
+        "standing": 500,
+        "scaleRank": "regional",
+        "nationalByStanding": true,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 5,
+        "gameDays": 151,
+        "villageLost": false,
+        "endReason": "survived"
+      },
+      {
+        "seed": 102808,
+        "standing": 190,
+        "scaleRank": "regional",
+        "nationalByStanding": false,
+        "nationalByRank": false,
+        "nationalOrGlobal": false,
+        "won": false,
+        "maxWave": 4,
+        "gameDays": 100,
+        "villageLost": true,
+        "endReason": "village-lost"
+      }
+    ],
+    "wall": {
+      "nationalByStanding": 3,
+      "nationalByRank": 0,
+      "nationalOrGlobal": 0,
+      "table": 0,
+      "wins": 0,
+      "wave4": 8,
+      "wave5": 3
+    },
+    "medianSurvival": 150,
+    "deaths": 629,
+    "w4kills": 22,
+    "perSeed": [
+      {
+        "seed": 102801,
+        "days": 150,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "trips": 0,
+        "havenTarget": 0,
+        "attempts": 0,
+        "landedLaunches": 0,
+        "blockedByReason": {},
+        "deaths": 91,
+        "w4kills": 2
+      },
+      {
+        "seed": 102802,
+        "days": 150,
+        "gameDays": 150,
+        "endReason": "survived",
+        "standing": 435,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 5,
+        "trips": 0,
+        "havenTarget": 0,
+        "attempts": 0,
+        "landedLaunches": 0,
+        "blockedByReason": {},
+        "deaths": 83,
+        "w4kills": 4
+      },
+      {
+        "seed": 102803,
+        "days": 150,
+        "gameDays": 150,
+        "endReason": "survived",
+        "standing": 275,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 5,
+        "trips": 0,
+        "havenTarget": 0,
+        "attempts": 0,
+        "landedLaunches": 0,
+        "blockedByReason": {},
+        "deaths": 44,
+        "w4kills": 3
+      },
+      {
+        "seed": 102804,
+        "days": 150,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "trips": 0,
+        "havenTarget": 0,
+        "attempts": 0,
+        "landedLaunches": 0,
+        "blockedByReason": {},
+        "deaths": 129,
+        "w4kills": 3
+      },
+      {
+        "seed": 102805,
+        "days": 108,
+        "gameDays": 107,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "trips": 0,
+        "havenTarget": 0,
+        "attempts": 0,
+        "landedLaunches": 0,
+        "blockedByReason": {},
+        "deaths": 90,
+        "w4kills": 3
+      },
+      {
+        "seed": 102806,
+        "days": 119,
+        "gameDays": 118,
+        "endReason": "village-lost",
+        "standing": 175,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "trips": 0,
+        "havenTarget": 0,
+        "attempts": 0,
+        "landedLaunches": 0,
+        "blockedByReason": {},
+        "deaths": 59,
+        "w4kills": 3
+      },
+      {
+        "seed": 102807,
+        "days": 150,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 500,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 5,
+        "trips": 0,
+        "havenTarget": 0,
+        "attempts": 0,
+        "landedLaunches": 0,
+        "blockedByReason": {},
+        "deaths": 62,
+        "w4kills": 3
+      },
+      {
+        "seed": 102808,
+        "days": 100,
+        "gameDays": 100,
+        "endReason": "village-lost",
+        "standing": 190,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "trips": 0,
+        "havenTarget": 0,
+        "attempts": 0,
+        "landedLaunches": 0,
+        "blockedByReason": {},
+        "deaths": 71,
+        "w4kills": 1
+      }
+    ]
+  }
+}
