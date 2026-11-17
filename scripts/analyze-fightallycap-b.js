@@ -41,13 +41,15 @@
 // lever effect.
 // Usage:
 //   node scripts/analyze-fightallycap-b.js <ctlDir> <armDir> [recDir]
-// Writes evidence/2026-11-17/fightallycap-b-analysis.json. Exits 0 iff
-// B1 passes, B3 passes, and the instrument is clean (and B2 passes
-// when judged).
+//   EXPECTED_FILES=N overrides the per-leg file-count gate (default 8,
+//   the pilot band). The confirm band runs 12 seeds per leg, so the
+//   confirm runs with EXPECTED_FILES=12; the gate counts files, it
+//   never touches a measurement.
 'use strict';
 const fs = require('fs');
 const path = require('path');
 const REPO = path.join(__dirname, '..');
+const EXPECTED_FILES = parseInt(process.env.EXPECTED_FILES || '8', 10) || 8;
 
 function loadDir(dir) {
   const out = {};
@@ -340,7 +342,7 @@ function main() {
   const b2 = judgeB2(armS);
   const b3Pass = armS.expedDeaths <= ctlS.expedDeaths * 1.10 && armS.deaths <= ctlS.deaths * 1.10;
   const instrClean = ctlS.instrumentErrors === 0 && armS.instrumentErrors === 0 &&
-    ctlS.files === 8 && armS.files === 8 && ctlS.missingHp === 0 && armS.missingHp === 0;
+    ctlS.files === EXPECTED_FILES && armS.files === EXPECTED_FILES && ctlS.missingHp === 0 && armS.missingHp === 0;
   const verdict = (b1Pass && b3Pass && instrClean && (!b2.judged || b2.pass)) ? 'GO' : 'NO-GO';
 
   const out = {
