@@ -31,21 +31,49 @@ function median(xs) {
   return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
 }
 
-// deathDayMap(j): vid -> first day the daily roster snapshot shows
-// dead===true (Infinity when never observed dead). Roster snapshots
-// are the only per-day aliveness record for non-holders; holders'
-// aliveness comes from planCensus itself.
+// deathDayMap(j): vid -> first day the villager is dead.
+// Sources, in order: (1) the run's deaths array — kind
+// 'villager'/'person' rows carry who=vid (monster kills carry
+// kind 'monster' and are skipped); (2) planCensus — a holder's
+// first holderAlive===false day (cross-check / fallback).
+// The daily roster snapshots CANNOT source death days: dead
+// villagers are REMOVED from the roster before the snapshot (the
+// snapshot's dead flag is always false and the roster shrinks —
+// verified on seed 103224: Sal Ding last roster day 31, first dead
+// census day 32). A holder dead in the census with no deaths row is
+// listed in deathDayUnknown (fallback to the census day).
 function deathDayMap(j) {
   const map = {};
   const seen = {};
-  for (const d of (j.daily || [])) {
-    for (const r of (d.roster || [])) {
-      if (!r || !r.vid) continue;
-      seen[r.vid] = true;
-      if (r.dead === true && map[r.vid] == null) map[r.vid] = (d.day | 0);
+  const unknown = [];
+  for (const d of (j.deaths || [])) {
+    if (!d || (d.kind !== 'villager' && d.kind !== 'person') || !d.who) continue;
+    if (map[d.who] == null || d.day < map[d.who]) map[d.who] = (d.day | 0);
+    seen[d.who] = true;
+  }
+  for (const r of (j.planCensus || [])) {
+    seen[r.vid] = true;
+    for (const pid of (r.party || [])) seen[pid] = true;
+    if (r.holderAlive === false) {
+      if (map[r.vid] == null) map[r.vid] = (r.day | 0);
+      else if (r.day < map[r.vid]) map[r.vid] = (r.day | 0);
     }
   }
-  return { map: map, seen: seen };
+  for (const d of (j.daily || [])) {
+    for (const r of (d.roster || [])) if (r && r.vid) seen[r.vid] = true;
+  }
+  // Census-dead holders with no deaths-array row.
+  const censusDead = {};
+  for (const r of (j.planCensus || [])) {
+    if (r.holderAlive === false) censusDead[r.vid] = true;
+  }
+  for (const vid of Object.keys(censusDead)) {
+    const hasDeathRow = (j.deaths || []).some(function (d) {
+      return d && (d.kind === 'villager' || d.kind === 'person') && d.who === vid;
+    });
+    if (!hasDeathRow) unknown.push(vid);
+  }
+  return { map: map, seen: seen, deathDayUnknown: unknown };
 }
 function finalKillLog(j) {
   try {
@@ -64,7 +92,7 @@ function analyzeOne(j) {
   const dawnScored = (j.dawnScored || []).slice();
   const pool = (j.companionPool || []).slice();
   const departs = (j.v4departs || []).slice();
-  const { map: deathDay, seen: rosterSeen } = deathDayMap(j);
+  const { map: deathDay, seen: rosterSeen, deathDayUnknown } = deathDayMap(j);
   const killLog = finalKillLog(j);
 
   // ---- validity (bar 1) ----
@@ -175,7 +203,28 @@ function analyzeOne(j) {
   const slot = { holders: slotHolderList, holderDays: slotHolderDays,
     launchesWithDeadParty: launchesWithDeadParty,
     winPlanOfCreatedDead: winPlanOfCreatedDead,
-    unknownPartyRefs: slotUnknownRefs };
+    unknownPartyRefs: slotUnknownRefs,
+    deathDayUnknown: deathDayUnknown };
+  // Reverse diagnostic (not a slot cost — nothing ever reads a dead
+  // holder's party except the holder's own, never-taken actions):
+  // dead holders whose plan.party still names a villager alive on
+  // that day. Stale in both directions, read in neither.
+  let deadHolderLivePartyRefs = 0;
+  const deadHolderLivePartyExamples = [];
+  for (const r of census) {
+    if (r.holderAlive !== false) continue;
+    for (const pid of (r.party || [])) {
+      if (!pid) continue;
+      const dd = deathDay[pid];
+      if (dd == null || dd > r.day) {
+        deadHolderLivePartyRefs++;
+        if (deadHolderLivePartyExamples.length < 5) {
+          deadHolderLivePartyExamples.push({ day: r.day, holder: r.vid, partyVid: pid });
+        }
+        break;
+      }
+    }
+  }
 
   // ---- (d) census noise ----
   const perDay = {};
@@ -245,6 +294,8 @@ function analyzeOne(j) {
       createsDeadN: createsDead.length, createsDead: createsDead,
     },
     slot: slot,
+    deadHolderLivePartyRefs: deadHolderLivePartyRefs,
+    deadHolderLivePartyExamples: deadHolderLivePartyExamples,
     censusNoise: censusNoise,
   };
 }

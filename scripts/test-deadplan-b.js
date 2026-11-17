@@ -136,7 +136,7 @@ function baseSeed(over) {
     instrumentErrors: [], v4seeds: [], dawnbidScores: [], dawnbidDeparts: [],
     dawnbidCensus: [], companionPool: [], daily: [{ day: 150, waveKillLog: [], roster: [] }],
     v4creates: [], planCensus: [], v4departs: [], v4gates: [], v4encounters: [],
-    dawnbidStarts: [], deadTouches: [], dawnScored: [],
+    dawnbidStarts: [], deadTouches: [], dawnScored: [], deaths: [],
   };
   return Object.assign(j, over || {});
 }
@@ -250,6 +250,12 @@ function dailyRoster(day, entries) {
         partyAlive: [{ id: 'v2', alive: false }], targetWave: 4 },
     ],
     deadTouches: [],
+    // Death days come from the deaths array (kind villager/person),
+    // NOT the roster: dead villagers are removed from the roster
+    // before the snapshot, so the roster dead flag is always false
+    // (verified live on seed 103224: Sal Ding last roster day 31,
+    // first dead census day 32).
+    deaths: [{ day: 21, kind: 'villager', who: 'v2', cause: 'monster', player: false }],
     daily: [dailyRoster(20, [['v2', false]]), dailyRoster(21, [['v2', true]])],
   });
   const one = ANALYZE.analyzeOne(j);
@@ -265,7 +271,36 @@ function dailyRoster(day, entries) {
     ANALYZE.classify([j]).verdict === 'COSTLY',
     'launches=' + JSON.stringify(one.slot.launchesWithDeadParty));
 })();
-// D5: census noise math — 3 live + 2 dead on day 10, 3 live + 0 dead
+// D8: death-day sourcing — the deaths array rules, the roster flag
+// does not (a roster that says alive forever must not mask a death),
+// and a census-dead holder with no deaths row falls back to the
+// census day and is listed in deathDayUnknown.
+(function () {
+  const j = baseSeed({
+    planCensus: [
+      censusRow(10, 'h1', null, 'hunt', true),
+      censusRow(11, 'h1', null, 'hunt', false),
+      censusRow(12, 'h1', null, 'hunt', false),
+      censusRow(10, 'h2', null, 'hunt', true, ['h3']),
+      censusRow(11, 'h2', null, 'hunt', true, ['h3']),
+      censusRow(12, 'h2', null, 'hunt', true, ['h3']),
+    ],
+    deaths: [{ day: 11, kind: 'villager', who: 'h3', cause: 'monster', player: false }],
+    deadTouches: [],
+    // Roster says everyone alive forever (the live shape: dead
+    // villagers are removed, the flag never flips) — must not mask h3.
+    daily: [dailyRoster(12, [['h3', false], ['h2', false]])],
+  });
+  const one = ANALYZE.analyzeOne(j);
+  check('D8 death days come from the deaths array, not the roster flag: h2 carries dead h3 for 2 holder-days',
+    one.slot.holders.length === 1 && one.slot.holderDays === 2 &&
+    one.slot.holders[0].vid === 'h2',
+    'holders=' + JSON.stringify(one.slot.holders) + ' days=' + one.slot.holderDays);
+  check('D8 census-dead holder with no deaths row falls back to the census day and is listed unknown',
+    one.slot.deathDayUnknown.length === 1 && one.slot.deathDayUnknown[0] === 'h1' &&
+    one.linger.tails.find(function (t) { return t.vid === 'h1'; }).spanDays === 1,
+    'unknown=' + JSON.stringify(one.slot.deathDayUnknown));
+})();
 // on day 11: mean inflation 1.25, max 1.667, final day 3/3.
 (function () {
   const j = baseSeed({
