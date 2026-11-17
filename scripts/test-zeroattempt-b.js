@@ -75,6 +75,18 @@ check('driver refuses a MODE=off run with the recorder on (mislabel trap)',
 check('driver refuses to overwrite per-seed files', driverSrc.indexOf('refusing to overwrite') !== -1);
 check('driver never calls winPlanStats() (stateOf would create the store)',
   driverSrc.indexOf('Game.winPlanStats(') === -1);
+// villageSlainN reads TOP-LEVEL state.villageSlain (game.js
+// recordWaveKill writes it there). The nested state.village
+// .villageSlain read returned 0 on all 8 seeds of the first sweep
+// even on seeds with 5 wave-4 kills in waveKillLog — instrument bug,
+// fixed 2026-11-17; the fake-Game checks below pin the path.
+check('villageSlainN reads top-level state.villageSlain, not the nested path',
+  driver.villageSlainN({ state: { villageSlain: { deer: 2, wolf: 0 } } }) === 1 &&
+  driver.villageSlainN({ state: { village: { villageSlain: { deer: 2 } } } }) === 0 &&
+  driver.villageSlainN({ state: {} }) === 0);
+check('knowFoughtN reads state.village.agency.know[vid].fought',
+  driver.knowFoughtN({ state: { village: { agency: { know: { v1: { fought: ['a', 'b'] } } } } } }, 'v1') === 2 &&
+  driver.knowFoughtN({ state: { village: { agency: { know: {} } } } }, 'v1') === null);
 check('driver never INVOKES state-creating winPlanOf/agencyState/agencyOf/npcTrigger (reads + wrap installs only)',
   driverSrc.indexOf('Game.winPlanOf(') === -1 && driverSrc.indexOf('Game.agencyState(') === -1 &&
   driverSrc.indexOf('Game.agencyOf(') === -1 && driverSrc.indexOf('Game.npcTrigger(') === -1);

@@ -331,9 +331,14 @@ function knowFoughtN(Game, vid) {
     return (kn.fought || []).length;
   } catch (e) { return null; }
 }
+// villageSlainN: the village's slain-type count as a PURE read.
+// TOP-LEVEL state.villageSlain (game.js recordWaveKill, win-plan.js
+// havenTick engagement check) — NOT state.village.villageSlain,
+// which never exists (caught 2026-11-17: the nested read returned 0
+// on all 8 seeds even on seeds with 5 wave-4 kills in waveKillLog).
 function villageSlainN(Game) {
   try {
-    const sl = ((Game.state || {}).village || {}).villageSlain || {};
+    const sl = (Game.state || {}).villageSlain || {};
     let n = 0;
     for (const k in sl) if (sl[k] > 0) n++;
     return n;
