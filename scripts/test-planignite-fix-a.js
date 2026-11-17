@@ -381,6 +381,14 @@ async function liveRuns() {
 console.log('== determinism legs D1/D2/D3 ==');
 function childRun(driverRel, envExtra, tag) {
   const env = Object.assign({}, process.env, { DAYS: '150', MODE: 'control' }, envExtra || {});
+  // Explicit env hygiene: the parent process may carry a leaked
+  // PLANFIX=1 from the in-process armed liveRuns leg. A control child
+  // must NEVER inherit it — the DIAG driver predates the flag and does
+  // not clear it, so a leaked value arms the lever inside a supposed
+  // control (first D3 run: the "control" child ran armed and matched
+  // the armed leg bit-for-bit). Armed children set PLANFIX explicitly
+  // in envExtra instead of relying on the leak.
+  if (!(envExtra && envExtra.PLANFIX)) delete env.PLANFIX;
   const outFile = '/tmp/planignite-fix-proof-' + tag + '.json';
   const script = "const fs=require('fs');const d=require('./scripts/" + driverRel + "');"
     + "d.oneRun(102601).then(function(o){"
@@ -393,11 +401,11 @@ function childRun(driverRel, envExtra, tag) {
 }
 async function determinism() {
   if (!OFF_MODE) {
-    const a = childRun('planignite-fix-driver-20261116.js', { MODE: 'armed' }, 'd1a');
-    const b = childRun('planignite-fix-driver-20261116.js', { MODE: 'armed' }, 'd1b');
+    const a = childRun('planignite-fix-driver-20261116.js', { MODE: 'armed', PLANFIX: '1' }, 'd1a');
+    const b = childRun('planignite-fix-driver-20261116.js', { MODE: 'armed', PLANFIX: '1' }, 'd1b');
     check('D1 repeatability: identical full corpus, recorder ON twice, armed 150d',
       JSON.stringify(a.full) === JSON.stringify(b.full));
-    const off = childRun('planignite-fix-driver-20261116.js', { MODE: 'armed', PLANIGNITE_RECORDER: 'off' }, 'd2off');
+    const off = childRun('planignite-fix-driver-20261116.js', { MODE: 'armed', PLANFIX: '1', PLANIGNITE_RECORDER: 'off' }, 'd2off');
     check('D2 wrap neutrality: identical trajectories, recorder ON vs OFF, armed 150d',
       JSON.stringify(a.fp) === JSON.stringify(off.fp));
     check('D2 recorder-off run carries empty v4/dawnbid/ignite arrays',
@@ -408,6 +416,8 @@ async function determinism() {
   // D3 runs in both modes: the lever is off on both sides here, so the
   // fix-driver control trajectory must equal the DIAG-driver control
   // trajectory exactly — the lever code + driver copy perturb nothing.
+  // (The child env is scrubbed of PLANFIX above: a leaked flag would
+  // arm the DIAG driver's "control" leg, which cannot clear it.)
   const fixCtrl = childRun('planignite-fix-driver-20261116.js', { MODE: 'control' }, 'd3fix');
   const diagCtrl = childRun('planignite-driver-20261116.js', { MODE: 'control' }, 'd3diag');
   check('D3 drift: fix-driver control == DIAG-driver control, identical trajectories (150d seed 102601)',
