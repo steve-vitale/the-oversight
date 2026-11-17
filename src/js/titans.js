@@ -24,6 +24,9 @@
 //   - titanLeaveArena() -> map a large battlefield back to its world node
 //   - titanReleaseCommitted(titanId) -> Haven's committed come home (shared with network-campaign.js)
 //   - titanStandDown(titanId) -> break an out-of-combat muster, release its workforce and stop upkeep
+//   - titanReconcileFieldSlain(day) -> dawn reconciliation (r232): a located, unslain titan whose monster is
+//     absent AND whose death is recorded is marked slain, said aloud, and its muster released (upkeep stops).
+//     Outcome 'slain-field' — distinct from the muster-fight 'slain'. No relic, no viewership, no System broadcast.
 //   - titanLastStandingContinuity() -> Unkillable ARMY last-standing refuse-rout when Game.unkillableLastStandingLeanFor > 0 and holder is last living ours blade
 //   - titanBreachPourThrough() -> One-Person Army ARMY breach pour-through when Game.opaBreachLeanFor > 0 and holder opens the titan front
 //   - titanWardAdvanceBehind() -> Undying Ward ARMY advance-behind when Game.wardAdvanceLeanFor > 0 and holder holds the titan line
@@ -150,7 +153,7 @@
       titanOutcomeLog().push({
         titan: titanId,
         day: titanOutcomeDay(),
-        outcome: outcome, // 'refused' | 'fought' | 'stood-down'
+        outcome: outcome, // 'refused' | 'fought' | 'stood-down' | 'slain-field' (r232: a field kill reconciled at dawn)
         detail: detail || null,
       });
     } catch (e) {}
@@ -174,6 +177,87 @@
       }
       recs.push({ titan: titanId, day: titanOutcomeDay(), outcome: outcome, result: (result === undefined || result === null) ? null : String(result), orphan: true });
     } catch (e) {}
+  }
+
+  // ---------- slain-field reconciliation (journey-deepening r232) ----------
+  // r227 documented the defect: a villager field-kill of a titan removes
+  // the world monster without setting state.titans.slain — the omen sits
+  // at stage 2 and the muster keeps charging upkeep for a corpse. At each
+  // dawn, for every located, unslain titan whose monster is absent from
+  // the world AND whose death is recorded (telemetry death who=monster id,
+  // OR state.villageSlain[monster] >= 1 — both engine kill records from
+  // the same vKill branch; the OR covers the 300-entry telemetry cap),
+  // mark it slain, say it aloud (naming the killer when the corpse names
+  // one), release the committed, clear the muster (upkeep stops), ledger
+  // 'slew:', record the moment, and record the outcome 'slain-field' —
+  // distinctly from the muster-fight 'slain', so the census can tell them
+  // apart. No relic, no viewership bump, no System broadcast: those are
+  // muster-fight spectacle beats, and a field kill is not a spectacle.
+  // The muster-fight path is untouched: titanVictory already sets slain,
+  // so this never fires for a titan the coalition slew. This answers only
+  // whether the corpse stops being billed — NOT whether villagers should
+  // be able to grind titans by attrition (Steve design call, still owed).
+  function titanFieldKillRecorded(monsterId) {
+    try {
+      var vs = (Game.state || {}).villageSlain || {};
+      if ((vs[monsterId] || 0) >= 1) return true;
+    } catch (e) {}
+    try {
+      var tel = (Game.state || {}).telemetry || [];
+      for (var i = tel.length - 1; i >= 0; i--) {
+        var r = tel[i];
+        if (r && r.type === 'death' && r.who === monsterId) return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+  function titanFieldKillKiller(monsterId) {
+    // Best-effort: the latest corpse for this monster names its killer.
+    // Corpses cap at 40 and rot away, so the name may be gone by dawn —
+    // the reconciliation does not depend on it.
+    try {
+      var list = (Game.corpses ? Game.corpses() : []) || [];
+      var best = null;
+      for (var i = 0; i < list.length; i++) {
+        var c = list[i];
+        if (c && c.kind === 'monster' && c.monsterId === monsterId) {
+          if (!best || (c.dayDied || 0) >= (best.dayDied || 0)) best = c;
+        }
+      }
+      if (best && best.killerId) return best.killerId;
+    } catch (e) {}
+    return null;
+  }
+  function titanReconcileFieldSlain(day) {
+    var st = titanState();
+    var defs = titanDefs();
+    Object.keys(defs).forEach(function (tid) {
+      var def = defs[tid];
+      if (!def || !def.monster) return;
+      if (st.slain[tid]) return;
+      var o = st.omens[tid];
+      if (!o || (o.stage || 0) < 2) return; // never located: nothing to reconcile
+      if (titanMonsterPresent(tid)) return; // still standing: not dead
+      if (!titanFieldKillRecorded(def.monster)) return; // absent without a kill record: not ours to close
+      var killerId = titanFieldKillKiller(def.monster);
+      var killerName = null;
+      if (killerId) {
+        try {
+          killerName = (killerId === 'player') ? 'you' : (Game.displayName ? Game.displayName(killerId) : null);
+        } catch (e) { killerName = null; }
+      }
+      st.slain[tid] = true;
+      titanReleaseCommitted(tid);
+      st.musters[tid] = null;
+      if (st.pendingCommit && st.pendingCommit.indexOf(tid + ':') === 0) st.pendingCommit = null;
+      var line = killerName
+        ? '⚔️ Word comes back from the field — ' + killerName + ' brought ' + def.title + ' down. No muster, no ceremony: the thing is dead, and the blades that were gathering against it can stand down.'
+        : '⚔️ Word comes back from the field — ' + def.title + ' is dead. No muster, no ceremony: the thing fell to whoever was standing there, and the blades that were gathering against it can stand down.';
+      Game.say(line);
+      try { if (Game.ledgerAdd) Game.ledgerAdd('titan', 'slew:' + tid); } catch (e) {}
+      try { if (Game.recordMoment) Game.recordMoment(def.title + ' slain in the field.'); } catch (e) {}
+      titanRecordOutcome(tid, 'slain-field', { killer: killerId || null });
+    });
   }
 
   // ---------- dawn tick: omens, escalation, upkeep, the turn ----------
@@ -212,6 +296,9 @@
         titanAdvanceOmen(tid, day);
         titanEscalate(tid, day);
       });
+      // r232: reconcile field-killed titans BEFORE upkeep is charged, so no
+      // upkeep is billed on the day the titan is already dead.
+      titanReconcileFieldSlain(day);
       titanMusterUpkeep(day);
       titanTurnTick(day);
     } catch (e) {}
@@ -1899,6 +1986,8 @@
     titanRecordOutcome: titanRecordOutcome,
     titanResolveOutcome: titanResolveOutcome,
     titanOutcomeLog: titanOutcomeLog,
+    titanReconcileFieldSlain: titanReconcileFieldSlain,
+    titanFieldKillRecorded: titanFieldKillRecorded,
     titanLastStandingContinuity: titanLastStandingContinuity,
     titanBreachPourThrough: titanBreachPourThrough,
     titanWardAdvanceBehind: titanWardAdvanceBehind,
