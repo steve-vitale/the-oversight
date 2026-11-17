@@ -1435,7 +1435,15 @@
         const fled = f.fighters.find(x => x.kind === 'hostile' && x.fled && x.villagerId);
         if (fled) {
           const v = this.state.village;
-          v.roster = (v.roster || []).filter(id => id !== fled.villagerId);
+          // NON-DEATH REMOVAL CLEANUP (sim-nondeathplan-b,
+          // 2026-11-17): the fled betrayer leaves through the one
+          // removal choke point — the old direct roster filter
+          // bypassed removeVillager entirely, so their plan entry
+          // would linger and they would miss every other removal
+          // hygiene (exiles ledger, positions, sick, doubts). The
+          // party/followers filters below stay: removeVillager does
+          // not clean those.
+          try { if (this.removeVillager) this.removeVillager(fled.villagerId, 'fled'); } catch (e) {}
           if (v.positions) delete v.positions[fled.villagerId];
           v.party = (v.party || []).filter(id => id !== fled.villagerId);
           v.followers = (v.followers || []).filter(id => id !== fled.villagerId);

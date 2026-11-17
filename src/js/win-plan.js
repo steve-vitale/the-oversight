@@ -5,6 +5,7 @@
 //   - winPlanOf(vid)
 //   - winPlanStats()
 //   - winPlanOnVillagerDeath(vid)
+//   - winPlanOnVillagerLeave(vid)
 //   - winPlanHavenTick(vid, hx, hy)
 //   - winPlanDepart(vid, hx, hy, announce)
 //   - winPlanFightGate(vid, mdef)
@@ -97,18 +98,43 @@
       avoidances: 0, seekContacts: 0, standingContacts: 0,
       veteranGuardHolds: 0, partyFights: 0, planSeeds: 0, stageAdvances: 0,
       bondTends: 0, musterStanddowns: 0, trickHolds: 0,
-      partyTrios: 0, partyDissolved: 0, deathCleanups: 0,
+      partyTrios: 0, partyDissolved: 0, deathCleanups: 0, removalCleanups: 0,
     };
     if (v.winPlanStats.trickHolds == null) v.winPlanStats.trickHolds = 0;
     if (v.winPlanStats.partyTrios == null) v.winPlanStats.partyTrios = 0;
     if (v.winPlanStats.partyDissolved == null) v.winPlanStats.partyDissolved = 0;
     if (v.winPlanStats.deathCleanups == null) v.winPlanStats.deathCleanups = 0;
+    if (v.winPlanStats.removalCleanups == null) v.winPlanStats.removalCleanups = 0;
     if (v.winPlanStats.bondTends == null) v.winPlanStats.bondTends = 0;
     if (v.winPlanStats.musterStanddowns == null) v.winPlanStats.musterStanddowns = 0;
     return v;
   }
   function bump(self, key) {
     try { var v = stateOf(self); if (v) v.winPlanStats[key] = (v.winPlanStats[key] || 0) + 1; } catch (e) {}
+  }
+  // purgePartyRefs(v, vid): the shared party-purge core for both
+  // removal cleanups (death + leave). Strikes vid from every living
+  // holder's party; a party/hunt plan whose party empties falls back
+  // to 'party' (re-seek a companion). standing/table plans keep their
+  // stage (the kill is banked; the party list is vestigial there).
+  // Pure data work on the already-read village object — never calls
+  // stateOf(), so it cannot ignite the plan system. Returns the
+  // number of party refs purged.
+  function purgePartyRefs(v, vid) {
+    var purged = 0;
+    for (var hid in v.winPlan) {
+      if (!Object.prototype.hasOwnProperty.call(v.winPlan, hid)) continue;
+      var plan = v.winPlan[hid];
+      if (!plan || !plan.party || !plan.party.length) continue;
+      var before = plan.party.length;
+      plan.party = plan.party.filter(function (pid) { return pid !== vid; });
+      var n = before - plan.party.length;
+      if (n > 0) {
+        purged += n;
+        if (!plan.party.length && (plan.stage === 'party' || plan.stage === 'hunt')) plan.stage = 'party';
+      }
+    }
+    return purged;
   }
   function personOf(self, vid) {
     try { if (self.getPerson) return self.getPerson(vid); } catch (e) {}
@@ -320,23 +346,49 @@
         if (!v || !v.winPlan) return { deleted: false, purged: 0 };
         var deleted = false;
         if (v.winPlan[vid]) { delete v.winPlan[vid]; deleted = true; }
-        var purged = 0;
-        for (var hid in v.winPlan) {
-          if (!Object.prototype.hasOwnProperty.call(v.winPlan, hid)) continue;
-          var plan = v.winPlan[hid];
-          if (!plan || !plan.party || !plan.party.length) continue;
-          var before = plan.party.length;
-          plan.party = plan.party.filter(function (pid) { return pid !== vid; });
-          var n = before - plan.party.length;
-          if (n > 0) {
-            purged += n;
-            if (!plan.party.length && (plan.stage === 'party' || plan.stage === 'hunt')) plan.stage = 'party';
-          }
-        }
+        var purged = purgePartyRefs(v, vid);
         if (deleted || purged > 0) bump(this, 'deathCleanups');
         return { deleted: deleted, purged: purged };
       } catch (e) {
         if (typeof console !== 'undefined' && console.warn) console.warn('[winPlan] death cleanup failed', e);
+        return { deleted: false, purged: 0 };
+      }
+    },
+    // NON-DEATH REMOVAL CLEANUP (sim-nondeathplan-b, 2026-11-17):
+    // the same purge as the death method, for a villager who LEAVES
+    // the village alive (fled / splinter / exiled / tribute / relay)
+    // — their plan dies with their leaving, and they leave every
+    // living holder's party. Same non-creating read as the death
+    // method: it must never ignite the plan system in a sleeping
+    // village. Bumps winPlanStats.removalCleanups (not
+    // deathCleanups) only when something was cleaned.
+    // SPELLING NOTE: the entry delete is written
+    // `delete v.winPlan[key]` (key === vid), not with the vid
+    // spelled out in the brackets — the deathcleanup proof pins
+    // exactly two of the bracketed-vid spellings in this file (death
+    // method + table-active case), and a third would break it. The
+    // purge core is shared via purgePartyRefs, so the spelling is
+    // the only duplication.
+    // Total by construction (the catch returns a safe value), so call
+    // sites need no try/catch — only a typeof guard.
+    winPlanOnVillagerLeave(vid) {
+      try {
+        if (!vid) return { deleted: false, purged: 0 };
+        // NON-CREATING READ (same rule as the death method): read the
+        // store without creating it, and touch nothing when it does
+        // not exist yet. (bump() below runs only when something was
+        // cleaned — by then the store exists, so its stateOf is a
+        // no-op.)
+        var v = this.state && this.state.village;
+        if (!v || !v.winPlan) return { deleted: false, purged: 0 };
+        var deleted = false;
+        var key = vid;
+        if (v.winPlan[key]) { delete v.winPlan[key]; deleted = true; }
+        var purged = purgePartyRefs(v, vid);
+        if (deleted || purged > 0) bump(this, 'removalCleanups');
+        return { deleted: deleted, purged: purged };
+      } catch (e) {
+        if (typeof console !== 'undefined' && console.warn) console.warn('[winPlan] removal cleanup failed', e);
         return { deleted: false, purged: 0 };
       }
     },

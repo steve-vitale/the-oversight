@@ -37,7 +37,11 @@ function gitBranchSrcFiles() {
   try {
     const mb = execSync('git merge-base HEAD master', { cwd: REPO }).toString().trim();
     const diffed = execSync('git diff --name-only ' + mb + ' -- src', { cwd: REPO }).toString().trim().split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
-    const uncommitted = execSync('git status --porcelain -- src', { cwd: REPO }).toString().trim().split('\n').map(function (s) { return s.trim().slice(3); }).filter(Boolean);
+    // Porcelain lines are XY + space + path (e.g. " M src/..." or
+    // "MM src/..."): slice the 3-char prefix per line WITHOUT
+    // trimming the whole output first (trim() would eat the first
+    // line's leading status space and shift its slice by one).
+    const uncommitted = execSync('git status --porcelain -- src', { cwd: REPO }).toString().split('\n').map(function (s) { return s.slice(3).trim(); }).filter(Boolean);
     const all = {};
     diffed.concat(uncommitted).forEach(function (f) { all[f] = true; });
     return Object.keys(all).sort();
@@ -154,7 +158,7 @@ async function unitFixtures() {
   await setupGame(Game);
   const roster = ((Game.state || {}).village || {}).roster || [];
   const npcs = roster.filter(function (id) { return id && id !== Game.villagerId; });
-  check('fixture game has NPC villagers to plan with', npcs.length >= 12, 'npcs=' + npcs.length);
+  check('fixture game has NPC villagers to plan with', npcs.length >= 10, 'npcs=' + npcs.length);
   // REGRESSION (ignition, sim-deathcleanup-b lesson): the leave
   // cleanup must NEVER create the winPlan store. Call the method
   // with a bare village object that has no winPlan key at all, and
@@ -207,8 +211,11 @@ async function unitFixtures() {
       JSON.stringify(r2));
   }
   // Standing / table plans keep their stage when the party empties
-  // (same rule as the death method — the kill is banked).
-  const sv = npcs[10], svComp = npcs[11];
+  // (same rule as the death method — the kill is banked). Reuse two
+  // surviving companions from the how-cases above (seed 103241's
+  // fixture village has 11 NPCs, so the standing pair cannot be
+  // fresh villagers): sv holds a standing plan naming svComp.
+  const sv = npcs[1], svComp = npcs[3];
   const sp = Game.winPlanOf(sv); sp.stage = 'standing'; sp.party = [svComp];
   const scp = Game.winPlanOf(svComp); scp.stage = 'gear'; scp.party = [];
   const rcBefore = Game.winPlanStats().removalCleanups || 0;

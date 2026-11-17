@@ -1263,6 +1263,16 @@
       // winPlanOnVillagerDeath is total by construction; the typeof
       // guard covers saves loaded before it existed.
       if (typeof this.winPlanOnVillagerDeath === 'function') this.winPlanOnVillagerDeath(vid);
+    } else {
+      // NON-DEATH REMOVAL CLEANUP (sim-nondeathplan-b, 2026-11-17):
+      // a villager who leaves alive — fled, splinter, exiled,
+      // tribute, relay — is gone the same as a dead one for plan
+      // purposes: their plan dies with their leaving, and they leave
+      // every living holder's party. Same non-creating read as the
+      // death method: never ignites the plan system in a sleeping
+      // village. winPlanOnVillagerLeave is total by construction;
+      // the typeof guard covers saves loaded before it existed.
+      if (typeof this.winPlanOnVillagerLeave === 'function') this.winPlanOnVillagerLeave(vid);
     }
   },
 
