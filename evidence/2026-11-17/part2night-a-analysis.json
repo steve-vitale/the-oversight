@@ -1,0 +1,1396 @@
+{
+  "arm": "part2night-a",
+  "run": "part2night-a",
+  "band": [
+    103411,
+    103412,
+    103413,
+    103414,
+    103415,
+    103416,
+    103417,
+    103418
+  ],
+  "policy": "competent",
+  "policySha": "df9b7dff4de4",
+  "anchorCommit": "7ff3dabfd3bd70c009caf04cc5ab34458b4a2d58",
+  "files": 8,
+  "verdict": {
+    "completeness": true,
+    "instrument": true,
+    "counterfactualComputed": true,
+    "floor": true,
+    "go": true,
+    "unjudgeable": false
+  },
+  "counts": {
+    "executed-launched": 0,
+    "executed-held": 0,
+    "died-at-night-veto": 6,
+    "died-at-night-other": 0,
+    "overwritten-before-night": 0,
+    "plan-churned-before-night": 0,
+    "holder-died-before-night": 0,
+    "run-ended": 0,
+    "UNCLASSIFIED": 0
+  },
+  "wave4counts": {
+    "executed-launched": 0,
+    "executed-held": 0,
+    "died-at-night-veto": 0,
+    "died-at-night-other": 0,
+    "overwritten-before-night": 0,
+    "plan-churned-before-night": 0,
+    "holder-died-before-night": 0,
+    "run-ended": 0,
+    "UNCLASSIFIED": 0
+  },
+  "commits": 6,
+  "wave4commits": 0,
+  "superseded": 12,
+  "orphans": 0,
+  "part3CommitDays": 0,
+  "instrumentErrors": 0,
+  "counterfactual": {
+    "would-have-launched": 0,
+    "launched-anyway": 0,
+    "would-not-launch": 6,
+    "no-next-dawn": 0,
+    "missing-dawn": 0
+  },
+  "dawnFailures": {
+    "plan-stage": 4,
+    "companion-away": 1,
+    "indoor-objective": 1,
+    "companion-not-at-haven": 1,
+    "holder-not-at-haven": 3,
+    "holder-away": 3
+  },
+  "holderState": {
+    "total": 6,
+    "atHaven": 6,
+    "away": 0,
+    "medicDuty": 0,
+    "sick": 0,
+    "engaged": 0,
+    "launchBlock": 0,
+    "reason": {
+      "night": 6
+    },
+    "wave4": 0
+  },
+  "wall": {
+    "wins": 0,
+    "nationalStanding": 1,
+    "nationalRank": 0,
+    "table": 0,
+    "wave4": 7,
+    "wave5": 1,
+    "survivals": [
+      48,
+      69,
+      151,
+      151,
+      151,
+      151,
+      151,
+      152
+    ],
+    "deaths": 460,
+    "starvation": 3,
+    "scholarDeaths": 43,
+    "medianSurvival": 151
+  },
+  "perSeed": {
+    "103411": {
+      "seed": 103411,
+      "days": 69,
+      "gameDays": 69,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "regional",
+      "standing": 175,
+      "maxWave": 4,
+      "deaths": 54,
+      "starvation": 0,
+      "scholarDeaths": 5,
+      "instrumentErrors": 0,
+      "commits": [],
+      "counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4commits": 0,
+      "superseded": [],
+      "supersededCount": 0,
+      "orphans": [],
+      "orphanCount": 0,
+      "badSkipReason": null,
+      "counterfactuals": [],
+      "nightDeaths": [],
+      "part3CommitDays": 0,
+      "wave4Ids": [
+        "algorithm",
+        "audit",
+        "congregation",
+        "eater",
+        "eulogy",
+        "herald",
+        "influencer",
+        "reunion",
+        "strike",
+        "suburb"
+      ]
+    },
+    "103412": {
+      "seed": 103412,
+      "days": 49,
+      "gameDays": 48,
+      "endReason": "village-lost",
+      "won": false,
+      "scaleRank": "village",
+      "standing": 50,
+      "maxWave": 3,
+      "deaths": 38,
+      "starvation": 3,
+      "scholarDeaths": 1,
+      "instrumentErrors": 0,
+      "commits": [],
+      "counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4commits": 0,
+      "superseded": [],
+      "supersededCount": 0,
+      "orphans": [],
+      "orphanCount": 0,
+      "badSkipReason": null,
+      "counterfactuals": [],
+      "nightDeaths": [],
+      "part3CommitDays": 0,
+      "wave4Ids": [
+        "algorithm",
+        "audit",
+        "congregation",
+        "eater",
+        "eulogy",
+        "herald",
+        "influencer",
+        "reunion",
+        "strike",
+        "suburb"
+      ]
+    },
+    "103413": {
+      "seed": 103413,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "standing": 199,
+      "maxWave": 4,
+      "deaths": 54,
+      "starvation": 0,
+      "scholarDeaths": 6,
+      "instrumentErrors": 0,
+      "commits": [],
+      "counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4commits": 0,
+      "superseded": [],
+      "supersededCount": 0,
+      "orphans": [],
+      "orphanCount": 0,
+      "badSkipReason": null,
+      "counterfactuals": [],
+      "nightDeaths": [],
+      "part3CommitDays": 0,
+      "wave4Ids": [
+        "algorithm",
+        "audit",
+        "congregation",
+        "eater",
+        "eulogy",
+        "herald",
+        "influencer",
+        "reunion",
+        "strike",
+        "suburb"
+      ]
+    },
+    "103414": {
+      "seed": 103414,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "standing": 150,
+      "maxWave": 4,
+      "deaths": 56,
+      "starvation": 0,
+      "scholarDeaths": 4,
+      "instrumentErrors": 0,
+      "commits": [
+        {
+          "vid": "gen_k8xfk0x",
+          "day": 49,
+          "target": null,
+          "stage": "hunt",
+          "party": [
+            "gen_hbkmafy"
+          ],
+          "needWave": null,
+          "wave": null,
+          "wave4": false,
+          "scoreRows": 1,
+          "class": "died-at-night-veto",
+          "sub": "night",
+          "detail": {
+            "skip": {
+              "seq": 41,
+              "day": 49,
+              "part": 3,
+              "vid": "gen_k8xfk0x",
+              "target": null,
+              "stage": "hunt",
+              "party": [
+                "gen_hbkmafy"
+              ],
+              "commitKind": "mid-day part-2",
+              "commitPart": 2,
+              "leg": "diag",
+              "reason": "night",
+              "executeResult": null,
+              "sick": false,
+              "health": 14,
+              "launchBlock": null,
+              "medicDuty": false,
+              "companionStates": [
+                {
+                  "vid": "gen_hbkmafy",
+                  "alive": true,
+                  "haven": false,
+                  "away": true,
+                  "exped": true,
+                  "launchBlock": "hurt-no-medicine-no-healer"
+                }
+              ],
+              "raw": {
+                "profile": "wanderer",
+                "node": {
+                  "nx": 4,
+                  "ny": 4
+                },
+                "haven": true,
+                "exped": false,
+                "away": false,
+                "night": true,
+                "engaged": false,
+                "indoor": false,
+                "danger": false,
+                "dead": false
+              }
+            }
+          }
+        },
+        {
+          "vid": "sam_wilson",
+          "day": 49,
+          "target": null,
+          "stage": "hunt",
+          "party": [
+            "gen_k8xfk0x"
+          ],
+          "needWave": null,
+          "wave": null,
+          "wave4": false,
+          "scoreRows": 1,
+          "class": "died-at-night-veto",
+          "sub": "night",
+          "detail": {
+            "skip": {
+              "seq": 42,
+              "day": 49,
+              "part": 3,
+              "vid": "sam_wilson",
+              "target": null,
+              "stage": "hunt",
+              "party": [
+                "gen_k8xfk0x"
+              ],
+              "commitKind": "mid-day part-2",
+              "commitPart": 2,
+              "leg": "diag",
+              "reason": "night",
+              "executeResult": null,
+              "sick": false,
+              "health": 59,
+              "launchBlock": null,
+              "medicDuty": false,
+              "companionStates": [
+                {
+                  "vid": "gen_k8xfk0x",
+                  "alive": true,
+                  "haven": true,
+                  "away": false,
+                  "exped": false,
+                  "launchBlock": null
+                }
+              ],
+              "raw": {
+                "profile": "wanderer",
+                "node": {
+                  "nx": 4,
+                  "ny": 4
+                },
+                "haven": true,
+                "exped": false,
+                "away": false,
+                "night": true,
+                "engaged": false,
+                "indoor": false,
+                "danger": false,
+                "dead": false
+              }
+            }
+          }
+        },
+        {
+          "vid": "gen_k8xfk0x",
+          "day": 53,
+          "target": null,
+          "stage": "hunt",
+          "party": [
+            "sam_wilson"
+          ],
+          "needWave": null,
+          "wave": null,
+          "wave4": false,
+          "scoreRows": 1,
+          "class": "died-at-night-veto",
+          "sub": "night",
+          "detail": {
+            "skip": {
+              "seq": 55,
+              "day": 53,
+              "part": 3,
+              "vid": "gen_k8xfk0x",
+              "target": null,
+              "stage": "hunt",
+              "party": [
+                "sam_wilson"
+              ],
+              "commitKind": "mid-day part-2",
+              "commitPart": 2,
+              "leg": "diag",
+              "reason": "night",
+              "executeResult": null,
+              "sick": false,
+              "health": 67,
+              "launchBlock": null,
+              "medicDuty": false,
+              "companionStates": [
+                {
+                  "vid": "sam_wilson",
+                  "alive": true,
+                  "haven": true,
+                  "away": false,
+                  "exped": false,
+                  "launchBlock": null
+                }
+              ],
+              "raw": {
+                "profile": "wanderer",
+                "node": {
+                  "nx": 4,
+                  "ny": 4
+                },
+                "haven": true,
+                "exped": false,
+                "away": false,
+                "night": true,
+                "engaged": false,
+                "indoor": false,
+                "danger": false,
+                "dead": false
+              }
+            }
+          }
+        },
+        {
+          "vid": "sam_wilson",
+          "day": 53,
+          "target": null,
+          "stage": "hunt",
+          "party": [
+            "gen_k8xfk0x"
+          ],
+          "needWave": null,
+          "wave": null,
+          "wave4": false,
+          "scoreRows": 1,
+          "class": "died-at-night-veto",
+          "sub": "night",
+          "detail": {
+            "skip": {
+              "seq": 56,
+              "day": 53,
+              "part": 3,
+              "vid": "sam_wilson",
+              "target": null,
+              "stage": "hunt",
+              "party": [
+                "gen_k8xfk0x"
+              ],
+              "commitKind": "mid-day part-2",
+              "commitPart": 2,
+              "leg": "diag",
+              "reason": "night",
+              "executeResult": null,
+              "sick": false,
+              "health": 96,
+              "launchBlock": null,
+              "medicDuty": false,
+              "companionStates": [
+                {
+                  "vid": "gen_k8xfk0x",
+                  "alive": true,
+                  "haven": true,
+                  "away": false,
+                  "exped": false,
+                  "launchBlock": null
+                }
+              ],
+              "raw": {
+                "profile": "wanderer",
+                "node": {
+                  "nx": 4,
+                  "ny": 4
+                },
+                "haven": true,
+                "exped": false,
+                "away": false,
+                "night": true,
+                "engaged": false,
+                "indoor": false,
+                "danger": false,
+                "dead": false
+              }
+            }
+          }
+        }
+      ],
+      "counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 4,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4commits": 0,
+      "superseded": [
+        {
+          "vid": "gen_hbkmafy",
+          "day": 45,
+          "action": "party_wait",
+          "scoreRows": 1
+        },
+        {
+          "vid": "gen_hbkmafy",
+          "day": 50,
+          "action": "DUTY",
+          "scoreRows": 1
+        },
+        {
+          "vid": "sam_wilson",
+          "day": 59,
+          "action": "VISIT",
+          "scoreRows": 1
+        },
+        {
+          "vid": "sam_wilson",
+          "day": 123,
+          "action": "party_wait",
+          "scoreRows": 1
+        },
+        {
+          "vid": "sam_wilson",
+          "day": 137,
+          "action": "party_wait",
+          "scoreRows": 1
+        },
+        {
+          "vid": "sam_wilson",
+          "day": 138,
+          "action": "party_wait",
+          "scoreRows": 1
+        }
+      ],
+      "supersededCount": 6,
+      "orphans": [],
+      "orphanCount": 0,
+      "badSkipReason": null,
+      "counterfactuals": [
+        {
+          "vid": "gen_k8xfk0x",
+          "day": 49,
+          "target": null,
+          "wave4": false,
+          "realDawnLaunch": false,
+          "realDawnHold": false,
+          "laterSameDayLaunch": false,
+          "status": "would-not-launch",
+          "failures": [
+            "plan-stage:hunt",
+            "companion-away:gen_hbkmafy",
+            "indoor-objective"
+          ],
+          "dawn": {
+            "dawnDay": 50,
+            "holderMedicDuty": false,
+            "freshCommit": {
+              "kind": "EXPEDITION",
+              "winPlanAction": "party_launch",
+              "companion": "sam_wilson",
+              "part": 2
+            },
+            "noDawn": false
+          }
+        },
+        {
+          "vid": "sam_wilson",
+          "day": 49,
+          "target": null,
+          "wave4": false,
+          "realDawnLaunch": true,
+          "realDawnHold": false,
+          "laterSameDayLaunch": false,
+          "status": "would-not-launch",
+          "failures": [
+            "plan-stage:hunt"
+          ],
+          "dawn": {
+            "dawnDay": 50,
+            "holderMedicDuty": false,
+            "freshCommit": {
+              "kind": "EXPEDITION",
+              "winPlanAction": "party_launch",
+              "companion": "gen_k8xfk0x",
+              "part": 0
+            },
+            "noDawn": false
+          }
+        },
+        {
+          "vid": "gen_k8xfk0x",
+          "day": 53,
+          "target": null,
+          "wave4": false,
+          "realDawnLaunch": true,
+          "realDawnHold": false,
+          "laterSameDayLaunch": false,
+          "status": "would-not-launch",
+          "failures": [
+            "plan-stage:hunt",
+            "companion-not-at-haven:sam_wilson"
+          ],
+          "dawn": {
+            "dawnDay": 54,
+            "holderMedicDuty": false,
+            "freshCommit": {
+              "kind": "EXPEDITION",
+              "winPlanAction": "party_launch",
+              "companion": "sam_wilson",
+              "part": 0
+            },
+            "noDawn": false
+          }
+        },
+        {
+          "vid": "sam_wilson",
+          "day": 53,
+          "target": null,
+          "wave4": false,
+          "realDawnLaunch": false,
+          "realDawnHold": false,
+          "laterSameDayLaunch": false,
+          "status": "would-not-launch",
+          "failures": [
+            "holder-not-at-haven",
+            "holder-away",
+            "plan-stage:hunt"
+          ],
+          "dawn": {
+            "dawnDay": 54,
+            "holderMedicDuty": false,
+            "freshCommit": {
+              "kind": "EXPEDITION",
+              "winPlanAction": "party_launch",
+              "companion": "gen_k8xfk0x",
+              "part": 2
+            },
+            "noDawn": false
+          }
+        }
+      ],
+      "nightDeaths": [
+        {
+          "seq": 41,
+          "day": 49,
+          "part": 3,
+          "vid": "gen_k8xfk0x",
+          "target": null,
+          "stage": "hunt",
+          "party": [
+            "gen_hbkmafy"
+          ],
+          "commitKind": "mid-day part-2",
+          "commitPart": 2,
+          "leg": "diag",
+          "reason": "night",
+          "executeResult": null,
+          "sick": false,
+          "health": 14,
+          "launchBlock": null,
+          "medicDuty": false,
+          "companionStates": [
+            {
+              "vid": "gen_hbkmafy",
+              "alive": true,
+              "haven": false,
+              "away": true,
+              "exped": true,
+              "launchBlock": "hurt-no-medicine-no-healer"
+            }
+          ],
+          "raw": {
+            "profile": "wanderer",
+            "node": {
+              "nx": 4,
+              "ny": 4
+            },
+            "haven": true,
+            "exped": false,
+            "away": false,
+            "night": true,
+            "engaged": false,
+            "indoor": false,
+            "danger": false,
+            "dead": false
+          }
+        },
+        {
+          "seq": 42,
+          "day": 49,
+          "part": 3,
+          "vid": "sam_wilson",
+          "target": null,
+          "stage": "hunt",
+          "party": [
+            "gen_k8xfk0x"
+          ],
+          "commitKind": "mid-day part-2",
+          "commitPart": 2,
+          "leg": "diag",
+          "reason": "night",
+          "executeResult": null,
+          "sick": false,
+          "health": 59,
+          "launchBlock": null,
+          "medicDuty": false,
+          "companionStates": [
+            {
+              "vid": "gen_k8xfk0x",
+              "alive": true,
+              "haven": true,
+              "away": false,
+              "exped": false,
+              "launchBlock": null
+            }
+          ],
+          "raw": {
+            "profile": "wanderer",
+            "node": {
+              "nx": 4,
+              "ny": 4
+            },
+            "haven": true,
+            "exped": false,
+            "away": false,
+            "night": true,
+            "engaged": false,
+            "indoor": false,
+            "danger": false,
+            "dead": false
+          }
+        },
+        {
+          "seq": 55,
+          "day": 53,
+          "part": 3,
+          "vid": "gen_k8xfk0x",
+          "target": null,
+          "stage": "hunt",
+          "party": [
+            "sam_wilson"
+          ],
+          "commitKind": "mid-day part-2",
+          "commitPart": 2,
+          "leg": "diag",
+          "reason": "night",
+          "executeResult": null,
+          "sick": false,
+          "health": 67,
+          "launchBlock": null,
+          "medicDuty": false,
+          "companionStates": [
+            {
+              "vid": "sam_wilson",
+              "alive": true,
+              "haven": true,
+              "away": false,
+              "exped": false,
+              "launchBlock": null
+            }
+          ],
+          "raw": {
+            "profile": "wanderer",
+            "node": {
+              "nx": 4,
+              "ny": 4
+            },
+            "haven": true,
+            "exped": false,
+            "away": false,
+            "night": true,
+            "engaged": false,
+            "indoor": false,
+            "danger": false,
+            "dead": false
+          }
+        },
+        {
+          "seq": 56,
+          "day": 53,
+          "part": 3,
+          "vid": "sam_wilson",
+          "target": null,
+          "stage": "hunt",
+          "party": [
+            "gen_k8xfk0x"
+          ],
+          "commitKind": "mid-day part-2",
+          "commitPart": 2,
+          "leg": "diag",
+          "reason": "night",
+          "executeResult": null,
+          "sick": false,
+          "health": 96,
+          "launchBlock": null,
+          "medicDuty": false,
+          "companionStates": [
+            {
+              "vid": "gen_k8xfk0x",
+              "alive": true,
+              "haven": true,
+              "away": false,
+              "exped": false,
+              "launchBlock": null
+            }
+          ],
+          "raw": {
+            "profile": "wanderer",
+            "node": {
+              "nx": 4,
+              "ny": 4
+            },
+            "haven": true,
+            "exped": false,
+            "away": false,
+            "night": true,
+            "engaged": false,
+            "indoor": false,
+            "danger": false,
+            "dead": false
+          }
+        }
+      ],
+      "part3CommitDays": 0,
+      "wave4Ids": [
+        "algorithm",
+        "audit",
+        "congregation",
+        "eater",
+        "eulogy",
+        "herald",
+        "influencer",
+        "reunion",
+        "strike",
+        "suburb"
+      ]
+    },
+    "103415": {
+      "seed": 103415,
+      "days": 150,
+      "gameDays": 152,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "standing": 199,
+      "maxWave": 4,
+      "deaths": 48,
+      "starvation": 0,
+      "scholarDeaths": 9,
+      "instrumentErrors": 0,
+      "commits": [
+        {
+          "vid": "catalina_reyes",
+          "day": 51,
+          "target": null,
+          "stage": "party",
+          "party": [],
+          "needWave": null,
+          "wave": null,
+          "wave4": false,
+          "scoreRows": 1,
+          "class": "died-at-night-veto",
+          "sub": "night",
+          "detail": {
+            "skip": {
+              "seq": 184,
+              "day": 51,
+              "part": 3,
+              "vid": "catalina_reyes",
+              "target": null,
+              "stage": "party",
+              "party": [],
+              "commitKind": "mid-day part-2",
+              "commitPart": 2,
+              "leg": "diag",
+              "reason": "night",
+              "executeResult": null,
+              "sick": false,
+              "health": 94,
+              "launchBlock": null,
+              "medicDuty": false,
+              "companionStates": [],
+              "raw": {
+                "profile": "wanderer",
+                "node": {
+                  "nx": 4,
+                  "ny": 4
+                },
+                "haven": true,
+                "exped": false,
+                "away": false,
+                "night": true,
+                "engaged": false,
+                "indoor": false,
+                "danger": false,
+                "dead": false
+              }
+            }
+          }
+        },
+        {
+          "vid": "catalina_reyes",
+          "day": 52,
+          "target": null,
+          "stage": "party",
+          "party": [],
+          "needWave": null,
+          "wave": null,
+          "wave4": false,
+          "scoreRows": 1,
+          "class": "died-at-night-veto",
+          "sub": "night",
+          "detail": {
+            "skip": {
+              "seq": 188,
+              "day": 52,
+              "part": 3,
+              "vid": "catalina_reyes",
+              "target": null,
+              "stage": "party",
+              "party": [],
+              "commitKind": "mid-day part-2",
+              "commitPart": 2,
+              "leg": "diag",
+              "reason": "night",
+              "executeResult": null,
+              "sick": false,
+              "health": 97,
+              "launchBlock": null,
+              "medicDuty": false,
+              "companionStates": [],
+              "raw": {
+                "profile": "wanderer",
+                "node": {
+                  "nx": 4,
+                  "ny": 4
+                },
+                "haven": true,
+                "exped": false,
+                "away": false,
+                "night": true,
+                "engaged": false,
+                "indoor": false,
+                "danger": false,
+                "dead": false
+              }
+            }
+          }
+        }
+      ],
+      "counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 2,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4commits": 0,
+      "superseded": [
+        {
+          "vid": "catalina_reyes",
+          "day": 69,
+          "action": "ASSIGN",
+          "scoreRows": 1
+        },
+        {
+          "vid": "catalina_reyes",
+          "day": 71,
+          "action": "ASSIGN",
+          "scoreRows": 1
+        },
+        {
+          "vid": "catalina_reyes",
+          "day": 75,
+          "action": "ASSIGN",
+          "scoreRows": 1
+        },
+        {
+          "vid": "catalina_reyes",
+          "day": 76,
+          "action": "ASSIGN",
+          "scoreRows": 1
+        },
+        {
+          "vid": "catalina_reyes",
+          "day": 80,
+          "action": "ASSIGN",
+          "scoreRows": 1
+        }
+      ],
+      "supersededCount": 5,
+      "orphans": [],
+      "orphanCount": 0,
+      "badSkipReason": null,
+      "counterfactuals": [
+        {
+          "vid": "catalina_reyes",
+          "day": 51,
+          "target": null,
+          "wave4": false,
+          "realDawnLaunch": false,
+          "realDawnHold": false,
+          "laterSameDayLaunch": false,
+          "status": "would-not-launch",
+          "failures": [
+            "holder-not-at-haven",
+            "holder-away"
+          ],
+          "dawn": {
+            "dawnDay": 52,
+            "holderMedicDuty": false,
+            "freshCommit": {
+              "kind": "EXPEDITION",
+              "winPlanAction": "party_launch",
+              "companion": "gen_cca3xa5",
+              "part": 2
+            },
+            "noDawn": false
+          }
+        },
+        {
+          "vid": "catalina_reyes",
+          "day": 52,
+          "target": null,
+          "wave4": false,
+          "realDawnLaunch": false,
+          "realDawnHold": true,
+          "laterSameDayLaunch": false,
+          "status": "would-not-launch",
+          "failures": [
+            "holder-not-at-haven",
+            "holder-away"
+          ],
+          "dawn": {
+            "dawnDay": 53,
+            "holderMedicDuty": false,
+            "freshCommit": {
+              "kind": "HAVEN_CHORE",
+              "winPlanAction": "party_wait",
+              "companion": null,
+              "part": 0
+            },
+            "noDawn": false
+          }
+        }
+      ],
+      "nightDeaths": [
+        {
+          "seq": 184,
+          "day": 51,
+          "part": 3,
+          "vid": "catalina_reyes",
+          "target": null,
+          "stage": "party",
+          "party": [],
+          "commitKind": "mid-day part-2",
+          "commitPart": 2,
+          "leg": "diag",
+          "reason": "night",
+          "executeResult": null,
+          "sick": false,
+          "health": 94,
+          "launchBlock": null,
+          "medicDuty": false,
+          "companionStates": [],
+          "raw": {
+            "profile": "wanderer",
+            "node": {
+              "nx": 4,
+              "ny": 4
+            },
+            "haven": true,
+            "exped": false,
+            "away": false,
+            "night": true,
+            "engaged": false,
+            "indoor": false,
+            "danger": false,
+            "dead": false
+          }
+        },
+        {
+          "seq": 188,
+          "day": 52,
+          "part": 3,
+          "vid": "catalina_reyes",
+          "target": null,
+          "stage": "party",
+          "party": [],
+          "commitKind": "mid-day part-2",
+          "commitPart": 2,
+          "leg": "diag",
+          "reason": "night",
+          "executeResult": null,
+          "sick": false,
+          "health": 97,
+          "launchBlock": null,
+          "medicDuty": false,
+          "companionStates": [],
+          "raw": {
+            "profile": "wanderer",
+            "node": {
+              "nx": 4,
+              "ny": 4
+            },
+            "haven": true,
+            "exped": false,
+            "away": false,
+            "night": true,
+            "engaged": false,
+            "indoor": false,
+            "danger": false,
+            "dead": false
+          }
+        }
+      ],
+      "part3CommitDays": 0,
+      "wave4Ids": [
+        "algorithm",
+        "audit",
+        "congregation",
+        "eater",
+        "eulogy",
+        "herald",
+        "influencer",
+        "reunion",
+        "strike",
+        "suburb"
+      ]
+    },
+    "103416": {
+      "seed": 103416,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "standing": 199,
+      "maxWave": 4,
+      "deaths": 84,
+      "starvation": 0,
+      "scholarDeaths": 9,
+      "instrumentErrors": 0,
+      "commits": [],
+      "counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4commits": 0,
+      "superseded": [],
+      "supersededCount": 0,
+      "orphans": [],
+      "orphanCount": 0,
+      "badSkipReason": null,
+      "counterfactuals": [],
+      "nightDeaths": [],
+      "part3CommitDays": 0,
+      "wave4Ids": [
+        "algorithm",
+        "audit",
+        "congregation",
+        "eater",
+        "eulogy",
+        "herald",
+        "influencer",
+        "reunion",
+        "strike",
+        "suburb"
+      ]
+    },
+    "103417": {
+      "seed": 103417,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "standing": 199,
+      "maxWave": 4,
+      "deaths": 58,
+      "starvation": 0,
+      "scholarDeaths": 3,
+      "instrumentErrors": 0,
+      "commits": [],
+      "counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4commits": 0,
+      "superseded": [
+        {
+          "vid": "gen_zeekgsu",
+          "day": 40,
+          "action": "party_wait",
+          "scoreRows": 1
+        }
+      ],
+      "supersededCount": 1,
+      "orphans": [],
+      "orphanCount": 0,
+      "badSkipReason": null,
+      "counterfactuals": [],
+      "nightDeaths": [],
+      "part3CommitDays": 0,
+      "wave4Ids": [
+        "algorithm",
+        "audit",
+        "congregation",
+        "eater",
+        "eulogy",
+        "herald",
+        "influencer",
+        "reunion",
+        "strike",
+        "suburb"
+      ]
+    },
+    "103418": {
+      "seed": 103418,
+      "days": 150,
+      "gameDays": 151,
+      "endReason": "survived",
+      "won": false,
+      "scaleRank": "regional",
+      "standing": 300,
+      "maxWave": 5,
+      "deaths": 68,
+      "starvation": 0,
+      "scholarDeaths": 6,
+      "instrumentErrors": 0,
+      "commits": [],
+      "counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4counts": {
+        "executed-launched": 0,
+        "executed-held": 0,
+        "died-at-night-veto": 0,
+        "died-at-night-other": 0,
+        "overwritten-before-night": 0,
+        "plan-churned-before-night": 0,
+        "holder-died-before-night": 0,
+        "run-ended": 0,
+        "UNCLASSIFIED": 0
+      },
+      "wave4commits": 0,
+      "superseded": [],
+      "supersededCount": 0,
+      "orphans": [],
+      "orphanCount": 0,
+      "badSkipReason": null,
+      "counterfactuals": [],
+      "nightDeaths": [],
+      "part3CommitDays": 0,
+      "wave4Ids": [
+        "algorithm",
+        "audit",
+        "congregation",
+        "eater",
+        "eulogy",
+        "herald",
+        "influencer",
+        "reunion",
+        "strike",
+        "suburb"
+      ]
+    }
+  }
+}

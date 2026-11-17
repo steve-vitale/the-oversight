@@ -326,6 +326,43 @@ check('counterfactual medic-duty holder is NOT a failure (directed launches exem
   check('counterfactual noDawn-but-run-continued -> missing-dawn', ev.status === 'missing-dawn', 'got ' + ev.status);
 })();
 
+// ---------- 2c. Analyzer main() end-to-end (regression: _raw crash 2026-11-17) ----------
+// main() used to crash reading bySeed[SEEDS[0]]._raw.policySha after the
+// _raw attachment was removed. Spawn it on a one-seed fixture corpus and
+// assert it exits 0, reports GO, and carries policySha/anchorCommit through.
+(function () {
+  const tmp = path.join('/tmp', 'p2n-main-test-' + process.pid);
+  try {
+    fs.mkdirSync(tmp, { recursive: true });
+    const fixture = cfSeed();
+    fixture.seed = 103411;
+    fixture.policySha = 'df9b7dff4de4';
+    fixture.anchorCommit = '7ff3dabfd3bd';
+    fs.writeFileSync(path.join(tmp, 'part2night-a-s103411-part2night-a-diag.json'), JSON.stringify(fixture));
+    const outPath = path.join(tmp, 'analysis.json');
+    execFileSync('node', [path.join(REPO, 'scripts', 'analyze-part2night-a.js'),
+      '--dir', tmp, '--out', outPath, '--seeds', '103411'],
+      { cwd: REPO, encoding: 'utf8', timeout: 120000 });
+    const a = JSON.parse(fs.readFileSync(outPath, 'utf8'));
+    check('analyzer main() exits 0 and reports GO on the fixture corpus',
+      a.verdict && a.verdict.go === true, 'got ' + JSON.stringify(a.verdict));
+    check('analyzer main() counts the fixture commit as a night-veto death',
+      a.counts && a.counts['died-at-night-veto'] === 1 && a.commits === 1,
+      'got ' + JSON.stringify(a.counts));
+    check('analyzer main() carries policySha/anchorCommit from the per-seed file',
+      a.policySha === 'df9b7dff4de4' && a.anchorCommit === '7ff3dabfd3bd',
+      'got policySha=' + a.policySha + ' anchorCommit=' + a.anchorCommit);
+    check('analyzer main() counterfactual on the fixture is would-have-launched',
+      a.counterfactual && a.counterfactual['would-have-launched'] === 1,
+      'got ' + JSON.stringify(a.counterfactual));
+  } catch (e) {
+    check('analyzer main() runs on a fixture corpus (no throw)', false,
+      (e && e.stack ? e.stack.split('\n').slice(0, 3).join(' | ') : String(e)));
+  } finally {
+    try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (e) {}
+  }
+})();
+
 // ---------- 3. Recorder: live 5d run (shape) ----------
 console.log('== recorder live (5d run) ==');
 async function liveRuns() {

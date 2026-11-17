@@ -19,8 +19,11 @@ const REPO = path.join(__dirname, '..');
 function argvVal(flag, dflt) {
   return process.argv.includes(flag) ? process.argv[process.argv.indexOf(flag) + 1] : dflt;
 }
-const DIR = path.join(REPO, argvVal('--dir', 'evidence/2026-11-17/perseed-part2night-a'));
-const OUT = path.join(REPO, argvVal('--out', 'evidence/2026-11-17/part2night-a-analysis.json'));
+// --dir/--out accept absolute paths (path.join would silently nest an
+// absolute path under REPO); relative paths resolve under REPO as before.
+function resolveRepo(p) { return path.isAbsolute(p) ? p : path.join(REPO, p); }
+const DIR = resolveRepo(argvVal('--dir', 'evidence/2026-11-17/perseed-part2night-a'));
+const OUT = resolveRepo(argvVal('--out', 'evidence/2026-11-17/part2night-a-analysis.json'));
 const SEEDS = (argvVal('--seeds', null) || '103411,103412,103413,103414,103415,103416,103417,103418')
   .split(',').map(function (s) { return parseInt(s.trim(), 10); });
 
@@ -350,11 +353,13 @@ function summarize(bySeed) {
 function main() {
   const bySeed = {};
   let files = 0;
+  let firstRaw = null;
   for (const seed of SEEDS) {
     const fp = path.join(DIR, 'part2night-a-s' + seed + '-part2night-a-diag.json');
     if (!fs.existsSync(fp)) throw new Error('missing per-seed file: ' + fp);
     const j = JSON.parse(fs.readFileSync(fp, 'utf8'));
     files++;
+    if (!firstRaw) firstRaw = j;
     const cs = classifySeed(j);
     bySeed[seed] = cs;
   }
@@ -375,8 +380,8 @@ function main() {
   const out = {
     arm: 'part2night-a', run: 'part2night-a', band: SEEDS,
     policy: 'competent',
-    policySha: (bySeed[SEEDS[0]] && bySeed[SEEDS[0]]._raw.policySha) || null,
-    anchorCommit: (bySeed[SEEDS[0]] && bySeed[SEEDS[0]]._raw.anchorCommit) || null,
+    policySha: (firstRaw && firstRaw.policySha) || null,
+    anchorCommit: (firstRaw && firstRaw.anchorCommit) || null,
     files: files, verdict: verdict,
     counts: sum.counts, wave4counts: sum.wave4counts,
     commits: sum.commits, wave4commits: sum.wave4commits,
