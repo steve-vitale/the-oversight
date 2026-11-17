@@ -127,7 +127,12 @@ reps) stays out of reach in 28d on all six panels. No defect claim.
   wave-3+ seeding path. (PLANFIX was off on this panel, so the
   planignite fix itself is unmeasured here; the r141 finding that the
   store "never switches on until a wave-3 fight, a kill, or a narrow
-  escape" still describes 9/10 villages.)
+  escape" still describes 9/10 villages. Addendum: while this run was
+  in flight, the planignite CONFIRM landed on master
+  (sim-planignconfirm-b, 2a49a1e82): NO-GO — kills/departure 0.289 →
+  0.115, deaths +25.7%; the lever stays env-gated OFF. The planignite
+  fix is not going live; the plan-store wake-up question stays open
+  for a different lever.)
 - **Deferred-ask guard (r231)**: 0 "It's already handled" lines in any
   transcript. The trigger case did not fire live — no stage-0 favorless
   ask_favor sitting pressed dlg:help — so the guard is neither
