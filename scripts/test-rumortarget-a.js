@@ -73,11 +73,15 @@ if (LEVER_PRESENT) {
   check('off: src diff is empty (lever fully reverted)', srcDiffFiles.length === 0, JSON.stringify(srcDiffFiles));
 }
 const scriptsStatus = gitOut('status --porcelain -- scripts/').split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+// REATTACH (sim-reattach-a): this branch also carries the re-attach
+// follow-up arm, so reattach-* instrument files are allowed in the
+// scripts diff alongside the rumortarget-* files. The design change
+// is deliberate: the re-attach rule extends the same method.
 const scriptsOk = scriptsStatus.every(function (s) {
-  return /scripts\/(rumortarget-driver-20261117|analyze-rumortarget-a|test-rumortarget-a|build-rumortarget-panels-20261117)\.js$/.test(s);
+  return /scripts\/(rumortarget-driver-20261117|analyze-rumortarget-a|test-rumortarget-a|build-rumortarget-panels-20261117|reattach-driver-20261117|analyze-reattach-a|test-reattach-a|build-reattach-panels-20261117)\.js$/.test(s);
 });
 if (LEVER_PRESENT) {
-  check('scripts worktree diff is rumortarget-* files only (' + JSON.stringify(scriptsStatus) + ')', scriptsOk);
+  check('scripts worktree diff is rumortarget-* + reattach-* files only (' + JSON.stringify(scriptsStatus) + ')', scriptsOk);
 } else {
   // OFF MODE: the proofadapt branch touches both adapted proof tests
   // and nothing else in scripts/ (the arm's driver/analyzer/panel
@@ -329,8 +333,14 @@ async function attachFixtures() {
   plan = setPlan(HOLDER, { target: 'redactor', needWave: 3 });
   SAY_LINES = [];
   ret = Game.winPlanRumorAttach(HOLDER, false);
-  check('targeted plan is never re-attached (target kept, no voice line)',
-    ret === null && plan.target === 'redactor' && SAY_LINES.length === 0);
+  // REATTACH (sim-reattach-a): the design changed on purpose — a
+  // targeted plan CAN now trade up when REATTACH=1. With REATTACH
+  // unset (this probe) the plan keeps its beast and the block is
+  // NAMED in the result instead of a bare null return.
+  check('targeted plan keeps its beast with REATTACH unset (block named reattach-off, no voice line)',
+    ret && ret.mid === null && ret.reattached === false && ret.reattachBlocked === 'reattach-off' &&
+    ret.oldTarget === 'redactor' && ret.oldWave === 3 && plan.target === 'redactor' && SAY_LINES.length === 0,
+    JSON.stringify({ mid: ret && ret.mid, blocked: ret && ret.reattachBlocked, target: plan.target }));
   clearPlan(HOLDER);
   // 8. Vet tales (repeat wave-4 kills) attach too.
   setTales([{ mid: 'eater', killer: TELLER, day: day, told: true, played: true, vet: true }]);
