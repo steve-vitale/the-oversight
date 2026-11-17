@@ -231,4 +231,16 @@ Eight villages, 100 days. **7/8 survived** (r226: 8/8). 67 living at end
 
 ## Landing
 
-- (to be filled: commits, rebase, merge, release, rotation)
+- Committed edfb08543 (frozen prereg + muster-policy driver/analyzer +
+  proofs) and f00e6b19e (run note + analyzer log) in the worktree; the
+  safe-commit index clobber struck on both commits and was repaired via
+  `git ls-tree -r HEAD` + `update-index --add --index-info`, verified
+  status empty + diff HEAD empty each time.
+- Master moved during the run (Loop B 0215Z+0030Z adoption landed
+  7199f371f: companion guard SHIPPED unconditional, expignite DIAG GO,
+  nationalsticky DIAG-NO-GO, rumortarget PILOT NO-GO, nightcarry
+  INCOMPLETE); rebased clean onto it, proof tests re-run green
+  (12/12 muster, 41/41 analyzer), merged ff-only into local master.
+- **Merged locally, pending ship** — no bump, no push, no live
+  verification (ship loop owns those).
+- Rotation 2→3 written with read-back; lock deleted at closeout.
