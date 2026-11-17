@@ -41,14 +41,15 @@ console.log('== static checks ==');
 // 1. The guard's src/ scope is EXACTLY villager-agency.js (the
 // guard) + villager-brain.js (the mirror's plan-record honesty).
 // Nothing else in src/ may change on this arm. Measured as the diff
-// against the FROZEN PREREG commit (35ba8eb58), not the worktree
-// status: the arm lands in two commits (guard + proof, then the GO
-// gate removal), and the scope check must pass at both — after the
-// first commit the worktree status is clean, after the gate removal
-// only agency.js is dirty, but the arm's cumulative src/ change is
-// still exactly these two files either way.
+// against the merge base (f7128f9f3 — the rebase base; the original
+// anchor, the frozen prereg commit 35ba8eb58, went stale when the
+// branch was rebased onto current master, because master-side
+// landings after the prereg — the Lane A r230 convo fix — then
+// counted as this arm's change). The assertion is unchanged: the
+// arm's cumulative src/ change is exactly these two files.
+// (Adoption re-pin, same class as the planignite policy-sha re-pin.)
 let srcStatus = null, srcErr = null;
-try { srcStatus = gitStatusWithRetry('diff --name-only 35ba8eb58 -- src/'); }
+try { srcStatus = gitStatusWithRetry('diff --name-only f7128f9f354ea57083817d87410f66e846e21029 -- src/'); }
 catch (e) { srcErr = String((e && e.message) || e).slice(0, 120); }
 check('game-code change touches only villager-agency.js + villager-brain.js', (function () {
   if (srcStatus === null) return false;
