@@ -171,6 +171,16 @@ function analyzeOne(j) {
   // (c-i) census-side: living holders whose plan.party contains a
   // vid dead on that day (deathDay map; unknown members counted
   // separately, never assumed dead).
+  // DEATH-DAY EXCLUSION (sim-nondeathplan-live-b, finding #2482):
+  // the daily census snapshot precedes the death within the day, so
+  // a party ref to someone who dies LATER that same day is not
+  // stale — it named a living villager at snapshot time. A ref
+  // counts only when the death day is strictly BEFORE the census
+  // day (deathDay < r.day). The old <= counted the death day's own
+  // row and read COSTLY on a band with zero lingering (3 single-day
+  // instances on 103241–103248). A ref on the day AFTER the death
+  // is still a linger — the cleanup should have deleted it on the
+  // death day — so no holder-days >= 2 threshold is applied.
   const slotHolders = {};
   let slotHolderDays = 0;
   let slotUnknownRefs = 0;
@@ -180,7 +190,7 @@ function analyzeOne(j) {
     let deadRef = null, unknownRef = null;
     for (const pid of party) {
       if (!pid) continue;
-      if (deathDay[pid] != null && deathDay[pid] <= r.day) { deadRef = pid; break; }
+      if (deathDay[pid] != null && deathDay[pid] < r.day) { deadRef = pid; break; }
       if (!rosterSeen[pid] && deathDay[pid] == null) unknownRef = pid;
     }
     if (deadRef) {

@@ -232,17 +232,24 @@ function dailyRoster(day, entries) {
 // D4: slot — living holder's plan party holds a dead vid; the holder
 // launches after the dead ref appears (non-blocking); a second
 // launch carries a dead party member (blocking instance).
+// #2482 CORRECTION (sim-nondeathplan-live-b): the death day's own
+// census row is NOT a linger — the daily snapshot precedes the death
+// within the day — so v2's death-day (21) rows do not count. v1
+// counts days 22–23, v3 counts day 22; the counts below are the
+// corrected ones (the pre-fix fixture counted day 21 as well).
 (function () {
   const j = baseSeed({
     planCensus: [
       censusRow(20, 'v1', 'strike', 'hunt', true, ['v2']),
       censusRow(21, 'v1', 'strike', 'hunt', true, ['v2']),
       censusRow(22, 'v1', 'strike', 'hunt', true, ['v2']),
+      censusRow(23, 'v1', 'strike', 'hunt', true, ['v2']),
       censusRow(20, 'v3', 'audit', 'hunt', true, ['v2']),
       censusRow(21, 'v3', 'audit', 'hunt', true, ['v2']),
+      censusRow(22, 'v3', 'audit', 'hunt', true, ['v2']),
     ],
     v4departs: [
-      { day: 22, vid: 'v1', source: 'winPlanDepart', result: 'launch', stage: 'hunt', target: 'strike',
+      { day: 23, vid: 'v1', source: 'winPlanDepart', result: 'launch', stage: 'hunt', target: 'strike',
         party: ['v4'], partySize: 2, partyKillers: 0, partyArmed: 1, holderAlive: true,
         partyAlive: [{ id: 'v4', alive: true }], targetWave: 4 },
       { day: 21, vid: 'v3', source: 'brain', result: 'launch', stage: 'hunt', target: 'audit',
@@ -259,7 +266,7 @@ function dailyRoster(day, entries) {
     daily: [dailyRoster(20, [['v2', false]]), dailyRoster(21, [['v2', true]])],
   });
   const one = ANALYZE.analyzeOne(j);
-  check('D4 slot: 2 holders carry the dead ref (v1 2 holder-days, v3 1); v1 launched after (non-blocking), v3 launched the same day (not after)',
+  check('D4 slot: 2 holders carry the dead ref (v1 2 holder-days, v3 1); v1 launched after (non-blocking), v3 launched before its first post-death ref (not after)',
     one.slot.holders.length === 2 &&
     one.slot.holderDays === 3 &&
     one.slot.holders.find(function (h) { return h.vid === 'v1'; }).launchedAfter === true &&
@@ -284,6 +291,7 @@ function dailyRoster(day, entries) {
       censusRow(10, 'h2', null, 'hunt', true, ['h3']),
       censusRow(11, 'h2', null, 'hunt', true, ['h3']),
       censusRow(12, 'h2', null, 'hunt', true, ['h3']),
+      censusRow(13, 'h2', null, 'hunt', true, ['h3']),
     ],
     deaths: [{ day: 11, kind: 'villager', who: 'h3', cause: 'monster', player: false }],
     deadTouches: [],
@@ -292,6 +300,8 @@ function dailyRoster(day, entries) {
     daily: [dailyRoster(12, [['h3', false], ['h2', false]])],
   });
   const one = ANALYZE.analyzeOne(j);
+  // #2482: the day-11 row is h3's death day itself (excluded — the
+  // snapshot precedes the death); the 2 holder-days are 12 and 13.
   check('D8 death days come from the deaths array, not the roster flag: h2 carries dead h3 for 2 holder-days',
     one.slot.holders.length === 1 && one.slot.holderDays === 2 &&
     one.slot.holders[0].vid === 'h2',
