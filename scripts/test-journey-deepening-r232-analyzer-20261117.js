@@ -1111,5 +1111,28 @@ function marchSeed(over) {
     out.indexOf('fullStrengthFights=1') !== -1,
     out.slice(0, 400));
 }
+{
+  const hasFn = typeof A.summarizeSlainField === 'function';
+  // (54) NEW r232: muster-fight slay is NOT an opportunity — the pilot
+  // shape (103301 arm A): death tele day 57 + absent at end + slain set,
+  // but the outcomes record 'slain' (muster fight, 8 blades, won).
+  const s = slainFieldSeed({
+    monsterWatch: [heraldRow(56, 700), heraldRow(57, 700), emptyRow(58), emptyRow(100)],
+    titanEnd: {
+      omens: { herald: { stage: 2, day: 56 } },
+      musters: {},
+      slain: { herald: true },
+      outcomes: [{ titan: 'herald', day: 57, outcome: 'slain', detail: { blades: 8 }, endDay: 57, result: 'won' }],
+      titanDeathTele: [{ day: 57, who: 'herald', cause: 'combat', wave: 4 }],
+      villageSlainTitan: { herald: 1 },
+      cast: {}, ready: { herald: false },
+    },
+  });
+  let r = null;
+  try { r = A.summarizeSlainField([s]); } catch (e) { r = { err: String(e && e.message) }; }
+  ok('(54) slain-field muster-fight slay excluded: death tele + slain outcome -> 0 opportunities, UNMEASURED',
+    hasFn && r.verdict === 'SLAIN-FIELD-UNMEASURED' && r.totOpp === 0 && r.totRec === 0 && r.totDefect === 0 && r.totFalse === 0,
+    hasFn ? JSON.stringify(r) : 'summarizeSlainField missing in this analyzer');
+}
 console.log(`r232 analyzer proof: ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

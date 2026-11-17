@@ -2235,6 +2235,12 @@ function summarizeMusterPolicy(seedJSONs) {
 // the muster cleared (null — upkeep cannot charge a null muster). A FALSE
 // reconciliation is a 'slain-field' outcome while the titan is present at
 // end, or slain set with no kill evidence while the monster lives.
+// A muster-fight slay is NOT an opportunity: it also leaves a death row
+// and an absent monster, but the titan is already accounted for (outcomes
+// 'slain' for that titan, slain set by titanVictory) — the field question
+// does not apply. The pilot (103301 arm A) caught this: the muster fight
+// slew the Herald day 57 (8 blades, won) and left exactly that shape;
+// without the exclusion the panel would read DEFECT on a healthy seed.
 // Verdicts: SLAIN-FIELD-UNMEASURED (no opportunity — the fix is judged by
 // its proof test, not this panel), SLAIN-FIELD-FALSE (a false
 // reconciliation fired), SLAIN-FIELD-GO (every opportunity with a dawn
@@ -2282,6 +2288,8 @@ function summarizeSlainField(seedJSONs) {
       const tid = SLAIN_FIELD_MONSTER_TO_TITAN[monster] || monster;
       const omen = omens[tid] || null;
       if (!omen || (omen.stage || 0) < 2) continue; // never located: not a muster titan
+      const hasSlainOutcome = outcomes.some(o => o && o.titan === tid && o.outcome === 'slain');
+      if (hasSlainOutcome) continue; // muster-fight slay: already accounted for (see header)
       let lastSeenDay = null;
       for (const row of mw) {
         if ((row.monsters || []).some(m => m && m.id === monster)) lastSeenDay = row.day;
