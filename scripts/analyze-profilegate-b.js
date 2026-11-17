@@ -552,10 +552,10 @@ function main() {
   const onSummary = on.summary, onRaw = on.raw;
   let offSummary = null, offRaw = null, offFiles = null;
   if (offDir) { const o = summarizeLeg(offDir); offSummary = o.summary; offRaw = o.raw; offFiles = o.files; }
-  let recSummary = null;
-  if (recDir) recSummary = summarizeLeg(recDir).summary;
-  let rec0Summary = null;
-  if (rec0Dir) rec0Summary = summarizeLeg(rec0Dir).summary;
+  let recSummary = null, recFiles = null;
+  if (recDir) { const r = summarizeLeg(recDir); recSummary = r.summary; recFiles = r.files; }
+  let rec0Summary = null, rec0Files = null;
+  if (rec0Dir) { const r0 = summarizeLeg(rec0Dir); rec0Summary = r0.summary; rec0Files = r0.files; }
 
   const onErrors = onSummary.perSeed.reduce(function (t, s) { return t + s.instrumentErrors; }, 0);
   const offErrors = offSummary ? offSummary.perSeed.reduce(function (t, s) { return t + s.instrumentErrors; }, 0) : 0;
@@ -593,7 +593,7 @@ function main() {
     onStarvTotal: onStarv.total, offStarvTotal: offStarv ? offStarv.total : null,
     armOnlyOn: armOnlyOn, armOnlyOff: armOnlyOff,
     d2On: d2On, d2Off: d2Off, w4Match: !!w4Match,
-    files: { on: on.files.length, off: offFiles, rec: recSummary ? recSummary.files : null, rec0: rec0Summary ? rec0Summary.files : null },
+    files: { on: on.files, off: offFiles, rec: recFiles, rec0: rec0Files },
     errors: { on: onErrors, off: offErrors, rec: recErrors, rec0: rec0Errors },
   });
   const bar1 = bars.bar1, bar2 = bars.bar2, bar3 = bars.bar3, bar4 = bars.bar4, bar5 = bars.bar5;
@@ -610,16 +610,16 @@ function main() {
       onPerSeed: onStarv.perSeed, offPerSeed: offStarv ? offStarv.perSeed : null },
     replication: replication,
     bars: {
-      poolFill: { pass: bar1, emptyShare: onPool.emptyShare, meanEligible: onPool.meanEligible,
-        empty: onPool.empty, dawns: onPool.dawns, emptyShareBar: 40 / 87, meanEligibleBar: 1.5 },
+      poolFill: { pass: bar1, emptyShare: onSummary.poolShape.emptyShare, meanEligible: onSummary.poolShape.meanEligible,
+        empty: onSummary.poolShape.empty, dawns: onSummary.poolShape.dawns, emptyShareBar: 40 / 87, meanEligibleBar: 1.5 },
       launches: { pass: bar2, on: onSummary.launchedInstances, off: offSummary ? offSummary.launchedInstances : null,
         bar: 5, launchEventsW4On: onSummary.launchEventsW4, launchEventsW4Off: offSummary ? offSummary.launchEventsW4 : null },
       cost: { pass: bar3, starvOn: onStarv.total, starvOff: offStarv ? offStarv.total : null,
         armOnlyOn: armOnlyOn, armOnlyOff: armOnlyOff,
         medianOn: onSummary.medianSurvival, medianOff: offSummary ? offSummary.medianSurvival : null },
       damageTracked: bar4,
-      instrument: { pass: bar5, onFiles: on.files.length, offFiles: offFiles,
-        recFiles: recSummary ? recSummary.files : null, rec0Files: rec0Summary ? rec0Summary.files : null,
+      instrument: { pass: bar5, onFiles: on.files, offFiles: offFiles,
+        recFiles: recFiles, rec0Files: rec0Files,
         onErrors: onErrors, offErrors: offErrors, recErrors: recErrors, rec0Errors: rec0Errors,
         wave4IdsMatch: !!w4Match, d2On: d2On, d2Off: d2Off,
         classifiedShare: onSummary.classifiedShare, unknown: onSummary.unknown },
@@ -631,7 +631,7 @@ function main() {
   fs.writeFileSync(outFile, JSON.stringify(out, null, 2) + '\n');
 
   console.log('=== profilegate-b (on leg, judged) ===');
-  console.log('seeds: ' + onSummary.seeds + '  files: ' + on.files.length +
+  console.log('seeds: ' + onSummary.seeds + '  files: ' + on.files +
     '  seedCallsW4: ' + onSummary.seedCallsW4 + '  instancesOpened: ' + onSummary.instancesOpened);
   console.log('funnel buckets: ' + JSON.stringify(onSummary.byFunnel));
   console.log('launched instances: ' + onSummary.launchedInstances + ' (off: ' + (offSummary ? offSummary.launchedInstances : null) + ')');
