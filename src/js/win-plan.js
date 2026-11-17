@@ -221,6 +221,14 @@
     try { return typeof process !== 'undefined' && process.env && process.env.VETREENGAGE === '1'; } catch (e) { return false; }
   }
 
+  // PLANFIX env gate (sim-planignite-fix-a): initialize the plan
+  // store on first HavenTick. OFF unless the process env carries
+  // PLANFIX=1 (node sims only; in the browser process is undefined,
+  // so the lever is off).
+  function planfixOn() {
+    try { return typeof process !== 'undefined' && process.env && process.env.PLANFIX === '1'; } catch (e) { return false; }
+  }
+
   // Launchability for a party companion, checked BEFORE the inviter
   // launches (or before a second companion is added): gear them first
   // (their own stash / the deposited armory / whittle, exactly what
@@ -340,7 +348,20 @@
     winPlanHavenTick(vid, hx, hy) {
       try {
         var v = this.state && this.state.village;
-        if (!v || !v.winPlan) return null;
+        if (!v) return null;
+        // PLANFIX (sim-planignite-fix-a): the plan store is lazily
+        // initialized by stateOf() only — and this tick reads it
+        // directly, so it can never be the first spark (the
+        // planignite-a DIAG: 2/8 villages never start a plan in 150d
+        // because no initializer of any kind ever fires). With the
+        // flag on, initialize the store here so the engagement check
+        // below can run on the first call. Env-gated default-OFF:
+        // with the flag unset the guard is the old behavior.
+        if (!v.winPlan) {
+          if (!planfixOn()) return null;
+          v = stateOf(this);
+          if (!v) return null;
+        }
         if (!atHaven(this, vid, hx, hy)) return null;
         var plan = v.winPlan[vid];
         // ENGAGEMENT: a plan starts from lived or heard knowledge, not
