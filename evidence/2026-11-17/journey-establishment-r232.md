@@ -352,8 +352,17 @@ guardrails.pantryKcal, c3.starvationDeaths):
 - Master moved during the run (social-life r234 landed
   `39eaa043e` — DRY2 fix, touching convo-dialogue.js); rebased
   clean onto it (2/2, no overlap with this run's files), proof
-  tests re-run green on the rebased tip (19+13+18+10+35+7),
-  merged ff-only into local master.
+  tests re-run green on the rebased tip (19+13+18+10+35+7).
+  Master then moved again (Loop A launchfunnel `7595ff0b9`,
+  part2night `48d767924`, nondeathplan-b evidence `95d3d9ca1`,
+  1415Z evidence `98ff5fc02`, 1409Z closeout `0668af726`) while
+  the second rebase was unconfirmed and the coordinator timed
+  out (orphan hbloop PID 3490 killed by the main session;
+  coordinator process gone, worktree clean at `fd5968693`).
+  Adopted by the main session: rebased clean onto `0668af726`
+  (3/3, no overlap), the same six proof tests re-run green on
+  the rebased tip `348ca3754` (19+13+18+10+35+7), merged
+  ff-only into local master.
 - **Merged locally, pending ship** — no bump, no push, no live
   verification (ship loop owns those).
 - Rotation 1→2 written with read-back; lock deleted at closeout
