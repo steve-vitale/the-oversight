@@ -1,17 +1,25 @@
 // test-profilegate-b.js — proof for arm sim-profilegate-b (LEVER: widen
 // the companion profile gate, PROFILEGATE=1, default OFF).
-// Proves, on static checks, analyzer fixtures, and live in-memory runs
-// (no corpus numbers): the src/ diff vs the frozen base is only the two
-// findCompanion twins (same gated profile check in both); the depart
-// bypass is landed and untouched; winPlanSecondCompanion stays
-// profile-open; the analyzer judges the frozen pool-shape / damage /
-// arm-only / bar logic on fixtures; the live gate fixture shows a
-// forager/homebody companion is picked at dawn ONLY with PROFILEGATE=1,
-// a staged homebody companion never leaves (range-0) while a staged
-// forager companion does; and the determinism legs D1 (repeatability)
-// + D2 (wrap neutrality) are green at 60d on seed 103411 with
-// VETREENGAGE=1 in both PROFILEGATE states, plus a 150d gate-act check
-// on seed 103413 (ON pool fills vs OFF).
+// VERDICT: NO-GO on B3 (median survival 116.5 vs bar 118.0), lever
+// REVERTED by disposition (commit ea3d3eabe). This test now proves the
+// INSTRUMENT plus the REVERT, on the frozen-base measurement (50/50 green
+// on eb2d3714f, see evidence/2026-11-17/sim-profilegate-b.md):
+//   - static: src/ diff vs the frozen base is EMPTY (no lever in the tree);
+//     the twins carry the UNGUARDED profile check (master behavior) and no
+//     profilegateOn() helper; the depart bypass is landed and untouched;
+//     winPlanSecondCompanion stays profile-open.
+//   - analyzer fixtures judge the frozen pool-shape / damage / arm-only /
+//     bar logic; the live gate fixture shows a forager/homebody companion
+//     is picked at dawn in NEITHER PROFILEGATE state (the flag is inert
+//     post-revert); the depart variants still prove the range-0 block.
+//   - determinism legs D1 (repeatability) + D2 (wrap neutrality) are green
+//     at 60d on seed 103411 with VETREENGAGE=1 in both PROFILEGATE states,
+//     plus a cross-state flag-inert check (identical trajectories).
+// The 150d gate-act check is RETIRED, not re-scored: its subject (the
+// lever) is gone by disposition, and its fixture seed 103413 plants no
+// plans on the rebased base (trajectory drift from the fightallycap
+// landing — see the evidence Rebase note). The gate-act behavior was
+// proven 50/50 on the frozen base and is recorded in the evidence.
 // Usage:
 //   node scripts/test-profilegate-b.js
 // The gate fixture runs in child processes (one harness per process):
@@ -67,21 +75,23 @@ const EXPECTED_SRC = ['src/js/villager-brain.js', 'src/js/win-plan.js'];
 const srcDiff = BASE ? gitDiffNames(BASE, 'src/') : ['NO-BASE'];
 const srcStatus = gitStatusNames('src/').filter(function (s) { return EXPECTED_SRC.indexOf(s) !== -1; });
 const srcUnion = Array.from(new Set(srcDiff.concat(srcStatus))).sort();
-check('src/ diff vs base + untracked is exactly the two findCompanion twins',
-  JSON.stringify(srcUnion) === JSON.stringify(EXPECTED_SRC.slice().sort()),
+// NO-GO disposition (revert ea3d3eabe): the lever is OUT of the tree, so
+// the src/ diff vs the frozen base must be EMPTY — not the two twins.
+check('src/ diff vs base + untracked is EMPTY (lever reverted by NO-GO disposition)',
+  JSON.stringify(srcUnion) === JSON.stringify([]),
   'union=' + JSON.stringify(srcUnion));
 const brainJs = fs.readFileSync(path.join(REPO, 'src', 'js', 'villager-brain.js'), 'utf8');
 const winplanJs = fs.readFileSync(path.join(REPO, 'src', 'js', 'win-plan.js'), 'utf8');
 const agencyJs = fs.readFileSync(path.join(REPO, 'src', 'js', 'villager-agency.js'), 'utf8');
 const GATED = "if (!profilegateOn() && prof !== 'wanderer' && prof !== 'explorer') continue;";
-check('brain twin carries the gated profile check', brainJs.indexOf(GATED) !== -1);
-check('win-plan twin carries the gated profile check', winplanJs.indexOf(GATED) !== -1);
-check('no unguarded profile check remains in either twin',
-  brainJs.indexOf("if (prof !== 'wanderer' && prof !== 'explorer') continue;") === -1 &&
-  winplanJs.indexOf("if (prof !== 'wanderer' && prof !== 'explorer') continue;") === -1);
-check('profilegateOn() helper defined in both twins (VETSHAPE pattern, default OFF)',
-  brainJs.indexOf("function profilegateOn()") !== -1 && winplanJs.indexOf("function profilegateOn()") !== -1 &&
-  brainJs.indexOf("process.env.PROFILEGATE === '1'") !== -1 && winplanJs.indexOf("process.env.PROFILEGATE === '1'") !== -1);
+check('brain twin does NOT carry the gated profile check (lever reverted)', brainJs.indexOf(GATED) === -1);
+check('win-plan twin does NOT carry the gated profile check (lever reverted)', winplanJs.indexOf(GATED) === -1);
+check('unguarded profile check PRESENT in both twins (master behavior restored)',
+  brainJs.indexOf("if (prof !== 'wanderer' && prof !== 'explorer') continue;") !== -1 &&
+  winplanJs.indexOf("if (prof !== 'wanderer' && prof !== 'explorer') continue;") !== -1);
+check('no profilegateOn() helper remains in either twin (lever reverted)',
+  brainJs.indexOf("function profilegateOn()") === -1 && winplanJs.indexOf("function profilegateOn()") === -1 &&
+  brainJs.indexOf("process.env.PROFILEGATE") === -1 && winplanJs.indexOf("process.env.PROFILEGATE") === -1);
 check('depart bypass landed in villager-agency.js and untouched by this arm',
   agencyJs.indexOf('PROFILEGATE (sim-profilegate-a)') !== -1 &&
   (BASE ? gitDiffNames(BASE, 'src/js/villager-agency.js').length === 0 : false),
@@ -435,9 +445,11 @@ async function gateLive() {
     !bidOff.error && bidOff.launchCompanion == null && bidOff.hasWait === true,
     JSON.stringify(bidOff));
   const bidOn = childGateFixture('1', 'bid');
-  check('gate bid ON: party_launch candidate exists with a forager/homebody companion',
-    !bidOn.error && bidOn.launchCompanion != null &&
-    (bidOn.launchCompanionProfile === 'forager' || bidOn.launchCompanionProfile === 'homebody'),
+  // REVERTED (NO-GO): the flag is inert — ON behaves exactly like OFF
+  // (no launch candidate, party_wait instead). The gate-act behavior was
+  // proven on the frozen base (50/50) and is recorded in the evidence.
+  check('gate bid ON (reverted): same as OFF — no party_launch candidate when only foragers/homebodies are eligible (party_wait instead)',
+    !bidOn.error && bidOn.launchCompanion == null && bidOn.hasWait === true,
     JSON.stringify(bidOn));
   const depHome = childGateFixture('1', 'depart-homebody');
   check('gate depart-homebody ON: holder leaves, homebody companion does NOT (range-0, startExpedition no-op)',
@@ -472,7 +484,7 @@ async function liveRuns() {
   return out;
 }
 
-// ---------- 5. Determinism legs D1/D2 + gate-act (60d/150d, VETREENGAGE=1) ----------
+// ---------- 5. Determinism legs D1/D2 + flag-inert (60d, VETREENGAGE=1) ----------
 function childRun(days, seed, envExtra) {
   const env = Object.assign({}, process.env, { DAYS: String(days), VETREENGAGE: '1' }, envExtra || {});
   for (const k of Object.keys(env)) if (env[k] === undefined) delete env[k];
@@ -493,11 +505,13 @@ function poolShapeOf(full) {
     meanEligible: rows.length ? elig / rows.length : null };
 }
 async function determinism() {
-  console.log('== determinism legs D1/D2 + gate-act ==');
+  console.log('== determinism legs D1/D2 + flag-inert ==');
   // D1/D2 in each PROFILEGATE state (60d, seed 103411).
+  const fpByState = {};
   for (const pg of ['0', '1']) {
     const a = childRun(60, 103411, { MODE: 'on', PROFILEGATE: pg });
     const b = childRun(60, 103411, { MODE: 'on', PROFILEGATE: pg });
+    fpByState[pg] = a.fp;
     check('D1 repeatability PROFILEGATE=' + pg + ': identical full corpus, recorder ON twice (60d)',
       JSON.stringify(a.full) === JSON.stringify(b.full));
     const off = childRun(60, 103411, { MODE: 'on', PROFILEGATE: pg, PROFILEGATE_RECORDER: 'off' });
@@ -510,15 +524,17 @@ async function determinism() {
       (off.full.v4encounters || []).length === 0 && (off.full.launchdefSkips || []).length === 0);
     check('D2 recorder-off run PROFILEGATE=' + pg + ' has 0 instrument errors', (off.full.instrumentErrors || []).length === 0);
   }
-  // Gate-act: 150d on seed 103413 (Devon's seed, 25 pool rows OFF) — the
-  // ON leg's pool must fill where the OFF leg's is empty.
-  const gateOff = childRun(150, 103413, { MODE: 'off', PROFILEGATE: '0' });
-  const gateOn = childRun(150, 103413, { MODE: 'on', PROFILEGATE: '1' });
-  const psOff = poolShapeOf(gateOff.full), psOn = poolShapeOf(gateOn.full);
-  console.log('  info: gate-act 150d seed 103413 pool OFF=' + JSON.stringify(psOff) + ' ON=' + JSON.stringify(psOn));
-  check('gate-act: ON pool fills vs OFF on identical seed 103413 (emptyShare down, meanEligible up)',
-    psOff.dawns > 0 && psOn.dawns > 0 && psOn.emptyShare < psOff.emptyShare && psOn.meanEligible > psOff.meanEligible,
-    'OFF=' + JSON.stringify(psOff) + ' ON=' + JSON.stringify(psOn));
+  // Flag-inert (reverted lever): the GAME trajectory must not depend on
+  // PROFILEGATE. The fingerprint excludes recorder arrays (the driver's
+  // flag-aware pool replica still scores pools per state — instrument
+  // behavior, not game behavior), so fp equality is the game-level proof.
+  check('flag-inert: PROFILEGATE=1 vs 0 identical game trajectories (60d, seed 103411)',
+    JSON.stringify(fpByState['0']) === JSON.stringify(fpByState['1']),
+    'fp0=' + JSON.stringify(fpByState['0']).slice(0, 200) + ' fp1=' + JSON.stringify(fpByState['1']).slice(0, 200));
+  // Gate-act RETIRED (see header): the 150d seed-103413 check exercised
+  // the lever, which is gone by disposition, and its fixture seed plants
+  // no plans on the rebased base. Do not re-add a 150d gate-act check
+  // without a live fixture seed on the current base.
 }
 
 async function main() {
