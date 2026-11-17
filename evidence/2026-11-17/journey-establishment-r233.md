@@ -352,10 +352,10 @@ base condition:
 - No src/js change this run — the blank is documented (F1 exile
   shape + d7-warning probe, F4 policy foraging question, F5
   want-raise spread), the watch is recorded (F2), the attribution
-  is closed (F3). Commits: prereg/driver/analyzer `ebc6c63fe`;
-  instruments `53b13e7f3`; evidence [PENDING — filled at closeout].
+  is closed (F3). Commits: prereg/driver/analyzer `2cf278fe3`;
+  instruments `fde3ad7dc`; evidence `1cfbdd894` (rebased tips).
 - Master moved during the run (winnability-round-2030 evidence
-  `392ec63d4`, no src/js); rebased clean onto it (no overlap),
+  `392ec63d4`, no src/js); rebased clean onto it (3/3, no overlap),
   proof tests re-run green on the rebased tip (19+13+18+10+35+7).
 - **Merged locally, pending ship** — no bump, no push, no live
   verification (ship loop owns those).
