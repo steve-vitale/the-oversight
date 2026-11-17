@@ -2307,6 +2307,13 @@ async function runSeed(seed, days) {
     inviteClass: announceDay != null ? 'announced' : (withdrawal ? 'withdrawal' : (Game.over && Game.villageLost ? 'village-lost' : 'silent')),
     deathRecords, deathWrapErrors,
     blockedArrivals: blockedArrivalsOf(),
+    // r233 COMPANIONGUARD WATCH (prereg Q7, probe-side only, zero src/js):
+    // read-only end-of-run sample of the shipped guard's village
+    // counters (villager-agency.js: companionGuardSkips mirrors
+    // medicDutyBlocked). Sampled at summary time, after the run ends —
+    // a pure read, zero trajectory effect; a re-run of pass A with
+    // this instrument must reproduce the pass-A trajectories exactly.
+    companionGuard: (function () { try { const vv = ((Game.state || {}).village || {}); return { skips: vv.companionGuardSkips | 0, medicDutyBlocked: vv.medicDutyBlocked | 0 }; } catch (e) { return { error: String(e && e.message) }; } })(),
   };
   if (process.env.DET !== '1' && process.env.FID !== '1') {
     try { fs.mkdirSync(EVID, { recursive: true }); } catch (e) {}
