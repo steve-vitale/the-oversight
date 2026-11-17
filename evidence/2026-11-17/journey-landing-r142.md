@@ -278,6 +278,17 @@ Better than r141 by 2 files: `test-trust-observer-neutrality.js` and
 `test-measurement-cache-flags.js`, both failing on r141 (timeout and
 load/EPERM-flap respectively), pass inside this gate.
 
+Re-run on the rebased tip (master had moved to 2a49a1e82 while this
+run was in flight; branch rebased, no src/js change underneath):
+`node scripts/check.js --quick`, log
+`journey-landing-r142-gate-rebased.log`: **336 passed, 4 failed in
+653s**. The measurement-proof staleness pair now PASSES (the sibling
+balance-proof.json refresh fixed it). Remaining 4 are the phone-frame
+staleness (3 fails, standing), the ladder-bundle control fail
+(standing), and the same two 120s load timeouts (living-garden,
+one-person-army — both already verified 8/8 and 7/7 standalone).
+0 attributable on the rebased tip as well.
+
 ## Metric review (proposals for r143, nothing binds this run)
 
 1. **Pocket bar — bind the shape, watch the turns.** r142 misses the
