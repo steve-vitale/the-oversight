@@ -363,6 +363,42 @@ lever).
   same counter) is deferred as follow-up; the L6 agreement leg checks
   analyzer agreement instead.
 
+## Adoption addendum (2026-11-17, fleshout-20261117T1015Z, worker sim-sametick-a)
+
+ADOPTION FINDING — L6 FAILED on first run (5 PASS, 1 FAIL): L6 agreement
+leg, s96301 medicduty curedEpisodes 9 vs feveranat cured-episodes 17.
+Root cause (in analyze-medicduty-a.js, this arm's own synthesis code):
+the synthesized 0-day episode omitted onsetDay/endDay, so the defensive
+'explained' check read its window as (-1, +inf) and swallowed every
+REPEAT same-tick cure of the same patient+disease on a later day as
+"explained" by the first synthesis. On s96301: 9 distinct
+patient+disease pairs, 17 events — 8 repeats lost. Feveranat's synthesis
+was immune because it sets onsetDay=endDay=cure day. Fix (sametick-owned,
+same file): synthesized episode now carries onsetDay: dc.day,
+endDay: dc.day, pinning it to its own day. Re-verified in-process on all
+8 seeds: medicduty == feveranat per seed (17/0/7/1/0/0/18/0, band 43);
+test-feveranat-a.js 11/11; full test-sametick-a.js re-run (L1–L6) below.
+Secondary (analyzer agreement) bar: MET after this fix.
+
+## Adoption re-run results (2026-11-17)
+
+- scripts/test-sametick-a.js: 6/6 PASS (L1–L6; L4 live 96301/150d:
+  17/17 dutyCure events, daysAlive 143; L5 corpus 43/43; L6 agreement
+  43 both analyzers, sameTick/unrecorded 0).
+- scripts/test-feveranat-a.js: 11/11 PASS. scripts/test-medicduty-a.js:
+  13/13 PASS (no regression from the episodesOf onsetDay/endDay fix).
+- Independent analyzer re-runs on the adoption tree match the frozen
+  evidence exactly: new corpus 43/43 capture, G2 PASS, G3 FAIL (same
+  pre-existing scholar radiation_sickness onset gap); old medicduty
+  corpus still 3 cured-episodes / 0 dutyCure events, medicduty VERDICT GO.
+- Verdict vs frozen bars: PRIMARY GO (43/43 ≥ 42), NEUTRALITY GO (G2
+  PASS all 8 seeds), SECONDARY GO (analyzer agreement 43/43 after the
+  adoption fix). G3 FAIL stands as documented, pre-existing, out of scope.
+- Canon note: no canon doc covers the recorder instrument itself;
+  DISEASES.md covers the disease names/vectors the synthesis relies on
+  (wound fever / gut rot / tick fever as tick-loop creations); the fix
+  invents no canon.
+
 ## Convergence state
 
 - Axis food-economy, blank #3 (same-tick recorder gap): FIXED PROSPECTIVELY
