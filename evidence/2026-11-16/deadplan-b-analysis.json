@@ -1,0 +1,3855 @@
+{
+  "arm": "deadplan-b",
+  "verdict": "COSTLY",
+  "bars": {
+    "bar1_corpusValid": true,
+    "bar3_classified": true,
+    "bar3counts": "COSTLY with 0 pool touches + 6 slot instances enumerated",
+    "bar4_wallReported": true
+  },
+  "staticReaderCheck": {
+    "filesWithWinPlan": [
+      "game.js",
+      "villager-agency.js",
+      "villager-brain.js",
+      "win-plan.js"
+    ],
+    "standingTableClean": true,
+    "problems": []
+  },
+  "on": {
+    "leg": {
+      "perSeed": [
+        {
+          "seed": 103221,
+          "mode": "on",
+          "recorderOn": true,
+          "anchorCommit": "0966de2735a9c05dbb1959d2b074d65f178c192a",
+          "policySha": "df9b7dff4de4",
+          "gameDays": 151,
+          "endReason": "survived",
+          "won": false,
+          "standing": 199,
+          "scaleRank": "regional",
+          "maxWave": 4,
+          "unlockedWave": 4,
+          "nationalByStanding": false,
+          "nationalByScaleRank": false,
+          "wave4Kills": 2,
+          "wave5Kills": 0,
+          "deaths": 87,
+          "instrumentErrors": 0,
+          "validity": {
+            "badSeed": null,
+            "badCreate": null,
+            "badTouch": null,
+            "unknownErrors": 0
+          },
+          "linger": {
+            "censusTotal": 310,
+            "censusDead": 87,
+            "share": 0.2806,
+            "buckets": {
+              "0-30": {
+                "total": 0,
+                "dead": 0
+              },
+              "31-60": {
+                "total": 40,
+                "dead": 0
+              },
+              "61-90": {
+                "total": 82,
+                "dead": 0
+              },
+              "91-120": {
+                "total": 90,
+                "dead": 14
+              },
+              "121-150": {
+                "total": 98,
+                "dead": 73
+              }
+            },
+            "tails": [
+              {
+                "vid": "gen_v8mtb82",
+                "deadRows": 44,
+                "firstDeadDay": 107,
+                "lastDay": 150,
+                "spanDays": 43,
+                "stage": "hunt",
+                "target": null
+              },
+              {
+                "vid": "mia_andersson",
+                "deadRows": 28,
+                "firstDeadDay": 123,
+                "lastDay": 150,
+                "spanDays": 27,
+                "stage": "party",
+                "target": "buffering"
+              },
+              {
+                "vid": "zoe_adams",
+                "deadRows": 15,
+                "firstDeadDay": 136,
+                "lastDay": 150,
+                "spanDays": 14,
+                "stage": "party",
+                "target": "spool"
+              }
+            ],
+            "longTails": 1,
+            "longestSpan": 43,
+            "distinctDeadHolders": 3
+          },
+          "pool": {
+            "b0_dawnScoredDeadN": 0,
+            "b0_dawnScoredDead": [],
+            "b1_dawnbidScoresDeadN": 0,
+            "b1_dawnbidScoresDead": [],
+            "b2_rankedPickDeadN": 0,
+            "b2_rankedPickDead": [],
+            "b3_departsDeadN": 0,
+            "b3_departsDead": [],
+            "b4_touchesDeadByMethod": {
+              "winPlanOf": [],
+              "winPlanHavenTick": [],
+              "winPlanDepart": [],
+              "winPlanSeedFromFight": [],
+              "winPlanNoteFight": [],
+              "winPlanNoteKill": [],
+              "winPlanFightGate": [],
+              "winPlanSecondCompanion": [],
+              "winPlanBondsTick": [],
+              "winPlanMusterTick": [],
+              "vbrainExecuteDepart": []
+            },
+            "b4_touchesDeadTotal": 0,
+            "touchesByMethod": {
+              "winPlanOf": 33,
+              "winPlanHavenTick": 111,
+              "winPlanDepart": 0,
+              "winPlanSeedFromFight": 53,
+              "winPlanNoteFight": 79,
+              "winPlanNoteKill": 25,
+              "winPlanFightGate": 84,
+              "winPlanSecondCompanion": 0,
+              "winPlanBondsTick": 600,
+              "winPlanMusterTick": 600,
+              "vbrainExecuteDepart": 111
+            },
+            "b5_secondPickDeadN": 0,
+            "b5_secondPickDead": [],
+            "b6_winPlanOfDeadN": 0,
+            "b6_winPlanOfDead": [],
+            "winPlanOfCreatedDeadN": 0,
+            "winPlanOfCreatedDead": [],
+            "createsDeadN": 0,
+            "createsDead": []
+          },
+          "slot": {
+            "holders": [],
+            "holderDays": 0,
+            "launchesWithDeadParty": [],
+            "winPlanOfCreatedDead": [],
+            "unknownPartyRefs": 0,
+            "deathDayUnknown": []
+          },
+          "deadHolderLivePartyRefs": 16,
+          "deadHolderLivePartyExamples": [
+            {
+              "day": 107,
+              "holder": "gen_v8mtb82",
+              "partyVid": "mia_andersson"
+            },
+            {
+              "day": 108,
+              "holder": "gen_v8mtb82",
+              "partyVid": "mia_andersson"
+            },
+            {
+              "day": 109,
+              "holder": "gen_v8mtb82",
+              "partyVid": "mia_andersson"
+            },
+            {
+              "day": 110,
+              "holder": "gen_v8mtb82",
+              "partyVid": "mia_andersson"
+            },
+            {
+              "day": 111,
+              "holder": "gen_v8mtb82",
+              "partyVid": "mia_andersson"
+            }
+          ],
+          "censusNoise": {
+            "daysWithCensus": 110,
+            "meanInflation": 1.563,
+            "maxInflation": "all-dead-day",
+            "finalDay": 150,
+            "finalDayIncl": 4,
+            "finalDayExcl": 1,
+            "perDay": {
+              "41": {
+                "incl": 2,
+                "excl": 2
+              },
+              "42": {
+                "incl": 2,
+                "excl": 2
+              },
+              "43": {
+                "incl": 2,
+                "excl": 2
+              },
+              "44": {
+                "incl": 2,
+                "excl": 2
+              },
+              "45": {
+                "incl": 2,
+                "excl": 2
+              },
+              "46": {
+                "incl": 2,
+                "excl": 2
+              },
+              "47": {
+                "incl": 2,
+                "excl": 2
+              },
+              "48": {
+                "incl": 2,
+                "excl": 2
+              },
+              "49": {
+                "incl": 2,
+                "excl": 2
+              },
+              "50": {
+                "incl": 2,
+                "excl": 2
+              },
+              "51": {
+                "incl": 2,
+                "excl": 2
+              },
+              "52": {
+                "incl": 2,
+                "excl": 2
+              },
+              "53": {
+                "incl": 2,
+                "excl": 2
+              },
+              "54": {
+                "incl": 2,
+                "excl": 2
+              },
+              "55": {
+                "incl": 2,
+                "excl": 2
+              },
+              "56": {
+                "incl": 2,
+                "excl": 2
+              },
+              "57": {
+                "incl": 2,
+                "excl": 2
+              },
+              "58": {
+                "incl": 2,
+                "excl": 2
+              },
+              "59": {
+                "incl": 2,
+                "excl": 2
+              },
+              "60": {
+                "incl": 2,
+                "excl": 2
+              },
+              "61": {
+                "incl": 2,
+                "excl": 2
+              },
+              "62": {
+                "incl": 2,
+                "excl": 2
+              },
+              "63": {
+                "incl": 2,
+                "excl": 2
+              },
+              "64": {
+                "incl": 2,
+                "excl": 2
+              },
+              "65": {
+                "incl": 2,
+                "excl": 2
+              },
+              "66": {
+                "incl": 2,
+                "excl": 2
+              },
+              "67": {
+                "incl": 2,
+                "excl": 2
+              },
+              "68": {
+                "incl": 2,
+                "excl": 2
+              },
+              "69": {
+                "incl": 3,
+                "excl": 3
+              },
+              "70": {
+                "incl": 3,
+                "excl": 3
+              },
+              "71": {
+                "incl": 3,
+                "excl": 3
+              },
+              "72": {
+                "incl": 3,
+                "excl": 3
+              },
+              "73": {
+                "incl": 3,
+                "excl": 3
+              },
+              "74": {
+                "incl": 3,
+                "excl": 3
+              },
+              "75": {
+                "incl": 3,
+                "excl": 3
+              },
+              "76": {
+                "incl": 3,
+                "excl": 3
+              },
+              "77": {
+                "incl": 3,
+                "excl": 3
+              },
+              "78": {
+                "incl": 3,
+                "excl": 3
+              },
+              "79": {
+                "incl": 3,
+                "excl": 3
+              },
+              "80": {
+                "incl": 3,
+                "excl": 3
+              },
+              "81": {
+                "incl": 3,
+                "excl": 3
+              },
+              "82": {
+                "incl": 3,
+                "excl": 3
+              },
+              "83": {
+                "incl": 3,
+                "excl": 3
+              },
+              "84": {
+                "incl": 3,
+                "excl": 3
+              },
+              "85": {
+                "incl": 3,
+                "excl": 3
+              },
+              "86": {
+                "incl": 3,
+                "excl": 3
+              },
+              "87": {
+                "incl": 3,
+                "excl": 3
+              },
+              "88": {
+                "incl": 3,
+                "excl": 3
+              },
+              "89": {
+                "incl": 3,
+                "excl": 3
+              },
+              "90": {
+                "incl": 3,
+                "excl": 3
+              },
+              "91": {
+                "incl": 3,
+                "excl": 3
+              },
+              "92": {
+                "incl": 3,
+                "excl": 3
+              },
+              "93": {
+                "incl": 3,
+                "excl": 3
+              },
+              "94": {
+                "incl": 3,
+                "excl": 3
+              },
+              "95": {
+                "incl": 3,
+                "excl": 3
+              },
+              "96": {
+                "incl": 3,
+                "excl": 3
+              },
+              "97": {
+                "incl": 3,
+                "excl": 3
+              },
+              "98": {
+                "incl": 3,
+                "excl": 3
+              },
+              "99": {
+                "incl": 3,
+                "excl": 3
+              },
+              "100": {
+                "incl": 3,
+                "excl": 3
+              },
+              "101": {
+                "incl": 3,
+                "excl": 3
+              },
+              "102": {
+                "incl": 3,
+                "excl": 3
+              },
+              "103": {
+                "incl": 3,
+                "excl": 3
+              },
+              "104": {
+                "incl": 3,
+                "excl": 3
+              },
+              "105": {
+                "incl": 3,
+                "excl": 3
+              },
+              "106": {
+                "incl": 3,
+                "excl": 3
+              },
+              "107": {
+                "incl": 3,
+                "excl": 2
+              },
+              "108": {
+                "incl": 3,
+                "excl": 2
+              },
+              "109": {
+                "incl": 3,
+                "excl": 2
+              },
+              "110": {
+                "incl": 3,
+                "excl": 2
+              },
+              "111": {
+                "incl": 3,
+                "excl": 2
+              },
+              "112": {
+                "incl": 3,
+                "excl": 2
+              },
+              "113": {
+                "incl": 3,
+                "excl": 2
+              },
+              "114": {
+                "incl": 3,
+                "excl": 2
+              },
+              "115": {
+                "incl": 3,
+                "excl": 2
+              },
+              "116": {
+                "incl": 3,
+                "excl": 2
+              },
+              "117": {
+                "incl": 3,
+                "excl": 2
+              },
+              "118": {
+                "incl": 3,
+                "excl": 2
+              },
+              "119": {
+                "incl": 3,
+                "excl": 2
+              },
+              "120": {
+                "incl": 3,
+                "excl": 2
+              },
+              "121": {
+                "incl": 3,
+                "excl": 2
+              },
+              "122": {
+                "incl": 3,
+                "excl": 2
+              },
+              "123": {
+                "incl": 3,
+                "excl": 1
+              },
+              "124": {
+                "incl": 3,
+                "excl": 1
+              },
+              "125": {
+                "incl": 3,
+                "excl": 1
+              },
+              "126": {
+                "incl": 3,
+                "excl": 1
+              },
+              "127": {
+                "incl": 3,
+                "excl": 1
+              },
+              "128": {
+                "incl": 3,
+                "excl": 1
+              },
+              "129": {
+                "incl": 3,
+                "excl": 1
+              },
+              "130": {
+                "incl": 3,
+                "excl": 1
+              },
+              "131": {
+                "incl": 3,
+                "excl": 1
+              },
+              "132": {
+                "incl": 3,
+                "excl": 1
+              },
+              "133": {
+                "incl": 3,
+                "excl": 1
+              },
+              "134": {
+                "incl": 3,
+                "excl": 1
+              },
+              "135": {
+                "incl": 3,
+                "excl": 1
+              },
+              "136": {
+                "incl": 3,
+                "excl": 0
+              },
+              "137": {
+                "incl": 3,
+                "excl": 0
+              },
+              "138": {
+                "incl": 3,
+                "excl": 0
+              },
+              "139": {
+                "incl": 3,
+                "excl": 0
+              },
+              "140": {
+                "incl": 3,
+                "excl": 0
+              },
+              "141": {
+                "incl": 3,
+                "excl": 0
+              },
+              "142": {
+                "incl": 3,
+                "excl": 0
+              },
+              "143": {
+                "incl": 4,
+                "excl": 1
+              },
+              "144": {
+                "incl": 4,
+                "excl": 1
+              },
+              "145": {
+                "incl": 4,
+                "excl": 1
+              },
+              "146": {
+                "incl": 4,
+                "excl": 1
+              },
+              "147": {
+                "incl": 4,
+                "excl": 1
+              },
+              "148": {
+                "incl": 4,
+                "excl": 1
+              },
+              "149": {
+                "incl": 4,
+                "excl": 1
+              },
+              "150": {
+                "incl": 4,
+                "excl": 1
+              }
+            }
+          }
+        },
+        {
+          "seed": 103222,
+          "mode": "on",
+          "recorderOn": true,
+          "anchorCommit": "0966de2735a9c05dbb1959d2b074d65f178c192a",
+          "policySha": "df9b7dff4de4",
+          "gameDays": 146,
+          "endReason": "village-lost",
+          "won": false,
+          "standing": 199,
+          "scaleRank": "regional",
+          "maxWave": 4,
+          "unlockedWave": 4,
+          "nationalByStanding": false,
+          "nationalByScaleRank": false,
+          "wave4Kills": 7,
+          "wave5Kills": 0,
+          "deaths": 98,
+          "instrumentErrors": 0,
+          "validity": {
+            "badSeed": null,
+            "badCreate": null,
+            "badTouch": null,
+            "unknownErrors": 0
+          },
+          "linger": {
+            "censusTotal": 405,
+            "censusDead": 287,
+            "share": 0.7086,
+            "buckets": {
+              "0-30": {
+                "total": 0,
+                "dead": 0
+              },
+              "31-60": {
+                "total": 43,
+                "dead": 0
+              },
+              "61-90": {
+                "total": 120,
+                "dead": 63
+              },
+              "91-120": {
+                "total": 120,
+                "dead": 120
+              },
+              "121-150": {
+                "total": 122,
+                "dead": 104
+              }
+            },
+            "tails": [
+              {
+                "vid": "gen_a9px8wb",
+                "deadRows": 78,
+                "firstDeadDay": 69,
+                "lastDay": 146,
+                "spanDays": 77,
+                "stage": "standing",
+                "target": "focus_group"
+              },
+              {
+                "vid": "gen_cjbntxh",
+                "deadRows": 73,
+                "firstDeadDay": 74,
+                "lastDay": 146,
+                "spanDays": 72,
+                "stage": "party",
+                "target": null
+              },
+              {
+                "vid": "diana_osei",
+                "deadRows": 69,
+                "firstDeadDay": 78,
+                "lastDay": 146,
+                "spanDays": 68,
+                "stage": "party",
+                "target": null
+              },
+              {
+                "vid": "desmond_clarke",
+                "deadRows": 67,
+                "firstDeadDay": 80,
+                "lastDay": 146,
+                "spanDays": 66,
+                "stage": "party",
+                "target": null
+              }
+            ],
+            "longTails": 4,
+            "longestSpan": 77,
+            "distinctDeadHolders": 4
+          },
+          "pool": {
+            "b0_dawnScoredDeadN": 0,
+            "b0_dawnScoredDead": [],
+            "b1_dawnbidScoresDeadN": 0,
+            "b1_dawnbidScoresDead": [],
+            "b2_rankedPickDeadN": 0,
+            "b2_rankedPickDead": [],
+            "b3_departsDeadN": 0,
+            "b3_departsDead": [],
+            "b4_touchesDeadByMethod": {
+              "winPlanOf": [],
+              "winPlanHavenTick": [],
+              "winPlanDepart": [],
+              "winPlanSeedFromFight": [],
+              "winPlanNoteFight": [],
+              "winPlanNoteKill": [],
+              "winPlanFightGate": [],
+              "winPlanSecondCompanion": [],
+              "winPlanBondsTick": [],
+              "winPlanMusterTick": [],
+              "vbrainExecuteDepart": []
+            },
+            "b4_touchesDeadTotal": 0,
+            "touchesByMethod": {
+              "winPlanOf": 33,
+              "winPlanHavenTick": 165,
+              "winPlanDepart": 0,
+              "winPlanSeedFromFight": 37,
+              "winPlanNoteFight": 66,
+              "winPlanNoteKill": 27,
+              "winPlanFightGate": 74,
+              "winPlanSecondCompanion": 0,
+              "winPlanBondsTick": 584,
+              "winPlanMusterTick": 584,
+              "vbrainExecuteDepart": 165
+            },
+            "b5_secondPickDeadN": 0,
+            "b5_secondPickDead": [],
+            "b6_winPlanOfDeadN": 0,
+            "b6_winPlanOfDead": [],
+            "winPlanOfCreatedDeadN": 0,
+            "winPlanOfCreatedDead": [],
+            "createsDeadN": 0,
+            "createsDead": []
+          },
+          "slot": {
+            "holders": [],
+            "holderDays": 0,
+            "launchesWithDeadParty": [],
+            "winPlanOfCreatedDead": [],
+            "unknownPartyRefs": 0,
+            "deathDayUnknown": []
+          },
+          "deadHolderLivePartyRefs": 11,
+          "deadHolderLivePartyExamples": [
+            {
+              "day": 69,
+              "holder": "gen_a9px8wb",
+              "partyVid": "desmond_clarke"
+            },
+            {
+              "day": 70,
+              "holder": "gen_a9px8wb",
+              "partyVid": "desmond_clarke"
+            },
+            {
+              "day": 71,
+              "holder": "gen_a9px8wb",
+              "partyVid": "desmond_clarke"
+            },
+            {
+              "day": 72,
+              "holder": "gen_a9px8wb",
+              "partyVid": "desmond_clarke"
+            },
+            {
+              "day": 73,
+              "holder": "gen_a9px8wb",
+              "partyVid": "desmond_clarke"
+            }
+          ],
+          "censusNoise": {
+            "daysWithCensus": 97,
+            "meanInflation": 2.743,
+            "maxInflation": "all-dead-day",
+            "finalDay": 146,
+            "finalDayIncl": 5,
+            "finalDayExcl": 1,
+            "perDay": {
+              "50": {
+                "incl": 3,
+                "excl": 3
+              },
+              "51": {
+                "incl": 4,
+                "excl": 4
+              },
+              "52": {
+                "incl": 4,
+                "excl": 4
+              },
+              "53": {
+                "incl": 4,
+                "excl": 4
+              },
+              "54": {
+                "incl": 4,
+                "excl": 4
+              },
+              "55": {
+                "incl": 4,
+                "excl": 4
+              },
+              "56": {
+                "incl": 4,
+                "excl": 4
+              },
+              "57": {
+                "incl": 4,
+                "excl": 4
+              },
+              "58": {
+                "incl": 4,
+                "excl": 4
+              },
+              "59": {
+                "incl": 4,
+                "excl": 4
+              },
+              "60": {
+                "incl": 4,
+                "excl": 4
+              },
+              "61": {
+                "incl": 4,
+                "excl": 4
+              },
+              "62": {
+                "incl": 4,
+                "excl": 4
+              },
+              "63": {
+                "incl": 4,
+                "excl": 4
+              },
+              "64": {
+                "incl": 4,
+                "excl": 4
+              },
+              "65": {
+                "incl": 4,
+                "excl": 4
+              },
+              "66": {
+                "incl": 4,
+                "excl": 4
+              },
+              "67": {
+                "incl": 4,
+                "excl": 4
+              },
+              "68": {
+                "incl": 4,
+                "excl": 4
+              },
+              "69": {
+                "incl": 4,
+                "excl": 3
+              },
+              "70": {
+                "incl": 4,
+                "excl": 3
+              },
+              "71": {
+                "incl": 4,
+                "excl": 3
+              },
+              "72": {
+                "incl": 4,
+                "excl": 3
+              },
+              "73": {
+                "incl": 4,
+                "excl": 3
+              },
+              "74": {
+                "incl": 4,
+                "excl": 2
+              },
+              "75": {
+                "incl": 4,
+                "excl": 2
+              },
+              "76": {
+                "incl": 4,
+                "excl": 2
+              },
+              "77": {
+                "incl": 4,
+                "excl": 2
+              },
+              "78": {
+                "incl": 4,
+                "excl": 1
+              },
+              "79": {
+                "incl": 4,
+                "excl": 1
+              },
+              "80": {
+                "incl": 4,
+                "excl": 0
+              },
+              "81": {
+                "incl": 4,
+                "excl": 0
+              },
+              "82": {
+                "incl": 4,
+                "excl": 0
+              },
+              "83": {
+                "incl": 4,
+                "excl": 0
+              },
+              "84": {
+                "incl": 4,
+                "excl": 0
+              },
+              "85": {
+                "incl": 4,
+                "excl": 0
+              },
+              "86": {
+                "incl": 4,
+                "excl": 0
+              },
+              "87": {
+                "incl": 4,
+                "excl": 0
+              },
+              "88": {
+                "incl": 4,
+                "excl": 0
+              },
+              "89": {
+                "incl": 4,
+                "excl": 0
+              },
+              "90": {
+                "incl": 4,
+                "excl": 0
+              },
+              "91": {
+                "incl": 4,
+                "excl": 0
+              },
+              "92": {
+                "incl": 4,
+                "excl": 0
+              },
+              "93": {
+                "incl": 4,
+                "excl": 0
+              },
+              "94": {
+                "incl": 4,
+                "excl": 0
+              },
+              "95": {
+                "incl": 4,
+                "excl": 0
+              },
+              "96": {
+                "incl": 4,
+                "excl": 0
+              },
+              "97": {
+                "incl": 4,
+                "excl": 0
+              },
+              "98": {
+                "incl": 4,
+                "excl": 0
+              },
+              "99": {
+                "incl": 4,
+                "excl": 0
+              },
+              "100": {
+                "incl": 4,
+                "excl": 0
+              },
+              "101": {
+                "incl": 4,
+                "excl": 0
+              },
+              "102": {
+                "incl": 4,
+                "excl": 0
+              },
+              "103": {
+                "incl": 4,
+                "excl": 0
+              },
+              "104": {
+                "incl": 4,
+                "excl": 0
+              },
+              "105": {
+                "incl": 4,
+                "excl": 0
+              },
+              "106": {
+                "incl": 4,
+                "excl": 0
+              },
+              "107": {
+                "incl": 4,
+                "excl": 0
+              },
+              "108": {
+                "incl": 4,
+                "excl": 0
+              },
+              "109": {
+                "incl": 4,
+                "excl": 0
+              },
+              "110": {
+                "incl": 4,
+                "excl": 0
+              },
+              "111": {
+                "incl": 4,
+                "excl": 0
+              },
+              "112": {
+                "incl": 4,
+                "excl": 0
+              },
+              "113": {
+                "incl": 4,
+                "excl": 0
+              },
+              "114": {
+                "incl": 4,
+                "excl": 0
+              },
+              "115": {
+                "incl": 4,
+                "excl": 0
+              },
+              "116": {
+                "incl": 4,
+                "excl": 0
+              },
+              "117": {
+                "incl": 4,
+                "excl": 0
+              },
+              "118": {
+                "incl": 4,
+                "excl": 0
+              },
+              "119": {
+                "incl": 4,
+                "excl": 0
+              },
+              "120": {
+                "incl": 4,
+                "excl": 0
+              },
+              "121": {
+                "incl": 4,
+                "excl": 0
+              },
+              "122": {
+                "incl": 4,
+                "excl": 0
+              },
+              "123": {
+                "incl": 4,
+                "excl": 0
+              },
+              "124": {
+                "incl": 4,
+                "excl": 0
+              },
+              "125": {
+                "incl": 4,
+                "excl": 0
+              },
+              "126": {
+                "incl": 4,
+                "excl": 0
+              },
+              "127": {
+                "incl": 4,
+                "excl": 0
+              },
+              "128": {
+                "incl": 4,
+                "excl": 0
+              },
+              "129": {
+                "incl": 5,
+                "excl": 1
+              },
+              "130": {
+                "incl": 5,
+                "excl": 1
+              },
+              "131": {
+                "incl": 5,
+                "excl": 1
+              },
+              "132": {
+                "incl": 5,
+                "excl": 1
+              },
+              "133": {
+                "incl": 5,
+                "excl": 1
+              },
+              "134": {
+                "incl": 5,
+                "excl": 1
+              },
+              "135": {
+                "incl": 5,
+                "excl": 1
+              },
+              "136": {
+                "incl": 5,
+                "excl": 1
+              },
+              "137": {
+                "incl": 5,
+                "excl": 1
+              },
+              "138": {
+                "incl": 5,
+                "excl": 1
+              },
+              "139": {
+                "incl": 5,
+                "excl": 1
+              },
+              "140": {
+                "incl": 5,
+                "excl": 1
+              },
+              "141": {
+                "incl": 5,
+                "excl": 1
+              },
+              "142": {
+                "incl": 5,
+                "excl": 1
+              },
+              "143": {
+                "incl": 5,
+                "excl": 1
+              },
+              "144": {
+                "incl": 5,
+                "excl": 1
+              },
+              "145": {
+                "incl": 5,
+                "excl": 1
+              },
+              "146": {
+                "incl": 5,
+                "excl": 1
+              }
+            }
+          }
+        },
+        {
+          "seed": 103223,
+          "mode": "on",
+          "recorderOn": true,
+          "anchorCommit": "0966de2735a9c05dbb1959d2b074d65f178c192a",
+          "policySha": "df9b7dff4de4",
+          "gameDays": 151,
+          "endReason": "survived",
+          "won": false,
+          "standing": 430,
+          "scaleRank": "regional",
+          "maxWave": 5,
+          "unlockedWave": 5,
+          "nationalByStanding": true,
+          "nationalByScaleRank": false,
+          "wave4Kills": 4,
+          "wave5Kills": 0,
+          "deaths": 101,
+          "instrumentErrors": 0,
+          "validity": {
+            "badSeed": null,
+            "badCreate": null,
+            "badTouch": null,
+            "unknownErrors": 0
+          },
+          "linger": {
+            "censusTotal": 515,
+            "censusDead": 268,
+            "share": 0.5204,
+            "buckets": {
+              "0-30": {
+                "total": 35,
+                "dead": 0
+              },
+              "31-60": {
+                "total": 120,
+                "dead": 10
+              },
+              "61-90": {
+                "total": 120,
+                "dead": 45
+              },
+              "91-120": {
+                "total": 120,
+                "dead": 93
+              },
+              "121-150": {
+                "total": 120,
+                "dead": 120
+              }
+            },
+            "tails": [
+              {
+                "vid": "gen_0eznhw3",
+                "deadRows": 100,
+                "firstDeadDay": 51,
+                "lastDay": 150,
+                "spanDays": 99,
+                "stage": "hunt",
+                "target": null
+              },
+              {
+                "vid": "gen_o4d8zhl",
+                "deadRows": 72,
+                "firstDeadDay": 79,
+                "lastDay": 150,
+                "spanDays": 71,
+                "stage": "hunt",
+                "target": null
+              },
+              {
+                "vid": "catalina_reyes",
+                "deadRows": 63,
+                "firstDeadDay": 88,
+                "lastDay": 150,
+                "spanDays": 62,
+                "stage": "party",
+                "target": null
+              },
+              {
+                "vid": "devon_okafor",
+                "deadRows": 33,
+                "firstDeadDay": 118,
+                "lastDay": 150,
+                "spanDays": 32,
+                "stage": "table",
+                "target": null
+              }
+            ],
+            "longTails": 4,
+            "longestSpan": 99,
+            "distinctDeadHolders": 4
+          },
+          "pool": {
+            "b0_dawnScoredDeadN": 0,
+            "b0_dawnScoredDead": [],
+            "b1_dawnbidScoresDeadN": 0,
+            "b1_dawnbidScoresDead": [],
+            "b2_rankedPickDeadN": 0,
+            "b2_rankedPickDead": [],
+            "b3_departsDeadN": 0,
+            "b3_departsDead": [],
+            "b4_touchesDeadByMethod": {
+              "winPlanOf": [],
+              "winPlanHavenTick": [],
+              "winPlanDepart": [],
+              "winPlanSeedFromFight": [],
+              "winPlanNoteFight": [],
+              "winPlanNoteKill": [],
+              "winPlanFightGate": [],
+              "winPlanSecondCompanion": [],
+              "winPlanBondsTick": [],
+              "winPlanMusterTick": [],
+              "vbrainExecuteDepart": []
+            },
+            "b4_touchesDeadTotal": 0,
+            "touchesByMethod": {
+              "winPlanOf": 68,
+              "winPlanHavenTick": 81,
+              "winPlanDepart": 0,
+              "winPlanSeedFromFight": 105,
+              "winPlanNoteFight": 133,
+              "winPlanNoteKill": 28,
+              "winPlanFightGate": 140,
+              "winPlanSecondCompanion": 0,
+              "winPlanBondsTick": 600,
+              "winPlanMusterTick": 600,
+              "vbrainExecuteDepart": 81
+            },
+            "b5_secondPickDeadN": 0,
+            "b5_secondPickDead": [],
+            "b6_winPlanOfDeadN": 0,
+            "b6_winPlanOfDead": [],
+            "winPlanOfCreatedDeadN": 0,
+            "winPlanOfCreatedDead": [],
+            "createsDeadN": 0,
+            "createsDead": []
+          },
+          "slot": {
+            "holders": [
+              {
+                "vid": "devon_okafor",
+                "firstDeadRefDay": 50,
+                "deadRef": "gen_0eznhw3",
+                "days": 34,
+                "launchedAfter": true
+              }
+            ],
+            "holderDays": 34,
+            "launchesWithDeadParty": [],
+            "winPlanOfCreatedDead": [],
+            "unknownPartyRefs": 0,
+            "deathDayUnknown": []
+          },
+          "deadHolderLivePartyRefs": 76,
+          "deadHolderLivePartyExamples": [
+            {
+              "day": 51,
+              "holder": "gen_0eznhw3",
+              "partyVid": "devon_okafor"
+            },
+            {
+              "day": 52,
+              "holder": "gen_0eznhw3",
+              "partyVid": "devon_okafor"
+            },
+            {
+              "day": 53,
+              "holder": "gen_0eznhw3",
+              "partyVid": "devon_okafor"
+            },
+            {
+              "day": 54,
+              "holder": "gen_0eznhw3",
+              "partyVid": "devon_okafor"
+            },
+            {
+              "day": 55,
+              "holder": "gen_0eznhw3",
+              "partyVid": "devon_okafor"
+            }
+          ],
+          "censusNoise": {
+            "daysWithCensus": 130,
+            "meanInflation": 2.117,
+            "maxInflation": "all-dead-day",
+            "finalDay": 150,
+            "finalDayIncl": 4,
+            "finalDayExcl": 0,
+            "perDay": {
+              "21": {
+                "incl": 2,
+                "excl": 2
+              },
+              "22": {
+                "incl": 3,
+                "excl": 3
+              },
+              "23": {
+                "incl": 3,
+                "excl": 3
+              },
+              "24": {
+                "incl": 3,
+                "excl": 3
+              },
+              "25": {
+                "incl": 4,
+                "excl": 4
+              },
+              "26": {
+                "incl": 4,
+                "excl": 4
+              },
+              "27": {
+                "incl": 4,
+                "excl": 4
+              },
+              "28": {
+                "incl": 4,
+                "excl": 4
+              },
+              "29": {
+                "incl": 4,
+                "excl": 4
+              },
+              "30": {
+                "incl": 4,
+                "excl": 4
+              },
+              "31": {
+                "incl": 4,
+                "excl": 4
+              },
+              "32": {
+                "incl": 4,
+                "excl": 4
+              },
+              "33": {
+                "incl": 4,
+                "excl": 4
+              },
+              "34": {
+                "incl": 4,
+                "excl": 4
+              },
+              "35": {
+                "incl": 4,
+                "excl": 4
+              },
+              "36": {
+                "incl": 4,
+                "excl": 4
+              },
+              "37": {
+                "incl": 4,
+                "excl": 4
+              },
+              "38": {
+                "incl": 4,
+                "excl": 4
+              },
+              "39": {
+                "incl": 4,
+                "excl": 4
+              },
+              "40": {
+                "incl": 4,
+                "excl": 4
+              },
+              "41": {
+                "incl": 4,
+                "excl": 4
+              },
+              "42": {
+                "incl": 4,
+                "excl": 4
+              },
+              "43": {
+                "incl": 4,
+                "excl": 4
+              },
+              "44": {
+                "incl": 4,
+                "excl": 4
+              },
+              "45": {
+                "incl": 4,
+                "excl": 4
+              },
+              "46": {
+                "incl": 4,
+                "excl": 4
+              },
+              "47": {
+                "incl": 4,
+                "excl": 4
+              },
+              "48": {
+                "incl": 4,
+                "excl": 4
+              },
+              "49": {
+                "incl": 4,
+                "excl": 4
+              },
+              "50": {
+                "incl": 4,
+                "excl": 4
+              },
+              "51": {
+                "incl": 4,
+                "excl": 3
+              },
+              "52": {
+                "incl": 4,
+                "excl": 3
+              },
+              "53": {
+                "incl": 4,
+                "excl": 3
+              },
+              "54": {
+                "incl": 4,
+                "excl": 3
+              },
+              "55": {
+                "incl": 4,
+                "excl": 3
+              },
+              "56": {
+                "incl": 4,
+                "excl": 3
+              },
+              "57": {
+                "incl": 4,
+                "excl": 3
+              },
+              "58": {
+                "incl": 4,
+                "excl": 3
+              },
+              "59": {
+                "incl": 4,
+                "excl": 3
+              },
+              "60": {
+                "incl": 4,
+                "excl": 3
+              },
+              "61": {
+                "incl": 4,
+                "excl": 3
+              },
+              "62": {
+                "incl": 4,
+                "excl": 3
+              },
+              "63": {
+                "incl": 4,
+                "excl": 3
+              },
+              "64": {
+                "incl": 4,
+                "excl": 3
+              },
+              "65": {
+                "incl": 4,
+                "excl": 3
+              },
+              "66": {
+                "incl": 4,
+                "excl": 3
+              },
+              "67": {
+                "incl": 4,
+                "excl": 3
+              },
+              "68": {
+                "incl": 4,
+                "excl": 3
+              },
+              "69": {
+                "incl": 4,
+                "excl": 3
+              },
+              "70": {
+                "incl": 4,
+                "excl": 3
+              },
+              "71": {
+                "incl": 4,
+                "excl": 3
+              },
+              "72": {
+                "incl": 4,
+                "excl": 3
+              },
+              "73": {
+                "incl": 4,
+                "excl": 3
+              },
+              "74": {
+                "incl": 4,
+                "excl": 3
+              },
+              "75": {
+                "incl": 4,
+                "excl": 3
+              },
+              "76": {
+                "incl": 4,
+                "excl": 3
+              },
+              "77": {
+                "incl": 4,
+                "excl": 3
+              },
+              "78": {
+                "incl": 4,
+                "excl": 3
+              },
+              "79": {
+                "incl": 4,
+                "excl": 2
+              },
+              "80": {
+                "incl": 4,
+                "excl": 2
+              },
+              "81": {
+                "incl": 4,
+                "excl": 2
+              },
+              "82": {
+                "incl": 4,
+                "excl": 2
+              },
+              "83": {
+                "incl": 4,
+                "excl": 2
+              },
+              "84": {
+                "incl": 4,
+                "excl": 2
+              },
+              "85": {
+                "incl": 4,
+                "excl": 2
+              },
+              "86": {
+                "incl": 4,
+                "excl": 2
+              },
+              "87": {
+                "incl": 4,
+                "excl": 2
+              },
+              "88": {
+                "incl": 4,
+                "excl": 1
+              },
+              "89": {
+                "incl": 4,
+                "excl": 1
+              },
+              "90": {
+                "incl": 4,
+                "excl": 1
+              },
+              "91": {
+                "incl": 4,
+                "excl": 1
+              },
+              "92": {
+                "incl": 4,
+                "excl": 1
+              },
+              "93": {
+                "incl": 4,
+                "excl": 1
+              },
+              "94": {
+                "incl": 4,
+                "excl": 1
+              },
+              "95": {
+                "incl": 4,
+                "excl": 1
+              },
+              "96": {
+                "incl": 4,
+                "excl": 1
+              },
+              "97": {
+                "incl": 4,
+                "excl": 1
+              },
+              "98": {
+                "incl": 4,
+                "excl": 1
+              },
+              "99": {
+                "incl": 4,
+                "excl": 1
+              },
+              "100": {
+                "incl": 4,
+                "excl": 1
+              },
+              "101": {
+                "incl": 4,
+                "excl": 1
+              },
+              "102": {
+                "incl": 4,
+                "excl": 1
+              },
+              "103": {
+                "incl": 4,
+                "excl": 1
+              },
+              "104": {
+                "incl": 4,
+                "excl": 1
+              },
+              "105": {
+                "incl": 4,
+                "excl": 1
+              },
+              "106": {
+                "incl": 4,
+                "excl": 1
+              },
+              "107": {
+                "incl": 4,
+                "excl": 1
+              },
+              "108": {
+                "incl": 4,
+                "excl": 1
+              },
+              "109": {
+                "incl": 4,
+                "excl": 1
+              },
+              "110": {
+                "incl": 4,
+                "excl": 1
+              },
+              "111": {
+                "incl": 4,
+                "excl": 1
+              },
+              "112": {
+                "incl": 4,
+                "excl": 1
+              },
+              "113": {
+                "incl": 4,
+                "excl": 1
+              },
+              "114": {
+                "incl": 4,
+                "excl": 1
+              },
+              "115": {
+                "incl": 4,
+                "excl": 1
+              },
+              "116": {
+                "incl": 4,
+                "excl": 1
+              },
+              "117": {
+                "incl": 4,
+                "excl": 1
+              },
+              "118": {
+                "incl": 4,
+                "excl": 0
+              },
+              "119": {
+                "incl": 4,
+                "excl": 0
+              },
+              "120": {
+                "incl": 4,
+                "excl": 0
+              },
+              "121": {
+                "incl": 4,
+                "excl": 0
+              },
+              "122": {
+                "incl": 4,
+                "excl": 0
+              },
+              "123": {
+                "incl": 4,
+                "excl": 0
+              },
+              "124": {
+                "incl": 4,
+                "excl": 0
+              },
+              "125": {
+                "incl": 4,
+                "excl": 0
+              },
+              "126": {
+                "incl": 4,
+                "excl": 0
+              },
+              "127": {
+                "incl": 4,
+                "excl": 0
+              },
+              "128": {
+                "incl": 4,
+                "excl": 0
+              },
+              "129": {
+                "incl": 4,
+                "excl": 0
+              },
+              "130": {
+                "incl": 4,
+                "excl": 0
+              },
+              "131": {
+                "incl": 4,
+                "excl": 0
+              },
+              "132": {
+                "incl": 4,
+                "excl": 0
+              },
+              "133": {
+                "incl": 4,
+                "excl": 0
+              },
+              "134": {
+                "incl": 4,
+                "excl": 0
+              },
+              "135": {
+                "incl": 4,
+                "excl": 0
+              },
+              "136": {
+                "incl": 4,
+                "excl": 0
+              },
+              "137": {
+                "incl": 4,
+                "excl": 0
+              },
+              "138": {
+                "incl": 4,
+                "excl": 0
+              },
+              "139": {
+                "incl": 4,
+                "excl": 0
+              },
+              "140": {
+                "incl": 4,
+                "excl": 0
+              },
+              "141": {
+                "incl": 4,
+                "excl": 0
+              },
+              "142": {
+                "incl": 4,
+                "excl": 0
+              },
+              "143": {
+                "incl": 4,
+                "excl": 0
+              },
+              "144": {
+                "incl": 4,
+                "excl": 0
+              },
+              "145": {
+                "incl": 4,
+                "excl": 0
+              },
+              "146": {
+                "incl": 4,
+                "excl": 0
+              },
+              "147": {
+                "incl": 4,
+                "excl": 0
+              },
+              "148": {
+                "incl": 4,
+                "excl": 0
+              },
+              "149": {
+                "incl": 4,
+                "excl": 0
+              },
+              "150": {
+                "incl": 4,
+                "excl": 0
+              }
+            }
+          }
+        },
+        {
+          "seed": 103224,
+          "mode": "on",
+          "recorderOn": true,
+          "anchorCommit": "0966de2735a9c05dbb1959d2b074d65f178c192a",
+          "policySha": "df9b7dff4de4",
+          "gameDays": 151,
+          "endReason": "survived",
+          "won": false,
+          "standing": 365,
+          "scaleRank": "regional",
+          "maxWave": 5,
+          "unlockedWave": 5,
+          "nationalByStanding": true,
+          "nationalByScaleRank": false,
+          "wave4Kills": 3,
+          "wave5Kills": 0,
+          "deaths": 114,
+          "instrumentErrors": 0,
+          "validity": {
+            "badSeed": null,
+            "badCreate": null,
+            "badTouch": null,
+            "unknownErrors": 0
+          },
+          "linger": {
+            "censusTotal": 754,
+            "censusDead": 442,
+            "share": 0.5862,
+            "buckets": {
+              "0-30": {
+                "total": 55,
+                "dead": 0
+              },
+              "31-60": {
+                "total": 159,
+                "dead": 54
+              },
+              "61-90": {
+                "total": 180,
+                "dead": 73
+              },
+              "91-120": {
+                "total": 180,
+                "dead": 135
+              },
+              "121-150": {
+                "total": 180,
+                "dead": 180
+              }
+            },
+            "tails": [
+              {
+                "vid": "gen_xkxnkfm",
+                "deadRows": 119,
+                "firstDeadDay": 32,
+                "lastDay": 150,
+                "spanDays": 118,
+                "stage": "hunt",
+                "target": null
+              },
+              {
+                "vid": "gen_amnwppq",
+                "deadRows": 115,
+                "firstDeadDay": 36,
+                "lastDay": 150,
+                "spanDays": 114,
+                "stage": "hunt",
+                "target": null
+              },
+              {
+                "vid": "gen_5w8wevt",
+                "deadRows": 67,
+                "firstDeadDay": 84,
+                "lastDay": 150,
+                "spanDays": 66,
+                "stage": "hunt",
+                "target": null
+              },
+              {
+                "vid": "jovan_milic",
+                "deadRows": 66,
+                "firstDeadDay": 85,
+                "lastDay": 150,
+                "spanDays": 65,
+                "stage": "hunt",
+                "target": null
+              },
+              {
+                "vid": "ethan_hunt",
+                "deadRows": 40,
+                "firstDeadDay": 111,
+                "lastDay": 150,
+                "spanDays": 39,
+                "stage": "hunt",
+                "target": "focus_group"
+              },
+              {
+                "vid": "carlos_diaz",
+                "deadRows": 35,
+                "firstDeadDay": 116,
+                "lastDay": 150,
+                "spanDays": 34,
+                "stage": "hunt",
+                "target": null
+              }
+            ],
+            "longTails": 6,
+            "longestSpan": 118,
+            "distinctDeadHolders": 6
+          },
+          "pool": {
+            "b0_dawnScoredDeadN": 0,
+            "b0_dawnScoredDead": [],
+            "b1_dawnbidScoresDeadN": 0,
+            "b1_dawnbidScoresDead": [],
+            "b2_rankedPickDeadN": 0,
+            "b2_rankedPickDead": [],
+            "b3_departsDeadN": 0,
+            "b3_departsDead": [],
+            "b4_touchesDeadByMethod": {
+              "winPlanOf": [],
+              "winPlanHavenTick": [],
+              "winPlanDepart": [],
+              "winPlanSeedFromFight": [],
+              "winPlanNoteFight": [],
+              "winPlanNoteKill": [],
+              "winPlanFightGate": [],
+              "winPlanSecondCompanion": [],
+              "winPlanBondsTick": [],
+              "winPlanMusterTick": [],
+              "vbrainExecuteDepart": []
+            },
+            "b4_touchesDeadTotal": 0,
+            "touchesByMethod": {
+              "winPlanOf": 69,
+              "winPlanHavenTick": 104,
+              "winPlanDepart": 0,
+              "winPlanSeedFromFight": 75,
+              "winPlanNoteFight": 113,
+              "winPlanNoteKill": 38,
+              "winPlanFightGate": 119,
+              "winPlanSecondCompanion": 0,
+              "winPlanBondsTick": 600,
+              "winPlanMusterTick": 600,
+              "vbrainExecuteDepart": 104
+            },
+            "b5_secondPickDeadN": 0,
+            "b5_secondPickDead": [],
+            "b6_winPlanOfDeadN": 0,
+            "b6_winPlanOfDead": [],
+            "winPlanOfCreatedDeadN": 0,
+            "winPlanOfCreatedDead": [],
+            "createsDeadN": 0,
+            "createsDead": []
+          },
+          "slot": {
+            "holders": [
+              {
+                "vid": "ethan_hunt",
+                "firstDeadRefDay": 32,
+                "deadRef": "gen_xkxnkfm",
+                "days": 30,
+                "launchedAfter": true
+              },
+              {
+                "vid": "jovan_milic",
+                "firstDeadRefDay": 36,
+                "deadRef": "gen_amnwppq",
+                "days": 14,
+                "launchedAfter": true
+              },
+              {
+                "vid": "carlos_diaz",
+                "firstDeadRefDay": 84,
+                "deadRef": "jovan_milic",
+                "days": 32,
+                "launchedAfter": false
+              }
+            ],
+            "holderDays": 76,
+            "launchesWithDeadParty": [],
+            "winPlanOfCreatedDead": [],
+            "unknownPartyRefs": 0,
+            "deathDayUnknown": []
+          },
+          "deadHolderLivePartyRefs": 182,
+          "deadHolderLivePartyExamples": [
+            {
+              "day": 32,
+              "holder": "gen_xkxnkfm",
+              "partyVid": "ethan_hunt"
+            },
+            {
+              "day": 33,
+              "holder": "gen_xkxnkfm",
+              "partyVid": "ethan_hunt"
+            },
+            {
+              "day": 34,
+              "holder": "gen_xkxnkfm",
+              "partyVid": "ethan_hunt"
+            },
+            {
+              "day": 35,
+              "holder": "gen_xkxnkfm",
+              "partyVid": "ethan_hunt"
+            },
+            {
+              "day": 36,
+              "holder": "gen_amnwppq",
+              "partyVid": "jovan_milic"
+            }
+          ],
+          "censusNoise": {
+            "daysWithCensus": 132,
+            "meanInflation": 2.089,
+            "maxInflation": "all-dead-day",
+            "finalDay": 150,
+            "finalDayIncl": 6,
+            "finalDayExcl": 0,
+            "perDay": {
+              "19": {
+                "incl": 2,
+                "excl": 2
+              },
+              "20": {
+                "incl": 4,
+                "excl": 4
+              },
+              "21": {
+                "incl": 4,
+                "excl": 4
+              },
+              "22": {
+                "incl": 5,
+                "excl": 5
+              },
+              "23": {
+                "incl": 5,
+                "excl": 5
+              },
+              "24": {
+                "incl": 5,
+                "excl": 5
+              },
+              "25": {
+                "incl": 5,
+                "excl": 5
+              },
+              "26": {
+                "incl": 5,
+                "excl": 5
+              },
+              "27": {
+                "incl": 5,
+                "excl": 5
+              },
+              "28": {
+                "incl": 5,
+                "excl": 5
+              },
+              "29": {
+                "incl": 5,
+                "excl": 5
+              },
+              "30": {
+                "incl": 5,
+                "excl": 5
+              },
+              "31": {
+                "incl": 5,
+                "excl": 5
+              },
+              "32": {
+                "incl": 5,
+                "excl": 4
+              },
+              "33": {
+                "incl": 5,
+                "excl": 4
+              },
+              "34": {
+                "incl": 5,
+                "excl": 4
+              },
+              "35": {
+                "incl": 5,
+                "excl": 4
+              },
+              "36": {
+                "incl": 5,
+                "excl": 3
+              },
+              "37": {
+                "incl": 5,
+                "excl": 3
+              },
+              "38": {
+                "incl": 5,
+                "excl": 3
+              },
+              "39": {
+                "incl": 5,
+                "excl": 3
+              },
+              "40": {
+                "incl": 5,
+                "excl": 3
+              },
+              "41": {
+                "incl": 5,
+                "excl": 3
+              },
+              "42": {
+                "incl": 5,
+                "excl": 3
+              },
+              "43": {
+                "incl": 5,
+                "excl": 3
+              },
+              "44": {
+                "incl": 5,
+                "excl": 3
+              },
+              "45": {
+                "incl": 5,
+                "excl": 3
+              },
+              "46": {
+                "incl": 5,
+                "excl": 3
+              },
+              "47": {
+                "incl": 5,
+                "excl": 3
+              },
+              "48": {
+                "incl": 5,
+                "excl": 3
+              },
+              "49": {
+                "incl": 5,
+                "excl": 3
+              },
+              "50": {
+                "incl": 5,
+                "excl": 3
+              },
+              "51": {
+                "incl": 5,
+                "excl": 3
+              },
+              "52": {
+                "incl": 6,
+                "excl": 4
+              },
+              "53": {
+                "incl": 6,
+                "excl": 4
+              },
+              "54": {
+                "incl": 6,
+                "excl": 4
+              },
+              "55": {
+                "incl": 6,
+                "excl": 4
+              },
+              "56": {
+                "incl": 6,
+                "excl": 4
+              },
+              "57": {
+                "incl": 6,
+                "excl": 4
+              },
+              "58": {
+                "incl": 6,
+                "excl": 4
+              },
+              "59": {
+                "incl": 6,
+                "excl": 4
+              },
+              "60": {
+                "incl": 6,
+                "excl": 4
+              },
+              "61": {
+                "incl": 6,
+                "excl": 4
+              },
+              "62": {
+                "incl": 6,
+                "excl": 4
+              },
+              "63": {
+                "incl": 6,
+                "excl": 4
+              },
+              "64": {
+                "incl": 6,
+                "excl": 4
+              },
+              "65": {
+                "incl": 6,
+                "excl": 4
+              },
+              "66": {
+                "incl": 6,
+                "excl": 4
+              },
+              "67": {
+                "incl": 6,
+                "excl": 4
+              },
+              "68": {
+                "incl": 6,
+                "excl": 4
+              },
+              "69": {
+                "incl": 6,
+                "excl": 4
+              },
+              "70": {
+                "incl": 6,
+                "excl": 4
+              },
+              "71": {
+                "incl": 6,
+                "excl": 4
+              },
+              "72": {
+                "incl": 6,
+                "excl": 4
+              },
+              "73": {
+                "incl": 6,
+                "excl": 4
+              },
+              "74": {
+                "incl": 6,
+                "excl": 4
+              },
+              "75": {
+                "incl": 6,
+                "excl": 4
+              },
+              "76": {
+                "incl": 6,
+                "excl": 4
+              },
+              "77": {
+                "incl": 6,
+                "excl": 4
+              },
+              "78": {
+                "incl": 6,
+                "excl": 4
+              },
+              "79": {
+                "incl": 6,
+                "excl": 4
+              },
+              "80": {
+                "incl": 6,
+                "excl": 4
+              },
+              "81": {
+                "incl": 6,
+                "excl": 4
+              },
+              "82": {
+                "incl": 6,
+                "excl": 4
+              },
+              "83": {
+                "incl": 6,
+                "excl": 4
+              },
+              "84": {
+                "incl": 6,
+                "excl": 3
+              },
+              "85": {
+                "incl": 6,
+                "excl": 2
+              },
+              "86": {
+                "incl": 6,
+                "excl": 2
+              },
+              "87": {
+                "incl": 6,
+                "excl": 2
+              },
+              "88": {
+                "incl": 6,
+                "excl": 2
+              },
+              "89": {
+                "incl": 6,
+                "excl": 2
+              },
+              "90": {
+                "incl": 6,
+                "excl": 2
+              },
+              "91": {
+                "incl": 6,
+                "excl": 2
+              },
+              "92": {
+                "incl": 6,
+                "excl": 2
+              },
+              "93": {
+                "incl": 6,
+                "excl": 2
+              },
+              "94": {
+                "incl": 6,
+                "excl": 2
+              },
+              "95": {
+                "incl": 6,
+                "excl": 2
+              },
+              "96": {
+                "incl": 6,
+                "excl": 2
+              },
+              "97": {
+                "incl": 6,
+                "excl": 2
+              },
+              "98": {
+                "incl": 6,
+                "excl": 2
+              },
+              "99": {
+                "incl": 6,
+                "excl": 2
+              },
+              "100": {
+                "incl": 6,
+                "excl": 2
+              },
+              "101": {
+                "incl": 6,
+                "excl": 2
+              },
+              "102": {
+                "incl": 6,
+                "excl": 2
+              },
+              "103": {
+                "incl": 6,
+                "excl": 2
+              },
+              "104": {
+                "incl": 6,
+                "excl": 2
+              },
+              "105": {
+                "incl": 6,
+                "excl": 2
+              },
+              "106": {
+                "incl": 6,
+                "excl": 2
+              },
+              "107": {
+                "incl": 6,
+                "excl": 2
+              },
+              "108": {
+                "incl": 6,
+                "excl": 2
+              },
+              "109": {
+                "incl": 6,
+                "excl": 2
+              },
+              "110": {
+                "incl": 6,
+                "excl": 2
+              },
+              "111": {
+                "incl": 6,
+                "excl": 1
+              },
+              "112": {
+                "incl": 6,
+                "excl": 1
+              },
+              "113": {
+                "incl": 6,
+                "excl": 1
+              },
+              "114": {
+                "incl": 6,
+                "excl": 1
+              },
+              "115": {
+                "incl": 6,
+                "excl": 1
+              },
+              "116": {
+                "incl": 6,
+                "excl": 0
+              },
+              "117": {
+                "incl": 6,
+                "excl": 0
+              },
+              "118": {
+                "incl": 6,
+                "excl": 0
+              },
+              "119": {
+                "incl": 6,
+                "excl": 0
+              },
+              "120": {
+                "incl": 6,
+                "excl": 0
+              },
+              "121": {
+                "incl": 6,
+                "excl": 0
+              },
+              "122": {
+                "incl": 6,
+                "excl": 0
+              },
+              "123": {
+                "incl": 6,
+                "excl": 0
+              },
+              "124": {
+                "incl": 6,
+                "excl": 0
+              },
+              "125": {
+                "incl": 6,
+                "excl": 0
+              },
+              "126": {
+                "incl": 6,
+                "excl": 0
+              },
+              "127": {
+                "incl": 6,
+                "excl": 0
+              },
+              "128": {
+                "incl": 6,
+                "excl": 0
+              },
+              "129": {
+                "incl": 6,
+                "excl": 0
+              },
+              "130": {
+                "incl": 6,
+                "excl": 0
+              },
+              "131": {
+                "incl": 6,
+                "excl": 0
+              },
+              "132": {
+                "incl": 6,
+                "excl": 0
+              },
+              "133": {
+                "incl": 6,
+                "excl": 0
+              },
+              "134": {
+                "incl": 6,
+                "excl": 0
+              },
+              "135": {
+                "incl": 6,
+                "excl": 0
+              },
+              "136": {
+                "incl": 6,
+                "excl": 0
+              },
+              "137": {
+                "incl": 6,
+                "excl": 0
+              },
+              "138": {
+                "incl": 6,
+                "excl": 0
+              },
+              "139": {
+                "incl": 6,
+                "excl": 0
+              },
+              "140": {
+                "incl": 6,
+                "excl": 0
+              },
+              "141": {
+                "incl": 6,
+                "excl": 0
+              },
+              "142": {
+                "incl": 6,
+                "excl": 0
+              },
+              "143": {
+                "incl": 6,
+                "excl": 0
+              },
+              "144": {
+                "incl": 6,
+                "excl": 0
+              },
+              "145": {
+                "incl": 6,
+                "excl": 0
+              },
+              "146": {
+                "incl": 6,
+                "excl": 0
+              },
+              "147": {
+                "incl": 6,
+                "excl": 0
+              },
+              "148": {
+                "incl": 6,
+                "excl": 0
+              },
+              "149": {
+                "incl": 6,
+                "excl": 0
+              },
+              "150": {
+                "incl": 6,
+                "excl": 0
+              }
+            }
+          }
+        },
+        {
+          "seed": 103225,
+          "mode": "on",
+          "recorderOn": true,
+          "anchorCommit": "0966de2735a9c05dbb1959d2b074d65f178c192a",
+          "policySha": "df9b7dff4de4",
+          "gameDays": 151,
+          "endReason": "survived",
+          "won": false,
+          "standing": 245,
+          "scaleRank": "regional",
+          "maxWave": 5,
+          "unlockedWave": 5,
+          "nationalByStanding": true,
+          "nationalByScaleRank": false,
+          "wave4Kills": 4,
+          "wave5Kills": 0,
+          "deaths": 46,
+          "instrumentErrors": 0,
+          "validity": {
+            "badSeed": null,
+            "badCreate": null,
+            "badTouch": null,
+            "unknownErrors": 0
+          },
+          "linger": {
+            "censusTotal": 0,
+            "censusDead": 0,
+            "share": 0,
+            "buckets": {
+              "0-30": {
+                "total": 0,
+                "dead": 0
+              },
+              "31-60": {
+                "total": 0,
+                "dead": 0
+              },
+              "61-90": {
+                "total": 0,
+                "dead": 0
+              },
+              "91-120": {
+                "total": 0,
+                "dead": 0
+              },
+              "121-150": {
+                "total": 0,
+                "dead": 0
+              }
+            },
+            "tails": [],
+            "longTails": 0,
+            "longestSpan": 0,
+            "distinctDeadHolders": 0
+          },
+          "pool": {
+            "b0_dawnScoredDeadN": 0,
+            "b0_dawnScoredDead": [],
+            "b1_dawnbidScoresDeadN": 0,
+            "b1_dawnbidScoresDead": [],
+            "b2_rankedPickDeadN": 0,
+            "b2_rankedPickDead": [],
+            "b3_departsDeadN": 0,
+            "b3_departsDead": [],
+            "b4_touchesDeadByMethod": {
+              "winPlanOf": [],
+              "winPlanHavenTick": [],
+              "winPlanDepart": [],
+              "winPlanSeedFromFight": [],
+              "winPlanNoteFight": [],
+              "winPlanNoteKill": [],
+              "winPlanFightGate": [],
+              "winPlanSecondCompanion": [],
+              "winPlanBondsTick": [],
+              "winPlanMusterTick": [],
+              "vbrainExecuteDepart": []
+            },
+            "b4_touchesDeadTotal": 0,
+            "touchesByMethod": {
+              "winPlanOf": 0,
+              "winPlanHavenTick": 94,
+              "winPlanDepart": 0,
+              "winPlanSeedFromFight": 0,
+              "winPlanNoteFight": 0,
+              "winPlanNoteKill": 0,
+              "winPlanFightGate": 0,
+              "winPlanSecondCompanion": 0,
+              "winPlanBondsTick": 600,
+              "winPlanMusterTick": 600,
+              "vbrainExecuteDepart": 94
+            },
+            "b5_secondPickDeadN": 0,
+            "b5_secondPickDead": [],
+            "b6_winPlanOfDeadN": 0,
+            "b6_winPlanOfDead": [],
+            "winPlanOfCreatedDeadN": 0,
+            "winPlanOfCreatedDead": [],
+            "createsDeadN": 0,
+            "createsDead": []
+          },
+          "slot": {
+            "holders": [],
+            "holderDays": 0,
+            "launchesWithDeadParty": [],
+            "winPlanOfCreatedDead": [],
+            "unknownPartyRefs": 0,
+            "deathDayUnknown": []
+          },
+          "deadHolderLivePartyRefs": 0,
+          "deadHolderLivePartyExamples": [],
+          "censusNoise": {
+            "daysWithCensus": 0,
+            "meanInflation": null,
+            "maxInflation": 0,
+            "finalDay": null,
+            "finalDayIncl": 0,
+            "finalDayExcl": 0,
+            "perDay": {}
+          }
+        },
+        {
+          "seed": 103226,
+          "mode": "on",
+          "recorderOn": true,
+          "anchorCommit": "0966de2735a9c05dbb1959d2b074d65f178c192a",
+          "policySha": "df9b7dff4de4",
+          "gameDays": 151,
+          "endReason": "survived",
+          "won": false,
+          "standing": 400,
+          "scaleRank": "regional",
+          "maxWave": 5,
+          "unlockedWave": 5,
+          "nationalByStanding": true,
+          "nationalByScaleRank": false,
+          "wave4Kills": 6,
+          "wave5Kills": 1,
+          "deaths": 93,
+          "instrumentErrors": 0,
+          "validity": {
+            "badSeed": null,
+            "badCreate": null,
+            "badTouch": null,
+            "unknownErrors": 0
+          },
+          "linger": {
+            "censusTotal": 0,
+            "censusDead": 0,
+            "share": 0,
+            "buckets": {
+              "0-30": {
+                "total": 0,
+                "dead": 0
+              },
+              "31-60": {
+                "total": 0,
+                "dead": 0
+              },
+              "61-90": {
+                "total": 0,
+                "dead": 0
+              },
+              "91-120": {
+                "total": 0,
+                "dead": 0
+              },
+              "121-150": {
+                "total": 0,
+                "dead": 0
+              }
+            },
+            "tails": [],
+            "longTails": 0,
+            "longestSpan": 0,
+            "distinctDeadHolders": 0
+          },
+          "pool": {
+            "b0_dawnScoredDeadN": 0,
+            "b0_dawnScoredDead": [],
+            "b1_dawnbidScoresDeadN": 0,
+            "b1_dawnbidScoresDead": [],
+            "b2_rankedPickDeadN": 0,
+            "b2_rankedPickDead": [],
+            "b3_departsDeadN": 0,
+            "b3_departsDead": [],
+            "b4_touchesDeadByMethod": {
+              "winPlanOf": [],
+              "winPlanHavenTick": [],
+              "winPlanDepart": [],
+              "winPlanSeedFromFight": [],
+              "winPlanNoteFight": [],
+              "winPlanNoteKill": [],
+              "winPlanFightGate": [],
+              "winPlanSecondCompanion": [],
+              "winPlanBondsTick": [],
+              "winPlanMusterTick": [],
+              "vbrainExecuteDepart": []
+            },
+            "b4_touchesDeadTotal": 0,
+            "touchesByMethod": {
+              "winPlanOf": 0,
+              "winPlanHavenTick": 145,
+              "winPlanDepart": 0,
+              "winPlanSeedFromFight": 0,
+              "winPlanNoteFight": 0,
+              "winPlanNoteKill": 0,
+              "winPlanFightGate": 0,
+              "winPlanSecondCompanion": 0,
+              "winPlanBondsTick": 600,
+              "winPlanMusterTick": 600,
+              "vbrainExecuteDepart": 145
+            },
+            "b5_secondPickDeadN": 0,
+            "b5_secondPickDead": [],
+            "b6_winPlanOfDeadN": 0,
+            "b6_winPlanOfDead": [],
+            "winPlanOfCreatedDeadN": 0,
+            "winPlanOfCreatedDead": [],
+            "createsDeadN": 0,
+            "createsDead": []
+          },
+          "slot": {
+            "holders": [],
+            "holderDays": 0,
+            "launchesWithDeadParty": [],
+            "winPlanOfCreatedDead": [],
+            "unknownPartyRefs": 0,
+            "deathDayUnknown": []
+          },
+          "deadHolderLivePartyRefs": 0,
+          "deadHolderLivePartyExamples": [],
+          "censusNoise": {
+            "daysWithCensus": 0,
+            "meanInflation": null,
+            "maxInflation": 0,
+            "finalDay": null,
+            "finalDayIncl": 0,
+            "finalDayExcl": 0,
+            "perDay": {}
+          }
+        },
+        {
+          "seed": 103227,
+          "mode": "on",
+          "recorderOn": true,
+          "anchorCommit": "0966de2735a9c05dbb1959d2b074d65f178c192a",
+          "policySha": "df9b7dff4de4",
+          "gameDays": 150,
+          "endReason": "survived",
+          "won": false,
+          "standing": 285,
+          "scaleRank": "regional",
+          "maxWave": 5,
+          "unlockedWave": 5,
+          "nationalByStanding": true,
+          "nationalByScaleRank": false,
+          "wave4Kills": 3,
+          "wave5Kills": 0,
+          "deaths": 56,
+          "instrumentErrors": 0,
+          "validity": {
+            "badSeed": null,
+            "badCreate": null,
+            "badTouch": null,
+            "unknownErrors": 0
+          },
+          "linger": {
+            "censusTotal": 0,
+            "censusDead": 0,
+            "share": 0,
+            "buckets": {
+              "0-30": {
+                "total": 0,
+                "dead": 0
+              },
+              "31-60": {
+                "total": 0,
+                "dead": 0
+              },
+              "61-90": {
+                "total": 0,
+                "dead": 0
+              },
+              "91-120": {
+                "total": 0,
+                "dead": 0
+              },
+              "121-150": {
+                "total": 0,
+                "dead": 0
+              }
+            },
+            "tails": [],
+            "longTails": 0,
+            "longestSpan": 0,
+            "distinctDeadHolders": 0
+          },
+          "pool": {
+            "b0_dawnScoredDeadN": 0,
+            "b0_dawnScoredDead": [],
+            "b1_dawnbidScoresDeadN": 0,
+            "b1_dawnbidScoresDead": [],
+            "b2_rankedPickDeadN": 0,
+            "b2_rankedPickDead": [],
+            "b3_departsDeadN": 0,
+            "b3_departsDead": [],
+            "b4_touchesDeadByMethod": {
+              "winPlanOf": [],
+              "winPlanHavenTick": [],
+              "winPlanDepart": [],
+              "winPlanSeedFromFight": [],
+              "winPlanNoteFight": [],
+              "winPlanNoteKill": [],
+              "winPlanFightGate": [],
+              "winPlanSecondCompanion": [],
+              "winPlanBondsTick": [],
+              "winPlanMusterTick": [],
+              "vbrainExecuteDepart": []
+            },
+            "b4_touchesDeadTotal": 0,
+            "touchesByMethod": {
+              "winPlanOf": 0,
+              "winPlanHavenTick": 0,
+              "winPlanDepart": 0,
+              "winPlanSeedFromFight": 0,
+              "winPlanNoteFight": 0,
+              "winPlanNoteKill": 0,
+              "winPlanFightGate": 0,
+              "winPlanSecondCompanion": 0,
+              "winPlanBondsTick": 599,
+              "winPlanMusterTick": 599,
+              "vbrainExecuteDepart": 0
+            },
+            "b5_secondPickDeadN": 0,
+            "b5_secondPickDead": [],
+            "b6_winPlanOfDeadN": 0,
+            "b6_winPlanOfDead": [],
+            "winPlanOfCreatedDeadN": 0,
+            "winPlanOfCreatedDead": [],
+            "createsDeadN": 0,
+            "createsDead": []
+          },
+          "slot": {
+            "holders": [],
+            "holderDays": 0,
+            "launchesWithDeadParty": [],
+            "winPlanOfCreatedDead": [],
+            "unknownPartyRefs": 0,
+            "deathDayUnknown": []
+          },
+          "deadHolderLivePartyRefs": 0,
+          "deadHolderLivePartyExamples": [],
+          "censusNoise": {
+            "daysWithCensus": 0,
+            "meanInflation": null,
+            "maxInflation": 0,
+            "finalDay": null,
+            "finalDayIncl": 0,
+            "finalDayExcl": 0,
+            "perDay": {}
+          }
+        },
+        {
+          "seed": 103228,
+          "mode": "on",
+          "recorderOn": true,
+          "anchorCommit": "0966de2735a9c05dbb1959d2b074d65f178c192a",
+          "policySha": "df9b7dff4de4",
+          "gameDays": 151,
+          "endReason": "survived",
+          "won": false,
+          "standing": 390,
+          "scaleRank": "regional",
+          "maxWave": 5,
+          "unlockedWave": 5,
+          "nationalByStanding": true,
+          "nationalByScaleRank": false,
+          "wave4Kills": 7,
+          "wave5Kills": 1,
+          "deaths": 94,
+          "instrumentErrors": 0,
+          "validity": {
+            "badSeed": null,
+            "badCreate": null,
+            "badTouch": null,
+            "unknownErrors": 0
+          },
+          "linger": {
+            "censusTotal": 631,
+            "censusDead": 416,
+            "share": 0.6593,
+            "buckets": {
+              "0-30": {
+                "total": 7,
+                "dead": 0
+              },
+              "31-60": {
+                "total": 150,
+                "dead": 6
+              },
+              "61-90": {
+                "total": 145,
+                "dead": 110
+              },
+              "91-120": {
+                "total": 150,
+                "dead": 150
+              },
+              "121-150": {
+                "total": 179,
+                "dead": 150
+              }
+            },
+            "tails": [
+              {
+                "vid": "liam_davis",
+                "deadRows": 93,
+                "firstDeadDay": 57,
+                "lastDay": 150,
+                "spanDays": 93,
+                "stage": "party",
+                "target": null
+              },
+              {
+                "vid": "gen_ebw4epv",
+                "deadRows": 91,
+                "firstDeadDay": 59,
+                "lastDay": 150,
+                "spanDays": 91,
+                "stage": "party",
+                "target": "eater"
+              },
+              {
+                "vid": "ruby_callaghan",
+                "deadRows": 89,
+                "firstDeadDay": 61,
+                "lastDay": 150,
+                "spanDays": 89,
+                "stage": "hunt",
+                "target": null
+              },
+              {
+                "vid": "gen_6aqbrvy",
+                "deadRows": 79,
+                "firstDeadDay": 71,
+                "lastDay": 150,
+                "spanDays": 79,
+                "stage": "hunt",
+                "target": null
+              },
+              {
+                "vid": "gen_v81e6mr",
+                "deadRows": 64,
+                "firstDeadDay": 86,
+                "lastDay": 150,
+                "spanDays": 64,
+                "stage": "hunt",
+                "target": null
+              }
+            ],
+            "longTails": 5,
+            "longestSpan": 93,
+            "distinctDeadHolders": 5
+          },
+          "pool": {
+            "b0_dawnScoredDeadN": 0,
+            "b0_dawnScoredDead": [],
+            "b1_dawnbidScoresDeadN": 0,
+            "b1_dawnbidScoresDead": [],
+            "b2_rankedPickDeadN": 0,
+            "b2_rankedPickDead": [],
+            "b3_departsDeadN": 0,
+            "b3_departsDead": [],
+            "b4_touchesDeadByMethod": {
+              "winPlanOf": [],
+              "winPlanHavenTick": [],
+              "winPlanDepart": [],
+              "winPlanSeedFromFight": [],
+              "winPlanNoteFight": [],
+              "winPlanNoteKill": [],
+              "winPlanFightGate": [],
+              "winPlanSecondCompanion": [],
+              "winPlanBondsTick": [],
+              "winPlanMusterTick": [],
+              "vbrainExecuteDepart": []
+            },
+            "b4_touchesDeadTotal": 0,
+            "touchesByMethod": {
+              "winPlanOf": 57,
+              "winPlanHavenTick": 127,
+              "winPlanDepart": 0,
+              "winPlanSeedFromFight": 51,
+              "winPlanNoteFight": 82,
+              "winPlanNoteKill": 29,
+              "winPlanFightGate": 91,
+              "winPlanSecondCompanion": 0,
+              "winPlanBondsTick": 600,
+              "winPlanMusterTick": 600,
+              "vbrainExecuteDepart": 127
+            },
+            "b5_secondPickDeadN": 0,
+            "b5_secondPickDead": [],
+            "b6_winPlanOfDeadN": 0,
+            "b6_winPlanOfDead": [],
+            "winPlanOfCreatedDeadN": 0,
+            "winPlanOfCreatedDead": [],
+            "createsDeadN": 0,
+            "createsDead": []
+          },
+          "slot": {
+            "holders": [
+              {
+                "vid": "gen_v81e6mr",
+                "firstDeadRefDay": 57,
+                "deadRef": "liam_davis",
+                "days": 29,
+                "launchedAfter": false
+              },
+              {
+                "vid": "gen_6aqbrvy",
+                "firstDeadRefDay": 61,
+                "deadRef": "ruby_callaghan",
+                "days": 10,
+                "launchedAfter": false
+              }
+            ],
+            "holderDays": 39,
+            "launchesWithDeadParty": [],
+            "winPlanOfCreatedDead": [],
+            "unknownPartyRefs": 0,
+            "deathDayUnknown": []
+          },
+          "deadHolderLivePartyRefs": 10,
+          "deadHolderLivePartyExamples": [
+            {
+              "day": 61,
+              "holder": "ruby_callaghan",
+              "partyVid": "gen_6aqbrvy"
+            },
+            {
+              "day": 62,
+              "holder": "ruby_callaghan",
+              "partyVid": "gen_6aqbrvy"
+            },
+            {
+              "day": 63,
+              "holder": "ruby_callaghan",
+              "partyVid": "gen_6aqbrvy"
+            },
+            {
+              "day": 64,
+              "holder": "ruby_callaghan",
+              "partyVid": "gen_6aqbrvy"
+            },
+            {
+              "day": 65,
+              "holder": "ruby_callaghan",
+              "partyVid": "gen_6aqbrvy"
+            }
+          ],
+          "censusNoise": {
+            "daysWithCensus": 122,
+            "meanInflation": 3.55,
+            "maxInflation": "all-dead-day",
+            "finalDay": 150,
+            "finalDayIncl": 6,
+            "finalDayExcl": 1,
+            "perDay": {
+              "28": {
+                "incl": 2,
+                "excl": 2
+              },
+              "29": {
+                "incl": 2,
+                "excl": 2
+              },
+              "30": {
+                "incl": 3,
+                "excl": 3
+              },
+              "31": {
+                "incl": 5,
+                "excl": 5
+              },
+              "32": {
+                "incl": 5,
+                "excl": 5
+              },
+              "33": {
+                "incl": 5,
+                "excl": 5
+              },
+              "34": {
+                "incl": 5,
+                "excl": 5
+              },
+              "35": {
+                "incl": 5,
+                "excl": 5
+              },
+              "36": {
+                "incl": 5,
+                "excl": 5
+              },
+              "37": {
+                "incl": 5,
+                "excl": 5
+              },
+              "38": {
+                "incl": 5,
+                "excl": 5
+              },
+              "39": {
+                "incl": 5,
+                "excl": 5
+              },
+              "40": {
+                "incl": 5,
+                "excl": 5
+              },
+              "41": {
+                "incl": 5,
+                "excl": 5
+              },
+              "42": {
+                "incl": 5,
+                "excl": 5
+              },
+              "43": {
+                "incl": 5,
+                "excl": 5
+              },
+              "44": {
+                "incl": 5,
+                "excl": 5
+              },
+              "45": {
+                "incl": 5,
+                "excl": 5
+              },
+              "46": {
+                "incl": 5,
+                "excl": 5
+              },
+              "47": {
+                "incl": 5,
+                "excl": 5
+              },
+              "48": {
+                "incl": 5,
+                "excl": 5
+              },
+              "49": {
+                "incl": 5,
+                "excl": 5
+              },
+              "50": {
+                "incl": 5,
+                "excl": 5
+              },
+              "51": {
+                "incl": 5,
+                "excl": 5
+              },
+              "52": {
+                "incl": 5,
+                "excl": 5
+              },
+              "53": {
+                "incl": 5,
+                "excl": 5
+              },
+              "54": {
+                "incl": 5,
+                "excl": 5
+              },
+              "55": {
+                "incl": 5,
+                "excl": 5
+              },
+              "56": {
+                "incl": 5,
+                "excl": 5
+              },
+              "57": {
+                "incl": 5,
+                "excl": 4
+              },
+              "58": {
+                "incl": 5,
+                "excl": 4
+              },
+              "59": {
+                "incl": 5,
+                "excl": 3
+              },
+              "60": {
+                "incl": 5,
+                "excl": 3
+              },
+              "61": {
+                "incl": 5,
+                "excl": 2
+              },
+              "62": {
+                "incl": 5,
+                "excl": 2
+              },
+              "63": {
+                "incl": 5,
+                "excl": 2
+              },
+              "64": {
+                "incl": 5,
+                "excl": 2
+              },
+              "65": {
+                "incl": 5,
+                "excl": 2
+              },
+              "66": {
+                "incl": 5,
+                "excl": 2
+              },
+              "67": {
+                "incl": 5,
+                "excl": 2
+              },
+              "68": {
+                "incl": 5,
+                "excl": 2
+              },
+              "69": {
+                "incl": 5,
+                "excl": 2
+              },
+              "70": {
+                "incl": 5,
+                "excl": 2
+              },
+              "71": {
+                "incl": 5,
+                "excl": 1
+              },
+              "72": {
+                "incl": 5,
+                "excl": 1
+              },
+              "73": {
+                "incl": 5,
+                "excl": 1
+              },
+              "74": {
+                "incl": 5,
+                "excl": 1
+              },
+              "75": {
+                "incl": 5,
+                "excl": 1
+              },
+              "76": {
+                "incl": 5,
+                "excl": 1
+              },
+              "77": {
+                "incl": 5,
+                "excl": 1
+              },
+              "78": {
+                "incl": 5,
+                "excl": 1
+              },
+              "79": {
+                "incl": 5,
+                "excl": 1
+              },
+              "80": {
+                "incl": 5,
+                "excl": 1
+              },
+              "81": {
+                "incl": 5,
+                "excl": 1
+              },
+              "82": {
+                "incl": 5,
+                "excl": 1
+              },
+              "83": {
+                "incl": 5,
+                "excl": 1
+              },
+              "84": {
+                "incl": 5,
+                "excl": 1
+              },
+              "85": {
+                "incl": 5,
+                "excl": 1
+              },
+              "86": {
+                "incl": 5,
+                "excl": 0
+              },
+              "88": {
+                "incl": 5,
+                "excl": 0
+              },
+              "89": {
+                "incl": 5,
+                "excl": 0
+              },
+              "90": {
+                "incl": 5,
+                "excl": 0
+              },
+              "91": {
+                "incl": 5,
+                "excl": 0
+              },
+              "92": {
+                "incl": 5,
+                "excl": 0
+              },
+              "93": {
+                "incl": 5,
+                "excl": 0
+              },
+              "94": {
+                "incl": 5,
+                "excl": 0
+              },
+              "95": {
+                "incl": 5,
+                "excl": 0
+              },
+              "96": {
+                "incl": 5,
+                "excl": 0
+              },
+              "97": {
+                "incl": 5,
+                "excl": 0
+              },
+              "98": {
+                "incl": 5,
+                "excl": 0
+              },
+              "99": {
+                "incl": 5,
+                "excl": 0
+              },
+              "100": {
+                "incl": 5,
+                "excl": 0
+              },
+              "101": {
+                "incl": 5,
+                "excl": 0
+              },
+              "102": {
+                "incl": 5,
+                "excl": 0
+              },
+              "103": {
+                "incl": 5,
+                "excl": 0
+              },
+              "104": {
+                "incl": 5,
+                "excl": 0
+              },
+              "105": {
+                "incl": 5,
+                "excl": 0
+              },
+              "106": {
+                "incl": 5,
+                "excl": 0
+              },
+              "107": {
+                "incl": 5,
+                "excl": 0
+              },
+              "108": {
+                "incl": 5,
+                "excl": 0
+              },
+              "109": {
+                "incl": 5,
+                "excl": 0
+              },
+              "110": {
+                "incl": 5,
+                "excl": 0
+              },
+              "111": {
+                "incl": 5,
+                "excl": 0
+              },
+              "112": {
+                "incl": 5,
+                "excl": 0
+              },
+              "113": {
+                "incl": 5,
+                "excl": 0
+              },
+              "114": {
+                "incl": 5,
+                "excl": 0
+              },
+              "115": {
+                "incl": 5,
+                "excl": 0
+              },
+              "116": {
+                "incl": 5,
+                "excl": 0
+              },
+              "117": {
+                "incl": 5,
+                "excl": 0
+              },
+              "118": {
+                "incl": 5,
+                "excl": 0
+              },
+              "119": {
+                "incl": 5,
+                "excl": 0
+              },
+              "120": {
+                "incl": 5,
+                "excl": 0
+              },
+              "121": {
+                "incl": 5,
+                "excl": 0
+              },
+              "122": {
+                "incl": 6,
+                "excl": 1
+              },
+              "123": {
+                "incl": 6,
+                "excl": 1
+              },
+              "124": {
+                "incl": 6,
+                "excl": 1
+              },
+              "125": {
+                "incl": 6,
+                "excl": 1
+              },
+              "126": {
+                "incl": 6,
+                "excl": 1
+              },
+              "127": {
+                "incl": 6,
+                "excl": 1
+              },
+              "128": {
+                "incl": 6,
+                "excl": 1
+              },
+              "129": {
+                "incl": 6,
+                "excl": 1
+              },
+              "130": {
+                "incl": 6,
+                "excl": 1
+              },
+              "131": {
+                "incl": 6,
+                "excl": 1
+              },
+              "132": {
+                "incl": 6,
+                "excl": 1
+              },
+              "133": {
+                "incl": 6,
+                "excl": 1
+              },
+              "134": {
+                "incl": 6,
+                "excl": 1
+              },
+              "135": {
+                "incl": 6,
+                "excl": 1
+              },
+              "136": {
+                "incl": 6,
+                "excl": 1
+              },
+              "137": {
+                "incl": 6,
+                "excl": 1
+              },
+              "138": {
+                "incl": 6,
+                "excl": 1
+              },
+              "139": {
+                "incl": 6,
+                "excl": 1
+              },
+              "140": {
+                "incl": 6,
+                "excl": 1
+              },
+              "141": {
+                "incl": 6,
+                "excl": 1
+              },
+              "142": {
+                "incl": 6,
+                "excl": 1
+              },
+              "143": {
+                "incl": 6,
+                "excl": 1
+              },
+              "144": {
+                "incl": 6,
+                "excl": 1
+              },
+              "145": {
+                "incl": 6,
+                "excl": 1
+              },
+              "146": {
+                "incl": 6,
+                "excl": 1
+              },
+              "147": {
+                "incl": 6,
+                "excl": 1
+              },
+              "148": {
+                "incl": 6,
+                "excl": 1
+              },
+              "149": {
+                "incl": 6,
+                "excl": 1
+              },
+              "150": {
+                "incl": 6,
+                "excl": 1
+              }
+            }
+          }
+        }
+      ],
+      "wall": {
+        "seeds": 8,
+        "nationalByStanding": 6,
+        "nationalByScaleRank": 0,
+        "table": 0,
+        "wins": 0,
+        "wave4Reached": 8,
+        "wave5Reached": 6,
+        "medianSurvival": 151,
+        "wave4Kills": 36,
+        "wave5Kills": 2,
+        "deaths": 689
+      }
+    },
+    "poolTotal": 0,
+    "slotTotal": 6,
+    "censusDeadTotal": 1500,
+    "censusTotal": 2615,
+    "validityOk": true,
+    "verdict": "COSTLY"
+  },
+  "offWall": {
+    "seeds": 8,
+    "nationalByStanding": 6,
+    "nationalByScaleRank": 0,
+    "table": 0,
+    "wins": 0,
+    "wave4Reached": 8,
+    "wave5Reached": 6,
+    "medianSurvival": 151,
+    "wave4Kills": 36,
+    "wave5Kills": 2,
+    "deaths": 689
+  },
+  "offPerSeed": [
+    {
+      "seed": 103221,
+      "gameDays": 151,
+      "standing": 199,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 4,
+      "wave4Kills": 2,
+      "deaths": 87
+    },
+    {
+      "seed": 103222,
+      "gameDays": 146,
+      "standing": 199,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 4,
+      "wave4Kills": 7,
+      "deaths": 98
+    },
+    {
+      "seed": 103223,
+      "gameDays": 151,
+      "standing": 430,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 5,
+      "wave4Kills": 4,
+      "deaths": 101
+    },
+    {
+      "seed": 103224,
+      "gameDays": 151,
+      "standing": 365,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 5,
+      "wave4Kills": 3,
+      "deaths": 114
+    },
+    {
+      "seed": 103225,
+      "gameDays": 151,
+      "standing": 245,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 5,
+      "wave4Kills": 4,
+      "deaths": 46
+    },
+    {
+      "seed": 103226,
+      "gameDays": 151,
+      "standing": 400,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 5,
+      "wave4Kills": 6,
+      "deaths": 93
+    },
+    {
+      "seed": 103227,
+      "gameDays": 150,
+      "standing": 285,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 5,
+      "wave4Kills": 3,
+      "deaths": 56
+    },
+    {
+      "seed": 103228,
+      "gameDays": 151,
+      "standing": 390,
+      "scaleRank": "regional",
+      "won": false,
+      "maxWave": 5,
+      "wave4Kills": 7,
+      "deaths": 94
+    }
+  ]
+}
