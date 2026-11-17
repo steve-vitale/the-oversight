@@ -2202,7 +2202,23 @@ try { this.noteTrialDeed('catch_3_lies', 1); } catch (e2) {}
       while (c.transcript.length > 200) c.transcript.shift(); // HISTORY (Steve 2026-10-05): was 8 — destroyed conversation history and desynced the tap-advance. 200 keeps the whole conversation; memory is trivial.
       c.exchanges++;
       try { this.tickAction(1); } catch (e) {} // confrontation takes a moment
-      this.sayLine(vid, r.line);
+      // DRY2 (journey-social r234): the confrontation's consequences already
+      // fired inside confrontDoubt (resolveDoubt, trust moves, memories,
+      // trial deeds, accuserPays) — the line is the outcome's voice, and
+      // blocking it misreports a landed outcome as a fizzle (the r86
+      // skill-lesson rule). A run-ledger-blocked r.line dried here (45708
+      // gen_o1jb3sv d50: the third confront returned the '"Never mind."'
+      // guard line, which sat in the 48-entry run ledger). WouldBlock-check
+      // first; on the blocked path only, re-speak with the diegetic-act
+      // exemption — the same class as invitation beats (r7), betrayal
+      // outcomes (r25), skill lessons (r86), secret replies (r120) and
+      // plant-teach (r157). Paraphrasing the outcome would risk misreporting
+      // it, so the line itself is spoken, not replaced. The unblocked path
+      // is untouched (pure read; the exemption fires only where the old
+      // code produced the dry line).
+      let confrontBlocked = false;
+      try { confrontBlocked = typeof this.convoWouldBlock === 'function' && !!this.convoWouldBlock(vid, r.line); } catch (e) { confrontBlocked = false; }
+      this.sayLine(vid, r.line, confrontBlocked ? { diegeticAct: true } : undefined);
       // the village-hears-about-it beat lands AFTER their reaction, not before.
       if (r.afterSay) { try { this.say(r.afterSay); } catch (e) {} }
       if (r.outcome === 'attacked') { try { this.endConvo(vid, 'left'); return { line: r.line, choices: [], ended: true, transcript: c.transcript.slice() }; } catch (e) {} }

@@ -8046,6 +8046,26 @@
           if (composed) line = composed;
         }
       } catch (e) {}
+      // DRY2 (journey-social r234): a topic ask whose COMPOSED line is
+      // run-ledger-blocked would dry at sayLine below (45706 Raj d132:
+      // "How are we with the neighbors, honestly?" → "...Sorry, lost my
+      // train of thought."). The guard must live HERE, after composition —
+      // a guard in topic2Ask is dead: it sees the bare topic line, while
+      // the ledger holds the ack-prefixed composite (convoComposeBeat
+      // prepends a random 1-of-3 topic ack), so WouldBlock on the bare
+      // line is always false and the dry fires only when the drawn ack
+      // happens to match another villager's (1-in-3 per pair). A blocked
+      // ask is answered with the honest exhausted line — the same line
+      // the null-pool branch serves. Scoped to 'ask:' turns only (the
+      // exhausted line is an answer to a question). Only fires where the
+      // old code dried — trajectory-neutral otherwise.
+      try {
+        if (line && typeof choiceId === 'string' && choiceId.indexOf('ask:') === 0 &&
+            typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, line)) {
+          const cg = (this.data.characterGen || {}).convo || {};
+          line = this.convoPickCycle(vid, 'exh', cg.exhausted || ['"I\'ve told you everything I know about that."']);
+        }
+      } catch (e) {}
       // NULL-LINE CLASS GUARD (journey-establishment r16 2026-10-18): several
       // branches can done(null) when a pool is fully ledger-blocked
       // (convoPickCycle -> null: winddown 'more', 'agree' agreefill, a null-text

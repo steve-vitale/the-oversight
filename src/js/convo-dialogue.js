@@ -1030,17 +1030,34 @@
         };
         const probePool = probePools[prods <= 1 ? 1 : prods === 2 ? 2 : 3];
         let line = null;
+        let stonewall = false;
         for (const cand of probePool) {
           try { if (!this.convoWouldBlock(vid, cand)) { line = cand; break; } } catch (e) { line = cand; break; }
         }
-        line = line || 'They shake their head — not no, not yes. Done talking about it.';
+        if (!line) {
+          line = 'They shake their head — not no, not yes. Done talking about it.';
+          stonewall = true;
+        }
         // FALLBACK (journey-social 2026-10-11): the no-repeat ledger blocks
         // the only branch line once it's been said (per-conversation or
         // run-wide) — without a fallback the probe lands in total silence
         // while its trust/mood/evidence consequences still fire. Stonewalling
         // is honest; silence is a dead verb.
+        // DRY2 (journey-social r234): the stonewall itself was ledgered when
+        // served as the PRIMARY line (sayLine ledgers every unblocked line),
+        // so a later sitting found all branch variants blocked AND the
+        // stonewall run-blocked — and sayLine's run-block branch serves the
+        // dry line, ignoring opts.fallback (45706 Raj d31/d32: the probe
+        // dried twice). A generic fallback served as a primary must be
+        // ledger-exempt — sayLine's own comment says fallbacks are
+        // "deliberately EXEMPT from the ledgers (generic by design)". Only
+        // the stonewall emission is structural; pool variants keep ledgering,
+        // so the no-repeat guard still governs real probe lines. A stonewall
+        // repeated under hammering in one sitting is a person digging in,
+        // not a parrot bug; the sitting still ends on its energy budget.
         const said = this.sayLine(vid, line, {
           fallback: 'They shake their head — not no, not yes. Done talking about it.',
+          structural: stonewall,
         });
         return { line: said || line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
       }
