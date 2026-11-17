@@ -346,8 +346,14 @@ guardrails.pantryKcal, c3.starvationDeaths):
 ## Closeout
 - No src/js change this run — the blank is documented (F1
   case-thread precedence), the escalation is recorded (F2), the
-  attribution is closed (F3). Driver/analyzer/prereg commit +
-  evidence commit (hashes below).
+  attribution is closed (F3). Commits: prereg/driver
+  `733ea8404` (rebased to `5093a0aa5`); evidence `c028d0ec2`
+  (rebased to `c15b659c9`).
+- Master moved during the run (social-life r234 landed
+  `39eaa043e` — DRY2 fix, touching convo-dialogue.js); rebased
+  clean onto it (2/2, no overlap with this run's files), proof
+  tests re-run green on the rebased tip (19+13+18+10+35+7),
+  merged ff-only into local master.
 - **Merged locally, pending ship** — no bump, no push, no live
   verification (ship loop owns those).
 - Rotation 1→2 written with read-back; lock deleted at closeout
