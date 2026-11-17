@@ -1,0 +1,48 @@
+test-nationalsticky-b: static checks
+  ok: S1 zero src/ diff (staged + unstaged)
+  ok: S1b zero untracked src/ files
+  ok: S2 competent sha256 is df9b7dff…
+  ok: S3 driver wraps answerNationalChoice
+  ok: S3b driver wraps tendLink
+  ok: S3c driver never stubs Game.save
+  ok: S3d driver calls villageStandingTotal at exactly one (end-of-run) site
+  ok: S4 analyzer exports deriveLapseCause
+  ok: S4b analyzer exports classifySeed
+test-nationalsticky-b: D1 determinism (ON twice, seed 103011, 60d)
+  ok: D1 identical daily nationalLive/scale/standing/pop/waveKills series
+  ok: D1b identical link-roll trust/seasoned series
+  ok: D1c identical verbEvents
+  ok: D1d identical end wall fields
+  ok: D1e series covers ≥30 days
+  ok: D1f zero instrument errors on both runs
+test-nationalsticky-b: D2 neutrality (OFF vs ON, seed 103011, 60d)
+  ok: D2 identical daily series OFF vs ON
+  ok: D2b identical end wall fields OFF vs ON
+  ok: D2c zero instrument errors OFF leg
+  ok: D2d OFF leg carries no recorder rows
+test-nationalsticky-b: D3 re-derivation (synthetic + corpus)
+  ok: D3a trust-drift classified
+  ok: D3a2 drift link named with 45->39
+  ok: D3a3 independent re-implementation agrees (trust-drift)
+  ok: D3b link-loss classified
+  ok: D3b2 lost link named (L3, trust 55)
+  ok: D3b3 independent agrees (link-loss)
+  ok: D3c both classified
+  ok: D3c2 independent agrees (both)
+  ok: D3d standing-fall flagged as co-occurrence (cause stays trust-drift)
+  ok: D3e unknown when no link cause (no forced cause)
+  ok: D3e2 independent agrees (unknown)
+  ok: D3f polity-still-qualifies anomaly flagged
+  ok: D3g every D1 series day carries shapeCands + linksRoll + nationalLive
+  ok: D3h series reach days == verb reach days on D1 corpus
+  ok: D3h2 unknown lapses 0 on D1 corpus
+  ok: D3i NEGATIVE CONTROL: stripped/missing answer verbs are detected
+test-nationalsticky-b: 35/35 checks passed
+
+Re-run 2026-11-17T04:34Z on the final tip (ec114659f, no src/ change):
+35/35, exit 0. Two earlier attempts the same hour exited 1 with an empty
+log file when stdout was redirected straight into a fresh log file — the
+recurring host write flap (fresh/empty-file writes refused); the same
+command with stdout to the terminal passed 35/35 three times in a row.
+The instrument is green; the two failed attempts are a logging artifact,
+not a proof failure.
