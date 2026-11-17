@@ -148,13 +148,53 @@ is ~1 min of panel + a re-point).
 ## Panel (filled after the run)
 
 - Command: `node scripts/balance-panel.js --out .proofrefresh-gateproof-a-panel --n 1`
-- (PENDING: timing, cases, sha, sourceHeadStart/End, staleness counts,
-  neutrality reproduction, row movement vs r211 panel.)
+- Single attempt, started 11:48:30Z, finished 11:56:36Z:
+  `Saved .proofrefresh-gateproof-a-panel; 4 cases, 0 cached jobs. PANEL_EXIT=0`.
+  ~8 min wall (r211's took 199s — box loaded this round).
+- The `cases/` cache in `.proofrefresh-gateproof-a-panel/` is NOT committed
+  (deleted at closeout; the retained .gz is the artifact).
+- `sourceHeadStart == sourceHeadEnd == e8daddbf0f108a2328f6544a1ad4a625ad738280`
+  (prereg/owed-check commit, on base 9be3676d8).
+- Panel sha256
+  `0f7a41a154052833b867fc7edf24c259b46e2cb9e00a6795cfcddff7a8731c19`.
+- Verification (read-only): the generated panel's `sources` vs the
+  branch-tip manifest: **0 keys differ** (532/532);
+  `validity.sourcesStable` true; 4 rows; neutrality 4/4 match, warnings
+  0, tuple identical to the r211 panel AND the b20 panel (regeneration
+  moved no NEUTRALITY verdict). Observer/contract digests match the tip
+  and the r211 panel. 0 rows with warnings/observer/gear problems.
+- Staleness on the tip (measured, `B.manifest` vs panel `sources`):
+  **gateproof-a-new 0 stale**; **r211 14 stale** (the 14 differing
+  keys); **b20 19 stale** (3 new policy files + 16 differ).
+  Before/after: the refresh takes the proof from 14 stale keys (r211)
+  to 0 (gateproof-a-new) on this tip.
+- ROW MOVEMENT (brief expectation NOT met — see the evidence file):
+  headline-field rows differ **3/4** vs r211 (per-field: days 3/4,
+  gameDays 2/4, waveReach 1/4; won/entered/national/table/maxArc/
+  maxRank/endReason/vests/vestsVillager 0/4) and **4/4** vs b20's
+  seed-7 rows (days 4/4, gameDays 4/4, waveReach 1/4, endReason 1/4).
+  Determinism proven on this tip (capable/seed 7 run twice as
+  standalone single-case panels → byte-identical rows; the single-case
+  re-run row == the full-panel capable/7 row, same stateHash
+  e4baf867…), so the movement is the game changing (planignite-fix +
+  r213 deepening moved 14 manifest keys the panel exercises), not
+  panel noise. The neutrality tuple — the proof's binding check —
+  reproduces exactly. Aggregates are unchanged: won 1/4, entered 1/4,
+  national 1/4, table 1/4, wave-5 2/4 — capable/7 still wins at
+  global on day 94.
+- Panel's own wall rows (scale-wall numbers, as the panel carries them):
+  4 rows, 150d, seed 7 x 4 policies: national 1/4, wins 1/4, entered
+  1/4 (capable only); wave-5 2/4 (capable + risk-aware); maxArc 4 on
+  4/4; median days 102 (94/150/110/94); end reasons over-other 1,
+  survived 1, village-lost 2; vests 3 total. These are the
+  instrument's own rows on the new tip, reported as carried, not a
+  balance verdict (this arm re-proves the instrument; no lever was
+  played, and no compare run was done).
 - Copy the regenerated panel to
-  `evidence/2026-11-17/neutral-gateproof-a.json.gz` (NEW file — do NOT
-  overwrite r211/b20/b19/b18), then `node
+  `evidence/2026-11-17/neutral-gateproof-a.json.gz` (NEW file — do
+  NOT overwrite r211/b20/b19/b18), then `node
   scripts/balance-proof-update.js
-  evidence/2026-11-17/neutral-gateproof-a.json.gz` — exit 0 expected.
+  evidence/2026-11-17/neutral-gateproof-a.json.gz` — exit 0.
   No hand-edited hashes; re-point to the NEW panel only.
 
 ## Telemetry
