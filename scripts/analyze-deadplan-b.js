@@ -318,7 +318,12 @@ function staticReaderCheck(repoRoot) {
         out.problems.push(f + ' reads winPlan');
       }
     }
-    const allowed = ['game.js', 'villager-agency.js', 'villager-brain.js', 'win-plan.js'];
+    const allowed = ['game.js', 'villager-agency.js', 'villager-brain.js', 'win-plan.js', 'betrayal.js'];
+    // CORRECTION (sim-deathcleanup-b, 2026-11-17): betrayal.js is now a
+    // sanctioned winPlan caller — removeVillager's death branch calls
+    // winPlanOnVillagerDeath(vid) (the one removal choke point). The
+    // deadplan-era allowlist predates that wiring; flagging it would
+    // report the intended fix as a problem.
     for (const f of out.filesWithWinPlan) {
       if (allowed.indexOf(f) === -1) out.problems.push('unexpected winPlan reader: ' + f);
     }

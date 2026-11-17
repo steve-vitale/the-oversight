@@ -1256,6 +1256,13 @@
           || (this.data.background_survivors || []).find(x => x.id === vid);
         if (rec) rec.dead = true;
       } catch (e) {}
+      // DEATH CLEANUP (sim-deathcleanup-b, 2026-11-17): the plan dies
+      // with the villager — delete their entry and strike them from
+      // every living holder's party. Placed here, after the phoenix
+      // early-return above: a held (phoenix) death keeps its plan.
+      // winPlanOnVillagerDeath is total by construction; the typeof
+      // guard covers saves loaded before it existed.
+      if (typeof this.winPlanOnVillagerDeath === 'function') this.winPlanOnVillagerDeath(vid);
     }
   },
 

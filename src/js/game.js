@@ -40359,6 +40359,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // hurtVillager guard — a fighter already removed from the roster is
       // already dead; don't push a second fallen entry for them.
       if (!((v.roster || []).includes(t.villagerId))) return;
+      // DEATH CLEANUP (sim-deathcleanup-b, 2026-11-17): a TB death
+      // bypasses removeVillager entirely — the plan dies here, at the
+      // fall. winPlanOnVillagerDeath is total by construction; the
+      // typeof guard covers saves loaded before it existed.
+      if (typeof this.winPlanOnVillagerDeath === 'function') this.winPlanOnVillagerDeath(t.villagerId);
       if (v.positions) delete v.positions[t.villagerId];
       v.fallen = v.fallen || [];
       v.fallen.push({ villagerId: t.villagerId, day: this.state.scholar.day, cause: 'combat', name: this.fallenName(t.villagerId) });

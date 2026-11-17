@@ -2174,7 +2174,7 @@ Place knowledge. The Scattering dropped the player somewhere
 ### win-plan (`win-plan.js`)
 Villagers pursuing a winning gameplan, in ordered stages.
 
-**Provides:** winPlanOf(vid), winPlanStats(), winPlanHavenTick(vid, hx, hy), winPlanDepart(vid, hx, hy, announce), winPlanFightGate(vid, mdef), winPlanSeedFromFight(vid, mdef, outcome), winPlanNoteKill(vid, mdef), winPlanNoteFight(vid, allyVids), winPlanBondsTick(hx, hy), winPlanMusterTick(hx, hy)
+**Provides:** winPlanOf(vid), winPlanStats(), winPlanOnVillagerDeath(vid), winPlanHavenTick(vid, hx, hy), winPlanDepart(vid, hx, hy, announce), winPlanFightGate(vid, mdef), winPlanSeedFromFight(vid, mdef, outcome), winPlanNoteKill(vid, mdef), winPlanNoteFight(vid, allyVids), winPlanBondsTick(hx, hy), winPlanMusterTick(hx, hy)
 
 **Rules:**
 - winplan_engagement: a plan starts from lived or heard knowledge (code: winPlanHavenTick)

@@ -4,6 +4,7 @@
 // provides:
 //   - winPlanOf(vid)
 //   - winPlanStats()
+//   - winPlanOnVillagerDeath(vid)
 //   - winPlanHavenTick(vid, hx, hy)
 //   - winPlanDepart(vid, hx, hy, announce)
 //   - winPlanFightGate(vid, mdef)
@@ -96,11 +97,12 @@
       avoidances: 0, seekContacts: 0, standingContacts: 0,
       veteranGuardHolds: 0, partyFights: 0, planSeeds: 0, stageAdvances: 0,
       bondTends: 0, musterStanddowns: 0, trickHolds: 0,
-      partyTrios: 0, partyDissolved: 0,
+      partyTrios: 0, partyDissolved: 0, deathCleanups: 0,
     };
     if (v.winPlanStats.trickHolds == null) v.winPlanStats.trickHolds = 0;
     if (v.winPlanStats.partyTrios == null) v.winPlanStats.partyTrios = 0;
     if (v.winPlanStats.partyDissolved == null) v.winPlanStats.partyDissolved = 0;
+    if (v.winPlanStats.deathCleanups == null) v.winPlanStats.deathCleanups = 0;
     if (v.winPlanStats.bondTends == null) v.winPlanStats.bondTends = 0;
     if (v.winPlanStats.musterStanddowns == null) v.winPlanStats.musterStanddowns = 0;
     return v;
@@ -287,6 +289,46 @@
     winPlanStats() {
       var v = stateOf(this);
       return v ? v.winPlanStats : {};
+    },
+    // DEATH CLEANUP (sim-deathcleanup-b, 2026-11-17): when a villager
+    // dies, their plan dies with them — delete their own entry, and
+    // strike their name from every living holder's party (the slot
+    // fix: sim-deadplan-b measured 6 living holders carrying a dead
+    // villager in their party for 149 holder-days, and 57% of census
+    // rows belonging to dead holders). A party/hunt plan whose party
+    // empties falls back to 'party' (re-seek a companion) instead of
+    // sitting at 'hunt' with an empty list; standing/table plans keep
+    // their stage (the kill is banked; the party list is vestigial
+    // there). Pure data work: no RNG, no say, no narration. Bumps
+    // winPlanStats.deathCleanups only when something was cleaned.
+    // Total by construction (the catch returns a safe value), so call
+    // sites need no try/catch — only a typeof guard.
+    winPlanOnVillagerDeath(vid) {
+      try {
+        if (!vid) return { deleted: false, purged: 0 };
+        var v = stateOf(this);
+        if (!v || !v.winPlan) return { deleted: false, purged: 0 };
+        var deleted = false;
+        if (v.winPlan[vid]) { delete v.winPlan[vid]; deleted = true; }
+        var purged = 0;
+        for (var hid in v.winPlan) {
+          if (!Object.prototype.hasOwnProperty.call(v.winPlan, hid)) continue;
+          var plan = v.winPlan[hid];
+          if (!plan || !plan.party || !plan.party.length) continue;
+          var before = plan.party.length;
+          plan.party = plan.party.filter(function (pid) { return pid !== vid; });
+          var n = before - plan.party.length;
+          if (n > 0) {
+            purged += n;
+            if (!plan.party.length && (plan.stage === 'party' || plan.stage === 'hunt')) plan.stage = 'party';
+          }
+        }
+        if (deleted || purged > 0) bump(this, 'deathCleanups');
+        return { deleted: deleted, purged: purged };
+      } catch (e) {
+        if (typeof console !== 'undefined' && console.warn) console.warn('[winPlan] death cleanup failed', e);
+        return { deleted: false, purged: 0 };
+      }
     },
     winPlanSeedFromFight(vid, mdef, outcome) {
       try {
