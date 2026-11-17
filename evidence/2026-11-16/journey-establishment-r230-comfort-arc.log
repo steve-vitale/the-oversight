@@ -1,0 +1,29 @@
+ok first comfort engages
+ok stage2 asks for follow-through rather than asking again
+ok empathic follow-through resolves as comforted
+ok want and generic feeling menus retire all completed comfort actions
+ok other choices remain available
+comfort-empathy: 5 passed, 0 failed
+ok stale dlg:comfort has no conversation payout or exchange
+ok stale dlg:empathize has no conversation payout or exchange
+ok stale dlg:stay has no conversation payout or exchange
+comfort-stale: 3 passed, 0 failed
+ok stale opener at stage2 pays no trust or exchange
+comfort-opening-replay: 1 passed, 0 failed
+ok leaving before engagement does not complete comfort
+comfort-early-leave: 1 passed, 0 failed
+ok existing four stays still resolve comfort
+ok resolved stay retires generic empathy too
+comfort-stay: 2 passed, 0 failed
+ok honest refusal remains deflected
+ok refused comfort is not re-offered on its thread
+comfort-deflect: 2 passed, 0 failed
+ok another feeling thread can still offer comfort
+ok other-thread comfort still responds, without changing the completed want
+comfort-other-thread: 2 passed, 0 failed
+ok comfort on a different thread does not engage an unrelated want
+comfort-other-want: 1 passed, 0 failed
+ok words and goodbye still obey40 trust cap
+ok goodbye preserves comforted resolution and consumes seed
+comfort-cap-and-close: 2 passed, 0 failed
+comfort-arc: 9 passed, 0 failed (isolated cases)
