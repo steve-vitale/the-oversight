@@ -1443,7 +1443,7 @@
           // hygiene (exiles ledger, positions, sick, doubts). The
           // party/followers filters below stay: removeVillager does
           // not clean those.
-          try { if (this.removeVillager) this.removeVillager(fled.villagerId, 'fled'); } catch (e) {}
+          try { if (this.removeVillager) this.removeVillager(fled.villagerId, 'fled'); } catch (e) { console.warn('tbEnd fled cleanup failed', e); }
           if (v.positions) delete v.positions[fled.villagerId];
           v.party = (v.party || []).filter(id => id !== fled.villagerId);
           v.followers = (v.followers || []).filter(id => id !== fled.villagerId);
