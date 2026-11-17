@@ -210,10 +210,24 @@ capstone is delivered.
 
 ## Gate / telemetry
 
-- **Gate:** `node scripts/check.js --quick` launched in the worktree
-  after the build commit (log:
-  `hidden_files/evidence/2026-11-17/journey-scale-r233-gate.log`).
-  [TO FILL at closeout: result + adjudication.]
+- **Gate:** `node scripts/check.js --quick` in the worktree after the
+  build commit (log:
+  `hidden_files/evidence/2026-11-17/journey-scale-r233-gate.log`):
+  **329 passed, 11 failed in 1587s — ADJUDICATED, all 11 pre-existing.**
+  The 11: 6× 120s timeouts (living-garden, occupation-panels,
+  one-person-army, solo-campaign-endings, trust-observer-neutrality,
+  capable-bot — the deed-attainment suite timeout class; the gate ran
+  nearly 2× slower than r232's 838s under box load), measurement-proof
+  staleness ×2 (proof-update + workflow, "retained neutrality proof
+  covers the current inputs" — **verified pre-existing by re-running
+  proof-update against base `34bcb7b0b` titans.js: still fails**),
+  phone-frame staleness, cache-flags 0/4 (the documented box-load
+  artifact, AGENTS.md 2026-11-12), ladder-bundle ambient-raid control
+  (same single failing control as r232). **None touches titans or the
+  refusal path; no titan script appears in the failure list.** The
+  change's own proof is green (refusal-once-a-day 25/25 + all 7 titan
+  suites). Landing follows the r232 precedent: land over pre-existing
+  failures, never over a failure the change caused.
 - **Telemetry:** two LOUD lines against the `scale.json` baseline
   (241 / 178 / 468), investigated in-run; **baseline NOT rolled.**
   (1) `maxGameDay` +110% (468 → 984): **EXPLAINED — a file-count
