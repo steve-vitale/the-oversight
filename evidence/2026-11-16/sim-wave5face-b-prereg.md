@@ -315,3 +315,56 @@ the secondary source.
 National (standing >= 200 AND scaleRank), table, wins, wave-4 unlocked,
 wave-5 unlocked, wave-5 faced, median survival, wave-4 kills, wave-5
 kills, deaths — per leg.
+
+## Correction 1 (recorded AFTER the judged sweep, BEFORE the evidence — read first)
+
+The prereg's frozen outcome rule for `died` was wrong about what the
+run-days death samples contain, and the first ON-leg corpus was resolved
+under the wrong rule. The error was found by reading the engine while
+checking the v1 outcomes against the corpus deaths list, before any
+evidence was written.
+
+- **The error.** The prereg says `died` = "no same-day kill and >= 1
+  death sample on the engagement day with kind in (monster, wild)".
+  The death samples (`sim-harness.js` live capture of `Game.tele('death')`)
+  mix TWO kinds of death (`src/js/corpses.js` registerDeath: "kind
+  covers person/monster/animal"). `kind='monster'` rows are MONSTER
+  deaths — the village killed something, `who` is the monster id —
+  NOT fighter deaths. And `kind='wild'` never occurs in the corpus (0
+  rows on all 8 seeds). The villager field-combat death signal is
+  `kind='villager'` (or `'person'`) with a combat cause (`'the wild'`,
+  `'monster'`, or a named monster).
+- **What it mislabeled.** Exactly one engagement: 102706 d158 nielsen
+  (v1 outcome `died`, combatDeathsSameDay 1) — the only death that day
+  is a monster the villagers killed (influencer, `villager combat`); no
+  villager died that day. Its correct outcome is `fled`. The other two
+  v1 `died` engagements keep their outcome under the corrected rule
+  (102702 d144 editor and 102704 d118 cancellation each have a real
+  villager wild-death that day); their combatDeathsSameDay counts drop
+  (2→1 and 4→1 — the monster-death rows no longer inflate them).
+- **The corrected rule (now in the driver).** `died` = no same-day kill
+  of that type AND >= 1 person combat death that day: kind
+  `villager`|`person` with cause `'the wild'`, `'monster'`, or the
+  id/name of a wave-5 monster. `combatDeathsSameDay` counts qualifying
+  person combat deaths only.
+- **What changed and what did not.** The driver (`classifyEngagements`)
+  and its proof fixtures are corrected; the analyzer gains a
+  re-derivation cross-check (`rederiveOutcomes`, corpus deaths list
+  only) that flags any disagreement with the driver's kill-log read.
+  The ON leg was RE-RUN under the corrected driver (deterministic —
+  D1 proven — trajectories byte-identical to v1 except the outcome
+  fields; verified by diff, v1 corpus kept in /tmp, not committed).
+  The OFF leg was NOT re-run (it carries no engagements; D2 compares
+  daily signatures + wall fields, none of which include outcomes).
+  Corrected outcome totals: killed 3, fled 10, died 2 (v1: killed 3,
+  fled 9, died 3). The facing verdict is UNCHANGED (5/5 released seeds
+  faced; 102706 faced 3 types) — one outcome label flips, no seed's
+  faced status moves. No GO bar moved: the bars judge the instrument
+  (valid corpora, proof green, facing answered for >=3 released seeds,
+  wall numbers), and all four hold under the corrected rule.
+- **Why this is a correction, not a re-score.** The frozen rule's INTENT
+  ("a combat death on the engagement day, plausibly from that day's
+  wave-5 fight") is unchanged; the rule's KIND READ was factually wrong
+  about the engine's death records. The correction makes the
+  implementation match the frozen intent, and the evidence reports both
+  the v1 and corrected values per affected engagement.

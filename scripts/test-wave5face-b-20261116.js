@@ -70,22 +70,36 @@ function snap(o) {
   check('w5FacedIdsPure: missing prog reads empty', JSON.stringify(DRIVER.w5FacedIdsPure({ state: { scholar: {} } })) === '[]');
   check('w5FacedIdsPure: does not create prog', (function () { const g = { state: { scholar: {} } }; DRIVER.w5FacedIdsPure(g); return g.state.scholar.prog === undefined; })());
 
-  // ---- classifyEngagements fixtures ----
+  // ---- classifyEngagements fixtures (CORRECTED rule, Correction 1:
+  // 'died' needs a PERSON combat death that day — kind 'monster' rows
+  // are monster deaths, not fighter deaths) ----
   const killLog = [{ d: 102, mid: 'cancellation', w: 5, by: 'p' }, { d: 110, mid: 'editor', w: 5, by: 'v1' }];
-  const deaths = [{ day: 105, kind: 'monster', who: 'x' }, { day: 105, kind: 'starvation', who: 'y' }, { day: 107, kind: 'wild', who: 'z' }];
+  const deaths = [
+    { day: 105, kind: 'villager', who: 'aki', cause: 'the wild' },
+    { day: 105, kind: 'monster', who: 'hummice', cause: 'combat' },
+    { day: 107, kind: 'monster', who: 'influencer', cause: 'villager combat' },
+    { day: 111, kind: 'villager', who: 'tashi', cause: 'monster' },
+    { day: 112, kind: 'villager', who: 'fatima', cause: 'cancellation' },
+  ];
   const engs = [
     { day: 102, mid: 'cancellation', outcome: null },
     { day: 105, mid: 'editor', outcome: null },
     { day: 107, mid: 'rerun', outcome: null },
     { day: 108, mid: 'spoiler', outcome: null },
+    { day: 110, mid: 'nielsen', outcome: null },
+    { day: 111, mid: 'timeslot', outcome: null },
+    { day: 112, mid: 'finale', outcome: null },
   ];
-  DRIVER.classifyEngagements(engs, killLog, deaths);
+  DRIVER.classifyEngagements(engs, killLog, deaths, ['cancellation', 'The Cancellation', 'editor', 'rerun', 'spoiler', 'timeslot', 'nielsen', 'finale']);
   check('classify: same-day kill of that type is killed', engs[0].outcome === 'killed', JSON.stringify(engs[0]));
-  check('classify: later kill of that type is NOT this engagement', engs[1].outcome === 'died', JSON.stringify(engs[1]));
-  check('classify: same-day combat death is died', engs[2].outcome === 'died' && engs[2].combatDeathsSameDay === 1, JSON.stringify(engs[2]));
+  check('classify: villager wild death is died (monster death same day does not inflate)', engs[1].outcome === 'died' && engs[1].combatDeathsSameDay === 1, JSON.stringify(engs[1]));
+  check('classify: REGRESSION 102706-d158 — only a monster death that day is fled, not died', engs[2].outcome === 'fled' && engs[2].combatDeathsSameDay === 0, JSON.stringify(engs[2]));
   check('classify: no kill, no combat death is fled', engs[3].outcome === 'fled' && engs[3].combatDeathsSameDay === 0, JSON.stringify(engs[3]));
+  check('classify: later kill of that type is NOT this engagement', engs[4].outcome === 'fled', JSON.stringify(engs[4]));
+  check('classify: villager killed by a monster (cause monster) is died', engs[5].outcome === 'died' && engs[5].combatDeathsSameDay === 1, JSON.stringify(engs[5]));
+  check('classify: villager killed BY a wave-5 monster (named cause) is died', engs[6].outcome === 'died' && engs[6].combatDeathsSameDay === 1, JSON.stringify(engs[6]));
   const engsStarve = [{ day: 105, mid: 'nielsen', outcome: null }];
-  DRIVER.classifyEngagements(engsStarve, [], [{ day: 105, kind: 'starvation', who: 'y' }]);
+  DRIVER.classifyEngagements(engsStarve, [], [{ day: 105, kind: 'villager', who: 'y', cause: 'starvation' }]);
   check('classify: starvation death does not make died', engsStarve[0].outcome === 'fled', JSON.stringify(engsStarve[0]));
 
   // ---- reconcileFacing fixtures ----
@@ -99,6 +113,35 @@ function snap(o) {
   check('reconcile: count mismatch detected', recCount.mismatch === true, JSON.stringify(recCount));
   const recIds = DRIVER.reconcileFacing([{ mid: 'cancellation' }, { mid: 'rerun' }], fakeGame2);
   check('reconcile: id-set mismatch detected', recIds.mismatch === true, JSON.stringify(recIds));
+
+  // ---- rederiveOutcomes fixtures (analyzer cross-check, corpus only) ----
+  const rederiveSeed = {
+    engagements: [
+      { day: 102, mid: 'cancellation', outcome: 'killed' },
+      { day: 105, mid: 'editor', outcome: 'died' },
+      { day: 107, mid: 'rerun', outcome: 'died' },
+      { day: 108, mid: 'spoiler', outcome: 'fled' },
+    ],
+    deaths: [
+      { day: 102, kind: 'monster', who: 'cancellation', cause: 'combat' },
+      { day: 105, kind: 'villager', who: 'aki', cause: 'the wild' },
+      { day: 107, kind: 'monster', who: 'influencer', cause: 'villager combat' },
+    ],
+  };
+  const rd = AN.rederiveOutcomes(rederiveSeed);
+  check('rederive: exactly the v1-bug engagement mismatches', rd.length === 1 && rd[0].day === 107 && rd[0].mid === 'rerun' && rd[0].recorded === 'died' && rd[0].rederived === 'fled', JSON.stringify(rd));
+  const rederiveClean = {
+    engagements: [
+      { day: 102, mid: 'cancellation', outcome: 'killed' },
+      { day: 105, mid: 'editor', outcome: 'died' },
+      { day: 108, mid: 'spoiler', outcome: 'fled' },
+    ],
+    deaths: [
+      { day: 102, kind: 'monster', who: 'cancellation', cause: 'combat' },
+      { day: 105, kind: 'villager', who: 'aki', cause: 'the wild' },
+    ],
+  };
+  check('rederive: clean corpus, 0 mismatches', AN.rederiveOutcomes(rederiveClean).length === 0, JSON.stringify(AN.rederiveOutcomes(rederiveClean)));
 
   // ---- holdKind sanity (reused instrument still classifies) ----
   check('holdKind: defer5 still classifies', INST.holdKind(snap({ standing: { total: 250, war: 250, diplomacy: 0, plenty: 0 }, capped: 250, gated: 199, peakWave: 4, readiness5: { ready: false, demand: { armored: 4, armed: 6, tricks: 3, veterans: 2 }, armored: 4, armed: 6, tricks: 5, veterans: 1 } })) === 'defer5');

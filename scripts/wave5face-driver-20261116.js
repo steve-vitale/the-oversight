@@ -193,14 +193,37 @@ function installFacingWrap(Game) {
   };
 }
 
-// classifyEngagements(engagements, killLog, deaths): frozen outcome
-// rules (prereg §Code read). killed = a wave-5 kill-log entry for this
-// monster id on the engagement day. died = no same-day kill and >= 1
-// combat death (kind monster|wild) that day. fled = otherwise.
-// deaths: the mapped run-days death list [{day, kind, ...}].
-function classifyEngagements(engagements, killLog, deaths) {
+// classifyEngagements(engagements, killLog, deaths, w5Names): frozen
+// outcome rules (prereg §Code read, as CORRECTED — see Correction 1 in
+// the prereg). killed = a wave-5 kill-log entry for this monster id on
+// the engagement day. died = no same-day kill and >= 1 PERSON combat
+// death that day (a villager/scholar who died fighting — kind
+// 'villager'|'person' with a combat cause: 'the wild', 'monster', or
+// the name/id of a wave-5 monster). fled = otherwise.
+// CORRECTION (why the person/combat-cause read, not the prereg's
+// kind-in-(monster, wild) read): the run-days death samples mix TWO
+// kinds of death (corpses.js registerDeath: "kind covers
+// person/monster/animal"). kind='monster' rows are MONSTER deaths (the
+// village killed something — who is the monster id), NOT fighter
+// deaths; kind='wild' never occurs. Counting kind='monster' as a
+// fighter death mislabels engagements whose only same-day death is a
+// monster the village killed (102706 d158 nielsen: the only death that
+// day is an influencer the villagers killed). combatDeathsSameDay counts
+// qualifying person combat deaths, not monster deaths.
+// deaths: the mapped run-days death list [{day, kind, who, cause, ...}].
+// w5Names: wave-5 monster ids + display names (for the named-cause
+// rule); defaults to [] (only the generic combat causes then count).
+function classifyEngagements(engagements, killLog, deaths, w5Names) {
   const log = killLog || [];
   const ds = deaths || [];
+  const names = {};
+  (w5Names || []).forEach(function (n) { names[String(n).toLowerCase()] = true; });
+  function isPersonCombatDeath(d) {
+    if (!d || (d.kind !== 'villager' && d.kind !== 'person')) return false;
+    const c = String(d.cause || '');
+    if (c === 'the wild' || c === 'monster') return true;
+    return !!names[c.toLowerCase()];
+  }
   for (let i = 0; i < engagements.length; i++) {
     const e = engagements[i];
     let killed = false;
@@ -211,8 +234,7 @@ function classifyEngagements(engagements, killLog, deaths) {
     if (killed) { e.outcome = 'killed'; e.combatDeathsSameDay = 0; continue; }
     let cd = 0;
     for (let j = 0; j < ds.length; j++) {
-      const d = ds[j];
-      if (d && (d.day | 0) === (e.day | 0) && (d.kind === 'monster' || d.kind === 'wild')) cd++;
+      if ((ds[j].day | 0) === (e.day | 0) && isPersonCombatDeath(ds[j])) cd++;
     }
     e.combatDeathsSameDay = cd;
     e.outcome = (cd > 0) ? 'died' : 'fled';
@@ -326,7 +348,14 @@ async function oneRun(seed, opts) {
     try {
       const killLog = ((Game.state || {}).waveKillLog) || [];
       facingReconcile = reconcileFacing(facing.engagements, Game);
-      classifyEngagements(facing.engagements, killLog, deaths);
+      let w5Names = [];
+      try {
+        const mons = (Game.data && Game.data.monsters) || [];
+        for (let i = 0; i < mons.length; i++) {
+          if ((mons[i].wave | 0) === 5) { w5Names.push(mons[i].id); if (mons[i].name) w5Names.push(mons[i].name); }
+        }
+      } catch (e) {}
+      classifyEngagements(facing.engagements, killLog, deaths, w5Names);
       engagements = facing.engagements;
       if (facingReconcile.mismatch) errors.push('facing-reconcile: recorded ' + facingReconcile.recordedCount + ' vs engaged ' + facingReconcile.engagedCount);
     } catch (e) { errors.push('facing-resolve: ' + String(e.message).slice(0, 80)); }

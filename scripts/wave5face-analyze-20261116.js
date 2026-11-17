@@ -38,6 +38,52 @@ function dedupeDaily(daily) {
   return out;
 }
 
+// rederiveOutcomes(seedData): cross-check each recorded engagement
+// outcome against the corpus deaths list ALONE (no kill log in the
+// corpus). killed iff a monster-death row (kind 'monster', who == mid)
+// falls on the engagement day — the tele-death record reproduces the
+// kill signal (verified 7 == 7 w5 kills on the v1 corpus); died iff no
+// such row and >= 1 person combat death that day (kind
+// 'villager'|'person', cause 'the wild' | 'monster' | a wave-5
+// monster id/name). Returns the mismatching engagements (empty =
+// the corpus is self-consistent with the driver's kill-log read).
+let W5_NAMES = null;
+function w5Names() {
+  if (W5_NAMES) return W5_NAMES;
+  W5_NAMES = [];
+  try {
+    const mons = JSON.parse(fs.readFileSync(path.join(REPO, 'src', 'data', 'monsters.json'), 'utf8'));
+    for (const m of mons) if ((m.wave | 0) === 5) { W5_NAMES.push(String(m.id).toLowerCase()); if (m.name) W5_NAMES.push(String(m.name).toLowerCase()); }
+  } catch (e) {}
+  return W5_NAMES;
+}
+function rederiveOutcomes(seedData) {
+  const names = {};
+  w5Names().forEach(function (n) { names[n] = true; });
+  const deaths = seedData.deaths || [];
+  const bad = [];
+  for (const e of (seedData.engagements || [])) {
+    let killed = false;
+    for (const d of deaths) {
+      if (d && d.kind === 'monster' && d.who === e.mid && (d.day | 0) === (e.day | 0)) { killed = true; break; }
+    }
+    let want;
+    if (killed) want = 'killed';
+    else {
+      let cd = 0;
+      for (const d of deaths) {
+        if (!d || (d.day | 0) !== (e.day | 0)) continue;
+        if (d.kind !== 'villager' && d.kind !== 'person') continue;
+        const c = String(d.cause || '');
+        if (c === 'the wild' || c === 'monster' || names[c.toLowerCase()]) cd++;
+      }
+      want = (cd > 0) ? 'died' : 'fled';
+    }
+    if (want !== e.outcome) bad.push({ day: e.day, mid: e.mid, recorded: e.outcome, rederived: want });
+  }
+  return bad;
+}
+
 // analyzeSeed: stand199 base classification + this arm's facing fields.
 function analyzeSeed(seedData) {
   const deduped = Object.assign({}, seedData, { daily: dedupeDaily(seedData.daily || []) });
@@ -52,6 +98,7 @@ function analyzeSeed(seedData) {
     engagements: engs,
     engagementCount: engs.length,
     outcomeCounts: outcomeCounts,
+    outcomeRederiveMismatches: rederiveOutcomes(seedData),
     firstFacedDay: firstFacedDay,
     faced: faced,
     w5facedCount: (seedData.w5facedCount | 0) || 0,
@@ -241,6 +288,8 @@ function main() {
     instrumentErrors: seeds.reduce(function (a, s) { return a + s.instrumentErrors; }, 0),
     reconcileErrors: seeds.reduce(function (a, s) { return a + s.reconcileErrors.length; }, 0),
     reconcileMismatches: seeds.filter(function (s) { return s.facingReconcileMismatch; }).map(function (s) { return s.seed; }),
+    outcomeRederiveMismatches: seeds.reduce(function (a, s) { return a + (s.outcomeRederiveMismatches || []).length; }, 0),
+    outcomeRederiveBad: seeds.filter(function (s) { return (s.outcomeRederiveMismatches || []).length; }).map(function (s) { return { seed: s.seed, mismatches: s.outcomeRederiveMismatches }; }),
     unclassified: seeds.filter(function (s) { return s.class === 'unclassified'; }).map(function (s) { return s.seed; }),
   };
   if (outFile) fs.writeFileSync(outFile, JSON.stringify(summary, null, 2) + '\n');
@@ -251,4 +300,5 @@ if (require.main === module) main();
 module.exports = {
   analyzeSeed: analyzeSeed, compareLegs: compareLegs,
   compareToStand199: compareToStand199, medianStd: medianStd, dedupeSig: dedupeSig,
+  rederiveOutcomes: rederiveOutcomes,
 };
