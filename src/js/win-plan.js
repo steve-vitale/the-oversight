@@ -257,6 +257,14 @@
     try { return typeof process !== 'undefined' && process.env && process.env.PLANFIX === '1'; } catch (e) { return false; }
   }
 
+  // FLEEREPAIR2 env gate (sim-fleerepair2-b, finding #2500): never
+  // seed a kill-hunt plan onto a leave-counter species. OFF unless
+  // the process env carries FLEEREPAIR2=1 (node sims only; in the
+  // browser process is undefined, so the lever is off).
+  function fleerepair2On() {
+    try { return typeof process !== 'undefined' && process.env && process.env.FLEEREPAIR2 === '1'; } catch (e) { return false; }
+  }
+
   // Launchability for a party companion, checked BEFORE the inviter
   // launches (or before a second companion is added): gear them first
   // (their own stash / the deposited armory / whittle, exactly what
@@ -395,6 +403,19 @@
     winPlanSeedFromFight(vid, mdef, outcome) {
       try {
         if (!mdef || (mdef.wave || 1) < 3) return null;
+        // FLEEREPAIR2 (sim-fleerepair2-b, finding #2500): a
+        // leave-counter species — the Suburb, whose counter is LEAVE
+        // (canon: monsters.json weaknesses, "you can't kill it —
+        // LEAVE"; fieldFights.js villagerTrickAction 'leave') — cannot
+        // be killed by fighting, so a kill-hunt plan seeded from
+        // fleeing one can never advance: the launched party meets it,
+        // leaves in round 1 with 0 damage, and re-meets it daily.
+        // Never seed or retarget a hunt plan onto it. The existing
+        // plan, if any, is left untouched (mid-expedition safety).
+        // The Suburb carries no `counter` field in monsters.json, so
+        // the id is named here, matching fieldFights.js's own
+        // hardcoded `mid === 'suburb'` branch.
+        if (fleerepair2On() && mdef.id === 'suburb') return null;
         var v = stateOf(this);
         if (!v) return null;
         var plan = v.winPlan[vid];
