@@ -124,6 +124,14 @@
     } catch (e) {}
     return { armed: !!(weaponB > 0 || carriesWeapon), armored: armorP > 0 };
   }
+  // PROFILEGATE (sim-profilegate-b): the widened companion gate is OFF
+  // unless the process env carries PROFILEGATE=1 (node sims only; in the
+  // browser process is undefined, so the lever is off). When on, any
+  // profile may walk as a companion — foragers and homebodies included.
+  // Every other eligibility check is unchanged.
+  function profilegateOn() {
+    try { return typeof process !== 'undefined' && process.env && process.env.PROFILEGATE === '1'; } catch (e) { return false; }
+  }
   // Party-path companion pick: eligibility stays local; ranking is the
   // shared companionScore (OVE-54). Do not fold bond-candidate ads here.
   function findCompanion(self, vid, hx, hy) {
@@ -147,7 +155,7 @@
         try { if (self.isEngaged && self.isEngaged(cid)) continue; } catch (e) {}
         var prof = null;
         try { prof = self.npcRangeProfile ? self.npcRangeProfile(cid) : null; } catch (e) {}
-        if (prof !== 'wanderer' && prof !== 'explorer') continue;
+        if (!profilegateOn() && prof !== 'wanderer' && prof !== 'explorer') continue;
         try {
           var a = self.agencyState ? self.agencyState() : null;
           if (a && a.exped && a.exped[cid]) continue;
