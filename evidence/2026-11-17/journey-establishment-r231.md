@@ -348,4 +348,21 @@ guardrails.pantryKcal, c3.starvationDeaths):
   code-driven. Gate GO for adoption.
 
 ## Closeout
-[TBD — merge/release/rotation/lock after the evidence commit.]
+- Fix committed [needs-eyes] (dialogue-behavior change, r230
+  precedent) `af1791e90`; prereg/driver `a2e861c20`;
+  evidence `9248c6354` (tip after rebase).
+- Master moved during the run (Lane B crisis r229 landed
+  `21e7b750a`); rebased clean onto it (3/3, no overlap with this
+  run's files), proof tests re-run green on the rebased tip
+  (19+13+18+10+35+7), merged ff-only into local master.
+- **Merged locally, pending ship** — no bump, no push, no live
+  verification (ship loop owns those).
+- Rotation 1→2 written with read-back; lock deleted at closeout
+  after run_id verification.
+- Worktree released (`merged`), branch deleted; final reap sweep
+  clean. Main tree verified clean after the merge.
+- The r231 panel corpus (per-seed JSONs + convo transcripts)
+  lives under the goal hidden_files evidence dir for 2026-11-17
+  (outside the repo, per the journey-lane pattern); the repo
+  evidence dir holds the prereg, run note, analyzer log, gate
+  log, and pilot/panel stderr logs.
