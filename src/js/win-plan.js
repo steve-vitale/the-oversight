@@ -200,20 +200,9 @@
     } catch (e) {}
     return null;
   }
-  // PROFILEGATE (sim-profilegate-b): the widened companion gate is OFF
-  // unless the process env carries PROFILEGATE=1 (node sims only; in the
-  // browser process is undefined, so the lever is off). When on, any
-  // profile may walk as a companion — foragers and homebodies included.
-  // Every other eligibility check is unchanged. Mirrors the twin in
-  // villager-brain.js — the two findCompanion implementations must stay
-  // in sync.
-  function profilegateOn() {
-    try { return typeof process !== 'undefined' && process.env && process.env.PROFILEGATE === '1'; } catch (e) { return false; }
-  }
   // A trusted villager this villager can SEE at Haven, willing and able
   // to walk: same node, trust floor shared with party-wiring (15),
-  // alive, not engaged, not already out, a ranger by profile
-  // (PROFILEGATE=1 admits any profile).
+  // alive, not engaged, not already out, a ranger by profile.
   // Ranking among eligibles is shared companionScore (OVE-54) — not
   // roster-first match.
   function findCompanion(self, vid, hx, hy) {
@@ -234,7 +223,7 @@
         try { if (self.isEngaged && self.isEngaged(cid)) continue; } catch (e) {}
         var prof = null;
         try { prof = self.npcRangeProfile ? self.npcRangeProfile(cid) : null; } catch (e) {}
-        if (!profilegateOn() && prof !== 'wanderer' && prof !== 'explorer') continue;
+        if (prof !== 'wanderer' && prof !== 'explorer') continue;
         try {
           var a = self.agencyState ? self.agencyState() : null;
           if (a && a.exped && a.exped[cid]) continue;
