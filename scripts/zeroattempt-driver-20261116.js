@@ -23,9 +23,11 @@
 // npcTrigger (registry dispatch) — raw state reads and
 // Game.objVillageDanger (pure belief + weather) stand in for those.
 // ZEROATTEMPT_RECORDER=off skips installing the wraps (determinism leg D2).
-// Usage:
-//   MODE=off OUTDIR=perseed-zeroattempt-b-off SEEDS=103201,103202 RUN=zeroattempt-b node scripts/zeroattempt-driver-20261116.js
-//   MODE=on  OUTDIR=perseed-zeroattempt-b-on  SEEDS=103201,103202 RUN=zeroattempt-b node scripts/zeroattempt-driver-20261116.js
+// Usage (the recorder switch is the ENV var, not MODE — MODE only
+// names the leg; an OFF leg MUST set ZEROATTEMPT_RECORDER=off or it
+// records like an ON leg):
+//   ZEROATTEMPT_RECORDER=off MODE=off OUTDIR=perseed-zeroattempt-b-off SEEDS=103201,103202 RUN=zeroattempt-b node scripts/zeroattempt-driver-20261116.js
+//   MODE=on OUTDIR=perseed-zeroattempt-b-on SEEDS=103201,103202 RUN=zeroattempt-b node scripts/zeroattempt-driver-20261116.js
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -895,6 +897,12 @@ async function oneRun(seed) {
 
 if (require.main === module) (async function () {
   if (!SEEDS.length) { console.error('ZEROATTEMPT STOP: SEEDS required.'); process.exit(2); }
+  // MODE=off is the trajectory-reference leg: the recorder MUST be
+  // off, or the "off" corpora are ON data under an off name (caught
+  // 2026-11-17: an off leg run without the env var recorded 1,060
+  // score rows). Refuse rather than mislabel.
+  if (MODE === 'off' && RECORDER_ON) { console.error('ZEROATTEMPT STOP: MODE=off requires ZEROATTEMPT_RECORDER=off.'); process.exit(2); }
+  if (MODE === 'on' && !RECORDER_ON) { console.error('ZEROATTEMPT STOP: MODE=on requires the recorder on (unset ZEROATTEMPT_RECORDER).'); process.exit(2); }
   const outDir = path.join(REPO, 'evidence', '2026-11-16', OUTDIR);
   fs.mkdirSync(outDir, { recursive: true });
   for (const seed of SEEDS) {

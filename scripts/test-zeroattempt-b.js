@@ -69,6 +69,9 @@ check('driver records census winPlanStoreExists/knowFoughtN/villageSlainN/assign
 check('driver records havenRows + creation ledger', driverSrc.indexOf('havenRows.push') !== -1 &&
   driverSrc.indexOf('v4creates.push') !== -1 && driverSrc.indexOf('storeInitRows.push') !== -1);
 check('driver has ZEROATTEMPT_RECORDER off-switch', driverSrc.indexOf('ZEROATTEMPT_RECORDER') !== -1);
+check('driver refuses a MODE=off run with the recorder on (mislabel trap)',
+  driverSrc.indexOf("if (MODE === 'off' && RECORDER_ON)") !== -1 &&
+  driverSrc.indexOf("MODE=off requires ZEROATTEMPT_RECORDER=off") !== -1);
 check('driver refuses to overwrite per-seed files', driverSrc.indexOf('refusing to overwrite') !== -1);
 check('driver never INVOKES state-creating winPlanOf/agencyState/agencyOf/npcTrigger (reads + wrap installs only)',
   driverSrc.indexOf('Game.winPlanOf(') === -1 && driverSrc.indexOf('Game.agencyState(') === -1 &&
