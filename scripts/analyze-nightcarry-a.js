@@ -1,0 +1,621 @@
+// analyze-nightcarry-a.js — classifier for arm sim-nightcarry-a (BUILD
+// lever: carry a part-2 party_launch commit across the night tick).
+// Copied from scripts/analyze-launchdef-a.js (classifier + bucket
+// definitions UNCHANGED except the GO section, replaced here with the
+// nightcarry prereg's frozen bars, and the carry table added per
+// §4b). Implements the frozen bucket definitions from
+// evidence/2026-11-15/sim-dawnbid-a-prereg.md (incl. Correction 2:
+// stage advancement is not churn; churn = holder-died /
+// plan-deleted / retargeted; new terminal bucket target-killed;
+// new sub-reason selected-not-executed), plus the carry join:
+// a launch whose depart row carries carried:true is a carried
+// launch; a nightcarryCarries row per (vid, day) is a carried commit.
+// Precedence (first match wins): launched > target-killed >
+// selected-blocked > bid-not-selected > plan-churned-before-dawn
+// > candidate-not-bid. Anything else is `unknown` and fails the run.
+// classifySeed(j, opts): opts.launchDefinition 'any-commit' (default)
+// or 'dawn-only' (the 0446Z definition, for the proof's old-vs-new
+// comparison on one fixture — never the judge).
+// Usage:
+//   node scripts/analyze-nightcarry-a.js <armedDir> [controlDir]
+// Writes evidence/2026-11-17/nightcarry-a-analysis.json. Exits 0 iff
+// every plan instance in the instrument leg is classified
+// (unknown == 0), all files parse, and no instrument errors.
+'use strict';
+const fs = require('fs');
+const path = require('path');
+const REPO = path.join(__dirname, '..');
+
+const W4_IDS_FROZEN = ['congregation', 'strike', 'influencer', 'audit', 'reunion', 'suburb', 'eulogy', 'algorithm', 'eater', 'herald'];
+const W4_SET = new Set(W4_IDS_FROZEN);
+const BUCKETS = ['launched', 'target-killed', 'selected-blocked', 'bid-not-selected', 'plan-churned-before-dawn', 'candidate-not-bid', 'unknown'];
+
+function loadDir(dir) {
+  const out = {};
+  const files = fs.readdirSync(dir).filter(function (x) { return x.endsWith('.json'); }).sort();
+  for (const f of files) {
+    const j = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+    out[j.seed] = j;
+  }
+  return { bySeed: out, files: files };
+}
+function round(x, n) { return Math.round(x * Math.pow(10, n)) / Math.pow(10, n); }
+function med(a) {
+  if (!a.length) return null;
+  const s = a.slice().sort(function (x, y) { return x - y; });
+  return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2;
+}
+function mapVidBlock(b) {
+  if (b === 'sick') return 'inviter-sick';
+  if (b === 'range-0') return 'inviter-range-0';
+  if (b === 'hurt-no-medicine-no-healer') return 'inviter-hurt';
+  return 'inviter-exped-failed-unknown';
+}
+
+function commitKindOfPart(part) {
+  if (part === 0) return 'dawn';
+  if (part === 1) return 'mid-day part-1';
+  if (part === 2) return 'mid-day part-2';
+  return 'part-' + part;
+}
+
+function classifySeed(j, opts) {
+  const launchDefinition = (opts && opts.launchDefinition) || 'any-commit';
+  const errors = (j.instrumentErrors || []).slice();
+  const seedRows = (j.v4seeds || []).slice();
+  const scoreRows = (j.dawnbidScores || []).slice();
+  const departRows = (j.dawnbidDeparts || []).slice();
+  const censusRows = (j.dawnbidCensus || []).slice();
+  const skipRows = (j.nightcarrySkips || []).slice();
+  const carryRows = (j.nightcarryCarries || []).slice();
+  const daily = (j.daily || []).slice();
+  const finalDay = j.gameDays || j.days || 0;
+
+  // Final waveKillLog (cumulative) for target-killed detection.
+  let finalKillLog = [];
+  try {
+    const last = daily.length ? daily[daily.length - 1] : null;
+    if (last && last.waveKillLog) finalKillLog = last.waveKillLog;
+  } catch (e) {}
+
+  const instances = [];
+  const openByVid = {};
+  let nonOpeningSeeds = 0;
+  let seedCallsW4 = 0;
+
+  function closeInstance(inst, kind, day) {
+    if (inst.closeDay != null) return;
+    inst.closeDay = day;
+    inst.closeKind = kind;
+    if (openByVid[inst.vid] === inst) delete openByVid[inst.vid];
+  }
+
+  // ---- State machine over seed rows (chronological) ----
+  for (const s of seedRows) {
+    if ((s.wave | 0) < 3) continue;
+    if ((s.wave | 0) >= 4) seedCallsW4++;
+    const stageAfter = s.stageAfter;
+    if (stageAfter !== 'gear' && stageAfter !== 'party') { nonOpeningSeeds++; continue; }
+    const open = openByVid[s.vid] || null;
+    if ((s.wave | 0) < 4) {
+      // Wave-3 seed: never opens an instance; retargets an open one.
+      if (open && open.target !== s.target) closeInstance(open, 'retargeted', s.day);
+      continue;
+    }
+    if (open) {
+      if (open.target === s.target) { open.refreshes++; open.lastSeedDay = s.day; }
+      else {
+        closeInstance(open, 'retargeted', s.day);
+        const inst = { vid: s.vid, target: s.target, needWave: s.wave, seedDay: s.day, seedOutcome: s.outcome || null, refreshes: 0, lastSeedDay: s.day, closeDay: null, closeKind: null, history: [] };
+        instances.push(inst);
+        openByVid[s.vid] = inst;
+      }
+    } else {
+      const inst = { vid: s.vid, target: s.target, needWave: s.wave, seedDay: s.day, seedOutcome: s.outcome || null, refreshes: 0, lastSeedDay: s.day, closeDay: null, closeKind: null, history: [] };
+      instances.push(inst);
+      openByVid[s.vid] = inst;
+    }
+  }
+
+  // ---- Per-instance evidence ----
+  for (const inst of instances) {
+    const vid = inst.vid;
+    const myScores = scoreRows.filter(function (r) {
+      return r.vid === vid && r.plan && r.plan.target === inst.target && r.day >= inst.seedDay &&
+        (inst.closeDay == null || r.day <= inst.closeDay);
+    });
+    const dawnRows = myScores.filter(function (r) { return r.part === 0; });
+    // One dawn commit per vid+day: the LAST part-0 row wins (a re-pick
+    // overwrites the earlier commit).
+    const dawnByDay = {};
+    for (const r of dawnRows) dawnByDay[r.day] = r;
+    const dawnDays = Object.keys(dawnByDay).map(Number).sort(function (a, b) { return a - b; });
+    inst.scoredDawns = dawnDays.length;
+    inst.firstScoredDawn = dawnDays.length ? dawnDays[0] : null;
+    // Stage history (Correction 2: transitions are history, not churn).
+    const stages = [];
+    for (const r of myScores) {
+      if (r.plan && r.plan.stage && (stages.length === 0 || stages[stages.length - 1] !== r.plan.stage)) stages.push(r.plan.stage);
+    }
+    inst.stageHistory = stages;
+    // Bids: any score row (dawn or mid-day refresh) whose candidate
+    // list carries party_launch. (Any-commit counting: a mid-day bid
+    // that loses the pick is still a bid, not a candidate-not-bid.)
+    inst.bids = [];
+    for (const r of myScores) {
+      const cand = (r.cands || []).find(function (c) { return c && c.winPlanAction === 'party_launch'; });
+      if (!cand) continue;
+      let score = null, rank = null;
+      try {
+        const lc = (r.logCands || []);
+        for (let i = 0; i < lc.length; i++) {
+          if (lc[i] && lc[i].winPlanAction === 'party_launch') { score = lc[i].score; rank = i; break; }
+        }
+      } catch (e) {}
+      inst.bids.push({ day: r.day, w: cand.w, score: score, rank: rank, totalCands: (r.logCands || []).length });
+    }
+    // Selections: ANY-commit party_launch (dawn part-0 OR mid-day
+    // refresh part-1/part-2) — the corrected definition (prereg §4a).
+    // One commit-day per vid+day per part-set: every score row that
+    // day whose commit carries party_launch for this instance.
+    // In 'dawn-only' mode (proof comparison only) part-0 commits
+    // alone count, and only depart rows consumed by a dawn commit
+    // resolve them.
+    const commitByDay = {};
+    for (const r of myScores) {
+      const act = r.commit ? (r.commit.winPlanAction || null) : null;
+      if (act !== 'party_launch') continue;
+      if (launchDefinition === 'dawn-only' && r.part !== 0) continue;
+      const d = r.day;
+      if (!commitByDay[d]) commitByDay[d] = { parts: [], kinds: [], companion: null };
+      if (commitByDay[d].parts.indexOf(r.part) === -1) commitByDay[d].parts.push(r.part);
+      commitByDay[d].kinds.push(commitKindOfPart(r.part));
+      if (r.commit && r.commit.companion) commitByDay[d].companion = r.commit.companion;
+    }
+    const selDays = Object.keys(commitByDay).map(Number).sort(function (a, b) { return a - b; });
+    inst.selections = [];
+    for (const d of selDays) {
+      inst.selections.push({ day: d, companion: commitByDay[d].companion,
+        commitKind: commitByDay[d].kinds[commitByDay[d].kinds.length - 1],
+        parts: commitByDay[d].parts.slice() });
+    }
+    function selKind(D) {
+      const ks = commitByDay[D] ? commitByDay[D].kinds : [];
+      return ks.length ? ks[ks.length - 1] : null;
+    }
+    // Resolve each commit day against depart rows / skip rows.
+    inst.resolved = [];
+    for (const D of selDays) {
+      const deps = departRows.filter(function (r) { return r.vid === vid && r.day === D && r.winPlanAction === 'party_launch' && r.target === inst.target; });
+      const daySkips = skipRows.filter(function (r) { return r.vid === vid && r.day === D && r.target === inst.target; }).sort(function (a, b) { return (a.part - b.part) || ((a.seq || 0) - (b.seq || 0)); });
+      let res = null;
+      for (const r of deps) {
+        if (launchDefinition === 'dawn-only' && r.commitKind !== 'dawn') continue;
+        if (r.result === 'launch' && r.vidExped && r.companionExped) { res = { outcome: 'launched', day: D, companion: r.companion, commitKind: r.commitKind || selKind(D), part: (r.commitPart != null ? r.commitPart : null), carried: !!r.carried }; break; }
+      }
+      if (!res) for (const r of deps) {
+        if (launchDefinition === 'dawn-only' && r.commitKind !== 'dawn') continue;
+        if (r.result === 'launch' && r.vidExped && !r.companionExped) { res = { outcome: 'blocked', reason: 'companion-not-started:' + (r.companionBlock || 'unknown'), day: D, commitKind: r.commitKind || selKind(D) }; break; }
+      }
+      if (!res) for (const r of deps) {
+        if (launchDefinition === 'dawn-only' && r.commitKind !== 'dawn') continue;
+        if (r.result === 'hold') { res = { outcome: 'blocked', reason: r.vidBlock ? mapVidBlock(r.vidBlock) : 'inviter-exped-failed-unknown', day: D, commitKind: r.commitKind || selKind(D) }; break; }
+      }
+      if (!res) for (const r of deps) {
+        if (launchDefinition === 'dawn-only' && r.commitKind !== 'dawn') continue;
+        if (r.result === 'normal') {
+          const sk = daySkips[0];
+          res = { outcome: 'blocked', reason: sk ? sk.reason : 'inviter-exped-failed-unknown', day: D, commitKind: (sk && sk.commitKind) || r.commitKind || selKind(D) };
+          break;
+        }
+      }
+      if (!res && daySkips.length) {
+        const sk = daySkips[0];
+        res = { outcome: 'blocked', reason: sk.reason, day: D, commitKind: sk.commitKind };
+      }
+      if (!res) {
+        // No depart row, no skip row: was the commit overwritten
+        // mid-day, or was there no tick left after it?
+        const midday = myScores.filter(function (r) { return r.day === D && r.part !== 0; });
+        let overwrote = null;
+        for (const m of midday) {
+          const a = (m.commit && m.commit.winPlanAction) || null;
+          if (a && a !== 'party_launch') { overwrote = a; break; }
+        }
+        if (overwrote) res = { outcome: 'blocked', reason: 'commit-overwritten-midday:' + overwrote, day: D, commitKind: selKind(D) };
+        else {
+          const lastPart = Math.max.apply(null, commitByDay[D].parts);
+          res = (lastPart >= 2)
+            ? { outcome: 'blocked', reason: 'no-tick-after-commit', day: D, commitKind: selKind(D) }
+            : { outcome: 'blocked', reason: 'selected-not-executed', day: D, commitKind: selKind(D) };
+        }
+      }
+      inst.resolved.push(res);
+    }
+    // Target-killed: holder slew the target type while open.
+    inst.targetKilledDay = null;
+    for (const e of finalKillLog) {
+      if (e && e.by === vid && e.mid === inst.target && (e.d | 0) >= inst.seedDay &&
+        (inst.closeDay == null || (e.d | 0) <= inst.closeDay)) {
+        if (inst.targetKilledDay == null || (e.d | 0) < inst.targetKilledDay) inst.targetKilledDay = e.d | 0;
+      }
+    }
+    // Churn (Correction 2: holder-died / plan-deleted / retargeted only).
+    if (inst.closeKind == null) {
+      const myCensus = censusRows.filter(function (r) { return r.vid === vid; }).sort(function (a, b) { return a.day - b.day; });
+      let diedDay = null;
+      for (const c of myCensus) if (!c.holderAlive) { diedDay = c.day; break; }
+      if (diedDay == null) {
+        // Backup: daily roster dead flags.
+        for (const snap of daily) {
+          if (!snap.roster) continue;
+          const row = snap.roster.find(function (x) { return x && x.vid === vid; });
+          if (row && row.dead) { diedDay = snap.day; break; }
+        }
+      }
+      if (diedDay != null && diedDay >= inst.seedDay) {
+        inst.closeDay = diedDay;
+        inst.closeKind = 'holder-died';
+      } else if (myCensus.length) {
+        const lastCensusDay = myCensus[myCensus.length - 1].day;
+        if (lastCensusDay < finalDay) {
+          // Plan left winPlan after the last census day (retargets are
+          // already closed by the seed state machine above).
+          inst.closeDay = lastCensusDay + 1;
+          inst.closeKind = 'plan-deleted';
+        }
+      }
+    }
+    // ---- Classification (frozen precedence) ----
+    const launched = inst.resolved.find(function (r) { return r.outcome === 'launched'; });
+    // NIGHTCARRY: carries for this instance (same holder, same target,
+    // on/after the seed day) and whether the launch rode a carried commit.
+    inst.carries = carryRows.filter(function (r) {
+      return r.vid === vid && r.plan && r.plan.target === inst.target && r.day >= inst.seedDay &&
+        (inst.closeDay == null || r.day <= inst.closeDay);
+    });
+    inst.carriedDays = inst.carries.length;
+    inst.carriedFromPart2 = inst.carries.filter(function (r) { return r.carriedFromPart === 2; }).length;
+    inst.carriedLaunches = inst.resolved.filter(function (r) { return r.outcome === 'launched' && r.carried; }).length;
+    const blocked = inst.resolved.find(function (r) { return r.outcome === 'blocked'; });
+    const churnedBeforeDawn = inst.closeDay != null && inst.closeKind != null &&
+      (inst.firstScoredDawn == null || inst.closeDay < inst.firstScoredDawn);
+    let bucket = null, sub = null;
+    if (launched) { bucket = 'launched'; sub = 'companion:' + (launched.companion || 'none') + ':' + (launched.commitKind || 'unknown') + (launched.carried ? ':carried' : ''); }
+    else if (inst.targetKilledDay != null) { bucket = 'target-killed'; sub = 'day:' + inst.targetKilledDay; }
+    else if (blocked) { bucket = 'selected-blocked'; sub = blocked.reason; }
+    else if (inst.bids.length) { bucket = 'bid-not-selected'; sub = 'bids:' + inst.bids.length; }
+    else if (churnedBeforeDawn) { bucket = 'plan-churned-before-dawn'; sub = inst.closeKind; }
+    else {
+      bucket = 'candidate-not-bid';
+      // Sub-reason: most frequent per-dawn not-bid reason.
+      const tally = {};
+      for (const d of dawnDays) {
+        const r = dawnByDay[d];
+        const acts = (r.cands || []).map(function (c) { return c && c.winPlanAction; }).filter(Boolean);
+        let reason;
+        if (acts.indexOf('gear_hold') !== -1) reason = 'gear-stage';
+        else if (acts.indexOf('party_wait') !== -1) reason = 'no-companion-party';
+        else if (acts.indexOf('veteran_guard') !== -1) reason = 'veteran-guard';
+        else if (acts.length === 0) reason = 'no-companion-hunt-plus';
+        else reason = 'other-action:' + acts.join(',');
+        tally[reason] = (tally[reason] || 0) + 1;
+      }
+      if (dawnDays.length === 0) sub = 'not-scored';
+      else {
+        let best = null, bestN = -1;
+        for (const k of Object.keys(tally)) if (tally[k] > bestN) { best = k; bestN = tally[k]; }
+        sub = best;
+      }
+    }
+    if (!bucket) { bucket = 'unknown'; sub = 'no-rule-matched'; }
+    inst.bucket = bucket;
+    inst.sub = sub;
+    inst.churnedBeforeDawn = churnedBeforeDawn;
+    inst.tally = { scoredDawns: inst.scoredDawns, bids: inst.bids.length, selections: inst.selections.length };
+  }
+
+  const byBucket = {};
+  for (const b of BUCKETS) byBucket[b] = 0;
+  const bySub = {};
+  for (const inst of instances) {
+    byBucket[inst.bucket]++;
+    const k = inst.bucket + ':' + (inst.sub || '');
+    bySub[k] = (bySub[k] || 0) + 1;
+  }
+  return {
+    seed: j.seed, days: j.days, gameDays: j.gameDays, endReason: j.endReason,
+    standing: j.standing, scaleRank: j.scaleRank, won: !!j.won, maxWave: j.maxWave,
+    villageLost: !!j.villageLost,
+    instrumentErrors: errors.length,
+    seedCallsW4: seedCallsW4, nonOpeningSeeds: nonOpeningSeeds,
+    instancesOpened: instances.length,
+    byBucket: byBucket, bySub: bySub,
+    instances: instances,
+  };
+}
+
+function summarize(leg) { // skipReasons are tallied from raw corpora in main() (skipReasonsOf).
+  const seeds = Object.keys(leg.bySeed).sort().map(function (k) { return leg.bySeed[k]; });
+  const byBucket = {};
+  for (const b of BUCKETS) byBucket[b] = 0;
+  const bySub = {};
+  let opened = 0, seedCalls = 0;
+  for (const s of seeds) {
+    opened += s.instancesOpened;
+    seedCalls += s.seedCallsW4;
+    for (const b of BUCKETS) byBucket[b] += s.byBucket[b];
+    for (const k of Object.keys(s.bySub)) bySub[k] = (bySub[k] || 0) + s.bySub[k];
+  }
+  const classified = opened - byBucket.unknown;
+  // NIGHTCARRY: carry totals across the leg's instances.
+  let carried = 0, carriedLaunched = 0, carriedFromPart2 = 0;
+  for (const s of seeds) {
+    for (const x of (s.instances || [])) {
+      carried += x.carriedDays || 0;
+      carriedLaunched += x.carriedLaunches || 0;
+      carriedFromPart2 += x.carriedFromPart2 || 0;
+    }
+  }
+  return {
+    files: leg.files.length,
+    seeds: seeds.length,
+    seedCallsW4: seedCalls,
+    instancesOpened: opened,
+    byBucket: byBucket,
+    bySub: bySub,
+    carried: carried, carriedLaunched: carriedLaunched,
+    carriedFromPart2: carriedFromPart2,
+    carryConversion: carried ? round(carriedLaunched / carried, 3) : null,
+    classifiedShare: opened ? round(classified / opened, 4) : null,
+    unknown: byBucket.unknown,
+    survived: seeds.filter(function (s) { return !s.villageLost && ((s.days || 0) >= 150 || s.endReason === 'survived' || (s.gameDays || 0) >= 150); }).length,
+    medianSurvival: med(seeds.map(function (s) { return s.gameDays || s.days || 0; })),
+    wall: {
+      national: seeds.filter(function (s) { return (s.standing || 0) >= 200; }).length,
+      table: 0, wins: seeds.filter(function (s) { return !!s.won; }).length,
+      wave4: seeds.filter(function (s) { return (s.maxWave || 1) >= 4; }).length,
+      wave5: seeds.filter(function (s) { return (s.maxWave || 1) >= 5; }).length,
+    },
+    perSeed: seeds,
+  };
+}
+
+function main() {
+  const instrumentDir = process.argv[2];
+  const controlDir = process.argv[3] || null;
+  if (!instrumentDir) { console.error('NIGHTCARRY ANALYZE STOP: armedDir required.'); process.exit(2); }
+  // Wave-4 id set check (frozen list vs live data).
+  let liveW4 = null;
+  try {
+    const raw = JSON.parse(fs.readFileSync(path.join(REPO, 'src', 'data', 'monsters.json'), 'utf8'));
+    const list = raw.monsters || raw;
+    liveW4 = list.filter(function (m) { return m.wave === 4; }).map(function (m) { return m.id; }).sort();
+  } catch (e) {}
+  const frozenSorted = W4_IDS_FROZEN.slice().sort();
+  const w4Match = liveW4 && JSON.stringify(liveW4) === JSON.stringify(frozenSorted);
+
+  const instRaw = loadDir(instrumentDir);
+  const ctrlRaw = controlDir ? loadDir(controlDir) : null;
+  const inst = loadDir(instrumentDir);
+  for (const k of Object.keys(inst.bySeed)) inst.bySeed[k] = classifySeed(inst.bySeed[k]);
+  const instSummary = summarize(inst);
+  let ctrlSummary = null;
+  if (controlDir) {
+    const ctrl = loadDir(controlDir);
+    for (const k of Object.keys(ctrl.bySeed)) ctrl.bySeed[k] = classifySeed(ctrl.bySeed[k]);
+    ctrlSummary = summarize(ctrl);
+  }
+  const instErrors = instSummary.perSeed.reduce(function (t, s) { return t + s.instrumentErrors; }, 0);
+  const ctrlErrors = ctrlSummary ? ctrlSummary.perSeed.reduce(function (t, s) { return t + s.instrumentErrors; }, 0) : 0;
+  const bar1 = instSummary.instancesOpened > 0 && instSummary.classifiedShare >= 0.9 && instSummary.unknown === 0;
+  const bar2 = inst.files.length === 8 && (!ctrlSummary || ctrlSummary.files === 8);
+  const bar3 = instErrors === 0 && ctrlErrors === 0;
+
+  // ---- GO section (sim-nightcarry-a prereg, FROZEN) ----
+  // Primary: launched wave-4+ instances (any-commit), armed >=
+  // control + 2 instances. Secondary: carried commits converting
+  // to launches >= 25% of carried. Cost bars: deaths/run within
+  // +2 of control, median survival ratio >= 0.9, starvation totals
+  // armed <= control + 2, starvation arm-only (matched same-seed
+  // same-day, B3) armed <= control arm-only + 2. Subject-viability
+  // floor (pre-stated, NOT a re-score): control + armed instances
+  // opened total < 4 => UNJUDGEABLE (vacuous subject), not a lever
+  // NO-GO. Skip coverage (no bare 'selected-not-executed') is
+  // reported, not a GO bar.
+  function starvDaysOf(rawBySeed) {
+    const perSeed = {};
+    let total = 0;
+    for (const k of Object.keys(rawBySeed)) {
+      const j = rawBySeed[k];
+      const days = (j.deaths || []).filter(function (d) { return d.cause === 'starvation'; }).map(function (d) { return d.day; });
+      perSeed[j.seed] = days;
+      total += days.length;
+    }
+    return { perSeed: perSeed, total: total };
+  }
+  function matchedStarv(a, b) {
+    let m = 0;
+    for (const seed of Object.keys(a.perSeed)) {
+      const counts = {};
+      for (const d of (b.perSeed[seed] || [])) counts[d] = (counts[d] || 0) + 1;
+      for (const d of a.perSeed[seed]) if (counts[d]) { m++; counts[d]--; }
+    }
+    return m;
+  }
+  const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
+  function nationalEnd(rawBySeed) {
+    let n = 0;
+    for (const k of Object.keys(rawBySeed)) {
+      const j = rawBySeed[k];
+      if ((RANK_ORDER[j.scaleRank] || 0) >= 2) n++;
+    }
+    return n;
+  }
+  const armStarv = starvDaysOf(instRaw.bySeed);
+  const ctrlStarv = ctrlRaw ? starvDaysOf(ctrlRaw.bySeed) : null;
+  const armStarvOnly = ctrlStarv ? armStarv.total - matchedStarv(armStarv, ctrlStarv) : null;
+  const ctrlStarvOnly = ctrlStarv ? ctrlStarv.total - matchedStarv(ctrlStarv, armStarv) : null;
+  const medArm = instSummary.medianSurvival, medCtrl = ctrlSummary ? ctrlSummary.medianSurvival : null;
+  const medianRatio = (medArm != null && medCtrl) ? round(medArm / medCtrl, 3) : null;
+  const launchedSeeds = Object.keys(inst.bySeed).filter(function (k) { return (inst.bySeed[k].byBucket.launched || 0) >= 1; }).map(Number).sort(function (a, b) { return a - b; });
+  let launchedTotal = 0, launchedW4Only = 0;
+  for (const k of Object.keys(inst.bySeed)) {
+    for (const x of (inst.bySeed[k].instances || [])) {
+      if (x.bucket === 'launched') { launchedTotal++; if (W4_SET.has(x.target)) launchedW4Only++; }
+    }
+  }
+  let launchedDawnOnly = 0;
+  const launchedDawnSeeds = [];
+  for (const k of Object.keys(inst.bySeed)) {
+    let n = 0;
+    for (const x of (inst.bySeed[k].instances || [])) {
+      if (x.bucket === 'launched') {
+        const r = (x.resolved || []).find(function (y) { return y.outcome === 'launched'; });
+        if (r && r.commitKind === 'dawn') n++;
+      }
+    }
+    if (n >= 1) launchedDawnSeeds.push(Number(k));
+    launchedDawnOnly += n;
+  }
+  // Skip-reason coverage (prereg bar 4): no bare
+  // 'selected-not-executed' commit-day in the armed leg — every
+  // blocked day carries a recorded skip reason or depart blocker.
+  let bareSelectedNotExecuted = 0, blockedDays = 0;
+  for (const k of Object.keys(inst.bySeed)) {
+    for (const x of (inst.bySeed[k].instances || [])) {
+      for (const r of (x.resolved || [])) {
+        if (r.outcome === 'blocked') {
+          blockedDays++;
+          if (r.reason === 'selected-not-executed') bareSelectedNotExecuted++;
+        }
+      }
+    }
+  }
+  const goSkipCoverage = bareSelectedNotExecuted === 0;
+  // NIGHTCARRY: control-leg launched instances (same any-commit
+  // definition) for the primary delta.
+  let ctrlLaunchedTotal = 0, ctrlLaunchedSeedsN = 0;
+  if (ctrlSummary) {
+    for (const s of ctrlSummary.perSeed) {
+      let n = 0;
+      for (const x of (s.instances || [])) if (x.bucket === 'launched') { ctrlLaunchedTotal++; n++; }
+      if (n >= 1) ctrlLaunchedSeedsN++;
+    }
+  }
+  const launchedDelta = launchedTotal - ctrlLaunchedTotal;
+  const goLaunch = ctrlSummary ? launchedDelta >= 2 : false;
+  // NIGHTCARRY: carried-conversion secondary (armed leg).
+  const carriedTotal = instSummary.carried || 0;
+  const carriedLaunchedTotal = instSummary.carriedLaunched || 0;
+  const carryConversion = instSummary.carryConversion;
+  const goConvert = carriedTotal > 0 && carryConversion != null && carryConversion >= 0.25;
+  // NIGHTCARRY: deaths/run cost bar (totals across the 8 seeds;
+  // +2 per run = +16 across the leg).
+  function deathsTotal(rawBySeed) {
+    let t = 0;
+    for (const k of Object.keys(rawBySeed)) t += ((rawBySeed[k].deaths || []).length);
+    return t;
+  }
+  const armDeaths = deathsTotal(instRaw.bySeed);
+  const ctrlDeaths = ctrlRaw ? deathsTotal(ctrlRaw.bySeed) : null;
+  const goDeaths = ctrlDeaths != null ? armDeaths <= ctrlDeaths + 16 : null;
+  const goMedian = medianRatio != null && medianRatio >= 0.9;
+  const goStarvTot = ctrlStarv ? armStarv.total <= ctrlStarv.total + 2 : null;
+  const goStarvOnly = (ctrlStarvOnly != null) ? armStarvOnly <= ctrlStarvOnly + 2 : null;
+  // NIGHTCARRY: subject-viability floor (pre-stated in the prereg).
+  const instancesBothLegs = instSummary.instancesOpened + (ctrlSummary ? ctrlSummary.instancesOpened : 0);
+  const vacuous = instancesBothLegs < 4;
+  const goPass = !vacuous && goLaunch && goConvert && goMedian && goStarvTot === true && goStarvOnly === true && goDeaths === true;
+  const verdict = vacuous ? 'UNJUDGEABLE' : (goPass ? 'GO' : 'NO-GO');
+  const go = {
+    verdict: verdict, vacuous: vacuous, instancesBothLegs: instancesBothLegs,
+    launchedSeeds: launchedSeeds, launchedSeedsN: launchedSeeds.length,
+    launchedTotal: launchedTotal, launchedW4Only: launchedW4Only,
+    ctrlLaunchedTotal: ctrlLaunchedTotal, ctrlLaunchedSeedsN: ctrlLaunchedSeedsN,
+    launchedDelta: launchedDelta,
+    carriedTotal: carriedTotal, carriedLaunchedTotal: carriedLaunchedTotal,
+    carryConversion: carryConversion, carriedFromPart2: instSummary.carriedFromPart2 || 0,
+    launchedDawnOnly: launchedDawnOnly, launchedDawnSeeds: launchedDawnSeeds,
+    blockedDays: blockedDays, bareSelectedNotExecuted: bareSelectedNotExecuted,
+    medianArmed: medArm, medianControl: medCtrl, medianRatio: medianRatio,
+    deathsArmed: armDeaths, deathsControl: ctrlDeaths,
+    starvArmedTotal: armStarv.total, starvControlTotal: ctrlStarv ? ctrlStarv.total : null,
+    starvArmedOnly: armStarvOnly, starvControlOnly: ctrlStarvOnly,
+    nationalEndArmed: nationalEnd(instRaw.bySeed),
+    nationalEndControl: ctrlRaw ? nationalEnd(ctrlRaw.bySeed) : null,
+    bars: { launch: goLaunch, convert: goConvert, median: goMedian, deaths: goDeaths, starvTotals: goStarvTot, starvArmOnly: goStarvOnly, skipCoverage: goSkipCoverage },
+    pass: goPass,
+  };
+
+  function skipReasonsOf(rawBySeed) {
+    const tally = {};
+    for (const k of Object.keys(rawBySeed)) {
+      for (const r of (rawBySeed[k].nightcarrySkips || [])) {
+        tally[r.reason || 'missing'] = (tally[r.reason || 'missing'] || 0) + 1;
+      }
+    }
+    return tally;
+  }
+  const out = {
+    arm: 'nightcarry-a', run: 'nightcarry-a',
+    verdict: verdict,
+    skipReasons: { instrument: skipReasonsOf(instRaw.bySeed), control: ctrlRaw ? skipReasonsOf(ctrlRaw.bySeed) : null },
+    carry: {
+      instrument: { carried: instSummary.carried, carriedLaunched: instSummary.carriedLaunched,
+        carriedFromPart2: instSummary.carriedFromPart2, conversion: instSummary.carryConversion },
+      control: ctrlSummary ? { carried: ctrlSummary.carried, carriedLaunched: ctrlSummary.carriedLaunched,
+        carriedFromPart2: ctrlSummary.carriedFromPart2, conversion: ctrlSummary.carryConversion } : null,
+    },
+    instrumentDir: path.basename(instrumentDir), controlDir: controlDir ? path.basename(controlDir) : null,
+    wave4IdsMatch: !!w4Match, wave4IdsLive: liveW4, wave4IdsFrozen: frozenSorted,
+    instrument: instSummary, control: ctrlSummary,
+    go: go,
+    bars: {
+      classification: { pass: bar1, classifiedShare: instSummary.classifiedShare, unknown: instSummary.unknown, instancesOpened: instSummary.instancesOpened },
+      corpus: { pass: bar2, instrumentFiles: inst.files.length, controlFiles: ctrlSummary ? ctrlSummary.files : null },
+      instrumentErrors: { pass: bar3, instrument: instErrors, control: ctrlErrors },
+    },
+  };
+  const outFile = path.join(REPO, 'evidence', '2026-11-17', 'nightcarry-a-analysis.json');
+  fs.mkdirSync(path.dirname(outFile), { recursive: true });
+  fs.writeFileSync(outFile, JSON.stringify(out, null, 2) + '\n');
+
+  console.log('=== nightcarry-a classification (armed leg) ===');
+  console.log('seeds: ' + instSummary.seeds + '  files: ' + instSummary.files +
+    '  seedCallsW4: ' + instSummary.seedCallsW4 + '  instancesOpened: ' + instSummary.instancesOpened);
+  for (const b of BUCKETS) {
+    const n = instSummary.byBucket[b];
+    const share = instSummary.instancesOpened ? round(n / instSummary.instancesOpened, 3) : null;
+    console.log('  ' + b + ': ' + n + (share == null ? '' : ' (' + share + ')'));
+  }
+  console.log('sub-reasons: ' + JSON.stringify(instSummary.bySub));
+  console.log('classifiedShare: ' + instSummary.classifiedShare + '  unknown: ' + instSummary.unknown);
+  console.log('wall (instrument): ' + JSON.stringify(instSummary.wall) + '  medianSurvival: ' + instSummary.medianSurvival);
+  if (ctrlSummary) {
+    console.log('--- control leg ---');
+    console.log('seeds: ' + ctrlSummary.seeds + '  files: ' + ctrlSummary.files +
+      '  seedCallsW4: ' + ctrlSummary.seedCallsW4 + '  instancesOpened: ' + ctrlSummary.instancesOpened);
+    console.log('wall (control): ' + JSON.stringify(ctrlSummary.wall) + '  medianSurvival: ' + ctrlSummary.medianSurvival);
+  }
+  console.log('bars: classification=' + (bar1 ? 'PASS' : 'FAIL') +
+    ' corpus=' + (bar2 ? 'PASS' : 'FAIL') + ' instrumentErrors=' + (bar3 ? 'PASS' : 'FAIL') +
+    ' wave4Ids=' + (w4Match ? 'MATCH' : 'MISMATCH'));
+  console.log('GO: launchedTotal armed=' + launchedTotal + ' control=' + ctrlLaunchedTotal + ' delta=' + launchedDelta + ' (bar +2)' +
+    ' launchedSeeds armed=' + launchedSeeds.length + ' (' + launchedSeeds.join(',') + ')' +
+    ' carried=' + carriedTotal + ' carriedLaunched=' + carriedLaunchedTotal + ' conversion=' + carryConversion + ' (bar 0.25)' +
+    ' carriedFromPart2=' + (instSummary.carriedFromPart2 || 0) +
+    ' bareSelectedNotExecuted=' + bareSelectedNotExecuted + '/' + blockedDays +
+    ' medianRatio=' + medianRatio + ' (bar 0.9)' +
+    ' deaths armed=' + armDeaths + ' control=' + ctrlDeaths + ' (bar +2/run)' +
+    ' starvTotals armed=' + armStarv.total + ' control=' + (ctrlStarv ? ctrlStarv.total : 'n/a') +
+    ' starvArmOnly armed=' + armStarvOnly + ' control=' + ctrlStarvOnly +
+    ' nationalEnd armed=' + go.nationalEndArmed + ' control=' + go.nationalEndControl +
+    ' instancesBothLegs=' + instancesBothLegs + ' (vacuity floor <4)' +
+    ' => ' + verdict);
+  console.log('analysis: ' + path.relative(REPO, outFile));
+  if (!bar1 || !bar2 || !bar3 || !w4Match) process.exitCode = 1;
+}
+
+if (require.main === module) main();
+module.exports = { classifySeed: classifySeed, summarize: summarize, BUCKETS: BUCKETS };
