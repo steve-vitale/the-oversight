@@ -2382,28 +2382,66 @@
     // convoRecapLine: "what were we talking about?" — re-anchors a long
     // exchange from the thread log. Two threads deep, it names the arc;
     // one thread, it restates it. Always voiced, never a dead end.
+    // convoRecapLiveLine (journey-social r231): the live thread a recap
+    // must name when the thread log is empty. A surfaced want (stage
+    // 1-2) names itself through its stale opener — the def's state-aware
+    // reframe, else the generic one (convoWantStaleOpener) — the same
+    // escape the opener chain uses (conversation.js ~3797). Stage 0
+    // wants are NOT live (opener never ran; r225 "stage-0 is not live");
+    // stage 3 wants are resolved. No live want -> null: the recap-empty
+    // pool stays the honest fallback. The line flows through the recap's
+    // own repeat / press-cap guards below, and the recap turn is
+    // structural (exempt from the run-ledger block), so a ledger-blocked
+    // stale line still speaks instead of drying.
+    convoRecapLiveLine(vid) {
+      const c = this.convoGet(vid);
+      const w = c && c.want;
+      if (!w || !w.def) return null;
+      const stage = w.stage || 0;
+      if (stage < 1 || stage >= 3) return null;
+      try {
+        const sline = (typeof w.def.staleOpener === 'function')
+          ? w.def.staleOpener.call(this, vid)
+          : this.convoWantStaleOpener(vid, w);
+        return (typeof sline === 'string' && sline) ? sline : null;
+      } catch (e) { console.warn('[convo] recapLiveLine', e); return null; }
+    },
+
     convoRecapLine(vid) {
       const c = this.convoGet(vid);
       const log = (c.threadLog || []).filter(e => e.thread && e.thread !== 'small' && e.thread !== 'nonverbal');
       const labelOf = (t) => this.convoThreadAbout(vid, t);
       let line;
       if (!log.length) {
-        // RECAP-EMPTY POOL (journey-social r195 2026-11-13): the empty-
-        // thread recap was ONE fixed line, so pressing recap twice in a
-        // sitting re-served the same core and the M4 scan flagged it
-        // (r181: 19 flags; r189: 1; r195 panel: 16 of 185 flags — the
-        // >= 10 bar met, so the pool fix lands). Four honest variants
-        // via convoPickCycle ('recapempty' key): the cycle serves
-        // distinct lines, and M9's 3-press cap bounds a sitting, so all
-        // serves in one sitting stay distinct. Every variant stays
-        // honest: nothing to recap means nothing to recap — no variant
-        // invents a topic, a shared event, or a promise.
-        line = this.convoPickCycle(vid, 'recapempty', [
-          '"We were just talking. Nothing important."',
-          '"Just catching up, really. Nothing to sum up."',
-          '"Nothing in particular — we were only talking."',
-          '"Small talk, that\'s all. Nothing worth repeating."',
-        ]);
+        // C3D (journey-social r231 2026-11-16): the thread log is empty
+        // but the sitting may still hold live unfinished business — a
+        // surfaced-but-unengaged want plants no thread (r229 Onni: a
+        // live creek-water favor ask, stated in the opener, requirements
+        // just discussed — threadLog empty). Serving the empty pool then
+        // erases real content ("Nothing important" while the favor is on
+        // the table). Name the live thread instead; serve the pool only
+        // when nothing is open (the Ruth non-sighting: all beats closed).
+        const live = this.convoRecapLiveLine(vid);
+        if (live) {
+          line = live;
+        } else {
+          // RECAP-EMPTY POOL (journey-social r195 2026-11-13): the empty-
+          // thread recap was ONE fixed line, so pressing recap twice in a
+          // sitting re-served the same core and the M4 scan flagged it
+          // (r181: 19 flags; r189: 1; r195 panel: 16 of 185 flags — the
+          // >= 10 bar met, so the pool fix lands). Four honest variants
+          // via convoPickCycle ('recapempty' key): the cycle serves
+          // distinct lines, and M9's 3-press cap bounds a sitting, so all
+          // serves in one sitting stay distinct. Every variant stays
+          // honest: nothing to recap means nothing to recap — no variant
+          // invents a topic, a shared event, or a promise.
+          line = this.convoPickCycle(vid, 'recapempty', [
+            '"We were just talking. Nothing important."',
+            '"Just catching up, really. Nothing to sum up."',
+            '"Nothing in particular — we were only talking."',
+            '"Small talk, that\'s all. Nothing worth repeating."',
+          ]);
+        }
       } else {
         const last = log[log.length - 1];
         if (log.length >= 2) {
