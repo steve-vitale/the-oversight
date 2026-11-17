@@ -227,7 +227,7 @@ Per-seed (both legs identical): 103221 survived 150d, standing 199, wave 4, 87 d
 - `2c59164ff` — sim-deadplan-b: frozen prereg — dead-holder plan linger cost DIAG (fresh band 103221-103228, 150d, competent verbatim)
 - `0966de273` — sim-deadplan-b: instrument — deadplan driver + analyzer + proof test (87/87)
 - `2c5cbc724` — sim-deadplan-b: analyzer death-day fix (deaths array, not roster flag) + D8 fixture — proof test 89/89, verdict NOISE-ONLY → COSTLY
-- `TBD` — sim-deadplan-b: evidence + analysis + corpora (OFF/ON, 8 seeds each)
+- `9ef8bac37` — sim-deadplan-b: evidence + analysis + corpora (OFF/ON, 8 seeds each)
 
 ## Files
 
