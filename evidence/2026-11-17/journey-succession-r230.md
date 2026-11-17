@@ -223,12 +223,14 @@ run (time — the gate took 18.8 min under sibling load).
 ## Run bookkeeping
 - Base master b4cdf252d; tooling commit 9ed2f39f9 (prereg + driver/
   analyzer/runner clones + MANTLE-FINE revision + corpus proof +
-  panel evidence); run-note commit [PENDING — fill at closeout].
+  panel evidence); run-note commit d797c0560.
 - Registration took ~9.5 min (08:56→09:05Z). Heartbeat loop (5-min
   cadence) started 09:07Z; no gaps.
-- Index clobber struck on the tooling commit (8th sighting) —
-  repaired via the ls-tree pipe; commit verified correct, status
-  empty after (plus a mode-only hbloop entry, chmod 644 to match
-  the committed 100644 house norm).
+- Index clobber struck on both safe-commits (8th + 9th sightings) —
+  repaired via the ls-tree pipe both times; commits verified
+  correct, status empty after (plus a mode-only hbloop entry on the
+  first, chmod 644 to match the committed 100644 house norm).
 - Rotation-b: 7 → 4. Lock: deleted at closeout.
-- Merge: [PENDING — fill at closeout].
+- Merge: ff-only d797c0560 (base current at merge, no rebase needed;
+  gate 333/7, 0 attributable). Tree released, branch deleted,
+  rotation-b 7 → 4, lock deleted.
