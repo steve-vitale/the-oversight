@@ -2809,6 +2809,36 @@
     convoWantMenu(vid) {
       const c = this.convoGet(vid);
       const w = c && c.want;
+      // STAGE-0 ASK SURFACING (journey-establishment r230): a fresh
+      // ask_favor want whose opener never ran (a resume/recall/case
+      // thread pre-empted the opening) waits at stage 0 with a live
+      // need — and the menu never offered it: this function returned []
+      // at stage 0 AND on non-want threads, so the ask was unreachable
+      // for the whole sitting (panel: 26/26 favorless sits class E1,
+      // stage max 0; staged probe: dlg:help never offered in 10 turns
+      // of a resume-owned sitting, while the startConvo comment claims
+      // "the menu surfaces it once the old thread settles"). Offer ONLY
+      // the engage verb (dlg:help) here: committing to, or refusing, an
+      // ask the player never heard is the phantom-promise / false-refusal
+      // shape the r225 guards exist to prevent. Pressing it runs
+      // engageBeat, whose deferred-after-resume branch already states
+      // the ask correctly (stage 0 -> 2, favor attached). The player can
+      // still ignore it and stay on the resumed thread — the want stays
+      // stage 0, unvoiced, and the r225 guards keep any later deflect
+      // honest. Gated on a LIVE need: no need, no ask to surface (the
+      // picker's weight-0 rule should already prevent this, but the menu
+      // must not offer help for a need that died between pick and menu).
+      if (w && w.id === 'ask_favor' && (w.stage || 0) === 0 && c && !(c.pendingQ || c.reactiveQ || c.genericQ)) {
+        let need = null;
+        try { need = (typeof this.convoFindFavorNeed === 'function') ? this.convoFindFavorNeed(vid) : null; } catch (e) { need = null; }
+        if (need) {
+          const labels = ['"How can I help?"', '"What do you need?"', '"I\'m listening."'];
+          const label = (typeof this.convoPickCycle === 'function')
+            ? (this.convoPickCycle(vid, 'wantmenu:ask_favor:0:dlg:help', labels) || labels[0])
+            : labels[0];
+          return [{ id: 'dlg:help', label, temper: 'kind' }];
+        }
+      }
       if (!w || !w.def || (w.stage || 0) === 0 || (w.stage || 0) >= 3) return [];
       if (c.pendingQ || c.reactiveQ || c.genericQ) return [];
       // Thread coherence: mid another topic thread, the want waits — it

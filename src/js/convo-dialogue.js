@@ -926,8 +926,9 @@
         // shape; 3 of the 4 stage-3 closes came through this handler.
         // Only a surfaced, undecided want (stage 1-2) is live here — the
         // same live definition convoWantMenu uses (it returns [] at
-        // stage 0). The unvoiced want stays stage 0; the need persists
-        // for a proper ask next sitting.)
+        // stage 0, except the r230 ask_favor surfacing offer — dlg:help
+        // only, which engages rather than decides). The unvoiced want
+        // stays stage 0; the need persists for a proper ask next sitting.)
         c.transcript.push({ who: 'you', text: '"I can\'t right now."' });
         const w = c.want;
         const wantLive = !!(w && w.def && (w.stage || 0) >= 1 && (w.stage || 0) < 3);
