@@ -1056,17 +1056,27 @@
           if (!a2 || !a2.exped[vid]) return 'hold';
         } catch (e) {}
         this.startExpedition(c.companion, hx, hy, false, opts);
+        // COMPANIONGUARD (sim-companionguard-b): verify the companion
+        // actually left before recording them — a skipped companion
+        // (already out on their own trip) keeps that trip, and the
+        // plan record must stay honest: `launched` lists only
+        // villagers whose expedition record exists after the call.
+        // This also closes the pre-existing mirror gap for
+        // sick/hurt-blocked companions (same code path, same lie,
+        // same fix). The inviter still advances to 'hunt' with the
+        // honest party (possibly solo).
+        var launched = [];
+        try {
+          var a2c = this.agencyState ? this.agencyState() : null;
+          if (a2c && a2c.exped && a2c.exped[c.companion]) launched.push(c.companion);
+        } catch (e) {}
         // VETREENGAGE (sim-vetreengage-a): launch the second companion on the
         // same shared target when the dawn candidate carried one. Only
         // a started expedition counts — a blocked second companion
-        // falls back to a pair launch, never a solo inviter. (The
-        // pre-existing mirror gap stays as-is: this mirror does not
-        // re-check the first companion's expedition the way
-        // winPlanDepart does; fixing that is out of scope.)
+        // falls back to a pair launch, never a solo inviter.
         // Env-gated: the second companion launches only when VETREENGAGE=1.
         var _vreC2m = false;
         try { _vreC2m = (typeof process !== 'undefined' && process.env && process.env.VETREENGAGE === '1'); } catch (e2) {}
-        var launched = [c.companion];
         if (_vreC2m && c.companion2) {
           this.startExpedition(c.companion2, hx, hy, false, opts);
           var ok2 = false;
@@ -1080,7 +1090,7 @@
           var plan2 = this.winPlanOf ? this.winPlanOf(vid) : null;
           if (plan2) { plan2.stage = 'hunt'; plan2.party = launched.slice(); }
           var cplan = this.winPlanOf ? this.winPlanOf(c.companion) : null;
-          if (cplan) { cplan.stage = 'hunt'; cplan.party = [vid].concat(launched.filter(function (x) { return x !== c.companion; })); }
+          if (cplan && launched.indexOf(c.companion) !== -1) { cplan.stage = 'hunt'; cplan.party = [vid].concat(launched.filter(function (x) { return x !== c.companion; })); }
           if (launched.length > 1) {
             var cplan2 = this.winPlanOf ? this.winPlanOf(c.companion2) : null;
             if (cplan2) {

@@ -482,6 +482,25 @@
       } catch (e) {}
       var a = this.agencyOf(vid);
       var st = this.agencyState();
+      // COMPANIONGUARD (sim-companionguard-b): a companion call must
+      // not clobber a live expedition. When a villager is already out
+      // on a trip of their own, skip them — they keep their trip and
+      // the party goes with whoever is available. Env-gated (node
+      // sims only; in the browser process is undefined, so the lever
+      // is off — same pattern as vetreengageOn() in win-plan.js).
+      // Returns BEFORE gear-up / heal-check, so a skipped companion
+      // burns no gear or care on a trip that never launches. The
+      // village counter mirrors medicDutyBlocked so the instrument
+      // can cross-check skips.
+      try {
+        if (typeof process !== 'undefined' && process.env && process.env.COMPANIONGUARD === '1') {
+          if (st.exped && st.exped[vid]) {
+            var vvc = this.state.village || {};
+            vvc.companionGuardSkips = (vvc.companionGuardSkips || 0) + 1;
+            return;
+          }
+        }
+      } catch (e) {}
       // GEAR-UP + HEAL CHECK (Steve 2026-10-09): expeditions arm up from the
       // village's gear and don't walk out hurt when help is at hand. A hurt
       // villager with no healer sits this cycle out (rest, try tomorrow).
