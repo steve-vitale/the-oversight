@@ -299,12 +299,17 @@ month is a wall.
 
 ## Closeout
 
-- **Commits (branch `journey-deepening`):** `9ccf48d7a` prereg +
-  driver/analyzer + proof tests (tooling only; analyzer 60/60,
-  muster 12/12, march 11/11 green on the branch tip); run-note
-  commit (to be filled). Safe-commit index clobber struck on commit 1
-  (staged-as-deleted pattern); repaired via the `ls-tree -r` pipe,
-  blobs verified against HEAD, tree clean after the repair.
+- **Commits (branch `journey-deepening`, after rebase):** `b0a4a5929`
+  prereg + driver/analyzer + proof tests (tooling only); `fe8b3666b`
+  run note. Safe-commit index clobber struck on both commits
+  (staged-as-deleted pattern); repaired each time via the `ls-tree
+  -r` pipe, blobs verified against HEAD, tree clean after each repair.
+  Master moved during the run (nondeathplan-live-b + journey-crisis
+  r230 + poolshape-a + a batch-ship version bump landed); rebased
+  clean onto `b921fde4f` (2/2, no conflicts, no overlap with this
+  run's files), proof tests re-run green on the rebased tip
+  (60 analyzer + 12 muster + 11 march), merged ff-only into local
+  master.
 - **Merged locally, pending ship** — no bump, no push, no live
   verification (ship loop owns those). (Merge + release + rotation +
   lock steps recorded in the run's memory log.)
