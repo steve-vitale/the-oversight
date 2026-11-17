@@ -522,7 +522,11 @@ function decomposeStore(rawLeg) {
     const haven = s.havenRows || [];
     const creates = s.v4creates || [];
     const inits = s.storeInitRows || [];
-    let storeEverInit = !!s.storeExistsFinal;
+    // storeEverInit from DURING-the-run reads only (census +
+    // init rows). storeExistsFinal is NOT consulted here: it is a
+    // post-run read, and any Game.winPlanStats() call would have
+    // created the store by then.
+    let storeEverInit = false;
     let firstStoreDay = null;
     for (const c of census) if (c.winPlanStoreExists) { storeEverInit = true; if (firstStoreDay == null || c.day < firstStoreDay) firstStoreDay = c.day; }
     if (inits.length) storeEverInit = true;

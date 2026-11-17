@@ -73,6 +73,8 @@ check('driver refuses a MODE=off run with the recorder on (mislabel trap)',
   driverSrc.indexOf("if (MODE === 'off' && RECORDER_ON)") !== -1 &&
   driverSrc.indexOf("MODE=off requires ZEROATTEMPT_RECORDER=off") !== -1);
 check('driver refuses to overwrite per-seed files', driverSrc.indexOf('refusing to overwrite') !== -1);
+check('driver never calls winPlanStats() (stateOf would create the store)',
+  driverSrc.indexOf('Game.winPlanStats(') === -1);
 check('driver never INVOKES state-creating winPlanOf/agencyState/agencyOf/npcTrigger (reads + wrap installs only)',
   driverSrc.indexOf('Game.winPlanOf(') === -1 && driverSrc.indexOf('Game.agencyState(') === -1 &&
   driverSrc.indexOf('Game.agencyOf(') === -1 && driverSrc.indexOf('Game.npcTrigger(') === -1);
@@ -507,6 +509,32 @@ check('origin: driver and analyzer agree (vbrain / random / unknown)',
   check('D3 tamper: plan holder with no creation row is flagged by the ledger check',
     storeT5.unknowns.length === 1 && storeT5.unknowns[0].vid === 'k',
     JSON.stringify(storeT5.unknowns));
+  // Fixture t6: a store-never-initialized seed — census store false,
+  // no init rows, no creates — must read storeEverInit false even
+  // though storeExistsFinal is (contaminated) true, and the engaged
+  // store-missing havenTick call must be counted.
+  const t6 = { bySeed: { 2: {
+    seed: 2, scholarId: 'scholar2',
+    censusRows: [
+      census('x', 10, { profile: 'explorer', winPlanStoreExists: false, knowFoughtN: 1, villageSlainN: 2 }),
+      census('x', 11, { profile: 'explorer', winPlanStoreExists: false, knowFoughtN: 1, villageSlainN: 2 }),
+    ],
+    scoreRows: [], gateRows: [], departRows: [], tickRows: [], launches: [],
+    returns: [], expedDeaths: [], openExped: [], dailySig: [], deaths: [], instrumentErrors: [],
+    havenRows: [
+      { seq: 1, day: 10, part: 0, vid: 'x', profile: 'explorer', foughtN: 1, slainN: 2, storeBefore: false, planBefore: null, planAfter: null, created: false },
+    ],
+    v4creates: [], v4seeds: [], storeInitRows: [],
+    storeExistsFinal: true, winPlanStats: null,
+  } } };
+  const storeT6 = AN.decomposeStore(t6);
+  check('store decomp: never-initialized seed reads storeEverInit false despite storeExistsFinal true, engaged store-missing counted',
+    storeT6.perSeed.length === 1 && storeT6.perSeed[0].storeEverInit === false &&
+    storeT6.perSeed[0].firstInitDay == null && storeT6.perSeed[0].firstInitCreator == null &&
+    storeT6.perSeed[0].engagedStoreMissing === 1 && storeT6.perSeed[0].firstSlainDay === 10 &&
+    storeT6.perSeed[0].firstFoughtDay === 10 &&
+    storeT6.mismatches.length === 0 && storeT6.unknowns.length === 0,
+    JSON.stringify(storeT6.perSeed[0]));
 })();
 
 // ---------- live runs + determinism legs D1/D2 ----------

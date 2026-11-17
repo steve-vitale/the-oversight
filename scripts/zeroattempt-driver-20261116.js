@@ -864,8 +864,12 @@ async function oneRun(seed) {
     }
   } catch (e) { errors.push('waveKillLog: ' + String(e.message).slice(0, 80)); }
 
+  // winPlanStats as a RAW read: the winPlanStats() method calls
+  // stateOf(), which CREATES the store (v.winPlan = {}) — calling it
+  // here would contaminate storeExistsFinal below (it would always
+  // read true).
   let winPlanStats = null;
-  try { winPlanStats = (typeof Game.winPlanStats === 'function') ? Game.winPlanStats() : null; } catch (e) { errors.push('winPlanStats: ' + String(e.message).slice(0, 80)); }
+  try { winPlanStats = (((Game.state || {}).village || {}).winPlanStats || null); } catch (e) { errors.push('winPlanStats: ' + String(e.message).slice(0, 80)); }
   let storeExistsFinal = false;
   try { storeExistsFinal = storeExistsRaw(Game); } catch (e) { storeExistsFinal = false; }
 
