@@ -64,9 +64,86 @@ is ~1 min of panel + a re-point).
   FAILS on 9be3676d8 with `Error: Proof source inputs are not current`
   (`scripts/balance-proof-update.js:8`), exit 1 — confirmed in the
   worktree before the panel run, matching the coordinator's baseline.
-  (PENDING: manifest-diff key list vs the retained r211 panel;
-  workflow 8/9 check; cache-flags owed-check score; ontology.)
-- **Verdict of the owed-check: PENDING.**
+  `test-measurement-workflow.js` standalone: **8 passed, 1 failed** —
+  the failing leg is exactly "retained neutrality proof covers the
+  current Game/controller/harness inputs" (the staleness failure; the
+  same leg the b11/b12/b13/b19/b20 adoptions recorded as 8/9 on their
+  stale landing tips).
+- `B.manifest('.')` vs the retained r211 panel's `sources`
+  (`evidence/2026-11-15/neutral-r211-rebased.json.gz`, sha256
+  `c015d3481741a1f268d176fe5c5431b36433d600b728f29530b64d5281f3414e`):
+  tip 532 keys, panel 532 keys — **0 keys only in the tip + 14 keys
+  differ**:
+
+  - `src/js/build.js` — batch-ship version bump (panel `5397ae4e941f…`,
+    tip `9818c3223fd5…`)
+  - `src/js/conversation.js` — r213 deepening (panel `30a19d552f8c…`,
+    tip `5ed57d8ab1a9…`)
+  - `src/js/convo-dialogue.js` — (panel `568099b225b1…`, tip
+    `7c2df8a88b42…`)
+  - `src/js/convo-scene.js` — (panel `d2c6e5d9b6b9…`, tip
+    `0dfb2f9af0b3…`)
+  - `src/js/convo-wants.js` — (panel `6123031b43d0…`, tip
+    `8d59db4d4e81…`)
+  - `src/js/game.js` — planignite-fix + r213 (panel `3d0f6c65f246…`,
+    tip `b66172d369aa…`)
+  - `src/js/hierarchy.js` — (panel `446b7141eb83…`, tip
+    `fff8f427c4b2…`)
+  - `src/js/titans.js` — (panel `ecd240b2ad53…`, tip `8b8065b1eaa2…`)
+  - `src/js/villager-agency.js` — planignite-fix (panel
+    `bf2397a34ca3…`, tip `2f283ecac9d9…`)
+  - `src/js/villager-brain.js` — planignite-fix (panel
+    `260bf980836c…`, tip `989a95594234…`)
+  - `src/js/win-plan.js` — (panel `6572ca7296a6…`, tip
+    `5350a15e378a…`)
+  - `scripts/policies/competent-courtship-b.js` — (panel
+    `2f067a525782…`, tip `09329adc2b62…`)
+  - `scripts/policies/competent.js` — (panel `74a890f0844e…`, tip
+    `df9b7dff4de4…`)
+  - `index.html` — batch-ship version bump (panel `181b87b0047d…`,
+    tip `a9c532772deb…`)
+
+  Observer and contract digests still match the r211 panel. The
+  staleness is the source manifest only. NOTE: the coordinator's
+  7-file list (build.js, feastBuff.js, game.js, havenGrowth.js,
+  storage.js, villager-build.js, index.html) was measured against the
+  Oct 29 01ab3e346 panel; against the CURRENT r211 panel the movers
+  are the 14 above, and feastBuff.js / havenGrowth.js / storage.js /
+  villager-build.js have NOT moved since r211.
+- `B.manifest('.')` vs the retained b20 panel's `sources`
+  (`evidence/2026-11-15/neutral-proofrefresh-b20.json.gz`): tip 532
+  keys, panel 529 keys — 3 new policy files (competent-courtship-b,
+  competent-covenant-b, competent-successorcaution-b) + **16 keys
+  differ** (adds alienPlayers.js, convo-mood.js, sigW3c.js to the
+  r211 list). Vs the b19 panel: same 3 new policy files + 16 differ.
+  Vs the b18 panel: 6 new policy files + 17 differ (adds
+  betrayal.js). Vs b13 and b12 panels: 6 new policy files + 17 differ
+  each. Observer and contract digests match all five.
+- Stale-input negatives verified on this tip (validate() FAILS with
+  "Proof source inputs are not current" on all six): r211, b20, b19,
+  b18, b13, b12. The brief's r211/b20 negatives hold, and so do
+  b19/b18/b13/b12.
+- Cache-flags anomaly in the owed-check: `test-measurement-cache-
+  flags.js` scored **0/4** on this tip (all four legs FAIL), where
+  round 20 scored 4/4 on a quiet box. Discriminating probe, same tip,
+  same hour: a single 1-day zero-policy panel build via the real CLI
+  completes fine (exit 0, 1 case) but takes **58.7s wall for ~3.9s
+  CPU** — over the test's 30s spawn timeout. Box load average was
+  5.30 at the time (sibling loops running in other trees). This is the
+  2026-11-12 load artifact, not a code failure: no panel/cache code
+  changed in this arm (only evidence + test files committed so far;
+  the base did not touch balance-panel.js or the cache logic). Leg (c)
+  is re-run at closeout on a quiet box; if the box is still loaded it
+  is judged by the A/B (same-tip quiet-box rerun), per the prereg.
+- Pre-regeneration `test-gateproof-a.js`: exit 1, legs (a) FAIL
+  ENOENT, proof-update FAIL exit 1, workflow 8/9, cache-flags 0/4,
+  ontology ok — then crashes at leg (d) with ENOENT —
+  `evidence/2026-11-17/neutral-gateproof-a.json.gz` does not exist yet
+  (the panel has not been generated or re-pointed).
+- `validate-ontology.js` standalone: exit 0, "All 138 systems
+  validated", ONTOLOGY.md 2198 lines.
+- **Verdict of the owed-check: OWED.** Panels at r211 and earlier are
+  superseded; the re-point target is the NEW panel only.
 
 ## Panel (filled after the run)
 
