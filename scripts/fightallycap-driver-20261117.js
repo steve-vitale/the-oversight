@@ -10,12 +10,15 @@
 // except the renames below and the ally-2 encounter fields) PLUS:
 //   1. v4encounters rows carry `mHpStart` (the spawned monster's
 //      starting HP, recovered AFTER the fight from the fight record:
-//      rec.mHpLeft + rec.mDealt for fought non-kill rows; null +
+//      rec.mHpLeft + rec.mDealt + the Pack Hunt harry total parsed
+//      from the record's log for fought non-kill rows — finding
+//      #2497: the harry (2–4/round) is NOT in rec.mDealt; null +
 //      vKill for kills — share 1.0 by definition; null for
 //      no-contact evades, where no monster spawned) so damage share
-//      (mDealt / mHpStart) needs no range imputation. (Recorder
-//      repair, finding #2488, inherited from the partysize recorder
-//      arm — see recoverMHpStart below.)
+//      (mDealt / mHpStart) needs no range imputation. Rows also carry
+//      `mPackDealt` (the parsed harry total, 0 when no harry fired).
+//      (Recorder repair, finding #2488, inherited from the partysize
+//      recorder arm — see recoverMHpStart below.)
 //   2. v4encounters rows carry the ally-cap fields: `ally2Vid`,
 //      `ally2Dealt`, `ally2Taken`, `allyDealt` (total across allies),
 //      and `joiningAllies` (count of allies that joined the fight) —
@@ -459,11 +462,26 @@ function commitKindOf(commit) {
 // hp is a RANGE ([950,1150]), so no spawned number exists before the
 // call — fieldFights.js rolls it (lroll(hpDef)) into members[0].hp.
 // After the call the record carries everything needed:
-//   - fought, non-kill: mHpStart = rec.mHpLeft + rec.mDealt (the
-//     monster's remaining HP plus everything dealt to it). Wave-4/5
-//     monsters are pack-1, so mDealt is lead-only and the sum is
-//     exact; the proof test cross-checks it against rec.mHpStart
-//     (the CONTACTREC field) on live fixture fights.
+//   - fought, non-kill: mHpStart = rec.mHpLeft + rec.mDealt +
+//     packHarryTotal(rec) (the monster's remaining HP plus everything
+//     dealt to it, including the Pack Hunt harry). mDealt counts
+//     strikes, verbs, and ally damage — but NOT the pack harry:
+//     a Beastmaster's Pack Hunt harries the monster for 2–4 per round
+//     as a side effect on the lead body (src/js/godpath.js fieldStrike,
+//     log line "the pack harries it for N."), counted in no dealt
+//     total. The pre-#2497 comment ("mDealt is lead-only and the sum
+//     is exact") was wrong for Beastmasters: on the frozen band
+//     103601–103608 the recovery understated spawn HP by 7–12 on 6
+//     rows, each exactly the harry total (finding #2497). The proof
+//     test cross-checks the sum against rec.mHpStart (the CONTACTREC
+//     field) on live fixture fights, and the frozen 6 rows reconcile
+//     exactly. mPackDealt is returned so the row carries the pack
+//     channel explicitly (0 when no harry fired). NOTE — same shape,
+//     NOT folded here: Bird Strike ("the birds tear at it for N.",
+//     8–12/round) is a second side-effect channel; zero bird lines
+//     exist on the frozen band, so it is a follow-up finding, not
+//     part of this fix — a future bird row still surfaces as a
+//     recMismatch, by design.
 //   - vKill: the kill's share is 1.0 by definition; exact spawned HP
 //     is unrecoverable from the record (mHpLeft is 0 and the killing
 //     blow may overkill), so mHpStart stays null and vKill is set —
@@ -475,19 +493,38 @@ function commitKindOf(commit) {
 //     pre-call live-instance read, if any.
 // Pure: reads only, no RNG, no state writes. Exported; exercised by
 // this pilot's instrument bar (missingHp 0 on fought non-kill rows).
+// packHarryTotal(rec): the Pack Hunt harry total for one fight
+// record — the sum of "the pack harries it for N." lines in the
+// record's log (src/js/godpath.js fieldStrike, 2–4 per round while
+// the pack is on the monster). Pure read; 0 when the log is absent
+// or no harry fired. Exported for the proof test's frozen-row legs.
+function packHarryTotal(rec) {
+  var total = 0;
+  try {
+    var log = (rec && rec.log) || [];
+    for (var i = 0; i < log.length; i++) {
+      var s = String(log[i]);
+      var re = /the pack harries it for (\d+)/g, m;
+      while ((m = re.exec(s)) !== null) total += parseInt(m[1], 10);
+    }
+  } catch (e) { return 0; }
+  return total;
+}
+
 function recoverMHpStart(rec, preHp) {
   var pre = (typeof preHp === 'number' && isFinite(preHp) && preHp > 0) ? preHp : null;
-  if (!rec) return { mHpStart: pre, vKill: false, noContact: false };
+  if (!rec) return { mHpStart: pre, vKill: false, noContact: false, mPackDealt: 0 };
   var rounds = rec.rounds | 0;
   var dealt = rec.mDealt | 0;
+  var pack = packHarryTotal(rec);
   var noContact = rec.outcome === 'evade' || rec.outcome === 'alreadyDead' || (rounds === 0 && dealt === 0);
-  if (noContact) return { mHpStart: null, vKill: false, noContact: true };
-  if (rec.outcome === 'vKill') return { mHpStart: null, vKill: true, noContact: false };
+  if (noContact) return { mHpStart: null, vKill: false, noContact: true, mPackDealt: pack };
+  if (rec.outcome === 'vKill') return { mHpStart: null, vKill: true, noContact: false, mPackDealt: pack };
   if (rec.mHpLeft != null && rec.mDealt != null) {
-    var v = Math.max(0, rec.mHpLeft) + Math.max(0, rec.mDealt);
-    if (v > 0) return { mHpStart: v, vKill: false, noContact: false };
+    var v = Math.max(0, rec.mHpLeft) + Math.max(0, rec.mDealt) + pack;
+    if (v > 0) return { mHpStart: v, vKill: false, noContact: false, mPackDealt: pack };
   }
-  return { mHpStart: pre, vKill: false, noContact: false };
+  return { mHpStart: pre, vKill: false, noContact: false, mPackDealt: pack };
 }
 
 // FIGHTALLYCAP: the agencyTick skip-reason recorder, copied verbatim
@@ -845,6 +882,7 @@ async function oneRun(seed) {
           const lg = lastGateByVid[vid] || null;
           row = { day: gday(Game), vid: vid, mid: mdef.id, wave: w,
             mHpStart: null, // recovered post-call from the fight record
+            mPackDealt: null, // Pack Hunt harry total parsed from the fight log (#2497)
             vKill: false,
             mHpStartRec: null, // diagnostic: CONTACTREC's rec.mHpStart
             alliesN: (opts && opts.allies) | 0,
@@ -874,6 +912,7 @@ async function oneRun(seed) {
             // passes a DEF (hp range), so no pre-call number exists.
             var recov = recoverMHpStart(rec, preHp);
             row.mHpStart = recov.mHpStart;
+            row.mPackDealt = recov.mPackDealt | 0;
             row.vKill = !!recov.vKill;
             try { row.mHpStartRec = (typeof rec.mHpStart === 'number' && isFinite(rec.mHpStart)) ? rec.mHpStart : null; } catch (e) {}
             row.outcome = rec.outcome || null;
@@ -1236,4 +1275,4 @@ if (require.main === module) (async function () {
   }
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 
-module.exports = { oneRun: oneRun, loadWave4Ids: loadWave4Ids, planIsWave4: planIsWave4, deriveLaunchBlock: deriveLaunchBlock, poolReplica: poolReplica, classifySeedPath: classifySeedPath, firstCallerFrame: firstCallerFrame, fightOrigin: fightOrigin, targetPersistence: targetPersistence, SEED_PATHS: SEED_PATHS, SEEDLAND: SEEDLAND, LAUNCHSURVIVE: LAUNCHSURVIVE, installSkipRecorder: installSkipRecorder, commitKindOf: commitKindOf, recoverMHpStart: recoverMHpStart };
+module.exports = { oneRun: oneRun, loadWave4Ids: loadWave4Ids, planIsWave4: planIsWave4, deriveLaunchBlock: deriveLaunchBlock, poolReplica: poolReplica, classifySeedPath: classifySeedPath, firstCallerFrame: firstCallerFrame, fightOrigin: fightOrigin, targetPersistence: targetPersistence, SEED_PATHS: SEED_PATHS, SEEDLAND: SEEDLAND, LAUNCHSURVIVE: LAUNCHSURVIVE, installSkipRecorder: installSkipRecorder, commitKindOf: commitKindOf, recoverMHpStart: recoverMHpStart, packHarryTotal: packHarryTotal };
