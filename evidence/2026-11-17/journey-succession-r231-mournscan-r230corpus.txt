@@ -1,0 +1,140 @@
+
+== seed 34321: handoff d40 Fiona -> Elena (scripted)
+   CAP-NC: no-newcomer-arrival (newcomer-probe: no newcomer arrived) bondedEver=false
+   CAP-D14 (descriptive): no-stranger-pool (probe: no stranger pool) bondedEver=n/a
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=6 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=0 over 29 bond-days (median/day=0); FIRST-bearer new=1 (driven-days=0, undriven-days=1); LATER-bearer new=0
+   OPP newcomers: arrivals=0 first-arrival d+null; FIRST-bearer new bonds with newcomers=0 vs pre-existing=1
+   MANTLE-FINE #0: entry d40 return d40 cause=the expedition flippedImmediate=true fineLatency=1 (roll=1 gapDays=0 sample=0) coarseLatency=0 rollCover=true zeroDaySleep=true heldBriefly=false firstNewTag=scripted-kill class=SAMPLING-or-CLEAN
+   MANTLE day-skips: none (sleep rolls: 110; 0-day no-advance sleeps: 23 — sleep called without rolling the day, not a skip)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=54 relD14=55 relD30=55 relEnd=55 relD14.selfId=elena_petrova
+   DRY-CENSUS: dry hits 0 {} | honest fallbacks 0 | null-return silences 0
+   MOURN-TEMPLATE: 0 name-parameterized mourning servings {}
+   MOURN-EXHAUST: exhausted-line servings 0 (in mourning sittings: 0)
+
+== seed 34322: handoff d41 Sanjay -> Emmett (scripted)
+   CAP-NC: bonded-by-deadline (newcomer-probe: Meera arrived d+47 probe d+47 deadline d+61 trust=40 want=curious refused=false) bondedEver=true
+   CAP-D14 (descriptive): second-handoff-before-d14 (probe: Gaspar trust=44 want=curious refused=false) bondedEver=true
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=5 unbonded=1 selfReqDayEntries=0
+       unbonded requesters: Gaspar(d48)
+   OPP bonds d+0..d+30: NPC-NPC new=3 over 31 bond-days (median/day=0); FIRST-bearer new=0 (driven-days=0, undriven-days=0); LATER-bearer new=0
+   OPP newcomers: arrivals=3 first-arrival d+47; FIRST-bearer new bonds with newcomers=0 vs pre-existing=0
+   MANTLE-FINE #0: entry d41 return d41 cause=the expedition flippedImmediate=true fineLatency=0 (roll=0 gapDays=0 sample=0) coarseLatency=0 rollCover=true zeroDaySleep=false heldBriefly=false firstNewTag=scripted-kill class=SAMPLING-or-CLEAN
+   MANTLE-FINE #1: entry d51 return d51 cause=the arena flippedImmediate=true fineLatency=0 (roll=0 gapDays=0 sample=1) coarseLatency=null rollCover=true zeroDaySleep=false heldBriefly=false firstNewTag=sleep class=SAMPLING-or-CLEAN
+   MANTLE-FINE #2: entry d74 return d74 cause=the wild flippedImmediate=true fineLatency=0 (roll=0 gapDays=0 sample=0) coarseLatency=null rollCover=true zeroDaySleep=true heldBriefly=false firstNewTag=sleep class=SAMPLING-or-CLEAN
+   MANTLE-FINE #3: entry d84 return d84 cause=the arena flippedImmediate=true fineLatency=0 (roll=0 gapDays=0 sample=0) coarseLatency=null rollCover=true zeroDaySleep=true heldBriefly=false firstNewTag=post class=SAMPLING-or-CLEAN
+   MANTLE-COARSE chain: Emmett -> Catalina detected d51 entry d51 coarseLatency=0
+   MANTLE-COARSE chain: Catalina -> Cameron detected d74 entry d74 coarseLatency=0
+   MANTLE-COARSE chain: Cameron -> Ellie detected d84 entry d84 coarseLatency=0
+   MANTLE day-skips: none (sleep rolls: 110; 0-day no-advance sleeps: 19 — sleep called without rolling the day, not a skip)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=39 relD14=41 relD30=42 relEnd=63 relD14.selfId=catalina_reyes
+   DRY-CENSUS: dry hits 0 {} | honest fallbacks 0 | null-return silences 0
+   MOURN-TEMPLATE: 11 name-parameterized mourning servings {"opener:dreamed":2,"opener:owed-favor":1,"cope:last-words":1,"opener:world-continues":3,"next:name-right":1,"part:habit-for":1,"opener:expect-fire":2}
+   MOURN-HIT seed=34322 d+14 Cameron shape=opener:dreamed dead=Emmett
+   MOURN-HIT seed=34322 d+3 Cameron shape=opener:owed-favor dead=Sanjay
+   MOURN-HIT seed=34322 d+3 Cameron shape=cope:last-words dead=Sanjay
+   MOURN-HIT seed=34322 d+3 Svein shape=opener:dreamed dead=Sanjay
+   MOURN-HIT seed=34322 d+45 Jovan shape=opener:world-continues dead=Cameron is gone and Gaspar
+   MOURN-HIT seed=34322 d+45 Svein shape=next:name-right dead=Gaspar
+   MOURN-HIT seed=34322 d+45 Svein shape=part:habit-for dead=Gaspar
+   MOURN-HIT seed=34322 d+47 Meera shape=opener:world-continues dead=Gaspar
+   MOURN-HIT seed=34322 d+53 Elijah shape=opener:expect-fire dead=Cameron
+   MOURN-HIT seed=34322 d+7 Cameron shape=opener:expect-fire dead=Sanjay
+   MOURN-HIT seed=34322 d+7 Ellie shape=opener:world-continues dead=Sanjay
+   MOURN-EXHAUST: exhausted-line servings 0 (in mourning sittings: 0)
+
+== seed 34323: handoff d41 Ethel -> Maureen (scripted)
+   CAP-NC: no-newcomer-arrival (newcomer-probe: no newcomer arrived) bondedEver=false
+   CAP-D14 (descriptive): not-bonded-by-d14 (probe: Zoltan trust=15 want=curious refused=false) bondedEver=false
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=6 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=4 over 30 bond-days (median/day=0); FIRST-bearer new=0 (driven-days=0, undriven-days=0); LATER-bearer new=0
+   OPP newcomers: arrivals=0 first-arrival d+null; FIRST-bearer new bonds with newcomers=0 vs pre-existing=0
+   MANTLE-FINE #0: entry d41 return d41 cause=the expedition flippedImmediate=true fineLatency=0 (roll=0 gapDays=0 sample=0) coarseLatency=0 rollCover=true zeroDaySleep=false heldBriefly=false firstNewTag=scripted-kill class=SAMPLING-or-CLEAN
+   MANTLE-FINE #1: entry d89 return d89 cause=the wild flippedImmediate=true fineLatency=1 (roll=1 gapDays=0 sample=0) coarseLatency=null rollCover=true zeroDaySleep=true heldBriefly=false firstNewTag=post class=SAMPLING-or-CLEAN
+   MANTLE-FINE #2: entry d95 return d95 cause=the wild flippedImmediate=true fineLatency=1 (roll=1 gapDays=0 sample=0) coarseLatency=null rollCover=true zeroDaySleep=true heldBriefly=false firstNewTag=post class=SAMPLING-or-CLEAN
+   MANTLE-COARSE chain: Maureen -> Rowan detected d89 entry d89 coarseLatency=0
+   MANTLE-COARSE chain: Rowan -> Alfredo detected d95 entry d95 coarseLatency=0
+   MANTLE day-skips: none (sleep rolls: 110; 0-day no-advance sleeps: 17 — sleep called without rolling the day, not a skip)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=45 relD14=47 relD30=49 relEnd=49 relD14.selfId=gen_ssdds8d
+   DRY-CENSUS: dry hits 0 {} | honest fallbacks 0 | null-return silences 0
+   MOURN-TEMPLATE: 11 name-parameterized mourning servings {"opener:expect-fire":1,"opener:world-continues":2,"cope:last-words":1,"next:name-right":1,"opener:dreamed":2,"opener:burnt-piece":1,"next:fire-smaller":1,"opener:owed-favor":1,"part:habit-for":1}
+   MOURN-HIT seed=34323 d+3 Alfredo shape=opener:expect-fire dead=Ethel
+   MOURN-HIT seed=34323 d+3 Amanda shape=opener:world-continues dead=Ethel
+   MOURN-HIT seed=34323 d+3 Amanda shape=cope:last-words dead=Ethel
+   MOURN-HIT seed=34323 d+3 Amanda shape=next:name-right dead=Ethel
+   MOURN-HIT seed=34323 d+3 Rowan shape=opener:dreamed dead=Ethel
+   MOURN-HIT seed=34323 d+53 Alfredo shape=opener:dreamed dead=Maureen
+   MOURN-HIT seed=34323 d+53 Amanda shape=opener:world-continues dead=Maureen
+   MOURN-HIT seed=34323 d+7 Alfredo shape=opener:burnt-piece dead=Ethel
+   MOURN-HIT seed=34323 d+7 Alfredo shape=next:fire-smaller dead=Ethel
+   MOURN-HIT seed=34323 d+7 Rowan shape=opener:owed-favor dead=Ethel
+   MOURN-HIT seed=34323 d+7 Rowan shape=part:habit-for dead=Ethel
+   MOURN-EXHAUST: exhausted-line servings 0 (in mourning sittings: 0)
+
+== seed 34324: handoff d41 Austin -> Gilberto (scripted)
+   CAP-NC: no-newcomer-arrival (newcomer-probe: no newcomer arrived) bondedEver=false
+   CAP-D14 (descriptive): no-stranger-pool (probe: no stranger pool) bondedEver=n/a
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=4 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=1 over 30 bond-days (median/day=0); FIRST-bearer new=0 (driven-days=0, undriven-days=0); LATER-bearer new=0
+   OPP newcomers: arrivals=0 first-arrival d+null; FIRST-bearer new bonds with newcomers=0 vs pre-existing=0
+   MANTLE-FINE #0: entry d41 return d41 cause=the expedition flippedImmediate=true fineLatency=0 (roll=0 gapDays=0 sample=0) coarseLatency=0 rollCover=true zeroDaySleep=false heldBriefly=false firstNewTag=scripted-kill class=SAMPLING-or-CLEAN
+   MANTLE-FINE #1: entry d49 return d49 cause=the wild flippedImmediate=true fineLatency=1 (roll=1 gapDays=0 sample=0) coarseLatency=null rollCover=true zeroDaySleep=true heldBriefly=false firstNewTag=post class=SAMPLING-or-CLEAN
+   MANTLE-COARSE chain: Gilberto -> Catalina detected d49 entry d49 coarseLatency=0
+   MANTLE day-skips: none (sleep rolls: 110; 0-day no-advance sleeps: 32 — sleep called without rolling the day, not a skip)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=58 relD14=59 relD30=59 relEnd=59 relD14.selfId=catalina_reyes
+   DRY-CENSUS: dry hits 0 {} | honest fallbacks 0 | null-return silences 0
+   MOURN-TEMPLATE: 8 name-parameterized mourning servings {"opener:owed-favor":1,"opener:dreamed":2,"next:fire-smaller":1,"opener:burnt-piece":1,"cope:last-words":1,"opener:expect-fire":1,"opener:world-continues":1}
+   MOURN-HIT seed=34324 d+14 Felix shape=opener:owed-favor dead=Gilberto
+   MOURN-HIT seed=34324 d+14 Hoani shape=opener:dreamed dead=Gilberto
+   MOURN-HIT seed=34324 d+14 Hoani shape=next:fire-smaller dead=Gilberto
+   MOURN-HIT seed=34324 d+4 Felix shape=opener:burnt-piece dead=Austin
+   MOURN-HIT seed=34324 d+4 Felix shape=cope:last-words dead=Austin
+   MOURN-HIT seed=34324 d+4 Ray shape=opener:expect-fire dead=Austin
+   MOURN-HIT seed=34324 d+8 Felix shape=opener:dreamed dead=Austin
+   MOURN-HIT seed=34324 d+8 Hoani shape=opener:world-continues dead=Austin
+   MOURN-EXHAUST: exhausted-line servings 0 (in mourning sittings: 0)
+
+== seed 33998: handoff d6 Heinrich -> Grace (scripted)
+   CAP-NC: no-newcomer-arrival (newcomer-probe: no newcomer arrived) bondedEver=false
+   CAP-D14 (descriptive): bonded-d14 (probe: Dakota trust=40 want=curious refused=false) bondedEver=true
+   OPP talk-requests (distinct, d+0..d+30, self excluded): total=8 unbonded=0 selfReqDayEntries=0
+   OPP bonds d+0..d+30: NPC-NPC new=16 over 25 bond-days (median/day=0); FIRST-bearer new=1 (driven-days=0, undriven-days=1); LATER-bearer new=0
+   OPP newcomers: arrivals=0 first-arrival d+null; FIRST-bearer new bonds with newcomers=0 vs pre-existing=1
+   MANTLE-FINE #0: entry d6 return d6 cause=the expedition flippedImmediate=true fineLatency=0 (roll=0 gapDays=0 sample=0) coarseLatency=0 rollCover=true zeroDaySleep=true heldBriefly=false firstNewTag=scripted-kill class=SAMPLING-or-CLEAN
+   MANTLE day-skips: none (sleep rolls: 30; 0-day no-advance sleeps: 6 — sleep called without rolling the day, not a skip)
+   CARRIED pick-time rank: 1 | funeral INCALL beat: true
+   relPost bonds=33 relD14=50 relD30=0 relEnd=51 relD14.selfId=grace_obi
+   DRY-CENSUS: dry hits 0 {} | honest fallbacks 0 | null-return silences 0
+   MOURN-TEMPLATE: 4 name-parameterized mourning servings {"opener:expect-fire":1,"part:pick-up-share":1,"opener:world-continues":1,"cope:last-words":1}
+   MOURN-HIT seed=33998 d+7 Ashanti shape=opener:expect-fire dead=Heinrich
+   MOURN-HIT seed=33998 d+7 Ashanti shape=part:pick-up-share dead=Heinrich
+   MOURN-HIT seed=33998 d+7 Ruby shape=opener:world-continues dead=Heinrich
+   MOURN-HIT seed=33998 d+7 Ruby shape=cope:last-words dead=Heinrich
+   MOURN-EXHAUST: exhausted-line servings 0 (in mourning sittings: 0)
+
+=== PANEL ===
+{"seed":"34321","cap":"no-newcomer-arrival","capEligible":false,"bondedEver":false,"deadlineDplus":null,"arrivals":0,"firstArrivalDplus":null,"firstBearerNewcomer":0,"firstBearerPreexisting":1,"capD14":"no-stranger-pool","reqTotal":6,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":0,"firstBearerNew":1,"firstBearerNewUndriven":1,"laterBearerNew":0,"pickRank":1,"incall":true,"mantleRows":[{"i":0,"entryDay":40,"returnDay":40,"cause":"the expedition","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":1,"fineLatencyRoll":1,"gapDays":0,"fineLatencySample":0,"coarseLatency":0,"rollCover":true,"zeroDaySleep":true,"heldBriefly":false,"firstNewTag":"scripted-kill","cls":"SAMPLING-or-CLEAN"}],"chainRows":[],"skips":0,"dryHits":[],"honestFallbacks":0,"nullReturns":0,"mournHits":[],"mournExhaust":[],"mournExhaustMourning":0}
+{"seed":"34322","cap":"bonded-by-deadline","capEligible":true,"bondedEver":true,"probeVid":"Meera","deadlineDplus":61,"arrivals":3,"firstArrivalDplus":47,"firstBearerNewcomer":0,"firstBearerPreexisting":0,"capD14":"second-handoff-before-d14","reqTotal":5,"reqUnbonded":1,"selfReqDayEntries":0,"npcNew":3,"firstBearerNew":0,"firstBearerNewUndriven":0,"laterBearerNew":0,"pickRank":1,"incall":true,"mantleRows":[{"i":0,"entryDay":41,"returnDay":41,"cause":"the expedition","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"fineLatencyRoll":0,"gapDays":0,"fineLatencySample":0,"coarseLatency":0,"rollCover":true,"zeroDaySleep":false,"heldBriefly":false,"firstNewTag":"scripted-kill","cls":"SAMPLING-or-CLEAN"},{"i":1,"entryDay":51,"returnDay":51,"cause":"the arena","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"fineLatencyRoll":0,"gapDays":0,"fineLatencySample":1,"coarseLatency":null,"rollCover":true,"zeroDaySleep":false,"heldBriefly":false,"firstNewTag":"sleep","cls":"SAMPLING-or-CLEAN"},{"i":2,"entryDay":74,"returnDay":74,"cause":"the wild","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"fineLatencyRoll":0,"gapDays":0,"fineLatencySample":0,"coarseLatency":null,"rollCover":true,"zeroDaySleep":true,"heldBriefly":false,"firstNewTag":"sleep","cls":"SAMPLING-or-CLEAN"},{"i":3,"entryDay":84,"returnDay":84,"cause":"the arena","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"fineLatencyRoll":0,"gapDays":0,"fineLatencySample":0,"coarseLatency":null,"rollCover":true,"zeroDaySleep":true,"heldBriefly":false,"firstNewTag":"post","cls":"SAMPLING-or-CLEAN"}],"chainRows":[{"deadFirst":"Emmett","newFirst":"Catalina","detectedDay":51,"entryDay":51,"coarseLatency":0},{"deadFirst":"Catalina","newFirst":"Cameron","detectedDay":74,"entryDay":74,"coarseLatency":0},{"deadFirst":"Cameron","newFirst":"Ellie","detectedDay":84,"entryDay":84,"coarseLatency":0}],"skips":0,"dryHits":[],"honestFallbacks":0,"nullReturns":0,"mournHits":[{"seed":"34322","speaker":"Cameron","dplus":14,"sittingDay":55,"shape":"opener:dreamed","dead":"Emmett","file":"journey-succession-r230-transcript-34322-dplus14-Cameron.txt"},{"seed":"34322","speaker":"Cameron","dplus":3,"sittingDay":44,"shape":"opener:owed-favor","dead":"Sanjay","file":"journey-succession-r230-transcript-34322-dplus3-Cameron.txt"},{"seed":"34322","speaker":"Cameron","dplus":3,"sittingDay":44,"shape":"cope:last-words","dead":"Sanjay","file":"journey-succession-r230-transcript-34322-dplus3-Cameron.txt"},{"seed":"34322","speaker":"Svein","dplus":3,"sittingDay":44,"shape":"opener:dreamed","dead":"Sanjay","file":"journey-succession-r230-transcript-34322-dplus3-Svein.txt"},{"seed":"34322","speaker":"Jovan","dplus":45,"sittingDay":86,"shape":"opener:world-continues","dead":"Cameron is gone and Gaspar","file":"journey-succession-r230-transcript-34322-dplus45-Jovan.txt"},{"seed":"34322","speaker":"Svein","dplus":45,"sittingDay":86,"shape":"next:name-right","dead":"Gaspar","file":"journey-succession-r230-transcript-34322-dplus45-Svein.txt"},{"seed":"34322","speaker":"Svein","dplus":45,"sittingDay":86,"shape":"part:habit-for","dead":"Gaspar","file":"journey-succession-r230-transcript-34322-dplus45-Svein.txt"},{"seed":"34322","speaker":"Meera","dplus":47,"sittingDay":88,"shape":"opener:world-continues","dead":"Gaspar","file":"journey-succession-r230-transcript-34322-dplus47-NEWCOMER-Meera.txt"},{"seed":"34322","speaker":"Elijah","dplus":53,"sittingDay":94,"shape":"opener:expect-fire","dead":"Cameron","file":"journey-succession-r230-transcript-34322-dplus53-Elijah.txt"},{"seed":"34322","speaker":"Cameron","dplus":7,"sittingDay":48,"shape":"opener:expect-fire","dead":"Sanjay","file":"journey-succession-r230-transcript-34322-dplus7-Cameron.txt"},{"seed":"34322","speaker":"Ellie","dplus":7,"sittingDay":48,"shape":"opener:world-continues","dead":"Sanjay","file":"journey-succession-r230-transcript-34322-dplus7-Ellie.txt"}],"mournExhaust":[],"mournExhaustMourning":0}
+{"seed":"34323","cap":"no-newcomer-arrival","capEligible":false,"bondedEver":false,"deadlineDplus":null,"arrivals":0,"firstArrivalDplus":null,"firstBearerNewcomer":0,"firstBearerPreexisting":0,"capD14":"not-bonded-by-d14","reqTotal":6,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":4,"firstBearerNew":0,"firstBearerNewUndriven":0,"laterBearerNew":0,"pickRank":1,"incall":true,"mantleRows":[{"i":0,"entryDay":41,"returnDay":41,"cause":"the expedition","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"fineLatencyRoll":0,"gapDays":0,"fineLatencySample":0,"coarseLatency":0,"rollCover":true,"zeroDaySleep":false,"heldBriefly":false,"firstNewTag":"scripted-kill","cls":"SAMPLING-or-CLEAN"},{"i":1,"entryDay":89,"returnDay":89,"cause":"the wild","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":1,"fineLatencyRoll":1,"gapDays":0,"fineLatencySample":0,"coarseLatency":null,"rollCover":true,"zeroDaySleep":true,"heldBriefly":false,"firstNewTag":"post","cls":"SAMPLING-or-CLEAN"},{"i":2,"entryDay":95,"returnDay":95,"cause":"the wild","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":1,"fineLatencyRoll":1,"gapDays":0,"fineLatencySample":0,"coarseLatency":null,"rollCover":true,"zeroDaySleep":true,"heldBriefly":false,"firstNewTag":"post","cls":"SAMPLING-or-CLEAN"}],"chainRows":[{"deadFirst":"Maureen","newFirst":"Rowan","detectedDay":89,"entryDay":89,"coarseLatency":0},{"deadFirst":"Rowan","newFirst":"Alfredo","detectedDay":95,"entryDay":95,"coarseLatency":0}],"skips":0,"dryHits":[],"honestFallbacks":0,"nullReturns":0,"mournHits":[{"seed":"34323","speaker":"Alfredo","dplus":3,"sittingDay":44,"shape":"opener:expect-fire","dead":"Ethel","file":"journey-succession-r230-transcript-34323-dplus3-Alfredo.txt"},{"seed":"34323","speaker":"Amanda","dplus":3,"sittingDay":44,"shape":"opener:world-continues","dead":"Ethel","file":"journey-succession-r230-transcript-34323-dplus3-Amanda.txt"},{"seed":"34323","speaker":"Amanda","dplus":3,"sittingDay":44,"shape":"cope:last-words","dead":"Ethel","file":"journey-succession-r230-transcript-34323-dplus3-Amanda.txt"},{"seed":"34323","speaker":"Amanda","dplus":3,"sittingDay":44,"shape":"next:name-right","dead":"Ethel","file":"journey-succession-r230-transcript-34323-dplus3-Amanda.txt"},{"seed":"34323","speaker":"Rowan","dplus":3,"sittingDay":44,"shape":"opener:dreamed","dead":"Ethel","file":"journey-succession-r230-transcript-34323-dplus3-Rowan.txt"},{"seed":"34323","speaker":"Alfredo","dplus":53,"sittingDay":94,"shape":"opener:dreamed","dead":"Maureen","file":"journey-succession-r230-transcript-34323-dplus53-Alfredo.txt"},{"seed":"34323","speaker":"Amanda","dplus":53,"sittingDay":94,"shape":"opener:world-continues","dead":"Maureen","file":"journey-succession-r230-transcript-34323-dplus53-Amanda.txt"},{"seed":"34323","speaker":"Alfredo","dplus":7,"sittingDay":48,"shape":"opener:burnt-piece","dead":"Ethel","file":"journey-succession-r230-transcript-34323-dplus7-Alfredo.txt"},{"seed":"34323","speaker":"Alfredo","dplus":7,"sittingDay":48,"shape":"next:fire-smaller","dead":"Ethel","file":"journey-succession-r230-transcript-34323-dplus7-Alfredo.txt"},{"seed":"34323","speaker":"Rowan","dplus":7,"sittingDay":48,"shape":"opener:owed-favor","dead":"Ethel","file":"journey-succession-r230-transcript-34323-dplus7-Rowan.txt"},{"seed":"34323","speaker":"Rowan","dplus":7,"sittingDay":48,"shape":"part:habit-for","dead":"Ethel","file":"journey-succession-r230-transcript-34323-dplus7-Rowan.txt"}],"mournExhaust":[],"mournExhaustMourning":0}
+{"seed":"34324","cap":"no-newcomer-arrival","capEligible":false,"bondedEver":false,"deadlineDplus":null,"arrivals":0,"firstArrivalDplus":null,"firstBearerNewcomer":0,"firstBearerPreexisting":0,"capD14":"no-stranger-pool","reqTotal":4,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":1,"firstBearerNew":0,"firstBearerNewUndriven":0,"laterBearerNew":0,"pickRank":1,"incall":true,"mantleRows":[{"i":0,"entryDay":41,"returnDay":41,"cause":"the expedition","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"fineLatencyRoll":0,"gapDays":0,"fineLatencySample":0,"coarseLatency":0,"rollCover":true,"zeroDaySleep":false,"heldBriefly":false,"firstNewTag":"scripted-kill","cls":"SAMPLING-or-CLEAN"},{"i":1,"entryDay":49,"returnDay":49,"cause":"the wild","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":1,"fineLatencyRoll":1,"gapDays":0,"fineLatencySample":0,"coarseLatency":null,"rollCover":true,"zeroDaySleep":true,"heldBriefly":false,"firstNewTag":"post","cls":"SAMPLING-or-CLEAN"}],"chainRows":[{"deadFirst":"Gilberto","newFirst":"Catalina","detectedDay":49,"entryDay":49,"coarseLatency":0}],"skips":0,"dryHits":[],"honestFallbacks":0,"nullReturns":0,"mournHits":[{"seed":"34324","speaker":"Felix","dplus":14,"sittingDay":55,"shape":"opener:owed-favor","dead":"Gilberto","file":"journey-succession-r230-transcript-34324-dplus14-Felix.txt"},{"seed":"34324","speaker":"Hoani","dplus":14,"sittingDay":55,"shape":"opener:dreamed","dead":"Gilberto","file":"journey-succession-r230-transcript-34324-dplus14-Hoani.txt"},{"seed":"34324","speaker":"Hoani","dplus":14,"sittingDay":55,"shape":"next:fire-smaller","dead":"Gilberto","file":"journey-succession-r230-transcript-34324-dplus14-Hoani.txt"},{"seed":"34324","speaker":"Felix","dplus":4,"sittingDay":45,"shape":"opener:burnt-piece","dead":"Austin","file":"journey-succession-r230-transcript-34324-dplus4-Felix.txt"},{"seed":"34324","speaker":"Felix","dplus":4,"sittingDay":45,"shape":"cope:last-words","dead":"Austin","file":"journey-succession-r230-transcript-34324-dplus4-Felix.txt"},{"seed":"34324","speaker":"Ray","dplus":4,"sittingDay":45,"shape":"opener:expect-fire","dead":"Austin","file":"journey-succession-r230-transcript-34324-dplus4-Ray.txt"},{"seed":"34324","speaker":"Felix","dplus":8,"sittingDay":49,"shape":"opener:dreamed","dead":"Austin","file":"journey-succession-r230-transcript-34324-dplus8-Felix.txt"},{"seed":"34324","speaker":"Hoani","dplus":8,"sittingDay":49,"shape":"opener:world-continues","dead":"Austin","file":"journey-succession-r230-transcript-34324-dplus8-Hoani.txt"}],"mournExhaust":[],"mournExhaustMourning":0}
+{"seed":"33998","cap":"no-newcomer-arrival","capEligible":false,"bondedEver":false,"deadlineDplus":null,"arrivals":0,"firstArrivalDplus":null,"firstBearerNewcomer":0,"firstBearerPreexisting":1,"capD14":"bonded-d14","reqTotal":8,"reqUnbonded":0,"selfReqDayEntries":0,"npcNew":16,"firstBearerNew":1,"firstBearerNewUndriven":1,"laterBearerNew":0,"pickRank":1,"incall":true,"mantleRows":[{"i":0,"entryDay":6,"returnDay":6,"cause":"the expedition","flippedImmediate":true,"over":false,"sameDayCascade":false,"fineLatency":0,"fineLatencyRoll":0,"gapDays":0,"fineLatencySample":0,"coarseLatency":0,"rollCover":true,"zeroDaySleep":true,"heldBriefly":false,"firstNewTag":"scripted-kill","cls":"SAMPLING-or-CLEAN"}],"chainRows":[],"skips":0,"dryHits":[],"honestFallbacks":0,"nullReturns":0,"mournHits":[{"seed":"33998","speaker":"Ashanti","dplus":7,"sittingDay":13,"shape":"opener:expect-fire","dead":"Heinrich","file":"journey-succession-r230-transcript-33998-dplus7-Ashanti.txt"},{"seed":"33998","speaker":"Ashanti","dplus":7,"sittingDay":13,"shape":"part:pick-up-share","dead":"Heinrich","file":"journey-succession-r230-transcript-33998-dplus7-Ashanti.txt"},{"seed":"33998","speaker":"Ruby","dplus":7,"sittingDay":13,"shape":"opener:world-continues","dead":"Heinrich","file":"journey-succession-r230-transcript-33998-dplus7-Ruby.txt"},{"seed":"33998","speaker":"Ruby","dplus":7,"sittingDay":13,"shape":"cope:last-words","dead":"Heinrich","file":"journey-succession-r230-transcript-33998-dplus7-Ruby.txt"}],"mournExhaust":[],"mournExhaustMourning":0}
+CAP-NC verdict: bonded-by-deadline 1/1 eligible seeds.
+CAP-NC binding verdict (r187 newcomer-channel bar): INSUFFICIENT-DATA (<3 eligible, or bonded fraction below the pass line)
+CAP-NC non-denominator: ["no-newcomer-arrival","no-newcomer-arrival","no-newcomer-arrival","no-newcomer-arrival"]
+Descriptive bondedEver (probe pair bonded in ANY snapshot or bondDaily): 1/1 probe-opened seeds.
+Descriptive CAP-D14 (r142 stranger probe): ["no-stranger-pool","second-handoff-before-d14","not-bonded-by-d14","no-stranger-pool","bonded-d14"]
+OPP totals: unbonded talk-requests 1; FIRST-bearer new bonds on undriven days 2; NPC-NPC new bonds 24; newcomer arrivals 3; FIRST-bearer newcomer bonds 0 vs pre-existing 2; selfReqDayEntries total 0 (r133 purge regression check, expect 0).
+MANTLE-FINE verdict: deaths observed 11 (village-over excluded: 0; flippedImmediate=false: 0; fineLatency>=2: 0; fineLatency==1 unexplained: 0; held-briefly same-day cascade bearers: 0; coarse>fine sampling gaps: 0; day-skips total: 0).
+MANTLE-FINE binding verdict: PASS (mantle flips synchronously at every observed death with a living successor; any coarse latency is sampling)
+MANTLE-COARSE (reported): [{"d":40,"coarse":0,"fine":1,"fineRoll":1,"gapDays":0,"fineSample":0,"cls":"SAMPLING-or-CLEAN"},{"d":41,"coarse":0,"fine":0,"fineRoll":0,"gapDays":0,"fineSample":0,"cls":"SAMPLING-or-CLEAN"},{"d":51,"coarse":null,"fine":0,"fineRoll":0,"gapDays":0,"fineSample":1,"cls":"SAMPLING-or-CLEAN"},{"d":74,"coarse":null,"fine":0,"fineRoll":0,"gapDays":0,"fineSample":0,"cls":"SAMPLING-or-CLEAN"},{"d":84,"coarse":null,"fine":0,"fineRoll":0,"gapDays":0,"fineSample":0,"cls":"SAMPLING-or-CLEAN"},{"d":41,"coarse":0,"fine":0,"fineRoll":0,"gapDays":0,"fineSample":0,"cls":"SAMPLING-or-CLEAN"},{"d":89,"coarse":null,"fine":1,"fineRoll":1,"gapDays":0,"fineSample":0,"cls":"SAMPLING-or-CLEAN"},{"d":95,"coarse":null,"fine":1,"fineRoll":1,"gapDays":0,"fineSample":0,"cls":"SAMPLING-or-CLEAN"},{"d":41,"coarse":0,"fine":0,"fineRoll":0,"gapDays":0,"fineSample":0,"cls":"SAMPLING-or-CLEAN"},{"d":49,"coarse":null,"fine":1,"fineRoll":1,"gapDays":0,"fineSample":0,"cls":"SAMPLING-or-CLEAN"},{"d":6,"coarse":0,"fine":0,"fineRoll":0,"gapDays":0,"fineSample":0,"cls":"SAMPLING-or-CLEAN"}]
+DRY-CENSUS verdict: dry hits 0 (binding-class 0; other-class 0; honest fallbacks 0; null-return silences 0).
+DRY-CENSUS binding verdict: PASS (zero dry lines on the panel)
+DRY-CENSUS r192 wild check (deflect_q + dlg:doubt; refusal has no sayTrace pick — covered by its proof test): deflect_q 0, dlg:doubt 0, other-class 0.
+MOURN-TEMPLATE verdict: servings 34 {"opener:dreamed":6,"opener:owed-favor":3,"cope:last-words":4,"opener:world-continues":7,"next:name-right":2,"part:habit-for":2,"opener:expect-fire":5,"opener:burnt-piece":2,"next:fire-smaller":2,"part:pick-up-share":1}; same-speaker repeats 1; village-window repeats 0.
+MOURN-TEMPLATE binding verdict: FAIL — {"sameSpeaker":[{"key":"34323|Amanda|opener:world-continues","deads":["Ethel","Maureen"]}],"villageWindow":[]}
+MOURN-EXHAUST verdict: exhausted-line servings in mourning sittings 0 (total exhausted servings 0).
+MOURN-EXHAUST binding verdict: PASS (no mourning sitting went silent on the exhausted line)

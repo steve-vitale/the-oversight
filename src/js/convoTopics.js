@@ -55,8 +55,32 @@
     // through here, so {fear}/{hope}/{quirk}/{habit} always resolve to THIS
     // villager's truth — never another speaker's.
     t2fill(line, vp, vid) {
+      // MOURN-TEMPLATE (journey-succession r231 2026-11-17): {mname} is
+      // resolved HERE, after the pick — never before it. The mourning pools
+      // carry the placeholder so convoPick's text dedupe, the village-fresh
+      // log, and the run ledger all see the TEMPLATE, not one dead
+      // person's name-baked copy: "…last thing Fiona said…" and "…last
+      // thing Sanjay said…" used to count as different lines, so the same
+      // template re-served for every new corpse (r230: 5/4/2 firings of
+      // three templates). The name comes from the current lately event —
+      // the same event the pools were built from — so the spoken line is
+      // unchanged; only the dedupe key moves from the name to the
+      // template. It MUST resolve before fillTalkLine below: the text
+      // module strips slots it does not know, so a {mname} reaching
+      // fillTalkLine comes out empty ("Since died..."). Lazy: the event
+      // scan runs only when a line actually carries {mname} (mourning
+      // lines only; no other pool uses it).
+      let lineIn = String(line == null ? '' : line);
+      if (lineIn.indexOf('{mname}') !== -1) {
+        let mname = 'them';
+        try {
+          const ev = (typeof this.t2LatelyEvent === 'function') ? this.t2LatelyEvent(vid) : null;
+          if (ev && ev.name) mname = ev.name;
+        } catch (e) {}
+        lineIn = lineIn.replaceAll('{mname}', mname);
+      }
       let s;
-      try { s = this.fillTalkLine(line, vp || {}); } catch (e) { s = String(line); }
+      try { s = this.fillTalkLine(lineIn, vp || {}); } catch (e) { s = String(lineIn); }
       const p = this.t2pers(vp);
       const pro = this.t2pro(vp, vid);
       // TEXT MODULE (rogue P0-2/P0-7 2026-10-22): pronoun bundle + shared
@@ -1264,13 +1288,21 @@
               '"We lost ' + mlist + '. I do the headcount without thinking. Then I think."',
               '"' + mgone + '. The fire doesn\'t care. That\'s what gets me — the fire doesn\'t care."'];
           } else if (mnames.length === 1) {
-            mlines = ['"Since ' + mnames[0] + ' died... I keep expecting to see ' + mnames[0] + ' at the fire. Stupid."',
-               '"' + mnames[0] + ' is gone and the world just... continues. That\'s the part I can\'t stand."',
+            // MOURN-TEMPLATE (journey-succession r231 2026-11-17): the
+            // templates carry {mname} — the name is filled by t2fill AFTER
+            // the pick, so convoPick dedupes on the template, not the
+            // name-baked copy (r230: this pool's first template fired 5x
+            // across the panel, once per dead person). Multi-name,
+            // nameless, sick-death, and successor-grief lines below keep
+            // their baked names: they are conditional single-fire lines,
+            // not the repeating pool.
+            mlines = ['"Since {mname} died... I keep expecting to see {mname} at the fire. Stupid."',
+               '"{mname} is gone and the world just... continues. That\'s the part I can\'t stand."',
                // R34 (2026-10-20): single-name pool was 2 templates, repeated
                // across villagers. Same plainspoken grief-through-routine voice.
-               '"' + mnames[0] + ' owed me a favor. I keep thinking about collecting. Stupid."',
-               '"I dreamed ' + mnames[0] + ' was still here. Woke up angry at the dream. Stupid."',
-               '"' + mnames[0] + ' always took the burnt piece. Said someone had to. I take it now."'];
+               '"{mname} owed me a favor. I keep thinking about collecting. Stupid."',
+               '"I dreamed {mname} was still here. Woke up angry at the dream. Stupid."',
+               '"{mname} always took the burnt piece. Said someone had to. I take it now."'];
           } else {
             mlines = ['"We lost someone. I keep setting out an extra portion. Stupid."',
                '"Grief doesn\'t schedule itself. It just shows up at dinner."',
@@ -1557,11 +1589,15 @@
       // it properly." — verbatim, same order, two different villagers). The
       // unique-person law (Steve 2026-10-06) means grief can't be a global
       // script: variants use the villager's own habit ({habitI}, filled by
-      // t2fill) and the dead person's knowledge-gated name ({mname}, filled
-      // below — ev.name is firstRef, never a raw id or a truncated "A").
-      // convoPick's run-ledger preference then spreads variants across the
-      // village instead of echoing one line. Other kinds keep their single
-      // lines for now (same thinness exists there — documented, not fixed).
+      // t2fill) and the dead person's knowledge-gated name ({mname} —
+      // ev.name is firstRef, never a raw id or a truncated "A"). {mname}
+      // is filled by t2fill AFTER the pick (r231): filling it here, before
+      // the pick, made convoPick's text dedupe see one template per dead
+      // person instead of one template, so the same variant re-served for
+      // every new corpse. convoPick's run-ledger preference then spreads
+      // variants across the village instead of echoing one line. Other
+      // kinds keep their single lines for now (same thinness exists there
+      // — documented, not fixed).
       // LATELY POOLS (journey deepening r9/r10 2026-10-13): three variants
       // per follow-up level for EVERY kind. R9 transcript-verified that
       // every grieving villager recited the identical single-line sequence
@@ -1699,8 +1735,15 @@
           '"My part? I {habitI} and stay ready."',
           '"I do the small things right. The big things notice."'],
       };
-      const mname = (ev && ev.name) || 'them';
-      const nm = (arr) => (arr || []).map(l => String(l).replaceAll('{mname}', mname));
+      // MOURN-TEMPLATE (journey-succession r231 2026-11-17): the pools
+      // return with {mname} INTACT — the name is filled by t2fill AFTER
+      // the pick. The old nm() mapping substituted the dead name here,
+      // before the pick, so convoPick's text dedupe saw "…last thing
+      // Fiona said…" and "…last thing Sanjay said…" as different lines
+      // and the same cope template re-served for every new corpse
+      // (r230: 4 firings). No other kind contains {mname}, so dropping
+      // the mapping is a no-op outside mourning (the weirdness-self
+      // pools below hold no {mname} either).
       // WEIRDNESS SELF (journey crisis r16 2026-10-15): the changed villager
       // themself gets first-person follow-ups — the observer pools ("try not
       // to stare") read wrong in their mouth.
@@ -1714,9 +1757,9 @@
         const selfPart = ['"My part? I don\'t hide it. Hiding makes it worse."',
           '"I answer their questions. Even the stupid ones. Especially the stupid ones."',
           '"I {habitI} and let them look. Looking is better than whispering."'];
-        return [nm(selfCope), nm(selfNext), nm(selfPart)];
+        return [selfCope, selfNext, selfPart];
       }
-      return [nm(cope[kind] || cope.none), nm(next[kind] || next.none), nm(part[kind] || part.none)];
+      return [cope[kind] || cope.none, next[kind] || next.none, part[kind] || part.none];
     },
   };
 

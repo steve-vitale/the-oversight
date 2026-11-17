@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d39: Tiana -> Olivia, topTrust=[{"id":"Howard","t":90},{"id":"Wendimu","t":90},{"id":"Werner","t":78},{"id":"Pavel","t":77}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=16 inheritedPlants=0 keptSkills=9 inheritedSkills=0 succTrustPre=90 succTrustPost=55
+PARITY readable=true equal=true inherited=[] pre=["the_touch","pyrokinesis","green_thumb","loud_chewer"] post=["the_touch","pyrokinesis","green_thumb","loud_chewer"]
+DEATH d39 (organic (phase A)): Tiana -> Olivia | passed=true lin=true mo=true trust=55 vouchers=6
+  BURIAL d+4: corpse found=true respects=true bury=true
+  CONVO d+3 with Howard (refused=false)
+  CONVO d+3 with Wendimu (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Werner (refused=false)
+  CONVO d+7 with Maya (refused=false)
+  CONVO d+14 with Maya (refused=false)
+  CONVO d+14 with Howard (refused=false)
+  CONVO d+30 with Werner (refused=false)
+  CONVO d+30 with Maya (refused=false)
+  NEWCOMER-PROBE d+41 with Daniyar (arrived d+41, trust=40 refused=false)
+  CONVO d+45 with Werner (refused=false)
+  CONVO d+45 with Onni (refused=false)
+  CONVO d+53 with Chloe (refused=false)
+  CONVO d+53 with Onni (refused=false)
+  CONVO d+64 with Chloe (refused=false)
+  CONVO d+64 with Pavel (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=6) echo=2 organicBurial={"respects":false,"bury":false} halfRation=8
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":45,"offerLines":22,"codexPlantsDelta":25,"codexSkillsDelta":19,"codexAbilitiesDelta":12,"xpDelta":34,"any":true} pantry 77921->8017
+TRUST-DIALS: office 55->92 (+37, climb) | villageMean 72.9->83 (+10.1, climb) | ge60 6->4 | movers>=5: [{"id":"Chantal","from":54,"to":88,"delta":34},{"id":"Farid","from":69,"to":90,"delta":21},{"id":"Pavel","from":77,"to":93,"delta":16}]
+DEED-LEDGER: calls=84 summary={"teachPlant":{"calls":21,"ok":21,"deltaSum":0,"deltaN":21,"positive":0,"meanDelta":0},"donateToPantry":{"calls":46,"ok":46,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":17,"ok":17,"deltaSum":45,"deltaN":17,"positive":14,"meanDelta":2.65}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=109 alive=6 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+8,d+14,d+30,d+70) t2=true(deedCalls=84) trustVerdict={"readable":true,"officeMantle":55,"officeLast":92,"officeDelta":37,"officeClass":"climb","villageMantle":72.9,"villageLast":83,"villageDelta":10.1,"villageClass":"climb","villageGe60Mantle":6,"villageGe60Last":4,"movers":[{"id":"Chantal","from":54,"to":88,"delta":34},{"id":"Farid","from":69,"to":90,"delta":21},{"id":"Pavel","from":77,"to":93,"delta":16}]}
+E6/CALLCHECK: e6={"callMoves":20,"withCensus":20,"chainHandoffs":5,"trustMoves":15} callCheck={"dailyMoveDays":20,"callMoveDays":18,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":15,"soloOffice":2,"soloOfficeDeltas":[2,2],"soloBearerDeltaExact":[2,2],"singleMoverBearer":4,"singleMoverOther":4,"eventClass":{"event-only":0,"deed-only":5,"both":10,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":4,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":5,"known":5,"unknown":0} e3={"dailyDays":71,"moves":20}
