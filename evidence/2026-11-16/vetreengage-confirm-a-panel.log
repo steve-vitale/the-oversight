@@ -1,0 +1,4 @@
+compare vetreengage-confirm-a-control->vetreengage-confirm-a-on: decision=review_required
+  policy vetreengage-confirm-a: review_required (8 cases)
+    villageDeaths: regression_watch delta=17.125 ci=[-2.75,36.25]
+    villageDeaths100Days: regression_signal delta=13.992873283841178 ci=[1.4117194936422184,25.691708733041835]

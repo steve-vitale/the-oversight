@@ -36,7 +36,7 @@ const contract = require('./balance-metrics.json');
 
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : null)
   || (argvVal('--seeds', null) ? argvVal('--seeds', '').split(',').map(function (s) { return parseInt(s.trim(), 10); }) : null)
-  || [102601, 102602, 102603, 102604, 102605, 102606, 102607, 102608];
+  || [102901, 102902, 102903, 102904, 102905, 102906, 102907, 102908]; // confirm band (prereg); was the pilot band 102601-102608 — fixed at adoption, the copy never updated the default
 const POLICIES = ['vetreengage-confirm-a']; // pseudo-policy: case identity is the seed (paired design)
 const DAYS = 150;
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
