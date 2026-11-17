@@ -271,11 +271,26 @@ lasts a month is a wall.
 
 ## Closeout
 
-- **Commits (branch `journey-deepening`):** `4869802b3` prereg +
-  driver/analyzer + proof tests (tooling only); `5eaa4571b` the
-  slain-field fix + proof test; `ad4325ed0` analyzer pilot catch
-  (muster-fight slay exclusion + case 54). Safe-commit index clobber
-  struck on all three commits (staged-as-deleted / MM pattern);
-  repaired each time via the `ls-tree -r` pipe, blobs verified against
-  HEAD, tree clean after each repair.
-- **Merge / rotation / lock / release:** PENDING — gate re-run first.
+- **Commits (branch `journey-deepening`, after rebase):** `70f4b9103`
+  prereg + driver/analyzer + proof tests (tooling only); `a6e2bfb58`
+  the slain-field fix + proof test; `72a77b2cf` analyzer pilot catch
+  (muster-fight slay exclusion + case 54); `b6c1a041c` run note.
+  Safe-commit index clobber struck on all four commits
+  (staged-as-deleted / MM pattern); repaired each time via the
+  `ls-tree -r` pipe, blobs verified against HEAD, tree clean after
+  each repair.
+- Master moved during the run (Lane B succession r230 landed
+  `7328a88fa`); rebased clean onto it (4/4, no conflicts, no overlap
+  with this run's files), proof tests re-run green on the rebased tip
+  (37 slain-field + 53 analyzer + 11 march + 12 muster), merged
+  ff-only into local master.
+- **Merged locally, pending ship** — no bump, no push, no live
+  verification (ship loop owns those).
+- Rotation 2→3 written with read-back; lock deleted at closeout
+  after run_id verification.
+- Worktree released (`merged`), branch deleted; final reap sweep
+  clean. Main tree verified clean after the merge.
+- The r232 panel corpus (per-seed JSONs + convo transcripts + analyzer
+  logs + gate log) lives under the goal hidden_files evidence dir for
+  2026-11-17 (outside the repo, per the journey-lane pattern); the
+  repo evidence dir holds the prereg and run note.
