@@ -1,0 +1,691 @@
+PANEL seeds=14491,14492,14493,14494,14495
+[
+ {
+  "seed": 14491,
+  "days": 122,
+  "end": "game-over",
+  "raids": 5,
+  "gorge": 10,
+  "sorties": 2,
+  "convos": 7,
+  "drifts": 5,
+  "resolutions": [
+   "d11:fought(tick)",
+   "d32:fought(sortie-call)",
+   "d40:fought(tick)",
+   "d56:moved-on(tick)"
+  ],
+  "alive": 1,
+  "pantry": 0
+ },
+ {
+  "seed": 14492,
+  "days": 149,
+  "end": "game-over",
+  "raids": 13,
+  "gorge": 47,
+  "sorties": 7,
+  "convos": 8,
+  "drifts": 16,
+  "resolutions": [
+   "d13:fought(tick)",
+   "d21:fought(tick)",
+   "d32:fought(tick)",
+   "d39:fought(tick)",
+   "d52:fought(tick)",
+   "d61:fought(tick)",
+   "d74:moved-on(tick)",
+   "d89:moved-on(tick)",
+   "d99:moved-on(tick)",
+   "d109:moved-on(tick)",
+   "d125:moved-on(tick)",
+   "d133:moved-on(tick)"
+  ],
+  "alive": 3,
+  "pantry": 0
+ },
+ {
+  "seed": 14493,
+  "days": 107,
+  "end": "game-over",
+  "raids": 6,
+  "gorge": 23,
+  "sorties": 5,
+  "convos": 8,
+  "drifts": 6,
+  "resolutions": [
+   "d11:fought(tick)",
+   "d27:fought(tick)",
+   "d43:fought(tick)",
+   "d59:moved-on(tick)",
+   "d80:moved-on(tick)"
+  ],
+  "alive": 1,
+  "pantry": 0
+ },
+ {
+  "seed": 14494,
+  "days": 150,
+  "end": "horizon",
+  "raids": 10,
+  "gorge": 21,
+  "sorties": 5,
+  "convos": 8,
+  "drifts": 15,
+  "resolutions": [
+   "d16:fought(tick)",
+   "d27:fought(tick)",
+   "d39:fought(tick)",
+   "d51:fought(sortie-call)",
+   "d57:fought(tick)",
+   "d67:fought(tick)",
+   "d80:moved-on(tick)",
+   "d87:moved-on(tick)",
+   "d105:moved-on(tick)",
+   "d112:moved-on(tick)"
+  ],
+  "alive": 5,
+  "pantry": 0
+ },
+ {
+  "seed": 14495,
+  "days": 94,
+  "end": "game-over",
+  "raids": 7,
+  "gorge": 26,
+  "sorties": 3,
+  "convos": 7,
+  "drifts": 9,
+  "resolutions": [
+   "d9:fought(tick)",
+   "d16:fought(tick)",
+   "d25:fought(tick)",
+   "d54:fought(tick)",
+   "d70:fought(sortie-call)",
+   "d83:moved-on(tick)",
+   "d93:moved-on(tick)"
+  ],
+  "alive": 1,
+  "pantry": 0
+ }
+]
+attempts=22 ok=19 refused=3 cleared(remaining0)=3 deltaExact=19 deltaBad=[]
+gorgeNights=127 gorgeKcal=139771 convos=38 fabricHits=0 sortieFights=31
+D1 snapshots: total=22 missing=0
+D2 crisis-at-clear table:
+[
+ {
+  "seed": 14491,
+  "day": 32,
+  "nightsWaited": 4,
+  "crisisBefore": "live-raiders",
+  "crisisBeforeName": "Buffering, The Loud Beast, Ugly-Eyes, Captain Bright-Eyes, Extended Warranty",
+  "crisisBeforeSince": 27,
+  "crisisAfter": "none",
+  "resolutionsDuring": [
+   "fought(sortie-call)"
+  ],
+  "laterSameDay": []
+ },
+ {
+  "seed": 14494,
+  "day": 51,
+  "nightsWaited": 3,
+  "crisisBefore": "live-raiders",
+  "crisisBeforeName": "Gavel, Big Ugly, Buffering, Static, Loud-Eyes",
+  "crisisBeforeSince": 47,
+  "crisisAfter": "none",
+  "resolutionsDuring": [
+   "fought(sortie-call)"
+  ],
+  "laterSameDay": []
+ },
+ {
+  "seed": 14495,
+  "day": 70,
+  "nightsWaited": 3,
+  "crisisBefore": "live-raiders",
+  "crisisBeforeName": "The Big Beast, Spool, The Redactor, The Ugly Beast, The Focus Group",
+  "crisisBeforeSince": 66,
+  "crisisAfter": "none",
+  "resolutionsDuring": [
+   "fought(sortie-call)"
+  ],
+  "laterSameDay": []
+ }
+]
+D3 drift labels: {"player-drawn-off":6,"sortie-clear":15,"moved-on-valve":30}
+D3 drift unknown: []
+D5 deltaBad=[]
+deadInMusterLines=0 gorgeAfterCleared(name-matched)=1 gorgeAfterIdMatched=0 gorgeAfterReturn=0
+D1 delayed>=3 attempts: 22/22
+D2 clear rate ok: 3/19
+D4 convos=38 fab=0
+R181 SOFTLOCK seeds=0 []
+R57 D2 early-resolution census (fought with lingerers remaining):
+[]
+R59 legacy early count (r57/r58 corpse-counting method): 1 ["14494 d39:1"]
+R59 TRUE early count (corpse excluded on aidFight vKill): 0
+R57 D7 beat classification: []
+R57 D2 resolutions missing lingeringAtResolution: 0
+R57 D3 death mismatches (say-only names): [
+ {
+  "seed": 14492,
+  "day": 106,
+  "name": "Luis",
+  "deathsDuring": [],
+  "sayLines": [
+   "📖 The Codex turns a page on its own. Luis is dead. You didn't ask. It knew.",
+   "⚔️ Luis faced Gavel at the treeline... and didn't come back. The party carries the body home. The sortie is over."
+  ]
+ },
+ {
+  "seed": 14494,
+  "day": 77,
+  "name": "Beatrice",
+  "deathsDuring": [],
+  "sayLines": [
+   "📖 The Codex turns a page on its own. Beatrice is dead. You didn't ask. It knew.",
+   "🕯️ Beatrice is dead — and the dead hold no treaties. Every link Haven has shakes.",
+   "⚔️ Beatrice faced The Eater at the treeline... and didn't come back. The party carries the body home. The sortie is over."
+  ]
+ }
+]
+R57 D1 episode resets: [
+ {
+  "seed": 14492,
+  "day": 132,
+  "episodeInfo": [
+   {
+    "id": "suburb",
+    "episode": 2,
+    "firstSeenDay": 128,
+    "firstSeenEver": 68
+   },
+   {
+    "id": "reunion",
+    "episode": 2,
+    "firstSeenDay": 128,
+    "firstSeenEver": 119
+   }
+  ]
+ },
+ {
+  "seed": 14492,
+  "day": 142,
+  "episodeInfo": [
+   {
+    "id": "congregation",
+    "episode": 2,
+    "firstSeenDay": 139,
+    "firstSeenEver": 93
+   },
+   {
+    "id": "eulogy",
+    "episode": 1,
+    "firstSeenDay": 139,
+    "firstSeenEver": 139
+   },
+   {
+    "id": "suburb",
+    "episode": 1,
+    "firstSeenDay": 139,
+    "firstSeenEver": 139
+   }
+  ]
+ },
+ {
+  "seed": 14492,
+  "book": {
+   "key": 4,
+   "id": "suburb",
+   "name": "The Suburb",
+   "firstSeenDay": 128,
+   "firstSeenEver": 68,
+   "episode": 2,
+   "sorties": 1,
+   "lastSortieDay": 132,
+   "clearedBySortieDay": null,
+   "clearedEpisode": null,
+   "draftHp": 1300,
+   "absentBoundaries": 14,
+   "drifted": true,
+   "resetReason": "re-linger-after-drift"
+  }
+ },
+ {
+  "seed": 14492,
+  "book": {
+   "key": 9,
+   "id": "congregation",
+   "name": "The Congregation",
+   "firstSeenDay": 139,
+   "firstSeenEver": 93,
+   "episode": 2,
+   "sorties": 1,
+   "lastSortieDay": 142,
+   "clearedBySortieDay": null,
+   "clearedEpisode": null,
+   "draftHp": 900,
+   "absentBoundaries": 0,
+   "drifted": false,
+   "resetReason": "re-linger-after-drift"
+  }
+ },
+ {
+  "seed": 14492,
+  "book": {
+   "key": 14,
+   "id": "reunion",
+   "name": "The Big Beast",
+   "firstSeenDay": 128,
+   "firstSeenEver": 119,
+   "episode": 2,
+   "sorties": 1,
+   "lastSortieDay": 132,
+   "clearedBySortieDay": null,
+   "clearedEpisode": null,
+   "draftHp": 1200,
+   "absentBoundaries": 14,
+   "drifted": true,
+   "resetReason": "re-linger-after-drift"
+  }
+ },
+ {
+  "seed": 14494,
+  "day": 84,
+  "episodeInfo": [
+   {
+    "id": "eater",
+    "episode": 2,
+    "firstSeenDay": 81,
+    "firstSeenEver": 74
+   },
+   {
+    "id": "herald",
+    "episode": 1,
+    "firstSeenDay": 81,
+    "firstSeenEver": 81
+   },
+   {
+    "id": "eulogy",
+    "episode": 1,
+    "firstSeenDay": 81,
+    "firstSeenEver": 81
+   }
+  ]
+ },
+ {
+  "seed": 14494,
+  "day": 110,
+  "episodeInfo": [
+   {
+    "id": "eulogy",
+    "episode": 1,
+    "firstSeenDay": 107,
+    "firstSeenEver": 107
+   },
+   {
+    "id": "audit",
+    "episode": 2,
+    "firstSeenDay": 107,
+    "firstSeenEver": 99
+   },
+   {
+    "id": "cancellation",
+    "episode": 1,
+    "firstSeenDay": 107,
+    "firstSeenEver": 107
+   }
+  ]
+ },
+ {
+  "seed": 14494,
+  "book": {
+   "key": 5,
+   "id": "eater",
+   "name": "The Eater",
+   "firstSeenDay": 81,
+   "firstSeenEver": 74,
+   "episode": 2,
+   "sorties": 1,
+   "lastSortieDay": 84,
+   "clearedBySortieDay": 84,
+   "clearedEpisode": 2,
+   "draftHp": 712,
+   "absentBoundaries": 68,
+   "drifted": false,
+   "resetReason": "re-linger-after-drift"
+  }
+ },
+ {
+  "seed": 14494,
+  "book": {
+   "key": 11,
+   "id": "audit",
+   "name": "The Audit",
+   "firstSeenDay": 107,
+   "firstSeenEver": 99,
+   "episode": 2,
+   "sorties": 1,
+   "lastSortieDay": 110,
+   "clearedBySortieDay": null,
+   "clearedEpisode": null,
+   "draftHp": 825,
+   "absentBoundaries": 41,
+   "drifted": true,
+   "resetReason": "re-linger-after-drift"
+  }
+ }
+]
+R57 D1 drift old-vs-new nightsWaited diffs: 4
+R57 D4 convo contest snapshots: total=38 missing=0
+R57 muster parse: sortieLines=19 parsed=19 noSortieLine=3
+R57 D3 muster-aware mismatches (say name in neither roster diff nor muster): []
+R57 D3 muster-explained (Dina class, closed): [
+ {
+  "seed": 14492,
+  "day": 106,
+  "name": "Luis",
+  "line": "📖 The Codex turns a page on its own. Luis is dead. You didn't ask. It knew."
+ },
+ {
+  "seed": 14492,
+  "day": 106,
+  "name": "Luis",
+  "line": "⚔️ Luis faced Gavel at the treeline... and didn't come back. The party carries the body home. The sortie is over."
+ },
+ {
+  "seed": 14494,
+  "day": 77,
+  "name": "Beatrice",
+  "line": "📖 The Codex turns a page on its own. Beatrice is dead. You didn't ask. It knew."
+ },
+ {
+  "seed": 14494,
+  "day": 77,
+  "name": "Beatrice",
+  "line": "🕯️ Beatrice is dead — and the dead hold no treaties. Every link Haven has shakes."
+ },
+ {
+  "seed": 14494,
+  "day": 77,
+  "name": "Beatrice",
+  "line": "⚔️ Beatrice faced The Eater at the treeline... and didn't come back. The party carries the body home. The sortie is over."
+ }
+]
+R57 D3 unattributed death lines (zero names matched): []
+R181 D3 leader-aware mismatches (say name in neither roster diff, muster, nor leader deaths): []
+R181 D3 leader-explained (Pavel class, closed): 0
+R58 refused-sortie book check:
+{"seed":14493,"day":107,"target":"The Eater","retOk":false,"bookSorties":0,"bookLastSortieDay":null,"refusedDayIsLastSortie":false}
+{"seed":14493,"day":107,"target":"The Eater","retOk":false,"bookSorties":0,"bookLastSortieDay":null,"refusedDayIsLastSortie":false}
+{"seed":14493,"day":108,"target":"The Eater","retOk":false,"bookSorties":0,"bookLastSortieDay":null,"refusedDayIsLastSortie":false}
+R58 bloodied deathsDuringSay lines: 0
+R70 phoenix burn-chain census:
+{"seed":14491,"end":"game-over","daysField":122,"maxSayDay":122,"lastDeathDay":11,"wrapMissing":false,"burnsTotal":0,"burnsWilling":0,"burnsOutsideFight":0,"maxBurnsOneFight":0,"fightsWith2Plus":0,"fightsWith6Plus":0,"burnsByDay":{},"burns":[]}
+{"seed":14492,"end":"game-over","daysField":149,"maxSayDay":144,"lastDeathDay":32,"wrapMissing":false,"burnsTotal":0,"burnsWilling":0,"burnsOutsideFight":0,"maxBurnsOneFight":0,"fightsWith2Plus":0,"fightsWith6Plus":0,"burnsByDay":{},"burns":[]}
+{"seed":14493,"end":"game-over","daysField":107,"maxSayDay":108,"lastDeathDay":18,"wrapMissing":false,"burnsTotal":0,"burnsWilling":0,"burnsOutsideFight":0,"maxBurnsOneFight":0,"fightsWith2Plus":0,"fightsWith6Plus":0,"burnsByDay":{},"burns":[]}
+{"seed":14494,"end":"horizon","daysField":150,"maxSayDay":151,"lastDeathDay":16,"wrapMissing":false,"burnsTotal":0,"burnsWilling":0,"burnsOutsideFight":0,"maxBurnsOneFight":0,"fightsWith2Plus":0,"fightsWith6Plus":0,"burnsByDay":{},"burns":[]}
+{"seed":14495,"end":"game-over","daysField":94,"maxSayDay":96,"lastDeathDay":9,"wrapMissing":false,"burnsTotal":0,"burnsWilling":0,"burnsOutsideFight":0,"maxBurnsOneFight":0,"fightsWith2Plus":0,"fightsWith6Plus":0,"burnsByDay":{},"burns":[]}
+R70 linger-conditional gorge/sortie judgment (prereg C2b):
+{"seed":14491,"lingererSetFormed":true,"gorgeNights":10,"sorties":2,"verdict":"judged on gorge+sorties"}
+{"seed":14492,"lingererSetFormed":true,"gorgeNights":47,"sorties":7,"verdict":"judged on gorge+sorties"}
+{"seed":14493,"lingererSetFormed":true,"gorgeNights":23,"sorties":5,"verdict":"judged on gorge+sorties"}
+{"seed":14494,"lingererSetFormed":true,"gorgeNights":21,"sorties":5,"verdict":"judged on gorge+sorties"}
+{"seed":14495,"lingererSetFormed":true,"gorgeNights":26,"sorties":3,"verdict":"judged on gorge+sorties"}
+R82 V1 defender steering:
+{"seed":14491,"day":11,"file":"journey-crisis-r229-seed14491-d11-defender-after-resolution.txt","vid":"gen_31vzb8g","latelySteered":true,"latelyOffered":false,"latelyFired":false,"subjectNavs":2}
+{"seed":14491,"day":28,"file":"journey-crisis-r229-seed14491-d28-defender-after-resolution.txt","vid":"gen_a7sglxz","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+{"seed":14491,"day":40,"file":"journey-crisis-r229-seed14491-d40-defender-after-resolution.txt","vid":"gen_ln0jmw5","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+{"seed":14491,"day":120,"file":"journey-crisis-r229-seed14491-d120-defender-after-resolution.txt","vid":"visjoin_115","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+{"seed":14492,"day":13,"file":"journey-crisis-r229-seed14492-d13-defender-after-resolution.txt","vid":"gen_vkjm1ql","latelySteered":true,"latelyOffered":false,"latelyFired":false,"subjectNavs":2}
+{"seed":14492,"day":32,"file":"journey-crisis-r229-seed14492-d32-defender-after-resolution.txt","vid":"gen_y1mrfv6","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+{"seed":14492,"day":39,"file":"journey-crisis-r229-seed14492-d39-defender-after-resolution.txt","vid":"gen_y1mrfv6","latelySteered":false,"latelyOffered":true,"latelyFired":true,"subjectNavs":0}
+{"seed":14492,"day":52,"file":"journey-crisis-r229-seed14492-d52-defender-after-resolution.txt","vid":"gen_8qohkmr","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+{"seed":14493,"day":11,"file":"journey-crisis-r229-seed14493-d11-defender-after-resolution.txt","vid":"gen_skdenqj","latelySteered":true,"latelyOffered":false,"latelyFired":false,"subjectNavs":2}
+{"seed":14493,"day":27,"file":"journey-crisis-r229-seed14493-d27-defender-after-resolution.txt","vid":"marcus_webb","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+{"seed":14493,"day":43,"file":"journey-crisis-r229-seed14493-d43-defender-after-resolution.txt","vid":"gen_ie56e6k","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+{"seed":14493,"day":74,"file":"journey-crisis-r229-seed14493-d74-defender-after-resolution.txt","vid":"app_mgpspiqn82","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+{"seed":14494,"day":16,"file":"journey-crisis-r229-seed14494-d16-defender-after-resolution.txt","vid":"gen_tv4iyiv","latelySteered":true,"latelyOffered":false,"latelyFired":false,"subjectNavs":2}
+{"seed":14494,"day":27,"file":"journey-crisis-r229-seed14494-d27-defender-after-resolution.txt","vid":"gen_tv4iyiv","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+{"seed":14494,"day":48,"file":"journey-crisis-r229-seed14494-d48-defender-after-resolution.txt","vid":"grace_obi","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+{"seed":14494,"day":57,"file":"journey-crisis-r229-seed14494-d57-defender-after-resolution.txt","vid":"gen_tv4iyiv","latelySteered":false,"latelyOffered":true,"latelyFired":true,"subjectNavs":0}
+{"seed":14495,"day":9,"file":"journey-crisis-r229-seed14495-d9-defender-after-resolution.txt","vid":"gen_v2nmllw","latelySteered":true,"latelyOffered":false,"latelyFired":false,"subjectNavs":2}
+{"seed":14495,"day":25,"file":"journey-crisis-r229-seed14495-d25-defender-after-resolution.txt","vid":"gen_v2nmllw","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+{"seed":14495,"day":54,"file":"journey-crisis-r229-seed14495-d54-defender-after-resolution.txt","vid":"gen_xm0u8lx","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+{"seed":14495,"day":67,"file":"journey-crisis-r229-seed14495-d67-defender-after-resolution.txt","vid":"grace_obi","latelySteered":false,"latelyOffered":false,"latelyFired":false,"subjectNavs":0}
+R82 F1 favor call-time no-longer entries:
+{"seed":14491,"wrapMissing":false,"entries":[]}
+{"seed":14492,"wrapMissing":false,"entries":[]}
+{"seed":14493,"wrapMissing":false,"entries":[]}
+{"seed":14494,"wrapMissing":false,"entries":[]}
+{"seed":14495,"wrapMissing":false,"entries":[]}
+R88 tick-part sampler coverage:
+{"seed":14491,"doActionWrapMissing":false,"samples":1225,"waitedGe3":60,"verbs":{"forage":643,"wait":414,"drink":168},"instrumentErrors":[]}
+{"seed":14492,"doActionWrapMissing":false,"samples":1995,"waitedGe3":401,"verbs":{"forage":1093,"wait":638,"drink":264},"instrumentErrors":[]}
+{"seed":14493,"doActionWrapMissing":false,"samples":1173,"waitedGe3":162,"verbs":{"forage":648,"wait":366,"drink":159},"instrumentErrors":[]}
+{"seed":14494,"doActionWrapMissing":false,"samples":1984,"waitedGe3":147,"verbs":{"forage":1196,"wait":570,"drink":218},"instrumentErrors":[]}
+{"seed":14495,"doActionWrapMissing":false,"samples":1028,"waitedGe3":153,"verbs":{"forage":527,"wait":387,"drink":114},"instrumentErrors":[]}
+R88 skipped-window analysis (drift with a tick-part waited>=3 sample after lastSeenDay and <= drift day, same id+episode):
+{"seed":14492,"driftDay":106,"id":"callback","name":"The Callback","episode":1,"lastSeenDay":105,"label":"player-drawn-off","windowSamples":3,"firstWindowDay":106,"firstWindowWaited":3}
+{"seed":14494,"driftDay":112,"id":"audit","name":"The Audit","episode":2,"lastSeenDay":110,"label":"moved-on-valve","windowSamples":9,"firstWindowDay":111,"firstWindowWaited":4}
+{"seed":14494,"driftDay":112,"id":"cancellation","name":"The Cancellation","episode":1,"lastSeenDay":110,"label":"moved-on-valve","windowSamples":9,"firstWindowDay":111,"firstWindowWaited":4}
+R88 missed-window total=3
+R154 missed-window corrected=3 (raw=3, excluded-answered=0)
+R155 missed-window per-day=2 (per-object corrected=3)
+R181 missed-window split (corrected=3): valve-expiry=2 per-day=1 drawn-off=1 per-day=1 byLabel={"player-drawn-off":1,"moved-on-valve":2}
+R154 missed-window kept (true misses): [
+ {
+  "seed": 14492,
+  "driftDay": 106,
+  "id": "callback",
+  "name": "The Callback",
+  "episode": 1,
+  "lastSeenDay": 105,
+  "label": "player-drawn-off"
+ },
+ {
+  "seed": 14494,
+  "driftDay": 112,
+  "id": "audit",
+  "name": "The Audit",
+  "episode": 2,
+  "lastSeenDay": 110,
+  "label": "moved-on-valve"
+ },
+ {
+  "seed": 14494,
+  "driftDay": 112,
+  "id": "cancellation",
+  "name": "The Cancellation",
+  "episode": 1,
+  "lastSeenDay": 110,
+  "label": "moved-on-valve"
+ }
+]
+R154 missed-window excluded (sortie attempt answered the set): []
+R154 drift duplicates in panel JSONs=0 driverSkipped=0 []
+R126 boundary-sortie cross-check (waited-ge3 / sampled-lt3 / none per target):
+{"seed":14491,"day":32,"ok":true,"checks":[{"id":"lockpick_raccoon","name":"Ugly-Eyes","priorWaitedGe3Samples":8,"priorSamples":25,"sampleClass":"waited-ge3"},{"id":"gallowdeer","name":"Captain Bright-Eyes","priorWaitedGe3Samples":8,"priorSamples":25,"sampleClass":"waited-ge3"}]}
+{"seed":14491,"day":53,"ok":true,"checks":[{"id":"herald","name":"The Herald","priorWaitedGe3Samples":9,"priorSamples":39,"sampleClass":"waited-ge3"},{"id":"eulogy","name":"The Eulogy","priorWaitedGe3Samples":9,"priorSamples":39,"sampleClass":"waited-ge3"}]}
+{"seed":14492,"day":71,"ok":true,"checks":[{"id":"white_noise_heron","name":"Big Loud","priorWaitedGe3Samples":0,"priorSamples":24,"sampleClass":"sampled-lt3"},{"id":"focus_group","name":"Big Ugly","priorWaitedGe3Samples":0,"priorSamples":24,"sampleClass":"sampled-lt3"},{"id":"eulogy","name":"The Eulogy","priorWaitedGe3Samples":0,"priorSamples":24,"sampleClass":"sampled-lt3"},{"id":"suburb","name":"The Suburb","priorWaitedGe3Samples":8,"priorSamples":32,"sampleClass":"waited-ge3"}]}
+{"seed":14492,"day":87,"ok":true,"checks":[{"id":"callback","name":"The Callback","priorWaitedGe3Samples":8,"priorSamples":49,"sampleClass":"waited-ge3"},{"id":"terms_of_service","name":"Big-Eyes","priorWaitedGe3Samples":8,"priorSamples":49,"sampleClass":"waited-ge3"}]}
+{"seed":14492,"day":96,"ok":true,"checks":[{"id":"paparazzo","name":"Big Big","priorWaitedGe3Samples":9,"priorSamples":41,"sampleClass":"waited-ge3"},{"id":"herald","name":"The Herald","priorWaitedGe3Samples":19,"priorSamples":51,"sampleClass":"waited-ge3"},{"id":"congregation","name":"The Congregation","priorWaitedGe3Samples":19,"priorSamples":51,"sampleClass":"waited-ge3"}]}
+{"seed":14492,"day":106,"ok":true,"checks":[{"id":"gavel","name":"Gavel","priorWaitedGe3Samples":20,"priorSamples":60,"sampleClass":"waited-ge3"},{"id":"eater","name":"The Loud Beast","priorWaitedGe3Samples":20,"priorSamples":60,"sampleClass":"waited-ge3"}]}
+{"seed":14492,"day":122,"ok":true,"checks":[{"id":"buffering","name":"Buffering","priorWaitedGe3Samples":6,"priorSamples":26,"sampleClass":"waited-ge3"},{"id":"reunion","name":"The Big Beast","priorWaitedGe3Samples":6,"priorSamples":26,"sampleClass":"waited-ge3"}]}
+{"seed":14492,"day":132,"ok":true,"checks":[{"id":"suburb","name":"The Suburb","priorWaitedGe3Samples":46,"priorSamples":104,"sampleClass":"waited-ge3"},{"id":"reunion","name":"The Big Beast","priorWaitedGe3Samples":45,"priorSamples":99,"sampleClass":"waited-ge3"}]}
+{"seed":14492,"day":142,"ok":true,"checks":[{"id":"congregation","name":"The Ugly Beast","priorWaitedGe3Samples":50,"priorSamples":109,"sampleClass":"waited-ge3"},{"id":"eulogy","name":"Don't-Look","priorWaitedGe3Samples":7,"priorSamples":58,"sampleClass":"waited-ge3"},{"id":"suburb","name":"The Big Beast","priorWaitedGe3Samples":53,"priorSamples":138,"sampleClass":"waited-ge3"}]}
+{"seed":14493,"day":56,"ok":true,"checks":[{"id":"eulogy","name":"The Eulogy","priorWaitedGe3Samples":10,"priorSamples":38,"sampleClass":"waited-ge3"},{"id":"reunion","name":"The Reunion","priorWaitedGe3Samples":10,"priorSamples":38,"sampleClass":"waited-ge3"},{"id":"callback","name":"The Big Beast","priorWaitedGe3Samples":10,"priorSamples":38,"sampleClass":"waited-ge3"}]}
+{"seed":14493,"day":77,"ok":true,"checks":[{"id":"herald","name":"The Herald","priorWaitedGe3Samples":10,"priorSamples":43,"sampleClass":"waited-ge3"}]}
+{"seed":14493,"day":107,"ok":true,"checks":[{"id":"eater","name":"The Eater","priorWaitedGe3Samples":19,"priorSamples":42,"sampleClass":"waited-ge3"}]}
+{"seed":14493,"day":107,"ok":true,"checks":[{"id":"eater","name":"The Eater","priorWaitedGe3Samples":19,"priorSamples":42,"sampleClass":"waited-ge3"}]}
+{"seed":14493,"day":108,"ok":true,"checks":[{"id":"eater","name":"The Eater","priorWaitedGe3Samples":30,"priorSamples":53,"sampleClass":"waited-ge3"}]}
+{"seed":14494,"day":51,"ok":true,"checks":[{"id":"belltoad","name":"Loud-Eyes","priorWaitedGe3Samples":0,"priorSamples":29,"sampleClass":"sampled-lt3"}]}
+{"seed":14494,"day":77,"ok":true,"checks":[{"id":"focus_group","name":"The Focus Group","priorWaitedGe3Samples":0,"priorSamples":67,"sampleClass":"sampled-lt3"},{"id":"statickite","name":"The Big Beast","priorWaitedGe3Samples":0,"priorSamples":67,"sampleClass":"sampled-lt3"},{"id":"callback","name":"The Ugly Beast","priorWaitedGe3Samples":0,"priorSamples":67,"sampleClass":"sampled-lt3"},{"id":"eater","name":"The Eater","priorWaitedGe3Samples":11,"priorSamples":78,"sampleClass":"waited-ge3"},{"id":"algorithm","name":"The Algorithm","priorWaitedGe3Samples":11,"priorSamples":78,"sampleClass":"waited-ge3"}]}
+{"seed":14494,"day":84,"ok":true,"checks":[{"id":"eater","name":"The Eater","priorWaitedGe3Samples":25,"priorSamples":143,"sampleClass":"waited-ge3"},{"id":"herald","name":"The Herald","priorWaitedGe3Samples":10,"priorSamples":61,"sampleClass":"waited-ge3"},{"id":"eulogy","name":"The Eulogy","priorWaitedGe3Samples":10,"priorSamples":61,"sampleClass":"waited-ge3"}]}
+{"seed":14494,"day":102,"ok":true,"checks":[{"id":"hushwolf","name":"Ugly-Eyes","priorWaitedGe3Samples":0,"priorSamples":31,"sampleClass":"sampled-lt3"},{"id":"spool","name":"Big Loud","priorWaitedGe3Samples":0,"priorSamples":31,"sampleClass":"sampled-lt3"},{"id":"audit","name":"The Audit","priorWaitedGe3Samples":10,"priorSamples":41,"sampleClass":"waited-ge3"}]}
+{"seed":14494,"day":110,"ok":true,"checks":[{"id":"eulogy","name":"The Eulogy","priorWaitedGe3Samples":20,"priorSamples":113,"sampleClass":"waited-ge3"},{"id":"audit","name":"The Audit","priorWaitedGe3Samples":35,"priorSamples":108,"sampleClass":"waited-ge3"},{"id":"cancellation","name":"The Cancellation","priorWaitedGe3Samples":4,"priorSamples":46,"sampleClass":"waited-ge3"}]}
+{"seed":14495,"day":70,"ok":true,"checks":[{"id":"focus_group","name":"The Focus Group","priorWaitedGe3Samples":0,"priorSamples":30,"sampleClass":"sampled-lt3"}]}
+{"seed":14495,"day":81,"ok":true,"checks":[{"id":"bright_idea","name":"Loud-Eyes","priorWaitedGe3Samples":9,"priorSamples":39,"sampleClass":"waited-ge3"},{"id":"reunion","name":"The Reunion","priorWaitedGe3Samples":9,"priorSamples":39,"sampleClass":"waited-ge3"},{"id":"moderator","name":"The Big Beast","priorWaitedGe3Samples":9,"priorSamples":39,"sampleClass":"waited-ge3"}]}
+{"seed":14495,"day":91,"ok":true,"checks":[{"id":"buffering","name":"Buffering","priorWaitedGe3Samples":20,"priorSamples":43,"sampleClass":"waited-ge3"},{"id":"understudy","name":"The Loud Beast","priorWaitedGe3Samples":12,"priorSamples":35,"sampleClass":"waited-ge3"},{"id":"reunion","name":"The Loud Beast","priorWaitedGe3Samples":38,"priorSamples":91,"sampleClass":"waited-ge3"},{"id":"voice_mimic_radio","name":"Big Ugly","priorWaitedGe3Samples":11,"priorSamples":34,"sampleClass":"waited-ge3"},{"id":"landlord","name":"The Ugly Beast","priorWaitedGe3Samples":20,"priorSamples":43,"sampleClass":"waited-ge3"}]}
+R88 C7 famine/disease pressure census:
+{"seed":14491,"end":"game-over","pantryLow":{"iter":52,"gameDay":53,"kcal":0},"pantryFinal":0,"alive":1,"famineDeaths":[],"diseaseDeaths":[],"woundDeaths":[],"corpseFamine":[{"day":89,"name":"Sofia Chen","cause":"starvation"},{"day":116,"name":"Fernando Figueroa","cause":"starvation"}],"corpseDisease":[],"corpseWounds":[{"day":80,"name":"Filipp Krylov","cause":"a wound that wouldn't close"}],"corpseThirst":[]}
+{"seed":14492,"end":"game-over","pantryLow":{"iter":76,"gameDay":77,"kcal":0},"pantryFinal":0,"alive":3,"famineDeaths":[],"diseaseDeaths":[],"woundDeaths":[],"corpseFamine":[],"corpseDisease":[],"corpseWounds":[],"corpseThirst":[]}
+{"seed":14493,"end":"game-over","pantryLow":{"iter":63,"gameDay":64,"kcal":0},"pantryFinal":0,"alive":1,"famineDeaths":[],"diseaseDeaths":[],"woundDeaths":[],"corpseFamine":[{"day":62,"name":"Otto","cause":"starvation"}],"corpseDisease":[],"corpseWounds":[{"day":80,"name":"Quinn Murphy","cause":"a wound that wouldn't close"}],"corpseThirst":[]}
+{"seed":14494,"end":"horizon","pantryLow":{"iter":83,"gameDay":85,"kcal":0},"pantryFinal":0,"alive":5,"famineDeaths":[],"diseaseDeaths":[],"woundDeaths":[],"corpseFamine":[],"corpseDisease":[],"corpseWounds":[],"corpseThirst":[]}
+{"seed":14495,"end":"game-over","pantryLow":{"iter":79,"gameDay":82,"kcal":0},"pantryFinal":0,"alive":1,"famineDeaths":[],"diseaseDeaths":[],"woundDeaths":[],"corpseFamine":[{"day":91,"name":"Atef","cause":"starvation"},{"day":92,"name":"Mariela","cause":"starvation"}],"corpseDisease":[],"corpseWounds":[{"day":67,"name":"Pavel Dubinin","cause":"a wound that wouldn't close"},{"day":93,"name":"Ariana Chacín","cause":"a wound that wouldn't close"}],"corpseThirst":[{"day":85,"name":"Carla","cause":"thirst"},{"day":86,"name":"Chantal","cause":"thirst"},{"day":86,"name":"Lena","cause":"thirst"},{"day":92,"name":"Aria","cause":"thirst"}]}
+R132 C7b corpse-cause counts (feed vs corpse record):
+{"seed":14491,"famine":{"feed":0,"corpse":2},"disease":{"feed":0,"corpse":0},"wound":{"feed":0,"corpse":1},"thirst":{"feed":0,"corpse":0},"corpseTotal":21,"deathsTotal":10,"corpseCauses":[{"day":29,"name":"Maya","cause":"monster"},{"day":29,"name":"Wanjiru Kamau","cause":"the night"},{"day":31,"name":"Ibrahim Ali","cause":"the arena"},{"day":35,"name":"Marcus Webb","cause":"the wild"},{"day":40,"name":"Lucas Brown","cause":"the wild"},{"day":42,"name":"Patricia Rentería","cause":"the wild"},{"day":43,"name":"Hnat Avramenko","cause":"the wild"},{"day":46,"name":"Nathan Lee","cause":"the wild"},{"day":53,"name":"Tashi Sherpa","cause":"the wild"},{"day":55,"name":"Kaan","cause":"monster"},{"day":57,"name":"Boris Kowalski","cause":"the wild"},{"day":59,"name":"Marthe Mukadi","cause":"the arena"},{"day":74,"name":"Chloe Dubois","cause":"the wild"},{"day":75,"name":"Nina Petrova","cause":"contest"},{"day":80,"name":"Filipp Krylov","cause":"a wound that wouldn't close"},{"day":82,"name":"Henry Zhang","cause":"contest"},{"day":89,"name":"Sofia Chen","cause":"starvation"},{"day":112,"name":"Farid Ahmed","cause":"the wild"},{"day":116,"name":"Fernando Figueroa","cause":"starvation"},{"day":120,"name":"Arnold","cause":"monster"},{"day":121,"name":"Afia","cause":"monster"}]}
+{"seed":14492,"famine":{"feed":0,"corpse":0},"disease":{"feed":0,"corpse":0},"wound":{"feed":0,"corpse":0},"thirst":{"feed":0,"corpse":0},"corpseTotal":15,"deathsTotal":6,"corpseCauses":[{"day":53,"name":"June Diallo","cause":"the wild"},{"day":54,"name":"Zhanbolat Kalmenov","cause":"the wild"},{"day":75,"name":"Hemi O'Brien","cause":"the wild"},{"day":84,"name":"Pavel Dubinin","cause":"the wild"},{"day":86,"name":"Aria Thompson","cause":"contest"},{"day":92,"name":"Sigrun Eiriksdottir","cause":"the arena"},{"day":93,"name":"Sanne","cause":"monster"},{"day":99,"name":"Eleuterio","cause":"monster"},{"day":106,"name":"Genet","cause":"monster"},{"day":106,"name":"Luis","cause":"monster"},{"day":118,"name":"Imtiaz","cause":"monster"},{"day":135,"name":"Petra Novak","cause":"the wild"},{"day":137,"name":"Cristóbal Baca","cause":"the wild"},{"day":141,"name":"Mwikali","cause":"monster"},{"day":142,"name":"Olivia Bennett","cause":"the wild"}]}
+{"seed":14493,"famine":{"feed":0,"corpse":1},"disease":{"feed":0,"corpse":0},"wound":{"feed":0,"corpse":1},"thirst":{"feed":0,"corpse":0},"corpseTotal":15,"deathsTotal":5,"corpseCauses":[{"day":27,"name":"Darnell Fuchs","cause":"the wild"},{"day":48,"name":"Kirollos Harby","cause":"the wild"},{"day":53,"name":"Marcus Webb","cause":"the wild"},{"day":62,"name":"Otto","cause":"starvation"},{"day":64,"name":"Grace Obi","cause":"the wild"},{"day":69,"name":"Amelia Domański","cause":"the wild"},{"day":71,"name":"Hannah","cause":"monster"},{"day":78,"name":"Cuauhtémoc","cause":"monster"},{"day":80,"name":"Quinn Murphy","cause":"a wound that wouldn't close"},{"day":88,"name":"Daniyar Askarov","cause":"the wild"},{"day":91,"name":"Nathan Lee","cause":"the wild"},{"day":100,"name":"Xavier Dubois","cause":"the wild"},{"day":102,"name":"Thiago","cause":"monster"},{"day":103,"name":"Irena Baran","cause":"the wild"},{"day":106,"name":"Gerardo","cause":"monster"}]}
+{"seed":14494,"famine":{"feed":0,"corpse":0},"disease":{"feed":0,"corpse":0},"wound":{"feed":0,"corpse":0},"thirst":{"feed":0,"corpse":0},"corpseTotal":10,"deathsTotal":6,"corpseCauses":[{"day":73,"name":"Lena Ruiz","cause":"the night"},{"day":77,"name":"Beatrice","cause":"monster"},{"day":80,"name":"Naomi Jordan","cause":"the wild"},{"day":86,"name":"Somchai","cause":"monster"},{"day":91,"name":"Zoltan","cause":"monster"},{"day":95,"name":"Grace Obi","cause":"the wild"},{"day":98,"name":"Stan Kowalski","cause":"the arena"},{"day":103,"name":"Anon","cause":"monster"},{"day":120,"name":"Rabiul Biswas","cause":"the night"},{"day":133,"name":"Hassan Ali","cause":"the wild"}]}
+{"seed":14495,"famine":{"feed":0,"corpse":2},"disease":{"feed":0,"corpse":0},"wound":{"feed":0,"corpse":2},"thirst":{"feed":0,"corpse":4},"corpseTotal":13,"deathsTotal":6,"corpseCauses":[{"day":39,"name":"Blanca Kovalenko","cause":"Gavel"},{"day":41,"name":"Tom Baker","cause":"the wild"},{"day":67,"name":"Rosa Tapia","cause":"the wild"},{"day":67,"name":"Pavel Dubinin","cause":"a wound that wouldn't close"},{"day":72,"name":"Lorenzo Zúñiga","cause":"the wild"},{"day":82,"name":"Dhruv","cause":"monster"},{"day":85,"name":"Carla","cause":"thirst"},{"day":86,"name":"Chantal","cause":"thirst"},{"day":86,"name":"Lena","cause":"thirst"},{"day":91,"name":"Atef","cause":"starvation"},{"day":92,"name":"Mariela","cause":"starvation"},{"day":92,"name":"Aria","cause":"thirst"},{"day":93,"name":"Ariana Chacín","cause":"a wound that wouldn't close"}]}
+R155 C7b say-line death record (buried dead never reach the corpse list):
+{"seed":14491,"deathsFeed":10,"corpseTotal":21,"sayDeaths":19,"buried":["Amara Santos","Dmitri Nguyen","Patricia","Filipp"],"sayFamine":2,"sayDisease":0,"sayWound":0,"sayThirst":0,"sayWild":12,"sayUnknownCause":2}
+{"seed":14492,"deathsFeed":6,"corpseTotal":15,"sayDeaths":11,"buried":["Omar Zhang","Rafael Petrov","Jesse Calhoun","Hemi"],"sayFamine":1,"sayDisease":0,"sayWound":0,"sayThirst":0,"sayWild":7,"sayUnknownCause":1}
+{"seed":14493,"deathsFeed":5,"corpseTotal":15,"sayDeaths":10,"buried":["Malik","Amelia"],"sayFamine":0,"sayDisease":0,"sayWound":0,"sayThirst":0,"sayWild":8,"sayUnknownCause":2}
+{"seed":14494,"deathsFeed":6,"corpseTotal":10,"sayDeaths":10,"buried":["Eli Xie","Amara Cisse","Mia"],"sayFamine":0,"sayDisease":0,"sayWound":0,"sayThirst":0,"sayWild":6,"sayUnknownCause":2}
+{"seed":14495,"deathsFeed":6,"corpseTotal":13,"sayDeaths":6,"buried":["Isabella Villanueva","Leroy","Lorenzo"],"sayFamine":0,"sayDisease":1,"sayWound":0,"sayThirst":0,"sayWild":2,"sayUnknownCause":3}
+R122 gorge attribution census + id-matched gorge-after-clear:
+{"seed":14491,"attributedFields":true,"gorgeTotal":10,"byAttribution":{"single":10,"ambiguous":0,"none":0},"multiGroups":[],"clearedRows":[{"key":1,"id":"lockpick_raccoon","clearedDay":32,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]},{"key":2,"id":"gallowdeer","clearedDay":32,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]}]}
+{"seed":14492,"attributedFields":true,"gorgeTotal":47,"byAttribution":{"single":47,"ambiguous":0,"none":0},"multiGroups":[],"clearedRows":[{"key":1,"id":"white_noise_heron","clearedDay":71,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]},{"key":2,"id":"focus_group","clearedDay":71,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]},{"key":3,"id":"eulogy","clearedDay":71,"clearedEpisode":1,"nameMatched":1,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]},{"key":7,"id":"paparazzo","clearedDay":96,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]}]}
+{"seed":14493,"attributedFields":true,"gorgeTotal":23,"byAttribution":{"single":23,"ambiguous":0,"none":0},"multiGroups":[],"clearedRows":[]}
+{"seed":14494,"attributedFields":true,"gorgeTotal":21,"byAttribution":{"single":20,"ambiguous":0,"none":0,"single-unbooked":1},"multiGroups":[],"clearedRows":[{"key":1,"id":"belltoad","clearedDay":51,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]},{"key":2,"id":"focus_group","clearedDay":77,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]},{"key":3,"id":"statickite","clearedDay":77,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]},{"key":4,"id":"callback","clearedDay":77,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]},{"key":5,"id":"eater","clearedDay":84,"clearedEpisode":2,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]},{"key":9,"id":"hushwolf","clearedDay":102,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]},{"key":10,"id":"spool","clearedDay":102,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]},{"key":12,"id":"eulogy","clearedDay":110,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]}]}
+{"seed":14495,"attributedFields":true,"gorgeTotal":26,"byAttribution":{"single":18,"ambiguous":8,"none":0},"multiGroups":[{"night":"87|The Loud Beast","events":2,"attributedKeys":[null,null],"attributions":["ambiguous","ambiguous"]},{"night":"88|The Loud Beast","events":2,"attributedKeys":[null,null],"attributions":["ambiguous","ambiguous"]},{"night":"89|The Loud Beast","events":2,"attributedKeys":[null,null],"attributions":["ambiguous","ambiguous"]},{"night":"90|The Loud Beast","events":2,"attributedKeys":[null,null],"attributions":["ambiguous","ambiguous"]}],"clearedRows":[{"key":1,"id":"focus_group","clearedDay":70,"clearedEpisode":1,"nameMatched":0,"idMatched":0,"returned":0,"idMatchedEvents":[],"returnEvents":[]}]}
+R122 panel totals: gorgeAfterIdMatched=0 gorgeAfterReturn=0 (name-matched=1 above, for comparison)
+R128 WRAP marked-ending check (prereg marker set):
+{"transcripts":38,"marked":38,"unmarked":0,"markerCounts":{"(conversation ended by the engine)":37,"(driver cap break:":1},"unmarkedFiles":[]}
+R181 BENCH refused-sortie bench census (prereg: gate vs supply vs availability):
+{"refused":3,"byMusterAvailable":{"0":3},"shape":{"gateOneShort":0,"supplyEmpty":3,"availabilityDrain":0,"other":0},"exclusionTotalsAcrossRefusals":{"away":0,"nodeAway":0,"withYou":0,"engaged":0,"nonMember":0,"dead":0}}
+{"aliveBenchRefusals":0,"aliveShape":{"gateOneShort":0,"supplyEmpty":0,"availabilityDrain":0,"other":0},"aliveNodeAwayExclusions":0,"aliveAwayExclusions":0,"aliveBenchRows":[]}
+{"NODEAWAY_PANEL":{"perSeed":{"14493":0},"totalAcrossRefusals":0,"aliveBenchNodeAway":0,"aliveBenchRefusals":0,"worstBenchSnapshot":{"seed":null,"day":null,"n":0}}}
+{
+ "refusedRows": [
+  {
+   "seed": 14493,
+   "day": 107,
+   "why": "no-fighters",
+   "musterAvailable": 0,
+   "livingBesidesPlayer": 0,
+   "excluded": {
+    "away": 0,
+    "nodeAway": 0,
+    "withYou": 0,
+    "engaged": 0,
+    "nonMember": 0,
+    "dead": 0
+   },
+   "benchMissing": false
+  },
+  {
+   "seed": 14493,
+   "day": 107,
+   "why": "no-fighters",
+   "musterAvailable": 0,
+   "livingBesidesPlayer": 0,
+   "excluded": {
+    "away": 0,
+    "nodeAway": 0,
+    "withYou": 0,
+    "engaged": 0,
+    "nonMember": 0,
+    "dead": 0
+   },
+   "benchMissing": false
+  },
+  {
+   "seed": 14493,
+   "day": 108,
+   "why": "no-fighters",
+   "musterAvailable": 0,
+   "livingBesidesPlayer": 0,
+   "excluded": {
+    "away": 0,
+    "nodeAway": 0,
+    "withYou": 0,
+    "engaged": 0,
+    "nonMember": 0,
+    "dead": 0
+   },
+   "benchMissing": false
+  }
+ ]
+}
+R181 W1 carried count: same-set re-musters after a refusal=[]
+R181 W1 carried count: ok sorties after a refusal on the same set=[]
+R181 W1 carried count: full clears after a refusal on the same set=[]
+R181 muster-size vs break (per ok sortie):
+{"seed":14491,"day":32,"partySize":3,"party":["Patricia","Hnat","Nathan"],"setSize":2,"setHp":[2,79],"broke":false,"remaining":0,"cleared":true,"fights":[{"m":"lockpick_raccoon","out":"vKill","vTaken":2,"leader":"Patricia Rentería"},{"m":"gallowdeer","out":"vKill","vTaken":30,"leader":"Patricia Rentería"}],"deathsDuring":[]}
+{"seed":14491,"day":53,"partySize":3,"party":["Sofia","Marthe","Boris"],"setSize":2,"setHp":[642,900],"broke":true,"remaining":2,"cleared":false,"fights":[{"m":"herald","out":"vFlee","vTaken":53,"leader":"Sofia Chen"}],"deathsDuring":[]}
+{"seed":14492,"day":71,"partySize":3,"party":["Aria","Petra","Sigrun"],"setSize":4,"setHp":[60,240,900,1300],"broke":true,"remaining":1,"cleared":true,"fights":[{"m":"white_noise_heron","out":"vKill","vTaken":15,"leader":"Aria Thompson"},{"m":"focus_group","out":"mFlee","vTaken":33,"leader":"Aria Thompson"},{"m":"eulogy","out":"mFlee","vTaken":0,"leader":"Aria Thompson"},{"m":"suburb","out":"vFlee","vTaken":18,"leader":"Aria Thompson"}],"deathsDuring":[]}
+{"seed":14492,"day":87,"partySize":3,"party":["Petra","Olivia","Cristóbal"],"setSize":2,"setHp":[260,340],"broke":true,"remaining":2,"cleared":false,"fights":[{"m":"callback","out":"vFlee","vTaken":81,"leader":"Petra Novak"}],"deathsDuring":[]}
+{"seed":14492,"day":96,"partySize":3,"party":["Luis","Olivia","Cristóbal"],"setSize":3,"setHp":[70,684,812],"broke":true,"remaining":2,"cleared":true,"fights":[{"m":"paparazzo","out":"vKill","vTaken":12,"leader":"Luis Fernandez"},{"m":"herald","out":"vFlee","vTaken":29,"leader":"Luis Fernandez"}],"deathsDuring":[]}
+{"seed":14492,"day":106,"partySize":3,"party":["Luis","Olivia","Cristóbal"],"setSize":2,"setHp":[300,887],"broke":true,"remaining":2,"cleared":false,"fights":[{"m":"gavel","out":"vDie","vTaken":100,"leader":"Luis Fernandez"}],"deathsDuring":[]}
+{"seed":14492,"day":122,"partySize":3,"party":["Olivia","Cristóbal","Nikos"],"setSize":2,"setHp":[280,1200],"broke":true,"remaining":2,"cleared":false,"fights":[{"m":"buffering","out":"vFlee","vTaken":25,"leader":"Olivia Bennett"}],"deathsDuring":[]}
+{"seed":14492,"day":132,"partySize":2,"party":["Cristóbal","Henry"],"setSize":2,"setHp":[1300,1200],"broke":true,"remaining":2,"cleared":false,"fights":[{"m":"suburb","out":"vFlee","vTaken":42,"leader":"Cristóbal"}],"deathsDuring":[]}
+{"seed":14492,"day":142,"partySize":2,"party":["Nikos","Henry"],"setSize":3,"setHp":[796,832,1300],"broke":true,"remaining":3,"cleared":false,"fights":[{"m":"congregation","out":"vFlee","vTaken":78,"leader":"Nikos"}],"deathsDuring":[]}
+{"seed":14493,"day":56,"partySize":3,"party":["Amelia","Nathan","Meera"],"setSize":3,"setHp":[900,1200,228],"broke":true,"remaining":3,"cleared":false,"fights":[{"m":"eulogy","out":"vFlee","vTaken":67,"leader":"Amelia Domański"}],"deathsDuring":[]}
+{"seed":14493,"day":77,"partySize":3,"party":["Nathan","Meera","Xavier"],"setSize":1,"setHp":[547],"broke":true,"remaining":1,"cleared":false,"fights":[{"m":"herald","out":"vFlee","vTaken":17,"leader":"Nathan Lee"}],"deathsDuring":[]}
+{"seed":14494,"day":51,"partySize":3,"party":["Stan","Benoit","Caleb"],"setSize":1,"setHp":[34],"broke":false,"remaining":0,"cleared":true,"fights":[{"m":"belltoad","out":"vKill","vTaken":4,"leader":"Stan Kowalski"}],"deathsDuring":[]}
+{"seed":14494,"day":77,"partySize":3,"party":["Beatrice","Stan","Benoit"],"setSize":5,"setHp":[1,60,89,712,750],"broke":true,"remaining":2,"cleared":true,"fights":[{"m":"focus_group","out":"mFlee","vTaken":30,"leader":"Beatrice Kalambayi"},{"m":"statickite","out":"vKill","vTaken":21,"leader":"Beatrice Kalambayi"},{"m":"callback","out":"vKill","vTaken":68,"leader":"Beatrice Kalambayi"},{"m":"eater","out":"vDie","vTaken":18,"leader":"Beatrice Kalambayi"}],"deathsDuring":[]}
+{"seed":14494,"day":84,"partySize":3,"party":["Stan","Benoit","Ivy"],"setSize":3,"setHp":[474,525,675],"broke":true,"remaining":2,"cleared":true,"fights":[{"m":"eater","out":"vKill","vTaken":66,"leader":"Stan Kowalski"},{"m":"herald","out":"vFlee","vTaken":28,"leader":"Stan Kowalski"}],"deathsDuring":[]}
+{"seed":14494,"day":102,"partySize":2,"party":["Benoit","Hassan"],"setSize":3,"setHp":[15,210,825],"broke":true,"remaining":1,"cleared":true,"fights":[{"m":"hushwolf","out":"vKill","vTaken":7,"leader":"Benoit Lambert"},{"m":"spool","out":"vKill","vTaken":83,"leader":"Benoit Lambert"},{"m":"audit","out":"vFlee","vTaken":30,"leader":"Benoit Lambert"}],"deathsDuring":[]}
+{"seed":14494,"day":110,"partySize":3,"party":["Benoit","Ivy","Hassan"],"setSize":3,"setHp":[675,445,1200],"broke":true,"remaining":2,"cleared":true,"fights":[{"m":"eulogy","out":"mFlee","vTaken":36,"leader":"Benoit Lambert"},{"m":"audit","out":"vFlee","vTaken":54,"leader":"Benoit Lambert"}],"deathsDuring":[]}
+{"seed":14495,"day":70,"partySize":3,"party":["Grace","Aria","Carla"],"setSize":1,"setHp":[230],"broke":false,"remaining":0,"cleared":true,"fights":[{"m":"focus_group","out":"mFlee","vTaken":24,"leader":"Grace Obi"}],"deathsDuring":[]}
+{"seed":14495,"day":81,"partySize":3,"party":["Carla","Atef","Mariela"],"setSize":3,"setHp":[41,1200,150],"broke":true,"remaining":3,"cleared":false,"fights":[{"m":"bright_idea","out":"vFlee","vTaken":6,"leader":"Carla"}],"deathsDuring":[]}
+{"seed":14495,"day":91,"partySize":3,"party":["Atef","Mariela","Ariana"],"setSize":5,"setHp":[270,105,1200,65,90],"broke":true,"remaining":5,"cleared":false,"fights":[{"m":"buffering","out":"vFlee","vTaken":8,"leader":"Atef"}],"deathsDuring":[]}
+R181 fight-1 vTaken vs break (per ok sortie):
+{"seed":14491,"day":32,"setSize":2,"partySize":3,"fight1Monster":"lockpick_raccoon","fight1Outcome":"vKill","fight1VTaken":2,"fightsFought":2,"broke":false,"remaining":0,"cleared":true}
+{"seed":14491,"day":53,"setSize":2,"partySize":3,"fight1Monster":"herald","fight1Outcome":"vFlee","fight1VTaken":53,"fightsFought":1,"broke":true,"remaining":2,"cleared":false}
+{"seed":14492,"day":71,"setSize":4,"partySize":3,"fight1Monster":"white_noise_heron","fight1Outcome":"vKill","fight1VTaken":15,"fightsFought":4,"broke":true,"remaining":1,"cleared":true}
+{"seed":14492,"day":87,"setSize":2,"partySize":3,"fight1Monster":"callback","fight1Outcome":"vFlee","fight1VTaken":81,"fightsFought":1,"broke":true,"remaining":2,"cleared":false}
+{"seed":14492,"day":96,"setSize":3,"partySize":3,"fight1Monster":"paparazzo","fight1Outcome":"vKill","fight1VTaken":12,"fightsFought":2,"broke":true,"remaining":2,"cleared":true}
+{"seed":14492,"day":106,"setSize":2,"partySize":3,"fight1Monster":"gavel","fight1Outcome":"vDie","fight1VTaken":100,"fightsFought":1,"broke":true,"remaining":2,"cleared":false}
+{"seed":14492,"day":122,"setSize":2,"partySize":3,"fight1Monster":"buffering","fight1Outcome":"vFlee","fight1VTaken":25,"fightsFought":1,"broke":true,"remaining":2,"cleared":false}
+{"seed":14492,"day":132,"setSize":2,"partySize":2,"fight1Monster":"suburb","fight1Outcome":"vFlee","fight1VTaken":42,"fightsFought":1,"broke":true,"remaining":2,"cleared":false}
+{"seed":14492,"day":142,"setSize":3,"partySize":2,"fight1Monster":"congregation","fight1Outcome":"vFlee","fight1VTaken":78,"fightsFought":1,"broke":true,"remaining":3,"cleared":false}
+{"seed":14493,"day":56,"setSize":3,"partySize":3,"fight1Monster":"eulogy","fight1Outcome":"vFlee","fight1VTaken":67,"fightsFought":1,"broke":true,"remaining":3,"cleared":false}
+{"seed":14493,"day":77,"setSize":1,"partySize":3,"fight1Monster":"herald","fight1Outcome":"vFlee","fight1VTaken":17,"fightsFought":1,"broke":true,"remaining":1,"cleared":false}
+{"seed":14494,"day":51,"setSize":1,"partySize":3,"fight1Monster":"belltoad","fight1Outcome":"vKill","fight1VTaken":4,"fightsFought":1,"broke":false,"remaining":0,"cleared":true}
+{"seed":14494,"day":77,"setSize":5,"partySize":3,"fight1Monster":"focus_group","fight1Outcome":"mFlee","fight1VTaken":30,"fightsFought":4,"broke":true,"remaining":2,"cleared":true}
+{"seed":14494,"day":84,"setSize":3,"partySize":3,"fight1Monster":"eater","fight1Outcome":"vKill","fight1VTaken":66,"fightsFought":2,"broke":true,"remaining":2,"cleared":true}
+{"seed":14494,"day":102,"setSize":3,"partySize":2,"fight1Monster":"hushwolf","fight1Outcome":"vKill","fight1VTaken":7,"fightsFought":3,"broke":true,"remaining":1,"cleared":true}
+{"seed":14494,"day":110,"setSize":3,"partySize":3,"fight1Monster":"eulogy","fight1Outcome":"mFlee","fight1VTaken":36,"fightsFought":2,"broke":true,"remaining":2,"cleared":true}
+{"seed":14495,"day":70,"setSize":1,"partySize":3,"fight1Monster":"focus_group","fight1Outcome":"mFlee","fight1VTaken":24,"fightsFought":1,"broke":false,"remaining":0,"cleared":true}
+{"seed":14495,"day":81,"setSize":3,"partySize":3,"fight1Monster":"bright_idea","fight1Outcome":"vFlee","fight1VTaken":6,"fightsFought":1,"broke":true,"remaining":3,"cleared":false}
+{"seed":14495,"day":91,"setSize":5,"partySize":3,"fight1Monster":"buffering","fight1Outcome":"vFlee","fight1VTaken":8,"fightsFought":1,"broke":true,"remaining":5,"cleared":false}
+R181 fight-1 summary: okSorties=19 brokeAfterFight1=10 cleared=9 brokeAfter1VTaken=[53,81,100,25,42,78,67,17,6,8] clearedVTaken=[2,15,12,4,30,66,7,36,24] clearedOpeners={"vKill":6,"mFlee":3} brokeAfter1Openers={"vFlee":9,"vDie":1} multiMonsterCleared=7/16
+R181 SUPPLY DECOMPOSITION (searches / rare rolls / acquisitions / deposits):
+{"seed":14491,"days":122,"end":"game-over","ruinSearches":4,"forageByTile":{"creek":316,"grove":182,"trail_edge":10,"ruin":4,"meadow":44,"forest_floor":33},"scavengeItems":3,"scavengeMedItems":[],"medAcquisitions":[],"pharmacyDeposits":[],"medSupply":{"days":122,"daysWithPharmacy":0,"daysWithPack":0,"maxPharmacy":0,"maxPack":0,"firstPharmacyDay":null}}
+{"seed":14492,"days":149,"end":"game-over","ruinSearches":1,"forageByTile":{"meadow":218,"ruin":1,"creek":165,"grove":246,"forest_floor":47,"wetland":112},"scavengeItems":1,"scavengeMedItems":[],"medAcquisitions":[],"pharmacyDeposits":[],"medSupply":{"days":149,"daysWithPharmacy":0,"daysWithPack":0,"maxPharmacy":0,"maxPack":0,"firstPharmacyDay":null}}
+{"seed":14493,"days":107,"end":"game-over","ruinSearches":0,"forageByTile":{"meadow":222,"forest_floor":195,"grove":157,"trail_edge":1,"creek":1},"scavengeItems":0,"scavengeMedItems":[],"medAcquisitions":[],"pharmacyDeposits":[],"medSupply":{"days":107,"daysWithPharmacy":0,"daysWithPack":0,"maxPharmacy":0,"maxPack":0,"firstPharmacyDay":null}}
+{"seed":14494,"days":150,"end":"horizon","ruinSearches":0,"forageByTile":{"meadow":213,"creek":289,"grove":233,"trail_edge":19,"wetland":11,"forest_floor":26},"scavengeItems":0,"scavengeMedItems":[],"medAcquisitions":[],"pharmacyDeposits":[],"medSupply":{"days":150,"daysWithPharmacy":0,"daysWithPack":0,"maxPharmacy":0,"maxPack":0,"firstPharmacyDay":null}}
+{"seed":14495,"days":94,"end":"game-over","ruinSearches":0,"forageByTile":{"grove":154,"meadow":127,"forest_floor":50,"trail_edge":24,"creek":32},"scavengeItems":0,"scavengeMedItems":[],"medAcquisitions":[],"pharmacyDeposits":[],"medSupply":{"days":94,"daysWithPharmacy":0,"daysWithPack":0,"maxPharmacy":0,"maxPack":0,"firstPharmacyDay":null}}
+R181 medic-duty census (live holder + spans + stash pharmacy):
+{"seed":14491,"days":122,"end":"game-over","medicDuty":{"holder":null,"holderAlive":null,"holderId":null,"rawField":null,"spans":[{"holder":"Wanjiru","firstDay":3,"lastDay":3},{"holder":"Patricia","firstDay":6,"lastDay":38},{"holder":"Hnat","firstDay":41,"lastDay":42},{"holder":"Sofia","firstDay":45,"lastDay":80},{"holder":"Farid","firstDay":82,"lastDay":88}],"stashMedicine":{},"blocked":53,"cures":{"ability":18,"medicine":0}},"stashMid":{"day":60,"medicine":{}},"medSupply":{"days":122,"daysWithPharmacy":0,"daysWithPack":0,"maxPharmacy":0,"maxPack":0,"firstPharmacyDay":null},"betrayalSiteForced":1}
+{"seed":14492,"days":149,"end":"game-over","medicDuty":{"holder":null,"holderAlive":null,"holderId":null,"rawField":null,"spans":[],"stashMedicine":{},"blocked":0,"cures":{"ability":0,"medicine":0}},"stashMid":{"day":60,"medicine":{}},"medSupply":{"days":149,"daysWithPharmacy":0,"daysWithPack":0,"maxPharmacy":0,"maxPack":0,"firstPharmacyDay":null},"betrayalSiteForced":0}
+{"seed":14493,"days":107,"end":"game-over","medicDuty":{"holder":null,"holderAlive":null,"holderId":null,"rawField":null,"spans":[{"holder":"Meera","firstDay":3,"lastDay":103}],"stashMedicine":{},"blocked":72,"cures":{"ability":22,"medicine":0}},"stashMid":{"day":61,"medicine":{}},"medSupply":{"days":107,"daysWithPharmacy":0,"daysWithPack":0,"maxPharmacy":0,"maxPack":0,"firstPharmacyDay":null},"betrayalSiteForced":1}
+{"seed":14494,"days":150,"end":"horizon","medicDuty":{"holder":"Benoit","holderAlive":true,"holderId":"benoit_lambert","rawField":"benoit_lambert","spans":[{"holder":"Mia","firstDay":3,"lastDay":29},{"holder":"Benoit","firstDay":34,"lastDay":151}],"stashMedicine":{},"blocked":107,"cures":{"ability":26,"medicine":0}},"stashMid":{"day":60,"medicine":{}},"medSupply":{"days":150,"daysWithPharmacy":0,"daysWithPack":0,"maxPharmacy":0,"maxPack":0,"firstPharmacyDay":null},"betrayalSiteForced":1}
+{"seed":14495,"days":94,"end":"game-over","medicDuty":{"holder":null,"holderAlive":null,"holderId":null,"rawField":null,"spans":[],"stashMedicine":{},"blocked":0,"cures":{"ability":0,"medicine":0}},"stashMid":{"day":60,"medicine":{}},"medSupply":{"days":94,"daysWithPharmacy":0,"daysWithPack":0,"maxPharmacy":0,"maxPack":0,"firstPharmacyDay":null},"betrayalSiteForced":1}
+R182 STRANGER (A1-A7 leg question: is the "a stranger" cluster legible?):
+{"seed":14491,"days":122,"alienKills":0,"killDays":[],"gaps":[],"cooldownViolations":0,"feedLines":0,"fearLines":0,"retalLines":0,"silentKills":0,"strangerFightDeaths":0,"maxDeaths17d":0,"verdict":"VACUOUS (no kills)"}
+{"seed":14492,"days":149,"alienKills":0,"killDays":[],"gaps":[],"cooldownViolations":0,"feedLines":0,"fearLines":0,"retalLines":0,"silentKills":0,"strangerFightDeaths":0,"maxDeaths17d":0,"verdict":"VACUOUS (no kills)"}
+{"seed":14493,"days":107,"alienKills":0,"killDays":[],"gaps":[],"cooldownViolations":0,"feedLines":0,"fearLines":0,"retalLines":0,"silentKills":0,"strangerFightDeaths":0,"maxDeaths17d":0,"verdict":"VACUOUS (no kills)"}
+{"seed":14494,"days":150,"alienKills":0,"killDays":[],"gaps":[],"cooldownViolations":0,"feedLines":0,"fearLines":0,"retalLines":0,"silentKills":0,"strangerFightDeaths":0,"maxDeaths17d":0,"verdict":"VACUOUS (no kills)"}
+{"seed":14495,"days":94,"alienKills":0,"killDays":[],"gaps":[],"cooldownViolations":0,"feedLines":0,"fearLines":0,"retalLines":0,"silentKills":0,"strangerFightDeaths":0,"maxDeaths17d":0,"verdict":"VACUOUS (no kills)"}
+R182 STRANGER panel: kills=0 silent=0 cooldownViolations=0 verdict=VACUOUS
+R182 RUINROAD ARM (S1-S5 arm: search -> rare roll -> acquisition -> deposit -> cure):
+{"seed":14491,"days":122,"ruinRoad":{"searches":0,"trips":0,"bridges":0,"skips":{"dayDone":0,"guardKcal":0,"guardHealth":0,"guardTicks":0,"guardCrisis":0,"guardEncounter":0,"noTarget":0,"travelBlocked":0,"bridgeNoWood":0}},"medAcquisitions":[],"pharmacyDeposits":[],"medicineCures":0,"armRan":false}
+{"seed":14492,"days":149,"ruinRoad":{"searches":0,"trips":0,"bridges":0,"skips":{"dayDone":0,"guardKcal":0,"guardHealth":0,"guardTicks":0,"guardCrisis":0,"guardEncounter":0,"noTarget":0,"travelBlocked":0,"bridgeNoWood":0}},"medAcquisitions":[],"pharmacyDeposits":[],"medicineCures":0,"armRan":false}
+{"seed":14493,"days":107,"ruinRoad":{"searches":0,"trips":0,"bridges":0,"skips":{"dayDone":0,"guardKcal":0,"guardHealth":0,"guardTicks":0,"guardCrisis":0,"guardEncounter":0,"noTarget":0,"travelBlocked":0,"bridgeNoWood":0}},"medAcquisitions":[],"pharmacyDeposits":[],"medicineCures":0,"armRan":false}
+{"seed":14494,"days":150,"ruinRoad":{"searches":0,"trips":0,"bridges":0,"skips":{"dayDone":0,"guardKcal":0,"guardHealth":0,"guardTicks":0,"guardCrisis":0,"guardEncounter":0,"noTarget":0,"travelBlocked":0,"bridgeNoWood":0}},"medAcquisitions":[],"pharmacyDeposits":[],"medicineCures":0,"armRan":false}
+{"seed":14495,"days":94,"ruinRoad":{"searches":0,"trips":0,"bridges":0,"skips":{"dayDone":0,"guardKcal":0,"guardHealth":0,"guardTicks":0,"guardCrisis":0,"guardEncounter":0,"noTarget":0,"travelBlocked":0,"bridgeNoWood":0}},"medAcquisitions":[],"pharmacyDeposits":[],"medicineCures":0,"armRan":false}
+R186 ELIGIBILITY (alien playground gates per day boundary):
+{"seed":14491,"daysSampled":122,"apEligibleDays":117,"encounterEligibleDays":1,"bothEligibleDays":1,"havenEndDays":105,"firstWave2Day":8,"firstSystemArrivedDay":8,"readinessDaysReady":4,"readinessMaxScore":121,"readinessLastScore":40}
+{"seed":14492,"daysSampled":149,"apEligibleDays":143,"encounterEligibleDays":0,"bothEligibleDays":0,"havenEndDays":118,"firstWave2Day":8,"firstSystemArrivedDay":8,"readinessDaysReady":4,"readinessMaxScore":140,"readinessLastScore":50}
+{"seed":14493,"daysSampled":107,"apEligibleDays":101,"encounterEligibleDays":0,"bothEligibleDays":0,"havenEndDays":100,"firstWave2Day":9,"firstSystemArrivedDay":8,"readinessDaysReady":3,"readinessMaxScore":120,"readinessLastScore":50}
+{"seed":14494,"daysSampled":150,"apEligibleDays":144,"encounterEligibleDays":0,"bothEligibleDays":0,"havenEndDays":114,"firstWave2Day":9,"firstSystemArrivedDay":9,"readinessDaysReady":3,"readinessMaxScore":125,"readinessLastScore":50}
+{"seed":14495,"daysSampled":94,"apEligibleDays":88,"encounterEligibleDays":0,"bothEligibleDays":0,"havenEndDays":70,"firstWave2Day":9,"firstSystemArrivedDay":8,"readinessDaysReady":2,"readinessMaxScore":120,"readinessLastScore":50}
+R192 DRY CENSUS (dry-line hits by preceding pick; deflect_q bar = 0):
+{"transcripts":38,"dryLines":0,"byPick":{},"deflectQ":0,"verdict":"DRY-CENSUS deflect_q GO","hits":[]}
