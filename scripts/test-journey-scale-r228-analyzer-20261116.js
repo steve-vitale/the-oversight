@@ -72,6 +72,9 @@
 //   (38) march corpus missing on arm B -> "unavailable", exit 0 (never a fail).
 //   (39) arm B march: fired but never arrived (blocked-at) -> Q1 MARCH
 //       NO-GO (never arrived), exit 0.
+//   (40) LAGGED JOIN: march arrives d137, coalition fight slays the titan
+//       d138 while the scholar still stands on the lair tile -> the fight
+//       IS march-completed, Q1 MARCH GO, exit 0.
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
@@ -782,6 +785,37 @@ function runAnalyzer(dir) {
   ok('(39) never-arrived exit 0', r.code === 0, 'code=' + r.code);
   ok('(39) NO-GO never-arrived printed', /Q1 MARCH VERDICT: NO-GO on the lever — the march step fired but never arrived at a lair/.test(r.out), r.out);
   ok('(39) band B march days=2 arrived=0', /MARCH band B: march days=2 arrived=0/.test(r.out), r.out);
+}
+// (40) LAGGED JOIN (r228 closeout correction): march arrives d137, the
+// coalition fight slays the titan d138 while the scholar still stands on
+// the lair tile -> the fight IS march-completed, Q1 MARCH GO, exit 0.
+// A same-day-only join would call this NO-GO — the lag is the finding.
+{
+  const dir = buildCorpus((s) => {
+    const called = {
+      rows: [{ day: 86, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: ['ana_ruiz', 'ben_okafor', 'cid_patel'], held: null, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } }],
+      outcomes: [{ titan: 'herald', day: 138, outcome: 'slain', endDay: 138, result: 'victory' }],
+      verbCalls: [{ day: 86, fn: 'soundTitanCall', arg: 'herald', ok: true, err: null }],
+    };
+    const marched = {
+      rows: [
+        { day: 136, titan: 'herald', stage: 2, lair: [7, 4], from: [6, 4], arrived: true, onTile: false, pending: false, held: null },
+        { day: 137, titan: 'herald', stage: 2, lair: [7, 4], from: [6, 4], arrived: true, onTile: false, pending: false, held: null },
+      ],
+      outcomes: [{ titan: 'herald', day: 138, outcome: 'slain', endDay: 138, result: 'victory' }],
+    };
+    s[135613].muster = {
+      rows: [{ day: 85, titan: 'herald', stage: 2, present: true, ready: false, bladesAllied: 0, bladesHaven: 0, called: false, committed: 0, committedVids: [], held: 'short:2', council: { total: 8, need: 10, alliesProj: 5, havenProj: 3, ready: false } }],
+      outcomes: [],
+      verbCalls: [],
+    };
+    s[135613].armB = { muster: called, march: marched, ladderW4: 35 };
+  });
+  const r = runAnalyzer(dir);
+  ok('(40) lagged march GO exit 0', r.code === 0, 'code=' + r.code + '\n' + r.out.slice(-800));
+  ok('(40) MARCH VERDICT GO printed', /Q1 MARCH VERDICT: GO — the lever moves the titan link/.test(r.out), r.out);
+  ok('(40) band B slain-on-march=1 (lagged)', /MARCH band B: .* slain-on-march=1/.test(r.out), r.out);
+  ok('(40) B seed line slain-on-march=1 fights off-march=0', /seed 135613 arm B: march days=2 arrived=2 .* fights on-march=1 slain-on-march=1 fights off-march=0 slain-off-march=0/.test(r.out), r.out);
 }
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail === 0 ? 0 : 1);

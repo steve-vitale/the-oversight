@@ -785,10 +785,12 @@ console.log('Q1 MUSTER VERDICT: ' + musterVerdict);
 
 console.log('\n=== journey-scale r228 — Q1 MARCH (the r227-owed lever — measurement only) ===');
 // Per arm, per seed: the march ledger + the engine's own titan outcomes
-// log, joined BY DAY (outcomes carry day): a fought/slain outcome on a
-// day the march arrived is a march-completed fight; a fought/slain on a
-// non-march day is the meeting flow's own doing (or a field mauling —
-// which the outcomes log does NOT count as slain, per the r227
+// log, joined BY DAY (outcomes carry day) WITH A ONE-DAY LAG: a
+// fought/slain outcome on a march-arrival day OR the day after, same
+// titan, is a march-completed fight (the scholar stands on the lair tile
+// the morning after the march returns him there); a fought/slain 2+ days
+// after the last arrival is the meeting flow's own doing (or a field
+// mauling — which the outcomes log does NOT count as slain, per the r227
 // metric-review correction). Measurement only — never sets fail.
 const MARCH_ARMS = {};
 for (const arm of ['a', 'b']) {
@@ -803,11 +805,20 @@ for (const arm of ['a', 'b']) {
     const outcomes = te.outcomes || [];
     const marchDaySet = {};
     for (const r of mrows) if (r.arrived) marchDaySet[r.day + ':' + (r.titan || '')] = true;
+    // LAGGED JOIN (r228 closeout correction — the prereg rule counts any
+    // march-completed fight, not a same-day one): the fight engages when
+    // the scholar STANDS on the lair tile, which is the morning after the
+    // march returns him there as often as the march day itself (135614 B:
+    // marched d134–137, fight d138 while still on the tile). A fight on
+    // a march-arrival day OR the day after, same titan, is
+    // march-completed. A fight 2+ days after the last arrival is the
+    // meeting flow's own doing (or a field mauling — which the outcomes
+    // log does NOT count as slain).
     let foughtOn = 0, slainOn = 0, foughtOff = 0, slainOff = 0;
     for (const o of outcomes) {
       const isFight = (o.outcome === 'fought' || o.outcome === 'slain' || o.outcome === 'fled');
       if (!isFight) continue;
-      const onMarch = !!marchDaySet[o.day + ':' + (o.titan || '')];
+      const onMarch = !!marchDaySet[o.day + ':' + (o.titan || '')] || !!marchDaySet[(o.day - 1) + ':' + (o.titan || '')];
       if (onMarch) { foughtOn += 1; if (o.outcome === 'slain') slainOn += 1; }
       else { foughtOff += 1; if (o.outcome === 'slain') slainOff += 1; }
     }
