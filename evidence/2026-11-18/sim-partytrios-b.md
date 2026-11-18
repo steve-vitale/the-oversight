@@ -9,7 +9,8 @@ deviation from the task brief's shorthand — substrate holds
 reproduces — and one correction — the `partyQuads` fix the brief
 cites as landed never merged to master; see below).
 **Branch tip:** `sim-partytrios-b` (fix + proof + instruments at
-`2ba21945a`; this evidence + corpora below that tip).
+`e02ae10b3` after rebase onto master `dc5ebcfc8`; this evidence +
+corpora below that tip; pre-rebase tip `2ba21945a`).
 **Builds on:** `evidence/2026-11-18/sim-triodrought-b.md` (finding
 #2532: 22 trios launched, counter reads 0) and its frozen corpora;
 `evidence/2026-11-18/sim-winplandepart-b.md` (depart-path trio
@@ -282,7 +283,7 @@ this bump against the sense arm's HELD copy.
 ## Files
 
 - Prereg: `evidence/2026-11-18/sim-partytrios-b-prereg.md`
-- Fix + proof + instruments: commit `2ba21945a`
+- Fix + proof + instruments: commit `e02ae10b3` (pre-rebase `2ba21945a`)
 - Pilot corpora: `evidence/2026-11-18/perseed-partytrios-b-ctl/` (8 seeds), `evidence/2026-11-18/perseed-partytrios-b-arm/` (8 seeds)
 - Logs: `evidence/2026-11-18/partytrios-b-ctl.log`, `evidence/2026-11-18/partytrios-b-arm.log`
 - Analysis: `evidence/2026-11-18/partytrios-b-analysis.json` (analyzer exit 0, verdict GO)
