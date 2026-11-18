@@ -317,7 +317,7 @@ check('C3 armed corpus: 8 files, 0 instrument errors',
   a.files.armed === 8 && a.instrumentErrors.armed === 0,
   'files=' + a.files.armed + ' errors=' + a.instrumentErrors.armed);
 (function () {
-  const leg = loadDir(path.join(REPO, 'evidence', '2026-11-18', 'perseed-notickexact-a-base'));
+  const leg = loadDir(path.join(REPO, 'evidence', '2026-11-17', 'perseed-notickexact-a-base'));
   let ok = Object.keys(leg.bySeed).length === 8;
   for (const k of Object.keys(leg.bySeed)) {
     const j = leg.bySeed[k];
@@ -327,7 +327,7 @@ check('C3 armed corpus: 8 files, 0 instrument errors',
   check('C2b baseline files carry the notickexact-a run + on mode + recorder on', ok);
 })();
 (function () {
-  const leg = loadDir(path.join(REPO, 'evidence', '2026-11-18', 'perseed-notickexact-a-armed'));
+  const leg = loadDir(path.join(REPO, 'evidence', '2026-11-17', 'perseed-notickexact-a-armed'));
   let ok = Object.keys(leg.bySeed).length === 8;
   for (const k of Object.keys(leg.bySeed)) {
     const j = leg.bySeed[k];

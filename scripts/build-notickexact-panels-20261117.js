@@ -20,7 +20,7 @@
 // by this driver — left null, never faked). All other contract metrics
 // are null (not observed by this instrument).
 // Usage: node scripts/build-notickfix-panels-20261117.js [--out evidence/2026-11-18/notickexact-a-panel]
-//   [--before evidence/2026-11-18/perseed-notickexact-a-base] [--after evidence/2026-11-18/perseed-notickexact-a-armed]
+//   [--before evidence/2026-11-17/perseed-notickexact-a-base] [--after evidence/2026-11-17/perseed-notickexact-a-armed]
 //   [--seeds 103541,103542,...,103548]
 //   Reads <dir>/profilegate-b-s<seed>-notickexact-a-on.json per leg.
 'use strict';
@@ -33,8 +33,8 @@ const REPO = path.join(__dirname, '..');
 function argvVal(flag, dflt) {
   return process.argv.includes(flag) ? process.argv[process.argv.indexOf(flag) + 1] : dflt;
 }
-const BEFORE_DIR = path.join(REPO, argvVal('--before', 'evidence/2026-11-18/perseed-notickexact-a-base'));
-const AFTER_DIR = path.join(REPO, argvVal('--after', 'evidence/2026-11-18/perseed-notickexact-a-armed'));
+const BEFORE_DIR = path.join(REPO, argvVal('--before', 'evidence/2026-11-17/perseed-notickexact-a-base'));
+const AFTER_DIR = path.join(REPO, argvVal('--after', 'evidence/2026-11-17/perseed-notickexact-a-armed'));
 const OUT_PREFIX = argvVal('--out', path.join(REPO, 'evidence', '2026-11-18', 'notickexact-a-panel'));
 
 const contractDigest = crypto.createHash('sha256')

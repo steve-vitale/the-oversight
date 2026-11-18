@@ -374,4 +374,18 @@ records the kill classification per MEASUREMENT §14a.
 
 ## Corrections
 
-(None yet — record here, never silently edit above.)
+### Correction 1 — corpus dated parent is evidence/2026-11-17/ (before any sims)
+
+The frozen driver `scripts/profilegate-driver-20261117.js` hardcodes its
+output parent as `evidence/2026-11-17/` (line 1139, no override) and
+records that path in each per-seed JSON's `file` field. The prereg's
+"Legs" and "Instrument" sections named the OUTDIRs without a dated
+parent; the corpora therefore land in
+`evidence/2026-11-17/perseed-notickexact-a-base/` and
+`evidence/2026-11-17/perseed-notickexact-a-armed/`, NOT in 2026-11-18/.
+Moving them after the run would leave a stale `file` field in every
+corpus file, so they stay where the driver wrote them. All judgment
+files (prereg, analysis JSONs, panel, evidence, proof test) live in
+`evidence/2026-11-18/` as frozen. The analyzer, panel builder, and
+proof test corpus paths are re-pointed to 2026-11-17 accordingly. No
+metric, bar, band, or horizon changes — paths only.
