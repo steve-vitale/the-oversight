@@ -68,4 +68,9 @@
 
 ## Closeout
 
-- (to be filled: commits, rebase, ff-merge, rotation 2→3, lock deletion)
+- **Adoption (this occurrence, 00:45 CST 2026-11-18):** stale-lock recovery at run start (lock `oversight-playtest-loop-2026-11-18T04:43:27Z`, 2h old, no registry entry for that run_id; journey-deepening heartbeat 55 min stale; subagent.list checked — no live agent on this tree, unlike the Lane B succession case). Adopted the timed-out r236 worktree rather than playing a fresh leg (memory-carried todo). Verified before adopting: diff reviewed (growth-line build only, additions-only), proof tests re-run green, analyzer re-run byte-identical to the stored log, telemetry re-run QUIET, fresh gate run 334/6 (0 attributable). Heartbeat loop kept the tree alive through the ~1h closeout.
+- **Commits (branch `journey-deepening`, after rebase onto `03c53bf6e`):** `0bc7ccd84` build + tooling + prereg [needs-eyes]; `bcf8fce10` run note. Safe-commit index clobber struck on both commits (staged-as-deleted pattern); repaired each time via the `ls-tree -r` pipe, blobs verified against HEAD, tree clean after each repair. Rebase 2/2 clean, no conflicts (no master commit since the branch base touched titans.js, game.js, or any r236 file); proof tests re-run green on the rebased tip (muster 20/20, march 11/11, analyzer 70/70, growth PASS). Merged ff-only into local master.
+- **Merged locally, pending ship** — no bump, no push, no live verification (ship loop owns those).
+- Rotation 2→3 written with read-back; lock deleted at closeout after run_id verification.
+- Worktree released (`merged`), branch deleted; final reap sweep clean. Main tree verified clean after the merge.
+- The r236 panel corpus (per-seed JSONs + convo transcripts + analyzer log + gate logs) lives under the goal hidden_files evidence dir for 2026-11-17; the repo evidence dir holds the prereg and this run note.
