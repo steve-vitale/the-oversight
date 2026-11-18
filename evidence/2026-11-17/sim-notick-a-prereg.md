@@ -180,9 +180,10 @@ evidence table, but the FATE is the first post-D event.
 | Fate | What it means (corpus evidence) |
 | --- | --- |
 | `depart-next-day` | A depart row `launch` for the same vid+target on day D+1. Would contradict the stale-commit mechanism — record the depart row's `commitKind`/`commitPart` if it ever fires. |
+| `depart-later` | A depart row `launch` for the same vid+target on a day in (D+1, D+7] with NO `party_launch` re-bid before it (legacy-path launch without a brain commit). Benign — the plan did depart, just late. |
 | `re-bid-next-day` | A `party_launch` commit for the same vid+target on day D+1 (any part). |
 | `re-bid-later` | First `party_launch` commit for the same plan on day > D+1 (gap in days recorded). |
-| `plan-deleted-after` | Instance closes `plan-deleted` with closeDay in (D, D+7] and no re-bid before the close. |
+| `plan-deleted-after` | Instance closes `plan-deleted` (or `retargeted` — the plan for this target left winPlan for a new target; closeKind recorded in the table) with closeDay in (D, D+7] and no re-bid before the close. |
 | `holder-died-after` | Instance closes `holder-died` with closeDay in (D, D+7] and no re-bid before the close. |
 | `village-ended` | Village ends (`gameDays`) in (D, D+7] before any re-bid. |
 | `stall` | Plan still scored on later days but NO `party_launch` commit within 7 days after D. |
@@ -229,8 +230,9 @@ ONLY if BOTH hold:
   `plan-deleted-after`, `holder-died-after`, `village-ended`,
   `stall`, or `unknown` — harm to the PLAN beyond the one lost part-3
   action (the indoor hold instead of the core pick). If every fate is
-  `re-bid-next-day`, `re-bid-later`, or `depart-next-day`, the commit
-  is benign by the mechanism above and NO fix is built.
+  `re-bid-next-day`, `re-bid-later`, `depart-next-day`, or
+  `depart-later`, the commit is benign by the mechanism above and NO
+  fix is built.
 - **(b) Proof + no-drift control:** the fix passes a proof test AND a
   same-base balanced-panel control (fresh band, PROFILEGATE=1 on both
   legs, fix OFF vs ON) showing wall numbers unchanged
@@ -242,6 +244,20 @@ and in `hidden_files/sim-findings.md` via the coordinator — not built.
 If (a) holds but (b) fails, the fix is likewise documented, not landed.
 A landed fix touches feel/combat/UI only if the panel shows a
 behavioral change the player can see; `[needs-eyes]` then applies.
+
+## Correction 1 (before any extraction — reading the driver)
+
+- Added fate `depart-later`: the driver records TWO depart streams —
+  `dawnbidDeparts` (brain executor, always carries the authorizing
+  same-day commit) and `v4departs` (brain + legacy `winPlanDepart`,
+  which runs only when the brain does not own dawn). A brain depart
+  cannot precede its re-bid, but a legacy depart could in principle,
+  so a launch on D+2..D+7 with no earlier re-bid gets its own benign
+  bucket instead of forcing a mislabel.
+- `plan-deleted-after` now covers closeKind `retargeted` as well as
+  `plan-deleted` (both mean the plan for this target left winPlan);
+  the closeKind is recorded per instance in the evidence table.
+- Fix rule (a) benign list gains `depart-later`.
 
 ## Horizon (why 150d death-aware, same as profilegate-b)
 
