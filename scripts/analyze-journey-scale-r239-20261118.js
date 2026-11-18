@@ -96,7 +96,7 @@
 const fs = require('fs');
 const path = require('path');
 const EVIDIR = process.argv[2] ? path.resolve(process.argv[2]) : path.join(__dirname, '..', '..', '..', 'goals', 'the-scattering-roguelite-survival-game', 'hidden_files', 'evidence', '2026-11-18');
-const SEEDS = [103701, 103702, 103703, 103704, 103705, 103706, 103707, 103708];
+const SEEDS = [103821, 103822, 103823, 103824, 103825, 103826, 103827, 103828];
 const ROLLING_LIVED_DAYS = 492; // control per-seed mean 123 (492/4 — r233's 8-seed band total 984/8, rolled forward per r233's metric review; the stale 4-seed 119 is retired)
 let fail = 0;
 function readJson(p) {

@@ -5,7 +5,7 @@
 // raisetalk files, capture + betray watch per seed.
 //
 // Cases:
-//   (1) national 1/2 (seed 103701 nat=1 from d95) + blocker named on
+//   (1) national 1/2 (seed 103821 nat=1 from d95) + blocker named on
 //       the other seed -> Q1 NATIONAL GO, exit 0.
 //   (2) national 0/2, every seed with a named blocker (LEAD 2/3,
 //       TRADE 1/3) -> Q1 NATIONAL NO-GO-on-the-wall with the
@@ -102,7 +102,7 @@ const path = require('path');
 const os = require('os');
 const { execFileSync } = require('child_process');
 const ANALYZER = path.join(__dirname, 'analyze-journey-scale-r239-20261118.js');
-const SEEDS = [103701, 103702, 103703, 103704, 103705, 103706, 103707, 103708];
+const SEEDS = [103821, 103822, 103823, 103824, 103825, 103826, 103827, 103828];
 let pass = 0, fail = 0;
 function ok(name, cond, extra) {
   if (cond) { pass++; console.log('  ok   ' + name); }
@@ -248,21 +248,21 @@ function baseSpecs() {
   // (alive d141, over d109/d102, scattered d67); the added four keep the
   // mean in range and price the lesser seat 5/8 (bar >=4/8).
   return {
-    103701: { days: 141, over: false, rank: 'national', peakStage: 3, stage3Day: 95, lesserDay: 100, raiseOutcome: 'accepted',
+    103821: { days: 141, over: false, rank: 'national', peakStage: 3, stage3Day: 95, lesserDay: 100, raiseOutcome: 'accepted',
       natgate: { lastDay: 141, firstNat: 95, lead: [3, 3], cov: [0, 1], trade: [0, 0] } },
-    103702: { days: 109, over: false, rank: 'regional', peakStage: 3, stage3Day: 100, lesserDay: 105, raiseOutcome: 'accepted',
+    103822: { days: 109, over: false, rank: 'regional', peakStage: 3, stage3Day: 100, lesserDay: 105, raiseOutcome: 'accepted',
       natgate: { lastDay: 109, firstNat: null, lead: [2, 3], cov: [1, 2], trade: [0, 1], pend: 'lead@120' } },
-    103703: { days: 102, over: true, rank: 'regional', peakStage: 2, stage3Day: null, lesserDay: 100, raiseOutcome: null,
+    103823: { days: 102, over: true, rank: 'regional', peakStage: 2, stage3Day: null, lesserDay: 100, raiseOutcome: null,
       natgate: { lastDay: 102, firstNat: null, lead: [1, 2], cov: [0, 1], trade: [1, 3] } },
-    103704: { days: 67, over: true, rank: 'village', peakStage: 1, stage3Day: null, lesserDay: null, raiseOutcome: null,
+    103824: { days: 67, over: true, rank: 'village', peakStage: 1, stage3Day: null, lesserDay: null, raiseOutcome: null,
       natgate: { lastDay: 67, firstNat: null, lead: [0, 0], cov: [0, 0], trade: [0, 0] } },
-    103705: { days: 140, over: false, rank: 'regional', peakStage: 2, stage3Day: 105, lesserDay: 110, raiseOutcome: null,
+    103825: { days: 140, over: false, rank: 'regional', peakStage: 2, stage3Day: 105, lesserDay: 110, raiseOutcome: null,
       natgate: { lastDay: 140, firstNat: null, lead: [1, 2], cov: [1, 2], trade: [0, 1] } },
-    103706: { days: 132, over: false, rank: 'regional', peakStage: 2, stage3Day: 100, lesserDay: null, raiseOutcome: null,
+    103826: { days: 132, over: false, rank: 'regional', peakStage: 2, stage3Day: 100, lesserDay: null, raiseOutcome: null,
       natgate: { lastDay: 132, firstNat: null, lead: [2, 3], cov: [0, 1], trade: [1, 2] } },
-    103707: { days: 121, over: false, rank: 'regional', peakStage: 2, stage3Day: 98, lesserDay: 115, raiseOutcome: null,
+    103827: { days: 121, over: false, rank: 'regional', peakStage: 2, stage3Day: 98, lesserDay: 115, raiseOutcome: null,
       natgate: { lastDay: 121, firstNat: null, lead: [1, 3], cov: [2, 2], trade: [0, 0] } },
-    103708: { days: 108, over: true, rank: 'village', peakStage: 1, stage3Day: null, lesserDay: null, raiseOutcome: null,
+    103828: { days: 108, over: true, rank: 'village', peakStage: 1, stage3Day: null, lesserDay: null, raiseOutcome: null,
       natgate: { lastDay: 108, firstNat: null, lead: [0, 1], cov: [0, 0], trade: [1, 1] } },
   };
 }
@@ -292,14 +292,14 @@ function runAnalyzer(dir) {
   const r = runAnalyzer(dir);
   ok('(1) national 1/8 exit 0', r.code === 0, 'code=' + r.code + '\n' + r.out.slice(-600));
   ok('(1) Q1 NATIONAL GO printed', /Q1 NATIONAL: GO — on-ramp open \(1\/8/.test(r.out), r.out);
-  ok('(1) LEAD blocker named for 103702', /103702: .*closest road LEAD 2\/3 seasoned/.test(r.out), r.out);
+  ok('(1) LEAD blocker named for 103822', /103822: .*closest road LEAD 2\/3 seasoned/.test(r.out), r.out);
   ok('(1) raise guard GO', /Q1 SPOKEN-RAISE VERDICT: GO/.test(r.out), r.out);
 }
 // (2) national 0/8, blockers named -> NO-GO-on-the-wall, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].natgate.firstNat = null; s[103701].natgate.lead = [2, 3];
-    s[103701].rank = 'regional';
+    s[103821].natgate.firstNat = null; s[103821].natgate.lead = [2, 3];
+    s[103821].rank = 'regional';
   });
   const r = runAnalyzer(dir);
   ok('(2) national 0/8 with blockers exit 0', r.code === 0, 'code=' + r.code);
@@ -307,21 +307,21 @@ function runAnalyzer(dir) {
 }
 // (3) not-offered-spoken raise talk -> DEFECT, exit 1.
 {
-  const dir = buildCorpus((s) => { s[103702].raiseOutcome = 'not-offered-spoken'; });
+  const dir = buildCorpus((s) => { s[103822].raiseOutcome = 'not-offered-spoken'; });
   const r = runAnalyzer(dir);
   ok('(3) raise defect exit 1', r.code === 1, 'code=' + r.code);
-  ok('(3) DEFECT line printed', /DEFECT: journey-scale-r239-a-raisetalk-103702-1\.txt \(not-offered-spoken/.test(r.out), r.out);
+  ok('(3) DEFECT line printed', /DEFECT: journey-scale-r239-a-raisetalk-103822-1\.txt \(not-offered-spoken/.test(r.out), r.out);
 }
 // (4) vetbar disagreement -> NO-GO, exit 1.
 {
-  const dir = buildCorpus((s) => { s[103702].vetbarDisagree = true; });
+  const dir = buildCorpus((s) => { s[103822].vetbarDisagree = true; });
   const r = runAnalyzer(dir);
   ok('(4) vetbar disagreement exit 1', r.code === 1, 'code=' + r.code);
   ok('(4) VETBAR NO-GO printed', /Q3 VETBAR GUARD: NO-GO/.test(r.out), r.out);
 }
 // (5) no raise talks -> INCOMPLETE, exit 2.
 {
-  const dir = buildCorpus((s) => { s[103701].raiseOutcome = null; s[103702].raiseOutcome = null; });
+  const dir = buildCorpus((s) => { s[103821].raiseOutcome = null; s[103822].raiseOutcome = null; });
   const r = runAnalyzer(dir);
   ok('(5) no raise talks exit 2', r.code === 2, 'code=' + r.code);
   ok('(5) INCOMPLETE printed', /Q1 SPOKEN-RAISE VERDICT: INCOMPLETE/.test(r.out), r.out);
@@ -335,15 +335,15 @@ function runAnalyzer(dir) {
 }
 // (7) natgate missing on one seed -> ERROR row, exit 0.
 {
-  const dir = buildCorpus((s) => { s[103702].natgate = null; });
+  const dir = buildCorpus((s) => { s[103822].natgate = null; });
   const r = runAnalyzer(dir);
   ok('(7) missing natgate exit 0', r.code === 0, 'code=' + r.code);
-  ok('(7) ERROR row printed', /seed 103702: ERROR \(no natgate file\)/.test(r.out), r.out);
+  ok('(7) ERROR row printed', /seed 103822: ERROR \(no natgate file\)/.test(r.out), r.out);
 }
 // (8) -nv transcript: pre-talk line first, header on line 1, mime shown
 // and answered -> trap HOLD, villager named (not the filename).
 {
-  const dir = buildCorpus((s) => { s[103702].nvTranscript = { name: 'Boris', vid: 'boris_kowalski', mime: true, answered: true }; });
+  const dir = buildCorpus((s) => { s[103822].nvTranscript = { name: 'Boris', vid: 'boris_kowalski', mime: true, answered: true }; });
   const r = runAnalyzer(dir);
   ok('(8) -nv mime answered exit 0', r.code === 0, 'code=' + r.code);
   ok('(8) trap guard HOLD', /Q4 TRAP-LINE GUARD: HOLD/.test(r.out), r.out);
@@ -351,7 +351,7 @@ function runAnalyzer(dir) {
 }
 // (9) -nv transcript: mime shown, offered, never answered -> guard BREACH.
 {
-  const dir = buildCorpus((s) => { s[103702].nvTranscript = { name: 'Boris', vid: 'boris_kowalski', mime: true, answered: false }; });
+  const dir = buildCorpus((s) => { s[103822].nvTranscript = { name: 'Boris', vid: 'boris_kowalski', mime: true, answered: false }; });
   const r = runAnalyzer(dir);
   ok('(9) -nv mime unanswered exit 1', r.code === 1, 'code=' + r.code);
   ok('(9) trap guard BREACH printed', /Q4 TRAP-LINE GUARD: BREACH/.test(r.out), r.out);
@@ -359,7 +359,7 @@ function runAnalyzer(dir) {
 // (10) REGULAR day90 transcript (not -nv) with a mime shown and answered
 // -> the trap guard counts it (r197 fix — the Boris 135302 d90 shape).
 {
-  const dir = buildCorpus((s) => { s[103701].dayTranscript = { name: 'Boris', vid: 'boris_kowalski', mime: true, answered: true }; });
+  const dir = buildCorpus((s) => { s[103821].dayTranscript = { name: 'Boris', vid: 'boris_kowalski', mime: true, answered: true }; });
   const r = runAnalyzer(dir);
   ok('(10) regular-transcript mime counted exit 0', r.code === 0, 'code=' + r.code);
   ok('(10) trap sittings 1 answered 1', /trap-line sittings \(driver transcripts\): 1 \(answered 1, defect 0\)/.test(r.out), r.out);
@@ -369,8 +369,8 @@ function runAnalyzer(dir) {
 // re-check map — only nonverbal sittings count as comm-'none'.
 {
   const dir = buildCorpus((s) => {
-    s[103702].nvTranscript = { name: 'Boris', vid: 'boris_kowalski', mime: true, answered: true };
-    s[103701].verbalTranscript = { name: 'Miguel', vid: 'miguel_santos' };
+    s[103822].nvTranscript = { name: 'Boris', vid: 'boris_kowalski', mime: true, answered: true };
+    s[103821].verbalTranscript = { name: 'Miguel', vid: 'miguel_santos' };
   });
   const r = runAnalyzer(dir);
   ok('(11) verbal sitting excluded exit 0', r.code === 0, 'code=' + r.code);
@@ -381,15 +381,15 @@ function runAnalyzer(dir) {
 
 // (12) -nv transcript: 4x consecutive nv:nod -> nod-loop BREACH, exit 1.
 {
-  const dir = buildCorpus((s) => { s[103702].nvTranscript = { name: 'Mariko', vid: 'mariko_tanaka', mime: false, answered: false, streak: { gesture: 'nod', count: 4 } }; });
+  const dir = buildCorpus((s) => { s[103822].nvTranscript = { name: 'Mariko', vid: 'mariko_tanaka', mime: false, answered: false, streak: { gesture: 'nod', count: 4 } }; });
   const r = runAnalyzer(dir);
   ok('(12) 4x nv:nod exit 1', r.code === 1, 'code=' + r.code);
   ok('(12) nod-loop BREACH printed', /Q2 NOD-LOOP GUARD: BREACH/.test(r.out), r.out);
-  ok('(12) DEFECT line printed', /DEFECT: journey-scale-r239-a-transcript-103702-day90-nv\.txt \(nod-loop: 4x consecutive nv:nod\)/.test(r.out), r.out);
+  ok('(12) DEFECT line printed', /DEFECT: journey-scale-r239-a-transcript-103822-day90-nv\.txt \(nod-loop: 4x consecutive nv:nod\)/.test(r.out), r.out);
 }
 // (13) -nv transcript: 2x consecutive nv:nod -> nod guard HOLD, exit 0.
 {
-  const dir = buildCorpus((s) => { s[103702].nvTranscript = { name: 'Mariko', vid: 'mariko_tanaka', mime: false, answered: false, streak: { gesture: 'nod', count: 2 } }; });
+  const dir = buildCorpus((s) => { s[103822].nvTranscript = { name: 'Mariko', vid: 'mariko_tanaka', mime: false, answered: false, streak: { gesture: 'nod', count: 2 } }; });
   const r = runAnalyzer(dir);
   ok('(13) 2x nv:nod exit 0', r.code === 0, 'code=' + r.code);
   ok('(13) nod-loop HOLD printed', /Q2 NOD-LOOP GUARD: HOLD/.test(r.out), r.out);
@@ -397,7 +397,7 @@ function runAnalyzer(dir) {
 }
 // (14) -nv transcript: 4x consecutive nv:listen -> excluded, exit 0.
 {
-  const dir = buildCorpus((s) => { s[103702].nvTranscript = { name: 'Mariko', vid: 'mariko_tanaka', mime: false, answered: false, streak: { gesture: 'listen', count: 4 } }; });
+  const dir = buildCorpus((s) => { s[103822].nvTranscript = { name: 'Mariko', vid: 'mariko_tanaka', mime: false, answered: false, streak: { gesture: 'listen', count: 4 } }; });
   const r = runAnalyzer(dir);
   ok('(14) 4x nv:listen exit 0', r.code === 0, 'code=' + r.code);
   ok('(14) nod-loop HOLD printed', /Q2 NOD-LOOP GUARD: HOLD/.test(r.out), r.out);
@@ -405,29 +405,29 @@ function runAnalyzer(dir) {
 // (15) tribute ready d90, 51 attempts all veterans-short, payable=1
 // -> READY-UNPAYABLE (the M23 shape), exit 0 (measurement, no fail).
 {
-  const dir = buildCorpus((s) => { s[103701].tribute = { readyDay: 90, attempts: 51, delivered: 0, payableAtReady: 1 }; });
+  const dir = buildCorpus((s) => { s[103821].tribute = { readyDay: 90, attempts: 51, delivered: 0, payableAtReady: 1 }; });
   const r = runAnalyzer(dir);
   ok('(15) ready-unpayable exit 0', r.code === 0, 'code=' + r.code);
-  ok('(15) READY-UNPAYABLE printed', /seed 103701: tribute READY-UNPAYABLE \(ready=d90 payableAtReady=1 attempts=51 delivered=0 reasons=\{"veterans-short":51\}\)/.test(r.out), r.out);
+  ok('(15) READY-UNPAYABLE printed', /seed 103821: tribute READY-UNPAYABLE \(ready=d90 payableAtReady=1 attempts=51 delivered=0 reasons=\{"veterans-short":51\}\)/.test(r.out), r.out);
 }
 // (16) tribute delivered d96, 1/1 ok, payable=2 -> DELIVERED, exit 0.
 {
-  const dir = buildCorpus((s) => { s[103702].tribute = { readyDay: 96, attempts: 1, delivered: 1, payableAtReady: 2 }; });
+  const dir = buildCorpus((s) => { s[103822].tribute = { readyDay: 96, attempts: 1, delivered: 1, payableAtReady: 2 }; });
   const r = runAnalyzer(dir);
   ok('(16) delivered exit 0', r.code === 0, 'code=' + r.code);
-  ok('(16) DELIVERED printed', /seed 103702: tribute DELIVERED \(ready=d96 payableAtReady=2 attempts=1 delivered=1 reasons=\{"none":1\}\)/.test(r.out), r.out);
+  ok('(16) DELIVERED printed', /seed 103822: tribute DELIVERED \(ready=d96 payableAtReady=2 attempts=1 delivered=1 reasons=\{"none":1\}\)/.test(r.out), r.out);
 }
 // (17) tribute never readies (no tribute files at all) -> NEVER-READY, exit 0.
 {
   const dir = buildCorpus();
   const r = runAnalyzer(dir);
   ok('(17) never-ready exit 0', r.code === 0, 'code=' + r.code);
-  ok('(17) NEVER-READY printed for all seeds', /seed 103701: tribute NEVER-READY/.test(r.out) && /seed 103702: tribute NEVER-READY/.test(r.out), r.out);
+  ok('(17) NEVER-READY printed for all seeds', /seed 103821: tribute NEVER-READY/.test(r.out) && /seed 103822: tribute NEVER-READY/.test(r.out), r.out);
 }
 // (18) spotterWatch snapshot with 2 spotters -> counted, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].spotterWatch = [
+    s[103821].spotterWatch = [
       { id: 'a', name: 'Ana', alive: true, foodXpSpotter: 12, spotterSkill: 1 },
       { id: 'b', name: 'Ben', alive: true, foodXpSpotter: 3, spotterSkill: 0 },
       { id: 'c', name: 'Cid', alive: false, foodXpSpotter: 0, spotterSkill: 0 },
@@ -435,35 +435,35 @@ function runAnalyzer(dir) {
   });
   const r = runAnalyzer(dir);
   ok('(18) spotter snapshot exit 0', r.code === 0, 'code=' + r.code);
-  ok('(18) 2 with foodXp.spotter>0 counted', /seed 103701 end: roster 3 \(alive 2\) — foodXp\.spotter>0: 2 \(Ana:12, Ben:3\); spotter skill>=1: 1 \(Ana\)/.test(r.out), r.out);
+  ok('(18) 2 with foodXp.spotter>0 counted', /seed 103821 end: roster 3 \(alive 2\) — foodXp\.spotter>0: 2 \(Ana:12, Ben:3\); spotter skill>=1: 1 \(Ana\)/.test(r.out), r.out);
 }
 // (19) no spotterWatch (null) -> "unavailable", exit 0 (never a fail).
 {
   const dir = buildCorpus();
   const r = runAnalyzer(dir);
   ok('(19) missing spotter snapshot exit 0', r.code === 0, 'code=' + r.code);
-  ok('(19) unavailable printed', /seed 103701 d90: spotter snapshot unavailable/.test(r.out) && /seed 103701 end: spotter snapshot unavailable/.test(r.out), r.out);
+  ok('(19) unavailable printed', /seed 103821 d90: spotter snapshot unavailable/.test(r.out) && /seed 103821 end: spotter snapshot unavailable/.test(r.out), r.out);
 }
 // (20) d90 spotterWatch90 with 2 spotters + EMPTY end snapshot
 // (collapse band) -> the d90 line counts them, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].spotterWatch90 = [
+    s[103821].spotterWatch90 = [
       { id: 'a', name: 'Ana', alive: true, foodXpSpotter: 12, spotterSkill: 1 },
       { id: 'b', name: 'Ben', alive: true, foodXpSpotter: 3, spotterSkill: 0 },
     ];
-    s[103701].spotterWatch = [];
+    s[103821].spotterWatch = [];
   });
   const r = runAnalyzer(dir);
   ok('(20) d90 spotter exit 0', r.code === 0, 'code=' + r.code);
-  ok('(20) d90 counts 2 spotters', /seed 103701 d90: roster 2 \(alive 2\) — foodXp\.spotter>0: 2 \(Ana:12, Ben:3\); spotter skill>=1: 1 \(Ana\)/.test(r.out), r.out);
-  ok('(20) end snapshot reads empty', /seed 103701 end: roster 0 \(alive 0\) — foodXp\.spotter>0: 0; spotter skill>=1: 0/.test(r.out), r.out);
+  ok('(20) d90 counts 2 spotters', /seed 103821 d90: roster 2 \(alive 2\) — foodXp\.spotter>0: 2 \(Ana:12, Ben:3\); spotter skill>=1: 1 \(Ana\)/.test(r.out), r.out);
+  ok('(20) end snapshot reads empty', /seed 103821 end: roster 0 \(alive 0\) — foodXp\.spotter>0: 0; spotter skill>=1: 0/.test(r.out), r.out);
 }
 // (21a) w5inst: one lingerKey fought 3 times + one fresh full-HP wild
 // Editor -> MIXED (recurring lingerer plus a fresh spawn), exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].w5inst = {
+    s[103821].w5inst = {
       fights: [
         { day: 96, via: 'scholar', monsterId: 'editor', wave: 5, ent: { key: 'ling3', id: 'editor', tx: 4, ty: 4, mx: 3, my: 3, hp: 900, maxHp: 1200, veteran: false }, pending: null, feast: null },
         { day: 101, via: 'scholar', monsterId: 'editor', wave: 5, ent: { key: 'ling3', id: 'editor', tx: 4, ty: 4, mx: 4, my: 3, hp: 700, maxHp: 1200, veteran: false }, pending: null, feast: null },
@@ -478,14 +478,14 @@ function runAnalyzer(dir) {
   });
   const r = runAnalyzer(dir);
   ok('(21a) w5 mixed exit 0', r.code === 0, 'code=' + r.code);
-  ok('(21a) MIXED printed', /seed 103701: wave-5 fights 4 \(3 scholar, 1 field\) — MIXED/.test(r.out), r.out);
+  ok('(21a) MIXED printed', /seed 103821: wave-5 fights 4 \(3 scholar, 1 field\) — MIXED/.test(r.out), r.out);
   ok('(21a) recurring lingerKey named', /recurring 1: ling3 x3/.test(r.out), r.out);
   ok('(21a) hp trajectory printed', /editor hp trajectory: d96:900\/1200 \[ling3\] -> d101:700\/1200 \[ling3\] -> d110:700\/1200 \[ling3\] -> d115:1200\/1200 \(field:mFlee\)/.test(r.out), r.out);
 }
 // (21b) w5inst: only fresh full-HP fights -> SUCCESSIVE, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103702].w5inst = {
+    s[103822].w5inst = {
       fights: [
         { day: 98, via: 'scholar', monsterId: 'spoiler', wave: 5, ent: { key: null, id: 'spoiler', tx: 3, ty: 3, mx: 5, my: 5, hp: 1500, maxHp: 1500, veteran: false }, pending: null, feast: null },
         { day: 112, via: 'scholar', monsterId: 'spoiler', wave: 5, ent: { key: null, id: 'spoiler', tx: 7, ty: 2, mx: 2, my: 6, hp: 1500, maxHp: 1500, veteran: false }, pending: null, feast: null },
@@ -498,34 +498,34 @@ function runAnalyzer(dir) {
   });
   const r = runAnalyzer(dir);
   ok('(21b) w5 successive exit 0', r.code === 0, 'code=' + r.code);
-  ok('(21b) SUCCESSIVE printed', /seed 103702: wave-5 fights 2 \(2 scholar, 0 field\) — SUCCESSIVE/.test(r.out), r.out);
+  ok('(21b) SUCCESSIVE printed', /seed 103822: wave-5 fights 2 \(2 scholar, 0 field\) — SUCCESSIVE/.test(r.out), r.out);
 }
 // (22) missing w5inst file -> "unavailable", exit 0 (never a fail).
 {
   const dir = buildCorpus();
   const r = runAnalyzer(dir);
   ok('(22) missing w5inst exit 0', r.code === 0, 'code=' + r.code);
-  ok('(22) unavailable printed', /seed 103701: w5-instance corpus unavailable/.test(r.out), r.out);
+  ok('(22) unavailable printed', /seed 103821: w5-instance corpus unavailable/.test(r.out), r.out);
 }
 // (24a) sortie corpus on arm B: 2 lingerer days (wave-5 seen both), 1
 // sortie called (cleared 1), 1 held on pantry -> counted, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].sortie = { arm: 'B', rows: [
+    s[103821].sortie = { arm: 'B', rows: [
       { day: 103, seen: 2, w5seen: 1, minHp: 60, sumHp: 120, held: null, called: true, cleared: 1, broke: false },
       { day: 110, seen: 1, w5seen: 1, minHp: 90, sumHp: 90, held: 'pantry', called: false, cleared: null, broke: false },
     ] };
   });
   const r = runAnalyzer(dir);
   ok('(24a) sortie arm-B exit 0', r.code === 0, 'code=' + r.code);
-  ok('(24a) arm-B seed line counted', /seed 103701: arm=B lingerer days=2 \(wave-5 seen on 2\) sorties called=1 cleared=1 broke=0 held=\{"pantry":1\}/.test(r.out), r.out);
+  ok('(24a) arm-B seed line counted', /seed 103821: arm=B lingerer days=2 \(wave-5 seen on 2\) sorties called=1 cleared=1 broke=0 held=\{"pantry":1\}/.test(r.out), r.out);
   ok('(24a) SORTIE band line', /SORTIE band: lingerer days=2 \(wave-5 seen on 2\) sorties called=1 held=\{"pantry":1\}/.test(r.out), r.out);
 }
 // (24b) sortie corpus on arm A (rows present) -> the NOTE fires (the
 // step should be inert), exit 0 (measurement only, never a fail).
 {
   const dir = buildCorpus((s) => {
-    s[103702].sortie = { arm: 'A', rows: [
+    s[103822].sortie = { arm: 'A', rows: [
       { day: 100, seen: 1, w5seen: 0, minHp: 50, sumHp: 50, held: null, called: true, cleared: 1, broke: false },
     ] };
   });
@@ -537,7 +537,7 @@ function runAnalyzer(dir) {
 // full-HP fight -> ONE, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].w5inst = {
+    s[103821].w5inst = {
       fights: [
         { day: 96, via: 'scholar', monsterId: 'editor', wave: 5, ent: { key: 'ling3', id: 'editor', tx: 4, ty: 4, mx: 3, my: 3, hp: 900, maxHp: 1200, veteran: false }, pending: null, feast: null },
         { day: 101, via: 'scholar', monsterId: 'editor', wave: 5, ent: { key: 'ling3', id: 'editor', tx: 4, ty: 4, mx: 4, my: 3, hp: 700, maxHp: 1200, veteran: false }, pending: null, feast: null },
@@ -550,13 +550,13 @@ function runAnalyzer(dir) {
   });
   const r = runAnalyzer(dir);
   ok('(25) w5 one exit 0', r.code === 0, 'code=' + r.code);
-  ok('(25) ONE printed', /seed 103701: wave-5 fights 2 \(2 scholar, 0 field\) — ONE/.test(r.out), r.out);
+  ok('(25) ONE printed', /seed 103821: wave-5 fights 2 \(2 scholar, 0 field\) — ONE/.test(r.out), r.out);
   ok('(25) recurring lingerKey named', /recurring 1: ling3 x2/.test(r.out), r.out);
 }
 // (26) w5inst: fresh full-HP fights of two species -> SUCCESSIVE, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103702].w5inst = {
+    s[103822].w5inst = {
       fights: [
         { day: 98, via: 'scholar', monsterId: 'editor', wave: 5, ent: { key: null, id: 'editor', tx: 3, ty: 3, mx: 5, my: 5, hp: 1200, maxHp: 1200, veteran: false }, pending: null, feast: null },
         { day: 112, via: 'scholar', monsterId: 'spoiler', wave: 5, ent: { key: null, id: 'spoiler', tx: 7, ty: 2, mx: 2, my: 6, hp: 1500, maxHp: 1500, veteran: false }, pending: null, feast: null },
@@ -569,7 +569,7 @@ function runAnalyzer(dir) {
   });
   const r = runAnalyzer(dir);
   ok('(26) w5 successive two-species exit 0', r.code === 0, 'code=' + r.code);
-  ok('(26) SUCCESSIVE printed', /seed 103702: wave-5 fights 2 \(2 scholar, 0 field\) — SUCCESSIVE/.test(r.out), r.out);
+  ok('(26) SUCCESSIVE printed', /seed 103822: wave-5 fights 2 \(2 scholar, 0 field\) — SUCCESSIVE/.test(r.out), r.out);
 }
 // (27) the lived-days control is the per-seed mean 123 (492/4): the
 // base fixture mean 115.0 (total 920 over 8 seeds) is -6.5%, HOLD,
@@ -584,7 +584,7 @@ function runAnalyzer(dir) {
 // MOVED, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = {
+    s[103821].muster = {
       rows: [
         { day: 85, titan: 'herald', stage: 2, present: true, ready: false, bladesAllied: 0, bladesHaven: 0, called: false, committed: 0, committedVids: [], held: 'short:2', council: { total: 8, need: 10, alliesProj: 5, havenProj: 3, ready: false } },
         { day: 86, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: ['ana_ruiz', 'ben_okafor', 'cid_patel'], held: null, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } },
@@ -597,19 +597,19 @@ function runAnalyzer(dir) {
         { day: 86, fn: 'titanCommitOwn', arg: 'herald', ok: true, err: null },
       ],
     };
-    s[103701].ladderW4 = 35;
+    s[103821].ladderW4 = 35;
   });
   const r = runAnalyzer(dir);
   ok('(28) muster MOVED exit 0', r.code === 0, 'code=' + r.code + '\n' + r.out.slice(-800));
   ok('(28) MUSTER VERDICT MOVED printed', /Q1 MUSTER VERDICT A: MOVED — the muster slew 1 titan\(s\); wave-4 fights 245 \/ kills 24, living-veteran peak 2, national 1\/8/.test(r.out), r.out);
   ok('(28) band slain=1', /MUSTER band A: .* slain=1/.test(r.out), r.out);
-  ok('(28) seed line slain=1', /seed 103701 arm A: titan days=2 called=1 readyDays=1 .* outcomes slain=1 fought=1 refused=0 fled=0/.test(r.out), r.out);
+  ok('(28) seed line slain=1', /seed 103821 arm A: titan days=2 called=1 readyDays=1 .* outcomes slain=1 fought=1 refused=0 fled=0/.test(r.out), r.out);
   ok('(28) verb calls counted', /verbCalls=\{"titanWarCouncil":1,"soundTitanCall":1,"titanCommitOwn":2\}/.test(r.out), r.out);
 }
 // (29) single-arm muster: held short, call never sounded -> NOT-CALLED, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = {
+    s[103821].muster = {
       rows: [{ day: 90, titan: 'herald', stage: 2, present: true, ready: false, bladesAllied: 0, bladesHaven: 0, called: false, committed: 0, committedVids: [], held: 'short:3', council: { total: 7, need: 10, alliesProj: 4, havenProj: 3, ready: false } }],
       outcomes: [{ titan: 'herald', day: 91, outcome: 'refused', detail: { gate: 'muster', have: 0, need: 10 } }],
       verbCalls: [{ day: 90, fn: 'titanWarCouncil', arg: 'herald', ok: true, err: null }],
@@ -623,7 +623,7 @@ function runAnalyzer(dir) {
 // (30) single-arm muster: call sounded, coalition fight fled -> FOUGHT-NOT-SLAIN, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = {
+    s[103821].muster = {
       rows: [{ day: 86, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: ['ana_ruiz'], held: null, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } }],
       outcomes: [{ titan: 'herald', day: 95, outcome: 'fled', endDay: 95, result: 'fled' }],
       verbCalls: [{ day: 86, fn: 'soundTitanCall', arg: 'herald', ok: true, err: null }],
@@ -637,7 +637,7 @@ function runAnalyzer(dir) {
 // (31) single-arm muster: titan slain on one ready row -> MOVED, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = {
+    s[103821].muster = {
       rows: [{ day: 86, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: [], held: null, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } }],
       outcomes: [{ titan: 'herald', day: 100, outcome: 'slain', endDay: 100, result: 'victory' }],
       verbCalls: [],
@@ -651,7 +651,7 @@ function runAnalyzer(dir) {
 // other seven, missing=7, exit 0 (never a fail).
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = {
+    s[103821].muster = {
       rows: [{ day: 90, titan: 'herald', stage: 2, present: true, ready: false, bladesAllied: 0, bladesHaven: 0, called: false, committed: 0, committedVids: [], held: 'short:1', council: { total: 9, need: 10, alliesProj: 6, havenProj: 3, ready: false } }],
       outcomes: [],
       verbCalls: [],
@@ -659,59 +659,59 @@ function runAnalyzer(dir) {
   });
   const r = runAnalyzer(dir);
   ok('(32) missing muster corpus exit 0', r.code === 0, 'code=' + r.code);
-  ok('(32) unavailable printed', /seed 103702 arm A: muster corpus unavailable/.test(r.out), r.out);
+  ok('(32) unavailable printed', /seed 103822 arm A: muster corpus unavailable/.test(r.out), r.out);
   ok('(32) band missing=7', /MUSTER band A: .* missing=7/.test(r.out), r.out);
 }
 // (33) single-arm muster: a committed Haven blade dies -> committedDeaths=1
 // in the cost read, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = {
+    s[103821].muster = {
       rows: [{ day: 86, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: ['ana_ruiz', 'ben_okafor', 'cid_patel'], held: null, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } }],
       outcomes: [{ titan: 'herald', day: 110, outcome: 'slain', endDay: 110, result: 'victory' }],
       verbCalls: [],
     };
-    s[103701].deathcensus = { deaths: [{ vid: 'ana_ruiz', day: 115, cause: 'the herald', name: 'Ana' }] };
-    s[103701].ladderW4 = 35;
+    s[103821].deathcensus = { deaths: [{ vid: 'ana_ruiz', day: 115, cause: 'the herald', name: 'Ana' }] };
+    s[103821].ladderW4 = 35;
   });
   const r = runAnalyzer(dir);
   ok('(33) committed death exit 0', r.code === 0, 'code=' + r.code);
-  ok('(33) committedDeaths=1 with name/day', /seed 103701 arm A: .* committedDeaths=1 \(ana_ruiz d115 the herald\)/.test(r.out), r.out);
+  ok('(33) committedDeaths=1 with name/day', /seed 103821 arm A: .* committedDeaths=1 \(ana_ruiz d115 the herald\)/.test(r.out), r.out);
   ok('(33) cost read counts 1 committed death on each arm', /COST READ B-vs-A: .* committed Haven blades who died: A=1 B=1/.test(r.out), r.out);
 }
 // (34) single-arm march: arrived + fought + slain on a march day -> Q1
 // MARCH MOVED, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = {
+    s[103821].muster = {
       rows: [{ day: 86, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: ['ana_ruiz', 'ben_okafor', 'cid_patel'], held: null, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } }],
       outcomes: [{ titan: 'herald', day: 110, outcome: 'slain', endDay: 110, result: 'victory' }],
       verbCalls: [{ day: 86, fn: 'soundTitanCall', arg: 'herald', ok: true, err: null }],
     };
-    s[103701].march = {
+    s[103821].march = {
       rows: [
         { day: 100, titan: 'herald', stage: 2, lair: [7, 4], from: [4, 4], arrived: false, onTile: false, pending: false, held: 'blocked-at:5,4' },
         { day: 110, titan: 'herald', stage: 2, lair: [7, 4], from: [6, 4], arrived: true, onTile: false, pending: true, held: null },
       ],
       outcomes: [{ titan: 'herald', day: 110, outcome: 'slain', endDay: 110, result: 'victory' }],
     };
-    s[103701].ladderW4 = 35;
+    s[103821].ladderW4 = 35;
   });
   const r = runAnalyzer(dir);
   ok('(34) march MOVED exit 0', r.code === 0, 'code=' + r.code + '\n' + r.out.slice(-800));
   ok('(34) MARCH VERDICT MOVED printed', /Q1 MARCH VERDICT A: MOVED — a march-completed fight slew 1 titan\(s\); wave-4 fights 245 \/ kills 24/.test(r.out), r.out);
   ok('(34) band slain-on-march=1', /MARCH band A: .* slain-on-march=1/.test(r.out), r.out);
-  ok('(34) seed line fought-on-march=1 slain-on-march=1', /seed 103701 arm A: march days=2 arrived=1 .* fights on-march=1 slain-on-march=1 fights off-march=0 slain-off-march=0/.test(r.out), r.out);
+  ok('(34) seed line fought-on-march=1 slain-on-march=1', /seed 103821 arm A: march days=2 arrived=1 .* fights on-march=1 slain-on-march=1 fights off-march=0 slain-off-march=0/.test(r.out), r.out);
 }
 // (35) single-arm march: arrived, no meeting (0 fought) -> ARRIVED-NO-FIGHT, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = {
+    s[103821].muster = {
       rows: [{ day: 86, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: ['ana_ruiz'], held: null, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } }],
       outcomes: [{ titan: 'herald', day: 91, outcome: 'refused', detail: { gate: 'muster', have: 0, need: 10 } }],
       verbCalls: [],
     };
-    s[103701].march = {
+    s[103821].march = {
       rows: [
         { day: 95, titan: 'herald', stage: 2, lair: [7, 4], from: [4, 4], arrived: true, onTile: false, pending: false, held: null },
         { day: 96, titan: 'herald', stage: 2, lair: [7, 4], from: [7, 4], arrived: true, onTile: true, pending: false, held: null },
@@ -728,12 +728,12 @@ function runAnalyzer(dir) {
 // FOUGHT-NOT-SLAIN, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = {
+    s[103821].muster = {
       rows: [{ day: 86, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: ['ana_ruiz'], held: null, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } }],
       outcomes: [{ titan: 'herald', day: 95, outcome: 'fled', endDay: 95, result: 'fled' }],
       verbCalls: [],
     };
-    s[103701].march = {
+    s[103821].march = {
       rows: [{ day: 95, titan: 'herald', stage: 2, lair: [7, 4], from: [5, 4], arrived: true, onTile: false, pending: true, held: null }],
       outcomes: [{ titan: 'herald', day: 95, outcome: 'fled', endDay: 95, result: 'fled' }],
     };
@@ -747,12 +747,12 @@ function runAnalyzer(dir) {
 // fired (no march rows) -> NO-MARCH, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = {
+    s[103821].muster = {
       rows: [{ day: 86, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: [], held: null, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } }],
       outcomes: [{ titan: 'herald', day: 100, outcome: 'slain', endDay: 100, result: 'victory' }],
       verbCalls: [],
     };
-    s[103701].march = { rows: [], outcomes: [] };
+    s[103821].march = { rows: [], outcomes: [] };
   });
   const r = runAnalyzer(dir);
   ok('(37) no-march exit 0', r.code === 0, 'code=' + r.code);
@@ -761,22 +761,22 @@ function runAnalyzer(dir) {
 // (38) march corpus missing on all seeds -> "unavailable", missing=8, exit 0 (never a fail).
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = { rows: [], outcomes: [], verbCalls: [] };
+    s[103821].muster = { rows: [], outcomes: [], verbCalls: [] };
   });
   const r = runAnalyzer(dir);
   ok('(38) missing march corpus exit 0', r.code === 0, 'code=' + r.code);
-  ok('(38) unavailable printed', /seed 103701 arm A: march corpus unavailable/.test(r.out), r.out);
+  ok('(38) unavailable printed', /seed 103821 arm A: march corpus unavailable/.test(r.out), r.out);
   ok('(38) band missing=8', /MARCH band A: .* missing=8/.test(r.out), r.out);
 }
 // (39) single-arm march: fired but never arrived (blocked-at) -> NO-ARRIVAL, exit 0.
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = {
+    s[103821].muster = {
       rows: [{ day: 86, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: ['ana_ruiz'], held: null, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } }],
       outcomes: [],
       verbCalls: [],
     };
-    s[103701].march = {
+    s[103821].march = {
       rows: [
         { day: 90, titan: 'herald', stage: 2, lair: [7, 4], from: [4, 4], arrived: false, onTile: false, pending: false, held: 'blocked-at:5,4' },
         { day: 91, titan: 'herald', stage: 2, lair: [7, 4], from: [4, 4], arrived: false, onTile: false, pending: false, held: 'blocked-at:5,4' },
@@ -795,25 +795,25 @@ function runAnalyzer(dir) {
 // A same-day-only join would call this NO-ARRIVAL — the lag is the finding.
 {
   const dir = buildCorpus((s) => {
-    s[103701].muster = {
+    s[103821].muster = {
       rows: [{ day: 86, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: ['ana_ruiz', 'ben_okafor', 'cid_patel'], held: null, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } }],
       outcomes: [{ titan: 'herald', day: 138, outcome: 'slain', endDay: 138, result: 'victory' }],
       verbCalls: [{ day: 86, fn: 'soundTitanCall', arg: 'herald', ok: true, err: null }],
     };
-    s[103701].march = {
+    s[103821].march = {
       rows: [
         { day: 136, titan: 'herald', stage: 2, lair: [7, 4], from: [6, 4], arrived: true, onTile: false, pending: false, held: null },
         { day: 137, titan: 'herald', stage: 2, lair: [7, 4], from: [6, 4], arrived: true, onTile: false, pending: false, held: null },
       ],
       outcomes: [{ titan: 'herald', day: 138, outcome: 'slain', endDay: 138, result: 'victory' }],
     };
-    s[103701].ladderW4 = 35;
+    s[103821].ladderW4 = 35;
   });
   const r = runAnalyzer(dir);
   ok('(40) lagged march MOVED exit 0', r.code === 0, 'code=' + r.code + '\n' + r.out.slice(-800));
   ok('(40) MARCH VERDICT MOVED printed', /Q1 MARCH VERDICT A: MOVED — a march-completed fight slew 1 titan\(s\); wave-4 fights 245 \/ kills 24/.test(r.out), r.out);
   ok('(40) band slain-on-march=1 (lagged)', /MARCH band A: .* slain-on-march=1/.test(r.out), r.out);
-  ok('(40) seed line slain-on-march=1 fights off-march=0', /seed 103701 arm A: march days=2 arrived=2 .* fights on-march=1 slain-on-march=1 fights off-march=0 slain-off-march=0/.test(r.out), r.out);
+  ok('(40) seed line slain-on-march=1 fights off-march=0', /seed 103821 arm A: march days=2 arrived=2 .* fights on-march=1 slain-on-march=1 fights off-march=0 slain-off-march=0/.test(r.out), r.out);
 }
 // (41) Q6(a): 12 'refused' outcomes on one seed (worst day 3) ->
 // measurement-only line, no bar; arm A mask NOT reproduced (no mercy
@@ -824,12 +824,12 @@ function runAnalyzer(dir) {
     for (const d of [90, 90, 90, 91, 91, 91, 92, 93, 94, 95, 96, 97]) {
       refused.push({ titan: 'herald', day: d, outcome: 'refused', detail: { gate: 'muster', have: 0, need: 10 } });
     }
-    s[103701].muster = { rows: [], outcomes: refused, verbCalls: [] };
+    s[103821].muster = { rows: [], outcomes: refused, verbCalls: [] };
   });
   const r = runAnalyzer(dir);
   ok('(41) refusal measurement exit 0', r.code === 0, 'code=' + r.code);
-  ok('(41) per-seed Q6(a) line', /seed 103701 arm A: Q6\(a\) refused=12 on 8 day\(s\), worst day 3; Q6\(b\) mercy rows=0 held=0 \(present-held 0\) proceeded=0 live-sitting held=0 unknown-ts=0/.test(r.out), r.out);
-  ok('(41) measurement-only line, no bar', /Q6\(a\) REFUSAL SPAM \(measurement only, no bar\): worst day 3 refused \(arm A seed 103701\)/.test(r.out), r.out);
+  ok('(41) per-seed Q6(a) line', /seed 103821 arm A: Q6\(a\) refused=12 on 8 day\(s\), worst day 3; Q6\(b\) mercy rows=0 held=0 \(present-held 0\) proceeded=0 live-sitting held=0 unknown-ts=0/.test(r.out), r.out);
+  ok('(41) measurement-only line, no bar', /Q6\(a\) REFUSAL SPAM \(measurement only, no bar\): worst day 3 refused \(arm A seed 103821\)/.test(r.out), r.out);
   ok('(41) Q6 VERDICT INCOMPLETE (arm A mask not reproduced)', /Q6 VERDICT: INCOMPLETE — arm A did not reproduce the mask/.test(r.out), r.out);
 }
 // (42) Q6(b): arm A 8 mercy-held rows + 1 live-sitting hold; arm B the
@@ -847,14 +847,14 @@ function runAnalyzer(dir) {
       rowsB.push({ day: d, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: ['ana_ruiz'], held: null, ta: true, ts: false, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } });
     }
     rowsB.push({ day: 108, titan: 'herald', stage: 2, present: true, ready: false, bladesAllied: 0, bladesHaven: 0, called: false, committed: 0, committedVids: [], held: 'tableSitting', ta: true, ts: true, council: { total: 0, need: 10, alliesProj: 0, havenProj: 0, ready: false } });
-    s[103701].muster = { rows: rowsA, outcomes: [], verbCalls: [] };
-    s[103701].armB = { muster: { rows: rowsB, outcomes: [], verbCalls: [] } };
+    s[103821].muster = { rows: rowsA, outcomes: [], verbCalls: [] };
+    s[103821].armB = { muster: { rows: rowsB, outcomes: [], verbCalls: [] } };
   });
   const r = runAnalyzer(dir);
   ok('(42) tableActive distinction exit 0', r.code === 0, 'code=' + r.code);
-  ok('(42) per-seed arm-A line', /seed 103701 arm A: Q6\(a\) refused=0 on 0 day\(s\), worst day 0; Q6\(b\) mercy rows=8 held=8 \(present-held 8\) proceeded=0 live-sitting held=1 unknown-ts=0/.test(r.out), r.out);
-  ok('(42) per-seed arm-B line', /seed 103701 arm B: Q6\(a\) refused=0 on 0 day\(s\), worst day 0; Q6\(b\) mercy rows=8 held=0 \(present-held 0\) proceeded=8 live-sitting held=1 unknown-ts=0/.test(r.out), r.out);
-  ok('(42) ARM A MASK REPRODUCED printed', /Q6\(b\) ARM A TABLEACTIVE MASK: REPRODUCED \(worst seed 103701: 8 present-held mercy rows; bar >=7\)/.test(r.out), r.out);
+  ok('(42) per-seed arm-A line', /seed 103821 arm A: Q6\(a\) refused=0 on 0 day\(s\), worst day 0; Q6\(b\) mercy rows=8 held=8 \(present-held 8\) proceeded=0 live-sitting held=1 unknown-ts=0/.test(r.out), r.out);
+  ok('(42) per-seed arm-B line', /seed 103821 arm B: Q6\(a\) refused=0 on 0 day\(s\), worst day 0; Q6\(b\) mercy rows=8 held=0 \(present-held 0\) proceeded=8 live-sitting held=1 unknown-ts=0/.test(r.out), r.out);
+  ok('(42) ARM A MASK REPRODUCED printed', /Q6\(b\) ARM A TABLEACTIVE MASK: REPRODUCED \(worst seed 103821: 8 present-held mercy rows; bar >=7\)/.test(r.out), r.out);
   ok('(42) ARM B DISTINCTION line', /Q6\(b\) ARM B TABLEACTIVE DISTINCTION: mercy rows held 0 on every seed; mercy-window musters proceeded 8; live-sitting holds fired 1/.test(r.out), r.out);
   ok('(42) Q6 VERDICT GO printed', /Q6 VERDICT: GO — the distinction holds: arm A reproduced the mask \(worst 8 present-held mercy rows\), arm B held 0 mercy rows, 8 mercy-window muster\(s\) proceeded, 1 live-sitting hold\(s\) fired/.test(r.out), r.out);
 }
@@ -879,12 +879,12 @@ function runAnalyzer(dir) {
     for (let d = 100; d <= 107; d++) {
       rowsB.push({ day: d, titan: 'herald', stage: 2, present: true, ready: true, bladesAllied: 7, bladesHaven: 3, called: true, committed: 3, committedVids: ['ana_ruiz'], held: d <= 101 ? 'tableSitting' : null, ta: true, ts: false, council: { total: 10, need: 10, alliesProj: 7, havenProj: 3, ready: true } });
     }
-    s[103701].muster = { rows: rowsA, outcomes: [], verbCalls: [] };
-    s[103701].armB = { muster: { rows: rowsB, outcomes: [], verbCalls: [] } };
+    s[103821].muster = { rows: rowsA, outcomes: [], verbCalls: [] };
+    s[103821].armB = { muster: { rows: rowsB, outcomes: [], verbCalls: [] } };
   });
   const r = runAnalyzer(dir);
   ok('(44) arm-B still holds exit 0', r.code === 0, 'code=' + r.code);
-  ok('(44) ARM B DISTINCTION still-held line', /Q6\(b\) ARM B TABLEACTIVE DISTINCTION: mercy rows held STILL HELD \(worst 2 on 103701\); mercy-window musters proceeded 6; live-sitting holds fired 0/.test(r.out), r.out);
+  ok('(44) ARM B DISTINCTION still-held line', /Q6\(b\) ARM B TABLEACTIVE DISTINCTION: mercy rows held STILL HELD \(worst 2 on 103821\); mercy-window musters proceeded 6; live-sitting holds fired 0/.test(r.out), r.out);
   ok('(44) Q6 VERDICT NO-GO printed', /Q6 VERDICT: NO-GO — arm B still holds mercy rows; the distinction does not hold/.test(r.out), r.out);
 }
 // (45) band wave-4 fights/kills lines: base fixture fights 240 (30 x 8)
