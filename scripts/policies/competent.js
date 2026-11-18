@@ -2327,6 +2327,19 @@ function beastFreeTiles(Game, f, px, py) {
 // monster's trick, as today); 'stuck' means candidates existed but none
 // moved (the caller records it and ends the turn WITHOUT counting the
 // trick — the trick didn't happen, so it must not be counted as performed).
+// DOOR TILE (journey-landing r145, 2026-11-18): stepping on a door tile
+// in combat escapes the fight (game.js FLEE BY DOOR, Steve 2026-10-05) —
+// a designed exit, not a move. Fight steps (approach, dodge) must never
+// take one by accident: the panel's seed-1234 d9 fight ended 'fled' with
+// 4 allies behind because a dodge step landed on the hall door at (4,6).
+// Fail-open: a Game without genDetail has no doors to skip.
+function isDoorTile(Game, x, y) {
+  try {
+    if (typeof Game.genDetail !== 'function' || !Game.map) return false;
+    const detail = Game.genDetail(Game.map.px, Game.map.py);
+    return !!(detail && detail[y] && detail[y][x] === 'door');
+  } catch (e) { return false; }
+}
 function beastDodgeMove(Game, f, p, px, py, avoid) {
   const cands = beastFreeTiles(Game, f, px, py);
   cands.sort((a, b) =>
@@ -2335,6 +2348,10 @@ function beastDodgeMove(Game, f, p, px, py, avoid) {
   let any = false;
   for (const c of cands) {
     if (avoid && avoid.has(c[0] + ',' + c[1])) continue;
+    // DOOR-SKIP (r145): a dodge step onto a door tile escapes the fight.
+    // Skip before `any` so a doors-only board reads as 'none' (no valid
+    // tile), not 'stuck'.
+    if (isDoorTile(Game, c[0], c[1])) continue;
     any = true;
     if (Game.tbIsPlayerTurn && !Game.tbIsPlayerTurn()) break;
     try {
@@ -2420,6 +2437,19 @@ function legacyFleeWalk(Game, f, ctx, p, px, py) {
 function closeStep(Game, f, ctx, p, px, py, tmx, tmy) {
   const occupied = new Set(
     f.fighters.filter(x => x.alive && x.key !== 'p').map(x => x.mx + ',' + x.my));
+  // DOOR-SKIP (journey-landing r145, 2026-11-18): stepping on a door tile
+  // in combat escapes the fight (game.js FLEE BY DOOR, Steve 2026-10-05)
+  // — a designed exit, not a move. An approach step must never take it
+  // by accident: the panel's seed-1234 d9 fight ended 'fled' with 4 allies
+  // behind because the nearest tile adjacent to the monster was the hall
+  // door at (4,6) (the step before it, (3,6), failed "No path there.").
+  // Skip door tiles when closing; if none remain, 'stuck' lets the caller
+  // wait for the monster to come through instead of fleeing by mistake.
+  // (The dodge twin of this defect lives in beastDodgeMove — the gallow-
+  // deer's move_windup dodge, not the approach, fired the panel's (4,6)
+  // step. Both read the shared isDoorTile helper. Fail-open: a Game
+  // without genDetail behaves exactly as before.)
+  const isDoor = (x, y) => isDoorTile(Game, x, y);
   const cands = [];
   for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
     if (!dx && !dy) continue;
@@ -2451,6 +2481,10 @@ function closeStep(Game, f, ctx, p, px, py, tmx, tmy) {
           dx = step[0]; dy = step[1];
         }
       }
+      // DOOR-SKIP: the step itself may cross a door even when the
+      // destination is not one (findPath routes through the hall doors)
+      // — check the tile actually stepped on, not just the candidate.
+      if (isDoor(dx, dy)) continue;
       const ox = p.mx, oy = p.my;
       Game.tbPlayerMove(dx, dy);
       if (p.mx !== ox || p.my !== oy) return 'moved';
