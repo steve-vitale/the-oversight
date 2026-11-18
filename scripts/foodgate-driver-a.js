@@ -138,7 +138,10 @@ try {
   CARRIER_PRESENT = _gpCarrier && /carrierRageFired/.test(ffSrc) && /carrierRageHeld/.test(ffSrc);
   // FOODGATE-INSTR: the instrument is present iff the gate flags are
   // in both files (godpath sets them, fieldFights records them).
-  FOODGATE_PRESENT = /foodgateTierBlock/.test(gpSrc) && /foodgatePayBlocked/.test(gpSrc) && /foodgateTierBlocked/.test(ffSrc) && /foodgatePayBlockedRage/.test(ffSrc);
+  // godpath names the flags payBlocked*/tierBlocked on the per-fight
+  // state (foodgateTierBlock helper + foodgatePayBlock warn tag);
+  // fieldFights names them foodgate* on the record.
+  FOODGATE_PRESENT = /foodgateTierBlock/.test(gpSrc) && /foodgatePayBlock/.test(gpSrc) && /foodgateTierBlocked/.test(ffSrc) && /foodgatePayBlockedRage/.test(ffSrc);
 } catch (e) {}
 const FIGHTALLY2_ON = process.env.FIGHTALLY2 === '1';
 let STANDING_MARKER = false;
