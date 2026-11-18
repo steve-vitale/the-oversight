@@ -57,18 +57,51 @@
   const first=(()=>{try{return g.displayName(vid).split(' ')[0];}catch(e){return 'They';}})();
   const temp=(()=>{try{return g.npcTemper?g.npcTemper(vid):'steady';}catch(e){return 'steady';}})();
   const pk=haulKcal(r.partnerHaul),total=haulKcal(r.playerHaul)+pk;
-  const n=(r.talkCount||0);
+  // TRAILTALK (journey-social r236 2026-11-18): every pool was 2 lines
+  // deep and selected pool[n%2], so a player mashing "Talk on the trail
+  // for a while" heard the same two lines verbatim, alternating (r235:
+  // line A 12x + line B 12x on one seed). The sayLine ledgers cannot
+  // catch this — trail talk is diegeticAct-exempt (r25) — so the pool
+  // itself must not repeat: 6 lines per temperament, and no verbatim
+  // repeat inside one outing until the pool is exhausted. The two
+  // original lines stay first, in order, so the first two presses of
+  // any outing are byte-identical to before. New lines use only live
+  // state already in scope (first name, haul kcal) or plain trail
+  // flavor — no fabricated shared history, no named plants, no claims
+  // about unseen things. r.talkUsed persists on the forageRun, so the
+  // set survives save/Continue; it resets only when exhausted.
   const pools={
    bold:[`"${first} grins. Good ground — keep your eyes up, the good stuff hides."`,
-     `"${total>0?('We are carrying '+total+' kcal between us already. ') : ''}Not bad for two pairs of hands."`],
+     `"${total>0?('We are carrying '+total+' kcal between us already. ') : ''}Not bad for two pairs of hands."`,
+     `"Another patch, another haul. That is how a pantry gets full."`,
+     `"${first} kicks at a root. 'There is more here than the patch shows. Dig deeper.'"`,
+     `"Keep up. The good ground is never where you stopped last time."`,
+     `"The day is not done, and neither are we. Keep walking."`],
    warm:[`"This is the part I like. Just us and the green."`,
-     `"${pk>0?('I have got '+pk+' kcal in my pack so far. ') : ''}Tell me what you see that I missed."`],
+     `"${pk>0?('I have got '+pk+' kcal in my pack so far. ') : ''}Tell me what you see that I missed."`,
+     `"It is quiet out here in the good way. Just the walking and the finding."`,
+     `"I like this — you, me, and a patch that gives."`,
+     `"When we get home, this will be worth telling over the fire."`,
+     `"${first} hums something tuneless, then grins. 'The work feels lighter with two.'"`,
+    ],
    cautious:[`"Slow. The patch gives more when you do not rush it."`,
-     `"Keep together out here. The green is generous; the rest of the wild is not."`],
+     `"Keep together out here. The green is generous; the rest of the wild is not."`,
+     `"Check behind you as you pick. Something that follows is quieter than we are."`,
+     `"Not too far from the path. The green is good here; there is no need to wander."`,
+     `"If the light starts to go, we go home. A full pack is not worth a dark walk."`,
+     `"${total>0?(total+' kcal between us. ') : ''}Enough to be worth the walk, not enough to be careless."`],
   };
   const pool=pools[temp]||[`"Two pairs of eyes, twice the ground. That was the deal, and it is working."`,
-    `"${total>0?('Between us we are carrying '+total+' kcal. ') : ''}Onward — there is more green ahead."`];
-  return pool[n%pool.length];
+    `"${total>0?('Between us we are carrying '+total+' kcal. ') : ''}Onward — there is more green ahead."`,
+    `"The pantry is counting on us. Eyes on the ground, ears open."`,
+    `"You walk well together. ${first} keeps pace without a word wasted."`,
+    `"${total>0?('Good weight in the packs — '+total+' kcal between us. ') : ''}Another patch like this and the pantry eats well tonight."`,
+    `"If the green runs out here, we try the next patch. That is the whole plan, and it works."`];
+  const used=Array.isArray(r.talkUsed)?r.talkUsed.filter(i=>Number.isInteger(i)&&i>=0&&i<pool.length):[];
+  let idx=pool.findIndex((_,i)=>!used.includes(i));
+  if(idx<0){r.talkUsed=[0];return pool[0];}
+  r.talkUsed=[...used,idx];
+  return pool[idx];
  }
  Object.assign(G,{
   forageFavorCompanions(){
