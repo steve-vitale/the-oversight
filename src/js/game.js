@@ -34181,6 +34181,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // outing whose dawn has come sets out now, or names why it cannot
       // (favor-outing.js). Runs at dawn, after the day roll, before save.
       try { if (this.attemptWaitingOutings) this.attemptWaitingOutings(); } catch (e) {}
+      // MUSTER-GROWTH LINE (r236): last dawn beat, AFTER the outings set
+      // out — the line names the Haven volunteers a call sounded this
+      // morning would actually find. Called here, not in titanDawnTick:
+      // the tick runs mid-dawn and the pool it reads is drained by the
+      // dawn's own tail before anyone can act on it.
+      try { if (typeof this.titanMusterGrowthLine === 'function') this.titanMusterGrowthLine(scholar.day); } catch (e) {}
       this.save();
       return this.status();
     },

@@ -19,6 +19,12 @@
 //   - titanCallReadiness(titanId) -> the faithful sum-readiness
 //     projection: who the call would bring if sounded now
 //     (refusal-respecting, on-demand only, momentary — see below)
+//   - titanMusterGrowth(titanId) -> the dawn-safe growth projection:
+//     what a re-sounded call would bring NOW (pure reads, no roster
+//     generation — see below); titanMusterGrowthLine(day) says it aloud
+//     once per growth for a short muster — called from game.js dawn,
+//     last beat after the waiting outings set out (r236: the mid-dawn
+//     tick reads a volunteer pool the dawn's own tail drains)
 //   - titanHavenBlades(muster)
 //   - titanPlacementTile(offset) -> a free, non-village tile inside the travel map
 //   - titanLeaveArena() -> map a large battlefield back to its world node
@@ -300,6 +306,14 @@
       // upkeep is billed on the day the titan is already dead.
       titanReconcileFieldSlain(day);
       titanMusterUpkeep(day);
+      // r236: the growth line is NOT called here. It reads the Haven
+      // volunteer pool, and the dawn's own tail (waiting outings set out
+      // at dawn, after this tick) drains that pool before anyone can act
+      // — the line would promise blades the morning's own assignments
+      // already took (r236 pilot: 3 of 4 lines named volunteers who were
+      // gone by muster time). game.js dawn calls titanMusterGrowthLine
+      // last, after attemptWaitingOutings, so the line names the pool a
+      // call sounded that morning would actually find.
       titanTurnTick(day);
     } catch (e) {}
   }
@@ -643,6 +657,90 @@
     return out;
   }
 
+  // ---------- muster-growth projection (2026-11-17, journey-deepening r236) ----------
+
+  // Game.titanMusterGrowth(titanId): the DAWN-SAFE answer to "would sounding
+  // the call again bring more blades?" PURE READS ONLY — no roster
+  // generation (unlike titanCallReadiness, which generates rosters for
+  // rosterless fires and is therefore explicit-demand-only), no RNG, no
+  // mutation. It replays the call's per-link math (refusal bars, trusted
+  // quota 6 else 2, already committed, free adults from rosters AS THEY
+  // STAND) + the Haven two-tap pool (cap 3, via titanVolunteers()). A link
+  // whose roster was never generated counts 0 free adults — undercount,
+  // never overclaim: the call itself generates the roster when sounded,
+  // and a refused link that later recovers stays silent here by design
+  // (its gain is unknowable without generation; the council still shows
+  // the recovery live). Returns null for unknown titan / slain / no
+  // muster. The dawn tick and the journey driver both read this one
+  // function, so the game's word and the panel's instrument cannot
+  // disagree about what a re-sounded call would bring.
+  function titanMusterGrowth(titanId) {
+    var def = titanDefs()[titanId];
+    if (!def) return null;
+    var st = titanState();
+    if (st.slain[titanId]) return null;
+    var muster = (st.musters || {})[titanId] || null;
+    if (!muster) return null;
+    var cfg = (Game.data.titans || {})._coalition || {};
+    var trustedAt = cfg.trustedAt == null ? 70 : cfg.trustedAt;
+    var trustedOpinion = cfg.trustedOpinion == null ? 10 : cfg.trustedOpinion;
+    var trustedBlades = cfg.trustedBlades || 6;
+    var baseBlades = cfg.baseBlades || 2;
+    var need = def.minAllies || 10;
+    // Committed faces across all live musters — a face marches once.
+    var committed = {};
+    try {
+      Object.keys(st.musters || {}).forEach(function (tid) {
+        if (st.slain && st.slain[tid]) return;
+        titanUniqueAllies(st.musters[tid]).forEach(function (a) { committed[a.villageId + ':' + a.vid] = true; });
+      });
+    } catch (e) {}
+    var out = { titanId: titanId, need: need, current: 0, harvestable: 0, total: 0,
+      ready: false, wouldBeReady: false, links: [], havenGain: 0, havenValid: 0, volunteers: 0 };
+    var currentAllies = 0;
+    try { currentAllies = titanUniqueAllies(muster).length; } catch (e) {}
+    var havenValid = 0;
+    try { havenValid = titanHavenBlades(muster).length; } catch (e) {}
+    out.current = currentAllies + havenValid;
+    out.havenValid = havenValid;
+    out.ready = out.current >= need;
+    titanAlliedLinks().forEach(function (link) {
+      try {
+        var vid = titanLinkOther(link);
+        var ov = null;
+        try { ov = Game._otherVillage(vid); } catch (e) {}
+        var trust = link.trust || 0;
+        var opinion = (ov && ov.opinion) || 0;
+        var arrears = link.arrears || 0;
+        var wouldRefuse = trust < 25 || opinion < -10 || arrears > 0;
+        var quota = trust >= trustedAt && opinion >= trustedOpinion ? trustedBlades : baseBlades;
+        var already = muster ? muster.allies.filter(function (a) { return a.villageId === vid; }).length : 0;
+        var freeAdults = 0;
+        try {
+          freeAdults = ((ov && ov.roster) || []).filter(function (r) {
+            return r && r.alive && (r.age == null || r.age >= 18) &&
+              (r.health === undefined || r.health > 0) && !committed[vid + ':' + r.id];
+          }).length;
+        } catch (e) { freeAdults = 0; }
+        var gain = wouldRefuse ? 0 : Math.max(0, Math.min(quota - already, freeAdults));
+        out.links.push({ villageId: vid, name: (ov && ov.name) || null, trust: trust, opinion: opinion,
+          arrears: arrears, quota: quota, already: already, freeAdults: freeAdults,
+          wouldRefuse: wouldRefuse, gain: gain });
+        out.harvestable += gain;
+      } catch (e) {}
+    });
+    try {
+      var vols = (typeof Game.titanVolunteers === 'function') ? Game.titanVolunteers() : null;
+      var volN = vols ? vols.length : 0;
+      out.volunteers = volN;
+      out.havenGain = Math.max(0, Math.min(3 - havenValid, volN));
+    } catch (e) {}
+    out.harvestable += out.havenGain;
+    out.total = out.current + out.harvestable;
+    out.wouldBeReady = out.total >= need;
+    return out;
+  }
+
   // ---------- war council ----------
 
   function titanWarCouncil(titanId) {
@@ -817,6 +915,11 @@
     // titanCommitOwn, two taps, said aloud, costly. The muster tracks
     // muster.haven as [{vid}] (never bare ids).
     try { if (Game.recordMoment) Game.recordMoment('The call went out against ' + def.title + ': ' + answered + ' fires answered.'); } catch (e) {}
+    // GROWTH-LINE RE-ARM (r236): the harvest just happened — store the
+    // post-call harvestable (usually only uncommitted Haven volunteers
+    // remain) so the dawn line stays silent on what was just harvested
+    // and speaks again only on FRESH growth.
+    try { var _g = titanMusterGrowth(titanId); if (_g) muster._growthSaid = _g.harvestable; } catch (e) {}
     return muster;
   }
 
@@ -942,6 +1045,10 @@
     try { if (Game.recordMoment) Game.recordMoment('Haven committed its own blades against ' + def.title + ': ' + names + '.'); } catch (e) {}
     try { if (Game.ledgerAdd) Game.ledgerAdd('titan', 'commit-own:' + titanId + ':' + cands.length); } catch (e) {}
     try { if (Game.save) Game.save(); } catch (e) {}
+    // GROWTH-LINE RE-ARM (r236): same rule as the call — store the
+    // post-commit harvestable so the dawn line stays silent on what was
+    // just sent and speaks again only on fresh growth.
+    try { var _g2 = titanMusterGrowth(titanId); if (_g2) muster._growthSaid = _g2.harvestable; } catch (e) {}
     return muster;
   }
 
@@ -1300,6 +1407,50 @@
       } else if (covered > 0) {
         Game.say('🌿 The Living Garden feeds the muster — ' + covered.toLocaleString() + ' of ' + need.toLocaleString() + ' kcal from the harvest. The coalition marches because you feed it.');
       }
+    });
+  }
+
+  // GROWTH LINE (2026-11-17, journey-deepening r236): a short muster is a
+  // silent stall — r235's 103601 sat at 9 blades for 27 days while its
+  // links' trust kept moving, and nothing said the call would now bring
+  // more. Once per growth (never daily): when a re-sounded call would
+  // bring more blades than the muster holds, say so aloud, naming the
+  // fire that warmed most and the Haven volunteers if any. The dedupe
+  // lives on the muster (muster._growthSaid = last announced harvestable
+  // count); sounding the call or committing Haven's own re-arms it (both
+  // verbs recompute and store the post-act harvestable), so fresh growth
+  // after a harvest speaks again while harvested growth never repeats.
+  // Ready, slain, titan-absent, and empty musters stay silent — the march,
+  // not the line, owns a ready muster, and the line never urges a call
+  // into the dark (titanMonsterPresent is the call's own gate).
+  function titanMusterGrowthLine(day) {
+    var st = titanState();
+    Object.keys(st.musters || {}).forEach(function (titanId) {
+      try {
+        var muster = st.musters[titanId];
+        if (!muster || st.slain[titanId]) return;
+        if (titanMusterReady(titanId)) return;
+        if (!titanMonsterPresent(titanId)) return;
+        var g = titanMusterGrowth(titanId);
+        if (!g || !(g.harvestable > 0)) return;
+        if ((muster._growthSaid || 0) >= g.harvestable) return;
+        muster._growthSaid = g.harvestable;
+        var top = null;
+        g.links.forEach(function (l) { if (l.gain > 0 && (!top || l.gain > top.gain)) top = l; });
+        var def = titanDefs()[titanId];
+        var line = '📯 The fires have warmed since the call — ';
+        var parts = [];
+        if (top) parts.push((top.name || 'an allied fire') + ' would send ' + top.gain + ' more blade' + (top.gain === 1 ? '' : 's') + ' if the call were sounded again');
+        // r236 pilot-2: the Haven clause used to carry no verb — a player
+        // who heard "Haven has 2 volunteers free to march" sounded the
+        // call and got 0 Haven blades, because the call only brings
+        // ALLIED blades; Haven marches on the commit. Name the commit.
+        if (g.havenGain > 0) parts.push('Haven has ' + g.havenGain + ' volunteer' + (g.havenGain === 1 ? '' : 's') + ' free to march — the commit sends them');
+        line += parts.join(', and ') + '. The muster would stand at ' + g.total + ' of the ' + g.need + ' ' + (def ? def.title : 'titan') + ' demands';
+        if (g.wouldBeReady) line += ' — enough. Sound the call' + (g.havenGain > 0 ? ', and send Haven\u2019s own.' : '.');
+        else line += '. Still short — but the gap is closing.';
+        Game.say(line);
+      } catch (e) {}
     });
   }
 
@@ -1954,6 +2105,8 @@
     titanTemptation: titanTemptation,
     titanMusterReady: titanMusterReady,
     titanCallReadiness: titanCallReadiness,
+    titanMusterGrowth: titanMusterGrowth,
+    titanMusterGrowthLine: titanMusterGrowthLine,
     titanHavenBlades: titanHavenBlades,
     titanPlacementTile: titanPlacementTile,
     titanLeaveArena: titanLeaveArena,
@@ -1989,6 +2142,8 @@
     titanEscalate: titanEscalate,
     titanMusterUpkeep: titanMusterUpkeep,
     titanCallReadiness: titanCallReadiness,
+    titanMusterGrowth: titanMusterGrowth,
+    titanMusterGrowthLine: titanMusterGrowthLine,
     titanOmen: titanOmen,
     titanState: titanState,
     titanTemptation: titanTemptation,
