@@ -1,0 +1,24 @@
+R1: throttle-off wrap honesty
+  PASS pristine prodThrottleEngaged is a function
+  PASS lean pantry: gate disengaged (false)
+  PASS fixture pantry is >4 fresh days (14.5)
+  PASS RED-probe: pristine gate ENGAGES on stocked pantry (true)
+  PASS OFF wrap neutralizes the gate (false)
+R2: oneRun feast-road measurement (OFF arm, 20d)
+  PASS run completed (days>0)
+  PASS throttle tag is off
+  PASS feasts is numeric
+  PASS plentyMax is numeric
+  PASS plentyFinal is numeric
+  PASS redirects is numeric
+  PASS OFF arm never redirects under the wrap (redirects===0)
+  PASS wall fields present (national/table/won/exiled)
+R3: OFF vs ON contract (20d, seed 11)
+  PASS OFF run tagged off
+  PASS ON run tagged on
+  PASS arms differ ONLY by the wrap: same policy, same seed, same days
+  PASS FEASTSCALE_R13 stayed armed across both arms
+  INFO off: feasts=0 plentyMax=0 redirects=0
+  INFO on:  feasts=0 plentyMax=0 redirects=58
+
+17 pass, 0 fail

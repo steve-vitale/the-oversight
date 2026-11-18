@@ -1,0 +1,77 @@
+
+1. The key: relative until the seat, locked at it
+  ok   before the seat: no locked key
+  ok   live key reads the build (track, class, subclass)
+  ok   relative: the live key follows the build as it changes (now a god, apocalypse slain)
+  ok   a lapsed class does not count (if you don't know it, it doesn't show)
+  ok   taking the seat locks the build half
+  ok   after the lock the build half never moves
+  ok   table_entered carries the key
+  ok   entering a door fills the path and the moral the Table earned
+  ok   a downgrade re-fills the path half; the doors are remembered
+
+2. Lookup order and fallbacks
+  ok   selectors: god > class/subclass > class > track > default
+  ok   endingSelectors() is the same order
+  ok   data loaded (table-beats.json, table-endings.json)
+  ok   ending: showrunner on Beloved resolves its bespoke slice, light and dark
+  ok   ending: demagogue without a bespoke slice gets its own class coda
+  ok   ending: a berserker on Defiant falls back one level to the brawler slice
+  ok   ending: a bespoke path entry wins over a god coda (god on Defiant -> the brawler slice)
+  ok   coda: no bespoke entry -> the god coda (god on Beloved, light and dark)
+  ok   coda: god > class/subclass (a keeper who ascended plays the god coda)
+  ok   coda: class/subclass > track (keeper, combat track -> the keeper coda)
+  ok   coda: completed subclass text wins over the track (berserker on Beloved)
+  ok   coda: track-only runs get the track coda on every path
+  ok   none: no build still gets the final alone; a named social class gets its coda
+  ok   grey relay: the coda reads the forward hand (lean > 0 light, < 0 dark, 0 light)
+  ok   exactly one coda: the god coda alone, its own lines
+  ok   beat: showrunner on Beloved plays its bespoke option
+  ok   beat: demagogue on Beloved plays the class template
+  ok   beat: a god plays its verb (god template) on every path
+  ok   beat: no class, no god -> the path default (exists for every path and moral)
+
+3. The scenario plays the build
+  ok   beat one (not the build beat) has no build option
+  ok   the build beat offers the showrunner's own option (light)
+  ok   the prompt names the build
+  ok   the stake is legible on the option
+  ok   the same class reads differently on the dark side (moral changes the option)
+  ok   playing it moves the path meter by its data (dark +4) and records the play
+  ok   a class with no bespoke beat still gets an option in its own name
+  ok   a god unlocks its verb as the option
+  ok   the titan finale feeds the beat (apocalypse line in the prompt)
+  ok   odds: god level (+2) and the slain apocalypse (+1) add to the default gain (+2)
+  ok   defiant x brawler (dark): the collector's hands
+  ok   the build option fails if the room is not yours yet (stake: audience 3 < 4) -> downgrade, never a wipe
+
+4. Every path losable and winnable, for every fixture key
+  ok   losable: every path x moral x fixture key can fail (105 walks)
+  ok   winnable: every path x moral reaches its finals with every key, including no class and no god
+
+5. Never a gate
+  ok   the doors and their standing are identical with and without a god
+  ok   table*.js still never reads god-path state (the key is handed in by endingKey.js)
+  ok   endingKey.js never touches seat pricing or the earned doors
+
+6. Endings resolve by key, in play
+  ok   beloved x showrunner x light: the bespoke final replaces the outcome and the coda plays
+  ok   {name} is filled with the bearer's name
+  ok   the win lands and the resolved ending is noted
+  ok   table_won carries the key and which ending resolved
+  ok   beloved x showrunner x dark: its own cut
+  ok   defiant x brawler x light: THE DOORWAY
+  ok   defiant x brawler x dark: THE SALTED ROAD
+  ok   new class coda follows the path's light outcome without replacing it
+
+7. Composed endings in play: the path's final + one coda
+  ok   track coda: the path's own final plays, then the coda after it
+  ok   {path} fills with the path's name and {name} with the bearer's
+  ok   exactly one coda: no god or class coda lines alongside it
+  ok   the resolved coda is noted
+  ok   table_won records which coda resolved
+  ok   god coda in play: Beloved's final, then the god's light coda with {god} filled
+  ok   class coda in play: the keeper's light coda
+  ok   grey relay in play: the coda follows relayLean, {path} = the Relay
+
+table-endings: 61 passed, 0 failed, 0 todo (phase 0)

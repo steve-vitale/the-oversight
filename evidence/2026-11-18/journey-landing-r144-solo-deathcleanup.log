@@ -1,0 +1,25 @@
+driver half (SEED=14511 DAYS=5):
+  ok: driver exits 0
+  ok: driver stdout parses as one JSON record
+  ok: driver record has no top-level error
+  ok: census.deathCleanup present
+  ok: deathCleanup has stats/entryCount/entries/firstPlanDay
+  ok: entryCount is a number, entries an array
+  ok: stats is null before ignition (day 5, plan never seeded)
+  ok: firstPlanDay is null before ignition
+  ok: instrumentErrors empty
+analyzer half:
+  ok: analyzer exits 0
+  ok: DEATHCLEANUP section printed
+  ok: DEATHCLEANUP line parses as JSON
+  ok: row A passes real cleanups/seeds through
+  ok: row A: no dead holders, not unseeded, no ignition-after-death
+  ok: row B: present, stats null (sleeping village)
+  ok: row B: no ignition-after-death
+  ok: row C: injected dead holder flagged
+  ok: row C: unseeded (planSeeds 0 with an entry present)
+  ok: row C: ignition-after-death (firstPlanDay == firstDeathDay+1, 0 cleanups, 0 seeds)
+  ok: row D: old-format record tolerated, present false
+  ok: panel totals: deathCleanups/planSeeds from A only
+  ok: panel totals: 1 dead-holder entry, C unseeded + ignition-after-death
+PASS test-deathcleanup-instrument-20261117

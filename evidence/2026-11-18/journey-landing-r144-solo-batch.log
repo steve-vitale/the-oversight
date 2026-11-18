@@ -1,0 +1,52 @@
+##### deathcleanup 12:09:21
+deathcleanup EXIT:0 12:09:46
+  ok: panel totals: deathCleanups/planSeeds from A only
+  ok: panel totals: 1 dead-holder entry, C unseeded + ignition-after-death
+PASS test-deathcleanup-instrument-20261117
+##### trust 12:09:46
+trust EXIT:0 12:11:45
+  ok   seed 42 samples retain monotonic exact write boundaries
+
+trust observer neutrality: 6 passed, 0 failed, 0 todo (phase 0)
+##### capablebot 12:11:45
+capablebot EXIT:0 12:14:16
+  ok   no policy-side errors
+
+test-capable-bot-20261014: 40 passed, 0 failed, 0 todo (phase 0)
+##### occupation 12:14:17
+occupation EXIT:0 12:17:46
+  ok   changed offer availability remains visible rather than a fake defeat
+
+occupation panels: 25 passed, 0 failed, 0 todo (phase 0)
+##### solocampaign 12:17:46
+solocampaign EXIT:0 12:20:08
+  ok   diagnostic snapshots neither hydrate people nor initialize agency
+
+Solo campaign endings: 15 passed, 0 failed, 0 todo (phase 0)
+##### synergystall 12:20:08
+synergystall EXIT:0 12:22:50
+  18 beard_moss villager:emma_larsen
+  21 beard_moss villager:rosa_mendez
+total ability_granted events: 44
+##### throttlefeast 12:22:50
+throttlefeast EXIT:0 12:24:17
+  INFO on:  feasts=0 plentyMax=0 redirects=58
+
+17 pass, 0 fail
+##### tableendings 12:24:17
+tableendings EXIT:0 12:25:46
+  ok   grey relay in play: the coda follows relayLean, {path} = the Relay
+
+table-endings: 61 passed, 0 failed, 0 todo (phase 0)
+##### cacheflags-AB 12:25:46
+--- cache-flags FIX branch
+FIX EXIT:1
+measurement cache flag isolation: 0 passed, 4 failed, 0 todo (phase 0)
+--- cache-flags PRISTINE (game.js at HEAD)
+pristine syntax OK
+PRISTINE EXIT:1
+measurement cache flag isolation: 0 passed, 4 failed, 0 todo (phase 0)
+--- restore fix
+fix restored OK
+POCKET REPAIR count: 1
+SOLO-FINAL-DONE 12:29:02
