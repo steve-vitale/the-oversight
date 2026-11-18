@@ -225,3 +225,21 @@ analyses + panels + corpora: committed on this branch with the closeout.
 The fix is a one-file behavior change; it needs Steve's eyes on his
 phone before it ships (a villager's late-day behavior changes, though
 only in the five measured cases per band).
+
+## Gate (adoption, 2026-11-18) — check.js on the rebased tip
+
+Master moved to `6fb98f473` (journey-scale r239 landing: run note +
+analyzer/test seed-band fix, no file overlap with this arm) after the
+first gate ran, so the branch rebased a second time (clean, 7/7, fix
+byte-identical) and the gate re-ran on the final tip `b985f86ee`.
+`node scripts/check.js --quick`: **335 passed, 6 failed in 863s**.
+The 6 failures are the standing set, 0 attributable to this branch:
+test-measurement-proof-update.js + test-measurement-workflow.js
+(measurement-proof staleness pair, stale against the base itself),
+test-living-garden-deed-attainment.js + test-one-person-army-deed-
+attainment.js (120s load timeouts), test-phone-frame-proof.js (stale
+receipt), test-ladder-bundle-20261108.js (ambient-raid control).
+Proof test re-run on the final tip: 41/41. Log
+`evidence/2026-11-18/notickexact-a-gate.log/.err`. (The superseded
+pre-rebase gate on tip `22f161520` read 335 passed, 6 failed in 770s —
+the same six failures.)
