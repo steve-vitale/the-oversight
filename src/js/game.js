@@ -35699,6 +35699,68 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         gridSize: (typeof this.isTitan === 'function' && this.isTitan(mid)) ? 12 : 9,
         ...(tableTrial ? { tableTrial: true } : {}),
       };
+      // POCKET REPAIR (journey-landing r144, 2026-11-18): a tile's blocking
+      // detail can split the board into disconnected open regions — the
+      // scholar can stand in one while the monster stands in another, and
+      // findPath then returns null for every move: the scholar spends the
+      // whole fight failing to move while allies grind the monster down
+      // (seed 1223 d11, The Understudy, 10 rounds, 26 failed moves,
+      // 0 strikes, won at full HP). After placement, if the player cannot
+      // path to a monster, move that monster onto the closest cell the
+      // player CAN reach — the monster walked into the player, so it
+      // arrives where it can be reached. Never moves the player: their
+      // cell is their real position. Single-tile monsters only; a
+      // multi-tile monster keeps its block (its anchor move could split
+      // the block across a wall). If the player sits in a 1-cell pocket
+      // with no reachable cell at all, nothing moves — the fight plays
+      // as before and the pocket analyzer still flags it.
+      try {
+        const _pp = this.tbFighter ? this.tbFighter('p') : null;
+        if (_pp && _pp.alive) {
+          const _detail = this.genDetail(this.map.px, this.map.py);
+          const _gmax = this.tbGridMax();
+          const _key = (x, y) => x + ',' + y;
+          const _open = (x, y) => {
+            if (x < 0 || x > _gmax || y < 0 || y > _gmax) return false;
+            const _cell = _detail[y] && _detail[y][x];
+            if (this.cellProps(_cell).blocks) return false;
+            if (this.tbfight && typeof this.tbTerrainAt === 'function' && this.tbTerrainAt(x, y) === 'eviction_wall') return false;
+            return true;
+          };
+          for (const _mo of this.tbfight.fighters.filter(x => x && x.kind === 'monster' && x.alive && !x.fled)) {
+            let _path = null;
+            try { _path = this.findPath(_pp.mx, _pp.my, _mo.mx, _mo.my); } catch (e) { console.warn('[pocket-repair] findPath threw, treating as no path', e); _path = null; }
+            if (_path) continue;
+            // BFS from the player over open cells (same step rules as
+            // findPath, including no corner-cutting); keep the reachable
+            // cell nearest the monster, never the player's own cell and
+            // never another live fighter's cell.
+            const _seen = new Set([_key(_pp.mx, _pp.my)]);
+            const _q = [[_pp.mx, _pp.my]];
+            let _best = null, _bestD = Infinity;
+            while (_q.length) {
+              const [x, y] = _q.shift();
+              const _d = Math.max(Math.abs(x - _mo.mx), Math.abs(y - _mo.my));
+              const _taken = this.tbfight.fighters.some(f => f && f !== _mo && f.alive && !f.fled && f.mx === x && f.my === y);
+              if ((x !== _pp.mx || y !== _pp.my) && !_taken && _d < _bestD) { _best = { x, y }; _bestD = _d; }
+              for (const [dx, dy] of [[0, 1], [0, -1], [1, 0], [-1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]]) {
+                const nx = x + dx, ny = y + dy;
+                if (_seen.has(_key(nx, ny))) continue;
+                if (!_open(nx, ny)) continue;
+                if (dx !== 0 && dy !== 0) {
+                  const c1 = _detail[y] && _detail[y][nx];
+                  const c2 = _detail[ny] && _detail[ny][x];
+                  if (this.cellProps(c1).blocks || this.cellProps(c2).blocks) continue;
+                }
+                _seen.add(_key(nx, ny));
+                _q.push([nx, ny]);
+              }
+            }
+            const _msize = Math.max(1, Math.min(3, ((_mo.mdef && _mo.mdef.size) || 1)));
+            if (_best && _msize === 1) { _mo.mx = _best.x; _mo.my = _best.y; }
+          }
+        }
+      } catch (e) { console.warn('[pocket-repair] repair failed, fight proceeds unrepaired', e); }
       try { S.Godpath?.beginApexHunt(this, this.tbfight); } catch (e) { console.warn('[godpath] encounter opening', e); }
       // SIM TELEMETRY (2026-10-11, combat-lever): pack size + player HP at
       // fight entry. Zero gameplay effect. (Placed after tbfight creation —
