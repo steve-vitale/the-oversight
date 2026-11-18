@@ -197,15 +197,18 @@ sweep-compare corpora directly.
 - Arm 1 already on master at adoption start (`c0151cb53`).
 - Arm 3: sanctity-gate rig fix found + verified by the adoption (HEAD
   version of the test fails E2 on master; fixed version GREEN);
-  committed `efafcf788` (rebased `3523b2303`), merged ff-only exit 0.
-  Safe-commit index clobber struck; repaired via the ls-tree -r pipe,
-  blobs verified.
+  landed as `3523b2303` on master, merged ff-only exit 0 by the
+  adoption (the arm-branch commit `efafcf788` rebased into it; the
+  deepening r238 run later branched from that tip). Safe-commit index
+  clobber struck; repaired via the ls-tree -r pipe, blobs verified.
 - Arm 2: balance-panel compare run by the adoption
   (`review_required`, investigated — no material signal); evidence
-  committed `bea325854` (rebased `a531ed8be`), merged ff-only exit 0.
-  Pristine corpus deleted; scratch tree sim-foodgate-measure verified
-  byte-identical to the committed files and removed. Safe-commit index
-  clobber struck; repaired via the ls-tree -r pipe, blobs verified.
+  merged as `cedbe56f2` (rebased from `a531ed8be` onto the r238 tip
+  `8aa995d3b` after master moved under the adoption; final merge
+  `1dc8b1641`), merged ff-only exit 0. Pristine corpus deleted;
+  scratch tree sim-foodgate-measure verified byte-identical to the
+  committed files and removed. Safe-commit index clobber struck;
+  repaired via the ls-tree -r pipe, blobs verified.
 - Worktrees sim-partyform-diag-a (already released by the run),
   sim-ladderbase-cause-a, sim-foodgate-instr-a, sim-foodgate-measure:
   all released, removed, branches deleted. No HELD work from this run
