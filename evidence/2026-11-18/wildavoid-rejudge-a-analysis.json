@@ -1,0 +1,645 @@
+{
+ "run": "sim-wildavoid-rejudge-a",
+ "seeds": [
+  104411,
+  104412,
+  104413,
+  104414,
+  104415,
+  104416,
+  104417,
+  104418
+ ],
+ "bars": {
+  "b1": {
+   "ctlWouldAvoid": 10,
+   "armAvoids": 13,
+   "bar": 0.5,
+   "ratio": 1.3,
+   "pass": true,
+   "contact": true
+  },
+  "b2": {
+   "events": {
+    "ctl": 30,
+    "arm": 30,
+    "pass": true
+   },
+   "instances": {
+    "ctl": 30,
+    "arm": 30,
+    "pass": true
+   },
+   "bar": 0.9,
+   "pass": true
+  },
+  "b3": {
+   "deaths": {
+    "ctl": 18,
+    "arm": 12
+   },
+   "fleeTaken": {
+    "ctl": 4288,
+    "arm": 3552
+   },
+   "pass": true
+  },
+  "b4": {
+   "armOutmatchedSuburbDeaths": 0,
+   "armOutmatchedSuburbFought": 0,
+   "armAvoidSuburb": 1,
+   "ctlOutmatchedSuburbFought": 1,
+   "ctlOutmatchedSuburbDeaths": 0,
+   "armSuburbDeathsAll": 1,
+   "ctlSuburbDeathsAll": 1,
+   "trickKnown": {
+    "ctl": 2,
+    "arm": 2
+   },
+   "death104417": {
+    "ctlDay": 98,
+    "armDay": 98,
+    "sameDay": true,
+    "ctlOutcome": "vDie",
+    "armOutcome": "vDie",
+    "ctlVTaken": 17,
+    "armVTaken": 17,
+    "sameVTaken": true,
+    "ctlVid": "visjoin_92",
+    "armVid": "visjoin_92",
+    "ctlAllyVids": [
+     "gen_0og0xvr",
+     "desmond_clarke"
+    ],
+    "armAllyVids": [
+     "gen_0og0xvr",
+     "desmond_clarke"
+    ],
+    "sameParty": true,
+    "ctlOrigin": "aid",
+    "armOrigin": "aid",
+    "ctlWave": 4,
+    "armWave": 4,
+    "ctlMid": "suburb",
+    "armMid": "suburb",
+    "ctlGate": null,
+    "armGate": null,
+    "ctlWild": {
+     "planStage": "party",
+     "planTarget": "eater",
+     "planParty": [],
+     "party": [
+      "visjoin_92",
+      "gen_0og0xvr",
+      "desmond_clarke"
+     ],
+     "partySize": 3,
+     "sensedSize": 3,
+     "countedSize": 0,
+     "allArmed": true,
+     "allArmored": true,
+     "gear": {
+      "visjoin_92": {
+       "armed": true,
+       "armored": true,
+       "armorP": 8
+      },
+      "gen_0og0xvr": {
+       "armed": true,
+       "armored": true,
+       "armorP": 21
+      },
+      "desmond_clarke": {
+       "armed": true,
+       "armored": true,
+       "armorP": 17
+      }
+     },
+     "isTableVeteran": false
+    },
+    "armWild": {
+     "planStage": "party",
+     "planTarget": "eater",
+     "planParty": [],
+     "party": [
+      "visjoin_92",
+      "gen_0og0xvr",
+      "desmond_clarke"
+     ],
+     "partySize": 3,
+     "sensedSize": 3,
+     "countedSize": 0,
+     "allArmed": true,
+     "allArmored": true,
+     "gear": {
+      "visjoin_92": {
+       "armed": true,
+       "armored": true,
+       "armorP": 8
+      },
+      "gen_0og0xvr": {
+       "armed": true,
+       "armored": true,
+       "armorP": 21
+      },
+      "desmond_clarke": {
+       "armed": true,
+       "armored": true,
+       "armorP": 17
+      }
+     },
+     "isTableVeteran": false
+    },
+    "ctlTrickBefore": true,
+    "armTrickBefore": true,
+    "ctlOutmatched": false,
+    "armOutmatched": false,
+    "ctlSuburbDays": [
+     94,
+     95,
+     96,
+     96,
+     96,
+     97,
+     98
+    ],
+    "armSuburbDays": [
+     94,
+     95,
+     96,
+     96,
+     96,
+     97,
+     98
+    ],
+    "ctlSuburbDetail": [
+     {
+      "day": 94,
+      "outcome": "vFlee",
+      "vTaken": 25,
+      "origin": "aid",
+      "trickBefore": true
+     },
+     {
+      "day": 95,
+      "outcome": "vFlee",
+      "vTaken": 13,
+      "origin": "aid",
+      "trickBefore": true
+     },
+     {
+      "day": 96,
+      "outcome": "vFlee",
+      "vTaken": 13,
+      "origin": "aid",
+      "trickBefore": true
+     },
+     {
+      "day": 96,
+      "outcome": "vFlee",
+      "vTaken": 13,
+      "origin": "aid",
+      "trickBefore": true
+     },
+     {
+      "day": 96,
+      "outcome": "vFlee",
+      "vTaken": 14,
+      "origin": "aid",
+      "trickBefore": true
+     },
+     {
+      "day": 97,
+      "outcome": "vFlee",
+      "vTaken": 14,
+      "origin": "aid",
+      "trickBefore": true
+     },
+     {
+      "day": 98,
+      "outcome": "vDie",
+      "vTaken": 17,
+      "origin": "aid",
+      "trickBefore": true
+     }
+    ],
+    "armSuburbDetail": [
+     {
+      "day": 94,
+      "outcome": "vFlee",
+      "vTaken": 25,
+      "origin": "aid",
+      "trickBefore": true
+     },
+     {
+      "day": 95,
+      "outcome": "vFlee",
+      "vTaken": 13,
+      "origin": "aid",
+      "trickBefore": true
+     },
+     {
+      "day": 96,
+      "outcome": "vFlee",
+      "vTaken": 13,
+      "origin": "aid",
+      "trickBefore": true
+     },
+     {
+      "day": 96,
+      "outcome": "vFlee",
+      "vTaken": 13,
+      "origin": "aid",
+      "trickBefore": true
+     },
+     {
+      "day": 96,
+      "outcome": "vFlee",
+      "vTaken": 14,
+      "origin": "aid",
+      "trickBefore": true
+     },
+     {
+      "day": 97,
+      "outcome": "vFlee",
+      "vTaken": 14,
+      "origin": "aid",
+      "trickBefore": true
+     },
+     {
+      "day": 98,
+      "outcome": "vDie",
+      "vTaken": 17,
+      "origin": "aid",
+      "trickBefore": true
+     }
+    ],
+    "firstAvoidDay104417": 141,
+    "firstDivDay104417": 141,
+    "predatesAvoid": true,
+    "predatesDivergence": true
+   },
+   "pass": true,
+   "death104417Verified": true
+  },
+  "b5": {
+   "files": {
+    "ctl": 8,
+    "arm": 8
+   },
+   "errors": {
+    "ctl": 0,
+    "arm": 0
+   },
+   "missingHp": {
+    "ctl": 0,
+    "arm": 0
+   },
+   "recMismatch": {
+    "ctl": 0,
+    "arm": 0
+   },
+   "unclassified": {
+    "ctl": 0,
+    "arm": 0
+   },
+   "d3": {
+    "ctl": {
+     "n": 46,
+     "agree": 46,
+     "agreement": 1.0
+    },
+    "arm": {
+     "n": 44,
+     "agree": 44,
+     "agreement": 1.0
+    }
+   },
+   "wildAvoidsStat": {
+    "ctl": 0,
+    "arm": 13
+   },
+   "avoids": {
+    "ctl": 0,
+    "arm": 13
+   },
+   "sayLines": {
+    "ctl": 0,
+    "arm": 13
+   },
+   "trajectory": [
+    {
+     "seed": 104411,
+     "firstDivDay": null,
+     "firstAvoidDay": null,
+     "pass": true
+    },
+    {
+     "seed": 104412,
+     "firstDivDay": 106,
+     "firstAvoidDay": 106,
+     "pass": true
+    },
+    {
+     "seed": 104413,
+     "firstDivDay": null,
+     "firstAvoidDay": null,
+     "pass": true
+    },
+    {
+     "seed": 104414,
+     "firstDivDay": 129,
+     "firstAvoidDay": 127,
+     "pass": true
+    },
+    {
+     "seed": 104415,
+     "firstDivDay": null,
+     "firstAvoidDay": null,
+     "pass": true
+    },
+    {
+     "seed": 104416,
+     "firstDivDay": 124,
+     "firstAvoidDay": 123,
+     "pass": true
+    },
+    {
+     "seed": 104417,
+     "firstDivDay": 141,
+     "firstAvoidDay": 141,
+     "pass": true
+    },
+    {
+     "seed": 104418,
+     "firstDivDay": 103,
+     "firstAvoidDay": 103,
+     "pass": true
+    }
+   ],
+   "pass": true
+  }
+ },
+ "metricBroken": false,
+ "ctlWildW4Meetings": 127,
+ "armWildW4Meetings": 108,
+ "perSeed": {
+  "104411": {
+   "ctl": {
+    "wildMeetings": 11,
+    "wildW4Meetings": 11,
+    "wildWouldAvoid": 0,
+    "wildDeaths": 1,
+    "wildFleeTaken": 290,
+    "wildSuburb": 0,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 0,
+    "launchEventsW4": 0,
+    "launchesW4": 0,
+    "trickSuburbKnown": false,
+    "firstAvoidDay": null
+   },
+   "arm": {
+    "wildMeetings": 11,
+    "wildW4Meetings": 11,
+    "wildWouldAvoid": 0,
+    "wildDeaths": 1,
+    "wildFleeTaken": 290,
+    "wildSuburb": 0,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 0,
+    "launchEventsW4": 0,
+    "launchesW4": 0,
+    "trickSuburbKnown": false,
+    "firstAvoidDay": null
+   }
+  },
+  "104412": {
+   "ctl": {
+    "wildMeetings": 36,
+    "wildW4Meetings": 36,
+    "wildWouldAvoid": 2,
+    "wildDeaths": 4,
+    "wildFleeTaken": 1354,
+    "wildSuburb": 2,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 0,
+    "launchEventsW4": 18,
+    "launchesW4": 18,
+    "trickSuburbKnown": true,
+    "firstAvoidDay": null
+   },
+   "arm": {
+    "wildMeetings": 32,
+    "wildW4Meetings": 32,
+    "wildWouldAvoid": 0,
+    "wildDeaths": 2,
+    "wildFleeTaken": 1080,
+    "wildSuburb": 2,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 1,
+    "launchEventsW4": 15,
+    "launchesW4": 15,
+    "trickSuburbKnown": true,
+    "firstAvoidDay": 106
+   }
+  },
+  "104413": {
+   "ctl": {
+    "wildMeetings": 7,
+    "wildW4Meetings": 7,
+    "wildWouldAvoid": 0,
+    "wildDeaths": 1,
+    "wildFleeTaken": 281,
+    "wildSuburb": 0,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 0,
+    "launchEventsW4": 1,
+    "launchesW4": 1,
+    "trickSuburbKnown": false,
+    "firstAvoidDay": null
+   },
+   "arm": {
+    "wildMeetings": 7,
+    "wildW4Meetings": 7,
+    "wildWouldAvoid": 0,
+    "wildDeaths": 1,
+    "wildFleeTaken": 281,
+    "wildSuburb": 0,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 0,
+    "launchEventsW4": 1,
+    "launchesW4": 1,
+    "trickSuburbKnown": false,
+    "firstAvoidDay": null
+   }
+  },
+  "104414": {
+   "ctl": {
+    "wildMeetings": 4,
+    "wildW4Meetings": 4,
+    "wildWouldAvoid": 1,
+    "wildDeaths": 1,
+    "wildFleeTaken": 208,
+    "wildSuburb": 1,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 1,
+    "avoids": 0,
+    "launchEventsW4": 0,
+    "launchesW4": 0,
+    "trickSuburbKnown": false,
+    "firstAvoidDay": null
+   },
+   "arm": {
+    "wildMeetings": 3,
+    "wildW4Meetings": 3,
+    "wildWouldAvoid": 0,
+    "wildDeaths": 1,
+    "wildFleeTaken": 142,
+    "wildSuburb": 0,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 1,
+    "launchEventsW4": 0,
+    "launchesW4": 0,
+    "trickSuburbKnown": false,
+    "firstAvoidDay": 127
+   }
+  },
+  "104415": {
+   "ctl": {
+    "wildMeetings": 0,
+    "wildW4Meetings": 0,
+    "wildWouldAvoid": 0,
+    "wildDeaths": 0,
+    "wildFleeTaken": 0,
+    "wildSuburb": 0,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 0,
+    "launchEventsW4": 0,
+    "launchesW4": 0,
+    "trickSuburbKnown": false,
+    "firstAvoidDay": null
+   },
+   "arm": {
+    "wildMeetings": 0,
+    "wildW4Meetings": 0,
+    "wildWouldAvoid": 0,
+    "wildDeaths": 0,
+    "wildFleeTaken": 0,
+    "wildSuburb": 0,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 0,
+    "launchEventsW4": 0,
+    "launchesW4": 0,
+    "trickSuburbKnown": false,
+    "firstAvoidDay": null
+   }
+  },
+  "104416": {
+   "ctl": {
+    "wildMeetings": 15,
+    "wildW4Meetings": 15,
+    "wildWouldAvoid": 1,
+    "wildDeaths": 3,
+    "wildFleeTaken": 376,
+    "wildSuburb": 0,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 0,
+    "launchEventsW4": 0,
+    "launchesW4": 0,
+    "trickSuburbKnown": false,
+    "firstAvoidDay": null
+   },
+   "arm": {
+    "wildMeetings": 11,
+    "wildW4Meetings": 11,
+    "wildWouldAvoid": 1,
+    "wildDeaths": 4,
+    "wildFleeTaken": 156,
+    "wildSuburb": 0,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 8,
+    "launchEventsW4": 0,
+    "launchesW4": 0,
+    "trickSuburbKnown": false,
+    "firstAvoidDay": 123
+   }
+  },
+  "104417": {
+   "ctl": {
+    "wildMeetings": 32,
+    "wildW4Meetings": 32,
+    "wildWouldAvoid": 5,
+    "wildDeaths": 3,
+    "wildFleeTaken": 939,
+    "wildSuburb": 7,
+    "wildSuburbDeaths": 1,
+    "wildSuburbOutmatched": 0,
+    "avoids": 0,
+    "launchEventsW4": 10,
+    "launchesW4": 10,
+    "trickSuburbKnown": true,
+    "firstAvoidDay": null
+   },
+   "arm": {
+    "wildMeetings": 31,
+    "wildW4Meetings": 31,
+    "wildWouldAvoid": 2,
+    "wildDeaths": 2,
+    "wildFleeTaken": 961,
+    "wildSuburb": 7,
+    "wildSuburbDeaths": 1,
+    "wildSuburbOutmatched": 0,
+    "avoids": 1,
+    "launchEventsW4": 10,
+    "launchesW4": 10,
+    "trickSuburbKnown": true,
+    "firstAvoidDay": 141
+   }
+  },
+  "104418": {
+   "ctl": {
+    "wildMeetings": 22,
+    "wildW4Meetings": 22,
+    "wildWouldAvoid": 1,
+    "wildDeaths": 5,
+    "wildFleeTaken": 840,
+    "wildSuburb": 1,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 0,
+    "launchEventsW4": 1,
+    "launchesW4": 1,
+    "trickSuburbKnown": false,
+    "firstAvoidDay": null
+   },
+   "arm": {
+    "wildMeetings": 13,
+    "wildW4Meetings": 13,
+    "wildWouldAvoid": 0,
+    "wildDeaths": 1,
+    "wildFleeTaken": 642,
+    "wildSuburb": 0,
+    "wildSuburbDeaths": 0,
+    "wildSuburbOutmatched": 0,
+    "avoids": 2,
+    "launchEventsW4": 4,
+    "launchesW4": 4,
+    "trickSuburbKnown": false,
+    "firstAvoidDay": 103
+   }
+  }
+ },
+ "verdict": "GO"
+}
