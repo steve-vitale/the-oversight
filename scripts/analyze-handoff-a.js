@@ -1,17 +1,32 @@
-// analyze-handoff-a.js — classifier for arm sim-handoff-diag-a (DIAG).
-// For each range-0-holder blocked selection in the FROZEN profilegate-b
-// ON corpus (band 103411-103418), determines whether a walker in the
+// analyze-handoff-a.js — classifier for arm sim-handoff-diag-a (DIAG)
+// and its recorder-fix follow-up sim-handoffrec-retry-b.
+// For each range-0-holder blocked selection in an ON corpus
+// (PROFILEGATE=1+VETREENGAGE=1), determines whether a walker in the
 // SAME village could have held the plan instead. Corpus-first per
-// prereg Correction 1 (2026-11-18): no fresh run, no new recorder.
+// the diag prereg Correction 1 (2026-11-18): no fresh run, no new
+// recorder — for the FROZEN corpus. The handoffrec arm re-runs this
+// classifier on a FRESH band produced by the fixed recorder
+// (scripts/handoffrec-driver-20261118.js: pool rows on every scored
+// call for a wave-4 holder, any part).
 //
 // Frozen rule (prereg Correction 1 + stability-probe refinement):
 //   - Selections enumerated with the frozen classifySeed (any-commit);
 //     a selection is an (instance, commit-day) pair whose resolution
 //     reason is 'inviter-range-0'. Must reproduce selblock-a exactly:
-//     79 selections, per-instance 1+8+28+24+5+10+3.
+//     79 selections, per-instance 1+8+28+24+5+10+3 (frozen corpus).
 //   - Village state from the nearest companionPool row for the holder
 //     on or BEFORE the selection day (same-day preferred; row age
-//     recorded). Profiles never change across pool rows (332/332 same
+//     recorded). HANDOFFREC JOIN (2026-11-18): with multiple rows per
+//     holder per day, the row is the latest with (day < D) or
+//     (day == D and part <= commitPart), where commitPart is parsed
+//     from the selection's commitKind (dawn -> 0, mid-day part-1 -> 1,
+//     mid-day part-2 -> 2). A part-2 re-score's row is NOT the state a
+//     part-1 commit was made on. When commitKind is missing or
+//     unparseable, the join falls back to the latest row with day <= D
+//     (the old rule). On the frozen corpus every row is part 0, so the
+//     new join reduces to the old join and the frozen analysis must
+//     reproduce exactly (bar 2 of the handoffrec prereg).
+//   - Profiles never change across pool rows (332/332 same
 //     in the probe), so profile may come from any pool row; at-Haven
 //     is NOT stable day-over-day (P(stay)=0.718, n=188), so day-D
 //     location/state is proven ONLY by a same-day pool row or — for
@@ -39,9 +54,12 @@
 //     walker-exists-but-unavailable bucket (proven-unavailable vs
 //     location-unproven), so the evidence never hides the gap.
 // Usage:
-//   node scripts/analyze-handoff-a.js [onDir]
-// Writes evidence/2026-11-17/handoff-a-analysis.json. Exits 0 iff the
-// enumeration reproduces selblock-a exactly (79 + per-instance counts).
+//   node scripts/analyze-handoff-a.js [onDir] [outFile] [expectMode]
+// Writes evidence/2026-11-17/handoff-a-analysis.json by default.
+// expectMode 'frozen' (default): exits 0 iff the enumeration
+// reproduces selblock-a exactly (79 + per-instance counts).
+// expectMode 'none' (fresh band): reports the counts with no frozen
+// expectation; arm is recorded as sim-handoffrec-retry-b.
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -50,7 +68,21 @@ const { classifySeed } = require(path.join(REPO, 'scripts', 'analyze-launchdef-a
 
 const ON_DIR = process.argv[2] ||
   path.join(REPO, 'evidence', '2026-11-17', 'perseed-profilegate-b-on');
-const OUT_FILE = path.join(REPO, 'evidence', '2026-11-17', 'handoff-a-analysis.json');
+const OUT_FILE = process.argv[3] ||
+  path.join(REPO, 'evidence', '2026-11-17', 'handoff-a-analysis.json');
+const EXPECT_MODE = process.argv[4] || 'frozen';
+const ARM_LABEL = EXPECT_MODE === 'none' ? 'sim-handoffrec-retry-b' : 'sim-handoff-diag-a';
+
+// commitPartOfKind(kind): the day-part a commitKind names ('dawn' ->
+// 0, 'mid-day part-1' -> 1, 'mid-day part-2' -> 2, 'part-N' -> N),
+// or null when the kind is missing or unparseable (the join then
+// falls back to the day-only rule).
+function commitPartOfKind(kind) {
+  if (kind == null) return null;
+  if (kind === 'dawn') return 0;
+  const m = String(kind).match(/part-(\d+)/);
+  return m ? parseInt(m[1], 10) : null;
+}
 
 const WALKER_PROFILES = ['forager', 'wanderer', 'explorer'];
 const EXPECTED_TOTAL = 79;
@@ -126,11 +158,25 @@ function classifySelection(j, inst, res) {
     if (deps.length) departCompanion = deps[0].companion || null;
   } catch (e) {}
   const picked = departCompanion || sel.companion || null;
+  // HANDOFFREC JOIN: the pool row is the latest with (day < D) or
+  // (day == D and part <= commitPart). commitPart comes from the
+  // resolution's commitKind (the commit in force at the depart/skip),
+  // falling back to the selection's own commitKind. Null commitPart
+  // falls back to the day-only rule (the frozen behavior).
+  const commitPart = (function () {
+    const a = commitPartOfKind(res.commitKind);
+    return a != null ? a : commitPartOfKind(sel.commitKind);
+  })();
   const pools = ((j.companionPool || []).filter(function (p) { return p.vid === vid; }))
-    .sort(function (a, b) { return a.day - b.day; });
+    .sort(function (a, b) { return (a.day - b.day) || ((a.part || 0) - (b.part || 0)); });
+  function rowIsOnOrBefore(p) {
+    if (p.day < D) return true;
+    if (p.day > D) return false;
+    return commitPart == null || (p.part || 0) <= commitPart;
+  }
   let row = null;
-  for (const p of pools) if (p.day <= D) row = p;
-  const afterRow = pools.find(function (p) { return p.day > D; }) || null;
+  for (const p of pools) if (rowIsOnOrBefore(p)) row = p;
+  const afterRow = pools.find(function (p) { return !rowIsOnOrBefore(p); }) || null;
   const gap = row ? (D - row.day) : null;
 
   const dailyD = ((j.daily || []).find(function (d) { return d.day === D; })) || null;
@@ -325,9 +371,10 @@ function classifySelection(j, inst, res) {
 
   return { seed: seed, holder: vid, holderProfile: (row ? row.holderProfile : null),
     target: inst.target, day: D, commitKind: res.commitKind || sel.commitKind || null,
+    commitPart: commitPart,
     companion: picked, departCompanion: departCompanion,
     companionAgrees: (departCompanion == null ? null : (departCompanion === (sel.companion || null))),
-    poolRowDay: row ? row.day : null, poolRowGap: gap,
+    poolRowDay: row ? row.day : null, poolRowPart: row ? (row.part != null ? row.part : 0) : null, poolRowGap: gap,
     poolRowAfterDay: afterRow ? afterRow.day : null,
     unknownProfileCount: unknownProfileCount,
     bucket: bucket, whySummary: whySummary,
@@ -360,8 +407,12 @@ function main() {
     }
   }
 
-  // Enumeration check vs selblock-a (D-check (a)).
-  const enumOk = selections.length === EXPECTED_TOTAL &&
+  // Enumeration check vs selblock-a (D-check (a)). Skipped when
+  // expectMode is 'none' (fresh band: the instance set is whatever
+  // current master produces; the counts are reported, not judged
+  // against the frozen 79).
+  const enumOk = EXPECT_MODE === 'none' ? null :
+    selections.length === EXPECTED_TOTAL &&
     Object.keys(EXPECTED_PER_INST).every(function (k) { return perInst[k] === EXPECTED_PER_INST[k]; }) &&
     Object.keys(perInst).every(function (k) { return EXPECTED_PER_INST[k] === perInst[k]; });
 
@@ -441,7 +492,10 @@ function main() {
     perSeedGameDays: perSeed.map(function (x) { return x.gameDays || x.days || 0; }),
   };
 
-  const analysis = { arm: 'sim-handoff-diag-a', corpus: 'perseed-profilegate-b-on (frozen)',
+  const analysis = { arm: ARM_LABEL,
+    corpus: EXPECT_MODE === 'none'
+      ? path.basename(ON_DIR) + ' (fresh band)'
+      : 'perseed-profilegate-b-on (frozen)',
     seeds: seeds, horizon: '150d death-aware', policy: 'competent',
     enumerationOk: enumOk, total: selections.length, perInstance: perInst,
     tally: tally, share: share,
@@ -466,8 +520,8 @@ function main() {
   console.log('pool-row gap dist:', JSON.stringify(gapDist));
   console.log('wall:', JSON.stringify(wall));
   console.log('wrote', path.relative(REPO, OUT_FILE));
-  if (!enumOk) { console.error('HANDOFF ANALYZE STOP: enumeration does not reproduce selblock-a.'); process.exit(3); }
+  if (EXPECT_MODE !== 'none' && !enumOk) { console.error('HANDOFF ANALYZE STOP: enumeration does not reproduce selblock-a.'); process.exit(3); }
 }
 
 if (require.main === module) main();
-module.exports = { classifySelection: classifySelection, WALKER_PROFILES: WALKER_PROFILES };
+module.exports = { classifySelection: classifySelection, commitPartOfKind: commitPartOfKind, WALKER_PROFILES: WALKER_PROFILES };
