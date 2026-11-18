@@ -11922,7 +11922,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (this.over) return { reached: false, steps: 0, path, blocked: null, interrupted: 'over' };
       if (this.inCombat && this.inCombat()) return { reached: false, steps: 0, path, blocked: null, interrupted: 'combat' };
       this.say('Heading home — following the compass back, one tile at a time.');
-      let steps = 0, blocked = null, interrupted = null, sidestepSaid = false;
+      let steps = 0, blocked = null, clearableBlocked = null, interrupted = null, sidestepSaid = false;
       while (this.map.px !== hx || this.map.py !== hy) {
         if (steps >= cap) { interrupted = 'cap'; break; }
         if (this.over) { interrupted = 'over'; break; }
@@ -11940,9 +11940,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const res = this.travelTo(px + sx, py + sy);
           if (this.map.px !== before.x || this.map.py !== before.y) return true;
           // Refused: remember the block if travelTo named one.
-          if (res && res.blocked) blocked = res.blocked;
-          else if (res && res.kind === 'blockage') blocked = res;
-          else if (res && res.blockType) blocked = res;
+          // R240 (journey-establishment r240): the stopping block is the
+          // FIRST homeward refusal — the obstacle on the direct route
+          // home — never overwritten by a later sidestep refusal. The
+          // old overwrite let an un-clearable creek met on a sidestep
+          // hide a clearable fallen tree on the direct route, so
+          // clear-and-retry never fired and the scholar sat stuck for
+          // days (seed 101401: Aria at (4,2), trees at (4,3)/(5,3),
+          // creek at (3,2) — 8 end attempts, all end-stranded, dead
+          // d16 of sickness). clearableBlocked names the first
+          // refusal clearBlockage can handle (fallen_tree / rubble /
+          // washed_out), so a walk stopped by a creek on the direct
+          // route can still clear a tree on a sidestep and detour.
+          let b = null;
+          if (res && res.blocked) b = res.blocked;
+          else if (res && res.kind === 'blockage') b = res;
+          else if (res && res.blockType) b = res;
+          if (b && !blocked) blocked = b;
+          if (b && !clearableBlocked && (b.blockType === 'fallen_tree' || b.blockType === 'rubble' || b.blockType === 'washed_out')) clearableBlocked = b;
           return false;
         };
         let moved = false;
@@ -11979,7 +11994,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       else if (interrupted === 'combat') this.say('Something found you on the way home. Deal with it, then walk home again.');
       // A bypassed block is not a stopping block: on success, blocked is
       // null (the walk detoured around it); on a stop, it names the obstacle.
-      return { reached, steps, path, blocked: reached ? null : blocked, interrupted };
+      return { reached, steps, path, blocked: reached ? null : blocked, interrupted, clearableBlocked: reached ? null : clearableBlocked };
     },
 
     // MAP KNOWLEDGE (Steve 2026-10-06): the world map shows ONLY what the

@@ -681,8 +681,14 @@ async function runSeed(seed) {
       try { w = (typeof Game.walkHome === 'function') ? Game.walkHome(12) : null; } catch (e) { w = { error: String(e && e.message).slice(0, 120) }; }
       rec.walks.push(w);
       if (w && w.reached) break;
-      const blocked = w && w.blocked ? w.blocked : null;
-      rec.blocked = blocked;
+      // R240: the stopping block (first homeward refusal) may be an
+      // un-clearable creek met on a sidestep while a clearable tree
+      // blocks the direct route (or a detour). Prefer the first
+      // clearable refusal for the clear decision; fall back to the
+      // stopping block. rec.blocked keeps the stopping block itself
+      // (the analyzer's travel-branch read).
+      rec.blocked = w && w.blocked ? w.blocked : null;
+      const blocked = (w && w.clearableBlocked) ? w.clearableBlocked : rec.blocked;
       if (!blocked || !CLEARABLE[blocked.blockType]) break;
       let ok = false;
       try { ok = !!Game.clearBlockage(blocked.x, blocked.y); } catch (e) { ok = false; rec.clearError = String(e && e.message).slice(0, 120); }
