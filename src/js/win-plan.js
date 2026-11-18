@@ -249,6 +249,14 @@
     try { return typeof process !== 'undefined' && process.env && process.env.VETREENGAGE === '1'; } catch (e) { return false; }
   }
 
+  // WILDAVOID env gate (sim-wildavoid-a, finding #2506): the wild
+  // outmatched-avoid is OFF unless the process env carries WILDAVOID=1
+  // (node sims only; in the browser process is undefined, so the lever
+  // is off).
+  function wildavoidOn() {
+    try { return typeof process !== 'undefined' && process.env && process.env.WILDAVOID === '1'; } catch (e) { return false; }
+  }
+
   // PLANFIX env gate (sim-planignite-fix-a): initialize the plan
   // store on first HavenTick. OFF unless the process env carries
   // PLANFIX=1 (node sims only; in the browser process is undefined,
@@ -765,17 +773,19 @@
     // Pre-fight gate for expeditionMonster. Returns null (old path),
     // {avoid:true} (no fight; plan falls back to gathering help), or
     // {seek:true} (walk in on purpose — awareness evade skipped).
-    winPlanFightGate(vid, mdef) {
+    // WILDAVOID (sim-wildavoid-a, finding #2506): the fight-gate
+    // party, as a shared read — the fighter plus sensed allies, plus
+    // VETREENGAGE co-tasked plan members. The gate and the wild
+    // outmatched check both call this; it never writes state.
+    winPlanFightParty(vid) {
       try {
-        if (!mdef) return null;
-        var wave = mdef.wave || 1;
         var party = [vid];
         try {
           var sensed = (typeof this.villagerFightAllies === 'function') ? (this.villagerFightAllies(vid) || []) : [];
           for (var i = 0; i < sensed.length; i++) if (party.indexOf(sensed[i]) === -1) party.push(sensed[i]);
         } catch (e) {}
-        // VETREENGAGE (sim-vetreengage-a): count co-tasked plan members. The
-        // plan's party set out together on one shared target (same
+        // VETREENGAGE (sim-vetreengage-a): count co-tasked plan members.
+        // The plan's party set out together on one shared target (same
         // tx/ty, same duration) — they are the travelling party even
         // when the encounter instant finds them a leg apart, because
         // villagerFightAllies only sees same/adjacent nodes at that
@@ -785,7 +795,6 @@
         // starts with the sensed allies only — counted members are
         // never injected into fieldFight.
         // Env-gated: no co-tasked counting unless VETREENGAGE=1.
-        var countedSize = 0;
         if (vetreengageOn()) try {
           var v0 = this.state && this.state.village;
           var plan0 = (v0 && v0.winPlan) ? v0.winPlan[vid] : null;
@@ -800,12 +809,59 @@
                 var pExped = a0.exped[pid];
                 if (pExped && pExped.tx === myExped.tx && pExped.ty === myExped.ty) {
                   party.push(pid);
-                  countedSize += 1;
                 }
               }
             }
           }
         } catch (e) {}
+        return party;
+      } catch (e) { return [vid]; }
+    },
+    // WILDAVOID (sim-wildavoid-a): the expedition gate's OUTMATCHED
+    // rule as a pure read — a wave-4-class beast in front of a party
+    // that is not full (fighter + 2, the engine's cap) and fully
+    // geared is not a fight, it is a death. Returns {avoid:true,
+    // reason:'outmatched', party} or null. NO plan mutation, NO plan
+    // seeding, NO bumps, NO veteran-guard, NO SEEK, NO trick-hold —
+    // the wild routers consult this before fieldFight; the gate
+    // itself keeps its own side effects on the expedition path.
+    // `party` may be passed in (the gate passes the party it already
+    // computed); otherwise it is read via winPlanFightParty.
+    winPlanOutmatched(vid, mdef, party) {
+      try {
+        if (!mdef) return null;
+        var wave = mdef.wave || 1;
+        if (wave < 4) return null;
+        party = (party && party.length) ? party : this.winPlanFightParty(vid);
+        var allArmed = true, allArmored = true;
+        for (var j = 0; j < party.length; j++) {
+          var gj = gearOf(this, party[j]);
+          if (!gj.armed) allArmed = false;
+          if (!gj.armored) allArmored = false;
+        }
+        if (party.length < 3 || !allArmed || !allArmored) {
+          return { avoid: true, reason: 'outmatched', party: party.slice(), allArmed: allArmed, allArmored: allArmored };
+        }
+        return null;
+      } catch (e) { return null; }
+    },
+    // WILDAVOID (sim-wildavoid-a): count a wild outmatched-avoid in
+    // winPlanStats, the same ledger the expedition gate's avoidances
+    // live in. The wild routers call this when they avoid; it writes
+    // nothing else.
+    winPlanBumpWildAvoid() {
+      try { bump(this, 'wildAvoids'); } catch (e) {}
+    },
+    winPlanFightGate(vid, mdef) {
+      try {
+        if (!mdef) return null;
+        var wave = mdef.wave || 1;
+        // WILDAVOID (sim-wildavoid-a): the party construction lives in
+        // winPlanFightParty now (sensed + VETREENGAGE co-tasked, the
+        // same party the wild outmatched check judges). The gate still
+        // computes gear over it for the veteran-guard and SEEK below.
+        var party = [vid];
+        try { party = this.winPlanFightParty ? this.winPlanFightParty(vid) : [vid]; } catch (e) { party = [vid]; }
         var allArmed = true, allArmored = true;
         for (var j = 0; j < party.length; j++) {
           var gj = gearOf(this, party[j]);
@@ -822,10 +878,13 @@
           bump(this, 'avoidances');
           return { avoid: true, reason: 'veteran-guard', party: party.slice() };
         }
-        // OUTMATCHED: a wave-4-class beast in front of a party that is
-        // not full (fighter + 2, the engine's cap) and fully geared is
-        // not a fight, it is a death. Go back for help instead.
-        if (wave >= 4 && (party.length < 3 || !allArmed || !allArmored)) {
+        // OUTMATCHED: the rule lives in winPlanOutmatched (the wild
+        // routers consult the same rule); the gate keeps its side
+        // effects here — the plan falls back to gathering help, or a
+        // plan is seeded when there is none. Go back for help instead.
+        var _om = null;
+        try { _om = this.winPlanOutmatched ? this.winPlanOutmatched(vid, mdef, party) : null; } catch (e) { _om = null; }
+        if (_om && _om.avoid) {
           if (plan) { plan.stage = (gearOf(this, vid).armed && gearOf(this, vid).armored) ? 'party' : 'gear'; plan.party = []; }
           else this.winPlanSeedFromFight(vid, mdef, 'avoided');
           bump(this, 'avoidances');

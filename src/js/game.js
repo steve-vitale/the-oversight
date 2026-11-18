@@ -8165,6 +8165,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // aidFight so allies at the door join as real combatants (it scores
       // the kill itself, channel 'aid-crisis', and resolves the crisis).
       let pViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
+      // WILDAVOID (sim-wildavoid-a, finding #2506): the expedition
+      // gate's outmatched rule, on the wild routers — an outmatched
+      // party gives the beast room instead of engaging. The beast stays
+      // in the world; an open aid crisis stays open for a
+      // better-equipped responder. No plan seeded, no plan mutated.
+      // Env-gated: WILDAVOID=1 (node sims only; in the browser process
+      // is undefined, so the lever is off).
+      let _pwa = null;
+      try {
+        var _pwaOn = false;
+        try { _pwaOn = (typeof process !== 'undefined' && process.env && process.env.WILDAVOID === '1'); } catch (e2) {}
+        if (_pwaOn && this.winPlanOutmatched) _pwa = this.winPlanOutmatched(vid, mdef);
+      } catch (e) {}
+      if (_pwa && _pwa.avoid) {
+        try { this.say(first + ' sees ' + mPhrase + ' and gives it room — not ready alone, going back for help.'); } catch (e) {}
+        try { if (this.winPlanBumpWildAvoid) this.winPlanBumpWildAvoid(); } catch (e) {}
+        return { avoided: true, reason: 'outmatched', viaAid: pViaAid, wave: mdef.wave || 0, mid: mdef.id || m.id };
+      }
       let rec = pViaAid ? this.aidFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids.slice() }) : null;
       if (!rec) { pViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: pAllies, allyVids: pAllyVids }); }
       const summary = this.fieldFightSummary ? this.fieldFightSummary(rec, first, mName) : `${first} fought ${mPhrase}`;
@@ -8244,6 +8262,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // deeds credit separately, the patrol deed credits the duty. The
       // dead earn nothing.
       if (rec.outcome !== 'vDie') { try { if (this.creditDeed) this.creditDeed(vid, 'patrol'); } catch (e) { console.warn('[tracks] patrol deed', e); } }
+      // WILDAVOID (sim-wildavoid-a): resolveWildMonsterEncounter returns
+      // its fight record, so the patrol returns its own — the avoid
+      // sentinel above and the fight record share one contract.
+      return rec;
     },
 
     // hurt a villager (non-player). Tracks health, handles death.
@@ -20914,6 +20936,27 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // restored. Raid defense and lingering-raider aid fights are never
       // skipped: the guard exempts opts.raid and the aid path.
       if (!opts.raid && !wViaAid && this.isPostFleeResting && this.isPostFleeResting(vid)) return null;
+      // WILDAVOID (sim-wildavoid-a, finding #2506): the expedition
+      // gate's outmatched rule, on the wild routers — an outmatched
+      // party gives the beast room instead of engaging. The beast stays
+      // in the world; an open aid crisis stays open for a
+      // better-equipped responder. Raids are defence at the haven door
+      // and never avoid (opts.raid). No plan seeded, no plan mutated.
+      // Env-gated: WILDAVOID=1 (node sims only; in the browser process
+      // is undefined, so the lever is off).
+      let _wwa = null;
+      try {
+        var _wwaOn = false;
+        try { _wwaOn = (typeof process !== 'undefined' && process.env && process.env.WILDAVOID === '1'); } catch (e2) {}
+        if (_wwaOn && !opts.raid && this.winPlanOutmatched) _wwa = this.winPlanOutmatched(vid, mdef);
+      } catch (e) {}
+      if (_wwa && _wwa.avoid) {
+        let _wPhrase = mName;
+        try { _wPhrase = this.articlePhrase ? this.articlePhrase(mName) : mName; } catch (e) {}
+        try { this.say(name + ' sees ' + _wPhrase + ' and gives it room — not ready alone, going back for help.'); } catch (e) {}
+        try { if (this.winPlanBumpWildAvoid) this.winPlanBumpWildAvoid(); } catch (e) {}
+        return { avoided: true, reason: 'outmatched', viaAid: wViaAid, wave: mdef.wave || 0, mid: mdef.id || m.id };
+      }
       let rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
       if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
       const summary = this.fieldFightSummary(rec, name, mName);
