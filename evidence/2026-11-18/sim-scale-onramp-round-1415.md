@@ -200,3 +200,20 @@ tables, never against a run baseline here. Baseline NOT rolled.
 Findings appended: #2543 (confirm NO-GO), #2544 (fightcap decomposition),
 #2545 (repeat-avoid), #2546 (sling fiction bug). #2538 refined.
 Claim deleted; lock deleted.
+
+## Addendum — check.js --quick on merged master (2026-11-18 ~15:55Z)
+
+336 passed, 6 failed in 427s (exit 1) — NOT green, and NOT attributable to
+this run (zero src/js, zero green-list files changed by either arm):
+- FAIL test-measurement-proof-update.js + test-measurement-workflow.js
+  (known stale neutral proof — tracker header: 7 Game files moved after
+  the proof).
+- FAIL test-phone-frame-proof.js (stale phone receipt vs current source).
+- FAIL test-living-garden-deed-attainment.js +
+  test-one-person-army-deed-attainment.js (both exit null at the 120s cap
+  — load timeouts under sibling sims, not assertion failures).
+- FAIL test-ladder-bundle-20261108.js (control: 200 monster turns WITHOUT
+  delivery fire the ambient raid — fires 0). Whether this failure predates
+  the wildavoid landing (95ba293f2) is UNESTABLISHED — flagged as a gap
+  for the next run, not green. The old 280/7 profile's visible parity-gear
+  failure does not appear in this run's list.
