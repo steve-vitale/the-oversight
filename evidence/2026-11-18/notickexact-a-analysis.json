@@ -1,0 +1,460 @@
+{
+  "arm": "notickexact-a",
+  "baseDir": "perseed-notickexact-a-base",
+  "armedDir": "perseed-notickexact-a-armed",
+  "files": {
+    "base": 8,
+    "armed": 8
+  },
+  "instrumentErrors": {
+    "base": 0,
+    "armed": 0
+  },
+  "noTick": {
+    "base": 5,
+    "armed": 0,
+    "baseFateTally": {
+      "depart-next-day": 1,
+      "depart-later": 1,
+      "re-bid-next-day": 1,
+      "re-bid-later": 2,
+      "plan-deleted-after": 0,
+      "holder-died-after": 0,
+      "village-ended": 0,
+      "stall": 0,
+      "unknown": 0
+    },
+    "armedFateTally": {
+      "depart-next-day": 0,
+      "depart-later": 0,
+      "re-bid-next-day": 0,
+      "re-bid-later": 0,
+      "plan-deleted-after": 0,
+      "holder-died-after": 0,
+      "village-ended": 0,
+      "stall": 0,
+      "unknown": 0
+    },
+    "baseTraces": [
+      {
+        "seed": 103543,
+        "vid": "visjoin_133",
+        "target": "eulogy",
+        "holderProfile": null,
+        "noTickDay": 135,
+        "noTickPart": 3,
+        "commitKind": "part-3",
+        "companion": "liam_davis",
+        "fate": "re-bid-later",
+        "fateDay": 137,
+        "fateNote": "re-bid day 137 part 0 companion=app_mgpsphpa415",
+        "rebidDay": 137,
+        "rebidPart": 0,
+        "rebidCompanion": "app_mgpsphpa415",
+        "rebidResolution": "blocked:danger-gate",
+        "launchDay": 140,
+        "launchSource": "brain",
+        "companionStarted": false,
+        "companionBlock": "range-0",
+        "firstScoreAfterDay": 137,
+        "firstSkipAfter": {
+          "day": 137,
+          "reason": "danger-gate"
+        },
+        "closeDay": null,
+        "closeKind": null,
+        "holderDeathDay": null,
+        "holderDeathCause": null,
+        "villageEndDay": 141,
+        "villageEndReason": "village-lost",
+        "eventualInstance": "selected-blocked:no-tick-after-commit",
+        "targetKilledDay": null
+      },
+      {
+        "seed": 103544,
+        "vid": "ingrid_vik",
+        "target": "algorithm",
+        "holderProfile": null,
+        "noTickDay": 52,
+        "noTickPart": 3,
+        "commitKind": "part-3",
+        "companion": "petra_novak",
+        "fate": "re-bid-later",
+        "fateDay": 57,
+        "fateNote": "re-bid day 57 part 0 companion=app_mgpspjdp808",
+        "rebidDay": 57,
+        "rebidPart": 0,
+        "rebidCompanion": "app_mgpspjdp808",
+        "rebidResolution": "blocked:inviter-sick",
+        "launchDay": 61,
+        "launchSource": "brain",
+        "companionStarted": false,
+        "companionBlock": "sick",
+        "firstScoreAfterDay": 54,
+        "firstSkipAfter": {
+          "day": 57,
+          "reason": "night"
+        },
+        "closeDay": 85,
+        "closeKind": "holder-died",
+        "holderDeathDay": 85,
+        "holderDeathCause": "the wild",
+        "villageEndDay": 95,
+        "villageEndReason": "village-lost",
+        "eventualInstance": "launched-fought-no-kill:vFlee:1",
+        "targetKilledDay": null
+      },
+      {
+        "seed": 103544,
+        "vid": "ruth_goldstein",
+        "target": "reunion",
+        "holderProfile": null,
+        "noTickDay": 90,
+        "noTickPart": 3,
+        "commitKind": "part-3",
+        "companion": "elijah_scott",
+        "fate": "re-bid-next-day",
+        "fateDay": 91,
+        "fateNote": "re-bid day 91 part 1 companion=elijah_scott",
+        "rebidDay": 91,
+        "rebidPart": 1,
+        "rebidCompanion": "elijah_scott",
+        "rebidResolution": "blocked:inviter-range-0",
+        "launchDay": null,
+        "launchSource": null,
+        "companionStarted": null,
+        "companionBlock": null,
+        "firstScoreAfterDay": 91,
+        "firstSkipAfter": {
+          "day": 91,
+          "reason": "night"
+        },
+        "closeDay": null,
+        "closeKind": null,
+        "holderDeathDay": null,
+        "holderDeathCause": null,
+        "villageEndDay": 95,
+        "villageEndReason": "village-lost",
+        "eventualInstance": "selected-blocked:no-tick-after-commit",
+        "targetKilledDay": null
+      },
+      {
+        "seed": 103547,
+        "vid": "james_okonkwo",
+        "target": "herald",
+        "holderProfile": null,
+        "noTickDay": 96,
+        "noTickPart": 3,
+        "commitKind": "part-3",
+        "companion": "fatima_hassan",
+        "fate": "depart-next-day",
+        "fateDay": 97,
+        "fateNote": "launch brain day 97 (HOLDER-ONLY, companion sick) commitKind=mid-day part-2 commitPart=2",
+        "rebidDay": 97,
+        "rebidPart": 2,
+        "rebidCompanion": "fatima_hassan",
+        "rebidResolution": "blocked:companion-not-started:sick",
+        "launchDay": 97,
+        "launchSource": "brain",
+        "companionStarted": false,
+        "companionBlock": "sick",
+        "firstScoreAfterDay": 97,
+        "firstSkipAfter": {
+          "day": 97,
+          "reason": "away-on-expedition"
+        },
+        "closeDay": 99,
+        "closeKind": "holder-died",
+        "holderDeathDay": 99,
+        "holderDeathCause": "the phoenix link",
+        "villageEndDay": 101,
+        "villageEndReason": "village-lost",
+        "eventualInstance": "launched-no-meeting:window:88-99",
+        "targetKilledDay": null
+      },
+      {
+        "seed": 103548,
+        "vid": "visjoin_111",
+        "target": "herald",
+        "holderProfile": null,
+        "noTickDay": 119,
+        "noTickPart": 3,
+        "commitKind": "part-3",
+        "companion": "gen_vsm9usx",
+        "fate": "depart-later",
+        "fateDay": 121,
+        "fateNote": "launch brain day 121 (HOLDER-ONLY, companion range-0) commitKind=mid-day part-1 commitPart=1",
+        "rebidDay": 121,
+        "rebidPart": 1,
+        "rebidCompanion": "gen_vsm9usx",
+        "rebidResolution": "blocked:companion-not-started:range-0",
+        "launchDay": 121,
+        "launchSource": "brain",
+        "companionStarted": false,
+        "companionBlock": "range-0",
+        "firstScoreAfterDay": 121,
+        "firstSkipAfter": {
+          "day": 121,
+          "reason": "away-on-expedition"
+        },
+        "closeDay": 123,
+        "closeKind": "holder-died",
+        "holderDeathDay": 123,
+        "holderDeathCause": "a wound that wouldn't close",
+        "villageEndDay": 150,
+        "villageEndReason": "survived",
+        "eventualInstance": "selected-blocked:no-tick-after-commit",
+        "targetKilledDay": null
+      }
+    ],
+    "armedTraces": []
+  },
+  "lateCommits": {
+    "base": 12,
+    "armed": 4,
+    "baseLaunched": 0,
+    "armedLaunched": 0,
+    "baseTally": {
+      "blocked:no-tick-after-commit": 5,
+      "blocked:night": 4,
+      "blocked:inviter-range-0": 2,
+      "blocked:companion-not-started:sick": 1
+    },
+    "armedTally": {
+      "blocked:night": 4
+    }
+  },
+  "launched": {
+    "instancesBase": 6,
+    "instancesArmed": 8,
+    "eventsW4Base": 21,
+    "eventsW4Armed": 19,
+    "eventsAllBase": 504,
+    "eventsAllArmed": 499
+  },
+  "deferredBids": {
+    "base": [],
+    "armed": [
+      {
+        "seed": 103543,
+        "vid": "visjoin_133",
+        "target": "eulogy",
+        "day": 135,
+        "part": 3,
+        "corePick": "WATER",
+        "pickKind": "EXPEDITION"
+      },
+      {
+        "seed": 103544,
+        "vid": "ingrid_vik",
+        "target": "algorithm",
+        "day": 52,
+        "part": 3,
+        "corePick": "WATER",
+        "pickKind": "EXPEDITION"
+      },
+      {
+        "seed": 103544,
+        "vid": "petra_novak",
+        "target": "algorithm",
+        "day": 58,
+        "part": 3,
+        "corePick": "VISIT",
+        "pickKind": "EXPEDITION"
+      },
+      {
+        "seed": 103547,
+        "vid": "james_okonkwo",
+        "target": "herald",
+        "day": 96,
+        "part": 3,
+        "corePick": "WATER",
+        "pickKind": "EXPEDITION"
+      },
+      {
+        "seed": 103548,
+        "vid": "visjoin_111",
+        "target": "herald",
+        "day": 119,
+        "part": 3,
+        "corePick": "HAVEN_CHORE",
+        "pickKind": "EXPEDITION"
+      }
+    ],
+    "baseN": 0,
+    "armedN": 5
+  },
+  "wall": {
+    "base": {
+      "nationalStanding": 2,
+      "nationalRank": 0,
+      "table": 0,
+      "wins": 0,
+      "wave4": 7,
+      "wave5": 2,
+      "deaths": 906,
+      "starvation": 3
+    },
+    "armed": {
+      "nationalStanding": 2,
+      "nationalRank": 0,
+      "table": 0,
+      "wins": 0,
+      "wave4": 7,
+      "wave5": 2,
+      "deaths": 889,
+      "starvation": 3
+    },
+    "medianBase": 139.5,
+    "medianArmed": 144,
+    "medianRatio": 1.032,
+    "survivedBase": 3,
+    "survivedArmed": 4
+  },
+  "starvation": {
+    "baseTotal": 3,
+    "armedTotal": 3,
+    "baseOnly": 0,
+    "armedOnly": 0,
+    "basePerSeed": {
+      "103541": 0,
+      "103542": 2,
+      "103543": 1,
+      "103544": 0,
+      "103545": 0,
+      "103546": 0,
+      "103547": 0,
+      "103548": 0
+    },
+    "armedPerSeed": {
+      "103541": 0,
+      "103542": 2,
+      "103543": 1,
+      "103544": 0,
+      "103545": 0,
+      "103546": 0,
+      "103547": 0,
+      "103548": 0
+    }
+  },
+  "trajectory": [
+    {
+      "seed": 103541,
+      "firstBaselineLateDay": null,
+      "firstDeferredDay": null,
+      "firstDivergenceDay": null,
+      "pass": true
+    },
+    {
+      "seed": 103542,
+      "firstBaselineLateDay": null,
+      "firstDeferredDay": null,
+      "firstDivergenceDay": null,
+      "pass": true
+    },
+    {
+      "seed": 103543,
+      "firstBaselineLateDay": 135,
+      "firstDeferredDay": 135,
+      "firstDivergenceDay": 137,
+      "pass": true
+    },
+    {
+      "seed": 103544,
+      "firstBaselineLateDay": 52,
+      "firstDeferredDay": 52,
+      "firstDivergenceDay": 53,
+      "pass": true
+    },
+    {
+      "seed": 103545,
+      "firstBaselineLateDay": null,
+      "firstDeferredDay": null,
+      "firstDivergenceDay": null,
+      "pass": true
+    },
+    {
+      "seed": 103546,
+      "firstBaselineLateDay": null,
+      "firstDeferredDay": null,
+      "firstDivergenceDay": null,
+      "pass": true
+    },
+    {
+      "seed": 103547,
+      "firstBaselineLateDay": 82,
+      "firstDeferredDay": 96,
+      "firstDivergenceDay": 97,
+      "pass": true
+    },
+    {
+      "seed": 103548,
+      "firstBaselineLateDay": 119,
+      "firstDeferredDay": 119,
+      "firstDivergenceDay": null,
+      "pass": true
+    }
+  ],
+  "trajectoryPass": true,
+  "funnel": {
+    "base": {
+      "launched-killed": 0,
+      "launched-fought-no-kill": 1,
+      "launched-no-meeting": 5,
+      "target-killed": 0,
+      "selected-blocked": 10,
+      "bid-not-selected": 0,
+      "plan-churned-before-dawn": 2,
+      "candidate-not-bid": 0,
+      "unknown": 0
+    },
+    "armed": {
+      "launched-killed": 0,
+      "launched-fought-no-kill": 1,
+      "launched-no-meeting": 7,
+      "target-killed": 0,
+      "selected-blocked": 4,
+      "bid-not-selected": 0,
+      "plan-churned-before-dawn": 2,
+      "candidate-not-bid": 0,
+      "unknown": 0
+    },
+    "baseSub": {
+      "selected-blocked:danger-gate": 4,
+      "plan-churned-before-dawn:holder-died": 2,
+      "selected-blocked:no-tick-after-commit": 3,
+      "launched-fought-no-kill:vFlee:1": 1,
+      "selected-blocked:companion-not-started:range-0": 2,
+      "selected-blocked:inviter-range-0": 1,
+      "launched-no-meeting:window:87-90": 1,
+      "launched-no-meeting:window:79-92": 1,
+      "launched-no-meeting:window:83-99": 1,
+      "launched-no-meeting:window:88-99": 1,
+      "launched-no-meeting:window:90-99": 1
+    },
+    "armedSub": {
+      "selected-blocked:danger-gate": 2,
+      "plan-churned-before-dawn:holder-died": 2,
+      "launched-no-meeting:window:137-137": 1,
+      "launched-fought-no-kill:evade:1": 1,
+      "launched-no-meeting:window:63-67": 1,
+      "launched-no-meeting:window:87-90": 1,
+      "launched-no-meeting:window:79-92": 1,
+      "launched-no-meeting:window:83-101": 1,
+      "launched-no-meeting:window:88-101": 1,
+      "launched-no-meeting:window:90-101": 1,
+      "selected-blocked:companion-not-started:range-0": 2
+    }
+  },
+  "go": {
+    "primaryNoTickArmedZero": true,
+    "primaryContact": true,
+    "launchesHeld": true,
+    "footprintCap": true,
+    "costMedian": true,
+    "costStarvTotals": true,
+    "costStarvArmOnly": true,
+    "trajectory": true,
+    "pass": true
+  }
+}
