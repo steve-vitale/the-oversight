@@ -228,6 +228,22 @@ counters. No robotic/static flag in this arm's area.
   proof test's own D1/D2 legs and 5d shape checks.
 - The frozen analysis JSON (`evidence/2026-11-15/seedattach-a-analysis.json`)
   is untouched and remains the before-oracle.
+- **check.js --quick (repo hygiene, not a GO bar): 334 passed, 7
+  failed in 806s.** Only one failure was captured before the output
+  tail cut the rest: `test-ladder-bundle-20261108` control "200
+  monster turns WITHOUT delivery fire the ambient raid — fires 0".
+  That control reproduces in isolation in 6s
+  (`node scripts/check.js --only ladder-bundle`: 78 passed, 1
+  failed) — deterministic and pre-existing on this tree, in the
+  mercy/charter area, untouched by this arm (no src/ diff, no
+  shared file with the seedattach test; the seedattach test passed
+  89/0 standalone and its lines read `ok` inside the check run).
+  The other 6 failures were not captured: the first run's output
+  was piped through `tail -15`, and the re-run for a full capture
+  was SIGTERM'd at ~500s with no log file. They are not this arm's
+  to chase (out of scope; the BODY forbids chasing off-axis items
+  mid-run) — flagged here for the coordinator. This arm's gate is
+  the proof test, which is green.
 
 ## Verdict: TAXONOMY RE-FREEZE GO
 
@@ -242,7 +258,8 @@ corpora; no past verdict moves. Net `src/` diff: zero.
 
 Test-only. No src/ change, no game change, no lever, no panel, no
 sims, no seed band. Backlog #2527 (finding #2516) moves
-`claimed` → `fixed` on landing. Commits: TBD by closeout.
+`claimed` → `fixed` on landing. Commit: `410f102fc` (test re-freeze +
+evidence); this amendment records the hash + the check.js note.
 
 ## Files
 
