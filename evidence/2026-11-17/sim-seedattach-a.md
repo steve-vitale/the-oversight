@@ -1,6 +1,6 @@
 # sim-seedattach-a — EVIDENCE (RECORDER FIX GO, finding #2523)
 
-**Arm:** sim-seedattach-a · **Loop A run:** fleshout-20261118T0330Z · **Axis:** scale-onramp
+**Arm:** sim-seedattach-a · **Loop A run:** fleshout-20261118T0441Z · **Axis:** scale-onramp
 **Type:** RECORDER FIX (scripts-only; no src/js change, no game change, no balanced panel, no seed band spent, no new sims).
 **Branch:** `sim-seedattach-a` · **Worktree:** `~/workspace/worktrees/sim-seedattach-a`
 **Base at arm start:** `4e9fdda99` (includes the #2508 fix `eb6ff8a27`) · **Prereg:** `evidence/2026-11-17/sim-seedattach-a-prereg.md` (committed `e426c2ed3` before any probe).

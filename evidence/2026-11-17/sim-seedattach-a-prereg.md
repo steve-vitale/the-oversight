@@ -1,6 +1,6 @@
 # sim-seedattach-a — PREREG (DIAG/PROBE, finding #2523)
 
-**Arm:** sim-seedattach-a · **Loop A run:** fleshout-20261118T0330Z · **Axis:** scale-onramp
+**Arm:** sim-seedattach-a · **Loop A run:** fleshout-20261118T0441Z · **Axis:** scale-onramp
 **Type:** DIAG/PROBE — analyzer-only; no src/js change, no game change, no
 balanced panel, no new sims unless the corpus lacks deaths coverage (it does
 not — see below).
