@@ -312,12 +312,25 @@ function classifyHavenTick(j) {
     }
     if (ep.firingPaths.filter(function (p) { return SEED_PATHS.indexOf(p) !== -1; }).length >= 2) multiPathEpisodes++;
     // Churn (same rules as classifySeed, read off planCensus).
+    // RECORDER FIX (sim-closekind-a, finding #2508): the deaths array is
+    // the authoritative holder-death source and is consulted FIRST.
+    // Census holderAlive=false and the daily-roster backup miss most
+    // deaths — dead villagers drop out of the daily roster, and census
+    // rows stop when the plan is deleted on death — so a holder death
+    // closed as plan-deleted.
     if (ep.closeKind == null) {
       const myCensus = censusRows.filter(function (r) {
         return r.vid === vid && r.target === ep.target && r.day >= ep.openDay;
       }).sort(function (a, b) { return a.day - b.day; });
       let diedDay = null;
-      for (const c of myCensus) if (!c.holderAlive) { diedDay = c.day; break; }
+      for (const e of (j.deaths || [])) {
+        if (e && e.kind === 'villager' && e.who === vid && (e.day | 0) >= ep.openDay) {
+          if (diedDay == null || (e.day | 0) < diedDay) diedDay = e.day | 0;
+        }
+      }
+      if (diedDay == null) {
+        for (const c of myCensus) if (!c.holderAlive) { diedDay = c.day; break; }
+      }
       if (diedDay == null) {
         for (const snap of daily) {
           if (!snap.roster) continue;

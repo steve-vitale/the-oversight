@@ -256,18 +256,48 @@ check('C3 every selected-blocked instance carries a NAMED reason (none is invite
 check('C4 OFF replication: funnel buckets exact vs frozen analysis',
   JSON.stringify(off.summary.byFunnel) === JSON.stringify(frozen.off.byFunnel),
   JSON.stringify(off.summary.byFunnel));
+// RECORDER FIX (sim-closekind-a, finding #2508): the frozen analysis was
+// written by the mislabeling classifier — holder deaths closed as
+// plan-deleted. The corrected classifier flips 29 closes to holder-died;
+// that moves the two churn-sub keys below (and one ON bucket, see C6).
+// Order-insensitive comparison: the re-run inserts new keys in instance
+// order, so key order differs from the frozen map.
+function sameMap(a, b) {
+  const ka = Object.keys(a).sort(), kb = Object.keys(b).sort();
+  if (JSON.stringify(ka) !== JSON.stringify(kb)) return false;
+  for (const k of ka) if (a[k] !== b[k]) return false;
+  return true;
+}
+function correctedMap(frozenMap, deltas) {
+  const s = JSON.parse(JSON.stringify(frozenMap));
+  for (const k of Object.keys(deltas)) {
+    s[k] = (s[k] || 0) + deltas[k];
+    if (s[k] === 0) delete s[k];
+  }
+  return s;
+}
 check('C5 OFF replication: funnel subs + pool shape + wall + median exact vs frozen analysis',
-  JSON.stringify(off.summary.byFunnelSub) === JSON.stringify(frozen.off.byFunnelSub) &&
+  sameMap(off.summary.byFunnelSub, correctedMap(frozen.off.byFunnelSub, {
+    'plan-churned-before-dawn:plan-deleted': -1, 'plan-churned-before-dawn:holder-died': 1,
+  })) &&
   JSON.stringify(off.summary.poolShape) === JSON.stringify(frozen.off.poolShape) &&
   JSON.stringify(off.summary.wall) === JSON.stringify(frozen.off.wall) &&
   off.summary.medianSurvival === frozen.off.medianSurvival,
-  'subs=' + (JSON.stringify(off.summary.byFunnelSub) === JSON.stringify(frozen.off.byFunnelSub)) +
+  'subs=' + (sameMap(off.summary.byFunnelSub, correctedMap(frozen.off.byFunnelSub, {
+    'plan-churned-before-dawn:plan-deleted': -1, 'plan-churned-before-dawn:holder-died': 1,
+  }))) +
   ' pool=' + (JSON.stringify(off.summary.poolShape) === JSON.stringify(frozen.off.poolShape)) +
   ' wall=' + (JSON.stringify(off.summary.wall) === JSON.stringify(frozen.off.wall)) +
   ' median=' + off.summary.medianSurvival + ' vs ' + frozen.off.medianSurvival);
 check('C6 ON re-analysis matches the frozen ON summary too (funnel + pool + wall + median)',
-  JSON.stringify(on.summary.byFunnel) === JSON.stringify(frozen.on.byFunnel) &&
-  JSON.stringify(on.summary.byFunnelSub) === JSON.stringify(frozen.on.byFunnelSub) &&
+  sameMap(on.summary.byFunnel, correctedMap(frozen.on.byFunnel, { 'plan-churned-before-dawn': 1, 'candidate-not-bid': -1 })) &&
+  sameMap(on.summary.byFunnelSub, correctedMap(frozen.on.byFunnelSub, {
+    'launched-no-meeting:window:134-148': -1, 'launched-no-meeting:window:134-147': 1,
+    'launched-no-meeting:window:45-48': -1, 'launched-no-meeting:window:45-47': 1,
+    'launched-no-meeting:window:96-146': -1, 'launched-no-meeting:window:96-145': 1,
+    'plan-churned-before-dawn:plan-deleted': -1, 'plan-churned-before-dawn:holder-died': 2,
+    'candidate-not-bid:not-scored': -1,
+  })) &&
   JSON.stringify(on.summary.poolShape) === JSON.stringify(frozen.on.poolShape) &&
   JSON.stringify(on.summary.wall) === JSON.stringify(frozen.on.wall) &&
   on.summary.medianSurvival === frozen.on.medianSurvival,

@@ -186,10 +186,24 @@ function classifySeed(j) {
       }
     }
     // Churn (Correction 2: holder-died / plan-deleted / retargeted only).
+    // RECORDER FIX (sim-closekind-a, finding #2508): the deaths array is
+    // the authoritative holder-death source and is consulted FIRST.
+    // Census holderAlive=false and the daily-roster backup miss most
+    // deaths — dead villagers drop out of the daily roster, and census
+    // rows stop when the plan is deleted on death — so a holder death
+    // closed as plan-deleted (28 instances across the frozen
+    // profilegate-b / notick-a corpora).
     if (inst.closeKind == null) {
       const myCensus = censusRows.filter(function (r) { return r.vid === vid; }).sort(function (a, b) { return a.day - b.day; });
       let diedDay = null;
-      for (const c of myCensus) if (!c.holderAlive) { diedDay = c.day; break; }
+      for (const e of (j.deaths || [])) {
+        if (e && e.kind === 'villager' && e.who === vid && (e.day | 0) >= inst.seedDay) {
+          if (diedDay == null || (e.day | 0) < diedDay) diedDay = e.day | 0;
+        }
+      }
+      if (diedDay == null) {
+        for (const c of myCensus) if (!c.holderAlive) { diedDay = c.day; break; }
+      }
       if (diedDay == null) {
         // Backup: daily roster dead flags.
         for (const snap of daily) {
