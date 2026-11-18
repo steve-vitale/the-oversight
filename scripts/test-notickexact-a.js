@@ -81,9 +81,9 @@ check('fix present: NOTICKEXACT marker + exact-population guard in vbrainScorePi
   brainJs.indexOf("logged.winPlanAction === 'party_launch' && partOf(this) === 3") !== -1 &&
   brainJs.indexOf("entry.deferred = 'party_launch:no-tick-exact'") !== -1);
 check('fix gates on the plan target + needWave (exact population, not every part-3 pick)',
-  brainJs.indexOf('plan.target') !== -1 &&
-  brainJs.indexOf('needWave') !== -1 &&
-  brainJs.indexOf('winPlan[vid]') !== -1);
+  brainJs.indexOf('_ntPlan.target != null') !== -1 &&
+  brainJs.indexOf('(_ntPlan.needWave | 0) >= 4') !== -1 &&
+  brainJs.indexOf('_ntVv.winPlan[vid]') !== -1);
 check('fix does NOT defer part-2 (no partOf(this) >= 2 deferral guard)',
   brainJs.indexOf("partOf(this) >= 2") === -1);
 check('fix clears the stale commit on deferral (delete br.commit[vid])',

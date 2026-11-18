@@ -976,7 +976,56 @@
         corePick: coreKind,
       };
       pushLog(this, entry);
-      if (logged) writeCommit(this, vid, Object.assign({}, logged, { score: chosenAnn ? chosenAnn.score : logged.w }), entry);
+      // NOTICKEXACT (sim-notickexact-a, finding #2498): a part-3
+      // party_launch pick is DEFERRED — but ONLY for the exact
+      // population the diag measured: the holder's current win-plan
+      // has a target and needWave >= 4. A commit written at part 3
+      // has no depart tick left to execute it — no tick runs after a
+      // part-3 score before dawn, and the part-3 tick itself is night
+      // and skips departures (agencyTick skips the depart path when
+      // isNight(), and isNight() is dayPart === 3) — so writing it
+      // strands the holder on an indoor EXPEDITION hold for a launch
+      // that can never come, and the commit evaporates overnight.
+      // The dead arms deferred EVERY part-3 pick (97 fires) and every
+      // part-≥2 pick (428 fires); the classifier counts only ~8–14
+      // no-tick selections per band, all wave-4-targeted (8 stage
+      // hunt + 6 stage party at score time on the calibration band),
+      // so stage is NOT gated here — only the plan's target and
+      // needWave. Wave-3 plans and targetless hunt plans still write
+      // their commit: no traced no-tick selection belongs to them,
+      // and deferring them is the broad footprint that killed both
+      // prior scopings. Deferring means: no commit is written, any
+      // earlier same-day commitment is cleared (the latest scoring
+      // decision is "not now", so no live instruction may execute at
+      // a later tick or be read as today's commit; a part-2 commit
+      // cleared this way has already had its one launch chance at
+      // the part-2 agency tick), and the scorer still returns the
+      // core pick — the villager does their core errand instead of
+      // the hold, and the plan re-bids at the next scoring
+      // opportunity (dawn, or the next perception event: a missing
+      // commit is refreshable). The log entry carries the deferral
+      // so the pick is explained without a commit behind it. No RNG
+      // is consumed or skipped here. Part-2 picks are UNTOUCHED:
+      // they still write their commit (2 of 14 baseline late commits
+      // launched same-day, so part-2 deferral is empirically risky).
+      var deferNoTick = false;
+      try {
+        var _ntPlan = null;
+        try {
+          var _ntVv = (this.state && this.state.village) ? this.state.village : null;
+          _ntPlan = (_ntVv && _ntVv.winPlan) ? _ntVv.winPlan[vid] : null;
+        } catch (e2) { _ntPlan = null; }
+        deferNoTick = !!(logged && logged.winPlanAction === 'party_launch' && partOf(this) === 3 &&
+          _ntPlan && _ntPlan.target != null && ((_ntPlan.needWave | 0) >= 4));
+      } catch (e) { deferNoTick = false; }
+      if (deferNoTick) entry.deferred = 'party_launch:no-tick-exact';
+      if (logged && !deferNoTick) writeCommit(this, vid, Object.assign({}, logged, { score: chosenAnn ? chosenAnn.score : logged.w }), entry);
+      if (deferNoTick) {
+        try {
+          var _ntBr = ensure(this);
+          if (_ntBr && _ntBr.commit) delete _ntBr.commit[vid];
+        } catch (e) {}
+      }
       return materialize;
     },
     // OVE-36 / Candidate A: after objPick materializes the core lottery kind
