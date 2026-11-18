@@ -245,5 +245,22 @@ harness **22/22**.
 
 ## Closeout
 
-PENDING — merge, release, rotation 7→4, lock deletion. (Adoption
-closeout hashes filled by a follow-up commit, r241 pattern.)
+- **Adoption:** the 12:00 coordinator timed out at 3600s with the
+  panel complete but nothing committed and the gate still running
+  (pid 17785). Adopted after heartbeat verification (registry hb
+  18:54:05Z, fresh): gate waited out (336/8, 0 attributable;
+  cache-flags verified standalone 4/4), proof + F5 harness re-runs
+  green, telemetry checked (coordinator's run: 2 LOUD lines, both
+  explained as the documented means-vs-sum mismatch; baseline NOT
+  rolled), finding #2517 updated with the r233 diagnostic answer,
+  commit `9fdf2cdb8` via the worktree's own safe-commit.sh (index
+  clobber repaired: all 98 files staged-as-deleted after the
+  private-index commit; repaired via ls-tree -r + update-index
+  --index-info, verified status empty), rebase onto master
+  `5c1976462` clean 1/1 pick (tip `9704401d1`), proof re-run green
+  on the rebased tip (r232 guard ALL GREEN, r225 F5 22/22).
+- **Remaining, in order:** ff-only merge into master (own call,
+  exit code verified directly); worktree release (`merged`) +
+  remove + branch delete; rotation-b 7→4 written and verified;
+  playtest-loop-2.lock (run_id 2026-11-18T17:55:50Z) deleted after
+  run_id verification, in its own call; main tree verified clean.
