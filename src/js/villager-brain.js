@@ -620,8 +620,19 @@
   }
   function firstNameOf(name) {
     try {
-      var s = String(name || '').split(' ')[0];
-      return s || String(name || '');
+      var s = String(name || '');
+      // AGUARD (sim-aguard-a, finding #2509): a stranger descriptor
+      // ("A man, maybe 20s") is not a name — splitting off its first
+      // word prints a bare "A" in say() lines ("A meant to walk out
+      // with A"). Precedent (game.js feastPlan first(), feastBuff.js
+      // disp(), hierarchy.js _repName, Game.firstRef): the whole
+      // descriptor is the honest short form, never the article alone.
+      // Real first names never start with a bare "A "/"An " token
+      // (name generator: src/data/characterGen.json, 48 first names,
+      // shortest 3 letters, none "A" or "An").
+      if (/^an? /i.test(s)) return s;
+      var f = s.split(' ')[0];
+      return f || s;
     } catch (e) { return String(name || ''); }
   }
   function writeCommit(self, vid, chosen, entry) {
