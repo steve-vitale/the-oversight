@@ -393,22 +393,28 @@ gate exactly):
   test takes a corpus argument and was not run standalone.
 
 ## Closeout
-- **Commits (branch `journey-establishment`, after rebase onto
-  `a468aec09`):** `47e351d0c` prereg + driver/analyzer clones
-  (tooling only, as-run driver); `58cb4ad44` walkHome first-refusal
+- **Commits (branch `journey-establishment`, after second rebase
+  onto `c6e738028`):** `38f56282e` prereg + driver/analyzer clones
+  (tooling only, as-run driver); `d7eec08d5` walkHome first-refusal
   + clearableBlocked + driver travelHome84 preference + proof test
-  27/27 `[needs-eyes]`; `1d51338f2` run note + pilot / panel /
-  analyzer / gate logs; this correction commit (rebased hashes —
-  pre-rebase tips were `76bc2dca7` / `6095a48ec` / `b2396c2c9`).
-  Safe-commit index clobber struck on all three commits
+  27/27 `[needs-eyes]`; `3225571c4` run note + pilot / panel /
+  analyzer / gate logs; `d6b5c3b16` first hash correction; this
+  second correction commit. Pre-rebase tips were `76bc2dca7` /
+  `6095a48ec` / `b2396c2c9` / `0a1505dc4` (first rebase) and
+  `47e351d0c` / `58cb4ad44` / `1d51338f2` / `0a1505dc4`-rebased
+  (second rebase).
+  Safe-commit index clobber struck on all four commits
   (staged-as-deleted / stale-blob / purged-entry patterns); repaired
   each time via the `ls-tree -r` pipe, blobs verified against HEAD,
   index == HEAD after each repair.
-- **Master moved during the run** (Loop B merged
-  sim-handoffrec-retry-b `52c21de71` + `a468aec09`, evidence-only,
-  no src/js overlap): rebased clean onto `a468aec09` (3/3, no
-  conflicts), proof tests re-run green on the rebased tip (r240
-  27/27, r137 clearhome 37/37).
+- **Master moved twice during the run** — first Loop B merged
+  sim-handoffrec-retry-b `52c21de71` + `a468aec09` (evidence-only),
+  then Lane B merged sim-partytrios-b `e02ae10b3` + `5a347152b` +
+  `aafc4208a` + `c6e738028` (brain-mirror partyTrios bump in
+  convo-wants.js/villager-brain.js, no src/js/game.js overlap):
+  rebased clean onto `a468aec09` then `c6e738028` (3/3 then 4/4,
+  no conflicts), proof tests re-run green on the final tip (r240
+  27/27, r137 clearhome 37/37, partytrios-b 21/21).
 - **Merged locally, pending ship** — no bump, no push, no live
   verification (ship loop owns those).
 - Rotation 1→2 written with read-back; lock deleted at closeout
