@@ -122,7 +122,14 @@ Adoption closeout (2026-11-18, r243 timed out at the 3600s execution
 limit with C-wide 6/8 and Pass D unstarted; adoption finished both):
 - C-wide resumed (seeds 89796, 89797) with the identical pass env;
   Pass D run fresh (FIGHTALLY2=1, 6 seeds). Analyzer run for both.
-- Commits: (to be filled)
+- Commits (rebased onto master `c0151cb53`, sim-partyform-diag-a):
+  `7cf1bba38` run note + prereg, drivers, panels + gate logs;
+  `fe638abdd` + `5c9e5d380` adoption heartbeat log. Analyzers
+  re-run on the rebased tip — all four passes PRIMARY GO | ALL GO,
+  verdicts unchanged. The full gate (334/10, 0 attributable) ran on
+  the pre-rebase tip; the rebase adds only two evidence-only commits
+  from other runs (establishment r241, sim-partyform-diag-a), no src
+  change on either side, so the gate was not re-run in full.
 - Rotation-b written 4→5 (social life next), read back.
 - Lock 2026-11-18T19:55:17Z deleted at closeout after run_id
   verification. Worktree journey2-endgame released (merged), removed;
