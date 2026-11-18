@@ -268,12 +268,33 @@ function eq(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
     process.env.VETREENGAGE = '1';
   })();
 
-  // 5q. QUAD-FIRE LEG — SKIPPED on this commit (win-plan half of
-  // the lever only). No fixture can make launched.length reach 3
-  // until the brain mirror learns companion3 (commit B of this
-  // arm) — the live leg lands there, not faked here.
-  skip('§5q quad launch bumps partyQuads to 1 (live fixture)',
-    'unreachable until the brain mirror lands (commit B); owned by the PARTYSIZE4 lever arm');
+  // 5q. QUAD-FIRE LEG — LIVE since the PARTYSIZE4 lever landed
+  // (sim-partysize4-b). A dawn commit carrying a third companion
+  // launches all four on one target, and the brain mirror bumps
+  // partyQuads to 1 (trios stays 1 — the quad is also a trio-sized
+  // launch, so both counters move). A blocked third companion falls
+  // back to a trio launch with partyQuads at 0. This is the
+  // observable effect the counter exists to count: a quad actually
+  // launching and fighting, not a green assertion.
+  (function () {
+    process.env.PARTYSIZE4 = '1';
+    const a = brainCtx({ c3: 'v4' });
+    const r = Game.vbrainExecuteDepart.call(a.ctx, 'v1', 5, 5, false);
+    check('§5q quad launch bumps partyQuads to 1 (live fixture)',
+      r === 'launch' && !!a.exped.v1 && !!a.exped.v2 && !!a.exped.v3 && !!a.exped.v4 &&
+      a.exped.v1.tx === a.exped.v2.tx && a.exped.v2.tx === a.exped.v3.tx && a.exped.v3.tx === a.exped.v4.tx &&
+      a.plan1.stage === 'hunt' && a.plan1.party.length === 3 &&
+      a.plan1.party.indexOf('v2') !== -1 && a.plan1.party.indexOf('v3') !== -1 && a.plan1.party.indexOf('v4') !== -1 &&
+      quads(a.ctx) === 1 && trios(a.ctx) === 1,
+      JSON.stringify({ r: r, exped: Object.keys(a.exped), party: a.plan1.party, quads: quads(a.ctx), trios: trios(a.ctx) }));
+    const b = brainCtx({ c3: 'v4', blockVid: 'v4' });
+    const r2 = Game.vbrainExecuteDepart.call(b.ctx, 'v1', 5, 5, false);
+    check('§5q blocked third companion falls back to a trio launch, partyQuads 0',
+      r2 === 'launch' && !!b.exped.v1 && !!b.exped.v2 && !!b.exped.v3 && !b.exped.v4 &&
+      b.plan1.party.length === 2 && quads(b.ctx) === 0 && trios(b.ctx) === 1,
+      JSON.stringify({ r: r2, exped: Object.keys(b.exped), party: b.plan1.party, quads: quads(b.ctx), trios: trios(b.ctx) }));
+    delete process.env.PARTYSIZE4;
+  })();
 })();
 
 // ---- §6 live driver leg: the adapted driver runs end to end ----

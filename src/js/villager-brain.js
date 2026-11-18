@@ -246,6 +246,22 @@
             if (c2) cand.companion2 = c2;
           }
         } catch (e) {}
+        // PARTYSIZE4 (sim-partysize4-b): a third companion for
+        // wave-4-target plans, so the launch can go out as a party
+        // of four. Pure read — the pick gears nobody and writes
+        // nothing; launch-time gates in the depart mirror decide
+        // whether the third companion can go. Env-gated: no third
+        // companion is picked unless PARTYSIZE4=1 (and the pick
+        // itself re-checks needWave + the wave-4 unlock). Only when
+        // a second companion was picked: no 4th without a 3rd.
+        var _ps4C3 = false;
+        try { _ps4C3 = (typeof process !== 'undefined' && process.env && process.env.PARTYSIZE4 === '1'); } catch (e2) {}
+        try {
+          if (_ps4C3 && c2 && plan && (plan.needWave | 0) >= 4 && typeof self.winPlanThirdCompanion === 'function') {
+            var c3 = self.winPlanThirdCompanion(vid, hx, hy, companion, c2);
+            if (c3) cand.companion3 = c3;
+          }
+        } catch (e) {}
         out.push(cand);
       } else if (stage === 'party' && !companion) {
         out.push({
@@ -1225,6 +1241,22 @@
           } catch (e) {}
           if (ok2) launched.push(c.companion2);
         }
+        // PARTYSIZE4 (sim-partysize4-b): launch the third companion on
+        // the same shared target when the dawn candidate carried one.
+        // Only a started expedition counts — a blocked third companion
+        // falls back to a trio launch, never a solo inviter.
+        // Env-gated: the third companion launches only when PARTYSIZE4=1.
+        var _ps4C3m = false;
+        try { _ps4C3m = (typeof process !== 'undefined' && process.env && process.env.PARTYSIZE4 === '1'); } catch (e2) {}
+        if (_ps4C3m && c.companion3) {
+          this.startExpedition(c.companion3, hx, hy, false, opts);
+          var ok3 = false;
+          try {
+            var a4 = this.agencyState ? this.agencyState() : null;
+            ok3 = !!(a4 && a4.exped && a4.exped[c.companion3]);
+          } catch (e) {}
+          if (ok3) launched.push(c.companion3);
+        }
         try {
           var plan2 = this.winPlanOf ? this.winPlanOf(vid) : null;
           if (plan2) { plan2.stage = 'hunt'; plan2.party = launched.slice(); }
@@ -1233,7 +1265,7 @@
           if (launched.length > 1) {
             var cplan2 = this.winPlanOf ? this.winPlanOf(c.companion2) : null;
             if (cplan2) {
-              cplan2.stage = 'hunt'; cplan2.party = [vid, c.companion];
+              cplan2.stage = 'hunt'; cplan2.party = [vid, c.companion].concat(launched.length > 2 ? [launched[2]] : []);
               cplan2.target = plan2 ? plan2.target : null; cplan2.node = plan2 ? plan2.node : null;
             }
             // PARTYTRIOS (sim-partytrios-b): the brain path is the
@@ -1245,6 +1277,13 @@
             try { var _pt = (typeof this.winPlanStats === 'function') ? this.winPlanStats() : null; if (_pt) _pt.partyTrios = (_pt.partyTrios || 0) + 1; } catch (e) {}
           }
           if (launched.length > 2) {
+            // PARTYSIZE4 (sim-partysize4-b): the third companion's
+            // plan mirrors the quad — same target, same party.
+            var cplan3 = this.winPlanOf ? this.winPlanOf(c.companion3) : null;
+            if (cplan3) {
+              cplan3.stage = 'hunt'; cplan3.party = [vid, c.companion, launched[1]];
+              cplan3.target = plan2 ? plan2.target : null; cplan3.node = plan2 ? plan2.node : null;
+            }
             // PARTYQUADS (sim-partyquads-b): the brain path is the
             // launch path that fires in sims, but it never bumped
             // partyQuads — only winPlanDepart did (for trios) — so the
@@ -1252,10 +1291,10 @@
             // sim-partysize-recorder-b branch (commit 035034c9f). A
             // quad launched here counts the same as one launched there
             // (winPlanStats() initializes the defaults, so this is safe
-            // on a fresh village). NOTE: the guard can only fire once
-            // a third companion launches — no candidate sets companion3
-            // on this tip (PARTYSIZE4 lever HELD), so the counter stays
-            // 0 by construction until that lever lands; the proof test
+            // on a fresh village). The guard fires only once a third
+            // companion launches — the PARTYSIZE4 lever (sim-partysize4-b)
+            // sets companion3 on the dawn candidate; with the flag off
+            // the counter stays 0 by construction. The proof test
             // bounds the placement (a trio must not bump it).
             try { var _pq = (typeof this.winPlanStats === 'function') ? this.winPlanStats() : null; if (_pq) _pq.partyQuads = (_pq.partyQuads || 0) + 1; } catch (e) {}
           }
