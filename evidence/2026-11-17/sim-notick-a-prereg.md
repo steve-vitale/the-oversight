@@ -167,8 +167,8 @@ this prereg. The systematic extraction below is the first judgement.
 
 ## Primary metric (frozen)
 
-**Fate classification of EVERY no-tick-after-commit selection** — the 4
-on the frozen ON corpus plus every no-tick selection on the fresh band.
+**Fate classification of EVERY no-tick-after-commit selection** — the 12
+on the frozen ON corpus (Correction 2) plus every no-tick selection on the fresh band.
 "Fate" = the earliest post-commit event for the same plan (same vid +
 target) within 7 days after the no-tick day D, from the frozen buckets
 below. A plan whose fate is a re-bid is traced to its eventual instance
@@ -206,8 +206,9 @@ at part >= 2" fix would break live behavior and is NOT trivially safe.
 ## GO bars (frozen — a miss is NO-GO, never re-scored)
 
 **DIAG GO** iff ALL of:
-1. **Frozen classification complete:** 4/4 frozen no-tick selections
-   classified into a named fate, **unknown ≤ 1**.
+1. **Frozen classification complete:** 12/12 frozen no-tick selections
+   classified into a named fate, **unknown ≤ 1**. (Corrected from 4/4
+   by Correction 2 — the population is 12.)
 2. **Fresh band complete:** the fresh 8-seed ON leg runs clean (8/8
    files, 0 instrument errors) and every no-tick selection on it is
    classified, **unknown ≤ 1**. The fresh no-tick count itself is
@@ -258,6 +259,63 @@ behavioral change the player can see; `[needs-eyes]` then applies.
   `plan-deleted` (both mean the plan for this target left winPlan);
   the closeKind is recorded per instance in the evidence table.
 - Fix rule (a) benign list gains `depart-later`.
+
+## Correction 2 (after the first tracer run, before any evidence — instrument facts)
+
+Three instrument facts the first tracer run exposed; all three are
+corrections to the INSTRUMENT, not to any verdict (no fate has been
+judged into evidence yet, and the fresh band has not run):
+
+1. **Population is 12, not 4.** selblock-a's "4 no-tick selections"
+   counted only the selections inside the 12 selected-blocked
+   instances. Launched instances ALSO carry no-tick commit days in
+   their history (a plan can commit at part 3, miss its tick, re-bid,
+   and launch days later). The frozen ON corpus carries **12**
+   no-tick-after-commit selections. GO bar 1 is corrected to **12/12
+   classified, unknown ≤ 1**. The brief's "classify EVERY
+   no-tick-after-commit instance" is the population that matters.
+2. **Holder death must be read from the deaths array.** The
+   classifier's churn detection (`classifySeed`) misses deaths: it
+   checks census `holderAlive=false` and daily-roster `dead:true`,
+   but dead villagers DROP OUT of the daily roster, and census rows
+   stop when the plan is deleted on death — so both david_kim (died
+   d86, seed 103416) and gen_4hoo6rr (died d147, seed 103413) close
+   as `plan-deleted` while the deaths array records their deaths.
+   The tracer now reads holder death from `deaths` (kind villager)
+   first, adds a death candidate to the fate precedence (depart >
+   re-bid > death > close > village-end), and reports the death
+   cause. This changes two frozen fates from `plan-deleted-after`
+   to `holder-died-after` — a correction of a mislabel, not a
+   re-score: the deaths are in the corpus either way.
+3. **Depart rows need the companionStarted qualifier.** A `launch`
+   depart row with `vidExped` true and `companionExped` false is a
+   HOLDER-ONLY departure (the companion never started; the plan
+   advances to hunt short-handed). The tracer now records
+   `companionStarted` (brain rows only; legacy rows carry no exped
+   flags) and qualifies every depart fate as full-party or
+   holder-only in the evidence table. The fate bucket is unchanged.
+
+## Correction 2b — fix rule (a), attribution (same moment, same reason)
+
+The two holder-died-after fates on the frozen leg are deaths the
+no-tick commit did not cause, shown by their backing rows: gen_4hoo6rr
+was already out hunting since d134, ten days BEFORE the d144 commit,
+and died in the wild d147 on that launched expedition; david_kim died
+d86 to a monster while his plan was still live and attempting
+departure that day (a directed startExpedition call, expedition never
+stood). The commit neither summoned the monster nor prevented the
+departure. Rule (a) as written would count any holder-died-after fate
+as "harm" — but its intent is harm the COMMIT caused. Clarified:
+**(a) holds only when a harm fate (plan-deleted-after,
+holder-died-after, village-ended, stall, unknown) is attributable to
+the no-tick commit on its backing rows** — i.e. the plan died, stalled,
+or dropped BECAUSE the commit evaporated and no re-bid or departure
+followed, with no independent cause (death by monster/wild, a launch
+that predates the commit, a village-ending event) in the rows. The
+fate LABELS are unchanged by this clarification; the attribution is
+reported per instance in the evidence table, and the metric review
+records the rule as written vs as applied. If the fresh band shows an
+attributable harm fate, (a) holds and the fix is attempted.
 
 ## Horizon (why 150d death-aware, same as profilegate-b)
 
