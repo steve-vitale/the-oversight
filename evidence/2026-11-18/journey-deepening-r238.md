@@ -332,7 +332,31 @@ loads an r238 file):
   worktree.
 
 ## Closeout
-- (to be filled)
+- Commits (branch journey-deepening, after rebase onto master
+  3523b2303): 3d31173c6 tooling (prereg + driver/analyzer clones +
+  proof tests); 3897a80b4 run note + pilot/panel/analyzer/gate
+  logs. Base for the rebase was the master ref, NOT the main
+  tree's checked-out HEAD: the main tree was checked out on
+  sim-winnability-round-2015 at a531ed8be (master + 5 foodgate
+  commits not on master), so an early rebase onto a531ed8be was
+  undone with `rebase --onto 3523b2303 a531ed8be` before landing.
+- Merged locally onto master by fast-forward ref update
+  (guarded on old value 3523b2303): master 3523b2303 →
+  3897a80b4. A literal `git merge --ff-only` in the main tree
+  would have landed the commits on the sibling winnability
+  branch instead of master; the ref update has exactly the
+  ff-merge effect on master and left the main tree's checkout
+  untouched. Verified: master contains 3897a80b4, pure ff.
+- Proof tests re-run green on the rebased tip (muster 37/37,
+  march 11/11, analyzer 80/80) before landing.
+- Index clobber struck after the second safe-commit (all 12
+  r238 files staged-as-deleted in the worktree index; commits
+  correct); repaired with `git ls-tree -r HEAD` +
+  `git update-index --add --index-info`, verified status empty
+  + diff HEAD empty + all 12 hash-objects match HEAD blobs.
+- Worktree released + removed; rotation 2→3; lock deleted.
+- Merged locally, pending ship (no version bump, no push, no
+  live verification — ship loop owns those).
 - The r238 panel corpus (per-seed JSONs + convo transcripts +
   analyzer log + gate log) lives under the goal hidden_files
   evidence dir for 2026-11-18; the repo evidence dir holds the
