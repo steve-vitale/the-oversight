@@ -651,6 +651,17 @@
       vbrainSrc: chosen.vbrainSrc || null,
       winPlanAction: chosen.winPlanAction || null,
       companion: chosen.companion || null,
+      // TRIODROUGHT (sim-triodrought-b, finding #2518): the dawn
+      // commitment must carry the second (and third) companion the
+      // candidate picked, or vbrainExecuteDepart can never launch
+      // them — the pick fires at scoring and dies here. Restores the
+      // lines the producergate revert (72a6efc99) removed; the carry
+      // is inert unless a candidate sets the field (companion2 only
+      // under VETREENGAGE; companion3 is set by no candidate on this
+      // tip). No needsFull gate is restored: a pair still launches
+      // when no second companion exists, per the vetreengage design.
+      companion2: chosen.companion2 || null,
+      companion3: chosen.companion3 || null,
       logIndex: br.logs.length - 1,
     };
     // A real re-score consumes the perception event that authorized it.
