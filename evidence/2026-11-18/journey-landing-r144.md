@@ -314,6 +314,26 @@ reaches every monster and fights.
   This run fixed a fight that could not be fought, which is one link in
   that chain, not the chain itself.
 
-## Closeout
+## Closeout (adoption, 2026-11-18)
 
-[PENDING — commit, merge, rotation 0→1, lock deletion.]
+Coordinator timed out during Q4 adjudication; adoption closed the run:
+- Fix commit `cc35d76b9` (pocket repair + proof tests 8/8, 14/14;
+  RED verified by reverting `game.js` to HEAD — fails on "monster at
+  (0,0), path=null" — GREEN restored after).
+- Evidence commit `80128cad6` (prereg, run note with Q4 adjudication,
+  driver, panel/gate/solo logs).
+- Both merged ff-only to master (`80128cad6`); main tree verified
+  clean; rotation-a written 0→1 (next leg: establishment); lock
+  `playtest-a-20261118T0920Z` deleted after run_id verification.
+- Adoption friction: first merge attempt (exit 128) raced the Lane B
+  social-life r236 adoption landing first — `update_ref` failed
+  because HEAD had moved; the failed merge dirtied the main tree
+  (r236 files staged-deleted, r144 files staged-added, favor-forage.js
+  MM). Repaired from HEAD (checkout + ls-tree index restore +
+  force-remove of staged adds); verified clean (status empty, diff
+  HEAD empty, game.js + favor-forage.js blobs match HEAD). Lock file
+  was found absent mid-adoption and re-created with the run_id +
+  fresh timestamp. A write flap 11:46:56–~11:50:35Z invalidated the
+  first solo batch's last three tests; the batch was re-run in full
+  on the new boot with durable logs. A VM replacement mid-adoption
+  wiped /tmp solo logs; the re-run's logs live in the evidence dir.
