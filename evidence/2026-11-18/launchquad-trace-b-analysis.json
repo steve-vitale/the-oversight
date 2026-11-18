@@ -1,0 +1,221 @@
+{
+  "arm": "launchquad-trace-b",
+  "run": "fleshout-loop-b-20261118T0330Z",
+  "corpus": {
+    "ctlDir": "perseed-partysize-allycap-b-ctl",
+    "armDir": "perseed-partysize-allycap-b-arm",
+    "band": "103601-103608"
+  },
+  "population": {
+    "expected": {
+      "total": 3,
+      "ctl": 1,
+      "arm": 2
+    },
+    "actual": {
+      "total": 3,
+      "ctl": 1,
+      "arm": 2
+    }
+  },
+  "verdictCounts": {
+    "ALLY-PICK": 3
+  },
+  "rows": [
+    {
+      "leg": "ctl",
+      "seed": "103606",
+      "day": 77,
+      "vid": "mateo_alvarez",
+      "mid": "eulogy",
+      "outcome": "evade",
+      "rounds": 0,
+      "mDealt": 0,
+      "launchDay": 61,
+      "launchTarget": "eulogy",
+      "targetMatch": true,
+      "launchParty": [
+        "gen_a48xjkw",
+        "mateo_alvarez"
+      ],
+      "launchPartySize": 2,
+      "meetingParty": [
+        "mateo_alvarez",
+        "gen_a7suqzn",
+        "elena_petrova"
+      ],
+      "meetingPartySize": 3,
+      "allyFromStart": false,
+      "gatePlanParty": [
+        "ivy_wang"
+      ],
+      "gateSensed": [
+        "mateo_alvarez",
+        "gen_a7suqzn",
+        "elena_petrova"
+      ],
+      "gatePlanStage": "hunt",
+      "gatePlanTarget": null,
+      "togetherRows": [],
+      "apartRows": [
+        {
+          "day": 64,
+          "vid": "gen_a48xjkw",
+          "mid": "eulogy",
+          "outcome": "mFlee",
+          "allies": [
+            "gen_a7suqzn",
+            "elena_petrova"
+          ]
+        },
+        {
+          "day": 69,
+          "vid": "mateo_alvarez",
+          "mid": "suburb",
+          "outcome": "evade",
+          "allies": [
+            "gen_a7suqzn",
+            "elena_petrova"
+          ]
+        },
+        {
+          "day": 76,
+          "vid": "mateo_alvarez",
+          "mid": "timeslot",
+          "outcome": "evade",
+          "allies": [
+            "gen_a7suqzn",
+            "elena_petrova"
+          ]
+        }
+      ],
+      "mHpStartRec": 991,
+      "log": "Mateo saw Big Ugly in time and gave it room.",
+      "distanceTerrain": "n/a (not in corpus)",
+      "verdict": "ALLY-PICK",
+      "reason": "meeting party differs from launch party; allyFromStart=false; the gate row itself records planParty [\"ivy_wang\"] vs sensed [\"mateo_alvarez\",\"gen_a7suqzn\",\"elena_petrova\"] — the meeting party was sensed fresh at the meeting, not carried from the launch"
+    },
+    {
+      "leg": "arm",
+      "seed": "103604",
+      "day": 49,
+      "vid": "ivy_wang",
+      "mid": "audit",
+      "outcome": "evade",
+      "rounds": 0,
+      "mDealt": 0,
+      "launchDay": 46,
+      "launchTarget": "audit",
+      "targetMatch": true,
+      "launchParty": [
+        "ivy_wang",
+        "benoit_lambert",
+        "naran_tumen",
+        "gen_ke7f7nq"
+      ],
+      "launchPartySize": 4,
+      "meetingParty": [
+        "ivy_wang",
+        "gen_256ihks",
+        "gen_x833x9m"
+      ],
+      "meetingPartySize": 3,
+      "allyFromStart": false,
+      "gatePlanParty": [
+        "benoit_lambert",
+        "ava_garcia",
+        "naran_tumen"
+      ],
+      "gateSensed": [
+        "ivy_wang",
+        "gen_256ihks",
+        "gen_x833x9m"
+      ],
+      "gatePlanStage": "hunt",
+      "gatePlanTarget": "audit",
+      "togetherRows": [
+        {
+          "day": 48,
+          "vid": "naran_tumen",
+          "mid": "strike",
+          "outcome": "evade",
+          "allies": [
+            "gen_256ihks",
+            "gen_ke7f7nq"
+          ]
+        }
+      ],
+      "apartRows": [],
+      "mHpStartRec": 1298,
+      "log": "Ivy saw The Audit in time and gave it room.",
+      "distanceTerrain": "n/a (not in corpus)",
+      "verdict": "ALLY-PICK",
+      "reason": "meeting party differs from launch party; allyFromStart=false; the gate row itself records planParty [\"benoit_lambert\",\"ava_garcia\",\"naran_tumen\"] vs sensed [\"ivy_wang\",\"gen_256ihks\",\"gen_x833x9m\"] — the meeting party was sensed fresh at the meeting, not carried from the launch"
+    },
+    {
+      "leg": "arm",
+      "seed": "103604",
+      "day": 53,
+      "vid": "ava_garcia",
+      "mid": "audit",
+      "outcome": "evade",
+      "rounds": 0,
+      "mDealt": 0,
+      "launchDay": 49,
+      "launchTarget": "audit",
+      "targetMatch": true,
+      "launchParty": [
+        "ivy_wang",
+        "benoit_lambert",
+        "ava_garcia",
+        "naran_tumen"
+      ],
+      "launchPartySize": 4,
+      "meetingParty": [
+        "ava_garcia",
+        "benoit_lambert",
+        "ivy_wang"
+      ],
+      "meetingPartySize": 3,
+      "allyFromStart": false,
+      "gatePlanParty": [
+        "benoit_lambert"
+      ],
+      "gateSensed": [
+        "ava_garcia",
+        "benoit_lambert",
+        "ivy_wang"
+      ],
+      "gatePlanStage": "hunt",
+      "gatePlanTarget": "audit",
+      "togetherRows": [
+        {
+          "day": 52,
+          "vid": "ivy_wang",
+          "mid": "eulogy",
+          "outcome": "evade",
+          "allies": [
+            "benoit_lambert",
+            "naran_tumen"
+          ]
+        },
+        {
+          "day": 53,
+          "vid": "benoit_lambert",
+          "mid": "algorithm",
+          "outcome": "vFlee",
+          "allies": [
+            "ivy_wang",
+            "gen_256ihks"
+          ]
+        }
+      ],
+      "apartRows": [],
+      "mHpStartRec": 1237,
+      "log": "Ava saw The Audit in time and gave it room.",
+      "distanceTerrain": "n/a (not in corpus)",
+      "verdict": "ALLY-PICK",
+      "reason": "meeting party differs from launch party; allyFromStart=false; the gate row itself records planParty [\"benoit_lambert\"] vs sensed [\"ava_garcia\",\"benoit_lambert\",\"ivy_wang\"] — the meeting party was sensed fresh at the meeting, not carried from the launch"
+    }
+  ]
+}
