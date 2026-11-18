@@ -3,18 +3,17 @@
 // numbers): the brain-path quad bump in vbrainExecuteDepart sits in
 // a `launched.length > 2` guard (NOT in the trio block — a trio
 // launch must leave partyQuads at 0), the winPlanStats default is 0,
-// and the winPlanStats accessor reaches the bump. It does NOT prove
-// a live quad launch bumps the counter — and it must not pretend to:
-// no fixture can make launched.length reach 3 on this tip, because
-// no code launches a third companion (no candidate sets companion3,
-// PARTYSIZE4 is read by no code, the PARTYSIZE4 lever is HELD).
-// That quad-fire leg is a documented SKIP below (§5q), owned by the
-// PARTYSIZE4 lever arm. What this test proves is the faithful
-// extraction (same accessor, same guard shape as the HELD commit
-// 035034c9f) plus the placement bound that keeps trios from being
-// counted as quads. Negative control: §0 and the §5d default check
-// fail on pre-fix code (no marker, no default, no bump line); the
-// §6 driver leg fails too (MODE=arm requires BUMP_PRESENT).
+// and the winPlanStats accessor reaches the bump. Since the
+// PARTYSIZE4 lever landed (sim-partysize4-b), the quad-fire leg
+// (§5q) is LIVE: a dawn commit carrying a third companion launches
+// all four on one target and bumps partyQuads to 1. What this test
+// proves is the faithful extraction (same accessor, same guard shape
+// as the HELD commit 035034c9f) plus the placement bound that keeps
+// trios from being counted as quads, plus the depart-path quad bump
+// the lever arm added (finding #2549). Negative control: §0 and the
+// §5d default check fail on pre-fix code (no marker, no default, no
+// bump line); the §6 driver leg fails too (MODE=arm requires
+// BUMP_PRESENT).
 // Fixture pattern follows test-partytrios-b.js §5 (hand-built ctx;
 // the brain depart calls the winPlanStats accessor off `this`, so
 // it is bound to the real one). The depart path's own partyTrios
@@ -46,7 +45,7 @@ function eq(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
   check('§0 brain mirror bumps partyQuads exactly once in the file',
     (brainSrc.match(/_pq\.partyQuads = \(_pq\.partyQuads \|\| 0\) \+ 1/g) || []).length === 1);
   check('§0 brain mirror bump sits inside a launched.length > 2 block',
-    /if \(launched\.length > 2\) \{[\s\S]{0,1200}_pq\.partyQuads = \(_pq\.partyQuads \|\| 0\) \+ 1/.test(brainSrc));
+    /if \(launched\.length > 2\) \{[\s\S]{0,2200}_pq\.partyQuads = \(_pq\.partyQuads \|\| 0\) \+ 1/.test(brainSrc));
   // Placement bound: the quad bump must NOT sit inside the trio
   // block — the text between `if (launched.length > 1) {` and the
   // trio bump must contain no _pq line (a trio counted as a quad
@@ -64,8 +63,16 @@ function eq(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
     winplanSrc.indexOf("if (v.winPlanStats.partyQuads == null) v.winPlanStats.partyQuads = 0;") !== -1);
   check('§0 depart path still bumps partyTrios (guard, owned by winplandepart-b)',
     winplanSrc.indexOf("bump(self, 'partyTrios')") !== -1);
-  check('§0 depart path has no partyQuads bump (out of scope — see prereg Diagnosis §3)',
-    winplanSrc.indexOf("bump(self, 'partyQuads')") === -1);
+  // PARTYSIZE4 (sim-partysize4-b, finding #2549): the depart path
+  // now carries its own quad bump — the lever arm added it, so the
+  // absence asserted here on the partyquads tip is superseded. The
+  // placement bound is the same as the brain path: inside a
+  // launched.length > 2 block, after the trio bump (a trio must
+  // never bump it).
+  check('§0 depart path bumps partyQuads (lever arm, finding #2549)',
+    winplanSrc.indexOf("bump(self, 'partyQuads')") !== -1);
+  check('§0 depart path quad bump sits inside a launched.length > 2 block',
+    /if \(launched\.length > 2\) \{[\s\S]{0,600}bump\(self, 'partyQuads'\)/.test(winplanSrc));
   check('§0 writeCommit still carries companion2/3 (triodrought substrate)',
     brainSrc.indexOf('companion2: chosen.companion2') !== -1 && brainSrc.indexOf('companion3: chosen.companion3') !== -1);
   check('§0 no other src/js file mentions partyQuads',
@@ -160,13 +167,18 @@ function eq(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
       v2: { node: [5, 5], weaponB: 5, items: [{ id: 'spear' }] },
       v3: { node: [5, 5], weaponB: 5, items: [{ id: 'spear' }] },
     });
+    if (o.c3 !== undefined) people.v4 = { id: 'v4', name: 'v4', dead: false, _armorP: 0, _weaponB: 5, items: [{ id: 'spear' }], node: [5, 5] };
     const plan1 = { stage: 'party', target: 'reunion', needWave: 4, node: { nx: 3, ny: 3 }, party: [], sinceDay: 10, holdSinceDay: -1 };
     const plan2 = { stage: 'gear', target: null, node: null, party: [], sinceDay: 0, holdSinceDay: -1 };
     const plan3 = { stage: 'gear', target: null, node: null, party: [], sinceDay: 0, holdSinceDay: -1 };
+    const plan4 = { stage: 'gear', target: null, node: null, party: [], sinceDay: 0, holdSinceDay: -1 };
     const commit = { kind: 'EXPEDITION', winPlanAction: 'party_launch', companion: 'v2',
       companion2: (o.c2 === undefined ? 'v3' : o.c2), day: 60 };
+    if (o.c3 !== undefined) commit.companion3 = o.c3;
+    const winPlan = { v1: plan1, v2: plan2, v3: plan3 };
+    if (o.c3 !== undefined) winPlan.v4 = plan4;
     const ctx = makeCtx({ people: people, exped: exped,
-      winPlan: { v1: plan1, v2: plan2, v3: plan3 },
+      winPlan: winPlan,
       vbrain: { commit: { v1: commit }, perception: {}, logs: [], stats: { picks: 0, gates: 0, expeditions: 0, winPlan: 0 } } });
     ctx.startExpedition = function (vid, hx, hy, announce, opts) {
       if (o.blockVid === vid) return; // blocked: no expedition starts
@@ -256,16 +268,12 @@ function eq(a, b) { return JSON.stringify(a) === JSON.stringify(b); }
     process.env.VETREENGAGE = '1';
   })();
 
-  // 5q. QUAD-FIRE LEG — SKIPPED, not faked. No fixture can make
-  // launched.length reach 3 on this tip: vbrainExecuteDepart never
-  // reads c.companion3 and no code launches a third companion, so
-  // the `launched.length > 2` guard is unreachable in live code
-  // until the PARTYSIZE4 lever lands. The analyzer selftest (§7)
-  // proves the counting logic on synthetic corpus data instead
-  // (a size-4 depart row with partyQuads 1 matches; with 0 it is
-  // judged NO-GO). This skip is the honest boundary of the proof.
+  // 5q. QUAD-FIRE LEG — SKIPPED on this commit (win-plan half of
+  // the lever only). No fixture can make launched.length reach 3
+  // until the brain mirror learns companion3 (commit B of this
+  // arm) — the live leg lands there, not faked here.
   skip('§5q quad launch bumps partyQuads to 1 (live fixture)',
-    'unreachable on this tip: no third-companion launch exists (PARTYSIZE4 lever HELD); owned by the PARTYSIZE4 lever arm');
+    'unreachable until the brain mirror lands (commit B); owned by the PARTYSIZE4 lever arm');
 })();
 
 // ---- §6 live driver leg: the adapted driver runs end to end ----

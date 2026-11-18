@@ -274,6 +274,82 @@
     try { return typeof process !== 'undefined' && process.env && process.env.FLEEREPAIR2 === '1'; } catch (e) { return false; }
   }
 
+  // PARTYSIZE4 env gate (sim-partysize4-b): wave-4+ hunt plans may
+  // recruit a FOURTH companion (holder + 3 = party of 4) once wave 4
+  // is unlocked. OFF unless the process env carries PARTYSIZE4=1
+  // (node sims only; in the browser process is undefined, so the
+  // lever is off). The gate is the LAUNCH-side cap only: the fight
+  // engine's ally cap (fieldFight slice(0,2) + one shout join) is
+  // untouched, so a 4th member travels but cannot yet join the
+  // fight — see the sim-partysize4-b prereg.
+  function partysize4On() {
+    try { return typeof process !== 'undefined' && process.env && process.env.PARTYSIZE4 === '1'; } catch (e) { return false; }
+  }
+
+  // Shared extra-companion scan for the second AND third picks
+  // (sim-vetreengage-a trio, sim-partysize4-b quad). Module-level (like
+  // findCompanion / companionLaunchable) so the second/third-companion
+  // wrappers can call it directly: the wrappers run with `this` bound
+  // to a test ctx as well as to Game, and a `this.winPlanExtraCompanion`
+  // call goes nowhere on a ctx that never received the method (the
+  // trio proof caught it: picks returned null on every fixture).
+  // Picks ONE Haven-idle villager from the same pool, excluding every
+  // id in `exclude` (the holder, the scholar, and the companions
+  // already picked). PURE READ — no gear-up, no state writes, no RNG.
+  // Preference: (1) living wave-3+ killers, (2) currently armed
+  // villagers, (3) the rest; within each tier the shared companionRank
+  // order (formula untouched). Wave-4-target plans only.
+  function extraCompanionScan(self, vid, hx, hy, exclude) {
+    try {
+      var plan = null;
+      try {
+        var vv = self.state && self.state.village;
+        plan = (vv && vv.winPlan) ? vv.winPlan[vid] : null;
+      } catch (e) {}
+      if (!plan || (plan.needWave | 0) < 4) return null;
+      var v = self.state && self.state.village;
+      if (!v) return null;
+      var roster = v.roster || [];
+      var trust = v.trust || {};
+      var away = v.away || {};
+      var sick = v.sick || {};
+      var ex = exclude || [];
+      var killers = [], armed = [], rest = [];
+      for (var i = 0; i < roster.length; i++) {
+        var cid = roster[i];
+        if (!cid || cid === vid || ex.indexOf(cid) !== -1 || cid === self.villagerId) continue;
+        if (!alive(self, cid)) continue;
+        if (away[cid]) continue;
+        if (((trust[cid] === undefined) ? 10 : trust[cid]) < 15) continue;
+        if (!atHaven(self, cid, hx, hy)) continue;
+        try { if (self.isEngaged && self.isEngaged(cid)) continue; } catch (e) {}
+        try {
+          var a = self.agencyState ? self.agencyState() : null;
+          if (a && a.exped && a.exped[cid]) continue;
+        } catch (e) {}
+        if (sick[cid]) continue;
+        try { if (self.npcMaxDist && self.npcMaxDist(cid) < 1) continue; } catch (e) {}
+        if (hasKillWaveAtLeast(self, cid, 3)) killers.push(cid);
+        else {
+          var g = gearOf(self, cid);
+          if (g.armed) armed.push(cid);
+          else rest.push(cid);
+        }
+      }
+      var pickFrom = function (list) {
+        if (!list.length) return null;
+        try {
+          if (self.companionRank) {
+            var ranked = self.companionRank(vid, list, { context: 'party' });
+            return (ranked[0] && ranked[0].id) || null;
+          }
+        } catch (e) {}
+        return list[0];
+      };
+      return pickFrom(killers) || pickFrom(armed) || pickFrom(rest);
+    } catch (e) { return null; }
+  }
+
   // Launchability for a party companion, checked BEFORE the inviter
   // launches (or before a second companion is added): gear them first
   // (their own stash / the deposited armory / whittle, exactly what
@@ -652,6 +728,28 @@
               if (ok2) launched.push(cid2);
             }
           }
+          // PARTYSIZE4 (sim-partysize4-b): a wave-4-target plan that
+          // went out as a trio may take a FOURTH companion — the
+          // party scales with the threat, earned on the wave-4
+          // unlock (the pick re-checks partysize4On + needWave +
+          // unlockedWave). Same Haven-idle pool, same launchability
+          // bar as the first two; a blocked pick falls back to the
+          // trio launch, never a wait. Only when the trio formed:
+          // launched.length > 1 means cid2 is out, so launched[1]
+          // is the second companion to exclude from the pick.
+          if (partysize4On() && (plan.needWave | 0) >= 4 && launched.length > 1) {
+            var cid3 = null;
+            try { cid3 = self.winPlanThirdCompanion ? self.winPlanThirdCompanion(vid, hx, hy, launched[0], launched[1]) : null; } catch (e) { cid3 = null; }
+            if (cid3 && companionLaunchable(self, cid3)) {
+              self.startExpedition(cid3, hx, hy, false, { tx: tx, ty: ty, duration: dur });
+              var ok3 = false;
+              try {
+                var a4 = self.agencyState ? self.agencyState() : null;
+                ok3 = !!(a4 && a4.exped && a4.exped[cid3]);
+              } catch (e) {}
+              if (ok3) launched.push(cid3);
+            }
+          }
           plan.stage = 'hunt';
           plan.party = launched.slice();
           try {
@@ -663,8 +761,13 @@
             }
             if (launched.length > 1) {
               var cplan2 = self.winPlanOf ? self.winPlanOf(launched[1]) : null;
-              if (cplan2) { cplan2.stage = 'hunt'; cplan2.party = [vid, cid]; cplan2.target = plan.target; cplan2.node = plan.node; }
+              if (cplan2) { cplan2.stage = 'hunt'; cplan2.party = [vid, cid].concat(launched.length > 2 ? [launched[2]] : []); cplan2.target = plan.target; cplan2.node = plan.node; }
               bump(self, 'partyTrios');
+            }
+            if (launched.length > 2) {
+              var cplan3 = self.winPlanOf ? self.winPlanOf(launched[2]) : null;
+              if (cplan3) { cplan3.stage = 'hunt'; cplan3.party = [vid, cid, launched[1]]; cplan3.target = plan.target; cplan3.node = plan.node; }
+              bump(self, 'partyQuads');
             }
           } catch (e) {}
           bump(self, 'partyDepartures');
@@ -718,58 +821,43 @@
     // scholar, not engaged/away/on-expedition, not sick, trust >= 15,
     // range >= 1. Whether the pick can actually go is decided at
     // LAUNCH time by companionLaunchable (gear-up + armed-or-armored
-    // bar); a blocked pick falls back to a pair launch.
+    // bar); a blocked pick falls back to a pair launch. The scan
+    // itself lives in extraCompanionScan (shared with the third pick);
+    // this wrapper only forwards the first companion as the exclusion.
     winPlanSecondCompanion(vid, hx, hy, firstCid) {
       try {
         // Env-gated: no second companion unless VETREENGAGE=1.
         if (!vetreengageOn()) return null;
-        var plan = null;
-        try {
-          var vv = this.state && this.state.village;
-          plan = (vv && vv.winPlan) ? vv.winPlan[vid] : null;
-        } catch (e) {}
-        if (!plan || (plan.needWave | 0) < 4) return null;
-        var v = this.state && this.state.village;
-        if (!v) return null;
-        var roster = v.roster || [];
-        var trust = v.trust || {};
-        var away = v.away || {};
-        var sick = v.sick || {};
-        var killers = [], armed = [], rest = [];
-        for (var i = 0; i < roster.length; i++) {
-          var cid = roster[i];
-          if (!cid || cid === vid || cid === firstCid || cid === this.villagerId) continue;
-          if (!alive(this, cid)) continue;
-          if (away[cid]) continue;
-          if (((trust[cid] === undefined) ? 10 : trust[cid]) < 15) continue;
-          if (!atHaven(this, cid, hx, hy)) continue;
-          try { if (this.isEngaged && this.isEngaged(cid)) continue; } catch (e) {}
-          try {
-            var a = this.agencyState ? this.agencyState() : null;
-            if (a && a.exped && a.exped[cid]) continue;
-          } catch (e) {}
-          if (sick[cid]) continue;
-          try { if (this.npcMaxDist && this.npcMaxDist(cid) < 1) continue; } catch (e) {}
-          if (hasKillWaveAtLeast(this, cid, 3)) killers.push(cid);
-          else {
-            var g = gearOf(this, cid);
-            if (g.armed) armed.push(cid);
-            else rest.push(cid);
-          }
-        }
-        var self = this;
-        var pickFrom = function (list) {
-          if (!list.length) return null;
-          try {
-            if (self.companionRank) {
-              var ranked = self.companionRank(vid, list, { context: 'party' });
-              return (ranked[0] && ranked[0].id) || null;
-            }
-          } catch (e) {}
-          return list[0];
-        };
-        return pickFrom(killers) || pickFrom(armed) || pickFrom(rest);
+        return extraCompanionScan(this, vid, hx, hy, [firstCid]);
       } catch (e) { return null; }
+    },
+    // PARTYSIZE4 (sim-partysize4-b): pick a THIRD companion for a
+    // wave-4-target plan — the fourth seat of the party. Env-gated:
+    // no third companion unless PARTYSIZE4=1. EARNED on the wave-4
+    // unlock: the village must actually have walked through the
+    // wave-4 door (unlockedWave() >= 4 — the readiness-held village,
+    // standing-rich but not released, does not earn it), on top of
+    // the plan targeting wave 4+. The scan is the shared
+    // extraCompanionScan (same pool, same tiers, same bars as the
+    // second pick — no eligibility change); the exclusions are the
+    // first and second companions. Callers launch the third only
+    // when the trio formed (a 4th without a 3rd is incoherent).
+    winPlanThirdCompanion(vid, hx, hy, firstCid, secondCid) {
+      try {
+        if (!partysize4On()) return null;
+        var uw = 0;
+        try { uw = this.unlockedWave ? this.unlockedWave() : 0; } catch (e) {}
+        if ((uw | 0) < 4) return null;
+        return extraCompanionScan(this, vid, hx, hy, [firstCid, secondCid]);
+      } catch (e) { return null; }
+    },
+    // PARTYSIZE4 (sim-partysize4-b): the shared extra-companion scan
+    // as a method, so test ctxs (and any future caller bound to a
+    // ctx that never received the method) can call it directly. The
+    // scan itself lives in extraCompanionScan (shared with the third
+    // pick); this wrapper only forwards `this`.
+    winPlanExtraCompanion(vid, hx, hy, exclude) {
+      return extraCompanionScan(this, vid, hx, hy, exclude);
     },
     // Pre-fight gate for expeditionMonster. Returns null (old path),
     // {avoid:true} (no fight; plan falls back to gathering help), or
