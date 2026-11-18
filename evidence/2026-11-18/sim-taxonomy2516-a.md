@@ -258,8 +258,9 @@ corpora; no past verdict moves. Net `src/` diff: zero.
 
 Test-only. No src/ change, no game change, no lever, no panel, no
 sims, no seed band. Backlog #2527 (finding #2516) moves
-`claimed` → `fixed` on landing. Commit: `410f102fc` (test re-freeze +
-evidence); this amendment records the hash + the check.js note.
+`claimed` → `fixed` on landing. Commit: `91264af52` (test re-freeze +
+evidence; rebased onto master `90f77c406` for landing — pre-rebase
+hash `410f102fc`); this amendment records the hash + the check.js note.
 
 ## Files
 
