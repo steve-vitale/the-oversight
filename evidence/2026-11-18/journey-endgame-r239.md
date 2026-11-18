@@ -357,8 +357,20 @@ scanned the same way.)
   The peakVet 4-vs-8 is the explained headline (89701 + 89704
   re-rolls banked no veterans; kills still happen panel-wide).
   Baseline NOT rolled.
-- Gate (`check.js --quick`): PENDING at note-writing time — see gate
-  log. [TO BE FILLED when the gate completes.]
+- Gate (`check.js --quick`): run by the adoption on the rebased tip
+  (d99c0513e), solo, 334 passed, 7 failed in 1002s — all 7 the
+  standing set, 0 attributable to this run: measurement-proof staleness
+  pair (test-measurement-proof-update.js, test-measurement-workflow.js),
+  stale phone-frame receipt (test-phone-frame-proof.js), ladder-bundle
+  ambient-raid control (test-ladder-bundle-20261108.js), 3× 120s load
+  timeouts (test-living-garden-deed-attainment.js,
+  test-one-person-army-deed-attainment.js, test-capable-bot-20261014.js).
+  Log: evidence/2026-11-18/journey-endgame-r239-gate-adopt.log. The
+  coordinator's own gate attempt was killed mid-run when the run
+  terminated (partial log journey-endgame-r239-gate.log, no summary);
+  the adoption's first re-run attempt at 08:34Z failed in 2s on a
+  write-flap window (EPERM ~08:28–08:35Z per the flap-watch log) and
+  was re-run clean once writes cleared.
 
 ## Closeout
 
@@ -366,6 +378,15 @@ scanned the same way.)
   FIGHTALLY2 — no src/js change this run). No fix arm this run.
 - Rotation-b write (4→5, social life) is owed at landing, after the
   merge is verified.
+- Adoption: the 01:00 CST coordinator was terminated before the gate
+  completed (panel + note done, nothing committed). Adopted after
+  heartbeat staleness (registry hb 07:43:37Z, stale 07:58:37Z; hbloop
+  dead, no live process in the tree). Evidence committed as e70becb9c
+  (rebased d99c0513e onto master b30a6367b), gate re-run solo — see
+  above. F1 (89783 never sat) filed in the findings backlog as #2519.
+  Lock run_id string says r238 (copy slip, documented in the prereg
+  and the run-start section above); the lock belongs to this r239 run
+  and is deleted at closeout.
 - Files: prereg, probe/analyzer clones, smoke + pass-A + pass-C +
   pass-C-wide + pass-D logs, analyze-A + analyze-C + analyze-C-wide
   + analyze-D logs, perseed corpora (A in perseed-endgame-r239/,
