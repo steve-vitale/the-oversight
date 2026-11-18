@@ -961,6 +961,30 @@
       } catch (e) { return false; }
     },
 
+    // TABLE SITTING (2026-11-18, journey-scale r239 — the r233-owed
+    // tableActive distinction): true ONLY while a table sequence is
+    // actually live — the win-day-floor deferral, or a tableDone sitting
+    // whose finale has not resolved. The LADDER MERCY window (capstone
+    // delivered, finale unresolved) is NOT a live sitting: mercy is
+    // protection from AMBIENT pressure, and a titan fight is a
+    // deliberate, player-initiated coalition hunt the engine never
+    // gates on tableActive(). Read-only query; tableActive() is
+    // untouched, so every ambient router behaves identically. The
+    // muster + march steps hold only on this predicate (driver
+    // MUSTER_HOLD=sitting). Equivalence, asserted by
+    // scripts/test-table-sitting-20261117.js: tableActive() ===
+    // tableSitting() || mercy, where mercy = ladderCapstone delivered
+    // && phase != 'done'.
+    tableSitting() {
+      try {
+        const pg = this.progState ? this.progState() : null;
+        const T = this.tableState();
+        if (T && T.winDeferred) return true;
+        if (!pg || !pg.tableDone) return false;
+        return !!(T && T.phase && T.phase !== 'done');
+      } catch (e) { return false; }
+    },
+
     // tableLiveWrap: every path's finale is televised in its genre — but
     // only when the show is actually watching (viewership >= 12, the
     // ledger's own threshold-beat rule). Otherwise the beat plays
