@@ -357,4 +357,43 @@ nod.
 
 ## Adoption closeout
 
-[TO BE COMPLETED — commits, merge, rotation, lock.]
+Adopted by the Lane B crisis adoption worker (r241 timed out before
+closeout; all panel work verified from the files, not taken on the
+run's word).
+
+- **Commits (rebased onto local master `430b849d2`, landed by
+  fast-forward):**
+  - `6f614ce66` — mime-walk invitation 6-variant pool + proof test
+    [needs-eyes]
+  - `11f9e87ca` — Wren cache-note 6-variant pool + proof test
+    [needs-eyes]
+  - `82e48591c` — prereg + panel driver/analyzer + gate log + run note
+- **Master after merge: `82e48591c`.** Merge was a clean fast-forward
+  `430b849d2..82e48591c` (master had moved under the adoption — the
+  deepening r237 round landed mid-adoption; the rebase replayed all
+  three commits cleanly, no conflicts, and per-commit diffs are
+  identical pre/post rebase).
+- **Proof tests re-run after the rebase:** mimewalk 20/20 and wrennote
+  9/9 on SEED=42 and SEED=7; `check.js --only r241` reports 2 passed,
+  0 failed.
+- **Gate (adoption, solo run): 333 passed, 9 failed, 0 attributable**
+  — adjudicated in the gate section above; the three load-artifact
+  failures pass standalone (cache-flags 4/4, occupation-panels 25/25,
+  capable-bot 40/40).
+- **Telemetry:** quiet; baseline NOT rolled.
+- **Rotation-b verified 7, NOT advanced** (the r240 adoption already
+  advanced it for leg 6).
+- **Lock `2026-11-18T15:04:29Z` deleted at closeout** (run_id verified
+  in the same call as the read, deletion in a separate call).
+- **Worktree `journey2-crisis` released; branches `journey2-crisis`
+  and `journey2-crisis-closeout` deleted.**
+- **Adoption corrections to the timed-out run's work:** both proof
+  tests moved from `scripts/` to `scripts/godpath/` (require path only)
+  so `check.js --quick` enumerates them; the run note's proof-test
+  paths updated to match. The safe-commit index clobber struck after
+  all three commits and was repaired each time (index restored from
+  `git ls-tree -r HEAD`, worktree blobs verified identical to HEAD).
+  This closeout section itself landed as a fourth commit on branch
+  `journey2-crisis-closeout` (evidence-only: this run note), merged
+  fast-forward after the main merge.
+- **Merged locally, pending ship** — the ship loop owns the push.
