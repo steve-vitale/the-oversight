@@ -1512,9 +1512,24 @@
       if (Math.random() > 0.5) return false; // they're careful
 
       ap.lastDropDay = day;
-      var line = helper.helpLines && helper.helpLines.length
-        ? helper.helpLines[Math.floor(Math.random() * helper.helpLines.length)]
-        : '"Supplies. No questions. — a friend."';
+      var li = helper.helpLines && helper.helpLines.length
+        ? Math.floor(Math.random() * helper.helpLines.length) : -1;
+      var line = li >= 0 ? helper.helpLines[li] : '"Supplies. No questions. — a friend."';
+      // WREN CACHE-NOTE VARIETY (journey-crisis r241 2026-11-18): the cache
+      // note is the helpLines slot marked by cacheNoteIndex, and the drop pick
+      // is uniform over 4 lines, so the same note reprinted verbatim 5-9x per
+      // seed (r238 logged 9x; r241: 9x on 14532, 6x on 14531, 7x on 14534).
+      // Each drop leaves a NEW note, so Wren writes a fresh short note each
+      // time: rotate through helper.cacheNotes (variant 0 = the original note
+      // verbatim) with a counter on ap state. Deterministic, no new RNG draw,
+      // so the seeded draw sequence is untouched. Other helpers are
+      // unaffected (only Wren carries cacheNoteIndex/cacheNotes).
+      if (li >= 0 && typeof helper.cacheNoteIndex === 'number' && li === helper.cacheNoteIndex &&
+          Array.isArray(helper.cacheNotes) && helper.cacheNotes.length) {
+        var ci = (typeof ap.cacheNoteIdx === 'number' ? ap.cacheNoteIdx : 0) % helper.cacheNotes.length;
+        line = helper.cacheNotes[ci];
+        ap.cacheNoteIdx = ci + 1;
+      }
 
       // DENIABLE: small, practical, never tier 3+
       var kcal = 200 + Math.floor(Math.random() * 300);
