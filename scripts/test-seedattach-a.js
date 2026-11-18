@@ -91,6 +91,7 @@ function baseSeed(over) {
     standing: 120, scaleRank: 'regional', won: false, maxWave: 4, villageLost: false,
     instrumentErrors: [], v4seeds: [], v4encounters: [],
     seedattachBounces: [], seedattachCreations: [], seedattachLaunches: [], seedattachCensus: [],
+    deaths: [],
     daily: [],
   };
   return Object.assign(j, over || {});
@@ -113,11 +114,15 @@ function launch(day, inviterVid, pathName, companion, inviterTargetBefore, compa
     inviterTargetBefore: inviterTargetBefore, companion: companion,
     companionTargetBefore: companionTargetBefore, companionTargetAfter: companionTargetAfter };
 }
-function censusRow(day, vid, target, stage, party, sinceDay) {
+function censusRow(day, vid, target, stage, party, sinceDay, opts) {
+  const o = opts || {};
   return { day: day, vid: vid, target: target, needWave: null, stage: stage,
     party: party || [], sinceDay: (sinceDay != null ? sinceDay : 5), node: null,
-    holderAlive: true, holderNode: { nx: 0, ny: 0 }, holderExped: false,
+    holderAlive: (o.holderAlive != null ? o.holderAlive : true), holderNode: { nx: 0, ny: 0 }, holderExped: false,
     holderSick: false, holderHealth: 100 };
+}
+function death(day, who, cause) {
+  return { day: day, kind: 'villager', who: who, cause: cause, player: false };
 }
 function classifyOne(j) {
   const r = ANALYZE.classifySeed(j);
@@ -267,6 +272,154 @@ expectBucket('companion-inherited census-only fallback', baseSeed({
   check('summarize returns files as a count (not an array)', sum.files === 1, 'got ' + JSON.stringify(sum.files));
   check('summarize counts the one opened instance', sum.instancesOpened === 1, 'got ' + sum.instancesOpened);
   check('summarize bucket table carries the instance', sum.byBucket['companion-inherited'] === 1, JSON.stringify(sum.byBucket));
+})();
+
+// ---------- 2d. closeKind deaths-first (finding #2523) ----------
+// The census keeps emitting rows for a dead holder's plan
+// (holderAlive:false) to the horizon, so a run ending at the horizon has
+// no row at runEndDay+1 — and the old code read that absence as
+// plan-deleted even when the holder had died mid-epoch. The fix consults
+// j.deaths FIRST, scoped to the close window [epochStartDay, runEndDay+1]
+// and only where the runEndDay+1 row is missing or holderAlive:false.
+// A death after the window, or a live row at runEndDay+1, leaves the
+// census read standing. Fixtures A/B/E fail on the pre-patch analyzer
+// (plan-deleted) and pass after the patch (holder-died); C/D/F pass on
+// both (the patch must NOT touch them).
+console.log('== closeKind deaths-first (finding #2523) ==');
+function expectClose(name, j, closeKind) {
+  const r = classifyOne(j);
+  const got = r.instances.length ? r.instances[0].closeKind : '(no instances)';
+  check(name + ' -> closeKind ' + closeKind, r.instances.length === 1 && r.instances[0].closeKind === closeKind,
+    'got ' + got + ' over ' + r.instances.length + ' instances');
+}
+function huntEpochBase(census, deathsArr, bounceDay) {
+  return baseSeed({
+    seedattachCreations: [creation(5, 'v1', 'winPlanHavenTick', 'win-plan.js:winPlanHavenTick', [], 3, 'gear', null)],
+    seedattachCensus: census,
+    seedattachBounces: [bounce(bounceDay, 'v1', 'audit', 4, 'hunt', null, 'hunt', null, { sinceDay: 5 })],
+    deaths: deathsArr,
+  });
+}
+// A: holder dies on runEndDay, no row after -> holder-died (was plan-deleted).
+expectClose('2523-A death on runEndDay, no row after', huntEpochBase([
+  censusRow(5, 'v1', null, 'gear', []), censusRow(7, 'v1', null, 'party', []),
+  censusRow(9, 'v1', null, 'hunt', ['v2']), censusRow(10, 'v1', null, 'hunt', ['v2']),
+  censusRow(11, 'v1', null, 'hunt', ['v2']), censusRow(12, 'v1', null, 'hunt', ['v2']),
+], [death(12, 'v1', 'monster')], 12), 'holder-died');
+// B: holder dies on runEndDay+1, no row -> holder-died (was plan-deleted).
+expectClose('2523-B death on runEndDay+1, no row', huntEpochBase([
+  censusRow(5, 'v1', null, 'gear', []), censusRow(7, 'v1', null, 'party', []),
+  censusRow(9, 'v1', null, 'hunt', ['v2']), censusRow(10, 'v1', null, 'hunt', ['v2']),
+  censusRow(11, 'v1', null, 'hunt', ['v2']), censusRow(12, 'v1', null, 'hunt', ['v2']),
+], [death(13, 'v1', 'monster')], 12), 'holder-died');
+// C: holder dies AFTER the close window (day 20), no row at 13 -> plan-deleted stays.
+expectClose('2523-C death after window stays plan-deleted', huntEpochBase([
+  censusRow(5, 'v1', null, 'gear', []), censusRow(7, 'v1', null, 'party', []),
+  censusRow(9, 'v1', null, 'hunt', ['v2']), censusRow(10, 'v1', null, 'hunt', ['v2']),
+  censusRow(11, 'v1', null, 'hunt', ['v2']), censusRow(12, 'v1', null, 'hunt', ['v2']),
+], [death(20, 'v1', 'monster')], 12), 'plan-deleted');
+// D: row at runEndDay+1 shows the plan left hunt with the holder ALIVE,
+// death the same day (after the snapshot) -> stage-left-hunt stays.
+expectClose('2523-D live stage-change row stands over same-day death', huntEpochBase([
+  censusRow(5, 'v1', null, 'gear', []), censusRow(7, 'v1', null, 'party', []),
+  censusRow(9, 'v1', null, 'hunt', ['v2']), censusRow(10, 'v1', null, 'hunt', ['v2']),
+  censusRow(11, 'v1', null, 'hunt', ['v2']), censusRow(12, 'v1', null, 'hunt', ['v2']),
+  censusRow(13, 'v1', null, 'party', []),
+], [death(13, 'v1', 'monster')], 12), 'stage-left-hunt:party');
+// E: corpus shape (mateo/diana): census rows keep coming after the death
+// with holderAlive:false to the horizon, then no row -> holder-died.
+expectClose('2523-E corpus shape: false rows to horizon, no row after', huntEpochBase([
+  censusRow(5, 'v1', null, 'gear', []), censusRow(7, 'v1', null, 'party', []),
+  censusRow(9, 'v1', null, 'hunt', ['v2']), censusRow(10, 'v1', null, 'hunt', ['v2']),
+  censusRow(11, 'v1', null, 'hunt', ['v2']), censusRow(12, 'v1', null, 'hunt', ['v2']),
+  censusRow(13, 'v1', null, 'hunt', ['v2'], 5, { holderAlive: false }),
+  censusRow(14, 'v1', null, 'hunt', ['v2'], 5, { holderAlive: false }),
+  censusRow(15, 'v1', null, 'hunt', ['v2'], 5, { holderAlive: false }),
+], [death(12, 'v1', 'monster')], 12), 'holder-died');
+// F: already-correct path — row at runEndDay+1 exists, holderAlive:false,
+// stage party -> holder-died on both old and new code.
+expectClose('2523-F dead-holder row stays holder-died', huntEpochBase([
+  censusRow(5, 'v1', null, 'gear', []), censusRow(7, 'v1', null, 'party', []),
+  censusRow(9, 'v1', null, 'hunt', ['v2']), censusRow(10, 'v1', null, 'hunt', ['v2']),
+  censusRow(11, 'v1', null, 'hunt', ['v2']), censusRow(12, 'v1', null, 'hunt', ['v2']),
+  censusRow(13, 'v1', null, 'party', [], 5, { holderAlive: false }),
+], [death(12, 'v1', 'monster')], 12), 'holder-died');
+
+// ---------- 2e. Frozen-corpus closeKind diff (finding #2523) ----------
+// The committed analysis JSON is the before-oracle: 2 plan-deleted closes
+// per leg, 0 holder-died. The patched analyzer must flip exactly the 4
+// mislabeled closes (mateo_alvarez 100874 d139 "the wild", diana_osei
+// 100876 d47 "a wound that wouldn't close", each in both legs — the legs
+// are identical trajectories) and move nothing else: every other close,
+// every bucket, every sub identical to the frozen JSON.
+console.log('== frozen-corpus closeKind diff (finding #2523) ==');
+(function () {
+  const frozen = JSON.parse(fs.readFileSync(path.join(REPO, 'evidence', '2026-11-15', 'seedattach-a-analysis.json'), 'utf8'));
+  const legs = { main: 'perseed-seedattach-a-competent', baseline: 'perseed-seedattach-a-tableseat-nowait' };
+  const flips = {
+    'main|100874|mateo_alvarez|run|91': 'holder-died',
+    'main|100876|diana_osei|run|46': 'holder-died',
+    'baseline|100874|mateo_alvarez|run|91': 'holder-died',
+    'baseline|100876|diana_osei|run|46': 'holder-died',
+  };
+  let checked = 0, flipped = 0, unchanged = 0;
+  const problems = [];
+  for (const legName of ['main', 'baseline']) {
+    const dir = path.join(REPO, 'evidence', '2026-11-15', legs[legName]);
+    const files = fs.readdirSync(dir).filter(function (x) { return x.endsWith('.json'); }).sort();
+    check('2523 corpus: ' + legName + ' has 8 seed files with deaths arrays',
+      files.length === 8 && files.every(function (f) {
+        const j = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+        return Array.isArray(j.deaths);
+      }), 'got ' + files.length + ' files');
+    const frozenLeg = frozen[legName];
+    let legPlanDeleted = 0, legHolderDied = 0;
+    for (const f of files) {
+      const j = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+      const r = ANALYZE.classifySeed(j);
+      const frozenSeed = frozenLeg.perSeed.find(function (s) { return String(s.seed) === String(j.seed); });
+      for (const ep of r.instances) {
+        checked++;
+        const fep = frozenSeed.instances.find(function (x) { return x.key === ep.key; });
+        if (!fep) { problems.push(legName + ' ' + j.seed + ' ' + ep.key + ': no frozen instance'); continue; }
+        const id = legName + '|' + j.seed + '|' + ep.key;
+        const expected = flips[id] || fep.closeKind;
+        if (flips[id]) flipped++;
+        else unchanged++;
+        if (ep.closeKind !== expected) {
+          problems.push(id + ': expected ' + expected + ', got ' + ep.closeKind + ' (frozen ' + fep.closeKind + ')');
+        }
+        if (ep.bucket !== fep.bucket || ep.sub !== fep.sub) {
+          problems.push(id + ': bucket/sub moved (' + fep.bucket + ':' + fep.sub + ' -> ' + ep.bucket + ':' + ep.sub + ')');
+        }
+        if (ep.closeKind === 'plan-deleted') legPlanDeleted++;
+        if (ep.closeKind === 'holder-died') legHolderDied++;
+      }
+      // Buckets/subs per seed identical to the frozen seed row.
+      const rb = JSON.stringify(r.byBucket), fb = JSON.stringify(frozenSeed.byBucket);
+      if (rb !== fb) problems.push(legName + ' ' + j.seed + ': byBucket moved (' + fb + ' -> ' + rb + ')');
+      const rs = JSON.stringify(r.bySub), fs2 = JSON.stringify(frozenSeed.bySub);
+      if (rs !== fs2) problems.push(legName + ' ' + j.seed + ': bySub moved (' + fs2 + ' -> ' + rs + ')');
+    }
+    check('2523 corpus: ' + legName + ' plan-deleted 2->0, holder-died 0->2',
+      legPlanDeleted === 0 && legHolderDied === 2,
+      'plan-deleted=' + legPlanDeleted + ' holder-died=' + legHolderDied);
+    // Deaths-array evidence for the two flipped closes on this leg.
+    const j874 = JSON.parse(fs.readFileSync(path.join(dir, files.find(function (f) { return f.indexOf('s100874') !== -1; })), 'utf8'));
+    const j876 = JSON.parse(fs.readFileSync(path.join(dir, files.find(function (f) { return f.indexOf('s100876') !== -1; })), 'utf8'));
+    const mateoDeath = (j874.deaths || []).find(function (d) { return d.kind === 'villager' && d.who === 'mateo_alvarez'; });
+    const dianaDeath = (j876.deaths || []).find(function (d) { return d.kind === 'villager' && d.who === 'diana_osei'; });
+    check('2523 corpus: ' + legName + ' mateo_alvarez died d139 "the wild"',
+      !!mateoDeath && mateoDeath.day === 139 && mateoDeath.cause === 'the wild',
+      JSON.stringify(mateoDeath));
+    check('2523 corpus: ' + legName + ' diana_osei died d47 "a wound that wouldn\'t close"',
+      !!dianaDeath && dianaDeath.day === 47 && dianaDeath.cause === "a wound that wouldn't close",
+      JSON.stringify(dianaDeath));
+  }
+  check('2523 corpus: 20 closes checked, exactly 4 flipped, 16 unchanged',
+    checked === 20 && flipped === 4 && unchanged === 16,
+    'checked=' + checked + ' flipped=' + flipped + ' unchanged=' + unchanged);
+  check('2523 corpus: no unexpected close/bucket/sub moves', problems.length === 0, problems.slice(0, 5).join(' | '));
 })();
 
 // ---------- 3. Recorder: live in-memory runs (shape + both LEG policies) ----------

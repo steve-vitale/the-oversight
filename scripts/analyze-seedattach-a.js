@@ -169,10 +169,32 @@ function classifySeed(j) {
     ep.targetLostDay = lostDay;
     // Epoch close: first census day after the run end showing the plan
     // gone / non-hunt / targeted, or holder dead, or run end.
+    // RECORDER FIX (sim-seedattach-a, finding #2523): the deaths array is
+    // the authoritative holder-death source and is consulted FIRST. The
+    // census keeps emitting rows for a dead holder's plan
+    // (holderAlive:false) to the horizon, so a run ending at the horizon
+    // has no row at runEndDay+1 — and the old code read that absence as
+    // plan-deleted even when the holder had died mid-epoch (mateo_alvarez
+    // d139, diana_osei d47 on the frozen corpora). A death inside the
+    // close window [epochStartDay, runEndDay+1] closes the epoch
+    // holder-died where the runEndDay+1 row is missing or shows the
+    // holder dead; a death after the window, or a live row at
+    // runEndDay+1, leaves the census read standing (the run ended for a
+    // recorded reason, not the death — a literal any-death rule would
+    // wrongly flip 4 stage-left-hunt closes whose holders died 10-60+
+    // days after their runs ended).
     let closeKind = 'run-end';
     if (ep.runEndDay != null) {
       const after = myCensus.find(function (r) { return r.day === ep.runEndDay + 1; });
-      if (!after) closeKind = 'plan-deleted';
+      const deathWindowStart = ep.creation ? ep.creation.day : ep.firstBounceDay;
+      let diedDay = null;
+      for (const e of (j.deaths || [])) {
+        if (e && e.kind === 'villager' && e.who === vid && (e.day | 0) >= deathWindowStart && (e.day | 0) <= ep.runEndDay + 1) {
+          if (diedDay == null || (e.day | 0) < diedDay) diedDay = e.day | 0;
+        }
+      }
+      if (diedDay != null && (!after || !after.holderAlive)) closeKind = 'holder-died';
+      else if (!after) closeKind = 'plan-deleted';
       else if (!after.holderAlive) closeKind = 'holder-died';
       else if (after.stage !== 'hunt') closeKind = 'stage-left-hunt:' + after.stage;
       else if (after.target != null) closeKind = 'target-set:' + after.target;
