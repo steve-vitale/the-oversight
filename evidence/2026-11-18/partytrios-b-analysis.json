@@ -1,0 +1,365 @@
+{
+  "verdict": "GO",
+  "kind": "",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": true,
+      "detail": "launches ctl 24 / arm 24; observed trios arm 19 (floor 6 launches/leg, >=1 arm trio)"
+    },
+    {
+      "id": "primary-counter",
+      "pass": true,
+      "detail": "arm partyTrios 19 / observed trios 19 = 1.00 (bar >= 0.80); ctl partyTrios 0 (bar == 0)"
+    },
+    {
+      "id": "cost-starvation",
+      "pass": true,
+      "detail": "starvation totals arm 1 vs ctl 1; villager arm 0 vs ctl 0 (bar arm<=ctl+2 both)"
+    },
+    {
+      "id": "cost-median",
+      "pass": true,
+      "detail": "median survival arm 150d vs ctl 150d (bar arm>=0.8x ctl)"
+    },
+    {
+      "id": "instrument",
+      "pass": true,
+      "detail": "instrument errors ctl 0 / arm 0 (bar 0)"
+    }
+  ],
+  "ctl": {
+    "dir": "evidence/2026-11-18/perseed-partytrios-b-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launches": 24,
+    "trioLaunches": 19,
+    "trioRate": 0.7916666666666666,
+    "sizes": {
+      "1": 2,
+      "2": 3,
+      "3": 19
+    },
+    "sources": {
+      "brain": 24
+    },
+    "c2depart": 20,
+    "candC2": 20,
+    "candC2carried": 20,
+    "candC2dropped": 0,
+    "candC2null": 4,
+    "unjoined": 0,
+    "midday": 6,
+    "dawn": 18,
+    "carryRate": 1,
+    "starvation": 1,
+    "starvationVillager": 0,
+    "medianDays": 150,
+    "partyTrios": 0,
+    "brainSha": {
+      "499249a3e754": 8
+    },
+    "carryPresent": {
+      "true": 8
+    },
+    "perSeed": [
+      {
+        "seed": 104011,
+        "days": 150,
+        "launches": 3,
+        "observedTrios": 3,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 570,
+        "bumpPresent": false,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104012,
+        "days": 151,
+        "launches": 0,
+        "observedTrios": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 405,
+        "bumpPresent": false,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104013,
+        "days": 111,
+        "launches": 3,
+        "observedTrios": 1,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": false,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104014,
+        "days": 130,
+        "launches": 4,
+        "observedTrios": 3,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": false,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104015,
+        "days": 151,
+        "launches": 0,
+        "observedTrios": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": false,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104016,
+        "days": 137,
+        "launches": 5,
+        "observedTrios": 5,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 195,
+        "bumpPresent": false,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104017,
+        "days": 151,
+        "launches": 9,
+        "observedTrios": 7,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": false,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104018,
+        "days": 151,
+        "launches": 0,
+        "observedTrios": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": false,
+        "carryPresent": true,
+        "errors": 0
+      }
+    ],
+    "wall": {
+      "wins": 0,
+      "national": 0,
+      "wave5": 2,
+      "wave4": 8,
+      "standing200": 2,
+      "medianDays": 150.5,
+      "survived": 5
+    }
+  },
+  "arm": {
+    "dir": "evidence/2026-11-18/perseed-partytrios-b-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launches": 24,
+    "trioLaunches": 19,
+    "trioRate": 0.7916666666666666,
+    "sizes": {
+      "1": 2,
+      "2": 3,
+      "3": 19
+    },
+    "sources": {
+      "brain": 24
+    },
+    "c2depart": 20,
+    "candC2": 20,
+    "candC2carried": 20,
+    "candC2dropped": 0,
+    "candC2null": 4,
+    "unjoined": 0,
+    "midday": 6,
+    "dawn": 18,
+    "carryRate": 1,
+    "starvation": 1,
+    "starvationVillager": 0,
+    "medianDays": 150,
+    "partyTrios": 19,
+    "brainSha": {
+      "f4417f25f9be": 8
+    },
+    "carryPresent": {
+      "true": 8
+    },
+    "perSeed": [
+      {
+        "seed": 104011,
+        "days": 150,
+        "launches": 3,
+        "observedTrios": 3,
+        "partyTrios": 3,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 570,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104012,
+        "days": 151,
+        "launches": 0,
+        "observedTrios": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 405,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104013,
+        "days": 111,
+        "launches": 3,
+        "observedTrios": 1,
+        "partyTrios": 1,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104014,
+        "days": 130,
+        "launches": 4,
+        "observedTrios": 3,
+        "partyTrios": 3,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104015,
+        "days": 151,
+        "launches": 0,
+        "observedTrios": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104016,
+        "days": 137,
+        "launches": 5,
+        "observedTrios": 5,
+        "partyTrios": 5,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 195,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104017,
+        "days": 151,
+        "launches": 9,
+        "observedTrios": 7,
+        "partyTrios": 7,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104018,
+        "days": 151,
+        "launches": 0,
+        "observedTrios": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      }
+    ],
+    "wall": {
+      "wins": 0,
+      "national": 0,
+      "wave5": 2,
+      "wave4": 8,
+      "standing200": 2,
+      "medianDays": 150.5,
+      "survived": 5
+    }
+  }
+}
