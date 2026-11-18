@@ -13,6 +13,11 @@
 //       encounter row carries mHpStart. No-contact evades (rounds 0,
 //       dealt 0) are correctly null and are not counted missing;
 //       vKill rows carry no mHpStart and share at 1.0 by definition.
+//       File count is corpus-derived (finding #2513): the two legs are
+//       matched corpora from one driver run, so the fuller leg sets the
+//       expected count and a short leg reads DIRTY — no hard-coded 8.
+//       The seed sets must match too, or equal counts would be a false
+//       clean. Expected count is reported in the instrument bar.
 // Launch join (for fought meetings): a v4encounters row is a
 // launched-party meeting iff some launch (v4departs result=launch)
 // by the same vid (or with the fighter among its party) has
@@ -207,6 +212,7 @@ function summarize(leg) {
   }
   return {
     files: leg.files.length, seeds: seeds.length,
+    seedList: seeds.map(function (s) { return s.seed; }),
     launches: launches, launchedSizes: sizes,
     suburbSeeds: suburbSeeds, blockedSuburbSeeds: blockedSuburbSeeds,
     suburbLaunches: suburbLaunches,
@@ -261,6 +267,24 @@ function judgeB2(armS, ctlS) {
     armed: armS.w4kills, control: ctlS.w4kills };
 }
 
+// Instrument (finding #2513): expected file count is derived from the
+// corpus itself — the fuller of the two matched legs sets the bar, so
+// an 8-seed corpus reads 8, a 16-seed corpus reads 16, and a leg short
+// of its partner still reads DIRTY. Seed sets must also match: equal
+// counts with different seeds would be a false clean. Exported for
+// the proof test.
+function judgeInstrument(ctlS, armS) {
+  const expectedFiles = Math.max(ctlS.files, armS.files);
+  const ctlSeeds = (ctlS.seedList || []).slice().sort();
+  const armSeeds = (armS.seedList || []).slice().sort();
+  const seedsMatch = ctlSeeds.length === armSeeds.length &&
+    ctlSeeds.every(function (s, i) { return s === armSeeds[i]; });
+  const pass = ctlS.instrumentErrors === 0 && armS.instrumentErrors === 0 &&
+    ctlS.files === expectedFiles && armS.files === expectedFiles &&
+    ctlS.missingHp === 0 && armS.missingHp === 0 && seedsMatch;
+  return { pass: pass, expectedFiles: expectedFiles, seedsMatch: seedsMatch };
+}
+
 function main() {
   const ctlDir = process.argv[2];
   const armDir = process.argv[3];
@@ -296,8 +320,8 @@ function main() {
   const b2 = judgeB2(armS, ctlS);
   const b2Pass = b2.pass;
   const b3Pass = armS.expedDeaths <= ctlS.expedDeaths * 1.10 && armS.deaths <= ctlS.deaths * 1.10;
-  const instrClean = ctlS.instrumentErrors === 0 && armS.instrumentErrors === 0 &&
-    ctlS.files === 8 && armS.files === 8 && ctlS.missingHp === 0 && armS.missingHp === 0;
+  const instrument = judgeInstrument(ctlS, armS);
+  const instrClean = instrument.pass;
   const verdict = (b1Pass && b2Pass && b3Pass && instrClean) ? 'GO' : 'NO-GO';
 
   const out = {
@@ -311,7 +335,8 @@ function main() {
       b3Guardrail: { pass: b3Pass, expedDeaths: { ctl: ctlS.expedDeaths, arm: armS.expedDeaths, limit: round(ctlS.expedDeaths * 1.10, 1) },
         deaths: { ctl: ctlS.deaths, arm: armS.deaths, limit: round(ctlS.deaths * 1.10, 1) } },
       instrument: { pass: instrClean, ctlErrors: ctlS.instrumentErrors, armErrors: armS.instrumentErrors,
-        ctlFiles: ctlS.files, armFiles: armS.files, missingHp: { ctl: ctlS.missingHp, arm: armS.missingHp },
+        ctlFiles: ctlS.files, armFiles: armS.files, expectedFiles: instrument.expectedFiles,
+        seedsMatch: instrument.seedsMatch, missingHp: { ctl: ctlS.missingHp, arm: armS.missingHp },
         recMismatch: { ctl: ctlS.recMismatch, arm: armS.recMismatch } },
     },
     verdict: verdict,
@@ -355,4 +380,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { launchesForSeed: launchesForSeed, seedAnalysis: seedAnalysis, summarize: summarize, trajDigest: trajDigest, judgeB1: judgeB1, judgeB2: judgeB2 };
+module.exports = { launchesForSeed: launchesForSeed, seedAnalysis: seedAnalysis, summarize: summarize, trajDigest: trajDigest, judgeB1: judgeB1, judgeB2: judgeB2, judgeInstrument: judgeInstrument };
