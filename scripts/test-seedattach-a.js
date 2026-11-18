@@ -2,15 +2,16 @@
 // Proves, on synthetic fixtures and live in-memory runs (no corpus
 // numbers): this arm touches NO src file (instrument-only), the driver
 // wraps exist (incl. the BEFORE-state seed wrap and the creation
-// wraps), the taxonomy's code anchors still hold (two target-write
-// sites, four hunt-entry sites, the seed early return), the wave-4 id
-// set matches the data, the classifier places one fixture per bucket /
-// sub-reason (incl. precedence, the same-day-launch exclusion, repeat
-// bounces, already-targeted secondary counts, the census-only
-// fallback), the recorder rows have their shape, both LEG policies
-// load with their frozen shas, and the determinism legs D1
-// (repeatability) + D2 (wrap neutrality) are green at 60d on seed
-// 100871.
+// wraps), the taxonomy's code anchors still hold (target-write sites,
+// six hunt-entry sites — inviter / first companion / second companion
+// per file since the vetreengage trio landing — the seed early return),
+// the wave-4 id set matches the data, the classifier places one
+// fixture per bucket / sub-reason (incl. precedence, the same-day-launch
+// exclusion, repeat bounces, already-targeted secondary counts, the
+// census-only fallback, and the second-companion shapes of finding
+// #2516), the recorder rows have their shape, both LEG policies load
+// with their frozen shas, and the determinism legs D1 (repeatability) +
+// D2 (wrap neutrality) are green at 60d on seed 100871.
 // Usage:
 //   node scripts/test-seedattach-a.js
 'use strict';
@@ -61,14 +62,30 @@ const winPlanJs = fs.readFileSync(path.join(REPO, 'src', 'js', 'win-plan.js'), '
 check('anchor: seed writes target only for gear/party (early return present)',
   winPlanJs.indexOf("plan.stage !== 'gear' && plan.stage !== 'party'") !== -1);
 check('anchor: seed target write exists', winPlanJs.indexOf('plan.target = mdef.id') !== -1);
-check('anchor: launchParty companion target copy exists', winPlanJs.indexOf('cplan.target = plan.target') !== -1);
+check('anchor: launchParty first-companion target copy exists (cplan.target = plan.target, win-plan.js:653)',
+  (winPlanJs.match(/cplan\.target/g) || []).length === 1, 'got ' + (winPlanJs.match(/cplan\.target/g) || []).length);
+check('anchor: launchParty second-companion target copy exists (cplan2.target = plan.target, win-plan.js:657)',
+  (winPlanJs.match(/cplan2\.target/g) || []).length === 1, 'got ' + (winPlanJs.match(/cplan2\.target/g) || []).length);
+check('anchor: exactly 3 .target writes in win-plan.js (seed :430 + companion copy :653 + second-companion copy :657)',
+  (winPlanJs.match(/\.target\s*=(?!=)/g) || []).length === 3, 'got ' + (winPlanJs.match(/\.target\s*=(?!=)/g) || []).length);
+// Hunt-entry sites, re-read 2026-11-18 (finding #2516): sim-vetreengage-a
+// (46426eb2e) added a third `.stage = 'hunt'` write per file — the second
+// companion's plan enters hunt with the inviter's target copied onto it.
+// win-plan.js:646 inviter, :651 first companion, :657 second companion
+// (VETREENGAGE trio, launched.length > 1); villager-brain.js:1170 inviter,
+// :1172 first companion, :1176 second companion (VETREENGAGE=1,
+// c.companion2 actually launched).
 const huntSetsWinPlan = (winPlanJs.match(/\.stage = 'hunt'/g) || []).length;
-check('anchor: exactly 2 hunt entries in win-plan.js (inviter + companion)', huntSetsWinPlan === 2, 'got ' + huntSetsWinPlan);
+check('anchor: exactly 3 hunt entries in win-plan.js (inviter :646 + first companion :651 + second companion :657)', huntSetsWinPlan === 3, 'got ' + huntSetsWinPlan);
 const brainJs = fs.readFileSync(path.join(REPO, 'src', 'js', 'villager-brain.js'), 'utf8');
 const huntSetsBrain = (brainJs.match(/\.stage = 'hunt'/g) || []).length;
-check('anchor: exactly 2 hunt entries in villager-brain.js (mirror inviter + companion)', huntSetsBrain === 2, 'got ' + huntSetsBrain);
-check('anchor: brain mirror does NOT copy the target (no cplan.target write in brain)',
-  brainJs.indexOf('cplan.target') === -1);
+check('anchor: exactly 3 hunt entries in villager-brain.js (mirror inviter :1170 + first companion :1172 + second companion :1176)', huntSetsBrain === 3, 'got ' + huntSetsBrain);
+check('anchor: brain mirror does NOT copy target to the FIRST companion (no cplan.target write in brain)',
+  (brainJs.match(/cplan\.target/g) || []).length === 0, 'got ' + (brainJs.match(/cplan\.target/g) || []).length);
+check('anchor: brain mirror DOES copy target to the SECOND companion (cplan2.target = plan2.target, villager-brain.js:1177)',
+  (brainJs.match(/cplan2\.target/g) || []).length === 1, 'got ' + (brainJs.match(/cplan2\.target/g) || []).length);
+check('anchor: exactly 1 .target write in villager-brain.js (second-companion copy :1177; first companion keeps its before-target)',
+  (brainJs.match(/\.target\s*=(?!=)/g) || []).length === 1, 'got ' + (brainJs.match(/\.target\s*=(?!=)/g) || []).length);
 check('anchor: target is born null in exactly 3 creation literals (winPlanOf / seed / HavenTick)',
   (winPlanJs.match(/target: null/g) || []).length === 3,
   'got ' + (winPlanJs.match(/target: null/g) || []).length);
@@ -80,7 +97,7 @@ const crypto = require('crypto');
 function sha12(file) {
   return crypto.createHash('sha256').update(fs.readFileSync(path.join(REPO, 'scripts', 'policies', file), 'utf8')).digest('hex').slice(0, 12);
 }
-check('competent policy sha is 74a890f0844e', sha12('competent.js') === '74a890f0844e', 'got ' + sha12('competent.js'));
+check('competent policy sha is df9b7dff4de4 (re-frozen 2026-11-18; journey r127/r128/r140)', sha12('competent.js') === 'df9b7dff4de4', 'got ' + sha12('competent.js'));
 check('tableseat-nowait policy sha is a11a1abc672e', sha12('tableseat-nowait.js') === 'a11a1abc672e', 'got ' + sha12('tableseat-nowait.js'));
 
 // ---------- 2. Classifier unit fixtures ----------
@@ -422,6 +439,108 @@ console.log('== frozen-corpus closeKind diff (finding #2523) ==');
   check('2523 corpus: no unexpected close/bucket/sub moves', problems.length === 0, problems.slice(0, 5).join(' | '));
 })();
 
+// ---------- 2f. Second-companion (cplan2) hunt entries (finding #2516) ----------
+// sim-vetreengage-a (46426eb2e) added a third `.stage = 'hunt'` write per
+// file: the second companion's plan enters hunt with the inviter's target
+// copied onto it (win-plan.js:657, villager-brain.js:1176-1177). The driver
+// records ONE launch row per launch, naming only the FIRST companion
+// (seedattach-driver-20261115.js: the winPlanDepart + vbrainExecuteDepart
+// wraps push a single seedattachLaunches row with companion = plan.party[0]
+// / commit.companion; companion2 appears only in the v4departs row) — a
+// second companion has NO launch event naming them. The classifier can
+// therefore only reach a cplan2 plan through the census-only fallback or
+// the census/bounce scans. These fixtures prove each cplan2 shape lands in
+// the bucket the frozen taxonomy already assigns it (no misclassification):
+//   2516-A lazy-created second companion -> companion-inherited via the
+//     census-only fallback (first sighting hunt, party [inviter, comp1],
+//     inviter target null that day). This is the third entry shape the
+//     old "exactly 2" anchor never named — and the bucket for it already
+//     existed in the frozen definitions (prereg bucket 1, census-only
+//     clause: first sighting hunt with party [inviter], inviter target null).
+//   2516-B same shape via the brain path -> same bucket/sub (the classifier
+//     does not branch on launch path for the fallback).
+//   2516-C pre-existing haven-born second companion -> haven-born-never-seeded
+//     (its null predates the launch; the same precedence the frozen taxonomy
+//     already applies to a pre-existing first companion invited as companion).
+//   2516-D pre-existing SEEDED second companion, target overwritten to null
+//     by the cplan2 copy -> seeded-then-lost (the census scan finds the loss;
+//     no launch event is needed for this rule).
+//   2516-E second companion of a SEEDED inviter (the copy carries a non-null
+//     target) -> no null-hunt instance opens (the bounce counts as
+//     bouncedTargeted secondary, not an instance).
+//   2516-F first companion of a TRIO launch (party of 2, launch row present)
+//     -> companion-inherited via the launch path, exactly as a pair launch:
+//     party length never enters the launch-path rule.
+console.log('== second-companion (cplan2) shapes (finding #2516) ==');
+// A: lazy-created second companion, win-plan path. No launch row names v2
+// (the driver records only the first companion); the inviter's day-10 row
+// carries target null, so the census-only fallback fires.
+expectBucket('2516-A lazy second companion (winplan) -> census-only', baseSeed({
+  seedattachCreations: [creation(10, 'v2', 'winPlanOf', 'win-plan.js:438', [], 0, 'gear', null)],
+  seedattachCensus: [
+    censusRow(10, 'v0', null, 'hunt', ['v1', 'v2']),
+    censusRow(10, 'v2', null, 'hunt', ['v0', 'v1'], 10), censusRow(11, 'v2', null, 'hunt', ['v0', 'v1'], 10),
+    censusRow(12, 'v2', null, 'hunt', ['v0', 'v1'], 10),
+  ],
+  seedattachBounces: [bounce(12, 'v2', 'strike', 4, 'hunt', null, 'hunt', null, { sinceDay: 10 })],
+}), 'companion-inherited', 'census-only:inviter-v0');
+// B: same shape via the brain path (creatorSite differs only; the fallback
+// does not branch on it).
+expectBucket('2516-B lazy second companion (brain) -> census-only', baseSeed({
+  seedattachCreations: [creation(10, 'v2', 'winPlanOf', 'villager-brain.js:1048', [], 0, 'gear', null)],
+  seedattachCensus: [
+    censusRow(10, 'v0', null, 'hunt', ['v1', 'v2']),
+    censusRow(10, 'v2', null, 'hunt', ['v0', 'v1'], 10), censusRow(11, 'v2', null, 'hunt', ['v0', 'v1'], 10),
+    censusRow(12, 'v2', null, 'hunt', ['v0', 'v1'], 10),
+  ],
+  seedattachBounces: [bounce(12, 'v2', 'strike', 4, 'hunt', null, 'hunt', null, { sinceDay: 10 })],
+}), 'companion-inherited', 'census-only:inviter-v0');
+// C: pre-existing haven-born plan pulled in as second companion. First
+// sighting is gear (day 5), so the census-only fallback cannot fire; the
+// null predates the launch, so it stays haven-born.
+expectBucket('2516-C pre-existing haven-born second companion -> haven-born', baseSeed({
+  seedattachCreations: [creation(5, 'v2', 'winPlanHavenTick', 'win-plan.js:winPlanHavenTick', [], 0, 'gear', null)],
+  seedattachCensus: [censusRow(5, 'v2', null, 'gear', []), censusRow(7, 'v2', null, 'party', []),
+    censusRow(10, 'v2', null, 'hunt', ['v0', 'v1']), censusRow(11, 'v2', null, 'hunt', ['v0', 'v1']),
+    censusRow(12, 'v2', null, 'hunt', ['v0', 'v1'])],
+  seedattachBounces: [bounce(12, 'v2', 'audit', 4, 'hunt', null, 'hunt', null, { sinceDay: 5 })],
+}), 'haven-born-never-seeded', 'created-by-read');
+// D: pre-existing seeded plan whose target the cplan2 copy overwrote to
+// null (inviter target null). No launch row names v2; the census scan
+// still finds target strike at day 6 lost at day 8.
+expectBucket('2516-D seeded second companion, target lost via cplan2 copy -> seeded-then-lost', baseSeed({
+  seedattachCreations: [creation(5, 'v2', 'winPlanHavenTick', 'win-plan.js:winPlanHavenTick', ['strike'], 0, 'gear', null)],
+  seedattachBounces: [
+    bounce(6, 'v2', 'strike', 4, 'gear', null, 'party', 'strike', { sinceDay: 5 }),
+    bounce(10, 'v2', 'audit', 4, 'hunt', null, 'hunt', null, { sinceDay: 5 }),
+  ],
+  seedattachCensus: [censusRow(5, 'v2', null, 'gear', []), censusRow(6, 'v2', 'strike', 'party', []),
+    censusRow(8, 'v2', null, 'hunt', ['v0', 'v1']), censusRow(9, 'v2', null, 'hunt', ['v0', 'v1']),
+    censusRow(10, 'v2', null, 'hunt', ['v0', 'v1'])],
+}), 'seeded-then-lost', 'target:strike:lost-day:8');
+// E: seeded inviter, so the cplan2 copy carries a non-null target — the
+// second companion never enters the null-hunt population.
+(function () {
+  const r = classifyOne(baseSeed({
+    seedattachCreations: [creation(10, 'v2', 'winPlanOf', 'win-plan.js:438', [], 0, 'gear', null)],
+    seedattachCensus: [censusRow(10, 'v2', 'strike', 'hunt', ['v0', 'v1'], 10),
+      censusRow(11, 'v2', 'strike', 'hunt', ['v0', 'v1'], 10), censusRow(12, 'v2', 'strike', 'hunt', ['v0', 'v1'], 10)],
+    seedattachBounces: [bounce(12, 'v2', 'strike', 4, 'hunt', 'strike', 'hunt', 'strike', { sinceDay: 10 })],
+  }));
+  check('2516-E seeded-inviter second companion opens 0 instances', r.instances.length === 0, 'got ' + r.instances.length);
+  check('2516-E seeded-inviter second companion counts as bouncedTargeted=1',
+    r.secondary.bouncedTargeted === 1, JSON.stringify(r.secondary));
+})();
+// F: first companion of a trio launch — party of 2 in the census, launch
+// row present — classifies exactly as a pair launch.
+expectBucket('2516-F first companion of a trio launch -> winplan launch path', baseSeed({
+  seedattachLaunches: [launch(10, 'v0', 'winplan', 'v1', null, null, null)],
+  seedattachCreations: [creation(10, 'v1', 'winPlanOf', 'win-plan.js:438', [], 0, 'gear', null)],
+  seedattachCensus: [censusRow(10, 'v1', null, 'hunt', ['v0', 'v2'], 10),
+    censusRow(11, 'v1', null, 'hunt', ['v0', 'v2'], 10), censusRow(12, 'v1', null, 'hunt', ['v0', 'v2'], 10)],
+  seedattachBounces: [bounce(12, 'v1', 'strike', 4, 'hunt', null, 'hunt', null, { sinceDay: 10 })],
+}), 'companion-inherited', 'winplan:inviter-v0');
+
 // ---------- 3. Recorder: live in-memory runs (shape + both LEG policies) ----------
 console.log('== recorder live ==');
 function loadDriverFresh(leg) {
@@ -435,7 +554,7 @@ async function liveRuns() {
   const d1 = loadDriverFresh('competent');
   const out = await d1.oneRun(100871);
   check('live competent run completes with 0 instrument errors', out.instrumentErrors.length === 0, JSON.stringify(out.instrumentErrors.slice(0, 3)));
-  check('live run policy is competent, sha 74a890f0844e', out.policy === 'competent' && out.policySha === '74a890f0844e',
+  check('live run policy is competent, sha df9b7dff4de4', out.policy === 'competent' && out.policySha === 'df9b7dff4de4',
     'got ' + out.policy + '/' + out.policySha);
   check('live run carries seedattach arrays', Array.isArray(out.seedattachBounces) && Array.isArray(out.seedattachCreations) &&
     Array.isArray(out.seedattachLaunches) && Array.isArray(out.seedattachCensus));
