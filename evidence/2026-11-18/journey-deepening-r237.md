@@ -295,9 +295,11 @@ loads an r237 file):
   r236 files (the fork regressed nothing).
 
 ## Closeout
-- **Commits (branch `journey-deepening`):** `172802aa` tooling
-  (prereg + driver + analyzer + proof tests), `33e2352f` run note +
-  logs.
+- **Commits (branch `journey-deepening`, after rebase onto
+  `86e78fb1a`):** `6a5cc4683` tooling (prereg + driver + analyzer +
+  proof tests), `a6397bb4e` run note + logs, `2ff51da48` note
+  hash-fill. (Pre-rebase hashes were `172802aa` / `33e2352f` /
+  `0b807f2d`.)
 - **Merged locally, pending ship** — no bump, no push, no live
   verification (ship loop owns those).
 - Rotation 2→3 written with read-back; lock deleted at closeout
