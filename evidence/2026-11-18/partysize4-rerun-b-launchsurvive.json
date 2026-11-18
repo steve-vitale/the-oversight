@@ -1,0 +1,97 @@
+=== launchsurvive-a control leg ===
+seeds: 8  files: 8  instancesOpened: 33  coverage: 1  errors: 0  trackerRows: 958  trackerGaps: 0
+launches: 10  byClass: {"traveled-and-found":0,"still-open":1,"died-en-route":4,"stayed-home-died":0,"died-at-home-other":3,"traveled-not-found":2}  meetingsShare: 0 (0/10)  persistenceYes: 9/10
+guard: expeditionDeaths=163 totalDeaths=684 (85.5/run)  starvation=1  medianSurvival=146.5
+linger: holderDiedInstances=24 lingeringPlans=0 (0)  medianTailDays=0
+wall: {"nationalByStanding":3,"nationalByRank":0,"table":0,"wins":0,"wave4":8,"wave5":3}
+  launch seed 104704: app_mgpspkzp25 -> eulogy comp catalina_reyes d141-151 cls=traveled-not-found meetings=0 persistence=yes (9d, minDist 1)
+  launch seed 104705: zoe_adams -> influencer comp hannah_kim d99-105 cls=died-at-home-other meetings=0 persistence=yes (4d, minDist 1) died d105 (monster, haven)
+  launch seed 104706: nadia_khoury -> eulogy comp visjoin_54 d56-open cls=still-open meetings=0 persistence=no (0d, minDist null)
+  launch seed 104708: app_mgpsphrx272 -> influencer comp app_mgpspjqh592 d70-71 cls=died-en-route meetings=0 persistence=yes (1d, minDist 0) died d71 (The Eulogy, away)
+  launch seed 104708: valeria_quispe -> reunion comp app_mgpspjqh592 d70-128 cls=died-at-home-other meetings=0 persistence=yes (40d, minDist 0) died d128 (the arena, haven)
+  launch seed 104708: sari_wulandari -> herald comp app_mgpspjqh592 d81-95 cls=died-en-route meetings=0 persistence=yes (14d, minDist 0) died d95 (monster, away)
+  launch seed 104709: ava_garcia -> strike comp katarina_novak d77-151 cls=died-at-home-other meetings=0 persistence=yes (20d, minDist 0) died d151 (the arena, haven)
+  launch seed 104710: yara_haddad -> eulogy comp gen_siru1cd d90-116 cls=traveled-not-found meetings=0 persistence=yes (20d, minDist 0)
+  launch seed 104711: app_mgpspji9718 -> eulogy comp ethan_hunt d75-120 cls=died-en-route meetings=0 persistence=yes (17d, minDist 0) died d120 (a stranger, away)
+  launch seed 104711: lena_ruiz -> reunion comp ethan_hunt d102-127 cls=died-en-route meetings=0 persistence=yes (24d, minDist 0) died d127 (the wild, away)
+=== launchsurvive-a on leg ===
+seeds: 8  files: 8  instancesOpened: 28  coverage: 1  errors: 0  trackerRows: 698  trackerGaps: 1
+launches: 9  byClass: {"traveled-and-found":1,"still-open":1,"died-en-route":2,"stayed-home-died":0,"died-at-home-other":4,"traveled-not-found":1}  meetingsShare: 0.1111 (1/9)  persistenceYes: 7/9
+guard: expeditionDeaths=169 totalDeaths=677 (84.6/run)  starvation=1  medianSurvival=130.5
+linger: holderDiedInstances=20 lingeringPlans=0 (0)  medianTailDays=0
+wall: {"nationalByStanding":4,"nationalByRank":0,"table":0,"wins":0,"wave4":8,"wave5":4}
+  launch seed 104704: app_mgpspkzp25 -> eulogy comp catalina_reyes d141-151 cls=traveled-not-found meetings=0 persistence=yes (10d, minDist 0)
+  launch seed 104705: zoe_adams -> influencer comp hannah_kim d99-128 cls=died-en-route meetings=0 persistence=yes (3d, minDist 2) died d128 (the wild, away)
+  launch seed 104706: nadia_khoury -> eulogy comp visjoin_54 d56-open cls=still-open meetings=0 persistence=no (0d, minDist null)
+  launch seed 104708: app_mgpsphrx272 -> influencer comp app_mgpspjqh592 d70-70 cls=died-at-home-other meetings=0 persistence=no (0d, minDist null) died d70 (monster, null)
+  launch seed 104708: valeria_quispe -> reunion comp app_mgpspjqh592 d70-98 cls=traveled-and-found meetings=1 persistence=yes (24d, minDist 0)
+  launch seed 104708: app_mgpspjwl107 -> rerun comp app_mgpspjqh592 d106-116 cls=died-at-home-other meetings=0 persistence=yes (7d, minDist 2) died d116 (the wild, haven)
+  launch seed 104709: ava_garcia -> strike comp katarina_novak d77-98 cls=died-en-route meetings=0 persistence=yes (21d, minDist 0) died d98 (monster, away)
+  launch seed 104710: yara_haddad -> eulogy comp gen_siru1cd d90-117 cls=died-at-home-other meetings=0 persistence=yes (23d, minDist 0) died d117 (monster, haven)
+  launch seed 104711: app_mgpspji9718 -> eulogy comp ethan_hunt d75-84 cls=died-at-home-other meetings=0 persistence=yes (9d, minDist 1) died d84 (contest, haven)
+=== D3 drift smoke (first divergence day vs first world-tick seed day) ===
+seed 104704: divergence day 141  first world-tick seed (control/on) 27/27  divergesBeforeFirstSeed: false
+seed 104705: divergence day 100  first world-tick seed (control/on) 86/86  divergesBeforeFirstSeed: false
+seed 104706: divergence day 56  first world-tick seed (control/on) 28/28  divergesBeforeFirstSeed: false
+seed 104707: divergence day null  first world-tick seed (control/on) 28/28  divergesBeforeFirstSeed: null
+seed 104708: divergence day 70  first world-tick seed (control/on) 29/29  divergesBeforeFirstSeed: false
+seed 104709: divergence day 96  first world-tick seed (control/on) 73/73  divergesBeforeFirstSeed: false
+seed 104710: divergence day 90  first world-tick seed (control/on) 31/31  divergesBeforeFirstSeed: false
+seed 104711: divergence day 75  first world-tick seed (control/on) 28/28  divergesBeforeFirstSeed: false
+judgment: {
+  "instrument": {
+    "controlErrors": 0,
+    "onErrors": 0,
+    "controlFiles": 8,
+    "onFiles": 8,
+    "controlParseErrors": [],
+    "onParseErrors": [],
+    "controlCoverage": 1,
+    "onCoverage": 1,
+    "controlTrackerGaps": 0,
+    "onTrackerGaps": 1,
+    "controlTrackerRows": 958,
+    "onTrackerRows": 698,
+    "controlInstances": 33,
+    "onInstances": 28,
+    "pass": false
+  },
+  "power": {
+    "value": 9,
+    "bar": ">= 3 launches on the 8-seed on-leg",
+    "pass": true
+  },
+  "classification": {
+    "unclassified": 0,
+    "noPersistence": 0,
+    "byClass": {
+      "traveled-and-found": 1,
+      "still-open": 1,
+      "died-en-route": 2,
+      "stayed-home-died": 0,
+      "died-at-home-other": 4,
+      "traveled-not-found": 1
+    },
+    "bar": "every launch in exactly one of the six classes, persistence measured per launch",
+    "pass": true
+  },
+  "proof": {
+    "value": null,
+    "bar": "test-launchsurvive-a.js green on the tip AND post-revert",
+    "pass": null
+  },
+  "determinism": {
+    "value": "D3 clean (D1/D2 in proof test)",
+    "bar": "D1/D2 green + D3 smoke clean",
+    "pass": true
+  },
+  "meetingsShare": {
+    "value": 0.1111,
+    "withMeeting": 1,
+    "launches": 9,
+    "bar": "primary metric (reported; seedland 0/3)",
+    "pass": null
+  },
+  "verdict": "NO-GO"
+}
+analysis: evidence/2026-11-16/launchsurvive-a-analysis.json
