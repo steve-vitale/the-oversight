@@ -618,6 +618,12 @@
       considerations: considerations,
     };
   }
+  function firstNameOf(name) {
+    try {
+      var s = String(name || '').split(' ')[0];
+      return s || String(name || '');
+    } catch (e) { return String(name || ''); }
+  }
   function writeCommit(self, vid, chosen, entry) {
     var br = ensure(self);
     if (!br) return;
@@ -641,6 +647,36 @@
     br.stats.picks = (br.stats.picks || 0) + 1;
     if (chosen.kind === 'EXPEDITION') br.stats.expeditions = (br.stats.expeditions || 0) + 1;
     if (chosen.winPlanAction) br.stats.winPlan = (br.stats.winPlan || 0) + 1;
+    // HOMEBODY VOICE (sim-homebodyvoice-a, finding #2499): a dawn-bid
+    // pick who cannot walk (range-0 companion) gets one fiction line,
+    // naming the holder, the companion, and the reason — once per
+    // (holder, companion) pair, never daily spam. Fiction only: say()
+    // consumes no RNG and writes only the narration log; the dedup map
+    // is read by nothing but this check. The guard mirrors the depart
+    // block exactly (startExpedition / companionLaunchable: maxD < 1).
+    // The second companion (companion2) is not voiced: the finding is
+    // about the dawn-bid pick, picked and launched on a different path.
+    try {
+      if (chosen.winPlanAction === 'party_launch' && chosen.companion) {
+        var _hbMaxD = -1;
+        try { _hbMaxD = self.npcMaxDist ? self.npcMaxDist(chosen.companion) : -1; } catch (e2) {}
+        if (_hbMaxD >= 0 && _hbMaxD < 1) {
+          if (!br.homebodySaid) br.homebodySaid = {};
+          var _hbKey = String(vid) + '>' + String(chosen.companion);
+          if (!br.homebodySaid[_hbKey]) {
+            br.homebodySaid[_hbKey] = dayOf(self);
+            var _hbH = null, _hbC = null;
+            try { _hbH = self.displayName ? self.displayName(vid) : null; } catch (e3) {}
+            try { _hbC = self.displayName ? self.displayName(chosen.companion) : null; } catch (e4) {}
+            _hbH = firstNameOf(_hbH || vid);
+            _hbC = firstNameOf(_hbC || chosen.companion);
+            try {
+              if (self.say) self.say(_hbH + ' asked ' + _hbC + ' to walk out with the party — but ' + _hbC + ' never leaves Haven, so ' + _hbC + ' stays behind.');
+            } catch (e5) {}
+          }
+        }
+      }
+    } catch (e) {}
     return br.commit[vid];
   }
 
