@@ -16,9 +16,25 @@ const REPO = path.join(__dirname, '..');
 
 function isW4Launch(r) { return r && r.result === 'launch' && ((r.targetWave | 0) >= 4); }
 
-// Classify one launch's re-pick from the pick rows paired to it.
-// pick: null row => 'null'; pick named + in party => 'carried';
-// pick named + not in party => 'dropped'; no pick row => 'unjoined'.
+// isDepartPick(p): is this second-companion pick a LAUNCH-TIME
+// re-pick from winPlanDepart? The call site is the launchParty
+// closure inside winPlanDepart, so the stack frame reads
+// 'at launchParty (src/js/win-plan.js:...)' — NOT 'winPlanDepart'.
+// The caller label alone misclassifies those as 'other' (caught on
+// the first pilot seed: 6 launchParty picks, 0 labelled depart).
+// Classify from the RAW caller frame, which the driver always
+// records; the caller label is only a fallback.
+function isDepartPick(p) {
+  const frame = (p && p.callerFrame) || '';
+  if (/launchParty|winPlanDepart/.test(frame)) return true;
+  return p && p.caller === 'winPlanDepart';
+}
+function isDawnPick(p) {
+  if (isDepartPick(p)) return false;
+  const frame = (p && p.callerFrame) || '';
+  if (/winPlanCands/.test(frame)) return true;
+  return p && p.caller === 'brain-dawn';
+}
 function classifyRepick(launch, pickRow) {
   if (!pickRow) return 'unjoined';
   if (!pickRow.pick) return 'null';
@@ -39,7 +55,7 @@ function analyzeSeed(f) {
   // the k-th winPlanDepart-caller pick for that key.
   const picksByKey = {};
   for (const p of secondPicks) {
-    if (p.caller !== 'winPlanDepart') continue;
+    if (!isDepartPick(p)) continue;
     const k = p.vid + '|' + p.day;
     (picksByKey[k] = picksByKey[k] || []).push(p);
   }
@@ -80,9 +96,9 @@ function analyzeSeed(f) {
     triosMatch: (endTrios == null ? null : (endTrios === triosDeltaSum)),
     brainCalls: brainCalls.length,
     secondPicksTotal: secondPicks.length,
-    secondPicksDepart: secondPicks.filter(function (p) { return p.caller === 'winPlanDepart'; }).length,
-    secondPicksDawn: secondPicks.filter(function (p) { return p.caller === 'brain-dawn'; }).length,
-    secondPicksOther: secondPicks.filter(function (p) { return p.caller === 'other' || p.caller === 'unknown'; }).length,
+    secondPicksDepart: secondPicks.filter(isDepartPick).length,
+    secondPicksDawn: secondPicks.filter(isDawnPick).length,
+    secondPicksOther: secondPicks.filter(function (p) { return !isDepartPick(p) && !isDawnPick(p); }).length,
     deaths: (f.deaths || []).length, starvation: starvation,
     instrumentErrors: (f.instrumentErrors || []).length,
   };
@@ -184,6 +200,18 @@ function selftest() {
   check('synth: brainCalls 0, dawn picks excluded from repicks',
     s.brainCalls === 0 && s.secondPicksDawn === 1 && s.secondPicksDepart === 3,
     JSON.stringify({ bc: s.brainCalls, dawn: s.secondPicksDawn, dep: s.secondPicksDepart }));
+  // (a2) launchParty-frame picks: the driver labels the closure call
+  // 'other', but the raw frame names launchParty in win-plan.js —
+  // the join must still count them as launch-time re-picks.
+  const synth3 = JSON.parse(JSON.stringify(synth));
+  for (const p of synth3.secondPicks) {
+    if (p.caller === 'winPlanDepart') { p.caller = 'other'; p.callerFrame = 'at launchParty (src/js/win-plan.js:635:61)'; }
+  }
+  const s3 = analyzeSeed(synth3);
+  check('synth3: launchParty-frame picks still join as depart re-picks',
+    s3.repicks.carried === 1 && s3.repicks.dropped === 1 && s3.repicks.null === 1 && s3.repicks.unjoined === 0 &&
+    s3.secondPicksDepart === 3 && s3.secondPicksOther === 0,
+    JSON.stringify({ rep: s3.repicks, dep: s3.secondPicksDepart, oth: s3.secondPicksOther }));
   check('synth: hold counted, instrument 0', s.holds === 1 && s.instrumentErrors === 0, JSON.stringify({ h: s.holds }));
   // (b) Unjoined launch: a w4 launch with no depart-caller pick row.
   const synth2 = JSON.parse(JSON.stringify(synth));
@@ -224,4 +252,4 @@ if (require.main === module) {
   console.log(JSON.stringify(out, null, 2));
 }
 
-module.exports = { analyzeSeed: analyzeSeed, analyzeDir: analyzeDir, analyzeTriodroughtFile: analyzeTriodroughtFile, classifyRepick: classifyRepick, selftest: selftest };
+module.exports = { analyzeSeed: analyzeSeed, analyzeDir: analyzeDir, analyzeTriodroughtFile: analyzeTriodroughtFile, classifyRepick: classifyRepick, isDepartPick: isDepartPick, isDawnPick: isDawnPick, selftest: selftest };
