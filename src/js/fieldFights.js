@@ -547,6 +547,17 @@
         // FINISHLOG (2026-11-05): per-round finish records, one entry per
         // round (see _flCloseRound). Record-only; no engine code reads it.
         roundsDetail: [],
+        // FOODGATE-INSTR (sim-foodgate-instr-a, finding #2557-A):
+        // food-gate instrumentation on the encounter row. foodTier /
+        // hungerStart are filled live below (fight-start values, read
+        // directly — never via gpF, which is null when the fighter
+        // holds no field abilities); the foodgate* flags are copied
+        // live from the per-fight godpath state after each fieldAct
+        // call. Record-only; no engine code reads them back.
+        foodTier: null, hungerStart: null, holdsRage: false, gpActive: false,
+        foodgateTierBlocked: null, foodgateTierBlockedRound: null, foodgateTierBlockedCount: 0,
+        foodgatePayBlocked: 0, foodgatePayBlockedRage: false, foodgatePayBlockedFirst: null,
+        rageFired: false, carrierRageHeld: false, carrierRageFired: false,
       };
       // LEARN-VS-FIGHT JUDGMENT (Steve 2026-10-13): default is learn-first.
       // It's much less risky to learn about a monster (observe, track,
@@ -662,6 +673,20 @@
         for (var k in (extra || {})) c[k] = extra[k];
         return c;
       };
+      // FOODGATE-INSTR (sim-foodgate-instr-a, finding #2557-A): fill
+      // the fight-start food values. Tier comes from the live
+      // fieldBegin state when it exists (the exact tier fieldAct
+      // gates on); hunger is the fighter's live hunger at fight
+      // start. Both are pure reads — no RNG, no state writes. Runs
+      // before the alreadyDead / awareness early returns below, so
+      // even a no-contact meeting carries its food values.
+      try {
+        rec.gpActive = !!gpF;
+        rec.holdsRage = vAbs.indexOf('rage') >= 0;
+        rec.foodTier = gpF ? (gpF.tier || 'secure') : (this.villageFoodTier ? this.villageFoodTier() : 'secure');
+        var _fgN = (this.npcNeeds ? this.npcNeeds(vid) : null);
+        rec.hungerStart = _fgN ? (_fgN.hunger || 0) : null;
+      } catch (e) { console.warn('[foodgate] fill', e); }
       // one-shot ability state, reset per fight
       var abAim = false, abAimed = false, abWarCried = false, abScreamed = false,
           abBraced = false, abDebtSettled = false, abStun = 0, abRoundTaken = 0,
@@ -1926,6 +1951,25 @@
               } catch (e) { console.warn('[godpath] fieldAct', e); gpOut = null; }
               gpTag(_gpLogN3);
             }
+            // FOODGATE-INSTR (sim-foodgate-instr-a, finding #2557-A):
+            // copy the live gate flags onto the record every round, so
+            // every return path below carries the latest values. Runs
+            // whether or not fieldAct ran this round (a trick can
+            // displace it — finding #2558 — and the flags persist on
+            // gpF). First-bite wins for kind/round/first-pay; counts
+            // accumulate; fire flags are sticky.
+            try {
+              if (gpF) {
+                if (gpF.tierBlocked && !rec.foodgateTierBlocked) { rec.foodgateTierBlocked = gpF.tierBlocked; rec.foodgateTierBlockedRound = gpF.tierBlockedRound; }
+                if (gpF.tierBlockedCount) rec.foodgateTierBlockedCount = gpF.tierBlockedCount;
+                if (gpF.payBlocked) rec.foodgatePayBlocked = gpF.payBlocked;
+                if (gpF.payBlockedRage) rec.foodgatePayBlockedRage = true;
+                if (gpF.payBlockedFirst && !rec.foodgatePayBlockedFirst) rec.foodgatePayBlockedFirst = { id: gpF.payBlockedFirst.id, actId: gpF.payBlockedFirst.actId, kcal: gpF.payBlockedFirst.kcal, hunger: gpF.payBlockedFirst.hunger };
+                if (gpF.rageFired) rec.rageFired = true;
+                if (gpF.carrierRage) rec.carrierRageHeld = true;
+                if (gpF.carrierRageFired) rec.carrierRageFired = true;
+              }
+            } catch (e) { console.warn('[foodgate] copy', e); }
             if (gpOut && gpOut.consumed) {
               // the verb was the action this round (narrated in fieldAct)
               // APEXHOOK (2026-10-16): track the verb for the editor/

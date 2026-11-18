@@ -1553,11 +1553,44 @@
         holdBonus: held.rally_aura ? 0.06 : 0, strikeMult: strike || 1, dodge: Math.min(0.5, dodge || 0), armorAdd: armor || 0, power, detAdd, detMul };
     } catch (e) { warn('fieldBegin', e); return null; }
   }
+  // FOODGATE-INSTR (sim-foodgate-instr-a, finding #2557-A): helpers for
+  // the food-gate instrumentation on the per-fight godpath state.
+  // foodgateHunger reads the fighter's live hunger (the number
+  // vCanPay gates on); foodgateTierBlock records a tier-gate bite on
+  // fieldAct (first kind/round wins, blocked rounds accumulate).
+  // Pure reads + flag-setting only — no RNG, no behavior change.
+  function foodgateHunger(vid) {
+    try { const n = Game.npcNeeds && Game.npcNeeds(vid); return n ? (n.hunger || 0) : null; }
+    catch (e) { return null; }
+  }
+  function foodgateTierBlock(G, kind, round) {
+    try {
+      if (!G) return;
+      if (!G.tierBlocked) { G.tierBlocked = kind; G.tierBlockedRound = round; }
+      G.tierBlockedCount = (G.tierBlockedCount || 0) + 1;
+    } catch (e) { warn('foodgateTierBlock', e); }
+  }
   function fieldPay(G, id, actId) {
     const ab = defOf(id) || {};
     const act = (ab.actions || []).find(a => a.id === actId) || (ab.actions || [])[0] || {};
     const kcal = vKcal(act, ab);
-    if (!vCanPay(G.vid, kcal)) return false;
+    if (!vCanPay(G.vid, kcal)) {
+      // FOODGATE-INSTR (sim-foodgate-instr-a, finding #2557-A): the
+      // hunger gate bites here — record the failed pay on the
+      // per-fight state (count, first blocked pay with the hunger
+      // that blocked it, and a Rage-specific flag for the 60-kcal
+      // pay). vCanPay is the only false path, so a false return IS
+      // a hunger-blocked pay (an exception inside vCanPay also
+      // returns false — see vCanPay's own warn).
+      try {
+        if (G) {
+          G.payBlocked = (G.payBlocked || 0) + 1;
+          if (!G.payBlockedFirst) G.payBlockedFirst = { id: id, actId: actId, kcal: kcal, hunger: foodgateHunger(G.vid) };
+          if (id === 'rage') { G.payBlockedRage = true; G.payBlockedRageHunger = foodgateHunger(G.vid); }
+        }
+      } catch (e) { warn('foodgatePayBlock', e); }
+      return false;
+    }
     vPay(G.vid, kcal);
     G.used[id] = (G.used[id] || 0) + 1;
     try { Game.tele && Game.tele('godpath_verb', { ability: id, verb: act.do || id, who: G.vid, field: true }); } catch (e) { warn('tele field', e); }
@@ -1570,9 +1603,13 @@
     const out = { consumed: false, abStun: 0 };
     try {
       if (!G || !c.lead || c.lead.hp <= 0) return out;
-      if (G.tier === 'starving') return out;
+      // FOODGATE-INSTR (sim-foodgate-instr-a, finding #2557-A): the
+      // tier gate bites here — record which tier blocked fieldAct
+      // before returning. The fight record copies these live (see
+      // fieldFights.js); no behavior change, no RNG.
+      if (G.tier === 'starving') { foodgateTierBlock(G, 'starving', c.round); return out; }
       const packN = (c.members || []).filter(m => m.hp > 0).length;
-      if (G.tier === 'tight' && packN < 2 && c.vHp > c.vHpMax * 0.4) return out;
+      if (G.tier === 'tight' && packN < 2 && c.vHp > c.vHpMax * 0.4) { foodgateTierBlock(G, 'tight', c.round); return out; }
       const h = G.held, u = (id) => G.used[id] || 0;
       const hp = c.vHp / Math.max(1, c.vHpMax);
       const L = c.log;
@@ -1624,6 +1661,11 @@
       if (h.rage && !u('rage') && !G.nextN && c.lead.hp > c.lead.maxHp * 0.4 && fieldPay(G, 'rage', 'unleash_rage')) {
         G.nextMult = 2; G.nextN = 3;
         L.push('R' + c.round + ': ' + c.vName + '\'s eyes go red. Next 3 strikes hit twice as hard. (Rage)');
+        // FOODGATE-INSTR (sim-foodgate-instr-a, finding #2557-A): the
+        // Rage branch fired — engine-side, same pattern as the
+        // carrier's carrierRageFired (finding #2553). Placed after the
+        // log line so the carrier patch's context stays intact.
+        G.rageFired = true;
         out.consumed = true; return out;
       }
       if (h.bird_strike && !u('bird_strike') && fieldPay(G, 'bird_strike', 'call')) {
