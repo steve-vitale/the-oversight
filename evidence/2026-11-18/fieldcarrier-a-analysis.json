@@ -1,0 +1,783 @@
+{
+  "verdict": "NO-GO",
+  "kind": "THIN-POOL",
+  "bars": [
+    {
+      "id": "pool-floor-pair",
+      "pass": false,
+      "detail": "engaged launched-party meetings (pair-inclusive, present): arm 2 (floor 10); ctl 2"
+    },
+    {
+      "id": "kill-share",
+      "pass": false,
+      "detail": "arm pair kill share 0.000 (0/2) vs ctl 0.000 (0/2) (bar arm>=0.25)"
+    },
+    {
+      "id": "kill-share-ratio",
+      "pass": false,
+      "detail": "ctl kills 0 — ratio bar passes iff arm kills > 0 (arm kills 0)"
+    },
+    {
+      "id": "cost-community-loss",
+      "pass": true,
+      "detail": "community loss arm 2/8 vs ctl 3/8 (bar arm share <= ctl share + 0.125)"
+    },
+    {
+      "id": "cost-starvation",
+      "pass": true,
+      "detail": "starvation totals arm 2 vs ctl 2; villager arm 2 vs ctl 2 (bar arm<=ctl+2 both)"
+    },
+    {
+      "id": "cost-median",
+      "pass": true,
+      "detail": "median survival arm 150d vs ctl 150d (bar arm>=0.8x ctl)"
+    },
+    {
+      "id": "instrument-errors",
+      "pass": true,
+      "detail": "instrument errors arm 0 / ctl 0 (bar 0)"
+    },
+    {
+      "id": "carrier-fires",
+      "pass": false,
+      "detail": "carrier-rage meetings (engine-side carrierRage flag on the encounter row): arm 0 (bar arm > 0 — 0 fires = failed mechanism check, not a GO)"
+    },
+    {
+      "id": "carrier-fires-ctl-zero",
+      "pass": true,
+      "detail": "carrier-rage meetings on the control leg (flag off — the carrier cannot fire there): ctl 0 (bar 0; any ctl fire is an instrument failure)"
+    }
+  ],
+  "carrierRageArm": [],
+  "carrierRageCtl": [],
+  "ctl": {
+    "dir": "evidence/2026-11-18/perseed-fieldcarrier-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {
+      "false": 8
+    },
+    "fightally2On": {
+      "true": 8
+    },
+    "meetings": 0,
+    "wins": 0,
+    "kills": 0,
+    "losses": 0,
+    "vDie": 0,
+    "vFlee": 0,
+    "mFlee": 0,
+    "winShare": null,
+    "killShare": null,
+    "funnel": {
+      "encounters": 19,
+      "joined": 19,
+      "unjoined": 0,
+      "noLaunchPlan": 0,
+      "pairLaunch": 15,
+      "partyAbsent": 4,
+      "evadeExcluded": 0
+    },
+    "byOutcome": {},
+    "gateXOutcome": {},
+    "gateAvoidShare": null,
+    "gateNullShare": null,
+    "gateSeekShare": null,
+    "lossGateNull": 0,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {},
+    "dmgShareMean": null,
+    "dmgShareByOutcome": {},
+    "roundsMean": null,
+    "vTakenMean": null,
+    "starvation": 2,
+    "starvationVillager": 2,
+    "medianDays": 150,
+    "communityLost": 3,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 4,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "arm": {
+    "dir": "evidence/2026-11-18/perseed-fieldcarrier-a-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {
+      "false": 8
+    },
+    "fightally2On": {
+      "true": 8
+    },
+    "meetings": 0,
+    "wins": 0,
+    "kills": 0,
+    "losses": 0,
+    "vDie": 0,
+    "vFlee": 0,
+    "mFlee": 0,
+    "winShare": null,
+    "killShare": null,
+    "funnel": {
+      "encounters": 20,
+      "joined": 20,
+      "unjoined": 0,
+      "noLaunchPlan": 0,
+      "pairLaunch": 16,
+      "partyAbsent": 4,
+      "evadeExcluded": 0
+    },
+    "byOutcome": {},
+    "gateXOutcome": {},
+    "gateAvoidShare": null,
+    "gateNullShare": null,
+    "gateSeekShare": null,
+    "lossGateNull": 0,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {},
+    "dmgShareMean": null,
+    "dmgShareByOutcome": {},
+    "roundsMean": null,
+    "vTakenMean": null,
+    "starvation": 2,
+    "starvationVillager": 2,
+    "medianDays": 150,
+    "communityLost": 2,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 3,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "ctlPair": {
+    "dir": "evidence/2026-11-18/perseed-fieldcarrier-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {
+      "false": 8
+    },
+    "fightally2On": {
+      "true": 8
+    },
+    "meetings": 2,
+    "wins": 0,
+    "kills": 0,
+    "losses": 2,
+    "vDie": 0,
+    "vFlee": 2,
+    "mFlee": 0,
+    "winShare": 0,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 19,
+      "joined": 19,
+      "unjoined": 0,
+      "noLaunchPlan": 0,
+      "pairLaunch": 0,
+      "partyAbsent": 12,
+      "evadeExcluded": 5
+    },
+    "byOutcome": {
+      "vFlee": {
+        "n": 2,
+        "rounds": [
+          5,
+          6
+        ],
+        "dmgShare": [
+          0.1631321370309951,
+          0.30424799081515497
+        ],
+        "vTaken": [
+          71,
+          78
+        ],
+        "partySize": [
+          3,
+          3
+        ],
+        "minArmorP": [
+          7,
+          21
+        ],
+        "meanArmorP": [
+          16.666666666666668,
+          28
+        ],
+        "mHpStart": [
+          1226,
+          871
+        ],
+        "abilitiesPerMember": [
+          0,
+          1.6666666666666667
+        ],
+        "fighterDmgShare": [
+          0.9259259259259259,
+          0.4696969696969697
+        ],
+        "parsedStrikeTotal": [
+          108,
+          132
+        ],
+        "roundsMean": 5.5,
+        "vTakenMean": 74.5,
+        "partySizeMean": 3,
+        "minArmorPMean": 14,
+        "meanArmorPMean": 22.333333333333336,
+        "mHpStartMean": 1048.5,
+        "abilitiesPerMemberMean": 0.8333333333333334,
+        "fighterDmgShareMean": 0.6978114478114479,
+        "parsedStrikeTotalMean": 120
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vFlee": 2
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 1,
+    "gateSeekShare": 0,
+    "lossGateNull": 2,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {
+      "audit": {
+        "win": 0,
+        "loss": 1
+      },
+      "influencer": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.23369006392307504,
+    "dmgShareByOutcome": {
+      "vFlee": 0.23369006392307504
+    },
+    "roundsMean": 5.5,
+    "vTakenMean": 74.5,
+    "starvation": 2,
+    "starvationVillager": 2,
+    "medianDays": 150,
+    "communityLost": 3,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 4,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "armPair": {
+    "dir": "evidence/2026-11-18/perseed-fieldcarrier-a-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {
+      "false": 8
+    },
+    "fightally2On": {
+      "true": 8
+    },
+    "meetings": 2,
+    "wins": 0,
+    "kills": 0,
+    "losses": 2,
+    "vDie": 0,
+    "vFlee": 2,
+    "mFlee": 0,
+    "winShare": 0,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 20,
+      "joined": 20,
+      "unjoined": 0,
+      "noLaunchPlan": 0,
+      "pairLaunch": 0,
+      "partyAbsent": 12,
+      "evadeExcluded": 6
+    },
+    "byOutcome": {
+      "vFlee": {
+        "n": 2,
+        "rounds": [
+          5,
+          6
+        ],
+        "dmgShare": [
+          0.1631321370309951,
+          0.30424799081515497
+        ],
+        "vTaken": [
+          71,
+          78
+        ],
+        "partySize": [
+          3,
+          3
+        ],
+        "minArmorP": [
+          7,
+          21
+        ],
+        "meanArmorP": [
+          16.666666666666668,
+          28
+        ],
+        "mHpStart": [
+          1226,
+          871
+        ],
+        "abilitiesPerMember": [
+          0,
+          1.6666666666666667
+        ],
+        "fighterDmgShare": [
+          0.9259259259259259,
+          0.4696969696969697
+        ],
+        "parsedStrikeTotal": [
+          108,
+          132
+        ],
+        "roundsMean": 5.5,
+        "vTakenMean": 74.5,
+        "partySizeMean": 3,
+        "minArmorPMean": 14,
+        "meanArmorPMean": 22.333333333333336,
+        "mHpStartMean": 1048.5,
+        "abilitiesPerMemberMean": 0.8333333333333334,
+        "fighterDmgShareMean": 0.6978114478114479,
+        "parsedStrikeTotalMean": 120
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vFlee": 2
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 1,
+    "gateSeekShare": 0,
+    "lossGateNull": 2,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {
+      "audit": {
+        "win": 0,
+        "loss": 1
+      },
+      "influencer": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.23369006392307504,
+    "dmgShareByOutcome": {
+      "vFlee": 0.23369006392307504
+    },
+    "roundsMean": 5.5,
+    "vTakenMean": 74.5,
+    "starvation": 2,
+    "starvationVillager": 2,
+    "medianDays": 150,
+    "communityLost": 2,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 3,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "ctlMeetings": [],
+  "armMeetings": [],
+  "ctlPairMeetings": [
+    {
+      "seed": 104604,
+      "day": 65,
+      "vid": "ruby_callaghan",
+      "mid": "audit",
+      "mHpStart": 1226,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 5,
+      "vTaken": 71,
+      "mDealt": 200,
+      "dmgShare": 0.1631321370309951,
+      "planParty": [
+        "emma_larsen"
+      ],
+      "allyVids": [
+        "app_mgpspi0n49",
+        "emma_larsen"
+      ],
+      "joiners": [
+        "app_mgpspi0n49",
+        "emma_larsen"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "ruby_callaghan": {
+          "armed": true,
+          "armored": true,
+          "armorP": 31
+        },
+        "app_mgpspi0n49": {
+          "armed": true,
+          "armored": true,
+          "armorP": 7
+        },
+        "emma_larsen": {
+          "armed": true,
+          "armored": true,
+          "armorP": 12
+        }
+      },
+      "minArmorP": 7,
+      "meanArmorP": 16.666666666666668,
+      "parsedStrikeTotal": 108,
+      "parsedAttributed": 108,
+      "dmgByVid": {
+        "ruby_callaghan": 100,
+        "app_mgpspi0n49": 8
+      },
+      "fighterDmgShare": 0.9259259259259259,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "ruby_callaghan": [],
+        "app_mgpspi0n49": [],
+        "emma_larsen": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Ruby walks straight into The Audit. No avoiding it.",
+        "Ruby sees The Audit coming and nocks an arrow — the fight opens at range (4 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Audit for 22 (1204 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "Ruby lowers the bow — The Audit is on them now. (1/4 hit)",
+        "R1: Ruby strikes for 40 (1164 left)",
+        "Ruby's gear absorbs 40.",
+        "R1: Field Audit hits Ruby for 13 (61 left)",
+        "R2: Ruby strikes for 39 (1125 left)",
+        "Ruby's gear absorbs 44.",
+        "R2: Assessment hits Ruby for 14 (47 left)",
+        "Ruby is losing — shouts for help! Chidera charges in!",
+        "R3: Ruby stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Chidera strikes for 8 (1117 left)",
+        "Ruby's gear absorbs 50.",
+        "R3: Assessment hits Ruby for 16 (51 left)",
+        "Ruby is still losing — shouts again! Emma charges in!",
+        "R4: Ruby strikes for 21 (audited — half strength) (1096 left)"
+      ]
+    },
+    {
+      "seed": 104605,
+      "day": 53,
+      "vid": "gen_t6ug6tj",
+      "mid": "influencer",
+      "mHpStart": 871,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 6,
+      "vTaken": 78,
+      "mDealt": 265,
+      "dmgShare": 0.30424799081515497,
+      "planParty": [
+        "gen_y2s5r8a"
+      ],
+      "allyVids": [
+        "gen_y2s5r8a",
+        "gen_z7hdi1o"
+      ],
+      "joiners": [
+        "gen_y2s5r8a",
+        "gen_z7hdi1o"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_t6ug6tj": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "gen_y2s5r8a": {
+          "armed": true,
+          "armored": true,
+          "armorP": 42
+        },
+        "gen_z7hdi1o": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        }
+      },
+      "minArmorP": 21,
+      "meanArmorP": 28,
+      "parsedStrikeTotal": 132,
+      "parsedAttributed": 132,
+      "dmgByVid": {
+        "gen_t6ug6tj": 62,
+        "gen_y2s5r8a": 58,
+        "gen_z7hdi1o": 12
+      },
+      "fighterDmgShare": 0.4696969696969697,
+      "abilitiesPerMember": 1.6666666666666667,
+      "memberAbilities": {
+        "gen_t6ug6tj": [
+          "the_touch"
+        ],
+        "gen_y2s5r8a": [
+          "beast_calm",
+          "rage",
+          "echo_location"
+        ],
+        "gen_z7hdi1o": [
+          "iron_stomach"
+        ]
+      },
+      "abilityTokens": [
+        "Rage",
+        "field medicine"
+      ],
+      "log": [
+        "Maricela walks straight into The Influencer. No avoiding it.",
+        "R1: Maricela's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "Maricela's gear absorbs 29.",
+        "R1: Ratio hits Maricela for 11 (79 left)",
+        "R2: Maricela strikes for 32 (x2.0) (839 left)",
+        "Maricela's gear absorbs 43.",
+        "R2: Ratio hits Maricela for 16 (63 left)",
+        "Maricela is losing — shouts for help! Carmine charges in!",
+        "Carmine's gear absorbs 45.",
+        "R3: Ratio hits Carmine for 9 (89 left)",
+        "R3: Maricela strikes for 30 (x2.0) (809 left)",
+        "R3: Carmine strikes for 30 (x1.3) (779 left)",
+        "Maricela is still losing — shouts again! Abdul charges in!",
+        "Maricela's gear absorbs 46.",
+        "R4: Ratio hits Maricela for 18 (45 left)",
+        "R4: Maricela stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R4: Carmine strikes for 28 (x1.3) (751 left)",
+        "R4: Abdul strikes for 12 (739 left)",
+        "Maricela's gear absorbs 41.",
+        "R5: Ratio hits Maricela for 15 (50 left)"
+      ]
+    }
+  ],
+  "armPairMeetings": [
+    {
+      "seed": 104604,
+      "day": 65,
+      "vid": "ruby_callaghan",
+      "mid": "audit",
+      "mHpStart": 1226,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 5,
+      "vTaken": 71,
+      "mDealt": 200,
+      "dmgShare": 0.1631321370309951,
+      "planParty": [
+        "emma_larsen"
+      ],
+      "allyVids": [
+        "app_mgpspi0n49",
+        "emma_larsen"
+      ],
+      "joiners": [
+        "app_mgpspi0n49",
+        "emma_larsen"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "ruby_callaghan": {
+          "armed": true,
+          "armored": true,
+          "armorP": 31
+        },
+        "app_mgpspi0n49": {
+          "armed": true,
+          "armored": true,
+          "armorP": 7
+        },
+        "emma_larsen": {
+          "armed": true,
+          "armored": true,
+          "armorP": 12
+        }
+      },
+      "minArmorP": 7,
+      "meanArmorP": 16.666666666666668,
+      "parsedStrikeTotal": 108,
+      "parsedAttributed": 108,
+      "dmgByVid": {
+        "ruby_callaghan": 100,
+        "app_mgpspi0n49": 8
+      },
+      "fighterDmgShare": 0.9259259259259259,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "ruby_callaghan": [],
+        "app_mgpspi0n49": [],
+        "emma_larsen": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Ruby walks straight into The Audit. No avoiding it.",
+        "Ruby sees The Audit coming and nocks an arrow — the fight opens at range (4 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Audit for 22 (1204 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "Ruby lowers the bow — The Audit is on them now. (1/4 hit)",
+        "R1: Ruby strikes for 40 (1164 left)",
+        "Ruby's gear absorbs 40.",
+        "R1: Field Audit hits Ruby for 13 (61 left)",
+        "R2: Ruby strikes for 39 (1125 left)",
+        "Ruby's gear absorbs 44.",
+        "R2: Assessment hits Ruby for 14 (47 left)",
+        "Ruby is losing — shouts for help! Chidera charges in!",
+        "R3: Ruby stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Chidera strikes for 8 (1117 left)",
+        "Ruby's gear absorbs 50.",
+        "R3: Assessment hits Ruby for 16 (51 left)",
+        "Ruby is still losing — shouts again! Emma charges in!",
+        "R4: Ruby strikes for 21 (audited — half strength) (1096 left)"
+      ]
+    },
+    {
+      "seed": 104605,
+      "day": 53,
+      "vid": "gen_t6ug6tj",
+      "mid": "influencer",
+      "mHpStart": 871,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 6,
+      "vTaken": 78,
+      "mDealt": 265,
+      "dmgShare": 0.30424799081515497,
+      "planParty": [
+        "gen_y2s5r8a"
+      ],
+      "allyVids": [
+        "gen_y2s5r8a",
+        "gen_z7hdi1o"
+      ],
+      "joiners": [
+        "gen_y2s5r8a",
+        "gen_z7hdi1o"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_t6ug6tj": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "gen_y2s5r8a": {
+          "armed": true,
+          "armored": true,
+          "armorP": 42
+        },
+        "gen_z7hdi1o": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        }
+      },
+      "minArmorP": 21,
+      "meanArmorP": 28,
+      "parsedStrikeTotal": 132,
+      "parsedAttributed": 132,
+      "dmgByVid": {
+        "gen_t6ug6tj": 62,
+        "gen_y2s5r8a": 58,
+        "gen_z7hdi1o": 12
+      },
+      "fighterDmgShare": 0.4696969696969697,
+      "abilitiesPerMember": 1.6666666666666667,
+      "memberAbilities": {
+        "gen_t6ug6tj": [
+          "the_touch"
+        ],
+        "gen_y2s5r8a": [
+          "beast_calm",
+          "rage",
+          "echo_location"
+        ],
+        "gen_z7hdi1o": [
+          "iron_stomach"
+        ]
+      },
+      "abilityTokens": [
+        "Rage",
+        "field medicine"
+      ],
+      "log": [
+        "Maricela walks straight into The Influencer. No avoiding it.",
+        "R1: Maricela's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "Maricela's gear absorbs 29.",
+        "R1: Ratio hits Maricela for 11 (79 left)",
+        "R2: Maricela strikes for 32 (x2.0) (839 left)",
+        "Maricela's gear absorbs 43.",
+        "R2: Ratio hits Maricela for 16 (63 left)",
+        "Maricela is losing — shouts for help! Carmine charges in!",
+        "Carmine's gear absorbs 45.",
+        "R3: Ratio hits Carmine for 9 (89 left)",
+        "R3: Maricela strikes for 30 (x2.0) (809 left)",
+        "R3: Carmine strikes for 30 (x1.3) (779 left)",
+        "Maricela is still losing — shouts again! Abdul charges in!",
+        "Maricela's gear absorbs 46.",
+        "R4: Ratio hits Maricela for 18 (45 left)",
+        "R4: Maricela stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R4: Carmine strikes for 28 (x1.3) (751 left)",
+        "R4: Abdul strikes for 12 (739 left)",
+        "Maricela's gear absorbs 41.",
+        "R5: Ratio hits Maricela for 15 (50 left)"
+      ]
+    }
+  ]
+}
