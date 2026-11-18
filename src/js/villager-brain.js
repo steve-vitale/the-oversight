@@ -677,6 +677,38 @@
         }
       }
     } catch (e) {}
+    // HOLDER VOICE (sim-holdervoice-b, finding #2505): the holder half of
+    // the same silence — a dawn-bid pick whose HOLDER cannot walk (range-0
+    // holder) gets one fiction line, naming the holder, the companion, and
+    // the reason — once per (holder, companion) pair, never daily spam.
+    // Pair-keyed like #2499: the line names a specific bid, and a different
+    // companion is a different bid the village has not yet answered (see
+    // prereg). When both holder and companion are range-0, both lines fire
+    // (two true facts); the companion line above fires first. Fiction
+    // only: say() consumes no RNG and writes only the narration log; the
+    // dedup map is read by nothing but this check. The guard mirrors the
+    // depart holder block (vidBlock "range-0", depart "hold").
+    try {
+      if (chosen.winPlanAction === 'party_launch' && chosen.companion) {
+        var _hdMaxD = -1;
+        try { _hdMaxD = self.npcMaxDist ? self.npcMaxDist(vid) : -1; } catch (e6) {}
+        if (_hdMaxD >= 0 && _hdMaxD < 1) {
+          if (!br.holderSaid) br.holderSaid = {};
+          var _hdKey = String(vid) + '>' + String(chosen.companion);
+          if (!br.holderSaid[_hdKey]) {
+            br.holderSaid[_hdKey] = dayOf(self);
+            var _hdH = null, _hdC = null;
+            try { _hdH = self.displayName ? self.displayName(vid) : null; } catch (e7) {}
+            try { _hdC = self.displayName ? self.displayName(chosen.companion) : null; } catch (e8) {}
+            _hdH = firstNameOf(_hdH || vid);
+            _hdC = firstNameOf(_hdC || chosen.companion);
+            try {
+              if (self.say) self.say(_hdH + ' meant to walk out with ' + _hdC + ' — but ' + _hdH + ' never leaves Haven, so ' + _hdH + ' stays home.');
+            } catch (e9) {}
+          }
+        }
+      }
+    } catch (e) {}
     return br.commit[vid];
   }
 
