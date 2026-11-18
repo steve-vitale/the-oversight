@@ -1,7 +1,10 @@
 # Journey scale r242 — the tableActive distinction, staged (Lane A, leg 3, days 80–140)
 
 Run: `oversight-playtest-loop`, Lane A, r242. Scheduled Wed 2026-11-18 10:45 CST.
-Branch `journey-scale`, base master `430b849d2` (r237 deepening). Seeds **103841–103848**
+Branch `journey-scale`, base master `430b849d2` (r237 deepening); rebased onto
+`c4a9ba498` at closeout (Lane A fleshout evidence + sim-fightcap-dmg-a
+landings; 4/4 picks clean, no stop-at-pick quirk; table-sitting 40/40 and
+analyzer 148/148 re-run green on the rebased tree). Seeds **103841–103848**
 (fresh band; 0 hits in all journey/sim preregs and goal evidence). Policy frozen:
 `scalecourt-traderoad-r113-linkraise-sit` + muster ON + march ON + STAGE herald;
 sortie INERT; SIT false; DAYCAP=140, death-aware stop.
@@ -239,7 +242,8 @@ as a standing content item; no fix in this run.
 
 ## Closeout
 
-- Merged locally (ff-only) to master [PATCH — commit hash], pending ship.
-  No bump, no push, no live verification — the ship loop owns those.
+- Merged locally (ff-only) to master, pending ship. No bump, no push, no
+  live verification — the ship loop owns those. (Exact tip hash in the run's
+  final report and the day log.)
 - Rotation written 3 → 0 (read back). Lock deleted after run_id verification.
 - Worktree released (`journey-scale`, merged); final reap done; main tree clean.
