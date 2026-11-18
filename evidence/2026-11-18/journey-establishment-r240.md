@@ -394,12 +394,14 @@ gate exactly):
 
 ## Closeout
 - **Commits (branch `journey-establishment`, after rebase onto
-  `a468aec09`):** `76bc2dca7` prereg + driver/analyzer clones
-  (tooling only, as-run driver); `6095a48ec` walkHome first-refusal
+  `a468aec09`):** `47e351d0c` prereg + driver/analyzer clones
+  (tooling only, as-run driver); `58cb4ad44` walkHome first-refusal
   + clearableBlocked + driver travelHome84 preference + proof test
-  27/27 `[needs-eyes]`; evidence commit for this run note + pilot /
-  panel / analyzer / gate logs. Safe-commit index clobber struck on
-  both commits (staged-as-deleted / stale-blob pattern); repaired
+  27/27 `[needs-eyes]`; `1d51338f2` run note + pilot / panel /
+  analyzer / gate logs; this correction commit (rebased hashes —
+  pre-rebase tips were `76bc2dca7` / `6095a48ec` / `b2396c2c9`).
+  Safe-commit index clobber struck on all three commits
+  (staged-as-deleted / stale-blob / purged-entry patterns); repaired
   each time via the `ls-tree -r` pipe, blobs verified against HEAD,
   index == HEAD after each repair.
 - **Master moved during the run** (Loop B merged
