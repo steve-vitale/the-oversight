@@ -1,0 +1,185 @@
+// analyze-partytrios-b.js — analyzer + judge, arm sim-partytrios-b.
+// Reads per-seed JSONs (the partytrios driver recorder, same shape as
+// the triodrought corpora) from two dirs and judges the frozen prereg:
+// the counter, not the launch. Primary: on the armed leg,
+// winPlanStats.partyTrios counts the trios the analyzer observes in
+// v4departs (partySize >= 3); on the control leg the counter stays 0.
+// The trio-launch rate itself is NOT re-judged here — triodrought
+// already proved trios launch (0.00 -> 0.88); this arm proves the
+// counter sees them. Reuses analyze-triodrought-b.js legStats for the
+// launch census (same join, same pool floor) and adds a per-seed
+// partyTrios-vs-observed-trios table plus the wall numbers.
+// Usage:
+//   node scripts/analyze-partytrios-b.js --ctl evidence/2026-11-18/perseed-partytrios-b-ctl --arm evidence/2026-11-18/perseed-partytrios-b-arm [--out evidence/2026-11-18/partytrios-b-analysis.json]
+//   node scripts/analyze-partytrios-b.js --selftest
+'use strict';
+const path = require('path');
+const fs = require('fs');
+const TD = require(path.join(__dirname, 'analyze-triodrought-b.js'));
+
+function median(xs) {
+  if (!xs.length) return null;
+  const s = xs.slice().sort(function (a, b) { return a - b; });
+  const m = s.length >> 1;
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
+
+function perSeed(dir) {
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(function (f) { return f.endsWith('.json'); }).sort() : [];
+  const rows = [];
+  for (const f of files) {
+    let d;
+    try { d = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); } catch (e) { continue; }
+    let trios = 0, launches = 0;
+    for (const r of (d.v4departs || [])) {
+      if (r.result !== 'launch' || (r.targetWave | 0) < 4) continue;
+      launches++;
+      const size = r.partySize != null ? r.partySize : ((r.party || []).length + 1);
+      if (size >= 3) trios++;
+    }
+    rows.push({
+      seed: d.seed, days: d.gameDays != null ? d.gameDays : (d.days != null ? d.days : 0),
+      launches: launches, observedTrios: trios,
+      partyTrios: ((d.winPlanStats || {}).partyTrios || 0),
+      partyQuads: ((d.winPlanStats || {}).partyQuads || 0),
+      won: !!d.won, scaleRank: d.scaleRank || null, maxWave: d.maxWave || null,
+      standing: d.standing != null ? d.standing : null,
+      bumpPresent: d.bumpPresent != null ? d.bumpPresent : null,
+      carryPresent: d.carryPresent != null ? d.carryPresent : null,
+      errors: (d.instrumentErrors || []).length,
+    });
+  }
+  return rows;
+}
+
+function wall(rows) {
+  return {
+    wins: rows.filter(function (r) { return r.won; }).length,
+    national: rows.filter(function (r) { return (RANK_ORDER[r.scaleRank] || 0) >= 2; }).length,
+    wave5: rows.filter(function (r) { return (r.maxWave || 0) >= 5; }).length,
+    wave4: rows.filter(function (r) { return (r.maxWave || 0) >= 4; }).length,
+    standing200: rows.filter(function (r) { return (r.standing || 0) >= 200; }).length,
+    medianDays: median(rows.map(function (r) { return r.days; })),
+    survived: rows.filter(function (r) { return (r.days || 0) >= 150; }).length,
+  };
+}
+
+function judge(ctl, arm) {
+  const bars = [];
+  const poolOk = ctl.launches >= 6 && arm.launches >= 6 && arm.trioLaunches >= 1;
+  bars.push({ id: 'pool-floor', pass: poolOk,
+    detail: 'launches ctl ' + ctl.launches + ' / arm ' + arm.launches + '; observed trios arm ' + arm.trioLaunches + ' (floor 6 launches/leg, >=1 arm trio)' });
+  const ratio = arm.trioLaunches ? arm.partyTrios / arm.trioLaunches : null;
+  const primaryPass = poolOk && ratio != null && ratio >= 0.80 && ctl.partyTrios === 0;
+  bars.push({ id: 'primary-counter', pass: primaryPass,
+    detail: 'arm partyTrios ' + arm.partyTrios + ' / observed trios ' + arm.trioLaunches +
+      ' = ' + (ratio == null ? 'n/a' : ratio.toFixed(2)) + ' (bar >= 0.80); ctl partyTrios ' + ctl.partyTrios + ' (bar == 0)' });
+  const starvPass = arm.starvation <= ctl.starvation + 2 && arm.starvationVillager <= ctl.starvationVillager + 2;
+  bars.push({ id: 'cost-starvation', pass: starvPass,
+    detail: 'starvation totals arm ' + arm.starvation + ' vs ctl ' + ctl.starvation + '; villager arm ' + arm.starvationVillager + ' vs ctl ' + ctl.starvationVillager + ' (bar arm<=ctl+2 both)' });
+  const medPass = ctl.medianDays == null || arm.medianDays == null || arm.medianDays >= 0.8 * ctl.medianDays;
+  bars.push({ id: 'cost-median', pass: medPass,
+    detail: 'median survival arm ' + arm.medianDays + 'd vs ctl ' + ctl.medianDays + 'd (bar arm>=0.8x ctl)' });
+  const instrPass = ctl.errors === 0 && arm.errors === 0;
+  bars.push({ id: 'instrument', pass: instrPass,
+    detail: 'instrument errors ctl ' + ctl.errors + ' / arm ' + arm.errors + ' (bar 0)' });
+  let verdict = 'NO-GO';
+  let kind = '';
+  if (!poolOk) { verdict = 'NO-GO'; kind = 'METRIC-BROKEN'; }
+  else if (bars.every(function (b) { return b.pass; })) { verdict = 'GO'; kind = ''; }
+  return { verdict: verdict, kind: kind, bars: bars };
+}
+
+function summarizeLeg(dir) {
+  const st = TD.legStats(dir);
+  const seeds = perSeed(dir);
+  return {
+    dir: dir, n: st.n, valid: st.valid, errors: st.errors,
+    launches: st.launches, trioLaunches: st.trioLaunches, trioRate: st.trioRate,
+    sizes: st.sizes, sources: st.sources, c2depart: st.c2depart,
+    candC2: st.candC2, candC2carried: st.candC2carried, candC2dropped: st.candC2dropped,
+    candC2null: st.candC2null, unjoined: st.unjoined, midday: st.midday, dawn: st.dawn,
+    carryRate: st.carryRate, starvation: st.starvation, starvationVillager: st.starvationVillager,
+    medianDays: st.medianDays, partyTrios: st.partyTrios,
+    brainSha: st.brainSha, carryPresent: st.carryPresent,
+    perSeed: seeds, wall: wall(seeds),
+  };
+}
+
+function selftest() {
+  let passed = 0, failed = 0;
+  function check(name, cond, extra) {
+    if (cond) passed++;
+    else { failed++; console.log('FAIL: ' + name + (extra ? ' — ' + extra : '')); }
+  }
+  function mkLeg(o) {
+    return Object.assign({ launches: 8, trioLaunches: 0, trioRate: 0, partyTrios: 0,
+      starvation: 0, starvationVillager: 0, medianDays: 150, errors: 0 }, o);
+  }
+  let j = judge(mkLeg({ trioLaunches: 0 }), mkLeg({ trioLaunches: 22, partyTrios: 22 }));
+  check('judge GO shape passes (22/22, ctl 0)', j.verdict === 'GO' && j.bars.every(function (b) { return b.pass; }), JSON.stringify(j));
+  j = judge(mkLeg({}), mkLeg({ trioLaunches: 22, partyTrios: 0 }));
+  check('judge NO-GO when the arm counter stays 0 (the bug)', j.verdict === 'NO-GO' && !j.bars[1].pass, JSON.stringify(j.bars));
+  j = judge(mkLeg({}), mkLeg({ trioLaunches: 22, partyTrios: 15 }));
+  check('judge NO-GO at 15/22 = 0.68 (< 0.80)', j.verdict === 'NO-GO' && !j.bars[1].pass, JSON.stringify(j.bars));
+  j = judge(mkLeg({}), mkLeg({ trioLaunches: 22, partyTrios: 18 }));
+  check('judge GO at 18/22 = 0.82 (>= 0.80)', j.verdict === 'GO', JSON.stringify(j.bars));
+  j = judge(mkLeg({}), mkLeg({ trioLaunches: 22, partyTrios: 22, starvation: 3 }));
+  check('judge NO-GO when the starvation cost bar breaches', j.verdict === 'NO-GO' && !j.bars[2].pass, JSON.stringify(j.bars));
+  j = judge(mkLeg({ launches: 3, trioLaunches: 0 }), mkLeg({ launches: 8, trioLaunches: 5, partyTrios: 5 }));
+  check('judge METRIC-BROKEN below the pool floor', j.verdict === 'NO-GO' && j.kind === 'METRIC-BROKEN', JSON.stringify(j));
+  j = judge(mkLeg({ partyTrios: 1 }), mkLeg({ trioLaunches: 22, partyTrios: 22 }));
+  check('judge NO-GO when the control counter is nonzero', j.verdict === 'NO-GO' && !j.bars[1].pass, JSON.stringify(j.bars));
+  // perSeed + wall on a synthetic corpus dir.
+  const os = require('os');
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'pt-analyze-'));
+  const dir = path.join(tmp, 'leg');
+  fs.mkdirSync(dir);
+  const seed = {
+    seed: 104011, days: 150, gameDays: 150, instrumentErrors: [], brainSha: 'abc', carryPresent: true, bumpPresent: true,
+    winPlanStats: { partyTrios: 2, partyQuads: 0 },
+    won: false, scaleRank: 'national', maxWave: 5, standing: 405,
+    deaths: [{ day: 5, kind: 'starvation', cause: 'hunger', player: false }],
+    v4departs: [
+      { day: 10, vid: 'h1', result: 'launch', source: 'brain', targetWave: 4, partySize: 3, companion2: 'c2', party: ['c1', 'c2'] },
+      { day: 12, vid: 'h1', result: 'launch', source: 'brain', targetWave: 4, partySize: 3, companion2: 'c2', party: ['c1', 'c2'] },
+      { day: 14, vid: 'h2', result: 'launch', source: 'brain', targetWave: 3, partySize: 2, companion2: null, party: ['c1'] },
+    ],
+    dawnbidDeparts: [], dawnbidScores: [], companionPool: [],
+  };
+  fs.writeFileSync(path.join(dir, 's104011.json'), JSON.stringify(seed));
+  const rows = perSeed(dir);
+  check('perSeed counts observed trios 2 and partyTrios 2',
+    rows.length === 1 && rows[0].observedTrios === 2 && rows[0].partyTrios === 2 && rows[0].launches === 2,
+    JSON.stringify(rows));
+  check('perSeed ignores wave-3 launches', rows[0].launches === 2);
+  const w = wall(rows);
+  check('wall counts national 1, wave5 1, standing200 1, survived 1',
+    w.national === 1 && w.wave5 === 1 && w.standing200 === 1 && w.survived === 1 && w.wins === 0,
+    JSON.stringify(w));
+  try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (e) {}
+  console.log('analyze-partytrios-b --selftest: ' + passed + ' passed, ' + failed + ' failed');
+  process.exit(failed ? 1 : 0);
+}
+
+if (require.main === module) {
+  const args = process.argv.slice(2);
+  if (args.indexOf('--selftest') !== -1) selftest();
+  let ctlDir = null, armDir = null, outFile = null;
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--ctl') ctlDir = args[++i];
+    else if (args[i] === '--arm') armDir = args[++i];
+    else if (args[i] === '--out') outFile = args[++i];
+  }
+  if (!ctlDir || !armDir) { console.error('usage: analyze-partytrios-b.js --ctl DIR --arm DIR [--out FILE] | --selftest'); process.exit(2); }
+  const ctl = summarizeLeg(ctlDir);
+  const arm = summarizeLeg(armDir);
+  const j = judge(ctl, arm);
+  const result = { verdict: j.verdict, kind: j.kind, bars: j.bars, ctl: ctl, arm: arm };
+  console.log(JSON.stringify({ verdict: j.verdict, kind: j.kind, bars: j.bars,
+    ctl: { launches: ctl.launches, trioLaunches: ctl.trioLaunches, partyTrios: ctl.partyTrios, wall: ctl.wall },
+    arm: { launches: arm.launches, trioLaunches: arm.trioLaunches, partyTrios: arm.partyTrios, wall: arm.wall } }, null, 2));
+  if (outFile) fs.writeFileSync(outFile, JSON.stringify(result, null, 2) + '\n');
+}
+module.exports = { perSeed: perSeed, wall: wall, judge: judge, summarizeLeg: summarizeLeg };

@@ -1236,6 +1236,13 @@
               cplan2.stage = 'hunt'; cplan2.party = [vid, c.companion];
               cplan2.target = plan2 ? plan2.target : null; cplan2.node = plan2 ? plan2.node : null;
             }
+            // PARTYTRIOS (sim-partytrios-b): the brain path is the
+            // launch path that fires in sims, but it never bumped
+            // partyTrios — only winPlanDepart did — so the stat read 0
+            // while 22 trios launched. A trio launched here counts the
+            // same as one launched there (winPlanStats() initializes
+            // the defaults, so this is safe on a fresh village).
+            try { var _pt = (typeof this.winPlanStats === 'function') ? this.winPlanStats() : null; if (_pt) _pt.partyTrios = (_pt.partyTrios || 0) + 1; } catch (e) {}
           }
         } catch (e) {}
         return 'launch';
