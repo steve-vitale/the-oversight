@@ -908,18 +908,22 @@ console.log('\n=== journey-scale r242 — Q6 THE BLANK: TABLEACTIVE DISTINCTION 
 // bar. The fix's regression check is the r239 proof test re-run, not
 // this count.
 // (b) TABLEACTIVE DISTINCTION: per arm, per seed — a muster/march row is
-// a MERCY row iff ta && !ts (tableActive true, no live sitting). Arm A:
-// REPRODUCED iff any seed holds >=7 mercy rows with the titan present.
-// Arm B: GO iff mercy rows held = 0 on every seed AND >=1 mercy-window
-// muster proceeds (mercy row, held==null, ready or called) where a titan
-// is present during mercy (measured, not gated — 0 reads honestly if no
-// titan is present during any mercy window). Live-sitting holds
-// (ts true, held set) are counted separately — the sanctity that matters
-// must still fire when a sitting is actually live.
+// a MERCY row iff ta && !ts (tableActive true, no live sitting). A mercy
+// row is HELD ON MERCY iff its held reason is the table predicate
+// ('tableActive' / 'tableSitting') — a 'short', 'absent', 'tbfight' or
+// 'stage-wait' hold during mercy is the muster hitting its real
+// constraint, not the table holding it (r242 instrument correction).
+// Arm A: REPRODUCED iff any seed holds >=7 mercy rows with the titan
+// present. Arm B: GO iff mercy rows held = 0 on every seed AND >=1
+// mercy-window muster proceeds (mercy row, held==null, ready or called)
+// where a titan is present during mercy (measured, not gated — 0 reads
+// honestly if no titan is present during any mercy window). Live-sitting
+// holds (ts true, held set) are counted separately — the sanctity that
+// matters must still fire when a sitting is actually live.
 let q6refusal = { worst: 0, worstSeed: null, worstArm: null, perSeed: {} };
 let q6mask = {};
 for (const arm of ['a', 'b']) {
-  const m = { worstMercyHeldPresent: 0, worstSeed: null, perSeed: {}, mercyProceed: 0, liveHeld: 0, unknownTs: 0 };
+  const m = { worstMercyHeldPresent: 0, worstSeed: null, perSeed: {}, mercyProceed: 0, liveHeld: 0, unknownTs: 0, mercyHeldOther: 0 };
   for (const seed of SEEDS) {
     let mj = null;
     try { mj = JSON.parse(fs.readFileSync(path.join(EVIDIR, `journey-scale-r242-${arm}-muster-${seed}.json`), 'utf8')); } catch (e) { mj = null; }
@@ -937,17 +941,27 @@ for (const arm of ['a', 'b']) {
     const allRows = (mj.rows || []).concat((kj && kj.rows) || []);
     const isMercy = (r) => r.ta === true && r.ts === false;
     const mercyRows = allRows.filter(isMercy);
-    const mercyHeld = mercyRows.filter(r => r.held);
-    const mercyHeldPresent = mercyRows.filter(r => r.held && r.present !== false);
+    // r242 INSTRUMENT CORRECTION (r242 panel): a mercy hold is a hold ON
+    // mercy — the table predicate ('tableActive' / 'tableSitting'). The
+    // old any-held count misread non-table holds during mercy as mercy
+    // holds: r242's arm B held ONE mercy row, a Nielsen 'short:8' (the
+    // coalition was 8 blades short — the muster had passed the table
+    // check and hit its real constraint). Those rows are counted
+    // separately (mercyHeldOther) and never feed the (a) bar.
+    const isTableHold = (r) => r.held === 'tableActive' || r.held === 'tableSitting';
+    const mercyHeld = mercyRows.filter(r => r.held && isTableHold(r));
+    const mercyHeldPresent = mercyRows.filter(r => r.held && isTableHold(r) && r.present !== false);
+    const mercyHeldOther = mercyRows.filter(r => r.held && !isTableHold(r));
     const mercyProceed = mercyRows.filter(r => !r.held && (r.ready || r.called || r.arrived));
     const liveHeld = allRows.filter(r => r.ts === true && r.held);
     const unknownTs = allRows.filter(r => r.ts == null);
-    m.perSeed[seed] = { mercy: mercyRows.length, mercyHeld: mercyHeld.length, mercyHeldPresent: mercyHeldPresent.length, mercyProceed: mercyProceed.length, liveHeld: liveHeld.length, unknownTs: unknownTs.length };
+    m.perSeed[seed] = { mercy: mercyRows.length, mercyHeld: mercyHeld.length, mercyHeldPresent: mercyHeldPresent.length, mercyHeldOther: mercyHeldOther.length, mercyProceed: mercyProceed.length, liveHeld: liveHeld.length, unknownTs: unknownTs.length };
     if (mercyHeldPresent.length > m.worstMercyHeldPresent) { m.worstMercyHeldPresent = mercyHeldPresent.length; m.worstSeed = seed; }
     m.mercyProceed += mercyProceed.length;
+    m.mercyHeldOther += mercyHeldOther.length;
     m.liveHeld += liveHeld.length;
     m.unknownTs += unknownTs.length;
-    console.log(`seed ${seed} arm ${arm.toUpperCase()}: Q6(a) refused=${refused.length} on ${Object.keys(byDay).length} day(s), worst day ${worstDay}; Q6(b) mercy rows=${mercyRows.length} held=${mercyHeld.length} (present-held ${mercyHeldPresent.length}) proceeded=${mercyProceed.length} live-sitting held=${liveHeld.length} unknown-ts=${unknownTs.length}`);
+    console.log(`seed ${seed} arm ${arm.toUpperCase()}: Q6(a) refused=${refused.length} on ${Object.keys(byDay).length} day(s), worst day ${worstDay}; Q6(b) mercy rows=${mercyRows.length} held=${mercyHeld.length} (present-held ${mercyHeldPresent.length}, other-held ${mercyHeldOther.length}) proceeded=${mercyProceed.length} live-sitting held=${liveHeld.length} unknown-ts=${unknownTs.length}`);
   }
   q6mask[arm] = m;
 }
@@ -955,7 +969,7 @@ console.log(`Q6(a) REFUSAL SPAM (measurement only, no bar): worst day ${q6refusa
 const maskReproA = q6mask.a.worstMercyHeldPresent >= 7;
 const maskGoneB = q6mask.b.worstMercyHeldPresent === 0;
 console.log(`Q6(b) ARM A TABLEACTIVE MASK: ${maskReproA ? 'REPRODUCED' : 'NOT REPRODUCED'} (worst seed ${q6mask.a.worstSeed == null ? '-' : q6mask.a.worstSeed}: ${q6mask.a.worstMercyHeldPresent} present-held mercy rows; bar >=7)`);
-console.log(`Q6(b) ARM B TABLEACTIVE DISTINCTION: mercy rows held ${q6mask.b.worstMercyHeldPresent === 0 ? '0 on every seed' : 'STILL HELD (worst ' + q6mask.b.worstMercyHeldPresent + ' on ' + q6mask.b.worstSeed + ')'}; mercy-window musters proceeded ${q6mask.b.mercyProceed}; live-sitting holds fired ${q6mask.b.liveHeld}`);
+console.log(`Q6(b) ARM B TABLEACTIVE DISTINCTION: mercy rows held ${q6mask.b.worstMercyHeldPresent === 0 ? '0 on every seed' : 'STILL HELD (worst ' + q6mask.b.worstMercyHeldPresent + ' on ' + q6mask.b.worstSeed + ')'}; mercy-window musters proceeded ${q6mask.b.mercyProceed}; other-held mercy rows (non-table reasons) ${q6mask.b.mercyHeldOther}; live-sitting holds fired ${q6mask.b.liveHeld}`);
 if (!maskReproA) { console.log('Q6 VERDICT: INCOMPLETE — arm A did not reproduce the mask, so the fix has nothing to prove against (prereg: the coordinator stops and diagnoses — the analyzer reports, it does not fail the run on Q6)'); }
 else if (maskGoneB) console.log(`Q6 VERDICT: GO — the distinction holds: arm A reproduced the mask (worst ${q6mask.a.worstMercyHeldPresent} present-held mercy rows), arm B held 0 mercy rows, ${q6mask.b.mercyProceed} mercy-window muster(s) proceeded, ${q6mask.b.liveHeld} live-sitting hold(s) fired`);
 else console.log('Q6 VERDICT: NO-GO — arm B still holds mercy rows; the distinction does not hold');
@@ -967,7 +981,7 @@ console.log('\n=== journey-scale r242 — Q1 STAGE (the r239-owed precondition, 
 // mismatch is a defect: the panel's comparability is broken.
 let stageByArm = {};
 for (const arm of ['a', 'b']) {
-  const s = { delivered: 0, natural: 0, abandoned: 0, neverArmed: 0, missing: 0, perSeed: {} };
+  const s = { delivered: 0, natural: 0, abandoned: 0, neverArmed: 0, unresolved: 0, missing: 0, perSeed: {} };
   for (const seed of SEEDS) {
     let sj = null;
     try { sj = JSON.parse(fs.readFileSync(path.join(EVIDIR, `journey-scale-r242-${arm}-stage-${seed}.json`), 'utf8')); } catch (e) { sj = null; }
@@ -976,12 +990,16 @@ for (const arm of ['a', 'b']) {
     let outcome = 'never-armed';
     if (st.deliveredDay != null) { outcome = st.via === 'natural' ? 'delivered-natural' : 'delivered-verb'; s.delivered++; if (st.via === 'natural') s.natural++; }
     else if (st.abandoned) { outcome = 'abandoned-' + st.abandoned; s.abandoned++; }
+    // r242 LABEL CORRECTION: armed but neither delivered nor abandoned
+    // (village collapsed before the day-120 deadline) is NOT never-armed
+    // — the stage DID arm. It is armed-unresolved.
+    else if (st.armedDay != null) { outcome = 'armed-unresolved'; s.unresolved++; }
     else s.neverArmed++;
     s.perSeed[seed] = { outcome, armedDay: st.armedDay, deliveredDay: st.deliveredDay, via: st.via, abandoned: st.abandoned, reason: st.reason, waitRows: st.waitRows };
     console.log(`seed ${seed} arm ${arm.toUpperCase()}: STAGE ${outcome} (armed d${st.armedDay == null ? '-' : st.armedDay}, delivered d${st.deliveredDay == null ? '-' : st.deliveredDay}${st.via ? ' via ' + st.via : ''}${st.abandoned ? ', abandoned ' + st.abandoned : ''}${st.reason ? ' — ' + st.reason : ''})`);
   }
   stageByArm[arm] = s;
-  console.log(`STAGE arm ${arm.toUpperCase()}: delivered ${s.delivered}/8 (${s.natural} natural), abandoned ${s.abandoned}, never-armed ${s.neverArmed}, missing ${s.missing}`);
+  console.log(`STAGE arm ${arm.toUpperCase()}: delivered ${s.delivered}/8 (${s.natural} natural), abandoned ${s.abandoned}, never-armed ${s.neverArmed}, armed-unresolved ${s.unresolved}, missing ${s.missing}`);
 }
 let stageMismatch = [];
 for (const seed of SEEDS) {

@@ -105,6 +105,16 @@
 //       arm-independent).
 //   (48) STAGE: no stage files on either arm -> "corpus unavailable"
 //       per seed, consistency line still printed, exit 0.
+//   (49) STAGE: armed d68, never delivered, never abandoned (village
+//       collapsed before the day-120 deadline) on both arms ->
+//       "armed-unresolved" (r242 label correction: armed is not
+//       never-armed), summary counts armed-unresolved 1, exit 0.
+//   (50) Q6(b) r242 INSTRUMENT CORRECTION: arm A reproduces (8 mercy
+//       rows held 'tableActive'); arm B holds the same 8 mercy days on
+//       'short:8' (coalition shortage — the muster passed the table
+//       check and hit its real constraint) -> arm-B mercy rows held 0,
+//       other-held 8, Q6 VERDICT GO. The OLD any-held count would have
+//       read worst 8 and said NO-GO; the corrected count says GO.
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
@@ -841,7 +851,7 @@ function runAnalyzer(dir) {
   });
   const r = runAnalyzer(dir);
   ok('(41) refusal measurement exit 0', r.code === 0, 'code=' + r.code);
-  ok('(41) per-seed Q6(a) line', /seed 103841 arm A: Q6\(a\) refused=12 on 8 day\(s\), worst day 3; Q6\(b\) mercy rows=0 held=0 \(present-held 0\) proceeded=0 live-sitting held=0 unknown-ts=0/.test(r.out), r.out);
+  ok('(41) per-seed Q6(a) line', /seed 103841 arm A: Q6\(a\) refused=12 on 8 day\(s\), worst day 3; Q6\(b\) mercy rows=0 held=0 \(present-held 0, other-held 0\) proceeded=0 live-sitting held=0 unknown-ts=0/.test(r.out), r.out);
   ok('(41) measurement-only line, no bar', /Q6\(a\) REFUSAL SPAM \(measurement only, no bar\): worst day 3 refused \(arm A seed 103841\)/.test(r.out), r.out);
   ok('(41) Q6 VERDICT INCOMPLETE (arm A mask not reproduced)', /Q6 VERDICT: INCOMPLETE — arm A did not reproduce the mask/.test(r.out), r.out);
 }
@@ -865,10 +875,10 @@ function runAnalyzer(dir) {
   });
   const r = runAnalyzer(dir);
   ok('(42) tableActive distinction exit 0', r.code === 0, 'code=' + r.code);
-  ok('(42) per-seed arm-A line', /seed 103841 arm A: Q6\(a\) refused=0 on 0 day\(s\), worst day 0; Q6\(b\) mercy rows=8 held=8 \(present-held 8\) proceeded=0 live-sitting held=1 unknown-ts=0/.test(r.out), r.out);
-  ok('(42) per-seed arm-B line', /seed 103841 arm B: Q6\(a\) refused=0 on 0 day\(s\), worst day 0; Q6\(b\) mercy rows=8 held=0 \(present-held 0\) proceeded=8 live-sitting held=1 unknown-ts=0/.test(r.out), r.out);
+  ok('(42) per-seed arm-A line', /seed 103841 arm A: Q6\(a\) refused=0 on 0 day\(s\), worst day 0; Q6\(b\) mercy rows=8 held=8 \(present-held 8, other-held 0\) proceeded=0 live-sitting held=1 unknown-ts=0/.test(r.out), r.out);
+  ok('(42) per-seed arm-B line', /seed 103841 arm B: Q6\(a\) refused=0 on 0 day\(s\), worst day 0; Q6\(b\) mercy rows=8 held=0 \(present-held 0, other-held 0\) proceeded=8 live-sitting held=1 unknown-ts=0/.test(r.out), r.out);
   ok('(42) ARM A MASK REPRODUCED printed', /Q6\(b\) ARM A TABLEACTIVE MASK: REPRODUCED \(worst seed 103841: 8 present-held mercy rows; bar >=7\)/.test(r.out), r.out);
-  ok('(42) ARM B DISTINCTION line', /Q6\(b\) ARM B TABLEACTIVE DISTINCTION: mercy rows held 0 on every seed; mercy-window musters proceeded 8; live-sitting holds fired 1/.test(r.out), r.out);
+  ok('(42) ARM B DISTINCTION line', /Q6\(b\) ARM B TABLEACTIVE DISTINCTION: mercy rows held 0 on every seed; mercy-window musters proceeded 8; other-held mercy rows \(non-table reasons\) 0; live-sitting holds fired 1/.test(r.out), r.out);
   ok('(42) Q6 VERDICT GO printed', /Q6 VERDICT: GO — the distinction holds: arm A reproduced the mask \(worst 8 present-held mercy rows\), arm B held 0 mercy rows, 8 mercy-window muster\(s\) proceeded, 1 live-sitting hold\(s\) fired/.test(r.out), r.out);
 }
 // (43) Q6 base corpus (no muster files): ARM A mask NOT REPRODUCED,
@@ -897,7 +907,7 @@ function runAnalyzer(dir) {
   });
   const r = runAnalyzer(dir);
   ok('(44) arm-B still holds exit 0', r.code === 0, 'code=' + r.code);
-  ok('(44) ARM B DISTINCTION still-held line', /Q6\(b\) ARM B TABLEACTIVE DISTINCTION: mercy rows held STILL HELD \(worst 2 on 103841\); mercy-window musters proceeded 6; live-sitting holds fired 0/.test(r.out), r.out);
+  ok('(44) ARM B DISTINCTION still-held line', /Q6\(b\) ARM B TABLEACTIVE DISTINCTION: mercy rows held STILL HELD \(worst 2 on 103841\); mercy-window musters proceeded 6; other-held mercy rows \(non-table reasons\) 0; live-sitting holds fired 0/.test(r.out), r.out);
   ok('(44) Q6 VERDICT NO-GO printed', /Q6 VERDICT: NO-GO — arm B still holds mercy rows; the distinction does not hold/.test(r.out), r.out);
 }
 // (45) band wave-4 fights/kills lines: base fixture fights 240 (30 x 8)
@@ -919,7 +929,7 @@ function runAnalyzer(dir) {
   const r = runAnalyzer(dir);
   ok('(46) stage identical exit 0', r.code === 0, 'code=' + r.code + '\n' + r.out.slice(-600));
   ok('(46) STAGE delivered-verb line arm A', /seed 103841 arm A: STAGE delivered-verb \(armed d52, delivered d71 via verb\)/.test(r.out), r.out);
-  ok('(46) STAGE arm A summary', /STAGE arm A: delivered 1\/8 \(0 natural\), abandoned 0, never-armed 0, missing 7/.test(r.out), r.out);
+  ok('(46) STAGE arm A summary', /STAGE arm A: delivered 1\/8 \(0 natural\), abandoned 0, never-armed 0, armed-unresolved 0, missing 7/.test(r.out), r.out);
   ok('(46) STAGE ARM-CONSISTENCY printed', /STAGE ARM-CONSISTENCY: armed\/delivered days identical across arms on all seeds with a stage corpus/.test(r.out), r.out);
   ok('(46) no STAGE ARM-MISMATCH', !/STAGE ARM-MISMATCH/.test(r.out), r.out);
 }
@@ -942,6 +952,45 @@ function runAnalyzer(dir) {
   ok('(48) stage missing exit 0', r.code === 0, 'code=' + r.code);
   ok('(48) STAGE corpus unavailable printed', /seed 103841 arm A: STAGE corpus unavailable/.test(r.out), r.out);
   ok('(48) STAGE ARM-CONSISTENCY printed', /STAGE ARM-CONSISTENCY: armed\/delivered days identical across arms on all seeds with a stage corpus/.test(r.out), r.out);
+}
+// (49) STAGE: armed d68, never delivered, never abandoned (village
+// collapsed before the day-120 deadline) on both arms ->
+// "armed-unresolved", summary counts armed-unresolved 1, exit 0.
+{
+  const dir = buildCorpus((s) => {
+    const st = { stage: 'herald', state: { armedDay: 68, deliveredDay: null, kind: null, via: null, abandoned: null, reason: null, waitRows: 47 }, rows: [{ day: 68, event: 'armed', heraldStage: 2 }] };
+    s[103841].stage = st;
+  });
+  const r = runAnalyzer(dir);
+  ok('(49) stage armed-unresolved exit 0', r.code === 0, 'code=' + r.code + '\n' + r.out.slice(-600));
+  ok('(49) STAGE armed-unresolved line arm A', /seed 103841 arm A: STAGE armed-unresolved \(armed d68, delivered d-\)/.test(r.out), r.out);
+  ok('(49) STAGE armed-unresolved line arm B', /seed 103841 arm B: STAGE armed-unresolved \(armed d68, delivered d-\)/.test(r.out), r.out);
+  ok('(49) STAGE arm A summary counts unresolved', /STAGE arm A: delivered 0\/8 \(0 natural\), abandoned 0, never-armed 0, armed-unresolved 1, missing 7/.test(r.out), r.out);
+  ok('(49) no STAGE ARM-MISMATCH', !/STAGE ARM-MISMATCH/.test(r.out), r.out);
+}
+// (50) Q6(b) r242 INSTRUMENT CORRECTION: arm A reproduces (8 mercy rows
+// held 'tableActive'); arm B holds the same 8 mercy days on 'short:8'
+// (coalition shortage — passed the table check, hit its real constraint)
+// -> arm-B mercy rows held 0, other-held 8, Q6 VERDICT GO. The OLD
+// any-held count would have read worst 8 and said NO-GO.
+{
+  const dir = buildCorpus((s) => {
+    const rowsA = [];
+    for (let d = 100; d <= 107; d++) {
+      rowsA.push({ day: d, titan: 'herald', stage: 2, present: true, ready: false, bladesAllied: 0, bladesHaven: 0, called: false, committed: 0, committedVids: [], held: 'tableActive', ta: true, ts: false, council: { total: 0, need: 10, alliesProj: 0, havenProj: 0, ready: false } });
+    }
+    const rowsB = [];
+    for (let d = 100; d <= 107; d++) {
+      rowsB.push({ day: d, titan: 'herald', stage: 2, present: true, ready: false, bladesAllied: 2, bladesHaven: 0, called: false, committed: 0, committedVids: [], held: 'short:8', ta: true, ts: false, council: { total: 2, need: 10, alliesProj: 2, havenProj: 0, ready: false } });
+    }
+    s[103841].muster = { rows: rowsA, outcomes: [], verbCalls: [] };
+    s[103841].armB = { muster: { rows: rowsB, outcomes: [], verbCalls: [] } };
+  });
+  const r = runAnalyzer(dir);
+  ok('(50) short-hold correction exit 0', r.code === 0, 'code=' + r.code);
+  ok('(50) per-seed arm-B line counts short as other-held', /seed 103841 arm B: Q6\(a\) refused=0 on 0 day\(s\), worst day 0; Q6\(b\) mercy rows=8 held=0 \(present-held 0, other-held 8\) proceeded=0 live-sitting held=0 unknown-ts=0/.test(r.out), r.out);
+  ok('(50) ARM B DISTINCTION line reports other-held 8', /Q6\(b\) ARM B TABLEACTIVE DISTINCTION: mercy rows held 0 on every seed; mercy-window musters proceeded 0; other-held mercy rows \(non-table reasons\) 8; live-sitting holds fired 0/.test(r.out), r.out);
+  ok('(50) Q6 VERDICT GO printed', /Q6 VERDICT: GO — the distinction holds: arm A reproduced the mask \(worst 8 present-held mercy rows\), arm B held 0 mercy rows, 0 mercy-window muster\(s\) proceeded, 0 live-sitting hold\(s\) fired/.test(r.out), r.out);
 }
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail === 0 ? 0 : 1);
