@@ -548,7 +548,16 @@
           // substitution reads it); ev.names carries the full fresh list
           // for the multi-name line templates. No fresh villager corpses:
           // the nameless variants (grief is real, the body isn't found).
-          return { kind: 'mourning', name: _names.length ? _names[_names.length - 1] : null, names: _names, sickDeath };
+          // REL-MOURN (journey-succession r232 2026-11-17): carry the
+          // dead's id and the corpse's witnesses so the mourning lines
+          // can speak to the speaker's actual relationship with the dead
+          // (bond / shared veteran standing / witnessing). The last fresh
+          // corpse is the one ev.name names, so its villagerId is the
+          // deadId.
+          const _lastFresh = _fresh[_fresh.length - 1] || null;
+          return { kind: 'mourning', name: _names.length ? _names[_names.length - 1] : null, names: _names, sickDeath,
+            deadId: _lastFresh ? (_lastFresh.villagerId || null) : null,
+            witnesses: _lastFresh ? (_lastFresh.witnesses || []) : [] };
         }
         // MANTLE MEMORY (journey crisis r4 2026-10-12): the village talks
         // about a dead bearer longer than the 3-day acute grief — the mantle
@@ -587,8 +596,12 @@
                 // SUCCESSOR'S OWN GRIEF, convo half (journey-succession r23
                 // 2026-10-18): carry the dead bearer's id so the mourning
                 // lines can acknowledge the SUCCESSOR's personal loss, not
-                // just the village's.
-                if (nm2) return { kind: 'mourning', name: nm2, bearer: true, bearerId: last.villagerId };
+                // just the village's. REL-MOURN (r232): deadId mirrors
+                // bearerId so the relationship gates read one field in
+                // both mourning branches. No witnesses here: the corpse
+                // may be buried by now, so the witness variant stays
+                // fresh-mourning-only by construction.
+                if (nm2) return { kind: 'mourning', name: nm2, bearer: true, bearerId: last.villagerId, deadId: last.villagerId };
               }
             }
           }
@@ -676,6 +689,35 @@
         if ((v.cheer || 0) > 0) return { kind: 'cheer' };
       } catch (e) {}
       return null;
+    },
+    // REL-MOURN (journey-succession r232 2026-11-17): the speaker's
+    // relationship with the lately-mourning dead, read from live state
+    // only — never guessed. One choke point so the opener pool
+    // (t2gen_lately) and the follow-up pools (t2fol_lately) gate on the
+    // same facts. bondClose reuses the successor-grief push's
+    // established line (v>=20 or depth>=1); bothVet needs a waveKillLog
+    // row for EACH of them (shared standing, never a claimed shared
+    // fight — the log can't prove same-fight); witnessed needs the
+    // speaker's id in the corpse's stored witnesses. A deadId the event
+    // doesn't carry (stranger corpse, nameless grief) gates everything
+    // off and the generic pool serves. KIN: no signal exists between two
+    // villagers (kin lives only relative to the scholar), so there is no
+    // kin arm here — deliberately, not an omission.
+    t2MournRel(vid, ev) {
+      const rel = { bondClose: false, bothVet: false, witnessed: false };
+      try {
+        const deadId = (ev && (ev.deadId || ev.bearerId)) || null;
+        if (deadId) {
+          const gb = (typeof this.bondGet === 'function') ? this.bondGet(vid, deadId) : null;
+          rel.bondClose = !!(gb && (((gb.v || 0) >= 20) || ((gb.depth || 0) >= 1)));
+          const log = ((this.state || {}).waveKillLog || []);
+          const spVet = log.some(e => e && (e.by || null) === vid);
+          const ddVet = log.some(e => e && (e.by || null) === deadId);
+          rel.bothVet = !!(spVet && ddVet);
+        }
+        rel.witnessed = !!((ev && ev.witnesses) || []).some(w => String(w) === String(vid));
+      } catch (e) {}
+      return rel;
     },
 
     // ---------- YOU: what they think of the player ----------
@@ -1303,6 +1345,29 @@
                '"{mname} owed me a favor. I keep thinking about collecting. Stupid."',
                '"I dreamed {mname} was still here. Woke up angry at the dream. Stupid."',
                '"{mname} always took the burnt piece. Said someone had to. I take it now."'];
+            // REL-MOURN (journey-succession r232 2026-11-17): the lines
+            // now know the speaker's relationship with the dead — a close
+            // bond, shared veteran standing, witnessing the death. Each
+            // variant carries {mname} like the generics above (filled by
+            // t2fill AFTER the pick, so the template dedupe sees the
+            // template, not one dead person's copy). Variants ADD to the
+            // pool, never replace it: a 1-variant pool would re-serve one
+            // template across sittings and trip MOURN-EXHAUST. Two per
+            // kind, so a bonded / veteran / witness speaker still has
+            // spread. Gated on t2MournRel (live state only); a stranger
+            // death serves the generic five.
+            try {
+              const _rel = (typeof this.t2MournRel === 'function') ? this.t2MournRel(vid, ev) : null;
+              if (_rel && _rel.bondClose) mlines.push(
+                '"{mname} was my person at this fire. I keep turning to the wrong empty spot."',
+                '"I knew {mname}. Really knew them, not the fire\'s version. Mine. And now there\'s just the fire\'s."');
+              if (_rel && _rel.bothVet) mlines.push(
+                '"We both stood at the treeline. {mname} held it. I keep replaying my part, looking for the step I missed."',
+                '"{mname} killed the things that come at night. I did too. That\'s a small club, and it\'s smaller now."');
+              if (_rel && _rel.witnessed) mlines.push(
+                '"I was there when {mname} fell. I keep seeing it when I blink, and blinking doesn\'t help."',
+                '"I saw {mname} go down. I did what I could. It wasn\'t enough, and I carry that now."');
+            } catch (e) {}
           } else {
             mlines = ['"We lost someone. I keep setting out an extra portion. Stupid."',
                '"Grief doesn\'t schedule itself. It just shows up at dinner."',
@@ -1735,6 +1800,22 @@
           '"My part? I {habitI} and stay ready."',
           '"I do the small things right. The big things notice."'],
       };
+      // REL-MOURN (journey-succession r232 2026-11-17): one bond variant
+      // per follow-up level — the conversation deepens in the speaker's
+      // own relationship, not just the opener. Same gate as the openers
+      // (t2MournRel), same {mname} discipline (filled by t2fill AFTER
+      // the pick). Veteran/witness follow-ups stay generic this run: the
+      // openers carry those kinds.
+      if (kind === 'mourning') {
+        try {
+          const _relF = (typeof this.t2MournRel === 'function') ? this.t2MournRel(vid, ev) : null;
+          if (_relF && _relF.bondClose) {
+            cope.mourning.push('"I {habitI} the way {mname} used to, when they were the one keeping me steady. It doesn\'t work the same. I do it anyway."');
+            next.mourning.push('"{mname} knew things about me nobody else does. That\'s gone now, and I keep catching myself about to tell them something."');
+            part.mourning.push('"My part? I carry what {mname} carried. Not their work. Their watch. Someone they trusted should hold it."');
+          }
+        } catch (e) {}
+      }
       // MOURN-TEMPLATE (journey-succession r231 2026-11-17): the pools
       // return with {mname} INTACT — the name is filled by t2fill AFTER
       // the pick. The old nm() mapping substituted the dead name here,
