@@ -2,7 +2,7 @@
 
 **Leg:** scale (days 80–140, DAYCAP 140). **Run:** `playtest-a-20261118T0145Z`, Lane A.
 **Branch:** `journey-scale` (base master `90f77c406` at prereg time; rebased onto
-`b30a6367b` at closeout). **Seeds:** fresh 103821–103828 (primary) +
+`b30a6367b` mid-run and onto `911c8db0c` at closeout — master moved twice under the run). **Seeds:** fresh 103821–103828 (primary) +
 fallback 103831–103838 (arm A only).
 **Policy (frozen):** `scalecourt-traderoad-r113-linkraise-sit` + muster ON + march ON, SIT false, sortie INERT.
 **Prereg:** `evidence/2026-11-18/journey-scale-r239-prereg.md`.
@@ -274,16 +274,20 @@ change, outside this run's panel scope.
 
 ## Closeout
 
-- **Commits (branch `journey-scale`, after rebase onto `b30a6367b`):**
-  `7c00c24e6` prereg + driver/analyzer + proof tests (tooling only);
-  `fe1415ad2` analyzer + proof test seed band 103821–103828 (clone fix).
+- **Commits (branch `journey-scale`, after rebase onto `911c8db0c`):**
+  `011a67450` prereg + driver/analyzer + proof tests (tooling only);
+  `e11a202a6` analyzer + proof test seed band 103821–103828 (clone fix);
+  run note (this file) + a correction commit for the final master tip and hashes.
   The fix commit `c6a62c604` was rebased out (see Tooling); the seed-fix commit
-  `7f0a24f24` was rebased onto the new master as `fe1415ad2`. Safe-commit index
-  clobber struck on all three commits (staged-as-deleted pattern); repaired each time
-  via the `ls-tree -r` pipe, blobs verified against HEAD, tree clean after each repair.
-  Rebase 2/2 clean (onto master) + 2/2 clean (drop fix commit), no conflicts, no
-  stop-at-pick quirk. Proof tests re-run green on the rebased tip (analyzer 129/129;
-  table-sitting RED 22/40 from the preserved copy).
+  was rebased twice (first onto `b30a6367b` as `fe1415ad2`, then onto `911c8db0c`
+  as `e11a202a6`). Safe-commit index clobber struck on every commit
+  (staged-as-deleted pattern); repaired each time via the `ls-tree -r` pipe,
+  blobs verified against HEAD, tree clean after each repair. Rebase 2/2 clean
+  (onto master) + 2/2 clean (drop fix commit) + 4/4 clean (onto final master, with
+  one stop-at-pick quirk on the 2nd pick — recovered via the documented
+  `git rebase --continue` after verifying the pick unapplied), no conflicts.
+  Proof tests re-run green on the rebased tip (analyzer 129/129; table-sitting
+  RED 22/40 from the preserved copy).
 - **Merged locally, pending ship** — no bump, no push, no live verification (ship loop owns those).
 - Rotation 3 → 0 (scale done; next run is landing). Lock deleted at closeout after run_id verification.
 - Worktree released (`merged`), branch deleted; final reap sweep clean. Main tree verified clean after the merge.
