@@ -1088,7 +1088,19 @@
           return `"You came through on ${favor.short}. I won't forget it."`;
         }
         if (favor && favor.state === 'broken') {
-          if (c.want) { c.want.favor = favor; c.want._favorSettle = 'acknowledged'; }
+          if (c.want) c.want.favor = favor;
+          // FALSE-SETTLEMENT GUARD (journey crisis r240 2026-11-18): a
+          // broken promise is not a settled debt — the deadline passed,
+          // but the need itself can still be live (seed 14525 d38: the
+          // wound favor rotted d19 while the scholar was blocked from
+          // tending, and Amanda was mauled again the same morning the
+          // sitting called it "done"). When the need is still live, say
+          // so plainly and do NOT record the settle — the favor stays
+          // broken, and the need can be re-asked or tended.
+          if (this.convoFavorNeedLive(favor)) {
+            return `"You said you'd help with ${favor.short}. It's still open — but that promise is dead."`;
+          }
+          if (c.want) c.want._favorSettle = 'acknowledged';
           return `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`;
         }
         // Legacy / no favor state — the old generic lines (defensive).
@@ -1126,6 +1138,14 @@
             ]);
           }
           if (favor.state === 'broken') {
+            // False-settlement guard (r240, same as the opener): a live
+            // need is not "done now", even when the promise is dead.
+            if (this.convoFavorNeedLive(favor)) {
+              return this.convoPickCycle(vid, 'repay:stale:live:' + (favor.kind || 'favor'), [
+                `"About ${sh} — still open. That promise is dead, but the need isn't."`,
+                `"${cap} — still open. The promise died, not the need."`,
+              ]);
+            }
             return this.convoPickCycle(vid, 'repay:stale:' + (favor.kind || 'favor'), [
               `"About ${sh} — I keep turning it over. It's done now, but I haven't forgotten it."`,
               `"${cap} — it's done now. I keep turning it over anyway."`,
@@ -1195,10 +1215,27 @@
           return picked;
         }
         if (favor && favor.state === 'broken') {
+          // False-settlement guard (r240): both pool lines claim the
+          // matter is done. When the need is still live, say that instead.
+          if (this.convoFavorNeedLive(favor)) {
+            return this.convoPickCycle(vid, 'repay:help:broken:live:' + (favor.kind || 'favor'), [
+              `"You said you'd help with ${favor.short}. It's still open — but that promise is dead."`,
+              `"About ${favor.short} — still open. The promise died, not the need."`,
+            ]) || `"You said you'd help with ${favor.short}. It's still open — but that promise is dead."`;
+          }
           return this.convoPickCycle(vid, 'repay:help:broken:' + (favor.kind || 'favor'), [
             `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`,
             `"About ${favor.short} — it's done. I haven't forgotten, but I'm not asking again."`,
           ]) || `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`;
+        }
+        // False-settlement guard (r240): an acknowledged favor whose need
+        // has returned (re-wounded after a legitimate settle) is not
+        // square either — the need is live again.
+        if (favor && favor.state === 'acknowledged' && this.convoFavorNeedLive(favor)) {
+          return this.convoPickCycle(vid, 'repay:help:acknowledged:live:' + (favor.kind || 'favor'), [
+            `"You said you'd help with ${favor.short}. It's still open — but that promise is dead."`,
+            `"About ${favor.short} — still open. The promise died, not the need."`,
+          ]) || `"You said you'd help with ${favor.short}. It's still open — but that promise is dead."`;
         }
         return '"Good. Then we\'re square." They look lighter for it.';
       },
@@ -1220,11 +1257,20 @@
           const c = this.convoGet(vid);
           const favor = (c && c.want && c.want.favor) || (typeof this.convoGetFavor === 'function' && this.convoGetFavor(vid)) || null;
           if (favor && ['fulfilled', 'thanked', 'acknowledged', 'moot', 'broken'].includes(favor.state)) {
-            return this.convoPickCycle(vid, 'deflect:repay:settled', [
-              '"Right. Forget it." A pause. "No — that one\'s settled. I just like saying it out loud."',
-              '"...Fine." They shake their head. "It\'s done now. I keep turning it over anyway."',
-              '"Okay. Your call." They file it away — settled, and counted.',
-            ]) || '"Right. Forget it." A pause. "No — that one\'s settled. I just like saying it out loud."';
+            // False-settlement guard (r240): a broken/acknowledged favor
+            // whose need is still live is not settled — fall through to
+            // the unpaid pool, which is honest about it. Fulfilled /
+            // thanked / moot mean the need really is gone, so they keep
+            // the settled pool.
+            let liveNeed = false;
+            try { liveNeed = (favor.state === 'broken' || favor.state === 'acknowledged') && !!this.convoFavorNeedLive(favor); } catch (e) { liveNeed = false; }
+            if (!liveNeed) {
+              return this.convoPickCycle(vid, 'deflect:repay:settled', [
+                '"Right. Forget it." A pause. "No — that one\'s settled. I just like saying it out loud."',
+                '"...Fine." They shake their head. "It\'s done now. I keep turning it over anyway."',
+                '"Okay. Your call." They file it away — settled, and counted.',
+              ]) || '"Right. Forget it." A pause. "No — that one\'s settled. I just like saying it out loud."';
+            }
           }
         } catch (e) { /* fall through to the unpaid pool */ }
         return this.convoPickCycle(vid, 'deflect:repay', [
@@ -2515,7 +2561,13 @@
       }
       if (favor.state === 'broken') {
         const c = this.convoGet(vid);
-        if (c && c.want) { c.want.favor = favor; c.want._favorSettle = 'acknowledged'; }
+        if (c && c.want) c.want.favor = favor;
+        // False-settlement guard (r240, same as the repay opener): the
+        // follow-up must not call a live need "done" either.
+        if (this.convoFavorNeedLive(favor)) {
+          return `"You said you'd help with ${favor.short}. It's still open — but that promise is dead."`;
+        }
+        if (c && c.want) c.want._favorSettle = 'acknowledged';
         return `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`;
       }
       if (favor.state === 'asked') {
