@@ -38,12 +38,13 @@ function median(xs) {
 // on a strong base — a different lever, finding #2552, not built
 // here). Computed from the per-seed files' v4encounters with the
 // partysize-b launch join: an encounter belongs to a quad launch
-// when its day falls within [launch day, launch day + 21], its
-// monster matches the launch target (or the target is null), and
-// its fighter (or ally) is in the launch party. Share = mDealt /
-// mHpStart (vKill = 1.0 by definition); the recorder repair
-// supplies mHpStart on fought rows (no-contact evades are correct
-// nulls and excluded).
+// when its day falls within [launch day, launch day + 21] and its
+// fighter (or ally) is in the launch party. Finding #2564 (rerun):
+// the target==mid rule is DROPPED — a launched party that meets a
+// different monster than its target still fields its fourth member,
+// so off-target meetings count. Share = mDealt / mHpStart (vKill =
+// 1.0 by definition); the recorder repair supplies mHpStart on
+// fought rows (no-contact evades are correct nulls and excluded).
 function size4Shares(dir) {
   const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(function (f) { return f.endsWith('.json'); }).sort() : [];
   const shares = [];
@@ -63,7 +64,7 @@ function size4Shares(dir) {
       let launched = null;
       for (const l of quads) {
         if (e.day < l.day || e.day > l.day + 21) continue;
-        if (l.target && e.mid !== l.target) continue;
+        // Finding #2564: NO target==mid rule — off-target meetings count.
         if (e.vid === l.vid || l.party.indexOf(e.vid) !== -1) { launched = l; break; }
         if (e.allyVid && (e.allyVid === l.vid || l.party.indexOf(e.allyVid) !== -1)) { launched = l; break; }
       }
@@ -79,7 +80,8 @@ function size4Shares(dir) {
 }
 
 // Field-4 table: per-seed launched-quad-meeting join (same
-// window/target/party join as size4Shares). A meeting is a fought
+// window/party join as size4Shares — finding #2564: the target==mid
+// rule is dropped, off-target meetings count). A meeting is a fought
 // expedition encounter row joined to a quad launch. Denominator:
 // the second ally joined (rec.ally2Vid present) — the third shout
 // can only fire after the second, so meetings where ally2 never
@@ -110,7 +112,7 @@ function field4Table(dir) {
       let launched = null;
       for (const l of quads) {
         if (e.day < l.day || e.day > l.day + 21) continue;
-        if (l.target && e.mid !== l.target) continue;
+        // Finding #2564: NO target==mid rule — off-target meetings count.
         if (e.vid === l.vid || l.party.indexOf(e.vid) !== -1) { launched = l; break; }
         if (e.allyVid && (e.allyVid === l.vid || l.party.indexOf(e.allyVid) !== -1)) { launched = l; break; }
       }
@@ -219,10 +221,12 @@ function selftest() {
     mkF4({ meetings: 6, denom: 4, numer: 0, deaths: 2 }),
     mkF4({ meetings: 6, denom: 5, numer: 4, rate: 0.8, rawRate: 4 / 6, deaths: 3 }));
   check('judge GO at exactly the bar (field-4 4/5 = 0.80)', j.verdict === 'GO', JSON.stringify(j.bars));
-  // field4Table join: day window [launch, launch+21], target==mid,
-  // party membership, ally2 denominator, ally3-in-party numerator,
-  // sense rate from the sensed list. A wrong-monster, out-of-window,
-  // or bystander-ally3 meeting must not count.
+  // field4Table join: day window [launch, launch+21], party
+  // membership, ally2 denominator, ally3-in-party numerator, sense
+  // rate from the sensed list. Finding #2564: the target==mid rule
+  // is DROPPED — the off-target 'eater' meeting (launch target
+  // 'strike') now counts. A wrong-monster meeting counts; an
+  // out-of-window or bystander-ally3 meeting must not.
   (function () {
     const os2 = require('os');
     const tmp2 = fs.mkdtempSync(path.join(os2.tmpdir(), 'as3-f4-'));
@@ -246,10 +250,39 @@ function selftest() {
       ],
     }));
     const t2 = field4Table(dir2);
-    check('field4Table joins in-window same-target meetings only; denom=ally2-joined, numer=ally3-in-party, sense from the sensed list',
-      t2.meetings === 3 && t2.denom === 3 && t2.numer === 2 && t2.senseDen === 3 && t2.senseN === 2 &&
-      t2.ally3DealtTotal === 45 && t2.deaths === 2 && Math.abs(t2.rate - 2 / 3) < 1e-9, JSON.stringify(t2));
+    check('field4Table joins in-window meetings incl. off-target (finding #2564); denom=ally2-joined, numer=ally3-in-party, sense from the sensed list',
+      t2.meetings === 4 && t2.denom === 4 && t2.numer === 2 && t2.senseDen === 4 && t2.senseN === 2 &&
+      t2.ally3DealtTotal === 45 && t2.deaths === 2 && Math.abs(t2.rate - 2 / 4) < 1e-9, JSON.stringify(t2));
     try { fs.rmSync(tmp2, { recursive: true, force: true }); } catch (e) {}
+  })();
+  // Finding #2564 regression: the one live-fire row from the old
+  // pilot (arm leg, seed 104437, day 133 — the Reunion, wave 4).
+  // The holder app_mgpsphub92 launched a quad on day 130 against
+  // the Herald (party ruby_callaghan + gen_ph37qf5 + gen_353ni1r);
+  // three days later the party met the Reunion instead and all
+  // three allies fought (ally3Vid gen_353ni1r, ally3Dealt 23 of
+  // 239 vs 1,322 HP, 7 rounds, vFlee). Under the old target==mid
+  // rule this row was invisible (Reunion !== Herald); under the
+  // loose join it counts as 1/1 fielded.
+  (function () {
+    const os3 = require('os');
+    const tmp3 = fs.mkdtempSync(path.join(os3.tmpdir(), 'as3-d133-'));
+    const dir3 = path.join(tmp3, 'leg');
+    fs.mkdirSync(dir3);
+    fs.writeFileSync(path.join(dir3, 's104437.json'), JSON.stringify({
+      seed: 104437,
+      deaths: [],
+      v4departs: [{ day: 130, vid: 'app_mgpsphub92', result: 'launch', targetWave: 4, target: 'herald',
+        party: ['ruby_callaghan', 'gen_ph37qf5', 'gen_353ni1r'], partySize: 4 }],
+      v4encounters: [
+        { day: 133, vid: 'ruby_callaghan', mid: 'reunion', wave: 4, outcome: 'vFlee', rounds: 7, mDealt: 239, mHpStart: 1322, origin: 'expedition',
+          allyVids: ['app_mgpsphub92', 'gen_ph37qf5', 'gen_353ni1r'], allyVid: 'app_mgpsphub92', ally2Vid: 'gen_ph37qf5', ally3Vid: 'gen_353ni1r', ally3Dealt: 23 },
+      ],
+    }));
+    const t3 = field4Table(dir3);
+    check('finding #2564 regression: the d133 Reunion row (launch target Herald) counts as 1/1 fielded under the loose join',
+      t3.meetings === 1 && t3.denom === 1 && t3.numer === 1 && t3.rate === 1 && t3.rawRate === 1 && t3.ally3DealtTotal === 23, JSON.stringify(t3));
+    try { fs.rmSync(tmp3, { recursive: true, force: true }); } catch (e) {}
   })();
   console.log('analyze-allyslot3-b --selftest: ' + passed + ' passed, ' + failed + ' failed');
   process.exit(failed ? 1 : 0);
