@@ -2051,6 +2051,19 @@
                 rec.outcome = 'vFlee';
                 rec.fleeWise = true;
                 rec.log.push('R' + round + ': ' + vName + ' reads the sterile streets — you can\u2019t kill a suburb. They walk out. (Navigation is victory.)');
+                // FLEEREPAIR3 (sim-fleerepair3-b, finding #2500): the
+                // leave used to set the outcome without ending the
+                // round, so the monster phase still ran and the
+                // departed villager ate a parting hit — 52/52 staged
+                // leave-first wise leaves took one, and 4 wounded
+                // leavers died walking out. With the flag on, the
+                // fight ends here, the offer_food/poison shape: you
+                // cannot be hit by a street you have left. A hit
+                // that landed BEFORE the leave (monster won
+                // initiative) still stands — only the parting hit
+                // goes. Default OFF; `process` is undefined in the
+                // browser, so the lever is off there.
+                if (typeof process !== 'undefined' && process.env && process.env.FLEEREPAIR3 === '1') break;
               } else if (trickAct.type === 'contradict') {
                 // EULOGY: contradict the narration with your actions — it
                 // says you run, you advance. Each contradiction restores a
