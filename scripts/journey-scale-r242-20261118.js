@@ -368,14 +368,21 @@ function stageStep(G, ctx) {
     stageWatch.push({ day, event: 'delivered-natural', kind: delivered, heraldStage: herald.stage, heraldPresent: herald.present });
     return;
   }
-  if (herald.stage < 2 || !herald.present) return; // not yet locatable+present: nothing to hold for
-  if (st.armedDay == null) { st.armedDay = day; stageWatch.push({ day, event: 'armed', heraldStage: herald.stage }); }
+  // Arming needs the herald locatable AND present; once armed, the
+  // delivery attempt runs regardless of presence (the herald is alive —
+  // presence only gated arming — and the mercy window opens at delivery;
+  // if the herald returns, present-held rows accrue). The day-120
+  // deadline applies while armed even on absent days.
+  if (st.armedDay == null) {
+    if (herald.stage < 2 || !herald.present) return; // not yet locatable+present: nothing to arm for
+    st.armedDay = day; stageWatch.push({ day, event: 'armed', heraldStage: herald.stage });
+  }
   if (day >= 120) { st.abandoned = 'never-ready'; st.reason = 'tribute not payable by day 120'; stageWatch.push({ day, event: 'abandoned', reason: st.abandoned }); return; }
   let ready = null;
   try { ready = (typeof G.ladderCapstoneReady === 'function') ? G.ladderCapstoneReady('military_tribute') : null; } catch (e) { stageWatch.push({ day, event: 'step-error', reason: 'ready-read:' + String((e && e.message) || e).slice(0, 80) }); return; }
   if (!ready || !ready.ready || (ready.payable | 0) < 2) {
     st.waitRows++;
-    if (st.waitRows <= 3 || st.waitRows % 10 === 0) stageWatch.push({ day, event: 'wait', reason: (ready && ready.reason) || 'not-ready', veterans: (ready && ready.veterans) || 0, payable: (ready && ready.payable) || 0 });
+    if (st.waitRows <= 3 || st.waitRows % 10 === 0) stageWatch.push({ day, event: 'wait', reason: (ready && ready.reason) || 'not-ready', veterans: (ready && ready.veterans) || 0, payable: (ready && ready.payable) || 0, heraldPresent: herald.present });
     return;
   }
   let ret = null;
