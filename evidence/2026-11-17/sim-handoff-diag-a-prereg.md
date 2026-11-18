@@ -552,3 +552,84 @@ NOT produced (no fresh run) and the handoff driver is NOT
 committed. Do NOT push, do NOT bump, do NOT merge — the coordinator
 lands the work.
 
+---
+
+# Correction 2 — two analyzer bugs + stale-row rule completion (2026-11-18, before the final classification run)
+
+The analyzer was built and run once against the frozen corpus (a
+validation run, not the final classification). It exposed two
+implementation bugs against Correction 1's own definitions, and one
+genuine gap in the frozen rule (stale-row walkers have no defined
+why). This correction fixes the bugs and completes the rule. It does
+NOT change any frozen bucket definition to improve the verdict — the
+unknown count rises as a result, and the verdict follows the frozen
+≤2 bar.
+
+## Bug 1 — no-walker-in-village without a pool row (fixed)
+
+Correction 1 defines no-walker-in-village as "Judged from the pool
+row's member list". The analyzer returned that bucket for the two
+no-pool-row selections whose picked companion is a homebody (giulia
+d68, visjoin_59 d77) — with no member list at all, the village's
+walker population is unobservable, so the bucket is wrong. Fixed:
+when no pool row exists on or before the day, the bucket can never
+be no-walker-in-village; it is unknown unless the picked companion
+is a provably-available walker (bid proof). Effect: giulia d68 and
+visjoin_59 d77 move to unknown.
+
+## Bug 2 — picked companion must be the executed pick (fixed)
+
+The analyzer took the picked companion from the score commit
+(`inst.selections[].companion`, the LAST commit that day). One
+selection disagrees with the depart row: visjoin_73 day 105, score
+commit companion jesse_cortez vs depart-row companion
+giulia_bianchi (a mid-day re-pick; the depart executed the later
+pick). The bid proof attaches to the pick the depart executed.
+Fixed: picked companion = the first matching depart row's
+companion when a depart row exists, else the score commit's
+companion; both are recorded and agreement is reported.
+
+## Rule completion — stale-row walkers (frozen now)
+
+Correction 1 defines at-Haven proof as same-day-row or bid-proof
+but gives no why for a stale-row non-companion walker (its day-D
+location/state is unproven — the stability probe measured
+P(stay at Haven) = 0.718, too low to assert). Completed: such a
+walker carries why `state-unproven-stale-Nd` (N = pool-row gap in
+days), and a selection whose walkers are all in that state goes in
+walker-exists-but-unavailable — the walkers' EXISTENCE is proven
+(profiles never change, 332/332; alive on day D via the daily
+roster), only their day-D location/state is unproven. The bucket
+tally SPLITS proven-unavailable from location-unproven (counts of
+selections where every walker is proven-unavailable vs mixed vs
+all-stale-unproven), and the metric review discusses the gap. The
+stale-face-value sensitivity (stale-row locations taken at face
+value) is reported alongside the primary strict share. `unknown`
+stays reserved for selections where even walker existence cannot be
+established (no pool row on or before the day and no bid-proof
+resolution).
+
+## Rejected — after-row as a village census
+
+Considered and REJECTED: using the AFTER pool row as a census for
+the 4 no-before-row selections (it would establish walker
+existence and move them out of unknown). Correction 1 authorizes
+the after-row for profile lookup only, and a walker who joined
+after day D would appear in the after-row but was not in the
+village on day D; adopting it now, after the tally was seen, would
+be re-defining the rule to improve the verdict. The 4 selections
+stay unknown under the frozen definition.
+
+## Expected verdict (stated before the final run)
+
+After Bug 1, unknown = 4 (giulia d68, visjoin_59 d77, yuki d71,
+yuki d72) against the frozen bar of ≤ 2. The final run will
+confirm; if it does, the verdict is **DIAG NO-GO on bar 1**
+(classification incomplete — the corpus cannot settle 4
+selections), with the measurement itself (share, splits, veteran
+and picked-companion counts, wall numbers) delivered in full. The
+GO bar is not re-scored: a NO-GO that delivers the numbers is the
+honest outcome, and the coordinator decides whether the 4 unknowns
+warrant a follow-up, not this arm.
+
+
