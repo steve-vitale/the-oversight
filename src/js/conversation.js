@@ -9056,7 +9056,30 @@
           const defs = (this.INVITE_DEFS && this.INVITE_DEFS()) || [];
           const idef = defs.find(d => d.id === inv.defId) || null;
           const spot = (idef && idef.spot) || 'the treeline';
-          gesture = '(They mime walking — pointing at themselves, then at you, then toward ' + spot + '. The meaning is unmistakable: come with me.)';
+          // MIME VARIETY (journey-crisis r241 2026-11-18): the walk-invitation
+          // mime was one hard-coded line, so the same nonverbal villager mimed
+          // the identical invitation three days running (Farid d57-59, Dorcas
+          // d109-111; r238 logged the same shape). Same meaning, different
+          // staging: a pool, no-repeat-until-exhausted per villager on the
+          // convo record (which persists across sittings). Variant 0 is the
+          // original line verbatim, so the first mime in any run is
+          // byte-identical to before. Deterministic, no RNG draw (the
+          // TRAILTALK precedent, r236). Every variant is stage direction,
+          // never quoted speech — the no-English rule holds: they SHOW the
+          // invitation, they never say it.
+          const MIME_WALK = [
+            s => '(They mime walking — pointing at themselves, then at you, then toward ' + s + '. The meaning is unmistakable: come with me.)',
+            s => '(They point at you, then at themselves, then at ' + s + ' — and mime walking with two fingers, twice, to be sure you got it.)',
+            s => '(They tap their own chest, sweep an arm toward ' + s + ', and take a few steps that way, looking back to check you are following.)',
+            s => '(They crouch, draw a little walking figure in the dirt with a stick, then point from it toward ' + s + '.)',
+            s => '(They take your sleeve — gently, asking, not pulling — and nod toward ' + s + ', walking in place.)',
+            s => '(They hold up one finger — wait — then mime walking, slow and clear, toward ' + s + ', and look back at you with raised eyebrows. The question is plain: are you coming?)',
+          ];
+          const _mimeUsed = Array.isArray(c._mimeUsed) ? c._mimeUsed.filter(i => Number.isInteger(i) && i >= 0 && i < MIME_WALK.length) : [];
+          let _mi = MIME_WALK.findIndex((_, i) => !_mimeUsed.includes(i));
+          if (_mi < 0) { _mi = 0; c._mimeUsed = [0]; }
+          else c._mimeUsed = [..._mimeUsed, _mi];
+          gesture = MIME_WALK[_mi](spot);
           c.transcript.push({ who: 'you', text: gesture });
           this.say(gesture);
           inv.spoken = true;
