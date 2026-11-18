@@ -204,6 +204,20 @@ scale-onramp: **converging** (not converged). The #2498 no-tick edge is
 closed by this fix; the wall (deed gate after national, rank never
 following, table 0) is untouched by it.
 
+## Correction (adoption, 2026-11-18) — proof-test anchor after rebase
+
+After the branch rebased onto master `911c8db0c`, the proof test's
+static confinement check failed: it diffed `src/` against the prereg
+base `03c53bf6e`, which predates the muster growth line (`titans.js` +
+`game.js`) that landed on master in the meantime, so the diff counted
+those master landings as this branch's change
+(`game.js`, `titans.js`, `villager-brain.js`). The fix itself is
+byte-identical across the rebase (verified by diff). The test's anchor
+was corrected to the merge-base with master
+(`git merge-base HEAD master` = `911c8db0c`); the assertion is unchanged
+in strictness (still exactly `src/js/villager-brain.js`). Proof test
+re-run on the rebased tip: 41/41 green. No metric, bar, or band changed.
+
 ## Disposition
 
 Fix + proof test: commit `eba0da8d6` (`[needs-eyes]`). Evidence +

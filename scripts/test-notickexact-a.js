@@ -70,6 +70,11 @@ function gitDiffNames(base, dir) {
     return execSync('git diff --name-only ' + base + ' HEAD -- ' + dir, { cwd: REPO }).toString().trim().split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
   } catch (e) { return ['GIT-UNAVAILABLE']; }
 }
+function mergeBase() {
+  try {
+    return execSync('git merge-base HEAD master', { cwd: REPO }).toString().trim();
+  } catch (e) { return null; }
+}
 
 // ---------- 1. Static ----------
 function staticChecks() {
@@ -107,8 +112,16 @@ if (!UNITS_ONLY) {
   const BASE = preregBase();
   console.log('  info: prereg base ' + BASE);
   check('prereg base resolves', !!BASE);
-  const srcDiff = BASE ? gitDiffNames(BASE, 'src/') : ['NO-BASE'];
-  check('src/ diff vs base is EXACTLY the fix (villager-brain.js only)',
+  // Confinement is the BRANCH's contribution: anchor on the merge-base
+  // with master, not the prereg base. The prereg base (03c53bf6e) predates
+  // the muster growth line (titans.js + game.js) that landed on master
+  // before this branch rebased; diffing against it would count master
+  // landings as this branch's change. The fix itself is byte-identical
+  // across the rebase (verified by diff). (Adoption correction 2026-11-18.)
+  const MB = mergeBase();
+  console.log('  info: merge-base with master ' + MB);
+  const srcDiff = MB ? gitDiffNames(MB, 'src/') : ['NO-BASE'];
+  check('src/ diff vs merge-base is EXACTLY the fix (villager-brain.js only)',
     JSON.stringify(srcDiff) === JSON.stringify(['src/js/villager-brain.js']),
     'diff=' + JSON.stringify(srcDiff));
 }
