@@ -220,9 +220,20 @@ driver wraps add no RNG and mutate no state.
 
 ## Gate
 
-`node scripts/check.js --quick` on the branch tip: **TBD — fill in
-before landing** (expect the standing set: measurement-proof
-staleness pair, phone-frame stale receipt, ladder-bundle, timeouts).
+`node scripts/check.js --quick` on the branch tip: **330 passed, 10 failed
+in 1433s, 0 attributable.** The 10: 5 exact-120s timeouts
+(living-garden, occupation-panels, one-person-army,
+trust-observer-neutrality, synergy-stall — load artifacts, standing);
+measurement-proof staleness pair (expected: this run's src/js change
+re-stales the retained proof; refresh is proof-refresh round 21's job);
+phone-frame stale receipt (standing); ladder-bundle control (standing);
+measurement-cache-flags 0/4 in the gate — **load artifact, proven 4/4
+standalone immediately after** (test-measurement-cache-flags.js run bare
+on the branch tip: 4 passed, 0 failed). Gate log:
+`hidden_files/evidence/2026-11-17/journey-social-life-r235-gate.log`.
+
+Rebased onto master `91931f7f1` (Loop B 2230Z round evidence landed while
+the gate ran); proofs re-run on the rebased tip: DRY3 37/37, C3d 35/35.
 
 ## Metric review
 
