@@ -98,10 +98,11 @@
       avoidances: 0, seekContacts: 0, standingContacts: 0,
       veteranGuardHolds: 0, partyFights: 0, planSeeds: 0, stageAdvances: 0,
       bondTends: 0, musterStanddowns: 0, trickHolds: 0,
-      partyTrios: 0, partyDissolved: 0, deathCleanups: 0, removalCleanups: 0,
+      partyTrios: 0, partyQuads: 0, partyDissolved: 0, deathCleanups: 0, removalCleanups: 0,
     };
     if (v.winPlanStats.trickHolds == null) v.winPlanStats.trickHolds = 0;
     if (v.winPlanStats.partyTrios == null) v.winPlanStats.partyTrios = 0;
+    if (v.winPlanStats.partyQuads == null) v.winPlanStats.partyQuads = 0;
     if (v.winPlanStats.partyDissolved == null) v.winPlanStats.partyDissolved = 0;
     if (v.winPlanStats.deathCleanups == null) v.winPlanStats.deathCleanups = 0;
     if (v.winPlanStats.removalCleanups == null) v.winPlanStats.removalCleanups = 0;

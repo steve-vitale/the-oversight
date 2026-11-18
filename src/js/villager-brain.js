@@ -1244,6 +1244,21 @@
             // the defaults, so this is safe on a fresh village).
             try { var _pt = (typeof this.winPlanStats === 'function') ? this.winPlanStats() : null; if (_pt) _pt.partyTrios = (_pt.partyTrios || 0) + 1; } catch (e) {}
           }
+          if (launched.length > 2) {
+            // PARTYQUADS (sim-partyquads-b): the brain path is the
+            // launch path that fires in sims, but it never bumped
+            // partyQuads — only winPlanDepart did (for trios) — so the
+            // stat read 0 while 6 quads launched on the HELD
+            // sim-partysize-recorder-b branch (commit 035034c9f). A
+            // quad launched here counts the same as one launched there
+            // (winPlanStats() initializes the defaults, so this is safe
+            // on a fresh village). NOTE: the guard can only fire once
+            // a third companion launches — no candidate sets companion3
+            // on this tip (PARTYSIZE4 lever HELD), so the counter stays
+            // 0 by construction until that lever lands; the proof test
+            // bounds the placement (a trio must not bump it).
+            try { var _pq = (typeof this.winPlanStats === 'function') ? this.winPlanStats() : null; if (_pq) _pq.partyQuads = (_pq.partyQuads || 0) + 1; } catch (e) {}
+          }
         } catch (e) {}
         return 'launch';
       }
