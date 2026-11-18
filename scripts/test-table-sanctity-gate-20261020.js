@@ -79,6 +79,12 @@ async function main() {
     const { Game, m, hx, hy } = await freshSanctity();
     const active = !!(Game.tableActive && Game.tableActive());
     const fired = wrapStartCombat(Game);
+    // Finding #2559-A: the control must un-linger the monster first.
+    // Since dc8cbd3f3 (2026-11-15) monsterTurn() returns early for a
+    // lingering raider, so with m.lingering still true this control could
+    // never fire. Sections A–D keep the lingering rig (A3 asserts the
+    // lingerer stays pinned); only the control steps off the treeline.
+    m.lingering = false;
     let ticks = 0;
     await quietLog(async () => { for (let i = 0; i < 200; i++) { ticks++; Game.monsterTurn(); } });
     const ambient = fired.filter(f => f.active && !f.tableTrial);
@@ -149,6 +155,11 @@ async function main() {
     try { const pg = Game.progState(); pg.tableDone = false; pg.tableSittingId = null; } catch (e) {}
     const active = !!(Game.tableActive && Game.tableActive());
     const fired = wrapStartCombat(Game);
+    // Finding #2559-A, same as section A: the control must un-linger the
+    // monster first — a lingering raider never raids via monsterTurn, so
+    // with m.lingering still true this control could never fire (E2 failed
+    // on master for exactly this reason).
+    m.lingering = false;
     let ticks = 0;
     await quietLog(async () => { for (let i = 0; i < 200 && !fired.length; i++) { ticks++; Game.monsterTurn(); } });
     console.log(`E. control (no sanctity): tableActive=${active}, ticks=${ticks}, fires=${fired.length}`);
