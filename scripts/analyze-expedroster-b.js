@@ -31,8 +31,13 @@
 // evidence/2026-11-18/sim-expedroster-b-prereg.md):
 //   capture rate — launches whose holder has a roster row within
 //     [launchDay, launchDay+2] / all launches. GO bar >=95%.
-//   snapshot gaps — missing days strictly inside any launch member's
-//     roster span [firstRosterDay, lastRosterDay]. GO bar 0.
+//   snapshot gaps — missing days strictly inside ONE expedition (one
+//     sinceDay run) of a launch member's roster span. GO bar 0.
+//     CORRECTED 2026-11-18T0130Z (re-judge): the frozen whole-span rule
+//     counted home intervals between expeditions as gaps (111/111 in
+//     the pilot were home intervals, 0 true misses); the corrected bar
+//     counts gaps only within one sinceDay run. Same corpus, same
+//     capture/join bars; the gap bar is the only change.
 //   join rate — launched wave-4 meetings (encounters joined to a
 //     launch by the replicated join) classifiable — fighter roster row
 //     on the meeting day, or a determinable absence reason (fighter
@@ -136,14 +141,26 @@ function daysByVid(byVid) {
   return out;
 }
 
-// Snapshot gaps: missing days strictly inside a member's roster span.
+// Snapshot gaps: missing days strictly inside ONE expedition (one
+// sinceDay run) of a member's roster span. Days between two expeditions
+// (a home interval: rows resume under a new sinceDay) are NOT gaps —
+// the recorder fires every day an expedition exists, and no expedition
+// exists on a home day. Rows without sinceDay fall back to one group
+// (the old whole-span rule) so synthetic fixtures stay valid.
 function gapDays(rows) {
-  const days = rows.map(function (r) { return r.day; }).sort(function (a, b) { return a - b; });
-  const gaps = [];
-  for (let i = 1; i < days.length; i++) {
-    for (let d = days[i - 1] + 1; d < days[i]; d++) gaps.push(d);
+  const groups = {};
+  for (const r of rows) {
+    const k = (r.sinceDay == null) ? '' : String(r.sinceDay);
+    (groups[k] = groups[k] || []).push(r.day);
   }
-  return gaps;
+  const gaps = [];
+  for (const k of Object.keys(groups)) {
+    const days = groups[k].sort(function (a, b) { return a - b; });
+    for (let i = 1; i < days.length; i++) {
+      for (let d = days[i - 1] + 1; d < days[i]; d++) gaps.push(d);
+    }
+  }
+  return gaps.sort(function (a, b) { return a - b; });
 }
 
 // Absence reason for a fighter with no roster row on the meeting day.
@@ -242,7 +259,7 @@ function main() {
   const captureRate = launches ? captured / launches : null;
   const joinRate = meetings ? classifiable / meetings : null;
   const go = launches >= POOL_FLOOR && captureRate != null && captureRate >= 0.95 && gaps === 0 && joinRate != null && joinRate >= 1;
-  const out = { arm: 'expedroster-b', run: 'fleshout-loop-b-20261118T0430Z',
+  const out = { arm: 'expedroster-b', run: process.argv[4] || 'fleshout-loop-b-20261118T0430Z',
     corpus: { dir: path.basename(dir), seeds: perSeed.map(function (s) { return s.seed; }) },
     instrument: { launches: launches, captured: captured,
       captureRate: captureRate, gaps: gaps, launchedMeetings: meetings,
@@ -341,6 +358,17 @@ function selftest() {
   // gapDays: contiguous spans have no gaps; a hole is reported.
   check('gapDays: contiguous span -> []', gapDays([{ day: 10 }, { day: 11 }, { day: 12 }]).length === 0);
   check('gapDays: hole d11 -> [11]', JSON.stringify(gapDays([{ day: 10 }, { day: 12 }])) === '[11]');
+  // gapDays (corrected bar, re-judge 2026-11-18T0130Z): a home interval
+  // between two sinceDay runs is NOT a gap; a hole inside one run is.
+  check('gapDays: home interval d100-112 between sinceDay runs -> []',
+    gapDays([{ day: 94, sinceDay: 98 }, { day: 95, sinceDay: 98 }, { day: 96, sinceDay: 98 },
+      { day: 97, sinceDay: 98 }, { day: 98, sinceDay: 98 }, { day: 99, sinceDay: 98 },
+      { day: 113, sinceDay: 113 }, { day: 114, sinceDay: 113 }]).length === 0);
+  check('gapDays: hole d11 inside one sinceDay run -> [11]',
+    JSON.stringify(gapDays([{ day: 10, sinceDay: 10 }, { day: 12, sinceDay: 10 }])) === '[11]');
+  check('gapDays: two runs, hole only in second -> [21]',
+    JSON.stringify(gapDays([{ day: 10, sinceDay: 10 }, { day: 11, sinceDay: 10 },
+      { day: 20, sinceDay: 20 }, { day: 22, sinceDay: 20 }])) === '[21]');
   // meetingAbsenceReason: dead fighter named; ended expedition named.
   const sj = { deaths: [{ day: 20, who: 'h', cause: 'monster', kind: 'monster' }] };
   check('absence: fighter dead by meeting day', meetingAbsenceReason(sj, 'h', 21, []) === 'fighter-dead d20 (monster)');
