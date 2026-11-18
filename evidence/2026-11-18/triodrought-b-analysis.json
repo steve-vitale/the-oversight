@@ -1,0 +1,593 @@
+{
+  "verdict": "GO",
+  "kind": "",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": true,
+      "detail": "launches ctl 18 / arm 25 (floor 6/leg)"
+    },
+    {
+      "id": "trio-rate",
+      "pass": true,
+      "detail": "arm 0.88 vs ctl 0.00 (bar arm>=0.50, diff>=+0.30)"
+    },
+    {
+      "id": "cost-starvation",
+      "pass": true,
+      "detail": "starvation totals arm 0 vs ctl 1; villager arm 0 vs ctl 0 (bar arm<=ctl+2 both)"
+    },
+    {
+      "id": "cost-median",
+      "pass": true,
+      "detail": "median survival arm 150d vs ctl 150d (bar arm>=0.8x ctl)"
+    }
+  ],
+  "ctl": {
+    "dir": "evidence/2026-11-18/perseed-triodrought-b-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launches": 18,
+    "trioLaunches": 0,
+    "trioRate": 0,
+    "sizes": {
+      "1": 1,
+      "2": 17
+    },
+    "sources": {
+      "brain": 18
+    },
+    "c2depart": 0,
+    "candC2": 17,
+    "candC2carried": 0,
+    "candC2dropped": 17,
+    "candC2null": 1,
+    "unjoined": 0,
+    "midday": 7,
+    "dawn": 11,
+    "carryRate": 0,
+    "poolRows": 47,
+    "poolUB": {
+      "1": 5,
+      "2": 13,
+      "3": 12,
+      "4": 11,
+      "5": 3,
+      "6": 3
+    },
+    "starvation": 1,
+    "starvationVillager": 0,
+    "medianDays": 150,
+    "partyTrios": 0,
+    "brainSha": {
+      "bff4cb2fff2c": 8
+    },
+    "carryPresent": {
+      "false": 8
+    }
+  },
+  "arm": {
+    "dir": "evidence/2026-11-18/perseed-triodrought-b-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launches": 25,
+    "trioLaunches": 22,
+    "trioRate": 0.88,
+    "sizes": {
+      "1": 2,
+      "2": 1,
+      "3": 22
+    },
+    "sources": {
+      "brain": 25
+    },
+    "c2depart": 22,
+    "candC2": 22,
+    "candC2carried": 22,
+    "candC2dropped": 0,
+    "candC2null": 3,
+    "unjoined": 0,
+    "midday": 8,
+    "dawn": 17,
+    "carryRate": 1,
+    "poolRows": 101,
+    "poolUB": {
+      "0": 9,
+      "1": 13,
+      "2": 23,
+      "3": 28,
+      "4": 19,
+      "5": 6,
+      "6": 3
+    },
+    "starvation": 0,
+    "starvationVillager": 0,
+    "medianDays": 150,
+    "partyTrios": 0,
+    "brainSha": {
+      "242942a034cc": 8
+    },
+    "carryPresent": {
+      "true": 8
+    }
+  },
+  "ctlLaunches": [
+    {
+      "seed": 104011,
+      "day": 140,
+      "vid": "app_mgpsplq2575",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "vasyl_shevchenko",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104011,
+      "day": 143,
+      "vid": "app_mgpsplq2575",
+      "partySize": 2,
+      "c2": null,
+      "candC2": null,
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104013,
+      "day": 94,
+      "vid": "sofia_chen",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "fatima_hassan",
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104013,
+      "day": 98,
+      "vid": "sofia_chen",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "fatima_hassan",
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104013,
+      "day": 103,
+      "vid": "sofia_chen",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "fatima_hassan",
+      "joined": true,
+      "commitPart": 2,
+      "commitKind": "mid-day part-2"
+    },
+    {
+      "seed": 104014,
+      "day": 45,
+      "vid": "gen_r8i9dc2",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "gen_ci9ae9n",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104014,
+      "day": 49,
+      "vid": "gen_r8i9dc2",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "gen_ci9ae9n",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104014,
+      "day": 54,
+      "vid": "gen_r8i9dc2",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "gen_ci9ae9n",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104014,
+      "day": 58,
+      "vid": "gen_r8i9dc2",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "gen_ci9ae9n",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104014,
+      "day": 62,
+      "vid": "gen_r8i9dc2",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "meera_reddy",
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104014,
+      "day": 64,
+      "vid": "gen_r8i9dc2",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "gen_ci9ae9n",
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104016,
+      "day": 81,
+      "vid": "app_mgpsphqo382",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "oliver_moore",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104016,
+      "day": 84,
+      "vid": "app_mgpsphoh887",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "oliver_moore",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104016,
+      "day": 131,
+      "vid": "visjoin_98",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "oliver_moore",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104017,
+      "day": 88,
+      "vid": "tom_baker",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "gen_3tw7t6k",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104017,
+      "day": 93,
+      "vid": "tom_baker",
+      "partySize": 1,
+      "c2": null,
+      "candC2": "gen_3tw7t6k",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104017,
+      "day": 126,
+      "vid": "lucas_brown",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "gen_3tw7t6k",
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104017,
+      "day": 130,
+      "vid": "lucas_brown",
+      "partySize": 2,
+      "c2": null,
+      "candC2": "gen_3tw7t6k",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    }
+  ],
+  "armLaunches": [
+    {
+      "seed": 104011,
+      "day": 140,
+      "vid": "app_mgpsplq2575",
+      "partySize": 3,
+      "c2": "vasyl_shevchenko",
+      "candC2": "vasyl_shevchenko",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104011,
+      "day": 143,
+      "vid": "app_mgpsplq2575",
+      "partySize": 3,
+      "c2": "vasyl_shevchenko",
+      "candC2": "vasyl_shevchenko",
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104011,
+      "day": 149,
+      "vid": "app_mgpsplq2575",
+      "partySize": 3,
+      "c2": "gen_f6ih0n3",
+      "candC2": "gen_f6ih0n3",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104013,
+      "day": 94,
+      "vid": "sofia_chen",
+      "partySize": 3,
+      "c2": "fatima_hassan",
+      "candC2": "fatima_hassan",
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104013,
+      "day": 99,
+      "vid": "sofia_chen",
+      "partySize": 1,
+      "c2": null,
+      "candC2": null,
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104013,
+      "day": 102,
+      "vid": "sofia_chen",
+      "partySize": 1,
+      "c2": null,
+      "candC2": null,
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104014,
+      "day": 45,
+      "vid": "gen_r8i9dc2",
+      "partySize": 3,
+      "c2": "gen_ci9ae9n",
+      "candC2": "gen_ci9ae9n",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104014,
+      "day": 49,
+      "vid": "gen_r8i9dc2",
+      "partySize": 3,
+      "c2": "gen_ci9ae9n",
+      "candC2": "gen_ci9ae9n",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104014,
+      "day": 54,
+      "vid": "gen_r8i9dc2",
+      "partySize": 3,
+      "c2": "hannah_kim",
+      "candC2": "hannah_kim",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104014,
+      "day": 58,
+      "vid": "gen_r8i9dc2",
+      "partySize": 3,
+      "c2": "gen_ci9ae9n",
+      "candC2": "gen_ci9ae9n",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104014,
+      "day": 140,
+      "vid": "lena_ruiz",
+      "partySize": 3,
+      "c2": "gen_mshl1xw",
+      "candC2": "gen_mshl1xw",
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104014,
+      "day": 144,
+      "vid": "lena_ruiz",
+      "partySize": 3,
+      "c2": "meera_reddy",
+      "candC2": "meera_reddy",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104016,
+      "day": 81,
+      "vid": "app_mgpsphqo382",
+      "partySize": 3,
+      "c2": "oliver_moore",
+      "candC2": "oliver_moore",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104016,
+      "day": 83,
+      "vid": "app_mgpsphqo382",
+      "partySize": 3,
+      "c2": "oliver_moore",
+      "candC2": "oliver_moore",
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104016,
+      "day": 109,
+      "vid": "visjoin_85",
+      "partySize": 3,
+      "c2": "visjoin_99",
+      "candC2": "visjoin_99",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104016,
+      "day": 113,
+      "vid": "visjoin_85",
+      "partySize": 3,
+      "c2": "david_kim",
+      "candC2": "david_kim",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104016,
+      "day": 118,
+      "vid": "visjoin_85",
+      "partySize": 3,
+      "c2": "david_kim",
+      "candC2": "david_kim",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104017,
+      "day": 88,
+      "vid": "tom_baker",
+      "partySize": 3,
+      "c2": "gen_3tw7t6k",
+      "candC2": "gen_3tw7t6k",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104017,
+      "day": 95,
+      "vid": "tom_baker",
+      "partySize": 3,
+      "c2": "gen_3tw7t6k",
+      "candC2": "gen_3tw7t6k",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104017,
+      "day": 97,
+      "vid": "tom_baker",
+      "partySize": 3,
+      "c2": "dmitri_sokolov",
+      "candC2": "dmitri_sokolov",
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    },
+    {
+      "seed": 104017,
+      "day": 104,
+      "vid": "tom_baker",
+      "partySize": 3,
+      "c2": "gen_3tw7t6k",
+      "candC2": "gen_3tw7t6k",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104017,
+      "day": 122,
+      "vid": "tom_baker",
+      "partySize": 3,
+      "c2": "gen_3tw7t6k",
+      "candC2": "gen_3tw7t6k",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104017,
+      "day": 127,
+      "vid": "app_mgpsphje328",
+      "partySize": 3,
+      "c2": "lucas_brown",
+      "candC2": "lucas_brown",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104017,
+      "day": 134,
+      "vid": "app_mgpsphje328",
+      "partySize": 3,
+      "c2": "lucas_brown",
+      "candC2": "lucas_brown",
+      "joined": true,
+      "commitPart": 0,
+      "commitKind": "dawn"
+    },
+    {
+      "seed": 104017,
+      "day": 139,
+      "vid": "app_mgpsphje328",
+      "partySize": 2,
+      "c2": null,
+      "candC2": null,
+      "joined": true,
+      "commitPart": 1,
+      "commitKind": "mid-day part-1"
+    }
+  ]
+}
