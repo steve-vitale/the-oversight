@@ -1,0 +1,19 @@
+journey-endgame r243 — gate solo re-runs (adoption, 2026-11-18 ~22:40Z)
+Worktree journey2-endgame, tip 6a97f3a07 (no src changes this run).
+Full gate: 334 passed, 10 failed in 1517s. Each failure below re-run
+solo via `node scripts/check.js --only <name>`:
+
+- test-measurement-cache-flags: 1 passed, 0 failed in 25s (gate: 0/4, 85.2s) — LOAD ARTIFACT, green solo.
+- test-trust-observer-neutrality: 1 passed, 0 failed in 44s (gate: 120s timeout) — LOAD ARTIFACT, green solo.
+- test-capable-bot-20261014: 1 passed, 0 failed in 36s (gate: 120s timeout) — LOAD ARTIFACT, green solo.
+- test-occupation-panels: 1 passed, 0 failed in 55s (gate: 120s timeout) — LOAD ARTIFACT, green solo.
+
+Not re-run by me (same-day solo evidence exists): the two deed-attainment
+120s timeouts — the partysize4-b adoption verified living-garden 58s and
+one-person-army 38s solo on 2026-11-18 (load artifacts under the 4-parallel
+gate run). Standing set otherwise: measurement-proof staleness pair,
+measurement-workflow retained-neutrality proof, phone-frame stale receipt,
+ladder-bundle control (pre-existing — base-pinned on the lever-free base
+by Loop A 1715Z and the partysize4-b adoption).
+
+Gate verdict: 334/10, 0 attributable. GO on adjudication.
