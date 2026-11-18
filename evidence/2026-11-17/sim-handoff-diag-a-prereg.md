@@ -327,3 +327,228 @@ this prereg, `scripts/handoff-driver-20261117.js`,
 `evidence/2026-11-17/perseed-handoff-a-on/` (8 files). D-check
 scratch legs are compared and deleted, not committed. Do NOT push,
 do NOT bump, do NOT merge — the coordinator lands the work.
+
+---
+
+# Correction 1 — corpus-first, fresh run abandoned (2026-11-18, before any classification)
+
+The frozen prereg above is WRONG on the corpus gap, and the fresh-run
+path it mandates cannot answer the task. This correction supersedes
+the "Corpus gap", "Instrument", "Instance set", "Classification
+rule", "D-checks", and "Disposition" sections above. The frozen
+original is left in place so the change of mind is auditable; nothing
+above this line is edited.
+
+## What was misread
+
+The task defines handoff-available as: **max range > 0, alive, at
+Haven, not already holding/committed to another plan** (note veteran
+status where relevant). It asks to verify the corpus carries
+**per-villager max range, location, and plan-hold/commit state**.
+Sick/health is NOT among the task's criteria and NOT in its
+verification list. The frozen prereg added sick/health as a
+requirement on its own authority — and on that added requirement
+alone concluded the corpus "cannot answer the question as asked".
+That conclusion is withdrawn: on the task's own criteria, the corpus
+carries everything needed (verified below, not assumed).
+
+## Why the fresh run cannot work (pilot evidence, not speculation)
+
+The pilot ran the frozen band with the extended recorder on this tip
+(seed 103414, 150d, `VETREENGAGE=1 PROFILEGATE=1`, lever re-applied
+exactly as profilegate-b): **0 handoff snapshots, 0 range-0 departs**
+(vs 57 frozen range-0 selections on that seed). The frozen instances
+do not occur on this tip. Cause, pinned by fingerprint comparison:
+
+- ON leg: trajectories identical to the frozen ON corpus through day
+  55 (v4seeds rows 1–12 identical, departs/scores identical,
+  including a homebody picked as companion on day 54 — the lever
+  demonstrably works identically). First divergence day 56: two
+  agency-expedition kills present in the frozen corpus (sam_wilson
+  kills mirror_stag day 55, gen_qj0v0ty kills sweeps_week day 56)
+  are absent on this tip; the next companion pick already differs
+  (day 59: jesse_cortez frozen vs giulia_bianchi new). The village
+  then dies day 103 (frozen: survived 150d, standing 199).
+- OFF leg (no lever at all on either side): first divergence day 38
+  (a murkcap kill present new, a union_rep kill present frozen),
+  v4seeds 35 vs 16 frozen, scores 61 vs 104. The OFF leg has no
+  lever to mis-apply and no recorder hook that can perturb it (the
+  snapshot never fired: 0 snapshots on both pilot legs), so the
+  divergence is **base drift in the fight/expedition engine** between
+  profilegate-b's frozen base (`eb2d3714f`) and this tip — the same
+  drift profilegate-b's own rebase note already showed for seed
+  103413. The lever re-application and the recorder are exonerated
+  by the OFF leg.
+
+Consequence: a fresh band on this tip measures DIFFERENT villages
+with (on the pilot seed) ZERO range-0-holder blocks. It cannot
+classify the frozen 79, which is the task's instance set. The fresh
+run is abandoned; the lever re-application is reverted (src diff
+zero, verified); the pilot/offcheck scratch corpora are deleted; the
+handoff driver (built for the abandoned run, never committed) is
+deleted. The pilot's drift finding stands as a result in its own
+right and is reported in the evidence.
+
+## Corpus verification (corrected — measured by probe, not assumed)
+
+Probe: `node /tmp/coverage-probe.js` (throwaway; reuses the frozen
+`classifySeed`, any-commit). Results:
+
+- **Enumeration reproduces selblock-a exactly:** 79 inviter-range-0
+  selections; per-instance 1 + 8 + 28 + 24 + 5 + 10 + 3 (naran_tumen,
+  omar_farouk, giulia_bianchi, visjoin_73, visjoin_85, yuki_mori,
+  visjoin_59). The instance set is the frozen 79.
+- **Range:** YES — `companionPool` member rows carry `profile`
+  (explorer 6 / wanderer 3 / forager 1 / homebody 0 via
+  `npcMaxDist`).
+- **Location:** YES, with a staleness caveat — member rows carry
+  `node`, `away`, `engaged`, `onExped`, `alive`, plus the row's
+  `haven` tile. Pool-row coverage per selection: same-day 50/79,
+  nearest-before 1d: 11, 2d: 5, 3d: 4, 4d: 2, 5d: 2, no pool row on
+  or before the day: 5 (giulia d65/d68, yuki d71/d72, visjoin_59
+  d77). Pool rows are a superset of the daily roster (8/99 rows
+  carry one extra member vs the daily roster — a villager the pool
+  saw at dawn who left the roster by end of day; never the reverse
+  in the sampled rows).
+- **Plan-hold/commit:** YES for the observable forms — a candidate
+  holding a wave-4 plan on day D has a `dawnbidCensus` row that day
+  (census is recorded end-of-day for every live wave-4 plan); a
+  candidate committing to their own plan that day has a
+  `dawnbidScores` row with a `party_launch` commit. Across the 79
+  selections, 181 walker-members are seen: 39 with a census-hold
+  that day, 38 with their own party_launch that day. The residual
+  ambiguity is a wave-3-only plan held silently: 46 walker-members
+  have a v4seed ≤ D with no census/score that day; of those, 20 are
+  wave-4-seeded (resolvable as NOT holding — a live wave-4 plan
+  would carry a census row) and 26 are wave-3-only seeded, of which
+  16 have a later score row (still bidding, likely still holding).
+  The genuinely ambiguous remainder (wave-3-seeded, no later bid)
+  is 10 walker-members; the analyzer flags each and reports how
+  many verdicts hinge on one (sensitivity count, see rule below).
+- **Veteran status:** YES — `daily` rows carry `vetsW3`/`vetsW4`
+  killers and `waveKillLog` (by/d/mid/w) per day.
+- **Sickness:** NOT carried for unpicked members (stated as a
+  caveat, not a blocker — the task's criteria omit it). The share
+  this arm reports is therefore an UPPER BOUND with respect to
+  sickness: a walker counted available might in truth be sick. The
+  bound is tight: in selblock-a, sickness blocked only 4/113
+  selections (inviter-sick 2, companion-sick 2), and the evidence
+  reports the bound as such.
+
+## Corrected classification rule (frozen — replaces the rule above)
+
+For each of the 79 selections (seed, holder vid, target, day D,
+picked companion), determine the village state from the frozen ON
+corpus as follows. Two evidence levels (location is fast-moving,
+profile/aliveness slow-moving):
+
+- **Pool row:** the nearest `companionPool` row for the holder on or
+  BEFORE D (same-day preferred). The row's age in days is recorded
+  per selection. A row AFTER D is used ONLY for profile (never for
+  location) and only when no before-row exists.
+- **At-Haven:** from a SAME-DAY pool row (`node == haven` and not
+  `away`), OR — for the picked companion only — from the bid itself:
+  both `findCompanion` twins require node == haven (alive, not away,
+  trust ≥ 15, not engaged, not on expedition) at scoring time, and
+  the score row proves the pick happened that day. The picked
+  companion's at-Haven is therefore proven at bid time (not at the
+  depart tick — the residual window is stated per selection).
+- **Alive:** the pool row's `alive` flag, corroborated by the daily
+  roster for day D.
+- **Holding/committed:** a candidate is HOLDING iff a `dawnbidCensus`
+  row names them on day D (live wave-4 plan) OR a `dawnbidScores`
+  row names them as holder with a `party_launch` commit on day D
+  (committing to their own plan that day, any wave). A candidate
+  with only a wave-3 v4seed ≤ D and no census/score that day is
+  flagged POSSIBLY-HOLDING (wave-3 plan, seeded day X, no bid
+  since); it does NOT block availability in the primary rule, but
+  every verdict resting on such a walker is flagged in the table
+  and the sensitivity count (verdicts that would flip if
+  possibly-holding blocked) is reported.
+- **Veteran status:** `vetW4 > 0` (living wave-4 veteran) /
+  `vetW3 > 0` from the day-D daily row's `vetsW4`/`vetsW3` killers
+  (fallback: cumulative `waveKillLog` to day D). Recorded for each
+  available walker.
+- **Named walker:** the first available walker in the pool row's
+  `rankedOrder` (companionRank order over eligibles) if any available
+  walker is ranked there, else the first available walker in roster
+  order. ALL available walkers are listed in the row so the tally
+  never depends on pick order. Trust is recorded for the named
+  walker but is NOT an availability criterion (the task omits it;
+  handing a plan is not a companion pick).
+
+A candidate is **handoff-available** iff ALL hold: walker
+(`maxDist > 0`, i.e. profile forager/wanderer/explorer), alive, at
+Haven (same-day pool row or picked-companion bid proof), not
+`away`, not `engaged`, not `onExped`, not HOLDING (observable
+rule above). Trust does not gate. Sickness is not observable and
+does not gate (upper-bound caveat above).
+
+Buckets (frozen — one per selection, no double counting):
+
+| Bucket | Meaning |
+| --- | --- |
+| `handoff-available` | ≥1 handoff-available walker. Sub-split: named walker IS the picked companion vs another walker; veteran-walker vs non-veteran. |
+| `no-walker-in-village` | Zero living roster members with maxDist > 0 exist in the village at the tick (no walker at all — not even an unavailable one). Judged from the pool row's member list (profile + alive). |
+| `walker-exists-but-unavailable` | ≥1 walker exists; none is available. The row states WHY per walker (first failing check each: away / not-at-Haven / engaged / onExped / holding-a-plan), and the tally groups the dominant reason. |
+| `unknown` | No pool row on or before the day AND the picked companion is not a provably-available walker (so neither the village census nor the bid proof can settle it), or the backing row is unreadable. A selection with a pool row showing zero available walkers is NOT unknown — it is one of the two walker buckets above. |
+
+Expected unknowns from the probe: the 5 no-before-row selections
+resolve via the picked-companion proof in 3 cases (giulia d65:
+companion app_mgpspjp5330, forager; yuki d71: thabo_maseko, forager;
+yuki d72: gen_9vcqa7j, forager — profiles to be verified against the
+nearest pool row / samples, hold status against census/scores) and
+stay unknown in 2 (giulia d68: companion luis_fernandez, homebody;
+visjoin_59 d77: companion naran_tumen, homebody — neither is a
+walker and no pool row exists to see the rest of the village). The
+analyzer verifies each of these by hand-checkable citation; the
+verdict stands or falls on what it finds, not on this expectation.
+
+## Corrected primary metric (frozen)
+
+**Share of the 79 range-0-holder blocked selections with a
+handoff-available walker** (handoff-available count ÷ 79), reported
+as an upper bound with respect to sickness (see caveat above). The
+metric is the ANSWER for the design call, not a pass/fail on the
+game: a high share says hand-off is viable (walkers are standing at
+Haven while homebody holders bid); a low share says stop-bidding is
+the honest fix. The GO bar judges the CLASSIFICATION, mirroring
+selblock-a.
+
+## Corrected GO bars (frozen — a miss is NO-GO, never re-scored)
+
+**DIAG GO** iff ALL of:
+1. **Classification complete:** all 79 selections classified into
+   a named bucket, **unknown ≤ 2**.
+2. **Instrument checks green:** (a) enumeration replication —
+   the analyzer reproduces selblock-a's 79 + per-instance counts
+   exactly from the frozen corpus (already verified by probe);
+   (b) join audit — every selection cites its backing pool row
+   (seed/day/vid) or the picked-companion bid proof, with the row
+   age recorded; (c) corpus integrity — the frozen
+   `analyze-profilegate-b.js` over the frozen ON corpus reproduces
+   `profilegate-b-analysis.json` on funnel + pool-shape + wall
+   fields (the selblock-a OFF/ON replication, re-run).
+3. **Proof test green:** `scripts/test-handoff-diag-a.js` passes all
+   checks (synthetic instances per bucket + the corpus checks in
+   (2)).
+
+A miss on any bar is DIAG NO-GO. D1/D2 (recorder repeatability and
+wrap neutrality) are DROPPED — there is no fresh run and no new
+recorder; the handoff driver is deleted, not committed. The D3
+reproduction check is replaced by the drift finding above (the
+frozen instances do not reproduce on this tip; the classification
+proceeds on the frozen corpus, which is the task's instance set).
+
+## Corrected disposition
+
+DIAG arm: nothing to revert (no src/ change at any point — the
+in-tree-only lever re-application is already reverted, net `src/`
+diff vs base: zero, verified). Commits are instrument + evidence
+only: this prereg (+ Correction 1),
+`scripts/analyze-handoff-a.js`, `scripts/test-handoff-diag-a.js`,
+`evidence/2026-11-17/sim-handoff-diag-a.md`. The new ON corpus is
+NOT produced (no fresh run) and the handoff driver is NOT
+committed. Do NOT push, do NOT bump, do NOT merge — the coordinator
+lands the work.
+
