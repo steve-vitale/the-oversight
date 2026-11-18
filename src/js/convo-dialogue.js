@@ -426,7 +426,20 @@
           // no-repeat choke point — a null return means the beat was already
           // spoken. Don't show the player a repeat the ledger blocked; fall
           // through to the dead-react wind-down like a dry thread.
-          const said = this.sayLine(vid, composed);
+          // DRY3 (journey-social r235 2026-11-17): the thread-beat pools
+          // are shared across villagers, so a beat another villager spoke
+          // recently is RUN-blocked — and sayLine returns the dry line
+          // truthy on a run-block, so the `if (said)` test below reported
+          // the beat as spoken while the transcript held the dry line
+          // (r234: 1 serving, greeting reply). Pre-check the composed
+          // line — what the ledger holds — and fall to the wind-down when
+          // blocked, like a dry thread. A within-sitting repeat takes the
+          // same honest path (the thread is dry for this sitting).
+          let said = null;
+          try {
+            const blocked = typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, composed);
+            if (!blocked) said = this.sayLine(vid, composed);
+          } catch (e) { said = null; }
           if (said) {
             c.threadDryFor = null;
             return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
@@ -899,6 +912,33 @@
           '"I don\'t have the words for all of it. But thank you for asking."',
         ]) || '"It\'s... complicated. But thank you for asking."';
         const composed = this.convoComposeDlg(vid, raw, choiceId);
+        // DRY3 (journey-social r235 2026-11-17): the composed line is what
+        // the run ledger holds (convoComposeDlg returns the beat unchanged
+        // for dlg: choices — convoPlayerSaid reports the choiceId, so no
+        // ack is prepended — and sayLine's ledger key is the whole line
+        // under 260 chars). A run-blocked composed line dry-replaces in
+        // sayLine, and sayLine returns the dry line truthy, so the `!said`
+        // check below never fires. The r146/r151 guards check the BARE
+        // whyLine/need-lines and cannot see this collision: the wild dry
+        // is the dry-pool line itself (raw null → pool variant already
+        // spoken by another villager). Check the run ledger on the
+        // COMPOSED line; on a run-block, serve the details dry-pool
+        // deflection ledger-exempt (generic grammar, DRY2 stonewall
+        // precedent) with the same tail. A within-sitting self-block
+        // still flows to sayLine → null → the self-repeat path below
+        // (r16: that accusation is only true for within-sitting repeats)
+        // — hence the run-block-only predicate, never convoWouldBlock.
+        if (typeof this.convoWouldRunBlock === 'function' && this.convoWouldRunBlock(vid, composed)) {
+          const fb = this.convoPickCycle(vid, 'dlg:details:dry', [
+            '"It\'s... complicated. But thank you for asking."',
+            '"I don\'t have the words for all of it. But thank you for asking."',
+          ]) || '"It\'s... complicated. But thank you for asking."';
+          this.sayLine(vid, fb, { structural: true });
+          try { this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'dlg:details' }); } catch (e) {}
+          if (c.want?.id === 'ask_favor') c.want.favorExplained = true;
+          this.convoWantEngage(vid, 'engage');
+          return { line: fb, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
+        }
         const said = this.sayLine(vid, composed);
         // HONEST REPEAT: respect sayLine's no-repeat signal. The old code
         // displayed the blocked line anyway — the transcript showed a repeat

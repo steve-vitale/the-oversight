@@ -1275,6 +1275,31 @@
       } catch (e) {}
       return false;
     },
+    // convoWouldRunBlock (journey-social r235 2026-11-17): RUN-ledger-only
+    // predicate — would sayLine refuse this line because ANOTHER villager
+    // spoke it recently (or this villager in an earlier sitting)? True only
+    // when the line's first-chunk key is in the run ledger AND NOT in this
+    // sitting's ledger: a within-sitting repeat is a self-block, whose
+    // honest fallback is the caller's "I just said" path (r16), not a
+    // run-block deflection. Mirrors sayLine's block decision (first-chunk
+    // key, per-sitting ledger + run ledger) without emitting or ledgering.
+    // Callers that divert on a run-block must use this, never
+    // convoWouldBlock (which is also true for self-blocks).
+    convoWouldRunBlock(vid, line) {
+      if (line == null) return false;
+      const c = this.convoGet(vid);
+      if (!c) return false;
+      let key = String(line);
+      try { key = this.convoSplitBeats(line)[0].trim(); } catch (e) {}
+      if (!key) return false;
+      const said = c.saidLinesConvo || [];
+      if (said.indexOf(key) !== -1) return false;
+      try {
+        const rl = (typeof this.convoRunLedger === 'function') ? this.convoRunLedger() : [];
+        if (rl && rl.indexOf(key) !== -1) return true;
+      } catch (e) {}
+      return false;
+    },
 
     // convoHasLiveUnfinished (dialog audit #4 2026-11-08): true when a real
     // unfinished beat still exists — open topic-ledger threads, a resume

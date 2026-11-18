@@ -1289,7 +1289,23 @@
           // r86 justification, verbatim). Monster/plant lines cannot
           // collide (codex-deduped), so only the place branch is exempt.
           var placeAct = !!taughtPlace;
-          try { if (this.sayLine(vid, lineText, placeAct ? { diegeticAct: true } : undefined)) spokenText = lineText; } catch (e) { spokenText = null; }
+          // DRY3 (journey-social r235 2026-11-17): the lesson line reaches
+          // sayLine with no pre-check — a run-blocked lesson dry-replaces,
+          // and sayLine returns the dry line truthy, so the handler reports
+          // the lesson as spoken while the transcript holds the dry line
+          // (r234: 2 servings, both expedition asks). The collision is
+          // real: the fallback line is ONE fixed string for every villager
+          // with k.monsters>=2 and nothing teachable (the "codex-deduped"
+          // comment above does not cover it). Pre-check the exact line
+          // sayLine would ledger; when blocked, skip sayLine and fall to
+          // the r193 closer pool (already pre-checked) or the honest noop
+          // below. The place branch keeps its diegeticAct exemption (deed
+          // fired, place spent) and skips the check.
+          var lessonBlocked = false;
+          try { lessonBlocked = !placeAct && typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, lineText); } catch (e) { lessonBlocked = false; }
+          if (!lessonBlocked) {
+            try { if (this.sayLine(vid, lineText, placeAct ? { diegeticAct: true } : undefined)) spokenText = lineText; } catch (e) { spokenText = null; }
+          }
         }
         var closedOut = false;
         if (!spokenText) {
