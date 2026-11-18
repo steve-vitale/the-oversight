@@ -1,0 +1,842 @@
+{
+  "dir": "perseed-profilegate-b-on",
+  "files": 8,
+  "seeds": 8,
+  "instrumentErrors": 0,
+  "noTickSelections": 12,
+  "fateTally": {
+    "depart-next-day": 4,
+    "depart-later": 1,
+    "re-bid-next-day": 2,
+    "re-bid-later": 3,
+    "plan-deleted-after": 0,
+    "holder-died-after": 2,
+    "village-ended": 0,
+    "stall": 0,
+    "unknown": 0
+  },
+  "unknown": 0,
+  "traces": [
+    {
+      "seed": 103411,
+      "vid": "yara_haddad",
+      "target": "suburb",
+      "holderProfile": null,
+      "noTickDay": 44,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "gen_fwzkbi1",
+      "fate": "depart-later",
+      "fateDay": 46,
+      "fateNote": "launch brain day 46 (full party) commitKind=dawn commitPart=0",
+      "rebidDay": 46,
+      "rebidPart": 0,
+      "rebidCompanion": "quinn_murphy",
+      "rebidResolution": "launched:undefined",
+      "launchDay": 46,
+      "launchSource": "brain",
+      "companionStarted": true,
+      "companionBlock": null,
+      "firstScoreAfterDay": 46,
+      "firstSkipAfter": {
+        "day": 46,
+        "reason": "away-on-expedition"
+      },
+      "closeDay": null,
+      "closeKind": null,
+      "holderDeathDay": null,
+      "holderDeathCause": null,
+      "villageEndDay": 62,
+      "villageEndReason": "village-lost",
+      "eventualInstance": "launched-fought-no-kill:vFlee:1",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103413,
+      "vid": "devon_okafor",
+      "target": "eulogy",
+      "holderProfile": null,
+      "noTickDay": 77,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "petra_novak",
+      "fate": "depart-next-day",
+      "fateDay": 78,
+      "fateNote": "launch brain day 78 (full party) commitKind=mid-day part-1 commitPart=1",
+      "rebidDay": 78,
+      "rebidPart": 1,
+      "rebidCompanion": "ines_duarte",
+      "rebidResolution": "launched:undefined",
+      "launchDay": 78,
+      "launchSource": "brain",
+      "companionStarted": true,
+      "companionBlock": null,
+      "firstScoreAfterDay": 78,
+      "firstSkipAfter": {
+        "day": 78,
+        "reason": "away-on-expedition"
+      },
+      "closeDay": 151,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": null,
+      "holderDeathCause": null,
+      "villageEndDay": 151,
+      "villageEndReason": "survived",
+      "eventualInstance": "launched-fought-no-kill:mFlee:1",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103413,
+      "vid": "gen_4hoo6rr",
+      "target": "reunion",
+      "holderProfile": null,
+      "noTickDay": 144,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "david_kim",
+      "fate": "holder-died-after",
+      "fateDay": 147,
+      "fateNote": "holder died day 147 cause=the wild",
+      "rebidDay": null,
+      "rebidPart": null,
+      "rebidCompanion": null,
+      "rebidResolution": null,
+      "launchDay": null,
+      "launchSource": null,
+      "companionStarted": null,
+      "companionBlock": null,
+      "firstScoreAfterDay": null,
+      "firstSkipAfter": null,
+      "closeDay": 148,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": 147,
+      "holderDeathCause": "the wild",
+      "villageEndDay": 151,
+      "villageEndReason": "survived",
+      "eventualInstance": "launched-no-meeting:window:134-148",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103414,
+      "vid": "visjoin_134",
+      "target": "eater",
+      "holderProfile": null,
+      "noTickDay": 137,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "visjoin_131",
+      "fate": "depart-next-day",
+      "fateDay": 138,
+      "fateNote": "launch brain day 138 (HOLDER-ONLY, companion range-0) commitKind=mid-day part-1 commitPart=1",
+      "rebidDay": 138,
+      "rebidPart": 1,
+      "rebidCompanion": "nathan_lee",
+      "rebidResolution": "blocked:companion-not-started:range-0",
+      "launchDay": 138,
+      "launchSource": "brain",
+      "companionStarted": false,
+      "companionBlock": "range-0",
+      "firstScoreAfterDay": 138,
+      "firstSkipAfter": {
+        "day": 138,
+        "reason": "away-on-expedition"
+      },
+      "closeDay": 139,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": 139,
+      "holderDeathCause": "monster",
+      "villageEndDay": 151,
+      "villageEndReason": "survived",
+      "eventualInstance": "selected-blocked:no-tick-after-commit",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103416,
+      "vid": "sofia_chen",
+      "target": "eulogy",
+      "holderProfile": null,
+      "noTickDay": 41,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "gen_bwi0gf8",
+      "fate": "re-bid-next-day",
+      "fateDay": 42,
+      "fateNote": "re-bid day 42 part 3 companion=gen_bwi0gf8",
+      "rebidDay": 42,
+      "rebidPart": 3,
+      "rebidCompanion": "gen_bwi0gf8",
+      "rebidResolution": "blocked:no-tick-after-commit",
+      "launchDay": 45,
+      "launchSource": "brain",
+      "companionStarted": true,
+      "companionBlock": null,
+      "firstScoreAfterDay": 42,
+      "firstSkipAfter": {
+        "day": 44,
+        "reason": "not-at-haven"
+      },
+      "closeDay": 48,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": 47,
+      "holderDeathCause": "Gavel",
+      "villageEndDay": 118,
+      "villageEndReason": "village-lost",
+      "eventualInstance": "launched-no-meeting:window:45-48",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103416,
+      "vid": "sofia_chen",
+      "target": "eulogy",
+      "holderProfile": null,
+      "noTickDay": 42,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "gen_bwi0gf8",
+      "fate": "re-bid-later",
+      "fateDay": 44,
+      "fateNote": "re-bid day 44 part 0 companion=gen_dl9blws",
+      "rebidDay": 44,
+      "rebidPart": 0,
+      "rebidCompanion": "gen_dl9blws",
+      "rebidResolution": "blocked:not-at-haven",
+      "launchDay": 45,
+      "launchSource": "brain",
+      "companionStarted": true,
+      "companionBlock": null,
+      "firstScoreAfterDay": 44,
+      "firstSkipAfter": {
+        "day": 44,
+        "reason": "not-at-haven"
+      },
+      "closeDay": 48,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": 47,
+      "holderDeathCause": "Gavel",
+      "villageEndDay": 118,
+      "villageEndReason": "village-lost",
+      "eventualInstance": "launched-no-meeting:window:45-48",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103416,
+      "vid": "david_kim",
+      "target": "congregation",
+      "holderProfile": null,
+      "noTickDay": 85,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "ethan_hunt",
+      "fate": "holder-died-after",
+      "fateDay": 86,
+      "fateNote": "holder died day 86 cause=monster",
+      "rebidDay": null,
+      "rebidPart": null,
+      "rebidCompanion": null,
+      "rebidResolution": null,
+      "launchDay": null,
+      "launchSource": null,
+      "companionStarted": null,
+      "companionBlock": null,
+      "firstScoreAfterDay": null,
+      "firstSkipAfter": null,
+      "closeDay": 86,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": 86,
+      "holderDeathCause": "monster",
+      "villageEndDay": 118,
+      "villageEndReason": "village-lost",
+      "eventualInstance": "selected-blocked:no-tick-after-commit",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103417,
+      "vid": "tariq_mahmood",
+      "target": "strike",
+      "holderProfile": null,
+      "noTickDay": 94,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "elena_petrova",
+      "fate": "re-bid-next-day",
+      "fateDay": 95,
+      "fateNote": "re-bid day 95 part 2 companion=aria_thompson",
+      "rebidDay": 95,
+      "rebidPart": 2,
+      "rebidCompanion": "aria_thompson",
+      "rebidResolution": "blocked:not-at-haven",
+      "launchDay": 96,
+      "launchSource": "brain",
+      "companionStarted": true,
+      "companionBlock": null,
+      "firstScoreAfterDay": 95,
+      "firstSkipAfter": {
+        "day": 95,
+        "reason": "not-at-haven"
+      },
+      "closeDay": 146,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": 145,
+      "holderDeathCause": "the night",
+      "villageEndDay": 151,
+      "villageEndReason": "survived",
+      "eventualInstance": "launched-no-meeting:window:96-146",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103417,
+      "vid": "tariq_mahmood",
+      "target": "strike",
+      "holderProfile": null,
+      "noTickDay": 117,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "elena_petrova",
+      "fate": "re-bid-later",
+      "fateDay": 122,
+      "fateNote": "re-bid day 122 part 3 companion=elena_petrova",
+      "rebidDay": 122,
+      "rebidPart": 3,
+      "rebidCompanion": "elena_petrova",
+      "rebidResolution": "blocked:no-tick-after-commit",
+      "launchDay": 126,
+      "launchSource": "brain",
+      "companionStarted": true,
+      "companionBlock": null,
+      "firstScoreAfterDay": 122,
+      "firstSkipAfter": {
+        "day": 124,
+        "reason": "danger-gate"
+      },
+      "closeDay": 146,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": 145,
+      "holderDeathCause": "the night",
+      "villageEndDay": 151,
+      "villageEndReason": "survived",
+      "eventualInstance": "launched-no-meeting:window:96-146",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103417,
+      "vid": "tariq_mahmood",
+      "target": "strike",
+      "holderProfile": null,
+      "noTickDay": 122,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "elena_petrova",
+      "fate": "re-bid-later",
+      "fateDay": 124,
+      "fateNote": "re-bid day 124 part 0 companion=visjoin_113",
+      "rebidDay": 124,
+      "rebidPart": 0,
+      "rebidCompanion": "visjoin_113",
+      "rebidResolution": "blocked:danger-gate",
+      "launchDay": 126,
+      "launchSource": "brain",
+      "companionStarted": true,
+      "companionBlock": null,
+      "firstScoreAfterDay": 124,
+      "firstSkipAfter": {
+        "day": 124,
+        "reason": "danger-gate"
+      },
+      "closeDay": 146,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": 145,
+      "holderDeathCause": "the night",
+      "villageEndDay": 151,
+      "villageEndReason": "survived",
+      "eventualInstance": "launched-no-meeting:window:96-146",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103417,
+      "vid": "sofia_chen",
+      "target": "eater",
+      "holderProfile": null,
+      "noTickDay": 145,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "visjoin_113",
+      "fate": "depart-next-day",
+      "fateDay": 146,
+      "fateNote": "launch brain day 146 (HOLDER-ONLY, companion range-0) commitKind=mid-day part-2 commitPart=2",
+      "rebidDay": 146,
+      "rebidPart": 2,
+      "rebidCompanion": "visjoin_113",
+      "rebidResolution": "blocked:companion-not-started:range-0",
+      "launchDay": 146,
+      "launchSource": "brain",
+      "companionStarted": false,
+      "companionBlock": "range-0",
+      "firstScoreAfterDay": 146,
+      "firstSkipAfter": {
+        "day": 146,
+        "reason": "away-on-expedition"
+      },
+      "closeDay": 151,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": null,
+      "holderDeathCause": null,
+      "villageEndDay": 151,
+      "villageEndReason": "survived",
+      "eventualInstance": "selected-blocked:no-tick-after-commit",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103418,
+      "vid": "visjoin_58",
+      "target": "influencer",
+      "holderProfile": null,
+      "noTickDay": 77,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "visjoin_59",
+      "fate": "depart-next-day",
+      "fateDay": 78,
+      "fateNote": "launch brain day 78 (HOLDER-ONLY, companion range-0) commitKind=mid-day part-1 commitPart=1",
+      "rebidDay": 78,
+      "rebidPart": 1,
+      "rebidCompanion": "naran_tumen",
+      "rebidResolution": "blocked:companion-not-started:range-0",
+      "launchDay": 78,
+      "launchSource": "brain",
+      "companionStarted": false,
+      "companionBlock": "range-0",
+      "firstScoreAfterDay": 78,
+      "firstSkipAfter": {
+        "day": 78,
+        "reason": "away-on-expedition"
+      },
+      "closeDay": 80,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": 80,
+      "holderDeathCause": "monster",
+      "villageEndDay": 103,
+      "villageEndReason": "village-lost",
+      "eventualInstance": "selected-blocked:inviter-hurt",
+      "targetKilledDay": null
+    }
+  ],
+  "lateCommits": [
+    {
+      "seed": 103411,
+      "vid": "yara_haddad",
+      "target": "suburb",
+      "day": 44,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "gen_fwzkbi1",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103413,
+      "vid": "devon_okafor",
+      "target": "eulogy",
+      "day": 77,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "petra_novak",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103413,
+      "vid": "devon_okafor",
+      "target": "eulogy",
+      "day": 114,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "victor_lopez",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103413,
+      "vid": "devon_okafor",
+      "target": "eulogy",
+      "day": 120,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "quinn_murphy",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:engaged",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103413,
+      "vid": "devon_okafor",
+      "target": "eulogy",
+      "day": 133,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "ines_duarte",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103413,
+      "vid": "devon_okafor",
+      "target": "eulogy",
+      "day": 150,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "ines_duarte",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103413,
+      "vid": "gen_4hoo6rr",
+      "target": "reunion",
+      "day": 128,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "devon_okafor",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103413,
+      "vid": "gen_4hoo6rr",
+      "target": "reunion",
+      "day": 144,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "david_kim",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103413,
+      "vid": "app_mgpspkh6343",
+      "target": "influencer",
+      "day": 150,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "ines_duarte",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103414,
+      "vid": "giulia_bianchi",
+      "target": "eater",
+      "day": 85,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "jesse_cortez",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103414,
+      "vid": "giulia_bianchi",
+      "target": "eater",
+      "day": 96,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "meera_reddy",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103414,
+      "vid": "visjoin_73",
+      "target": "reunion",
+      "day": 105,
+      "parts": [
+        0,
+        3
+      ],
+      "lastPart": 3,
+      "companion": "jesse_cortez",
+      "commitKind": "part-3",
+      "resolution": "blocked:inviter-range-0",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103414,
+      "vid": "visjoin_73",
+      "target": "reunion",
+      "day": 124,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "jesse_cortez",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103414,
+      "vid": "visjoin_73",
+      "target": "reunion",
+      "day": 128,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "jesse_cortez",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:inviter-range-0",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103414,
+      "vid": "visjoin_73",
+      "target": "reunion",
+      "day": 129,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "jesse_cortez",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:inviter-range-0",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103414,
+      "vid": "visjoin_134",
+      "target": "eater",
+      "day": 137,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "visjoin_131",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103416,
+      "vid": "sofia_chen",
+      "target": "eulogy",
+      "day": 41,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "gen_bwi0gf8",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103416,
+      "vid": "sofia_chen",
+      "target": "eulogy",
+      "day": 42,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "gen_bwi0gf8",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103416,
+      "vid": "david_kim",
+      "target": "congregation",
+      "day": 85,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "ethan_hunt",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103417,
+      "vid": "tariq_mahmood",
+      "target": "strike",
+      "day": 94,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "elena_petrova",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103417,
+      "vid": "tariq_mahmood",
+      "target": "strike",
+      "day": 95,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "aria_thompson",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:not-at-haven",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103417,
+      "vid": "tariq_mahmood",
+      "target": "strike",
+      "day": 111,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "elena_petrova",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103417,
+      "vid": "tariq_mahmood",
+      "target": "strike",
+      "day": 117,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "elena_petrova",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103417,
+      "vid": "tariq_mahmood",
+      "target": "strike",
+      "day": 122,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "elena_petrova",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103417,
+      "vid": "tariq_mahmood",
+      "target": "strike",
+      "day": 130,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "aria_thompson",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103417,
+      "vid": "sofia_chen",
+      "target": "eater",
+      "day": 145,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "visjoin_113",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103417,
+      "vid": "sofia_chen",
+      "target": "eater",
+      "day": 146,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "visjoin_113",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:companion-not-started:range-0",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103418,
+      "vid": "visjoin_58",
+      "target": "influencer",
+      "day": 77,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "visjoin_59",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103418,
+      "vid": "yuki_mori",
+      "target": "reunion",
+      "day": 72,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "gen_9vcqa7j",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:inviter-range-0",
+      "resolvedPart": null
+    }
+  ],
+  "lateCommitCount": 29,
+  "lateCommitLaunched": 0,
+  "lateTally": {
+    "blocked:no-tick-after-commit": 12,
+    "blocked:night": 10,
+    "blocked:engaged": 1,
+    "blocked:inviter-range-0": 4,
+    "blocked:not-at-haven": 1,
+    "blocked:companion-not-started:range-0": 1
+  }
+}

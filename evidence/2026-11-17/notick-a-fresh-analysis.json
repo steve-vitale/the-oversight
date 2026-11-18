@@ -1,0 +1,320 @@
+{
+  "dir": "perseed-notick-a-on",
+  "files": 8,
+  "seeds": 8,
+  "instrumentErrors": 0,
+  "noTickSelections": 5,
+  "fateTally": {
+    "depart-next-day": 2,
+    "depart-later": 0,
+    "re-bid-next-day": 0,
+    "re-bid-later": 1,
+    "plan-deleted-after": 1,
+    "holder-died-after": 1,
+    "village-ended": 0,
+    "stall": 0,
+    "unknown": 0
+  },
+  "unknown": 0,
+  "traces": [
+    {
+      "seed": 103441,
+      "vid": "app_mgpspl5e343",
+      "target": "strike",
+      "holderProfile": null,
+      "noTickDay": 128,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "fatima_hassan",
+      "fate": "depart-next-day",
+      "fateDay": 129,
+      "fateNote": "launch brain day 129 (HOLDER-ONLY, companion range-0) commitKind=mid-day part-2 commitPart=2",
+      "rebidDay": 129,
+      "rebidPart": 2,
+      "rebidCompanion": "fatima_hassan",
+      "rebidResolution": "blocked:companion-not-started:range-0",
+      "launchDay": 129,
+      "launchSource": "brain",
+      "companionStarted": false,
+      "companionBlock": "range-0",
+      "firstScoreAfterDay": 129,
+      "firstSkipAfter": {
+        "day": 129,
+        "reason": "away-on-expedition"
+      },
+      "closeDay": 133,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": 132,
+      "holderDeathCause": "thirst",
+      "villageEndDay": 151,
+      "villageEndReason": "survived",
+      "eventualInstance": "selected-blocked:no-tick-after-commit",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103441,
+      "vid": "luis_fernandez",
+      "target": "editor",
+      "holderProfile": null,
+      "noTickDay": 149,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "chantal_mukendi",
+      "fate": "plan-deleted-after",
+      "fateDay": 151,
+      "fateNote": "close plan-deleted day 151",
+      "rebidDay": null,
+      "rebidPart": null,
+      "rebidCompanion": null,
+      "rebidResolution": null,
+      "launchDay": null,
+      "launchSource": null,
+      "companionStarted": null,
+      "companionBlock": null,
+      "firstScoreAfterDay": null,
+      "firstSkipAfter": null,
+      "closeDay": 151,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": null,
+      "holderDeathCause": null,
+      "villageEndDay": 151,
+      "villageEndReason": "survived",
+      "eventualInstance": "launched-no-meeting:window:145-151",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103446,
+      "vid": "aki_tanaka",
+      "target": "algorithm",
+      "holderProfile": null,
+      "noTickDay": 72,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "aria_thompson",
+      "fate": "depart-next-day",
+      "fateDay": 73,
+      "fateNote": "launch brain day 73 (full party) commitKind=mid-day part-1 commitPart=1",
+      "rebidDay": 73,
+      "rebidPart": 1,
+      "rebidCompanion": "app_mgpspjtu814",
+      "rebidResolution": "launched:undefined",
+      "launchDay": 73,
+      "launchSource": "brain",
+      "companionStarted": true,
+      "companionBlock": null,
+      "firstScoreAfterDay": 73,
+      "firstSkipAfter": {
+        "day": 73,
+        "reason": "away-on-expedition"
+      },
+      "closeDay": 96,
+      "closeKind": "retargeted",
+      "holderDeathDay": null,
+      "holderDeathCause": null,
+      "villageEndDay": 105,
+      "villageEndReason": "village-lost",
+      "eventualInstance": "launched-fought-no-kill:evade:1",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103446,
+      "vid": "aki_tanaka",
+      "target": "algorithm",
+      "holderProfile": null,
+      "noTickDay": 83,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "ines_duarte",
+      "fate": "re-bid-later",
+      "fateDay": 87,
+      "fateNote": "re-bid day 87 part 1 companion=app_mgpspjtu814",
+      "rebidDay": 87,
+      "rebidPart": 1,
+      "rebidCompanion": "app_mgpspjtu814",
+      "rebidResolution": "blocked:danger-gate",
+      "launchDay": 88,
+      "launchSource": "brain",
+      "companionStarted": true,
+      "companionBlock": null,
+      "firstScoreAfterDay": 87,
+      "firstSkipAfter": {
+        "day": 87,
+        "reason": "danger-gate"
+      },
+      "closeDay": 96,
+      "closeKind": "retargeted",
+      "holderDeathDay": null,
+      "holderDeathCause": null,
+      "villageEndDay": 105,
+      "villageEndReason": "village-lost",
+      "eventualInstance": "launched-fought-no-kill:evade:1",
+      "targetKilledDay": null
+    },
+    {
+      "seed": 103446,
+      "vid": "tom_baker",
+      "target": "reunion",
+      "holderProfile": null,
+      "noTickDay": 98,
+      "noTickPart": 3,
+      "commitKind": "part-3",
+      "companion": "gen_oe3tjaz",
+      "fate": "holder-died-after",
+      "fateDay": 99,
+      "fateNote": "holder died day 99 cause=monster",
+      "rebidDay": null,
+      "rebidPart": null,
+      "rebidCompanion": null,
+      "rebidResolution": null,
+      "launchDay": null,
+      "launchSource": null,
+      "companionStarted": null,
+      "companionBlock": null,
+      "firstScoreAfterDay": null,
+      "firstSkipAfter": null,
+      "closeDay": 99,
+      "closeKind": "plan-deleted",
+      "holderDeathDay": 99,
+      "holderDeathCause": "monster",
+      "villageEndDay": 105,
+      "villageEndReason": "village-lost",
+      "eventualInstance": "selected-blocked:no-tick-after-commit",
+      "targetKilledDay": null
+    }
+  ],
+  "lateCommits": [
+    {
+      "seed": 103441,
+      "vid": "app_mgpspl5e343",
+      "target": "strike",
+      "day": 128,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "fatima_hassan",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103441,
+      "vid": "app_mgpspl5e343",
+      "target": "strike",
+      "day": 129,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "fatima_hassan",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:companion-not-started:range-0",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103441,
+      "vid": "luis_fernandez",
+      "target": "editor",
+      "day": 149,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "chantal_mukendi",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103446,
+      "vid": "aki_tanaka",
+      "target": "algorithm",
+      "day": 72,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "aria_thompson",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103446,
+      "vid": "aki_tanaka",
+      "target": "algorithm",
+      "day": 83,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "ines_duarte",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103446,
+      "vid": "aki_tanaka",
+      "target": "algorithm",
+      "day": 91,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "ines_duarte",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103446,
+      "vid": "aki_tanaka",
+      "target": "eater",
+      "day": 98,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "app_mgpspju135",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103446,
+      "vid": "aki_tanaka",
+      "target": "eater",
+      "day": 105,
+      "parts": [
+        2
+      ],
+      "lastPart": 2,
+      "companion": "gen_oe3tjaz",
+      "commitKind": "mid-day part-2",
+      "resolution": "blocked:night",
+      "resolvedPart": null
+    },
+    {
+      "seed": 103446,
+      "vid": "tom_baker",
+      "target": "reunion",
+      "day": 98,
+      "parts": [
+        3
+      ],
+      "lastPart": 3,
+      "companion": "gen_oe3tjaz",
+      "commitKind": "part-3",
+      "resolution": "blocked:no-tick-after-commit",
+      "resolvedPart": null
+    }
+  ],
+  "lateCommitCount": 9,
+  "lateCommitLaunched": 0,
+  "lateTally": {
+    "blocked:no-tick-after-commit": 5,
+    "blocked:companion-not-started:range-0": 1,
+    "blocked:night": 3
+  }
+}
