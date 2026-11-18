@@ -303,7 +303,13 @@ async function main() {
     G.map.px = hx; G.map.py = hy;
     const s = G.state.scholar; s.mx = 4; s.my = 4;
     const m = G.spawnWorldMonster({ id: 'suburb' }, hx, hy, { mx: 4, my: 6 });
-    m.lingering = true;
+    // NO lingering here, on purpose (finding #2559-A): since dc8cbd3f3
+    // (2026-11-15, "linger holds the treeline") monsterTurn() returns
+    // early for a lingering raider, so a lingering monster can NEVER raid
+    // via monsterTurn — the section-C control could never fire, and the
+    // section-A mercy passed vacuously. The rig must be a monster that
+    // would raid: section A then tests the table gate alone (delivery on
+    // vs off is the only difference between A and C).
     return { Game: G, m, hx, hy };
   }
   function countFires(G) {
