@@ -1,31 +1,30 @@
-// launchparty-sense-driver-a.js — JUDGED driver, arm sim-launchparty-sense-a
-// (BUILD: the meeting sense prefers the launch/expedition party —
-// finding #2515. villagerFightAllies used to return whoever was near at
-// the meeting, capped at 2, never reading the launch party; with
-// LAUNCHPARTY=1 the launch party answers first, in launch order.)
-// A copy of scripts/triodrought-driver-b.js (the unified launch-funnel
+// fightcap-dmg-driver-a.js — JUDGED driver, arm sim-fightcap-dmg-a
+// (CAPABILITY: a damage-multiplier carrier in launched parties —
+// finding #2544. The launched party's holder rages like a Rage-holder
+// against a wave-4+ monster even without the ability, env FIGHTCAPDMG=1,
+// game.js tbVillagerAbility; see the prereg.)
+// A copy of scripts/launchparty-sense-driver-a.js (the unified launch-funnel
 // census instrument: v4seeds with seed-path classification, v4departs,
 // v4gates, v4encounters with origin, dawnbidScores / dawnbidDeparts /
 // dawnbidCensus / dawnbidStarts, companionPool, agencyTick skip-reason
-// recorder) — the recorder is UNCHANGED except the encounter row now
-// also carries ally2Vid (the fight's second joiner; the old driver
-// recorded only allyVid).
-//   Legs differ ONLY by ENV: ctl = LAUNCHPARTY unset, arm = LAUNCHPARTY=1.
-//      Same code on disk both legs (no revert between legs). Env is
-//      otherwise IDENTICAL: VETREENGAGE=1 + PARTYSIZE4=1 +
-//      FLEEREPAIR2=1 + FIGHTALLY2=1 (substrate — FIGHTALLY2=1 both legs
-//      so the sense fix's second seat can actually join the fight; see
-//      the prereg). main() asserts the MODE label matches the flag
-//      (arm ⟺ LAUNCHPARTY=1) and stops otherwise — a leg/flag mismatch
-//      is a loud stop, never a silent mislabel. The corpus files also
-//      carry wiringSha (sha256 of src/js/party-wiring.js) and
-//      launchpartyOn so each file self-describes which code+flag it ran
-//      under.
+// recorder) — the recorder is UNCHANGED.
+//   Legs differ ONLY by ENV: ctl = FIGHTCAPDMG unset, arm = FIGHTCAPDMG=1.
+//      BOTH legs run LAUNCHPARTY=1 (the sense fix is the substrate — the
+//      fightcap baseline was measured on it; see the prereg). Same code
+//      on disk both legs (no revert between legs). Env is otherwise
+//      IDENTICAL: VETREENGAGE=1 + PARTYSIZE4=1 + FLEEREPAIR2=1 +
+//      FIGHTALLY2=1 + LAUNCHPARTY=1 (substrate). main() asserts the MODE
+//      label matches the flag (arm ⟺ FIGHTCAPDMG=1) and stops otherwise —
+//      a leg/flag mismatch is a loud stop, never a silent mislabel. The
+//      corpus files also carry wiringSha (sha256 of src/js/party-wiring.js),
+//      gameSha (sha256 of src/js/game.js), carrierPresent, launchpartyOn
+//      and fightcapdmgOn so each file self-describes which code+flags it
+//      ran under.
 // Policy: competent verbatim (scripts/policies/competent.js), 150d
-// death-aware. Pilot band 104401-104408 (fresh — see prereg).
+// death-aware. Pilot band 104601-104608 (fresh — see prereg).
 // Usage:
-//   VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 MODE=ctl OUTDIR=perseed-launchparty-sense-a-ctl SEEDS=104401,104402 RUN=launchparty-sense-a node scripts/launchparty-sense-driver-a.js
-//   VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 LAUNCHPARTY=1 MODE=arm OUTDIR=perseed-launchparty-sense-a-arm SEEDS=104401,104402 RUN=launchparty-sense-a node scripts/launchparty-sense-driver-a.js
+//   VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 LAUNCHPARTY=1 MODE=ctl OUTDIR=perseed-fightcap-dmg-a-ctl SEEDS=104601,104602 RUN=fightcap-dmg-a node scripts/fightcap-dmg-driver-a.js
+//   VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 LAUNCHPARTY=1 FIGHTCAPDMG=1 MODE=arm OUTDIR=perseed-fightcap-dmg-a-arm SEEDS=104601,104602 RUN=fightcap-dmg-a node scripts/fightcap-dmg-driver-a.js
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -38,9 +37,9 @@ const VF = require(path.join(REPO, 'scripts', 'vetfirst-instrument-20261111'));
 
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : []).filter(Number.isFinite);
 const DAYS = parseInt(process.env.DAYS || '150', 10) || 150;
-const RUN = process.env.RUN || 'launchparty-sense-a';
+const RUN = process.env.RUN || 'fightcap-dmg-a';
 const MODE = process.env.MODE || 'vre';
-const OUTDIR = process.env.OUTDIR || ('perseed-launchparty-sense-a-' + MODE);
+const OUTDIR = process.env.OUTDIR || ('perseed-fightcap-dmg-a-' + MODE);
 const RECORDER_ON = process.env.LAUNCHPARTY_RECORDER !== 'off';
 // SEEDLAND (sim-seedland-b): the fieldFight watch is wave >= 4
 // (wave-5 encounters are recorded in v4encounters alongside wave-4)
@@ -97,6 +96,17 @@ try {
   SENSE_PRESENT = /LAUNCHPARTY/.test(wiringSrc) && /winPlan/.test(wiringSrc) && /exped/.test(wiringSrc);
 } catch (e) {}
 const LAUNCHPARTY_ON = process.env.LAUNCHPARTY === '1';
+const FIGHTCAPDMG_ON = process.env.FIGHTCAPDMG === '1';
+// FIGHTCAPDMG: sha of the file that carries the carrier + whether the
+// carrier is in it, so each corpus file self-describes the code it ran
+// under. The flag itself is recorded per file below.
+let GAME_SHA = 'unknown';
+let CARRIER_PRESENT = false;
+try {
+  const gameSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'game.js'), 'utf8');
+  GAME_SHA = crypto.createHash('sha256').update(gameSrc).digest('hex').slice(0, 12);
+  CARRIER_PRESENT = /FIGHTCAPDMG/.test(gameSrc) && /_fcdCarrier/.test(gameSrc) && /_vRageRounds = 3/.test(gameSrc);
+} catch (e) {}
 const FIGHTALLY2_ON = process.env.FIGHTALLY2 === '1';
 let STANDING_MARKER = false;
 try { STANDING_MARKER = fs.readFileSync(path.join(REPO, 'src', 'js', 'standing.js'), 'utf8').indexOf('ROSTER CHECK') !== -1; } catch (e) {}
@@ -1161,11 +1171,13 @@ async function oneRun(seed) {
   });
 
   const out = {
-    seed: seed, arm: 'launchparty-sense-a', run: RUN, mode: MODE, leg: MODE,
+    seed: seed, arm: 'fightcap-dmg-a', run: RUN, mode: MODE, leg: MODE,
     anchorCommit: ANCHOR, standingMarker: STANDING_MARKER,
     brainSha: BRAIN_SHA, carryPresent: CARRY_PRESENT,
     wiringSha: WIRING_SHA, sensePresent: SENSE_PRESENT,
+    gameSha: GAME_SHA, carrierPresent: CARRIER_PRESENT,
     launchpartyOn: LAUNCHPARTY_ON, fightally2On: FIGHTALLY2_ON,
+    fightcapdmgOn: FIGHTCAPDMG_ON,
     recorderOn: RECORDER_ON,
     policySha: POLICY_SHA, policy: 'competent',
     days: result.days, gameDays: (st.scholar && st.scholar.day) || 0,
@@ -1206,34 +1218,39 @@ async function oneRun(seed) {
 }
 
 if (require.main === module) (async function () {
-  if (MODE !== 'ctl' && MODE !== 'arm') { console.error('LAUNCHPARTY-SENSE STOP: MODE must be ctl|arm, got ' + JSON.stringify(MODE)); process.exit(2); }
-  // The legs differ ONLY by ENV (LAUNCHPARTY flag); the MODE label must
-  // match the flag. ctl = LAUNCHPARTY unset, arm = LAUNCHPARTY=1. Same
-  // code on disk both legs — no revert between legs. A leg/flag mismatch
-  // is a loud stop, never a silent mislabel.
-  if (MODE === 'arm' && !SENSE_PRESENT) { console.error('LAUNCHPARTY-SENSE STOP: MODE=arm requires the launch-preference sense in src/js/party-wiring.js.'); process.exit(2); }
-  if (MODE === 'arm' && !LAUNCHPARTY_ON) { console.error('LAUNCHPARTY-SENSE STOP: MODE=arm requires LAUNCHPARTY=1.'); process.exit(2); }
-  if (MODE === 'ctl' && LAUNCHPARTY_ON) { console.error('LAUNCHPARTY-SENSE STOP: MODE=ctl requires LAUNCHPARTY unset.'); process.exit(2); }
-  if (process.env.VETREENGAGE !== '1') { console.error('LAUNCHPARTY-SENSE STOP: VETREENGAGE=1 required (substrate) for every mode.'); process.exit(2); }
-  if (process.env.PARTYSIZE4 !== '1') { console.error('LAUNCHPARTY-SENSE STOP: PARTYSIZE4=1 required (substrate) for every mode.'); process.exit(2); }
-  if (process.env.FLEEREPAIR2 !== '1') { console.error('LAUNCHPARTY-SENSE STOP: FLEEREPAIR2=1 required (substrate) for every mode.'); process.exit(2); }
-  if (process.env.FIGHTALLY2 !== '1') { console.error('LAUNCHPARTY-SENSE STOP: FIGHTALLY2=1 required (substrate, both legs — the second seat must be able to join the fight).'); process.exit(2); }
-  if (!SEEDS.length) { console.error('LAUNCHPARTY-SENSE STOP: SEEDS required.'); process.exit(2); }
+  if (MODE !== 'ctl' && MODE !== 'arm') { console.error('FIGHTCAP-DMG STOP: MODE must be ctl|arm, got ' + JSON.stringify(MODE)); process.exit(2); }
+  // The legs differ ONLY by ENV (FIGHTCAPDMG flag); the MODE label must
+  // match the flag. ctl = FIGHTCAPDMG unset, arm = FIGHTCAPDMG=1. BOTH
+  // legs run LAUNCHPARTY=1 (the sense fix is the substrate — see prereg).
+  // Same code on disk both legs — no revert between legs. A leg/flag
+  // mismatch is a loud stop, never a silent mislabel.
+  if (!SENSE_PRESENT) { console.error('FIGHTCAP-DMG STOP: the launch-preference sense must be present in src/js/party-wiring.js (substrate).'); process.exit(2); }
+  if (!LAUNCHPARTY_ON) { console.error('FIGHTCAP-DMG STOP: LAUNCHPARTY=1 required on BOTH legs (substrate).'); process.exit(2); }
+  if (MODE === 'arm' && !CARRIER_PRESENT) { console.error('FIGHTCAP-DMG STOP: MODE=arm requires the damage-multiplier carrier in src/js/game.js.'); process.exit(2); }
+  if (MODE === 'arm' && !FIGHTCAPDMG_ON) { console.error('FIGHTCAP-DMG STOP: MODE=arm requires FIGHTCAPDMG=1.'); process.exit(2); }
+  if (MODE === 'ctl' && FIGHTCAPDMG_ON) { console.error('FIGHTCAP-DMG STOP: MODE=ctl requires FIGHTCAPDMG unset.'); process.exit(2); }
+  if (process.env.VETREENGAGE !== '1') { console.error('FIGHTCAP-DMG STOP: VETREENGAGE=1 required (substrate) for every mode.'); process.exit(2); }
+  if (process.env.PARTYSIZE4 !== '1') { console.error('FIGHTCAP-DMG STOP: PARTYSIZE4=1 required (substrate) for every mode.'); process.exit(2); }
+  if (process.env.FLEEREPAIR2 !== '1') { console.error('FIGHTCAP-DMG STOP: FLEEREPAIR2=1 required (substrate) for every mode.'); process.exit(2); }
+  if (process.env.FIGHTALLY2 !== '1') { console.error('FIGHTCAP-DMG STOP: FIGHTALLY2=1 required (substrate, both legs — the second seat must be able to join the fight).'); process.exit(2); }
+  if (!SEEDS.length) { console.error('FIGHTCAP-DMG STOP: SEEDS required.'); process.exit(2); }
   const outDir = path.join(REPO, 'evidence', '2026-11-18', OUTDIR);
   fs.mkdirSync(outDir, { recursive: true });
   for (const seed of SEEDS) {
-    const file = path.join(outDir, 'launchparty-sense-a-s' + seed + '-' + RUN + '-' + MODE + '.json');
-    if (fs.existsSync(file)) { console.error('LAUNCHPARTY-SENSE STOP: refusing to overwrite ' + file); process.exit(3); }
+    const file = path.join(outDir, 'fightcap-dmg-a-s' + seed + '-' + RUN + '-' + MODE + '.json');
+    if (fs.existsSync(file)) { console.error('FIGHTCAP-DMG STOP: refusing to overwrite ' + file); process.exit(3); }
   }
   for (const seed of SEEDS) {
     const out = await oneRun(seed);
-    const file = path.join(outDir, 'launchparty-sense-a-s' + seed + '-' + RUN + '-' + MODE + '.json');
+    const file = path.join(outDir, 'fightcap-dmg-a-s' + seed + '-' + RUN + '-' + MODE + '.json');
     writeRobust(file, JSON.stringify(out, null, 2) + '\n');
     console.log(JSON.stringify({
       seed: out.seed, mode: out.mode, anchor: (out.anchorCommit || '').slice(0, 12),
       brainSha: out.brainSha, carryPresent: out.carryPresent,
       wiringSha: out.wiringSha, sensePresent: out.sensePresent,
+      gameSha: out.gameSha, carrierPresent: out.carrierPresent,
       launchpartyOn: out.launchpartyOn, fightally2On: out.fightally2On,
+      fightcapdmgOn: out.fightcapdmgOn,
       policySha: out.policySha, standingMarker: out.standingMarker,
       recorderOn: out.recorderOn,
       days: out.days, endReason: out.endReason, won: out.won,
