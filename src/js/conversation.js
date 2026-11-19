@@ -7343,8 +7343,11 @@
               // r225 comment's claim that the cycle "skips the
               // ledger-blocked variant" is wrong on that point. Try each
               // variant in cycle order until one is fresh; all three
-              // blocked keeps the pick (rare — the dry line then, noted
-              // in the run note).
+              // blocked falls to null (journey-social-life r238 — the
+              // generic fallback below, structural-exempt, speaks
+              // instead; keeping the blocked pick dried, the r226
+              // residual characterized by the r238 F5 harness:
+              // V1,V2,V3,DRY,DRY,DRY on rapid re-asks).
               const handledPool = [
                 '"No, really — it\'s handled. Thanks for asking, though."',
                 '"It\'s taken care of, I swear. You don\'t need to worry about that one anymore."',
@@ -7356,6 +7359,7 @@
                   if (alt !== wline && !this.convoWouldBlock(vid, alt)) { wline = alt; break; }
                 }
               }
+              if (typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, wline)) wline = null;
             } else if (c.want && c.want.def && (c.want.stage || 0) >= 1 && (c.want.stage || 0) < 3 &&
                        typeof c.want.def.engageBeat === 'function') {
               // WANT RESUME (journey crisis r8 2026-10-14): the want is already
@@ -7469,6 +7473,16 @@
           // WANT-AFTER-SECRET (journey-deepening r124): the want surfaced —
           // its job on this sitting's menu is done.
           c.wantAfterSecret = null;
+          // FALLBACK-STRUCTURAL (journey-social-life r238): when every
+          // fresh phrasing is ledger-blocked, wline is null and the turn
+          // falls to the generic "Okay. Here's the thing —" opener. That
+          // line is conversation GRAMMAR, not content (r17) — but it was
+          // handed to sayLine unchecked, so a ledger-blocked fallback
+          // dried instead ("...Sorry, lost my train of thought." —
+          // wild, seed 45752, twice: repay opener + both stale variants
+          // + fallback all blocked). Exempt the last-resort fallback
+          // from the run-ledger block so the turn always speaks.
+          if (!wline) structuralTurn = true;
           this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'alive:want' });
           done(wline || '"Okay. Here\u2019s the thing \u2014"', '"Is there something you need? Really."');
         } else if (akind === 'event') {
