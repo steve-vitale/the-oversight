@@ -1,0 +1,41 @@
+
+ORGANIC DEATH d32: Stephen -> Avery, topTrust=[{"id":"Kennedy","t":100},{"id":"Lamar","t":90},{"id":"Miguel","t":90},{"id":"Rosa","t":90}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=16 inheritedPlants=0 keptSkills=14 inheritedSkills=0 succTrustPre=90 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach","rage","echo_location"] post=["iron_stomach","rage","echo_location"]
+DEATH d32 (organic (phase A)): Stephen -> Avery | passed=true lin=true mo=true trust=62 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Kennedy (refused=false)
+  CONVO d+3 with Lamar (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Hryhoriy (depth=2 v=54 refused=false)
+  CONVO d+7 with Kennedy (refused=false)
+  CONVO d+7 with Lamar (refused=false)
+  CONVO d+14 with Kennedy (refused=false)
+  CONVO d+14 with Lamar (refused=false)
+  BOND-CONVO d+14 with Hryhoriy (depth=2 v=54 refused=false)
+  CONVO d+30 with Kennedy (refused=false)
+  CONVO d+30 with Hryhoriy (refused=false)
+  CONVO d+45 with Hryhoriy (refused=false)
+  CONVO d+45 with Ursula (refused=false)
+  CONVO d+53 with Hryhoriy (refused=false)
+  CONVO d+53 with Ursula (refused=false)
+  CONVO d+64 with Ursula (refused=false)
+  CONVO d+64 with Miguel (refused=false)
+  NEWCOMER-PROBE d+67 with Benoit (arrived d+67, trust=24 refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=7) echo=3 organicBurial={"respects":false,"bury":false} halfRation=7
+
+MEAL-GATE: audited=70 violations=0 noMealDays=7 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":51,"offerLines":18,"codexPlantsDelta":31,"codexSkillsDelta":22,"codexAbilitiesDelta":8,"xpDelta":-10,"any":true} pantry 32096->10551
+TRUST-DIALS: office 62->85 (+23, climb) | villageMean 72.6->69.1 (-3.5, fall) | ge60 7->5 | movers>=5: [{"id":"Nikolai","from":59,"to":90,"delta":31},{"id":"Elena","from":60,"to":90,"delta":30},{"id":"Andiswa","from":36,"to":54,"delta":18},{"id":"Olivia","from":76,"to":90,"delta":14}]
+DEED-LEDGER: calls=6 summary={"giveFood":{"calls":3,"ok":3,"deltaSum":7,"deltaN":3,"positive":2,"meanDelta":2.33},"teachPlant":{"calls":3,"ok":3,"deltaSum":0,"deltaN":3,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=102 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=6) trustVerdict={"readable":true,"officeMantle":62,"officeLast":85,"officeDelta":23,"officeClass":"climb","villageMantle":72.6,"villageLast":69.1,"villageDelta":-3.5,"villageClass":"fall","villageGe60Mantle":7,"villageGe60Last":5,"movers":[{"id":"Nikolai","from":59,"to":90,"delta":31},{"id":"Elena","from":60,"to":90,"delta":30},{"id":"Andiswa","from":36,"to":54,"delta":18},{"id":"Olivia","from":76,"to":90,"delta":14}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":4,"trustMoves":2} callCheck={"dailyMoveDays":6,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=5, excludedLoot=1))
+E7/R47: e7={"trustMoves":2,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":5,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":6}

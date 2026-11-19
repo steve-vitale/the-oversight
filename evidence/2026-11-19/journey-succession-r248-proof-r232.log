@@ -1,0 +1,44 @@
+PASS bond-fires: roster has >= 7 villagers to stage deaths from — roster=11
+PASS bond-fires: staged bond reads back close — {"v":30,"depth":1,"day":40,"dayGain":0}
+PASS bond-fires: event resolves to named mourning for Leroy — {"kind":"mourning","name":"Leroy"}
+PASS bond-fires: cope pool holds the bond variant — "I {habitI}. It doesn't bring anyone back. It just keeps my hands from shaking."
+"I keep turning over the last thing {mn
+PASS bond-fires: next pool holds the bond variant
+PASS bond-fires: part pool holds the bond variant
+PASS bond-fires: >=1 bond opener in 7 sittings — bond openers=2 templates=opener:bond-knew,opener:bond-person
+PASS bond-fires: bond follow-up servings recorded — bond follow-ups=0 templates=none
+PASS bond-fires: no exhausted line served while variants remain — opener:bond-knew,next:bury-grieve,part:habit-for,opener:bond-person,opener:expect-fire,opener:burnt-piece,opener:world-continues,opener:owed-favor,unknown:"I've said all I know. The rest is just guessing."
+PASS bond-fires: no served line leaks a literal {mname}
+PASS bond-fires: every served opener names its dead — opener:bond-knew,opener:bond-person,opener:expect-fire,opener:burnt-piece,opener:world-continues,opener:owed-favor
+PASS bond-silent: roster has >= 7 villagers to stage deaths from — roster=11
+PASS bond-silent: event resolves to named mourning for Bill — {"kind":"mourning","name":"Bill"}
+PASS bond-silent: cope pool holds NO bond variant
+PASS bond-silent: next pool holds NO bond variant
+PASS bond-silent: part pool holds NO bond variant
+PASS bond-silent: 0 bond-variant servings in 7 sittings — bond hits=0 
+PASS bond-silent: no served line leaks a literal {mname}
+PASS bond-silent: every served opener names its dead — opener:dreamed,opener:world-continues,opener:expect-fire,opener:burnt-piece
+PASS veteran-fires: roster has >= 7 villagers to stage deaths from — roster=11
+PASS veteran-fires: event resolves to named mourning for Stephen — {"kind":"mourning","name":"Stephen"}
+PASS veteran-fires: >=1 veteran opener in 7 sittings — vet openers=2 templates=opener:vet-club,opener:vet-treeline
+PASS veteran-fires: no served line leaks a literal {mname}
+PASS veteran-silent: roster has >= 7 villagers to stage deaths from — roster=11
+PASS veteran-silent: event resolves to named mourning for Carl — {"kind":"mourning","name":"Carl"}
+PASS veteran-silent: 0 veteran openers when only the speaker is a veteran — vet hits=0 
+PASS veteran-silent: no served line leaks a literal {mname}
+PASS witness-fires: roster has >= 7 villagers to stage deaths from — roster=11
+PASS witness-fires: event resolves to named mourning for Emma — {"kind":"mourning","name":"Emma"}
+PASS witness-fires: >=1 witness opener in 7 sittings — wit openers=2 templates=opener:wit-saw,opener:wit-there
+PASS witness-fires: no served line leaks a literal {mname}
+PASS witness-silent: roster has >= 7 villagers to stage deaths from — roster=11
+PASS witness-silent: event resolves to named mourning for Fiona — {"kind":"mourning","name":"Fiona"}
+PASS witness-silent: 0 witness openers when the speaker did not witness — wit hits=0 
+PASS witness-silent: no served line leaks a literal {mname}
+PASS name-correct: roster has >= 7 villagers to stage deaths from — roster=11
+PASS name-correct: A's opener names the dead (Rosa) — "Since Rosa died... I keep expecting to see Rosa at the fire. Stupid."
+PASS name-correct: B's opener names the dead (Rosa) — "Rosa is gone and the world just... continues. That's the part I can't stand."
+PASS name-correct: no literal {mname} in any served line
+PASS name-correct: stranger speaker B serves 0 bond variants in one sitting — B bond hits=0 
+PASS name-correct: bonded speaker A may serve a bond variant (recorded, not asserted) — A bond hits=1 cope:bond-habit
+
+ALL GREEN
