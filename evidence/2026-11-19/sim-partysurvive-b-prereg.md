@@ -4,6 +4,39 @@
 `e1f002065` (journey-establishment r243). Branch `sim-partysurvive-b`
 (worktree `~/workspace/worktrees/sim-partysurvive-b`, already rebased
 onto master `e1f002065` by the coordinator).
+
+**CORRECTION (2026-11-19 13:07 UTC, BEFORE any judged sim — no
+judged numbers exist yet):** two definitions in this prereg were
+wrong about the recorder, discovered by running the analyzer on the
+frozen fightcap-b arm corpus as unjudged instrument validation
+(`test-partysurvive-b.js` §B covers the sense-miss reproduction;
+the full-analyzer run is validation only, not the verdict):
+1. **Death-day cross-check:** the prereg said a member's death day
+   must agree with the first day their `daily[].roster` row reads
+   `dead: true`. The roster carries no such flip — it is the LIVING
+   roster: the dead VANISH (present with `dead: false` on the death
+   day, absent from the next day on; `dead` never reads `true` in
+   the fightcap corpora — verified on seed 104771: Catalina present
+   d63–d64, gone d65; Rosa present d76, gone d77). The cross-check
+   is therefore PRESENCE-based: last-seen day must be the death day
+   or the day before (±1 day snapshot tolerance, strict on the late
+   side — seen after the death day is impossible). Early vanish
+   (last seen >1 day before the death day) is a warning, not a
+   failure — the living can leave the roster for other reasons.
+   The validation run cross-checks 57/57 agree, 0 disagree.
+2. **Pool floor:** the pre-fight-death floor was 5, set from
+   fightcap's "10 dead companions" — but that 10 counts companions
+   dead at ANY missed meeting, while this arm's denominator counts
+   deaths before the FIRST joined meeting only. Under this arm's
+   definition the reference band yields 3 pre-fight deaths on 18
+   quad launches. The floor is corrected to **>= 3**, set FROM the
+   reference-band measurement under this definition. The 0.90
+   classification bar stands: on n≈3 it effectively requires
+   classifying all of them, and the evidence will name the count
+   beside the share.
+Nothing else changes. The judged leg is still the fresh band
+105941–105948; the reference-corpus run is validation, not a
+verdict.
 **Arm:** the launch-party survival-to-the-fight diagnostic (tracker
 blank 1 from the 2026-11-19 0830Z Loop B round, fightcap follow-up).
 INSTRUMENT ONLY — zero `src/js` game-code changes. This arm builds a
@@ -111,9 +144,14 @@ is fresh.
     member's later fate is out of scope — the question is survival
     TO the fight).
 - **Death day cross-check:** a member's death day from `deaths`
-  (kind `villager`, `who` == vid) must agree with the first day the
-  member's `daily[].roster` row reads `dead: true`. Any disagreement
-  is an instrument error and is reported, not silently resolved.
+  (kind `villager`, `who` == vid) must agree with the member's
+  last-seen day in the `daily[].roster` LIVING roster (CORRECTED
+  2026-11-19 13:07 UTC — see the correction note at the top: the
+  roster carries no `dead: true` flip; the dead vanish. Last seen
+  must be the death day or the day before; seen after the death day
+  is a hard disagreement). Any hard disagreement is an instrument
+  error and is reported, not silently resolved. Early vanish (last
+  seen >1 day before the death day) is a warning, not a failure.
 - **Pre-fight death cause classes (frozen precedence, exactly one
   per death — classify from the `deaths` row `cause`, linked to a
   recorded fight where the corpus allows):**
@@ -167,14 +205,16 @@ classification below 0.90 leaves the question open the same way;
 fights, not guess. The top cause must be named because the next
 build arm needs ONE death to prevent first.
 
-**Pool floor (binding precondition):** >= 6 quad launches AND >= 5
-`died-before-meeting` deaths. If launches < 6 or pre-fight deaths
-< 5, the pilot is NO-GO, kind METRIC-BROKEN (the band delivered too
-thin a pool to decompose — the fightcap reference band delivered
-10 dead companions on 24 launches, so 5 is half that with slack
-for delivery variance). If there are 0 pre-fight deaths, kind
-NO-PRE-FIGHT-DEATHS (a finding in itself — the party survived —
-but not a GO: there is nothing to classify).
+**Pool floor (binding precondition):** >= 6 quad launches AND >= 3
+`died-before-meeting` deaths (CORRECTED 2026-11-19 13:07 UTC — see
+the correction note at the top: the reference band yields 3 under
+this arm's first-meeting definition). If launches < 6 or pre-fight
+deaths < 3, the pilot is NO-GO, kind METRIC-BROKEN (the band
+delivered too thin a pool to decompose — the fightcap reference band
+delivered 3 pre-fight deaths on 18 quad launches, so 3 is the
+measured rate with no slack below it). If there are 0 pre-fight
+deaths, kind NO-PRE-FIGHT-DEATHS (a finding in itself — the party
+survived — but not a GO: there is nothing to classify).
 
 **Instrument bar:** 0 errors on the leg; 8/8 per-seed files;
 frozen seeds 105941–105948; driver determinism (proof test
@@ -284,4 +324,9 @@ and report the wall numbers directly.
   measured rate (24 launches, 10 dead companions), not from an
   unjudged survey of this band. Running a survey first would spend
   a second identical leg to measure what the reference already
-  measured.
+  measured. The reference-band validation run (unjudged, 2026-11-19
+  ~13:00 UTC, analyzer on the frozen fightcap-b arm corpus) reads:
+  18 quad launches, 72 members tracked, 3 pre-fight deaths, 3/3
+  classified (field-fight 2, wounds 1), share alive at meeting
+  0.841, median days launch→death 0, cross-check 57/57 agree.
+  That run is what corrected the floor and the cross-check above.
