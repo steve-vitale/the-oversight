@@ -15,13 +15,14 @@
 //   (b) miss loss — zero-damage strikes, priced at the pooled mean.
 //   (c) ally-delay loss — striker-slot rounds empty (ally not yet
 //       joined / already down), priced at the allies' mean.
-//   (d) base-rate ceiling — W(111) minus P_mean x 3 (three landed
-//       strikes every round: the tactical formula's own ceiling).
+//   (d) base-rate ceiling — W(111) minus P_mean x 4 (four landed
+//       strikes every round: the tactical formula's own ceiling on
+//       the ported substrate — fighter + 3 allies, Correction 2).
 // GO: accounted share ((a)+(b)+(c)+(d))/G >= 0.70 AND top contributor
 // >= 0.25 of G, where G = 111 - D_meas. Pool floor: >=6 launches,
 // >=4 joined quad meetings, >=8 fled fights. Reconciliation (prereg
 // Correction 1): the exact identity (a')+(b')+(c')-echoBonus =
-// P_mean x 3 - D_strike (same counts priced at P_mean; D_strike is
+// P_mean x 4 - D_strike (same counts priced at P_mean; D_strike is
 // volley-excluded) must hold within +-15%; a larger error is an
 // instrument failure (NO-GO kind INSTRUMENT).
 //
@@ -158,7 +159,7 @@ function parseFightLog(log) {
       continue;
     }
     if ((m = line.match(RE_DOOR))) {
-      const slot = allyNames.ally1 ? 'ally2' : 'ally1';
+      const slot = !allyNames.ally1 ? 'ally1' : (!allyNames.ally2 ? 'ally2' : 'ally3');
       if (!allyNames[slot]) { allyNames[slot] = m[1]; nameSlot[m[1]] = slot; joinRound[slot] = 1; }
       if (!fighterName) fighterName = m[2];
       continue;
@@ -193,15 +194,17 @@ function decomposeEncounter(enc) {
   const p = parseFightLog(enc.log || []);
   const rd = Array.isArray(enc.roundsDetail) ? enc.roundsDetail : [];
   // Per-member dealt from roundsDetail (engine numbers; fighter =
-  // dealt - allyDealt, ally1 = allyDealt - ally2Dealt, ally2 =
-  // ally2Dealt). Falls back to the log parse if roundsDetail is empty.
-  let fighterDealt = 0, ally1Dealt = 0, ally2Dealt = 0, rdRounds = 0;
+  // dealt - allyDealt, ally1 = allyDealt - ally2Dealt - ally3Dealt,
+  // ally2 = ally2Dealt, ally3 = ally3Dealt). Falls back to the log
+  // parse if roundsDetail is empty.
+  let fighterDealt = 0, ally1Dealt = 0, ally2Dealt = 0, ally3Dealt = 0, rdRounds = 0;
   let abilityFiredRounds = 0, trickRounds = 0, trickCount = 0;
   for (const r of rd) {
     rdRounds++;
     fighterDealt += (r.dealt || 0) - (r.allyDealt || 0);
-    ally1Dealt += (r.allyDealt || 0) - (r.ally2Dealt || 0);
+    ally1Dealt += (r.allyDealt || 0) - (r.ally2Dealt || 0) - (r.ally3Dealt || 0);
     ally2Dealt += (r.ally2Dealt || 0);
+    ally3Dealt += (r.ally3Dealt || 0);
     if ((r.abilities || []).length) abilityFiredRounds++;
     if ((r.tricks || []).length) { trickRounds++; trickCount += r.tricks.length; }
   }
@@ -256,10 +259,10 @@ function decomposeEncounter(enc) {
   const emptyAlly1 = emptyRoundsFor('ally1', 'allyVid', 'allyDealt');
   const emptyAlly2 = emptyRoundsFor('ally2', 'ally2Vid', 'ally2Dealt');
   const emptyAlly3 = emptyRoundsFor('ally3', 'ally3Vid', 'ally3Dealt');
-  // Ally3 is NOT a striker slot on this master (no slot code): the
-  // ceiling prices 3 strikers (fighter + 2 allies), so only ally1 +
-  // ally2 empty rounds enter the loss. emptyAlly3 is reported only.
-  const emptyStrikerRounds = emptyAlly1 + emptyAlly2;
+  // Four striker slots on the ported substrate (fighter + 3 allies);
+  // the ceiling prices 4 landed strikes every round, so all three
+  // ally slots' empty rounds enter the loss (prereg Correction 2).
+  const emptyStrikerRounds = emptyAlly1 + emptyAlly2 + emptyAlly3;
   // Ability-touch + excess from strike notes.
   let abTouchDmg = 0, abExcess = 0, abTouchStrikes = 0;
   for (const s of strikes) {
@@ -276,7 +279,7 @@ function decomposeEncounter(enc) {
   const verbLoss = (pFighter != null && rounds > 0) ? (verbRounds / rounds) * pFighter : null;
   const missLoss = (pMean != null && rounds > 0) ? (zero.length / rounds) * pMean : null;
   const allyDelayLoss = (pAlly != null && rounds > 0) ? (emptyStrikerRounds / rounds) * pAlly : null;
-  const baseCeiling = (pMean != null) ? WIN_SHAPE - pMean * 3 : null;
+  const baseCeiling = (pMean != null) ? WIN_SHAPE - pMean * 4 : null;
   return { seed: enc._seed, day: enc.day, mid: enc.mid, wave: enc.wave, fighter: enc.vid,
     outcome: enc.outcome, rounds: rounds, mDealt: mDealt, mHpStart: mHpStart, dpr: dpr,
     volley: volley, volleyLog: p.volleyDmg, dStrike: dStrike,
@@ -289,8 +292,8 @@ function decomposeEncounter(enc) {
     emptyStrikerRounds: emptyStrikerRounds, allyDelayLoss: allyDelayLoss,
     baseCeiling: baseCeiling,
     echoStrikes: echoStrikes.length, echoDmg: sumDmg(echoStrikes),
-    fighterDealt: fighterDealt, ally1Dealt: ally1Dealt, ally2Dealt: ally2Dealt,
-    rdRounds: rdRounds, rdDealtSum: fighterDealt + ally1Dealt + ally2Dealt,
+    fighterDealt: fighterDealt, ally1Dealt: ally1Dealt, ally2Dealt: ally2Dealt, ally3Dealt: ally3Dealt,
+    rdRounds: rdRounds, rdDealtSum: fighterDealt + ally1Dealt + ally2Dealt + ally3Dealt,
     abTouchDmg: abTouchDmg, abTouchStrikes: abTouchStrikes, abExcess: abExcess,
     abilityFiredRounds: abilityFiredRounds, trickRounds: trickRounds, trickCount: trickCount,
     rageFired: !!enc.rageFired, rageFireRound: p.rageFireRound,
@@ -373,7 +376,7 @@ function aggregate(fled) {
   let top = null, topVal = -Infinity;
   for (const k of Object.keys(comps)) { if (comps[k] != null && comps[k] > topVal) { top = k; topVal = comps[k]; } }
   // Reconciliation (Correction 1, exact identity): (a')+(b')+(c')
-  // - echoBonus vs P_mean x 3 - D_strike, all pooled at P_mean.
+  // - echoBonus vs P_mean x 4 - D_strike, all pooled at P_mean.
   const aPrime = totalRounds ? (totalVerb / totalRounds) * pMean : null;
   const bPrime = totalRounds ? (totalZero / totalRounds) * pMean : null;
   const cPrime = totalRounds ? (totalEmpty / totalRounds) * pMean : null;
@@ -387,7 +390,8 @@ function aggregate(fled) {
   const fDealt = fled.reduce(function (a, f) { return a + f.fighterDealt; }, 0);
   const a1Dealt = fled.reduce(function (a, f) { return a + f.ally1Dealt; }, 0);
   const a2Dealt = fled.reduce(function (a, f) { return a + f.ally2Dealt; }, 0);
-  const rdSum = fDealt + a1Dealt + a2Dealt;
+  const a3Dealt = fled.reduce(function (a, f) { return a + f.ally3Dealt; }, 0);
+  const rdSum = fDealt + a1Dealt + a2Dealt + a3Dealt;
   const rageFights = fled.filter(function (f) { return f.rageFired; });
   const lateRage = rageFights.filter(function (f) { return f.rageFireRound != null && f.rageFireRound >= 4; });
   const rageNoRound = rageFights.filter(function (f) { return f.rageFireRound == null; });
@@ -401,9 +405,9 @@ function aggregate(fled) {
     topShareOfGap: (gap != null && gap > 0 && topVal !== -Infinity) ? topVal / gap : null,
     recon: { aPrime: aPrime, bPrime: bPrime, cPrime: cPrime, echoBonus: echoBonus,
       reconSum: reconSum, reconTarget: reconTarget, reconErr: reconErr },
-    perMember: { fighter: fDealt, ally1: a1Dealt, ally2: a2Dealt, total: rdSum,
+    perMember: { fighter: fDealt, ally1: a1Dealt, ally2: a2Dealt, ally3: a3Dealt, total: rdSum,
       fighterShare: rdSum ? fDealt / rdSum : null, ally1Share: rdSum ? a1Dealt / rdSum : null,
-      ally2Share: rdSum ? a2Dealt / rdSum : null },
+      ally2Share: rdSum ? a2Dealt / rdSum : null, ally3Share: rdSum ? a3Dealt / rdSum : null },
     ability: { touchDmg: totalAbTouch, touchShare: totalDealt ? totalAbTouch / totalDealt : null,
       excess: totalAbExcess, excessShare: totalDealt ? totalAbExcess / totalDealt : null },
     tricks: { trickCount: totalTricks, trickRounds: fled.reduce(function (a, f) { return a + f.trickRounds; }, 0) },
@@ -529,13 +533,13 @@ function selftest() {
     syn.pMean === 15 && syn.pFighter === 20 && syn.pAlly === 10, { pMean: syn.pMean, pFighter: syn.pFighter, pAlly: syn.pAlly });
   check('§B synthetic: verbRounds 1, verbLoss 10/3 per round',
     syn.verbRounds === 1 && Math.abs(syn.verbLoss - 10 / 3) < 1e-9, { verbRounds: syn.verbRounds, verbLoss: syn.verbLoss });
-  check('§B synthetic: missLoss 2.5/round, allyDelayLoss 40/3 per round (8 empty slots)',
-    Math.abs(syn.missLoss - 2.5) < 1e-9 && syn.emptyStrikerRounds === 8 && Math.abs(syn.allyDelayLoss - 40 / 3) < 1e-9,
+  check('§B synthetic: missLoss 2.5/round, allyDelayLoss 70/3 per round (14 empty slots: ally1 2 + ally2 6 + ally3 6)',
+    Math.abs(syn.missLoss - 2.5) < 1e-9 && syn.emptyStrikerRounds === 14 && Math.abs(syn.allyDelayLoss - 70 / 3) < 1e-9,
     { missLoss: syn.missLoss, empty: syn.emptyStrikerRounds, allyDelayLoss: syn.allyDelayLoss });
-  check('§B synthetic: baseCeiling 66/round (111 - 15x3)',
-    syn.baseCeiling === 66, syn.baseCeiling);
-  check('§B synthetic: per-member fighter 80 / ally1 40 / ally2 0',
-    syn.fighterDealt === 80 && syn.ally1Dealt === 40 && syn.ally2Dealt === 0, syn);
+  check('§B synthetic: baseCeiling 51/round (111 - 15x4, four strikers on the ported substrate)',
+    syn.baseCeiling === 51, syn.baseCeiling);
+  check('§B synthetic: per-member fighter 80 / ally1 40 / ally2 0 / ally3 0',
+    syn.fighterDealt === 80 && syn.ally1Dealt === 40 && syn.ally2Dealt === 0 && syn.ally3Dealt === 0, syn);
   check('§B synthetic: volley 12, dStrike 20/round',
     syn.volley === 12 && syn.dStrike === 20, { volley: syn.volley, dStrike: syn.dStrike });
   // §B2: Rage-fire round parse + ability excess.
@@ -576,8 +580,8 @@ function selftest() {
   try { d = JSON.parse(fs.readFileSync(path.join(smokePath, 'dmgshape-b-s105931-dmgshape-b-smoke-dmgshape.json'), 'utf8')); } catch (e) {}
   check('§C driver smoke: corpus file written', !!d, null);
   if (d) {
-    check('§C driver smoke: flags self-describe (leverPresent false, allyslot3Flag 1, senseexpedFlag 1)',
-      d.leverPresent === false && d.allyslot3Flag === '1' && d.senseexpedFlag === '1',
+    check('§C driver smoke: flags self-describe (leverPresent true — slot ported, allyslot3Flag 1, senseexpedFlag 1)',
+      d.leverPresent === true && d.allyslot3Flag === '1' && d.senseexpedFlag === '1',
       { leverPresent: d.leverPresent, allyslot3Flag: d.allyslot3Flag, senseexpedFlag: d.senseexpedFlag });
     check('§C driver smoke: 0 instrument errors',
       (d.instrumentErrors || []).length === 0, d.instrumentErrors);

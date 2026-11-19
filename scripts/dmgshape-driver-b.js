@@ -1241,11 +1241,12 @@ async function oneRun(seed) {
 
 if (require.main === module) (async function () {
   if (MODE !== 'dmgshape') { console.error('DMGSHAPE STOP: MODE must be dmgshape, got ' + JSON.stringify(MODE)); process.exit(2); }
-  // Single diagnostic leg on current master. ALLYSLOT3 is INERT here:
-  // the slot code is absent from src/js on this tip (grep-verified),
-  // so LEVER_PRESENT is recorded per corpus file, never enforced.
-  // SENSEEXPED + PARTYSIZE4 + FIGHTALLY2 + the writeCommit carry +
-  // the partyQuads bump are all REQUIRED substrate (on master).
+  // Single diagnostic leg on current master. ALLYSLOT3 is PORTED here
+  // (coordinator's call, prereg Correction 2: held slot commit
+  // 5a5343363 cherry-picked onto this branch as c84a312ba) — the
+  // flag is LIVE, and LEVER_PRESENT is recorded per corpus file.
+  // If the port is ever removed, LEVER_PRESENT goes false and the
+  // note below fires; the leg must then stop, never re-scope.
   if (!SENSE_PRESENT) { console.error('DMGSHAPE STOP: the SENSEEXPED sense code (party-wiring.js) must be present — the old LAUNCHPARTY sense fix is not a substitute.'); process.exit(2); }
   if (!BUMP_PRESENT) { console.error('DMGSHAPE STOP: the brain-mirror partyQuads bump must be present.'); process.exit(2); }
   if (!CARRY_PRESENT) { console.error('DMGSHAPE STOP: the writeCommit companion2 carry (triodrought fix) must be present.'); process.exit(2); }
@@ -1254,8 +1255,8 @@ if (require.main === module) (async function () {
   if (process.env.FIGHTALLY2 !== '1') { console.error('DMGSHAPE STOP: FIGHTALLY2=1 required (substrate).'); process.exit(2); }
   if (process.env.SENSEEXPED !== '1') { console.error('DMGSHAPE STOP: SENSEEXPED=1 required (substrate).'); process.exit(2); }
   if (process.env.PARTYSIZE4 !== '1') { console.error('DMGSHAPE STOP: PARTYSIZE4=1 required (substrate).'); process.exit(2); }
-  if (process.env.ALLYSLOT3 !== '1') { console.error('DMGSHAPE STOP: ALLYSLOT3=1 required (substrate flag — inert on this master, set for fightcap-arm fidelity).'); process.exit(2); }
-  if (!LEVER_PRESENT) { console.error('DMGSHAPE NOTE: ALLYSLOT3 slot code absent on this tip — flag is inert; judged population is launched-quad meetings as they occur on master (max 2 allies).'); }
+  if (process.env.ALLYSLOT3 !== '1') { console.error('DMGSHAPE STOP: ALLYSLOT3=1 required (substrate flag — the ported slot).'); process.exit(2); }
+  if (!LEVER_PRESENT) { console.error('DMGSHAPE STOP: ALLYSLOT3 slot code absent — the port is required for this diagnostic; stopping, never re-scoping.'); process.exit(2); }
 if (!SEEDS.length) { console.error('DMGSHAPE STOP: SEEDS required.'); process.exit(2); }
   const outDir = path.join(REPO, 'evidence', '2026-11-19', OUTDIR);
   fs.mkdirSync(outDir, { recursive: true });

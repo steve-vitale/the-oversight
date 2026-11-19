@@ -17,6 +17,54 @@ The party needed ~111/round over 9 rounds and dealt ~76. The cap
 was a real constraint on damage and not the constraint on killing.
 This arm decomposes WHERE the ~61/round gap comes from.
 
+## Correction 2 (coordinator's call, 2026-11-19 ~13:20 UTC — port the
+held lever; BEFORE any judged sim on the corrected substrate)
+
+The "Substrate honesty note" above is SUPERSEDED by this correction
+(it stays as the record of what was true at freeze time). The
+coordinator verified the same blocker on the sibling arm
+(sim-partysurvive-b) and authorized, for this purpose only, porting
+the held ALLYSLOT3 slot onto this branch — overriding the
+"zero src/js changes" line in the original brief for the port alone.
+
+- **Port:** `git cherry-pick 5a5343363` (held lever commit on branch
+  sim-fightcap-b; ports slot commit 7efbf26a8 from sim-allyslot3-b
+  onto master eccc08af2) onto this branch → commit `c84a312ba`,
+  applied CLEANLY with no conflicts. Verification:
+  `git diff 5a5343363 -- src/js/fieldFights.js src/js/game.js
+  src/js/party-wiring.js` shows ONLY rebase/base differences —
+  fieldFights.js 18 lines (sim-speargate-a ammo naming),
+  game.js 225 lines (sim-bowopen-a villagerStageBow),
+  party-wiring.js byte-identical, scripts/test-allyslot3-b.js
+  byte-identical. Proof test `scripts/test-allyslot3-b.js`: **18/18**.
+- **Killed inert-substrate leg (full disclosure):** a judged leg on
+  the inert substrate had ALREADY STARTED before this correction
+  arrived (7/8 seeds complete, 105931–105937; seed 105938 in
+  flight). It was KILLED on receipt of the correction, its corpus
+  DELETED (7 files, `evidence/2026-11-19/perseed-dmgshape-b/`),
+  and NO analysis was run on it — no verdict was taken from it.
+  Its driver log is preserved as
+  `evidence/2026-11-19/dmgshape-b-leg-killed-inert.log` (+ `.err`).
+  The coordinator's "no judged sim has run yet" is therefore
+  corrected here: a leg started, was killed mid-run, and is
+  discarded; the judged leg below runs AFTER the port, on the
+  corrected substrate. The frozen substrate (flags, band, policy,
+  horizon) is otherwise UNCHANGED.
+- **Ceiling redefinition (consequence of the port, frozen here):**
+  the port makes FOUR strikers possible (fighter + 3 allies), so
+  component (d) is now `W − P_mean × 4` (was ×3), the empty-slot
+  accounting in (c) now includes ally3's empty rounds, and the
+  per-member split now reports ally3 separately (roundsDetail
+  carries `ally3Dealt` per round on the ported engine). The GO bars
+  (accounted ≥ 0.70, top ≥ 0.25), the pool floor, and the
+  reconciliation band (±15%, Correction 1, now against
+  `P_mean × 4 − D_strike`) are UNCHANGED.
+- **EVIDENCE-ONLY:** the ported lever must NEVER be merged to
+  master as a game change. This branch holds it only so the
+  diagnostic can run; the coordinator lands evidence-only
+  (tooling/prereg/evidence cherry-pick, as fightcap was handled)
+  or releases the branch done-abandoned.
+
 ## Substrate honesty note — ALLYSLOT3 is inert on this master (frozen)
 
 The task brief says to match fightcap-b's arm leg exactly
@@ -95,22 +143,25 @@ fights (`vDie`) are reported beside, never substituted.
     mirage miss, editor cut) as a share of strike attempts:
     `zeroStrikes / totalRounds × mean landed-strike damage`.
   - (c) **Ally-delay loss** — striker-slot rounds empty: rounds
-    before ally1/ally2 joined (join line "charges in!") or after
-    they went down, vs a full 3-striker round:
+    before ally1/ally2/ally3 joined (join line "charges in!") or after
+    they went down, vs a full 4-striker round:
     `emptyStrikerRounds / totalRounds × mean ally landed-strike
-    damage`.
+    damage`. (Correction 2: ally3's empty rounds count now that the
+    slot is ported; the ceiling is 4 strikers.)
   - (d) **Base-rate ceiling** — the strike formula's own ceiling:
-    `W − P_mean × 3`, where `P_mean` = mean damage per landed
-    strike (fighter + allies, volley excluded) and 3 = max
-    strikers/round (fighter + 2 allies, no verbs, no misses).
-    This is the shortfall that remains even at a full party
-    striking every round — it names the tactical formula
-    ([4+wb, 8+wb] per strike, `fieldFights.js`) as the mechanism,
-    with the measured `P_mean` beside it.
-  - Reconciliation: (a)+(b)+(c) must equal `P_mean × 3 − D_meas`
+    `W − P_mean × 4`, where `P_mean` = mean damage per landed
+    strike (fighter + allies, volley excluded) and 4 = max
+    strikers/round (fighter + 3 allies, no verbs, no misses).
+    (Correction 2: was ×3 on the inert substrate; ×4 on the
+    ported substrate.) This is the shortfall that remains even at
+    a full party striking every round — it names the tactical
+    formula ([4+wb, 8+wb] per strike, `fieldFights.js`) as the
+    mechanism, with the measured `P_mean` beside it.
+  - Reconciliation: (a)+(b)+(c) must equal `P_mean × 4 − D_meas`
     within ±15% (the volley/pre-round damage and Live Broadcast
     echo strikes are the known reconcilers, reported beside the
-    error); a larger error is an instrument failure, verdict
+    error — see Correction 1 for the exact identity); a larger
+    error is an instrument failure, verdict
     NO-GO kind INSTRUMENT.
 - **Accounted share** = ((a)+(b)+(c)+(d)) / G.
 - **GO bar: accounted share ≥ 0.70 AND the single top contributor
@@ -129,10 +180,11 @@ was 15 launches / 8 seeds); the floor prices that gamble.
 
 ## Secondary (REPORTED, not binding)
 
-- Per-member contribution: fighter vs ally1 vs ally2 shares of
-  `mDealt` over fled fights (from `roundsDetail`: fighter =
-  dealt − allyDealt; ally1 = allyDealt − ally2Dealt; ally2 =
-  ally2Dealt; cross-checked against the full-log strike parse).
+- Per-member contribution: fighter vs ally1 vs ally2 vs ally3 shares
+  of `mDealt` over fled fights (from `roundsDetail`: fighter =
+  dealt − allyDealt; ally1 = allyDealt − ally2Dealt − ally3Dealt;
+  ally2 = ally2Dealt; ally3 = ally3Dealt; cross-checked against
+  the full-log strike parse). (Correction 2: ally3 added.)
 - Ability/touch damage share: damage of strikes carrying an
   ability note (aimed 2.5x, HAYMAKER x2, dead aim x2, blood trail
   +2, stalker's opening +4, debt settled 1.5x, GPf `(xN.N)`
@@ -173,14 +225,16 @@ reproducibility reference.
   FIGHTALLY2=1 ALLYSLOT3=1 (last flag inert — see honesty note).
 - Driver: `scripts/dmgshape-driver-b.js` — a copy of
   `scripts/fightcap-driver-b.js` with ONLY these changes: RUN/OUTDIR
-  renamed; the `LEVER_PRESENT` assertion removed (recorded, not
-  enforced); `row.log` uncapped (500 lines × 400 chars); the row
+  renamed; `row.log` uncapped (500 lines × 400 chars); the row
   additionally carries `rec.roundsDetail`, `rec.roundTotals`,
   `rec.actionKinds`, `rec.strikesThrown`, `rec.rageFired`,
   `rec.flPreRoundDealt`, `rec.allyDealt`, `rec.ally2Dealt`
-  (pure reads, no game change). All other recorder logic
-  (v4departs, v4gates, dawnbid, wall fields, per-seed summary)
-  is byte-identical in behavior.
+  (pure reads, no game change; `rec.ally3Dealt` was already
+  carried by the copied row). Correction 2: the driver now STOPS
+  if the ported slot code is absent (`LEVER_PRESENT` enforced) —
+  the leg must never re-scope to the control substrate. All other
+  recorder logic (v4departs, v4gates, dawnbid, wall fields,
+  per-seed summary) is byte-identical in behavior.
 - Analyzer: `scripts/analyze-dmgshape-b.js` — reuses
   `analyze-fightcap-b.js` `quadKills()` for the population +
   ladder, then decomposes the fled rows from the new fields +
@@ -228,7 +282,9 @@ own rows, not live fights.
   effects (flee-round truncation, trick-displaced strikes, stuns),
   which the evidence will name if large. Same class of fix as
   ragepreempt-b's Correction 1: an instrument-model error found in
-  shakedown, before any judged data was seen.
+  shakedown, before any judged data was seen. (Correction 2 moves
+  the ceiling to ×4 — four strikers on the ported substrate; the
+  identity is otherwise unchanged.)
 - The primary denominator (fled launched-quad meetings, corrected
   loose join) is pre-registered here with the reason stated (the
   flee is the outcome to explain; kills and deaths are reported
@@ -242,9 +298,10 @@ own rows, not live fights.
   half godhood). If `D_meas` lands far from 49.5, the gap is
   computed from THIS corpus's `D_meas`, not from 49.5 — the
   fightcap number stays a reference, never a substitute.
-- The base-rate ceiling (d) uses `P_mean × 3` — three landed
+- The base-rate ceiling (d) uses `P_mean × 4` — four landed
   strikes every round. That is the formula ceiling for a full
-  party, not a realistic rate (verbs, misses, and join delays
+  party (Correction 2: was ×3 on the inert substrate), not a
+  realistic rate (verbs, misses, and join delays
   are priced separately in (a)–(c)); the reconciliation error
   is the check that the split is honest.
 - The late-Rage-fire secondary is observed-or-absent by design:
