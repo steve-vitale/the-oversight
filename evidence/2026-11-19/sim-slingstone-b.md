@@ -418,16 +418,21 @@ evades, the named line, the creek-bed gathering all read.
 ## 11. Blanks, limits, and things not done
 
 - **Post-sim rebase before merge (recorded, not hidden):** after
-  the judged sims, local master moved again (68b1f6370
-  journey-social-life r239, evidence-only, + acbcb24af
-  sim-winnability-round-1830 adoption closeout) and the branch was
-  rebased onto acbcb24af before merging. The rebase replayed the
-  single arm commit cleanly (1/1, no picks); the arm's files are
-  byte-identical before and after (`git diff` of the arm paths
+  the judged sims, local master moved twice and the branch was
+  rebased twice — first onto acbcb24af (sim-winnability-round-1830
+  adoption closeout), then onto f482b0706 (sim-fusioncell-fix-a
+  NO-GO) after the first merge attempt failed cleanly on the
+  moved master (exit 128, diverging branches, main tree untouched).
+  Both rebases replayed the arm commits cleanly; the arm's files
+  are byte-identical before and after (`git diff` of the arm paths
   between the pre- and post-rebase commits is empty). No sim was
   re-run: the corpora still record the base they ran on
   (`anchorCommit` 16975bb01), and the numbers, verdict, and
   instrument in this file are unchanged by the re-parenting.
+  Note for the next band: the f482b0706 range also carries the
+  BOWCRAFT turn-on (d56fbe819: env gate removed, bowcraft duty
+  always on in live play), which post-dates these judged sims —
+  a future sling/bow band runs under it, this one did not.
 - **No 12–16 seed confirm** — gated off by the NO-GO (see §2).
 - **Trajectory drift vs slingstone-a (§4):** the base move
   changed three seeds' trajectories (107023 wave 5 → 4,
