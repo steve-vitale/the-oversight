@@ -28,8 +28,8 @@ const REPO = path.join(__dirname, '..');
 function argvVal(flag, dflt) {
   return process.argv.includes(flag) ? process.argv[process.argv.indexOf(flag) + 1] : dflt;
 }
-const BEFORE_DIR = path.join(REPO, argvVal('--before', 'evidence/2026-11-19/perseed-dmgshape-b-ctl'));
-const AFTER_DIR = path.join(REPO, argvVal('--after', 'evidence/2026-11-19/perseed-dmgshape-b-arm'));
+const BEFORE_DIR = path.join(REPO, argvVal('--before', 'evidence/2026-11-19/perseed-fightcap-b-arm'));
+const AFTER_DIR = path.join(REPO, argvVal('--after', 'evidence/2026-11-19/perseed-dmgshape-b'));
 const OUT_PREFIX = argvVal('--out', path.join(REPO, 'evidence', '2026-11-19', 'dmgshape-b-panel'));
 
 const contractDigest = crypto.createHash('sha256')
@@ -53,7 +53,9 @@ const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 function load(dir, leg, run, seeds, stem) {
   const rows = [];
   for (const seed of seeds) {
-    const fp = path.join(dir, stem + '-s' + seed + '-' + run + '.json');
+    // Per-seed files are <stem>-s<seed>-<run>-<mode>.json, where run is
+    // the RUN name (fightcap-b / dmgshape-b) and mode the leg mode.
+    const fp = path.join(dir, stem + '-s' + seed + '-' + stem + '-' + run + '.json');
     if (!fs.existsSync(fp)) throw new Error('missing per-seed file: ' + fp);
     rows.push({ seed: seed, run: leg, r: JSON.parse(fs.readFileSync(fp, 'utf8')) });
   }
@@ -73,14 +75,14 @@ function metricsFor(r) {
   return m;
 }
 
-function buildPanel(rows) {
+function buildPanel(rows, seeds) {
   return {
     schemaVersion: 1,
     observerDigest: 'dmgshape-b-instrument-v1',
     contractDigest: contractDigest,
     sources: {},
     options: {
-      days: DAYS, policies: POLICIES, seeds: SEEDS, region: null,
+      days: DAYS, policies: POLICIES, seeds: seeds, region: null,
       origin: 'sim-dmgshape-b',
       flags: {},
       nodeVersion: process.version,
@@ -94,7 +96,7 @@ function buildPanel(rows) {
     }),
     validity: {
       sourcesStable: true,
-      neutrality: POLICIES.map(function (p) { return { policy: p, seed: SEEDS[0], match: true, warnings: 0 }; }),
+      neutrality: POLICIES.map(function (p) { return { policy: p, seed: seeds[0], match: true, warnings: 0 }; }),
     },
   };
 }
@@ -109,8 +111,8 @@ function main() {
   const afterRows = load(AFTER_DIR, 'dmgshape-b-dmgshape', argvVal('--mode-after', 'dmgshape'), SEEDS, 'dmgshape-b');
   const beforePath = OUT_PREFIX + '-before.json.gz';
   const afterPath = OUT_PREFIX + '-after.json.gz';
-  fs.writeFileSync(beforePath, zlib.gzipSync(JSON.stringify(buildPanel(beforeRows)) + '\n'));
-  fs.writeFileSync(afterPath, zlib.gzipSync(JSON.stringify(buildPanel(afterRows)) + '\n'));
+  fs.writeFileSync(beforePath, zlib.gzipSync(JSON.stringify(buildPanel(beforeRows, BEFORE_SEEDS)) + '\n'));
+  fs.writeFileSync(afterPath, zlib.gzipSync(JSON.stringify(buildPanel(afterRows, SEEDS)) + '\n'));
   console.log('wrote ' + beforePath + ' + ' + afterPath);
   console.log('compare with: node scripts/balance-panel.js compare --before ' + beforePath + ' --after ' + afterPath + ' --out ' + OUT_PREFIX);
 }

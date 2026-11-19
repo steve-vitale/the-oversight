@@ -368,7 +368,7 @@ function aggregate(fled) {
   const compA = totalRounds ? verbLossNum / totalRounds : null;
   const compB = totalRounds ? missLossNum / totalRounds : null;
   const compC = totalRounds ? allyDelayNum / totalRounds : null;
-  const compD = pMean != null ? WIN_SHAPE - pMean * 3 : null;
+  const compD = pMean != null ? WIN_SHAPE - pMean * 4 : null;
   const gap = dMeas != null ? WIN_SHAPE - dMeas : null;
   const accounted = (gap != null && gap > 0 && compA != null && compB != null && compC != null && compD != null)
     ? (compA + compB + compC + compD) / gap : null;
@@ -381,7 +381,7 @@ function aggregate(fled) {
   const bPrime = totalRounds ? (totalZero / totalRounds) * pMean : null;
   const cPrime = totalRounds ? (totalEmpty / totalRounds) * pMean : null;
   const echoBonus = totalRounds ? (totalEcho / totalRounds) * pMean : null;
-  const reconTarget = (pMean != null && dStrikePooled != null) ? pMean * 3 - dStrikePooled : null;
+  const reconTarget = (pMean != null && dStrikePooled != null) ? pMean * 4 - dStrikePooled : null;
   const reconSum = (aPrime != null && bPrime != null && cPrime != null && echoBonus != null)
     ? aPrime + bPrime + cPrime - echoBonus : null;
   const reconErr = (reconSum != null && reconTarget != null && Math.abs(reconTarget) > 1e-9)
@@ -542,6 +542,15 @@ function selftest() {
     syn.fighterDealt === 80 && syn.ally1Dealt === 40 && syn.ally2Dealt === 0 && syn.ally3Dealt === 0, syn);
   check('§B synthetic: volley 12, dStrike 20/round',
     syn.volley === 12 && syn.dStrike === 20, { volley: syn.volley, dStrike: syn.dStrike });
+  // §B3: the aggregate over the synthetic fight must satisfy the
+  // exact identity (Correction 1, four strikers after Correction 2):
+  // recon error 0, baseCeiling 51, accounted 80.17/89.
+  const synAgg = aggregate([syn]);
+  check('§B3 aggregate identity on the synthetic fight: recon error 0, baseCeiling 51/round',
+    synAgg.recon.reconErr != null && synAgg.recon.reconErr < 1e-9 && synAgg.components.baseCeiling === 51,
+    { reconErr: synAgg.recon.reconErr, baseCeiling: synAgg.components.baseCeiling });
+  check('§B3 aggregate accounted share 80.17/89 = 0.901 on the synthetic fight',
+    synAgg.accounted != null && Math.abs(synAgg.accounted - 80.16666666666667 / 89) < 1e-9, synAgg.accounted);
   // §B2: Rage-fire round parse + ability excess.
   const rageLog = [
     'Ruby walks straight into The Algorithm. No avoiding it.',

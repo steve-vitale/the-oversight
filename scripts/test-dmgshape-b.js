@@ -37,8 +37,8 @@ function check(name, cond, extra) {
     { cwd: REPO, encoding: 'utf8', timeout: 600000 });
   const out = (r.stdout || '') + (r.stderr || '');
   const m = out.match(/test-dmgshape-b: (\d+) passed, (\d+) failed/);
-  check('§A analyzer selftest exits 0 with 19 passed, 0 failed',
-    r.status === 0 && !!m && m[1] === '19' && m[2] === '0', out.slice(-300));
+  check('§A analyzer selftest exits 0 with 21 passed, 0 failed',
+    r.status === 0 && !!m && m[1] === '21' && m[2] === '0', out.slice(-300));
 })();
 
 (function sectionB() {
