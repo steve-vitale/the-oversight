@@ -1,0 +1,34 @@
+
+ORGANIC DEATH d28: Hermann -> Stan, topTrust=[{"id":"Thabo","t":93},{"id":"Javier","t":91},{"id":"Vincent","t":91},{"id":"James","t":91}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=20 inheritedPlants=0 keptSkills=7 inheritedSkills=0 succTrustPre=91 succTrustPost=60
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","lucky_rock","trophy_room"] post=["beast_calm","lucky_rock","trophy_room"]
+DEATH d28 (organic (phase A)): Hermann -> Stan | passed=true lin=true mo=true trust=60 vouchers=9
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Didier (refused=false)
+  CONVO d+3 with Vincent (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Javier (depth=1 v=34 refused=false)
+  CONVO d+7 with Didier (refused=false)
+  CONVO d+7 with James (refused=false)
+  CONVO d+14 with Javier (refused=false)
+  CONVO d+14 with Vincent (refused=false)
+  NEWCOMER-PROBE d+15 with Myroslav (arrived d+15, trust=34 refused=false)
+  CONVO d+30 with James (refused=false)
+  CONVO d+30 with Onni (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=9) echo=5 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=35 violations=0 noMealDays=6 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=35 signals={"levelUp":true,"systemVoice":49,"offerLines":17,"codexPlantsDelta":15,"codexSkillsDelta":9,"codexAbilitiesDelta":5,"xpDelta":48,"any":true} pantry 78498->0
+TRUST-DIALS: office 60->76 (+16, climb) | villageMean 82.9->65.8 (-17.1, fall) | ge60 9->2 | movers>=5: [{"id":"Onni","from":78,"to":90,"delta":12}]
+DEED-LEDGER: calls=46 summary={"giveFood":{"calls":20,"ok":20,"deltaSum":79,"deltaN":20,"positive":20,"meanDelta":3.95},"teachPlant":{"calls":6,"ok":6,"deltaSum":0,"deltaN":6,"positive":0,"meanDelta":0},"donateToPantry":{"calls":20,"ok":20,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=63 alive=4 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=35
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=46) trustVerdict={"readable":true,"officeMantle":60,"officeLast":76,"officeDelta":16,"officeClass":"climb","villageMantle":82.9,"villageLast":65.8,"villageDelta":-17.1,"villageClass":"fall","villageGe60Mantle":9,"villageGe60Last":2,"movers":[{"id":"Onni","from":78,"to":90,"delta":12}]}
+E6/CALLCHECK: e6={"callMoves":14,"withCensus":14,"chainHandoffs":1,"trustMoves":13} callCheck={"dailyMoveDays":14,"callMoveDays":13,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=6, excludedLoot=0))
+E7/R47: e7={"trustMoves":13,"soloOffice":5,"soloOfficeDeltas":[1,2,1,2,2],"soloBearerDeltaExact":[1,2,1,2,2],"singleMoverBearer":0,"singleMoverOther":4,"eventClass":{"event-only":0,"deed-only":1,"both":12,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":6,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":36,"moves":14}

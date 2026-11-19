@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d18: Angelo -> Victor, topTrust=[{"id":"Sergio","t":90},{"id":"Benoit","t":90},{"id":"Jaxon","t":69},{"id":"Ruia","t":65}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=11 inheritedPlants=0 keptSkills=4 inheritedSkills=0 succTrustPre=90 succTrustPost=58
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d17 (organic (phase A)): Angelo -> Victor | passed=true lin=true mo=true trust=58 vouchers=5
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Sergio (refused=false)
+  CONVO d+3 with Benoit (refused=false)
+  STRANGER-PROBE d+3 with Seiichi (trust=19 refused=false)
+  CONVO d+7 with Sergio (refused=false)
+  CONVO d+7 with Jaxon (refused=false)
+  CONVO d+14 with Jaxon (refused=false)
+  CONVO d+14 with Sergio (refused=false)
+  CONVO d+30 with Sergio (refused=false)
+  CONVO d+30 with Jaxon (refused=false)
+  CONVO d+45 with Ruia (refused=false)
+  CONVO d+45 with Somchai (refused=false)
+  CONVO d+53 with Ruia (refused=false)
+  CONVO d+53 with Somchai (refused=false)
+  NEWCOMER-PROBE d+55 with Zoe (arrived d+55, trust=40 refused=false)
+  CONVO d+64 with Somchai (refused=false)
+  CONVO d+64 with Daniyar (refused=false)
+
+FUNERAL: deathBeat=11 recover=1 vouch=1 (eligible=5) echo=6 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=70 violations=0 noMealDays=10 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":111,"offerLines":63,"codexPlantsDelta":32,"codexSkillsDelta":25,"codexAbilitiesDelta":19,"xpDelta":240,"any":true} pantry 16816->10160
+TRUST-DIALS: office 58->90 (+32, climb) | villageMean 59.9->81.6 (+21.7, climb) | ge60 5->7 | movers>=5: [{"id":"Somchai","from":52,"to":100,"delta":48},{"id":"Priya","from":54,"to":91,"delta":37},{"id":"Boris","from":55,"to":91,"delta":36},{"id":"Nadia","from":56,"to":90,"delta":34},{"id":"Daniyar","from":61,"to":93,"delta":32}]
+DEED-LEDGER: calls=28 summary={"teachPlant":{"calls":9,"ok":9,"deltaSum":0,"deltaN":9,"positive":0,"meanDelta":0},"giveFood":{"calls":9,"ok":9,"deltaSum":17,"deltaN":9,"positive":5,"meanDelta":1.89},"donateToPantry":{"calls":10,"ok":10,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=6 (convo=6, say=0)) m4=true m5=manual | endDay=88 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+71) t2=true(deedCalls=28) trustVerdict={"readable":true,"officeMantle":58,"officeLast":90,"officeDelta":32,"officeClass":"climb","villageMantle":59.9,"villageLast":81.6,"villageDelta":21.7,"villageClass":"climb","villageGe60Mantle":5,"villageGe60Last":7,"movers":[{"id":"Somchai","from":52,"to":100,"delta":48},{"id":"Priya","from":54,"to":91,"delta":37},{"id":"Boris","from":55,"to":91,"delta":36},{"id":"Nadia","from":56,"to":90,"delta":34},{"id":"Daniyar","from":61,"to":93,"delta":32}]}
+E6/CALLCHECK: e6={"callMoves":10,"withCensus":10,"chainHandoffs":3,"trustMoves":7} callCheck={"dailyMoveDays":10,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=7 (v2=7, excludedLoot=0))
+E7/R47: e7={"trustMoves":7,"soloOffice":5,"soloOfficeDeltas":[1,1,2,1,2],"soloBearerDeltaExact":[1,1,2,1,2],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":2,"both":5,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":6,"v2":7,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":10}
