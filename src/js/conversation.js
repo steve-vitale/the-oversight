@@ -7938,12 +7938,31 @@
             `"Here — and here." ${vname} sketches in the dirt with a stick, quick sure lines. "Don't go there after rain. And this one's worth the walk."`,
             `"I've been all through here." A finger traces routes you haven't walked. "The ground's different than it looks from far off. Now you know."`,
             `${vname} talks you through their ground — where the path holds, where it doesn't, what's worth seeing. Your map grows by ${cmp.newCount} place${cmp.newCount === 1 ? '' : 's'}.`,
+            // MAPS-POOL EXPANSION (journey-landing r147 2026-11-19): the
+            // shared pool held 3 lines and the even-maps pool 2 — convoPick
+            // filters against everything ever said to this villager, so a
+            // sitting comparing maps 3+ times with nothing new dried to
+            // null and the null-line guard rendered bare "..." (r146:
+            // 1248 d6, 1250 d10). Six lines each means a sitting needs
+            // seven compares before any repeat — same remedy as the r124
+            // small-pool and r146 want-bridge expansions. Existing lines
+            // kept as entries 1-3.
+            `"Look — this bend here." ${vname} draws it twice, slow, pressing the line deep. "The ground dips. Remember it."`,
+            `"Here's one you haven't got." ${vname} marks it with a thumbnail in the dirt. "Worth the walk, that one."`,
+            `${vname} walks you through the ground they've covered — the safe cuts, the dead ends, the places worth the walk. Your map grows by ${cmp.newCount} place${cmp.newCount === 1 ? '' : 's'}.`,
           ];
           line = this.convoPick(vid, 'maps:shared', spots);
         } else {
           const spots = [
             `"Huh. We've walked the same ground, you and I." ${vname} shrugs. "Nothing new on mine."`,
             `"Let me see... no, you've got everything I've got. We're even."`,
+            // MAPS-POOL EXPANSION (journey-landing r147 2026-11-19): see
+            // above — the even-maps pool held 2 lines; the third compare
+            // in one sitting returned null and rendered bare "...".
+            `"Same ground, same paths." ${vname} taps the dirt twice with a stick. "You haven't missed anything I've walked."`,
+            `"We've both been everywhere worth going, looks like." ${vname} folds their arms. "Nothing left to trade."`,
+            `"Your map's as full as mine on this stretch." ${vname} squints at the lines. "We're even, truly."`,
+            `"No new ground between us." ${vname} shrugs. "We've already walked each other's footsteps."`,
           ];
           line = this.convoPick(vid, 'maps:nonenew', spots);
         }
