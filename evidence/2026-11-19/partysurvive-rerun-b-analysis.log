@@ -1,0 +1,73 @@
+{
+  "verdict": "NO-GO",
+  "kind": "NO-PRE-FIGHT-DEATHS",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": false,
+      "detail": "quad launches 2 (floor 6); pre-fight deaths 0 (floor 3); members tracked 8"
+    },
+    {
+      "id": "primary-classified-share",
+      "pass": false,
+      "detail": "classified pre-fight deaths 0/0 = n/a (bar >= 0.90); top cause none (0)"
+    },
+    {
+      "id": "primary-survival-curve",
+      "pass": false,
+      "detail": "share alive at meeting 1.000 (4/4); median days launch→death null (Q1 null, Q3 null); alive +7d 0.875, +21d 0.500"
+    },
+    {
+      "id": "instrument",
+      "pass": true,
+      "detail": "instrument errors 0 (bar 0); files 8/8; death-day cross-check 4/4 agree, 0 disagree, 0 unchecked (no roster row), 0 early-vanish warnings"
+    }
+  ],
+  "launches": 2,
+  "membersTracked": 8,
+  "preFightDeaths": 0,
+  "classified": 0,
+  "classifiedShare": null,
+  "byCause": {},
+  "bySub": {},
+  "byMonster": {},
+  "topCause": null,
+  "survival": {
+    "metMembers": 4,
+    "aliveAtMeeting": 4,
+    "diedBeforeMeeting": 0,
+    "shareAliveAtMeeting": 1,
+    "shareAlivePlus7": 0.875,
+    "shareAlivePlus21": 0.5,
+    "daysToDeathMedian": null,
+    "daysToDeathQ1": null,
+    "daysToDeathQ3": null,
+    "daysToDeath": []
+  },
+  "holderPreFight": 0,
+  "companionPreFight": 0,
+  "sameDayFlagged": 0,
+  "diedInMeeting": 0,
+  "noMeetingDeaths": 2,
+  "noMeetingByCause": {
+    "field-fight": 1,
+    "the-wild": 1
+  },
+  "crossCheck": {
+    "checked": 4,
+    "agree": 4,
+    "disagree": [],
+    "unchecked": 0,
+    "earlyVanish": []
+  },
+  "wall": {
+    "wins": 0,
+    "national": 0,
+    "wave5": 4,
+    "wave4": 8,
+    "standing200": 4,
+    "medianDays": 140.5,
+    "survived": 3
+  },
+  "medianDays": 141
+}
