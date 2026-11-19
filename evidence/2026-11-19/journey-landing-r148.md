@@ -279,9 +279,10 @@ Rebased-tip gate: re-run after rebase onto master `7e0810eea`
   still refusing writes at 20:05Z). None of the three touches
   `competent.js` or `bond-initiation.js`; cache-flags and
   occupation-panels were also in r248's gate (335/9) and adjudicated
-  standing/flaky there. Re-run to green is owed once writes clear;
-  the failure signature (EPERM at write/copyfile, nothing else) is
-  environmental, not a code failure, and blocks nothing in this landing.
+  standing/flaky there. **Confirmed after the window cleared
+  (~20:19Z): all three PASS solo** — deathcleanup PASS, occupation-panels
+  25/25, cache-flags 4/4. The failure signature (EPERM at
+  write/copyfile, nothing else) was environmental, not a code failure.
 
 ## Metric review (for the NEXT run)
 
@@ -394,9 +395,9 @@ Rebased-tip gate: re-run after rebase onto master `7e0810eea`
 - **Flap:** a write-refusal window (7th on boot `82c04730`) ran
   19:34:48Z–~19:51Z and ended with the VM replacement; a fresh window
   opened on the new boot within ~5 min and was still refusing writes
-  at 20:16Z. It cost the rebased gate its 3 EPERM failures and is the
-  reason the three solo re-runs (deathcleanup, cache-flags,
-  occupation-panels) are still owed once writes clear — see Q4.
+  at 20:16Z, clearing ~20:19Z. It cost the rebased gate its 3 EPERM
+  failures; all three re-ran to green once writes cleared
+  (deathcleanup PASS, occupation-panels 25/25, cache-flags 4/4) — see Q4.
 - **Merge:** ff-only merge of `journey-landing` into master, in its
   own call with the exit code verified directly. Merge hash recorded
   in the daily memory note and the adoption report (this note follows
