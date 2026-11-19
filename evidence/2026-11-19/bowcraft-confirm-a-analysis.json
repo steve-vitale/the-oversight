@@ -1,0 +1,1200 @@
+{
+  "verdict": "GO",
+  "bars": [
+    {
+      "id": "craft-attempts",
+      "pass": true,
+      "detail": "bow-rung craft attempts (bow / crude_bow): arm 54 (ok 15, fail 39) vs ctl 0 (bar arm >= 3); attempts per ranged-less-knows day arm 0.011 on 5113 ranged-less-knows days (ctl 90)"
+    },
+    {
+      "id": "bows-crafted",
+      "pass": true,
+      "detail": "bows crafted (bow / crude_bow, ok): arm 15 vs ctl 0 (bar arm >= 3); by item {\"crude_bow\":{\"ok\":13,\"fail\":31},\"bow\":{\"ok\":2,\"fail\":8}}"
+    },
+    {
+      "id": "bowless-falls",
+      "pass": true,
+      "detail": "bowless departure share: ctl 0.584 (160/274) -> arm 0.490 (118/241), delta 0.094 (bar >= 0.05)"
+    },
+    {
+      "id": "no-regression",
+      "pass": true,
+      "detail": "median survival arm 150 vs ctl 150 (bar >= 0.8x ctl: pass); starvation deaths arm 3 vs ctl 5 (bar <= ctl+2: pass); deaths/seed arm 79.4 vs ctl 80.8 (bar <= 1.10x ctl: pass)"
+    }
+  ],
+  "ctl": {
+    "dir": "evidence/2026-11-19/perseed-bowcraft-confirm-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {
+      "false": 8
+    },
+    "bowopenOn": {
+      "false": 8
+    },
+    "senseexpedOn": {
+      "true": 8
+    },
+    "bowcraftOn": {
+      "false": 8
+    },
+    "starting": 34,
+    "startingById": {
+      "bow": 12,
+      "crossbow": 6,
+      "sling": 8,
+      "crude_bow": 8
+    },
+    "appearances": 33,
+    "crafted": 0,
+    "looted": 3,
+    "spawned": 18,
+    "moved": 6,
+    "unexplained": 6,
+    "attributionCompleteness": 0.9104477611940298,
+    "appearanceAttribution": 0.8181818181818182,
+    "disappearances": 45,
+    "diedWith": 45,
+    "deposited": 0,
+    "pileUnexplainedGain": 0,
+    "pileUnexplainedLoss": 0,
+    "craftEvents": 0,
+    "craftOk": 0,
+    "craftFail": 0,
+    "craftByItem": {},
+    "craftByVid": {},
+    "craftSuccessRate": null,
+    "craftBowEvents": 0,
+    "craftBowOk": 0,
+    "attemptsPerRangedlessDay": 0,
+    "eligibleDays": 90,
+    "knowsBowDays": 1764,
+    "rangedlessEligibleDays": 90,
+    "spearArmedKnowsDays": 0,
+    "attemptsPerEligibleDay": 0,
+    "craftWrapLive": true,
+    "unexplainedEarth": 0,
+    "lootDrops": 445,
+    "lootBowDrops": 3,
+    "lootBowById": {
+      "phase_sling": 3
+    },
+    "gearMoves": 133,
+    "gearBowMoves": 6,
+    "departs": 274,
+    "bowless": 160,
+    "bowlessShare": 0.583941605839416,
+    "bowlessSourced": 0,
+    "bowlessNoSource": 160,
+    "bowlessSpear": 47,
+    "sourcedShareOfBowless": 0,
+    "departsWave4": 255,
+    "bowlessWave4": 148,
+    "encMeetings": 11,
+    "encRanged": 6,
+    "encRangedShare": 0.5454545454545454,
+    "medianDays": 150,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 3,
+    "communityLost": 2,
+    "starvation": 5,
+    "starvationVillager": 5,
+    "deathsTotal": 646,
+    "deathsPerSeed": 80.75,
+    "scaleRanks": {
+      "regional": 8
+    },
+    "stockAt": {
+      "1": {
+        "totals": [
+          4,
+          3,
+          4,
+          3,
+          6,
+          3,
+          6,
+          5
+        ],
+        "piles": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "knows": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "eligible": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "30": {
+        "totals": [
+          2,
+          2,
+          3,
+          2,
+          5,
+          2,
+          4,
+          5
+        ],
+        "piles": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "knows": [
+          1,
+          2,
+          1,
+          2,
+          4,
+          1,
+          1,
+          3
+        ],
+        "eligible": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "60": {
+        "totals": [
+          2,
+          2,
+          2,
+          2,
+          4,
+          2,
+          5,
+          4
+        ],
+        "piles": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "knows": [
+          2,
+          2,
+          1,
+          1,
+          3,
+          0,
+          2,
+          2
+        ],
+        "eligible": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "90": {
+        "totals": [
+          0,
+          2,
+          2,
+          4,
+          4,
+          1,
+          4,
+          1
+        ],
+        "piles": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "knows": [
+          1,
+          2,
+          1,
+          1,
+          4,
+          0,
+          2,
+          0
+        ],
+        "eligible": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "120": {
+        "totals": [
+          1,
+          3,
+          5,
+          4,
+          0,
+          5,
+          3
+        ],
+        "piles": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "knows": [
+          0,
+          3,
+          2,
+          5,
+          0,
+          2,
+          0
+        ],
+        "eligible": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      "150": {
+        "totals": [
+          1,
+          1,
+          3,
+          5,
+          1,
+          1
+        ],
+        "piles": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "knows": [
+          0,
+          1,
+          1,
+          5,
+          0,
+          0
+        ],
+        "eligible": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "perSeed": [
+      {
+        "seed": 107011,
+        "days": 150,
+        "endReason": "survived",
+        "scaleRank": "regional",
+        "starting": 4,
+        "appearances": 5,
+        "attributed": {
+          "crafted": 0,
+          "looted": 0,
+          "spawned": 2,
+          "moved": 1
+        },
+        "unexplained": 2,
+        "craftEvents": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftBowEvents": 0,
+        "craftBowOk": 0,
+        "eligibleDays": 37,
+        "rangedlessEligibleDays": 37,
+        "spearArmedKnowsDays": 0,
+        "deathsTotal": 66,
+        "departs": 19,
+        "bowless": 4,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 4,
+        "encMeetings": 2,
+        "encRanged": 1,
+        "errors": 0
+      },
+      {
+        "seed": 107012,
+        "days": 150,
+        "endReason": "survived",
+        "scaleRank": "regional",
+        "starting": 3,
+        "appearances": 2,
+        "attributed": {
+          "crafted": 0,
+          "looted": 0,
+          "spawned": 2,
+          "moved": 0
+        },
+        "unexplained": 0,
+        "craftEvents": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftBowEvents": 0,
+        "craftBowOk": 0,
+        "eligibleDays": 0,
+        "rangedlessEligibleDays": 0,
+        "spearArmedKnowsDays": 0,
+        "deathsTotal": 118,
+        "departs": 65,
+        "bowless": 54,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 54,
+        "encMeetings": 2,
+        "encRanged": 2,
+        "errors": 0
+      },
+      {
+        "seed": 107013,
+        "days": 103,
+        "endReason": "village-lost",
+        "scaleRank": "regional",
+        "starting": 4,
+        "appearances": 1,
+        "attributed": {
+          "crafted": 0,
+          "looted": 0,
+          "spawned": 1,
+          "moved": 0
+        },
+        "unexplained": 0,
+        "craftEvents": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftBowEvents": 0,
+        "craftBowOk": 0,
+        "eligibleDays": 0,
+        "rangedlessEligibleDays": 0,
+        "spearArmedKnowsDays": 0,
+        "deathsTotal": 52,
+        "departs": 4,
+        "bowless": 3,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 3,
+        "encMeetings": 0,
+        "encRanged": 0,
+        "errors": 0
+      },
+      {
+        "seed": 107014,
+        "days": 150,
+        "endReason": "survived",
+        "scaleRank": "regional",
+        "starting": 3,
+        "appearances": 6,
+        "attributed": {
+          "crafted": 0,
+          "looted": 1,
+          "spawned": 3,
+          "moved": 1
+        },
+        "unexplained": 1,
+        "craftEvents": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftBowEvents": 0,
+        "craftBowOk": 0,
+        "eligibleDays": 0,
+        "rangedlessEligibleDays": 0,
+        "spearArmedKnowsDays": 0,
+        "deathsTotal": 91,
+        "departs": 51,
+        "bowless": 40,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 40,
+        "encMeetings": 2,
+        "encRanged": 0,
+        "errors": 0
+      },
+      {
+        "seed": 107015,
+        "days": 150,
+        "endReason": "survived",
+        "scaleRank": "regional",
+        "starting": 6,
+        "appearances": 6,
+        "attributed": {
+          "crafted": 0,
+          "looted": 0,
+          "spawned": 3,
+          "moved": 2
+        },
+        "unexplained": 1,
+        "craftEvents": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftBowEvents": 0,
+        "craftBowOk": 0,
+        "eligibleDays": 44,
+        "rangedlessEligibleDays": 44,
+        "spearArmedKnowsDays": 0,
+        "deathsTotal": 76,
+        "departs": 33,
+        "bowless": 11,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 11,
+        "encMeetings": 0,
+        "encRanged": 0,
+        "errors": 0
+      },
+      {
+        "seed": 107016,
+        "days": 150,
+        "endReason": "survived",
+        "scaleRank": "regional",
+        "starting": 3,
+        "appearances": 2,
+        "attributed": {
+          "crafted": 0,
+          "looted": 1,
+          "spawned": 0,
+          "moved": 0
+        },
+        "unexplained": 1,
+        "craftEvents": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftBowEvents": 0,
+        "craftBowOk": 0,
+        "eligibleDays": 0,
+        "rangedlessEligibleDays": 0,
+        "spearArmedKnowsDays": 0,
+        "deathsTotal": 73,
+        "departs": 18,
+        "bowless": 3,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 3,
+        "encMeetings": 0,
+        "encRanged": 0,
+        "errors": 0
+      },
+      {
+        "seed": 107017,
+        "days": 138,
+        "endReason": "village-lost",
+        "scaleRank": "regional",
+        "starting": 6,
+        "appearances": 8,
+        "attributed": {
+          "crafted": 0,
+          "looted": 1,
+          "spawned": 5,
+          "moved": 2
+        },
+        "unexplained": 0,
+        "craftEvents": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftBowEvents": 0,
+        "craftBowOk": 0,
+        "eligibleDays": 8,
+        "rangedlessEligibleDays": 8,
+        "spearArmedKnowsDays": 0,
+        "deathsTotal": 96,
+        "departs": 70,
+        "bowless": 41,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 41,
+        "encMeetings": 5,
+        "encRanged": 3,
+        "errors": 0
+      },
+      {
+        "seed": 107018,
+        "days": 150,
+        "endReason": "survived",
+        "scaleRank": "regional",
+        "starting": 5,
+        "appearances": 3,
+        "attributed": {
+          "crafted": 0,
+          "looted": 0,
+          "spawned": 2,
+          "moved": 0
+        },
+        "unexplained": 1,
+        "craftEvents": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftBowEvents": 0,
+        "craftBowOk": 0,
+        "eligibleDays": 1,
+        "rangedlessEligibleDays": 1,
+        "spearArmedKnowsDays": 0,
+        "deathsTotal": 74,
+        "departs": 14,
+        "bowless": 4,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 4,
+        "encMeetings": 0,
+        "encRanged": 0,
+        "errors": 0
+      }
+    ]
+  },
+  "arm": {
+    "dir": "evidence/2026-11-19/perseed-bowcraft-confirm-a-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {
+      "false": 8
+    },
+    "bowopenOn": {
+      "false": 8
+    },
+    "senseexpedOn": {
+      "true": 8
+    },
+    "bowcraftOn": {
+      "true": 8
+    },
+    "starting": 34,
+    "startingById": {
+      "bow": 12,
+      "crossbow": 6,
+      "sling": 8,
+      "crude_bow": 8
+    },
+    "appearances": 49,
+    "crafted": 15,
+    "looted": 4,
+    "spawned": 14,
+    "moved": 7,
+    "unexplained": 9,
+    "attributionCompleteness": 0.891566265060241,
+    "appearanceAttribution": 0.8163265306122449,
+    "disappearances": 60,
+    "diedWith": 60,
+    "deposited": 0,
+    "pileUnexplainedGain": 0,
+    "pileUnexplainedLoss": 0,
+    "craftEvents": 54,
+    "craftOk": 15,
+    "craftFail": 39,
+    "craftByItem": {
+      "crude_bow": {
+        "ok": 13,
+        "fail": 31
+      },
+      "bow": {
+        "ok": 2,
+        "fail": 8
+      }
+    },
+    "craftByVid": {
+      "gen_fo5rp5h": 1,
+      "oliver_moore": 1,
+      "miguel_santos": 1,
+      "visjoin_111": 1,
+      "gen_ro3bl4b": 1,
+      "olivia_bennett": 1,
+      "app_mgpspk6d882": 1,
+      "gen_1t3w93t": 1,
+      "gen_guxts9n": 1,
+      "gen_x572g79": 1,
+      "tom_baker": 1,
+      "gen_p9atnip": 1,
+      "mateo_alvarez": 1,
+      "gen_y6k6hqe": 1,
+      "jesse_cortez": 1
+    },
+    "craftSuccessRate": 0.2777777777777778,
+    "craftBowEvents": 54,
+    "craftBowOk": 15,
+    "attemptsPerRangedlessDay": 0.01056131429689028,
+    "eligibleDays": 646,
+    "knowsBowDays": 8513,
+    "rangedlessEligibleDays": 5113,
+    "spearArmedKnowsDays": 1338,
+    "attemptsPerEligibleDay": 0.08359133126934984,
+    "craftWrapLive": true,
+    "unexplainedEarth": 0,
+    "lootDrops": 429,
+    "lootBowDrops": 4,
+    "lootBowById": {
+      "phase_sling": 2,
+      "searcaster": 1,
+      "starfall_bow": 1
+    },
+    "gearMoves": 93,
+    "gearBowMoves": 9,
+    "departs": 241,
+    "bowless": 118,
+    "bowlessShare": 0.4896265560165975,
+    "bowlessSourced": 2,
+    "bowlessNoSource": 116,
+    "bowlessSpear": 41,
+    "sourcedShareOfBowless": 0.01694915254237288,
+    "departsWave4": 221,
+    "bowlessWave4": 106,
+    "encMeetings": 8,
+    "encRanged": 4,
+    "encRangedShare": 0.5,
+    "medianDays": 150,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 2,
+    "communityLost": 3,
+    "starvation": 3,
+    "starvationVillager": 3,
+    "deathsTotal": 635,
+    "deathsPerSeed": 79.375,
+    "scaleRanks": {
+      "regional": 8
+    },
+    "stockAt": {
+      "1": {
+        "totals": [
+          4,
+          3,
+          4,
+          3,
+          6,
+          3,
+          6,
+          5
+        ],
+        "piles": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "knows": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "eligible": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "30": {
+        "totals": [
+          2,
+          3,
+          3,
+          3,
+          5,
+          2,
+          6,
+          5
+        ],
+        "piles": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "knows": [
+          9,
+          11,
+          9,
+          11,
+          10,
+          10,
+          9,
+          10
+        ],
+        "eligible": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "60": {
+        "totals": [
+          2,
+          5,
+          4,
+          3,
+          5,
+          2,
+          6,
+          4
+        ],
+        "piles": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "knows": [
+          8,
+          10,
+          7,
+          9,
+          9,
+          8,
+          8,
+          8
+        ],
+        "eligible": [
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      "90": {
+        "totals": [
+          0,
+          6,
+          3,
+          3,
+          5,
+          1,
+          3,
+          2
+        ],
+        "piles": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "knows": [
+          6,
+          10,
+          8,
+          6,
+          9,
+          8,
+          5,
+          5
+        ],
+        "eligible": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1
+        ]
+      },
+      "120": {
+        "totals": [
+          1,
+          5,
+          6,
+          1,
+          4,
+          0,
+          1
+        ],
+        "piles": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "knows": [
+          2,
+          7,
+          7,
+          4,
+          6,
+          7,
+          2
+        ],
+        "eligible": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "150": {
+        "totals": [
+          1,
+          4,
+          4,
+          1
+        ],
+        "piles": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "knows": [
+          2,
+          5,
+          6,
+          7
+        ],
+        "eligible": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "perSeed": [
+      {
+        "seed": 107011,
+        "days": 150,
+        "endReason": "survived",
+        "scaleRank": "regional",
+        "starting": 4,
+        "appearances": 5,
+        "attributed": {
+          "crafted": 0,
+          "looted": 0,
+          "spawned": 2,
+          "moved": 1
+        },
+        "unexplained": 2,
+        "craftEvents": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftBowEvents": 0,
+        "craftBowOk": 0,
+        "eligibleDays": 130,
+        "rangedlessEligibleDays": 694,
+        "spearArmedKnowsDays": 102,
+        "deathsTotal": 66,
+        "departs": 19,
+        "bowless": 4,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 4,
+        "encMeetings": 2,
+        "encRanged": 1,
+        "errors": 0
+      },
+      {
+        "seed": 107012,
+        "days": 150,
+        "endReason": "survived",
+        "scaleRank": "regional",
+        "starting": 3,
+        "appearances": 14,
+        "attributed": {
+          "crafted": 4,
+          "looted": 2,
+          "spawned": 4,
+          "moved": 1
+        },
+        "unexplained": 3,
+        "craftEvents": 10,
+        "craftOk": 4,
+        "craftFail": 6,
+        "craftBowEvents": 10,
+        "craftBowOk": 4,
+        "eligibleDays": 88,
+        "rangedlessEligibleDays": 693,
+        "spearArmedKnowsDays": 345,
+        "deathsTotal": 118,
+        "departs": 73,
+        "bowless": 49,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 49,
+        "encMeetings": 1,
+        "encRanged": 1,
+        "errors": 0
+      },
+      {
+        "seed": 107013,
+        "days": 150,
+        "endReason": "survived",
+        "scaleRank": "regional",
+        "starting": 4,
+        "appearances": 8,
+        "attributed": {
+          "crafted": 3,
+          "looted": 0,
+          "spawned": 1,
+          "moved": 2
+        },
+        "unexplained": 2,
+        "craftEvents": 4,
+        "craftOk": 3,
+        "craftFail": 1,
+        "craftBowEvents": 4,
+        "craftBowOk": 3,
+        "eligibleDays": 120,
+        "rangedlessEligibleDays": 614,
+        "spearArmedKnowsDays": 140,
+        "deathsTotal": 81,
+        "departs": 22,
+        "bowless": 15,
+        "bowlessSourced": 1,
+        "bowlessNoSource": 14,
+        "encMeetings": 3,
+        "encRanged": 0,
+        "errors": 0
+      },
+      {
+        "seed": 107014,
+        "days": 121,
+        "endReason": "village-lost",
+        "scaleRank": "regional",
+        "starting": 3,
+        "appearances": 5,
+        "attributed": {
+          "crafted": 2,
+          "looted": 0,
+          "spawned": 3,
+          "moved": 0
+        },
+        "unexplained": 0,
+        "craftEvents": 10,
+        "craftOk": 2,
+        "craftFail": 8,
+        "craftBowEvents": 10,
+        "craftBowOk": 2,
+        "eligibleDays": 70,
+        "rangedlessEligibleDays": 681,
+        "spearArmedKnowsDays": 63,
+        "deathsTotal": 75,
+        "departs": 18,
+        "bowless": 13,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 13,
+        "encMeetings": 0,
+        "encRanged": 0,
+        "errors": 0
+      },
+      {
+        "seed": 107015,
+        "days": 150,
+        "endReason": "survived",
+        "scaleRank": "regional",
+        "starting": 6,
+        "appearances": 4,
+        "attributed": {
+          "crafted": 2,
+          "looted": 0,
+          "spawned": 1,
+          "moved": 1
+        },
+        "unexplained": 0,
+        "craftEvents": 12,
+        "craftOk": 2,
+        "craftFail": 10,
+        "craftBowEvents": 12,
+        "craftBowOk": 2,
+        "eligibleDays": 48,
+        "rangedlessEligibleDays": 588,
+        "spearArmedKnowsDays": 108,
+        "deathsTotal": 73,
+        "departs": 45,
+        "bowless": 15,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 15,
+        "encMeetings": 0,
+        "encRanged": 0,
+        "errors": 0
+      },
+      {
+        "seed": 107016,
+        "days": 150,
+        "endReason": "survived",
+        "scaleRank": "regional",
+        "starting": 3,
+        "appearances": 2,
+        "attributed": {
+          "crafted": 0,
+          "looted": 1,
+          "spawned": 0,
+          "moved": 0
+        },
+        "unexplained": 1,
+        "craftEvents": 2,
+        "craftOk": 0,
+        "craftFail": 2,
+        "craftBowEvents": 2,
+        "craftBowOk": 0,
+        "eligibleDays": 76,
+        "rangedlessEligibleDays": 1024,
+        "spearArmedKnowsDays": 496,
+        "deathsTotal": 72,
+        "departs": 18,
+        "bowless": 3,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 3,
+        "encMeetings": 0,
+        "encRanged": 0,
+        "errors": 0
+      },
+      {
+        "seed": 107017,
+        "days": 111,
+        "endReason": "village-lost",
+        "scaleRank": "regional",
+        "starting": 6,
+        "appearances": 5,
+        "attributed": {
+          "crafted": 3,
+          "looted": 1,
+          "spawned": 0,
+          "moved": 1
+        },
+        "unexplained": 0,
+        "craftEvents": 10,
+        "craftOk": 3,
+        "craftFail": 7,
+        "craftBowEvents": 10,
+        "craftBowOk": 3,
+        "eligibleDays": 50,
+        "rangedlessEligibleDays": 320,
+        "spearArmedKnowsDays": 84,
+        "deathsTotal": 69,
+        "departs": 32,
+        "bowless": 15,
+        "bowlessSourced": 1,
+        "bowlessNoSource": 14,
+        "encMeetings": 2,
+        "encRanged": 2,
+        "errors": 0
+      },
+      {
+        "seed": 107018,
+        "days": 122,
+        "endReason": "village-lost",
+        "scaleRank": "regional",
+        "starting": 5,
+        "appearances": 6,
+        "attributed": {
+          "crafted": 1,
+          "looted": 0,
+          "spawned": 3,
+          "moved": 1
+        },
+        "unexplained": 1,
+        "craftEvents": 6,
+        "craftOk": 1,
+        "craftFail": 5,
+        "craftBowEvents": 6,
+        "craftBowOk": 1,
+        "eligibleDays": 64,
+        "rangedlessEligibleDays": 499,
+        "spearArmedKnowsDays": 0,
+        "deathsTotal": 81,
+        "departs": 14,
+        "bowless": 4,
+        "bowlessSourced": 0,
+        "bowlessNoSource": 4,
+        "encMeetings": 0,
+        "encRanged": 0,
+        "errors": 0
+      }
+    ]
+  }
+}

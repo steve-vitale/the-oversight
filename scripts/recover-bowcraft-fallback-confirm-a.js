@@ -1,19 +1,27 @@
 #!/usr/bin/env node
-// scripts/recover-bowcraft-fallback-confirm-a.js — recover bowcraft-confirm arm-leg
-// corpora whose writeRobust file write was refused by the host write
-// flap (seeds 107002–107008: the driver fell back to dumping each
-// corpus as text to stdout, i.e. the sweep .log file).
+// scripts/recover-bowcraft-fallback-confirm-a.js — recover bowcraft-confirm
+// corpora (EITHER leg) whose writeRobust file write was refused by the
+// host write flap (the driver fell back to dumping each corpus as text
+// to stdout, i.e. the sweep .log file). Clone of the pilot's
+// recover-bowcraft-fallback-a.js, generalized: the mode (ctl|arm) is
+// read from the target filename, bowcraftOn must match the mode
+// (arm=true, ctl=false), and the anchor is validated against the LIVE
+// branch HEAD (git rev-parse HEAD at recovery time — the corpora
+// record the branch HEAD, which descends from the prereg base
+// 7e0810eea with only prereg/instrument commits on top, 0 src/ diff),
+// not a hardcoded prefix.
 //
 // The fallback format is one line `@@FALLBACK <target path>` followed
 // by the full corpus JSON (JSON.stringify(out, null, 2)). This script
 // extracts each block (a block ends at the next per-seed summary line
 // — a line starting at column 0 with `{"seed":` — or the next
 // @@FALLBACK marker, or EOF), validates it (JSON parses; seed matches
-// the target filename; mode arm; bowcraftOn true; anchor is the
-// committed fix), and writes it to the target path with write +
-// readback verification, retrying up to 10 minutes (the flap is
-// intermittent). It refuses to overwrite an existing non-empty corpus
-// file. It also removes the 0-byte .tmp files writeRobust left behind.
+// the target filename; mode matches the filename's leg; bowcraftOn
+// matches the mode; anchorCommit equals the live branch HEAD; non-empty
+// bowCensus), and writes it to the target path with write + readback
+// verification, retrying up to 10 minutes (the flap is intermittent).
+// It refuses to overwrite an existing non-empty corpus file. It also
+// removes the 0-byte .tmp files writeRobust left behind.
 //
 // Usage: node scripts/recover-bowcraft-fallback-confirm-a.js [--log evidence/2026-11-19/bowcraft-confirm-a-arm.log]
 // Exit 0 = every missing corpus recovered and validated. Exit 1 = a
@@ -23,6 +31,9 @@
 const fs = require('fs');
 const path = require('path');
 const REPO = path.join(__dirname, '..');
+const { execSync } = require('child_process');
+let HEAD_ANCHOR = 'unknown';
+try { HEAD_ANCHOR = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim(); } catch (e) {}
 const LOG = process.argv.includes('--log')
   ? process.argv[process.argv.indexOf('--log') + 1]
   : path.join(REPO, 'evidence', '2026-11-19', 'bowcraft-confirm-a-arm.log');
@@ -82,13 +93,15 @@ function main() {
       failed++;
       continue;
     }
-    const m = /s(\d+)-bowcraft-confirm-a-arm\.json$/.exec(b.target);
+    const m = /s(\d+)-bowcraft-confirm-a-(ctl|arm)\.json$/.exec(b.target);
     const wantSeed = m ? parseInt(m[1], 10) : null;
-    const ok = obj && obj.seed === wantSeed && obj.mode === 'arm' && obj.bowcraftOn === true &&
-      typeof obj.anchorCommit === 'string' && obj.anchorCommit.indexOf('7e0810eea') === 0 &&
+    const wantMode = m ? m[2] : null;
+    const ok = obj && obj.seed === wantSeed && obj.mode === wantMode &&
+      obj.bowcraftOn === (wantMode === 'arm') &&
+      typeof obj.anchorCommit === 'string' && obj.anchorCommit === HEAD_ANCHOR &&
       Array.isArray(obj.bowCensus) && obj.bowCensus.length > 0;
     if (!ok) {
-      console.log('FAIL ' + b.target + ' — validation failed: ' + JSON.stringify({ seed: obj && obj.seed, wantSeed: wantSeed, mode: obj && obj.mode, bowcraftOn: obj && obj.bowcraftOn, anchor: obj && obj.anchorCommit }));
+      console.log('FAIL ' + b.target + ' — validation failed: ' + JSON.stringify({ seed: obj && obj.seed, wantSeed: wantSeed, mode: obj && obj.mode, wantMode: wantMode, bowcraftOn: obj && obj.bowcraftOn, anchor: obj && obj.anchorCommit, headAnchor: HEAD_ANCHOR }));
       failed++;
       continue;
     }
