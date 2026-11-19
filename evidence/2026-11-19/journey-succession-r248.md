@@ -164,8 +164,27 @@ timeout); phone-frame-proof (3 sub-failures, stale receipt);
 one-person-army deed-attainment (120s timeout);
 trust-observer-neutrality (120s timeout); capable-bot (120s timeout).
 
-**Adjudication (adoption, solo re-runs — PENDING; see addendum
-below).**
+**Adjudication (adoption, solo re-runs — DONE).** All 9 re-run solo,
+after the journey-deepening gate finished (never two check.js
+concurrently). **0 attributable to this change** (no src/js change
+this run):
+
+- living-garden deed-attainment: solo PASS in 322s (over the 120s
+  cap; load artifact).
+- one-person-army deed-attainment: solo PASS in 69s.
+- occupation-panels: solo PASS 25/25 in 28s.
+- trust-observer-neutrality: solo PASS 6/6 in 22s.
+- capable-bot: solo PASS 40/40 in 21s.
+- measurement-cache-flags: solo PASS 4/4 in 13s (load artifact;
+  same as r147).
+- measurement-proof-update + measurement-workflow: measurement-proof
+  staleness pair (standing). Both fail identically on pristine
+  master f075dbb84 ("Proof source inputs are not current";
+  "retained neutrality proof covers the current
+  Game/controller/harness inputs").
+- phone-frame-proof: stale phone-frame receipt (standing). 3 passed,
+  3 failed solo in the worktree; identical 3/3 on pristine master
+  f075dbb84.
 
 ## Reachable / Fun / Winnable
 
@@ -216,7 +235,10 @@ below).**
 
 ## Adoption addendum
 
-- Gate solo adjudication: (to be filled).
+- Gate solo adjudication: DONE — all 9 failures re-run solo, 0
+  attributable. 5 deed-attainment timeouts + cache-flags pass solo
+  (load artifacts); staleness pair + phone-frame fail identically on
+  pristine master f075dbb84 (standing). See Gate section.
 - Master at adoption: `f075dbb84` (Loop A 1215Z round evidence;
   bowsource DIAG-GO + arrowsupply DIAG-NO-GO) — the main tree had
   returned to master by the time the adoption started; no merge
