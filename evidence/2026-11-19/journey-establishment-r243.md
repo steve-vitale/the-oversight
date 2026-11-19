@@ -97,7 +97,11 @@ Five villages, 60 people at the start, 47 alive at day 40 (9/10/8/9/11 of 12). T
 
 ## Gate
 
-[PENDING — `node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest` running at note time; result to be filled before merge.]
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest` in the worktree (after waiting out Lane B's r247 `check.js` in `journey2-crisis` — no concurrent jest): **339 passed, 5 failed in 745s**, gate log `evidence/2026-11-19/journey-establishment-r243-gate.log`. All 5 failures are r242's standing set, **0 attributable** to this run (this run changed no game code — evidence + driver/analyzer clones only):
+- `test-one-person-army-deed-attainment.js` and `test-living-garden-deed-attainment.js` — 120s timeouts (same as r242).
+- `test-measurement-proof-update.js` and `test-measurement-workflow.js` ("retained neutrality proof covers the current Game/controller/harness inputs") — stale balance-proof manifest (same as r242; the inputs moved with master, not with this run's evidence-only branch).
+- `test-phone-frame-proof.js` — phone-frame receipt stale (same as r242).
+- The 6th r242 failure (`test-measurement-cache-flags.js`) **passed** this run — the r241 load artifact did not recur, so this gate is 339/5 vs r242's 338/6.
 
 ## Reachable / fun / winnable
 
