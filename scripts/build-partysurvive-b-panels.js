@@ -41,7 +41,13 @@ const contractDigest = crypto.createHash('sha256')
 const contract = require('./balance-metrics.json');
 
 const BEFORE_SEEDS = [104770, 104771, 104772, 104773, 104774, 104775, 104776, 104777];
-const AFTER_SEEDS = [105941, 105942, 105943, 105944, 105945, 105946, 105947, 105948];
+// Re-run parametrization (2026-11-19 sim-partysurvive-rerun-b): the
+// after seeds/run/origin are argv-overridable; defaults preserve the
+// frozen 1230Z behavior exactly (seeds 105941–105948, run
+// 'partysurvive-b'). No default changed.
+const AFTER_SEEDS = (argvVal('--after-seeds', '105941,105942,105943,105944,105945,105946,105947,105948')).split(',').map(function (s) { return parseInt(s, 10); });
+const AFTER_RUN = argvVal('--after-run', 'partysurvive-b');
+const AFTER_ORIGIN = argvVal('--after-origin', 'sim-partysurvive-b');
 const POLICIES = ['competent'];
 const DAYS = 150;
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
@@ -97,11 +103,11 @@ function buildPanel(rows, seeds, origin) {
 
 function main() {
   const beforeRows = load(BEFORE_DIR, BEFORE_SEEDS, 'fightcap-b', 'fightcap-b-arm');
-  const afterRows = load(AFTER_DIR, AFTER_SEEDS, 'partysurvive-b', 'partysurvive-b');
+  const afterRows = load(AFTER_DIR, AFTER_SEEDS, AFTER_RUN, AFTER_RUN);
   const beforePath = OUT_PREFIX + '-before.json.gz';
   const afterPath = OUT_PREFIX + '-after.json.gz';
   fs.writeFileSync(beforePath, zlib.gzipSync(JSON.stringify(buildPanel(beforeRows, BEFORE_SEEDS, 'sim-fightcap-b')) + '\n'));
-  fs.writeFileSync(afterPath, zlib.gzipSync(JSON.stringify(buildPanel(afterRows, AFTER_SEEDS, 'sim-partysurvive-b')) + '\n'));
+  fs.writeFileSync(afterPath, zlib.gzipSync(JSON.stringify(buildPanel(afterRows, AFTER_SEEDS, AFTER_ORIGIN)) + '\n'));
   console.log('wrote ' + beforePath + ' + ' + afterPath);
   console.log('compare with: node scripts/balance-panel.js compare --before ' + beforePath + ' --after ' + afterPath + ' --out ' + OUT_PREFIX);
 }
