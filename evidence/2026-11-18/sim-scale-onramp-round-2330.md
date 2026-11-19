@@ -76,15 +76,96 @@ nationalStanding 2 / nationalRank 0 / table 0 / wins 0 / wave4 8 /
 wave5 2 / median survival 150d. The wall does not move on this
 round.
 
+## Gate
+
+`node scripts/check.js --quick` on tip 48c81dac6 (branch
+sim-round2330-evidence-a, master 986cc5584 + this evidence commit):
+**334 passed, 10 failed in 1424s, 0 attributable.** Full log:
+goal `hidden_files/evidence/2026-11-18/sim-scale-onramp-round-2330-gate.log`.
+The tip was rebased onto master 9da088d34 clean before the ff-merge
+(new tip 36992da58); the rebase replayed only evidence files onto
+evidence-only master movement (crisis r244 panel evidence + Loop B
+round evidence, no src/ changes on either side), so the gate tally
+stands for the merged tip.
+
+1. `test-measurement-proof-update.js` (exit 1, 4.2s) — "Proof source
+   inputs are not current". Standing staleness pair, part 1.
+2. `test-measurement-workflow.js` (exit 1, 7.0s) — "retained
+   neutrality proof covers the current Game/controller/harness
+   inputs". Standing staleness pair, part 2. Both were already failing
+   in the 1735Z round's gate before this run's arms landed; the
+   neutrality proof needs a refresh (`balance-proof-update.js`) —
+   standing maintenance, not an adoption task.
+3. `test-phone-frame-proof.js` (exit 1, 6.0s) — phone receipt stale
+   (index.html + data files). Standing.
+4. `test-living-garden-deed-attainment.js` (TIMEOUT 120s) — solo
+   re-runs expired at 300s AND 600s mid-run (seed 3 of 16) under box
+   load 21.8 (the sibling Loop B adoption was running identical solo
+   re-runs concurrently); not re-proven this round. Same 120s
+   gate-timeout signature as the standing load artifact (it passed
+   solo in 63s on a quiet box in the 2015Z round).
+5. `test-one-person-army-deed-attainment.js` (TIMEOUT 120s) — passes
+   solo, exit 0 in 289s. Load artifact.
+6. `test-occupation-panels.js` (TIMEOUT 120s) — passes solo, exit 0
+   in 174s, 25/25. Load artifact.
+7. `test-trust-observer-neutrality.js` (TIMEOUT 120s) — passes solo,
+   exit 0 in 183s, 6/6. Load artifact.
+8. `test-synergy-stall.js` (TIMEOUT 120s) — passes solo, exit 0 in
+   132s. Load artifact.
+9. `test-capable-bot-20261014.js` (TIMEOUT 120s) — solo exit 1 at
+   225s, all 15 sub-assertions pass; the failure is
+   `spawnSync /usr/bin/node ETIMEDOUT` on the test's self-spawn
+   (`--campaign 1234`) under load. Spawn budget, not an assertion.
+   Load artifact.
+10. `test-measurement-cache-flags.js` (exit 1, 93.1s) — solo: 3 of 4
+    sub-assertions pass; "both actual CLI configurations complete
+    valid neutral panels" still fails. The test spawns
+    `balance-panel.js` with a 30s timeout per configuration; under
+    load 21.8 the spawn exceeds its budget. The test's inputs
+    (`balance-panel.js`, the observer lib, game src/) are
+    byte-identical between this tip and master — this landing changes
+    no file the test reads — so the failure is a load artifact, not
+    attributable to this landing. No pristine-vs-tip A/B was run: a
+    full worktree checkout for the A/B was not justified once the
+    mechanism (30s spawn budget under saturation) plus the
+    identical-inputs argument was established.
+
+**Ladder-bundle control: CONFIRMED FIXED (still).** Absent from this
+gate's failure list — it was failing in the 1735Z and 1715Z gates,
+fixed by the ladderbase-cause-a fix, and stays absent here.
+
+The gate ran 1424s vs 689s in the 2015Z round: the box was saturated
+(load 21.8 at adjudication; Loop B's gate + solo re-runs and the
+0115Z workers concurrent). That saturation is the common cause of the
+six timeouts. **0 attributable:** no failure is attributable to this
+landing (evidence-only; no src/ changes; the one panel-builder script
+is not read by any failing test).
+
+## Telemetry
+
+`node scripts/telemetry-check.js --baseline
+evidence/2026-11-18/telemetry-baselines/scale-wall.json --current
+'evidence/2026-11-18/perseed-partyform-fix-a-arm/*.json' --metrics
+national,table,wins,exiled` — ENOENT: the baseline file does not
+exist in the repo (no `telemetry-baselines/` directory). The deviation
+check could not run; same outcome as the fieldcarrier-confirm-a arm
+and the 2015Z/2030Z rounds (telemetry-check refuses the recorder
+corpora). Baseline NOT rolled. No LOUD line to investigate — there is
+no baseline to compare against, and the arm-vs-ctl comparison in the
+analyzer + panel is the operative contrast for this round.
+
 ## Landing
 
 Evidence-only commit on branch `sim-round2330-evidence-a`, merged
 ff-only to master (this round's own merge — see log). No game code
-in this landing. Worktrees: sim-fieldcarrier-confirm-a released as
-merged, tree removed, branch deleted (its commits are on master);
-sim-partyform-fix-a released as tree-removed-branch-kept (lever
-HELD). Main tree clean on master at closeout. No push, no bump, no
-live verification — merged locally, pending ship.
+in this landing. Worktrees: sim-fieldcarrier-confirm-a tree removed,
+branch KEPT (its evidence commits are on master, but the tooling
+commit 9dd183c4b is branch-only — deleting the branch would lose the
+driver/analyzer/panel-builder; the draft's "branch deleted" line was
+corrected at closeout); sim-partyform-fix-a released as
+tree-removed-branch-kept (lever HELD). Main tree clean on master at
+closeout. No push, no bump, no live verification — merged locally,
+pending ship.
 
 ## This run's own arms (fleshout-20261119T0115Z, spawned, in flight)
 
