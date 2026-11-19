@@ -1,0 +1,1605 @@
+{
+  "verdict": "DIAG-GO",
+  "kind": "",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": true,
+      "detail": "launches 13 (floor 6); primary denominator meetings 8 (floor 2)"
+    },
+    {
+      "id": "trace-coverage",
+      "pass": true,
+      "detail": "same-day traces on 8/8 primary meetings = 1.00 (bar >= 0.90); stale 0, no-trace 0"
+    },
+    {
+      "id": "classification-complete",
+      "pass": true,
+      "detail": "misses 5, unclassified 0 (bar 0); by class {\"not-in-plan:mirror-overwrite\":2,\"not-in-plan:fighter-relaunched\":3}"
+    },
+    {
+      "id": "test-cases",
+      "pass": true,
+      "detail": "named rows reproduced + traced 4/4 (bar >= 3): d133:ok, d69:ok, d112:ok, d117:ok"
+    },
+    {
+      "id": "instrument",
+      "pass": true,
+      "detail": "file errors 0; traces dropped by cap 0; mirror mismatches 0 (bar 0 each)"
+    }
+  ],
+  "census": {
+    "dir": "evidence/2026-11-19/perseed-sense-guard-diag-a-repro",
+    "n": 3,
+    "valid": 3,
+    "errors": 0,
+    "launches": 13,
+    "trioLaunches": 12,
+    "trioRate": 0.9230769230769231,
+    "quadLaunches": 11,
+    "partyQuads": 11,
+    "sizes": {
+      "2": 1,
+      "3": 1,
+      "4": 11
+    },
+    "sources": {
+      "brain": 13
+    },
+    "c2depart": 12,
+    "candC2": 12,
+    "candC2carried": 12,
+    "candC2dropped": 0,
+    "candC2null": 1,
+    "unjoined": 0,
+    "midday": 4,
+    "dawn": 9,
+    "carryRate": 1,
+    "starvation": 1,
+    "starvationVillager": 1,
+    "medianDays": 150,
+    "partyTrios": 12,
+    "brainSha": {
+      "9a9b9305296f": 3
+    },
+    "carryPresent": {
+      "true": 3
+    },
+    "perSeed": [
+      {
+        "seed": 104437,
+        "days": 152,
+        "launches": 1,
+        "observedTrios": 1,
+        "observedQuads": 1,
+        "partyTrios": 1,
+        "partyQuads": 1,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104721,
+        "days": 151,
+        "launches": 6,
+        "observedTrios": 6,
+        "observedQuads": 5,
+        "partyTrios": 6,
+        "partyQuads": 5,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104722,
+        "days": 124,
+        "launches": 6,
+        "observedTrios": 5,
+        "observedQuads": 5,
+        "partyTrios": 5,
+        "partyQuads": 5,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 450,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      }
+    ],
+    "wall": {
+      "wins": 0,
+      "national": 0,
+      "wave5": 1,
+      "wave4": 3,
+      "standing200": 1,
+      "medianDays": 151,
+      "survived": 2
+    }
+  },
+  "senseRate": 0.75,
+  "denom": 8,
+  "trioN": 6,
+  "misses": [
+    {
+      "seed": 104721,
+      "day": 69,
+      "vid": "gen_5b212hy",
+      "mid": "audit",
+      "pid": "nikolai_volkov",
+      "mech": "not-in-plan:mirror-overwrite"
+    },
+    {
+      "seed": 104721,
+      "day": 69,
+      "vid": "gen_5b212hy",
+      "mid": "audit",
+      "pid": "gen_dnv7tkn",
+      "mech": "not-in-plan:mirror-overwrite"
+    },
+    {
+      "seed": 104722,
+      "day": 112,
+      "vid": "nino_kapanadze",
+      "mid": "eater",
+      "pid": "petra_novak",
+      "mech": "not-in-plan:fighter-relaunched"
+    },
+    {
+      "seed": 104722,
+      "day": 112,
+      "vid": "nino_kapanadze",
+      "mid": "eater",
+      "pid": "visjoin_100",
+      "mech": "not-in-plan:fighter-relaunched"
+    },
+    {
+      "seed": 104722,
+      "day": 112,
+      "vid": "nino_kapanadze",
+      "mid": "eater",
+      "pid": "miguel_santos",
+      "mech": "not-in-plan:fighter-relaunched"
+    }
+  ],
+  "byClass": {
+    "not-in-plan:mirror-overwrite": 2,
+    "not-in-plan:fighter-relaunched": 3
+  },
+  "traceCoverage": 1,
+  "traced": 8,
+  "stale": 0,
+  "noTrace": 0,
+  "traceTotal": 2219,
+  "traceDropped": 0,
+  "traceSkipped": 19183,
+  "mirrorMismatch": 0,
+  "worldTick": 6,
+  "noSensePath": 16,
+  "meetings": [
+    {
+      "seed": 104437,
+      "day": 133,
+      "vid": "ruby_callaghan",
+      "mid": "reunion",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 130,
+        "vid": "app_mgpsphub92",
+        "target": "herald",
+        "party": [
+          "app_mgpsphub92",
+          "ruby_callaghan",
+          "gen_ph37qf5",
+          "gen_353ni1r"
+        ],
+        "score": 4,
+        "launchAge": 3,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 22,
+        "day": 133,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "app_mgpsphub92",
+          "gen_ph37qf5",
+          "gen_353ni1r"
+        ],
+        "planParty": [
+          "app_mgpsphub92",
+          "gen_ph37qf5",
+          "gen_353ni1r"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 7,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "app_mgpsphub92",
+        "gen_ph37qf5",
+        "gen_353ni1r"
+      ],
+      "ally3Vid": "gen_353ni1r",
+      "ally3Dealt": 23
+    },
+    {
+      "seed": 104721,
+      "day": 69,
+      "vid": "gen_5b212hy",
+      "mid": "audit",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 65,
+        "vid": "gen_5b212hy",
+        "target": "eater",
+        "party": [
+          "gen_5b212hy",
+          "gen_3ghdbz4",
+          "nikolai_volkov",
+          "gen_dnv7tkn"
+        ],
+        "score": 2,
+        "launchAge": 4,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 367,
+        "day": 69,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "gen_3ghdbz4"
+        ],
+        "planParty": [
+          "gen_3ghdbz4"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "nikolai_volkov",
+          "mech": "not-in-plan:mirror-overwrite",
+          "detail": "fighter taken as a companion in gen_3ghdbz4's day-68 launch — the mirror write overwrote the fighter's plan.party to [gen_3ghdbz4]"
+        },
+        {
+          "pid": "gen_dnv7tkn",
+          "mech": "not-in-plan:mirror-overwrite",
+          "detail": "fighter taken as a companion in gen_3ghdbz4's day-68 launch — the mirror write overwrote the fighter's plan.party to [gen_3ghdbz4]"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "vasyl_shevchenko",
+          "kind": "bystander",
+          "otherLaunch": null
+        }
+      ],
+      "rounds": 6,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "gen_3ghdbz4",
+        "vasyl_shevchenko"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104721,
+      "day": 80,
+      "vid": "gen_3ghdbz4",
+      "mid": "eater",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 77,
+        "vid": "gen_5b212hy",
+        "target": "eater",
+        "party": [
+          "gen_5b212hy",
+          "gen_3ghdbz4",
+          "gen_dnv7tkn",
+          "nikolai_volkov"
+        ],
+        "score": 4,
+        "launchAge": 3,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 545,
+        "day": 80,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "gen_5b212hy",
+          "gen_dnv7tkn",
+          "nikolai_volkov"
+        ],
+        "planParty": [
+          "gen_5b212hy",
+          "gen_dnv7tkn",
+          "nikolai_volkov"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 5,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "gen_5b212hy",
+        "gen_dnv7tkn",
+        "nikolai_volkov"
+      ],
+      "ally3Vid": "nikolai_volkov",
+      "ally3Dealt": 30
+    },
+    {
+      "seed": 104721,
+      "day": 98,
+      "vid": "nikolai_volkov",
+      "mid": "influencer",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 98,
+        "vid": "gen_5b212hy",
+        "target": "eater",
+        "party": [
+          "gen_5b212hy",
+          "gen_3ghdbz4",
+          "gen_dnv7tkn",
+          "nikolai_volkov"
+        ],
+        "score": 4,
+        "launchAge": 0,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 841,
+        "day": 98,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "gen_5b212hy",
+          "gen_3ghdbz4",
+          "gen_dnv7tkn"
+        ],
+        "planParty": [
+          "gen_5b212hy",
+          "gen_3ghdbz4",
+          "gen_dnv7tkn"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 6,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "gen_5b212hy",
+        "gen_3ghdbz4",
+        "gen_dnv7tkn"
+      ],
+      "ally3Vid": "gen_dnv7tkn",
+      "ally3Dealt": 51
+    },
+    {
+      "seed": 104722,
+      "day": 91,
+      "vid": "nikos_papadopoulos",
+      "mid": "spoiler",
+      "wave": 5,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 91,
+        "vid": "petra_novak",
+        "target": "rerun",
+        "party": [
+          "petra_novak",
+          "hannah_kim",
+          "nikos_papadopoulos",
+          "app_mgpspkqo111"
+        ],
+        "score": 4,
+        "launchAge": 0,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 11,
+        "day": 91,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "petra_novak",
+          "hannah_kim",
+          "app_mgpspkqo111"
+        ],
+        "planParty": [
+          "petra_novak",
+          "hannah_kim",
+          "app_mgpspkqo111"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 4,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "petra_novak",
+        "hannah_kim",
+        "app_mgpspkqo111"
+      ],
+      "ally3Vid": "app_mgpspkqo111",
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104722,
+      "day": 112,
+      "vid": "nino_kapanadze",
+      "mid": "eater",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 106,
+        "vid": "petra_novak",
+        "target": "rerun",
+        "party": [
+          "petra_novak",
+          "visjoin_100",
+          "miguel_santos",
+          "nino_kapanadze"
+        ],
+        "score": 1,
+        "launchAge": 6,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 279,
+        "day": 112,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "hannah_kim"
+        ],
+        "planParty": [
+          "hannah_kim"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "petra_novak",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 111 (joined launch day 106); sense reads the NEW party"
+        },
+        {
+          "pid": "visjoin_100",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 111 (joined launch day 106); sense reads the NEW party"
+        },
+        {
+          "pid": "miguel_santos",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 111 (joined launch day 106); sense reads the NEW party"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "hannah_kim",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 91,
+            "vid": "petra_novak"
+          }
+        },
+        {
+          "pid": "nikos_papadopoulos",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 91,
+            "vid": "petra_novak"
+          }
+        }
+      ],
+      "rounds": 4,
+      "outcome": "vDie",
+      "fastFlee": false,
+      "allyVids": [
+        "hannah_kim",
+        "nikos_papadopoulos"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104722,
+      "day": 117,
+      "vid": "miguel_santos",
+      "mid": "editor",
+      "wave": 5,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 115,
+        "vid": "petra_novak",
+        "target": "rerun",
+        "party": [
+          "petra_novak",
+          "hannah_kim",
+          "miguel_santos",
+          "nikos_papadopoulos"
+        ],
+        "score": 4,
+        "launchAge": 2,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 335,
+        "day": 117,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "petra_novak",
+          "hannah_kim",
+          "nikos_papadopoulos"
+        ],
+        "planParty": [
+          "petra_novak",
+          "hannah_kim",
+          "nikos_papadopoulos"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 5,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "petra_novak",
+        "hannah_kim",
+        "nikos_papadopoulos"
+      ],
+      "ally3Vid": "nikos_papadopoulos",
+      "ally3Dealt": 17
+    },
+    {
+      "seed": 104722,
+      "day": 117,
+      "vid": "nikos_papadopoulos",
+      "mid": "rerun",
+      "wave": 5,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 115,
+        "vid": "petra_novak",
+        "target": "rerun",
+        "party": [
+          "petra_novak",
+          "hannah_kim",
+          "miguel_santos",
+          "nikos_papadopoulos"
+        ],
+        "score": 4,
+        "launchAge": 2,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 338,
+        "day": 117,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "petra_novak",
+          "hannah_kim",
+          "miguel_santos"
+        ],
+        "planParty": [
+          "petra_novak",
+          "hannah_kim",
+          "miguel_santos"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee",
+      "fastFlee": true,
+      "allyVids": [
+        "petra_novak",
+        "hannah_kim",
+        "miguel_santos"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    }
+  ],
+  "worldTickMeetings": [
+    {
+      "seed": 104437,
+      "day": 138,
+      "vid": "ruby_callaghan",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "world-tick",
+      "population": "world-tick",
+      "joined": {
+        "day": 130,
+        "vid": "app_mgpsphub92",
+        "target": "herald",
+        "party": [
+          "app_mgpsphub92",
+          "ruby_callaghan",
+          "gen_ph37qf5",
+          "gen_353ni1r"
+        ],
+        "score": 2,
+        "launchAge": 8,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 72,
+        "day": 138,
+        "state": "ok",
+        "fighterBlock": "no-plan-party",
+        "launchMirror": [],
+        "planParty": [],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "app_mgpsphub92",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 136 (joined launch day 130); sense reads the NEW party"
+        },
+        {
+          "pid": "gen_ph37qf5",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 136 (joined launch day 130); sense reads the NEW party"
+        }
+      ],
+      "bystanders": [],
+      "rounds": 3,
+      "outcome": "mFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "ursula_weber",
+        "gen_353ni1r"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104437,
+      "day": 143,
+      "vid": "ruby_callaghan",
+      "mid": "reunion",
+      "wave": 4,
+      "origin": "world-tick",
+      "population": "world-tick",
+      "joined": {
+        "day": 130,
+        "vid": "app_mgpsphub92",
+        "target": "herald",
+        "party": [
+          "app_mgpsphub92",
+          "ruby_callaghan",
+          "gen_ph37qf5",
+          "gen_353ni1r"
+        ],
+        "score": 2,
+        "launchAge": 13,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 127,
+        "day": 143,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "gen_ph37qf5"
+        ],
+        "planParty": [
+          "gen_ph37qf5"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "app_mgpsphub92",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 136 (joined launch day 130); sense reads the NEW party"
+        },
+        {
+          "pid": "gen_353ni1r",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 136 (joined launch day 130); sense reads the NEW party"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "ursula_weber",
+          "kind": "bystander",
+          "otherLaunch": null
+        }
+      ],
+      "rounds": 7,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "gen_ph37qf5",
+        "ursula_weber"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104722,
+      "day": 99,
+      "vid": "petra_novak",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "world-tick",
+      "population": "world-tick",
+      "joined": {
+        "day": 91,
+        "vid": "petra_novak",
+        "target": "rerun",
+        "party": [
+          "petra_novak",
+          "hannah_kim",
+          "nikos_papadopoulos",
+          "app_mgpspkqo111"
+        ],
+        "score": 2,
+        "launchAge": 8,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 66,
+        "day": 99,
+        "state": "ok",
+        "fighterBlock": "fighter-no-exped",
+        "launchMirror": [],
+        "planParty": [
+          "hannah_kim",
+          "nikos_papadopoulos",
+          "app_mgpspkqo111"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "hannah_kim",
+          "mech": "fighter-no-exped",
+          "detail": "fighter holds no expedition entry — whole launch list skipped"
+        },
+        {
+          "pid": "app_mgpspkqo111",
+          "mech": "fighter-no-exped",
+          "detail": "fighter holds no expedition entry — whole launch list skipped"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "miguel_santos",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 102,
+            "vid": "petra_novak"
+          }
+        }
+      ],
+      "rounds": 4,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "nikos_papadopoulos",
+        "miguel_santos"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104722,
+      "day": 99,
+      "vid": "petra_novak",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "world-tick",
+      "population": "world-tick",
+      "joined": {
+        "day": 91,
+        "vid": "petra_novak",
+        "target": "rerun",
+        "party": [
+          "petra_novak",
+          "hannah_kim",
+          "nikos_papadopoulos",
+          "app_mgpspkqo111"
+        ],
+        "score": 2,
+        "launchAge": 8,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 67,
+        "day": 99,
+        "state": "ok",
+        "fighterBlock": "fighter-no-exped",
+        "launchMirror": [],
+        "planParty": [
+          "hannah_kim",
+          "nikos_papadopoulos",
+          "app_mgpspkqo111"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "hannah_kim",
+          "mech": "fighter-no-exped",
+          "detail": "fighter holds no expedition entry — whole launch list skipped"
+        },
+        {
+          "pid": "app_mgpspkqo111",
+          "mech": "fighter-no-exped",
+          "detail": "fighter holds no expedition entry — whole launch list skipped"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "miguel_santos",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 102,
+            "vid": "petra_novak"
+          }
+        }
+      ],
+      "rounds": 2,
+      "outcome": "vKill",
+      "fastFlee": true,
+      "allyVids": [
+        "nikos_papadopoulos",
+        "miguel_santos"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104722,
+      "day": 108,
+      "vid": "visjoin_100",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "world-tick",
+      "population": "world-tick",
+      "joined": {
+        "day": 106,
+        "vid": "petra_novak",
+        "target": "rerun",
+        "party": [
+          "petra_novak",
+          "visjoin_100",
+          "miguel_santos",
+          "nino_kapanadze"
+        ],
+        "score": 1,
+        "launchAge": 2,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 191,
+        "day": 108,
+        "state": "ok",
+        "fighterBlock": "fighter-no-exped",
+        "launchMirror": [],
+        "planParty": [
+          "petra_novak",
+          "miguel_santos",
+          "nino_kapanadze"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "petra_novak",
+          "mech": "fighter-no-exped",
+          "detail": "fighter holds no expedition entry — whole launch list skipped"
+        },
+        {
+          "pid": "miguel_santos",
+          "mech": "fighter-no-exped",
+          "detail": "fighter holds no expedition entry — whole launch list skipped"
+        },
+        {
+          "pid": "nino_kapanadze",
+          "mech": "fighter-no-exped",
+          "detail": "fighter holds no expedition entry — whole launch list skipped"
+        }
+      ],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee",
+      "fastFlee": true,
+      "allyVids": [],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104722,
+      "day": 119,
+      "vid": "petra_novak",
+      "mid": "herald",
+      "wave": 4,
+      "origin": "world-tick",
+      "population": "world-tick",
+      "joined": {
+        "day": 115,
+        "vid": "petra_novak",
+        "target": "rerun",
+        "party": [
+          "petra_novak",
+          "hannah_kim",
+          "miguel_santos",
+          "nikos_papadopoulos"
+        ],
+        "score": 3,
+        "launchAge": 4,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 372,
+        "day": 119,
+        "state": "ok",
+        "fighterBlock": "fighter-no-exped",
+        "launchMirror": [],
+        "planParty": [
+          "hannah_kim",
+          "miguel_santos",
+          "nikos_papadopoulos"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "miguel_santos",
+          "mech": "fighter-no-exped",
+          "detail": "fighter holds no expedition entry — whole launch list skipped"
+        }
+      ],
+      "bystanders": [],
+      "rounds": 5,
+      "outcome": "vKill",
+      "fastFlee": false,
+      "allyVids": [
+        "nikos_papadopoulos",
+        "hannah_kim"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    }
+  ],
+  "noSensePathMeetings": [
+    {
+      "seed": 104437,
+      "day": 135,
+      "vid": "chen_wei",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 2,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104437,
+      "day": 136,
+      "vid": "chen_wei",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104437,
+      "day": 136,
+      "vid": "chen_wei",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vDie"
+    },
+    {
+      "seed": 104437,
+      "day": 149,
+      "vid": "ruby_callaghan",
+      "mid": "reunion",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 6,
+      "outcome": "vDie"
+    },
+    {
+      "seed": 104722,
+      "day": 77,
+      "vid": "nora_wilson",
+      "mid": "reunion",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 3,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104722,
+      "day": 77,
+      "vid": "elena_petrova",
+      "mid": "reunion",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 4,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104722,
+      "day": 77,
+      "vid": "nora_wilson",
+      "mid": "reunion",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vDie"
+    },
+    {
+      "seed": 104722,
+      "day": 77,
+      "vid": "elena_petrova",
+      "mid": "audit",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104722,
+      "day": 79,
+      "vid": "elena_petrova",
+      "mid": "reunion",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 4,
+      "outcome": "vDie"
+    },
+    {
+      "seed": 104722,
+      "day": 80,
+      "vid": "naran_tumen",
+      "mid": "congregation",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 14,
+      "outcome": "vKill"
+    },
+    {
+      "seed": 104722,
+      "day": 114,
+      "vid": "app_mgpspkqo111",
+      "mid": "rerun",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104722,
+      "day": 115,
+      "vid": "app_mgpspkqo111",
+      "mid": "rerun",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 2,
+      "outcome": "vDie"
+    },
+    {
+      "seed": 104722,
+      "day": 115,
+      "vid": "nikos_papadopoulos",
+      "mid": "rerun",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 7,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104722,
+      "day": 117,
+      "vid": "petra_novak",
+      "mid": "rerun",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 7,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104722,
+      "day": 118,
+      "vid": "miguel_santos",
+      "mid": "rerun",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 7,
+      "outcome": "vKill"
+    },
+    {
+      "seed": 104722,
+      "day": 119,
+      "vid": "nikos_papadopoulos",
+      "mid": "rerun",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 5,
+      "outcome": "vFlee"
+    }
+  ],
+  "testCases": [
+    {
+      "label": "d133",
+      "expected": {
+        "label": "d133",
+        "seed": 104437,
+        "day": 133,
+        "vid": "ruby_callaghan",
+        "mid": "reunion"
+      },
+      "reproduced": true,
+      "day": 133,
+      "meeting": {
+        "seed": 104437,
+        "day": 133,
+        "vid": "ruby_callaghan",
+        "mid": "reunion",
+        "wave": 4,
+        "origin": "expedition",
+        "population": "primary",
+        "joined": {
+          "day": 130,
+          "vid": "app_mgpsphub92",
+          "target": "herald",
+          "party": [
+            "app_mgpsphub92",
+            "ruby_callaghan",
+            "gen_ph37qf5",
+            "gen_353ni1r"
+          ],
+          "score": 4,
+          "launchAge": 3,
+          "fighterRole": "companion"
+        },
+        "trace": {
+          "seq": 22,
+          "day": 133,
+          "state": "ok",
+          "fighterBlock": null,
+          "launchMirror": [
+            "app_mgpsphub92",
+            "gen_ph37qf5",
+            "gen_353ni1r"
+          ],
+          "planParty": [
+            "app_mgpsphub92",
+            "gen_ph37qf5",
+            "gen_353ni1r"
+          ],
+          "mirrorMismatch": false
+        },
+        "traceState": "ok",
+        "senseTrio": true,
+        "misses": [],
+        "bystanders": [],
+        "rounds": 7,
+        "outcome": "vFlee",
+        "fastFlee": false,
+        "allyVids": [
+          "app_mgpsphub92",
+          "gen_ph37qf5",
+          "gen_353ni1r"
+        ],
+        "ally3Vid": "gen_353ni1r",
+        "ally3Dealt": 23
+      }
+    },
+    {
+      "label": "d69",
+      "expected": {
+        "label": "d69",
+        "seed": 104721,
+        "day": 69,
+        "vid": "gen_5b212hy",
+        "mid": "audit"
+      },
+      "reproduced": true,
+      "day": 69,
+      "meeting": {
+        "seed": 104721,
+        "day": 69,
+        "vid": "gen_5b212hy",
+        "mid": "audit",
+        "wave": 4,
+        "origin": "expedition",
+        "population": "primary",
+        "joined": {
+          "day": 65,
+          "vid": "gen_5b212hy",
+          "target": "eater",
+          "party": [
+            "gen_5b212hy",
+            "gen_3ghdbz4",
+            "nikolai_volkov",
+            "gen_dnv7tkn"
+          ],
+          "score": 2,
+          "launchAge": 4,
+          "fighterRole": "holder"
+        },
+        "trace": {
+          "seq": 367,
+          "day": 69,
+          "state": "ok",
+          "fighterBlock": null,
+          "launchMirror": [
+            "gen_3ghdbz4"
+          ],
+          "planParty": [
+            "gen_3ghdbz4"
+          ],
+          "mirrorMismatch": false
+        },
+        "traceState": "ok",
+        "senseTrio": false,
+        "misses": [
+          {
+            "pid": "nikolai_volkov",
+            "mech": "not-in-plan:mirror-overwrite",
+            "detail": "fighter taken as a companion in gen_3ghdbz4's day-68 launch — the mirror write overwrote the fighter's plan.party to [gen_3ghdbz4]"
+          },
+          {
+            "pid": "gen_dnv7tkn",
+            "mech": "not-in-plan:mirror-overwrite",
+            "detail": "fighter taken as a companion in gen_3ghdbz4's day-68 launch — the mirror write overwrote the fighter's plan.party to [gen_3ghdbz4]"
+          }
+        ],
+        "bystanders": [
+          {
+            "pid": "vasyl_shevchenko",
+            "kind": "bystander",
+            "otherLaunch": null
+          }
+        ],
+        "rounds": 6,
+        "outcome": "vFlee",
+        "fastFlee": false,
+        "allyVids": [
+          "gen_3ghdbz4",
+          "vasyl_shevchenko"
+        ],
+        "ally3Vid": null,
+        "ally3Dealt": null
+      }
+    },
+    {
+      "label": "d112",
+      "expected": {
+        "label": "d112",
+        "seed": 104722,
+        "day": 112,
+        "vid": "nino_kapanadze",
+        "mid": "eater"
+      },
+      "reproduced": true,
+      "day": 112,
+      "meeting": {
+        "seed": 104722,
+        "day": 112,
+        "vid": "nino_kapanadze",
+        "mid": "eater",
+        "wave": 4,
+        "origin": "expedition",
+        "population": "primary",
+        "joined": {
+          "day": 106,
+          "vid": "petra_novak",
+          "target": "rerun",
+          "party": [
+            "petra_novak",
+            "visjoin_100",
+            "miguel_santos",
+            "nino_kapanadze"
+          ],
+          "score": 1,
+          "launchAge": 6,
+          "fighterRole": "companion"
+        },
+        "trace": {
+          "seq": 279,
+          "day": 112,
+          "state": "ok",
+          "fighterBlock": null,
+          "launchMirror": [
+            "hannah_kim"
+          ],
+          "planParty": [
+            "hannah_kim"
+          ],
+          "mirrorMismatch": false
+        },
+        "traceState": "ok",
+        "senseTrio": false,
+        "misses": [
+          {
+            "pid": "petra_novak",
+            "mech": "not-in-plan:fighter-relaunched",
+            "detail": "fighter re-launched day 111 (joined launch day 106); sense reads the NEW party"
+          },
+          {
+            "pid": "visjoin_100",
+            "mech": "not-in-plan:fighter-relaunched",
+            "detail": "fighter re-launched day 111 (joined launch day 106); sense reads the NEW party"
+          },
+          {
+            "pid": "miguel_santos",
+            "mech": "not-in-plan:fighter-relaunched",
+            "detail": "fighter re-launched day 111 (joined launch day 106); sense reads the NEW party"
+          }
+        ],
+        "bystanders": [
+          {
+            "pid": "hannah_kim",
+            "kind": "other-quad",
+            "otherLaunch": {
+              "day": 91,
+              "vid": "petra_novak"
+            }
+          },
+          {
+            "pid": "nikos_papadopoulos",
+            "kind": "other-quad",
+            "otherLaunch": {
+              "day": 91,
+              "vid": "petra_novak"
+            }
+          }
+        ],
+        "rounds": 4,
+        "outcome": "vDie",
+        "fastFlee": false,
+        "allyVids": [
+          "hannah_kim",
+          "nikos_papadopoulos"
+        ],
+        "ally3Vid": null,
+        "ally3Dealt": null
+      }
+    },
+    {
+      "label": "d117",
+      "expected": {
+        "label": "d117",
+        "seed": 104722,
+        "day": 117,
+        "vid": "miguel_santos",
+        "mid": "editor"
+      },
+      "reproduced": true,
+      "day": 117,
+      "meeting": {
+        "seed": 104722,
+        "day": 117,
+        "vid": "miguel_santos",
+        "mid": "editor",
+        "wave": 5,
+        "origin": "expedition",
+        "population": "primary",
+        "joined": {
+          "day": 115,
+          "vid": "petra_novak",
+          "target": "rerun",
+          "party": [
+            "petra_novak",
+            "hannah_kim",
+            "miguel_santos",
+            "nikos_papadopoulos"
+          ],
+          "score": 4,
+          "launchAge": 2,
+          "fighterRole": "companion"
+        },
+        "trace": {
+          "seq": 335,
+          "day": 117,
+          "state": "ok",
+          "fighterBlock": null,
+          "launchMirror": [
+            "petra_novak",
+            "hannah_kim",
+            "nikos_papadopoulos"
+          ],
+          "planParty": [
+            "petra_novak",
+            "hannah_kim",
+            "nikos_papadopoulos"
+          ],
+          "mirrorMismatch": false
+        },
+        "traceState": "ok",
+        "senseTrio": true,
+        "misses": [],
+        "bystanders": [],
+        "rounds": 5,
+        "outcome": "vFlee",
+        "fastFlee": false,
+        "allyVids": [
+          "petra_novak",
+          "hannah_kim",
+          "nikos_papadopoulos"
+        ],
+        "ally3Vid": "nikos_papadopoulos",
+        "ally3Dealt": 17
+      }
+    }
+  ],
+  "testOk": 4
+}

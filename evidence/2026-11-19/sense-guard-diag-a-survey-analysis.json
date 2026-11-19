@@ -1,0 +1,2817 @@
+{
+  "verdict": "DIAG-NO-GO",
+  "kind": "TESTCASE-MISS",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": true,
+      "detail": "launches 15 (floor 6); primary denominator meetings 18 (floor 2)"
+    },
+    {
+      "id": "trace-coverage",
+      "pass": true,
+      "detail": "same-day traces on 18/18 primary meetings = 1.00 (bar >= 0.90); stale 0, no-trace 0"
+    },
+    {
+      "id": "classification-complete",
+      "pass": true,
+      "detail": "misses 19, unclassified 0 (bar 0); by class {\"target-mismatch\":4,\"not-in-plan:mirror-overwrite\":5,\"not-in-plan:fighter-relaunched\":10}"
+    },
+    {
+      "id": "test-cases",
+      "pass": false,
+      "detail": "named rows reproduced + traced 0/4 (bar >= 3): d69:absent, d112:absent, d117:absent, d133:absent"
+    },
+    {
+      "id": "instrument",
+      "pass": true,
+      "detail": "file errors 0; traces dropped by cap 0; mirror mismatches 0 (bar 0 each)"
+    }
+  ],
+  "census": {
+    "dir": "evidence/2026-11-19/perseed-sense-guard-diag-a-survey",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launches": 15,
+    "trioLaunches": 12,
+    "trioRate": 0.8,
+    "quadLaunches": 9,
+    "partyQuads": 9,
+    "sizes": {
+      "2": 3,
+      "3": 3,
+      "4": 9
+    },
+    "sources": {
+      "brain": 15
+    },
+    "c2depart": 13,
+    "candC2": 13,
+    "candC2carried": 13,
+    "candC2dropped": 0,
+    "candC2null": 2,
+    "unjoined": 0,
+    "midday": 7,
+    "dawn": 8,
+    "carryRate": 1,
+    "starvation": 3,
+    "starvationVillager": 3,
+    "medianDays": 150,
+    "partyTrios": 12,
+    "brainSha": {
+      "9a9b9305296f": 8
+    },
+    "carryPresent": {
+      "true": 8
+    },
+    "perSeed": [
+      {
+        "seed": 104750,
+        "days": 151,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104751,
+        "days": 112,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 155,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104752,
+        "days": 151,
+        "launches": 5,
+        "observedTrios": 5,
+        "observedQuads": 4,
+        "partyTrios": 5,
+        "partyQuads": 4,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104753,
+        "days": 152,
+        "launches": 8,
+        "observedTrios": 6,
+        "observedQuads": 4,
+        "partyTrios": 6,
+        "partyQuads": 4,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 580,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104754,
+        "days": 151,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 415,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104755,
+        "days": 144,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104756,
+        "days": 151,
+        "launches": 1,
+        "observedTrios": 1,
+        "observedQuads": 1,
+        "partyTrios": 1,
+        "partyQuads": 1,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 455,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104757,
+        "days": 88,
+        "launches": 1,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      }
+    ],
+    "wall": {
+      "wins": 0,
+      "national": 0,
+      "wave5": 3,
+      "wave4": 8,
+      "standing200": 3,
+      "medianDays": 151,
+      "survived": 5
+    }
+  },
+  "senseRate": 0.3888888888888889,
+  "denom": 18,
+  "trioN": 7,
+  "misses": [
+    {
+      "seed": 104752,
+      "day": 135,
+      "vid": "xavier_dubois",
+      "mid": "suburb",
+      "pid": "sam_wilson",
+      "mech": "target-mismatch"
+    },
+    {
+      "seed": 104752,
+      "day": 135,
+      "vid": "xavier_dubois",
+      "mid": "suburb",
+      "pid": "sofia_chen",
+      "mech": "target-mismatch"
+    },
+    {
+      "seed": 104753,
+      "day": 73,
+      "vid": "emma_larsen",
+      "mid": "timeslot",
+      "pid": "gen_qdkzsm2",
+      "mech": "not-in-plan:mirror-overwrite"
+    },
+    {
+      "seed": 104753,
+      "day": 77,
+      "vid": "gen_qdkzsm2",
+      "mid": "network_note",
+      "pid": "emma_larsen",
+      "mech": "not-in-plan:fighter-relaunched"
+    },
+    {
+      "seed": 104753,
+      "day": 77,
+      "vid": "gen_qdkzsm2",
+      "mid": "network_note",
+      "pid": "marcus_webb",
+      "mech": "not-in-plan:fighter-relaunched"
+    },
+    {
+      "seed": 104753,
+      "day": 78,
+      "vid": "gen_qdkzsm2",
+      "mid": "network_note",
+      "pid": "emma_larsen",
+      "mech": "not-in-plan:fighter-relaunched"
+    },
+    {
+      "seed": 104753,
+      "day": 78,
+      "vid": "gen_qdkzsm2",
+      "mid": "network_note",
+      "pid": "marcus_webb",
+      "mech": "not-in-plan:fighter-relaunched"
+    },
+    {
+      "seed": 104753,
+      "day": 84,
+      "vid": "emma_larsen",
+      "mid": "congregation",
+      "pid": "gen_jlebylg",
+      "mech": "not-in-plan:mirror-overwrite"
+    },
+    {
+      "seed": 104753,
+      "day": 84,
+      "vid": "emma_larsen",
+      "mid": "congregation",
+      "pid": "gen_qdkzsm2",
+      "mech": "not-in-plan:mirror-overwrite"
+    },
+    {
+      "seed": 104753,
+      "day": 93,
+      "vid": "gen_2d564h8",
+      "mid": "influencer",
+      "pid": "marcus_webb",
+      "mech": "not-in-plan:fighter-relaunched"
+    },
+    {
+      "seed": 104753,
+      "day": 93,
+      "vid": "gen_2d564h8",
+      "mid": "influencer",
+      "pid": "gen_05o7eqn",
+      "mech": "not-in-plan:fighter-relaunched"
+    },
+    {
+      "seed": 104753,
+      "day": 93,
+      "vid": "marcus_webb",
+      "mid": "suburb",
+      "pid": "gen_2d564h8",
+      "mech": "not-in-plan:fighter-relaunched"
+    },
+    {
+      "seed": 104753,
+      "day": 93,
+      "vid": "marcus_webb",
+      "mid": "suburb",
+      "pid": "gen_05o7eqn",
+      "mech": "not-in-plan:fighter-relaunched"
+    },
+    {
+      "seed": 104753,
+      "day": 94,
+      "vid": "emma_larsen",
+      "mid": "influencer",
+      "pid": "gen_2d564h8",
+      "mech": "not-in-plan:mirror-overwrite"
+    },
+    {
+      "seed": 104753,
+      "day": 94,
+      "vid": "emma_larsen",
+      "mid": "influencer",
+      "pid": "gen_05o7eqn",
+      "mech": "not-in-plan:mirror-overwrite"
+    },
+    {
+      "seed": 104753,
+      "day": 96,
+      "vid": "marcus_webb",
+      "mid": "rerun",
+      "pid": "gen_2d564h8",
+      "mech": "not-in-plan:fighter-relaunched"
+    },
+    {
+      "seed": 104753,
+      "day": 96,
+      "vid": "gen_2d564h8",
+      "mid": "rerun",
+      "pid": "gen_05o7eqn",
+      "mech": "not-in-plan:fighter-relaunched"
+    },
+    {
+      "seed": 104753,
+      "day": 124,
+      "vid": "diana_osei",
+      "mid": "network_note",
+      "pid": "tashi_sherpa",
+      "mech": "target-mismatch"
+    },
+    {
+      "seed": 104753,
+      "day": 124,
+      "vid": "diana_osei",
+      "mid": "network_note",
+      "pid": "emma_larsen",
+      "mech": "target-mismatch"
+    }
+  ],
+  "byClass": {
+    "target-mismatch": 4,
+    "not-in-plan:mirror-overwrite": 5,
+    "not-in-plan:fighter-relaunched": 10
+  },
+  "traceCoverage": 1,
+  "traced": 18,
+  "stale": 0,
+  "noTrace": 0,
+  "traceTotal": 4757,
+  "traceDropped": 0,
+  "traceSkipped": 35431,
+  "mirrorMismatch": 0,
+  "worldTick": 5,
+  "noSensePath": 60,
+  "meetings": [
+    {
+      "seed": 104752,
+      "day": 132,
+      "vid": "stan_kowalski",
+      "mid": "strike",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 132,
+        "vid": "xavier_dubois",
+        "target": "herald",
+        "party": [
+          "xavier_dubois",
+          "sam_wilson",
+          "stan_kowalski",
+          "dale_hoffman"
+        ],
+        "score": 4,
+        "launchAge": 0,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 325,
+        "day": 132,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "xavier_dubois",
+          "sam_wilson",
+          "dale_hoffman"
+        ],
+        "planParty": [
+          "xavier_dubois",
+          "sam_wilson",
+          "dale_hoffman"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 3,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "xavier_dubois",
+        "sam_wilson",
+        "dale_hoffman"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104752,
+      "day": 135,
+      "vid": "xavier_dubois",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 135,
+        "vid": "xavier_dubois",
+        "target": "herald",
+        "party": [
+          "xavier_dubois",
+          "sam_wilson",
+          "sofia_chen",
+          "stan_kowalski"
+        ],
+        "score": 2,
+        "launchAge": 0,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 406,
+        "day": 135,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "stan_kowalski"
+        ],
+        "planParty": [
+          "sam_wilson",
+          "sofia_chen",
+          "stan_kowalski"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "sam_wilson",
+          "mech": "target-mismatch",
+          "detail": "companion target (4,4) vs fighter target (3,4); companion own plan target null (matches fighter: false)"
+        },
+        {
+          "pid": "sofia_chen",
+          "mech": "target-mismatch",
+          "detail": "companion target (4,4) vs fighter target (3,4); companion own plan target herald (matches fighter: true)"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "app_mgpspki6976",
+          "kind": "bystander",
+          "otherLaunch": null
+        }
+      ],
+      "rounds": 1,
+      "outcome": "vFlee",
+      "fastFlee": true,
+      "allyVids": [
+        "stan_kowalski",
+        "app_mgpspki6976"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104752,
+      "day": 142,
+      "vid": "xavier_dubois",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 141,
+        "vid": "xavier_dubois",
+        "target": "herald",
+        "party": [
+          "xavier_dubois",
+          "sam_wilson",
+          "sofia_chen",
+          "dale_hoffman"
+        ],
+        "score": 4,
+        "launchAge": 1,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 575,
+        "day": 142,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "sam_wilson",
+          "sofia_chen",
+          "dale_hoffman"
+        ],
+        "planParty": [
+          "sam_wilson",
+          "sofia_chen",
+          "dale_hoffman"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee",
+      "fastFlee": true,
+      "allyVids": [
+        "sam_wilson",
+        "sofia_chen",
+        "dale_hoffman"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104752,
+      "day": 142,
+      "vid": "dale_hoffman",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 141,
+        "vid": "xavier_dubois",
+        "target": "herald",
+        "party": [
+          "xavier_dubois",
+          "sam_wilson",
+          "sofia_chen",
+          "dale_hoffman"
+        ],
+        "score": 4,
+        "launchAge": 1,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 578,
+        "day": 142,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "xavier_dubois",
+          "sam_wilson",
+          "sofia_chen"
+        ],
+        "planParty": [
+          "xavier_dubois",
+          "sam_wilson",
+          "sofia_chen"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee",
+      "fastFlee": true,
+      "allyVids": [
+        "xavier_dubois",
+        "sam_wilson",
+        "sofia_chen"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 69,
+      "vid": "emma_larsen",
+      "mid": "influencer",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 67,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_jlebylg",
+          "gen_qdkzsm2"
+        ],
+        "score": 4,
+        "launchAge": 2,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 806,
+        "day": 69,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "marcus_webb",
+          "gen_jlebylg",
+          "gen_qdkzsm2"
+        ],
+        "planParty": [
+          "marcus_webb",
+          "gen_jlebylg",
+          "gen_qdkzsm2"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 9,
+      "outcome": "vKill",
+      "fastFlee": false,
+      "allyVids": [
+        "marcus_webb",
+        "gen_jlebylg",
+        "gen_qdkzsm2"
+      ],
+      "ally3Vid": "gen_qdkzsm2",
+      "ally3Dealt": 122
+    },
+    {
+      "seed": 104753,
+      "day": 73,
+      "vid": "emma_larsen",
+      "mid": "timeslot",
+      "wave": 5,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 67,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_jlebylg",
+          "gen_qdkzsm2"
+        ],
+        "score": 3,
+        "launchAge": 6,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 917,
+        "day": 73,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "gen_jlebylg"
+        ],
+        "planParty": [
+          "gen_jlebylg"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "gen_qdkzsm2",
+          "mech": "not-in-plan:mirror-overwrite",
+          "detail": "fighter taken as a companion in gen_jlebylg's day-71 launch — the mirror write overwrote the fighter's plan.party to [gen_jlebylg]"
+        }
+      ],
+      "bystanders": [],
+      "rounds": 10,
+      "outcome": "vKill",
+      "fastFlee": false,
+      "allyVids": [
+        "gen_jlebylg",
+        "marcus_webb"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 77,
+      "vid": "gen_qdkzsm2",
+      "mid": "network_note",
+      "wave": 5,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 67,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_jlebylg",
+          "gen_qdkzsm2"
+        ],
+        "score": 2,
+        "launchAge": 10,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 1030,
+        "day": 77,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "diana_osei"
+        ],
+        "planParty": [
+          "diana_osei"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "emma_larsen",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 74 (joined launch day 67); sense reads the NEW party"
+        },
+        {
+          "pid": "marcus_webb",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 74 (joined launch day 67); sense reads the NEW party"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "diana_osei",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 112,
+            "vid": "aria_thompson"
+          }
+        }
+      ],
+      "rounds": 6,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "diana_osei",
+        "gen_jlebylg"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 78,
+      "vid": "gen_qdkzsm2",
+      "mid": "network_note",
+      "wave": 5,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 67,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_jlebylg",
+          "gen_qdkzsm2"
+        ],
+        "score": 2,
+        "launchAge": 11,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 1053,
+        "day": 78,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "diana_osei"
+        ],
+        "planParty": [
+          "diana_osei"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "emma_larsen",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 74 (joined launch day 67); sense reads the NEW party"
+        },
+        {
+          "pid": "marcus_webb",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 74 (joined launch day 67); sense reads the NEW party"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "diana_osei",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 112,
+            "vid": "aria_thompson"
+          }
+        }
+      ],
+      "rounds": 2,
+      "outcome": "mFlee",
+      "fastFlee": true,
+      "allyVids": [
+        "diana_osei",
+        "gen_jlebylg"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 84,
+      "vid": "emma_larsen",
+      "mid": "congregation",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 67,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_jlebylg",
+          "gen_qdkzsm2"
+        ],
+        "score": 2,
+        "launchAge": 17,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 1162,
+        "day": 84,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "marcus_webb"
+        ],
+        "planParty": [
+          "marcus_webb"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "gen_jlebylg",
+          "mech": "not-in-plan:mirror-overwrite",
+          "detail": "fighter taken as a companion in gen_jlebylg's day-71 launch — the mirror write overwrote the fighter's plan.party to [marcus_webb]"
+        },
+        {
+          "pid": "gen_qdkzsm2",
+          "mech": "not-in-plan:mirror-overwrite",
+          "detail": "fighter taken as a companion in gen_jlebylg's day-71 launch — the mirror write overwrote the fighter's plan.party to [marcus_webb]"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "gen_2d564h8",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 86,
+            "vid": "emma_larsen"
+          }
+        }
+      ],
+      "rounds": 4,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "marcus_webb",
+        "gen_2d564h8"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 89,
+      "vid": "gen_2d564h8",
+      "mid": "influencer",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 86,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_2d564h8",
+          "gen_05o7eqn"
+        ],
+        "score": 4,
+        "launchAge": 3,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 1307,
+        "day": 89,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_05o7eqn"
+        ],
+        "planParty": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_05o7eqn"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 5,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "emma_larsen",
+        "marcus_webb",
+        "gen_05o7eqn"
+      ],
+      "ally3Vid": "gen_05o7eqn",
+      "ally3Dealt": 39
+    },
+    {
+      "seed": 104753,
+      "day": 89,
+      "vid": "gen_05o7eqn",
+      "mid": "strike",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 86,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_2d564h8",
+          "gen_05o7eqn"
+        ],
+        "score": 4,
+        "launchAge": 3,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 1322,
+        "day": 89,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_2d564h8"
+        ],
+        "planParty": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_2d564h8"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 9,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "emma_larsen",
+        "marcus_webb",
+        "gen_2d564h8"
+      ],
+      "ally3Vid": "gen_2d564h8",
+      "ally3Dealt": 68
+    },
+    {
+      "seed": 104753,
+      "day": 90,
+      "vid": "gen_05o7eqn",
+      "mid": "network_note",
+      "wave": 5,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 86,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_2d564h8",
+          "gen_05o7eqn"
+        ],
+        "score": 4,
+        "launchAge": 4,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 1358,
+        "day": 90,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_2d564h8"
+        ],
+        "planParty": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_2d564h8"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 8,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "emma_larsen",
+        "marcus_webb",
+        "gen_2d564h8"
+      ],
+      "ally3Vid": "gen_2d564h8",
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 93,
+      "vid": "gen_2d564h8",
+      "mid": "influencer",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 86,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_2d564h8",
+          "gen_05o7eqn"
+        ],
+        "score": 2,
+        "launchAge": 7,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 1465,
+        "day": 93,
+        "state": "ok",
+        "fighterBlock": "no-plan-party",
+        "launchMirror": [],
+        "planParty": [],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "marcus_webb",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 90 (joined launch day 86); sense reads the NEW party"
+        },
+        {
+          "pid": "gen_05o7eqn",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 90 (joined launch day 86); sense reads the NEW party"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "gen_jlebylg",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 67,
+            "vid": "emma_larsen"
+          }
+        }
+      ],
+      "rounds": 1,
+      "outcome": "vFlee",
+      "fastFlee": true,
+      "allyVids": [
+        "gen_jlebylg",
+        "emma_larsen"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 93,
+      "vid": "marcus_webb",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 86,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_2d564h8",
+          "gen_05o7eqn"
+        ],
+        "score": 2,
+        "launchAge": 7,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 1478,
+        "day": 93,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "gen_qdkzsm2"
+        ],
+        "planParty": [
+          "gen_qdkzsm2"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "gen_2d564h8",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 91 (joined launch day 86); sense reads the NEW party"
+        },
+        {
+          "pid": "gen_05o7eqn",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 91 (joined launch day 86); sense reads the NEW party"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "gen_qdkzsm2",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 67,
+            "vid": "emma_larsen"
+          }
+        }
+      ],
+      "rounds": 1,
+      "outcome": "vFlee",
+      "fastFlee": true,
+      "allyVids": [
+        "gen_qdkzsm2",
+        "emma_larsen"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 94,
+      "vid": "emma_larsen",
+      "mid": "influencer",
+      "wave": 4,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 86,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_2d564h8",
+          "gen_05o7eqn"
+        ],
+        "score": 2,
+        "launchAge": 8,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 1510,
+        "day": 94,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "diana_osei"
+        ],
+        "planParty": [
+          "diana_osei"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "gen_2d564h8",
+          "mech": "not-in-plan:mirror-overwrite",
+          "detail": "fighter taken as a companion in diana_osei's day-93 launch — the mirror write overwrote the fighter's plan.party to [diana_osei]"
+        },
+        {
+          "pid": "gen_05o7eqn",
+          "mech": "not-in-plan:mirror-overwrite",
+          "detail": "fighter taken as a companion in diana_osei's day-93 launch — the mirror write overwrote the fighter's plan.party to [diana_osei]"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "diana_osei",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 112,
+            "vid": "aria_thompson"
+          }
+        }
+      ],
+      "rounds": 9,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "diana_osei",
+        "marcus_webb"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 96,
+      "vid": "marcus_webb",
+      "mid": "rerun",
+      "wave": 5,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 86,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_2d564h8",
+          "gen_05o7eqn"
+        ],
+        "score": 3,
+        "launchAge": 10,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 1586,
+        "day": 96,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "gen_05o7eqn"
+        ],
+        "planParty": [
+          "gen_05o7eqn"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "gen_2d564h8",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 91 (joined launch day 86); sense reads the NEW party"
+        }
+      ],
+      "bystanders": [],
+      "rounds": 9,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "gen_05o7eqn",
+        "emma_larsen"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 96,
+      "vid": "gen_2d564h8",
+      "mid": "rerun",
+      "wave": 5,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 86,
+        "vid": "emma_larsen",
+        "target": "algorithm",
+        "party": [
+          "emma_larsen",
+          "marcus_webb",
+          "gen_2d564h8",
+          "gen_05o7eqn"
+        ],
+        "score": 3,
+        "launchAge": 10,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 1589,
+        "day": 96,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "marcus_webb"
+        ],
+        "planParty": [
+          "marcus_webb"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "gen_05o7eqn",
+          "mech": "not-in-plan:fighter-relaunched",
+          "detail": "fighter re-launched day 90 (joined launch day 86); sense reads the NEW party"
+        }
+      ],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vDie",
+      "fastFlee": true,
+      "allyVids": [
+        "marcus_webb",
+        "emma_larsen"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 124,
+      "vid": "diana_osei",
+      "mid": "network_note",
+      "wave": 5,
+      "origin": "expedition",
+      "population": "primary",
+      "joined": {
+        "day": 122,
+        "vid": "tashi_sherpa",
+        "target": "eater",
+        "party": [
+          "tashi_sherpa",
+          "diana_osei",
+          "emma_larsen",
+          "grace_obi"
+        ],
+        "score": 2,
+        "launchAge": 2,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 2069,
+        "day": 124,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "grace_obi"
+        ],
+        "planParty": [
+          "tashi_sherpa",
+          "emma_larsen",
+          "grace_obi"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "tashi_sherpa",
+          "mech": "target-mismatch",
+          "detail": "companion target (5,3) vs fighter target (3,4); companion own plan target eater (matches fighter: false)"
+        },
+        {
+          "pid": "emma_larsen",
+          "mech": "target-mismatch",
+          "detail": "companion target (5,3) vs fighter target (3,4); companion own plan target eater (matches fighter: false)"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "gen_jlebylg",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 67,
+            "vid": "emma_larsen"
+          }
+        }
+      ],
+      "rounds": 9,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "grace_obi",
+        "gen_jlebylg"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    }
+  ],
+  "worldTickMeetings": [
+    {
+      "seed": 104752,
+      "day": 146,
+      "vid": "sam_wilson",
+      "mid": "eater",
+      "wave": 4,
+      "origin": "world-tick",
+      "population": "world-tick",
+      "joined": {
+        "day": 141,
+        "vid": "xavier_dubois",
+        "target": "herald",
+        "party": [
+          "xavier_dubois",
+          "sam_wilson",
+          "sofia_chen",
+          "dale_hoffman"
+        ],
+        "score": 2,
+        "launchAge": 5,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 638,
+        "day": 146,
+        "state": "ok",
+        "fighterBlock": "fighter-no-exped",
+        "launchMirror": [],
+        "planParty": [
+          "xavier_dubois",
+          "sofia_chen",
+          "dale_hoffman"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "sofia_chen",
+          "mech": "fighter-no-exped",
+          "detail": "fighter holds no expedition entry — whole launch list skipped"
+        },
+        {
+          "pid": "dale_hoffman",
+          "mech": "fighter-no-exped",
+          "detail": "fighter holds no expedition entry — whole launch list skipped"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "farid_ahmed",
+          "kind": "bystander",
+          "otherLaunch": null
+        }
+      ],
+      "rounds": 4,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "xavier_dubois",
+        "farid_ahmed"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 112,
+      "vid": "aria_thompson",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "world-tick",
+      "population": "world-tick",
+      "joined": {
+        "day": 112,
+        "vid": "aria_thompson",
+        "target": "spoiler",
+        "party": [
+          "aria_thompson",
+          "diana_osei",
+          "gen_05o7eqn",
+          "rafael_torres"
+        ],
+        "score": 4,
+        "launchAge": 0,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 1853,
+        "day": 112,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "diana_osei",
+          "gen_05o7eqn",
+          "rafael_torres"
+        ],
+        "planParty": [
+          "diana_osei",
+          "gen_05o7eqn",
+          "rafael_torres"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 5,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "diana_osei",
+        "gen_05o7eqn",
+        "rafael_torres"
+      ],
+      "ally3Vid": "rafael_torres",
+      "ally3Dealt": 22
+    },
+    {
+      "seed": 104753,
+      "day": 112,
+      "vid": "aria_thompson",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "world-tick",
+      "population": "world-tick",
+      "joined": {
+        "day": 112,
+        "vid": "aria_thompson",
+        "target": "spoiler",
+        "party": [
+          "aria_thompson",
+          "diana_osei",
+          "gen_05o7eqn",
+          "rafael_torres"
+        ],
+        "score": 4,
+        "launchAge": 0,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 1854,
+        "day": 112,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "diana_osei",
+          "gen_05o7eqn",
+          "rafael_torres"
+        ],
+        "planParty": [
+          "diana_osei",
+          "gen_05o7eqn",
+          "rafael_torres"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": true,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 2,
+      "outcome": "vFlee",
+      "fastFlee": true,
+      "allyVids": [
+        "diana_osei",
+        "gen_05o7eqn",
+        "rafael_torres"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 114,
+      "vid": "rafael_torres",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "world-tick",
+      "population": "world-tick",
+      "joined": {
+        "day": 112,
+        "vid": "aria_thompson",
+        "target": "spoiler",
+        "party": [
+          "aria_thompson",
+          "diana_osei",
+          "gen_05o7eqn",
+          "rafael_torres"
+        ],
+        "score": 1,
+        "launchAge": 2,
+        "fighterRole": "companion"
+      },
+      "trace": {
+        "seq": 1899,
+        "day": 114,
+        "state": "ok",
+        "fighterBlock": "fighter-no-exped",
+        "launchMirror": [],
+        "planParty": [
+          "aria_thompson",
+          "diana_osei",
+          "gen_05o7eqn"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "aria_thompson",
+          "mech": "fighter-no-exped",
+          "detail": "fighter holds no expedition entry — whole launch list skipped"
+        },
+        {
+          "pid": "diana_osei",
+          "mech": "fighter-no-exped",
+          "detail": "fighter holds no expedition entry — whole launch list skipped"
+        },
+        {
+          "pid": "gen_05o7eqn",
+          "mech": "player",
+          "detail": null
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "gen_jlebylg",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 67,
+            "vid": "emma_larsen"
+          }
+        },
+        {
+          "pid": "emma_larsen",
+          "kind": "other-quad",
+          "otherLaunch": {
+            "day": 67,
+            "vid": "emma_larsen"
+          }
+        }
+      ],
+      "rounds": 3,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "gen_jlebylg",
+        "emma_larsen"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    },
+    {
+      "seed": 104753,
+      "day": 122,
+      "vid": "tashi_sherpa",
+      "mid": "eater",
+      "wave": 4,
+      "origin": "world-tick",
+      "population": "world-tick",
+      "joined": {
+        "day": 122,
+        "vid": "tashi_sherpa",
+        "target": "eater",
+        "party": [
+          "tashi_sherpa",
+          "diana_osei",
+          "emma_larsen",
+          "grace_obi"
+        ],
+        "score": 2,
+        "launchAge": 0,
+        "fighterRole": "holder"
+      },
+      "trace": {
+        "seq": 2038,
+        "day": 122,
+        "state": "ok",
+        "fighterBlock": null,
+        "launchMirror": [
+          "emma_larsen"
+        ],
+        "planParty": [
+          "diana_osei",
+          "emma_larsen",
+          "grace_obi"
+        ],
+        "mirrorMismatch": false
+      },
+      "traceState": "ok",
+      "senseTrio": false,
+      "misses": [
+        {
+          "pid": "diana_osei",
+          "mech": "target-mismatch",
+          "detail": "companion target (3,4) vs fighter target (5,3); companion own plan target null (matches fighter: false)"
+        },
+        {
+          "pid": "grace_obi",
+          "mech": "target-mismatch",
+          "detail": "companion target (3,4) vs fighter target (5,3); companion own plan target eater (matches fighter: true)"
+        }
+      ],
+      "bystanders": [
+        {
+          "pid": "onni_korhonen",
+          "kind": "bystander",
+          "otherLaunch": null
+        }
+      ],
+      "rounds": 4,
+      "outcome": "vFlee",
+      "fastFlee": false,
+      "allyVids": [
+        "emma_larsen",
+        "onni_korhonen"
+      ],
+      "ally3Vid": null,
+      "ally3Dealt": null
+    }
+  ],
+  "noSensePathMeetings": [
+    {
+      "seed": 104750,
+      "day": 115,
+      "vid": "visjoin_104",
+      "mid": "herald",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 4,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104751,
+      "day": 78,
+      "vid": "visjoin_75",
+      "mid": "congregation",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104751,
+      "day": 90,
+      "vid": "visjoin_85",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 2,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104752,
+      "day": 94,
+      "vid": "sofia_chen",
+      "mid": "influencer",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104752,
+      "day": 96,
+      "vid": "app_mgpsphsu219",
+      "mid": "influencer",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "mFlee"
+    },
+    {
+      "seed": 104752,
+      "day": 134,
+      "vid": "leo_martin",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104752,
+      "day": 134,
+      "vid": "leo_martin",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vDie"
+    },
+    {
+      "seed": 104752,
+      "day": 136,
+      "vid": "app_mgpspki6976",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104752,
+      "day": 136,
+      "vid": "sam_wilson",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104752,
+      "day": 136,
+      "vid": "sam_wilson",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104752,
+      "day": 138,
+      "vid": "stan_kowalski",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104753,
+      "day": 118,
+      "vid": "rafael_torres",
+      "mid": "spoiler",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 3,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104753,
+      "day": 118,
+      "vid": "aria_thompson",
+      "mid": "spoiler",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 4,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104753,
+      "day": 119,
+      "vid": "tashi_sherpa",
+      "mid": "spoiler",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 5,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104753,
+      "day": 125,
+      "vid": "rafael_torres",
+      "mid": "eater",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 5,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104753,
+      "day": 127,
+      "vid": "tashi_sherpa",
+      "mid": "eater",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104753,
+      "day": 128,
+      "vid": "aria_thompson",
+      "mid": "rerun",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 4,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104753,
+      "day": 135,
+      "vid": "aria_thompson",
+      "mid": "cancellation",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104753,
+      "day": 150,
+      "vid": "visjoin_147",
+      "mid": "network_note",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vDie"
+    },
+    {
+      "seed": 104754,
+      "day": 91,
+      "vid": "visjoin_74",
+      "mid": "audit",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 2,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104754,
+      "day": 91,
+      "vid": "visjoin_74",
+      "mid": "audit",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vDie"
+    },
+    {
+      "seed": 104754,
+      "day": 121,
+      "vid": "visjoin_110",
+      "mid": "reunion",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 4,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104754,
+      "day": 121,
+      "vid": "visjoin_110",
+      "mid": "reunion",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104754,
+      "day": 122,
+      "vid": "rafael_torres",
+      "mid": "editor",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 3,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104754,
+      "day": 123,
+      "vid": "rafael_torres",
+      "mid": "reunion",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104754,
+      "day": 124,
+      "vid": "rafael_torres",
+      "mid": "editor",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vDie"
+    },
+    {
+      "seed": 104754,
+      "day": 125,
+      "vid": "visjoin_122",
+      "mid": "editor",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 4,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104754,
+      "day": 144,
+      "vid": "visjoin_122",
+      "mid": "timeslot",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 4,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104754,
+      "day": 145,
+      "vid": "visjoin_110",
+      "mid": "editor",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 2,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104754,
+      "day": 145,
+      "vid": "visjoin_122",
+      "mid": "timeslot",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 4,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104754,
+      "day": 145,
+      "vid": "visjoin_122",
+      "mid": "cancellation",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104755,
+      "day": 61,
+      "vid": "vasyl_shevchenko",
+      "mid": "strike",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 4,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104755,
+      "day": 63,
+      "vid": "mateo_alvarez",
+      "mid": "strike",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 2,
+      "outcome": "vDie"
+    },
+    {
+      "seed": 104755,
+      "day": 114,
+      "vid": "visjoin_103",
+      "mid": "audit",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 3,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104755,
+      "day": 126,
+      "vid": "visjoin_103",
+      "mid": "herald",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 10,
+      "outcome": "vKill"
+    },
+    {
+      "seed": 104755,
+      "day": 133,
+      "vid": "visjoin_103",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104755,
+      "day": 133,
+      "vid": "visjoin_103",
+      "mid": "audit",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vDie"
+    },
+    {
+      "seed": 104756,
+      "day": 101,
+      "vid": "app_mgpsphcr739",
+      "mid": "eulogy",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 0,
+      "outcome": "vKill"
+    },
+    {
+      "seed": 104756,
+      "day": 105,
+      "vid": "thabo_maseko",
+      "mid": "editor",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 4,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104756,
+      "day": 109,
+      "vid": "app_mgpsphcr739",
+      "mid": "editor",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104756,
+      "day": 117,
+      "vid": "app_mgpsphcr739",
+      "mid": "timeslot",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 6,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104756,
+      "day": 139,
+      "vid": "app_mgpsphq2482",
+      "mid": "cancellation",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 3,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104756,
+      "day": 139,
+      "vid": "thabo_maseko",
+      "mid": "cancellation",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 5,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104756,
+      "day": 140,
+      "vid": "app_mgpsphq2482",
+      "mid": "cancellation",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 2,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104756,
+      "day": 143,
+      "vid": "app_mgpsphq2482",
+      "mid": "cancellation",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104756,
+      "day": 143,
+      "vid": "app_mgpsphq2482",
+      "mid": "cancellation",
+      "wave": 5,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 50,
+      "vid": "nora_wilson",
+      "mid": "congregation",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 2,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 50,
+      "vid": "nora_wilson",
+      "mid": "congregation",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 51,
+      "vid": "ivy_wang",
+      "mid": "congregation",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 2,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 51,
+      "vid": "nora_wilson",
+      "mid": "eater",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 2,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 53,
+      "vid": "ivy_wang",
+      "mid": "congregation",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 2,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 55,
+      "vid": "rosa_mendez",
+      "mid": "congregation",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 15,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 55,
+      "vid": "rosa_mendez",
+      "mid": "congregation",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 3,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 84,
+      "vid": "nikolai_volkov",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 84,
+      "vid": "ivy_wang",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 84,
+      "vid": "ivy_wang",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 87,
+      "vid": "ivy_wang",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 87,
+      "vid": "ivy_wang",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 88,
+      "vid": "nikolai_volkov",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    },
+    {
+      "seed": 104757,
+      "day": 88,
+      "vid": "emma_larsen",
+      "mid": "suburb",
+      "wave": 4,
+      "origin": "aid",
+      "population": "no-sense-path",
+      "joined": null,
+      "trace": null,
+      "senseTrio": null,
+      "misses": [],
+      "bystanders": [],
+      "rounds": 1,
+      "outcome": "vFlee"
+    }
+  ],
+  "testCases": [
+    {
+      "label": "d69",
+      "expected": {
+        "label": "d69",
+        "seed": 104721,
+        "day": 69,
+        "vid": "gen_5b212hy",
+        "mid": "audit"
+      },
+      "reproduced": false,
+      "day": null,
+      "meeting": null
+    },
+    {
+      "label": "d112",
+      "expected": {
+        "label": "d112",
+        "seed": 104722,
+        "day": 112,
+        "vid": "nino_kapanadze",
+        "mid": "eater"
+      },
+      "reproduced": false,
+      "day": null,
+      "meeting": null
+    },
+    {
+      "label": "d117",
+      "expected": {
+        "label": "d117",
+        "seed": 104722,
+        "day": 117,
+        "vid": "miguel_santos",
+        "mid": "editor"
+      },
+      "reproduced": false,
+      "day": null,
+      "meeting": null
+    },
+    {
+      "label": "d133",
+      "expected": {
+        "label": "d133",
+        "seed": 104437,
+        "day": 133,
+        "vid": "ruby_callaghan",
+        "mid": "reunion"
+      },
+      "reproduced": false,
+      "day": null,
+      "meeting": null
+    }
+  ],
+  "testOk": 0
+}
