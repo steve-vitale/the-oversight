@@ -264,3 +264,38 @@ guard ALL GREEN; the r225 F5 targeted harness 22/22.
   delete; rotation-b 7→4 written and verified; playtest-loop-2.lock
   (run_id 2026-11-19T03:56:53Z) deleted after run_id verification;
   main tree verified clean.
+
+## Adoption closeout (Lane B succession r245 adoption, 2026-11-19)
+
+The scheduled run timed out before closeout; the adoption finished it.
+All panel claims re-verified from the files, nothing taken on the
+timed-out run's word:
+
+- Panel log: all 5 seeds exit 0, analyzer exit 0.
+- Analyzer verdicts: REL-BOND 4/4 held; REL-VET 5/5 held on 13 opener
+  draws (floor 10, met with margin); REL-WIT INSUFFICIENT-DATA (0
+  witness convos) with WITNESS-CENSUS SUPPLY-PRESENT (177 corpses:
+  41 person / 136 monster; 2 witnessed person corpses — Vincent and
+  Javier, both combat, seed 34362); MANTLE-FINE 19 deaths, 0
+  day-skips; DRY-CENSUS 0 dry hits, 5 honest fallbacks;
+  MOURN-TEMPLATE 37 servings / 13 shapes, 0 repeats; MOURN-EXHAUST 0;
+  HABIT-COLLISION PASS; CAP-NC 0/0 eligible.
+- F5 spot-check: 0 "already handled" firings across all 65
+  transcripts + 5 stdout JSONs — the adopted 5-panel window PASS
+  stands as recorded.
+- Telemetry re-run: exactly the 2 LOUD lines the run note documents
+  (deaths.bearer +150%, census.fallen +208%), both the documented
+  means-vs-sum mismatch — per-file means are BELOW baseline (bearer
+  3.8 vs 7.6; fallen 8.8 vs 14.3). Baseline NOT rolled.
+- Gate solo re-runs on the branch tip: measurement-proof staleness
+  pair FAIL solo as standing ("Proof source inputs are not current";
+  retained neutrality proof); phone-frame FAIL solo as standing
+  (stale receipt); living-garden + one-person-army PASS solo (exit 0)
+  — load artifacts. Ladder-bundle control absent from the gate
+  failure list — cleared by the ladderbase-cause-a fix.
+- Proof tests on the branch tip: r232 relationship-mourning ALL GREEN;
+  r225 F5 settled-favor 22/22.
+- Uncommitted file at adoption start: `scripts/run-journey-succession-r245-panel.sh`
+  — mode change only (100644 → 100755, no content change), committed
+  with this closeout note.
+- No src/js change this run; no lever held (none in scope).
