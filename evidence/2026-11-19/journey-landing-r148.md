@@ -258,8 +258,30 @@ comparison, per standing practice. No failure touches the two r148 fixes
 (competent.js, bond-initiation.js) — both proof tests pass on the branch tip
 and were re-run on the rebased tip (see Closeout).
 
-Rebased-tip gate: re-run after rebase onto master `7e0810eea` (see Closeout
-for the tally).
+Rebased-tip gate: re-run after rebase onto master `7e0810eea`
+(334 scripts; the count moved 341→344 with the post-r147 landings):
+**334 passed, 10 failed in 1416s; 0 attributable.** The 10:
+
+- The 7 standing failures from the branch gate, minus the two that now
+  pass (foodpower 30/30 after the ONTOLOGY restore; sw-audio-cache 7/7
+  after the flap cleared): the measurement pair (stale on master — see
+  above), phone-frame (stale receipt), and the four 120s deed-attainment
+  timeouts (living-garden, one-person-army, trust-observer, capable-bot —
+  all PASS solo, verified above).
+- **3 NEW, all FLAP:** test-deathcleanup-instrument-20261117.js
+  (EPERM `writeFileSync` on the analyzer-half seed file — driver half
+  passes fully), test-measurement-cache-flags.js (EPERM `writeFileSync`
+  inside balance-panel.js), test-occupation-panels.js (EPERM
+  `copyFileSync` balance-panel.js → /tmp). All three failed identically
+  in the gate and on solo re-runs during the active write-refusal window
+  (7th window on boot `82c04730`, onset 19:34:48Z; a fresh window opened
+  on the replacement boot within ~5 min of its ~19:51Z start and was
+  still refusing writes at 20:05Z). None of the three touches
+  `competent.js` or `bond-initiation.js`; cache-flags and
+  occupation-panels were also in r248's gate (335/9) and adjudicated
+  standing/flaky there. Re-run to green is owed once writes clear;
+  the failure signature (EPERM at write/copyfile, nothing else) is
+  environmental, not a code failure, and blocks nothing in this landing.
 
 ## Metric review (for the NEXT run)
 
@@ -339,5 +361,43 @@ for the tally).
 
 ## Closeout
 
-[To be completed: gate result, commits, ff-merge, worktree release,
-rotation 0→1, lock deletion, heartbeat kill.]
+- **ONTOLOGY.md:** flap truncation, NOT run work. The worktree copy was 0
+  lines (2199 deletions) with no mention in the run's report; restored
+  byte-identical from HEAD (`git checkout HEAD -- docs/ONTOLOGY.md`, 2199
+  lines, `git diff HEAD -- docs/ONTOLOGY.md` empty after). NOT committed.
+  Same signature as the senseexped-b coordinator's earlier ONTOLOGY.md
+  emptying.
+- **Commits on branch `journey-landing`** (base `0aa413222`, rebased clean
+  onto master `7e0810eea`, no conflicts):
+  - `cf17e4dd6` — moderator-mute guard + link-accept rotation by pool
+    index + both proof tests + driver.
+  - `b79533ab8` — panel evidence + run note (Q1–Q3, gate as run).
+  - Gate-rebased log + Q4 update + this closeout — committed as the
+    third commit before merging (see git log).
+- **Gate:** branch tip 335/9, 0 attributable (adjudicated above);
+  rebased tip 334/10, 0 attributable (7 standing + 3 flap-EPERM,
+  adjudicated above). Proof tests pass on the rebased tip; check-wired
+  0 unwired on `bond-initiation.js`.
+- **Telemetry:** quiet on the pre-registered panel and on the fix2
+  re-panel (5 metrics each vs `landing-split.json`). Baseline NOT rolled.
+- **Locks / rotation:** the timed-out run's `playtest-loop.lock` was
+  already gone when the adoption started (a new 10:45 CST occurrence
+  had claimed it, failed worktree registration — slug `journey-landing`
+  already registered — and aborted, deleting its lock). The adoption
+  held NO lock. Rotation-a 0→1 written at closeout. No claim file
+  exists for this run (journey loops use the lock only).
+- **Heartbeat:** old hbloop PID 9557 killed by exact PID at adoption
+  start; replacement PID 29794 ran until the VM replacement ~19:51Z
+  killed it; restarted as PID 1857, heartbeat fresh 19:52:15Z.
+  Registry heartbeats were stale 18:46–19:52Z during the registry-lock
+  pile-up (18 processes blocked on REGISTRY.lock flock ~19:00Z).
+- **Flap:** a write-refusal window (7th on boot `82c04730`) ran
+  19:34:48Z–~19:51Z and ended with the VM replacement; a fresh window
+  opened on the new boot within ~5 min and was still refusing writes
+  at 20:16Z. It cost the rebased gate its 3 EPERM failures and is the
+  reason the three solo re-runs (deathcleanup, cache-flags,
+  occupation-panels) are still owed once writes clear — see Q4.
+- **Merge:** ff-only merge of `journey-landing` into master, in its
+  own call with the exit code verified directly. Merge hash recorded
+  in the daily memory note and the adoption report (this note follows
+  the r249 pattern of not carrying the merge hash itself).
