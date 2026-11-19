@@ -63,12 +63,17 @@ async function main() {
   check('counter line names something, not the clause', learned.includes('COUNTER LEARNED — something:'), learned);
   check('counter line never contains the clause', !learned.includes('creek went still'), learned);
 
-  // 3. Blast radius: every other monster's label is its display name.
-  // Only monsters whose guarded noun falls back to 'something' change.
+  // 3. Blast radius: every other monster's label is its display name,
+  // EXCEPT the comma-clause class (journey-establishment r244: when
+  // the display name carries a comma, the label is the guarded noun
+  // — monsterNoun's truncated head — not the raw descriptor). Only
+  // monsters whose guarded noun falls back to 'something' change to
+  // 'something'; comma-clause monsters change to their noun.
   const defs = Game.data.monsters || [];
   check('monster defs load', defs.length > 10, 'got ' + defs.length);
   const changed = [];
   const mismatched = [];
+  const commaChanged = [];
   for (const m of defs) {
     const label = Game.monsterCounterLabel(m.id);
     const disp = Game.monsterDisplayName(m.id);
@@ -77,11 +82,14 @@ async function main() {
       if (label !== 'something') mismatched.push(m.id + ' => ' + JSON.stringify(label));
       else changed.push(m.id);
     } else if (label !== disp) {
-      mismatched.push(m.id + ' label ' + JSON.stringify(label) + ' != display ' + JSON.stringify(disp));
+      if (disp.includes(',') && label === noun) commaChanged.push(m.id);
+      else mismatched.push(m.id + ' label ' + JSON.stringify(label) + ' != display ' + JSON.stringify(disp));
     }
   }
   console.log('labels changed to something: ' + (changed.length ? changed.join(', ') : 'none'));
+  console.log('labels changed to the guarded noun (comma case): ' + commaChanged.length);
   check('only clause/prose monsters change label', changed.length === 8, 'changed: ' + changed.join(', '));
+  check('comma-clause monsters change to their guarded noun', commaChanged.length === 38, 'changed: ' + commaChanged.join(', '));
   check('no other label differs from its display name', mismatched.length === 0, mismatched.slice(0, 5).join('; '));
 
   // 4. A village-named monster keeps its name in the counter line.

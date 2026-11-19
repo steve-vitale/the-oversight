@@ -23548,9 +23548,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // in current content); when it does, use that here too and keep the
     // display name everywhere else, so only clause / long-prose
     // descriptors change.
+    // R244 (journey-establishment r244): the r246 guard missed the
+    // comma-clause class. monsterNoun TRUNCATES at the first comma
+    // ("a toad like a war drum, throat swelling" -> "toad like a war
+    // drum") but this label returned the RAW display name, clause tail
+    // included — 38 of 72 defs carry a comma-clause descriptor, and
+    // the r244 panel fired 3 of them (belltoad, dustboar, rut_king).
+    // When the display name carries a comma, use the guarded noun
+    // (the truncated head); the 'something' fallback above still
+    // takes precedence, and proper/village names are untouched
+    // (monsterNoun returns them whole).
     monsterCounterLabel(mid) {
       try {
         if (this.monsterNoun && this.monsterNoun(mid) === 'something') return 'something';
+      } catch (e) {}
+      try {
+        const disp = this.monsterDisplayName(mid);
+        if (typeof disp === 'string' && disp.indexOf(',') !== -1 && this.monsterNoun) return this.monsterNoun(mid);
+        return disp;
       } catch (e) {}
       return this.monsterDisplayName(mid);
     },
