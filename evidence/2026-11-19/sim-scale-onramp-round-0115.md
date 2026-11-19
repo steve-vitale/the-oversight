@@ -108,12 +108,40 @@ telemetry compare applies to recorder corpora.)
 
 ## Gate tally — `check.js --quick` on the rebased round tip
 
-[GATE RESULTS TO FILL AFTER THE RUN — adjudicate every failure
-individually; standing set: measurement-proof staleness pair,
-phone-frame stale receipt, ladder-bundle control (ladderbase-cause-a
-fix is on master — verify whether it still fires), 120s timeouts
-under load, cache-flags load artifact (verify standalone/A-B before
-calling it one).]
+**339 passed, 5 failed in 557s** on the rebased round tip `d0e75b3b8`
+(master `f5bff7413` + this round's evidence commit), full log
+`evidence/2026-11-19/check-quick-round-0115.log`. **0 attributable**
+— every failure adjudicated individually:
+
+- Measurement-proof staleness pair (2): `test-measurement-proof-update.js`
+  (exit 1, "Proof source inputs are not current") and
+  `test-measurement-workflow.js` (exit 1, "retained neutrality proof
+  covers the current Game/controller/harness inputs") — pre-existing
+  master debt, documented since the Oct 29 tracker rebuild (7 Game
+  files moved after the proof). This round adds no code; not
+  attributable.
+- Phone-frame stale receipt (1): `test-phone-frame-proof.js` (exit 1,
+  "retained receipt hash 736" ok, but retained browser inputs don't
+  match current source; "Phone receipt source is stale or missing:
+  index.html") — pre-existing master debt; not attributable.
+- 120s timeouts under load (2): `test-living-garden-deed-attainment.js`
+  and `test-one-person-army-deed-attainment.js` (both exit null, 120.1s).
+  Both were solo-verified green on the same content (exit 0; the
+  pre-rebase gate's solo runs: living-garden exit 0, one-person-army
+  exit 0) — load artifacts, not attributable.
+- Ladder-bundle control: **does NOT fire on this tip** — the
+  ladderbase-cause-a fix holds (also cleared on the 2330B gate tip).
+- Cache-flags, occupation-panels, capable-bot: all three failed on the
+  pre-rebase gate run (336 passed, 8 failed in 1265s — the box was
+  loaded then) and **all pass on this rebased-tip run** (cache-flags
+  solo 4/4 green; occupation-panels 25/25 and capable-bot 40/40 solo
+  green on the pre-rebase tip). Load artifacts, confirmed by the
+  quieter re-run, not attributable.
+
+The pre-rebase gate (336/8 in 1265s) is superseded by this rebased-tip
+gate; its solo verifications are cited above. Baseline NOT rolled
+(telemetry-check refuses recorder corpora by design — verified, exit
+2, no LOUD lines).
 
 ## Convergence tracker
 
@@ -125,8 +153,11 @@ immediately before writing; sibling loop may have written).
 Evidence-only landing: round branch built from current master
 containing ONLY evidence files (checkout `evidence/` paths from the
 arm tips + this file; no `src/js` changes — verified with `git log` /
-`git show`). Rebased onto current local master; proof tests re-run on
-the rebased tip before the ff-only merge. Merge commit: [TO FILL].
+`git show`). Rebased onto current local master `f5bff7413` clean (one
+commit replayed, tip `d0e75b3b8`); gate re-run on the rebased tip
+before the ff-only merge (339/5, 0 attributable). Merged ff-only to
+master; the merge commit is recorded in the convergence tracker entry
+for this run.
 
 ## Lock / claim note (adoption anomaly)
 
@@ -139,6 +170,10 @@ adoption was running (arm heartbeats were ~50 min stale at the time).
 No claim file, coordinator, or registry tree for 0325Z was ever
 found; it most likely aborted on the 16/16 worktree cap and left a
 stale lock. The 0115Z claim is retired to `.DEAD` by this adoption.
-[LOCK DECISION TO FILL AT CLOSEOUT — re-check for any 0325Z
-coordinator/claim/tree before touching the lock; delete only if
-still no sign of life, as stale-lock recovery, and say so.]
+Lock decision (verified at closeout): the `fleshout-loop.lock` file
+was already GONE — the 0325Z occurrence (which had replaced the 0115Z
+lock via stale-lock recovery) deleted it when it stood down (its
+tracker entry says so; verified absent twice by the adoption worker,
+and no 0325Z coordinator, claim, or registry tree was ever found).
+There was no lock left to delete, and none was re-created. The 0115Z
+claim is retired to `.DEAD` by this adoption.
