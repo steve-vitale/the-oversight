@@ -75,6 +75,17 @@
   var BOND_TICK_P = 0.18;   // npcBondTick: scholar-proposal staging lottery (tuning 3, 2026-11-05: 0.25 staged ~10/90d on long-lived villages; full panel hit 13/seed vs the prereg 12 cap — trim for margin)
   var PAIR_TICK_P = 0.08;   // npcPairBondTick: NPC->NPC proposal lottery
   var LINK_TICK_P = 0.5;    // npcLinkRaiseTick: link-raise staging lottery
+  var LINK_ACCEPT_ROTATION = {}; // journey-landing r148: last accept pool
+  // INDEX served per `how` (see linkAcceptLine). The run ledger is a
+  // 48-entry window — an accept line served days ago has aged out by the
+  // next accept, so first-unledgered always returns pool[0] (22/23
+  // identical on the r148 panel; the pool's second line was decorative).
+  // Rotation only breaks ties among unledgered lines; the ledger check
+  // still runs first. The store holds an INDEX, not the line: the line
+  // embeds the village name ({V}), and accepts are usually for different
+  // villages — comparing full lines would never match (r148 re-panel
+  // diagnostic: store held "...to Thornfield" while the next accept was
+  // for Ashford). Run-scoped, like the ledger.
   var TELL_P = 0.3;         // endConvo: scholar tells a villager a village
   var LINK_RAISE_COOLDOWN_DAYS = 14;
   // WARMTH WINDOW (tuned 2026-11-05 after the armed pilot showed 0
@@ -876,6 +887,24 @@
         return String((ch && ch[0]) || s).trim();
       };
       for (var i = 0; i < pool.length; i++) { if (rl.indexOf(key(pool[i])) === -1) { picked = pool[i]; break; } }
+      // R148 ROTATION (journey-landing r148): when the first-unledgered
+      // pick would repeat the pool line last served for this `how`, serve
+      // the other unledgered line instead — the pool exists to vary, and
+      // two different villagers days apart saying the same acceptance
+      // verbatim is the repeat the pools are for. The store holds the
+      // POOL INDEX: the served line embeds the village name, and accepts
+      // are usually for different villages, so full-line comparison never
+      // matches. If the other line is ledgered (said recently), keep the
+      // repeat: a repeat beats a ledgered parrot. Fail-open to the
+      // first-unledgered pick.
+      var lastIdx = (typeof LINK_ACCEPT_ROTATION[how] === 'number') ? LINK_ACCEPT_ROTATION[how] : null;
+      var pickedIdx = pool.indexOf(picked);
+      if (lastIdx !== null && pickedIdx === lastIdx) {
+        for (var j = 0; j < pool.length; j++) {
+          if (j !== lastIdx && rl.indexOf(key(pool[j])) === -1) { picked = pool[j]; pickedIdx = j; break; }
+        }
+      }
+      LINK_ACCEPT_ROTATION[how] = pickedIdx;
     } catch (e) {}
     return picked;
   }

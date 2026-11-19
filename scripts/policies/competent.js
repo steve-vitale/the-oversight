@@ -4057,6 +4057,84 @@ const competent = {
           }
         } catch (e) { ctx.recoverErrors = (ctx.recoverErrors || 0) + 1; }
       }
+      // MODERATOR MUTE (journey-landing r148): the moderator announces its
+      // muted verb plainly and the suppression field is grid-visible — the
+      // player always knows what is muted, and the coaching says it
+      // outright (MOVE muted: "STRIKE or WAIT to flip the mute, then
+      // move"; STRIKE muted: "Step OUT of the purple field, or vary your
+      // verbs"). The old policy ignored the live mute and re-issued the
+      // muted verb every round (1271 d25: two MOVE violations, +3/+6 to
+      // Notices, 0 strikes while allies killed a 245-HP moderator — the
+      // panel's only B-shape fight). The 'wait' trick in beastTrickPlay
+      // covers this only when the counter is KNOWN; the mute itself is
+      // live perception (announced + visible), so the guard reads it
+      // directly and needs no knowledge gate. When the muted verb is the
+      // one this turn would use and the scholar stands in the field, use
+      // the other verb instead: MOVE muted + out of strike range -> WAIT
+      // (silence flips the mute; tbPlayerWait auto-advances, never
+      // endTurn after it); STRIKE muted + in range -> step to an adjacent
+      // tile outside the field if one exists, else WAIT. Reads only live
+      // engine state; fail-open when the engine lacks it. Never fires
+      // outside the field (the mute binds only inside it) or when the
+      // turn would not use the muted verb anyway.
+      try {
+        const _mod = (typeof Game.modLive === 'function') ? Game.modLive() : null;
+        if (_mod && Array.isArray(_mod.modMuted) && _mod.modMuted.length &&
+            typeof Game.modPlayerInField === 'function' && Game.modPlayerInField(_mod)) {
+          const _muted = _mod.modMuted;
+          const _live = (f.fighters || []).filter(function (x) { return x && x.kind === 'monster' && (x.hp || 0) > 0 && !x.fled; });
+          if (_live.length) {
+            _live.sort(function (a, b) { return (a.hp || 0) - (b.hp || 0); });
+            const _tgt = _live[0];
+            const _w0 = (Game.equippedWeapon && Game.equippedWeapon()) || { range: 1 };
+            const _px0 = p.mx != null ? p.mx : 4, _py0 = p.my != null ? p.my : 4;
+            const _tmx0 = _tgt.mx != null ? _tgt.mx : 4, _tmy0 = _tgt.my != null ? _tgt.my : 4;
+            const _d0 = Math.max(Math.abs(_tmx0 - _px0), Math.abs(_tmy0 - _py0));
+            const _inRange = _d0 <= (_w0.range || 1);
+            if (_muted.indexOf('move') >= 0 && !_inRange) {
+              // MOVE muted + out of strike range: any close step is a
+              // violation. WAIT to dilute the verb window and flip the
+              // mute; the monster's turn changes the geometry meanwhile.
+              ctx.modMuteWaits = (ctx.modMuteWaits || 0) + 1;
+              if (typeof Game.tbPlayerWait === 'function') { try { Game.tbPlayerWait(); } catch (e) {} }
+              else if (Game.tbIsPlayerTurn && Game.tbIsPlayerTurn()) endTurn();
+              return true;
+            }
+            if (_muted.indexOf('strike') >= 0 && _inRange) {
+              // STRIKE muted + in range: a strike is a violation. Step
+              // to an adjacent tile outside the field if one exists,
+              // else WAIT to flip the mute.
+              const _field = (_mod.modFieldSet instanceof Set) ? _mod.modFieldSet : null;
+              let _stepped = false;
+              if (_field) {
+                const _cands = [];
+                for (let _dx = -1; _dx <= 1; _dx++) for (let _dy = -1; _dy <= 1; _dy++) {
+                  if (!_dx && !_dy) continue;
+                  const _cx = _px0 + _dx, _cy = _py0 + _dy;
+                  if (_cx < 0 || _cx > 8 || _cy < 0 || _cy > 8) continue;
+                  if (_field.has(_cx + ',' + _cy)) continue;
+                  _cands.push([_cx, _cy]);
+                }
+                for (const _c of _cands) {
+                  if (Game.tbIsPlayerTurn && !Game.tbIsPlayerTurn()) break;
+                  const _ox = p.mx, _oy = p.my;
+                  try { Game.tbPlayerMove(_c[0], _c[1]); } catch (e) {}
+                  if (p.mx !== _ox || p.my !== _oy) { _stepped = true; break; }
+                }
+              }
+              if (_stepped) {
+                ctx.modMuteStepsOut = (ctx.modMuteStepsOut || 0) + 1;
+                if (Game.tbIsPlayerTurn && Game.tbIsPlayerTurn()) endTurn();
+              } else {
+                ctx.modMuteWaits = (ctx.modMuteWaits || 0) + 1;
+                if (typeof Game.tbPlayerWait === 'function') { try { Game.tbPlayerWait(); } catch (e) {} }
+                else if (Game.tbIsPlayerTurn && Game.tbIsPlayerTurn()) endTurn();
+              }
+              return true;
+            }
+          }
+        }
+      } catch (e) {}
       const alive = f.fighters.filter(x => x.kind === 'monster' && (x.hp || 0) > 0);
       if (!alive.length) return false;
       alive.sort((a, b) => (a.hp || 0) - (b.hp || 0));
