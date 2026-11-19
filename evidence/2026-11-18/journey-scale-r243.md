@@ -207,6 +207,6 @@ words now instead of parroting yours.
   showed staged-as-deleted); repaired with `git ls-tree -r HEAD | git
   update-index --add --index-info`; status + diff HEAD verified empty.
 - Analyzer fix commit `e420c8200` (analyzer + proof test).
-- Run-note commit: [RUN-NOTE-COMMIT].
+- Run-note commit `ac01c4dfb` (+ closeout hash fix in the follow-up).
 - Merged locally, pending ship (ship loop owns bump/push/live verify).
 - Rotation 3→0 written. Lock deleted after run_id verification.
