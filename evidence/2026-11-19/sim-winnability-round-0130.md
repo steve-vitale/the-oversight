@@ -47,7 +47,19 @@ No village took the full seat on any leg; no village reached national. The wall 
 
 ## Gate
 
-(To be filled after the check.js run on the landed tip — see below.)
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-carriersetup-b` on the rebased tip (branch `sim-carriersetup-b`, base `9645f4536`): **336 passed, 8 failed, 0 attributable.** Log: `evidence/2026-11-18/check-quick-round-0130.log`.
+
+| Failure | Attribution |
+| --- | --- |
+| `test-living-garden-deed-attainment.js` (exit null, 120.1s) | 120s timeout under load (standing set) |
+| `test-occupation-panels.js` (exit null, 120.1s) | 120s timeout under load (standing set) |
+| `test-one-person-army-deed-attainment.js` (exit null, 120.2s) | 120s timeout under load (standing set) |
+| `test-capable-bot-20261014.js` (exit null, 120.2s) | 120s timeout under load (standing set) |
+| `test-measurement-proof-update.js` (exit 1) + `test-measurement-workflow.js` (exit 1, 1 failed) | Measurement-proof staleness pair (standing set — the retained neutrality proof is stale since 7 Game files moved; documented in the tracker header since Oct 29) |
+| `test-phone-frame-proof.js` (exit 1, 3 failed) | Phone-frame stale receipt (standing set) |
+| `test-measurement-cache-flags.js` (exit 1, 4 failed in-gate) | **Load artifact, proven by solo A/B:** re-run solo passes 4/4, exit 0. The parallel-gate failure is contention, not a regression. |
+
+**Ladder-bundle control: CLEARED.** Zero "ladder" mentions in the gate log — the ladderbase-cause-a fix on master cleared the standing control failure. Verified on this rebased tip, not assumed. This round's 336/8 is one failure fewer than the 2330Z round's 335/9 and two fewer than the Loop A closeout's 334/10, entirely on the ladder fix clearing.
 
 ## Findings touched
 
