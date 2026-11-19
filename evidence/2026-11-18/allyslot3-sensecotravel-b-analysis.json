@@ -1,0 +1,1080 @@
+{
+  "verdict": "NO-GO",
+  "kind": "",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": true,
+      "detail": "launches ctl 22 / arm 24; arm field-4 denominator (ally2-joined quad meetings) 6 (floor 6 launches/leg, >=2 denominator meetings)"
+    },
+    {
+      "id": "primary-field-4",
+      "pass": false,
+      "detail": "arm field-4 4/6 = 0.67 (bar >= 0.80); ctl field-4 0/2 (bar 0 numerator); raw rate over all launched quad meetings arm 0.44 (4/9)"
+    },
+    {
+      "id": "sense-rate-reported",
+      "pass": true,
+      "detail": "sense rate arm 6/9 = 0.67; ctl 0/5 (reported only)"
+    },
+    {
+      "id": "cost-starvation",
+      "pass": true,
+      "detail": "starvation totals arm 9 vs ctl 8; villager arm 9 vs ctl 8 (bar arm<=ctl+2 both)"
+    },
+    {
+      "id": "cost-median",
+      "pass": true,
+      "detail": "median survival arm 137d vs ctl 136d (bar arm>=0.8x ctl)"
+    },
+    {
+      "id": "cost-community",
+      "pass": true,
+      "detail": "village deaths arm 603 vs ctl 602 (bar arm<=ctl+16)"
+    },
+    {
+      "id": "instrument",
+      "pass": true,
+      "detail": "instrument errors ctl 0 / arm 0 (bar 0)"
+    }
+  ],
+  "ctl": {
+    "dir": "evidence/2026-11-18/perseed-allyslot3-rerun-b-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launches": 22,
+    "trioLaunches": 17,
+    "trioRate": 0.7727272727272727,
+    "quadLaunches": 11,
+    "partyQuads": 11,
+    "sizes": {
+      "1": 1,
+      "2": 4,
+      "3": 6,
+      "4": 11
+    },
+    "sources": {
+      "brain": 22
+    },
+    "c2depart": 18,
+    "candC2": 18,
+    "candC2carried": 18,
+    "candC2dropped": 0,
+    "candC2null": 4,
+    "unjoined": 0,
+    "midday": 7,
+    "dawn": 15,
+    "carryRate": 1,
+    "starvation": 8,
+    "starvationVillager": 8,
+    "medianDays": 136,
+    "partyTrios": 17,
+    "brainSha": {
+      "9a9b9305296f": 8
+    },
+    "carryPresent": {
+      "true": 8
+    },
+    "perSeed": [
+      {
+        "seed": 104720,
+        "days": 80,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 150,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104721,
+        "days": 150,
+        "launches": 5,
+        "observedTrios": 5,
+        "observedQuads": 4,
+        "partyTrios": 5,
+        "partyQuads": 4,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104722,
+        "days": 121,
+        "launches": 5,
+        "observedTrios": 4,
+        "observedQuads": 4,
+        "partyTrios": 4,
+        "partyQuads": 4,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 425,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104723,
+        "days": 113,
+        "launches": 2,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 325,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104724,
+        "days": 151,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 425,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104725,
+        "days": 151,
+        "launches": 3,
+        "observedTrios": 3,
+        "observedQuads": 0,
+        "partyTrios": 3,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 340,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104726,
+        "days": 151,
+        "launches": 7,
+        "observedTrios": 5,
+        "observedQuads": 3,
+        "partyTrios": 5,
+        "partyQuads": 3,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 510,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104727,
+        "days": 57,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "village",
+        "maxWave": 3,
+        "standing": 25,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      }
+    ],
+    "wall": {
+      "wins": 0,
+      "national": 0,
+      "wave5": 5,
+      "wave4": 7,
+      "standing200": 5,
+      "medianDays": 135.5,
+      "survived": 4
+    }
+  },
+  "arm": {
+    "dir": "evidence/2026-11-18/perseed-allyslot3-rerun-b-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launches": 24,
+    "trioLaunches": 19,
+    "trioRate": 0.7916666666666666,
+    "quadLaunches": 13,
+    "partyQuads": 13,
+    "sizes": {
+      "1": 1,
+      "2": 4,
+      "3": 6,
+      "4": 13
+    },
+    "sources": {
+      "brain": 24
+    },
+    "c2depart": 20,
+    "candC2": 20,
+    "candC2carried": 20,
+    "candC2dropped": 0,
+    "candC2null": 4,
+    "unjoined": 0,
+    "midday": 7,
+    "dawn": 17,
+    "carryRate": 1,
+    "starvation": 9,
+    "starvationVillager": 9,
+    "medianDays": 137,
+    "partyTrios": 19,
+    "brainSha": {
+      "9a9b9305296f": 8
+    },
+    "carryPresent": {
+      "true": 8
+    },
+    "perSeed": [
+      {
+        "seed": 104720,
+        "days": 80,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 150,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104721,
+        "days": 151,
+        "launches": 6,
+        "observedTrios": 6,
+        "observedQuads": 5,
+        "partyTrios": 6,
+        "partyQuads": 5,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104722,
+        "days": 124,
+        "launches": 6,
+        "observedTrios": 5,
+        "observedQuads": 5,
+        "partyTrios": 5,
+        "partyQuads": 5,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 450,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104723,
+        "days": 113,
+        "launches": 2,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 325,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104724,
+        "days": 151,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 425,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104725,
+        "days": 151,
+        "launches": 3,
+        "observedTrios": 3,
+        "observedQuads": 0,
+        "partyTrios": 3,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 340,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104726,
+        "days": 151,
+        "launches": 7,
+        "observedTrios": 5,
+        "observedQuads": 3,
+        "partyTrios": 5,
+        "partyQuads": 3,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 510,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104727,
+        "days": 57,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "village",
+        "maxWave": 3,
+        "standing": 25,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      }
+    ],
+    "wall": {
+      "wins": 0,
+      "national": 0,
+      "wave5": 5,
+      "wave4": 7,
+      "standing200": 5,
+      "medianDays": 137.5,
+      "survived": 4
+    }
+  },
+  "field4": {
+    "ctl": {
+      "perSeed": [
+        {
+          "seed": 104720,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104721,
+          "quadLaunches": 4,
+          "meetings": 1,
+          "denom": 1,
+          "numer": 0,
+          "senseDen": 1,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104722,
+          "quadLaunches": 4,
+          "meetings": 2,
+          "denom": 1,
+          "numer": 0,
+          "senseDen": 2,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104723,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104724,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104725,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104726,
+          "quadLaunches": 3,
+          "meetings": 2,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 2,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104727,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        }
+      ],
+      "meetings": 5,
+      "denom": 2,
+      "numer": 0,
+      "rate": 0,
+      "rawRate": 0,
+      "senseDen": 5,
+      "senseN": 0,
+      "senseRate": 0,
+      "ally3DealtTotal": 0,
+      "deaths": 602
+    },
+    "arm": {
+      "perSeed": [
+        {
+          "seed": 104720,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104721,
+          "quadLaunches": 5,
+          "meetings": 3,
+          "denom": 3,
+          "numer": 2,
+          "senseDen": 3,
+          "senseN": 2,
+          "ally3Dealt": 81
+        },
+        {
+          "seed": 104722,
+          "quadLaunches": 5,
+          "meetings": 4,
+          "denom": 3,
+          "numer": 2,
+          "senseDen": 4,
+          "senseN": 3,
+          "ally3Dealt": 17
+        },
+        {
+          "seed": 104723,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104724,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104725,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104726,
+          "quadLaunches": 3,
+          "meetings": 2,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 2,
+          "senseN": 1,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104727,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        }
+      ],
+      "meetings": 9,
+      "denom": 6,
+      "numer": 4,
+      "rate": 0.6666666666666666,
+      "rawRate": 0.4444444444444444,
+      "senseDen": 9,
+      "senseN": 6,
+      "senseRate": 0.6666666666666666,
+      "ally3DealtTotal": 98,
+      "deaths": 603
+    }
+  },
+  "size4Shares": {
+    "ctl": {
+      "n": 5,
+      "fought": 5,
+      "noHp": 0,
+      "mean": 0.09990629597021344
+    },
+    "arm": {
+      "n": 9,
+      "fought": 9,
+      "noHp": 0,
+      "mean": 0.16061046009005614
+    }
+  },
+  "senseMisses": {
+    "ctl": {
+      "meetings": 5,
+      "senseFull": 0,
+      "misses": [
+        {
+          "seed": 104721,
+          "day": 69,
+          "mid": "audit",
+          "wave": 4,
+          "fighter": "gen_5b212hy",
+          "rounds": 6,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 65,
+            "holder": "gen_5b212hy",
+            "party": [
+              "gen_5b212hy",
+              "gen_3ghdbz4",
+              "nikolai_volkov",
+              "gen_dnv7tkn"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "gen_3ghdbz4",
+            "vasyl_shevchenko"
+          ],
+          "missing": [
+            "nikolai_volkov",
+            "gen_dnv7tkn"
+          ],
+          "extra": [
+            "vasyl_shevchenko"
+          ],
+          "ally2Vid": "vasyl_shevchenko",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "nikolai_volkov",
+                "planParty": [
+                  "gen_3ghdbz4"
+                ],
+                "gateDay": 69,
+                "ended": {
+                  "day": 68,
+                  "vid": "nikolai_volkov"
+                }
+              }
+            },
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "gen_dnv7tkn",
+                "planParty": [
+                  "gen_3ghdbz4"
+                ],
+                "gateDay": 69,
+                "ended": {
+                  "day": 68,
+                  "vid": "gen_dnv7tkn"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104722,
+          "day": 91,
+          "mid": "spoiler",
+          "wave": 5,
+          "fighter": "nikos_papadopoulos",
+          "rounds": 4,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 91,
+            "holder": "petra_novak",
+            "party": [
+              "petra_novak",
+              "hannah_kim",
+              "nikos_papadopoulos",
+              "app_mgpspkqo111"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "petra_novak",
+            "hannah_kim"
+          ],
+          "missing": [
+            "app_mgpspkqo111"
+          ],
+          "extra": [],
+          "ally2Vid": "hannah_kim",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "cap-2-cut",
+              "detail": {
+                "companion": "app_mgpspkqo111",
+                "planParty": [
+                  "petra_novak",
+                  "hannah_kim",
+                  "app_mgpspkqo111"
+                ],
+                "gateDay": 91
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104722,
+          "day": 94,
+          "mid": "cancellation",
+          "wave": 5,
+          "fighter": "nikos_papadopoulos",
+          "rounds": 1,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 94,
+            "holder": "nikos_papadopoulos",
+            "party": [
+              "nikos_papadopoulos",
+              "hannah_kim",
+              "naran_tumen",
+              "petra_novak"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "hannah_kim",
+            "naran_tumen"
+          ],
+          "missing": [
+            "petra_novak"
+          ],
+          "extra": [],
+          "ally2Vid": null,
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "cap-2-cut",
+              "detail": {
+                "companion": "petra_novak",
+                "planParty": [
+                  "hannah_kim",
+                  "naran_tumen",
+                  "petra_novak"
+                ],
+                "gateDay": 94
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104726,
+          "day": 82,
+          "mid": "reunion",
+          "wave": 4,
+          "fighter": "gen_befdi99",
+          "rounds": 5,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 81,
+            "holder": "victor_lopez",
+            "party": [
+              "victor_lopez",
+              "katarina_novak",
+              "gen_befdi99",
+              "ingrid_vik"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "katarina_novak",
+            "gen_gjd3ji9"
+          ],
+          "missing": [
+            "victor_lopez",
+            "ingrid_vik"
+          ],
+          "extra": [
+            "gen_gjd3ji9"
+          ],
+          "ally2Vid": null,
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "victor_lopez",
+                "planParty": [
+                  "katarina_novak"
+                ],
+                "gateDay": 82,
+                "deathDay": 81,
+                "deathCause": "a wound that wouldn't close"
+              }
+            },
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "ingrid_vik",
+                "planParty": [
+                  "katarina_novak"
+                ],
+                "gateDay": 82,
+                "deathDay": 82,
+                "deathCause": "The Ugly Beast"
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104726,
+          "day": 138,
+          "mid": "influencer",
+          "wave": 4,
+          "fighter": "sofia_chen",
+          "rounds": 2,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 138,
+            "holder": "elif_demir",
+            "party": [
+              "elif_demir",
+              "pavel_dubinin",
+              "app_mgpsplkf603",
+              "sofia_chen"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "elif_demir",
+            "pavel_dubinin"
+          ],
+          "missing": [
+            "app_mgpsplkf603"
+          ],
+          "extra": [],
+          "ally2Vid": null,
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "cap-2-cut",
+              "detail": {
+                "companion": "app_mgpsplkf603",
+                "planParty": [
+                  "elif_demir",
+                  "pavel_dubinin",
+                  "app_mgpsplkf603"
+                ],
+                "gateDay": 138
+              }
+            }
+          ]
+        }
+      ],
+      "byCause": {
+        "expedition-ended": 2,
+        "cap-2-cut": 3,
+        "dead": 2
+      }
+    },
+    "arm": {
+      "meetings": 9,
+      "senseFull": 6,
+      "misses": [
+        {
+          "seed": 104721,
+          "day": 69,
+          "mid": "audit",
+          "wave": 4,
+          "fighter": "gen_5b212hy",
+          "rounds": 6,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 65,
+            "holder": "gen_5b212hy",
+            "party": [
+              "gen_5b212hy",
+              "gen_3ghdbz4",
+              "nikolai_volkov",
+              "gen_dnv7tkn"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "gen_3ghdbz4",
+            "vasyl_shevchenko"
+          ],
+          "missing": [
+            "nikolai_volkov",
+            "gen_dnv7tkn"
+          ],
+          "extra": [
+            "vasyl_shevchenko"
+          ],
+          "ally2Vid": "vasyl_shevchenko",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "nikolai_volkov",
+                "planParty": [
+                  "gen_3ghdbz4"
+                ],
+                "gateDay": 69,
+                "ended": {
+                  "day": 68,
+                  "vid": "nikolai_volkov"
+                }
+              }
+            },
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "gen_dnv7tkn",
+                "planParty": [
+                  "gen_3ghdbz4"
+                ],
+                "gateDay": 69,
+                "ended": {
+                  "day": 68,
+                  "vid": "gen_dnv7tkn"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104722,
+          "day": 112,
+          "mid": "eater",
+          "wave": 4,
+          "fighter": "nino_kapanadze",
+          "rounds": 4,
+          "outcome": "vDie",
+          "joinedLaunch": {
+            "day": 106,
+            "holder": "petra_novak",
+            "party": [
+              "petra_novak",
+              "visjoin_100",
+              "miguel_santos",
+              "nino_kapanadze"
+            ],
+            "score": 0
+          },
+          "sensed": [
+            "hannah_kim",
+            "nikos_papadopoulos"
+          ],
+          "missing": [
+            "petra_novak",
+            "visjoin_100",
+            "miguel_santos"
+          ],
+          "extra": [
+            "hannah_kim",
+            "nikos_papadopoulos"
+          ],
+          "ally2Vid": "nikos_papadopoulos",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "different-expedition",
+              "detail": {
+                "companion": "petra_novak",
+                "planParty": [
+                  "hannah_kim"
+                ],
+                "gateDay": 112,
+                "otherLaunch": {
+                  "day": 111,
+                  "holder": "petra_novak"
+                }
+              }
+            },
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "visjoin_100",
+                "planParty": [
+                  "hannah_kim"
+                ],
+                "gateDay": 112,
+                "ended": {
+                  "day": 110,
+                  "vid": "petra_novak"
+                }
+              }
+            },
+            {
+              "cause": "different-expedition",
+              "detail": {
+                "companion": "miguel_santos",
+                "planParty": [
+                  "hannah_kim"
+                ],
+                "gateDay": 112,
+                "otherLaunch": {
+                  "day": 111,
+                  "holder": "petra_novak"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104726,
+          "day": 82,
+          "mid": "reunion",
+          "wave": 4,
+          "fighter": "gen_befdi99",
+          "rounds": 5,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 81,
+            "holder": "victor_lopez",
+            "party": [
+              "victor_lopez",
+              "katarina_novak",
+              "gen_befdi99",
+              "ingrid_vik"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "katarina_novak",
+            "gen_gjd3ji9"
+          ],
+          "missing": [
+            "victor_lopez",
+            "ingrid_vik"
+          ],
+          "extra": [
+            "gen_gjd3ji9"
+          ],
+          "ally2Vid": null,
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "victor_lopez",
+                "planParty": [
+                  "katarina_novak"
+                ],
+                "gateDay": 82,
+                "deathDay": 81,
+                "deathCause": "a wound that wouldn't close"
+              }
+            },
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "ingrid_vik",
+                "planParty": [
+                  "katarina_novak"
+                ],
+                "gateDay": 82,
+                "deathDay": 82,
+                "deathCause": "The Ugly Beast"
+              }
+            }
+          ]
+        }
+      ],
+      "byCause": {
+        "expedition-ended": 3,
+        "different-expedition": 2,
+        "dead": 2
+      }
+    }
+  }
+}
