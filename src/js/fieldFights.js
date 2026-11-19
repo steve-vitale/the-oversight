@@ -1009,7 +1009,23 @@
           var _maxShots = clamp(1 + Math.floor(_range / Math.max(1, mSpeed)), 1, 4);
           var _shots = Math.min(_ammoN, _maxShots);
           if (_shots < 1) {
-            rec.log.push(vName + ' has ' + (_rdef.name || 'a bow') + ' but no arrows — the string stays drawn, useless.');
+            // #2593 (sim-speargate-a): name the weapon's ACTUAL ammo —
+            // a searcaster takes fusion cells, a crossbow bolts, a sling
+            // stones — not "arrows" for all of them. The plural comes
+            // from the ammo item's own data name (Arrow -> arrows,
+            // Crossbow bolt -> crossbow bolts, Stone -> stones, Fusion
+            // cell -> fusion cells); unknown ammo falls back to "arrows".
+            var _ammoName = 'arrows';
+            try {
+              for (var _di3 = 0; _di3 < (this.data.items || []).length; _di3++) {
+                if (this.data.items[_di3].id === _ammoId) {
+                  var _an = String(this.data.items[_di3].name || _ammoId).toLowerCase();
+                  if (_an) _ammoName = _an + 's';
+                  break;
+                }
+              }
+            } catch (e) {}
+            rec.log.push(vName + ' has ' + (_rdef.name || 'a bow') + ' but no ' + _ammoName + ' — the string stays drawn, useless.');
             rec.volley = { shots: 0, hits: 0, dmg: 0, ammoLeft: _ammoN };
           } else {
             var _hitP = clamp(0.85 - 0.06 * _range, 0.35, 0.85);
