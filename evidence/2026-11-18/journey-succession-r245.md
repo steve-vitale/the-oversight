@@ -296,6 +296,10 @@ timed-out run's word:
 - Proof tests on the branch tip: r232 relationship-mourning ALL GREEN;
   r225 F5 settled-favor 22/22.
 - Uncommitted file at adoption start: `scripts/run-journey-succession-r245-panel.sh`
-  — mode change only (100644 → 100755, no content change), committed
-  with this closeout note.
+  — mode change only (100644 → 100755, no content change). NOT landed:
+  safe-commit.sh stages every path with a hardcoded `100644` mode, so a
+  pure mode change is silently dropped from its commits (verified: the
+  closeout commit carried only the note). The bit was reverted (chmod
+  644) so the worktree is clean; the script's content is committed in
+  9671c5ad7 and the bit is execution scaffolding, not evidence.
 - No src/js change this run; no lever held (none in scope).
