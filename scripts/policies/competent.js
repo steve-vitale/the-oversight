@@ -2340,6 +2340,20 @@ function isDoorTile(Game, x, y) {
     return !!(detail && detail[y] && detail[y][x] === 'door');
   } catch (e) { return false; }
 }
+// FLEDBAD-PROBE (journey-landing r146, 2026-11-18): sample the
+// legacy-outmatched increment site so the run can NAME the firing fight
+// (matched to the census fights81 record by day + monster HP). Record-only;
+// never throws, never writes game state.
+function fledBadSample(ctx, Game, monsters, totalMhp, maxWave, hpPct, pmax) {
+  try {
+    (ctx.fledBadLog = ctx.fledBadLog || []).push({
+      day: (Game.state && Game.state.scholar && Game.state.scholar.day) || null,
+      totalMhp: totalMhp, maxWave: maxWave,
+      hpPct: Math.round(hpPct * 100) / 100, pmax: pmax,
+      mons: (monsters || []).map(function (m) { return { id: m.monsterId || null, hp: m.hp || 0, maxHp: m.maxHp || m.hp || 0 }; }),
+    });
+  } catch (e) {}
+}
 function beastDodgeMove(Game, f, p, px, py, avoid) {
   const cands = beastFreeTiles(Game, f, px, py);
   cands.sort((a, b) =>
@@ -2556,6 +2570,14 @@ function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
               if (idx >= 0) { dx = path[idx][0]; dy = path[idx][1]; }
             }
           }
+          // DOOR-SKIP (r146): the step itself may be a door even when
+          // the destination is not one (findPath routes through the hall
+          // doors) — check the tile actually stepped on, not just the
+          // candidate. tbPlayerMove flees only when the move ENDS on a
+          // door tile (game.js FLEE BY DOOR reads the final cell), so
+          // the stepped tile is the tile that matters. Mirror of the
+          // r145 closeStep guard.
+          if (isDoorTile(Game, dx, dy)) continue;
           const ox = p.mx, oy = p.my;
           Game.tbPlayerMove(dx, dy);
           if (p.mx !== ox || p.my !== oy) { moved = true; break; }
@@ -2723,6 +2745,11 @@ function beastTrickPlay(Game, f, ctx, p, endTurn) {
           (a[0] - b[0]) || (a[1] - b[1]));
         let pick = null;
         for (const c of cands) {
+          // DOOR-SKIP (journey-landing r146, 2026-11-18): the trick move
+          // ends ON the picked tile — a door tile would flee the fight
+          // (game.js FLEE BY DOOR). Skip door-tile picks outright (same
+          // class as the r145 closeStep/beastDodgeMove fix).
+          if (isDoorTile(Game, c[0], c[1])) continue;
           let path = null;
           try { path = Game.findPath(px, py, c[0], c[1]) || []; } catch (e) { continue; }
           if (path.length < need) continue;
@@ -2785,6 +2812,12 @@ function beastTrickPlay(Game, f, ctx, p, endTurn) {
           // refused move still counted the trick. Break only on a real
           // position change; try the next candidate otherwise.
           for (const c of cands) {
+            // DOOR-SKIP (journey-landing r146, 2026-11-18): the
+            // keep-distance move ends ON the picked tile — a door tile
+            // would flee the fight (game.js FLEE BY DOOR). Skip
+            // door-tile picks outright (same class as the r145
+            // closeStep/beastDodgeMove fix).
+            if (isDoorTile(Game, c[0], c[1])) continue;
             let path = null;
             try { path = Game.findPath(px, py, c[0], c[1]) || []; } catch (e) { continue; }
             if (!path.length) continue;
@@ -3934,6 +3967,9 @@ const competent = {
             hpPct < 0.5);
           if (outmatched && monsters.length) {
             ctx.fledBad = (ctx.fledBad || 0) + 1;
+            // FLEDBAD-PROBE (r146): sample the increment site (see
+            // fledBadSample above) so the run can name the firing fight.
+            try { fledBadSample(ctx, Game, monsters, totalMhp, maxWave, hpPct, pmax); } catch (e) {}
             const fr = flee();
             if (fr) return true;
             // directional-flee hold (at haven): no exit leads toward safety —
@@ -4186,7 +4222,7 @@ const competent = {
   },
 };
 
-module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, beastTrickPlay, legacyFleeWalk, beastDodgeMove, closeStep, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, counterAnswerOn, answerPendingCounter, pantryKcalTotal, COUNTER_SWEETEN_PANTRY_MIN, COUNTER_SWEETEN_KCAL, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, recoverOn, approachFallbackOn, approachMonsterSig, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
+module.exports = { competent, competentEat, packEatOnce, beastStrikeTarget, beastTrickPlay, legacyFleeWalk, beastDodgeMove, closeStep, fledBadSample, walkTo, walkHome, thirstWalkHome, goHomeStanding, standingHomeOn, workTrapline, workTraplineSet, forageTripSeedFirst, sortHaul, donateHaul, needTrip, keepKnife, armUp, gearUp, stoneRun, clearRubbleForStone, sootheTrauma, channelDevotion, eveningFeast, feastFightRoad, feastOn, recentGives, surplusFeast, surplusFeastOn, talkRound, deepTalk, talkOn, counterAnswerOn, answerPendingCounter, pantryKcalTotal, COUNTER_SWEETEN_PANTRY_MIN, COUNTER_SWEETEN_KCAL, pickTalkTargets, pickTalkChoice, holdConversation, talkScore, keepPromises, dpsRaceAssess, dpsRaceInit, dpsRaceOn, dirFleeOn, fleeRepairOn, recoverOn, approachFallbackOn, approachMonsterSig, chooseFleeDir, fleeDirScore, markRecover, recovering, recoverStep, DIR_FLEE_HAVEN, fightAssessOn, fightAssessRace, fightAssessDPR, fightAssessHook, fightAssessSkipTile, fightAssessLore, w2disengageOn, w2disengageSkipTile, W2_DISENGAGE_TOP4, W2_DISENGAGE_ARMOR_GATE, armorWantsVine };
 
 
 // The public shared gearing routine, also used by prepared policy proofs.

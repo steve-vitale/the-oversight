@@ -220,12 +220,21 @@
       // heard two turns earlier (1142 d6, 1148 d6: each line x2 verbatim).
       // Six lines means a sitting would need seven want-bridges before any
       // repeat, and the keep-3 memory window keeps near repeats out.
-      // Same voice throughout: the villager backs off their own want and
-      // hands the floor to the player.
+      // r146 (journey-landing 2026-11-18): the driver found the seventh —
+      // seed 1250 d10, a 27-turn sitting with seven deflects of a pending
+      // warn_you want, repeated '"Look, forget it. You wanted something?"'
+      // at turns 1 and 24 (HEED-V=1). Ten lines means a sitting would need
+      // eleven want-bridges before any repeat. Same voice throughout: the
+      // villager backs off their own want and hands the floor to the
+      // player.
       '"...Never mind me. What were you going to say?"',
       '"That can wait — it isn\'t going anywhere. What\'s on your mind?"',
       '"Look, forget it. You wanted something?"',
-      '"Anyway — that\'s my problem, not yours. What did you want?"'],
+      '"Anyway — that\'s my problem, not yours. What did you want?"',
+      '"It\'s nothing, really. What were you saying?"',
+      '"Forget it — go on, I\'m listening."',
+      '"Never mind. You had something to say?"',
+      '"I\'ll keep it to myself. What\'s on your mind?"'],
     secret: ['"Don\'t tell anyone I told you. What\'s on your mind?"', '"...Anyway. What did you want to ask?"'],
     small: ['"Sure — what\'s on your mind?"', '"Yeah? What\'s up?"',
       // r127 (journey-landing 2026-11-12): the pool held only the two lines
