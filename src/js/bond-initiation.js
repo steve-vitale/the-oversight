@@ -824,9 +824,70 @@
       if (treq && treq.linkRaise) delete ((G.state.village || {}).talkRequests)[vid];
     } catch (e) {}
   }
+  // ---------- LINK-ACCEPT VOICE (journey-scale r243, 2026-11-18) ----------
+  // The raise-accept reply used to parrot the player's choice label
+  // ("All right — let's ask them.") — 13/13 accepted/counter raise talks
+  // on r242's band. Canon (docs/CONVERSATIONS.md): "Replies belong to
+  // the spoken exchange" — the NPC answers in their own words, keyed to
+  // how they know the village (the same lore `how` linkRaiseLine uses).
+  // The carry stays narration, never quoted speech.
+  function linkAcceptLine(vid, villageId, villageName) {
+    var how = null;
+    try {
+      var lore = (G.villageLoreOf ? G.villageLoreOf(vid) : {}) || {};
+      how = ((lore[villageId] || {}).how) || null;
+    } catch (e) { how = null; }
+    // Pool entries are COMPLETE lines (quoted speech + carry narration,
+    // {V} = the village name) — so the first-unledgered pick below
+    // compares the same string sayLine ledgers (the declineLine
+    // precedent: its pool entries are complete lines too). A bare quoted
+    // line would never match a ledgered full line.
+    var name = villageName || 'them';
+    var pools = {
+      'visit': [
+        '"Good. Tell them I remember their fires — and that we\'re ready." You carry the proposal to {V}.',
+        '"Good — I\'ve sat by their fires. They\'ll listen." You carry the proposal to {V}.'
+      ],
+      'seen-nearby': [
+        '"Good. I\'ve watched their fires from the road. They\'ll listen." You carry the proposal to {V}.',
+        '"Good. Their fires are close enough to trust — go and ask." You carry the proposal to {V}.'
+      ],
+      'rumor': [
+        '"Good. What I\'ve heard of them, I believe. Go and ask." You carry the proposal to {V}.',
+        '"Good — the word on them is kind. Go and ask." You carry the proposal to {V}.'
+      ],
+      'told': [
+        '"Good. What I\'ve heard of them, I believe. Go and ask." You carry the proposal to {V}.',
+        '"Good — the word on them is kind. Go and ask." You carry the proposal to {V}.'
+      ]
+    };
+    var raw = pools[how] || [
+      '"Good. I know them — they\'ll listen." You carry the proposal to {V}.',
+      '"Good. Go and ask — I\'ll stand behind it." You carry the proposal to {V}.'
+    ];
+    var pool = raw.map(function (s) { return s.replace('{V}', name); });
+    // First-unledgered pick (declineLine precedent): the same villager
+    // does not repeat one accept line across villages.
+    var picked = pool[0];
+    try {
+      var rl = (typeof G.convoRunLedger === 'function') ? G.convoRunLedger() : [];
+      var key = function (s) {
+        var ch = (typeof G.convoSplitBeats === 'function') ? G.convoSplitBeats(s) : [s];
+        return String((ch && ch[0]) || s).trim();
+      };
+      for (var i = 0; i < pool.length; i++) { if (rl.indexOf(key(pool[i])) === -1) { picked = pool[i]; break; } }
+    } catch (e) {}
+    return picked;
+  }
   function acceptLinkRaise(vid) {
     var pending = pendingLinkRaise(vid);
     if (!pending) return { ok: false, reason: 'no-pending' };
+    var vname = 'them';
+    try {
+      var ovs = ((G.state || {}).otherVillages || []);
+      for (var i = 0; i < ovs.length; i++) if (ovs[i] && ovs[i].id === pending.villageId) { vname = ovs[i].name || ovs[i].id; break; }
+    } catch (e) {}
+    var line = linkAcceptLine(vid, pending.villageId, vname);
     consumeLinkRaise(vid);
     linkRaiseState()[pairKey(vid, pending.villageId)] = { day: dayOf(), outcome: 'accepted' };
     // The raiser tells the bearer what they know — the player cannot
@@ -839,7 +900,7 @@
     var res = null;
     try { res = G.proposeLink ? G.proposeLink(pending.villageId) : null; } catch (e) { bondWarn('acceptLink:proposeLink', e); res = null; }
     tele({ initiator: vid, target: pending.villageId, kind: 'link', outcome: 'accepted', chance: null });
-    return { ok: true, proposed: true, villageId: pending.villageId, link: res };
+    return { ok: true, proposed: true, villageId: pending.villageId, link: res, line: line };
   }
   function declineLinkRaise(vid) {
     var pending = pendingLinkRaise(vid);
@@ -970,7 +1031,10 @@
     if (kind === 'link' && act === 'accept') {
       var a = (G.acceptLinkRaise || acceptLinkRaise)(vid);
       if (!a.ok) return finish('"Not them. Not now."', '"Not now."');
-      return finish('"All right — let\'s ask them." You carry the proposal to ' + (function () { try { var ovs = ((G.state || {}).otherVillages || []); for (var i = 0; i < ovs.length; i++) if (ovs[i] && ovs[i].id === a.villageId) return ovs[i].name || ovs[i].id; } catch (e) {} return 'them'; })() + '.', '"All right. Let\'s ask them."');
+      // r243: the NPC answers in their own words (a.line, voiced by how
+      // they know the village) — never a parrot of the player's choice.
+      // The fallback is voiced too; the old parrot line is gone.
+      return finish((a && a.line) || ('"Good. Go and ask them." You carry the proposal to ' + (function () { try { var ovs = ((G.state || {}).otherVillages || []); for (var i = 0; i < ovs.length; i++) if (ovs[i] && ovs[i].id === a.villageId) return ovs[i].name || ovs[i].id; } catch (e) {} return 'them'; })() + '.'), '"All right. Let\'s ask them."');
     }
     if (kind === 'link' && act === 'decline') {
       var dl = (G.declineLinkRaise || declineLinkRaise)(vid);
@@ -1042,6 +1106,7 @@
     stageLinkRaise: function (vid, villageId) { return stageLinkRaise(vid, villageId); },
     pendingLinkRaise: function (vid) { return pendingLinkRaise(vid); },
     acceptLinkRaise: function (vid) { return acceptLinkRaise(vid); },
+    linkAcceptLine: function (vid, villageId, villageName) { return linkAcceptLine(vid, villageId, villageName); },
     declineLinkRaise: function (vid) { return declineLinkRaise(vid); },
     npcLinkRaiseTick: function () { return npcLinkRaiseTick(); },
     bondProposalLine: function (vid) { return bondProposalLine(vid); },
