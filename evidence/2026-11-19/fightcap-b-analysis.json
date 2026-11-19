@@ -1,0 +1,2420 @@
+{
+  "verdict": "NO-GO",
+  "kind": "",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": true,
+      "detail": "launches ctl 15 / arm 24; arm joined quad meetings 18 (floor 6 launches/leg, >=4 arm meetings); ctl joined quad meetings 9"
+    },
+    {
+      "id": "primary-dmg-share",
+      "pass": true,
+      "detail": "4th-member damage share arm 246/1344 = 0.183 over 2 fielded fights (bar >= 0.10); ctl 0 fielded (bar 0 by construction)"
+    },
+    {
+      "id": "primary-kill-share",
+      "pass": false,
+      "detail": "kill share on joined quad meetings arm 0/18 = 0.000 (bar >= 0.20; fightcap-a combined pair-inclusive baseline 0.059); ctl 0/9 = 0.000; talk-downs (mFlee, not kills) arm 0 / ctl 0"
+    },
+    {
+      "id": "no-leak",
+      "pass": true,
+      "detail": "control leg fields no third ally: field-4 numerator ctl 0/6, fielded fights ctl 0 (bar 0 — a ctl fielding is a flag-off leak)"
+    },
+    {
+      "id": "field-4-reported",
+      "pass": true,
+      "detail": "field-4 rate arm 2/13 = 0.15; sense rate arm 5/18 = 0.28; ctl 0/9 (reported only)"
+    },
+    {
+      "id": "cost-community",
+      "pass": true,
+      "detail": "community-loss share arm 5/8 = 0.625 vs ctl 5/8 = 0.625 (bar arm<=ctl+0.125)"
+    },
+    {
+      "id": "cost-starvation",
+      "pass": true,
+      "detail": "starvation totals arm 3 vs ctl 3; villager arm 2 vs ctl 2 (bar arm<=ctl+2 both)"
+    },
+    {
+      "id": "cost-median",
+      "pass": true,
+      "detail": "median survival arm 147d vs ctl 142.5d (bar arm>=0.8x ctl)"
+    },
+    {
+      "id": "instrument",
+      "pass": true,
+      "detail": "instrument errors ctl 0 / arm 0 (bar 0)"
+    }
+  ],
+  "ctl": {
+    "dir": "evidence/2026-11-19/perseed-fightcap-b-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launches": 15,
+    "trioLaunches": 13,
+    "trioRate": 0.8666666666666667,
+    "quadLaunches": 10,
+    "partyQuads": 10,
+    "sizes": {
+      "2": 2,
+      "3": 3,
+      "4": 10
+    },
+    "sources": {
+      "brain": 15
+    },
+    "c2depart": 15,
+    "candC2": 15,
+    "candC2carried": 15,
+    "candC2dropped": 0,
+    "candC2null": 0,
+    "unjoined": 0,
+    "midday": 2,
+    "dawn": 13,
+    "carryRate": 1,
+    "starvation": 3,
+    "starvationVillager": 2,
+    "medianDays": 142.5,
+    "partyTrios": 13,
+    "brainSha": {
+      "9a9b9305296f": 8
+    },
+    "carryPresent": {
+      "true": 8
+    },
+    "perSeed": [
+      {
+        "seed": 104770,
+        "days": 146,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104771,
+        "days": 132,
+        "launches": 10,
+        "observedTrios": 8,
+        "observedQuads": 6,
+        "partyTrios": 8,
+        "partyQuads": 6,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 485,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104772,
+        "days": 150,
+        "launches": 1,
+        "observedTrios": 1,
+        "observedQuads": 1,
+        "partyTrios": 1,
+        "partyQuads": 1,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104773,
+        "days": 140,
+        "launches": 1,
+        "observedTrios": 1,
+        "observedQuads": 1,
+        "partyTrios": 1,
+        "partyQuads": 1,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104774,
+        "days": 121,
+        "launches": 1,
+        "observedTrios": 1,
+        "observedQuads": 0,
+        "partyTrios": 1,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104775,
+        "days": 128,
+        "launches": 1,
+        "observedTrios": 1,
+        "observedQuads": 1,
+        "partyTrios": 1,
+        "partyQuads": 1,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 315,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104776,
+        "days": 151,
+        "launches": 1,
+        "observedTrios": 1,
+        "observedQuads": 1,
+        "partyTrios": 1,
+        "partyQuads": 1,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 400,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104777,
+        "days": 151,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      }
+    ],
+    "wall": {
+      "wins": 0,
+      "national": 0,
+      "wave5": 3,
+      "wave4": 8,
+      "standing200": 3,
+      "medianDays": 143,
+      "survived": 3
+    }
+  },
+  "arm": {
+    "dir": "evidence/2026-11-19/perseed-fightcap-b-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launches": 24,
+    "trioLaunches": 22,
+    "trioRate": 0.9166666666666666,
+    "quadLaunches": 18,
+    "partyQuads": 18,
+    "sizes": {
+      "2": 2,
+      "3": 4,
+      "4": 18
+    },
+    "sources": {
+      "brain": 24
+    },
+    "c2depart": 23,
+    "candC2": 23,
+    "candC2carried": 23,
+    "candC2dropped": 0,
+    "candC2null": 1,
+    "unjoined": 0,
+    "midday": 5,
+    "dawn": 19,
+    "carryRate": 1,
+    "starvation": 3,
+    "starvationVillager": 2,
+    "medianDays": 147,
+    "partyTrios": 22,
+    "brainSha": {
+      "9a9b9305296f": 8
+    },
+    "carryPresent": {
+      "true": 8
+    },
+    "perSeed": [
+      {
+        "seed": 104770,
+        "days": 146,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104771,
+        "days": 153,
+        "launches": 12,
+        "observedTrios": 11,
+        "observedQuads": 10,
+        "partyTrios": 11,
+        "partyQuads": 10,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 810,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104772,
+        "days": 148,
+        "launches": 8,
+        "observedTrios": 7,
+        "observedQuads": 5,
+        "partyTrios": 7,
+        "partyQuads": 5,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104773,
+        "days": 140,
+        "launches": 1,
+        "observedTrios": 1,
+        "observedQuads": 1,
+        "partyTrios": 1,
+        "partyQuads": 1,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104774,
+        "days": 121,
+        "launches": 1,
+        "observedTrios": 1,
+        "observedQuads": 0,
+        "partyTrios": 1,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104775,
+        "days": 128,
+        "launches": 1,
+        "observedTrios": 1,
+        "observedQuads": 1,
+        "partyTrios": 1,
+        "partyQuads": 1,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 315,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104776,
+        "days": 151,
+        "launches": 1,
+        "observedTrios": 1,
+        "observedQuads": 1,
+        "partyTrios": 1,
+        "partyQuads": 1,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 400,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      },
+      {
+        "seed": 104777,
+        "days": 151,
+        "launches": 0,
+        "observedTrios": 0,
+        "observedQuads": 0,
+        "partyTrios": 0,
+        "partyQuads": 0,
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "bumpPresent": true,
+        "carryPresent": true,
+        "errors": 0
+      }
+    ],
+    "wall": {
+      "wins": 0,
+      "national": 0,
+      "wave5": 3,
+      "wave4": 8,
+      "standing200": 3,
+      "medianDays": 147,
+      "survived": 3
+    }
+  },
+  "field4": {
+    "ctl": {
+      "perSeed": [
+        {
+          "seed": 104770,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "quadLaunches": 6,
+          "meetings": 4,
+          "denom": 4,
+          "numer": 0,
+          "senseDen": 4,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104772,
+          "quadLaunches": 1,
+          "meetings": 1,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 1,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104773,
+          "quadLaunches": 1,
+          "meetings": 3,
+          "denom": 2,
+          "numer": 0,
+          "senseDen": 3,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104774,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104775,
+          "quadLaunches": 1,
+          "meetings": 1,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 1,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104776,
+          "quadLaunches": 1,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104777,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        }
+      ],
+      "meetings": 9,
+      "denom": 6,
+      "numer": 0,
+      "rate": 0,
+      "rawRate": 0,
+      "senseDen": 9,
+      "senseN": 0,
+      "senseRate": 0,
+      "ally3DealtTotal": 0,
+      "deaths": 695
+    },
+    "arm": {
+      "perSeed": [
+        {
+          "seed": 104770,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "quadLaunches": 10,
+          "meetings": 12,
+          "denom": 10,
+          "numer": 2,
+          "senseDen": 12,
+          "senseN": 4,
+          "ally3Dealt": 246
+        },
+        {
+          "seed": 104772,
+          "quadLaunches": 5,
+          "meetings": 2,
+          "denom": 1,
+          "numer": 0,
+          "senseDen": 2,
+          "senseN": 1,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104773,
+          "quadLaunches": 1,
+          "meetings": 3,
+          "denom": 2,
+          "numer": 0,
+          "senseDen": 3,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104774,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104775,
+          "quadLaunches": 1,
+          "meetings": 1,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 1,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104776,
+          "quadLaunches": 1,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104777,
+          "quadLaunches": 0,
+          "meetings": 0,
+          "denom": 0,
+          "numer": 0,
+          "senseDen": 0,
+          "senseN": 0,
+          "ally3Dealt": 0
+        }
+      ],
+      "meetings": 18,
+      "denom": 13,
+      "numer": 2,
+      "rate": 0.15384615384615385,
+      "rawRate": 0.1111111111111111,
+      "senseDen": 18,
+      "senseN": 5,
+      "senseRate": 0.2777777777777778,
+      "ally3DealtTotal": 246,
+      "deaths": 722
+    }
+  },
+  "fourthShare": {
+    "ctl": {
+      "n": 0,
+      "rows": [],
+      "ally3DealtTotal": 0,
+      "mDealtTotal": 0,
+      "share": null
+    },
+    "arm": {
+      "n": 2,
+      "rows": [
+        {
+          "seed": 104771,
+          "day": 58,
+          "mid": "congregation",
+          "wave": 4,
+          "fighter": "rosa_mendez",
+          "ally3Vid": "katarina_novak",
+          "ally3Dealt": 141,
+          "mDealt": 686,
+          "mHpStart": 999,
+          "share": 0.2055393586005831,
+          "rounds": 9,
+          "outcome": "vFlee"
+        },
+        {
+          "seed": 104771,
+          "day": 76,
+          "mid": "spoiler",
+          "wave": 5,
+          "fighter": "rosa_mendez",
+          "ally3Vid": "katarina_novak",
+          "ally3Dealt": 105,
+          "mDealt": 658,
+          "mHpStart": 1346,
+          "share": 0.1595744680851064,
+          "rounds": 6,
+          "outcome": "vFlee"
+        }
+      ],
+      "ally3DealtTotal": 246,
+      "mDealtTotal": 1344,
+      "share": 0.18303571428571427
+    }
+  },
+  "quadKills": {
+    "ctl": {
+      "meetings": 9,
+      "kills": 0,
+      "talkdowns": 0,
+      "killShare": 0,
+      "rows": [
+        {
+          "seed": 104771,
+          "day": 50,
+          "mid": "eater",
+          "wave": 4,
+          "fighter": "rosa_mendez",
+          "outcome": "vFlee",
+          "rounds": 4,
+          "mDealt": 152,
+          "mHpStart": 1027,
+          "dmgPerRound": 38,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "day": 58,
+          "mid": "congregation",
+          "wave": 4,
+          "fighter": "rosa_mendez",
+          "outcome": "vFlee",
+          "rounds": 8,
+          "mDealt": 435,
+          "mHpStart": 999,
+          "dmgPerRound": 54.375,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "day": 71,
+          "mid": "eulogy",
+          "wave": 4,
+          "fighter": "catalina_reyes",
+          "outcome": "vFlee",
+          "rounds": 4,
+          "mDealt": 242,
+          "mHpStart": 1089,
+          "dmgPerRound": 60.5,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "day": 77,
+          "mid": "network_note",
+          "wave": 5,
+          "fighter": "app_mgpsphrw216",
+          "outcome": "vFlee",
+          "rounds": 4,
+          "mDealt": 268,
+          "mHpStart": 1300,
+          "dmgPerRound": 67,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104772,
+          "day": 116,
+          "mid": "reunion",
+          "wave": 4,
+          "fighter": "omar_farouk",
+          "outcome": "vFlee",
+          "rounds": 4,
+          "mDealt": 116,
+          "mHpStart": 1252,
+          "dmgPerRound": 29,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104773,
+          "day": 110,
+          "mid": "strike",
+          "wave": 4,
+          "fighter": "diana_osei",
+          "outcome": "vFlee",
+          "rounds": 6,
+          "mDealt": 380,
+          "mHpStart": 1084,
+          "dmgPerRound": 63.333333333333336,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104773,
+          "day": 111,
+          "mid": "audit",
+          "wave": 4,
+          "fighter": "james_okonkwo",
+          "outcome": "vFlee",
+          "rounds": 9,
+          "mDealt": 121,
+          "mHpStart": 1243,
+          "dmgPerRound": 13.444444444444445,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104773,
+          "day": 116,
+          "mid": "audit",
+          "wave": 4,
+          "fighter": "diana_osei",
+          "outcome": "vFlee",
+          "rounds": 5,
+          "mDealt": 95,
+          "mHpStart": 1132,
+          "dmgPerRound": 19,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104775,
+          "day": 90,
+          "mid": "reunion",
+          "wave": 4,
+          "fighter": "owen_smith",
+          "outcome": "vDie",
+          "rounds": 2,
+          "mDealt": 48,
+          "mHpStart": 1280,
+          "dmgPerRound": 24,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        }
+      ],
+      "ladder": {
+        "vFlee": {
+          "n": 8,
+          "dmgPerRoundMean": 43.08159722222222,
+          "roundsMean": 5.5,
+          "mHpMean": 1140.75
+        },
+        "vDie": {
+          "n": 1,
+          "dmgPerRoundMean": 24,
+          "roundsMean": 2,
+          "mHpMean": 1280
+        }
+      }
+    },
+    "arm": {
+      "meetings": 18,
+      "kills": 0,
+      "talkdowns": 0,
+      "killShare": 0,
+      "rows": [
+        {
+          "seed": 104771,
+          "day": 50,
+          "mid": "eater",
+          "wave": 4,
+          "fighter": "rosa_mendez",
+          "outcome": "vFlee",
+          "rounds": 4,
+          "mDealt": 152,
+          "mHpStart": 1027,
+          "dmgPerRound": 38,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "day": 58,
+          "mid": "congregation",
+          "wave": 4,
+          "fighter": "rosa_mendez",
+          "outcome": "vFlee",
+          "rounds": 9,
+          "mDealt": 686,
+          "mHpStart": 999,
+          "dmgPerRound": 76.22222222222223,
+          "ally3Vid": "katarina_novak",
+          "ally3Dealt": 141
+        },
+        {
+          "seed": 104771,
+          "day": 64,
+          "mid": "spoiler",
+          "wave": 5,
+          "fighter": "catalina_reyes",
+          "outcome": "vDie",
+          "rounds": 2,
+          "mDealt": 104,
+          "mHpStart": 1441,
+          "dmgPerRound": 52,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "day": 66,
+          "mid": "cancellation",
+          "wave": 5,
+          "fighter": "naran_tumen",
+          "outcome": "vFlee",
+          "rounds": 4,
+          "mDealt": 230,
+          "mHpStart": 1782,
+          "dmgPerRound": 57.5,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "day": 72,
+          "mid": "eulogy",
+          "wave": 4,
+          "fighter": "gen_6hg4pdi",
+          "outcome": "vFlee",
+          "rounds": 3,
+          "mDealt": 96,
+          "mHpStart": 950,
+          "dmgPerRound": 32,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "day": 76,
+          "mid": "spoiler",
+          "wave": 5,
+          "fighter": "rosa_mendez",
+          "outcome": "vFlee",
+          "rounds": 6,
+          "mDealt": 658,
+          "mHpStart": 1346,
+          "dmgPerRound": 109.66666666666667,
+          "ally3Vid": "katarina_novak",
+          "ally3Dealt": 105
+        },
+        {
+          "seed": 104771,
+          "day": 78,
+          "mid": "cancellation",
+          "wave": 5,
+          "fighter": "katarina_novak",
+          "outcome": "vFlee",
+          "rounds": 5,
+          "mDealt": 518,
+          "mHpStart": 1749,
+          "dmgPerRound": 103.6,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "day": 83,
+          "mid": "reunion",
+          "wave": 4,
+          "fighter": "gen_dmeldz9",
+          "outcome": "vFlee",
+          "rounds": 4,
+          "mDealt": 170,
+          "mHpStart": 1348,
+          "dmgPerRound": 42.5,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "day": 83,
+          "mid": "eater",
+          "wave": 4,
+          "fighter": "desmond_clarke",
+          "outcome": "vFlee",
+          "rounds": 4,
+          "mDealt": 95,
+          "mHpStart": 1078,
+          "dmgPerRound": 23.75,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "day": 111,
+          "mid": "cancellation",
+          "wave": 5,
+          "fighter": "visjoin_89",
+          "outcome": "vFlee",
+          "rounds": 5,
+          "mDealt": 190,
+          "mHpStart": 1624,
+          "dmgPerRound": 38,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "day": 135,
+          "mid": "timeslot",
+          "wave": 5,
+          "fighter": "katarina_novak",
+          "outcome": "vFlee",
+          "rounds": 5,
+          "mDealt": 298,
+          "mHpStart": 1412,
+          "dmgPerRound": 59.6,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104771,
+          "day": 142,
+          "mid": "eater",
+          "wave": 4,
+          "fighter": "naran_tumen",
+          "outcome": "vDie",
+          "rounds": 4,
+          "mDealt": 33,
+          "mHpStart": 1084,
+          "dmgPerRound": 8.25,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104772,
+          "day": 127,
+          "mid": "congregation",
+          "wave": 4,
+          "fighter": "omar_farouk",
+          "outcome": "vFlee",
+          "rounds": 8,
+          "mDealt": 202,
+          "mHpStart": 1086,
+          "dmgPerRound": 25.25,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104772,
+          "day": 138,
+          "mid": "influencer",
+          "wave": 4,
+          "fighter": "visjoin_120",
+          "outcome": "vFlee",
+          "rounds": 4,
+          "mDealt": 161,
+          "mHpStart": 1017,
+          "dmgPerRound": 40.25,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104773,
+          "day": 110,
+          "mid": "strike",
+          "wave": 4,
+          "fighter": "diana_osei",
+          "outcome": "vFlee",
+          "rounds": 6,
+          "mDealt": 380,
+          "mHpStart": 1084,
+          "dmgPerRound": 63.333333333333336,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104773,
+          "day": 111,
+          "mid": "audit",
+          "wave": 4,
+          "fighter": "james_okonkwo",
+          "outcome": "vFlee",
+          "rounds": 9,
+          "mDealt": 121,
+          "mHpStart": 1243,
+          "dmgPerRound": 13.444444444444445,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104773,
+          "day": 116,
+          "mid": "audit",
+          "wave": 4,
+          "fighter": "diana_osei",
+          "outcome": "vFlee",
+          "rounds": 5,
+          "mDealt": 95,
+          "mHpStart": 1132,
+          "dmgPerRound": 19,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        },
+        {
+          "seed": 104775,
+          "day": 90,
+          "mid": "reunion",
+          "wave": 4,
+          "fighter": "owen_smith",
+          "outcome": "vDie",
+          "rounds": 2,
+          "mDealt": 48,
+          "mHpStart": 1280,
+          "dmgPerRound": 24,
+          "ally3Vid": null,
+          "ally3Dealt": 0
+        }
+      ],
+      "ladder": {
+        "vFlee": {
+          "n": 15,
+          "dmgPerRoundMean": 49.47444444444445,
+          "roundsMean": 5.4,
+          "mHpMean": 1258.4666666666667
+        },
+        "vDie": {
+          "n": 3,
+          "dmgPerRoundMean": 28.083333333333332,
+          "roundsMean": 2.6666666666666665,
+          "mHpMean": 1268.3333333333333
+        }
+      }
+    }
+  },
+  "communityLoss": {
+    "ctl": {
+      "n": 8,
+      "lost": 5,
+      "share": 0.625
+    },
+    "arm": {
+      "n": 8,
+      "lost": 5,
+      "share": 0.625
+    }
+  },
+  "size4Shares": {
+    "ctl": {
+      "n": 9,
+      "fought": 9,
+      "noHp": 0,
+      "mean": 0.18597645062242857
+    },
+    "arm": {
+      "n": 18,
+      "fought": 18,
+      "noHp": 0,
+      "mean": 0.18935373207846143
+    }
+  },
+  "senseMisses": {
+    "ctl": {
+      "meetings": 9,
+      "senseFull": 0,
+      "misses": [
+        {
+          "seed": 104771,
+          "day": 50,
+          "mid": "eater",
+          "wave": 4,
+          "fighter": "rosa_mendez",
+          "rounds": 4,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 48,
+            "holder": "rosa_mendez",
+            "party": [
+              "rosa_mendez",
+              "catalina_reyes",
+              "naran_tumen",
+              "katarina_novak"
+            ],
+            "score": 0
+          },
+          "sensed": [
+            "desmond_clarke",
+            "gen_dmeldz9"
+          ],
+          "missing": [
+            "catalina_reyes",
+            "naran_tumen",
+            "katarina_novak"
+          ],
+          "extra": [
+            "desmond_clarke",
+            "gen_dmeldz9"
+          ],
+          "ally2Vid": "gen_dmeldz9",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "in-plan-party-but-unsensed/different-tile",
+              "detail": {
+                "companion": "catalina_reyes",
+                "planParty": [
+                  "catalina_reyes",
+                  "naran_tumen",
+                  "katarina_novak"
+                ],
+                "gateDay": 50,
+                "fighterDawn": {
+                  "node": {
+                    "nx": 5,
+                    "ny": 4
+                  },
+                  "away": true,
+                  "onExped": true,
+                  "alive": true
+                },
+                "companionDawn": {
+                  "node": {
+                    "nx": 1,
+                    "ny": 1
+                  },
+                  "away": true,
+                  "onExped": true,
+                  "alive": true
+                }
+              }
+            },
+            {
+              "cause": "in-plan-party-but-unsensed/different-tile",
+              "detail": {
+                "companion": "naran_tumen",
+                "planParty": [
+                  "catalina_reyes",
+                  "naran_tumen",
+                  "katarina_novak"
+                ],
+                "gateDay": 50,
+                "fighterDawn": {
+                  "node": {
+                    "nx": 5,
+                    "ny": 4
+                  },
+                  "away": true,
+                  "onExped": true,
+                  "alive": true
+                },
+                "companionDawn": {
+                  "node": {
+                    "nx": 5,
+                    "ny": 3
+                  },
+                  "away": true,
+                  "onExped": true,
+                  "alive": true
+                }
+              }
+            },
+            {
+              "cause": "in-plan-party-but-unsensed/different-tile",
+              "detail": {
+                "companion": "katarina_novak",
+                "planParty": [
+                  "catalina_reyes",
+                  "naran_tumen",
+                  "katarina_novak"
+                ],
+                "gateDay": 50,
+                "fighterDawn": {
+                  "node": {
+                    "nx": 5,
+                    "ny": 4
+                  },
+                  "away": true,
+                  "onExped": true,
+                  "alive": true
+                },
+                "companionDawn": {
+                  "node": {
+                    "nx": 1,
+                    "ny": 1
+                  },
+                  "away": true,
+                  "onExped": true,
+                  "alive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104771,
+          "day": 58,
+          "mid": "congregation",
+          "wave": 4,
+          "fighter": "rosa_mendez",
+          "rounds": 8,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 55,
+            "holder": "rosa_mendez",
+            "party": [
+              "rosa_mendez",
+              "catalina_reyes",
+              "katarina_novak",
+              "gen_6hg4pdi"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "catalina_reyes",
+            "gen_6hg4pdi"
+          ],
+          "missing": [
+            "katarina_novak"
+          ],
+          "extra": [],
+          "ally2Vid": "gen_6hg4pdi",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "cap-2-cut",
+              "detail": {
+                "companion": "katarina_novak",
+                "planParty": [
+                  "catalina_reyes",
+                  "katarina_novak",
+                  "gen_6hg4pdi"
+                ],
+                "gateDay": 58
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104771,
+          "day": 71,
+          "mid": "eulogy",
+          "wave": 4,
+          "fighter": "catalina_reyes",
+          "rounds": 4,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 55,
+            "holder": "rosa_mendez",
+            "party": [
+              "rosa_mendez",
+              "catalina_reyes",
+              "katarina_novak",
+              "gen_6hg4pdi"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "david_kim",
+            "katarina_novak"
+          ],
+          "missing": [
+            "rosa_mendez",
+            "gen_6hg4pdi"
+          ],
+          "extra": [
+            "david_kim"
+          ],
+          "ally2Vid": "katarina_novak",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "rosa_mendez",
+                "planParty": [
+                  "david_kim"
+                ],
+                "gateDay": 71,
+                "ended": {
+                  "day": 66,
+                  "vid": "rosa_mendez"
+                }
+              }
+            },
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "gen_6hg4pdi",
+                "planParty": [
+                  "david_kim"
+                ],
+                "gateDay": 71,
+                "deathDay": 58,
+                "deathCause": "monster"
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104771,
+          "day": 77,
+          "mid": "network_note",
+          "wave": 5,
+          "fighter": "app_mgpsphrw216",
+          "rounds": 4,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 77,
+            "holder": "rosa_mendez",
+            "party": [
+              "rosa_mendez",
+              "catalina_reyes",
+              "katarina_novak",
+              "app_mgpsphrw216"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "catalina_reyes",
+            "katarina_novak"
+          ],
+          "missing": [
+            "rosa_mendez"
+          ],
+          "extra": [],
+          "ally2Vid": "katarina_novak",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "cap-2-cut",
+              "detail": {
+                "companion": "rosa_mendez",
+                "planParty": [
+                  "rosa_mendez",
+                  "catalina_reyes",
+                  "katarina_novak"
+                ],
+                "gateDay": 77
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104772,
+          "day": 116,
+          "mid": "reunion",
+          "wave": 4,
+          "fighter": "omar_farouk",
+          "rounds": 4,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 109,
+            "holder": "valeria_quispe",
+            "party": [
+              "valeria_quispe",
+              "theo_lindqvist",
+              "omar_farouk",
+              "amina_diallo"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "amina_diallo",
+            "ines_duarte"
+          ],
+          "missing": [
+            "valeria_quispe",
+            "theo_lindqvist"
+          ],
+          "extra": [
+            "ines_duarte"
+          ],
+          "ally2Vid": null,
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "valeria_quispe",
+                "planParty": [],
+                "gateDay": 116,
+                "deathDay": 114,
+                "deathCause": "a wound that wouldn't close"
+              }
+            },
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "theo_lindqvist",
+                "planParty": [],
+                "gateDay": 116,
+                "deathDay": 115,
+                "deathCause": "a wound that wouldn't close"
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104773,
+          "day": 110,
+          "mid": "strike",
+          "wave": 4,
+          "fighter": "diana_osei",
+          "rounds": 6,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 109,
+            "holder": "valeria_quispe",
+            "party": [
+              "valeria_quispe",
+              "diana_osei",
+              "chen_wei",
+              "james_okonkwo"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "chen_wei",
+            "james_okonkwo"
+          ],
+          "missing": [
+            "valeria_quispe"
+          ],
+          "extra": [],
+          "ally2Vid": "james_okonkwo",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "valeria_quispe",
+                "planParty": [
+                  "chen_wei",
+                  "james_okonkwo"
+                ],
+                "gateDay": 110,
+                "deathDay": 109,
+                "deathCause": "a wound that wouldn't close"
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104773,
+          "day": 111,
+          "mid": "audit",
+          "wave": 4,
+          "fighter": "james_okonkwo",
+          "rounds": 9,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 109,
+            "holder": "valeria_quispe",
+            "party": [
+              "valeria_quispe",
+              "diana_osei",
+              "chen_wei",
+              "james_okonkwo"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "chen_wei",
+            "diana_osei"
+          ],
+          "missing": [
+            "valeria_quispe"
+          ],
+          "extra": [],
+          "ally2Vid": null,
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "valeria_quispe",
+                "planParty": [
+                  "diana_osei",
+                  "chen_wei"
+                ],
+                "gateDay": 111,
+                "deathDay": 109,
+                "deathCause": "a wound that wouldn't close"
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104773,
+          "day": 116,
+          "mid": "audit",
+          "wave": 4,
+          "fighter": "diana_osei",
+          "rounds": 5,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 109,
+            "holder": "valeria_quispe",
+            "party": [
+              "valeria_quispe",
+              "diana_osei",
+              "chen_wei",
+              "james_okonkwo"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "james_okonkwo",
+            "nino_kapanadze"
+          ],
+          "missing": [
+            "valeria_quispe",
+            "chen_wei"
+          ],
+          "extra": [
+            "nino_kapanadze"
+          ],
+          "ally2Vid": "nino_kapanadze",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "valeria_quispe",
+                "planParty": [
+                  "james_okonkwo"
+                ],
+                "gateDay": 116,
+                "deathDay": 109,
+                "deathCause": "a wound that wouldn't close"
+              }
+            },
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "chen_wei",
+                "planParty": [
+                  "james_okonkwo"
+                ],
+                "gateDay": 116,
+                "ended": {
+                  "day": 114,
+                  "vid": "chen_wei"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104775,
+          "day": 90,
+          "mid": "reunion",
+          "wave": 4,
+          "fighter": "owen_smith",
+          "rounds": 2,
+          "outcome": "vDie",
+          "joinedLaunch": {
+            "day": 81,
+            "holder": "app_mgpspjvl994",
+            "party": [
+              "app_mgpspjvl994",
+              "owen_smith",
+              "gen_pao1m06",
+              "valeria_quispe"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "gen_pao1m06",
+            "valeria_quispe"
+          ],
+          "missing": [
+            "app_mgpspjvl994"
+          ],
+          "extra": [],
+          "ally2Vid": null,
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "app_mgpspjvl994",
+                "planParty": [
+                  "gen_pao1m06"
+                ],
+                "gateDay": 90,
+                "ended": {
+                  "day": 85,
+                  "vid": "app_mgpspjvl994"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "byCause": {
+        "in-plan-party-but-unsensed/different-tile": 3,
+        "cap-2-cut": 2,
+        "expedition-ended": 3,
+        "dead": 6
+      }
+    },
+    "arm": {
+      "meetings": 18,
+      "senseFull": 5,
+      "misses": [
+        {
+          "seed": 104771,
+          "day": 50,
+          "mid": "eater",
+          "wave": 4,
+          "fighter": "rosa_mendez",
+          "rounds": 4,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 48,
+            "holder": "rosa_mendez",
+            "party": [
+              "rosa_mendez",
+              "catalina_reyes",
+              "naran_tumen",
+              "katarina_novak"
+            ],
+            "score": 0
+          },
+          "sensed": [
+            "desmond_clarke",
+            "gen_dmeldz9"
+          ],
+          "missing": [
+            "catalina_reyes",
+            "naran_tumen",
+            "katarina_novak"
+          ],
+          "extra": [
+            "desmond_clarke",
+            "gen_dmeldz9"
+          ],
+          "ally2Vid": "gen_dmeldz9",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "in-plan-party-but-unsensed/different-tile",
+              "detail": {
+                "companion": "catalina_reyes",
+                "planParty": [
+                  "catalina_reyes",
+                  "naran_tumen",
+                  "katarina_novak"
+                ],
+                "gateDay": 50,
+                "fighterDawn": {
+                  "node": {
+                    "nx": 5,
+                    "ny": 4
+                  },
+                  "away": true,
+                  "onExped": true,
+                  "alive": true
+                },
+                "companionDawn": {
+                  "node": {
+                    "nx": 1,
+                    "ny": 1
+                  },
+                  "away": true,
+                  "onExped": true,
+                  "alive": true
+                }
+              }
+            },
+            {
+              "cause": "in-plan-party-but-unsensed/different-tile",
+              "detail": {
+                "companion": "naran_tumen",
+                "planParty": [
+                  "catalina_reyes",
+                  "naran_tumen",
+                  "katarina_novak"
+                ],
+                "gateDay": 50,
+                "fighterDawn": {
+                  "node": {
+                    "nx": 5,
+                    "ny": 4
+                  },
+                  "away": true,
+                  "onExped": true,
+                  "alive": true
+                },
+                "companionDawn": {
+                  "node": {
+                    "nx": 5,
+                    "ny": 3
+                  },
+                  "away": true,
+                  "onExped": true,
+                  "alive": true
+                }
+              }
+            },
+            {
+              "cause": "in-plan-party-but-unsensed/different-tile",
+              "detail": {
+                "companion": "katarina_novak",
+                "planParty": [
+                  "catalina_reyes",
+                  "naran_tumen",
+                  "katarina_novak"
+                ],
+                "gateDay": 50,
+                "fighterDawn": {
+                  "node": {
+                    "nx": 5,
+                    "ny": 4
+                  },
+                  "away": true,
+                  "onExped": true,
+                  "alive": true
+                },
+                "companionDawn": {
+                  "node": {
+                    "nx": 1,
+                    "ny": 1
+                  },
+                  "away": true,
+                  "onExped": true,
+                  "alive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104771,
+          "day": 64,
+          "mid": "spoiler",
+          "wave": 5,
+          "fighter": "catalina_reyes",
+          "rounds": 2,
+          "outcome": "vDie",
+          "joinedLaunch": {
+            "day": 64,
+            "holder": "rosa_mendez",
+            "party": [
+              "rosa_mendez",
+              "catalina_reyes",
+              "gen_dmeldz9",
+              "desmond_clarke"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "desmond_clarke",
+            "rosa_mendez"
+          ],
+          "missing": [
+            "gen_dmeldz9"
+          ],
+          "extra": [],
+          "ally2Vid": null,
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "in-plan-party-but-unsensed/same-tile",
+              "detail": {
+                "companion": "gen_dmeldz9",
+                "planParty": [
+                  "rosa_mendez",
+                  "gen_dmeldz9",
+                  "desmond_clarke"
+                ],
+                "gateDay": 64,
+                "fighterDawn": {
+                  "node": {
+                    "nx": 4,
+                    "ny": 4
+                  },
+                  "away": false,
+                  "onExped": false,
+                  "alive": true
+                },
+                "companionDawn": {
+                  "node": {
+                    "nx": 4,
+                    "ny": 4
+                  },
+                  "away": false,
+                  "onExped": false,
+                  "alive": true
+                }
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104771,
+          "day": 66,
+          "mid": "cancellation",
+          "wave": 5,
+          "fighter": "naran_tumen",
+          "rounds": 4,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 48,
+            "holder": "rosa_mendez",
+            "party": [
+              "rosa_mendez",
+              "catalina_reyes",
+              "naran_tumen",
+              "katarina_novak"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "gen_dmeldz9",
+            "rosa_mendez"
+          ],
+          "missing": [
+            "catalina_reyes",
+            "katarina_novak"
+          ],
+          "extra": [
+            "gen_dmeldz9"
+          ],
+          "ally2Vid": "rosa_mendez",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "catalina_reyes",
+                "planParty": [],
+                "gateDay": 66,
+                "deathDay": 64,
+                "deathCause": "The Spoiler"
+              }
+            },
+            {
+              "cause": "different-expedition",
+              "detail": {
+                "companion": "katarina_novak",
+                "planParty": [],
+                "gateDay": 66,
+                "otherLaunch": {
+                  "day": 55,
+                  "holder": "rosa_mendez"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104771,
+          "day": 78,
+          "mid": "cancellation",
+          "wave": 5,
+          "fighter": "katarina_novak",
+          "rounds": 5,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 76,
+            "holder": "katarina_novak",
+            "party": [
+              "katarina_novak",
+              "desmond_clarke",
+              "rosa_mendez",
+              "gen_dmeldz9"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "desmond_clarke",
+            "gen_dmeldz9"
+          ],
+          "missing": [
+            "rosa_mendez"
+          ],
+          "extra": [],
+          "ally2Vid": "gen_dmeldz9",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "rosa_mendez",
+                "planParty": [
+                  "desmond_clarke",
+                  "gen_dmeldz9"
+                ],
+                "gateDay": 78,
+                "deathDay": 77,
+                "deathCause": "Buffering"
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104771,
+          "day": 83,
+          "mid": "reunion",
+          "wave": 4,
+          "fighter": "gen_dmeldz9",
+          "rounds": 4,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 76,
+            "holder": "katarina_novak",
+            "party": [
+              "katarina_novak",
+              "desmond_clarke",
+              "rosa_mendez",
+              "gen_dmeldz9"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "desmond_clarke",
+            "gen_qupnl46"
+          ],
+          "missing": [
+            "katarina_novak",
+            "rosa_mendez"
+          ],
+          "extra": [
+            "gen_qupnl46"
+          ],
+          "ally2Vid": "gen_qupnl46",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "katarina_novak",
+                "planParty": [
+                  "desmond_clarke"
+                ],
+                "gateDay": 83,
+                "ended": {
+                  "day": 79,
+                  "vid": "katarina_novak"
+                }
+              }
+            },
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "rosa_mendez",
+                "planParty": [
+                  "desmond_clarke"
+                ],
+                "gateDay": 83,
+                "deathDay": 77,
+                "deathCause": "Buffering"
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104771,
+          "day": 83,
+          "mid": "eater",
+          "wave": 4,
+          "fighter": "desmond_clarke",
+          "rounds": 4,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 76,
+            "holder": "katarina_novak",
+            "party": [
+              "katarina_novak",
+              "desmond_clarke",
+              "rosa_mendez",
+              "gen_dmeldz9"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "gen_dmeldz9",
+            "gen_qupnl46"
+          ],
+          "missing": [
+            "katarina_novak",
+            "rosa_mendez"
+          ],
+          "extra": [
+            "gen_qupnl46"
+          ],
+          "ally2Vid": "gen_qupnl46",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "katarina_novak",
+                "planParty": [
+                  "gen_dmeldz9"
+                ],
+                "gateDay": 83,
+                "ended": {
+                  "day": 79,
+                  "vid": "katarina_novak"
+                }
+              }
+            },
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "rosa_mendez",
+                "planParty": [
+                  "gen_dmeldz9"
+                ],
+                "gateDay": 83,
+                "deathDay": 77,
+                "deathCause": "Buffering"
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104771,
+          "day": 135,
+          "mid": "timeslot",
+          "wave": 5,
+          "fighter": "katarina_novak",
+          "rounds": 5,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 125,
+            "holder": "visjoin_90",
+            "party": [
+              "visjoin_90",
+              "katarina_novak",
+              "gen_qupnl46",
+              "naran_tumen"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "gen_6hg4pdi",
+            "naran_tumen"
+          ],
+          "missing": [
+            "visjoin_90",
+            "gen_qupnl46"
+          ],
+          "extra": [
+            "gen_6hg4pdi"
+          ],
+          "ally2Vid": "naran_tumen",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "visjoin_90",
+                "planParty": [
+                  "naran_tumen"
+                ],
+                "gateDay": 135,
+                "deathDay": 126,
+                "deathCause": "monster"
+              }
+            },
+            {
+              "cause": "trim-unproven",
+              "detail": {
+                "companion": "gen_qupnl46",
+                "planParty": [
+                  "naran_tumen"
+                ],
+                "gateDay": 135
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104771,
+          "day": 142,
+          "mid": "eater",
+          "wave": 4,
+          "fighter": "naran_tumen",
+          "rounds": 4,
+          "outcome": "vDie",
+          "joinedLaunch": {
+            "day": 125,
+            "holder": "visjoin_90",
+            "party": [
+              "visjoin_90",
+              "katarina_novak",
+              "gen_qupnl46",
+              "naran_tumen"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "katarina_novak",
+            "gen_6hg4pdi"
+          ],
+          "missing": [
+            "visjoin_90",
+            "gen_qupnl46"
+          ],
+          "extra": [
+            "gen_6hg4pdi"
+          ],
+          "ally2Vid": null,
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "visjoin_90",
+                "planParty": [
+                  "katarina_novak"
+                ],
+                "gateDay": 142,
+                "deathDay": 126,
+                "deathCause": "monster"
+              }
+            },
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "gen_qupnl46",
+                "planParty": [
+                  "katarina_novak"
+                ],
+                "gateDay": 142,
+                "ended": {
+                  "day": 142,
+                  "vid": "gen_qupnl46",
+                  "via": "dawn"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104772,
+          "day": 138,
+          "mid": "influencer",
+          "wave": 4,
+          "fighter": "visjoin_120",
+          "rounds": 4,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 135,
+            "holder": "visjoin_120",
+            "party": [
+              "visjoin_120",
+              "emma_larsen",
+              "sofia_chen",
+              "theo_lindqvist"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "sofia_chen",
+            "theo_lindqvist"
+          ],
+          "missing": [
+            "emma_larsen"
+          ],
+          "extra": [],
+          "ally2Vid": "theo_lindqvist",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "emma_larsen",
+                "planParty": [
+                  "sofia_chen",
+                  "theo_lindqvist"
+                ],
+                "gateDay": 138,
+                "deathDay": 135,
+                "deathCause": "Gavel"
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104773,
+          "day": 110,
+          "mid": "strike",
+          "wave": 4,
+          "fighter": "diana_osei",
+          "rounds": 6,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 109,
+            "holder": "valeria_quispe",
+            "party": [
+              "valeria_quispe",
+              "diana_osei",
+              "chen_wei",
+              "james_okonkwo"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "chen_wei",
+            "james_okonkwo"
+          ],
+          "missing": [
+            "valeria_quispe"
+          ],
+          "extra": [],
+          "ally2Vid": "james_okonkwo",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "valeria_quispe",
+                "planParty": [
+                  "chen_wei",
+                  "james_okonkwo"
+                ],
+                "gateDay": 110,
+                "deathDay": 109,
+                "deathCause": "a wound that wouldn't close"
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104773,
+          "day": 111,
+          "mid": "audit",
+          "wave": 4,
+          "fighter": "james_okonkwo",
+          "rounds": 9,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 109,
+            "holder": "valeria_quispe",
+            "party": [
+              "valeria_quispe",
+              "diana_osei",
+              "chen_wei",
+              "james_okonkwo"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "chen_wei",
+            "diana_osei"
+          ],
+          "missing": [
+            "valeria_quispe"
+          ],
+          "extra": [],
+          "ally2Vid": null,
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "valeria_quispe",
+                "planParty": [
+                  "diana_osei",
+                  "chen_wei"
+                ],
+                "gateDay": 111,
+                "deathDay": 109,
+                "deathCause": "a wound that wouldn't close"
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104773,
+          "day": 116,
+          "mid": "audit",
+          "wave": 4,
+          "fighter": "diana_osei",
+          "rounds": 5,
+          "outcome": "vFlee",
+          "joinedLaunch": {
+            "day": 109,
+            "holder": "valeria_quispe",
+            "party": [
+              "valeria_quispe",
+              "diana_osei",
+              "chen_wei",
+              "james_okonkwo"
+            ],
+            "score": 1
+          },
+          "sensed": [
+            "james_okonkwo",
+            "nino_kapanadze"
+          ],
+          "missing": [
+            "valeria_quispe",
+            "chen_wei"
+          ],
+          "extra": [
+            "nino_kapanadze"
+          ],
+          "ally2Vid": "nino_kapanadze",
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "dead",
+              "detail": {
+                "companion": "valeria_quispe",
+                "planParty": [
+                  "james_okonkwo"
+                ],
+                "gateDay": 116,
+                "deathDay": 109,
+                "deathCause": "a wound that wouldn't close"
+              }
+            },
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "chen_wei",
+                "planParty": [
+                  "james_okonkwo"
+                ],
+                "gateDay": 116,
+                "ended": {
+                  "day": 114,
+                  "vid": "chen_wei"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "seed": 104775,
+          "day": 90,
+          "mid": "reunion",
+          "wave": 4,
+          "fighter": "owen_smith",
+          "rounds": 2,
+          "outcome": "vDie",
+          "joinedLaunch": {
+            "day": 81,
+            "holder": "app_mgpspjvl994",
+            "party": [
+              "app_mgpspjvl994",
+              "owen_smith",
+              "gen_pao1m06",
+              "valeria_quispe"
+            ],
+            "score": 2
+          },
+          "sensed": [
+            "gen_pao1m06",
+            "valeria_quispe"
+          ],
+          "missing": [
+            "app_mgpspjvl994"
+          ],
+          "extra": [],
+          "ally2Vid": null,
+          "ally3Vid": null,
+          "classifications": [
+            {
+              "cause": "expedition-ended",
+              "detail": {
+                "companion": "app_mgpspjvl994",
+                "planParty": [
+                  "gen_pao1m06"
+                ],
+                "gateDay": 90,
+                "ended": {
+                  "day": 85,
+                  "vid": "app_mgpspjvl994"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "byCause": {
+        "in-plan-party-but-unsensed/different-tile": 3,
+        "in-plan-party-but-unsensed/same-tile": 1,
+        "dead": 10,
+        "different-expedition": 1,
+        "expedition-ended": 5,
+        "trim-unproven": 1
+      }
+    }
+  }
+}
