@@ -1,0 +1,396 @@
+{
+  "verdict": "DIAG-GO",
+  "bars": [
+    {
+      "id": "census-coverage",
+      "pass": true,
+      "detail": "seeds with complete holder census 8/8 (baseline + daily census + cellPile rows, 0 instrument errors, census-day share >= 0.5); per-seed: 107021:ok 107022:ok 107023:ok 107024:ok 107025:ok 107026:ok 107027:ok 107028:ok"
+    },
+    {
+      "id": "attribution",
+      "pass": true,
+      "detail": "cell appearances 3, attributed 3 (completeness 1.000, bar >= 0.90); by source {\"contest-prize\":3}"
+    },
+    {
+      "id": "volley-opportunity-pool",
+      "pass": true,
+      "detail": "engaged wave-4+ meetings with a 0-cell searcaster participant 0 (floor 5); armed searcaster meetings 0; all wave-4+ meetings with a 0-cell searcaster participant 0 (evaded 0); searcaster holder-days 97 — RARE-RATE path: pool thin, stated as a finding, not re-scored"
+    }
+  ],
+  "diag": {
+    "dir": "evidence/2026-11-19/perseed-fusioncell-a-diag",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "bowopenOn": {
+      "false": 8
+    },
+    "senseexpedOn": {
+      "true": 8
+    },
+    "coverage": [
+      {
+        "seed": 107021,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 1248,
+        "cellPileRows": 135,
+        "censusDays": 135,
+        "livedDays": 137,
+        "censusDayShare": 0.9854014598540146,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107022,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 631,
+        "cellPileRows": 102,
+        "censusDays": 102,
+        "livedDays": 104,
+        "censusDayShare": 0.9807692307692307,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107023,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 1536,
+        "cellPileRows": 148,
+        "censusDays": 148,
+        "livedDays": 151,
+        "censusDayShare": 0.9801324503311258,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107024,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 1573,
+        "cellPileRows": 147,
+        "censusDays": 147,
+        "livedDays": 150,
+        "censusDayShare": 0.98,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107025,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 933,
+        "cellPileRows": 102,
+        "censusDays": 102,
+        "livedDays": 104,
+        "censusDayShare": 0.9807692307692307,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107026,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 1470,
+        "cellPileRows": 147,
+        "censusDays": 147,
+        "livedDays": 151,
+        "censusDayShare": 0.9735099337748344,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107027,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 1621,
+        "cellPileRows": 148,
+        "censusDays": 148,
+        "livedDays": 151,
+        "censusDayShare": 0.9801324503311258,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107028,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 782,
+        "cellPileRows": 82,
+        "censusDays": 82,
+        "livedDays": 85,
+        "censusDayShare": 0.9647058823529412,
+        "instrumentErrors": 0,
+        "complete": true
+      }
+    ],
+    "coverageComplete": 8,
+    "searcasterHolders": [
+      {
+        "seed": 107023,
+        "vid": "chen_wei",
+        "holderDays": 97,
+        "cellDays": 0,
+        "maxCells": 0,
+        "zeroDays": 97
+      }
+    ],
+    "searcasterHolderDays": 97,
+    "searcasterCellDays": 0,
+    "searcasterZeroDays": 97,
+    "searcasterHoldersTotal": 1,
+    "cellHolderDays": 57,
+    "maxCellsEver": 1,
+    "cellAppearances": 3,
+    "cellAttributed": 3,
+    "cellAttribution": 1,
+    "cellBySource": {
+      "contest-prize": 3
+    },
+    "searcasterAppearances": 1,
+    "searcasterAttributed": 0,
+    "searcasterAttribution": 0,
+    "searcasterBySource": {
+      "unexplained": 1
+    },
+    "searcasterBaseline": 0,
+    "cellBaseline": 0,
+    "searcasterDeparts": 0,
+    "searcasterDepartsZero": 0,
+    "searcasterDepartOutcomes": {},
+    "lootCellDrops": 0,
+    "lootSearcasterDrops": 0,
+    "lootByDrop": {
+      "phase_sling": 1
+    },
+    "grantCellByCaller": {
+      "contest-prize": 3
+    },
+    "grantSearcasterByCaller": {
+      "contest-prize": 4
+    },
+    "grantCellTotal": 3,
+    "grantSearcasterTotal": 4,
+    "corpseTakeCell": 0,
+    "corpseTakeTotal": 474,
+    "contestPrizes": 155,
+    "scholarCellAppearances": 1,
+    "scholarCellAttributed": 1,
+    "scholarCellBySource": {
+      "contest-prize": 1
+    },
+    "playerCrafts": 26,
+    "playerCraftCell": 0,
+    "playerCraftByRecipe": {
+      "stone_knife": 4,
+      "snare": 21,
+      "bark_armor": 1
+    },
+    "pileMaxTotal": 0,
+    "pileEverPositive": 0,
+    "scholarMaxCells": 1,
+    "poolEngagedZero": 0,
+    "poolEngagedArmed": 0,
+    "poolAllZero": 0,
+    "poolEvadedZero": 0,
+    "volleyFiredFromSearcaster": 0,
+    "noFusionCellsLines": 0,
+    "encWave4Plus": 85,
+    "encEngaged": 63,
+    "medianDays": 143.5,
+    "communityLost": 4,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 2,
+    "scaleRanks": {
+      "regional": 8
+    },
+    "starvation": 3,
+    "starvationVillager": 2,
+    "perSeed": [
+      {
+        "seed": 107021,
+        "days": 137,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 0,
+        "searcasterHolderDays": 0,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 32,
+        "engagedMeetings": 30
+      },
+      {
+        "seed": 107022,
+        "days": 104,
+        "endReason": "village-lost",
+        "standing": 150,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 0,
+        "searcasterHolderDays": 0,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 0,
+        "engagedMeetings": 0
+      },
+      {
+        "seed": 107023,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 290,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 1,
+        "searcasterHolderDays": 97,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 8,
+        "engagedMeetings": 8
+      },
+      {
+        "seed": 107024,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 0,
+        "searcasterHolderDays": 0,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 0,
+        "engagedMeetings": 0
+      },
+      {
+        "seed": 107025,
+        "days": 104,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 0,
+        "searcasterHolderDays": 0,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 15,
+        "engagedMeetings": 13
+      },
+      {
+        "seed": 107026,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 0,
+        "searcasterHolderDays": 0,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 4,
+        "engagedMeetings": 1
+      },
+      {
+        "seed": 107027,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 365,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 0,
+        "searcasterHolderDays": 0,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 22,
+        "engagedMeetings": 8
+      },
+      {
+        "seed": 107028,
+        "days": 85,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 0,
+        "searcasterHolderDays": 0,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 4,
+        "engagedMeetings": 3
+      }
+    ]
+  },
+  "cellAppearanceDetail": [
+    {
+      "seed": 107024,
+      "vid": "gen_d7qxdld",
+      "day": 142,
+      "prevDay": 141,
+      "delta": 1,
+      "source": "contest-prize"
+    },
+    {
+      "seed": 107026,
+      "vid": "__scholar__",
+      "day": 76,
+      "prevDay": 75,
+      "delta": 1,
+      "source": "contest-prize"
+    },
+    {
+      "seed": 107027,
+      "vid": "mia_andersson",
+      "day": 103,
+      "prevDay": 102,
+      "delta": 1,
+      "source": "contest-prize"
+    }
+  ],
+  "searcasterAppearanceDetail": [
+    {
+      "seed": 107023,
+      "vid": "chen_wei",
+      "day": 54,
+      "prevDay": 53,
+      "source": "unexplained"
+    }
+  ],
+  "poolDetail": []
+}
