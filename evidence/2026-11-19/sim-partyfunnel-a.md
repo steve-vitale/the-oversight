@@ -125,3 +125,12 @@ Who died and why: on the control leg the villages that died (105701, 105704, 105
 - Corpora: `evidence/2026-11-19/perseed-partyfunnel-a-ctl/` (8 seeds), `perseed-partyfunnel-a-arm/` (8 seeds)
 - Lever (HELD on this branch, not landed): `src/js/win-plan.js` (`PARTYFUNNEL`, commit `b4cda1de2`)
 - Instruments: `scripts/partyfunnel-driver.js`, `scripts/analyze-partyfunnel-a.js`, `scripts/test-partyfunnel-a.js`, `scripts/build-partyfunnel-panels-a.js` (commit `efbf674d1`)
+
+## Adoption (Loop A run fleshout-20261119T0915Z, coordinator)
+
+- Landed evidence-only by cherry-pick onto master 701a3349e (from branch tip 0c8a44bed; master had moved to e7bd782ab + 5de43bcf0 since the branch base — cherry-pick applied clean, exit 0). Commits: prereg 126260f06, instruments a0b3d48dc, evidence 5a3ba4ebe, corpora 701a3349e.
+- Verified by the coordinator from the files, not the worker's word: analysis JSON re-read (ctl 4/17 = 0.235, arm 8/19 = 0.421, floor ok, C1 pass, C2 fail 3 vs 8, C3 pass); lever commit b4cda1de2 and substrate 64b0fb1a6 verified NOT on master; no src/ files in the four landed commits.
+- Proof-test note: `scripts/test-partyfunnel-a.js` FAILS 6 sections on master (§1/§2/§4 flag-ON mechanism) — EXPECTED, not a regression: the PARTYFUNNEL lever is HELD off master, so flag-ON behaves as flag-OFF here. The 22 old-code-control lines pass, and the analyzer selftest passes 42/42 on master. The proof test is green on the branch tip where the lever lives. Do not "fix" these 6 failures on master; they resolve only if the lever ever lands.
+- Branch sim-partyfunnel-a KEPT with the lever intact (HELD). Worktree released done-abandoned and removed.
+- Findings #2584 ("0 rounds, 0 taken") and #2585 (band-total cost bars) filed by the worker; numbers verified free (no duplicates in sim-findings.md).
+- Next arm: the frozen (b)-trigger FIRED — pool-empty is the dominant arm stall (4/8). Findings #2561/#2562 (companion pool / holder range) are the next arm, not another funnel turn.
