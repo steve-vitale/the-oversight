@@ -585,11 +585,13 @@ for (const seed of seeds) {
     // UNHEARD verdict there is absence of evidence, not evidence of
     // silence — counted separately and labeled on the line.
     const q5Absent = (d.mootLines === undefined || d.caseLog === undefined);
-    // SAME-DAY open+resolve (r242 metric-review blind spot): the case never
-    // appears in caseLog (opened + resolved between dawn snapshots), but the
-    // exile-day moot convened and pronounced on the same people the same day.
-    // Flagged, not re-verdicted: the HEARD/PRESENT/UNHEARD verdict above stands.
-    const sameDay = myCases.length === 0 && presentLines.length > 0 && !!pron;
+    // SAME-DAY open+resolve (r242 metric-review blind spot): the exiling
+    // case never appears LIVE in caseLog (opened + resolved between dawn
+    // snapshots) — it is present only as a terminal snapshot, so its
+    // firstDay stays null while its resolution reads 'exile'. A case
+    // that was seen open (firstDay set) is not same-day, even if other
+    // cases about the same person were never seen open.
+    const sameDay = myCases.some(mc => mc.firstDay === null && mc.resolution === 'exile') && presentLines.length > 0 && !!pron;
     if (sameDay) q5SameDay++;
     if (heard) q5Heard++; else if (present) q5Present++; else if (q5Absent) q5UnheardAbsent++; else q5Unheard++;
     lines.push(`  Q5 EXILE d${ex.day}: ${ex.name} (${ex.vid}) — path=${q5path}${pron ? '' : ' (no pronouncement line on exile day)'}; warning lines before: ${warnBefore.length}; moot/case lines naming them: ${mootNamed.length}; cases naming them accused: ${myCases.length ? myCases.map(mc => `${mc.id} open ${mc.firstDay === null ? 'never (same-day open+resolve — below dawn resolution)' : 'd' + mc.firstDay + '–d' + mc.lastDay} [${[...mc.statuses].join('/')}]${mc.resolution ? ' → ' + mc.resolution : ''}`).join('; ') : 'none'}; case-thread-held proxy: ${caseHeldProxy.length ? caseHeldProxy.join('; ') : 'none'}; present at exile-day moot: ${presentLines.length} lines — ${heard ? 'HEARD (advance notice)' : (present ? 'PRESENT-AT-SENTENCING (in the room, no advance naming)' : (q5Absent ? 'UNHEARD — INSTRUMENT ABSENT (pre-r242 corpus, not evidence of silence)' : 'UNHEARD'))}${sameDay ? ' — SAME-DAY open+resolve (moot convening + pronouncement d' + ex.day + ', case never seen open in caseLog)' : ''}`);
