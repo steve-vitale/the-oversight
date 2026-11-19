@@ -1273,6 +1273,22 @@
     // materials simply never attempts here, so the truly bare still
     // whittle. Scholar-driven crafting (the player's craft()) is
     // untouched. Returns the number of weapons crafted.
+    // BOWCRAFT (sim-bowcraft-a, 2026-11-19, finding #2597): the duty
+    // above never fired for bows — it served weaponless villagers
+    // only, and bow knowledge sat on armed villagers it skipped
+    // (1,138 of 1,228 knows-bow days, bowsource diag). With
+    // BOWCRAFT=1 (node sims only; unset = the old behavior,
+    // byte-identical): (a) a villager with NO volley-capable ranged
+    // weapon is served even when armed — a spear in the ranged slot
+    // is not a ranged weapon (volleyWeaponOf, speargate #2590) — but
+    // an armed villager crafts BOW rungs only, never a second spear;
+    // (b) knowledge seeds from SEEING: a ladder weapon EQUIPPED by
+    // another villager at home (same tile, visible in hand) teaches
+    // L1, exactly as handling teaches — a bow in a pack or stash is
+    // not seen. The seeing snapshot is taken before the loop, so a
+    // same-day craft cannot seed a same-day attempt. Teaching a
+    // recipe to someone who has never seen the weapon, and gossip
+    // seeding, are NOT built here (design calls — see the prereg).
     // PERCEPTION LAW (Steve 2026-10-28): every input below is the
     // villager's OWN state or the camp pile they are standing at —
     // own equipped/carried/stashed gear (the weaponless check and the
@@ -1280,8 +1296,11 @@
     // the communal pile at home, and recipes.json (public recipe
     // data). The roster is iterated only to SCHEDULE each villager's
     // own decision (the villagerArmorCraftDay pattern); no villager's
-    // decision reads another villager's gear, knowledge or materials,
-    // and no global "who is weaponless" list is built or consulted.
+    // decision reads another villager's knowledge or materials, and
+    // no global "who is weaponless" list is built or consulted. The
+    // ONE exception is BOWCRAFT seeing (above): a villager SEES the
+    // weapon another villager at home has EQUIPPED — visible gear on
+    // the same tile, not a roster read; a pack or stash is never seen.
     villagerWeaponCraftDay() {
       let made = 0;
       try {
@@ -1294,11 +1313,34 @@
         v.weaponCraft = v.weaponCraft || {};       // vid -> { recipeId: level }
         v.weaponCraftCd = v.weaponCraftCd || {};   // vid -> last attempt day
         const LADDER = ['hunting_spear', 'fire_hardened_spear', 'bow', 'crude_bow'];
+        const BOW_RUNGS = ['bow', 'crude_bow'];
+        // BOWCRAFT (sim-bowcraft-a, finding #2597): env gate, node
+        // sims only. Unset = the old duty, byte-identical.
+        let bowcraftOn = false;
+        try { bowcraftOn = (typeof process !== 'undefined' && process.env && process.env.BOWCRAFT === '1'); } catch (e) {}
         const idOf = (it) => (it && (it.itemId || it.id)) || it;
         const defOf = (id) => defs.find(d => d.id === id) || null;
         const home = (v.roster || []).filter(id =>
           id !== this.villagerId && !((v.away || {})[id]) &&
           !(this.getPerson ? (this.getPerson(id) || {}).dead : false));
+        // BOWCRAFT SEEING SNAPSHOT: the ladder rungs EQUIPPED by
+        // anyone at home right now — visible in hand on the same
+        // tile. Taken before the loop, so a craft made during this
+        // duty call cannot seed an attempt later in the same call.
+        // A bow in a pack or stash is not seen; only equipped gear.
+        const seenRungs = [];
+        if (bowcraftOn) {
+          for (const hid of home) {
+            try {
+              const hp = this.getPerson ? this.getPerson(hid) : null;
+              if (!hp) continue;
+              for (const e of Object.values(hp.equipped || {})) {
+                const eid = e && (e.itemId || e.id);
+                if (eid && LADDER.indexOf(eid) >= 0 && seenRungs.indexOf(eid) === -1) seenRungs.push(eid);
+              }
+            } catch (e) {}
+          }
+        }
         for (const vid of home) {
           try {
             const p = this.getPerson ? this.getPerson(vid) : null;
@@ -1314,6 +1356,15 @@
             for (const rid of LADDER) {
               if ((lv[rid] || 0) < 1 && ownGear.indexOf(rid) >= 0) lv[rid] = 1;
             }
+            // BOWCRAFT SEEING: a ladder weapon equipped by another
+            // villager at home is SEEN up close — L1, same rule as
+            // handling. Only when BOWCRAFT is on; off = the old
+            // handling-only seeding above.
+            if (bowcraftOn) {
+              for (const rid of seenRungs) {
+                if ((lv[rid] || 0) < 1) lv[rid] = 1;
+              }
+            }
             if ((v.weaponCraftCd[vid] || -99) > day - 3) continue; // ≤1 attempt / 3d
             try { eq.autoEquip(p, defs); } catch (e) {}
             // WEAPONLESS: no weapon in either hand and none in their
@@ -1321,7 +1372,23 @@
             // villager this duty exists for).
             const armed = ((eq.weaponBonusOf ? (eq.weaponBonusOf(p, defs, 'melee') || 0) + (eq.weaponBonusOf(p, defs, 'ranged') || 0) : 0) > 0) ||
               (p.items || []).some(e => { const d = defOf(idOf(e)); return d && d.weapon; });
-            if (armed) continue;
+            // BOWCRAFT: a villager with no volley-capable ranged
+            // weapon is served even when armed — a spear in the
+            // ranged slot is not a ranged weapon (volleyWeaponOf).
+            // Armed-but-ranged-less villagers craft BOW rungs only;
+            // weaponless villagers keep the full ladder. A villager
+            // holding a volley weapon is still skipped. Off = the
+            // old weaponless-only rule.
+            let rungs = LADDER;
+            if (bowcraftOn) {
+              let hasVolley = false;
+              try { hasVolley = !!(eq.volleyWeaponOf && eq.volleyWeaponOf(p, defs)); } catch (e) {}
+              if (!hasVolley) {
+                hasVolley = (p.items || []).some(e => { const d = defOf(idOf(e)); return d && d.weapon && d.weapon.ammo; });
+              }
+              if (hasVolley) continue;
+              if (armed) rungs = BOW_RUNGS;
+            } else if (armed) continue;
             // their own carried materials: pack entries carrying a
             // material key (the craft() matching rule), never gear
             const isMatEntry = (e, mat) => {
@@ -1341,9 +1408,10 @@
             try { const st = this.stashState ? this.stashState() : null; mats = (st && st.materials) || null; } catch (e) { warn('weaponcraft stash', e); }
             if (!mats) mats = (v.stash && v.stash.materials) || {};
             // first ladder rung whose recipe they personally know and
-            // whose materials they can reach
+            // whose materials they can reach (BOWCRAFT: an armed
+            // but ranged-less villager only considers bow rungs)
             let pick = null;
-            for (const rid of LADDER) {
+            for (const rid of rungs) {
               const recipe = recipes.find(r => r.id === rid);
               if (!recipe || !recipe.materials) continue;
               const level = lv[rid] || 0;
