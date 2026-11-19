@@ -1817,5 +1817,38 @@ function sdlog(day, beforeAllies, beforeHaven, afterAllies, afterHaven) {
     hasFn && r.verdict === 'F8-UNMEASURED' && r.totHits === 0,
     hasFn ? JSON.stringify(r) : 'summarizeF8 missing in this analyzer');
 }
+// ---- r244 PILOT FIX: growth-line horizon (day-101 dawn voice) ----
+{
+  const hasFn = typeof A.summarizeGrowth === 'function';
+  // The r244 pilot shape: watch rows end day 100, the dawn voice speaks
+  // again on day 101 (the extra day the harness never plays). The day-101
+  // line is out of coverage — neither bad nor a repeat — and the day-98
+  // line still judges on its real growth (harvestable 1, no call after).
+  const s = growthSeed(
+    [gw(96, 2, 0, 0), gw(97, 2, 0, 0), gw(98, 2, 1, 0), gw(99, 2, 1, 0), gw(100, 2, 0, 0)],
+    [{ day: 98, line: GROWTH_LINE }, { day: 101, line: GROWTH_LINE }],
+    []);
+  let r = null;
+  try { r = A.summarizeGrowth([s]); } catch (e) { r = { err: String(e && e.message) }; }
+  ok('(91) growth-line HORIZON: line past the last watch day is out of coverage, not bad, not a repeat -> bad=0 repeat=0 beyondHorizon=1',
+    hasFn && r.totBad === 0 && r.totRepeat === 0 && r.perSeed[0].beyondHorizon === 1 &&
+    r.perSeed[0].beyond.length === 1 && r.perSeed[0].beyond[0] === 101 && r.totLines === 1,
+    hasFn ? JSON.stringify(r.perSeed[0]) : 'summarizeGrowth missing in this analyzer');
+}
+{
+  const hasFn = typeof A.summarizeGrowth === 'function';
+  // In-span gap is still a defect: a line on day 97 with watch rows on
+  // 96 and 98 (no day-97 row) is bad — the watch should have recorded it.
+  const s = growthSeed(
+    [gw(96, 2, 1, 0), gw(98, 2, 1, 0)],
+    [{ day: 97, line: GROWTH_LINE }],
+    []);
+  let r = null;
+  try { r = A.summarizeGrowth([s]); } catch (e) { r = { err: String(e && e.message) }; }
+  ok('(92) growth-line IN-SPAN GAP still bad: line day inside the watch span with no row -> bad=1, beyondHorizon=0',
+    hasFn && r.totBad === 1 && r.perSeed[0].bad.length === 1 &&
+    r.perSeed[0].bad[0].reason === 'no-growth-row' && r.perSeed[0].beyondHorizon === 0,
+    hasFn ? JSON.stringify(r.perSeed[0]) : 'summarizeGrowth missing in this analyzer');
+}
 console.log(`r244 analyzer proof: ${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

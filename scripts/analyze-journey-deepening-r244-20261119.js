@@ -3,7 +3,9 @@
 // NEW summarizeF8 (Q1 wild check of the confide-line gate: driver
 // f8ExitLines joined to the sitting's secretShared flag) and Q3 sub-gate
 // blades on summarizeMarch fightRows (outcome detail.blades + musterLog
-// Haven at fight time, split sub-gate <10 vs at-gate >=10).
+// Haven at fight time, split sub-gate <10 vs at-gate >=10). PILOT FIX:
+// summarizeGrowth excludes heard lines past the last growthWatch day
+// (the day-101 dawn-voice horizon — see the function comment).
 // Everything else is the r243 analyzer VERBATIM.
 // analyze-journey-deepening-r243-20261119.js -- r243 analyzer (tooling
 // only, zero game code). Fork of the r238 analyzer. Changes this run —
@@ -2643,6 +2645,15 @@ function summarizeCoalitionGap(seedJSONs) {
 //   the same growth twice (the dedupe failed). A call between line days
 //   legitimizes the second line (the call's re-arm stores the post-call
 //   harvestable, so a second line needs FRESH growth above it).
+// - HORIZON (r244 pilot): a heard line past the last growthWatch day is
+//   OUT OF COVERAGE, not bad — the line is a game.js dawn voice, and the
+//   run's day budget ends at the dawn of the extra day (DAY CAP 100 plays
+//   days 1..100; the day-101 dawn fires, then the harness stops before any
+//   policy upkeep runs, so no growthWatch row can exist for day 101).
+//   Such lines are counted as beyondHorizon, excluded from bad/repeat
+//   and from lineDays (heardLines still counts them), and reported.
+//   A line day INSIDE the watch span with no row is still bad — the
+//   watch should have recorded it.
 // - growthCalls: musterLog entries with growthHeard && call. For each,
 //   the announced allied gain is the growthWatch row's (harvestable −
 //   havenGain) that day (the call does not commit Haven); the harvested
@@ -2670,7 +2681,13 @@ function summarizeGrowth(seedJSONs) {
     const log = (s.musterLog || []).slice().sort((a, b) => a.day - b.day);
     const callDays = log.filter(e => e && e.call).map(e => e.day);
     const poolRows = rows.filter(r => !r.ready && (r.harvestable || 0) > 0);
-    const lineDays = Object.keys(heardByDay).map(Number).sort((a, b) => a - b);
+    const allLineDays = Object.keys(heardByDay).map(Number).sort((a, b) => a - b);
+    // r244 pilot horizon: line days past the last growthWatch day are out
+    // of coverage (the dawn voice fires on the extra day the harness never
+    // plays). They are reported, never judged.
+    const lastWatchDay = rows.length ? rows[rows.length - 1].day : null;
+    const beyond = allLineDays.filter(d => lastWatchDay != null && d > lastWatchDay);
+    const lineDays = allLineDays.filter(d => !(lastWatchDay != null && d > lastWatchDay));
     const bad = [];
     for (const d of lineDays) {
       const row = rowByDay[d];
@@ -2713,7 +2730,8 @@ function summarizeGrowth(seedJSONs) {
       else { harvestMismatchHaven++; mismatchesHaven.push({ day: e.day, announced: announcedHv, gained: gainedHv }); }
     }
     perSeed.push({ seed, poolDays: poolRows.length, lineDays: lineDays.length,
-      heardLines: heard.length, badLines: bad.length, bad,
+      heardLines: heard.length, beyondHorizon: beyond.length, beyond,
+      badLines: bad.length, bad,
       repeatLines: repeats.length, repeats,
       growthCalls, harvestOk, harvestMismatch, mismatches,
       announcedAllied, harvestedAllied,
@@ -2728,6 +2746,7 @@ function summarizeGrowth(seedJSONs) {
   const totGrowthCalls = perSeed.reduce((a, x) => a + x.growthCalls, 0);
   const totMismatch = perSeed.reduce((a, x) => a + x.harvestMismatch, 0);
   const totMismatchHaven = perSeed.reduce((a, x) => a + x.harvestMismatchHaven, 0);
+  const totBeyondHorizon = perSeed.reduce((a, x) => a + (x.beyondHorizon || 0), 0);
   let verdict = 'GROWTH-LINE-UNMEASURED';
   // Defects dominate: a bad/repeat line or a harvest mismatch (allied OR
   // Haven) is NO-GO even when the pool is empty.
@@ -2736,7 +2755,7 @@ function summarizeGrowth(seedJSONs) {
   else if (totLines === 0) verdict = 'GROWTH-LINE-UNMEASURED-SILENT';
   else if (totGrowthCalls === 0) verdict = 'GROWTH-LINE-UNMEASURED-HARVEST';
   else verdict = 'GROWTH-LINE-GO';
-  return { perSeed, totPool, totLines, totBad, totRepeat, totGrowthCalls, totMismatch, totMismatchHaven, verdict };
+  return { perSeed, totPool, totLines, totBad, totRepeat, totGrowthCalls, totMismatch, totMismatchHaven, totBeyondHorizon, verdict };
 }
 
 // r238 F2-MUSTER-RESETS (report-only unless the bar trips): the driver
@@ -3450,8 +3469,8 @@ function main() {
   for (const s of cg.perSeed) console.log(`   Q2-COALITION-GAP-SEED seed=${s.seed} watchDays=${s.watchDays} maxTotal=${s.maxTotal} short79=${s.short79Days} oneShort=${s.oneShortDays} longestOneShortRun=${s.longestOneShortRun} firstWatchDay=${s.firstWatchDay} readyDay=${s.readyDay} daysToReady=${s.daysToReady} ready=${s.ready} linksMax=${s.linksMax} meanTrustAtEnd=${s.meanTrustAtEnd}`);
   // r236 Q1-GROWTH-LINE PANEL (wild verification of the one-short line):
   const gr = summarizeGrowth(ppSeeds);
-  console.log(`Q1-GROWTH-LINE PANEL: poolDays=${gr.totPool} lineDays=${gr.totLines} badLines=${gr.totBad} repeatLines=${gr.totRepeat} growthCalls=${gr.totGrowthCalls} harvestMismatch=${gr.totMismatch} havenMismatch=${gr.totMismatchHaven} -> ${gr.verdict}`);
-  for (const s of gr.perSeed) console.log(`   Q1-GROWTH-LINE-SEED seed=${s.seed} poolDays=${s.poolDays} lineDays=${s.lineDays} heardLines=${s.heardLines} badLines=${s.badLines} ${JSON.stringify(s.bad)} repeatLines=${s.repeatLines} ${JSON.stringify(s.repeats)} growthCalls=${s.growthCalls} harvestOk=${s.harvestOk} harvestMismatch=${s.harvestMismatch} ${JSON.stringify(s.mismatches)} harvestOkHaven=${s.harvestOkHaven} harvestMismatchHaven=${s.harvestMismatchHaven} ${JSON.stringify(s.mismatchesHaven)} announcedAllied=${s.announcedAllied} harvestedAllied=${s.harvestedAllied} announcedHaven=${s.announcedHaven} harvestedHaven=${s.harvestedHaven} maxHarvestable=${s.maxHarvestable}`);
+  console.log(`Q1-GROWTH-LINE PANEL: poolDays=${gr.totPool} lineDays=${gr.totLines} badLines=${gr.totBad} repeatLines=${gr.totRepeat} growthCalls=${gr.totGrowthCalls} harvestMismatch=${gr.totMismatch} havenMismatch=${gr.totMismatchHaven} beyondHorizon=${gr.totBeyondHorizon} -> ${gr.verdict}`);
+  for (const s of gr.perSeed) console.log(`   Q1-GROWTH-LINE-SEED seed=${s.seed} poolDays=${s.poolDays} lineDays=${s.lineDays} heardLines=${s.heardLines} beyondHorizon=${s.beyondHorizon} ${JSON.stringify(s.beyond)} badLines=${s.badLines} ${JSON.stringify(s.bad)} repeatLines=${s.repeatLines} ${JSON.stringify(s.repeats)} growthCalls=${s.growthCalls} harvestOk=${s.harvestOk} harvestMismatch=${s.harvestMismatch} ${JSON.stringify(s.mismatches)} harvestOkHaven=${s.harvestOkHaven} harvestMismatchHaven=${s.harvestMismatchHaven} ${JSON.stringify(s.mismatchesHaven)} announcedAllied=${s.announcedAllied} harvestedAllied=${s.harvestedAllied} announcedHaven=${s.announcedHaven} harvestedHaven=${s.harvestedHaven} maxHarvestable=${s.maxHarvestable}`);
   // r238 F2-MUSTER-RESETS PANEL (stood-down re-arm watch):
   const mr = summarizeMusterResets(ppSeeds);
   console.log(`F2-MUSTER-RESETS PANEL: resets=${mr.totResets} rearmed=${mr.totRearmed} stale=${mr.totStale} -> ${mr.verdict}`);
