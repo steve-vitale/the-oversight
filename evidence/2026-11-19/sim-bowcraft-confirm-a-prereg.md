@@ -6,13 +6,38 @@ BOWCRAFT turn-on decision (finding #2597 / #2610).
 **Frozen:** 2026-11-19 ~19:09 UTC, before any judged sim.
 **Branch:** `sim-bowcraft-confirm-a` (worktree
 `~/workspace/worktrees/sim-bowcraft-confirm-a`). **Base:** master
-`17bb496df` (rebased from the brief's base `af7fddfc4` before any
-judged sim, per the brief — the rebase was a clean fast-forward).
-**The only differences between af7fddfc4 and 17bb496df are the ship
+`7e0810eea` (see the rebase correction below; the brief named
+`17bb496df`, which was stale by the time the sweep started).
+**The only differences between af7fddfc4 and 7e0810eea are the ship
 bump files** (`index.html`, `src/js/build.js`, `sw.js`,
-`version.json` — verified with `git diff af7fddfc4..HEAD --stat`:
-4 files, no `src/` change other than the build stamp, no
-bow/craft/departure code touched).
+`version.json`) **plus two evidence files from the
+sim-winnability-round-1530 adoption closeout** (`evidence/
+2026-11-19/sim-winnability-round-1530.md`,
+`check-quick-round-1530.log`) — verified with `git diff
+af7fddfc4..HEAD --stat` and `git diff 17bb496df..7e0810eea
+--name-only`: **zero `src/` files changed, no bow/craft/departure
+code touched** between the brief's base and this tip.
+
+## REBASE CORRECTION (2026-11-19 ~19:20 UTC, before any judged sim completed)
+
+The coordinator corrected the brief: current master tip is
+`7e0810eea` ("sim-winnability-round-1530: adoption closeout —
+launchfunnel GO + laterage NO-GO"), not the `17bb496df` named in
+the brief. (`origin/master` still points at `17bb496df` — the
+closeout is merged locally in the main tree, not yet pushed; the
+tip was taken from the main tree's local master, commit present
+in this repo.) The branch was first rebased onto `17bb496df`
+(clean fast-forward) and a control leg was STARTED on that base
+(3 of 8 seeds completed, anchor `17bb496df7a1`, no analyzer run,
+no judged output). On the correction the leg was killed, its 3
+partial corpora + logs were DELETED (never judged, never kept),
+the branch was rebased onto `7e0810eea` (clean, 1 commit replayed
+as `5cf7ce7d1`), and both legs will run from scratch on the new
+tip. The frozen bars below are UNCHANGED by this correction —
+only the base tip and the recover-script anchor
+(`17bb496df` → `7e0810eea`) moved. The game code is identical
+between the two tips (0 `src/` diff), so the re-run is a base
+correction, not a re-measurement.
 **The fix is LANDED on master as `ef1c81094`** (sim-bowcraft-a:
 BOWCRAFT fix for finding #2597 — serve ranged-less villagers +
 seed bow knowledge from seeing). This arm builds NO game code: it
@@ -143,7 +168,7 @@ stays env-gated OFF.
   record the encounter averages beside the verdict.
 - **Fallback recovery:** `scripts/recover-bowcraft-fallback-confirm-a.js`
   (clone of the pilot's recover script, re-pointed at the
-  confirm log/filenames and the current anchor `17bb496df`).
+  confirm log/filenames and the current anchor `7e0810eea`).
   If a corpus write fails, the driver falls back to dumping
   the corpus as text into the sweep log; the recover script
   extracts it and writes it back with write + readback

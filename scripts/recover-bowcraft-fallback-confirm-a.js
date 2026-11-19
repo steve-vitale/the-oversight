@@ -85,7 +85,7 @@ function main() {
     const m = /s(\d+)-bowcraft-confirm-a-arm\.json$/.exec(b.target);
     const wantSeed = m ? parseInt(m[1], 10) : null;
     const ok = obj && obj.seed === wantSeed && obj.mode === 'arm' && obj.bowcraftOn === true &&
-      typeof obj.anchorCommit === 'string' && obj.anchorCommit.indexOf('17bb496df') === 0 &&
+      typeof obj.anchorCommit === 'string' && obj.anchorCommit.indexOf('7e0810eea') === 0 &&
       Array.isArray(obj.bowCensus) && obj.bowCensus.length > 0;
     if (!ok) {
       console.log('FAIL ' + b.target + ' — validation failed: ' + JSON.stringify({ seed: obj && obj.seed, wantSeed: wantSeed, mode: obj && obj.mode, bowcraftOn: obj && obj.bowcraftOn, anchor: obj && obj.anchorCommit }));
