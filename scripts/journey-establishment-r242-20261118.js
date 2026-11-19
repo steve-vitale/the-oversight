@@ -1157,11 +1157,13 @@ async function runSeed(seed) {
   // pronouncement signal), so moot and case discussion lines land
   // here instead. The /case/ needle is deliberately narrow ("the
   // case" / "a case" / "case against" — NOT bare "case", which would
-  // flood on "just in case" / "in that case" small talk); the
-  // analyzer filters to lines naming the exiled person. Noisy by
-  // design — the counts are reported, the verdict reads the lines.
+  // flood on "just in case" / "in that case" small talk); "moot"
+  // is word-boundaried (/\bmoot\b/ — bare /moot/ matches "smooth",
+  // e.g. "Smooth stalks" and "the smooth deflect"). The analyzer
+  // filters to lines naming the exiled person. Noisy by design —
+  // the counts are reported, the verdict reads the lines.
   const mootLines = [];
-  for (const d of Object.keys(dayLines)) for (const ln of dayLines[d]) if (/moot|the case|a case|case against/i.test(ln)) mootLines.push({ day: parseInt(d, 10), line: ln.replace(/^(SAY|SYS): /, '') });
+  for (const d of Object.keys(dayLines)) for (const ln of dayLines[d]) if (/\bmoot\b|the case|a case|case against/i.test(ln)) mootLines.push({ day: parseInt(d, 10), line: ln.replace(/^(SAY|SYS): /, '') });
 
   // People check: 2 held convos at end of run (top cook-ish fallback: first
   // two living non-player villagers in roster order), goon-first, 8 turns.

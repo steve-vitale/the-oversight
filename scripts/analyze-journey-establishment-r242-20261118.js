@@ -65,7 +65,7 @@ let strandedDawns = 0, strandedRunsTotal = 0, strandedWorked = 0, guardFires = 0
 let strandedSocial = 0, strandedNoSocial = 0, strandedCommits = 0;
 const strandedRunKeys = new Set();
 // R242 Q5 MOOT-PATH panel counters.
-let q5Exiles = 0, q5Heard = 0, q5Unheard = 0, q5UnheardAbsent = 0;
+let q5Exiles = 0, q5Heard = 0, q5Present = 0, q5Unheard = 0, q5UnheardAbsent = 0;
 const q5ByPath = {};
 // R138 THREAD BRANCH: end attempts where the wedge had to page (the
 // Yara shape — menu paged by betrayal/agency prepends, cancel on page
@@ -512,7 +512,16 @@ for (const seed of seeds) {
   for (const ex of q5ExilesThisSeed) {
     q5Exiles++;
     const first = String((ex.name || '').split(' ')[0] || '');
-    const pron = exLines.filter(e => e.day === ex.day).find(e => /Take what you can carry/i.test(e.line));
+    // Path from the pronouncement text. The moot says TWO "take what
+    // you can carry" lines on the exile day — the sentencing line
+    // ("The oldest among them stands... 'X — take what you can carry
+    // and go.'") and the pronouncement ("X is exiled. 'Take what you
+    // can carry and go.'...") — so taking the FIRST match misreads
+    // the path (r242 first pass: 3/5 unknown). Prefer a line that
+    // matches a path pattern; fall back to the first Take-carry line.
+    const dayCarry = exLines.filter(e => e.day === ex.day && /Take what you can carry/i.test(e.line));
+    const myCarry = first ? dayCarry.filter(e => new RegExp(first, 'i').test(e.line)) : [];
+    const pron = (myCarry.length ? myCarry : dayCarry).find(e => / is exiled\.|^It's done\./i.test(e.line)) || (myCarry[0] || dayCarry[0] || null);
     let q5path = 'unknown';
     if (pron) {
       if (/^It's done\./i.test(pron.line)) q5path = 'freeload';
@@ -531,14 +540,25 @@ for (const seed of seeds) {
     const warnBefore = (first ? exLines.filter(e => e.day < ex.day && new RegExp(first, 'i').test(e.line) && /pull weight|pulling weight|village will decide|freeload|isn't pulling|exile/i.test(e.line)) : []);
     const mootNamed = first ? mootL.filter(e => e.day <= ex.day && new RegExp(first, 'i').test(e.line)) : [];
     // Cases naming this person as accused: dawn range where the case
-    // was listed open/dormant/advisory.
+    // was listed OPEN/dormant/advisory (the live states — betrayal.js
+    // :1208). A case that later resolves stays in the array with a
+    // terminal status (resolved/acquitted/exile/weregild); snapshots
+    // after that point do NOT extend the open window, so the
+    // case-thread-held proxy only counts sittings inside the live
+    // window, never sittings after the case closed.
+    const LIVE_CASE = { open: 1, dormant: 1, advisory: 1 };
     const myCases = [];
     for (const snap of caseL) {
       for (const c of (snap.cases || [])) {
         if ((c.accused || []).map(String).includes(String(ex.vid))) {
           let mc = myCases.find(m => m.id === c.id);
-          if (!mc) { mc = { id: c.id, firstDay: snap.day, lastDay: snap.day, statuses: new Set(), resolution: c.resolution || null }; myCases.push(mc); }
-          mc.lastDay = snap.day; if (c.status) mc.statuses.add(c.status); if (c.resolution) mc.resolution = c.resolution;
+          if (!mc) { mc = { id: c.id, firstDay: null, lastDay: null, statuses: new Set(), resolution: c.resolution || null }; myCases.push(mc); }
+          if (c.status) mc.statuses.add(c.status);
+          if (c.resolution) mc.resolution = c.resolution;
+          if (LIVE_CASE[c.status]) {
+            if (mc.firstDay === null) mc.firstDay = snap.day;
+            mc.lastDay = snap.day;
+          }
         }
       }
     }
@@ -546,16 +566,27 @@ for (const seed of seeds) {
     for (const s of (d.wedgeSits || [])) {
       const picks = s.picks || [];
       if (!picks.some(p => String(p.id || '').startsWith('betrayal:'))) continue;
-      const hit = myCases.find(mc => s.day >= mc.firstDay && s.day <= mc.lastDay);
+      const hit = myCases.find(mc => mc.firstDay !== null && s.day >= mc.firstDay && s.day <= mc.lastDay);
       if (hit) caseHeldProxy.push(`d${s.day} with ${s.name || s.vid} (case ${hit.id} open)`);
     }
+    // PRESENT-AT-SENTENCING: moot-convening lines on the exile day
+    // ("LIVE! THE MOOT", "call a moot", "The moot turns to you.
+    // Your vote matters here") — the player was IN the room and
+    // voted at the moot that sentenced this person, even if no line
+    // named them in advance. That is not advance notice (HEARD is
+    // about before the day), but it is not a silent exile either:
+    // the player learns the accused at the moot itself. The verdict
+    // is three-way: HEARD (advance notice) / PRESENT (in the room
+    // at sentencing, no advance naming) / UNHEARD (neither).
+    const presentLines = mootL.filter(e => e.day === ex.day && /LIVE! THE MOOT|call a moot|moot turns to you/i.test(e.line));
     const heard = warnBefore.length > 0 || mootNamed.length > 0 || caseHeldProxy.length > 0;
+    const present = presentLines.length > 0;
     // On a pre-r242 corpus the moot/case channels are ABSENT, so an
     // UNHEARD verdict there is absence of evidence, not evidence of
     // silence — counted separately and labeled on the line.
     const q5Absent = (d.mootLines === undefined || d.caseLog === undefined);
-    if (heard) q5Heard++; else if (q5Absent) q5UnheardAbsent++; else q5Unheard++;
-    lines.push(`  Q5 EXILE d${ex.day}: ${ex.name} (${ex.vid}) — path=${q5path}${pron ? '' : ' (no pronouncement line on exile day)'}; warning lines before: ${warnBefore.length}; moot/case lines naming them: ${mootNamed.length}; cases naming them accused: ${myCases.length ? myCases.map(mc => `${mc.id} d${mc.firstDay}–d${mc.lastDay} [${[...mc.statuses].join('/')}]${mc.resolution ? ' → ' + mc.resolution : ''}`).join('; ') : 'none'}; case-thread-held proxy: ${caseHeldProxy.length ? caseHeldProxy.join('; ') : 'none'} — ${heard ? 'HEARD' : (q5Absent ? 'UNHEARD — INSTRUMENT ABSENT (pre-r242 corpus, not evidence of silence)' : 'UNHEARD')}`);
+    if (heard) q5Heard++; else if (present) q5Present++; else if (q5Absent) q5UnheardAbsent++; else q5Unheard++;
+    lines.push(`  Q5 EXILE d${ex.day}: ${ex.name} (${ex.vid}) — path=${q5path}${pron ? '' : ' (no pronouncement line on exile day)'}; warning lines before: ${warnBefore.length}; moot/case lines naming them: ${mootNamed.length}; cases naming them accused: ${myCases.length ? myCases.map(mc => `${mc.id} open ${mc.firstDay === null ? 'never (same-day open+resolve — below dawn resolution)' : 'd' + mc.firstDay + '–d' + mc.lastDay} [${[...mc.statuses].join('/')}]${mc.resolution ? ' → ' + mc.resolution : ''}`).join('; ') : 'none'}; case-thread-held proxy: ${caseHeldProxy.length ? caseHeldProxy.join('; ') : 'none'}; present at exile-day moot: ${presentLines.length} lines — ${heard ? 'HEARD (advance notice)' : (present ? 'PRESENT-AT-SENTENCING (in the room, no advance naming)' : (q5Absent ? 'UNHEARD — INSTRUMENT ABSENT (pre-r242 corpus, not evidence of silence)' : 'UNHEARD'))}`);
     for (const w of warnBefore.slice(0, 4)) lines.push(`    warn d${w.day}: ${String(w.line).slice(0, 160)}`);
     for (const m of mootNamed.slice(0, 4)) lines.push(`    moot/case d${m.day}: ${String(m.line).slice(0, 160)}`);
   }
@@ -589,7 +620,7 @@ for (const d of lostAskDetail) console.log(`  ${d}`);
 for (const d of stage0DeflectedDetail) console.log(`  ${d}`);
 for (const d of stage0SurfacedDetail) console.log(`  ${d}`);
 for (const d of favorlessDetailAll) console.log(`  ${d}`);
-console.log(`Q5 EXILE WARNING HEARD (r242 — moot-path instrument): ${q5Exiles} exiles on the panel, paths ${JSON.stringify(q5ByPath)}; HEARD ${q5Heard}, UNHEARD ${q5Unheard}, UNHEARD-instrument-absent ${q5UnheardAbsent} (pre-r242 corpus — not silence evidence) — freeloader exile with no warning line = silent-exile defect trigger; UNHEARD moot exile = finding (documented + proposed)`);
+console.log(`Q5 EXILE WARNING HEARD (r242 — moot-path instrument): ${q5Exiles} exiles on the panel, paths ${JSON.stringify(q5ByPath)}; HEARD (advance notice) ${q5Heard}, PRESENT-at-sentencing ${q5Present}, UNHEARD ${q5Unheard}, UNHEARD-instrument-absent ${q5UnheardAbsent} (pre-r242 corpus — not silence evidence) — freeloader exile with no warning line = silent-exile defect trigger; UNHEARD moot exile = finding (documented + proposed); PRESENT-at-sentencing means the player was in the room and voted at the sentencing moot`);
 console.log(`Q6 POLICY FORAGING (r242 — r233 F4 named question, report-only): scholar bumpCalls vs wedgeSits vs joint forage_help commits per seed (F4 shape = bumpCalls <= 2 with wedgeSits >= 50)`);
 for (const l of q6Lines) console.log(l);
 console.log(`  favorless repeats per villager: ${JSON.stringify(favorlessRepeats)}; contentless re-seeds after favorless sits: ${favorlessReseeds}/${favorlessTotal}`);
