@@ -232,3 +232,21 @@ precedent). dryRate quiet. Baseline NOT rolled over schema drift.
 
 Merged locally, pending ship (ship loop owns bump/push/live verify).
 Rotation-b 5→6. Lock deleted after run_id verification.
+
+## Adoption addendum — full 4-seed panel re-run on fixed code (2026-11-19 ~11:40Z, tip `416e81241`)
+
+Worktree `journey2-social-adopt`, base `416e81241` (master at rebase; includes the r238 fix `e7bd782ab` plus the speargate-a lever commits, env-gated OFF, and the #2593 ammo-naming narration). Same driver/analyzer as the run, seeds 45749–45752, DAYCAP 140, OUTDIR `evidence/2026-11-19/r238-fixed-panel` (the run's original unfixed JSONs untouched). Panel exit 0 (~185s); analyzer exit 0 (718 lines, `r238-fixed-panel-analysis.log`).
+
+**F6 wild hold — CONFIRMED: dry lines 0 panel-wide (bar 0) — GO.** Unfixed panel had 2 dry lines on 45752; both sittings now end naturally (forced closes 5→3, natural ends 151→153). The dry line "...Sorry, lost my train of thought." is replaced by "Okay. Here’s the thing —" and the sittings close with "Good — that debt, settled. Feels better said out loud." A third turn on 45752 also changed: a repeat-ask "I just said — did you miss it?" now falls through to the generic fallback — the F5 all-3-blocked fall-through firing in the wild.
+
+**F5 settled-favor: V1=1 V2=1 V3=1, total 3, dryLines=0** — all on 45752, Catalina Reyes, C-friendship. Unchanged from the unfixed panel.
+
+**TRAIL wild hold — distinct FAIL as written, recurrence PASS:** presses 6 (45749: 1, 45750: 0, 45751: 1, 45752: 4 — counted once per spoken line; each line is recorded twice in the JSON, once as `outingArm/stages/line` and once as `transcript/text`); distinct lines panel-wide **2** (bar ≥6) — FAIL; max recurrence per seed 4 on 45752 (bar ≤4) — PASS at the bar. Same two lines as the unfixed panel (default pool[0] + warm pool[0]). The metric-review note stands: the bar measures press frequency, not pool depth — the pool is 6 deep per temperament since r236, but only two temperaments fired in this panel. Not re-scored.
+
+**No regressions elsewhere:** B5 funerals 16, full 10 / partial 5 / none 1 (identical to unfixed). B6 GO. M6 GO (re-aligned definition). M9/M10/FACE HOLDS. M11 recap-empty 0. M12 threeTimes 51, max/sitting 1, 0 sittings 2+, exits 187 (within the revised bar). Dropped threads 0. Recap cap failures 0. Villages survived 2/4 (45750 d129, 45751 d60 village-lost — same as unfixed). Determinism check: seeds 45749/45750/45751 differ from the unfixed JSONs only in `manifest/commit` and runtime `ms` — trajectories byte-identical; 45752 differs only in the three fixed turns above plus pacing ripple (3 pacingDays values).
+
+**Proof tests re-run on the rebased tip `416e81241` — all green:** repay-fallback 36/36, F5 harness 50/50, F6 proof 49/49, TRAILTALK proof 30/30.
+
+**Adoption blockers (for the record):** a host write flap (~10:13–11:02Z, ~49 min, ended by a VM replacement, boot `813e39bb`) killed the first worktree checkout and its repair; the adoption waited it out, then rebuilt the worktree with `git reset --hard HEAD` (100%, 103,876 files, exit 0) and registered it manually (the register script cannot adopt an existing tree). Flap size/timing data measured during the window: 100B writes pass while 26KB fail in the same seconds; 1B passes; window flickers at ~10–30s granularity. Telemetry adjudication verified from the per-seed JSONs (no `l3.*` keys; driver emits `bondEnd.bonds` / `social.moots`) — schema drift, baseline NOT rolled.
+
+**Remainders carried (unchanged):** Zinhle creek-pocket, Olivia triple re-ask / driver re-ask pestering, repay.engageBeat pools broken/open, M4 split proposal. Proof refresh round 21 + gate follow in the adoption closeout.
