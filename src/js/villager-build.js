@@ -1273,19 +1273,17 @@
     // materials simply never attempts here, so the truly bare still
     // whittle. Scholar-driven crafting (the player's craft()) is
     // untouched. Returns the number of weapons crafted.
-    // BOWCRAFT (sim-bowcraft-a, 2026-11-19, finding #2597): the duty
-    // above never fired for bows — it served weaponless villagers
-    // only, and bow knowledge sat on armed villagers it skipped
-    // (1,138 of 1,228 knows-bow days, bowsource diag). With
-    // BOWCRAFT=1 (node sims only; unset = the old behavior,
-    // byte-identical): (a) a villager with NO volley-capable ranged
-    // weapon is served even when armed — a spear in the ranged slot
-    // is not a ranged weapon (volleyWeaponOf, speargate #2590) — but
-    // an armed villager crafts BOW rungs only, never a second spear;
-    // (b) knowledge seeds from SEEING: a ladder weapon EQUIPPED by
-    // another villager at home (same tile, visible in hand) teaches
-    // L1, exactly as handling teaches — a bow in a pack or stash is
-    // not seen. The seeing snapshot is taken before the loop, so a
+    // BOWCRAFT (sim-bowcraft-a, 2026-11-19, finding #2597; TURNED ON
+    // 2026-11-19 by the 1815Z adoption — pilot BUILD-GO + confirm GO
+    // on two fresh bands, no regression): the duty below always runs
+    // now — (a) a villager with NO volley-capable ranged weapon is
+    // served even when armed — a spear in the ranged slot is not a
+    // ranged weapon (volleyWeaponOf, speargate #2590) — but an armed
+    // villager crafts BOW rungs only, never a second spear; (b)
+    // knowledge seeds from SEEING: a ladder weapon EQUIPPED by another
+    // villager at home (same tile, visible in hand) teaches L1,
+    // exactly as handling teaches — a bow in a pack or stash is not
+    // seen. The seeing snapshot is taken before the loop, so a
     // same-day craft cannot seed a same-day attempt. Teaching a
     // recipe to someone who has never seen the weapon, and gossip
     // seeding, are NOT built here (design calls — see the prereg).
@@ -1314,10 +1312,12 @@
         v.weaponCraftCd = v.weaponCraftCd || {};   // vid -> last attempt day
         const LADDER = ['hunting_spear', 'fire_hardened_spear', 'bow', 'crude_bow'];
         const BOW_RUNGS = ['bow', 'crude_bow'];
-        // BOWCRAFT (sim-bowcraft-a, finding #2597): env gate, node
-        // sims only. Unset = the old duty, byte-identical.
-        let bowcraftOn = false;
-        try { bowcraftOn = (typeof process !== 'undefined' && process.env && process.env.BOWCRAFT === '1'); } catch (e) {}
+        // BOWCRAFT (sim-bowcraft-a, finding #2597): TURNED ON
+        // 2026-11-19 (1815Z adoption: pilot + confirm GO) — the duty
+        // is always on in live play now; the env gate is gone and
+        // BOWCRAFT=1 is a no-op. Kept as a named local so the
+        // seeing-snapshot and rung branches below read plainly.
+        let bowcraftOn = true;
         const idOf = (it) => (it && (it.itemId || it.id)) || it;
         const defOf = (id) => defs.find(d => d.id === id) || null;
         const home = (v.roster || []).filter(id =>

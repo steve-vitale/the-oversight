@@ -131,7 +131,8 @@ try {
 const LAUNCHPARTY_ON = process.env.LAUNCHPARTY === '1';
 const SENSEEXPED_ON = process.env.SENSEEXPED === '1';
 const BOWOPEN_ON = process.env.BOWOPEN === '1';
-const BOWCRAFT_ON = process.env.BOWCRAFT === '1';
+const BOWCRAFT_ON = true; // TURNED ON 2026-11-19 (1815Z adoption): the duty is
+// always on; the env flag is a no-op. Corpora self-describe the duty as on.
 // BOWCRAFT: sha of the file that carries the bow-craft fix +
 // whether the gate is in it, so each corpus file self-describes
 // the code it ran under. The flag itself is recorded per file below.
@@ -1634,8 +1635,7 @@ if (require.main === module) (async function () {
   // SENSEEXPED (landed successor) in place of LAUNCHPARTY (dead flag
   // on this master — appears nowhere in src/js).
   if (!BOWCRAFT_PRESENT) { console.error('BOWCRAFT STOP: the bow-craft fix (BOWCRAFT) must be present in src/js/villager-build.js.'); process.exit(2); }
-  if (MODE === 'ctl' && BOWCRAFT_ON) { console.error('BOWCRAFT STOP: MODE=ctl requires BOWCRAFT unset (control leg = the old duty).'); process.exit(2); }
-  if (MODE === 'arm' && !BOWCRAFT_ON) { console.error('BOWCRAFT STOP: MODE=arm requires BOWCRAFT=1 (the fix leg).'); process.exit(2); }
+  if (MODE === 'ctl') { console.error('BOWCRAFT STOP: the ctl leg is retired — the duty is always on since the 2026-11-19 turn-on; there is no control leg anymore.'); process.exit(2); }
   if (!SENSEEXPED_PRESENT) { console.error('BOWCRAFT STOP: the launch-preference sense (SENSEEXPED) must be present in src/js/party-wiring.js (substrate).'); process.exit(2); }
   if (!SENSEEXPED_ON) { console.error('BOWCRAFT STOP: SENSEEXPED=1 required (substrate).'); process.exit(2); }
   if (LAUNCHPARTY_ON) { console.error('BOWCRAFT STOP: LAUNCHPARTY must be unset (dead flag on this master; SENSEEXPED is its landed successor).'); process.exit(2); }

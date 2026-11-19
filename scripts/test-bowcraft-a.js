@@ -14,16 +14,17 @@
 //     into ranged and the spear moves to melee (the LANDED
 //     MELEE-FIRST FALLBACK in equipment.js autoEquip — verified here,
 //     NOT re-implemented);
-// (d) control leg byte-identical — BOWCRAFT unset: spear-armed
-//     villagers are skipped and no seeing-seeding happens (the old
-//     duty, exactly as bowsource measured it: 0 attempts).
+// (d) TURN-ON (2026-11-19, 1815Z adoption) — the env gate is gone:
+//     with BOWCRAFT UNSET the duty still fires (spear-armed villagers
+//     craft BOW rungs; seeing still seeds L1). There is no control leg
+//     anymore: the old duty is retired, not preserved.
 // The duty is called DIRECTLY on a staged village (the
 // proof-lootabilities-w3 pattern): Math.random is stubbed to 0.01
 // around each duty call so the L1 35% / L2 85% roll succeeds
 // deterministically, and restored right after. The driver is then
-// proven on a short LIVE smoke (1 seed, 5 days, competent policy,
-// BOWCRAFT=1) and the live corpus is fed through the analyzer; a
-// child process proves the BOWCRAFT-unset smoke (MODE=ctl) end to end.
+// proven on a short LIVE smoke (1 seed, 5 days, competent policy)
+// and the live corpus is fed through the analyzer; a child process
+// proves the env-UNSET smoke end to end (the duty fires with no flag).
 //
 // Usage: node scripts/test-bowcraft-a.js
 // Exit 0 = all checks pass. Exit 1 = a failure (listed).
@@ -34,7 +35,7 @@
 'use strict';
 process.env.DAYS = '5';
 process.env.SENSEEXPED = '1'; // sweep substrate (landed successor to LAUNCHPARTY; see prereg)
-process.env.BOWCRAFT = '1'; // the fix leg; direct-duty scenarios toggle this per case
+process.env.BOWCRAFT = '1'; // no-op since the 2026-11-19 turn-on (duty always on); direct-duty scenarios toggle this per case anyway
 const path = require('path');
 const fs = require('fs');
 const os = require('os');
@@ -75,7 +76,7 @@ function offSmoke(driverPath) {
 async function main() {
   // ---- 1. Static wiring ----
   const vb = fs.readFileSync(path.join(REPO, 'src', 'js', 'villager-build.js'), 'utf8');
-  check('BOWCRAFT gate reads process.env in villagerWeaponCraftDay', /BOWCRAFT === '1'/.test(vb));
+  check('BOWCRAFT is always on (turn-on 2026-11-19): no env gate in villagerWeaponCraftDay', !/process\.env\.BOWCRAFT/.test(vb) && /let bowcraftOn = true/.test(vb));
   check('BOW_RUNGS is bow + crude_bow only', /const BOW_RUNGS = \['bow', 'crude_bow'\]/.test(vb));
   check('seeing snapshot reads EQUIPPED gear only (same tile, visible)', /BOWCRAFT SEEING SNAPSHOT/.test(vb) && /Object\.values\(hp\.equipped/.test(vb));
   check('ranged-less read uses volleyWeaponOf (speargate rule)', /eq\.volleyWeaponOf && eq\.volleyWeaponOf\(p, defs\)/.test(vb));
@@ -291,9 +292,10 @@ async function main() {
   console.log('after: ranged=' + equippedId(learner, 'ranged') + ' tele=' + JSON.stringify(craftTeleFor(learner)));
   check('S8 bow-armed villager makes NO attempt', craftTeleFor(learner).length === 0, JSON.stringify(craftTeleFor(learner)));
 
-  // S9: CONTROL (BOWCRAFT unset) — the old duty, exactly as bowsource
-  // measured it: spear-armed skipped, no seeing-seeding.
-  console.log('\n=== S9: control leg (BOWCRAFT unset) — old behavior ===');
+  // S9: TURN-ON (env UNSET) — the duty fires with no flag: the old
+  // control leg is retired. Same setups as the old S9, opposite
+  // expectations: spear-armed crafts a bow; seeing seeds L1.
+  console.log('\n=== S9: turn-on (BOWCRAFT unset) — duty fires with no flag ===');
   setBowcraft(false);
   resetKnowledge();
   const lp9 = resetVillager(learner);
@@ -305,7 +307,7 @@ async function main() {
   teleEvents.length = 0;
   callDuty();
   console.log('after S9a: ranged=' + equippedId(learner, 'ranged') + ' tele=' + JSON.stringify(craftTeleFor(learner)));
-  check('S9a control: spear-armed villager is SKIPPED (no attempt)', craftTeleFor(learner).length === 0, JSON.stringify(craftTeleFor(learner)));
+  check('S9a turn-on: spear-armed villager CRAFTS a bow with the flag unset', craftTeleFor(learner).some(function (e) { return e.d.item === 'bow' && e.d.ok === true; }), JSON.stringify(craftTeleFor(learner)));
   const tp9 = resetVillager(teacher);
   tp9.items = ['bow'];
   if (EQ) EQ.autoEquip(tp9, G.data.items);
@@ -316,7 +318,7 @@ async function main() {
   teleEvents.length = 0;
   callDuty();
   console.log('after S9b: teacher ranged=' + equippedId(teacher, 'ranged') + ' learner knows=' + JSON.stringify(knowledgeOf(learner)));
-  check('S9b control: seeing seeds NOTHING when the flag is off', (knowledgeOf(learner).bow | 0) === 0, JSON.stringify(knowledgeOf(learner)));
+  check('S9b turn-on: seeing seeds L1 with the flag unset', (knowledgeOf(learner).bow | 0) === 1, JSON.stringify(knowledgeOf(learner)));
 
   // S10: weaponless villager keeps the FULL ladder (spear first).
   console.log('\n=== S10: weaponless ladder order unchanged (spear first) ===');
@@ -354,8 +356,8 @@ async function main() {
   console.log('after call 2 (same day): tele=' + JSON.stringify(craftTeleFor(learner)));
   check('S11 call 2 same day: NO second attempt (cooldown)', craftTeleFor(learner).length === 1, JSON.stringify(craftTeleFor(learner)));
 
-  // ---- 4. LIVE smoke: 1 seed, 5 days, competent policy, BOWCRAFT=1 ----
-  console.log('\n=== LIVE smoke (driver oneRun, BOWCRAFT=1) ===');
+  // ---- 4. LIVE smoke: 1 seed, 5 days, competent policy (flag now a no-op) ----
+  console.log('\n=== LIVE smoke (driver oneRun) ===');
   setBowcraft(true);
   const out = await drv.oneRun(107001);
   check('smoke ran 5 days', out.days === 5 && out.gameDays >= 5, 'days=' + out.days + ' gameDays=' + out.gameDays);
@@ -401,8 +403,10 @@ async function main() {
     try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (e) {}
   }
 
-  // ---- 6. Child-process off-smoke (BOWCRAFT unset, MODE=ctl) ----
-  console.log('\n=== Child off-smoke (BOWCRAFT unset) ===');
+  // ---- 6. Child-process unset-smoke (BOWCRAFT unset) ----
+  // The duty is always on now: with no flag the child still runs
+  // the fix leg end to end.
+  console.log('\n=== Child unset-smoke (BOWCRAFT unset — duty still on) ===');
   let off = null;
   try {
     const env = Object.assign({}, process.env);
@@ -418,12 +422,12 @@ async function main() {
     console.log('  (child off-smoke failed: ' + (e && e.message) + ')');
   }
   if (off && !off.error) {
-    console.log('  off-smoke result: ' + JSON.stringify(off));
-    check('off-smoke ran with BOWCRAFT off', off.bowcraftOn === false && off.bowcraftPresent === true, JSON.stringify(off));
-    check('off-smoke instrument errors are 0', off.errors === 0, JSON.stringify(off));
-    check('off-smoke census rows exist with the ranged-less counts', off.censusRows >= 3 && off.hasRangedlessCount === true, JSON.stringify(off));
+    console.log('  unset-smoke result: ' + JSON.stringify(off));
+    check('unset-smoke ran with BOWCRAFT on (duty always on, no flag needed)', off.bowcraftOn === true && off.bowcraftPresent === true, JSON.stringify(off));
+    check('unset-smoke instrument errors are 0', off.errors === 0, JSON.stringify(off));
+    check('unset-smoke census rows exist with the ranged-less counts', off.censusRows >= 3 && off.hasRangedlessCount === true, JSON.stringify(off));
   } else {
-    check('off-smoke child ran and reported', false, off ? JSON.stringify(off) : 'no output');
+    check('unset-smoke child ran and reported', false, off ? JSON.stringify(off) : 'no output');
   }
 
   console.log('BOWCRAFT_FAILS ' + failed + (fails.length ? ' ' + fails.join(',') : ''));
