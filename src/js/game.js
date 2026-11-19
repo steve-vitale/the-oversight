@@ -7831,6 +7831,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const defOf = (id) => defs.find(d => d.id === id) || null;
         const idOf = (e) => (typeof e === 'string') ? e : (e && (e.itemId || e.id));
         const isRanged = (id) => { const d = defOf(id); return !!(d && d.weapon && d.weapon.type === 'ranged'); };
+        // SPEARGATE (sim-speargate-a, finding #2590): a ranged-gated
+        // mechanism must check weapon.ammo, not the slot. A spear
+        // (melee, range 2, no ammo) sits in the ranged slot when its
+        // carrier holds no real ranged weapon — staging it as
+        // "already has a ranged weapon" blinds the gate: the volley
+        // can never fire from it. With SPEARGATE=1 a staged weapon
+        // must be volley-capable (its def carries weapon.ammo); off =
+        // the old type-based read, byte-identical. On current data
+        // the two coincide (all 8 type-'ranged' weapons carry ammo,
+        // no type-'melee' weapon does).
+        let speargateOn = false;
+        try { speargateOn = (typeof process !== 'undefined' && process.env && process.env.SPEARGATE === '1'); } catch (e) {}
+        const isVolley = (id) => { const d = defOf(id); return !!(d && d.weapon && d.weapon.ammo); };
+        const isStageable = speargateOn ? isVolley : isRanged;
         const bonusOf = (id) => { const d = defOf(id); return (d && d.weapon && d.weapon.bonus) || 0; };
         const record = (source, itemId) => {
           v.bowOpenByVid[vid] = { day: day, source: source, itemId: itemId || null };
@@ -7840,10 +7854,30 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         };
         // Already holds one? gearUp already ran autoEquip, but seat a
         // pack-carried ranged weapon if one sits unseated.
+        // SPEARGATE telemetry (either leg): the equipped ranged entry
+        // may be a spear — it reads as a ranged weapon from the slot
+        // but carries no ammo. spearSeen counts every such departure
+        // (pure observation); spearPassed counts the ones the gate
+        // passes over to the sources (SPEARGATE on only). The gate
+        // read itself uses volleyWeaponOf when on, rangedWeaponOf
+        // when off.
         let rw = null;
-        try { rw = S.equipment.rangedWeaponOf(person, defs) || null; } catch (e) {}
+        let slotRw = null;
+        try { slotRw = S.equipment.rangedWeaponOf(person, defs) || null; } catch (e) {}
+        if (slotRw) {
+          const slotDef = defOf(slotRw.itemId || slotRw.id);
+          if (!(slotDef && slotDef.weapon && slotDef.weapon.ammo)) {
+            bump('spearSeen');
+            if (speargateOn) bump('spearPassed');
+          }
+        }
+        try {
+          rw = (speargateOn && S.equipment.volleyWeaponOf)
+            ? S.equipment.volleyWeaponOf(person, defs)
+            : slotRw;
+        } catch (e) { rw = slotRw; }
         if (!rw) {
-          for (const e of (person.items || [])) { if (isRanged(idOf(e))) { rw = { itemId: idOf(e) }; break; } }
+          for (const e of (person.items || [])) { if (isStageable(idOf(e))) { rw = { itemId: idOf(e) }; break; } }
           if (rw) { try { S.equipment.autoEquip(person, defs); } catch (e) {} }
         }
         if (rw) { record('alreadyHad', rw.itemId || rw.id || null); return out; }
@@ -7853,7 +7887,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           let best = null, bestB = -1, bestIdx = -1;
           for (let i = 0; i < stash.length; i++) {
             const gid = idOf(stash[i]);
-            if (gid && isRanged(gid) && bonusOf(gid) > bestB) { bestB = bonusOf(gid); best = gid; bestIdx = i; }
+            if (gid && isStageable(gid) && bonusOf(gid) > bestB) { bestB = bonusOf(gid); best = gid; bestIdx = i; }
           }
           if (best) {
             stash.splice(bestIdx, 1);
@@ -7871,7 +7905,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           let best = null, bestB = -1, bestIdx = -1;
           for (let i = 0; i < pile.length; i++) {
             const gid = pile[i].itemId || pile[i].id;
-            if ((pile[i].units ?? 1) > 0 && gid && isRanged(gid) && bonusOf(gid) > bestB) { bestB = bonusOf(gid); best = gid; bestIdx = i; }
+            if ((pile[i].units ?? 1) > 0 && gid && isStageable(gid) && bonusOf(gid) > bestB) { bestB = bonusOf(gid); best = gid; bestIdx = i; }
           }
           if (best) {
             const taken = pile[bestIdx];

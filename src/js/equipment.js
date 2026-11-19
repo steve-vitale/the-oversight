@@ -367,6 +367,27 @@
     const eq = (v && v.equipped) || {};
     return eq.ranged || null;
   }
+  // volleyWeaponOf: the equipped ranged-slot weapon, but ONLY when it
+  // can actually volley — its def carries weapon.ammo. A spear
+  // (melee type, range 2, no ammo) sits in the ranged slot when its
+  // carrier holds no real ranged weapon; rangedWeaponOf returns it,
+  // but no volley can ever fire from it. Ranged-gated mechanisms
+  // (launch staging, sim-speargate-a finding #2590) must read this,
+  // not the slot. Pure read; the SPEARGATE env gate lives in the
+  // caller (stageBow), not here. Requires itemDefs (no defs -> null,
+  // fail-closed). On current data every type-'ranged' weapon carries
+  // ammo and no type-'melee' weapon does, so this coincides with
+  // isRealRangedWeapon today — but the check is ammo, as the finding
+  // requires, so a future ammo-less ranged weapon or ammo-bearing
+  // melee weapon is classified by what it can fire.
+  function volleyWeaponOf(v, itemDefs) {
+    const eq = (v && v.equipped) || {};
+    const w = eq.ranged || null;
+    if (!w) return null;
+    const def = defOf(itemDefs, w.itemId || w.id);
+    if (!def || !def.weapon || !def.weapon.ammo) return null;
+    return w;
+  }
 
   // Set-vs-pieces comparison for the UI crossover moment.
   function compareSetVsPieces(v, itemDefs) {
@@ -575,7 +596,7 @@
     slotForItem, isAccessory, isRangedWeapon, isFallbackSpear, isRealRangedWeapon, carriesRealRanged, wornAvoidance, sealDamageSettlement, consumeDamageSettlement, damageSettlementHealth,
     weaponKind, armorTier, headKind,
     equipScore, coordinationBonus, armorOf, weaponBonusOf,
-    meleeWeaponOf, rangedWeaponOf,
+    meleeWeaponOf, rangedWeaponOf, volleyWeaponOf,
     compareSetVsPieces, autoEquip,
     threatLevel, threatLabel, gearDescription,
     migrateEquipment,
