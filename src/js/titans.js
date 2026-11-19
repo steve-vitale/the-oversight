@@ -1454,6 +1454,20 @@
     });
   }
 
+  // F2 (journey-deepening r243): the spoken refusal count and the hard
+  // gate must agree — both read the same blade count (unique living
+  // allies + committed Haven blades). The wrapper used to say
+  // muster.allies.length (raw allies only: duplicates and the dead
+  // counted, Haven excluded), so a village standing at 9 heard
+  // "you have 6". One helper, read by both, so they cannot drift again.
+  function titanMusterBladeCount(titanId) {
+    var muster = (titanState().musters || {})[titanId] || null;
+    var allies = 0, haven = 0;
+    try { allies = titanUniqueAllies(muster).length; } catch (e) {}
+    try { haven = new Set(titanHavenBlades(muster).map(function (h) { return h.vid; })).size; } catch (e) {}
+    return allies + haven;
+  }
+
   function titanMusterReady(titanId) {
     var st = titanState();
     var muster = st.musters[titanId];
@@ -1463,8 +1477,7 @@
     // HAVEN COUNTS (2026-10-13): committed Haven blades are allied blades —
     // the player's own commitment moves the hard gate. The coalition is
     // still mostly the many (cap 3 ours), never a solo with extra steps.
-    var alive = titanUniqueAllies(muster).length + new Set(titanHavenBlades(muster).map(function (h) { return h.vid; })).size;
-    return alive >= def.minAllies;
+    return titanMusterBladeCount(titanId) >= def.minAllies;
   }
 
   // ---------- combat integration ----------
@@ -1502,8 +1515,12 @@
         // HARD GATE: no solo titans. Not a likely death — a refusal.
         if (!gateAns && !titanMusterReady(titanId)) {
           var def = titanDefs()[titanId];
+          // F2 (journey-deepening r243): the spoken count is the GATE
+          // count — unique living allies + committed Haven blades. The
+          // old read (raw muster.allies.length) understated the muster
+          // whenever Haven stood with it (9 blades heard as 6).
           var have = 0;
-          try { have = (titanState().musters[titanId] || { allies: [] }).allies.length; } catch (e) {}
+          try { have = titanMusterBladeCount(titanId); } catch (e) {}
           // REFUSAL SPAM (journey-scale r233, r232-owed): the line is said
           // ONCE per titan per day — a scholar camped at a lair was
           // refused 10x in one day (103402) and heard the same line every
