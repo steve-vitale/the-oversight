@@ -213,12 +213,7 @@ function seedFiles(dir, seed, spec, arm) {
     // (the day join lives in the analyzer, not the fixture).
     fs.writeFileSync(path.join(dir, `${P}march-${seed}.json`), JSON.stringify({ seed, arm: arm.toUpperCase(), march: arm === 'b', rows: spec.march.rows || [], titanEnd: spec.march.titanEnd || { omens: {}, musters: {}, slain: {}, outcomes: spec.march.outcomes || [] } }));
   }
-  if (arm === 'b' && spec.r242raiseTalk) {
-    // r242 before-measurement fixture: the analyzer's ECHO section runs
-    // the same detector on r242's arm-B corpora in the same EVIDIR.
-    fs.writeFileSync(path.join(dir, `journey-scale-r242-b-raisetalk-${seed}-1.txt`),
-      `seed ${seed} talk 1 outcome ${spec.r242raiseTalk.outcome || 'accepted'}\n` + spec.r242raiseTalk.lines.join('\n') + '\n');
-  }
+
   if (spec.deathcensus) {
     // Death-census fixture: only .deaths is read by the analyzer's
     // committed-blades join (vid + day + cause).
@@ -291,6 +286,16 @@ function buildCorpus(mut) {
   // missing guard corpus on either arm, so a one-arm fixture would fail
   // every case. Optional corpora may differ per arm via spec.armB.
   for (const seed of SEEDS) { seedFiles(dir, seed, specs[seed], 'a'); seedFiles(dir, seed, specs[seed], 'b'); }
+  // r242 before-measurement fixtures live under r242's own seeds
+  // (103841-103848) — the analyzer's before-detector globs those.
+  const R242_SEEDS = [103841, 103842, 103843, 103844, 103845, 103846, 103847, 103848];
+  for (const seed of R242_SEEDS) {
+    const sp = specs[seed];
+    if (sp && sp.r242raiseTalk) {
+      fs.writeFileSync(path.join(dir, `journey-scale-r242-b-raisetalk-${seed}-1.txt`),
+        `seed ${seed} talk 1 outcome ${sp.r242raiseTalk.outcome || 'accepted'}\n` + sp.r242raiseTalk.lines.join('\n') + '\n');
+    }
+  }
   return dir;
 }
 function runAnalyzer(dir) {
@@ -890,11 +895,11 @@ function runAnalyzer(dir) {
 // -> the before-line reads 1 echo / 1 accepted; the r243 side stays GO.
 {
   const dir = buildCorpus((sp) => {
-    sp[103851].r242raiseTalk = { outcome: 'accepted', lines: [
+    sp[103841] = { r242raiseTalk: { outcome: 'accepted', lines: [
       `THEM: "I've heard good things about Stonebridge. We should link with them — we'd be stronger together."`,
       `YOU: "All right. Let's ask them."`,
       `THEM: "All right — let's ask them." You carry the proposal to Stonebridge.`,
-    ] };
+    ] } };
   });
   const r = runAnalyzer(dir);
   ok('(55) before-measurement exit 0', r.code === 0, 'code=' + r.code);

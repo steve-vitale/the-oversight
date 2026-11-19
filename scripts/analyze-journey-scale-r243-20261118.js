@@ -893,9 +893,13 @@ console.log('\n=== journey-scale r243 — Q1 THE BLANK: RAISE-ACCEPT ECHO (the f
 // lands only on a Q1 GO the coordinator reads off this line.
 function echoNorm(str) { return String(str || '').toLowerCase().replace(/[^a-z0-9]/g, ''); }
 function echoQuoted(line) { const m = String(line || '').match(/"([^"]*)"/); return m ? m[1] : ''; }
-function countEchoes(prefix) {
+// r242's band ran on its own seeds (103841-103848); the before-
+// measurement must glob THOSE, not this run's 103851-103858 — the
+// first r243 run read 0 r242 files and printed a 0/0 before-line.
+const R242_SEEDS = [103841, 103842, 103843, 103844, 103845, 103846, 103847, 103848];
+function countEchoes(prefix, seeds) {
   let accepted = 0, echoes = 0, echoFiles = [], talks = 0;
-  for (const seed of SEEDS) {
+  for (const seed of (seeds || SEEDS)) {
     let files = [];
     try { files = fs.readdirSync(EVIDIR).filter(f => f.startsWith(prefix + `-${seed}-`) && f.endsWith('.txt')).sort(); } catch (e) { files = []; }
     for (const f of files) {
@@ -920,7 +924,7 @@ function countEchoes(prefix) {
   return { accepted, echoes, echoFiles, talks };
 }
 const echoNow = countEchoes('journey-scale-r243-b-raisetalk');
-const echoBefore = countEchoes('journey-scale-r242-b-raisetalk');
+const echoBefore = countEchoes('journey-scale-r242-b-raisetalk', R242_SEEDS);
 console.log(`ECHO before (r242 arm B, same detector): ${echoBefore.echoes} echoes / ${echoBefore.accepted} accepted talks (${echoBefore.talks} raisetalk files)`);
 console.log(`ECHO now (r243 arm B): ${echoNow.echoes} echoes / ${echoNow.accepted} accepted talks (${echoNow.talks} raisetalk files)`);
 for (const d of echoNow.echoFiles) console.log('  ECHO: ' + d);
