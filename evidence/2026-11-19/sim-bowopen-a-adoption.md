@@ -148,6 +148,9 @@ partyfunnel-a (its branch tip is `efbf674d1` instruments +
   first half (check.js pid 8358, started 08:22Z) — the box runs
   two gates at once more often than the discipline allows; worth
   a coordinator-side serialization note, not a code change.
-- Index clobber did NOT strike in this adoption (cherry-picks +
-  one safe-commit; `git status` clean after every step).
+- Index clobber DID strike on the adoption-note safe-commit
+  (files showed staged-deleted + untracked right after commit
+  d3c605e1f); repaired via the `ls-tree -r HEAD` pipe, blobs
+  verified vs HEAD by hash-object. The commit itself was always
+  correct.
 - No bump, push, or live verification — ship loop owns that.
