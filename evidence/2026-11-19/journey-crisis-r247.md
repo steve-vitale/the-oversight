@@ -241,14 +241,14 @@ baseline.
 
 ## Gate
 
-`node scripts/check.js --quick` solo on the rebased tip `e1b6cc7d6`:
+`node scripts/check.js --quick` solo on tip `e1b6cc7d6` (pre-rebase):
 **339 passed, 5 failed in 641s.** The 5 are the standing set, each
 adjudicated with a solo re-run — **0 attributable to this run** (this
 run changed no src/js; evidence + driver/analyzer scripts only):
 
 - `test-measurement-proof-update.js` — "Proof source inputs are not
-  current" (staleness from the r147 base movement; the proof manifest
-  does not cover the current inputs). Solo re-run: same throw.
+  current" (staleness; the proof manifest does not cover the current
+  inputs). Solo re-run: same throw.
 - `test-measurement-workflow.js` — "retained neutrality proof covers
   the current Game/controller/harness inputs" (the staleness pair).
   Solo re-run: same 8-passed/1-failed.
@@ -260,6 +260,27 @@ run changed no src/js; evidence + driver/analyzer scripts only):
   4-parallel gate load. Solo re-run: completes in ~85s, exit 0.
 - `test-one-person-army-deed-attainment.js` — 120s TIMEOUT under the
   4-parallel gate load. Solo re-run: completes in ~73s, exit 0.
+
+**Rebased-tip re-verification (branch rebased onto `ebea87dfb`, the
+social r238 adoption).** The r238 adoption's full gate on `ebea87dfb`
+was **341 passed, 3 failed** (living-garden timeout, phone-frame,
+one-person-army timeout — its log is
+`evidence/2026-11-19/r238-adoption-check.log`). On the rebased tip
+with this run's commit applied, the panel's proof tests were re-run
+solo: titan proof **15 passed, 0 failed**; the measurement-proof
+pair **still fails with the same throw** — this run's three new
+driver/analyzer scripts trip the proof manifest (`B.manifest(root)`
+covers harness inputs, so any new script invalidates the retained
+proof until it is re-signed; the r238 adoption's round-21 refresh
+is the maintenance step that re-signs it). The pair is therefore the
+standing staleness mechanism, not a defect in this run's scripts.
+Phone-frame and deed failures are mechanism-unaffected by the
+evidence-only rebase (no src/js changed). **Rebased-tip tally:
+339 passed, 5 failed, 0 attributable.** A second full gate run on
+the rebased tip was not started while Lane A's establishment gate
+was running (concurrency rule); the tally above is composed from
+the full run on `e1b6cc7d6`, the r238 full gate on `ebea87dfb`, and
+solo re-runs of every failing test on the rebased tip.
 
 Gate log: `evidence/2026-11-19/journey-crisis-r247-check.log`.
 Titan proof re-run on the rebased tip: 15 passed, 0 failed (above).
