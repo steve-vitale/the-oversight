@@ -1,0 +1,178 @@
+{
+  "verdict": "DIAG-NO-GO",
+  "bars": [
+    {
+      "id": "pool-departures",
+      "pass": false,
+      "detail": "ammo-bearing-archer departures 31 (floor 50); all ranged-holder departures 129, spear 98"
+    },
+    {
+      "id": "decisive-answer",
+      "pass": true,
+      "detail": "zero-ammo 1/31 (rate 0.032); dominant reason craft-failed 100% (bar >=50% or rate <=0.10); reasons {\"craft-failed\":1}"
+    },
+    {
+      "id": "encounter-read",
+      "pass": false,
+      "detail": "pair-inclusive engaged meetings with an ammo-bearing fighter 0 (armed 0, zero-ammo 0, floor 8); matched seeds (both kinds) 0"
+    },
+    {
+      "id": "instrument-craft-seen",
+      "pass": true,
+      "detail": "departure craft attempts 3 (ok 1), home-duty attempts 92 (ok 44), tele ammo_craft 95 — cross-check, not a verdict bar"
+    }
+  ],
+  "diag": {
+    "dir": "evidence/2026-11-19/perseed-arrowsupply-a-diag",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "bowopenOn": {
+      "false": 8
+    },
+    "senseexpedOn": {
+      "true": 8
+    },
+    "departs": 129,
+    "archerDeparts": 31,
+    "spearDeparts": 98,
+    "zeroAmmo": 1,
+    "zeroAmmoRate": 0.03225806451612903,
+    "byWeapon": {
+      "crude_bow": {
+        "n": 4,
+        "zero": 1
+      },
+      "crossbow": {
+        "n": 1,
+        "zero": 0
+      },
+      "sling": {
+        "n": 16,
+        "zero": 0
+      },
+      "phase_sling": {
+        "n": 6,
+        "zero": 0
+      },
+      "bow": {
+        "n": 4,
+        "zero": 0
+      }
+    },
+    "byOutcome": {
+      "spear-no-ammo": 98,
+      "already-full": 15,
+      "craft-ok": 1,
+      "pile-stone": 13,
+      "already-had": 1,
+      "craft-failed": 1
+    },
+    "byReason": {
+      "craft-failed": 1
+    },
+    "bySite": {
+      "expedition": {
+        "n": 31,
+        "zero": 1
+      }
+    },
+    "planWave4Departs": 0,
+    "planWave4Zero": 0,
+    "pocketed": 55,
+    "craftedAttempts": 3,
+    "craftedOk": 1,
+    "homeRows": 1232,
+    "homeAttempts": 92,
+    "homeSuccess": 44,
+    "homeReasons": {
+      "no-materials": 24,
+      "craft-failed": 48,
+      "not-attempted-unknown": 3,
+      "cooldown": 86,
+      "away": 310,
+      "already-stocked": 717
+    },
+    "lootAmmo": 0,
+    "lootRanged": 1,
+    "lootByDrop": {
+      "phase_sling": 1
+    },
+    "playerCraft": 0,
+    "playerCraftOk": 0,
+    "teleAmmoCraft": 95,
+    "baselineArchers": 11,
+    "baselineZero": 11,
+    "baselineZeroShare": 1,
+    "censusRows": 9794,
+    "censusArchers": 2515,
+    "censusZero": 1372,
+    "censusZeroShare": 0.5455268389662028,
+    "censusMeanAmmo": 2.8083499005964216,
+    "censusByBucket": {
+      "d0-30": {
+        "archers": 590,
+        "zero": 412,
+        "ammoSum": 941,
+        "zeroShare": 0.6983050847457627,
+        "meanAmmo": 1.5949152542372882
+      },
+      "d31-60": {
+        "archers": 621,
+        "zero": 280,
+        "ammoSum": 2092,
+        "zeroShare": 0.45088566827697263,
+        "meanAmmo": 3.368760064412238
+      },
+      "d61-100": {
+        "archers": 705,
+        "zero": 340,
+        "ammoSum": 2349,
+        "zeroShare": 0.48226950354609927,
+        "meanAmmo": 3.331914893617021
+      },
+      "d101+": {
+        "archers": 599,
+        "zero": 340,
+        "ammoSum": 1681,
+        "zeroShare": 0.5676126878130217,
+        "meanAmmo": 2.8063439065108513
+      }
+    },
+    "pileMeans": {
+      "stick": 94.6973293768546,
+      "stone": 306.73887240356083,
+      "fiber": 22.37784371909001,
+      "vine": 1.2858555885262117,
+      "wood": 20.23837784371909,
+      "branch": 38.560830860534125
+    },
+    "medianDays": 143.5,
+    "communityLost": 4,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 2,
+    "scaleRanks": {
+      "regional": 8
+    },
+    "starvation": 3,
+    "starvationVillager": 2,
+    "encMeetings": 9,
+    "encArmed": 0,
+    "encZero": 0,
+    "encArmedDmgPerRound": null,
+    "encZeroDmgPerRound": null,
+    "encArmedMDealt": null,
+    "encZeroMDealt": null,
+    "encArmedRounds": null,
+    "encZeroRounds": null,
+    "encArmedOutcomes": {},
+    "encZeroOutcomes": {},
+    "encArmedVolleyDmg": null,
+    "encZeroVolleyDmg": null,
+    "encZeroVolleyLost": 0,
+    "encMatchedSeeds": 0
+  },
+  "encDetail": []
+}
