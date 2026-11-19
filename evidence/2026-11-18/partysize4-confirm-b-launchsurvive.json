@@ -1,0 +1,100 @@
+=== launchsurvive-a control leg ===
+seeds: 16  files: 16  instancesOpened: 56  coverage: 1  errors: 0  trackerRows: 1425  trackerGaps: 0
+launches: 9  byClass: {"traveled-and-found":2,"still-open":2,"died-en-route":4,"stayed-home-died":0,"died-at-home-other":1,"traveled-not-found":0}  meetingsShare: 0.2222 (2/9)  persistenceYes: 6/9
+guard: expeditionDeaths=391 totalDeaths=1397 (87.3/run)  starvation=6  medianSurvival=150
+linger: holderDiedInstances=34 lingeringPlans=0 (0)  medianTailDays=0
+wall: {"nationalByStanding":7,"nationalByRank":0,"table":0,"wins":0,"wave4":16,"wave5":7}
+  launch seed 104732: emma_larsen -> eulogy comp maya_singh d75-84 cls=traveled-and-found meetings=1 persistence=no (0d, minDist null)
+  launch seed 104733: stan_kowalski -> strike comp katarina_novak d85-149 cls=died-at-home-other meetings=0 persistence=yes (11d, minDist 0) died d149 (monster, haven)
+  launch seed 104733: oliver_moore -> strike comp katarina_novak d113-151 cls=died-en-route meetings=0 persistence=yes (4d, minDist 0) died d151 (the wild, away)
+  launch seed 104733: app_mgpspjlh231 -> spoiler comp katarina_novak d126-open cls=traveled-and-found meetings=1 persistence=no (0d, minDist null)
+  launch seed 104733: elif_demir -> spoiler comp katarina_novak d122-open cls=still-open meetings=0 persistence=yes (4d, minDist 0)
+  launch seed 104742: nikos_papadopoulos -> algorithm comp mateo_alvarez d76-116 cls=died-en-route meetings=0 persistence=no (0d, minDist null) died d116 (monster, away)
+  launch seed 104742: ines_duarte -> congregation comp emma_larsen d97-106 cls=died-en-route meetings=0 persistence=yes (3d, minDist 2) died d106 (a wound that wouldn't close, away)
+  launch seed 104743: app_mgpspi5i94 -> eulogy comp wanjiru_kamau d75-open cls=still-open meetings=0 persistence=yes (9d, minDist 1)
+  launch seed 104744: tariq_mahmood -> reunion comp jorge_silva d87-89 cls=died-en-route meetings=0 persistence=yes (1d, minDist 2) died d89 (Gavel, away)
+=== launchsurvive-a on leg ===
+seeds: 16  files: 16  instancesOpened: 36  coverage: 1  errors: 0  trackerRows: 891  trackerGaps: 0
+launches: 5  byClass: {"traveled-and-found":1,"still-open":1,"died-en-route":3,"stayed-home-died":0,"died-at-home-other":0,"traveled-not-found":0}  meetingsShare: 0.2 (1/5)  persistenceYes: 4/5
+guard: expeditionDeaths=374 totalDeaths=1352 (84.5/run)  starvation=5  medianSurvival=148
+linger: holderDiedInstances=23 lingeringPlans=0 (0)  medianTailDays=0
+wall: {"nationalByStanding":5,"nationalByRank":0,"table":0,"wins":0,"wave4":16,"wave5":5}
+  launch seed 104732: emma_larsen -> eulogy comp maya_singh d75-84 cls=traveled-and-found meetings=1 persistence=no (0d, minDist null)
+  launch seed 104733: stan_kowalski -> strike comp katarina_novak d85-128 cls=died-en-route meetings=0 persistence=yes (15d, minDist 1) died d128 (contest, away)
+  launch seed 104742: nikos_papadopoulos -> algorithm comp mateo_alvarez d76-open cls=still-open meetings=0 persistence=yes (9d, minDist 1)
+  launch seed 104742: app_mgpspjyn38 -> eater comp mateo_alvarez d85-86 cls=died-en-route meetings=0 persistence=yes (2d, minDist 1) died d86 (starvation, away)
+  launch seed 104743: app_mgpspi5i94 -> eulogy comp wanjiru_kamau d75-82 cls=died-en-route meetings=0 persistence=yes (8d, minDist 0) died d82 (a wound that wouldn't close, away)
+=== D3 drift smoke (first divergence day vs first world-tick seed day) ===
+seed 104730: divergence day null  first world-tick seed (control/on) 33/33  divergesBeforeFirstSeed: null
+seed 104731: divergence day null  first world-tick seed (control/on) 34/34  divergesBeforeFirstSeed: null
+seed 104732: divergence day null  first world-tick seed (control/on) 34/34  divergesBeforeFirstSeed: null
+seed 104733: divergence day 85  first world-tick seed (control/on) 33/33  divergesBeforeFirstSeed: false
+seed 104734: divergence day null  first world-tick seed (control/on) 29/29  divergesBeforeFirstSeed: null
+seed 104735: divergence day null  first world-tick seed (control/on) 28/28  divergesBeforeFirstSeed: null
+seed 104736: divergence day null  first world-tick seed (control/on) 34/34  divergesBeforeFirstSeed: null
+seed 104737: divergence day null  first world-tick seed (control/on) null/null  divergesBeforeFirstSeed: null
+seed 104738: divergence day null  first world-tick seed (control/on) 95/95  divergesBeforeFirstSeed: null
+seed 104739: divergence day null  first world-tick seed (control/on) 27/27  divergesBeforeFirstSeed: null
+seed 104740: divergence day null  first world-tick seed (control/on) 37/37  divergesBeforeFirstSeed: null
+seed 104741: divergence day null  first world-tick seed (control/on) 39/39  divergesBeforeFirstSeed: null
+seed 104742: divergence day 76  first world-tick seed (control/on) 36/36  divergesBeforeFirstSeed: false
+seed 104743: divergence day 75  first world-tick seed (control/on) 28/28  divergesBeforeFirstSeed: false
+seed 104744: divergence day 76  first world-tick seed (control/on) 54/54  divergesBeforeFirstSeed: false
+seed 104745: divergence day null  first world-tick seed (control/on) 32/32  divergesBeforeFirstSeed: null
+judgment: {
+  "instrument": {
+    "controlErrors": 0,
+    "onErrors": 0,
+    "controlFiles": 16,
+    "onFiles": 16,
+    "controlParseErrors": [],
+    "onParseErrors": [],
+    "controlCoverage": 1,
+    "onCoverage": 1,
+    "controlTrackerGaps": 0,
+    "onTrackerGaps": 0,
+    "controlTrackerRows": 1425,
+    "onTrackerRows": 891,
+    "controlInstances": 56,
+    "onInstances": 36,
+    "pass": false
+  },
+  "power": {
+    "value": 5,
+    "bar": ">= 3 launches on the 8-seed on-leg",
+    "pass": true
+  },
+  "classification": {
+    "unclassified": 0,
+    "noPersistence": 0,
+    "byClass": {
+      "traveled-and-found": 1,
+      "still-open": 1,
+      "died-en-route": 3,
+      "stayed-home-died": 0,
+      "died-at-home-other": 0,
+      "traveled-not-found": 0
+    },
+    "bar": "every launch in exactly one of the six classes, persistence measured per launch",
+    "pass": true
+  },
+  "proof": {
+    "value": null,
+    "bar": "test-launchsurvive-a.js green on the tip AND post-revert",
+    "pass": null
+  },
+  "determinism": {
+    "value": "D3 clean (D1/D2 in proof test)",
+    "bar": "D1/D2 green + D3 smoke clean",
+    "pass": true
+  },
+  "meetingsShare": {
+    "value": 0.2,
+    "withMeeting": 1,
+    "launches": 5,
+    "bar": "primary metric (reported; seedland 0/3)",
+    "pass": null
+  },
+  "verdict": "NO-GO"
+}
+analysis: evidence/2026-11-16/launchsurvive-a-analysis.json
