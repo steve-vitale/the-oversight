@@ -5042,7 +5042,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
         const tmdef = (this.data.monsters || []).find(m => m.id === teachable) || {};
         const tctr = tmdef.counter || {};
-        this.say(`${first} leans in, voice low. "Here's what we figured out about ${this.monsterDisplayName(teachable)}. ${tctr.trick || 'There is a trick'}. ${tctr.reveal || ''}"`);
+        this.say(`${first} leans in, voice low. "Here's what we figured out about ${this.monsterCounterLabel(teachable)}. ${tctr.trick || 'There is a trick'}. ${tctr.reveal || ''}"`);
         this.discoverMonsterCounter(teachable, 'taught');
         this.socialTick(vid);
         return { ok: true, taught: teachable };
@@ -23311,6 +23311,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       }
       return n;
     },
+    // monsterCounterLabel(mid): the name slot for counter-learned lines.
+    // Counter lines name the beast the trick applies to ("COUNTER
+    // LEARNED — X: ...", "Here's what we figured out about X.").
+    // monsterDisplayName returns the RAW unknown descriptor for unnamed
+    // monsters, which for living_wire is a prose clause ("the creek went
+    // still, and your arm-hairs stood up") — a sentence fragment where a
+    // name belongs (journey-endgame r246, C-wide 89817 d6, Chloe). The
+    // guarded monsterNoun already falls back to 'something' for exactly
+    // this class (journey-crisis r192, plus the long-prose rule — 8 defs
+    // in current content); when it does, use that here too and keep the
+    // display name everywhere else, so only clause / long-prose
+    // descriptors change.
+    monsterCounterLabel(mid) {
+      try {
+        if (this.monsterNoun && this.monsterNoun(mid) === 'something') return 'something';
+      } catch (e) {}
+      return this.monsterDisplayName(mid);
+    },
     // articlePhrase(noun, cap): sentence-safe article composition for a
     // monsterNoun or monsterDisplayName value. (playtest deepening r18
     // 2026-10-18, backlog #542 from landing r22: "the The Loud Beast flesh".)
@@ -36376,7 +36394,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           : via === 'node-witnessed' ? 'The village pieced it together from a death someone lived to report.'
           : via === 'observed' ? 'Two survived encounters — the fire has a theory.'
           : '';
-        this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${c.trick}. ${c.reveal}${viaLine ? ` (${viaLine})` : ''}`);
+        this.say(`💡 COUNTER LEARNED — ${this.monsterCounterLabel(mid)}: ${c.trick}. ${c.reveal}${viaLine ? ` (${viaLine})` : ''}`);
         try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${c.trick} — ${c.reveal}`); } catch (e) {}
         return true;
       } catch (e) { return false; }
@@ -36592,10 +36610,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { this.tele('counter_discovered', { id: mid, via: firstPerson ? 'scholar-observed' : 'observed' }); } catch (e) {}
         const t = defs[mid] || {};
         if (firstPerson) {
-          this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (You lived to tell it, twice — and now you see the pattern.)`);
+          this.say(`💡 COUNTER LEARNED — ${this.monsterCounterLabel(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (You lived to tell it, twice — and now you see the pattern.)`);
         } else {
           const vName = this.firstRef ? this.firstRef(vid) : 'Someone';
-          this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${vName} lived to tell it, twice — the village pieced it together.)`);
+          this.say(`💡 COUNTER LEARNED — ${this.monsterCounterLabel(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${vName} lived to tell it, twice — the village pieced it together.)`);
         }
         try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${t.trick} — ${t.reveal}`); } catch (e) {}
         return true;
@@ -36666,7 +36684,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         vt[mid] = true;
         try { this.tele('counter_discovered', { id: mid, via: 'node-witnessed' }); } catch (e) {}
         const t = defs[mid] || {};
-        this.say(`💡 COUNTER LEARNED — ${this.monsterDisplayName(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${wName} watched it take ${vName} — the village pieced it together from the death.)`);
+        this.say(`💡 COUNTER LEARNED — ${this.monsterCounterLabel(mid)}: ${t.trick || 'there is a trick'}. ${t.reveal || ''} (${wName} watched it take ${vName} — the village pieced it together from the death.)`);
         try { if (this.journalNote) this.journalNote('monsters', mid, `Counter: ${t.trick} — ${t.reveal}`); } catch (e) {}
         return true;
       } catch (e) { return false; }
