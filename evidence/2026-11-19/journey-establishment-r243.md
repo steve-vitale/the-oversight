@@ -117,8 +117,8 @@ Five villages, 60 people at the start, 47 alive at day 40 (9/10/8/9/11 of 12). T
 
 ## Closeout
 
-- Evidence + run note committed [COMMIT — to fill].
-- Rebase onto current master if it moved, proof tests re-run [to fill].
+- Evidence + run note committed `cb2b059ac` (panel evidence + note) and `708adbe8e` (gate log + gate section). Safe-commit index clobber struck on every commit this run (six times total, incl. the r147 adoption); repaired each time with `git ls-tree -r HEAD -- <paths> | git update-index --add --index-info` and verified (status empty, diff empty, hash-object == HEAD blob).
+- Master moved during the run (Lane B journey-crisis r247 adoption, `9ad111089`); rebased onto it clean, exit 0, tip `0b9eba2f6`. Rebase range touches no game code (evidence + new crisis scripts + `scripts/balance-proof.json` re-sign only), so the gate result carries over. Proof tests re-run on the rebased tip: r147 maps-pools ALL GREEN; r243 analyzer re-run reproduces every panel number exactly.
 - Merge `--ff-only` [to fill], worktree released, branch deleted, reap [to fill].
 - Rotation 1→2 with read-back [to fill].
 - Lock deleted last after run_id verification [to fill].
