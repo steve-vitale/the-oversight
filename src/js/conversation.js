@@ -8496,6 +8496,18 @@
         const exits = cg.exits || {};
         const key = (mood === 'grieving' || mood === 'scared') ? mood : temp;
         let pool = exits[key] || exits.steady || ['"I should go."'];
+        // F8 (journey-deepening r244): the cautious "This stays between
+        // us, right? Right." exit implies a confidence was shared. It
+        // must never close a sitting where no secret was shared — the
+        // conversation state already carries the exact flag
+        // (c.secretShared, set only when the villager volunteers a
+        // secret as the opener, conversation.js:3793). Filter it out of
+        // the pool unless a secret was shared; never empty the pool.
+        const CONFIDE_LINE = '"This stays between us, right? Right."';
+        if (!c.secretShared && pool.length > 1) {
+          const filtered = pool.filter(l => l !== CONFIDE_LINE);
+          if (filtered.length) pool = filtered;
+        }
         // RELATIONSHIP AGE (Steve 2026-10-06): old friends don't make
         // speeches. Close tier sometimes gets short, warm shorthand —
         // "Later." lands harder than a paragraph when you've talked a
