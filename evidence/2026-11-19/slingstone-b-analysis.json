@@ -1,0 +1,156 @@
+{
+  "verdict": "DIAG-NO-GO",
+  "bars": [
+    {
+      "id": "completeness",
+      "pass": true,
+      "detail": "delta-attribution completeness 1.000 (bar >= 0.90); total drain D=49, residual drain 0, unexplained gains 0"
+    },
+    {
+      "id": "departure-pool",
+      "pass": true,
+      "detail": "stone-carrying sling/phase_sling departures 22 (floor 15); stones pocketed 55"
+    },
+    {
+      "id": "drain-pool",
+      "pass": false,
+      "detail": "census-intervals with a positive net stone drain 18 (floor 25); alive intervals 1140, deaths 3, switches 9, vanished 0"
+    },
+    {
+      "id": "split-quantified",
+      "pass": true,
+      "detail": "volley 0.959, craft 0.000, gear 0.000, death 0.041, residual 0.000; duty wraps live: {\"weaponCraft\":1065,\"ammoCraft\":1065,\"armorCraft\":1065,\"gearDay\":1065} — majority cause: volley 96%"
+    },
+    {
+      "id": "instrument-volley-xcheck",
+      "pass": true,
+      "detail": "volley rows where ammoLeft != ammoAtEntry - shots: 0 of 120 sling fights (cross-check, not a verdict bar)"
+    }
+  ],
+  "diag": {
+    "dir": "evidence/2026-11-19/perseed-slingstone-b-diag",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "bowopenOn": {
+      "false": 8
+    },
+    "senseexpedOn": {
+      "true": 8
+    },
+    "intervals": 1140,
+    "drainIntervals": 18,
+    "departuresStone": 22,
+    "pocketedStone": 55,
+    "volleyShots": 47,
+    "volleyFights": 120,
+    "volleyNull": 49,
+    "volleyXcheckBad": 0,
+    "craftTake": 0,
+    "craftTakeByDuty": {},
+    "gearTake": 0,
+    "deathCarried": 2,
+    "deathsN": 3,
+    "switchesN": 9,
+    "switchOut": 6,
+    "vanishedN": 0,
+    "vanishedStones": 0,
+    "residualDrain": 0,
+    "residualGain": 0,
+    "inflowTotal": 55,
+    "outflowRecorded": 47,
+    "drainTotal": 49,
+    "completeness": 1,
+    "split": {
+      "volley": 0.9591836734693877,
+      "craft": 0,
+      "gear": 0,
+      "death": 0.04081632653061224,
+      "residual": 0
+    },
+    "majorityCause": "volley",
+    "majorityShare": 0.9591836734693877,
+    "dutyCalls": {
+      "weaponCraft": 1065,
+      "ammoCraft": 1065,
+      "armorCraft": 1065,
+      "gearDay": 1065
+    },
+    "dutyTakesRows": 0,
+    "lootStoneRows": 0,
+    "deathRows": 3,
+    "epochlessRows": 0,
+    "censusSlingDays": 1158,
+    "censusSlingZero": 1057,
+    "censusSlingZeroShare": 0.9127806563039723,
+    "censusSlingMean": 0.44905008635578586,
+    "censusByWeapon": {
+      "sling": {
+        "days": 964,
+        "zero": 898,
+        "ammoSum": 340,
+        "zeroShare": 0.9315352697095436,
+        "meanAmmo": 0.35269709543568467
+      },
+      "phase_sling": {
+        "days": 194,
+        "zero": 159,
+        "ammoSum": 180,
+        "zeroShare": 0.8195876288659794,
+        "meanAmmo": 0.9278350515463918
+      }
+    },
+    "medianDays": 145,
+    "communityLost": 4,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 1,
+    "scaleRanks": {
+      "regional": 8
+    },
+    "starvation": 3,
+    "starvationVillager": 3,
+    "volleyByWave": {
+      "w1": {
+        "fights": 58,
+        "shots": 21,
+        "nulls": 29
+      },
+      "w2": {
+        "fights": 40,
+        "shots": 14,
+        "nulls": 14
+      },
+      "w3": {
+        "fights": 15,
+        "shots": 12,
+        "nulls": 4
+      },
+      "w4": {
+        "fights": 7,
+        "shots": 0,
+        "nulls": 2
+      }
+    },
+    "volleyByOrigin": {
+      "world-tick": {
+        "fights": 34,
+        "shots": 12
+      },
+      "other:_cxBlood": {
+        "fights": 16,
+        "shots": 0
+      },
+      "aid": {
+        "fights": 2,
+        "shots": 0
+      },
+      "expedition": {
+        "fights": 68,
+        "shots": 35
+      }
+    }
+  },
+  "residualDetail": []
+}
