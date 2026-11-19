@@ -1,0 +1,119 @@
+{
+ "verdict": "DIAG-NO-GO METRIC-BROKEN",
+ "kind": "diag-laterage",
+ "bars": [
+  {
+   "id": "pool-floor",
+   "pass": false,
+   "detail": "observable Rage fights 1 (floor 8; Rage fights in corpus 1 of 127 wave-4+ encounters)"
+  },
+  {
+   "id": "taxonomy-complete",
+   "pass": true,
+   "detail": "unclassified 0, anomalies 0"
+  },
+  {
+   "id": "dominant-cause-named",
+   "pass": true,
+   "detail": "dominant delay cause field_medicine (1 of 1 delay rounds)"
+  },
+  {
+   "id": "instrument-errors",
+   "pass": true,
+   "detail": "instrument errors 0"
+  }
+ ],
+ "corpus": {
+  "dir": "evidence/2026-11-19/perseed-laterage-b",
+  "n": 8,
+  "wall": {
+   "n": 8,
+   "national": 0,
+   "table": null,
+   "wins": 0,
+   "wave4": 7,
+   "wave5": 2,
+   "medianSurvival": 137,
+   "communityLoss": 5
+  }
+ },
+ "summary": {
+  "encounters": 127,
+  "rageFights": 1,
+  "observable": 1,
+  "unclassified": 0,
+  "anomalies": 0,
+  "anomalyRows": [],
+  "unclassifiedRows": [],
+  "fireRoundDist": {
+   "1": 1
+  },
+  "lateFire": 0,
+  "lateFireShare": 0,
+  "lateFire4": 0,
+  "lateFire4Share": 0,
+  "meanDelay": null,
+  "medianDelay": null,
+  "delayDist": {},
+  "neverLanded": 1,
+  "neverLandedShare": 1,
+  "meanDelayToEnd": 1,
+  "zeroDamage": 1,
+  "zeroDamageShare": 1,
+  "doubledLandedDist": {
+   "0": 1,
+   "1": 0,
+   "2": 0,
+   "3": 0
+  },
+  "causeCounts": {
+   "field_medicine": 1
+  },
+  "coarseCounts": {
+   "field_medicine": 1
+  },
+  "dominantCause": "field_medicine",
+  "dominantCauseN": 1,
+  "totalDelayRounds": 1,
+  "dmgPerRoundLate": null,
+  "dmgPerRoundR1": 0,
+  "foregoneEstimate": 0,
+  "foregoneRows": [],
+  "corpusMeanDoubled": null,
+  "rows": [
+   {
+    "seed": 106113,
+    "day": 76,
+    "vid": "diana_osei",
+    "mid": "eater",
+    "outcome": "vFlee",
+    "rounds": 2,
+    "mDealt": 0,
+    "rageFiredFlag": true,
+    "moraleHolds": 0,
+    "rageRound": 1,
+    "name": "Diana",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 0,
+    "doubledLanded": 0,
+    "doubledNotes": [],
+    "preStrikeDmgs": [],
+    "zeroDamage": true,
+    "dmgPerRound": 0,
+    "firstDoubledRound": null,
+    "firstDoubledDmg": null,
+    "delay": null,
+    "delayToEnd": 1,
+    "delayRounds": [
+     {
+      "round": 2,
+      "cause": "field_medicine",
+      "detail": "binds the wound — field medicine, +"
+     }
+    ],
+    "status": "classified"
+   }
+  ]
+ }
+}
