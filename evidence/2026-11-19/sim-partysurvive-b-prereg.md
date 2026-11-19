@@ -5,7 +5,7 @@
 (worktree `~/workspace/worktrees/sim-partysurvive-b`, already rebased
 onto master `e1f002065` by the coordinator).
 
-**CORRECTION 2 (2026-11-19 ~14:05 UTC, BEFORE any judged sim — no
+**CORRECTION 2 (2026-11-19 13:21 UTC, BEFORE any judged sim — no
 judged numbers exist yet):** the frozen substrate was NOT present on
 the prereg's base master `e1f002065`: the ALLYSLOT3 slot code was
 absent (the fightcap-b lever was held, never landed), so the
