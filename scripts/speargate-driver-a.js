@@ -127,26 +127,39 @@ function sleepMs(ms) {
     while (process.hrtime.bigint() - t0 < BigInt(ms) * 1000000n) {}
   }
 }
+// The host write flap (2026-11-19, this arm): file writes fail EPERM in
+// minutes-long windows while the process keeps running. A failed
+// process.stdout.write to a FILE raises an unhandled 'error' event on
+// the SyncWriteStream and kills the whole run (ctl leg, seeds 105906-7:
+// the @@FALLBACK dump itself threw EPERM and crashed node mid-leg).
+// Swallow stream errors so a refused log/fallback write can never kill
+// the sim — the per-seed corpus files are the source of truth and are
+// verified after the run, never the log.
+process.stdout.on('error', function () {});
+process.stderr.on('error', function () {});
 function writeRobust(filePath, data) {
   const tmp = filePath + '.tmp-' + process.pid;
-  for (let i = 0; i < 480; i++) {
+  for (let i = 0; i < 2400; i++) { // 2400 x 250ms = 10 min: ride out a flap window
     try {
       if (fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, data);
         const back = fs.readFileSync(filePath, 'utf8');
         if (back.length !== data.length) throw new Error('readback length mismatch');
-        return;
+        return true;
       }
       fs.writeFileSync(tmp, data);
       const back = fs.readFileSync(tmp, 'utf8');
       if (back.length !== data.length) throw new Error('readback length mismatch');
       fs.renameSync(tmp, filePath);
-      return;
+      return true;
     } catch (e) {
-      if (i === 479) { process.stdout.write('@@FALLBACK ' + filePath + '\n' + data + '\n'); return; }
       sleepMs(250);
     }
   }
+  // No stdout fallback dump: during a flap the dump itself throws EPERM
+  // on the log stream and kills the run (see header note). The sim is
+  // deterministic per seed — a lost seed is re-run after the flap clears.
+  return false;
 }
 
 function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; } catch (e) { return 0; } }
@@ -1290,10 +1303,15 @@ if (require.main === module) (async function () {
     const file = path.join(outDir, 'speargate-a-s' + seed + '-' + RUN + '-' + MODE + '.json');
     if (fs.existsSync(file)) { console.error('SPEARGATE STOP: refusing to overwrite ' + file); process.exit(3); }
   }
+  let lostSeeds = [];
   for (const seed of SEEDS) {
     const out = await oneRun(seed);
     const file = path.join(outDir, 'speargate-a-s' + seed + '-' + RUN + '-' + MODE + '.json');
-    writeRobust(file, JSON.stringify(out, null, 2) + '\n');
+    const saved = writeRobust(file, JSON.stringify(out, null, 2) + '\n');
+    if (!saved) {
+      lostSeeds.push(seed);
+      console.error('SPEARGATE STOP: could not write ' + path.relative(REPO, file) + ' after 10 min of retries (write flap?) — seed ' + seed + ' NOT saved; re-run this seed after the flap clears.');
+    }
     console.log(JSON.stringify({
       seed: out.seed, mode: out.mode, anchor: (out.anchorCommit || '').slice(0, 12),
       brainSha: out.brainSha, carryPresent: out.carryPresent,
@@ -1321,6 +1339,10 @@ if (require.main === module) (async function () {
       errors: out.instrumentErrors.length,
       file: path.relative(REPO, file),
     }));
+  }
+  if (lostSeeds.length) {
+    console.error('SPEARGATE STOP: ' + lostSeeds.length + ' seed(s) NOT saved (' + lostSeeds.join(',') + ') — re-run them after the flap clears. Exit 4.');
+    process.exitCode = 4;
   }
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 
