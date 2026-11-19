@@ -417,15 +417,17 @@ evades, the named line, the creek-bed gathering all read.
 
 ## 11. Blanks, limits, and things not done
 
-- **Rebase before judged sims (recorded, not hidden):** the
-  branch was registered at 7e0810eea (sim-winnability-round-1530
-  adoption closeout) and rebased onto local master 16975bb01
-  (sim-partysurvive-rerun-b, 4 commits, linear descendant,
-  clean, no picks) before any judged sim ran. Origin/master
-  (17bb496df, a batch-ship version bump) does NOT contain
-  16975bb01 — local master runs ahead of origin between ships,
-  as usual; the rebase target was local master, the branch the
-  coordinator merges into.
+- **Post-sim rebase before merge (recorded, not hidden):** after
+  the judged sims, local master moved again (68b1f6370
+  journey-social-life r239, evidence-only, + acbcb24af
+  sim-winnability-round-1830 adoption closeout) and the branch was
+  rebased onto acbcb24af before merging. The rebase replayed the
+  single arm commit cleanly (1/1, no picks); the arm's files are
+  byte-identical before and after (`git diff` of the arm paths
+  between the pre- and post-rebase commits is empty). No sim was
+  re-run: the corpora still record the base they ran on
+  (`anchorCommit` 16975bb01), and the numbers, verdict, and
+  instrument in this file are unchanged by the re-parenting.
 - **No 12–16 seed confirm** — gated off by the NO-GO (see §2).
 - **Trajectory drift vs slingstone-a (§4):** the base move
   changed three seeds' trajectories (107023 wave 5 → 4,
