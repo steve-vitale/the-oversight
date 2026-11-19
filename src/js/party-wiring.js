@@ -18,10 +18,27 @@
 //     fight engine takes the first two; with FIGHTALLY2=1 both can
 //     answer (second via a second shout), otherwise one answers per
 //     fight (fieldFights.js, sim-fightallycap-b, finding #2496).
+//   - launch_first: with SENSEEXPED=1 (sim-senseexped-b, finding
+//     #2583), the fighter's current expedition companions answer
+//     FIRST, in expedition-start order: the agencyState().exped
+//     entries sharing the fighter's target (tx, ty). The party that
+//     set out travels together even when the encounter instant finds
+//     them a leg apart — the fight gate counts them the same way
+//     (code: winPlanFightGate). Membership comes from the expedition
+//     itself, NOT from winPlan[vid].party, which a re-launch, a
+//     companion's early return, or a death can rewrite mid-hunt (the
+//     two DIAG arms: sim-sensecotravel-b + sim-sense-guard-diag-a).
+//     They bypass the trust floor: the companion picks enforced it
+//     at launch (trust >= 15), and the expedition itself is the
+//     commitment. Cap stays 2 — the engine takes the first two, so a
+//     trio arrives whole and a quad arrives as holder + 2 of 3; the
+//     4th seat needs a fieldFights 3rd-ally slot (separate arm, not
+//     here).
 //   - no_self_rescue: the fighter never answers their own call; the player
 //     is excluded (the player's own party system is separate).
 // consumes:
 //   - state.village.roster, state.village.trust
+//   - agencyState().exped (launch companions + same-target guard, SENSEEXPED=1)
 //   - npcNode(vid), vpOf(vid) (alive check)
 // ============ PARTY WIRING ============
 // Villagers fight together now — not because a lever told them to, but
@@ -37,7 +54,7 @@
   const OUTDOOR_TASKS = ['patrol', 'scout', 'hunt', 'forage'];
 
   // villagerFightAllies(vid): up to 2 villager ids who'd answer vid's shout,
-  // trust-ordered. Empty when truly alone.
+  // launch party first (SENSEEXPED=1), then trust-ordered. Empty when truly alone.
   Game.villagerFightAllies = function (vid) {
     const self = this;
     try {
@@ -69,6 +86,51 @@
         cands.push({ rid: rid, trust: t, crew: why === 'crew' });
       };
 
+      // 0. The launch party — SENSEEXPED (sim-senseexped-b, finding
+      // #2583): the party that set out together answers first, in
+      // expedition-start order (sinceDay, then sincePart). Membership
+      // comes from the fighter's CURRENT expedition companions — the
+      // agencyState().exped entries sharing the fighter's target —
+      // not from winPlan[vid].party, which a re-launch, a companion's
+      // early return, or a death can rewrite mid-hunt. Same-target is
+      // the guard. No trust floor here — the pick enforced it at
+      // launch, and the expedition is the commitment. No node check:
+      // they travel together even a leg apart at the meeting instant
+      // (the gate counts them the same way). Env-gated: off = the old
+      // sense, byte-identical (launch stays empty).
+      var launch = [];
+      var senseexpedOn = false;
+      try { senseexpedOn = (typeof process !== 'undefined' && process.env && process.env.SENSEEXPED === '1'); } catch (e) {}
+      if (senseexpedOn) try {
+        var a0 = self.agencyState ? self.agencyState() : null;
+        var myExped = (a0 && a0.exped) ? a0.exped[vid] : null;
+        if (myExped) {
+          var comp = [];
+          var exped = a0.exped;
+          for (var rid2 in exped) {
+            if (!Object.prototype.hasOwnProperty.call(exped, rid2)) continue;
+            var e2 = exped[rid2];
+            if (!e2 || rid2 === vid) continue;
+            if (e2.tx !== myExped.tx || e2.ty !== myExped.ty) continue;
+            comp.push({ rid: rid2, sinceDay: (e2.sinceDay | 0), sincePart: (e2.sincePart | 0) });
+          }
+          comp.sort(function (x, y) {
+            if (x.sinceDay !== y.sinceDay) return x.sinceDay - y.sinceDay;
+            if (x.sincePart !== y.sincePart) return x.sincePart - y.sincePart;
+            return (x.rid < y.rid) ? -1 : (x.rid > y.rid) ? 1 : 0;
+          });
+          for (var k = 0; k < comp.length; k++) {
+            var pid = comp[k].rid;
+            if (!pid || seen[pid]) continue;
+            if (pid === self.villagerId) continue; // player's own party system is separate
+            if (roster.indexOf(pid) === -1) continue;
+            if (!alive(pid)) continue;
+            seen[pid] = true;
+            launch.push(pid);
+          }
+        }
+      } catch (e) {}
+
       // 1. The outdoor crew — out there together. Live read of assignments
       // (the _outdoorCrew snapshot goes stale between phases; the depth
       // probe found it always empty when fights actually happen).
@@ -96,12 +158,16 @@
       }
 
       // Crew first (they're together), then earshot — each trust-ordered.
-      // A stranger doesn't sprint; the trusted do, in order.
+      // A stranger doesn't sprint; the trusted do, in order. The launch
+      // party heads the list (expedition-start order) ahead of both: the
+      // party that set out answers before whoever happens to be near.
       cands.sort((a, b) => {
         if (a.crew !== b.crew) return a.crew ? -1 : 1;
         return b.trust - a.trust;
       });
-      return cands.slice(0, 2).map((c) => c.rid);
+      var out = launch.slice(0, 2);
+      for (var i = 0; i < cands.length && out.length < 2; i++) out.push(cands[i].rid);
+      return out;
     } catch (e) { return []; }
   };
 })();
