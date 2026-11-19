@@ -517,6 +517,11 @@
       try { if ((this.state.village.sick || {})[vid]) return; } catch (e) {}
       var maxD = this.npcMaxDist(vid);
       if (maxD < 1) return;
+      // BOW (sim-bowopen-a, finding #2544): the launched party opens
+      // ranged — stage a bow for a bowless departing villager BEFORE
+      // pocketing ammo, so the staged bow gets its arrows. Env-gated
+      // BOWOPEN=1 inside villagerStageBow; off is a no-op.
+      try { if (this.villagerStageBow) this.villagerStageBow(vid); } catch (e) {}
       // AMMO (gap-ammo 2026-10-27): the expedition is really launching —
       // pocket stones / craft a batch from the pile before leaving.
       try { if (this.villagerPocketAmmo) this.villagerPocketAmmo(vid); } catch (e) {}

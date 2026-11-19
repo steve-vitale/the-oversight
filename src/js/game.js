@@ -7772,6 +7772,197 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       } catch (e) {}
     },
 
+    // VILLAGER STAGE BOW (sim-bowopen-a, 2026-11-19, finding #2544):
+    // the ranged-opening half of the winning launched-party shape
+    // (fightcap-a §5.3: Rage x2.5 + a bow opening ~50-60 damage + all
+    // three hitting every round, ~111 dmg/round). The volley engine
+    // (fieldFights.js) already fires when the fighter CARRIES a ranged
+    // weapon + matching ammo, and villagerPocketAmmo already pockets
+    // ammo for a bow-holder at departure — but a departing villager
+    // with NO ranged weapon at all never gets one: villagerGearUp
+    // takes the best weapon by bonus (usually melee), and the
+    // weapon-craft home duty only serves the weaponless. So the
+    // launched party's opening never happens. A departing villager
+    // now stages a bow first, in the same honest order as gear-up:
+    //   1. their OWN stashed ranged weapon (own property),
+    //   2. a deposited ranged weapon from the communal armory
+    //      (ledgered like gearUp's armory borrow),
+    //   3. ONE craft attempt per departure from the EXISTING bow /
+    //      crude_bow recipes (bow first, then crude_bow — the
+    //      villagerWeaponCraftDay ladder order), using the SHARED
+    //      v.weaponCraft knowledge record (no knowledge -> no attempt;
+    //      blind 35%, learned 85%; a blind success teaches — the
+    //      PRACTICE rule, exactly as craft() / villagerPocketAmmo).
+    //      Materials: own carried first, then the communal pile.
+    //      A failed craft spends the materials, same as the existing
+    //      departure ammo craft.
+    //   4. nothing available -> goes without, as today (noSource).
+    // Why a bow moves more than the volley: the field-fight strike
+    // formula folds the ranged bonus into every melee strike
+    // (wb = round((meleeBonus + rangedBonus)/2), fieldFights.js) —
+    // a bow (bonus 22) lifts each striker ~+11/strike on top of the
+    // ~25-35 opening volley. Env-gated BOWOPEN=1; off is byte-identical
+    // old behavior (no state writes at all). Called ONLY from
+    // departure sites (startExpedition) AFTER gear-up and AFTER the
+    // sit-out checks, BEFORE villagerPocketAmmo so the staged bow
+    // gets its arrows. Never mid-fight, never for the player.
+    // Telemetry: village.bowOpen counters + bowOpenByVid[vid] (last
+    // staging) — the driver reads them; the encounter row carries
+    // the volley itself (rec.volley), so carrier-fire detection
+    // comes from the fight engine, never from snapshots.
+    villagerStageBow(vid) {
+      const out = { staged: false, source: null, itemId: null, craftedOk: false };
+      try {
+        if (!vid || vid === this.villagerId) return out;
+        const person = this.getPerson ? this.getPerson(vid) : null;
+        if (!person || person.dead) return out;
+        const S = (typeof globalThis !== 'undefined' ? globalThis.Scattering : null) || {};
+        if (!S.equipment) return out;
+        let on = false;
+        try { on = (typeof process !== 'undefined' && process.env && process.env.BOWOPEN === '1'); } catch (e) {}
+        if (!on) return out;
+        const v = this.state.village || {};
+        const day = (this.state.scholar || {}).day || 0;
+        v.bowOpen = v.bowOpen || {};
+        v.bowOpenByVid = v.bowOpenByVid || {};
+        const bump = (k) => { v.bowOpen[k] = (v.bowOpen[k] || 0) + 1; };
+        const defs = this.data.items || [];
+        const recipes = this.data.recipes || [];
+        const defOf = (id) => defs.find(d => d.id === id) || null;
+        const idOf = (e) => (typeof e === 'string') ? e : (e && (e.itemId || e.id));
+        const isRanged = (id) => { const d = defOf(id); return !!(d && d.weapon && d.weapon.type === 'ranged'); };
+        const bonusOf = (id) => { const d = defOf(id); return (d && d.weapon && d.weapon.bonus) || 0; };
+        const record = (source, itemId) => {
+          v.bowOpenByVid[vid] = { day: day, source: source, itemId: itemId || null };
+          bump(source);
+          if (source !== 'alreadyHad' && source !== 'noSource') { out.staged = true; out.source = source; out.itemId = itemId || null; }
+          else { out.source = source; }
+        };
+        // Already holds one? gearUp already ran autoEquip, but seat a
+        // pack-carried ranged weapon if one sits unseated.
+        let rw = null;
+        try { rw = S.equipment.rangedWeaponOf(person, defs) || null; } catch (e) {}
+        if (!rw) {
+          for (const e of (person.items || [])) { if (isRanged(idOf(e))) { rw = { itemId: idOf(e) }; break; } }
+          if (rw) { try { S.equipment.autoEquip(person, defs); } catch (e) {} }
+        }
+        if (rw) { record('alreadyHad', rw.itemId || rw.id || null); return out; }
+        // 1. Own stashed ranged weapon — best bonus, own property.
+        try {
+          const stash = person.stashed || [];
+          let best = null, bestB = -1, bestIdx = -1;
+          for (let i = 0; i < stash.length; i++) {
+            const gid = idOf(stash[i]);
+            if (gid && isRanged(gid) && bonusOf(gid) > bestB) { bestB = bonusOf(gid); best = gid; bestIdx = i; }
+          }
+          if (best) {
+            stash.splice(bestIdx, 1);
+            person.items = person.items || [];
+            person.items.push(best);
+            S.equipment.autoEquip(person, defs);
+            record('fromStash', best);
+            return out;
+          }
+        } catch (e) {}
+        // 2. Communal armory — deposited ranged weapons only, ledgered.
+        try {
+          const st = (this.stashState) ? this.stashState() : null;
+          const pile = (st && st.weapons) || [];
+          let best = null, bestB = -1, bestIdx = -1;
+          for (let i = 0; i < pile.length; i++) {
+            const gid = pile[i].itemId || pile[i].id;
+            if ((pile[i].units ?? 1) > 0 && gid && isRanged(gid) && bonusOf(gid) > bestB) { bestB = bonusOf(gid); best = gid; bestIdx = i; }
+          }
+          if (best) {
+            const taken = pile[bestIdx];
+            taken.units = (taken.units ?? 1) - 1;
+            if (taken.units <= 0) pile.splice(bestIdx, 1);
+            try { if (this.stashLog) this.stashLog('take', best, 1, vid); } catch (e2) {}
+            person.items = person.items || [];
+            person.items.push(best);
+            S.equipment.autoEquip(person, defs);
+            record('fromArmory', best);
+            return out;
+          }
+        } catch (e) {}
+        // 3. One craft attempt — the villager must PERSONALLY know the
+        // recipe (v.weaponCraft, seeded only by handling the weapon —
+        // the villagerWeaponCraftDay rule; this departure never seeds).
+        try {
+          v.weaponCraft = v.weaponCraft || {};
+          const lv = v.weaponCraft[vid] = v.weaponCraft[vid] || {};
+          const LADDER = ['bow', 'crude_bow'];
+          let pick = null;
+          let mats = null;
+          try { const st = (this.stashState) ? this.stashState() : null; mats = (st && st.materials) || null; } catch (e) {}
+          if (!mats) mats = (v.stash && v.stash.materials) || {};
+          const ownMat = (mat) => {
+            let n = 0;
+            for (const e of (person.items || [])) {
+              if (typeof e === 'string') { if (e === mat) n += 1; }
+              else if (e && (e.material === mat || (e.itemId === mat && !(defOf(mat) || {}).weapon && !(defOf(mat) || {}).armor))) n += (e.units || 1);
+            }
+            return n;
+          };
+          for (const rid of LADDER) {
+            const recipe = recipes.find(r => r.id === rid);
+            if (!recipe || !recipe.materials) continue;
+            if ((lv[rid] || 0) < 1) continue;
+            let ok = true;
+            for (const [m, need] of Object.entries(recipe.materials)) {
+              if (ownMat(m) + (mats[m] || 0) < need) { ok = false; break; }
+            }
+            if (!ok) continue;
+            pick = { rid: rid, recipe: recipe, level: lv[rid] };
+            break;
+          }
+          if (pick) {
+            // honest take: own carried materials first, then the pile.
+            for (const [m, need] of Object.entries(pick.recipe.materials)) {
+              let left = need;
+              const items = person.items || [];
+              for (let i = items.length - 1; i >= 0 && left > 0; i--) {
+                const e = items[i];
+                const isMat = (typeof e === 'string') ? (e === m)
+                  : (e && (e.material === m || (e.itemId === m && !(defOf(m) || {}).weapon && !(defOf(m) || {}).armor)));
+                if (!isMat) continue;
+                const have = (typeof e === 'string') ? 1 : (e.units || 1);
+                const take = Math.min(have, left);
+                left -= take;
+                if (typeof e === 'string') items.splice(i, 1);
+                else { e.units = have - take; if (e.units <= 0) items.splice(i, 1); }
+              }
+              if (left > 0) {
+                mats[m] = (mats[m] || 0) - left;
+                try { if (this.stashLog) this.stashLog('take', m, left, vid); } catch (e2) {}
+              }
+            }
+            const rate = pick.level >= 2 ? 0.85 : 0.35;
+            const success = Math.random() < rate;
+            out.craftedOk = success;
+            if (success) {
+              if (pick.level < 2) lv[pick.rid] = 2;
+              const cdef = defOf(pick.rid) || {};
+              person.items = person.items || [];
+              person.items.push({ itemId: pick.rid, name: cdef.name || pick.recipe.name || pick.rid,
+                units: 1, kcalEach: 0, kg: cdef.kg || pick.recipe.kg || 0.5 });
+              S.equipment.autoEquip(person, defs);
+              try { if (this.tele) this.tele('weapon_craft', { vid: vid, item: pick.rid, ok: true }); } catch (e2) {}
+              record('crafted', pick.rid);
+            } else {
+              try { if (this.tele) this.tele('weapon_craft', { vid: vid, item: pick.rid, ok: false }); } catch (e2) {}
+              record('craftedFail', pick.rid);
+            }
+            return out;
+          }
+        } catch (e) {}
+        // 4. Nothing available — goes without, as today.
+        record('noSource', null);
+        return out;
+      } catch (e) {}
+      return out;
+    },
+
     // VILLAGER POCKET AMMO (gap-ammo 2026-10-27, Triage A4): the departure
     // half of the volley. The volley engine (fieldFights.js) already fires
     // when the fighter CARRIES matching ammo — but villagerGearUp never
