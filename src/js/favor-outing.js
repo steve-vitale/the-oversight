@@ -103,7 +103,7 @@
    // The day's event came first: no departure, but a named wait, not silence.
    if(this.state.activeContest||(this.tableActive&&this.tableActive())){
     const reason='the day\'s event came first';
-    note(this,vid,f,day,reason,`${first} and the ${short} wait: ${reason}.`);
+    note(this,vid,f,day,reason,`${first} and the ${short.replace(/^the /i, '')} wait: ${reason}.`);
     return{vid,favorId:f.id,outcome:'noted',reason};
    }
    const person=(()=>{try{return this.getPerson(vid);}catch(e){return null;}})();

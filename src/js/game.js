@@ -41153,7 +41153,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               // UNINTERRUPTIBLE (Steve 2026-10-14): see player scream above.
               if (m.telegraph && !(m.mdef && m.mdef.uninterruptible)) { m.telegraph = null; n++; }
             }
-            this.say(`${v.name} SCREAMS — a sound like milk curdling in fast-forward.${n ? ' Its focus shatters.' : ''} The ${targets.length > 1 ? 'monsters freeze' : mname(targets[0]) + ' freezes'}. (stunned)`);
+            this.say(`${v.name} SCREAMS — a sound like milk curdling in fast-forward.${n ? ' Its focus shatters.' : ''} ${targets.length > 1 ? 'The monsters freeze' : mname(targets[0]) + ' freezes'}. (stunned)`);
             try { this.tbRefreshTelegraphUI(); } catch (e) {}
             return true;
           }
