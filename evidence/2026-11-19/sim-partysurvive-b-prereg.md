@@ -5,6 +5,28 @@
 (worktree `~/workspace/worktrees/sim-partysurvive-b`, already rebased
 onto master `e1f002065` by the coordinator).
 
+**CORRECTION 2 (2026-11-19 ~14:05 UTC, BEFORE any judged sim — no
+judged numbers exist yet):** the frozen substrate was NOT present on
+the prereg's base master `e1f002065`: the ALLYSLOT3 slot code was
+absent (the fightcap-b lever was held, never landed), so the
+fightcap driver refused both legs and the first worker reported
+BLOCKED-SUBSTRATE-MISSING. The coordinator authorized option 1
+(port the held lever): commit `5a5343363` (sim-fightcap-b's port of
+held sim-allyslot3-b `7efbf26a8`) was cherry-picked onto this branch
+as port commit `f4d1100ee`. Port verification: the port's diff
+against its own parent is content-identical to the source port's
+diff (only hunk line numbers / blob hashes differ — base drift
+between `eccc08af2` and `e1f002065`, e.g. speargate #2593 ammo
+naming, bowopen staging); `scripts/test-allyslot3-b.js` re-run on
+this branch: **18/18**. The frozen substrate is unchanged — the
+port RESTORES it on current master; no flag, seed, horizon, policy,
+or threshold changes. The "INSTRUMENT ONLY — zero src/js
+game-code changes" line below is superseded ONLY by this
+coordinator-authorized substrate port, which is EVIDENCE-ONLY: the
+ported lever must NEVER be merged to master as a game change; this
+branch holds it only so the diagnostic can run, and the coordinator
+lands evidence-only or releases the branch done-abandoned.
+
 **CORRECTION (2026-11-19 13:07 UTC, BEFORE any judged sim — no
 judged numbers exist yet):** two definitions in this prereg were
 wrong about the recorder, discovered by running the analyzer on the
