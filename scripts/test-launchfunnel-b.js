@@ -82,7 +82,9 @@ check('survey substrate env gates present on this base (VETREENGAGE/PARTYSIZE4/S
 check('ALLYSLOT3 port NOT applied: no ALLYSLOT3 gate anywhere in src/js',
   srcText.every(function (t) { return t.indexOf('ALLYSLOT3') === -1; }) &&
   !fs.readdirSync(path.join(REPO, 'src', 'js')).some(function (f) {
-    return fs.readFileSync(path.join(REPO, 'src', 'js', f), 'utf8').indexOf('ALLYSLOT3') !== -1;
+    const p = path.join(REPO, 'src', 'js', f);
+    try { if (!fs.statSync(p).isFile() || !/\.js$/.test(f)) return false; } catch (e) { return false; }
+    return fs.readFileSync(p, 'utf8').indexOf('ALLYSLOT3') !== -1;
   }));
 const EXPECTED_SCRIPTS = [
   'scripts/launchfunnel-driver-20261119.js',
