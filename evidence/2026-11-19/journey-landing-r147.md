@@ -221,8 +221,24 @@ panel carries no new information that moves it. No LOUD lines.
 
 ## Q4 — Gate (adoption closeout, 2026-11-19 ~11:1xZ)
 
-[PENDING — sibling gate running at write time; filled in by the adoption
-run below.]
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest`
+in the worktree on the rebased tip (`4ea7686ea` + evidence `ebaf457be`):
+**338 passed, 6 failed in 992s** (log
+`evidence/2026-11-19/journey-landing-r147-gate.log`). The 6 failures are
+0 attributable — this branch changes only `conversation.js` (maps-pool
+lines) + a proof test + evidence:
+
+| Failure | Verdict |
+|---|---|
+| `test-living-garden-deed-attainment.js` (120s timeout) | standing deed-attainment timeout class (r242 same) |
+| `test-measurement-proof-update.js` ("Proof source inputs are not current") | standing stale balance-proof manifest (r242 same) |
+| `test-measurement-workflow.js` (neutrality proof coverage) | same stale-manifest family (r242 same) |
+| `test-measurement-cache-flags.js` ("both actual CLI configurations complete valid neutral panels", 69.1s) | r241 failure recurring; passed in-gate on r242 — load artifact, not the maps-pool change (neutral panels don't read convo pools) |
+| `test-phone-frame-proof.js` (phone receipt stale/missing: index.html) | standing phone-frame receipt staleness (r242 same) |
+| `test-one-person-army-deed-attainment.js` (120s timeout) | standing deed-attainment timeout class (r242 same) |
+
+Gate GOOD for merge: 338/6, 0 attributable (5 = r242's exact standing
+set; cache-flags = the r241 failure recurring under load).
 
 ## Adoption closeout — stale-lock recovery (2026-11-19 ~11:05Z)
 
