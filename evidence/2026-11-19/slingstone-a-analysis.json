@@ -1,0 +1,319 @@
+{
+  "verdict": "DIAG-NO-GO",
+  "bars": [
+    {
+      "id": "completeness",
+      "pass": false,
+      "detail": "delta-attribution completeness 0.783 (bar >= 0.90); total drain D=60, residual drain 13, unexplained gains 11"
+    },
+    {
+      "id": "departure-pool",
+      "pass": true,
+      "detail": "stone-carrying sling/phase_sling departures 22 (floor 15); stones pocketed 55"
+    },
+    {
+      "id": "drain-pool",
+      "pass": false,
+      "detail": "census-intervals with a positive net stone drain 18 (floor 25); alive intervals 1197, deaths 0, switches 8, vanished 2"
+    },
+    {
+      "id": "split-quantified",
+      "pass": true,
+      "detail": "volley 0.783, craft 0.000, gear 0.000, death 0.000, residual 0.217; duty wraps live: {\"weaponCraft\":1029,\"ammoCraft\":1029,\"armorCraft\":1029,\"gearDay\":1029} — majority cause: volley 78%"
+    },
+    {
+      "id": "instrument-volley-xcheck",
+      "pass": true,
+      "detail": "volley rows where ammoLeft != ammoAtEntry - shots: 0 of 116 sling fights (cross-check, not a verdict bar)"
+    }
+  ],
+  "diag": {
+    "dir": "evidence/2026-11-19/perseed-slingstone-a-diag",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "bowopenOn": {
+      "false": 8
+    },
+    "senseexpedOn": {
+      "true": 8
+    },
+    "intervals": 1197,
+    "drainIntervals": 18,
+    "departuresStone": 22,
+    "pocketedStone": 55,
+    "volleyShots": 47,
+    "volleyFights": 116,
+    "volleyNull": 49,
+    "volleyXcheckBad": 0,
+    "craftTake": 0,
+    "craftTakeByDuty": {},
+    "gearTake": 0,
+    "deathCarried": 0,
+    "deathsN": 0,
+    "switchesN": 8,
+    "switchOut": 6,
+    "vanishedN": 2,
+    "vanishedStones": 4,
+    "residualDrain": 13,
+    "residualGain": 11,
+    "inflowTotal": 55,
+    "outflowRecorded": 47,
+    "drainTotal": 60,
+    "completeness": 0.7833333333333333,
+    "split": {
+      "volley": 0.7833333333333333,
+      "craft": 0,
+      "gear": 0,
+      "death": 0,
+      "residual": 0.21666666666666667
+    },
+    "majorityCause": "volley",
+    "majorityShare": 0.7833333333333333,
+    "dutyCalls": {
+      "weaponCraft": 1029,
+      "ammoCraft": 1029,
+      "armorCraft": 1029,
+      "gearDay": 1029
+    },
+    "dutyTakesRows": 0,
+    "lootStoneRows": 0,
+    "deathRows": 2,
+    "censusSlingDays": 1215,
+    "censusSlingZero": 1114,
+    "censusSlingZeroShare": 0.9168724279835391,
+    "censusSlingMean": 0.4279835390946502,
+    "censusByWeapon": {
+      "sling": {
+        "days": 1021,
+        "zero": 955,
+        "ammoSum": 340,
+        "zeroShare": 0.9353574926542605,
+        "meanAmmo": 0.3330068560235064
+      },
+      "phase_sling": {
+        "days": 194,
+        "zero": 159,
+        "ammoSum": 180,
+        "zeroShare": 0.8195876288659794,
+        "meanAmmo": 0.9278350515463918
+      }
+    },
+    "medianDays": 143.5,
+    "communityLost": 4,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 2,
+    "scaleRanks": {
+      "regional": 8
+    },
+    "starvation": 3,
+    "starvationVillager": 2,
+    "volleyByWave": {
+      "w1": {
+        "fights": 58,
+        "shots": 21,
+        "nulls": 29
+      },
+      "w2": {
+        "fights": 40,
+        "shots": 14,
+        "nulls": 14
+      },
+      "w3": {
+        "fights": 17,
+        "shots": 12,
+        "nulls": 4
+      },
+      "w4": {
+        "fights": 3,
+        "shots": 0,
+        "nulls": 2
+      }
+    },
+    "volleyByOrigin": {
+      "world-tick": {
+        "fights": 33,
+        "shots": 12
+      },
+      "other:_cxBlood": {
+        "fights": 16,
+        "shots": 0
+      },
+      "expedition": {
+        "fights": 68,
+        "shots": 35
+      },
+      "aid": {
+        "fights": 1,
+        "shots": 0
+      }
+    }
+  },
+  "residualDetail": [
+    {
+      "seed": 107025,
+      "vid": "gen_vqdtcb2",
+      "dayFrom": 17,
+      "dayTo": 18,
+      "open": 6,
+      "close": 6,
+      "inflow": 0,
+      "outflow": 1,
+      "residual": -1
+    },
+    {
+      "seed": 107025,
+      "vid": "gen_vqdtcb2",
+      "dayFrom": 18,
+      "dayTo": 19,
+      "open": 6,
+      "close": 5,
+      "inflow": 0,
+      "outflow": 0,
+      "residual": 1
+    },
+    {
+      "seed": 107025,
+      "vid": "gen_vqdtcb2",
+      "dayFrom": 52,
+      "dayTo": 53,
+      "open": 6,
+      "close": 3,
+      "inflow": 0,
+      "outflow": 5,
+      "residual": -2
+    },
+    {
+      "seed": 107025,
+      "vid": "gen_vqdtcb2",
+      "dayFrom": 53,
+      "dayTo": 54,
+      "open": 3,
+      "close": 1,
+      "inflow": 0,
+      "outflow": 0,
+      "residual": 2
+    },
+    {
+      "seed": 107025,
+      "vid": "gen_vqdtcb2",
+      "dayFrom": 54,
+      "dayTo": 55,
+      "open": 1,
+      "close": 6,
+      "inflow": 5,
+      "outflow": 2,
+      "residual": -2
+    },
+    {
+      "seed": 107025,
+      "vid": "gen_vqdtcb2",
+      "dayFrom": 55,
+      "dayTo": 56,
+      "open": 6,
+      "close": 4,
+      "inflow": 0,
+      "outflow": 0,
+      "residual": 2
+    },
+    {
+      "seed": 107025,
+      "vid": "gen_vqdtcb2",
+      "dayFrom": 56,
+      "dayTo": 57,
+      "open": 4,
+      "close": 4,
+      "inflow": 0,
+      "outflow": 1,
+      "residual": -1
+    },
+    {
+      "seed": 107025,
+      "vid": "gen_vqdtcb2",
+      "dayFrom": 57,
+      "dayTo": 58,
+      "open": 4,
+      "close": 0,
+      "inflow": 0,
+      "outflow": 3,
+      "residual": 1
+    },
+    {
+      "seed": 107025,
+      "vid": "gen_vqdtcb2",
+      "dayFrom": 67,
+      "dayTo": 68,
+      "open": 6,
+      "close": 6,
+      "inflow": 0,
+      "outflow": 1,
+      "residual": -1
+    },
+    {
+      "seed": 107025,
+      "vid": "gen_vqdtcb2",
+      "dayFrom": 68,
+      "dayTo": 69,
+      "open": 6,
+      "close": 2,
+      "inflow": 0,
+      "outflow": 3,
+      "residual": 1
+    },
+    {
+      "seed": 107025,
+      "vid": "gen_rc3zr79",
+      "day": 25,
+      "open": 0,
+      "inflow": 0,
+      "outflow": 0,
+      "lost": 0,
+      "kind": "vanished"
+    },
+    {
+      "seed": 107026,
+      "vid": "gen_xwziftr",
+      "dayFrom": 52,
+      "dayTo": 53,
+      "open": 6,
+      "close": 6,
+      "inflow": 0,
+      "outflow": 2,
+      "residual": -2
+    },
+    {
+      "seed": 107026,
+      "vid": "gen_xwziftr",
+      "dayFrom": 53,
+      "dayTo": 54,
+      "open": 6,
+      "close": 2,
+      "inflow": 0,
+      "outflow": 2,
+      "residual": 2
+    },
+    {
+      "seed": 107026,
+      "vid": "gen_xwziftr",
+      "dayFrom": 69,
+      "dayTo": 70,
+      "open": 4,
+      "close": 4,
+      "inflow": 0,
+      "outflow": 2,
+      "residual": -2
+    },
+    {
+      "seed": 107026,
+      "vid": "gen_xwziftr",
+      "day": 70,
+      "open": 4,
+      "inflow": 0,
+      "outflow": 0,
+      "lost": 4,
+      "kind": "vanished"
+    }
+  ]
+}
