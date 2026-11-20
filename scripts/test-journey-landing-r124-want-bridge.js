@@ -48,17 +48,30 @@ function check(name, cond, detail) {
 // Known BRIDGES.want lines: the 2 originals + the 4 added by the fix.
 // The extraction matches the served bridge text inside the voiced line
 // (voiceLine may prepend an opener or append a closer).
+// Known BRIDGES.want lines as distinctive mid-line fragments, all 10 of
+// the current pool (r146 expanded it 6 -> 10; this test still listed 6).
+// Full-line matching breaks two ways: voiceLine may append a closer
+// (", friend?") before the closing quote, and a served line outside the
+// test's list reads as null. Each fragment identifies exactly one line.
 const WANT_LINES = [
-  "Sorry — I shouldn't load that on you. What's up?",
-  'Forget I said anything. What did you want?',
-  '...Never mind me. What were you going to say?',
-  "That can wait — it isn't going anywhere. What's on your mind?",
-  'Look, forget it. You wanted something?',
-  "Anyway — that's my problem, not yours. What did you want?",
+  "shouldn't load that on you",
+  'Forget I said anything',
+  'Never mind me',
+  "isn't going anywhere",
+  'forget it. You wanted something',
+  "that's my problem, not yours",
+  "It's nothing, really",
+  'Forget it — go on',
+  'Never mind. You had something',
+  "keep it to myself",
 ];
 const SMALL_LINES = [
-  "Sure — what's on your mind?",
-  "Yeah? What's up?",
+  "Sure — what's on your mind",
+  "Yeah? What's up",
+  "Right — go on, I'm listening",
+  "Okay, I'm all ears",
+  "you've got my attention",
+  "Alright, I'm listening",
 ];
 
 function extractServed(voiced, pool) {

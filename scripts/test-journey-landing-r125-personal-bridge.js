@@ -50,17 +50,26 @@ function check(name, cond, detail) {
 // Known BRIDGES.personal lines: the 2 originals + the 4 added by the fix.
 // The extraction matches the served bridge text inside the voiced line
 // (voiceLine may prepend an opener or append a closer).
+// Known BRIDGES.personal / BRIDGES.small lines as distinctive mid-line
+// fragments. Full-line matching breaks two ways: voiceLine may append a
+// closer (", friend?") before the closing quote, and the small pool grew
+// 2 -> 6 at r127 while this test still listed 2 — a served line outside
+// the test's list reads as null. Each fragment identifies exactly one line.
 const PERSONAL_LINES = [
-  "That's me, I guess. What's on your mind?",
-  'Anyway. What did you want?',
-  "Enough about me — you've got something on your mind, I can tell.",
-  "That's my story, anyway. What's yours today?",
-  "I could go on about myself all day. Better if I don't — what do you need?",
-  "Right. Me, me, me. Your turn — what's up?",
+  "That's me, I guess",
+  'Anyway. What did you want',
+  'Enough about me',
+  "That's my story, anyway",
+  "I could go on about myself all day",
+  'Right. Me, me, me',
 ];
 const SMALL_LINES = [
-  "Sure — what's on your mind?",
-  "Yeah? What's up?",
+  "Sure — what's on your mind",
+  "Yeah? What's up",
+  "Right — go on, I'm listening",
+  "Okay, I'm all ears",
+  "you've got my attention",
+  "Alright, I'm listening",
 ];
 
 function extractServed(voiced, pool) {

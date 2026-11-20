@@ -194,7 +194,20 @@
   const BRIDGES = {
     grief: ['"Sorry — I got lost in it for a second. What did you want to ask?"', '"...Anyway. Sorry. What\'s on your mind?"'],
     cheer: ['"Ha — sorry, I\'m rambling. What\'s up?"', '"Good times. What did you want to talk about?"'],
-    goal: ['"Anyway — that\'s my cross to carry. What\'s on your mind?"', '"Right. Sorry, I go on about it. What did you want?"'],
+    goal: ['"Anyway — that\'s my cross to carry. What\'s on your mind?"', '"Right. Sorry, I go on about it. What did you want?"',
+      // r149 (journey-landing 2026-11-20): the pool held only the two lines
+      // above, so convoPickCycle's without-replacement cycle was strict
+      // alternation — a third goal-bridge in one sitting repeated a line
+      // heard two turns earlier (1274 d7: "Anyway — that's my cross to
+      // carry. What's on your mind?" x2 at turns 8 and 16). Six lines
+      // means a sitting would need seven goal-bridges before any repeat,
+      // and the keep-3 memory window keeps near repeats out. Same voice
+      // throughout: the villager steps back from talking about their goal
+      // or burden and hands the floor to the player.
+      '"That\'s my road to walk. What did you want to ask?"',
+      '"I\'ll carry it a while longer. What\'s on your mind?"',
+      '"Enough about what I\'m chasing. What did you want?"',
+      '"One day at a time, that\'s the plan. What did you want to ask?"'],
     past: ['"Ancient history. What\'s on your mind?"', '"...That was a lifetime ago. What did you want to ask?"'],
     village: ['"That\'s the state of things. What\'s up?"', '"Anyway — people stuff. What did you want?"'],
     plans: ['"That\'s the plan, anyway. What\'s on your mind?"', '"We\'ll see how it goes. What did you want?"'],

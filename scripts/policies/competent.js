@@ -2354,6 +2354,24 @@ function fledBadSample(ctx, Game, monsters, totalMhp, maxWave, hpPct, pmax) {
     });
   } catch (e) {}
 }
+// Reachability pre-check (journey-landing r149, 2026-11-20): can the
+// scholar actually step onto (cx, cy) this turn? True only when the game
+// would accept the move — a path exists and its full terrain cost fits
+// inside moveLeft (game.js tbPlayerMove prices the whole path up front
+// and refuses "Too far" past it). Fail-open: a Game without findPath /
+// tbTerrainCost cannot price the step, so the candidate is attempted as
+// today (the r128 stub path).
+function beastDodgeReachable(Game, p, cx, cy) {
+  try {
+    if (typeof Game.findPath !== 'function') return true;
+    const path = Game.findPath(p.mx, p.my, cx, cy);
+    if (!path || !path.length) return false;
+    if (typeof Game.tbTerrainCost !== 'function') return true;
+    let cost = 0;
+    for (const [tx, ty] of path) cost += Game.tbTerrainCost(tx, ty);
+    return cost <= p.moveLeft;
+  } catch (e) { return true; }
+}
 function beastDodgeMove(Game, f, p, px, py, avoid) {
   const cands = beastFreeTiles(Game, f, px, py);
   cands.sort((a, b) =>
@@ -2367,6 +2385,18 @@ function beastDodgeMove(Game, f, p, px, py, avoid) {
     // tile), not 'stuck'.
     if (isDoorTile(Game, c[0], c[1])) continue;
     any = true;
+    // REACHABILITY (journey-landing r149, 2026-11-20): the panel's
+    // seed-1277 d21 fight burned 33 refused moves in one turn — the
+    // scholar at (8,8) with 3 squares left tried every free tile 5+
+    // away, each refused ("Too far — 3 squares left.", mostly deduped
+    // silent). This was the only fight-step helper without the R140
+    // budget stop and without a reachability check — closeStep and
+    // beastStrikeTarget already carry both. Skip a candidate the
+    // scholar cannot reach WITHOUT calling tbPlayerMove, and stop the
+    // scan at once when the budget is spent. A hopeless candidate is
+    // never attempted, so it is never a refused turn.
+    if (p.moveLeft <= 0) break;
+    if (!beastDodgeReachable(Game, p, c[0], c[1])) continue;
     if (Game.tbIsPlayerTurn && !Game.tbIsPlayerTurn()) break;
     try {
       const ox = p.mx, oy = p.my;
@@ -2490,7 +2520,15 @@ function closeStep(Game, f, ctx, p, px, py, tmx, tmy) {
       const ml = (p.moveLeft || 0);
       if (ml > 0 && typeof Game.findPath === 'function') {
         const path = Game.findPath(px, py, c.cx, c.cy);
-        if (path && path.length > ml) {
+        // R149 NO-PATH SKIP (journey-landing r149, 2026-11-20): a
+        // candidate with no path at all is refused ("No path there.") —
+        // never attempt it. The panel's seed-1277 d25 fight burned 14
+        // refused approach steps in two rounds from the walled-in corner
+        // (8,8), where findPath returns null for every tile adjacent to
+        // the monster. (The dodge twin of this defect was fixed in
+        // beastDodgeMove above.)
+        if (!path || !path.length) continue;
+        if (path.length > ml) {
           const step = path[ml - 1];
           dx = step[0]; dy = step[1];
         }
@@ -2559,7 +2597,15 @@ function beastStrikeTarget(Game, f, ctx, p, px, py, tgt, endTurn) {
           let dx = bx, dy = by;
           if (typeof Game.findPath === 'function') {
             const path = Game.findPath(px, py, bx, by);
-            if (path && path.length) {
+            // R149 NO-PATH SKIP (journey-landing r149): same defect as
+            // closeStep — a candidate with no path is refused ("No path
+            // there."); never attempt it. (No panel evidence for this
+            // helper yet — the Spool fight's 14 refusals came from
+            // closeStep — but the code shape is identical, and the same
+            // walled-in corner would scan the same way through a strike
+            // trick.)
+            if (!path || !path.length) continue;
+            if (path.length) {
               let cost = 0, idx = -1;
               for (let i = 0; i < path.length; i++) {
                 let c = 1;
