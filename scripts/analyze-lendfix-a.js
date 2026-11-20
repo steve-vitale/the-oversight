@@ -781,6 +781,17 @@ function firstDiff(a, b, path) {
     }
     return null;
   }
+  if (typeof a === 'string' && typeof b === 'string') {
+    // INSTRUMENT FIX (adoption, sim-lendfix-a): the grant/v4seed wraps
+    // capture a stack frame naming the DRIVER's own file:line
+    // (grantEvents[].frame, v4seeds[].caller). The two legs run
+    // different driver files, so those strings differ by construction
+    // and can never match — they record the instrument's identity,
+    // not the game. Normalize the driver file:line:col out before
+    // comparing; any other difference in the same string still fails.
+    const normDriver = function (s) { return s.replace(/[^\s'"]*?(lend-driver-a|lendfix-driver-a)\.js:\d+:\d+/g, '<DRIVER>'); };
+    if (normDriver(a) === normDriver(b)) return null;
+  }
   return path + ' (' + JSON.stringify(a) + ' vs ' + JSON.stringify(b) + ')';
 }
 function guardrailIdentity(ctlDir, fixDir) {
@@ -1240,6 +1251,20 @@ function selftest() {
   fs.writeFileSync(path.join(fixD, 'lendfix-a-s107081-lendfix-a-fix.json'), JSON.stringify(gFixMissing));
   gr = guardrailIdentity(ctlD, fixD);
   check('guardrailIdentity: missing key caught (v4encounters missing in fix)', !gr.identical && /v4encounters/.test(gr.diffs[0].diff), JSON.stringify(gr.diffs));
+  // Driver frame/caller strings: the two legs run different driver
+  // files, so grantEvents[].frame / v4seeds[].caller differ by
+  // construction; only the driver file:line is normalized, any other
+  // difference in the same string must still fail.
+  const gFrameCtl = Object.assign({}, gSeed, { grantEvents: [{ day: 2, itemId: 'searcaster', frame: 'at Game.alienLootGrant (/home/hatch/workspace/worktrees/sim-lendfix-a/scripts/lend-driver-a.js:1268:25)' }], v4seeds: [{ day: 2, caller: 'at Game.winPlanSeedFromFight (/home/hatch/workspace/worktrees/sim-lendfix-a/scripts/lend-driver-a.js:1435:23)' }] });
+  const gFrameFix = Object.assign({}, gSeed, { grantEvents: [{ day: 2, itemId: 'searcaster', frame: 'at Game.alienLootGrant (/home/hatch/workspace/worktrees/sim-lendfix-a/scripts/lendfix-driver-a.js:1330:25)' }], v4seeds: [{ day: 2, caller: 'at Game.winPlanSeedFromFight (/home/hatch/workspace/worktrees/sim-lendfix-a/scripts/lendfix-driver-a.js:1497:23)' }] });
+  fs.writeFileSync(path.join(ctlD, 'lend-a-s107081-lendfix-a-ctl.json'), JSON.stringify(gFrameCtl));
+  fs.writeFileSync(path.join(fixD, 'lendfix-a-s107081-lendfix-a-fix.json'), JSON.stringify(gFrameFix));
+  gr = guardrailIdentity(ctlD, fixD);
+  check('guardrailIdentity: driver frame/caller strings normalized (identical when only the driver file:line differs)', gr.identical && gr.diffs.length === 0, JSON.stringify(gr));
+  const gFrameBad = Object.assign({}, gFrameFix, { grantEvents: [{ day: 2, itemId: 'searcaster', frame: 'at Game.otherFunction (/home/hatch/workspace/worktrees/sim-lendfix-a/scripts/lendfix-driver-a.js:1330:25)' }] });
+  fs.writeFileSync(path.join(fixD, 'lendfix-a-s107081-lendfix-a-fix.json'), JSON.stringify(gFrameBad));
+  gr = guardrailIdentity(ctlD, fixD);
+  check('guardrailIdentity: a real difference inside a frame string is still caught', !gr.identical && /frame/.test(gr.diffs[0].diff), JSON.stringify(gr.diffs));
   // JudgeLendfix shapes.
   function mkPool(o) { return Object.assign({ dir: '', n: 8, valid: 8, errors: 0, moments: 5, momentsGun: 3, momentsCells: 2, momentsTile: 2, momentsAdjacent: 3, fights: 5, perSeed: { 107081: 1 }, byKind: { gun: 3, cells: 2 }, byFrom: { tile: 2, adjacent: 3 }, detail: [] }, o); }
   function mkGuard(o) { return Object.assign({ identical: true, diffs: [], ctlFiles: 8, fixFiles: 8, seeds: 8 }, o); }
