@@ -298,7 +298,7 @@ function tallyVendetta(armEvents) {
   return { total: evs.length, directed, unordered, maxDirected, maxUnordered, topDirected: top(directed), topUnordered: top(unordered), pairsGte4 };
 }
 
-module.exports = { aggregateNightlyNews, summarizeBondProposed, tallyOffered, summarizeCounters, tallyRecap, mapTranscriptEntry, tallyReoffers, tallyDroppedThreads, tallyNarrDup, tallyConfessions, tallyVendetta, tallyRecapEmpty, tallyDoorReq, maxDoorServes, tallyThreeTimes, proposalsPerVillageDay };
+module.exports = { aggregateNightlyNews, summarizeBondProposed, tallyOffered, summarizeCounters, tallyRecap, mapTranscriptEntry, tallyReoffers, tallyDroppedThreads, tallyNarrDup, tallyConfessions, tallyVendetta, tallyRecapEmpty, tallyDoorReq, maxDoorServes, tallyThreeTimes, proposalsPerVillageDay, classifyM4Flag, splitM4Flags };
 
 // r195 (M11) RECAP-EMPTY TALLY: count M4 near-dup flags carrying the
 // empty-thread recap core "We were just talking. Nothing important."
@@ -484,4 +484,61 @@ function tallyRecap(transcripts) {
     if (presses >= 6) capFailures.push({ tag: t.tag || '?', vid: t.vid || '?', day: t.day == null ? null : t.day, presses, offeredAfterCap: !!t.recapOfferedAfterCap });
   }
   return { maxRecapPresses, totalPresses, offeredAfterCap, capFailures };
+}
+
+// r250 (M4 SPLIT) — append to scripts/journey-social-r226-helpers.js
+// (after tallyThreeTimes / before the end of the file's function block;
+// exports line gains classifyM4Flag + splitM4Flags).
+//
+// The M4 near-dup scan flags two DISTINCT core lines in one conversation
+// sharing a beat. Since r234 the flag count has been dominated by
+// INSTRUCTIONAL text — requirements / positioning / teaching / want
+// re-asks the interface serves to tell the player what to do — not by
+// NPC prose repeating itself. r238: 181 flags, 174 instructional by this
+// classifier, 7 conversational. The split makes the conversational count
+// the binding signal (bar: <= 12 panel-wide, r250 prereg) and the
+// instructional count a watch-only tally.
+//
+// A flag is INSTRUCTIONAL if EITHER core matches any pattern below
+// (same either-side rule as tallyRecapEmpty / tallyDoorReq). Patterns
+// were fitted on the r238 corpus and the split is pinned by
+// scripts/test-journey-social-life-r250-m4-split-20261119.js (synthetic
+// cases + the 7 real conversational pairs + sampled instructional pairs
+// from the r238 corpus; corpus regression: 181 / 174 / 7).
+//
+// Known limitation: several patterns are broad by design ('hunt',
+// 'forage', 'fill', 'carry', 'we need', 'come back') — they err toward
+// INSTRUCTIONAL, so a conversational repeat wearing requirement words
+// can hide. The bar has headroom for that direction; the opposite error
+// (prose flagged instructional) would only inflate the watch tally.
+const M4_INSTR_PATTERNS = [
+  /haven/i, /\bdawn\b/i, /\bdoor\b/i, /same side/i, /meet me/i, /meet .* at/i,
+  /pantry/i, /creek/i, /water run/i, /bucket/i, /cistern/i, /boil/i,
+  /teach/i, /lesson/i, /show you how/i, /let me show/i,
+  /you show them/i, /where it grows/i,
+  /have you had a chance/i, /did you (get|bring|find|manage)/i, /did you have/i,
+  /bring (me|us|it|the|some)/i, /fetch/i, /need you to/i, /you need to/i,
+  /come (with|along|back)/i, /wait (for|at|here)/i, /follow me/i,
+  /three times now/i, /still on /i, /the plan is/i, /we need/i,
+  /supplies/i, /rations/i, /firewood/i, /forage/i, /hunt/i, /patrol/i,
+  /watch shift/i, /snare/i, /keep company/i, /stay close/i,
+  /fill/i, /haul/i, /carry/i, /unload/i, /run (to|for|the)/i,
+  /providing basic care/i, /medical ability/i,
+  /wound/i, /still need (help|a hand)/i, /isn'?t going away/i,
+  /that'?s still where we are/i, /we hadn'?t finished/i, /never did get back to that/i,
+];
+function classifyM4Flag(a, b) {
+  for (const re of M4_INSTR_PATTERNS) {
+    if (re.test(String(a || '')) || re.test(String(b || ''))) return 'instructional';
+  }
+  return 'conversational';
+}
+function splitM4Flags(flags) {
+  const out = { instructional: 0, conversational: 0, conversationalFlags: [] };
+  for (const f of (flags || [])) {
+    if (!f) continue;
+    if (classifyM4Flag(f.a, f.b) === 'instructional') out.instructional++;
+    else { out.conversational++; out.conversationalFlags.push(f); }
+  }
+  return out;
 }

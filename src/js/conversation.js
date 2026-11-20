@@ -8151,7 +8151,28 @@
         if (line && typeof choiceId === 'string' && choiceId.indexOf('ask:') === 0 &&
             typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, line)) {
           const cg = (this.data.characterGen || {}).convo || {};
-          line = this.convoPickCycle(vid, 'exh', cg.exhausted || ['"I\'ve told you everything I know about that."']);
+          const exhPool = cg.exhausted || ['"I\'ve told you everything I know about that."'];
+          let repl = this.convoPickCycle(vid, 'exh', exhPool);
+          // DRY2 REPLACEMENT CHECK (journey-social-life r256 2026-11-20):
+          // the pick itself was never checked against the ledger. The
+          // exhausted pool cycles per villager, not cross-villager, so a
+          // pick another villager spoke recently was handed to sayLine
+          // blocked and dry-replaced ("...Sorry, lost my train of
+          // thought.") — the wild F6 site (Sigrun 45766 d45, ask:gossip:
+          // the composed gossip line was run-blocked, the guard's
+          // exhausted pick was run-blocked too). Walk the pool for a
+          // variant convoWouldBlock would NOT refuse (r186/r192 pattern);
+          // if every variant is blocked, the admission is conversation
+          // GRAMMAR, not content — speak it structural (r169 wind-down
+          // class) rather than drying. A villager who has told you
+          // everything they know does not forget it.
+          if (repl && typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, repl)) {
+            for (const alt of exhPool) {
+              if (alt !== repl && !this.convoWouldBlock(vid, alt)) { repl = alt; break; }
+            }
+          }
+          if (repl && typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, repl)) structuralTurn = true;
+          line = repl;
         }
       } catch (e) {}
       // NULL-LINE CLASS GUARD (journey-establishment r16 2026-10-18): several
