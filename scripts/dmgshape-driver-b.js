@@ -1,4 +1,15 @@
 // dmgshape-driver-b.js — JUDGED driver, arm sim-dmgshape-b
+// COPY of scripts/dmgshape-driver-b.js (finding #2605, designated
+// band 106181-106188): ONLY the header, the usage lines, the RUN/OUTDIR
+// defaults, the evidence-date default, the two stack-skip filename
+// strings (functional: the renamed file must skip its own frames),
+// the arm string, and the corpus file prefix moved. The MODE guard
+// stays MODE=dmgshape; all substrate assertions stay (SENSEEXPED,
+// PARTYSIZE4, VETREENGAGE, FLEEREPAIR2, FIGHTALLY2, ALLYSLOT3 flags
+// =1; LEVER_PRESENT enforced — the leg must never re-scope to the
+// control substrate). All recorder logic is byte-identical in
+// behavior. See the frozen prereg
+// evidence/2026-11-20/sim-dmgshape-b-prereg.md.
 // (the 4th member's damage share + kill share on quad-fight meetings
 // — the dmgshape question for the 3rd-ally slot, finding #2559 family
 // / #2567: does the 4th member's damage turn quads into killers?).
@@ -39,8 +50,7 @@
 // Policy: competent verbatim (scripts/policies/competent.js), 150d
 // death-aware. Pilot band TBD by survey (measured — see prereg).
 // Usage:
-//   SENSEEXPED=1 PARTYSIZE4=1 VETREENGAGE=1 FLEEREPAIR2=1 FIGHTALLY2=1 MODE=ctl OUTDIR=perseed-dmgshape-b-ctl SEEDS=10473x,... RUN=dmgshape-b node scripts/dmgshape-driver-b.js
-//   SENSEEXPED=1 PARTYSIZE4=1 VETREENGAGE=1 FLEEREPAIR2=1 FIGHTALLY2=1 ALLYSLOT3=1 MODE=arm OUTDIR=perseed-dmgshape-b-arm SEEDS=10473x,... RUN=dmgshape-b node scripts/dmgshape-driver-b.js
+//   SENSEEXPED=1 PARTYSIZE4=1 VETREENGAGE=1 FLEEREPAIR2=1 FIGHTALLY2=1 ALLYSLOT3=1 LAUNCHSURVIVE=1 MODE=dmgshape OUTDIR=perseed-dmgshape-b SEEDS=106181,...,106188 RUN=dmgshape-b node scripts/dmgshape-driver-b.js
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -1258,7 +1268,7 @@ if (require.main === module) (async function () {
   if (process.env.ALLYSLOT3 !== '1') { console.error('DMGSHAPE STOP: ALLYSLOT3=1 required (substrate flag — the ported slot).'); process.exit(2); }
   if (!LEVER_PRESENT) { console.error('DMGSHAPE STOP: ALLYSLOT3 slot code absent — the port is required for this diagnostic; stopping, never re-scoping.'); process.exit(2); }
 if (!SEEDS.length) { console.error('DMGSHAPE STOP: SEEDS required.'); process.exit(2); }
-  const outDir = path.join(REPO, 'evidence', '2026-11-19', OUTDIR);
+  const outDir = path.join(REPO, 'evidence', '2026-11-20', OUTDIR);
   fs.mkdirSync(outDir, { recursive: true });
   for (const seed of SEEDS) {
     const file = path.join(outDir, 'dmgshape-b-s' + seed + '-' + RUN + '-' + MODE + '.json');

@@ -1,24 +1,31 @@
-// test-dmgshape-b.js — measurement proof test, arm sim-dmgshape-b
-// (the damage-per-round decomposition diagnostic, tracker blank 1).
+// test-dmgshape-b.js — measurement proof test, arm sim-dmgshape-b (Loop B 0530Z run)
+// (the damage-per-launch re-measurement, finding #2605, designated band
+// 106181-106188).
 // WHAT IT PROVES (the measurement, not just the instrument):
-//   §A ANALYZER SELFTEST: the analyzer's own --selftest (19 checks):
-//     reproduction of the frozen fightcap-b arm corpus (18 joined
-//     quad meetings, 0 kills, vFlee ladder 49.4744/round, d58 row
-//     686/9), the synthetic full-log decomposition (known strikes /
-//     verb round / miss / ally join -> known components), the
-//     Rage-fire-round parse + ability-excess arithmetic, and the
-//     driver smoke (one 30d seed, exit 0, 0 instrument errors,
-//     flags self-describing, leverPresent false).
-//   §B CORPUS-REPRODUCTION CHECK: the analyzer run over the frozen
-//     fightcap-b arm corpus reproduces the published ladder through
-//     the analyzer's own judge path (quadKills + fled matching):
-//     the d58 Congregation row is found and its decomposition fields
-//     are populated from the capped corpus (log truncated at 20 lines
-//     — the test asserts the parser still reads strikes, not that
-//     the cap is absent; the uncapped log is the dmgshape driver's
-//     job, proven in §A §C).
+//   §A ANALYZER SELFTEST: the analyzer's own --selftest (43 checks):
+//     first-fight selection fixtures (any-origin, earliest-day,
+//     21-day window, target-type match, fought filter, same-day
+//     file-order tiebreak, one fight shared by two launches,
+//     no-fight-in-window), classification fixtures (landed-strike
+//     rule vs the strict reading, 0-damage fight unclassified),
+//     judge fixtures (GO shape, both pool legs, classification,
+//     instrument, reconciliation, NO-GAP, UNEXPLAINED-GAP), the
+//     retained decomposition fixtures (synthetic 6-round fight,
+//     Rage-fire parse + ability excess, aggregate identity,
+//     fightcap-arm reproduction), and the driver smoke (one 30d
+//     seed on the designated band, exit 0, 0 instrument errors,
+//     flags self-describing, port present, arm label dmgshape-b).
+//   §B CORPUS-REPRODUCTION CHECK: the analyzer run over the FROZEN
+//     dmgsurvey designated-band corpus (same band, same policy,
+//     slot env-only there) reproduces the first-fight population
+//     the prereg's pool floor is priced against: 16 launches, 9
+//     first-fights, 6 fled, 0 killed, 3 died, 6 distinct fights,
+//     by origin expedition 3 / world-tick 5 / aid 1, same-day 2.
+//     COUNTS ONLY: the survey corpora carry no roundsDetail, so
+//     no decomposition value is asserted here. This is a
+//     reproduction of the PRIOR corpus through the new instrument
+//     — not a judged sim.
 // Usage: node scripts/test-dmgshape-b.js
-// Exit 0 = all checks pass.
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -36,27 +43,34 @@ function check(name, cond, extra) {
   const r = spawnSync(process.execPath, [path.join(REPO, 'scripts', 'analyze-dmgshape-b.js'), '--selftest'],
     { cwd: REPO, encoding: 'utf8', timeout: 600000 });
   const out = (r.stdout || '') + (r.stderr || '');
-  const m = out.match(/test-dmgshape-b: (\d+) passed, (\d+) failed/);
-  check('§A analyzer selftest exits 0 with 21 passed, 0 failed',
-    r.status === 0 && !!m && m[1] === '21' && m[2] === '0', out.slice(-300));
+  const m = out.match(/analyze-dmgshape-b selftest: (\d+) passed, (\d+) failed/);
+  check('§A analyzer selftest exits 0 with 43 passed, 0 failed',
+    r.status === 0 && !!m && m[1] === '43' && m[2] === '0', out.slice(-300));
 })();
 
 (function sectionB() {
-  const dir = path.join(REPO, 'evidence', '2026-11-19', 'perseed-fightcap-b-arm');
-  if (!fs.existsSync(dir)) { console.log('SKIP §B: fightcap arm corpus not present'); return; }
-  const dec = A.fledDecompositions(dir);
-  check('§B frozen fightcap arm corpus: 18 meetings, 15 fled, 0 killed, 3 died',
-    dec.qk.meetings === 18 && dec.fled.length === 15 && dec.killed.length === 0 && dec.died.length === 3,
-    { meetings: dec.qk.meetings, fled: dec.fled.length, killed: dec.killed.length, died: dec.died.length });
-  const d58 = dec.fled.filter(function (f) { return f.seed === 104771 && f.day === 58; })[0];
-  check('§B d58 row decomposes from the capped corpus (686 dealt, 9 rounds, log truncated at 20 lines)',
-    !!d58 && d58.mDealt === 686 && d58.rounds === 9 && d58.logLines === 20, d58 && { mDealt: d58.mDealt, rounds: d58.rounds, logLines: d58.logLines });
-  check('§B d58 row parses strikes from the truncated log (R1-R4 visible)',
-    !!d58 && d58.strikesAttempted >= 6 && d58.pMean != null && d58.pMean > 0,
-    d58 && { attempts: d58.strikesAttempted, pMean: d58.pMean });
-  check('§B capped-corpus rows carry no roundsDetail (the dmgshape driver adds it)',
-    dec.fled.every(function (f) { return f.rdRounds === 0; }),
-    { rdRounds: dec.fled.map(function (f) { return f.rdRounds; }).slice(0, 5) });
+  const dir = path.join(REPO, 'evidence', '2026-11-20', 'perseed-dmgsurvey-b-106181-106188');
+  if (!fs.existsSync(dir)) { console.log('SKIP §B: dmgsurvey designated-band corpus not present'); return; }
+  const a = A.analyzeDir(dir);
+  check('§B frozen dmgsurvey designated-band corpus: 16 launches, 9 first-fights, 6 fled, 0 killed, 3 died',
+    a.launches === 16 && a.firstFights === 9 && a.fled === 6 && a.killed === 0 && a.died === 3,
+    { launches: a.launches, firstFights: a.firstFights, fled: a.fled, killed: a.killed, died: a.died });
+  check('§B three launches share fights: distinct fights 6, not 9',
+    a.distinctFights === 6, a.distinctFights);
+  check('§B first-fights by origin: expedition 3, world-tick 5, aid 1',
+    (a.byOrigin.expedition || 0) === 3 && (a.byOrigin['world-tick'] || 0) === 5 && (a.byOrigin.aid || 0) === 1,
+    a.byOrigin);
+  check('§B same-day first-fights 2', a.sameDayFirstFights === 2, a.sameDayFirstFights);
+  check('§B no-fight launches 7', a.noFight === 7, a.noFight);
+  const s188 = a.perSeed.filter(function (p) { return p.seed === 106188; })[0];
+  check('§B seed 106188: 7 launches, 2 first-fights, 5 no-fight (the audit churn)',
+    !!s188 && s188.launches === 7 && s188.firstFights === 2 && s188.noFight === 5, s188);
+  const eul = a.rows.filter(function (r) { return r.fight && r.seed === 106182 && r.fight.day === 114 && r.fight.mid === 'eulogy'; })[0];
+  check('§B seed 106182 d114 Eulogy first-fight: 5 rounds, 329 dealt, fled (Hassan, the survey sense-test fight)',
+    !!eul && eul.fight.rounds === 5 && eul.fight.mDealt === 329 && eul.fight.outcome === 'vFlee',
+    eul && { day: eul.fight.day, rounds: eul.fight.rounds, dealt: eul.fight.mDealt, outcome: eul.fight.outcome });
+  check('§B instrument clean on the prior corpus (0 errors, 8 files)',
+    a.errors === 0 && a.files === 8, { errors: a.errors, files: a.files });
 })();
 
 console.log('test-dmgshape-b: ' + passed + ' passed, ' + failed + ' failed');
