@@ -95,6 +95,16 @@ async function main() {
   check('mirrormoth fixture is wave 1', moth && (moth.wave || 1) === 1, JSON.stringify(moth && moth.wave));
   check('lend helper exists on Game', typeof Game._lendSearcaster === 'function');
   check('return helper exists on Game', typeof Game._returnLentSearcaster === 'function');
+  // Post-revert shape (NO-GO arms leave the lever reverted): when the
+  // helpers are absent, the 36 lever-on checks below cannot run — record
+  // them as FAIL (same record as the presence/gunrate/cellgate arms: the
+  // lever-on assertions fail, the lever-independent ones still pass)
+  // instead of crashing on the first direct call.
+  const leverMissing = typeof Game._lendSearcaster !== 'function' ||
+    typeof Game._returnLentSearcaster !== 'function';
+  if (leverMissing) {
+    for (let i = 0; i < 36; i++) check('lever-on check ' + (i + 1) + '/36 (lever reverted)', false);
+  }
 
   const MTX = 5, MTY = 5; // monster tile for the direct-helper fixtures
   const m4 = { id: 'eulogy', tx: MTX, ty: MTY };
@@ -131,6 +141,7 @@ async function main() {
     Game.npcSetNode(lender2, MTX, MTY);
   }
 
+  if (!leverMissing) {
   // ---- 2. direct-helper fixtures (zero draws) ----
   setLend(true);
   // (a) gun lend, on-tile holder: borrower has a bow, lender armed on the tile.
@@ -355,6 +366,7 @@ async function main() {
   Game.fieldFight = realFieldFight;
   Game.state.worldMonsters = savedMonsters;
   setLend(false); setCellgate(false); setGunrate(false);
+  } // end if (!leverMissing) — lever-on sections 2–3
 
   // ---- 4. analyzer selftest (cross-leg judge shapes) ----
   console.log('\n=== Analyzer selftest (analyze-lend-a --selftest) ===');
