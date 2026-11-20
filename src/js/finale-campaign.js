@@ -242,7 +242,19 @@
             var need0 = (def0 && def0.minAllies) || 20;
             var have0 = 0;
             try { have0 = ((titanSt().musters || {}).finale || { allies: [] }).allies.length; } catch (e) {}
-            Game.say('⛔ THE COMMERCIAL BREAK does not notice you the way prey notices a hunter. The march needs ' + need0 + ' allied blades (you have ' + have0 + '). Sound the call. This is not courage. This is arithmetic.');
+            // REFUSAL SPAM (journey-crisis r253 2026-11-19, r233 class):
+            // the Herald titan gate says its refusal ONCE per titan per day
+            // (titans.js) — this march gate said it on EVERY attempt, and
+            // the PS4 arm heard it 10x on one day (14562 d103). The refusal
+            // still stands on every attempt (return null below); only the
+            // spoken line is deduped. The per-day record lives in campaign
+            // state (saved with the run, same home as `started`).
+            var _marchDay = 0;
+            try { _marchDay = ((Game.state || {}).scholar || {}).day || 0; } catch (e) {}
+            if (c0.marchRefusalDay !== _marchDay) {
+              Game.say('⛔ THE COMMERCIAL BREAK does not notice you the way prey notices a hunter. The march needs ' + need0 + ' allied blades (you have ' + have0 + '). Sound the call. This is not courage. This is arithmetic.');
+              c0.marchRefusalDay = _marchDay;
+            }
             return null;
           }
           c0.started = true;

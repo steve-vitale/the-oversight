@@ -37486,13 +37486,17 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // PROSE (2026-10-07): m.name carries its own article on unknowns
         // ("the thing with headlights for eyes, standing too still") — compose
         // via monsterNoun like the 7040 call site; never "The the ...".
+        // (journey-crisis r253 2026-11-19: a village-named proper name
+        // carries its OWN article — "The Bright Bastard" — and the bare
+        // "The " + mn below said "The The Bright Bastard" on seed 14563.
+        // Compose via articlePhrase like the patrol/witness sites.)
         let mn = m.name;
         try { mn = this.monsterNoun(m.monsterId); } catch (e) {}
         // HONESTY (break-it combat r3 2026-10-10, sibling of the villager-
         // haymaker fix): same class — the pre-mitigation roll was announced
         // before armor/dodge had their say. tbDamage narrates the landing.
         if (/^something\b/i.test(mn)) this.say(`Something thrashes its antlers at ${who} — getting close has a price.`);
-        else this.say(`The ${mn} thrashes its antlers at ${who} — getting close has a price.`);
+        else this.say(`${this.articlePhrase ? this.articlePhrase(mn, true) : 'The ' + mn} thrashes its antlers at ${who} — getting close has a price.`);
         this.tbDamage(o.key, d, mn + "'s antlers", m.key);
         hit = true;
         if (f.over) return true;
