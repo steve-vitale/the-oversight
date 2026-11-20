@@ -7843,6 +7843,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // no type-'melee' weapon does).
         let speargateOn = false;
         try { speargateOn = (typeof process !== 'undefined' && process.env && process.env.SPEARGATE === '1'); } catch (e) {}
+        let depmatOn = false;
+        try { depmatOn = (typeof process !== 'undefined' && process.env && process.env.DEPMAT === '1'); } catch (e) {}
+        let depmatScopeOn = false;
+        try { depmatScopeOn = (typeof process !== 'undefined' && process.env && process.env.DEPMATSCOPE === '1'); } catch (e) {}
+        let isSpearHolder = false;
         const isVolley = (id) => { const d = defOf(id); return !!(d && d.weapon && d.weapon.ammo); };
         const isStageable = speargateOn ? isVolley : isRanged;
         const bonusOf = (id) => { const d = defOf(id); return (d && d.weapon && d.weapon.bonus) || 0; };
@@ -7867,6 +7872,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (slotRw) {
           const slotDef = defOf(slotRw.itemId || slotRw.id);
           if (!(slotDef && slotDef.weapon && slotDef.weapon.ammo)) {
+            isSpearHolder = true;
             bump('spearSeen');
             if (speargateOn) bump('spearPassed');
           }
@@ -7928,6 +7934,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const LADDER = ['bow', 'crude_bow'];
           let pick = null;
           let mats = null;
+          let fromSite = null;
+          let siteMats = null;
           try { const st = (this.stashState) ? this.stashState() : null; mats = (st && st.materials) || null; } catch (e) {}
           if (!mats) mats = (v.stash && v.stash.materials) || {};
           const ownMat = (mat) => {
@@ -7943,8 +7951,40 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             if (!recipe || !recipe.materials) continue;
             if ((lv[rid] || 0) < 1) continue;
             let ok = true;
+            const shortMats = [];
             for (const [m, need] of Object.entries(recipe.materials)) {
-              if (ownMat(m) + (mats[m] || 0) < need) { ok = false; break; }
+              if (ownMat(m) + (mats[m] || 0) < need) { ok = false; shortMats.push(m); }
+            }
+            // DEPMAT (sim-depmat-a, finding #2590): the trailhead bundle.
+            // A crafter who knows crude_bow but falls short on green
+            // branch and vine cord gathers the shortfall from the brush
+            // at the departure site itself and the pick proceeds — the
+            // site materials are spent by the attempt exactly like pile
+            // materials, a failed roll loses them, and the pile is never
+            // touched for the site portion. Crude_bow only: a green
+            // branch and a vine cord grow at the village edge, a seasoned
+            // wood stave does not. The block draws nothing itself.
+            // DEPMATSCOPE (sim-evade-a): the trailhead bundle serves
+            // spear-holders only — a non-spear villager never fires
+            // the site supply, so the lever stops changing
+            // non-spear villagers from day 2 and the paired
+            // comparison survives past day 2. Scope off = the
+            // unscoped depmat recovery, unchanged.
+            if (!ok && depmatOn && (!depmatScopeOn || isSpearHolder) && rid === 'crude_bow' && shortMats.length &&
+                shortMats.every(function (m) { return m === 'branch' || m === 'vine'; })) {
+              pick = { rid: rid, recipe: recipe, level: lv[rid] };
+              fromSite = shortMats.slice();
+              siteMats = shortMats.slice();
+              out.depmatSite = true;
+              out.siteMats = shortMats.slice();
+              try { if (this.tele) this.tele('weapon_craft_site', { vid: vid, item: 'crude_bow', mats: shortMats.slice() }); } catch (e2) {}
+              try {
+                if (this.playerAtHaven && this.playerAtHaven()) {
+                  const nm = this.firstRef ? this.firstRef(vid) : 'Someone';
+                  this.say(nm + ' snaps a green branch and twists a vine cord from the brush at the trailhead.');
+                }
+              } catch (e2) {}
+              break;
             }
             if (!ok) continue;
             pick = { rid: rid, recipe: recipe, level: lv[rid] };
@@ -7967,8 +8007,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 else { e.units = have - take; if (e.units <= 0) items.splice(i, 1); }
               }
               if (left > 0) {
-                mats[m] = (mats[m] || 0) - left;
-                try { if (this.stashLog) this.stashLog('take', m, left, vid); } catch (e2) {}
+                if (fromSite && fromSite.indexOf(m) !== -1) {
+                  // Site-supplied: the brush at the trailhead covered
+                  // this material — the pile is never touched for it.
+                } else {
+                  mats[m] = (mats[m] || 0) - left;
+                  try { if (this.stashLog) this.stashLog('take', m, left, vid); } catch (e2) {}
+                }
               }
             }
             const rate = pick.level >= 2 ? 0.85 : 0.35;

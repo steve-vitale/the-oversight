@@ -930,6 +930,22 @@
           rec.outcome = 'evade';
           rec.vHpLeft = vHp; rec.mHpLeft = members[0].hp;
           try { GPf?.finishFieldEscape(this, vid, huntOpening, rec, !!opts.noFlee); } catch (e) { console.warn('[godpath] field evasion', e); }
+          // EVADEOBS (sim-evade-a, finding #2590): the evade wall.
+          // An awareness-evade is a survived encounter, and the
+          // settlement below promises it brings home a trick
+          // observation — but this early return never reaches the
+          // settlement, so the observation never records and the
+          // trick-hold loop never opens (no trick -> no seek ->
+          // evade -> no observation -> still no trick). Record it
+          // here, villagers only (the scholar has his own channel),
+          // gated by env. The evade still evades — this records,
+          // it does not force contact.
+          try {
+            if (vid && vid !== 'player' && this.noteVillagerTrickObservation &&
+                typeof process !== 'undefined' && process.env && process.env.EVADEOBS === '1') {
+              this.noteVillagerTrickObservation(vid, mdef.id);
+            }
+          } catch (e) {}
           rec.log.push(vName + ' saw ' + mPhrase + ' in time and gave it room.');
           return rec;
         }
