@@ -62,7 +62,7 @@ const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 function load(dir, leg, mode) {
   const rows = [];
   for (const seed of SEEDS) {
-    const fp = path.join(dir, 'speargate-a-s' + seed + '-bowknow-a-' + mode + '.json');
+    const fp = path.join(dir, 'bowknow-a-s' + seed + '-bowknow-a-' + mode + '.json');
     if (!fs.existsSync(fp)) throw new Error('missing per-seed file: ' + fp);
     rows.push({ seed: seed, run: leg, r: JSON.parse(fs.readFileSync(fp, 'utf8')) });
   }
