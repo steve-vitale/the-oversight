@@ -247,7 +247,11 @@ survived / 465 (control 151 survived / 390); 106088 140 village-lost /
   mid-flight (SIGTERM ~164s, /tmp wiped); run state in ~/workspace
   survived; heartbeat re-established first. A restart ~05:42Z preceded
   the run (brief note in the dmgshape evidence).
-- Safe-commit index clobber: [PENDING at closeout.]
+- Safe-commit index clobber: struck the adoption commit `46bf66a39`
+  (both files staged-as-deleted in the worktree index, worktree files
+  intact) — repaired via the `git ls-tree -r HEAD` +
+  `update-index --add --index-info` pipe; status empty, diff HEAD
+  empty, both hash-objects == HEAD blobs. Commit always correct.
 - Master moved once during the adoption (0515Z adoption closeout
   `59711ccc5`, gate 339/5); adoption worktree rebased onto it before
   the final gate. The Lane A r246 adoption was still running at
@@ -256,8 +260,15 @@ survived / 465 (control 151 survived / 390); 106088 140 village-lost /
   killed by the ~07:20Z restart and left a 17G orphaned partial
   evidence copy (unregistered, not a git worktree); the worker removed
   it with rm -rf.
-- Claim + lock: [PENDING — deleted at closeout, same-call as the read,
-  run_id verified.]
+- Claim + lock: retired / deleted at closeout by the 1030Z Loop B run
+  (claim `fleshout-loop-b-20261120T0530Z.json` retired to `.DEAD`;
+  lock deleted in the same exec call as the read, run_id
+  `fleshout-loop-b-20261120T0530Z` verified on both lines).
+- Closeout completion: the adoption's resume attempt was blocked by a
+  NEW flap window (verified real 09:57Z) and stopped without merging
+  or deleting anything; the 1030Z Loop B run completed the closeout —
+  gate verdict settled (capable-bot standalone 42/42), round files
+  committed (`46bf66a39`) + merged, claim retired, lock deleted.
 
 ## Next blanks, in order
 
