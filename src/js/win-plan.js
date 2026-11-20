@@ -12,6 +12,8 @@
 //   - winPlanSeedFromFight(vid, mdef, outcome)
 //   - winPlanNoteKill(vid, mdef)
 //   - winPlanNoteFight(vid, allyVids)
+//   - winPlanNoteSighting(mid)
+//   - winPlanCommitDeadTarget(vid)
 //   - winPlanBondsTick(hx, hy)
 //   - winPlanMusterTick(hx, hy)
 // rules:
@@ -65,6 +67,22 @@
 //     villagerFightAllies / fieldFight opts path. This module launches
 //     companions on the same expedition target so the engine can find
 //     them; it never builds a second join trigger.
+//   - winplan_dead_target_reseed: a departure never chases a dead (code: winPlanCommitDeadTarget, winPlanDepart, vbrainExecuteDepart)
+//     target type (sim-reseed-b, finding #2626). At the commit point,
+//     when the plan's target type is recorded slain in villageSlain
+//     AND no sighting of the type has been noted since the kill day
+//     (villageLastSeenDay, stamped by winPlanNoteSighting from
+//     fieldFight on every live contact), the plan RE-SEEDS from
+//     rumors the holder has actually heard — their own fought
+//     species, their own fight memories, then village sightings —
+//     or EXPIRES (dissolves with a fireside beat) when no live rumor
+//     exists. An expired plan re-attempts the re-seed on every later
+//     commit and holds meanwhile; it never launches targetless. A
+//     sighting after the kill day re-opens the type. Type-level, not
+//     instance-level: the plan store holds a target type, never a
+//     monster instance identity. Env-gated default-OFF
+//     (PLANRESEED=1). It never touches winPlanNoteKill,
+//     winPlanFightGate, winPlanCands, or winPlanSeedFromFight.
 // ============ WIN PLAN ============
 // Why villagers kept losing the long game: they had breadth (a rule for
 // every situation) but no sequence — a villager could be geared, alone,
@@ -99,7 +117,10 @@
       veteranGuardHolds: 0, partyFights: 0, planSeeds: 0, stageAdvances: 0,
       bondTends: 0, musterStanddowns: 0, trickHolds: 0,
       partyTrios: 0, partyQuads: 0, partyDissolved: 0, deathCleanups: 0, removalCleanups: 0,
+      planReseeds: 0, planExpiries: 0,
     };
+    if (v.winPlanStats.planReseeds == null) v.winPlanStats.planReseeds = 0;
+    if (v.winPlanStats.planExpiries == null) v.winPlanStats.planExpiries = 0;
     if (v.winPlanStats.trickHolds == null) v.winPlanStats.trickHolds = 0;
     if (v.winPlanStats.partyTrios == null) v.winPlanStats.partyTrios = 0;
     if (v.winPlanStats.partyQuads == null) v.winPlanStats.partyQuads = 0;
@@ -284,6 +305,220 @@
   // fight — see the sim-partysize4-b prereg.
   function partysize4On() {
     try { return typeof process !== 'undefined' && process.env && process.env.PARTYSIZE4 === '1'; } catch (e) { return false; }
+  }
+
+  // PLANRESEED env gate (sim-reseed-b, finding #2626): the
+  // commit-time dead-target re-seed / expiry is OFF unless the
+  // process env carries PLANRESEED=1 (node sims only; in the browser
+  // process is undefined, so the lever is off). The sighting stamp
+  // (winPlanNoteSighting) is gated on the same flag, so the whole
+  // arm — stamp + commit check — is inert when the flag is unset.
+  function planreseedOn() {
+    try { return typeof process !== 'undefined' && process.env && process.env.PLANRESEED === '1'; } catch (e) { return false; }
+  }
+
+  // lastKillDayOf(self, type): the day of the village's most recent
+  // dated kill of a monster type, from the waveKillLog (the dated
+  // kill record maintained by recordWaveKill / recordPyrrhicKill).
+  // Null when no dated kill exists — the re-seed fails OPEN on null
+  // (an undated kill cannot prove the type died after the last
+  // sighting, so the departure proceeds as before).
+  function lastKillDayOf(self, type) {
+    try {
+      var log = (self.state && self.state.waveKillLog) || [];
+      var best = null;
+      for (var i = 0; i < log.length; i++) {
+        var e = log[i];
+        if (e && e.mid === type && typeof e.d === 'number' && (best == null || e.d > best)) best = e.d;
+      }
+      return best;
+    } catch (e) { return null; }
+  }
+
+  // planTargetDeadByType(self, type): the village-level liveness
+  // rule (sim-reseed-b, finding #2626 — same rule the held
+  // dead-target gate used, re-implemented fresh on master). The
+  // target TYPE is dead when the village has slain 1+ of it
+  // (villageSlain, the fire's told count) AND no sighting of the
+  // type has been noted since the kill day (villageLastSeenDay,
+  // stamped by winPlanNoteSighting from fieldFight on every live
+  // contact). A sighting ON the kill day does not re-open the type
+  // — day granularity cannot order same-day events. Type-level, not
+  // instance-level: the plan store holds a target type, never a
+  // monster instance identity.
+  function planTargetDeadByType(self, type) {
+    try {
+      if (!type) return false;
+      var slain = 0;
+      try { slain = ((self.state || {}).villageSlain || {})[type] || 0; } catch (e) {}
+      if (!slain) return false;
+      var killDay = lastKillDayOf(self, type);
+      if (killDay == null) return false; // undated kill: fail open
+      var seenDay = null;
+      try { seenDay = ((self.state || {}).villageLastSeenDay || {})[type]; } catch (e) {}
+      if (seenDay != null && seenDay > killDay) return false; // seen alive since the kill
+      return true;
+    } catch (e) { return false; }
+  }
+
+  // monsterWaveOf(self, type): the wave of a monster type id, from
+  // the roster (this.data.monsters — the established lookup pattern).
+  // Null when the type is unknown — the re-seed fails closed on it.
+  function monsterWaveOf(self, type) {
+    try {
+      var list = (self.data && self.data.monsters) || [];
+      for (var i = 0; i < list.length; i++) {
+        if (list[i] && list[i].id === type) return (list[i].wave | 0) || 1;
+      }
+      return null;
+    } catch (e) { return null; }
+  }
+
+  // planReseedPick(self, vid, plan): the rumor-based re-seed pick
+  // (sim-reseed-b, finding #2626). Returns {id, wave} for the first
+  // live rumor target the holder has actually heard about, or null.
+  // Perception-gated: only monsters the holder has sensed or heard
+  // about — never the global roster. Sources, in order: (1) the
+  // holder's own fought species (agency know.fought, most recent
+  // first); (2) the holder's own fight memories
+  // (village.monsterSightings, most recent day first — earned only
+  // by actually fighting a living world monster at that tile);
+  // (3) village fire knowledge (villageLastSeenDay keys, most
+  // recent first — types the village has seen alive in a fight; the
+  // deed talk tells everyone). Wave floor: candidate wave >=
+  // max(3, plan.needWave) — never hunt below the plan's own wave.
+  // No freshness window: liveness is the filter (a type fought 40
+  // days ago with no kill since is still live). Excludes the dead
+  // target itself, the suburb when FLEEREPAIR2=1 (leave-counter
+  // species — same rule as winPlanSeedFromFight), and any candidate
+  // that fails the liveness rule. Deterministic, no RNG, pure read
+  // — no state writes.
+  function planReseedPick(self, vid, plan) {
+    try {
+      if (!self || !vid || !plan) return null;
+      var need = Math.max(3, (plan.needWave | 0) || 3);
+      var dead = plan.target || null;
+      var seen = {};
+      function consider(id) {
+        if (!id || seen[id]) return null;
+        seen[id] = true;
+        if (id === dead) return null;
+        if (fleerepair2On() && id === 'suburb') return null;
+        var w = monsterWaveOf(self, id);
+        if (w == null || w < need) return null;
+        if (planTargetDeadByType(self, id)) return null;
+        return { id: id, wave: w };
+      }
+      // (1) Holder's own fought species, most recent first.
+      var fought = null;
+      try {
+        var a = self.agencyState ? self.agencyState() : null;
+        fought = (a && a.know && a.know[vid] && a.know[vid].fought) || null;
+      } catch (e) {}
+      if (fought) {
+        for (var i = fought.length - 1; i >= 0; i--) {
+          var pick = consider(fought[i]);
+          if (pick) return pick;
+        }
+      }
+      // (2) Holder's own fight memories, most recent day first.
+      var mems = null;
+      try { mems = (((self.state || {}).village || {}).monsterSightings || {})[vid] || null; } catch (e) {}
+      if (mems && mems.length) {
+        var ordered = mems.slice().sort(function (x, y) { return ((y && y.day) || 0) - ((x && x.day) || 0); });
+        for (var j = 0; j < ordered.length; j++) {
+          var pick2 = consider(ordered[j] && ordered[j].mid);
+          if (pick2) return pick2;
+        }
+      }
+      // (3) Village fire knowledge: types seen alive, most recent first.
+      var lastSeen = null;
+      try { lastSeen = (self.state || {}).villageLastSeenDay || null; } catch (e) {}
+      if (lastSeen) {
+        var keys = Object.keys(lastSeen).sort(function (x, y) { return (lastSeen[y] || 0) - (lastSeen[x] || 0); });
+        for (var k = 0; k < keys.length; k++) {
+          var pick3 = consider(keys[k]);
+          if (pick3) return pick3;
+        }
+      }
+      return null;
+    } catch (e) { return null; }
+  }
+
+  // reseedBeat(self, vid, oldType, newType): the FIRESIDE BEAT for a
+  // re-seed (sim-reseed-b, finding #2626) — one deterministic line
+  // when a plan's target is re-seeded at commit (Steve's
+  // no-silent-actions law: the retarget must be heard, not silent).
+  // Names the holder (disp convention) and both types (monsterNoun
+  // — the knowledge-gated name, never the raw id). Deterministic
+  // wording, no Math.random. The dead-target branch contains "put
+  // down" contiguously so the recorder's SAY_RE filter keeps it in
+  // the corpus transcript; the expired-plan branch (oldType null)
+  // has no dead target to name and reads as a found trail instead.
+  // Total by construction (the catch swallows), so call sites need
+  // no try/catch — only a typeof guard on say is needed inside.
+  function reseedBeat(self, vid, oldType, newType) {
+    try {
+      if (!self || typeof self.say !== 'function') return;
+      var cname = null;
+      try { cname = (typeof self.disp === 'function' ? self.disp(vid) : (self.displayName ? self.displayName(vid) : null)); } catch (e) {}
+      if (!cname) cname = 'Someone';
+      var oname = null, nname = null;
+      try { oname = self.monsterNoun ? self.monsterNoun(oldType) : null; } catch (e) {}
+      try { nname = self.monsterNoun ? self.monsterNoun(newType) : null; } catch (e) {}
+      if (!oname) oname = oldType || 'something';
+      if (!nname) nname = newType || 'something';
+      var ophrase = oname, nphrase = nname;
+      try { ophrase = (typeof self.articlePhrase === 'function') ? self.articlePhrase(oname, false) : oname; } catch (e) {}
+      try { nphrase = (typeof self.articlePhrase === 'function') ? self.articlePhrase(nname, false) : nname; } catch (e) {}
+      var line = null;
+      if (!oldType) {
+        // Re-seed of an already-expired (targetless) plan: there is
+        // no dead target to name — the hunt simply finds a new trail.
+        // The new kind is named ONCE (it was named twice in the first
+        // draft — "was seen ... turns to ..." — and read as a repeat).
+        line = cname + ' has no trail — but the fire remembers ' + nphrase + ' was seen, and the hunt turns that way.';
+      } else {
+        // The new kind is named once, mid-sentence (lowercase 'the'
+        // is correct there); the old kind's "that kind" has its
+        // antecedent in the same clause. The first draft put the new
+        // kind at a sentence start lowercase ("...put down. the ...")
+        // and named it twice — both fixed here.
+        line = cname + ' was ready to hunt ' + ophrase + ' — but the fire says that kind is already put down. The hunt turns to ' + nphrase + ' instead.';
+      }
+      if (self.state && self.state.systemArrived) self.say('📺 SYSTEM: "' + line + '"');
+      else self.say(line);
+    } catch (e) {}
+  }
+
+  // expiryBeat(self, vid, oldType): the FIRESIDE BEAT for a plan
+  // expiry (sim-reseed-b, finding #2626 — the dissolve beat already
+  // owed from #2621). One deterministic line when a plan expires on
+  // a dead target with no live rumor to turn to. Same pattern as
+  // reseedBeat: holder + type named as the village knows them, no
+  // Math.random, "put down" contiguous for the SAY_RE filter. Fires
+  // once per EXPIRY (called from the expiry branch only), never per
+  // hold — the hold is silent by design: the villager was already
+  // told. Total by construction.
+  function expiryBeat(self, vid, oldType) {
+    try {
+      if (!self || typeof self.say !== 'function') return;
+      var cname = null;
+      try { cname = (typeof self.disp === 'function' ? self.disp(vid) : (self.displayName ? self.displayName(vid) : null)); } catch (e) {}
+      if (!cname) cname = 'Someone';
+      var oname = null;
+      try { oname = self.monsterNoun ? self.monsterNoun(oldType) : null; } catch (e) {}
+      if (!oname) oname = oldType || 'something';
+      var ophrase = oname;
+      try { ophrase = (typeof self.articlePhrase === 'function') ? self.articlePhrase(oname, false) : oname; } catch (e) {}
+      // The first draft ended "...the fire keeps the name" — but no
+      // name was ever spoken in the line (the kind is named only as
+      // the village knows it, "the sky"), so the clause dangled.
+      // It now ends at the called-off hunt.
+      var line = cname + ' was ready to hunt ' + ophrase + ' — but the fire says that kind is already put down, and no one has seen another trail. The hunt is called off.';
+      if (self.state && self.state.systemArrived) self.say('📺 SYSTEM: "' + line + '"');
+      else self.say(line);
+    } catch (e) {}
   }
 
   // Shared extra-companion scan for the second AND third picks
@@ -549,6 +784,94 @@
         return plan;
       } catch (e) { return null; }
     },
+    // SIGHTING STAMP (sim-reseed-b, finding #2626): a live contact
+    // with a monster type — the village saw it alive today. Called
+    // from fieldFight on every live contact (evade, or a fight of any
+    // outcome), never for a corpse (alreadyDead). Village-level, one
+    // day-stamp per type: the re-seed's liveness half (a type is dead
+    // only when slain with no sighting since the kill) and its third
+    // rumor source (types seen alive). Env-gated: with PLANRESEED
+    // unset this is a no-op, so the whole arm is inert when the lever
+    // is off. Total by construction (the catch returns null), so call
+    // sites need no try/catch — only a typeof guard.
+    winPlanNoteSighting(mid) {
+      try {
+        if (!planreseedOn()) return null;
+        if (!mid) return null;
+        var day = 0;
+        try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
+        this.state = this.state || {};
+        this.state.villageLastSeenDay = this.state.villageLastSeenDay || {};
+        this.state.villageLastSeenDay[mid] = day;
+        return day;
+      } catch (e) { return null; }
+    },
+    // COMMIT-TIME DEAD-TARGET CHECK (sim-reseed-b, finding #2626):
+    // the re-seed / expiry decision, run at the commit point on both
+    // departure paths before any launch. Returns 'reseeded' (the
+    // dead target was retargeted onto a live rumor — the caller
+    // proceeds to launch), 'expired' (no live rumor — the plan
+    // dissolved with a beat; the caller returns 'normal' and the
+    // villager's day proceeds), 'held' (the plan already expired on
+    // an earlier commit and no rumor has arrived since — the caller
+    // returns 'hold', silent, no bump, no second beat), or null
+    // (flag off, no plan, live target, or a never-targeted plan —
+    // proceed as before; a never-targeted plan launches targetless
+    // in the village's normal wandering shape and is never touched
+    // here). The plan is read WITHOUT creating it (winPlanOf would
+    // materialize a plan entry); the check must never be the spark
+    // that ignites the plan system in a village where it sleeps.
+    // Total by construction (the catch returns null), so call sites
+    // need no try/catch — only a typeof guard.
+    winPlanCommitDeadTarget(vid) {
+      try {
+        if (!planreseedOn()) return null;
+        var v = this.state && this.state.village;
+        if (!v || !v.winPlan || !v.winPlan[vid]) return null;
+        var plan = v.winPlan[vid];
+        var day = 0;
+        try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
+        if (plan.target) {
+          if (!planTargetDeadByType(this, plan.target)) return null;
+          var oldType = plan.target;
+          var fresh = planReseedPick(this, vid, plan);
+          if (fresh) {
+            plan.target = fresh.id;
+            plan.needWave = fresh.wave;
+            plan.node = null;
+            plan.party = [];
+            plan.reseedExpiryDay = null;
+            bump(this, 'planReseeds');
+            reseedBeat(this, vid, oldType, fresh.id);
+            return 'reseeded';
+          }
+          plan.target = null;
+          plan.node = null;
+          plan.party = [];
+          plan.stage = 'party';
+          plan.holdSinceDay = -1;
+          plan.reseedExpiryDay = day;
+          bump(this, 'planExpiries');
+          expiryBeat(this, vid, oldType);
+          return 'expired';
+        }
+        // Targetless: only a plan THIS lever expired is held — a
+        // never-targeted plan (no stamp) is untouched.
+        if (plan.reseedExpiryDay == null) return null;
+        var fresh2 = planReseedPick(this, vid, plan);
+        if (fresh2) {
+          plan.target = fresh2.id;
+          plan.needWave = fresh2.wave;
+          plan.node = null;
+          plan.party = [];
+          plan.reseedExpiryDay = null;
+          bump(this, 'planReseeds');
+          reseedBeat(this, vid, null, fresh2.id);
+          return 'reseeded';
+        }
+        return 'held';
+      } catch (e) { return null; }
+    },
     // Haven evaluation: stage transitions from what the villager can
     // judge at home — their own gear, a beat broadcast while here, a
     // companion they can see. Never departs anyone; departure is the
@@ -780,6 +1103,20 @@
           plan.stage = 'party';
           bump(this, 'stageAdvances');
         }
+        // PLANRESEED (sim-reseed-b, finding #2626): the commit-time
+        // dead-target check — a plan whose target the village has
+        // slain with no sighting since is re-seeded from rumors the
+        // holder has heard, or expires when no live rumor exists;
+        // an expired plan holds on later commits until a rumor (or a
+        // lived fight) re-seeds it. Runs before any launch below, so
+        // no departure ever chases a dead target or launches
+        // targetless on a plan this lever expired. 'expired' returns
+        // 'normal' (the plan is gone; the day proceeds); 'held'
+        // returns 'hold' (stay at Haven this commit, silent).
+        var _rs = null;
+        try { _rs = (typeof this.winPlanCommitDeadTarget === 'function') ? this.winPlanCommitDeadTarget(vid) : null; } catch (e) {}
+        if (_rs === 'expired') return 'normal';
+        if (_rs === 'held') return 'hold';
         if (plan.stage === 'table' && hasKillWaveAtLeast(this, vid, 4)) {
           // Guard the veteran: no solo hard departure. With a party,
           // launch; without one, hold (bounded — the fight gate is the

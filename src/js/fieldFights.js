@@ -14,6 +14,7 @@
 //   - record: every fight returns rounds, wounds both ways, and outcome — feeds deeds, gossip, scars. (code: fieldFight)
 //   - cheap: round cap 15, no grid, no UI. (code: fieldFight)
 //   - alreadyDead: a world-monster entity with hp<=0 is a corpse, not a fight — early exit, no rewards. (code: fieldFight)
+//   - plan_reseed_sighting: every live contact (evade, or a fight of any outcome but alreadyDead) stamps the type's sighting day for the re-seed's liveness rule (code: fieldFight, winPlanNoteSighting, sim-reseed-b finding #2626). Flag-gated; a no-op with PLANRESEED unset.
 //   - awareness: the pre-fight evade check ("saw it, gave it room") decides contact, not outcome. (code: fieldFight)
 //   - determinism: opts.rng supplies every random draw (the contest engine's seeded resolution stream) — without it, Math.random/combat.roll exactly as before; the live path is untouched. (code: fieldFight, break-it 2026-10-08)
 //   - gear: the villager re-equips at fight entry (villagerGearUp, acquire=false — deterministic, no mid-fight crafting) and strikes with the tactical formula; equipped armor absorbs via diminishing returns (r = P/(P+20); absorb = min(hit-1, round(hit*r)) — at least 1 always lands) — mirroring the tactical engine, never full immunity. (code: fieldFight, 2026-10-09)
@@ -931,6 +932,11 @@
           rec.vHpLeft = vHp; rec.mHpLeft = members[0].hp;
           try { GPf?.finishFieldEscape(this, vid, huntOpening, rec, !!opts.noFlee); } catch (e) { console.warn('[godpath] field evasion', e); }
           rec.log.push(vName + ' saw ' + mPhrase + ' in time and gave it room.');
+          // PLANRESEED (sim-reseed-b, finding #2626): a live
+          // sighting — the type was seen alive today. The stamp is
+          // the re-seed's liveness half; the method itself is
+          // flag-gated (a no-op with PLANRESEED unset).
+          try { if (this.winPlanNoteSighting) this.winPlanNoteSighting(mdef && mdef.id); } catch (e) {}
           return rec;
         }
         rec.log.push(vName + ' walks straight into ' + mPhrase + '. No avoiding it.');
@@ -3128,6 +3134,13 @@
       if (ally2Settles) {
         try { this.hurtVillager(ally2Vid, ally2Taken, 'monster', rec, { monsterId: (mdef && mdef.id) || null, monsterName: mName || null }); } catch (e) {}
       }
+      // PLANRESEED (sim-reseed-b, finding #2626): a live contact
+      // with this type — the village saw it alive today (vKill /
+      // vFlee / mFlee / vDie all count; the alreadyDead early return
+      // above never reaches here). The stamp is the re-seed's
+      // liveness half; the method itself is flag-gated (a no-op with
+      // PLANRESEED unset).
+      try { if (this.winPlanNoteSighting) this.winPlanNoteSighting(mdef && mdef.id); } catch (e) {}
       return _sealed;
     },
 

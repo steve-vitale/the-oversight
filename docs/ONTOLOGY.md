@@ -792,6 +792,7 @@ Off-screen blow-by-blow fights for villager-vs-monster meetings. Real rounds, re
 - record: every fight returns rounds, wounds both ways, and outcome — feeds deeds, gossip, scars. (code: fieldFight)
 - cheap: round cap 15, no grid, no UI. (code: fieldFight)
 - alreadyDead: a world-monster entity with hp<=0 is a corpse, not a fight — early exit, no rewards. (code: fieldFight)
+- plan_reseed_sighting: every live contact (evade, or a fight of any outcome but alreadyDead) stamps the type's sighting day for the re-seed's liveness rule (code: fieldFight, winPlanNoteSighting, sim-reseed-b finding #2626). Flag-gated; a no-op with PLANRESEED unset.
 - awareness: the pre-fight evade check ("saw it, gave it room") decides contact, not outcome. (code: fieldFight)
 - determinism: opts.rng supplies every random draw (the contest engine's seeded resolution stream) — without it, Math.random/combat.roll exactly as before; the live path is untouched. (code: fieldFight, break-it 2026-10-08)
 - gear: the villager re-equips at fight entry (villagerGearUp, acquire=false — deterministic, no mid-fight crafting) and strikes with the tactical formula; equipped armor absorbs via diminishing returns (r = P/(P+20); absorb = min(hit-1, round(hit*r)) — at least 1 always lands) — mirroring the tactical engine, never full immunity. (code: fieldFight, 2026-10-09)
@@ -2174,7 +2175,7 @@ Place knowledge. The Scattering dropped the player somewhere
 ### win-plan (`win-plan.js`)
 Villagers pursuing a winning gameplan, in ordered stages.
 
-**Provides:** winPlanOf(vid), winPlanStats(), winPlanOnVillagerDeath(vid), winPlanOnVillagerLeave(vid), winPlanHavenTick(vid, hx, hy), winPlanDepart(vid, hx, hy, announce), winPlanFightGate(vid, mdef), winPlanSeedFromFight(vid, mdef, outcome), winPlanNoteKill(vid, mdef), winPlanNoteFight(vid, allyVids), winPlanBondsTick(hx, hy), winPlanMusterTick(hx, hy)
+**Provides:** winPlanOf(vid), winPlanStats(), winPlanOnVillagerDeath(vid), winPlanOnVillagerLeave(vid), winPlanHavenTick(vid, hx, hy), winPlanDepart(vid, hx, hy, announce), winPlanFightGate(vid, mdef), winPlanSeedFromFight(vid, mdef, outcome), winPlanNoteKill(vid, mdef), winPlanNoteFight(vid, allyVids), winPlanNoteSighting(mid), winPlanCommitDeadTarget(vid), winPlanBondsTick(hx, hy), winPlanMusterTick(hx, hy)
 
 **Rules:**
 - winplan_engagement: a plan starts from lived or heard knowledge (code: winPlanHavenTick)

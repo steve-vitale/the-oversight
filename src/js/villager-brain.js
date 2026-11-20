@@ -1187,6 +1187,18 @@
       } catch (e) {}
       var opts = null;
       if (c.winPlanAction === 'party_launch' && c.companion && typeof this.startExpedition === 'function') {
+        // PLANRESEED (sim-reseed-b, finding #2626): the commit-time
+        // dead-target check — the committed party launch is the
+        // departure that fires in sims, so the check lives here, not
+        // in the dawn bid. A dead target is re-seeded from rumors
+        // the holder has heard (the launch proceeds on the new
+        // target) or the plan expires ('normal' — the day proceeds);
+        // an expired plan holds ('hold') until a rumor or a lived
+        // fight re-seeds it. Runs before any startExpedition below.
+        var _rs = null;
+        try { _rs = (typeof this.winPlanCommitDeadTarget === 'function') ? this.winPlanCommitDeadTarget(vid) : null; } catch (e) {}
+        if (_rs === 'expired') return 'normal';
+        if (_rs === 'held') return 'hold';
         // Mirror winPlanDepart's shared-target party launch, owned by the
         // dawn commitment rather than a midday re-decide.
         var tx = null, ty = null, dur = 0;
