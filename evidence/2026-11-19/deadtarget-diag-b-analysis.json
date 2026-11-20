@@ -1,0 +1,493 @@
+{
+  "verdict": "DIAG-GO",
+  "kind": null,
+  "bars": [
+    {
+      "id": "pool-launches",
+      "pass": true,
+      "detail": "launches 6 (floor 4); dead 2, live 4, unknown 0"
+    },
+    {
+      "id": "classification",
+      "pass": true,
+      "detail": "classified 6/6 = 1.000 (bar 1.000); dead share 0.333"
+    },
+    {
+      "id": "gate-snapshot",
+      "pass": true,
+      "detail": "gate snapshots missing 0, mismatched vs recomputation 0 (bar 0 / 0); duplicate depart rows 0 (expect 0)"
+    },
+    {
+      "id": "instrument",
+      "pass": true,
+      "detail": "instrument errors 0 (bar 0); files 8/8"
+    }
+  ],
+  "analysis": {
+    "dir": "evidence/2026-11-19/perseed-deadtarget-diag-b",
+    "files": 8,
+    "seeds": [
+      106081,
+      106082,
+      106083,
+      106084,
+      106085,
+      106086,
+      106087,
+      106088
+    ],
+    "errors": 0,
+    "duplicates": 0,
+    "gateMissing": 0,
+    "gateMismatch": 0,
+    "launches": 6,
+    "perSeed": [
+      {
+        "seed": 106081,
+        "launches": 1,
+        "dead": 0,
+        "live": 1,
+        "unknown": 0,
+        "duplicates": 0,
+        "gateMissing": 0,
+        "gateMismatch": 0
+      },
+      {
+        "seed": 106082,
+        "launches": 0,
+        "dead": 0,
+        "live": 0,
+        "unknown": 0,
+        "duplicates": 0,
+        "gateMissing": 0,
+        "gateMismatch": 0
+      },
+      {
+        "seed": 106083,
+        "launches": 1,
+        "dead": 0,
+        "live": 1,
+        "unknown": 0,
+        "duplicates": 0,
+        "gateMissing": 0,
+        "gateMismatch": 0
+      },
+      {
+        "seed": 106084,
+        "launches": 4,
+        "dead": 2,
+        "live": 2,
+        "unknown": 0,
+        "duplicates": 0,
+        "gateMissing": 0,
+        "gateMismatch": 0
+      },
+      {
+        "seed": 106085,
+        "launches": 0,
+        "dead": 0,
+        "live": 0,
+        "unknown": 0,
+        "duplicates": 0,
+        "gateMissing": 0,
+        "gateMismatch": 0
+      },
+      {
+        "seed": 106086,
+        "launches": 0,
+        "dead": 0,
+        "live": 0,
+        "unknown": 0,
+        "duplicates": 0,
+        "gateMissing": 0,
+        "gateMismatch": 0
+      },
+      {
+        "seed": 106087,
+        "launches": 0,
+        "dead": 0,
+        "live": 0,
+        "unknown": 0,
+        "duplicates": 0,
+        "gateMissing": 0,
+        "gateMismatch": 0
+      },
+      {
+        "seed": 106088,
+        "launches": 0,
+        "dead": 0,
+        "live": 0,
+        "unknown": 0,
+        "duplicates": 0,
+        "gateMissing": 0,
+        "gateMismatch": 0
+      }
+    ],
+    "rows": [
+      {
+        "seed": 106081,
+        "launch": {
+          "seed": 106081,
+          "day": 112,
+          "vid": "app_mgpspho1903",
+          "target": "herald",
+          "targetWave": 4,
+          "party": [
+            "app_mgpspho1903",
+            "app_mgpsphkb257",
+            "gen_l19ie5f",
+            "chantal_mukendi"
+          ],
+          "partySize": 4,
+          "source": "brain",
+          "gate": {
+            "stageBefore": "party",
+            "targetBefore": "herald",
+            "node": {
+              "nx": 3,
+              "ny": 5
+            },
+            "sinceDay": 110,
+            "villageSlain": 0,
+            "lastFightDay": 110,
+            "lastFightKill": false,
+            "lastFightOutcome": "vFlee",
+            "daysSinceLastFight": 2,
+            "lastSightingDay": 110,
+            "daysSinceLastSighting": 2
+          }
+        },
+        "cls": "live",
+        "lastFought": {
+          "day": 110,
+          "vid": "app_mgpspho1903",
+          "outcome": "vFlee",
+          "vKill": false,
+          "origin": "world-tick"
+        },
+        "lastSighted": {
+          "day": 110,
+          "outcome": "vFlee"
+        },
+        "daysSinceLastFight": 2,
+        "daysSinceLastSighting": 2,
+        "firstFightAfter": {
+          "day": 117,
+          "vid": "app_mgpsphkb257",
+          "outcome": "vKill",
+          "origin": "aid",
+          "sameDay": false
+        },
+        "refoughtAfter": true,
+        "gateOk": true,
+        "stageBefore": "party",
+        "villageSlain": 0
+      },
+      {
+        "seed": 106083,
+        "launch": {
+          "seed": 106083,
+          "day": 114,
+          "vid": "caleb_jones",
+          "target": "editor",
+          "targetWave": 5,
+          "party": [
+            "caleb_jones",
+            "somchai_prasert",
+            "aria_thompson",
+            "fatima_hassan"
+          ],
+          "partySize": 4,
+          "source": "brain",
+          "gate": {
+            "stageBefore": "party",
+            "targetBefore": "editor",
+            "node": {
+              "nx": 3,
+              "ny": 4
+            },
+            "sinceDay": 113,
+            "villageSlain": 1,
+            "lastFightDay": 113,
+            "lastFightKill": false,
+            "lastFightOutcome": "vFlee",
+            "daysSinceLastFight": 1,
+            "lastSightingDay": 113,
+            "daysSinceLastSighting": 1
+          }
+        },
+        "cls": "live",
+        "lastFought": {
+          "day": 113,
+          "vid": "caleb_jones",
+          "outcome": "vFlee",
+          "vKill": false,
+          "origin": "world-tick"
+        },
+        "lastSighted": {
+          "day": 113,
+          "outcome": "vFlee"
+        },
+        "daysSinceLastFight": 1,
+        "daysSinceLastSighting": 1,
+        "firstFightAfter": {
+          "day": 115,
+          "vid": "caleb_jones",
+          "outcome": "vFlee",
+          "origin": "world-tick",
+          "sameDay": false
+        },
+        "refoughtAfter": true,
+        "gateOk": true,
+        "stageBefore": "party",
+        "villageSlain": 1
+      },
+      {
+        "seed": 106084,
+        "launch": {
+          "seed": 106084,
+          "day": 115,
+          "vid": "visjoin_109",
+          "target": "herald",
+          "targetWave": 4,
+          "party": [
+            "visjoin_109",
+            "rafael_torres"
+          ],
+          "partySize": 2,
+          "source": "brain",
+          "gate": {
+            "stageBefore": "party",
+            "targetBefore": "herald",
+            "node": {
+              "nx": 5,
+              "ny": 4
+            },
+            "sinceDay": 114,
+            "villageSlain": 0,
+            "lastFightDay": 114,
+            "lastFightKill": false,
+            "lastFightOutcome": "vFlee",
+            "daysSinceLastFight": 1,
+            "lastSightingDay": 114,
+            "daysSinceLastSighting": 1
+          }
+        },
+        "cls": "live",
+        "lastFought": {
+          "day": 114,
+          "vid": "visjoin_109",
+          "outcome": "vFlee",
+          "vKill": false,
+          "origin": "world-tick"
+        },
+        "lastSighted": {
+          "day": 114,
+          "outcome": "vFlee"
+        },
+        "daysSinceLastFight": 1,
+        "daysSinceLastSighting": 1,
+        "firstFightAfter": {
+          "day": 118,
+          "vid": "visjoin_115",
+          "outcome": "vFlee",
+          "origin": "world-tick",
+          "sameDay": false
+        },
+        "refoughtAfter": true,
+        "gateOk": true,
+        "stageBefore": "party",
+        "villageSlain": 0
+      },
+      {
+        "seed": 106084,
+        "launch": {
+          "seed": 106084,
+          "day": 124,
+          "vid": "visjoin_114",
+          "target": "herald",
+          "targetWave": 4,
+          "party": [
+            "visjoin_114",
+            "rafael_torres",
+            "sari_wulandari"
+          ],
+          "partySize": 3,
+          "source": "brain",
+          "gate": {
+            "stageBefore": "party",
+            "targetBefore": "herald",
+            "node": {
+              "nx": 4,
+              "ny": 5
+            },
+            "sinceDay": 123,
+            "villageSlain": 0,
+            "lastFightDay": 123,
+            "lastFightKill": false,
+            "lastFightOutcome": "vFlee",
+            "daysSinceLastFight": 1,
+            "lastSightingDay": 123,
+            "daysSinceLastSighting": 1
+          }
+        },
+        "cls": "live",
+        "lastFought": {
+          "day": 123,
+          "vid": "visjoin_114",
+          "outcome": "vFlee",
+          "vKill": false,
+          "origin": "world-tick"
+        },
+        "lastSighted": {
+          "day": 123,
+          "outcome": "vFlee"
+        },
+        "daysSinceLastFight": 1,
+        "daysSinceLastSighting": 1,
+        "firstFightAfter": {
+          "day": 124,
+          "vid": "visjoin_114",
+          "outcome": "vFlee",
+          "origin": "world-tick",
+          "sameDay": true
+        },
+        "refoughtAfter": true,
+        "gateOk": true,
+        "stageBefore": "party",
+        "villageSlain": 0
+      },
+      {
+        "seed": 106084,
+        "launch": {
+          "seed": 106084,
+          "day": 136,
+          "vid": "visjoin_114",
+          "target": "herald",
+          "targetWave": 4,
+          "party": [
+            "visjoin_114",
+            "rafael_torres"
+          ],
+          "partySize": 2,
+          "source": "brain",
+          "gate": {
+            "stageBefore": "hunt",
+            "targetBefore": "herald",
+            "node": {
+              "nx": 4,
+              "ny": 5
+            },
+            "sinceDay": 123,
+            "villageSlain": 1,
+            "lastFightDay": 126,
+            "lastFightKill": true,
+            "lastFightOutcome": "vKill",
+            "daysSinceLastFight": 10,
+            "lastSightingDay": 126,
+            "daysSinceLastSighting": 10
+          }
+        },
+        "cls": "dead",
+        "lastFought": {
+          "day": 126,
+          "vid": "rafael_torres",
+          "outcome": "vKill",
+          "vKill": true,
+          "origin": "world-tick"
+        },
+        "lastSighted": {
+          "day": 126,
+          "outcome": "vKill"
+        },
+        "daysSinceLastFight": 10,
+        "daysSinceLastSighting": 10,
+        "firstFightAfter": null,
+        "refoughtAfter": false,
+        "gateOk": true,
+        "stageBefore": "hunt",
+        "villageSlain": 1
+      },
+      {
+        "seed": 106084,
+        "launch": {
+          "seed": 106084,
+          "day": 141,
+          "vid": "visjoin_114",
+          "target": "herald",
+          "targetWave": 4,
+          "party": [
+            "visjoin_114",
+            "rafael_torres",
+            "miguel_santos"
+          ],
+          "partySize": 3,
+          "source": "brain",
+          "gate": {
+            "stageBefore": "hunt",
+            "targetBefore": "herald",
+            "node": {
+              "nx": 4,
+              "ny": 5
+            },
+            "sinceDay": 123,
+            "villageSlain": 1,
+            "lastFightDay": 126,
+            "lastFightKill": true,
+            "lastFightOutcome": "vKill",
+            "daysSinceLastFight": 15,
+            "lastSightingDay": 126,
+            "daysSinceLastSighting": 15
+          }
+        },
+        "cls": "dead",
+        "lastFought": {
+          "day": 126,
+          "vid": "rafael_torres",
+          "outcome": "vKill",
+          "vKill": true,
+          "origin": "world-tick"
+        },
+        "lastSighted": {
+          "day": 126,
+          "outcome": "vKill"
+        },
+        "daysSinceLastFight": 15,
+        "daysSinceLastSighting": 15,
+        "firstFightAfter": null,
+        "refoughtAfter": false,
+        "gateOk": true,
+        "stageBefore": "hunt",
+        "villageSlain": 1
+      }
+    ],
+    "dead": 2,
+    "live": 4,
+    "unknown": 0,
+    "classified": 6,
+    "classifiedShare": 1,
+    "deadShare": 0.3333333333333333,
+    "stageBefore": {
+      "party": 4,
+      "hunt": 2
+    },
+    "deadStanding": 0,
+    "deadSlainKnown": 2,
+    "deadNeverRefought": 2,
+    "withFirstAfter": 4,
+    "sameDayFirstAfter": 1,
+    "medianDaysSinceLastFight": 1.5
+  },
+  "wall": {
+    "wins": 0,
+    "national": 0,
+    "wave5": 4,
+    "wave4": 8,
+    "standing200": 4,
+    "medianDays": 150.5,
+    "survived": 5
+  },
+  "medianDays": 150,
+  "launches": 6,
+  "errors": 0
+}
