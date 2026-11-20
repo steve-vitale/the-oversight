@@ -7843,6 +7843,11 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // no type-'melee' weapon does).
         let speargateOn = false;
         try { speargateOn = (typeof process !== 'undefined' && process.env && process.env.SPEARGATE === '1'); } catch (e) {}
+        let depmatOn = false;
+        try { depmatOn = (typeof process !== 'undefined' && process.env && process.env.DEPMAT === '1'); } catch (e) {}
+        let roll35On = false;
+        try { roll35On = (typeof process !== 'undefined' && process.env && process.env.ROLL35 === '1'); } catch (e) {}
+        let isSpearHolder = false;
         const isVolley = (id) => { const d = defOf(id); return !!(d && d.weapon && d.weapon.ammo); };
         const isStageable = speargateOn ? isVolley : isRanged;
         const bonusOf = (id) => { const d = defOf(id); return (d && d.weapon && d.weapon.bonus) || 0; };
@@ -7867,6 +7872,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (slotRw) {
           const slotDef = defOf(slotRw.itemId || slotRw.id);
           if (!(slotDef && slotDef.weapon && slotDef.weapon.ammo)) {
+            isSpearHolder = true;
             bump('spearSeen');
             if (speargateOn) bump('spearPassed');
           }
@@ -7928,6 +7934,8 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const LADDER = ['bow', 'crude_bow'];
           let pick = null;
           let mats = null;
+          let fromSite = null;
+          let siteMats = null;
           try { const st = (this.stashState) ? this.stashState() : null; mats = (st && st.materials) || null; } catch (e) {}
           if (!mats) mats = (v.stash && v.stash.materials) || {};
           const ownMat = (mat) => {
@@ -7943,8 +7951,34 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             if (!recipe || !recipe.materials) continue;
             if ((lv[rid] || 0) < 1) continue;
             let ok = true;
+            const shortMats = [];
             for (const [m, need] of Object.entries(recipe.materials)) {
-              if (ownMat(m) + (mats[m] || 0) < need) { ok = false; break; }
+              if (ownMat(m) + (mats[m] || 0) < need) { ok = false; shortMats.push(m); }
+            }
+            // DEPMAT (sim-depmat-a, finding #2590): the trailhead bundle.
+            // A crafter who knows crude_bow but falls short on green
+            // branch and vine cord gathers the shortfall from the brush
+            // at the departure site itself and the pick proceeds — the
+            // site materials are spent by the attempt exactly like pile
+            // materials, a failed roll loses them, and the pile is never
+            // touched for the site portion. Crude_bow only: a green
+            // branch and a vine cord grow at the village edge, a seasoned
+            // wood stave does not. The block draws nothing itself.
+            if (!ok && depmatOn && rid === 'crude_bow' && shortMats.length &&
+                shortMats.every(function (m) { return m === 'branch' || m === 'vine'; })) {
+              pick = { rid: rid, recipe: recipe, level: lv[rid] };
+              fromSite = shortMats.slice();
+              siteMats = shortMats.slice();
+              out.depmatSite = true;
+              out.siteMats = shortMats.slice();
+              try { if (this.tele) this.tele('weapon_craft_site', { vid: vid, item: 'crude_bow', mats: shortMats.slice() }); } catch (e2) {}
+              try {
+                if (this.playerAtHaven && this.playerAtHaven()) {
+                  const nm = this.firstRef ? this.firstRef(vid) : 'Someone';
+                  this.say(nm + ' snaps a green branch and twists a vine cord from the brush at the trailhead.');
+                }
+              } catch (e2) {}
+              break;
             }
             if (!ok) continue;
             pick = { rid: rid, recipe: recipe, level: lv[rid] };
@@ -7967,12 +8001,28 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
                 else { e.units = have - take; if (e.units <= 0) items.splice(i, 1); }
               }
               if (left > 0) {
-                mats[m] = (mats[m] || 0) - left;
-                try { if (this.stashLog) this.stashLog('take', m, left, vid); } catch (e2) {}
+                if (fromSite && fromSite.indexOf(m) !== -1) {
+                  // Site-supplied: the brush at the trailhead covered
+                  // this material — the pile is never touched for it.
+                } else {
+                  mats[m] = (mats[m] || 0) - left;
+                  try { if (this.stashLog) this.stashLog('take', m, left, vid); } catch (e2) {}
+                }
               }
             }
             const rate = pick.level >= 2 ? 0.85 : 0.35;
-            const success = Math.random() < rate;
+            // ROLL35 (sim-roll35-a, finding #2590): the learned
+            // first-make rate. A spear-holder who already knows how
+            // a crude bow is made faces 60% on the first make
+            // instead of the blind 35% — the 85% learned rate at
+            // lv >= 2 is untouched, and everyone else (non-spear
+            // holders, the bow rung) keeps the blind rate. A
+            // threshold swap on the same single draw: zero new
+            // draws, so the RNG streams stay aligned in count.
+            let roll35Rate = rate;
+            try { if (roll35On && isSpearHolder && pick.rid === 'crude_bow' && pick.level < 2) roll35Rate = 0.60; } catch (e) {}
+            out.roll35Rate = roll35Rate;
+            const success = Math.random() < roll35Rate;
             out.craftedOk = success;
             if (success) {
               if (pick.level < 2) lv[pick.rid] = 2;
@@ -8109,7 +8159,29 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         const lv = v.ammoCraft[vid] = v.ammoCraft[vid] || {};
         const level = lv[ammoId] || 1;
         const rate = level >= 2 ? 0.85 : 0.35;
-        const success = Math.random() < rate;
+        // AMMO (sim-ammo-a, finding #2590): the served-bow quiver.
+        // A carrier whose bow was staged THIS departure faces the
+        // learned 60% first-make rate on the arrow craft instead of
+        // the blind 35% — the 85% learned rate at lv >= 2 is
+        // untouched, and everyone else (alreadyHad bows, non-served
+        // carriers) keeps the blind rate. A threshold swap on the
+        // same single draw: zero new draws, so the RNG streams stay
+        // aligned in count.
+        let ammoOn = false;
+        try { ammoOn = (typeof process !== 'undefined' && process.env && process.env.AMMO === '1'); } catch (e) {}
+        let ammoRate = rate;
+        let ammoServed = false;
+        try {
+          const rec = (v.bowOpenByVid || {})[vid] || null;
+          const today = (this.state.scholar || {}).day || 0;
+          if (ammoOn && rec && rec.day === today && (rec.source === 'crafted' || rec.source === 'fromStash' || rec.source === 'fromArmory')) {
+            ammoServed = true;
+            if (level < 2) ammoRate = 0.60;
+          }
+        } catch (e) {}
+        out.ammoServed = ammoServed;
+        out.ammoRate = ammoRate;
+        const success = Math.random() < ammoRate;
         out.crafted = 1;
         out.craftedOk = success;
         if (success) {
