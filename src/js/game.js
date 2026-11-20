@@ -47276,6 +47276,18 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           && !(i.id === 'fusion_pellet' && this.state.fusionReactorHolder));
         if (!pool.length) tier--;
       }
+      // SEARSUPPLY (sim-searsupply-a, finding #2599): on contest-prize
+      // paths at tier 4 only, weight fusion_cell ×4 in the pool (1/15
+      // -> 4/18). Same single pick draw, different mapping — draw
+      // count identical leg-to-leg, so the fix-a exposure confound
+      // (an extra draw shifting the whole RNG stream) cannot recur.
+      // Kill loot, show gifts, trade, and corpse takes are untouched.
+      try {
+        if (loot.rewardSource === 'contest' && tier === 4 && typeof process !== 'undefined' && process.env && process.env.SEARSUPPLY === '1') {
+          const _cellDef = (this.data.items || []).find(function (d) { return d.id === 'fusion_cell'; });
+          if (_cellDef) pool.push(_cellDef, _cellDef, _cellDef);
+        }
+      } catch (e) {}
       if (!pool.length) return null;
       return pool[Math.floor(Math.random() * pool.length)].id;
     },
