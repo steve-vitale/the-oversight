@@ -2928,7 +2928,21 @@
           moreOpen = !!w.def.moreAvailable.call(this, vid);
         }
       } catch (e) {}
-      return moreOpen ? out : out.filter(o => o && o.id !== 'dlg:more');
+      let filtered = moreOpen ? out : out.filter(o => o && o.id !== 'dlg:more');
+      // REACT-EXHAUSTION (journey-scale r246 2026-11-20): the bare react is
+      // offered only while the thread is alive. Two dead reacts in a row
+      // (reactDryCount >= 2 — the same threshold the generic topic-pool
+      // gate in convo-beats.js uses) mean the conversation has run out of
+      // beats, and the want menu must retire it like the pool does: the
+      // want-owned menu bypasses that gate entirely (want options are
+      // pushed before the pool loop), so a just_company sitting could tap
+      // react forever while the 4-line dead-react pool cycled verbatim
+      // (Miguel d90: "So." twice in one sitting, the want advancing on
+      // nothing). The conversation winds down to more/leave/silence
+      // instead. A landed beat resets the count (conversation.js), so new
+      // content re-opens react — it retires only while dry.
+      if ((c.reactDryCount || 0) >= 2) filtered = filtered.filter(o => o && o.id !== 'dlg:react');
+      return filtered;
     },
 
     // convoWantCloseLine: the goodbye beat for how the want ended — the
