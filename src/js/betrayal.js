@@ -1070,7 +1070,12 @@
           kind: 'person', villagerId: plot.target,
           name: this.displayName(plot.target),
           cause: 'ambush', killerId: plot.leader,
-          witnesses: this.witnesses ? (this.witnesses(6) || []) : [],
+          // SELFWIT (journey-succession r258): witnesses() excludes only
+          // the bearer — the victim, standing next to the scholar, lands
+          // in their own witness list. The combat path excludes the victim
+          // via fightWitnesses(excludeVid); the ambush path must do the
+          // same, or the dead witness their own death.
+          witnesses: this.witnesses ? (this.witnesses(6) || []).filter(id => id !== plot.target) : [],
         });
       } catch (e) {}
       // FALLEN RECORD (journey-social r125): registerDeath makes the
