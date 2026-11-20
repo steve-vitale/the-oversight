@@ -61,26 +61,38 @@ function launchesOf(d) {
 // before the day's fights). An evade (rounds 0, mDealt 0) is a
 // sighting, not a fight — it never counts here. Returns null when
 // no such row exists.
+// CORRECTION (2026-11-20, found by the gate cross-check on the
+// judged corpus): same-day ties resolve to the LAST row in file
+// order (the recorder appends chronologically, so the last row at
+// the max day is the latest fight of that day). The first version
+// used a strict `>` and kept the FIRST row at the max day — on
+// seed 106084 d126 a flee and the kill share the day, and the
+// first-version analyzer took the flee while the driver's
+// at-departure snapshot (last write wins) took the kill: 2 gate
+// mismatches, and both d136/d141 re-launches misclassified as
+// live. The frozen rule ("the LAST pre-launch fought encounter")
+// never changed; the implementation now matches it.
 function lastFoughtBefore(d, launch) {
   let best = null;
   for (const e of (d.v4encounters || [])) {
     if (e.mid !== launch.target) continue;
     if (e.day >= launch.day) continue;
     if (!isFought(e)) continue;
-    if (!best || e.day > best.day) best = e;
+    if (!best || e.day >= best.day) best = e;
   }
   return best;
 }
 
 // Latest encounter of the target type strictly before the launch
 // day, fought or evaded (the monster was seen alive). Returns null
-// when no such row exists.
+// when no such row exists. Same last-row-wins tie-break as
+// lastFoughtBefore (see the correction note above).
 function lastSightedBefore(d, launch) {
   let best = null;
   for (const e of (d.v4encounters || [])) {
     if (e.mid !== launch.target) continue;
     if (e.day >= launch.day) continue;
-    if (!best || e.day > best.day) best = e;
+    if (!best || e.day >= best.day) best = e;
   }
   return best;
 }
@@ -260,6 +272,8 @@ function selftest() {
       mkLaunch(60, 'h5', 'reunion', 4, mkGate('hunt', 55, false, 0)),    // live: kill d50, refight d55 flee -> live
       mkLaunch(70, 'h6', 'eulogy', 4, mkGate('party', 65, true, 1)),      // dead by kill d65; evade d68 is sighting only
       mkLaunch(80, 'h7', 'editor', 5, mkGate('table', null, null, 0)),    // unknown; same-day fight d80 must NOT count as before
+      mkLaunch(90, 'h8', 'strike', 4, mkGate('hunt', 88, true, 1)),       // CORRECTION PIN: same-day flee-then-kill d88 -> dead (last row wins)
+      mkLaunch(95, 'h9', 'congregation', 4, mkGate('hunt', 90, false, 1)), // CORRECTION PIN: same-day kill-then-flee d90 -> live (last row wins)
     ],
     v4encounters: [
       mkEnc(18, 'x1', 'herald', 'world-tick', 'vKill', 6, 400, true),
@@ -272,10 +286,14 @@ function selftest() {
       mkEnc(68, 'x6', 'eulogy', 'aid', 'vFlee', 0, 0, false),   // no-contact evade: sighting, not a fight
       mkEnc(80, 'h7', 'editor', 'world-tick', 'vFlee', 3, 90, false), // same-day as h7's launch: NOT "before"
       mkEnc(85, 'h7', 'editor', 'world-tick', 'vFlee', 2, 50, false), // after launch: first-fight-after + refought
+      mkEnc(88, 'x7', 'strike', 'world-tick', 'vFlee', 2, 40, false), // same day, FIRST: flee
+      mkEnc(88, 'x8', 'strike', 'world-tick', 'vKill', 5, 300, true), // same day, LAST: kill -> h8 dead
+      mkEnc(90, 'x9', 'congregation', 'world-tick', 'vKill', 5, 300, true), // same day, FIRST: kill
+      mkEnc(90, 'y9', 'congregation', 'world-tick', 'vFlee', 2, 40, false), // same day, LAST: flee -> h9 live
     ],
   };
   const a = analyzeFile(d);
-  check('§A seven launches counted', a.launches === 7, a.launches);
+  check('§A nine launches counted', a.launches === 9, a.launches);
   const byVid = {};
   for (const r of a.rows) byVid[r.launch.vid] = r;
   check('§A h1: last fight d19 flee (AFTER the d18 kill) -> live, not dead',
@@ -298,7 +316,13 @@ function selftest() {
     byVid.h7.cls === 'unknown' && !!byVid.h7.firstFightAfter && byVid.h7.firstFightAfter.day === 80 &&
     byVid.h7.firstFightAfter.sameDay === true && byVid.h7.refoughtAfter === true,
     byVid.h7);
-  check('§A gate cross-check passes on all seven rows (snapshot == recomputation)',
+  check('§A h8 (correction pin): same-day flee-then-kill d88 -> dead, last row wins',
+    byVid.h8.cls === 'dead' && byVid.h8.lastFought.day === 88 && byVid.h8.lastFought.outcome === 'vKill',
+    byVid.h8);
+  check('§A h9 (correction pin): same-day kill-then-flee d90 -> live, last row wins',
+    byVid.h9.cls === 'live' && byVid.h9.lastFought.day === 90 && byVid.h9.lastFought.outcome === 'vFlee',
+    byVid.h9);
+  check('§A gate cross-check passes on all nine rows (snapshot == recomputation)',
     a.gateMissing === 0 && a.gateMismatch === 0 && a.rows.every(function (r) { return r.gateOk === true; }),
     { missing: a.gateMissing, mismatch: a.gateMismatch });
   check('§A dead never-refought: h4 has no herald fight after d50',
