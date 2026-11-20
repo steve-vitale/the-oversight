@@ -1,0 +1,1860 @@
+{
+  "verdict": "NO-GO",
+  "kind": "",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": true,
+      "detail": "spear-holder departures (spearSeen): arm 111 (floor 10); ctl 108"
+    },
+    {
+      "id": "gate-pass-rate",
+      "pass": true,
+      "detail": "arm spearPassed/spearSeen = 111/111 = 1.000 (bar 1.0 — every spear-holder passed over)"
+    },
+    {
+      "id": "ctl-pass-rate",
+      "pass": true,
+      "detail": "ctl spearPassed/spearSeen = 108/108 = 1.000 (bar 1.0 — the gate is ON on the ctl leg too; every spear-holder is passed over)"
+    },
+    {
+      "id": "consistency-alreadyHad",
+      "pass": true,
+      "detail": "arm alreadyHad 195 vs ctl alreadyHad 195 (delta 0, bar |delta|<=3; both legs gate-on, so no spearSeen term)"
+    },
+    {
+      "id": "consistency-noSource",
+      "pass": false,
+      "detail": "arm noSource 259 vs ctl noSource 255 minus (arm staged 2 - ctl staged 0) = 253 (delta 6, bar |delta|<=3; PARTITION formula — every departure partitions into staged / craftedFail / noSource, so a served departure leaves noSource by exactly one)"
+    },
+    {
+      "id": "served",
+      "pass": false,
+      "detail": "SERVED (fromStash+fromArmory+crafted): arm 2 (stash 0 armory 0 crafted 2, craftedFail 5) minus ctl 0 = 2 (bar >= 3 — the gate must actually serve spear-holders, not just pass them to noSource)"
+    },
+    {
+      "id": "volley-rate-rise",
+      "pass": true,
+      "detail": "volley fire share arm 0.435 (10/23) minus ctl 0.333 (7/21) = 0.101 (bar >= +0.10 — served bows must actually open fire)"
+    },
+    {
+      "id": "cost-starvation",
+      "pass": true,
+      "detail": "starvation totals arm 2 vs ctl 3; villager arm 2 vs ctl 3 (bar arm<=ctl+2 both)"
+    },
+    {
+      "id": "cost-median",
+      "pass": true,
+      "detail": "median survival arm 150d vs ctl 150d (bar arm>=0.8x ctl)"
+    }
+  ],
+  "ctl": {
+    "dir": "evidence/2026-11-19/perseed-bowsee-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "senseexpedOn": {
+      "true": 8
+    },
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "speargateOn": {
+      "true": 8
+    },
+    "departseeOn": {
+      "false": 8
+    },
+    "bowknowOn": {
+      "false": 8
+    },
+    "meetings": 12,
+    "wins": 2,
+    "kills": 0,
+    "losses": 10,
+    "vDie": 1,
+    "vFlee": 9,
+    "mFlee": 2,
+    "winShare": 0.16666666666666666,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 71,
+      "joined": 71,
+      "unjoined": 0,
+      "noLaunchPlan": 4,
+      "pairLaunch": 37,
+      "partyAbsent": 3,
+      "evadeExcluded": 15
+    },
+    "byOutcome": {
+      "vFlee": {
+        "n": 9,
+        "rounds": [
+          4,
+          5,
+          4,
+          2,
+          7,
+          3,
+          5,
+          2,
+          5
+        ],
+        "dmgShare": [
+          0.12299465240641712,
+          0.15304182509505704,
+          0.10408560311284047,
+          0.04208654416123296,
+          0.11152073732718894,
+          0.04204753199268738,
+          0.2521186440677966,
+          0.033050047214353166,
+          0.14945652173913043
+        ],
+        "vTaken": [
+          70,
+          59,
+          31,
+          32,
+          82,
+          68,
+          37,
+          40,
+          78
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          11,
+          22,
+          22,
+          24,
+          12,
+          5,
+          17,
+          17,
+          17
+        ],
+        "meanArmorP": [
+          20,
+          24,
+          27.333333333333332,
+          46.666666666666664,
+          31,
+          11.666666666666666,
+          26,
+          26,
+          28
+        ],
+        "mHpStart": [
+          935,
+          1052,
+          1028,
+          1687,
+          1085,
+          1094,
+          944,
+          1059,
+          1104
+        ],
+        "abilitiesPerMember": [
+          3.6666666666666665,
+          0.6666666666666666,
+          2,
+          1.6666666666666667,
+          1.3333333333333333,
+          2,
+          3,
+          3,
+          5.333333333333333
+        ],
+        "fighterDmgShare": [
+          0.5652173913043478,
+          0.4909090909090909,
+          0.4485981308411215,
+          1,
+          1,
+          0.5217391304347826,
+          0.7355371900826446,
+          1,
+          0.3333333333333333
+        ],
+        "parsedStrikeTotal": [
+          115,
+          110,
+          107,
+          71,
+          62,
+          46,
+          121,
+          35,
+          141
+        ],
+        "dmgPerRound": [
+          28.75,
+          32.2,
+          26.75,
+          35.5,
+          17.285714285714285,
+          15.333333333333334,
+          47.6,
+          17.5,
+          33
+        ],
+        "volleyDmg": [
+          0,
+          10,
+          20
+        ],
+        "dmgPerRoundMean": 28.213227513227515,
+        "volleyDmgMean": 10,
+        "roundsMean": 4.111111111111111,
+        "vTakenMean": 55.22222222222222,
+        "partySizeMean": 3,
+        "minArmorPMean": 16.333333333333332,
+        "meanArmorPMean": 26.74074074074074,
+        "mHpStartMean": 1109.7777777777778,
+        "abilitiesPerMemberMean": 2.5185185185185186,
+        "fighterDmgShareMean": 0.6772593629894801,
+        "parsedStrikeTotalMean": 89.77777777777777
+      },
+      "mFlee": {
+        "n": 2,
+        "rounds": [
+          1,
+          1
+        ],
+        "dmgShare": [
+          0.044444444444444446,
+          0
+        ],
+        "vTaken": [
+          0,
+          7
+        ],
+        "partySize": [
+          3,
+          3
+        ],
+        "minArmorP": [
+          12,
+          12
+        ],
+        "meanArmorP": [
+          31,
+          31
+        ],
+        "mHpStart": [
+          1080,
+          952
+        ],
+        "abilitiesPerMember": [
+          1.3333333333333333,
+          1.3333333333333333
+        ],
+        "fighterDmgShare": [],
+        "parsedStrikeTotal": [
+          0,
+          0
+        ],
+        "dmgPerRound": [
+          48,
+          0
+        ],
+        "volleyDmg": [
+          48,
+          0
+        ],
+        "dmgPerRoundMean": 24,
+        "volleyDmgMean": 24,
+        "roundsMean": 1,
+        "vTakenMean": 3.5,
+        "partySizeMean": 3,
+        "minArmorPMean": 12,
+        "meanArmorPMean": 31,
+        "mHpStartMean": 1016,
+        "abilitiesPerMemberMean": 1.3333333333333333,
+        "fighterDmgShareMean": null,
+        "parsedStrikeTotalMean": 0
+      },
+      "vDie": {
+        "n": 1,
+        "rounds": [
+          4
+        ],
+        "dmgShare": [
+          0.06365313653136531
+        ],
+        "vTaken": [
+          84
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          4
+        ],
+        "meanArmorP": [
+          19.333333333333332
+        ],
+        "mHpStart": [
+          1084
+        ],
+        "abilitiesPerMember": [
+          5
+        ],
+        "fighterDmgShare": [
+          0.6666666666666666
+        ],
+        "parsedStrikeTotal": [
+          69
+        ],
+        "dmgPerRound": [
+          17.25
+        ],
+        "volleyDmg": [],
+        "dmgPerRoundMean": 17.25,
+        "volleyDmgMean": null,
+        "roundsMean": 4,
+        "vTakenMean": 84,
+        "partySizeMean": 3,
+        "minArmorPMean": 4,
+        "meanArmorPMean": 19.333333333333332,
+        "mHpStartMean": 1084,
+        "abilitiesPerMemberMean": 5,
+        "fighterDmgShareMean": 0.6666666666666666,
+        "parsedStrikeTotalMean": 69
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vFlee": 8,
+        "mFlee": 2
+      },
+      "seek": {
+        "vFlee": 1,
+        "vDie": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 0.8333333333333334,
+    "gateSeekShare": 0.16666666666666666,
+    "lossGateNull": 8,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 2,
+    "monsterByOutcome": {
+      "eulogy": {
+        "win": 1,
+        "loss": 1
+      },
+      "eater": {
+        "win": 0,
+        "loss": 3
+      },
+      "congregation": {
+        "win": 0,
+        "loss": 2
+      },
+      "timeslot": {
+        "win": 0,
+        "loss": 1
+      },
+      "strike": {
+        "win": 0,
+        "loss": 1
+      },
+      "influencer": {
+        "win": 1,
+        "loss": 1
+      },
+      "audit": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.09320830734104281,
+    "dmgShareByOutcome": {
+      "vFlee": 0.11226690079074492,
+      "mFlee": 0.022222222222222223,
+      "vDie": 0.06365313653136531
+    },
+    "roundsMean": 3.5833333333333335,
+    "vTakenMean": 49,
+    "dmgPerRoundMean": 26.59742063492064,
+    "volleyFired": 3,
+    "volleyFireShare": 0.25,
+    "volleyDmgMean": 15.6,
+    "rangedAtEntry": 8,
+    "rangedAtEntryShare": 0.6666666666666666,
+    "bowOpen": {
+      "alreadyHad": 195,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 0,
+      "craftedFail": 8,
+      "noSource": 255,
+      "spearSeen": 108,
+      "spearPassed": 108
+    },
+    "bowOpenStagedVids": 70,
+    "spearSeen": 108,
+    "spearPassed": 108,
+    "staged": 0,
+    "spearPassRate": 1,
+    "spearAlreadyHad": 0,
+    "spearAlreadyHadVids": [],
+    "departSee": {
+      "rows": 458,
+      "spearRows": 108,
+      "hasParty": 426,
+      "hasPartySpear": 105,
+      "mateBowVisible": 143,
+      "mateBowVisibleSpear": 26,
+      "lvBowAtAttempt": 215,
+      "lvBowAtAttemptSpear": 55,
+      "seeded": 0,
+      "seededSpear": 0,
+      "seededCrafted": 0,
+      "seededCraftedFail": 0,
+      "seededNoSource": 0,
+      "seededCraftedAll": 0,
+      "seededCraftedFailAll": 0,
+      "seededNoSourceAll": 0
+    },
+    "starvation": 3,
+    "starvationVillager": 3,
+    "deathsTotal": 854,
+    "deathsPerEngaged": 71.16666666666667,
+    "medianDays": 150,
+    "communityLost": 2,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 4,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "arm": {
+    "dir": "evidence/2026-11-19/perseed-bowsee-a-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "senseexpedOn": {
+      "true": 8
+    },
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "speargateOn": {
+      "true": 8
+    },
+    "departseeOn": {
+      "true": 8
+    },
+    "bowknowOn": {
+      "false": 8
+    },
+    "meetings": 10,
+    "wins": 2,
+    "kills": 0,
+    "losses": 8,
+    "vDie": 1,
+    "vFlee": 7,
+    "mFlee": 2,
+    "winShare": 0.2,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 71,
+      "joined": 71,
+      "unjoined": 0,
+      "noLaunchPlan": 4,
+      "pairLaunch": 40,
+      "partyAbsent": 3,
+      "evadeExcluded": 14
+    },
+    "byOutcome": {
+      "vFlee": {
+        "n": 7,
+        "rounds": [
+          4,
+          5,
+          7,
+          3,
+          5,
+          2,
+          5
+        ],
+        "dmgShare": [
+          0.12299465240641712,
+          0.15304182509505704,
+          0.11152073732718894,
+          0.04204753199268738,
+          0.2521186440677966,
+          0.033050047214353166,
+          0.14945652173913043
+        ],
+        "vTaken": [
+          70,
+          59,
+          82,
+          68,
+          37,
+          40,
+          78
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          11,
+          22,
+          12,
+          5,
+          17,
+          17,
+          17
+        ],
+        "meanArmorP": [
+          20,
+          24,
+          31,
+          11.666666666666666,
+          26,
+          26,
+          28
+        ],
+        "mHpStart": [
+          935,
+          1052,
+          1085,
+          1094,
+          944,
+          1059,
+          1104
+        ],
+        "abilitiesPerMember": [
+          3.6666666666666665,
+          0.6666666666666666,
+          1.3333333333333333,
+          2,
+          3,
+          3,
+          5.333333333333333
+        ],
+        "fighterDmgShare": [
+          0.5652173913043478,
+          0.4909090909090909,
+          1,
+          0.5217391304347826,
+          0.7355371900826446,
+          1,
+          0.3333333333333333
+        ],
+        "parsedStrikeTotal": [
+          115,
+          110,
+          62,
+          46,
+          121,
+          35,
+          141
+        ],
+        "dmgPerRound": [
+          28.75,
+          32.2,
+          17.285714285714285,
+          15.333333333333334,
+          47.6,
+          17.5,
+          33
+        ],
+        "volleyDmg": [
+          10,
+          20
+        ],
+        "dmgPerRoundMean": 27.381292517006806,
+        "volleyDmgMean": 15,
+        "roundsMean": 4.428571428571429,
+        "vTakenMean": 62,
+        "partySizeMean": 3,
+        "minArmorPMean": 14.428571428571429,
+        "meanArmorPMean": 23.809523809523814,
+        "mHpStartMean": 1039,
+        "abilitiesPerMemberMean": 2.7142857142857144,
+        "fighterDmgShareMean": 0.6638194480091714,
+        "parsedStrikeTotalMean": 90
+      },
+      "mFlee": {
+        "n": 2,
+        "rounds": [
+          1,
+          1
+        ],
+        "dmgShare": [
+          0.044444444444444446,
+          0
+        ],
+        "vTaken": [
+          0,
+          7
+        ],
+        "partySize": [
+          3,
+          3
+        ],
+        "minArmorP": [
+          12,
+          12
+        ],
+        "meanArmorP": [
+          31,
+          31
+        ],
+        "mHpStart": [
+          1080,
+          952
+        ],
+        "abilitiesPerMember": [
+          1.3333333333333333,
+          1.3333333333333333
+        ],
+        "fighterDmgShare": [],
+        "parsedStrikeTotal": [
+          0,
+          0
+        ],
+        "dmgPerRound": [
+          48,
+          0
+        ],
+        "volleyDmg": [
+          48,
+          0
+        ],
+        "dmgPerRoundMean": 24,
+        "volleyDmgMean": 24,
+        "roundsMean": 1,
+        "vTakenMean": 3.5,
+        "partySizeMean": 3,
+        "minArmorPMean": 12,
+        "meanArmorPMean": 31,
+        "mHpStartMean": 1016,
+        "abilitiesPerMemberMean": 1.3333333333333333,
+        "fighterDmgShareMean": null,
+        "parsedStrikeTotalMean": 0
+      },
+      "vDie": {
+        "n": 1,
+        "rounds": [
+          4
+        ],
+        "dmgShare": [
+          0.06365313653136531
+        ],
+        "vTaken": [
+          84
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          4
+        ],
+        "meanArmorP": [
+          19.333333333333332
+        ],
+        "mHpStart": [
+          1084
+        ],
+        "abilitiesPerMember": [
+          5
+        ],
+        "fighterDmgShare": [
+          0.6666666666666666
+        ],
+        "parsedStrikeTotal": [
+          69
+        ],
+        "dmgPerRound": [
+          17.25
+        ],
+        "volleyDmg": [],
+        "dmgPerRoundMean": 17.25,
+        "volleyDmgMean": null,
+        "roundsMean": 4,
+        "vTakenMean": 84,
+        "partySizeMean": 3,
+        "minArmorPMean": 4,
+        "meanArmorPMean": 19.333333333333332,
+        "mHpStartMean": 1084,
+        "abilitiesPerMemberMean": 5,
+        "fighterDmgShareMean": 0.6666666666666666,
+        "parsedStrikeTotalMean": 69
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vFlee": 6,
+        "mFlee": 2
+      },
+      "seek": {
+        "vFlee": 1,
+        "vDie": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 0.8,
+    "gateSeekShare": 0.2,
+    "lossGateNull": 6,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 2,
+    "monsterByOutcome": {
+      "eulogy": {
+        "win": 1,
+        "loss": 1
+      },
+      "eater": {
+        "win": 0,
+        "loss": 3
+      },
+      "strike": {
+        "win": 0,
+        "loss": 1
+      },
+      "influencer": {
+        "win": 1,
+        "loss": 1
+      },
+      "congregation": {
+        "win": 0,
+        "loss": 1
+      },
+      "audit": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.09723275408184404,
+    "dmgShareByOutcome": {
+      "vFlee": 0.12346142283466152,
+      "mFlee": 0.022222222222222223,
+      "vDie": 0.06365313653136531
+    },
+    "roundsMean": 3.7,
+    "vTakenMean": 52.5,
+    "dmgPerRoundMean": 25.691904761904766,
+    "volleyFired": 3,
+    "volleyFireShare": 0.3,
+    "volleyDmgMean": 19.5,
+    "rangedAtEntry": 7,
+    "rangedAtEntryShare": 0.7,
+    "bowOpen": {
+      "alreadyHad": 195,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 2,
+      "craftedFail": 5,
+      "noSource": 259,
+      "spearSeen": 111,
+      "spearPassed": 111
+    },
+    "bowOpenStagedVids": 73,
+    "spearSeen": 111,
+    "spearPassed": 111,
+    "staged": 2,
+    "spearPassRate": 1,
+    "spearAlreadyHad": 0,
+    "spearAlreadyHadVids": [],
+    "departSee": {
+      "rows": 461,
+      "spearRows": 111,
+      "hasParty": 428,
+      "hasPartySpear": 107,
+      "mateBowVisible": 147,
+      "mateBowVisibleSpear": 28,
+      "lvBowAtAttempt": 270,
+      "lvBowAtAttemptSpear": 71,
+      "seeded": 17,
+      "seededSpear": 5,
+      "seededCrafted": 0,
+      "seededCraftedFail": 0,
+      "seededNoSource": 5,
+      "seededCraftedAll": 0,
+      "seededCraftedFailAll": 0,
+      "seededNoSourceAll": 17
+    },
+    "starvation": 2,
+    "starvationVillager": 2,
+    "deathsTotal": 867,
+    "deathsPerEngaged": 86.7,
+    "medianDays": 150,
+    "communityLost": 2,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 4,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "ctlPair": {
+    "dir": "evidence/2026-11-19/perseed-bowsee-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "senseexpedOn": {
+      "true": 8
+    },
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "speargateOn": {
+      "true": 8
+    },
+    "departseeOn": {
+      "false": 8
+    },
+    "bowknowOn": {
+      "false": 8
+    },
+    "meetings": 21,
+    "wins": 3,
+    "kills": 0,
+    "losses": 18,
+    "vDie": 2,
+    "vFlee": 16,
+    "mFlee": 3,
+    "winShare": 0.14285714285714285,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 71,
+      "joined": 71,
+      "unjoined": 0,
+      "noLaunchPlan": 4,
+      "pairLaunch": 0,
+      "partyAbsent": 8,
+      "evadeExcluded": 38
+    },
+    "byOutcome": {
+      "vFlee": {
+        "n": 16,
+        "rounds": [
+          11,
+          4,
+          5,
+          4,
+          6,
+          6,
+          2,
+          3,
+          7,
+          7,
+          3,
+          3,
+          5,
+          2,
+          5,
+          5
+        ],
+        "dmgShare": [
+          0.3830213903743315,
+          0.12299465240641712,
+          0.15304182509505704,
+          0.10408560311284047,
+          0.20816967792615867,
+          0.4262114537444934,
+          0.04208654416123296,
+          0.06828885400313972,
+          0.2648401826484018,
+          0.11152073732718894,
+          0.04204753199268738,
+          0.031226199543031227,
+          0.2521186440677966,
+          0.033050047214353166,
+          0.22035573122529645,
+          0.14945652173913043
+        ],
+        "vTaken": [
+          106,
+          70,
+          59,
+          31,
+          62,
+          56,
+          32,
+          75,
+          81,
+          82,
+          68,
+          66,
+          37,
+          40,
+          81,
+          78
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          11,
+          11,
+          22,
+          22,
+          21,
+          22,
+          24,
+          5,
+          8,
+          12,
+          5,
+          23,
+          17,
+          17,
+          17,
+          17
+        ],
+        "meanArmorP": [
+          16,
+          20,
+          24,
+          27.333333333333332,
+          27,
+          33,
+          46.666666666666664,
+          11.666666666666666,
+          13.666666666666666,
+          31,
+          11.666666666666666,
+          25.666666666666668,
+          26,
+          26,
+          23.333333333333332,
+          28
+        ],
+        "mHpStart": [
+          1496,
+          935,
+          1052,
+          1028,
+          1273,
+          908,
+          1687,
+          1274,
+          1095,
+          1085,
+          1094,
+          1313,
+          944,
+          1059,
+          1012,
+          1104
+        ],
+        "abilitiesPerMember": [
+          3,
+          3.6666666666666665,
+          0.6666666666666666,
+          2,
+          1.3333333333333333,
+          2,
+          1.6666666666666667,
+          1,
+          2.6666666666666665,
+          1.3333333333333333,
+          2,
+          2.6666666666666665,
+          3,
+          3,
+          5.333333333333333,
+          5.333333333333333
+        ],
+        "fighterDmgShare": [
+          0.44808743169398907,
+          0.5652173913043478,
+          0.4909090909090909,
+          0.4485981308411215,
+          0.7244897959183674,
+          0.7201492537313433,
+          1,
+          0.6176470588235294,
+          0.8055555555555556,
+          1,
+          0.5217391304347826,
+          0.5609756097560976,
+          0.7355371900826446,
+          1,
+          0.8983050847457628,
+          0.3333333333333333
+        ],
+        "parsedStrikeTotal": [
+          183,
+          115,
+          110,
+          107,
+          196,
+          268,
+          71,
+          68,
+          72,
+          62,
+          46,
+          41,
+          121,
+          35,
+          118,
+          141
+        ],
+        "dmgPerRound": [
+          52.09090909090909,
+          28.75,
+          32.2,
+          26.75,
+          44.166666666666664,
+          64.5,
+          35.5,
+          29,
+          41.42857142857143,
+          17.285714285714285,
+          15.333333333333334,
+          13.666666666666666,
+          47.6,
+          17.5,
+          44.6,
+          33
+        ],
+        "volleyDmg": [
+          0,
+          19,
+          31,
+          10,
+          20,
+          27
+        ],
+        "dmgPerRoundMean": 33.96074134199135,
+        "volleyDmgMean": 17.833333333333332,
+        "roundsMean": 4.875,
+        "vTakenMean": 64,
+        "partySizeMean": 3,
+        "minArmorPMean": 15.875,
+        "meanArmorPMean": 24.437499999999996,
+        "mHpStartMean": 1147.4375,
+        "abilitiesPerMemberMean": 2.541666666666667,
+        "fighterDmgShareMean": 0.6794090035706228,
+        "parsedStrikeTotalMean": 109.625
+      },
+      "mFlee": {
+        "n": 3,
+        "rounds": [
+          1,
+          1,
+          1
+        ],
+        "dmgShare": [
+          0.00966183574879227,
+          0.044444444444444446,
+          0
+        ],
+        "vTaken": [
+          26,
+          0,
+          7
+        ],
+        "partySize": [
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          19,
+          12,
+          12
+        ],
+        "meanArmorP": [
+          22.666666666666668,
+          31,
+          31
+        ],
+        "mHpStart": [
+          1242,
+          1080,
+          952
+        ],
+        "abilitiesPerMember": [
+          1,
+          1.3333333333333333,
+          1.3333333333333333
+        ],
+        "fighterDmgShare": [],
+        "parsedStrikeTotal": [
+          0,
+          0,
+          0
+        ],
+        "dmgPerRound": [
+          12,
+          48,
+          0
+        ],
+        "volleyDmg": [
+          12,
+          48,
+          0
+        ],
+        "dmgPerRoundMean": 20,
+        "volleyDmgMean": 20,
+        "roundsMean": 1,
+        "vTakenMean": 11,
+        "partySizeMean": 3,
+        "minArmorPMean": 14.333333333333334,
+        "meanArmorPMean": 28.222222222222225,
+        "mHpStartMean": 1091.3333333333333,
+        "abilitiesPerMemberMean": 1.222222222222222,
+        "fighterDmgShareMean": null,
+        "parsedStrikeTotalMean": 0
+      },
+      "vDie": {
+        "n": 2,
+        "rounds": [
+          3,
+          4
+        ],
+        "dmgShare": [
+          0.12964824120603016,
+          0.06365313653136531
+        ],
+        "vTaken": [
+          53,
+          84
+        ],
+        "partySize": [
+          3,
+          3
+        ],
+        "minArmorP": [
+          17,
+          4
+        ],
+        "meanArmorP": [
+          23.666666666666668,
+          19.333333333333332
+        ],
+        "mHpStart": [
+          995,
+          1084
+        ],
+        "abilitiesPerMember": [
+          4.666666666666667,
+          5
+        ],
+        "fighterDmgShare": [
+          0,
+          0.6666666666666666
+        ],
+        "parsedStrikeTotal": [
+          129,
+          69
+        ],
+        "dmgPerRound": [
+          43,
+          17.25
+        ],
+        "volleyDmg": [],
+        "dmgPerRoundMean": 30.125,
+        "volleyDmgMean": null,
+        "roundsMean": 3.5,
+        "vTakenMean": 68.5,
+        "partySizeMean": 3,
+        "minArmorPMean": 10.5,
+        "meanArmorPMean": 21.5,
+        "mHpStartMean": 1039.5,
+        "abilitiesPerMemberMean": 4.833333333333334,
+        "fighterDmgShareMean": 0.3333333333333333,
+        "parsedStrikeTotalMean": 99
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vFlee": 14,
+        "mFlee": 3
+      },
+      "seek": {
+        "vFlee": 2,
+        "vDie": 2
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 0.8095238095238095,
+    "gateSeekShare": 0.19047619047619047,
+    "lossGateNull": 14,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 4,
+    "monsterByOutcome": {
+      "suburb": {
+        "win": 0,
+        "loss": 1
+      },
+      "eulogy": {
+        "win": 1,
+        "loss": 2
+      },
+      "eater": {
+        "win": 0,
+        "loss": 4
+      },
+      "congregation": {
+        "win": 0,
+        "loss": 3
+      },
+      "reunion": {
+        "win": 1,
+        "loss": 2
+      },
+      "timeslot": {
+        "win": 0,
+        "loss": 1
+      },
+      "audit": {
+        "win": 0,
+        "loss": 2
+      },
+      "strike": {
+        "win": 0,
+        "loss": 2
+      },
+      "influencer": {
+        "win": 1,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.1361868216434376,
+    "dmgShareByOutcome": {
+      "vFlee": 0.1632822247863473,
+      "mFlee": 0.018035426731078906,
+      "vDie": 0.09665068886869774
+    },
+    "roundsMean": 4.190476190476191,
+    "vTakenMean": 56.857142857142854,
+    "dmgPerRoundMean": 31.601041022469595,
+    "volleyFired": 7,
+    "volleyFireShare": 0.3333333333333333,
+    "volleyDmgMean": 18.555555555555557,
+    "rangedAtEntry": 14,
+    "rangedAtEntryShare": 0.6666666666666666,
+    "bowOpen": {
+      "alreadyHad": 195,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 0,
+      "craftedFail": 8,
+      "noSource": 255,
+      "spearSeen": 108,
+      "spearPassed": 108
+    },
+    "bowOpenStagedVids": 70,
+    "spearSeen": 108,
+    "spearPassed": 108,
+    "staged": 0,
+    "spearPassRate": 1,
+    "spearAlreadyHad": 0,
+    "spearAlreadyHadVids": [],
+    "departSee": {
+      "rows": 458,
+      "spearRows": 108,
+      "hasParty": 426,
+      "hasPartySpear": 105,
+      "mateBowVisible": 143,
+      "mateBowVisibleSpear": 26,
+      "lvBowAtAttempt": 215,
+      "lvBowAtAttemptSpear": 55,
+      "seeded": 0,
+      "seededSpear": 0,
+      "seededCrafted": 0,
+      "seededCraftedFail": 0,
+      "seededNoSource": 0,
+      "seededCraftedAll": 0,
+      "seededCraftedFailAll": 0,
+      "seededNoSourceAll": 0
+    },
+    "starvation": 3,
+    "starvationVillager": 3,
+    "deathsTotal": 854,
+    "deathsPerEngaged": 40.666666666666664,
+    "medianDays": 150,
+    "communityLost": 2,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 4,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "armPair": {
+    "dir": "evidence/2026-11-19/perseed-bowsee-a-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "senseexpedOn": {
+      "true": 8
+    },
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "speargateOn": {
+      "true": 8
+    },
+    "departseeOn": {
+      "true": 8
+    },
+    "bowknowOn": {
+      "false": 8
+    },
+    "meetings": 23,
+    "wins": 4,
+    "kills": 0,
+    "losses": 19,
+    "vDie": 2,
+    "vFlee": 17,
+    "mFlee": 4,
+    "winShare": 0.17391304347826086,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 71,
+      "joined": 71,
+      "unjoined": 0,
+      "noLaunchPlan": 4,
+      "pairLaunch": 0,
+      "partyAbsent": 8,
+      "evadeExcluded": 36
+    },
+    "byOutcome": {
+      "vFlee": {
+        "n": 17,
+        "rounds": [
+          11,
+          4,
+          5,
+          5,
+          4,
+          15,
+          6,
+          3,
+          8,
+          7,
+          7,
+          3,
+          3,
+          5,
+          2,
+          5,
+          5
+        ],
+        "dmgShare": [
+          0.3830213903743315,
+          0.12299465240641712,
+          0.15304182509505704,
+          0.1971947194719472,
+          0.16349384098544234,
+          0.6901004304160688,
+          0.3408239700374532,
+          0.06828885400313972,
+          0.40476190476190477,
+          0.2648401826484018,
+          0.11152073732718894,
+          0.04204753199268738,
+          0.031226199543031227,
+          0.2521186440677966,
+          0.033050047214353166,
+          0.22035573122529645,
+          0.14945652173913043
+        ],
+        "vTaken": [
+          106,
+          70,
+          59,
+          59,
+          50,
+          57,
+          54,
+          75,
+          56,
+          81,
+          82,
+          68,
+          66,
+          37,
+          40,
+          81,
+          78
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          11,
+          11,
+          22,
+          14,
+          21,
+          37,
+          37,
+          5,
+          12,
+          8,
+          12,
+          5,
+          23,
+          17,
+          17,
+          17,
+          17
+        ],
+        "meanArmorP": [
+          16,
+          20,
+          24,
+          30.333333333333332,
+          32.666666666666664,
+          38,
+          38,
+          11.666666666666666,
+          25,
+          13.666666666666666,
+          31,
+          11.666666666666666,
+          25.666666666666668,
+          26,
+          26,
+          23.333333333333332,
+          28
+        ],
+        "mHpStart": [
+          1496,
+          935,
+          1052,
+          1212,
+          893,
+          1394,
+          1068,
+          1274,
+          1470,
+          1095,
+          1085,
+          1094,
+          1313,
+          944,
+          1059,
+          1012,
+          1104
+        ],
+        "abilitiesPerMember": [
+          3,
+          3.6666666666666665,
+          0.6666666666666666,
+          0.6666666666666666,
+          1.3333333333333333,
+          2,
+          2,
+          1,
+          1.6666666666666667,
+          2.6666666666666665,
+          1.3333333333333333,
+          2,
+          2.6666666666666665,
+          3,
+          3,
+          5.333333333333333,
+          5.333333333333333
+        ],
+        "fighterDmgShare": [
+          0.44808743169398907,
+          0.5652173913043478,
+          0.4909090909090909,
+          0.4251207729468599,
+          0.7142857142857143,
+          0.6428571428571429,
+          0.6458333333333334,
+          0.6176470588235294,
+          0.6492537313432836,
+          0.8055555555555556,
+          1,
+          0.5217391304347826,
+          0.5609756097560976,
+          0.7355371900826446,
+          1,
+          0.8983050847457628,
+          0.3333333333333333
+        ],
+        "parsedStrikeTotal": [
+          183,
+          115,
+          110,
+          207,
+          84,
+          224,
+          144,
+          68,
+          268,
+          72,
+          62,
+          46,
+          41,
+          121,
+          35,
+          118,
+          141
+        ],
+        "dmgPerRound": [
+          52.09090909090909,
+          28.75,
+          32.2,
+          47.8,
+          36.5,
+          64.13333333333334,
+          60.666666666666664,
+          29,
+          74.375,
+          41.42857142857143,
+          17.285714285714285,
+          15.333333333333334,
+          13.666666666666666,
+          47.6,
+          17.5,
+          44.6,
+          33
+        ],
+        "volleyDmg": [
+          0,
+          73,
+          19,
+          0,
+          31,
+          10,
+          20,
+          27
+        ],
+        "dmgPerRoundMean": 38.58412910618794,
+        "volleyDmgMean": 22.5,
+        "roundsMean": 5.764705882352941,
+        "vTakenMean": 65.82352941176471,
+        "partySizeMean": 3,
+        "minArmorPMean": 16.823529411764707,
+        "meanArmorPMean": 24.764705882352942,
+        "mHpStartMean": 1147.0588235294117,
+        "abilitiesPerMemberMean": 2.431372549019608,
+        "fighterDmgShareMean": 0.6502739747885569,
+        "parsedStrikeTotalMean": 119.94117647058823
+      },
+      "mFlee": {
+        "n": 4,
+        "rounds": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "dmgShare": [
+          0.00966183574879227,
+          0.0371859296482412,
+          0.044444444444444446,
+          0
+        ],
+        "vTaken": [
+          26,
+          0,
+          0,
+          7
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          19,
+          12,
+          12,
+          12
+        ],
+        "meanArmorP": [
+          22.666666666666668,
+          25,
+          31,
+          31
+        ],
+        "mHpStart": [
+          1242,
+          995,
+          1080,
+          952
+        ],
+        "abilitiesPerMember": [
+          1,
+          1.6666666666666667,
+          1.3333333333333333,
+          1.3333333333333333
+        ],
+        "fighterDmgShare": [],
+        "parsedStrikeTotal": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "dmgPerRound": [
+          12,
+          37,
+          48,
+          0
+        ],
+        "volleyDmg": [
+          12,
+          37,
+          48,
+          0
+        ],
+        "dmgPerRoundMean": 24.25,
+        "volleyDmgMean": 24.25,
+        "roundsMean": 1,
+        "vTakenMean": 8.25,
+        "partySizeMean": 3,
+        "minArmorPMean": 13.75,
+        "meanArmorPMean": 27.416666666666668,
+        "mHpStartMean": 1067.25,
+        "abilitiesPerMemberMean": 1.3333333333333333,
+        "fighterDmgShareMean": null,
+        "parsedStrikeTotalMean": 0
+      },
+      "vDie": {
+        "n": 2,
+        "rounds": [
+          3,
+          4
+        ],
+        "dmgShare": [
+          0.12964824120603016,
+          0.06365313653136531
+        ],
+        "vTaken": [
+          53,
+          84
+        ],
+        "partySize": [
+          3,
+          3
+        ],
+        "minArmorP": [
+          17,
+          4
+        ],
+        "meanArmorP": [
+          23.666666666666668,
+          19.333333333333332
+        ],
+        "mHpStart": [
+          995,
+          1084
+        ],
+        "abilitiesPerMember": [
+          4.666666666666667,
+          5
+        ],
+        "fighterDmgShare": [
+          0,
+          0.6666666666666666
+        ],
+        "parsedStrikeTotal": [
+          129,
+          69
+        ],
+        "dmgPerRound": [
+          43,
+          17.25
+        ],
+        "volleyDmg": [],
+        "dmgPerRoundMean": 30.125,
+        "volleyDmgMean": null,
+        "roundsMean": 3.5,
+        "vTakenMean": 68.5,
+        "partySizeMean": 3,
+        "minArmorPMean": 10.5,
+        "meanArmorPMean": 21.5,
+        "mHpStartMean": 1039.5,
+        "abilitiesPerMemberMean": 4.833333333333334,
+        "fighterDmgShareMean": 0.3333333333333333,
+        "parsedStrikeTotalMean": 99
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vFlee": 15,
+        "mFlee": 4
+      },
+      "seek": {
+        "vFlee": 2,
+        "vDie": 2
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 0.8260869565217391,
+    "gateSeekShare": 0.17391304347826086,
+    "lossGateNull": 15,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 4,
+    "monsterByOutcome": {
+      "suburb": {
+        "win": 0,
+        "loss": 3
+      },
+      "eulogy": {
+        "win": 2,
+        "loss": 1
+      },
+      "eater": {
+        "win": 0,
+        "loss": 4
+      },
+      "audit": {
+        "win": 0,
+        "loss": 3
+      },
+      "influencer": {
+        "win": 1,
+        "loss": 2
+      },
+      "congregation": {
+        "win": 0,
+        "loss": 3
+      },
+      "reunion": {
+        "win": 1,
+        "loss": 1
+      },
+      "strike": {
+        "win": 0,
+        "loss": 2
+      }
+    },
+    "dmgShareMean": 0.17012742482124005,
+    "dmgShareByOutcome": {
+      "vFlee": 0.21343159901821457,
+      "mFlee": 0.022823052460369482,
+      "vDie": 0.09665068886869774
+    },
+    "roundsMean": 4.739130434782608,
+    "vTakenMean": 56.04347826086956,
+    "dmgPerRoundMean": 35.35566064370413,
+    "volleyFired": 10,
+    "volleyFireShare": 0.43478260869565216,
+    "volleyDmgMean": 23.083333333333332,
+    "rangedAtEntry": 17,
+    "rangedAtEntryShare": 0.7391304347826086,
+    "bowOpen": {
+      "alreadyHad": 195,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 2,
+      "craftedFail": 5,
+      "noSource": 259,
+      "spearSeen": 111,
+      "spearPassed": 111
+    },
+    "bowOpenStagedVids": 73,
+    "spearSeen": 111,
+    "spearPassed": 111,
+    "staged": 2,
+    "spearPassRate": 1,
+    "spearAlreadyHad": 0,
+    "spearAlreadyHadVids": [],
+    "departSee": {
+      "rows": 461,
+      "spearRows": 111,
+      "hasParty": 428,
+      "hasPartySpear": 107,
+      "mateBowVisible": 147,
+      "mateBowVisibleSpear": 28,
+      "lvBowAtAttempt": 270,
+      "lvBowAtAttemptSpear": 71,
+      "seeded": 17,
+      "seededSpear": 5,
+      "seededCrafted": 0,
+      "seededCraftedFail": 0,
+      "seededNoSource": 5,
+      "seededCraftedAll": 0,
+      "seededCraftedFailAll": 0,
+      "seededNoSourceAll": 17
+    },
+    "starvation": 2,
+    "starvationVillager": 2,
+    "deathsTotal": 867,
+    "deathsPerEngaged": 37.69565217391305,
+    "medianDays": 150,
+    "communityLost": 2,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 4,
+    "scaleRanks": {
+      "regional": 8
+    }
+  }
+}
