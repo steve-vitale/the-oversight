@@ -820,12 +820,32 @@
           // ("Good. Just — be careful. I mean it.") carries the goodbye.
           this.convoWantEngage(vid, 'commit');
         } else {
-          line = this.convoPickCycle(vid, 'dlg:heed:lines', [
-            '"Good. I mean it — watch yourself out there."',
-            '"Promise me that. Please."',
-            '"Thank you. I needed to hear you say it."',
-          ]) || '"Good. I mean it — watch yourself out there."';
-          this.sayLine(vid, line, { tag: 'warning', fallback: () => this.convoSelfRepeatLine(vid) });
+          // WARN-HEED (journey landing r150): the first heed of a warn_you
+          // sitting used to answer with a content-free generic line
+          // ("Good. I mean it — watch yourself out there.") while the
+          // warning itself lived only behind dlg:details — which the menu
+          // drops at stage>=2. A player who promises to be careful was
+          // never told WHAT to be careful about, and could never ask after
+          // (r150 panel: 4/4 warn_you sittings, 0 dangers named). The NPC
+          // now states the warning on the first heed, once per sitting
+          // (the details path marks it delivered too, so a details-first
+          // sitting does not double-deliver). Falls back to the generic
+          // pool when every warning variant is blocked.
+          let warned = null;
+          try {
+            if (c.want && c.want.id === 'warn_you' && !c._warnDelivered && typeof this.convoWantWarning === 'function') warned = this.convoWantWarning(vid);
+          } catch (e) { warned = null; }
+          if (warned) {
+            line = warned;
+          } else {
+            line = this.convoPickCycle(vid, 'dlg:heed:lines', [
+              '"Good. I mean it — watch yourself out there."',
+              '"Promise me that. Please."',
+              '"Thank you. I needed to hear you say it."',
+            ]) || '"Good. I mean it — watch yourself out there."';
+          }
+          const said = this.sayLine(vid, line, { tag: 'warning', fallback: () => this.convoSelfRepeatLine(vid) });
+          if (warned && said) c._warnDelivered = true;
           this.convoWantEngage(vid, 'engage');
         }
         return { line, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
@@ -966,6 +986,10 @@
           this.sayLine(vid, dup);
           return { line: dup, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
         }
+        // WARN-HEED (journey landing r150): the warning was delivered
+        // through details — mark it so a later first heed does not repeat
+        // a second warning variant. Set only on an actually-spoken line.
+        if (c.want && c.want.id === 'warn_you') c._warnDelivered = true;
         // SCENE (Phase 2): through the resolver.
         try { this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'dlg:details' }); } catch (e) {}
         if (c.want?.id === 'ask_favor') c.want.favorExplained = true;
