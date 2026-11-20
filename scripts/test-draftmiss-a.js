@@ -18,9 +18,9 @@ const CTL = path.join(__dirname, '..', 'evidence', '2026-11-20', 'perseed-presen
 // Filled in by the evidence commit; the test fails loudly if the instrument
 // ever reproduces different numbers.
 const PINNED = {
-  rows: 64, pairs: 21, fights: 0, // fights filled below (0 = not yet pinned)
-  counts: { a: 0, b: 0, c: 0, d: 0, e: 0, f: 0 }, // filled below
-  verdict: '' // filled below
+  rows: 64, pairs: 21, fights: 25,
+  counts: { a: 2, b: 0, c: 0, d: 0, e: 7, f: 12 },
+  verdict: 'NO-GO'
 };
 
 let failures = 0;

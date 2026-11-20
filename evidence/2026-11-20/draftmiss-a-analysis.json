@@ -1,0 +1,1081 @@
+{
+  "verdict": "NO-GO",
+  "gate": {
+    "rows": 64,
+    "pairs": 21,
+    "expectedRows": 64,
+    "expectedPairs": 21,
+    "pass": true
+  },
+  "counts": {
+    "a": 2,
+    "b": 0,
+    "c": 0,
+    "d": 0,
+    "e": 7,
+    "f": 12
+  },
+  "overcount": {
+    "rows": 64,
+    "fights": 25,
+    "pairs": 21,
+    "rowsPerFight": 2.56,
+    "rowsPerPair": 3.0476190476190474
+  },
+  "musterAgreement": {
+    "onDays": {
+      "haven": 5,
+      "total": 27
+    },
+    "offDays": {
+      "notHaven": 0,
+      "total": 0
+    }
+  },
+  "realMiss": [
+    "107052|79|reunion",
+    "107052|86|reunion",
+    "107052|89|reunion",
+    "107054|81|reunion",
+    "107054|100|strike",
+    "107054|106|strike",
+    "107057|142|eulogy"
+  ],
+  "pairs": [
+    {
+      "seed": 107052,
+      "day": 79,
+      "mid": "eulogy",
+      "mechanisms": [
+        "e"
+      ],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "victor_lopez"
+      ],
+      "nRows": 4,
+      "nEncounters": 1,
+      "nInstances": 1,
+      "holder": "victor_lopez",
+      "armed": true,
+      "eligibleSlots": 0,
+      "pooledEligibleSlots": 0,
+      "rowInflation": 4,
+      "cls": "e",
+      "reason": "every tick row for eulogy on day 79 has nOnTile = 0 — no tick fight could happen; the joined encounter(s) must be raid-path fights",
+      "ctl": {
+        "status": "identical",
+        "detail": "4 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107052,
+      "day": 79,
+      "mid": "reunion",
+      "mechanisms": [],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "victor_lopez"
+      ],
+      "nRows": 3,
+      "nEncounters": 1,
+      "nInstances": 2,
+      "holder": "victor_lopez",
+      "armed": true,
+      "eligibleSlots": 1,
+      "pooledEligibleSlots": 1,
+      "rowInflation": 3,
+      "teleport": {
+        "teleported": false,
+        "lastPos": [
+          6,
+          1
+        ],
+        "firstPos": [
+          6,
+          1
+        ],
+        "manhattan": 0,
+        "availableSteps": 1,
+        "mFlee": false,
+        "reason": "first D+1 position not near haven"
+      },
+      "provenRaidDay": true,
+      "raidExcluded": false,
+      "nTickFights": 1,
+      "slotShelter": [
+        {
+          "seq": 2247,
+          "call": 1,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        }
+      ],
+      "cls": "f",
+      "reason": "REAL-MISS? tick fight at a pooled slot where the holder was NOT sheltered (slot shelter: [{\"seq\":2247,\"call\":1,\"regionSize\":2,\"regionIsHaven\":false,\"musterOn\":true,\"sheltered\":false}]) and not resting/stale — the draft should have fired",
+      "realMiss": true,
+      "ctl": {
+        "status": "identical",
+        "detail": "8 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107052,
+      "day": 80,
+      "mid": "suburb",
+      "mechanisms": [],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "victor_lopez"
+      ],
+      "nRows": 4,
+      "nEncounters": 2,
+      "nInstances": 2,
+      "holder": "victor_lopez",
+      "armed": true,
+      "eligibleSlots": 3,
+      "pooledEligibleSlots": 3,
+      "rowInflation": 2,
+      "teleport": {
+        "teleported": false,
+        "reason": "no D+1 rows for suburb"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": true,
+      "raidExcludedBy": 79,
+      "nTickFights": 2,
+      "slotShelter": [
+        {
+          "seq": 2267,
+          "call": 0,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        },
+        {
+          "seq": 2274,
+          "call": 2,
+          "regionSize": 1,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        },
+        {
+          "seq": 2281,
+          "call": 3,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        }
+      ],
+      "cls": "f",
+      "reason": "ambiguous: the tick fight(s) are at an unknown subset of 3 eligible slot(s); the holder was NOT sheltered at any pooled eligible slot, so the fight may have been a real miss (pooled slot) or (d) (unpooled slot)",
+      "ctl": {
+        "status": "identical",
+        "detail": "8 tick rows, 2 encounter(s)"
+      }
+    },
+    {
+      "seed": 107052,
+      "day": 83,
+      "mid": "reunion",
+      "mechanisms": [],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "victor_lopez"
+      ],
+      "nRows": 4,
+      "nEncounters": 1,
+      "nInstances": 2,
+      "holder": "victor_lopez",
+      "armed": true,
+      "eligibleSlots": 4,
+      "pooledEligibleSlots": 4,
+      "rowInflation": 4,
+      "teleport": {
+        "teleported": false,
+        "lastPos": [
+          5,
+          0
+        ],
+        "firstPos": [
+          4,
+          0
+        ],
+        "manhattan": 1,
+        "availableSteps": 1,
+        "mFlee": false,
+        "reason": "first D+1 position not near haven"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": true,
+      "raidExcludedBy": 79,
+      "nTickFights": 1,
+      "slotShelter": [
+        {
+          "seq": 2307,
+          "call": 0,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        },
+        {
+          "seq": 2313,
+          "call": 1,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        },
+        {
+          "seq": 2319,
+          "call": 2,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        },
+        {
+          "seq": 2325,
+          "call": 3,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        }
+      ],
+      "cls": "f",
+      "reason": "ambiguous: the tick fight(s) are at an unknown subset of 4 eligible slot(s); the holder was NOT sheltered at any pooled eligible slot, so the fight may have been a real miss (pooled slot) or (d) (unpooled slot)",
+      "ctl": {
+        "status": "identical",
+        "detail": "8 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107052,
+      "day": 86,
+      "mid": "reunion",
+      "mechanisms": [],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "victor_lopez"
+      ],
+      "nRows": 4,
+      "nEncounters": 1,
+      "nInstances": 2,
+      "holder": "victor_lopez",
+      "armed": true,
+      "eligibleSlots": 1,
+      "pooledEligibleSlots": 1,
+      "rowInflation": 4,
+      "teleport": {
+        "teleported": false,
+        "lastPos": [
+          5,
+          0
+        ],
+        "firstPos": [
+          5,
+          0
+        ],
+        "manhattan": 0,
+        "availableSteps": 1,
+        "mFlee": false,
+        "reason": "first D+1 position not near haven"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": false,
+      "nTickFights": 1,
+      "slotShelter": [
+        {
+          "seq": 2367,
+          "call": 0,
+          "regionSize": 6,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        }
+      ],
+      "cls": "f",
+      "reason": "REAL-MISS? tick fight at a pooled slot where the holder was NOT sheltered (slot shelter: [{\"seq\":2367,\"call\":0,\"regionSize\":6,\"regionIsHaven\":false,\"musterOn\":true,\"sheltered\":false}]) and not resting/stale — the draft should have fired",
+      "realMiss": true,
+      "ctl": {
+        "status": "identical",
+        "detail": "8 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107052,
+      "day": 87,
+      "mid": "reunion",
+      "mechanisms": [
+        "e"
+      ],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "victor_lopez"
+      ],
+      "nRows": 2,
+      "nEncounters": 1,
+      "nInstances": 3,
+      "holder": "victor_lopez",
+      "armed": true,
+      "eligibleSlots": 0,
+      "pooledEligibleSlots": 0,
+      "rowInflation": 2,
+      "cls": "e",
+      "reason": "every tick row for reunion on day 87 has nOnTile = 0 — no tick fight could happen; the joined encounter(s) must be raid-path fights",
+      "ctl": {
+        "status": "identical",
+        "detail": "8 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107052,
+      "day": 89,
+      "mid": "reunion",
+      "mechanisms": [],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "victor_lopez"
+      ],
+      "nRows": 4,
+      "nEncounters": 1,
+      "nInstances": 2,
+      "holder": "victor_lopez",
+      "armed": true,
+      "eligibleSlots": 1,
+      "pooledEligibleSlots": 1,
+      "rowInflation": 4,
+      "teleport": {
+        "teleported": false,
+        "lastPos": [
+          4,
+          1
+        ],
+        "firstPos": [
+          4,
+          1
+        ],
+        "manhattan": 0,
+        "availableSteps": 1,
+        "mFlee": false,
+        "reason": "first D+1 position not near haven"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": true,
+      "raidExcludedBy": 87,
+      "nTickFights": 1,
+      "slotShelter": [
+        {
+          "seq": 2427,
+          "call": 0,
+          "regionSize": 6,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        }
+      ],
+      "cls": "f",
+      "reason": "REAL-MISS? tick fight at a pooled slot where the holder was NOT sheltered (slot shelter: [{\"seq\":2427,\"call\":0,\"regionSize\":6,\"regionIsHaven\":false,\"musterOn\":true,\"sheltered\":false}]) and not resting/stale — the draft should have fired",
+      "realMiss": true,
+      "ctl": {
+        "status": "identical",
+        "detail": "8 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107054,
+      "day": 80,
+      "mid": "reunion",
+      "mechanisms": [
+        "e"
+      ],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "yuki_mori"
+      ],
+      "nRows": 4,
+      "nEncounters": 1,
+      "nInstances": 1,
+      "holder": "yuki_mori",
+      "armed": true,
+      "eligibleSlots": 0,
+      "pooledEligibleSlots": 0,
+      "rowInflation": 4,
+      "cls": "e",
+      "reason": "every tick row for reunion on day 80 has nOnTile = 0 — no tick fight could happen; the joined encounter(s) must be raid-path fights",
+      "ctl": {
+        "status": "identical",
+        "detail": "4 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107054,
+      "day": 81,
+      "mid": "reunion",
+      "mechanisms": [],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "yuki_mori"
+      ],
+      "nRows": 2,
+      "nEncounters": 1,
+      "nInstances": 1,
+      "holder": "yuki_mori",
+      "armed": true,
+      "eligibleSlots": 1,
+      "pooledEligibleSlots": 1,
+      "rowInflation": 2,
+      "teleport": {
+        "teleported": false,
+        "lastPos": [
+          5,
+          4
+        ],
+        "firstPos": [
+          5,
+          4
+        ],
+        "manhattan": 0,
+        "availableSteps": 1,
+        "mFlee": false,
+        "reason": "first D+1 position near haven but reachable in 1 step(s)"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": true,
+      "raidExcludedBy": 80,
+      "nTickFights": 1,
+      "slotShelter": [
+        {
+          "seq": 6468,
+          "call": 0,
+          "regionSize": 4,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        }
+      ],
+      "cls": "f",
+      "reason": "REAL-MISS? tick fight at a pooled slot where the holder was NOT sheltered (slot shelter: [{\"seq\":6468,\"call\":0,\"regionSize\":4,\"regionIsHaven\":false,\"musterOn\":true,\"sheltered\":false}]) and not resting/stale — the draft should have fired",
+      "realMiss": true,
+      "ctl": {
+        "status": "identical",
+        "detail": "2 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107054,
+      "day": 84,
+      "mid": "herald",
+      "mechanisms": [],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "yuki_mori"
+      ],
+      "nRows": 3,
+      "nEncounters": 1,
+      "nInstances": 1,
+      "holder": "yuki_mori",
+      "armed": true,
+      "eligibleSlots": 3,
+      "pooledEligibleSlots": 3,
+      "rowInflation": 3,
+      "teleport": {
+        "teleported": false,
+        "lastPos": [
+          5,
+          4
+        ],
+        "firstPos": [
+          5,
+          4
+        ],
+        "manhattan": 0,
+        "availableSteps": 1,
+        "mFlee": false,
+        "reason": "first D+1 position near haven but reachable in 1 step(s)"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": true,
+      "raidExcludedBy": 80,
+      "nTickFights": 1,
+      "slotShelter": [
+        {
+          "seq": 6507,
+          "call": 0,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        },
+        {
+          "seq": 6511,
+          "call": 1,
+          "regionSize": 4,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        },
+        {
+          "seq": 6515,
+          "call": 2,
+          "regionSize": 5,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        }
+      ],
+      "cls": "f",
+      "reason": "ambiguous: the tick fight(s) are at an unknown subset of 3 eligible slot(s); the holder was NOT sheltered at any pooled eligible slot, so the fight may have been a real miss (pooled slot) or (d) (unpooled slot)",
+      "ctl": {
+        "status": "identical",
+        "detail": "3 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107054,
+      "day": 95,
+      "mid": "strike",
+      "mechanisms": [
+        "e"
+      ],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "yuki_mori"
+      ],
+      "nRows": 2,
+      "nEncounters": 1,
+      "nInstances": 1,
+      "holder": "yuki_mori",
+      "armed": true,
+      "eligibleSlots": 0,
+      "pooledEligibleSlots": 0,
+      "rowInflation": 2,
+      "cls": "e",
+      "reason": "every tick row for strike on day 95 has nOnTile = 0 — no tick fight could happen; the joined encounter(s) must be raid-path fights",
+      "ctl": {
+        "status": "identical",
+        "detail": "2 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107054,
+      "day": 96,
+      "mid": "strike",
+      "mechanisms": [
+        "a"
+      ],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "yuki_mori"
+      ],
+      "nRows": 4,
+      "nEncounters": 3,
+      "nInstances": 1,
+      "holder": "yuki_mori",
+      "armed": true,
+      "eligibleSlots": 3,
+      "pooledEligibleSlots": 3,
+      "rowInflation": 1.3333333333333333,
+      "teleport": {
+        "teleported": false,
+        "lastPos": [
+          4,
+          4
+        ],
+        "firstPos": [
+          4,
+          4
+        ],
+        "manhattan": 0,
+        "availableSteps": 1,
+        "mFlee": false,
+        "reason": "first D+1 position near haven but reachable in 1 step(s)"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": true,
+      "raidExcludedBy": 95,
+      "nTickFights": 3,
+      "slotShelter": [
+        {
+          "seq": 6732,
+          "call": 0,
+          "regionSize": 1,
+          "regionIsHaven": true,
+          "musterOn": true,
+          "sheltered": true
+        },
+        {
+          "seq": 6741,
+          "call": 1,
+          "regionSize": 1,
+          "regionIsHaven": true,
+          "musterOn": true,
+          "sheltered": true
+        },
+        {
+          "seq": 6750,
+          "call": 2,
+          "regionSize": 1,
+          "regionIsHaven": true,
+          "musterOn": true,
+          "sheltered": true
+        }
+      ],
+      "cls": "a",
+      "reason": "tick fight at a pooled slot; the holder was sheltered at every pooled eligible slot (feasible node = haven (4,4), muster in effect day 96)",
+      "ctl": {
+        "status": "identical",
+        "detail": "4 tick rows, 3 encounter(s)"
+      }
+    },
+    {
+      "seed": 107054,
+      "day": 97,
+      "mid": "strike",
+      "mechanisms": [],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "yuki_mori"
+      ],
+      "nRows": 3,
+      "nEncounters": 2,
+      "nInstances": 1,
+      "holder": "yuki_mori",
+      "armed": true,
+      "eligibleSlots": 3,
+      "pooledEligibleSlots": 3,
+      "rowInflation": 1.5,
+      "teleport": {
+        "teleported": false,
+        "lastPos": [
+          4,
+          4
+        ],
+        "firstPos": [
+          4,
+          4
+        ],
+        "manhattan": 0,
+        "availableSteps": 1,
+        "mFlee": false,
+        "reason": "first D+1 position near haven but reachable in 1 step(s)"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": true,
+      "raidExcludedBy": 95,
+      "nTickFights": 2,
+      "slotShelter": [
+        {
+          "seq": 6768,
+          "call": 0,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        },
+        {
+          "seq": 6777,
+          "call": 1,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        },
+        {
+          "seq": 6786,
+          "call": 2,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        }
+      ],
+      "cls": "f",
+      "reason": "ambiguous: the tick fight(s) are at an unknown subset of 3 eligible slot(s); the holder was NOT sheltered at any pooled eligible slot, so the fight may have been a real miss (pooled slot) or (d) (unpooled slot)",
+      "ctl": {
+        "status": "identical",
+        "detail": "3 tick rows, 2 encounter(s)"
+      }
+    },
+    {
+      "seed": 107054,
+      "day": 99,
+      "mid": "strike",
+      "mechanisms": [
+        "a"
+      ],
+      "alternates": [
+        "d"
+      ],
+      "notes": [],
+      "holders": [
+        "yuki_mori"
+      ],
+      "nRows": 4,
+      "nEncounters": 1,
+      "nInstances": 1,
+      "holder": "yuki_mori",
+      "armed": true,
+      "eligibleSlots": 2,
+      "pooledEligibleSlots": 2,
+      "rowInflation": 4,
+      "teleport": {
+        "teleported": false,
+        "lastPos": [
+          4,
+          4
+        ],
+        "firstPos": [
+          4,
+          4
+        ],
+        "manhattan": 0,
+        "availableSteps": 1,
+        "mFlee": false,
+        "reason": "first D+1 position near haven but reachable in 1 step(s)"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": true,
+      "raidExcludedBy": 95,
+      "nTickFights": 1,
+      "slotShelter": [
+        {
+          "seq": 6810,
+          "call": 0,
+          "regionSize": 1,
+          "regionIsHaven": true,
+          "musterOn": true,
+          "sheltered": true
+        },
+        {
+          "seq": 6818,
+          "call": 1,
+          "regionSize": 1,
+          "regionIsHaven": true,
+          "musterOn": true,
+          "sheltered": true
+        }
+      ],
+      "cls": "a",
+      "reason": "tick fight(s) at an unknown subset of 2 eligible slot(s); the holder was sheltered at every pooled eligible slot, so a fight at a pooled slot is (a) and at an unpooled slot is (d) — NOT-a-miss either way",
+      "ctl": {
+        "status": "identical",
+        "detail": "4 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107054,
+      "day": 100,
+      "mid": "strike",
+      "mechanisms": [],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "yuki_mori"
+      ],
+      "nRows": 2,
+      "nEncounters": 1,
+      "nInstances": 1,
+      "holder": "yuki_mori",
+      "armed": true,
+      "eligibleSlots": 1,
+      "pooledEligibleSlots": 1,
+      "rowInflation": 2,
+      "teleport": {
+        "teleported": false,
+        "lastPos": [
+          4,
+          5
+        ],
+        "firstPos": [
+          4,
+          5
+        ],
+        "manhattan": 0,
+        "availableSteps": 1,
+        "mFlee": false,
+        "reason": "first D+1 position near haven but reachable in 1 step(s)"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": true,
+      "raidExcludedBy": 95,
+      "nTickFights": 1,
+      "slotShelter": [
+        {
+          "seq": 6842,
+          "call": 0,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        }
+      ],
+      "cls": "f",
+      "reason": "REAL-MISS? tick fight at a pooled slot where the holder was NOT sheltered (slot shelter: [{\"seq\":6842,\"call\":0,\"regionSize\":2,\"regionIsHaven\":false,\"musterOn\":true,\"sheltered\":false}]) and not resting/stale — the draft should have fired",
+      "realMiss": true,
+      "ctl": {
+        "status": "identical",
+        "detail": "2 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107054,
+      "day": 106,
+      "mid": "strike",
+      "mechanisms": [],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "yuki_mori"
+      ],
+      "nRows": 4,
+      "nEncounters": 1,
+      "nInstances": 1,
+      "holder": "yuki_mori",
+      "armed": true,
+      "eligibleSlots": 1,
+      "pooledEligibleSlots": 1,
+      "rowInflation": 4,
+      "teleport": {
+        "teleported": false,
+        "reason": "no D+1 rows for strike"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": false,
+      "nTickFights": 1,
+      "slotShelter": [
+        {
+          "seq": 6996,
+          "call": 0,
+          "regionSize": 6,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        }
+      ],
+      "cls": "f",
+      "reason": "REAL-MISS? tick fight at a pooled slot where the holder was NOT sheltered (slot shelter: [{\"seq\":6996,\"call\":0,\"regionSize\":6,\"regionIsHaven\":false,\"musterOn\":true,\"sheltered\":false}]) and not resting/stale — the draft should have fired",
+      "realMiss": true,
+      "ctl": {
+        "status": "identical",
+        "detail": "4 tick rows, 1 encounter(s)"
+      }
+    },
+    {
+      "seed": 107057,
+      "day": 107,
+      "mid": "audit",
+      "mechanisms": [
+        "e"
+      ],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "naran_tumen"
+      ],
+      "nRows": 2,
+      "nEncounters": 1,
+      "nInstances": 2,
+      "holder": "naran_tumen",
+      "armed": true,
+      "eligibleSlots": 0,
+      "pooledEligibleSlots": 0,
+      "rowInflation": 2,
+      "cls": "e",
+      "reason": "every tick row for audit on day 107 has nOnTile = 0 — no tick fight could happen; the joined encounter(s) must be raid-path fights",
+      "ctl": {
+        "status": "diverged",
+        "detail": "tick rows arm 4 vs ctl 0; encounters arm [quinn_murphy/vDie] vs ctl []"
+      }
+    },
+    {
+      "seed": 107057,
+      "day": 107,
+      "mid": "herald",
+      "mechanisms": [
+        "e"
+      ],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "naran_tumen"
+      ],
+      "nRows": 2,
+      "nEncounters": 1,
+      "nInstances": 1,
+      "holder": "naran_tumen",
+      "armed": true,
+      "eligibleSlots": 0,
+      "pooledEligibleSlots": 0,
+      "rowInflation": 2,
+      "cls": "e",
+      "reason": "every tick row for herald on day 107 has nOnTile = 0 — no tick fight could happen; the joined encounter(s) must be raid-path fights",
+      "ctl": {
+        "status": "diverged",
+        "detail": "tick rows arm 2 vs ctl 0; encounters arm [tariq_mahmood/vKill] vs ctl []"
+      }
+    },
+    {
+      "seed": 107057,
+      "day": 121,
+      "mid": "spoiler",
+      "mechanisms": [
+        "e"
+      ],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "naran_tumen"
+      ],
+      "nRows": 3,
+      "nEncounters": 1,
+      "nInstances": 1,
+      "holder": "naran_tumen",
+      "armed": true,
+      "eligibleSlots": 0,
+      "pooledEligibleSlots": 0,
+      "rowInflation": 3,
+      "cls": "e",
+      "reason": "every tick row for spoiler on day 121 has nOnTile = 0 — no tick fight could happen; the joined encounter(s) must be raid-path fights",
+      "ctl": {
+        "status": "diverged",
+        "detail": "tick rows arm 3 vs ctl 0; encounters arm [ingrid_vik/vFlee] vs ctl []"
+      }
+    },
+    {
+      "seed": 107057,
+      "day": 141,
+      "mid": "spoiler",
+      "mechanisms": [],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "naran_tumen"
+      ],
+      "nRows": 2,
+      "nEncounters": 1,
+      "nInstances": 1,
+      "holder": "naran_tumen",
+      "armed": true,
+      "eligibleSlots": 2,
+      "pooledEligibleSlots": 2,
+      "rowInflation": 2,
+      "teleport": {
+        "teleported": false,
+        "lastPos": [
+          4,
+          4
+        ],
+        "firstPos": [
+          4,
+          4
+        ],
+        "manhattan": 0,
+        "availableSteps": 1,
+        "mFlee": false,
+        "reason": "first D+1 position near haven but reachable in 1 step(s)"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": false,
+      "nTickFights": 1,
+      "slotShelter": [
+        {
+          "seq": 12230,
+          "call": 1,
+          "regionSize": 9,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        },
+        {
+          "seq": 12241,
+          "call": 5,
+          "regionSize": 9,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        }
+      ],
+      "cls": "f",
+      "reason": "ambiguous: the tick fight(s) are at an unknown subset of 2 eligible slot(s); the holder was NOT sheltered at any pooled eligible slot, so the fight may have been a real miss (pooled slot) or (d) (unpooled slot)",
+      "ctl": {
+        "status": "diverged",
+        "detail": "tick rows arm 2 vs ctl 2; encounters arm [elena_petrova/vFlee] vs ctl []"
+      }
+    },
+    {
+      "seed": 107057,
+      "day": 142,
+      "mid": "eulogy",
+      "mechanisms": [],
+      "alternates": [],
+      "notes": [],
+      "holders": [
+        "naran_tumen"
+      ],
+      "nRows": 2,
+      "nEncounters": 1,
+      "nInstances": 1,
+      "holder": "naran_tumen",
+      "armed": true,
+      "eligibleSlots": 1,
+      "pooledEligibleSlots": 1,
+      "rowInflation": 2,
+      "teleport": {
+        "teleported": false,
+        "lastPos": [
+          4,
+          4
+        ],
+        "firstPos": [
+          4,
+          4
+        ],
+        "manhattan": 0,
+        "availableSteps": 1,
+        "mFlee": false,
+        "reason": "first D+1 position near haven but reachable in 1 step(s)"
+      },
+      "provenRaidDay": false,
+      "raidExcluded": false,
+      "nTickFights": 1,
+      "slotShelter": [
+        {
+          "seq": 12256,
+          "call": 2,
+          "regionSize": 2,
+          "regionIsHaven": false,
+          "musterOn": true,
+          "sheltered": false
+        }
+      ],
+      "cls": "f",
+      "reason": "REAL-MISS? tick fight at a pooled slot where the holder was NOT sheltered (slot shelter: [{\"seq\":12256,\"call\":2,\"regionSize\":2,\"regionIsHaven\":false,\"musterOn\":true,\"sheltered\":false}]) and not resting/stale — the draft should have fired",
+      "realMiss": true,
+      "ctl": {
+        "status": "diverged",
+        "detail": "tick rows arm 2 vs ctl 0; encounters arm [elena_petrova/vFlee] vs ctl []"
+      }
+    }
+  ]
+}
