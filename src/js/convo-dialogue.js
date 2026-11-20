@@ -557,7 +557,22 @@
         const deferredAsk = c.want?.id === 'ask_favor' && !(c.want && c.want.favor) &&
           ((c.want && c.want.stage) || 0) < 1 && !!deferredLiveNeed;
         if (!deferredAsk && settledFavor && ['moot','fulfilled','thanked','broken','acknowledged','declined'].includes(settledFavor.state)) {
-          const line = '"It\'s already handled. Thank you for asking."';
+          // NAME THE SETTLED FAVOR (journey-scale r247): the bare "It's
+          // already handled" never says WHAT was handled. Wild evidence —
+          // seed 103891 day 120, Karlygash: the favor was planted d114,
+          // the opener signaled an edge ("something curdled"), the player
+          // pressed dlg:help and learned nothing — the favor died
+          // off-screen and the answer named no part of it. Every favor
+          // carries a short, and the codebase speaks it in every
+          // follow-up ("About {short} — ...", "Never mind {short} — ...");
+          // this branch was the one place that didn't. Name it; fall back
+          // to the bare line only when there is no speakable short (a
+          // bare kind id must never be spoken — the r16 stale-opener
+          // rule: name the ask, never the id).
+          const sh = (settledFavor.short && / /.test(settledFavor.short)) ? settledFavor.short : null;
+          const line = sh
+            ? `"It's already handled — ${sh}. Thank you for asking."`
+            : '"It\'s already handled. Thank you for asking."';
           this.sayLine(vid, line, { structural: true });
           // HELP SPEND-OUT (journey-social r35 2026-10-20): a settled favor's
           // help topic is exhausted after one honest answer — the menu kept
