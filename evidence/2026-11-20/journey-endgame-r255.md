@@ -221,11 +221,18 @@ roll was premature and the file reverts. uw/won untouched.
 
 ## Gate
 
-`node scripts/check.js --quick` on the branch tip (6b8051ec2 + this
-evidence, no code changes): **339 passed, 5 failed in 601s, 0
-attributable.** All five are the standing set, verified identical to
-the r246 adoption's gate on the same tip (run twice, 339/5 both
-times, same five scripts):
+`node scripts/check.js --quick` run twice, both **339 passed, 5 failed,
+0 attributable**, both the standing set (verified identical to the r246
+adoption's gate on the same code, run twice, 339/5 both times):
+
+- First run on the branch tip (6b8051ec2 + this evidence, no code
+  changes): 339/5 in 601s (`journey-endgame-r255-gate.log`).
+- Master then moved (Loop A 0315Z landing `ec0a42913` — evidence +
+  test scripts, game code reverted); the branch was rebased onto it
+  (clean, 1 commit) and the gate re-run FRESH on the final tip:
+  339/5 in 773s (`journey-endgame-r255-gate2.log`), same five scripts.
+
+The five, in both runs:
 
 - `test-measurement-proof-update.js` + `test-measurement-workflow.js`
   (measurement-proof staleness pair): fail with "Proof source inputs
