@@ -1,0 +1,1154 @@
+// analyze-lend-a.js — analyzer + judge, arm sim-lend-a.
+// LEND: the gun to the fighters already going (finding #2599: the
+// presence draft fired once in 8 seeds because the armed holder is
+// almost never in contact with a wave-4+ fight as the lead; the lend
+// hands the gun to the fighter who is already going). Reads the
+// lend driver corpora (perseed-lend-a-*): ammoCensus rows,
+// cellPile rows, ammoBaseline, Game.craft wrap, `partyCells` on
+// every wave-4+ encounter row, PLUS the grant-side wraps:
+// `alienLootGrant`, `_cxItemPrize`, `_corpseTakeStack`, PLUS the
+// `v4tickPresence` pool rows, the `v4transfers` gun-move rows, and
+// the new `v4lends` fired-rows (day / monster / lender / borrower /
+// kind / cells moved / return outcome).
+//
+// Judge (frozen prereg): GO iff (1) arm villager
+// searcaster-holder-days >= 40; (2) arm armed-holder entries
+// (wave-4+ entry, searcaster + >= 1 cell, any participant) >= 3;
+// (3) arm armed volleys fired (lead rangedId searcaster,
+// shots > 0) >= 2; (4) no-regression guardrail, SEPARATED: (i)
+// lent-fight safety — the borrower is alive at fight end in >= 50%
+// of lent fights (applies only if >= 1 lend fired; skipped, not
+// failed, with 0 lends); (ii) downstream — arm deaths per engaged
+// wave-4+ meeting <= 1.10 x ctl AND arm median survival >= 0.80 x
+// ctl; (5) starvation guardrail: arm villager starvation deaths <=
+// ctl + 2. Kind: bar 1 miss = SUPPLY; bars 2-3 miss =
+// PARTICIPATION; bars 4-5 miss = GUARDRAIL. The `judge` /
+// `judgeParticipation` functions below are the inherited diag
+// instruments (kept verbatim for the single-leg --dir path); the
+// two-leg judge is `judgeLend`.
+//
+// INSTRUMENT FIX (finding #2622): the `armedLeads` counter in
+// `participationStats` is incremented here — the gunrate/cellgate
+// analyzer initialized it to 0 and never added to it, so "armed
+// leads 0" was an instrument artifact (the real count on the
+// cellgate band was 1, read from armedDetail). The selftest's
+// armed-entry fixture is an ALLY, so its armedLeads === 0
+// assertion stays correct; a new armed-LEAD fixture row asserts
+// armedLeads === 1.
+//
+// Presence stats (`presenceStats`): the v4tickPresence pool joined
+// to v4encounters on (day, mid, origin world-tick) — pool ticks,
+// pool fights, holder-led fights, draft misses (fight happened,
+// holder pooled, lead is someone else); and the v4transfers rows
+// (transfers / vanishes / new-holders / holder-died).
+//
+// Attribution (bowsource family): every fusion_cell first-appearance
+// in a villager's personal union (held + stashed) after baseline is
+// attributed to starting / looted (villager kill) / contest-prize /
+// show-gift / trade / spawned (new roster vid) / crafted / moved
+// (same-window loss+gain) / unexplained, from the census window
+// (prevRowDay, rowDay] joined to the kill-loot / grant / craft event
+// logs. Searcaster appearances are attributed the same way (where
+// did the searcaster itself come from?). The scholar's cell
+// appearances (cellPile scholar series) are attributed the same way
+// (corpse-take / contest-prize / trade / crafted / unexplained) and
+// count in the attribution denominator.
+// v2 NOTE: the v1 `teleLoot` branch is DEAD and removed — the VF
+// instrument's teleRows carries only veteran-relevant tele types, so
+// no loot_dropped row can ever appear in it (proven: 0 rows across
+// 3 seeds despite teleCounts 20-28). Grants are read from the
+// driver's grantEvents wrap on alienLootGrant, never from teleRows.
+//
+// Judge (frozen prereg): DIAG-GO iff (1) holder census coverage
+// complete on all 8 seeds; (2) acquisition-event attribution >= 0.90
+// — OR zero appearances (PASS-vacuous, only when bar 1 passes and
+// the frozen mechanism names loot as the sole route); (3)
+// volley-opportunity pool >= 5 (wave-4+ engaged meetings with a
+// cell-weapon participant at 0 cells) — OR the rare-rate conclusion
+// (thin pool stated as a finding, not re-scored).
+//
+// Usage:
+//   node scripts/analyze-lend-a.js --dir DIR [--out FILE] [--no-judge]
+//   node scripts/analyze-lend-a.js --selftest
+//
+// Attribution (bowsource family): every fusion_cell first-appearance
+// in a villager's personal union (held + stashed) after baseline is
+// attributed to starting / looted (villager kill) / contest-prize /
+// show-gift / trade / spawned (new roster vid) / crafted / moved
+// (same-window loss+gain) / unexplained, from the census window
+// (prevRowDay, rowDay] joined to the kill-loot / grant / craft event
+// logs. Searcaster appearances are attributed the same way (where
+// did the searcaster itself come from?). The scholar's cell
+// appearances (cellPile scholar series) are attributed the same way
+// (corpse-take / contest-prize / trade / crafted / unexplained) and
+// count in the attribution denominator.
+// v2 NOTE: the v1 `teleLoot` branch is DEAD and removed — the VF
+// instrument's teleRows carries only veteran-relevant tele types, so
+// no loot_dropped row can ever appear in it (proven: 0 rows across
+// 3 seeds despite teleCounts 20-28). Grants are read from the
+// driver's grantEvents wrap on alienLootGrant, never from teleRows.
+//
+// Judge (frozen prereg): DIAG-GO iff (1) holder census coverage
+// complete on all 8 seeds; (2) acquisition-event attribution >= 0.90
+// — OR zero appearances (PASS-vacuous, only when bar 1 passes and
+// the frozen mechanism names loot as the sole route); (3)
+// volley-opportunity pool >= 5 (wave-4+ engaged meetings with a
+// cell-weapon participant at 0 cells) — OR the rare-rate conclusion
+// (thin pool stated as a finding, not re-scored).
+//
+// Usage:
+//   node scripts/analyze-lend-a.js --dir DIR [--out FILE] [--no-judge]
+//   node scripts/analyze-lend-a.js --selftest
+'use strict';
+const path = require('path');
+const fs = require('fs');
+
+function mean(xs) {
+  if (!xs.length) return null;
+  return xs.reduce(function (a, b) { return a + b; }, 0) / xs.length;
+}
+function median(xs) {
+  if (!xs.length) return null;
+  const s = xs.slice().sort(function (a, b) { return a - b; });
+  const m = s.length >> 1;
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+function isStarvation(d) {
+  return /starvat/i.test(String((d && d.kind) || '')) || /starvat/i.test(String((d && d.cause) || ''));
+}
+function bucket(day) {
+  if (day <= 30) return 'd0-30';
+  if (day <= 60) return 'd31-60';
+  if (day <= 100) return 'd61-100';
+  return 'd101+';
+}
+function cellsTotal(row) { return (row.cells | 0) + (row.cellsStash | 0); }
+
+// attributeIncrease(events, vid, prevDay, day, delta): the shared
+// window attribution for one appearance event. `events` carries the
+// seed's loot/craft logs + the per-vid totals series (for moved
+// detection). Pure; exported for the proof test.
+function attributeIncrease(ctx, vid, prevDay, day, itemKind) {
+  // ctx: { loot: [{day, vid, dropId}], crafts: [{day, recipeId}],
+  //   grants: [{day, itemId, toKind, toVid, caller}],
+  //   takes: [{day, itemId}], series: { vid: [{day, total}] },
+  //   baselineVids: Set, role: 'villager' | 'scholar' }
+  // itemKind: 'fusion_cell' or 'searcaster'. The grant match is
+  // role-aware: a villager appearance needs a grant TO that vid; a
+  // scholar appearance needs a grant to the scholar (or a corpse
+  // take for cells). 'moved' reads the series (villagers + the
+  // scholar pseudo-vid '__scholar__') for a same-window decrease.
+  const role = ctx.role || 'villager';
+  if (role === 'villager' && !ctx.baselineVids.has(vid)) return 'spawned';
+  for (const e of (ctx.loot || [])) {
+    if (role === 'villager' && e.vid === vid && e.dropId === itemKind && e.day > prevDay && e.day <= day) return 'looted';
+  }
+  for (const g of (ctx.grants || [])) {
+    if (g.itemId !== itemKind || !(g.day > prevDay && g.day <= day)) continue;
+    if (role === 'villager' && g.toKind === 'villager' && g.toVid === vid) {
+      if (g.caller === 'contest-prize') return 'contest-prize';
+      if (g.caller === 'show-gift') return 'show-gift';
+      if (g.caller === 'trade') return 'trade';
+      return 'grant-other';
+    }
+    if (role === 'scholar' && g.toKind === 'scholar') {
+      if (g.caller === 'contest-prize') return 'contest-prize';
+      if (g.caller === 'show-gift') return 'show-gift';
+      if (g.caller === 'trade') return 'trade';
+      return 'grant-other';
+    }
+  }
+  if (itemKind === 'fusion_cell') {
+    for (const e of (ctx.crafts || [])) {
+      if (e.recipeId === 'fusion_cell' && e.day > prevDay && e.day <= day) return 'crafted';
+    }
+    if (role === 'scholar') {
+      for (const t of (ctx.takes || [])) {
+        if (t.itemId === 'fusion_cell' && t.day > prevDay && t.day <= day) return 'corpse-take';
+      }
+    }
+  }
+  // moved: another holder's total fell in the same window (a gift,
+  // a hand-off, a corpse stripped — the window cannot tell which).
+  if (ctx.series) {
+    for (const other of Object.keys(ctx.series)) {
+      if (other === vid) continue;
+      const rows = ctx.series[other];
+      let before = null, after = null;
+      for (const r of rows) {
+        if (r.day <= prevDay) before = r.total;
+        if (r.day <= day) after = r.total;
+      }
+      if (before != null && after != null && (before - after) >= 1) return 'moved';
+    }
+  }
+  return 'unexplained';
+}
+
+function cellStats(dir) {
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(function (f) { return f.endsWith('.json'); }).sort() : [];
+  const st = { dir: dir, n: 0, valid: 0, errors: 0,
+    bowopenOn: {}, senseexpedOn: {}, speargateOn: {}, gunrateOn: {},
+    // coverage (bar 1)
+    coverage: [], coverageComplete: 0,
+    // holders
+    searcasterHolders: [], // {seed, vid, holderDays, cellDays, maxCells, zeroDays}
+    searcasterHolderDays: 0, searcasterCellDays: 0, searcasterZeroDays: 0,
+    searcasterHoldersTotal: 0, cellHolderDays: 0, maxCellsEver: 0,
+    // appearances + attribution (bar 2)
+    cellAppearances: 0, cellAttributed: 0, cellAttribution: null,
+    cellBySource: {}, cellAppearanceDetail: [],
+    searcasterAppearances: 0, searcasterAttributed: 0, searcasterAttribution: null,
+    searcasterBySource: {}, searcasterAppearanceDetail: [],
+    searcasterBaseline: 0, cellBaseline: 0,
+    // departures
+    searcasterDeparts: 0, searcasterDepartsZero: 0, searcasterDepartOutcomes: {},
+    // acquisition events
+    lootCellDrops: 0, lootSearcasterDrops: 0, lootByDrop: {},
+    grantCellByCaller: {}, grantSearcasterByCaller: {},
+    grantCellTotal: 0, grantSearcasterTotal: 0,
+    corpseTakeCell: 0, corpseTakeTotal: 0, contestPrizes: 0,
+    scholarCellAppearances: 0, scholarCellAttributed: 0, scholarCellBySource: {},
+    playerCrafts: 0, playerCraftCell: 0, playerCraftByRecipe: {},
+    pileMaxTotal: 0, pileEverPositive: 0, scholarMaxCells: 0,
+    // volley opportunities (bar 3)
+    poolEngagedZero: 0, poolEngagedArmed: 0, poolAllZero: 0, poolEvadedZero: 0,
+    poolDetail: [], volleyFiredFromSearcaster: 0, noFusionCellsLines: 0,
+    encWave4Plus: 0, encEngaged: 0,
+    // wall numbers
+    days: [], medianDays: null, communityLost: 0, national: 0,
+    seedWins: 0, wave4: 0, wave5: 0, scaleRanks: {},
+    starvation: 0, starvationVillager: 0,
+    perSeed: [] };
+  const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
+  for (const f of files) {
+    let d;
+    try { d = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); } catch (e) { st.errors++; continue; }
+    st.n++;
+    if (!d || typeof d !== 'object') { st.errors++; continue; }
+    st.valid++;
+    const seedErr = ((d.instrumentErrors || []).length);
+    st.errors += seedErr;
+    if (d.bowopenOn != null) st.bowopenOn[String(d.bowopenOn)] = (st.bowopenOn[String(d.bowopenOn)] || 0) + 1;
+    if (d.senseexpedOn != null) st.senseexpedOn[String(d.senseexpedOn)] = (st.senseexpedOn[String(d.senseexpedOn)] || 0) + 1;
+    if (d.speargateOn != null) st.speargateOn[String(d.speargateOn)] = (st.speargateOn[String(d.speargateOn)] || 0) + 1;
+    if (d.gunrateOn != null) st.gunrateOn[String(d.gunrateOn)] = (st.gunrateOn[String(d.gunrateOn)] || 0) + 1;
+    const seed = d.seed;
+    st.days.push(d.days != null ? d.days : (d.gameDays != null ? d.gameDays : 0));
+    if ((RANK_ORDER[d.scaleRank] || 0) >= 2) st.national++;
+    if (d.won) st.seedWins++;
+    if ((d.maxWave | 0) >= 4) st.wave4++;
+    if ((d.maxWave | 0) >= 5) st.wave5++;
+    if (['village-lost', 'village-dead', 'pop-zero'].includes(d.endReason)) st.communityLost++;
+    st.scaleRanks[d.scaleRank || '?'] = (st.scaleRanks[d.scaleRank || '?'] || 0) + 1;
+    for (const death of (d.deaths || [])) {
+      if (isStarvation(death)) { st.starvation++; if (!death.player) st.starvationVillager++; }
+    }
+    // ---- coverage (bar 1) ----
+    const baseline = d.ammoBaseline || null;
+    const baselineRows = (baseline && Array.isArray(baseline.census)) ? baseline.census : [];
+    const censusRows = d.ammoCensus || [];
+    const pileRows = d.cellPile || [];
+    const censusDays = {};
+    for (const r of censusRows) censusDays[r.day | 0] = true;
+    const livedDays = (d.gameDays | 0) || (d.days | 0) || 0;
+    const coverDays = Object.keys(censusDays).length;
+    const cov = { seed: seed, baselinePresent: baselineRows.length > 0,
+      baselineRows: baselineRows.length, censusRows: censusRows.length,
+      cellPileRows: pileRows.length, censusDays: coverDays,
+      livedDays: livedDays, censusDayShare: livedDays ? coverDays / livedDays : null,
+      instrumentErrors: seedErr,
+      complete: baselineRows.length > 0 && censusRows.length > 0 && pileRows.length > 0
+        && seedErr === 0 && livedDays > 0 && (coverDays / livedDays) >= 0.5 };
+    st.coverage.push(cov);
+    if (cov.complete) st.coverageComplete++;
+    // ---- per-vid series (cells + searcaster presence) ----
+    const baselineVids = new Set();
+    const baseCells = {}, baseRanged = {};
+    for (const r of baselineRows) {
+      baselineVids.add(r.vid);
+      baseCells[r.vid] = cellsTotal(r);
+      baseRanged[r.vid] = r.rangedId || null;
+      if (r.rangedId === 'searcaster') st.searcasterBaseline++;
+      if (cellsTotal(r) > 0) st.cellBaseline += cellsTotal(r);
+    }
+    const series = {}; // vid -> [{day, total}] (cells)
+    const rangedSeries = {}; // vid -> [{day, rangedId}]
+    const holderAgg = {}; // vid -> {holderDays, cellDays, maxCells, zeroDays}
+    const sortedCensus = censusRows.slice().sort(function (a, b) { return (a.day | 0) - (b.day | 0); });
+    for (const r of sortedCensus) {
+      if (!series[r.vid]) series[r.vid] = [];
+      series[r.vid].push({ day: r.day | 0, total: cellsTotal(r) });
+      if (!rangedSeries[r.vid]) rangedSeries[r.vid] = [];
+      rangedSeries[r.vid].push({ day: r.day | 0, rangedId: r.rangedId || null });
+      if (r.rangedId === 'searcaster') {
+        const h = holderAgg[r.vid] || (holderAgg[r.vid] = { holderDays: 0, cellDays: 0, maxCells: 0, zeroDays: 0 });
+        h.holderDays++;
+        if (cellsTotal(r) > 0) h.cellDays++;
+        else h.zeroDays++;
+        if (cellsTotal(r) > h.maxCells) h.maxCells = cellsTotal(r);
+      }
+      if (cellsTotal(r) > 0) st.cellHolderDays++;
+      if (cellsTotal(r) > st.maxCellsEver) st.maxCellsEver = cellsTotal(r);
+    }
+    for (const vid of Object.keys(holderAgg)) {
+      const h = holderAgg[vid];
+      st.searcasterHolders.push({ seed: seed, vid: vid, holderDays: h.holderDays,
+        cellDays: h.cellDays, maxCells: h.maxCells, zeroDays: h.zeroDays });
+      st.searcasterHolderDays += h.holderDays;
+      st.searcasterCellDays += h.cellDays;
+      st.searcasterZeroDays += h.zeroDays;
+    }
+    st.searcasterHoldersTotal += Object.keys(holderAgg).length;
+    // ---- event logs for attribution ----
+    const lootEvents = (d.ammoLoot || []).slice();
+    const craftEvents = (d.ammoPlayerCraft || []).slice();
+    const grantEvents = (d.grantEvents || []).slice();
+    const takeEvents = (d.corpseTakeEvents || []).slice();
+    st.contestPrizes += (d.contestPrizeEvents || []).length;
+    for (const e of lootEvents) {
+      if (e.dropId === 'fusion_cell') st.lootCellDrops++;
+      if (e.dropId === 'searcaster') st.lootSearcasterDrops++;
+      st.lootByDrop[e.dropId || '?'] = (st.lootByDrop[e.dropId || '?'] || 0) + 1;
+    }
+    for (const g of grantEvents) {
+      if (g.itemId === 'fusion_cell') {
+        st.grantCellTotal++;
+        st.grantCellByCaller[g.caller || '?'] = (st.grantCellByCaller[g.caller || '?'] || 0) + 1;
+      }
+      if (g.itemId === 'searcaster') {
+        st.grantSearcasterTotal++;
+        st.grantSearcasterByCaller[g.caller || '?'] = (st.grantSearcasterByCaller[g.caller || '?'] || 0) + 1;
+      }
+    }
+    for (const t of takeEvents) {
+      st.corpseTakeTotal++;
+      if (t.itemId === 'fusion_cell') st.corpseTakeCell++;
+    }
+    for (const e of craftEvents) {
+      st.playerCrafts++;
+      st.playerCraftByRecipe[e.recipeId || '?'] = (st.playerCraftByRecipe[e.recipeId || '?'] || 0) + 1;
+      if (e.recipeId === 'fusion_cell') st.playerCraftCell++;
+    }
+    // ---- cell appearances (window attribution) ----
+    // The scholar pseudo-vid carries the scholar's cell series so a
+    // villager gaining while the scholar loses in-window reads as
+    // 'moved' (a gift / hand-off).
+    const scholarSeries = [];
+    for (const p of pileRows) {
+      scholarSeries.push({ day: p.day | 0, total: (p.scholar ? (p.scholar.cells | 0) : 0) });
+    }
+    const seriesWithScholar = Object.assign({}, series, { __scholar__: scholarSeries });
+    const ctx = { loot: lootEvents, crafts: craftEvents, grants: grantEvents,
+      takes: takeEvents, series: seriesWithScholar, baselineVids: baselineVids, role: 'villager' };
+    for (const vid of Object.keys(series)) {
+      const rows = series[vid];
+      let prev = (baseCells[vid] != null ? baseCells[vid] : 0);
+      let prevDay = (baseline && baseline.day != null) ? (baseline.day | 0) : 0;
+      for (const r of rows) {
+        const delta = r.total - prev;
+        if (delta > 0) {
+          const src = attributeIncrease(ctx, vid, prevDay, r.day, 'fusion_cell');
+          st.cellAppearances++;
+          if (src !== 'unexplained') st.cellAttributed++;
+          st.cellBySource[src] = (st.cellBySource[src] || 0) + 1;
+          st.cellAppearanceDetail.push({ seed: seed, vid: vid, day: r.day, prevDay: prevDay,
+            delta: delta, source: src });
+        }
+        prev = r.total; prevDay = r.day;
+      }
+    }
+    // ---- searcaster appearances (window attribution) ----
+    const rangedCtx = { loot: lootEvents, crafts: [], grants: grantEvents,
+      takes: takeEvents, series: null, baselineVids: baselineVids, role: 'villager' };
+    // moved detection for weapons: presence series (0/1).
+    const presSeries = {};
+    for (const vid of Object.keys(rangedSeries)) {
+      presSeries[vid] = rangedSeries[vid].map(function (r) { return { day: r.day, total: r.rangedId === 'searcaster' ? 1 : 0 }; });
+    }
+    rangedCtx.series = presSeries;
+    for (const vid of Object.keys(rangedSeries)) {
+      const rows = rangedSeries[vid];
+      let prevR = (baseRanged[vid] != null ? baseRanged[vid] : null);
+      let prevDay = (baseline && baseline.day != null) ? (baseline.day | 0) : 0;
+      for (const r of rows) {
+        if (r.rangedId === 'searcaster' && prevR !== 'searcaster') {
+          const src = attributeIncrease(rangedCtx, vid, prevDay, r.day, 'searcaster');
+          st.searcasterAppearances++;
+          if (src !== 'unexplained') st.searcasterAttributed++;
+          st.searcasterBySource[src] = (st.searcasterBySource[src] || 0) + 1;
+          st.searcasterAppearanceDetail.push({ seed: seed, vid: vid, day: r.day, prevDay: prevDay, source: src });
+        }
+        prevR = r.rangedId; prevDay = r.day;
+      }
+    }
+    // ---- pile + scholar stock ----
+    let pileMax = 0, pilePos = 0, scholarMax = 0;
+    for (const p of pileRows) {
+      const t = p.total | 0;
+      if (t > pileMax) pileMax = t;
+      if (t > 0) pilePos++;
+      if (p.scholar && (p.scholar.cells | 0) > scholarMax) scholarMax = p.scholar.cells | 0;
+      // Pile/scholar increases are NOT folded into the villager
+      // attribution denominator (the pile cannot receive loot and
+      // the scholar's loot path is the tele log) — they are reported
+      // as stock maxima above; any positive row is listed in the
+      // evidence.
+    }
+    if (pileMax > st.pileMaxTotal) st.pileMaxTotal = pileMax;
+    st.pileEverPositive += pilePos;
+    if (scholarMax > st.scholarMaxCells) st.scholarMaxCells = scholarMax;
+    // ---- scholar cell appearances (window attribution) ----
+    // The scholar's series comes from the cellPile rows; the baseline
+    // is the day-0 scholar cell count. Scholar appearances count in
+    // the attribution denominator (prereg amendment).
+    const scholarCtx = { loot: [], crafts: craftEvents, grants: grantEvents,
+      takes: takeEvents, series: seriesWithScholar, baselineVids: baselineVids, role: 'scholar' };
+    let prevScholarCells = (baseline && baseline.scholarCells) ? (baseline.scholarCells.cells | 0) : 0;
+    let prevScholarDay = (baseline && baseline.day != null) ? (baseline.day | 0) : 0;
+    for (const p of pileRows) {
+      const cur = (p.scholar ? (p.scholar.cells | 0) : 0);
+      if (cur > prevScholarCells) {
+        const src2 = attributeIncrease(scholarCtx, '__scholar__', prevScholarDay, p.day | 0, 'fusion_cell');
+        st.cellAppearances++;
+        st.scholarCellAppearances++;
+        if (src2 !== 'unexplained') { st.cellAttributed++; st.scholarCellAttributed++; }
+        st.cellBySource[src2] = (st.cellBySource[src2] || 0) + 1;
+        st.scholarCellBySource[src2] = (st.scholarCellBySource[src2] || 0) + 1;
+        st.cellAppearanceDetail.push({ seed: seed, vid: '__scholar__', day: p.day | 0, prevDay: prevScholarDay,
+          delta: cur - prevScholarCells, source: src2 });
+      }
+      prevScholarCells = cur; prevScholarDay = p.day | 0;
+    }
+    // ---- departures (searcaster) ----
+    let seedSearDeparts = 0, seedSearZero = 0;
+    for (const r of (d.ammoDeparts || [])) {
+      if (r.rangedId !== 'searcaster') continue;
+      seedSearDeparts++;
+      st.searcasterDeparts++;
+      st.searcasterDepartOutcomes[r.outcome || '?'] = (st.searcasterDepartOutcomes[r.outcome || '?'] || 0) + 1;
+      if ((r.carriedAfter | 0) === 0) { seedSearZero++; st.searcasterDepartsZero++; }
+    }
+    // ---- encounters (volley-opportunity pool, read directly) ----
+    let seedPoolEngagedZero = 0, seedPoolEngagedArmed = 0, seedPoolAllZero = 0,
+      seedPoolEvadedZero = 0, seedWave4Plus = 0, seedEngaged = 0;
+    for (const r of (d.v4encounters || [])) {
+      if (((r.wave | 0)) < 4) continue;
+      seedWave4Plus++;
+      st.encWave4Plus++;
+      const engaged = (r.rounds | 0) > 0;
+      if (engaged) { seedEngaged++; st.encEngaged++; }
+      const parts = r.partyCells || [];
+      let hasZero = false, hasArmed = false;
+      for (const p of parts) {
+        if (p.rangedId === 'searcaster' && p.alive !== false) {
+          if ((p.cells | 0) === 0) hasZero = true;
+          else hasArmed = true;
+        }
+      }
+      if (hasZero) {
+        seedPoolAllZero++; st.poolAllZero++;
+        if (engaged) { seedPoolEngagedZero++; st.poolEngagedZero++; }
+        else { seedPoolEvadedZero++; st.poolEvadedZero++; }
+        st.poolDetail.push({ seed: seed, day: r.day, vid: r.vid, mid: r.mid, origin: r.origin || null,
+          outcome: r.outcome, rounds: r.rounds | 0, mDealt: r.mDealt, volley: r.volley || null,
+          partyCells: parts.filter(function (p) { return p.rangedId === 'searcaster'; }) });
+      }
+      if (hasArmed) {
+        if (engaged) { seedPoolEngagedArmed++; st.poolEngagedArmed++; }
+      }
+      if (r.volley && (r.volley.shots | 0) > 0 && (r.rangedId === 'searcaster' || hasArmed)) st.volleyFiredFromSearcaster++;
+      for (const line of (r.log || [])) {
+        if (/fusion cells/i.test(String(line))) st.noFusionCellsLines++;
+      }
+    }
+    st.perSeed.push({ seed: seed, days: (d.days != null ? d.days : (d.gameDays | 0)),
+      endReason: d.endReason, standing: d.standing, scaleRank: d.scaleRank,
+      maxWave: d.maxWave, won: !!d.won, coverageComplete: cov.complete,
+      searcasterHolders: Object.keys(holderAgg).length,
+      searcasterHolderDays: Object.keys(holderAgg).reduce(function (a, v) { return a + holderAgg[v].holderDays; }, 0),
+      searcasterDeparts: seedSearDeparts, searcasterDepartsZero: seedSearZero,
+      poolEngagedZero: seedPoolEngagedZero, poolEngagedArmed: seedPoolEngagedArmed,
+      wave4PlusMeetings: seedWave4Plus, engagedMeetings: seedEngaged });
+  }
+  st.cellAttribution = st.cellAppearances ? st.cellAttributed / st.cellAppearances : null;
+  st.searcasterAttribution = st.searcasterAppearances ? st.searcasterAttributed / st.searcasterAppearances : null;
+  st.medianDays = median(st.days);
+  return st;
+}
+
+
+// ---- PARTICIPATION ----
+// participationStats(dir): the three frozen bars, read off the same
+// corpora cellStats reads. Lead attribution = a leadRule other than
+// 'unclassified' (other:<fn> counts — the caller is named). Flee
+// classification = a fleeCause other than 'unclassified' on a vFlee
+// row. Pool floors are the raw counts. Also the secondary table:
+// armed-holder entries, armed leads, armed volleys, flee shares,
+// deaths per engaged meeting (exposure-normalized, per the fix-a §6
+// proposal — recorded, never re-scored into the verdict).
+function participationStats(dir) {
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(function (f) { return f.endsWith('.json'); }).sort() : [];
+  const p = { dir: dir, n: 0, valid: 0, errors: 0,
+    meetings: 0, engaged: 0, flees: 0,
+    leadAttributed: 0, leadRuleCounts: {}, leadUnclassified: 0,
+    fleeClassified: 0, fleeUnclassified: 0, fleeCauseCounts: {},
+    armedEntries: 0, armedLeads: 0, armedVolleys: 0,
+    armedFlees: 0, armedMeetings: 0, unarmedFlees: 0, unarmedMeetings: 0,
+    deathsTotal: 0, deathsPerEngaged: null,
+    volleyDmgLeadRanged: 0, mDealtLeadRanged: 0,
+    leadGearFlee: [], leadGearKill: [], leadGearOther: [],
+    fleeDetail: [], armedDetail: [],
+    national: 0, seedWins: 0, wave4: 0, wave5: 0, medianDays: null, days: [],
+    communityLost: 0, perSeed: [] };
+  const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
+  for (const f of files) {
+    let d;
+    try { d = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); } catch (e) { p.errors++; continue; }
+    p.n++;
+    if (!d || typeof d !== 'object') { p.errors++; continue; }
+    p.valid++;
+    const seed = d.seed;
+    p.days.push(d.days != null ? d.days : (d.gameDays != null ? d.gameDays : 0));
+    if ((RANK_ORDER[d.scaleRank] || 0) >= 2) p.national++;
+    if (d.won) p.seedWins++;
+    if ((d.maxWave | 0) >= 4) p.wave4++;
+    if ((d.maxWave | 0) >= 5) p.wave5++;
+    if (['village-lost', 'village-dead', 'pop-zero'].includes(d.endReason)) p.communityLost++;
+    p.deathsTotal += (d.deaths || []).length;
+    let seedMeet = 0, seedEng = 0, seedFlee = 0, seedArmed = 0;
+    for (const r of (d.v4encounters || [])) {
+      if ((r.wave | 0) < 4) continue;
+      seedMeet++; p.meetings++;
+      const engaged = (r.rounds | 0) > 0;
+      if (engaged) { seedEng++; p.engaged++; }
+      const lr = r.leadRule || 'unclassified';
+      p.leadRuleCounts[lr] = (p.leadRuleCounts[lr] || 0) + 1;
+      if (lr === 'unclassified') p.leadUnclassified++;
+      else p.leadAttributed++;
+      const parts = r.partyCells || [];
+      let armedHere = false, armedLeadHere = false;
+      for (const pc of parts) {
+        if (pc.rangedId === 'searcaster' && pc.alive !== false && (pc.cells | 0) > 0) {
+          armedHere = true;
+          if (pc.vid === r.vid) armedLeadHere = true;
+        }
+      }
+      if (armedHere) {
+        seedArmed++; p.armedEntries++;
+        // PRESENCE FIX (finding #2622): the counter was initialized
+        // and read but NEVER incremented — "armed leads 0" was an
+        // instrument artifact, not a finding. Count it here, from
+        // the already-computed armedLeadHere.
+        if (armedLeadHere) p.armedLeads++;
+        p.armedMeetings++;
+        p.armedDetail.push({ seed: seed, day: r.day, vid: r.vid, mid: r.mid,
+          origin: r.origin || null, leadRule: lr, outcome: r.outcome,
+          lead: armedLeadHere, volley: r.volley || null,
+          partyCells: parts.filter(function (x) { return x.rangedId === 'searcaster'; }) });
+      } else p.unarmedMeetings++;
+      if (r.volley && (r.volley.shots | 0) > 0 && r.rangedId === 'searcaster') p.armedVolleys++;
+      if (r.rangedId && r.volley && (r.volley.shots | 0) > 0) {
+        p.volleyDmgLeadRanged += (r.volley.dmg | 0);
+        p.mDealtLeadRanged += (r.mDealt | 0);
+      }
+      const lg = r.leadGear || null;
+      if (r.outcome === 'vFlee') {
+        seedFlee++; p.flees++;
+        const fc = r.fleeCause || 'unclassified';
+        p.fleeCauseCounts[fc] = (p.fleeCauseCounts[fc] || 0) + 1;
+        if (fc === 'unclassified') p.fleeUnclassified++;
+        else p.fleeClassified++;
+        if (armedHere) p.armedFlees++; else p.unarmedFlees++;
+        if (lg) p.leadGearFlee.push({ bravery: lg.bravery, armorP: lg.armorP, weaponB: lg.weaponB, temper: lg.temper });
+        p.fleeDetail.push({ seed: seed, day: r.day, vid: r.vid, mid: r.mid, origin: r.origin || null,
+          leadRule: lr, fleeCause: fc, rounds: r.rounds | 0, mDealt: r.mDealt,
+          vTaken: r.vTaken, fleeHpFrac: r.fleeHpFrac, armed: armedHere,
+          intent: r.intent || null, everHopeless: !!r.everHopeless, everWinning: !!r.everWinning,
+          shoutRound: r.shoutRound, volley: r.volley || null });
+      } else if (r.outcome === 'vKill') {
+        if (lg) p.leadGearKill.push({ bravery: lg.bravery, armorP: lg.armorP, weaponB: lg.weaponB, temper: lg.temper });
+      } else if (lg) p.leadGearOther.push({ bravery: lg.bravery, armorP: lg.armorP, weaponB: lg.weaponB, temper: lg.temper });
+    }
+    p.perSeed.push({ seed: seed, meetings: seedMeet, engaged: seedEng, flees: seedFlee, armed: seedArmed,
+      days: (d.days != null ? d.days : (d.gameDays | 0)), endReason: d.endReason,
+      standing: d.standing, scaleRank: d.scaleRank, maxWave: d.maxWave, won: !!d.won });
+  }
+  p.leadAttribution = p.meetings ? p.leadAttributed / p.meetings : null;
+  p.fleeClassification = p.flees ? p.fleeClassified / p.flees : null;
+  p.deathsPerEngaged = p.engaged ? p.deathsTotal / p.engaged : null;
+  p.medianDays = median(p.days);
+  return p;
+}
+
+// presenceStats(dir): the draft's contact pool + the gun-move
+// ledger. Reads v4tickPresence (one row per wave-4+ world monster
+// per tick) joined to v4encounters on (day, mid, origin
+// 'world-tick'), and v4transfers rows. A pool row with a matching
+// world-tick encounter is a tick where the fight happened; if the
+// lead is one of the pooled holders the holder led that fight; if
+// the lead is someone else while a holder was pooled, the draft
+// MISSED (arm leg: a bug, not a finding — the draft fires whenever
+// a holder is pooled and the fight happens). A pool row with no
+// match is a tick the 0.5 coin flip (or the player's-tile skip)
+// kept bloodless — no fight, no draft, no verdict.
+// Transfers: kind transfer / vanish / new-holder / holder-died,
+// with attribution (grant-*, kill-loot, corpse-take, unexplained).
+function presenceStats(dir) {
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(function (f) { return f.endsWith('.json'); }).sort() : [];
+  const p = { dir: dir, n: 0, valid: 0, errors: 0,
+    poolTicks: 0, poolHolderPresent: 0, poolOnTile: 0, poolAdjacent: 0, poolAbsent: 0,
+    poolFights: 0, poolHolderLed: 0, poolDraftMiss: 0, poolNoFight: 0,
+    transfers: 0, vanishes: 0, newHolders: 0, holderDied: 0,
+    transferDetail: [], vanishDetail: [], draftMissDetail: [] };
+  for (const f of files) {
+    let d;
+    try { d = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); } catch (e) { p.errors++; continue; }
+    p.n++;
+    if (!d || typeof d !== 'object') { p.errors++; continue; }
+    p.valid++;
+    const seed = d.seed;
+    const encByKey = {};
+    for (const r of (d.v4encounters || [])) {
+      if ((r.wave | 0) < 4) continue;
+      if (r.origin !== 'world-tick') continue;
+      const k = r.day + '|' + r.mid;
+      (encByKey[k] = encByKey[k] || []).push(r);
+    }
+    for (const t of (d.v4tickPresence || [])) {
+      p.poolTicks++;
+      const pooled = (t.onTile || []).concat(t.adjacent || []);
+      if (pooled.length) {
+        p.poolHolderPresent++;
+        if ((t.onTile || []).length) p.poolOnTile++;
+        if ((t.adjacent || []).length) p.poolAdjacent++;
+      } else p.poolAbsent++;
+      const matches = encByKey[t.day + '|' + t.mid] || [];
+      if (!matches.length) { p.poolNoFight++; continue; }
+      p.poolFights++;
+      let led = false;
+      for (const m of matches) if (pooled.indexOf(m.vid) !== -1) { led = true; break; }
+      if (led) p.poolHolderLed++;
+      else if (pooled.length) {
+        p.poolDraftMiss++;
+        p.draftMissDetail.push({ seed: seed, day: t.day, mid: t.mid,
+          pooled: pooled.slice(), leads: matches.map(function (m) { return m.vid; }) });
+      }
+    }
+    for (const tr of (d.v4transfers || [])) {
+      if (tr.kind === 'transfer') { p.transfers++; p.transferDetail.push({ seed: seed, day: tr.day, from: tr.from, to: tr.to, attribution: tr.attribution || null }); }
+      else if (tr.kind === 'vanish') { p.vanishes++; p.vanishDetail.push({ seed: seed, day: tr.day, from: tr.from }); }
+      else if (tr.kind === 'new-holder') p.newHolders++;
+      else if (tr.kind === 'holder-died') p.holderDied++;
+    }
+  }
+  return p;
+}
+
+// lendStats(dir): the lend's own fired-rows, joined to the fights
+// they fed. Reads v4lends (one row per lend fire, from the driver's
+// wraps on _lendSearcaster / _returnLentSearcaster) joined to
+// v4encounters on (day, mid, borrower vid = encounter lead) for the
+// lent fight's outcome + volley. Borrower survival for the
+// separated guardrail: the joined encounter's outcome is not
+// 'vDie' AND the borrower has no death row on the lend day in that
+// seed (the same-day death-row read can catch a borrower who died
+// later the same day in a different fight — disclosed in the
+// prereg; the encounter-outcome read is the primary signal). A
+// lend with no joined encounter is a lend whose fight never
+// recorded (aidFight returning null, or a watch miss) — counted
+// separately, never silently dropped.
+function lendStats(dir) {
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(function (f) { return f.endsWith('.json'); }).sort() : [];
+  const p = { dir: dir, n: 0, valid: 0, errors: 0,
+    lends: 0, lendsGun: 0, lendsCells: 0, lendsTile: 0, lendsAdjacent: 0,
+    gunReturned: 0, borrowerKept: 0, cellsReturned: 0, cellsMoved: 0,
+    lendsJoined: 0, lendsUnjoined: 0,
+    lentVolleys: 0, lentVolleyDmg: 0, lentOutcomes: {},
+    borrowerSurvived: 0, borrowerDied: 0, borrowerSurvival: null,
+    lendDetail: [] };
+  for (const f of files) {
+    let d;
+    try { d = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); } catch (e) { p.errors++; continue; }
+    p.n++;
+    if (!d || typeof d !== 'object') { p.errors++; continue; }
+    p.valid++;
+    const seed = d.seed;
+    const encByKey = {};
+    for (const r of (d.v4encounters || [])) {
+      if ((r.wave | 0) < 4) continue;
+      const k = r.day + '|' + r.mid + '|' + r.vid;
+      (encByKey[k] = encByKey[k] || []).push(r);
+    }
+    const deathByDayVid = {};
+    for (const death of (d.deaths || [])) {
+      const k = (death.day | 0) + '|' + (death.who || '');
+      deathByDayVid[k] = true;
+    }
+    for (const l of (d.v4lends || [])) {
+      p.lends++;
+      if (l.kind === 'gun') p.lendsGun++;
+      else if (l.kind === 'cells') p.lendsCells++;
+      if (l.from === 'tile') p.lendsTile++;
+      else if (l.from === 'adjacent') p.lendsAdjacent++;
+      p.cellsMoved += (l.cellsMoved | 0);
+      if (l.gunReturned) p.gunReturned++;
+      if (l.lenderAlive === false) p.borrowerKept++;
+      p.cellsReturned += (l.cellsReturned | 0);
+      const matches = encByKey[l.day + '|' + l.mid + '|' + l.borrower] || [];
+      const det = { seed: seed, day: l.day, mid: l.mid, lender: l.lender, borrower: l.borrower,
+        kind: l.kind, from: l.from, cellsMoved: l.cellsMoved | 0,
+        gunReturned: !!l.gunReturned, cellsReturned: l.cellsReturned | 0,
+        lenderAlive: l.lenderAlive, borrowerAlive: l.borrowerAlive,
+        joined: matches.length > 0, outcome: null, volley: null, borrowerSurvived: null };
+      if (!matches.length) { p.lendsUnjoined++; p.lendDetail.push(det); continue; }
+      p.lendsJoined++;
+      const enc = matches[0];
+      det.outcome = enc.outcome || null;
+      det.volley = enc.volley || null;
+      p.lentOutcomes[enc.outcome || '?'] = (p.lentOutcomes[enc.outcome || '?'] || 0) + 1;
+      if (enc.volley && (enc.volley.shots | 0) > 0 && enc.rangedId === 'searcaster') {
+        p.lentVolleys++;
+        p.lentVolleyDmg += (enc.volley.dmg | 0);
+      }
+      const diedInFight = enc.outcome === 'vDie';
+      const diedSameDay = !!deathByDayVid[l.day + '|' + l.borrower];
+      const survived = !diedInFight && !diedSameDay;
+      det.borrowerSurvived = survived;
+      if (survived) p.borrowerSurvived++;
+      else p.borrowerDied++;
+      p.lendDetail.push(det);
+    }
+  }
+  p.borrowerSurvival = p.lendsJoined ? p.borrowerSurvived / p.lendsJoined : null;
+  return p;
+}
+
+function judgeParticipation(p) {
+  // Frozen bars (prereg): (1) lead-rule attribution >= 0.80 of
+  // wave-4+ meetings; (2) flee-cause classification >= 0.80 of flee
+  // events AND <= 2 unclassified; (3) pool floors >= 25 meetings AND
+  // >= 8 flees, else DIAG-NO-GO kind METRIC-BROKEN / pool-blocked.
+  const bars = [];
+  const leadOk = p.meetings > 0 && p.leadAttribution != null && p.leadAttribution >= 0.80;
+  bars.push({ id: 'lead-rule-attribution', pass: leadOk,
+    detail: 'lead rule attributed ' + p.leadAttributed + '/' + p.meetings +
+      ' (' + (p.leadAttribution == null ? 'n/a' : p.leadAttribution.toFixed(3)) + ', bar >= 0.80); by rule ' +
+      JSON.stringify(p.leadRuleCounts) + '; unclassified ' + p.leadUnclassified });
+  const fleeOk = p.flees > 0 && p.fleeClassification != null && p.fleeClassification >= 0.80 && p.fleeUnclassified <= 2;
+  bars.push({ id: 'flee-cause-classification', pass: fleeOk,
+    detail: 'flee cause classified ' + p.fleeClassified + '/' + p.flees +
+      ' (' + (p.fleeClassification == null ? 'n/a' : p.fleeClassification.toFixed(3)) + ', bar >= 0.80); unclassified ' +
+      p.fleeUnclassified + ' (bar <= 2); by cause ' + JSON.stringify(p.fleeCauseCounts) });
+  const poolOk = p.meetings >= 25 && p.flees >= 8;
+  bars.push({ id: 'pool-floors', pass: poolOk,
+    detail: 'wave-4+ meetings ' + p.meetings + ' (floor 25); flees ' + p.flees + ' (floor 8)' +
+      (poolOk ? '' : ' — METRIC-BROKEN / pool-blocked: the band is too quiet to judge the bars') });
+  const verdict = (leadOk && fleeOk && poolOk) ? 'DIAG-GO' : 'DIAG-NO-GO';
+  const kind = (!poolOk) ? 'METRIC-BROKEN' : ((!leadOk || !fleeOk) ? 'ATTRIBUTION' : null);
+  return { verdict: verdict, kind: kind, bars: bars };
+}
+
+function judge(st) {
+  // Frozen bars (prereg): (1) census coverage complete on all 8
+  // seeds; (2) attribution >= 0.90, or zero appearances
+  // (PASS-vacuous when bar 1 passes); (3) volley-opportunity pool
+  // >= 5, or the rare-rate conclusion (pool < 5 stated as a finding).
+  const bars = [];
+  const covOk = st.n === 8 && st.coverageComplete === 8;
+  bars.push({ id: 'census-coverage', pass: covOk,
+    detail: 'seeds with complete holder census ' + st.coverageComplete + '/' + st.n +
+      ' (baseline + daily census + cellPile rows, 0 instrument errors, census-day share >= 0.5); per-seed: ' +
+      st.coverage.map(function (c) { return c.seed + ':' + (c.complete ? 'ok' : 'INCOMPLETE(baseline=' + c.baselineRows + ',census=' + c.censusRows + ',pile=' + c.cellPileRows + ',err=' + c.instrumentErrors + ',share=' + (c.censusDayShare == null ? 'n/a' : c.censusDayShare.toFixed(2)) + ')'); }).join(' ') });
+  const zeroApp = st.cellAppearances === 0;
+  const attrOk = zeroApp ? covOk : (st.cellAttribution != null && st.cellAttribution >= 0.90);
+  bars.push({ id: 'attribution', pass: attrOk,
+    detail: zeroApp
+      ? 'cell appearances 0 — PASS-vacuous (bar 1 ' + (covOk ? 'passes' : 'FAILS') + '); zero-supply conclusion stands on the census + the frozen loot-pool mechanism (loot is the sole in-code route)'
+      : 'cell appearances ' + st.cellAppearances + ', attributed ' + st.cellAttributed + ' (completeness ' + st.cellAttribution.toFixed(3) + ', bar >= 0.90); by source ' + JSON.stringify(st.cellBySource) });
+  const poolOk = st.poolEngagedZero >= 5;
+  const rareOk = !poolOk && st.searcasterHolderDays >= 0; // the rare-rate path: the pool size itself is the finding
+  bars.push({ id: 'volley-opportunity-pool', pass: poolOk || rareOk,
+    detail: 'engaged wave-4+ meetings with a 0-cell searcaster participant ' + st.poolEngagedZero +
+      ' (floor 5); armed searcaster meetings ' + st.poolEngagedArmed +
+      '; all wave-4+ meetings with a 0-cell searcaster participant ' + st.poolAllZero +
+      ' (evaded ' + st.poolEvadedZero + '); searcaster holder-days ' + st.searcasterHolderDays +
+      (poolOk ? '' : ' — RARE-RATE path: pool thin, stated as a finding, not re-scored') });
+  const verdict = (covOk && attrOk && (poolOk || rareOk)) ? 'DIAG-GO' : 'DIAG-NO-GO';
+  return { verdict: verdict, bars: bars };
+}
+
+function judgeLend(ctlDiag, ctlPart, armDiag, armPart, ctlLend, armLend) {
+  // Frozen bars (prereg): (1) arm villager searcaster-holder-days
+  // >= 40; (2) arm armed-holder entries (wave-4+ entry, searcaster +
+  // >= 1 cell, any participant) >= 3; (3) arm armed volleys fired
+  // (lead rangedId searcaster, shots > 0) >= 2; (4) no-regression
+  // guardrail, SEPARATED (chosen before judging — presence §9
+  // proposal): (i) lent-fight safety — the borrower is alive at
+  // fight end in >= 50% of lent fights (applies only if >= 1 lend
+  // fired; skipped, not failed, with 0 lends); (ii) downstream —
+  // arm deaths per engaged wave-4+ meeting <= 1.10 x ctl AND arm
+  // median survival >= 0.80 x ctl; (5) starvation guardrail: arm
+  // villager starvation deaths <= ctl + 2.
+  const bars = [];
+  const hd = armDiag ? (armDiag.searcasterHolderDays | 0) : 0;
+  const b1 = hd >= 40;
+  bars.push({ id: 'searcaster-holder-days', pass: b1,
+    detail: 'arm villager searcaster-holder-days ' + hd + ' (floor 40); ctl ' +
+      (ctlDiag ? (ctlDiag.searcasterHolderDays | 0) : 'n/a') });
+  const ae = armPart ? (armPart.armedEntries | 0) : 0;
+  const b2 = ae >= 3;
+  bars.push({ id: 'armed-holder-entries', pass: b2,
+    detail: 'arm armed-holder entries ' + ae + ' (floor 3); armed leads ' +
+      (armPart ? (armPart.armedLeads | 0) : 'n/a') + '; ctl entries ' +
+      (ctlPart ? (ctlPart.armedEntries | 0) : 'n/a') });
+  const av = armPart ? (armPart.armedVolleys | 0) : 0;
+  const b3 = av >= 2;
+  bars.push({ id: 'armed-volley-fired', pass: b3,
+    detail: 'arm armed volleys fired ' + av + ' (floor 2); ctl ' +
+      (ctlPart ? (ctlPart.armedVolleys | 0) : 'n/a') +
+      (b3 ? '' : ' — PARTICIPATION finding if bars 1-2 pass: the gun reaches hands that never lead') });
+  let b4 = false, gDetail = '';
+  const ctlD = ctlPart ? ctlPart.deathsPerEngaged : null;
+  const armD = armPart ? armPart.deathsPerEngaged : null;
+  const ctlM = ctlPart ? ctlPart.medianDays : null;
+  const armM = armPart ? armPart.medianDays : null;
+  // (i) lent-fight safety — the mechanism's own harm, judged on
+  // the lent fights themselves. With 0 lends this part is skipped
+  // (bars 2-3 already fail as participation then).
+  const armLends = armLend ? (armLend.lendsJoined | 0) : 0;
+  const armSurv = armLend ? armLend.borrowerSurvival : null;
+  let safeOk = true, safeDetail = '';
+  if ((armLend ? (armLend.lends | 0) : 0) === 0) {
+    safeDetail = 'lent fights 0 — safety part skipped (no lends fired; bars 2-3 judge participation)';
+  } else if (armLends === 0) {
+    safeOk = false;
+    safeDetail = 'lent fights joined 0/' + (armLend.lends | 0) + ' — no lent fight recorded, cannot judge safety';
+  } else {
+    safeOk = armSurv != null && armSurv >= 0.50;
+    safeDetail = 'borrower survived ' + (armLend.borrowerSurvived | 0) + '/' + armLends +
+      ' lent fights (' + (armSurv == null ? 'n/a' : (armSurv * 100).toFixed(0) + '%') + ', bar >= 50%)';
+  }
+  // (ii) downstream — the cascade check, at the gunrate arm's 1.10x
+  // allowance (the strict 1.00x bar cannot tell a harmful lever
+  // from an unlucky cascade — presence §9).
+  let downOk = false, downDetail = '';
+  if (ctlD == null || armD == null || ctlM == null || armM == null) {
+    downDetail = 'unjudgeable: deaths/engaged ctl ' + ctlD + ' arm ' + armD +
+      '; median days ctl ' + ctlM + ' arm ' + armM + ' (a leg with zero engaged meetings cannot be guardrailed)';
+  } else {
+    const dOk = armD <= 1.10 * ctlD;
+    const mOk = armM >= 0.80 * ctlM;
+    downOk = dOk && mOk;
+    downDetail = 'deaths per engaged meeting arm ' + armD.toFixed(2) + ' vs ctl ' + ctlD.toFixed(2) +
+      ' (bar <= ' + (1.10 * ctlD).toFixed(2) + ', ' + (dOk ? 'pass' : 'FAIL') + '); median survival arm ' +
+      armM + 'd vs ctl ' + ctlM + 'd (bar >= ' + (0.80 * ctlM).toFixed(1) + ', ' + (mOk ? 'pass' : 'FAIL') + ')';
+  }
+  b4 = safeOk && downOk;
+  gDetail = 'SEPARATED guardrail — (i) lent-fight safety: ' + safeDetail + ' (' + (safeOk ? 'pass' : 'FAIL') +
+    '); (ii) downstream: ' + downDetail + ' (' + (downOk ? 'pass' : 'FAIL') + ')';
+  bars.push({ id: 'guardrail-separated', pass: b4, detail: gDetail });
+  const ctlS = ctlDiag ? (ctlDiag.starvationVillager | 0) : null;
+  const armS = armDiag ? (armDiag.starvationVillager | 0) : null;
+  const b5 = (ctlS != null && armS != null) ? (armS <= ctlS + 2) : false;
+  bars.push({ id: 'starvation-guardrail', pass: b5,
+    detail: 'villager starvation deaths arm ' + armS + ' vs ctl ' + ctlS + ' (bar <= ' + (ctlS != null ? (ctlS + 2) : 'n/a') + ')' });
+  const verdict = (b1 && b2 && b3 && b4 && b5) ? 'GO' : 'NO-GO';
+  const kind = !b1 ? 'SUPPLY' : ((!b2 || !b3) ? 'PARTICIPATION' : ((!b4 || !b5) ? 'GUARDRAIL' : null));
+  return { verdict: verdict, kind: kind, bars: bars };
+}
+
+function summarize(st) {
+  const o = {};
+  for (const k of ['dir', 'n', 'valid', 'errors', 'bowopenOn', 'senseexpedOn', 'speargateOn', 'gunrateOn',
+    'coverage', 'coverageComplete',
+    'searcasterHolders', 'searcasterHolderDays', 'searcasterCellDays', 'searcasterZeroDays',
+    'searcasterHoldersTotal', 'cellHolderDays', 'maxCellsEver',
+    'cellAppearances', 'cellAttributed', 'cellAttribution', 'cellBySource',
+    'searcasterAppearances', 'searcasterAttributed', 'searcasterAttribution', 'searcasterBySource',
+    'searcasterBaseline', 'cellBaseline',
+    'searcasterDeparts', 'searcasterDepartsZero', 'searcasterDepartOutcomes',
+    'lootCellDrops', 'lootSearcasterDrops', 'lootByDrop',
+    'grantCellByCaller', 'grantSearcasterByCaller',
+    'grantCellTotal', 'grantSearcasterTotal',
+    'corpseTakeCell', 'corpseTakeTotal', 'contestPrizes',
+    'scholarCellAppearances', 'scholarCellAttributed', 'scholarCellBySource',
+    'playerCrafts', 'playerCraftCell', 'playerCraftByRecipe',
+    'pileMaxTotal', 'pileEverPositive', 'scholarMaxCells',
+    'poolEngagedZero', 'poolEngagedArmed', 'poolAllZero', 'poolEvadedZero',
+    'volleyFiredFromSearcaster', 'noFusionCellsLines',
+    'encWave4Plus', 'encEngaged',
+    'medianDays', 'communityLost', 'national', 'seedWins', 'wave4', 'wave5', 'scaleRanks',
+    'starvation', 'starvationVillager', 'perSeed']) o[k] = st[k];
+  return o;
+}
+
+function selftest() {
+  let passed = 0, failed = 0;
+  function check(name, cond, extra) {
+    if (cond) passed++;
+    else { failed++; console.log('FAIL: ' + name + (extra ? ' — ' + extra : '')); }
+  }
+  const os = require('os');
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'fc-analyze-'));
+  const dir = path.join(tmp, 'leg');
+  fs.mkdirSync(dir);
+  function mkSeed(o) {
+    return Object.assign({ seed: 1, days: 4, gameDays: 4, scaleRank: 'regional', won: false,
+      maxWave: 4, endReason: 'survived', instrumentErrors: [], bowopenOn: false, senseexpedOn: true,
+      deaths: [], teleCounts: {}, teleRows: [],
+      v4encounters: [], ammoDeparts: [], ammoLoot: [], ammoPlayerCraft: [],
+      ammoCensus: [], cellPile: [], ammoBaseline: null }, o);
+  }
+  // Seed 1: chen-like holder (searcaster from baseline, 0 cells all
+  // along) + a looted cell + a spawned searcaster arrival.
+  const seed = mkSeed({
+    ammoBaseline: { day: 1, pile: {}, pileCells: { materials: 0, weapons: 0, armor: 0, tools: 0, medicine: 0, total: 0 },
+      scholarCells: { cells: 0, rangedId: null, ammoId: null },
+      census: [
+        { vid: 'chen', rangedId: 'searcaster', ammoId: 'fusion_cell', ammo: 0, stashAmmo: 0, away: false, exped: false, cells: 0, cellsStash: 0 },
+        { vid: 'ana', rangedId: 'bow', ammoId: 'arrow', ammo: 5, stashAmmo: 0, away: false, exped: false, cells: 0, cellsStash: 0 },
+      ] },
+    ammoCensus: [
+      { day: 2, vid: 'chen', rangedId: 'searcaster', ammoId: 'fusion_cell', ammo: 0, stashAmmo: 0, away: false, exped: false, cells: 0, cellsStash: 0 },
+      { day: 2, vid: 'ana', rangedId: 'bow', ammoId: 'arrow', ammo: 5, stashAmmo: 0, away: false, exped: false, cells: 0, cellsStash: 0 },
+      { day: 3, vid: 'chen', rangedId: 'searcaster', ammoId: 'fusion_cell', ammo: 0, stashAmmo: 0, away: false, exped: false, cells: 0, cellsStash: 0 },
+      { day: 3, vid: 'ana', rangedId: 'bow', ammoId: 'arrow', ammo: 5, stashAmmo: 0, away: false, exped: false, cells: 2, cellsStash: 0 },
+      { day: 4, vid: 'chen', rangedId: 'searcaster', ammoId: 'fusion_cell', ammo: 0, stashAmmo: 0, away: false, exped: false, cells: 0, cellsStash: 0 },
+      { day: 4, vid: 'ana', rangedId: 'bow', ammoId: 'arrow', ammo: 5, stashAmmo: 0, away: false, exped: false, cells: 1, cellsStash: 0 },
+      { day: 4, vid: 'new1', rangedId: 'searcaster', ammoId: 'fusion_cell', ammo: 0, stashAmmo: 0, away: false, exped: false, cells: 0, cellsStash: 0 },
+    ],
+    cellPile: [
+      { day: 2, materials: 0, weapons: 0, armor: 0, tools: 0, medicine: 0, total: 0, scholar: { cells: 0, rangedId: null, ammoId: null } },
+      { day: 3, materials: 0, weapons: 0, armor: 0, tools: 0, medicine: 0, total: 0, scholar: { cells: 0, rangedId: null, ammoId: null } },
+      { day: 4, materials: 0, weapons: 0, armor: 0, tools: 0, medicine: 0, total: 0, scholar: { cells: 1, rangedId: null, ammoId: null } },
+    ],
+    ammoLoot: [{ day: 3, vid: 'ana', mid: 'audit', dropId: 'arrow', kind: 'ammo' }],
+    ammoPlayerCraft: [{ day: 5, vid: 'p', recipeId: 'arrow', ok: true }],
+    teleRows: [],
+    grantEvents: [{ day: 3, itemId: 'fusion_cell', toKind: 'villager', toVid: 'ana', caller: 'contest-prize', frame: 'at _cxItemPrize (contests.js:185)' }],
+    corpseTakeEvents: [{ day: 4, itemId: 'fusion_cell', toKind: 'scholar' }],
+    contestPrizeEvents: [{ day: 3, who: 'ana', contest: 'c1', granted: true }],
+    ammoDeparts: [
+      { day: 2, vid: 'chen', site: 'expedition', planWave4: true, rangedId: 'searcaster', ammoId: 'fusion_cell', carriedBefore: 0, carriedAfter: 0, stashBefore: 0, pocketed: 0, crafted: 0, craftedOk: false, outcome: 'no-source-kind', reason: 'no-source-kind' },
+    ],
+    v4encounters: [
+      { day: 2, vid: 'chen', mid: 'audit', wave: 4, origin: 'expedition', outcome: 'vFlee', rounds: 6, mDealt: 200, mHpStart: 1000, vTaken: 50, rangedId: 'searcaster', ammoAtEntry: 0, volley: { shots: 0, hits: 0, dmg: 0, ammoLeft: 0 }, partyCells: [{ vid: 'chen', rangedId: 'searcaster', ammoId: 'fusion_cell', cells: 0, alive: true }], log: ['chen has Searcaster but no fusion cells — the string stays drawn, useless.'] },
+      { day: 3, vid: 'ana', mid: 'eulogy', wave: 4, origin: 'world-tick', outcome: 'evade', rounds: 0, mDealt: 0, mHpStart: null, vTaken: 0, rangedId: 'bow', ammoAtEntry: 5, volley: null, partyCells: [{ vid: 'ana', rangedId: 'bow', ammoId: 'arrow', cells: 2, alive: true }], log: [] },
+    ],
+  });
+  fs.writeFileSync(path.join(dir, 's1.json'), JSON.stringify(seed));
+  const st = cellStats(dir);
+  check('coverage complete on the fixture seed', st.coverageComplete === 1 && st.coverage[0].complete, JSON.stringify(st.coverage));
+  check('searcaster holders: chen 3 days + new1 1 day = 4 holder-days, 2 holders', st.searcasterHolderDays === 4 && st.searcasterHoldersTotal === 2, JSON.stringify({ d: st.searcasterHolderDays, n: st.searcasterHoldersTotal }));
+  check('searcaster zero-days 4, cell-days 0', st.searcasterZeroDays === 4 && st.searcasterCellDays === 0, JSON.stringify({ z: st.searcasterZeroDays, c: st.searcasterCellDays }));
+  check('cell holder-days 2 (ana d3-d4)', st.cellHolderDays === 2, 'got ' + st.cellHolderDays);
+  check('max cells ever 2', st.maxCellsEver === 2, 'got ' + st.maxCellsEver);
+  check('cell appearances 2 (ana contest-prize + scholar corpse-take), attributed 2', st.cellAppearances === 2 && st.cellAttributed === 2 && st.cellAttribution === 1 && st.cellBySource['contest-prize'] === 1 && st.cellBySource['corpse-take'] === 1, JSON.stringify({ a: st.cellAppearances, at: st.cellAttributed, by: st.cellBySource }));
+  check('scholar cell appearances 1, attributed corpse-take', st.scholarCellAppearances === 1 && st.scholarCellAttributed === 1 && st.scholarCellBySource['corpse-take'] === 1, JSON.stringify({ a: st.scholarCellAppearances, by: st.scholarCellBySource }));
+  check('searcaster appearances 1 (new1 spawned), baseline 1 (chen)', st.searcasterAppearances === 1 && st.searcasterBySource.spawned === 1 && st.searcasterBaseline === 1, JSON.stringify({ a: st.searcasterAppearances, by: st.searcasterBySource, b: st.searcasterBaseline }));
+  check('grants: 1 cell via contest-prize; corpse takes: 1 cell', st.grantCellTotal === 1 && st.grantCellByCaller['contest-prize'] === 1 && st.corpseTakeCell === 1, JSON.stringify({ g: st.grantCellTotal, by: st.grantCellByCaller, t: st.corpseTakeCell }));
+  check('contest prize events 1', st.contestPrizes === 1, 'got ' + st.contestPrizes);
+  check('player crafts 1 (arrow), 0 fusion_cell', st.playerCrafts === 1 && st.playerCraftCell === 0, JSON.stringify({ n: st.playerCrafts, c: st.playerCraftCell }));
+  check('searcaster departures 1, zero 1, no-source-kind', st.searcasterDeparts === 1 && st.searcasterDepartsZero === 1 && st.searcasterDepartOutcomes['no-source-kind'] === 1, JSON.stringify({ d: st.searcasterDeparts, z: st.searcasterDepartsZero, o: st.searcasterDepartOutcomes }));
+  check('pool: engaged zero-cell 1, all zero 1, evaded 0, armed 0', st.poolEngagedZero === 1 && st.poolAllZero === 1 && st.poolEvadedZero === 0 && st.poolEngagedArmed === 0, JSON.stringify({ e: st.poolEngagedZero, a: st.poolAllZero, v: st.poolEvadedZero, ar: st.poolEngagedArmed }));
+  check('no-fusion-cells log line counted 1', st.noFusionCellsLines === 1, 'got ' + st.noFusionCellsLines);
+  check('volley fired from searcaster 0', st.volleyFiredFromSearcaster === 0, 'got ' + st.volleyFiredFromSearcaster);
+  check('pile max 0, scholar max 1 (corpse-taken cell)', st.pileMaxTotal === 0 && st.scholarMaxCells === 1, JSON.stringify({ p: st.pileMaxTotal, s: st.scholarMaxCells }));
+  // attributeIncrease unit checks (pure).
+  const uctx = { loot: [], crafts: [], grants: [], takes: [], role: 'villager',
+    baselineVids: new Set(['a', 'b']),
+    series: { a: [{ day: 1, total: 0 }, { day: 5, total: 2 }], b: [{ day: 1, total: 2 }, { day: 5, total: 0 }] } };
+  check('attributeIncrease moved (b lost 2 as a gained 2)', attributeIncrease(uctx, 'a', 1, 5, 'fusion_cell') === 'moved');
+  check('attributeIncrease unexplained (no event, no decrease)', attributeIncrease({ loot: [], crafts: [], grants: [], takes: [], role: 'villager', baselineVids: new Set(['a']), series: { a: [{ day: 1, total: 0 }, { day: 5, total: 1 }] } }, 'a', 1, 5, 'fusion_cell') === 'unexplained');
+  check('attributeIncrease spawned (new vid)', attributeIncrease({ loot: [], crafts: [], grants: [], takes: [], role: 'villager', baselineVids: new Set(['a']), series: {} }, 'newbie', 1, 5, 'fusion_cell') === 'spawned');
+  check('attributeIncrease contest-prize via grant', attributeIncrease({ loot: [], crafts: [], grants: [{ day: 3, itemId: 'fusion_cell', toKind: 'villager', toVid: 'a', caller: 'contest-prize' }], takes: [], role: 'villager', baselineVids: new Set(['a']), series: {} }, 'a', 1, 5, 'fusion_cell') === 'contest-prize');
+  check('attributeIncrease corpse-take for the scholar', attributeIncrease({ loot: [], crafts: [], grants: [], takes: [{ day: 3, itemId: 'fusion_cell' }], role: 'scholar', baselineVids: new Set([]), series: {} }, '__scholar__', 1, 5, 'fusion_cell') === 'corpse-take');
+  try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (e) {}
+  // Judge shapes (bars: 0 coverage, 1 attribution, 2 pool).
+  function mk(o) {
+    return Object.assign({ n: 8, coverageComplete: 8,
+      coverage: [1, 2, 3, 4, 5, 6, 7, 8].map(function (s) { return { seed: s, complete: true }; }),
+      cellAppearances: 10, cellAttributed: 10, cellAttribution: 1,
+      cellBySource: { looted: 10 },
+      poolEngagedZero: 6, poolEngagedArmed: 0, poolAllZero: 6, poolEvadedZero: 0,
+      searcasterHolderDays: 100 }, o);
+  }
+  let j = judge(mk({}));
+  check('judge DIAG-GO (all bars pass)', j.verdict === 'DIAG-GO' && j.bars.every(function (b) { return b.pass; }), JSON.stringify(j));
+  j = judge(mk({ cellAppearances: 0, cellAttributed: 0, cellAttribution: null, cellBySource: {} }));
+  check('judge DIAG-GO zero-appearance vacuous (attribution bar passes when coverage passes)', j.verdict === 'DIAG-GO' && j.bars[1].pass, JSON.stringify(j.bars));
+  j = judge(mk({ cellAppearances: 10, cellAttributed: 8, cellAttribution: 0.8 }));
+  check('judge DIAG-NO-GO attribution 0.80 < 0.90', j.verdict === 'DIAG-NO-GO' && !j.bars[1].pass, JSON.stringify(j.bars));
+  j = judge(mk({ coverageComplete: 7 }));
+  check('judge DIAG-NO-GO coverage 7/8', j.verdict === 'DIAG-NO-GO' && !j.bars[0].pass, JSON.stringify(j.bars));
+  j = judge(mk({ poolEngagedZero: 2, poolAllZero: 2 }));
+  check('judge DIAG-GO thin pool via rare-rate path (pool bar passes as stated finding)', j.verdict === 'DIAG-GO' && j.bars[2].pass && /RARE-RATE/.test(j.bars[2].detail), JSON.stringify(j.bars));
+  j = judge(mk({ coverageComplete: 7, cellAppearances: 0, cellAttributed: 0, cellAttribution: null }));
+  check('judge DIAG-NO-GO zero appearances + broken coverage (vacuous path needs bar 1)', j.verdict === 'DIAG-NO-GO' && !j.bars[1].pass, JSON.stringify(j.bars));
+  // ---- PARTICIPATION fixtures (a second seed with leadRule / fleeCause rows) ----
+  // NOTE: the cell selftest above rmSync'd the tmp dir, so recreate it
+  // and rewrite s1.json (the `seed` object is still in scope) + s2.json.
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 's1.json'), JSON.stringify(seed));
+  const seedP = mkSeed({
+    seed: 2, days: 10, gameDays: 10,
+    v4encounters: [
+      { day: 2, vid: 'nora', mid: 'audit', wave: 4, origin: 'expedition', leadRule: 'expedition-holder', outcome: 'vFlee', rounds: 4, mDealt: 120, mHpStart: 1000, vTaken: 60, rangedId: 'bow', ammoAtEntry: 5, volley: { shots: 2, hits: 1, dmg: 12, ammoLeft: 3 }, fleeCause: 'hopeless-after-help', fleeHopeless: true, fleeLearn: false, fleeHpFrac: 0.42, calledHelp: true, shoutRound: 2, intent: 'engage', everHopeless: true, everWinning: false, leadGear: { bravery: 5, temper: 'steady', armed: true, armored: true, armorP: 12, weaponB: 20 }, partyCells: [{ vid: 'nora', rangedId: 'bow', ammoId: 'arrow', cells: 0, alive: true }, { vid: 'ally1', rangedId: 'searcaster', ammoId: 'fusion_cell', cells: 2, alive: true }], log: [] },
+      { day: 3, vid: 'raj', mid: 'eulogy', wave: 4, origin: 'world-tick', leadRule: 'world-tick', outcome: 'vFlee', rounds: 3, mDealt: 40, mHpStart: 900, vTaken: 70, rangedId: null, ammoAtEntry: 0, volley: null, fleeCause: 'floor-hp', fleeHopeless: false, fleeLearn: false, fleeHpFrac: 0.18, calledHelp: false, shoutRound: null, intent: 'engage', everHopeless: false, everWinning: false, leadGear: { bravery: 1, temper: 'cautious', armed: false, armored: false, armorP: 0, weaponB: 0 }, partyCells: [{ vid: 'raj', rangedId: null, ammoId: null, cells: 0, alive: true }], log: [] },
+      { day: 4, vid: 'ana', mid: 'reunion', wave: 4, origin: 'expedition', leadRule: 'expedition-holder', outcome: 'vKill', rounds: 5, mDealt: 1000, mHpStart: 1000, vTaken: 20, rangedId: 'bow', ammoAtEntry: 5, volley: { shots: 3, hits: 2, dmg: 20, ammoLeft: 2 }, fleeCause: null, fleeHopeless: false, fleeLearn: false, fleeHpFrac: null, calledHelp: false, shoutRound: null, intent: 'engage', everHopeless: false, everWinning: true, leadGear: { bravery: 12, temper: 'bold', armed: true, armored: true, armorP: 20, weaponB: 30 }, partyCells: [{ vid: 'ana', rangedId: 'bow', ammoId: 'arrow', cells: 0, alive: true }], log: [] },
+      { day: 5, vid: 'bob', mid: 'audit', wave: 5, origin: 'patrol', leadRule: 'patrol', outcome: 'vFlee', rounds: 2, mDealt: 0, mHpStart: 1200, vTaken: 10, rangedId: null, ammoAtEntry: 0, volley: null, fleeCause: 'learn-withdrawal', fleeHopeless: false, fleeLearn: true, fleeHpFrac: 0.8, calledHelp: false, shoutRound: null, intent: 'learn', everHopeless: false, everWinning: false, leadGear: { bravery: 3, temper: 'steady', armed: true, armored: false, armorP: 0, weaponB: 10 }, partyCells: [{ vid: 'bob', rangedId: null, ammoId: null, cells: 0, alive: true }], log: [] },
+      // PRESENCE FIXTURE (finding #2622): an armed LEAD — cara leads
+      // with the searcaster + 2 cells and fires the volley. The old
+      // analyzer read this row's armed entry but never counted the
+      // lead; the fix must read armedLeads === 1 here.
+      { day: 6, vid: 'cara', mid: 'strike', wave: 4, origin: 'world-tick', leadRule: 'world-tick', outcome: 'vKill', rounds: 5, mDealt: 1100, mHpStart: 1000, vTaken: 30, rangedId: 'searcaster', ammoAtEntry: 2, volley: { shots: 2, hits: 1, dmg: 130, ammoLeft: 0 }, fleeCause: null, fleeHopeless: false, fleeLearn: false, fleeHpFrac: null, calledHelp: true, shoutRound: 2, intent: 'engage', everHopeless: false, everWinning: true, leadGear: { bravery: 10, temper: 'bold', armed: true, armored: true, armorP: 15, weaponB: 120 }, partyCells: [{ vid: 'cara', rangedId: 'searcaster', ammoId: 'fusion_cell', cells: 2, alive: true }], log: [] },
+    ],
+    deaths: [{ kind: 'monster', cause: 'eaten' }],
+  });
+  fs.writeFileSync(path.join(dir, 's2.json'), JSON.stringify(seedP));
+  const pp = participationStats(dir);
+  check('participation: meetings 7 (5 new + 2 fixture), flees 4', pp.meetings === 7 && pp.flees === 4, JSON.stringify({ m: pp.meetings, f: pp.flees }));
+  check('participation: lead attributed 5/7 (fixture seed-1 rows lack leadRule)', pp.leadAttributed === 5 && pp.leadUnclassified === 2, JSON.stringify({ a: pp.leadAttributed, u: pp.leadUnclassified }));
+  check('participation: flee classified 3/4 (fixture seed-1 vFlee row has no fleeCause)', pp.fleeClassified === 3 && pp.fleeUnclassified === 1, JSON.stringify({ c: pp.fleeClassified, u: pp.fleeUnclassified }));
+  check('participation: armed entries 2, armed leads 1, armed volleys 1 (finding #2622 fix)', pp.armedEntries === 2 && pp.armedLeads === 1 && pp.armedVolleys === 1, JSON.stringify({ e: pp.armedEntries, l: pp.armedLeads, v: pp.armedVolleys }));
+  check('participation: flee causes counted (hopeless-after-help, floor-hp, learn-withdrawal)', pp.fleeCauseCounts['hopeless-after-help'] === 1 && pp.fleeCauseCounts['floor-hp'] === 1 && pp.fleeCauseCounts['learn-withdrawal'] === 1, JSON.stringify(pp.fleeCauseCounts));
+  check('participation: deaths per engaged meeting 1/6', Math.abs(pp.deathsPerEngaged - 1 / 6) < 1e-9, 'got ' + pp.deathsPerEngaged);
+  // JudgeParticipation shapes.
+  function mkP(o) {
+    return Object.assign({ meetings: 30, engaged: 25, flees: 10,
+      leadAttributed: 27, leadAttribution: 0.9, leadRuleCounts: { 'expedition-holder': 27 }, leadUnclassified: 3,
+      fleeClassified: 9, fleeClassification: 0.9, fleeUnclassified: 1,
+      fleeCauseCounts: { 'hopeless-alone': 9 } }, o);
+  }
+  let pj = judgeParticipation(mkP({}));
+  check('judgeParticipation DIAG-GO (all bars pass)', pj.verdict === 'DIAG-GO' && pj.bars.every(function (b) { return b.pass; }), JSON.stringify(pj));
+  pj = judgeParticipation(mkP({ leadAttributed: 20, leadAttribution: 0.667, leadUnclassified: 10 }));
+  check('judgeParticipation DIAG-NO-GO lead attribution 0.667 < 0.80', pj.verdict === 'DIAG-NO-GO' && !pj.bars[0].pass, JSON.stringify(pj.bars));
+  pj = judgeParticipation(mkP({ fleeClassified: 6, fleeClassification: 0.6, fleeUnclassified: 4 }));
+  check('judgeParticipation DIAG-NO-GO flee classification 0.60 < 0.80', pj.verdict === 'DIAG-NO-GO' && !pj.bars[1].pass, JSON.stringify(pj.bars));
+  pj = judgeParticipation(mkP({ fleeClassified: 9, fleeClassification: 0.9, fleeUnclassified: 3 }));
+  check('judgeParticipation DIAG-NO-GO 3 unclassified flees > 2 (share passes, count fails)', pj.verdict === 'DIAG-NO-GO' && !pj.bars[1].pass, JSON.stringify(pj.bars));
+  pj = judgeParticipation(mkP({ meetings: 20, flees: 10 }));
+  check('judgeParticipation DIAG-NO-GO METRIC-BROKEN meetings 20 < 25', pj.verdict === 'DIAG-NO-GO' && pj.kind === 'METRIC-BROKEN' && !pj.bars[2].pass, JSON.stringify(pj));
+  pj = judgeParticipation(mkP({ meetings: 30, flees: 5 }));
+  check('judgeParticipation DIAG-NO-GO METRIC-BROKEN flees 5 < 8', pj.verdict === 'DIAG-NO-GO' && pj.kind === 'METRIC-BROKEN' && !pj.bars[2].pass, JSON.stringify(pj));
+  // JudgePresence shapes.
+  function mkLeg(o) {
+    return Object.assign({ searcasterHolderDays: 0,
+      armedEntries: 0, armedLeads: 0, armedVolleys: 0, starvationVillager: 0,
+      deathsPerEngaged: 5, medianDays: 140 }, o);
+  }
+  let sj = judgeLend(mkLeg({}), mkLeg({}), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2, deathsPerEngaged: 4.5, medianDays: 145 }), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2, deathsPerEngaged: 4.5, medianDays: 145 }));
+  check('judgeLend GO (all bars pass)', sj.verdict === 'GO' && sj.bars.every(function (b) { return b.pass; }), JSON.stringify(sj));
+  sj = judgeLend(mkLeg({}), mkLeg({}), mkLeg({ searcasterHolderDays: 10 }), mkLeg({ searcasterHolderDays: 10 }));
+  check('judgeLend NO-GO holder-days 10 < 40 (kind SUPPLY)', sj.verdict === 'NO-GO' && !sj.bars[0].pass && sj.kind === 'SUPPLY', JSON.stringify(sj));
+  sj = judgeLend(mkLeg({}), mkLeg({}), mkLeg({ searcasterHolderDays: 55, armedEntries: 1 }), mkLeg({ searcasterHolderDays: 55, armedEntries: 1 }));
+  check('judgeLend NO-GO armed entries 1 < 3 (kind PARTICIPATION)', sj.verdict === 'NO-GO' && !sj.bars[1].pass && sj.kind === 'PARTICIPATION', JSON.stringify(sj));
+  sj = judgeLend(mkLeg({}), mkLeg({}), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 0 }), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 0 }));
+  check('judgeLend NO-GO armed volleys 0 < 2 (kind PARTICIPATION)', sj.verdict === 'NO-GO' && !sj.bars[2].pass && sj.kind === 'PARTICIPATION', JSON.stringify(sj));
+  sj = judgeLend(mkLeg({}), mkLeg({}), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 1 }), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 1 }));
+  check('judgeLend NO-GO armed volleys 1 < 2 (kind PARTICIPATION)', sj.verdict === 'NO-GO' && !sj.bars[2].pass && sj.kind === 'PARTICIPATION', JSON.stringify(sj));
+  sj = judgeLend(mkLeg({ deathsPerEngaged: 4 }), mkLeg({ deathsPerEngaged: 4 }), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2, deathsPerEngaged: 5, medianDays: 145 }), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2, deathsPerEngaged: 5, medianDays: 145 }));
+  check('judgeLend NO-GO guardrail deaths/engaged 5.00 > 4.40 (1.10x, kind GUARDRAIL)', sj.verdict === 'NO-GO' && !sj.bars[3].pass && sj.kind === 'GUARDRAIL', JSON.stringify(sj));
+  sj = judgeLend(mkLeg({}), mkLeg({}), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2, starvationVillager: 3 }), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2, starvationVillager: 3 }));
+  check('judgeLend NO-GO starvation 3 > 0+2 (kind GUARDRAIL)', sj.verdict === 'NO-GO' && !sj.bars[4].pass && sj.kind === 'GUARDRAIL', JSON.stringify(sj));
+  sj = judgeLend(mkLeg({}), mkLeg({ deathsPerEngaged: null }), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2 }), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2 }));
+  check('judgeLend NO-GO guardrail unjudgeable when a leg has zero engaged meetings', sj.verdict === 'NO-GO' && !sj.bars[3].pass, JSON.stringify(sj));
+  // ---- LEND stats fixture (a third seed with fired-rows) ----
+  const seedL = mkSeed({
+    seed: 3, days: 10, gameDays: 10,
+    v4encounters: [
+      { day: 2, vid: 'yara', mid: 'algorithm', wave: 4, origin: 'world-tick', leadRule: 'world-tick', outcome: 'vFlee', rounds: 7, mDealt: 565, mHpStart: 750, vTaken: 30, rangedId: 'searcaster', ammoAtEntry: 2, volley: { shots: 2, hits: 1, dmg: 64, ammoLeft: 0 }, fleeCause: 'floor-hp', fleeHopeless: false, fleeLearn: false, fleeHpFrac: 0.3, calledHelp: true, shoutRound: 5, intent: 'engage', everHopeless: false, everWinning: false, leadGear: { bravery: 5, temper: 'steady', armed: true, armored: true, armorP: 10, weaponB: 120 }, partyCells: [{ vid: 'yara', rangedId: 'searcaster', ammoId: 'fusion_cell', cells: 2, alive: true }, { vid: 'naran', rangedId: null, ammoId: null, cells: 0, alive: true }], log: [] },
+      { day: 3, vid: 'bob', mid: 'eulogy', wave: 4, origin: 'world-tick', leadRule: 'world-tick', outcome: 'vDie', rounds: 1, mDealt: 0, mHpStart: 900, vTaken: 100, rangedId: 'searcaster', ammoAtEntry: 2, volley: { shots: 0, hits: 0, dmg: 0, ammoLeft: 2 }, fleeCause: null, fleeHopeless: false, fleeLearn: false, fleeHpFrac: null, calledHelp: false, shoutRound: null, intent: 'engage', everHopeless: false, everWinning: false, leadGear: { bravery: 1, temper: 'cautious', armed: false, armored: false, armorP: 0, weaponB: 120 }, partyCells: [{ vid: 'bob', rangedId: 'searcaster', ammoId: 'fusion_cell', cells: 2, alive: true }], log: [] },
+      { day: 4, vid: 'cara', mid: 'strike', wave: 4, origin: 'world-tick', leadRule: 'world-tick', outcome: 'vKill', rounds: 5, mDealt: 1100, mHpStart: 1000, vTaken: 30, rangedId: 'searcaster', ammoAtEntry: 2, volley: { shots: 2, hits: 1, dmg: 130, ammoLeft: 0 }, fleeCause: null, fleeHopeless: false, fleeLearn: false, fleeHpFrac: null, calledHelp: true, shoutRound: 2, intent: 'engage', everHopeless: false, everWinning: true, leadGear: { bravery: 10, temper: 'bold', armed: true, armored: true, armorP: 15, weaponB: 120 }, partyCells: [{ vid: 'cara', rangedId: 'searcaster', ammoId: 'fusion_cell', cells: 2, alive: true }], log: [] },
+    ],
+    v4lends: [
+      { seq: 1, day: 2, mid: 'algorithm', lender: 'naran', borrower: 'yara', kind: 'gun', from: 'adjacent', cellsMoved: 2, gunReturned: true, cellsReturned: 1, lenderAlive: true, borrowerAlive: true },
+      { seq: 2, day: 3, mid: 'eulogy', lender: 'naran', borrower: 'bob', kind: 'cells', from: 'tile', cellsMoved: 2, gunReturned: false, cellsReturned: 0, lenderAlive: true, borrowerAlive: false },
+      { seq: 3, day: 5, mid: 'reunion', lender: 'naran', borrower: 'zoe', kind: 'gun', from: 'adjacent', cellsMoved: 2, gunReturned: null, cellsReturned: null, lenderAlive: null, borrowerAlive: null },
+    ],
+    deaths: [{ day: 3, kind: 'monster', who: 'bob', cause: 'eaten' }],
+  });
+  fs.writeFileSync(path.join(dir, 's3.json'), JSON.stringify(seedL));
+  const ls = lendStats(dir);
+  check('lendStats: 3 lends (2 gun, 1 cells; 1 tile, 2 adjacent)', ls.lends === 3 && ls.lendsGun === 2 && ls.lendsCells === 1 && ls.lendsTile === 1 && ls.lendsAdjacent === 2, JSON.stringify({ l: ls.lends, g: ls.lendsGun, c: ls.lendsCells, t: ls.lendsTile, a: ls.lendsAdjacent }));
+  check('lendStats: gun returned 1, cells returned 1, cells moved 6', ls.gunReturned === 1 && ls.cellsReturned === 1 && ls.cellsMoved === 6, JSON.stringify({ g: ls.gunReturned, c: ls.cellsReturned, m: ls.cellsMoved }));
+  check('lendStats: joined 2, unjoined 1 (the day-5 lend has no encounter)', ls.lendsJoined === 2 && ls.lendsUnjoined === 1, JSON.stringify({ j: ls.lendsJoined, u: ls.lendsUnjoined }));
+  check('lendStats: lent volleys 1 (yara), lent volley dmg 64', ls.lentVolleys === 1 && ls.lentVolleyDmg === 64, JSON.stringify({ v: ls.lentVolleys, d: ls.lentVolleyDmg }));
+  check('lendStats: outcomes vFlee 1 + vDie 1; borrower survived 1/2 (0.50)', ls.lentOutcomes.vFlee === 1 && ls.lentOutcomes.vDie === 1 && ls.borrowerSurvived === 1 && ls.borrowerDied === 1 && ls.borrowerSurvival === 0.5, JSON.stringify({ o: ls.lentOutcomes, s: ls.borrowerSurvived, d: ls.borrowerDied, r: ls.borrowerSurvival }));
+  // ---- judgeLend SEPARATED-guardrail shapes ----
+  function mkLend(o) {
+    return Object.assign({ lends: 0, lendsJoined: 0, borrowerSurvived: 0, borrowerDied: 0, borrowerSurvival: null }, o);
+  }
+  const goodLeg = mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2, deathsPerEngaged: 4.5, medianDays: 145 });
+  sj = judgeLend(mkLeg({ deathsPerEngaged: 5 }), mkLeg({ deathsPerEngaged: 5 }), goodLeg, goodLeg,
+    mkLend({}), mkLend({ lends: 2, lendsJoined: 2, borrowerSurvived: 2, borrowerSurvival: 1 }));
+  check('judgeLend GO with lends (borrowers survived 2/2, downstream 4.50 <= 5.50)', sj.verdict === 'GO' && sj.bars.every(function (b) { return b.pass; }), JSON.stringify(sj));
+  sj = judgeLend(mkLeg({ deathsPerEngaged: 5 }), mkLeg({ deathsPerEngaged: 5 }), goodLeg, goodLeg,
+    mkLend({}), mkLend({ lends: 2, lendsJoined: 2, borrowerSurvived: 0, borrowerSurvival: 0 }));
+  check('judgeLend NO-GO lent-fight safety 0/2 < 50% (kind GUARDRAIL, downstream passes)', sj.verdict === 'NO-GO' && !sj.bars[3].pass && sj.kind === 'GUARDRAIL' && /lent-fight safety/.test(sj.bars[3].detail), JSON.stringify(sj.bars[3]));
+  sj = judgeLend(mkLeg({ deathsPerEngaged: 4 }), mkLeg({ deathsPerEngaged: 4 }), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2, deathsPerEngaged: 4.5, medianDays: 145 }), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2, deathsPerEngaged: 4.5, medianDays: 145 }),
+    mkLend({}), mkLend({ lends: 2, lendsJoined: 2, borrowerSurvived: 2, borrowerSurvival: 1 }));
+  check('judgeLend NO-GO downstream 4.50 > 4.40 (1.10x, kind GUARDRAIL)', sj.verdict === 'NO-GO' && !sj.bars[3].pass && sj.kind === 'GUARDRAIL', JSON.stringify(sj.bars[3]));
+  sj = judgeLend(mkLeg({ deathsPerEngaged: 4 }), mkLeg({ deathsPerEngaged: 4 }), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2, deathsPerEngaged: 4.3, medianDays: 145 }), mkLeg({ searcasterHolderDays: 55, armedEntries: 4, armedVolleys: 2, deathsPerEngaged: 4.3, medianDays: 145 }),
+    mkLend({}), mkLend({ lends: 2, lendsJoined: 2, borrowerSurvived: 2, borrowerSurvival: 1 }));
+  check('judgeLend GO at 4.30 <= 4.40 — the 1.10x allowance tolerates cascade noise the strict 1.00x would fail', sj.verdict === 'GO' && sj.bars[3].pass, JSON.stringify(sj.bars[3]));
+  sj = judgeLend(mkLeg({ deathsPerEngaged: 5 }), mkLeg({ deathsPerEngaged: 5 }), goodLeg, goodLeg,
+    mkLend({}), mkLend({ lends: 0, lendsJoined: 0 }));
+  check('judgeLend GO with 0 lends — safety part skipped, not failed (bars 2-3 judge participation)', sj.verdict === 'GO' && /skipped/.test(sj.bars[3].detail), JSON.stringify(sj.bars[3]));
+  sj = judgeLend(mkLeg({ deathsPerEngaged: 5 }), mkLeg({ deathsPerEngaged: 5 }), goodLeg, goodLeg,
+    mkLend({}), mkLend({ lends: 2, lendsJoined: 0, borrowerSurvived: 0, borrowerSurvival: null }));
+  check('judgeLend NO-GO lends unjoined 0/2 — safety unjudgeable, not skipped', sj.verdict === 'NO-GO' && !sj.bars[3].pass && sj.kind === 'GUARDRAIL', JSON.stringify(sj.bars[3]));
+  console.log('analyze-lend-a --selftest: ' + passed + ' passed, ' + failed + ' failed');
+  process.exit(failed ? 1 : 0);
+}
+
+if (require.main === module) {
+  const args = process.argv.slice(2);
+  if (args.indexOf('--selftest') !== -1) selftest();
+  let dir = null, outFile = null, ctlDir = null, armDir = null;
+  const noJudge = args.indexOf('--no-judge') !== -1;
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--dir') dir = args[++i];
+    else if (args[i] === '--out') outFile = args[++i];
+    else if (args[i] === '--ctl') ctlDir = args[++i];
+    else if (args[i] === '--arm') armDir = args[++i];
+  }
+  if (ctlDir && armDir) {
+    const ctlSt = cellStats(ctlDir), ctlPart = participationStats(ctlDir), ctlPres = presenceStats(ctlDir), ctlLend = lendStats(ctlDir);
+    const armSt = cellStats(armDir), armPart = participationStats(armDir), armPres = presenceStats(armDir), armLend = lendStats(armDir);
+    const sj = noJudge ? null : judgeLend(ctlSt, ctlPart, armSt, armPart, ctlLend, armLend);
+    const result = { verdict: sj ? sj.verdict : null, kind: sj ? sj.kind : null, bars: sj ? sj.bars : null,
+      ctl: { diag: summarize(ctlSt), participation: ctlPart, presence: ctlPres, lend: ctlLend },
+      arm: { diag: summarize(armSt), participation: armPart, presence: armPres, lend: armLend } };
+    console.log(JSON.stringify({ verdict: result.verdict, kind: result.kind, bars: result.bars,
+      ctl: { holderDays: ctlSt.searcasterHolderDays, armedEntries: ctlPart.armedEntries, armedLeads: ctlPart.armedLeads, armedVolleys: ctlPart.armedVolleys, deathsPerEngaged: ctlPart.deathsPerEngaged, medianDays: ctlPart.medianDays, starvationVillager: ctlSt.starvationVillager, poolTicks: ctlPres.poolTicks, poolHolderPresent: ctlPres.poolHolderPresent, poolFights: ctlPres.poolFights, poolHolderLed: ctlPres.poolHolderLed, transfers: ctlPres.transfers, vanishes: ctlPres.vanishes,
+        lends: ctlLend.lends, lendsJoined: ctlLend.lendsJoined, lentVolleys: ctlLend.lentVolleys, borrowerSurvival: ctlLend.borrowerSurvival },
+      arm: { holderDays: armSt.searcasterHolderDays, armedEntries: armPart.armedEntries, armedLeads: armPart.armedLeads, armedVolleys: armPart.armedVolleys, deathsPerEngaged: armPart.deathsPerEngaged, medianDays: armPart.medianDays, starvationVillager: armSt.starvationVillager, poolTicks: armPres.poolTicks, poolHolderPresent: armPres.poolHolderPresent, poolFights: armPres.poolFights, poolHolderLed: armPres.poolHolderLed, poolDraftMiss: armPres.poolDraftMiss, transfers: armPres.transfers, vanishes: armPres.vanishes,
+        lends: armLend.lends, lendsGun: armLend.lendsGun, lendsCells: armLend.lendsCells, lendsTile: armLend.lendsTile, lendsAdjacent: armLend.lendsAdjacent, gunReturned: armLend.gunReturned, borrowerKept: armLend.borrowerKept, lendsJoined: armLend.lendsJoined, lendsUnjoined: armLend.lendsUnjoined, lentVolleys: armLend.lentVolleys, lentVolleyDmg: armLend.lentVolleyDmg, lentOutcomes: armLend.lentOutcomes, borrowerSurvived: armLend.borrowerSurvived, borrowerDied: armLend.borrowerDied, borrowerSurvival: armLend.borrowerSurvival } }, null, 2));
+    if (outFile) fs.writeFileSync(outFile, JSON.stringify(result, null, 2) + '\n');
+    process.exit(sj && sj.verdict !== 'GO' ? 0 : 0);
+  }
+  if (!dir) { console.error('usage: analyze-lend-a.js --dir DIR [--out FILE] [--no-judge] | --selftest'); process.exit(2); }
+  const st = cellStats(dir);
+  const j = noJudge ? null : judge(st);
+  const part = participationStats(dir);
+  const pj = noJudge ? null : judgeParticipation(part);
+  const lend = lendStats(dir);
+  const result = { verdict: pj ? pj.verdict : null, kind: pj ? pj.kind : null, bars: pj ? pj.bars : null,
+    participation: part, lend: lend,
+    cellVerdict: j ? j.verdict : null, cellBars: j ? j.bars : null,
+    diag: summarize(st), cellAppearanceDetail: st.cellAppearanceDetail,
+    searcasterAppearanceDetail: st.searcasterAppearanceDetail, poolDetail: st.poolDetail };
+  console.log(JSON.stringify({ verdict: result.verdict, kind: result.kind, bars: result.bars,
+    participation: { meetings: part.meetings, engaged: part.engaged, flees: part.flees,
+      leadAttribution: part.leadAttribution, fleeClassification: part.fleeClassification,
+      armedEntries: part.armedEntries, armedLeads: part.armedLeads, armedVolleys: part.armedVolleys,
+      deathsPerEngaged: part.deathsPerEngaged, national: part.national, seedWins: part.seedWins,
+      wave4: part.wave4, wave5: part.wave5, medianDays: part.medianDays },
+    cellVerdict: result.cellVerdict }, null, 2));
+  if (outFile) fs.writeFileSync(outFile, JSON.stringify(result, null, 2) + '\n');
+}
+module.exports = { cellStats: cellStats, judge: judge, bucket: bucket, attributeIncrease: attributeIncrease,
+  participationStats: participationStats, judgeParticipation: judgeParticipation, presenceStats: presenceStats, lendStats: lendStats, judgeLend: judgeLend };
