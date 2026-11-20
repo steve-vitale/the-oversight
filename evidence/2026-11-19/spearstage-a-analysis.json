@@ -1,0 +1,4567 @@
+{
+  "verdict": "NO-GO",
+  "kind": "",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": true,
+      "detail": "spear-holder departures (spearSeen): arm 49 (floor 10); ctl 49"
+    },
+    {
+      "id": "gate-pass-rate",
+      "pass": true,
+      "detail": "arm spearPassed/spearSeen = 49/49 = 1.000 (bar 1.0 — every spear-holder passed over)"
+    },
+    {
+      "id": "ctl-pass-zero",
+      "pass": true,
+      "detail": "ctl spearPassed = 0 (bar 0 — the old gate never passes a spear)"
+    },
+    {
+      "id": "consistency-alreadyHad",
+      "pass": true,
+      "detail": "arm alreadyHad 101 vs ctl alreadyHad 150 minus ctl spearSeen 49 = 101 (delta 0, bar |delta|<=3)"
+    },
+    {
+      "id": "consistency-noSource",
+      "pass": true,
+      "detail": "arm noSource 130 vs ctl noSource 81 plus arm spearSeen 49 = 130 (delta 0, bar |delta|<=3; frozen formula as written — a served departure leaves noSource by construction, so this bar binds when arm.staged > 3; see header note)"
+    },
+    {
+      "id": "served",
+      "pass": false,
+      "detail": "SERVED (fromStash+fromArmory+crafted): arm 1 (stash 0 armory 0 crafted 1, craftedFail 2) minus ctl 1 = 0 (bar >= 3 — the gate must actually serve spear-holders, not just pass them to noSource)"
+    },
+    {
+      "id": "volley-rate-rise",
+      "pass": false,
+      "detail": "volley fire share arm 0.500 (5/10) minus ctl 0.500 (5/10) = 0.000 (bar >= +0.10 — served bows must actually open fire)"
+    },
+    {
+      "id": "cost-kill-share",
+      "pass": true,
+      "detail": "pair-inclusive kill share arm 0.200 (2/10) vs ctl 0.200 (2/10) (bar arm>=ctl-0.05)"
+    },
+    {
+      "id": "cost-damage-per-round",
+      "pass": true,
+      "detail": "pair-inclusive mean damage/round arm 43.4 vs ctl 43.4 (bar arm>=0.9x ctl)"
+    },
+    {
+      "id": "cost-deaths-per-engaged",
+      "pass": true,
+      "detail": "deaths per engaged meeting arm 80.80 (808/10) vs ctl 80.80 (808/10) x1.10 = 88.88 (bar arm<=ctl x 1.10)"
+    },
+    {
+      "id": "cost-community-loss",
+      "pass": true,
+      "detail": "community loss arm 3/8 vs ctl 3/8 (bar arm share <= ctl share + 0.125, i.e. at most 4 villages)"
+    },
+    {
+      "id": "cost-starvation",
+      "pass": true,
+      "detail": "starvation totals arm 0 vs ctl 0; villager arm 0 vs ctl 0 (bar arm<=ctl+2 both)"
+    },
+    {
+      "id": "cost-median",
+      "pass": true,
+      "detail": "median survival arm 150d vs ctl 150d (bar arm>=0.8x ctl)"
+    }
+  ],
+  "ctl": {
+    "dir": "evidence/2026-11-19/perseed-spearstage-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "senseexpedOn": {
+      "true": 8
+    },
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "speargateOn": {
+      "false": 8
+    },
+    "meetings": 6,
+    "wins": 2,
+    "kills": 1,
+    "losses": 4,
+    "vDie": 1,
+    "vFlee": 3,
+    "mFlee": 1,
+    "winShare": 0.3333333333333333,
+    "killShare": 0.16666666666666666,
+    "funnel": {
+      "encounters": 27,
+      "joined": 27,
+      "unjoined": 0,
+      "noLaunchPlan": 3,
+      "pairLaunch": 13,
+      "partyAbsent": 0,
+      "evadeExcluded": 5
+    },
+    "byOutcome": {
+      "vDie": {
+        "n": 1,
+        "rounds": [
+          3
+        ],
+        "dmgShare": [
+          0.0638063806380638
+        ],
+        "vTaken": [
+          84
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          9
+        ],
+        "meanArmorP": [
+          30.666666666666668
+        ],
+        "mHpStart": [
+          909
+        ],
+        "abilitiesPerMember": [
+          0.3333333333333333
+        ],
+        "fighterDmgShare": [
+          0
+        ],
+        "parsedStrikeTotal": [
+          58
+        ],
+        "dmgPerRound": [
+          19.333333333333332
+        ],
+        "volleyDmg": [
+          0
+        ],
+        "dmgPerRoundMean": 19.333333333333332,
+        "volleyDmgMean": 0,
+        "roundsMean": 3,
+        "vTakenMean": 84,
+        "partySizeMean": 3,
+        "minArmorPMean": 9,
+        "meanArmorPMean": 30.666666666666668,
+        "mHpStartMean": 909,
+        "abilitiesPerMemberMean": 0.3333333333333333,
+        "fighterDmgShareMean": 0,
+        "parsedStrikeTotalMean": 58
+      },
+      "vFlee": {
+        "n": 3,
+        "rounds": [
+          2,
+          3,
+          4
+        ],
+        "dmgShare": [
+          0.04029605263157895,
+          0.05181347150259067,
+          0.15815085158150852
+        ],
+        "vTaken": [
+          21,
+          53,
+          64
+        ],
+        "partySize": [
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          8,
+          24,
+          24
+        ],
+        "meanArmorP": [
+          30.333333333333332,
+          35.333333333333336,
+          39
+        ],
+        "mHpStart": [
+          1216,
+          1351,
+          1644
+        ],
+        "abilitiesPerMember": [
+          1,
+          2.3333333333333335,
+          0
+        ],
+        "fighterDmgShare": [
+          1,
+          0.7,
+          0.3211009174311927
+        ],
+        "parsedStrikeTotal": [
+          49,
+          70,
+          109
+        ],
+        "dmgPerRound": [
+          24.5,
+          23.333333333333332,
+          65
+        ],
+        "volleyDmg": [
+          42
+        ],
+        "dmgPerRoundMean": 37.61111111111111,
+        "volleyDmgMean": 42,
+        "roundsMean": 3,
+        "vTakenMean": 46,
+        "partySizeMean": 3,
+        "minArmorPMean": 18.666666666666668,
+        "meanArmorPMean": 34.88888888888889,
+        "mHpStartMean": 1403.6666666666667,
+        "abilitiesPerMemberMean": 1.1111111111111112,
+        "fighterDmgShareMean": 0.6737003058103975,
+        "parsedStrikeTotalMean": 76
+      },
+      "vKill": {
+        "n": 1,
+        "rounds": [
+          12
+        ],
+        "dmgShare": [],
+        "vTaken": [
+          45
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          24
+        ],
+        "meanArmorP": [
+          39
+        ],
+        "mHpStart": [],
+        "abilitiesPerMember": [
+          0
+        ],
+        "fighterDmgShare": [
+          0.3145539906103286
+        ],
+        "parsedStrikeTotal": [
+          213
+        ],
+        "dmgPerRound": [
+          87.83333333333333
+        ],
+        "volleyDmg": [
+          13
+        ],
+        "dmgPerRoundMean": 87.83333333333333,
+        "volleyDmgMean": 13,
+        "roundsMean": 12,
+        "vTakenMean": 45,
+        "partySizeMean": 3,
+        "minArmorPMean": 24,
+        "meanArmorPMean": 39,
+        "mHpStartMean": null,
+        "abilitiesPerMemberMean": 0,
+        "fighterDmgShareMean": 0.3145539906103286,
+        "parsedStrikeTotalMean": 213
+      },
+      "mFlee": {
+        "n": 1,
+        "rounds": [
+          1
+        ],
+        "dmgShare": [
+          0.00749063670411985
+        ],
+        "vTaken": [
+          0
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          15
+        ],
+        "meanArmorP": [
+          26
+        ],
+        "mHpStart": [
+          1068
+        ],
+        "abilitiesPerMember": [
+          4.333333333333333
+        ],
+        "fighterDmgShare": [],
+        "parsedStrikeTotal": [
+          0
+        ],
+        "dmgPerRound": [
+          8
+        ],
+        "volleyDmg": [
+          8
+        ],
+        "dmgPerRoundMean": 8,
+        "volleyDmgMean": 8,
+        "roundsMean": 1,
+        "vTakenMean": 0,
+        "partySizeMean": 3,
+        "minArmorPMean": 15,
+        "meanArmorPMean": 26,
+        "mHpStartMean": 1068,
+        "abilitiesPerMemberMean": 4.333333333333333,
+        "fighterDmgShareMean": null,
+        "parsedStrikeTotalMean": 0
+      }
+    },
+    "gateXOutcome": {
+      "seek": {
+        "vDie": 1,
+        "vFlee": 1
+      },
+      "null": {
+        "vFlee": 2,
+        "vKill": 1,
+        "mFlee": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 0.6666666666666666,
+    "gateSeekShare": 0.3333333333333333,
+    "lossGateNull": 2,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 2,
+    "monsterByOutcome": {
+      "congregation": {
+        "win": 2,
+        "loss": 1
+      },
+      "reunion": {
+        "win": 0,
+        "loss": 1
+      },
+      "rerun": {
+        "win": 0,
+        "loss": 1
+      },
+      "cancellation": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.06431147861157235,
+    "dmgShareByOutcome": {
+      "vDie": 0.0638063806380638,
+      "vFlee": 0.08342012523855939,
+      "vKill": null,
+      "mFlee": 0.00749063670411985
+    },
+    "roundsMean": 4.166666666666667,
+    "vTakenMean": 44.5,
+    "dmgPerRoundMean": 38,
+    "volleyFired": 3,
+    "volleyFireShare": 0.5,
+    "volleyDmgMean": 15.75,
+    "rangedAtEntry": 5,
+    "rangedAtEntryShare": 0.8333333333333334,
+    "bowOpen": {
+      "alreadyHad": 150,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 1,
+      "craftedFail": 2,
+      "noSource": 81,
+      "spearSeen": 49,
+      "spearPassed": 0
+    },
+    "bowOpenStagedVids": 46,
+    "spearSeen": 49,
+    "spearPassed": 0,
+    "staged": 1,
+    "spearPassRate": 0,
+    "spearAlreadyHad": 8,
+    "spearAlreadyHadVids": [
+      "gen_x89qe9y:hunting_spear",
+      "gen_93637hu:fire_hardened_spear",
+      "gen_56hgy5z:hunting_spear",
+      "stan_kowalski:fire_hardened_spear",
+      "gen_rkgoa3u:hunting_spear",
+      "benoit_lambert:fire_hardened_spear",
+      "gen_m7tyelq:fire_hardened_spear",
+      "gen_1334kmo:fire_hardened_spear"
+    ],
+    "starvation": 0,
+    "starvationVillager": 0,
+    "deathsTotal": 808,
+    "deathsPerEngaged": 134.66666666666666,
+    "medianDays": 150,
+    "communityLost": 3,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 7,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "arm": {
+    "dir": "evidence/2026-11-19/perseed-spearstage-a-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "senseexpedOn": {
+      "true": 8
+    },
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "speargateOn": {
+      "true": 8
+    },
+    "meetings": 6,
+    "wins": 2,
+    "kills": 1,
+    "losses": 4,
+    "vDie": 1,
+    "vFlee": 3,
+    "mFlee": 1,
+    "winShare": 0.3333333333333333,
+    "killShare": 0.16666666666666666,
+    "funnel": {
+      "encounters": 27,
+      "joined": 27,
+      "unjoined": 0,
+      "noLaunchPlan": 3,
+      "pairLaunch": 13,
+      "partyAbsent": 0,
+      "evadeExcluded": 5
+    },
+    "byOutcome": {
+      "vDie": {
+        "n": 1,
+        "rounds": [
+          3
+        ],
+        "dmgShare": [
+          0.0638063806380638
+        ],
+        "vTaken": [
+          84
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          9
+        ],
+        "meanArmorP": [
+          30.666666666666668
+        ],
+        "mHpStart": [
+          909
+        ],
+        "abilitiesPerMember": [
+          0.3333333333333333
+        ],
+        "fighterDmgShare": [
+          0
+        ],
+        "parsedStrikeTotal": [
+          58
+        ],
+        "dmgPerRound": [
+          19.333333333333332
+        ],
+        "volleyDmg": [
+          0
+        ],
+        "dmgPerRoundMean": 19.333333333333332,
+        "volleyDmgMean": 0,
+        "roundsMean": 3,
+        "vTakenMean": 84,
+        "partySizeMean": 3,
+        "minArmorPMean": 9,
+        "meanArmorPMean": 30.666666666666668,
+        "mHpStartMean": 909,
+        "abilitiesPerMemberMean": 0.3333333333333333,
+        "fighterDmgShareMean": 0,
+        "parsedStrikeTotalMean": 58
+      },
+      "vFlee": {
+        "n": 3,
+        "rounds": [
+          2,
+          3,
+          4
+        ],
+        "dmgShare": [
+          0.04029605263157895,
+          0.05181347150259067,
+          0.15815085158150852
+        ],
+        "vTaken": [
+          21,
+          53,
+          64
+        ],
+        "partySize": [
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          8,
+          24,
+          24
+        ],
+        "meanArmorP": [
+          30.333333333333332,
+          35.333333333333336,
+          39
+        ],
+        "mHpStart": [
+          1216,
+          1351,
+          1644
+        ],
+        "abilitiesPerMember": [
+          1,
+          2.3333333333333335,
+          0
+        ],
+        "fighterDmgShare": [
+          1,
+          0.7,
+          0.3211009174311927
+        ],
+        "parsedStrikeTotal": [
+          49,
+          70,
+          109
+        ],
+        "dmgPerRound": [
+          24.5,
+          23.333333333333332,
+          65
+        ],
+        "volleyDmg": [
+          42
+        ],
+        "dmgPerRoundMean": 37.61111111111111,
+        "volleyDmgMean": 42,
+        "roundsMean": 3,
+        "vTakenMean": 46,
+        "partySizeMean": 3,
+        "minArmorPMean": 18.666666666666668,
+        "meanArmorPMean": 34.88888888888889,
+        "mHpStartMean": 1403.6666666666667,
+        "abilitiesPerMemberMean": 1.1111111111111112,
+        "fighterDmgShareMean": 0.6737003058103975,
+        "parsedStrikeTotalMean": 76
+      },
+      "vKill": {
+        "n": 1,
+        "rounds": [
+          12
+        ],
+        "dmgShare": [],
+        "vTaken": [
+          45
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          24
+        ],
+        "meanArmorP": [
+          39
+        ],
+        "mHpStart": [],
+        "abilitiesPerMember": [
+          0
+        ],
+        "fighterDmgShare": [
+          0.3145539906103286
+        ],
+        "parsedStrikeTotal": [
+          213
+        ],
+        "dmgPerRound": [
+          87.83333333333333
+        ],
+        "volleyDmg": [
+          13
+        ],
+        "dmgPerRoundMean": 87.83333333333333,
+        "volleyDmgMean": 13,
+        "roundsMean": 12,
+        "vTakenMean": 45,
+        "partySizeMean": 3,
+        "minArmorPMean": 24,
+        "meanArmorPMean": 39,
+        "mHpStartMean": null,
+        "abilitiesPerMemberMean": 0,
+        "fighterDmgShareMean": 0.3145539906103286,
+        "parsedStrikeTotalMean": 213
+      },
+      "mFlee": {
+        "n": 1,
+        "rounds": [
+          1
+        ],
+        "dmgShare": [
+          0.00749063670411985
+        ],
+        "vTaken": [
+          0
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          15
+        ],
+        "meanArmorP": [
+          26
+        ],
+        "mHpStart": [
+          1068
+        ],
+        "abilitiesPerMember": [
+          4.333333333333333
+        ],
+        "fighterDmgShare": [],
+        "parsedStrikeTotal": [
+          0
+        ],
+        "dmgPerRound": [
+          8
+        ],
+        "volleyDmg": [
+          8
+        ],
+        "dmgPerRoundMean": 8,
+        "volleyDmgMean": 8,
+        "roundsMean": 1,
+        "vTakenMean": 0,
+        "partySizeMean": 3,
+        "minArmorPMean": 15,
+        "meanArmorPMean": 26,
+        "mHpStartMean": 1068,
+        "abilitiesPerMemberMean": 4.333333333333333,
+        "fighterDmgShareMean": null,
+        "parsedStrikeTotalMean": 0
+      }
+    },
+    "gateXOutcome": {
+      "seek": {
+        "vDie": 1,
+        "vFlee": 1
+      },
+      "null": {
+        "vFlee": 2,
+        "vKill": 1,
+        "mFlee": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 0.6666666666666666,
+    "gateSeekShare": 0.3333333333333333,
+    "lossGateNull": 2,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 2,
+    "monsterByOutcome": {
+      "congregation": {
+        "win": 2,
+        "loss": 1
+      },
+      "reunion": {
+        "win": 0,
+        "loss": 1
+      },
+      "rerun": {
+        "win": 0,
+        "loss": 1
+      },
+      "cancellation": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.06431147861157235,
+    "dmgShareByOutcome": {
+      "vDie": 0.0638063806380638,
+      "vFlee": 0.08342012523855939,
+      "vKill": null,
+      "mFlee": 0.00749063670411985
+    },
+    "roundsMean": 4.166666666666667,
+    "vTakenMean": 44.5,
+    "dmgPerRoundMean": 38,
+    "volleyFired": 3,
+    "volleyFireShare": 0.5,
+    "volleyDmgMean": 15.75,
+    "rangedAtEntry": 5,
+    "rangedAtEntryShare": 0.8333333333333334,
+    "bowOpen": {
+      "alreadyHad": 101,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 1,
+      "craftedFail": 2,
+      "noSource": 130,
+      "spearSeen": 49,
+      "spearPassed": 49
+    },
+    "bowOpenStagedVids": 46,
+    "spearSeen": 49,
+    "spearPassed": 49,
+    "staged": 1,
+    "spearPassRate": 1,
+    "spearAlreadyHad": 0,
+    "spearAlreadyHadVids": [],
+    "starvation": 0,
+    "starvationVillager": 0,
+    "deathsTotal": 808,
+    "deathsPerEngaged": 134.66666666666666,
+    "medianDays": 150,
+    "communityLost": 3,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 7,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "ctlPair": {
+    "dir": "evidence/2026-11-19/perseed-spearstage-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "senseexpedOn": {
+      "true": 8
+    },
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "speargateOn": {
+      "false": 8
+    },
+    "meetings": 10,
+    "wins": 3,
+    "kills": 2,
+    "losses": 7,
+    "vDie": 3,
+    "vFlee": 4,
+    "mFlee": 1,
+    "winShare": 0.3,
+    "killShare": 0.2,
+    "funnel": {
+      "encounters": 27,
+      "joined": 27,
+      "unjoined": 0,
+      "noLaunchPlan": 3,
+      "pairLaunch": 0,
+      "partyAbsent": 2,
+      "evadeExcluded": 12
+    },
+    "byOutcome": {
+      "vKill": {
+        "n": 2,
+        "rounds": [
+          15,
+          12
+        ],
+        "dmgShare": [],
+        "vTaken": [
+          78,
+          45
+        ],
+        "partySize": [
+          3,
+          3
+        ],
+        "minArmorP": [
+          32,
+          24
+        ],
+        "meanArmorP": [
+          40,
+          39
+        ],
+        "mHpStart": [],
+        "abilitiesPerMember": [
+          2.6666666666666665,
+          0
+        ],
+        "fighterDmgShare": [
+          0.5654761904761905,
+          0.3145539906103286
+        ],
+        "parsedStrikeTotal": [
+          168,
+          213
+        ],
+        "dmgPerRound": [
+          98.73333333333333,
+          87.83333333333333
+        ],
+        "volleyDmg": [
+          69,
+          13
+        ],
+        "dmgPerRoundMean": 93.28333333333333,
+        "volleyDmgMean": 41,
+        "roundsMean": 13.5,
+        "vTakenMean": 61.5,
+        "partySizeMean": 3,
+        "minArmorPMean": 28,
+        "meanArmorPMean": 39.5,
+        "mHpStartMean": null,
+        "abilitiesPerMemberMean": 1.3333333333333333,
+        "fighterDmgShareMean": 0.44001509054325955,
+        "parsedStrikeTotalMean": 190.5
+      },
+      "vDie": {
+        "n": 3,
+        "rounds": [
+          3,
+          5,
+          2
+        ],
+        "dmgShare": [
+          0.0638063806380638,
+          0.10599078341013825,
+          0.02821316614420063
+        ],
+        "vTaken": [
+          84,
+          92,
+          50
+        ],
+        "partySize": [
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          9,
+          24,
+          7
+        ],
+        "meanArmorP": [
+          30.666666666666668,
+          36.666666666666664,
+          9.333333333333334
+        ],
+        "mHpStart": [
+          909,
+          1085,
+          957
+        ],
+        "abilitiesPerMember": [
+          0.3333333333333333,
+          0.6666666666666666,
+          2.3333333333333335
+        ],
+        "fighterDmgShare": [
+          0,
+          0,
+          0
+        ],
+        "parsedStrikeTotal": [
+          58,
+          115,
+          27
+        ],
+        "dmgPerRound": [
+          19.333333333333332,
+          23,
+          13.5
+        ],
+        "volleyDmg": [
+          0
+        ],
+        "dmgPerRoundMean": 18.61111111111111,
+        "volleyDmgMean": 0,
+        "roundsMean": 3.3333333333333335,
+        "vTakenMean": 75.33333333333333,
+        "partySizeMean": 3,
+        "minArmorPMean": 13.333333333333334,
+        "meanArmorPMean": 25.555555555555554,
+        "mHpStartMean": 983.6666666666666,
+        "abilitiesPerMemberMean": 1.1111111111111112,
+        "fighterDmgShareMean": 0,
+        "parsedStrikeTotalMean": 66.66666666666667
+      },
+      "vFlee": {
+        "n": 4,
+        "rounds": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "dmgShare": [
+          0.04029605263157895,
+          0.05181347150259067,
+          0.15815085158150852,
+          0.35931174089068824
+        ],
+        "vTaken": [
+          21,
+          53,
+          64,
+          89
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          8,
+          24,
+          24,
+          22
+        ],
+        "meanArmorP": [
+          30.333333333333332,
+          35.333333333333336,
+          39,
+          25
+        ],
+        "mHpStart": [
+          1216,
+          1351,
+          1644,
+          988
+        ],
+        "abilitiesPerMember": [
+          1,
+          2.3333333333333335,
+          0,
+          2.3333333333333335
+        ],
+        "fighterDmgShare": [
+          1,
+          0.7,
+          0.3211009174311927,
+          0.8344827586206897
+        ],
+        "parsedStrikeTotal": [
+          49,
+          70,
+          109,
+          145
+        ],
+        "dmgPerRound": [
+          24.5,
+          23.333333333333332,
+          65,
+          71
+        ],
+        "volleyDmg": [
+          42,
+          0
+        ],
+        "dmgPerRoundMean": 45.95833333333333,
+        "volleyDmgMean": 21,
+        "roundsMean": 3.5,
+        "vTakenMean": 56.75,
+        "partySizeMean": 3,
+        "minArmorPMean": 19.5,
+        "meanArmorPMean": 32.41666666666667,
+        "mHpStartMean": 1299.75,
+        "abilitiesPerMemberMean": 1.4166666666666667,
+        "fighterDmgShareMean": 0.7138959190129706,
+        "parsedStrikeTotalMean": 93.25
+      },
+      "mFlee": {
+        "n": 1,
+        "rounds": [
+          1
+        ],
+        "dmgShare": [
+          0.00749063670411985
+        ],
+        "vTaken": [
+          0
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          15
+        ],
+        "meanArmorP": [
+          26
+        ],
+        "mHpStart": [
+          1068
+        ],
+        "abilitiesPerMember": [
+          4.333333333333333
+        ],
+        "fighterDmgShare": [],
+        "parsedStrikeTotal": [
+          0
+        ],
+        "dmgPerRound": [
+          8
+        ],
+        "volleyDmg": [
+          8
+        ],
+        "dmgPerRoundMean": 8,
+        "volleyDmgMean": 8,
+        "roundsMean": 1,
+        "vTakenMean": 0,
+        "partySizeMean": 3,
+        "minArmorPMean": 15,
+        "meanArmorPMean": 26,
+        "mHpStartMean": 1068,
+        "abilitiesPerMemberMean": 4.333333333333333,
+        "fighterDmgShareMean": null,
+        "parsedStrikeTotalMean": 0
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vKill": 2,
+        "vFlee": 3,
+        "vDie": 1,
+        "mFlee": 1
+      },
+      "seek": {
+        "vDie": 2,
+        "vFlee": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 0.7,
+    "gateSeekShare": 0.3,
+    "lossGateNull": 4,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 3,
+    "monsterByOutcome": {
+      "suburb": {
+        "win": 1,
+        "loss": 0
+      },
+      "congregation": {
+        "win": 2,
+        "loss": 1
+      },
+      "reunion": {
+        "win": 0,
+        "loss": 1
+      },
+      "rerun": {
+        "win": 0,
+        "loss": 1
+      },
+      "eater": {
+        "win": 0,
+        "loss": 2
+      },
+      "cancellation": {
+        "win": 0,
+        "loss": 1
+      },
+      "influencer": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.10188413543786111,
+    "dmgShareByOutcome": {
+      "vKill": null,
+      "vDie": 0.06600344339746757,
+      "vFlee": 0.15239302915159159,
+      "mFlee": 0.00749063670411985
+    },
+    "roundsMean": 5.2,
+    "vTakenMean": 57.6,
+    "dmgPerRoundMean": 43.42333333333333,
+    "volleyFired": 5,
+    "volleyFireShare": 0.5,
+    "volleyDmgMean": 22,
+    "rangedAtEntry": 7,
+    "rangedAtEntryShare": 0.7,
+    "bowOpen": {
+      "alreadyHad": 150,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 1,
+      "craftedFail": 2,
+      "noSource": 81,
+      "spearSeen": 49,
+      "spearPassed": 0
+    },
+    "bowOpenStagedVids": 46,
+    "spearSeen": 49,
+    "spearPassed": 0,
+    "staged": 1,
+    "spearPassRate": 0,
+    "spearAlreadyHad": 8,
+    "spearAlreadyHadVids": [
+      "gen_x89qe9y:hunting_spear",
+      "gen_93637hu:fire_hardened_spear",
+      "gen_56hgy5z:hunting_spear",
+      "stan_kowalski:fire_hardened_spear",
+      "gen_rkgoa3u:hunting_spear",
+      "benoit_lambert:fire_hardened_spear",
+      "gen_m7tyelq:fire_hardened_spear",
+      "gen_1334kmo:fire_hardened_spear"
+    ],
+    "starvation": 0,
+    "starvationVillager": 0,
+    "deathsTotal": 808,
+    "deathsPerEngaged": 80.8,
+    "medianDays": 150,
+    "communityLost": 3,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 7,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "armPair": {
+    "dir": "evidence/2026-11-19/perseed-spearstage-a-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "senseexpedOn": {
+      "true": 8
+    },
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "speargateOn": {
+      "true": 8
+    },
+    "meetings": 10,
+    "wins": 3,
+    "kills": 2,
+    "losses": 7,
+    "vDie": 3,
+    "vFlee": 4,
+    "mFlee": 1,
+    "winShare": 0.3,
+    "killShare": 0.2,
+    "funnel": {
+      "encounters": 27,
+      "joined": 27,
+      "unjoined": 0,
+      "noLaunchPlan": 3,
+      "pairLaunch": 0,
+      "partyAbsent": 2,
+      "evadeExcluded": 12
+    },
+    "byOutcome": {
+      "vKill": {
+        "n": 2,
+        "rounds": [
+          15,
+          12
+        ],
+        "dmgShare": [],
+        "vTaken": [
+          78,
+          45
+        ],
+        "partySize": [
+          3,
+          3
+        ],
+        "minArmorP": [
+          32,
+          24
+        ],
+        "meanArmorP": [
+          40,
+          39
+        ],
+        "mHpStart": [],
+        "abilitiesPerMember": [
+          2.6666666666666665,
+          0
+        ],
+        "fighterDmgShare": [
+          0.5654761904761905,
+          0.3145539906103286
+        ],
+        "parsedStrikeTotal": [
+          168,
+          213
+        ],
+        "dmgPerRound": [
+          98.73333333333333,
+          87.83333333333333
+        ],
+        "volleyDmg": [
+          69,
+          13
+        ],
+        "dmgPerRoundMean": 93.28333333333333,
+        "volleyDmgMean": 41,
+        "roundsMean": 13.5,
+        "vTakenMean": 61.5,
+        "partySizeMean": 3,
+        "minArmorPMean": 28,
+        "meanArmorPMean": 39.5,
+        "mHpStartMean": null,
+        "abilitiesPerMemberMean": 1.3333333333333333,
+        "fighterDmgShareMean": 0.44001509054325955,
+        "parsedStrikeTotalMean": 190.5
+      },
+      "vDie": {
+        "n": 3,
+        "rounds": [
+          3,
+          5,
+          2
+        ],
+        "dmgShare": [
+          0.0638063806380638,
+          0.10599078341013825,
+          0.02821316614420063
+        ],
+        "vTaken": [
+          84,
+          92,
+          50
+        ],
+        "partySize": [
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          9,
+          24,
+          7
+        ],
+        "meanArmorP": [
+          30.666666666666668,
+          36.666666666666664,
+          9.333333333333334
+        ],
+        "mHpStart": [
+          909,
+          1085,
+          957
+        ],
+        "abilitiesPerMember": [
+          0.3333333333333333,
+          0.6666666666666666,
+          2.3333333333333335
+        ],
+        "fighterDmgShare": [
+          0,
+          0,
+          0
+        ],
+        "parsedStrikeTotal": [
+          58,
+          115,
+          27
+        ],
+        "dmgPerRound": [
+          19.333333333333332,
+          23,
+          13.5
+        ],
+        "volleyDmg": [
+          0
+        ],
+        "dmgPerRoundMean": 18.61111111111111,
+        "volleyDmgMean": 0,
+        "roundsMean": 3.3333333333333335,
+        "vTakenMean": 75.33333333333333,
+        "partySizeMean": 3,
+        "minArmorPMean": 13.333333333333334,
+        "meanArmorPMean": 25.555555555555554,
+        "mHpStartMean": 983.6666666666666,
+        "abilitiesPerMemberMean": 1.1111111111111112,
+        "fighterDmgShareMean": 0,
+        "parsedStrikeTotalMean": 66.66666666666667
+      },
+      "vFlee": {
+        "n": 4,
+        "rounds": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "dmgShare": [
+          0.04029605263157895,
+          0.05181347150259067,
+          0.15815085158150852,
+          0.35931174089068824
+        ],
+        "vTaken": [
+          21,
+          53,
+          64,
+          89
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          8,
+          24,
+          24,
+          22
+        ],
+        "meanArmorP": [
+          30.333333333333332,
+          35.333333333333336,
+          39,
+          25
+        ],
+        "mHpStart": [
+          1216,
+          1351,
+          1644,
+          988
+        ],
+        "abilitiesPerMember": [
+          1,
+          2.3333333333333335,
+          0,
+          2.3333333333333335
+        ],
+        "fighterDmgShare": [
+          1,
+          0.7,
+          0.3211009174311927,
+          0.8344827586206897
+        ],
+        "parsedStrikeTotal": [
+          49,
+          70,
+          109,
+          145
+        ],
+        "dmgPerRound": [
+          24.5,
+          23.333333333333332,
+          65,
+          71
+        ],
+        "volleyDmg": [
+          42,
+          0
+        ],
+        "dmgPerRoundMean": 45.95833333333333,
+        "volleyDmgMean": 21,
+        "roundsMean": 3.5,
+        "vTakenMean": 56.75,
+        "partySizeMean": 3,
+        "minArmorPMean": 19.5,
+        "meanArmorPMean": 32.41666666666667,
+        "mHpStartMean": 1299.75,
+        "abilitiesPerMemberMean": 1.4166666666666667,
+        "fighterDmgShareMean": 0.7138959190129706,
+        "parsedStrikeTotalMean": 93.25
+      },
+      "mFlee": {
+        "n": 1,
+        "rounds": [
+          1
+        ],
+        "dmgShare": [
+          0.00749063670411985
+        ],
+        "vTaken": [
+          0
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          15
+        ],
+        "meanArmorP": [
+          26
+        ],
+        "mHpStart": [
+          1068
+        ],
+        "abilitiesPerMember": [
+          4.333333333333333
+        ],
+        "fighterDmgShare": [],
+        "parsedStrikeTotal": [
+          0
+        ],
+        "dmgPerRound": [
+          8
+        ],
+        "volleyDmg": [
+          8
+        ],
+        "dmgPerRoundMean": 8,
+        "volleyDmgMean": 8,
+        "roundsMean": 1,
+        "vTakenMean": 0,
+        "partySizeMean": 3,
+        "minArmorPMean": 15,
+        "meanArmorPMean": 26,
+        "mHpStartMean": 1068,
+        "abilitiesPerMemberMean": 4.333333333333333,
+        "fighterDmgShareMean": null,
+        "parsedStrikeTotalMean": 0
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vKill": 2,
+        "vFlee": 3,
+        "vDie": 1,
+        "mFlee": 1
+      },
+      "seek": {
+        "vDie": 2,
+        "vFlee": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 0.7,
+    "gateSeekShare": 0.3,
+    "lossGateNull": 4,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 3,
+    "monsterByOutcome": {
+      "suburb": {
+        "win": 1,
+        "loss": 0
+      },
+      "congregation": {
+        "win": 2,
+        "loss": 1
+      },
+      "reunion": {
+        "win": 0,
+        "loss": 1
+      },
+      "rerun": {
+        "win": 0,
+        "loss": 1
+      },
+      "eater": {
+        "win": 0,
+        "loss": 2
+      },
+      "cancellation": {
+        "win": 0,
+        "loss": 1
+      },
+      "influencer": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.10188413543786111,
+    "dmgShareByOutcome": {
+      "vKill": null,
+      "vDie": 0.06600344339746757,
+      "vFlee": 0.15239302915159159,
+      "mFlee": 0.00749063670411985
+    },
+    "roundsMean": 5.2,
+    "vTakenMean": 57.6,
+    "dmgPerRoundMean": 43.42333333333333,
+    "volleyFired": 5,
+    "volleyFireShare": 0.5,
+    "volleyDmgMean": 22,
+    "rangedAtEntry": 7,
+    "rangedAtEntryShare": 0.7,
+    "bowOpen": {
+      "alreadyHad": 101,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 1,
+      "craftedFail": 2,
+      "noSource": 130,
+      "spearSeen": 49,
+      "spearPassed": 49
+    },
+    "bowOpenStagedVids": 46,
+    "spearSeen": 49,
+    "spearPassed": 49,
+    "staged": 1,
+    "spearPassRate": 1,
+    "spearAlreadyHad": 0,
+    "spearAlreadyHadVids": [],
+    "starvation": 0,
+    "starvationVillager": 0,
+    "deathsTotal": 808,
+    "deathsPerEngaged": 80.8,
+    "medianDays": 150,
+    "communityLost": 3,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 7,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "ctlMeetings": [
+    {
+      "seed": 107044,
+      "day": 134,
+      "vid": "visjoin_128",
+      "mid": "congregation",
+      "mHpStart": 909,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 3,
+      "vTaken": 84,
+      "mDealt": 58,
+      "dmgShare": 0.0638063806380638,
+      "dmgPerRound": 19.333333333333332,
+      "volley": {
+        "shots": 0,
+        "hits": 0,
+        "dmg": 0
+      },
+      "rangedId": "crossbow",
+      "ammoAtEntry": 0,
+      "planParty": [
+        "quinn_murphy",
+        "stan_kowalski",
+        "visjoin_109"
+      ],
+      "allyVids": [
+        "quinn_murphy",
+        "stan_kowalski"
+      ],
+      "joiners": [
+        "quinn_murphy"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "visjoin_128": {
+          "armed": true,
+          "armored": true,
+          "armorP": 9
+        },
+        "quinn_murphy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "stan_kowalski": {
+          "armed": true,
+          "armored": true,
+          "armorP": 28
+        },
+        "visjoin_109": {
+          "armed": true,
+          "armored": true,
+          "armorP": 8
+        }
+      },
+      "minArmorP": 9,
+      "meanArmorP": 30.666666666666668,
+      "parsedStrikeTotal": 58,
+      "parsedAttributed": 28,
+      "dmgByVid": {
+        "quinn_murphy": 28
+      },
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "visjoin_128": [],
+        "quinn_murphy": [
+          "bloodhound"
+        ],
+        "stan_kowalski": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Willow has Crossbow but no crossbow bolts — the string stays drawn, useless.",
+        "R1: Willow stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Willow's gear absorbs 29.",
+        "R1: Absolution hits Willow for 28 (41 left)",
+        "R2: Willow strikes for 30 (x1.3) (879 left)",
+        "Willow's gear absorbs 27.",
+        "R2: Absolution hits Willow for 26 (15 left)",
+        "Willow is losing — shouts for help! Quinn charges in!",
+        "R3: Willow argues theology — transubstantiation, the liturgy of the lost. It MUST engage.",
+        "R3: Quinn strikes for 28 (x1.3) (851 left)",
+        "Willow's gear absorbs 32.",
+        "R3: Absolution hits Willow for 30 (0 left)"
+      ]
+    },
+    {
+      "seed": 107044,
+      "day": 134,
+      "vid": "stan_kowalski",
+      "mid": "reunion",
+      "mHpStart": 1216,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 21,
+      "mDealt": 49,
+      "dmgShare": 0.04029605263157895,
+      "dmgPerRound": 24.5,
+      "volley": null,
+      "rangedId": "fire_hardened_spear",
+      "ammoAtEntry": 0,
+      "planParty": [
+        "quinn_murphy",
+        "visjoin_109"
+      ],
+      "allyVids": [
+        "quinn_murphy",
+        "visjoin_109"
+      ],
+      "joiners": [
+        "quinn_murphy"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "stan_kowalski": {
+          "armed": true,
+          "armored": true,
+          "armorP": 28
+        },
+        "quinn_murphy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "visjoin_109": {
+          "armed": true,
+          "armored": true,
+          "armorP": 8
+        }
+      },
+      "minArmorP": 8,
+      "meanArmorP": 30.333333333333332,
+      "parsedStrikeTotal": 49,
+      "parsedAttributed": 49,
+      "dmgByVid": {
+        "stan_kowalski": 49
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 1,
+      "memberAbilities": {
+        "stan_kowalski": [],
+        "quinn_murphy": [
+          "bloodhound"
+        ],
+        "visjoin_109": [
+          "night_eyes",
+          "lucky_rock"
+        ]
+      },
+      "abilityTokens": [
+        "Tripwire"
+      ],
+      "log": [
+        "Stan had strung a wire at ankle height before it closed — the first rush will eat dirt. (Tripwire)",
+        "R1: Big Loud hesitates — Stan bought a breath.",
+        "R1: Stan strikes for 25 (x1.3) (1191 left)",
+        "R1: Stan strikes for 24 (x1.3) (1167 left)",
+        "Stan's gear absorbs 55.",
+        "R2: Your Move hits Stan for 21 (11 left)",
+        "R2: Stan does something they have never done — stands on one foot and recites a poem mid-fight. The Reunion falters; it has nothing to wear. (Novelty.)",
+        "Stan is losing — shouts for help! Quinn charges in!",
+        "Quinn answered Stan's shout, but Stan is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 70,
+      "vid": "meera_reddy",
+      "mid": "rerun",
+      "mHpStart": 1351,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 3,
+      "vTaken": 53,
+      "mDealt": 70,
+      "dmgShare": 0.05181347150259067,
+      "dmgPerRound": 23.333333333333332,
+      "volley": null,
+      "rangedId": null,
+      "ammoAtEntry": 0,
+      "planParty": [
+        "emma_larsen",
+        "theo_lindqvist"
+      ],
+      "allyVids": [
+        "emma_larsen",
+        "theo_lindqvist"
+      ],
+      "joiners": [
+        "emma_larsen",
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "meera_reddy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 31
+        },
+        "emma_larsen": {
+          "armed": true,
+          "armored": true,
+          "armorP": 51
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 35.333333333333336,
+      "parsedStrikeTotal": 70,
+      "parsedAttributed": 70,
+      "dmgByVid": {
+        "meera_reddy": 49,
+        "emma_larsen": 21
+      },
+      "fighterDmgShare": 0.7,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "meera_reddy": [
+          "green_whisper",
+          "lucky_rock"
+        ],
+        "emma_larsen": [
+          "iron_stomach",
+          "echo_location",
+          "dowsing",
+          "rage",
+          "green_whisper"
+        ],
+        "theo_lindqvist": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Meera walks straight into Big Loud. No avoiding it.",
+        "R1: Meera stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R1: the clapperboard holds — take 12, 4 rounds to the rewind.",
+        "Meera's gear absorbs 40.",
+        "R1: Notes Session hits Meera for 16 (58 left)",
+        "R2: Meera strikes for 23 (1328 left)",
+        "R2: the clapperboard holds — take 12, 3 rounds to the rewind.",
+        "Meera's gear absorbs 30.",
+        "R2: Cold Open hits Meera for 12 (46 left)",
+        "Meera is losing — shouts for help! Emma charges in!",
+        "R3: Meera strikes for 26 (1302 left)",
+        "R3: Emma strikes for 21 (1281 left)",
+        "R3: the clapperboard holds — take 12, 2 rounds to the rewind.",
+        "Meera's gear absorbs 63.",
+        "R3: Take Twelve hits Meera for 25 (21 left)",
+        "Meera is still losing — shouts again! Theo charges in!",
+        "Emma answered Meera's shout, but Meera is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 84,
+      "vid": "visjoin_72",
+      "mid": "cancellation",
+      "mHpStart": 1644,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 64,
+      "mDealt": 260,
+      "dmgShare": 0.15815085158150852,
+      "dmgPerRound": 65,
+      "volley": {
+        "shots": 4,
+        "hits": 3,
+        "dmg": 42
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 5,
+      "planParty": [
+        "theo_lindqvist",
+        "benoit_lambert"
+      ],
+      "allyVids": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "joiners": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "visjoin_72": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "benoit_lambert": {
+          "armed": true,
+          "armored": true,
+          "armorP": 38
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 39,
+      "parsedStrikeTotal": 109,
+      "parsedAttributed": 109,
+      "dmgByVid": {
+        "visjoin_72": 35,
+        "benoit_lambert": 74
+      },
+      "fighterDmgShare": 0.3211009174311927,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "visjoin_72": [],
+        "benoit_lambert": [],
+        "theo_lindqvist": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Jenny walks straight into The Cancellation. No avoiding it.",
+        "Jenny sees The Cancellation coming and nocks an arrow — the fight opens at range (4 shots).",
+        "  loosed — it takes The Cancellation for 14 (1630 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Cancellation for 14 (1616 left).",
+        "  loosed — it takes The Cancellation for 14 (1602 left).",
+        "Jenny lowers the bow — The Cancellation is on them now. (3/4 hit)",
+        "R1: Jenny strikes for 19 (1583 left)",
+        "R1: the stamp descends over Jenny (1/3). Red ink.",
+        "Jenny's gear absorbs 61.",
+        "R1: Pilot Season hits Jenny for 16 (66 left)",
+        "R2: Jenny strikes for 16 (1567 left)",
+        "R2: the stamp descends over Jenny (2/3). Red ink.",
+        "Jenny's gear absorbs 64.",
+        "R2: Under Review hits Jenny for 18 (48 left)",
+        "Jenny is losing — shouts for help! Benoit charges in!",
+        "R3: Jenny stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Benoit strikes for 74 (1493 left)",
+        "R3: the stamp descends over Jenny (3/3). Red ink.",
+        "Jenny's gear absorbs 50."
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 88,
+      "vid": "visjoin_72",
+      "mid": "congregation",
+      "mHpStart": null,
+      "outcome": "vKill",
+      "win": true,
+      "rounds": 12,
+      "vTaken": 45,
+      "mDealt": 1054,
+      "dmgShare": null,
+      "dmgPerRound": 87.83333333333333,
+      "volley": {
+        "shots": 3,
+        "hits": 1,
+        "dmg": 13
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 6,
+      "planParty": [
+        "theo_lindqvist",
+        "benoit_lambert"
+      ],
+      "allyVids": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "joiners": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "visjoin_72": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "benoit_lambert": {
+          "armed": true,
+          "armored": true,
+          "armorP": 38
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 39,
+      "parsedStrikeTotal": 213,
+      "parsedAttributed": 213,
+      "dmgByVid": {
+        "visjoin_72": 67,
+        "benoit_lambert": 146
+      },
+      "fighterDmgShare": 0.3145539906103286,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "visjoin_72": [],
+        "benoit_lambert": [],
+        "theo_lindqvist": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Jenny walks straight into The Congregation. No avoiding it.",
+        "Jenny sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Congregation for 13 (1004 left).",
+        "Jenny lowers the bow — The Congregation is on them now. (1/3 hit)",
+        "R1: Jenny strikes for 17 (987 left)",
+        "Jenny's gear absorbs 60.",
+        "R1: Absolution hits Jenny for 9 (78 left)",
+        "R2: Jenny strikes for 18 (969 left)",
+        "Jenny's gear absorbs 52.",
+        "R2: Absolution hits Jenny for 8 (70 left)",
+        "Jenny is losing — shouts for help! Benoit charges in!",
+        "R3: Jenny strikes for 16 (953 left)",
+        "R3: Benoit strikes for 72 (881 left)",
+        "Benoit's gear absorbs 45.",
+        "R3: Absolution hits Benoit for 10 (67 left)",
+        "Jenny is still losing — shouts again! Theo charges in!",
+        "R4: Jenny strikes for 16 (865 left)",
+        "R4: Benoit strikes for 74 (791 left)"
+      ]
+    },
+    {
+      "seed": 107048,
+      "day": 90,
+      "vid": "chloe_dubois",
+      "mid": "congregation",
+      "mHpStart": 1068,
+      "outcome": "mFlee",
+      "win": true,
+      "rounds": 1,
+      "vTaken": 0,
+      "mDealt": 8,
+      "dmgShare": 0.00749063670411985,
+      "dmgPerRound": 8,
+      "volley": {
+        "shots": 3,
+        "hits": 1,
+        "dmg": 8
+      },
+      "rangedId": "sling",
+      "ammoAtEntry": 6,
+      "planParty": [
+        "gen_xqkd6ft",
+        "gen_shbz8ol",
+        "gen_ns263pg"
+      ],
+      "allyVids": [
+        "gen_ns263pg",
+        "gen_shbz8ol"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "chloe_dubois": {
+          "armed": true,
+          "armored": true,
+          "armorP": 39
+        },
+        "gen_ns263pg": {
+          "armed": true,
+          "armored": true,
+          "armorP": 15
+        },
+        "gen_shbz8ol": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 15,
+      "meanArmorP": 26,
+      "parsedStrikeTotal": 0,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": null,
+      "abilitiesPerMember": 4.333333333333333,
+      "memberAbilities": {
+        "chloe_dubois": [
+          "green_whisper",
+          "scream_cheese"
+        ],
+        "gen_ns263pg": [
+          "green_whisper",
+          "beard_moss",
+          "pyrokinesis",
+          "harvest_table",
+          "green_thumb",
+          "photosynthesis"
+        ],
+        "gen_shbz8ol": [
+          "green_whisper",
+          "beard_moss",
+          "rage",
+          "green_thumb",
+          "cornucopia"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Chloe walks straight into The Congregation. No avoiding it.",
+        "Chloe sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed — it takes The Congregation for 8 (1060 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "Chloe lowers the bow — The Congregation is on them now. (1/3 hit)",
+        "R1: Chloe walks in open-handed, talking — low, steady, unafraid. And impossibly, it listens. It stands down. (Peacemaker: Walk In)"
+      ]
+    }
+  ],
+  "armMeetings": [
+    {
+      "seed": 107044,
+      "day": 134,
+      "vid": "visjoin_128",
+      "mid": "congregation",
+      "mHpStart": 909,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 3,
+      "vTaken": 84,
+      "mDealt": 58,
+      "dmgShare": 0.0638063806380638,
+      "dmgPerRound": 19.333333333333332,
+      "volley": {
+        "shots": 0,
+        "hits": 0,
+        "dmg": 0
+      },
+      "rangedId": "crossbow",
+      "ammoAtEntry": 0,
+      "planParty": [
+        "quinn_murphy",
+        "stan_kowalski",
+        "visjoin_109"
+      ],
+      "allyVids": [
+        "quinn_murphy",
+        "stan_kowalski"
+      ],
+      "joiners": [
+        "quinn_murphy"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "visjoin_128": {
+          "armed": true,
+          "armored": true,
+          "armorP": 9
+        },
+        "quinn_murphy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "stan_kowalski": {
+          "armed": true,
+          "armored": true,
+          "armorP": 28
+        },
+        "visjoin_109": {
+          "armed": true,
+          "armored": true,
+          "armorP": 8
+        }
+      },
+      "minArmorP": 9,
+      "meanArmorP": 30.666666666666668,
+      "parsedStrikeTotal": 58,
+      "parsedAttributed": 28,
+      "dmgByVid": {
+        "quinn_murphy": 28
+      },
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "visjoin_128": [],
+        "quinn_murphy": [
+          "bloodhound"
+        ],
+        "stan_kowalski": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Willow has Crossbow but no crossbow bolts — the string stays drawn, useless.",
+        "R1: Willow stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Willow's gear absorbs 29.",
+        "R1: Absolution hits Willow for 28 (41 left)",
+        "R2: Willow strikes for 30 (x1.3) (879 left)",
+        "Willow's gear absorbs 27.",
+        "R2: Absolution hits Willow for 26 (15 left)",
+        "Willow is losing — shouts for help! Quinn charges in!",
+        "R3: Willow argues theology — transubstantiation, the liturgy of the lost. It MUST engage.",
+        "R3: Quinn strikes for 28 (x1.3) (851 left)",
+        "Willow's gear absorbs 32.",
+        "R3: Absolution hits Willow for 30 (0 left)"
+      ]
+    },
+    {
+      "seed": 107044,
+      "day": 134,
+      "vid": "stan_kowalski",
+      "mid": "reunion",
+      "mHpStart": 1216,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 21,
+      "mDealt": 49,
+      "dmgShare": 0.04029605263157895,
+      "dmgPerRound": 24.5,
+      "volley": null,
+      "rangedId": "fire_hardened_spear",
+      "ammoAtEntry": 0,
+      "planParty": [
+        "quinn_murphy",
+        "visjoin_109"
+      ],
+      "allyVids": [
+        "quinn_murphy",
+        "visjoin_109"
+      ],
+      "joiners": [
+        "quinn_murphy"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "stan_kowalski": {
+          "armed": true,
+          "armored": true,
+          "armorP": 28
+        },
+        "quinn_murphy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "visjoin_109": {
+          "armed": true,
+          "armored": true,
+          "armorP": 8
+        }
+      },
+      "minArmorP": 8,
+      "meanArmorP": 30.333333333333332,
+      "parsedStrikeTotal": 49,
+      "parsedAttributed": 49,
+      "dmgByVid": {
+        "stan_kowalski": 49
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 1,
+      "memberAbilities": {
+        "stan_kowalski": [],
+        "quinn_murphy": [
+          "bloodhound"
+        ],
+        "visjoin_109": [
+          "night_eyes",
+          "lucky_rock"
+        ]
+      },
+      "abilityTokens": [
+        "Tripwire"
+      ],
+      "log": [
+        "Stan had strung a wire at ankle height before it closed — the first rush will eat dirt. (Tripwire)",
+        "R1: Big Loud hesitates — Stan bought a breath.",
+        "R1: Stan strikes for 25 (x1.3) (1191 left)",
+        "R1: Stan strikes for 24 (x1.3) (1167 left)",
+        "Stan's gear absorbs 55.",
+        "R2: Your Move hits Stan for 21 (11 left)",
+        "R2: Stan does something they have never done — stands on one foot and recites a poem mid-fight. The Reunion falters; it has nothing to wear. (Novelty.)",
+        "Stan is losing — shouts for help! Quinn charges in!",
+        "Quinn answered Stan's shout, but Stan is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 70,
+      "vid": "meera_reddy",
+      "mid": "rerun",
+      "mHpStart": 1351,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 3,
+      "vTaken": 53,
+      "mDealt": 70,
+      "dmgShare": 0.05181347150259067,
+      "dmgPerRound": 23.333333333333332,
+      "volley": null,
+      "rangedId": null,
+      "ammoAtEntry": 0,
+      "planParty": [
+        "emma_larsen",
+        "theo_lindqvist"
+      ],
+      "allyVids": [
+        "emma_larsen",
+        "theo_lindqvist"
+      ],
+      "joiners": [
+        "emma_larsen",
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "meera_reddy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 31
+        },
+        "emma_larsen": {
+          "armed": true,
+          "armored": true,
+          "armorP": 51
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 35.333333333333336,
+      "parsedStrikeTotal": 70,
+      "parsedAttributed": 70,
+      "dmgByVid": {
+        "meera_reddy": 49,
+        "emma_larsen": 21
+      },
+      "fighterDmgShare": 0.7,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "meera_reddy": [
+          "green_whisper",
+          "lucky_rock"
+        ],
+        "emma_larsen": [
+          "iron_stomach",
+          "echo_location",
+          "dowsing",
+          "rage",
+          "green_whisper"
+        ],
+        "theo_lindqvist": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Meera walks straight into Big Loud. No avoiding it.",
+        "R1: Meera stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R1: the clapperboard holds — take 12, 4 rounds to the rewind.",
+        "Meera's gear absorbs 40.",
+        "R1: Notes Session hits Meera for 16 (58 left)",
+        "R2: Meera strikes for 23 (1328 left)",
+        "R2: the clapperboard holds — take 12, 3 rounds to the rewind.",
+        "Meera's gear absorbs 30.",
+        "R2: Cold Open hits Meera for 12 (46 left)",
+        "Meera is losing — shouts for help! Emma charges in!",
+        "R3: Meera strikes for 26 (1302 left)",
+        "R3: Emma strikes for 21 (1281 left)",
+        "R3: the clapperboard holds — take 12, 2 rounds to the rewind.",
+        "Meera's gear absorbs 63.",
+        "R3: Take Twelve hits Meera for 25 (21 left)",
+        "Meera is still losing — shouts again! Theo charges in!",
+        "Emma answered Meera's shout, but Meera is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 84,
+      "vid": "visjoin_72",
+      "mid": "cancellation",
+      "mHpStart": 1644,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 64,
+      "mDealt": 260,
+      "dmgShare": 0.15815085158150852,
+      "dmgPerRound": 65,
+      "volley": {
+        "shots": 4,
+        "hits": 3,
+        "dmg": 42
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 5,
+      "planParty": [
+        "theo_lindqvist",
+        "benoit_lambert"
+      ],
+      "allyVids": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "joiners": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "visjoin_72": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "benoit_lambert": {
+          "armed": true,
+          "armored": true,
+          "armorP": 38
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 39,
+      "parsedStrikeTotal": 109,
+      "parsedAttributed": 109,
+      "dmgByVid": {
+        "visjoin_72": 35,
+        "benoit_lambert": 74
+      },
+      "fighterDmgShare": 0.3211009174311927,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "visjoin_72": [],
+        "benoit_lambert": [],
+        "theo_lindqvist": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Jenny walks straight into The Cancellation. No avoiding it.",
+        "Jenny sees The Cancellation coming and nocks an arrow — the fight opens at range (4 shots).",
+        "  loosed — it takes The Cancellation for 14 (1630 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Cancellation for 14 (1616 left).",
+        "  loosed — it takes The Cancellation for 14 (1602 left).",
+        "Jenny lowers the bow — The Cancellation is on them now. (3/4 hit)",
+        "R1: Jenny strikes for 19 (1583 left)",
+        "R1: the stamp descends over Jenny (1/3). Red ink.",
+        "Jenny's gear absorbs 61.",
+        "R1: Pilot Season hits Jenny for 16 (66 left)",
+        "R2: Jenny strikes for 16 (1567 left)",
+        "R2: the stamp descends over Jenny (2/3). Red ink.",
+        "Jenny's gear absorbs 64.",
+        "R2: Under Review hits Jenny for 18 (48 left)",
+        "Jenny is losing — shouts for help! Benoit charges in!",
+        "R3: Jenny stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Benoit strikes for 74 (1493 left)",
+        "R3: the stamp descends over Jenny (3/3). Red ink.",
+        "Jenny's gear absorbs 50."
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 88,
+      "vid": "visjoin_72",
+      "mid": "congregation",
+      "mHpStart": null,
+      "outcome": "vKill",
+      "win": true,
+      "rounds": 12,
+      "vTaken": 45,
+      "mDealt": 1054,
+      "dmgShare": null,
+      "dmgPerRound": 87.83333333333333,
+      "volley": {
+        "shots": 3,
+        "hits": 1,
+        "dmg": 13
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 6,
+      "planParty": [
+        "theo_lindqvist",
+        "benoit_lambert"
+      ],
+      "allyVids": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "joiners": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "visjoin_72": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "benoit_lambert": {
+          "armed": true,
+          "armored": true,
+          "armorP": 38
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 39,
+      "parsedStrikeTotal": 213,
+      "parsedAttributed": 213,
+      "dmgByVid": {
+        "visjoin_72": 67,
+        "benoit_lambert": 146
+      },
+      "fighterDmgShare": 0.3145539906103286,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "visjoin_72": [],
+        "benoit_lambert": [],
+        "theo_lindqvist": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Jenny walks straight into The Congregation. No avoiding it.",
+        "Jenny sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Congregation for 13 (1004 left).",
+        "Jenny lowers the bow — The Congregation is on them now. (1/3 hit)",
+        "R1: Jenny strikes for 17 (987 left)",
+        "Jenny's gear absorbs 60.",
+        "R1: Absolution hits Jenny for 9 (78 left)",
+        "R2: Jenny strikes for 18 (969 left)",
+        "Jenny's gear absorbs 52.",
+        "R2: Absolution hits Jenny for 8 (70 left)",
+        "Jenny is losing — shouts for help! Benoit charges in!",
+        "R3: Jenny strikes for 16 (953 left)",
+        "R3: Benoit strikes for 72 (881 left)",
+        "Benoit's gear absorbs 45.",
+        "R3: Absolution hits Benoit for 10 (67 left)",
+        "Jenny is still losing — shouts again! Theo charges in!",
+        "R4: Jenny strikes for 16 (865 left)",
+        "R4: Benoit strikes for 74 (791 left)"
+      ]
+    },
+    {
+      "seed": 107048,
+      "day": 90,
+      "vid": "chloe_dubois",
+      "mid": "congregation",
+      "mHpStart": 1068,
+      "outcome": "mFlee",
+      "win": true,
+      "rounds": 1,
+      "vTaken": 0,
+      "mDealt": 8,
+      "dmgShare": 0.00749063670411985,
+      "dmgPerRound": 8,
+      "volley": {
+        "shots": 3,
+        "hits": 1,
+        "dmg": 8
+      },
+      "rangedId": "sling",
+      "ammoAtEntry": 6,
+      "planParty": [
+        "gen_xqkd6ft",
+        "gen_shbz8ol",
+        "gen_ns263pg"
+      ],
+      "allyVids": [
+        "gen_ns263pg",
+        "gen_shbz8ol"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "chloe_dubois": {
+          "armed": true,
+          "armored": true,
+          "armorP": 39
+        },
+        "gen_ns263pg": {
+          "armed": true,
+          "armored": true,
+          "armorP": 15
+        },
+        "gen_shbz8ol": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 15,
+      "meanArmorP": 26,
+      "parsedStrikeTotal": 0,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": null,
+      "abilitiesPerMember": 4.333333333333333,
+      "memberAbilities": {
+        "chloe_dubois": [
+          "green_whisper",
+          "scream_cheese"
+        ],
+        "gen_ns263pg": [
+          "green_whisper",
+          "beard_moss",
+          "pyrokinesis",
+          "harvest_table",
+          "green_thumb",
+          "photosynthesis"
+        ],
+        "gen_shbz8ol": [
+          "green_whisper",
+          "beard_moss",
+          "rage",
+          "green_thumb",
+          "cornucopia"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Chloe walks straight into The Congregation. No avoiding it.",
+        "Chloe sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed — it takes The Congregation for 8 (1060 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "Chloe lowers the bow — The Congregation is on them now. (1/3 hit)",
+        "R1: Chloe walks in open-handed, talking — low, steady, unafraid. And impossibly, it listens. It stands down. (Peacemaker: Walk In)"
+      ]
+    }
+  ],
+  "ctlPairMeetings": [
+    {
+      "seed": 107041,
+      "day": 106,
+      "vid": "jovan_milic",
+      "mid": "suburb",
+      "mHpStart": null,
+      "outcome": "vKill",
+      "win": true,
+      "rounds": 15,
+      "vTaken": 78,
+      "mDealt": 1481,
+      "dmgShare": null,
+      "dmgPerRound": 98.73333333333333,
+      "volley": {
+        "shots": 4,
+        "hits": 4,
+        "dmg": 69
+      },
+      "rangedId": "bow",
+      "ammoAtEntry": 8,
+      "planParty": [
+        "gen_lj8dmol"
+      ],
+      "allyVids": [
+        "gen_lj8dmol",
+        "olivia_bennett"
+      ],
+      "joiners": [
+        "gen_lj8dmol",
+        "olivia_bennett"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "jovan_milic": {
+          "armed": true,
+          "armored": true,
+          "armorP": 32
+        },
+        "gen_lj8dmol": {
+          "armed": true,
+          "armored": true,
+          "armorP": 56
+        },
+        "olivia_bennett": {
+          "armed": true,
+          "armored": true,
+          "armorP": 32
+        }
+      },
+      "minArmorP": 32,
+      "meanArmorP": 40,
+      "parsedStrikeTotal": 168,
+      "parsedAttributed": 168,
+      "dmgByVid": {
+        "jovan_milic": 95,
+        "gen_lj8dmol": 73
+      },
+      "fighterDmgShare": 0.5654761904761905,
+      "abilitiesPerMember": 2.6666666666666665,
+      "memberAbilities": {
+        "jovan_milic": [
+          "the_touch",
+          "green_thumb"
+        ],
+        "gen_lj8dmol": [
+          "iron_stomach",
+          "echo_location",
+          "rage",
+          "pyrokinesis",
+          "dowsing",
+          "adrenaline_control"
+        ],
+        "olivia_bennett": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Jovan walks straight into The Suburb. No avoiding it.",
+        "Jovan sees The Suburb coming and nocks an arrow — the fight opens at range (4 shots).",
+        "  loosed — it takes The Suburb for 16 (1409 left).",
+        "  loosed — it takes The Suburb for 19 (1390 left).",
+        "  loosed — it takes The Suburb for 17 (1373 left).",
+        "  loosed — it takes The Suburb for 17 (1356 left).",
+        "Jovan lowers the bow — The Suburb is on them now. (4/4 hit)",
+        "R1: Jovan strikes for 25 (1331 left)",
+        "Jovan's gear absorbs 38.",
+        "R1: Property Tax hits Jovan for 9 (91 left)",
+        "R2: Jovan strikes for 25 (1306 left)",
+        "Jovan's gear absorbs 36.",
+        "R2: Property Tax hits Jovan for 8 (83 left)",
+        "Jovan is losing — shouts for help! Dina charges in!",
+        "R3: Jovan strikes for 22 (1284 left)",
+        "R3: Dina strikes for 73 (x1.3) (1211 left)",
+        "Jovan's gear absorbs 34.",
+        "R3: Property Tax hits Jovan for 8 (75 left)",
+        "Jovan is still losing — shouts again! Olivia charges in!",
+        "R4: Jovan strikes for 23 (1188 left)"
+      ]
+    },
+    {
+      "seed": 107044,
+      "day": 134,
+      "vid": "visjoin_128",
+      "mid": "congregation",
+      "mHpStart": 909,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 3,
+      "vTaken": 84,
+      "mDealt": 58,
+      "dmgShare": 0.0638063806380638,
+      "dmgPerRound": 19.333333333333332,
+      "volley": {
+        "shots": 0,
+        "hits": 0,
+        "dmg": 0
+      },
+      "rangedId": "crossbow",
+      "ammoAtEntry": 0,
+      "planParty": [
+        "quinn_murphy",
+        "stan_kowalski",
+        "visjoin_109"
+      ],
+      "allyVids": [
+        "quinn_murphy",
+        "stan_kowalski"
+      ],
+      "joiners": [
+        "quinn_murphy"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "visjoin_128": {
+          "armed": true,
+          "armored": true,
+          "armorP": 9
+        },
+        "quinn_murphy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "stan_kowalski": {
+          "armed": true,
+          "armored": true,
+          "armorP": 28
+        },
+        "visjoin_109": {
+          "armed": true,
+          "armored": true,
+          "armorP": 8
+        }
+      },
+      "minArmorP": 9,
+      "meanArmorP": 30.666666666666668,
+      "parsedStrikeTotal": 58,
+      "parsedAttributed": 28,
+      "dmgByVid": {
+        "quinn_murphy": 28
+      },
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "visjoin_128": [],
+        "quinn_murphy": [
+          "bloodhound"
+        ],
+        "stan_kowalski": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Willow has Crossbow but no crossbow bolts — the string stays drawn, useless.",
+        "R1: Willow stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Willow's gear absorbs 29.",
+        "R1: Absolution hits Willow for 28 (41 left)",
+        "R2: Willow strikes for 30 (x1.3) (879 left)",
+        "Willow's gear absorbs 27.",
+        "R2: Absolution hits Willow for 26 (15 left)",
+        "Willow is losing — shouts for help! Quinn charges in!",
+        "R3: Willow argues theology — transubstantiation, the liturgy of the lost. It MUST engage.",
+        "R3: Quinn strikes for 28 (x1.3) (851 left)",
+        "Willow's gear absorbs 32.",
+        "R3: Absolution hits Willow for 30 (0 left)"
+      ]
+    },
+    {
+      "seed": 107044,
+      "day": 134,
+      "vid": "stan_kowalski",
+      "mid": "reunion",
+      "mHpStart": 1216,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 21,
+      "mDealt": 49,
+      "dmgShare": 0.04029605263157895,
+      "dmgPerRound": 24.5,
+      "volley": null,
+      "rangedId": "fire_hardened_spear",
+      "ammoAtEntry": 0,
+      "planParty": [
+        "quinn_murphy",
+        "visjoin_109"
+      ],
+      "allyVids": [
+        "quinn_murphy",
+        "visjoin_109"
+      ],
+      "joiners": [
+        "quinn_murphy"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "stan_kowalski": {
+          "armed": true,
+          "armored": true,
+          "armorP": 28
+        },
+        "quinn_murphy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "visjoin_109": {
+          "armed": true,
+          "armored": true,
+          "armorP": 8
+        }
+      },
+      "minArmorP": 8,
+      "meanArmorP": 30.333333333333332,
+      "parsedStrikeTotal": 49,
+      "parsedAttributed": 49,
+      "dmgByVid": {
+        "stan_kowalski": 49
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 1,
+      "memberAbilities": {
+        "stan_kowalski": [],
+        "quinn_murphy": [
+          "bloodhound"
+        ],
+        "visjoin_109": [
+          "night_eyes",
+          "lucky_rock"
+        ]
+      },
+      "abilityTokens": [
+        "Tripwire"
+      ],
+      "log": [
+        "Stan had strung a wire at ankle height before it closed — the first rush will eat dirt. (Tripwire)",
+        "R1: Big Loud hesitates — Stan bought a breath.",
+        "R1: Stan strikes for 25 (x1.3) (1191 left)",
+        "R1: Stan strikes for 24 (x1.3) (1167 left)",
+        "Stan's gear absorbs 55.",
+        "R2: Your Move hits Stan for 21 (11 left)",
+        "R2: Stan does something they have never done — stands on one foot and recites a poem mid-fight. The Reunion falters; it has nothing to wear. (Novelty.)",
+        "Stan is losing — shouts for help! Quinn charges in!",
+        "Quinn answered Stan's shout, but Stan is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 70,
+      "vid": "meera_reddy",
+      "mid": "rerun",
+      "mHpStart": 1351,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 3,
+      "vTaken": 53,
+      "mDealt": 70,
+      "dmgShare": 0.05181347150259067,
+      "dmgPerRound": 23.333333333333332,
+      "volley": null,
+      "rangedId": null,
+      "ammoAtEntry": 0,
+      "planParty": [
+        "emma_larsen",
+        "theo_lindqvist"
+      ],
+      "allyVids": [
+        "emma_larsen",
+        "theo_lindqvist"
+      ],
+      "joiners": [
+        "emma_larsen",
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "meera_reddy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 31
+        },
+        "emma_larsen": {
+          "armed": true,
+          "armored": true,
+          "armorP": 51
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 35.333333333333336,
+      "parsedStrikeTotal": 70,
+      "parsedAttributed": 70,
+      "dmgByVid": {
+        "meera_reddy": 49,
+        "emma_larsen": 21
+      },
+      "fighterDmgShare": 0.7,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "meera_reddy": [
+          "green_whisper",
+          "lucky_rock"
+        ],
+        "emma_larsen": [
+          "iron_stomach",
+          "echo_location",
+          "dowsing",
+          "rage",
+          "green_whisper"
+        ],
+        "theo_lindqvist": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Meera walks straight into Big Loud. No avoiding it.",
+        "R1: Meera stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R1: the clapperboard holds — take 12, 4 rounds to the rewind.",
+        "Meera's gear absorbs 40.",
+        "R1: Notes Session hits Meera for 16 (58 left)",
+        "R2: Meera strikes for 23 (1328 left)",
+        "R2: the clapperboard holds — take 12, 3 rounds to the rewind.",
+        "Meera's gear absorbs 30.",
+        "R2: Cold Open hits Meera for 12 (46 left)",
+        "Meera is losing — shouts for help! Emma charges in!",
+        "R3: Meera strikes for 26 (1302 left)",
+        "R3: Emma strikes for 21 (1281 left)",
+        "R3: the clapperboard holds — take 12, 2 rounds to the rewind.",
+        "Meera's gear absorbs 63.",
+        "R3: Take Twelve hits Meera for 25 (21 left)",
+        "Meera is still losing — shouts again! Theo charges in!",
+        "Emma answered Meera's shout, but Meera is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 75,
+      "vid": "meera_reddy",
+      "mid": "eater",
+      "mHpStart": 1085,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 5,
+      "vTaken": 92,
+      "mDealt": 115,
+      "dmgShare": 0.10599078341013825,
+      "dmgPerRound": 23,
+      "volley": null,
+      "rangedId": null,
+      "ammoAtEntry": 0,
+      "planParty": [
+        "theo_lindqvist"
+      ],
+      "allyVids": [
+        "theo_lindqvist",
+        "visjoin_72"
+      ],
+      "joiners": [
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "meera_reddy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 31
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        },
+        "visjoin_72": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 36.666666666666664,
+      "parsedStrikeTotal": 115,
+      "parsedAttributed": 19,
+      "dmgByVid": {
+        "theo_lindqvist": 19
+      },
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 0.6666666666666666,
+      "memberAbilities": {
+        "meera_reddy": [
+          "green_whisper",
+          "lucky_rock"
+        ],
+        "theo_lindqvist": [],
+        "visjoin_72": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Meera's gear absorbs 49.",
+        "R1: Smack-Rush hits Meera for 14 (57 left)",
+        "R1: Meera stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Meera's gear absorbs 50.",
+        "R2: Gorge hits Meera for 15 (62 left)",
+        "R2: Meera strikes for 23 (1062 left)",
+        "Meera holds the line — they know how this one is fought, and have not had their turn to prove it.",
+        "R3: Meera strikes for 23 (1039 left)",
+        "Meera's gear absorbs 57.",
+        "R3: Gorge hits Meera for 17 (45 left)",
+        "Meera holds the line — they know how this one is fought, and have not had their turn to prove it.",
+        "Meera's gear absorbs 72.",
+        "R4: Smack-Rush hits Meera for 22 (23 left)",
+        "R4: Meera strikes for 26 (1013 left)",
+        "Meera is losing — shouts for help! Theo charges in!",
+        "R5: Meera strikes for 24 (989 left)",
+        "R5: Theo strikes for 19 (x1.3) (970 left)",
+        "Meera's gear absorbs 81.",
+        "R5: Gorge hits Meera for 24 (0 left)"
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 84,
+      "vid": "visjoin_72",
+      "mid": "cancellation",
+      "mHpStart": 1644,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 64,
+      "mDealt": 260,
+      "dmgShare": 0.15815085158150852,
+      "dmgPerRound": 65,
+      "volley": {
+        "shots": 4,
+        "hits": 3,
+        "dmg": 42
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 5,
+      "planParty": [
+        "theo_lindqvist",
+        "benoit_lambert"
+      ],
+      "allyVids": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "joiners": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "visjoin_72": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "benoit_lambert": {
+          "armed": true,
+          "armored": true,
+          "armorP": 38
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 39,
+      "parsedStrikeTotal": 109,
+      "parsedAttributed": 109,
+      "dmgByVid": {
+        "visjoin_72": 35,
+        "benoit_lambert": 74
+      },
+      "fighterDmgShare": 0.3211009174311927,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "visjoin_72": [],
+        "benoit_lambert": [],
+        "theo_lindqvist": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Jenny walks straight into The Cancellation. No avoiding it.",
+        "Jenny sees The Cancellation coming and nocks an arrow — the fight opens at range (4 shots).",
+        "  loosed — it takes The Cancellation for 14 (1630 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Cancellation for 14 (1616 left).",
+        "  loosed — it takes The Cancellation for 14 (1602 left).",
+        "Jenny lowers the bow — The Cancellation is on them now. (3/4 hit)",
+        "R1: Jenny strikes for 19 (1583 left)",
+        "R1: the stamp descends over Jenny (1/3). Red ink.",
+        "Jenny's gear absorbs 61.",
+        "R1: Pilot Season hits Jenny for 16 (66 left)",
+        "R2: Jenny strikes for 16 (1567 left)",
+        "R2: the stamp descends over Jenny (2/3). Red ink.",
+        "Jenny's gear absorbs 64.",
+        "R2: Under Review hits Jenny for 18 (48 left)",
+        "Jenny is losing — shouts for help! Benoit charges in!",
+        "R3: Jenny stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Benoit strikes for 74 (1493 left)",
+        "R3: the stamp descends over Jenny (3/3). Red ink.",
+        "Jenny's gear absorbs 50."
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 88,
+      "vid": "visjoin_72",
+      "mid": "congregation",
+      "mHpStart": null,
+      "outcome": "vKill",
+      "win": true,
+      "rounds": 12,
+      "vTaken": 45,
+      "mDealt": 1054,
+      "dmgShare": null,
+      "dmgPerRound": 87.83333333333333,
+      "volley": {
+        "shots": 3,
+        "hits": 1,
+        "dmg": 13
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 6,
+      "planParty": [
+        "theo_lindqvist",
+        "benoit_lambert"
+      ],
+      "allyVids": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "joiners": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "visjoin_72": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "benoit_lambert": {
+          "armed": true,
+          "armored": true,
+          "armorP": 38
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 39,
+      "parsedStrikeTotal": 213,
+      "parsedAttributed": 213,
+      "dmgByVid": {
+        "visjoin_72": 67,
+        "benoit_lambert": 146
+      },
+      "fighterDmgShare": 0.3145539906103286,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "visjoin_72": [],
+        "benoit_lambert": [],
+        "theo_lindqvist": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Jenny walks straight into The Congregation. No avoiding it.",
+        "Jenny sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Congregation for 13 (1004 left).",
+        "Jenny lowers the bow — The Congregation is on them now. (1/3 hit)",
+        "R1: Jenny strikes for 17 (987 left)",
+        "Jenny's gear absorbs 60.",
+        "R1: Absolution hits Jenny for 9 (78 left)",
+        "R2: Jenny strikes for 18 (969 left)",
+        "Jenny's gear absorbs 52.",
+        "R2: Absolution hits Jenny for 8 (70 left)",
+        "Jenny is losing — shouts for help! Benoit charges in!",
+        "R3: Jenny strikes for 16 (953 left)",
+        "R3: Benoit strikes for 72 (881 left)",
+        "Benoit's gear absorbs 45.",
+        "R3: Absolution hits Benoit for 10 (67 left)",
+        "Jenny is still losing — shouts again! Theo charges in!",
+        "R4: Jenny strikes for 16 (865 left)",
+        "R4: Benoit strikes for 74 (791 left)"
+      ]
+    },
+    {
+      "seed": 107047,
+      "day": 50,
+      "vid": "gen_qczznq9",
+      "mid": "influencer",
+      "mHpStart": 957,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 50,
+      "mDealt": 27,
+      "dmgShare": 0.02821316614420063,
+      "dmgPerRound": 13.5,
+      "volley": null,
+      "rangedId": null,
+      "ammoAtEntry": 0,
+      "planParty": [
+        "gen_1334kmo"
+      ],
+      "allyVids": [
+        "gen_1334kmo",
+        "aki_tanaka"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_qczznq9": {
+          "armed": true,
+          "armored": true,
+          "armorP": 7
+        },
+        "gen_1334kmo": {
+          "armed": true,
+          "armored": true,
+          "armorP": 12
+        },
+        "aki_tanaka": {
+          "armed": true,
+          "armored": true,
+          "armorP": 9
+        }
+      },
+      "minArmorP": 7,
+      "meanArmorP": 9.333333333333334,
+      "parsedStrikeTotal": 27,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "gen_qczznq9": [
+          "bloodhound",
+          "lucky_rock",
+          "fusion_reactor"
+        ],
+        "gen_1334kmo": [
+          "the_touch",
+          "echo_location"
+        ],
+        "aki_tanaka": [
+          "beast_calm",
+          "lucky_rock"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "August walks straight into The Influencer. No avoiding it.",
+        "R1: August strikes for 15 (942 left)",
+        "August's gear absorbs 19.",
+        "R1: Ratio hits August for 21 (25 left)",
+        "R2: August strikes for 12 (930 left)",
+        "August's gear absorbs 26.",
+        "R2: Ratio hits August for 29 (0 left)"
+      ]
+    },
+    {
+      "seed": 107048,
+      "day": 74,
+      "vid": "gen_xqkd6ft",
+      "mid": "eater",
+      "mHpStart": 988,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 5,
+      "vTaken": 89,
+      "mDealt": 355,
+      "dmgShare": 0.35931174089068824,
+      "dmgPerRound": 71,
+      "volley": {
+        "shots": 2,
+        "hits": 0,
+        "dmg": 0
+      },
+      "rangedId": "phase_sling",
+      "ammoAtEntry": 6,
+      "planParty": [
+        "gen_shbz8ol"
+      ],
+      "allyVids": [
+        "gen_shbz8ol",
+        "tariq_mahmood"
+      ],
+      "joiners": [
+        "gen_shbz8ol",
+        "tariq_mahmood"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_xqkd6ft": {
+          "armed": true,
+          "armored": true,
+          "armorP": 22
+        },
+        "gen_shbz8ol": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        },
+        "tariq_mahmood": {
+          "armed": true,
+          "armored": true,
+          "armorP": 29
+        }
+      },
+      "minArmorP": 22,
+      "meanArmorP": 25,
+      "parsedStrikeTotal": 145,
+      "parsedAttributed": 145,
+      "dmgByVid": {
+        "gen_xqkd6ft": 121,
+        "gen_shbz8ol": 24
+      },
+      "fighterDmgShare": 0.8344827586206897,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "gen_xqkd6ft": [
+          "green_whisper",
+          "bloodhound",
+          "war_cry"
+        ],
+        "gen_shbz8ol": [
+          "green_whisper",
+          "beard_moss",
+          "rage",
+          "green_thumb"
+        ],
+        "tariq_mahmood": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Zhazira walks straight into The Eater. No avoiding it.",
+        "Zhazira sees The Eater coming and nocks an arrow — the fight opens at range (2 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "Zhazira lowers the bow — The Eater is on them now. (0/2 hit)",
+        "R1: Zhazira strikes for 44 (stalker's opening +4) (x1.3) (944 left)",
+        "Zhazira's gear absorbs 39.",
+        "R1: Gorge hits Zhazira for 16 (69 left)",
+        "R2: Zhazira strikes for 39 (x1.3) (905 left)",
+        "Zhazira's gear absorbs 46.",
+        "R2: Gorge hits Zhazira for 19 (50 left)",
+        "Zhazira is losing — shouts for help! Oliver charges in!",
+        "Zhazira's gear absorbs 61.",
+        "R3: Gorge hits Zhazira for 26 (24 left)",
+        "R3: Zhazira stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Oliver strikes for 24 (x1.3) (881 left)",
+        "Zhazira is still losing — shouts again! Tariq charges in!",
+        "Zhazira's gear absorbs 68.",
+        "R4: Gorge hits Zhazira for 28 (16 left)",
+        "R4: Zhazira strikes for 38 (x1.3) (843 left)"
+      ]
+    },
+    {
+      "seed": 107048,
+      "day": 90,
+      "vid": "chloe_dubois",
+      "mid": "congregation",
+      "mHpStart": 1068,
+      "outcome": "mFlee",
+      "win": true,
+      "rounds": 1,
+      "vTaken": 0,
+      "mDealt": 8,
+      "dmgShare": 0.00749063670411985,
+      "dmgPerRound": 8,
+      "volley": {
+        "shots": 3,
+        "hits": 1,
+        "dmg": 8
+      },
+      "rangedId": "sling",
+      "ammoAtEntry": 6,
+      "planParty": [
+        "gen_xqkd6ft",
+        "gen_shbz8ol",
+        "gen_ns263pg"
+      ],
+      "allyVids": [
+        "gen_ns263pg",
+        "gen_shbz8ol"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "chloe_dubois": {
+          "armed": true,
+          "armored": true,
+          "armorP": 39
+        },
+        "gen_ns263pg": {
+          "armed": true,
+          "armored": true,
+          "armorP": 15
+        },
+        "gen_shbz8ol": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 15,
+      "meanArmorP": 26,
+      "parsedStrikeTotal": 0,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": null,
+      "abilitiesPerMember": 4.333333333333333,
+      "memberAbilities": {
+        "chloe_dubois": [
+          "green_whisper",
+          "scream_cheese"
+        ],
+        "gen_ns263pg": [
+          "green_whisper",
+          "beard_moss",
+          "pyrokinesis",
+          "harvest_table",
+          "green_thumb",
+          "photosynthesis"
+        ],
+        "gen_shbz8ol": [
+          "green_whisper",
+          "beard_moss",
+          "rage",
+          "green_thumb",
+          "cornucopia"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Chloe walks straight into The Congregation. No avoiding it.",
+        "Chloe sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed — it takes The Congregation for 8 (1060 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "Chloe lowers the bow — The Congregation is on them now. (1/3 hit)",
+        "R1: Chloe walks in open-handed, talking — low, steady, unafraid. And impossibly, it listens. It stands down. (Peacemaker: Walk In)"
+      ]
+    }
+  ],
+  "armPairMeetings": [
+    {
+      "seed": 107041,
+      "day": 106,
+      "vid": "jovan_milic",
+      "mid": "suburb",
+      "mHpStart": null,
+      "outcome": "vKill",
+      "win": true,
+      "rounds": 15,
+      "vTaken": 78,
+      "mDealt": 1481,
+      "dmgShare": null,
+      "dmgPerRound": 98.73333333333333,
+      "volley": {
+        "shots": 4,
+        "hits": 4,
+        "dmg": 69
+      },
+      "rangedId": "bow",
+      "ammoAtEntry": 8,
+      "planParty": [
+        "gen_lj8dmol"
+      ],
+      "allyVids": [
+        "gen_lj8dmol",
+        "olivia_bennett"
+      ],
+      "joiners": [
+        "gen_lj8dmol",
+        "olivia_bennett"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "jovan_milic": {
+          "armed": true,
+          "armored": true,
+          "armorP": 32
+        },
+        "gen_lj8dmol": {
+          "armed": true,
+          "armored": true,
+          "armorP": 56
+        },
+        "olivia_bennett": {
+          "armed": true,
+          "armored": true,
+          "armorP": 32
+        }
+      },
+      "minArmorP": 32,
+      "meanArmorP": 40,
+      "parsedStrikeTotal": 168,
+      "parsedAttributed": 168,
+      "dmgByVid": {
+        "jovan_milic": 95,
+        "gen_lj8dmol": 73
+      },
+      "fighterDmgShare": 0.5654761904761905,
+      "abilitiesPerMember": 2.6666666666666665,
+      "memberAbilities": {
+        "jovan_milic": [
+          "the_touch",
+          "green_thumb"
+        ],
+        "gen_lj8dmol": [
+          "iron_stomach",
+          "echo_location",
+          "rage",
+          "pyrokinesis",
+          "dowsing",
+          "adrenaline_control"
+        ],
+        "olivia_bennett": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Jovan walks straight into The Suburb. No avoiding it.",
+        "Jovan sees The Suburb coming and nocks an arrow — the fight opens at range (4 shots).",
+        "  loosed — it takes The Suburb for 16 (1409 left).",
+        "  loosed — it takes The Suburb for 19 (1390 left).",
+        "  loosed — it takes The Suburb for 17 (1373 left).",
+        "  loosed — it takes The Suburb for 17 (1356 left).",
+        "Jovan lowers the bow — The Suburb is on them now. (4/4 hit)",
+        "R1: Jovan strikes for 25 (1331 left)",
+        "Jovan's gear absorbs 38.",
+        "R1: Property Tax hits Jovan for 9 (91 left)",
+        "R2: Jovan strikes for 25 (1306 left)",
+        "Jovan's gear absorbs 36.",
+        "R2: Property Tax hits Jovan for 8 (83 left)",
+        "Jovan is losing — shouts for help! Dina charges in!",
+        "R3: Jovan strikes for 22 (1284 left)",
+        "R3: Dina strikes for 73 (x1.3) (1211 left)",
+        "Jovan's gear absorbs 34.",
+        "R3: Property Tax hits Jovan for 8 (75 left)",
+        "Jovan is still losing — shouts again! Olivia charges in!",
+        "R4: Jovan strikes for 23 (1188 left)"
+      ]
+    },
+    {
+      "seed": 107044,
+      "day": 134,
+      "vid": "visjoin_128",
+      "mid": "congregation",
+      "mHpStart": 909,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 3,
+      "vTaken": 84,
+      "mDealt": 58,
+      "dmgShare": 0.0638063806380638,
+      "dmgPerRound": 19.333333333333332,
+      "volley": {
+        "shots": 0,
+        "hits": 0,
+        "dmg": 0
+      },
+      "rangedId": "crossbow",
+      "ammoAtEntry": 0,
+      "planParty": [
+        "quinn_murphy",
+        "stan_kowalski",
+        "visjoin_109"
+      ],
+      "allyVids": [
+        "quinn_murphy",
+        "stan_kowalski"
+      ],
+      "joiners": [
+        "quinn_murphy"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "visjoin_128": {
+          "armed": true,
+          "armored": true,
+          "armorP": 9
+        },
+        "quinn_murphy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "stan_kowalski": {
+          "armed": true,
+          "armored": true,
+          "armorP": 28
+        },
+        "visjoin_109": {
+          "armed": true,
+          "armored": true,
+          "armorP": 8
+        }
+      },
+      "minArmorP": 9,
+      "meanArmorP": 30.666666666666668,
+      "parsedStrikeTotal": 58,
+      "parsedAttributed": 28,
+      "dmgByVid": {
+        "quinn_murphy": 28
+      },
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "visjoin_128": [],
+        "quinn_murphy": [
+          "bloodhound"
+        ],
+        "stan_kowalski": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Willow has Crossbow but no crossbow bolts — the string stays drawn, useless.",
+        "R1: Willow stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Willow's gear absorbs 29.",
+        "R1: Absolution hits Willow for 28 (41 left)",
+        "R2: Willow strikes for 30 (x1.3) (879 left)",
+        "Willow's gear absorbs 27.",
+        "R2: Absolution hits Willow for 26 (15 left)",
+        "Willow is losing — shouts for help! Quinn charges in!",
+        "R3: Willow argues theology — transubstantiation, the liturgy of the lost. It MUST engage.",
+        "R3: Quinn strikes for 28 (x1.3) (851 left)",
+        "Willow's gear absorbs 32.",
+        "R3: Absolution hits Willow for 30 (0 left)"
+      ]
+    },
+    {
+      "seed": 107044,
+      "day": 134,
+      "vid": "stan_kowalski",
+      "mid": "reunion",
+      "mHpStart": 1216,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 21,
+      "mDealt": 49,
+      "dmgShare": 0.04029605263157895,
+      "dmgPerRound": 24.5,
+      "volley": null,
+      "rangedId": "fire_hardened_spear",
+      "ammoAtEntry": 0,
+      "planParty": [
+        "quinn_murphy",
+        "visjoin_109"
+      ],
+      "allyVids": [
+        "quinn_murphy",
+        "visjoin_109"
+      ],
+      "joiners": [
+        "quinn_murphy"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "stan_kowalski": {
+          "armed": true,
+          "armored": true,
+          "armorP": 28
+        },
+        "quinn_murphy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "visjoin_109": {
+          "armed": true,
+          "armored": true,
+          "armorP": 8
+        }
+      },
+      "minArmorP": 8,
+      "meanArmorP": 30.333333333333332,
+      "parsedStrikeTotal": 49,
+      "parsedAttributed": 49,
+      "dmgByVid": {
+        "stan_kowalski": 49
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 1,
+      "memberAbilities": {
+        "stan_kowalski": [],
+        "quinn_murphy": [
+          "bloodhound"
+        ],
+        "visjoin_109": [
+          "night_eyes",
+          "lucky_rock"
+        ]
+      },
+      "abilityTokens": [
+        "Tripwire"
+      ],
+      "log": [
+        "Stan had strung a wire at ankle height before it closed — the first rush will eat dirt. (Tripwire)",
+        "R1: Big Loud hesitates — Stan bought a breath.",
+        "R1: Stan strikes for 25 (x1.3) (1191 left)",
+        "R1: Stan strikes for 24 (x1.3) (1167 left)",
+        "Stan's gear absorbs 55.",
+        "R2: Your Move hits Stan for 21 (11 left)",
+        "R2: Stan does something they have never done — stands on one foot and recites a poem mid-fight. The Reunion falters; it has nothing to wear. (Novelty.)",
+        "Stan is losing — shouts for help! Quinn charges in!",
+        "Quinn answered Stan's shout, but Stan is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 70,
+      "vid": "meera_reddy",
+      "mid": "rerun",
+      "mHpStart": 1351,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 3,
+      "vTaken": 53,
+      "mDealt": 70,
+      "dmgShare": 0.05181347150259067,
+      "dmgPerRound": 23.333333333333332,
+      "volley": null,
+      "rangedId": null,
+      "ammoAtEntry": 0,
+      "planParty": [
+        "emma_larsen",
+        "theo_lindqvist"
+      ],
+      "allyVids": [
+        "emma_larsen",
+        "theo_lindqvist"
+      ],
+      "joiners": [
+        "emma_larsen",
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "meera_reddy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 31
+        },
+        "emma_larsen": {
+          "armed": true,
+          "armored": true,
+          "armorP": 51
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 35.333333333333336,
+      "parsedStrikeTotal": 70,
+      "parsedAttributed": 70,
+      "dmgByVid": {
+        "meera_reddy": 49,
+        "emma_larsen": 21
+      },
+      "fighterDmgShare": 0.7,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "meera_reddy": [
+          "green_whisper",
+          "lucky_rock"
+        ],
+        "emma_larsen": [
+          "iron_stomach",
+          "echo_location",
+          "dowsing",
+          "rage",
+          "green_whisper"
+        ],
+        "theo_lindqvist": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Meera walks straight into Big Loud. No avoiding it.",
+        "R1: Meera stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R1: the clapperboard holds — take 12, 4 rounds to the rewind.",
+        "Meera's gear absorbs 40.",
+        "R1: Notes Session hits Meera for 16 (58 left)",
+        "R2: Meera strikes for 23 (1328 left)",
+        "R2: the clapperboard holds — take 12, 3 rounds to the rewind.",
+        "Meera's gear absorbs 30.",
+        "R2: Cold Open hits Meera for 12 (46 left)",
+        "Meera is losing — shouts for help! Emma charges in!",
+        "R3: Meera strikes for 26 (1302 left)",
+        "R3: Emma strikes for 21 (1281 left)",
+        "R3: the clapperboard holds — take 12, 2 rounds to the rewind.",
+        "Meera's gear absorbs 63.",
+        "R3: Take Twelve hits Meera for 25 (21 left)",
+        "Meera is still losing — shouts again! Theo charges in!",
+        "Emma answered Meera's shout, but Meera is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 75,
+      "vid": "meera_reddy",
+      "mid": "eater",
+      "mHpStart": 1085,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 5,
+      "vTaken": 92,
+      "mDealt": 115,
+      "dmgShare": 0.10599078341013825,
+      "dmgPerRound": 23,
+      "volley": null,
+      "rangedId": null,
+      "ammoAtEntry": 0,
+      "planParty": [
+        "theo_lindqvist"
+      ],
+      "allyVids": [
+        "theo_lindqvist",
+        "visjoin_72"
+      ],
+      "joiners": [
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "meera_reddy": {
+          "armed": true,
+          "armored": true,
+          "armorP": 31
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        },
+        "visjoin_72": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 36.666666666666664,
+      "parsedStrikeTotal": 115,
+      "parsedAttributed": 19,
+      "dmgByVid": {
+        "theo_lindqvist": 19
+      },
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 0.6666666666666666,
+      "memberAbilities": {
+        "meera_reddy": [
+          "green_whisper",
+          "lucky_rock"
+        ],
+        "theo_lindqvist": [],
+        "visjoin_72": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Meera's gear absorbs 49.",
+        "R1: Smack-Rush hits Meera for 14 (57 left)",
+        "R1: Meera stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Meera's gear absorbs 50.",
+        "R2: Gorge hits Meera for 15 (62 left)",
+        "R2: Meera strikes for 23 (1062 left)",
+        "Meera holds the line — they know how this one is fought, and have not had their turn to prove it.",
+        "R3: Meera strikes for 23 (1039 left)",
+        "Meera's gear absorbs 57.",
+        "R3: Gorge hits Meera for 17 (45 left)",
+        "Meera holds the line — they know how this one is fought, and have not had their turn to prove it.",
+        "Meera's gear absorbs 72.",
+        "R4: Smack-Rush hits Meera for 22 (23 left)",
+        "R4: Meera strikes for 26 (1013 left)",
+        "Meera is losing — shouts for help! Theo charges in!",
+        "R5: Meera strikes for 24 (989 left)",
+        "R5: Theo strikes for 19 (x1.3) (970 left)",
+        "Meera's gear absorbs 81.",
+        "R5: Gorge hits Meera for 24 (0 left)"
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 84,
+      "vid": "visjoin_72",
+      "mid": "cancellation",
+      "mHpStart": 1644,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 64,
+      "mDealt": 260,
+      "dmgShare": 0.15815085158150852,
+      "dmgPerRound": 65,
+      "volley": {
+        "shots": 4,
+        "hits": 3,
+        "dmg": 42
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 5,
+      "planParty": [
+        "theo_lindqvist",
+        "benoit_lambert"
+      ],
+      "allyVids": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "joiners": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "visjoin_72": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "benoit_lambert": {
+          "armed": true,
+          "armored": true,
+          "armorP": 38
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 39,
+      "parsedStrikeTotal": 109,
+      "parsedAttributed": 109,
+      "dmgByVid": {
+        "visjoin_72": 35,
+        "benoit_lambert": 74
+      },
+      "fighterDmgShare": 0.3211009174311927,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "visjoin_72": [],
+        "benoit_lambert": [],
+        "theo_lindqvist": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Jenny walks straight into The Cancellation. No avoiding it.",
+        "Jenny sees The Cancellation coming and nocks an arrow — the fight opens at range (4 shots).",
+        "  loosed — it takes The Cancellation for 14 (1630 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Cancellation for 14 (1616 left).",
+        "  loosed — it takes The Cancellation for 14 (1602 left).",
+        "Jenny lowers the bow — The Cancellation is on them now. (3/4 hit)",
+        "R1: Jenny strikes for 19 (1583 left)",
+        "R1: the stamp descends over Jenny (1/3). Red ink.",
+        "Jenny's gear absorbs 61.",
+        "R1: Pilot Season hits Jenny for 16 (66 left)",
+        "R2: Jenny strikes for 16 (1567 left)",
+        "R2: the stamp descends over Jenny (2/3). Red ink.",
+        "Jenny's gear absorbs 64.",
+        "R2: Under Review hits Jenny for 18 (48 left)",
+        "Jenny is losing — shouts for help! Benoit charges in!",
+        "R3: Jenny stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Benoit strikes for 74 (1493 left)",
+        "R3: the stamp descends over Jenny (3/3). Red ink.",
+        "Jenny's gear absorbs 50."
+      ]
+    },
+    {
+      "seed": 107045,
+      "day": 88,
+      "vid": "visjoin_72",
+      "mid": "congregation",
+      "mHpStart": null,
+      "outcome": "vKill",
+      "win": true,
+      "rounds": 12,
+      "vTaken": 45,
+      "mDealt": 1054,
+      "dmgShare": null,
+      "dmgPerRound": 87.83333333333333,
+      "volley": {
+        "shots": 3,
+        "hits": 1,
+        "dmg": 13
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 6,
+      "planParty": [
+        "theo_lindqvist",
+        "benoit_lambert"
+      ],
+      "allyVids": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "joiners": [
+        "benoit_lambert",
+        "theo_lindqvist"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "visjoin_72": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "benoit_lambert": {
+          "armed": true,
+          "armored": true,
+          "armorP": 38
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 39,
+      "parsedStrikeTotal": 213,
+      "parsedAttributed": 213,
+      "dmgByVid": {
+        "visjoin_72": 67,
+        "benoit_lambert": 146
+      },
+      "fighterDmgShare": 0.3145539906103286,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "visjoin_72": [],
+        "benoit_lambert": [],
+        "theo_lindqvist": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Jenny walks straight into The Congregation. No avoiding it.",
+        "Jenny sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Congregation for 13 (1004 left).",
+        "Jenny lowers the bow — The Congregation is on them now. (1/3 hit)",
+        "R1: Jenny strikes for 17 (987 left)",
+        "Jenny's gear absorbs 60.",
+        "R1: Absolution hits Jenny for 9 (78 left)",
+        "R2: Jenny strikes for 18 (969 left)",
+        "Jenny's gear absorbs 52.",
+        "R2: Absolution hits Jenny for 8 (70 left)",
+        "Jenny is losing — shouts for help! Benoit charges in!",
+        "R3: Jenny strikes for 16 (953 left)",
+        "R3: Benoit strikes for 72 (881 left)",
+        "Benoit's gear absorbs 45.",
+        "R3: Absolution hits Benoit for 10 (67 left)",
+        "Jenny is still losing — shouts again! Theo charges in!",
+        "R4: Jenny strikes for 16 (865 left)",
+        "R4: Benoit strikes for 74 (791 left)"
+      ]
+    },
+    {
+      "seed": 107047,
+      "day": 50,
+      "vid": "gen_qczznq9",
+      "mid": "influencer",
+      "mHpStart": 957,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 50,
+      "mDealt": 27,
+      "dmgShare": 0.02821316614420063,
+      "dmgPerRound": 13.5,
+      "volley": null,
+      "rangedId": null,
+      "ammoAtEntry": 0,
+      "planParty": [
+        "gen_1334kmo"
+      ],
+      "allyVids": [
+        "gen_1334kmo",
+        "aki_tanaka"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_qczznq9": {
+          "armed": true,
+          "armored": true,
+          "armorP": 7
+        },
+        "gen_1334kmo": {
+          "armed": true,
+          "armored": true,
+          "armorP": 12
+        },
+        "aki_tanaka": {
+          "armed": true,
+          "armored": true,
+          "armorP": 9
+        }
+      },
+      "minArmorP": 7,
+      "meanArmorP": 9.333333333333334,
+      "parsedStrikeTotal": 27,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "gen_qczznq9": [
+          "bloodhound",
+          "lucky_rock",
+          "fusion_reactor"
+        ],
+        "gen_1334kmo": [
+          "the_touch",
+          "echo_location"
+        ],
+        "aki_tanaka": [
+          "beast_calm",
+          "lucky_rock"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "August walks straight into The Influencer. No avoiding it.",
+        "R1: August strikes for 15 (942 left)",
+        "August's gear absorbs 19.",
+        "R1: Ratio hits August for 21 (25 left)",
+        "R2: August strikes for 12 (930 left)",
+        "August's gear absorbs 26.",
+        "R2: Ratio hits August for 29 (0 left)"
+      ]
+    },
+    {
+      "seed": 107048,
+      "day": 74,
+      "vid": "gen_xqkd6ft",
+      "mid": "eater",
+      "mHpStart": 988,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 5,
+      "vTaken": 89,
+      "mDealt": 355,
+      "dmgShare": 0.35931174089068824,
+      "dmgPerRound": 71,
+      "volley": {
+        "shots": 2,
+        "hits": 0,
+        "dmg": 0
+      },
+      "rangedId": "phase_sling",
+      "ammoAtEntry": 6,
+      "planParty": [
+        "gen_shbz8ol"
+      ],
+      "allyVids": [
+        "gen_shbz8ol",
+        "tariq_mahmood"
+      ],
+      "joiners": [
+        "gen_shbz8ol",
+        "tariq_mahmood"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_xqkd6ft": {
+          "armed": true,
+          "armored": true,
+          "armorP": 22
+        },
+        "gen_shbz8ol": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        },
+        "tariq_mahmood": {
+          "armed": true,
+          "armored": true,
+          "armorP": 29
+        }
+      },
+      "minArmorP": 22,
+      "meanArmorP": 25,
+      "parsedStrikeTotal": 145,
+      "parsedAttributed": 145,
+      "dmgByVid": {
+        "gen_xqkd6ft": 121,
+        "gen_shbz8ol": 24
+      },
+      "fighterDmgShare": 0.8344827586206897,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "gen_xqkd6ft": [
+          "green_whisper",
+          "bloodhound",
+          "war_cry"
+        ],
+        "gen_shbz8ol": [
+          "green_whisper",
+          "beard_moss",
+          "rage",
+          "green_thumb"
+        ],
+        "tariq_mahmood": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Zhazira walks straight into The Eater. No avoiding it.",
+        "Zhazira sees The Eater coming and nocks an arrow — the fight opens at range (2 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "Zhazira lowers the bow — The Eater is on them now. (0/2 hit)",
+        "R1: Zhazira strikes for 44 (stalker's opening +4) (x1.3) (944 left)",
+        "Zhazira's gear absorbs 39.",
+        "R1: Gorge hits Zhazira for 16 (69 left)",
+        "R2: Zhazira strikes for 39 (x1.3) (905 left)",
+        "Zhazira's gear absorbs 46.",
+        "R2: Gorge hits Zhazira for 19 (50 left)",
+        "Zhazira is losing — shouts for help! Oliver charges in!",
+        "Zhazira's gear absorbs 61.",
+        "R3: Gorge hits Zhazira for 26 (24 left)",
+        "R3: Zhazira stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Oliver strikes for 24 (x1.3) (881 left)",
+        "Zhazira is still losing — shouts again! Tariq charges in!",
+        "Zhazira's gear absorbs 68.",
+        "R4: Gorge hits Zhazira for 28 (16 left)",
+        "R4: Zhazira strikes for 38 (x1.3) (843 left)"
+      ]
+    },
+    {
+      "seed": 107048,
+      "day": 90,
+      "vid": "chloe_dubois",
+      "mid": "congregation",
+      "mHpStart": 1068,
+      "outcome": "mFlee",
+      "win": true,
+      "rounds": 1,
+      "vTaken": 0,
+      "mDealt": 8,
+      "dmgShare": 0.00749063670411985,
+      "dmgPerRound": 8,
+      "volley": {
+        "shots": 3,
+        "hits": 1,
+        "dmg": 8
+      },
+      "rangedId": "sling",
+      "ammoAtEntry": 6,
+      "planParty": [
+        "gen_xqkd6ft",
+        "gen_shbz8ol",
+        "gen_ns263pg"
+      ],
+      "allyVids": [
+        "gen_ns263pg",
+        "gen_shbz8ol"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "chloe_dubois": {
+          "armed": true,
+          "armored": true,
+          "armorP": 39
+        },
+        "gen_ns263pg": {
+          "armed": true,
+          "armored": true,
+          "armorP": 15
+        },
+        "gen_shbz8ol": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 15,
+      "meanArmorP": 26,
+      "parsedStrikeTotal": 0,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": null,
+      "abilitiesPerMember": 4.333333333333333,
+      "memberAbilities": {
+        "chloe_dubois": [
+          "green_whisper",
+          "scream_cheese"
+        ],
+        "gen_ns263pg": [
+          "green_whisper",
+          "beard_moss",
+          "pyrokinesis",
+          "harvest_table",
+          "green_thumb",
+          "photosynthesis"
+        ],
+        "gen_shbz8ol": [
+          "green_whisper",
+          "beard_moss",
+          "rage",
+          "green_thumb",
+          "cornucopia"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Chloe walks straight into The Congregation. No avoiding it.",
+        "Chloe sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed — it takes The Congregation for 8 (1060 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "Chloe lowers the bow — The Congregation is on them now. (1/3 hit)",
+        "R1: Chloe walks in open-handed, talking — low, steady, unafraid. And impossibly, it listens. It stands down. (Peacemaker: Walk In)"
+      ]
+    }
+  ]
+}
