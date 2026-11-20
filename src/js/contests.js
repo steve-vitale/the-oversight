@@ -166,46 +166,6 @@
     return tier;
   };
 
-  // SEARSUPPLY (sim-searsupply-a, finding #2599): the System presses its
-  // rarest weapon into a FIGHTER's hands, not the scholar's pack. A
-  // searcaster or fusion_cell contest prize won by the player is
-  // redirected to the village's most fight-proven living villager —
-  // the scholar's pack already holds searcasters that never reach a
-  // fight (diag: 3 in the pack, 0 ever equipped as far as the census
-  // can see), and the volley only fires from the LEAD fighter's
-  // equipped weapon, so the gun belongs with someone who leads fights.
-  // Deterministic (deeds + roster order, zero draws); falls back to
-  // the player when no villager is eligible. Env-gated SEARSUPPLY=1;
-  // unset = the old prize routing, byte-identical.
-  G._searSupplyFighter = function() {
-    // Own eligibility (NOT contestEligible — the show's day-14 casting
-    // gate must not decide who can carry the village's gun): alive,
-    // a member in good standing, of fighting age, not gravely wounded.
-    // No away check — the System delivers the prize wherever the
-    // fighter stands.
-    const v = this.state.village || {};
-    const roster = v.roster || [];
-    const nota = this.state.notability || {};
-    let best = null, bestScore = -1;
-    for (let i = 0; i < roster.length; i++) {
-      const id = roster[i];
-      if (!id || id === this.villagerId) continue;
-      if ((v.severed || {})[id]) continue;
-      if (!this.isMember(id)) continue;
-      let vp = null;
-      try { vp = this.vpOf(id); } catch (e) {}
-      if (vp && vp.dead) continue;
-      const age = (vp && typeof vp.age === 'number') ? vp.age : 30;
-      if (age < 15 || age > 72) continue;
-      const vhp = ((v.health || {})[id] !== undefined) ? v.health[id] : 100;
-      if (vhp <= 20) continue;
-      const d = nota[id] || {};
-      const score = (d.wave3Kill ? 4 : 0) + (d.wave2Kill ? 2 : 0) + (d.contestWin || 0);
-      if (score > bestScore) { bestScore = score; best = id; }
-    }
-    return best;
-  };
-
   G._cxItemPrize = function(ac, contest, who) {
     who = who || 'player';
     const cfg = (this.data.rewardEconomy || {}).broadcast || {};
@@ -218,36 +178,12 @@
     const apex = wave >= 4 || wins >= (cfg.apexWins == null ? 8 : cfg.apexWins) || (this.apFavor && this.apFavor() >= (cfg.apexFavor == null ? 100 : cfg.apexFavor));
     if (contest.risk === 'extreme' && apex && Math.random() < (cfg.apexChance == null ? 0.25 : cfg.apexChance)) tier = 4;
     const loot = this.rollAlienLoot({ wave, loot: { chance, tier, rewardSource: 'contest' } });
-    let person = who === 'player' ? null : this.getPerson(who);
+    const person = who === 'player' ? null : this.getPerson(who);
     // Never redirect a missing/dead winner's personal reward to the bearer.
     if (who !== 'player' && (!person || !this.isMember(who))) return false;
     if (person) person.items = person.items || [];
-    // SEARSUPPLY (sim-searsupply-a, finding #2599): a searcaster or
-    // fusion_cell prize won by the player goes to the village's most
-    // fight-proven villager instead of the scholar's pack, and a
-    // searcaster prize bundles 2 cells with the gun so the two halves
-    // arrive together. Draw-neutral: the redirect is deterministic
-    // (deeds + roster order) and the bundle is a consequence of the
-    // existing grant — zero new Math.random() draws on either leg.
-    let searSupplyOn = false;
-    try { searSupplyOn = (typeof process !== 'undefined' && process.env && process.env.SEARSUPPLY === '1'); } catch (e) {}
-    if (searSupplyOn && loot && (loot === 'searcaster' || loot === 'fusion_cell') && who === 'player') {
-      let target = null;
-      try { target = this._searSupplyFighter ? this._searSupplyFighter() : null; } catch (e) {}
-      if (target) {
-        const tp = this.getPerson ? this.getPerson(target) : null;
-        if (tp && this.isMember(target)) {
-          who = target; person = tp;
-          person.items = person.items || [];
-        }
-      }
-    }
     const granted = loot ? this.alienLootGrant(loot, person) : null;
     if (granted) {
-      if (searSupplyOn && loot === 'searcaster') {
-        try { this.alienLootGrant('fusion_cell', person); this.alienLootGrant('fusion_cell', person); } catch (e) {}
-        this.sysSay('📺 ...and two humming cells to feed it. The gun is useless without them.');
-      }
       const d = granted.def;
       const name = who === 'player' ? 'your' : this.displayName(who) + "'s";
       this.sysSay(`📺 The System presses something humming into ${name} hands: ${d.name}.${d.flavor ? ' ' + d.flavor : ''}`);
