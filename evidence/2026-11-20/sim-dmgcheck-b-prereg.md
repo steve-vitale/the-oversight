@@ -3,8 +3,23 @@
 **Arm:** sim-dmgcheck-b · **Loop B run:** fleshout-loop-b-20261120T1830Z · **Axis:** winnability chain
 **Type:** DIAG check, instrument-only. No game-code change, no default flipped, no lever built.
 **Branch:** `sim-dmgcheck-b` · **Worktree:** `~/workspace/worktrees/sim-dmgcheck-b`
-**Base at arm start:** master `e103a64cc` (journey-crisis r257 adoption closeout).
+**Base at arm start:** master `d352834ef` (sim-lend-a coordinator addendum).
 **Frozen:** 2026-11-20 ~18:47 UTC, BEFORE any judged sim.
+**Base update (coordinator-directed, 2026-11-20 ~19:00 UTC):** the
+prereg was first frozen on master `e103a64cc`; master moved during
+registration (Loop A landed sim-lend-a, NO-GO PARTICIPATION, lever
+reverted) and the coordinator directed a rebase onto `d352834ef`
+before the judged leg completed. The diff `e103a64cc..d352834ef`
+was verified independently here: 4 commits, all sim-lend-a
+(prereg, instrument, evidence, coordinator addendum), touching
+only `evidence/` + `scripts/` — zero `src/js`, zero
+`scripts/policies/` — so the launch/fight substrate is identical
+(policy sha still `1884c8852d38`, ALLYSLOT3 still unlanded).
+The judged leg had run 3 of 8 seeds on the old base when the
+rebase was ordered; the leg was killed and those 3 corpora
+discarded, and the leg is re-run in full on the new base. The
+decision bars, band, substrate, and counting are unchanged by
+this update — only the recorded base moved.
 **Policy:** competent verbatim (`scripts/policies/competent.js`),
 sha256 `1884c8852d38170e0e99078a279e867496e27605fdcadbd3c2a42c07a54d4bb0`
 (first 12: `1884c8852d38`; git blob `aaf5e31ac`).
@@ -83,7 +98,7 @@ this band under the new policy, the collapse was band variance
 and the fight-step change is launch-neutral as expected. If
 launches drop anyway, the diff above is NOT the story (it cannot
 move launch formation) and the call is a bisect of
-`057bfa60f..e103a64cc` — which this arm does NOT perform.
+`057bfa60f..d352834ef` — which this arm does NOT perform.
 
 ## Substrate (env flags — same as the dmgsurvey prereg; verify, don't guess)
 
@@ -99,7 +114,7 @@ driver-local (the launch tracker rows; no game-code read — same
 as the dmgsurvey and strikeband drivers).
 
 **ALLYSLOT3 DISCREPANCY (verified, not assumed): ALLYSLOT3 is
-STILL NOT landed on master `e103a64cc`.** The port commit
+STILL NOT landed on master `d352834ef`.** The port commit
 `f4d1100ee` is NOT an ancestor of HEAD
 (`git merge-base --is-ancestor f4d1100ee HEAD` = no), and
 `src/js/` contains ZERO occurrences of `ALLYSLOT3` or
@@ -153,7 +168,7 @@ from the log, per the rageholder-survey-b precedent.
   and always writes the JSON.
 - `scripts/test-dmgcheck-b.js` — proof (mirrors
   `scripts/test-dmgsurvey-b.js`): §1 static (frozen base
-  resolves to `e103a64cc`, src diff 0, substrate gates present,
+  resolves to `d352834ef`, src diff 0, substrate gates present,
   ALLYSLOT3 absent from src, instrument = the 3 new files only,
   driver arm/filename strings, analyzer exports incl. the new
   `dmgcheckVerdict`, selftest green) + §2 first-fight counting
@@ -202,7 +217,7 @@ same band: **16 launches, 9 first-fights, 6 fled**.
   106241–106248 (coordinator-authorized, fresh prereg).
 - **BASE REGRESSION:** launches <= 8 OR first-fights <= 3 →
   the base moved the launch engine. Report the call for a bisect
-  of `057bfa60f..e103a64cc` — do NOT bisect in this arm.
+  of `057bfa60f..d352834ef` — do NOT bisect in this arm.
 - **INCONCLUSIVE:** between the bars (e.g. 9–11 launches with
   4–5 first-fights, or launches >= 12 with first-fights 4–5) →
   report as INCONCLUSIVE, never re-score against a friendlier
@@ -253,7 +268,7 @@ counts. The evidence carries a "metric review" section.
    decomposition is judged here.
 5. **Launch rate is substrate-sensitive** (finding #2616): the
    verdict holds under the check substrate (seven flags as run,
-   policy `1884c8852d38`, base `e103a64cc`). A re-run under a
+   policy `1884c8852d38`, base `d352834ef`). A re-run under a
    different flag set or policy must re-verify, not assume.
 6. **One band, one comparison.** The check decides variance vs
    regression for THIS band on THIS base. It does not measure

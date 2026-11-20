@@ -17,7 +17,7 @@
 //   SENSEEXPED=1 PARTYSIZE4=1 VETREENGAGE=1 FLEEREPAIR2=1 FIGHTALLY2=1
 //   ALLYSLOT3=1 LAUNCHSURVIVE=1
 // ALLYSLOT3 DISCREPANCY (prereg): ALLYSLOT3 is NOT landed on master
-// e103a64cc (port f4d1100ee is not an ancestor of HEAD; 0 occurrences
+// d352834ef (port f4d1100ee is not an ancestor of HEAD; 0 occurrences
 // in src/js). The env flag is set but unread by game code. This
 // check judges launch counts and launched FIRST-FIGHT counts, which
 // the slot cannot change (it gates only ally3's in-fight damage,

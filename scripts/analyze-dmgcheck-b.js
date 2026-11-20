@@ -18,7 +18,7 @@
 // designation on this same band: 16 launches, 9 first-fights,
 // 6 fled): launches >= 12 AND first-fights >= 6 → BAND VARIANCE;
 // launches <= 8 OR first-fights <= 3 → BASE REGRESSION (report
-// the call for a bisect of 057bfa60f..e103a64cc — do NOT bisect
+// the call for a bisect of 057bfa60f..d352834ef — do NOT bisect
 // here); between the bars → INCONCLUSIVE, never re-scored. The
 // survey `judge` (first-fight floor + taxonomy + instrument) is
 // kept verbatim for instrument-validity reporting.
