@@ -32,7 +32,11 @@
 //     exclusions, liveness rule) — it records the live re-seedable
 //     rumor pool for the holder at commit time (poolN, pool ids in
 //     pick order, firstPick) plus the liveness verdict on the plan's
-//     current target (deadTarget). The analyzer's pool floor is the
+//     current target (deadTarget) and whether this lever already
+//     expired the plan (expiredStamp — the reseedExpiryDay stamp;
+//     added by correction 2, see the evidence file: without it an
+//     expired-plan re-seed launch is indistinguishable from a
+//     never-targeted targetless launch). The analyzer's pool floor is the
 //     minimum poolN across dead-target commits. The snapshot NEVER
 //     calls planReseedPick or winPlanCommitDeadTarget (both live
 //     inside the departure call that follows) — it is an independent
@@ -403,6 +407,13 @@ function rumorPoolSnapshot(Game, vid) {
     const need = Math.max(3, (plan.needWave | 0) || 3);
     const dead = plan.target || null;
     const deadTarget = dead ? rumorPoolDeadByType(Game, dead) : false;
+    // RESEEDEXPIRY CORRECTION 2 (2026-11-20, found on the band-A
+    // probe corpus): whether THIS lever already expired this plan
+    // (reseedExpiryDay stamp set). A launch on a targetless plan
+    // that carries the stamp is an expired-plan re-seed at commit
+    // time — the analyzer cannot tell it from a never-targeted
+    // targetless launch without this bit. Pure read.
+    const expiredStamp = (plan.reseedExpiryDay != null);
     const suburbOff = process.env.FLEEREPAIR2 === '1';
     const seen = {};
     const pool = [];
@@ -437,6 +448,7 @@ function rumorPoolSnapshot(Game, vid) {
       for (let k = 0; k < keys.length; k++) consider(keys[k]);
     }
     return { target: dead, needWave: need, deadTarget: deadTarget,
+      expiredStamp: expiredStamp,
       pool: pool, poolN: pool.length, firstPick: pool.length ? pool[0] : null };
   } catch (e) { return null; }
 }

@@ -239,11 +239,23 @@ function expiriesOf(d) {
   const out = [];
   const seen = {};
   // (a) Brain path: the reseed rule, unchanged (dawnbidDeparts row
-  // shape + prior-target evidence).
+  // shape + prior-target evidence) — PLUS the stale-commit
+  // correction (sim-reseedexpiry-b, 2026-11-20, found on the band-A
+  // probe corpus): vbrainExecuteDepart returns 'normal' BEFORE the
+  // commit check when the stored commit is stale (commit day !=
+  // today), so a stale re-execution the day after an expiry writes
+  // a row shaped exactly like a fresh expiry (same vid, same
+  // companion, same part) — except the snapshot shows the plan
+  // ALREADY targetless (the expiry dissolved it yesterday). A true
+  // expiry's snapshot still holds the dead target. So when a
+  // rumorPool is present, the row counts only when the snapshot's
+  // target is non-null AND dead; rows without a snapshot keep the
+  // old rule (reseed-era corpora).
   for (const r of (d.dawnbidDeparts || [])) {
     if (r.result !== 'normal' || r.winPlanAction !== 'party_launch') continue;
     if (r.stage !== 'party' || r.target != null) continue;
     if (r.vidExped !== false || r.companionExped !== false) continue;
+    if (r.rumorPool && (r.rumorPool.target == null || r.rumorPool.deadTarget !== true)) continue;
     if (!hadTargetBefore(d, r.vid, r.day)) continue;
     const key = [r.vid, r.day].join('|');
     if (seen[key]) continue;
@@ -394,16 +406,34 @@ function postExpiryHolds(d, expiries) {
 // twice when both fire, and the dedupe is the rule (same as
 // launchesOf). A re-seed that launches is counted as a launch on the
 // NEW target (its class is judged by the new target's last fight).
+// CORRECTION 2 (sim-reseedexpiry-b, 2026-11-20, band-A probe): a
+// re-seed of an ALREADY-EXPIRED (targetless) plan has targetBefore
+// null — the reseed arm's rule (targetBefore non-null and differing)
+// misses it entirely, so expired holders looked like they never
+// re-seeded (0/3 within 7d on the probe band, while the game stats
+// showed planReseeds 3 on 106307 and 1 on 106301). Counted when the
+// snapshot carries the expiry stamp (expiredStamp true): the only
+// code that puts a target on a targetless stamped plan at commit
+// time is the commit check's targetless branch (a lived-fight
+// retarget would show up as a non-null targetBefore instead).
+// from is null for these rows — the plan had no target to name.
 function reseedsOf(d) {
   const out = [];
   const seen = {};
   for (const r of (d.v4departs || [])) {
-    if (r.result !== 'launch' || !r.target || !r.gate || !r.gate.targetBefore) continue;
-    if (r.gate.targetBefore === r.target) continue;
+    if (r.result !== 'launch' || !r.target || !r.gate) continue;
+    let from = null, isReseed = false;
+    if (r.gate.targetBefore) {
+      if (r.gate.targetBefore === r.target) continue;
+      from = r.gate.targetBefore; isReseed = true;
+    } else if (r.rumorPool && r.rumorPool.expiredStamp === true) {
+      from = null; isReseed = true;
+    }
+    if (!isReseed) continue;
     const key = [r.vid, r.day, r.target].join('|');
     if (seen[key]) continue;
     seen[key] = true;
-    out.push({ seed: d.seed, day: r.day, vid: r.vid, from: r.gate.targetBefore, to: r.target,
+    out.push({ seed: d.seed, day: r.day, vid: r.vid, from: from, to: r.target,
       source: r.source || null });
   }
   return out;
@@ -1039,6 +1069,69 @@ function selftest() {
   const pdBad = poolDisagreements(dgBad, deadCommitsOf(dgBad));
   check('§G poolDisagreements catches a pool-0 dead commit that launches (1 row)',
     pdBad.length === 1 && pdBad[0].day === 80, pdBad);
+  // CORRECTION 1 — STALE TWIN (2026-11-20, band-A probe seed 106307):
+  // the day after a true expiry, the stale mid-day part-1 commit
+  // re-executes and returns 'normal' WITHOUT the commit check
+  // running (vbrainExecuteDepart returns 'normal' for a stale
+  // commit first). The row is shaped like an expiry — but the
+  // snapshot shows the plan ALREADY targetless. It must not count.
+  const dgStale = { seed: 999010, instrumentErrors: [], winPlanStats: { planExpiries: 1 },
+    v4departs: [], v4encounters: [],
+    v4seeds: [{ day: 35, vid: 'emmett', mid: 'terms_of_service', target: 'terms_of_service', blocked: false }],
+    dawnbidDeparts: [
+      // d36: the TRUE expiry (snapshot still holds the dead target).
+      { seq: 123, day: 36, vid: 'emmett', source: 'brain', result: 'normal',
+        winPlanAction: 'party_launch', commitKind: 'mid-day part-1', commitPart: 1,
+        companion: 'c1', companion2: null, companion3: null,
+        vidExped: false, companionExped: false, vidBlock: 'unknown', companionBlock: 'unknown',
+        stage: 'party', target: null, party: [],
+        rumorPool: { target: 'terms_of_service', needWave: 3, deadTarget: true, pool: [], poolN: 0, firstPick: null } },
+      // d37: the STALE twin (same commit re-executed; plan already targetless).
+      { seq: 124, day: 37, vid: 'emmett', source: 'brain', result: 'normal',
+        winPlanAction: 'party_launch', commitKind: 'mid-day part-1', commitPart: 1,
+        companion: 'c1', companion2: null, companion3: null,
+        vidExped: false, companionExped: false, vidBlock: 'unknown', companionBlock: 'unknown',
+        stage: 'party', target: null, party: [],
+        rumorPool: { target: null, needWave: 3, deadTarget: false, pool: [], poolN: 0, firstPick: null } },
+      // d38: the expiry hold firing on a later commit ('hold', not an expiry).
+      { seq: 125, day: 38, vid: 'emmett', source: 'brain', result: 'hold',
+        winPlanAction: 'party_launch', commitKind: 'mid-day part-2', commitPart: 2,
+        companion: 'c1', companion2: null, companion3: null,
+        vidExped: false, companionExped: false, vidBlock: 'unknown', companionBlock: 'unknown',
+        stage: 'party', target: null, party: [],
+        rumorPool: { target: null, needWave: 3, deadTarget: false, pool: [], poolN: 0, firstPick: null } },
+    ] };
+  const exStale = expiriesOf(dgStale);
+  check('§G stale-twin correction: the d37 stale re-execution is NOT a second expiry (1 expiry: d36 only)',
+    exStale.length === 1 && exStale[0].day === 36, exStale);
+  // CORRECTION 2 — EXPIRED-PLAN RE-SEED (2026-11-20, band-A probe):
+  // a launch whose gate targetBefore is null but whose snapshot
+  // carries the expiry stamp IS a re-seed (the commit check's
+  // targetless branch retargeted the plan at commit time). The same
+  // row without the stamp (a never-targeted plan) is not.
+  const dgRe = { seed: 999011, instrumentErrors: [], winPlanStats: { planExpiries: 1, planReseeds: 1 },
+    v4departs: [
+      { day: 42, vid: 'emmett', result: 'launch', target: 'callback', targetWave: 3,
+        party: ['c1'], partySize: 2, source: 'brain',
+        gate: { stageBefore: 'hunt', targetBefore: null, node: null, sinceDay: 35,
+          villageSlain: null, lastFightDay: null, lastFightKill: null, lastFightOutcome: null,
+          daysSinceLastFight: null, lastSightingDay: null, daysSinceLastSighting: null },
+        rumorPool: { target: null, needWave: 3, deadTarget: false, expiredStamp: true,
+          pool: ['callback'], poolN: 1, firstPick: 'callback' } },
+      // Never-targeted targetless launch (no stamp): NOT a re-seed.
+      { day: 50, vid: 'gen', result: 'launch', target: 'spool', targetWave: 3,
+        party: ['c1'], partySize: 2, source: 'brain',
+        gate: { stageBefore: 'hunt', targetBefore: null, node: null, sinceDay: 35,
+          villageSlain: null, lastFightDay: null, lastFightKill: null, lastFightOutcome: null,
+          daysSinceLastFight: null, lastSightingDay: null, daysSinceLastSighting: null },
+        rumorPool: { target: null, needWave: 3, deadTarget: false, expiredStamp: false,
+          pool: ['spool'], poolN: 1, firstPick: 'spool' } },
+    ],
+    v4encounters: [], v4seeds: [],
+    dawnbidDeparts: [] };
+  const rsRe = reseedsOf(dgRe);
+  check('§G expired-plan re-seed counted (from null -> callback); never-targeted launch not counted',
+    rsRe.length === 1 && rsRe[0].from === null && rsRe[0].to === 'callback' && rsRe[0].day === 42, rsRe);
   // Pooled judge on two synthetic band analyses.
   function mkBand(o) {
     return Object.assign({ dir: 'x', files: 8, seeds: [1], errors: 0, duplicates: 0,
