@@ -21111,6 +21111,254 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // blow-by-blow fight — real stats, the monster's real attack data —
     // never an outcome table. fieldFight() resolves rounds; this method
     // routes the honest record into the world's downstream systems.
+    // LEND (sim-lend-a, finding #2599; return fixed sim-lendfix-a,
+    // finding #2629): the gun to the fighters already going. At a
+    // wave-4+ fight launch, when the picked lead is unarmed-or-empty
+    // and a living armed searcaster holder stands in earshot but is
+    // NOT the lead, the holder lends the gun — or just its cells,
+    // when the lead already carries an empty gun — for that one
+    // fight. Env-gated: LEND=1 (node sims only). Zero Math.random()
+    // calls: roster-order reads + entry-object moves + gear-ups.
+    // The lend is a design call (sim-lend-a prereg, Steve can
+    // overrule): when the village's best weapon is standing in
+    // earshot of the hardest beast and the fighter going in has no
+    // gun, the carrier hands it over for the fight and takes it
+    // back after.
+    _lendSearcaster(vid, m, mdef, opts) {
+      try {
+        var _on = false;
+        try { _on = (typeof process !== 'undefined' && process.env && process.env.LEND === '1'); } catch (e2) {}
+        if (!_on) return null;
+        opts = opts || {};
+        if (opts.raid) return null;
+        var _mdef = null;
+        try { _mdef = (this.data.monsters || []).find(function (x) { return x.id === m.id; }) || null; } catch (e2) {}
+        var _wave = (_mdef && _mdef.wave) || (mdef && mdef.wave) || 0;
+        if (_wave < 4) return null;
+        var _bPerson = null;
+        try { _bPerson = this.getPerson ? this.getPerson(vid) : null; } catch (e2) {}
+        if (!_bPerson || _bPerson.dead) return null;
+        var _S = (typeof globalThis !== 'undefined' ? globalThis.Scattering : null) || {};
+        var _rw = null;
+        try { _rw = (_S.equipment && _S.equipment.rangedWeaponOf) ? _S.equipment.rangedWeaponOf(_bPerson, this.data.items) : ((_bPerson.equipped || {}).ranged || null); } catch (e2) {}
+        var _rwId = _rw ? (_rw.itemId || _rw.id) : null;
+        var _kind = null;
+        if (_rwId === 'searcaster') {
+          var _cells = 0;
+          try { for (var _ci = 0; _ci < (_bPerson.items || []).length; _ci++) { var _ce = _bPerson.items[_ci]; if (_ce && ((_ce.itemId || _ce.id) === 'fusion_cell' || _ce.material === 'fusion_cell')) _cells += (_ce.units || 1); } } catch (e2) {}
+          if (_cells > 0) return null; // a loaded borrower needs nothing
+          _kind = 'cells';
+        } else {
+          _kind = 'gun';
+        }
+        // Armed holder in earshot: roster order, on-tile first, then
+        // adjacent (Chebyshev <= 1 from the monster's tile). The
+        // lender may also be an ally in the fight — ally status does
+        // not block the lend.
+        var _roster = ((this.state.village || {}).roster || []);
+        var _health = ((this.state.village || {}).health || {});
+        var _mtx = (m && m.tx != null) ? m.tx : null, _mty = (m && m.ty != null) ? m.ty : null;
+        var _lender = null, _from = null;
+        for (var _pass = 0; _pass < 2 && !_lender; _pass++) {
+          for (var _ri = 0; _ri < _roster.length; _ri++) {
+            var _hid = _roster[_ri];
+            if (!_hid || _hid === vid || _hid === this.villagerId) continue;
+            var _hp = null;
+            try { _hp = this.getPerson ? this.getPerson(_hid) : null; } catch (e2) {}
+            if (!_hp || _hp.dead) continue;
+            var _hh = _health[_hid];
+            if (_hh !== undefined && _hh <= 20) continue;
+            try { if (this.isSheltered && this.isSheltered(_hid)) continue; } catch (e2) {}
+            try { if (this.isPostFleeResting && this.isPostFleeResting(_hid)) continue; } catch (e2) {}
+            var _node = null;
+            try { _node = this.npcNode ? this.npcNode(_hid) : null; } catch (e2) {}
+            if (!_node || _node.nx == null || _node.ny == null || _mtx == null || _mty == null) continue;
+            var _dist = Math.max(Math.abs(_node.nx - _mtx), Math.abs(_node.ny - _mty));
+            if (_dist > 1) continue;
+            if ((_pass === 0) !== (_dist === 0)) continue;
+            var _hrw = null;
+            try { _hrw = (_S.equipment && _S.equipment.rangedWeaponOf) ? _S.equipment.rangedWeaponOf(_hp, this.data.items) : ((_hp.equipped || {}).ranged || null); } catch (e2) {}
+            if (!_hrw || (_hrw.itemId || _hrw.id) !== 'searcaster') continue;
+            var _hcells = 0;
+            try { for (var _hi = 0; _hi < (_hp.items || []).length; _hi++) { var _he = _hp.items[_hi]; if (_he && ((_he.itemId || _he.id) === 'fusion_cell' || _he.material === 'fusion_cell')) _hcells += (_he.units || 1); } } catch (e2) {}
+            if (_hcells < 1) continue;
+            _lender = _hid; _from = (_dist === 0) ? 'tile' : 'adjacent';
+            break;
+          }
+        }
+        if (!_lender) return null;
+        var _lPerson = null;
+        try { _lPerson = this.getPerson ? this.getPerson(_lender) : null; } catch (e2) {}
+        if (!_lPerson) return null;
+        // Move by entry-object identity: the gun entry + ALL the
+        // lender's fusion-cell entries (gun lend), or just the cells
+        // (cell lend). The borrower's own cells are never moved.
+        var _gunEntry = null, _cellEntries = [];
+        var _litems = _lPerson.items || [];
+        for (var _li = 0; _li < _litems.length; _li++) {
+          var _le = _litems[_li];
+          var _lid = _le ? (_le.itemId || _le.id || _le.material) : null;
+          if (_kind === 'gun' && _lid === 'searcaster' && !_gunEntry) _gunEntry = _le;
+          else if (_lid === 'fusion_cell') _cellEntries.push(_le);
+        }
+        if (_kind === 'gun' && !_gunEntry) return null;
+        if (!_cellEntries.length) return null;
+        _bPerson.items = _bPerson.items || [];
+        _lPerson.items = _litems.filter(function (e) { return e !== _gunEntry && _cellEntries.indexOf(e) === -1; });
+        // The lender's equipped slots still reference the moved entries
+        // (equipped is a reference, not a copy) — clear them, or the
+        // lender still reads as armed with a gun they no longer hold.
+        var _moved = _cellEntries.slice();
+        if (_gunEntry) _moved.push(_gunEntry);
+        if (_lPerson.equipped) {
+          for (var _ek in _lPerson.equipped) { if (_moved.indexOf(_lPerson.equipped[_ek]) !== -1) delete _lPerson.equipped[_ek]; }
+        }
+        var _cellsMoved = 0;
+        for (var _mi = 0; _mi < _cellEntries.length; _mi++) { _cellsMoved += (_cellEntries[_mi].units || 1); _bPerson.items.push(_cellEntries[_mi]); }
+        if (_gunEntry) _bPerson.items.push(_gunEntry);
+        try { if (this.villagerGearUp) this.villagerGearUp(vid, false); } catch (e2) {}
+        // The lender's equipped slots are COPIES rebuilt from items
+        // (autoEquip) — the identity clear above cannot drop the stale
+        // searcaster copy, so gear the lender up too: with the gun gone
+        // from their items, autoEquip clears the ranged slot and the
+        // lender reads as disarmed.
+        try { if (this.villagerGearUp) this.villagerGearUp(_lender, false); } catch (e2) {}
+        return { lender: _lender, borrower: vid, kind: _kind, from: _from, mid: (m && m.id) || null, gunEntry: _gunEntry, cellEntries: _cellEntries.slice(), cellsMoved: _cellsMoved };
+      } catch (e) { return null; }
+    },
+    // _returnLentSearcaster(lend) — the way home for a lent gun.
+    // THE FIX (sim-lendfix-a, finding #2629): the return recovers the
+    // lent entries by entry-object identity from the BORROWER'S OWN
+    // person record — via getPerson, which finds the borrower dead or
+    // alive, on-roster or off it — NOT from any roster-scoped read.
+    // Probed, not assumed: a real deadly fieldFight (vDie round 1,
+    // direct + lender-as-ally) followed by the full hurtVillager
+    // settlement leaves the lent gun in the dead borrower's items,
+    // findable by identity (probe /tmp/lendfix-probe.js, seed 7). The
+    // engine never strips it. The lend-a sink was the return never
+    // looking there: roster reads (census, transfer detector, any
+    // roster-iterating lookup) go blind the moment the borrower
+    // leaves the roster, so the gun read as lost while it sat in a
+    // dead villager's pack. This return searches the borrower's items
+    // + equipped slots by identity first, then the corpse list, and
+    // removes the entry from wherever it is found before returning
+    // it, so the gun is never duplicated. A dead lender means the
+    // borrower keeps the gun; both dead means it stays with the
+    // borrower's gear (existing death handling — still findable in
+    // the dead borrower's items, not lost). Deterministic: zero draws.
+    _returnLentSearcaster(lend) {
+      var _out = { lender: null, borrower: null, mid: null, gunReturned: false, cellsReturned: 0, lenderAlive: false, borrowerAlive: false };
+      try {
+        if (!lend) return _out;
+        _out.lender = lend.lender || null;
+        _out.borrower = lend.borrower || null;
+        _out.mid = lend.mid || null;
+        var _bPerson = null, _lPerson = null;
+        try { _bPerson = this.getPerson ? this.getPerson(lend.borrower) : null; } catch (e) {}
+        try { _lPerson = this.getPerson ? this.getPerson(lend.lender) : null; } catch (e) {}
+        var _health = ((this.state.village || {}).health || {});
+        var _alive = function (p, vid) {
+          if (!p || p.dead) return false;
+          var _h = _health[vid];
+          if (_h !== undefined && _h <= 0) return false;
+          return true;
+        };
+        _out.borrowerAlive = _alive(_bPerson, lend.borrower);
+        _out.lenderAlive = _alive(_lPerson, lend.lender);
+        var _self = this;
+        // Locate a lent entry by identity: borrower items, lender
+        // items (a previous partial return), borrower/lender equipped
+        // slots, then every corpse's items.
+        var _findEntry = function (entry) {
+          if (!entry) return null;
+          var _places = [];
+          if (_bPerson && _bPerson.items) _places.push(_bPerson.items);
+          if (_lPerson && _lPerson.items) _places.push(_lPerson.items);
+          for (var _pi = 0; _pi < _places.length; _pi++) {
+            var _ix = _places[_pi].indexOf(entry);
+            if (_ix !== -1) return { arr: _places[_pi], idx: _ix };
+          }
+          var _eqs = [];
+          if (_bPerson && _bPerson.equipped) _eqs.push(_bPerson.equipped);
+          if (_lPerson && _lPerson.equipped) _eqs.push(_lPerson.equipped);
+          for (var _ei = 0; _ei < _eqs.length; _ei++) {
+            for (var _k in _eqs[_ei]) { if (_eqs[_ei][_k] === entry) return { arr: null, idx: -1, slot: _k, eqObj: _eqs[_ei] }; }
+          }
+          try {
+            var _corpses = _self.corpses ? _self.corpses() : null;
+            if (Array.isArray(_corpses)) {
+              for (var _ci = 0; _ci < _corpses.length; _ci++) {
+                var _citems = _corpses[_ci] && _corpses[_ci].items;
+                if (!_citems) continue;
+                var _cix = _citems.indexOf(entry);
+                if (_cix !== -1) return { arr: _citems, idx: _cix };
+              }
+            }
+          } catch (e2) {}
+          return null;
+        };
+        // Take the entry out of wherever it sits (clearing any
+        // equipped slot that still references it), so the return can
+        // never duplicate it.
+        var _takeEntry = function (entry) {
+          var _loc = _findEntry(entry);
+          if (!_loc) return false;
+          if (_loc.arr) {
+            _loc.arr.splice(_loc.idx, 1);
+            for (var _p = 0; _p < 2; _p++) {
+              var _per = (_p === 0) ? _bPerson : _lPerson;
+              if (_per && _per.equipped) {
+                for (var _sk in _per.equipped) { if (_per.equipped[_sk] === entry) delete _per.equipped[_sk]; }
+              }
+            }
+            return true;
+          }
+          if (_loc.slot && _loc.eqObj) { delete _loc.eqObj[_loc.slot]; return true; }
+          return false;
+        };
+        // Cells first: every moved cell entry with units left comes
+        // home to a living lender. (An entry spent to 0 was already
+        // spliced by the volley and returns nothing.)
+        var _cellsBack = 0;
+        var _cellEntries = lend.cellEntries || [];
+        if (_out.lenderAlive && _lPerson) {
+          _lPerson.items = _lPerson.items || [];
+          for (var _i = 0; _i < _cellEntries.length; _i++) {
+            var _cent = _cellEntries[_i];
+            var _units = (_cent && (_cent.units || 1)) || 0;
+            if (_units <= 0) continue;
+            if (_lPerson.items.indexOf(_cent) !== -1) { _cellsBack += _units; continue; }
+            if (_takeEntry(_cent)) { _lPerson.items.push(_cent); _cellsBack += _units; }
+          }
+        }
+        _out.cellsReturned = _cellsBack;
+        // The gun: home to a living lender, verified by identity in
+        // the lender's items after the move.
+        if (lend.gunEntry) {
+          if (_out.lenderAlive && _lPerson) {
+            if ((_lPerson.items || []).indexOf(lend.gunEntry) !== -1) {
+              _out.gunReturned = true;
+            } else if (_takeEntry(lend.gunEntry)) {
+              _lPerson.items = _lPerson.items || [];
+              _lPerson.items.push(lend.gunEntry);
+              _out.gunReturned = ((_lPerson.items || []).indexOf(lend.gunEntry) !== -1);
+            }
+          } else {
+            _out.gunReturned = false;
+          }
+        } else {
+          _out.gunReturned = false;
+        }
+        // Re-seat: the borrower back to their own best weapon, the
+        // lender back to the returned gun.
+        try { if (_out.borrowerAlive && _bPerson && this.villagerGearUp) this.villagerGearUp(lend.borrower, false); } catch (e) {}
+        try { if (_out.lenderAlive && _lPerson && this.villagerGearUp) this.villagerGearUp(lend.lender, false); } catch (e) {}
+        if (_out.gunReturned && _lPerson) {
+          if ((_lPerson.items || []).indexOf(lend.gunEntry) === -1) _out.gunReturned = false;
+        }
+        return _out;
+      } catch (e) { return _out; }
+    },
     resolveWildMonsterEncounter(vid, m, opts) {
       opts = opts || {};
       // POST-FLEE REST: entry HP, so a vFlee below 25% of max can be
@@ -21197,8 +21445,45 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         try { if (this.winPlanBumpWildAvoid) this.winPlanBumpWildAvoid(); } catch (e) {}
         return { avoided: true, reason: 'outmatched', viaAid: wViaAid, wave: mdef.wave || 0, mid: mdef.id || m.id };
       }
-      let rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
-      if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
+      // LEND (sim-lend-a, finding #2599; return fixed sim-lendfix-a,
+      // finding #2629): the gun to the fighters already going. The
+      // helper returns null when LEND is unset or no lend fires, and
+      // the fight below runs exactly as before. The return runs in
+      // the finally — before the summary and all downstream scoring —
+      // so a lent gun is home before any vKill loot or vDie
+      // settlement reads the borrower's kit.
+      let _lend = null;
+      try { _lend = this._lendSearcaster ? this._lendSearcaster(vid, m, mdef, opts) : null; } catch (e) {}
+      let rec = null;
+      try {
+        rec = wViaAid ? this.aidFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids.slice() }) : null;
+        if (!rec) { wViaAid = false; rec = this.fieldFight(vid, mdef, m, { allies: wAllies, allyVids: wAllyVids }); }
+      } finally {
+        if (_lend) {
+          var _lret = null;
+          try { _lret = this._returnLentSearcaster ? this._returnLentSearcaster(_lend) : null; } catch (e2) {}
+          try {
+            if (rec && rec.log) {
+              var _lb = null, _ll = null;
+              try { _lb = this.getPerson ? this.getPerson(_lend.borrower) : null; } catch (e3) {}
+              try { _ll = this.getPerson ? this.getPerson(_lend.lender) : null; } catch (e3) {}
+              var _bn = _lb && _lb.name ? String(_lb.name).split(' ')[0] : 'Someone';
+              var _ln = _ll && _ll.name ? String(_ll.name).split(' ')[0] : 'Someone';
+              if (_lend.kind === 'gun') rec.log.unshift(_ln + ' presses the Searcaster into ' + _bn + '\'s hands — \'Take it. You go first.\'');
+              else rec.log.unshift(_ln + ' presses ' + (_lend.cellsMoved | 0) + ' fusion cells into ' + _bn + '\'s hands — \'For the Searcaster. Make them count.\'');
+              if (_lret) {
+                if (_lend.kind === 'gun') {
+                  if (!_lret.lenderAlive) rec.log.push(_ln + ' is gone — ' + _bn + ' keeps the Searcaster.');
+                  else if (!_lret.borrowerAlive) rec.log.push(_bn + ' falls — ' + _ln + ' takes the Searcaster back.');
+                  else rec.log.push(_bn + ' hands the Searcaster back to ' + _ln + '.');
+                } else {
+                  rec.log.push(_bn + ' hands the spare cells back to ' + _ln + '.');
+                }
+              }
+            }
+          } catch (e4) {}
+        }
+      }
       const summary = this.fieldFightSummary(rec, name, mName);
       // RETURN-TO-FIGHT (gap-routing 2026-10-27): a villager who actually
       // fought a living world monster remembers the fight's tile, so the
@@ -47281,6 +47566,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (!pool.length) tier--;
       }
       if (!pool.length) return null;
+      // GUNRATE (sim-gunrate-a, finding #2599): the tier-4 contest pool
+      // weights the searcaster x4 (1/15 -> 4/18) — contest prizes only.
+      // Trade and kill-loot paths are untouched, and no draw is added.
+      // Env-gated: GUNRATE=1 (node sims only; in the browser process
+      // is undefined, so the lever is off).
+      try {
+        var _grOn = false;
+        try { _grOn = (typeof process !== 'undefined' && process.env && process.env.GUNRATE === '1'); } catch (e2) {}
+        if (_grOn && loot.rewardSource === 'contest' && tier === 4) {
+          var _sear = null;
+          for (var _si = 0; _si < pool.length; _si++) { if (pool[_si] && pool[_si].id === 'searcaster') { _sear = pool[_si]; break; } }
+          if (_sear) { pool.push(_sear, _sear, _sear); }
+        }
+      } catch (e) {}
       return pool[Math.floor(Math.random() * pool.length)].id;
     },
     // ALIEN LOOT GRANT (Steve 2026-10-06): ONE shared path for monster-kill

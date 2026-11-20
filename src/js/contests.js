@@ -166,6 +166,38 @@
     return tier;
   };
 
+  // GUNRATE (sim-gunrate-a, finding #2599): the redirect recipient — the
+  // village's lead-weighted living villager. Current expedition +8,
+  // launches +2 each capped +8, wave-3 kill +4, wave-2 kill +2, contest
+  // win +1 each; roster-order tie-break. Own eligibility (alive + on
+  // roster), never the scholar. Zero draws.
+  G._gunRateFighter = function() {
+    var roster = ((this.state.village || {}).roster || []);
+    var agency = null;
+    try { agency = this.agencyState ? this.agencyState() : null; } catch (e) {}
+    var exped = (agency && agency.exped) || {};
+    var stats = (agency && agency.stats) || {};
+    var nota = this.state.notability || {};
+    var best = null, bestScore = -1;
+    for (var i = 0; i < roster.length; i++) {
+      var vid = roster[i];
+      if (!vid || vid === this.villagerId) continue;
+      var p = null;
+      try { p = this.getPerson ? this.getPerson(vid) : null; } catch (e2) {}
+      if (!p || p.dead) continue;
+      var score = 0;
+      if (exped[vid]) score += 8;
+      var launches = ((stats[vid] || {}).expeditions || 0);
+      score += Math.min(launches * 2, 8);
+      var n = nota[vid] || {};
+      if (n.wave3Kill) score += 4;
+      if (n.wave2Kill) score += 2;
+      score += (n.contestWin || 0);
+      if (score > bestScore) { bestScore = score; best = vid; }
+    }
+    return best;
+  };
+
   G._cxItemPrize = function(ac, contest, who) {
     who = who || 'player';
     const cfg = (this.data.rewardEconomy || {}).broadcast || {};
@@ -178,14 +210,32 @@
     const apex = wave >= 4 || wins >= (cfg.apexWins == null ? 8 : cfg.apexWins) || (this.apFavor && this.apFavor() >= (cfg.apexFavor == null ? 100 : cfg.apexFavor));
     if (contest.risk === 'extreme' && apex && Math.random() < (cfg.apexChance == null ? 0.25 : cfg.apexChance)) tier = 4;
     const loot = this.rollAlienLoot({ wave, loot: { chance, tier, rewardSource: 'contest' } });
-    const person = who === 'player' ? null : this.getPerson(who);
+    // GUNRATE (sim-gunrate-a): a searcaster / fusion_cell prize won by
+    // the player is REDIRECTED to the lead-weighted living villager, and
+    // a searcaster prize BUNDLES 2 fusion cells to the same recipient.
+    // Env-gated: GUNRATE=1. Zero draws; ordinary prizes stay put.
+    var _grOn = false;
+    try { _grOn = (typeof process !== 'undefined' && process.env && process.env.GUNRATE === '1'); } catch (e2) {}
+    var recip = who;
+    if (_grOn && loot && (loot === 'searcaster' || loot === 'fusion_cell') && who === 'player') {
+      var _f = null;
+      try { _f = this._gunRateFighter ? this._gunRateFighter() : null; } catch (e3) {}
+      if (_f) recip = _f;
+    }
+    const person = recip === 'player' ? null : this.getPerson(recip);
     // Never redirect a missing/dead winner's personal reward to the bearer.
-    if (who !== 'player' && (!person || !this.isMember(who))) return false;
+    if (recip !== 'player' && (!person || !this.isMember(recip))) return false;
     if (person) person.items = person.items || [];
     const granted = loot ? this.alienLootGrant(loot, person) : null;
     if (granted) {
+      // Bundle: 2 fusion cells beside a granted searcaster, same recipient.
+      if (_grOn && loot === 'searcaster') {
+        var _cell = { itemId: 'fusion_cell', name: 'Fusion cell', units: 2, kg: 0.4 };
+        if (person) person.items.push(_cell);
+        else { const s = this.state.scholar || {}; s.inventory = s.inventory || []; s.inventory.push(_cell); }
+      }
       const d = granted.def;
-      const name = who === 'player' ? 'your' : this.displayName(who) + "'s";
+      const name = recip === 'player' ? 'your' : this.displayName(recip) + "'s";
       this.sysSay(`📺 The System presses something humming into ${name} hands: ${d.name}.${d.flavor ? ' ' + d.flavor : ''}`);
       this.tele('broadcast_item_prize', { who, id: d.id, tier: d.lootTier || 1, contest: contest.id });
       return true;

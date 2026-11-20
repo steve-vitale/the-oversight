@@ -1008,7 +1008,18 @@
           _cfAmmoBefore = _ammoN;
           var _maxShots = clamp(1 + Math.floor(_range / Math.max(1, mSpeed)), 1, 4);
           var _shots = Math.min(_ammoN, _maxShots);
-          if (_shots < 1) {
+          // CELLGATE (sim-cellgate-a, finding #2599): a searcaster lead
+          // holds fire below wave 4 — the bundle's cells survive the
+          // first low-wave fight. Env-gated: CELLGATE=1. Other weapons
+          // are untouched; a cell-less gun still says "no fusion cells"
+          // (that line lives in the _shots < 1 branch below, which is
+          // why the hold needs cells to save).
+          var _cgHold = false;
+          try { _cgHold = (typeof process !== 'undefined' && process.env && process.env.CELLGATE === '1') && _rwId === 'searcaster' && wave < 4 && _ammoN > 0; } catch (e2) {}
+          if (_cgHold) {
+            rec.log.push(vName + ' holds the Searcaster — the beast is below wave 4, and the cells are saved for harder prey.');
+            rec.volley = { shots: 0, hits: 0, dmg: 0, ammoLeft: _ammoN };
+          } else if (_shots < 1) {
             // #2593 (sim-speargate-a): name the weapon's ACTUAL ammo —
             // a searcaster takes fusion cells, a crossbow bolts, a sling
             // stones — not "arrows" for all of them. The plural comes
