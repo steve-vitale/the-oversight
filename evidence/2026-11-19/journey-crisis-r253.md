@@ -140,18 +140,23 @@ proof (`test-titan-refusal-have-counts-haven-20261119.js`) 15/15.
   and Joko's d50 death absent from the census corpse list (r247 review 10)
   — census-owner looks, no panel impact, carried.
 
-## Base movement at merge (1cb6ce2e1 → ae33e03b3)
+## Base movement at merge (1cb6ce2e1 → 0edff1f59)
 
-20 commits to `55770a359` plus the Lane A r245 landing. Only ONE touches
-live behavior under the default panel: **SEARSUPPLY lever (6c4b75925,
-src/js/contests.js +66, src/js/game.js +12)** — contest-prize redirect to
-fight-proven villagers, searcaster bundles 2 cells, tier-4 cell weight x4
-[needs-eyes]. It postdates the r253 panel, so the panel verdicts stand on
-`1cb6ce2e1`; the proof tests were re-run GREEN on the merged base. The rest
-is evidence/scripts only (searsupply prereg/evidence, winnability round
-record, scale-onramp adoption, deadtarget/laterage/spearstage/fusioncell
-diagnostics) plus the r245 deepening run note + gate log. Canon unchanged
-(`git log` on the canon docs empty since r247, per prereg).
+25 commits to `55770a359`, the Lane A r245 landing, plus 5 bowknow commits.
+TWO touch live behavior under the default panel, both postdating the r253
+panel, so the panel verdicts stand on `1cb6ce2e1`:
+(a) **SEARSUPPLY lever (6c4b75925, src/js/contests.js +66, src/js/game.js
++12)** — contest-prize redirect to fight-proven villagers, searcaster
+bundles 2 cells, tier-4 cell weight x4 [needs-eyes].
+(b) **BOWKNOW mentoring (eaf530d6a, src/js/villager-build.js +60)** — a
+bow-knower at home teaches spear-holders (finding #2590 serve half);
+prereg + proof 19/19.
+The proof tests were re-run GREEN on the merged base after each rebase.
+The rest is evidence/scripts only (searsupply prereg/evidence, winnability
+round record, scale-onramp adoption, deadtarget/laterage/spearstage/
+fusioncell diagnostics, bowknow prereg/analyzer/driver/evidence) plus the
+r245 deepening run note + gate log. Canon unchanged (`git log` on the canon
+docs empty since r247, per prereg).
 
 ## Gate
 
