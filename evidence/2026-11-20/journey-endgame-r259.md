@@ -12,7 +12,11 @@ Coordinator dead (no WT_RUN_ID, no endgame processes); the orphan hbloop
 (22:59:34Z). The adoption ran the Pass D analyzer (not run by the
 coordinator), the telemetry adjudication, the people check, the gate, and
 this note. Rebased onto master `8ca5da828` (Loop A 2015Z sim-ammo-a
-landing) — clean, no conflicts. New tip `9268bbccc` (pre-merge).
+landing) — clean, no conflicts. Master moved again while the gate ran
+(the Loop A 2015Z adoption landed, tip `a4e7173d4`), so the branch was
+rebased a second time onto `a4e7173d4` — clean, no conflicts — and the
+gate re-run on the final tip. New tip `626deadb1` (pre-merge, before the
+gate-2 amendment commit).
 **Rotation:** read 4 → write 4→5 at closeout on verified landing. Next leg:
 social life.
 **Worktree:** `~/workspace/worktrees/journey2-endgame` (branch
@@ -320,9 +324,10 @@ tolerance, not rolled.
 ## Gate
 
 `node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest2`
-on the rebased tip (`9268bbccc`), log
-`hidden_files/journey-endgame-r259-gate.log`: **338 passed, 6 failed
-in 699s — 0 attributable.** All six are the standing set:
+ran twice (see Infrastructure below). First run on the rebased tip
+(`9268bbccc`), log `hidden_files/journey-endgame-r259-gate.log`:
+**338 passed, 6 failed in 699s — 0 attributable.** All six are the
+standing set:
 - measurement-proof staleness pair: `test-measurement-proof-update.js`
   + `test-measurement-workflow.js` (proof re-sign round 22 still owed).
 - phone-frame stale receipt: `test-phone-frame-proof.js`.
@@ -338,13 +343,24 @@ restart (~23:23Z, uptime 1 min at 23:24:30Z); heartbeat re-established
 first, writes re-probed OK, gate re-run from scratch. No flap during
 either attempt.
 
+Second run (the gate of record) on the final rebased tip (`626deadb1`,
+after master moved to `a4e7173d4` — the Loop A 2015Z adoption, which
+landed the lendfix src/js change env-gated OFF), log
+`hidden_files/journey-endgame-r259-gate2.log`: **336 passed, 8 failed
+in 1141s — 0 attributable.** Same standing families as run 1, plus two
+more 120s timeouts (`test-occupation-panels.js`,
+`test-trust-observer-neutrality.js`) — the run took 19 min under load
+(the sibling pinquaddoor-b gate ran concurrently for part of it), so
+more timeout flakes. The six run-1 failures recur identically.
+
 ## Landing
 
-- Commit `944a833db` (rebased to `9268bbccc`): prereg, 4 pass logs,
+- Commit `910e9cd94` (rebased onto `a4e7173d4`): prereg, 4 pass logs,
   smoke log, 4 analyzer logs + .err, probe/analyzer/clone scripts,
   5 perseed corpora (50 files). Evidence-only, 0 src/js changes.
-- Run note: this file (second commit on the branch, below the evidence
-  commit).
-- Gate log: `hidden_files/journey-endgame-r259-gate.log`.
+- Run note: this file (`626deadb1` + gate-2 amendment commit).
+- Gate logs: `hidden_files/journey-endgame-r259-gate.log` (run 1,
+  338/6) and `hidden_files/journey-endgame-r259-gate2.log` (run 2,
+  336/8 — gate of record, on the final tip).
 - Rotation-b: 4 → 5 (social life) after verified merge.
 - Lock deleted last on run_id match.
