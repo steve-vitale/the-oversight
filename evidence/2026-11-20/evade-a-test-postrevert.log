@@ -1,0 +1,61 @@
+  FAIL EVADEOBS env gate read in fieldFights.js
+  FAIL observation call sits inside the awareness-evade early return — ;
+          rec.vHpLeft = vHp; rec.mHpLeft = members[0].hp;
+          try { GPf?.finishFieldEscape(this, vid, huntOpening, rec, !!opts.noFlee); } catch (e) { console.warn('[godpath] field evasion', e)
+  PASS settlement observation call untouched (vFlee/mFlee/evade)
+  FAIL DEPMATSCOPE env gate read in villagerStageBow
+  FAIL scope condition gates the site block on spear-holders
+  PASS fieldFight callable
+  PASS villageKnowsTrick callable
+  PASS roster has >=4 non-vessel villagers
+  PASS influencer def present (wave-4 trick-bearing)
+
+=== M1: flag off — two awareness-evades record 0 observations ===
+after: obs=0 known=false outcomes=evade/evade rounds=0/0 observedTele=0
+  PASS M1 flag off: both meetings evade (rounds 0, no contact)
+  PASS M1 flag off: 0 observations after two evades
+  PASS M1 flag off: trick stays unknown
+  PASS M1 flag off: no counter_observed telemetry
+
+=== M2: flag on — two awareness-evades teach the trick ===
+after 1st: obs=0 known=false outcome=evade observedTele=0
+  PASS M2 flag on: first evade still evades (rounds 0 — the fix records, it does not force contact)
+  FAIL M2 flag on: first evade records obs 1 — obs=0
+  PASS M2 flag on: trick still unknown after one observation
+  FAIL M2 flag on: one counter_observed telemetry after first evade — []
+after 2nd: obs=0 known=false outcome=evade observedTele=0 discoveredTele=0
+  PASS M2 flag on: second evade still evades (rounds 0)
+  FAIL M2 flag on: second evade records obs 2 — obs=0
+  FAIL M2 flag on: trick learned after two evades
+  FAIL M2 flag on: villagerTricks holds the species
+  FAIL M2 flag on: two counter_observed telemetry total — []
+  FAIL M2 flag on: one counter_discovered telemetry — []
+  FAIL M2 flag on: the counter is announced aloud — []
+
+=== M3: flag on — third evade records nothing more ===
+after 3rd: obs=0 known=false discoveredTele=0
+  PASS M3 third evade: still evades
+  FAIL M3 third evade: obs stays 2 (already known — no double-count) — obs=0
+  PASS M3 third evade: no second counter_discovered telemetry
+
+=== M4: flag on — the 'player' vid's evades take no villager observation ===
+after: obs=0 outcomes=evade/evade
+  PASS M4 player evades: both meetings evade
+  PASS M4 player evades: 0 villager observations
+  PASS M4 player evades: trick stays unknown
+
+=== M5: scope — non-spear villager, flag on: no site supply; scope off: served ===
+scope on: source=noSource siteTele=0 draws=0
+  PASS M5 scope on: non-spear staging records noSource
+  PASS M5 scope on: no site telemetry
+  PASS M5 scope on: return carries no depmatSite
+scope off: source=noSource siteTele=0
+  FAIL M5 scope off: same villager is served (unscoped recovery, unchanged) — noSource
+  FAIL M5 scope off: site telemetry fires — []
+
+=== M6: draws — first evade, flag off vs on ===
+first-evade draws: off=2 on=2; second-evade draws on=2
+  PASS M6 first evade: flag on draws exactly the flag-off count (telemetry draws nothing)
+  PASS M6 second evade: the trick-learn evade draws the same count (say draws nothing)
+
+EVADE 22 passed, 15 failed — FAILS: EVADEOBS env gate read in fieldFights.js; observation call sits inside the awareness-evade early return; DEPMATSCOPE env gate read in villagerStageBow; scope condition gates the site block on spear-holders; M2 flag on: first evade records obs 1; M2 flag on: one counter_observed telemetry after first evade; M2 flag on: second evade records obs 2; M2 flag on: trick learned after two evades; M2 flag on: villagerTricks holds the species; M2 flag on: two counter_observed telemetry total; M2 flag on: one counter_discovered telemetry; M2 flag on: the counter is announced aloud; M3 third evade: obs stays 2 (already known — no double-count); M5 scope off: same villager is served (unscoped recovery, unchanged); M5 scope off: site telemetry fires
