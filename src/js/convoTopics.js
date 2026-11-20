@@ -1329,6 +1329,27 @@
               // repeated visibly (2 templates). Grief-through-routine voice.
               '"We lost ' + mlist + '. I do the headcount without thinking. Then I think."',
               '"' + mgone + '. The fire doesn\'t care. That\'s what gets me — the fire doesn\'t care."'];
+            // REL-MOURN MULTI-NAME (journey-succession r254 2026-11-20):
+            // witnessed deaths arrive clustered — combat kills the people
+            // standing next to the dead — so the witness variant was
+            // unreachable exactly when witnessed deaths happen: the
+            // multi-name branch carried no relationship variant. When the
+            // speaker witnessed the MOST-RECENT fresh dead, the witness
+            // lines join the multi-name pool. The group templates grieve
+            // the group; the witness speaks about the one they saw fall.
+            // Gated on t2MournRel (ev.witnesses carries the latest
+            // corpse's witnesses only): a speaker who witnessed an
+            // EARLIER fresh corpse but not the latest gets nothing — the
+            // lines would name the wrong dead. Same {mname} discipline
+            // as the single-name branch (filled by t2fill AFTER the pick;
+            // ev.name is the latest dead, the witnessed one by the gate).
+            // Bond/vet variants in multi-name stay open, not built here.
+            try {
+              const _relM = (typeof this.t2MournRel === 'function') ? this.t2MournRel(vid, ev) : null;
+              if (_relM && _relM.witnessed) mlines.push(
+                '"I was there when {mname} fell. I keep seeing it when I blink, and blinking doesn\'t help."',
+                '"I saw {mname} go down. I did what I could. It wasn\'t enough, and I carry that now."');
+            } catch (e) {}
           } else if (mnames.length === 1) {
             // MOURN-TEMPLATE (journey-succession r231 2026-11-17): the
             // templates carry {mname} — the name is filled by t2fill AFTER
