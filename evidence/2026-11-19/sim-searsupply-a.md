@@ -80,10 +80,20 @@ are alien tech.
   `searsupplyOn: true`, `searsupplyPresent: true`, anchor
   `6c4b75925`. Corpus:
   `evidence/2026-11-19/perseed-searsupply-a-arm/searsupply-a-s107051-searsupply-a-arm.json`.
-- **Running detached** (launched ~04:07Z, PIDs 44655 ctl /
-  44656 arm — see §7): ctl leg 8 seeds (107051–107058), arm leg
+- **Running as runtime-tracked background execs** (relaunched
+  ~03:44Z — see §7): ctl leg 8 seeds (107051–107058), arm leg
   the remaining 7 (107052–107058; 107051 is the smoke seed and
   must NOT be re-run — the driver refuses to overwrite).
+  **RESTART KILL (recorded 03:43Z):** the first pilot launch
+  (detached setsid, PIDs 44655/44656, ~03:38Z) died silently at a
+  VM restart at ~03:41Z — `uptime` read 2 min at 03:43Z, the
+  classic tell. Zero seeds were lost (nothing had been written
+  yet; the smoke corpus was already committed). The relaunch uses
+  runtime-tracked background execs instead of setsid, so a
+  failure is reported rather than silent — but a further restart
+  would still kill them, in which case re-run the §7 commands
+  (the driver refuses to overwrite finished seeds, so a re-run
+  resumes the missing seeds only).
 
 ## 4. Smoke-seed signal (ONE seed — a signal, not a verdict)
 
@@ -143,11 +153,18 @@ are alien tech.
 **Hold worktree `sim-searsupply-a` until both sweeps exit.**
 Progress: count JSON lines in `evidence/2026-11-19/searsupply-a-sweep-ctl.log`
 (target 8) and `searsupply-a-sweep-arm.log` (target 7); both
-`.err` files must stay empty of driver errors. PIDs 44655 (ctl)
-and 44656 (arm), launched detached via `/tmp/searsupply-sweep.sh`
-(setsid + nohup; the script text is recorded here in case it must
-be re-run — it refuses to overwrite finished seeds, so re-running
-it after a kill resumes the missing seeds only).
+`.err` files must stay empty of driver errors. The sweeps are
+runtime-tracked background execs (relaunched ~03:44Z after the
+~03:41Z restart killed the first detached launch — see §3); if
+they die, re-run the driver commands below (the driver refuses to
+overwrite finished seeds, so a re-run resumes the missing seeds
+only):
+
+```
+cd ~/workspace/worktrees/sim-searsupply-a
+VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 SENSEEXPED=1 MODE=ctl OUTDIR=perseed-searsupply-a-ctl SEEDS=107051,107052,107053,107054,107055,107056,107057,107058 RUN=searsupply-a node scripts/searsupply-driver-a.js > evidence/2026-11-19/searsupply-a-sweep-ctl.log 2> evidence/2026-11-19/searsupply-a-sweep-ctl.err
+VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 SENSEEXPED=1 SEARSUPPLY=1 MODE=arm OUTDIR=perseed-searsupply-a-arm SEEDS=107052,107053,107054,107055,107056,107057,107058 RUN=searsupply-a node scripts/searsupply-driver-a.js > evidence/2026-11-19/searsupply-a-sweep-arm.log 2> evidence/2026-11-19/searsupply-a-sweep-arm.err
+```
 
 When both legs are done:
 
