@@ -235,6 +235,18 @@ the witness-variant change. (Adoption re-runs the fix proof test and
 check.js --quick fresh on the rebased tip before merging; results
 recorded in the closeout commit if they differ.)
 
+**Adoption re-run (fresh, rebased tip `0d925556a` + fix, log
+`journey-succession-r254-gate-adoption.log`): 335 passed, 9 failed in
+1385s — 0 attributable.** The same 5 standing failures, plus 4
+parallel-load flakes, each verified GREEN standalone on this tip:
+`test-measurement-cache-flags.js` 4/4 (was exit 1 in-gate),
+`test-occupation-panels.js` 25/25, `test-trust-observer-neutrality.js`
+6/6, `test-capable-bot-20261014.js` 42/42 (all three were 120s
+timeouts in-gate). The gate ran slower (1385s vs 802s) under heavy
+concurrent load (bowsee + deadgate + journey-scale active). Fix proof
+test 4/4 GREEN and r232 regression proof ALL GREEN re-run on the
+rebased tip.
+
 ## Reachable / Fun / Winnable
 
 - **Reachable: YES, with a caveat.** The succession leg fires on every
