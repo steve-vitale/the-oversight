@@ -1,0 +1,210 @@
+{
+  "verdict": "NO-GO",
+  "kind": "METRIC-BROKEN",
+  "bars": [
+    {
+      "id": "pool-first-fights",
+      "pass": false,
+      "detail": "launches with a first fight against the target 4 (floor 6); launches total 8; distinct first-fight rows 4"
+    },
+    {
+      "id": "pool-fled",
+      "pass": false,
+      "detail": "fled first-fights 3 (floor 4); killed 1, died 0, other 0"
+    },
+    {
+      "id": "instrument",
+      "pass": true,
+      "detail": "instrument errors 0 (bar 0); files 8/8"
+    },
+    {
+      "id": "classification",
+      "pass": true,
+      "detail": "classified first-fights 4/4 = 1.000 (bar >= 0.90); strict-reading share 0.500 (2/4)"
+    },
+    {
+      "id": "reconciliation",
+      "pass": true,
+      "detail": "exact-identity error 0.0% (band 15%)"
+    },
+    {
+      "id": "accounted-share",
+      "pass": false,
+      "detail": "accounted 0.694 (bar 0.70); gap 98.3/round; D_meas 12.7"
+    },
+    {
+      "id": "top-contributor",
+      "pass": true,
+      "detail": "top baseCeiling 60.8/round = 61.9% of gap (bar 25%)"
+    }
+  ],
+  "launches": 8,
+  "firstFights": 4,
+  "distinctFights": 4,
+  "fled": 3,
+  "killed": 1,
+  "died": 0,
+  "other": 0,
+  "noFight": 4,
+  "classified": 4,
+  "classifiedShare": 1,
+  "strictClassified": 2,
+  "strictClassifiedShare": 0.5,
+  "byOrigin": {
+    "aid": 1,
+    "world-tick": 3
+  },
+  "byOutcome": {
+    "vKill": 1,
+    "vFlee": 3
+  },
+  "sameDayFirstFights": 1,
+  "agg": {
+    "n": 3,
+    "totalRounds": 12,
+    "totalDealt": 138,
+    "totalVolley": 0,
+    "dMeas": 12.73015873015873,
+    "dStrikePooled": 11.5,
+    "gap": 98.26984126984127,
+    "strikesAttempted": 11,
+    "strikesLanded": 11,
+    "strikesZero": 0,
+    "hitRate": 1,
+    "attemptsPerRound": 0.9166666666666666,
+    "pMean": 12.545454545454545,
+    "verbRounds": 2,
+    "emptyStrikerRounds": 35,
+    "echoStrikes": 0,
+    "components": {
+      "verbLoss": 2.736111111111111,
+      "missLoss": 0,
+      "allyDelayLoss": 4.666666666666667,
+      "baseCeiling": 60.81818181818182
+    },
+    "accounted": 0.6942207162890414,
+    "topContributor": "baseCeiling",
+    "topValue": 60.81818181818182,
+    "topShareOfGap": 0.6188895904612267,
+    "recon": {
+      "aPrime": 2.090909090909091,
+      "bPrime": 0,
+      "cPrime": 36.590909090909086,
+      "echoBonus": 0,
+      "reconSum": 38.68181818181818,
+      "reconTarget": 38.68181818181818,
+      "reconErr": 0
+    },
+    "perMember": {
+      "fighter": 131,
+      "ally1": 7,
+      "ally2": 0,
+      "ally3": 0,
+      "total": 138,
+      "fighterShare": 0.9492753623188406,
+      "ally1Share": 0.050724637681159424,
+      "ally2Share": 0,
+      "ally3Share": 0
+    },
+    "ability": {
+      "touchDmg": 0,
+      "touchShare": 0,
+      "excess": 0,
+      "excessShare": 0
+    },
+    "tricks": {
+      "trickCount": 0,
+      "trickRounds": 0
+    },
+    "volleyShare": 0,
+    "roundsMedian": 3,
+    "roundsMean": 4,
+    "killGapHpMean": 692.6666666666666,
+    "killGapRoundsMean": 6.24024024024024,
+    "rage": {
+      "fights": 0,
+      "late": 0,
+      "noRound": 0,
+      "fireRounds": []
+    }
+  },
+  "aggAll": {
+    "n": 4,
+    "totalRounds": 18,
+    "totalDealt": 245,
+    "totalVolley": 14,
+    "dMeas": 14.00595238095238,
+    "dStrikePooled": 12.833333333333334,
+    "gap": 96.99404761904762,
+    "strikesAttempted": 17,
+    "strikesLanded": 17,
+    "strikesZero": 0,
+    "hitRate": 1,
+    "attemptsPerRound": 0.9444444444444444,
+    "pMean": 13.588235294117647,
+    "verbRounds": 3,
+    "emptyStrikerRounds": 52,
+    "echoStrikes": 0,
+    "components": {
+      "verbLoss": 2.5907407407407406,
+      "missLoss": 0,
+      "allyDelayLoss": 25.77777777777778,
+      "baseCeiling": 56.64705882352941
+    },
+    "accounted": 0.8765030373405371,
+    "topContributor": "baseCeiling",
+    "topValue": 56.64705882352941,
+    "topShareOfGap": 0.5840261357688212,
+    "recon": {
+      "aPrime": 2.264705882352941,
+      "bPrime": 0,
+      "cPrime": 39.25490196078431,
+      "echoBonus": 0,
+      "reconSum": 41.51960784313725,
+      "reconTarget": 41.51960784313725,
+      "reconErr": 0
+    },
+    "perMember": {
+      "fighter": 200,
+      "ally1": 31,
+      "ally2": 0,
+      "ally3": 0,
+      "total": 231,
+      "fighterShare": 0.8658008658008658,
+      "ally1Share": 0.1341991341991342,
+      "ally2Share": 0,
+      "ally3Share": 0
+    },
+    "ability": {
+      "touchDmg": 0,
+      "touchShare": 0,
+      "excess": 0,
+      "excessShare": 0
+    },
+    "tricks": {
+      "trickCount": 0,
+      "trickRounds": 0
+    },
+    "volleyShare": 0.05714285714285714,
+    "roundsMedian": 4.5,
+    "roundsMean": 4.5,
+    "killGapHpMean": 692.6666666666666,
+    "killGapRoundsMean": 6.24024024024024,
+    "rage": {
+      "fights": 0,
+      "late": 0,
+      "noRound": 0,
+      "fireRounds": []
+    }
+  },
+  "wall": {
+    "wins": 0,
+    "national": 0,
+    "wave5": 4,
+    "wave4": 8,
+    "standing200": 4,
+    "medianDays": 150.5,
+    "survived": 5
+  },
+  "medianDays": 150
+}
