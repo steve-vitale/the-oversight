@@ -1,0 +1,2546 @@
+{
+  "verdict": "NO-GO",
+  "kind": "SUPPLY",
+  "bars": [
+    {
+      "id": "searcaster-holder-days",
+      "pass": false,
+      "detail": "arm villager searcaster-holder-days 0 (floor 40); ctl 0"
+    },
+    {
+      "id": "armed-holder-entries",
+      "pass": false,
+      "detail": "arm armed-holder entries 0 (floor 3); armed leads 0; ctl entries 0"
+    },
+    {
+      "id": "armed-volley-fired",
+      "pass": false,
+      "detail": "arm armed volleys fired 0 (floor 1); ctl 0 — PARTICIPATION finding if bars 1-2 pass: the gun reaches hands that never lead"
+    },
+    {
+      "id": "guardrail-exposure-normalized",
+      "pass": true,
+      "detail": "deaths per engaged meeting arm 5.89 vs ctl 5.89 (bar <= 6.48, pass); median survival arm 140.5d vs ctl 140.5d (bar >= 112.4, pass)"
+    }
+  ],
+  "ctl": {
+    "diag": {
+      "dir": "evidence/2026-11-20/perseed-gunrate-a-smoke",
+      "n": 2,
+      "valid": 2,
+      "errors": 0,
+      "bowopenOn": {
+        "true": 2
+      },
+      "senseexpedOn": {
+        "true": 2
+      },
+      "speargateOn": {
+        "true": 2
+      },
+      "gunrateOn": {
+        "true": 1,
+        "false": 1
+      },
+      "coverage": [
+        {
+          "seed": 107051,
+          "baselinePresent": true,
+          "baselineRows": 12,
+          "censusRows": 1092,
+          "cellPileRows": 140,
+          "censusDays": 140,
+          "livedDays": 142,
+          "censusDayShare": 0.9859154929577465,
+          "instrumentErrors": 0,
+          "complete": true
+        },
+        {
+          "seed": 107051,
+          "baselinePresent": true,
+          "baselineRows": 12,
+          "censusRows": 1061,
+          "cellPileRows": 137,
+          "censusDays": 137,
+          "livedDays": 139,
+          "censusDayShare": 0.9856115107913669,
+          "instrumentErrors": 0,
+          "complete": true
+        }
+      ],
+      "coverageComplete": 2,
+      "searcasterHolders": [],
+      "searcasterHolderDays": 0,
+      "searcasterCellDays": 0,
+      "searcasterZeroDays": 0,
+      "searcasterHoldersTotal": 0,
+      "cellHolderDays": 0,
+      "maxCellsEver": 0,
+      "cellAppearances": 1,
+      "cellAttributed": 1,
+      "cellAttribution": 1,
+      "cellBySource": {
+        "contest-prize": 1
+      },
+      "searcasterAppearances": 0,
+      "searcasterAttributed": 0,
+      "searcasterAttribution": null,
+      "searcasterBySource": {},
+      "searcasterBaseline": 0,
+      "cellBaseline": 0,
+      "searcasterDeparts": 0,
+      "searcasterDepartsZero": 0,
+      "searcasterDepartOutcomes": {},
+      "lootCellDrops": 0,
+      "lootSearcasterDrops": 0,
+      "lootByDrop": {},
+      "grantCellByCaller": {
+        "contest-prize": 2
+      },
+      "grantSearcasterByCaller": {
+        "contest-prize": 1
+      },
+      "grantCellTotal": 2,
+      "grantSearcasterTotal": 1,
+      "corpseTakeCell": 0,
+      "corpseTakeTotal": 92,
+      "contestPrizes": 59,
+      "scholarCellAppearances": 1,
+      "scholarCellAttributed": 1,
+      "scholarCellBySource": {
+        "contest-prize": 1
+      },
+      "playerCrafts": 17,
+      "playerCraftCell": 0,
+      "playerCraftByRecipe": {
+        "snare": 17
+      },
+      "pileMaxTotal": 0,
+      "pileEverPositive": 0,
+      "scholarMaxCells": 2,
+      "poolEngagedZero": 0,
+      "poolEngagedArmed": 0,
+      "poolAllZero": 0,
+      "poolEvadedZero": 0,
+      "volleyFiredFromSearcaster": 0,
+      "noFusionCellsLines": 0,
+      "encWave4Plus": 58,
+      "encEngaged": 46,
+      "medianDays": 140.5,
+      "communityLost": 2,
+      "national": 0,
+      "seedWins": 0,
+      "wave4": 2,
+      "wave5": 0,
+      "scaleRanks": {
+        "regional": 2
+      },
+      "starvation": 0,
+      "starvationVillager": 0,
+      "perSeed": [
+        {
+          "seed": 107051,
+          "days": 142,
+          "endReason": "village-lost",
+          "standing": 199,
+          "scaleRank": "regional",
+          "maxWave": 4,
+          "won": false,
+          "coverageComplete": true,
+          "searcasterHolders": 0,
+          "searcasterHolderDays": 0,
+          "searcasterDeparts": 0,
+          "searcasterDepartsZero": 0,
+          "poolEngagedZero": 0,
+          "poolEngagedArmed": 0,
+          "wave4PlusMeetings": 33,
+          "engagedMeetings": 27
+        },
+        {
+          "seed": 107051,
+          "days": 139,
+          "endReason": "village-lost",
+          "standing": 199,
+          "scaleRank": "regional",
+          "maxWave": 4,
+          "won": false,
+          "coverageComplete": true,
+          "searcasterHolders": 0,
+          "searcasterHolderDays": 0,
+          "searcasterDeparts": 0,
+          "searcasterDepartsZero": 0,
+          "poolEngagedZero": 0,
+          "poolEngagedArmed": 0,
+          "wave4PlusMeetings": 25,
+          "engagedMeetings": 19
+        }
+      ]
+    },
+    "participation": {
+      "dir": "evidence/2026-11-20/perseed-gunrate-a-smoke",
+      "n": 2,
+      "valid": 2,
+      "errors": 0,
+      "meetings": 58,
+      "engaged": 46,
+      "flees": 34,
+      "leadAttributed": 58,
+      "leadRuleCounts": {
+        "expedition-holder": 18,
+        "world-tick": 25,
+        "aid": 15
+      },
+      "leadUnclassified": 0,
+      "fleeClassified": 34,
+      "fleeUnclassified": 0,
+      "fleeCauseCounts": {
+        "hopeless-after-help": 30,
+        "floor-hp": 4
+      },
+      "armedEntries": 0,
+      "armedLeads": 0,
+      "armedVolleys": 0,
+      "armedFlees": 0,
+      "armedMeetings": 0,
+      "unarmedFlees": 34,
+      "unarmedMeetings": 58,
+      "deathsTotal": 271,
+      "deathsPerEngaged": 5.891304347826087,
+      "volleyDmgLeadRanged": 124,
+      "mDealtLeadRanged": 764,
+      "leadGearFlee": [
+        {
+          "bravery": 0,
+          "armorP": 29,
+          "weaponB": 0,
+          "temper": "intense"
+        },
+        {
+          "bravery": 36,
+          "armorP": 20,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 46,
+          "armorP": 20,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 0,
+          "armorP": 5,
+          "weaponB": 0,
+          "temper": "mischievous"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 8,
+          "armorP": 37,
+          "weaponB": 15,
+          "temper": "restless"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 8,
+          "armorP": 37,
+          "weaponB": 15,
+          "temper": "restless"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 27,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 27,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 10,
+          "armorP": 37,
+          "weaponB": 15,
+          "temper": "restless"
+        },
+        {
+          "bravery": 0,
+          "armorP": 10,
+          "weaponB": 0,
+          "temper": "gentle"
+        },
+        {
+          "bravery": 0,
+          "armorP": 10,
+          "weaponB": 0,
+          "temper": "gentle"
+        },
+        {
+          "bravery": 0,
+          "armorP": 7,
+          "weaponB": 12,
+          "temper": "intense"
+        },
+        {
+          "bravery": 0,
+          "armorP": 7,
+          "weaponB": 12,
+          "temper": "intense"
+        },
+        {
+          "bravery": 0,
+          "armorP": 7,
+          "weaponB": 12,
+          "temper": "intense"
+        },
+        {
+          "bravery": 0,
+          "armorP": 29,
+          "weaponB": 0,
+          "temper": "intense"
+        },
+        {
+          "bravery": 36,
+          "armorP": 20,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 46,
+          "armorP": 20,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 0,
+          "armorP": 5,
+          "weaponB": 0,
+          "temper": "mischievous"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 8,
+          "armorP": 37,
+          "weaponB": 15,
+          "temper": "restless"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 8,
+          "armorP": 37,
+          "weaponB": 15,
+          "temper": "restless"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        }
+      ],
+      "leadGearKill": [
+        {
+          "bravery": 0,
+          "armorP": 27,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        }
+      ],
+      "leadGearOther": [
+        {
+          "bravery": 36,
+          "armorP": 17,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 39,
+          "armorP": 17,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 40,
+          "armorP": 20,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 3,
+          "armorP": 11,
+          "weaponB": 12,
+          "temper": "warm"
+        },
+        {
+          "bravery": 3,
+          "armorP": 11,
+          "weaponB": 12,
+          "temper": "warm"
+        },
+        {
+          "bravery": 3,
+          "armorP": 11,
+          "weaponB": 12,
+          "temper": "warm"
+        },
+        {
+          "bravery": 0,
+          "armorP": 5,
+          "weaponB": 0,
+          "temper": "mischievous"
+        },
+        {
+          "bravery": 3,
+          "armorP": 59,
+          "weaponB": 15,
+          "temper": "warm"
+        },
+        {
+          "bravery": 0,
+          "armorP": 27,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 10,
+          "weaponB": 40,
+          "temper": "gentle"
+        },
+        {
+          "bravery": 0,
+          "armorP": 7,
+          "weaponB": 12,
+          "temper": "intense"
+        },
+        {
+          "bravery": 0,
+          "armorP": 7,
+          "weaponB": 12,
+          "temper": "intense"
+        },
+        {
+          "bravery": 36,
+          "armorP": 17,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 39,
+          "armorP": 17,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 40,
+          "armorP": 20,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 3,
+          "armorP": 11,
+          "weaponB": 12,
+          "temper": "warm"
+        },
+        {
+          "bravery": 3,
+          "armorP": 11,
+          "weaponB": 12,
+          "temper": "warm"
+        },
+        {
+          "bravery": 3,
+          "armorP": 11,
+          "weaponB": 12,
+          "temper": "warm"
+        },
+        {
+          "bravery": 0,
+          "armorP": 5,
+          "weaponB": 0,
+          "temper": "mischievous"
+        },
+        {
+          "bravery": 3,
+          "armorP": 59,
+          "weaponB": 15,
+          "temper": "warm"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 16,
+          "armorP": 37,
+          "weaponB": 60,
+          "temper": "restless"
+        }
+      ],
+      "fleeDetail": [
+        {
+          "seed": 107051,
+          "day": 58,
+          "vid": "gen_y1r0f2o",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 6,
+          "mDealt": 221,
+          "vTaken": 93,
+          "fleeHpFrac": 0.27,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": {
+            "shots": 3,
+            "hits": 0,
+            "dmg": 0,
+            "ammoLeft": 4
+          }
+        },
+        {
+          "seed": 107051,
+          "day": 59,
+          "vid": "gen_eff1mxj",
+          "mid": "suburb",
+          "origin": "expedition",
+          "leadRule": "expedition-holder",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 11,
+          "mDealt": 573,
+          "vTaken": 106,
+          "fleeHpFrac": 0.14,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 66,
+          "vid": "gen_eff1mxj",
+          "mid": "eulogy",
+          "origin": "expedition",
+          "leadRule": "expedition-holder",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 4,
+          "mDealt": 115,
+          "vTaken": 70,
+          "fleeHpFrac": 0.22,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 72,
+          "vid": "app_mgpsphqg557",
+          "mid": "herald",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 100,
+          "vTaken": 74,
+          "fleeHpFrac": 0.21,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": {
+            "shots": 3,
+            "hits": 1,
+            "dmg": 21,
+            "ammoLeft": 2
+          }
+        },
+        {
+          "seed": 107051,
+          "day": 89,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 65,
+          "vTaken": 67,
+          "fleeHpFrac": 0.26,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 89,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "floor-hp",
+          "rounds": 1,
+          "mDealt": 0,
+          "vTaken": 25,
+          "fleeHpFrac": 0.21,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": false,
+          "everWinning": false,
+          "shoutRound": null,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 97,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 20,
+          "vTaken": 70,
+          "fleeHpFrac": 0.18,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 101,
+          "vid": "visjoin_91",
+          "mid": "eater",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 4,
+          "mDealt": 107,
+          "vTaken": 28,
+          "fleeHpFrac": 0.48,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 101,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 4,
+          "mDealt": 95,
+          "vTaken": 92,
+          "fleeHpFrac": 0.03,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 103,
+          "vid": "visjoin_91",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 27,
+          "vTaken": 29,
+          "fleeHpFrac": 0.1,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 103,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 25,
+          "vTaken": 62,
+          "fleeHpFrac": 0.07,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 104,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 23,
+          "vTaken": 63,
+          "fleeHpFrac": 0.17,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 105,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 13,
+          "vTaken": 39,
+          "fleeHpFrac": 0.14,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 106,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 12,
+          "vTaken": 36,
+          "fleeHpFrac": 0.16,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 107,
+          "vid": "visjoin_91",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "floor-hp",
+          "rounds": 1,
+          "mDealt": 16,
+          "vTaken": 16,
+          "fleeHpFrac": 0.1,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": false,
+          "everWinning": false,
+          "shoutRound": null,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 124,
+          "vid": "visjoin_120",
+          "mid": "influencer",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 82,
+          "vTaken": 78,
+          "fleeHpFrac": 0.17,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": {
+            "shots": 0,
+            "hits": 0,
+            "dmg": 0,
+            "ammoLeft": 0
+          }
+        },
+        {
+          "seed": 107051,
+          "day": 125,
+          "vid": "visjoin_120",
+          "mid": "influencer",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 21,
+          "vTaken": 45,
+          "fleeHpFrac": 0.1,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": {
+            "shots": 0,
+            "hits": 0,
+            "dmg": 0,
+            "ammoLeft": 0
+          }
+        },
+        {
+          "seed": 107051,
+          "day": 129,
+          "vid": "visjoin_123",
+          "mid": "influencer",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 14,
+          "vTaken": 78,
+          "fleeHpFrac": 0.09,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 132,
+          "vid": "visjoin_123",
+          "mid": "reunion",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "floor-hp",
+          "rounds": 1,
+          "mDealt": 0,
+          "vTaken": 58,
+          "fleeHpFrac": 0.12,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": false,
+          "everWinning": false,
+          "shoutRound": null,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 136,
+          "vid": "visjoin_123",
+          "mid": "algorithm",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 13,
+          "vTaken": 64,
+          "fleeHpFrac": 0.05,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 58,
+          "vid": "gen_y1r0f2o",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 6,
+          "mDealt": 221,
+          "vTaken": 93,
+          "fleeHpFrac": 0.27,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": {
+            "shots": 3,
+            "hits": 0,
+            "dmg": 0,
+            "ammoLeft": 4
+          }
+        },
+        {
+          "seed": 107051,
+          "day": 59,
+          "vid": "gen_eff1mxj",
+          "mid": "suburb",
+          "origin": "expedition",
+          "leadRule": "expedition-holder",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 11,
+          "mDealt": 573,
+          "vTaken": 106,
+          "fleeHpFrac": 0.14,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 66,
+          "vid": "gen_eff1mxj",
+          "mid": "eulogy",
+          "origin": "expedition",
+          "leadRule": "expedition-holder",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 4,
+          "mDealt": 115,
+          "vTaken": 70,
+          "fleeHpFrac": 0.22,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 72,
+          "vid": "app_mgpsphqg557",
+          "mid": "herald",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 100,
+          "vTaken": 74,
+          "fleeHpFrac": 0.21,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": {
+            "shots": 3,
+            "hits": 1,
+            "dmg": 21,
+            "ammoLeft": 2
+          }
+        },
+        {
+          "seed": 107051,
+          "day": 89,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 65,
+          "vTaken": 67,
+          "fleeHpFrac": 0.26,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 89,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "floor-hp",
+          "rounds": 1,
+          "mDealt": 0,
+          "vTaken": 25,
+          "fleeHpFrac": 0.21,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": false,
+          "everWinning": false,
+          "shoutRound": null,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 97,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 20,
+          "vTaken": 70,
+          "fleeHpFrac": 0.18,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 101,
+          "vid": "visjoin_91",
+          "mid": "eater",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 4,
+          "mDealt": 107,
+          "vTaken": 28,
+          "fleeHpFrac": 0.48,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 101,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 4,
+          "mDealt": 95,
+          "vTaken": 92,
+          "fleeHpFrac": 0.03,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 103,
+          "vid": "visjoin_91",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 27,
+          "vTaken": 29,
+          "fleeHpFrac": 0.1,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 103,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 25,
+          "vTaken": 62,
+          "fleeHpFrac": 0.07,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 104,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 23,
+          "vTaken": 63,
+          "fleeHpFrac": 0.17,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 105,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 13,
+          "vTaken": 42,
+          "fleeHpFrac": 0.1,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 106,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 12,
+          "vTaken": 38,
+          "fleeHpFrac": 0.1,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        }
+      ],
+      "armedDetail": [],
+      "national": 0,
+      "seedWins": 0,
+      "wave4": 2,
+      "wave5": 0,
+      "medianDays": 140.5,
+      "days": [
+        142,
+        139
+      ],
+      "communityLost": 2,
+      "perSeed": [
+        {
+          "seed": 107051,
+          "meetings": 33,
+          "engaged": 27,
+          "flees": 20,
+          "armed": 0,
+          "days": 142,
+          "endReason": "village-lost",
+          "standing": 199,
+          "scaleRank": "regional",
+          "maxWave": 4,
+          "won": false
+        },
+        {
+          "seed": 107051,
+          "meetings": 25,
+          "engaged": 19,
+          "flees": 14,
+          "armed": 0,
+          "days": 139,
+          "endReason": "village-lost",
+          "standing": 199,
+          "scaleRank": "regional",
+          "maxWave": 4,
+          "won": false
+        }
+      ],
+      "leadAttribution": 1,
+      "fleeClassification": 1
+    }
+  },
+  "arm": {
+    "diag": {
+      "dir": "evidence/2026-11-20/perseed-gunrate-a-smoke",
+      "n": 2,
+      "valid": 2,
+      "errors": 0,
+      "bowopenOn": {
+        "true": 2
+      },
+      "senseexpedOn": {
+        "true": 2
+      },
+      "speargateOn": {
+        "true": 2
+      },
+      "gunrateOn": {
+        "true": 1,
+        "false": 1
+      },
+      "coverage": [
+        {
+          "seed": 107051,
+          "baselinePresent": true,
+          "baselineRows": 12,
+          "censusRows": 1092,
+          "cellPileRows": 140,
+          "censusDays": 140,
+          "livedDays": 142,
+          "censusDayShare": 0.9859154929577465,
+          "instrumentErrors": 0,
+          "complete": true
+        },
+        {
+          "seed": 107051,
+          "baselinePresent": true,
+          "baselineRows": 12,
+          "censusRows": 1061,
+          "cellPileRows": 137,
+          "censusDays": 137,
+          "livedDays": 139,
+          "censusDayShare": 0.9856115107913669,
+          "instrumentErrors": 0,
+          "complete": true
+        }
+      ],
+      "coverageComplete": 2,
+      "searcasterHolders": [],
+      "searcasterHolderDays": 0,
+      "searcasterCellDays": 0,
+      "searcasterZeroDays": 0,
+      "searcasterHoldersTotal": 0,
+      "cellHolderDays": 0,
+      "maxCellsEver": 0,
+      "cellAppearances": 1,
+      "cellAttributed": 1,
+      "cellAttribution": 1,
+      "cellBySource": {
+        "contest-prize": 1
+      },
+      "searcasterAppearances": 0,
+      "searcasterAttributed": 0,
+      "searcasterAttribution": null,
+      "searcasterBySource": {},
+      "searcasterBaseline": 0,
+      "cellBaseline": 0,
+      "searcasterDeparts": 0,
+      "searcasterDepartsZero": 0,
+      "searcasterDepartOutcomes": {},
+      "lootCellDrops": 0,
+      "lootSearcasterDrops": 0,
+      "lootByDrop": {},
+      "grantCellByCaller": {
+        "contest-prize": 2
+      },
+      "grantSearcasterByCaller": {
+        "contest-prize": 1
+      },
+      "grantCellTotal": 2,
+      "grantSearcasterTotal": 1,
+      "corpseTakeCell": 0,
+      "corpseTakeTotal": 92,
+      "contestPrizes": 59,
+      "scholarCellAppearances": 1,
+      "scholarCellAttributed": 1,
+      "scholarCellBySource": {
+        "contest-prize": 1
+      },
+      "playerCrafts": 17,
+      "playerCraftCell": 0,
+      "playerCraftByRecipe": {
+        "snare": 17
+      },
+      "pileMaxTotal": 0,
+      "pileEverPositive": 0,
+      "scholarMaxCells": 2,
+      "poolEngagedZero": 0,
+      "poolEngagedArmed": 0,
+      "poolAllZero": 0,
+      "poolEvadedZero": 0,
+      "volleyFiredFromSearcaster": 0,
+      "noFusionCellsLines": 0,
+      "encWave4Plus": 58,
+      "encEngaged": 46,
+      "medianDays": 140.5,
+      "communityLost": 2,
+      "national": 0,
+      "seedWins": 0,
+      "wave4": 2,
+      "wave5": 0,
+      "scaleRanks": {
+        "regional": 2
+      },
+      "starvation": 0,
+      "starvationVillager": 0,
+      "perSeed": [
+        {
+          "seed": 107051,
+          "days": 142,
+          "endReason": "village-lost",
+          "standing": 199,
+          "scaleRank": "regional",
+          "maxWave": 4,
+          "won": false,
+          "coverageComplete": true,
+          "searcasterHolders": 0,
+          "searcasterHolderDays": 0,
+          "searcasterDeparts": 0,
+          "searcasterDepartsZero": 0,
+          "poolEngagedZero": 0,
+          "poolEngagedArmed": 0,
+          "wave4PlusMeetings": 33,
+          "engagedMeetings": 27
+        },
+        {
+          "seed": 107051,
+          "days": 139,
+          "endReason": "village-lost",
+          "standing": 199,
+          "scaleRank": "regional",
+          "maxWave": 4,
+          "won": false,
+          "coverageComplete": true,
+          "searcasterHolders": 0,
+          "searcasterHolderDays": 0,
+          "searcasterDeparts": 0,
+          "searcasterDepartsZero": 0,
+          "poolEngagedZero": 0,
+          "poolEngagedArmed": 0,
+          "wave4PlusMeetings": 25,
+          "engagedMeetings": 19
+        }
+      ]
+    },
+    "participation": {
+      "dir": "evidence/2026-11-20/perseed-gunrate-a-smoke",
+      "n": 2,
+      "valid": 2,
+      "errors": 0,
+      "meetings": 58,
+      "engaged": 46,
+      "flees": 34,
+      "leadAttributed": 58,
+      "leadRuleCounts": {
+        "expedition-holder": 18,
+        "world-tick": 25,
+        "aid": 15
+      },
+      "leadUnclassified": 0,
+      "fleeClassified": 34,
+      "fleeUnclassified": 0,
+      "fleeCauseCounts": {
+        "hopeless-after-help": 30,
+        "floor-hp": 4
+      },
+      "armedEntries": 0,
+      "armedLeads": 0,
+      "armedVolleys": 0,
+      "armedFlees": 0,
+      "armedMeetings": 0,
+      "unarmedFlees": 34,
+      "unarmedMeetings": 58,
+      "deathsTotal": 271,
+      "deathsPerEngaged": 5.891304347826087,
+      "volleyDmgLeadRanged": 124,
+      "mDealtLeadRanged": 764,
+      "leadGearFlee": [
+        {
+          "bravery": 0,
+          "armorP": 29,
+          "weaponB": 0,
+          "temper": "intense"
+        },
+        {
+          "bravery": 36,
+          "armorP": 20,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 46,
+          "armorP": 20,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 0,
+          "armorP": 5,
+          "weaponB": 0,
+          "temper": "mischievous"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 8,
+          "armorP": 37,
+          "weaponB": 15,
+          "temper": "restless"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 8,
+          "armorP": 37,
+          "weaponB": 15,
+          "temper": "restless"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 27,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 27,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 10,
+          "armorP": 37,
+          "weaponB": 15,
+          "temper": "restless"
+        },
+        {
+          "bravery": 0,
+          "armorP": 10,
+          "weaponB": 0,
+          "temper": "gentle"
+        },
+        {
+          "bravery": 0,
+          "armorP": 10,
+          "weaponB": 0,
+          "temper": "gentle"
+        },
+        {
+          "bravery": 0,
+          "armorP": 7,
+          "weaponB": 12,
+          "temper": "intense"
+        },
+        {
+          "bravery": 0,
+          "armorP": 7,
+          "weaponB": 12,
+          "temper": "intense"
+        },
+        {
+          "bravery": 0,
+          "armorP": 7,
+          "weaponB": 12,
+          "temper": "intense"
+        },
+        {
+          "bravery": 0,
+          "armorP": 29,
+          "weaponB": 0,
+          "temper": "intense"
+        },
+        {
+          "bravery": 36,
+          "armorP": 20,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 46,
+          "armorP": 20,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 0,
+          "armorP": 5,
+          "weaponB": 0,
+          "temper": "mischievous"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 8,
+          "armorP": 37,
+          "weaponB": 15,
+          "temper": "restless"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 8,
+          "armorP": 37,
+          "weaponB": 15,
+          "temper": "restless"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        }
+      ],
+      "leadGearKill": [
+        {
+          "bravery": 0,
+          "armorP": 27,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        }
+      ],
+      "leadGearOther": [
+        {
+          "bravery": 36,
+          "armorP": 17,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 39,
+          "armorP": 17,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 40,
+          "armorP": 20,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 3,
+          "armorP": 11,
+          "weaponB": 12,
+          "temper": "warm"
+        },
+        {
+          "bravery": 3,
+          "armorP": 11,
+          "weaponB": 12,
+          "temper": "warm"
+        },
+        {
+          "bravery": 3,
+          "armorP": 11,
+          "weaponB": 12,
+          "temper": "warm"
+        },
+        {
+          "bravery": 0,
+          "armorP": 5,
+          "weaponB": 0,
+          "temper": "mischievous"
+        },
+        {
+          "bravery": 3,
+          "armorP": 59,
+          "weaponB": 15,
+          "temper": "warm"
+        },
+        {
+          "bravery": 0,
+          "armorP": 27,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 0,
+          "armorP": 10,
+          "weaponB": 40,
+          "temper": "gentle"
+        },
+        {
+          "bravery": 0,
+          "armorP": 7,
+          "weaponB": 12,
+          "temper": "intense"
+        },
+        {
+          "bravery": 0,
+          "armorP": 7,
+          "weaponB": 12,
+          "temper": "intense"
+        },
+        {
+          "bravery": 36,
+          "armorP": 17,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 39,
+          "armorP": 17,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 40,
+          "armorP": 20,
+          "weaponB": 5,
+          "temper": "bold"
+        },
+        {
+          "bravery": 3,
+          "armorP": 11,
+          "weaponB": 12,
+          "temper": "warm"
+        },
+        {
+          "bravery": 3,
+          "armorP": 11,
+          "weaponB": 12,
+          "temper": "warm"
+        },
+        {
+          "bravery": 3,
+          "armorP": 11,
+          "weaponB": 12,
+          "temper": "warm"
+        },
+        {
+          "bravery": 0,
+          "armorP": 5,
+          "weaponB": 0,
+          "temper": "mischievous"
+        },
+        {
+          "bravery": 3,
+          "armorP": 59,
+          "weaponB": 15,
+          "temper": "warm"
+        },
+        {
+          "bravery": 0,
+          "armorP": 24,
+          "weaponB": 12,
+          "temper": "fidgety"
+        },
+        {
+          "bravery": 16,
+          "armorP": 37,
+          "weaponB": 60,
+          "temper": "restless"
+        }
+      ],
+      "fleeDetail": [
+        {
+          "seed": 107051,
+          "day": 58,
+          "vid": "gen_y1r0f2o",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 6,
+          "mDealt": 221,
+          "vTaken": 93,
+          "fleeHpFrac": 0.27,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": {
+            "shots": 3,
+            "hits": 0,
+            "dmg": 0,
+            "ammoLeft": 4
+          }
+        },
+        {
+          "seed": 107051,
+          "day": 59,
+          "vid": "gen_eff1mxj",
+          "mid": "suburb",
+          "origin": "expedition",
+          "leadRule": "expedition-holder",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 11,
+          "mDealt": 573,
+          "vTaken": 106,
+          "fleeHpFrac": 0.14,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 66,
+          "vid": "gen_eff1mxj",
+          "mid": "eulogy",
+          "origin": "expedition",
+          "leadRule": "expedition-holder",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 4,
+          "mDealt": 115,
+          "vTaken": 70,
+          "fleeHpFrac": 0.22,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 72,
+          "vid": "app_mgpsphqg557",
+          "mid": "herald",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 100,
+          "vTaken": 74,
+          "fleeHpFrac": 0.21,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": {
+            "shots": 3,
+            "hits": 1,
+            "dmg": 21,
+            "ammoLeft": 2
+          }
+        },
+        {
+          "seed": 107051,
+          "day": 89,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 65,
+          "vTaken": 67,
+          "fleeHpFrac": 0.26,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 89,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "floor-hp",
+          "rounds": 1,
+          "mDealt": 0,
+          "vTaken": 25,
+          "fleeHpFrac": 0.21,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": false,
+          "everWinning": false,
+          "shoutRound": null,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 97,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 20,
+          "vTaken": 70,
+          "fleeHpFrac": 0.18,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 101,
+          "vid": "visjoin_91",
+          "mid": "eater",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 4,
+          "mDealt": 107,
+          "vTaken": 28,
+          "fleeHpFrac": 0.48,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 101,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 4,
+          "mDealt": 95,
+          "vTaken": 92,
+          "fleeHpFrac": 0.03,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 103,
+          "vid": "visjoin_91",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 27,
+          "vTaken": 29,
+          "fleeHpFrac": 0.1,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 103,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 25,
+          "vTaken": 62,
+          "fleeHpFrac": 0.07,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 104,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 23,
+          "vTaken": 63,
+          "fleeHpFrac": 0.17,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 105,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 13,
+          "vTaken": 39,
+          "fleeHpFrac": 0.14,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 106,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 12,
+          "vTaken": 36,
+          "fleeHpFrac": 0.16,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 107,
+          "vid": "visjoin_91",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "floor-hp",
+          "rounds": 1,
+          "mDealt": 16,
+          "vTaken": 16,
+          "fleeHpFrac": 0.1,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": false,
+          "everWinning": false,
+          "shoutRound": null,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 124,
+          "vid": "visjoin_120",
+          "mid": "influencer",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 82,
+          "vTaken": 78,
+          "fleeHpFrac": 0.17,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": {
+            "shots": 0,
+            "hits": 0,
+            "dmg": 0,
+            "ammoLeft": 0
+          }
+        },
+        {
+          "seed": 107051,
+          "day": 125,
+          "vid": "visjoin_120",
+          "mid": "influencer",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 21,
+          "vTaken": 45,
+          "fleeHpFrac": 0.1,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": {
+            "shots": 0,
+            "hits": 0,
+            "dmg": 0,
+            "ammoLeft": 0
+          }
+        },
+        {
+          "seed": 107051,
+          "day": 129,
+          "vid": "visjoin_123",
+          "mid": "influencer",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 14,
+          "vTaken": 78,
+          "fleeHpFrac": 0.09,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 132,
+          "vid": "visjoin_123",
+          "mid": "reunion",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "floor-hp",
+          "rounds": 1,
+          "mDealt": 0,
+          "vTaken": 58,
+          "fleeHpFrac": 0.12,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": false,
+          "everWinning": false,
+          "shoutRound": null,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 136,
+          "vid": "visjoin_123",
+          "mid": "algorithm",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 13,
+          "vTaken": 64,
+          "fleeHpFrac": 0.05,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 58,
+          "vid": "gen_y1r0f2o",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 6,
+          "mDealt": 221,
+          "vTaken": 93,
+          "fleeHpFrac": 0.27,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": {
+            "shots": 3,
+            "hits": 0,
+            "dmg": 0,
+            "ammoLeft": 4
+          }
+        },
+        {
+          "seed": 107051,
+          "day": 59,
+          "vid": "gen_eff1mxj",
+          "mid": "suburb",
+          "origin": "expedition",
+          "leadRule": "expedition-holder",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 11,
+          "mDealt": 573,
+          "vTaken": 106,
+          "fleeHpFrac": 0.14,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 66,
+          "vid": "gen_eff1mxj",
+          "mid": "eulogy",
+          "origin": "expedition",
+          "leadRule": "expedition-holder",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 4,
+          "mDealt": 115,
+          "vTaken": 70,
+          "fleeHpFrac": 0.22,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 72,
+          "vid": "app_mgpsphqg557",
+          "mid": "herald",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 100,
+          "vTaken": 74,
+          "fleeHpFrac": 0.21,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": {
+            "shots": 3,
+            "hits": 1,
+            "dmg": 21,
+            "ammoLeft": 2
+          }
+        },
+        {
+          "seed": 107051,
+          "day": 89,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 65,
+          "vTaken": 67,
+          "fleeHpFrac": 0.26,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 89,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "floor-hp",
+          "rounds": 1,
+          "mDealt": 0,
+          "vTaken": 25,
+          "fleeHpFrac": 0.21,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": false,
+          "everWinning": false,
+          "shoutRound": null,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 97,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 20,
+          "vTaken": 70,
+          "fleeHpFrac": 0.18,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 101,
+          "vid": "visjoin_91",
+          "mid": "eater",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 4,
+          "mDealt": 107,
+          "vTaken": 28,
+          "fleeHpFrac": 0.48,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 101,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 4,
+          "mDealt": 95,
+          "vTaken": 92,
+          "fleeHpFrac": 0.03,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 103,
+          "vid": "visjoin_91",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 27,
+          "vTaken": 29,
+          "fleeHpFrac": 0.1,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 103,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 25,
+          "vTaken": 62,
+          "fleeHpFrac": 0.07,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 104,
+          "vid": "visjoin_81",
+          "mid": "reunion",
+          "origin": "world-tick",
+          "leadRule": "world-tick",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 3,
+          "mDealt": 23,
+          "vTaken": 63,
+          "fleeHpFrac": 0.17,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 3,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 105,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 13,
+          "vTaken": 42,
+          "fleeHpFrac": 0.1,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        },
+        {
+          "seed": 107051,
+          "day": 106,
+          "vid": "visjoin_81",
+          "mid": "eater",
+          "origin": "aid",
+          "leadRule": "aid",
+          "fleeCause": "hopeless-after-help",
+          "rounds": 2,
+          "mDealt": 12,
+          "vTaken": 38,
+          "fleeHpFrac": 0.1,
+          "armed": false,
+          "intent": "engage",
+          "everHopeless": true,
+          "everWinning": false,
+          "shoutRound": 2,
+          "volley": null
+        }
+      ],
+      "armedDetail": [],
+      "national": 0,
+      "seedWins": 0,
+      "wave4": 2,
+      "wave5": 0,
+      "medianDays": 140.5,
+      "days": [
+        142,
+        139
+      ],
+      "communityLost": 2,
+      "perSeed": [
+        {
+          "seed": 107051,
+          "meetings": 33,
+          "engaged": 27,
+          "flees": 20,
+          "armed": 0,
+          "days": 142,
+          "endReason": "village-lost",
+          "standing": 199,
+          "scaleRank": "regional",
+          "maxWave": 4,
+          "won": false
+        },
+        {
+          "seed": 107051,
+          "meetings": 25,
+          "engaged": 19,
+          "flees": 14,
+          "armed": 0,
+          "days": 139,
+          "endReason": "village-lost",
+          "standing": 199,
+          "scaleRank": "regional",
+          "maxWave": 4,
+          "won": false
+        }
+      ],
+      "leadAttribution": 1,
+      "fleeClassification": 1
+    }
+  }
+}
