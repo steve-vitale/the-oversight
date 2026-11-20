@@ -1,0 +1,153 @@
+# Journey establishment r246 — run note
+
+- Run: `playtest-20261120T2232Z` (Lane A, scheduled Fri 2026-11-20 15:45 CST)
+- Leg: establishment (days 14–40, 42-day horizon, death-aware tail +10d)
+- Seeds: **101961–101965** (fresh band; full-scope freshness search 2026-11-20 ~22:45Z: zero hits in preregs, evidence filenames, git log; the only `10196[1-5]` hits anywhere are digit substrings inside floating-point values in old October JSON corpora — not seed-band namings; see prereg)
+- Base: local master `1581a7887` at registration
+- Base delta vs r245 panel base `683c9a6e5` (src/js, +89/−11, 5 files): WARN-HEED r150, settled-favor naming r247, DRY2 replacement check r256, goal-bridge pool 2→6 r149, SELFWIT self-witness exclusion r258; build.js version stamp only. Everything else in range is evidence/scripts-only.
+- Prereg: `evidence/2026-11-20/journey-establishment-r246-prereg.md` (this note adjudicates against it; metric binding applies — a miss is NO-GO, never re-scored mid-run)
+- Rotation file read **1 (establishment)** — no queue jump; this run plays leg 1.
+- Write flap: new window ~22:33Z (first `worktree-register.sh` failed: `unable to write file tools/mobile-sim.html` / `version.json` / `Could not reset index file to revision 'HEAD'`; probe write to a fresh file failed EPERM in /tmp and ~/workspace/worktrees at ~22:36Z). Per the flap skill: no forced writes, waited for the clear — cleared ~22:34:51Z (probe passed on the first re-check after a 1-minute wait). Registration retried after the clear: the branch name already existed (r245's branch, at the current master tip, fully merged, no registry entry) — deleted with `git branch -d` and re-registered cleanly. Nothing was forced during the window.
+- Lock created 22:32:12Z (run_id playtest-20261120T2232Z). Heartbeat loop running (9-min cadence, detached setsid loop).
+- Pilot: seed 101961 completed clean (exit 0, ~20s); all pilot-gate criteria passed (standingEnd 95, scholarDawns 42, teleTypeCounts 56 keys, mootLines 12, caseLog 42, sittingCloses 2, rosterDepartures 6, 71 verbal sits with wantIds, 82 Q1-trace sits, "pull weight" regex present, r246 instruments present: warnLog [], settledFavorLines [], dryLines [], dayDesync 12 entries, loopDay on daily + scholarDawns). Panel ran 101962–101965 (exit 0, ~41s).
+
+## Panel results
+
+| seed | endDay | alive d40 | wave | standing | pantry kcal | spotter | ladder | bumpCalls/benefit | scholar deaths |
+|------|--------|-----------|------|----------|-------------|---------|--------|-------------------|----------------|
+| 101961 | 43 | 7 | 3 | 95 | 56,747 | 0 | no | 41/32 | Brianna d34 (wild), Aki d37 (wild), Eyad d37 (stranger), Lauren d42 (wild) |
+| 101962 | 43 | 11 | 3 | 65 | 80,272 | 5 | YES | 45/30 | Courtney d33 (wild) |
+| 101963 | 43 | 10 | 3 | 0 | 21,863 | 11 | YES | 24/18 | — |
+| 101964 | 43 | 10 | 4 | 130 | 48,762 | 14 | YES | 27/21 | — |
+| 101965 | 43 | 8 | 3 | 95 | 81,773 | 3 | no | 31/21 | Chloe d35 (wild) |
+
+All 5 seeds endDay 43 (net drift 0 — no game-day short on this panel, unlike r245's 101955).
+
+## Bar verdicts
+
+- **SPOTTER — NO-GO (first miss on this leg in the recent run).** Panel foodXp['spotter'] total 33 (bar ≥10 ✓) but seeds with >0 = **4/5** — seed 101961 reads **0**. The bar requires every panel seed >0. Investigated below; mechanism understood, no fix landed (design + measurement questions for the goals arm — see Defect findings).
+- **LADDER — 3/5** (bar ≥4/5 under a SPOTTER GO — moot under the NO-GO; pace read only). r245: 4/5.
+- **FASTER-ID — GO.** Benefit fired on 5/5 seeds (122 benefit plays in 168 bump calls; bar ≥2/5).
+- **END — GO.** 3/3 broken-live forage opportunities closed within 2 dawns (qualifying only; 2 seeds NO-OPPORTUNITY).
+- **THREAD — GO.** 1/1 paged (Yara-shape) opportunities closed within 2 dawns; 1/3 end sits paged.
+- **TRAVEL — NO-OPPORTUNITY.** 0/0 clearable-blockage; 0/12 homeward sits hit one. Mechanism carried by the proof test.
+- **TRUST GUARD — PASS (hard, DROP-ONLY).** 0 trust drops on end presses.
+- **JAM — 0** jam-days (report-only).
+- **VILLAGE — GO.** 5/5 seeds alive at d40 (bar ≥3/5).
+- **Q2 sitting closes — GO.** 0/10 CUT sittings; 1 engine-ended WITH closing beats; 0 other no-close.
+- **Q1b want-raise — GO.** 69/374 social sits raised ask_favor (18.4%; bar ≥10%); zero-raise seeds 0/5. Thinnest seed 9.1%, fattest 34.3% — no F5 floor shape. Kinds: forage_help 31, heal_help 21, sick_help 7, food_share 7, (no-kind) 3.
+- **Q1 favorless asks — GO on the rate, with 3 LOST-ask defect findings.** 3 favorless sits of 69 raised asks (**4.3%**; bar <20%); 0 stage-0-deflected; every sit classified (E1 3/3); stage-0-surfaced **0/3**. History: r231 15.9% → r232 2.6% → r233 1.9% → r240 1.4% → r241 1.8% → r242 2.9% → r243 3.8% → r244 4.9% pre-fix / 0% re-panel → r245 5.7% → r246 4.3%. **LOST asks 3 — the worst LOST count yet** (r245: 2, r244 pre-fix: 2); all three never surfaced, where r245's 2/4 surfaced. See Defect findings below.
+- **Q5 exile warning — GO.** 2 exiles (Olivia + Zhanibek, both d16, both moot path), HEARD 2, PRESENT 0, UNHEARD 0. No silent exile.
+- **Q6 policy foraging — report-only, no F4 shape.** bumpCalls 24–45, wedgeSits 77–82, joint forage commits 1–6 per seed.
+- **COUNTER label watch — PASS.** 100 COUNTER LEARNED lines, **0 comma-clause, 0 em-dash**.
+- **REACT watch — max 1 on all 5 seeds, 0 sittings ≥3.** Per the prereg, **RETIRE for this leg** (second live panel at max 1; the r246 defect was a scale-leg shape). Keep it on scale only.
+- **BOWCRAFT watch — gear count 10 bows panel-wide** (vs r245 corpus 7, corrected by the fork proof from the r245 note's 6). Per seed: 1, 1, 3, 2, 3 (crude_bow ×4, bow ×3, crossbow ×3). Telemetry /bow/i scan still 0 — the blind-scan confirmation, not a finding.
+- **WARN-HEED — GO.** 8 warn_you sittings, 5 with a warning delivered, **0 engaged sittings with no warning delivered**. The r150 defect (4/4 sittings, 0 dangers named) is FIXED on live play: every engaged sitting named a danger. 3 sittings ended before engagement (all Tom on 101965) — the player walked away before asking; reported, not faulted.
+- **SETTLED-FAVOR — 0/0, no opportunity.** No "It's already handled" line on the panel — the r247 naming got no live read. Report-only.
+- **DRY2 — 0 dry lines.** GO on the watch (expect 0).
+- **SELFWIT — 0 observable.** No death on the panel carried a witness list (observable denominator 0) — the one ambush death (Aroha d11, 101965) has witnesses null in the telemetry entry. The watch is unobservable through telemetry on this leg, same supply problem as r258's panel (1/9 seeds). Report-only, not a pass.
+- **DAY-DESYNC — net drift 0 on all 5 seeds.** Jitter repeats/skips present (6/6, 5/5, 0/0, 3/3, 5/5) — 101963 had a perfectly clean clock. The r245 101955 one-day-short shape did not recur. The fork proof's correction stands: repeat/skip pairs are systematic clock jitter netting to zero, not a one-seed quirk.
+- **F2 scholar deaths — 6 on the panel (bar: ≤2 WATCH, ≥3 INVESTIGATE). Investigated below; the haven-edge shape graduates to a goals-arm question.**
+- **SENSEEXPED launch watch:** zero launches again (sixth panel silent: r241–r246). No launch/party/exped telemetry key on any seed; combat starts 2–7 per seed, companion_kill_beat 0–3 — fights happen, parties never launch.
+- **Wave-4/standing watch:** **1/5 seeds reached wave 4** (101964, standing 130; r245: 3/5). Standing: 95, 65, **0**, 130, 95. Seed 101963 survived to wave 3 with standing **0** — see Census. No mechanism ties the drop to the base delta (the delta is conversation-only); band noise + standing is the likelier read. A matched-band A/B is still owed before any claim about the wave-4 door.
+
+## Defect findings — SPOTTER NO-GO (1) + Q1 LOST asks (3)
+
+### SPOTTER NO-GO — seed 101961 reads 0 (the village's food knowledge died with its scholars)
+
+The seed's scholar chain: **Brianna → Aki → Eyad → Lauren → Nancy — five scholars in 42 days**, four scholar deaths (d34 wild, d37 wild, d37 stranger, d42 wild). The end census shows all 8 living villagers at spotterXp 0 — including Nancy, the final scholar, who took over on d42 and had one day in the role.
+
+The mechanism, traced in the JSON:
+- The spotter grant fires (32 benefit plays in 41 bump calls; the scholar's spotterSkill rose 0 → 1 on d8 → 0 on d35 (succession) → 2 on d38). Skill 2 on the self-taught ladder (5 XP → 1) means **Lauren held 10+ spotter XP by d38** — earned as a villager through forage resolutions plus as scholar through bumps. So villagers CAN accumulate spotter XP; the grant is not broken.
+- But the XP lives on the PERSON, not the village: Lauren's 10+ XP died with her on d42 (haven-edge, wild). **Succession does not transfer foodXp** — Nancy shows 0. The other living villagers show 0 because they never forage-resolve (the driver sends the scholar out; villagers' own forage resolutions are rare — the census shows the spotter holder is the scholar alone on all 5 seeds: Noah 5, Megan 11, Mason 14, Gerald 3, nobody else anywhere).
+- The Codex still holds the village's plant knowledge (33 plants identified on 101961 — the most on the panel), so the village is not ignorant; what it lost is the spotter SKILL (faster identification), which lives in one person's head at a time.
+
+Verdict: **NO-GO by the binding bar** (4/5 seeds >0, not 5/5). The mechanism works; the bar measures end-holding, which scholar turnover zeroes. Two questions, both for the goals arm, not a unilateral fix: (a) game design — should succession transfer foodXp, or should spotter knowledge live in the Codex/village rather than one person? The village-as-protagonist continuity says the VILLAGE's knowledge shouldn't die with one person, but the current design says it does. (b) measurement — should the bar count cumulative village spotter earned (including the dead) rather than end-holding? Proposed, not landed. The r245 observation ("scholar turnover bleeds food knowledge") now has a NO-GO attached and a precise mechanism.
+
+### Q1 LOST asks (3) — all E1, none surfaced
+
+**1. Lauren (gen_3dhpfc1), seed 101961, d18 — E1-plain. LOST.** Need forage_help urgency 2 (probed 2× by findNeed). Sitting (mode accept, openThread secret, resumedOnce false): picks `secret:promise → confront:d_um3ffvv → confront:d_dlm72rv → alive:want:ask_favor → goon → joke`, result no-offer. The `alive:want:ask_favor` pick was pressed (turn 4) but attached nothing — the ledger held a moot food_share favor ("the food I needed", state moot) the opener couldn't attach, and the wantOpener for ask_favor never ran. The sitting spent itself on a secret/confrontation thread. Lauren later became the 4th scholar and died d42 in the wild — her need died with her, unasked.
+
+**2. August (gen_c229dyk), seed 101964, d16 — E1-case. LOST.** Need forage_help urgency 2 (probed 3×). Sitting (mode accept, openThread recall, resumedOnce false): picks `betrayal:press:case_4 → betrayal:approach:case_4 → betrayal:site:case_4 → betrayal:witnesses:case_4 → betrayal:investigate:case_4 → betrayal:moot:case_4 → silence`, result no-offer. All 7 picks case thread. The sitting fell on the double-exile day (Olivia + Zhanibek exiled d16 over case_4) — the case that condemned them ate August's sitting whole. Same shape as r245's Victoria/Heinrich.
+
+**3. DeShawn (gen_swidc1g), seed 101965, d28 — E1-case (1/12). LOST.** Need food_share urgency 4 (probed 2×) — the highest urgency of the three. Sitting (mode accept, openThread you, resumedOnce TRUE): picks `betrayal:accept → goon → bond:accept → dlg:more → party_role → party_rolepick:point → dlg:react → recap → goon → dlg:subject → ask:lately → goon`, result no-offer. Only 1 case pick in 12 — the E1-case label is technically true (≥1 betrayal pick) but the case thread did NOT eat this sitting; a resumed thread plus a long meandering sitting (party roles, recap, small talk) crowded the opener out. The mechanism here is closer to E1-plain. **Metric-review note:** the E1-case/E1-plain split by "any betrayal pick" mislabels sittings where the case thread is a single pick among many. Proposed revision for the next run: E1-case = case picks are the MAJORITY of the sitting (≥50%); E1-plain otherwise. DeShawn would re-classify E1-plain under that rule; August and the r245 pair stay E1-case.
+
+All three LOST asks are documented + proposed, not landed (per prereg — same handling as r244/r245). The fix proposal stands: the opener gets one turn in a case sitting, or the case thread yields one pick to a u≥3 need (DeShawn's u4 food_share is the sharpest case for it).
+
+## F2 scholar deaths — investigated (6 on the panel)
+
+- **Brianna, 101961, d34, "the wild".** Last dawn d34 at (5,4), atHaven=false — out in the wild at dawn, died there the same day.
+- **Aki, 101961, d37, "the wild".** Last dawn d37 at (1,7), atHaven=false — out in the wild. **Eyad, 101961, d37, "a stranger".** Last dawn d37 at (1,7), atHaven=false — same dawn, same tile: Aki died, Eyad succeeded him, and Eyad was killed by a stranger the same day. Two scholar deaths in one day.
+- **Lauren, 101961, d42, "the wild".** Last dawn d42 at (4,4), atHaven=true, insideHaven=false — **the haven-edge shape**.
+- **Courtney, 101962, d33, "the wild".** Last dawn d33 at (4,4), atHaven=true, insideHaven=false — **haven-edge**.
+- **Chloe, 101965, d35, "the wild".** Last dawn d35 at (4,4), atHaven=true, insideHaven=false — **haven-edge**.
+
+No contest deaths this panel. No new mechanism beyond the haven-edge shape and the d37 double-death. The base delta (conversation-only) has no plausible path to scholar deaths. **Haven-edge count is now 3/6 this panel, 6 across three panels running** (r244 Domingo + r245 Paisley/Werner + r246 Lauren/Courtney/Chloe). Per the prereg §5, **the haven-edge shape GRADUATES from watch to a goals-arm question**: should the scholar sleep INSIDE the haven? The scholar sleeps on the haven's edge tile (4,4) — the haven point itself — with insideHaven=false, steps into the wild, and dies the same day. That is the single most repeated scholar-death shape on this leg. **Verdict: band noise for the count (6 is at the top of the panel range, r242 also had 6), but the haven-edge mechanism graduates as specified.** No fix owed from this run.
+
+## Census (Q4, plain words)
+
+60 villagers started across 5 villages; **46 alive at d43** (46 also at d40). The accounting: 14 villager deaths + 2 exiles = 16 departures, **plus 2 arrivals** — Lena Ruiz and Nathan Lee, both on 101961, both in the final three days (d41–43), with **no arrival line anywhere**: no arrival telemetry key, no mention in the 101961 conversation dump, no dawn SAY. The village gained two people silently while losing its fourth scholar. That is a blank, not a bar item (no arrival bar on this leg): the game should say something when someone joins. Owed as a watch for the next run — does the arrival channel exist at all in the driver, or does the game narrate arrivals somewhere the driver never looks? (The analyzer's roster reconcile reads UNACCOUNTED=0 on all seeds because it only checks start-members with no death/departure record — it never flags end-members who were never in the start roster. The two arrivals were found by ID-diffing the start and end censuses, not by any instrument.)
+
+- **101961 (wave 3, standing 95, pantry 56,747):** 12 → 8 alive — but the path matters: six died (four scholars — Brianna, Aki, Eyad, Lauren — plus Heidi d5 and Danae d27 to monsters) and **two strangers, Lena Ruiz and Nathan Lee, joined in the last three days without a word anywhere** (see the census header). Nancy, the fifth scholar, holds the village at the end with 0 spotter XP — the food knowledge died with Lauren. And yet the pantry is mid-table and the Codex knows 33 plants, the most on the panel. A village that knows its ground, keeps losing the person who knows it, and quietly gains people nobody introduced.
+- **101962 (wave 3, standing 65, pantry 80,272 — second-richest):** 12 → 10 alive. Scholar Courtney died in the wild d33 (haven-edge); Noah succeeded her and holds the village's whole 5 spotter XP. One villager (Rafael) died to The Focus Group d41 — the only contest-adjacent death on the panel. Steady, alive, unremarkable.
+- **101963 (wave 3, standing 0, pantry 21,863 — thinnest):** 12 → 10 alive. NO scholar death — Megan held the role all 42 days and holds 11 spotter XP, the second-highest on the panel. The village foraged jointly 5 times (all returned), proposed 24 bonds, did 6 godpath deeds, fired a scale_rank event — and earned **zero standing**. It knows its food and talks plenty and the ladder never moved. Two villagers died of wounds that wouldn't close (Rahul d8, Katarina d23) — the only wound-fever deaths on the panel, both on the village with no scholar death and the thinnest pantry. A healthy, knowledgeable, social village the standing system never noticed.
+- **101964 (wave 4, standing 130, pantry 48,762 — the only wave-4 village):** 12 → 10 alive. Nobody died — the losses were the two exiles, Olivia and Zhanibek, both thrown out d16 over case_4 after a moot the player heard about in advance (4 moot/case lines naming Olivia; present at the exile-day moot). Mason the trail crew lead holds 14 spotter XP, the strongest food knowledge on the panel. Reached wave 4 with the highest standing. A village that had a good forty days — and the one that threw two people out to do it.
+- **101965 (wave 4? no — wave 3, standing 95, pantry 81,773 — richest):** 12 → 8 alive. Scholar Chloe died in the wild d35 (haven-edge); Gerald the butcher succeeded her with 3 spotter XP. Two villagers to monsters (Adriana d12, DeShawn d34 — DeShawn, whose u4 food_share ask was LOST d28, died to a monster six days later). One ambush death (Aroha d11). Tom the truck driver warned the player about the treeline at dusk seven times across the run — the only warn_you voice on the panel. Rich and battered at once.
+
+What the villages knew: spotter knowledge is concentrated in **one person per village — the scholar** (Nancy 0, Noah 5, Megan 11, Mason 14, Gerald 3). No other villager holds any spotter XP on any seed. Codex plants identified: 128 across the panel (21–33 per seed). Bonds proposed 10–54 per seed; killer tales 15–25 per seed; combat 2–7 starts per seed, all ended. What was missing: two silent arrivals on 101961 (no arrival channel anywhere in the driver's view); no SENSEEXPED launches (sixth panel silent); no settled-favor lines (the r247 naming got no live read); no ambush-death witness lists in telemetry (SELFWIT unobservable); one village at standing 0 despite doing everything the game asks of a village except the deeds that pay standing.
+
+## People check (SENSE-TESTING LAW — 4 held convos read in full, seeds 101961/101962/101964)
+
+**Valeria (pottery instructor, 101961).** A nonverbal conversation — she speaks only Spanish, no shared words. Gestures, nods, smiles: she asks where they are, says she won't forget, calls the player a good person, asks "Are you... the boss?" Warm closing beats. Meaningful within its constraint; the language barrier is played straight, not faked.
+
+**Ursula (mortician, 101961).** Opens on a burial ("We gave them a good burial. Doesn't feel like enough, does it?"). She names the dead — Lauren, the d42 scholar — and the line that lands is "Lauren is gone and the world just... continues. That's the part I can't stand." The player teaches her Common Plantain; she laughs that she's been walking past it for weeks. She declines an invitation honestly ("Another time. The village needs me here."). The mourning-witness watch: the line names Lauren but does not say Ursula witnessed her fall, and witness status is unobservable from the JSON (death telemetry carries no witnesses) — reported, not adjudicated. **Mourning-witness watch, second panel: 1 sitting, generic line, witness status unknown.**
+
+**Paola (chimney sweep, 101962).** Taken kin — Ray, the pods, the humming. She asks the player to ask the System about the taken, and the player promises ("I'll ask it. I promise.") — a consequential commitment, an OWED thing. Her Columbus answer ("I still dream in its weather — rain on a tin roof, that specific smell. I wake up here and for a second I'm furious at the sky for the swap.") is grounded and personal. Polish note, not a defect: the player presses "You don't have to say it all at once" three times in one sitting (the goon label repeats) — the conversation still works, but the repeat is visible.
+
+**Caroline (tailor, 101962).** "It's quiet today. Wrong kind of quiet." Monster-naming gossip ("Paola is pushing 'The Ugly Beast'"). "Do you still count the days? I lost track days ago." → "I count. Someone has to." → "Good. Keep counting. The days need witnesses." Then: "I count meals, not days. Three meals since the rain. Two since the alarm." Ends by engine with a comfortable quiet and "Thanks for... you know. Just listening." Meaningful, coherent, consequential.
+
+**Chris (aquarium keeper, 101964).** Opens on what he did for fun — "watching the fire and not being afraid. It's a downgrade and an upgrade." He asks to walk to the ridge; the walk beat lands. Then the hard question: "Have you ever hurt someone? Since all this started." The player answers yes, won't detail; Chris receives it with grace. The ending resolves ("Good — what you did for fun, settled."). Polish note: one stage-direction beat ("They take it in and give nothing back. Not yet.") is served as a dialogue line after a goon.
+
+**Stanley (barber, 101964).** Opens mid-thread on personal stuff and a haul favor. Gossip names real things ("You won The Long Odds on the cameras", "Chris headed out"). The r241 dry beat fires once: after silence + "Keep going", "The moment passes without landing. Not yet." (One serving — the grep counted 2 because the line appears in both the turn print and the full-transcript dump.) The context is honest (a quiet beat after silence), but it is the canned dry line the watch tracks — recorded for the conversation build arm. r245 had 0; r246 has 1.
+
+Verdict: villagers act like people. No filler loops, no static menus, no fabricated shared history in the held sample. **GOAL-BRIDGE watch: 0 repeats of any bridge line in any held convo** — the r149 pool expansion holds on live play.
+
+## Reachable / fun / winnable
+
+- **Reachable:** yes. All five villages lived to d40, all the leg's systems fired (contests, moots, exiles, wave unlocks, bonds, killer tales, counter-learning, warnings with real dangers named). Nothing in the leg was unreachable.
+- **Fun:** yes, with two dents. The three LOST asks are the fun-dent: villagers with real, probed needs sat with the player and never got to ask — and this panel none of the three ever surfaced later, where r245's two of four did. The second dent is 101961: a village that loses four scholars in six weeks reads as the game eating its own knowledge faster than the player can replace it — which is the SPOTTER story, not a separate defect.
+- **Winnable:** the leg points the right way on 101964 (wave 4, standing 130) and sideways on 101963 (wave 3, standing 0 despite doing everything except the paying deeds). The binding wall remains downstream (deed gate opening, capstone delivery), per the endgame r230 picture. The wave-4 door opened on 1/5 this panel after 3/5 on r245 — band noise, no mechanism in the delta.
+
+## Metric review (for the NEXT run)
+
+1. **SPOTTER bar — measurement question.** The bar counts end-roster foodXp['spotter']; on a seed with late scholar turnover it reads 0 even though the grant fired (32 benefit plays) and the village's Codex knows 33 plants. Propose for the next run: report a SECOND number alongside the bar — cumulative village spotter earned (sum of each scholar's end-of-tenure XP, or the max spotter skill reached) — so a turnover seed isn't read as a no-knowledge seed. The bar itself stays as the judge until a Steve call changes it; the NO-GO stands.
+2. **E1-case split — majority rule.** The "any betrayal pick" split mislabels DeShawn (1/12 case picks). Next run: E1-case = case picks are the MAJORITY of the sitting (≥50%); E1-plain otherwise. DeShawn re-classifies E1-plain; August and the r245 pair stay E1-case.
+3. **REACT watch — RETIRE for this leg.** Second live panel at max 1 on all 5 seeds, 0 sittings ≥3. Retire it for establishment; keep it on scale only (the r246 defect was a scale-leg shape).
+4. **BOWCRAFT watch — gear count stands.** 10 bows on this panel vs 7 on the r245 corpus. The telemetry scan stays as the secondary line (0 again — the blind-scan confirmation).
+5. **WARN-HEED — GO, keep the watch one more run.** The r150 fix holds on live play (5/5 engaged sittings named a danger), but all 8 sittings were one villager (Tom, 101965) — the watch has not yet seen a second warn_you voice. Keep it until the panel shows a second voice.
+6. **SETTLED-FAVOR — no opportunity.** 0/0 lines; the r247 naming still has no live read. Keep the watch; a panel with no settled-favor line says nothing about the fix.
+7. **F2 scholar-death bar — haven-edge graduates.** 6 deaths investigated as band noise for the count, but the haven-edge mechanism (3/6 this panel, 6 across three panels) graduates to a goals-arm question: should the scholar sleep inside the haven? The bar (≤2 WATCH / ≥3 investigate) worked as designed; no revision.
+8. **Day-desync — net drift is the metric.** The fork proof corrected the r245 reading: repeat/skip pairs are systematic clock jitter (51 pairs on the r245 panel, net drift 0 on 4/5 seeds). This panel: net drift 0 on all 5 seeds, jitter 0–9 pairs per seed (101963 had a perfectly clean clock). Keep net drift as the headline; the jitter counts are diagnosis detail.
+9. **Q1 LOST mechanism — the fix proposal sharpens.** Two of the three LOST asks are E1-case (case thread ate the sitting); the third is a resumed-thread meander at u4. The proposed fix (opener gets one turn in a case sitting, or the case thread yields one pick to a u≥3 need) would have caught August (u2, no) but DeShawn (u4, yes) — the u≥3 threshold is the sharper of the two variants. Owed to the goals/conversation arm.
+10. **Standing-0 village — a question, not a finding.** 101963 did joint forages, bonds, deeds, and a scale event, and earned 0 standing. Is standing too narrowly sourced, or is this village simply not doing the paying deeds (feast, tribute)? Worth one look by the goals arm at what standing actually pays for on this leg.
+11. **Silent arrivals — new watch for the next run.** Two villagers joined 101961 in the final three days with no arrival line in any channel the driver captures (no telemetry key, no convo-dump mention, no dawn SAY). Add an arrival watch: does the game narrate arrivals somewhere the driver never looks, or is joining genuinely silent? If silent, that is a blank to fill — a stranger joining the village is a moment the player should hear about. Also: the analyzer's roster reconcile should flag end-members who were never in the start roster (it currently only flags start-members with no death/departure record, which is why this read UNACCOUNTED=0).
+
+## Proof tests (all re-run on the new base, worktree)
+
+15/15 GREEN, 0 failures — log `~/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/r246-proof/proof-batch.log`:
+walkHome 27/27, settled-help 19/19, stage0-help 13/13, stage0-cant 18/18, mood-goodbye 10/10, spotter 35/35, want-raise 7/7, clearhome 37/37, want-bridge r146 ALL GREEN, link-accept-voice 61/61, link-accept-rotation r148 ALL CHECKS PASS (3 cases + summary = 4 lines; r245's log captured only 2 of the 4 PASS lines — same test file, unchanged since cf17e4dd6; a logging artifact, not a test difference), maps-pools r147 ALL GREEN, counter-label 19/19, react-exhaustion r246 PASS 0 failed, mourning multiwit r254 ALL GREEN (4 cases).
+
+## Analyzer fork proof
+
+r246 analyzer vs r245 analyzer on the r245 corpus (5 seeds): diff shows ONLY intended changes (E1-case 2 / E1-plain 1 on the old corpus — the r245 "case-thread E1 sits 3" counter counted every E1, not just case-thread ones; the split corrects it. Katarina 101955 d14 re-classifies E1-plain: 0/12 case picks, dlg:help pressed YES, surfaced later. BOWCRAFT gear-count lines — r245 corpus: crude_bow ×3, bow ×3, crossbow ×1 = 7, correcting the r245 run note's ×2. WARN-HEED lines — warnLog absent on all 5 seeds, 15 engaged sittings unobservable, 0 findings. DRY2 / SETTLED-FAVOR / SELFWIT lines — 0s are instrument-absence, not measurements. DAY-DESYNC — net drift 0 on 4/5 seeds, −1 on 101955; the fork CORRECTS the r245 note's reading: 51 repeat/skip pairs across the panel, systematic clock jitter netting to zero). All old-bar numbers reproduce exactly.
+
+## Gate + telemetry
+
+- Gate: **[PENDING — check.js --quick running; fill in before closeout]**
+- Telemetry deviation check: ran 2026-11-20 ~23:10Z — 3 LOUD lines, all the KNOWN schema mismatch (baseline r132 BEFORE panel): `guardrails.deaths` 604 → 0, `guardrails.popAlive` 178 → 0, `guardrails.pantryKcal` 1,210,411 → 0 (n=5 files). The driver never emits `guardrails.*` fields, so the checker reads missing paths as 0 — expected per prereg, NOT a finding. `c3.starvationDeaths` produced no LOUD line. **Baseline NOT rolled** (prereg: never roll on a mismatch). No src/js change this run, so no guardrail move could be caused by this run's code anyway.
+
+## Closeout
+
+- No src/js change this run (1 SPOTTER NO-GO + 3 LOST asks documented + proposed, not landed).
+- Files to commit (worktree, via safe-commit.sh): prereg, this run note, `scripts/journey-establishment-r246-20261120.js`, `scripts/analyze-journey-establishment-r246-20261120.js`.
+- Rotation: read at closeout; file reads `1` → write `1→2` with read-back.
