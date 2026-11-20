@@ -244,6 +244,42 @@ artifact, not committed). All other metrics quiet (moots 7→3,
 bondProposed 139→109, confrontEvents 38→25, funerals 23→13,
 transcripts 458→424).
 
+## Gate (`check.js --quick`)
+
+Two runs, both on the rebased tip `ed19c3d57`:
+
+- **Flap-contaminated run (14:17–14:36Z): 329 passed, 15 failed.**
+  A host write flap (window since ~14:25:45Z, confirmed by the
+  watchdog) overlapped the run's tail: 5 failures were EPERM write
+  refusals (proof-text-identity, telemetry-check-recorder,
+  sw-audio-cache copyfile, prepared-runner-custody,
+  deathcleanup-instrument), 4 were 120s timeouts under flap + a
+  concurrent sibling gate, and the flap truncated `docs/ONTOLOGY.md`
+  to 0 bytes in the worktree at ~14:30:08Z. Log preserved as
+  `evidence/2026-11-20/check-quick-r256-adopt-flap.log`. The
+  ONTOLOGY.md truncation was restored byte-identical from HEAD
+  (hash `c4fcc0454e5d20095f3d16631186b5b62550fdde` matches HEAD) and
+  never committed.
+- **Fresh re-run after the flap cleared (15:22–15:32Z, fresh boot):
+  339 passed, 5 failed in 596s.** All 5 are standing failures,
+  **0 attributable**:
+  - measurement-proof staleness pair: test-measurement-proof-update
+    ("Proof source inputs are not current") + test-measurement-workflow
+    ("retained neutrality proof covers the current Game/controller/
+    harness inputs") — proof re-sign round 22 owed, unchanged on master.
+  - phone-frame stale receipt: test-phone-frame-proof (index.html +
+    5 data files) — standing.
+  - 120s timeouts: living-garden + one-person-army deed-attainment —
+    the known cap issue (they exceed 120s even solo on a fresh boot
+    with no concurrent gate).
+  - Everything the flap run flagged beyond the standing set passed
+    fresh: foodpower (ontology validator green — the conversation.js
+    edit does not trip it), occupation-panels, measurement-cache-flags,
+    proof-text-identity, telemetry-check-recorder, sw-audio-cache,
+    prepared-runner-custody, deathcleanup-instrument,
+    trust-observer-neutrality, capable-bot.
+- Log: `evidence/2026-11-20/check-quick-r256-adopt.log`.
+
 ## Adjudication
 
 Panel verdict is **MIXED**: the run's headline arm (F6) is GO, TRAIL
