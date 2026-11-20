@@ -874,6 +874,37 @@
       if (st.slain[tid]) return;
       titanUniqueAllies(st.musters[tid]).forEach(function (a) { committed[a.villageId + ':' + a.vid] = true; });
     });
+    // GROWTH-LINE COOLED CALL (journey-deepening r245): the dawn line may
+    // have promised allied blades the morning has since eaten (a contest
+    // death after dawn, r244 105024 d86: the line promised 2, the call
+    // brought 0). Recompute fresh BEFORE sounding: if a line promised
+    // allied blades and none are free now, do NOT sound — say so honestly
+    // instead. No empty ritual, no trust cost, no per-link refusal lines.
+    // The Haven leg is separate: volunteers still free are named for the
+    // commit, not the call. When no line promised allied growth, or the
+    // fresh gain is still > 0, the call sounds exactly as before.
+    try {
+      var _fresh = titanMusterGrowth(titanId);
+      if (_fresh && (muster._growthPromisedAllied || 0) > 0) {
+        var _freshAllied = 0;
+        (_fresh.links || []).forEach(function (l) { _freshAllied += (l.gain || 0); });
+        if (_freshAllied <= 0) {
+          var _cur = 0;
+          try { _cur = titanMusterBladeCount(titanId); } catch (e2) {}
+          var _cool = '📯 The fires have cooled since dawn — the growth the dawn promised is gone. No new blades answer.';
+          _cool += (_cur >= def.minAllies)
+            ? ' The muster already stands at ' + _cur + ' — enough.'
+            : ' The muster stands at ' + _cur + ' of the ' + def.minAllies + ' ' + def.title + ' demands.';
+          if ((_fresh.havenGain || 0) > 0) _cool += ' Haven still has ' + _fresh.havenGain + ' volunteer' + (_fresh.havenGain === 1 ? '' : 's') + ' free to march — the commit sends them.';
+          Game.say(_cool);
+          // Re-arm the dawn line on the fresh numbers, so it speaks again
+          // only on fresh growth — a cooled promise must not repeat.
+          try { muster._growthSaid = _fresh.harvestable; } catch (e3) {}
+          muster._growthPromisedAllied = 0;
+          return null;
+        }
+      }
+    } catch (e) {}
     Game.say('📯 THE CALL GOES OUT — ' + def.title + ' must fall, and no one fire can do it.');
     var links = titanAlliedLinks();
     var answered = 0;
@@ -918,8 +949,10 @@
     // GROWTH-LINE RE-ARM (r236): the harvest just happened — store the
     // post-call harvestable (usually only uncommitted Haven volunteers
     // remain) so the dawn line stays silent on what was just harvested
-    // and speaks again only on FRESH growth.
+    // and speaks again only on FRESH growth. R245: the call consumed
+    // the line's allied promise — clear it with the re-arm.
     try { var _g = titanMusterGrowth(titanId); if (_g) muster._growthSaid = _g.harvestable; } catch (e) {}
+    muster._growthPromisedAllied = 0;
     return muster;
   }
 
@@ -1435,10 +1468,27 @@
         if (!g || !(g.harvestable > 0)) return;
         if ((muster._growthSaid || 0) >= g.harvestable) return;
         muster._growthSaid = g.harvestable;
+        // R245 (journey-deepening r245): remember what this line promised
+        // on the ALLIED leg — the call brings allies only, and the morning
+        // can eat the growth after dawn (a contest death, r244 105024
+        // d86). soundTitanCall re-validates against this promise: if the
+        // promised blades are gone, the call says so instead of sounding
+        // an empty ritual. The promise is consumed by the call (or voided
+        // by a cooled call); the commit does not clear it — Haven's leg
+        // is a separate verb and the allied promise survives it.
+        var _promisedAllied = 0;
+        (g.links || []).forEach(function (l) { _promisedAllied += (l.gain || 0); });
+        muster._growthPromisedAllied = _promisedAllied;
         var top = null;
         g.links.forEach(function (l) { if (l.gain > 0 && (!top || l.gain > top.gain)) top = l; });
         var def = titanDefs()[titanId];
-        var line = '📯 The fires have warmed since the call — ';
+        // R245: the line reports DAWN state ("at dawn, … would send …")
+        // and qualifies the imperative ("enough, if the morning holds") —
+        // the numbers are the dawn's, and the morning can move them. The
+        // exact prefix and the parsed number phrases are unchanged (the
+        // journey driver matches the prefix; the analyzer reads the
+        // projection, not the prose).
+        var line = '📯 The fires have warmed since the call — at dawn, ';
         var parts = [];
         if (top) parts.push((top.name || 'an allied fire') + ' would send ' + top.gain + ' more blade' + (top.gain === 1 ? '' : 's') + ' if the call were sounded again');
         // r236 pilot-2: the Haven clause used to carry no verb — a player
@@ -1447,7 +1497,11 @@
         // ALLIED blades; Haven marches on the commit. Name the commit.
         if (g.havenGain > 0) parts.push('Haven has ' + g.havenGain + ' volunteer' + (g.havenGain === 1 ? '' : 's') + ' free to march — the commit sends them');
         line += parts.join(', and ') + '. The muster would stand at ' + g.total + ' of the ' + g.need + ' ' + (def ? def.title : 'titan') + ' demands';
-        if (g.wouldBeReady) line += ' — enough. Sound the call' + (g.havenGain > 0 ? ', and send Haven\u2019s own.' : '.');
+        // R245: "enough, if the morning holds" — the dawn's arithmetic is
+        // a promise the morning can break; the call re-validates before
+        // sounding (see soundTitanCall). The "still short" branch is
+        // unchanged.
+        if (g.wouldBeReady) line += ' — enough, if the morning holds. Sound the call' + (g.havenGain > 0 ? ', and send Haven\u2019s own.' : '.');
         else line += '. Still short — but the gap is closing.';
         Game.say(line);
       } catch (e) {}
