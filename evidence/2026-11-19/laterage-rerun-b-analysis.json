@@ -1,0 +1,508 @@
+{
+ "verdict": "DIAG-GO",
+ "kind": "diag-laterage",
+ "bars": [
+  {
+   "id": "pool-floor",
+   "pass": true,
+   "detail": "observable Rage fights 12 (floor 8; Rage fights in corpus 12 of 136 wave-4+ encounters)"
+  },
+  {
+   "id": "taxonomy-complete",
+   "pass": true,
+   "detail": "unclassified 0, anomalies 0"
+  },
+  {
+   "id": "dominant-cause-named",
+   "pass": true,
+   "detail": "dominant delay cause brawler_instinct (6 of 6 delay rounds)"
+  },
+  {
+   "id": "instrument-errors",
+   "pass": true,
+   "detail": "instrument errors 0"
+  }
+ ],
+ "corpus": {
+  "dir": "evidence/2026-11-19/perseed-laterage-rerun-b",
+  "n": 8,
+  "wall": {
+   "n": 8,
+   "national": 0,
+   "table": null,
+   "wins": 0,
+   "wave4": 8,
+   "wave5": 3,
+   "medianSurvival": 150,
+   "communityLoss": 2
+  }
+ },
+ "summary": {
+  "encounters": 136,
+  "rageFights": 12,
+  "observable": 12,
+  "unclassified": 0,
+  "anomalies": 0,
+  "anomalyRows": [],
+  "unclassifiedRows": [],
+  "fireRoundDist": {
+   "1": 12
+  },
+  "lateFire": 0,
+  "lateFireShare": 0,
+  "lateFire4": 0,
+  "lateFire4Share": 0,
+  "meanDelay": 1.5,
+  "medianDelay": 1.5,
+  "delayDist": {
+   "1": 6,
+   "2": 6
+  },
+  "neverLanded": 0,
+  "neverLandedShare": 0,
+  "meanDelayToEnd": null,
+  "zeroDamage": 0,
+  "zeroDamageShare": 0,
+  "doubledLandedDist": {
+   "0": 0,
+   "1": 0,
+   "2": 1,
+   "3": 11
+  },
+  "causeCounts": {
+   "brawler_instinct": 6
+  },
+  "coarseCounts": {
+   "brawler_instinct": 6
+  },
+  "dominantCause": "brawler_instinct",
+  "dominantCauseN": 6,
+  "totalDelayRounds": 6,
+  "dmgPerRoundLate": null,
+  "dmgPerRoundR1": 61.43968253968254,
+  "foregoneEstimate": 48,
+  "foregoneRows": [
+   {
+    "seed": 106158,
+    "day": 86,
+    "vid": "luis_fernandez",
+    "mid": "herald",
+    "rageRound": 1,
+    "doubledLanded": 2,
+    "unit": 48,
+    "basis": "own doubled strike (48)",
+    "foregone": 48
+   }
+  ],
+  "corpusMeanDoubled": 64.75,
+  "rows": [
+   {
+    "seed": 106151,
+    "day": 92,
+    "vid": "gen_vn5sluf",
+    "mid": "eulogy",
+    "outcome": "vFlee",
+    "rounds": 4,
+    "mDealt": 155,
+    "rageFiredFlag": true,
+    "moraleHolds": 0,
+    "rageRound": 1,
+    "name": "Luiz",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 3,
+    "doubledLanded": 3,
+    "doubledNotes": [
+     "(x2.0) (933 left)",
+     "(x2.0) (901 left)",
+     "(x2.0) (855 left)"
+    ],
+    "preStrikeDmgs": [],
+    "zeroDamage": false,
+    "dmgPerRound": 38.75,
+    "firstDoubledRound": 2,
+    "firstDoubledDmg": 38,
+    "delay": 1,
+    "delayToEnd": null,
+    "delayRounds": [],
+    "status": "classified"
+   },
+   {
+    "seed": 106151,
+    "day": 95,
+    "vid": "nina_petrova",
+    "mid": "cancellation",
+    "outcome": "vFlee",
+    "rounds": 5,
+    "mDealt": 388,
+    "rageFiredFlag": true,
+    "moraleHolds": 0,
+    "rageRound": 1,
+    "name": "Nina",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 3,
+    "doubledLanded": 3,
+    "doubledNotes": [
+     "(x2.5) (1884 left)",
+     "(x2.5) (1771 left)",
+     "(x2.5) (1620 left)"
+    ],
+    "preStrikeDmgs": [],
+    "zeroDamage": false,
+    "dmgPerRound": 77.6,
+    "firstDoubledRound": 2,
+    "firstDoubledDmg": 83,
+    "delay": 1,
+    "delayToEnd": null,
+    "delayRounds": [],
+    "status": "classified"
+   },
+   {
+    "seed": 106151,
+    "day": 100,
+    "vid": "gen_vn5sluf",
+    "mid": "suburb",
+    "outcome": "vFlee",
+    "rounds": 12,
+    "mDealt": 588,
+    "rageFiredFlag": true,
+    "moraleHolds": 0,
+    "rageRound": 1,
+    "name": "Luiz",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 11,
+    "doubledLanded": 3,
+    "doubledNotes": [
+     "(x2.0) (1394 left)",
+     "(x2.0) (1358 left)",
+     "(x2.0) (1307 left)"
+    ],
+    "preStrikeDmgs": [],
+    "zeroDamage": false,
+    "dmgPerRound": 49,
+    "firstDoubledRound": 2,
+    "firstDoubledDmg": 34,
+    "delay": 1,
+    "delayToEnd": null,
+    "delayRounds": [],
+    "status": "classified"
+   },
+   {
+    "seed": 106151,
+    "day": 118,
+    "vid": "gen_vn5sluf",
+    "mid": "network_note",
+    "outcome": "vFlee",
+    "rounds": 5,
+    "mDealt": 339,
+    "rageFiredFlag": true,
+    "moraleHolds": 0,
+    "rageRound": 1,
+    "name": "Luiz",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 4,
+    "doubledLanded": 3,
+    "doubledNotes": [
+     "(x2.6) (1156 left)",
+     "(x2.6) (1082 left)",
+     "(x2.6) (991 left)"
+    ],
+    "preStrikeDmgs": [],
+    "zeroDamage": false,
+    "dmgPerRound": 67.8,
+    "firstDoubledRound": 2,
+    "firstDoubledDmg": 63,
+    "delay": 1,
+    "delayToEnd": null,
+    "delayRounds": [],
+    "status": "classified"
+   },
+   {
+    "seed": 106151,
+    "day": 145,
+    "vid": "farid_ahmed",
+    "mid": "audit",
+    "outcome": "vFlee",
+    "rounds": 5,
+    "mDealt": 211,
+    "rageFiredFlag": true,
+    "moraleHolds": 0,
+    "rageRound": 1,
+    "name": "Farid",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 3,
+    "doubledLanded": 3,
+    "doubledNotes": [
+     "(x2.0) (1064 left)",
+     "(audited — half strength) (x2.0) (1016 left)",
+     "(audited — half strength) (x2.0) (948 left)"
+    ],
+    "preStrikeDmgs": [],
+    "zeroDamage": false,
+    "dmgPerRound": 42.2,
+    "firstDoubledRound": 2,
+    "firstDoubledDmg": 60,
+    "delay": 1,
+    "delayToEnd": null,
+    "delayRounds": [],
+    "status": "classified"
+   },
+   {
+    "seed": 106158,
+    "day": 79,
+    "vid": "luis_fernandez",
+    "mid": "eulogy",
+    "outcome": "vFlee",
+    "rounds": 4,
+    "mDealt": 250,
+    "rageFiredFlag": true,
+    "moraleHolds": 0,
+    "rageRound": 1,
+    "name": "Luis",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 3,
+    "doubledLanded": 3,
+    "doubledNotes": [
+     "(x2.0) (435 left)",
+     "(blood trail +2) (x2.0) (385 left)",
+     "(blood trail +2) (x2.0) (290 left)"
+    ],
+    "preStrikeDmgs": [],
+    "zeroDamage": false,
+    "dmgPerRound": 62.5,
+    "firstDoubledRound": 2,
+    "firstDoubledDmg": 46,
+    "delay": 1,
+    "delayToEnd": null,
+    "delayRounds": [],
+    "status": "classified"
+   },
+   {
+    "seed": 106158,
+    "day": 81,
+    "vid": "luis_fernandez",
+    "mid": "algorithm",
+    "outcome": "vFlee",
+    "rounds": 7,
+    "mDealt": 407,
+    "rageFiredFlag": true,
+    "moraleHolds": 0,
+    "rageRound": 1,
+    "name": "Luis",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 5,
+    "doubledLanded": 3,
+    "doubledNotes": [
+     "(x2.0) (704 left)",
+     "(x2.0) (624 left)",
+     "(x2.0) (533 left)"
+    ],
+    "preStrikeDmgs": [],
+    "zeroDamage": false,
+    "dmgPerRound": 58.142857142857146,
+    "firstDoubledRound": 3,
+    "firstDoubledDmg": 46,
+    "delay": 2,
+    "delayToEnd": null,
+    "delayRounds": [
+     {
+      "round": 2,
+      "cause": "brawler_instinct",
+      "detail": "(Brawler's Instinct: +2 speed)"
+     }
+    ],
+    "status": "classified"
+   },
+   {
+    "seed": 106158,
+    "day": 86,
+    "vid": "luis_fernandez",
+    "mid": "herald",
+    "outcome": "vFlee",
+    "rounds": 4,
+    "mDealt": 225,
+    "rageFiredFlag": true,
+    "moraleHolds": 0,
+    "rageRound": 1,
+    "name": "Luis",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 2,
+    "doubledLanded": 2,
+    "doubledNotes": [
+     "(x2.0) (477 left)",
+     "(x2.0) (372 left)"
+    ],
+    "preStrikeDmgs": [],
+    "zeroDamage": false,
+    "dmgPerRound": 56.25,
+    "firstDoubledRound": 3,
+    "firstDoubledDmg": 48,
+    "delay": 2,
+    "delayToEnd": null,
+    "delayRounds": [
+     {
+      "round": 2,
+      "cause": "brawler_instinct",
+      "detail": "(Brawler's Instinct: +2 speed)"
+     }
+    ],
+    "status": "classified"
+   },
+   {
+    "seed": 106158,
+    "day": 86,
+    "vid": "luis_fernandez",
+    "mid": "herald",
+    "outcome": "vKill",
+    "rounds": 5,
+    "mDealt": 316,
+    "rageFiredFlag": true,
+    "moraleHolds": 0,
+    "rageRound": 1,
+    "name": "Luis",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 3,
+    "doubledLanded": 3,
+    "doubledNotes": [
+     "(blood trail +2) (x2.0) (246 left)",
+     "(blood trail +2) (x2.0) (151 left)",
+     "(blood trail +2) (x2.0) (44 left)"
+    ],
+    "preStrikeDmgs": [],
+    "zeroDamage": false,
+    "dmgPerRound": 63.2,
+    "firstDoubledRound": 3,
+    "firstDoubledDmg": 54,
+    "delay": 2,
+    "delayToEnd": null,
+    "delayRounds": [
+     {
+      "round": 2,
+      "cause": "brawler_instinct",
+      "detail": "(Brawler's Instinct: +2 speed)"
+     }
+    ],
+    "status": "classified"
+   },
+   {
+    "seed": 106158,
+    "day": 106,
+    "vid": "luis_fernandez",
+    "mid": "reunion",
+    "outcome": "vFlee",
+    "rounds": 6,
+    "mDealt": 320,
+    "rageFiredFlag": true,
+    "moraleHolds": 4,
+    "rageRound": 1,
+    "name": "Luis",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 3,
+    "doubledLanded": 3,
+    "doubledNotes": [
+     "(blood trail +2) (x2.0) (460 left)",
+     "(blood trail +2) (x2.0) (360 left)",
+     "(blood trail +2) (x2.0) (268 left)"
+    ],
+    "preStrikeDmgs": [],
+    "zeroDamage": false,
+    "dmgPerRound": 53.333333333333336,
+    "firstDoubledRound": 3,
+    "firstDoubledDmg": 98,
+    "delay": 2,
+    "delayToEnd": null,
+    "delayRounds": [
+     {
+      "round": 2,
+      "cause": "brawler_instinct",
+      "detail": "(Brawler's Instinct: +2 speed)"
+     }
+    ],
+    "status": "classified"
+   },
+   {
+    "seed": 106158,
+    "day": 109,
+    "vid": "luis_fernandez",
+    "mid": "suburb",
+    "outcome": "vFlee",
+    "rounds": 6,
+    "mDealt": 597,
+    "rageFiredFlag": true,
+    "moraleHolds": 0,
+    "rageRound": 1,
+    "name": "Luis",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 4,
+    "doubledLanded": 3,
+    "doubledNotes": [
+     "(x2.0) (1144 left)",
+     "(x2.0) (1016 left)",
+     "(x2.0) (867 left)"
+    ],
+    "preStrikeDmgs": [],
+    "zeroDamage": false,
+    "dmgPerRound": 99.5,
+    "firstDoubledRound": 3,
+    "firstDoubledDmg": 94,
+    "delay": 2,
+    "delayToEnd": null,
+    "delayRounds": [
+     {
+      "round": 2,
+      "cause": "brawler_instinct",
+      "detail": "(Brawler's Instinct: +2 speed)"
+     }
+    ],
+    "status": "classified"
+   },
+   {
+    "seed": 106158,
+    "day": 114,
+    "vid": "luis_fernandez",
+    "mid": "reunion",
+    "outcome": "vFlee",
+    "rounds": 6,
+    "mDealt": 414,
+    "rageFiredFlag": true,
+    "moraleHolds": 4,
+    "rageRound": 1,
+    "name": "Luis",
+    "lateFire": false,
+    "lateFire4": false,
+    "postStrikeCount": 3,
+    "doubledLanded": 3,
+    "doubledNotes": [
+     "(x2.5) (724 left)",
+     "(x2.5) (604 left)",
+     "(x2.5) (486 left)"
+    ],
+    "preStrikeDmgs": [],
+    "zeroDamage": false,
+    "dmgPerRound": 69,
+    "firstDoubledRound": 3,
+    "firstDoubledDmg": 113,
+    "delay": 2,
+    "delayToEnd": null,
+    "delayRounds": [
+     {
+      "round": 2,
+      "cause": "brawler_instinct",
+      "detail": "(Brawler's Instinct: +2 speed)"
+     }
+    ],
+    "status": "classified"
+   }
+  ]
+ }
+}
