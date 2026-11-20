@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Darius","t":100},{"id":"Jose","t":94},{"id":"Charlotte","t":91},{"id":"Farid","t":91}], roster=12
+INH readable=true scripted=true deadItems=8 distinct=8 transferred=1 vanished=2 keptPlants=23 inheritedPlants=2 keptSkills=8 inheritedSkills=7 succTrustPre=100 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","beard_moss","echo_location"] post=["green_whisper","beard_moss","echo_location"]
+DEATH d41 (the expedition, scripted): Gertrude -> Darius | passed=true lin=true mo=true trust=62 vouchers=10
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=1 vanished=2 of 8 distinct dead-bearer items
+  CONVO d+3 with Jose (refused=false)
+  CONVO d+3 with Benoit (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Jose (refused=false)
+  CONVO d+7 with Benoit (refused=false)
+  CONVO d+14 with Jose (refused=false)
+  CONVO d+14 with Benoit (refused=false)
+  CONVO d+30 with Jose (refused=false)
+  CONVO d+30 with Farid (refused=false)
+  CONVO d+45 with Charlotte (refused=false)
+  CONVO d+45 with Nikolai (refused=false)
+  CONVO d+53 with Benoit (refused=false)
+  CONVO d+53 with Nikolai (refused=false)
+  NEWCOMER-PROBE d+57 with Mateo (arrived d+57, trust=42 refused=false)
+  CONVO d+64 with Chloe (refused=false)
+  CONVO d+64 with Mateo (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=10) echo=2 organicBurial={"respects":false,"bury":false} halfRation=11
+
+MEAL-GATE: audited=70 violations=0 noMealDays=14 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":47,"offerLines":32,"codexPlantsDelta":32,"codexSkillsDelta":22,"codexAbilitiesDelta":14,"xpDelta":2,"any":true} pantry 63597->7217
+TRUST-DIALS: office 62->90 (+28, climb) | villageMean 89.4->79.1 (-10.3, fall) | ge60 10->7 | movers>=5: [{"id":"Chloe","from":82,"to":99,"delta":17},{"id":"Nikolai","from":85,"to":90,"delta":5},{"id":"Benjamin","from":90,"to":76,"delta":-14}]
+DEED-LEDGER: calls=11 summary={"giveFood":{"calls":8,"ok":8,"deltaSum":18,"deltaN":8,"positive":7,"meanDelta":2.25},"donateToPantry":{"calls":3,"ok":3,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=3 grief-excluded=2
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=111 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=11) trustVerdict={"readable":true,"officeMantle":62,"officeLast":90,"officeDelta":28,"officeClass":"climb","villageMantle":89.4,"villageLast":79.1,"villageDelta":-10.3,"villageClass":"fall","villageGe60Mantle":10,"villageGe60Last":7,"movers":[{"id":"Chloe","from":82,"to":99,"delta":17},{"id":"Nikolai","from":85,"to":90,"delta":5},{"id":"Benjamin","from":90,"to":76,"delta":-14}]}
+E6/CALLCHECK: e6={"callMoves":10,"withCensus":10,"chainHandoffs":4,"trustMoves":6} callCheck={"dailyMoveDays":10,"callMoveDays":10,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":6,"soloOffice":1,"soloOfficeDeltas":[2],"soloBearerDeltaExact":[2],"singleMoverBearer":3,"singleMoverOther":1,"eventClass":{"event-only":1,"deed-only":0,"both":5,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":10}
