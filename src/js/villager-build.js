@@ -1341,6 +1341,66 @@
             } catch (e) {}
           }
         }
+        // BOWKNOW (sim-bowknow-a, finding #2590): MENTORING. A
+        // villager at home who KNOWS the bow (lv[bow] >= 1 in their
+        // own record) can show a spear-holder how it is strung.
+        // Knowledge, unlike a bow, does not go away on expedition,
+        // so a knower at home teaches where seeing cannot reach:
+        // spear-holders never handled a bow, so they never learned
+        // it, and no bow is ever equipped at home on their day.
+        // One learner per mentor per duty day, spear-holders only
+        // (armed but no volley-capable ranged weapon); the learner
+        // still needs materials and still faces the blind 35%
+        // craft roll — knowledge opens the door, it hands them no
+        // bow. Off = no teaching (old behavior, byte-identical).
+        // Mentors are read from the records as they stand BEFORE
+        // today's seeing seeding — a villager taught today teaches
+        // tomorrow, the same rule as the snapshot (a craft made
+        // during this call cannot seed an attempt later in it).
+        let bowknowOn = false;
+        try { bowknowOn = (typeof process !== 'undefined' && process.env && process.env.BOWKNOW === '1'); } catch (e) {}
+        if (bowknowOn) {
+          try {
+            const mentors = [];
+            const learners = [];
+            for (const hid of home) {
+              try {
+                const hp = this.getPerson ? this.getPerson(hid) : null;
+                if (!hp) continue;
+                if ((((v.weaponCraft || {})[hid] || {}).bow || 0) >= 1) { mentors.push(hid); continue; }
+                let hasVolley = false;
+                try { hasVolley = !!(eq.volleyWeaponOf && eq.volleyWeaponOf(hp, defs)); } catch (e2) {}
+                if (!hasVolley) {
+                  hasVolley = (hp.items || []).some(e => { const d = defOf(idOf(e)); return d && d.weapon && d.weapon.ammo; });
+                }
+                if (hasVolley) continue;
+                const armed = ((eq.weaponBonusOf ? (eq.weaponBonusOf(hp, defs, 'melee') || 0) + (eq.weaponBonusOf(hp, defs, 'ranged') || 0) : 0) > 0) ||
+                  (hp.items || []).some(e => { const d = defOf(idOf(e)); return d && d.weapon; });
+                if (!armed) continue;
+                learners.push(hid);
+              } catch (e2) {}
+            }
+            const pairs = Math.min(mentors.length, learners.length);
+            if (pairs > 0) {
+              let atHaven = false;
+              try { atHaven = this.playerAtHaven ? this.playerAtHaven() : false; } catch (e2) {}
+              for (let i = 0; i < pairs; i++) {
+                const mvid = mentors[i], lvid = learners[i];
+                const llv = v.weaponCraft[lvid] = v.weaponCraft[lvid] || {};
+                if ((llv.bow || 0) >= 1) continue;
+                llv.bow = 1;
+                try { if (this.tele) this.tele('weapon_teach', { vid: lvid, by: mvid, item: 'bow' }); } catch (e2) {}
+                if (atHaven) {
+                  try {
+                    const mn = (this.firstRef ? this.firstRef(mvid) : null) || (this.getPerson(mvid) || {}).name || 'Someone';
+                    const ln = (this.firstRef ? this.firstRef(lvid) : null) || (this.getPerson(lvid) || {}).name || 'Someone';
+                    this.say(mn + ' showed ' + ln + ' how a bow is strung, hands moving slow so the lesson sticks. ' + ln + ' can try one now.');
+                  } catch (e2) {}
+                }
+              }
+            }
+          } catch (e) { warn('weaponcraft teach', e); }
+        }
         for (const vid of home) {
           try {
             const p = this.getPerson ? this.getPerson(vid) : null;
