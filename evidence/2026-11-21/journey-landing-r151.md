@@ -245,6 +245,32 @@ This run's own proof test scripts/test-worktree-heartbeat-flock-20261121.js
 passes inside the gate (its case-1 free-lock beat also landed live
 2026-11-21T06:32:35Z; case 2 held-lock 3/3 proven on the pre-rebase tip).
 
+REBASE + SECOND GATE (adoption, 2026-11-21T08:37:14Z) — master moved while
+gate 1 ran (Loop A 0437 round, `9070aaf70`: leadside + evadebow arms,
+instrument + evidence only, `src/` byte-identical to `b20328ad9`), so the
+branch was rebased onto `9070aaf70` (new tip `1f248b820`, clean) and the
+gate re-run from scratch in `r151-gate` on that tip:
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r151-gate2`:
+**334 passed, 10 failed, 1538s**. GATE2_EXIT:1, log at goal
+`hidden_files/journey-landing-r151-gate-rebased2.log`.
+
+Adjudication — 0 attributable, same standing families as gate 1:
+- 6 × 120s TIMEOUT: test-living-garden-deed-attainment,
+  test-occupation-panels, test-one-person-army-deed-attainment,
+  test-trust-observer-neutrality, test-capable-bot-20261014,
+  test-table-endings-20261014 (trust-observer + capable-bot already proven
+  solo on this tip family, 6/6 and 42/0).
+- Standing staleness pair: test-measurement-proof-update.js +
+  test-measurement-workflow.js (proof re-sign round 22 owed).
+- Standing phone-frame stale receipt: test-phone-frame-proof.js.
+- test-measurement-cache-flags.js (exit 1, 93.8s) — proven solo 4/4 on
+  this tip earlier the same day; load flake.
+- This run's proof test PASSED inside gate 2. (A standalone re-run of it
+  on the rebased tip at ~07:44Z failed case 1 only because the registry
+  lock was held >60s by the concurrent r262 gate + Loop B arms — the
+  designed fail-loud behavior, not a defect; case 2 held-lock passed
+  3/3 on that same re-run.)
+
 ## Telemetry
 
 **Quiet.** `node scripts/telemetry-check.js` vs the landing-split baseline
