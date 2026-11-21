@@ -787,8 +787,273 @@ function selftest() {
     check('class (f) real miss', r.cls === 'f' && r.realMiss === true, 'got ' + r.cls + ' (' + (r.reason || '') + ')');
   })();
 
+
+  // ---- draftMissStats + judgeDraftmiss shapes (sim-draftmiss-a, fresh band) ----
+  const fs2 = require('fs');
+  const os = require('os');
+  const tmpD = fs2.mkdtempSync(path.join(os.tmpdir(), 'draftmiss-selftest-'));
+  function dmRow(o) { return Object.assign({ seq: 1, day: 10, mid: 'algorithm', wave: 4, lead: 'ana', leadKind: 'gun', raid: false, cause: 'no-living-holder', underlyingCause: 'no-living-holder', subreason: null, nearestHolder: null, nearestDist: null, nearestState: 'no-living-holder', nearestHealth: null, nearestCells: null, livingHolders: 0, anyArmedEarshot: false, anyEligibleEarshot: false, lendable: false, tickPooled: [], tickStale: false, wouldFire: false }, o); }
+  function dmEnc(o) { return Object.assign({ day: 10, vid: 'ana', mid: 'algorithm', wave: 4, outcome: 'vKill', origin: 'world-tick', rangedId: 'crude_bow', ammoAtEntry: 5, partyCells: [{ vid: 'ana', rangedId: 'crude_bow', ammoId: 'arrow', cells: 0, alive: true }] }, o); }
+  function dmSeed(o) { return Object.assign({ seed: 107191, v4draftMiss: [], v4nearMiss: [], v4encounters: [], v4tickPresence: [], v4lendPool: [], v4lends: [], instrumentErrors: [], deaths: [], ammoBaseline: { census: [] }, ammoCensus: [], cellPile: [] }, o); }
+  const dmD = path.join(tmpD, 'dm');
+  fs2.mkdirSync(dmD);
+  fs2.writeFileSync(path.join(dmD, 'draftmiss-a-s107191-draftmiss-a-diag.json'), JSON.stringify(dmSeed({
+    v4draftMiss: [
+      dmRow({}),
+      dmRow({ seq: 2, day: 12, mid: 'eulogy', lead: 'mei', leadKind: 'cells', cause: 'sheltered-holder', underlyingCause: 'sheltered-holder', nearestHolder: 'victor', nearestDist: 2, nearestState: 'sheltered', nearestHealth: 80, nearestCells: 2, livingHolders: 1 }),
+      dmRow({ seq: 3, day: 14, mid: 'eulogy', lead: 'yara', leadKind: 'cells', cause: 'raid', underlyingCause: 'raid', raid: true, nearestHolder: 'naran', nearestDist: 1, nearestState: 'out-in-world', nearestHealth: 90, nearestCells: 2, livingHolders: 1, anyArmedEarshot: true, anyEligibleEarshot: true }),
+      dmRow({ seq: 4, day: 16, mid: 'herald', cause: 'on-tile', underlyingCause: 'on-tile', nearestHolder: 'naran', nearestDist: 0, nearestState: 'in-camp', nearestHealth: 90, nearestCells: 2, livingHolders: 1, anyArmedEarshot: true, anyEligibleEarshot: true, wouldFire: true }),
+      dmRow({ seq: 5, day: 18, mid: 'herald', cause: 'stale-pre-tick-read', underlyingCause: 'no-living-holder', nearestHolder: null, nearestDist: null, nearestState: 'no-living-holder', livingHolders: 0, tickPooled: ['ghost'], tickStale: true }),
+    ],
+    v4encounters: [
+      dmEnc({}),
+      dmEnc({ day: 12, vid: 'mei', mid: 'eulogy', outcome: 'vDie', rangedId: 'searcaster', ammoAtEntry: 0, partyCells: [{ vid: 'mei', rangedId: 'searcaster', ammoId: 'fusion_cell', cells: 0, alive: true }] }),
+      dmEnc({ day: 14, vid: 'yara', mid: 'eulogy', outcome: 'vFlee', rangedId: 'searcaster', ammoAtEntry: 0, partyCells: [{ vid: 'yara', rangedId: 'searcaster', ammoId: 'fusion_cell', cells: 0, alive: true }] }),
+      dmEnc({ day: 16, mid: 'herald', outcome: 'mFlee' }),
+      dmEnc({ day: 18, mid: 'herald', outcome: 'vKill' }),
+      dmEnc({ day: 20, mid: 'algorithm', outcome: 'vKill', origin: 'expedition' }),
+    ],
+    v4tickPresence: [
+      { seq: 1, day: 10, mid: 'algorithm', wave: 4, tx: 5, ty: 5, nOnTile: 1, onTile: [], adjacent: [], holderPresent: false },
+    ],
+  })));
+  fs2.writeFileSync(path.join(dmD, 'draftmiss-a-s107192-draftmiss-a-diag.json'), JSON.stringify(dmSeed({ seed: 107192,
+    v4draftMiss: [
+      dmRow({ seq: 1, day: 11, lead: 'mei', cause: 'out-of-earshot', underlyingCause: 'out-of-earshot', subreason: 'on-expedition', nearestHolder: 'victor', nearestDist: 6, nearestState: 'on-expedition', nearestHealth: 90, nearestCells: 2, livingHolders: 1 }),
+      dmRow({ seq: 2, day: 13, mid: 'eulogy', lead: 'mei', cause: 'adjacent-but-unreachable', underlyingCause: 'adjacent-but-unreachable', subreason: 'on-expedition', nearestHolder: 'victor', nearestDist: 1, nearestState: 'on-expedition', nearestHealth: 90, nearestCells: 2, livingHolders: 1, anyArmedEarshot: true, anyEligibleEarshot: false }),
+    ],
+    v4encounters: [
+      dmEnc({ day: 11, vid: 'mei', outcome: 'vKill' }),
+      dmEnc({ day: 13, vid: 'mei', mid: 'eulogy', outcome: 'vDie' }),
+    ],
+  })));
+  const dm = draftMissStats(dmD);
+  check('draftMissStats launches 6 non-raid (5 gun + 1 cells), raid 1', dm.launches === 6 && dm.launchesGun === 5 && dm.launchesCells === 1 && dm.raidLaunches === 1, JSON.stringify({ launches: dm.launches, gun: dm.launchesGun, cells: dm.launchesCells, raid: dm.raidLaunches }));
+  check('draftMissStats byCause: no-living-holder 1, sheltered 1, on-tile 1, stale 1, out-of-earshot 1, adjacent-unreachable 1', dm.byCause['no-living-holder'] === 1 && dm.byCause['sheltered-holder'] === 1 && dm.byCause['on-tile'] === 1 && dm.byCause['stale-pre-tick-read'] === 1 && dm.byCause['out-of-earshot'] === 1 && dm.byCause['adjacent-but-unreachable'] === 1, JSON.stringify(dm.byCause));
+  check('draftMissStats byDist: 0->1, 1->1, 2->1, 6+->1, none->2', dm.byDist['0'] === 1 && dm.byDist['1'] === 1 && dm.byDist['2'] === 1 && dm.byDist['6+'] === 1 && dm.byDist.none === 2, JSON.stringify(dm.byDist));
+  check('draftMissStats wouldFire 1 (on-tile only)', dm.wouldFire === 1 && dm.wouldFireOnTile === 1 && dm.wouldFireAdjacent === 0, JSON.stringify({ wf: dm.wouldFire, tile: dm.wouldFireOnTile, adj: dm.wouldFireAdjacent }));
+  check('draftMissStats tickStale 1', dm.tickStale === 1, JSON.stringify({ stale: dm.tickStale }));
+  check('draftMissStats distinct pairs 6, distinct launches 6 (raid rows excluded from both)', dm.distinctPairs === 6 && dm.distinctLaunches === 6, JSON.stringify({ pairs: dm.distinctPairs, launches: dm.distinctLaunches }));
+  check('draftMissStats coverage 7/7 = 1.0, orphan 0 (expedition encounter excluded; raid row joins the raid encounter)', dm.encDenominator === 7 && dm.encCovered === 7 && dm.coverage === 1 && dm.orphanRows === 0, JSON.stringify({ denom: dm.encDenominator, covered: dm.encCovered, coverage: dm.coverage, orphans: dm.orphanRows }));
+  check('draftMissStats dominant diffuse: 6 causes tie at 1 (share 1/6)', dm.dominantShare === 1 / 6 && dm.dominantN === 1, JSON.stringify({ dom: dm.dominantCause, n: dm.dominantN, share: dm.dominantShare }));
+  function mkDm(o) { return Object.assign({ dir: '', n: 2, valid: 2, errors: 0, launches: 6, launchesGun: 5, launchesCells: 1, raidLaunches: 1, unarmedLaunches: 6, armedEarshot: 2, eligibleEarshot: 1, armedEarshotUnarmed: 2, eligibleEarshotUnarmed: 1, byCause: { 'no-living-holder': 1, 'sheltered-holder': 1, 'on-tile': 1, 'stale-pre-tick-read': 1, 'out-of-earshot': 1, 'adjacent-but-unreachable': 1 }, byDist: {}, byUnderlying: {}, byState: {}, noLivingHolder: 1, lendable: 0, unknown: 0, wouldFire: 1, wouldFireOnTile: 1, wouldFireAdjacent: 0, tickStale: 1, tickStaleNull: 0, tickPooledRows: 1, distinctPairs: 5, distinctLaunches: 6, encDenominator: 7, encCovered: 7, coverage: 1, orphanRows: 0, dominantCause: 'no-living-holder', dominantN: 1, dominantShare: 1 / 6, secondCause: 'sheltered-holder', secondN: 1, secondShare: 1 / 6, perSeed: {}, detail: [] }, o); }
+  function mkPoolDm(o) { return Object.assign({ dir: '', n: 8, valid: 8, errors: 0, moments: 0, momentsGun: 0, momentsCells: 0, momentsTile: 0, momentsAdjacent: 0, fights: 0, perSeed: {}, byKind: {}, byFrom: {}, detail: [] }, o); }
+  function mkLendDm(o) { return Object.assign({ lends: 0, lendsJoined: 0, borrowerSurvived: 0, borrowerDied: 0, borrowerSurvival: null }, o); }
+  function mkPresDm(o) { return Object.assign({ poolDraftMiss: 3, poolFights: 5, poolOnTile: 0 }, o); }
+  function mkNmDm(o) { return Object.assign({ launches: 7, unarmedLaunches: 6, armedEarshot: 2, eligibleEarshot: 1 }, o); }
+  let dj = judgeDraftmiss(mkDm({}), mkPoolDm({}), mkLendDm({}), mkPresDm({}), mkNmDm({}));
+  check('judgeDraftmiss DIAG-GO diffuse (dominant 1/6 < 30% — still a quantified answer)', dj.verdict === 'DIAG-GO' && dj.bars.every(function (b) { return b.pass; }) && /DIFFUSE/.test(dj.bars[2].detail), JSON.stringify(dj));
+  dj = judgeDraftmiss(mkDm({ dominantCause: 'no-living-holder', dominantN: 5, dominantShare: 5 / 6, secondCause: 'sheltered-holder', secondN: 1, secondShare: 1 / 6, byCause: { 'no-living-holder': 5, 'sheltered-holder': 1 } }), mkPoolDm({}), mkLendDm({}), mkPresDm({}), mkNmDm({}));
+  check('judgeDraftmiss DIAG-GO dominant 5/6 (no DIFFUSE note)', dj.verdict === 'DIAG-GO' && !/DIFFUSE/.test(dj.bars[2].detail), JSON.stringify(dj.bars[2]));
+  dj = judgeDraftmiss(mkDm({ encCovered: 6, coverage: 6 / 7 }), mkPoolDm({}), mkLendDm({}), mkPresDm({}), mkNmDm({}));
+  check('judgeDraftmiss DIAG-NO-GO coverage 6/7 < 0.95 (kind METRIC-BROKEN)', dj.verdict === 'DIAG-NO-GO' && !dj.bars[0].pass && dj.kind === 'METRIC-BROKEN', JSON.stringify(dj));
+  dj = judgeDraftmiss(mkDm({ unknown: 1 }), mkPoolDm({}), mkLendDm({}), mkPresDm({}), mkNmDm({}));
+  check('judgeDraftmiss DIAG-NO-GO 1/6 rows unclassified > 5% (kind METRIC-BROKEN)', dj.verdict === 'DIAG-NO-GO' && !dj.bars[0].pass && dj.kind === 'METRIC-BROKEN', JSON.stringify(dj.bars[0]));
+  dj = judgeDraftmiss(mkDm({}), mkPoolDm({ moments: 1 }), mkLendDm({}), mkPresDm({}), mkNmDm({}));
+  check('judgeDraftmiss DIAG-NO-GO lendable 0 vs pool moments 1 (kind SUBSTRATE)', dj.verdict === 'DIAG-NO-GO' && !dj.bars[1].pass && dj.kind === 'SUBSTRATE', JSON.stringify(dj.bars[1]));
+  dj = judgeDraftmiss(mkDm({}), mkPoolDm({}), mkLendDm({ lends: 1 }), mkPresDm({}), mkNmDm({}));
+  check('judgeDraftmiss DIAG-NO-GO lend fired on the diag leg (kind SUBSTRATE)', dj.verdict === 'DIAG-NO-GO' && !dj.bars[1].pass && dj.kind === 'SUBSTRATE', JSON.stringify(dj.bars[1]));
+  dj = judgeDraftmiss(mkDm({ unarmedLaunches: 0, launches: 0, launchesGun: 0, launchesCells: 0, encDenominator: 0, encCovered: 0, coverage: null, dominantCause: null, dominantN: 0, dominantShare: null, secondCause: null, secondN: 0, secondShare: null, lendable: 0, byCause: {} }), mkPoolDm({ moments: 0 }), mkLendDm({}), mkPresDm({}), mkNmDm({ launches: 0, unarmedLaunches: 0, armedEarshot: 0, eligibleEarshot: 0 }));
+  check('judgeDraftmiss DIAG-NO-GO no unarmed population (kind NO-POPULATION)', dj.verdict === 'DIAG-NO-GO' && dj.bars[0].pass && !dj.bars[2].pass && dj.kind === 'NO-POPULATION', JSON.stringify(dj));
+  try { fs2.rmSync(tmpD, { recursive: true, force: true }); } catch (e) {}
+
   console.log('analyze-draftmiss-a --selftest: ' + passed + ' passed, ' + failed + ' failed');
   return failed === 0;
+}
+
+
+// ---- LAUNCH-LEVEL DRAFT-MISS (sim-draftmiss-a, fresh band) --------
+// The classifier above works on the OLD corpus's tick rows (the
+// 2026-11-20 arm). The new instrument classifies at LAUNCH time
+// from the driver's v4draftMiss rows (live reads, raid flag known
+// at the wrap). Reused stats come from the lendpool analyzer
+// (required, not copied): cellStats / participationStats /
+// presenceStats / poolStats / lendStats for wall numbers and
+// cross-checks. distBucket is the lendpool one, re-exported here
+// so the proof test can require it from either file.
+const lendpoolAna = require('./analyze-lendpool-a.js');
+const DRAFT_MISS_CAUSES = ['raid', 'stale-pre-tick-read', 'no-living-holder',
+  'sheltered-holder', 'post-flee-resting', 'low-health', 'on-tile',
+  'adjacent-but-unreachable', 'adjacent-eligible', 'out-of-earshot', 'other'];
+function dmMedian(xs) {
+  if (!xs.length) return null;
+  const s = xs.slice().sort(function (a, b) { return a - b; });
+  const m = s.length >> 1;
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+function draftMissStats(dir) {
+  // One v4draftMiss row per unarmed-lead wave-4+ fight launch.
+  // The breakdown is over UNARMED-lead NON-RAID launches only
+  // (leadKind gun | cells); RAID rows exist ONLY for the coverage
+  // join (the encounter recorder logs raid fights through the
+  // same choke point). Coverage is judged against an INDEPENDENT
+  // denominator: the v4encounters rows for the same choke-point
+  // population (origin world-tick | aid, wave >= 4, real-fight
+  // outcome, lead unarmed-or-empty at entry from rangedId +
+  // partyCells[0].cells, falling back to ammoAtEntry) — the same
+  // join as nearMissStats. Join key is seed|day|mid|lead|leadKind,
+  // matched as a multiset. Orphan rows — draft-miss rows with no
+  // matching encounter row — are counted, never dropped.
+  // Distinct counts: distinct LAUNCHES = distinct
+  // (seed, day, mid, lead); distinct PAIRS = distinct
+  // (seed, day, mid) — the presence-a-comparable collapse (their
+  // 21 pairs over 8 seeds, 64 rows, 25 fights, 2.56x
+  // rows-per-fight). Shares use launches as the denominator.
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(function (f) { return f.endsWith('.json'); }).sort() : [];
+  const p = { dir: dir, n: 0, valid: 0, errors: 0,
+    launches: 0, launchesGun: 0, launchesCells: 0, raidLaunches: 0,
+    unarmedLaunches: 0, armedEarshot: 0, eligibleEarshot: 0,
+    armedEarshotUnarmed: 0, eligibleEarshotUnarmed: 0,
+    byCause: {}, byDist: {}, byUnderlying: {}, byState: {},
+    noLivingHolder: 0, lendable: 0, unknown: 0, wouldFire: 0,
+    wouldFireOnTile: 0, wouldFireAdjacent: 0, tickStale: 0,
+    tickStaleNull: 0, tickPooledRows: 0,
+    distinctPairs: 0, distinctLaunches: 0,
+    encDenominator: 0, encCovered: 0, coverage: null, orphanRows: 0,
+    dominantCause: null, dominantN: 0, dominantShare: null,
+    secondCause: null, secondN: 0, secondShare: null,
+    perSeed: {}, detail: [] };
+  for (const c of DRAFT_MISS_CAUSES) p.byCause[c] = 0;
+  for (const b of ['0', '1', '2', '3', '4-5', '6+', 'none']) p.byDist[b] = 0;
+  const REAL_OUTCOMES = { vKill: 1, mFlee: 1, vFlee: 1, vDie: 1 };
+  const pairKeys = {}, launchKeys = {};
+  for (const f of files) {
+    let d;
+    try { d = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); } catch (e) { p.errors++; continue; }
+    p.n++;
+    if (!d || typeof d !== 'object') { p.errors++; continue; }
+    p.valid++;
+    const seed = d.seed;
+    p.perSeed[seed] = p.perSeed[seed] || { launches: 0, unarmed: 0, raidLaunches: 0, wouldFire: 0, tickStale: 0 };
+    const dmKeys = {};
+    for (const r of (d.v4draftMiss || [])) {
+      const isRaid = !!r.raid;
+      const k = seed + '|' + r.day + '|' + r.mid + '|' + r.lead + '|' + r.leadKind;
+      dmKeys[k] = (dmKeys[k] || 0) + 1;
+      if (isRaid) { p.raidLaunches++; p.perSeed[seed].raidLaunches++; continue; }
+      p.launches++;
+      p.perSeed[seed].launches++;
+      if (r.leadKind === 'gun') p.launchesGun++;
+      else if (r.leadKind === 'cells') p.launchesCells++;
+      if (r.anyArmedEarshot) p.armedEarshot++;
+      if (r.anyEligibleEarshot) p.eligibleEarshot++;
+      if (r.lendable) p.lendable++;
+      // Every draft-miss row is an unarmed-lead launch by
+      // construction (the driver returns null for loaded leads).
+      p.unarmedLaunches++;
+      p.perSeed[seed].unarmed++;
+      const cause = (r.cause || 'unknown');
+      if (DRAFT_MISS_CAUSES.indexOf(cause) === -1) { p.unknown++; }
+      else p.byCause[cause] = (p.byCause[cause] || 0) + 1;
+      p.byDist[lendpoolAna.distBucket(r.nearestDist)]++;
+      if (r.underlyingCause) p.byUnderlying[r.underlyingCause] = (p.byUnderlying[r.underlyingCause] || 0) + 1;
+      if (r.nearestState) p.byState[r.nearestState] = (p.byState[r.nearestState] || 0) + 1;
+      if (cause === 'no-living-holder') p.noLivingHolder++;
+      if (r.wouldFire) {
+        p.wouldFire++; p.perSeed[seed].wouldFire++;
+        if (r.underlyingCause === 'on-tile') p.wouldFireOnTile++;
+        else if (r.underlyingCause === 'adjacent-eligible') p.wouldFireAdjacent++;
+      }
+      if (r.tickStale === true) { p.tickStale++; p.perSeed[seed].tickStale++; }
+      else if (r.tickStale == null) p.tickStaleNull++;
+      pairKeys[seed + '|' + r.day + '|' + r.mid] = true;
+      launchKeys[seed + '|' + r.day + '|' + r.mid + '|' + r.lead] = true;
+      if (r.anyArmedEarshot) p.armedEarshotUnarmed++;
+      if (r.anyEligibleEarshot) p.eligibleEarshotUnarmed++;
+      p.detail.push({ seed: seed, day: r.day, mid: r.mid, lead: r.lead, leadKind: r.leadKind,
+        cause: cause, underlyingCause: r.underlyingCause || null, subreason: r.subreason || null,
+        nearestHolder: r.nearestHolder, nearestDist: r.nearestDist, nearestState: r.nearestState,
+        nearestHealth: r.nearestHealth, livingHolders: r.livingHolders,
+        anyArmedEarshot: !!r.anyArmedEarshot, anyEligibleEarshot: !!r.anyEligibleEarshot,
+        lendable: !!r.lendable, tickPooled: r.tickPooled || null, tickStale: r.tickStale,
+        wouldFire: !!r.wouldFire });
+    }
+    p.tickPooledRows += (d.v4tickPresence || []).length;
+    // Independent denominator from v4encounters (same choke point).
+    for (const e of (d.v4encounters || [])) {
+      if (((e.wave | 0) < 4) || !REAL_OUTCOMES[e.outcome]) continue;
+      if (e.origin !== 'world-tick' && e.origin !== 'aid') continue;
+      let leadCells = null;
+      try {
+        if (e.partyCells && e.partyCells[0]) leadCells = e.partyCells[0].cells | 0;
+        else if (e.rangedId === 'searcaster') leadCells = e.ammoAtEntry | 0;
+        else leadCells = 0;
+      } catch (err) { leadCells = 0; }
+      const unarmed = (e.rangedId !== 'searcaster') || (leadCells === 0);
+      if (!unarmed) continue;
+      p.encDenominator++;
+      const encKind = (e.rangedId === 'searcaster') ? 'cells' : 'gun';
+      const k = seed + '|' + e.day + '|' + e.mid + '|' + e.vid + '|' + encKind;
+      if (dmKeys[k] > 0) { dmKeys[k]--; p.encCovered++; }
+    }
+    for (const k of Object.keys(dmKeys)) p.orphanRows += dmKeys[k];
+  }
+  p.coverage = (p.encDenominator > 0) ? (p.encCovered / p.encDenominator) : null;
+  p.distinctPairs = Object.keys(pairKeys).length;
+  p.distinctLaunches = Object.keys(launchKeys).length;
+  const ranked = DRAFT_MISS_CAUSES.map(function (c) { return { cause: c, n: p.byCause[c] || 0 }; })
+    .sort(function (a, b) { return b.n - a.n; });
+  if (p.unarmedLaunches > 0) {
+    p.dominantCause = ranked[0].cause; p.dominantN = ranked[0].n;
+    p.dominantShare = ranked[0].n / p.unarmedLaunches;
+    p.secondCause = ranked[1].cause; p.secondN = ranked[1].n;
+    p.secondShare = ranked[1].n / p.unarmedLaunches;
+  }
+  return p;
+}
+
+function judgeDraftmiss(dm, pool, lend, pres, nm) {
+  // Frozen bars (prereg): (1) draft-miss coverage >= 0.95 with
+  // <= 5% unclassified rows (vacuous-pass only when the encounter
+  // denominator is 0 — no unarmed launches to classify); (2) pool
+  // re-verified — the counter ran on all 8 seeds, the draft-miss
+  // lendable count agrees with the v4lendPool moment count, and
+  // the lend stayed OFF (v4lends empty); (3) the answer is
+  // quantified — an unarmed population exists to break down, the
+  // dominant cause is named with its share, and the earshot base
+  // rate + would-fire bound have denominators. Diffuse (< 30%
+  // largest class) is still a quantified answer: the top two are
+  // named and the evidence must say so plainly.
+  const bars = [];
+  const denom = dm.encDenominator;
+  const unknownShare = (dm.unarmedLaunches > 0) ? (dm.unknown / dm.unarmedLaunches) : 0;
+  const covOk = (denom === 0) ? true : (dm.coverage != null && dm.coverage >= 0.95 && unknownShare <= 0.05);
+  bars.push({ id: 'draft-miss-coverage', pass: covOk,
+    detail: (denom === 0
+      ? 'encounter denominator 0 — coverage vacuous (no unarmed-lead wave-4+ launches to classify); draft-miss rows ' + dm.unarmedLaunches
+      : 'encounter-derived unarmed launches ' + denom + ', covered ' + dm.encCovered +
+        ' (coverage ' + (dm.coverage == null ? 'n/a' : (dm.coverage * 100).toFixed(1) + '%') + ', bar >= 95%)' +
+        '; unclassified rows ' + dm.unknown + '/' + dm.unarmedLaunches + ' (' + (unknownShare * 100).toFixed(1) + '%, bar <= 5%)' +
+        '; orphan draft-miss rows ' + dm.orphanRows +
+        '; distinct launches ' + dm.distinctLaunches + ', distinct pairs ' + dm.distinctPairs) });
+  const poolOk = !!pool && pool.valid === 8 && pool.errors === 0;
+  const crossOk = !!pool && dm.lendable === pool.moments;
+  const lendOff = !!lend && ((lend.lends | 0) === 0);
+  bars.push({ id: 'pool-reverified', pass: poolOk && crossOk && lendOff,
+    detail: 'pool counter files ' + (pool ? pool.valid : 'n/a') + '/8 (errors ' + (pool ? pool.errors : 'n/a') + ')' +
+      '; draft-miss lendable rows ' + dm.lendable + ' vs v4lendPool moments ' + (pool ? pool.moments : 'n/a') +
+      ' (' + (crossOk ? 'agree' : 'MISMATCH') + '); v4lends ' + (lend ? (lend.lends | 0) : 'n/a') +
+      ' (' + (lendOff ? 'lend stayed OFF' : 'LEND FIRED') + ')' });
+  const diffuse = dm.dominantShare != null && dm.dominantShare < 0.30;
+  const ansOk = dm.unarmedLaunches > 0 && dm.launches > 0;
+  bars.push({ id: 'answer-quantified', pass: ansOk,
+    detail: (dm.unarmedLaunches === 0
+      ? 'no unarmed-lead wave-4+ launches on the band — nothing to break down'
+      : 'dominant draft-miss cause ' + dm.dominantCause + ' ' + dm.dominantN + '/' + dm.unarmedLaunches +
+        ' (' + (dm.dominantShare * 100).toFixed(1) + '%)' +
+        (diffuse ? ' — DIFFUSE: no single class >= 30%; second ' + dm.secondCause + ' ' + dm.secondN +
+          '/' + dm.unarmedLaunches + ' (' + (dm.secondShare * 100).toFixed(1) + '%)' : '') +
+        '; earshot base rate over ALL ' + (nm ? nm.launches : dm.launches) + ' NON-RAID wave-4+ launches' +
+        (nm ? ' (near-miss rows, loaded leads included)' : ' (draft-miss rows only — loaded leads unseen)') + ': armed ' +
+        (nm ? nm.armedEarshot : dm.armedEarshot) + ' (' + ((nm ? nm.launches : dm.launches) ? (((nm ? nm.armedEarshot : dm.armedEarshot) / (nm ? nm.launches : dm.launches)) * 100).toFixed(1) : 'n/a') + '%)' +
+        ', eligible ' + (nm ? nm.eligibleEarshot : dm.eligibleEarshot) + ' (' + ((nm ? nm.launches : dm.launches) ? (((nm ? nm.eligibleEarshot : dm.eligibleEarshot) / (nm ? nm.launches : dm.launches)) * 100).toFixed(1) : 'n/a') + '%)' +
+        '; would-fire bound (on-tile + adjacent-eligible) ' + dm.wouldFire + ' (' + dm.wouldFireOnTile + ' on-tile, ' + dm.wouldFireAdjacent + ' adjacent)' +
+        '; tick-stale rows ' + dm.tickStale + ' (null ' + dm.tickStaleNull + ')' +
+        '; raid launches ' + dm.raidLaunches + ' (coverage rows only, excluded from the breakdown)') +
+      (pres ? '; presence cross-check (tick rows): ' + pres.poolDraftMiss + ' misses over ' + pres.poolFights + ' pooled fights, poolOnTile ' + pres.poolOnTile : '') });
+  const verdict = bars.every(function (b) { return b.pass; }) ? 'DIAG-GO' : 'DIAG-NO-GO';
+  const kind = !covOk ? 'METRIC-BROKEN' : ((!poolOk || !crossOk || !lendOff) ? 'SUBSTRATE' : (!ansOk ? 'NO-POPULATION' : null));
+  return { verdict: verdict, kind: kind, bars: bars };
 }
 
 // ---- CLI --------------------------------------------------------------------
@@ -797,14 +1062,64 @@ function main() {
   if (args.indexOf('--selftest') !== -1) {
     process.exit(selftest() ? 0 : 1);
   }
-  let armDir = null, ctlDir = null, outFile = null;
+  let armDir = null, ctlDir = null, outFile = null, dir = null;
+  const noJudge = args.indexOf('--no-judge') !== -1;
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--arm') armDir = args[++i];
     else if (args[i] === '--ctl') ctlDir = args[++i];
+    else if (args[i] === '--dir') dir = args[++i];
     else if (args[i] === '--out') outFile = args[++i];
   }
+  if (dir) {
+    // Single-leg launch-level mode (fresh band): the frozen
+    // judge is judgeDraftmiss. Wall numbers come from the reused
+    // lendpool stats on the same corpora.
+    const dm = draftMissStats(dir);
+    const nm = lendpoolAna.nearMissStats(dir);
+    const pool = lendpoolAna.poolStats(dir);
+    const lend = lendpoolAna.lendStats(dir);
+    const pres = lendpoolAna.presenceStats(dir);
+    const part = lendpoolAna.participationStats(dir);
+    const st = lendpoolAna.cellStats(dir);
+    const j = noJudge ? null : judgeDraftmiss(dm, pool, lend, pres, nm);
+    const wall = { days: st.days, medianDays: dmMedian(st.days),
+      national: st.national, seedWins: st.seedWins, wave4: st.wave4, wave5: st.wave5,
+      communityLost: st.communityLost, starvationVillager: st.starvationVillager,
+      searcasterHolderDays: st.searcasterHolderDays, searcasterCellDays: st.searcasterCellDays,
+      perSeed: st.perSeed };
+    const result = { verdict: j ? j.verdict : null, kind: j ? j.kind : null, bars: j ? j.bars : null,
+      draftMiss: dm, nearMiss: nm, participation: part, presence: pres, lend: lend, pool: pool,
+      wall: wall };
+    console.log(JSON.stringify({ verdict: result.verdict, kind: result.kind, bars: result.bars,
+      draftMiss: { launches: dm.launches, launchesGun: dm.launchesGun, launchesCells: dm.launchesCells,
+        raidLaunches: dm.raidLaunches, unarmedLaunches: dm.unarmedLaunches,
+        byCause: dm.byCause, byDist: dm.byDist, byUnderlying: dm.byUnderlying,
+        noLivingHolder: dm.noLivingHolder, lendable: dm.lendable, unknown: dm.unknown,
+        wouldFire: dm.wouldFire, wouldFireOnTile: dm.wouldFireOnTile,
+        wouldFireAdjacent: dm.wouldFireAdjacent, tickStale: dm.tickStale, tickStaleNull: dm.tickStaleNull,
+        distinctPairs: dm.distinctPairs, distinctLaunches: dm.distinctLaunches,
+        encDenominator: dm.encDenominator, encCovered: dm.encCovered, coverage: dm.coverage,
+        orphanRows: dm.orphanRows, dominantCause: dm.dominantCause, dominantN: dm.dominantN,
+        dominantShare: dm.dominantShare, secondCause: dm.secondCause, secondN: dm.secondN,
+        secondShare: dm.secondShare, perSeed: dm.perSeed },
+      nearMiss: { launches: nm.launches, unarmedLaunches: nm.unarmedLaunches,
+        armedEarshot: nm.armedEarshot, eligibleEarshot: nm.eligibleEarshot, lendable: nm.lendable,
+        byState: nm.byState, dominantState: nm.dominantState, dominantShare: nm.dominantShare },
+      participation: { meetings: part.meetings, engaged: part.engaged, flees: part.flees,
+        armedEntries: part.armedEntries, armedLeads: part.armedLeads, armedVolleys: part.armedVolleys,
+        deathsPerEngaged: part.deathsPerEngaged, national: part.national, seedWins: part.seedWins,
+        wave4: part.wave4, wave5: part.wave5, medianDays: part.medianDays },
+      presence: { poolTicks: pres.poolTicks, poolHolderPresent: pres.poolHolderPresent,
+        poolOnTile: pres.poolOnTile, poolFights: pres.poolFights, poolHolderLed: pres.poolHolderLed,
+        poolDraftMiss: pres.poolDraftMiss, transfers: pres.transfers, vanishes: pres.vanishes },
+      pool: { moments: pool.moments, fights: pool.fights, perSeed: pool.perSeed },
+      lend: { lends: lend.lends },
+      wall: wall }, null, 2));
+    if (outFile) fs.writeFileSync(outFile, JSON.stringify(result, null, 2) + '\n');
+    process.exit(0);
+  }
   if (!armDir || !ctlDir) {
-    console.error('usage: analyze-draftmiss-a.js --arm DIR --ctl DIR [--out FILE] | --selftest');
+    console.error('usage: analyze-draftmiss-a.js --arm DIR --ctl DIR [--out FILE] | --dir DIR [--out FILE] [--no-judge] | --selftest');
     process.exit(2);
   }
   const result = analyze(armDir, ctlDir);
@@ -826,4 +1141,6 @@ module.exports = { loadDir: loadDir, reproduceMiss: reproduceMiss, segmentCalls:
   musterModel: musterModel, holderArmed: holderArmed, holderDied: holderDied,
   holderEarlierFlee: holderEarlierFlee, holderOtherEncounters: holderOtherEncounters,
   teleportSignature: teleportSignature, classifyPair: classifyPair,
-  provenRaidDaysForSeed: provenRaidDaysForSeed, ctlCompare: ctlCompare, analyze: analyze, selftest: selftest };
+  provenRaidDaysForSeed: provenRaidDaysForSeed, ctlCompare: ctlCompare, analyze: analyze, selftest: selftest,
+  DRAFT_MISS_CAUSES: DRAFT_MISS_CAUSES, draftMissStats: draftMissStats,
+  judgeDraftmiss: judgeDraftmiss, dmMedian: dmMedian };
