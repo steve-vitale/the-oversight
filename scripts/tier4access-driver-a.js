@@ -382,6 +382,9 @@ async function oneRun(seed) {
   // roll is synchronous inside the prize call — save/restore is safe).
   let prizeSeq = 0;
   let prizeSeqCurrent = null;
+  // TIER4ACCESS stale-read guard: the _t4aLast seq of the last contest
+  // roll that actually evaluated the lever (see the rollAlienLoot wrap).
+  let lastT4aSeq = null;
 
   // ---- wraps (pure reads + driver-local writes; each game
   // function runs exactly once, untouched) ----
@@ -472,9 +475,17 @@ async function oneRun(seed) {
         // contest prizes; a kill-loot row reading a stale _t4aLast
         // would be a misjoin). On the ctl leg (env off) _t4aLast is
         // never set, so effTier falls back to the input tier — identical
-        // to the grantrate definition.
+        // to the grantrate definition. STALE READ (smoke catch): a
+        // shy-vault null returns BEFORE the lever block, so _t4aLast
+        // still holds the PREVIOUS roll's values — the seq (incremented
+        // per evaluation) detects it: a seq already seen means this
+        // roll never evaluated, so the row falls back to the input tier.
         let t4a = null;
         try { t4a = (caller === 'contest-prize') ? (this._t4aLast || null) : null; } catch (e) { t4a = null; }
+        if (t4a && t4a.seq != null) {
+          if (t4a.seq === lastT4aSeq) t4a = null;
+          else lastT4aSeq = t4a.seq;
+        }
         rollEvents.push({ seq: prizeSeqCurrent, day: gday(Game),
           caller: caller, frame: frame,
           chance: (loot.chance != null ? loot.chance : null),

@@ -107,6 +107,12 @@ async function liveTests() {
     let stateJson = '';
     try { stateJson = JSON.stringify(Game.state || {}); } catch (e) { stateJson = 'STRINGIFY-FAILED'; }
     check('transient: _t4a never serializes into Game.state', stateJson.indexOf('_t4a') === -1);
+    // (6) the diagnostic seq increments once per evaluation, so a
+    // driver can tell a fresh read from a stale one (smoke catch).
+    const seqA = (Game._t4aLast || {}).seq;
+    contestRoll(Game, 4, 3, 'extreme');
+    const seqB = (Game._t4aLast || {}).seq;
+    check('diagnostic: _t4aLast.seq increments per evaluation', seqA != null && seqB === seqA + 1);
   } finally {
     delete process.env.TIER4ACCESS;
   }

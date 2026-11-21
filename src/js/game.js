@@ -47628,7 +47628,9 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             _t4aBumped = true;
           }
           try {
-            this._t4aLast = { inTier: _t4aInTier, bumped: _t4aBumped, outTier: maxTier, holderless: _t4aHolderless, wave: wave, risk: loot.risk || null };
+            var _t4aSeq = ((this._t4aSeq || 0) + 1);
+            this._t4aSeq = _t4aSeq;
+            this._t4aLast = { seq: _t4aSeq, inTier: _t4aInTier, bumped: _t4aBumped, outTier: maxTier, holderless: _t4aHolderless, wave: wave, risk: loot.risk || null };
             var _t4aSt = this._t4aStats || (this._t4aStats = { evaluated: 0, bumped: 0 });
             _t4aSt.evaluated++;
             if (_t4aBumped) _t4aSt.bumped++;
