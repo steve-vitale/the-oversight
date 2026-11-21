@@ -1,8 +1,24 @@
 # sim-downedtwice-b — fix finding #2634: a downed companion is struck again and "goes down" a second time
 
-**Verdict: [TO FILL after guardrail]**
+**Verdict: GO — LAND (fix arm, finding #2634 fixed)**
 
-**The answer in one paragraph.** [TO FILL]
+**The answer in one paragraph.** A downed companion could be hit
+again because the monster-phase ally pick hardcoded slot numbers 1/2
+instead of indexing the live-allies list, and the "goes down!" fall
+block fired on post-hit HP alone, so it re-fired — line and flat-30
+fall wound included — on any re-hit. The fix (two edits, one file,
+`src/js/fieldFights.js`) indexes `_liveAllies` for the pick and gates
+the fall on the transition to 0. The proof test is RED before (4
+fails) and GREEN after (25/25); the staged fixed fight reads true
+("goes down!" exactly once, downed ally never struck again); and the
+8-seed guardrail is trajectory-identical to control on all 8 seeds —
+0 wins, 0 national, 0 table, wave 5 on 4/8, median survival 150.5d,
+624 deaths, 0 downed re-hits on both legs — with the balanced-panel
+compare at `review_required` and no `regression_signal`. Both halves
+of the defect were real: targeting was already correct on master for
+the two-slot case (proved by §2 GREEN-before) but wrong for the
+three-slot shapes the held pin branch introduces; the narration guard
+was genuinely missing and is now in place.
 
 ## 1. The defect, reproduced
 
@@ -107,29 +123,202 @@ fixed form (index `_liveAllies`; transition-gated fall).
 
 ## 4. Proof test (`scripts/test-downedtwice-b.js`)
 
-[TO FILL: RED-before / GREEN-after table]
+Run with `FIGHTALLY2=1 node scripts/test-downedtwice-b.js` (25 checks).
+
+| Section | Pre-fix (commit `3a4154a21`, unfixed code) | Post-fix (commit `8546cb96`) |
+|---|---|---|
+| §1 pick invariant (all live-set shapes × 7 RR draws) | **FAIL** — live `[1,3]` resolves to downed slot 2 on draws ≥ 0.5 (4 cases shown; `[2,3]` likewise on draws < 0.5) | PASS |
+| §1b RNG parity (1 draw for 2+ live, 0 for one) | **FAIL** — 3-live case draws 0 (falls through to `_liveAllies[0]`, always the first live ally) | PASS |
+| §3 was-live captured before the HP subtraction | **FAIL** | PASS |
+| §3 fall block gated on the transition | **FAIL** | PASS |
+| §2 fight-level no-repeat (6 rigged + 6 natural fights) | PASS — 0 violations in 12 fights, 6 with a down | PASS — same shape, 0 violations |
+| **Total** | **21 passed, 4 failed (exit 1)** | **25 passed, 0 failed (exit 0)** |
+
+The two halves split exactly as the prereg predicted:
+
+- **(a) Targeting — already correct on master for the two-slot case.**
+  §2 is GREEN before and after: across 12 staged fights (6 rigged-RNG,
+  6 natural-RNG) with the low-HP ally downed in 6 of them, no ally was
+  ever hit after going down and no "goes down!" line ever repeated. The
+  defect's targeting half is real but unreachable on master — it only
+  bites when a third ally slot exists, which is why §1 proves it at
+  unit level against the actual pick line: RED before (the hardcoded
+  1/2 pick resolves to a downed or absent slot for live pairs (1,3)
+  and (2,3)), GREEN after (the pick always indexes `_liveAllies`).
+- **(b) Narration — genuinely broken, now fixed.** §3 is RED before
+  (the fall block keys only on post-hit HP, so it re-fires on any
+  re-hit) and GREEN after (transition-gated: `_hWasLive && _hHp <= 0`).
+  On master the re-hit is unreachable through targeting, so the guard
+  is defense-in-depth against the double settlement the observed fight
+  performed — the flat-30 fall wound (`hurtVillager`) fired twice for
+  one fall. Both halves are fixed in this arm, as the prereg allowed.
 
 ## 5. Staged proof (M2) — the fixed transcript
 
-[TO FILL: quote the fixed staged fight]
+Geared wave-4 party (encounter-gear rule: hide armor + hunting spear
+throughout; holder 84 HP, ally1 100 HP, ally2 staged at 16 HP —
+Lenkina's shape), vs the wave-4 audit, rigged RNG seed 47, on the
+fixed tip. Party: Gladys Corpuz (holder), Anh Alvarado (ally1),
+Tika Chambi (ally2, "the woman in her 40s", 16 HP). Outcome vFlee,
+3 rounds:
+
+```
+00 | the woman in her 40s is already at the door too — charges in with the person in their 40s!
+01 | the person in their 20s is already at the door — charges in with the person in their 40s!
+02 | R1: the person in their 40s strikes for 6 (1220 left)
+03 | R1: the person in their 20s strikes for 8 (x1.3) (1212 left)
+04 | R1: the woman in her 40s strikes for 7 (1205 left)
+05 | R1: Field Audit hits the woman in her 40s for 52 (0 left)
+06 | the woman in her 40s goes down!
+07 | R2: the person in their 40s strikes for 5 (1200 left)
+08 | R2: the person in their 20s strikes for 6 (x1.3) (1194 left)
+09 | R2: the person in their 40s's gear absorbs 41.
+10 | R2: Assessment hits the person in their 40s for 24 (60 left)
+11 | R3: the person in their 40s strikes for 7 (1187 left)
+12 | R3: the person in their 20s strikes for 9 (x1.3) (1178 left)
+13 | R3: the person in their 40s's gear absorbs 42.
+14 | R3: Assessment hits the person in their 40s for 24 (36 left)
+15 | R3: the person in their 40s sees how this ends — and runs while running still works.
+```
+
+It reads true: the 16-HP ally takes one blow to 0, "goes down!" fires
+exactly once (line 06), and in R2–R3 the monster hits only the
+holder — the downed ally is never struck again, never strikes again,
+and lies at 0 HP for the rest of the fight (ally2HpLeft=0). Compare
+the original #2634 transcript (§1): same shape, but the R2 blow
+landed on the downed Lenkina for 42 with a second "goes down!". That
+beat is gone.
 
 ## 6. Guardrail — 8-seed fresh band, control vs armed
 
-[TO FILL: bars table, per-seed table, downed census, wall numbers, panel compare]
+Band 106801–106808 (fresh, per the frozen prereg), competent policy
+verbatim (sha `1884c8852d38`), 150d death-aware, substrate
+`SENSEEXPED=1 PARTYSIZE4=1 VETREENGAGE=1 FLEEREPAIR2=1 FIGHTALLY2=1`.
+Control leg on `b20328ad9` (pre-fix, `fixPresent=false`); armed leg
+on `8546cb96` (post-fix, `fixPresent=true`). Corpora:
+`evidence/2026-11-21/perseed-downedtwice-b-control/` and
+`...-armed/`.
+
+### Bars table (prereg §14, M3)
+
+| Bar | Required | Result |
+|---|---|---|
+| B1 downed re-hits, armed leg | 0 | **0** (0 repeats, 0 re-hits, 0 strike-after-down across 960 fights) |
+| B1 downed re-hits, control leg | 0 (defect unreachable on master; any nonzero investigated) | **0** (same census: 960 fights, 5 goes-down lines, 0 repeats) |
+| B2 no outcome change | deaths / wins / wave-4/5 unlocks / median survival within noise of control; expected per-seed trajectory-identical | **8/8 seeds trajectory-identical** (full per-seed JSONs equal after stripping anchor/mode/leg/run/fixPresent — including standing, deaths, end reason, gameDays) |
+| B3 balanced-panel compare | `review_required`, no `regression_signal` | **`review_required`**, 0 occurrences of `regression_signal` in `downedtwice-b-panel.json` (1 descriptive, 6 no_material_signal, 24 not_observed) |
+| M1 proof test | all sections green on fixed tip; RED before | RED before (21/25, 4 fails), GREEN after (**25/25**) |
+| M2 staged proof | geared party, one ally down, transcript reads true | quoted in §5 — "goes down!" once, downed ally never re-struck |
+
+### Per-seed table (identical on both legs — one table serves both)
+
+| Seed | End | Days | Rank | Standing | Max wave | Deaths | Fights | Goes-down |
+|---|---|---|---|---|---|---|---|---|
+| 106801 | survived | 151 | regional | 635 | 5 | 82 | 126 | 1 |
+| 106802 | survived | 151 | regional | 275 | 5 | 74 | 82 | 1 |
+| 106803 | survived | 150 | regional | 199 | 4 | 79 | 87 | 0 |
+| 106804 | survived | 151 | regional | 475 | 5 | 99 | 212 | 1 |
+| 106805 | village-lost | 145 | regional | 199 | 4 | 123 | 277 | 1 |
+| 106806 | village-lost | 80 | village | 175 | 4 | 39 | 35 | 0 |
+| 106807 | survived | 151 | regional | 199 | 4 | 79 | 104 | 1 |
+| 106808 | village-lost | 135 | regional | 350 | 5 | 49 | 37 | 0 |
+| **Total / median** | 5 survived, 3 lost | **median 150.5** | 7 regional, 1 village | — | **wave 5: 4/8** | **624** | **960** | **5** |
+
+### Downed census (both legs, identical)
+
+960 field fights censused per leg; 5 fights with a down; 5
+"goes down!" lines total; 0 repeat goes-down, 0 re-hit lines,
+0 strike-after-down, 0 instrument errors. The fix changes no fight
+outcome: the pick consumes the same RNG draws on master (length-2
+split identical: `floor(RR()*2)` picks index 0 iff `RR() < 0.5`, the
+old 1/2 split), and the fall guard never fires on master because the
+re-hit is unreachable through targeting there.
+
+### Panel compare
+
+`evidence/2026-11-21/downedtwice-b-panel.{json,md}` (before/after
+`.json.gz` alongside). Decision `review_required`; every observed
+metric delta 0 (wins 0→0, national 0→0, village deaths 78→78,
+deaths/100d 55.4666→55.4666, community loss 0.375→0.375, survival30/60
+1→1). No metric moved, so there is nothing to review in the delta —
+the `review_required` verdict is the panel's standing posture on an
+8-pair screen, not a signal.
 
 ## 7. Wall numbers (descriptive)
 
-[TO FILL]
+Both legs identical (see §6 table): wins 0/8, national 0/8, table
+0/8 (no table wait, no entry), wave-4 unlocks 8/8, wave-5 unlocks
+4/8 (106801, 106802, 106804, 106808), median survival 150.5 days
+(range 80–151), deaths 624 total (mean 78/seed; per-seed 82, 74, 79,
+99, 123, 39, 79, 49), 5 villages survived to 150d, 3 village-lost
+(106805 d145, 106806 d80, 106808 d135). Standing per seed: 635, 275,
+199, 475, 199, 175, 199, 350. Nothing in the wall moved with the
+fix, as expected for a narration/targeting-only change that is inert
+on master's two-slot fights.
 
 ## 8. Sense-test: reading the fixed fight
 
-[TO FILL]
+Read the §5 transcript as a player would. Round 1: three companions
+strike, the audit answers by flooring the 16-HP ally in one blow —
+"Field Audit hits the woman in her 40s for 52 (0 left)" / "the woman
+in her 40s goes down!". That is the whole of her fall: one blow, one
+line. Rounds 2–3: the monster turns on the still-standing holder
+("Assessment hits the person in their 40s for 24"), whose gear
+absorbs part of each blow, until the holder reads the fight and
+runs. The downed ally is never mentioned again — no second hit, no
+second "goes down!", no strike from the floor. The fight ends with
+her at 0 HP, down but not dead, exactly the state the original
+finding said was coherent. The defect's incoherent beat — a corpse-
+cold fighter taking a second full blow and "going down" again — is
+gone, and nothing else in the fight's shape changed: same blows,
+same absorptions, same flee. The fix is invisible in a healthy
+fight and only removes the impossible beat.
 
 ## 9. Metric review
 
-[TO FILL]
+The frozen bars held without revision. Two notes for the next run:
+
+1. **The guardrail's B1 control expectation was the sharpest part of
+   the prereg** — it demanded 0 re-hits on the control leg too, with
+   any nonzero treated as an investigation item rather than a pass.
+   The control leg delivered exactly that (960 fights, 0 re-hits),
+   which is what licenses calling the targeting half "already
+   correct on master" instead of merely "untested".
+2. **The proof test's §2 cannot stage the three-slot shapes** (no
+   ally3 code on master), so the targeting half's proof for those
+   shapes stays at unit level (§1, against the actual pick line).
+   That is the honest limit of this arm: the fight-level proof for
+   (1,3)/(2,3) live pairs can only run once the held pin branch's
+   third slot lands — at which point the fixed pick line is already
+   in place. No metric change proposed; the next arm that touches
+   ally3 should re-run §1 against the merged line.
+
+No bar was missed, re-scored, or swapped. The metric proved right:
+M1 (proof test) + M2 (staged transcript) carry the fix's evidence,
+M3 (guardrail) carries its safety, and the two did not trade off
+against each other.
 
 ## 10. Blanks filled / documented
 
-- Finding #2634 FIXED (this arm): [TO FILL verdict].
-- [TO FILL any further findings]
+- Finding #2634 FIXED (this arm): **GO — LAND.** Two edits, one
+  file (`src/js/fieldFights.js`, commit `8546cb96`): pick indexes
+  `_liveAllies`; fall gated on the transition to 0.
+- Both halves fixed in this arm: (a) targeting — real defect, but
+  unreachable on master two-slot (proved §2 GREEN-before; §1 RED→
+  GREEN at unit level for the three-slot shapes); (b) narration —
+  genuinely broken (fall block unguarded, §3 RED→GREEN), now
+  transition-gated. The double flat-30 fall settlement is closed
+  with the same gate.
+- No new findings. No behavior change beyond the downed-targeting /
+  narration rows; `villager-brain.js` / `win-plan.js` untouched
+  (#2605 stays BLOCKED); the held `sim-pinquaddoor-b` branch
+  untouched.
+- CONFLICT NOTE (for the coordinator's closeout): both edits touch
+  lines the held pin branch also modified (its pick line and its
+  `ally3In` line inside the fall block) — a rebase of the pin branch
+  onto the fixed master will conflict there. Resolve keeping the
+  fixed form (index `_liveAllies`; transition-gated fall).
+- Ready to land: fix commit `8546cb96` + proof test + evidence +
+  both corpora + panel compare. Held: nothing in this arm. The
+  coordinator merges; no rebase, no push, no version bump, no live
+  verification done by this arm.
