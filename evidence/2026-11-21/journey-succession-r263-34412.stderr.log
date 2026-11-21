@@ -1,0 +1,41 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Debbie","t":90},{"id":"Zoltan","t":90},{"id":"Onni","t":86},{"id":"Lena","t":86}], roster=11
+INH readable=true scripted=true deadItems=16 distinct=12 transferred=1 vanished=2 keptPlants=24 inheritedPlants=0 keptSkills=4 inheritedSkills=8 succTrustPre=90 succTrustPost=81
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","rage"] post=["green_whisper","rage"]
+DEATH d41 (the expedition, scripted): Grace -> Debbie | passed=true lin=true mo=true trust=81 vouchers=6
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=2 vanished=2 of 12 distinct dead-bearer items
+  CONVO d+3 with Mario (refused=false)
+  CONVO d+3 with Onni (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Kwame (depth=3 v=100 refused=false)
+  CONVO d+7 with Mario (refused=false)
+  CONVO d+7 with Onni (refused=false)
+  CONVO d+14 with Mario (refused=false)
+  CONVO d+14 with Onni (refused=false)
+  BOND-CONVO d+14 with Kwame (depth=3 v=100 refused=false)
+  CONVO d+30 with Onni (refused=false)
+  CONVO d+30 with Mario (refused=false)
+  CONVO d+45 with Onni (refused=false)
+  CONVO d+45 with Mario (refused=false)
+  CONVO d+53 with Onni (refused=false)
+  CONVO d+53 with Mario (refused=false)
+  CONVO d+64 with Onni (refused=false)
+  CONVO d+64 with Mario (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=6) echo=4 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":55,"offerLines":50,"codexPlantsDelta":17,"codexSkillsDelta":14,"codexAbilitiesDelta":6,"xpDelta":157,"any":true} pantry 93358->40519
+TRUST-DIALS: office 81->97 (+16, climb) | villageMean 68.2->92.8 (+24.6, climb) | ge60 6->8 | movers>=5: [{"id":"Yara","from":38,"to":90,"delta":52},{"id":"Ester","from":40,"to":91,"delta":51},{"id":"Kwame","from":52,"to":89,"delta":37},{"id":"Elena","from":65,"to":90,"delta":25},{"id":"Chloe","from":73,"to":94,"delta":21},{"id":"Onni","from":86,"to":100,"delta":14},{"id":"Mario","from":84,"to":96,"delta":12},{"id":"Lena","from":86,"to":92,"delta":6}]
+DEED-LEDGER: calls=96 summary={"donateToPantry":{"calls":70,"ok":70,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":26,"ok":26,"deltaSum":52,"deltaN":26,"positive":25,"meanDelta":2}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=111 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+31,d+70) t2=true(deedCalls=96) trustVerdict={"readable":true,"officeMantle":81,"officeLast":97,"officeDelta":16,"officeClass":"climb","villageMantle":68.2,"villageLast":92.8,"villageDelta":24.6,"villageClass":"climb","villageGe60Mantle":6,"villageGe60Last":8,"movers":[{"id":"Yara","from":38,"to":90,"delta":52},{"id":"Ester","from":40,"to":91,"delta":51},{"id":"Kwame","from":52,"to":89,"delta":37},{"id":"Elena","from":65,"to":90,"delta":25},{"id":"Chloe","from":73,"to":94,"delta":21},{"id":"Onni","from":86,"to":100,"delta":14},{"id":"Mario","from":84,"to":96,"delta":12},{"id":"Lena","from":86,"to":92,"delta":6}]}
+E6/CALLCHECK: e6={"callMoves":18,"withCensus":18,"chainHandoffs":0,"trustMoves":18} callCheck={"dailyMoveDays":18,"callMoveDays":18,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":18,"soloOffice":11,"soloOfficeDeltas":[1,1,2,2,1,1,1,1,1,1,1],"soloBearerDeltaExact":[1,1,2,2,1,1,1,1,1,1,1],"singleMoverBearer":3,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":2,"both":16,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":5,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":18}

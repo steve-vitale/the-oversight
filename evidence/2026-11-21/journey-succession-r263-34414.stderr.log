@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d35: Stephen -> Dmitri, topTrust=[{"id":"Aaron","t":92},{"id":"Milton","t":90},{"id":"Eric","t":90},{"id":"Marcus","t":90}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=23 inheritedPlants=0 keptSkills=4 inheritedSkills=0 succTrustPre=91 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d34 (organic (phase A)): Stephen -> Dmitri | passed=true lin=true mo=true trust=62 vouchers=9
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Aaron (refused=false)
+  CONVO d+3 with Miguel (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Milton (depth=1 v=44 refused=false)
+  CONVO d+7 with Milton (refused=false)
+  CONVO d+7 with Eric (refused=false)
+  CONVO d+14 with Aaron (refused=false)
+  CONVO d+14 with Miguel (refused=false)
+  NEWCOMER-PROBE d+27 with Suman (arrived d+27, trust=23 refused=false)
+  CONVO d+30 with Petra (refused=false)
+  CONVO d+30 with Santiago (refused=false)
+  CONVO d+45 with Santiago (refused=false)
+  CONVO d+45 with Miguel (refused=false)
+  CONVO d+53 with Santiago (refused=false)
+  CONVO d+53 with Greta (refused=false)
+  CONVO d+64 with Santiago (refused=false)
+  CONVO d+64 with Greta (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=9) echo=5 organicBurial={"respects":false,"bury":false} halfRation=3
+
+MEAL-GATE: audited=70 violations=0 noMealDays=12 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":72,"offerLines":48,"codexPlantsDelta":23,"codexSkillsDelta":21,"codexAbilitiesDelta":20,"xpDelta":167,"any":true} pantry 29701->9339
+TRUST-DIALS: office 62->87 (+25, climb) | villageMean 82.6->75.8 (-6.8, fall) | ge60 9->5 | movers>=5: [{"id":"Santiago","from":66,"to":90,"delta":24},{"id":"Ana","from":78,"to":85,"delta":7},{"id":"Petra","from":87,"to":77,"delta":-10}]
+DEED-LEDGER: calls=21 summary={"donateToPantry":{"calls":2,"ok":2,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":16,"ok":16,"deltaSum":31,"deltaN":16,"positive":15,"meanDelta":1.94},"teachPlant":{"calls":3,"ok":3,"deltaSum":0,"deltaN":3,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=105 alive=7 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+31,d+71) t2=true(deedCalls=21) trustVerdict={"readable":true,"officeMantle":62,"officeLast":87,"officeDelta":25,"officeClass":"climb","villageMantle":82.6,"villageLast":75.8,"villageDelta":-6.8,"villageClass":"fall","villageGe60Mantle":9,"villageGe60Last":5,"movers":[{"id":"Santiago","from":66,"to":90,"delta":24},{"id":"Ana","from":78,"to":85,"delta":7},{"id":"Petra","from":87,"to":77,"delta":-10}]}
+E6/CALLCHECK: e6={"callMoves":7,"withCensus":7,"chainHandoffs":4,"trustMoves":3} callCheck={"dailyMoveDays":7,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=7 (v2=7, excludedLoot=0))
+E7/R47: e7={"trustMoves":3,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":2,"both":1,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":7,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":7}

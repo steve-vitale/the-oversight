@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Zuri","t":90},{"id":"August","t":90},{"id":"Tomas","t":90},{"id":"Rory","t":90}], roster=10
+INH readable=true scripted=true deadItems=19 distinct=17 transferred=1 vanished=3 keptPlants=18 inheritedPlants=3 keptSkills=9 inheritedSkills=10 succTrustPre=90 succTrustPost=54
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location"] post=["beast_calm","echo_location"]
+DEATH d41 (the expedition, scripted): Aria -> Rory | passed=true lin=true mo=true trust=54 vouchers=3
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=13 vanished=3 of 17 distinct dead-bearer items
+  CONVO d+3 with Zuri (refused=false)
+  CONVO d+3 with August (refused=false)
+  STRANGER-PROBE d+3 with Pavel (trust=6 refused=false)
+  CONVO d+7 with Zuri (refused=false)
+  CONVO d+7 with August (refused=false)
+  CONVO d+14 with Zuri (refused=false)
+  CONVO d+14 with August (refused=false)
+  CONVO d+30 with August (refused=false)
+  CONVO d+30 with Leo (refused=false)
+  CONVO d+45 with Zuri (refused=false)
+  CONVO d+45 with August (refused=false)
+  CONVO d+53 with Zuri (refused=false)
+  CONVO d+53 with August (refused=false)
+  NEWCOMER-PROBE d+62 with Jepchirchir (arrived d+62, trust=36 refused=false)
+  CONVO d+64 with Zuri (refused=false)
+  CONVO d+64 with August (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=3) echo=5 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":52,"offerLines":21,"codexPlantsDelta":18,"codexSkillsDelta":16,"codexAbilitiesDelta":10,"xpDelta":137,"any":true} pantry 6457->17008
+TRUST-DIALS: office 54->96 (+42, climb) | villageMean 50.8->69.9 (+19.1, climb) | ge60 3->6 | movers>=5: [{"id":"Nathan","from":34,"to":85,"delta":51},{"id":"Vasyl","from":54,"to":91,"delta":37},{"id":"Daniyar","from":12,"to":27,"delta":15}]
+DEED-LEDGER: calls=14 summary={"giveFood":{"calls":8,"ok":8,"deltaSum":16,"deltaN":8,"positive":7,"meanDelta":2},"donateToPantry":{"calls":6,"ok":6,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=110 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+69) t2=true(deedCalls=14) trustVerdict={"readable":true,"officeMantle":54,"officeLast":96,"officeDelta":42,"officeClass":"climb","villageMantle":50.8,"villageLast":69.9,"villageDelta":19.1,"villageClass":"climb","villageGe60Mantle":3,"villageGe60Last":6,"movers":[{"id":"Nathan","from":34,"to":85,"delta":51},{"id":"Vasyl","from":54,"to":91,"delta":37},{"id":"Daniyar","from":12,"to":27,"delta":15}]}
+E6/CALLCHECK: e6={"callMoves":7,"withCensus":7,"chainHandoffs":1,"trustMoves":6} callCheck={"dailyMoveDays":7,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=6, excludedLoot=0))
+E7/R47: e7={"trustMoves":6,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":3,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":6,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":7}
