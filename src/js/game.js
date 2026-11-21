@@ -47578,6 +47578,63 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (!loot.rewardSource && loot.tier4Chance > 0 && Math.random() < loot.tier4Chance) {
         maxTier = 4;
       }
+      // TIER4ACCESS (sim-tier4access-a): second chance at tier 4 on
+      // contest-prize rolls for holderless villages. The first 25%
+      // apex roll lives in _cxItemPrize (contests.js) — when it fails,
+      // a village with NO living searcaster holder gets one more 25%
+      // draw, at the same rate, gated to extreme-risk contests at
+      // wave 4+ (the canon tier-4 gate: CONTESTS.md, tier 4 only for
+      // extreme-risk wins at wave 4). Once a village holds a gun the
+      // lever switches itself off — a catch-up, not a faucet.
+      // Env-gated: TIER4ACCESS=1 (node sims only; in the browser
+      // process is undefined, so the lever is off — same pattern as
+      // GUNRATE). Transient diagnostics only (_t4aLast / _t4aStats on
+      // the Game instance, never this.state) so nothing serializes
+      // into a save.
+      try {
+        var _t4aOn = false;
+        try { _t4aOn = (typeof process !== 'undefined' && process.env && process.env.TIER4ACCESS === '1'); } catch (e2) {}
+        if (_t4aOn && loot.rewardSource === 'contest') {
+          var _t4aHolderless = true;
+          try {
+            var _hasSear = function (items) {
+              var _arr = items || [];
+              for (var _hi = 0; _hi < _arr.length; _hi++) {
+                var _e = _arr[_hi];
+                if (!_e) continue;
+                if ((typeof _e === 'string' ? _e : (_e.itemId || _e.id)) === 'searcaster') return true;
+              }
+              return false;
+            };
+            var _sch = this.state.scholar || {};
+            if (_hasSear(_sch.inventory)) _t4aHolderless = false;
+            if (_t4aHolderless) {
+              var _eq = _sch.equipped || {};
+              for (var _slot in _eq) { if (_eq[_slot] && ((_eq[_slot].itemId || _eq[_slot].id) === 'searcaster')) { _t4aHolderless = false; break; } }
+            }
+            if (_t4aHolderless) {
+              var _roster = ((this.state.village || {}).roster) || [];
+              for (var _ri = 0; _ri < _roster.length && _t4aHolderless; _ri++) {
+                var _p = null;
+                try { _p = (typeof this.getPerson === 'function') ? this.getPerson(_roster[_ri]) : null; } catch (e3) { _p = null; }
+                if (_p && !_p.dead && _hasSear(_p.items)) _t4aHolderless = false;
+              }
+            }
+          } catch (e4) { _t4aHolderless = false; }
+          var _t4aInTier = maxTier;
+          var _t4aBumped = false;
+          if (_t4aHolderless && maxTier < 4 && wave >= 4 && loot.risk === 'extreme' && Math.random() < 0.25) {
+            maxTier = 4;
+            _t4aBumped = true;
+          }
+          try {
+            this._t4aLast = { inTier: _t4aInTier, bumped: _t4aBumped, outTier: maxTier, holderless: _t4aHolderless, wave: wave, risk: loot.risk || null };
+            var _t4aSt = this._t4aStats || (this._t4aStats = { evaluated: 0, bumped: 0 });
+            _t4aSt.evaluated++;
+            if (_t4aBumped) _t4aSt.bumped++;
+          } catch (e5) {}
+        }
+      } catch (e) {}
       // Find the highest available tier <= maxTier (fallback if tier missing)
       let tier = Math.max(1, maxTier);
       let pool = [];
