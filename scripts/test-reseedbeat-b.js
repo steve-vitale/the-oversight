@@ -215,7 +215,12 @@ if (OLD_CODE_PATH) {
     departBody.indexOf("bump(self, 'partyDepartures');") !== -1 &&
     departBody.indexOf('self.winPlanReseedLaunchBeat(vid)') > departBody.indexOf("bump(self, 'partyDepartures');"), null);
   check('§A vbrainExecuteDepart party_launch branch speaks the beat before return launch',
-    brainSrc.indexOf("this.winPlanReseedLaunchBeat(vid); } catch (e) {}\n        return 'launch';") !== -1, null);
+    brainSrc.indexOf("this.winPlanDepartLaunchBeat(vid, launched);") !== -1 &&
+    brainSrc.indexOf("this.winPlanDepartLaunchBeat(vid, launched);") < brainSrc.indexOf("return 'launch';", brainSrc.indexOf("this.winPlanDepartLaunchBeat(vid, launched);")) &&
+    // sim-departbeat-b: the shared hook replaced the direct reseed
+    // call; the fallback below preserves the old call for callers
+    // that never received the shared hook (test ctx, older caller).
+    brainSrc.indexOf("else if (typeof this.winPlanReseedLaunchBeat === 'function') this.winPlanReseedLaunchBeat(vid);") !== -1, null);
   check('§A winPlanReseedLaunchBeat is listed in the provides header',
     wpSrc.indexOf('winPlanReseedLaunchBeat(vid)') !== -1, null);
   check('§A reseedexpiry driver SAY_RE contains "new trail" (the recorder hears the beat)',

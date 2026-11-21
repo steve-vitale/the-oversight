@@ -15,6 +15,7 @@
 //   - winPlanNoteSighting(mid)
 //   - winPlanCommitDeadTarget(vid)
 //   - winPlanReseedLaunchBeat(vid)
+//   - winPlanDepartLaunchBeat(vid, launched)
 //   - winPlanBondsTick(hx, hy)
 //   - winPlanMusterTick(hx, hy)
 // rules:
@@ -90,6 +91,11 @@
 //     monster instance identity. Env-gated default-OFF
 //     (PLANRESEED=1). It never touches winPlanNoteKill,
 //     winPlanFightGate, winPlanCands, or winPlanSeedFromFight.
+//     The ORDINARY wave-4+ launch speaks too (sim-departbeat-b):
+//     every non-re-seed wave-4+ launch fires one fireside beat via
+//     winPlanDepartLaunchBeat — holder + party + target, once per
+//     launch, default-ON (DEPARTBEAT=0 silences it). A re-seed
+//     launch keeps its own beat and never gets a second line.
 // ============ WIN PLAN ============
 // Why villagers kept losing the long game: they had breadth (a rule for
 // every situation) but no sequence — a villager could be geared, alone,
@@ -348,6 +354,18 @@
     try { return typeof process !== 'undefined' && process.env && process.env.PLANRESEED === '1'; } catch (e) { return false; }
   }
 
+  // DEPARTBEAT env gate (sim-departbeat-b): the ordinary wave-4+
+  // launch beat is DEFAULT-ON — it fires on every ordinary wave-4+
+  // launch unless the process env carries DEPARTBEAT=0 (node sims
+  // only; in the browser process is undefined, so the beat is on).
+  // Deliberately inverted vs the other *On() gates above (all
+  // default-OFF): the pinned design is that the village always says
+  // when a party walks out to hunt a wave-4+ beast, and only the
+  // control leg silences it. Fiction only — see departLaunchBeat.
+  function departbeatOn() {
+    try { return !(typeof process !== 'undefined' && process.env && process.env.DEPARTBEAT === '0'); } catch (e) { return true; }
+  }
+
   // lastKillDayOf(self, type): the day of the village's most recent
   // dated kill of a monster type, from the waveKillLog (the dated
   // kill record maintained by recordWaveKill / recordPyrrhicKill).
@@ -579,6 +597,58 @@
       var nphrase = nname;
       try { nphrase = (typeof self.articlePhrase === 'function') ? self.articlePhrase(nname, false) : nname; } catch (e) {}
       var line = cname + ' is hunting ' + nphrase + ' now — the fire found a new trail.';
+      if (self.state && self.state.systemArrived) self.say('📺 SYSTEM: "' + line + '"');
+      else self.say(line);
+    } catch (e) {}
+  }
+
+  // departLaunchBeat(self, vid, launched, target): the FIRESIDE BEAT
+  // for an ORDINARY wave-4+ LAUNCH (sim-departbeat-b). One
+  // deterministic line when a holder walks out on a wave-4+ plan
+  // with their party — the re-seed launch speaks (reseedLaunchBeat)
+  // but the ordinary launch was silent on the whole 16-seed confirm
+  // band (0 launch-mention vetSays lines): the village never said
+  // when a party went out to hunt a wave-4 beast. Same voice as the
+  // re-seed beat: holder + party + target named as the village knows
+  // them, deterministic wording, never rolled. "marks the trail" is
+  // contiguous so the recorder's SAY_RE filter keeps it in the
+  // corpus transcript (the departbeat driver's SAY_RE gained the
+  // token with this beat). `launched` is the party that actually
+  // left (holder excluded — the inviter is `vid`); an empty party
+  // is a solo launch and names the holder alone. A null target
+  // drops the "after ..." clause rather than inventing one.
+  // Fires ONLY from winPlanDepartLaunchBeat, which gates on
+  // needWave >= 4 and stamps the day+target BEFORE speaking, so at
+  // most one beat per launch. Fiction only: say() consumes no RNG
+  // and writes only the narration log. Total by construction.
+  function departLaunchBeat(self, vid, launched, target) {
+    try {
+      if (!self || typeof self.say !== 'function') return;
+      var cname = null;
+      try { cname = (typeof self.disp === 'function' ? self.disp(vid) : (self.displayName ? self.displayName(vid) : null)); } catch (e) {}
+      if (!cname) cname = 'Someone';
+      var party = [];
+      var list = launched || [];
+      for (var i = 0; i < list.length; i++) {
+        if (!list[i] || list[i] === vid) continue;
+        var pname = null;
+        try { pname = (typeof self.disp === 'function' ? self.disp(list[i]) : (self.displayName ? self.displayName(list[i]) : null)); } catch (e) {}
+        if (pname) party.push(pname);
+      }
+      var withClause = '';
+      if (party.length === 1) withClause = ' with ' + party[0];
+      else if (party.length === 2) withClause = ' with ' + party[0] + ' and ' + party[1];
+      else if (party.length > 2) withClause = ' with ' + party.slice(0, -1).join(', ') + ' and ' + party[party.length - 1];
+      var afterClause = '';
+      if (target) {
+        var nname = null;
+        try { nname = self.monsterNoun ? self.monsterNoun(target) : null; } catch (e) {}
+        if (!nname) nname = target;
+        var nphrase = nname;
+        try { nphrase = (typeof self.articlePhrase === 'function') ? self.articlePhrase(nname, false) : nname; } catch (e) {}
+        afterClause = ' after ' + nphrase;
+      }
+      var line = cname + ' sets out' + withClause + afterClause + ' — the fire marks the trail.';
       if (self.state && self.state.systemArrived) self.say('📺 SYSTEM: "' + line + '"');
       else self.say(line);
     } catch (e) {}
@@ -975,6 +1045,49 @@
         return true;
       } catch (e) { return false; }
     },
+    // DEPARTURE LAUNCH BEAT (sim-departbeat-b): the single launch
+    // hook for BOTH departure paths — the re-seed beat AND the
+    // ordinary wave-4+ beat. Called by winPlanDepart's launchParty
+    // and vbrainExecuteDepart's party_launch branch AFTER the
+    // expedition has actually started — never on a hold, never on a
+    // failed launch. The re-seed beat speaks first: if it fires,
+    // the launch already has its beat, so the ordinary beat is
+    // skipped and the dedup stamp is set (a second call for the
+    // same launch stays silent even though the re-seed stamp is
+    // gone). Otherwise the ordinary beat fires only for a wave-4+
+    // plan (needWave >= 4), only while DEPARTBEAT is on
+    // (default-ON; DEPARTBEAT=0 silences it), and only once per
+    // launch: plan.departBeatDay / plan.departBeatTarget are
+    // stamped BEFORE speaking, so a re-entrant call the same day
+    // for the same target is silent, while a genuinely new launch
+    // (different day, or different target) speaks again. A plan
+    // with no target speaks without the "after ..." clause. The
+    // plan is read WITHOUT creating it, like the re-seed check.
+    // Total by construction (the catch returns false).
+    winPlanDepartLaunchBeat(vid, launched) {
+      try {
+        var v = this.state && this.state.village;
+        if (!v || !v.winPlan || !v.winPlan[vid]) return false;
+        var plan = v.winPlan[vid];
+        var day = 0;
+        try { day = (this.state.scholar || {}).day || 0; } catch (e) {}
+        var target = plan.target || null;
+        var reseedSpoke = false;
+        try { if (typeof this.winPlanReseedLaunchBeat === 'function') reseedSpoke = !!this.winPlanReseedLaunchBeat(vid); } catch (e) {}
+        if (reseedSpoke) {
+          plan.departBeatDay = day;
+          plan.departBeatTarget = target;
+          return true;
+        }
+        if (!departbeatOn()) return false;
+        if ((plan.needWave | 0) < 4) return false;
+        if (plan.departBeatDay === day && plan.departBeatTarget === target) return false;
+        plan.departBeatDay = day;
+        plan.departBeatTarget = target;
+        departLaunchBeat(this, vid, launched || [], target);
+        return true;
+      } catch (e) { return false; }
+    },
     // Haven evaluation: stage transitions from what the villager can
     // judge at home — their own gear, a beat broadcast while here, a
     // companion they can see. Never departs anyone; departure is the
@@ -1197,14 +1310,20 @@
             }
           } catch (e) {}
           bump(self, 'partyDepartures');
-          // RE-SEED LAUNCH BEAT (sim-reseedbeat-b, finding #2632):
-          // the holder is out the door on the re-seeded target — say
-          // so now, and only now. A no-op on every launch without a
-          // pending expired-plan stamp (the method reads the plan
-          // without creating it). Guarded by typeof: test ctxs and
-          // older callers that never received the method launch
-          // exactly as before.
-          try { if (typeof self.winPlanReseedLaunchBeat === 'function') self.winPlanReseedLaunchBeat(vid); } catch (e) {}
+          // DEPARTURE LAUNCH BEAT (sim-departbeat-b): the holder is
+          // out the door — say so now, and only now. The shared
+          // hook speaks the re-seed beat when a stamp is pending
+          // and the ordinary wave-4+ beat otherwise, exactly once
+          // per launch. A no-op on every launch below wave 4 and on
+          // every launch with DEPARTBEAT=0 (the method reads the
+          // plan without creating it). Fallback: a caller that
+          // never received the shared hook (test ctx, older caller)
+          // still gets the re-seed beat exactly as before — the
+          // fallback is the old call, not a second speak.
+          try {
+            if (typeof self.winPlanDepartLaunchBeat === 'function') self.winPlanDepartLaunchBeat(vid, launched);
+            else if (typeof self.winPlanReseedLaunchBeat === 'function') self.winPlanReseedLaunchBeat(vid);
+          } catch (e) {}
           return true;
         };
         if (plan.stage === 'gear') {

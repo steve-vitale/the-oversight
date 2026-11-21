@@ -1335,12 +1335,20 @@
             try { var _pq = (typeof this.winPlanStats === 'function') ? this.winPlanStats() : null; if (_pq) _pq.partyQuads = (_pq.partyQuads || 0) + 1; } catch (e) {}
           }
         } catch (e) {}
-        // RE-SEED LAUNCH BEAT (sim-reseedbeat-b, finding #2632): the
-        // holder is out the door on the re-seeded target — say so
-        // now, and only now. Mirrors winPlanDepart's launchParty
+        // DEPARTURE LAUNCH BEAT (sim-departbeat-b): the
+        // holder is out the door — say so now, and only now.
+        // The shared hook speaks the re-seed beat when a stamp is
+        // pending and the ordinary wave-4+ beat otherwise, exactly
+        // once per launch. Mirrors winPlanDepart's launchParty
         // hook; this is the departure path that fires in sims. A
-        // no-op on every launch without a pending expired-plan stamp.
-        try { if (typeof this.winPlanReseedLaunchBeat === 'function') this.winPlanReseedLaunchBeat(vid); } catch (e) {}
+        // no-op on every launch below wave 4 and on every launch
+        // with DEPARTBEAT=0. Fallback: a caller that never received
+        // the shared hook still gets the re-seed beat exactly as
+        // before (the old call, not a second speak).
+        try {
+          if (typeof this.winPlanDepartLaunchBeat === 'function') this.winPlanDepartLaunchBeat(vid, launched);
+          else if (typeof this.winPlanReseedLaunchBeat === 'function') this.winPlanReseedLaunchBeat(vid);
+        } catch (e) {}
         return 'launch';
       }
       if (typeof this.startExpedition === 'function') {
