@@ -38,6 +38,32 @@
 //   (281 launches, 70 targetWave>=4, 0 targetless), so the case is
 //   a diagnostic, not an expected shape. Unexplained unmatched
 //   beat days fail B2 as spam.
+//   CORRECTION 2 (2026-11-21, after the pilot ran, before judging
+//   — INSTRUMENT fix, the frozen metric is unchanged): the first
+//   version counted ALL beat lines (ordinary + re-seed) against
+//   wave-4+ launch days. That miscounts a wave-3 re-seed launch's
+//   beat: the re-seed beat has no wave gate by design (it speaks
+//   for ANY expired-plan re-seed launch), so a wave-3 re-seed
+//   launch speaks while the wave-4+ survey excludes it. Found on
+//   the pilot band itself, seed 106776 d36: Dale Hoffman launched
+//   on an expired-plan re-seed to terms_of_service (targetWave 3,
+//   stage hunt, party of 2 — v4departs row + dawnbidDeparts seq
+//   378 confirm the launch) and the re-seed beat fired exactly
+//   once; the counter flagged the line as both "spam" and
+//   "unmatched". The frozen B2 metric ("every wave-4+ launch
+//   carries exactly 1 beat line") never covered that line — it
+//   belongs to a wave-3 launch. The fix: spam/unmatched are
+//   counted on ORDINARY beats only (each wave-4+ launch carries
+//   at most one ordinary beat, by the hook's stamp — exact), and a
+//   re-seed beat on a day with no counted launch is explained iff
+//   ANY v4departs launch row exists that day. A re-seed beat with
+//   no launch row at all that day stays unexplained and fails B2.
+//   The missed check still counts either kind (a wave-4+ launch
+//   beaten by a re-seed line is beaten). Limitation, stated
+//   plainly: the day-join cannot prove a reseed line on a
+//   wave-4+ launch day belongs to that launch rather than to a
+//   same-day wave-3 launch — the hook + staged proof (D3) prove
+//   the one-beat-per-launch construction; the analyzer counts.
 // Frozen bars (prereg evidence/2026-11-21/sim-departbeat-b-prereg.md):
 //   B1: armed ordinary-beat vetSays lines > 0; control = 0.
 //   B2: every armed wave-4+ launch carries exactly 1 beat line:
@@ -120,11 +146,26 @@ function analyzeSeed(d) {
   const targetless = targetlessLaunchesOf(d);
   const ordinary = beats.filter(function (b) { return b.kind === 'ordinary'; });
   const reseed = beats.filter(function (b) { return b.kind === 'reseed'; });
-  // Per-day join: beats per launch-day, launches per day.
+  // Per-day join, on ORDINARY beats only (correction 2): a wave-4+
+  // launch carries at most one ordinary beat (the hook's stamp),
+  // and a wave-3 launch never fires one — so the ordinary count is
+  // exact per day. A re-seed beat may belong to a wave-4+ launch
+  // (its beat) or to a wave-3 re-seed launch (out of population);
+  // the day-join cannot tell them apart, so re-seed beats are
+  // checked separately below (any launch row that day explains one).
   const launchesByDay = {};
   for (const l of launches) launchesByDay[l.day] = (launchesByDay[l.day] || 0) + 1;
+  const ordinaryByDay = {};
+  for (const b of ordinary) ordinaryByDay[b.day] = (ordinaryByDay[b.day] || 0) + 1;
   const beatsByDay = {};
   for (const b of beats) beatsByDay[b.day] = (beatsByDay[b.day] || 0) + 1;
+  // Any launch row, any wave/target, by day — explains re-seed beats
+  // on days with no counted wave-4+ launch (correction 2).
+  const anyLaunchByDay = {};
+  for (const r of (d.v4departs || [])) {
+    if (r.result !== 'launch') continue;
+    anyLaunchByDay[r.day] = (anyLaunchByDay[r.day] || 0) + 1;
+  }
   let missed = 0;
   const missedLaunches = [];
   for (const l of launches) {
@@ -132,24 +173,40 @@ function analyzeSeed(d) {
   }
   let spamDays = 0;
   const spamDayList = [];
-  for (const day of Object.keys(beatsByDay)) {
-    const n = beatsByDay[day];
+  for (const day of Object.keys(ordinaryByDay)) {
+    const n = ordinaryByDay[day];
     const ln = launchesByDay[day] || 0;
     if (n > ln) { spamDays++; spamDayList.push({ day: Number(day), beats: n, launches: ln }); }
   }
-  // Unmatched beat days: beat lines on a day with no counted launch.
-  // Explained iff a targetless needWave>=4 launch row exists that day.
+  // Unmatched ORDINARY beat days: ordinary lines on a day with no
+  // counted launch. Explained iff a targetless needWave>=4 launch
+  // row exists that day (correction 1). Disjoint from spamDays by
+  // construction (spam needs launches that day; unmatched has none).
   const targetlessDays = {};
   for (const t of targetless) targetlessDays[t.day] = (targetlessDays[t.day] || 0) + 1;
   let unmatched = 0;
   const unmatchedDays = [];
   let explainedUnmatched = 0;
-  for (const day of Object.keys(beatsByDay)) {
+  for (const day of Object.keys(ordinaryByDay)) {
     if (launchesByDay[day]) continue;
-    const n = beatsByDay[day];
+    const n = ordinaryByDay[day];
     if (targetlessDays[day]) { explainedUnmatched += n; continue; }
     unmatched += n;
     unmatchedDays.push({ day: Number(day), beats: n });
+  }
+  // Unexplained RE-SEED beats: a re-seed line on a day with no
+  // counted launch AND no launch row of any kind (correction 2).
+  // A re-seed line on a day with a counted launch is that launch's
+  // beat (or a same-day wave-3 launch's — the hook proves at most
+  // one beat per launch; the day-join cannot split the two, and
+  // does not try).
+  let unexplainedReseed = 0;
+  const unexplainedReseedDays = [];
+  for (const b of reseed) {
+    if (launchesByDay[b.day]) continue;
+    if (anyLaunchByDay[b.day]) continue;
+    unexplainedReseed++;
+    unexplainedReseedDays.push({ day: b.day, line: b.line });
   }
   // Structural check: every ordinary beat line must parse as
   // holder (+ party) (+ target) + the frozen tail; same for reseed.
@@ -169,6 +226,7 @@ function analyzeSeed(d) {
     spamDays: spamDays, spamDayList: spamDayList,
     unmatchedBeatLines: unmatched, unmatchedDays: unmatchedDays,
     explainedUnmatched: explainedUnmatched,
+    unexplainedReseedBeats: unexplainedReseed, unexplainedReseedDays: unexplainedReseedDays,
     targetlessLaunches: targetless.length,
     malformedBeatLines: malformed.length, malformedList: malformed,
     deaths: deaths,
@@ -197,6 +255,7 @@ function judgePooled(armed, control) {
   const aMissed = armed.reduce(function (s, x) { return s + x.missedLaunches; }, 0);
   const aSpamDays = armed.reduce(function (s, x) { return s + x.spamDays; }, 0);
   const aUnmatched = armed.reduce(function (s, x) { return s + x.unmatchedBeatLines; }, 0);
+  const aUnexplainedReseed = armed.reduce(function (s, x) { return s + x.unexplainedReseedBeats; }, 0);
   const aMalformed = armed.reduce(function (s, x) { return s + x.malformedBeatLines; }, 0);
   const aDeaths = armed.reduce(function (s, x) { return s + x.deaths; }, 0);
   const cDeaths = control.reduce(function (s, x) { return s + x.deaths; }, 0);
@@ -222,7 +281,7 @@ function judgePooled(armed, control) {
   }
   const b1 = aOrdinary > 0 && cOrdinary === 0;
   const lowN = aLaunches < MIN_LAUNCHES;
-  const b2 = !lowN && aMissed === 0 && aSpamDays === 0 && aUnmatched === 0 && aMalformed === 0;
+  const b2 = !lowN && aMissed === 0 && aSpamDays === 0 && aUnmatched === 0 && aUnexplainedReseed === 0 && aMalformed === 0;
   const b3 = guardrailMismatches.length === 0;
   let verdict;
   if (lowN) verdict = 'REPORTED / LOW-N';
@@ -233,7 +292,8 @@ function judgePooled(armed, control) {
     bars: {
       B1_ordinaryBeatsArmed: aOrdinary, B1_ordinaryBeatsControl: cOrdinary, B1_pass: b1,
       B2_launchesArmed: aLaunches, B2_missedLaunches: aMissed, B2_spamDays: aSpamDays,
-      B2_unmatchedBeatLines: aUnmatched, B2_malformedBeatLines: aMalformed,
+      B2_unmatchedBeatLines: aUnmatched, B2_unexplainedReseedBeats: aUnexplainedReseed,
+      B2_malformedBeatLines: aMalformed,
       B2_floor: MIN_LAUNCHES, B2_lowN: lowN, B2_pass: b2,
       B3_guardrailMismatches: guardrailMismatches, B3_pass: b3,
     },
@@ -346,6 +406,46 @@ function selftest() {
   const s14 = analyzeSeed(seedDoc(14, [{ day: 130, vid: 'amina', result: 'launch', source: 'brain', target: 'spool', targetWave: 3, party: ['c1'], partySize: 2 }], []));
   check('S14 wave-3 launch row is not a wave-4+ launch',
     s14.launches === 0, s14);
+  // S15 (correction 2): a re-seed beat on a wave-3 launch day — the
+  // launch row exists (targetWave 3), no counted launch — is
+  // explained, not spam, not unmatched. (The 106776 d36 shape.)
+  const s15doc = seedDoc(15, [], [{ day: 36, line: 'Dale is hunting The Terms of Service now — the fire found a new trail.' }]);
+  s15doc.v4departs = [{ day: 36, vid: 'dale_hoffman', result: 'launch', source: 'brain', target: 'terms_of_service', targetWave: 3, party: ['maya_singh'], partySize: 2 }];
+  const s15 = analyzeSeed(s15doc);
+  check('S15 wave-3 re-seed launch beat is explained by its launch row (correction 2)',
+    s15.launches === 0 && s15.reseedBeats === 1 && s15.spamDays === 0 && s15.unmatchedBeatLines === 0 && s15.unexplainedReseedBeats === 0, s15);
+  // S16: one wave-4+ launch day carrying an ordinary beat AND a
+  // re-seed beat (a same-day wave-3 re-seed launch) — the ordinary
+  // count is exact, the re-seed line is explained by the day's
+  // counted launch; no spam, no miss.
+  const s16doc = seedDoc(16, [launchRow(50, 'amina', 'herald')],
+    [{ day: 50, line: 'Amina sets out with Diana after Herald — the fire marks the trail.' },
+     { day: 50, line: 'Dale is hunting The Terms of Service now — the fire found a new trail.' }]);
+  const s16 = analyzeSeed(s16doc);
+  check('S16 ordinary + re-seed beats on one launch day: no spam, no miss',
+    s16.launches === 1 && s16.spamDays === 0 && s16.missedLaunches === 0 && s16.unexplainedReseedBeats === 0, s16);
+  // S17: a re-seed beat with NO launch row at all that day stays
+  // unexplained and fails B2.
+  const s17 = analyzeSeed(seedDoc(17, [], [{ day: 60, line: 'Dale is hunting The Terms of Service now — the fire found a new trail.' }]));
+  check('S17 re-seed beat with no launch row that day is unexplained',
+    s17.unexplainedReseedBeats === 1, s17);
+  const j17 = judgePooled(
+    [analyzeSeed(seedDoc(117, [launchRow(60, 'amina', 'herald')],
+      [{ day: 60, line: 'Amina sets out with Diana after Herald — the fire marks the trail.' }], [])),
+     analyzeSeed(seedDoc(118, [launchRow(61, 'amina', 'herald')],
+      [{ day: 61, line: 'Amina sets out with Diana after Herald — the fire marks the trail.' }], [])),
+     analyzeSeed(seedDoc(119, [launchRow(62, 'amina', 'herald')],
+      [{ day: 62, line: 'Amina sets out with Diana after Herald — the fire marks the trail.' }], [])),
+     analyzeSeed(seedDoc(120, [launchRow(63, 'amina', 'herald')],
+      [{ day: 63, line: 'Amina sets out with Diana after Herald — the fire marks the trail.' }], []))].map(function (x, i) {
+        return i === 3 ? Object.assign({}, x, { unexplainedReseedBeats: 1 }) : x;
+      }),
+    [analyzeSeed(seedDoc(117, [launchRow(60, 'amina', 'herald')], [], [])),
+     analyzeSeed(seedDoc(118, [launchRow(61, 'amina', 'herald')], [], [])),
+     analyzeSeed(seedDoc(119, [launchRow(62, 'amina', 'herald')], [], [])),
+     analyzeSeed(seedDoc(120, [launchRow(63, 'amina', 'herald')], [], []))]);
+  check('S17 pooled: an unexplained re-seed beat fails B2 -> NO-GO',
+    j17.verdict === 'NO-GO' && !j17.bars.B2_pass, j17);
   console.log('analyze-departbeat-b selftest: ' + passed + ' passed, ' + failed + ' failed');
   return failed === 0;
 }

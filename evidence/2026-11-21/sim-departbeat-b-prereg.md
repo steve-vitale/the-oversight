@@ -203,3 +203,29 @@ diagnostic, not an expected shape. The staged proof (34/34)
 already proves the per-launch holder/party/target naming, so the
 analyzer counts by day rather than re-proving wording (vetSays
 rows carry {day, line} only, no holder).
+
+## 10. CORRECTION 2 (2026-11-21, after the pilot ran, before judging — INSTRUMENT fix, the frozen metric is unchanged)
+
+The analyzer's first version counted ALL beat lines (ordinary +
+re-seed) against wave-4+ launch days and reported NO-GO (spamDays
+1, unmatched 1). That was the counter, not the game: seed 106776
+d36, Dale Hoffman launched on an expired-plan re-seed to
+`terms_of_service` (targetWave 3, stage hunt, party of 2 — the
+v4departs row and dawnbidDeparts seq 378 confirm the launch) and
+the re-seed beat fired exactly once. The re-seed beat has no wave
+gate by design — it speaks for ANY expired-plan re-seed launch —
+so a wave-3 re-seed launch speaks while the wave-4+ survey
+excludes it. The frozen B2 metric ("every wave-4+ launch carries
+exactly 1 beat line") never covered that line; it belongs to a
+wave-3 launch. The fix (in `scripts/analyze-departbeat-b.js`,
+selftest S15–S17): spam/unmatched are counted on ORDINARY beats
+only (each wave-4+ launch carries at most one ordinary beat, by
+the hook's stamp — exact), and a re-seed beat on a day with no
+counted launch is explained iff ANY launch row exists that day.
+A re-seed beat with no launch row at all that day stays
+unexplained and fails B2. The missed check still counts either
+kind. Limitation, stated plainly: the day-join cannot prove a
+re-seed line on a wave-4+ launch day belongs to that launch
+rather than to a same-day wave-3 launch — the hook + staged
+proof (D3) prove the one-beat-per-launch construction; the
+analyzer counts.
