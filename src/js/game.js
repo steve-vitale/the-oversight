@@ -21500,6 +21500,24 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (rec.allyVid) this.objNoteMonsterSighting(rec.allyVid, m.id, m.tx, m.ty);
         }
       } catch (e) {}
+      // LEADSIDE (sim-leadside-a, finding #2628/#2599): a villager who
+      // LEADS a wave-4+ fight is the fighter already going — record the
+      // lead so the gun redirect can weight toward them. Counts real
+      // fights only (vKill/mFlee/vFlee/vDie), non-raid, at this choke
+      // point (the same one the near-miss instrument watches); patrol
+      // and TB fights are not counted. Stored in state.wave4Leads,
+      // deliberately OUTSIDE notability: notability feeds contest/show
+      // casting weights, and the lead record must not move casting.
+      // Env-gated: LEADSIDE=1 (node sims only). Zero draws.
+      try {
+        var _lsOn = false;
+        try { _lsOn = (typeof process !== 'undefined' && process.env && process.env.LEADSIDE === '1'); } catch (e2) {}
+        if (_lsOn && !opts.raid && rec && ['vKill', 'mFlee', 'vFlee', 'vDie'].indexOf(rec.outcome) >= 0
+          && (mdef.wave || 0) >= 4 && vid && vid !== 'player' && vid !== this.villagerId) {
+          var _w4l = this.state.wave4Leads || (this.state.wave4Leads = {});
+          _w4l[vid] = (_w4l[vid] || 0) + 1;
+        }
+      } catch (e) {}
       // VETREENGAGE (sim-vetreengage-a): a villager who FACED a wave-4+ beast
       // and lived — fought it and fled — now knows the type is real,
       // where it is, and that they survived it. That lived knowledge
