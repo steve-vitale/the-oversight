@@ -90,36 +90,51 @@ any row; table win 0 -> 0, national 0 -> 0 on both.
 exists for it. Recorded, not invented: there is no telemetry baseline
 to compare these panels against.
 
-## Gate caveat
+## Gate
 
-No full `check.js` gate ran at closeout. A flap window (see below)
-blocked every git write from ~10:09Z, so neither branch could be
-rebased or merged while it lasted; the gate needs the merged tip and
-could not run. Arm proofs are green on the rebased tips is the bar
-met per the 1830Z/2015Z precedent — with the qualification that the
-post-revert proofs are green-by-design (m2step2 33/41 with the 8
-reverted-leg failures named; shape2 fataling at the removed method
-after 10 fixture passes, selftest 101/101). The shape2 worker's
-check.js re-run showed only the standing staleness pair
-(measurement-proof + phone-frame) — adjudicated as NOT lever
-failures, not chased. No check.js was running from the r262, r151 or
-0430Z adoptions at closeout (ps verified, none found).
+`node scripts/check.js --quick` ran on the merged tip `2b97163b0` in
+the sim-shape2-a worktree (344 scripts, 4 parallel, 1194s):
+**334 passed, 10 failed.** All 10 failures are adjudicated standing /
+not lever-attributable: the measurement-proof staleness family (3 —
+test-measurement-proof-update.js "Proof source inputs are not current";
+test-measurement-workflow.js "retained neutrality proof covers the
+current Game/controller/harness inputs"; test-measurement-cache-flags.js
+"both actual CLI configurations complete valid neutral panels", same
+root cause — the retained proof is stale vs current inputs) + the
+phone-frame stale receipt (1 — test-phone-frame-proof.js, retained
+browser inputs do not match current source) + six 120s timeouts under
+load (test-living-garden-deed-attainment.js,
+test-occupation-panels.js, test-one-person-army-deed-attainment.js,
+test-trust-observer-neutrality.js, test-synergy-stall.js,
+test-capable-bot-20261014.js — all exit null at ~120.1s, timed out,
+never asserted). This round changed 0 src/js and no
+collector/contract inputs, so the staleness predates it; the proof
+refresh rounds 11 + 12 are owed separately. Arm proofs are green on
+the rebased tips per the 1830Z/2015Z precedent — with the qualification
+that the post-revert proofs are green-by-design (m2step2 33/41 with
+the 8 reverted-leg failures named; shape2 fataling at the removed
+method after 10 fixture passes, selftest 101/101). No check.js was
+running from the r262, r151 or 0430Z adoptions at closeout (ps
+verified, none found).
 
 ## Flap
 
 - Earlier window 04:46:04Z–~04:58Z Nov 21: closure already reported
   in the executive update for the shipped cycle (folded in there).
-- NEW window: onset ~10:09–10:10Z Nov 21, still open at closeout.
-  The flap watcher caught it at 10:10:07Z (write EPERM, update-ref
-  rc=128, fsync-rename EPERM in python and node) and it was still
-  failing at 10:11:11Z. It blocked 4 rebase attempts on sim-m2step2-a
+- NEW window: onset ~10:09–10:10Z Nov 21, cleared ~10:13Z (about 4
+  minutes — a brief blip). The flap watcher caught it at 10:10:07Z
+  (write EPERM, update-ref rc=128, fsync-rename EPERM in python and
+  node) and it was still failing at 10:11:11Z; watcher probes passed
+  again at 10:13:16Z and the coordinator's own update-ref probe
+  passed at 10:13:32Z. It blocked 4 rebase attempts on sim-m2step2-a
   (all `fatal: could not write to .../rebase-merge/head-name:
   Operation not permitted`) and an update-ref probe, while plain
   shell writes to the same paths succeeded — the usual selective
   signature. One rebase attempt left a partial `rebase-merge`
   directory (no commands done, HEAD never moved); it was removed
-  before retrying. Merges are deferred until the window clears; the
-  branches are complete and verified on disk at their tips.
+  before retrying. Both branches were rebased and merged after the
+  window cleared (m2step2 `babcf2c9a`, shape2 + round record
+  `2b97163b0`).
 
 ## Lock / claim
 
@@ -157,10 +172,11 @@ the lane is free; this absence is recorded here instead of a delete.
   `dc614732a`, substrate `d6508a67e`, lever+instrument `17aa0a1fa`,
   analyzer fix `d34e19b9e`, substrate revert `b94b28e58`, lever
   revert `da26f7cfc`, evidence `83a01d139`, hash-fill `da1b16a96`.
-  Merge: [MERGE-M2STEP2].
+  Merge: `babcf2c9a`.
 - sim-shape2-a (base 9070aaf70): prereg `e12b830c6`, amendment
   `0d0541a06`, lever+instrument `638205b2c`, lever revert
   `2464bf2e9`, evidence `c591db4a3`, hash-fill `0ab2a5236`.
-  Merge: [MERGE-SHAPE2].
-- Round record: this commit [COMMIT-ROUND-RECORD] (on sim-shape2-a,
-  merged with that arm).
+  Merge: `2b97163b0`.
+- Round record: this commit `2b97163b0` (on sim-shape2-a,
+  merged with that arm; the hash-update commit that filled these
+  placeholders follows it).
