@@ -302,3 +302,109 @@ evidence carries a "metric review" section.
 - Analysis: `evidence/2026-11-20/launcheng-b-analysis.json`
 - Evidence: `evidence/2026-11-20/sim-launcheng-b.md`
 - `src/` diff: 0 lines in this stage (DIAG, analyzer only).
+
+---
+
+## CORRECTION 2026-11-21 (appended after the first judged run — see MEASUREMENT §14; the frozen body above is not rewritten)
+
+The first judged analyzer run (2026-11-21 ~01:15 UTC) returned
+DIAG-NO-GO on the completeness bar: 89 `unknown-not-scored`
+dawns. Read-only diagnosis of those 89 against the corpora +
+the `objTick` code (`villager-objectives.js:1764-1914`) shows the
+frozen Taxonomy B was built on a false premise — that a holder
+is scored at most once a day, at dawn (part 0). In fact scoring
+happens at any of the 4 day-parts, and the pick PHASE DRIFTS:
+a `party_wait` pick sets a HAVEN_CHORE with
+`partsLeft = 2 + floor(R()*3)` (2–4, or 3–5 when the core pick
+was VISIT); the chore completes after that many `objTick` parts,
+and the re-pick happens at the next part where the objective is
+observed done — dawn only when the completion lands exactly on
+a part boundary that leaves the objective idle at dawn
+(`vbrainShouldRefresh`: a same-day pick blocks mid-day
+re-picks while the commit is fresh; a stale commit allows
+them). So most "not-scored dawns" are days the holder WAS
+assessed, mid-day. The instrument is corrected, NOT the bar:
+the DIAG-GO bar (0 unknown) stands unchanged; the unit moves
+from "dawn" to "instance-day" and Taxonomy B is replaced by B'
+below. The corrected run is the judged run for this arm; the
+first run's DIAG-NO-GO stands as the record of the instrument
+gap, and this correction is the dated account of what changed
+and why.
+
+### C1. Scored-dawn total 143 → 141
+
+The frozen total 143 counted companionPool rows in instance
+windows. Two of those pool rows are RETARGET-BOUNDARY dawns:
+the dawn pick belonged to the predecessor instance (the plan
+retargeted mid-day), so the instance-matched part-0 score count
+is 141, not 143. The two days: 106246
+`app_mgpspk5p357` d145 (dawn pick for `influencer`; the
+`cancellation` plan was seeded later that day) and 106247
+`james_okonkwo` d88 (dawn pick for `eulogy`; the `audit` plan
+was seeded later that day). The analyzer's 141 was correct;
+the exploration's 143 double-counted the boundary.
+
+### C2. Taxonomy B' — day-level zero-row classification (replaces B)
+
+Unit: the instance-day (every day in `[seedDay, endDay]`).
+A day is ASSESSED if any score row exists for (vid, target)
+that day, at any part (dawn part-0, or mid-day part 1–3); its
+reason comes from Taxonomy A applied to the part-0 row if
+present, else the earliest mid-day row. A day with NO score
+row is a ZERO-ROW day, classified first-match:
+
+| Reason | Rule |
+| --- | --- |
+| `holder-dead` | death row for the holder that day or earlier, or census `holderAlive` false |
+| `holder-scholar` | the holder is the player character (scholar) at dawn — `daily[day].scholarId == vid` AND `daily[day-1].scholarId == vid` (the scholar never runs `vbrainScorePick`; `objTick` skips `rid == villagerId`). The 3 scored-while-scholar rows in the corpora are mid-day inheritances (holder scored at dawn as a villager, became scholar later that day) and do not contradict this. |
+| `retarget-boundary` | a score row exists that day for the same vid with a DIFFERENT plan.target (the dawn pick belonged to the predecessor instance — C1) |
+| `seed-day` | `day == seedDay` (the plan was seeded by a fight mid-day; no dawn pick could exist before it) |
+| `holder-on-expedition` | census `holderExped` true |
+| `holder-away` | a pool member row for the holder that day reads `away: true` (part-0 sample of the `v.away` flag) |
+| `field-encounter-day` | a `v4encounters` row that day names the holder (as `vid` or in `allyVids`) — the encounter consumed their parts |
+| `plan-not-in-census` | no census row for the holder that day |
+| `holder-off-haven` | census node != haven (away-return in progress; the away flag is sampled, not daily) |
+| `phase-edge` | the previous assessed day's pick was at part 3 with corePick VISIT — the only no-skip shape whose completion lands on the last part of this day (`p3 + L=5`, L from `3 + floor(R()*3)`), so no refresh fires this day and the next pick lands at the next dawn. Consistency argument, not proof: the R() draw is unrecorded; both phase-edge days' next picks ARE at the next dawn, as the model predicts. |
+| `unknown-no-signal` | none of the above matched — MUST be 0 for DIAG-GO |
+
+Pool rows are part-0 only, so the pool decomposition (Taxonomy
+D) still rests on the 141 dawn days; the 82 midday-only days
+carry the same reason (`party_wait`) without a fresh pool
+sample — the evidence says so.
+
+### C3. Corrected frozen totals (instrument-consistency check)
+
+31 instances, 19 candidate-not-bid, 7 churned, 22
+wave-4-target launches, 15 uncounted, 0 instrument errors on
+8/8 files (unchanged) + 141 scored not-bid dawns (was 143, C1)
++ 268 instance-days, 223 assessed days (141 dawn + 82
+midday-only), 85 midday rows, 226 assessed rows, 45 zero-row
+days, 10 `unknown-no-signal` zero-row days. The 10 are:
+106241 `visjoin_91` d97, d103; 106243 `visjoin_116` d122;
+106246 `visjoin_125` (strike) d129, d131, d135; 106246
+`visjoin_96` (editor) d146; 106247 `david_kim` (eulogy) d72;
+106247 `fatima_hassan` (reunion) d98; 106247
+`app_mgpspki2526` (spoiler) d127. On each, the
+holder was at Haven, not away at part 0, not the scholar, not
+a seed day, with no encounter and no phase-edge shape — yet
+the phase model predicts a pick. The only remaining mechanism
+in code is skipped `objTick` parts (mid-day `isEngaged`, or a
+mid-day node excursion), neither of which the strikeband4
+recorder sampled. Closing them needs a per-part holder-state
+recorder (objective kind/state/partsLeft, `v.away`,
+`isEngaged`, node, for plan holders) on a fresh band — the
+next run's instrument item, since events re-roll and a probe
+cannot retroactively classify these 9 days.
+
+### C4. Effect on the verdict
+
+The DIAG-GO bar is UNCHANGED (0 unknown). With 10
+`unknown-no-signal` instance-days the completeness bar FAILS,
+so the corrected run's verdict is DIAG-NO-GO on completeness
+alone — bars (2) binding gate, (3) launch accounting, (4)
+instrument validity pass. The substantive diagnosis is
+complete (the binding gate is named with counts on 223/223
+assessed days); the miss is 10/268 days (3.7%) of
+non-assessment days, not rejected bids. No game-code change
+follows from this stage (diag-only per the overlap guard —
+see the evidence file).
