@@ -171,11 +171,6 @@
   // launches +2 each capped +8, wave-3 kill +4, wave-2 kill +2, contest
   // win +1 each; roster-order tie-break. Own eligibility (alive + on
   // roster), never the scholar. Zero draws.
-  // LEADSIDE (sim-leadside-a, finding #2628/#2599): +4 per wave-4+
-  // launch led (state.wave4Leads, recorded in resolveWildMonster-
-  // Encounter), capped +12 — the fighters already going get the gun.
-  // Env-gated: LEADSIDE=1. The counter lives outside notability on
-  // purpose (notability feeds contest/show casting weights).
   G._gunRateFighter = function() {
     var roster = ((this.state.village || {}).roster || []);
     var agency = null;
@@ -183,9 +178,6 @@
     var exped = (agency && agency.exped) || {};
     var stats = (agency && agency.stats) || {};
     var nota = this.state.notability || {};
-    var _lsOn = false;
-    try { _lsOn = (typeof process !== 'undefined' && process.env && process.env.LEADSIDE === '1'); } catch (e2) {}
-    var _w4l = this.state.wave4Leads || {};
     var best = null, bestScore = -1;
     for (var i = 0; i < roster.length; i++) {
       var vid = roster[i];
@@ -200,7 +192,6 @@
       var n = nota[vid] || {};
       if (n.wave3Kill) score += 4;
       if (n.wave2Kill) score += 2;
-      if (_lsOn) score += Math.min(((_w4l[vid] || 0) * 4), 12);
       score += (n.contestWin || 0);
       if (score > bestScore) { bestScore = score; best = vid; }
     }
