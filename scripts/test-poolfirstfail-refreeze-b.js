@@ -3,10 +3,13 @@
 // recorded in the re-anchor prereg: NEW §0 anchor section (static +
 // negative + live-positive), §1 adapted to the re-anchor invariant
 // (on-disk src/ matches the frozen base, NOT clean vs HEAD) and the
-// df40fced1-vs-HEAD pool-path identity, §2 count updated for §I.
-// §1 static (frozen prereg, instrument = 3 new files only, src diff 0,
-// pool path identical between the holderstate corpus base a6534c67b
-// and this base df40fced1) + §2 analyzer selftest green + §3 fixture
+// df40fced1-vs-HEAD pool-path delta, re-frozen by the 2026-11-21 §1
+// amendment to assert the delta is exactly the env-gated PROFILEGATE4
+// lever (coordinator-authorized, before any judged sim), §2 count
+// updated for §I.
+// §1 static (frozen prereg + §1 re-freeze amendment, instrument = 3 new
+// files only, src diff 0, pool-path delta df40fced1-vs-HEAD is exactly the
+// env-gated PROFILEGATE4 lever) + §2 analyzer selftest green + §3 fixture
 // end-to-end through seedOf on a synthetic corpus (H applied + Leg P
 // pool decomposition) + §4 live 150d shape run on screening seed
 // 106731 (pool rows with gap fields, census rows, holder-state rows)
@@ -94,9 +97,42 @@ function git(args) {
   // returns null) when the diff is non-empty.
   check('§1 on-disk src/ matches the frozen base (git diff --quiet df40fced1 -- src/ empty)',
     git('diff --quiet df40fced1 -- src/') !== null);
-  const poolPathDiff = git('diff df40fced1 HEAD -- src/js/villager-brain.js src/js/win-plan.js src/js/villager-agency.js src/js/villager-objectives.js src/js/companion-score.js src/js/game.js src/data scripts/sim-harness.js scripts/vetfirst-instrument-20261111.js scripts/policies/competent.js scripts/analyze-launcheng-b.js scripts/analyze-launchfunnel-a.js scripts/analyze-launchdef-a.js scripts/analyze-dmgshape-rerun-b.js');
-  check('§1 pool-path files identical between frozen base df40fced1 and HEAD (brain/win-plan/agency/objectives/companion-score/game/data/harness/policy/analyzers)', poolPathDiff === '', (poolPathDiff || '').slice(0, 200));
+  // AMENDMENT (2026-11-21, coordinator-authorized, before any judged
+  // sim): the df40fced1-vs-HEAD pool-path identity check is re-frozen.
+  // HEAD moved after the refreeze prereg froze (84e57fcc3, the
+  // PROFILEGATE4 lever, landed in the 1430Z round), so identity is
+  // false by measurement. The amended §1 asserts the delta is EXACTLY
+  // that lever: the two files below, helper + one gate-line each, and
+  // PROFILEGATE4 unset in the run env (lever inert). The judged leg
+  // still runs the frozen src/ checkout (CLI guard + sentinel guard).
+  // Verified from the live diff 2026-11-21 ~16:12 UTC: 50 added lines,
+  // 2 removed (both the old gate line), 2 new gate lines; every other
+  // added line is a comment, blank, contains profilegate4 /
+  // PROFILEGATE4 / profile-gate, or one of the six helper-body lines.
+  check('§1 prereg records the 2026-11-21 §1 re-freeze amendment (PROFILEGATE4 lever delta)',
+    text.indexOf('AMENDMENT — §1 re-freeze') !== -1 &&
+    flat.indexOf('PROFILEGATE4` is unset in the run env') !== -1);
+  const poolPathNames = git('diff --name-only df40fced1 HEAD -- src/js/villager-brain.js src/js/win-plan.js src/js/villager-agency.js src/js/villager-objectives.js src/js/companion-score.js src/js/game.js src/data scripts/sim-harness.js scripts/vetfirst-instrument-20261111.js scripts/policies/competent.js scripts/analyze-launcheng-b.js scripts/analyze-launchfunnel-a.js scripts/analyze-launchdef-a.js scripts/analyze-dmgshape-rerun-b.js');
+  check('§1 df40fced1-vs-HEAD pool-path delta touches ONLY villager-brain.js + win-plan.js (PROFILEGATE4 lever files)',
+    poolPathNames === 'src/js/villager-brain.js\nsrc/js/win-plan.js', poolPathNames);
   const brainWinDiff = git('diff df40fced1 HEAD -- src/js/villager-brain.js src/js/win-plan.js') || '';
+  const diffLines = brainWinDiff.split('\n');
+  const added = diffLines.filter(function (l) { return l[0] === '+' && l.slice(0, 3) !== '+++'; }).map(function (l) { return l.slice(1); });
+  const removed = diffLines.filter(function (l) { return l[0] === '-' && l.slice(0, 3) !== '---'; }).map(function (l) { return l.slice(1); });
+  const OLD_GATE = "        if (prof !== 'wanderer' && prof !== 'explorer') continue;";
+  const NEW_GATE = "        if (!profilegate4OpenFor(self, vid) && prof !== 'wanderer' && prof !== 'explorer') continue;";
+  const BODY_OK = ['try {', '} catch (e) { return false; }', '}', 'var vv = self.state && self.state.village;', 'var plan = (vv && vv.winPlan) ? vv.winPlan[vid] : null;', 'return !!(plan && ((plan.needWave | 0) >= 4));'];
+  const addedOk = added.every(function (l) {
+    return /^\s*$/.test(l) || /^\s*\/\//.test(l) || /profilegate4/i.test(l) ||
+      l.trim() === NEW_GATE.trim() || BODY_OK.indexOf(l.trim()) !== -1;
+  });
+  check('§1 brain/win-plan delta is exactly the PROFILEGATE4 lever: 50 added lines (helper + gate-line each), 2 removed (old gate line), every added line classified',
+    added.length === 50 && removed.length === 2 && addedOk &&
+    removed.every(function (l) { return l === OLD_GATE; }) &&
+    added.filter(function (l) { return l.trim() === NEW_GATE.trim(); }).length === 2,
+    { added: added.length, removed: removed.length, addedOk: addedOk });
+  check('§1 PROFILEGATE4 is unset in the run env (lever inert even on HEAD code)',
+    typeof process.env.PROFILEGATE4 === 'undefined', process.env.PROFILEGATE4);
   const poolFnChanged = brainWinDiff.split('\n').filter(function (l) {
     return (l[0] === '+' || l[0] === '-') && /findCompanion|npcRangeProfile|npcRangingApt|RANGY_OCC/.test(l);
   });

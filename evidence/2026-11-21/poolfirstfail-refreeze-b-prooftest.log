@@ -14,7 +14,10 @@ PASS §1 prereg freezes Taxonomy H
 PASS §1 prereg records the re-recorded band 106731-106738 (same band, re-used deliberately)
 PASS §1 prereg records AMENDMENT 1 (census definition) + AMENDMENT 2 (§4 150d)
 PASS §1 on-disk src/ matches the frozen base (git diff --quiet df40fced1 -- src/ empty)
-FAIL §1 pool-path files identical between frozen base df40fced1 and HEAD (brain/win-plan/agency/objectives/companion-score/game/data/harness/policy/analyzers) :: "diff --git a/src/js/villager-brain.js b/src/js/villager-brain.js\nindex b2bc5f49b..be644f5a1 100644\n--- a/src/js/villager-brain.js\n+++ b/src/js/villager-brain.js\n@@ -124,6 +124,30 @@\n     } catch (e) {"
+PASS §1 prereg records the 2026-11-21 §1 re-freeze amendment (PROFILEGATE4 lever delta)
+PASS §1 df40fced1-vs-HEAD pool-path delta touches ONLY villager-brain.js + win-plan.js (PROFILEGATE4 lever files)
+PASS §1 brain/win-plan delta is exactly the PROFILEGATE4 lever: 50 added lines (helper + gate-line each), 2 removed (old gate line), every added line classified
+PASS §1 PROFILEGATE4 is unset in the run env (lever inert even on HEAD code)
 PASS §1 no added/removed pool-filter line between df40fced1 and HEAD (findCompanion/npcRangeProfile/RANGY_OCC)
 PASS §1 driver + analyzer + test are new files on this branch
 PASS §1 driver arm/run is poolfirstfail-refreeze-b, usage line re-seeded to 106731-106738
@@ -129,4 +132,4 @@ PASS D2 wrap neutrality: identical trajectories, recorder ON vs OFF, full substr
 PASS D2 recorder-off run carries empty recorder arrays (v4/dawnbid/pool/census/skips/holder-state)
 PASS D2 recorder-off run has 0 instrument errors
   info: D1 30d run recorded 0 holder-state rows, 0 gate picks, 0 encounters, 0 seed rows, 0 pool rows, 28 census rows
-test-poolfirstfail-refreeze-b: 47 passed, 1 failed
+test-poolfirstfail-refreeze-b: 51 passed, 0 failed

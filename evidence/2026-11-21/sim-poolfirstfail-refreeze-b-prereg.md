@@ -465,3 +465,102 @@ and says whether they still read the same.
 - Evidence: `evidence/2026-11-21/sim-poolfirstfail-refreeze-b.md`
 - Leg log: `evidence/2026-11-21/poolfirstfail-refreeze-b-legs.log`
 - `src/` diff: 0 lines (DIAG, recorder wraps only).
+
+## AMENDMENT — §1 re-freeze (2026-11-21 ~16:12 UTC, coordinator-authorized, BEFORE any judged sim)
+
+**Status:** written 2026-11-21 ~16:12 UTC, after the proof gate STOPPED the
+first refreeze attempt (47/48 — the single failure the inherited §1
+pool-path identity check, `evidence/2026-11-21/poolfirstfail-refreeze-b-prooftest.log`)
+and BEFORE any judged sim has run in this arm. No judged corpora exist
+yet; nothing is re-scored, re-rolled, or re-judged after the fact. The
+frozen bars (a)+(b)+(c), the reproduction criterion, Leg P / Taxonomy H /
+Leg R definitions, band, horizon, and substrate flags are UNTOUCHED by
+this amendment — only the §1 guard's expectation changes.
+
+**Coordinator decision (this round's brief):** re-freeze the §1 pool-path
+identity check BEFORE any judged leg runs, and record it as a dated
+prereg amendment. This amendment is that record.
+
+**Reason — master moved under the frozen guard:** the §1 check as frozen
+in the re-anchor prereg asserts `df40fced1`-vs-HEAD pool-path identity,
+which was true when the re-anchor prereg froze (HEAD `238dcf94b`). The
+PROFILEGATE4 lever (`84e57fcc3`, sim-profilegate-b, committed 2026-11-21
+15:09:57 UTC, landed in the 1430Z round) moved HEAD's pool path after
+that freeze. The refreeze prereg (~15:59 UTC) recorded the resulting
+six-file delta by measurement but left the §1 check verbatim, deferring
+any re-freeze to a coordinator decision (see Instrument limitation 11
+below — superseded by this amendment). The proof gate then confirmed the
+drift: 47/48, the one failure exactly the §1 identity check. The guard
+did its job; its premise is now re-frozen to the measured HEAD.
+
+**Verified diff evidence (measured 2026-11-21 ~16:12 UTC from the live
+worktree, not asserted):**
+
+- Full `src/` delta `df40fced1 → HEAD` (`3e13d63d8`) is exactly SIX
+  files: `src/js/build.js` (version stamp only, 1 insertion / 1
+  deletion); `src/js/conversation.js` (4 insertions / 1 deletion,
+  M12-CAP favor-requirements circles latch);
+  `src/js/convo-dialogue.js` (25 insertions / 4 deletions, M12-CAP,
+  same latch); `src/js/fieldFights.js` (9 insertions / 2 deletions,
+  the #2634 downedtwice fix); `src/js/villager-brain.js` (25
+  insertions / 1 deletion); `src/js/win-plan.js` (25 insertions / 1
+  deletion). Total: 89 insertions, 10 deletions.
+- The two NEW pool-path files are exactly the PROFILEGATE4 lever and
+  nothing else: `git diff df40fced1 HEAD -- src/js/villager-brain.js
+  src/js/win-plan.js` contains, per file, the `profilegate4On()` /
+  `profilegate4OpenFor()` helpers (comments + two functions) and ONE
+  gate-line change in `findCompanion` (`if
+  (!profilegate4OpenFor(self, vid) && prof !== 'wanderer' && prof !==
+  'explorer') continue;` replacing `if (prof !== 'wanderer' && prof !==
+  'explorer') continue;`). Across both files: 50 added lines, 2
+  removed lines, both removed lines the old gate line, both new gate
+  lines the profilegate-wrapped gate line; every other added line is a
+  comment, a blank line, a line containing `profilegate4` /
+  `PROFILEGATE4` / `profile-gate`, or one of the six helper-body code
+  lines (`try {`, `} catch (e) { return false; }`, `}`, `var vv =
+  self.state && self.state.village;`, `var plan = (vv && vv.winPlan) ?
+  vv.winPlan[vid] : null;`, `return !!(plan && ((plan.needWave | 0) >=
+  4));`). No other pool-path change exists in the delta.
+- `PROFILEGATE4` is UNSET in this arm's run env (verified live:
+  `PROFILEGATE4=<unset>`), so the lever is inert even on HEAD's code:
+  `profilegate4On()` returns false, `profilegate4OpenFor()` returns
+  false, and the gate line behaves exactly as the frozen base's gate
+  line.
+- The judged leg runs under the frozen `src/` checkout
+  (`df40fced1`), so code in HEAD's `src/` cannot affect it: the CLI
+  guard (`git diff --quiet df40fced1 -- src/` exit 0) plus the
+  per-`oneRun()` sentinel guard prove the on-disk `src/` IS the
+  frozen base's `src/`. The §1 failure is therefore a guard-drift
+  label, not a substrate difference in the judged run.
+
+**Amended §1 asserts (replacing the `poolPathDiff === ''` identity
+assertion; the on-disk-src-matches-frozen-base check and the sibling
+regex check are unchanged):**
+
+1. On-disk `src/` matches the frozen base (`git diff --quiet
+   df40fced1 -- src/` empty under the frozen checkout) — unchanged.
+2. The `df40fced1`-vs-HEAD pool-path delta (the same file list as
+   before: brain / win-plan / agency / objectives / companion-score /
+   game / data / harness / policy / analyzers) touches ONLY
+   `src/js/villager-brain.js` and `src/js/win-plan.js`, AND that
+   two-file delta is exactly the PROFILEGATE4 lever: 50 added lines,
+   2 removed lines (both the old gate line), 2 new gate lines, every
+   added line classified as above.
+3. `PROFILEGATE4` is unset in the run env.
+
+**Untouched:** `EXPECTED.anchor12` (`'df40fced12a0'` — the
+"Post-hoc amendment is forbidden" rule still binds it); the §0
+anchor assertions; bars (a)+(b)+(c); the reproduction criterion;
+Leg P, Taxonomy H, Leg R; the band (106731–106738, re-recorded);
+the 150d death-aware horizon; the seven substrate flags; the
+sibling §1 regex check (no added/removed pool-filter line matching
+`findCompanion|npcRangeProfile|npcRangingApt|RANGY_OCC`), which
+still passes and stays as-is.
+
+**Supersedes:** Instrument limitation 11's deferral ("any re-freeze
+of that check … is a coordinator decision for the next round") —
+that coordinator decision has now been made, in this round's brief,
+and this amendment records it. The run procedure step 4's "Known
+pre-registered risk" note is now the operative text with the risk
+resolved by this amendment; step 6's six-file delta wording stands.
+The expected proof result is now 48/48.
