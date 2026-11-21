@@ -159,10 +159,16 @@ function attributeTransfer(row, sd) {
     const wasCarried = locsForVid(prevLocs, to).some(function (l) { return l.loc === 'carried'; });
     if (wasCarried) {
       const pg = priorGrantTo(sd, to, d);
-      const ae = dayAutoEquips.filter(function (e) { return e.vid === to; })[0];
+      // The seating event may precede the census row by a day:
+      // villagerGearDay (villager-build.js) runs AFTER the driver's
+      // end-of-day snapshot, so the autoEquip row lands on day d-1
+      // while the census first shows 'equipped' on day d (pilot
+      // catch, 2026-11-21: all four seating rows).
+      const ae = dayAutoEquips.filter(function (e) { return e.vid === to; })[0] ||
+        eventsOnDay(sd.autoEquipEvents, d - 1).filter(function (e) { return e.vid === to; })[0];
       return { cause: 'pack-transfer',
-        mechanism: 'autoEquip seated a carried gun (villagerGearUp at fight entry)' +
-          (ae ? ' — autoEquip ' + (ae.rangedBefore || '?') + ' -> ' + (ae.rangedAfter || '?') + (ae.frame ? ' (' + ae.frame + ')' : '') : ' [no autoEquip row fired today]') +
+        mechanism: 'autoEquip seated a carried gun (villagerGearDay, villager-build.js:906)' +
+          (ae ? ' — autoEquip day ' + ae.day + ': ' + (ae.rangedBefore || '(empty)') + ' -> ' + (ae.rangedAfter || '?') + (ae.frame ? ' (' + ae.frame + ')' : '') : ' [no autoEquip row fired today or yesterday]') +
           (pg ? '; granted day ' + pg.day + ' via ' + (pg.caller || '?') : '; no prior grant to ' + to + ' on record'),
         evidence: evSummary };
     }
@@ -614,6 +620,22 @@ function selftest() {
   a = attributeTransfer({ day: 11, kind: 'new-holder', from: null, to: '__scholar__' }, dispSd);
   check('new-holder scholar + equip displacement -> pack-transfer', a.cause === 'pack-transfer');
   check('displacement row names the displacing weapon', /crude_bow/.test(a.mechanism));
+  // 17. Seating event lands the day BEFORE the census row (pilot
+  // catch, 2026-11-21): villagerGearDay runs after the end-of-day
+  // snapshot, so the autoEquip row is day d-1, the 'equipped' row d.
+  const seatSd = mkSd({
+    gunLocRows: undefined,
+    v4gunLoc: [
+      { day: 10, locations: [{ loc: 'carried', vid: 'bob', count: 1 }], personFlags: { bob: { dead: false, onRoster: true } } },
+      { day: 11, locations: [{ loc: 'equipped', vid: 'bob', count: 1 }], personFlags: { bob: { dead: false, onRoster: true } } },
+    ],
+    grantEvents: [{ day: 10, itemId: 'searcaster', toKind: 'villager', toVid: 'bob', caller: 'contest-prize', frame: '_cxItemPrize@contests.js' }],
+    autoEquipEvents: [{ day: 10, vid: 'bob', rangedBefore: 'crude_bow', rangedAfter: 'searcaster', frame: 'villagerGearDay@villager-build.js' }],
+  });
+  delete seatSd.gunLocRows;
+  a = attributeTransfer({ day: 11, kind: 'new-holder', from: null, to: 'bob' }, seatSd);
+  check('new-holder + seating event day before -> pack-transfer', a.cause === 'pack-transfer');
+  check('seating row names the day-before autoEquip', /day 10/.test(a.mechanism) && /villagerGearDay/.test(a.mechanism));
   console.log('vanishcause analyzer selftest: ' + pass + ' passed, ' + fail + ' failed');
   return fail === 0;
 }
