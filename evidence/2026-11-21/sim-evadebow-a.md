@@ -242,19 +242,20 @@ information the brain is given (it cannot see the bow), not in the villagers' in
   `--allow-recorder-corpus` or `--update-baseline` — no baseline was rolled forward.
 - **Write flap:** none struck. Every write, commit, and ref update in this adoption went
   through on the first try; no EPERM, no `.lock` failure, no retry needed.
-- **Rebase:** rebased cleanly onto master `b20328ad9` (7/7 picks, no conflicts); new tip `f8d88f0f5`;
-  `git diff b20328ad9 -- src/` empty; post-rebase proof 30/33 (3 by-design substrate legs), analyzer
-  selftest 34/34. Evidence commit hashes updated after the rebase (`187587fd8` / `f8d88f0f5`).
+- **Rebase:** rebased cleanly onto master `9622f8089` (post-leadside-merge master, 8/8 picks, no conflicts); new tip `766179faf`;
+  `git diff 9622f8089 -- src/` empty; post-rebase proof 30/33 (3 by-design substrate legs), analyzer
+  selftest 34/34; analyzer re-run over the corpora byte-identical to the committed analysis. Evidence commit hashes updated after the rebase (`b8aae9af9` / `620a2fc56`).
 
 ## Commits
 
-- `a4085bbc5` prereg — evade-on-a-quivered-bow diag, fresh band 107151–107158, frozen before any judged sim
-- `b70a2fdd3` instrument + DEPMAT/ROLL35/AMMO substrate re-land (FIBERFETCH excluded, concept-dead)
-- `118f4d2ae` instrument + proof (33/33); substrate proofs DEPMAT 43/43, ROLL35 41/41, AMMO 52/52
-- `b7ddede59` analyzer awareness-gating fix; selftest 34/34, proof 33/33
-- `c9eba2cf0` panel builder + smoke (107151 both legs exit 0)
-- `187587fd8` (adoption) evidence + instrument + corpus + panel commit
-- `f8d88f0f5` (adoption) substrate revert commit — final tip: 0 src/js delta vs base `b5514461c`
+- `7cfa92185` prereg — evade-on-a-quivered-bow diag, fresh band 107151–107158, frozen before any judged sim
+- `85e68ebad` instrument + DEPMAT/ROLL35/AMMO substrate re-land (FIBERFETCH excluded, concept-dead)
+- `7c239e3d2` instrument + proof (33/33); substrate proofs DEPMAT 43/43, ROLL35 41/41, AMMO 52/52
+- `0e6413ebc` analyzer awareness-gating fix; selftest 34/34, proof 33/33
+- `7c9d60c11` panel builder + smoke (107151 both legs exit 0)
+- `b8aae9af9` (adoption) evidence + instrument + corpus + panel commit
+- `620a2fc56` (adoption) substrate revert commit — 0 src/js delta vs master `9622f8089`
+- (hash-update commit — this file's Rebase/Commits sections, after the rebase onto `9622f8089`)
 
 ## Files
 
