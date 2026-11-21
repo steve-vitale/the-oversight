@@ -242,8 +242,9 @@ information the brain is given (it cannot see the bow), not in the villagers' in
   `--allow-recorder-corpus` or `--update-baseline` — no baseline was rolled forward.
 - **Write flap:** none struck. Every write, commit, and ref update in this adoption went
   through on the first try; no EPERM, no `.lock` failure, no retry needed.
-- **Rebase:** rebased onto current master at adoption time; proofs re-run green modulo the
-  3 by-design substrate legs (see Proofs).
+- **Rebase:** rebased cleanly onto master `b20328ad9` (7/7 picks, no conflicts); new tip `f8d88f0f5`;
+  `git diff b20328ad9 -- src/` empty; post-rebase proof 30/33 (3 by-design substrate legs), analyzer
+  selftest 34/34. Evidence commit hashes updated after the rebase (`187587fd8` / `f8d88f0f5`).
 
 ## Commits
 
@@ -252,8 +253,8 @@ information the brain is given (it cannot see the bow), not in the villagers' in
 - `118f4d2ae` instrument + proof (33/33); substrate proofs DEPMAT 43/43, ROLL35 41/41, AMMO 52/52
 - `b7ddede59` analyzer awareness-gating fix; selftest 34/34, proof 33/33
 - `c9eba2cf0` panel builder + smoke (107151 both legs exit 0)
-- (adoption) evidence + instrument + corpus + panel commit
-- (adoption) substrate revert commit — final tip: 0 src/js delta vs base `b5514461c`
+- `187587fd8` (adoption) evidence + instrument + corpus + panel commit
+- `f8d88f0f5` (adoption) substrate revert commit — final tip: 0 src/js delta vs base `b5514461c`
 
 ## Files
 
