@@ -298,7 +298,7 @@ function tallyVendetta(armEvents) {
   return { total: evs.length, directed, unordered, maxDirected, maxUnordered, topDirected: top(directed), topUnordered: top(unordered), pairsGte4 };
 }
 
-module.exports = { aggregateNightlyNews, summarizeBondProposed, tallyOffered, summarizeCounters, tallyRecap, mapTranscriptEntry, tallyReoffers, tallyDroppedThreads, tallyNarrDup, tallyConfessions, tallyVendetta, tallyRecapEmpty, tallyDoorReq, maxDoorServes, tallyThreeTimes, proposalsPerVillageDay, classifyM4Flag, splitM4Flags };
+module.exports = { aggregateNightlyNews, summarizeBondProposed, tallyOffered, summarizeCounters, tallyRecap, mapTranscriptEntry, tallyReoffers, tallyDroppedThreads, tallyNarrDup, tallyConfessions, tallyVendetta, tallyRecapEmpty, tallyDoorReq, maxDoorServes, tallyThreeTimes, proposalsPerVillageDay, classifyM4Flag, splitM4Flags, stripM4RepeatPrefix, stripM4DiscourseOpener };
 
 // r195 (M11) RECAP-EMPTY TALLY: count M4 near-dup flags carrying the
 // empty-thread recap core "We were just talking. Nothing important."
@@ -524,9 +524,39 @@ const M4_INSTR_PATTERNS = [
   /watch shift/i, /snare/i, /keep company/i, /stay close/i,
   /fill/i, /haul/i, /carry/i, /unload/i, /run (to|for|the)/i,
   /providing basic care/i, /medical ability/i,
+  /finish the fight/i, // r260: fight-order instruction, surfaced by the circles-strip ("Finish the fight before helping." + recap-suffixed twin); instructional, not prose
   /wound/i, /still need (help|a hand)/i, /isn'?t going away/i,
   /that'?s still where we are/i, /we hadn'?t finished/i, /never did get back to that/i,
 ];
+// r260 (M4 metric review, Arm A) — the analyzer's M4 scan strips
+// repeat prefixes before comparing openings (see the analyzer). The
+// r256 panel showed the strip list missed four DISCOURSE openers:
+// conversation grammar, not content — so two lines sharing ONLY such
+// an opener were flagged as content repeats. stripM4RepeatPrefix is
+// the scan's prefix strip (shared here so the analyzer and the
+// M4-split proof test cannot drift); stripM4DiscourseOpener removes
+// a leading discourse opener from a scan core. Both apply to scan
+// cores ONLY, never to game text. Fitted on the r256 13
+// conversational flags; the belonging / murder-ambush /
+// plant-teaching / favor-re-ask / hunger-plea families still flag.
+function stripM4RepeatPrefix(t) {
+  let s = String(t || '').replace(/^["“]/, '').replace(/["”]$/, '');
+  let prev = '';
+  while (prev !== s) { prev = s; s = s.replace(/^(as i said|like i said|still the same thing|i'?ve told you three times now|we'?re going in circles( a bit)?|short version|quick version|the way i read it)\s*[—\-–]\s*/i, ''); }
+  return s;
+}
+function stripM4DiscourseOpener(t) {
+  let s = String(t || '');
+  let prev = '';
+  while (prev !== s) {
+    prev = s;
+    s = s.replace(/^(i don'?t know)\s+(?=\S)/i, '');
+    s = s.replace(/^you say nothing\.?\s*/i, '');
+    s = s.replace(/^you want to know about that\?\s*okay\.?\s*["”]?\s*/i, '');
+    s = s.replace(/^["“]\s*/, '');
+  }
+  return s;
+}
 function classifyM4Flag(a, b) {
   for (const re of M4_INSTR_PATTERNS) {
     if (re.test(String(a || '')) || re.test(String(b || ''))) return 'instructional';
