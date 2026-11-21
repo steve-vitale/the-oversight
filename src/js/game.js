@@ -21124,6 +21124,106 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     // earshot of the hardest beast and the fighter going in has no
     // gun, the carrier hands it over for the fight and takes it
     // back after.
+    // SHAPE2 (sim-shape2-a, findings #2628/#2599): draft-armed-holder-
+    // as-lead — at a wave-4+ fight launch, the launch rule goes and
+    // fetches a living armed holder as lead even when they are not
+    // the natural lead and not in earshot. Tier 1 is the gun
+    // (searcaster + >= 1 fusion cell); tier 2 is a bow with arrows
+    // (any ranged weapon with an ammo id + >= 1 of that ammo). The
+    // pick is roster order within a tier, gun first. Eligibility
+    // mirrors the lend's: living roster villager, never the scholar,
+    // health > 20, not sheltered, not post-flee resting, not sick,
+    // range >= 1. No earshot / location requirement — that is the
+    // shape's point. The natural lead is never replaced when they
+    // are already armed; raids and aid-routed fights are out of
+    // scope (defence at the door / the aided villager IS the lead).
+    // Pure decision: zero Math.random() draws, zero game-state
+    // writes. Returns { lead, drafted, holder, tier, missReason,
+    // candidates } — lead is the villager id to fight as lead.
+    _shape2DraftLead(vid, m, mdef, opts) {
+      var _out = { lead: vid, drafted: false, holder: null, tier: null, missReason: 'off', candidates: [] };
+      try {
+        var _on = false;
+        try { _on = (typeof process !== 'undefined' && process.env && process.env.SHAPE2 === '1'); } catch (e2) {}
+        if (!_on) return _out;
+        opts = opts || {};
+        if (opts.raid) { _out.missReason = 'raid'; return _out; }
+        if (opts.aid) { _out.missReason = 'aid'; return _out; }
+        var _mdef = null;
+        try { _mdef = (this.data.monsters || []).find(function (x) { return x.id === m.id; }) || null; } catch (e2) {}
+        var _wave = (_mdef && _mdef.wave) || (mdef && mdef.wave) || 0;
+        if (_wave < 4) { _out.missReason = 'not-wave4'; return _out; }
+        if (vid === this.villagerId) { _out.missReason = 'scholar-lead'; return _out; }
+        var _S = (typeof globalThis !== 'undefined' ? globalThis.Scattering : null) || {};
+        var _items = this.data ? this.data.items : [];
+        var _self = this;
+        var _kitOf = function (p) {
+          var _rw = null;
+          try { _rw = (_S.equipment && _S.equipment.rangedWeaponOf) ? _S.equipment.rangedWeaponOf(p, _items) : ((p.equipped || {}).ranged || null); } catch (e3) {}
+          if (!_rw) return { rwId: null, ammoId: null };
+          var _rwId = _rw.itemId || _rw.id || null;
+          var _def = null;
+          try { for (var _di = 0; _di < _items.length; _di++) { if (_items[_di] && _items[_di].id === _rwId) { _def = _items[_di]; break; } } } catch (e3) {}
+          return { rwId: _rwId, ammoId: (_def && _def.weapon && _def.weapon.ammo) || null };
+        };
+        var _ammoCount = function (p, ammoId) {
+          var _n = 0;
+          try { for (var _ci = 0; _ci < (p.items || []).length; _ci++) { var _ce = p.items[_ci]; if (_ce && ((_ce.itemId || _ce.id) === ammoId || _ce.material === ammoId)) _n += (_ce.units || 1); } } catch (e3) {}
+          return _n;
+        };
+        var _tierOf = function (p) {
+          if (!p) return null;
+          var _k = _kitOf(p);
+          if (!_k.rwId) return null;
+          if (_k.rwId === 'searcaster') return (_ammoCount(p, 'fusion_cell') >= 1) ? 'gun' : null;
+          if (_k.ammoId) return (_ammoCount(p, _k.ammoId) >= 1) ? 'bow' : null;
+          return null;
+        };
+        var _bPerson = null;
+        try { _bPerson = this.getPerson ? this.getPerson(vid) : null; } catch (e2) {}
+        var _leadTier = _tierOf(_bPerson);
+        if (_leadTier) { _out.missReason = 'lead-already-armed'; _out.tier = _leadTier; return _out; }
+        var _roster = ((this.state.village || {}).roster || []);
+        var _health = ((this.state.village || {}).health || {});
+        var _sick = ((this.state.village || {}).sick || {});
+        var _gunCands = [], _bowCands = [];
+        for (var _ri = 0; _ri < _roster.length; _ri++) {
+          var _hid = _roster[_ri];
+          if (!_hid || _hid === vid || _hid === this.villagerId) continue;
+          var _hp = null;
+          try { _hp = this.getPerson ? this.getPerson(_hid) : null; } catch (e2) {}
+          if (!_hp || _hp.dead) continue;
+          var _tier = _tierOf(_hp);
+          if (!_tier) continue;
+          var _fail = null;
+          var _hh = _health[_hid];
+          if (_hh !== undefined && _hh <= 20) _fail = 'low-health';
+          else { try { if (_self.isSheltered && _self.isSheltered(_hid)) _fail = 'sheltered'; } catch (e3) {} }
+          if (!_fail) { try { if (_self.isPostFleeResting && _self.isPostFleeResting(_hid)) _fail = 'resting'; } catch (e3) {} }
+          if (!_fail && _sick[_hid]) _fail = 'sick';
+          if (!_fail) { try { if (_self.npcMaxDist && _self.npcMaxDist(_hid) < 1) _fail = 'range0'; } catch (e3) {} }
+          var _row = { vid: _hid, tier: _tier, fail: _fail };
+          _out.candidates.push(_row);
+          if (_tier === 'gun') _gunCands.push(_row); else _bowCands.push(_row);
+        }
+        if (!_out.candidates.length) { _out.missReason = 'no-living-holder'; return _out; }
+        for (var _gi = 0; _gi < _gunCands.length; _gi++) {
+          if (!_gunCands[_gi].fail) {
+            _out.lead = _gunCands[_gi].vid; _out.drafted = true; _out.holder = _gunCands[_gi].vid; _out.tier = 'gun'; _out.missReason = null;
+            return _out;
+          }
+        }
+        for (var _bi = 0; _bi < _bowCands.length; _bi++) {
+          if (!_bowCands[_bi].fail) {
+            _out.lead = _bowCands[_bi].vid; _out.drafted = true; _out.holder = _bowCands[_bi].vid; _out.tier = 'bow'; _out.missReason = null;
+            return _out;
+          }
+        }
+        if (_gunCands.length) _out.missReason = 'gun:' + (_gunCands[0].fail || 'unknown');
+        else _out.missReason = 'bow:' + (_bowCands[0].fail || 'unknown');
+        return _out;
+      } catch (e) { _out.missReason = 'error'; return _out; }
+    },
     _lendSearcaster(vid, m, mdef, opts) {
       try {
         var _on = false;
@@ -21361,6 +21461,31 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     },
     resolveWildMonsterEncounter(vid, m, opts) {
       opts = opts || {};
+      // SHAPE2 (sim-shape2-a): draft-armed-holder-as-lead. The draft
+      // needs the monster def (wave) and the aid routing, both pure
+      // reads, so they come first. The post-flee check is judged on
+      // the NATURAL lead (a resting lead means no encounter at all —
+      // no draft conjures a fight); then the draft swaps vid, and
+      // every read below follows the drafted lead. With SHAPE2 off
+      // the draft is a no-op and the head reads the same values as
+      // before (all pure reads — the reorder changes no behavior).
+      // HELP FIGHTS BLOW-BY-BLOW (audit 2026-10-14): same routing as
+      // resolvePatrol — a lingering raider during an aid crisis is fought
+      // through aidFight, allies at the door in the fight from round one.
+      let mdef = {};
+      try { mdef = (this.data.monsters || []).find(x => x.id === m.id) || {}; } catch (e) {}
+      let wViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
+      // POST-FLEE REST: a critically wounded fleer hides for the rest of
+      // the day — no new fight is rolled, nothing relocates, no HP
+      // restored. Raid defense and lingering-raider aid fights are never
+      // skipped: the guard exempts opts.raid and the aid path.
+      if (!opts.raid && !wViaAid && this.isPostFleeResting && this.isPostFleeResting(vid)) return null;
+      try {
+        if (this._shape2DraftLead) {
+          var _sd = this._shape2DraftLead(vid, m, mdef, { raid: !!opts.raid, aid: !!wViaAid });
+          if (_sd && _sd.drafted && _sd.lead) vid = _sd.lead;
+        }
+      } catch (e) {}
       // POST-FLEE REST: entry HP, so a vFlee below 25% of max can be
       // recognized after the fight's wounds land (max = max(100, entry),
       // exactly as the deathcensus recorder reads villager HP).
@@ -21376,8 +21501,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         s.awayNews = s.awayNews || [];
         if (s.awayNews.length < 8) s.awayNews.push(msg);
       };
-      let mdef = {};
-      try { mdef = (this.data.monsters || []).find(x => x.id === m.id) || {}; } catch (e) {}
+      // (mdef is read above, before the SHAPE2 draft, so the draft sees the wave.)
       // PARTY-UP (Steve 2026-10-09): same outdoor-crew rule as patrols — a
       // villager jumped in the wild can call to whoever's out there with them.
       // PARTY WIRING (Steve 2026-10-12): trust-ordered — friends answer first.
@@ -21415,15 +21539,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           }
         }
       } catch (e) {}
-      // HELP FIGHTS BLOW-BY-BLOW (audit 2026-10-14): same routing as
-      // resolvePatrol — a lingering raider during an aid crisis is fought
-      // through aidFight, allies at the door in the fight from round one.
-      let wViaAid = !!(m.lingering && this.aidCrisis && this.aidCrisis() && this.aidFight);
-      // POST-FLEE REST: a critically wounded fleer hides for the rest of
-      // the day — no new fight is rolled, nothing relocates, no HP
-      // restored. Raid defense and lingering-raider aid fights are never
-      // skipped: the guard exempts opts.raid and the aid path.
-      if (!opts.raid && !wViaAid && this.isPostFleeResting && this.isPostFleeResting(vid)) return null;
+      // (Aid routing + post-flee rest are judged above, before the SHAPE2 draft.)
       // WILDAVOID (sim-wildavoid-a, finding #2506): the expedition
       // gate's outmatched rule, on the wild routers — an outmatched
       // party gives the beast room instead of engaging. The beast stays
