@@ -56,7 +56,7 @@ const contract = require('./balance-metrics.json');
 
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : null)
   || (argvVal('--seeds', null) ? argvVal('--seeds', '').split(',').map(function (s) { return parseInt(s.trim(), 10); }) : null)
-  || [107151, 107152, 107153, 107154, 107155, 107156, 107157, 107158];
+  || [107171, 107172, 107173, 107174, 107175, 107176, 107177, 107178];
 const POLICIES = ['m2step2-a']; // pseudo-policy: case identity is the seed (paired design)
 const DAYS = 150;
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
