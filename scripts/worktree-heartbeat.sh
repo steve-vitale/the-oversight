@@ -15,7 +15,17 @@ LOCK="$WTBASE/REGISTRY.lock"
 slug="${1:?usage: worktree-heartbeat.sh <slug>}"
 
 exec 200>"$LOCK"
-flock -x 200
+# FLOCK TIMEOUT (journey-landing r151 2026-11-21): a bare `flock -x` blocks
+# indefinitely on a held registry lock — r149's beat hung ~19 min silently
+# behind live sibling registrations. Bound the wait: fail loud after
+# FLOCK_TIMEOUT seconds (default 120; HEARTBEAT_FLOCK_TIMEOUT overrides,
+# used by the proof test) so the caller retries instead of hanging. The
+# 15-minute staleness threshold leaves room for several retries.
+FLOCK_TIMEOUT="${HEARTBEAT_FLOCK_TIMEOUT:-120}"
+if ! flock -w "$FLOCK_TIMEOUT" -x 200; then
+  echo "FAIL: registry lock held > ${FLOCK_TIMEOUT}s — heartbeat skipped, retry later" >&2
+  exit 1
+fi
 python3 - "$slug" "$REG" <<'EOF'
 import json, os, sys, datetime
 slug, reg = sys.argv[1:3]
