@@ -604,7 +604,12 @@ function poolReplica(Game, vid) {
   } catch (e) { return null; }
 }
 
-const SAY_RE = /veteran|blooded|scarred|\belder\b|pack-leader|put down|killing blow|veteran kill|remember the name|MIRROR DRAFT|PRODUCERS|FINAL DRAFT|blood your fighters/i;
+const SAY_RE = /veteran|blooded|scarred|\belder\b|pack-leader|put down|killing blow|veteran kill|remember the name|new trail|MIRROR DRAFT|PRODUCERS|FINAL DRAFT|blood your fighters/i;
+// SAY_RE gained "new trail" with sim-reseedbeat-b (finding #2632):
+// the re-seed launch beat ("...the fire found a new trail.") is the
+// line this driver must record, and it carries no older token. The
+// token matches nothing else the game says — only the launch beat
+// contains it — so no other transcript row is newly captured.
 
 // LAUNCHPARTY: monotonic row sequence (lets the analyzer join a launch
 // depart row to the commit that authorized it) + commit-kind names.

@@ -14,6 +14,7 @@
 //   - winPlanNoteFight(vid, allyVids)
 //   - winPlanNoteSighting(mid)
 //   - winPlanCommitDeadTarget(vid)
+//   - winPlanReseedLaunchBeat(vid)
 //   - winPlanBondsTick(hx, hy)
 //   - winPlanMusterTick(hx, hy)
 // rules:
@@ -77,8 +78,14 @@
 //     species, their own fight memories, then village sightings —
 //     or EXPIRES (dissolves with a fireside beat) when no live rumor
 //     exists. An expired plan re-attempts the re-seed on every later
-//     commit and holds meanwhile; it never launches targetless. A
-//     sighting after the kill day re-opens the type. Type-level, not
+//     commit and holds meanwhile; it never launches targetless. When
+//     the expired plan DOES re-seed, the fireside beat is spoken at
+//     the LAUNCH, not the commit (sim-reseedbeat-b, finding #2632):
+//     the commit stamps plan.reseedLaunchBeat and
+//     winPlanReseedLaunchBeat speaks it once the expedition has
+//     started — the commit and the departure can split across days,
+//     and the player must hear the hunter go out. A sighting after
+//     the kill day re-opens the type. Type-level, not
 //     instance-level: the plan store holds a target type, never a
 //     monster instance identity. Env-gated default-OFF
 //     (PLANRESEED=1). It never touches winPlanNoteKill,
@@ -446,17 +453,22 @@
   }
 
   // reseedBeat(self, vid, oldType, newType): the FIRESIDE BEAT for a
-  // re-seed (sim-reseed-b, finding #2626) — one deterministic line
-  // when a plan's target is re-seeded at commit (Steve's
-  // no-silent-actions law: the retarget must be heard, not silent).
-  // Names the holder (disp convention) and both types (monsterNoun
-  // — the knowledge-gated name, never the raw id). Deterministic
-  // wording, no Math.random. The dead-target branch contains "put
-  // down" contiguously so the recorder's SAY_RE filter keeps it in
-  // the corpus transcript; the expired-plan branch (oldType null)
-  // has no dead target to name and reads as a found trail instead.
-  // Total by construction (the catch swallows), so call sites need
-  // no try/catch — only a typeof guard on say is needed inside.
+  // DEAD-TARGET re-seed (sim-reseed-b, finding #2626) — one
+  // deterministic line when a plan's target is re-seeded at commit
+  // (Steve's no-silent-actions law: the retarget must be heard, not
+  // silent). Names the holder (disp convention) and both types
+  // (monsterNoun — the knowledge-gated name, never the raw id).
+  // Deterministic wording, no Math.random. Contains "put down"
+  // contiguously so the recorder's SAY_RE filter keeps it in the
+  // corpus transcript. The expired-plan re-seed used to speak here
+  // too (oldType null) — sim-reseedbeat-b (finding #2632) moved it
+  // to LAUNCH: the commit and the departure can split across days,
+  // and the player must hear the hunter actually go out, not the
+  // intent to. The launch beat is reseedLaunchBeat, stamped as
+  // plan.reseedLaunchBeat at commit and spoken by
+  // winPlanReseedLaunchBeat at the launch. Total by construction
+  // (the catch swallows), so call sites need no try/catch — only a
+  // typeof guard on say is needed inside.
   function reseedBeat(self, vid, oldType, newType) {
     try {
       if (!self || typeof self.say !== 'function') return;
@@ -471,21 +483,12 @@
       var ophrase = oname, nphrase = nname;
       try { ophrase = (typeof self.articlePhrase === 'function') ? self.articlePhrase(oname, false) : oname; } catch (e) {}
       try { nphrase = (typeof self.articlePhrase === 'function') ? self.articlePhrase(nname, false) : nname; } catch (e) {}
-      var line = null;
-      if (!oldType) {
-        // Re-seed of an already-expired (targetless) plan: there is
-        // no dead target to name — the hunt simply finds a new trail.
-        // The new kind is named ONCE (it was named twice in the first
-        // draft — "was seen ... turns to ..." — and read as a repeat).
-        line = cname + ' has no trail — but the fire remembers ' + nphrase + ' was seen, and the hunt turns that way.';
-      } else {
-        // The new kind is named once, mid-sentence (lowercase 'the'
-        // is correct there); the old kind's "that kind" has its
-        // antecedent in the same clause. The first draft put the new
-        // kind at a sentence start lowercase ("...put down. the ...")
-        // and named it twice — both fixed here.
-        line = cname + ' was ready to hunt ' + ophrase + ' — but the fire says that kind is already put down. The hunt turns to ' + nphrase + ' instead.';
-      }
+      // The new kind is named once, mid-sentence (lowercase 'the'
+      // is correct there); the old kind's "that kind" has its
+      // antecedent in the same clause. The first draft put the new
+      // kind at a sentence start lowercase ("...put down. the ...")
+      // and named it twice — both fixed here.
+      var line = cname + ' was ready to hunt ' + ophrase + ' — but the fire says that kind is already put down. The hunt turns to ' + nphrase + ' instead.';
       if (self.state && self.state.systemArrived) self.say('📺 SYSTEM: "' + line + '"');
       else self.say(line);
     } catch (e) {}
@@ -516,6 +519,42 @@
       // the village knows it, "the sky"), so the clause dangled.
       // It now ends at the called-off hunt.
       var line = cname + ' was ready to hunt ' + ophrase + ' — but the fire says that kind is already put down, and no one has seen another trail. The hunt is called off.';
+      if (self.state && self.state.systemArrived) self.say('📺 SYSTEM: "' + line + '"');
+      else self.say(line);
+    } catch (e) {}
+  }
+
+  // reseedLaunchBeat(self, vid, newType): the FIRESIDE BEAT for an
+  // EXPIRED-PLAN re-seed LAUNCH (sim-reseedbeat-b, finding #2632).
+  // One deterministic line when a holder whose plan expired goes
+  // back out on the re-seeded target — the expiry speaks ("the hunt
+  // is called off") and the commit-time re-seed used to speak, but
+  // the launch itself was silent: the hunter went back out and the
+  // player was never told (Amina d31, Fernando d46 — the commit-time
+  // line also carried no SAY_RE token, so the corpus showed nothing
+  // at all on the launch day). Same voice as the expiry beat: holder
+  // + new target named as the village knows them, deterministic
+  // wording, never rolled.
+  // "new trail" is contiguous so the recorder's SAY_RE filter keeps
+  // it in the corpus transcript (the reseedexpiry driver's SAY_RE
+  // gained the token with this beat). Fires ONLY from
+  // winPlanReseedLaunchBeat, which stamps the target at commit and
+  // speaks it at the launch — never at commit, never at expiry,
+  // never for a non-expired (dead-target) re-seed, at most once per
+  // re-seed launch (the stamp is cleared before speaking). Total by
+  // construction.
+  function reseedLaunchBeat(self, vid, newType) {
+    try {
+      if (!self || typeof self.say !== 'function') return;
+      var cname = null;
+      try { cname = (typeof self.disp === 'function' ? self.disp(vid) : (self.displayName ? self.displayName(vid) : null)); } catch (e) {}
+      if (!cname) cname = 'Someone';
+      var nname = null;
+      try { nname = self.monsterNoun ? self.monsterNoun(newType) : null; } catch (e) {}
+      if (!nname) nname = newType || 'something';
+      var nphrase = nname;
+      try { nphrase = (typeof self.articlePhrase === 'function') ? self.articlePhrase(nname, false) : nname; } catch (e) {}
+      var line = cname + ' is hunting ' + nphrase + ' now — the fire found a new trail.';
       if (self.state && self.state.systemArrived) self.say('📺 SYSTEM: "' + line + '"');
       else self.say(line);
     } catch (e) {}
@@ -834,6 +873,11 @@
         if (plan.target) {
           if (!planTargetDeadByType(this, plan.target)) return null;
           var oldType = plan.target;
+          // A pending launch beat belongs to a re-seed that never
+          // launched; this target died first, so the beat is moot —
+          // clear it, or it would speak for a target the hunter
+          // never goes out after (sim-reseedbeat-b).
+          plan.reseedLaunchBeat = null;
           var fresh = planReseedPick(this, vid, plan);
           if (fresh) {
             plan.target = fresh.id;
@@ -865,12 +909,47 @@
           plan.node = null;
           plan.party = [];
           plan.reseedExpiryDay = null;
+          // The beat is NOT spoken here. The commit and the launch
+          // can split across days (no companion, party wait), and
+          // the player must hear the hunter actually go out — so
+          // the re-seed is stamped and the beat fires at the launch
+          // via winPlanReseedLaunchBeat (sim-reseedbeat-b, finding
+          // #2632). The stamp is the new target id; the launch hook
+          // speaks only while the plan still carries that target.
+          plan.reseedLaunchBeat = fresh2.id;
           bump(this, 'planReseeds');
-          reseedBeat(this, vid, null, fresh2.id);
           return 'reseeded';
         }
         return 'held';
       } catch (e) { return null; }
+    },
+    // RE-SEED LAUNCH BEAT (sim-reseedbeat-b, finding #2632): speaks
+    // the pending expired-plan re-seed beat at the launch, and only
+    // at the launch. Called by both departure paths (winPlanDepart's
+    // launchParty and vbrainExecuteDepart's party_launch branch)
+    // AFTER the expedition has actually started — never on a hold,
+    // never on a failed launch. The stamp is cleared BEFORE speaking
+    // so a re-entrant say can never double-fire, and the beat fires
+    // only while the plan still carries the stamped target: if the
+    // target changed or died since the commit (the commit check
+    // clears the stamp on the dead-target path too), the launch is
+    // an ordinary one and stays silent. A plan with no stamp — every
+    // non-expired launch, every dead-target re-seed — returns false
+    // unheard. The plan is read WITHOUT creating it, like the commit
+    // check. Total by construction (the catch returns false).
+    winPlanReseedLaunchBeat(vid) {
+      try {
+        if (!planreseedOn()) return false;
+        var v = this.state && this.state.village;
+        if (!v || !v.winPlan || !v.winPlan[vid]) return false;
+        var plan = v.winPlan[vid];
+        if (!plan.reseedLaunchBeat) return false;
+        if (plan.target !== plan.reseedLaunchBeat) { plan.reseedLaunchBeat = null; return false; }
+        var target = plan.reseedLaunchBeat;
+        plan.reseedLaunchBeat = null;
+        reseedLaunchBeat(this, vid, target);
+        return true;
+      } catch (e) { return false; }
     },
     // Haven evaluation: stage transitions from what the villager can
     // judge at home — their own gear, a beat broadcast while here, a
@@ -1094,6 +1173,14 @@
             }
           } catch (e) {}
           bump(self, 'partyDepartures');
+          // RE-SEED LAUNCH BEAT (sim-reseedbeat-b, finding #2632):
+          // the holder is out the door on the re-seeded target — say
+          // so now, and only now. A no-op on every launch without a
+          // pending expired-plan stamp (the method reads the plan
+          // without creating it). Guarded by typeof: test ctxs and
+          // older callers that never received the method launch
+          // exactly as before.
+          try { if (typeof self.winPlanReseedLaunchBeat === 'function') self.winPlanReseedLaunchBeat(vid); } catch (e) {}
           return true;
         };
         if (plan.stage === 'gear') {

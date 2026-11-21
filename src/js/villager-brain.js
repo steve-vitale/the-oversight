@@ -1311,6 +1311,12 @@
             try { var _pq = (typeof this.winPlanStats === 'function') ? this.winPlanStats() : null; if (_pq) _pq.partyQuads = (_pq.partyQuads || 0) + 1; } catch (e) {}
           }
         } catch (e) {}
+        // RE-SEED LAUNCH BEAT (sim-reseedbeat-b, finding #2632): the
+        // holder is out the door on the re-seeded target — say so
+        // now, and only now. Mirrors winPlanDepart's launchParty
+        // hook; this is the departure path that fires in sims. A
+        // no-op on every launch without a pending expired-plan stamp.
+        try { if (typeof this.winPlanReseedLaunchBeat === 'function') this.winPlanReseedLaunchBeat(vid); } catch (e) {}
         return 'launch';
       }
       if (typeof this.startExpedition === 'function') {

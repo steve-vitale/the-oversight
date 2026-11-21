@@ -149,7 +149,13 @@ function fidelityCase(name, opts, expect) {
       f.says.length === 1 && /put down/.test(f.says[0] || '');
   } else if (expect.outcome === 'reseeded') {
     realOk = real === 'reseeded' && f.plan.target === expect.firstPick &&
-      (st.planReseeds || 0) === 1 && f.says.length === 1;
+      (st.planReseeds || 0) === 1 && f.says.length === (expect.commitSays == null ? 1 : expect.commitSays) &&
+      // sim-reseedbeat-b: an EXPIRED-plan re-seed stamps the launch
+      // beat instead of speaking at commit (commitSays 0), and a
+      // DEAD-TARGET re-seed stamps nothing (no stamp on any other
+      // outcome — the launch beat never fires for a non-expired
+      // re-seed). The stamp is the new target id.
+      (expect.expiredReseed ? f.plan.reseedLaunchBeat === expect.firstPick : (f.plan.reseedLaunchBeat == null));
   } else if (expect.outcome === 'held') {
     realOk = real === 'held' && f.plan.target === null && (st.planExpiries || 0) === 0 &&
       f.says.length === 0;
@@ -213,9 +219,12 @@ fidelityCase('A10 expired plan, no rumor: HELD silent',
   { fought: [], expired: true },
   { poolN: 0, firstPick: null, deadTarget: false, outcome: 'held' });
 // A10b: expired plan re-attempt, rumor arrived -> RE-SEEDED.
+// sim-reseedbeat-b (finding #2632): the commit no longer speaks
+// for an expired-plan re-seed (commitSays 0) — it stamps
+// plan.reseedLaunchBeat, and the beat fires at the launch.
 fidelityCase('A10b expired plan, rumor arrived: reseeded to reunion',
   { fought: ['reunion'], expired: true },
-  { poolN: 1, firstPick: 'reunion', deadTarget: false, outcome: 'reseeded' });
+  { poolN: 1, firstPick: 'reunion', deadTarget: false, outcome: 'reseeded', commitSays: 0, expiredReseed: true });
 // A11: never-targeted plan (no stamp) -> untouched, commit null.
 fidelityCase('A11 never-targeted plan: commit null, untouched',
   { fought: ['reunion'], target: null },

@@ -233,6 +233,11 @@ function reseedCtx(o) {
   ctx.winPlanOf = function (vid) { return Game.winPlanOf.call(ctx, vid); };
   ctx.winPlanCommitDeadTarget = function (vid) { return Game.winPlanCommitDeadTarget.call(ctx, vid); };
   ctx.winPlanNoteSighting = function (mid) { return Game.winPlanNoteSighting.call(ctx, mid); };
+  // sim-reseedbeat-b: the launch-beat hook must be reachable from a
+  // ctx that drives a real departure (the §C2 launch below).
+  if (typeof Game.winPlanReseedLaunchBeat === 'function') {
+    ctx.winPlanReseedLaunchBeat = function (vid) { return Game.winPlanReseedLaunchBeat.call(ctx, vid); };
+  }
   if (opts.seen) ctx.state.villageLastSeenDay = opts.seen;
   return { ctx: ctx, plan: plan, exped: exped, people: people, says: says };
 }
@@ -388,10 +393,18 @@ function armEnv() {
   const r2 = Game.winPlanCommitDeadTarget.call(f.ctx, 'v1');
   check("§C2 expired + new rumor: commit returns 'reseeded'",
     r2 === 'reseeded', 'r2=' + r2);
-  check('§C2 expired + new rumor: plan retargeted to eater, stamp cleared, reseed beat once',
+  check('§C2 expired + new rumor: plan retargeted to eater, stamp cleared, commit silent, launch beat stamped',
     f.plan.target === 'eater' && f.plan.reseedExpiryDay == null &&
-    statsOf(f.ctx).planReseeds === 1 && f.says.length === 1 && f.says[0].indexOf('eater') !== -1,
+    statsOf(f.ctx).planReseeds === 1 && f.says.length === 0 && f.plan.reseedLaunchBeat === 'eater',
     JSON.stringify({ target: f.plan.target, stamp: f.plan.reseedExpiryDay, stats: statsOf(f.ctx), says: f.says }));
+  // sim-reseedbeat-b (finding #2632): the beat moved from the commit
+  // to the launch — drive the departure and hear it once there.
+  const r2b = Game.winPlanDepart.call(f.ctx, 'v1', 5, 5, false);
+  check('§C2 expired + new rumor: the launch speaks the beat once (launch, one line, stamp cleared)',
+    r2b === 'launch' && f.says.length === 1 &&
+    /is hunting .*eater now — the fire found a new trail/.test(f.says[0]) &&
+    f.plan.reseedLaunchBeat == null,
+    JSON.stringify({ res: r2b, says: f.says, stamp: f.plan.reseedLaunchBeat }));
   // C3: no plan -> null, creates no plan entry (the check must never
   // ignite the plan system).
   const g = reseedCtx({ fought: ['reunion'] });
