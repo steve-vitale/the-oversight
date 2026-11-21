@@ -281,7 +281,7 @@ prereg rule also forbids rolling a forced-chain panel forward).
 
 | Leg question | Verdict |
 |---|---|
-| M12 escalator cap (fix) | **FIXED + PROVEN** — RED→GREEN, neighbors green; panel-confirm [PENDING] |
+| M12 escalator cap (fix) | **FIXED + PROVEN** — RED→GREEN, neighbors green; panel-confirm PROVEN (seed 45787: 14 "three times now" total, max 1 per sitting, 0 sittings with 2+, 24 circles exits; worst sitting Ines Duarte D-talk-request d26 with 1) |
 | STAGE (new) | **PASS** — first staged single-fresh witness sitting ever |
 | REL-WIT (binding) | **INSUFFICIENT-DATA** — 1 draw < 3 floor; the pick, not the sitting, is now the wall |
 | REL-BOND (binding) | **PASS** (3/3 held) |
@@ -296,6 +296,52 @@ prereg rule also forbids rolling a forced-chain panel forward).
 | M4 strip (Arm 3) | **DONE** — 49/49, corpus pins exact |
 | **Succession r262** | **reachable: yes; fun: yes (the staged sitting reads true; the mantle passes cleanly); winnable: not yet — the witness variant still waits on a second and third draw** |
 
+## Gate (adoption, rebased tip d32692fce)
+
+- Run's own gate: the run note said the gate "did not complete", but the
+  gate log in the worktree shows it DID complete on the branch tip
+  64b8dd9f5: **338 passed, 6 failed in 768s** (staleness pair, phone-frame
+  stale receipt, two 120s deed-attainment timeouts, deathcleanup EPERM —
+  the deathcleanup test re-ran solo PASS, flap-caused, not attributable).
+- Adoption gate, from scratch on the rebased tip in dedicated detached
+  worktree `r262-gate` (`node scripts/check.js --quick`):
+  **333 passed, 11 failed in 1540s.** Log:
+  goal `hidden_files/evidence/2026-11-21/journey-succession-r262-gate.log`.
+  First adoption-gate attempt (started 05:08Z) was killed by a VM
+  replacement ~05:27Z mid-run (uptime 1 min on the new boot); re-launched
+  05:29Z on the same rebased tip. The gate overlapped Lane A's landing
+  r151 gate (started 05:43Z) from 05:43 onward — that overlap is why this
+  gate has 5 more failures than the run's own 338/6.
+- The 11 failures, adjudicated — **0 attributable**:
+  - `test-measurement-proof-update.js`, `test-measurement-workflow.js`
+    — measurement-proof staleness pair, standing set (proof re-sign
+    round 22 still owed).
+  - `test-living-garden-deed-attainment.js`, `test-one-person-army-deed-attainment.js`
+    — 120s timeouts under load, standing set.
+  - `test-phone-frame-proof.js` — stale receipt, standing set.
+  - `test-measurement-cache-flags.js` — LOAD FLAKE, proven: the test
+    spawns `balance-panel.js` twice with a 30s spawnSync timeout; timed
+    directly on this tip, one panel run takes 28.7s and the other 36.3s
+    wall (only ~5.4s user CPU — the rest is waiting on a loaded
+    machine), both exit 0 given time. Three runs gave three different
+    scores (3/4, 0/4, 1/3) as load varied. Not a regression.
+  - `test-trust-observer-neutrality.js` — solo PASS 6/6 (2m49s wall,
+    31s user — CPU-starved past the 120s gate cap).
+  - `test-synergy-stall.js` — solo PASS.
+  - `test-capable-bot-20261014.js` — solo PASS 42/42 (3m20s wall,
+    33s user — CPU-starved past the 120s gate cap).
+  - `test-table-endings-20261014.js` — solo PASS 61/61.
+  - `test-succession-grief-20261017.js` — solo PASS 22/22 (leg-relevant
+    grief flow; the gate timeout was load, not a grief regression).
+- Gate verdict: **GREEN-equivalent (333/11, 0 attributable).** The
+  deathcleanup test that failed on the run's attempt PASSED here.
+- Observed, not this lane: Lane A's landing r151 gate (started 05:43Z)
+  died without a summary — its process is gone and its log ends mid-dots
+  with no pass/fail line. Its own adoption owns that re-run.
+
 ## Closeout
 
-- [TO BE COMPLETED: confirm result, gate, commit, merge, rotation, lock.]
+- Gate filled by the adoption (amendment commit below); merge, rotation
+  7→4, and lock deletion follow in the adoption's closeout, recorded in
+  the daily memory note and the tracking entry — not in this file, which
+  is frozen at merge.
