@@ -1,0 +1,120 @@
+{
+  "arm": "vanishcause-a",
+  "dir": "evidence/2026-11-21/perseed-vanishcause-a-smoke",
+  "rows": [
+    {
+      "seed": 107058,
+      "row": {
+        "day": 77,
+        "kind": "new-holder",
+        "from": null,
+        "to": "catalina_reyes",
+        "attribution": "grant-contest-prize"
+      },
+      "cause": "grant-contest-prize",
+      "mechanism": "_cxItemPrize -> alienLootGrant (GUNRATE redirect) to catalina_reyes",
+      "evidence": "prev=[(no guns anywhere)] cur=[equipped:catalina_reyesx1]"
+    },
+    {
+      "seed": 107058,
+      "row": {
+        "day": 93,
+        "kind": "vanish",
+        "from": "catalina_reyes",
+        "to": null,
+        "attribution": "unexplained"
+      },
+      "cause": "pack-transfer",
+      "mechanism": "playerDeath succession (ledger.js:658) — catalina_reyes became the scholar on day 93 (old scholar gen_y4t6xan died: the wild); the gun stayed equipped, now scholar-equipped — the old holder map cannot see an equipped scholar gun",
+      "evidence": "prev=[equipped:catalina_reyesx1] cur=[scholar-equipped:__scholar__:rangedx1]"
+    },
+    {
+      "seed": 107058,
+      "row": {
+        "day": 95,
+        "kind": "new-holder",
+        "from": null,
+        "to": "__scholar__",
+        "attribution": "unexplained"
+      },
+      "cause": "pack-transfer",
+      "mechanism": "Game.equip displaced the searcaster: the policy equipped fire_hardened_spear in the ranged slot and the gun went back to the pack (dry — gearUp only displaces the best weapon when it has no ammo)",
+      "evidence": "prev=[scholar-equipped:__scholar__:rangedx1] cur=[scholar-pack:__scholar__x1]"
+    },
+    {
+      "seed": 107058,
+      "row": {
+        "day": 108,
+        "kind": "vanish",
+        "from": "__scholar__",
+        "to": null,
+        "attribution": "unexplained"
+      },
+      "cause": "died-holding",
+      "mechanism": "playerDeath (ledger.js:658) — scholar died holding (pack); inventory + equipped gear -> corpse death pack corpse_108_2ld9og, successor naran_tumen; nothing auto-transfers",
+      "evidence": "prev=[scholar-pack:__scholar__x1] cur=[corpse:corpse_108_2ld9ogx1]"
+    }
+  ],
+  "perSeed": [
+    {
+      "seed": 107058,
+      "days": 151,
+      "end": "survived",
+      "maxWave": 4,
+      "standing": 199,
+      "scaleRank": "regional",
+      "won": false,
+      "transfers": 4,
+      "explained": 4,
+      "gunLocRows": 148,
+      "grants": 1,
+      "lends": 0
+    }
+  ],
+  "wall": {
+    "seeds": 1,
+    "wins": 0,
+    "national": 0,
+    "table": null,
+    "wave5": 0,
+    "wave4": 1,
+    "medianSurvival": 151,
+    "communityLost": 0
+  },
+  "instrumentErrors": 0,
+  "consistencyMatch": true,
+  "consistencyNotes": [],
+  "rowsWithoutLocation": 0,
+  "judge": {
+    "bars": {
+      "attributionRate": {
+        "value": 1,
+        "threshold": 0.8,
+        "pass": true
+      },
+      "vanishCauseNamed": {
+        "value": 2,
+        "threshold": 1,
+        "pass": true
+      },
+      "instrumentValidity": {
+        "value": {
+          "proofTest": "see test run",
+          "selftest": true,
+          "instrumentErrors": 0,
+          "rowsWithoutLocation": 0
+        },
+        "pass": true
+      },
+      "guardrailNeutrality": {
+        "value": "see --compare output (leg1 vs leg2)",
+        "pass": null
+      }
+    },
+    "verdict": "DIAG-GO",
+    "attributionRate": 1,
+    "explained": 4,
+    "total": 4,
+    "vanishNamed": 2
+  }
+}

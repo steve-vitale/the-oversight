@@ -1,0 +1,270 @@
+{
+  "arm": "vanishcause-a",
+  "dir": "evidence/2026-11-21/perseed-vanishcause-a-leg1",
+  "rows": [
+    {
+      "seed": 107222,
+      "row": {
+        "day": 73,
+        "kind": "new-holder",
+        "from": null,
+        "to": "gen_gmy38x3",
+        "attribution": "unexplained"
+      },
+      "cause": "pack-transfer",
+      "mechanism": "autoEquip seated a carried gun (villagerGearDay, villager-build.js:906) — autoEquip day 72: crude_bow -> searcaster (villagerGearDay@js/villager-build.js:906:16); granted day 72 via contest-prize",
+      "evidence": "prev=[carried:gen_gmy38x3x1] cur=[equipped:gen_gmy38x3x1]"
+    },
+    {
+      "seed": 107222,
+      "row": {
+        "day": 81,
+        "kind": "vanish",
+        "from": "gen_gmy38x3",
+        "to": null,
+        "attribution": "unexplained"
+      },
+      "cause": "died-holding",
+      "mechanism": "registerDeath (corpse corpse_81_mznm7d, cause the wild) — gun on the corpse",
+      "evidence": "prev=[equipped:gen_gmy38x3x1] cur=[scholar-equipped:__scholar__:rangedx1]"
+    },
+    {
+      "seed": 107224,
+      "row": {
+        "day": 111,
+        "kind": "new-holder",
+        "from": null,
+        "to": "gen_q9x1lf3",
+        "attribution": "unexplained"
+      },
+      "cause": "pack-transfer",
+      "mechanism": "autoEquip seated a carried gun (villagerGearDay, villager-build.js:906) — autoEquip day 110: bow -> searcaster (villagerGearDay@js/villager-build.js:906:16); granted day 110 via contest-prize",
+      "evidence": "prev=[carried:gen_q9x1lf3x1] cur=[equipped:gen_q9x1lf3x1]"
+    },
+    {
+      "seed": 107224,
+      "row": {
+        "day": 126,
+        "kind": "vanish",
+        "from": "gen_q9x1lf3",
+        "to": null,
+        "attribution": "unexplained"
+      },
+      "cause": "pack-transfer",
+      "mechanism": "playerDeath succession (ledger.js:658) — gen_q9x1lf3 became the scholar on day 126 (old scholar gen_rc0dd1q died: the wild); the gun stayed equipped, now scholar-equipped — the old holder map cannot see an equipped scholar gun",
+      "evidence": "prev=[equipped:gen_q9x1lf3x1] cur=[scholar-equipped:__scholar__:rangedx1]"
+    },
+    {
+      "seed": 107224,
+      "row": {
+        "day": 143,
+        "kind": "new-holder",
+        "from": null,
+        "to": "__scholar__",
+        "attribution": "corpse-take"
+      },
+      "cause": "corpse-take",
+      "mechanism": "_corpseTakeStack (corpse corpse_142_lgiqih, of gen_q9x1lf3)",
+      "evidence": "prev=[corpse:corpse_142_lgiqihx1] cur=[scholar-pack:__scholar__x1]"
+    },
+    {
+      "seed": 107226,
+      "row": {
+        "day": 59,
+        "kind": "new-holder",
+        "from": null,
+        "to": "meera_reddy",
+        "attribution": "unexplained"
+      },
+      "cause": "pack-transfer",
+      "mechanism": "autoEquip seated a carried gun (villagerGearDay, villager-build.js:906) — autoEquip day 58: (empty) -> searcaster (villagerGearDay@js/villager-build.js:906:16); granted day 58 via contest-prize",
+      "evidence": "prev=[carried:meera_reddyx1] cur=[equipped:meera_reddyx1]"
+    },
+    {
+      "seed": 107227,
+      "row": {
+        "day": 71,
+        "kind": "new-holder",
+        "from": null,
+        "to": "app_mgpsphsc177",
+        "attribution": "unexplained"
+      },
+      "cause": "pack-transfer",
+      "mechanism": "autoEquip seated a carried gun (villagerGearDay, villager-build.js:906) — autoEquip day 70: (empty) -> searcaster (villagerGearDay@js/villager-build.js:906:16); granted day 70 via contest-prize",
+      "evidence": "prev=[carried:app_mgpsphsc177x1] cur=[equipped:app_mgpsphsc177x1]"
+    },
+    {
+      "seed": 107227,
+      "row": {
+        "day": 76,
+        "kind": "holder-died",
+        "from": "app_mgpsphsc177",
+        "to": null,
+        "attribution": "holder-died"
+      },
+      "cause": "died-holding",
+      "mechanism": "registerDeath (corpse corpse_76_jf610c, cause the wild) [personFlags dead]",
+      "evidence": "prev=[equipped:app_mgpsphsc177x1] cur=[corpse:corpse_76_jf610cx1]"
+    }
+  ],
+  "perSeed": [
+    {
+      "seed": 107221,
+      "days": 115,
+      "end": "village-lost",
+      "maxWave": 4,
+      "standing": 199,
+      "scaleRank": "regional",
+      "won": false,
+      "transfers": 0,
+      "explained": 0,
+      "gunLocRows": 113,
+      "grants": 0,
+      "lends": 0
+    },
+    {
+      "seed": 107222,
+      "days": 110,
+      "end": "village-lost",
+      "maxWave": 4,
+      "standing": 199,
+      "scaleRank": "regional",
+      "won": false,
+      "transfers": 2,
+      "explained": 2,
+      "gunLocRows": 108,
+      "grants": 2,
+      "lends": 0
+    },
+    {
+      "seed": 107223,
+      "days": 150,
+      "end": "survived",
+      "maxWave": 4,
+      "standing": 199,
+      "scaleRank": "regional",
+      "won": false,
+      "transfers": 0,
+      "explained": 0,
+      "gunLocRows": 148,
+      "grants": 0,
+      "lends": 0
+    },
+    {
+      "seed": 107224,
+      "days": 150,
+      "end": "survived",
+      "maxWave": 4,
+      "standing": 199,
+      "scaleRank": "regional",
+      "won": false,
+      "transfers": 3,
+      "explained": 3,
+      "gunLocRows": 147,
+      "grants": 1,
+      "lends": 0
+    },
+    {
+      "seed": 107225,
+      "days": 150,
+      "end": "survived",
+      "maxWave": 5,
+      "standing": 280,
+      "scaleRank": "regional",
+      "won": false,
+      "transfers": 0,
+      "explained": 0,
+      "gunLocRows": 148,
+      "grants": 0,
+      "lends": 0
+    },
+    {
+      "seed": 107226,
+      "days": 151,
+      "end": "survived",
+      "maxWave": 4,
+      "standing": 170,
+      "scaleRank": "regional",
+      "won": false,
+      "transfers": 1,
+      "explained": 1,
+      "gunLocRows": 148,
+      "grants": 1,
+      "lends": 0
+    },
+    {
+      "seed": 107227,
+      "days": 103,
+      "end": "village-lost",
+      "maxWave": 4,
+      "standing": 100,
+      "scaleRank": "regional",
+      "won": false,
+      "transfers": 2,
+      "explained": 2,
+      "gunLocRows": 101,
+      "grants": 1,
+      "lends": 0
+    },
+    {
+      "seed": 107228,
+      "days": 151,
+      "end": "survived",
+      "maxWave": 4,
+      "standing": 199,
+      "scaleRank": "regional",
+      "won": false,
+      "transfers": 0,
+      "explained": 0,
+      "gunLocRows": 148,
+      "grants": 0,
+      "lends": 0
+    }
+  ],
+  "wall": {
+    "seeds": 8,
+    "wins": 0,
+    "national": 0,
+    "table": null,
+    "wave5": 1,
+    "wave4": 8,
+    "medianSurvival": 150,
+    "communityLost": 3
+  },
+  "instrumentErrors": 0,
+  "consistencyMatch": true,
+  "consistencyNotes": [],
+  "rowsWithoutLocation": 0,
+  "judge": {
+    "bars": {
+      "attributionRate": {
+        "value": 1,
+        "threshold": 0.8,
+        "pass": true
+      },
+      "vanishCauseNamed": {
+        "value": 2,
+        "threshold": 1,
+        "pass": true
+      },
+      "instrumentValidity": {
+        "value": {
+          "proofTest": "see test run",
+          "selftest": true,
+          "instrumentErrors": 0,
+          "rowsWithoutLocation": 0
+        },
+        "pass": true
+      },
+      "guardrailNeutrality": {
+        "value": "see --compare output (leg1 vs leg2)",
+        "pass": null
+      }
+    },
+    "verdict": "DIAG-GO",
+    "attributionRate": 1,
+    "explained": 8,
+    "total": 8,
+    "vanishNamed": 2
+  }
+}
