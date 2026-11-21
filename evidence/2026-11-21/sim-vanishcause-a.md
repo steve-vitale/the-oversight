@@ -2,8 +2,8 @@
 
 - Arm: sim-vanishcause-a (DIAG), Loop A run fleshout-20261121T1415Z.
 - Base master: `b6aad8942`. Branch: `sim-vanishcause-a`.
-- Prereg: `evidence/2026-11-21/sim-vanishcause-a-prereg.md` (committed `97eb60094`, frozen ~15:05 UTC 2026-11-21, before any judged sim).
-- Instrument commits: `e17364e48` (driver + analyzer + proof test + panel builder), `a23fd8df0` (smoke catches), `b9807f455` (zero-units census fix), `614e985d0` (day-before seating lookup).
+- Prereg: `evidence/2026-11-21/sim-vanishcause-a-prereg.md` (committed `9185f42ec`, frozen ~15:05 UTC 2026-11-21, before any judged sim).
+- Instrument commits: `d85e7f573` (driver + analyzer + proof test + panel builder), `87e07a7af` (smoke catches), `47a51e305` (zero-units census fix), `068a987b3` (day-before seating lookup).
 - Horizon: 150d death-aware. Seeds: 107221–107228 (fresh band, verified unused). Policy: competent (verbatim). Substrate: `GUNRATE=1 CELLGATE=1`; `LEND` off, `PRESENCE` off. Env (both legs identical): `VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 SENSEEXPED=1 BOWOPEN=1 SPEARGATE=1 GUNRATE=1 CELLGATE=1`.
 - Two legs, leg1 + leg2, identical env — the second leg is the instrument-neutrality proof (a diag with no lever; the honest panel result is no material signal everywhere).
 
@@ -63,13 +63,13 @@ The prereg required the instrument to attribute BOTH known vanishes from the pre
 
 Note on the gate as written: on the current master (b6aad8942) the scholar vanish lands day 108, not day 119 as on the presence band's older master — the trajectory moved when master moved, but the same two vanish shapes occur and both attribute. The gate is met in substance (both known vanish mechanisms named), not by day number.
 
-The smoke caught four instrument bugs before the pilot (fixed in `a23fd8df0`, all covered by new selftest/proof-test cases):
+The smoke caught four instrument bugs before the pilot (fixed in `87e07a7af`, all covered by new selftest/proof-test cases):
 1. The analyzer read `sd.gunLocRows`; the corpus field is `v4gunLoc` — every row came back "no-prior-census" until fixed (selftest case 14 now uses the corpus shape).
 2. The lend wrap recorded every `_lendSearcaster` CALL (62 on the smoke); the function returns null when LEND is off. It now records fires only (0 on every pilot seed, as required).
 3. Equip displacement was unrecorded: `Game.equip` of another weapon over an equipped searcaster sends the gun to the pack with no unequip call. The wrap now records the displaced piece.
 4. Succession was unattributed: the analyzer had no playerDeath-successor branch.
 
-The pilot then caught two more (`614e985d0`, `b9807f455`):
+The pilot then caught two more (`068a987b3`, `47a51e305`):
 5. The seating event lands the day BEFORE the census row changes: `villagerGearDay` (villager-build.js:906) runs after the driver's end-of-day snapshot. The analyzer now looks back a day for the autoEquip row.
 6. **Zero-units stacks are taken, not present**: `_corpseTakeStack` (corpses.js:463) zeroes `it.units` instead of splicing the entry out, and the census's `(e.units || 1)` counted a taken gun as still on the corpse — seed 107224 ended with a phantom second gun. `countItemIn` now treats `units === 0` as absent. The pilot was re-run on the fixed instrument; the sims reproduced identically on every field and 107224's gun total corrected 2 → 1.
 
@@ -119,7 +119,7 @@ The chain is legible end to end: win it, carry it, survive the fight your schola
 
 ## Metric review (MEASUREMENT.md §14)
 
-- **Bars frozen before any judged sim** (prereg, committed 97eb60094 ~15:05 UTC): attribution ≥ 80%, ≥ 1 vanish cause named, instrument validity, guardrail neutrality. All four pass on the judged pilot; no re-scoring, no bar moved after the fact.
+- **Bars frozen before any judged sim** (prereg, committed 9185f42ec ~15:05 UTC): attribution ≥ 80%, ≥ 1 vanish cause named, instrument validity, guardrail neutrality. All four pass on the judged pilot; no re-scoring, no bar moved after the fact.
 - **Smoke-gate deviation, stated plainly:** the prereg named the scholar vanish as "day 119" from the presence band; on this master it lands day 108. The gate was judged on the mechanisms (both known vanish shapes attributed), not the day number; the shift is master movement between the presence run and b6aad8942, confirmed by the identical catalina day-93 reproduction.
 - **Closed-set proposals for the next instrument revision** (not retroactively applied): the frozen set has no `succession` label — succession is currently mapped to pack-transfer with the mechanism naming playerDeath. A `succession` label would make it first-class. Likewise `left-with-holder` for a holder who leaves the roster alive (removeVillager exiled/fled/splinter with the gun in their pack) — that branch fired 0 times on this band, but the mechanism text is written for it.
 - **Day-boundary timing:** events can land a day before the census row that shows them (villagerGearDay runs after the end-of-day snapshot). The analyzer looks back one day for autoEquip rows; the same one-day window should be assumed for any future event type whose caller runs after the snapshot.
@@ -130,7 +130,7 @@ The chain is legible end to end: win it, carry it, survive the fight your schola
 
 ## Files
 
-- Prereg: `evidence/2026-11-21/sim-vanishcause-a-prereg.md` (97eb60094)
+- Prereg: `evidence/2026-11-21/sim-vanishcause-a-prereg.md` (9185f42ec)
 - Instrument: `scripts/vanishcause-driver-a.js`, `scripts/analyze-vanishcause-a.js` (selftest 27/27), `scripts/test-vanishcause-a.js` (57/57 green), `scripts/build-vanishcause-panels-a.js`, `scripts/sense-vanishcause-a.js`
 - Smoke: `evidence/2026-11-21/perseed-vanishcause-a-smoke/` (seed 107058, 4/4 attributed), `evidence/2026-11-21/vanishcause-a-smoke-analysis.json`, `evidence/2026-11-21/vanishcause-a-smoke-v1.json` (pre-fix corpus, kept as the record of the first smoke), `evidence/2026-11-21/vanishcause-a-sense.log`
 - Pilot: `evidence/2026-11-21/perseed-vanishcause-a-leg1/` (8 corpora), `evidence/2026-11-21/perseed-vanishcause-a-leg2/` (8 corpora), `evidence/2026-11-21/vanishcause-a-leg1-analysis.json`, `evidence/2026-11-21/vanishcause-a-neutrality.json`
