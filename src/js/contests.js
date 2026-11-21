@@ -229,12 +229,8 @@
     const granted = loot ? this.alienLootGrant(loot, person) : null;
     if (granted) {
       // Bundle: 2 fusion cells beside a granted searcaster, same recipient.
-      // BIGBUNDLE (sim-holdersupply-a, finding #2628): 6 cells (3 volleys)
-      // instead of 2. Env-gated: BIGBUNDLE=1. Zero draws.
       if (_grOn && loot === 'searcaster') {
-        var _bbOn = false;
-        try { _bbOn = (typeof process !== 'undefined' && process.env && process.env.BIGBUNDLE === '1'); } catch (e2) {}
-        var _cell = { itemId: 'fusion_cell', name: 'Fusion cell', units: _bbOn ? 6 : 2, kg: 0.4 };
+        var _cell = { itemId: 'fusion_cell', name: 'Fusion cell', units: 2, kg: 0.4 };
         if (person) person.items.push(_cell);
         else { const s = this.state.scholar || {}; s.inventory = s.inventory || []; s.inventory.push(_cell); }
       }

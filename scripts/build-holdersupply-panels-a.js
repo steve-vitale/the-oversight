@@ -47,7 +47,7 @@ const contract = require('./balance-metrics.json');
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : null)
   || (argvVal('--seeds', null) ? argvVal('--seeds', '').split(',').map(function (s) { return parseInt(s.trim(), 10); }) : null)
   || [107131, 107132, 107133, 107134, 107135, 107136, 107137, 107138];
-const POLICIES = [holdersupply-a]; // pseudo-policy: case identity is the seed (two-leg fix)
+const POLICIES = ['holdersupply-a']; // pseudo-policy: case identity is the seed (two-leg fix)
 const DAYS = 150;
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
@@ -88,7 +88,7 @@ function buildPanel(rows) {
     },
     rows: rows.map(function (x) {
       return {
-        row: { policy: holdersupply-a, seed: x.seed, corpus: x.run },
+        row: { policy: 'holdersupply-a', seed: x.seed, corpus: x.run },
         metrics: metricsFor(x.r),
         warnings: [], observerErrors: [], gear: { errors: [] },
       };
