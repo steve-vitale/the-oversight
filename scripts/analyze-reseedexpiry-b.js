@@ -17,6 +17,9 @@
 // Usage:
 //   node scripts/analyze-reseedexpiry-b.js --dir evidence/2026-11-20/perseed-reseedexpiry-b-106301-armed [--dir evidence/2026-11-20/perseed-reseedexpiry-b-106401-armed] [--armed] [--out evidence/2026-11-20/reseedexpiry-b-armed-analysis.json]
 //   node scripts/analyze-reseedexpiry-b.js --selftest
+// RESEEDWIDE (sim-reseedwide-b): --min-expiries N freezes the
+// pre-registered power floor in judgePooled — pooled expiries below
+// N are reported, not judged (verdict REPORTED / LOW-N).
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -658,6 +661,15 @@ function judge(a, leg, opts) {
 // counts the evidence reports.
 function judgePooled(analyses, opts) {
   const armed = !opts || opts.armed !== false;
+  // RESEEDWIDE (sim-reseedwide-b, frozen prereg): opts.minExpiries
+  // is the pre-registered power floor. When pooled expiries ec fall
+  // below it, the follow-through bars (re-seed share, fight-again
+  // share, post-expiry 0) are REPORTED, not judged — their bar
+  // entries carry pass: null and the verdict is REPORTED / LOW-N
+  // when every hard bar passes. The evidence then applies the
+  // combined-fix judgment (dead-0 + guardrail). Unset (legacy):
+  // the judge behaves exactly as before.
+  const minExp = (opts && opts.minExpiries != null) ? opts.minExpiries : null;
   const dirs = analyses || [];
   let errors = 0, filesOk = true, gateMissing = 0, gateMismatch = 0;
   let classifiedOk = true, br = 0, pd = 0, pb = 0, dc = 0, ec = 0;
@@ -682,6 +694,7 @@ function judgePooled(analyses, opts) {
   }
   const rs = ec ? (rw / ec) : null;
   const fs = ec ? (fa / ec) : null;
+  const lowN = minExp != null && ec < minExp;
   const bars = [
     { id: 'instrument-pooled', pass: errors === 0 && filesOk,
       detail: 'instrument errors ' + errors + ' (bar 0); all band dirs 8 files: ' + filesOk },
@@ -692,11 +705,15 @@ function judgePooled(analyses, opts) {
       detail: 'replica-vs-real disagreements ' + pd + ' (bar 0)' },
     { id: 'dead-commits-pooled', pass: dc > 0,
       detail: 'dead-target commits ' + dc + ' pooled; pool floor min ' + (poolMin == null ? 'n/a' : poolMin) + ', dist ' + JSON.stringify(poolDist) },
-    { id: 'post-expiry-pooled', pass: pb === 0, detail: 'post-expiry targetless launches ' + pb + ' (bar 0)' },
-    { id: 'reseed-pooled', pass: ec > 0 && rs != null && rs >= BARS.reseededShare,
-      detail: 'expiries ' + ec + '; re-seeded within 7d ' + rw + '/' + ec + ' = ' + (rs == null ? 'n/a' : rs.toFixed(3)) + ' (bar ' + BARS.reseededShare.toFixed(3) + ')' },
-    { id: 'holders-fight-again-pooled', pass: ec > 0 && fs != null && fs >= BARS.foughtAgainShare,
-      detail: 'holders fighting again within 14d ' + fa + '/' + ec + ' = ' + (fs == null ? 'n/a' : fs.toFixed(3)) + ' (bar ' + BARS.foughtAgainShare.toFixed(3) + ')' },
+    { id: 'post-expiry-pooled', pass: lowN ? null : pb === 0,
+      detail: lowN ? ('post-expiry targetless launches ' + pb + ' — REPORTED, not judged (expiries ' + ec + ' < ' + minExp + ')')
+        : ('post-expiry targetless launches ' + pb + ' (bar 0)') },
+    { id: 'reseed-pooled', pass: lowN ? null : (ec > 0 && rs != null && rs >= BARS.reseededShare),
+      detail: lowN ? ('expiries ' + ec + '; re-seeded within 7d ' + rw + '/' + ec + ' = ' + (rs == null ? 'n/a' : rs.toFixed(3)) + ' — REPORTED, not judged (expiries < ' + minExp + ')')
+        : ('expiries ' + ec + '; re-seeded within 7d ' + rw + '/' + ec + ' = ' + (rs == null ? 'n/a' : rs.toFixed(3)) + ' (bar ' + BARS.reseededShare.toFixed(3) + ')') },
+    { id: 'holders-fight-again-pooled', pass: lowN ? null : (ec > 0 && fs != null && fs >= BARS.foughtAgainShare),
+      detail: lowN ? ('holders fighting again within 14d ' + fa + '/' + ec + ' = ' + (fs == null ? 'n/a' : fs.toFixed(3)) + ' — REPORTED, not judged (expiries < ' + minExp + ')')
+        : ('holders fighting again within 14d ' + fa + '/' + ec + ' = ' + (fs == null ? 'n/a' : fs.toFixed(3)) + ' (bar ' + BARS.foughtAgainShare.toFixed(3) + ')') },
   ];
   let verdict = 'DIAG-GO', kind = null;
   if (errors || !filesOk) { verdict = 'NO-GO'; kind = 'INSTRUMENT'; }
@@ -704,6 +721,7 @@ function judgePooled(analyses, opts) {
   else if (br) { verdict = 'NO-GO'; kind = 'INSTRUMENT'; }
   else if (armed && pd) { verdict = 'NO-GO'; kind = 'INSTRUMENT'; }
   else if (dc === 0) { verdict = 'NO-GO'; kind = 'METRIC-BROKEN'; }
+  else if (lowN) { verdict = 'REPORTED'; kind = 'LOW-N'; }
   else if (ec === 0) { verdict = 'NO-GO'; kind = 'UNREACHABLE'; }
   else if (pb > 0) { verdict = 'NO-GO'; kind = 'POST-BLOCK'; }
   else if (rs == null || rs < BARS.reseededShare) { verdict = 'NO-GO'; kind = 'RESEED'; }
@@ -712,7 +730,8 @@ function judgePooled(analyses, opts) {
     pooled: { dirs: dirs.length, deadCommits: dc, expiries: ec, poolFloorMin: poolMin,
       poolDist: poolDist, reseededWithin7: rw, foughtAgain14: fa,
       reseededShare: rs, foughtAgainShare: fs, postExpiryTargetlessLaunches: pb,
-      poolDisagreements: pd, expiryRuleMismatch: br } };
+      poolDisagreements: pd, expiryRuleMismatch: br,
+      minExpiries: minExp, lowN: lowN } };
 }
 
 function selftest() {
@@ -1160,6 +1179,35 @@ function selftest() {
     mkBand({ deadCommitsCount: 0, poolFloor: { commits: 0, min: null, median: null, dist: {}, table: [] } })], { armed: true });
   check('§G pooled judge METRIC-BROKEN on zero dead commits across both bands',
     jp.verdict === 'NO-GO' && jp.kind === 'METRIC-BROKEN', JSON.stringify(jp));
+  // §H MIN-EXPIRIES POWER FLOOR (sim-reseedwide-b, frozen prereg):
+  // with --min-expiries 3, follow bars are REPORTED (pass null),
+  // not judged, while ec < 3; at ec >= 3 the legacy path holds.
+  jp = judgePooled([mkBand({ expiriesCount: 1, reseededWithin7Count: 1, foughtAgain14Count: 1,
+    poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } }),
+    mkBand({ expiriesCount: 1, reseededWithin7Count: 1, foughtAgain14Count: 1,
+    poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } })], { armed: true, minExpiries: 3 });
+  check('§H minExpiries 3: ec=2 (shares 1.0) -> REPORTED LOW-N, follow bars pass null (reported, not judged)',
+    jp.verdict === 'REPORTED' && jp.kind === 'LOW-N' && jp.pooled.lowN === true &&
+    jp.bars[5].pass === null && jp.bars[6].pass === null && jp.bars[7].pass === null &&
+    jp.pooled.reseededShare === 1.0, JSON.stringify(jp));
+  jp = judgePooled([mkBand({ expiriesCount: 2, reseededWithin7Count: 2, foughtAgain14Count: 2,
+    poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } }),
+    mkBand({ expiriesCount: 1, reseededWithin7Count: 1, foughtAgain14Count: 1,
+    poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } })], { armed: true, minExpiries: 3 });
+  check('§H minExpiries 3: ec=3 shares 1.0 -> DIAG-GO (normal path)',
+    jp.verdict === 'DIAG-GO' && jp.pooled.expiries === 3 && jp.pooled.reseededShare === 1.0, JSON.stringify(jp.pooled));
+  jp = judgePooled([mkBand({ expiriesCount: 2, reseededWithin7Count: 1, foughtAgain14Count: 2,
+    poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } }),
+    mkBand({ expiriesCount: 1, reseededWithin7Count: 0, foughtAgain14Count: 1,
+    poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } })], { armed: true, minExpiries: 3 });
+  check('§H minExpiries 3: ec=3 re-seed 1/3 -> NO-GO RESEED',
+    jp.verdict === 'NO-GO' && jp.kind === 'RESEED' && jp.pooled.reseededShare === 1 / 3, JSON.stringify(jp.pooled));
+  jp = judgePooled([mkBand({}), mkBand({})], { armed: true, minExpiries: 3 });
+  check('§H minExpiries 3: ec=0 -> REPORTED LOW-N (not UNREACHABLE; the combined-fix judgment decides)',
+    jp.verdict === 'REPORTED' && jp.kind === 'LOW-N' && jp.pooled.expiries === 0, JSON.stringify(jp));
+  jp = judgePooled([mkBand({ expiriesCount: 1, reseededWithin7Count: 0, foughtAgain14Count: 0 })], { armed: true });
+  check('§H legacy (minExpiries unset): ec=1 re-seed 0/1 -> NO-GO RESEED (unchanged)',
+    jp.verdict === 'NO-GO' && jp.kind === 'RESEED', JSON.stringify(jp));
   console.log('analyze-reseedexpiry-b selftest: ' + passed + ' passed, ' + failed + ' failed');
   return failed === 0;
 }
@@ -1169,18 +1217,19 @@ if (require.main === module) {
   if (args.indexOf('--selftest') !== -1) {
     process.exit(selftest() ? 0 : 1);
   }
-  let dirs = [], outFile = null, armed = true;
+  let dirs = [], outFile = null, armed = true, minExpiries = null;
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--dir') dirs.push(args[++i]);
     else if (args[i] === '--dir2') dirs.push(args[++i]);
     else if (args[i] === '--out') outFile = args[++i];
     else if (args[i] === '--control') armed = false;
+    else if (args[i] === '--min-expiries') minExpiries = parseInt(args[++i], 10);
   }
-  if (!dirs.length) { console.error('usage: analyze-reseedexpiry-b.js --dir DIR [--dir2 DIR2] [--armed|--control] [--out FILE] | --selftest'); process.exit(2); }
+  if (!dirs.length) { console.error('usage: analyze-reseedexpiry-b.js --dir DIR [--dir2 DIR2] [--armed|--control] [--min-expiries N] [--out FILE] | --selftest'); process.exit(2); }
   const analyses = dirs.map(function (d) { return analyzeDir(d); });
   const legs = dirs.map(function (d) { return FCB.summarizeLeg(d); });
   const perDir = analyses.map(function (a, i) { return judge(a, legs[i], { armed: armed }); });
-  const pooled = judgePooled(analyses, { armed: armed });
+  const pooled = judgePooled(analyses, { armed: armed, minExpiries: minExpiries });
   const a0 = analyses[0], leg0 = legs[0], j0 = perDir[0];
   const result = { verdict: pooled.verdict, kind: pooled.kind, bars: pooled.bars, pooled: pooled.pooled,
     perDir: perDir.map(function (j, i) { return { dir: dirs[i], verdict: j.verdict, kind: j.kind, bars: j.bars }; }),
