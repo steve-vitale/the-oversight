@@ -506,6 +506,16 @@
         // gates) — a sick villager resting by the fire doesn't get the itch
         // to walk the trap line. No new invite ideas while sick.
         try { if ((this.state.village.sick || {})[vid]) continue; } catch (e) {}
+        // OWED WALK (journey-scale r249 2026-11-21): a walk the fever vetoed
+        // after the player said yes comes back first once the villager is
+        // well — the SAME walk, not a fresh random one. The debt outranks
+        // the trust roll: the player already said yes to this one.
+        if (hist.owedWalk) {
+          const owed = hist.owedWalk;
+          hist.owedWalk = null;
+          hist.pending = { defId: owed.defId, day: this.state.scholar.day };
+          continue;
+        }
         // don't invite if they barely know you (gate relaxes once warm)
         const t = ((this.state.village.trust || {})[vid]) || 10;
         if (t < 12 && R() < (warm ? 0.3 : 0.7)) continue;
@@ -563,7 +573,14 @@
       try {
         if ((this.state.village.sick || {})[vid]) {
           const first = (typeof this.whoTag === 'function') ? this.whoTag(vid) : 'They';
-          return { outcome: 'sick', line: `"All right \u2014" ${first} starts to stand, then sinks back down. "Maybe not today. The fire's got me."` };
+          // OWED WALK (journey-scale r249 2026-11-21): a yes the fever vetoes
+          // must not evaporate — the walk is owed, not cancelled. Record it
+          // on the invite history (the r107 `pocketed` pattern: the record
+          // outlives the sitting) so the next invite tick re-offers the SAME
+          // walk once the villager is well, and say so out loud: the
+          // withdrawal names the reschedule.
+          hist.owedWalk = { defId: inv.defId, day: this.state.scholar.day };
+          return { outcome: 'sick', line: `"All right \u2014" ${first} starts to stand, then sinks back down. "Maybe not today. The fire's got me. Tomorrow, when it lets me go \u2014 same walk?"` };
         }
       } catch (e) {}
       return this.resolveInvite(vid, inv.defId);
