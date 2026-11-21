@@ -449,12 +449,17 @@ async function oneRun(seed) {
   // spot); unequip pushes back; dropItem splices out of existence
   // (the woods take it); stealFrom moves kcal only (recorded to
   // prove theft never moves a gun); giftArmor is armor-only.
+  // equip ALSO displaces: equipping another weapon over an equipped
+  // searcaster sends the gun back to the pack with NO unequip call
+  // (the policy's ammo-aware gearUp does exactly this to a dry
+  // searcaster) — so the displaced piece is recorded too.
   wrapGame('equip', function (orig) {
     return function (itemIdx, slot) {
-      let itemId = null;
+      let itemId = null, displacedId = null;
       try { const inv = ((this.state || {}).scholar || {}).inventory || []; const it = inv[itemIdx]; itemId = itemIdOf(it); } catch (e) {}
+      try { const eq = ((this.state || {}).scholar || {}).equipped || {}; const e = eq[slot]; displacedId = itemIdOf(e); } catch (e) {}
       const ret = orig.apply(this, arguments);
-      try { if (itemId === 'searcaster') equipEvents.push({ day: gday(Game), itemId: itemId, slot: slot || null }); } catch (e) { errors.push('equip-log: ' + String(e.message).slice(0, 80)); }
+      try { if (itemId === 'searcaster' || displacedId === 'searcaster') equipEvents.push({ day: gday(Game), itemId: itemId, slot: slot || null, displacedId: displacedId || null }); } catch (e) { errors.push('equip-log: ' + String(e.message).slice(0, 80)); }
       return ret;
     };
   });
@@ -561,18 +566,23 @@ async function oneRun(seed) {
       return ret;
     };
   });
-  // Lend guard (LEND off — any call is a loud instrument error).
+  // Lend guard (LEND off — a lend must never FIRE). _lendSearcaster
+  // returns null when LEND is off (or the wave/earshot gates fail),
+  // so only a non-null return is a real lend: record fires, not
+  // calls (the first smoke logged 62 calls, all null returns).
   wrapGame('_lendSearcaster', function (orig) {
     return function () {
       const ret = orig.apply(this, arguments);
-      try { lendEvents.push({ day: gday(Game), fn: '_lendSearcaster', ret: ret != null }); } catch (e) { errors.push('lend-log: ' + String(e.message).slice(0, 80)); }
+      try { if (ret) lendEvents.push({ day: gday(Game), fn: '_lendSearcaster', ret: true,
+        lender: ret.lender || null, borrower: ret.borrower || null, kind: ret.kind || null,
+        cellsMoved: ret.cellsMoved | 0 }); } catch (e) { errors.push('lend-log: ' + String(e.message).slice(0, 80)); }
       return ret;
     };
   });
   wrapGame('_returnLentSearcaster', function (orig) {
     return function (lend) {
       const ret = orig.apply(this, arguments);
-      try { lendEvents.push({ day: gday(Game), fn: '_returnLentSearcaster', ret: ret != null }); } catch (e) { errors.push('lend-return-log: ' + String(e.message).slice(0, 80)); }
+      try { if (ret) lendEvents.push({ day: gday(Game), fn: '_returnLentSearcaster', ret: true }); } catch (e) { errors.push('lend-return-log: ' + String(e.message).slice(0, 80)); }
       return ret;
     };
   });

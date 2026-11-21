@@ -58,12 +58,16 @@ function priorGrantTo(sd, vid, day) {
 // without re-running the sim.
 function attributeTransfer(row, sd) {
   const d = row.day;
-  const found = locsOnDay(sd.gunLocRows, d);
+  // The corpus names the census field v4gunLoc (driver) — fixtures may
+  // use gunLocRows; accept either (smoke catch, 2026-11-21: the
+  // analyzer read only gunLocRows and attributed NOTHING).
+  const gunLocRows = sd.gunLocRows || sd.v4gunLoc || [];
+  const found = locsOnDay(gunLocRows, d);
   if (!found || found.idx <= 0) {
     return { cause: 'unexplained-with-evidence', mechanism: 'no-prior-census',
       evidence: 'no gun-location row before day ' + d + ' (row: ' + JSON.stringify(row) + ')' };
   }
-  const prev = sd.gunLocRows[found.idx - 1];
+  const prev = gunLocRows[found.idx - 1];
   const cur = found.row;
   const prevLocs = prev.locations || [];
   const curLocs = cur.locations || [];
@@ -124,7 +128,20 @@ function attributeTransfer(row, sd) {
           mechanism: 'Game.unequip(' + (dayUnequips[0].slot || '?') + ') — an equipped scholar gun returns to the pack (the old blind-spot mirror)',
           evidence: evSummary };
       }
-      return { cause: 'unexplained-with-evidence', mechanism: 'scholar new-holder with no corpse-take, grant, or unequip event today',
+      // The policy's ammo-aware gearUp equips a usable weapon OVER a
+      // dry searcaster: Game.equip displaces the gun back to the pack
+      // with NO unequip call (smoke catch, 2026-11-21: day 95, the
+      // scholar equipped a bow over the dry searcaster). Displacement
+      // implies dry — the searcaster (bonus 120) outscores every other
+      // ranged weapon, so gearUp only seats another weapon over it
+      // when it has no fusion cells.
+      const disp = dayEquips.filter(function (e) { return e.displacedId === 'searcaster'; })[0];
+      if (disp) {
+        return { cause: 'pack-transfer',
+          mechanism: 'Game.equip displaced the searcaster: the policy equipped ' + (disp.itemId || '?') + ' in the ' + (disp.slot || '?') + ' slot and the gun went back to the pack (dry — gearUp only displaces the best weapon when it has no ammo)',
+          evidence: evSummary };
+      }
+      return { cause: 'unexplained-with-evidence', mechanism: 'scholar new-holder with no corpse-take, grant, unequip, or equip-displacement event today',
         evidence: evSummary };
     }
     // A villager's new-holder.
@@ -194,6 +211,20 @@ function attributeTransfer(row, sd) {
       if (flagDead) {
         return { cause: 'died-holding', mechanism: 'personFlags dead (no registerDeath row fired today — wrap gap, flag is the evidence)', evidence: evSummary };
       }
+    }
+    // (a2) SUCCESSION: the holder BECAME the scholar (playerDeath).
+    // The gun never left them — their equipped gun is now the
+    // scholar's equipped gun, which the old holder map cannot see
+    // (smoke catch, 2026-11-21: catalina_reyes held the gun day 92,
+    // became the scholar day 93, and the old map read 'vanish').
+    // Cause label: pack-transfer — the gun moved from the villager's
+    // kit to the scholar's kit because the holder's identity changed.
+    const succ = dayPlayerDeaths.filter(function (e) { return e.newVid === from; })[0];
+    if (succ) {
+      return { cause: 'pack-transfer',
+        mechanism: 'playerDeath succession (ledger.js:658) — ' + from + ' became the scholar on day ' + d +
+          ' (old scholar ' + (succ.oldVid || '?') + ' died: ' + (succ.cause || '?') + '); the gun stayed equipped, now scholar-equipped — the old holder map cannot see an equipped scholar gun',
+        evidence: evSummary };
     }
     // (b2) The scholar equipped their own pack gun (the blind spot:
     // Game.equip splices the gun OUT of inventory, so the old holder
@@ -539,6 +570,50 @@ function selftest() {
     { cause: 'grant-contest-prize', row: { kind: 'new-holder' } },
   ], instrumentErrors: 0, rowsWithoutLocation: 0, consistencyMatch: true });
   check('judge NO-GO below 80% + no vanish named', jNo.verdict === 'DIAG-NO-GO' && !jNo.bars.attributionRate.pass && !jNo.bars.vanishCauseNamed.pass);
+  // 14. CORPUS shape: the driver writes the census as v4gunLoc, not
+  // gunLocRows — attributeTransfer must read it (smoke catch,
+  // 2026-11-21: every row came back 'no-prior-census' until this).
+  const corpusSd = mkSd({
+    gunLocRows: undefined,
+    v4gunLoc: [
+      { day: 10, locations: [{ loc: 'scholar-pack', vid: '__scholar__', count: 1 }], personFlags: {} },
+      { day: 11, locations: [{ loc: 'corpse', cid: 'c9', cvid: 'gen_old', count: 1 }], personFlags: {} },
+    ],
+    playerDeathEvents: [{ day: 11, oldVid: 'gen_old', newVid: 'gen_new', corpseId: 'c9', hadGun: 'pack', cause: 'injuries' }],
+  });
+  delete corpusSd.gunLocRows;
+  a = attributeTransfer({ day: 11, kind: 'vanish', from: '__scholar__', to: null }, corpusSd);
+  check('corpus v4gunLoc shape attributes the scholar death', a.cause === 'died-holding' && a.mechanism !== 'no-prior-census');
+  // 15. SUCCESSION: the holder became the scholar (smoke catch,
+  // 2026-11-21) — the gun never left them; the old map read vanish
+  // because an equipped scholar gun is invisible to it.
+  const succSd = mkSd({
+    gunLocRows: undefined,
+    v4gunLoc: [
+      { day: 10, locations: [{ loc: 'equipped', vid: 'alice', count: 1 }], personFlags: { alice: { dead: false, onRoster: true } } },
+      { day: 11, locations: [{ loc: 'scholar-equipped', vid: '__scholar__', slot: 'ranged', count: 1 }], personFlags: { alice: { dead: false, onRoster: true } } },
+    ],
+    playerDeathEvents: [{ day: 11, oldVid: 'gen_old', newVid: 'alice', corpseId: 'c9', hadGun: null, cause: 'the wild' }],
+  });
+  delete succSd.gunLocRows;
+  a = attributeTransfer({ day: 11, kind: 'vanish', from: 'alice', to: null }, succSd);
+  check('vanish + succession -> pack-transfer', a.cause === 'pack-transfer');
+  check('succession row names playerDeath', /succession/.test(a.mechanism) && /playerDeath/.test(a.mechanism));
+  // 16. EQUIP DISPLACEMENT: the policy equipped another weapon over
+  // a dry searcaster (smoke catch, 2026-11-21) — no unequip call,
+  // the gun just goes back to the pack.
+  const dispSd = mkSd({
+    gunLocRows: undefined,
+    v4gunLoc: [
+      { day: 10, locations: [{ loc: 'scholar-equipped', vid: '__scholar__', slot: 'ranged', count: 1 }], personFlags: {} },
+      { day: 11, locations: [{ loc: 'scholar-pack', vid: '__scholar__', count: 1 }], personFlags: {} },
+    ],
+    equipEvents: [{ day: 11, itemId: 'crude_bow', slot: 'ranged', displacedId: 'searcaster' }],
+  });
+  delete dispSd.gunLocRows;
+  a = attributeTransfer({ day: 11, kind: 'new-holder', from: null, to: '__scholar__' }, dispSd);
+  check('new-holder scholar + equip displacement -> pack-transfer', a.cause === 'pack-transfer');
+  check('displacement row names the displacing weapon', /crude_bow/.test(a.mechanism));
   console.log('vanishcause analyzer selftest: ' + pass + ' passed, ' + fail + ' failed');
   return fail === 0;
 }

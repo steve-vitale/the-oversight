@@ -159,6 +159,22 @@ async function liveTests() {
   check('live: equipped scholar gun is scholar-equipped in the census', loc.locations.some(function (l) { return l.loc === 'scholar-equipped' && l.vid === '__scholar__'; }));
   const h = driver.legacyHoldersOf(Game);
   check('live: equipped scholar gun is NOT a legacy holder', !h['__scholar__']);
+  // (3b2) EQUIP DISPLACEMENT: equipping another ranged weapon over
+  // the searcaster sends the gun back to the pack with NO unequip
+  // call (the policy's dry-weapon gearUp does exactly this — the
+  // smoke catch, 2026-11-21).
+  s.inventory.push({ itemId: 'crude_bow', name: 'Crude bow', units: 1 });
+  const bowIdx = s.inventory.findIndex(function (e) { return (e.itemId || e.id) === 'crude_bow'; });
+  check('live: displacement fixture has a bow to equip', bowIdx !== -1);
+  try { Game.equip(bowIdx, 'ranged'); } catch (e) { check('live: Game.equip (displacement) runs without throwing', false); }
+  const displacedBack = (s.inventory || []).some(function (e) { return (e.itemId || e.id) === 'searcaster'; });
+  const bowEquipped = ((s.equipped || {}).ranged || {}).itemId === 'crude_bow';
+  check('live: equipping a bow over the searcaster returns it to the pack', displacedBack);
+  check('live: the bow is now in the ranged slot', bowEquipped);
+  // Re-equip the searcaster for the unequip check below.
+  const scIdx2 = s.inventory.findIndex(function (e) { return (e.itemId || e.id) === 'searcaster'; });
+  try { Game.equip(scIdx2, 'ranged'); } catch (e) { check('live: Game.equip (re-equip) runs without throwing', false); }
+  check('live: searcaster re-equipped', ((s.equipped || {}).ranged || {}).itemId === 'searcaster');
   // (3c) unequip returns it to the pack.
   try { Game.unequip('ranged'); } catch (e) { check('live: Game.unequip runs without throwing', false); }
   const backInPack = (s.inventory || []).some(function (e) { return (e.itemId || e.id) === 'searcaster'; });
