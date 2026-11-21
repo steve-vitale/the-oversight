@@ -7371,7 +7371,22 @@
               // instead; keeping the blocked pick dried, the r226
               // residual characterized by the r238 F5 harness:
               // V1,V2,V3,DRY,DRY,DRY on rapid re-asks).
-              const handledPool = [
+              // SETTLED-FAVOR NAMES THE FAVOR (journey-landing r152
+              // 2026-11-21): the r247 fix named the favor in the dlg:help
+              // settled branch, but this re-ask pool spoke only "that
+              // one" (r152 panel: 1332 d16 Onni — "You don't need to
+              // worry about that one anymore" names nothing). When the
+              // settled favor carries a speakable short (a phrase with
+              // a space — the r247 rule), the variants name it;
+              // otherwise the generic pool stands, and a bare kind id
+              // is never spoken.
+              const _fshort = (wf && wf.short && / /.test(wf.short)) ? wf.short : null;
+              const _cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+              const handledPool = _fshort ? [
+                `"No, really — it's handled: ${_fshort}. Thanks for asking, though."`,
+                `"${_cap(_fshort)} — it's taken care of, I swear. You don't need to worry about it anymore."`,
+                `"Honestly? It's done — ${_fshort}. Finished. Thank you for checking — it means something that you did."`,
+              ] : [
                 '"No, really — it\'s handled. Thanks for asking, though."',
                 '"It\'s taken care of, I swear. You don\'t need to worry about that one anymore."',
                 '"Honestly? It\'s done. Finished. Thank you for checking — it means something that you did."',

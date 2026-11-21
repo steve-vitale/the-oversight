@@ -5020,6 +5020,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         this.say(`${first} goes still. "${tUnkC}. You're sure." They'll tell the others — word travels fast around a fire.`);
         this.socialTick(vid);
         this.monsterNewsCheck(mid);
+        // NAMING RECENCY (journey-landing r152 2026-11-21): remember the
+        // beast just told about, day-stamped — the namebeast topic asked
+        // in the same sitting must open THIS debate (r25 intent), even
+        // when the telling hasn't kicked it yet (see namebeast below).
+        const _cx = (this.state.codex = this.state.codex || {});
+        _cx.lastToldBeast = { mid, day: (this.state.scholar || {}).day || 0 };
         return { ok: true };
       }
       if (topic === 'beasttricks') {
@@ -5053,9 +5059,32 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         // NAMING RECENCY (journey-landing r25 2026-10-19): most recently
         // kicked debate first — "what are we calling that thing?" right after
         // telling about beast X must open X's debate, not an older one.
+        // NAMING RECENCY (journey-landing r152 2026-11-21): the r25 sort
+        // only helps when X's debate already kicked — but telling adds
+        // one knower and the debate needs three, so X usually isn't
+        // kicked yet (r152 panel: 27/43 tell->name pairs opened a
+        // different beast). Asking to name it IS the village starting
+        // the argument, so kick the just-told debate on the spot when
+        // it is reported and unnamed; an already-kicked told debate is
+        // moved to the front below. No-tell and already-named paths
+        // are unchanged.
+        const _ncx = (this.state.codex = this.state.codex || {});
+        const _lt = _ncx.lastToldBeast;
+        const _today = (this.state.scholar || {}).day || 0;
+        const _ltMid = (_lt && _lt.day === _today && _lt.mid) ? _lt.mid : null;
+        if (_ltMid) {
+          const _le = (this.state.codex.monsters || {})[_ltMid];
+          if (_le && _le.reported && !_le.villageName && !_le.namingKicked) {
+            this.kickMonsterNaming(_ltMid);
+          }
+        }
         const cands = Object.entries(this.state.codex.monsters || {})
           .filter(([id, e]) => e.namingKicked && !e.villageName)
           .sort((a, b) => (b[1].namingKickSeq || 0) - (a[1].namingKickSeq || 0));
+        if (_ltMid) {
+          const _ix = cands.findIndex(([id]) => id === _ltMid);
+          if (_ix > 0) { const _row = cands.splice(_ix, 1)[0]; cands.unshift(_row); }
+        }
         if (!cands.length) {
           this.say(`${first} shrugs. "Name what? We haven't seen anything worth naming lately."`);
           return { ok: true };
