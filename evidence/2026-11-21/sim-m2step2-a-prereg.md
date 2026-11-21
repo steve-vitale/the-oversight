@@ -61,13 +61,26 @@ shift is rate inflation. The engine OVER-credits the volley ~3×.
 
 Consequences, frozen into this prereg:
 
-1. **Honest pricing RAISES rtk by ~0.3 rounds** (it removes the inflation;
-   the banked HP reduction stays). The hopeless read gets slightly
-   STRICTER, not looser. The lever cannot by itself flip a hopeless
-   meeting: the diag meetings were hopeless by 4–5× (rtk 6–15 rounds vs
-   rtd ~3 rounds). A 13–26 dmg volley is 1.5–3% of a 850–1500 HP wave-4
-   monster (MONSTER-WAVES.md bands) — no honest accounting of it moves
+1. **Honest pricing RAISES rtk by the inflation amount — mean ~0.7
+   rounds on the diag's two fought meetings (1.1 and 0.3)** — because
+   it removes the rate inflation while keeping the banked HP
+   reduction. The volley's honest value stays ~0.3 rounds each
+   (volleyDmg/sustainedDpr); the engine's +1.0-round mean shift =
+   ~0.3 honest value + ~0.7 inflation, and the lever removes the
+   0.7. The hopeless read gets slightly STRICTER, not looser. The
+   lever cannot by itself flip a hopeless meeting: the diag meetings
+   were hopeless by 4–5× (rtk 6–15 rounds vs rtd ~3 rounds). A 13–26
+   dmg volley is 1.5–3% of a 850–1500 HP wave-4 monster
+   (MONSTER-WAVES.md bands) — no honest accounting of it moves
    the verdict.
+   *(Correction 2026-11-21 ~03:10 UTC, before any judged sim: the
+   frozen prereg first wrote "raises rtk by ~0.3 rounds", conflating
+   the volley's honest value (0.3) with the inflation removed (0.7
+   mean). The decomposition in the paragraph above was correct; only
+   this sentence and the §1 mechanism-check expectation were wrong.
+   The frozen bars are untouched; the conclusion — the lever makes
+   the read slightly stricter and cannot flip a meeting — is
+   unchanged, and the corrected magnitude strengthens it.)*
 2. **There is one genuine second-order effect the sim can reveal** that
    hand arithmetic cannot: earlier hopeless → earlier shout → earlier
    help → more party damage a round sooner → rtk falls → possible
@@ -193,11 +206,14 @@ Band **107171–107178** (pilot, 8 seeds) — FRESH. Checked 2026-11-21
      mean (`rtkHonest` − `rtkAll`) across fought served meetings is
      the lever's actual rtk movement.
 - **Mechanism check (not a GO bar):** mean (`rtkHonest` − `rtkAll`)
-  across fought served meetings on the arm leg ≈ +0.3 rounds (the
-  volley's honest value), vs the diag's +1.0-round inflated shift.
-  This proves the lever is wired and moves the read by what the
-  volley actually buys. If it reads ~0, the lever is not live and
-  the run stops before judging.
+  across fought served meetings on the arm leg ≈ +0.7 rounds (the
+  inflation the lever removes; the diag's two fought meetings read
+  1.1 and 0.3), vs the diag's +1.0-round inflated shift. The volley's
+  honest value is ~0.3 rounds — the check measures the inflation
+  removed, not the value. This proves the lever is wired and moves
+  the read by the inflation it removes. If it reads ~0, the lever is
+  not live and the run stops before judging. *(Corrected with §0.1
+  point 1, same correction commit — first wrote +0.3.)*
 - **Primary metric:** served-holder wave-4+ engaged-vs-hopeless-flee
   on served leads, arm vs ctl on identical seeds.
   - Engaged-finishes = engaged-vKill + engaged-mFlee + engaged-vWin.
