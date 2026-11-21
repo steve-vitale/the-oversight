@@ -1,0 +1,2029 @@
+{
+  "verdict": "DIAG-NO-GO",
+  "kind": "SUBSTRATE",
+  "bars": [
+    {
+      "id": "near-miss-coverage",
+      "pass": true,
+      "detail": "encounter-derived unarmed launches 40, covered 40 (coverage 100.0%, bar >= 95%); unclassified rows 0/37 (0.0%, bar <= 5%); orphan near-miss rows 0"
+    },
+    {
+      "id": "pool-reverified",
+      "pass": false,
+      "detail": "pool counter files 1/8 (errors 0); near-miss lendable rows 0 vs v4lendPool moments 0 (agree); v4lends 0 (lend stayed OFF)"
+    },
+    {
+      "id": "answer-quantified",
+      "pass": true,
+      "detail": "dominant nearest-holder state no-living-holder 33/37 (89.2%); earshot base rate over ALL 37 NON-RAID wave-4+ launches: armed 4 (10.8%), eligible 0 (0.0%); raid launches 3 (coverage rows only, excluded from the breakdown); draft-miss cross-check (tick rows): 21 misses over 86 pooled fights"
+    }
+  ],
+  "nearMiss": {
+    "dir": "evidence/2026-11-21/perseed-lendpool-a-smoke2",
+    "n": 1,
+    "valid": 1,
+    "errors": 0,
+    "launches": 37,
+    "launchesGun": 37,
+    "launchesCells": 0,
+    "launchesLoaded": 0,
+    "raidLaunches": 3,
+    "unarmedLaunches": 37,
+    "armedEarshot": 4,
+    "eligibleEarshot": 0,
+    "armedEarshotUnarmed": 4,
+    "eligibleEarshotUnarmed": 0,
+    "byState": {
+      "sheltered": 4,
+      "resting": 0,
+      "low-health": 0,
+      "on-expedition": 0,
+      "away": 0,
+      "at-home": 0,
+      "in-camp": 0,
+      "out-in-world": 0,
+      "no-living-holder": 33,
+      "unknown": 0
+    },
+    "byDist": {
+      "0": 2,
+      "1": 2,
+      "2": 0,
+      "3": 0,
+      "4-5": 0,
+      "6+": 0,
+      "none": 33
+    },
+    "noLivingHolder": 33,
+    "lendable": 0,
+    "unknown": 0,
+    "encDenominator": 40,
+    "encCovered": 40,
+    "coverage": 1,
+    "orphanRows": 0,
+    "dominantState": "no-living-holder",
+    "dominantN": 33,
+    "dominantShare": 0.8918918918918919,
+    "secondState": "sheltered",
+    "secondN": 4,
+    "secondShare": 0.10810810810810811,
+    "perSeed": {
+      "107111": {
+        "launches": 37,
+        "unarmed": 37,
+        "armedEarshot": 4,
+        "eligibleEarshot": 0,
+        "lendable": 0,
+        "raidLaunches": 3
+      }
+    },
+    "detail": [
+      {
+        "seed": 107111,
+        "day": 55,
+        "mid": "reunion",
+        "lead": "mara_vasquez",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 55,
+        "mid": "eulogy",
+        "lead": "benoit_lambert",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 55,
+        "mid": "eulogy",
+        "lead": "mara_vasquez",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 55,
+        "mid": "eulogy",
+        "lead": "mara_vasquez",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 58,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 58,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 58,
+        "mid": "eulogy",
+        "lead": "benoit_lambert",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 60,
+        "mid": "eulogy",
+        "lead": "benoit_lambert",
+        "leadKind": "gun",
+        "nearestHolder": "jesse_cortez",
+        "nearestDist": 0,
+        "nearestState": "sheltered",
+        "nearestHealth": 86,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 61,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": "jesse_cortez",
+        "nearestDist": 0,
+        "nearestState": "sheltered",
+        "nearestHealth": 84,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 72,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": "jesse_cortez",
+        "nearestDist": 1,
+        "nearestState": "sheltered",
+        "nearestHealth": 86,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 79,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": "jesse_cortez",
+        "nearestDist": 1,
+        "nearestState": "sheltered",
+        "nearestHealth": 100,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 82,
+        "mid": "eulogy",
+        "lead": "chloe_dubois",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 93,
+        "mid": "herald",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 100,
+        "mid": "eulogy",
+        "lead": "visjoin_81",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 100,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 100,
+        "mid": "herald",
+        "lead": "visjoin_81",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 102,
+        "mid": "eulogy",
+        "lead": "chloe_dubois",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 102,
+        "mid": "algorithm",
+        "lead": "visjoin_99",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 102,
+        "mid": "herald",
+        "lead": "visjoin_99",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 102,
+        "mid": "algorithm",
+        "lead": "chloe_dubois",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 102,
+        "mid": "herald",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 103,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 103,
+        "mid": "algorithm",
+        "lead": "chloe_dubois",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 104,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 105,
+        "mid": "algorithm",
+        "lead": "chloe_dubois",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 105,
+        "mid": "algorithm",
+        "lead": "chloe_dubois",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 106,
+        "mid": "eulogy",
+        "lead": "visjoin_104",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 111,
+        "mid": "editor",
+        "lead": "chloe_dubois",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 111,
+        "mid": "editor",
+        "lead": "chloe_dubois",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 119,
+        "mid": "eulogy",
+        "lead": "jovan_milic",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 128,
+        "mid": "timeslot",
+        "lead": "visjoin_122",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 131,
+        "mid": "timeslot",
+        "lead": "visjoin_127",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 137,
+        "mid": "eulogy",
+        "lead": "visjoin_135",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 138,
+        "mid": "finale_crew",
+        "lead": "visjoin_135",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 138,
+        "mid": "finale_crew",
+        "lead": "visjoin_135",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 138,
+        "mid": "eulogy",
+        "lead": "visjoin_135",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107111,
+        "day": 139,
+        "mid": "finale_crew",
+        "lead": "visjoin_135",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      }
+    ]
+  },
+  "participation": {
+    "dir": "evidence/2026-11-21/perseed-lendpool-a-smoke2",
+    "n": 1,
+    "valid": 1,
+    "errors": 0,
+    "meetings": 42,
+    "engaged": 40,
+    "flees": 23,
+    "leadAttributed": 42,
+    "leadRuleCounts": {
+      "expedition-holder": 2,
+      "aid": 25,
+      "world-tick": 15
+    },
+    "leadUnclassified": 0,
+    "fleeClassified": 23,
+    "fleeUnclassified": 0,
+    "fleeCauseCounts": {
+      "hopeless-after-help": 15,
+      "floor-hp": 5,
+      "learn-withdrawal": 3
+    },
+    "armedEntries": 6,
+    "armedLeads": 0,
+    "armedVolleys": 0,
+    "armedFlees": 3,
+    "armedMeetings": 6,
+    "unarmedFlees": 20,
+    "unarmedMeetings": 36,
+    "deathsTotal": 104,
+    "deathsPerEngaged": 2.6,
+    "volleyDmgLeadRanged": 8,
+    "mDealtLeadRanged": 20,
+    "leadGearFlee": [
+      {
+        "bravery": 0,
+        "armorP": 30,
+        "weaponB": 20,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "intense"
+      },
+      {
+        "bravery": 0,
+        "armorP": 12,
+        "weaponB": 0,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "intense"
+      },
+      {
+        "bravery": 0,
+        "armorP": 24,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 24,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 12,
+        "weaponB": 0,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 24,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 42,
+        "weaponB": 35,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 36,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 12,
+        "weaponB": 0,
+        "temper": "fidgety"
+      },
+      {
+        "bravery": 0,
+        "armorP": 8,
+        "weaponB": 0,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 0,
+        "armorP": 42,
+        "weaponB": 35,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 42,
+        "weaponB": 35,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 52,
+        "weaponB": 35,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 52,
+        "weaponB": 35,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 3,
+        "weaponB": 12,
+        "temper": "stoic"
+      },
+      {
+        "bravery": 0,
+        "armorP": 52,
+        "weaponB": 35,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 52,
+        "weaponB": 35,
+        "temper": "dry"
+      },
+      {
+        "bravery": 3,
+        "armorP": 5,
+        "weaponB": 5,
+        "temper": "bold"
+      },
+      {
+        "bravery": 0,
+        "armorP": 55,
+        "weaponB": 35,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 0,
+        "armorP": 55,
+        "weaponB": 35,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 0,
+        "armorP": 55,
+        "weaponB": 35,
+        "temper": "mischievous"
+      }
+    ],
+    "leadGearKill": [
+      {
+        "bravery": 0,
+        "armorP": 42,
+        "weaponB": 35,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 46,
+        "weaponB": 0,
+        "temper": "warm"
+      }
+    ],
+    "leadGearOther": [
+      {
+        "bravery": 0,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "intense"
+      },
+      {
+        "bravery": 0,
+        "armorP": 12,
+        "weaponB": 0,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 12,
+        "weaponB": 0,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 36,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 36,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 46,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 46,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 12,
+        "weaponB": 0,
+        "temper": "fidgety"
+      },
+      {
+        "bravery": 0,
+        "armorP": 42,
+        "weaponB": 35,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 8,
+        "weaponB": 0,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 0,
+        "armorP": 46,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 46,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 27,
+        "weaponB": 35,
+        "temper": "bold"
+      },
+      {
+        "bravery": 3,
+        "armorP": 5,
+        "weaponB": 5,
+        "temper": "bold"
+      },
+      {
+        "bravery": 0,
+        "armorP": 5,
+        "weaponB": 15,
+        "temper": "earnest"
+      },
+      {
+        "bravery": 0,
+        "armorP": 55,
+        "weaponB": 35,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 0,
+        "armorP": 55,
+        "weaponB": 35,
+        "temper": "mischievous"
+      }
+    ],
+    "fleeDetail": [
+      {
+        "seed": 107111,
+        "day": 39,
+        "vid": "gen_4n309mn",
+        "mid": "strike",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 5,
+        "mDealt": 225,
+        "vTaken": 64,
+        "fleeHpFrac": 0.36,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107111,
+        "day": 55,
+        "vid": "mara_vasquez",
+        "mid": "reunion",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 94,
+        "vTaken": 109,
+        "fleeHpFrac": 0.06,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107111,
+        "day": 55,
+        "vid": "benoit_lambert",
+        "mid": "eulogy",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 124,
+        "vTaken": 54,
+        "fleeHpFrac": 0.39,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107111,
+        "day": 55,
+        "vid": "mara_vasquez",
+        "mid": "eulogy",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 9,
+        "vTaken": 35,
+        "fleeHpFrac": 0.04,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107111,
+        "day": 58,
+        "vid": "ines_duarte",
+        "mid": "eulogy",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "floor-hp",
+        "rounds": 3,
+        "mDealt": 0,
+        "vTaken": 45,
+        "fleeHpFrac": 0.26,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 58,
+        "vid": "ines_duarte",
+        "mid": "eulogy",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 0,
+        "vTaken": 16,
+        "fleeHpFrac": 0.1,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 59,
+        "vid": "benoit_lambert",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 16,
+        "vTaken": 38,
+        "fleeHpFrac": 0.1,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107111,
+        "day": 61,
+        "vid": "ines_duarte",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 0,
+        "vTaken": 46,
+        "fleeHpFrac": 0.13,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 3,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 71,
+        "vid": "chloe_dubois",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 0,
+        "vTaken": 28,
+        "fleeHpFrac": 0.25,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 3,
+        "volley": null
+      },
+      {
+        "seed": 107111,
+        "day": 93,
+        "vid": "ines_duarte",
+        "mid": "herald",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 14,
+        "mDealt": 434,
+        "vTaken": 55,
+        "fleeHpFrac": 0.45,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 100,
+        "vid": "visjoin_81",
+        "mid": "eulogy",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 0,
+        "vTaken": 75,
+        "fleeHpFrac": 0.18,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 3,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 102,
+        "vid": "visjoin_99",
+        "mid": "algorithm",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 107,
+        "vTaken": 76,
+        "fleeHpFrac": 0.24,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 102,
+        "vid": "chloe_dubois",
+        "mid": "algorithm",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 163,
+        "vTaken": 35,
+        "fleeHpFrac": 0.4,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 103,
+        "vid": "chloe_dubois",
+        "mid": "algorithm",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 11,
+        "mDealt": 208,
+        "vTaken": 61,
+        "fleeHpFrac": 0.22,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 11,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 105,
+        "vid": "chloe_dubois",
+        "mid": "algorithm",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 34,
+        "vTaken": 19,
+        "fleeHpFrac": 0.21,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 3,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 105,
+        "vid": "chloe_dubois",
+        "mid": "algorithm",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 0,
+        "vTaken": 4,
+        "fleeHpFrac": 0.17,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 106,
+        "vid": "visjoin_104",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 0,
+        "vTaken": 91,
+        "fleeHpFrac": 0.06,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107111,
+        "day": 111,
+        "vid": "chloe_dubois",
+        "mid": "editor",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 256,
+        "vTaken": 64,
+        "fleeHpFrac": 0.33,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 111,
+        "vid": "chloe_dubois",
+        "mid": "editor",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 0,
+        "vTaken": 18,
+        "fleeHpFrac": 0.15,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 128,
+        "vid": "visjoin_122",
+        "mid": "timeslot",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "learn-withdrawal",
+        "rounds": 1,
+        "mDealt": 20,
+        "vTaken": 40,
+        "fleeHpFrac": 0.12,
+        "armed": false,
+        "intent": "learn",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 2,
+          "hits": 1,
+          "dmg": 8,
+          "ammoLeft": 2
+        }
+      },
+      {
+        "seed": 107111,
+        "day": 138,
+        "vid": "visjoin_135",
+        "mid": "finale_crew",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "learn-withdrawal",
+        "rounds": 1,
+        "mDealt": 24,
+        "vTaken": 5,
+        "fleeHpFrac": 0.33,
+        "armed": false,
+        "intent": "learn",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": null
+      },
+      {
+        "seed": 107111,
+        "day": 138,
+        "vid": "visjoin_135",
+        "mid": "finale_crew",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "learn-withdrawal",
+        "rounds": 1,
+        "mDealt": 22,
+        "vTaken": 5,
+        "fleeHpFrac": 0.28,
+        "armed": false,
+        "intent": "learn",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": null
+      },
+      {
+        "seed": 107111,
+        "day": 138,
+        "vid": "visjoin_135",
+        "mid": "eulogy",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 0,
+        "vTaken": 5,
+        "fleeHpFrac": 0.23,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": null
+      }
+    ],
+    "armedDetail": [
+      {
+        "seed": 107111,
+        "day": 59,
+        "vid": "benoit_lambert",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "jesse_cortez",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 60,
+        "vid": "benoit_lambert",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vDie",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "jesse_cortez",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 61,
+        "vid": "ines_duarte",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        },
+        "partyCells": [
+          {
+            "vid": "jesse_cortez",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 71,
+        "vid": "chloe_dubois",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "jesse_cortez",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 72,
+        "vid": "ines_duarte",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "mFlee",
+        "lead": false,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        },
+        "partyCells": [
+          {
+            "vid": "jesse_cortez",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 79,
+        "vid": "ines_duarte",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "mFlee",
+        "lead": false,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        },
+        "partyCells": [
+          {
+            "vid": "jesse_cortez",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      }
+    ],
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 1,
+    "wave5": 1,
+    "medianDays": 140,
+    "days": [
+      140
+    ],
+    "communityLost": 1,
+    "perSeed": [
+      {
+        "seed": 107111,
+        "meetings": 42,
+        "engaged": 40,
+        "flees": 23,
+        "armed": 6,
+        "days": 140,
+        "endReason": "village-lost",
+        "standing": 315,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "won": false
+      }
+    ],
+    "leadAttribution": 1,
+    "fleeClassification": 1
+  },
+  "presence": {
+    "dir": "evidence/2026-11-21/perseed-lendpool-a-smoke2",
+    "n": 1,
+    "valid": 1,
+    "errors": 0,
+    "poolTicks": 1954,
+    "poolHolderPresent": 42,
+    "poolOnTile": 0,
+    "poolAdjacent": 42,
+    "poolAbsent": 1912,
+    "poolFights": 86,
+    "poolHolderLed": 0,
+    "poolDraftMiss": 21,
+    "poolNoFight": 1868,
+    "transfers": 0,
+    "vanishes": 1,
+    "newHolders": 1,
+    "holderDied": 0,
+    "transferDetail": [],
+    "vanishDetail": [
+      {
+        "seed": 107111,
+        "day": 80,
+        "from": "jesse_cortez"
+      }
+    ],
+    "draftMissDetail": [
+      {
+        "seed": 107111,
+        "day": 59,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "benoit_lambert"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 59,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "benoit_lambert"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 59,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "benoit_lambert"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 60,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "benoit_lambert"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 60,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "benoit_lambert"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 60,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "benoit_lambert"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 60,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "benoit_lambert"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 61,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "ines_duarte"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 61,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "ines_duarte"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 61,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "ines_duarte"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 61,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "ines_duarte"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 71,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "chloe_dubois"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 71,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "chloe_dubois"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 71,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "chloe_dubois"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 71,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "chloe_dubois"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 72,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "ines_duarte"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 72,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "ines_duarte"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 72,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "ines_duarte"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 72,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "ines_duarte"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 79,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "ines_duarte"
+        ]
+      },
+      {
+        "seed": 107111,
+        "day": 79,
+        "mid": "eulogy",
+        "pooled": [
+          "jesse_cortez"
+        ],
+        "leads": [
+          "ines_duarte"
+        ]
+      }
+    ]
+  },
+  "lend": {
+    "dir": "evidence/2026-11-21/perseed-lendpool-a-smoke2",
+    "n": 1,
+    "valid": 1,
+    "errors": 0,
+    "lends": 0,
+    "lendsGun": 0,
+    "lendsCells": 0,
+    "lendsTile": 0,
+    "lendsAdjacent": 0,
+    "gunReturned": 0,
+    "borrowerKept": 0,
+    "cellsReturned": 0,
+    "cellsMoved": 0,
+    "lendsJoined": 0,
+    "lendsUnjoined": 0,
+    "lentVolleys": 0,
+    "lentVolleyDmg": 0,
+    "lentOutcomes": {},
+    "borrowerSurvived": 0,
+    "borrowerDied": 0,
+    "borrowerSurvival": null,
+    "lendDetail": []
+  },
+  "pool": {
+    "dir": "evidence/2026-11-21/perseed-lendpool-a-smoke2",
+    "n": 1,
+    "valid": 1,
+    "errors": 0,
+    "moments": 0,
+    "momentsGun": 0,
+    "momentsCells": 0,
+    "momentsTile": 0,
+    "momentsAdjacent": 0,
+    "fights": 0,
+    "perSeed": {
+      "107111": 0
+    },
+    "byKind": {},
+    "byFrom": {},
+    "detail": []
+  },
+  "cellVerdict": "DIAG-NO-GO",
+  "cellBars": [
+    {
+      "id": "census-coverage",
+      "pass": false,
+      "detail": "seeds with complete holder census 1/1 (baseline + daily census + cellPile rows, 0 instrument errors, census-day share >= 0.5); per-seed: 107111:ok"
+    },
+    {
+      "id": "attribution",
+      "pass": false,
+      "detail": "cell appearances 1, attributed 0 (completeness 0.000, bar >= 0.90); by source {\"unexplained\":1}"
+    },
+    {
+      "id": "volley-opportunity-pool",
+      "pass": true,
+      "detail": "engaged wave-4+ meetings with a 0-cell searcaster participant 0 (floor 5); armed searcaster meetings 6; all wave-4+ meetings with a 0-cell searcaster participant 0 (evaded 0); searcaster holder-days 22 — RARE-RATE path: pool thin, stated as a finding, not re-scored"
+    }
+  ],
+  "participationVerdict": "DIAG-GO",
+  "diag": {
+    "dir": "evidence/2026-11-21/perseed-lendpool-a-smoke2",
+    "n": 1,
+    "valid": 1,
+    "errors": 0,
+    "bowopenOn": {
+      "true": 1
+    },
+    "senseexpedOn": {
+      "true": 1
+    },
+    "speargateOn": {
+      "true": 1
+    },
+    "gunrateOn": {
+      "true": 1
+    },
+    "coverage": [
+      {
+        "seed": 107111,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 1093,
+        "cellPileRows": 138,
+        "censusDays": 138,
+        "livedDays": 140,
+        "censusDayShare": 0.9857142857142858,
+        "instrumentErrors": 0,
+        "complete": true
+      }
+    ],
+    "coverageComplete": 1,
+    "searcasterHolders": [
+      {
+        "seed": 107111,
+        "vid": "jesse_cortez",
+        "holderDays": 22,
+        "cellDays": 22,
+        "maxCells": 2,
+        "zeroDays": 0
+      }
+    ],
+    "searcasterHolderDays": 22,
+    "searcasterCellDays": 22,
+    "searcasterZeroDays": 0,
+    "searcasterHoldersTotal": 1,
+    "cellHolderDays": 22,
+    "maxCellsEver": 2,
+    "cellAppearances": 1,
+    "cellAttributed": 0,
+    "cellAttribution": 0,
+    "cellBySource": {
+      "unexplained": 1
+    },
+    "searcasterAppearances": 1,
+    "searcasterAttributed": 1,
+    "searcasterAttribution": 1,
+    "searcasterBySource": {
+      "contest-prize": 1
+    },
+    "searcasterBaseline": 0,
+    "cellBaseline": 0,
+    "searcasterDeparts": 0,
+    "searcasterDepartsZero": 0,
+    "searcasterDepartOutcomes": {},
+    "lootCellDrops": 0,
+    "lootSearcasterDrops": 0,
+    "lootByDrop": {},
+    "grantCellByCaller": {},
+    "grantSearcasterByCaller": {
+      "contest-prize": 1
+    },
+    "grantCellTotal": 0,
+    "grantSearcasterTotal": 1,
+    "corpseTakeCell": 0,
+    "corpseTakeTotal": 109,
+    "contestPrizes": 34,
+    "scholarCellAppearances": 0,
+    "scholarCellAttributed": 0,
+    "scholarCellBySource": {},
+    "playerCrafts": 1,
+    "playerCraftCell": 0,
+    "playerCraftByRecipe": {
+      "stone_knife": 1
+    },
+    "pileMaxTotal": 0,
+    "pileEverPositive": 0,
+    "scholarMaxCells": 0,
+    "poolEngagedZero": 0,
+    "poolEngagedArmed": 6,
+    "poolAllZero": 0,
+    "poolEvadedZero": 0,
+    "volleyFiredFromSearcaster": 0,
+    "noFusionCellsLines": 0,
+    "encWave4Plus": 42,
+    "encEngaged": 40,
+    "medianDays": 140,
+    "communityLost": 1,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 1,
+    "wave5": 1,
+    "scaleRanks": {
+      "regional": 1
+    },
+    "starvation": 1,
+    "starvationVillager": 1,
+    "perSeed": [
+      {
+        "seed": 107111,
+        "days": 140,
+        "endReason": "village-lost",
+        "standing": 315,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 1,
+        "searcasterHolderDays": 22,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 6,
+        "wave4PlusMeetings": 42,
+        "engagedMeetings": 40
+      }
+    ]
+  },
+  "cellAppearanceDetail": [
+    {
+      "seed": 107111,
+      "vid": "jesse_cortez",
+      "day": 58,
+      "prevDay": 57,
+      "delta": 2,
+      "source": "unexplained"
+    }
+  ],
+  "searcasterAppearanceDetail": [
+    {
+      "seed": 107111,
+      "vid": "jesse_cortez",
+      "day": 58,
+      "prevDay": 57,
+      "source": "contest-prize"
+    }
+  ],
+  "poolDetail": []
+}
