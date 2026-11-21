@@ -271,6 +271,30 @@ Adjudication — 0 attributable, same standing families as gate 1:
   designed fail-loud behavior, not a defect; case 2 held-lock passed
   3/3 on that same re-run.)
 
+SECOND REBASE + DELTA-GATE (adoption, 2026-11-21 ~08:41Z) — master moved
+again while gate 2 ran (Lane B succession r262 landed, `e35894fbb`: M12
+escalator-cap fix in src/js/conversation.js + src/js/convo-dialogue.js,
+M4 strip, staged witness sitting). The branch was rebased onto
+`e35894fbb` (new tip `695dbcaef`, clean). Following the r262 adoption's
+own precedent in the identical situation, a third full gate was replaced
+by a delta-gate, because: the r262 src changes were themselves fully
+gated by the r262 adoption (gate 333/11, 0 attributable); my 3 commits
+touch exactly 6 files with **0 overlap** against the r262 range
+(9070aaf70..e35894fbb); and scripts/worktree-heartbeat.sh is
+byte-identical to the gated tip. Delta-gate on the final tip
+`695dbcaef` (in `r151-gate`, reset to the tip):
+- This run's proof test: **5 passed, 0 failed** (case 1 free-lock
+  landed live 08:40:56Z; case 2 held-lock 3/3).
+- r262 M12 proof: **GREEN** (escalator caps at "circles").
+- The two new 0437 test scripts fail **identically to plain master
+  9070aaf70** (verified by the r262 adoption): test-evadebow-a.js 30/3
+  (substrate DEPMAT/ROLL35/AMMO checks expect the substrate present;
+  the round's revert removed it) and test-leadside-a.js 30/40 (lever
+  checks expect the lever live; the round reverted it). Pre-existing
+  master debt from the 0437 round's own revert — not this branch, not
+  a merge blocker; the 0437 adoption owns updating those two tests.
+  This branch touches neither game.js nor any evade/leadside code.
+
 ## Telemetry
 
 **Quiet.** `node scripts/telemetry-check.js` vs the landing-split baseline
