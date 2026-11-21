@@ -2386,7 +2386,27 @@
       // doubles too nested unescaped quotes (transcript-verified:
       // ...neighbors.""). Single quotes nest cleanly; the snippet text
       // itself is untouched.
-      if (o.snippet) {
+      // QUOTE-KIND MATCH (journey-crisis r262, blemish 5): the label
+      // re-derives to the ledger's CURRENT favor (r228) while the snippet
+      // is the thread's last beat under the favor it was planted with.
+      // When the favor changed kind since planting (wound care -> foraging
+      // help), quoting the old favor's words under the new favor's label
+      // misattributes the memory (Suarni 14583 d48: "that foraging help"
+      // quoted a wound-conversation line from 9 days back). Drop the
+      // quote; the thread still resumes (label + whyLine). Same-kind or
+      // generic labels keep their quotes — the snippet is the thread's
+      // own memory then. This preserves the r228 behavior (the opener
+      // still names the CURRENT favor, C3c holds); only the stale quote
+      // drops, like the R17–R20 guards above it.
+      const _favorLabels = {
+        food_share: 'that food share', forage_help: 'that foraging help',
+        sick_help: 'that sickness help', heal_help: 'that wound care',
+        water_haul: 'that water haul', watch_shift: 'that watch shift',
+        stay_close: 'that night together', snare_mend: 'that snare mending',
+      };
+      const _kindOf = (l) => Object.keys(_favorLabels).find(k => _favorLabels[k] === l) || null;
+      const _quoteKindChanged = !!(_kindOf(o.label) && _kindOf(label) && _kindOf(o.label) !== _kindOf(label));
+      if (o.snippet && !_quoteKindChanged) {
         // R17 (journey-social 2026-10-15): never quote a deflection as the
         // "memory" — the sayLine hook no longer notes fallback chunks, so no
         // new deflection snippets are planted; this guards threads planted

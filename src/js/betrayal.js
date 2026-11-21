@@ -1527,15 +1527,23 @@
     // role-aware: "you" only when YOU were the target who walked out
     const you = this.isPlayer(c.target);
     const tname = you ? 'you' : this.disp(c.target);
-    if (!wits.length) { this.say(`No one saw ${tname} leave. Just trees.`); return null; }
+    if (!wits.length) {
+      // WITNESS-LINE RETURN (journey-crisis r262, blemish 1): the caller
+      // (betrayalTurn 'witnesses') speaks this line into the conversation
+      // transcript — returning null left it speaking the fixed label
+      // 'Names, named.' while the honest answer lived only in sayLines.
+      const l = `No one saw ${tname} leave. Just trees.`;
+      this.say(l); return l;
+    }
     // count the walk honestly — the party was the plotters plus the target
     const nwalk = (c.accused || []).length + 1;
     const all = nwalk <= 2 ? 'both of you' : nwalk === 3 ? 'all three of you' : nwalk === 4 ? 'all four of you' : `all ${nwalk} of you`;
     const walked = you ? `saw you walk out together — ${all}, friendly as anything`
       : `saw ${tname} walk out with them — friendly as anything`;
-    this.say(`${this.capFirst(wits.map(w => this.whoTag(w)).join(', '))} ${walked}. That much, at least, nobody can rehearse away.`);
+    const wline = `${this.capFirst(wits.map(w => this.whoTag(w)).join(', '))} ${walked}. That much, at least, nobody can rehearse away.`;
+    this.say(wline);
     this.moveBelief(c, -8 * Math.min(2, wits.length), 'witnesses saw them leave together');
-    return true;
+    return wline;
   },
   // (d) interrogate separately: catch the planted inconsistencies
   pressAccomplice(caseId, vid) {
@@ -4679,7 +4687,16 @@
         : finish('"Nothing to show. Just my word."', '"Look at me."');
     }
     if (act === 'site') { this.examineAmbushSite(parts[2]); return finish('The ground remembers.', '(examine the site)'); }
-    if (act === 'witnesses') { this.nameWitnesses(parts[2]); return finish('Names, named.', '"Who saw us leave?"'); }
+    if (act === 'witnesses') {
+      // WITNESS-LINE RETURN (journey-crisis r262, blemish 1): speak the
+      // line nameWitnesses actually said — "No one saw Sanne leave. Just
+      // trees." — instead of the fixed label 'Names, named.', which
+      // claimed names were named when the game said no one saw. The
+      // fallback stays for the already-named repeat (menu hides the
+      // choice once witnessesNamed, so it should not fire).
+      const wl = this.nameWitnesses(parts[2]);
+      return finish(typeof wl === 'string' ? wl : 'Names, named.', '"Who saw us leave?"');
+    }
     if (act === 'expose') {
       const cs = this.getCase(parts[2]);
       const b = (cs.foundBribes || []).find(x => !cs.exposedBribes.includes(x.voter));

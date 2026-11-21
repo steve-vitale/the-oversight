@@ -291,6 +291,7 @@ function v2Fight(Game, ctx) {
     if (ctx._fightObj !== f) {
       ctx._fightObj = f;
       ctx._turnN = 0;
+      ctx._closeStuck = 0;
       armUp(Game, ctx);
       // COUNTER CHECK: focus a known-counter monster first (dormant by
       // construction — no def carries a counter field; measured, not assumed).
@@ -350,7 +351,28 @@ function v2Fight(Game, ctx) {
           const dd = Math.max(Math.abs(cx - px), Math.abs(cy - py));
           if (dd < bd) { bd = dd; bx = cx; by = cy; }
         }
+        // UNREACHABLE-FLEE (journey-crisis r262): the radio-mimic stall
+        // (r261 panel seed 14584 d27) — the target sits across unpathable
+        // ground, findPath fails every turn, and the policy retried the
+        // same failed close 116 times while the fight never resolved.
+        // A player who cannot move for 3 straight turns while the target
+        // stays out of weapon range is stuck: disengage through the
+        // existing barrier-exit flee instead of burning the day. Any
+        // successful move resets the count, so legitimate repositioning
+        // never trips it; a distant-but-pathable target the policy never
+        // stages toward also flees at 3 (the policy still lacks a staged
+        // approach — a separate change with its own panel comparison).
+        const _px0 = px, _py0 = py;
         if (bx != null) { try { Game.tbPlayerMove(bx, by); } catch (e) {} }
+        let _q = null;
+        try { _q = Game.tbFighter('p'); } catch (e) {}
+        const _moved = !!_q && (_q.mx !== _px0 || _q.my !== _py0);
+        let _d1 = d0;
+        try { _d1 = Math.max(Math.abs(tmx - (_q ? _q.mx : px)), Math.abs(tmy - (_q ? _q.my : py))); } catch (e) {}
+        if (!_moved && _d1 > (w.range || 1)) {
+          ctx._closeStuck = (ctx._closeStuck || 0) + 1;
+          if (ctx._closeStuck >= 3) return flee('unreachable');
+        } else ctx._closeStuck = 0;
         endTurn();
         ctx._turnN = (ctx._turnN || 0) + 1;
         return true;
@@ -361,11 +383,13 @@ function v2Fight(Game, ctx) {
     const turnN = ctx._turnN || 0;
     const abilKey = pickTurn(Game, ctx, f, p, hpPct, tgt.key, turnN);
     if (abilKey && fire(Game, ctx, abilKey, tgt.key)) {
+      ctx._closeStuck = 0;
       ctx._turnN = turnN + 1;
       endTurn();
       return true;
     }
     try { Game.tbPlayerStrike(tgt.key); ctx.struck = (ctx.struck || 0) + 1; } catch (e) {}
+    ctx._closeStuck = 0;
     ctx._turnN = turnN + 1;
     endTurn();
     return true;

@@ -901,7 +901,16 @@
         // seed 444/666). Same pool treatment as this def's commitBeat and
         // closeLine: cycles per conversation, keyed by favor kind; the
         // no-repeat ledger still applies at sayLine. The plant survives —
-        // every variant keeps "they won't forget / won't ask twice".
+        // every variant keeps "they won't forget".
+        // NO NEVER-AGAIN PROMISE (journey-crisis r262, blemish 2): the old
+        // variants promised the ask would never return ("They'll just stop
+        // asking", "They won't raise it again", "They won't ask twice") —
+        // narrator assertion, not the NPC's own breakable promise — while
+        // the re-ask path (RE-ASK VARIETY, sociallife 2026-10-11)
+        // deliberately re-asks a live need ("I hate to ask twice, but
+        // it's still open"). A need that never re-opens can never be met
+        // later, so the re-ask stays; the decline now promises only the
+        // moment — a pause, never forever.
         const c = this.convoGet(vid);
         const favor = (c.want && c.want.favor) || (typeof this.convoGetFavor === 'function' && this.convoGetFavor(vid));
         const kind = (favor && favor.kind) || 'favor';
@@ -914,10 +923,10 @@
           return '"Oh — no, it\'s fine. Already handled. But thanks."';
         }
         return this.convoPickCycle(vid, 'deflect:favor:' + kind, [
-          '"No, yeah, of course. Forget I asked." They won\'t forget. They\'ll just stop asking.',
-          '"Right. I get it." A beat — and then the subject is closed. They won\'t raise it again.',
-          '"...Okay. I\'ll figure it out." They won\'t ask twice. That much is clear.',
-        ]) || '"No, yeah, of course. Forget I asked." They won\'t forget. They\'ll just stop asking.';
+          '"No, yeah, of course. Forget I asked." They won\'t forget. They\'ll let it rest — for now.',
+          '"Right. I get it." A beat — and then the subject is closed. For today, anyway.',
+          '"...Okay. I\'ll figure it out." They won\'t press it. Not right now.',
+        ]) || '"No, yeah, of course. Forget I asked." They won\'t forget. They\'ll let it rest — for now.';
       },
       commitBeat(vid) {
         const c = this.convoGet(vid);
