@@ -32,7 +32,7 @@ const VF = require(path.join(REPO, 'scripts', 'vetfirst-instrument-20261111'));
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : []).filter(Number.isFinite);
 const DAYS = parseInt(process.env.DAYS || '150', 10) || 150;
 const RUN = process.env.RUN || 'holdersupply-a';
-const MODE = process.env.MODE || 'diag';
+const MODE = process.env.MODE || 'ctl';
 const OUTDIR = process.env.OUTDIR || ('perseed-holdersupply-a');
 const RECORDER_ON = process.env.LAUNCHPARTY_RECORDER !== 'off';
 // SEEDLAND (sim-seedland-b): the fieldFight watch is wave >= 4
@@ -110,6 +110,7 @@ const FIGHTALLY2_ON = process.env.FIGHTALLY2 === '1';
 const SPEARGATE_ON = process.env.SPEARGATE === '1';
 const GUNRATE_ON = process.env.GUNRATE === '1';
 const CELLGATE_ON = process.env.CELLGATE === '1';
+const BIGBUNDLE_ON = process.env.BIGBUNDLE === '1';
 const LEND_ON = process.env.LEND === '1';
 // GUNRATE: sha of the files that carry the lever + whether it is in
 // them, so each corpus file self-describes the code it ran under.
@@ -126,6 +127,13 @@ let CELLGATE_PRESENT = false;
 try {
   const ffSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'fieldFights.js'), 'utf8');
   CELLGATE_PRESENT = /CELLGATE/.test(ffSrc) && /holds the Searcaster/.test(ffSrc);
+} catch (e) {}
+// BIGBUNDLE: the 6-cell bundle must be in contests.js, so each
+// corpus file self-describes the code it ran under.
+let BIGBUNDLE_PRESENT = false;
+try {
+  const contestsSrc2 = fs.readFileSync(path.join(REPO, 'src', 'js', 'contests.js'), 'utf8');
+  BIGBUNDLE_PRESENT = /BIGBUNDLE/.test(contestsSrc2) && /units: _bbOn \? 6 : 2/.test(contestsSrc2);
 } catch (e) {}
 // LEND: the gun lend must be in game.js, so each corpus file
 // self-describes the code it ran under.
@@ -2352,6 +2360,7 @@ async function oneRun(seed) {
     gameSha: GAME_SHA, bowopenPresent: BOWOPEN_PRESENT,
     launchpartyOn: false, senseexpedOn: SENSEEXPED_ON, senseexpedPresent: SENSE_PRESENT, fightally2On: FIGHTALLY2_ON, speargateOn: SPEARGATE_ON, gunrateOn: GUNRATE_ON, gunratePresent: GUNRATE_PRESENT,
     cellgateOn: CELLGATE_ON, cellgatePresent: CELLGATE_PRESENT,
+    bigbundleOn: BIGBUNDLE_ON, bigbundlePresent: BIGBUNDLE_PRESENT,
     lendOn: LEND_ON, lendPresent: LEND_PRESENT,
     bowopenOn: BOWOPEN_ON,
     recorderOn: RECORDER_ON,
@@ -2408,14 +2417,17 @@ async function oneRun(seed) {
 }
 
 if (require.main === module) (async function () {
-  // LENDPOOL: one diag leg (MODE=diag). The lendfix two-leg guard
-  // (ctl|fix) is replaced: this arm measures the pool's near-miss,
-  // it does not compare legs.
-  if (MODE !== 'diag') { console.error('LENDPOOL STOP: MODE must be diag, got ' + JSON.stringify(MODE)); process.exit(2); }
+  // HOLDERSUPPLY: two legs (MODE=ctl|arm). The legs differ ONLY by
+  // bundle size: ctl runs the 2-cell substrate bundle, arm adds
+  // BIGBUNDLE=1 (6 cells). LEND stays OFF on both legs.
+  if (MODE !== 'ctl' && MODE !== 'arm') { console.error('HOLDERSUPPLY STOP: MODE must be ctl or arm, got ' + JSON.stringify(MODE)); process.exit(2); }
+  if (MODE === 'arm' && !BIGBUNDLE_ON) { console.error('HOLDERSUPPLY STOP: BIGBUNDLE=1 required on the arm leg.'); process.exit(2); }
+  if (MODE === 'ctl' && BIGBUNDLE_ON) { console.error('HOLDERSUPPLY STOP: BIGBUNDLE must be unset on the control leg.'); process.exit(2); }
+  if (!BIGBUNDLE_PRESENT) { console.error('HOLDERSUPPLY STOP: the BIGBUNDLE lever code (contests.js bundle units) must be present.'); process.exit(2); }
   if (!GUNRATE_ON) { console.error('LEND STOP: GUNRATE=1 required on both legs (rebuilt substrate).'); process.exit(2); }
   if (!CELLGATE_ON) { console.error('LEND STOP: CELLGATE=1 required on both legs (rebuilt substrate).'); process.exit(2); }
   // NO lend re-test in this arm: LEND must be unset.
-  // The diag leg measures the pool's near-miss (counter only); the lend stays OFF.
+  // Both legs measure the pool's near-miss (counter only); the lend stays OFF.
   if (LEND_ON) { console.error('LENDPOOL STOP: LEND must be unset — this arm diagnoses the pool with the lend OFF, it does not re-test the lend.'); process.exit(2); }
   if (process.env.PRESENCE === '1') { console.error('LEND STOP: PRESENCE must be unset on both legs (reverted lever — its code is absent from master).'); process.exit(2); }
   if (!GUNRATE_PRESENT) { console.error('LEND STOP: the GUNRATE lever code (game.js + contests.js) must be present.'); process.exit(2); }
@@ -2453,7 +2465,7 @@ if (require.main === module) (async function () {
       wiringSha: out.wiringSha, sensePresent: out.sensePresent,
       gameSha: out.gameSha, bowopenPresent: out.bowopenPresent,
       senseexpedOn: out.senseexpedOn, senseexpedPresent: out.senseexpedPresent, fightally2On: out.fightally2On,
-      bowopenOn: out.bowopenOn, speargateOn: out.speargateOn, gunrateOn: out.gunrateOn, gunratePresent: out.gunratePresent, cellgateOn: out.cellgateOn, cellgatePresent: out.cellgatePresent, lendOn: out.lendOn, lendPresent: out.lendPresent,
+      bowopenOn: out.bowopenOn, speargateOn: out.speargateOn, gunrateOn: out.gunrateOn, gunratePresent: out.gunratePresent, cellgateOn: out.cellgateOn, cellgatePresent: out.cellgatePresent, bigbundleOn: out.bigbundleOn, bigbundlePresent: out.bigbundlePresent, lendOn: out.lendOn, lendPresent: out.lendPresent,
       policySha: out.policySha, standingMarker: out.standingMarker,
       recorderOn: out.recorderOn,
       days: out.days, endReason: out.endReason, won: out.won,
