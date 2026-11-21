@@ -275,4 +275,4 @@ directly in this file instead.
 - `d34e19b9e` — analyzer CLI print fix (bars/wall lines; JSON unchanged)
 - [COMMIT-SUBSTRATE-REVERT] — substrate revert
 - [COMMIT-LEVER-REVERT] — lever revert
-- [COMMIT-EVIDENCE] — instrument + evidence (panel-builder seed fix, corpora, analysis, panel)
+- `83a01d139` — instrument + evidence (panel-builder seed fix, corpora, analysis, panel)
