@@ -223,3 +223,29 @@ cleanly is still GO; the rate itself is the finding.
 ## 8. Metric review (to be filled in the evidence file)
 
 - (filled after the run; no bar re-scored)
+
+## Amendment A — smoke catch (before any judged sim, 2026-11-21 ~17:05 UTC)
+
+The smoke on seed 107222 caught one wrong code-read prior in §2, fixed
+before the judged pilot (no judged sim has run; the amendment is committed
+before the pilot, so no bar is re-scored):
+
+- **§2 prior, corrected:** kill loot has TWO shapes, not one.
+  `villagerKillLoot` (game.js:8145) pushes the drop DIRECT to the killer's
+  pack — no `alienLootGrant` call at all. The corpse path is the PLAYER's
+  kill reward, `tbKillRewards` (game.js:47786): `rollAlienLoot` →
+  `corpseForKill` → `alienLootGrant(dropId, lootCorpse)`. `corpseForKill`
+  is a SIBLING of the roll/grant calls, not an ancestor, so the stack
+  names `tbKillRewards` — the first smoke run classified the day-105
+  corpse grant as caller `other` (frame `tbKillRewards@game.js:47790`).
+- **Fix (instrument only, 0 src delta):** `classifyGrantCaller` and
+  `classifyRollCaller` gain a `tbKillRewards` branch (→ `kill-loot-corpse`
+  / `kill-loot`). Analyzer S5 counts player-kill corpse grants as
+  kill-loot drops alongside villagerKillLoot drops. Proof test + analyzer
+  selftest gain tbKillRewards cases (selftest 20/20, proof test 39/39).
+- **Smoke re-run reproduces the trajectory exactly** (same days, counts,
+  and sim fields on 107222) and now resolves the cross-check exactly:
+  contest-prize grant day 72 to gen_gmy38x3 (2 cells bundled) +
+  tbKillRewards corpse drop day 105, never taken — matching the
+  vanishcause record. Smoke gate passes: joins 100%, 0 instrument errors,
+  19 prize rolls observed.

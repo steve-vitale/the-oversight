@@ -28,9 +28,10 @@
 //       (pushed direct to person.items, bypassing alienLootGrant — so
 //       the _cxItemPrize wrap diffs the recipient's cells pre/post
 //       instead of trusting the grant wrap).
-//     villagerKillLoot + _corpseTakeStack — the kill-loot entry: a
-//       searcaster drop lands on the monster's corpse until the
-//       scholar takes it.
+//     villagerKillLoot + tbKillRewards + _corpseTakeStack — the
+//       kill-loot entry: a villager's kill pushes the drop direct to
+//       the killer's pack; a player's kill (tbKillRewards) lands it on
+//       the monster's corpse until the scholar takes it.
 //   Daily census: FULL gun-location census (gunLocationsOf, copied
 //   from the vanishcause driver) — total guns + holder count per day,
 //   so loss days (gun total falls to 0 after >= 1) are visible for
@@ -184,16 +185,22 @@ function firstCallerFrame(stack) {
 }
 // classifyGrantCaller / grantRecipientOf — copied from
 // vanishcause-driver-a.js (provenance: the gunrate/cellgate driver
-// family). The grant side of rollAlienLoot has four callers:
+// family). The grant side of rollAlienLoot has five callers:
 // contest prizes (_cxItemPrize), show gifts (_showVillagerEnd /
-// apWackyGift), trade (betrayal.js), kill loot (corpseForKill ->
-// alienLootGrant -> corpse).
+// apWackyGift), trade (betrayal.js), kill loot — player kills
+// (tbKillRewards -> corpseForKill -> alienLootGrant to the monster's
+// corpse; corpseForKill is a SIBLING call, not an ancestor of the
+// grant, so the stack names tbKillRewards, not corpseForKill — smoke
+// catch, 2026-11-21: the day-105 corpse grant read 'other' until the
+// tbKillRewards branch was added) and villager kills
+// (villagerKillLoot pushes direct to the killer's pack — no
+// alienLootGrant call at all — so no grant row ever carries it).
 function classifyGrantCaller(stack) {
   const st = String(stack || '');
   if (st.indexOf('_cxItemPrize') !== -1) return 'contest-prize';
   if (st.indexOf('_showVillagerEnd') !== -1 || st.indexOf('apWackyGift') !== -1) return 'show-gift';
   if (st.indexOf('betrayal') !== -1) return 'trade';
-  if (st.indexOf('corpseForKill') !== -1) return 'kill-loot-corpse';
+  if (st.indexOf('tbKillRewards') !== -1 || st.indexOf('corpseForKill') !== -1) return 'kill-loot-corpse';
   return 'other';
 }
 function grantRecipientOf(Game, toCorpse) {
@@ -209,12 +216,16 @@ function grantRecipientOf(Game, toCorpse) {
 }
 // classifyRollCaller(stack): the rollAlienLoot caller taxonomy —
 // contest prizes go through _cxItemPrize; kill loot through
-// villagerKillLoot / corpseForKill; anything else is 'other' with its
-// first caller frame for audit. Pure string match, never game state.
+// villagerKillLoot (villager kills, direct to the killer's pack) or
+// tbKillRewards (player kills, to the monster's corpse — the stack
+// names tbKillRewards, not corpseForKill: the corpse call is a sibling
+// of the roll, not an ancestor — smoke catch, 2026-11-21); anything
+// else is 'other' with its first caller frame for audit. Pure string
+// match, never game state.
 function classifyRollCaller(stack) {
   const st = String(stack || '');
   if (st.indexOf('_cxItemPrize') !== -1) return 'contest-prize';
-  if (st.indexOf('villagerKillLoot') !== -1 || st.indexOf('corpseForKill') !== -1) return 'kill-loot';
+  if (st.indexOf('villagerKillLoot') !== -1 || st.indexOf('tbKillRewards') !== -1 || st.indexOf('corpseForKill') !== -1) return 'kill-loot';
   return 'other';
 }
 

@@ -1,0 +1,190 @@
+{
+  "arm": "grantrate-a",
+  "dir": "evidence/2026-11-21/perseed-grantrate-a-smoke",
+  "perSeed": [
+    {
+      "seed": 107222,
+      "days": 110,
+      "end": "village-lost",
+      "maxWave": 4,
+      "standing": 199,
+      "scaleRank": "regional",
+      "won": false,
+      "funnel": {
+        "contestsFired": 14,
+        "contestsNoCast": 0,
+        "contestsUnknownCast": 0,
+        "contestEnds": 11,
+        "endsByOutcome": {
+          "won": 8,
+          "lost": 3
+        },
+        "wins": 8,
+        "prizeCalls": 19,
+        "prizeGranted": 16,
+        "prizeByWho": {
+          "player": 8,
+          "villager": 11
+        },
+        "prizeByRisk": {
+          "high": 2,
+          "medium": 3,
+          "extreme": 10,
+          "low": 4
+        },
+        "contestRolls": 19,
+        "killRolls": 55,
+        "otherRolls": 0,
+        "rollsByTier": {
+          "2": 5,
+          "3": 13,
+          "4": 1
+        },
+        "tier4Rolls": 1,
+        "rollNoTier": 0,
+        "rollNull": 3,
+        "rollSear": 1,
+        "rollCell": 0,
+        "searGrants": 2,
+        "searContestGrants": 1,
+        "searKillGrants": 1,
+        "searOtherGrants": 0,
+        "cellGrants": 0
+      },
+      "joins": {
+        "unjoinedPrizes": [],
+        "orphanRolls": 0,
+        "unattributedGrants": [],
+        "ungrantedRolls": []
+      },
+      "grantDays": [
+        72
+      ],
+      "firstGrantDay": 72,
+      "grantsAfterFirst": [],
+      "losses": [],
+      "corpsePersist": [
+        {
+          "cid": "corpse_81_mznm7d",
+          "first": 82,
+          "last": 110,
+          "days": 29
+        }
+      ],
+      "cellsPerGun": [
+        {
+          "day": 72,
+          "who": "gen_gmy38x3",
+          "recipient": "gen_gmy38x3",
+          "gunsGained": 1,
+          "cellsGained": 2,
+          "cellsAfter": 2,
+          "predictedFighter": "nina_petrova",
+          "redirectMatched": true
+        }
+      ],
+      "cellPrizeNearGun": [],
+      "killSearDrops": [
+        {
+          "day": 105,
+          "vid": "corpse_105_8ukvtb",
+          "dropId": "searcaster",
+          "path": "player-kill-corpse"
+        }
+      ],
+      "killSearRolls": [
+        {
+          "seq": null,
+          "day": 105,
+          "caller": "kill-loot",
+          "frame": "tbKillRewards@js/game.js:47786:31",
+          "chance": 0.12,
+          "tier": 4,
+          "rewardSource": null,
+          "wave": 1,
+          "mdefId": "gallowdeer",
+          "result": "searcaster"
+        }
+      ],
+      "searTakes": [],
+      "instrumentErrors": 0,
+      "gunLocRows": 108
+    }
+  ],
+  "band": {
+    "seeds": 1,
+    "contestsFired": 14,
+    "contestEnds": 11,
+    "wins": 8,
+    "prizeCalls": 19,
+    "prizeGranted": 16,
+    "contestRolls": 19,
+    "tier4Rolls": 1,
+    "rollNull": 3,
+    "rollSear": 1,
+    "rollCell": 0,
+    "searGrants": 2,
+    "searContestGrants": 1,
+    "searKillGrants": 1,
+    "cellGrants": 0,
+    "grantsPerSeed": [
+      1
+    ],
+    "grantsPerContest": 0.07142857142857142,
+    "grantsPerPrizeRoll": 0.05263157894736842,
+    "secondGrants": 0,
+    "losses": 0,
+    "regrantsAfterLoss": 0,
+    "killSearDrops": 1,
+    "searTakes": 0
+  },
+  "wall": {
+    "seeds": 1,
+    "wins": 0,
+    "national": 0,
+    "table": null,
+    "wave5": 0,
+    "wave4": 1,
+    "medianSurvival": 110,
+    "communityLost": 1
+  },
+  "instrumentErrors": 0,
+  "judge": {
+    "bars": {
+      "instrumentValidity": {
+        "value": {
+          "proofTest": "see test run",
+          "selftest": true,
+          "instrumentErrors": 0,
+          "rollsWithoutTier": 0,
+          "unjoinedPrizes": 0,
+          "orphanRolls": 0
+        },
+        "pass": true
+      },
+      "coverage": {
+        "value": {
+          "prizeCalls": 19,
+          "unjoinedPrizes": 0,
+          "unattributedGrants": 0,
+          "ungrantedSearRolls": 0
+        },
+        "pass": true
+      },
+      "answerQuantified": {
+        "value": {
+          "seeds": 1,
+          "s1Answered": true,
+          "seedsWithGrants": 1,
+          "seedsZeroGrants": 0
+        },
+        "pass": false
+      },
+      "guardrailNeutrality": {
+        "value": "see --compare output (leg1 vs leg2)",
+        "pass": null
+      }
+    },
+    "verdict": "DIAG-NO-GO"
+  }
+}

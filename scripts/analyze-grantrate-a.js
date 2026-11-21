@@ -164,8 +164,16 @@ function analyzeSeed(c) {
   }
 
   // S5 — kill-loot entry: searcaster drops to a monster corpse, and
-  // whether the scholar ever takes one.
-  const killSearDrops = kills.filter(function (e) { return e.dropId === 'searcaster'; });
+  // whether the scholar ever takes one. Two shapes: villager kills
+  // (villagerKillLoot rows — direct to the killer's pack, so a gun
+  // there is already taken) and PLAYER kills (tbKillRewards rows:
+  // the grant lands on the monster's corpse via alienLootGrant and
+  // only enters a pack when the scholar takes it).
+  const killSearDrops = kills.filter(function (e) { return e.dropId === 'searcaster'; })
+    .map(function (e) { return { day: e.day, vid: e.vid, dropId: e.dropId, path: 'villager-kill-pack' }; })
+    .concat(grants.filter(function (e) { return e.itemId === 'searcaster' && e.caller === 'kill-loot-corpse' && e.toKind === 'corpse'; })
+      .map(function (e) { return { day: e.day, vid: e.toVid, dropId: 'searcaster', path: 'player-kill-corpse' }; }))
+    .sort(function (a, b) { return a.day - b.day; });
   const killSearRolls = killRolls.filter(function (r) { return r.result === 'searcaster'; });
   const searTakes = takes.filter(function (e) { return e.itemId === 'searcaster'; });
 
@@ -390,14 +398,25 @@ function selftest() {
       { day: 50, total: 0, locations: [] }, { day: 150, total: 0, locations: [] }],
   }));
   check('S3 loss no regrant', s.losses.length === 1 && s.losses[0].regrantDay === null, s.losses);
-  // (7) S5: kill-loot drop, never taken.
+  // (7a) S5 villager-kill shape: a villagerKillLoot searcaster drop
+  // goes direct to the killer's pack (already taken).
   s = analyzeSeed(mkSeed({
     killLootEvents: [{ day: 105, vid: 'vidK', dropId: 'searcaster', kind: 'cell-or-gun' }],
     rollEvents: [{ seq: null, day: 105, caller: 'kill-loot', tier: 4, result: 'searcaster' }],
-    grantEvents: [{ day: 105, itemId: 'searcaster', toKind: 'corpse', toVid: 'corpse_1', caller: 'kill-loot-corpse' }],
     corpseTakeEvents: [],
   }));
-  check('S5 drop recorded, no take', s.killSearDrops.length === 1 && s.searTakes.length === 0, { drops: s.killSearDrops, takes: s.searTakes });
+  check('S5 villager-kill drop counted', s.killSearDrops.length === 1 && s.killSearDrops[0].path === 'villager-kill-pack', s.killSearDrops);
+  check('S5 villager drop, no corpse take', s.searTakes.length === 0, s.searTakes);
+  // (7b) S5 player-kill shape: a tbKillRewards corpse grant counts as
+  // a kill-loot drop (no villagerKillLoot row exists for it), and a
+  // scholar take of it counts as taken.
+  s = analyzeSeed(mkSeed({
+    rollEvents: [{ seq: null, day: 105, caller: 'kill-loot', tier: 4, result: 'searcaster' }],
+    grantEvents: [{ day: 105, itemId: 'searcaster', toKind: 'corpse', toVid: 'corpse_105_x', caller: 'kill-loot-corpse' }],
+    corpseTakeEvents: [{ day: 106, itemId: 'searcaster', corpseId: 'corpse_105_x', toKind: 'scholar' }],
+  }));
+  check('S5 player-kill corpse drop counted', s.killSearDrops.length === 1 && s.killSearDrops[0].path === 'player-kill-corpse', s.killSearDrops);
+  check('S5 corpse take counted', s.searTakes.length === 1, s.searTakes);
   check('S5 kill grant not contest grant', s.funnel.searKillGrants === 1 && s.funnel.searContestGrants === 0, s.funnel);
   // (8) tier-4 roll with null result (shy vault) counts as a tier-4 roll, not a grant.
   s = analyzeSeed(mkSeed({

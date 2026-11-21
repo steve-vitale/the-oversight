@@ -86,9 +86,11 @@ function pureTests() {
   // (2) roll caller taxonomy.
   check('classifyRollCaller: contest prize', driver.classifyRollCaller('Error\n at foo (_cxItemPrize) (contests.js:1:1)') === 'contest-prize');
   check('classifyRollCaller: kill loot', driver.classifyRollCaller('Error\n at foo (villagerKillLoot) (game.js:1:1)') === 'kill-loot');
+  check('classifyRollCaller: kill loot via tbKillRewards', driver.classifyRollCaller('Error\n at foo (tbKillRewards) (game.js:1:1)') === 'kill-loot');
   check('classifyRollCaller: kill loot via corpse', driver.classifyRollCaller('Error\n at foo (corpseForKill) (game.js:1:1)') === 'kill-loot');
   check('classifyRollCaller: other', driver.classifyRollCaller('Error\n at foo (something-else.js:1:1)') === 'other');
   check('classifyGrantCaller: contest prize', driver.classifyGrantCaller('Error\n at foo (_cxItemPrize) (contests.js:1:1)') === 'contest-prize');
+  check('classifyGrantCaller: kill loot via tbKillRewards', driver.classifyGrantCaller('Error\n at foo (tbKillRewards) (game.js:1:1)') === 'kill-loot-corpse');
   check('classifyGrantCaller: show gift', driver.classifyGrantCaller('Error\n at foo (_showVillagerEnd) (contests.js:1:1)') === 'show-gift');
 }
 
