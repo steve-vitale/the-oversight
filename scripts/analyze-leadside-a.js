@@ -1640,6 +1640,7 @@ if (require.main === module) {
     const armSt = cellStats(armDir), armPart = participationStats(armDir), armPres = presenceStats(armDir), armLend = lendStats(armDir), armPool = poolStats(armDir), armNm = nearMissStats(armDir);
     const sj = noJudge ? null : judgeLeadside(summarize(ctlSt), ctlPart, summarize(armSt), armPart, ctlLend, armLend);
     const result = { verdict: sj ? sj.verdict : null, kind: sj ? sj.kind : null, bars: sj ? sj.bars : null,
+      sinkCensus: { ctl: sinkCensus(ctlPres), arm: sinkCensus(armPres) },
       ctl: { diag: summarize(ctlSt), participation: ctlPart, presence: ctlPres, lend: ctlLend, pool: ctlPool, nearMiss: ctlNm },
       arm: { diag: summarize(armSt), participation: armPart, presence: armPres, lend: armLend, pool: armPool, nearMiss: armNm } };
     console.log(JSON.stringify({ verdict: result.verdict, kind: result.kind, bars: result.bars,

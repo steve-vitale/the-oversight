@@ -1,0 +1,6334 @@
+{
+  "verdict": "DIAG-GO",
+  "kind": null,
+  "bars": [
+    {
+      "id": "near-miss-coverage",
+      "pass": true,
+      "detail": "encounter-derived unarmed launches 125, covered 125 (coverage 100.0%, bar >= 95%); unclassified rows 0/111 (0.0%, bar <= 5%); orphan near-miss rows 0"
+    },
+    {
+      "id": "pool-reverified",
+      "pass": true,
+      "detail": "pool counter files 8/8 (errors 0); near-miss lendable rows 0 vs v4lendPool moments 0 (agree); v4lends 0 (lend stayed OFF)"
+    },
+    {
+      "id": "answer-quantified",
+      "pass": true,
+      "detail": "dominant nearest-holder state no-living-holder 95/111 (85.6%); earshot base rate over ALL 111 NON-RAID wave-4+ launches: armed 14 (12.6%), eligible 0 (0.0%); raid launches 14 (coverage rows only, excluded from the breakdown); draft-miss cross-check (tick rows): 14 misses over 233 pooled fights"
+    }
+  ],
+  "nearMiss": {
+    "dir": "evidence/2026-11-21/perseed-leadside-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launches": 111,
+    "launchesGun": 111,
+    "launchesCells": 0,
+    "launchesLoaded": 0,
+    "raidLaunches": 14,
+    "unarmedLaunches": 111,
+    "armedEarshot": 14,
+    "eligibleEarshot": 0,
+    "armedEarshotUnarmed": 14,
+    "eligibleEarshotUnarmed": 0,
+    "byState": {
+      "sheltered": 16,
+      "resting": 0,
+      "low-health": 0,
+      "on-expedition": 0,
+      "away": 0,
+      "at-home": 0,
+      "in-camp": 0,
+      "out-in-world": 0,
+      "no-living-holder": 95,
+      "unknown": 0
+    },
+    "byDist": {
+      "0": 10,
+      "1": 4,
+      "2": 2,
+      "3": 0,
+      "4-5": 0,
+      "6+": 0,
+      "none": 95
+    },
+    "noLivingHolder": 95,
+    "lendable": 0,
+    "unknown": 0,
+    "encDenominator": 125,
+    "encCovered": 125,
+    "coverage": 1,
+    "orphanRows": 0,
+    "dominantState": "no-living-holder",
+    "dominantN": 95,
+    "dominantShare": 0.8558558558558559,
+    "secondState": "sheltered",
+    "secondN": 16,
+    "secondShare": 0.14414414414414414,
+    "perSeed": {
+      "107141": {
+        "launches": 10,
+        "unarmed": 10,
+        "armedEarshot": 0,
+        "eligibleEarshot": 0,
+        "lendable": 0,
+        "raidLaunches": 2
+      },
+      "107142": {
+        "launches": 1,
+        "unarmed": 1,
+        "armedEarshot": 0,
+        "eligibleEarshot": 0,
+        "lendable": 0,
+        "raidLaunches": 0
+      },
+      "107143": {
+        "launches": 1,
+        "unarmed": 1,
+        "armedEarshot": 0,
+        "eligibleEarshot": 0,
+        "lendable": 0,
+        "raidLaunches": 0
+      },
+      "107144": {
+        "launches": 49,
+        "unarmed": 49,
+        "armedEarshot": 0,
+        "eligibleEarshot": 0,
+        "lendable": 0,
+        "raidLaunches": 2
+      },
+      "107145": {
+        "launches": 0,
+        "unarmed": 0,
+        "armedEarshot": 0,
+        "eligibleEarshot": 0,
+        "lendable": 0,
+        "raidLaunches": 0
+      },
+      "107146": {
+        "launches": 23,
+        "unarmed": 23,
+        "armedEarshot": 0,
+        "eligibleEarshot": 0,
+        "lendable": 0,
+        "raidLaunches": 4
+      },
+      "107147": {
+        "launches": 16,
+        "unarmed": 16,
+        "armedEarshot": 14,
+        "eligibleEarshot": 0,
+        "lendable": 0,
+        "raidLaunches": 4
+      },
+      "107148": {
+        "launches": 11,
+        "unarmed": 11,
+        "armedEarshot": 0,
+        "eligibleEarshot": 0,
+        "lendable": 0,
+        "raidLaunches": 2
+      }
+    },
+    "detail": [
+      {
+        "seed": 107141,
+        "day": 67,
+        "mid": "influencer",
+        "lead": "visjoin_65",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107141,
+        "day": 69,
+        "mid": "influencer",
+        "lead": "katarina_novak",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107141,
+        "day": 69,
+        "mid": "influencer",
+        "lead": "katarina_novak",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107141,
+        "day": 73,
+        "mid": "reunion",
+        "lead": "visjoin_65",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107141,
+        "day": 87,
+        "mid": "reunion",
+        "lead": "visjoin_85",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107141,
+        "day": 103,
+        "mid": "herald",
+        "lead": "visjoin_89",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107141,
+        "day": 103,
+        "mid": "herald",
+        "lead": "visjoin_89",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107141,
+        "day": 103,
+        "mid": "herald",
+        "lead": "visjoin_89",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107141,
+        "day": 104,
+        "mid": "herald",
+        "lead": "visjoin_89",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107141,
+        "day": 105,
+        "mid": "herald",
+        "lead": "visjoin_89",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107142,
+        "day": 65,
+        "mid": "eater",
+        "lead": "quinn_murphy",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107143,
+        "day": 40,
+        "mid": "eater",
+        "lead": "naran_tumen",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 50,
+        "mid": "eulogy",
+        "lead": "gen_upn7ih2",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 53,
+        "mid": "eulogy",
+        "lead": "somchai_prasert",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 79,
+        "mid": "reunion",
+        "lead": "app_mgpsphva289",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 80,
+        "mid": "eulogy",
+        "lead": "leo_martin",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 85,
+        "mid": "reunion",
+        "lead": "app_mgpsphva289",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 86,
+        "mid": "reunion",
+        "lead": "app_mgpsphva289",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 87,
+        "mid": "algorithm",
+        "lead": "dmitri_sokolov",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 88,
+        "mid": "algorithm",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 90,
+        "mid": "herald",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 90,
+        "mid": "algorithm",
+        "lead": "priya_nair",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 90,
+        "mid": "herald",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 91,
+        "mid": "algorithm",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 96,
+        "mid": "reunion",
+        "lead": "priya_nair",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 99,
+        "mid": "herald",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 99,
+        "mid": "reunion",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 100,
+        "mid": "reunion",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 103,
+        "mid": "congregation",
+        "lead": "dmitri_sokolov",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 103,
+        "mid": "congregation",
+        "lead": "owen_smith",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 105,
+        "mid": "congregation",
+        "lead": "leo_martin",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 106,
+        "mid": "suburb",
+        "lead": "yuki_mori",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 106,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 106,
+        "mid": "suburb",
+        "lead": "yuki_mori",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 107,
+        "mid": "reunion",
+        "lead": "leo_martin",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 107,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 107,
+        "mid": "suburb",
+        "lead": "dmitri_sokolov",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 109,
+        "mid": "suburb",
+        "lead": "dmitri_sokolov",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 109,
+        "mid": "eulogy",
+        "lead": "leo_martin",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 109,
+        "mid": "suburb",
+        "lead": "dmitri_sokolov",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 110,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 110,
+        "mid": "timeslot",
+        "lead": "yuki_mori",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 114,
+        "mid": "network_note",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 115,
+        "mid": "timeslot",
+        "lead": "ethan_hunt",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 115,
+        "mid": "reunion",
+        "lead": "naran_tumen",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 115,
+        "mid": "timeslot",
+        "lead": "naran_tumen",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 116,
+        "mid": "network_note",
+        "lead": "hassan_ali",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 116,
+        "mid": "timeslot",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 116,
+        "mid": "eulogy",
+        "lead": "app_mgpsplj6801",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 117,
+        "mid": "eulogy",
+        "lead": "naran_tumen",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 117,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 117,
+        "mid": "eulogy",
+        "lead": "pavel_dubinin",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 117,
+        "mid": "eulogy",
+        "lead": "hassan_ali",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 118,
+        "mid": "eulogy",
+        "lead": "pavel_dubinin",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 118,
+        "mid": "reunion",
+        "lead": "hassan_ali",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 118,
+        "mid": "timeslot",
+        "lead": "hassan_ali",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 118,
+        "mid": "eulogy",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 118,
+        "mid": "reunion",
+        "lead": "naran_tumen",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 119,
+        "mid": "eulogy",
+        "lead": "naran_tumen",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 119,
+        "mid": "reunion",
+        "lead": "victor_lopez",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107144,
+        "day": 119,
+        "mid": "timeslot",
+        "lead": "ines_duarte",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 74,
+        "mid": "herald",
+        "lead": "app_mgpsphrr113",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 74,
+        "mid": "herald",
+        "lead": "app_mgpsphrr113",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 77,
+        "mid": "suburb",
+        "lead": "boris_kowalski",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 77,
+        "mid": "eater",
+        "lead": "app_mgpsphrr113",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 83,
+        "mid": "eater",
+        "lead": "app_mgpsphv6414",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 84,
+        "mid": "eater",
+        "lead": "visjoin_70",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 84,
+        "mid": "eater",
+        "lead": "visjoin_70",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 87,
+        "mid": "eater",
+        "lead": "app_mgpsphrr113",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 88,
+        "mid": "influencer",
+        "lead": "app_mgpsphrr113",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 89,
+        "mid": "eater",
+        "lead": "app_mgpsphrr113",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 98,
+        "mid": "influencer",
+        "lead": "visjoin_92",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 100,
+        "mid": "reunion",
+        "lead": "visjoin_92",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 101,
+        "mid": "influencer",
+        "lead": "boris_kowalski",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 102,
+        "mid": "eater",
+        "lead": "boris_kowalski",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 105,
+        "mid": "reunion",
+        "lead": "visjoin_92",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 105,
+        "mid": "reunion",
+        "lead": "visjoin_92",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 106,
+        "mid": "influencer",
+        "lead": "visjoin_92",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 107,
+        "mid": "eater",
+        "lead": "visjoin_92",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 123,
+        "mid": "herald",
+        "lead": "visjoin_117",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 130,
+        "mid": "reunion",
+        "lead": "visjoin_117",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 148,
+        "mid": "suburb",
+        "lead": "visjoin_133",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 149,
+        "mid": "suburb",
+        "lead": "visjoin_133",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107146,
+        "day": 149,
+        "mid": "suburb",
+        "lead": "visjoin_133",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 115,
+        "mid": "reunion",
+        "lead": "aki_tanaka",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 1,
+        "nearestState": "sheltered",
+        "nearestHealth": 87,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 115,
+        "mid": "reunion",
+        "lead": "aki_tanaka",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 1,
+        "nearestState": "sheltered",
+        "nearestHealth": 87,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 116,
+        "mid": "herald",
+        "lead": "mateo_alvarez",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 0,
+        "nearestState": "sheltered",
+        "nearestHealth": 90,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 116,
+        "mid": "influencer",
+        "lead": "aki_tanaka",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 0,
+        "nearestState": "sheltered",
+        "nearestHealth": 75,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 117,
+        "mid": "influencer",
+        "lead": "aki_tanaka",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 0,
+        "nearestState": "sheltered",
+        "nearestHealth": 78,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 124,
+        "mid": "strike",
+        "lead": "aki_tanaka",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 0,
+        "nearestState": "sheltered",
+        "nearestHealth": 98,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 126,
+        "mid": "eulogy",
+        "lead": "mateo_alvarez",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 1,
+        "nearestState": "sheltered",
+        "nearestHealth": 85,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 128,
+        "mid": "strike",
+        "lead": "mateo_alvarez",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 0,
+        "nearestState": "sheltered",
+        "nearestHealth": 86,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 129,
+        "mid": "editor",
+        "lead": "aki_tanaka",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 0,
+        "nearestState": "sheltered",
+        "nearestHealth": 86,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 132,
+        "mid": "editor",
+        "lead": "aki_tanaka",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 0,
+        "nearestState": "sheltered",
+        "nearestHealth": 95,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 134,
+        "mid": "eulogy",
+        "lead": "aki_tanaka",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 2,
+        "nearestState": "sheltered",
+        "nearestHealth": 97,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 134,
+        "mid": "eulogy",
+        "lead": "aki_tanaka",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 2,
+        "nearestState": "sheltered",
+        "nearestHealth": 97,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 136,
+        "mid": "eulogy",
+        "lead": "giulia_bianchi",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 0,
+        "nearestState": "sheltered",
+        "nearestHealth": 100,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 141,
+        "mid": "eulogy",
+        "lead": "giulia_bianchi",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 0,
+        "nearestState": "sheltered",
+        "nearestHealth": 100,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 144,
+        "mid": "timeslot",
+        "lead": "giulia_bianchi",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 1,
+        "nearestState": "sheltered",
+        "nearestHealth": 100,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107147,
+        "day": 148,
+        "mid": "audit",
+        "lead": "giulia_bianchi",
+        "leadKind": "gun",
+        "nearestHolder": "gen_824pdhl",
+        "nearestDist": 0,
+        "nearestState": "sheltered",
+        "nearestHealth": 83,
+        "anyArmedEarshot": true,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107148,
+        "day": 76,
+        "mid": "algorithm",
+        "lead": "lena_ruiz",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107148,
+        "day": 79,
+        "mid": "reunion",
+        "lead": "lena_ruiz",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107148,
+        "day": 89,
+        "mid": "algorithm",
+        "lead": "wanjiru_kamau",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107148,
+        "day": 93,
+        "mid": "reunion",
+        "lead": "wanjiru_kamau",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107148,
+        "day": 93,
+        "mid": "eater",
+        "lead": "wanjiru_kamau",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107148,
+        "day": 105,
+        "mid": "reunion",
+        "lead": "visjoin_94",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107148,
+        "day": 106,
+        "mid": "reunion",
+        "lead": "lena_ruiz",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107148,
+        "day": 130,
+        "mid": "eater",
+        "lead": "visjoin_116",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107148,
+        "day": 130,
+        "mid": "editor",
+        "lead": "visjoin_116",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107148,
+        "day": 131,
+        "mid": "audit",
+        "lead": "visjoin_129",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      },
+      {
+        "seed": 107148,
+        "day": 131,
+        "mid": "eater",
+        "lead": "visjoin_129",
+        "leadKind": "gun",
+        "nearestHolder": null,
+        "nearestDist": null,
+        "nearestState": "no-living-holder",
+        "nearestHealth": null,
+        "anyArmedEarshot": false,
+        "anyEligibleEarshot": false,
+        "lendable": false
+      }
+    ]
+  },
+  "participation": {
+    "dir": "evidence/2026-11-21/perseed-leadside-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "meetings": 183,
+    "engaged": 142,
+    "flees": 97,
+    "leadAttributed": 183,
+    "leadRuleCounts": {
+      "expedition-holder": 58,
+      "aid": 65,
+      "world-tick": 60
+    },
+    "leadUnclassified": 0,
+    "fleeClassified": 97,
+    "fleeUnclassified": 0,
+    "fleeCauseCounts": {
+      "hopeless-after-help": 76,
+      "floor-hp": 15,
+      "learn-withdrawal": 1,
+      "wise-leave": 5
+    },
+    "armedEntries": 21,
+    "armedLeads": 0,
+    "armedVolleys": 0,
+    "armedFlees": 11,
+    "armedMeetings": 21,
+    "unarmedFlees": 86,
+    "unarmedMeetings": 162,
+    "deathsTotal": 848,
+    "deathsPerEngaged": 5.971830985915493,
+    "volleyDmgLeadRanged": 1030,
+    "mDealtLeadRanged": 4690,
+    "leadGearFlee": [
+      {
+        "bravery": 7,
+        "armorP": 17,
+        "weaponB": 15,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 0,
+        "armorP": 5,
+        "weaponB": 0,
+        "temper": "cautious"
+      },
+      {
+        "bravery": 0,
+        "armorP": 14,
+        "weaponB": 12,
+        "temper": "bold"
+      },
+      {
+        "bravery": 0,
+        "armorP": 5,
+        "weaponB": 0,
+        "temper": "cautious"
+      },
+      {
+        "bravery": 0,
+        "armorP": 25,
+        "weaponB": 35,
+        "temper": "sardonic"
+      },
+      {
+        "bravery": 0,
+        "armorP": 25,
+        "weaponB": 35,
+        "temper": "sardonic"
+      },
+      {
+        "bravery": 0,
+        "armorP": 25,
+        "weaponB": 35,
+        "temper": "sardonic"
+      },
+      {
+        "bravery": 0,
+        "armorP": 25,
+        "weaponB": 35,
+        "temper": "sardonic"
+      },
+      {
+        "bravery": 0,
+        "armorP": 25,
+        "weaponB": 35,
+        "temper": "sardonic"
+      },
+      {
+        "bravery": 9,
+        "armorP": 10,
+        "weaponB": 12,
+        "temper": "steady"
+      },
+      {
+        "bravery": 0,
+        "armorP": 8,
+        "weaponB": 15,
+        "temper": "warm"
+      },
+      {
+        "bravery": 24,
+        "armorP": 39,
+        "weaponB": 8,
+        "temper": "intense"
+      },
+      {
+        "bravery": 6,
+        "armorP": 22,
+        "weaponB": 5,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 9,
+        "armorP": 12,
+        "weaponB": 8,
+        "temper": "restless"
+      },
+      {
+        "bravery": 0,
+        "armorP": 10,
+        "weaponB": 35,
+        "temper": "stoic"
+      },
+      {
+        "bravery": 0,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 10,
+        "weaponB": 35,
+        "temper": "stoic"
+      },
+      {
+        "bravery": 2,
+        "armorP": 10,
+        "weaponB": 35,
+        "temper": "stoic"
+      },
+      {
+        "bravery": 6,
+        "armorP": 10,
+        "weaponB": 15,
+        "temper": "earnest"
+      },
+      {
+        "bravery": 2,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 37,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 37,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 11,
+        "weaponB": 15,
+        "temper": "intense"
+      },
+      {
+        "bravery": 0,
+        "armorP": 37,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 37,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 5,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 11,
+        "weaponB": 15,
+        "temper": "intense"
+      },
+      {
+        "bravery": 0,
+        "armorP": 37,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 37,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 10,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "dry"
+      },
+      {
+        "bravery": 12,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "withdrawn"
+      },
+      {
+        "bravery": 0,
+        "armorP": 23,
+        "weaponB": 12,
+        "temper": "cautious"
+      },
+      {
+        "bravery": 0,
+        "armorP": 23,
+        "weaponB": 12,
+        "temper": "cautious"
+      },
+      {
+        "bravery": 0,
+        "armorP": 23,
+        "weaponB": 12,
+        "temper": "cautious"
+      },
+      {
+        "bravery": 18,
+        "armorP": 24,
+        "weaponB": 15,
+        "temper": "restless"
+      },
+      {
+        "bravery": 10,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "dry"
+      },
+      {
+        "bravery": 6,
+        "armorP": 11,
+        "weaponB": 15,
+        "temper": "intense"
+      },
+      {
+        "bravery": 13,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 45,
+        "weaponB": 12,
+        "temper": "cautious"
+      },
+      {
+        "bravery": 21,
+        "armorP": 32,
+        "weaponB": 12,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 3,
+        "armorP": 37,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 42,
+        "weaponB": 0,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 42,
+        "weaponB": 0,
+        "temper": "dry"
+      },
+      {
+        "bravery": 6,
+        "armorP": 37,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 5,
+        "weaponB": 35,
+        "temper": "dry"
+      },
+      {
+        "bravery": 6,
+        "armorP": 37,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 3,
+        "armorP": 37,
+        "weaponB": 20,
+        "temper": "steady"
+      },
+      {
+        "bravery": 3,
+        "armorP": 37,
+        "weaponB": 20,
+        "temper": "steady"
+      },
+      {
+        "bravery": 6,
+        "armorP": 37,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 42,
+        "weaponB": 0,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 42,
+        "weaponB": 0,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 17,
+        "weaponB": 8,
+        "temper": "steady"
+      },
+      {
+        "bravery": 17,
+        "armorP": 17,
+        "weaponB": 15,
+        "temper": "warm"
+      },
+      {
+        "bravery": 51,
+        "armorP": 39,
+        "weaponB": 15,
+        "temper": "restless"
+      },
+      {
+        "bravery": 28,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "withdrawn"
+      },
+      {
+        "bravery": 0,
+        "armorP": 17,
+        "weaponB": 35,
+        "temper": "fidgety"
+      },
+      {
+        "bravery": 0,
+        "armorP": 17,
+        "weaponB": 35,
+        "temper": "fidgety"
+      },
+      {
+        "bravery": 0,
+        "armorP": 10,
+        "weaponB": 0,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 0,
+        "armorP": 10,
+        "weaponB": 0,
+        "temper": "steady"
+      },
+      {
+        "bravery": 3,
+        "armorP": 17,
+        "weaponB": 35,
+        "temper": "fidgety"
+      },
+      {
+        "bravery": 0,
+        "armorP": 10,
+        "weaponB": 0,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 9,
+        "armorP": 17,
+        "weaponB": 35,
+        "temper": "fidgety"
+      },
+      {
+        "bravery": 9,
+        "armorP": 17,
+        "weaponB": 35,
+        "temper": "fidgety"
+      },
+      {
+        "bravery": 0,
+        "armorP": 60,
+        "weaponB": 0,
+        "temper": "gentle"
+      },
+      {
+        "bravery": 3,
+        "armorP": 60,
+        "weaponB": 5,
+        "temper": "gentle"
+      },
+      {
+        "bravery": 0,
+        "armorP": 15,
+        "weaponB": 0,
+        "temper": "steady"
+      },
+      {
+        "bravery": 3,
+        "armorP": 60,
+        "weaponB": 5,
+        "temper": "gentle"
+      },
+      {
+        "bravery": 3,
+        "armorP": 60,
+        "weaponB": 5,
+        "temper": "gentle"
+      },
+      {
+        "bravery": 4,
+        "armorP": 22,
+        "weaponB": 25,
+        "temper": "gentle"
+      },
+      {
+        "bravery": 37,
+        "armorP": 29,
+        "weaponB": 15,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 15,
+        "weaponB": 5,
+        "temper": "stoic"
+      },
+      {
+        "bravery": 0,
+        "armorP": 46,
+        "weaponB": 15,
+        "temper": "intense"
+      },
+      {
+        "bravery": 0,
+        "armorP": 46,
+        "weaponB": 15,
+        "temper": "intense"
+      },
+      {
+        "bravery": 0,
+        "armorP": 50,
+        "weaponB": 15,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 50,
+        "weaponB": 15,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 50,
+        "weaponB": 15,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 22,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 50,
+        "weaponB": 15,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 50,
+        "weaponB": 15,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 50,
+        "weaponB": 15,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 50,
+        "weaponB": 15,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 22,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 22,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 1,
+        "armorP": 22,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 3,
+        "armorP": 22,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 53,
+        "armorP": 24,
+        "weaponB": 35,
+        "temper": "restless"
+      },
+      {
+        "bravery": 0,
+        "armorP": 24,
+        "weaponB": 0,
+        "temper": "steady"
+      },
+      {
+        "bravery": 0,
+        "armorP": 24,
+        "weaponB": 0,
+        "temper": "steady"
+      },
+      {
+        "bravery": 15,
+        "armorP": 49,
+        "weaponB": 5,
+        "temper": "steady"
+      },
+      {
+        "bravery": 6,
+        "armorP": 18,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 6,
+        "armorP": 18,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 5,
+        "weaponB": 8,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 15,
+        "armorP": 24,
+        "weaponB": 15,
+        "temper": "gentle"
+      },
+      {
+        "bravery": 18,
+        "armorP": 49,
+        "weaponB": 5,
+        "temper": "steady"
+      },
+      {
+        "bravery": 0,
+        "armorP": 34,
+        "weaponB": 8,
+        "temper": "bold"
+      },
+      {
+        "bravery": 0,
+        "armorP": 18,
+        "weaponB": 35,
+        "temper": "dry"
+      },
+      {
+        "bravery": 23,
+        "armorP": 24,
+        "weaponB": 15,
+        "temper": "gentle"
+      }
+    ],
+    "leadGearKill": [
+      {
+        "bravery": 0,
+        "armorP": 37,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 18,
+        "armorP": 24,
+        "weaponB": 15,
+        "temper": "restless"
+      },
+      {
+        "bravery": 3,
+        "armorP": 37,
+        "weaponB": 12,
+        "temper": "steady"
+      },
+      {
+        "bravery": 6,
+        "armorP": 37,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 3,
+        "armorP": 60,
+        "weaponB": 5,
+        "temper": "gentle"
+      },
+      {
+        "bravery": 0,
+        "armorP": 15,
+        "weaponB": 5,
+        "temper": "stoic"
+      },
+      {
+        "bravery": 0,
+        "armorP": 46,
+        "weaponB": 15,
+        "temper": "intense"
+      },
+      {
+        "bravery": 0,
+        "armorP": 19,
+        "weaponB": 8,
+        "temper": "bold"
+      },
+      {
+        "bravery": 0,
+        "armorP": 50,
+        "weaponB": 15,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 19,
+        "weaponB": 8,
+        "temper": "bold"
+      },
+      {
+        "bravery": 0,
+        "armorP": 19,
+        "weaponB": 8,
+        "temper": "bold"
+      },
+      {
+        "bravery": 0,
+        "armorP": 22,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 50,
+        "weaponB": 15,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 126,
+        "armorP": 24,
+        "weaponB": 35,
+        "temper": "restless"
+      },
+      {
+        "bravery": 18,
+        "armorP": 49,
+        "weaponB": 5,
+        "temper": "steady"
+      }
+    ],
+    "leadGearOther": [
+      {
+        "bravery": 7,
+        "armorP": 17,
+        "weaponB": 15,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 7,
+        "armorP": 17,
+        "weaponB": 15,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 14,
+        "armorP": 7,
+        "weaponB": 45,
+        "temper": "earnest"
+      },
+      {
+        "bravery": 14,
+        "armorP": 7,
+        "weaponB": 45,
+        "temper": "earnest"
+      },
+      {
+        "bravery": 0,
+        "armorP": 14,
+        "weaponB": 12,
+        "temper": "bold"
+      },
+      {
+        "bravery": 0,
+        "armorP": 10,
+        "weaponB": 12,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 5,
+        "weaponB": 0,
+        "temper": "cautious"
+      },
+      {
+        "bravery": 0,
+        "armorP": 12,
+        "weaponB": 12,
+        "temper": "intense"
+      },
+      {
+        "bravery": 22,
+        "armorP": 39,
+        "weaponB": 8,
+        "temper": "intense"
+      },
+      {
+        "bravery": 24,
+        "armorP": 39,
+        "weaponB": 8,
+        "temper": "intense"
+      },
+      {
+        "bravery": 9,
+        "armorP": 17,
+        "weaponB": 8,
+        "temper": "bold"
+      },
+      {
+        "bravery": 3,
+        "armorP": 24,
+        "weaponB": 15,
+        "temper": "restless"
+      },
+      {
+        "bravery": 0,
+        "armorP": 22,
+        "weaponB": 12,
+        "temper": "dry"
+      },
+      {
+        "bravery": 3,
+        "armorP": 24,
+        "weaponB": 15,
+        "temper": "restless"
+      },
+      {
+        "bravery": 18,
+        "armorP": 22,
+        "weaponB": 5,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 3,
+        "armorP": 24,
+        "weaponB": 15,
+        "temper": "restless"
+      },
+      {
+        "bravery": 0,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "withdrawn"
+      },
+      {
+        "bravery": 0,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "withdrawn"
+      },
+      {
+        "bravery": 7,
+        "armorP": 24,
+        "weaponB": 15,
+        "temper": "restless"
+      },
+      {
+        "bravery": 2,
+        "armorP": 10,
+        "weaponB": 35,
+        "temper": "stoic"
+      },
+      {
+        "bravery": 3,
+        "armorP": 37,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 3,
+        "armorP": 37,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 20,
+        "armorP": 24,
+        "weaponB": 15,
+        "temper": "restless"
+      },
+      {
+        "bravery": 13,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "dry"
+      },
+      {
+        "bravery": 3,
+        "armorP": 37,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 34,
+        "weaponB": 15,
+        "temper": "bold"
+      },
+      {
+        "bravery": 0,
+        "armorP": 42,
+        "weaponB": 0,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 11,
+        "weaponB": 0,
+        "temper": "dry"
+      },
+      {
+        "bravery": 0,
+        "armorP": 11,
+        "weaponB": 5,
+        "temper": "dry"
+      },
+      {
+        "bravery": 3,
+        "armorP": 37,
+        "weaponB": 20,
+        "temper": "steady"
+      },
+      {
+        "bravery": 42,
+        "armorP": 6,
+        "weaponB": 12,
+        "temper": "stoic"
+      },
+      {
+        "bravery": 19,
+        "armorP": 17,
+        "weaponB": 15,
+        "temper": "warm"
+      },
+      {
+        "bravery": 25,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "withdrawn"
+      },
+      {
+        "bravery": 22,
+        "armorP": 17,
+        "weaponB": 15,
+        "temper": "warm"
+      },
+      {
+        "bravery": 25,
+        "armorP": 17,
+        "weaponB": 5,
+        "temper": "withdrawn"
+      },
+      {
+        "bravery": 22,
+        "armorP": 17,
+        "weaponB": 15,
+        "temper": "warm"
+      },
+      {
+        "bravery": 58,
+        "armorP": 6,
+        "weaponB": 12,
+        "temper": "stoic"
+      },
+      {
+        "bravery": 0,
+        "armorP": 8,
+        "weaponB": 0,
+        "temper": "cautious"
+      },
+      {
+        "bravery": 68,
+        "armorP": 39,
+        "weaponB": 15,
+        "temper": "restless"
+      },
+      {
+        "bravery": 0,
+        "armorP": 8,
+        "weaponB": 0,
+        "temper": "cautious"
+      },
+      {
+        "bravery": 0,
+        "armorP": 10,
+        "weaponB": 0,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 9,
+        "armorP": 17,
+        "weaponB": 35,
+        "temper": "fidgety"
+      },
+      {
+        "bravery": 9,
+        "armorP": 17,
+        "weaponB": 35,
+        "temper": "fidgety"
+      },
+      {
+        "bravery": 0,
+        "armorP": 15,
+        "weaponB": 0,
+        "temper": "steady"
+      },
+      {
+        "bravery": 3,
+        "armorP": 60,
+        "weaponB": 5,
+        "temper": "gentle"
+      },
+      {
+        "bravery": 39,
+        "armorP": 29,
+        "weaponB": 15,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 15,
+        "weaponB": 5,
+        "temper": "stoic"
+      },
+      {
+        "bravery": 0,
+        "armorP": 46,
+        "weaponB": 15,
+        "temper": "intense"
+      },
+      {
+        "bravery": 12,
+        "armorP": 27,
+        "weaponB": 25,
+        "temper": "gentle"
+      },
+      {
+        "bravery": 27,
+        "armorP": 62,
+        "weaponB": 15,
+        "temper": "restless"
+      },
+      {
+        "bravery": 16,
+        "armorP": 27,
+        "weaponB": 8,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 31,
+        "armorP": 62,
+        "weaponB": 15,
+        "temper": "restless"
+      },
+      {
+        "bravery": 34,
+        "armorP": 62,
+        "weaponB": 15,
+        "temper": "restless"
+      },
+      {
+        "bravery": 0,
+        "armorP": 19,
+        "weaponB": 8,
+        "temper": "bold"
+      },
+      {
+        "bravery": 0,
+        "armorP": 50,
+        "weaponB": 15,
+        "temper": "prickly"
+      },
+      {
+        "bravery": 0,
+        "armorP": 22,
+        "weaponB": 0,
+        "temper": "warm"
+      },
+      {
+        "bravery": 48,
+        "armorP": 24,
+        "weaponB": 5,
+        "temper": "bold"
+      },
+      {
+        "bravery": 22,
+        "armorP": 15,
+        "weaponB": 15,
+        "temper": "bold"
+      },
+      {
+        "bravery": 27,
+        "armorP": 81,
+        "weaponB": 5,
+        "temper": "steady"
+      },
+      {
+        "bravery": 54,
+        "armorP": 24,
+        "weaponB": 5,
+        "temper": "bold"
+      },
+      {
+        "bravery": 36,
+        "armorP": 15,
+        "weaponB": 5,
+        "temper": "stoic"
+      },
+      {
+        "bravery": 54,
+        "armorP": 24,
+        "weaponB": 5,
+        "temper": "bold"
+      },
+      {
+        "bravery": 6,
+        "armorP": 18,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 15,
+        "armorP": 49,
+        "weaponB": 5,
+        "temper": "steady"
+      },
+      {
+        "bravery": 6,
+        "armorP": 18,
+        "weaponB": 5,
+        "temper": "warm"
+      },
+      {
+        "bravery": 0,
+        "armorP": 5,
+        "weaponB": 8,
+        "temper": "mischievous"
+      },
+      {
+        "bravery": 18,
+        "armorP": 49,
+        "weaponB": 5,
+        "temper": "steady"
+      },
+      {
+        "bravery": 0,
+        "armorP": 34,
+        "weaponB": 8,
+        "temper": "bold"
+      },
+      {
+        "bravery": 0,
+        "armorP": 18,
+        "weaponB": 35,
+        "temper": "dry"
+      },
+      {
+        "bravery": 27,
+        "armorP": 37,
+        "weaponB": 15,
+        "temper": "warm"
+      },
+      {
+        "bravery": 20,
+        "armorP": 49,
+        "weaponB": 5,
+        "temper": "steady"
+      }
+    ],
+    "fleeDetail": [
+      {
+        "seed": 107141,
+        "day": 43,
+        "vid": "gen_xnchpm2",
+        "mid": "suburb",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 5,
+        "mDealt": 209,
+        "vTaken": 41,
+        "fleeHpFrac": 0.46,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107141,
+        "day": 67,
+        "vid": "visjoin_65",
+        "mid": "influencer",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 20,
+        "vTaken": 26,
+        "fleeHpFrac": 0.32,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": null
+      },
+      {
+        "seed": 107141,
+        "day": 69,
+        "vid": "katarina_novak",
+        "mid": "influencer",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 102,
+        "vTaken": 65,
+        "fleeHpFrac": 0.32,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107141,
+        "day": 72,
+        "vid": "visjoin_65",
+        "mid": "influencer",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 19,
+        "vTaken": 80,
+        "fleeHpFrac": 0.18,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 3,
+        "volley": null
+      },
+      {
+        "seed": 107141,
+        "day": 103,
+        "vid": "visjoin_89",
+        "mid": "herald",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 121,
+        "vTaken": 23,
+        "fleeHpFrac": 0.42,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 1,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107141,
+        "day": 103,
+        "vid": "visjoin_89",
+        "mid": "herald",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 124,
+        "vTaken": 15,
+        "fleeHpFrac": 0.27,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107141,
+        "day": 103,
+        "vid": "visjoin_89",
+        "mid": "herald",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 31,
+        "vTaken": 5,
+        "fleeHpFrac": 0.22,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107141,
+        "day": 104,
+        "vid": "visjoin_89",
+        "mid": "herald",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 81,
+        "vTaken": 29,
+        "fleeHpFrac": 0.11,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107141,
+        "day": 105,
+        "vid": "visjoin_89",
+        "mid": "herald",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 50,
+        "vTaken": 7,
+        "fleeHpFrac": 0.19,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 2,
+          "hits": 1,
+          "dmg": 16,
+          "ammoLeft": 3
+        }
+      },
+      {
+        "seed": 107142,
+        "day": 50,
+        "vid": "liam_davis",
+        "mid": "influencer",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 130,
+        "vTaken": 84,
+        "fleeHpFrac": 0.12,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107142,
+        "day": 65,
+        "vid": "quinn_murphy",
+        "mid": "eater",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 39,
+        "vTaken": 71,
+        "fleeHpFrac": 0.24,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107142,
+        "day": 73,
+        "vid": "zoe_adams",
+        "mid": "eater",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 139,
+        "vTaken": 52,
+        "fleeHpFrac": 0.36,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107144,
+        "day": 50,
+        "vid": "gen_upn7ih2",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "learn-withdrawal",
+        "rounds": 3,
+        "mDealt": 34,
+        "vTaken": 47,
+        "fleeHpFrac": 0.36,
+        "armed": false,
+        "intent": "learn",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 53,
+        "vid": "somchai_prasert",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 9,
+        "vTaken": 21,
+        "fleeHpFrac": 0.04,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": null
+      },
+      {
+        "seed": 107144,
+        "day": 79,
+        "vid": "app_mgpsphva289",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 75,
+        "vTaken": 112,
+        "fleeHpFrac": 0.05,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107144,
+        "day": 84,
+        "vid": "dmitri_sokolov",
+        "mid": "strike",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 82,
+        "vTaken": 67,
+        "fleeHpFrac": 0.23,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 84,
+        "vid": "app_mgpsphva289",
+        "mid": "eulogy",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 0,
+        "vTaken": 77,
+        "fleeHpFrac": 0.04,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 3,
+        "volley": null
+      },
+      {
+        "seed": 107144,
+        "day": 85,
+        "vid": "app_mgpsphva289",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 0,
+        "vTaken": 41,
+        "fleeHpFrac": 0.24,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": null
+      },
+      {
+        "seed": 107144,
+        "day": 85,
+        "vid": "app_mgpspkij589",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 14,
+        "vTaken": 37,
+        "fleeHpFrac": 0.1,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": null
+      },
+      {
+        "seed": 107144,
+        "day": 87,
+        "vid": "dmitri_sokolov",
+        "mid": "algorithm",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 38,
+        "vTaken": 35,
+        "fleeHpFrac": 0.17,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 88,
+        "vid": "ines_duarte",
+        "mid": "algorithm",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 186,
+        "vTaken": 29,
+        "fleeHpFrac": 0.42,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 3,
+          "hits": 2,
+          "dmg": 40,
+          "ammoLeft": 2
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 90,
+        "vid": "ines_duarte",
+        "mid": "herald",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 8,
+        "mDealt": 373,
+        "vTaken": 50,
+        "fleeHpFrac": 0.41,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 3,
+          "hits": 1,
+          "dmg": 22,
+          "ammoLeft": 4
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 90,
+        "vid": "priya_nair",
+        "mid": "algorithm",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 6,
+        "mDealt": 77,
+        "vTaken": 79,
+        "fleeHpFrac": 0.06,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 5,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 90,
+        "vid": "ines_duarte",
+        "mid": "herald",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 112,
+        "vTaken": 29,
+        "fleeHpFrac": 0.32,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 3,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 1
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 91,
+        "vid": "ines_duarte",
+        "mid": "algorithm",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 18,
+        "vTaken": 5,
+        "fleeHpFrac": 0.25,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 1,
+          "hits": 1,
+          "dmg": 18,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 93,
+        "vid": "dmitri_sokolov",
+        "mid": "suburb",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 112,
+        "vTaken": 44,
+        "fleeHpFrac": 0.41,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 96,
+        "vid": "priya_nair",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 35,
+        "vTaken": 67,
+        "fleeHpFrac": 0.11,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 99,
+        "vid": "ines_duarte",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 6,
+        "mDealt": 227,
+        "vTaken": 98,
+        "fleeHpFrac": 0.09,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 6,
+        "volley": {
+          "shots": 1,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 100,
+        "vid": "ines_duarte",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 0,
+        "vTaken": 14,
+        "fleeHpFrac": 0.18,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 103,
+        "vid": "dmitri_sokolov",
+        "mid": "congregation",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 176,
+        "vTaken": 83,
+        "fleeHpFrac": 0.25,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 3,
+          "hits": 2,
+          "dmg": 35,
+          "ammoLeft": 2
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 103,
+        "vid": "owen_smith",
+        "mid": "congregation",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 212,
+        "vTaken": 57,
+        "fleeHpFrac": 0.36,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107144,
+        "day": 104,
+        "vid": "yuki_mori",
+        "mid": "congregation",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "floor-hp",
+        "rounds": 5,
+        "mDealt": 167,
+        "vTaken": 57,
+        "fleeHpFrac": 0.29,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 4,
+          "hits": 3,
+          "dmg": 61,
+          "ammoLeft": 1
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 106,
+        "vid": "yuki_mori",
+        "mid": "suburb",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 179,
+        "vTaken": 42,
+        "fleeHpFrac": 0.33,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 4,
+          "hits": 1,
+          "dmg": 18,
+          "ammoLeft": 2
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 106,
+        "vid": "yuki_mori",
+        "mid": "suburb",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "wise-leave",
+        "rounds": 1,
+        "mDealt": 0,
+        "vTaken": 9,
+        "fleeHpFrac": 0.24,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 2,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 107,
+        "vid": "leo_martin",
+        "mid": "reunion",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 47,
+        "vTaken": 84,
+        "fleeHpFrac": 0.09,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 4,
+        "volley": null
+      },
+      {
+        "seed": 107144,
+        "day": 107,
+        "vid": "dmitri_sokolov",
+        "mid": "suburb",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "wise-leave",
+        "rounds": 1,
+        "mDealt": 36,
+        "vTaken": 13,
+        "fleeHpFrac": null,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 2,
+          "hits": 2,
+          "dmg": 36,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 109,
+        "vid": "priya_nair",
+        "mid": "algorithm",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 8,
+        "mDealt": 93,
+        "vTaken": 89,
+        "fleeHpFrac": 0.07,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 7,
+        "volley": {
+          "shots": 1,
+          "hits": 1,
+          "dmg": 12,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 109,
+        "vid": "dmitri_sokolov",
+        "mid": "suburb",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "wise-leave",
+        "rounds": 1,
+        "mDealt": 0,
+        "vTaken": 12,
+        "fleeHpFrac": 0.04,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 110,
+        "vid": "yuki_mori",
+        "mid": "timeslot",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 302,
+        "vTaken": 32,
+        "fleeHpFrac": 0.43,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 3,
+          "hits": 2,
+          "dmg": 42,
+          "ammoLeft": 2
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 110,
+        "vid": "nino_kapanadze",
+        "mid": "cancellation",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 301,
+        "vTaken": 54,
+        "fleeHpFrac": 0.29,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 114,
+        "vid": "ines_duarte",
+        "mid": "network_note",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 6,
+        "mDealt": 765,
+        "vTaken": 56,
+        "fleeHpFrac": 0.46,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 1,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 115,
+        "vid": "naran_tumen",
+        "mid": "reunion",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 6,
+        "mDealt": 104,
+        "vTaken": 83,
+        "fleeHpFrac": 0.17,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 6,
+        "volley": {
+          "shots": 2,
+          "hits": 2,
+          "dmg": 35,
+          "ammoLeft": 3
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 115,
+        "vid": "naran_tumen",
+        "mid": "timeslot",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 65,
+        "vTaken": 6,
+        "fleeHpFrac": 0.11,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 2,
+          "hits": 2,
+          "dmg": 36,
+          "ammoLeft": 1
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 116,
+        "vid": "ines_duarte",
+        "mid": "timeslot",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 5,
+        "mDealt": 389,
+        "vTaken": 72,
+        "fleeHpFrac": 0.03,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 4,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 116,
+        "vid": "app_mgpsplj6801",
+        "mid": "eulogy",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 0,
+        "vTaken": 87,
+        "fleeHpFrac": 0.13,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 3,
+        "volley": null
+      },
+      {
+        "seed": 107144,
+        "day": 117,
+        "vid": "ines_duarte",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 163,
+        "vTaken": 19,
+        "fleeHpFrac": 0.24,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 4,
+          "hits": 3,
+          "dmg": 163,
+          "ammoLeft": 1
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 117,
+        "vid": "hassan_ali",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 0,
+        "vTaken": 31,
+        "fleeHpFrac": 0.17,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 3,
+        "volley": null
+      },
+      {
+        "seed": 107144,
+        "day": 118,
+        "vid": "hassan_ali",
+        "mid": "reunion",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 34,
+        "vTaken": 32,
+        "fleeHpFrac": 0.14,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107144,
+        "day": 118,
+        "vid": "ines_duarte",
+        "mid": "eulogy",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 0,
+        "vTaken": 11,
+        "fleeHpFrac": 0.1,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 1,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 118,
+        "vid": "naran_tumen",
+        "mid": "reunion",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 35,
+        "vTaken": 27,
+        "fleeHpFrac": 0.19,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 119,
+        "vid": "naran_tumen",
+        "mid": "eulogy",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 19,
+        "vTaken": 11,
+        "fleeHpFrac": 0.25,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 4,
+          "hits": 1,
+          "dmg": 19,
+          "ammoLeft": 1
+        }
+      },
+      {
+        "seed": 107144,
+        "day": 119,
+        "vid": "victor_lopez",
+        "mid": "reunion",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 51,
+        "vTaken": 84,
+        "fleeHpFrac": 0.1,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 3,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 45,
+        "vid": "mia_andersson",
+        "mid": "reunion",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 5,
+        "mDealt": 172,
+        "vTaken": 77,
+        "fleeHpFrac": 0.23,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 62,
+        "vid": "leo_martin",
+        "mid": "eater",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 234,
+        "vTaken": 58,
+        "fleeHpFrac": 0.35,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 65,
+        "vid": "owen_smith",
+        "mid": "audit",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 156,
+        "vTaken": 86,
+        "fleeHpFrac": 0.08,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 74,
+        "vid": "app_mgpsphrr113",
+        "mid": "herald",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 5,
+        "mDealt": 205,
+        "vTaken": 51,
+        "fleeHpFrac": 0.44,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 74,
+        "vid": "app_mgpsphrr113",
+        "mid": "herald",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 148,
+        "vTaken": 28,
+        "fleeHpFrac": 0.16,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 76,
+        "vid": "visjoin_70",
+        "mid": "herald",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 5,
+        "mDealt": 105,
+        "vTaken": 80,
+        "fleeHpFrac": 0.2,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 5,
+        "volley": {
+          "shots": 2,
+          "hits": 2,
+          "dmg": 30,
+          "ammoLeft": 3
+        }
+      },
+      {
+        "seed": 107146,
+        "day": 77,
+        "vid": "boris_kowalski",
+        "mid": "suburb",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 17,
+        "vTaken": 38,
+        "fleeHpFrac": 0.08,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107146,
+        "day": 77,
+        "vid": "app_mgpsphrr113",
+        "mid": "eater",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 22,
+        "vTaken": 26,
+        "fleeHpFrac": 0.17,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 84,
+        "vid": "visjoin_70",
+        "mid": "eater",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "floor-hp",
+        "rounds": 2,
+        "mDealt": 46,
+        "vTaken": 70,
+        "fleeHpFrac": 0.26,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 2,
+          "hits": 1,
+          "dmg": 13,
+          "ammoLeft": 1
+        }
+      },
+      {
+        "seed": 107146,
+        "day": 87,
+        "vid": "app_mgpsphrr113",
+        "mid": "eater",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 205,
+        "vTaken": 41,
+        "fleeHpFrac": 0.18,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 88,
+        "vid": "app_mgpsphrr113",
+        "mid": "influencer",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 161,
+        "vTaken": 55,
+        "fleeHpFrac": 0.06,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 98,
+        "vid": "visjoin_92",
+        "mid": "influencer",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 14,
+        "mDealt": 536,
+        "vTaken": 62,
+        "fleeHpFrac": 0.46,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 100,
+        "vid": "visjoin_92",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 5,
+        "mDealt": 170,
+        "vTaken": 41,
+        "fleeHpFrac": 0.39,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 101,
+        "vid": "boris_kowalski",
+        "mid": "influencer",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 31,
+        "vTaken": 54,
+        "fleeHpFrac": 0.18,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 3,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107146,
+        "day": 105,
+        "vid": "visjoin_92",
+        "mid": "reunion",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 5,
+        "mDealt": 117,
+        "vTaken": 54,
+        "fleeHpFrac": 0.11,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 4,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 105,
+        "vid": "visjoin_92",
+        "mid": "reunion",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 16,
+        "vTaken": 21,
+        "fleeHpFrac": 0.1,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 110,
+        "vid": "gen_gpkg590",
+        "mid": "eater",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 76,
+        "vTaken": 76,
+        "fleeHpFrac": 0.05,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 3,
+        "volley": {
+          "shots": 2,
+          "hits": 1,
+          "dmg": 15,
+          "ammoLeft": 1
+        }
+      },
+      {
+        "seed": 107146,
+        "day": 115,
+        "vid": "mia_andersson",
+        "mid": "reunion",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 5,
+        "mDealt": 168,
+        "vTaken": 97,
+        "fleeHpFrac": 0.03,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 4,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107146,
+        "day": 129,
+        "vid": "visjoin_117",
+        "mid": "audit",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 168,
+        "vTaken": 67,
+        "fleeHpFrac": 0.11,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107146,
+        "day": 149,
+        "vid": "visjoin_133",
+        "mid": "suburb",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "wise-leave",
+        "rounds": 1,
+        "mDealt": 0,
+        "vTaken": 5,
+        "fleeHpFrac": null,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": null
+      },
+      {
+        "seed": 107146,
+        "day": 149,
+        "vid": "visjoin_133",
+        "mid": "suburb",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "wise-leave",
+        "rounds": 1,
+        "mDealt": 0,
+        "vTaken": 7,
+        "fleeHpFrac": null,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": null
+      },
+      {
+        "seed": 107147,
+        "day": 115,
+        "vid": "aki_tanaka",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 262,
+        "vTaken": 40,
+        "fleeHpFrac": 0.37,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107147,
+        "day": 115,
+        "vid": "aki_tanaka",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 29,
+        "vTaken": 25,
+        "fleeHpFrac": 0.12,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107147,
+        "day": 116,
+        "vid": "aki_tanaka",
+        "mid": "influencer",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 29,
+        "vTaken": 13,
+        "fleeHpFrac": 0.17,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107147,
+        "day": 121,
+        "vid": "giulia_bianchi",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 258,
+        "vTaken": 53,
+        "fleeHpFrac": 0.16,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107147,
+        "day": 124,
+        "vid": "aki_tanaka",
+        "mid": "strike",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 258,
+        "vTaken": 31,
+        "fleeHpFrac": 0.28,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107147,
+        "day": 129,
+        "vid": "aki_tanaka",
+        "mid": "editor",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 362,
+        "vTaken": 52,
+        "fleeHpFrac": 0.41,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107147,
+        "day": 132,
+        "vid": "aki_tanaka",
+        "mid": "editor",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 376,
+        "vTaken": 62,
+        "fleeHpFrac": 0.18,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107147,
+        "day": 134,
+        "vid": "aki_tanaka",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 7,
+        "mDealt": 302,
+        "vTaken": 39,
+        "fleeHpFrac": 0.42,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107147,
+        "day": 141,
+        "vid": "giulia_bianchi",
+        "mid": "eulogy",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 42,
+        "vTaken": 71,
+        "fleeHpFrac": 0.22,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 4,
+        "volley": {
+          "shots": 4,
+          "hits": 2,
+          "dmg": 42,
+          "ammoLeft": 1
+        }
+      },
+      {
+        "seed": 107147,
+        "day": 144,
+        "vid": "giulia_bianchi",
+        "mid": "timeslot",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 458,
+        "vTaken": 69,
+        "fleeHpFrac": 0.27,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 3,
+          "hits": 2,
+          "dmg": 43,
+          "ammoLeft": 3
+        }
+      },
+      {
+        "seed": 107147,
+        "day": 146,
+        "vid": "giulia_bianchi",
+        "mid": "editor",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "floor-hp",
+        "rounds": 1,
+        "mDealt": 19,
+        "vTaken": 32,
+        "fleeHpFrac": 0.02,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": false,
+        "everWinning": false,
+        "shoutRound": null,
+        "volley": {
+          "shots": 3,
+          "hits": 1,
+          "dmg": 19,
+          "ammoLeft": 2
+        }
+      },
+      {
+        "seed": 107147,
+        "day": 148,
+        "vid": "giulia_bianchi",
+        "mid": "audit",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 145,
+        "vTaken": 63,
+        "fleeHpFrac": 0.18,
+        "armed": true,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107148,
+        "day": 47,
+        "vid": "leo_martin",
+        "mid": "audit",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 387,
+        "vTaken": 66,
+        "fleeHpFrac": 0.11,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 3,
+          "hits": 1,
+          "dmg": 22,
+          "ammoLeft": 1
+        }
+      },
+      {
+        "seed": 107148,
+        "day": 76,
+        "vid": "lena_ruiz",
+        "mid": "algorithm",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 157,
+        "vTaken": 47,
+        "fleeHpFrac": 0.34,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107148,
+        "day": 79,
+        "vid": "lena_ruiz",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 104,
+        "vTaken": 63,
+        "fleeHpFrac": 0.46,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107148,
+        "day": 87,
+        "vid": "lena_ruiz",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 6,
+        "mDealt": 481,
+        "vTaken": 51,
+        "fleeHpFrac": 0.42,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107148,
+        "day": 89,
+        "vid": "wanjiru_kamau",
+        "mid": "algorithm",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 44,
+        "vTaken": 51,
+        "fleeHpFrac": 0.14,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107148,
+        "day": 93,
+        "vid": "wanjiru_kamau",
+        "mid": "reunion",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 33,
+        "vTaken": 52,
+        "fleeHpFrac": 0.16,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107148,
+        "day": 104,
+        "vid": "visjoin_94",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 2,
+        "mDealt": 65,
+        "vTaken": 78,
+        "fleeHpFrac": 0.14,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 107148,
+        "day": 106,
+        "vid": "daniyar_askarov",
+        "mid": "suburb",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 13,
+        "mDealt": 670,
+        "vTaken": 76,
+        "fleeHpFrac": 0.43,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107148,
+        "day": 121,
+        "vid": "lena_ruiz",
+        "mid": "spoiler",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 7,
+        "mDealt": 478,
+        "vTaken": 64,
+        "fleeHpFrac": 0.36,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107148,
+        "day": 130,
+        "vid": "visjoin_116",
+        "mid": "eater",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 6,
+        "mDealt": 359,
+        "vTaken": 71,
+        "fleeHpFrac": 0.11,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107148,
+        "day": 131,
+        "vid": "visjoin_129",
+        "mid": "audit",
+        "origin": "aid",
+        "leadRule": "aid",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 3,
+        "mDealt": 71,
+        "vTaken": 72,
+        "fleeHpFrac": 0.06,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      },
+      {
+        "seed": 107148,
+        "day": 135,
+        "vid": "daniyar_askarov",
+        "mid": "editor",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "fleeCause": "hopeless-after-help",
+        "rounds": 4,
+        "mDealt": 100,
+        "vTaken": 80,
+        "fleeHpFrac": 0.06,
+        "armed": false,
+        "intent": "engage",
+        "everHopeless": true,
+        "everWinning": false,
+        "shoutRound": 2,
+        "volley": null
+      }
+    ],
+    "armedDetail": [
+      {
+        "seed": 107146,
+        "day": 115,
+        "vid": "mia_andersson",
+        "mid": "reunion",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        },
+        "partyCells": [
+          {
+            "vid": "gen_cl8qjxk",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 80,
+        "vid": "gen_e9d8xa5",
+        "mid": "suburb",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "outcome": "evade",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 115,
+        "vid": "aki_tanaka",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 115,
+        "vid": "aki_tanaka",
+        "mid": "reunion",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 116,
+        "vid": "mateo_alvarez",
+        "mid": "herald",
+        "origin": "aid",
+        "leadRule": "aid",
+        "outcome": "vKill",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 116,
+        "vid": "aki_tanaka",
+        "mid": "influencer",
+        "origin": "aid",
+        "leadRule": "aid",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 117,
+        "vid": "aki_tanaka",
+        "mid": "influencer",
+        "origin": "aid",
+        "leadRule": "aid",
+        "outcome": "vKill",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 121,
+        "vid": "theo_lindqvist",
+        "mid": "spoiler",
+        "origin": "expedition",
+        "leadRule": "expedition-holder",
+        "outcome": "evade",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 121,
+        "vid": "mateo_alvarez",
+        "mid": "reunion",
+        "origin": "aid",
+        "leadRule": "aid",
+        "outcome": "vKill",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 121,
+        "vid": "giulia_bianchi",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        },
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 124,
+        "vid": "aki_tanaka",
+        "mid": "strike",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 126,
+        "vid": "mateo_alvarez",
+        "mid": "eulogy",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vKill",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 128,
+        "vid": "mateo_alvarez",
+        "mid": "strike",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vDie",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 128,
+        "vid": "giulia_bianchi",
+        "mid": "strike",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vKill",
+        "lead": false,
+        "volley": {
+          "shots": 4,
+          "hits": 1,
+          "dmg": 19,
+          "ammoLeft": 4
+        },
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 129,
+        "vid": "aki_tanaka",
+        "mid": "editor",
+        "origin": "aid",
+        "leadRule": "aid",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 132,
+        "vid": "aki_tanaka",
+        "mid": "editor",
+        "origin": "aid",
+        "leadRule": "aid",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 136,
+        "vid": "giulia_bianchi",
+        "mid": "eulogy",
+        "origin": "aid",
+        "leadRule": "aid",
+        "outcome": "mFlee",
+        "lead": false,
+        "volley": {
+          "shots": 4,
+          "hits": 2,
+          "dmg": 41,
+          "ammoLeft": 5
+        },
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 141,
+        "vid": "giulia_bianchi",
+        "mid": "eulogy",
+        "origin": "aid",
+        "leadRule": "aid",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": {
+          "shots": 4,
+          "hits": 2,
+          "dmg": 42,
+          "ammoLeft": 1
+        },
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 144,
+        "vid": "giulia_bianchi",
+        "mid": "timeslot",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": {
+          "shots": 3,
+          "hits": 2,
+          "dmg": 43,
+          "ammoLeft": 3
+        },
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 144,
+        "vid": "aki_tanaka",
+        "mid": "timeslot",
+        "origin": "world-tick",
+        "leadRule": "world-tick",
+        "outcome": "vKill",
+        "lead": false,
+        "volley": null,
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 148,
+        "vid": "giulia_bianchi",
+        "mid": "audit",
+        "origin": "aid",
+        "leadRule": "aid",
+        "outcome": "vFlee",
+        "lead": false,
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        },
+        "partyCells": [
+          {
+            "vid": "gen_824pdhl",
+            "rangedId": "searcaster",
+            "ammoId": "fusion_cell",
+            "cells": 2,
+            "alive": true
+          }
+        ]
+      }
+    ],
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 4,
+    "medianDays": 150,
+    "days": [
+      109,
+      150,
+      68,
+      118,
+      150,
+      150,
+      150,
+      150
+    ],
+    "communityLost": 3,
+    "perSeed": [
+      {
+        "seed": 107141,
+        "meetings": 17,
+        "engaged": 14,
+        "flees": 9,
+        "armed": 0,
+        "days": 109,
+        "endReason": "village-lost",
+        "standing": 150,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false
+      },
+      {
+        "seed": 107142,
+        "meetings": 5,
+        "engaged": 3,
+        "flees": 3,
+        "armed": 0,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 175,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false
+      },
+      {
+        "seed": 107143,
+        "meetings": 4,
+        "engaged": 1,
+        "flees": 0,
+        "armed": 0,
+        "days": 68,
+        "endReason": "village-lost",
+        "standing": 150,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false
+      },
+      {
+        "seed": 107144,
+        "meetings": 60,
+        "engaged": 55,
+        "flees": 40,
+        "armed": 0,
+        "days": 118,
+        "endReason": "village-lost",
+        "standing": 345,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "won": false
+      },
+      {
+        "seed": 107145,
+        "meetings": 0,
+        "engaged": 0,
+        "flees": 0,
+        "armed": 0,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 125,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false
+      },
+      {
+        "seed": 107146,
+        "meetings": 43,
+        "engaged": 32,
+        "flees": 21,
+        "armed": 1,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 535,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "won": false
+      },
+      {
+        "seed": 107147,
+        "meetings": 25,
+        "engaged": 19,
+        "flees": 12,
+        "armed": 20,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 445,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "won": false
+      },
+      {
+        "seed": 107148,
+        "meetings": 29,
+        "engaged": 18,
+        "flees": 12,
+        "armed": 0,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 515,
+        "scaleRank": "village",
+        "maxWave": 5,
+        "won": false
+      }
+    ],
+    "leadAttribution": 1,
+    "fleeClassification": 1
+  },
+  "presence": {
+    "dir": "evidence/2026-11-21/perseed-leadside-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "poolTicks": 9944,
+    "poolHolderPresent": 442,
+    "poolOnTile": 0,
+    "poolAdjacent": 442,
+    "poolAbsent": 9502,
+    "poolFights": 233,
+    "poolHolderLed": 0,
+    "poolDraftMiss": 14,
+    "poolNoFight": 9711,
+    "transfers": 0,
+    "vanishes": 2,
+    "newHolders": 4,
+    "holderDied": 1,
+    "sinkByKind": {
+      "new-holder:unexplained": 3,
+      "vanish:unexplained": 2,
+      "holder-died:holder-died": 1,
+      "new-holder:grant-contest-prize": 1
+    },
+    "sinkUnexplained": 5,
+    "sinkTotal": 7,
+    "dropEvents": 0,
+    "transferDetail": [],
+    "vanishDetail": [
+      {
+        "seed": 107144,
+        "day": 70,
+        "from": "gen_glnvgji",
+        "attribution": "unexplained"
+      },
+      {
+        "seed": 107146,
+        "day": 117,
+        "from": "gen_cl8qjxk",
+        "attribution": "unexplained"
+      }
+    ],
+    "draftMissDetail": [
+      {
+        "seed": 107147,
+        "day": 115,
+        "mid": "reunion",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "aki_tanaka",
+          "aki_tanaka"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 115,
+        "mid": "reunion",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "aki_tanaka",
+          "aki_tanaka"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 115,
+        "mid": "reunion",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "aki_tanaka",
+          "aki_tanaka"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 124,
+        "mid": "strike",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "aki_tanaka"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 124,
+        "mid": "strike",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "aki_tanaka"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 124,
+        "mid": "strike",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "aki_tanaka"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 124,
+        "mid": "strike",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "aki_tanaka"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 126,
+        "mid": "eulogy",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "mateo_alvarez"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 128,
+        "mid": "strike",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "mateo_alvarez",
+          "giulia_bianchi"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 128,
+        "mid": "strike",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "mateo_alvarez",
+          "giulia_bianchi"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 128,
+        "mid": "strike",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "mateo_alvarez",
+          "giulia_bianchi"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 128,
+        "mid": "strike",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "mateo_alvarez",
+          "giulia_bianchi"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 144,
+        "mid": "timeslot",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "giulia_bianchi",
+          "aki_tanaka"
+        ]
+      },
+      {
+        "seed": 107147,
+        "day": 144,
+        "mid": "timeslot",
+        "pooled": [
+          "gen_824pdhl"
+        ],
+        "leads": [
+          "giulia_bianchi",
+          "aki_tanaka"
+        ]
+      }
+    ],
+    "sinkDetail": [
+      {
+        "seed": 107144,
+        "day": 55,
+        "kind": "new-holder",
+        "from": null,
+        "to": "gen_glnvgji",
+        "attribution": "unexplained"
+      },
+      {
+        "seed": 107144,
+        "day": 70,
+        "kind": "vanish",
+        "from": "gen_glnvgji",
+        "to": null,
+        "attribution": "unexplained"
+      },
+      {
+        "seed": 107146,
+        "day": 60,
+        "kind": "new-holder",
+        "from": null,
+        "to": "xavier_dubois",
+        "attribution": "unexplained"
+      },
+      {
+        "seed": 107146,
+        "day": 67,
+        "kind": "holder-died",
+        "from": "xavier_dubois",
+        "to": null,
+        "attribution": "holder-died"
+      },
+      {
+        "seed": 107146,
+        "day": 115,
+        "kind": "new-holder",
+        "from": null,
+        "to": "gen_cl8qjxk",
+        "attribution": "grant-contest-prize"
+      },
+      {
+        "seed": 107146,
+        "day": 117,
+        "kind": "vanish",
+        "from": "gen_cl8qjxk",
+        "to": null,
+        "attribution": "unexplained"
+      },
+      {
+        "seed": 107147,
+        "day": 71,
+        "kind": "new-holder",
+        "from": null,
+        "to": "gen_824pdhl",
+        "attribution": "unexplained"
+      }
+    ]
+  },
+  "lend": {
+    "dir": "evidence/2026-11-21/perseed-leadside-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "lends": 0,
+    "lendsGun": 0,
+    "lendsCells": 0,
+    "lendsTile": 0,
+    "lendsAdjacent": 0,
+    "gunReturned": 0,
+    "borrowerKept": 0,
+    "cellsReturned": 0,
+    "cellsMoved": 0,
+    "lendsJoined": 0,
+    "lendsUnjoined": 0,
+    "lentVolleys": 0,
+    "lentVolleyDmg": 0,
+    "lentOutcomes": {},
+    "borrowerSurvived": 0,
+    "borrowerDied": 0,
+    "borrowerSurvival": null,
+    "lendDetail": []
+  },
+  "pool": {
+    "dir": "evidence/2026-11-21/perseed-leadside-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "moments": 0,
+    "momentsGun": 0,
+    "momentsCells": 0,
+    "momentsTile": 0,
+    "momentsAdjacent": 0,
+    "fights": 0,
+    "perSeed": {
+      "107141": 0,
+      "107142": 0,
+      "107143": 0,
+      "107144": 0,
+      "107145": 0,
+      "107146": 0,
+      "107147": 0,
+      "107148": 0
+    },
+    "byKind": {},
+    "byFrom": {},
+    "detail": []
+  },
+  "cellVerdict": "DIAG-NO-GO",
+  "cellBars": [
+    {
+      "id": "census-coverage",
+      "pass": true,
+      "detail": "seeds with complete holder census 8/8 (baseline + daily census + cellPile rows, 0 instrument errors, census-day share >= 0.5); per-seed: 107141:ok 107142:ok 107143:ok 107144:ok 107145:ok 107146:ok 107147:ok 107148:ok"
+    },
+    {
+      "id": "attribution",
+      "pass": false,
+      "detail": "cell appearances 11, attributed 6 (completeness 0.545, bar >= 0.90); by source {\"unexplained\":5,\"contest-prize\":2,\"corpse-take\":2,\"moved\":2}"
+    },
+    {
+      "id": "volley-opportunity-pool",
+      "pass": true,
+      "detail": "engaged wave-4+ meetings with a 0-cell searcaster participant 0 (floor 5); armed searcaster meetings 17; all wave-4+ meetings with a 0-cell searcaster participant 0 (evaded 0); searcaster holder-days 102 — RARE-RATE path: pool thin, stated as a finding, not re-scored"
+    }
+  ],
+  "participationVerdict": "DIAG-GO",
+  "diag": {
+    "dir": "evidence/2026-11-21/perseed-leadside-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "bowopenOn": {
+      "true": 8
+    },
+    "senseexpedOn": {
+      "true": 8
+    },
+    "speargateOn": {
+      "true": 8
+    },
+    "gunrateOn": {
+      "true": 8
+    },
+    "coverage": [
+      {
+        "seed": 107141,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 884,
+        "cellPileRows": 107,
+        "censusDays": 107,
+        "livedDays": 109,
+        "censusDayShare": 0.981651376146789,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107142,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 1367,
+        "cellPileRows": 146,
+        "censusDays": 146,
+        "livedDays": 151,
+        "censusDayShare": 0.9668874172185431,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107143,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 602,
+        "cellPileRows": 66,
+        "censusDays": 66,
+        "livedDays": 68,
+        "censusDayShare": 0.9705882352941176,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107144,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 1052,
+        "cellPileRows": 112,
+        "censusDays": 112,
+        "livedDays": 121,
+        "censusDayShare": 0.9256198347107438,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107145,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 1385,
+        "cellPileRows": 148,
+        "censusDays": 148,
+        "livedDays": 151,
+        "censusDayShare": 0.9801324503311258,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107146,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 1275,
+        "cellPileRows": 148,
+        "censusDays": 148,
+        "livedDays": 151,
+        "censusDayShare": 0.9801324503311258,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107147,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 1431,
+        "cellPileRows": 148,
+        "censusDays": 148,
+        "livedDays": 151,
+        "censusDayShare": 0.9801324503311258,
+        "instrumentErrors": 0,
+        "complete": true
+      },
+      {
+        "seed": 107148,
+        "baselinePresent": true,
+        "baselineRows": 12,
+        "censusRows": 1240,
+        "cellPileRows": 148,
+        "censusDays": 148,
+        "livedDays": 151,
+        "censusDayShare": 0.9801324503311258,
+        "instrumentErrors": 0,
+        "complete": true
+      }
+    ],
+    "coverageComplete": 8,
+    "searcasterHolders": [
+      {
+        "seed": 107144,
+        "vid": "gen_glnvgji",
+        "holderDays": 13,
+        "cellDays": 13,
+        "maxCells": 2,
+        "zeroDays": 0
+      },
+      {
+        "seed": 107146,
+        "vid": "xavier_dubois",
+        "holderDays": 7,
+        "cellDays": 7,
+        "maxCells": 2,
+        "zeroDays": 0
+      },
+      {
+        "seed": 107146,
+        "vid": "gen_cl8qjxk",
+        "holderDays": 2,
+        "cellDays": 2,
+        "maxCells": 2,
+        "zeroDays": 0
+      },
+      {
+        "seed": 107147,
+        "vid": "gen_824pdhl",
+        "holderDays": 80,
+        "cellDays": 80,
+        "maxCells": 2,
+        "zeroDays": 0
+      }
+    ],
+    "searcasterHolderDays": 102,
+    "searcasterCellDays": 102,
+    "searcasterZeroDays": 0,
+    "searcasterHoldersTotal": 4,
+    "cellHolderDays": 216,
+    "maxCellsEver": 2,
+    "cellAppearances": 11,
+    "cellAttributed": 6,
+    "cellAttribution": 0.5454545454545454,
+    "cellBySource": {
+      "unexplained": 5,
+      "contest-prize": 2,
+      "corpse-take": 2,
+      "moved": 2
+    },
+    "searcasterAppearances": 4,
+    "searcasterAttributed": 1,
+    "searcasterAttribution": 0.25,
+    "searcasterBySource": {
+      "unexplained": 3,
+      "contest-prize": 1
+    },
+    "searcasterBaseline": 0,
+    "cellBaseline": 0,
+    "searcasterDeparts": 5,
+    "searcasterDepartsZero": 0,
+    "searcasterDepartOutcomes": {
+      "already-had": 5
+    },
+    "lootCellDrops": 1,
+    "lootSearcasterDrops": 0,
+    "lootByDrop": {
+      "fusion_cell": 1,
+      "phase_sling": 5,
+      "starfall_bow": 1
+    },
+    "grantCellByCaller": {
+      "contest-prize": 2
+    },
+    "grantSearcasterByCaller": {
+      "contest-prize": 4,
+      "other": 1
+    },
+    "grantCellTotal": 2,
+    "grantSearcasterTotal": 5,
+    "corpseTakeCell": 2,
+    "corpseTakeTotal": 442,
+    "contestPrizes": 196,
+    "scholarCellAppearances": 4,
+    "scholarCellAttributed": 4,
+    "scholarCellBySource": {
+      "corpse-take": 2,
+      "moved": 2
+    },
+    "playerCrafts": 36,
+    "playerCraftCell": 0,
+    "playerCraftByRecipe": {
+      "snare": 34,
+      "hide_armor": 1,
+      "stone_knife": 1
+    },
+    "pileMaxTotal": 0,
+    "pileEverPositive": 0,
+    "scholarMaxCells": 2,
+    "poolEngagedZero": 0,
+    "poolEngagedArmed": 17,
+    "poolAllZero": 0,
+    "poolEvadedZero": 0,
+    "volleyFiredFromSearcaster": 4,
+    "noFusionCellsLines": 0,
+    "encWave4Plus": 183,
+    "encEngaged": 142,
+    "medianDays": 150,
+    "communityLost": 3,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 4,
+    "scaleRanks": {
+      "regional": 7,
+      "village": 1
+    },
+    "starvation": 0,
+    "starvationVillager": 0,
+    "perSeed": [
+      {
+        "seed": 107141,
+        "days": 109,
+        "endReason": "village-lost",
+        "standing": 150,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 0,
+        "searcasterHolderDays": 0,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 17,
+        "engagedMeetings": 14
+      },
+      {
+        "seed": 107142,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 175,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 0,
+        "searcasterHolderDays": 0,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 5,
+        "engagedMeetings": 3
+      },
+      {
+        "seed": 107143,
+        "days": 68,
+        "endReason": "village-lost",
+        "standing": 150,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 0,
+        "searcasterHolderDays": 0,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 4,
+        "engagedMeetings": 1
+      },
+      {
+        "seed": 107144,
+        "days": 118,
+        "endReason": "village-lost",
+        "standing": 345,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 1,
+        "searcasterHolderDays": 13,
+        "searcasterDeparts": 3,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 60,
+        "engagedMeetings": 55
+      },
+      {
+        "seed": 107145,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 125,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 0,
+        "searcasterHolderDays": 0,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 0,
+        "engagedMeetings": 0
+      },
+      {
+        "seed": 107146,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 535,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 2,
+        "searcasterHolderDays": 9,
+        "searcasterDeparts": 2,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 1,
+        "wave4PlusMeetings": 43,
+        "engagedMeetings": 32
+      },
+      {
+        "seed": 107147,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 445,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 1,
+        "searcasterHolderDays": 80,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 16,
+        "wave4PlusMeetings": 25,
+        "engagedMeetings": 19
+      },
+      {
+        "seed": 107148,
+        "days": 150,
+        "endReason": "survived",
+        "standing": 515,
+        "scaleRank": "village",
+        "maxWave": 5,
+        "won": false,
+        "coverageComplete": true,
+        "searcasterHolders": 0,
+        "searcasterHolderDays": 0,
+        "searcasterDeparts": 0,
+        "searcasterDepartsZero": 0,
+        "poolEngagedZero": 0,
+        "poolEngagedArmed": 0,
+        "wave4PlusMeetings": 29,
+        "engagedMeetings": 18
+      }
+    ]
+  },
+  "cellAppearanceDetail": [
+    {
+      "seed": 107141,
+      "vid": "zoltan_nagy",
+      "day": 22,
+      "prevDay": 21,
+      "delta": 1,
+      "source": "unexplained"
+    },
+    {
+      "seed": 107141,
+      "vid": "tom_baker",
+      "day": 107,
+      "prevDay": 106,
+      "delta": 1,
+      "source": "contest-prize"
+    },
+    {
+      "seed": 107141,
+      "vid": "__scholar__",
+      "day": 97,
+      "prevDay": 96,
+      "delta": 1,
+      "source": "corpse-take"
+    },
+    {
+      "seed": 107142,
+      "vid": "zoe_adams",
+      "day": 107,
+      "prevDay": 106,
+      "delta": 1,
+      "source": "contest-prize"
+    },
+    {
+      "seed": 107142,
+      "vid": "__scholar__",
+      "day": 148,
+      "prevDay": 147,
+      "delta": 1,
+      "source": "corpse-take"
+    },
+    {
+      "seed": 107144,
+      "vid": "gen_glnvgji",
+      "day": 54,
+      "prevDay": 52,
+      "delta": 2,
+      "source": "unexplained"
+    },
+    {
+      "seed": 107144,
+      "vid": "__scholar__",
+      "day": 70,
+      "prevDay": 69,
+      "delta": 2,
+      "source": "moved"
+    },
+    {
+      "seed": 107146,
+      "vid": "gen_cl8qjxk",
+      "day": 115,
+      "prevDay": 114,
+      "delta": 2,
+      "source": "unexplained"
+    },
+    {
+      "seed": 107146,
+      "vid": "xavier_dubois",
+      "day": 58,
+      "prevDay": 57,
+      "delta": 2,
+      "source": "unexplained"
+    },
+    {
+      "seed": 107146,
+      "vid": "__scholar__",
+      "day": 117,
+      "prevDay": 116,
+      "delta": 2,
+      "source": "moved"
+    },
+    {
+      "seed": 107147,
+      "vid": "gen_824pdhl",
+      "day": 70,
+      "prevDay": 69,
+      "delta": 2,
+      "source": "unexplained"
+    }
+  ],
+  "searcasterAppearanceDetail": [
+    {
+      "seed": 107144,
+      "vid": "gen_glnvgji",
+      "day": 55,
+      "prevDay": 54,
+      "source": "unexplained"
+    },
+    {
+      "seed": 107146,
+      "vid": "gen_cl8qjxk",
+      "day": 115,
+      "prevDay": 114,
+      "source": "contest-prize"
+    },
+    {
+      "seed": 107146,
+      "vid": "xavier_dubois",
+      "day": 60,
+      "prevDay": 59,
+      "source": "unexplained"
+    },
+    {
+      "seed": 107147,
+      "vid": "gen_824pdhl",
+      "day": 71,
+      "prevDay": 70,
+      "source": "unexplained"
+    }
+  ],
+  "poolDetail": []
+}

@@ -2467,8 +2467,8 @@ async function oneRun(seed) {
 
 if (require.main === module) (async function () {
   // LEADSIDE: two legs (MODE=ctl|arm). The legs differ ONLY by
-  // bundle size: ctl runs the 2-cell substrate bundle, arm adds
-  // LEADSIDE=1 (6 cells). LEND stays OFF on both legs.
+  // the redirect rule: ctl runs the substrate as-is (LEADSIDE unset),
+  // arm adds LEADSIDE=1. LEND stays OFF on both legs.
   if (MODE !== 'ctl' && MODE !== 'arm') { console.error('LEADSIDE STOP: MODE must be ctl or arm, got ' + JSON.stringify(MODE)); process.exit(2); }
   if (MODE === 'arm' && !LEADSIDE_ON) { console.error('LEADSIDE STOP: LEADSIDE=1 required on the arm leg.'); process.exit(2); }
   if (MODE === 'ctl' && LEADSIDE_ON) { console.error('LEADSIDE STOP: LEADSIDE must be unset on the control leg.'); process.exit(2); }

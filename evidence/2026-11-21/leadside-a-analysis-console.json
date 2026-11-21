@@ -1,0 +1,268 @@
+{
+  "verdict": "NO-GO",
+  "kind": "PARTICIPATION",
+  "bars": [
+    {
+      "id": "searcaster-holder-days",
+      "pass": true,
+      "detail": "arm villager searcaster-holder-days 102 (floor 40); ctl 102"
+    },
+    {
+      "id": "armed-leads",
+      "pass": false,
+      "detail": "arm armed leads 0 (floor 2 — the discriminating bar); ctl armed leads 0 — the redirect did not put a proven leader in front of a wave-4+ fight"
+    },
+    {
+      "id": "armed-volley-fired",
+      "pass": false,
+      "detail": "arm armed volleys fired 0 (floor 1 — a FIRST volley from a proven leader); ctl 0 — no proven leader ever fired the gun"
+    },
+    {
+      "id": "armed-holder-entries",
+      "pass": true,
+      "detail": "arm armed-holder entries 21 (floor 3); armed leads 0; ctl entries 21"
+    },
+    {
+      "id": "guardrail-separated",
+      "pass": true,
+      "detail": "SEPARATED guardrail — (i) lent-fight safety: lent fights 0 — safety part skipped (no lends fired; bars 2-3 judge participation) (pass); (ii) downstream: deaths per engaged meeting arm 5.97 vs ctl 5.97 (bar <= 6.57, pass); median survival arm 150d vs ctl 150d (bar >= 120.0, pass) (pass)"
+    },
+    {
+      "id": "starvation-guardrail",
+      "pass": true,
+      "detail": "villager starvation deaths arm 0 vs ctl 0 (bar <= 2)"
+    }
+  ],
+  "ctl": {
+    "holderDays": 102,
+    "armedEntries": 21,
+    "armedLeads": 0,
+    "armedVolleys": 0,
+    "deathsPerEngaged": 5.971830985915493,
+    "medianDays": 150,
+    "starvationVillager": 0,
+    "poolTicks": 9944,
+    "poolHolderPresent": 442,
+    "poolFights": 233,
+    "poolHolderLed": 0,
+    "transfers": 0,
+    "vanishes": 2,
+    "lends": 0,
+    "lendsJoined": 0,
+    "lentVolleys": 0,
+    "borrowerSurvival": null,
+    "poolMoments": 0
+  },
+  "arm": {
+    "holderDays": 102,
+    "armedEntries": 21,
+    "armedLeads": 0,
+    "armedVolleys": 0,
+    "deathsPerEngaged": 5.971830985915493,
+    "medianDays": 150,
+    "starvationVillager": 0,
+    "poolTicks": 9944,
+    "poolHolderPresent": 442,
+    "poolFights": 0,
+    "poolHolderLed": 0,
+    "poolDraftMiss": 14,
+    "transfers": 0,
+    "vanishes": 2,
+    "lends": 0,
+    "lendsGun": 0,
+    "lendsCells": 0,
+    "lendsTile": 0,
+    "lendsAdjacent": 0,
+    "gunReturned": 0,
+    "borrowerKept": 0,
+    "lendsJoined": 0,
+    "lendsUnjoined": 0,
+    "lentVolleys": 0,
+    "lentVolleyDmg": 0,
+    "lentOutcomes": {},
+    "borrowerSurvived": 0,
+    "borrowerDied": 0,
+    "borrowerSurvival": null,
+    "poolMoments": 0,
+    "poolMomentsGun": 0,
+    "poolMomentsCells": 0,
+    "poolMomentsTile": 0,
+    "poolMomentsAdjacent": 0,
+    "poolPerSeed": {
+      "107141": 0,
+      "107142": 0,
+      "107143": 0,
+      "107144": 0,
+      "107145": 0,
+      "107146": 0,
+      "107147": 0,
+      "107148": 0
+    }
+  },
+  "sinkCensus": {
+    "ctl": {
+      "total": 7,
+      "byKind": {
+        "new-holder:unexplained": 3,
+        "vanish:unexplained": 2,
+        "holder-died:holder-died": 1,
+        "new-holder:grant-contest-prize": 1
+      },
+      "unexplained": 5,
+      "unexplainedShare": 0.7142857142857143,
+      "vanishes": 2,
+      "holderDied": 1,
+      "transfers": 0,
+      "newHolders": 4,
+      "dropEvents": 0,
+      "detail": [
+        {
+          "seed": 107144,
+          "day": 55,
+          "kind": "new-holder",
+          "from": null,
+          "to": "gen_glnvgji",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107144,
+          "day": 70,
+          "kind": "vanish",
+          "from": "gen_glnvgji",
+          "to": null,
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107146,
+          "day": 60,
+          "kind": "new-holder",
+          "from": null,
+          "to": "xavier_dubois",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107146,
+          "day": 67,
+          "kind": "holder-died",
+          "from": "xavier_dubois",
+          "to": null,
+          "attribution": "holder-died"
+        },
+        {
+          "seed": 107146,
+          "day": 115,
+          "kind": "new-holder",
+          "from": null,
+          "to": "gen_cl8qjxk",
+          "attribution": "grant-contest-prize"
+        },
+        {
+          "seed": 107146,
+          "day": 117,
+          "kind": "vanish",
+          "from": "gen_cl8qjxk",
+          "to": null,
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107147,
+          "day": 71,
+          "kind": "new-holder",
+          "from": null,
+          "to": "gen_824pdhl",
+          "attribution": "unexplained"
+        }
+      ]
+    },
+    "arm": {
+      "total": 7,
+      "byKind": {
+        "new-holder:unexplained": 3,
+        "vanish:unexplained": 2,
+        "holder-died:holder-died": 1,
+        "new-holder:grant-contest-prize": 1
+      },
+      "unexplained": 5,
+      "unexplainedShare": 0.7142857142857143,
+      "vanishes": 2,
+      "holderDied": 1,
+      "transfers": 0,
+      "newHolders": 4,
+      "dropEvents": 0,
+      "detail": [
+        {
+          "seed": 107144,
+          "day": 55,
+          "kind": "new-holder",
+          "from": null,
+          "to": "gen_glnvgji",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107144,
+          "day": 70,
+          "kind": "vanish",
+          "from": "gen_glnvgji",
+          "to": null,
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107146,
+          "day": 60,
+          "kind": "new-holder",
+          "from": null,
+          "to": "xavier_dubois",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107146,
+          "day": 67,
+          "kind": "holder-died",
+          "from": "xavier_dubois",
+          "to": null,
+          "attribution": "holder-died"
+        },
+        {
+          "seed": 107146,
+          "day": 115,
+          "kind": "new-holder",
+          "from": null,
+          "to": "gen_cl8qjxk",
+          "attribution": "grant-contest-prize"
+        },
+        {
+          "seed": 107146,
+          "day": 117,
+          "kind": "vanish",
+          "from": "gen_cl8qjxk",
+          "to": null,
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107147,
+          "day": 71,
+          "kind": "new-holder",
+          "from": null,
+          "to": "gen_824pdhl",
+          "attribution": "unexplained"
+        }
+      ]
+    }
+  },
+  "nearMiss": {
+    "ctl": {
+      "unarmedLaunches": 111,
+      "noLivingHolder": 95,
+      "presence": "16/111",
+      "lendable": 0,
+      "coverage": 1
+    },
+    "arm": {
+      "unarmedLaunches": 111,
+      "noLivingHolder": 95,
+      "presence": "16/111",
+      "lendable": 0,
+      "coverage": 1
+    }
+  }
+}
