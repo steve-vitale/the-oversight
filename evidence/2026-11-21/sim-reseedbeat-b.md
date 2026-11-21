@@ -277,8 +277,9 @@ readings, stated plainly:
   fixes the counter before judging.
 - **Branch:** `sim-reseedexpiry-b`, build commit `3815f2076`
   (rebased onto master `f9ed3a851`, clean 9/9, new tip
-  `6ec74e210` before the build). HELD unmerged, as instructed.
-  Evidence commit to follow in this run's closeout.
+  `6ec74e210` before the build), evidence commit `770b01212`,
+  corpora commit `befe2af92` (branch tip). HELD unmerged, as
+  instructed.
 - **No check.js --quick on this branch:** sibling gates were
   running at closeout; the discipline forbids a third concurrent
   run. The arm's own gates (proof 30/30, reseed 97/97,
