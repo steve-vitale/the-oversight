@@ -208,9 +208,42 @@ this run**.
 
 ## Gate
 
-PENDING — `node scripts/check.js --quick` in the worktree with
-`--cacheDirectory=/tmp/jest-cache-playtest`. (Deferred until the flap
-cleared; jest needs /tmp writes for its cache.)
+DONE (adoption, 2026-11-21T07:31:36Z) — `node scripts/check.js --quick
+--cacheDirectory=/tmp/jest-cache-r151-gate` run from scratch in the dedicated
+`r151-gate` worktree on the rebased tip `ede030e06` (master `b20328ad9` +
+this run's commit `b02c7bba`): **326 passed, 18 failed, 2345s**.
+GATE_EXIT:1, log at goal
+`hidden_files/journey-landing-r151-gate-rebased.log`.
+
+Adjudication — 0 failures attributable to this run's change:
+- 12 × 120s TIMEOUT (exit null, inner checks passing in the log):
+  test-comfort-arc, test-living-garden-deed-attainment,
+  test-occupation-panels, test-one-person-army-deed-attainment,
+  test-solo-campaign-endings, test-time-save-crashes, test-synergy-stall,
+  test-tablerecon-20261013, test-throttlefeast-20261014,
+  test-capable-bot-20261014, test-first-ability-magic-20261014,
+  test-table-endings-20261014. Load flakes: the gate ran 39 min (vs ~13
+  min typical) while the Loop B 0430Z arms and the r262 adoption were
+  active. Verified by sample: test-capable-bot-20261014 passes solo
+  42/0 in 84s. The two deed-attainment timeouts are the standing
+  known-exceeds-120s family.
+- Standing staleness pair (proof re-sign round 22 owed, pre-existing on
+  master before this change): test-measurement-proof-update.js ("Proof
+  source inputs are not current") + test-measurement-workflow.js
+  ("retained neutrality proof covers the current Game/controller/harness
+  inputs").
+- Standing phone-frame stale receipt: test-phone-frame-proof.js
+  (index.html / boot inputs moved on master since the receipt was pinned;
+  this change touches no boot input).
+- Load flakes, each passing solo on the same tip:
+  test-trust-observer-neutrality.js 6/6, test-measurement-driver.js 6/6
+  (including the exact "separate actual startup rejects an unplayable
+  region" check that failed in the gate),
+  test-measurement-cache-flags.js 4/4.
+
+This run's own proof test scripts/test-worktree-heartbeat-flock-20261121.js
+passes inside the gate (its case-1 free-lock beat also landed live
+2026-11-21T06:32:35Z; case 2 held-lock 3/3 proven on the pre-rebase tip).
 
 ## Telemetry
 
