@@ -293,7 +293,9 @@ if (OLD_CODE_PATH) {
   const os = require('os');
   const tmp = path.join(os.tmpdir(), 'reseedbeat-old-win-plan-' + process.pid + '.js');
   try {
-    const oldSrc = execSync('git show HEAD:src/js/win-plan.js', { cwd: REPO, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+    // Pinned to the pre-change commit (the rebased tip): HEAD moves
+    // as this arm commits, so HEAD would stop being "old code".
+    const oldSrc = execSync('git show 6ec74e210:src/js/win-plan.js', { cwd: REPO, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
     fs.writeFileSync(tmp, oldSrc);
   } catch (e) {
     check('§C old-code control: git show HEAD:src/js/win-plan.js readable', false, String(e).slice(0, 200));
