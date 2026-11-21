@@ -1,0 +1,342 @@
+{
+  "verdict": "NO-GO",
+  "kind": "PARTICIPATION",
+  "bars": [
+    {
+      "id": "searcaster-holder-days",
+      "pass": true,
+      "detail": "arm villager searcaster-holder-days 162 (floor 40); ctl 180"
+    },
+    {
+      "id": "armed-leads",
+      "pass": false,
+      "detail": "arm armed leads 0 (floor 2 — the discriminating bar); ctl armed leads 0 — the draft did not put an armed holder in front of a wave-4+ fight"
+    },
+    {
+      "id": "armed-volley-fired",
+      "pass": false,
+      "detail": "arm armed volleys fired 0 (floor 1 — a FIRST volley from a drafted holder); ctl 0 — no drafted holder ever fired the gun"
+    },
+    {
+      "id": "armed-holder-entries",
+      "pass": false,
+      "detail": "arm armed-holder entries 1 (floor 3); armed leads 0; ctl entries 10"
+    },
+    {
+      "id": "guardrail-separated",
+      "pass": true,
+      "detail": "SEPARATED guardrail — (i) lent-fight safety: lent fights 0 — safety part skipped (no lends fired; bars 2-3 judge participation) (pass); (ii) downstream: deaths per engaged meeting arm 6.22 vs ctl 5.98 (bar <= 6.58, pass); median survival arm 150d vs ctl 141.5d (bar >= 113.2, pass) (pass)"
+    },
+    {
+      "id": "starvation-guardrail",
+      "pass": true,
+      "detail": "villager starvation deaths arm 3 vs ctl 5 (bar <= 7)"
+    }
+  ],
+  "ctl": {
+    "holderDays": 180,
+    "armedEntries": 10,
+    "armedLeads": 0,
+    "armedVolleys": 0,
+    "deathsPerEngaged": 5.98019801980198,
+    "medianDays": 141.5,
+    "starvationVillager": 5,
+    "poolTicks": 12238,
+    "poolHolderPresent": 957,
+    "poolFights": 221,
+    "poolHolderLed": 0,
+    "transfers": 0,
+    "vanishes": 2,
+    "lends": 0,
+    "lendsJoined": 0,
+    "lentVolleys": 0,
+    "borrowerSurvival": null,
+    "poolMoments": 0
+  },
+  "arm": {
+    "holderDays": 162,
+    "armedEntries": 1,
+    "armedLeads": 0,
+    "armedVolleys": 0,
+    "deathsPerEngaged": 6.221052631578948,
+    "medianDays": 150,
+    "starvationVillager": 3,
+    "poolTicks": 13433,
+    "poolHolderPresent": 877,
+    "poolFights": 0,
+    "poolHolderLed": 0,
+    "poolDraftMiss": 4,
+    "transfers": 0,
+    "vanishes": 0,
+    "lends": 0,
+    "lendsGun": 0,
+    "lendsCells": 0,
+    "lendsTile": 0,
+    "lendsAdjacent": 0,
+    "gunReturned": 0,
+    "borrowerKept": 0,
+    "lendsJoined": 0,
+    "lendsUnjoined": 0,
+    "lentVolleys": 0,
+    "lentVolleyDmg": 0,
+    "lentOutcomes": {},
+    "borrowerSurvived": 0,
+    "borrowerDied": 0,
+    "borrowerSurvival": null,
+    "poolMoments": 0,
+    "poolMomentsGun": 0,
+    "poolMomentsCells": 0,
+    "poolMomentsTile": 0,
+    "poolMomentsAdjacent": 0,
+    "poolPerSeed": {
+      "107161": 0,
+      "107162": 0,
+      "107163": 0,
+      "107164": 0,
+      "107165": 0,
+      "107166": 0,
+      "107167": 0,
+      "107168": 0
+    }
+  },
+  "sinkCensus": {
+    "ctl": {
+      "total": 9,
+      "byKind": {
+        "new-holder:grant-contest-prize": 1,
+        "vanish:unexplained": 2,
+        "new-holder:unexplained": 5,
+        "new-holder:corpse-take": 1
+      },
+      "unexplained": 7,
+      "unexplainedShare": 0.7777777777777778,
+      "vanishes": 2,
+      "holderDied": 0,
+      "transfers": 0,
+      "newHolders": 7,
+      "dropEvents": 0,
+      "detail": [
+        {
+          "seed": 107162,
+          "day": 101,
+          "kind": "new-holder",
+          "from": null,
+          "to": "ruby_callaghan",
+          "attribution": "grant-contest-prize"
+        },
+        {
+          "seed": 107162,
+          "day": 116,
+          "kind": "vanish",
+          "from": "ruby_callaghan",
+          "to": null,
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107165,
+          "day": 111,
+          "kind": "new-holder",
+          "from": null,
+          "to": "sofia_chen",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107165,
+          "day": 116,
+          "kind": "new-holder",
+          "from": null,
+          "to": "ruth_goldstein",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107167,
+          "day": 92,
+          "kind": "new-holder",
+          "from": null,
+          "to": "henry_zhang",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107167,
+          "day": 95,
+          "kind": "new-holder",
+          "from": null,
+          "to": "farid_ahmed",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107167,
+          "day": 148,
+          "kind": "new-holder",
+          "from": null,
+          "to": "__scholar__",
+          "attribution": "corpse-take"
+        },
+        {
+          "seed": 107168,
+          "day": 126,
+          "kind": "new-holder",
+          "from": null,
+          "to": "yuki_mori",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107168,
+          "day": 129,
+          "kind": "vanish",
+          "from": "yuki_mori",
+          "to": null,
+          "attribution": "unexplained"
+        }
+      ]
+    },
+    "arm": {
+      "total": 5,
+      "byKind": {
+        "new-holder:unexplained": 4,
+        "new-holder:corpse-take": 1
+      },
+      "unexplained": 4,
+      "unexplainedShare": 0.8,
+      "vanishes": 0,
+      "holderDied": 0,
+      "transfers": 0,
+      "newHolders": 5,
+      "dropEvents": 0,
+      "detail": [
+        {
+          "seed": 107165,
+          "day": 111,
+          "kind": "new-holder",
+          "from": null,
+          "to": "sofia_chen",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107165,
+          "day": 116,
+          "kind": "new-holder",
+          "from": null,
+          "to": "ruth_goldstein",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107167,
+          "day": 92,
+          "kind": "new-holder",
+          "from": null,
+          "to": "henry_zhang",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107167,
+          "day": 95,
+          "kind": "new-holder",
+          "from": null,
+          "to": "farid_ahmed",
+          "attribution": "unexplained"
+        },
+        {
+          "seed": 107167,
+          "day": 148,
+          "kind": "new-holder",
+          "from": null,
+          "to": "__scholar__",
+          "attribution": "corpse-take"
+        }
+      ]
+    }
+  },
+  "draft": {
+    "ctl": {
+      "decisions": 835,
+      "off": 835,
+      "errors": 0,
+      "fired": 0,
+      "firedGun": 0,
+      "firedBow": 0,
+      "misses": 0,
+      "missByReason": {},
+      "byRouter": {
+        "world-tick": 486,
+        "expedition": 349
+      },
+      "reached": 0,
+      "reachedGun": 0,
+      "reachedBow": 0
+    },
+    "arm": {
+      "decisions": 866,
+      "off": 0,
+      "errors": 0,
+      "fired": 3,
+      "firedGun": 0,
+      "firedBow": 3,
+      "misses": 863,
+      "missByReason": {
+        "not-wave4": 565,
+        "raid": 156,
+        "aid": 81,
+        "lead-already-armed": 35,
+        "bow:sheltered": 16,
+        "bow:low-health": 3,
+        "bow:range0": 1,
+        "no-living-holder": 5,
+        "gun:sheltered": 1
+      },
+      "byRouter": {
+        "world-tick": 452,
+        "expedition": 414
+      },
+      "reached": 3,
+      "reachedGun": 0,
+      "reachedBow": 3
+    }
+  },
+  "bow": {
+    "ctl": {
+      "bowLeads": 23,
+      "bowVolleys": 18
+    },
+    "arm": {
+      "bowLeads": 28,
+      "bowVolleys": 22
+    }
+  },
+  "grantsByLead": {
+    "ctl": {
+      "total": 6,
+      "buckets": {
+        "0": 6,
+        "1": 0,
+        "2+": 0
+      },
+      "scholar": 0
+    },
+    "arm": {
+      "total": 4,
+      "buckets": {
+        "0": 4,
+        "1": 0,
+        "2+": 0
+      },
+      "scholar": 0
+    }
+  },
+  "nearMiss": {
+    "ctl": {
+      "unarmedLaunches": 87,
+      "noLivingHolder": 66,
+      "presence": "21/87",
+      "lendable": 0,
+      "coverage": 1
+    },
+    "arm": {
+      "unarmedLaunches": 78,
+      "noLivingHolder": 66,
+      "presence": "12/78",
+      "lendable": 0,
+      "coverage": 1
+    }
+  }
+}
