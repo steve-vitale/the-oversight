@@ -7876,6 +7876,13 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             ? S.equipment.volleyWeaponOf(person, defs)
             : slotRw;
         } catch (e) { rw = slotRw; }
+        // The spear-holder read — the same spearSeen read the gate
+        // uses (the ranged slot holds a non-ammo weapon). The ROLL35
+        // learned first-make rate keys off this; the marker comment
+        // lives at the rate swap below, so the proof test's draw
+        // check reads a tight block.
+        const slotId = (typeof slotRw === 'string') ? slotRw : (slotRw && (slotRw.itemId || slotRw.id));
+        const isSpearHolder = !!(slotRw && slotId && !(((defOf(slotId) || {}).weapon || {}).ammo));
         if (!rw) {
           for (const e of (person.items || [])) { if (isStageable(idOf(e))) { rw = { itemId: idOf(e) }; break; } }
           if (rw) { try { S.equipment.autoEquip(person, defs); } catch (e) {} }
@@ -7938,6 +7945,23 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             }
             return n;
           };
+          let depmatOn = false;
+          let roll35On = false;
+          try { depmatOn = (typeof process !== 'undefined' && process.env && process.env.DEPMAT === '1'); } catch (e) {}
+          try { roll35On = (typeof process !== 'undefined' && process.env && process.env.ROLL35 === '1'); } catch (e) {}
+          // DEPMAT (sim-depmat-a): the trailhead bundle — at the
+          // departure craft attempt, for the crude_bow rung ONLY,
+          // when the crafter knows crude_bow but own pack + pile
+          // fall short on branch and/or vine, the shortfall (at most
+          // 1 branch + 1 vine — exactly the recipe's need) is
+          // gathered from the brush at the departure site and the
+          // pick proceeds. Site materials are never deducted from
+          // the pile (they were never in it) and are consumed by
+          // the attempt exactly like pile materials — a failed roll
+          // loses them. The 35% / 85% roll is untouched. The block
+          // performs no draw of its own.
+          let fromSite = [];
+          let siteShort = {};
           for (const rid of LADDER) {
             const recipe = recipes.find(r => r.id === rid);
             if (!recipe || !recipe.materials) continue;
@@ -7946,14 +7970,51 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
             for (const [m, need] of Object.entries(recipe.materials)) {
               if (ownMat(m) + (mats[m] || 0) < need) { ok = false; break; }
             }
-            if (!ok) continue;
+            if (!ok) {
+              if (depmatOn && rid === 'crude_bow') {
+                const siteMats = [];
+                const short = {};
+                let siteOk = true;
+                for (const [m, need] of Object.entries(recipe.materials)) {
+                  if (ownMat(m) + (mats[m] || 0) >= need) continue;
+                  if (m === 'branch' || m === 'vine') { siteMats.push(m); short[m] = need - (ownMat(m) + (mats[m] || 0)); }
+                  else { siteOk = false; break; }
+                }
+                if (siteOk && siteMats.length) {
+                  pick = { rid: rid, recipe: recipe, level: lv[rid] };
+                  fromSite = siteMats;
+                  siteShort = short;
+                  break;
+                }
+              }
+              continue;
+            }
             pick = { rid: rid, recipe: recipe, level: lv[rid] };
             break;
           }
           if (pick) {
+            // The trailhead bundle fired — the site supplied the
+            // shortfall. Name it on the return, on telemetry, and
+            // (when the scholar is at home to witness it) aloud.
+            if (fromSite.length) {
+              out.depmatSite = true;
+              out.siteMats = fromSite.slice();
+              try { if (this.tele) this.tele('weapon_craft_site', { vid: vid, item: pick.rid, mats: fromSite.slice() }); } catch (e2) {}
+              try {
+                const vv = this.state.village || {};
+                const home = this.map && this.map.px === (vv.px ?? 4) && this.map.py === (vv.py ?? 4);
+                if (home && this.say) {
+                  let nm = 'Someone';
+                  try { nm = (this.firstRef ? this.firstRef(vid) : null) || (person.name || 'them'); } catch (e3) {}
+                  this.say(nm + ' snaps a green branch and twists a vine cord from the brush at the trailhead.');
+                }
+              } catch (e2) {}
+            }
             // honest take: own carried materials first, then the pile.
+            // A site-supplied material's shortfall was never in the
+            // pile — take only what own + pile actually hold for it.
             for (const [m, need] of Object.entries(pick.recipe.materials)) {
-              let left = need;
+              let left = need - (siteShort[m] || 0);
               const items = person.items || [];
               for (let i = items.length - 1; i >= 0 && left > 0; i--) {
                 const e = items[i];
@@ -7972,7 +8033,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
               }
             }
             const rate = pick.level >= 2 ? 0.85 : 0.35;
-            const success = Math.random() < rate;
+            // ROLL35 (sim-roll35-a): the learned first-make rate —
+            // at the departure crude_bow craft attempt, a
+            // SPEAR-HOLDER faces 0.60 on the first make instead of
+            // the blind 35% — one threshold swap on the same single
+            // draw, zero new draws. The learned 85% is untouched.
+            let rollRate = rate;
+            if (roll35On && pick.rid === 'crude_bow' && isSpearHolder) rollRate = pick.level >= 2 ? 0.85 : 0.60;
+            out.roll35Rate = rollRate;
+            const success = Math.random() < rollRate;
             out.craftedOk = success;
             if (success) {
               if (pick.level < 2) lv[pick.rid] = 2;
@@ -8098,18 +8167,81 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (ammoId !== 'arrow' && ammoId !== 'bolt') return out;
         const recipe = (this.data.recipes || []).find(r => r.id === ammoId);
         if (!recipe || !recipe.materials) return out;
+        let fiberfetchOn = false;
+        let ammoOn = false;
+        try { fiberfetchOn = (typeof process !== 'undefined' && process.env && process.env.FIBERFETCH === '1'); } catch (e) {}
+        try { ammoOn = (typeof process !== 'undefined' && process.env && process.env.AMMO === '1'); } catch (e) {}
+        // Served-bow read (shared by the FIBERFETCH site fetch and
+        // the AMMO quiver rate below): the carrier's bow was staged
+        // THIS departure — bowOpenByVid day === today, source
+        // crafted / fromStash / fromArmory.
+        const day = (this.state.scholar || {}).day || 0;
+        const rec = ((this.state.village || {}).bowOpenByVid || {})[vid];
+        const servedBow = !!(rec && rec.day === day && (rec.source === 'crafted' || rec.source === 'fromStash' || rec.source === 'fromArmory'));
         let ok = true;
         for (const [m, need] of Object.entries(recipe.materials)) {
           if ((mats[m] || 0) < need) { ok = false; break; }
         }
-        if (!ok) return out;
-        for (const [m, need] of Object.entries(recipe.materials)) mats[m] -= need;
+        if (!ok) {
+          // FIBERFETCH (sim-fiberfetch-a): the trailhead fiber fetch
+          // — at the departure arrow-craft attempt for a SERVED bow
+          // only, when the pile is short on fiber and fiber alone,
+          // gather the missing fiber from the brush at the departure
+          // site and let the attempt proceed. The fetched fiber is
+          // consumed by the attempt exactly like pile fiber — it is
+          // never added to the pile, and a failed roll loses it. The
+          // fetch performs no draw of its own. It never fires at the
+          // bow craft, never for a non-served departure, and never
+          // when another material is short too.
+          if (fiberfetchOn && ammoId === 'arrow' && servedBow) {
+            let fiberShort = 0;
+            let otherShort = false;
+            for (const [m, need] of Object.entries(recipe.materials)) {
+              if (m === 'fiber') { if ((mats.fiber || 0) < need) fiberShort = need - (mats.fiber || 0); }
+              else if ((mats[m] || 0) < need) { otherShort = true; break; }
+            }
+            if (fiberShort > 0 && !otherShort) {
+              out.fiberFetch = true;
+              out.fiberSite = fiberShort;
+              try { if (this.tele) this.tele('ammo_fetch_site', { vid: vid, item: 'arrow', mats: ['fiber'] }); } catch (e2) {}
+              try {
+                const vv = this.state.village || {};
+                const home = this.map && this.map.px === (vv.px ?? 4) && this.map.py === (vv.py ?? 4);
+                if (home && this.say) {
+                  let nm = 'Someone';
+                  try { nm = (this.firstRef ? this.firstRef(vid) : null) || (person.name || 'them'); } catch (e3) {}
+                  this.say(nm + ' strips a length of plant fiber from the cleared brush at the trailhead.');
+                }
+              } catch (e2) {}
+              ok = true;
+            }
+          }
+          if (!ok) return out;
+        }
+        for (const [m, need] of Object.entries(recipe.materials)) {
+          if (m === 'fiber' && out.fiberFetch) {
+            // The fetch supplied this fiber's shortfall — take only
+            // what the pile actually holds for it, never below zero.
+            const fromPile = Math.max(0, need - (out.fiberSite || 0));
+            mats[m] = Math.max(0, (mats[m] || 0) - fromPile);
+          } else mats[m] -= need;
+        }
         const v = this.state.village || {};
         v.ammoCraft = v.ammoCraft || {};
         const lv = v.ammoCraft[vid] = v.ammoCraft[vid] || {};
         const level = lv[ammoId] || 1;
         const rate = level >= 2 ? 0.85 : 0.35;
-        const success = Math.random() < rate;
+        // AMMO (sim-ammo-a): the served-bow quiver — at the departure
+        // arrow/bolt craft attempt, a carrier whose bow was staged
+        // THIS departure faces the learned first-make rate (0.60)
+        // instead of the blind 35% — one threshold swap on the same
+        // single draw, zero new draws. The learned 85% is untouched.
+        let ammoRate = rate;
+        let ammoServed = false;
+        if (ammoOn && servedBow) { ammoRate = level >= 2 ? 0.85 : 0.60; ammoServed = true; }
+        out.ammoRate = ammoRate;
+        out.ammoServed = ammoServed;
+        const success = Math.random() < ammoRate;
         out.crafted = 1;
         out.craftedOk = success;
         if (success) {
