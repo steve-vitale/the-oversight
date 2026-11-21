@@ -129,19 +129,44 @@ const BRUISER = { id: 'bruiser', hp: [120, 120], attack: { damage: [14, 18], nam
   }
 
   // ---------- 6. rally: hold for them, once per fight ----------
+  // OVE-196 / OVE-195 FIXTURE_DRIFT: tip starting-gear absorb + party morale
+  // made the old BRUISER (120 HP / slam 14–18) everWinning, so hopeless never
+  // crossed. Retarget with a §6-local clone only — harder slam + longer body
+  // so lead+ally still read hopeless with ally standing under current absorb.
+  // Do not strip gearUp armor or edit fieldFights.js.
   {
+    const HOPELESS_BRUISER = Object.assign({}, BRUISER, {
+      hp: [600, 600],
+      attack: { damage: [40, 50], name: 'slam' },
+    });
     const Game = await freshGame(SEED + 5);
     const [a, b] = vids(Game, 2);
     Game.state.village.npcAbilities = Game.state.village.npcAbilities || {};
     Game.state.village.npcAbilities[a] = ['rally'];
     Game.state.village.health = Game.state.village.health || {};
     Game.state.village.health[a] = 100; Game.state.village.health[b] = 100;
-    const rec = Game.fieldFight(a, BRUISER, null, {
+    const rec = Game.fieldFight(a, HOPELESS_BRUISER, null, {
       allies: 1, allyVids: [b], allyFromStart: true, rng: () => 0.5, // 0.5: the ally isn't hit every round, lives to the hopeless round
     });
     const rallies = rec.log.filter(l => /\(Rally\)/.test(l)).length;
-    ok('rally fires on the hopeless round', rallies === 1, 'rallies=' + rallies + ' outcome=' + rec.outcome + ' rounds=' + rec.rounds);
+    const fired = (rec.ffFired || []).filter(id => id === 'rally').length;
+    ok('rally fires on the hopeless round', rallies === 1 && fired === 1,
+      'rallies=' + rallies + ' ffFired(rally)=' + fired + ' outcome=' + rec.outcome + ' rounds=' + rec.rounds + ' everHopeless=' + !!rec.everHopeless);
     ok('held that round, decided honestly after (rounds>=3)', (rec.rounds || 0) >= 3, 'rounds=' + rec.rounds);
+    // Control: same hopeless scene without the grant — no rally, no ffFired('rally').
+    const Game2 = await freshGame(SEED + 5);
+    const [c, d] = vids(Game2, 2);
+    Game2.state.village.npcAbilities = Game2.state.village.npcAbilities || {};
+    Game2.state.village.npcAbilities[c] = []; // RED: take the grant away
+    Game2.state.village.health = Game2.state.village.health || {};
+    Game2.state.village.health[c] = 100; Game2.state.village.health[d] = 100;
+    const rec2 = Game2.fieldFight(c, HOPELESS_BRUISER, null, {
+      allies: 1, allyVids: [d], allyFromStart: true, rng: () => 0.5,
+    });
+    const rallies2 = rec2.log.filter(l => /\(Rally\)/.test(l)).length;
+    const fired2 = (rec2.ffFired || []).filter(id => id === 'rally').length;
+    ok('RED: no rally grant -> no (Rally) / ffFired', rallies2 === 0 && fired2 === 0,
+      'rallies=' + rallies2 + ' ffFired(rally)=' + fired2 + ' everHopeless=' + !!rec2.everHopeless + ' outcome=' + rec2.outcome);
   }
 
   // ---------- 7. stand_together capstone: the pool grows twice as fast ----------
