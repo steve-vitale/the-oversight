@@ -76,6 +76,12 @@
   var PAIR_TICK_P = 0.08;   // npcPairBondTick: NPC->NPC proposal lottery
   var LINK_TICK_P = 0.5;    // npcLinkRaiseTick: link-raise staging lottery
   var LINK_ACCEPT_ROTATION = {}; // journey-landing r148: last accept pool
+  var LINK_RAISE_ROTATION = {}; // journey-scale r248: last raise-opener pool
+  // INDEX served per `how` (see linkRaiseLine). Same ledger-window problem
+  // as the accept line: first-unledgered alone always returns pool[0]
+  // once the ledger ages out, so rotation breaks ties among unledgered
+  // lines. Two villagers staging raises for the same `how` before either
+  // is spoken also get different openers this way.
   // INDEX served per `how` (see linkAcceptLine). The run ledger is a
   // 48-entry window — an accept line served days ago has aged out by the
   // next accept, so first-unledgered always returns pool[0] (22/23
@@ -764,6 +770,19 @@
   }
 
   // ---------- LINK RAISES (NPC -> bearer) ----------
+  // ---------- LINK-RAISE OPENER VOICE (journey-scale r248, 2026-11-21) ----------
+  // The opener used to be ONE fixed line per `how` — no pool, no rotation.
+  // In the scale leg `how` is (almost) always rumor/told (villagers learn
+  // of other villages by rumor, never by visiting), so every raise opened
+  // with the same sentence: 11/11 identical on r247's band, 6/6 on r248's
+  // pilot. The accept reply got pools in r243; the opener never did.
+  // Pools below mirror linkAcceptLine: pool[0] is the pre-r248 line
+  // verbatim, so no existing wording changes — only new variants are
+  // added. Every variant keeps the "We should link with them — we'd be
+  // stronger together." tail the analyzer's RAISE_LINE classifier reads
+  // (except the pre-existing default pool[0], which never matched it —
+  // left verbatim, as today; the default branch never fires in the scale
+  // leg, where lore `how` is always rumor/told).
   function linkRaiseLine(vid) {
     var pending = pendingLinkRaise(vid);
     var vname = 'them';
@@ -776,10 +795,52 @@
         how = ((lore[pending.villageId] || {}).how) || null;
       }
     } catch (e) {}
-    if (how === 'visit') return '"I\'ve been to ' + vname + '. I know their fires. We should link with them — we\'d be stronger together."';
-    if (how === 'seen-nearby') return '"I\'ve seen ' + vname + '\'s fires from the road. We should link with them — we\'d be stronger together."';
-    if (how === 'rumor' || how === 'told') return '"I\'ve heard good things about ' + vname + '. We should link with them — we\'d be stronger together."';
-    return '"We should link with ' + vname + '. I know them. We\'d be stronger together."';
+    var pools = {
+      'visit': [
+        '"I\'ve been to ' + vname + '. I know their fires. We should link with them — we\'d be stronger together."',
+        '"I\'ve sat by ' + vname + '\'s fires myself. We should link with them — we\'d be stronger together."'
+      ],
+      'seen-nearby': [
+        '"I\'ve seen ' + vname + '\'s fires from the road. We should link with them — we\'d be stronger together."',
+        '"I\'ve watched ' + vname + '\'s fires from the road — they\'re holding. We should link with them — we\'d be stronger together."'
+      ],
+      // rumor/told share ONE pool and ONE rotation key: the opener text
+      // cannot tell them apart (unlike linkAcceptLine, whose identical
+      // rumor/told pools rotate separately — here the two hows are one
+      // voice, so a 'told' staging and a 'rumor' staging alternate
+      // instead of each repeating pool[0] in its own domain).
+      'rumor': [
+        '"I\'ve heard good things about ' + vname + '. We should link with them — we\'d be stronger together."',
+        '"Word is ' + vname + ' holds together. We should link with them — we\'d be stronger together."',
+        '"They speak well of ' + vname + ' wherever I\'ve asked. We should link with them — we\'d be stronger together."'
+      ]
+    };
+    var howKey = (how === 'rumor' || how === 'told') ? 'rumor' : how;
+    var pool = pools[howKey] || [
+      '"We should link with ' + vname + '. I know them. We\'d be stronger together."',
+      '"I know ' + vname + ' — good people. We should link with them — we\'d be stronger together."'
+    ];
+    // First-unledgered pick + rotation (linkAcceptLine precedent): the
+    // same villager does not repeat one opener across villages, and two
+    // stagings for the same `how` before either is spoken still vary.
+    var picked = pool[0];
+    try {
+      var rl = (typeof G.convoRunLedger === 'function') ? G.convoRunLedger() : [];
+      var key = function (s) {
+        var ch = (typeof G.convoSplitBeats === 'function') ? G.convoSplitBeats(s) : [s];
+        return String((ch && ch[0]) || s).trim();
+      };
+      for (var i = 0; i < pool.length; i++) { if (rl.indexOf(key(pool[i])) === -1) { picked = pool[i]; break; } }
+      var lastIdx = (typeof LINK_RAISE_ROTATION[howKey] === 'number') ? LINK_RAISE_ROTATION[howKey] : null;
+      var pickedIdx = pool.indexOf(picked);
+      if (lastIdx !== null && pickedIdx === lastIdx) {
+        for (var j = 0; j < pool.length; j++) {
+          if (j !== lastIdx && rl.indexOf(key(pool[j])) === -1) { picked = pool[j]; pickedIdx = j; break; }
+        }
+      }
+      LINK_RAISE_ROTATION[howKey] = pickedIdx;
+    } catch (e) {}
+    return picked;
   }
   function stageLinkRaise(vid, villageId) {
     var day = dayOf();
