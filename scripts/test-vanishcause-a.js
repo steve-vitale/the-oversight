@@ -99,6 +99,18 @@ function pureTests() {
   check('census: stash + buried-corpse guns both found', loc.total === 2 &&
     loc.locations.some(function (l) { return l.loc === 'stash'; }) &&
     loc.locations.some(function (l) { return l.loc === 'corpse' && l.buried === true; }));
+  // (1h) ZERO-UNITS is a taken stack, not a gun: _corpseTakeStack
+  // zeroes it.units instead of splicing the entry out (pilot catch,
+  // 2026-11-21: seed 107224 ended with a phantom second gun on the
+  // corpse the scholar had already looted). A corpse holding only a
+  // zeroed searcaster entry holds NO gun; zeroed cells count as 0.
+  g = fakeGame();
+  g.state.corpses = [{ id: 'c1', villagerId: 'alice', kind: 'villager', buried: false,
+    items: [{ itemId: 'searcaster', units: 0 }, { itemId: 'fusion_cell', units: 0 }] }];
+  loc = driver.gunLocationsOf(g);
+  check('census: zero-units corpse entry is not a gun', loc.total === 0 && loc.locations.length === 0);
+  check('census: zero-units cells count as 0', driver.cellCountIn(g.state.corpses[0].items, 'fusion_cell') === 0);
+  check('census: missing units still means one', driver.countItemIn([{ itemId: 'searcaster' }], 'searcaster') === 1);
   // (2) legacy holder map: the old blind spot, reproduced.
   g = fakeGame();
   g.state.scholar.inventory = [{ itemId: 'searcaster', units: 1 }];

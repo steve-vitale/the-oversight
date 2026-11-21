@@ -140,7 +140,13 @@ function countItemIn(items, id) {
   let n = 0;
   try {
     for (const e of (items || [])) {
-      if (itemIdOf(e) === id) n += (typeof e === 'string') ? 1 : (e.units || 1);
+      // units === 0 is a TAKEN stack, not a gun: _corpseTakeStack
+      // (corpses.js:463) zeroes it.units instead of splicing the
+      // entry out. The old `(e.units || 1)` counted a taken gun as
+      // still on the corpse (pilot catch, 2026-11-21: seed 107224
+      // ended with a phantom second gun on corpse_142). Missing
+      // units still means one.
+      if (itemIdOf(e) === id) n += (typeof e === 'string') ? 1 : ((e.units == null) ? 1 : e.units);
     }
   } catch (e) {}
   return n;
