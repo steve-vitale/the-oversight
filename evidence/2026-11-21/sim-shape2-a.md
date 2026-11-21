@@ -166,8 +166,7 @@ existed at launch time. The mechanism itself works; the pool is empty.
 - [COMMIT-LEVER-REVERT] — revert SHAPE2 from game.js +
   villager-agency.js (NO-GO participation; src/ hash-verified identical
   to base 9070aaf70)
-- [COMMIT-EVIDENCE] — instrument + evidence (corpora, analysis, panel,
-  logs)
+- `c591db4a3` — instrument + evidence (corpora, analysis, panel, logs)
 
 ## Next lever
 
