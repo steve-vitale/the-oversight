@@ -254,11 +254,32 @@ function expiriesOf(d) {
   // rumorPool is present, the row counts only when the snapshot's
   // target is non-null AND dead; rows without a snapshot keep the
   // old rule (reseed-era corpora).
+  // CORRECTION 3 (sim-expirycount-b, 2026-11-21, finding #2633):
+  // the companion's expedition state is irrelevant to whether the
+  // holder's plan expired. On seed 106705 Amina's Spool plan
+  // expired d37 while her dawn companion gen_2b3r5r7 (the
+  // spool-killer) was already out on an expedition
+  // (companionExped true), and the old rule missed the expiry
+  // (planExpiries 1 vs detected 0, pooled NO-GO INSTRUMENT). When
+  // a rumorPool snapshot is present, the row counts when the
+  // snapshot shows a dead target + an empty pool, regardless of
+  // companionExped; the snapshot's target non-null + deadTarget
+  // true still excludes the stale twin (whose snapshot shows the
+  // plan already targetless). Rows WITHOUT a snapshot keep the old
+  // rule (both at home) — a snapshot-less companion-out row is
+  // still the stale-commit shape (§E gen d79).
   for (const r of (d.dawnbidDeparts || [])) {
     if (r.result !== 'normal' || r.winPlanAction !== 'party_launch') continue;
     if (r.stage !== 'party' || r.target != null) continue;
-    if (r.vidExped !== false || r.companionExped !== false) continue;
-    if (r.rumorPool && (r.rumorPool.target == null || r.rumorPool.deadTarget !== true)) continue;
+    if (r.rumorPool) {
+      if (r.rumorPool.target == null || r.rumorPool.deadTarget !== true) continue;
+      const poolN = r.rumorPool.poolN != null ? r.rumorPool.poolN
+        : (Array.isArray(r.rumorPool.pool) ? r.rumorPool.pool.length : null);
+      if (poolN !== 0) continue;
+      if (r.vidExped !== false) continue;
+    } else {
+      if (r.vidExped !== false || r.companionExped !== false) continue;
+    }
     if (!hadTargetBefore(d, r.vid, r.day)) continue;
     const key = [r.vid, r.day].join('|');
     if (seen[key]) continue;
@@ -506,6 +527,29 @@ function holdersFightAgain(d, expiries, reseeds, days) {
   return out;
 }
 
+// HOLDERS FOUGHT AN ENCOUNTER (sim-expirycount-b, re-derived bar
+// diagnostic): for each expiry, whether the holder has a FOUGHT
+// v4encounters row (rounds > 0 or mDealt > 0, vid == holder) within
+// `days` — no launch, no lived-fight seed. The launch-based
+// holdersFightAgain counts going back out; this counts a
+// blow-by-blow fight with a beast. The reseedbeat re-derivation
+// keeps it a diagnostic, never a GO bar: 0/5 on the extended pool
+// (no holder closed with the re-seeded target inside 14d).
+function holdersFoughtEncounter(d, expiries, days) {
+  const out = [];
+  for (const b of (expiries || [])) {
+    let via = null, day = null;
+    for (const e of (d.v4encounters || [])) {
+      if (e.vid !== b.vid || e.day <= b.day || e.day > b.day + days) continue;
+      if (!isFought(e)) continue;
+      if (day == null || e.day < day) { via = 'encounter:' + (e.mid || '?'); day = e.day; }
+    }
+    out.push({ seed: d.seed, vid: b.vid, expiryDay: b.day,
+      foughtEncounter: via != null, withinDays: day != null ? (day - b.day) : null, via: via });
+  }
+  return out;
+}
+
 // Aggregate one corpus dir.
 function analyzeDir(dir) {
   const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(function (f) { return f.endsWith('.json'); }).sort() : [];
@@ -513,7 +557,7 @@ function analyzeDir(dir) {
   let rows = [];
   let errors = 0, filesRead = 0, duplicates = 0, gateMissing = 0, gateMismatch = 0;
   let postExpiryRows = [], postExpiryHoldRows = [], expiryRows = [], expiryRuleMismatch = 0;
-  let reseedRows = [], reseededRows = [], foughtAgainRows = [];
+  let reseedRows = [], reseededRows = [], reseeded14Rows = [], foughtAgainRows = [], foughtEncounterRows = [];
   let deadCommitRows = [], poolDisagreementRows = [];
   const seeds = [];
   for (const f of files) {
@@ -532,7 +576,9 @@ function analyzeDir(dir) {
     const ph = postExpiryHolds(d, expiries);
     const rs = reseedsOf(d);
     const rw = reseededWithin(d, expiries, rs, 7);
+    const rw14 = reseededWithin(d, expiries, rs, 14);
     const fa = holdersFightAgain(d, expiries, rs, 14);
+    const fe = holdersFoughtEncounter(d, expiries, 14);
     const dc = deadCommitsOf(d);
     const pd = poolDisagreements(d, dc);
     expiryRows = expiryRows.concat(expiries);
@@ -540,7 +586,9 @@ function analyzeDir(dir) {
     postExpiryHoldRows = postExpiryHoldRows.concat(ph);
     reseedRows = reseedRows.concat(rs);
     reseededRows = reseededRows.concat(rw);
+    reseeded14Rows = reseeded14Rows.concat(rw14);
     foughtAgainRows = foughtAgainRows.concat(fa);
+    foughtEncounterRows = foughtEncounterRows.concat(fe);
     deadCommitRows = deadCommitRows.concat(dc);
     poolDisagreementRows = poolDisagreementRows.concat(pd);
     const expiriesCount = (d.winPlanStats && d.winPlanStats.planExpiries != null) ? d.winPlanStats.planExpiries : null;
@@ -553,7 +601,9 @@ function analyzeDir(dir) {
       expiries: expiries.length, planExpiries: expiriesCount,
       reseeds: rs.length,
       reseededWithin7: rw.filter(function (x) { return x.reseeded; }).length,
+      reseededWithin14: rw14.filter(function (x) { return x.reseeded; }).length,
       foughtAgain14: fa.filter(function (x) { return x.foughtAgain; }).length,
+      foughtEncounter14: fe.filter(function (x) { return x.foughtEncounter; }).length,
       postExpiryTargetlessLaunches: pb.length, postExpiryHolds: ph.length,
       deadCommits: dc.length, poolMin: poolFloorStats(dc).min,
       poolDisagreements: pd.length });
@@ -585,12 +635,17 @@ function analyzeDir(dir) {
     postExpiryHolds: postExpiryHoldRows.length,
     postExpiryHoldRows: postExpiryHoldRows,
     expiryRuleMismatch: expiryRuleMismatch,
-    reseeds: reseedRows, reseededWithin7: reseededRows, foughtAgain14: foughtAgainRows,
+    reseeds: reseedRows, reseededWithin7: reseededRows, reseededWithin14: reseeded14Rows,
+    foughtAgain14: foughtAgainRows, foughtEncounter14: foughtEncounterRows,
     reseedsCount: reseedRows.length, expiriesCount: expiryRows.length,
     reseededWithin7Count: reseededRows.filter(function (x) { return x.reseeded; }).length,
+    reseededWithin14Count: reseeded14Rows.filter(function (x) { return x.reseeded; }).length,
     foughtAgain14Count: foughtAgainRows.filter(function (x) { return x.foughtAgain; }).length,
+    foughtEncounter14Count: foughtEncounterRows.filter(function (x) { return x.foughtEncounter; }).length,
     reseededShare: reseededRows.length ? (reseededRows.filter(function (x) { return x.reseeded; }).length / reseededRows.length) : null,
+    reseededWithin14Share: reseeded14Rows.length ? (reseeded14Rows.filter(function (x) { return x.reseeded; }).length / reseeded14Rows.length) : null,
     foughtAgainShare: foughtAgainRows.length ? (foughtAgainRows.filter(function (x) { return x.foughtAgain; }).length / foughtAgainRows.length) : null,
+    foughtEncounter14Share: foughtEncounterRows.length ? (foughtEncounterRows.filter(function (x) { return x.foughtEncounter; }).length / foughtEncounterRows.length) : null,
     deadCommits: deadCommitRows, deadCommitsCount: deadCommitRows.length,
     poolFloor: poolFloorStats(deadCommitRows),
     poolDisagreements: poolDisagreementRows, poolDisagreementsCount: poolDisagreementRows.length };
@@ -670,10 +725,18 @@ function judgePooled(analyses, opts) {
   // combined-fix judgment (dead-0 + guardrail). Unset (legacy):
   // the judge behaves exactly as before.
   const minExp = (opts && opts.minExpiries != null) ? opts.minExpiries : null;
+  // RE-DERIVED BAR (sim-expirycount-b, 2026-11-21, reseedbeat §7):
+  // opts.reseedDays selects the re-seed window the pooled judge
+  // applies — 7 (frozen legacy) or 14 (re-derived primary). The
+  // 14-day window measures the mechanism's follow-through (does
+  // the holder come back?) while the 7-day window measured the
+  // rumor supply's restock speed. The 7-day share stays reported
+  // as a secondary in the pooled output either way.
+  const reseedDays = (opts && opts.reseedDays != null) ? opts.reseedDays : 7;
   const dirs = analyses || [];
   let errors = 0, filesOk = true, gateMissing = 0, gateMismatch = 0;
   let classifiedOk = true, br = 0, pd = 0, pb = 0, dc = 0, ec = 0;
-  let rw = 0, fa = 0, poolMin = null;
+  let rw = 0, rw7 = 0, rw14 = 0, fa = 0, fe = 0, poolMin = null;
   const poolDist = {};
   for (const a of dirs) {
     errors += (a.errors || 0);
@@ -686,14 +749,23 @@ function judgePooled(analyses, opts) {
     pb += (a.postExpiryTargetlessLaunches || 0);
     dc += (a.deadCommitsCount || 0);
     ec += (a.expiriesCount || 0);
-    rw += (a.reseededWithin7Count || 0);
+    rw7 += (a.reseededWithin7Count || 0);
+    // Analyses written before the 14-day field existed carry no
+    // reseededWithin14Count — fall back to their 7-day count so an
+    // old analysis JSON still judges (conservatively) under 14d.
+    rw14 += (a.reseededWithin14Count != null ? a.reseededWithin14Count : (a.reseededWithin7Count || 0));
     fa += (a.foughtAgain14Count || 0);
+    fe += (a.foughtEncounter14Count || 0);
     if (a.poolFloor && a.poolFloor.min != null && (poolMin == null || a.poolFloor.min < poolMin)) poolMin = a.poolFloor.min;
     const dist = (a.poolFloor && a.poolFloor.dist) || {};
     for (const k of Object.keys(dist)) poolDist[k] = (poolDist[k] || 0) + dist[k];
   }
+  rw = (reseedDays === 14) ? rw14 : rw7;
   const rs = ec ? (rw / ec) : null;
+  const rs7 = ec ? (rw7 / ec) : null;
+  const rs14 = ec ? (rw14 / ec) : null;
   const fs = ec ? (fa / ec) : null;
+  const fes = ec ? (fe / ec) : null;
   const lowN = minExp != null && ec < minExp;
   const bars = [
     { id: 'instrument-pooled', pass: errors === 0 && filesOk,
@@ -709,11 +781,13 @@ function judgePooled(analyses, opts) {
       detail: lowN ? ('post-expiry targetless launches ' + pb + ' — REPORTED, not judged (expiries ' + ec + ' < ' + minExp + ')')
         : ('post-expiry targetless launches ' + pb + ' (bar 0)') },
     { id: 'reseed-pooled', pass: lowN ? null : (ec > 0 && rs != null && rs >= BARS.reseededShare),
-      detail: lowN ? ('expiries ' + ec + '; re-seeded within 7d ' + rw + '/' + ec + ' = ' + (rs == null ? 'n/a' : rs.toFixed(3)) + ' — REPORTED, not judged (expiries < ' + minExp + ')')
-        : ('expiries ' + ec + '; re-seeded within 7d ' + rw + '/' + ec + ' = ' + (rs == null ? 'n/a' : rs.toFixed(3)) + ' (bar ' + BARS.reseededShare.toFixed(3) + ')') },
+      detail: lowN ? ('expiries ' + ec + '; re-seeded within ' + reseedDays + 'd ' + rw + '/' + ec + ' = ' + (rs == null ? 'n/a' : rs.toFixed(3)) + ' — REPORTED, not judged (expiries < ' + minExp + ')')
+        : ('expiries ' + ec + '; re-seeded within ' + reseedDays + 'd ' + rw + '/' + ec + ' = ' + (rs == null ? 'n/a' : rs.toFixed(3)) + ' (bar ' + BARS.reseededShare.toFixed(3) + ')') },
     { id: 'holders-fight-again-pooled', pass: lowN ? null : (ec > 0 && fs != null && fs >= BARS.foughtAgainShare),
       detail: lowN ? ('holders fighting again within 14d ' + fa + '/' + ec + ' = ' + (fs == null ? 'n/a' : fs.toFixed(3)) + ' — REPORTED, not judged (expiries < ' + minExp + ')')
         : ('holders fighting again within 14d ' + fa + '/' + ec + ' = ' + (fs == null ? 'n/a' : fs.toFixed(3)) + ' (bar ' + BARS.foughtAgainShare.toFixed(3) + ')') },
+    { id: 'fought-encounter-pooled', pass: null,
+      detail: 'DIAGNOSTIC (never a GO bar): holders with a fought encounter row within 14d ' + fe + '/' + ec + ' = ' + (fes == null ? 'n/a' : fes.toFixed(3)) + '; 7-day re-seed share ' + (rs7 == null ? 'n/a' : rs7.toFixed(3)) + ' (' + rw7 + '/' + ec + ') for the record' },
   ];
   let verdict = 'DIAG-GO', kind = null;
   if (errors || !filesOk) { verdict = 'NO-GO'; kind = 'INSTRUMENT'; }
@@ -728,10 +802,13 @@ function judgePooled(analyses, opts) {
   else if (fs == null || fs < BARS.foughtAgainShare) { verdict = 'NO-GO'; kind = 'FIGHT-AGAIN'; }
   return { verdict: verdict, kind: kind, bars: bars,
     pooled: { dirs: dirs.length, deadCommits: dc, expiries: ec, poolFloorMin: poolMin,
-      poolDist: poolDist, reseededWithin7: rw, foughtAgain14: fa,
-      reseededShare: rs, foughtAgainShare: fs, postExpiryTargetlessLaunches: pb,
+      poolDist: poolDist, reseededWithin: rw, reseededWithin7: rw7, reseededWithin14: rw14,
+      foughtAgain14: fa, foughtEncounter14: fe,
+      reseededShare: rs, reseededShare7: rs7, reseededShare14: rs14,
+      foughtAgainShare: fs, foughtEncounter14Share: fes,
+      postExpiryTargetlessLaunches: pb,
       poolDisagreements: pd, expiryRuleMismatch: br,
-      minExpiries: minExp, lowN: lowN } };
+      minExpiries: minExp, lowN: lowN, reseedDays: reseedDays } };
 }
 
 function selftest() {
@@ -1208,6 +1285,148 @@ function selftest() {
   jp = judgePooled([mkBand({ expiriesCount: 1, reseededWithin7Count: 0, foughtAgain14Count: 0 })], { armed: true });
   check('§H legacy (minExpiries unset): ec=1 re-seed 0/1 -> NO-GO RESEED (unchanged)',
     jp.verdict === 'NO-GO' && jp.kind === 'RESEED', JSON.stringify(jp));
+  // §I COMPANION-OUT EXPIRY (sim-expirycount-b, finding #2633):
+  // the 106705 Amina shape — her Spool plan expired d37 while her
+  // dawn companion gen_2b3r5r7 was already out on an expedition
+  // (companionExped true). The snapshot shows a dead target + an
+  // empty pool, so the expiry counts; the two same-day hold rows
+  // are not expiries; the d53 re-seed launch is 16d later (outside
+  // both windows) and she fought no encounter in between.
+  const di = { seed: 106705, instrumentErrors: [], winPlanStats: { planExpiries: 1 },
+    v4departs: [
+      // d53: the expired-plan re-seed launch (expiredStamp true).
+      { day: 53, vid: 'amina_diallo', result: 'launch', target: 'spool', targetWave: 3,
+        party: ['gen_2b3r5r7'], partySize: 2, source: 'brain',
+        gate: { stageBefore: 'party', targetBefore: null, node: null, sinceDay: 26,
+          villageSlain: null, lastFightDay: null, lastFightKill: null, lastFightOutcome: null,
+          daysSinceLastFight: null, lastSightingDay: null, daysSinceLastSighting: null },
+        rumorPool: { target: null, needWave: 3, deadTarget: false, expiredStamp: true,
+          pool: ['spool', 'eater', 'buffering', 'ad_break'], poolN: 4, firstPick: 'spool' } },
+    ],
+    v4encounters: [],
+    v4seeds: [
+      // Prior-target evidence: Amina fled a spool d26 (plan had a spool target).
+      { day: 26, vid: 'amina_diallo', mid: 'spool', target: 'spool', blocked: false },
+    ],
+    dawnbidDeparts: [
+      // d37 seq 144: THE expiry — companion already out, snapshot
+      // dead spool + empty pool.
+      { seq: 144, day: 37, vid: 'amina_diallo', source: 'brain', result: 'normal',
+        winPlanAction: 'party_launch', commitKind: 'dawn', commitPart: 0,
+        companion: 'gen_2b3r5r7', companion2: null, companion3: null,
+        vidExped: false, companionExped: true, vidBlock: 'unknown', companionBlock: null,
+        stage: 'party', target: null, party: [],
+        rumorPool: { target: 'spool', needWave: 3, deadTarget: true, expiredStamp: false,
+          pool: [], poolN: 0, firstPick: null } },
+      // d37 seq 145/146: the same-day post-expiry holds (not expiries).
+      { seq: 145, day: 37, vid: 'amina_diallo', source: 'brain', result: 'hold',
+        winPlanAction: 'party_launch', commitKind: 'dawn', commitPart: 0,
+        companion: 'gen_2b3r5r7', companion2: null, companion3: null,
+        vidExped: false, companionExped: true, vidBlock: 'unknown', companionBlock: null,
+        stage: 'party', target: null, party: [],
+        rumorPool: { target: null, needWave: 3, deadTarget: false, expiredStamp: true,
+          pool: [], poolN: 0, firstPick: null } },
+      { seq: 146, day: 37, vid: 'amina_diallo', source: 'brain', result: 'hold',
+        winPlanAction: 'party_launch', commitKind: 'dawn', commitPart: 0,
+        companion: 'gen_2b3r5r7', companion2: null, companion3: null,
+        vidExped: false, companionExped: true, vidBlock: 'unknown', companionBlock: null,
+        stage: 'party', target: null, party: [],
+        rumorPool: { target: null, needWave: 3, deadTarget: false, expiredStamp: true,
+          pool: [], poolN: 0, firstPick: null } },
+      // d53: the re-seed launch row (targeted — not post-expiry targetless).
+      { seq: 152, day: 53, vid: 'amina_diallo', source: 'brain', result: 'launch',
+        winPlanAction: 'party_launch', commitKind: 'dawn', commitPart: 0,
+        companion: 'gen_2b3r5r7', companion2: null, companion3: null,
+        vidExped: true, companionExped: true, vidBlock: null, companionBlock: null,
+        stage: 'hunt', target: 'spool', party: ['gen_2b3r5r7'],
+        rumorPool: { target: null, needWave: 3, deadTarget: false, expiredStamp: true,
+          pool: ['spool', 'eater', 'buffering', 'ad_break'], poolN: 4, firstPick: 'spool' } },
+    ] };
+  const exI = expiriesOf(di);
+  check('§I companion-out expiry counts (106705 Amina d37: companionExped true, snapshot dead spool + pool 0)',
+    exI.length === 1 && exI[0].vid === 'amina_diallo' && exI[0].day === 37, exI);
+  const pbI = postExpiryTargetlessLaunches(di, exI);
+  check('§I no post-expiry targetless launch: the d53 launch is targeted (spool)',
+    pbI.length === 0, pbI);
+  const phI = postExpiryHolds(di, exI);
+  check('§I the two same-day d37 holds are not post-expiry holds (same day, not after)',
+    phI.length === 0, phI);
+  const rsI = reseedsOf(di);
+  check('§I the d53 expired-plan launch is a re-seed (from null -> spool)',
+    rsI.length === 1 && rsI[0].day === 53 && rsI[0].to === 'spool', rsI);
+  const rwI7 = reseededWithin(di, exI, rsI, 7);
+  const rwI14 = reseededWithin(di, exI, rsI, 14);
+  check('§I Amina re-seeded in 16d: outside BOTH windows (7d no, 14d no)',
+    rwI7.length === 1 && rwI7[0].reseeded === false && rwI14.length === 1 && rwI14[0].reseeded === false,
+    { w7: rwI7, w14: rwI14 });
+  const faI = holdersFightAgain(di, exI, rsI, 14);
+  check('§I Amina fought again within 14d: no (first outing 16d, no encounter in the window)',
+    faI.length === 1 && faI[0].foughtAgain === false, faI);
+  const feI = holdersFoughtEncounter(di, exI, 14);
+  check('§I Amina fought-encounter diagnostic: no encounter row in the window',
+    feI.length === 1 && feI[0].foughtEncounter === false, feI);
+  // The relaxation applies ONLY with a snapshot: a snapshot-less
+  // companion-out row is still the stale-commit shape (§E gen d79)
+  // and must not count, even when the holder's plan had a target.
+  const diStale = { seed: 999012, instrumentErrors: [], winPlanStats: { planExpiries: 1 },
+    v4departs: [], v4encounters: [],
+    v4seeds: [{ day: 60, vid: 'brian', mid: 'herald', target: 'herald', blocked: false }],
+    dawnbidDeparts: [
+      mkDep(69, 'brian', 'normal', 'party', null, false, false),  // the true expiry (companion home)
+      mkDep(70, 'brian', 'normal', 'party', null, false, true),   // stale twin, companion out, NO snapshot
+    ] };
+  const exStale2 = expiriesOf(diStale);
+  check('§I snapshot-less companion-out row still excluded (stale twin, no rumorPool): 1 expiry, d69 only',
+    exStale2.length === 1 && exStale2[0].day === 69, exStale2);
+  // A companion-out row whose snapshot shows a LIVE target (pool
+  // non-empty, deadTarget false) is a re-seed commit, not an expiry.
+  const diLive = { seed: 999013, instrumentErrors: [], winPlanStats: { planExpiries: 0 },
+    v4departs: [], v4encounters: [],
+    v4seeds: [{ day: 60, vid: 'brian', mid: 'herald', target: 'herald', blocked: false }],
+    dawnbidDeparts: [
+      { seq: 200, day: 69, vid: 'brian', source: 'brain', result: 'normal',
+        winPlanAction: 'party_launch', commitKind: 'dawn', commitPart: 0,
+        companion: 'c1', companion2: null, companion3: null,
+        vidExped: false, companionExped: true, vidBlock: 'unknown', companionBlock: null,
+        stage: 'party', target: null, party: [],
+        rumorPool: { target: 'herald', needWave: 4, deadTarget: false, expiredStamp: false,
+          pool: ['spool'], poolN: 1, firstPick: 'spool' } },
+    ] };
+  check('§I companion-out row with a live-target snapshot is not an expiry',
+    expiriesOf(diLive).length === 0, expiriesOf(diLive));
+  // Pooled judge under the re-derived 14-day bar.
+  function mkBand14(o) {
+    return Object.assign(mkBand({}), { reseededWithin14Count: 0, reseededWithin7Count: 0 }, o);
+  }
+  jp = judgePooled([
+    mkBand14({ expiriesCount: 2, reseededWithin7Count: 1, reseededWithin14Count: 2, foughtAgain14Count: 2, foughtEncounter14Count: 0,
+      poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } }),
+    mkBand14({ expiriesCount: 2, reseededWithin7Count: 1, reseededWithin14Count: 2, foughtAgain14Count: 2, foughtEncounter14Count: 0,
+      poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } }),
+    mkBand14({ expiriesCount: 1, reseededWithin7Count: 0, reseededWithin14Count: 0, foughtAgain14Count: 0, foughtEncounter14Count: 0,
+      poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } }),
+  ], { armed: true, minExpiries: 3, reseedDays: 14 });
+  check('§I pooled 14-day judge: ec=5, re-seed 4/5 = 0.800 >= 2/3 -> DIAG-GO; 7-day share 2/5 reported alongside',
+    jp.verdict === 'DIAG-GO' && jp.pooled.expiries === 5 && jp.pooled.reseededWithin14 === 4 &&
+    jp.pooled.reseededShare14 === 0.8 && jp.pooled.reseededShare7 === 0.4 &&
+    jp.pooled.foughtAgain14 === 4 && jp.pooled.foughtEncounter14 === 0,
+    JSON.stringify(jp.pooled));
+  jp = judgePooled([
+    mkBand14({ expiriesCount: 2, reseededWithin7Count: 1, reseededWithin14Count: 1, foughtAgain14Count: 1, foughtEncounter14Count: 0,
+      poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } }),
+    mkBand14({ expiriesCount: 1, reseededWithin7Count: 0, reseededWithin14Count: 0, foughtAgain14Count: 0, foughtEncounter14Count: 0,
+      poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } }),
+  ], { armed: true, minExpiries: 3, reseedDays: 14 });
+  check('§I pooled 14-day judge: ec=3, re-seed 1/3 -> NO-GO RESEED (14-day window applied, not 7-day)',
+    jp.verdict === 'NO-GO' && jp.kind === 'RESEED' && jp.pooled.reseededShare === 1 / 3, JSON.stringify(jp.pooled));
+  jp = judgePooled([
+    mkBand14({ expiriesCount: 2, reseededWithin7Count: 2, reseededWithin14Count: 2, foughtAgain14Count: 2, foughtEncounter14Count: 0,
+      poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } }),
+    mkBand14({ expiriesCount: 1, reseededWithin7Count: 0, reseededWithin14Count: 0, foughtAgain14Count: 0, foughtEncounter14Count: 0,
+      poolFloor: { commits: 3, min: 0, median: 1, dist: { 0: 1, 1: 1, 2: 1 }, table: [] } }),
+  ], { armed: true, minExpiries: 3 });
+  check('§I legacy default (reseedDays unset): 7-day window still applied (2/3 -> DIAG-GO)',
+    jp.verdict === 'DIAG-GO' && jp.pooled.reseedDays === 7 && jp.pooled.reseededShare === 2 / 3, JSON.stringify(jp.pooled));
   console.log('analyze-reseedexpiry-b selftest: ' + passed + ' passed, ' + failed + ' failed');
   return failed === 0;
 }
@@ -1217,19 +1436,20 @@ if (require.main === module) {
   if (args.indexOf('--selftest') !== -1) {
     process.exit(selftest() ? 0 : 1);
   }
-  let dirs = [], outFile = null, armed = true, minExpiries = null;
+  let dirs = [], outFile = null, armed = true, minExpiries = null, reseedDays = 7;
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--dir') dirs.push(args[++i]);
     else if (args[i] === '--dir2') dirs.push(args[++i]);
     else if (args[i] === '--out') outFile = args[++i];
     else if (args[i] === '--control') armed = false;
     else if (args[i] === '--min-expiries') minExpiries = parseInt(args[++i], 10);
+    else if (args[i] === '--reseed-days') reseedDays = parseInt(args[++i], 10);
   }
-  if (!dirs.length) { console.error('usage: analyze-reseedexpiry-b.js --dir DIR [--dir2 DIR2] [--armed|--control] [--min-expiries N] [--out FILE] | --selftest'); process.exit(2); }
+  if (!dirs.length) { console.error('usage: analyze-reseedexpiry-b.js --dir DIR [--dir2 DIR2] [--armed|--control] [--min-expiries N] [--reseed-days 7|14] [--out FILE] | --selftest'); process.exit(2); }
   const analyses = dirs.map(function (d) { return analyzeDir(d); });
   const legs = dirs.map(function (d) { return FCB.summarizeLeg(d); });
   const perDir = analyses.map(function (a, i) { return judge(a, legs[i], { armed: armed }); });
-  const pooled = judgePooled(analyses, { armed: armed, minExpiries: minExpiries });
+  const pooled = judgePooled(analyses, { armed: armed, minExpiries: minExpiries, reseedDays: reseedDays });
   const a0 = analyses[0], leg0 = legs[0], j0 = perDir[0];
   const result = { verdict: pooled.verdict, kind: pooled.kind, bars: pooled.bars, pooled: pooled.pooled,
     perDir: perDir.map(function (j, i) { return { dir: dirs[i], verdict: j.verdict, kind: j.kind, bars: j.bars }; }),
@@ -1248,8 +1468,10 @@ if (require.main === module) {
     postExpiryTargetlessLaunches: a0.postExpiryTargetlessLaunches, postExpiryHolds: a0.postExpiryHolds,
     expiryRuleMismatch: a0.expiryRuleMismatch, expiries: a0.expiries,
     reseeds: a0.reseedsCount, expiriesCount: a0.expiriesCount,
-    reseededWithin7: a0.reseededWithin7Count, foughtAgain14: a0.foughtAgain14Count,
-    reseededShare: a0.reseededShare, foughtAgainShare: a0.foughtAgainShare,
+    reseededWithin7: a0.reseededWithin7Count, reseededWithin14: a0.reseededWithin14Count,
+    foughtAgain14: a0.foughtAgain14Count, foughtEncounter14: a0.foughtEncounter14Count,
+    reseededShare: a0.reseededShare, reseededWithin14Share: a0.reseededWithin14Share,
+    foughtAgainShare: a0.foughtAgainShare, foughtEncounter14Share: a0.foughtEncounter14Share,
     deadCommits: a0.deadCommits, deadCommitsCount: a0.deadCommitsCount,
     poolFloor: a0.poolFloor, poolDisagreements: a0.poolDisagreements,
     poolDisagreementsCount: a0.poolDisagreementsCount,
@@ -1264,5 +1486,6 @@ module.exports = { launchesOf: launchesOf, lastFoughtBefore: lastFoughtBefore,
   expiriesOf: expiriesOf, postExpiryTargetlessLaunches: postExpiryTargetlessLaunches,
   postExpiryHolds: postExpiryHolds, reseedsOf: reseedsOf,
   reseededWithin: reseededWithin, holdersFightAgain: holdersFightAgain,
+  holdersFoughtEncounter: holdersFoughtEncounter,
   hadTargetBefore: hadTargetBefore, deadCommitsOf: deadCommitsOf,
   poolFloorStats: poolFloorStats, poolDisagreements: poolDisagreements, selftest: selftest };
