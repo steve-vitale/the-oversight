@@ -224,12 +224,31 @@ not committed).
 
 ## Gate (`check.js --quick`)
 
-NOT RUN this occurrence — the VM restart (~01:23Z) + the slow
-panel (~402s) consumed the budget; the gate goes to adoption
-(r239/r256 precedent). Standing proofs all GREEN in the worktree
-before the panel: M4-split (extended) 44/44, F6 dry-opener 49/49,
-DRY2 27/27, DRY3 37/37, TRAILTALK 30/30, F5 harness 50/50,
-repay-fallback 36/36, gossip-dry (r256) 9/9, C3d recap-live 35/35.
+**Adoption gate on the merged tip `af2320278`: 339 passed, 5 failed,
+0 attributable** (log:
+`hidden_files/evidence/2026-11-21/journey-social-life-r260-gate.log`,
+710s, run from worktree `r260-gate`). The 5 failures are all
+standing set: measurement-proof staleness pair
+(`test-measurement-proof-update.js` "Proof source inputs are not
+current" + `test-measurement-workflow.js` retained-neutrality proof —
+proof re-sign round 22 still owed), phone-frame stale receipt
+(`test-phone-frame-proof.js`), and two 120s timeouts under load
+(`test-living-garden-deed-attainment.js`,
+`test-one-person-army-deed-attainment.js`). Notably
+`test-measurement-cache-flags.js`, `test-capable-bot-20261014.js`,
+`test-trust-observer-neutrality.js`, and
+`test-occupation-panels.js` all PASS on this tip — they timed out
+on the concurrent deepening r247 gate (335/9), confirming the
+load-flake reading. M4-split proof re-run on the merged tip:
+44/44 GREEN, corpus pins 181 / 174 / 7 exact.
+
+NOT RUN during the occurrence itself — the VM restart (~01:23Z) +
+the slow panel (~402s) consumed the budget; the gate went to
+adoption (r239/r256 precedent). Standing proofs all GREEN in the
+worktree before the panel: M4-split (extended) 44/44, F6
+dry-opener 49/49, DRY2 27/27, DRY3 37/37, TRAILTALK 30/30, F5
+harness 50/50, repay-fallback 36/36, gossip-dry (r256) 9/9, C3d
+recap-live 35/35.
 
 ## Adjudication
 
