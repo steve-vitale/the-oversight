@@ -2559,7 +2559,24 @@
           var mlead = null;
           for (var lj = 0; lj < members.length; lj++) { if (members[lj].hp > 0) { mlead = members[lj]; break; } }
           if (mlead) {
-            var vDpr = rec.mDealt / round, mDpr = rec.vTakenP4 / round;
+            // M2STEP2 (sim-m2step2-a, finding #2590 M2): the opening
+            // volley is BANKED damage, not a rate. It already reduced
+            // the lead's HP (mlead.hp below carries it) — and it was
+            // dealt at range, before the monster could hit back, at
+            // zero incoming cost. Spreading that one-time lump across
+            // rounds as damage-per-round inflates vDpr and understates
+            // rounds-to-kill: the diag priced the inflation at ~0.7 of
+            // the volley's +1.0-round apparent shift, against an honest
+            // ~0.3 rounds (volleyDmg / sustainedDpr). With the flag on,
+            // the sustained rate reads melee + ally damage only; the
+            // volley is its own banked stream, never a smear. rtd,
+            // the shout branch, winning, the trick holds, and the
+            // committed-finish hold are untouched; flag unset is
+            // byte-identical behavior to base.
+            var _m2VolleyDmg = 0, _m2On = false;
+            try { _m2VolleyDmg = (rec.volley && rec.volley.dmg) | 0; } catch (e2) {}
+            try { _m2On = (typeof process !== 'undefined' && process.env && process.env.M2STEP2 === '1'); } catch (e2) {}
+            var vDpr = (rec.mDealt - (_m2On ? _m2VolleyDmg : 0)) / round, mDpr = rec.vTakenP4 / round;
             var rtk = mlead.hp / Math.max(1, vDpr);  // rounds to drop the lead
             // FIGHTBLEND-B (sim-fightblend-b, 2026-11-08): the morale read
             // runs on the HYPOTHETICAL trajectory — the HP the fighter
