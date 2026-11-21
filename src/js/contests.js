@@ -209,7 +209,7 @@
     const wins = (((this.state.notability || {})[who] || {}).contestWin || 0);
     const apex = wave >= 4 || wins >= (cfg.apexWins == null ? 8 : cfg.apexWins) || (this.apFavor && this.apFavor() >= (cfg.apexFavor == null ? 100 : cfg.apexFavor));
     if (contest.risk === 'extreme' && apex && Math.random() < (cfg.apexChance == null ? 0.25 : cfg.apexChance)) tier = 4;
-    const loot = this.rollAlienLoot({ wave, loot: { chance, tier, rewardSource: 'contest', risk: contest.risk } });
+    const loot = this.rollAlienLoot({ wave, loot: { chance, tier, rewardSource: 'contest' } });
     // GUNRATE (sim-gunrate-a): a searcaster / fusion_cell prize won by
     // the player is REDIRECTED to the lead-weighted living villager, and
     // a searcaster prize BUNDLES 2 fusion cells to the same recipient.
