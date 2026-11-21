@@ -44726,7 +44726,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           const p1 = this.tbFighter('p');
           if (tg.threatenedPlayer && !playerHit && p1 && p1.alive) {
             this.say('You\'re not where it landed. Clean dodge.');
-            this.tbStyle(15, `dodged the ${this.encAttackName(m, tg.attackName)}!`);
+            // DODGE ARTICLE (journey-crisis r261, panel seed 14575 d44):
+            // encAttackName returns 'the attack' (article included) while
+            // the pattern is unlearned, so a blind "the " prepend composed
+            // "dodged the the attack!" — same family as the r249/r253 antler
+            // fix. Compose via articlePhrase: unknown -> "dodged the
+            // attack!", a learned capitalized name stands bare ("dodged
+            // Trample!"), a learned lowercase name takes "the ".
+            this.tbStyle(15, `dodged ${this.articlePhrase(this.encAttackName(m, tg.attackName))}!`);
           }
           if (lungeLanding && m.alive && this.tbCanOccupy(m, lungeLanding.cx, lungeLanding.cy)) {
             m.mx = lungeLanding.cx; m.my = lungeLanding.cy;
