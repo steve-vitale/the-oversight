@@ -135,6 +135,10 @@ r246 corpus copied to `hidden_files/r247-analyzer-proof/` (renamed r246→r247; 
 - **Proof tests: 14/14 GREEN** (see above).
 - **Analyzer fork proof: clean** (see above).
 
-## Closeout
+## Closeout (adoption, 2026-11-21)
 
-PENDING — fill in at closeout.
+- **Flap:** the adoption waited out the third write-flap window of the day, 11:06:07Z–~12:58Z (~112 min, longest on record; boot 18c49d22). No writes were forced during it; the O_EXCL probe passed before any commit was attempted. The original run's heartbeat loop was dead on adoption start (killed by the ~10:48Z VM replacement); a new adoption hbloop was started detached and heartbeated until session end.
+- **Lock:** `playtest-loop.lock` was already absent when the adoption began — removed before the adoption started (not by this adoption). No live Lane A run holds it; nothing to delete.
+- **Branch:** fast-forwarded in the worktree 2b97163b0 → 9c4ed7a87 (the batch-ship version bump landed during the flap wait) before committing; `git sparse-checkout add evidence/2026-11-21` per the run's closeout instruction (tracked files under that dir only — the full `evidence/` tree was NOT checked out). Commit `1d039688f` (4 files, 3016 insertions: prereg, run note, driver, analyzer). Index clobber struck after the safe-commit (all 4 files staged-deleted, worktree files byte-identical to HEAD); repaired via `ls-tree -r` + `update-index --add --index-info`, all 4 blobs hash-verified. 8 stray `flap-probe-*` files remain untracked in the worktree (probe debris from the run; not committed).
+- **Adoption gate** (`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest-r247adopt`, worktree, 1085s): **332 passed, 12 failed, 0 attributable.** 8× ENOENT sparse-checkout artifacts — the same 8 as the run's gate (controller-census, conversation-answer-context, legacy-map-nightfall, measurement-comparison, measurement-proof-update, measurement-workflow, phone-frame-proof, regional-sprites); two confirmed directly (installed-update-old-save-r1.json, neutral-new.json.gz). 4× 120s timeouts under load — living-garden + one-person-army deed-attainment (standing family), trust-observer-neutrality (6/6 solo PASS), capable-bot (42/42 solo PASS). The run's 7 flap-EPERM failures all PASS in this gate, confirming they were flap artifacts.
+- **Merge:** branch merged ff-only to master (see git log for tip); main tree verified clean; worktree released and removed; rotation-a advanced 1→2 (read back).
