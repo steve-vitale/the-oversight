@@ -124,6 +124,30 @@
     } catch (e) {}
     return { armed: !!(weaponB > 0 || carriesWeapon), armored: armorP > 0 };
   }
+  // PROFILEGATE4 env gate (sim-profilegate-b, findings #2638/#2605):
+  // the scoped profile-gate relaxation is OFF unless the process env
+  // carries PROFILEGATE4=1 (node sims only; in the browser process
+  // is undefined, so the lever is off). Scoped: the gate opens only
+  // for a holder whose plan targets wave 4+ (plan.needWave >= 4) —
+  // see profilegate4OpenFor below. Do NOT confuse with PROFILEGATE=1
+  // (the unscoped parent lever, reverted NO-GO on B3).
+  function profilegate4On() {
+    try { return typeof process !== 'undefined' && process.env && process.env.PROFILEGATE4 === '1'; } catch (e) { return false; }
+  }
+
+  // PROFILEGATE4 scope: the profile gate opens only when the holder's
+  // own plan has needWave >= 4 (the VETREENGAGE / PARTYSIZE4 idiom).
+  // No plan, or a wave-3 plan, keeps the old gate — the safe default.
+  // Pure read: never writes, never rolls RNG.
+  function profilegate4OpenFor(self, vid) {
+    try {
+      if (!profilegate4On()) return false;
+      var vv = self.state && self.state.village;
+      var plan = (vv && vv.winPlan) ? vv.winPlan[vid] : null;
+      return !!(plan && ((plan.needWave | 0) >= 4));
+    } catch (e) { return false; }
+  }
+
   // Party-path companion pick: eligibility stays local; ranking is the
   // shared companionScore (OVE-54). Do not fold bond-candidate ads here.
   function findCompanion(self, vid, hx, hy) {
@@ -147,7 +171,7 @@
         try { if (self.isEngaged && self.isEngaged(cid)) continue; } catch (e) {}
         var prof = null;
         try { prof = self.npcRangeProfile ? self.npcRangeProfile(cid) : null; } catch (e) {}
-        if (prof !== 'wanderer' && prof !== 'explorer') continue;
+        if (!profilegate4OpenFor(self, vid) && prof !== 'wanderer' && prof !== 'explorer') continue;
         try {
           var a = self.agencyState ? self.agencyState() : null;
           if (a && a.exped && a.exped[cid]) continue;
