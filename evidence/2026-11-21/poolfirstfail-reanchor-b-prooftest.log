@@ -1,0 +1,132 @@
+PASS §0 driver stamps the frozen base as a constant (FROZEN_BASE)
+PASS §0 driver carries the CLI guard + per-oneRun sentinel guard
+PASS §0 driver has no HEAD lookup left for the anchor
+PASS §0 analyzer EXPECTED.anchor12 is df40fced1 (unchanged from the original prereg)
+PASS §0 prereg forbids post-hoc amendment of EXPECTED.anchor12
+PASS §0 negative: synthetic corpus stamped with the old bad anchor 38692c34c24b fails the substrate check
+FAIL §0 positive: synthetic corpus stamped with the frozen base passes the substrate check :: ["anchor:df40fced12a0"]
+PASS §1 prereg exists
+PASS §1 prereg freezes the DIAG-GO bar
+PASS §1 prereg freezes the classification bar (0 unclassified pool snapshots on the fresh band)
+PASS §1 prereg freezes Leg P (pool-first-fail decomposition, P1-P8)
+PASS §1 prereg names the overlap guard (no villager-brain.js / win-plan.js)
+PASS §1 prereg freezes Taxonomy H
+PASS §1 prereg records the re-recorded band 106731-106738 (same band, re-used deliberately)
+PASS §1 prereg records AMENDMENT 1 (census definition) + AMENDMENT 2 (§4 150d)
+PASS §1 on-disk src/ matches the frozen base (git diff --quiet df40fced1 -- src/ empty)
+PASS §1 pool-path files identical between frozen base df40fced1 and HEAD (brain/win-plan/agency/objectives/companion-score/game/data/harness/policy/analyzers)
+PASS §1 no added/removed pool-filter line between df40fced1 and HEAD (findCompanion/npcRangeProfile/RANGY_OCC)
+PASS §1 driver + analyzer + test are new files on this branch
+PASS §1 driver arm/run is poolfirstfail-reanchor-b, usage line re-seeded to 106731-106738
+PASS §1 driver carries the per-part recorder (objTick / npcNodeTravel / vbrainLogGate wraps)
+PASS §1 driver carries the pool-first-fail extension (rangeScoreOf + census + holderRange)
+PASS §1 analyzer exports the H classifier + Leg R + Leg P + seedOf
+PASS §A party_launch is a bid
+PASS §A party_wait is party-no-companion with pool attached
+PASS §A gear_hold is gear-hold
+PASS §A veteran_guard is veteran-guard
+PASS §A gear stage + armed + no cand is gear-geared-silent
+PASS §A hunt stage + no cand is hunt-standing-table-no-companion-silent
+PASS §A standing stage + no cand is the same silent reason
+PASS §A party stage + no cand is unknown-party-silent (winPlanCands always emits here)
+PASS §A unknown stage is unknown-stage
+PASS §A missing plan is unknown-no-plan
+PASS §B death day classifies holder-dead
+PASS §B census holderAlive false classifies holder-dead
+PASS §B scholar at dawn (scholar today AND yesterday) classifies holder-scholar
+PASS §B scholar only today (mid-day inheritance) is NOT holder-scholar at dawn
+PASS §B another-target score row that day classifies retarget-boundary
+PASS §B seed day classifies seed-day
+PASS §B census exped classifies holder-on-expedition
+PASS §B member-row away classifies holder-away
+PASS §B v4 encounter that day classifies field-encounter-day
+PASS §B no census row classifies plan-not-in-census
+PASS §B off-haven node classifies holder-off-haven
+PASS §B prev pick part 3 + VISIT classifies phase-edge
+PASS §B prev pick part 3 + FORAGE is NOT phase-edge
+PASS §B alive at haven with no other gate is unknown-no-signal
+PASS §C wave-4-target launch rows are 3 (wave-3 chorus_line + hold excluded)
+PASS §C counted row is the needWave=4 launch
+PASS §C uncounted rows are 2
+PASS §C c1 copy-links to the h1 launch (companion in its party)
+PASS §C x9 has no copy link
+PASS §C h1 + c1 have start calls, x9 does not
+PASS §D one repeat group for h1+algorithm (2 launches)
+PASS §D the d20 meeting is inside the 21-day window (first fight d20)
+PASS §D track rows attach with the nearDist drift 2 -> 4
+PASS §D a single launch is not a repeat group
+PASS §E instance has 3 instance-days (d10-d12)
+PASS §E d11 midday-only counts as assessed (party-no-companion, part 1)
+PASS §E d10 is a zero-row seed-day
+PASS §E d12 is a zero-row holder-scholar day (scholar d11 AND d12)
+PASS §E day-level classification has 0 unknown
+PASS §F engaged skip delays the chore past the day (hs-engaged-skip)
+PASS §F away skip delays the chore past the day (hs-away-skip)
+PASS §F a hard-gate pick on the day is hs-gate-pick (gate beats the trace)
+PASS §F done at a reached part with a same-day commit is hs-refresh-blocked
+PASS §F done at a reached part with a stale commit and no pick is hs-unexplained
+PASS §F a ready objective with no pick is hs-departure-pending
+PASS §F still-live all day with no skip is hs-chore-not-finished-no-skip
+PASS §F no rows at all is hs-no-rows
+PASS §F integration: B leaves d12 unknown-no-signal (hU=1)
+PASS §F integration: H explains d12 as hs-engaged-skip (hE=1, hS=1)
+PASS §F integration: instance unknown drops 1 -> 0 after H
+PASS §F integration: the B reason in zeroRow[] is NOT rewritten
+PASS §G Leg R reproduces the 10 launcheng unknown days exactly
+PASS §G Leg R: the old corpora carry zero holder-state rows (H inapplicable there)
+PASS §G Leg R: band unknown is 10
+PASS §H eligibleUnder baseline: only the home ranger is eligible
+PASS §H eligibleUnder relax-profile: home forager joins
+PASS §H eligibleUnder relax-away: away ranger joins
+PASS §H eligibleUnder relax-all: all three eligible
+PASS §H eligibleUnder: a dead member never counts, even relaxed
+PASS §H eligibleUnder: selfOrScholar never counts
+PASS §H poolSnapshotCheck: clean row has 0 problems
+PASS §H poolSnapshotCheck: bad firstFail + missing range/trust + counts sum all flagged
+PASS §H poolSeedP: 2 snapshots, 0 problems
+PASS §H poolSeedP: firstFails non-self tally (notRanger 3, away 1, trustLow 1)
+PASS §H poolSeedP: relax-profile fills both empty snapshots (gains 2)
+PASS §H poolSeedP: gap histogram {1:1, 2:1, 0:1} and stale 1 (live ranger, cached forager)
+PASS §H poolSeedP: gap-1 member closes via snare (aptParts all 0)
+PASS §H poolSeedP: away cross-tab expedition|exped|ranger|trustOk = 1, would-be-eligible 0 (onExped)
+PASS §H poolSeedP: trust gap 7 counted once; trustDist <15 = 1
+PASS §H poolSeedP: census 3 rows, chain full on 3/3 days, censusOk
+PASS §H poolSeedP: holder split forager 2 snapshots, both empty; stage split party 1 / hunt 1
+PASS §H poolBandP: binding first-fail is notRanger 3 vs away 2 (plurality)
+PASS §H poolBandP: censusBadSeeds counts the seed with no census rows
+PASS §H poolBandP: sampleEmpty carries rows from both seeds
+PASS §I EXPECTED.anchor12 stays df40fced1 (post-hoc amendment forbidden)
+FAIL §I substrateOf: frozen-base stamp passes :: ["anchor:df40fced12a0"]
+PASS §I substrateOf: the old bad stamp 38692c34c24b fails the anchor check
+PASS §I substrateOf: a wrong policy sha fails (the anchor alone is not the whole substrate)
+analyze-poolfirstfail-reanchor-b selftest: 77 passed, 1 failed
+FAIL §2 analyzer selftest green (78 checks incl. §F H fixtures + §G Leg R + §H Leg P + §I anchor)
+PASS §3 seedOf opens exactly 1 instance, candidate-not-bid
+PASS §3 seedOf: B leaves 1 unknown day (d12), H explains it as hs-engaged-skip
+PASS §3 seedOf: instance unknown is 0 after H
+PASS §3 seedOf: holder-state rows counted (10)
+PASS §3 seedOf Leg P: 2 snapshots, 0 problems, census 12 rows, censusOk
+PASS §3 seedOf Leg P: binding first-fail notRanger 3 (away 1, trustLow 1)
+PASS §3 seedOf Leg P: relax-profile fills both empty snapshots
+PASS §3 seedOf Leg P: gap histogram {0:1, 1:1, 2:1}, stale 1
+== recorder live ==
+== determinism legs D1/D2 ==
+PASS live driver sees SEEDLAND hard-on
+PASS live run completes with 0 instrument errors
+PASS live run arm is poolfirstfail-reanchor-b
+PASS §0 live-positive: live run anchorCommit is the frozen base even though HEAD has moved
+PASS live run carries v4 + dawnbid + pool + census + skip + holder-state arrays
+PASS live run self-describes the substrate (all seven flags 1, allyslot3InSrc false, launchTrackOn true)
+PASS live run policy sha is the current competent verbatim (1884c8852d38)
+PASS live run holder-state rows exist with all 3 `when` values (part-start / tick-entry / tick-exit)
+PASS live run has at most 1 holder-state row per (vid, day, part, when)
+PASS live run holder-state rows all carry the frozen fields (day/part 0-3, flags boolean)
+PASS live run pool rows exist with gap fields on every non-self member (counts sum to rosterN)
+PASS live run census rows exist (one per daily day, AMENDMENT 1) with the frozen supply-chain fields
+  info: live 150d run recorded 378 holder-state rows ({"part-start":126,"tick-entry":126,"tick-exit":126}), 21 gate picks, 27 seed rows, 23 pool rows, 148 census rows
+PASS D1 repeatability: identical full corpus, recorder ON twice, full substrate (30d)
+PASS D2 wrap neutrality: identical trajectories, recorder ON vs OFF, full substrate (30d)
+PASS D2 recorder-off run carries empty recorder arrays (v4/dawnbid/pool/census/skips/holder-state)
+PASS D2 recorder-off run has 0 instrument errors
+  info: D1 30d run recorded 0 holder-state rows, 0 gate picks, 0 encounters, 0 seed rows, 0 pool rows, 28 census rows
+test-poolfirstfail-reanchor-b: 46 passed, 2 failed
