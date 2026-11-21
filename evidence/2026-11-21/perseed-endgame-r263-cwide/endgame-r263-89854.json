@@ -1,0 +1,8284 @@
+{
+ "seed": 89854,
+ "days": 180,
+ "gameDays": 60,
+ "deferDays": null,
+ "greedy": {
+  "waits": 0,
+  "maxTier": 0,
+  "seatDay": null,
+  "seatKind": null
+ },
+ "armory": {
+  "donations": 5,
+  "craftDonations": 2,
+  "donatedBonus": 65,
+  "donateFailed": 0,
+  "vinebankDeferred": 0,
+  "knapWasted": 0,
+  "errors": 0,
+  "unitsAtEnd": 3
+ },
+ "w3Mentions": [
+  {
+   "id": "redactor",
+   "name": "The Redactor",
+   "firstDay": null,
+   "count": 0,
+   "firstLine": null
+  },
+  {
+   "id": "gavel",
+   "name": "Gavel",
+   "firstDay": null,
+   "count": 0,
+   "firstLine": null
+  },
+  {
+   "id": "focus_group",
+   "name": "The Focus Group",
+   "firstDay": 25,
+   "count": 50,
+   "firstLine": "Something moves out there — The Focus Group."
+  },
+  {
+   "id": "spool",
+   "name": "Spool",
+   "firstDay": 31,
+   "count": 7,
+   "firstLine": "Something moves out there — Spool."
+  },
+  {
+   "id": "chorus_line",
+   "name": "Chorus Line",
+   "firstDay": 30,
+   "count": 47,
+   "firstLine": "The Chorus Line stops at the treeline — pacing, unwilling. The walls end the argument. It's still out there."
+  },
+  {
+   "id": "terms_of_service",
+   "name": "The Terms of Service",
+   "firstDay": 27,
+   "count": 12,
+   "firstLine": "Something moves out there — The Terms of Service."
+  },
+  {
+   "id": "callback",
+   "name": "The Callback",
+   "firstDay": 26,
+   "count": 19,
+   "firstLine": "Something moves out there — The Callback."
+  },
+  {
+   "id": "buffering",
+   "name": "Buffering",
+   "firstDay": 40,
+   "count": 190,
+   "firstLine": "⚔ BUFFERING! Miguel joins you!"
+  },
+  {
+   "id": "ad_break",
+   "name": "Ad Break",
+   "firstDay": null,
+   "count": 0,
+   "firstLine": null
+  }
+ ],
+ "w5FaceEvents": [],
+ "w5Mentions": [
+  {
+   "id": "cancellation",
+   "name": "The Cancellation",
+   "firstDay": null,
+   "count": 0,
+   "firstLine": null,
+   "firstLineKind": null,
+   "firstContext": null
+  },
+  {
+   "id": "editor",
+   "name": "The Editor",
+   "firstDay": null,
+   "count": 0,
+   "firstLine": null,
+   "firstLineKind": null,
+   "firstContext": null
+  },
+  {
+   "id": "rerun",
+   "name": "The Rerun",
+   "firstDay": 15,
+   "count": 3,
+   "firstLine": "📖 Codex: Rerun — locks onto one target — moving won't dodge it. You won't forget this.",
+   "firstLineKind": "codex",
+   "firstContext": [
+    "Armor absorbs 3.",
+    "Tiger's attack hits you for 7.",
+    "📖 Codex: Rerun — locks onto one target — moving won't dodge it. You won't forget this.",
+    "📺 SYSTEM: \"Ava's turn\"",
+    "Ava strikes the Sweeps Week."
+   ]
+  },
+  {
+   "id": "spoiler",
+   "name": "The Spoiler",
+   "firstDay": null,
+   "count": 0,
+   "firstLine": null,
+   "firstLineKind": null,
+   "firstContext": null
+  },
+  {
+   "id": "timeslot",
+   "name": "The Timeslot",
+   "firstDay": null,
+   "count": 0,
+   "firstLine": null,
+   "firstLineKind": null,
+   "firstContext": null
+  },
+  {
+   "id": "nielsen",
+   "name": "The Nielsen",
+   "firstDay": null,
+   "count": 0,
+   "firstLine": null,
+   "firstLineKind": null,
+   "firstContext": null
+  },
+  {
+   "id": "finale",
+   "name": "The Finale",
+   "firstDay": 30,
+   "count": 1,
+   "firstLine": "📺 SYSTEM: \"SEASON FINALE APPROACHES! Party cap raised to FIVE! Go out with a BANG! (Figuratively. Mostly.)\"",
+   "firstLineKind": "broadcast",
+   "firstContext": [
+    "Fever dreams shake you — wings, black water, a sky full of eyes. (-2 HP)",
+    "A cart-driver with flour on their sleeves waits a while, then moves on down the road. Word travels about that, too.",
+    "📺 SYSTEM: \"SEASON FINALE APPROACHES! Party cap raised to FIVE! Go out with a BANG! (Figuratively. Mostly.)\"",
+    "📺 SYSTEM: \"It is today. You dreamed about the cameras. Everyone did. The village is very quiet.\"",
+    "📺 SYSTEM: \"═══ CONTEST INTERRUPTION ═══\""
+   ]
+  },
+  {
+   "id": "finale_crew",
+   "name": "The Commercial Break",
+   "firstDay": null,
+   "count": 0,
+   "firstLine": null,
+   "firstLineKind": null,
+   "firstContext": null
+  },
+  {
+   "id": "finale_opening",
+   "name": "The Opening Credits",
+   "firstDay": null,
+   "count": 0,
+   "firstLine": null,
+   "firstLineKind": null,
+   "firstContext": null
+  },
+  {
+   "id": "network_note",
+   "name": "The Network Note",
+   "firstDay": null,
+   "count": 0,
+   "firstLine": null,
+   "firstLineKind": null,
+   "firstContext": null
+  }
+ ],
+ "guardTrace": [],
+ "windowEndGuard": null,
+ "announceCapIdx": null,
+ "overtimeLines": 0,
+ "plan": "waves",
+ "competentPin": "live",
+ "fullseat": {
+  "days": 59,
+  "errs": 0,
+  "bestSeat": "lesser",
+  "max": {
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "contests": 6,
+   "crises": 5,
+   "stage": 3,
+   "foodShared": 37,
+   "score": 295,
+   "standing": 199
+  },
+  "sentDay": 11,
+  "surgeDay": null,
+  "firstLesserDay": 55,
+  "firstFullSeatDay": null,
+  "firstFullSeat": null,
+  "indispEver": false,
+  "firstIndispDay": null,
+  "winDay": null,
+  "winSeat": null
+ },
+ "endReason": "village-lost",
+ "won": false,
+ "announceDay": null,
+ "satDay": null,
+ "satSeatKind": null,
+ "satWaves": null,
+ "auditLine": null,
+ "auditNamed": null,
+ "satPenalty": null,
+ "maxTier": 0,
+ "otMismatch": null,
+ "walkedPath": null,
+ "walkedBranch": null,
+ "walkedMoral": null,
+ "instrumentErrors": 0,
+ "telemetry": [],
+ "rg": null,
+ "noticedCount": 0,
+ "noticeLines": [],
+ "ledgerLine": null,
+ "bandCrossings": 0,
+ "relayDoor": {
+  "heldAtSit": false,
+  "leanAtSit": 0,
+  "bandAtSit": "grey",
+  "bondAtSit": 0,
+  "groundingAtSit": 100,
+  "capClaimed": 0,
+  "capAppointed": 0,
+  "capAnswers": 0,
+  "capCommunes": 0,
+  "capReroutes": 0,
+  "doorsOffered": null,
+  "doorWalked": null
+ },
+ "relayTrace": [
+  {
+   "day": 7,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 14,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 21,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 28,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 28,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 35,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 42,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 49,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  },
+  {
+   "day": 56,
+   "lean": 0,
+   "band": "grey",
+   "grounding": 100,
+   "bond": 0,
+   "held": false
+  }
+ ],
+ "finalBeat": false,
+ "finalOptsCount": 0,
+ "finalPickId": null,
+ "finalLabel": null,
+ "finalResolved": false,
+ "finalOutcomeLines": [],
+ "promptFrameCount": 0,
+ "dispatchCount": 0,
+ "weekly": [],
+ "loss": {
+  "endReason": "village-lost",
+  "scatteredFlag": true,
+  "extinctFlag": false,
+  "lineKind": "scattering",
+  "line": "Haven couldn't hold. On the third hungry day, people started walking — in different directions. The scattering, again.",
+  "lineDay": 60,
+  "kind": "scattering",
+  "kindSource": "flag",
+  "aliveAtEnd": 1,
+  "pantryAtEnd": 0
+ },
+ "vetIncrements": [
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "engine",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 889
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 847
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 817
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 788
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 755
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 725
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 699
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 668
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 654
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 634
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 618
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 598
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 579
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 560
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 540
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 522
+    }
+   ],
+   "preCall": false
+  },
+  {
+   "day": 54,
+   "delta": 1,
+   "committed": true,
+   "over": false,
+   "censusState": "open",
+   "monsters": [
+    {
+     "mid": "congregation",
+     "dataWave": 4,
+     "mdefWave": 4,
+     "hp": 503
+    }
+   ],
+   "preCall": false
+  }
+ ],
+ "fightCensus": {
+  "fights": [
+   {
+    "monsters": [
+     "congregation"
+    ],
+    "startDay": 54,
+    "endDay": 54,
+    "turns": 41,
+    "turnsObserved": true,
+    "outcome": "vDie",
+    "killFlag": false,
+    "dieFlag": true,
+    "talkDown": false,
+    "gotAway": false,
+    "gotAwayLines": [],
+    "closeSnapResult": null,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine+policy",
+    "committed": true,
+    "arenaMention": false,
+    "deathCauses": [
+     "the wild"
+    ],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 0.784,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 0.784,
+     "commitLive": true
+    },
+    "ctxCommitAtFirstObserve": true,
+    "anatomy": {
+     "partySize": 2,
+     "partyKeys": [
+      "p",
+      "v_visjoin_37"
+     ],
+     "monsterCount": 1,
+     "openMonsterHp": 900,
+     "closeMonsterHp": 61,
+     "dmgDealt": 839,
+     "feastedAtStart": false,
+     "feastedAtOpen": false,
+     "feastedSource": "open"
+    },
+    "playerFled": false,
+    "villFled": true,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "ref-change",
+    "diedInFight": [
+     "gen_5lpzahe"
+    ],
+    "diedDayWindow": [
+     "gen_5lpzahe"
+    ],
+    "scholarDiedInFight": true,
+    "partyFallback": false,
+    "scholarIdAtOpen": "gen_5lpzahe",
+    "causalDeaths": [
+     {
+      "channel": "registerDeath",
+      "vid": "gen_5lpzahe",
+      "name": "Morgan Owens",
+      "cause": "the wild",
+      "day": 54,
+      "fightLive": true,
+      "fightOver": true,
+      "monsters": [
+       {
+        "id": "congregation",
+        "wave": 4
+       }
+      ]
+     }
+    ],
+    "causalFlag": true,
+    "vetAtOpen": null,
+    "vetAtClose": 17,
+    "vetDelta": null
+   },
+   {
+    "monsters": [
+     "algorithm"
+    ],
+    "startDay": 54,
+    "endDay": 54,
+    "turns": 1,
+    "turnsObserved": false,
+    "outcome": "talkDown",
+    "killFlag": false,
+    "dieFlag": false,
+    "talkDown": true,
+    "gotAway": true,
+    "gotAwayLines": [
+     "It got away. No meat, no trophy — but you're breathing, and now you know its moves."
+    ],
+    "closeSnapResult": null,
+    "escapeKind": "break",
+    "openDriver": "engine",
+    "source": "engine",
+    "committed": false,
+    "arenaMention": false,
+    "deathCauses": [],
+    "gateAtOpen": {
+     "vetcommitOn": true,
+     "uw": 4,
+     "veteransShort": true,
+     "hpPct": 1,
+     "commitLive": true
+    },
+    "gateAtFirstObserve": null,
+    "ctxCommitAtFirstObserve": null,
+    "anatomy": {
+     "partySize": 1,
+     "partyKeys": [
+      "p"
+     ],
+     "monsterCount": 1,
+     "openMonsterHp": 1000,
+     "closeMonsterHp": 1000,
+     "dmgDealt": 0,
+     "feastedAtStart": false,
+     "feastedAtOpen": false,
+     "feastedSource": "open"
+    },
+    "playerFled": false,
+    "villFled": false,
+    "monFled": false,
+    "result": null,
+    "closeWhy": "day-end",
+    "diedInFight": [],
+    "diedDayWindow": [],
+    "scholarDiedInFight": false,
+    "partyFallback": false,
+    "scholarIdAtOpen": "visjoin_37",
+    "causalDeaths": [],
+    "causalFlag": false,
+    "vetAtOpen": null,
+    "vetAtClose": 17,
+    "vetDelta": null
+   }
+  ],
+  "nonCommittedW4": 0,
+  "censusErrors": 0,
+  "fastW4": [],
+  "fastNonCommittedW4": 0,
+  "engineOpensW4": 2,
+  "engineOpensDistinctW4": 2,
+  "policyOnlyOpensW4": 0
+ },
+ "census": {
+  "alive": 1,
+  "dead": 0,
+  "people": [
+   {
+    "id": "visjoin_37",
+    "name": "Sung-min Dongbang",
+    "dead": false,
+    "occupation": "army medic",
+    "npcAbilities": 0
+   }
+  ],
+  "fallen": [
+   {
+    "id": "gen_45iyi58",
+    "name": "Jada",
+    "day": 10,
+    "cause": "ambush"
+   },
+   {
+    "id": "chloe_dubois",
+    "name": "Chloe",
+    "day": 19,
+    "cause": "a stranger"
+   },
+   {
+    "id": "gen_lcilasj",
+    "name": "Rafael",
+    "day": 30,
+    "cause": "sickness"
+   },
+   {
+    "id": "gen_ydnfjte",
+    "name": "Silas",
+    "day": 32,
+    "cause": "the expedition"
+   },
+   {
+    "id": "tom_baker",
+    "name": "Tom",
+    "day": 33,
+    "cause": "sickness"
+   },
+   {
+    "id": "gen_aaf9q9d",
+    "name": "Casey",
+    "day": 34,
+    "cause": "sickness"
+   },
+   {
+    "id": "ava_garcia",
+    "name": "Ava",
+    "day": 39,
+    "cause": "a stranger"
+   },
+   {
+    "id": "miguel_santos",
+    "name": "Miguel",
+    "day": 41,
+    "cause": "combat"
+   },
+   {
+    "id": "desmond_clarke",
+    "name": "Desmond",
+    "day": 41,
+    "cause": "starvation"
+   },
+   {
+    "id": "app_mgpsphqu18",
+    "name": "Therese",
+    "day": 44,
+    "cause": "a stranger"
+   },
+   {
+    "id": "visjoin_43",
+    "name": "Milo",
+    "day": 51,
+    "cause": "starvation"
+   },
+   {
+    "id": "gen_5lpzahe",
+    "name": "Morgan",
+    "day": 54,
+    "cause": "the wild"
+   }
+  ],
+  "pantryKcal": 0,
+  "scale": "regional",
+  "mantle": "Sung-min Dongbang"
+ },
+ "veterans": {
+  "rd5ready": false,
+  "rd5short": [
+   "armor",
+   "weapons",
+   "veterans"
+  ],
+  "rd5veterans": 0,
+  "rd5armored": 1,
+  "rd5armed": 1,
+  "rd5tricks": 17,
+  "rd5demand": {
+   "armored": 4,
+   "armorP": 15,
+   "armed": 6,
+   "tricks": 3,
+   "veterans": 2
+  },
+  "unlockedWave": 4,
+  "w4plusKills": 0,
+  "killLog": [],
+  "killers": {},
+  "livingVeterans": [],
+  "livingVeteranCount": 0,
+  "vetFights": 17,
+  "vetFirstDay": 54,
+  "vetDpsFledSeen": 0
+ },
+ "withdrawal": null,
+ "peakLivingVeterans": 0,
+ "peakLivingVetDay": null,
+ "peakLivingVetKillers": [],
+ "releaseSnap": null,
+ "feastChain": {
+  "feasts": 0,
+  "armedFeasts": 0,
+  "fsFeasts": 0,
+  "fsArmedFeasts": 0,
+  "facedDraw": 0,
+  "devotionChannels": 44,
+  "huntSorties": 9,
+  "huntFeastFights": 0,
+  "huntWaveFights": 3,
+  "huntNoTarget": 6,
+  "huntGone": 0,
+  "huntUnreached": 6,
+  "feastedDays": 0,
+  "armedDays": 50,
+  "surgeDay": null,
+  "surgeSpends": [],
+  "surgeMode": null,
+  "feastedDayFights": [],
+  "surgeDayFights": null
+ },
+ "duskCensus": {
+  "days": [
+   {
+    "day": 1,
+    "atHaven": true
+   },
+   {
+    "day": 2,
+    "atHaven": true
+   },
+   {
+    "day": 3,
+    "atHaven": true
+   },
+   {
+    "day": 5,
+    "atHaven": true
+   },
+   {
+    "day": 7,
+    "atHaven": false
+   },
+   {
+    "day": 8,
+    "atHaven": false
+   },
+   {
+    "day": 9,
+    "atHaven": false
+   },
+   {
+    "day": 10,
+    "atHaven": true
+   },
+   {
+    "day": 11,
+    "atHaven": false
+   },
+   {
+    "day": 12,
+    "atHaven": false
+   },
+   {
+    "day": 14,
+    "atHaven": true
+   },
+   {
+    "day": 17,
+    "atHaven": true
+   },
+   {
+    "day": 19,
+    "atHaven": false
+   },
+   {
+    "day": 20,
+    "atHaven": false
+   },
+   {
+    "day": 21,
+    "atHaven": false
+   },
+   {
+    "day": 23,
+    "atHaven": false
+   },
+   {
+    "day": 25,
+    "atHaven": false
+   },
+   {
+    "day": 26,
+    "atHaven": false
+   },
+   {
+    "day": 27,
+    "atHaven": false
+   },
+   {
+    "day": 28,
+    "atHaven": false
+   },
+   {
+    "day": 29,
+    "atHaven": false
+   },
+   {
+    "day": 31,
+    "atHaven": true
+   },
+   {
+    "day": 33,
+    "atHaven": true
+   },
+   {
+    "day": 35,
+    "atHaven": false
+   },
+   {
+    "day": 36,
+    "atHaven": false
+   },
+   {
+    "day": 37,
+    "atHaven": true
+   },
+   {
+    "day": 39,
+    "atHaven": false
+   },
+   {
+    "day": 40,
+    "atHaven": false
+   },
+   {
+    "day": 42,
+    "atHaven": true
+   },
+   {
+    "day": 44,
+    "atHaven": false
+   },
+   {
+    "day": 46,
+    "atHaven": false
+   },
+   {
+    "day": 48,
+    "atHaven": false
+   },
+   {
+    "day": 49,
+    "atHaven": true
+   },
+   {
+    "day": 51,
+    "atHaven": false
+   },
+   {
+    "day": 53,
+    "atHaven": true
+   },
+   {
+    "day": 55,
+    "atHaven": false
+   },
+   {
+    "day": 56,
+    "atHaven": true
+   },
+   {
+    "day": 57,
+    "atHaven": true
+   },
+   {
+    "day": 59,
+    "atHaven": true
+   }
+  ],
+  "atHaven": 16,
+  "away": 23,
+  "unknown": 0
+ },
+ "surgeSpends": [],
+ "ghostLines": [
+  {
+   "day": 10,
+   "companion": "Tom",
+   "line": "🚶 Chloe is back with Tom."
+  },
+  {
+   "day": 14,
+   "companion": "Chloe",
+   "line": "🚶 Morgan is back with Chloe."
+  },
+  {
+   "day": 14,
+   "companion": "Morgan",
+   "line": "🚶 Chloe is back with Morgan."
+  },
+  {
+   "day": 15,
+   "companion": "Miguel",
+   "line": "🚶 Casey is back with Miguel."
+  },
+  {
+   "day": 16,
+   "companion": "Tom",
+   "line": "🚶 Casey is back with Tom."
+  },
+  {
+   "day": 16,
+   "companion": "Rafael",
+   "line": "🚶 Desmond is back with Rafael."
+  },
+  {
+   "day": 16,
+   "companion": "Casey",
+   "line": "🚶 Tom is back with Casey."
+  }
+ ],
+ "ghostHits": [
+  {
+   "day": 10,
+   "companion": "Tom",
+   "line": "🚶 Chloe is back with Tom.",
+   "hit": false,
+   "firstNameHit": false,
+   "deathDay": null,
+   "deathCause": null,
+   "aliveCandidate": true
+  },
+  {
+   "day": 14,
+   "companion": "Chloe",
+   "line": "🚶 Morgan is back with Chloe.",
+   "hit": false,
+   "firstNameHit": false,
+   "deathDay": null,
+   "deathCause": null,
+   "aliveCandidate": true
+  },
+  {
+   "day": 14,
+   "companion": "Morgan",
+   "line": "🚶 Chloe is back with Morgan.",
+   "hit": false,
+   "firstNameHit": false,
+   "deathDay": null,
+   "deathCause": null,
+   "aliveCandidate": true
+  },
+  {
+   "day": 15,
+   "companion": "Miguel",
+   "line": "🚶 Casey is back with Miguel.",
+   "hit": false,
+   "firstNameHit": false,
+   "deathDay": null,
+   "deathCause": null,
+   "aliveCandidate": true
+  },
+  {
+   "day": 16,
+   "companion": "Tom",
+   "line": "🚶 Casey is back with Tom.",
+   "hit": false,
+   "firstNameHit": false,
+   "deathDay": null,
+   "deathCause": null,
+   "aliveCandidate": true
+  },
+  {
+   "day": 16,
+   "companion": "Rafael",
+   "line": "🚶 Desmond is back with Rafael.",
+   "hit": false,
+   "firstNameHit": false,
+   "deathDay": null,
+   "deathCause": null,
+   "aliveCandidate": true
+  },
+  {
+   "day": 16,
+   "companion": "Casey",
+   "line": "🚶 Tom is back with Casey.",
+   "hit": false,
+   "firstNameHit": false,
+   "deathDay": null,
+   "deathCause": null,
+   "aliveCandidate": true
+  }
+ ],
+ "firenarr": [
+  {
+   "day": 26,
+   "kind": "E2",
+   "line": "⚠ The store has fallen far from its recent high — the shelves are nearly bare.",
+   "capIdx": 3743
+  },
+  {
+   "day": 47,
+   "kind": "E2",
+   "line": "⚠ The store has fallen far from its recent high again — the shelves are nearly bare.",
+   "capIdx": 6911
+  }
+ ],
+ "hurtreturn": [],
+ "noTickDeferrals": [],
+ "trioCarry": [],
+ "warpathDeeds": null,
+ "ladder": {
+  "stage": 2,
+  "stageName": "Regional Standing",
+  "peak": 2,
+  "peakDay": 25,
+  "counted": 38,
+  "total": 38,
+  "tracks": {
+   "fight": 4,
+   "forage": 2,
+   "craft": 2,
+   "talk": 6,
+   "explore": 24
+  },
+  "countedTracks": {
+   "fight": 4,
+   "forage": 2,
+   "craft": 2,
+   "talk": 6,
+   "explore": 24
+  },
+  "capped": [],
+  "nextThreshold": 40,
+  "shortfall": 2,
+  "bundleBonus": 0,
+  "bundleStages": [],
+  "capstone": null,
+  "capstoneDay": null,
+  "dailyPeak": 2,
+  "lastDaily": {
+   "day": 60,
+   "stage": 2,
+   "peak": 2,
+   "counted": 38,
+   "total": 38,
+   "tracks": {
+    "fight": 4,
+    "forage": 2,
+    "craft": 2,
+    "talk": 6,
+    "explore": 24
+   },
+   "countedTracks": {
+    "fight": 4,
+    "forage": 2,
+    "craft": 2,
+    "talk": 6,
+    "explore": 24
+   },
+   "capped": [],
+   "shortfall": 2,
+   "bundleBonus": 0,
+   "bundleStages": [],
+   "capstone": null
+  }
+ },
+ "ladderLines": [],
+ "capstone": {
+  "enabled": true,
+  "attempts": [],
+  "delivery": null,
+  "missedSit": null,
+  "deedGate": null,
+  "deedGateFirstOkDay": null,
+  "refusalVoicing": [],
+  "firstRefusalCapIdx": null
+ },
+ "buyout": {
+  "enabled": true,
+  "earlyEnabled": true,
+  "attempts": [],
+  "window": [],
+  "windowEarly": []
+ },
+ "surgeEndState": {
+  "banked": true,
+  "used": false,
+  "useReceipt": null
+ },
+ "grantLog": [],
+ "standingTrace": [
+  {
+   "day": 1,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 5,
+    "tricks": 0,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 1,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 5,
+    "tricks": 0,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 1,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 5,
+    "tricks": 0,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 2,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 0,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 2,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 0,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 2,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 0,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 3,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 0,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 3,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 0,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 3,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 0,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 5,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 0,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 5,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 0,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 5,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 0,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 5,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 1,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 6,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 1,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 6,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 1,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 7,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 1,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 7,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 1,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 7,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 1,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 8,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 1,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 8,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 1,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 8,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 1,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 9,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 1,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 9,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 1,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 9,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 1,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 10,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 2,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 10,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 2,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 10,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "tricks",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 12,
+    "tricks": 2,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 11,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 11,
+    "tricks": 3,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 11,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 11,
+    "tricks": 3,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 11,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 11,
+    "tricks": 3,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 12,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 11,
+    "tricks": 4,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 12,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 11,
+    "tricks": 4,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 12,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 11,
+    "tricks": 4,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 12,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 5,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 13,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 5,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 13,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 5,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 14,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 6,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 14,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 6,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 14,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 6,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 14,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 6,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 15,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 6,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 15,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 6,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 15,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 7,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 16,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 7,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 16,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 7,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 17,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 8,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 17,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 8,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 17,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 8,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 17,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 9,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 18,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 9,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 18,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 9,
+    "tricks": 9,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 19,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 10,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 19,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 10,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 19,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 10,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 20,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 11,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 20,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 11,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 20,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 11,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 21,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 8,
+    "tricks": 12,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 21,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 12,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 21,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 12,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 21,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 22,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 22,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 23,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 23,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 23,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 23,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 24,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 24,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 13,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 25,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 25,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 25,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 26,
+   "war": 0,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 0,
+   "warPts": 0,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 26,
+   "war": 25,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 25,
+   "warPts": 1,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 26,
+   "war": 25,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 25,
+   "warPts": 1,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 27,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 27,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 27,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 28,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 28,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 28,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 29,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 29,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 29,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 29,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 30,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 30,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 8,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 31,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 7,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 31,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 7,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 31,
+   "war": 50,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 50,
+   "warPts": 2,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 7,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 31,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 7,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 32,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 7,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 32,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 5,
+    "armed": 7,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 33,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 6,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 33,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 6,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 33,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 6,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 33,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 6,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 34,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 5,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 34,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 5,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 35,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 4,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 35,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 4,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 35,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 4,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 36,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 4,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 36,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 4,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 36,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 4,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 37,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 5,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 37,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 5,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 37,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 5,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 37,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 5,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 38,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 5,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 38,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 4,
+    "armed": 5,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 39,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 5,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 39,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 5,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 39,
+   "war": 75,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 75,
+   "warPts": 3,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 5,
+    "tricks": 14,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 40,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 5,
+    "tricks": 15,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 40,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 5,
+    "tricks": 15,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 40,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 5,
+    "tricks": 15,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 40,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": true,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 3,
+    "armed": 5,
+    "tricks": 15,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 41,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 2,
+    "armed": 4,
+    "tricks": 15,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 41,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 2,
+    "armed": 4,
+    "tricks": 15,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 42,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 16,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 42,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 16,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 42,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 16,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 42,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 43,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 43,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 44,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 44,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 44,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 44,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 45,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 45,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 46,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 46,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 46,
+   "war": 150,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 150,
+   "warPts": 6,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 46,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 47,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 47,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 48,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 48,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 48,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 49,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 49,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 49,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 49,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 50,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 50,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 51,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 51,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 51,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 51,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 3,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 52,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 52,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 53,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 53,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 53,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 53,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 54,
+   "war": 175,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 175,
+   "warPts": 7,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 54,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 2,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 55,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 0,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 55,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 0,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 55,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 0,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 56,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 0,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 56,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 56,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 57,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 57,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 57,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 57,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 58,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 58,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 59,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 59,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 59,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 59,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 60,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  },
+  {
+   "day": 60,
+   "war": 200,
+   "diplomacy": 0,
+   "plenty": 0,
+   "raw": 200,
+   "warPts": 8,
+   "links": 0,
+   "feasts": 0,
+   "rd4ready": false,
+   "rd5ready": false,
+   "rd5short": [
+    "armor",
+    "weapons",
+    "veterans"
+   ],
+   "rd5": {
+    "armored": 1,
+    "armed": 1,
+    "tricks": 17,
+    "veterans": 0
+   }
+  }
+ ],
+ "standingCfg": {
+  "warPerKill": 25,
+  "diplomacyPerLink": 34,
+  "plentyPerFeast": 20,
+  "t4": 100,
+  "t5": 200,
+  "feastQualityMin": 1,
+  "feastLogCap": 60,
+  "readyDemand": {
+   "4": {
+    "armored": 3,
+    "armorP": 10,
+    "armed": 5,
+    "tricks": 3,
+    "veterans": 1
+   },
+   "5": {
+    "armored": 4,
+    "armorP": 15,
+    "armed": 6,
+    "tricks": 3,
+    "veterans": 2
+   }
+  },
+  "plentyCapT5": 100
+ },
+ "feastHoldLog": [
+  {
+   "day": 1,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": false,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 14,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "Nobody is here to feast with.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 2,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": false,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 14,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": true,
+    "why": null,
+    "have": 39940,
+    "cost": 1500,
+    "bufferOk": true,
+    "invitable": 2,
+    "away": 9
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 3,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": false,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 14,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": true,
+    "why": null,
+    "have": 33930,
+    "cost": 1500,
+    "bufferOk": true,
+    "invitable": 2,
+    "away": 9
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 5,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": false,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 14,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": true,
+    "why": null,
+    "have": 28500,
+    "cost": 1500,
+    "bufferOk": true,
+    "invitable": 1,
+    "away": 10
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 7,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": false,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 14,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 8,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": false,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 14,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 9,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": false,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 14,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 10,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": false,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 14,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": true,
+    "why": null,
+    "have": 29900,
+    "cost": 1500,
+    "bufferOk": true,
+    "invitable": 2,
+    "away": 9
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 11,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": false,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 14,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 12,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 14,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": true,
+    "why": null,
+    "have": 26874,
+    "cost": 2800,
+    "bufferOk": true,
+    "invitable": 6,
+    "away": 2
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 17,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": true,
+    "why": null,
+    "have": 19450,
+    "cost": 3600,
+    "bufferOk": true,
+    "invitable": 8,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 19,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 20,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 21,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 23,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 25,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 26,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 27,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 28,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 29,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 31,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": true,
+    "why": null,
+    "have": 0,
+    "cost": 2400,
+    "bufferOk": false,
+    "invitable": 5,
+    "away": 1
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 33,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": true,
+    "why": null,
+    "have": 200,
+    "cost": 2000,
+    "bufferOk": false,
+    "invitable": 4,
+    "away": 1
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 35,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 36,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 37,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": true,
+    "why": null,
+    "have": 600,
+    "cost": 2000,
+    "bufferOk": false,
+    "invitable": 4,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 39,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 40,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 42,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": true,
+    "why": null,
+    "have": 0,
+    "cost": 1500,
+    "bufferOk": false,
+    "invitable": 1,
+    "away": 1
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 44,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 46,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 48,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 49,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": true,
+    "why": null,
+    "have": 0,
+    "cost": 1500,
+    "bufferOk": false,
+    "invitable": 1,
+    "away": 1
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 51,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 53,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": true,
+    "why": null,
+    "have": 0,
+    "cost": 1500,
+    "bufferOk": false,
+    "invitable": 1,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 55,
+   "atHaven": false,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "You need to be at the haven to host a feast.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 56,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "Nobody is here to feast with.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 57,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "Nobody is here to feast with.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  },
+  {
+   "day": 59,
+   "atHaven": true,
+   "feastDay": null,
+   "armed": true,
+   "reactor": false,
+   "lastFs": null,
+   "cadence": 7,
+   "cadenceBlocked": false,
+   "contrib": {
+    "gives": 0,
+    "trib": 0,
+    "total": 0
+   },
+   "plan": {
+    "ok": false,
+    "why": "Nobody is here to feast with.",
+    "have": 0,
+    "cost": 0,
+    "bufferOk": true,
+    "invitable": 0,
+    "away": 0
+   },
+   "fsFeastsCum": 0,
+   "feastsCum": 0
+  }
+ ],
+ "hostLog": [],
+ "waveTrace": [
+  {
+   "day": 1,
+   "w1": 0,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 1,
+   "w1": 0,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 1,
+   "w1": 0,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 2,
+   "w1": 0,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 2,
+   "w1": 0,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 2,
+   "w1": 0,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 3,
+   "w1": 0,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 3,
+   "w1": 0,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 3,
+   "w1": 0,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 5,
+   "w1": 0,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 5,
+   "w1": 0,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 5,
+   "w1": 0,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 5,
+   "w1": 1,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 6,
+   "w1": 1,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 6,
+   "w1": 1,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 7,
+   "w1": 1,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 7,
+   "w1": 1,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 7,
+   "w1": 1,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 8,
+   "w1": 1,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 8,
+   "w1": 1,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 8,
+   "w1": 1,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 9,
+   "w1": 4,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 9,
+   "w1": 4,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 0,
+   "contests": 0
+  },
+  {
+   "day": 9,
+   "w1": 4,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 1,
+   "contests": 0
+  },
+  {
+   "day": 10,
+   "w1": 4,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 1,
+   "contests": 0
+  },
+  {
+   "day": 10,
+   "w1": 4,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 1,
+   "contests": 0
+  },
+  {
+   "day": 10,
+   "w1": 4,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 1,
+   "contests": 0
+  },
+  {
+   "day": 11,
+   "w1": 4,
+   "w2": 0,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 2,
+   "contests": 0
+  },
+  {
+   "day": 11,
+   "w1": 4,
+   "w2": 1,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 2,
+   "contests": 0
+  },
+  {
+   "day": 11,
+   "w1": 4,
+   "w2": 1,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 2,
+   "contests": 0
+  },
+  {
+   "day": 12,
+   "w1": 4,
+   "w2": 1,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 2,
+   "contests": 0
+  },
+  {
+   "day": 12,
+   "w1": 4,
+   "w2": 1,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 2,
+   "contests": 0
+  },
+  {
+   "day": 12,
+   "w1": 4,
+   "w2": 1,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 2,
+   "contests": 0
+  },
+  {
+   "day": 12,
+   "w1": 4,
+   "w2": 1,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 3,
+   "contests": 0
+  },
+  {
+   "day": 13,
+   "w1": 4,
+   "w2": 2,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 3,
+   "contests": 0
+  },
+  {
+   "day": 13,
+   "w1": 4,
+   "w2": 2,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 3,
+   "contests": 0
+  },
+  {
+   "day": 14,
+   "w1": 4,
+   "w2": 2,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 3,
+   "contests": 0
+  },
+  {
+   "day": 14,
+   "w1": 4,
+   "w2": 2,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 3,
+   "contests": 0
+  },
+  {
+   "day": 14,
+   "w1": 4,
+   "w2": 2,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 3,
+   "contests": 0
+  },
+  {
+   "day": 14,
+   "w1": 4,
+   "w2": 2,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 3,
+   "contests": 0
+  },
+  {
+   "day": 15,
+   "w1": 4,
+   "w2": 2,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 3,
+   "contests": 0
+  },
+  {
+   "day": 15,
+   "w1": 4,
+   "w2": 2,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 3,
+   "contests": 0
+  },
+  {
+   "day": 15,
+   "w1": 4,
+   "w2": 3,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 3,
+   "contests": 0
+  },
+  {
+   "day": 16,
+   "w1": 5,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 0
+  },
+  {
+   "day": 16,
+   "w1": 5,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 0
+  },
+  {
+   "day": 17,
+   "w1": 7,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 0
+  },
+  {
+   "day": 17,
+   "w1": 7,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 0
+  },
+  {
+   "day": 17,
+   "w1": 7,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 0
+  },
+  {
+   "day": 17,
+   "w1": 7,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 0
+  },
+  {
+   "day": 18,
+   "w1": 7,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 0
+  },
+  {
+   "day": 18,
+   "w1": 7,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 0
+  },
+  {
+   "day": 19,
+   "w1": 8,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 19,
+   "w1": 8,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 19,
+   "w1": 8,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 20,
+   "w1": 8,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 20,
+   "w1": 8,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 20,
+   "w1": 8,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 21,
+   "w1": 8,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 21,
+   "w1": 8,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 21,
+   "w1": 8,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 21,
+   "w1": 9,
+   "w2": 4,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 22,
+   "w1": 9,
+   "w2": 5,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 22,
+   "w1": 9,
+   "w2": 5,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 23,
+   "w1": 9,
+   "w2": 6,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 23,
+   "w1": 9,
+   "w2": 6,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 23,
+   "w1": 9,
+   "w2": 6,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 23,
+   "w1": 9,
+   "w2": 6,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 24,
+   "w1": 10,
+   "w2": 6,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 24,
+   "w1": 10,
+   "w2": 6,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 1
+  },
+  {
+   "day": 25,
+   "w1": 10,
+   "w2": 6,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 25,
+   "w1": 10,
+   "w2": 6,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 25,
+   "w1": 10,
+   "w2": 6,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 26,
+   "w1": 10,
+   "w2": 6,
+   "w3": 0,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 26,
+   "w1": 11,
+   "w2": 6,
+   "w3": 1,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 26,
+   "w1": 11,
+   "w2": 6,
+   "w3": 1,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 27,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 27,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 27,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 28,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 28,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 28,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 29,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 29,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 29,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 29,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 30,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 30,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 4,
+   "contests": 2
+  },
+  {
+   "day": 31,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 31,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 31,
+   "w1": 11,
+   "w2": 6,
+   "w3": 2,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 31,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 32,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 32,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 33,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 33,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 33,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 33,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 34,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 34,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 35,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 35,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 35,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 36,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 36,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 36,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 37,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 37,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 37,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 37,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 38,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 38,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 39,
+   "w1": 11,
+   "w2": 6,
+   "w3": 3,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 39,
+   "w1": 11,
+   "w2": 6,
+   "w3": 4,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 39,
+   "w1": 11,
+   "w2": 6,
+   "w3": 4,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 40,
+   "w1": 12,
+   "w2": 6,
+   "w3": 5,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 40,
+   "w1": 12,
+   "w2": 6,
+   "w3": 5,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 40,
+   "w1": 12,
+   "w2": 6,
+   "w3": 5,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 40,
+   "w1": 12,
+   "w2": 6,
+   "w3": 5,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 2
+  },
+  {
+   "day": 41,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 41,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 42,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 42,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 42,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 42,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 43,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 43,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 44,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 44,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 44,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 44,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 45,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 45,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 46,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 46,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 46,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 46,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 47,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 47,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 48,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 48,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 48,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 49,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 49,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 49,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 49,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 50,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 50,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 51,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 51,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 51,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 51,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 3
+  },
+  {
+   "day": 52,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 4
+  },
+  {
+   "day": 52,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 4
+  },
+  {
+   "day": 53,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 4
+  },
+  {
+   "day": 53,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 4
+  },
+  {
+   "day": 53,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 4
+  },
+  {
+   "day": 53,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 4
+  },
+  {
+   "day": 54,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 4
+  },
+  {
+   "day": 54,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 0,
+   "w5": 0,
+   "crises": 5,
+   "contests": 4
+  },
+  {
+   "day": 55,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 4
+  },
+  {
+   "day": 55,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 4
+  },
+  {
+   "day": 55,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 4
+  },
+  {
+   "day": 56,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 5
+  },
+  {
+   "day": 56,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 5
+  },
+  {
+   "day": 56,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 5
+  },
+  {
+   "day": 57,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 5
+  },
+  {
+   "day": 57,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 5
+  },
+  {
+   "day": 57,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 5
+  },
+  {
+   "day": 57,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 5
+  },
+  {
+   "day": 58,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 5
+  },
+  {
+   "day": 58,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 5
+  },
+  {
+   "day": 59,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 6
+  },
+  {
+   "day": 59,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 6
+  },
+  {
+   "day": 59,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 6
+  },
+  {
+   "day": 59,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 6
+  },
+  {
+   "day": 60,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 6
+  },
+  {
+   "day": 60,
+   "w1": 14,
+   "w2": 6,
+   "w3": 6,
+   "w4": 2,
+   "w5": 0,
+   "crises": 5,
+   "contests": 6
+  }
+ ],
+ "wavesFacedKeys": {
+  "hushwolf": 1,
+  "sanjun": 1,
+  "mirrormoth": 1,
+  "nightlight_catfish": 1,
+  "moderator": 2,
+  "paparazzo": 2,
+  "giant_mosquito": 2,
+  "memory_projector": 2,
+  "sweeps_week": 1,
+  "rut_king": 1,
+  "gallowdeer": 1,
+  "belltoad": 1,
+  "hummice": 1,
+  "heckler": 2,
+  "bright_idea": 2,
+  "nightcourt": 1,
+  "focus_group": 3,
+  "focus_group_eye": 1,
+  "callback": 3,
+  "spool": 3,
+  "terms_of_service": 3,
+  "cliffhanger": 1,
+  "chorus_line": 3,
+  "living_wire": 1,
+  "buffering": 3,
+  "glasswing": 1,
+  "congregation": 4,
+  "algorithm": 4
+ },
+ "crisisKeys": [
+  "the-siege",
+  "first-grave",
+  "schism",
+  "breach",
+  "hunger-winter"
+ ],
+ "inviteClass": "village-lost",
+ "deathRecords": [
+  {
+   "channel": "registerDeath",
+   "vid": "gen_45iyi58",
+   "name": "Jada",
+   "cause": "ambush",
+   "day": 10,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "chloe_dubois",
+   "name": "Chloe",
+   "cause": "alien",
+   "day": 19,
+   "fightLive": true,
+   "fightOver": false,
+   "monsters": [
+    {
+     "id": "belltoad",
+     "wave": 1
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": null,
+   "name": "Stranger",
+   "cause": "combat",
+   "day": 28,
+   "fightLive": true,
+   "fightOver": false,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_lcilasj",
+   "name": "Rafael",
+   "cause": "sickness",
+   "day": 30,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_ydnfjte",
+   "name": "Silas Hamilton",
+   "cause": "the expedition",
+   "day": 32,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "tom_baker",
+   "name": "Tom",
+   "cause": "sickness",
+   "day": 33,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_aaf9q9d",
+   "name": "Casey",
+   "cause": "sickness",
+   "day": 34,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "ava_garcia",
+   "name": "Ava",
+   "cause": "alien",
+   "day": 39,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "tbVillagerFalls",
+   "vid": "miguel_santos",
+   "name": "Miguel",
+   "cause": "combat",
+   "day": 41,
+   "fightLive": true,
+   "fightOver": false,
+   "monsters": [
+    {
+     "id": "buffering",
+     "wave": 3
+    }
+   ]
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "desmond_clarke",
+   "name": "Desmond Clarke",
+   "cause": "starvation",
+   "day": 41,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "app_mgpsphqu18",
+   "name": "Therese",
+   "cause": "alien",
+   "day": 44,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "visjoin_43",
+   "name": "Milo",
+   "cause": "starvation",
+   "day": 51,
+   "fightLive": false,
+   "fightOver": null,
+   "monsters": []
+  },
+  {
+   "channel": "registerDeath",
+   "vid": "gen_5lpzahe",
+   "name": "Morgan Owens",
+   "cause": "the wild",
+   "day": 54,
+   "fightLive": true,
+   "fightOver": true,
+   "monsters": [
+    {
+     "id": "congregation",
+     "wave": 4
+    }
+   ]
+  }
+ ],
+ "deathWrapErrors": 0,
+ "blockedArrivals": [
+  {
+   "line": "The Ugly-Eyes stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Ugly-Eyes",
+   "wave": null,
+   "capIdx": 4904,
+   "day": 38
+  },
+  {
+   "line": "The Loud Beast stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Loud Beast",
+   "wave": null,
+   "capIdx": 7145,
+   "day": 50
+  },
+  {
+   "line": "The Congregation stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "congregation",
+   "rawName": "The Congregation",
+   "wave": 4,
+   "capIdx": 7242,
+   "day": 51
+  },
+  {
+   "line": "The Loud Beast stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "congregation",
+   "rawName": "The Loud Beast",
+   "wave": 4,
+   "capIdx": 7248,
+   "day": 51
+  },
+  {
+   "line": "The Loud Beast stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Loud Beast",
+   "wave": null,
+   "capIdx": 7343,
+   "day": 52
+  },
+  {
+   "line": "The Congregation stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "congregation",
+   "rawName": "The Congregation",
+   "wave": 4,
+   "capIdx": 7347,
+   "day": 52
+  },
+  {
+   "line": "The Algorithm stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": "algorithm",
+   "rawName": "The Algorithm",
+   "wave": 4,
+   "capIdx": 7586,
+   "day": 53
+  },
+  {
+   "line": "The Big Ugly stops at the boundary — pacing, unwilling. Something else is already here. It's still out there.",
+   "monster": null,
+   "rawName": "The Big Ugly",
+   "wave": null,
+   "capIdx": 8622,
+   "day": 59
+  }
+ ],
+ "companionGuard": {
+  "skips": 0,
+  "medicDutyBlocked": 5
+ },
+ "planDeath": {
+  "deathCleanups": 0,
+  "removalCleanups": 0
+ }
+}
