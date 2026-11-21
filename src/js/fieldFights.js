@@ -926,44 +926,6 @@
         // modifiers a villager holds (bird_whisperer, third_eye, beast_calm)
         // read here the way they read for the player: seen first, given room.
         if (gpF) { try { evade = GPf.fieldEvade(gpF, evade); } catch (e) { console.warn('[godpath] fieldEvade', e); } }
-        // M1RANGE (sim-m1range-a, finding #2590): the lead stands their
-        // ground when they can strike first — a ranged weapon WITH ammo
-        // lowers the slip-away chance. Env-gated: M1RANGE=1; unset is
-        // byte-identical behavior. Bow/crossbow/sling term -0.15; the
-        // searcaster (gun tier) -0.25. The predicate is the volley's
-        // own: the equipped ranged weapon whose def carries
-        // weapon.ammo, with >=1 ammo counted by item id OR material
-        // in the lead's pack. A spear in the ranged slot takes no
-        // ammo and earns nothing; a searcaster with 0 fusion cells
-        // earns nothing. Applied before the clamp, like every other
-        // term. Recorded on rec for the instrument (m1rangeTerm).
-        var _m1Term = 0;
-        try {
-          if (typeof process !== 'undefined' && process.env && process.env.M1RANGE === '1' && S && S.equipment && S.equipment.rangedWeaponOf) {
-            var _m1rw = S.equipment.rangedWeaponOf(vp, this.data.items);
-            if (_m1rw) {
-              var _m1rid = _m1rw.itemId || _m1rw.id;
-              var _m1rdef = null;
-              for (var _m1di = 0; _m1di < (this.data.items || []).length; _m1di++) {
-                if (this.data.items[_m1di].id === _m1rid) { _m1rdef = this.data.items[_m1di]; break; }
-              }
-              var _m1ammo = (_m1rdef && _m1rdef.weapon) ? _m1rdef.weapon.ammo : null;
-              if (_m1ammo) {
-                var _m1n = 0;
-                var _m1items = vp.items || [];
-                for (var _m1ai = 0; _m1ai < _m1items.length; _m1ai++) {
-                  var _m1ent = _m1items[_m1ai], _m1eid = null, _m1mat = null;
-                  if (typeof _m1ent === 'string') { _m1eid = _m1ent; }
-                  else if (_m1ent) { _m1eid = _m1ent.itemId || _m1ent.id; _m1mat = _m1ent.material; }
-                  if (_m1eid === _m1ammo || _m1mat === _m1ammo) _m1n += (typeof _m1ent === 'string') ? 1 : (_m1ent.units || 1);
-                }
-                if (_m1n >= 1) _m1Term = (_m1rid === 'searcaster') ? -0.25 : -0.15;
-              }
-            }
-          }
-        } catch (e) {}
-        evade += _m1Term;
-        try { rec.m1rangeTerm = _m1Term; } catch (e) {}
         evade = clamp(evade, 0.05, 0.90);
         if (RR() < evade) {
           rec.outcome = 'evade';
