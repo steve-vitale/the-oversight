@@ -143,7 +143,7 @@ r246 analyzer vs r245 analyzer on the r245 corpus (5 seeds): diff shows ONLY int
 
 ## Gate + telemetry
 
-- Gate: **[PENDING — check.js --quick running; fill in before closeout]**
+- Gate: **336 passed, 8 failed, 0 attributable** (adoption run, `node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest`, 1126s, log `~/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/journey-establishment-r246-gate.log`). The 8: 5× 120s timeouts with no assertion failure (living-garden-deed-attainment, one-person-army-deed-attainment, trust-observer-neutrality, synergy-stall, capable-bot) + the measurement-proof staleness pair (proof-update + measurement-workflow, "Proof source inputs are not current" — proof re-sign round 22 still owed) + phone-frame stale receipt. All 8 are the documented standing set; the sibling r259 gate running concurrently shows the same families (336/8, same 5 shared failures) — load flake, not this run. Decisive: this run changed zero src/js files, so no game-code regression is attributable to it. Proofs re-run on the rebased tip 15/15 GREEN (log `hidden_files/r246-proof-adopt/proof-batch.log`).
 - Telemetry deviation check: ran 2026-11-20 ~23:10Z — 3 LOUD lines, all the KNOWN schema mismatch (baseline r132 BEFORE panel): `guardrails.deaths` 604 → 0, `guardrails.popAlive` 178 → 0, `guardrails.pantryKcal` 1,210,411 → 0 (n=5 files). The driver never emits `guardrails.*` fields, so the checker reads missing paths as 0 — expected per prereg, NOT a finding. `c3.starvationDeaths` produced no LOUD line. **Baseline NOT rolled** (prereg: never roll on a mismatch). No src/js change this run, so no guardrail move could be caused by this run's code anyway.
 
 ## Closeout
