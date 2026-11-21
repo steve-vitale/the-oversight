@@ -215,12 +215,22 @@ function analyzeFile(j) {
     classified.push(c);
   }
   // Band baseline: ALL wave-4+ leads (served or not) — the evadeP
-  // comparison population.
+  // comparison population. The awareness check only runs when
+  // opts.awareness is set (expedition meetings); world-tick / aid
+  // meetings skip it entirely, so the evadeP calibration is gated
+  // on awareness:true — mixing in the other meetings would compare
+  // a rate against a probability that was never consulted.
   let allLeads = 0, allAwareEvades = 0, allEvadePSum = 0, allEvadePN = 0;
+  let awareLeads = 0, awareEvades = 0, awareEvadePSum = 0;
   for (const m of meetings) {
     allLeads++;
     if (m.outcome === 'evade') allAwareEvades++;
     if (m.evade && m.evade.evadeP != null) { allEvadePSum += m.evade.evadeP; allEvadePN++; }
+    if (m.evade && m.evade.awareness) {
+      awareLeads++;
+      awareEvadePSum += m.evade.evadeP;
+      if (m.outcome === 'evade') awareEvades++;
+    }
   }
   // Depmat-attributable served count (tie-in to prior arms).
   let depmatServed = 0;
@@ -237,6 +247,9 @@ function analyzeFile(j) {
     allLeads: allLeads, allAwareEvades: allAwareEvades,
     allMeanEvadeP: allEvadePN ? +(allEvadePSum / allEvadePN).toFixed(3) : null,
     allAwareEvadeRate: allLeads ? +(allAwareEvades / allLeads).toFixed(3) : null,
+    awareLeads: awareLeads, awareEvades: awareEvades,
+    awareMeanEvadeP: awareLeads ? +(awareEvadePSum / awareLeads).toFixed(3) : null,
+    awareEvadeRate: awareLeads ? +(awareEvades / awareLeads).toFixed(3) : null,
     gameSha: j.gameSha || null, anchorCommit: j.anchorCommit || null };
 }
 
@@ -252,7 +265,9 @@ function analyzeDir(dir) {
   let pool = 0, unclassified = 0, errors = 0, evadePRepMismatch = 0;
   let evades = 0, engaged = 0, volleyFired = 0, volleyShots = 0, volleyHits = 0, volleyDmg = 0;
   let evadePSum = 0, evadePN = 0, awareEvades = 0;
+  let sqAwareLeads = 0, sqAwareEvades = 0, sqAwareEvadePSum = 0;
   let allLeads = 0, allAwareEvades = 0, allEvadePSum = 0, allEvadePN = 0;
+  let allAwareLeads = 0, allAwareEvadesBand = 0, allAwareEvadePSum = 0;
   let nat = 0, wins = 0, w4 = 0, w5 = 0, surv = [];
   const rtkShifts = [];
   const allMeetings = [];
@@ -261,6 +276,8 @@ function analyzeDir(dir) {
     evadePRepMismatch += s.evadePRepMismatch;
     allLeads += s.allLeads; allAwareEvades += s.allAwareEvades;
     if (s.allMeanEvadeP != null) { allEvadePSum += s.allMeanEvadeP * s.allLeads; allEvadePN += s.allLeads; }
+    allAwareLeads += s.awareLeads; allAwareEvadesBand += s.awareEvades;
+    if (s.awareMeanEvadeP != null) allAwareEvadePSum += s.awareMeanEvadeP * s.awareLeads;
     if (s.scaleRank === 'national' || (typeof s.scaleRank === 'string' && s.scaleRank.indexOf('national') !== -1)) nat++;
     if (s.won) wins++;
     if ((s.maxWave | 0) >= 4) w4++;
@@ -284,6 +301,13 @@ function analyzeDir(dir) {
       }
       if (m.cls === 'awareness-evade' && m.evadeP != null) { evadePSum += m.evadeP; evadePN++; awareEvades++; }
       else if (m.evadeP != null) { evadePSum += m.evadeP; evadePN++; }
+      // Awareness-gated served-quivered stats: only meetings where
+      // the check actually ran consult evadeP.
+      if (m.evade && m.evade.awareness) {
+        sqAwareLeads++;
+        if (m.evadeP != null) sqAwareEvadePSum += m.evadeP;
+        if (m.cls === 'awareness-evade') sqAwareEvades++;
+      }
     }
   }
   // Dominant evade class (bar c).
@@ -311,9 +335,14 @@ function analyzeDir(dir) {
     mechanism: mechanism,
     volley: { fired: volleyFired, ofEngaged: engaged, shots: volleyShots, hits: volleyHits, dmg: volleyDmg },
     evadeP: { servedQuiveredMean: evadePN ? +(evadePSum / evadePN).toFixed(3) : null,
-      servedQuiveredAwareRate: pool ? +(awareEvades / pool).toFixed(3) : null,
+      servedQuiveredAwareRate: sqAwareLeads ? +(sqAwareEvades / sqAwareLeads).toFixed(3) : null,
+      servedQuiveredAwareLeads: sqAwareLeads,
+      servedQuiveredAwareMeanEvadeP: sqAwareLeads ? +(sqAwareEvadePSum / sqAwareLeads).toFixed(3) : null,
       allLeadsMean: allEvadePN ? +(allEvadePSum / allEvadePN).toFixed(3) : null,
       allLeadsAwareRate: allLeads ? +(allAwareEvades / allLeads).toFixed(3) : null,
+      allAwareLeads: allAwareLeads,
+      allAwareRate: allAwareLeads ? +(allAwareEvadesBand / allAwareLeads).toFixed(3) : null,
+      allAwareMeanEvadeP: allAwareLeads ? +(allAwareEvadePSum / allAwareLeads).toFixed(3) : null,
       allLeads: allLeads },
     volleyHopeless: { meanRtkShiftRounds: meanRtkShift, n: rtkShifts.length },
     meetings: allMeetings,
@@ -366,7 +395,7 @@ function selftest() {
   function mrow(over) {
     const base = { seed: 1, day: 50, vid: 'v1', mid: 'eater', wave: 4, origin: 'expedition',
       rangedId: 'crude_bow', ammoAtEntry: 4,
-      evade: { tracking: 0, behavior: 'territorial', mSpeed: 3, mNotice: 5, mSize: 1, potential: false, abs: {}, abNight: false, evadeP: 0.24, gpTerm: false, obsBefore: 0, obsAfter: 0 },
+      evade: { awareness: true, tracking: 0, behavior: 'territorial', mSpeed: 3, mNotice: 5, mSize: 1, potential: false, abs: {}, abNight: false, evadeP: 0.24, gpTerm: false, obsBefore: 0, obsAfter: 0 },
       outcome: 'evade', rounds: 0, vTaken: 0, mDealt: 0, mHpStart: 1000, calledHelp: false,
       allyVid: null, ally2Vid: null, alliesN: 0, fleeHpFrac: null, fleeWise: false, fleeLearn: false,
       fleeHopeless: false, everHopeless: false, everWinning: false, intent: 'engage', intentWhy: 'seek',
@@ -413,6 +442,9 @@ function selftest() {
   check('analyzeFile pool is 3', fa.classified.length === 3, 'got ' + fa.classified.length);
   check('analyzeFile evadePRepMismatch 0', fa.evadePRepMismatch === 0);
   check('analyzeFile allLeads 4', fa.allLeads === 4);
+  check('analyzeFile aware-gated: 4 aware leads, 2 evades, meanEvadeP 0.24',
+    fa.awareLeads === 4 && fa.awareEvades === 2 && fa.awareMeanEvadeP === 0.24,
+    JSON.stringify({ awareLeads: fa.awareLeads, awareEvades: fa.awareEvades, awareMeanEvadeP: fa.awareMeanEvadeP }));
   console.log('EVADEBOW_ANALYZE_SELFTEST ' + passed + ' passed, ' + failed + ' failed');
   return failed;
 }
@@ -437,7 +469,7 @@ if (require.main === module) {
   console.log('dominant evade class: ' + diag.dominantEvadeClass + ' (' + diag.dominantEvadeN + '/' + diag.evades + ')');
   console.log('mechanism: ' + diag.mechanism);
   console.log('volley: fired ' + diag.volley.fired + '/' + diag.volley.ofEngaged + ' engaged, ' + diag.volley.shots + ' shots / ' + diag.volley.hits + ' hits / ' + diag.volley.dmg + ' dmg');
-  console.log('evadeP served-quivered mean ' + diag.evadeP.servedQuiveredMean + ' aware-rate ' + diag.evadeP.servedQuiveredAwareRate + ' | all-leads mean ' + diag.evadeP.allLeadsMean + ' aware-rate ' + diag.evadeP.allLeadsAwareRate);
+  console.log('evadeP served-quivered mean ' + diag.evadeP.servedQuiveredMean + ' aware-gated rate ' + diag.evadeP.servedQuiveredAwareRate + ' (n=' + diag.evadeP.servedQuiveredAwareLeads + ', meanEvadeP ' + diag.evadeP.servedQuiveredAwareMeanEvadeP + ') | all-leads aware-gated rate ' + diag.evadeP.allAwareRate + ' (n=' + diag.evadeP.allAwareLeads + ', meanEvadeP ' + diag.evadeP.allAwareMeanEvadeP + ')');
   console.log('volley hopeless: mean rtk shift +' + diag.volleyHopeless.meanRtkShiftRounds + ' rounds (n=' + diag.volleyHopeless.n + ')');
   if (ctl) console.log('ctl: pool ' + ctl.pool + ' | all-leads aware-rate ' + ctl.evadeP.allLeadsAwareRate);
   console.log('wall diag: national ' + diag.wall.national + '/8, wins ' + diag.wall.wins + '/8, wave4 ' + diag.wall.wave4 + '/8, wave5 ' + diag.wall.wave5 + '/8, median survival ' + diag.wall.medianSurvival + 'd');
