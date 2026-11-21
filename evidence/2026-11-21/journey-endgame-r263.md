@@ -320,8 +320,23 @@ within tolerance, not rolled.
 
 ## Gate
 
-(Pending — gate worktree run after this note is committed. To be filled.)
-
-## Landing
-
-(Pending — to be filled after the gate and merge.)
+- Adoption gate, `node scripts/check.js --quick` in the journey2-endgame
+  worktree on branch tip 08e6334ee (the separate r263-gate worktree the
+  first adoption planned was never built — the gate ran against the
+  identical tree in the existing worktree, saving a 10–20 min checkout
+  under load): **338 passed, 6 failed in 1080s.** Log: goal
+  `hidden_files/evidence/2026-11-21/journey-endgame-r263-gate.log`.
+- All 6 failures are standing-set members, identical to the r262 adoption
+  gate: the staleness pair (test-measurement-proof-update.js,
+  test-measurement-workflow.js), test-measurement-cache-flags.js,
+  test-phone-frame-proof.js (stale receipt), and two 120s
+  deed-attainment timeouts (living-garden, one-person-army).
+  **0 attributable to this branch** — evidence-only, no src/js change.
+  The five r262 timeout failures (trust-observer-neutrality,
+  synergy-stall, capable-bot, table-endings, succession-grief) all passed
+  this run.
+- No second (rebased-tip) gate: the branch is evidence-only; the rebase
+  onto master 9c4ed7a87 changes only the base (the ship loop's
+  version-bump commit), not the branch content, and no green-list test
+  reads this branch's evidence files. Rebase verified clean (see the
+  closeout record in ~/memory/2026-11-21.md).
