@@ -3,10 +3,10 @@
 - **Verdict: NO-GO, kind PARTICIPATION** (frozen bars §5 of the prereg; judged on the frozen judge, never re-scored)
 - **Arm:** sim-leadside-a · **Loop A run:** fleshout-20261121T0437Z (closed out by adoption worker, run fleshout-20261121T0615Z) · **Axis:** scale-onramp
 - **Findings:** #2628 (lend pool empty) / #2599 (searcaster that can never fire) / #2635 (granted gun vanishes when its holder dies — STAYS OPEN, see §4)
-- **Base master:** `b5514461c` · **Band:** 107141–107148 (verified fresh in the prereg) · **Anchor commit:** `b12018cfc` (LEADSIDE lever + instrument, proof 40/40 pre-revert)
-- **Revert commit:** `62c16da73` (LEADSIDE game code reverted; src/js hash-identical to base — see §7)
-- **Evidence commit:** (filled in after rebase — see §8)
-- **Prereg:** `evidence/2026-11-21/sim-leadside-a-prereg.md` (commit `878a821d9`)
+- **Base master:** `b5514461c` · **Band:** 107141–107148 (verified fresh in the prereg) · **Anchor commit:** `a53ad393a` (LEADSIDE lever + instrument, proof 40/40 pre-revert)
+- **Revert commit:** `d0619c33e` (LEADSIDE game code reverted; src/js hash-identical to master — see §9)
+- **Evidence commit:** `92844e1c5` (rebased tip before the hash-update commit; see §10)
+- **Prereg:** `evidence/2026-11-21/sim-leadside-a-prereg.md` (commit `5bf069833`)
 - **Horizon:** 150d death-aware (dead villages stop; +10d tail max). **Seeds:** 8 ctl + 8 arm, identical seeds, balanced panel.
 - **Substrate (both legs):** `VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 SENSEEXPED=1 BOWOPEN=1 SPEARGATE=1 GUNRATE=1 CELLGATE=1`, LEND OFF. Legs differ ONLY by the redirect rule (ctl: LEADSIDE unset; arm: LEADSIDE=1).
 
@@ -196,10 +196,12 @@ thing being watched.
   in the worktree (`src/js/contests.js` −9 lines, `src/js/game.js` −18
   lines; worktree src files already equal to base). Verified before
   committing: `git diff b5514461c -- src/js/contests.js src/js/game.js`
-  empty pre-commit; committed as `62c16da73`; verified after:
-  `git hash-object` of both files equals the base blobs
+  empty pre-commit; committed as `62c16da73` (rebased as `d0619c33e`);
+  verified after: `git hash-object` of both files equals the base blobs
   (`contests.js 302d0d61…`, `game.js 97956402…`); final `git diff
-  b5514461c -- src/js/` empty. **0 src/js delta vs base.**
+  b5514461c -- src/js/` empty pre-rebase, and `git diff master -- src/js/`
+  empty post-rebase (both files hash-identical to master `b20328ad9`).
+  **0 src/js delta vs master.**
 - **Proof test post-revert:** `node scripts/test-leadside-a.js` →
   **30/40, 10 fail BY DESIGN** (run twice, same 10 fails, deterministic).
   The 10 failing legs are exactly the LEADSIDE-specific ones — recorder
@@ -233,20 +235,21 @@ thing being watched.
   hung for 2+ minutes at ~06:50Z and was killed — `git log` itself had
   already printed; the slow step was the `git status` half. No work was
   lost; the main-tree tip `b20328ad9` was confirmed from the log output.)
-- **Rebase:** pending at the time this section was written — rebase onto
-  current master `b20328ad9` (ship bump, 06:15Z) after the evidence
-  commit; proof re-run after the rebase (same 30/40 by-design
-  expectation). Hash block in §10 updated after the rebase.
+- **Rebase:** rebased onto current master `b20328ad9` (ship bump,
+  06:15Z), clean, no conflicts. Proof re-run post-rebase: 30/40, same
+  10 by-design fails (see §9). Hash block in §10 updated after the
+  rebase; tip before the hash-update commit: `92844e1c5`.
 - **No push, no bump, no live verification.** Merged locally, pending
   ship — the ship loop owns deploys. Readiness reported to the
   coordinator; the coordinator merges.
 
 ## 10. Commits (this branch)
 
-- `878a821d9` — prereg (band 107141–107148 verified fresh)
-- `b12018cfc` — LEADSIDE lever (wave4Lead term + recorder) + instrument
+- `5bf069833` — prereg (band 107141–107148 verified fresh)
+- `a53ad393a` — LEADSIDE lever (wave4Lead term + recorder) + instrument
   (driver/analyzer/panel builder, proof 40/40)
-- `62c16da73` — REVERT LEADSIDE game code (NO-GO; src/js hash-identical
-  to base `b5514461c`)
-- (evidence + instrument + corpus + analysis + panel commit — hash below
-  after commit)
+- `d0619c33e` — REVERT LEADSIDE game code (NO-GO; src/js hash-identical
+  to master `b20328ad9`)
+- `92844e1c5` — evidence + instrument + corpus + analysis + panel
+- (hash-update commit — this file's §1/§9/§10, after the rebase; hash in
+  the coordinator's closeout note)
