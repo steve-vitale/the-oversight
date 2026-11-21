@@ -608,8 +608,8 @@ if (require.main === module) {
   console.log('GO rule: arm engaged-finishes ' + arm.engagedFinishes + ' (vDie ' + arm.engagedDie + '), hopeless-flee ' + arm.hopelessFlee + (ctl ? ' | ctl engaged-finishes ' + ctl.engagedFinishes + ', hopeless-flee ' + ctl.hopelessFlee : ' | no ctl'));
   console.log('guardrails: starvation arm ' + arm.starvationTotal + (ctl ? ' vs ctl ' + ctl.starvationTotal : '') + ' | median survival arm ' + arm.wall.medianSurvival + 'd' + (ctl ? ' vs ctl ' + ctl.wall.medianSurvival + 'd' : ''));
   if (ctl) console.log('ctl: pool ' + ctl.pool + ' | all-leads aware-rate ' + ctl.evadeP.allLeadsAwareRate);
-  console.log('wall arm: national ' + arm.wall.national + '/8, wins ' + arm.wall.wins + '/8, wave4 ' + arm.wall.wave4 + '/8, wave5 ' + arm.wall.wave5 + '/8, median survival ' + arm.wall.medianSurvival + 'd');
-  console.log('bars: a=' + arm.bars.aCompleteness + ' b=' + arm.bars.bPool + ' c=' + arm.bars.cDominantNamed + ' => ' + res.judge.verdict);
+  console.log('wall arm: national ' + arm.wall.national + '/' + arm.seeds + ', wins ' + arm.wall.wins + '/' + arm.seeds + ', wave4 ' + arm.wall.wave4 + '/' + arm.seeds + ', wave5 ' + arm.wall.wave5 + '/' + arm.seeds + ', median survival ' + arm.wall.medianSurvival + 'd');
+  console.log('bars: a=' + arm.bars.aCompleteness + ' b=' + arm.bars.bPool + ' c=' + res.judge.bars.cGoRule + ' d=' + res.judge.bars.dGuardrails + ' => ' + res.judge.verdict);
   console.log('analysis: ' + outPath);
 }
 
