@@ -1755,8 +1755,11 @@
               var _allyRoll = _liveAllies.length ? RR() : 1;
               var hittingAlly = _liveAllies.length > 0 && _allyRoll < _allyShare;
               // The blow's target, resolved only when it lands on an ally.
+              // Index _liveAllies (never hardcode slot numbers): with a
+              // third slot the live pair can be (1,3) or (2,3), and a
+              // hardcoded 1/2 pick can land on a downed ally (#2634).
               var _hitAllyIdx = 0;
-              if (hittingAlly) _hitAllyIdx = _liveAllies.length === 2 ? (RR() < 0.5 ? 1 : 2) : _liveAllies[0];
+              if (hittingAlly) _hitAllyIdx = _liveAllies.length >= 2 ? _liveAllies[Math.floor(RR() * _liveAllies.length)] : _liveAllies[0];
               var _hIdx = _hitAllyIdx || 1;
               var _hVid = _hIdx === 2 ? ally2Vid : allyVid;
               var _hName = _hIdx === 2 ? ally2Name : allyName;
@@ -1859,6 +1862,10 @@
                 // its slot at the block's end.
                 var _leechShare = 0;
                 if (vHasAb('leech') && total > 0) _leechShare = Math.floor(total / 2);
+                // DOWNEDTWICE (#2634): remember whether the target was
+                // live before this blow — the fall below fires only on
+                // the transition to 0, never on a re-hit at 0 HP.
+                var _hWasLive = _hHp > 0;
                 _hHp -= (total - _leechShare);
                 if (_leechShare > 0) {
                   vHp -= _leechShare; rec.vTaken += _leechShare; abRoundTaken += _leechShare;
@@ -1883,7 +1890,7 @@
                   try { var _gpHold = GPf.fieldAllyDown(gpF, gpC({ round: round })); if (_gpHold) _hHp = _gpHold; } catch (e) { console.warn('[godpath] ally down', e); }
                   gpTag(_gpLogN2);
                 }
-                if (_hHp <= 0) {
+                if (_hWasLive && _hHp <= 0) {
                   huntOpening.lost = true;
                   if (_hIdx === 2) ally2In = false; else allyIn = false;
                   rec.log.push(_hName + ' goes down!');
