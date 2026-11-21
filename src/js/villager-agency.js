@@ -635,20 +635,6 @@
       catch (e) { pool = this.data.monsters || []; }
       if (!pool.length) return;
       var m = pick(pool);
-      // SHAPE2 (sim-shape2-a): draft-armed-holder-as-lead. The draft
-      // fires on the picked monster's wave; when it swaps the lead,
-      // the agency record is re-captured for the drafted holder
-      // (agencyOf initializes their know/xp maps) and every read
-      // below — gate, allies, fight, kill/hurt bookkeeping — follows
-      // the holder. The post-flee + table checks above already ran
-      // on the natural lead, so no draft conjures a fight that
-      // should not happen. With SHAPE2 off this is a no-op.
-      try {
-        if (this._shape2DraftLead) {
-          var _sd2 = this._shape2DraftLead(vid, m, null, {});
-          if (_sd2 && _sd2.drafted && _sd2.lead) { vid = _sd2.lead; a = this.agencyOf(vid); }
-        }
-      } catch (e) {}
       var mName = 'something';
       try { mName = this.encDescribeMonster ? this.encDescribeMonster(m) : (m.unknown || 'something'); } catch (e) {}
       var nm = '';
