@@ -1,0 +1,8027 @@
+{
+  "verdict": "DIAG-NO-GO",
+  "kind": "BAR-FAIL",
+  "bars": [
+    {
+      "id": "0",
+      "name": "instrument validity (errors 0 on all 16 per-seed files)",
+      "value": "0 ctl errors + 0 rep errors",
+      "pass": true
+    },
+    {
+      "id": "1",
+      "name": "supply gap quantified (named source+sink with rates, pile-zero >= 0.40)",
+      "value": "source assign/deadfall 0.348/day; sink pocketAmmo 0.017/day; pile-zero 0.208 (201/966 days)",
+      "pass": false
+    },
+    {
+      "id": "2",
+      "name": "fiber-need events >= 5 (no-mats departures with pile fiber 0)",
+      "value": "65",
+      "pass": true
+    },
+    {
+      "id": "3",
+      "name": "personal-vs-pile separation measured (census present every seed, scholar mean stated)",
+      "value": "census present; scholar mean 0.03, max 1; villagers max 0",
+      "pass": true
+    }
+  ],
+  "ctl": {
+    "per": [
+      {
+        "seed": 107091,
+        "days": 151,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 465,
+        "deaths": 106,
+        "starvation": 0,
+        "starvationVillager": 0,
+        "communityLost": 0,
+        "instrumentErrors": 0,
+        "censusDays": 148,
+        "pileZeroDays": 2,
+        "pileZeroShare": 0.013513513513513514,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 3,
+        "firstPileFiber": 0,
+        "deadfallHauls": 26,
+        "deadfallFiber": 16,
+        "deadfallSticks": 36,
+        "deadfallStaffedDays": 117,
+        "sticksGe6Days": 43,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 16,
+            "out": 0,
+            "n": 16
+          },
+          "batchTurn": {
+            "in": 0,
+            "out": 1,
+            "n": 1
+          },
+          "pocketAmmo": {
+            "in": 0,
+            "out": 1,
+            "n": 3
+          }
+        },
+        "inTotal": 16,
+        "outTotal": 2,
+        "netEvents": 14,
+        "residual": -11,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 3,
+            "residual": -3
+          },
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 6,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 8,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 9,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 10,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 11,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 12,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 13,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 14,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 15,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 21,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 31,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 32,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 39,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 44,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 74,
+        "noMats": 36,
+        "noMatsFiber0": 0,
+        "noMatsFiber0Served": 0,
+        "craftOk": 3,
+        "craftFail": 0,
+        "craftAttempts": 3,
+        "ammoSinkFiber": 1,
+        "ammoSinkStick": 6,
+        "ledgerPocketOut": 1,
+        "pileFiber0Rows": 0,
+        "pileRows": 74,
+        "servedDepartures": 1,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 17,
+        "fiberStashLog": 12,
+        "saySample": [
+          {
+            "day": 2,
+            "line": "🍂 A woman, maybe 60s, with a shaved head gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 2,
+            "line": "🍂 A woman, maybe 30s, with weathered hands gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 2,
+            "line": "🍂 A woman, maybe 60s, with a shaved head gathers deadfall — 1 stick + 1 fiber. The pile grows. (3 sticks now.)"
+          },
+          {
+            "day": 3,
+            "line": "👁️ You saw A woman, maybe 60s, with a shaved head palm 1 plant fiber from the village stash and slide it into their pack."
+          },
+          {
+            "day": 4,
+            "line": "🍂 Madison gathers deadfall — 2 sticks + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Madison gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 A woman, maybe 60s, with a shaved head gathers deadfall — 2 sticks + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 A woman, maybe 60s, with a shaved head gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Emma gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 A person, maybe 50s gathers deadfall — 2 sticks + 1 fiber. The pile grows. (8 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Emma gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Kamsi gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 2,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5em9vij"
+          },
+          {
+            "day": 2,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "amina_diallo"
+          },
+          {
+            "day": 3,
+            "kind": "take",
+            "what": "Plant fiber",
+            "qty": 1,
+            "vid": "gen_igdqxjm"
+          },
+          {
+            "day": 4,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ivy_wang"
+          },
+          {
+            "day": 5,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5em9vij"
+          },
+          {
+            "day": 7,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ivy_wang"
+          },
+          {
+            "day": 10,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5em9vij"
+          },
+          {
+            "day": 12,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ivy_wang"
+          },
+          {
+            "day": 20,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ivy_wang"
+          },
+          {
+            "day": 30,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "amina_diallo"
+          },
+          {
+            "day": 38,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_0zi9syg"
+          },
+          {
+            "day": 43,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5em9vij"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 150,
+          "armor": 150
+        }
+      },
+      {
+        "seed": 107092,
+        "days": 74,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 175,
+        "deaths": 63,
+        "starvation": 1,
+        "starvationVillager": 1,
+        "communityLost": 1,
+        "instrumentErrors": 0,
+        "censusDays": 71,
+        "pileZeroDays": 2,
+        "pileZeroShare": 0.028169014084507043,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 34,
+        "firstPileFiber": 0,
+        "deadfallHauls": 112,
+        "deadfallFiber": 65,
+        "deadfallSticks": 224,
+        "deadfallStaffedDays": 7,
+        "sticksGe6Days": 64,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 65,
+            "out": 0,
+            "n": 65
+          },
+          "batchTurn": {
+            "in": 0,
+            "out": 1,
+            "n": 1
+          },
+          "pocketAmmo": {
+            "in": 0,
+            "out": 5,
+            "n": 5
+          }
+        },
+        "inTotal": 65,
+        "outTotal": 6,
+        "netEvents": 59,
+        "residual": -25,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 5,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 9,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 10,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 11,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 12,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 18,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 19,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 23,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 27,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 29,
+            "jump": -3,
+            "attributed": -1,
+            "residual": -2
+          },
+          {
+            "day": 30,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 31,
+            "jump": 4,
+            "attributed": 3,
+            "residual": 1
+          },
+          {
+            "day": 32,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 35,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 36,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 38,
+            "jump": 2,
+            "attributed": 4,
+            "residual": -2
+          },
+          {
+            "day": 42,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 47,
+            "jump": -3,
+            "attributed": 0,
+            "residual": -3
+          },
+          {
+            "day": 52,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 61,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 67,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 68,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 34,
+        "noMats": 0,
+        "noMatsFiber0": 0,
+        "noMatsFiber0Served": 0,
+        "craftOk": 3,
+        "craftFail": 2,
+        "craftAttempts": 5,
+        "ammoSinkFiber": 5,
+        "ammoSinkStick": 10,
+        "ledgerPocketOut": 5,
+        "pileFiber0Rows": 0,
+        "pileRows": 34,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 67,
+        "fiberStashLog": 26,
+        "saySample": [
+          {
+            "day": 2,
+            "line": "🍂 A woman, maybe 40s, with a slouched posture gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 3,
+            "line": "The stash count is off. 1 plant fiber missing. Nobody saw anything. Everybody suspects something."
+          },
+          {
+            "day": 4,
+            "line": "🍂 A woman, maybe 40s, with a slouched posture gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 A woman, maybe 40s, with restless hands gathers deadfall — 2 sticks + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 A woman, maybe 40s, with a slouched posture gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 Cristina gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 A woman, maybe 40s, with restless hands gathers deadfall — 2 sticks + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 A woman, maybe 40s, with a slouched posture gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Cristina gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 8,
+            "line": "🍂 Meera gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Cristina gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 11,
+            "line": "🍂 Eyerusalem gathers deadfall — 1 stick + 1 fiber. The pile grows. (10 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 3,
+            "kind": "take",
+            "what": "Plant fiber",
+            "qty": 1,
+            "vid": null
+          },
+          {
+            "day": 4,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "naran_tumen"
+          },
+          {
+            "day": 5,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "quinn_murphy"
+          },
+          {
+            "day": 7,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "naran_tumen"
+          },
+          {
+            "day": 8,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "quinn_murphy"
+          },
+          {
+            "day": 11,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "quinn_murphy"
+          },
+          {
+            "day": 18,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_a9svpu2"
+          },
+          {
+            "day": 18,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "meera_reddy"
+          },
+          {
+            "day": 22,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_a9svpu2"
+          },
+          {
+            "day": 22,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "meera_reddy"
+          },
+          {
+            "day": 26,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_a9svpu2"
+          },
+          {
+            "day": 28,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "meera_reddy"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 74,
+          "armor": 74
+        }
+      },
+      {
+        "seed": 107093,
+        "days": 151,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 325,
+        "deaths": 96,
+        "starvation": 0,
+        "starvationVillager": 0,
+        "communityLost": 0,
+        "instrumentErrors": 0,
+        "censusDays": 147,
+        "pileZeroDays": 10,
+        "pileZeroShare": 0.06802721088435375,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 0,
+        "firstPileFiber": 0,
+        "deadfallHauls": 105,
+        "deadfallFiber": 58,
+        "deadfallSticks": 228,
+        "deadfallStaffedDays": 7,
+        "sticksGe6Days": 140,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 58,
+            "out": 0,
+            "n": 58
+          },
+          "pocketAmmo": {
+            "in": 0,
+            "out": 6,
+            "n": 10
+          }
+        },
+        "inTotal": 58,
+        "outTotal": 6,
+        "netEvents": 52,
+        "residual": -52,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 3,
+            "residual": -3
+          },
+          {
+            "day": 4,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 8,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 9,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 11,
+            "jump": -2,
+            "attributed": 1,
+            "residual": -3
+          },
+          {
+            "day": 12,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 14,
+            "jump": -2,
+            "attributed": 2,
+            "residual": -4
+          },
+          {
+            "day": 15,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 18,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 19,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 22,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 23,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 24,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 26,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 32,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 33,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 34,
+            "jump": -2,
+            "attributed": -1,
+            "residual": -1
+          },
+          {
+            "day": 35,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 36,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 38,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 39,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 40,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 41,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 42,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 43,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 44,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 47,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 50,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 53,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 56,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 76,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 86,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 91,
+            "jump": 0,
+            "attributed": -1,
+            "residual": 1
+          },
+          {
+            "day": 92,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 97,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 103,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 107,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 116,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 119,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 124,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 126,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 130,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 133,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 142,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 143,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 144,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 145,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 147,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 150,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 62,
+        "noMats": 3,
+        "noMatsFiber0": 3,
+        "noMatsFiber0Served": 0,
+        "craftOk": 9,
+        "craftFail": 1,
+        "craftAttempts": 10,
+        "ammoSinkFiber": 6,
+        "ammoSinkStick": 20,
+        "ledgerPocketOut": 6,
+        "pileFiber0Rows": 12,
+        "pileRows": 62,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 62,
+        "fiberStashLog": 52,
+        "saySample": [
+          {
+            "day": 2,
+            "line": "🍂 Aria gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 2,
+            "line": "🍂 A person, maybe 50s, with a scarred cheek gathers deadfall — 2 sticks + 1 fiber. The pile grows. (3 sticks now.)"
+          },
+          {
+            "day": 2,
+            "line": "🍂 Aria gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Yesenia gathers deadfall — 2 sticks + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Ester gathers deadfall — 1 stick + 1 fiber. The pile grows. (3 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Sumet gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 Yesenia gathers deadfall — 2 sticks + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 Guadalupe gathers deadfall — 1 stick + 1 fiber. The pile grows. (7 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Landon gathers deadfall — 3 sticks + 1 fiber. The pile grows. (8 sticks now.)"
+          },
+          {
+            "day": 8,
+            "line": "🍂 Landon gathers deadfall — 3 sticks + 1 fiber. The pile grows. (8 sticks now.)"
+          },
+          {
+            "day": 11,
+            "line": "🍂 Yesenia gathers deadfall — 1 stick + 1 fiber. The pile grows. (8 sticks now.)"
+          },
+          {
+            "day": 14,
+            "line": "🍂 Landon gathers deadfall — 2 sticks + 1 fiber. The pile grows. (4 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 2,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "rosa_mendez"
+          },
+          {
+            "day": 4,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "nina_petrova"
+          },
+          {
+            "day": 5,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "rosa_mendez"
+          },
+          {
+            "day": 7,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "nina_petrova"
+          },
+          {
+            "day": 10,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "rosa_mendez"
+          },
+          {
+            "day": 10,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "nina_petrova"
+          },
+          {
+            "day": 13,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "rosa_mendez"
+          },
+          {
+            "day": 13,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "nina_petrova"
+          },
+          {
+            "day": 17,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "nina_petrova"
+          },
+          {
+            "day": 18,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_axew0rj"
+          },
+          {
+            "day": 21,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ines_duarte"
+          },
+          {
+            "day": 22,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_axew0rj"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 150,
+          "armor": 150
+        }
+      },
+      {
+        "seed": 107094,
+        "days": 150,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 175,
+        "deaths": 51,
+        "starvation": 1,
+        "starvationVillager": 1,
+        "communityLost": 0,
+        "instrumentErrors": 0,
+        "censusDays": 148,
+        "pileZeroDays": 2,
+        "pileZeroShare": 0.013513513513513514,
+        "scholarMean": 0.23648648648648649,
+        "scholarMax": 1,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 113,
+        "firstPileFiber": 0,
+        "deadfallHauls": 237,
+        "deadfallFiber": 113,
+        "deadfallSticks": 522,
+        "deadfallStaffedDays": 3,
+        "sticksGe6Days": 145,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 113,
+            "out": 0,
+            "n": 113
+          }
+        },
+        "inTotal": 113,
+        "outTotal": 0,
+        "netEvents": 113,
+        "residual": 0,
+        "unexplainedDays": [
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 4,
+            "residual": -4
+          },
+          {
+            "day": 5,
+            "jump": 4,
+            "attributed": 0,
+            "residual": 4
+          },
+          {
+            "day": 6,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 9,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 10,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 14,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 16,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 17,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 18,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 21,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 23,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 24,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 70,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 71,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          }
+        ],
+        "departures": 0,
+        "noMats": 0,
+        "noMatsFiber0": 0,
+        "noMatsFiber0Served": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftAttempts": 0,
+        "ammoSinkFiber": 0,
+        "ammoSinkStick": 0,
+        "ledgerPocketOut": 0,
+        "pileFiber0Rows": 0,
+        "pileRows": 0,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 114,
+        "fiberStashLog": 0,
+        "saySample": [
+          {
+            "day": 4,
+            "line": "🍂 A woman, maybe 50s gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Marvin gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Marvin gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 A woman, maybe 50s gathers deadfall — 1 stick + 1 fiber. The pile grows. (3 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Nino gathers deadfall — 1 stick + 1 fiber. The pile grows. (7 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Nino gathers deadfall — 1 stick + 1 fiber. The pile grows. (9 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Nino gathers deadfall — 1 stick + 1 fiber. The pile grows. (10 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Nino gathers deadfall — 1 stick + 1 fiber. The pile grows. (13 sticks now.)"
+          },
+          {
+            "day": 8,
+            "line": "🍂 Nino gathers deadfall — 1 stick + 1 fiber. The pile grows. (16 sticks now.)"
+          },
+          {
+            "day": 8,
+            "line": "🍂 Nino gathers deadfall — 2 sticks + 1 fiber. The pile grows. (19 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Nino gathers deadfall — 1 stick + 1 fiber. The pile grows. (20 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Nino gathers deadfall — 2 sticks + 1 fiber. The pile grows. (23 sticks now.)"
+          }
+        ],
+        "stashSample": [],
+        "craftDayCalls": {
+          "weapon": 149,
+          "armor": 149
+        }
+      },
+      {
+        "seed": 107095,
+        "days": 92,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "deaths": 51,
+        "starvation": 0,
+        "starvationVillager": 0,
+        "communityLost": 1,
+        "instrumentErrors": 0,
+        "censusDays": 90,
+        "pileZeroDays": 28,
+        "pileZeroShare": 0.3111111111111111,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 0,
+        "firstPileFiber": 0,
+        "deadfallHauls": 22,
+        "deadfallFiber": 11,
+        "deadfallSticks": 28,
+        "deadfallStaffedDays": 36,
+        "sticksGe6Days": 54,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 11,
+            "out": 0,
+            "n": 11
+          }
+        },
+        "inTotal": 11,
+        "outTotal": 0,
+        "netEvents": 11,
+        "residual": -11,
+        "unexplainedDays": [
+          {
+            "day": 3,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 4,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 5,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 7,
+            "jump": -1,
+            "attributed": 4,
+            "residual": -5
+          },
+          {
+            "day": 8,
+            "jump": 4,
+            "attributed": 0,
+            "residual": 4
+          },
+          {
+            "day": 10,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 11,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 12,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 15,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 19,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 37,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 38,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 62,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 67,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 27,
+        "noMats": 6,
+        "noMatsFiber0": 6,
+        "noMatsFiber0Served": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftAttempts": 0,
+        "ammoSinkFiber": 0,
+        "ammoSinkStick": 0,
+        "ledgerPocketOut": 0,
+        "pileFiber0Rows": 13,
+        "pileRows": 27,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 11,
+        "fiberStashLog": 11,
+        "saySample": [
+          {
+            "day": 3,
+            "line": "🍂 Etornam gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Desmond gathers deadfall — 2 sticks + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 A man, maybe 60s, with a long braid gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 Desmond gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Etornam gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 A man, maybe 60s, with a long braid gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Piper gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Sam gathers deadfall — 1 stick + 1 fiber. The pile grows. (7 sticks now.)"
+          },
+          {
+            "day": 11,
+            "line": "🍂 Etornam gathers deadfall — 1 stick + 1 fiber. The pile grows. (8 sticks now.)"
+          },
+          {
+            "day": 19,
+            "line": "🍂 Etornam gathers deadfall — 2 sticks + 1 fiber. The pile grows. (7 sticks now.)"
+          },
+          {
+            "day": 37,
+            "line": "🍂 Sam gathers deadfall — 2 sticks + 1 fiber. The pile grows. (8 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 5,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_f1fq9mg"
+          },
+          {
+            "day": 6,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5c6p66s"
+          },
+          {
+            "day": 9,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_f1fq9mg"
+          },
+          {
+            "day": 9,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "elif_demir"
+          },
+          {
+            "day": 14,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "elif_demir"
+          },
+          {
+            "day": 18,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_f1fq9mg"
+          },
+          {
+            "day": 19,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "elif_demir"
+          },
+          {
+            "day": 28,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5c6p66s"
+          },
+          {
+            "day": 36,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5c6p66s"
+          },
+          {
+            "day": 61,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_3c401xt"
+          },
+          {
+            "day": 66,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_3c401xt"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 92,
+          "armor": 92
+        }
+      },
+      {
+        "seed": 107096,
+        "days": 148,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 480,
+        "deaths": 109,
+        "starvation": 0,
+        "starvationVillager": 0,
+        "communityLost": 1,
+        "instrumentErrors": 0,
+        "censusDays": 145,
+        "pileZeroDays": 4,
+        "pileZeroShare": 0.027586206896551724,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 12,
+        "firstPileFiber": 0,
+        "deadfallHauls": 88,
+        "deadfallFiber": 41,
+        "deadfallSticks": 174,
+        "deadfallStaffedDays": 4,
+        "sticksGe6Days": 140,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 41,
+            "out": 0,
+            "n": 41
+          },
+          "pocketAmmo": {
+            "in": 0,
+            "out": 4,
+            "n": 4
+          }
+        },
+        "inTotal": 41,
+        "outTotal": 4,
+        "netEvents": 37,
+        "residual": -25,
+        "unexplainedDays": [
+          {
+            "day": 5,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 6,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 8,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 9,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 10,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 28,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 34,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 35,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 37,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 73,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 76,
+            "jump": -2,
+            "attributed": -1,
+            "residual": -1
+          },
+          {
+            "day": 77,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 79,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 80,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 81,
+            "jump": -2,
+            "attributed": -1,
+            "residual": -1
+          },
+          {
+            "day": 82,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 83,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 92,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 93,
+            "jump": -4,
+            "attributed": -2,
+            "residual": -2
+          },
+          {
+            "day": 100,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 101,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 109,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 115,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 118,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 121,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 125,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 129,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 61,
+        "noMats": 0,
+        "noMatsFiber0": 0,
+        "noMatsFiber0Served": 0,
+        "craftOk": 3,
+        "craftFail": 1,
+        "craftAttempts": 4,
+        "ammoSinkFiber": 4,
+        "ammoSinkStick": 8,
+        "ledgerPocketOut": 4,
+        "pileFiber0Rows": 0,
+        "pileRows": 61,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 41,
+        "fiberStashLog": 25,
+        "saySample": [
+          {
+            "day": 5,
+            "line": "🍂 Esmeralda gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 A person, maybe 40s gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Ines gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Esmeralda gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (9 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (11 sticks now.)"
+          },
+          {
+            "day": 10,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (10 sticks now.)"
+          },
+          {
+            "day": 10,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (12 sticks now.)"
+          },
+          {
+            "day": 10,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (13 sticks now.)"
+          },
+          {
+            "day": 12,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (16 sticks now.)"
+          },
+          {
+            "day": 12,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (17 sticks now.)"
+          },
+          {
+            "day": 13,
+            "line": "🍂 Gunther gathers deadfall — 2 sticks + 1 fiber. The pile grows. (20 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 5,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ines_duarte"
+          },
+          {
+            "day": 6,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_b5173a4"
+          },
+          {
+            "day": 9,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_b5173a4"
+          },
+          {
+            "day": 10,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ines_duarte"
+          },
+          {
+            "day": 27,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_b5173a4"
+          },
+          {
+            "day": 36,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_qzjlpyc"
+          },
+          {
+            "day": 72,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "lucas_brown"
+          },
+          {
+            "day": 75,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "visjoin_74"
+          },
+          {
+            "day": 76,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "lucas_brown"
+          },
+          {
+            "day": 78,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "visjoin_74"
+          },
+          {
+            "day": 79,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "lucas_brown"
+          },
+          {
+            "day": 80,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ruby_callaghan"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 148,
+          "armor": 148
+        }
+      },
+      {
+        "seed": 107097,
+        "days": 76,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 140,
+        "deaths": 62,
+        "starvation": 0,
+        "starvationVillager": 0,
+        "communityLost": 1,
+        "instrumentErrors": 0,
+        "censusDays": 74,
+        "pileZeroDays": 45,
+        "pileZeroShare": 0.6081081081081081,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 0,
+        "firstPileFiber": 0,
+        "deadfallHauls": 29,
+        "deadfallFiber": 15,
+        "deadfallSticks": 37,
+        "deadfallStaffedDays": 7,
+        "sticksGe6Days": 65,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 15,
+            "out": 0,
+            "n": 15
+          },
+          "batchTurn": {
+            "in": 0,
+            "out": 1,
+            "n": 1
+          }
+        },
+        "inTotal": 15,
+        "outTotal": 1,
+        "netEvents": 14,
+        "residual": -14,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 4,
+            "residual": -4
+          },
+          {
+            "day": 5,
+            "jump": 5,
+            "attributed": 2,
+            "residual": 3
+          },
+          {
+            "day": 6,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 8,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 9,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 12,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 15,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 18,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 20,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 22,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 23,
+            "jump": -1,
+            "attributed": 2,
+            "residual": -3
+          },
+          {
+            "day": 24,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 26,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 31,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 32,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 38,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 1,
+        "noMats": 0,
+        "noMatsFiber0": 0,
+        "noMatsFiber0Served": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftAttempts": 0,
+        "ammoSinkFiber": 0,
+        "ammoSinkStick": 0,
+        "ledgerPocketOut": 0,
+        "pileFiber0Rows": 1,
+        "pileRows": 1,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 17,
+        "fiberStashLog": 15,
+        "saySample": [
+          {
+            "day": 2,
+            "line": "🍂 A person, maybe 30s, with a scarred cheek gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 2,
+            "line": "🍂 A person, maybe 60s gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 3,
+            "line": "The stash count is off. 1 plant fiber missing. Nobody saw anything. Everybody suspects something."
+          },
+          {
+            "day": 4,
+            "line": "🍂 A person, maybe 30s, with a scarred cheek gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Oliver gathers deadfall — 2 sticks + 1 fiber. The pile grows. (3 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 A person, maybe 40s, with freckles gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 A person, maybe 50s gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 A person, maybe 40s, with freckles gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 Poniman gathers deadfall — 1 stick + 1 fiber. The pile grows. (8 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Poniman gathers deadfall — 1 stick + 1 fiber. The pile grows. (7 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Poniman gathers deadfall — 1 stick + 1 fiber. The pile grows. (9 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Poniman gathers deadfall — 2 sticks + 1 fiber. The pile grows. (11 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 2,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_m974ods"
+          },
+          {
+            "day": 3,
+            "kind": "take",
+            "what": "Plant fiber",
+            "qty": 1,
+            "vid": null
+          },
+          {
+            "day": 5,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "oliver_moore"
+          },
+          {
+            "day": 8,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_m974ods"
+          },
+          {
+            "day": 8,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "oliver_moore"
+          },
+          {
+            "day": 11,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_m974ods"
+          },
+          {
+            "day": 11,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "oliver_moore"
+          },
+          {
+            "day": 14,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "oliver_moore"
+          },
+          {
+            "day": 17,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "oliver_moore"
+          },
+          {
+            "day": 19,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_et8zg9r"
+          },
+          {
+            "day": 21,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "oliver_moore"
+          },
+          {
+            "day": 22,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_et8zg9r"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 76,
+          "armor": 76
+        }
+      },
+      {
+        "seed": 107098,
+        "days": 146,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "deaths": 105,
+        "starvation": 0,
+        "starvationVillager": 0,
+        "communityLost": 1,
+        "instrumentErrors": 0,
+        "censusDays": 143,
+        "pileZeroDays": 108,
+        "pileZeroShare": 0.7552447552447552,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 0,
+        "firstPileFiber": 0,
+        "deadfallHauls": 33,
+        "deadfallFiber": 17,
+        "deadfallSticks": 47,
+        "deadfallStaffedDays": 18,
+        "sticksGe6Days": 126,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 17,
+            "out": 0,
+            "n": 17
+          }
+        },
+        "inTotal": 17,
+        "outTotal": 0,
+        "netEvents": 17,
+        "residual": -17,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 5,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 6,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 7,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 8,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 9,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 11,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 12,
+            "jump": -1,
+            "attributed": 2,
+            "residual": -3
+          },
+          {
+            "day": 13,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 15,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 17,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 18,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 19,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 20,
+            "jump": -2,
+            "attributed": 1,
+            "residual": -3
+          },
+          {
+            "day": 21,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 27,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 28,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 33,
+            "jump": -1,
+            "attributed": 2,
+            "residual": -3
+          },
+          {
+            "day": 34,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 36,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 40,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 41,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 43,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 80,
+        "noMats": 56,
+        "noMatsFiber0": 56,
+        "noMatsFiber0Served": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftAttempts": 0,
+        "ammoSinkFiber": 0,
+        "ammoSinkStick": 0,
+        "ledgerPocketOut": 0,
+        "pileFiber0Rows": 80,
+        "pileRows": 80,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 20,
+        "fiberStashLog": 17,
+        "saySample": [
+          {
+            "day": 2,
+            "line": "🍂 Sanne gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 A woman, maybe 40s, with a slouched posture gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Darkhan gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 A woman, maybe 40s, with a slouched posture gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 8,
+            "line": "🍂 Sofia gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 8,
+            "line": "🍂 Darkhan gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Darkhan gathers deadfall — 1 stick + 1 fiber. The pile grows. (3 sticks now.)"
+          },
+          {
+            "day": 10,
+            "line": "🍂 Sofia gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 12,
+            "line": "🍂 Sofia gathers deadfall — 2 sticks + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 12,
+            "line": "🍂 Darkhan gathers deadfall — 2 sticks + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 12,
+            "line": "🔍 Sofia crouches over a towering emergent tree with a buttressed trunk, dropping pods full of silky fiber and dark seeds, studying it a moment before moving on. (1/3 looks)"
+          },
+          {
+            "day": 17,
+            "line": "🍂 Meera gathers deadfall — 2 sticks + 1 fiber. The pile grows. (7 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 4,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_t3qas9u"
+          },
+          {
+            "day": 4,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_zhcwv2o"
+          },
+          {
+            "day": 8,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_t3qas9u"
+          },
+          {
+            "day": 8,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_zhcwv2o"
+          },
+          {
+            "day": 11,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "sanne_bakker"
+          },
+          {
+            "day": 12,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_zhcwv2o"
+          },
+          {
+            "day": 14,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "sanne_bakker"
+          },
+          {
+            "day": 16,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_zhcwv2o"
+          },
+          {
+            "day": 17,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "sanne_bakker"
+          },
+          {
+            "day": 19,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_t3qas9u"
+          },
+          {
+            "day": 19,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_zhcwv2o"
+          },
+          {
+            "day": 26,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_zhcwv2o"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 145,
+          "armor": 145
+        }
+      }
+    ],
+    "seeds": 8,
+    "villageDays": 966,
+    "zeroDays": 201,
+    "pileZeroShare": 0.2080745341614907,
+    "needEvents": 65,
+    "inTotal": 336,
+    "outTotal": 19,
+    "kindTotals": {
+      "assign/deadfall": {
+        "in": 336,
+        "out": 0,
+        "n": 336
+      },
+      "batchTurn": {
+        "in": 0,
+        "out": 3,
+        "n": 3
+      },
+      "pocketAmmo": {
+        "in": 0,
+        "out": 16,
+        "n": 22
+      }
+    },
+    "domSource": "assign/deadfall",
+    "domSourceRate": 336,
+    "domSink": "pocketAmmo",
+    "domSinkRate": 16,
+    "domSourcePerDay": 0.34782608695652173,
+    "domSinkPerDay": 0.016563146997929608,
+    "inPerDay": 0.34782608695652173,
+    "outPerDay": 0.019668737060041408,
+    "errors": 0,
+    "censusPresent": true,
+    "scholarMeanBand": 0.02956081081081081,
+    "scholarMaxBand": 1,
+    "villagersMaxBand": 0,
+    "departures": 339,
+    "noMats": 101,
+    "craftAttempts": 22,
+    "craftOk": 18,
+    "craftFail": 4,
+    "ammoSinkFiber": 16,
+    "ledgerPocketOut": 16,
+    "deadfallHauls": 652,
+    "deadfallFiber": 336,
+    "deadfallSticks": 1296,
+    "deadfallStaffedDays": 199,
+    "sticksGe6Days": 777,
+    "scholarCraftAttempts": 0,
+    "scholarCraftOk": 0,
+    "scholarFiberSpent": 0,
+    "scholarPileDelta": 0,
+    "fiberSays": 349,
+    "fiberStashLog": 158,
+    "national": 0,
+    "wins": 0,
+    "wave4": 8,
+    "wave5": 3,
+    "communityLost": 5,
+    "starvation": 2,
+    "starvationVillager": 2,
+    "medianDays": 147,
+    "deaths": 643,
+    "residuals": [
+      {
+        "seed": 107091,
+        "residual": -11,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 3,
+            "residual": -3
+          },
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 6,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 8,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 9,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 10,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 11,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 12,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 13,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 14,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 15,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 21,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 31,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 32,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 39,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 44,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      },
+      {
+        "seed": 107092,
+        "residual": -25,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 5,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 9,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 10,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 11,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 12,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 18,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 19,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 23,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 27,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 29,
+            "jump": -3,
+            "attributed": -1,
+            "residual": -2
+          },
+          {
+            "day": 30,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 31,
+            "jump": 4,
+            "attributed": 3,
+            "residual": 1
+          },
+          {
+            "day": 32,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 35,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 36,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 38,
+            "jump": 2,
+            "attributed": 4,
+            "residual": -2
+          },
+          {
+            "day": 42,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 47,
+            "jump": -3,
+            "attributed": 0,
+            "residual": -3
+          },
+          {
+            "day": 52,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 61,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 67,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 68,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      },
+      {
+        "seed": 107093,
+        "residual": -52,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 3,
+            "residual": -3
+          },
+          {
+            "day": 4,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 8,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 9,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 11,
+            "jump": -2,
+            "attributed": 1,
+            "residual": -3
+          },
+          {
+            "day": 12,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 14,
+            "jump": -2,
+            "attributed": 2,
+            "residual": -4
+          },
+          {
+            "day": 15,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 18,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 19,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 22,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 23,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 24,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 26,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 32,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 33,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 34,
+            "jump": -2,
+            "attributed": -1,
+            "residual": -1
+          },
+          {
+            "day": 35,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 36,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 38,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 39,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 40,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 41,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 42,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 43,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 44,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 47,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 50,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 53,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 56,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 76,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 86,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 91,
+            "jump": 0,
+            "attributed": -1,
+            "residual": 1
+          },
+          {
+            "day": 92,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 97,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 103,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 107,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 116,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 119,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 124,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 126,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 130,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 133,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 142,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 143,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 144,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 145,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 147,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 150,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      },
+      {
+        "seed": 107094,
+        "residual": 0,
+        "unexplainedDays": [
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 4,
+            "residual": -4
+          },
+          {
+            "day": 5,
+            "jump": 4,
+            "attributed": 0,
+            "residual": 4
+          },
+          {
+            "day": 6,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 9,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 10,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 14,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 16,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 17,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 18,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 21,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 23,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 24,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 70,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 71,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          }
+        ]
+      },
+      {
+        "seed": 107095,
+        "residual": -11,
+        "unexplainedDays": [
+          {
+            "day": 3,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 4,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 5,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 7,
+            "jump": -1,
+            "attributed": 4,
+            "residual": -5
+          },
+          {
+            "day": 8,
+            "jump": 4,
+            "attributed": 0,
+            "residual": 4
+          },
+          {
+            "day": 10,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 11,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 12,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 15,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 19,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 37,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 38,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 62,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 67,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      },
+      {
+        "seed": 107096,
+        "residual": -25,
+        "unexplainedDays": [
+          {
+            "day": 5,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 6,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 8,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 9,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 10,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 28,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 34,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 35,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 37,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 73,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 76,
+            "jump": -2,
+            "attributed": -1,
+            "residual": -1
+          },
+          {
+            "day": 77,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 79,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 80,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 81,
+            "jump": -2,
+            "attributed": -1,
+            "residual": -1
+          },
+          {
+            "day": 82,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 83,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 92,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 93,
+            "jump": -4,
+            "attributed": -2,
+            "residual": -2
+          },
+          {
+            "day": 100,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 101,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 109,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 115,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 118,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 121,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 125,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 129,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      },
+      {
+        "seed": 107097,
+        "residual": -14,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 4,
+            "residual": -4
+          },
+          {
+            "day": 5,
+            "jump": 5,
+            "attributed": 2,
+            "residual": 3
+          },
+          {
+            "day": 6,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 8,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 9,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 12,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 15,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 18,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 20,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 22,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 23,
+            "jump": -1,
+            "attributed": 2,
+            "residual": -3
+          },
+          {
+            "day": 24,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 26,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 31,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 32,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 38,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      },
+      {
+        "seed": 107098,
+        "residual": -17,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 5,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 6,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 7,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 8,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 9,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 11,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 12,
+            "jump": -1,
+            "attributed": 2,
+            "residual": -3
+          },
+          {
+            "day": 13,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 15,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 17,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 18,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 19,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 20,
+            "jump": -2,
+            "attributed": 1,
+            "residual": -3
+          },
+          {
+            "day": 21,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 27,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 28,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 33,
+            "jump": -1,
+            "attributed": 2,
+            "residual": -3
+          },
+          {
+            "day": 34,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 36,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 40,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 41,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 43,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      }
+    ]
+  },
+  "rep": {
+    "per": [
+      {
+        "seed": 107091,
+        "days": 151,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 465,
+        "deaths": 106,
+        "starvation": 0,
+        "starvationVillager": 0,
+        "communityLost": 0,
+        "instrumentErrors": 0,
+        "censusDays": 148,
+        "pileZeroDays": 2,
+        "pileZeroShare": 0.013513513513513514,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 3,
+        "firstPileFiber": 0,
+        "deadfallHauls": 26,
+        "deadfallFiber": 16,
+        "deadfallSticks": 36,
+        "deadfallStaffedDays": 117,
+        "sticksGe6Days": 43,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 16,
+            "out": 0,
+            "n": 16
+          },
+          "batchTurn": {
+            "in": 0,
+            "out": 1,
+            "n": 1
+          },
+          "pocketAmmo": {
+            "in": 0,
+            "out": 1,
+            "n": 3
+          }
+        },
+        "inTotal": 16,
+        "outTotal": 2,
+        "netEvents": 14,
+        "residual": -11,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 3,
+            "residual": -3
+          },
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 6,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 8,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 9,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 10,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 11,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 12,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 13,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 14,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 15,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 21,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 31,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 32,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 39,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 44,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 74,
+        "noMats": 36,
+        "noMatsFiber0": 0,
+        "noMatsFiber0Served": 0,
+        "craftOk": 3,
+        "craftFail": 0,
+        "craftAttempts": 3,
+        "ammoSinkFiber": 1,
+        "ammoSinkStick": 6,
+        "ledgerPocketOut": 1,
+        "pileFiber0Rows": 0,
+        "pileRows": 74,
+        "servedDepartures": 1,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 17,
+        "fiberStashLog": 12,
+        "saySample": [
+          {
+            "day": 2,
+            "line": "🍂 A woman, maybe 60s, with a shaved head gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 2,
+            "line": "🍂 A woman, maybe 30s, with weathered hands gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 2,
+            "line": "🍂 A woman, maybe 60s, with a shaved head gathers deadfall — 1 stick + 1 fiber. The pile grows. (3 sticks now.)"
+          },
+          {
+            "day": 3,
+            "line": "👁️ You saw A woman, maybe 60s, with a shaved head palm 1 plant fiber from the village stash and slide it into their pack."
+          },
+          {
+            "day": 4,
+            "line": "🍂 Madison gathers deadfall — 2 sticks + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Madison gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 A woman, maybe 60s, with a shaved head gathers deadfall — 2 sticks + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 A woman, maybe 60s, with a shaved head gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Emma gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 A person, maybe 50s gathers deadfall — 2 sticks + 1 fiber. The pile grows. (8 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Emma gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Kamsi gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 2,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5em9vij"
+          },
+          {
+            "day": 2,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "amina_diallo"
+          },
+          {
+            "day": 3,
+            "kind": "take",
+            "what": "Plant fiber",
+            "qty": 1,
+            "vid": "gen_igdqxjm"
+          },
+          {
+            "day": 4,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ivy_wang"
+          },
+          {
+            "day": 5,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5em9vij"
+          },
+          {
+            "day": 7,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ivy_wang"
+          },
+          {
+            "day": 10,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5em9vij"
+          },
+          {
+            "day": 12,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ivy_wang"
+          },
+          {
+            "day": 20,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ivy_wang"
+          },
+          {
+            "day": 30,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "amina_diallo"
+          },
+          {
+            "day": 38,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_0zi9syg"
+          },
+          {
+            "day": 43,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5em9vij"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 150,
+          "armor": 150
+        }
+      },
+      {
+        "seed": 107092,
+        "days": 74,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 175,
+        "deaths": 63,
+        "starvation": 1,
+        "starvationVillager": 1,
+        "communityLost": 1,
+        "instrumentErrors": 0,
+        "censusDays": 71,
+        "pileZeroDays": 2,
+        "pileZeroShare": 0.028169014084507043,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 34,
+        "firstPileFiber": 0,
+        "deadfallHauls": 112,
+        "deadfallFiber": 65,
+        "deadfallSticks": 224,
+        "deadfallStaffedDays": 7,
+        "sticksGe6Days": 64,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 65,
+            "out": 0,
+            "n": 65
+          },
+          "batchTurn": {
+            "in": 0,
+            "out": 1,
+            "n": 1
+          },
+          "pocketAmmo": {
+            "in": 0,
+            "out": 5,
+            "n": 5
+          }
+        },
+        "inTotal": 65,
+        "outTotal": 6,
+        "netEvents": 59,
+        "residual": -25,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 5,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 9,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 10,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 11,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 12,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 18,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 19,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 23,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 27,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 29,
+            "jump": -3,
+            "attributed": -1,
+            "residual": -2
+          },
+          {
+            "day": 30,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 31,
+            "jump": 4,
+            "attributed": 3,
+            "residual": 1
+          },
+          {
+            "day": 32,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 35,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 36,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 38,
+            "jump": 2,
+            "attributed": 4,
+            "residual": -2
+          },
+          {
+            "day": 42,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 47,
+            "jump": -3,
+            "attributed": 0,
+            "residual": -3
+          },
+          {
+            "day": 52,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 61,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 67,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 68,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 34,
+        "noMats": 0,
+        "noMatsFiber0": 0,
+        "noMatsFiber0Served": 0,
+        "craftOk": 3,
+        "craftFail": 2,
+        "craftAttempts": 5,
+        "ammoSinkFiber": 5,
+        "ammoSinkStick": 10,
+        "ledgerPocketOut": 5,
+        "pileFiber0Rows": 0,
+        "pileRows": 34,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 67,
+        "fiberStashLog": 26,
+        "saySample": [
+          {
+            "day": 2,
+            "line": "🍂 A woman, maybe 40s, with a slouched posture gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 3,
+            "line": "The stash count is off. 1 plant fiber missing. Nobody saw anything. Everybody suspects something."
+          },
+          {
+            "day": 4,
+            "line": "🍂 A woman, maybe 40s, with a slouched posture gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 A woman, maybe 40s, with restless hands gathers deadfall — 2 sticks + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 A woman, maybe 40s, with a slouched posture gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 Cristina gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 A woman, maybe 40s, with restless hands gathers deadfall — 2 sticks + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 A woman, maybe 40s, with a slouched posture gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Cristina gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 8,
+            "line": "🍂 Meera gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Cristina gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 11,
+            "line": "🍂 Eyerusalem gathers deadfall — 1 stick + 1 fiber. The pile grows. (10 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 3,
+            "kind": "take",
+            "what": "Plant fiber",
+            "qty": 1,
+            "vid": null
+          },
+          {
+            "day": 4,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "naran_tumen"
+          },
+          {
+            "day": 5,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "quinn_murphy"
+          },
+          {
+            "day": 7,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "naran_tumen"
+          },
+          {
+            "day": 8,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "quinn_murphy"
+          },
+          {
+            "day": 11,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "quinn_murphy"
+          },
+          {
+            "day": 18,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_a9svpu2"
+          },
+          {
+            "day": 18,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "meera_reddy"
+          },
+          {
+            "day": 22,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_a9svpu2"
+          },
+          {
+            "day": 22,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "meera_reddy"
+          },
+          {
+            "day": 26,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_a9svpu2"
+          },
+          {
+            "day": 28,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "meera_reddy"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 74,
+          "armor": 74
+        }
+      },
+      {
+        "seed": 107093,
+        "days": 151,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 325,
+        "deaths": 96,
+        "starvation": 0,
+        "starvationVillager": 0,
+        "communityLost": 0,
+        "instrumentErrors": 0,
+        "censusDays": 147,
+        "pileZeroDays": 10,
+        "pileZeroShare": 0.06802721088435375,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 0,
+        "firstPileFiber": 0,
+        "deadfallHauls": 105,
+        "deadfallFiber": 58,
+        "deadfallSticks": 228,
+        "deadfallStaffedDays": 7,
+        "sticksGe6Days": 140,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 58,
+            "out": 0,
+            "n": 58
+          },
+          "pocketAmmo": {
+            "in": 0,
+            "out": 6,
+            "n": 10
+          }
+        },
+        "inTotal": 58,
+        "outTotal": 6,
+        "netEvents": 52,
+        "residual": -52,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 3,
+            "residual": -3
+          },
+          {
+            "day": 4,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 8,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 9,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 11,
+            "jump": -2,
+            "attributed": 1,
+            "residual": -3
+          },
+          {
+            "day": 12,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 14,
+            "jump": -2,
+            "attributed": 2,
+            "residual": -4
+          },
+          {
+            "day": 15,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 18,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 19,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 22,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 23,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 24,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 26,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 32,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 33,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 34,
+            "jump": -2,
+            "attributed": -1,
+            "residual": -1
+          },
+          {
+            "day": 35,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 36,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 38,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 39,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 40,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 41,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 42,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 43,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 44,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 47,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 50,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 53,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 56,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 76,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 86,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 91,
+            "jump": 0,
+            "attributed": -1,
+            "residual": 1
+          },
+          {
+            "day": 92,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 97,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 103,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 107,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 116,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 119,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 124,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 126,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 130,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 133,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 142,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 143,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 144,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 145,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 147,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 150,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 62,
+        "noMats": 3,
+        "noMatsFiber0": 3,
+        "noMatsFiber0Served": 0,
+        "craftOk": 9,
+        "craftFail": 1,
+        "craftAttempts": 10,
+        "ammoSinkFiber": 6,
+        "ammoSinkStick": 20,
+        "ledgerPocketOut": 6,
+        "pileFiber0Rows": 12,
+        "pileRows": 62,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 62,
+        "fiberStashLog": 52,
+        "saySample": [
+          {
+            "day": 2,
+            "line": "🍂 Aria gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 2,
+            "line": "🍂 A person, maybe 50s, with a scarred cheek gathers deadfall — 2 sticks + 1 fiber. The pile grows. (3 sticks now.)"
+          },
+          {
+            "day": 2,
+            "line": "🍂 Aria gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Yesenia gathers deadfall — 2 sticks + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Ester gathers deadfall — 1 stick + 1 fiber. The pile grows. (3 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Sumet gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 Yesenia gathers deadfall — 2 sticks + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 Guadalupe gathers deadfall — 1 stick + 1 fiber. The pile grows. (7 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Landon gathers deadfall — 3 sticks + 1 fiber. The pile grows. (8 sticks now.)"
+          },
+          {
+            "day": 8,
+            "line": "🍂 Landon gathers deadfall — 3 sticks + 1 fiber. The pile grows. (8 sticks now.)"
+          },
+          {
+            "day": 11,
+            "line": "🍂 Yesenia gathers deadfall — 1 stick + 1 fiber. The pile grows. (8 sticks now.)"
+          },
+          {
+            "day": 14,
+            "line": "🍂 Landon gathers deadfall — 2 sticks + 1 fiber. The pile grows. (4 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 2,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "rosa_mendez"
+          },
+          {
+            "day": 4,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "nina_petrova"
+          },
+          {
+            "day": 5,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "rosa_mendez"
+          },
+          {
+            "day": 7,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "nina_petrova"
+          },
+          {
+            "day": 10,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "rosa_mendez"
+          },
+          {
+            "day": 10,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "nina_petrova"
+          },
+          {
+            "day": 13,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "rosa_mendez"
+          },
+          {
+            "day": 13,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "nina_petrova"
+          },
+          {
+            "day": 17,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "nina_petrova"
+          },
+          {
+            "day": 18,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_axew0rj"
+          },
+          {
+            "day": 21,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ines_duarte"
+          },
+          {
+            "day": 22,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_axew0rj"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 150,
+          "armor": 150
+        }
+      },
+      {
+        "seed": 107094,
+        "days": 150,
+        "endReason": "survived",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 175,
+        "deaths": 51,
+        "starvation": 1,
+        "starvationVillager": 1,
+        "communityLost": 0,
+        "instrumentErrors": 0,
+        "censusDays": 148,
+        "pileZeroDays": 2,
+        "pileZeroShare": 0.013513513513513514,
+        "scholarMean": 0.23648648648648649,
+        "scholarMax": 1,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 113,
+        "firstPileFiber": 0,
+        "deadfallHauls": 237,
+        "deadfallFiber": 113,
+        "deadfallSticks": 522,
+        "deadfallStaffedDays": 3,
+        "sticksGe6Days": 145,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 113,
+            "out": 0,
+            "n": 113
+          }
+        },
+        "inTotal": 113,
+        "outTotal": 0,
+        "netEvents": 113,
+        "residual": 0,
+        "unexplainedDays": [
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 4,
+            "residual": -4
+          },
+          {
+            "day": 5,
+            "jump": 4,
+            "attributed": 0,
+            "residual": 4
+          },
+          {
+            "day": 6,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 9,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 10,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 14,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 16,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 17,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 18,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 21,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 23,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 24,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 70,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 71,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          }
+        ],
+        "departures": 0,
+        "noMats": 0,
+        "noMatsFiber0": 0,
+        "noMatsFiber0Served": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftAttempts": 0,
+        "ammoSinkFiber": 0,
+        "ammoSinkStick": 0,
+        "ledgerPocketOut": 0,
+        "pileFiber0Rows": 0,
+        "pileRows": 0,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 114,
+        "fiberStashLog": 0,
+        "saySample": [
+          {
+            "day": 4,
+            "line": "🍂 A woman, maybe 50s gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Marvin gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Marvin gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 A woman, maybe 50s gathers deadfall — 1 stick + 1 fiber. The pile grows. (3 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Nino gathers deadfall — 1 stick + 1 fiber. The pile grows. (7 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Nino gathers deadfall — 1 stick + 1 fiber. The pile grows. (9 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Nino gathers deadfall — 1 stick + 1 fiber. The pile grows. (10 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Nino gathers deadfall — 1 stick + 1 fiber. The pile grows. (13 sticks now.)"
+          },
+          {
+            "day": 8,
+            "line": "🍂 Nino gathers deadfall — 1 stick + 1 fiber. The pile grows. (16 sticks now.)"
+          },
+          {
+            "day": 8,
+            "line": "🍂 Nino gathers deadfall — 2 sticks + 1 fiber. The pile grows. (19 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Nino gathers deadfall — 1 stick + 1 fiber. The pile grows. (20 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Nino gathers deadfall — 2 sticks + 1 fiber. The pile grows. (23 sticks now.)"
+          }
+        ],
+        "stashSample": [],
+        "craftDayCalls": {
+          "weapon": 149,
+          "armor": 149
+        }
+      },
+      {
+        "seed": 107095,
+        "days": 92,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "deaths": 51,
+        "starvation": 0,
+        "starvationVillager": 0,
+        "communityLost": 1,
+        "instrumentErrors": 0,
+        "censusDays": 90,
+        "pileZeroDays": 28,
+        "pileZeroShare": 0.3111111111111111,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 0,
+        "firstPileFiber": 0,
+        "deadfallHauls": 22,
+        "deadfallFiber": 11,
+        "deadfallSticks": 28,
+        "deadfallStaffedDays": 36,
+        "sticksGe6Days": 54,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 11,
+            "out": 0,
+            "n": 11
+          }
+        },
+        "inTotal": 11,
+        "outTotal": 0,
+        "netEvents": 11,
+        "residual": -11,
+        "unexplainedDays": [
+          {
+            "day": 3,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 4,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 5,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 7,
+            "jump": -1,
+            "attributed": 4,
+            "residual": -5
+          },
+          {
+            "day": 8,
+            "jump": 4,
+            "attributed": 0,
+            "residual": 4
+          },
+          {
+            "day": 10,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 11,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 12,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 15,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 19,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 37,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 38,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 62,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 67,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 27,
+        "noMats": 6,
+        "noMatsFiber0": 6,
+        "noMatsFiber0Served": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftAttempts": 0,
+        "ammoSinkFiber": 0,
+        "ammoSinkStick": 0,
+        "ledgerPocketOut": 0,
+        "pileFiber0Rows": 13,
+        "pileRows": 27,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 11,
+        "fiberStashLog": 11,
+        "saySample": [
+          {
+            "day": 3,
+            "line": "🍂 Etornam gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Desmond gathers deadfall — 2 sticks + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 A man, maybe 60s, with a long braid gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 Desmond gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Etornam gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 A man, maybe 60s, with a long braid gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Piper gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Sam gathers deadfall — 1 stick + 1 fiber. The pile grows. (7 sticks now.)"
+          },
+          {
+            "day": 11,
+            "line": "🍂 Etornam gathers deadfall — 1 stick + 1 fiber. The pile grows. (8 sticks now.)"
+          },
+          {
+            "day": 19,
+            "line": "🍂 Etornam gathers deadfall — 2 sticks + 1 fiber. The pile grows. (7 sticks now.)"
+          },
+          {
+            "day": 37,
+            "line": "🍂 Sam gathers deadfall — 2 sticks + 1 fiber. The pile grows. (8 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 5,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_f1fq9mg"
+          },
+          {
+            "day": 6,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5c6p66s"
+          },
+          {
+            "day": 9,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_f1fq9mg"
+          },
+          {
+            "day": 9,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "elif_demir"
+          },
+          {
+            "day": 14,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "elif_demir"
+          },
+          {
+            "day": 18,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_f1fq9mg"
+          },
+          {
+            "day": 19,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "elif_demir"
+          },
+          {
+            "day": 28,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5c6p66s"
+          },
+          {
+            "day": 36,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_5c6p66s"
+          },
+          {
+            "day": 61,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_3c401xt"
+          },
+          {
+            "day": 66,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_3c401xt"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 92,
+          "armor": 92
+        }
+      },
+      {
+        "seed": 107096,
+        "days": 148,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 5,
+        "standing": 480,
+        "deaths": 109,
+        "starvation": 0,
+        "starvationVillager": 0,
+        "communityLost": 1,
+        "instrumentErrors": 0,
+        "censusDays": 145,
+        "pileZeroDays": 4,
+        "pileZeroShare": 0.027586206896551724,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 12,
+        "firstPileFiber": 0,
+        "deadfallHauls": 88,
+        "deadfallFiber": 41,
+        "deadfallSticks": 174,
+        "deadfallStaffedDays": 4,
+        "sticksGe6Days": 140,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 41,
+            "out": 0,
+            "n": 41
+          },
+          "pocketAmmo": {
+            "in": 0,
+            "out": 4,
+            "n": 4
+          }
+        },
+        "inTotal": 41,
+        "outTotal": 4,
+        "netEvents": 37,
+        "residual": -25,
+        "unexplainedDays": [
+          {
+            "day": 5,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 6,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 8,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 9,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 10,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 28,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 34,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 35,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 37,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 73,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 76,
+            "jump": -2,
+            "attributed": -1,
+            "residual": -1
+          },
+          {
+            "day": 77,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 79,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 80,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 81,
+            "jump": -2,
+            "attributed": -1,
+            "residual": -1
+          },
+          {
+            "day": 82,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 83,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 92,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 93,
+            "jump": -4,
+            "attributed": -2,
+            "residual": -2
+          },
+          {
+            "day": 100,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 101,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 109,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 115,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 118,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 121,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 125,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 129,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 61,
+        "noMats": 0,
+        "noMatsFiber0": 0,
+        "noMatsFiber0Served": 0,
+        "craftOk": 3,
+        "craftFail": 1,
+        "craftAttempts": 4,
+        "ammoSinkFiber": 4,
+        "ammoSinkStick": 8,
+        "ledgerPocketOut": 4,
+        "pileFiber0Rows": 0,
+        "pileRows": 61,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 41,
+        "fiberStashLog": 25,
+        "saySample": [
+          {
+            "day": 5,
+            "line": "🍂 Esmeralda gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 A person, maybe 40s gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Ines gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 7,
+            "line": "🍂 Esmeralda gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (9 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (11 sticks now.)"
+          },
+          {
+            "day": 10,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (10 sticks now.)"
+          },
+          {
+            "day": 10,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (12 sticks now.)"
+          },
+          {
+            "day": 10,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (13 sticks now.)"
+          },
+          {
+            "day": 12,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (16 sticks now.)"
+          },
+          {
+            "day": 12,
+            "line": "🍂 Gunther gathers deadfall — 1 stick + 1 fiber. The pile grows. (17 sticks now.)"
+          },
+          {
+            "day": 13,
+            "line": "🍂 Gunther gathers deadfall — 2 sticks + 1 fiber. The pile grows. (20 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 5,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ines_duarte"
+          },
+          {
+            "day": 6,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_b5173a4"
+          },
+          {
+            "day": 9,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_b5173a4"
+          },
+          {
+            "day": 10,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ines_duarte"
+          },
+          {
+            "day": 27,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_b5173a4"
+          },
+          {
+            "day": 36,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_qzjlpyc"
+          },
+          {
+            "day": 72,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "lucas_brown"
+          },
+          {
+            "day": 75,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "visjoin_74"
+          },
+          {
+            "day": 76,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "lucas_brown"
+          },
+          {
+            "day": 78,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "visjoin_74"
+          },
+          {
+            "day": 79,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "lucas_brown"
+          },
+          {
+            "day": 80,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "ruby_callaghan"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 148,
+          "armor": 148
+        }
+      },
+      {
+        "seed": 107097,
+        "days": 76,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 140,
+        "deaths": 62,
+        "starvation": 0,
+        "starvationVillager": 0,
+        "communityLost": 1,
+        "instrumentErrors": 0,
+        "censusDays": 74,
+        "pileZeroDays": 45,
+        "pileZeroShare": 0.6081081081081081,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 0,
+        "firstPileFiber": 0,
+        "deadfallHauls": 29,
+        "deadfallFiber": 15,
+        "deadfallSticks": 37,
+        "deadfallStaffedDays": 7,
+        "sticksGe6Days": 65,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 15,
+            "out": 0,
+            "n": 15
+          },
+          "batchTurn": {
+            "in": 0,
+            "out": 1,
+            "n": 1
+          }
+        },
+        "inTotal": 15,
+        "outTotal": 1,
+        "netEvents": 14,
+        "residual": -14,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 4,
+            "residual": -4
+          },
+          {
+            "day": 5,
+            "jump": 5,
+            "attributed": 2,
+            "residual": 3
+          },
+          {
+            "day": 6,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 8,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 9,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 12,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 15,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 18,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 20,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 22,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 23,
+            "jump": -1,
+            "attributed": 2,
+            "residual": -3
+          },
+          {
+            "day": 24,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 26,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 31,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 32,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 38,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 1,
+        "noMats": 0,
+        "noMatsFiber0": 0,
+        "noMatsFiber0Served": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftAttempts": 0,
+        "ammoSinkFiber": 0,
+        "ammoSinkStick": 0,
+        "ledgerPocketOut": 0,
+        "pileFiber0Rows": 1,
+        "pileRows": 1,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 17,
+        "fiberStashLog": 15,
+        "saySample": [
+          {
+            "day": 2,
+            "line": "🍂 A person, maybe 30s, with a scarred cheek gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 2,
+            "line": "🍂 A person, maybe 60s gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 3,
+            "line": "The stash count is off. 1 plant fiber missing. Nobody saw anything. Everybody suspects something."
+          },
+          {
+            "day": 4,
+            "line": "🍂 A person, maybe 30s, with a scarred cheek gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 Oliver gathers deadfall — 2 sticks + 1 fiber. The pile grows. (3 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 A person, maybe 40s, with freckles gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 A person, maybe 50s gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 A person, maybe 40s, with freckles gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 5,
+            "line": "🍂 Poniman gathers deadfall — 1 stick + 1 fiber. The pile grows. (8 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Poniman gathers deadfall — 1 stick + 1 fiber. The pile grows. (7 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Poniman gathers deadfall — 1 stick + 1 fiber. The pile grows. (9 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Poniman gathers deadfall — 2 sticks + 1 fiber. The pile grows. (11 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 2,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_m974ods"
+          },
+          {
+            "day": 3,
+            "kind": "take",
+            "what": "Plant fiber",
+            "qty": 1,
+            "vid": null
+          },
+          {
+            "day": 5,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "oliver_moore"
+          },
+          {
+            "day": 8,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_m974ods"
+          },
+          {
+            "day": 8,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "oliver_moore"
+          },
+          {
+            "day": 11,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_m974ods"
+          },
+          {
+            "day": 11,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "oliver_moore"
+          },
+          {
+            "day": 14,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "oliver_moore"
+          },
+          {
+            "day": 17,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "oliver_moore"
+          },
+          {
+            "day": 19,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_et8zg9r"
+          },
+          {
+            "day": 21,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "oliver_moore"
+          },
+          {
+            "day": 22,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_et8zg9r"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 76,
+          "armor": 76
+        }
+      },
+      {
+        "seed": 107098,
+        "days": 146,
+        "endReason": "village-lost",
+        "won": false,
+        "scaleRank": "regional",
+        "maxWave": 4,
+        "standing": 199,
+        "deaths": 105,
+        "starvation": 0,
+        "starvationVillager": 0,
+        "communityLost": 1,
+        "instrumentErrors": 0,
+        "censusDays": 143,
+        "pileZeroDays": 108,
+        "pileZeroShare": 0.7552447552447552,
+        "scholarMean": 0,
+        "scholarMax": 0,
+        "villagersMean": 0,
+        "villagersMax": 0,
+        "lastPileFiber": 0,
+        "firstPileFiber": 0,
+        "deadfallHauls": 33,
+        "deadfallFiber": 17,
+        "deadfallSticks": 47,
+        "deadfallStaffedDays": 18,
+        "sticksGe6Days": 126,
+        "byKind": {
+          "assign/deadfall": {
+            "in": 17,
+            "out": 0,
+            "n": 17
+          }
+        },
+        "inTotal": 17,
+        "outTotal": 0,
+        "netEvents": 17,
+        "residual": -17,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 5,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 6,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 7,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 8,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 9,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 11,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 12,
+            "jump": -1,
+            "attributed": 2,
+            "residual": -3
+          },
+          {
+            "day": 13,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 15,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 17,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 18,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 19,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 20,
+            "jump": -2,
+            "attributed": 1,
+            "residual": -3
+          },
+          {
+            "day": 21,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 27,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 28,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 33,
+            "jump": -1,
+            "attributed": 2,
+            "residual": -3
+          },
+          {
+            "day": 34,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 36,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 40,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 41,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 43,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ],
+        "departures": 80,
+        "noMats": 56,
+        "noMatsFiber0": 56,
+        "noMatsFiber0Served": 0,
+        "craftOk": 0,
+        "craftFail": 0,
+        "craftAttempts": 0,
+        "ammoSinkFiber": 0,
+        "ammoSinkStick": 0,
+        "ledgerPocketOut": 0,
+        "pileFiber0Rows": 80,
+        "pileRows": 80,
+        "servedDepartures": 0,
+        "servedWithAmmo": 0,
+        "scholarCraftAttempts": 0,
+        "scholarCraftOk": 0,
+        "scholarFiberSpent": 0,
+        "scholarPileDelta": 0,
+        "fiberSays": 20,
+        "fiberStashLog": 17,
+        "saySample": [
+          {
+            "day": 2,
+            "line": "🍂 Sanne gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 4,
+            "line": "🍂 A woman, maybe 40s, with a slouched posture gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 Darkhan gathers deadfall — 1 stick + 1 fiber. The pile grows. (1 sticks now.)"
+          },
+          {
+            "day": 6,
+            "line": "🍂 A woman, maybe 40s, with a slouched posture gathers deadfall — 1 stick + 1 fiber. The pile grows. (2 sticks now.)"
+          },
+          {
+            "day": 8,
+            "line": "🍂 Sofia gathers deadfall — 1 stick + 1 fiber. The pile grows. (5 sticks now.)"
+          },
+          {
+            "day": 8,
+            "line": "🍂 Darkhan gathers deadfall — 1 stick + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 9,
+            "line": "🍂 Darkhan gathers deadfall — 1 stick + 1 fiber. The pile grows. (3 sticks now.)"
+          },
+          {
+            "day": 10,
+            "line": "🍂 Sofia gathers deadfall — 1 stick + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 12,
+            "line": "🍂 Sofia gathers deadfall — 2 sticks + 1 fiber. The pile grows. (4 sticks now.)"
+          },
+          {
+            "day": 12,
+            "line": "🍂 Darkhan gathers deadfall — 2 sticks + 1 fiber. The pile grows. (6 sticks now.)"
+          },
+          {
+            "day": 12,
+            "line": "🔍 Sofia crouches over a towering emergent tree with a buttressed trunk, dropping pods full of silky fiber and dark seeds, studying it a moment before moving on. (1/3 looks)"
+          },
+          {
+            "day": 17,
+            "line": "🍂 Meera gathers deadfall — 2 sticks + 1 fiber. The pile grows. (7 sticks now.)"
+          }
+        ],
+        "stashSample": [
+          {
+            "day": 4,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_t3qas9u"
+          },
+          {
+            "day": 4,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_zhcwv2o"
+          },
+          {
+            "day": 8,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_t3qas9u"
+          },
+          {
+            "day": 8,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_zhcwv2o"
+          },
+          {
+            "day": 11,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "sanne_bakker"
+          },
+          {
+            "day": 12,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_zhcwv2o"
+          },
+          {
+            "day": 14,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "sanne_bakker"
+          },
+          {
+            "day": 16,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_zhcwv2o"
+          },
+          {
+            "day": 17,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "sanne_bakker"
+          },
+          {
+            "day": 19,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_t3qas9u"
+          },
+          {
+            "day": 19,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_zhcwv2o"
+          },
+          {
+            "day": 26,
+            "kind": "take",
+            "what": "fiber",
+            "qty": 1,
+            "vid": "gen_zhcwv2o"
+          }
+        ],
+        "craftDayCalls": {
+          "weapon": 145,
+          "armor": 145
+        }
+      }
+    ],
+    "seeds": 8,
+    "villageDays": 966,
+    "zeroDays": 201,
+    "pileZeroShare": 0.2080745341614907,
+    "needEvents": 65,
+    "inTotal": 336,
+    "outTotal": 19,
+    "kindTotals": {
+      "assign/deadfall": {
+        "in": 336,
+        "out": 0,
+        "n": 336
+      },
+      "batchTurn": {
+        "in": 0,
+        "out": 3,
+        "n": 3
+      },
+      "pocketAmmo": {
+        "in": 0,
+        "out": 16,
+        "n": 22
+      }
+    },
+    "domSource": "assign/deadfall",
+    "domSourceRate": 336,
+    "domSink": "pocketAmmo",
+    "domSinkRate": 16,
+    "domSourcePerDay": 0.34782608695652173,
+    "domSinkPerDay": 0.016563146997929608,
+    "inPerDay": 0.34782608695652173,
+    "outPerDay": 0.019668737060041408,
+    "errors": 0,
+    "censusPresent": true,
+    "scholarMeanBand": 0.02956081081081081,
+    "scholarMaxBand": 1,
+    "villagersMaxBand": 0,
+    "departures": 339,
+    "noMats": 101,
+    "craftAttempts": 22,
+    "craftOk": 18,
+    "craftFail": 4,
+    "ammoSinkFiber": 16,
+    "ledgerPocketOut": 16,
+    "deadfallHauls": 652,
+    "deadfallFiber": 336,
+    "deadfallSticks": 1296,
+    "deadfallStaffedDays": 199,
+    "sticksGe6Days": 777,
+    "scholarCraftAttempts": 0,
+    "scholarCraftOk": 0,
+    "scholarFiberSpent": 0,
+    "scholarPileDelta": 0,
+    "fiberSays": 349,
+    "fiberStashLog": 158,
+    "national": 0,
+    "wins": 0,
+    "wave4": 8,
+    "wave5": 3,
+    "communityLost": 5,
+    "starvation": 2,
+    "starvationVillager": 2,
+    "medianDays": 147,
+    "deaths": 643,
+    "residuals": [
+      {
+        "seed": 107091,
+        "residual": -11,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 3,
+            "residual": -3
+          },
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 6,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 8,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 9,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 10,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 11,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 12,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 13,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 14,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 15,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 21,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 31,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 32,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 39,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 44,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      },
+      {
+        "seed": 107092,
+        "residual": -25,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 5,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 9,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 10,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 11,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 12,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 18,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 19,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 23,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 27,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 29,
+            "jump": -3,
+            "attributed": -1,
+            "residual": -2
+          },
+          {
+            "day": 30,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 31,
+            "jump": 4,
+            "attributed": 3,
+            "residual": 1
+          },
+          {
+            "day": 32,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 35,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 36,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 38,
+            "jump": 2,
+            "attributed": 4,
+            "residual": -2
+          },
+          {
+            "day": 42,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 47,
+            "jump": -3,
+            "attributed": 0,
+            "residual": -3
+          },
+          {
+            "day": 52,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 61,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 67,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 68,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      },
+      {
+        "seed": 107093,
+        "residual": -52,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 3,
+            "residual": -3
+          },
+          {
+            "day": 4,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 8,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 9,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 11,
+            "jump": -2,
+            "attributed": 1,
+            "residual": -3
+          },
+          {
+            "day": 12,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 14,
+            "jump": -2,
+            "attributed": 2,
+            "residual": -4
+          },
+          {
+            "day": 15,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 18,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 19,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 22,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 23,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 24,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 26,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 32,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 33,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 34,
+            "jump": -2,
+            "attributed": -1,
+            "residual": -1
+          },
+          {
+            "day": 35,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 36,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 38,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 39,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 40,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 41,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 42,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 43,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 44,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 47,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 50,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 53,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 56,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 76,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 86,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 91,
+            "jump": 0,
+            "attributed": -1,
+            "residual": 1
+          },
+          {
+            "day": 92,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 97,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 103,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 107,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 116,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 119,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 124,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 126,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 130,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 133,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 142,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 143,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 144,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 145,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 147,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 150,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      },
+      {
+        "seed": 107094,
+        "residual": 0,
+        "unexplainedDays": [
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 4,
+            "residual": -4
+          },
+          {
+            "day": 5,
+            "jump": 4,
+            "attributed": 0,
+            "residual": 4
+          },
+          {
+            "day": 6,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 9,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 10,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 14,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 16,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 17,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 18,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 21,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 23,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 24,
+            "jump": 3,
+            "attributed": 2,
+            "residual": 1
+          },
+          {
+            "day": 70,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 71,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          }
+        ]
+      },
+      {
+        "seed": 107095,
+        "residual": -11,
+        "unexplainedDays": [
+          {
+            "day": 3,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 4,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 5,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 7,
+            "jump": -1,
+            "attributed": 4,
+            "residual": -5
+          },
+          {
+            "day": 8,
+            "jump": 4,
+            "attributed": 0,
+            "residual": 4
+          },
+          {
+            "day": 10,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 11,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 12,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 15,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 19,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 37,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 38,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 62,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 67,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      },
+      {
+        "seed": 107096,
+        "residual": -25,
+        "unexplainedDays": [
+          {
+            "day": 5,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 6,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 8,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 9,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 10,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 28,
+            "jump": 1,
+            "attributed": 2,
+            "residual": -1
+          },
+          {
+            "day": 34,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 35,
+            "jump": 2,
+            "attributed": 1,
+            "residual": 1
+          },
+          {
+            "day": 37,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 73,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 76,
+            "jump": -2,
+            "attributed": -1,
+            "residual": -1
+          },
+          {
+            "day": 77,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 79,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 80,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 81,
+            "jump": -2,
+            "attributed": -1,
+            "residual": -1
+          },
+          {
+            "day": 82,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 83,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 92,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 93,
+            "jump": -4,
+            "attributed": -2,
+            "residual": -2
+          },
+          {
+            "day": 100,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 101,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 109,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 115,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 118,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 121,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 125,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 129,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      },
+      {
+        "seed": 107097,
+        "residual": -14,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 4,
+            "jump": 0,
+            "attributed": 4,
+            "residual": -4
+          },
+          {
+            "day": 5,
+            "jump": 5,
+            "attributed": 2,
+            "residual": 3
+          },
+          {
+            "day": 6,
+            "jump": 2,
+            "attributed": 3,
+            "residual": -1
+          },
+          {
+            "day": 7,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 8,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 9,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 12,
+            "jump": -2,
+            "attributed": 0,
+            "residual": -2
+          },
+          {
+            "day": 15,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 18,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 20,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 22,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 23,
+            "jump": -1,
+            "attributed": 2,
+            "residual": -3
+          },
+          {
+            "day": 24,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 26,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 31,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 32,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 38,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      },
+      {
+        "seed": 107098,
+        "residual": -17,
+        "unexplainedDays": [
+          {
+            "day": 2,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 5,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 6,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 7,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 8,
+            "jump": 0,
+            "attributed": 2,
+            "residual": -2
+          },
+          {
+            "day": 9,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 11,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 12,
+            "jump": -1,
+            "attributed": 2,
+            "residual": -3
+          },
+          {
+            "day": 13,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 15,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 17,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 18,
+            "jump": 0,
+            "attributed": 1,
+            "residual": -1
+          },
+          {
+            "day": 19,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 20,
+            "jump": -2,
+            "attributed": 1,
+            "residual": -3
+          },
+          {
+            "day": 21,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 27,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 28,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 29,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 33,
+            "jump": -1,
+            "attributed": 2,
+            "residual": -3
+          },
+          {
+            "day": 34,
+            "jump": 2,
+            "attributed": 0,
+            "residual": 2
+          },
+          {
+            "day": 36,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          },
+          {
+            "day": 40,
+            "jump": -1,
+            "attributed": 1,
+            "residual": -2
+          },
+          {
+            "day": 41,
+            "jump": 1,
+            "attributed": 0,
+            "residual": 1
+          },
+          {
+            "day": 43,
+            "jump": -1,
+            "attributed": 0,
+            "residual": -1
+          }
+        ]
+      }
+    ]
+  },
+  "determinism": [
+    {
+      "seed": 107091,
+      "identical": false,
+      "diffKeys": [
+        "anchorCommit"
+      ]
+    },
+    {
+      "seed": 107092,
+      "identical": false,
+      "diffKeys": [
+        "anchorCommit"
+      ]
+    },
+    {
+      "seed": 107093,
+      "identical": false,
+      "diffKeys": [
+        "anchorCommit"
+      ]
+    },
+    {
+      "seed": 107094,
+      "identical": false,
+      "diffKeys": [
+        "anchorCommit"
+      ]
+    },
+    {
+      "seed": 107095,
+      "identical": false,
+      "diffKeys": [
+        "anchorCommit"
+      ]
+    },
+    {
+      "seed": 107096,
+      "identical": false,
+      "diffKeys": [
+        "anchorCommit"
+      ]
+    },
+    {
+      "seed": 107097,
+      "identical": false,
+      "diffKeys": [
+        "anchorCommit"
+      ]
+    },
+    {
+      "seed": 107098,
+      "identical": false,
+      "diffKeys": [
+        "dawnbidDeparts",
+        "launchdefSkips"
+      ]
+    }
+  ]
+}
