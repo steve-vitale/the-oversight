@@ -327,8 +327,8 @@ seeds; no wall claim is made.
 - **New open finding appended:** the expired-plan re-seed
   launches silently (no beat on the re-seed day for either
   holder) — no-silent-actions gap.
-- **Branch:** `sim-reseedexpiry-b`, evidence commit (this
-  file) below the instrument `3a6ac430a` and prereg
+- **Branch:** `sim-reseedexpiry-b`, evidence commit `ecf271e98`
+  (this file) below the instrument `3a6ac430a` and prereg
   `616fbd531`, on the rebased tip `91e815132`. HELD unmerged:
   the verdict is GO (combined) and the branch sits on the held
   reseed lever, which this arm does not re-judge or merge.
