@@ -1,0 +1,1452 @@
+{
+  "verdict": "NO-GO",
+  "kind": "RESEED",
+  "bars": [
+    {
+      "id": "instrument-pooled",
+      "pass": true,
+      "detail": "instrument errors 0 (bar 0); all band dirs 8 files: true"
+    },
+    {
+      "id": "gate-pooled",
+      "pass": true,
+      "detail": "gate missing 0, mismatch 0, classified ok true"
+    },
+    {
+      "id": "expiry-rule-pooled",
+      "pass": true,
+      "detail": "expiry-rule mismatches 0 (bar 0)"
+    },
+    {
+      "id": "pool-agreement-pooled",
+      "pass": true,
+      "detail": "replica-vs-real disagreements 0 (bar 0)"
+    },
+    {
+      "id": "dead-commits-pooled",
+      "pass": true,
+      "detail": "dead-target commits 7 pooled; pool floor min 0, dist {\"0\":2,\"3\":1,\"6\":1,\"7\":2,\"10\":1}"
+    },
+    {
+      "id": "post-expiry-pooled",
+      "pass": true,
+      "detail": "post-expiry targetless launches 0 (bar 0)"
+    },
+    {
+      "id": "reseed-pooled",
+      "pass": false,
+      "detail": "expiries 2; re-seeded within 7d 1/2 = 0.500 (bar 0.667)"
+    },
+    {
+      "id": "holders-fight-again-pooled",
+      "pass": true,
+      "detail": "holders fighting again within 14d 2/2 = 1.000 (bar 0.667)"
+    }
+  ],
+  "pooled": {
+    "dirs": 1,
+    "deadCommits": 7,
+    "expiries": 2,
+    "poolFloorMin": 0,
+    "poolDist": {
+      "0": 2,
+      "3": 1,
+      "6": 1,
+      "7": 2,
+      "10": 1
+    },
+    "reseededWithin7": 1,
+    "foughtAgain14": 2,
+    "reseededShare": 0.5,
+    "foughtAgainShare": 1,
+    "postExpiryTargetlessLaunches": 0,
+    "poolDisagreements": 0,
+    "expiryRuleMismatch": 0
+  },
+  "perDir": [
+    {
+      "dir": "evidence/2026-11-20/perseed-reseedexpiry-b-106301-armed",
+      "verdict": "NO-GO",
+      "kind": "RESEED",
+      "bars": [
+        {
+          "id": "pool-launches",
+          "pass": true,
+          "detail": "launches 14 (floor 4); dead 0, live 9, unknown 5"
+        },
+        {
+          "id": "classification",
+          "pass": true,
+          "detail": "classified 14/14 = 1.000 (bar 1.000); dead share 0.000"
+        },
+        {
+          "id": "gate-snapshot",
+          "pass": true,
+          "detail": "gate snapshots missing 0, mismatched vs recomputation 0 (bar 0 / 0); duplicate depart rows 0 (expect 0)"
+        },
+        {
+          "id": "instrument",
+          "pass": true,
+          "detail": "instrument errors 0 (bar 0); files 8/8"
+        },
+        {
+          "id": "expiry-rule",
+          "pass": true,
+          "detail": "expiry-rule rows vs planExpiries mismatched on 0 seed(s) (bar 0)"
+        },
+        {
+          "id": "post-expiry",
+          "pass": true,
+          "detail": "post-expiry targetless launches 0 (bar 0); post-expiry holds 1"
+        },
+        {
+          "id": "dead-commits",
+          "pass": true,
+          "detail": "dead-target commits 7 (the survey denominator); pool floor min 0, median 6, dist {\"0\":2,\"3\":1,\"6\":1,\"7\":2,\"10\":1}"
+        },
+        {
+          "id": "pool-agreement",
+          "pass": true,
+          "detail": "replica-vs-real disagreements (pool-0 dead commit that launched) 0 (bar 0)"
+        },
+        {
+          "id": "reseed",
+          "pass": false,
+          "detail": "expiries 2; re-seed launches 7; re-seeded within 7d 1/2 = 0.500 (bar 0.667)"
+        },
+        {
+          "id": "holders-fight-again",
+          "pass": true,
+          "detail": "holders fighting again within 14d 2/2 = 1.000 (bar 0.667)"
+        }
+      ]
+    }
+  ],
+  "analyses": [
+    {
+      "dir": "evidence/2026-11-20/perseed-reseedexpiry-b-106301-armed",
+      "files": 8,
+      "seeds": [
+        106301,
+        106302,
+        106303,
+        106304,
+        106305,
+        106306,
+        106307,
+        106308
+      ],
+      "errors": 0,
+      "duplicates": 0,
+      "gateMissing": 0,
+      "gateMismatch": 0,
+      "launches": 14,
+      "perSeed": [
+        {
+          "seed": 106301,
+          "launches": 3,
+          "dead": 0,
+          "live": 2,
+          "unknown": 1,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 1,
+          "planExpiries": 1,
+          "reseeds": 1,
+          "reseededWithin7": 0,
+          "foughtAgain14": 1,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 1,
+          "poolMin": 0,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106302,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 0,
+          "poolMin": null,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106303,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 0,
+          "poolMin": null,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106304,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 0,
+          "poolMin": null,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106305,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 0,
+          "poolMin": null,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106306,
+          "launches": 4,
+          "dead": 0,
+          "live": 4,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 3,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 3,
+          "poolMin": 3,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106307,
+          "launches": 6,
+          "dead": 0,
+          "live": 2,
+          "unknown": 4,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 1,
+          "planExpiries": 1,
+          "reseeds": 3,
+          "reseededWithin7": 1,
+          "foughtAgain14": 1,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 1,
+          "deadCommits": 3,
+          "poolMin": 0,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106308,
+          "launches": 1,
+          "dead": 0,
+          "live": 1,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 0,
+          "poolMin": null,
+          "poolDisagreements": 0
+        }
+      ],
+      "rows": [
+        {
+          "seed": 106301,
+          "launch": {
+            "seed": 106301,
+            "day": 57,
+            "vid": "gen_4s847jb",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "gen_4s847jb",
+              "gen_db1oos1"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": null,
+              "node": null,
+              "sinceDay": 38,
+              "villageSlain": null,
+              "lastFightDay": null,
+              "lastFightKill": null,
+              "lastFightOutcome": null,
+              "daysSinceLastFight": null,
+              "lastSightingDay": null,
+              "daysSinceLastSighting": null
+            }
+          },
+          "cls": "unknown",
+          "lastFought": null,
+          "lastSighted": {
+            "day": 52,
+            "outcome": "evade"
+          },
+          "daysSinceLastFight": null,
+          "daysSinceLastSighting": 5,
+          "firstFightAfter": null,
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": null
+        },
+        {
+          "seed": 106301,
+          "launch": {
+            "seed": 106301,
+            "day": 113,
+            "vid": "james_okonkwo",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "james_okonkwo",
+              "mateo_alvarez",
+              "stan_kowalski"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 108,
+              "villageSlain": 0,
+              "lastFightDay": 108,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 5,
+              "lastSightingDay": 108,
+              "daysSinceLastSighting": 5
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 108,
+            "vid": "james_okonkwo",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 108,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 5,
+          "daysSinceLastSighting": 5,
+          "firstFightAfter": {
+            "day": 123,
+            "vid": "james_okonkwo",
+            "outcome": "mFlee",
+            "origin": "aid",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106301,
+          "launch": {
+            "seed": 106301,
+            "day": 123,
+            "vid": "james_okonkwo",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "james_okonkwo",
+              "stan_kowalski",
+              "mara_vasquez"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 108,
+              "villageSlain": 0,
+              "lastFightDay": 108,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 15,
+              "lastSightingDay": 108,
+              "daysSinceLastSighting": 15
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 108,
+            "vid": "james_okonkwo",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 108,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 15,
+          "daysSinceLastSighting": 15,
+          "firstFightAfter": {
+            "day": 123,
+            "vid": "james_okonkwo",
+            "outcome": "mFlee",
+            "origin": "aid",
+            "sameDay": true
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106306,
+          "launch": {
+            "seed": 106306,
+            "day": 58,
+            "vid": "chen_wei",
+            "target": "algorithm",
+            "targetWave": 4,
+            "party": [
+              "chen_wei",
+              "diana_osei",
+              "gen_p35e6dt",
+              "giulia_bianchi"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "algorithm",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 57,
+              "villageSlain": 0,
+              "lastFightDay": 57,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 57,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 57,
+            "vid": "chen_wei",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 57,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": null,
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106306,
+          "launch": {
+            "seed": 106306,
+            "day": 63,
+            "vid": "chen_wei",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "chen_wei",
+              "giulia_bianchi"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "algorithm",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 57,
+              "villageSlain": 1,
+              "lastFightDay": 57,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 6,
+              "lastSightingDay": 57,
+              "daysSinceLastSighting": 6
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 58,
+            "vid": "chen_wei",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "expedition"
+          },
+          "lastSighted": {
+            "day": 58,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 5,
+          "daysSinceLastSighting": 5,
+          "firstFightAfter": null,
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 1
+        },
+        {
+          "seed": 106306,
+          "launch": {
+            "seed": 106306,
+            "day": 74,
+            "vid": "giulia_bianchi",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "giulia_bianchi",
+              "diana_osei"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "algorithm",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 0,
+              "villageSlain": 1,
+              "lastFightDay": 57,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 17,
+              "lastSightingDay": 57,
+              "daysSinceLastSighting": 17
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 47,
+            "vid": "giulia_bianchi",
+            "outcome": "mFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 47,
+            "outcome": "mFlee"
+          },
+          "daysSinceLastFight": 27,
+          "daysSinceLastSighting": 27,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 1
+        },
+        {
+          "seed": 106306,
+          "launch": {
+            "seed": 106306,
+            "day": 80,
+            "vid": "giulia_bianchi",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "giulia_bianchi",
+              "diana_osei",
+              "gen_sqmgqil"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "audit",
+              "node": null,
+              "sinceDay": 0,
+              "villageSlain": 0,
+              "lastFightDay": 47,
+              "lastFightKill": false,
+              "lastFightOutcome": "mFlee",
+              "daysSinceLastFight": 33,
+              "lastSightingDay": 47,
+              "daysSinceLastSighting": 33
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 47,
+            "vid": "giulia_bianchi",
+            "outcome": "mFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 47,
+            "outcome": "mFlee"
+          },
+          "daysSinceLastFight": 33,
+          "daysSinceLastSighting": 33,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106307,
+          "launch": {
+            "seed": 106307,
+            "day": 108,
+            "vid": "visjoin_101",
+            "target": "herald",
+            "targetWave": 4,
+            "party": [
+              "visjoin_101",
+              "visjoin_69"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "herald",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 107,
+              "villageSlain": 0,
+              "lastFightDay": 107,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 107,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 107,
+            "vid": "visjoin_101",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 107,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": {
+            "day": 118,
+            "vid": "visjoin_101",
+            "outcome": "vKill",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106307,
+          "launch": {
+            "seed": 106307,
+            "day": 114,
+            "vid": "visjoin_101",
+            "target": "herald",
+            "targetWave": 4,
+            "party": [
+              "visjoin_101",
+              "visjoin_69",
+              "valeria_quispe",
+              "chen_wei"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "herald",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 107,
+              "villageSlain": 0,
+              "lastFightDay": 107,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 7,
+              "lastSightingDay": 107,
+              "daysSinceLastSighting": 7
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 107,
+            "vid": "visjoin_101",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 107,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 7,
+          "daysSinceLastSighting": 7,
+          "firstFightAfter": {
+            "day": 118,
+            "vid": "visjoin_101",
+            "outcome": "vKill",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106307,
+          "launch": {
+            "seed": 106307,
+            "day": 122,
+            "vid": "valeria_quispe",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "valeria_quispe",
+              "visjoin_69"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "table",
+              "targetBefore": "herald",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 0,
+              "villageSlain": 1,
+              "lastFightDay": 118,
+              "lastFightKill": true,
+              "lastFightOutcome": "vKill",
+              "daysSinceLastFight": 4,
+              "lastSightingDay": 118,
+              "daysSinceLastSighting": 4
+            }
+          },
+          "cls": "unknown",
+          "lastFought": null,
+          "lastSighted": {
+            "day": 121,
+            "outcome": "evade"
+          },
+          "daysSinceLastFight": null,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "table",
+          "villageSlain": 1
+        },
+        {
+          "seed": 106307,
+          "launch": {
+            "seed": 106307,
+            "day": 125,
+            "vid": "valeria_quispe",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "valeria_quispe",
+              "visjoin_69"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "audit",
+              "node": null,
+              "sinceDay": 0,
+              "villageSlain": 0,
+              "lastFightDay": null,
+              "lastFightKill": null,
+              "lastFightOutcome": null,
+              "daysSinceLastFight": null,
+              "lastSightingDay": 121,
+              "daysSinceLastSighting": 4
+            }
+          },
+          "cls": "unknown",
+          "lastFought": null,
+          "lastSighted": {
+            "day": 121,
+            "outcome": "evade"
+          },
+          "daysSinceLastFight": null,
+          "daysSinceLastSighting": 4,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106307,
+          "launch": {
+            "seed": 106307,
+            "day": 133,
+            "vid": "valeria_quispe",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "valeria_quispe",
+              "visjoin_69",
+              "gen_pfwkvn4"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "table",
+              "targetBefore": "audit",
+              "node": null,
+              "sinceDay": 0,
+              "villageSlain": 0,
+              "lastFightDay": null,
+              "lastFightKill": null,
+              "lastFightOutcome": null,
+              "daysSinceLastFight": null,
+              "lastSightingDay": 127,
+              "daysSinceLastSighting": 6
+            }
+          },
+          "cls": "unknown",
+          "lastFought": null,
+          "lastSighted": {
+            "day": 127,
+            "outcome": "evade"
+          },
+          "daysSinceLastFight": null,
+          "daysSinceLastSighting": 6,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "table",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106307,
+          "launch": {
+            "seed": 106307,
+            "day": 149,
+            "vid": "valeria_quispe",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "valeria_quispe",
+              "visjoin_69",
+              "elif_demir",
+              "chen_wei"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "audit",
+              "node": null,
+              "sinceDay": 0,
+              "villageSlain": 0,
+              "lastFightDay": null,
+              "lastFightKill": null,
+              "lastFightOutcome": null,
+              "daysSinceLastFight": null,
+              "lastSightingDay": 138,
+              "daysSinceLastSighting": 11
+            }
+          },
+          "cls": "unknown",
+          "lastFought": null,
+          "lastSighted": {
+            "day": 138,
+            "outcome": "evade"
+          },
+          "daysSinceLastFight": null,
+          "daysSinceLastSighting": 11,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106308,
+          "launch": {
+            "seed": 106308,
+            "day": 115,
+            "vid": "app_mgpspkkv850",
+            "target": "influencer",
+            "targetWave": 4,
+            "party": [
+              "app_mgpspkkv850",
+              "leo_martin",
+              "app_mgpspkj0648",
+              "gen_cnp1rm9"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "influencer",
+              "node": {
+                "nx": 3,
+                "ny": 3
+              },
+              "sinceDay": 112,
+              "villageSlain": 1,
+              "lastFightDay": 112,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 3,
+              "lastSightingDay": 112,
+              "daysSinceLastSighting": 3
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 112,
+            "vid": "app_mgpspkkv850",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 112,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 3,
+          "daysSinceLastSighting": 3,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 1
+        }
+      ],
+      "dead": 0,
+      "live": 9,
+      "unknown": 5,
+      "classified": 14,
+      "classifiedShare": 1,
+      "deadShare": 0,
+      "stageBefore": {
+        "hunt": 8,
+        "party": 4,
+        "table": 2
+      },
+      "deadStanding": 0,
+      "deadSlainKnown": 0,
+      "deadNeverRefought": 0,
+      "withFirstAfter": 4,
+      "sameDayFirstAfter": 1,
+      "medianDaysSinceLastFight": 5,
+      "expiries": [
+        {
+          "seed": 106301,
+          "day": 43,
+          "vid": "gen_4s847jb",
+          "seq": 2,
+          "source": "brain"
+        },
+        {
+          "seed": 106307,
+          "day": 36,
+          "vid": "gen_p1wn71v",
+          "seq": 1,
+          "source": "brain"
+        }
+      ],
+      "postExpiryTargetlessLaunches": 0,
+      "postExpiryTargetlessLaunchRows": [],
+      "postExpiryHolds": 1,
+      "postExpiryHoldRows": [
+        {
+          "seed": 106307,
+          "day": 38,
+          "vid": "gen_p1wn71v",
+          "seq": 3,
+          "expiryDays": [
+            36
+          ]
+        }
+      ],
+      "expiryRuleMismatch": 0,
+      "reseeds": [
+        {
+          "seed": 106301,
+          "day": 57,
+          "vid": "gen_4s847jb",
+          "from": null,
+          "to": "eulogy",
+          "source": "brain"
+        },
+        {
+          "seed": 106306,
+          "day": 63,
+          "vid": "chen_wei",
+          "from": "algorithm",
+          "to": "eulogy",
+          "source": "brain"
+        },
+        {
+          "seed": 106306,
+          "day": 66,
+          "vid": "gen_p35e6dt",
+          "from": "algorithm",
+          "to": "callback",
+          "source": "brain"
+        },
+        {
+          "seed": 106306,
+          "day": 74,
+          "vid": "giulia_bianchi",
+          "from": "algorithm",
+          "to": "audit",
+          "source": "brain"
+        },
+        {
+          "seed": 106307,
+          "day": 42,
+          "vid": "gen_p1wn71v",
+          "from": null,
+          "to": "callback",
+          "source": "brain"
+        },
+        {
+          "seed": 106307,
+          "day": 122,
+          "vid": "valeria_quispe",
+          "from": "herald",
+          "to": "audit",
+          "source": "brain"
+        },
+        {
+          "seed": 106307,
+          "day": 141,
+          "vid": "chen_wei",
+          "from": "herald",
+          "to": "buffering",
+          "source": "brain"
+        }
+      ],
+      "reseededWithin7": [
+        {
+          "seed": 106301,
+          "vid": "gen_4s847jb",
+          "expiryDay": 43,
+          "reseeded": false,
+          "withinDays": null,
+          "via": null
+        },
+        {
+          "seed": 106307,
+          "vid": "gen_p1wn71v",
+          "expiryDay": 36,
+          "reseeded": true,
+          "withinDays": 6,
+          "via": "reseed-launch:null->callback"
+        }
+      ],
+      "foughtAgain14": [
+        {
+          "seed": 106301,
+          "vid": "gen_4s847jb",
+          "expiryDay": 43,
+          "foughtAgain": true,
+          "withinDays": 14,
+          "via": "reseed-launch"
+        },
+        {
+          "seed": 106307,
+          "vid": "gen_p1wn71v",
+          "expiryDay": 36,
+          "foughtAgain": true,
+          "withinDays": 6,
+          "via": "reseed-launch"
+        }
+      ],
+      "reseedsCount": 7,
+      "expiriesCount": 2,
+      "reseededWithin7Count": 1,
+      "foughtAgain14Count": 2,
+      "reseededShare": 0.5,
+      "foughtAgainShare": 1,
+      "deadCommits": [
+        {
+          "seed": 106301,
+          "day": 43,
+          "vid": "gen_4s847jb",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": null
+        },
+        {
+          "seed": 106306,
+          "day": 63,
+          "vid": "chen_wei",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 4,
+          "poolN": 3,
+          "pool": [
+            "eulogy",
+            "audit",
+            "reunion"
+          ],
+          "firstPick": "eulogy",
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106306,
+          "day": 66,
+          "vid": "gen_p35e6dt",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 3,
+          "poolN": 7,
+          "pool": [
+            "callback",
+            "influencer",
+            "eulogy",
+            "audit",
+            "reunion",
+            "redactor",
+            "buffering"
+          ],
+          "firstPick": "callback",
+          "result": "launch",
+          "targetAfter": "callback"
+        },
+        {
+          "seed": 106306,
+          "day": 74,
+          "vid": "giulia_bianchi",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 3,
+          "poolN": 7,
+          "pool": [
+            "audit",
+            "influencer",
+            "eulogy",
+            "reunion",
+            "callback",
+            "redactor",
+            "buffering"
+          ],
+          "firstPick": "audit",
+          "result": "launch",
+          "targetAfter": "audit"
+        },
+        {
+          "seed": 106307,
+          "day": 36,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": null
+        },
+        {
+          "seed": 106307,
+          "day": 122,
+          "vid": "valeria_quispe",
+          "source": "brain",
+          "target": "herald",
+          "needWave": 3,
+          "poolN": 6,
+          "pool": [
+            "audit",
+            "spool",
+            "gavel",
+            "terms_of_service",
+            "reunion",
+            "buffering"
+          ],
+          "firstPick": "audit",
+          "result": "launch",
+          "targetAfter": "audit"
+        },
+        {
+          "seed": 106307,
+          "day": 141,
+          "vid": "chen_wei",
+          "source": "brain",
+          "target": "herald",
+          "needWave": 3,
+          "poolN": 10,
+          "pool": [
+            "buffering",
+            "algorithm",
+            "audit",
+            "eulogy",
+            "focus_group",
+            "congregation",
+            "network_note",
+            "spool",
+            "gavel",
+            "reunion"
+          ],
+          "firstPick": "buffering",
+          "result": "launch",
+          "targetAfter": "buffering"
+        }
+      ],
+      "deadCommitsCount": 7,
+      "poolFloor": {
+        "commits": 7,
+        "min": 0,
+        "median": 6,
+        "dist": {
+          "0": 2,
+          "3": 1,
+          "6": 1,
+          "7": 2,
+          "10": 1
+        },
+        "table": [
+          {
+            "seed": 106301,
+            "day": 43,
+            "vid": "gen_4s847jb",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": null
+          },
+          {
+            "seed": 106306,
+            "day": 63,
+            "vid": "chen_wei",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 4,
+            "poolN": 3,
+            "pool": [
+              "eulogy",
+              "audit",
+              "reunion"
+            ],
+            "firstPick": "eulogy",
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106306,
+            "day": 66,
+            "vid": "gen_p35e6dt",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 3,
+            "poolN": 7,
+            "pool": [
+              "callback",
+              "influencer",
+              "eulogy",
+              "audit",
+              "reunion",
+              "redactor",
+              "buffering"
+            ],
+            "firstPick": "callback",
+            "result": "launch",
+            "targetAfter": "callback"
+          },
+          {
+            "seed": 106306,
+            "day": 74,
+            "vid": "giulia_bianchi",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 3,
+            "poolN": 7,
+            "pool": [
+              "audit",
+              "influencer",
+              "eulogy",
+              "reunion",
+              "callback",
+              "redactor",
+              "buffering"
+            ],
+            "firstPick": "audit",
+            "result": "launch",
+            "targetAfter": "audit"
+          },
+          {
+            "seed": 106307,
+            "day": 36,
+            "vid": "gen_p1wn71v",
+            "source": "brain",
+            "target": "terms_of_service",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": null
+          },
+          {
+            "seed": 106307,
+            "day": 122,
+            "vid": "valeria_quispe",
+            "source": "brain",
+            "target": "herald",
+            "needWave": 3,
+            "poolN": 6,
+            "pool": [
+              "audit",
+              "spool",
+              "gavel",
+              "terms_of_service",
+              "reunion",
+              "buffering"
+            ],
+            "firstPick": "audit",
+            "result": "launch",
+            "targetAfter": "audit"
+          },
+          {
+            "seed": 106307,
+            "day": 141,
+            "vid": "chen_wei",
+            "source": "brain",
+            "target": "herald",
+            "needWave": 3,
+            "poolN": 10,
+            "pool": [
+              "buffering",
+              "algorithm",
+              "audit",
+              "eulogy",
+              "focus_group",
+              "congregation",
+              "network_note",
+              "spool",
+              "gavel",
+              "reunion"
+            ],
+            "firstPick": "buffering",
+            "result": "launch",
+            "targetAfter": "buffering"
+          }
+        ]
+      },
+      "poolDisagreements": [],
+      "poolDisagreementsCount": 0
+    }
+  ],
+  "wall": {
+    "wins": 0,
+    "national": 0,
+    "wave5": 3,
+    "wave4": 8,
+    "standing200": 3,
+    "medianDays": 151,
+    "survived": 6
+  },
+  "medianDays": 150,
+  "launches": 14,
+  "errors": 0
+}

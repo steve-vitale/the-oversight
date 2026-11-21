@@ -1,0 +1,2211 @@
+{
+  "verdict": "NO-GO",
+  "kind": "UNREACHABLE",
+  "bars": [
+    {
+      "id": "instrument-pooled",
+      "pass": true,
+      "detail": "instrument errors 0 (bar 0); all band dirs 8 files: true"
+    },
+    {
+      "id": "gate-pooled",
+      "pass": true,
+      "detail": "gate missing 0, mismatch 0, classified ok true"
+    },
+    {
+      "id": "expiry-rule-pooled",
+      "pass": true,
+      "detail": "expiry-rule mismatches 0 (bar 0)"
+    },
+    {
+      "id": "pool-agreement-pooled",
+      "pass": true,
+      "detail": "replica-vs-real disagreements 24 (bar 0)"
+    },
+    {
+      "id": "dead-commits-pooled",
+      "pass": true,
+      "detail": "dead-target commits 42 pooled; pool floor min 0, dist {\"0\":27,\"1\":13,\"2\":2}"
+    },
+    {
+      "id": "post-expiry-pooled",
+      "pass": true,
+      "detail": "post-expiry targetless launches 0 (bar 0)"
+    },
+    {
+      "id": "reseed-pooled",
+      "pass": false,
+      "detail": "expiries 0; re-seeded within 7d 0/0 = n/a (bar 0.667)"
+    },
+    {
+      "id": "holders-fight-again-pooled",
+      "pass": false,
+      "detail": "holders fighting again within 14d 0/0 = n/a (bar 0.667)"
+    }
+  ],
+  "pooled": {
+    "dirs": 1,
+    "deadCommits": 42,
+    "expiries": 0,
+    "poolFloorMin": 0,
+    "poolDist": {
+      "0": 27,
+      "1": 13,
+      "2": 2
+    },
+    "reseededWithin7": 0,
+    "foughtAgain14": 0,
+    "reseededShare": null,
+    "foughtAgainShare": null,
+    "postExpiryTargetlessLaunches": 0,
+    "poolDisagreements": 24,
+    "expiryRuleMismatch": 0
+  },
+  "perDir": [
+    {
+      "dir": "evidence/2026-11-20/perseed-reseedexpiry-b-106301-control",
+      "verdict": "NO-GO",
+      "kind": "UNREACHABLE",
+      "bars": [
+        {
+          "id": "pool-launches",
+          "pass": true,
+          "detail": "launches 7 (floor 4); dead 0, live 7, unknown 0"
+        },
+        {
+          "id": "classification",
+          "pass": true,
+          "detail": "classified 7/7 = 1.000 (bar 1.000); dead share 0.000"
+        },
+        {
+          "id": "gate-snapshot",
+          "pass": true,
+          "detail": "gate snapshots missing 0, mismatched vs recomputation 0 (bar 0 / 0); duplicate depart rows 0 (expect 0)"
+        },
+        {
+          "id": "instrument",
+          "pass": true,
+          "detail": "instrument errors 0 (bar 0); files 8/8"
+        },
+        {
+          "id": "expiry-rule",
+          "pass": true,
+          "detail": "expiry-rule rows vs planExpiries mismatched on 0 seed(s) (bar 0)"
+        },
+        {
+          "id": "post-expiry",
+          "pass": true,
+          "detail": "post-expiry targetless launches 0 (bar 0); post-expiry holds 0"
+        },
+        {
+          "id": "dead-commits",
+          "pass": true,
+          "detail": "dead-target commits 42 (the survey denominator); pool floor min 0, median 0, dist {\"0\":27,\"1\":13,\"2\":2}"
+        },
+        {
+          "id": "pool-agreement",
+          "pass": true,
+          "detail": "control leg: pool-0 launches expected (lever off), agreement not judged"
+        },
+        {
+          "id": "reseed",
+          "pass": false,
+          "detail": "expiries 0; re-seed launches 0; re-seeded within 7d 0/0 = n/a (bar 0.667)"
+        },
+        {
+          "id": "holders-fight-again",
+          "pass": false,
+          "detail": "holders fighting again within 14d 0/0 = n/a (bar 0.667)"
+        }
+      ]
+    }
+  ],
+  "analyses": [
+    {
+      "dir": "evidence/2026-11-20/perseed-reseedexpiry-b-106301-control",
+      "files": 8,
+      "seeds": [
+        106301,
+        106302,
+        106303,
+        106304,
+        106305,
+        106306,
+        106307,
+        106308
+      ],
+      "errors": 0,
+      "duplicates": 0,
+      "gateMissing": 0,
+      "gateMismatch": 0,
+      "launches": 7,
+      "perSeed": [
+        {
+          "seed": 106301,
+          "launches": 1,
+          "dead": 0,
+          "live": 1,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 6,
+          "poolMin": 0,
+          "poolDisagreements": 4
+        },
+        {
+          "seed": 106302,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 3,
+          "poolMin": 0,
+          "poolDisagreements": 3
+        },
+        {
+          "seed": 106303,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 7,
+          "poolMin": 1,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106304,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 1,
+          "poolMin": 0,
+          "poolDisagreements": 1
+        },
+        {
+          "seed": 106305,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 0,
+          "poolMin": null,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106306,
+          "launches": 5,
+          "dead": 0,
+          "live": 5,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 12,
+          "poolMin": 0,
+          "poolDisagreements": 5
+        },
+        {
+          "seed": 106307,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 11,
+          "poolMin": 0,
+          "poolDisagreements": 9
+        },
+        {
+          "seed": 106308,
+          "launches": 1,
+          "dead": 0,
+          "live": 1,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 2,
+          "poolMin": 0,
+          "poolDisagreements": 2
+        }
+      ],
+      "rows": [
+        {
+          "seed": 106301,
+          "launch": {
+            "seed": 106301,
+            "day": 96,
+            "vid": "james_okonkwo",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "james_okonkwo",
+              "app_mgpspk2x836",
+              "mara_vasquez",
+              "adaeze_nwosu"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 3,
+                "ny": 4
+              },
+              "sinceDay": 93,
+              "villageSlain": 0,
+              "lastFightDay": 93,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 3,
+              "lastSightingDay": 93,
+              "daysSinceLastSighting": 3
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 93,
+            "vid": "james_okonkwo",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 93,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 3,
+          "daysSinceLastSighting": 3,
+          "firstFightAfter": {
+            "day": 110,
+            "vid": "james_okonkwo",
+            "outcome": "mFlee",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106306,
+          "launch": {
+            "seed": 106306,
+            "day": 58,
+            "vid": "chen_wei",
+            "target": "algorithm",
+            "targetWave": 4,
+            "party": [
+              "chen_wei",
+              "diana_osei",
+              "gen_p35e6dt",
+              "giulia_bianchi"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "algorithm",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 57,
+              "villageSlain": 0,
+              "lastFightDay": 57,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 57,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 57,
+            "vid": "chen_wei",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 57,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106306,
+          "launch": {
+            "seed": 106306,
+            "day": 63,
+            "vid": "chen_wei",
+            "target": "algorithm",
+            "targetWave": 4,
+            "party": [
+              "chen_wei",
+              "giulia_bianchi"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "algorithm",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 57,
+              "villageSlain": 1,
+              "lastFightDay": 57,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 6,
+              "lastSightingDay": 57,
+              "daysSinceLastSighting": 6
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 57,
+            "vid": "chen_wei",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 57,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 6,
+          "daysSinceLastSighting": 6,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 1
+        },
+        {
+          "seed": 106306,
+          "launch": {
+            "seed": 106306,
+            "day": 71,
+            "vid": "chen_wei",
+            "target": "algorithm",
+            "targetWave": 4,
+            "party": [
+              "chen_wei",
+              "diana_osei",
+              "giulia_bianchi",
+              "gen_sqmgqil"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "algorithm",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 57,
+              "villageSlain": 1,
+              "lastFightDay": 57,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 14,
+              "lastSightingDay": 57,
+              "daysSinceLastSighting": 14
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 57,
+            "vid": "chen_wei",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 57,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 14,
+          "daysSinceLastSighting": 14,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 1
+        },
+        {
+          "seed": 106306,
+          "launch": {
+            "seed": 106306,
+            "day": 73,
+            "vid": "chen_wei",
+            "target": "algorithm",
+            "targetWave": 4,
+            "party": [
+              "chen_wei",
+              "diana_osei",
+              "giulia_bianchi",
+              "gen_sqmgqil"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "algorithm",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 57,
+              "villageSlain": 1,
+              "lastFightDay": 57,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 16,
+              "lastSightingDay": 57,
+              "daysSinceLastSighting": 16
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 57,
+            "vid": "chen_wei",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 57,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 16,
+          "daysSinceLastSighting": 16,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 1
+        },
+        {
+          "seed": 106306,
+          "launch": {
+            "seed": 106306,
+            "day": 76,
+            "vid": "chen_wei",
+            "target": "algorithm",
+            "targetWave": 4,
+            "party": [
+              "chen_wei",
+              "giulia_bianchi",
+              "gen_sqmgqil"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "algorithm",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 57,
+              "villageSlain": 1,
+              "lastFightDay": 57,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 19,
+              "lastSightingDay": 57,
+              "daysSinceLastSighting": 19
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 57,
+            "vid": "chen_wei",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 57,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 19,
+          "daysSinceLastSighting": 19,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 1
+        },
+        {
+          "seed": 106308,
+          "launch": {
+            "seed": 106308,
+            "day": 115,
+            "vid": "app_mgpspkkv850",
+            "target": "influencer",
+            "targetWave": 4,
+            "party": [
+              "app_mgpspkkv850",
+              "leo_martin",
+              "app_mgpspkj0648",
+              "gen_cnp1rm9"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "influencer",
+              "node": {
+                "nx": 3,
+                "ny": 3
+              },
+              "sinceDay": 112,
+              "villageSlain": 1,
+              "lastFightDay": 112,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 3,
+              "lastSightingDay": 112,
+              "daysSinceLastSighting": 3
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 112,
+            "vid": "app_mgpspkkv850",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 112,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 3,
+          "daysSinceLastSighting": 3,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 1
+        }
+      ],
+      "dead": 0,
+      "live": 7,
+      "unknown": 0,
+      "classified": 7,
+      "classifiedShare": 1,
+      "deadShare": 0,
+      "stageBefore": {
+        "party": 3,
+        "hunt": 4
+      },
+      "deadStanding": 0,
+      "deadSlainKnown": 0,
+      "deadNeverRefought": 0,
+      "withFirstAfter": 1,
+      "sameDayFirstAfter": 0,
+      "medianDaysSinceLastFight": 6,
+      "expiries": [],
+      "postExpiryTargetlessLaunches": 0,
+      "postExpiryTargetlessLaunchRows": [],
+      "postExpiryHolds": 0,
+      "postExpiryHoldRows": [],
+      "expiryRuleMismatch": 0,
+      "reseeds": [],
+      "reseededWithin7": [],
+      "foughtAgain14": [],
+      "reseedsCount": 0,
+      "expiriesCount": 0,
+      "reseededWithin7Count": 0,
+      "foughtAgain14Count": 0,
+      "reseededShare": null,
+      "foughtAgainShare": null,
+      "deadCommits": [
+        {
+          "seed": 106301,
+          "day": 43,
+          "vid": "gen_4s847jb",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106301,
+          "day": 55,
+          "vid": "gen_4s847jb",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106301,
+          "day": 71,
+          "vid": "gen_4s847jb",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106301,
+          "day": 71,
+          "vid": "gen_db1oos1",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106301,
+          "day": 74,
+          "vid": "gen_4s847jb",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106301,
+          "day": 78,
+          "vid": "gen_4s847jb",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106302,
+          "day": 71,
+          "vid": "dmitri_sokolov",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106302,
+          "day": 73,
+          "vid": "dmitri_sokolov",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106302,
+          "day": 77,
+          "vid": "dmitri_sokolov",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106303,
+          "day": 130,
+          "vid": "ella_johnson",
+          "source": "brain",
+          "target": "eater",
+          "needWave": 4,
+          "poolN": 1,
+          "pool": [
+            "reunion"
+          ],
+          "firstPick": "reunion",
+          "result": "hold",
+          "targetAfter": "eater"
+        },
+        {
+          "seed": 106303,
+          "day": 131,
+          "vid": "ella_johnson",
+          "source": "brain",
+          "target": "eater",
+          "needWave": 4,
+          "poolN": 1,
+          "pool": [
+            "reunion"
+          ],
+          "firstPick": "reunion",
+          "result": "hold",
+          "targetAfter": "eater"
+        },
+        {
+          "seed": 106303,
+          "day": 132,
+          "vid": "ella_johnson",
+          "source": "brain",
+          "target": "eater",
+          "needWave": 4,
+          "poolN": 1,
+          "pool": [
+            "reunion"
+          ],
+          "firstPick": "reunion",
+          "result": "hold",
+          "targetAfter": "eater"
+        },
+        {
+          "seed": 106303,
+          "day": 138,
+          "vid": "ella_johnson",
+          "source": "brain",
+          "target": "eater",
+          "needWave": 4,
+          "poolN": 1,
+          "pool": [
+            "reunion"
+          ],
+          "firstPick": "reunion",
+          "result": "hold",
+          "targetAfter": "eater"
+        },
+        {
+          "seed": 106303,
+          "day": 148,
+          "vid": "ella_johnson",
+          "source": "brain",
+          "target": "eater",
+          "needWave": 4,
+          "poolN": 1,
+          "pool": [
+            "reunion"
+          ],
+          "firstPick": "reunion",
+          "result": "hold",
+          "targetAfter": "eater"
+        },
+        {
+          "seed": 106303,
+          "day": 149,
+          "vid": "ella_johnson",
+          "source": "brain",
+          "target": "eater",
+          "needWave": 4,
+          "poolN": 1,
+          "pool": [
+            "reunion"
+          ],
+          "firstPick": "reunion",
+          "result": "hold",
+          "targetAfter": "eater"
+        },
+        {
+          "seed": 106303,
+          "day": 150,
+          "vid": "ella_johnson",
+          "source": "brain",
+          "target": "eater",
+          "needWave": 4,
+          "poolN": 1,
+          "pool": [
+            "reunion"
+          ],
+          "firstPick": "reunion",
+          "result": "hold",
+          "targetAfter": "eater"
+        },
+        {
+          "seed": 106304,
+          "day": 65,
+          "vid": "brian_otieno",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        },
+        {
+          "seed": 106306,
+          "day": 63,
+          "vid": "chen_wei",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 66,
+          "vid": "gen_p35e6dt",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 71,
+          "vid": "chen_wei",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 73,
+          "vid": "chen_wei",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 73,
+          "vid": "gen_sqmgqil",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 3,
+          "poolN": 1,
+          "pool": [
+            "eulogy"
+          ],
+          "firstPick": "eulogy",
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 76,
+          "vid": "chen_wei",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 76,
+          "vid": "gen_sqmgqil",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 3,
+          "poolN": 1,
+          "pool": [
+            "eulogy"
+          ],
+          "firstPick": "eulogy",
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 81,
+          "vid": "giulia_bianchi",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 3,
+          "poolN": 2,
+          "pool": [
+            "eulogy",
+            "audit"
+          ],
+          "firstPick": "eulogy",
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 84,
+          "vid": "gen_sqmgqil",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 3,
+          "poolN": 1,
+          "pool": [
+            "eulogy"
+          ],
+          "firstPick": "eulogy",
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 89,
+          "vid": "gen_sqmgqil",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 3,
+          "poolN": 1,
+          "pool": [
+            "eulogy"
+          ],
+          "firstPick": "eulogy",
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 89,
+          "vid": "giulia_bianchi",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 3,
+          "poolN": 2,
+          "pool": [
+            "eulogy",
+            "audit"
+          ],
+          "firstPick": "eulogy",
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 91,
+          "vid": "gen_sqmgqil",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 3,
+          "poolN": 1,
+          "pool": [
+            "eulogy"
+          ],
+          "firstPick": "eulogy",
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106307,
+          "day": 36,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 43,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 1,
+          "pool": [
+            "spool"
+          ],
+          "firstPick": "spool",
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 46,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 50,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 56,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 64,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 68,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 77,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 100,
+          "vid": "theo_lindqvist",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        },
+        {
+          "seed": 106307,
+          "day": 103,
+          "vid": "theo_lindqvist",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        },
+        {
+          "seed": 106307,
+          "day": 106,
+          "vid": "theo_lindqvist",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        },
+        {
+          "seed": 106308,
+          "day": 115,
+          "vid": "app_mgpspkkv850",
+          "source": "brain",
+          "target": "influencer",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "influencer"
+        },
+        {
+          "seed": 106308,
+          "day": 117,
+          "vid": "gen_cnp1rm9",
+          "source": "brain",
+          "target": "influencer",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "influencer"
+        }
+      ],
+      "deadCommitsCount": 42,
+      "poolFloor": {
+        "commits": 42,
+        "min": 0,
+        "median": 0,
+        "dist": {
+          "0": 27,
+          "1": 13,
+          "2": 2
+        },
+        "table": [
+          {
+            "seed": 106301,
+            "day": 43,
+            "vid": "gen_4s847jb",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106301,
+            "day": 55,
+            "vid": "gen_4s847jb",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106301,
+            "day": 71,
+            "vid": "gen_4s847jb",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106301,
+            "day": 71,
+            "vid": "gen_db1oos1",
+            "source": "brain",
+            "target": "terms_of_service",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "terms_of_service"
+          },
+          {
+            "seed": 106301,
+            "day": 74,
+            "vid": "gen_4s847jb",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106301,
+            "day": 78,
+            "vid": "gen_4s847jb",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106302,
+            "day": 71,
+            "vid": "dmitri_sokolov",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106302,
+            "day": 73,
+            "vid": "dmitri_sokolov",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106302,
+            "day": 77,
+            "vid": "dmitri_sokolov",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106303,
+            "day": 130,
+            "vid": "ella_johnson",
+            "source": "brain",
+            "target": "eater",
+            "needWave": 4,
+            "poolN": 1,
+            "pool": [
+              "reunion"
+            ],
+            "firstPick": "reunion",
+            "result": "hold",
+            "targetAfter": "eater"
+          },
+          {
+            "seed": 106303,
+            "day": 131,
+            "vid": "ella_johnson",
+            "source": "brain",
+            "target": "eater",
+            "needWave": 4,
+            "poolN": 1,
+            "pool": [
+              "reunion"
+            ],
+            "firstPick": "reunion",
+            "result": "hold",
+            "targetAfter": "eater"
+          },
+          {
+            "seed": 106303,
+            "day": 132,
+            "vid": "ella_johnson",
+            "source": "brain",
+            "target": "eater",
+            "needWave": 4,
+            "poolN": 1,
+            "pool": [
+              "reunion"
+            ],
+            "firstPick": "reunion",
+            "result": "hold",
+            "targetAfter": "eater"
+          },
+          {
+            "seed": 106303,
+            "day": 138,
+            "vid": "ella_johnson",
+            "source": "brain",
+            "target": "eater",
+            "needWave": 4,
+            "poolN": 1,
+            "pool": [
+              "reunion"
+            ],
+            "firstPick": "reunion",
+            "result": "hold",
+            "targetAfter": "eater"
+          },
+          {
+            "seed": 106303,
+            "day": 148,
+            "vid": "ella_johnson",
+            "source": "brain",
+            "target": "eater",
+            "needWave": 4,
+            "poolN": 1,
+            "pool": [
+              "reunion"
+            ],
+            "firstPick": "reunion",
+            "result": "hold",
+            "targetAfter": "eater"
+          },
+          {
+            "seed": 106303,
+            "day": 149,
+            "vid": "ella_johnson",
+            "source": "brain",
+            "target": "eater",
+            "needWave": 4,
+            "poolN": 1,
+            "pool": [
+              "reunion"
+            ],
+            "firstPick": "reunion",
+            "result": "hold",
+            "targetAfter": "eater"
+          },
+          {
+            "seed": 106303,
+            "day": 150,
+            "vid": "ella_johnson",
+            "source": "brain",
+            "target": "eater",
+            "needWave": 4,
+            "poolN": 1,
+            "pool": [
+              "reunion"
+            ],
+            "firstPick": "reunion",
+            "result": "hold",
+            "targetAfter": "eater"
+          },
+          {
+            "seed": 106304,
+            "day": 65,
+            "vid": "brian_otieno",
+            "source": "brain",
+            "target": "buffering",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "buffering"
+          },
+          {
+            "seed": 106306,
+            "day": 63,
+            "vid": "chen_wei",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "algorithm"
+          },
+          {
+            "seed": 106306,
+            "day": 66,
+            "vid": "gen_p35e6dt",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "algorithm"
+          },
+          {
+            "seed": 106306,
+            "day": 71,
+            "vid": "chen_wei",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "algorithm"
+          },
+          {
+            "seed": 106306,
+            "day": 73,
+            "vid": "chen_wei",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "algorithm"
+          },
+          {
+            "seed": 106306,
+            "day": 73,
+            "vid": "gen_sqmgqil",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 3,
+            "poolN": 1,
+            "pool": [
+              "eulogy"
+            ],
+            "firstPick": "eulogy",
+            "result": "launch",
+            "targetAfter": "algorithm"
+          },
+          {
+            "seed": 106306,
+            "day": 76,
+            "vid": "chen_wei",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "algorithm"
+          },
+          {
+            "seed": 106306,
+            "day": 76,
+            "vid": "gen_sqmgqil",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 3,
+            "poolN": 1,
+            "pool": [
+              "eulogy"
+            ],
+            "firstPick": "eulogy",
+            "result": "launch",
+            "targetAfter": "algorithm"
+          },
+          {
+            "seed": 106306,
+            "day": 81,
+            "vid": "giulia_bianchi",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 3,
+            "poolN": 2,
+            "pool": [
+              "eulogy",
+              "audit"
+            ],
+            "firstPick": "eulogy",
+            "result": "launch",
+            "targetAfter": "algorithm"
+          },
+          {
+            "seed": 106306,
+            "day": 84,
+            "vid": "gen_sqmgqil",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 3,
+            "poolN": 1,
+            "pool": [
+              "eulogy"
+            ],
+            "firstPick": "eulogy",
+            "result": "launch",
+            "targetAfter": "algorithm"
+          },
+          {
+            "seed": 106306,
+            "day": 89,
+            "vid": "gen_sqmgqil",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 3,
+            "poolN": 1,
+            "pool": [
+              "eulogy"
+            ],
+            "firstPick": "eulogy",
+            "result": "launch",
+            "targetAfter": "algorithm"
+          },
+          {
+            "seed": 106306,
+            "day": 89,
+            "vid": "giulia_bianchi",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 3,
+            "poolN": 2,
+            "pool": [
+              "eulogy",
+              "audit"
+            ],
+            "firstPick": "eulogy",
+            "result": "launch",
+            "targetAfter": "algorithm"
+          },
+          {
+            "seed": 106306,
+            "day": 91,
+            "vid": "gen_sqmgqil",
+            "source": "brain",
+            "target": "algorithm",
+            "needWave": 3,
+            "poolN": 1,
+            "pool": [
+              "eulogy"
+            ],
+            "firstPick": "eulogy",
+            "result": "launch",
+            "targetAfter": "algorithm"
+          },
+          {
+            "seed": 106307,
+            "day": 36,
+            "vid": "gen_p1wn71v",
+            "source": "brain",
+            "target": "terms_of_service",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "terms_of_service"
+          },
+          {
+            "seed": 106307,
+            "day": 43,
+            "vid": "gen_p1wn71v",
+            "source": "brain",
+            "target": "terms_of_service",
+            "needWave": 3,
+            "poolN": 1,
+            "pool": [
+              "spool"
+            ],
+            "firstPick": "spool",
+            "result": "launch",
+            "targetAfter": "terms_of_service"
+          },
+          {
+            "seed": 106307,
+            "day": 46,
+            "vid": "gen_p1wn71v",
+            "source": "brain",
+            "target": "terms_of_service",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "terms_of_service"
+          },
+          {
+            "seed": 106307,
+            "day": 50,
+            "vid": "gen_p1wn71v",
+            "source": "brain",
+            "target": "terms_of_service",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "terms_of_service"
+          },
+          {
+            "seed": 106307,
+            "day": 56,
+            "vid": "gen_p1wn71v",
+            "source": "brain",
+            "target": "terms_of_service",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "terms_of_service"
+          },
+          {
+            "seed": 106307,
+            "day": 64,
+            "vid": "gen_p1wn71v",
+            "source": "brain",
+            "target": "terms_of_service",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "terms_of_service"
+          },
+          {
+            "seed": 106307,
+            "day": 68,
+            "vid": "gen_p1wn71v",
+            "source": "brain",
+            "target": "terms_of_service",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "terms_of_service"
+          },
+          {
+            "seed": 106307,
+            "day": 77,
+            "vid": "gen_p1wn71v",
+            "source": "brain",
+            "target": "terms_of_service",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "terms_of_service"
+          },
+          {
+            "seed": 106307,
+            "day": 100,
+            "vid": "theo_lindqvist",
+            "source": "brain",
+            "target": "buffering",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "buffering"
+          },
+          {
+            "seed": 106307,
+            "day": 103,
+            "vid": "theo_lindqvist",
+            "source": "brain",
+            "target": "buffering",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "buffering"
+          },
+          {
+            "seed": 106307,
+            "day": 106,
+            "vid": "theo_lindqvist",
+            "source": "brain",
+            "target": "buffering",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "buffering"
+          },
+          {
+            "seed": 106308,
+            "day": 115,
+            "vid": "app_mgpspkkv850",
+            "source": "brain",
+            "target": "influencer",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "influencer"
+          },
+          {
+            "seed": 106308,
+            "day": 117,
+            "vid": "gen_cnp1rm9",
+            "source": "brain",
+            "target": "influencer",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "influencer"
+          }
+        ]
+      },
+      "poolDisagreements": [
+        {
+          "seed": 106301,
+          "day": 43,
+          "vid": "gen_4s847jb",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106301,
+          "day": 71,
+          "vid": "gen_4s847jb",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106301,
+          "day": 74,
+          "vid": "gen_4s847jb",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106301,
+          "day": 78,
+          "vid": "gen_4s847jb",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106302,
+          "day": 71,
+          "vid": "dmitri_sokolov",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106302,
+          "day": 73,
+          "vid": "dmitri_sokolov",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106302,
+          "day": 77,
+          "vid": "dmitri_sokolov",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106304,
+          "day": 65,
+          "vid": "brian_otieno",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        },
+        {
+          "seed": 106306,
+          "day": 63,
+          "vid": "chen_wei",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 66,
+          "vid": "gen_p35e6dt",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 71,
+          "vid": "chen_wei",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 73,
+          "vid": "chen_wei",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106306,
+          "day": 76,
+          "vid": "chen_wei",
+          "source": "brain",
+          "target": "algorithm",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "algorithm"
+        },
+        {
+          "seed": 106307,
+          "day": 36,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 46,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 50,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 56,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 64,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 77,
+          "vid": "gen_p1wn71v",
+          "source": "brain",
+          "target": "terms_of_service",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "terms_of_service"
+        },
+        {
+          "seed": 106307,
+          "day": 100,
+          "vid": "theo_lindqvist",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        },
+        {
+          "seed": 106307,
+          "day": 103,
+          "vid": "theo_lindqvist",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        },
+        {
+          "seed": 106307,
+          "day": 106,
+          "vid": "theo_lindqvist",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        },
+        {
+          "seed": 106308,
+          "day": 115,
+          "vid": "app_mgpspkkv850",
+          "source": "brain",
+          "target": "influencer",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "influencer"
+        },
+        {
+          "seed": 106308,
+          "day": 117,
+          "vid": "gen_cnp1rm9",
+          "source": "brain",
+          "target": "influencer",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "influencer"
+        }
+      ],
+      "poolDisagreementsCount": 24
+    }
+  ],
+  "wall": {
+    "wins": 0,
+    "national": 0,
+    "wave5": 4,
+    "wave4": 8,
+    "standing200": 4,
+    "medianDays": 150.5,
+    "survived": 5
+  },
+  "medianDays": 150,
+  "launches": 7,
+  "errors": 0
+}
