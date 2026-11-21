@@ -1,0 +1,6401 @@
+{
+  "verdict": "NO-GO",
+  "kind": "INSTRUMENT",
+  "bars": [
+    {
+      "id": "instrument-pooled",
+      "pass": true,
+      "detail": "instrument errors 0 (bar 0); all band dirs 8 files: true"
+    },
+    {
+      "id": "gate-pooled",
+      "pass": true,
+      "detail": "gate missing 0, mismatch 0, classified ok true"
+    },
+    {
+      "id": "expiry-rule-pooled",
+      "pass": true,
+      "detail": "expiry-rule mismatches 0 (bar 0)"
+    },
+    {
+      "id": "pool-agreement-pooled",
+      "pass": false,
+      "detail": "replica-vs-real disagreements 61 (bar 0)"
+    },
+    {
+      "id": "dead-commits-pooled",
+      "pass": true,
+      "detail": "dead-target commits 110 pooled; pool floor min 0, dist {\"0\":102,\"1\":5,\"2\":3}"
+    },
+    {
+      "id": "post-expiry-pooled",
+      "pass": null,
+      "detail": "post-expiry targetless launches 0 — REPORTED, not judged (expiries 0 < 3)"
+    },
+    {
+      "id": "reseed-pooled",
+      "pass": null,
+      "detail": "expiries 0; re-seeded within 7d 0/0 = n/a — REPORTED, not judged (expiries < 3)"
+    },
+    {
+      "id": "holders-fight-again-pooled",
+      "pass": null,
+      "detail": "holders fighting again within 14d 0/0 = n/a — REPORTED, not judged (expiries < 3)"
+    }
+  ],
+  "pooled": {
+    "dirs": 2,
+    "deadCommits": 110,
+    "expiries": 0,
+    "poolFloorMin": 0,
+    "poolDist": {
+      "0": 102,
+      "1": 5,
+      "2": 3
+    },
+    "reseededWithin7": 0,
+    "foughtAgain14": 0,
+    "reseededShare": null,
+    "foughtAgainShare": null,
+    "postExpiryTargetlessLaunches": 0,
+    "poolDisagreements": 61,
+    "expiryRuleMismatch": 0,
+    "minExpiries": 3,
+    "lowN": true
+  },
+  "perDir": [
+    {
+      "dir": "evidence/2026-11-20/perseed-reseedwide-b-106601-control",
+      "verdict": "NO-GO",
+      "kind": "INSTRUMENT",
+      "bars": [
+        {
+          "id": "pool-launches",
+          "pass": true,
+          "detail": "launches 19 (floor 4); dead 0, live 19, unknown 0"
+        },
+        {
+          "id": "classification",
+          "pass": true,
+          "detail": "classified 19/19 = 1.000 (bar 1.000); dead share 0.000"
+        },
+        {
+          "id": "gate-snapshot",
+          "pass": true,
+          "detail": "gate snapshots missing 0, mismatched vs recomputation 0 (bar 0 / 0); duplicate depart rows 0 (expect 0)"
+        },
+        {
+          "id": "instrument",
+          "pass": true,
+          "detail": "instrument errors 0 (bar 0); files 8/8"
+        },
+        {
+          "id": "expiry-rule",
+          "pass": true,
+          "detail": "expiry-rule rows vs planExpiries mismatched on 0 seed(s) (bar 0)"
+        },
+        {
+          "id": "post-expiry",
+          "pass": true,
+          "detail": "post-expiry targetless launches 0 (bar 0); post-expiry holds 0"
+        },
+        {
+          "id": "dead-commits",
+          "pass": true,
+          "detail": "dead-target commits 28 (the survey denominator); pool floor min 0, median 0, dist {\"0\":23,\"1\":3,\"2\":2}"
+        },
+        {
+          "id": "pool-agreement",
+          "pass": false,
+          "detail": "replica-vs-real disagreements (pool-0 dead commit that launched) 19 (bar 0)"
+        },
+        {
+          "id": "reseed",
+          "pass": false,
+          "detail": "expiries 0; re-seed launches 0; re-seeded within 7d 0/0 = n/a (bar 0.667)"
+        },
+        {
+          "id": "holders-fight-again",
+          "pass": false,
+          "detail": "holders fighting again within 14d 0/0 = n/a (bar 0.667)"
+        }
+      ]
+    },
+    {
+      "dir": "evidence/2026-11-20/perseed-reseedwide-b-106609-control",
+      "verdict": "NO-GO",
+      "kind": "INSTRUMENT",
+      "bars": [
+        {
+          "id": "pool-launches",
+          "pass": true,
+          "detail": "launches 18 (floor 4); dead 1, live 15, unknown 2"
+        },
+        {
+          "id": "classification",
+          "pass": true,
+          "detail": "classified 18/18 = 1.000 (bar 1.000); dead share 0.056"
+        },
+        {
+          "id": "gate-snapshot",
+          "pass": true,
+          "detail": "gate snapshots missing 0, mismatched vs recomputation 0 (bar 0 / 0); duplicate depart rows 0 (expect 0)"
+        },
+        {
+          "id": "instrument",
+          "pass": true,
+          "detail": "instrument errors 0 (bar 0); files 8/8"
+        },
+        {
+          "id": "expiry-rule",
+          "pass": true,
+          "detail": "expiry-rule rows vs planExpiries mismatched on 0 seed(s) (bar 0)"
+        },
+        {
+          "id": "post-expiry",
+          "pass": true,
+          "detail": "post-expiry targetless launches 0 (bar 0); post-expiry holds 0"
+        },
+        {
+          "id": "dead-commits",
+          "pass": true,
+          "detail": "dead-target commits 82 (the survey denominator); pool floor min 0, median 0, dist {\"0\":79,\"1\":2,\"2\":1}"
+        },
+        {
+          "id": "pool-agreement",
+          "pass": false,
+          "detail": "replica-vs-real disagreements (pool-0 dead commit that launched) 42 (bar 0)"
+        },
+        {
+          "id": "reseed",
+          "pass": false,
+          "detail": "expiries 0; re-seed launches 0; re-seeded within 7d 0/0 = n/a (bar 0.667)"
+        },
+        {
+          "id": "holders-fight-again",
+          "pass": false,
+          "detail": "holders fighting again within 14d 0/0 = n/a (bar 0.667)"
+        }
+      ]
+    }
+  ],
+  "analyses": [
+    {
+      "dir": "evidence/2026-11-20/perseed-reseedwide-b-106601-control",
+      "files": 8,
+      "seeds": [
+        106601,
+        106602,
+        106603,
+        106604,
+        106605,
+        106606,
+        106607,
+        106608
+      ],
+      "errors": 0,
+      "duplicates": 0,
+      "gateMissing": 0,
+      "gateMismatch": 0,
+      "launches": 19,
+      "perSeed": [
+        {
+          "seed": 106601,
+          "launches": 1,
+          "dead": 0,
+          "live": 1,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 0,
+          "poolMin": null,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106602,
+          "launches": 5,
+          "dead": 0,
+          "live": 5,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 0,
+          "poolMin": null,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106603,
+          "launches": 1,
+          "dead": 0,
+          "live": 1,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 8,
+          "poolMin": 0,
+          "poolDisagreements": 8
+        },
+        {
+          "seed": 106604,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 12,
+          "poolMin": 0,
+          "poolDisagreements": 6
+        },
+        {
+          "seed": 106605,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 0,
+          "poolMin": null,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106606,
+          "launches": 7,
+          "dead": 0,
+          "live": 7,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 0,
+          "poolMin": null,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106607,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 3,
+          "poolMin": 0,
+          "poolDisagreements": 3
+        },
+        {
+          "seed": 106608,
+          "launches": 5,
+          "dead": 0,
+          "live": 5,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 5,
+          "poolMin": 0,
+          "poolDisagreements": 2
+        }
+      ],
+      "rows": [
+        {
+          "seed": 106601,
+          "launch": {
+            "seed": 106601,
+            "day": 86,
+            "vid": "nikos_papadopoulos",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "nikos_papadopoulos",
+              "visjoin_74",
+              "chen_wei"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "audit",
+              "node": {
+                "nx": 4,
+                "ny": 4
+              },
+              "sinceDay": 82,
+              "villageSlain": 0,
+              "lastFightDay": 82,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 4,
+              "lastSightingDay": 82,
+              "daysSinceLastSighting": 4
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 82,
+            "vid": "nikos_papadopoulos",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 82,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 4,
+          "daysSinceLastSighting": 4,
+          "firstFightAfter": {
+            "day": 98,
+            "vid": "ursula_weber",
+            "outcome": "vFlee",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106602,
+          "launch": {
+            "seed": 106602,
+            "day": 101,
+            "vid": "app_mgpsphye145",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "app_mgpsphye145",
+              "jorge_silva",
+              "app_mgpspkbl607",
+              "amina_diallo"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "audit",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 100,
+              "villageSlain": 0,
+              "lastFightDay": 100,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 100,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 100,
+            "vid": "app_mgpsphye145",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 100,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": null,
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106602,
+          "launch": {
+            "seed": 106602,
+            "day": 108,
+            "vid": "app_mgpsphye145",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "app_mgpsphye145",
+              "marcus_webb",
+              "amina_diallo",
+              "app_mgpspkbl607"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "audit",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 100,
+              "villageSlain": 0,
+              "lastFightDay": 100,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 8,
+              "lastSightingDay": 100,
+              "daysSinceLastSighting": 8
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 100,
+            "vid": "app_mgpsphye145",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 100,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 8,
+          "daysSinceLastSighting": 8,
+          "firstFightAfter": null,
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106602,
+          "launch": {
+            "seed": 106602,
+            "day": 113,
+            "vid": "app_mgpsphye145",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "app_mgpsphye145",
+              "jorge_silva",
+              "app_mgpspkbl607",
+              "hassan_ali"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "audit",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 100,
+              "villageSlain": 0,
+              "lastFightDay": 100,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 13,
+              "lastSightingDay": 100,
+              "daysSinceLastSighting": 13
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 100,
+            "vid": "app_mgpsphye145",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 100,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 13,
+          "daysSinceLastSighting": 13,
+          "firstFightAfter": null,
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106602,
+          "launch": {
+            "seed": 106602,
+            "day": 117,
+            "vid": "app_mgpsphye145",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "app_mgpsphye145",
+              "app_mgpspkbl607",
+              "hassan_ali"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "audit",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 100,
+              "villageSlain": 0,
+              "lastFightDay": 100,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 17,
+              "lastSightingDay": 100,
+              "daysSinceLastSighting": 17
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 100,
+            "vid": "app_mgpsphye145",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 100,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 17,
+          "daysSinceLastSighting": 17,
+          "firstFightAfter": null,
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106602,
+          "launch": {
+            "seed": 106602,
+            "day": 122,
+            "vid": "app_mgpsphye145",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "app_mgpsphye145",
+              "jorge_silva",
+              "amina_diallo",
+              "app_mgpspkbl607"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "audit",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 100,
+              "villageSlain": 0,
+              "lastFightDay": 100,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 22,
+              "lastSightingDay": 100,
+              "daysSinceLastSighting": 22
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 100,
+            "vid": "app_mgpsphye145",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 100,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 22,
+          "daysSinceLastSighting": 22,
+          "firstFightAfter": {
+            "day": 140,
+            "vid": "jorge_silva",
+            "outcome": "vFlee",
+            "origin": "aid",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106603,
+          "launch": {
+            "seed": 106603,
+            "day": 94,
+            "vid": "henry_zhang",
+            "target": "herald",
+            "targetWave": 4,
+            "party": [
+              "henry_zhang",
+              "diana_osei",
+              "gen_j699cit"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "herald",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 92,
+              "villageSlain": 0,
+              "lastFightDay": 92,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 2,
+              "lastSightingDay": 92,
+              "daysSinceLastSighting": 2
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 92,
+            "vid": "henry_zhang",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 92,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 2,
+          "daysSinceLastSighting": 2,
+          "firstFightAfter": {
+            "day": 95,
+            "vid": "app_mgpsphuj350",
+            "outcome": "vKill",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106606,
+          "launch": {
+            "seed": 106606,
+            "day": 143,
+            "vid": "visjoin_127",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "visjoin_127",
+              "visjoin_140"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 3,
+                "ny": 3
+              },
+              "sinceDay": 135,
+              "villageSlain": 0,
+              "lastFightDay": 135,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 8,
+              "lastSightingDay": 135,
+              "daysSinceLastSighting": 8
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 135,
+            "vid": "visjoin_127",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 135,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 8,
+          "daysSinceLastSighting": 8,
+          "firstFightAfter": {
+            "day": 157,
+            "vid": "visjoin_140",
+            "outcome": "vFlee",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106606,
+          "launch": {
+            "seed": 106606,
+            "day": 148,
+            "vid": "visjoin_127",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "visjoin_127",
+              "visjoin_140"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "table",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 3,
+                "ny": 3
+              },
+              "sinceDay": 135,
+              "villageSlain": 0,
+              "lastFightDay": 135,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 13,
+              "lastSightingDay": 135,
+              "daysSinceLastSighting": 13
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 135,
+            "vid": "visjoin_127",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 135,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 13,
+          "daysSinceLastSighting": 13,
+          "firstFightAfter": {
+            "day": 157,
+            "vid": "visjoin_140",
+            "outcome": "vFlee",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "table",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106606,
+          "launch": {
+            "seed": 106606,
+            "day": 153,
+            "vid": "visjoin_127",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "visjoin_127",
+              "visjoin_140"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "table",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 3,
+                "ny": 3
+              },
+              "sinceDay": 135,
+              "villageSlain": 0,
+              "lastFightDay": 135,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 18,
+              "lastSightingDay": 135,
+              "daysSinceLastSighting": 18
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 135,
+            "vid": "visjoin_127",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 135,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 18,
+          "daysSinceLastSighting": 18,
+          "firstFightAfter": {
+            "day": 157,
+            "vid": "visjoin_140",
+            "outcome": "vFlee",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "table",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106606,
+          "launch": {
+            "seed": 106606,
+            "day": 157,
+            "vid": "visjoin_127",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "visjoin_127",
+              "visjoin_140"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "table",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 3,
+                "ny": 3
+              },
+              "sinceDay": 135,
+              "villageSlain": 0,
+              "lastFightDay": 135,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 22,
+              "lastSightingDay": 135,
+              "daysSinceLastSighting": 22
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 135,
+            "vid": "visjoin_127",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 135,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 22,
+          "daysSinceLastSighting": 22,
+          "firstFightAfter": {
+            "day": 157,
+            "vid": "visjoin_140",
+            "outcome": "vFlee",
+            "origin": "world-tick",
+            "sameDay": true
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "table",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106606,
+          "launch": {
+            "seed": 106606,
+            "day": 163,
+            "vid": "visjoin_127",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "visjoin_127",
+              "visjoin_140",
+              "ava_garcia"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "table",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 3,
+                "ny": 3
+              },
+              "sinceDay": 135,
+              "villageSlain": 0,
+              "lastFightDay": 157,
+              "lastFightKill": false,
+              "lastFightOutcome": "mFlee",
+              "daysSinceLastFight": 6,
+              "lastSightingDay": 157,
+              "daysSinceLastSighting": 6
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 157,
+            "vid": "visjoin_127",
+            "outcome": "mFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 157,
+            "outcome": "mFlee"
+          },
+          "daysSinceLastFight": 6,
+          "daysSinceLastSighting": 6,
+          "firstFightAfter": {
+            "day": 168,
+            "vid": "ava_garcia",
+            "outcome": "mFlee",
+            "origin": "expedition",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "table",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106606,
+          "launch": {
+            "seed": 106606,
+            "day": 166,
+            "vid": "visjoin_127",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "visjoin_127",
+              "visjoin_140",
+              "ava_garcia",
+              "visjoin_164"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "table",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 3,
+                "ny": 3
+              },
+              "sinceDay": 135,
+              "villageSlain": 0,
+              "lastFightDay": 157,
+              "lastFightKill": false,
+              "lastFightOutcome": "mFlee",
+              "daysSinceLastFight": 9,
+              "lastSightingDay": 157,
+              "daysSinceLastSighting": 9
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 157,
+            "vid": "visjoin_127",
+            "outcome": "mFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 157,
+            "outcome": "mFlee"
+          },
+          "daysSinceLastFight": 9,
+          "daysSinceLastSighting": 9,
+          "firstFightAfter": {
+            "day": 168,
+            "vid": "ava_garcia",
+            "outcome": "mFlee",
+            "origin": "expedition",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "table",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106606,
+          "launch": {
+            "seed": 106606,
+            "day": 172,
+            "vid": "visjoin_127",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "visjoin_127",
+              "visjoin_168"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "table",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 3,
+                "ny": 3
+              },
+              "sinceDay": 135,
+              "villageSlain": 0,
+              "lastFightDay": 169,
+              "lastFightKill": false,
+              "lastFightOutcome": "vDie",
+              "daysSinceLastFight": 3,
+              "lastSightingDay": 169,
+              "daysSinceLastSighting": 3
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 169,
+            "vid": "visjoin_164",
+            "outcome": "vDie",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 169,
+            "outcome": "vDie"
+          },
+          "daysSinceLastFight": 3,
+          "daysSinceLastSighting": 3,
+          "firstFightAfter": {
+            "day": 172,
+            "vid": "visjoin_127",
+            "outcome": "mFlee",
+            "origin": "expedition",
+            "sameDay": true
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "table",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106608,
+          "launch": {
+            "seed": 106608,
+            "day": 141,
+            "vid": "app_mgpspk56204",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "app_mgpspk56204",
+              "nadia_khoury",
+              "app_mgpspkrq723",
+              "mara_vasquez"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "audit",
+              "node": {
+                "nx": 4,
+                "ny": 4
+              },
+              "sinceDay": 140,
+              "villageSlain": 0,
+              "lastFightDay": 140,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 140,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 140,
+            "vid": "app_mgpspk56204",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 140,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106608,
+          "launch": {
+            "seed": 106608,
+            "day": 144,
+            "vid": "app_mgpspk56204",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "app_mgpspk56204",
+              "nadia_khoury",
+              "mara_vasquez"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "audit",
+              "node": {
+                "nx": 4,
+                "ny": 4
+              },
+              "sinceDay": 140,
+              "villageSlain": 0,
+              "lastFightDay": 140,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 4,
+              "lastSightingDay": 140,
+              "daysSinceLastSighting": 4
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 140,
+            "vid": "app_mgpspk56204",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 140,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 4,
+          "daysSinceLastSighting": 4,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106608,
+          "launch": {
+            "seed": 106608,
+            "day": 152,
+            "vid": "app_mgpspkrq723",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "app_mgpspkrq723",
+              "nadia_khoury",
+              "app_mgpspk56204",
+              "meera_reddy"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "audit",
+              "node": {
+                "nx": 4,
+                "ny": 4
+              },
+              "sinceDay": 140,
+              "villageSlain": 0,
+              "lastFightDay": 140,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 12,
+              "lastSightingDay": 140,
+              "daysSinceLastSighting": 12
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 140,
+            "vid": "app_mgpspk56204",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 140,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 12,
+          "daysSinceLastSighting": 12,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106608,
+          "launch": {
+            "seed": 106608,
+            "day": 157,
+            "vid": "app_mgpspkrq723",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "app_mgpspkrq723",
+              "nadia_khoury",
+              "meera_reddy"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "audit",
+              "node": {
+                "nx": 4,
+                "ny": 4
+              },
+              "sinceDay": 140,
+              "villageSlain": 0,
+              "lastFightDay": 140,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 17,
+              "lastSightingDay": 140,
+              "daysSinceLastSighting": 17
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 140,
+            "vid": "app_mgpspk56204",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 140,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 17,
+          "daysSinceLastSighting": 17,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106608,
+          "launch": {
+            "seed": 106608,
+            "day": 164,
+            "vid": "app_mgpspkrq723",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "app_mgpspkrq723",
+              "nadia_khoury",
+              "tom_baker"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "audit",
+              "node": {
+                "nx": 4,
+                "ny": 4
+              },
+              "sinceDay": 140,
+              "villageSlain": 0,
+              "lastFightDay": 140,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 24,
+              "lastSightingDay": 140,
+              "daysSinceLastSighting": 24
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 140,
+            "vid": "app_mgpspk56204",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 140,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 24,
+          "daysSinceLastSighting": 24,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        }
+      ],
+      "dead": 0,
+      "live": 19,
+      "unknown": 0,
+      "classified": 19,
+      "classifiedShare": 1,
+      "deadShare": 0,
+      "stageBefore": {
+        "party": 5,
+        "hunt": 8,
+        "table": 6
+      },
+      "deadStanding": 0,
+      "deadSlainKnown": 0,
+      "deadNeverRefought": 0,
+      "withFirstAfter": 10,
+      "sameDayFirstAfter": 2,
+      "medianDaysSinceLastFight": 9,
+      "expiries": [],
+      "postExpiryTargetlessLaunches": 0,
+      "postExpiryTargetlessLaunchRows": [],
+      "postExpiryHolds": 0,
+      "postExpiryHoldRows": [],
+      "expiryRuleMismatch": 0,
+      "reseeds": [],
+      "reseededWithin7": [],
+      "foughtAgain14": [],
+      "reseedsCount": 0,
+      "expiriesCount": 0,
+      "reseededWithin7Count": 0,
+      "foughtAgain14Count": 0,
+      "reseededShare": null,
+      "foughtAgainShare": null,
+      "deadCommits": [
+        {
+          "seed": 106603,
+          "day": 28,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 38,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 43,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 51,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 57,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 71,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 77,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 82,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 34,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 44,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 55,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 67,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 72,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 80,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 84,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 165,
+          "vid": "leo_martin",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 2,
+          "pool": [
+            "eater",
+            "reunion"
+          ],
+          "firstPick": "eater",
+          "result": "normal",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106604,
+          "day": 167,
+          "vid": "leo_martin",
+          "source": "brain",
+          "target": "strike",
+          "needWave": 4,
+          "poolN": 1,
+          "pool": [
+            "eater"
+          ],
+          "firstPick": "eater",
+          "result": "normal",
+          "targetAfter": "strike"
+        },
+        {
+          "seed": 106604,
+          "day": 170,
+          "vid": "leo_martin",
+          "source": "brain",
+          "target": "strike",
+          "needWave": 4,
+          "poolN": 2,
+          "pool": [
+            "nielsen",
+            "eater"
+          ],
+          "firstPick": "nielsen",
+          "result": "normal",
+          "targetAfter": "strike"
+        },
+        {
+          "seed": 106604,
+          "day": 172,
+          "vid": "leo_martin",
+          "source": "brain",
+          "target": "strike",
+          "needWave": 4,
+          "poolN": 1,
+          "pool": [
+            "eater"
+          ],
+          "firstPick": "eater",
+          "result": "normal",
+          "targetAfter": "strike"
+        },
+        {
+          "seed": 106604,
+          "day": 173,
+          "vid": "leo_martin",
+          "source": "brain",
+          "target": "strike",
+          "needWave": 4,
+          "poolN": 1,
+          "pool": [
+            "eater"
+          ],
+          "firstPick": "eater",
+          "result": "normal",
+          "targetAfter": "strike"
+        },
+        {
+          "seed": 106607,
+          "day": 55,
+          "vid": "devon_okafor",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106607,
+          "day": 71,
+          "vid": "devon_okafor",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106607,
+          "day": 73,
+          "vid": "devon_okafor",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106608,
+          "day": 116,
+          "vid": "nadia_khoury",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106608,
+          "day": 125,
+          "vid": "quinn_murphy",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        },
+        {
+          "seed": 106608,
+          "day": 126,
+          "vid": "nadia_khoury",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106608,
+          "day": 130,
+          "vid": "nadia_khoury",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106608,
+          "day": 130,
+          "vid": "quinn_murphy",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        }
+      ],
+      "deadCommitsCount": 28,
+      "poolFloor": {
+        "commits": 28,
+        "min": 0,
+        "median": 0,
+        "dist": {
+          "0": 23,
+          "1": 3,
+          "2": 2
+        },
+        "table": [
+          {
+            "seed": 106603,
+            "day": 28,
+            "vid": "amina_diallo",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106603,
+            "day": 38,
+            "vid": "amina_diallo",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106603,
+            "day": 43,
+            "vid": "amina_diallo",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106603,
+            "day": 51,
+            "vid": "amina_diallo",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106603,
+            "day": 57,
+            "vid": "amina_diallo",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106603,
+            "day": 71,
+            "vid": "amina_diallo",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106603,
+            "day": 77,
+            "vid": "amina_diallo",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106603,
+            "day": 82,
+            "vid": "amina_diallo",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106604,
+            "day": 34,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106604,
+            "day": 44,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106604,
+            "day": 55,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106604,
+            "day": 67,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106604,
+            "day": 72,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106604,
+            "day": 80,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106604,
+            "day": 84,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106604,
+            "day": 165,
+            "vid": "leo_martin",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 2,
+            "pool": [
+              "eater",
+              "reunion"
+            ],
+            "firstPick": "eater",
+            "result": "normal",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106604,
+            "day": 167,
+            "vid": "leo_martin",
+            "source": "brain",
+            "target": "strike",
+            "needWave": 4,
+            "poolN": 1,
+            "pool": [
+              "eater"
+            ],
+            "firstPick": "eater",
+            "result": "normal",
+            "targetAfter": "strike"
+          },
+          {
+            "seed": 106604,
+            "day": 170,
+            "vid": "leo_martin",
+            "source": "brain",
+            "target": "strike",
+            "needWave": 4,
+            "poolN": 2,
+            "pool": [
+              "nielsen",
+              "eater"
+            ],
+            "firstPick": "nielsen",
+            "result": "normal",
+            "targetAfter": "strike"
+          },
+          {
+            "seed": 106604,
+            "day": 172,
+            "vid": "leo_martin",
+            "source": "brain",
+            "target": "strike",
+            "needWave": 4,
+            "poolN": 1,
+            "pool": [
+              "eater"
+            ],
+            "firstPick": "eater",
+            "result": "normal",
+            "targetAfter": "strike"
+          },
+          {
+            "seed": 106604,
+            "day": 173,
+            "vid": "leo_martin",
+            "source": "brain",
+            "target": "strike",
+            "needWave": 4,
+            "poolN": 1,
+            "pool": [
+              "eater"
+            ],
+            "firstPick": "eater",
+            "result": "normal",
+            "targetAfter": "strike"
+          },
+          {
+            "seed": 106607,
+            "day": 55,
+            "vid": "devon_okafor",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106607,
+            "day": 71,
+            "vid": "devon_okafor",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106607,
+            "day": 73,
+            "vid": "devon_okafor",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106608,
+            "day": 116,
+            "vid": "nadia_khoury",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106608,
+            "day": 125,
+            "vid": "quinn_murphy",
+            "source": "brain",
+            "target": "buffering",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "buffering"
+          },
+          {
+            "seed": 106608,
+            "day": 126,
+            "vid": "nadia_khoury",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106608,
+            "day": 130,
+            "vid": "nadia_khoury",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106608,
+            "day": 130,
+            "vid": "quinn_murphy",
+            "source": "brain",
+            "target": "buffering",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "buffering"
+          }
+        ]
+      },
+      "poolDisagreements": [
+        {
+          "seed": 106603,
+          "day": 28,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 38,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 43,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 51,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 57,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 71,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 77,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106603,
+          "day": 82,
+          "vid": "amina_diallo",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 34,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 55,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 67,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 72,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 80,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106604,
+          "day": 84,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106607,
+          "day": 55,
+          "vid": "devon_okafor",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106607,
+          "day": 71,
+          "vid": "devon_okafor",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106607,
+          "day": 73,
+          "vid": "devon_okafor",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106608,
+          "day": 125,
+          "vid": "quinn_murphy",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        },
+        {
+          "seed": 106608,
+          "day": 130,
+          "vid": "quinn_murphy",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        }
+      ],
+      "poolDisagreementsCount": 19
+    },
+    {
+      "dir": "evidence/2026-11-20/perseed-reseedwide-b-106609-control",
+      "files": 8,
+      "seeds": [
+        106609,
+        106610,
+        106611,
+        106612,
+        106613,
+        106614,
+        106615,
+        106616
+      ],
+      "errors": 0,
+      "duplicates": 0,
+      "gateMissing": 0,
+      "gateMismatch": 0,
+      "launches": 18,
+      "perSeed": [
+        {
+          "seed": 106609,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 3,
+          "poolMin": 0,
+          "poolDisagreements": 2
+        },
+        {
+          "seed": 106610,
+          "launches": 2,
+          "dead": 0,
+          "live": 1,
+          "unknown": 1,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 8,
+          "poolMin": 0,
+          "poolDisagreements": 8
+        },
+        {
+          "seed": 106611,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 1,
+          "poolMin": 0,
+          "poolDisagreements": 1
+        },
+        {
+          "seed": 106612,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 11,
+          "poolMin": 0,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106613,
+          "launches": 1,
+          "dead": 0,
+          "live": 1,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 0,
+          "poolMin": null,
+          "poolDisagreements": 0
+        },
+        {
+          "seed": 106614,
+          "launches": 0,
+          "dead": 0,
+          "live": 0,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 22,
+          "poolMin": 0,
+          "poolDisagreements": 13
+        },
+        {
+          "seed": 106615,
+          "launches": 13,
+          "dead": 1,
+          "live": 11,
+          "unknown": 1,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 37,
+          "poolMin": 0,
+          "poolDisagreements": 18
+        },
+        {
+          "seed": 106616,
+          "launches": 2,
+          "dead": 0,
+          "live": 2,
+          "unknown": 0,
+          "duplicates": 0,
+          "gateMissing": 0,
+          "gateMismatch": 0,
+          "expiries": 0,
+          "planExpiries": 0,
+          "reseeds": 0,
+          "reseededWithin7": 0,
+          "foughtAgain14": 0,
+          "postExpiryTargetlessLaunches": 0,
+          "postExpiryHolds": 0,
+          "deadCommits": 0,
+          "poolMin": null,
+          "poolDisagreements": 0
+        }
+      ],
+      "rows": [
+        {
+          "seed": 106610,
+          "launch": {
+            "seed": 106610,
+            "day": 77,
+            "vid": "gen_q3stxjy",
+            "target": "reunion",
+            "targetWave": 4,
+            "party": [
+              "gen_q3stxjy",
+              "gen_flv0wow",
+              "gen_1bbsg0y",
+              "gen_uwnuqb5"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "reunion",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 75,
+              "villageSlain": 0,
+              "lastFightDay": null,
+              "lastFightKill": null,
+              "lastFightOutcome": null,
+              "daysSinceLastFight": null,
+              "lastSightingDay": 75,
+              "daysSinceLastSighting": 2
+            }
+          },
+          "cls": "unknown",
+          "lastFought": null,
+          "lastSighted": {
+            "day": 75,
+            "outcome": "evade"
+          },
+          "daysSinceLastFight": null,
+          "daysSinceLastSighting": 2,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106610,
+          "launch": {
+            "seed": 106610,
+            "day": 134,
+            "vid": "omar_farouk",
+            "target": "network_note",
+            "targetWave": 5,
+            "party": [
+              "omar_farouk",
+              "desmond_clarke"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "network_note",
+              "node": {
+                "nx": 3,
+                "ny": 5
+              },
+              "sinceDay": 133,
+              "villageSlain": 0,
+              "lastFightDay": 133,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 133,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 133,
+            "vid": "omar_farouk",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 133,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": {
+            "day": 142,
+            "vid": "visjoin_129",
+            "outcome": "vFlee",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106613,
+          "launch": {
+            "seed": 106613,
+            "day": 82,
+            "vid": "brian_otieno",
+            "target": "algorithm",
+            "targetWave": 4,
+            "party": [
+              "brian_otieno",
+              "visjoin_78",
+              "daniyar_askarov",
+              "sari_wulandari"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "algorithm",
+              "node": {
+                "nx": 5,
+                "ny": 4
+              },
+              "sinceDay": 81,
+              "villageSlain": 0,
+              "lastFightDay": 81,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 81,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 81,
+            "vid": "brian_otieno",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 81,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": {
+            "day": 88,
+            "vid": "sari_wulandari",
+            "outcome": "vFlee",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 90,
+            "vid": "emma_larsen",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "emma_larsen",
+              "carlos_diaz",
+              "victor_lopez",
+              "gen_ba8yb1q"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 2,
+                "ny": 5
+              },
+              "sinceDay": 89,
+              "villageSlain": 1,
+              "lastFightDay": 89,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 89,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 89,
+            "vid": "emma_larsen",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 89,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": {
+            "day": 91,
+            "vid": "aki_tanaka",
+            "outcome": "vFlee",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 1
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 94,
+            "vid": "aki_tanaka",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "aki_tanaka",
+              "wanjiru_kamau"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 3,
+                "ny": 4
+              },
+              "sinceDay": 91,
+              "villageSlain": 1,
+              "lastFightDay": 91,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 3,
+              "lastSightingDay": 91,
+              "daysSinceLastSighting": 3
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 91,
+            "vid": "aki_tanaka",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 91,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 3,
+          "daysSinceLastSighting": 3,
+          "firstFightAfter": {
+            "day": 97,
+            "vid": "olivia_bennett",
+            "outcome": "mFlee",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 1
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 99,
+            "vid": "emma_larsen",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "emma_larsen",
+              "gen_ba8yb1q",
+              "olivia_bennett",
+              "aki_tanaka"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 2,
+                "ny": 5
+              },
+              "sinceDay": 89,
+              "villageSlain": 1,
+              "lastFightDay": 98,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 98,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 98,
+            "vid": "aki_tanaka",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "aid"
+          },
+          "lastSighted": {
+            "day": 98,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": {
+            "day": 99,
+            "vid": "hassan_ali",
+            "outcome": "vFlee",
+            "origin": "aid",
+            "sameDay": true
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 1
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 106,
+            "vid": "emma_larsen",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "emma_larsen",
+              "wanjiru_kamau",
+              "olivia_bennett",
+              "aki_tanaka"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 2,
+                "ny": 5
+              },
+              "sinceDay": 89,
+              "villageSlain": 2,
+              "lastFightDay": 105,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 105,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 105,
+            "vid": "olivia_bennett",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 105,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": {
+            "day": 107,
+            "vid": "aki_tanaka",
+            "outcome": "mFlee",
+            "origin": "expedition",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 2
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 115,
+            "vid": "emma_larsen",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "emma_larsen",
+              "petra_novak",
+              "app_mgpsphcl908"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 2,
+                "ny": 5
+              },
+              "sinceDay": 89,
+              "villageSlain": 3,
+              "lastFightDay": 113,
+              "lastFightKill": true,
+              "lastFightOutcome": "vKill",
+              "daysSinceLastFight": 2,
+              "lastSightingDay": 113,
+              "daysSinceLastSighting": 2
+            }
+          },
+          "cls": "dead",
+          "lastFought": {
+            "day": 113,
+            "vid": "nikos_papadopoulos",
+            "outcome": "vKill",
+            "vKill": true,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 113,
+            "outcome": "vKill"
+          },
+          "daysSinceLastFight": 2,
+          "daysSinceLastSighting": 2,
+          "firstFightAfter": {
+            "day": 116,
+            "vid": "emma_larsen",
+            "outcome": "mFlee",
+            "origin": "expedition",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 3
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 120,
+            "vid": "app_mgpsphcl908",
+            "target": "audit",
+            "targetWave": 4,
+            "party": [
+              "app_mgpsphcl908",
+              "petra_novak",
+              "visjoin_106"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "audit",
+              "node": {
+                "nx": 2,
+                "ny": 5
+              },
+              "sinceDay": 119,
+              "villageSlain": 0,
+              "lastFightDay": null,
+              "lastFightKill": null,
+              "lastFightOutcome": null,
+              "daysSinceLastFight": null,
+              "lastSightingDay": 119,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "unknown",
+          "lastFought": null,
+          "lastSighted": {
+            "day": 119,
+            "outcome": "evade"
+          },
+          "daysSinceLastFight": null,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 123,
+            "vid": "visjoin_106",
+            "target": "rerun",
+            "targetWave": 5,
+            "party": [
+              "visjoin_106",
+              "carlos_diaz"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "rerun",
+              "node": {
+                "nx": 2,
+                "ny": 5
+              },
+              "sinceDay": 122,
+              "villageSlain": 0,
+              "lastFightDay": 122,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 122,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 122,
+            "vid": "visjoin_106",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 122,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": {
+            "day": 130,
+            "vid": "visjoin_106",
+            "outcome": "vDie",
+            "origin": "aid",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 127,
+            "vid": "visjoin_106",
+            "target": "rerun",
+            "targetWave": 5,
+            "party": [
+              "visjoin_106",
+              "emma_larsen",
+              "wanjiru_kamau",
+              "carlos_diaz"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "rerun",
+              "node": {
+                "nx": 2,
+                "ny": 5
+              },
+              "sinceDay": 122,
+              "villageSlain": 0,
+              "lastFightDay": 122,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 5,
+              "lastSightingDay": 122,
+              "daysSinceLastSighting": 5
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 122,
+            "vid": "visjoin_106",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 122,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 5,
+          "daysSinceLastSighting": 5,
+          "firstFightAfter": {
+            "day": 130,
+            "vid": "visjoin_106",
+            "outcome": "vDie",
+            "origin": "aid",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 135,
+            "vid": "emma_larsen",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "emma_larsen",
+              "wanjiru_kamau",
+              "carlos_diaz"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "table",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 2,
+                "ny": 5
+              },
+              "sinceDay": 89,
+              "villageSlain": 3,
+              "lastFightDay": 116,
+              "lastFightKill": false,
+              "lastFightOutcome": "mFlee",
+              "daysSinceLastFight": 19,
+              "lastSightingDay": 116,
+              "daysSinceLastSighting": 19
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 116,
+            "vid": "emma_larsen",
+            "outcome": "mFlee",
+            "vKill": false,
+            "origin": "expedition"
+          },
+          "lastSighted": {
+            "day": 116,
+            "outcome": "mFlee"
+          },
+          "daysSinceLastFight": 19,
+          "daysSinceLastSighting": 19,
+          "firstFightAfter": {
+            "day": 137,
+            "vid": "visjoin_135",
+            "outcome": "vFlee",
+            "origin": "world-tick",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "table",
+          "villageSlain": 3
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 139,
+            "vid": "visjoin_135",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "visjoin_135",
+              "wanjiru_kamau",
+              "carlos_diaz"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 4,
+                "ny": 4
+              },
+              "sinceDay": 137,
+              "villageSlain": 3,
+              "lastFightDay": 138,
+              "lastFightKill": false,
+              "lastFightOutcome": "mFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 138,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 138,
+            "vid": "emma_larsen",
+            "outcome": "mFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 138,
+            "outcome": "mFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": null,
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 3
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 144,
+            "vid": "visjoin_135",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "visjoin_135",
+              "emma_larsen",
+              "visjoin_140"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 4,
+                "ny": 4
+              },
+              "sinceDay": 137,
+              "villageSlain": 3,
+              "lastFightDay": 138,
+              "lastFightKill": false,
+              "lastFightOutcome": "mFlee",
+              "daysSinceLastFight": 6,
+              "lastSightingDay": 138,
+              "daysSinceLastSighting": 6
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 138,
+            "vid": "emma_larsen",
+            "outcome": "mFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 138,
+            "outcome": "mFlee"
+          },
+          "daysSinceLastFight": 6,
+          "daysSinceLastSighting": 6,
+          "firstFightAfter": null,
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 3
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 169,
+            "vid": "visjoin_157",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "visjoin_157",
+              "visjoin_158"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "party",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 5,
+                "ny": 3
+              },
+              "sinceDay": 168,
+              "villageSlain": 3,
+              "lastFightDay": 168,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 1,
+              "lastSightingDay": 168,
+              "daysSinceLastSighting": 1
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 168,
+            "vid": "visjoin_157",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 168,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 1,
+          "daysSinceLastSighting": 1,
+          "firstFightAfter": {
+            "day": 169,
+            "vid": "visjoin_157",
+            "outcome": "vFlee",
+            "origin": "world-tick",
+            "sameDay": true
+          },
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "party",
+          "villageSlain": 3
+        },
+        {
+          "seed": 106615,
+          "launch": {
+            "seed": 106615,
+            "day": 172,
+            "vid": "visjoin_157",
+            "target": "eulogy",
+            "targetWave": 4,
+            "party": [
+              "visjoin_157",
+              "visjoin_158"
+            ],
+            "partySize": 2,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "eulogy",
+              "node": {
+                "nx": 5,
+                "ny": 3
+              },
+              "sinceDay": 168,
+              "villageSlain": 3,
+              "lastFightDay": 169,
+              "lastFightKill": false,
+              "lastFightOutcome": "vFlee",
+              "daysSinceLastFight": 3,
+              "lastSightingDay": 169,
+              "daysSinceLastSighting": 3
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 169,
+            "vid": "visjoin_157",
+            "outcome": "vFlee",
+            "vKill": false,
+            "origin": "world-tick"
+          },
+          "lastSighted": {
+            "day": 169,
+            "outcome": "vFlee"
+          },
+          "daysSinceLastFight": 3,
+          "daysSinceLastSighting": 3,
+          "firstFightAfter": null,
+          "refoughtAfter": false,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 3
+        },
+        {
+          "seed": 106616,
+          "launch": {
+            "seed": 106616,
+            "day": 57,
+            "vid": "leo_martin",
+            "target": "strike",
+            "targetWave": 4,
+            "party": [
+              "leo_martin",
+              "gen_5axxfp6",
+              "gen_raywq3j"
+            ],
+            "partySize": 3,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "strike",
+              "node": {
+                "nx": 4,
+                "ny": 6
+              },
+              "sinceDay": 51,
+              "villageSlain": 0,
+              "lastFightDay": 51,
+              "lastFightKill": false,
+              "lastFightOutcome": "vDie",
+              "daysSinceLastFight": 6,
+              "lastSightingDay": 51,
+              "daysSinceLastSighting": 6
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 51,
+            "vid": "gen_30c2m54",
+            "outcome": "vDie",
+            "vKill": false,
+            "origin": "expedition"
+          },
+          "lastSighted": {
+            "day": 51,
+            "outcome": "vDie"
+          },
+          "daysSinceLastFight": 6,
+          "daysSinceLastSighting": 6,
+          "firstFightAfter": null,
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        },
+        {
+          "seed": 106616,
+          "launch": {
+            "seed": 106616,
+            "day": 64,
+            "vid": "leo_martin",
+            "target": "strike",
+            "targetWave": 4,
+            "party": [
+              "leo_martin",
+              "mateo_alvarez",
+              "caleb_jones",
+              "xavier_dubois"
+            ],
+            "partySize": 4,
+            "source": "brain",
+            "gate": {
+              "stageBefore": "hunt",
+              "targetBefore": "strike",
+              "node": {
+                "nx": 4,
+                "ny": 6
+              },
+              "sinceDay": 51,
+              "villageSlain": 0,
+              "lastFightDay": 51,
+              "lastFightKill": false,
+              "lastFightOutcome": "vDie",
+              "daysSinceLastFight": 13,
+              "lastSightingDay": 51,
+              "daysSinceLastSighting": 13
+            }
+          },
+          "cls": "live",
+          "lastFought": {
+            "day": 51,
+            "vid": "gen_30c2m54",
+            "outcome": "vDie",
+            "vKill": false,
+            "origin": "expedition"
+          },
+          "lastSighted": {
+            "day": 51,
+            "outcome": "vDie"
+          },
+          "daysSinceLastFight": 13,
+          "daysSinceLastSighting": 13,
+          "firstFightAfter": {
+            "day": 82,
+            "vid": "leo_martin",
+            "outcome": "vFlee",
+            "origin": "expedition",
+            "sameDay": false
+          },
+          "refoughtAfter": true,
+          "gateOk": true,
+          "stageBefore": "hunt",
+          "villageSlain": 0
+        }
+      ],
+      "dead": 1,
+      "live": 15,
+      "unknown": 2,
+      "classified": 18,
+      "classifiedShare": 1,
+      "deadShare": 0.05555555555555555,
+      "stageBefore": {
+        "party": 10,
+        "hunt": 7,
+        "table": 1
+      },
+      "deadStanding": 0,
+      "deadSlainKnown": 1,
+      "deadNeverRefought": 0,
+      "withFirstAfter": 12,
+      "sameDayFirstAfter": 2,
+      "medianDaysSinceLastFight": 1.5,
+      "expiries": [],
+      "postExpiryTargetlessLaunches": 0,
+      "postExpiryTargetlessLaunchRows": [],
+      "postExpiryHolds": 0,
+      "postExpiryHoldRows": [],
+      "expiryRuleMismatch": 0,
+      "reseeds": [],
+      "reseededWithin7": [],
+      "foughtAgain14": [],
+      "reseedsCount": 0,
+      "expiriesCount": 0,
+      "reseededWithin7Count": 0,
+      "foughtAgain14Count": 0,
+      "reseededShare": null,
+      "foughtAgainShare": null,
+      "deadCommits": [
+        {
+          "seed": 106609,
+          "day": 40,
+          "vid": "sam_wilson",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106609,
+          "day": 47,
+          "vid": "sam_wilson",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106609,
+          "day": 49,
+          "vid": "sam_wilson",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106610,
+          "day": 38,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 46,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 53,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 57,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 60,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 65,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 72,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 99,
+          "vid": "visjoin_90",
+          "source": "brain",
+          "target": "callback",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "callback"
+        },
+        {
+          "seed": 106611,
+          "day": 75,
+          "vid": "pavel_dubinin",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        },
+        {
+          "seed": 106612,
+          "day": 52,
+          "vid": "tariq_mahmood",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106612,
+          "day": 53,
+          "vid": "tariq_mahmood",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106612,
+          "day": 54,
+          "vid": "tariq_mahmood",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106612,
+          "day": 55,
+          "vid": "tariq_mahmood",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106612,
+          "day": 56,
+          "vid": "tariq_mahmood",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106612,
+          "day": 57,
+          "vid": "tariq_mahmood",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106612,
+          "day": 59,
+          "vid": "tariq_mahmood",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106612,
+          "day": 60,
+          "vid": "tariq_mahmood",
+          "source": "brain",
+          "target": "redactor",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "redactor"
+        },
+        {
+          "seed": 106612,
+          "day": 78,
+          "vid": "owen_smith",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106612,
+          "day": 79,
+          "vid": "owen_smith",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106612,
+          "day": 80,
+          "vid": "owen_smith",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106614,
+          "day": 60,
+          "vid": "gen_yf7h6e8",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 61,
+          "vid": "gen_yf7h6e8",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 63,
+          "vid": "gen_yf7h6e8",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 69,
+          "vid": "gen_yf7h6e8",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 73,
+          "vid": "gen_yf7h6e8",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 77,
+          "vid": "gen_yf7h6e8",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 85,
+          "vid": "gen_yf7h6e8",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 97,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "gavel",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "gavel"
+        },
+        {
+          "seed": 106614,
+          "day": 101,
+          "vid": "gen_yq2j43s",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 102,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "gavel",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "gavel"
+        },
+        {
+          "seed": 106614,
+          "day": 102,
+          "vid": "gen_yq2j43s",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 104,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "gavel",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "gavel"
+        },
+        {
+          "seed": 106614,
+          "day": 109,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "gavel",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "gavel"
+        },
+        {
+          "seed": 106614,
+          "day": 113,
+          "vid": "gen_yq2j43s",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 117,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "gavel",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "gavel"
+        },
+        {
+          "seed": 106614,
+          "day": 121,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106614,
+          "day": 126,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106614,
+          "day": 128,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106614,
+          "day": 128,
+          "vid": "gen_yq2j43s",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 129,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106614,
+          "day": 132,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106614,
+          "day": 135,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106615,
+          "day": 69,
+          "vid": "gen_pxzzt26",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106615,
+          "day": 70,
+          "vid": "gen_pxzzt26",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106615,
+          "day": 72,
+          "vid": "gen_pxzzt26",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106615,
+          "day": 77,
+          "vid": "gen_pxzzt26",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106615,
+          "day": 79,
+          "vid": "gen_pxzzt26",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106615,
+          "day": 90,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 93,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 93,
+          "vid": "victor_lopez",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 94,
+          "vid": "aki_tanaka",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 94,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 95,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 95,
+          "vid": "gen_ba8yb1q",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 96,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 98,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 99,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 100,
+          "vid": "carlos_diaz",
+          "source": "brain",
+          "target": "focus_group",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "focus_group"
+        },
+        {
+          "seed": 106615,
+          "day": 105,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 106,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 110,
+          "vid": "olivia_bennett",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 113,
+          "vid": "olivia_bennett",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 3,
+          "poolN": 1,
+          "pool": [
+            "rerun"
+          ],
+          "firstPick": "rerun",
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 114,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 115,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 115,
+          "vid": "wanjiru_kamau",
+          "source": "brain",
+          "target": "focus_group",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "focus_group"
+        },
+        {
+          "seed": 106615,
+          "day": 116,
+          "vid": "wanjiru_kamau",
+          "source": "brain",
+          "target": "focus_group",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "focus_group"
+        },
+        {
+          "seed": 106615,
+          "day": 118,
+          "vid": "carlos_diaz",
+          "source": "brain",
+          "target": "focus_group",
+          "needWave": 3,
+          "poolN": 1,
+          "pool": [
+            "rerun"
+          ],
+          "firstPick": "rerun",
+          "result": "launch",
+          "targetAfter": "focus_group"
+        },
+        {
+          "seed": 106615,
+          "day": 118,
+          "vid": "olivia_bennett",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 3,
+          "poolN": 2,
+          "pool": [
+            "gavel",
+            "rerun"
+          ],
+          "firstPick": "gavel",
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 120,
+          "vid": "petra_novak",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 123,
+          "vid": "wanjiru_kamau",
+          "source": "brain",
+          "target": "focus_group",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "focus_group"
+        },
+        {
+          "seed": 106615,
+          "day": 127,
+          "vid": "wanjiru_kamau",
+          "source": "brain",
+          "target": "focus_group",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "focus_group"
+        },
+        {
+          "seed": 106615,
+          "day": 135,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 139,
+          "vid": "visjoin_135",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 141,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "normal",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 142,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 143,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "hold",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 144,
+          "vid": "visjoin_135",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 169,
+          "vid": "visjoin_157",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 172,
+          "vid": "visjoin_157",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        }
+      ],
+      "deadCommitsCount": 82,
+      "poolFloor": {
+        "commits": 82,
+        "min": 0,
+        "median": 0,
+        "dist": {
+          "0": 79,
+          "1": 2,
+          "2": 1
+        },
+        "table": [
+          {
+            "seed": 106609,
+            "day": 40,
+            "vid": "sam_wilson",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106609,
+            "day": 47,
+            "vid": "sam_wilson",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106609,
+            "day": 49,
+            "vid": "sam_wilson",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106610,
+            "day": 38,
+            "vid": "gen_q3stxjy",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106610,
+            "day": 46,
+            "vid": "gen_q3stxjy",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106610,
+            "day": 53,
+            "vid": "gen_q3stxjy",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106610,
+            "day": 57,
+            "vid": "gen_q3stxjy",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106610,
+            "day": 60,
+            "vid": "gen_q3stxjy",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106610,
+            "day": 65,
+            "vid": "gen_q3stxjy",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106610,
+            "day": 72,
+            "vid": "gen_q3stxjy",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106610,
+            "day": 99,
+            "vid": "visjoin_90",
+            "source": "brain",
+            "target": "callback",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "callback"
+          },
+          {
+            "seed": 106611,
+            "day": 75,
+            "vid": "pavel_dubinin",
+            "source": "brain",
+            "target": "buffering",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "buffering"
+          },
+          {
+            "seed": 106612,
+            "day": 52,
+            "vid": "tariq_mahmood",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106612,
+            "day": 53,
+            "vid": "tariq_mahmood",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106612,
+            "day": 54,
+            "vid": "tariq_mahmood",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106612,
+            "day": 55,
+            "vid": "tariq_mahmood",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106612,
+            "day": 56,
+            "vid": "tariq_mahmood",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106612,
+            "day": 57,
+            "vid": "tariq_mahmood",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106612,
+            "day": 59,
+            "vid": "tariq_mahmood",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106612,
+            "day": 60,
+            "vid": "tariq_mahmood",
+            "source": "brain",
+            "target": "redactor",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "redactor"
+          },
+          {
+            "seed": 106612,
+            "day": 78,
+            "vid": "owen_smith",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106612,
+            "day": 79,
+            "vid": "owen_smith",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106612,
+            "day": 80,
+            "vid": "owen_smith",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106614,
+            "day": 60,
+            "vid": "gen_yf7h6e8",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106614,
+            "day": 61,
+            "vid": "gen_yf7h6e8",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106614,
+            "day": 63,
+            "vid": "gen_yf7h6e8",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106614,
+            "day": 69,
+            "vid": "gen_yf7h6e8",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106614,
+            "day": 73,
+            "vid": "gen_yf7h6e8",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106614,
+            "day": 77,
+            "vid": "gen_yf7h6e8",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106614,
+            "day": 85,
+            "vid": "gen_yf7h6e8",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106614,
+            "day": 97,
+            "vid": "gen_nqkokv9",
+            "source": "brain",
+            "target": "gavel",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "gavel"
+          },
+          {
+            "seed": 106614,
+            "day": 101,
+            "vid": "gen_yq2j43s",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106614,
+            "day": 102,
+            "vid": "gen_nqkokv9",
+            "source": "brain",
+            "target": "gavel",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "gavel"
+          },
+          {
+            "seed": 106614,
+            "day": 102,
+            "vid": "gen_yq2j43s",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106614,
+            "day": 104,
+            "vid": "gen_nqkokv9",
+            "source": "brain",
+            "target": "gavel",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "gavel"
+          },
+          {
+            "seed": 106614,
+            "day": 109,
+            "vid": "gen_nqkokv9",
+            "source": "brain",
+            "target": "gavel",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "gavel"
+          },
+          {
+            "seed": 106614,
+            "day": 113,
+            "vid": "gen_yq2j43s",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106614,
+            "day": 117,
+            "vid": "gen_nqkokv9",
+            "source": "brain",
+            "target": "gavel",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "gavel"
+          },
+          {
+            "seed": 106614,
+            "day": 121,
+            "vid": "gen_nqkokv9",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106614,
+            "day": 126,
+            "vid": "gen_nqkokv9",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106614,
+            "day": 128,
+            "vid": "gen_nqkokv9",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106614,
+            "day": 128,
+            "vid": "gen_yq2j43s",
+            "source": "brain",
+            "target": "ad_break",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "ad_break"
+          },
+          {
+            "seed": 106614,
+            "day": 129,
+            "vid": "gen_nqkokv9",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106614,
+            "day": 132,
+            "vid": "gen_nqkokv9",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106614,
+            "day": 135,
+            "vid": "gen_nqkokv9",
+            "source": "brain",
+            "target": "spool",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "spool"
+          },
+          {
+            "seed": 106615,
+            "day": 69,
+            "vid": "gen_pxzzt26",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106615,
+            "day": 70,
+            "vid": "gen_pxzzt26",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106615,
+            "day": 72,
+            "vid": "gen_pxzzt26",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106615,
+            "day": 77,
+            "vid": "gen_pxzzt26",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106615,
+            "day": 79,
+            "vid": "gen_pxzzt26",
+            "source": "brain",
+            "target": "chorus_line",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "chorus_line"
+          },
+          {
+            "seed": 106615,
+            "day": 90,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 93,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 93,
+            "vid": "victor_lopez",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 94,
+            "vid": "aki_tanaka",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 94,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 95,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 95,
+            "vid": "gen_ba8yb1q",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 96,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 98,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 99,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 100,
+            "vid": "carlos_diaz",
+            "source": "brain",
+            "target": "focus_group",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "focus_group"
+          },
+          {
+            "seed": 106615,
+            "day": 105,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 106,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 110,
+            "vid": "olivia_bennett",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 113,
+            "vid": "olivia_bennett",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 3,
+            "poolN": 1,
+            "pool": [
+              "rerun"
+            ],
+            "firstPick": "rerun",
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 114,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 115,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 115,
+            "vid": "wanjiru_kamau",
+            "source": "brain",
+            "target": "focus_group",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "focus_group"
+          },
+          {
+            "seed": 106615,
+            "day": 116,
+            "vid": "wanjiru_kamau",
+            "source": "brain",
+            "target": "focus_group",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "focus_group"
+          },
+          {
+            "seed": 106615,
+            "day": 118,
+            "vid": "carlos_diaz",
+            "source": "brain",
+            "target": "focus_group",
+            "needWave": 3,
+            "poolN": 1,
+            "pool": [
+              "rerun"
+            ],
+            "firstPick": "rerun",
+            "result": "launch",
+            "targetAfter": "focus_group"
+          },
+          {
+            "seed": 106615,
+            "day": 118,
+            "vid": "olivia_bennett",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 3,
+            "poolN": 2,
+            "pool": [
+              "gavel",
+              "rerun"
+            ],
+            "firstPick": "gavel",
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 120,
+            "vid": "petra_novak",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 123,
+            "vid": "wanjiru_kamau",
+            "source": "brain",
+            "target": "focus_group",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "focus_group"
+          },
+          {
+            "seed": 106615,
+            "day": 127,
+            "vid": "wanjiru_kamau",
+            "source": "brain",
+            "target": "focus_group",
+            "needWave": 3,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "focus_group"
+          },
+          {
+            "seed": 106615,
+            "day": 135,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 139,
+            "vid": "visjoin_135",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 141,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "normal",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 142,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 143,
+            "vid": "emma_larsen",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "hold",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 144,
+            "vid": "visjoin_135",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 169,
+            "vid": "visjoin_157",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          },
+          {
+            "seed": 106615,
+            "day": 172,
+            "vid": "visjoin_157",
+            "source": "brain",
+            "target": "eulogy",
+            "needWave": 4,
+            "poolN": 0,
+            "pool": [],
+            "firstPick": null,
+            "result": "launch",
+            "targetAfter": "eulogy"
+          }
+        ]
+      },
+      "poolDisagreements": [
+        {
+          "seed": 106609,
+          "day": 40,
+          "vid": "sam_wilson",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106609,
+          "day": 49,
+          "vid": "sam_wilson",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106610,
+          "day": 38,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 46,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 53,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 57,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 60,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 65,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 72,
+          "vid": "gen_q3stxjy",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106610,
+          "day": 99,
+          "vid": "visjoin_90",
+          "source": "brain",
+          "target": "callback",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "callback"
+        },
+        {
+          "seed": 106611,
+          "day": 75,
+          "vid": "pavel_dubinin",
+          "source": "brain",
+          "target": "buffering",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "buffering"
+        },
+        {
+          "seed": 106614,
+          "day": 63,
+          "vid": "gen_yf7h6e8",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 69,
+          "vid": "gen_yf7h6e8",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 73,
+          "vid": "gen_yf7h6e8",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 77,
+          "vid": "gen_yf7h6e8",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 85,
+          "vid": "gen_yf7h6e8",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 97,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "gavel",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "gavel"
+        },
+        {
+          "seed": 106614,
+          "day": 104,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "gavel",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "gavel"
+        },
+        {
+          "seed": 106614,
+          "day": 109,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "gavel",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "gavel"
+        },
+        {
+          "seed": 106614,
+          "day": 113,
+          "vid": "gen_yq2j43s",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 117,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "gavel",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "gavel"
+        },
+        {
+          "seed": 106614,
+          "day": 121,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106614,
+          "day": 128,
+          "vid": "gen_yq2j43s",
+          "source": "brain",
+          "target": "ad_break",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "ad_break"
+        },
+        {
+          "seed": 106614,
+          "day": 132,
+          "vid": "gen_nqkokv9",
+          "source": "brain",
+          "target": "spool",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "spool"
+        },
+        {
+          "seed": 106615,
+          "day": 72,
+          "vid": "gen_pxzzt26",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106615,
+          "day": 79,
+          "vid": "gen_pxzzt26",
+          "source": "brain",
+          "target": "chorus_line",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "chorus_line"
+        },
+        {
+          "seed": 106615,
+          "day": 90,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 93,
+          "vid": "victor_lopez",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 94,
+          "vid": "aki_tanaka",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 95,
+          "vid": "gen_ba8yb1q",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 99,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 100,
+          "vid": "carlos_diaz",
+          "source": "brain",
+          "target": "focus_group",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "focus_group"
+        },
+        {
+          "seed": 106615,
+          "day": 106,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 110,
+          "vid": "olivia_bennett",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 115,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 120,
+          "vid": "petra_novak",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 123,
+          "vid": "wanjiru_kamau",
+          "source": "brain",
+          "target": "focus_group",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "focus_group"
+        },
+        {
+          "seed": 106615,
+          "day": 127,
+          "vid": "wanjiru_kamau",
+          "source": "brain",
+          "target": "focus_group",
+          "needWave": 3,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "focus_group"
+        },
+        {
+          "seed": 106615,
+          "day": 135,
+          "vid": "emma_larsen",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 144,
+          "vid": "visjoin_135",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 169,
+          "vid": "visjoin_157",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        },
+        {
+          "seed": 106615,
+          "day": 172,
+          "vid": "visjoin_157",
+          "source": "brain",
+          "target": "eulogy",
+          "needWave": 4,
+          "poolN": 0,
+          "pool": [],
+          "firstPick": null,
+          "result": "launch",
+          "targetAfter": "eulogy"
+        }
+      ],
+      "poolDisagreementsCount": 42
+    }
+  ],
+  "wall": {
+    "wins": 0,
+    "national": 0,
+    "wave5": 6,
+    "wave4": 8,
+    "standing200": 6,
+    "medianDays": 155,
+    "survived": 4
+  },
+  "medianDays": 155,
+  "launches": 19,
+  "errors": 0
+}
