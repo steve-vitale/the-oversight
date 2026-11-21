@@ -339,6 +339,62 @@ prereg rule also forbids rolling a forced-chain panel forward).
   died without a summary — its process is gone and its log ends mid-dots
   with no pass/fail line. Its own adoption owns that re-run.
 
+### Rebased gate (tip d89852828, on master b20328ad9)
+
+- Master moved during the first adoption gate (Loop B 0330Z round +
+  ship df40fced1), so the branch was rebased onto b20328ad9; the master
+  moves touched src/js (fieldFights, villager-brain, win-plan via the
+  reseedbeat lever), so a fresh gate was required. Source diff verified
+  byte-identical across the rebase (convo-dialogue.js, conversation.js,
+  both proof scripts hash-matched); M12 proof + M4 proof re-ran GREEN
+  on the rebased tip (M4 49/49, pins 181/174/7).
+- Fresh gate from scratch in `r262-gate` (detached, rebased tip):
+  **334 passed, 10 failed in 1734s.** Log:
+  goal `hidden_files/evidence/2026-11-21/journey-succession-r262-gate-rebased.log`.
+  The gate overlapped no other check.js this time (the landing r151
+  gate had finished 07:31Z; a VM replacement at ~05:27Z had killed the
+  first adoption-gate attempt, which was re-launched 05:29Z).
+- The 10 failures, adjudicated — **0 attributable**:
+  - staleness pair, phone-frame stale receipt, both deed-attainment
+    120s timeouts — standing set (as the 333/11 gate).
+  - `test-measurement-cache-flags.js` — same proven load flake (panel
+    runs 28.7s/36.3s wall vs the test's 30s spawnSync timeout).
+  - `test-occupation-panels.js` — 120s timeout (5 oks, then the cap);
+    solo PASS 25/25 on the rebased tip.
+  - `test-trust-observer-neutrality.js` — exit 1 at 113.9s (bare Error
+    at setup under gate load); solo PASS 6/6 on the rebased tip.
+  - `test-synergy-stall.js`, `test-capable-bot-20261014.js` — 120s
+    timeouts; solo PASS (synergy completes; capable-bot 42/42) on the
+    rebased tip.
+  - `test-table-endings-20261014.js` and
+    `test-succession-grief-20261017.js` PASSED on this gate (their
+    333/11 failures were load flakes, confirmed).
+- Gate verdict: **GREEN-equivalent (334/10, 0 attributable).**
+
+### Second rebase + delta-gate (final tip, on master 9070aaf70)
+
+- Master moved again while the rebased gate ran (Loop A 0437 round:
+  leadside NO-GO PARTICIPATION + evadebow DIAG-GO). The range
+  b20328ad9..9070aaf70 changes **0 src/ files** and has **0 file
+  overlap** with this branch; the src/js tree hash is identical to the
+  gated tip (0a196558393900cb2b7137c734303a86bdb3daf6 both sides). A
+  third full gate would re-prove identical content, so the delta was
+  gated instead: the only ungated content on the merged tip is the two
+  new test scripts the 0437 round added, plus this branch's proofs.
+- Delta-gate on the final rebased tip: M12 proof GREEN, M4 proof
+  49/49 pins exact. The two new 0437 test scripts FAIL — and fail
+  **identically on plain master 9070aaf70** (verified in the gate
+  worktree at the master tip, same scores, same failing checks):
+  `test-evadebow-a.js` 30 passed / 3 failed (substrate DEPMAT/ROLL35/
+  AMMO checks expect the substrate present; the round's own revert
+  commit removed it from game.js without updating the test) and
+  `test-leadside-a.js` 30/40 (recorder/term/redirect checks expect the
+  lever live; the round reverted the lever without updating the test).
+  Pre-existing master debt from the 0437 round's own revert, not r262
+  and not a merge blocker — the 0437 adoption owns updating those two
+  tests. This branch touches neither game.js nor any evade/leadside
+  code.
+
 ## Closeout
 
 - Gate filled by the adoption (amendment commit below); merge, rotation
