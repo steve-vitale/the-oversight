@@ -196,8 +196,8 @@ no wall claim is made.
   bands, 7 re-seed commits band A) + guardrail (passes both bands)
   — or run a wider band / longer window for the expiry follow
   bars. Either way the fix stays HELD and unmerged on this verdict.
-- **Branch:** `sim-reseedexpiry-b`, evidence commit [TO FILL —
-  adoption commit hash] (instrument `28d98846c` + `d33f076ac`
+- **Branch:** `sim-reseedexpiry-b`, evidence commit `f7e68d418`
+  (instrument `28d98846c` + `d33f076ac`
   below it; base held `sim-reseed-b` `0f34690b7`). HELD unmerged by
   the 2130Z adoption: the verdict is NO-GO and the branch sits on
   the held reseed lever, which this arm does not re-judge or merge.
