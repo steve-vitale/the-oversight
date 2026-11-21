@@ -553,6 +553,13 @@ function stripM4DiscourseOpener(t) {
     s = s.replace(/^(i don'?t know)\s+(?=\S)/i, '');
     s = s.replace(/^you say nothing\.?\s*/i, '');
     s = s.replace(/^you want to know about that\?\s*okay\.?\s*["”]?\s*/i, '');
+    // r262 (journey-succession, r260 metric review): "You asked me that
+    // before. It's a different question now." is a change-ack prefix like
+    // the ack-question stem above — a question-stem opener, not content.
+    // It prefixes the real line in the same turn (aroha trio, r260 panel:
+    // same prefix + three different contents flagged as repeats). Strip
+    // the prefix + the closing quote so the content core is compared.
+    s = s.replace(/^you asked me that before\.?\s*it'?s a different question now\.?\s*["”]?\s*/i, '');
     s = s.replace(/^["“]\s*/, '');
   }
   return s;

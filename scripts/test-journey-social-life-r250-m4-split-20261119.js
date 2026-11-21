@@ -134,5 +134,23 @@ check('scan silence pair unflags', scanTranscript(['You say nothing. Neither do 
 check('scan belonging still flags', scanTranscript(['Back home I was invisible. Here, someone might actually see me. I need that to be true.', 'Back home nobody noticed me. Here — here I could be someone. I need that to be true.', 'The sky looks wrong tonight.', 'I keep thinking about the river.']).length, 1);
 check('scan hunger still flags', scanTranscript(["I'm past hungry — do you have anything to eat? Anything at all? I can't keep going like this.", "Please — do you have anything to eat? Anything at all? I can't keep going like this.", 'The sky looks wrong tonight.', 'I keep thinking about the river.']).length, 1);
 
+// (6) r262 "You asked me that before" strip — the aroha trio from the
+// r260 panel (verbatim cores, evidence/2026-11-21/
+// journey-social-life-r260-analysis.log, M4 SPLIT CONV lines) must
+// strip to their contents, and the trio must unflag as a set, while the
+// same content twice (prefix or not) still flags.
+check('strip asked-before-1', strip('You asked me that before. It\'s a different question now." "I knew Angelo. Really knew them, not the fire\'s version. Mine. And now there\'s just the fire\'s.'), 'I knew Angelo. Really knew them, not the fire\'s version. Mine. And now there\'s just the fire\'s.');
+check('strip asked-before-2', strip('You asked me that before. It\'s a different question now." "Betty is gone and the world just... continues. That\'s the part I can\'t stand.'), 'Betty is gone and the world just... continues. That\'s the part I can\'t stand.');
+check('strip asked-before-3', strip('You asked me that before. It\'s a different question now." "They took you — Impress Us, on the screens. The whole fire watched. Nobody knew where to look.'), 'They took you — Impress Us, on the screens. The whole fire watched. Nobody knew where to look.');
+check('scan asked-before trio unflags', scanTranscript([
+  'You asked me that before. It\'s a different question now." "I knew Angelo. Really knew them, not the fire\'s version. Mine. And now there\'s just the fire\'s.',
+  'You asked me that before. It\'s a different question now." "Betty is gone and the world just... continues. That\'s the part I can\'t stand.',
+  'You asked me that before. It\'s a different question now." "They took you — Impress Us, on the screens. The whole fire watched. Nobody knew where to look.',
+  'The sky looks wrong tonight.', 'I keep thinking about the river.']).length, 0);
+check('scan asked-before same content still flags', scanTranscript([
+  'You asked me that before. It\'s a different question now." "Betty is gone and the world just... continues. That\'s the part I can\'t stand.',
+  'You asked me that before. It\'s a different question now." "Betty is gone and the world just... continues. That\'s the part I can\'t stand. Ask me something else if you want.',
+  'The sky looks wrong tonight.', 'I keep thinking about the river.']).length, 1);
+
 console.log('M4-SPLIT: ' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

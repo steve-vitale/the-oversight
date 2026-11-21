@@ -242,13 +242,34 @@
             let favorReqSpentOut = false;
             if (c._favorReqReframes > 3) {
               const escKey = status.reasonKey || rawReq;
-              if (c._favorReqLastEscKey === escKey) c._favorReqEscalations = (c._favorReqEscalations || 0) + 1;
-              else { c._favorReqLastEscKey = escKey; c._favorReqEscalations = 1; }
-              if (c._favorReqEscalations >= 2) {
+              // M12-CAP (journey-succession r262 2026-11-21): once the
+              // circles exit has fired for this block reason in this
+              // sitting, the escalator stays capped there. The old code
+              // reset _favorReqEscalations to 0 after the spend-out, so
+              // the next repeat re-served "I've told you three times
+              // now" and the cycle repeated as long as the player kept
+              // pressing (r260 Ines d27: three-times 3x in one sitting;
+              // the count is a lie the second time). The spend only
+              // drops dlg:favor_requirements from the menu — the outing
+              // action re-enters this path — so the cap has to live in
+              // the escalator itself, not the menu. A new block reason
+              // still re-arms honestly (fresh escKey); a fresh sitting
+              // resets the latch with the convo object.
+              c._favorReqCirclesServed = c._favorReqCirclesServed || {};
+              if (c._favorReqCirclesServed[escKey]) {
                 try { this.convoSpendChoice(vid, 'dlg:favor_requirements'); } catch (e) {}
-                c._favorReqEscalations = 0;
                 line = `We're going in circles — ${rawReq} Ask me something else if you want.`;
                 favorReqSpentOut = true;
+              } else {
+                if (c._favorReqLastEscKey === escKey) c._favorReqEscalations = (c._favorReqEscalations || 0) + 1;
+                else { c._favorReqLastEscKey = escKey; c._favorReqEscalations = 1; }
+                if (c._favorReqEscalations >= 2) {
+                  try { this.convoSpendChoice(vid, 'dlg:favor_requirements'); } catch (e) {}
+                  c._favorReqEscalations = 0;
+                  c._favorReqCirclesServed[escKey] = true;
+                  line = `We're going in circles — ${rawReq} Ask me something else if you want.`;
+                  favorReqSpentOut = true;
+                }
               }
             }
             if (!favorReqSpentOut) {
