@@ -8178,6 +8178,19 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         if (person) {
           person.items = person.items || [];
           person.items.push(dropId);
+          // KILLBUNDLE (sim-killlootbundle-a, finding #2635 follow-up):
+          // a kill-loot searcaster arrives with the same 2-cell bundle a
+          // contest-prize gun gets (contests.js _cxItemPrize) — a gun
+          // that arrives dry never fires under CELLGATE. Env-gated:
+          // KILLBUNDLE=1 (node sims only). Zero draws; ordinary drops
+          // stay put; the bundle lands on the same killer as the gun.
+          try {
+            var _kbOn = false;
+            try { _kbOn = (typeof process !== 'undefined' && process.env && process.env.KILLBUNDLE === '1'); } catch (e2) {}
+            if (_kbOn && dropId === 'searcaster') {
+              person.items.push({ itemId: 'fusion_cell', name: 'Fusion cell', units: 2, kg: 0.4 });
+            }
+          } catch (e2) {}
         }
       } catch (e) {}
       // GODHOOD REWORK (Steve 2026-10-13): a tier-4 drop can complete a build.
