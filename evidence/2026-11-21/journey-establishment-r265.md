@@ -85,6 +85,15 @@ The first pilot (seed 101966) passed its gate except for one finding: `winPlanEn
 - **3 pre-existing staleness failures — NOT attributable (proven on the clean base):** `test-measurement-proof-update.js` ("Proof source inputs are not current"), `test-measurement-workflow.js` ("retained neutrality proof covers the current Game/controller/harness inputs"), `test-phone-frame-proof.js` ("every retained browser input matches current source"). All three were reproduced identically on a clean `git archive a8c2c201c` extraction (scripts + src + index.html + the two evidence files the tests read) — same errors, same failing checks. The retained neutrality proof and phone receipt were already stale against the base's 63 commits before this run; my changes touch none of the phone receipt's inputs (index.html, src/data/*) and the proof staleness predates them. Refreshing the neutrality proof is a balance-maintenance procedure (a fresh real observer-neutral panel via `scripts/balance-proof-update.js`), not a run fix — owed to the balance lane, not this run.
 - **Gate verdict: 0 attributable failures outstanding.** The one attributable failure was fixed in-test and re-proven green solo; the remaining six are classified above with direct evidence (base reproduction + solo runs + r247 precedent).
 
+**Adoption gate (rebased tip `157d77a93`)** — `node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r265-adopt`: **339 passed, 5 failed in 744s — 0 attributable.** Log: `evidence/2026-11-21/journey-establishment-r265-gate.log`. The 5:
+  1. `test-measurement-proof-update.js` — "Proof source inputs are not current". Staleness pair, standing since r151.
+  2. `test-measurement-workflow.js` — "retained neutrality proof covers the current Game/controller/harness inputs". Staleness pair, standing since r151.
+  3. `test-phone-frame-proof.js` — stale receipt / retained browser inputs do not match current source. Standing phone-frame family.
+  4. `test-living-garden-deed-attainment.js` — TIMEOUT after 120s. Standing 120s-timeout family.
+  5. `test-one-person-army-deed-attainment.js` — TIMEOUT after 120s. Standing 120s-timeout family.
+- The deathcleanup fix HOLDS on the rebased tip (test passes in the gate). Trust-observer passed in 83s (it was a load timeout in the run's gate). No load flakes this run — no measurement-cache-flags, occupation-panels, or capable-bot failures.
+- **One-person-army solo re-run (adoption): 7 passed, 0 failed, exit 0** — all 16 seeds swept, all assertions green. The gate timeout is a load artifact, confirmed directly.
+
 ## Telemetry
 `node scripts/telemetry-check.js --baseline hidden_files/telemetry-baselines/establishment.json --current '<r265 per-seed glob>' --metrics spotter,ladder,standing,wave,pantry` — **quiet (5 files, 5 metrics, no large deviations)**, exit 0. No LOUD lines to adjudicate; baseline NOT rolled (nothing to roll on — the before/after deltas on the leg's key metrics sit inside tolerance, and the win-plan movement is the intended fix effect, recorded in the verdicts table above).
 
