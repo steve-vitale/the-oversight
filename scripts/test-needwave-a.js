@@ -1,33 +1,33 @@
-// test-needwave-a.js — REVERT GUARD for arm sim-needwave-a (NO-GO).
-// The arm's lever (copy needWave unconditionally in the companion
-// plan sync) was KILLED: a leader with no wave number wipes a
-// companion's set wave number (evidence/2026-11-22/sim-needwave-a.md
-// §4 — seed 107377, Jason's wave 4 wiped day 58, trio launch became
-// a silent solo). The game-code change is reverted zero-trace, and
-// THIS test now guards the revert on master: it proves the unguarded
-// copy is absent on BOTH launch paths and that a companion's set
-// wave number survives departing with a null-wave leader.
-//   §A source pins (negated): no unguarded `cplan.needWave = ...`
+// test-needwave-a.js — SUPERSEDED revert guard, updated by arm
+// sim-needwave-b (guarded copy) in its instrument commit — see the
+// note below. The -a arm's lever (copy needWave unconditionally)
+// was KILLED: a leader with no wave number wipes a companion's set
+// wave number (evidence/2026-11-22/sim-needwave-a.md §4 — seed
+// 107377, Jason's wave 4 wiped day 58, trio launch became a silent
+// solo). The game-code change was reverted zero-trace, and THIS test
+// guarded the revert on master. sim-needwave-b replaces the revert
+// guard with the guarded copy (copy only when the leader's wave
+// number is set; never erase a companion's existing one), so the
+// sections below are updated DELIBERATELY, not silently weakened:
+//   §A source pins UNCHANGED: no unguarded `cplan.needWave = ...`
 //       statement at line start in win-plan.js / villager-brain.js.
-//       A GUARDED copy (e.g. `if (...) cplan.needWave = ...`) does
-//       not trip these pins — sim-needwave-b owns that shape.
-//   §B live fixtures: launches still succeed; companions keep their
-//       own needWave (null stays null, 4 stays 4).
-//   §B2W null-holder wipe guard: leader needWave null, companions 4
-//       — both companions must keep 4 after the departure.
-//   §B3 LAUNCHVOICE (journey r268, 1c11dbb14): the departure-beat
-//       wave-4+ gate is gone by design, so the companion-turned-
-//       holder speaks their line too — the beat is wave-agnostic
-//       now. §B3 pins that the hook fires (launch narration intact),
-//       not silence.
-//   §C OLD-CODE CONTROL unchanged: fixtures against the frozen
-//       branch-base tip must leave companions needWave-null.
-//   §D negative cases: wave-3 launch copies nothing; targetless
-//       null-wave launch invents nothing.
-// Adopted by run fleshout-20261122T1415Z (rebase onto 4dc7cb454 +
-// this guard flip); the frozen arm record (23/23 on the lever code)
-// stands in sim-needwave-a.md §9. sim-needwave-b (guarded copy)
-// replaces this guard with a lever proof of its own.
+//       A GUARDED copy (`if (...) cplan.needWave = ...` on the same
+//       line as its guard) does not trip these pins — that is the
+//       -b shape, and the pins still forbid the -a shape.
+//   §B live fixtures UPDATED to the guarded expectations: a
+//       companion INHERITS the leader's set wave number (§B1/§B2),
+//       and the companion-turned-holder now SPEAKS the beat (§B3).
+//   §B2W null-holder wipe guard UNCHANGED: leader needWave null,
+//       companions 4 — both companions must keep 4 after the
+//       departure. The guarded copy satisfies it by construction.
+//   §C OLD-CODE CONTROL unchanged in shape; BASE is now the -b
+//       base tip (b199d55c8, reverted code on current master).
+//   §D1 UPDATED: a wave-3 launch copies needWave 3 faithfully (not
+//       a hardcoded 4); §D2 unchanged (a null-wave leader invents
+//       nothing).
+// The guarded copy's own proof lives in scripts/test-needwave-b.js;
+// this file now guards the GUARDED shape: the unguarded copy must
+// never come back, and the guard must never silently re-admit it.
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -210,8 +210,8 @@ if (OLD_CODE_PATH) {
 (function sectionA() {
   const wpSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'win-plan.js'), 'utf8');
   const brainSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'villager-brain.js'), 'utf8');
-  const drvSrc = fs.readFileSync(path.join(__dirname, 'needwave-driver-a.js'), 'utf8');
-  const anaSrc = fs.readFileSync(path.join(__dirname, 'analyze-needwave-a.js'), 'utf8');
+  const drvSrc = fs.readFileSync(path.join(__dirname, 'needwave-driver-b.js'), 'utf8');
+  const anaSrc = fs.readFileSync(path.join(__dirname, 'analyze-needwave-b.js'), 'utf8');
   check('§A win-plan.js has NO unguarded needWave copy (NO-GO revert guard)',
     !/(^|\n)\s*cplan\.needWave = plan\.needWave;/.test(wpSrc) &&
     !/(^|\n)\s*cplan2\.needWave = plan\.needWave;/.test(wpSrc) &&
@@ -231,7 +231,7 @@ if (OLD_CODE_PATH) {
   check('§A analyzer judges the frozen bars (primary 0.25, trio, beat, starvation, survival, det-gate)',
     /0\.25/.test(anaSrc) && /detGateForSeed/.test(anaSrc) && /starvTotal/.test(anaSrc) && /0\.8 \* ctlMed/.test(anaSrc), null);
   check('§A analyzer selftest passes 100%',
-    (function () { try { return require(path.join(__dirname, 'analyze-needwave-a.js')).selftest() === true; } catch (e) { return false; } })(), null);
+    (function () { try { return require(path.join(__dirname, 'analyze-needwave-b.js')).selftest() === true; } catch (e) { return false; } })(), null);
 })();
 
 // ---- §B LIVE FIXTURES (new code) ----
@@ -241,8 +241,8 @@ if (OLD_CODE_PATH) {
   const f = needwaveCtx({});
   const res = Game.winPlanDepart.call(f.ctx, 'amina_diallo', 5, 5, false);
   check('§B1 winPlanDepart launches the pair', res === 'launch' && !!f.exped.amina_diallo && !!f.exped.diana_osei, { res: res, exped: Object.keys(f.exped) });
-  check('§B1 companion plan needWave stays null (no unguarded copy)',
-    f.winPlan.diana_osei && f.winPlan.diana_osei.needWave == null, { needWave: f.winPlan.diana_osei && f.winPlan.diana_osei.needWave });
+  check('§B1 companion plan needWave inherits 4 (guarded copy fills a blank)',
+    f.winPlan.diana_osei && f.winPlan.diana_osei.needWave === 4, { needWave: f.winPlan.diana_osei && f.winPlan.diana_osei.needWave });
   check('§B1 companion plan still inherits target + stage',
     f.winPlan.diana_osei && f.winPlan.diana_osei.target === 'herald' && f.winPlan.diana_osei.stage === 'hunt', null);
   check('§B1 holder plan needWave untouched by the sync',
@@ -254,18 +254,19 @@ if (OLD_CODE_PATH) {
   const g = needwaveCtx({ quad: true });
   const res2 = Game.vbrainExecuteDepart.call(g.ctx, 'amina_diallo', 5, 5, false);
   check('§B2 vbrainExecuteDepart launches the quad', res2 === 'launch' && !!g.exped.amina_diallo && !!g.exped.diana_osei && !!g.exped.emmett_okafor && !!g.exped.femi_ade, { res: res2, exped: Object.keys(g.exped) });
-  check('§B2 first companion needWave stays null (no unguarded copy)',
-    g.winPlan.diana_osei && g.winPlan.diana_osei.needWave == null, { needWave: g.winPlan.diana_osei && g.winPlan.diana_osei.needWave });
-  check('§B2 second companion needWave stays null (no unguarded copy)',
-    g.winPlan.emmett_okafor && g.winPlan.emmett_okafor.needWave == null, { needWave: g.winPlan.emmett_okafor && g.winPlan.emmett_okafor.needWave });
-  check('§B2 planless third companion gets a plan, needWave stays null',
-    g.winPlan.femi_ade && g.winPlan.femi_ade.needWave == null && g.winPlan.femi_ade.stage === 'hunt', { femi: g.winPlan.femi_ade });
+  check('§B2 first companion needWave inherits 4 (guarded copy fills a blank)',
+    g.winPlan.diana_osei && g.winPlan.diana_osei.needWave === 4, { needWave: g.winPlan.diana_osei && g.winPlan.diana_osei.needWave });
+  check('§B2 second companion needWave inherits 4 (guarded copy fills a blank)',
+    g.winPlan.emmett_okafor && g.winPlan.emmett_okafor.needWave === 4, { needWave: g.winPlan.emmett_okafor && g.winPlan.emmett_okafor.needWave });
+  check('§B2 planless third companion gets a plan with needWave 4',
+    g.winPlan.femi_ade && g.winPlan.femi_ade.needWave === 4 && g.winPlan.femi_ade.stage === 'hunt', { femi: g.winPlan.femi_ade });
   disarmEnv();
 
   // B2W: null-holder wipe guard — the NO-GO's root cause. A leader
   // whose plan has NO wave number departs with companions who DO
-  // have one; the unguarded copy would erase theirs. On reverted
-  // code both companions keep their 4.
+  // have one; the unguarded copy would erase theirs. Under the
+  // guarded copy both companions keep their 4 (the guard copies
+  // only when the leader's wave number is set).
   armQuadEnv();
   const w = needwaveCtx({ quad: true, needWave: null, dianaNeedWave: 4, emmettNeedWave: 4 });
   const resW = Game.vbrainExecuteDepart.call(w.ctx, 'amina_diallo', 5, 5, false);
@@ -283,20 +284,19 @@ if (OLD_CODE_PATH) {
   const before = departBeatLines(h.says).length;
   const hookRet = Game.winPlanDepartLaunchBeat.call(h.ctx, 'diana_osei', ['amina_diallo']);
   const beatLines = departBeatLines(h.says);
-  check('§B3 companion-turned-holder speaks (LAUNCHVOICE r268: wave-4+ beat gate gone, beat is wave-agnostic)',
-    hookRet === true && beatLines.length === before + 1 &&
-    /Diana sets out with Amina after Herald — the fire marks the trail\./.test(beatLines[beatLines.length - 1] || ''), { hookRet: hookRet, lines: beatLines });
+  check('§B3 companion-turned-holder now speaks (inherited wave number opens the beat gate)',
+    hookRet === true && beatLines.length === before + 1, { hookRet: hookRet, lines: beatLines });
   disarmEnv();
 })();
 
 // ---- §C OLD-CODE CONTROL ----
 (function sectionC() {
-  // Frozen branch base tip (prereg §base): the old win-plan.js +
+  // Frozen -b base tip (prereg §base): the old win-plan.js +
   // villager-brain.js come from git show of this commit. The child
   // runs the same §B fixtures against them; the copy assertions
   // must read null (fail on old, pass on new) while the launches
   // themselves still succeed.
-  const BASE = 'bda6ff495';
+  const BASE = 'b199d55c8';
   const tmp = '/tmp/needwave-oldcode-' + process.pid;
   try {
     fs.mkdirSync(tmp, { recursive: true });
@@ -330,8 +330,8 @@ if (OLD_CODE_PATH) {
   armEnv();
   const f = needwaveCtx({ target: 'spool', needWave: 3 });
   const res = Game.winPlanDepart.call(f.ctx, 'amina_diallo', 5, 5, false);
-  check('§D1 wave-3 launch does NOT copy needWave (stays null, no unguarded copy)',
-    res === 'launch' && f.winPlan.diana_osei && f.winPlan.diana_osei.needWave == null, { needWave: f.winPlan.diana_osei && f.winPlan.diana_osei.needWave });
+  check('§D1 wave-3 launch copies needWave 3 faithfully (guarded copy, not hardcoded 4)',
+    res === 'launch' && f.winPlan.diana_osei && f.winPlan.diana_osei.needWave === 3, { needWave: f.winPlan.diana_osei && f.winPlan.diana_osei.needWave });
   disarmEnv();
   // D2: the sync does not invent a needWave for a targetless plan.
   armEnv();
