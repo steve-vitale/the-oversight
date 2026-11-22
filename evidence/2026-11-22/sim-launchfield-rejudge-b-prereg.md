@@ -132,6 +132,9 @@ retargeted / dead / plan-deleted / field-encounter / no-rows.
 Nothing else in Leg S changes; the bar (0 unexplained parts) is
 unchanged.
 
+## AMENDMENT 2 (recorded 2026-11-22, adoption of the 1630Z round)
+§4 holder-state shape: a holder-state row's `target` field may be null. The frozen shape check required `r.target` truthy; the live trajectory (needwave-b on master) produces holder rows whose plan currently has no target — stage "standing" or "hunt", commit kind HAVEN_CHORE / winPlanAction "party_wait", holder between targets. A null target is a legitimate game state, not a malformed row. The field must still be PRESENT (string or null); every other frozen field (day/part 0–3, vid, away/engaged/haven/onExped/isScholar/dead boolean) is unchanged. Verified, not assumed: on the proof's own §4 live run (screening seed 107399, 150d, rebased tip) all 188 bad rows fail ONLY on no-target (ROWS=1831 BAD=188 BYREASON={"no-target":188}); on the judged-band corpus all 266 bad rows fail only on no-target (diag ~/workspace/diag-badshape-out.txt; 1882 rows). The proof test §4 predicate changes `!r.target` → `!('target' in r)`. Nothing else changes: the judgment (DIAG-NO-GO on completeness), the frozen bars, the band (107415–107422), and the evidence are untouched. This amendment corrects test strictness only; it is NOT a game defect and does NOT re-score any judged number.
+
 ## ANCHOR PIN (frozen, ported verbatim from the refreeze arm — the §6 fix)
 
 The launchstate §6 proof compared the recorded anchor against

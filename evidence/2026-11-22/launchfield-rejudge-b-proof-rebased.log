@@ -1,0 +1,131 @@
+PASS §1 prereg exists
+PASS §1 prereg freezes the DIAG-GO bar
+PASS §1 prereg freezes the completeness bar (0 unknown instance-days + 0 unexplained parts)
+PASS §1 prereg freezes Leg S (per-part scored-ness ledger)
+PASS §1 prereg freezes the H extensions (hs-scholar-idle + churn-closing fallback)
+PASS §1 prereg freezes the field-encounter fallback (per-part, v4encounters day-match + Haven-rows-absent)
+PASS §1 prereg names the overlap guard (no villager-brain.js / win-plan.js)
+PASS §1 prereg freezes Taxonomy H
+PASS §1 prereg records the fresh screen range 107399-107430 (32 seeds, 4 bands)
+PASS §1 prereg freezes the screen budget (32 seeds) and the first-supplying-band rule
+PASS §1 prereg records AMENDMENT 1 (Leg S part-level fallback rules)
+PASS §1 prereg records the anchor pin (FROZEN BASE literal, not run-time merge-base)
+PASS §1 src/ clean at proof time
+FAIL §1 branch is anchored at the frozen base (merge-base == 1c11dbb149a6) :: "8ec902e5635c608df1a083e5e91488c3dc700ac3"
+FAIL §1 src/js identical between the frozen base and HEAD (instrument-only arm) :: "diff --git a/src/js/build.js b/src/js/build.js\nindex eeab83537..ca52ad950 100644\n--- a/src/js/build.js\n+++ b/src/js/build.js\n@@ -8,4 +8,4 @@\n // consumes: (none)\n /* Build version — stamped by scripts"
+PASS §1 driver + analyzer + test are new files on this branch
+PASS §1 driver arm/run is launchfield-rejudge-b, usage line re-seeded to 107399-107406
+PASS §6 anchor pin: driver records the FROZEN BASE literal as anchorCommit, never a run-time merge-base
+PASS §1 driver carries the per-part recorder (objTick / npcNodeTravel / vbrainLogGate wraps)
+PASS §1 driver carries the pool-first-fail extension (rangeScoreOf + census + holderRange)
+PASS §1 analyzer exports the H classifier + Leg R + Leg S + seedOf + field-encounter fallback
+PASS §A party_launch is a bid
+PASS §A party_wait is party-no-companion with pool attached
+PASS §A gear_hold is gear-hold
+PASS §A veteran_guard is veteran-guard
+PASS §A gear stage + armed + no cand is gear-geared-silent
+PASS §A hunt stage + no cand is hunt-standing-table-no-companion-silent
+PASS §A standing stage + no cand is the same silent reason
+PASS §A party stage + no cand is unknown-party-silent (winPlanCands always emits here)
+PASS §A unknown stage is unknown-stage
+PASS §A missing plan is unknown-no-plan
+PASS §B death day classifies holder-dead
+PASS §B census holderAlive false classifies holder-dead
+PASS §B scholar at dawn (scholar today AND yesterday) classifies holder-scholar
+PASS §B scholar only today (mid-day inheritance) is NOT holder-scholar at dawn
+PASS §B another-target score row that day classifies retarget-boundary
+PASS §B seed day classifies seed-day
+PASS §B census exped classifies holder-on-expedition
+PASS §B member-row away classifies holder-away
+PASS §B v4 encounter that day classifies field-encounter-day
+PASS §B no census row classifies plan-not-in-census
+PASS §B off-haven node classifies holder-off-haven
+PASS §B prev pick part 3 + VISIT classifies phase-edge
+PASS §B prev pick part 3 + FORAGE is NOT phase-edge
+PASS §B alive at haven with no other gate is unknown-no-signal
+PASS §C wave-4-target launch rows are 3 (wave-3 chorus_line + hold excluded)
+PASS §C counted row is the needWave=4 launch
+PASS §C uncounted rows are 2
+PASS §C c1 copy-links to the h1 launch (companion in its party)
+PASS §C x9 has no copy link
+PASS §C h1 + c1 have start calls, x9 does not
+PASS §D one repeat group for h1+algorithm (2 launches)
+PASS §D the d20 meeting is inside the 21-day window (first fight d20)
+PASS §D track rows attach with the nearDist drift 2 -> 4
+PASS §D a single launch is not a repeat group
+PASS §E instance has 3 instance-days (d10-d12)
+PASS §E d11 midday-only counts as assessed (party-no-companion, part 1)
+PASS §E d10 is a zero-row seed-day
+PASS §E d12 is a zero-row holder-scholar day (scholar d11 AND d12)
+PASS §E day-level classification has 0 unknown
+PASS §F engaged skip delays the chore past the day (hs-engaged-skip)
+PASS §F away skip delays the chore past the day (hs-away-skip)
+PASS §F a hard-gate pick on the day is hs-gate-pick (gate beats the trace)
+PASS §F done at a reached part with a same-day commit is hs-refresh-blocked
+PASS §F done at a reached part with a stale commit and no pick is hs-unexplained
+PASS §F a ready objective with no pick is hs-departure-pending
+PASS §F still-live all day with no skip is hs-chore-not-finished-no-skip
+PASS §F no rows at all is hs-no-rows
+PASS §F integration: B leaves d12 unknown-no-signal (hU=1)
+PASS §F integration: H explains d12 as hs-engaged-skip (hE=1, hS=1)
+PASS §F integration: instance unknown drops 1 -> 0 after H
+PASS §F integration: the B reason in zeroRow[] is NOT rewritten
+PASS §G Leg R reproduces the 10 launcheng unknown days exactly
+PASS §G Leg R: the old corpora carry zero holder-state rows (H inapplicable there)
+PASS §G Leg R: band unknown is 10
+PASS §H scholar at every sampled part with no score/gate row is hs-scholar-idle
+PASS §H scholar at only some parts is NOT hs-scholar-idle (stale commit, no pick)
+PASS §H retarget seed row with stageAfter hunt closes as retarget-seed-row-any-stage
+PASS §H no seed row but holder-state target change closes as retarget-observed-holderstate
+PASS §H no seed row and no holder-state target change stays retarget-seed-row-missing (unknown)
+PASS §H Leg S: 12 parts total (3 days x 4)
+PASS §H Leg S: 1 scored part (d10 p0)
+PASS §H Leg S: 1 unexplained part (d11 p0, no-rows)
+PASS §H Leg S: whyNot tally covers engaged/chore-live/scholar/departure-pending/refresh-blocked/gate-pick/dead/no-rows
+PASS §H Leg S: no seed-day parts ride on the AMENDMENT 1 fallback here (rows exist)
+PASS §H Leg S AMENDMENT 1: seed-day parts with no rows are seed-day (explained)
+PASS §H Leg S AMENDMENT 1: other-target rows that day classify retargeted (explained)
+PASS §H Leg S LAUNCHFIELD: Haven rows at p0-2 + encounter that day classifies p3 field-encounter (explained)
+PASS §H Leg S LAUNCHFIELD: the field-encounter part carries the encounter trace (mid suburb, outcome vFlee)
+PASS §H Leg S LAUNCHFIELD negative: encounter for another vid leaves the part no-rows (unexplained)
+PASS §H Leg S LAUNCHFIELD negative: encounter with no Haven rows that day leaves the part no-rows (unexplained)
+PASS §H Leg S LAUNCHFIELD: vid as encounter ally classifies field-encounter (same map as day level)
+analyze-launchfield-rejudge-b selftest: 71 passed, 0 failed
+PASS §2 analyzer selftest green (71 checks incl. §F H fixtures + §G Leg R + §H Leg S + §H4 field-encounter)
+PASS §3 seedOf opens exactly 1 instance, candidate-not-bid
+PASS §3 seedOf substrate is clean (arm/run/mode/policy/anchor/flags on the frozen base)
+PASS §3 seedOf: B leaves 1 unknown day (d12), H explains it as hs-engaged-skip
+PASS §3 seedOf: instance unknown is 0 after H
+PASS §3 seedOf: holder-state rows counted (10)
+PASS §3 seedOf Leg S: 12 parts (3 days x 4), 1 scored (d11 p1)
+PASS §3 seedOf Leg S: 3 unexplained parts (d11 p0/p2/p3, no-rows — the fixture records no rows there)
+PASS §3 seedOf Leg S: seed-day fallback covers d10 (4 parts), chore-live 3, engaged 1
+PASS §3b old band: 324 parts, 0 unexplained after the field-encounter fallback (was 2)
+PASS §3b old band: exactly 2 field-encounter parts
+PASS §3b old band: the 2 parts are 107305 devon_okafor/reunion + benoit_lambert/eulogy, d150 p3, suburb/vFlee
+== recorder live ==
+== determinism legs D1/D2 ==
+PASS live driver sees SEEDLAND hard-on
+PASS live driver exports the frozen base literal (anchor pin)
+PASS live run completes with 0 instrument errors
+PASS live run arm is launchfield-rejudge-b
+PASS §6 live anchor: anchorCommit IS the frozen base literal 1c11dbb149a6, anchorHead is run-time HEAD
+PASS live run carries v4 + dawnbid + pool + census + skip + holder-state arrays
+PASS live run self-describes the substrate (all seven flags 1, allyslot3InSrc true, launchTrackOn true)
+PASS live run policy sha is the current competent verbatim (1884c8852d38)
+PASS live run holder-state rows exist with all 3 `when` values (part-start / tick-entry / tick-exit)
+PASS live run has at most 1 holder-state row per (vid, day, part, when)
+FAIL live run holder-state rows all carry the frozen fields (day/part 0-3, flags boolean) :: "badShape=188"
+PASS live run pool rows exist with gap fields on every non-self member (counts sum to rosterN)
+PASS live run census rows exist (one per daily day, AMENDMENT 1) with the frozen supply-chain fields
+  info: live 150d run recorded 1831 holder-state rows ({"part-start":607,"tick-entry":612,"tick-exit":612}), 53 gate picks, 31 seed rows, 38 pool rows, 148 census rows
+PASS §6b tripwire setup: git shim installed (flap-retried)
+LAUNCHFIELD STOP: merge-base 4266e6ccef2a !== frozen base 1c11dbb149a6 — re-freeze, do not amend silently.
+PASS §6b anchor tripwire: driver refuses (exit 2, merge-base message) when the base is not frozen
+PASS §6b anchor tripwire: a real base at 4266e6cce differs from the frozen base (same comparison trips on a genuine rebase)
+PASS D1 repeatability: identical full corpus, recorder ON twice, full substrate (30d)
+PASS D2 wrap neutrality: identical trajectories, recorder ON vs OFF, full substrate (30d)
+PASS D2 recorder-off run carries empty recorder arrays (v4/dawnbid/pool/census/skips/holder-state)
+PASS D2 recorder-off run has 0 instrument errors
+  info: D1 30d run recorded 0 holder-state rows, 0 gate picks, 0 encounters, 0 seed rows, 0 pool rows, 28 census rows
+test-launchfield-rejudge-b: 50 passed, 3 failed

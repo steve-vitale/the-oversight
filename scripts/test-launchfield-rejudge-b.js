@@ -269,7 +269,7 @@ async function liveRuns() {
     dupes === 0, 'dupes=' + dupes);
   let badShape = 0;
   for (const r of hs) {
-    if (r.day == null || r.part == null || r.part < 0 || r.part > 3 || !r.vid || !r.target ||
+    if (r.day == null || r.part == null || r.part < 0 || r.part > 3 || !r.vid || !('target' in r) || // AMENDMENT 2: target may be null — a holder between targets
         typeof r.away !== 'boolean' || typeof r.engaged !== 'boolean' ||
         typeof r.haven !== 'boolean' || typeof r.onExped !== 'boolean' ||
         typeof r.isScholar !== 'boolean' || typeof r.dead !== 'boolean') badShape++;
