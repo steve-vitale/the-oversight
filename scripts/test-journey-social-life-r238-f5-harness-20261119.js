@@ -8,11 +8,19 @@
 // the r226 F6 guard (try each variant until one is fresh; all three
 // blocked keeps the pick — the known residual, characterized here, NOT
 // judged):
-//   V1: "No, really — it's handled. Thanks for asking, though."
-//   V2: "It's taken care of, I swear. You don't need to worry about that
-//       one anymore."
-//   V3: "Honestly? It's done. Finished. Thank you for checking — it means
-//       something that you did."
+//   V1: "No, really — it's handled: spare food for the little ones. Thanks
+//       for asking, though."
+//   V2: "Spare food for the little ones — it's taken care of, I swear. You
+//       don't need to worry about it anymore."
+//   V3: "Honestly? It's done — spare food for the little ones. Finished.
+//       Thank you for checking — it means something that you did."
+// (r266: the variants above are the NAMED pool — the harness stages favors
+// with a speakable short, so the game serves these, not the generic pool.
+// The r238 cores matched only the generic pool, so every named serving
+// read variant=null; the r238 poisoning used the generic strings, which
+// cannot block the named variants. Both are fixed here: shape-based
+// detection + poison by variant slot. The generic pool is covered by the
+// r152 named test (shortless favor) and the r225 F5 test.)
 //
 // THE GAP: wild counts by grep were r231: 1, r234: 3, r235: 0, r236: 0,
 // r237: NOT COUNTED — six thin panels. The wild panel never produced a
@@ -48,15 +56,17 @@ const K = require('./godpath/lib');
 const T = K.reporter('journey-social-life-r238-f5-harness');
 
 const DRY_MARK = 'lost my train of thought';
+// r266 (r152 fallout): poison + detect by VARIANT SLOT in the NAMED pool —
+// the staged short interpolates between the core words, so the generic
+// strings below could neither be matched nor poisoned. Detection is
+// shape-based (r265 analyzer F5W cores): V1 = "it's handled" + "Thanks
+// for asking"; V2 = case-insensitive "taken care of, i swear"; V3 =
+// "Finished. Thank you for checking".
+const F5_SHORT = 'spare food for the little ones';
 const F5_VARIANTS = [
-  '"No, really — it\'s handled. Thanks for asking, though."',
-  '"It\'s taken care of, I swear. You don\'t need to worry about that one anymore."',
-  '"Honestly? It\'s done. Finished. Thank you for checking — it means something that you did."',
-];
-const F5_CORES = [
-  "it's handled. Thanks for asking",
-  "It's taken care of, I swear",
-  "It's done. Finished",
+  `"No, really — it's handled: ${F5_SHORT}. Thanks for asking, though."`,
+  `"Spare food for the little ones — it's taken care of, I swear. You don't need to worry about it anymore."`,
+  `"Honestly? It's done — ${F5_SHORT}. Finished. Thank you for checking — it means something that you did."`,
 ];
 
 (async () => {
@@ -114,7 +124,7 @@ const F5_CORES = [
     return (c && Array.isArray(c.transcript)) ? c.transcript.length : 0;
   }
   function stageSettledFavor(vid, tag) {
-    const favor = { vid, id: 'favor-f5-' + tag + '-' + vid + '-' + day(), kind: 'food_share', state: 'thanked', askedDay: day(), short: 'spare food for the little ones' };
+    const favor = { vid, id: 'favor-f5-' + tag + '-' + vid + '-' + day(), kind: 'food_share', state: 'thanked', askedDay: day(), short: F5_SHORT };
     try { Game.convoStoreFavor(favor); } catch (e) {}
     const c = convo(vid);
     c.want = { id: 'ask_favor', favor, stage: 0, fromSeed: false };
@@ -127,8 +137,13 @@ const F5_CORES = [
     const lines = themLinesSince(vid, before);
     return { res, text: lines.join(' ') };
   }
+  // r266: shape-based detection (F5W cores) — matches the named pool the
+  // game actually serves, and the generic pool too.
   function whichVariant(text) {
-    for (let i = 0; i < F5_CORES.length; i++) if (text.indexOf(F5_CORES[i]) !== -1) return 'V' + (i + 1);
+    if (!text) return null;
+    if (text.indexOf('Finished. Thank you for checking') !== -1) return 'V3';
+    if (text.toLowerCase().indexOf('taken care of, i swear') !== -1) return 'V2';
+    if (text.indexOf("it's handled") !== -1 && text.indexOf('Thanks for asking') !== -1) return 'V1';
     return null;
   }
   function endSitting(vid) { try { Game.endConvo(vid, 'left'); } catch (e) {} }
@@ -166,7 +181,7 @@ const F5_CORES = [
   const v2 = whichVariant(turn2.text);
   T.ok('the turn ran', !!turn2.res && typeof turn2.res === 'object', 'res=' + String(turn2.res && turn2.res.line || turn2.res).slice(0, 60));
   T.ok('the turn serves a fresh variant (V2 or V3)', v2 === 'V2' || v2 === 'V3', 'variant=' + v2 + ' text=' + turn2.text.slice(0, 140));
-  T.ok('the turn does NOT repeat blocked V1', turn2.text.indexOf(F5_CORES[0]) === -1, 'text=' + turn2.text.slice(0, 140));
+  T.ok('the turn does NOT repeat blocked V1', whichVariant(turn2.text) !== 'V1', 'variant=' + whichVariant(turn2.text) + ' text=' + turn2.text.slice(0, 140));
   T.ok('the turn does NOT dry', turn2.text.indexOf(DRY_MARK) === -1, 'text=' + turn2.text.slice(0, 140));
   endSitting(vid2);
 

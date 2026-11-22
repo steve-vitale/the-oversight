@@ -51,10 +51,17 @@ const REPAY_OPENER = '"You came through on the food I needed. I won\'t forget it
 const STALE_1 = '"About the food I needed — I keep thinking about what you did. I want to say it right."';
 const STALE_2 = '"The food I needed — I still owe you the thanks. Let me say it properly."';
 const FALLBACK = '"Okay. Here’s the thing —"';
+// r266 (r152 fallout): the F5 variants below are the NAMED pool — section 3
+// stages its favor with this short, so the game serves these, not the
+// generic pool. Poisoning the generic strings left the named V1 unblocked,
+// so the game served it instead of the structural fallback. The generic
+// pool is covered by the r152 named test (shortless favor) and the r225
+// F5 test (shape markers).
+const F5_SHORT = 'spare food for the little ones';
 const F5_VARIANTS = [
-  '"No, really — it\'s handled. Thanks for asking, though."',
-  '"It\'s taken care of, I swear. You don\'t need to worry about that one anymore."',
-  '"Honestly? It\'s done. Finished. Thank you for checking — it means something that you did."',
+  `"No, really — it's handled: ${F5_SHORT}. Thanks for asking, though."`,
+  `"Spare food for the little ones — it's taken care of, I swear. You don't need to worry about it anymore."`,
+  `"Honestly? It's done — ${F5_SHORT}. Finished. Thank you for checking — it means something that you did."`,
 ];
 
 (async () => {
@@ -144,7 +151,7 @@ const F5_VARIANTS = [
     return favor;
   }
   function stageSettledFavor(vid) {
-    const favor = { vid, id: 'favor-r238-f5-' + vid + '-' + day(), kind: 'food_share', state: 'thanked', askedDay: day(), short: 'spare food for the little ones' };
+    const favor = { vid, id: 'favor-r238-f5-' + vid + '-' + day(), kind: 'food_share', state: 'thanked', askedDay: day(), short: F5_SHORT };
     try { Game.convoStoreFavor(favor); } catch (e) {}
     const c = convo(vid);
     c.want = { id: 'ask_favor', favor, stage: 0, fromSeed: false };

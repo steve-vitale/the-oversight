@@ -58,10 +58,17 @@ const T = K.reporter('journey-social-life-r226-f6-dry-opener');
 const DRY_MARK = 'lost my train of thought';
 const REPAY_OPENER = '"You came through on the food I needed. I won\'t forget it."';
 const REPAY_THANKS_2 = '"the food I needed — you kept your word. Thank you."';
+// r266 (r152 fallout): the F5 variants below are the NAMED pool — section 4
+// stages its favor with this short, so the game serves these, not the
+// generic pool. Poisoning the generic strings could neither block the
+// named variants nor make the pick order-independent (the served variant
+// was random among the three). The generic pool is covered by the r152
+// named test (shortless favor) and the r225 F5 test (shape markers).
+const F5_SHORT = 'spare food for the little ones';
 const F5_VARIANTS = [
-  '"No, really — it\'s handled. Thanks for asking, though."',
-  '"It\'s taken care of, I swear. You don\'t need to worry about that one anymore."',
-  '"Honestly? It\'s done. Finished. Thank you for checking — it means something that you did."',
+  `"No, really — it's handled: ${F5_SHORT}. Thanks for asking, though."`,
+  `"Spare food for the little ones — it's taken care of, I swear. You don't need to worry about it anymore."`,
+  `"Honestly? It's done — ${F5_SHORT}. Finished. Thank you for checking — it means something that you did."`,
 ];
 const TEACH_ID = 'q_teach_me';
 
@@ -261,7 +268,7 @@ const TEACH_ID = 'q_teach_me';
     T.ok('poisoned F5 variant 1 through another villager', poisonOther(f.speaking, vid4, F5_VARIANTS[0]));
     T.ok('poisoned F5 variant 2 through another villager', poisonOther(f.speaking, vid4, F5_VARIANTS[1]));
     T.ok('opened a sitting on the test villager', openVid(vid4));
-    const favor = { vid: vid4, id: 'favor-f6-f5', kind: 'food_share', state: 'thanked', askedDay: day(), short: 'spare food for the little ones' };
+    const favor = { vid: vid4, id: 'favor-f6-f5', kind: 'food_share', state: 'thanked', askedDay: day(), short: F5_SHORT };
     try { Game.convoStoreFavor(favor); } catch (e) {}
     const c = convo(vid4);
     c.want = { id: 'ask_favor', favor, stage: 0, fromSeed: false };
@@ -269,7 +276,7 @@ const TEACH_ID = 'q_teach_me';
     T.ok('variant 3 is NOT run-blocked', Game.convoWouldBlock(vid4, F5_VARIANTS[2]) === false);
     const turn = askWant(vid4);
     T.ok('the turn ran', !!turn.res && typeof turn.res === 'object', 'res=' + String(turn.res && turn.res.line || turn.res).slice(0, 80));
-    T.ok('the turn speaks variant 3', turn.text.indexOf("It's done. Finished") !== -1, 'text=' + turn.text.slice(0, 140));
+    T.ok('the turn speaks variant 3', turn.text.indexOf('Finished. Thank you for checking') !== -1, 'text=' + turn.text.slice(0, 140));
     T.ok('the turn does NOT dry', turn.text.indexOf(DRY_MARK) === -1, 'text=' + turn.text.slice(0, 140));
     try { Game.endConvo(vid4, 'left'); } catch (e) {}
   }
