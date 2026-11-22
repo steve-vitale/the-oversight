@@ -255,6 +255,25 @@ function stuckKey(Game, f) {
   } catch (e) { return 'x'; }
 }
 
+// STUCK-TRACE (journey-crisis r264): record-only log of the unreachable-flee
+// counter's life — fight-start keys, no-move increments, flee fires, and
+// resets with their cause — so a panel can tell whether the key churns
+// inside a stall day (the r263 deduction) or the counter resets elsewhere
+// (a move, a strike, an ability). No decision reads it; the driver dumps
+// it into rec.stuckTrace. Capped at 1000 entries per ctx (one game-day,
+// since the harness creates a fresh ctx per runDays call).
+function traceStuck(Game, ctx, kind, key, why) {
+  try {
+    if (!ctx) return;
+    const t = ctx._stuckTrace || (ctx._stuckTrace = []);
+    if (t.length >= 1000) return;
+    const day = ((Game.state || {}).scholar || {}).day || 0;
+    const e = { k: kind, d: day, key: key || null, s: ctx._closeStuck || 0 };
+    if (why) e.w = why;
+    t.push(e);
+  } catch (err) {}
+}
+
 function v2Fight(Game, ctx) {
   try {
     const f = Game.tbfight;
@@ -316,6 +335,10 @@ function v2Fight(Game, ctx) {
       // influencer churn, r262). A new monster set or a new day restarts it.
       const _sk = stuckKey(Game, f);
       if (ctx._closeStuckKey !== _sk) { ctx._closeStuck = 0; ctx._closeStuckKey = _sk; }
+      // STUCK-TRACE (journey-crisis r264, record-only): log the fight-start
+      // key + counter so the panel can see whether the key churns inside a
+      // stall day or holds while the counter resets elsewhere.
+      traceStuck(Game, ctx, 'start', _sk);
       armUp(Game, ctx);
       // COUNTER CHECK: focus a known-counter monster first (dormant by
       // construction — no def carries a counter field; measured, not assumed).
@@ -395,8 +418,12 @@ function v2Fight(Game, ctx) {
         try { _d1 = Math.max(Math.abs(tmx - (_q ? _q.mx : px)), Math.abs(tmy - (_q ? _q.my : py))); } catch (e) {}
         if (!_moved && _d1 > (w.range || 1)) {
           ctx._closeStuck = (ctx._closeStuck || 0) + 1;
-          if (ctx._closeStuck >= 3) return flee('unreachable');
-        } else ctx._closeStuck = 0;
+          traceStuck(Game, ctx, 'inc', ctx._closeStuckKey);
+          if (ctx._closeStuck >= 3) { traceStuck(Game, ctx, 'flee', ctx._closeStuckKey); return flee('unreachable'); }
+        } else {
+          if (ctx._closeStuck) traceStuck(Game, ctx, 'reset', ctx._closeStuckKey, _moved ? 'moved' : 'inrange');
+          ctx._closeStuck = 0;
+        }
         endTurn();
         ctx._turnN = (ctx._turnN || 0) + 1;
         return true;
@@ -407,12 +434,14 @@ function v2Fight(Game, ctx) {
     const turnN = ctx._turnN || 0;
     const abilKey = pickTurn(Game, ctx, f, p, hpPct, tgt.key, turnN);
     if (abilKey && fire(Game, ctx, abilKey, tgt.key)) {
+      if (ctx._closeStuck) traceStuck(Game, ctx, 'reset', ctx._closeStuckKey, 'ability');
       ctx._closeStuck = 0;
       ctx._turnN = turnN + 1;
       endTurn();
       return true;
     }
     try { Game.tbPlayerStrike(tgt.key); ctx.struck = (ctx.struck || 0) + 1; } catch (e) {}
+    if (ctx._closeStuck) traceStuck(Game, ctx, 'reset', ctx._closeStuckKey, 'strike');
     ctx._closeStuck = 0;
     ctx._turnN = turnN + 1;
     endTurn();
