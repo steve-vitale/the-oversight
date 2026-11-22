@@ -1305,12 +1305,12 @@
           var plan2 = this.winPlanOf ? this.winPlanOf(vid) : null;
           if (plan2) { plan2.stage = 'hunt'; plan2.party = launched.slice(); }
           var cplan = this.winPlanOf ? this.winPlanOf(c.companion) : null;
-          if (cplan && launched.indexOf(c.companion) !== -1) { cplan.stage = 'hunt'; cplan.party = [vid].concat(launched.filter(function (x) { return x !== c.companion; })); }
+          if (cplan && launched.indexOf(c.companion) !== -1) { cplan.stage = 'hunt'; cplan.party = [vid].concat(launched.filter(function (x) { return x !== c.companion; })); if (plan2 && plan2.needWave != null) cplan.needWave = plan2.needWave; }
           if (launched.length > 1) {
             var cplan2 = this.winPlanOf ? this.winPlanOf(c.companion2) : null;
             if (cplan2) {
               cplan2.stage = 'hunt'; cplan2.party = [vid, c.companion].concat(launched.length > 2 ? [launched[2]] : []);
-              cplan2.target = plan2 ? plan2.target : null; cplan2.node = plan2 ? plan2.node : null;
+              cplan2.target = plan2 ? plan2.target : null; cplan2.node = plan2 ? plan2.node : null; if (plan2 && plan2.needWave != null) cplan2.needWave = plan2.needWave;
             }
             // PARTYTRIOS (sim-partytrios-b): the brain path is the
             // launch path that fires in sims, but it never bumped
@@ -1326,7 +1326,7 @@
             var cplan3 = this.winPlanOf ? this.winPlanOf(c.companion3) : null;
             if (cplan3) {
               cplan3.stage = 'hunt'; cplan3.party = [vid, c.companion, launched[1]];
-              cplan3.target = plan2 ? plan2.target : null; cplan3.node = plan2 ? plan2.node : null;
+              cplan3.target = plan2 ? plan2.target : null; cplan3.node = plan2 ? plan2.node : null; if (plan2 && plan2.needWave != null) cplan3.needWave = plan2.needWave;
             }
             // PARTYQUADS (sim-partyquads-b): the brain path is the
             // launch path that fires in sims, but it never bumped

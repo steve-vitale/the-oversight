@@ -1315,15 +1315,16 @@
               cplan.stage = 'hunt';
               cplan.party = [vid].concat(launched.filter(function (x) { return x !== cid; }));
               cplan.target = plan.target; cplan.node = plan.node;
+              if (plan.needWave != null) cplan.needWave = plan.needWave;
             }
             if (launched.length > 1) {
               var cplan2 = self.winPlanOf ? self.winPlanOf(launched[1]) : null;
-              if (cplan2) { cplan2.stage = 'hunt'; cplan2.party = [vid, cid].concat(launched.length > 2 ? [launched[2]] : []); cplan2.target = plan.target; cplan2.node = plan.node; }
+              if (cplan2) { cplan2.stage = 'hunt'; cplan2.party = [vid, cid].concat(launched.length > 2 ? [launched[2]] : []); cplan2.target = plan.target; cplan2.node = plan.node; if (plan.needWave != null) cplan2.needWave = plan.needWave; }
               bump(self, 'partyTrios');
             }
             if (launched.length > 2) {
               var cplan3 = self.winPlanOf ? self.winPlanOf(launched[2]) : null;
-              if (cplan3) { cplan3.stage = 'hunt'; cplan3.party = [vid, cid, launched[1]]; cplan3.target = plan.target; cplan3.node = plan.node; }
+              if (cplan3) { cplan3.stage = 'hunt'; cplan3.party = [vid, cid, launched[1]]; cplan3.target = plan.target; cplan3.node = plan.node; if (plan.needWave != null) cplan3.needWave = plan.needWave; }
               bump(self, 'partyQuads');
             }
           } catch (e) {}
