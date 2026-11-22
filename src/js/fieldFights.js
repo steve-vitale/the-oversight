@@ -997,6 +997,14 @@
         }
         var _w = (_rdef && _rdef.weapon) || null;
         var _ammoId = _w ? _w.ammo : null;
+        // SEARVOICE (sim-searvoice-a, findings #2623 + 2026-11-21
+        // narration): a searcaster is a fusion-cell gun, not a bow —
+        // the volley and dry lines below branch on _isGun so the gun
+        // reads as a gun (trigger / discharge / cells spent). Bow,
+        // crossbow and sling keep the old lines byte-identical.
+        // Narration only: shots, hit chance, damage and ammo spend
+        // are untouched. Default ON, no env gate.
+        var _isGun = (_rwId === 'searcaster');
         if (_w && _ammoId) {
           var _range = _w.range || 3;
           var _rBonus = (_w.bonus || 0);
@@ -1042,7 +1050,11 @@
                 }
               }
             } catch (e) {}
-            rec.log.push(vName + ' has ' + (_rdef.name || 'a bow') + ' but no ' + _ammoName + ' — the string stays drawn, useless.');
+            if (_isGun) {
+              rec.log.push(vName + ' has ' + (_rdef.name || 'a gun') + ' but no ' + _ammoName + ' — the trigger clicks on nothing.');
+            } else {
+              rec.log.push(vName + ' has ' + (_rdef.name || 'a bow') + ' but no ' + _ammoName + ' — the string stays drawn, useless.');
+            }
             rec.volley = { shots: 0, hits: 0, dmg: 0, ammoLeft: _ammoN };
           } else {
             var _hitP = clamp(0.85 - 0.06 * _range, 0.35, 0.85);
@@ -1050,7 +1062,11 @@
             try { _tracking = (((this.agencyOf(vid) || {}).xp || {})[vid] || {}).tracking || 0; } catch (e) {}
             _hitP += Math.min(0.15, _tracking * 0.005);
             var _vh = 0, _vdmg = 0;
-            rec.log.push(vName + ' sees ' + mPhrase + ' coming and nocks an arrow — the fight opens at range (' + _shots + ' shot' + (_shots === 1 ? '' : 's') + ').');
+            if (_isGun) {
+              rec.log.push(vName + ' sees ' + mPhrase + ' coming and raises the ' + (_rdef.name || 'Searcaster') + ' — the fight opens at range (' + _shots + ' shot' + (_shots === 1 ? '' : 's') + ').');
+            } else {
+              rec.log.push(vName + ' sees ' + mPhrase + ' coming and nocks an arrow — the fight opens at range (' + _shots + ' shot' + (_shots === 1 ? '' : 's') + ').');
+            }
             for (var _s = 0; _s < _shots; _s++) {
               // spend one ammo, honestly — the quiver empties
               var _spent = false;
@@ -1068,14 +1084,26 @@
                 var _vd = lroll([4 + _wbR, 8 + _wbR]);
                 members[0].hp -= _vd; rec.mDealt += _vd; _vh++; _vdmg += _vd;
                 if (members[0].hp <= 0) members[0].alive = false;
-                rec.log.push('  loosed — it takes ' + mPhrase + ' for ' + _vd + ' (' + Math.max(0, members[0].hp) + ' left).');
+                if (_isGun) {
+                  rec.log.push('  the ' + (_rdef.name || 'Searcaster') + ' fires — it takes ' + mPhrase + ' for ' + _vd + ' (' + Math.max(0, members[0].hp) + ' left).');
+                } else {
+                  rec.log.push('  loosed — it takes ' + mPhrase + ' for ' + _vd + ' (' + Math.max(0, members[0].hp) + ' left).');
+                }
               } else {
-                rec.log.push('  loosed wide — the arrow buries itself in the dirt. (spent)');
+                if (_isGun) {
+                  rec.log.push('  fires wide — the discharge scorches the dirt beside ' + mPhrase + '. (cell spent)');
+                } else {
+                  rec.log.push('  loosed wide — the arrow buries itself in the dirt. (spent)');
+                }
               }
               if (members[0].hp <= 0) break;
             }
             rec.volley = { shots: _shots, hits: _vh, dmg: _vdmg, ammoLeft: Math.max(0, _ammoN) };
-            rec.log.push(vName + ' lowers the bow — ' + mPhrase + ' is on them now. (' + _vh + '/' + _shots + ' hit)');
+            if (_isGun) {
+              rec.log.push(vName + ' lowers the ' + (_rdef.name || 'Searcaster') + ' — ' + mPhrase + ' is on them now. (' + _vh + '/' + _shots + ' hit)');
+            } else {
+              rec.log.push(vName + ' lowers the bow — ' + mPhrase + ' is on them now. (' + _vh + '/' + _shots + ' hit)');
+            }
           }
         }
       } catch (e) { /* no ranged kit, no volley — the fight starts as before */ }
