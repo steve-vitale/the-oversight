@@ -15,8 +15,11 @@
 //       own needWave (null stays null, 4 stays 4).
 //   §B2W null-holder wipe guard: leader needWave null, companions 4
 //       — both companions must keep 4 after the departure.
-//   §B3 the departure-beat gate still requires an inherited wave
-//       number (companion-turned-holder stays silent without one).
+//   §B3 LAUNCHVOICE (journey r268, 1c11dbb14): the departure-beat
+//       wave-4+ gate is gone by design, so the companion-turned-
+//       holder speaks their line too — the beat is wave-agnostic
+//       now. §B3 pins that the hook fires (launch narration intact),
+//       not silence.
 //   §C OLD-CODE CONTROL unchanged: fixtures against the frozen
 //       branch-base tip must leave companions needWave-null.
 //   §D negative cases: wave-3 launch copies nothing; targetless
@@ -280,8 +283,9 @@ if (OLD_CODE_PATH) {
   const before = departBeatLines(h.says).length;
   const hookRet = Game.winPlanDepartLaunchBeat.call(h.ctx, 'diana_osei', ['amina_diallo']);
   const beatLines = departBeatLines(h.says);
-  check('§B3 companion-turned-holder stays silent without an inherited wave number (beat gate intact)',
-    hookRet === false && beatLines.length === before, { hookRet: hookRet, lines: beatLines });
+  check('§B3 companion-turned-holder speaks (LAUNCHVOICE r268: wave-4+ beat gate gone, beat is wave-agnostic)',
+    hookRet === true && beatLines.length === before + 1 &&
+    /Diana sets out with Amina after Herald — the fire marks the trail\./.test(beatLines[beatLines.length - 1] || ''), { hookRet: hookRet, lines: beatLines });
   disarmEnv();
 })();
 
