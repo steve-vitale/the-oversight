@@ -824,6 +824,51 @@
         } catch (e) {}
         return;
       }
+      // LEADERPROJ (sim-leaderproj-b, finding #2619): the
+      // leader-PROJECTION gate. A pinned quad does not walk into a
+      // wave-4+ door with its LEADER projected at or below the
+      // 25-HP floor within two rounds of focused wave-4 damage
+      // (~25 HP/round, hypofloor-b §4). The evidence
+      // (leaderhpgate-b §9 + S10): on band 107375-107382 the
+      // projection census would have touched 4 of the 6 fought
+      // doors — the d108 leader death (Petra entered at 64 HP,
+      // projected 14 HP after two rounds, died round 7 with the
+      // monster at 44 HP) and the d147 flee (Vitalina entered at
+      // 51 HP, projected 1 HP, fled at 16 HP) — doors no < 25
+      // floor ever refuses, because the leader walks in healthy
+      // and collapses in the fight. The gate reads the LEADER's
+      // live HP at the door, projects it two rounds forward at
+      // 25/round, and refuses when the projection is at or below
+      // the 25-HP floor (leader HP <= 75). Same avoid verb as the
+      // floors (no fight, no flee, no death), same counter shape.
+      // Env-gated OFF by default; no RNG is drawn; off-mode is
+      // byte-identical (the whole block needs LEADERPROJ=1 AND a
+      // pinned door). Placed AFTER LEADERHPGATE deliberately, so
+      // its counter measures marginal fires only — a door HPGATE
+      // or LEADERHPGATE already refused is never counted here.
+      // The projection is a forecast, not a fact: the monster may
+      // not focus the leader, and the quad may kill first — the
+      // pilot prices whether refusing these doors buys fewer
+      // flees/deaths per door, not whether the forecast is exact.
+      var _lpGate = null;
+      try {
+        if (typeof process !== 'undefined' && process.env && process.env.LEADERPROJ === '1' &&
+            _pinDoor && m && ((m.wave | 0) >= 4)) {
+          var _lpHealth = (this.state.village || {}).health || {};
+          var _lpHp = (_lpHealth[vid] !== undefined) ? _lpHealth[vid] : 100;
+          var _lpProj = _lpHp - 50;
+          if (_lpProj <= 25) { _lpGate = { id: vid, hp: _lpHp, proj: _lpProj }; }
+        }
+      } catch (e) { _lpGate = null; }
+      if (_lpGate) {
+        try { st.leaderprojFires = (st.leaderprojFires | 0) + 1; } catch (e) {}
+        try {
+          var _lpNm = '';
+          try { _lpNm = this.displayName(_lpGate.id); } catch (e) { _lpNm = 'Someone'; }
+          if (st.exped[vid]) st.exped[vid].encounters.push('gave ' + (m.id || 'it') + ' room — ' + _lpNm + ' is too hurt to lead a door (projected ' + _lpGate.hp + ' HP, ' + _lpGate.proj + ' HP in two rounds)');
+        } catch (e) {}
+        return;
+      }
       var rec = this.fieldFight(vid, m, null, { awareness: !_wpSeek, allies: allyVids.length, allyVids: allyVids, allyFromStart: _pinDoor });
       try { if (this.winPlanNoteFight) this.winPlanNoteFight(vid, allyVids); } catch (e) {}
       // The village hears about a rescue — gossip fodder, honestly sourced.

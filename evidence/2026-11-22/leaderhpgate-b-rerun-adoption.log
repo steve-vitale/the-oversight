@@ -1,0 +1,60 @@
+PASS §0 villager-agency.js carries the LEADERHPGATE gate (LEADERHPGATE env + _pinDoor + wave >= 4 + leader-only HP read)
+PASS §0 the floor is 25 HP, strict, on the LEADER only (no pinned-ally read in the leader gate)
+PASS §0 the gate counts itself (st.leaderhpgateFires increments) and narrates the avoid (encounters note, "too hurt to lead a door")
+PASS §0 the gate draws no RNG (no RR() inside the LEADERHPGATE block)
+PASS §0 off-mode is byte-identical by construction (the whole block needs LEADERHPGATE=1 AND a pinned door; _pinDoor is false without PINQUAD)
+PASS §0 the leader gate sits AFTER the whole-party gate (HPGATE block precedes LEADERHPGATE, so its counter measures marginal fires only)
+PASS §1a staging: hurt-leader load stages (pinned quad, leader 21, seed 11)
+  [§1a] ffCalls=[] fires=1 hpFires=0 notes=["gave congregation room — A person, maybe 50s, with a slouched posture is too hurt to lead a door (21 HP)"]
+PASS §1a the quad pins (pinQuadParty true)
+PASS §1a the hurt leader never fights (fieldFight never called)
+PASS §1a the gate counts itself (leaderhpgateFires 1, hpgateFires 0 — the whole-party gate is off)
+PASS §1a the avoid is narrated (note names the hurt leader and 21 HP, "too hurt to lead a door")
+PASS §1b staging: hurt-ally load stages (pinned quad, ally3 3 HP, seed 11)
+  [§1b] ffCalls=[{"mid":"congregation","wave":4,"allyFromStart":true,"allyVids":["gen_2gu4ufa","gen_psebddf","gen_qijvybn"]}] fires=0 notes=[]
+PASS §1b the quad pins (pinQuadParty true)
+PASS §1b the hurt ally does NOT trigger the leader gate (fieldFight called — the door opens)
+PASS §1b the gate never fires on a hurt ally (counter 0, no lead note)
+PASS §1c staging: leader-24 load stages
+PASS §1c leader at 24 HP refuses (no fight, counter 1)
+PASS §1c staging: leader-25 load stages
+  [§1c] leader-25 ffCalls=[{"mid":"congregation","wave":4,"allyFromStart":true,"allyVids":["gen_2gu4ufa","gen_psebddf","gen_qijvybn"]}] fires=0
+PASS §1c leader at exactly 25 HP proceeds (fieldFight called once, counter 0)
+PASS §1c the 25-HP door opens as a door (allyFromStart true, the pinned trio as allies)
+PASS §2 staging: healthy load stages
+  [§2] ffCalls=[{"mid":"congregation","wave":4,"allyFromStart":true,"allyVids":["gen_2gu4ufa","gen_psebddf","gen_qijvybn"]}] fires=0 outcome=vDie rounds=5
+PASS §2 the healthy door opens (fieldFight called once, allyFromStart true, pinned trio as allies)
+PASS §2 the healthy door is the congregation (same monster as the hurt loads — the pick is deterministic per seed)
+PASS §2 the gate never fires healthy (counter 0, no gate note)
+PASS §3 staging: no-pin load stages (PINQUAD unset)
+  [§3] ffCalls=[{"mid":"congregation","wave":4,"allyFromStart":false,"allyVids":["gen_2gu4ufa","gen_psebddf","gen_qijvybn"]}] fires=0
+PASS §3 pinQuadParty writes nothing with PINQUAD unset (returns false)
+PASS §3 without the pin the hurt leader still fights (fieldFight called, counter 0 — no door, no gate)
+PASS §4 staging: wave-1 load stages
+  [§4] ffCalls=[{"mid":"hushwolf","wave":1,"allyFromStart":true,"allyVids":["gen_2gu4ufa","gen_psebddf","gen_qijvybn"]}] fires=0
+PASS §4 the quad pins even at wave 1
+PASS §4 the wave-1 monster really is wave 1
+PASS §4 LEADERHPGATE holds nothing at wave 1 (fieldFight called, counter 0)
+PASS §5 staging: flag-off hurt load stages
+PASS §5 with the flag off the hurt leader fights (fieldFight called, counter 0, no gate note)
+PASS §5 staging: flag-off healthy load stages
+PASS §5 staging: flag-on healthy load stages
+  [§5] flag-off healthy={"outcome":"vDie","rounds":5,"mDealt":852,"vTaken":124} flag-on healthy={"outcome":"vDie","rounds":5,"mDealt":852,"vTaken":124}
+PASS §5 the healthy door fight is identical with the flag on vs off (outcome/rounds/dealt/vTaken equal — no RNG drawn, nothing changed)
+PASS §6 staging: both-gates hurt-leader load stages
+  [§6] leader-21 ffCalls=[] leaderFires=0 hpFires=1 notes=["gave congregation room — A person, maybe 50s, with a slouched posture is too hurt to hold a door (21 HP)"]
+PASS §6 with HPGATE on, the hurt leader never fights (fieldFight never called)
+PASS §6 the WHOLE-PARTY gate fires first (hpgateFires 1 — the leader is first in its party order)
+PASS §6 the leader gate never fires alongside HPGATE (leaderhpgateFires 0 — subsumption, staged)
+PASS §6 the avoid is narrated by the whole-party gate ("too hurt to hold a door", no "lead" note)
+PASS §6 staging: both-gates hurt-ally load stages
+  [§6] ally-3 ffCalls=[] leaderFires=0 hpFires=1
+PASS §6 with HPGATE on, the hurt ally still refuses the door (fieldFight never called, hpgateFires 1, leaderhpgateFires 0)
+PASS §7 driver smoke (direct, armed): exit 0 on one 30d seed
+PASS §7 driver smoke: corpus file written, leaderhpgateFlag 1 + hpgateFlag 1 + hypofloorFlag 1 + doorflee2Flag 1 + dmgpinFlag 1 + pinquadFlag 1 + slotPresent true
+PASS §7 driver smoke: leaderhpgateFires is a number and gateAvoidNotes is an array on the corpus file
+PASS §7 driver smoke: 0 instrument errors
+PASS §7 driver smoke: every v4 row carries a numeric leaderEntryHp
+PASS §8 whole-party gate re-runs green (test-hpgate-b.js 43/43)
+PASS §8 floor gate re-runs green (test-hypofloor-b.js 48/48)
+test-leaderhpgate-b: 50 passed, 0 failed

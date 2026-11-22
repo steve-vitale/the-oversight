@@ -71,6 +71,14 @@
 // whether the leader was projected-dead after one/two rounds of
 // focused wave-4 damage). Pure reads only; no other driver
 // behavior changes.
+// LEADERPROJ (sim-leaderproj-b, finding #2619): the corpus stamp
+// gains leaderprojFlag + leaderprojFires (same shape as the other
+// gates) and the gate-avoid-notes regex also parses the projection
+// gate's note ("... too hurt to lead a door (projected <hp> HP,
+// <proj> HP in two rounds)") as kind 'proj' with its projected
+// HP, so the analyzer can attribute avoided doors to the
+// projection gate. Pure reads only; no other driver behavior
+// changes.
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -1337,26 +1345,33 @@ async function oneRun(seed) {
   // so the notes are collected here, verbatim, with the fired
   // member's HP and the gate kind ('hold' = whole-party gate,
   // 'lead' = leader gate). Pure reads at end of run.
+  // LEADERPROJ (sim-leaderproj-b): the projection-gate counter
+  // (same shape) + its notes, parsed by the same regex — a
+  // "(projected <hp> HP, <proj> HP in two rounds)" tail marks
+  // kind 'proj' and carries the projected HP, so the analyzer can
+  // attribute avoided doors to the projection gate.
   let leaderhpgateFires = 0;
+  let leaderprojFires = 0;
   const gateAvoidNotes = [];
   try {
     const _ag2 = Game.agencyState ? Game.agencyState() : null;
     leaderhpgateFires = (_ag2 && _ag2.leaderhpgateFires) | 0;
+    leaderprojFires = (_ag2 && _ag2.leaderprojFires) | 0;
     const _exp = (_ag2 && _ag2.exped) || {};
-    const _re = /gave (\S+) room — (.+?) is too hurt to (hold|lead) a door \((\d+) HP\)/;
+    const _re = /gave (\S+) room — (.+?) is too hurt to (hold|lead) a door \((projected )?(\d+) HP(?:, (-?\d+) HP in two rounds)?\)/;
     for (const _vid of Object.keys(_exp)) {
       const _encs = (_exp[_vid] && _exp[_vid].encounters) || [];
       for (const _n of _encs) {
         const _m = _re.exec(String(_n));
-        if (_m) gateAvoidNotes.push({ vid: _vid, mid: _m[1], name: _m[2], kind: _m[3], hp: parseInt(_m[4], 10), note: String(_n) });
+        if (_m) gateAvoidNotes.push({ vid: _vid, mid: _m[1], name: _m[2], kind: _m[4] ? 'proj' : _m[3], hp: parseInt(_m[5], 10), projHp2: _m[6] != null ? parseInt(_m[6], 10) : null, note: String(_n) });
       }
     }
-  } catch (e) { leaderhpgateFires = 0; }
+  } catch (e) { leaderhpgateFires = 0; leaderprojFires = 0; }
 
   const out = {
     seed: seed, arm: 'pinquaddoor-b', run: RUN, mode: MODE, leg: MODE,
     anchorCommit: ANCHOR, standingMarker: STANDING_MARKER,
-    brainSha: BRAIN_SHA, carryPresent: CARRY_PRESENT, bumpPresent: BUMP_PRESENT, slotPresent: SLOT_PRESENT, pinPresent: PIN_PRESENT, senseexpedPresent: SENSE_PRESENT, allyslot3Flag: process.env.ALLYSLOT3 || null, pinquadFlag: process.env.PINQUAD || null, dmgpinFlag: process.env.DMGPIN || null, doorflee2Flag: process.env.DOORFLEE2 || null, hypofloorFlag: process.env.HYPOFLOOR || null, hpgateFlag: process.env.HPGATE || null, hpgateFires: hpgateFires, leaderhpgateFlag: process.env.LEADERHPGATE || null, leaderhpgateFires: leaderhpgateFires, gateAvoidNotes: gateAvoidNotes, senseexpedFlag: process.env.SENSEEXPED || null,
+    brainSha: BRAIN_SHA, carryPresent: CARRY_PRESENT, bumpPresent: BUMP_PRESENT, slotPresent: SLOT_PRESENT, pinPresent: PIN_PRESENT, senseexpedPresent: SENSE_PRESENT, allyslot3Flag: process.env.ALLYSLOT3 || null, pinquadFlag: process.env.PINQUAD || null, dmgpinFlag: process.env.DMGPIN || null, doorflee2Flag: process.env.DOORFLEE2 || null, hypofloorFlag: process.env.HYPOFLOOR || null, hpgateFlag: process.env.HPGATE || null, hpgateFires: hpgateFires, leaderhpgateFlag: process.env.LEADERHPGATE || null, leaderhpgateFires: leaderhpgateFires, leaderprojFlag: process.env.LEADERPROJ || null, leaderprojFires: leaderprojFires, gateAvoidNotes: gateAvoidNotes, senseexpedFlag: process.env.SENSEEXPED || null,
     recorderOn: RECORDER_ON,
     policySha: POLICY_SHA, policy: 'competent',
     days: result.days, gameDays: (st.scholar && st.scholar.day) || 0,
@@ -1430,7 +1445,7 @@ if (!SEEDS.length) { console.error('PINQUADDOOR STOP: SEEDS required.'); process
     writeRobust(file, JSON.stringify(out, null, 2) + '\n');
     console.log(JSON.stringify({
       seed: out.seed, mode: out.mode, anchor: (out.anchorCommit || '').slice(0, 12),
-      brainSha: out.brainSha, carryPresent: out.carryPresent, bumpPresent: out.bumpPresent, slotPresent: out.slotPresent, pinPresent: out.pinPresent, pinquadFlag: out.pinquadFlag, dmgpinFlag: out.dmgpinFlag, doorflee2Flag: out.doorflee2Flag, hypofloorFlag: out.hypofloorFlag, hpgateFlag: out.hpgateFlag, hpgateFires: out.hpgateFires, leaderhpgateFlag: out.leaderhpgateFlag, leaderhpgateFires: out.leaderhpgateFires, gateAvoidNotes: out.gateAvoidNotes.length, senseexpedPresent: out.senseexpedPresent, allyslot3Flag: out.allyslot3Flag, pinquadFlag: out.pinquadFlag, senseexpedFlag: out.senseexpedFlag,
+      brainSha: out.brainSha, carryPresent: out.carryPresent, bumpPresent: out.bumpPresent, slotPresent: out.slotPresent, pinPresent: out.pinPresent, pinquadFlag: out.pinquadFlag, dmgpinFlag: out.dmgpinFlag, doorflee2Flag: out.doorflee2Flag, hypofloorFlag: out.hypofloorFlag, hpgateFlag: out.hpgateFlag, hpgateFires: out.hpgateFires, leaderhpgateFlag: out.leaderhpgateFlag, leaderhpgateFires: out.leaderhpgateFires, leaderprojFlag: out.leaderprojFlag, leaderprojFires: out.leaderprojFires, gateAvoidNotes: out.gateAvoidNotes.length, senseexpedPresent: out.senseexpedPresent, allyslot3Flag: out.allyslot3Flag, pinquadFlag: out.pinquadFlag, senseexpedFlag: out.senseexpedFlag,
       policySha: out.policySha, standingMarker: out.standingMarker,
       recorderOn: out.recorderOn,
       days: out.days, endReason: out.endReason, won: out.won,
