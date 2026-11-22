@@ -271,5 +271,19 @@ NOT rolled.
 
 ## Gate
 
-(TBD at closeout — serialized after the Loop A 0815Z adoption gate,
-which held the slot at run start.)
+Certified by the adoption (serialized; the run's own gate timed out
+at ~11:54Z under extreme load with a partial 372-byte log, no
+summary). Two gate runs: the first on base 87b2122f3 gave 339/5 in
+749s, then master moved to be0cfca40 (leadgate + r250 + 0930Z
+adoptions, incl. src/js changes), so the branch was rebased and the
+gate re-run on the rebased tip 1f093b9e5: **339 passed, 5 failed in
+667s, 0 attributable**. The 5 are exactly the standing set:
+measurement-proof staleness pair
+(test-measurement-proof-update.js, test-measurement-workflow.js),
+phone-frame stale receipt (test-phone-frame-proof.js), and two
+120s deed-attainment timeouts
+(test-living-garden-deed-attainment.js,
+test-one-person-army-deed-attainment.js — both pass solo; the
+120s cap under load, per r264). Full log:
+`evidence/2026-11-22/journey-endgame-r267-gate.log` (also copied to
+goal `hidden_files/check-quick-r267-gate.log`).
