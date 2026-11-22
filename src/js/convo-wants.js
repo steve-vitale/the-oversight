@@ -2317,8 +2317,54 @@
       try {
         const v = this.state.village || {};
         v.favorLedger = v.favorLedger || {};
+        // MOOT-CLOSE (journey-deepening r269 — r268 follow-up, Mechanism B):
+        // the ledger holds one favor per villager, so storing a new favor
+        // evicts the old one. If the evicted favor holds a live unreturned
+        // joint run (forage_help / water_haul), the run would strand
+        // invisible to every scan — the ledger no longer lists it, the
+        // bearer (often dead) can never close it, and the player can never
+        // end it. Close its books here (returned, 0 deposited) so the
+        // spoken "we got it handled" (HONEST MOOT, r34) is true on the
+        // books too. The player keeps what they carry; the pantry/cistern
+        // receives 0; the partner's virtual share is never conjured (the
+        // r81 / BEARER-END r265 honesty rule). Same-id re-stores (the same
+        // favor being saved again) are untouched.
+        const prev = v.favorLedger[favor.vid];
+        if (prev && prev.id !== favor.id) { try { this.convoCloseMootedRun(prev); } catch (e) { console.warn('moot-close', e); } }
         v.favorLedger[favor.vid] = favor;
       } catch (e) {}
+    },
+
+    // convoCloseMootedRun: close the books on a live joint run whose favor
+    // is being evicted from the ledger (see convoStoreFavor). Forage:
+    // returned, 0 kcal deposited. Water: returned, 0 liters delivered.
+    // Tele records the moot (mooted:true) so panels can count it.
+    // Returns true when a run was closed.
+    convoCloseMootedRun(favor) {
+      try {
+        if (!favor) return false;
+        const day = (this.state.scholar || {}).day || 0;
+        if (favor.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned) {
+          const r = favor.forageRun;
+          r.returned = true; r.returnedDay = day;
+          r.deliveredKcal = 0; r.deliveredPlayerKcal = 0; r.deliveredPartnerKcal = 0; r.deliveredPlayerCounterKcal = 0;
+          r.mooted = true;
+          favor.state = 'moot';
+          try { this.tele('favor_forage_return', { favorId: favor.id, partner: favor.vid, playerKcal: 0, partnerKcal: 0, deliveredKcal: 0, playerCounterKcal: 0, kept: false, endedEarly: true, mooted: true }); } catch (e) {}
+          return true;
+        }
+        if (favor.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
+          const r = favor.waterRun;
+          r.partnerWater = [];
+          r.returned = true; r.returnedDay = day;
+          r.deliveredLiters = 0;
+          r.mooted = true;
+          favor.state = 'moot';
+          try { this.tele('favor_water_return', { favorId: favor.id, partner: favor.vid, cleanLiters: 0, riskyLiters: 0, kept: false, endedEarly: true, mooted: true }); } catch (e) {}
+          return true;
+        }
+        return false;
+      } catch (e) { console.warn('moot-close', e); return false; }
     },
 
     // openFavorObligation: the tracked promise for a favor, if open.
