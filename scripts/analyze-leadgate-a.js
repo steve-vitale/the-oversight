@@ -11,6 +11,28 @@
 const fs = require('fs');
 const path = require('path');
 
+// Wave-4+ id set (frozen list from src/data/monsters.json —
+// re-read live so the analyzer refuses a stale roster silently).
+// A plan is wave-4+ when its needWave is >= 4 OR its target is a
+// wave-4+ species: the companion sync in launchParty copies target
+// but NOT needWave (win-plan.js), so a companion-inherited plan can
+// carry a wave-4 target with needWave null. needWave alone
+// UNDERCOUNTS the wave-4 plan population (14 vs 25 on the judged
+// band — see the evidence file's metric review).
+const W4P_IDS_FROZEN = ['congregation', 'strike', 'influencer', 'audit', 'reunion', 'suburb', 'eulogy', 'algorithm', 'eater', 'herald',
+  'cancellation', 'editor', 'rerun', 'spoiler', 'timeslot', 'nielsen', 'finale', 'network_note'];
+function loadWave4pIds() {
+  try {
+    const raw = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'src', 'data', 'monsters.json'), 'utf8'));
+    const list = raw.monsters || raw;
+    return list.filter(function (m) { return (m.wave | 0) >= 4; }).map(function (m) { return m.id; }).sort();
+  } catch (e) { return W4P_IDS_FROZEN.slice().sort(); }
+}
+const W4P_SET = new Set(loadWave4pIds());
+function isW4Plan(plan) {
+  return !!(plan && (((plan.needWave | 0) >= 4) || (plan.target && W4P_SET.has(plan.target))));
+}
+
 function isAttrs(a) {
   return !!(a && typeof a === 'object' && typeof a.vid === 'string' && typeof a.hp === 'number');
 }
@@ -142,7 +164,7 @@ function analyzeSeed(out) {
     if (a.gunEquipped) h.gunEquippedDays++;
     const plan = a.plan || null;
     const hasPlan = !!plan;
-    const w4plan = !!(plan && (plan.needWave | 0) >= 4);
+    const w4plan = isW4Plan(plan);
     if (hasPlan) {
       h.planDays++;
       h.stages[plan.stage || 'null'] = (h.stages[plan.stage || 'null'] || 0) + 1;
@@ -162,13 +184,20 @@ function analyzeSeed(out) {
   }
   // Launches / fights led while holding a gun, per holder.
   const ledWhileHolding = {};
+  // Launches / fights led by anyone, per holder (for the w4-holder
+  // table — NOT gun-gated; ledWhileHolding above is gun-gated only).
+  const ledCounts = {};
   for (const l of launches) {
+    ledCounts[l.vid] = ledCounts[l.vid] || { launches: 0, fights: 0 };
+    ledCounts[l.vid].launches++;
     if (l.gunHolderIsLead) {
       ledWhileHolding[l.vid] = ledWhileHolding[l.vid] || { launches: 0, fights: 0 };
       ledWhileHolding[l.vid].launches++;
     }
   }
   for (const f of fights) {
+    ledCounts[f.vid] = ledCounts[f.vid] || { launches: 0, fights: 0 };
+    ledCounts[f.vid].fights++;
     if (f.gunHolderIsLead) {
       ledWhileHolding[f.vid] = ledWhileHolding[f.vid] || { launches: 0, fights: 0 };
       ledWhileHolding[f.vid].fights++;
@@ -180,13 +209,65 @@ function analyzeSeed(out) {
     return Object.assign({}, h, { launchesLedWhileHolding: led.launches,
       fightsLedWhileHolding: led.fights });
   }).filter(function (h) { return h.gunDays > 0; });
+  // Wave-4+ plan holders (corrected definition — needWave OR target):
+  // who holds a wave-4+ plan at all, and did they ever launch it.
+  const w4Holders = Object.keys(holderDays).map(function (vid) {
+    const h = holderDays[vid];
+    const led = ledCounts[vid] || { launches: 0, fights: 0 };
+    return { vid: vid, days: h.days, w4planDays: h.w4planDays,
+      stages: h.stages, profile: (function () {
+        let top = null, topN = 0;
+        for (const p of Object.keys(h.profiles || {})) if (h.profiles[p] > topN) { top = p; topN = h.profiles[p]; }
+        return top;
+      })(),
+      launchesLed: led.launches, fightsLed: led.fights };
+  }).filter(function (h) { return h.w4planDays > 0; });
+  // Seeder profile flip + outcome split: for each seeded plan, the
+  // seeder's range profile at seed time (nearest census row on/after
+  // the seed day), and the seed outcome (fled vs evaded).
+  const censusByVid = {};
+  for (const r of (out.planCensus || [])) {
+    if (!r.vid) continue;
+    (censusByVid[r.vid] = censusByVid[r.vid] || []).push(r);
+  }
+  function profileAt(vid, day) {
+    const rows = censusByVid[vid] || [];
+    for (let i = 0; i < rows.length; i++) if (rows[i].day >= day) return (rows[i].attrs || {}).profile || null;
+    if (rows.length) return (rows[rows.length - 1].attrs || {}).profile || null;
+    return null;
+  }
+  const seedProfileFlip = { w3: {}, w4: {}, w5: {} };
+  const seedOutcomes = { w3: {}, w4: {}, w5: {} };
+  for (const s of seeds) {
+    if (!s.seeded) continue;
+    const bk = (s.wave | 0) >= 5 ? 'w5' : ((s.wave | 0) >= 4 ? 'w4' : 'w3');
+    const p = profileAt(s.vid, s.day) || 'null';
+    seedProfileFlip[bk][p] = (seedProfileFlip[bk][p] || 0) + 1;
+    seedOutcomes[bk][s.outcome || 'null'] = (seedOutcomes[bk][s.outcome || 'null'] || 0) + 1;
+  }
+  // Launch party-size split by holder needWave (set vs null) and
+  // launch source. The needWave-null half cannot take a 2nd/3rd
+  // companion (extraCompanionScan gates on needWave >= 4).
+  const launchPartySize = { needWaveSet: { n: 0, partySizeSum: 0, trioPlus: 0 },
+    needWaveNull: { n: 0, partySizeSum: 0, trioPlus: 0 } };
+  const launchSources = {};
+  for (const l of launches) {
+    launchSources[l.source || 'null'] = (launchSources[l.source || 'null'] || 0) + 1;
+    const nwNull = !(l.lead && l.lead.planNeedWave != null);
+    const bk = nwNull ? 'needWaveNull' : 'needWaveSet';
+    launchPartySize[bk].n++;
+    launchPartySize[bk].partySizeSum += (l.partySize | 0);
+    if ((l.partySize | 0) >= 3) launchPartySize[bk].trioPlus++;
+  }
   return { seed: seed, wall: wall, instrumentErrors: errors,
     grants: grants, grantsUnaccounted: grantsUnaccounted,
     launches: launches, launchesTotal: launchesTotal,
     launchesAttributed: launchesAttributed, holdsTotal: holdsTotal,
     fights: fights, fightsTotal: fightsTotal,
     fightsAttributed: fightsAttributed,
-    planSeeds: seeds, gunHolders: gunHolders };
+    planSeeds: seeds, gunHolders: gunHolders, w4Holders: w4Holders,
+    seedProfileFlip: seedProfileFlip, seedOutcomes: seedOutcomes,
+    launchPartySize: launchPartySize, launchSources: launchSources };
 }
 
 function aggregate(perSeed) {
@@ -290,6 +371,44 @@ function aggregate(perSeed) {
   const gunInPartyFights = allFights.filter(function (r) { return r.gunHolderInParty; }).length;
   const launchCoverage = launchesTotal ? launchesAttributed / launchesTotal : 1;
   const fightCoverage = fightsTotal ? fightsAttributed / fightsTotal : 1;
+  // Roll up the corrected wave-4+ holder population, the seeder
+  // profile flip, the seed-outcome split, and the launch party-size
+  // split (needWave set vs null).
+  const w4HoldersAll = [];
+  const seedProfileFlip = { w3: {}, w4: {}, w5: {} };
+  const seedOutcomes = { w3: {}, w4: {}, w5: {} };
+  const launchPartySize = { needWaveSet: { n: 0, partySizeSum: 0, trioPlus: 0 },
+    needWaveNull: { n: 0, partySizeSum: 0, trioPlus: 0 } };
+  const launchSources = {};
+  for (const s of perSeed) {
+    for (const h of (s.w4Holders || [])) w4HoldersAll.push(Object.assign({ seed: s.seed }, h));
+    for (const bk of ['w3', 'w4', 'w5']) {
+      for (const p of Object.keys((s.seedProfileFlip || {})[bk] || {})) {
+        seedProfileFlip[bk][p] = (seedProfileFlip[bk][p] || 0) + s.seedProfileFlip[bk][p];
+      }
+      for (const oc of Object.keys((s.seedOutcomes || {})[bk] || {})) {
+        seedOutcomes[bk][oc] = (seedOutcomes[bk][oc] || 0) + s.seedOutcomes[bk][oc];
+      }
+    }
+    for (const bk of ['needWaveSet', 'needWaveNull']) {
+      const part = (s.launchPartySize || {})[bk];
+      if (part) {
+        launchPartySize[bk].n += part.n | 0;
+        launchPartySize[bk].partySizeSum += part.partySizeSum | 0;
+        launchPartySize[bk].trioPlus += part.trioPlus | 0;
+      }
+    }
+    for (const src of Object.keys(s.launchSources || {})) {
+      launchSources[src] = (launchSources[src] || 0) + s.launchSources[src];
+    }
+  }
+  for (const bk of ['needWaveSet', 'needWaveNull']) {
+    const part = launchPartySize[bk];
+    part.meanPartySize = part.n ? +(part.partySizeSum / part.n).toFixed(2) : 0;
+  }
+  const w4HolderProfiles = {};
+  for (const h of w4HoldersAll) w4HolderProfiles[h.profile || 'null'] = (w4HolderProfiles[h.profile || 'null'] || 0) + 1;
+  const w4HoldersEverLaunched = w4HoldersAll.filter(function (h) { return (h.launchesLed | 0) > 0; }).length;
   const bars = {
     bar1Instrument: errorsTotal === 0,
     bar2LaunchCoverage: launchCoverage >= 0.8,
@@ -319,6 +438,11 @@ function aggregate(perSeed) {
     gunInPartyLaunches: gunInPartyLaunches, gunInPartyFights: gunInPartyFights,
     planSeedSummary: { seedsTotal: seedsTotal, seedsW4: seedsW4,
       seedsW3: seedsW3, distinctSeeders: Object.keys(seeders).length, seeders: seeders },
+    w4Holders: w4HoldersAll,
+    w4HolderCount: w4HoldersAll.length, w4HolderProfiles: w4HolderProfiles,
+    w4HoldersEverLaunched: w4HoldersEverLaunched,
+    seedProfileFlip: seedProfileFlip, seedOutcomes: seedOutcomes,
+    launchPartySize: launchPartySize, launchSources: launchSources,
     launches: allLaunches, fights: allFights, gunHolders: allGunHolders,
     perSeed: perSeed.map(function (s) { return { seed: s.seed, wall: s.wall,
       instrumentErrors: s.instrumentErrors, grants: s.grants.length,
@@ -424,10 +548,44 @@ function selftest() {
   const agg7 = aggregate(many);
   check('f7: 5 launches full coverage -> DIAG-GO-PENDING', agg7.verdict === 'DIAG-GO-PENDING' && agg7.launchesTotal === 5);
   check('f7: launch lead veteran3 rate 1.0, gun rate 0.0', agg7.leadComparison.launchLeads.veteran3Rate === 1 && agg7.leadComparison.launchLeads.gunRate === 0);
+  check('f7: w4 holders 5 (one per seed), ever launched 5', agg7.w4HolderCount === 5 && agg7.w4HoldersEverLaunched === 5);
   check('f7: gun-holder w4-plan rate 0.0', agg7.gunHolderStats.withW4PlanRate === 0);
   check('f7: wall counts', agg7.wall.wave5 === 5 && agg7.wall.wins === 0);
   // Fixture 8: plan-seed summary counts wave-4 seeds and seeders.
   check('f8: seed summary 5 w4 seeds, 1 seeder', agg7.planSeedSummary.seedsTotal === 5 && agg7.planSeedSummary.seedsW4 === 5 && agg7.planSeedSummary.distinctSeeders === 1);
+  // Fixture 9: a companion-inherited plan — wave-4 target with
+  // needWave null — still counts as a wave-4+ plan (the companion
+  // sync copies target but not needWave; needWave alone undercounts).
+  const f9 = JSON.parse(JSON.stringify(f1));
+  f9.seed = 9;
+  f9.planCensus = [
+    { day: 11, vid: 'alice', attrs: mkAttrs('alice', { gunEquipped: true, cells: 2,
+      plan: { stage: 'hunt', target: 'eater', needWave: null, party: ['bob'] } }) },
+    { day: 12, vid: 'alice', attrs: mkAttrs('alice', { gunEquipped: true, cells: 2,
+      plan: { stage: 'hunt', target: 'eater', needWave: null, party: ['bob'] } }) },
+    { day: 20, vid: 'bob', attrs: mkAttrs('bob', { plan: null }) },
+  ];
+  const a9 = analyzeSeed(f9);
+  check('f9: target-based w4 plan counts (needWave null + eater target)', (function () {
+    const g = a9.gunHolders.filter(function (x) { return x.vid === 'alice'; })[0];
+    return g && g.w4planDays === 2 && g.gunAndW4planDays === 2;
+  })());
+  check('f9: w4Holders lists the target-based holder', a9.w4Holders.length === 1 && a9.w4Holders[0].vid === 'alice' && a9.w4Holders[0].w4planDays === 2);
+  // Fixture 10: launch party-size split — a needWave-null launch
+  // goes out as a pair; a needWave-set launch goes out as a trio+.
+  const f10 = JSON.parse(JSON.stringify(f1));
+  f10.seed = 10;
+  f10.v4departs = [
+    { day: 20, vid: 'bob', source: 'brain', result: 'launch',
+      stage: 'hunt', target: 'eater', needWave: 4, party: ['alice', 'carol'], partySize: 3,
+      members: [mkAttrs('bob'), mkAttrs('alice'), mkAttrs('carol')] },
+    { day: 21, vid: 'dave', source: 'brain', result: 'launch',
+      stage: 'hunt', target: 'eater', needWave: null, party: ['erin'], partySize: 2,
+      members: [mkAttrs('dave', { plan: { stage: 'hunt', target: 'eater', needWave: null, party: ['erin'] } }), mkAttrs('erin')] },
+  ];
+  const a10 = analyzeSeed(f10);
+  check('f10: party-size split set-trio vs null-pair', a10.launchPartySize.needWaveSet.trioPlus === 1 && a10.launchPartySize.needWaveNull.trioPlus === 0 && a10.launchPartySize.needWaveNull.n === 1);
+  check('f10: launch sources counted', a10.launchSources.brain === 2);
   console.log('leadgate selftest: ' + pass + ' passed, ' + fail + ' failed');
   return fail === 0;
 }
