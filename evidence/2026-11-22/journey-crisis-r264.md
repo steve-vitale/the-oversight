@@ -231,9 +231,67 @@ all read as people, 0 fabric hits, 0 dry lines.
 
 ## Gate
 
-(Fill at closeout — `node scripts/check.js --quick`, serialized, on the
-rebased tip.)
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r264-gate`
+on the rebased tip `241490396`, run detached from a script file (never
+concurrent with another gate; no other gate was running): **332 passed,
+12 failed in 890s** (21:26:04–21:40:54Z). Log:
+`evidence/2026-11-22/journey-crisis-r264-gate.log`.
+
+**0 attributable.** The 12 break down as 6 standing + 6 flap/load
+artifacts, all green standalone with writes clear:
+
+Standing (not attributable — the standing set):
+- measurement-proof-update + measurement-workflow (staleness pair:
+  "Proof source inputs are not current"; the r269 src fixes landed on
+  master just before this rebase, so the proof is stale relative to the
+  new master — not this delta, which touches no `src/js` file).
+- living-garden + one-person-army deed-attainment (120s timeouts under
+  load; load avg hit 11.9 during the gate).
+- measurement-cache-flags ("both actual CLI configurations complete
+  valid neutral panels").
+- phone-frame-proof (stale receipt: index.html + 5 data files changed
+  since the receipt).
+
+Flap/load artifacts (all pass standalone on the rebased tip):
+- prepared-runner-custody 4/0, proof-text-identity 9/0,
+  telemetry-check-recorder 8/0, sw-audio-cache 7/7 — all four failed in
+  the gate with `EPERM: operation not permitted, write`. Flap window 9
+  was active mid-gate (21:33:14–21:35:27Z, three consecutive failing
+  watcher cycles, A/B failing) — see Flap below.
+- occupation-panels 25/0 ("real CLI workflow completed" in the gate;
+  79.4s under load 11+).
+- foodpower 30/0 (ontology validator failed in the gate; passes
+  standalone; no `src/js` change in this delta).
+
+Gate verdict stands at the standing 6.
+
+## Flap (window 9, during this closeout)
+
+Window 9, boot `ebfbfaba`, two episodes on the same machine with a clear
+gap between them (the 08:49Z pattern — cleared then returned on the same
+boot):
+- Episode 1: ~21:33–~21:36Z (failing cycles 21:33:14, 21:34:20,
+  21:35:27Z; cleared by 21:36:35Z) — mid-gate, explains the four EPERM
+  gate failures.
+- Episode 2: ~21:41–~21:47Z (failing cycles 21:42:02–21:46:08Z; cleared
+  by 21:47:10Z, probes TMP-OK + HOME-OK at 21:47:22Z). Strace captured
+  the exact failing write 3× per cycle (`write(3, "{\"x\": ", 6) = -1
+  EPERM`).
+
+Onset + closure are owed as a flap note by the parent (this finisher
+reports the window here). Nothing was lost; the gate re-runs above were
+done after the clear.
 
 ## Closeout
 
-(Fill at closeout — merge tip, rotation-b 6→7 read-back, lock delete.)
+- Rebased onto current master `f2d03db92` (deepening r269) clean, tip
+  `241490396`; proofs re-run on the rebased tip (nopath 16/0, stucktrace
+  16/0); gate 332/12, 0 attributable (above).
+- Merged ff-only into master (tip `241490396` — ff-only, so master moves
+  to exactly the branch tip); worktree released, branch `journey2-crisis`
+  deleted.
+- Rotation-b 6→7, read back.
+- Lock `playtest-loop-2.lock` deleted LAST with same-call per-line
+  run_id verification.
+- Telemetry: quiet (3 files, 1 metric, no large deviations); baseline
+  NOT rolled.
