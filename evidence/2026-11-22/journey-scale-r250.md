@@ -540,8 +540,9 @@ secret-place / seek_taken cross-sitting reuse (small pools by design).
   + broken-favor resolution lines [needs-eyes]" (driver + analyzer +
   analyzer proof test + prereg + run note + convo-wants.js fix +
   broken-favor proof test).
-- Gate-record commit (this note's gate section + the r240 test update):
-  (hash to be recorded after safe-commit).
+- Gate-record commit `239e6a456` — "journey-scale r250: gate record in
+  run note (333/11 in 1349s, 0 attributable) + r240 control wording for
+  the fixed line" (this note's gate section + the r240 test update).
 
 ## Evidence paths
 
