@@ -550,8 +550,9 @@ async function oneRun(seed) {
         try { const pl = planOfGame(this, vid); planPartyPre = pl && pl.party ? pl.party.slice() : null; } catch (e) {}
       }
       const rec = orig.apply(this, arguments);
+      let v = null;
       try {
-        const v = (rec && rec.volley) || null;
+        v = (rec && rec.volley) || null;
         if (v) {
           volleyEvents.push({ day: gday(Game), vid: vid || null, rwId: rwId,
             wave: (mdef && mdef.wave) || null, mdefId: (mdef && mdef.id) || null,

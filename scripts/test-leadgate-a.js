@@ -45,6 +45,12 @@ check('driver depart rows carry members', /members: members/.test(driverSrc));
 check('driver fight rows carry lead + allies', /lead: leadAttrs/.test(driverSrc) && /allies: allyAttrs/.test(driverSrc));
 check('driver wraps both departure paths', /winPlanDepart/.test(driverSrc) && /vbrainExecuteDepart/.test(driverSrc));
 check('driver wraps winPlanSeedFromFight', /winPlanSeedFromFight/.test(driverSrc));
+// REGRESSION (leadgate band leg-1, 2026-11-22): the v4fights push
+// reads the volley `v`, which was first declared as a block-scoped
+// `const` inside the volley try — every wave-4+ fight threw
+// "v is not defined" and v4fights stayed 0. The volley must be
+// declared with `let` at wrap-function scope, before the volley try.
+check('driver volley is let-scoped for the v4fights push (regression)', /let v = null;\s*\n\s*try \{\s*\n\s*v = \(rec && rec\.volley\)/.test(driverSrc));
 
 // --- 3. attrsOf on a stub Game ---
 function stubGame() {
