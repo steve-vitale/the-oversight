@@ -492,7 +492,7 @@
       var rec = {
         outcome: null, rounds: 0, vTaken: 0, mDealt: 0,
         vHpLeft: 0, mHpLeft: 0, packCount: 1, log: [],
-        allyDealt: 0, ally2Dealt: 0, calledHelp: false, allyVid: null, ally2Vid: null, fleeHopeless: null, fleeHpFrac: null,
+        allyDealt: 0, ally2Dealt: 0, ally3Dealt: 0, calledHelp: false, allyVid: null, ally2Vid: null, ally3Vid: null, fleeHopeless: null, fleeHpFrac: null,
         everWinning: false, everHopeless: false, minHpFrac: 1,
         // FIGHTBLEND-B (sim-fightblend-b, 2026-11-08): parallel
         // protection-4 incoming totals (see the monster-phase P4 block
@@ -500,7 +500,7 @@
         // trajectory as if protection were 4; vTakenP4/allyTakenP4 are
         // its accumulators. vHpHypoLeft/allyHpHypoLeft are set at the
         // close (record-only).
-        vTakenP4: 0, allyTakenP4: 0, ally2TakenP4: 0, vHpHypoLeft: null, allyHpHypoLeft: null, ally2HpHypoLeft: null,
+        vTakenP4: 0, allyTakenP4: 0, ally2TakenP4: 0, ally3TakenP4: 0, vHpHypoLeft: null, allyHpHypoLeft: null, ally2HpHypoLeft: null, ally3HpHypoLeft: null,
         // TWOBLOW (sim-twoblow-a, 2026-10-31): the committed-finish
         // window's audit fields. committedFinish/ committedRounds are
         // set at the in-round break check; twoblowLastTwo/twoblowSum
@@ -1285,7 +1285,13 @@
       var holdBonus = 0;
       if (wb > 0) holdBonus += 0.08;                        // armed: trust the gear
       var allies = Math.max(0, opts.allies || 0);
-      var allyVids = (opts.allyVids || []).slice(0, 2);
+      // ALLYSLOT3 (sim-allyslot3-b, finding #2515): the engine slice
+      // follows the sense — 3 only when the flag is on (the sense only
+      // ever returns a 3rd id for a launched quad). Off-mode this is
+      // exactly the old slice(0, 2).
+      var _slot3Cap = 2;
+      try { if (typeof process !== 'undefined' && process.env && process.env.ALLYSLOT3 === '1') _slot3Cap = 3; } catch (e) {}
+      var allyVids = (opts.allyVids || []).slice(0, _slot3Cap);
       holdBonus += Math.min(0.12, allies * 0.04);            // allies nearby steady them
       // PARTY-BOND (2026-10-12): bond with the people beside you steadies
       // further — earned, not given. Capped; the ward's village pool stacks.
@@ -1325,6 +1331,17 @@
       try { ally2On = (typeof process !== 'undefined' && process.env && process.env.FIGHTALLY2 === '1'); } catch (e) { ally2On = false; }
       var ally2In = false, ally2Hp = 0, ally2Max = 70, ally2Vid = null, ally2Name = 'Someone';
       var ally2EntryHp = 0, ally2Wb = null, ally2Armor = 0, ally2StrikeMult = 1, ally2Called = false;
+      // ALLYSLOT3 (sim-allyslot3-b, finding #2515): the third ally slot.
+      // Same shape as the second slot (own body, gear, wound settlement),
+      // gated on ALLYSLOT3=1. The slot only ever fills from a launched
+      // quad — the sense returns a 3rd id only for one — so a third
+      // ally here is always a launch companion, never a bystander.
+      // Off-mode (ally3On false) every branch below is unreachable and
+      // no new RNG is drawn (byte-identical to the two-ally engine).
+      var ally3On = false;
+      try { ally3On = (typeof process !== 'undefined' && process.env && process.env.ALLYSLOT3 === '1'); } catch (e) { ally3On = false; }
+      var ally3In = false, ally3Hp = 0, ally3Max = 70, ally3Vid = null, ally3Name = 'Someone';
+      var ally3EntryHp = 0, ally3Wb = null, ally3Armor = 0, ally3StrikeMult = 1, ally3Called = false;
       var helpCalled = false, allyIn = false, allyHp = 0;
       // JOINENDLINES (sim-joinendlines-a, 2026-10-29): true only when the
       // hopeless-shout branch below fired this fight — NOT for
@@ -1396,13 +1413,14 @@
       // either slot. Off-mode (ally2On false) this is exactly the old
       // ally1 check.
       var anyAllyLive = function () {
-        return (allyIn && allyHp > 0) || (ally2On && ally2In && ally2Hp > 0);
+        return (allyIn && allyHp > 0) || (ally2On && ally2In && ally2Hp > 0) || (ally3On && ally3In && ally3Hp > 0);
       };
       // liveAllyName(): the standing ally's name for the shared-stance
       // lines (shield wall, rally) — the first slot when it stands.
       var liveAllyName = function () {
         if (allyIn && allyHp > 0) return allyName;
         if (ally2On && ally2In && ally2Hp > 0) return ally2Name;
+        if (ally3On && ally3In && ally3Hp > 0) return ally3Name;
         return allyName;
       };
       var allyBody = function (id) {
@@ -1445,6 +1463,25 @@
           rec.log.push(ally2Name + ' is already at the door too — charges in with ' + vName + '!');
           try { if (this.bumpTrust) this.bumpTrust(ally2Vid, 1); } catch (e) {}
         }
+        // ALLYSLOT3: with the third slot on, the third ally at the door
+        // charges in too — same body/gear read, same trust bump, same
+        // "already at the door" line. Off-mode this block never runs.
+        if (ally3On && allies > 0 && allyVids.length) {
+          ally3Called = true; ally3In = true;
+          ally3Vid = allyVids.shift(); allies--;
+          var _ab0c = allyBody(ally3Vid); ally3Hp = _ab0c.entry; ally3Max = _ab0c.max; ally3EntryHp = _ab0c.entry;
+          rec.ally3TakenP4 = 0;
+          var _g0c = allyGear(ally3Vid);
+          if (_g0c) { ally3Wb = _g0c.wb; ally3Armor = _g0c.armor; ally3StrikeMult = _g0c.strikeMult; }
+          try {
+            var _fa0c = (opts.foreignAllies || {})[ally3Vid];
+            ally3Name = (_fa0c && _fa0c.name) || opts.allyName || refName(ally3Vid);
+          } catch (e) {}
+          rec.ally3Vid = ally3Vid;
+          rec.ally3Joined = true;
+          rec.log.push(ally3Name + ' is already at the door too — charges in with ' + vName + '!');
+          try { if (this.bumpTrust) this.bumpTrust(ally3Vid, 1); } catch (e) {}
+        }
         try {
           var _fa0 = (opts.foreignAllies || {})[allyVid];
           allyName = (_fa0 && _fa0.name) || opts.allyName || refName(allyVid);
@@ -1454,6 +1491,59 @@
         rec.log.push(allyName + ' is already at the door — charges in with ' + vName + '!');
         try { if (this.bumpTrust) this.bumpTrust(allyVid, 1); } catch (e) {}
       }
+      // DMGPIN (sim-dmgpin-b, finding #2605/#2619): a pinned quad
+      // strikes as one unit. The gate is computed ONCE, here, after
+      // the door block and before the round loop — so only a FULL
+      // pinned trio that entered AT THE DOOR qualifies (a trio that
+      // joins later through the shout ladder never sees this flag:
+      // allyVid/ally2Vid/ally3Vid are null until the door sets them).
+      // Wave-gated to wave >= 4: the lever's question is the wave-4+
+      // door kill, and the canon-anchored wave-1 duel balance ("fair,
+      // not free") is never touched. Env-gated, OFF by default: in
+      // the browser `process` is undefined, so the flag is never on
+      // there; with it unset this block is unreachable and no new
+      // RNG is drawn (off-mode is byte-identical). DMGPIN without
+      // PINQUAD is inert by construction — pinnedQuadAllies returns
+      // [] when the pin is off, so the trio can never match.
+      var dmgPinOn = false;
+      try {
+        if (typeof process !== 'undefined' && process.env && process.env.DMGPIN === '1' &&
+            mdef && ((mdef.wave | 0) >= 4) && typeof this.pinnedQuadAllies === 'function') {
+          var _dmgPin = this.pinnedQuadAllies(vid) || [];
+          dmgPinOn = _dmgPin.length === 3 && allyVid === _dmgPin[0] && ally2Vid === _dmgPin[1] && ally3Vid === _dmgPin[2];
+        }
+      } catch (e) { dmgPinOn = false; }
+      // DMGPIN: the once-per-fight narration for the coordinated
+      // strikes, in the same shape as the blooded line.
+      var dmgPinTell = function () {
+        if (!rec.dmgPinTold) {
+          rec.dmgPinTold = true;
+          rec.log.push('The pinned quad fights as one — every strike lands with the unit\'s weight behind it. (Coordinated strikes x2)');
+        }
+      };
+      // DOORFLEE2 (sim-doorflee2-b, finding #2619): the staying lever's
+      // gate, computed ONCE here beside DMGPIN, on the same terms —
+      // only a FULL pinned trio that entered AT THE DOOR qualifies
+      // (a trio that joins later through the shout ladder never sees
+      // this flag: allyVid/ally2Vid/ally3Vid are null until the door
+      // sets them). Wave-gated >= 4 and door-gated on
+      // opts.allyFromStart. Env-gated, OFF by default: in the
+      // browser `process` is undefined, so the flag is never on
+      // there; with it unset the hold below is unreachable and no
+      // new RNG is drawn (off-mode is byte-identical). This REPLACES
+      // the DOORFLEE hold (sim-doorflee-b pilot NO-GO: the
+      // leader-next-round guard let the leader survive one round
+      // and die two rounds later — 3 hold deaths on 8 held doors).
+      // The DOORFLEE2 hold keeps only the leader-survival rule
+      // below; the DOORFLEE env flag is no longer read.
+      var doorflee2On = false, doorFlee2Quad = false;
+      try {
+        doorflee2On = (typeof process !== 'undefined' && process.env && process.env.DOORFLEE2 === '1');
+        if (doorflee2On && mdef && ((mdef.wave | 0) >= 4) && opts.allyFromStart && typeof this.pinnedQuadAllies === 'function') {
+          var _df2Pin = this.pinnedQuadAllies(vid) || [];
+          doorFlee2Quad = _df2Pin.length === 3 && allyVid === _df2Pin[0] && ally2Vid === _df2Pin[1] && ally3Vid === _df2Pin[2];
+        }
+      } catch (e) { doorflee2On = false; doorFlee2Quad = false; }
       // ABILITY — TRIPWIRE (lootabilities Arm 4): the card is strung BEFORE
       // the monster moves ("the next monster that moves is stunned"). A
       // field fight has no approach march to model, so the wire is strung
@@ -1493,18 +1583,23 @@
           var _allyTakenNow = (allyEntryHp > 0) ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0;
           // FIGHTALLY2: the second ally's per-round taken, same shape.
           var _ally2TakenNow = (ally2EntryHp > 0) ? Math.max(0, ally2EntryHp - Math.max(0, ally2Hp)) : 0;
+          // ALLYSLOT3: the third ally's per-round taken, same shape.
+          var _ally3TakenNow = (ally3EntryHp > 0) ? Math.max(0, ally3EntryHp - Math.max(0, ally3Hp)) : 0;
           var _mHpTotal = 0;
           for (var _mi = 0; _mi < members.length; _mi++) _mHpTotal += Math.max(0, members[_mi].hp);
           rec.roundsDetail.push({
             round: _flStart.round,
             vHpStart: _flStart.vHp, mHpStart: _flStart.mHp, allyHpStart: _flStart.allyHp,
             ally2HpStart: _flStart.ally2Hp,
+            ally3HpStart: _flStart.ally3Hp,
             vHpEnd: Math.max(0, vHp), mHpEnd: Math.max(0, members[0].hp), allyHpEnd: (allyEntryHp > 0 ? allyHp : null),
             ally2HpEnd: (ally2EntryHp > 0 ? ally2Hp : null),
+            ally3HpEnd: (ally3EntryHp > 0 ? ally3Hp : null),
             mHpTotalEnd: _mHpTotal,
             dealt: rec.mDealt - _flStart.mDealt, taken: rec.vTaken - _flStart.vTaken,
             allyDealt: rec.allyDealt - _flStart.allyDealt, allyTaken: _allyTakenNow - _flStart.allyTaken,
             ally2Dealt: rec.ally2Dealt - (_flStart.ally2Dealt || 0), ally2Taken: _ally2TakenNow - (_flStart.ally2Taken || 0),
+            ally3Dealt: rec.ally3Dealt - (_flStart.ally3Dealt || 0), ally3Taken: _ally3TakenNow - (_flStart.ally3Taken || 0),
             abilities: (rec.ffFired || []).slice(_flStart.ffN),
             tricks: (rec.trickLog || []).slice(_flStart.trickN),
           });
@@ -1540,7 +1635,7 @@
         var vHpRoundStart = vHp;
         // FINISHLOG: round-open snapshot (before any damage this round).
         try {
-          if (_flOn) _flStart = { round: round, vHp: vHp, mHp: members[0].hp, allyHp: (allyEntryHp > 0 ? allyHp : null), ally2Hp: (ally2EntryHp > 0 ? ally2Hp : null), mDealt: rec.mDealt, vTaken: rec.vTaken, allyDealt: rec.allyDealt, ally2Dealt: rec.ally2Dealt, allyTaken: (allyEntryHp > 0) ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0, ally2Taken: (ally2EntryHp > 0) ? Math.max(0, ally2EntryHp - Math.max(0, ally2Hp)) : 0, ffN: (rec.ffFired || []).length, trickN: (rec.trickLog || []).length };
+          if (_flOn) _flStart = { round: round, vHp: vHp, mHp: members[0].hp, allyHp: (allyEntryHp > 0 ? allyHp : null), ally2Hp: (ally2EntryHp > 0 ? ally2Hp : null), ally3Hp: (ally3EntryHp > 0 ? ally3Hp : null), mDealt: rec.mDealt, vTaken: rec.vTaken, allyDealt: rec.allyDealt, ally2Dealt: rec.ally2Dealt, ally3Dealt: rec.ally3Dealt, allyTaken: (allyEntryHp > 0) ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0, ally2Taken: (ally2EntryHp > 0) ? Math.max(0, ally2EntryHp - Math.max(0, ally2Hp)) : 0, ally3Taken: (ally3EntryHp > 0) ? Math.max(0, ally3EntryHp - Math.max(0, ally3Hp)) : 0, ffN: (rec.ffFired || []).length, trickN: (rec.trickLog || []).length };
         } catch (e) { _flStart = null; }
         abRoundTaken = 0;
         vStruckThisRound = false;
@@ -1739,6 +1834,7 @@
               var _liveAllies = [];
               if (allyIn && allyHp > 0) _liveAllies.push(1);
               if (ally2On && ally2In && ally2Hp > 0) _liveAllies.push(2);
+              if (ally3On && ally3In && ally3Hp > 0) _liveAllies.push(3);
               if (gpF && _liveAllies.length) { try { _allyShare = GPf.fieldAllyShare(gpF, _allyShare); } catch (e) { console.warn('[godpath] ally share', e); } }
               if (vHasAb('draw_fire') && _liveAllies.length && !abDrewFire) {
                 abDrewFire = true;
@@ -1761,13 +1857,13 @@
               var _hitAllyIdx = 0;
               if (hittingAlly) _hitAllyIdx = _liveAllies.length >= 2 ? _liveAllies[Math.floor(RR() * _liveAllies.length)] : _liveAllies[0];
               var _hIdx = _hitAllyIdx || 1;
-              var _hVid = _hIdx === 2 ? ally2Vid : allyVid;
-              var _hName = _hIdx === 2 ? ally2Name : allyName;
-              var _hArmor = _hIdx === 2 ? ally2Armor : allyArmor;
-              var _hHp = _hIdx === 2 ? ally2Hp : allyHp;
+              var _hVid = _hIdx === 3 ? ally3Vid : (_hIdx === 2 ? ally2Vid : allyVid);
+              var _hName = _hIdx === 3 ? ally3Name : (_hIdx === 2 ? ally2Name : allyName);
+              var _hArmor = _hIdx === 3 ? ally3Armor : (_hIdx === 2 ? ally2Armor : allyArmor);
+              var _hHp = _hIdx === 3 ? ally3Hp : (_hIdx === 2 ? ally2Hp : allyHp);
               if (_wardAegis && _allyShare === 0 && _allyRoll < 0.4) {
                 _wardVia = 'aegis_link';
-                if (_liveAllies.length) _wardAllyVid = _liveAllies[0] === 2 ? ally2Vid : allyVid;
+                if (_liveAllies.length) _wardAllyVid = _liveAllies[0] === 3 ? ally3Vid : (_liveAllies[0] === 2 ? ally2Vid : allyVid);
               }
               // TANK — BODYGUARD (2026-10-12): once per fight, a blow falling
               // on the ally lands on the guard instead. "Not them."
@@ -1880,7 +1976,8 @@
                 // firing exactly when the mitigated leech split fires.
                 var _p4Leech = (vHasAb('leech') && total > 0) ? Math.floor(_p4Total / 2) : 0;
                 rec.vTakenP4 += _p4Leech;
-                if (_hIdx === 2) rec.ally2TakenP4 += (_p4Total - _p4Leech);
+                if (_hIdx === 3) rec.ally3TakenP4 += (_p4Total - _p4Leech);
+                else if (_hIdx === 2) rec.ally2TakenP4 += (_p4Total - _p4Leech);
                 else rec.allyTakenP4 += (_p4Total - _p4Leech);
                 // GOD-PATH HOLD (fieldAllyDown) is singular by design —
                 // it only ever knew the one ally. The second slot
@@ -1892,7 +1989,7 @@
                 }
                 if (_hWasLive && _hHp <= 0) {
                   huntOpening.lost = true;
-                  if (_hIdx === 2) ally2In = false; else allyIn = false;
+                  if (_hIdx === 3) ally3In = false; else if (_hIdx === 2) ally2In = false; else allyIn = false;
                   rec.log.push(_hName + ' goes down!');
                   // AID (comms 2026-10-10): a foreign ally's fall lands on the
                   // link — trust, gossip, debt forgiven in blood — not on a
@@ -1906,7 +2003,7 @@
                   } catch (e) {}
                 }
                 // FIGHTALLY2: write the target's HP back to its slot.
-                if (_hIdx === 2) ally2Hp = _hHp; else allyHp = _hHp;
+                if (_hIdx === 3) ally3Hp = _hHp; else if (_hIdx === 2) ally2Hp = _hHp; else allyHp = _hHp;
               } else {
                 // ABILITY — UNBREAKABLE (brace): the player's brace is a 60%
                 // reduction on the next hit, bought with a turn. Off-screen
@@ -2410,6 +2507,18 @@
                   }
                 } catch (e) { console.warn('[blooded] field strike', e); }
               }
+              // DMGPIN (sim-dmgpin-b): the pinned quad strikes as one —
+              // every strike lands with the unit's weight behind it.
+              // x2 on the rolled strike, after every other modifier
+              // (so the twoblow window and the damage log both see the
+              // doubled number, the same placement BLOODED uses).
+              // Strikes only: the volley, the ambush opening, the
+              // contact finish and ability-touch damage are untouched.
+              if (dmgPinOn && vd > 0) {
+                vd = Math.round(vd * 2);
+                abNote += ' (pinned quad x2)';
+                dmgPinTell();
+              }
               // TWOBLOW (sim-twoblow-a, 2026-10-31): a proven blow is
               // vd > 0 after every multiplier, as actually landed.
               // A 0-damage swing (mirage miss, editor cut) proves
@@ -2452,9 +2561,11 @@
                   }
                 } catch (e) { console.warn('[blooded] field ally strike', e); }
               }
+              // DMGPIN (sim-dmgpin-b): the first ally's strike, same rule.
+              if (dmgPinOn && ad > 0) { ad = Math.round(ad * 2); dmgPinTell(); }
               lead.hp -= ad; rec.mDealt += ad; rec.allyDealt += ad;
               if (lead.hp <= 0) lead.alive = false;
-              rec.log.push('R' + round + ': ' + allyName + ' strikes for ' + ad + (allyStrikeMult !== 1 ? ' (x' + allyStrikeMult.toFixed(1) + ')' : '') + ' (' + Math.max(0, lead.hp) + ' left)');
+              rec.log.push('R' + round + ': ' + allyName + ' strikes for ' + ad + (allyStrikeMult !== 1 ? ' (x' + allyStrikeMult.toFixed(1) + ')' : '') + (dmgPinOn ? ' (pinned x2)' : '') + ' (' + Math.max(0, lead.hp) + ' left)');
               // GEARTIER-A (abilities pass): Live Broadcast — the ally
               // fights louder for two rounds. The counter is set by
               // fieldAct on the call round and consumed here, one
@@ -2464,9 +2575,12 @@
                 gpF.broadcastN--;
                 var _bd = (allyWb != null) ? lroll([4 + allyWb, 8 + allyWb]) : lroll([3, 6]);
                 if (allyWb != null && allyStrikeMult !== 1) _bd = Math.round(_bd * allyStrikeMult);
+                // DMGPIN (sim-dmgpin-b): the broadcast echo is the same
+                // ally's extra strike — it doubles with the rest.
+                if (dmgPinOn && _bd > 0) { _bd = Math.round(_bd * 2); dmgPinTell(); }
                 lead.hp -= _bd; rec.mDealt += _bd; rec.allyDealt += _bd;
                 if (lead.hp <= 0) lead.alive = false;
-                rec.log.push('R' + round + ': ' + allyName + ' strikes again, louder — ' + _bd + ' (' + Math.max(0, lead.hp) + ' left). (Live Broadcast)');
+                rec.log.push('R' + round + ': ' + allyName + ' strikes again, louder — ' + _bd + (dmgPinOn ? ' (pinned x2)' : '') + ' (' + Math.max(0, lead.hp) + ' left). (Live Broadcast)');
               }
             }
             // FIGHTALLY2: the second ally fights too — same tactical
@@ -2487,9 +2601,34 @@
                   }
                 } catch (e) { console.warn('[blooded] field ally2 strike', e); }
               }
+              // DMGPIN (sim-dmgpin-b): the second ally's strike, same rule.
+              if (dmgPinOn && ad2 > 0) { ad2 = Math.round(ad2 * 2); dmgPinTell(); }
               lead.hp -= ad2; rec.mDealt += ad2; rec.allyDealt += ad2; rec.ally2Dealt += ad2;
               if (lead.hp <= 0) lead.alive = false;
-              rec.log.push('R' + round + ': ' + ally2Name + ' strikes for ' + ad2 + (ally2StrikeMult !== 1 ? ' (x' + ally2StrikeMult.toFixed(1) + ')' : '') + ' (' + Math.max(0, lead.hp) + ' left)');
+              rec.log.push('R' + round + ': ' + ally2Name + ' strikes for ' + ad2 + (ally2StrikeMult !== 1 ? ' (x' + ally2StrikeMult.toFixed(1) + ')' : '') + (dmgPinOn ? ' (pinned x2)' : '') + ' (' + Math.max(0, lead.hp) + ' left)');
+            }
+            // ALLYSLOT3: the third ally fights too — same tactical
+            // formula on their OWN weapon, same blooded rule, their own
+            // dealt tally (rec.ally3Dealt) feeding the shared
+            // rec.allyDealt total.
+            if (ally3On && ally3In && ally3Hp > 0 && lead.hp > 0) {
+              var ad3 = (ally3Wb != null) ? lroll([4 + ally3Wb, 8 + ally3Wb]) : lroll([3, 6]);
+              if (ally3Wb != null && ally3StrikeMult !== 1) ad3 = Math.round(ad3 * ally3StrikeMult);
+              if ((mdef && (mdef.wave | 0)) === 5 && ad3 > 0 && ally3Wb != null && !(opts.foreignAllies || {})[ally3Vid] && this.villageBlooded && this.villageBlooded()) {
+                try {
+                  var _bdm3b = (typeof this.bloodedCfg === 'function' ? this.bloodedCfg().dmgMult : 1.5) || 1.5;
+                  ad3 = Math.round(ad3 * _bdm3b);
+                  if (!rec.bloodedTold) {
+                    rec.bloodedTold = true;
+                    rec.log.push('R' + round + ': ' + this.bloodedLine());
+                  }
+                } catch (e) { console.warn('[blooded] field ally3 strike', e); }
+              }
+              // DMGPIN (sim-dmgpin-b): the third ally's strike, same rule.
+              if (dmgPinOn && ad3 > 0) { ad3 = Math.round(ad3 * 2); dmgPinTell(); }
+              lead.hp -= ad3; rec.mDealt += ad3; rec.allyDealt += ad3; rec.ally3Dealt += ad3;
+              if (lead.hp <= 0) lead.alive = false;
+              rec.log.push('R' + round + ': ' + ally3Name + ' strikes for ' + ad3 + (ally3StrikeMult !== 1 ? ' (x' + ally3StrikeMult.toFixed(1) + ')' : '') + (dmgPinOn ? ' (pinned x2)' : '') + ' (' + Math.max(0, lead.hp) + ' left)');
             }
           }
         }
@@ -2588,6 +2727,10 @@
               _partyHpHypo += ally2EntryHp - rec.ally2TakenP4;
               _partyTakenP4 += rec.ally2TakenP4;
             }
+            if (ally3On && ally3In && ally3Hp > 0 && ally3EntryHp > 0) {
+              _partyHpHypo += ally3EntryHp - rec.ally3TakenP4;
+              _partyTakenP4 += rec.ally3TakenP4;
+            }
             if (_partyTakenP4 !== rec.vTakenP4) {
               rtd = _partyHpHypo / Math.max(1, _partyTakenP4 / round);
             }
@@ -2639,6 +2782,58 @@
           }
           hopeless = false;
           fleeAt = 0.05;
+        }
+        // DOORFLEE2 (sim-doorflee2-b, finding #2619): a pinned quad at a
+        // door holds while the LIVE race says it is winning AND the
+        // LEADER themself can survive the whole remaining fight. The
+        // hopeless read above judges the fight as if everyone's armor
+        // were protection 4 — on a door, where the party wears tier
+        // armor (protection ~33 lets through ~20% of a blow,
+        // protection 4 lets through ~68%), the imagined damage runs
+        // ~3x the real damage, the leader's imagined health goes
+        // deeply negative after a few rounds, and that negative
+        // number drags the whole four-person party's pooled survival
+        // below the kill horizon — so a quad that is actually winning
+        // (monster 1-3 rounds from death, three allies nearly
+        // untouched) reads as hopeless and runs. The hold re-reads
+        // the SAME race on live numbers — live party HP left against
+        // live damage taken per round, same 1.1 winning margin — and
+        // only while the quad is a pinned door fight (doorFlee2Quad)
+        // and the P4 read actually said hopeless. The guard is
+        // LEADER-SURVIVAL-ONLY: the leader's live HP must exceed
+        // their incoming rate times the rounds left to kill
+        // (vHp > leaderRate * rtk) — the leader must plausibly
+        // survive the whole remaining fight, not just the next round.
+        // The DOORFLEE guard (vHp > leaderRate, one round of
+        // foresight) let the leader survive the next round and die
+        // two rounds later on 3 of 8 held doors, so it is replaced,
+        // not kept alongside. The hold never touches learn-first
+        // withdrawal, death, signature exits, or sealed arenas. A
+        // quad that is losing on live numbers flees exactly as
+        // before. No RNG is drawn; off-mode (DOORFLEE2 unset) never
+        // reaches this block.
+        if (doorFlee2Quad && !opts.noFlee && rec.intent !== 'learn' && hopeless && round >= 2 && members[0].hp > 0) {
+          var _df2Lead = null;
+          for (var _df2j = 0; _df2j < members.length; _df2j++) { if (members[_df2j].hp > 0) { _df2Lead = members[_df2j]; break; } }
+          if (_df2Lead) {
+            var _df2Entry = vHpStart + Math.max(0, allyEntryHp) + Math.max(0, ally2EntryHp) + Math.max(0, ally3EntryHp);
+            var _df2Live = Math.max(0, vHp) + Math.max(0, allyHp) + Math.max(0, ally2Hp) + Math.max(0, ally3Hp);
+            var _df2TakenRate = Math.max(0, _df2Entry - _df2Live) / round;
+            var _df2Rtk = _df2Lead.hp / Math.max(1, rec.mDealt / round);
+            var _df2Rtd = _df2TakenRate > 0 ? _df2Live / _df2TakenRate : Infinity;
+            var _df2LeaderRate = Math.max(0, vHpStart - vHp) / round;
+            if (_df2Rtk <= _df2Rtd * 1.1 && vHp > _df2LeaderRate * _df2Rtk) {
+              if (!rec.doorHoldLogged) {
+                rec.doorHoldLogged = true;
+                rec.log.push(vName + ' holds the door — the fight is theirs on the numbers they can see, and the quad is not leaving it. (Door hold)');
+              }
+              rec.doorHold = (rec.doorHold | 0) + 1;
+              hopeless = false;
+              winning = true;
+              rec.everWinning = true;
+              fleeAt = 0.05;
+            }
+          }
         }
         // LEARN-VS-FIGHT (Steve 2026-10-13): the situational override. A
         // learning villager reads the first exchange — good odds → commit
@@ -2715,6 +2910,29 @@
           rec.shout2Round = round;
           rec.log.push(vName + ' is still losing — shouts again! ' + ally2Name + ' charges in!');
           try { if (this.bumpTrust) this.bumpTrust(ally2Vid, 1, 'answered a call for help'); } catch (e) {}
+        } else if (hopeless && helpCalled && ally2Called && ally3On && !ally3Called && allies > 0 && allyVids.length && rec.intent !== 'learn') {
+          // ALLYSLOT3 — THE THIRD SHOUT (finding #2515): the trajectory
+          // is hopeless AGAIN with two allies already in, and the third
+          // launch companion is still at hand. The fighter shouts a
+          // third time instead of running — the third ally charges in
+          // on the same terms as the first two (real body, own gear,
+          // trust bump). One shout per ally; when no ally remains, the
+          // hopeless-and-alone branch below decides the flight.
+          ally3Called = true; ally3In = true;
+          ally3Vid = allyVids.shift(); allies--;
+          var _ab3 = allyBody(ally3Vid); ally3Hp = _ab3.entry; ally3Max = _ab3.max; ally3EntryHp = _ab3.entry;
+          rec.ally3TakenP4 = 0; // FIGHTBLEND-B: a new ally starts a new P4 total.
+          var _g3 = allyGear(ally3Vid);
+          if (_g3) { ally3Wb = _g3.wb; ally3Armor = _g3.armor; ally3StrikeMult = _g3.strikeMult; }
+          try {
+            var _fa3b = (opts.foreignAllies || {})[ally3Vid];
+            ally3Name = (_fa3b && _fa3b.name) || opts.allyName || refName(ally3Vid);
+          } catch (e) {}
+          rec.ally3Vid = ally3Vid;
+          rec.ally3Joined = true;
+          rec.shout3Round = round;
+          rec.log.push(vName + ' is still losing — shouts a third time! ' + ally3Name + ' charges in!');
+          try { if (this.bumpTrust) this.bumpTrust(ally3Vid, 1, 'answered a call for help'); } catch (e) {}
         } else if (hopeless) {
           // HOPELESS AND ALONE (break-it contests r11 2026-10-10): the
           // trajectory is legible (drops long before the lead falls) and no
@@ -3023,6 +3241,8 @@
             if (helpCalled && allyIn && allyHp > 0 && allyVid && allyVid !== vid && _nw.indexOf(allyVid) < 0) _nw.push(allyVid);
             // FIGHTALLY2: the second ally stood there too.
             if (ally2On && helpCalled && ally2In && ally2Hp > 0 && ally2Vid && ally2Vid !== vid && _nw.indexOf(ally2Vid) < 0) _nw.push(ally2Vid);
+            // ALLYSLOT3: the third ally stood there too.
+            if (ally3On && helpCalled && ally3In && ally3Hp > 0 && ally3Vid && ally3Vid !== vid && _nw.indexOf(ally3Vid) < 0) _nw.push(ally3Vid);
           } catch (e) {}
           if (_nw.length) this.noteNodeWitnessKill(vid, mdef.id, _nw);
         }
@@ -3042,16 +3262,20 @@
           // ledger is pairwise by construction).
           var _ally2Alive = ally2On && helpCalled && ally2In && ally2Hp > 0 && ally2Vid;
           var _ally2Died = ally2On && helpCalled && !ally2In && ally2Hp <= 0 && ally2Vid;
+          var _ally3Alive = ally3On && helpCalled && ally3In && ally3Hp > 0 && ally3Vid;
+          var _ally3Died = ally3On && helpCalled && !ally3In && ally3Hp <= 0 && ally3Vid;
           if (rec.outcome === 'vKill' || rec.outcome === 'mFlee' || rec.outcome === 'vFlee') {
             if (_allyAlive && this.noteSharedFight) this.noteSharedFight([vid, allyVid]);
             if (_ally2Alive && this.noteSharedFight) this.noteSharedFight([vid, ally2Vid]);
+            if (_ally3Alive && this.noteSharedFight) this.noteSharedFight([vid, ally3Vid]);
             if (this.noteShieldbearerOffer) this.noteShieldbearerOffer(vid);
             if (this.noteVillageBondFight) this.noteVillageBondFight();
           } else if (rec.outcome === 'vDie') {
-            if (this.noteBondGrief) this.noteBondGrief(vid, (_allyAlive ? [allyVid] : []).concat(_ally2Alive ? [ally2Vid] : []));
+            if (this.noteBondGrief) this.noteBondGrief(vid, (_allyAlive ? [allyVid] : []).concat(_ally2Alive ? [ally2Vid] : []).concat(_ally3Alive ? [ally3Vid] : []));
           }
           if (_allyDied && this.noteBondGrief) this.noteBondGrief(allyVid, [vid]);
           if (_ally2Died && this.noteBondGrief) this.noteBondGrief(ally2Vid, [vid]);
+          if (_ally3Died && this.noteBondGrief) this.noteBondGrief(ally3Vid, [vid]);
         }
       } catch (e) {}
       var _gpLogN6 = rec.log.length;
@@ -3063,7 +3287,7 @@
         // FIGHTALLY2: intact means every JOINED ally still stands — a
         // never-joined second slot is not a casualty. Off-mode
         // (ally2Vid null) this is exactly the old read.
-        { packUsed: !!(gpF && gpF.used.pack_hunt), intact: !helpCalled || (((!allyVid) || (allyIn && allyHp > 0)) && ((!ally2Vid) || (ally2In && ally2Hp > 0))) }); }
+        { packUsed: !!(gpF && gpF.used.pack_hunt), intact: !helpCalled || (((!allyVid) || (allyIn && allyHp > 0)) && ((!ally2Vid) || (ally2In && ally2Hp > 0)) && ((!ally3Vid) || (ally3In && ally3Hp > 0))) }); }
       catch (e) { console.warn('[godpath] field hunt outcome', e); }
       gpTag(_gpLogN6);
       // FIELD-WOUND CARRYOVER (tackle-wound2): the surviving Haven ally's
@@ -3079,6 +3303,10 @@
       // through their own once-only sealed entry — never folded into
       // the first ally's total, never double-applied.
       var ally2Taken = 0, ally2Settles = false;
+      // ALLYSLOT3: the third ally's wounds settle on their own body,
+      // through their own once-only sealed entry — never folded into
+      // another ally's total, never double-applied.
+      var ally3Taken = 0, ally3Settles = false;
       try {
         var _roster = ((this.state.village || {}).roster || []);
         allyTaken = helpCalled ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0;
@@ -3089,19 +3317,28 @@
         ally2Settles = !!(ally2On && helpCalled && ally2In && ally2Hp > 0 && ally2Vid && ally2Vid !== vid &&
           ally2Vid !== this.villagerId && !(opts.foreignAllies || {})[ally2Vid] &&
           _roster.indexOf(ally2Vid) >= 0 && ally2Taken > 0);
-      } catch (e) { allySettles = false; ally2Settles = false; }
+        ally3Taken = (ally3On && helpCalled) ? Math.max(0, ally3EntryHp - Math.max(0, ally3Hp)) : 0;
+        ally3Settles = !!(ally3On && helpCalled && ally3In && ally3Hp > 0 && ally3Vid && ally3Vid !== vid &&
+          ally3Vid !== this.villagerId && !(opts.foreignAllies || {})[ally3Vid] &&
+          _roster.indexOf(ally3Vid) >= 0 && ally3Taken > 0);
+      } catch (e) { allySettles = false; ally2Settles = false; ally3Settles = false; }
       rec.allyTaken = helpCalled ? Math.max(0, allyEntryHp - Math.max(0, allyHp)) : 0;
       rec.allyHpLeft = helpCalled ? Math.max(0, allyHp) : null;
       rec.allyEntryHp = helpCalled ? allyEntryHp : null;
       rec.ally2Taken = (ally2On && helpCalled) ? Math.max(0, ally2EntryHp - Math.max(0, ally2Hp)) : 0;
       rec.ally2HpLeft = (ally2On && helpCalled) ? Math.max(0, ally2Hp) : null;
       rec.ally2EntryHp = (ally2On && helpCalled) ? ally2EntryHp : null;
+      rec.ally3Taken = (ally3On && helpCalled) ? Math.max(0, ally3EntryHp - Math.max(0, ally3Hp)) : 0;
+      rec.ally3HpLeft = (ally3On && helpCalled) ? Math.max(0, ally3Hp) : null;
+      rec.ally3EntryHp = (ally3On && helpCalled) ? ally3EntryHp : null;
       // FIGHTBLEND-B: record-only — the hypothetical trajectory at the close.
       rec.vHpHypoLeft = Math.max(0, vHpStart - rec.vTakenP4);
       rec.allyHpHypoLeft = helpCalled ? Math.max(0, allyEntryHp - rec.allyTakenP4) : null;
       rec.ally2HpHypoLeft = (ally2On && helpCalled) ? Math.max(0, ally2EntryHp - rec.ally2TakenP4) : null;
+      rec.ally3HpHypoLeft = (ally3On && helpCalled) ? Math.max(0, ally3EntryHp - rec.ally3TakenP4) : null;
       rec.allyWoundsSettled = allySettles;
       rec.ally2WoundsSettled = ally2Settles;
+      rec.ally3WoundsSettled = ally3Settles;
       // REAR GUARD (sim-gaps-ghost, 2026-10-29): the mustered fighters
       // who never joined the blows are not ghosts — they marched, and
       // they stood the rear through the fight. allyVids here holds
@@ -3134,12 +3371,16 @@
         vid !== 'player' && vid !== this.villagerId ? { start: vHpStart, end: rec.vHpLeft } : null]];
       if (allySettles) _sealEntries.push([allyVid, allyTaken, { start: allyEntryHp, end: Math.max(0, allyHp) }]);
       if (ally2Settles) _sealEntries.push([ally2Vid, ally2Taken, { start: ally2EntryHp, end: Math.max(0, ally2Hp) }]);
+      if (ally3Settles) _sealEntries.push([ally3Vid, ally3Taken, { start: ally3EntryHp, end: Math.max(0, ally3Hp) }]);
       var _sealed = this.sealDamageResult(rec, _sealEntries);
       if (allySettles) {
         try { this.hurtVillager(allyVid, allyTaken, 'monster', rec, { monsterId: (mdef && mdef.id) || null, monsterName: mName || null }); } catch (e) {}
       }
       if (ally2Settles) {
         try { this.hurtVillager(ally2Vid, ally2Taken, 'monster', rec, { monsterId: (mdef && mdef.id) || null, monsterName: mName || null }); } catch (e) {}
+      }
+      if (ally3Settles) {
+        try { this.hurtVillager(ally3Vid, ally3Taken, 'monster', rec, { monsterId: (mdef && mdef.id) || null, monsterName: mName || null }); } catch (e) {}
       }
       // PLANRESEED (sim-reseed-b, finding #2626): a live contact
       // with this type — the village saw it alive today (vKill /

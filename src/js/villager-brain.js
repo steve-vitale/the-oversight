@@ -1293,6 +1293,14 @@
           } catch (e) {}
           if (ok3) launched.push(c.companion3);
         }
+        // PINQUAD (sim-pinquaddoor-b, finding #2619): a launched quad
+        // travels as a unit — pin the party on every member's
+        // expedition record so the sense + the door read the launch,
+        // not the overnight churn. Mirrors the winPlanDepart call
+        // above; only a full quad pins. Gated inside pinQuadParty.
+        if (launched.length > 2) {
+          try { if (typeof this.pinQuadParty === 'function') this.pinQuadParty(vid, launched.slice()); } catch (e) {}
+        }
         try {
           var plan2 = this.winPlanOf ? this.winPlanOf(vid) : null;
           if (plan2) { plan2.stage = 'hunt'; plan2.party = launched.slice(); }

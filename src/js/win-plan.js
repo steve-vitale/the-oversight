@@ -1289,6 +1289,15 @@
               if (ok3) launched.push(cid3);
             }
           }
+          // PINQUAD (sim-pinquaddoor-b, finding #2619): a launched quad
+          // travels as a unit — pin the party on every member's
+          // expedition record (launcher + three companions) so the
+          // sense + the door read the launch, not the overnight churn.
+          // Only a full quad pins (launched.length === 3 companions);
+          // a trio/pair launch pins nothing. Gated inside pinQuadParty.
+          if (launched.length > 2) {
+            try { if (self.pinQuadParty) self.pinQuadParty(vid, launched.slice()); } catch (e) {}
+          }
           plan.stage = 'hunt';
           plan.party = launched.slice();
           try {

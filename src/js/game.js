@@ -21434,14 +21434,20 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // fighter's node — in earshot) is the same rule, from live senses
       // instead of a stale snapshot; it already keeps the snapshot as a
       // backup source. No roster feed: only co-tasked or co-located
-      // villagers, trust-ordered, capped at 2 by the helper.
+      // villagers, trust-ordered, capped at 2 by the helper (3 for a
+      // launched quad when ALLYSLOT3=1 — sim-allyslot3-b, finding #2515).
       let wAllies = 0; const wAllyVids = [];
       try {
         if (typeof this.villagerFightAllies === 'function') {
           const _sensed = this.villagerFightAllies(vid) || [];
+          // ALLYSLOT3 (sim-allyslot3-b): the wild router carries the
+          // 3rd ally when the flag is on — the sense only returns one
+          // for a launched quad. Off-mode the cap stays 2.
+          var _wCap = 2;
+          try { if (typeof process !== 'undefined' && process.env && process.env.ALLYSLOT3 === '1') _wCap = 3; } catch (e) {}
           for (const rid of _sensed) {
             wAllies++;
-            if (wAllyVids.length < 2) wAllyVids.push(rid);
+            if (wAllyVids.length < _wCap) wAllyVids.push(rid);
           }
         } else {
           const _wt = (this.state.village || {}).trust || {};

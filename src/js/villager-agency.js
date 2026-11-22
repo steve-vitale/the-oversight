@@ -577,6 +577,66 @@
       // in the npc-triggers.js registry row 'departure'.
       try { if (this.npcTrigger) this.npcTrigger(vid, 'departure', { dims: { who: vid, purpose: 'expedition' } }); } catch (e) {}
     },
+    // PINQUAD (sim-pinquaddoor-b, finding #2619): pin a launched quad.
+    // A launch is a one-dawn decision re-scored daily, so the party
+    // dissolves before the fight (the sense returns whoever is still
+    // standing together — fresh band: 3 quads launched, 0 three-vid
+    // encounters). The pin records the launch AS the party: launcher +
+    // three named companions, written onto EACH member's current
+    // expedition record. The sense + the door read the pin, not the
+    // churned same-target scan. Lifetime is the expedition record
+    // itself: expeditionReturn deletes the record (pin dies when the
+    // fighter comes home); a re-launch overwrites it (newest pin
+    // wins). Only the launch sites call this, only for exactly three
+    // companions. Env-gated: off = no pin ever written, byte-identical.
+    pinQuadParty(launcher, companions) {
+      var on = false;
+      try { on = (typeof process !== 'undefined' && process.env && process.env.PINQUAD === '1'); } catch (e) {}
+      if (!on) return false;
+      if (!launcher || !companions || companions.length !== 3) return false;
+      var st = null;
+      try { st = this.agencyState ? this.agencyState() : null; } catch (e) { return false; }
+      if (!st || !st.exped) return false;
+      var party = [launcher].concat(companions.slice(0, 3));
+      for (var i = 0; i < party.length; i++) {
+        var ex = st.exped[party[i]];
+        if (!ex) continue; // a member whose expedition never started carries no pin
+        ex.pinnedParty = party.slice();
+      }
+      return true;
+    },
+    // PINQUAD: the fighter's pinned companions — the pin on their own
+    // expedition record, minus the fighter, filtered to alive + on the
+    // roster, in pinned order. [] with no pin / PINQUAD off. The ONLY
+    // exclusion is death: a companion whose own expedition record
+    // churned or ended still counts as travelling (the pin is the
+    // commitment — the known fiction cost of this lever, see the
+    // prereg). Never the scholar (the player's own party system is
+    // separate). Pure read: no RNG, no state writes.
+    pinnedQuadAllies(vid) {
+      var on = false;
+      try { on = (typeof process !== 'undefined' && process.env && process.env.PINQUAD === '1'); } catch (e) {}
+      if (!on) return [];
+      var st = null;
+      try { st = this.agencyState ? this.agencyState() : null; } catch (e) { return []; }
+      if (!st || !st.exped || !st.exped[vid] || !st.exped[vid].pinnedParty) return [];
+      var pin = st.exped[vid].pinnedParty;
+      var v = null;
+      try { v = this.state && this.state.village; } catch (e) { return []; }
+      var roster = (v && v.roster) || [];
+      var out = [];
+      for (var i = 0; i < pin.length; i++) {
+        var rid = pin[i];
+        if (!rid || rid === vid) continue;
+        if (rid === this.villagerId) continue;
+        if (roster.indexOf(rid) === -1) continue;
+        var alive = true;
+        try { var p = this.vpOf ? this.vpOf(rid) : null; alive = !!(p && !p.dead); } catch (e) { alive = true; }
+        if (!alive) continue;
+        out.push(rid);
+      }
+      return out;
+    },
     expeditionLeg(vid, hx, hy, playerAtHaven) {
       var st = this.agencyState();
       var a = this.agencyOf(vid);
@@ -655,11 +715,28 @@
       var _wpSeek = !!(_wpg && _wpg.seek);
       var allyVids = [];
       try { allyVids = this.villagerFightAllies ? this.villagerFightAllies(vid) : []; } catch (e) { allyVids = []; }
+      // PINQUAD (sim-pinquaddoor-b, finding #2619): a pinned quad enters
+      // at the door. The third ally's only other entry is a third
+      // hopeless round (rounds 2, 3, 4) and live wave-4 fights end
+      // first (designated band: max 1 shout in all 8 three-vid
+      // fights) — so the pinned trio is already at the door when the
+      // fight opens, through the ported ALLYSLOT3 door block. Only a
+      // FULL pinned trio opens the door: a non-pinned three-vid
+      // meeting (co-location accident) does not. The door opens only
+      // here, on the launch route — the wild/patrol routers sense the
+      // pin but get no door.
+      var _pinDoor = false;
+      try {
+        if (typeof process !== 'undefined' && process.env && process.env.PINQUAD === '1' && allyVids.length === 3 && typeof this.pinnedQuadAllies === 'function') {
+          var _pinned = this.pinnedQuadAllies(vid) || [];
+          _pinDoor = _pinned.length === 3 && allyVids[0] === _pinned[0] && allyVids[1] === _pinned[1] && allyVids[2] === _pinned[2];
+        }
+      } catch (e) { _pinDoor = false; }
       // POST-FLEE REST: entry HP, so a vFlee below 25% of max can be
       // recognized after the fight's wounds land (max = max(100, entry)).
       var _pfEntryHp = 100;
       try { var _vh = (this.state.village || {}).health || {}; if (_vh[vid] !== undefined) _pfEntryHp = _vh[vid]; } catch (e) {}
-      var rec = this.fieldFight(vid, m, null, { awareness: !_wpSeek, allies: allyVids.length, allyVids: allyVids });
+      var rec = this.fieldFight(vid, m, null, { awareness: !_wpSeek, allies: allyVids.length, allyVids: allyVids, allyFromStart: _pinDoor });
       try { if (this.winPlanNoteFight) this.winPlanNoteFight(vid, allyVids); } catch (e) {}
       // The village hears about a rescue — gossip fodder, honestly sourced.
       // "Mara ran into the treeline when she heard James scream."

@@ -32,8 +32,8 @@
 //     at launch (trust >= 15), and the expedition itself is the
 //     commitment. Cap stays 2 — the engine takes the first two, so a
 //     trio arrives whole and a quad arrives as holder + 2 of 3; the
-//     4th seat needs a fieldFights 3rd-ally slot (separate arm, not
-//     here).
+//     4th seat opens only with ALLYSLOT3=1 (sim-fightcap-b, ported
+//     from sim-allyslot3-b, finding #2515).
 //   - no_self_rescue: the fighter never answers their own call; the player
 //     is excluded (the player's own party system is separate).
 // consumes:
@@ -131,6 +131,26 @@
         }
       } catch (e) {}
 
+      // PINQUAD (sim-pinquaddoor-b, finding #2619): a pinned quad
+      // travels as a unit — the pin names the party, so it REPLACES
+      // the same-target scan (the churned view) when one exists. The
+      // launch is a one-dawn decision re-scored daily; the pin is the
+      // record of what launched, read from the fighter's own
+      // expedition record (which survives companions being re-launched
+      // or sent home). Chain-safe: pinnedQuadAllies may not exist on
+      // a bare probe ctx. The launch-order + trust-order rules below
+      // are untouched; the existing ALLYSLOT3 third-seat rule
+      // (launch.length >= 3) opens the third seat from the pin.
+      try {
+        if (typeof self.pinnedQuadAllies === 'function') {
+          var _pinned = self.pinnedQuadAllies(vid) || [];
+          if (_pinned.length) {
+            launch = _pinned.slice();
+            for (var _pi = 0; _pi < _pinned.length; _pi++) seen[_pinned[_pi]] = true;
+          }
+        }
+      } catch (e) {}
+
       // 1. The outdoor crew — out there together. Live read of assignments
       // (the _outdoorCrew snapshot goes stale between phases; the depth
       // probe found it always empty when fights actually happen).
@@ -165,8 +185,17 @@
         if (a.crew !== b.crew) return a.crew ? -1 : 1;
         return b.trust - a.trust;
       });
+      // ALLYSLOT3 (sim-allyslot3-b, finding #2515): the 3rd seat is
+      // launch-only by construction — it opens only when 3 launch
+      // companions are co-travelling (launch.length >= 3), and only
+      // the launch list fills it: a bystander never takes the 3rd
+      // seat, and a non-launched meeting stays capped at 2. Off-mode
+      // this is exactly the old cap-2 return.
+      var slot3On = false;
+      try { slot3On = (typeof process !== 'undefined' && process.env && process.env.ALLYSLOT3 === '1'); } catch (e) {}
       var out = launch.slice(0, 2);
       for (var i = 0; i < cands.length && out.length < 2; i++) out.push(cands[i].rid);
+      if (slot3On && launch.length >= 3) out.push(launch[2]);
       return out;
     } catch (e) { return []; }
   };
