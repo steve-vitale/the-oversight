@@ -51,12 +51,20 @@ const K = require('./lib'), P = require('../lib/conversation-playtest'),
   }
   {
     // B — control: broken favor, wound healed (90 HP). Old behavior kept.
+    // r250: the SETTLE is unchanged (favor -> 'acknowledged'), but the
+    // WORDING changed on purpose — "It's done now. Forget it." voids the
+    // promise with no account of how the need resolved (journey-scale
+    // r250, seed 106261: d128 "still open... need isn't [dead]" -> d129
+    // "It's done now. Forget it."). The dead-need opener now names the
+    // resolution as outside the player (convoFavorResolvedWithoutYou);
+    // a wound favor has no outing, so this is the "handled, not by you"
+    // line. The control still pins: dead need -> settled, honestly.
     const { v, vid, favor } = scene();
     favor.state = 'broken';
     v.health[vid] = 90;
     T.ok('B: the wound need is gone', !G.convoFavorNeedLive(favor));
     const opening = G.startConvo(vid);
-    T.ok('B: opener still calls a dead need done', /It\'s done now/.test(opening.line), opening.line);
+    T.ok('B: opener still calls a dead need done', /handled now, not by you/i.test(opening.line), opening.line);
     T.ok('B: opener settles a broken favor whose need is gone', favor.state === 'acknowledged', favor.state);
     const def = G.convoGet(vid).want.def;
     const beat = def.engageBeat.call(G, vid);

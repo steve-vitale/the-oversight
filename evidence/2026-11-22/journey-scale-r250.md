@@ -437,12 +437,39 @@ secret-place / seek_taken cross-sitting reuse (small pools by design).
 ## Gate result
 
 - `node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r250-gate`
-  (run AFTER the build commit, per loop order): **PENDING at note time**
-  — result to be recorded from the log, not from this note. The gate log
-  is `journey-scale-r250-gate.log` (goal hidden_files evidence
-  dir). Expected standing failure set: measurement-proof staleness pair,
-  phone-frame stale receipt, 2× deed-attainment 120s timeouts — judge
-  only whether failures are attributable to this run.
+  on build commit `92f38507e`: **333 passed, 11 failed in 1349s**
+  (gate exit 1). Log:
+  `journey-scale-r250-gate.log` (goal hidden_files evidence dir).
+- **Attribution of the 11:**
+  - Standing set (5, as expected): 2× deed-attainment 120s timeouts
+    (`test-living-garden-deed-attainment.js`,
+    `test-one-person-army-deed-attainment.js`), measurement-proof staleness
+    pair (`test-measurement-proof-update.js`,
+    `test-measurement-workflow.js` — "retained neutrality proof covers
+    the current Game/controller/harness inputs"), phone-frame stale
+    receipt (`test-phone-frame-proof.js` — retained browser inputs vs
+    current source, incl. `index.html`).
+  - Attributable to this run (1): `test-repay-broken-live-need.js`
+    (r240 guard), case B opener — it pins the OLD dead-need wording
+    ("It's done now") that the r250 blank fix deliberately replaces.
+    **Fixed after the gate** by updating the control assertion to the
+    new wording ("handled now, not by you") with an r250 comment; the
+    settle behavior it guards is unchanged (favor → 'acknowledged').
+    Re-run standalone: **17 passed, 0 failed**. (Design changed on
+    purpose → test updated in the gate-record commit, per repo rule.)
+  - Load flakes (5, all re-verified green standalone):
+    `test-measurement-cache-flags.js` (4/0 in 17s standalone; failed in
+    the gate after 70.4s), `test-occupation-panels.js` (25/0),
+    `test-trust-observer-neutrality.js` (6/0), `test-synergy-stall.js`
+    (exit 0 in ~23s), `test-capable-bot-20261014.js` (40/0). The four
+    timeouts hit the 120s per-script cap in the gate under extreme load
+    (machine freshly restarted mid-gate, load avg ~9, sibling loops).
+    None touches convo-wants.js or the r250 fix.
+- **Gate verdict: 333/11, 0 attributable after the test update.**
+  The gate ran on `92f38507e` (before the test update); the gate-record
+  commit changes only one test file's assertion wording plus this note,
+  and the updated test is verified green standalone — no full re-gate
+  (parent can re-run if it wants a fresh stamp on the final tree).
 - The analyzer proof test passed before the gate (145 passed, 0 failed)
   and the broken-favor proof test passed on seeds 5001–5006.
 
@@ -475,27 +502,46 @@ secret-place / seek_taken cross-sitting reuse (small pools by design).
 
 ## Infrastructure notes (for the parent)
 
-- **No VM restart, no write-flap window this run.** Nothing lost.
+- **VM restart at ~11:31Z** (`uptime` 1 min when checked 11:32:48Z):
+  killed the first gate run (SIGTERM after ~89s, 0 output, no gate log
+  file created) and the hbloop (pid 42941). Recovered per AGENTS.md:
+  hbloop restarted with setsid nohup (new pid 1911, same
+  `/tmp/hbloop-scale.log`), writes probed OK, gate re-run from scratch
+  (1349s, completed). Commit `92f38507e` was already landed and intact
+  (worktree status clean after the restart). No work lost. The run note's
+  earlier "No VM restart" line is corrected here — the restart happened
+  AFTER the panel + commit, DURING the gate.
+- **Registry lock stuck at gate-record time:** the manual heartbeat and
+  the hbloop's last two cycles both skipped with "registry lock held >
+  120s" (checked ~12:00Z, load avg ~9). Same stuck-registry-lock
+  infrastructure issue other loops hit today. The hbloop (pid 1911)
+  keeps retrying every 10 min; the lock was NOT touched (live-coordinator
+  check first, per AGENTS.md — a sibling registration may hold it).
+  **Parent action:** confirm the journey-scale heartbeat is landing
+  again before/during closeout; the work itself is committed and safe.
 - **Machine heavily loaded by sibling loops:** `git status` once hung
-  3.5+ min and was killed — `git log` (fast) was used where possible;
-  long timeouts allowed for git status.
-- **Heartbeat:** detached loop pid 42941 (10-min cadence, log
-  `/tmp/hbloop-scale.log`) alive throughout; manual
-  `bash scripts/worktree-heartbeat.sh journey-scale` re-landed after long
-  steps.
+  3.5+ min and was killed; the gate's 4 extra 120s timeouts are load,
+  not game failures (all re-verified green standalone — see Gate).
+- **Index clobber on the build commit:** after `safe-commit.sh` created
+  `92f38507e`, `git status` showed the 6 new files as staged-deleted and
+  `convo-wants.js` as MM. Repaired with the documented recipe
+  (`git ls-tree -r HEAD -- <paths> | git update-index --add
+  --index-info`); status clean, diff HEAD empty, commit verified
+  (7 files, +4882/−7).
 - **Stray file note (worker):** a `journey-scale-r250-b-capture-106267.txt`
   exists with no matching transcript or raise talk for probe seed 106267
   (the probe ran, no convo days were sampled for it). Not an error.
-- **Merge not yet done at note time:** it waits on the gate result.
+- **Merge not yet done at note time:** it waits on the parent's closeout.
   Branch `journey-scale` is on base `3d7a25427`.
 
 ## Commit
 
-- (To be recorded after safe-commit; the build commit covers: driver +
-  analyzer + analyzer proof test + prereg + run note + convo-wants.js
-  fix + broken-favor proof test. Message: "journey-scale r250: scale leg
-  panel (seeds 106259–106266) + broken-favor resolution lines
-  [needs-eyes]".)
+- `92f38507e` — "journey-scale r250: scale leg panel (seeds 106259–106266)
+  + broken-favor resolution lines [needs-eyes]" (driver + analyzer +
+  analyzer proof test + prereg + run note + convo-wants.js fix +
+  broken-favor proof test).
+- Gate-record commit (this note's gate section + the r240 test update):
+  (hash to be recorded after safe-commit).
 
 ## Evidence paths
 
