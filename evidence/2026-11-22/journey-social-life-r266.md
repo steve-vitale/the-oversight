@@ -246,3 +246,39 @@ re-run on the rebased tip at closeout; see the closeout addendum below.
   logging for the dry fallback; (2) F5-REASK interception at the sitting;
   (3) door-direction + thread-label line variety (M4); (4) retire or
   re-point legacy F5 at the widened pool; (5) TRAIL press-pool width.
+
+## Closeout addendum (Lane B 12:00 CST run, 2026-11-22 ~18:00Z)
+
+The adoption above timed out mid-closeout (gate waiter detached, merge /
+rotation / lock-delete never done); the machine restart ~17:18Z killed
+the waiter and the 11:00 CST occurrence's run. This run finished the
+closeout:
+
+- **Stale-lock recovery:** lock `playtest-loop-2-20261122T1700Z` had no
+  registered tree and the `journey2-social` heartbeat was 36 min stale;
+  no live coordinator in `ps` or the subagent list. Replaced with the
+  12:00 CST run's lock `playtest-loop-2-20261122T1800Z`.
+- **Rebase:** branch rebased cleanly onto current master `f5b6c71d1`
+  (batch-ship version bump) — new tip `60241cfa8`. The branch touches
+  only scripts + evidence; the bump touches only version files, so the
+  rebase is content-trivial.
+- **Gate (rebased tip, `journey-social-life-r266-gate-rebased.log`):**
+  336 passed, 8 failed in 1361s = the standing 5 (measurement-proof
+  staleness pair, phone-frame stale receipt, 2× deed-attainment 120s
+  timeouts) + 3 extra 120s timeouts: `test-trust-observer-neutrality`,
+  `test-synergy-stall`, `test-capable-bot-20261014`. Standalone
+  adjudication, all load-timeout signature under load ~25: synergy-stall
+  ran to completion standalone (log complete); trust-observer threw only
+  because a 60s `spawnSync` child failed under load; capable-bot stuck
+  >26 min standalone and was killed (its `timeout 300` SIGTERM does not
+  land on a synchronous hang). The r268-establishment adoption verified
+  capable-bot green solo. Gate verdict stands at the standing 5.
+- **Arm B proofs re-run on the rebased tip `60241cfa8` (correct paths
+  carry the `test-` prefix):** F5 harness 50/0, F6 dry-opener 49/0,
+  repay-fallback 36/0, all EXIT=0 — identical to the adoption's numbers.
+- **Merge / release / rotation:** see the run note for the 12:00 CST run
+  (crisis r268 setup) and the memory log 2026-11-22 — the main-tree
+  `git status` pre-flight was still grinding at closeout time under
+  load 25, so the ff-only merge is the adoption's first step, then
+  release, rotation-b 5→6, and lock delete (only if the lock still reads
+  the 1800Z run_id).
