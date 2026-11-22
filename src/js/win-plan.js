@@ -1309,29 +1309,21 @@
           }
           plan.stage = 'hunt';
           plan.party = launched.slice();
-          // NEEDWAVE (sim-needwave-a, finding #2685): the companion
-          // sync copies the holder's target onto each companion's
-          // plan — and the plan's needWave with it. Without the
-          // copy, a companion-inherited plan carries a wave-4 target
-          // with needWave null, invisible to every needWave >= 4
-          // gate (extra companions, departure beat), so its holder
-          // launches as a pair into wave-4+ fights and the beat
-          // stays silent. Same one-line copy on all three syncs.
           try {
             var cplan = self.winPlanOf ? self.winPlanOf(cid) : null;
             if (cplan) {
               cplan.stage = 'hunt';
               cplan.party = [vid].concat(launched.filter(function (x) { return x !== cid; }));
-              cplan.target = plan.target; cplan.node = plan.node; cplan.needWave = plan.needWave;
+              cplan.target = plan.target; cplan.node = plan.node;
             }
             if (launched.length > 1) {
               var cplan2 = self.winPlanOf ? self.winPlanOf(launched[1]) : null;
-              if (cplan2) { cplan2.stage = 'hunt'; cplan2.party = [vid, cid].concat(launched.length > 2 ? [launched[2]] : []); cplan2.target = plan.target; cplan2.node = plan.node; cplan2.needWave = plan.needWave; }
+              if (cplan2) { cplan2.stage = 'hunt'; cplan2.party = [vid, cid].concat(launched.length > 2 ? [launched[2]] : []); cplan2.target = plan.target; cplan2.node = plan.node; }
               bump(self, 'partyTrios');
             }
             if (launched.length > 2) {
               var cplan3 = self.winPlanOf ? self.winPlanOf(launched[2]) : null;
-              if (cplan3) { cplan3.stage = 'hunt'; cplan3.party = [vid, cid, launched[1]]; cplan3.target = plan.target; cplan3.node = plan.node; cplan3.needWave = plan.needWave; }
+              if (cplan3) { cplan3.stage = 'hunt'; cplan3.party = [vid, cid, launched[1]]; cplan3.target = plan.target; cplan3.node = plan.node; }
               bump(self, 'partyQuads');
             }
           } catch (e) {}
