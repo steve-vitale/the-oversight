@@ -192,7 +192,21 @@
   // When the topic shifts, the NPC speaks a bridge tied to the OLD topic.
   // Never a hard pivot. Voiced per person (voiceLine), never hardcoded flat.
   const BRIDGES = {
-    grief: ['"Sorry — I got lost in it for a second. What did you want to ask?"', '"...Anyway. Sorry. What\'s on your mind?"'],
+    grief: ['"Sorry — I got lost in it for a second. What did you want to ask?"', '"...Anyway. Sorry. What\'s on your mind?"',
+      // r154 (journey-landing 2026-11-22): the pool held only the two lines
+      // above, so convoPickCycle's without-replacement cycle was strict
+      // alternation — a fifth grief-bridge in one sitting repeated a line
+      // heard four turns earlier (1357 d8: "...Anyway. Sorry. What's on
+      // your mind?" x3 at turns 1, 7 and 13, "Sorry — I got lost in it
+      // for a second. What did you want to ask?" x2 at turns 4 and 10).
+      // Six lines means a sitting would need seven grief-bridges before
+      // any repeat, and the keep-3 memory window keeps near repeats out.
+      // Same voice throughout: the villager steps back from their grief
+      // and hands the floor to the player.
+      '"Forgive me — my head\'s still at the burial. What did you want?"',
+      '"I keep drifting back to them. Sorry — go on, what were you saying?"',
+      '"That\'s enough of that for now. What did you want to talk about?"',
+      '"I shouldn\'t keep you standing here in it. What\'s on your mind?"'],
     cheer: ['"Ha — sorry, I\'m rambling. What\'s up?"', '"Good times. What did you want to talk about?"'],
     goal: ['"Anyway — that\'s my cross to carry. What\'s on your mind?"', '"Right. Sorry, I go on about it. What did you want?"',
       // r149 (journey-landing 2026-11-20): the pool held only the two lines
