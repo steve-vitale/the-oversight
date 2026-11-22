@@ -388,9 +388,38 @@ evidence):
 5. `test-measurement-workflow.js` — "retained neutrality proof covers
    the current Game/controller/harness inputs". Staleness pair,
    standing since r151.
-No re-run: the 5 are the deterministic standing set (r153's first run
-had 2 extra load-flaky failures that did not reproduce; this run has
-exactly the 5, same count as r153's re-run at 339/5).
+No re-run was needed for the first gate: the 5 are the deterministic
+standing set (r153's first run had 2 extra load-flaky failures that
+did not reproduce; this run has exactly the 5, same count as r153's
+re-run at 339/5).
+
+Rebased gate (after master moved — see Commit): the branch was rebased
+onto local master `bda6ff495` (new tip `793942971`) and the gate re-run
+(`--cacheDirectory=/tmp/jest-cache-r154-gate2`, log
+`hidden_files/journey-landing-r154-gate-rebased.log`): **334 passed,
+10 failed in 1454s** — the standing 5 plus 5 extras, all load
+artifacts from a gate that ran twice as slow as the first (1454s vs
+738s, machine load average ~11 with sibling jest gates running):
+- `test-occupation-panels.js` — 120s timeout in gate; standalone
+  re-run: EXIT 0, 25 passed, 0 failed.
+- `test-trust-observer-neutrality.js` — 120s timeout in gate;
+  standalone: EXIT 0, 6 passed, 0 failed.
+- `test-synergy-stall.js` — 120s timeout in gate; standalone: EXIT 0.
+- `test-capable-bot-20261014.js` — 120.2s timeout in gate (90s and
+  passing in the first gate); standalone: EXIT 0, 40 passed, 0 failed.
+- `test-measurement-cache-flags.js` — exit 1, 0/4 in gate; standalone
+  3/4, the one failure being "both actual CLI configurations complete
+  valid neutral panels". That assertion spawns `balance-panel.js`
+  with a hard 30s timeout; a manual run of the same command under the
+  current load takes ~34s (EXIT 0, 1 case written), so the spawn is
+  killed by its own budget — a load artifact, not a game defect. The
+  same test passed in the first gate on this exact code+fix, and the
+  other three assertions (cache isolation, identities, reuse) pass.
+  No change to the test's timeout is made here — that is a separate
+  measurement-instrument decision, out of this run's one-blank scope.
+Gate verdict on the rebased tip: the standing 5 only, 0 attributable
+to this run's change. The proof tests (grief + r149) re-ran ALL GREEN
+on the rebased tip before the gate.
 
 ## Telemetry deviation check
 
