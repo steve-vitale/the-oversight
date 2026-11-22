@@ -2819,14 +2819,29 @@
         // pending favor never blocks an unrelated want thread.
         if (lc.tid === 'want') {
           try {
-            const fav = (typeof this.convoGetFavor === 'function') ? this.convoGetFavor(vid) : null;
+            // SITTING-FAVOR ANCHOR (journey-crisis r263): the r201 gate
+            // anchors on the LEDGER favor via its label — but a `want`
+            // thread's label comes from the sitting's WANT, and a repay
+            // sitting labels the favor's debt 'that debt', not 'that wound
+            // care' (transcript-caught: crisis r262 seed 14594 d30 Fiona
+            // Wen — broken heal_help, wound still open, closer said
+            // "Good — that debt, settled"). The sitting's want carries its
+            // favor (c.want.favor); when present, THAT favor is the
+            // thread's subject, whatever the label says. The ledger-label
+            // match stays as the fallback for favorless sittings, so a
+            // pending favor still never blocks an unrelated want thread
+            // (the r201 anchor). Same state rule in both anchors: a favor
+            // want is settled only when the favor is fulfilled / thanked.
+            const sitFav = (c.want && c.want.favor) || null;
+            const fav = sitFav || ((typeof this.convoGetFavor === 'function') ? this.convoGetFavor(vid) : null);
             const favorLabels = {
               food_share: 'that food share', forage_help: 'that foraging help',
               sick_help: 'that sickness help', heal_help: 'that wound care',
               water_haul: 'that water haul', watch_shift: 'that watch shift',
               stay_close: 'that night together', snare_mend: 'that snare mending',
             };
-            if (fav && fav.kind && favorLabels[fav.kind] === lc.label &&
+            const labelMatches = !!(fav && fav.kind && favorLabels[fav.kind] === lc.label);
+            if (fav && (sitFav || labelMatches) &&
                 !(fav.state === 'fulfilled' || fav.state === 'thanked')) {
               L.lastClosed = null; return null;
             }

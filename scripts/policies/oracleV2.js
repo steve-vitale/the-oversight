@@ -236,6 +236,25 @@ function deedValue(Game, f) {
   } catch (e) { return true; }
 }
 
+// stuckKey (journey-crisis r263): the unreachable-flee counter's key.
+// The r262 fix keyed _closeStuck to the fight OBJECT, but spool-replay /
+// influencer-round fights re-create the fight object between turns,
+// zeroing the counter before it could reach 3 (r262 panel: 6 stall-days,
+// fled_unreachable 0). The counter is now keyed to the monster set + day,
+// so it survives fight-object churn within one engagement. It still resets
+// on a successful move, strike, or ability, and on a new monster set or a
+// new day. Corner, documented: a genuinely NEW engagement with the same
+// monster on the same day inherits the counter (the player already proved
+// they cannot close on it today) — the flee then fires on the first failed
+// close instead of the third.
+function stuckKey(Game, f) {
+  try {
+    const day = ((Game.state || {}).scholar || {}).day || 0;
+    const ids = monstersOf(f).map(m => m.monsterId || m.key || '?').sort().join('+');
+    return ids + '@d' + day;
+  } catch (e) { return 'x'; }
+}
+
 function v2Fight(Game, ctx) {
   try {
     const f = Game.tbfight;
@@ -291,7 +310,12 @@ function v2Fight(Game, ctx) {
     if (ctx._fightObj !== f) {
       ctx._fightObj = f;
       ctx._turnN = 0;
-      ctx._closeStuck = 0;
+      // STUCK-KEY (journey-crisis r263): the stuck counter resets only
+      // when the MONSTER+DAY key changes — a re-created fight object for
+      // the same monster on the same day keeps the count (spool-replay /
+      // influencer churn, r262). A new monster set or a new day restarts it.
+      const _sk = stuckKey(Game, f);
+      if (ctx._closeStuckKey !== _sk) { ctx._closeStuck = 0; ctx._closeStuckKey = _sk; }
       armUp(Game, ctx);
       // COUNTER CHECK: focus a known-counter monster first (dormant by
       // construction — no def carries a counter field; measured, not assumed).
