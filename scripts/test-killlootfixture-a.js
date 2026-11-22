@@ -11,9 +11,10 @@
 // Extends the 2015Z killlootbundle proof test + analyzer helpers; does
 // not rebuild them. Seed 7 via scripts/sim-harness.js (Math.random
 // seeded BEFORE eval, per the harness rules).
-// Run (judged legs, each twice for the determinism gate):
-//   CELLGATE=1 node scripts/test-killlootfixture-a.js            (ctl)
-//   CELLGATE=1 KILLBUNDLE=1 node scripts/test-killlootfixture-a.js  (arm)
+// Run (judged legs, each twice for the determinism gate; full pilot
+// substrate env so the party is the prereg's 3-fighter party):
+//   VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 SENSEEXPED=1 BOWOPEN=1 SPEARGATE=1 GUNRATE=1 CELLGATE=1 node scripts/test-killlootfixture-a.js            (ctl)
+//   VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 SENSEEXPED=1 BOWOPEN=1 SPEARGATE=1 GUNRATE=1 CELLGATE=1 KILLBUNDLE=1 node scripts/test-killlootfixture-a.js  (arm)
 //   ... rerun   (determinism copies, writes -rerun.json)
 //   node scripts/test-killlootfixture-a.js --compare   (judges bars 1-6)
 // Prereg: evidence/2026-11-21/sim-killlootfixture-a-prereg.md (frozen
@@ -161,6 +162,10 @@ async function oneLeg() {
     console.error('KILLLOOTFIXTURE STOP: CELLGATE=1 required (both legs).');
     process.exit(2);
   }
+  if (process.env.FIGHTALLY2 !== '1') {
+    console.error('KILLLOOTFIXTURE STOP: FIGHTALLY2=1 required (both legs) — the prereg party is holder + 2 allies; without it only 1 ally joins.');
+    process.exit(2);
+  }
   const kbPresent = killbundlePresent();
   if (!kbPresent) {
     console.error('KILLLOOTFIXTURE STOP: the KILLBUNDLE lever code (game.js villagerKillLoot) must be present.');
@@ -206,6 +211,19 @@ async function oneLeg() {
   const holderGain = (gains || []).find(function (g) { return g.holder === holder; }) || null;
   const cellsAtArrival = holderGain ? holderGain.cellsGained : null;
   const gunsAtArrival = holderGain ? holderGain.gunsGained : null;
+  // --- fight-entry gear-up, run explicitly before the pre-fight read ---
+  // fieldFight re-equips the fighter at entry (villagerGearUp(vid,
+  // false)); the gun sits in items until then, so an equipped-slot read
+  // before entry sees null. Running the engine's own entry step here
+  // (deterministic, no acquisition, idempotent — fieldFight runs the
+  // identical call again at entry) makes the setup gate read what the
+  // fight will actually see. Instrument correction after a ctl false
+  // start (setup-gate failed equipped=null before any judged data);
+  // the frozen prereg's gate text is unchanged.
+  try {
+    if (typeof Game.villagerGearUp === 'function') Game.villagerGearUp(holder, false);
+    else errors.push('gear-up: villagerGearUp not a function');
+  } catch (e) { errors.push('gear-up: ' + String(e.message).slice(0, 80)); }
   // --- pre-fight state + setup gate ---
   const preState = preFightStateOf(Game);
   let kit = null, cellsPre = null, hpBefore = null;
@@ -248,12 +266,18 @@ async function oneLeg() {
     console.error('KILLLOOTFIXTURE STOP: fieldFight threw: ' + e.stack);
     process.exit(2);
   }
-  let holderAlive = null, cellsAfter = null, hpAfter = null;
+  let holderAlive = null, cellsAfter = null, hpAfter = null, hpAfterHealthMap = null;
   try {
     const p2 = Game.getPerson ? Game.getPerson(holder) : null;
-    holderAlive = !!(p2 && !p2.dead && ((((Game.state || {}).village || {}).health || {})[holder] || 0) > 0);
+    // HOLDER-ALIVE READ (instrument correction): village.health carries
+    // NO entry for the holder at setup (null before and after — fieldFight
+    // reads HP with a 100 default and never writes it back to the map in
+    // this path), so a health-map read always reports dead. The sealed
+    // fight record's vHpLeft IS the authoritative post-fight HP.
+    holderAlive = !!(p2 && !p2.dead) && (rec && rec.vHpLeft != null ? rec.vHpLeft > 0 : false);
     cellsAfter = countItemIn((p2 && p2.items) || [], 'fusion_cell');
-    hpAfter = (((Game.state || {}).village || {}).health || {})[holder] != null
+    hpAfter = (rec && rec.vHpLeft != null) ? rec.vHpLeft : null;
+    hpAfterHealthMap = (((Game.state || {}).village || {}).health || {})[holder] != null
       ? ((Game.state.village || {}).health || {})[holder] : null;
   } catch (e) { errors.push('postfight-read: ' + String(e.message).slice(0, 80)); }
   out.volley = (rec && rec.volley) || null;
@@ -265,6 +289,10 @@ async function oneLeg() {
   out.holderAlive = holderAlive;
   out.cellsAfterFight = cellsAfter;
   out.hpAfter = hpAfter;
+  out.hpAfterHealthMap = hpAfterHealthMap;
+  out.partySize = rec ? rec.partySize : null;
+  out.allyVid = rec ? rec.allyVid : null;
+  out.ally2Vid = rec ? rec.ally2Vid : null;
   out.log = (rec && rec.log) || [];
   out.arrowLine = (out.log || []).some(function (l) { return String(l).indexOf('nocks an arrow') !== -1; });
   out.instrumentErrors = errors;
@@ -276,6 +304,7 @@ async function oneLeg() {
     drop: drop, cellsAtArrival: cellsAtArrival, gunsAtArrival: gunsAtArrival,
     equipped: out.preFightEquippedRanged, cellsPre: cellsPre,
     volley: out.volley, outcome: out.outcome, rounds: out.rounds,
+    partySize: out.partySize, allyVid: out.allyVid, ally2Vid: out.ally2Vid,
     holderAlive: holderAlive, cellsAfter: cellsAfter,
     stubRestored: stubRestored, errors: errors.length,
     file: path.relative(REPO, OUT_FILE),
