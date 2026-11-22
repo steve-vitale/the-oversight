@@ -412,3 +412,45 @@ carries a "metric review" section.
 - Evidence: `evidence/2026-11-21/sim-launchstate-b.md`
 - Leg log: `evidence/2026-11-21/launchstate-b-legs.log`
 - `src/` diff: 0 lines (DIAG, recorder wraps only).
+
+## AMENDMENT 1 — Leg S part-level fallback rules (2026-11-22 ~02:50 UTC, before any judged sim)
+
+The frozen Leg S text derives whyNot from the tick-entry
+holder-state row, with `no-rows` for a missing row. Reasoning
+through the ledger before building shows `no-rows` would fire
+BY CONSTRUCTION on four day shapes the day-level taxonomy
+already names — the ledger would then fail bar (a) on nearly
+every instance regardless of recorder quality. The ledger is
+amended with four part-level fallbacks, applied in this order
+BEFORE `no-rows`, each named by the same mechanism the
+day-level taxonomy already uses for that day:
+
+- `seed-day` — the part is on the instance's seed day AND no
+  holder-state row exists for (vid, target) that part. The
+  sampler only records LIVE wave-4 plans; the plan did not
+  exist until the seeding fight that day, so pre-seed parts
+  cannot score. Counted separately in the band aggregation
+  (`sSeedDayParts`), so a reader can see how many ledger
+  parts ride on it.
+- `retargeted` — a holder-state row exists for the vid that
+  day+part with a DIFFERENT target, or a `v4seeds` row exists
+  for the vid that day with a different target. The plan
+  retargeted; this instance's target is no longer the holder's
+  plan that part.
+- `dead` — a death row exists for the holder on or before that
+  day. The holder is dead; no scoring is possible (B'
+  `holder-dead`, same evidence).
+- `plan-deleted` — no holder-state row for (vid, target) that
+  part AND no `dawnbidCensus` row for the vid that day. The
+  plan no longer exists (B' `plan-not-in-census`, same
+  evidence). Caveat: a retarget to a wave-3 target also leaves
+  no census row (the census records wave-4 plans only), so a
+  `plan-deleted` part on a day with no retarget evidence may
+  be a wave-3 retarget, not a deletion — the evidence says so
+  wherever it occurs.
+
+`no-rows` now means only: no holder-state row, no other-target
+row, no retarget seed row, the holder alive, a census row
+exists — a genuine coverage gap, still UNEXPLAINED. Nothing
+else in Leg S changes; the bar (0 unexplained parts) is
+unchanged.
