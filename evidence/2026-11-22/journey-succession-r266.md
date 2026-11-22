@@ -352,10 +352,29 @@ game-breaker; both are filed as open findings below.
 
 ## Gate
 
-[To be filled by the adoption after the ff-only merge: `node
-scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r266-gate`
-on the merged tip, serialized. Standing pre-existing failure
-families (r263: measurement-proof staleness pair, phone-frame stale
-receipt, deed-attainment 120s timeouts, occupation-panels load
-flake) are the baseline; any NEW failure is a stop-and-explain item.
-No src/js change this run, so no attributable failure is expected.]
+Adoption gate on the merged tip `67a87d1b5` (after rebase onto
+`4681e740f`): `node scripts/check.js --quick
+--cacheDirectory=/tmp/jest-cache-r266-gate` — **338 passed, 6
+failed in 1085s**, log at goal
+`hidden_files/check-quick-r266-adoption.log`. The 6 failures are
+all standing pre-existing families, 0 attributable to this run (no
+src/js change; evidence + tooling only):
+
+- test-living-garden-deed-attainment.js — 120.2s timeout
+  (deed-attainment 120s timeouts under load).
+- test-one-person-army-deed-attainment.js — 120.1s timeout (same
+  family).
+- test-measurement-proof-update.js — "Proof source inputs are not
+  current" (measurement-proof staleness, first of the pair).
+- test-measurement-workflow.js — exit 1 (staleness pair, second).
+- test-measurement-cache-flags.js — exit 1
+  (measurement-cache-flags family).
+- test-phone-frame-proof.js — stale receipt (phone-frame stale
+  receipt family).
+
+Occupation-panels (114s, slow but passed) did not fail this time.
+338/6 is better than the recent baseline (r263 adoption gate
+331/13, r265 339/5) and no failure touches any file this run
+changed. The five WILD CHECK proofs re-ran GREEN on the rebased tip
+before the merge (r262 escalator-cap, r254 multiwit, r232
+relationship-mourning, r225 F5 22/22, r258 selfwit).
