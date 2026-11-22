@@ -1,0 +1,579 @@
+{
+  "seed": 107369,
+  "anchorCommit": "c8c30bd556fb6b5fcf3e2080f5b6327e891f00db",
+  "recorderOn": true,
+  "files": [
+    "gunloss-a-s107369-gunloss-a-diag.json"
+  ],
+  "bar1Instrument": {
+    "errors": 0,
+    "pass": true
+  },
+  "bar2Reproduction": {
+    "diffs": [],
+    "pass": true
+  },
+  "gunlossEventCount": 1279,
+  "gunlossCallCounts": {
+    "hostileVisitorTick": 145,
+    "autoEquip": 2701,
+    "vesselStashFetch": 145,
+    "vesselArmorFetch": 145,
+    "villagerWeaponCraftDay": 145,
+    "villagerAmmoCraftDay": 145,
+    "equip": 10,
+    "fieldFight": 126,
+    "registerDeath": 90,
+    "villagerPocketAmmo": 29,
+    "expeditionMonster": 65,
+    "expeditionReturn": 27,
+    "playerDeath": 8,
+    "mantleBecome": 8,
+    "migrateKeepsakes": 8,
+    "unequip": 4
+  },
+  "gunCensusDays": 143,
+  "bar3Attribution": {
+    "verdict": "ATTRIBUTED",
+    "path": "src/js/villager-build.js :: mantleBecome",
+    "day": 134,
+    "fn": "mantleBecome",
+    "file": "src/js/villager-build.js",
+    "gunEvents": 4,
+    "cellEvents": 4,
+    "event": {
+      "kind": "wrap",
+      "fn": "mantleBecome",
+      "file": "src/js/villager-build.js",
+      "day": 134,
+      "stack": "at Object.playerDeath (src/js/ledger.js:935:59)",
+      "delta": {
+        "gun": -1,
+        "cells": -2,
+        "scholarGun": 1,
+        "scholarCells": 1,
+        "gunEqChanged": true
+      },
+      "pre": {
+        "person": {
+          "vid": "omar_farouk",
+          "found": true,
+          "items": [
+            {
+              "id": "reading_glasses",
+              "units": 1
+            },
+            {
+              "id": "mixtape",
+              "units": 1
+            },
+            {
+              "id": "hunting_spear",
+              "units": 1
+            },
+            {
+              "id": "chefs_knife",
+              "units": 1
+            },
+            {
+              "id": "witness_coat",
+              "units": 1
+            },
+            {
+              "id": "searcaster",
+              "units": 1
+            },
+            {
+              "id": "fusion_cell",
+              "units": 2
+            }
+          ],
+          "equipped": {
+            "melee": "hunting_spear",
+            "ranged": "searcaster",
+            "head": "reading_glasses",
+            "torso": "witness_coat",
+            "acc1": "mixtape",
+            "acc2": "chefs_knife",
+            "acc3": "fusion_cell"
+          },
+          "stashed": [
+            {
+              "id": "rain_poncho",
+              "units": 1
+            },
+            {
+              "id": "duffel_bag",
+              "units": 1
+            },
+            {
+              "id": "trail_rations_pouch",
+              "units": 1
+            }
+          ],
+          "gun": 1,
+          "cells": 2,
+          "gunEquipped": "searcaster",
+          "stashGun": 0,
+          "stashCells": 0
+        },
+        "scholar": {
+          "cells": 0,
+          "cellsInv": 0,
+          "cellsEq": 0,
+          "gunInv": 0,
+          "gunEq": null,
+          "gunEqSlots": [],
+          "equipped": {},
+          "items": []
+        }
+      },
+      "post": {
+        "person": {
+          "vid": "omar_farouk",
+          "found": true,
+          "items": [],
+          "equipped": {},
+          "stashed": [],
+          "gun": 0,
+          "cells": 0,
+          "gunEquipped": null,
+          "stashGun": 0,
+          "stashCells": 0
+        },
+        "scholar": {
+          "cells": 1,
+          "cellsInv": 0,
+          "cellsEq": 1,
+          "gunInv": 0,
+          "gunEq": "searcaster",
+          "gunEqSlots": [
+            "ranged"
+          ],
+          "equipped": {
+            "melee": "hunting_spear",
+            "ranged": "searcaster",
+            "head": "reading_glasses",
+            "torso": "witness_coat",
+            "acc1": "mixtape",
+            "acc2": "chefs_knife",
+            "acc3": "fusion_cell"
+          },
+          "items": []
+        }
+      },
+      "threw": null
+    },
+    "destination": {
+      "scholarGun": 1,
+      "scholarCells": 1,
+      "scholarEquippedAfter": {
+        "melee": "hunting_spear",
+        "ranged": "searcaster",
+        "head": "reading_glasses",
+        "torso": "witness_coat",
+        "acc1": "mixtape",
+        "acc2": "chefs_knife",
+        "acc3": "fusion_cell"
+      },
+      "scholarItemsAfter": []
+    },
+    "netLoss": {
+      "gun": 0,
+      "cells": 1
+    },
+    "nesting": "mutation rows name mantleBecome (its own lines moved the pieces); outer span(s) src/js/ledger.js :: playerDeath show the same pack delta because their pre/post snapshot covers the inner call",
+    "gap": null
+  },
+  "windowEvents": [
+    {
+      "kind": "wrap",
+      "fn": "registerDeath",
+      "day": 133,
+      "path": "src/js/ledger.js :: registerDeath",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "registerDeath",
+      "day": 133,
+      "path": "src/js/ledger.js :: registerDeath",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 133,
+      "path": "src/js/game.js:9399:21 :: returnToVillage [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "hostileVisitorTick",
+      "day": 133,
+      "path": "src/js/betrayal.js :: hostileVisitorTick",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "vesselStashFetch",
+      "day": 133,
+      "path": "src/js/villager-build.js :: vesselStashFetch",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "vesselArmorFetch",
+      "day": 133,
+      "path": "src/js/villager-build.js :: vesselArmorFetch",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "registerDeath",
+      "day": 134,
+      "path": "src/js/ledger.js :: registerDeath",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "registerDeath",
+      "day": 134,
+      "path": "src/js/ledger.js :: registerDeath",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/ledger.js:725:21 :: playerDeath [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/ledger.js:726:20 :: playerDeath [scholar.equipped]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "registerDeath",
+      "day": 134,
+      "path": "src/js/ledger.js :: registerDeath",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/villager-build.js:642:20 :: mantleBecome [scholar.equipped]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "splice",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/villager-build.js:648:16 :: mantleBecome",
+      "pieces": {
+        "gun": 1,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "splice",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/villager-build.js:648:16 :: mantleBecome",
+      "pieces": {
+        "gun": 0,
+        "cells": 2
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/villager-build.js:672:21 :: mantleBecome [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/villager-build.js:701:36 :: mantleBecome [omar_farouk.items]",
+      "pieces": {
+        "gun": 1,
+        "cells": 2
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/villager-build.js:701:58 :: mantleBecome [omar_farouk.equipped]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/villager-build.js:701:79 :: mantleBecome [omar_farouk.stashed]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "mantleBecome",
+      "day": 134,
+      "path": "src/js/villager-build.js :: mantleBecome",
+      "pieces": {
+        "gun": 0,
+        "cells": 1
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "migrateKeepsakes",
+      "day": 134,
+      "path": "src/js/keepsakes.js :: migrateKeepsakes",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "playerDeath",
+      "day": 134,
+      "path": "src/js/ledger.js :: playerDeath",
+      "pieces": {
+        "gun": 0,
+        "cells": 1
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/game.js:29255:25 :: eat [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/game.js:29255:25 :: eat [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/game.js:29255:25 :: eat [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 134,
+      "path": "src/js/game.js:9399:21 :: returnToVillage [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "hostileVisitorTick",
+      "day": 134,
+      "path": "src/js/betrayal.js :: hostileVisitorTick",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "vesselStashFetch",
+      "day": 134,
+      "path": "src/js/villager-build.js :: vesselStashFetch",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "vesselArmorFetch",
+      "day": 134,
+      "path": "src/js/villager-build.js :: vesselArmorFetch",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 135,
+      "path": "src/js/game.js:29255:25 :: eat [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 135,
+      "path": "src/js/game.js:29255:25 :: eat [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 135,
+      "path": "src/js/game.js:29255:25 :: eat [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 135,
+      "path": "src/js/game.js:29255:25 :: eat [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 135,
+      "path": "src/js/game.js:9399:21 :: returnToVillage [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "reassign",
+      "fn": null,
+      "day": 135,
+      "path": "src/js/carexplore.js:163:34 :: giveFood [scholar.inventory]",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "hostileVisitorTick",
+      "day": 135,
+      "path": "src/js/betrayal.js :: hostileVisitorTick",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "vesselStashFetch",
+      "day": 135,
+      "path": "src/js/villager-build.js :: vesselStashFetch",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    },
+    {
+      "kind": "wrap",
+      "fn": "vesselArmorFetch",
+      "day": 135,
+      "path": "src/js/villager-build.js :: vesselArmorFetch",
+      "pieces": {
+        "gun": 0,
+        "cells": 0
+      }
+    }
+  ],
+  "bar5Wall": {
+    "wins": 0,
+    "seeds": 1,
+    "national": 0,
+    "table": "not instrumented",
+    "maxWave": 4,
+    "unlockedWave": 4,
+    "days": 145,
+    "standing": 199,
+    "villageLost": true,
+    "scaleRank": "regional"
+  },
+  "verdict": "DIAG-GO",
+  "bars": {
+    "bar1": true,
+    "bar2": true,
+    "bar3": "ATTRIBUTED",
+    "bar5": true
+  }
+}

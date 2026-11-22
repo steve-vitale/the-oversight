@@ -93,16 +93,50 @@ function eventPath(ev) {
   }
   return 'unknown';
 }
+// callerFn(ev): the function that CALLED the wrapped function (or
+// performed the splice/reassign), from the event's first stack frame
+// — e.g. 'playerDeath' for a mantleBecome called inside playerDeath.
+function callerFn(ev) {
+  const st = String((ev && ev.stack) || '');
+  const m = st.match(/at\s+(?:[A-Za-z_$][\w$]*\.)?([A-Za-z_$][\w$]*)\s+\(/);
+  return m ? m[1] : null;
+}
+// mutationActors(events, day): the functions named by the pack-moving
+// splice/reassign rows' stacks on that day — the functions whose OWN
+// lines performed the mutations (as opposed to outer spans whose
+// pre/post delta merely covers an inner call). On the judged day the
+// splices at villager-build.js:648 and the wipe at :701 all name
+// mantleBecome; playerDeath's own lines (ledger.js:725/726) moved
+// 0 gun/cells (the dead bearer's gear, which held none).
+function mutationActors(events, day) {
+  const fns = {};
+  for (const ev of (events || [])) {
+    if (!ev || ev.day !== day) continue;
+    if (ev.kind !== 'splice' && ev.kind !== 'reassign') continue;
+    const p = packPieces(ev);
+    if (p.gun === 0 && p.cells === 0) continue;
+    const fn = callerFn(ev);
+    if (fn) fns[fn] = (fns[fn] || 0) + 1;
+  }
+  return Object.keys(fns);
+}
 // attributeLoss(events, day): the day-134 attribution. Returns
 // {verdict: 'ATTRIBUTED'|'UNATTRIBUTED', path, day, fn, file,
-//  gunEvents, cellEvents, destination, netLoss, gap}. ATTRIBUTED
-// requires ONE event that takes BOTH the gun and the 2 cells OUT OF
-// THE HOLDER'S PACK (the day-134 loss is gun -1 AND cells -2 from the
-// same holder on the same day, per the frozen census). Where the
-// pieces WENT is reported separately in `destination` (scholar gains
-// in any slot + the scholar's equipped map after the call) and the
-// net destruction in `netLoss` (pack loss minus scholar gain — a
-// transfer is a move, a collapsed stack destroys the difference).
+//  gunEvents, cellEvents, destination, netLoss, nesting, gap}.
+// ATTRIBUTED requires ONE event that takes BOTH the gun and the 2
+// cells OUT OF THE HOLDER'S PACK (the day-134 loss is gun -1 AND
+// cells -2 from the same holder on the same day, per the frozen
+// census). Where the pieces WENT is reported separately in
+// `destination` (scholar gains in any slot + the scholar's equipped
+// map after the call) and the net destruction in `netLoss` (pack loss
+// minus scholar gain — a transfer is a move, a collapsed stack
+// destroys the difference). NESTING: a wrap's pre/post delta spans
+// everything inside it, so an outer call (playerDeath) shows the
+// SAME pack delta as the inner call (mantleBecome) that actually
+// moved the pieces. When several both-piece events share the day,
+// the splice/reassign backstops decide: the mutation rows name the
+// function whose own lines moved the pieces, and the attribution
+// goes to that inner call, with the outer span named in `nesting`.
 // Anything else is UNATTRIBUTED with the gap named — never a faked
 // single path.
 function attributeLoss(events, day) {
@@ -113,8 +147,15 @@ function attributeLoss(events, day) {
   const gunEvents = scored.filter(function (s) { return s.pieces.gun > 0; });
   const cellEvents = scored.filter(function (s) { return s.pieces.cells > 0; });
   const both = scored.filter(function (s) { return s.pieces.gun > 0 && s.pieces.cells > 0; });
-  if (both.length === 1 && gunEvents.length === 1 && cellEvents.length === 1) {
-    const b = both[0];
+  // Candidate ACTORS are the named calls (wraps). Splice/reassign
+  // rows are backstop evidence, not rival calls: a splice inside
+  // mantleBecome's worn loop moves the same pieces the mantle wrap
+  // already accounts for, so it must never block the attribution or
+  // be named as an "outer span".
+  const wrapBoth = both.filter(function (s) { return s.ev.kind === 'wrap'; });
+  const wrapGun = gunEvents.filter(function (s) { return s.ev.kind === 'wrap'; });
+  const wrapCell = cellEvents.filter(function (s) { return s.ev.kind === 'wrap'; });
+  function attributedResult(b, nesting) {
     const d = (b.ev && b.ev.delta) || {};
     const destination = {
       scholarGun: d.scholarGun || 0, scholarCells: d.scholarCells || 0,
@@ -123,7 +164,23 @@ function attributeLoss(events, day) {
     return { verdict: 'ATTRIBUTED', path: b.path, day: day,
       fn: b.ev.fn || b.ev.kind, file: b.ev.file || null,
       gunEvents: gunEvents.length, cellEvents: cellEvents.length,
-      event: b.ev, destination: destination, netLoss: b.net, gap: null };
+      event: b.ev, destination: destination, netLoss: b.net,
+      nesting: nesting || null, gap: null };
+  }
+  if (wrapBoth.length === 1 && wrapGun.length === 1 && wrapCell.length === 1) {
+    return attributedResult(wrapBoth[0], null);
+  }
+  if (wrapBoth.length === 0 && both.length === 1) {
+    return attributedResult(both[0], 'no named call wraps the loss; the backstop row is the only evidence');
+  }
+  if (wrapBoth.length > 1) {
+    const actors = mutationActors(events, day);
+    const inner = wrapBoth.filter(function (s) { return actors.indexOf(s.ev.fn) !== -1; });
+    if (inner.length === 1) {
+      const outer = wrapBoth.filter(function (s) { return s !== inner[0]; }).map(function (s) { return s.path; }).join(' | ');
+      return attributedResult(inner[0],
+        'mutation rows name ' + inner[0].ev.fn + ' (its own lines moved the pieces); outer span(s) ' + outer + ' show the same pack delta because their pre/post snapshot covers the inner call');
+    }
   }
   const gaps = [];
   if (gunEvents.length === 0) gaps.push('no event takes the searcaster out of the pack on day ' + day);
@@ -136,7 +193,7 @@ function attributeLoss(events, day) {
   if (both.length > 1) gaps.push(both.length + ' events each take gun+cells out of the pack on day ' + day + ': ' + both.map(function (s) { return s.path; }).join(' | '));
   return { verdict: 'UNATTRIBUTED', path: null, day: day, fn: null, file: null,
     gunEvents: gunEvents.length, cellEvents: cellEvents.length,
-    event: null, destination: null, netLoss: null,
+    event: null, destination: null, netLoss: null, nesting: null,
     gap: gaps.join('; ') || 'no pack-loss events in window' };
 }
 
@@ -193,8 +250,14 @@ function compareReproduction(fresh, frozen) {
 }
 
 // ---- det-gate core (pure; selftested) ----
+// DET_FIELDS are RECORDER-INDEPENDENT game counters only. sayCount
+// is deliberately NOT here: the say lines are counted by the
+// instrument itself, so the recorder-off leg records 0 by
+// construction (on=13836, off=0 on seed 107369) — a counting artifact,
+// not a game divergence (deaths/killCalls/fights/casts/spawns/daily
+// are all identical across the legs).
 const DET_FIELDS = ['days', 'gameDays', 'endReason', 'won', 'over', 'villageLost',
-  'scaleRank', 'maxWave', 'unlockedWave', 'standing', 'endPantryKcal', 'sayCount'];
+  'scaleRank', 'maxWave', 'unlockedWave', 'standing', 'endPantryKcal'];
 function compareDetgate(on, off) {
   const diffs = [];
   for (const k of DET_FIELDS) {
@@ -299,6 +362,26 @@ function selftest() {
   // attribution: two events each losing gun+cells
   const a4 = attributeLoss([mant, Object.assign({}, mant, { fn: 'playerDeath', file: 'src/js/ledger.js' })], 134);
   check('attributeLoss: two both-events UNATTRIBUTED', a4.verdict === 'UNATTRIBUTED' && /2 events/.test(a4.gap), a4.gap);
+  // attribution: NESTED pair — mantleBecome inside playerDeath, with
+  // the splice/reassign backstops naming mantleBecome's own lines.
+  // The outer span's identical delta must NOT block the attribution.
+  const nestedMant = { kind: 'wrap', fn: 'mantleBecome', file: 'src/js/villager-build.js', day: 134,
+    stack: 'at Object.playerDeath (src/js/ledger.js:935:59)',
+    delta: { gun: -1, cells: -2, scholarGun: 1, scholarCells: 1, gunEqChanged: true },
+    post: { scholar: { equipped: { ranged: 'searcaster', acc3: 'fusion_cell' }, items: [] } } };
+  const nestedOuter = { kind: 'wrap', fn: 'playerDeath', file: 'src/js/ledger.js', day: 134,
+    stack: 'at Object.tbEnd (src/js/game.js:48315:24)',
+    delta: { gun: -1, cells: -2, scholarGun: 1, scholarCells: 1, gunEqChanged: true } };
+  const sp1 = { kind: 'splice', day: 134, stack: 'at Object.mantleBecome (src/js/villager-build.js:648:16)', before: { gun: 1, cells: 2 }, after: { gun: 0, cells: 2 } };
+  const sp2 = { kind: 'splice', day: 134, stack: 'at Object.mantleBecome (src/js/villager-build.js:648:16)', before: { gun: 0, cells: 2 }, after: { gun: 0, cells: 0 } };
+  const re1 = { kind: 'reassign', label: 'omar_farouk', prop: 'items', day: 134, stack: 'at Object.mantleBecome (src/js/villager-build.js:701:36)', before: { len: 7, gun: 1, cells: 2 }, after: { len: 0, gun: 0, cells: 0 } };
+  const aN = attributeLoss([nestedMant, nestedOuter, sp1, sp2, re1], 134);
+  check('attributeLoss: nested mantle inside playerDeath attributes to mantleBecome',
+    aN.verdict === 'ATTRIBUTED' && aN.fn === 'mantleBecome' && /outer span/.test(aN.nesting || ''), JSON.stringify(aN));
+  check('attributeLoss: nested destination names acc3 cell slot',
+    aN.destination && aN.destination.scholarEquippedAfter && aN.destination.scholarEquippedAfter.acc3 === 'fusion_cell', JSON.stringify(aN.destination));
+  check('attributeLoss: nested net loss is 1 cell (collapsed unit)',
+    aN.netLoss && aN.netLoss.gun === 0 && aN.netLoss.cells === 1, JSON.stringify(aN.netLoss));
   // attribution: reassign wipe
   const re = { kind: 'reassign', label: 'omar', prop: 'items', day: 134, stack: 'at mantleBecome (src/js/villager-build.js:701:20)',
     before: { len: 5, gun: 1, cells: 2 }, after: { len: 0, gun: 0, cells: 0 } };
