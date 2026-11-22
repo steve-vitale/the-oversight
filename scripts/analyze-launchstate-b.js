@@ -52,7 +52,7 @@ const BAND_DIR = 'perseed-launchstate-b-107301-107308';
 const OLD_BAND_DIR = 'perseed-strikeband4-b-106241-106248';
 const EXPECTED = {
   arm: 'launchstate-b', run: 'launchstate-b', mode: 'vre',
-  policySha12: '1884c8852d38', anchor12: 'a0a2bf26d',
+  policySha12: '1884c8852d38', anchor12: 'a0a2bf26dbfa',
   flags: { senseexpedFlag: '1', partysize4Flag: '1', vetreengageFlag: '1',
     fleerepair2Flag: '1', fightally2Flag: '1', allyslot3Flag: '1', launchsurviveFlag: '1' },
   allyslot3InSrc: false,

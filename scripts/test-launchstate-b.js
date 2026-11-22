@@ -49,7 +49,7 @@ function git(args) {
     text.indexOf('hs-scholar-idle') !== -1 && text.indexOf('retarget-observed-holderstate') !== -1);
   const flat = text.replace(/\s+/g, ' ');
   check('§1 prereg names the overlap guard (no villager-brain.js / win-plan.js)',
-    text.indexOf('OVERLAP GUARD') !== -1 && flat.indexOf('Do NOT touch `villager-brain.js`, `win-plan.js`') !== -1);
+    text.indexOf('overlap guard') !== -1 && flat.indexOf('Do NOT touch `villager-brain.js`, `win-plan.js`,') !== -1);
   check('§1 prereg freezes Taxonomy H', flat.indexOf('Taxonomy H') !== -1);
   check('§1 prereg records the fresh band 107301-107308',
     text.indexOf('107301–107308') !== -1 && text.indexOf('107301–107308 FRESH') !== -1);
@@ -100,7 +100,7 @@ function git(args) {
     typeof AH.buildHsCtx === 'function' && typeof AH.reproduceOldBand === 'function' &&
     typeof AH.seedOf === 'function' && Array.isArray(AH.REPRODUCTION) && AH.REPRODUCTION.length === 10 &&
     typeof AH.perPartWhyNot === 'function' && typeof AH.applyPerPartLedger === 'function' &&
-    AH.EXPECTED.anchor12 === 'a0a2bf26d' && AH.EXPECTED.seeds.join(',') === '107301,107302,107303,107304,107305,107306,107307,107308');
+    AH.EXPECTED.anchor12 === 'a0a2bf26dbfa' && AH.EXPECTED.seeds.join(',') === '107301,107302,107303,107304,107305,107306,107307,107308');
 })();
 
 // ---- §2 ANALYZER SELFTEST ----
@@ -118,7 +118,7 @@ check('§2 analyzer selftest green (66 checks incl. §F H fixtures + §G Leg R +
   function doneObj() { return { kind: 'idle', state: 'done', partsLeft: 0, indoor: false, chore: null, purpose: null, targetVid: null, companion: null }; }
   const commit11 = { day: 11, part: 1, kind: 'HAVEN_CHORE', winPlanAction: 'party_wait' };
   const doc = { seed: 999003, arm: 'launchstate-b', run: 'launchstate-b', mode: 'vre',
-    policySha: '1884c8852d38aaaa', anchorCommit: 'a0a2bf26d0000000000000000000000000000000',
+    policySha: '1884c8852d38aaaa', anchorCommit: 'a0a2bf26dbfa0000000000000000000000000000',
     anchorHead: 'bcadb0e2600000000000000000000000000000000',
     senseexpedFlag: '1', partysize4Flag: '1',
     vetreengageFlag: '1', fleerepair2Flag: '1', fightally2Flag: '1',
@@ -191,7 +191,7 @@ async function liveRuns() {
   check('live run completes with 0 instrument errors', out.instrumentErrors.length === 0, JSON.stringify(out.instrumentErrors.slice(0, 3)));
   check('live run arm is launchstate-b', out.arm === 'launchstate-b' && out.run === 'launchstate-b', 'arm=' + out.arm);
   check('§6 live anchor: anchorCommit is the frozen base merge-base, anchorHead is run-time HEAD, and they differ (the fix is live)',
-    (out.anchorCommit || '').slice(0, 12) === 'a0a2bf26d' && out.anchorHead === git('rev-parse HEAD') &&
+    (out.anchorCommit || '').slice(0, 12) === 'a0a2bf26dbfa' && out.anchorHead === git('rev-parse HEAD') &&
     out.anchorCommit !== out.anchorHead,
     { anchor: (out.anchorCommit || '').slice(0, 12), head: (out.anchorHead || '').slice(0, 12) });
   check('live run carries v4 + dawnbid + pool + census + skip + holder-state arrays',

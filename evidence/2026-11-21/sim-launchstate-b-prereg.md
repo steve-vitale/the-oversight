@@ -454,3 +454,33 @@ row, no retarget seed row, the holder alive, a census row
 exists — a genuine coverage gap, still UNEXPLAINED. Nothing
 else in Leg S changes; the bar (0 unexplained parts) is
 unchanged.
+
+## CORRECTION 2026-11-22 (appended after the proof run — the frozen body above is not rewritten)
+
+The proof test (`scripts/test-launchstate-b.js`, first run
+2026-11-22 ~03:00 UTC, 40 passed / 3 failed) caught a literal
+error in this prereg: four places state a 12-character
+comparison against the 9-character short hash `a0a2bf26d`
+(the ANCHOR FIX bullet: "the merge-base's first 12 chars are
+not `a0a2bf26d`"; "the analyzer asserts `anchorCommit`
+slice(0,12) == `a0a2bf26d`"; the analyzer line: "EXPECTED seeds
+107301–107308 + anchor12 `a0a2bf26d`"; the §6 note: "`anchorCommit`
+slice(0,12) == `a0a2bf26d`"). A 12-character slice can never
+equal a 9-character literal, so the driver's refuse check and
+the analyzer's substrate check could never pass as written —
+the same latent shape as the poolfirstfail anchor miss, in the
+opposite direction (a too-short literal instead of a wrong
+commit). The base commit itself is UNCHANGED
+(`a0a2bf26d` = `a0a2bf26dbfa…`, verified live: `git merge-base
+HEAD master` = `a0a2bf26dbfa…`); the correction is that all four
+literals read **`a0a2bf26dbfa`** (the merge-base's first 12
+characters). The driver (`FROZEN_BASE12`), the analyzer
+(`EXPECTED.anchor12`), and the proof test (§3 fixture, §6 live
+check) are corrected to match. The proof test's other two
+failures were the same literal in test form (§3 substrate,
+§6 live anchor); its third failure (§1 overlap guard) was the
+test checking for the string `OVERLAP GUARD`, which this
+prereg states lowercase ("overlap guard") — the test is
+corrected to the prereg's actual wording. No bar, band,
+substrate, or instrument behavior changes; the corrected
+proof test is re-run before the judged leg.

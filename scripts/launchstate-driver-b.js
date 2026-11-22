@@ -93,7 +93,7 @@ const W4_SET = new Set(loadWave4Ids());
 // base the corpora ran under — NEVER run-time HEAD. anchorHead
 // records run-time HEAD alongside for transparency. The CLI
 // refuses to run unless the merge-base is the frozen base.
-const FROZEN_BASE12 = 'a0a2bf26d';
+const FROZEN_BASE12 = 'a0a2bf26dbfa';
 let ANCHOR = 'unknown';
 let ANCHOR_HEAD = 'unknown';
 try { ANCHOR = execSync('git merge-base HEAD master', { cwd: REPO }).toString().trim(); } catch (e) {}
