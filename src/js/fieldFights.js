@@ -1000,11 +1000,18 @@
         // SEARVOICE (sim-searvoice-a, findings #2623 + 2026-11-21
         // narration): a searcaster is a fusion-cell gun, not a bow —
         // the volley and dry lines below branch on _isGun so the gun
-        // reads as a gun (trigger / discharge / cells spent). Bow,
-        // crossbow and sling keep the old lines byte-identical.
-        // Narration only: shots, hit chance, damage and ammo spend
-        // are untouched. Default ON, no env gate.
+        // reads as a gun (trigger / discharge / cells spent).
+        // CROSSVOICE (sim-crossvoice-a, searvoice §5/§6 leftover):
+        // the same defect class on crossbow and sling — the volley
+        // and dry lines also branch on _isCrossbow / _isSling so a
+        // crossbow reads as a crossbow (crank / bolt) and a sling as
+        // a sling (whirl / stone). Bow lines survive byte-identical
+        // for bows (the else branch). Narration only: shots, hit
+        // chance, damage and ammo spend are untouched. Default ON,
+        // no env gate.
         var _isGun = (_rwId === 'searcaster');
+        var _isCrossbow = (_rwId === 'crossbow');
+        var _isSling = (_rwId === 'sling' || _rwId === 'phase_sling');
         if (_w && _ammoId) {
           var _range = _w.range || 3;
           var _rBonus = (_w.bonus || 0);
@@ -1052,6 +1059,10 @@
             } catch (e) {}
             if (_isGun) {
               rec.log.push(vName + ' has ' + (_rdef.name || 'a gun') + ' but no ' + _ammoName + ' — the trigger clicks on nothing.');
+            } else if (_isCrossbow) {
+              rec.log.push(vName + ' has ' + (_rdef.name || 'a crossbow') + ' but no ' + _ammoName + ' — the crank clicks on nothing.');
+            } else if (_isSling) {
+              rec.log.push(vName + ' has ' + (_rdef.name || 'a sling') + ' but no ' + _ammoName + ' — the pouch hangs empty.');
             } else {
               rec.log.push(vName + ' has ' + (_rdef.name || 'a bow') + ' but no ' + _ammoName + ' — the string stays drawn, useless.');
             }
@@ -1064,6 +1075,10 @@
             var _vh = 0, _vdmg = 0;
             if (_isGun) {
               rec.log.push(vName + ' sees ' + mPhrase + ' coming and raises the ' + (_rdef.name || 'Searcaster') + ' — the fight opens at range (' + _shots + ' shot' + (_shots === 1 ? '' : 's') + ').');
+            } else if (_isCrossbow) {
+              rec.log.push(vName + ' sees ' + mPhrase + ' coming and cranks a bolt into place — the fight opens at range (' + _shots + ' shot' + (_shots === 1 ? '' : 's') + ').');
+            } else if (_isSling) {
+              rec.log.push(vName + ' sees ' + mPhrase + ' coming and whirls the ' + (_rdef.name || 'Sling') + ' — the fight opens at range (' + _shots + ' shot' + (_shots === 1 ? '' : 's') + ').');
             } else {
               rec.log.push(vName + ' sees ' + mPhrase + ' coming and nocks an arrow — the fight opens at range (' + _shots + ' shot' + (_shots === 1 ? '' : 's') + ').');
             }
@@ -1086,12 +1101,20 @@
                 if (members[0].hp <= 0) members[0].alive = false;
                 if (_isGun) {
                   rec.log.push('  the ' + (_rdef.name || 'Searcaster') + ' fires — it takes ' + mPhrase + ' for ' + _vd + ' (' + Math.max(0, members[0].hp) + ' left).');
+                } else if (_isCrossbow) {
+                  rec.log.push('  loosed — the bolt takes ' + mPhrase + ' for ' + _vd + ' (' + Math.max(0, members[0].hp) + ' left).');
+                } else if (_isSling) {
+                  rec.log.push('  loosed — the stone takes ' + mPhrase + ' for ' + _vd + ' (' + Math.max(0, members[0].hp) + ' left).');
                 } else {
                   rec.log.push('  loosed — it takes ' + mPhrase + ' for ' + _vd + ' (' + Math.max(0, members[0].hp) + ' left).');
                 }
               } else {
                 if (_isGun) {
                   rec.log.push('  fires wide — the discharge scorches the dirt beside ' + mPhrase + '. (cell spent)');
+                } else if (_isCrossbow) {
+                  rec.log.push('  loosed wide — the bolt buries itself in the dirt. (spent)');
+                } else if (_isSling) {
+                  rec.log.push('  loosed wide — the stone skips away into the dirt. (spent)');
                 } else {
                   rec.log.push('  loosed wide — the arrow buries itself in the dirt. (spent)');
                 }
@@ -1101,6 +1124,10 @@
             rec.volley = { shots: _shots, hits: _vh, dmg: _vdmg, ammoLeft: Math.max(0, _ammoN) };
             if (_isGun) {
               rec.log.push(vName + ' lowers the ' + (_rdef.name || 'Searcaster') + ' — ' + mPhrase + ' is on them now. (' + _vh + '/' + _shots + ' hit)');
+            } else if (_isCrossbow) {
+              rec.log.push(vName + ' lowers the ' + (_rdef.name || 'Crossbow') + ' — ' + mPhrase + ' is on them now. (' + _vh + '/' + _shots + ' hit)');
+            } else if (_isSling) {
+              rec.log.push(vName + ' lowers the ' + (_rdef.name || 'Sling') + ' — ' + mPhrase + ' is on them now. (' + _vh + '/' + _shots + ' hit)');
             } else {
               rec.log.push(vName + ' lowers the bow — ' + mPhrase + ' is on them now. (' + _vh + '/' + _shots + ' hit)');
             }
