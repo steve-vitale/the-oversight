@@ -56,8 +56,13 @@ function git(args) {
   check('§1 prereg records AMENDMENT 1 (Leg S part-level fallback rules)',
     text.indexOf('AMENDMENT 1') !== -1 && text.indexOf('Leg S part-level fallback rules') !== -1);
   check('§1 src/ clean at proof time', (git('status --short -- src/js') || '') === '', git('status --short -- src/js'));
-  const srcDiff = git('diff a0a2bf26d HEAD -- src/js') || '';
-  check('§1 src/js identical between frozen base a0a2bf26d and HEAD (instrument-only arm)', srcDiff === '', srcDiff.slice(0, 200));
+  // COORDINATOR RE-FREEZE 2026-11-22 (landing rebase onto 4266e6cce, the doorflee2 merge):
+  // the instrument-only arm changes no src/js relative to its own base — the base is the
+  // merge-base, not the frozen pilot base a0a2bf26d (the doorflee2 port legitimately changed
+  // src/js between a0a2bf26d and this HEAD; the judged corpora stay anchored at a0a2bf26d).
+  const mergeBase = git('merge-base HEAD master') || '';
+  const srcDiff = git('diff ' + mergeBase + ' HEAD -- src/js') || '';
+  check('§1 src/js identical between the arm base (merge-base) and HEAD (instrument-only arm)', srcDiff === '', srcDiff.slice(0, 200));
   const headSha = git('rev-parse HEAD') || '';
   check('§1 HEAD is ahead of the frozen base (the anchor fix is live: merge-base != HEAD)',
     headSha !== '' && headSha.slice(0, 12) !== 'a0a2bf26d', headSha);
@@ -190,8 +195,11 @@ async function liveRuns() {
   const out = await driver.oneRun(107301);
   check('live run completes with 0 instrument errors', out.instrumentErrors.length === 0, JSON.stringify(out.instrumentErrors.slice(0, 3)));
   check('live run arm is launchstate-b', out.arm === 'launchstate-b' && out.run === 'launchstate-b', 'arm=' + out.arm);
+  // COORDINATOR RE-FREEZE 2026-11-22: anchorCommit is the merge-base at run time, which moved
+  // from a0a2bf26dbfa to 4266e6ccef2a when this branch was rebased onto the doorflee2 merge.
+  // The check's intent (anchorCommit IS the merge-base, differs from HEAD) is unchanged.
   check('§6 live anchor: anchorCommit is the frozen base merge-base, anchorHead is run-time HEAD, and they differ (the fix is live)',
-    (out.anchorCommit || '').slice(0, 12) === 'a0a2bf26dbfa' && out.anchorHead === git('rev-parse HEAD') &&
+    (out.anchorCommit || '').slice(0, 12) === (git('merge-base HEAD master') || '').slice(0, 12) && out.anchorHead === git('rev-parse HEAD') &&
     out.anchorCommit !== out.anchorHead,
     { anchor: (out.anchorCommit || '').slice(0, 12), head: (out.anchorHead || '').slice(0, 12) });
   check('live run carries v4 + dawnbid + pool + census + skip + holder-state arrays',
@@ -200,10 +208,13 @@ async function liveRuns() {
     Array.isArray(out.companionPool) && Array.isArray(out.poolCensus) &&
     Array.isArray(out.launchdefSkips) &&
     Array.isArray(out.holderState) && Array.isArray(out.holderGatePicks));
-  check('live run self-describes the substrate (all seven flags 1, allyslot3InSrc false, launchTrackOn true)',
+  // COORDINATOR RE-FREEZE 2026-11-22: allyslot3InSrc is now TRUE — the doorflee2 port landed
+  // ALLYSLOT3 in src/js on master (4266e6cce) after the pilot ran. The run still honestly
+  // reports the substrate; only the substrate changed, not the instrument.
+  check('live run self-describes the substrate (all seven flags 1, allyslot3InSrc true, launchTrackOn true)',
     out.senseexpedFlag === '1' && out.partysize4Flag === '1' && out.vetreengageFlag === '1' &&
     out.fleerepair2Flag === '1' && out.fightally2Flag === '1' && out.allyslot3Flag === '1' &&
-    out.launchsurviveFlag === '1' && out.allyslot3InSrc === false && out.launchTrackOn === true);
+    out.launchsurviveFlag === '1' && out.allyslot3InSrc === true && out.launchTrackOn === true);
   check('live run policy sha is the current competent verbatim (1884c8852d38)',
     out.policySha === '1884c8852d38', 'got ' + out.policySha);
   const hs = out.holderState || [];

@@ -484,3 +484,25 @@ prereg states lowercase ("overlap guard") — the test is
 corrected to the prereg's actual wording. No bar, band,
 substrate, or instrument behavior changes; the corrected
 proof test is re-run before the judged leg.
+
+## CORRECTION 2026-11-22 — coordinator re-freeze at landing (appended by the coordinator; the frozen body above is not rewritten)
+
+At landing the branch was rebased onto master `4266e6cce` (the doorflee2 merge, which
+landed the pinquad/dmgpin/ALLYSLOT3 port + DOORFLEE2 in src/js). The proof test
+`scripts/test-launchstate-b.js` then failed 3 checks — all three are anchor pins
+tied to the old base, not measurement defects:
+
+1. §1 src/js diff `a0a2bf26d..HEAD` is non-empty because the doorflee2 merge
+   legitimately changed src/js between the frozen pilot base and the new HEAD.
+   The arm itself touches zero src/js (`git diff 4266e6cce..HEAD -- src/` empty).
+2. §6 live anchor expected `a0a2bf26dbfa`; the driver records the merge-base at
+   run time, which is now `4266e6ccef2a`.
+3. Substrate self-description expected `allyslot3InSrc false`; ALLYSLOT3 is now
+   in src/js via the doorflee2 port, so the live run honestly reports true.
+
+The three checks are re-pointed at the merge-base (computed, not a new literal)
+and the substrate expectation is updated to true, each check's intent preserved.
+The frozen pilot record is UNCHANGED: the judged corpora stay anchored at
+`a0a2bf26d`, `FROZEN_BASE12` / `EXPECTED.anchor12` / the §3 fixture keep the
+`a0a2bf26dbfa` literal, and no bar, band, substrate, or instrument behavior
+changes. The corrected proof test is re-run before the merge.
