@@ -27,7 +27,12 @@ const driver = require(path.join(REPO, 'scripts', 'killlootbundle-driver-a'));
 const analyzer = require(path.join(REPO, 'scripts', 'analyze-killlootbundle-a'));
 const { loadGame, setupGame } = require(path.join(REPO, 'scripts', 'sim-harness'));
 
-const EVIDENCE_DIR = path.join(REPO, 'evidence', '2026-11-21');
+const EVIDENCE_DIR = process.env.KILLLOOTFIXTURE_EVIDENCE_DIR
+  ? path.join(REPO, process.env.KILLLOOTFIXTURE_EVIDENCE_DIR)
+  : path.join(REPO, 'evidence', '2026-11-21');
+// (sim-searvoice-a: the override lets a later arm re-run the fixture
+// into its own evidence dir without overwriting this arm's judged
+// JSONs; unset, the path is exactly the old one.)
 const MODE = process.env.KILLBUNDLE === '1' ? 'arm' : 'ctl';
 const RERUN = process.argv[2] === 'rerun';
 const OUT_FILE = path.join(EVIDENCE_DIR, 'killlootfixture-a-' + MODE + (RERUN ? '-rerun' : '') + '.json');
