@@ -1572,6 +1572,38 @@
           doorFlee2Quad = _df2Pin.length === 3 && allyVid === _df2Pin[0] && ally2Vid === _df2Pin[1] && ally3Vid === _df2Pin[2];
         }
       } catch (e) { doorflee2On = false; doorFlee2Quad = false; }
+      // HYPOFLOOR (sim-hypofloor-b, finding #2619): floor each
+      // fighter's hypothetical HP at 0 in the P4 morale pool, on the
+      // same terms as DOORFLEE2 — only a FULL pinned trio that
+      // entered AT THE DOOR qualifies (a trio that joins later
+      // through the shout ladder never sees this flag:
+      // allyVid/ally2Vid/ally3Vid are null until the door sets
+      // them). Wave-gated >= 4 and door-gated on
+      // opts.allyFromStart. The P4 read imagines protection 4, so a
+      // geared leader's hypothetical HP goes deeply negative after
+      // a few rounds and drags the whole quad's pooled survival
+      // below the kill horizon even when the quad is winning on
+      // live numbers — the record fields already floor the same
+      // hypothetical HP at 0 for reporting (vHpHypoLeft below);
+      // the floor extends that convention into the decision. The
+      // floor attacks the flee at its source (the misread) while
+      // the DOORFLEE2 hold catches the fights that still read
+      // hopeless even floored — the caution from doorflee-b §1 is
+      // why the two ship together, not the floor alone (floored
+      // rtd ~7.8 vs a 9.7-round kill horizon on 106830 d105).
+      // Env-gated, OFF by default: in the browser `process` is
+      // undefined, so the flag is never on there; with it unset the
+      // pool below is byte-identical and no new RNG is drawn.
+      // Independent of DOORFLEE2: its own flag, so the proof can
+      // isolate the floor from the hold.
+      var hypoFloorOn = false, hypoFloorQuad = false;
+      try {
+        hypoFloorOn = (typeof process !== 'undefined' && process.env && process.env.HYPOFLOOR === '1');
+        if (hypoFloorOn && mdef && ((mdef.wave | 0) >= 4) && opts.allyFromStart && typeof this.pinnedQuadAllies === 'function') {
+          var _hfPin = this.pinnedQuadAllies(vid) || [];
+          hypoFloorQuad = _hfPin.length === 3 && allyVid === _hfPin[0] && ally2Vid === _hfPin[1] && ally3Vid === _hfPin[2];
+        }
+      } catch (e) { hypoFloorOn = false; hypoFloorQuad = false; }
       // ABILITY — TRIPWIRE (lootabilities Arm 4): the card is strung BEFORE
       // the monster moves ("the next monster that moves is stunned"). A
       // field fight has no approach march to model, so the wire is strung
@@ -2736,6 +2768,13 @@
             // judgment imagines protection 4. The party variant uses the
             // hypothetical ally HP the same way.
             var vHpHypo = vHpStart - rec.vTakenP4;
+            // HYPOFLOOR (sim-hypofloor-b): a fighter cannot be "more
+            // than dead" in the imagined fight — floor each
+            // hypothetical HP at 0 so one deeply-negative term stops
+            // dragging the pooled survival below the kill horizon.
+            // Gated on hypoFloorQuad (same door terms as DOORFLEE2);
+            // off-mode is byte-identical.
+            if (hypoFloorQuad && vHpHypo < 0) vHpHypo = 0;
             var rtd = vHpHypo / Math.max(1, mDpr);   // rounds until the villager drops (as if prot 4)
             // WINFIELD-DMG (2026-11-03): with a live ally standing, the
             // honest comparison is the PARTY's survival against the
@@ -2748,15 +2787,15 @@
             // algebraically the old formula.
             var _partyHpHypo = vHpHypo, _partyTakenP4 = rec.vTakenP4;
             if (allyIn && allyHp > 0 && allyEntryHp > 0) {
-              _partyHpHypo += allyEntryHp - rec.allyTakenP4;
+              _partyHpHypo += hypoFloorQuad ? Math.max(0, allyEntryHp - rec.allyTakenP4) : (allyEntryHp - rec.allyTakenP4);
               _partyTakenP4 += rec.allyTakenP4;
             }
             if (ally2On && ally2In && ally2Hp > 0 && ally2EntryHp > 0) {
-              _partyHpHypo += ally2EntryHp - rec.ally2TakenP4;
+              _partyHpHypo += hypoFloorQuad ? Math.max(0, ally2EntryHp - rec.ally2TakenP4) : (ally2EntryHp - rec.ally2TakenP4);
               _partyTakenP4 += rec.ally2TakenP4;
             }
             if (ally3On && ally3In && ally3Hp > 0 && ally3EntryHp > 0) {
-              _partyHpHypo += ally3EntryHp - rec.ally3TakenP4;
+              _partyHpHypo += hypoFloorQuad ? Math.max(0, ally3EntryHp - rec.ally3TakenP4) : (ally3EntryHp - rec.ally3TakenP4);
               _partyTakenP4 += rec.ally3TakenP4;
             }
             if (_partyTakenP4 !== rec.vTakenP4) {

@@ -49,6 +49,10 @@
 // live pin, at ANY wave (S4: the pin's blast radius is wider than
 // the wave-4 census — 106253 diverged with zero pinned wave-4
 // fights). Both are pure reads, no RNG, no game-state writes.
+// HYPOFLOOR (sim-hypofloor-b, finding #2619): the corpus stamp gains
+// hypofloorFlag (process.env.HYPOFLOOR, null on the control leg) and
+// the legs-log line carries it; doorHold/everHopeless row fields are
+// unchanged. No other driver behavior changes.
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -1295,7 +1299,7 @@ async function oneRun(seed) {
   const out = {
     seed: seed, arm: 'pinquaddoor-b', run: RUN, mode: MODE, leg: MODE,
     anchorCommit: ANCHOR, standingMarker: STANDING_MARKER,
-    brainSha: BRAIN_SHA, carryPresent: CARRY_PRESENT, bumpPresent: BUMP_PRESENT, slotPresent: SLOT_PRESENT, pinPresent: PIN_PRESENT, senseexpedPresent: SENSE_PRESENT, allyslot3Flag: process.env.ALLYSLOT3 || null, pinquadFlag: process.env.PINQUAD || null, dmgpinFlag: process.env.DMGPIN || null, doorflee2Flag: process.env.DOORFLEE2 || null, senseexpedFlag: process.env.SENSEEXPED || null,
+    brainSha: BRAIN_SHA, carryPresent: CARRY_PRESENT, bumpPresent: BUMP_PRESENT, slotPresent: SLOT_PRESENT, pinPresent: PIN_PRESENT, senseexpedPresent: SENSE_PRESENT, allyslot3Flag: process.env.ALLYSLOT3 || null, pinquadFlag: process.env.PINQUAD || null, dmgpinFlag: process.env.DMGPIN || null, doorflee2Flag: process.env.DOORFLEE2 || null, hypofloorFlag: process.env.HYPOFLOOR || null, senseexpedFlag: process.env.SENSEEXPED || null,
     recorderOn: RECORDER_ON,
     policySha: POLICY_SHA, policy: 'competent',
     days: result.days, gameDays: (st.scholar && st.scholar.day) || 0,
@@ -1369,7 +1373,7 @@ if (!SEEDS.length) { console.error('PINQUADDOOR STOP: SEEDS required.'); process
     writeRobust(file, JSON.stringify(out, null, 2) + '\n');
     console.log(JSON.stringify({
       seed: out.seed, mode: out.mode, anchor: (out.anchorCommit || '').slice(0, 12),
-      brainSha: out.brainSha, carryPresent: out.carryPresent, bumpPresent: out.bumpPresent, slotPresent: out.slotPresent, pinPresent: out.pinPresent, pinquadFlag: out.pinquadFlag, dmgpinFlag: out.dmgpinFlag, doorflee2Flag: out.doorflee2Flag, senseexpedPresent: out.senseexpedPresent, allyslot3Flag: out.allyslot3Flag, pinquadFlag: out.pinquadFlag, senseexpedFlag: out.senseexpedFlag,
+      brainSha: out.brainSha, carryPresent: out.carryPresent, bumpPresent: out.bumpPresent, slotPresent: out.slotPresent, pinPresent: out.pinPresent, pinquadFlag: out.pinquadFlag, dmgpinFlag: out.dmgpinFlag, doorflee2Flag: out.doorflee2Flag, hypofloorFlag: out.hypofloorFlag, senseexpedPresent: out.senseexpedPresent, allyslot3Flag: out.allyslot3Flag, pinquadFlag: out.pinquadFlag, senseexpedFlag: out.senseexpedFlag,
       policySha: out.policySha, standingMarker: out.standingMarker,
       recorderOn: out.recorderOn,
       days: out.days, endReason: out.endReason, won: out.won,
