@@ -43,7 +43,7 @@ function argvVal(flag, dflt) {
 }
 const BEFORE_DIR = path.join(REPO, argvVal('--before', 'evidence/2026-11-22/perseed-needwave-a-ctl'));
 const AFTER_DIR = path.join(REPO, argvVal('--after', 'evidence/2026-11-22/perseed-needwave-a-arm'));
-const OUT_PREFIX = argvVal('--out', path.join(REPO, 'evidence', '2026-11-20', 'needwave-a-panel'));
+const OUT_PREFIX = argvVal('--out', path.join(REPO, 'evidence', '2026-11-22', 'needwave-a-panel'));
 
 const contractDigest = crypto.createHash('sha256')
   .update(fs.readFileSync(path.join(REPO, 'scripts', 'balance-metrics.json'))).digest('hex');
