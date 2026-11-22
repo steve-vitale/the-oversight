@@ -47629,6 +47629,72 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           if (_sear) { pool.push(_sear, _sear, _sear); }
         }
       } catch (e) {}
+      // TIER4POOL (sim-tier4pool-a, findings #2647/#2648): the tier-4
+      // POOL, not the gate, decides whether a village that reaches the
+      // gate gets a gun — with the gate lever the arm paid the gun on
+      // 2/29 tier-4 rolls (6.9%) against the 22.2% design rate, and the
+      // zero-grant split is dominated by rolled-and-lost. For a village
+      // with NO living searcaster holder, weight the tier-4 contest pool
+      // further toward the gun: +10 searcaster copies on top of
+      // GUNRATE's +3, so the gun is 14 of 28 draws (50%) instead of 4
+      // of 18 (22.2%). Contest prizes only; kill-loot and trade
+      // untouched; no draw added. Once a village holds a gun the lever
+      // switches itself off — a catch-up, not a faucet. Env-gated:
+      // TIER4POOL=1 (node sims only; in the browser process is
+      // undefined, so the lever is off — same pattern as GUNRATE). A
+      // default flip is a Steve/design call. Transient diagnostics only
+      // (_t4pLast / _t4pStats on the Game instance, never this.state)
+      // so nothing serializes into a save. The diagnostic carries a
+      // monotonic seq (Amendment A pattern from tier4access-a):
+      // rollAlienLoot returns early on the chance gate before this
+      // block, so a stale _t4pLast must never be read as this roll's.
+      try {
+        var _t4pOn = false;
+        try { _t4pOn = (typeof process !== 'undefined' && process.env && process.env.TIER4POOL === '1'); } catch (e2) {}
+        if (_t4pOn && loot.rewardSource === 'contest') {
+          var _t4pHolderless = true;
+          try {
+            var _hasSear = function (items) {
+              var _arr = items || [];
+              for (var _hi = 0; _hi < _arr.length; _hi++) {
+                var _e = _arr[_hi];
+                if (!_e) continue;
+                if ((typeof _e === 'string' ? _e : (_e.itemId || _e.id)) === 'searcaster') return true;
+              }
+              return false;
+            };
+            var _sch = this.state.scholar || {};
+            if (_hasSear(_sch.inventory)) _t4pHolderless = false;
+            if (_t4pHolderless) {
+              var _eq = _sch.equipped || {};
+              for (var _slot in _eq) { if (_eq[_slot] && ((_eq[_slot].itemId || _eq[_slot].id) === 'searcaster')) { _t4pHolderless = false; break; } }
+            }
+            if (_t4pHolderless) {
+              var _roster = ((this.state.village || {}).roster) || [];
+              for (var _ri = 0; _ri < _roster.length && _t4pHolderless; _ri++) {
+                var _p = null;
+                try { _p = (typeof this.getPerson === 'function') ? this.getPerson(_roster[_ri]) : null; } catch (e3) { _p = null; }
+                if (_p && !_p.dead && _hasSear(_p.items)) _t4pHolderless = false;
+              }
+            }
+          } catch (e4) { _t4pHolderless = false; }
+          var _t4pBoosted = false;
+          if (_t4pHolderless && tier === 4) {
+            var _sear2 = null;
+            for (var _sj = 0; _sj < pool.length; _sj++) { if (pool[_sj] && pool[_sj].id === 'searcaster') { _sear2 = pool[_sj]; break; } }
+            if (_sear2) { for (var _sk = 0; _sk < 10; _sk++) pool.push(_sear2); _t4pBoosted = true; }
+          }
+          try {
+            this._t4pSeq = (this._t4pSeq || 0) + 1;
+            var _searN = 0;
+            for (var _sn = 0; _sn < pool.length; _sn++) { if (pool[_sn] && pool[_sn].id === 'searcaster') _searN++; }
+            this._t4pLast = { seq: this._t4pSeq, inTier: tier, boosted: _t4pBoosted, holderless: _t4pHolderless, poolSize: pool.length, searCopies: _searN };
+            var _t4pSt = this._t4pStats || (this._t4pStats = { evaluated: 0, boosted: 0 });
+            _t4pSt.evaluated++;
+            if (_t4pBoosted) _t4pSt.boosted++;
+          } catch (e5) {}
+        }
+      } catch (e) {}
       return pool[Math.floor(Math.random() * pool.length)].id;
     },
     // ALIEN LOOT GRANT (Steve 2026-10-06): ONE shared path for monster-kill
