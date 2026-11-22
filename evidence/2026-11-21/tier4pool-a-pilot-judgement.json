@@ -1,0 +1,196 @@
+{
+  "bars": {
+    "primaryTier4Pay": {
+      "value": {
+        "ctlPayRate": 0.24,
+        "armPayRate": 0.4074074074074074,
+        "ratio": 1.6975308641975309,
+        "ctlEffTier4": 25,
+        "armEffTier4": 27,
+        "ctlEffTier4Sear": 6,
+        "armEffTier4Sear": 11,
+        "ctlHolderlessPay": null,
+        "armHolderlessPay": 0.6153846153846154,
+        "ctlHolderlessTier4": 0,
+        "armHolderlessTier4": 13,
+        "ctlHolderlessTier4Sear": 0,
+        "armHolderlessTier4Sear": 8
+      },
+      "pass": true
+    },
+    "secondaryGrants": {
+      "value": {
+        "ctlGrantsPerContest": 0.046153846153846156,
+        "armGrantsPerContest": 0.07913669064748201,
+        "ratio": 1.71462829736211,
+        "ctlGrants": 6,
+        "armGrants": 11
+      },
+      "pass": true
+    },
+    "instrumentValidity": {
+      "value": {
+        "ctl": true,
+        "arm": true
+      },
+      "pass": true
+    },
+    "coverage": {
+      "value": {
+        "ctl": true,
+        "arm": true
+      },
+      "pass": true
+    },
+    "guardrails": {
+      "value": {
+        "ctlMedianSurvival": 150.5,
+        "armMedianSurvival": 150.5,
+        "medianRatio": 1,
+        "ctlStarvationDeaths": 0,
+        "armStarvationDeaths": 0,
+        "starvationDelta": 0,
+        "armOnlyStarvationDeaths": 0,
+        "ctlWins": 0,
+        "armWins": 0,
+        "ctlNational": 0,
+        "armNational": 0
+      },
+      "pass": true
+    },
+    "answerQuantified": {
+      "value": {
+        "ctlZeroSplit": [
+          {
+            "seed": 107271,
+            "kind": "rolled-and-lost",
+            "why": "4 eff tier-4 rolls, 0 grants",
+            "days": 151,
+            "end": "survived",
+            "prizeCalls": 28,
+            "effTier4Rolls": 4
+          },
+          {
+            "seed": 107272,
+            "kind": "thin-gate",
+            "why": "1 eff tier-4 roll(s) in 150d, 25 prize rolls",
+            "days": 150,
+            "end": "survived",
+            "prizeCalls": 25,
+            "effTier4Rolls": 1
+          },
+          {
+            "seed": 107273,
+            "kind": "rolled-and-lost",
+            "why": "3 eff tier-4 rolls, 0 grants",
+            "days": 151,
+            "end": "survived",
+            "prizeCalls": 26,
+            "effTier4Rolls": 3
+          },
+          {
+            "seed": 107274,
+            "kind": "thin-gate",
+            "why": "1 eff tier-4 roll(s) in 121d, 21 prize rolls",
+            "days": 121,
+            "end": "village-lost",
+            "prizeCalls": 21,
+            "effTier4Rolls": 1
+          }
+        ],
+        "armZeroSplit": [
+          {
+            "seed": 107275,
+            "kind": "rolled-and-lost",
+            "why": "3 eff tier-4 rolls, 0 grants",
+            "days": 109,
+            "end": "village-lost",
+            "prizeCalls": 24,
+            "effTier4Rolls": 3
+          }
+        ],
+        "ctlArrivals": 6,
+        "armArrivals": 11
+      },
+      "pass": true
+    }
+  },
+  "verdict": "GO",
+  "zeroGrantSplit": {
+    "ctl": [
+      {
+        "seed": 107271,
+        "kind": "rolled-and-lost",
+        "why": "4 eff tier-4 rolls, 0 grants",
+        "days": 151,
+        "end": "survived",
+        "prizeCalls": 28,
+        "effTier4Rolls": 4
+      },
+      {
+        "seed": 107272,
+        "kind": "thin-gate",
+        "why": "1 eff tier-4 roll(s) in 150d, 25 prize rolls",
+        "days": 150,
+        "end": "survived",
+        "prizeCalls": 25,
+        "effTier4Rolls": 1
+      },
+      {
+        "seed": 107273,
+        "kind": "rolled-and-lost",
+        "why": "3 eff tier-4 rolls, 0 grants",
+        "days": 151,
+        "end": "survived",
+        "prizeCalls": 26,
+        "effTier4Rolls": 3
+      },
+      {
+        "seed": 107274,
+        "kind": "thin-gate",
+        "why": "1 eff tier-4 roll(s) in 121d, 21 prize rolls",
+        "days": 121,
+        "end": "village-lost",
+        "prizeCalls": 21,
+        "effTier4Rolls": 1
+      }
+    ],
+    "arm": [
+      {
+        "seed": 107275,
+        "kind": "rolled-and-lost",
+        "why": "3 eff tier-4 rolls, 0 grants",
+        "days": 109,
+        "end": "village-lost",
+        "prizeCalls": 24,
+        "effTier4Rolls": 3
+      }
+    ]
+  },
+  "gunArrivals": {
+    "ctl": 6,
+    "arm": 11
+  },
+  "wall": {
+    "ctl": {
+      "seeds": 8,
+      "wins": 0,
+      "national": 0,
+      "table": null,
+      "wave5": 3,
+      "wave4": 8,
+      "medianSurvival": 150.5,
+      "communityLost": 2
+    },
+    "arm": {
+      "seeds": 8,
+      "wins": 0,
+      "national": 0,
+      "table": null,
+      "wave5": 3,
+      "wave4": 8,
+      "medianSurvival": 150.5,
+      "communityLost": 2
+    }
+  }
+}
