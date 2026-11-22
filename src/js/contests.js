@@ -207,24 +207,7 @@
     if (contest.risk === 'high') chance = Math.min(0.95, chance + 0.15);
     if (contest.risk === 'extreme') chance = Math.min(0.95, chance + 0.3);
     const wins = (((this.state.notability || {})[who] || {}).contestWin || 0);
-    // TIER4GATE (sim-tier4gate-a, finding #2648): the tier-4 GATE is
-    // the next wall after the tier-4 pool GO — tier-4 rolls are only
-    // ~15% of prize rolls. The diag (scripts/analyze-tier4gate-diag-a.js
-    // over the tier4pool corpora) shows the binding half is the 25%
-    // apex lottery on a 62.5% eligible base, and the two widening
-    // increments are tiny: earlier apex adds 5 wave-3-extreme rolls
-    // per 261, and counting high-risk as extreme adds zero (high-risk
-    // contests fire only at waves 2-3, never apex-eligible). This lever
-    // tests the earlier apex: wave-3 extreme contests become
-    // apex-eligible. Static prior ~16% band tier-4 rate — expected to
-    // fall short of the 25% bar; the pilot measures it. Env-gated:
-    // TIER4GATE=1 (node sims only; in the browser process is undefined,
-    // so the lever is off — same pattern as GUNRATE / TIER4POOL). A
-    // default flip is a Steve/design call.
-    var _t4gOn = false;
-    try { _t4gOn = (typeof process !== 'undefined' && process.env && process.env.TIER4GATE === '1'); } catch (e2) {}
-    const apexWave = _t4gOn ? 3 : 4;
-    const apex = wave >= apexWave || wins >= (cfg.apexWins == null ? 8 : cfg.apexWins) || (this.apFavor && this.apFavor() >= (cfg.apexFavor == null ? 100 : cfg.apexFavor));
+    const apex = wave >= 4 || wins >= (cfg.apexWins == null ? 8 : cfg.apexWins) || (this.apFavor && this.apFavor() >= (cfg.apexFavor == null ? 100 : cfg.apexFavor));
     if (contest.risk === 'extreme' && apex && Math.random() < (cfg.apexChance == null ? 0.25 : cfg.apexChance)) tier = 4;
     const loot = this.rollAlienLoot({ wave, loot: { chance, tier, rewardSource: 'contest' } });
     // GUNRATE (sim-gunrate-a): a searcaster / fusion_cell prize won by
