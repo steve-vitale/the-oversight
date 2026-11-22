@@ -420,3 +420,24 @@ from staged fights). No band run.
   `killlootfixture-a-arm.json`,
   `killlootfixture-a-ctl-rerun.json`,
   `killlootfixture-a-arm-rerun.json`
+
+- **Fourth rebase at landing (adoption, master moved again):** after
+  the third rebase, local master moved to `e56ea1383` (1 commit:
+  journey succession r266 gate record, evidence-only; touches only
+  `evidence/2026-11-22/journey-succession-r266.md` — no overlap with
+  any of this arm's files), so the branch was rebased a fourth time
+  onto `e56ea1383`. The stop-at-pick quirk struck three times in this
+  rebase (picks `d61932a33`, `1e28ad16c`, `8ec05e1a8` — each appearing
+  in both the done and todo lists); each verified unapplied via
+  `git diff <pick> -- evidence/2026-11-22/` (non-empty, 279/294/296
+  lines) with the worktree clean, then `git rebase --continue` — all
+  6 commits replayed clean, each exactly once. New hashes: instrument
+  `575339d2c`, fix `a730a0612`, evidence `28fcb1f4a`, first rebase note
+  `ac8737c56`, second rebase note `ea134dc65`, third rebase note
+  `dbcb5d8a3`. The replayed fix patch is byte-identical to the
+  original (diff of the two patches, excluding the index-hash header
+  line, empty). **Proofs re-run after the fourth rebase** (same
+  commands): proof test 12/12, selftest 17/17,
+  `test-crossvoice-a.js` → GO, S1–S6 pass, exit 0, identical
+  assertions; refreshed JSONs differ only in `anchorCommit` (now
+  `dbcb5d8a3`, the branch tip at re-run time — 1 line each).
