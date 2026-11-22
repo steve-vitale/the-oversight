@@ -234,13 +234,22 @@ NOT rolled.
 
 ## Gate
 
-`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r264-gate`
-in the worktree, rebased onto `70d9dda36` before the gate (the timed-out
-run's gate log was a 294-byte partial, killed ~230/344, so the adoption
-re-ran the full gate serialized):
+Two full gates were run by the adoption (the timed-out run's gate log
+was a 294-byte partial, killed ~230/344):
 
-- **339 passed, 5 failed in 818s — 0 attributable.** The 5 are exactly
-  the standing families, identical to r152/r153:
+**Gate 1** — `node scripts/check.js --quick
+--cacheDirectory=/tmp/jest-cache-r264-gate` in the worktree, rebased
+onto `70d9dda36`: **339 passed, 5 failed in 818s — 0 attributable.**
+The 5 are exactly the standing families, identical to r152/r153:
+measurement-proof staleness pair (2), phone-frame stale receipt (1),
+120s deed-attainment timeouts (2).
+
+**Gate 2 (final, on the merge tip)** — the ship loop then landed its
+batch-ship version bump (`caaf6742c`), so the branch was rebased onto
+it (`73c42ca0e`) and the gate re-run serialized:
+`node scripts/check.js --quick
+--cacheDirectory=/tmp/jest-cache-r264-gate2`: **336 passed, 8 failed
+in 1261s — 0 attributable.** The 8:
   1. `test-measurement-proof-update.js` — "Proof source inputs are not
      current". Staleness pair, standing since r151.
   2. `test-measurement-workflow.js` — retained neutrality proof covers
@@ -251,8 +260,18 @@ re-ran the full gate serialized):
      Standing 120s-timeout family.
   5. `test-living-garden-deed-attainment.js` — TIMEOUT after 120s.
      Standing 120s-timeout family.
-- This run touches no src/, data, or index.html — only evidence +
-  scripts (probe, analyzer, clone, pass script, proof test) — so none
-  of the 5 can be caused by this run's changes. Proof test
-  `test-endgame-r264-tribute-first.js` re-run 5/5 PASS on the rebased
+  6. `test-measurement-cache-flags.js` — "both actual CLI
+     configurations complete valid neutral panels". Standing
+     measurement-cache-flags family; **passes solo 4/4**.
+  7. `test-occupation-panels.js` — TIMEOUT after 120s under load
+     (same flake r153 saw once); **passes solo 25/25**.
+  8. `test-capable-bot-20261014.js` — TIMEOUT after 120s under load,
+     sub-assertions all ok; **passes solo 42/42**.
+- The 3 extras (6–8) were each re-run solo on the merge tip and pass
+  clean — load flakes under the concurrent ship-loop + adoption-merge
+  contention during gate 2, not regressions. This run touches no src/,
+  data, or index.html — only evidence + scripts (probe, analyzer,
+  clone, pass script, proof test) — so none of the 8 can be caused by
+  this run's changes. Proof test
+  `test-endgame-r264-tribute-first.js` re-run 5/5 PASS on the merge
   tip. Log: `evidence/2026-11-21/journey-endgame-r264-gate.log`.
