@@ -2,8 +2,11 @@
 
 - Arm: sim-killrate-a, Loop A run fleshout-20261122T0815Z, DIAG/code-read arm.
 - Axis: scale-onramp · Finding #2649.
-- Base: worktree HEAD `dbab0832e` (prereg `842b6e8e7` + proof tests
-  `dbab0832e`); branch `sim-killrate-a`. No game-code change in this arm.
+- Base: worktree HEAD `dbab0832e` at band time (prereg `842b6e8e7` +
+  proof tests `dbab0832e`); branch `sim-killrate-a`. REBASED after the
+  judged band onto master `4681e740f` — see "Rebase onto 4681e740f"
+  at the end of this file; no band input changed, no re-run. No
+  game-code change in this arm.
 - Prereg: `evidence/2026-11-22/sim-killrate-a-prereg.md` (content frozen
   08:50 UTC, caller-count correction 08:56, committed `842b6e8e7` at
   09:33 — commit delayed by the write flap, see §7; no judged numbers
@@ -343,3 +346,42 @@ villager combat 36, combat 22 of its 161 deaths).
   evidence/2026-11-22/killrate-a-analysis.json` → exit 0;
   `node scripts/test-killrate-analysis-a.js --dir <same> >
   evidence/2026-11-22/killrate-a-tally.json` → exit 0.
+
+## Rebase onto 4681e740f (coordinator heads-up, received ~03:51 CST, after the judged band + evidence commit)
+
+- **Master moved:** local master `4681e740f` (Loop B sim-hypofloor-b
+  merge: hypo floor for pinned-door flee, NO-GO on F1, env-gated
+  OFF). My branch base was `e67224635`; `e67224635` is an ancestor
+  of `4681e740f`, and the range `e67224635..4681e740f` is exactly
+  that one commit.
+- **Scope verification (before rebasing):** `git show --stat
+  4681e740f` + `git diff --name-only e67224635..4681e740f` — the
+  commit touches ONLY hypofloor-b files: `evidence/2026-11-22/`
+  hypofloor-b analysis/panels/corpora, `scripts/analyze-hypofloor-b.js`,
+  `scripts/pinquaddoor-driver-b.js` (stamp-only), `scripts/test-hypofloor-b.js`,
+  and `src/js/fieldFights.js` (+45/−, the lever itself). It touches
+  NONE of this arm's files: `src/js/game.js` (`rollAlienLoot` /
+  `villagerKillLoot`) untouched, `scripts/killlootbundle-driver-a.js`
+  and `scripts/analyze-killlootbundle-a.js` untouched,
+  `scripts/test-killrate-a.js` / `scripts/test-killrate-analysis-a.js`
+  untouched, no sim-killrate-a evidence touched.
+- **fieldFights.js, read in full:** the change adds a `hypoFloorOn`
+  / `hypoFloorQuad` computation gated on `process.env.HYPOFLOOR ===
+  '1'`, wave ≥ 4, and the pinned-door terms, and floors each
+  fighter's hypothetical HP at 0 in the P4 morale pool only when
+  that flag holds. Off-mode is byte-identical (ternaries preserve
+  the old formula), no new RNG is drawn, and the volley path is
+  untouched. My substrate never sets HYPOFLOOR. The judged band's
+  trajectories therefore cannot differ on the new base — **the band
+  stands, no re-run**.
+- **Rebase:** `git rebase 4681e740f`, 3/3 clean, no conflicts.
+  `842b6e8e7` → `c314534df` (prereg), `dbab0832e` → `78cc4b47c`
+  (proof tests), `7b8d73a7f` → `c08506ac4` (band + evidence).
+  Corpus `anchorCommit` stays `dbab0832e` on all 8 files — that is
+  the tip the band ran on, kept as the run record, not rewritten.
+- **Proofs re-run on the rebased base:** `test-killlootbundle-a.js`
+  12/12, `analyze-killlootbundle-a.js --selftest` 17/17,
+  `test-killrate-a.js` 36/36, `test-killrate-analysis-a.js` 14/14;
+  tier re-tally identical (88 drops, 12 tier-4, 0 searcaster, sized
+  23 fresh-only). Worktree clean after the rebase; this section
+  committed as the rebase record (see log).
