@@ -2,8 +2,9 @@
 
 - Arm: sim-crossvoice-a (NARRATION FIX), Loop A run fleshout-20261122T0815Z, arm 1 of 1.
 - Base: worktree HEAD `e67224635` (Loop A 0215Z adoption round record);
-  local master moved twice during this arm — rebased onto `4681e740f`,
-  then onto `efd5f4273` (see §7). Branch `sim-crossvoice-a`.
+  local master moved three times during this arm — rebased onto
+  `4681e740f`, then `efd5f4273`, then `96f638c8a` (see §7).
+  Branch `sim-crossvoice-a`.
 - Prereg: `evidence/2026-11-22/sim-crossvoice-a-prereg.md` (committed
   `79ceb43eb`, frozen ~09:10 UTC 2026-11-22, before any judged run).
 - Instrument commit: `79ceb43eb` (prereg +
@@ -371,6 +372,30 @@ from staged fights). No band run.
   assertions (bow lines observed in use: "nocks an arrow", "lowers
   the bow"); refreshed JSONs differ only in `anchorCommit` (now
   `891b474cd`, the branch tip at re-run time — 1 line each).
+- **Third rebase at landing (master moved again):** after that,
+  local master moved again to `96f638c8a` (4 commits, sim-killrate-a
+  arm landing: prereg, proof tests, judged band + evidence, rebase
+  record; the tip commit touches only
+  `evidence/2026-11-22/sim-killrate-a.md` — no overlap with any of
+  this arm's files), so the branch was rebased a third time onto
+  `96f638c8a`. The stop-at-pick quirk struck a third time, this
+  time on the 5th pick (the second rebase-note commit `d04b76849`
+  — "Could not execute the todo command", rescheduled); verified
+  the pick unapplied via `git diff d04b76849 --
+  evidence/2026-11-22/` (non-empty, 1,405 lines) with the worktree
+  clean, then `git rebase --continue` — all 5 commits replayed
+  clean, each exactly once. New hashes: instrument `18efd0713`
+  (was `90126ee07`), fix `44b4e97b5` (was `fb23cb9e1`), evidence
+  `baf36f390` (was `807ef3489`), first rebase note `d61932a33`
+  (was `891b474cd`), second rebase note `1e28ad16c` (was
+  `d04b76849`). The replayed fix patch is byte-identical to the
+  original (diff of the two patches, excluding hash headers,
+  empty). **Proofs re-run after the third rebase** (same commands):
+  proof test 12/12, selftest 17/17, `test-crossvoice-a.js` → GO,
+  S1–S6 pass, exit 0, identical assertions; refreshed JSONs differ
+  only in `anchorCommit` (now `1e28ad16c`, the branch tip at re-run
+  time — 1 line each). Master was still at `96f638c8a` after the
+  re-run, so the branch sits on the current tip.
 - **Green-list scan:** no test pins the old bow lines for a
   crossbow/sling holder (see §4).
 
