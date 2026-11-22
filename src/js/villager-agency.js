@@ -736,6 +736,49 @@
       // recognized after the fight's wounds land (max = max(100, entry)).
       var _pfEntryHp = 100;
       try { var _vh = (this.state.village || {}).health || {}; if (_vh[vid] !== undefined) _pfEntryHp = _vh[vid]; } catch (e) {}
+      // HPGATE (sim-hpgate-b, finding #2619): HP-gate door parties.
+      // A pinned quad does not walk into a wave-4+ door with a member
+      // inside one round of death. The evidence: doorflee-b §6 S7 — a
+      // third ally entered a door at 3 HP (9 HP armed); doorflee2-b
+      // §6 S7 — leaders at 26 HP (died the next day) and 25 HP (fled
+      // round 1); hypofloor-b §4 — a leader at 21 HP dying next round
+      // while the monster hits 22-25 a round. The floor is 25 HP —
+      // one round of focused wave-4 damage (MONSTER-WAVES.md: wave-4
+      // damage 35-95, a 4-6 round fight) — for the WHOLE party,
+      // leader + all three pinned allies, read live at the door. A
+      // member below 25 HP cannot survive even the first exchange,
+      // let alone the kill horizon. The gate is read HERE, at the
+      // door-open decision, not at launch: the exhibit members were
+      // near-dead AT THE DOOR (the 3-HP ally was hurt in the same
+      // day's earlier door), so a launch-time gate cannot catch the
+      // evidence. When it fires the party gives the monster room —
+      // the existing avoid verb, not a fight relabelled: no fight,
+      // no flee, no death — and the agency counter lets the driver
+      // census it. Env-gated OFF by default; no RNG is drawn;
+      // off-mode is byte-identical (the whole block needs HPGATE=1
+      // AND a pinned door, and _pinDoor is false without PINQUAD).
+      var _hpGate = null;
+      try {
+        if (typeof process !== 'undefined' && process.env && process.env.HPGATE === '1' &&
+            _pinDoor && m && ((m.wave | 0) >= 4)) {
+          var _hgHealth = (this.state.village || {}).health || {};
+          var _hgParty = [vid].concat(this.pinnedQuadAllies(vid) || []);
+          for (var _hgi = 0; _hgi < _hgParty.length; _hgi++) {
+            var _hgId = _hgParty[_hgi];
+            var _hgHp = (_hgHealth[_hgId] !== undefined) ? _hgHealth[_hgId] : 100;
+            if (_hgHp < 25) { _hpGate = { id: _hgId, hp: _hgHp }; break; }
+          }
+        }
+      } catch (e) { _hpGate = null; }
+      if (_hpGate) {
+        try { st.hpgateFires = (st.hpgateFires | 0) + 1; } catch (e) {}
+        try {
+          var _hgNm = '';
+          try { _hgNm = this.displayName(_hpGate.id); } catch (e) { _hgNm = 'Someone'; }
+          if (st.exped[vid]) st.exped[vid].encounters.push('gave ' + (m.id || 'it') + ' room — ' + _hgNm + ' is too hurt to hold a door (' + _hpGate.hp + ' HP)');
+        } catch (e) {}
+        return;
+      }
       var rec = this.fieldFight(vid, m, null, { awareness: !_wpSeek, allies: allyVids.length, allyVids: allyVids, allyFromStart: _pinDoor });
       try { if (this.winPlanNoteFight) this.winPlanNoteFight(vid, allyVids); } catch (e) {}
       // The village hears about a rescue — gossip fodder, honestly sourced.
