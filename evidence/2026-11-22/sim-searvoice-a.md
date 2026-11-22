@@ -10,14 +10,14 @@
   block; none of its lines were touched.
 - Prereg: `evidence/2026-11-22/sim-searvoice-a-prereg.md` (committed
   `a436bae3f`, frozen ~03:20 UTC 2026-11-22, before any judged run;
-  rebased to `316ef0484` — see §7).
-- Instrument commit: `316ef0484` (was `a436bae3f` before the landing
-  rebase; prereg + `scripts/test-searvoice-a.js` +
+  rebased to `12d7491a8` — see §7).
+- Instrument commit: `12d7491a8` (was `a436bae3f` before the landing
+  rebases; prereg + `scripts/test-searvoice-a.js` +
   a 1-line, default-identical `EVIDENCE_DIR` override in
   `scripts/test-killlootfixture-a.js` so this arm's fixture re-runs land
   in `evidence/2026-11-22/` without overwriting the prior arm's judged
   JSONs in `evidence/2026-11-21/`).
-- Fix commit: `5895ca826` ("sim-searvoice-a: searcaster volley reads as a gun,
+- Fix commit: `b5fb12e10` ("sim-searvoice-a: searcaster volley reads as a gun,
   not a bow [needs-eyes]").
 - No live-game code change beyond narration: shots, hit chance, damage,
   ammo spend, and the CELLGATE hold are untouched. Default ON, no env
@@ -199,7 +199,7 @@ from a staged fight). No band run.
   itself in the dirt", "lowers the bow"; dry line "the string stays
   drawn"). FIXED by sim-searvoice-a (Loop A run
   fleshout-20261122T0215Z, evidence/2026-11-22/sim-searvoice-a.md,
-  verdict GO, fix commit `5895ca826`): the volley block now branches
+  verdict GO, fix commit `b5fb12e10`): the volley block now branches
   on `_rwId === 'searcaster'` (the block's own CELLGATE convention)
   — gun lines read trigger/discharge/cells spent, bow lines survive
   byte-identical for bows. This also closes finding #2623 (2026-11-20,
@@ -215,7 +215,7 @@ from a staged fight). No band run.
 
 - **Base:** worktree HEAD `4266e6cce` at first edit; branch
   `sim-searvoice-a`; prereg + instrument commit `a436bae3f` (rebased to
-  `316ef0484` — see the landing-rebase note below). **Rebased onto local
+  `12d7491a8` — see the landing-rebase notes below). **Rebased onto local
   master tip `4266e6cce`** before any edit (from `fc915f94d`, zero
   local commits, clean fast-forward, no conflicts).
 - **Pre-flight:** `node scripts/test-killlootbundle-a.js` → 12/12;
@@ -226,11 +226,13 @@ from a staged fight). No band run.
   scripts/test-searvoice-a.js` → NO-GO, S1/S2/S3 fail, S5 pass,
   exit 1.
 - **Judged (post-fix):** same command → GO, S1–S6 pass, exit 0.
-- **Fix commit:** `5895ca826` ("sim-searvoice-a: searcaster volley reads as
+- **Fix commit:** `b5fb12e10` ("sim-searvoice-a: searcaster volley reads as
   a gun, not a bow [needs-eyes]").
 - **Post-commit re-run:** `node scripts/test-searvoice-a.js` once after the
   fix commit → GO, S1–S6 pass, exit 0, assertions identical to the judged
-  run; all four JSONs carried `anchorCommit: 5895ca826` at that time.
+  run; all four JSONs carried `anchorCommit: 48baef381` (the fix commit
+  at that time; the hash has since changed twice through landing
+  rebases — see below).
 - **Rebase at landing (master moved):** local master moved to `4812f62f1`
   (sim-launchstate-b, 6 commits, none touching fieldFights.js) while this
   arm worked, so the branch was rebased onto `4812f62f1` before merging.
@@ -247,6 +249,20 @@ from a staged fight). No band run.
   `test-searvoice-a.js` → GO, S1–S6 pass, exit 0, identical assertions;
   refreshed JSONs differ from the pre-rebase ones only in `anchorCommit`
   (now `cea909dfd`, the branch tip at re-run time — 1 line each).
+- **Second landing rebase (master moved again):** local master moved to
+  `f80f68b8c` (journey-crisis r263: flee-counter + run note, 2 commits,
+  none touching this arm's files) before the merge, so the branch was
+  rebased onto `f80f68b8c`. The quirk struck again — this time on the
+  4th pick (`98a642ea0`, the rebase-note follow-up), in BOTH done and
+  todo, worktree clean, pick unapplied (verified via `git diff
+  98a642ea0 -- evidence/2026-11-22/`, non-empty). Recovered with `git
+  rebase --continue` — all 4 commits replayed clean, each exactly
+  once. New hashes: instrument `12d7491a8`, fix `b5fb12e10`, evidence
+  `46595cb44`, rebase-note `8715b3d56`. **Proofs re-run after this
+  rebase** (same commands): proof test 12/12, selftest 17/17,
+  `test-searvoice-a.js` → GO, S1–S6 pass, exit 0, identical
+  assertions; refreshed JSONs differ only in `anchorCommit` (now
+  `8715b3d56`, the branch tip at re-run time — 1 line each).
 - **Gate:** `node scripts/check.js --quick
   --cacheDirectory=/tmp/jest-cache-sim-searvoice-a` → NOT run to
   completion (load-starved at 0 CPU for ~8 min under load 24; killed —
@@ -255,10 +271,10 @@ from a staged fight). No band run.
 
 ## Files
 
-- Prereg: `evidence/2026-11-22/sim-searvoice-a-prereg.md` (`316ef0484`)
-- Instrument: `scripts/test-searvoice-a.js` (`316ef0484`); 1-line
+- Prereg: `evidence/2026-11-22/sim-searvoice-a-prereg.md` (`12d7491a8`)
+- Instrument: `scripts/test-searvoice-a.js` (`12d7491a8`); 1-line
   `EVIDENCE_DIR` override in `scripts/test-killlootfixture-a.js`
-  (`316ef0484`)
+  (`12d7491a8`)
 - Fix: `src/js/fieldFights.js` (fix commit — see §7)
 - Fixture outputs (this arm's dir):
   `evidence/2026-11-22/killlootfixture-a-ctl.json`,
