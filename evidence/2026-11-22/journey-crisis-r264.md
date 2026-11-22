@@ -287,9 +287,9 @@ done after the clear.
 - Rebased onto current master `f2d03db92` (deepening r269) clean, tip
   `241490396`; proofs re-run on the rebased tip (nopath 16/0, stucktrace
   16/0); gate 332/12, 0 attributable (above).
-- Merged ff-only into master (tip `241490396` — ff-only, so master moves
-  to exactly the branch tip); worktree released, branch `journey2-crisis`
-  deleted.
+- Merged ff-only into master (ff-only, so master moves to exactly the
+  branch tip — see git log for the tip); worktree released, branch
+  `journey2-crisis` deleted.
 - Rotation-b 6→7, read back.
 - Lock `playtest-loop-2.lock` deleted LAST with same-call per-line
   run_id verification.
