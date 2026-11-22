@@ -196,6 +196,8 @@ function traceGunLife(c, rows, volleys, takes, grant, lastCensusDay, endDay) {
   const transfers = [];
   const states = [];
   let vanished = false;
+  let vanishDay = null;
+  let vanishHolder = null;
   let lastSeenDay = grantDay;
   let lastState = null;
   let prevTotal = null;
@@ -272,6 +274,7 @@ function traceGunLife(c, rows, volleys, takes, grant, lastCensusDay, endDay) {
           // census. (A corpse-cap cull is one uninstrumented cause —
           // named as a hypothesis in the evidence, never asserted.)
           vanished = true;
+          if (vanishDay == null) { vanishDay = row.day; vanishHolder = holder; }
           events.push({ day: row.day, kind: 'vanish', from: holder, totalBefore: prevTotal, totalAfter: total });
         } else if (sightings.length) {
           const dest = sightings[0];
@@ -308,6 +311,16 @@ function traceGunLife(c, rows, volleys, takes, grant, lastCensusDay, endDay) {
     states.push({ from: lastState.from, to: lastCensusDay, holder: lastState.holder,
       loc: lastState.loc, equipped: lastState.equipped, cells: lastState.cells });
   }
+  // Terminal vanished range (sim-vanishtile-a): after a vanish the gun is
+  // gone for good — close the tiling at the vanish day so the states tile
+  // grantDay..lastCensusDay. Only when no later state re-covers the gun
+  // (a reappearance after a vanish would overlap; leave that gap visible
+  // rather than forcing a tiling).
+  if (vanished && vanishDay != null && states.length
+      && states[states.length - 1].to < vanishDay) {
+    states.push({ from: vanishDay, to: lastCensusDay, holder: vanishHolder,
+      loc: 'vanished', equipped: false, cells: null });
+  }
   // Grant-day unseen stretch: if the first sight is after the grant day,
   // prepend an unseen range so the states tile grantDay..lastCensusDay.
   if (states.length && states[0].from > grantDay) {
@@ -321,7 +334,7 @@ function traceGunLife(c, rows, volleys, takes, grant, lastCensusDay, endDay) {
 
   // Counts from the tiled states.
   let equippedDays = 0, equippedDaysWithCells = 0, equippedDaysCellsNA = 0;
-  let carriedDays = 0, stashedDays = 0, corpseDays = 0, unseenDays = 0;
+  let carriedDays = 0, stashedDays = 0, corpseDays = 0, unseenDays = 0, vanishedDays = 0;
   let cellsAtEnd = null, lastEquippedCells = null;
   for (const s of states) {
     const n = s.to - s.from + 1;
@@ -333,6 +346,7 @@ function traceGunLife(c, rows, volleys, takes, grant, lastCensusDay, endDay) {
     } else if (s.loc === 'carried' || s.loc === 'scholar-pack') carriedDays += n;
     else if (s.loc === 'stashed') stashedDays += n;
     else if (s.loc === 'corpse') corpseDays += n;
+    else if (s.loc === 'vanished') vanishedDays += n;
     else unseenDays += n;
   }
   if (lastEquippedCells != null) cellsAtEnd = lastEquippedCells;
@@ -342,8 +356,13 @@ function traceGunLife(c, rows, volleys, takes, grant, lastCensusDay, endDay) {
   // mid-life, so match the holder on that day); for the scholar the vid
   // is the vessel's id, unknown to the census — match searcaster volleys
   // in the period instead and record the vid as the inferred vessel.
+  // Days in a terminal `vanished` range are NOT held days: the holder
+  // demonstrably holds no gun there, so no fight there counts.
   const holderByDay = {};
-  for (const s of states) for (let d = s.from; d <= s.to; d++) holderByDay[d] = s.holder;
+  for (const s of states) {
+    if (s.loc === 'vanished') continue;
+    for (let d = s.from; d <= s.to; d++) holderByDay[d] = s.holder;
+  }
   let fightsEntered = 0, fightsEntered4plus = 0, gunFights = 0, gunFights4plus = 0;
   const attempts = { fired: 0, held: 0, dry: 0, shots: 0 };
   const fightRows = [];
@@ -396,7 +415,7 @@ function traceGunLife(c, rows, volleys, takes, grant, lastCensusDay, endDay) {
     equippedDays: equippedDays, equippedDaysWithCells: equippedDaysWithCells,
     equippedDaysCellsNA: equippedDaysCellsNA,
     carriedDays: carriedDays, stashedDays: stashedDays, corpseDays: corpseDays,
-    unseenDays: unseenDays, lastSeenDay: lastSeenDay,
+    unseenDays: unseenDays, vanishedDays: vanishedDays, lastSeenDay: lastSeenDay,
     fightsEntered: fightsEntered, fightsEntered4plus: fightsEntered4plus,
     gunFights: gunFights, gunFights4plus: gunFights4plus,
     attempts: attempts, fightRows: fightRows,
@@ -539,6 +558,16 @@ function selftest() {
   const t7 = traceSeed(c7);
   check('vanish flagged', t7.grants[0].vanished === true);
   check('vanish mechanism', t7.grants[0].mechanism === 'unexplained-vanish');
+  // sim-vanishtile-a: a vanish must CLOSE the tiling — the terminal
+  // `vanished` range tiles the vanish day to the last census day, so the
+  // grant counts as traced. (The old selftest never asserted this, which
+  // is how the gap passed frozen.)
+  check('vanish rows complete', t7.grants[0].rowsComplete === true);
+  check('vanish terminal range is day 5, loc vanished',
+    t7.grants[0].lifeRows.states.length === 3
+    && t7.grants[0].lifeRows.states[2].from === 5 && t7.grants[0].lifeRows.states[2].to === 5
+    && t7.grants[0].lifeRows.states[2].loc === 'vanished');
+  check('vanish days counted (1)', t7.grants[0].vanishedDays === 1);
   // Fixture 8: prevHolderState clobber (regression). A two-gun stock
   // transfers one gun to a holder who already holds one: on the
   // transfer day the new holder's count (2) differs from the old
@@ -561,6 +590,33 @@ function selftest() {
   check('clobber regression: second transfer alice->stash day 6', t8.grants[0].transfers.length >= 2 && t8.grants[0].transfers[1].day === 6 && t8.grants[0].transfers[1].from === 'alice' && t8.grants[0].transfers[1].toLoc === 'village-stash');
   check('clobber regression: rows complete', t8.grants[0].rowsComplete === true);
   check('clobber regression: mechanism gun-left-holder', t8.grants[0].mechanism === 'gun-left-holder');
+  // Fixture 9: mid-run vanish (regression for sim-vanishtile-a). The gun
+  // vanishes on day 7 of a 10-day run — the terminal `vanished` range
+  // must tile days 7–10, not just close a last-day vanish (fixture 7).
+  const c9 = JSON.parse(JSON.stringify(c2));
+  c9.v4gunLoc = [
+    { day: 3, locations: [{ loc: 'carried', vid: 'bob', count: 1 }], total: 1, personFlags: { bob: { dead: false, onRoster: true } } },
+    { day: 4, locations: [{ loc: 'equipped', vid: 'bob', count: 1, cells: 2 }], total: 1, personFlags: { bob: { dead: false, onRoster: true } } },
+    { day: 5, locations: [{ loc: 'equipped', vid: 'bob', count: 1, cells: 2 }, { loc: 'corpse', cid: 'corpse_5_x', cvid: 'bob', kind: 'villager', buried: false, count: 1 }], total: 1, personFlags: { bob: { dead: true, onRoster: false } } },
+    { day: 6, locations: [{ loc: 'corpse', cid: 'corpse_5_x', cvid: 'bob', kind: 'villager', buried: false, count: 1 }], total: 1, personFlags: { bob: { dead: true, onRoster: false } } },
+    { day: 7, locations: [], total: 0, personFlags: { bob: { dead: true, onRoster: false } } },
+    { day: 8, locations: [], total: 0, personFlags: { bob: { dead: true, onRoster: false } } },
+    { day: 9, locations: [], total: 0, personFlags: { bob: { dead: true, onRoster: false } } },
+    { day: 10, locations: [], total: 0, personFlags: { bob: { dead: true, onRoster: false } } },
+  ];
+  c9.gameDays = 10;
+  const t9 = traceSeed(c9);
+  check('mid-run vanish flagged', t9.grants[0].vanished === true);
+  check('mid-run vanish mechanism', t9.grants[0].mechanism === 'unexplained-vanish');
+  check('mid-run vanish rows complete', t9.grants[0].rowsComplete === true);
+  check('mid-run vanish terminal range tiles 7..10',
+    t9.grants[0].lifeRows.states.length === 4
+    && t9.grants[0].lifeRows.states[3].from === 7 && t9.grants[0].lifeRows.states[3].to === 10
+    && t9.grants[0].lifeRows.states[3].loc === 'vanished');
+  check('mid-run vanish days counted (4)', t9.grants[0].vanishedDays === 4);
+  check('mid-run vanish corpse days counted (2)', t9.grants[0].corpseDays === 2);
+  check('mid-run vanish equipped days counted (1)', t9.grants[0].equippedDays === 1);
+  check('mid-run vanish final disposition', t9.grants[0].finalDisposition === 'vanished-from-census');
   console.log('SELFTEST: ' + pass + ' passed, ' + fail + ' failed');
   return fail === 0;
 }
