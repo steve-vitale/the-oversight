@@ -78,7 +78,7 @@ function git(args) {
     driverSrc.indexOf("process.env.EVIDENCE_DATE || '2026-11-21'") !== -1);
   check('§6 anchor fix: driver records merge-base as anchorCommit + anchorHead, refuses a stale base',
     driverSrc.indexOf('git merge-base HEAD master') !== -1 &&
-    driverSrc.indexOf("FROZEN_BASE12 = 'a0a2bf26d'") !== -1 &&
+    driverSrc.indexOf("FROZEN_BASE12 = 'a0a2bf26dbfa'") !== -1 &&
     driverSrc.indexOf('anchorHead: ANCHOR_HEAD') !== -1 &&
     driverSrc.indexOf('merge-base') !== -1 &&
     driverSrc.indexOf('!== frozen base') !== -1);
