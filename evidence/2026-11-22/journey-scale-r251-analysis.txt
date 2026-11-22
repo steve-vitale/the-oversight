@@ -1,0 +1,233 @@
+=== journey-scale r251 arm B — Q3 GUARD: VETBAR ===
+seed 106268: vetbarRows=140 disagree4=0 disagree5=0 phantomDays4=[] phantomDays5=[] maxR4=4 maxL3=4 maxR5=2 maxL4=2 bloodedDays=24
+seed 106269: vetbarRows=140 disagree4=0 disagree5=0 phantomDays4=[130,131,132,133,134,135,136,137,138,139,140] phantomDays5=[130,131,132,133,134,135,136,137,138,139,140] maxR4=6 maxL3=6 maxR5=3 maxL4=3 bloodedDays=73
+seed 106270: vetbarRows=62 disagree4=0 disagree5=0 phantomDays4=[] phantomDays5=[] maxR4=4 maxL3=4 maxR5=0 maxL4=0 bloodedDays=0
+seed 106271: vetbarRows=125 disagree4=0 disagree5=0 phantomDays4=[] phantomDays5=[] maxR4=2 maxL3=2 maxR5=1 maxL4=1 bloodedDays=28
+seed 106272: vetbarRows=140 disagree4=0 disagree5=0 phantomDays4=[80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140] phantomDays5=[80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140] maxR4=4 maxL3=4 maxR5=1 maxL4=1 bloodedDays=16
+seed 106273: vetbarRows=140 disagree4=0 disagree5=0 phantomDays4=[] phantomDays5=[] maxR4=6 maxL3=6 maxR5=1 maxL4=1 bloodedDays=2
+seed 106274: vetbarRows=123 disagree4=0 disagree5=0 phantomDays4=[92,93,94,95,96,97,98,99,100,101,102,103,104,106,106,107,108,110,110,111,112,113,114,115,116,117,118,119,120,121,122,123] phantomDays5=[92,93,94,95,96,97,98,99,100,101,102,103,104,106,106,107,108,110,110,111,112,113,114,115,116,117,118,119,120,121,122,123] maxR4=3 maxL3=3 maxR5=0 maxL4=0 bloodedDays=0
+seed 106275: vetbarRows=140 disagree4=0 disagree5=0 phantomDays4=[124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139] phantomDays5=[124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139] maxR4=3 maxL3=3 maxR5=3 maxL4=3 bloodedDays=43
+Q3 VETBAR GUARD: GO (total disagreements 0)
+
+=== journey-scale r251 arm B — Q3 TRAJECTORY SHAPE ===
+lived-days mean 127.0 (total 1016 over 8 seeds) vs control per-seed mean 123 (3.3%; guardrail +/-25%)
+Q3 lived-days guardrail: HOLD
+lesser seat priced: 8/8 (bar >=4/8): HOLD
+
+=== journey-scale r251 arm B — Q1 NATIONAL ON-RAMP (measurement, not a gate) ===
+seed 106268: national days=11 (first d132) maxRank=global lastDay=d142 lead=2/2 cov=0/0 trade=3/3 belongGood=0 pend=-@-
+seed 106269: national days=0 maxRank=regional lastDay=d140 lead=1/3 cov=0/1 trade=0/1 belongGood=0 pend=-@- — BLOCKER: closest road LEAD 1/3 seasoned (3 active) — needs 2 more seasoned
+seed 106270: national days=0 maxRank=regional lastDay=d62 lead=1/1 cov=0/0 trade=0/3 belongGood=0 pend=-@- — BLOCKER: COLLAPSE — village over d62 before national (final: LEAD 1/3 seasoned, COV 0/3, TRADE 0/3)
+seed 106271: national days=0 maxRank=regional lastDay=d125 lead=2/2 cov=0/0 trade=0/1 belongGood=0 pend=-@- — BLOCKER: COLLAPSE — village over d125 before national (final: LEAD 2/3 seasoned, COV 0/3, TRADE 0/3)
+seed 106272: national days=0 maxRank=regional lastDay=d140 lead=2/2 cov=0/0 trade=0/3 belongGood=0 pend=-@- — BLOCKER: closest road LEAD 2/3 seasoned (2 active) — needs 1 more seasoned
+seed 106273: national days=0 maxRank=regional lastDay=d140 lead=2/2 cov=0/1 trade=3/3 belongGood=0 pend=-@- — BLOCKER: closest road TRADE 3/3 seasoned (3 active) — needs 0 more seasoned
+seed 106274: national days=0 maxRank=regional lastDay=d123 lead=2/2 cov=0/0 trade=0/0 belongGood=0 pend=-@- — BLOCKER: COLLAPSE — village over d123 before national (final: LEAD 2/3 seasoned, COV 0/3, TRADE 0/3)
+seed 106275: national days=0 maxRank=regional lastDay=d139 lead=2/2 cov=1/2 trade=0/3 belongGood=0 pend=-@- — BLOCKER: closest road LEAD 2/3 seasoned (2 active) — needs 1 more seasoned
+Q1 NATIONAL: GO — on-ramp open (1/8 seeds reached national)
+
+=== journey-scale r251 arm B — Q5 CENSUS ===
+seed 106268: days=143 over=false won=false pop=8/8 rank=global peakStage=3 stage3=d29 lesser=d33 full=- ready={"trade_charter":132,"feast_embassy":null,"military_tribute":128} delivered=trade_charter@d133 fights=26 byWave={"1":7,"2":7,"3":5,"4":6,"5":1} w4kills=4 deaths=10 byCause={"The Strike":1,"the arena":3,"dehydration":1,"a stranger":1,"the wild":3,"the night":1} booksClose=true unattributed=0 teleOnly=0
+seed 106269: days=141 over=false won=false pop=7/7 rank=regional peakStage=3 stage3=d20 lesser=d43 full=- ready={"trade_charter":null,"feast_embassy":null,"military_tribute":86} delivered=military_tribute@d130 fights=15 byWave={"1":2,"3":3,"4":5,"5":5} w4kills=8 deaths=14 byCause={"ambush":1,"Gavel":1,"contest":1,"the wild":4,"monster":4,"thirst":1,"a stranger":2} booksClose=true unattributed=0 teleOnly=0
+seed 106270: days=62 over=true won=false pop=6/6 rank=regional peakStage=3 stage3=d20 lesser=d43 full=- ready={"trade_charter":null,"feast_embassy":null,"military_tribute":null} delivered=- fights=12 byWave={"1":3,"3":4,"4":5} w4kills=0 deaths=15 byCause={"monster":7,"a stranger":1,"the wild":5,"the arena":1,"thirst":1} booksClose=true unattributed=0 teleOnly=0
+seed 106271: days=125 over=true won=false pop=5/5 rank=regional peakStage=3 stage3=d29 lesser=d43 full=- ready={"trade_charter":null,"feast_embassy":null,"military_tribute":null} delivered=- fights=38 byWave={"1":3,"2":6,"3":6,"4":23} w4kills=4 deaths=13 byCause={"contest":3,"the wild":5,"The Eater":1,"monster":3,"thirst":1} booksClose=true unattributed=0 teleOnly=0
+seed 106272: days=141 over=false won=false pop=9/9 rank=regional peakStage=3 stage3=d32 lesser=d47 full=- ready={"trade_charter":null,"feast_embassy":null,"military_tribute":null} delivered=- fights=26 byWave={"1":7,"2":3,"3":2,"4":14} w4kills=3 deaths=16 byCause={"ambush":1,"the wild":12,"monster":2,"a wound that wouldn't close":1} booksClose=true unattributed=0 teleOnly=0
+seed 106273: days=141 over=false won=false pop=7/7 rank=regional peakStage=3 stage3=d22 lesser=d39 full=- ready={"trade_charter":null,"feast_embassy":null,"military_tribute":null} delivered=- fights=16 byWave={"1":3,"2":1,"3":4,"4":8} w4kills=2 deaths=8 byCause={"monster":1,"the wild":6,"the arena":1} booksClose=true unattributed=0 teleOnly=0
+seed 106274: days=123 over=true won=false pop=1/1 rank=regional peakStage=3 stage3=d29 lesser=d45 full=- ready={"trade_charter":null,"feast_embassy":null,"military_tribute":null} delivered=- fights=17 byWave={"1":4,"2":2,"3":4,"4":7} w4kills=1 deaths=15 byCause={"ambush":2,"the arena":1,"the wild":7,"monster":3,"a wound that wouldn't close":1,"contest":1} booksClose=true unattributed=0 teleOnly=0
+seed 106275: days=140 over=false won=false pop=5/5 rank=regional peakStage=3 stage3=d27 lesser=d55 full=- ready={"trade_charter":null,"feast_embassy":null,"military_tribute":99} delivered=military_tribute@d124 fights=42 byWave={"1":12,"2":5,"3":5,"4":17,"5":3} w4kills=5 deaths=8 byCause={"a wound that wouldn't close":1,"the wild":4,"a stranger":2,"monster":1} booksClose=true unattributed=0 teleOnly=0
+
+=== journey-scale r251 arm B — Q1 SPOKEN-RAISE (not-offered split) ===
+raise talks: 7 (properly-answered 6, counter 0, not-offered-spoken 0 [DEFECT], not-offered-unspoken 1 [correct hold], failed/error 0, defect 0)
+Q1 SPOKEN-RAISE VERDICT: GO (zero not-offered-spoken AND >=1 properly-answered talk)
+
+=== journey-scale r251 arm B — Q4 GUARD: TRAP-LINE (r133 fix still live) ===
+  journey-scale-r251-b-transcript-106268-day120-nv.txt: mime shown, offered=yes, answered=yes
+  journey-scale-r251-b-transcript-106268-day90-nv.txt: mime shown, offered=yes, answered=yes
+  journey-scale-r251-b-transcript-106274-day120-nv.txt: mime shown, offered=yes, answered=yes
+trap-line sittings (driver transcripts): 3 (answered 3, defect 0); mimes anywhere in the say-capture: 20
+Q4 TRAP-LINE GUARD: HOLD (zero defect sittings AND >=1 answered sitting)
+
+=== journey-scale r251 arm B — Q2 DAILY-PLAY MIME (read-only) ===
+daily-play mimes (capture minus driver sittings with mimes): 17 (capture 20, driver sittings with mimes 3)
+driver-sitting accepts (betray watch): 9; accept events on non-driver days: 0
+resolveInvite walk lines in capture: 5; daily-play accept LOWER bound (walk lines minus driver accepts): 0
+comm-'none' villagers seen in driver transcripts: 5
+  Zewditu (app_mgpsphzb328): mime shown=yes, answered=yes
+  Farid (farid_ahmed): mime shown=no, answered=no
+  Tithi (app_mgpsphuv802): mime shown=no, answered=no
+  Mehmet (visjoin_104): mime shown=yes, answered=yes
+  Dmitri (dmitri_sokolov): mime shown=no, answered=no
+Q2 DAILY-PLAY MIME: RECORDED (read-only — daily mimes 17, daily accepts proven 0 by the capture lower bound, 0 off-day events in the betray watch; lane decision owed: teach the shared chooser to take betrayal:accept + nv:accept when offered, or keep proving fixes only where the driver looks)
+
+=== journey-scale r251 arm B — Q4 GUARD: BETRAYAL SIBLING (invite label in the opening) ===
+  journey-scale-r251-b-transcript-106268-day90.txt: turn-0 betrayal:accept offered, invite label in opening=yes
+  journey-scale-r251-b-transcript-106271-day120.txt: turn-0 betrayal:accept offered, invite label in opening=yes
+  journey-scale-r251-b-transcript-106271-day90.txt: turn-0 betrayal:accept offered, invite label in opening=yes
+  journey-scale-r251-b-transcript-106272-day120.txt: turn-0 betrayal:accept offered, invite label in opening=yes
+betrayal turn-0 offers: 4 (defect 0)
+Q4 BETRAYAL GUARD: HOLD (no live defect; Thabo verdict stands)
+
+=== journey-scale r251 arm B — Q2 GUARD: NOD-LOOP (r132 fix re-proof) ===
+  journey-scale-r251-b-transcript-106268-day120-nv.txt: max identical nv: react streak=3 (nv:nod)
+  journey-scale-r251-b-transcript-106268-day120.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106268-day90-nv.txt: max identical nv: react streak=3 (nv:nod)
+  journey-scale-r251-b-transcript-106268-day90.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106269-day120.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106269-day90.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106271-day120.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106271-day90.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106272-day120.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106272-day90-nv.txt: max identical nv: react streak=3 (nv:nod)
+  journey-scale-r251-b-transcript-106272-day90.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106273-day120-nv.txt: max identical nv: react streak=3 (nv:nod)
+  journey-scale-r251-b-transcript-106273-day120.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106273-day90-nv.txt: max identical nv: react streak=3 (nv:nod)
+  journey-scale-r251-b-transcript-106273-day90.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106274-day120-nv.txt: max identical nv: react streak=3 (nv:nod)
+  journey-scale-r251-b-transcript-106274-day120.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106274-day90-nv.txt: max identical nv: react streak=3 (nv:nod)
+  journey-scale-r251-b-transcript-106274-day90.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106275-day120.txt: max identical nv: react streak=0
+  journey-scale-r251-b-transcript-106275-day90.txt: max identical nv: react streak=0
+Q2 NOD-LOOP GUARD: HOLD (0 sittings with a >=4 identical nv: react streak; worst 3x)
+
+=== journey-scale r251 arm B — TRIBUTE PAYABILITY (M23 metric revision, measurement only) ===
+seed 106268: tribute READY-UNPAYABLE (ready=d128 payableAtReady=1 attempts=4 delivered=0 reasons={"veterans-short":4})
+seed 106269: tribute DELIVERED (ready=d86 payableAtReady=1 attempts=36 delivered=1 reasons={"veterans-short":35,"none":1})
+seed 106270: tribute NEVER-READY (ready=- payableAtReady=- attempts=0 delivered=0 reasons={})
+seed 106271: tribute NEVER-READY (ready=- payableAtReady=- attempts=0 delivered=0 reasons={})
+seed 106272: tribute NEVER-READY (ready=- payableAtReady=- attempts=0 delivered=0 reasons={})
+seed 106273: tribute NEVER-READY (ready=- payableAtReady=- attempts=0 delivered=0 reasons={})
+seed 106274: tribute NEVER-READY (ready=- payableAtReady=- attempts=0 delivered=0 reasons={})
+seed 106275: tribute DELIVERED (ready=d99 payableAtReady=1 attempts=9 delivered=1 reasons={"veterans-short":8,"none":1})
+
+=== journey-scale r251 arm B — Q5 SPOTTER (r139 wiring — d90 + end reads, measurement only) ===
+seed 106268 d90: roster 9 (alive 9) — foodXp.spotter>0: 1 (Maikel:6); spotter skill>=1: 2 (Maikel, Zewditu)
+seed 106268 end: roster 8 (alive 8) — foodXp.spotter>0: 1 (Katarina:3); spotter skill>=1: 2 (Zewditu, Liam)
+seed 106269 d90: roster 9 (alive 9) — foodXp.spotter>0: 1 (Stan:5); spotter skill>=1: 2 (Stan, Ines)
+seed 106269 end: roster 7 (alive 7) — foodXp.spotter>0: 1 (Sari:1); spotter skill>=1: 0
+seed 106270 d90: roster 0 (alive 0) — foodXp.spotter>0: 0; spotter skill>=1: 0
+seed 106270 end: roster 6 (alive 6) — foodXp.spotter>0: 1 (Elif:3); spotter skill>=1: 0
+seed 106271 d90: roster 5 (alive 5) — foodXp.spotter>0: 1 (Giulia:1); spotter skill>=1: 0
+seed 106271 end: roster 5 (alive 5) — foodXp.spotter>0: 1 (Chester:6); spotter skill>=1: 1 (Chester)
+seed 106272 d90: roster 12 (alive 12) — foodXp.spotter>0: 1 (Naran:8); spotter skill>=1: 1 (Naran)
+seed 106272 end: roster 9 (alive 9) — foodXp.spotter>0: 1 (Henry:6); spotter skill>=1: 1 (Henry)
+seed 106273 d90: roster 9 (alive 9) — foodXp.spotter>0: 0; spotter skill>=1: 1 (Tashi)
+seed 106273 end: roster 7 (alive 7) — foodXp.spotter>0: 0; spotter skill>=1: 1 (Tashi)
+seed 106274 d90: roster 5 (alive 5) — foodXp.spotter>0: 1 (Tariq:5); spotter skill>=1: 1 (Tariq)
+seed 106274 end: roster 1 (alive 1) — foodXp.spotter>0: 0; spotter skill>=1: 0
+seed 106275 d90: roster 8 (alive 8) — foodXp.spotter>0: 1 (Latifa:2); spotter skill>=1: 1 (Mia)
+seed 106275 end: roster 5 (alive 5) — foodXp.spotter>0: 1 (Ella:13); spotter skill>=1: 1 (Ella)
+
+=== journey-scale r251 arm B — SORTIE (r215-owed: the sortie ledger — measurement only) ===
+seed 106268: arm=B lingerer days=0 (wave-5 seen on 0) sorties called=0 cleared=0 broke=0 held={}
+seed 106269: arm=B lingerer days=0 (wave-5 seen on 0) sorties called=0 cleared=0 broke=0 held={}
+seed 106270: arm=B lingerer days=0 (wave-5 seen on 0) sorties called=0 cleared=0 broke=0 held={}
+seed 106271: arm=B lingerer days=0 (wave-5 seen on 0) sorties called=0 cleared=0 broke=0 held={}
+seed 106272: arm=B lingerer days=0 (wave-5 seen on 0) sorties called=0 cleared=0 broke=0 held={}
+seed 106273: arm=B lingerer days=0 (wave-5 seen on 0) sorties called=0 cleared=0 broke=0 held={}
+seed 106274: arm=B lingerer days=0 (wave-5 seen on 0) sorties called=0 cleared=0 broke=0 held={}
+seed 106275: arm=B lingerer days=0 (wave-5 seen on 0) sorties called=0 cleared=0 broke=0 held={}
+SORTIE band: lingerer days=0 (wave-5 seen on 0) sorties called=0 held={}
+
+=== journey-scale r251 arm B — W5-INSTANCE (r207-owed: one Editor or successive Editors — measurement only) ===
+seed 106268: wave-5 fights 1 (1 scholar, 0 field) — UNANSWERED — distinct lingerKeys 0 (recurring 0: none; wild fingerprints 1 (wild:rerun:hp?/? x1); fresh full-HP fights 0/1; live wave-5 entities max 1/day on 2/140 days; live-span finale_crew d141-d142 (2d))
+  rerun hp trajectory: d139:?/?
+seed 106269: wave-5 fights 22 (5 scholar, 17 field) — MIXED — distinct lingerKeys 2 (recurring 1: ling18 x4; wild fingerprints 14 (wild:spoiler:hp1300/1300 x1, wild:editor:hp1125/1500 x1, wild:editor:hp229/1500 x1, wild:editor:hp200/1500 x1, wild:finale_crew:hp?/? x4, wild:editor:hp141/1500 x1, wild:timeslot:hp1400/1400 x1, wild:timeslot:hp1312/1400 x1, wild:timeslot:hp768/1400 x1, wild:network_note:hp750/1000 x1, wild:timeslot:hp619/1400 x1, wild:network_note:hp669/1000 x1, wild:network_note:hp574/1000 x1, wild:network_note:hp530/1000 x1); fresh full-HP fights 2/22; live wave-5 entities max 6/day on 55/140 days; live-span spoiler d86-d140 (55d), cancellation d86-d140 (55d), editor d90-d140 (59d), finale_crew d100-d140 (41d), timeslot d102-d140 (8d), network_note d104-d111 (8d))
+  spoiler hp trajectory: d88:1300/1300 (field:vFlee)
+  editor hp trajectory: d94:1125/1500 (field:vFlee) -> d96:229/1500 (field:vFlee) -> d98:200/1500 (field:vFlee) -> d101:141/1500 (field:vFlee) -> d108:1/1500 [ling17] (field:vKill)
+  finale_crew hp trajectory: d100:?/? -> d100:?/? -> d100:?/? -> d100:?/?
+  timeslot hp trajectory: d102:1400/1400 (field:vFlee) -> d104:1312/1400 (field:vFlee) -> d108:768/1400 (field:vFlee) -> d109:619/1400
+  network_note hp trajectory: d108:750/1000 (field:vFlee) -> d109:669/1000 (field:vFlee) -> d109:574/1000 (field:vFlee) -> d112:530/1000 (field:vKill)
+  cancellation hp trajectory: d118:1200/1600 [ling18] (field:vFlee) -> d119:1165/1600 [ling18] (field:vFlee) -> d124:1013/1600 [ling18] (field:vFlee) -> d124:577/1600 [ling18] (field:vFlee)
+seed 106270: wave-5 fights 0 — UNANSWERED (no wave-5 fights; live wave-5 entities: max 0/day on 0/62 days)
+seed 106271: wave-5 fights 0 — UNANSWERED (no wave-5 fights; live wave-5 entities: max 0/day on 0/125 days)
+seed 106272: wave-5 fights 0 — UNANSWERED (no wave-5 fights; live wave-5 entities: max 0/day on 0/140 days)
+seed 106273: wave-5 fights 0 — UNANSWERED (no wave-5 fights; live wave-5 entities: max 0/day on 0/140 days)
+seed 106274: wave-5 fights 0 — UNANSWERED (no wave-5 fights; live wave-5 entities: max 0/day on 0/123 days)
+seed 106275: wave-5 fights 11 (3 scholar, 8 field) — MIXED — distinct lingerKeys 2 (recurring 2: ling8 x4, ling12 x4; wild fingerprints 3 (wild:cancellation:hp1200/1600 x1, wild:editor:hp1500/1500 x1, wild:spoiler:hp975/1300 x1); fresh full-HP fights 1/11; live wave-5 entities max 6/day on 37/140 days; live-span spoiler d103-d139 (33d), cancellation d104-d122 (19d), editor d106-d139 (20d), timeslot d112-d139 (38d), finale_crew d122-d139 (18d))
+  cancellation hp trajectory: d104:1200/1600 (field:mFlee) -> d118:800/1600 [ling12] (field:mFlee) -> d119:800/1600 [ling12] (field:mFlee) -> d122:800/1600 [ling12] (field:vFlee) -> d123:800/1600 [ling12]
+  spoiler hp trajectory: d105:975/1300 [ling8] (field:vFlee) -> d106:958/1300 [ling8] (field:mFlee) -> d107:958/1300 [ling8] (field:vDie) -> d111:616/1300 [ling8] -> d116:975/1300 (field:mFlee)
+  editor hp trajectory: d106:1500/1500
+
+=== journey-scale r251 arm B — Q1 ANSWERMAIL (mechanism) ===
+seed 106268: armed=0 tends=0 renegAnswers=0 accordAnswers=0 demandAnswers=0 tendsBlockedPantry=0 tendsPaidKcal=0 renegGiftKcal=0 errors=0
+seed 106269: armed=0 tends=0 renegAnswers=0 accordAnswers=0 demandAnswers=0 tendsBlockedPantry=0 tendsPaidKcal=0 renegGiftKcal=0 errors=0
+seed 106270: armed=0 tends=0 renegAnswers=0 accordAnswers=0 demandAnswers=0 tendsBlockedPantry=0 tendsPaidKcal=0 renegGiftKcal=0 errors=0
+seed 106271: armed=0 tends=0 renegAnswers=0 accordAnswers=0 demandAnswers=0 tendsBlockedPantry=0 tendsPaidKcal=0 renegGiftKcal=0 errors=0
+seed 106272: armed=0 tends=0 renegAnswers=0 accordAnswers=0 demandAnswers=0 tendsBlockedPantry=0 tendsPaidKcal=0 renegGiftKcal=0 errors=0
+seed 106273: armed=0 tends=0 renegAnswers=0 accordAnswers=0 demandAnswers=0 tendsBlockedPantry=0 tendsPaidKcal=0 renegGiftKcal=0 errors=0
+seed 106274: armed=0 tends=0 renegAnswers=0 accordAnswers=0 demandAnswers=0 tendsBlockedPantry=0 tendsPaidKcal=0 renegGiftKcal=0 errors=0
+seed 106275: armed=0 tends=0 renegAnswers=0 accordAnswers=0 demandAnswers=0 tendsBlockedPantry=0 tendsPaidKcal=0 renegGiftKcal=0 errors=0
+ANSWERMAIL arm B: firedSeeds=0/8 tends=0 renegAnswers=0 accordAnswers=0 demandAnswers=0 tendsBlockedPantry=0 missing=0
+
+=== journey-scale r251 arm B — SUBCAP GUARD (control behavior — lever OFF this run) ===
+seed 106268: seen=16 answered=1 linked=1 passedSubCapOff=0 skippedSubCap=15 notReady=0 leadActive=2/2 fired=0
+seed 106269: seen=21 answered=2 linked=2 passedSubCapOff=0 skippedSubCap=18 notReady=0 leadActive=3/1 fired=1
+seed 106270: seen=6 answered=0 linked=0 passedSubCapOff=0 skippedSubCap=3 notReady=0 leadActive=1/1 fired=0
+seed 106271: seen=23 answered=1 linked=1 passedSubCapOff=0 skippedSubCap=21 notReady=1 leadActive=2/2 fired=0
+seed 106272: seen=24 answered=0 linked=0 passedSubCapOff=0 skippedSubCap=20 notReady=0 leadActive=2/2 fired=0
+seed 106273: seen=13 answered=1 linked=1 passedSubCapOff=0 skippedSubCap=12 notReady=0 leadActive=2/2 fired=0
+seed 106274: seen=13 answered=1 linked=1 passedSubCapOff=0 skippedSubCap=9 notReady=0 leadActive=2/2 fired=0
+seed 106275: seen=15 answered=0 linked=0 passedSubCapOff=0 skippedSubCap=9 notReady=0 leadActive=2/2 fired=0
+SUBCAP arm B: firedSeeds=1/8 linked=6 passedSubCapOff=0 skippedSubCap=107 seen=131 missing=0
+
+=== journey-scale r251 arm B — Q2 BLOCKER TAXONOMY ===
+seed 106268: BLOCKER NATIONAL (national from d132)
+seed 106269: BLOCKER FORMATION-LATE (LEAD) — LEAD 3rd link village_2 formed d126 (age 15, trust 33)
+seed 106270: BLOCKER COLLAPSE (village over d62)
+seed 106271: BLOCKER COLLAPSE (village over d125)
+seed 106272: BLOCKER FORMATION-FEW (LEAD) — LEAD 2/3 ever formed (2 active)
+seed 106273: BLOCKER RUNG (TRADE) — TRADE 3/3 seasoned but national false (pend -@-)
+seed 106274: BLOCKER COLLAPSE (village over d123)
+seed 106275: BLOCKER FORMATION-FEW (LEAD) — LEAD 2/3 ever formed (2 active)
+BLOCKER arm B: {"NATIONAL":1,"FORMATION-LATE":1,"COLLAPSE":3,"FORMATION-FEW":2,"RUNG":1}
+
+=== journey-scale r251 — Q1 MUSTER (the r223-owed lever — measurement only) ===
+seed 106268 arm B: titan days=26 called=1 readyDays=3 held={"short:3":2,"short:2":6,"short:1":10,"tbfight":2,"stood-down":1,"tableActive":2} outcomes slain=1 fought=1 refused=0 fled=0 committed=3 committedDeaths=2 (raj_patel d114 the night, grace_obi d139 the arena) verbCalls={"titanWarCouncil":1,"soundTitanCall":1,"titanCommitOwn":2} verbErr=0
+seed 106269 arm B: titan days=53 called=0 readyDays=0 held={"short:6":4,"short:5":7,"absent":30,"pendingEncounter":1,"tableActive":10,"tbfight":1} outcomes slain=0 fought=0 refused=0 fled=0 committed=0 committedDeaths=0 verbCalls={"titanWarCouncil":1} verbErr=0
+seed 106270 arm B: titan days=8 called=0 readyDays=0 held={"short:2":6,"tbfight":1,"short:1":1} outcomes slain=0 fought=0 refused=0 fled=0 committed=0 committedDeaths=0 verbCalls={"titanWarCouncil":1} verbErr=0
+seed 106271 arm B: titan days=60 called=0 readyDays=0 held={"short:3":21,"short:1":12,"short:2":19,"tbfight":2,"short:6":2,"short:5":1,"short:4":2,"absent":1} outcomes slain=0 fought=0 refused=15 fled=0 committed=0 committedDeaths=0 verbCalls={"titanWarCouncil":1} verbErr=0
+seed 106272 arm B: titan days=4 called=1 readyDays=1 held={"short:5":1,"short:4":1,"short:1":1} outcomes slain=1 fought=1 refused=0 fled=0 committed=3 committedDeaths=3 (gen_uknlqek d101 the wild, tom_baker d102 the wild, farid_ahmed d101 monster) verbCalls={"titanWarCouncil":1,"soundTitanCall":1,"titanCommitOwn":2} verbErr=0
+seed 106273 arm B: titan days=5 called=1 readyDays=1 held={"short:3":2,"short:5":1,"short:4":1} outcomes slain=1 fought=1 refused=0 fled=0 committed=3 committedDeaths=1 (meera_reddy d124 the wild) verbCalls={"titanWarCouncil":1,"soundTitanCall":1,"titanCommitOwn":2} verbErr=0
+seed 106274 arm B: titan days=2 called=1 readyDays=1 held={"short:4":1} outcomes slain=1 fought=1 refused=0 fled=0 committed=2 committedDeaths=1 (nathan_lee d123 the wild) verbCalls={"titanWarCouncil":1,"soundTitanCall":1,"titanCommitOwn":2} verbErr=0
+seed 106275 arm B: titan days=91 called=2 readyDays=2 held={"short:3":5,"short:6":3,"short:4":2,"short:5":3,"short:2":1,"stood-down":2,"tbfight":5,"absent":36,"tableActive":32} outcomes slain=0 fought=1 refused=7 fled=1 committed=3 committedDeaths=0 verbCalls={"titanWarCouncil":1,"soundTitanCall":2,"titanCommitOwn":4} verbErr=0
+MUSTER band B: titan days=249 called=6 readyDays=8 slain=4 fought=5 refused=22 fled=1 committed=14 committedDeaths=7 held={"short:3":30,"short:2":32,"short:1":24,"tbfight":11,"stood-down":3,"tableActive":44,"short:6":9,"short:5":13,"absent":67,"pendingEncounter":1,"short:4":7} verbCalls={"titanWarCouncil":8,"soundTitanCall":6,"titanCommitOwn":12} verbErr=0 missing=0
+band wave-4 fights (ladder count, refused meetings included): B=85
+band wave-4 kills (killAttr w4total): B=27
+band titan fights started (outcomes log, authoritative): B=5; refused meetings: B=22
+band living-veteran peak (readiness w4): B=6; national: B=1/8
+band tribute: B=READY-UNPAYABLE,DELIVERED,NEVER-READY,NEVER-READY,NEVER-READY,NEVER-READY,NEVER-READY,DELIVERED
+COST READ B: lived-days total=1016 mean=127.0/seed; collapses: 106270,106271,106274; starvation deaths 0
+COST READ B: committed Haven blades who died: B=7 (the price, read against the kill gain — not gated)
+Q1 MUSTER VERDICT B: MOVED — the muster slew 4 titan(s); wave-4 fights 85 / kills 27, living-veteran peak 6, national 1/8
+
+=== journey-scale r251 — Q1 MARCH (the r227-owed lever — measurement only) ===
+seed 106268 arm B: march days=3 arrived=3 onTile=0 pending=0 held={} fights on-march=1 slain-on-march=1 fights off-march=0 slain-off-march=0
+seed 106269 arm B: march days=0 arrived=0 onTile=0 pending=0 held={} fights on-march=0 slain-on-march=0 fights off-march=0 slain-off-march=0
+seed 106270 arm B: march days=0 arrived=0 onTile=0 pending=0 held={} fights on-march=0 slain-on-march=0 fights off-march=0 slain-off-march=0
+seed 106271 arm B: march days=0 arrived=0 onTile=0 pending=0 held={} fights on-march=0 slain-on-march=0 fights off-march=0 slain-off-march=0
+seed 106272 arm B: march days=1 arrived=1 onTile=0 pending=0 held={} fights on-march=1 slain-on-march=1 fights off-march=0 slain-off-march=0
+seed 106273 arm B: march days=1 arrived=1 onTile=0 pending=0 held={} fights on-march=1 slain-on-march=1 fights off-march=0 slain-off-march=0
+seed 106274 arm B: march days=1 arrived=1 onTile=0 pending=0 held={} fights on-march=1 slain-on-march=1 fights off-march=0 slain-off-march=0
+seed 106275 arm B: march days=2 arrived=2 onTile=0 pending=0 held={} fights on-march=1 slain-on-march=0 fights off-march=0 slain-off-march=0
+MARCH band B: march days=8 arrived=8 onTile=0 pending=0 fought-on-march=5 slain-on-march=4 fought-off-march=0 slain-off-march=0 held={} missing=0
+Q1 MARCH VERDICT B: MOVED — a march-completed fight slew 4 titan(s); wave-4 fights 85 / kills 27
+
+=== journey-scale r251 — Q1 PLAYTEST PANEL VERDICT (the leg verdict) ===
+PANEL national: B=1/8 tableOffered(lesser)=8/8 fullSeat=0/8
+PANEL fights: wave-4 fights=85 wave-4 kills=27 wave-5 faced=3/8
+PANEL stall: standing-199 stall seeds=4/8 stallDays=120 survival=5/8
+PANEL stall split (seed-level, peak-based — r249: INVALID as written, kept for continuity): stalled-while-otherwise-ready 120d on 4/8 seeds; stalled-while-not-ready 0d on 0/8 seeds
+PANEL stall split (r251 per-day revision): stalled-while-ready (r5>=2 on the stalled day) 0d on 0/8 seeds; stalled-while-not-ready 120d on 4/8 seeds
+PANEL blockers B: ["106268:NATIONAL","106269:FORMATION-LATE","106270:COLLAPSE","106271:COLLAPSE","106272:FORMATION-FEW","106273:RUNG","106274:COLLAPSE","106275:FORMATION-FEW"]
+Q1 PLAYTEST PANEL VERDICT: INTERESTING — new blocker class: ["106273:RUNG"]; national 1/8, table offered 8/8
+Q2-WINPLAN PANEL: planSeeds=49 on 8/8 seeds partyDepartures=179 on 8 seeds (trios=0 quads=0) partyFights=680 reseeds=0 expiries=0 -> WINPLAN-LAUNCHES
+   Q2-WINPLAN-SEED seed=106268 ignited=true storeWoken=true plans=[Katarina:hunt party1] planSeeds=7 invites=0 departures=16 trios=0 quads=0 fights=52 reseeds=0 expiries=0 stageAdv=5 gearHolds=0
+   Q2-WINPLAN-SEED seed=106269 ignited=true storeWoken=true plans=[none] planSeeds=15 invites=0 departures=22 trios=0 quads=0 fights=84 reseeds=0 expiries=0 stageAdv=6 gearHolds=0
+   Q2-WINPLAN-SEED seed=106270 ignited=true storeWoken=true plans=[none] planSeeds=4 invites=0 departures=26 trios=0 quads=0 fights=107 reseeds=0 expiries=0 stageAdv=4 gearHolds=0
+   Q2-WINPLAN-SEED seed=106271 ignited=true storeWoken=true plans=[none] planSeeds=2 invites=0 departures=13 trios=0 quads=0 fights=41 reseeds=0 expiries=0 stageAdv=2 gearHolds=0
+   Q2-WINPLAN-SEED seed=106272 ignited=true storeWoken=true plans=[Emma:party] planSeeds=5 invites=0 departures=23 trios=0 quads=0 fights=62 reseeds=0 expiries=0 stageAdv=7 gearHolds=0
+   Q2-WINPLAN-SEED seed=106273 ignited=true storeWoken=true plans=[Tithi:party/buffering] planSeeds=5 invites=0 departures=38 trios=0 quads=0 fights=138 reseeds=0 expiries=0 stageAdv=8 gearHolds=0
+   Q2-WINPLAN-SEED seed=106274 ignited=true storeWoken=true plans=[none] planSeeds=3 invites=0 departures=18 trios=0 quads=0 fights=88 reseeds=0 expiries=0 stageAdv=5 gearHolds=0
+   Q2-WINPLAN-SEED seed=106275 ignited=true storeWoken=true plans=[none] planSeeds=8 invites=0 departures=23 trios=0 quads=0 fights=108 reseeds=0 expiries=0 stageAdv=4 gearHolds=0
+TRADE WATCH B: tradeSeasoned3of3=2/8 nationalViaTrade=1/1 national
