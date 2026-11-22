@@ -3,9 +3,11 @@
 //
 // Proves two things, both read-only with respect to the game:
 //  1. DRIVER half: a short live run emits census.deathCleanup with the
-//     right shape — and, before the plan system ever ignites (day 5),
-//     stats is null and firstPlanDay is null (reading the store cannot
-//     ignite it, and the instrument does not hallucinate stats).
+//     right shape — and, before any plan seeds (day 5), stats is the
+//     woken-empty store (planSeeds 0; r265 PLANWAKE wakes the store on
+//     the first Haven day by design) and firstPlanDay is null (reading
+//     the store cannot seed a plan, and the instrument does not
+//     hallucinate one).
 //  2. ANALYZER half: the R238 DEATHCLEANUP section aggregates what the
 //     records say — real clean numbers pass through, an injected
 //     dead-holder entry raises deadHolders + unseeded +
@@ -54,8 +56,13 @@ try {
     !!(dc && 'stats' in dc && 'entryCount' in dc && 'entries' in dc && 'firstPlanDay' in dc), dc);
   check('entryCount is a number, entries an array',
     !!(dc && typeof dc.entryCount === 'number' && Array.isArray(dc.entries)), dc);
-  check('stats is null before ignition (day 5, plan never seeded)',
-    !!(dc && dc.stats === null), dc && dc.stats);
+  // r265 PLANWAKE: the store now wakes on the first Haven day BY
+  // DESIGN, so stats is a zeroed object (planSeeds 0) rather than
+  // null on a 5-day run — "never ignited" now reads planSeeds 0 +
+  // firstPlanDay null, not stats null. The instrument reports the
+  // woken-but-empty store honestly; it does not hallucinate a plan.
+  check('stats is the woken-empty store before any plan seeds (day 5, planSeeds 0)',
+    !!(dc && dc.stats && dc.stats.planSeeds === 0 && dc.stats.deathCleanups === 0), dc && dc.stats);
   check('firstPlanDay is null before ignition',
     !!(dc && dc.firstPlanDay === null), dc && dc.firstPlanDay);
   check('instrumentErrors empty', !!(rec && Array.isArray(rec.instrumentErrors) && rec.instrumentErrors.length === 0),

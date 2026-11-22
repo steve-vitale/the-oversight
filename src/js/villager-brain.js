@@ -1343,6 +1343,15 @@
             try { var _pq = (typeof this.winPlanStats === 'function') ? this.winPlanStats() : null; if (_pq) _pq.partyQuads = (_pq.partyQuads || 0) + 1; } catch (e) {}
           }
         } catch (e) {}
+        // PARTYDEPARTURES (r265 — DEPARTCOUNT): the brain path is the
+        // launch path that fires in sims, but it never bumped
+        // partyDepartures — only winPlanDepart did — so the stat read
+        // 0 while plans launched (r265 pilot seed 101966: two plans
+        // in 'hunt' with partyDepartures 0). A departure launched
+        // here counts the same as one launched there (winPlanStats()
+        // initializes the defaults, so this is safe on a fresh
+        // village). Same gap the trio/quad counters already had.
+        try { var _pd = (typeof this.winPlanStats === 'function') ? this.winPlanStats() : null; if (_pd) _pd.partyDepartures = (_pd.partyDepartures || 0) + 1; } catch (e) {}
         // DEPARTURE LAUNCH BEAT (sim-departbeat-b): the
         // holder is out the door — say so now, and only now.
         // The shared hook speaks the re-seed beat when a stamp is

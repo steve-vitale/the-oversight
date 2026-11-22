@@ -166,6 +166,29 @@
      return{ready:true,action:'forage_end',reason:'You carry '+pk+' kcal; your partner is gone, and their share '+(dead?'is lost with them.':'stays with them, wherever they are.')+' Unload what you carry and end this outing.'};
     }
    }
+   // BEARER-END (journey-establishment r265: the r81 mirror — the
+   // r247 establishment panel's seed 101970 orphan: Jamie died d25
+   // leaving a joint forage run for Jack, and the run stranded 18
+   // dawns because this bearer block fires before the ending branch
+   // for ANY previous bearer, living or dead). A dead or roster-gone
+   // bearer can never come back to close their outing, so the
+   // successor may end it at Haven: unload only what the successor
+   // carries (the dead bearer's haul is lost with them — matched
+   // from the successor's pack, so it deposits 0 by construction)
+   // and close the books. A LIVING previous bearer still owns their
+   // outing — the block below stands for them. Ending needs only
+   // home, not the partner: requiring the partner would re-hang the
+   // run whenever the partner is away or dead too.
+   if(ending&&r&&r.bearer!==this.villagerId){
+    const bp=(()=>{try{return this.getPerson(r.bearer);}catch(e){return null;}})();
+    const bearerGone=!bp||!!bp.dead||!(v.roster||[]).includes(r.bearer);
+    if(bearerGone){
+     const home=homePoint(this);
+     if(!(this.map.px===home.x&&this.map.py===home.y))return block('Return to Haven to close this outing.');
+     const bFirst=(()=>{try{return this.displayName(r.bearer).split(' ')[0];}catch(e){return 'Your predecessor';}})();
+     return{ready:true,action:'forage_end',reason:'This outing belonged to '+bFirst+', who is gone. Their share is lost with them. Unload what you carry and close the books.'};
+    }
+   }
    if(!(v.roster||[]).includes(vid)||vid===this.villagerId||!this.getPerson(vid)||this.getPerson(vid).dead)return block('Your partner is no longer available for this outing.');
    if(r&&r.bearer!==this.villagerId)return block('That outing belonged to the previous bearer. It is not your promise.');
    const adj=adjacent(this,vid);if(!adj.ok)return adj.reasonKey?{...block(adj.reason),reasonKey:adj.reasonKey}:block(adj.reason);
@@ -322,9 +345,15 @@
    // depositing it after their death would conjure food nobody
    // carries. The player's matched share above is the only honest
    // arrival; the loss is named in the return line below.
+   // BEARER-END (r265): the same honesty rule for a gone bearer —
+   // the partner's virtual share was earned on the dead bearer's
+   // presses, and the successor never carried it; depositing it
+   // would conjure food nobody carries. The successor unloads only
+   // their own matched share (0 for an orphaned run).
    const partnerGone=!(v.roster||[]).includes(vid)||!this.getPerson(vid)||this.getPerson(vid).dead||!!v.away?.[vid];
+   const bearerGone=(()=>{try{const bp=this.getPerson(r.bearer);return !bp||!!bp.dead||!(v.roster||[]).includes(r.bearer);}catch(e){return false;}})();
    for(const item of (r.partnerHaul||[])){
-    if(partnerGone)break;
+    if(partnerGone||bearerGone)break;
     try{deliveredPartner+=this.depositPantryPieces(v,Object.assign({},item),500)||0;}catch(e){}
    }
    const delivered=deliveredPlayer+deliveredPartner;
@@ -337,9 +366,10 @@
    f.state=missed?'broken':'fulfilled';if(!missed)f.fulfilledDay=s.day;
    try{this.tele('favor_forage_return',{favorId:f.id,partner:vid,playerKcal:deliveredPlayer,partnerKcal:deliveredPartner,deliveredKcal:delivered,playerCounterKcal:counterKcal,kept:!missed,endedEarly:status.action==='forage_end'});}catch(e){}
    this.journalFavorPromise?.(vid,v.promises?.[vid]);this.save();
-   if(partnerGone&&status.action==='forage_end'){
+   if((partnerGone||bearerGone)&&status.action==='forage_end'){
     const dead=!!this.getPerson(vid)?.dead;
-    return{ok:true,close:true,promiseMissed:missed,line:'You unload your share: '+pantryPlayer+' kcal into the pantry'+(counterKcal>0?' — and your '+counterKcal+' kcal waits on the counter, still to be cooked':'')+'. '+first+'\'s share '+(dead?'is lost with them.':'stays with them, wherever they are.')+(missed?' The promise was missed; unloading does not earn kept-promise credit.':'')};
+    const bFirst=bearerGone?(()=>{try{return this.displayName(r.bearer).split(' ')[0];}catch(e){return 'Your predecessor';}})():null;
+    return{ok:true,close:true,promiseMissed:missed,line:'You unload your share: '+pantryPlayer+' kcal into the pantry'+(counterKcal>0?' — and your '+counterKcal+' kcal waits on the counter, still to be cooked':'')+'. '+first+'\'s share '+(dead?'is lost with them.':'stays with them, wherever they are.')+(bearerGone?' The outing belonged to '+bFirst+', who is gone — their share is lost with them.':'')+(missed?' The promise was missed; unloading does not earn kept-promise credit.':'')};
    }
    return{ok:true,close:true,promiseMissed:missed,line:'You unload both shares: '+deliveredPlayer+' kcal from you, '+deliveredPartner+' kcal from '+first+' — '+deliveredPantry+' kcal into the pantry'+(counterKcal>0?' (your '+counterKcal+' kcal waits on the counter — it still needs cooking)':'')+'.'+(missed?' The promise was missed; unloading does not earn kept-promise credit.':' You both made the trip and brought the food home.')};
   },

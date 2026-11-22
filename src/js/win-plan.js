@@ -292,10 +292,10 @@
     try { return typeof process !== 'undefined' && process.env && process.env.WILDAVOID === '1'; } catch (e) { return false; }
   }
 
-  // PLANFIX env gate (sim-planignite-fix-a): initialize the plan
-  // store on first HavenTick. OFF unless the process env carries
-  // PLANFIX=1 (node sims only; in the browser process is undefined,
-  // so the lever is off).
+  // PLANFIX env gate (sim-planignite-fix-a): RETIRED as a guard by
+  // PLANWAKE (journey-establishment r265) — the store now wakes live
+  // on the first Haven tick. Kept so sim arms that still set PLANFIX=1
+  // keep running (the flag is now a no-op for this guard).
   function planfixOn() {
     try { return typeof process !== 'undefined' && process.env && process.env.PLANFIX === '1'; } catch (e) { return false; }
   }
@@ -1098,16 +1098,21 @@
       try {
         var v = this.state && this.state.village;
         if (!v) return null;
-        // PLANFIX (sim-planignite-fix-a): the plan store is lazily
-        // initialized by stateOf() only — and this tick reads it
-        // directly, so it can never be the first spark (the
+        // PLANWAKE (journey-establishment r265, 2026-11-22): the plan
+        // store is lazily initialized by stateOf() only — and this tick
+        // reads it directly, so it can never be the first spark (the
         // planignite-a DIAG: 2/8 villages never start a plan in 150d
-        // because no initializer of any kind ever fires). With the
-        // flag on, initialize the store here so the engagement check
-        // below can run on the first call. Env-gated default-OFF:
-        // with the flag unset the guard is the old behavior.
+        // because no initializer of any kind ever fires; the r247
+        // establishment panel read 0/5 ignited for the same reason —
+        // the store is created only by a wave-3+ agency evade/flee/
+        // kill, which never fires on this leg). The store now wakes
+        // LIVE on the first Haven tick of any villager, so the
+        // engagement check below can run. The old env gate
+        // (planfixOn, sim-planignite-fix-a) is retired for this guard:
+        // waking an empty store changes nothing by itself — a plan
+        // still seeds only from lived/heard knowledge (below), and
+        // every plan path reads the store without creating it.
         if (!v.winPlan) {
-          if (!planfixOn()) return null;
           v = stateOf(this);
           if (!v) return null;
         }

@@ -86,6 +86,22 @@
    if(this.inCombat())return block('Finish the fight before hauling water.');
    if(this.state.activeContest||this.tableActive?.())return block('Finish the current event before hauling water.');
    if(!(v.roster||[]).includes(vid)||vid===this.villagerId||!this.getPerson(vid)||this.getPerson(vid).dead)return block('Your partner is no longer available for this trip.');
+   // BEARER-END (journey-establishment r265: the forage mirror —
+   // a dead or roster-gone bearer can never come back to close
+   // their creek trip, so the successor may end it at Haven. The
+   // successor unloads only what they carry; the partner's virtual
+   // water stays with the partner — see the unload below. A LIVING
+   // previous bearer still owns their trip.)
+   if(ending&&r&&r.bearer!==this.villagerId){
+    const bp=(()=>{try{return this.getPerson(r.bearer);}catch(e){return null;}})();
+    const bearerGone=!bp||!!bp.dead||!(v.roster||[]).includes(r.bearer);
+    if(bearerGone){
+     const origin=homePoint(this);
+     if(!(this.map.px===origin.x&&this.map.py===origin.y))return block('Return to Haven to close this trip.');
+     const bFirst=(()=>{try{return this.displayName(r.bearer).split(' ')[0];}catch(e){return 'Your predecessor';}})();
+     return{ready:true,action:'water_end',reason:'This creek trip belonged to '+bFirst+', who is gone. Their water is lost with them. Unload what you carry and close the books.'};
+    }
+   }
    if(r&&r.bearer!==this.villagerId)return block('That creek trip belonged to the previous bearer. It is not your promise.');
    const origin=homePoint(this),node=v.nodePos?.[vid]||{nx:origin.x,ny:origin.y},pos=v.positions?.[vid];
    const home=this.map.px===origin.x&&this.map.py===origin.y;
@@ -146,7 +162,12 @@
     this.save();
     return{ok:filled>0,incomplete:true,line:filled+'L collected from the creek. You carry '+liters(cargo(this,f))+'/2L; your partner carries '+liters(r.partnerWater)+'/2L. Carry the water back to Haven. It is still risky until boiled.'};
    }
-   const bottles=[...cargo(this,f),...r.partnerWater],vw=v.water||(v.water={clean:0,dirty:0});
+   // BEARER-END (r265): a dead bearer's partner water is virtual — it
+   // was never in any inventory — so it never becomes cistern water
+   // when the successor closes the trip. The successor unloads only
+   // what they carry (cargo, matched from their own pack).
+   const bearerGone=(()=>{try{const bp=this.getPerson(r.bearer);return !bp||!!bp.dead||!(v.roster||[]).includes(r.bearer);}catch(e){return false;}})();
+   const bottles=bearerGone?[...cargo(this,f)]:[...cargo(this,f),...r.partnerWater],vw=v.water||(v.water={clean:0,dirty:0});
    const clean=liters(bottles.filter(b=>b.quality==='clean')),dirty=liters(bottles.filter(b=>b.quality!=='clean'));
    s.water=(s.water||[]).filter(b=>b.favorId!==f.id);r.partnerWater=[];r.returned=true;r.returnedDay=s.day;r.deliveredLiters=clean+dirty;
    vw.clean=(vw.clean||0)+clean;vw.dirty=(vw.dirty||0)+dirty;
@@ -159,7 +180,8 @@
    f.state=missed?'broken':'fulfilled';if(!missed)f.fulfilledDay=s.day;
    this.tele('favor_water_return',{favorId:f.id,partner:vid,cleanLiters:clean,riskyLiters:dirty,kept:!missed,endedEarly:status.action==='water_end'});
    this.journalFavorPromise?.(vid,v.promises?.[vid]);this.save();
-   return{ok:true,close:true,promiseMissed:missed,line:'You unload '+(clean+dirty)+'L into the cistern ('+clean+'L clean, '+dirty+'L risky).'+(dirty?' The risky water still needs boiling.':'')+(missed?' The promise was missed; unloading does not earn kept-promise credit.':' You both made the trip and brought the water home.')};
+   const bFirst=bearerGone?(()=>{try{return this.displayName(r.bearer).split(' ')[0];}catch(e){return 'Your predecessor';}})():null;
+   return{ok:true,close:true,promiseMissed:missed,line:'You unload '+(clean+dirty)+'L into the cistern ('+clean+'L clean, '+dirty+'L risky).'+(dirty?' The risky water still needs boiling.':'')+(bearerGone&&status.action==='water_end'?' The trip belonged to '+bFirst+', who is gone — their water is lost with them.':'')+(missed?' The promise was missed; unloading does not earn kept-promise credit.':' You both made the trip and brought the water home.')};
   },
  });
  const traveling=G.travelingWith;
