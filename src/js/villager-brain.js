@@ -1301,16 +1301,27 @@
         if (launched.length > 2) {
           try { if (typeof this.pinQuadParty === 'function') this.pinQuadParty(vid, launched.slice()); } catch (e) {}
         }
+        // NEEDWAVE (sim-needwave-a, finding #2685): the companion
+        // sync copies the holder's target onto each companion's plan
+        // — and the plan's needWave with it. This is the launch path
+        // that fires in sims (the brain owns dawn), and it had the
+        // same drop as winPlanDepart's launchParty: a
+        // companion-inherited plan carried a wave-4 target with
+        // needWave null, invisible to every needWave >= 4 gate, so
+        // its holder launched as a pair and the beat stayed silent.
+        // Same one-line copy on all three syncs. (The first
+        // companion's sync still copies no target/node — that gap is
+        // a separate finding, not this lever.)
         try {
           var plan2 = this.winPlanOf ? this.winPlanOf(vid) : null;
           if (plan2) { plan2.stage = 'hunt'; plan2.party = launched.slice(); }
           var cplan = this.winPlanOf ? this.winPlanOf(c.companion) : null;
-          if (cplan && launched.indexOf(c.companion) !== -1) { cplan.stage = 'hunt'; cplan.party = [vid].concat(launched.filter(function (x) { return x !== c.companion; })); }
+          if (cplan && launched.indexOf(c.companion) !== -1) { cplan.stage = 'hunt'; cplan.party = [vid].concat(launched.filter(function (x) { return x !== c.companion; })); cplan.needWave = plan2 ? plan2.needWave : null; }
           if (launched.length > 1) {
             var cplan2 = this.winPlanOf ? this.winPlanOf(c.companion2) : null;
             if (cplan2) {
               cplan2.stage = 'hunt'; cplan2.party = [vid, c.companion].concat(launched.length > 2 ? [launched[2]] : []);
-              cplan2.target = plan2 ? plan2.target : null; cplan2.node = plan2 ? plan2.node : null;
+              cplan2.target = plan2 ? plan2.target : null; cplan2.node = plan2 ? plan2.node : null; cplan2.needWave = plan2 ? plan2.needWave : null;
             }
             // PARTYTRIOS (sim-partytrios-b): the brain path is the
             // launch path that fires in sims, but it never bumped
@@ -1326,7 +1337,7 @@
             var cplan3 = this.winPlanOf ? this.winPlanOf(c.companion3) : null;
             if (cplan3) {
               cplan3.stage = 'hunt'; cplan3.party = [vid, c.companion, launched[1]];
-              cplan3.target = plan2 ? plan2.target : null; cplan3.node = plan2 ? plan2.node : null;
+              cplan3.target = plan2 ? plan2.target : null; cplan3.node = plan2 ? plan2.node : null; cplan3.needWave = plan2 ? plan2.needWave : null;
             }
             // PARTYQUADS (sim-partyquads-b): the brain path is the
             // launch path that fires in sims, but it never bumped
