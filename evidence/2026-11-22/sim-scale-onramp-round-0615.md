@@ -91,13 +91,24 @@ Finding #2685 (companion sync drops needWave). Evidence:
   when the leader's wave number is set, never erase one that is already
   there — is a follow-up arm (sim-needwave-b), not a re-score of this
   one.
-- Proof status on the rebased tip (adoption re-ran): proof test
-  `scripts/test-needwave-a.js` 15/23 on the reverted code AS DESIGNED
-  (8 fail: companion wave number stays null, beat hook silent);
-  23/23 on the new code per the evidence. Analyzer selftest 19/19
-  re-green on the rebased tip. The proof test is NOT in the check.js
-  suite (verified: no mention in scripts/check.js or green-list.txt),
-  so its designed failure cannot fail the gate.
+- Proof status on the rebased tip (adoption re-ran BEFORE the guard
+  flip below): proof test `scripts/test-needwave-a.js` 15/23 on the
+  reverted code AS DESIGNED (8 fail: companion wave number stays
+  null, beat hook silent); 23/23 on the new code per the evidence.
+  Analyzer selftest 19/19 re-green on the rebased tip. The proof test
+  is NOT in the check.js suite (verified: no mention in
+  scripts/check.js or green-list.txt), so its designed failure could
+  not fail the gate.
+- GUARD FLIP (live 1415Z run, after this adoption's proof re-run):
+  the 1415Z Loop A occurrence adopted this branch itself and flipped
+  the proof test into a NO-GO revert guard (commit `512f86760`):
+  the test now proves the unguarded copy is ABSENT on both launch
+  paths and that a companion's set wave number survives departing
+  with a null-wave leader (§B2W wipe guard). Adoption verified the
+  flipped test on the reverted code: **26/26 pass, 0 fail**. A guarded
+  copy (sim-needwave-b, being registered by the 1415Z run) replaces
+  this guard with a lever proof of its own. The frozen arm record
+  (23/23 on the lever code) stands in sim-needwave-a.md §9.
 - Panel comparison (§15): decision review_required. Wins 0 → 0,
   national 0 → 0, deaths per run 96 → 97.75 (+1.75,
   regression_watch), deaths per 100 days 70.0 → 73.3 (+3.27,
@@ -108,9 +119,13 @@ Finding #2685 (companion sync drops needWave). Evidence:
 - Merge: evidence-only (instrument + evidence + prereg; no game-code
   change). Adoption rebased 5/5 clean onto current master
   `4dc7cb454`, no stop-at-pick quirk; proofs re-run on the rebased
-  tip as above; ff-only exit 0 (merge tip recorded in the tracker
-  entry for this run). Worktree released done-merged, branch
-  deleted. Verified an ancestor of HEAD.
+  tip as above. **NOT merged by this adoption** — the live 1415Z Loop
+  A run adopted this branch itself (guard flip `512f86760` + follow-up
+  arm sim-needwave-b) while this adoption was gating, so the merge,
+  release, and branch delete are theirs. The branch is left HELD on
+  tip 8c919556e + the correction below, worktree registered and clean.
+  Do NOT merge from this record alone — the 1415Z run owns the
+  closeout.
 - Findings filed: [open] null-holder wipe (the companion sync copies
   needWave unconditionally); [open] diffNeedWaves blind to null wipes.
 - Wall: wins 0 → 0, national 0 → 0, wave-5 reached 3 → 3 villages,
@@ -208,8 +223,26 @@ and its designed 15/23 on the reverted code cannot fail the gate
   evidence `ffc70261e` (merge tip, by the run).
 - sim-needwave-a: prereg `f9f6e43bd` (rebased), instrument
   `882099e9c` (rebased), lever `f0485969f` (rebased, reverted by
-  `870f61e19`), evidence `229a9d8bd` (rebased tip; merge tip
-  NEEDWAVE-MERGE-TIP).
+  `870f61e19`), evidence `229a9d8bd` (rebased tip), guard flip
+  `512f86760` (by the live 1415Z run), record `8c919556e` + handover
+  correction (this commit). Branch HELD — merge is the 1415Z run's.
 - Round record: this commit (follows the needwave evidence tip
-  `229a9d8bd`; the merge tip is recorded in the tracker entry for
-  this run).
+  `229a9d8bd`) + the handover correction below (the record's own
+  commit). The merge tip is the 1415Z run's to record, not this
+  adoption's.
+
+## Handover correction (adoption closeout)
+
+While this adoption was gating (gate launched 15:20Z, finished
+15:32:48Z), the live Loop A 1415Z occurrence adopted this branch
+itself: it committed the proof-test guard flip `512f86760` at
+15:26:52Z and began registering the follow-up arm sim-needwave-b
+(guarded copy) at ~15:31Z. The adoption's proof re-run (15/23 as
+designed) predates the flip; the flipped test was verified by this
+adoption after the fact (26/26 on the reverted code). The gate
+(339/5 in 697s, 0 attributable) ran on the pre-flip tip — the flip
+touches only `scripts/test-needwave-a.js`, which is not in the check
+suite, so the gate numbers stand. This adoption yields the merge,
+release, and branch delete to the 1415Z run and does NOT delete the
+Loop A lock (it belongs to the 1415Z run). The branch is left clean
+on this correction commit, worktree registered and heartbeated.
