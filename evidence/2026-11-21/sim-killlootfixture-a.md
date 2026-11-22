@@ -246,6 +246,18 @@ data is 2 seeds of unjudged ctl smoke (wins 0/2, national 0/2, wave
 
 - **Base:** worktree HEAD `70d9dda36`; branch
   `sim-killlootfixture-a`; prereg + instrument commit `dde89606c`.
+  **Rebased onto local master tip `caaf6742c`** (version bump
+  `70d9dda36-20261122-000556`, batch ship) before finishing — branch
+  tip now `58874b937` (3 commits replayed clean, no conflicts). The
+  rebase first refused on the safe-commit index-clobber class (all 9
+  committed files staged-as-deleted in the main index); repaired with
+  the `git ls-tree -r HEAD | git update-index --add --index-info`
+  pipe, verified empty cached diff + empty diff HEAD + hash-object
+  match per file, then rebased clean. **Proofs re-run after the
+  rebase** (same commands as above): proof test 12/12, selftest
+  17/17, all four fixture legs + compare → GO, identical results;
+  refreshed JSONs differ from the pre-rebase ones only in
+  `anchorCommit` (1 line each).
 - **Pre-flight:** `node scripts/test-killlootbundle-a.js` → 12/12;
   `node scripts/analyze-killlootbundle-a.js --selftest` → 17/17.
 - **Fixture (judged, corrected legs):**
