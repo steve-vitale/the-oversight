@@ -329,6 +329,25 @@ from staged fights). No band run.
 - **Gate:** `node scripts/check.js --quick
   --cacheDirectory=/tmp/jest-cache-sim-crossvoice-a` → exit 0
   (344 scripts), ~280 s wall under load.
+- **Rebase at landing (master moved):** local master moved to
+  `4681e740f` (sim-hypofloor-b, 1 commit; touches fieldFights.js
+  at :1572 and :2736+, outside the volley block) after the judged
+  run, so the branch was rebased onto `4681e740f` before merging.
+  The rebase hit the documented stop-at-pick quirk on the 3rd pick
+  (`ccdf68c5d`, the evidence commit — "Could not execute the todo
+  command", rescheduled); verified the pick unapplied via `git diff
+  ccdf68c5d -- evidence/2026-11-22/` (non-empty, 2.2M lines) with
+  the worktree clean, then `git rebase --continue` — all 3 commits
+  replayed clean, each exactly once. New hashes: instrument
+  `ba1fb1e92` (was `79ceb43eb`), fix `63d90d857` (was
+  `0168ec2cf`), evidence `04e153abe` (was `ccdf68c5d`). The
+  replayed fix patch is byte-identical to the original (diff of the
+  two patches, excluding hash headers, empty). **Proofs re-run
+  after the rebase** (same commands): proof test 12/12, selftest
+  17/17, `test-crossvoice-a.js` → GO, S1–S6 pass, exit 0,
+  identical assertions; refreshed JSONs differ from the pre-rebase
+  ones only in `anchorCommit` (now `04e153abe`, the branch tip at
+  re-run time — 1 line each).
 - **Green-list scan:** no test pins the old bow lines for a
   crossbow/sling holder (see §4).
 
