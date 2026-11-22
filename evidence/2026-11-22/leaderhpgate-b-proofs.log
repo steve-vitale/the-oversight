@@ -1,0 +1,39 @@
+===== test-allyslot3-b =====
+  [control from-start] outcome=vDie rounds=15 mDealt=246 allyDealt=158
+test-allyslot3-b: 18 passed, 0 failed
+exit=0
+===== test-pinquaddoor-b =====
+PASS §1 analyzer selftest passes (26/26 incl. pin census + armed driver smoke + wide secondaries)
+test-pinquaddoor-b: 35 passed, 0 failed
+exit=0
+===== test-pinquaddoor-wide-b =====
+PASS §2 analyzer reads the wide smoke corpus (exit 0, S1–S4 lines printed)
+test-pinquaddoor-wide-b: 16 passed, 0 failed
+exit=0
+===== test-dmgpin-b =====
+PASS §4 driver smoke: 0 instrument errors
+test-dmgpin-b: 29 passed, 0 failed
+exit=0
+===== test-doorflee2-b =====
+PASS §6 downedtwice regression re-runs green (test-downedtwice-b.js, exit 0)
+test-doorflee2-b: 49 passed, 0 failed
+exit=0
+===== test-downedtwice-b =====
+
+25 passed, 0 failed
+exit=0
+===== test-hypofloor-b =====
+PASS §6 downedtwice regression re-runs green (test-downedtwice-b.js, exit 0)
+test-hypofloor-b: 48 passed, 0 failed
+exit=0
+===== test-hpgate-b =====
+PASS §7 downedtwice regression re-runs green (test-downedtwice-b.js, exit 0)
+test-hpgate-b: 43 passed, 0 failed
+exit=0
+===== test-leaderhpgate-b =====
+PASS §8 floor gate re-runs green (test-hypofloor-b.js 48/48)
+test-leaderhpgate-b: 50 passed, 0 failed
+exit=0
+===== analyzer selftest =====
+PASS §J B1 secondary (rate-only): armed 2/2 ally3Vid vs control 3/3 — passes without the row floor
+analyze-leaderhpgate-b selftest: 24 passed, 0 failed

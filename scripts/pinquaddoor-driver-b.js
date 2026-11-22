@@ -58,6 +58,19 @@
 // hpgateFires (the agency-state counter the gate increments when it
 // refuses a door — 0 when the gate never fires or the flag is off).
 // No other driver behavior changes.
+// LEADERHPGATE (sim-leaderhpgate-b, finding #2619): the corpus
+// stamp gains leaderhpgateFlag + leaderhpgateFires (same shape as
+// hpgateFlag/hpgateFires) and gateAvoidNotes (the gate-avoid
+// encounter notes, parsed from the agency expedition records —
+// this closes the hpgate-b §5 instrument gap: the avoid is now
+// persisted as data, quotable in the sense test, instead of living
+// only in live state). Each v4encounters row also gains
+// leaderEntryHp (the leader's live village-health HP read BEFORE
+// the fight — the same live read the gates use at the door — so the
+// analyzer's S10 projection census can price, per fought door,
+// whether the leader was projected-dead after one/two rounds of
+// focused wave-4 damage). Pure reads only; no other driver
+// behavior changes.
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -947,10 +960,18 @@ async function oneRun(seed) {
         } catch (e) {}
         if (watch) {
           const lg = lastGateByVid[vid] || null;
+          // LEADERHPGATE (sim-leaderhpgate-b): the leader's live HP
+          // at the door — the same live read the HPGATE /
+          // LEADERHPGATE gates use at the door-open decision
+          // (village.health, missing entry defaults 100, the
+          // established default). Pure read, before the call.
+          let leaderEntryHp = 100;
+          try { const _lh = ((Game.state || {}).village || {}).health || {}; if (_lh[vid] !== undefined) leaderEntryHp = _lh[vid]; } catch (e) {}
           row = { day: gday(Game), vid: vid, mid: mdef.id, wave: w,
             mHpStart: null, // recovered post-call from the fight record
             vKill: false,
             mHpStartRec: null, // diagnostic: CONTACTREC's rec.mHpStart
+            leaderEntryHp: leaderEntryHp,
             alliesN: (opts && opts.allies) | 0,
             allyVids: ((opts && opts.allyVids) || []).slice(0, 3),
             allyFromStart: !!(opts && opts.allyFromStart),
@@ -1308,10 +1329,34 @@ async function oneRun(seed) {
   let hpgateFires = 0;
   try { const _ag = Game.agencyState ? Game.agencyState() : null; hpgateFires = (_ag && _ag.hpgateFires) | 0; } catch (e) { hpgateFires = 0; }
 
+  // LEADERHPGATE (sim-leaderhpgate-b): the leader-gate counter
+  // (same shape as hpgateFires) + the gate-avoid notes, parsed from
+  // the agency expedition records. The avoid note is the only
+  // persisted evidence of a fired gate (the meeting itself leaves
+  // no fight row) — hpgate-b §5 named this as an instrument gap,
+  // so the notes are collected here, verbatim, with the fired
+  // member's HP and the gate kind ('hold' = whole-party gate,
+  // 'lead' = leader gate). Pure reads at end of run.
+  let leaderhpgateFires = 0;
+  const gateAvoidNotes = [];
+  try {
+    const _ag2 = Game.agencyState ? Game.agencyState() : null;
+    leaderhpgateFires = (_ag2 && _ag2.leaderhpgateFires) | 0;
+    const _exp = (_ag2 && _ag2.exped) || {};
+    const _re = /gave (\S+) room — (.+?) is too hurt to (hold|lead) a door \((\d+) HP\)/;
+    for (const _vid of Object.keys(_exp)) {
+      const _encs = (_exp[_vid] && _exp[_vid].encounters) || [];
+      for (const _n of _encs) {
+        const _m = _re.exec(String(_n));
+        if (_m) gateAvoidNotes.push({ vid: _vid, mid: _m[1], name: _m[2], kind: _m[3], hp: parseInt(_m[4], 10), note: String(_n) });
+      }
+    }
+  } catch (e) { leaderhpgateFires = 0; }
+
   const out = {
     seed: seed, arm: 'pinquaddoor-b', run: RUN, mode: MODE, leg: MODE,
     anchorCommit: ANCHOR, standingMarker: STANDING_MARKER,
-    brainSha: BRAIN_SHA, carryPresent: CARRY_PRESENT, bumpPresent: BUMP_PRESENT, slotPresent: SLOT_PRESENT, pinPresent: PIN_PRESENT, senseexpedPresent: SENSE_PRESENT, allyslot3Flag: process.env.ALLYSLOT3 || null, pinquadFlag: process.env.PINQUAD || null, dmgpinFlag: process.env.DMGPIN || null, doorflee2Flag: process.env.DOORFLEE2 || null, hypofloorFlag: process.env.HYPOFLOOR || null, hpgateFlag: process.env.HPGATE || null, hpgateFires: hpgateFires, senseexpedFlag: process.env.SENSEEXPED || null,
+    brainSha: BRAIN_SHA, carryPresent: CARRY_PRESENT, bumpPresent: BUMP_PRESENT, slotPresent: SLOT_PRESENT, pinPresent: PIN_PRESENT, senseexpedPresent: SENSE_PRESENT, allyslot3Flag: process.env.ALLYSLOT3 || null, pinquadFlag: process.env.PINQUAD || null, dmgpinFlag: process.env.DMGPIN || null, doorflee2Flag: process.env.DOORFLEE2 || null, hypofloorFlag: process.env.HYPOFLOOR || null, hpgateFlag: process.env.HPGATE || null, hpgateFires: hpgateFires, leaderhpgateFlag: process.env.LEADERHPGATE || null, leaderhpgateFires: leaderhpgateFires, gateAvoidNotes: gateAvoidNotes, senseexpedFlag: process.env.SENSEEXPED || null,
     recorderOn: RECORDER_ON,
     policySha: POLICY_SHA, policy: 'competent',
     days: result.days, gameDays: (st.scholar && st.scholar.day) || 0,
@@ -1385,7 +1430,7 @@ if (!SEEDS.length) { console.error('PINQUADDOOR STOP: SEEDS required.'); process
     writeRobust(file, JSON.stringify(out, null, 2) + '\n');
     console.log(JSON.stringify({
       seed: out.seed, mode: out.mode, anchor: (out.anchorCommit || '').slice(0, 12),
-      brainSha: out.brainSha, carryPresent: out.carryPresent, bumpPresent: out.bumpPresent, slotPresent: out.slotPresent, pinPresent: out.pinPresent, pinquadFlag: out.pinquadFlag, dmgpinFlag: out.dmgpinFlag, doorflee2Flag: out.doorflee2Flag, hypofloorFlag: out.hypofloorFlag, hpgateFlag: out.hpgateFlag, hpgateFires: out.hpgateFires, senseexpedPresent: out.senseexpedPresent, allyslot3Flag: out.allyslot3Flag, pinquadFlag: out.pinquadFlag, senseexpedFlag: out.senseexpedFlag,
+      brainSha: out.brainSha, carryPresent: out.carryPresent, bumpPresent: out.bumpPresent, slotPresent: out.slotPresent, pinPresent: out.pinPresent, pinquadFlag: out.pinquadFlag, dmgpinFlag: out.dmgpinFlag, doorflee2Flag: out.doorflee2Flag, hypofloorFlag: out.hypofloorFlag, hpgateFlag: out.hpgateFlag, hpgateFires: out.hpgateFires, leaderhpgateFlag: out.leaderhpgateFlag, leaderhpgateFires: out.leaderhpgateFires, gateAvoidNotes: out.gateAvoidNotes.length, senseexpedPresent: out.senseexpedPresent, allyslot3Flag: out.allyslot3Flag, pinquadFlag: out.pinquadFlag, senseexpedFlag: out.senseexpedFlag,
       policySha: out.policySha, standingMarker: out.standingMarker,
       recorderOn: out.recorderOn,
       days: out.days, endReason: out.endReason, won: out.won,

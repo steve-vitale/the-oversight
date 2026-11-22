@@ -779,6 +779,51 @@
         } catch (e) {}
         return;
       }
+      // LEADERHPGATE (sim-leaderhpgate-b, finding #2619): the
+      // leader-HP gate. A pinned quad does not walk into a wave-4+
+      // door with its LEADER inside one round of death. The evidence
+      // (hpgate-b §5 sense test): the d57 reunion flee was really
+      // the leader collapsing — Patrick 67 → 44 → 22 HP in two
+      // rounds under focused monster damage (22–25/round, hypofloor-b
+      // §4) — while Victor, the whole-party gate's trigger at 23 HP,
+      // was never hit. The trigger (any member < 25) and the
+      // mechanism (leader HP collapse) coincided without being the
+      // same thing. This gate reads the LEADER only, live at the
+      // door, strict < 25 — the same number as HPGATE, the same
+      // door-open decision, the same avoid verb (no fight, no flee,
+      // no death) and the same counter shape. Env-gated OFF by
+      // default; no RNG is drawn; off-mode is byte-identical (the
+      // whole block needs LEADERHPGATE=1 AND a pinned door).
+      // SUBSUMPTION, stated here so the prereg can price it: the
+      // HPGATE block above checks [leader, ...pinned] in order and
+      // fires on ANY member < 25, so with HPGATE=1 on the same leg
+      // this gate's condition (leader < 25) is already covered —
+      // its marginal fires are expected to be 0, and the arm's
+      // yield is the leader-projection diagnostic (see the
+      // analyzer's S10): whether a PROJECTION gate (leader HP after
+      // one/two rounds of focused wave-4 damage) would have a pool
+      // the < 25 floor never touches. The gate is placed AFTER
+      // HPGATE deliberately: an additional gate alongside the
+      // whole-party floor, so its counter measures marginal fires
+      // only — never stealing attribution from HPGATE's census.
+      var _lhGate = null;
+      try {
+        if (typeof process !== 'undefined' && process.env && process.env.LEADERHPGATE === '1' &&
+            _pinDoor && m && ((m.wave | 0) >= 4)) {
+          var _lhHealth = (this.state.village || {}).health || {};
+          var _lhHp = (_lhHealth[vid] !== undefined) ? _lhHealth[vid] : 100;
+          if (_lhHp < 25) { _lhGate = { id: vid, hp: _lhHp }; }
+        }
+      } catch (e) { _lhGate = null; }
+      if (_lhGate) {
+        try { st.leaderhpgateFires = (st.leaderhpgateFires | 0) + 1; } catch (e) {}
+        try {
+          var _lhNm = '';
+          try { _lhNm = this.displayName(_lhGate.id); } catch (e) { _lhNm = 'Someone'; }
+          if (st.exped[vid]) st.exped[vid].encounters.push('gave ' + (m.id || 'it') + ' room — ' + _lhNm + ' is too hurt to lead a door (' + _lhGate.hp + ' HP)');
+        } catch (e) {}
+        return;
+      }
       var rec = this.fieldFight(vid, m, null, { awareness: !_wpSeek, allies: allyVids.length, allyVids: allyVids, allyFromStart: _pinDoor });
       try { if (this.winPlanNoteFight) this.winPlanNoteFight(vid, allyVids); } catch (e) {}
       // The village hears about a rescue — gossip fodder, honestly sourced.
