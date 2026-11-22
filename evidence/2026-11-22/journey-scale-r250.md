@@ -557,3 +557,10 @@ secret-place / seek_taken cross-sitting reuse (small pools by design).
 - Analyzer proof test: worktree `scripts/test-journey-scale-r250-analyzer-20261122.js` (145 pass)
 - Fix proof test: worktree `scripts/test-convo-broken-favor-resolved-r250-20261122.js` (seeds 5001–5006 green)
 - Telemetry rows: `.../evidence/2026-11-22/journey-scale-r250-telemetry-row-*.json`
+
+## Rebase record (parent closeout, 2026-11-22 ~12:10Z)
+
+- Master had moved at closeout (5 commits since base `3d7a25427`: gunlife-a ×3, scale-onramp adoption, hpgate-b); zero file overlap with this branch's 8 files. Rebased cleanly, no conflicts: `92f38507e` → `20783a0be`, `239e6a456` → `4c8dd5b84`, `b9d9ddda7` → `125a8dd06`, new base `87b2122f3`. The gate's `92f38507e` references above are the pre-rebase hashes — the gate did run on that commit; the merged content is identical (rebase only).
+- Proofs re-run green on the rebased tip `125a8dd06`: analyzer 145/145, broken-favor proof PASS (0 failed), godpath repay-broken-live-need 17/17.
+- Registry lock was held by live siblings at closeout (flesh-out-loop registrations running since 11:36–11:37Z, plus a 12:04Z journey2-endgame heartbeat) — NOT stale, NOT deleted. Journey-scale heartbeat last landed 11:33:20Z; the hbloop keeps retrying. Tree protected by registered-active status throughout.
+- Main tree at closeout carried one untracked sibling file (`evidence/2026-11-22/sim-winnability-round-0930.md`, flesh-out loop's) — not this run's, left alone.
