@@ -1,0 +1,42 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Renee","t":90},{"id":"Zintle","t":84},{"id":"Somchai","t":71},{"id":"Mason","t":70}], roster=10
+INH readable=true scripted=true deadItems=17 distinct=16 transferred=4 vanished=2 keptPlants=19 inheritedPlants=6 keptSkills=5 inheritedSkills=9 succTrustPre=90 succTrustPost=57
+PARITY readable=true equal=true inherited=[] pre=["the_touch","echo_location","green_whisper"] post=["the_touch","echo_location","green_whisper"]
+DEATH d41 (the expedition, scripted): Heidi -> Renee | passed=true lin=true mo=true trust=57 vouchers=4
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=4 vanished=2 of 16 distinct dead-bearer items
+  CONVO d+3 with Zintle (refused=false)
+  CONVO d+3 with Somchai (refused=false)
+  STRANGER-PROBE d+3 with Guelor (trust=67 refused=false)
+  BOND-CONVO d+3 with Nia (depth=2 v=66 refused=false)
+  CONVO d+7 with Somchai (refused=false)
+  CONVO d+7 with Guelor (refused=false)
+  NEWCOMER-PROBE d+11 with Amina (arrived d+11, trust=31 refused=false)
+  CONVO d+14 with Guelor (refused=false)
+  CONVO d+14 with Somchai (refused=false)
+  BOND-CONVO d+14 with Mason (depth=0 v=20 refused=false)
+  CONVO d+30 with Guelor (refused=false)
+  CONVO d+30 with Somchai (refused=false)
+  CONVO d+45 with Guelor (refused=false)
+  CONVO d+45 with Somchai (refused=false)
+  CONVO d+53 with Guelor (refused=false)
+  CONVO d+53 with Somchai (refused=false)
+  CONVO d+64 with Guelor (refused=false)
+  CONVO d+64 with Somchai (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=4) echo=5 organicBurial={"respects":false,"bury":false} halfRation=5
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":54,"offerLines":43,"codexPlantsDelta":36,"codexSkillsDelta":14,"codexAbilitiesDelta":5,"xpDelta":153,"any":true} pantry 11570->10532
+TRUST-DIALS: office 57->100 (+43, climb) | villageMean 63.4->91 (+27.6, climb) | ge60 4->7 | movers>=5: [{"id":"Yuki","from":35,"to":93,"delta":58},{"id":"Elijah","from":52,"to":95,"delta":43},{"id":"Guelor","from":65,"to":100,"delta":35},{"id":"Petra","from":59,"to":90,"delta":31},{"id":"Mason","from":70,"to":92,"delta":22},{"id":"Somchai","from":83,"to":100,"delta":17}]
+DEED-LEDGER: calls=142 summary={"giveFood":{"calls":53,"ok":53,"deltaSum":126,"deltaN":53,"positive":48,"meanDelta":2.38},"teachPlant":{"calls":22,"ok":22,"deltaSum":0,"deltaN":22,"positive":0,"meanDelta":0},"donateToPantry":{"calls":67,"ok":67,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=111 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+31,d+70) t2=true(deedCalls=142) trustVerdict={"readable":true,"officeMantle":57,"officeLast":100,"officeDelta":43,"officeClass":"climb","villageMantle":63.4,"villageLast":91,"villageDelta":27.6,"villageClass":"climb","villageGe60Mantle":4,"villageGe60Last":7,"movers":[{"id":"Yuki","from":35,"to":93,"delta":58},{"id":"Elijah","from":52,"to":95,"delta":43},{"id":"Guelor","from":65,"to":100,"delta":35},{"id":"Petra","from":59,"to":90,"delta":31},{"id":"Mason","from":70,"to":92,"delta":22},{"id":"Somchai","from":83,"to":100,"delta":17}]}
+E6/CALLCHECK: e6={"callMoves":25,"withCensus":25,"chainHandoffs":0,"trustMoves":25} callCheck={"dailyMoveDays":25,"callMoveDays":18,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=6, excludedLoot=0))
+E7/R47: e7={"trustMoves":25,"soloOffice":13,"soloOfficeDeltas":[1,1,1,1,1,1,2,2,2,2,2,2,2],"soloBearerDeltaExact":[1,1,1,1,1,1,2,2,2,2,2,2,2],"singleMoverBearer":2,"singleMoverOther":2,"eventClass":{"event-only":0,"deed-only":8,"both":17,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":6,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":25}

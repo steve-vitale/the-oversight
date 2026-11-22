@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d35: Shanice -> Jae, topTrust=[{"id":"Walt","t":90},{"id":"Lucas","t":90},{"id":"Sofia","t":88},{"id":"Bernadette","t":72}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=16 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=91 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach","lucky_rock","green_whisper","green_thumb","war_cry"] post=["iron_stomach","lucky_rock","green_whisper","green_thumb","war_cry"]
+DEATH d35 (organic (phase A)): Shanice -> Jae | passed=true lin=true mo=true trust=62 vouchers=6
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Walt (refused=false)
+  CONVO d+3 with Sofia (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Hua (depth=2 v=68 refused=false)
+  CONVO d+7 with Walt (refused=false)
+  CONVO d+7 with Hua (refused=false)
+  CONVO d+14 with Walt (refused=false)
+  CONVO d+14 with Sofia (refused=false)
+  BOND-CONVO d+14 with Hua (depth=2 v=68 refused=false)
+  CONVO d+30 with Walt (refused=false)
+  CONVO d+30 with Hua (refused=false)
+  CONVO d+45 with Hua (refused=false)
+  CONVO d+45 with Bernadette (refused=false)
+  CONVO d+53 with Hua (refused=false)
+  CONVO d+53 with Bernadette (refused=false)
+  CONVO d+64 with Hua (refused=false)
+  CONVO d+64 with Sofia (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=6) echo=1 organicBurial={"respects":false,"bury":false} halfRation=7
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":45,"offerLines":24,"codexPlantsDelta":22,"codexSkillsDelta":11,"codexAbilitiesDelta":5,"xpDelta":25,"any":true} pantry 55439->18366
+TRUST-DIALS: office 62->96 (+34, climb) | villageMean 69->90.9 (+21.9, climb) | ge60 6->8 | movers>=5: [{"id":"Chantal","from":42,"to":90,"delta":48},{"id":"Benoit","from":53,"to":90,"delta":37},{"id":"Hua","from":60,"to":93,"delta":33},{"id":"Nikos","from":58,"to":90,"delta":32},{"id":"Nina","from":68,"to":90,"delta":22},{"id":"Bernadette","from":72,"to":91,"delta":19}]
+DEED-LEDGER: calls=79 summary={"teachPlant":{"calls":23,"ok":23,"deltaSum":0,"deltaN":23,"positive":0,"meanDelta":0},"giveFood":{"calls":16,"ok":16,"deltaSum":13,"deltaN":16,"positive":13,"meanDelta":0.81},"donateToPantry":{"calls":40,"ok":40,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=105 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+8,d+14,d+30,d+70) t2=true(deedCalls=79) trustVerdict={"readable":true,"officeMantle":62,"officeLast":96,"officeDelta":34,"officeClass":"climb","villageMantle":69,"villageLast":90.9,"villageDelta":21.9,"villageClass":"climb","villageGe60Mantle":6,"villageGe60Last":8,"movers":[{"id":"Chantal","from":42,"to":90,"delta":48},{"id":"Benoit","from":53,"to":90,"delta":37},{"id":"Hua","from":60,"to":93,"delta":33},{"id":"Nikos","from":58,"to":90,"delta":32},{"id":"Nina","from":68,"to":90,"delta":22},{"id":"Bernadette","from":72,"to":91,"delta":19}]}
+E6/CALLCHECK: e6={"callMoves":25,"withCensus":25,"chainHandoffs":1,"trustMoves":24} callCheck={"dailyMoveDays":25,"callMoveDays":19,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":24,"soloOffice":22,"soloOfficeDeltas":[1,2,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1],"soloBearerDeltaExact":[1,2,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":8,"both":16,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":3,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":25}

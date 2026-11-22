@@ -1,0 +1,40 @@
+
+PRE-DEATH d40: bearer <redacted>, topTrust=[{"id":"Daniela","t":92},{"id":"Wilhelm","t":90},{"id":"Liam","t":90},{"id":"Quinn","t":86}], roster=10
+INH readable=true scripted=true deadItems=14 distinct=13 transferred=2 vanished=3 keptPlants=25 inheritedPlants=1 keptSkills=4 inheritedSkills=13 succTrustPre=92 succTrustPost=56
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","lucky_rock"] post=["beast_calm","lucky_rock"]
+DEATH d40 (the expedition, scripted): Hattie -> Daniela | passed=true lin=true mo=true trust=56 vouchers=5
+  BURIAL d+4: corpse found=true respects=true bury=true
+  INH d+4: transferred=8 vanished=3 of 13 distinct dead-bearer items
+  CONVO d+3 with Wilhelm (refused=false)
+  CONVO d+3 with Miguel (refused=false)
+  STRANGER-PROBE d+3 with Aria (trust=33 refused=false)
+  CONVO d+7 with Wilhelm (refused=false)
+  CONVO d+7 with Quinn (refused=false)
+  NEWCOMER-PROBE d+12 with Evie (arrived d+12, trust=24 refused=false)
+  CONVO d+14 with Wilhelm (refused=false)
+  CONVO d+14 with Quinn (refused=false)
+  CONVO d+30 with Wilhelm (refused=false)
+  CONVO d+30 with Quinn (refused=false)
+  CONVO d+45 with Lucas (refused=false)
+  CONVO d+45 with Quinn (refused=false)
+  CONVO d+53 with Quinn (refused=false)
+  CONVO d+53 with Lucas (refused=false)
+  CONVO d+64 with Quinn (refused=false)
+  CONVO d+64 with Lucas (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=5) echo=4 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=70 violations=0 noMealDays=1 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":61,"offerLines":45,"codexPlantsDelta":25,"codexSkillsDelta":17,"codexAbilitiesDelta":11,"xpDelta":122,"any":true} pantry 68671->11868
+TRUST-DIALS: office 56->100 (+44, climb) | villageMean 64.8->95.4 (+30.6, climb) | ge60 5->8 | movers>=5: [{"id":"Ivy","from":32,"to":94,"delta":62},{"id":"Sean","from":44,"to":90,"delta":46},{"id":"Lucas","from":71,"to":100,"delta":29},{"id":"Quinn","from":86,"to":100,"delta":14},{"id":"Miguel","from":86,"to":91,"delta":5}]
+DEED-LEDGER: calls=41 summary={"giveFood":{"calls":18,"ok":18,"deltaSum":80,"deltaN":18,"positive":17,"meanDelta":4.44},"teachPlant":{"calls":8,"ok":8,"deltaSum":0,"deltaN":8,"positive":0,"meanDelta":0},"donateToPantry":{"calls":15,"ok":15,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=111 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+71) t2=true(deedCalls=41) trustVerdict={"readable":true,"officeMantle":56,"officeLast":100,"officeDelta":44,"officeClass":"climb","villageMantle":64.8,"villageLast":95.4,"villageDelta":30.6,"villageClass":"climb","villageGe60Mantle":5,"villageGe60Last":8,"movers":[{"id":"Ivy","from":32,"to":94,"delta":62},{"id":"Sean","from":44,"to":90,"delta":46},{"id":"Lucas","from":71,"to":100,"delta":29},{"id":"Quinn","from":86,"to":100,"delta":14},{"id":"Miguel","from":86,"to":91,"delta":5}]}
+E6/CALLCHECK: e6={"callMoves":11,"withCensus":11,"chainHandoffs":1,"trustMoves":10} callCheck={"dailyMoveDays":11,"callMoveDays":10,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=7, excludedLoot=1))
+E7/R47: e7={"trustMoves":10,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":2,"singleMoverOther":2,"eventClass":{"event-only":1,"deed-only":4,"both":5,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":7,"v2Say":3,"v2Delta":3,"arcExcluded":3,"teleWeek2":6,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":11}

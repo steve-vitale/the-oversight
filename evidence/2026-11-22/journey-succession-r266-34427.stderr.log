@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Jamal","t":90},{"id":"Carlos","t":90},{"id":"Niamh","t":89},{"id":"Frank","t":82}], roster=9
+INH readable=true scripted=true deadItems=27 distinct=21 transferred=1 vanished=2 keptPlants=16 inheritedPlants=2 keptSkills=6 inheritedSkills=7 succTrustPre=90 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["bloodhound","echo_location","dowsing"] post=["bloodhound","echo_location","dowsing"]
+DEATH d41 (the expedition, scripted): Eric -> Carlos | passed=true lin=true mo=true trust=62 vouchers=5
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=1 vanished=2 of 21 distinct dead-bearer items
+  CONVO d+3 with Niamh (refused=false)
+  CONVO d+3 with Jamal (refused=false)
+  STRANGER-PROBE d+3 with David (trust=24 refused=false)
+  CONVO d+7 with Niamh (refused=false)
+  CONVO d+7 with Jamal (refused=false)
+  NEWCOMER-PROBE: Darwin already bonded on arrival day — no convo driven
+  CONVO d+14 with Jamal (refused=false)
+  CONVO d+14 with Rafael (refused=false)
+  CONVO d+30 with Jamal (refused=false)
+  CONVO d+30 with Rafael (refused=false)
+  CONVO d+45 with Jamal (refused=false)
+  CONVO d+45 with Tariq (refused=false)
+  CONVO d+53 with Jamal (refused=false)
+  CONVO d+53 with Tariq (refused=false)
+  CONVO d+64 with Jamal (refused=false)
+  CONVO d+64 with Tariq (refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=5) echo=3 organicBurial={"respects":false,"bury":false} halfRation=3
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":64,"offerLines":28,"codexPlantsDelta":29,"codexSkillsDelta":28,"codexAbilitiesDelta":15,"xpDelta":-20,"any":true} pantry 81037->4055
+TRUST-DIALS: office 62->84 (+22, climb) | villageMean 66->81.3 (+15.3, climb) | ge60 5->3 | movers>=5: [{"id":"Rafael","from":77,"to":90,"delta":13}]
+DEED-LEDGER: calls=42 summary={"giveFood":{"calls":21,"ok":21,"deltaSum":52,"deltaN":21,"positive":21,"meanDelta":2.48},"teachPlant":{"calls":10,"ok":10,"deltaSum":0,"deltaN":10,"positive":0,"meanDelta":0},"donateToPantry":{"calls":11,"ok":11,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=110 alive=5 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+8,d+15,d+31,d+69) t2=true(deedCalls=42) trustVerdict={"readable":true,"officeMantle":62,"officeLast":84,"officeDelta":22,"officeClass":"climb","villageMantle":66,"villageLast":81.3,"villageDelta":15.3,"villageClass":"climb","villageGe60Mantle":5,"villageGe60Last":3,"movers":[{"id":"Rafael","from":77,"to":90,"delta":13}]}
+E6/CALLCHECK: e6={"callMoves":11,"withCensus":11,"chainHandoffs":4,"trustMoves":7} callCheck={"dailyMoveDays":11,"callMoveDays":10,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":7,"soloOffice":3,"soloOfficeDeltas":[1,1,1],"soloBearerDeltaExact":[1,1,1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":2,"both":5,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":5,"known":5,"unknown":0} e3={"dailyDays":71,"moves":11}

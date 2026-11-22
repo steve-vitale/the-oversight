@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d36: Hannah -> Henry, topTrust=[{"id":"Aki","t":100},{"id":"Mateo","t":96},{"id":"Ruth","t":91},{"id":"Salvatore","t":90}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=20 inheritedPlants=0 keptSkills=8 inheritedSkills=0 succTrustPre=92 succTrustPost=60
+PARITY readable=true equal=true inherited=[] pre=["night_eyes","echo_location","rage","dowsing","green_whisper"] post=["night_eyes","echo_location","rage","dowsing","green_whisper"]
+DEATH d36 (organic (phase A)): Hannah -> Henry | passed=true lin=true mo=true trust=60 vouchers=8
+  BURIAL d+4: corpse found=true respects=true bury=true
+  CONVO d+3 with Mateo (refused=false)
+  CONVO d+3 with Ruth (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Mateo (refused=false)
+  CONVO d+7 with Salvatore (refused=false)
+  CONVO d+14 with Mateo (refused=false)
+  CONVO d+14 with Salvatore (refused=false)
+  BOND-CONVO d+14 with Ruth (depth=1 v=32 refused=false)
+  CONVO d+30 with Ursula (refused=false)
+  CONVO d+30 with Mateo (refused=false)
+  CONVO d+45 with Salvatore (refused=false)
+  CONVO d+45 with Farid (refused=false)
+  CONVO d+53 with Salvatore (refused=false)
+  CONVO d+53 with Farid (refused=false)
+  NEWCOMER-PROBE d+61 with Sari (arrived d+61, trust=40 refused=false)
+  CONVO d+64 with Farid (refused=false)
+  CONVO d+64 with Ruth (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=8) echo=2 organicBurial={"respects":false,"bury":false} halfRation=5
+
+MEAL-GATE: audited=70 violations=0 noMealDays=9 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":38,"offerLines":22,"codexPlantsDelta":29,"codexSkillsDelta":13,"codexAbilitiesDelta":7,"xpDelta":-49,"any":true} pantry 66565->1900
+TRUST-DIALS: office 60->90 (+30, climb) | villageMean 85.4->93.1 (+7.7, climb) | ge60 8->7 | movers>=5: [{"id":"Farid","from":41,"to":100,"delta":59},{"id":"Ursula","from":81,"to":90,"delta":9},{"id":"Ruth","from":91,"to":97,"delta":6}]
+DEED-LEDGER: calls=34 summary={"teachPlant":{"calls":28,"ok":28,"deltaSum":0,"deltaN":28,"positive":0,"meanDelta":0},"giveFood":{"calls":6,"ok":6,"deltaSum":12,"deltaN":6,"positive":4,"meanDelta":2}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=107 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+71) t2=true(deedCalls=34) trustVerdict={"readable":true,"officeMantle":60,"officeLast":90,"officeDelta":30,"officeClass":"climb","villageMantle":85.4,"villageLast":93.1,"villageDelta":7.7,"villageClass":"climb","villageGe60Mantle":8,"villageGe60Last":7,"movers":[{"id":"Farid","from":41,"to":100,"delta":59},{"id":"Ursula","from":81,"to":90,"delta":9},{"id":"Ruth","from":91,"to":97,"delta":6}]}
+E6/CALLCHECK: e6={"callMoves":4,"withCensus":4,"chainHandoffs":3,"trustMoves":1} callCheck={"dailyMoveDays":4,"callMoveDays":4,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":1,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":1,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":4,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":4}

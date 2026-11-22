@@ -1,0 +1,44 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Rachel","t":100},{"id":"Tyler","t":91},{"id":"Helga","t":90},{"id":"Asep","t":90}], roster=9
+INH readable=true scripted=true deadItems=23 distinct=22 transferred=3 vanished=1 keptPlants=23 inheritedPlants=0 keptSkills=5 inheritedSkills=7 succTrustPre=100 succTrustPost=61
+PARITY readable=true equal=true inherited=[] pre=["bloodhound","lucky_rock"] post=["bloodhound","lucky_rock"]
+DEATH d41 (the expedition, scripted): Brunhilde -> Rachel | passed=true lin=true mo=true trust=61 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=4 vanished=0 of 22 distinct dead-bearer items
+  CONVO d+3 with Helga (refused=false)
+  CONVO d+3 with Ruby (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Ella (depth=3 v=98 refused=false)
+  CONVO d+7 with Diana (refused=false)
+  CONVO d+7 with Tyler (refused=false)
+  NEWCOMER-PROBE d+7 with Milagros (arrived d+7, trust=40 refused=false)
+  CONVO d+14 with Diana (refused=false)
+  CONVO d+14 with Ella (refused=false)
+  BOND-CONVO d+14 with Ruby (depth=0 v=12 refused=false)
+  CONVO d+30 with Ella (refused=false)
+  CONVO d+30 with Diana (refused=false)
+  WIT-SIT [post] d+38: Ruby sits for witnessed Ella (sitSeq=1, freshPersonN=2, latelyDead=Tyler, witnessed=true, witnessServed=none) refused=false
+  WIT-SIT [post] d+39: Diana sits for witnessed Ella (sitSeq=2, freshPersonN=2, latelyDead=Tyler, witnessed=true, witnessServed=none) refused=false
+  CONVO d+45 with Asep (refused=false)
+  CONVO d+45 with Stan (refused=false)
+  CONVO d+53 with Asep (refused=false)
+  CONVO d+53 with Sameh (refused=false)
+  CONVO d+64 with Stan (refused=false)
+  CONVO d+64 with Milagros (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=7) echo=1 organicBurial={"respects":false,"bury":false} halfRation=3
+
+MEAL-GATE: audited=70 violations=0 noMealDays=18 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":51,"offerLines":56,"codexPlantsDelta":40,"codexSkillsDelta":28,"codexAbilitiesDelta":15,"xpDelta":82,"any":true} pantry 69721->7828
+TRUST-DIALS: office 61->87 (+26, climb) | villageMean 91.4->85 (-6.4, fall) | ge60 7->3 | movers>=5: []
+DEED-LEDGER: calls=68 summary={"teachPlant":{"calls":23,"ok":23,"deltaSum":0,"deltaN":23,"positive":0,"meanDelta":0},"giveFood":{"calls":23,"ok":23,"deltaSum":38,"deltaN":23,"positive":16,"meanDelta":1.65},"donateToPantry":{"calls":22,"ok":22,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=111 alive=5 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=68) trustVerdict={"readable":true,"officeMantle":61,"officeLast":87,"officeDelta":26,"officeClass":"climb","villageMantle":91.4,"villageLast":85,"villageDelta":-6.4,"villageClass":"fall","villageGe60Mantle":7,"villageGe60Last":3,"movers":[]}
+E6/CALLCHECK: e6={"callMoves":17,"withCensus":17,"chainHandoffs":4,"trustMoves":13} callCheck={"dailyMoveDays":17,"callMoveDays":13,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=2, excludedLoot=0))
+E7/R47: e7={"trustMoves":13,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":2,"singleMoverOther":3,"eventClass":{"event-only":0,"deed-only":1,"both":12,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":2,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":17}
