@@ -144,7 +144,7 @@ Three full transcripts read:
 - **Reaper:** not run by this adoption during the flap (registry writes EPERM); final sweep at closeout.
 - **Heartbeat loop:** detached (setsid, 10-min cadence, pid 1756 post-restart), alive for the adoption; registry heartbeat never went stale after 09:32:08Z.
 - **Safe-commit index clobber:** watch for it after every safe-commit (known class; repair via `git ls-tree -r HEAD -- <paths> | git update-index --add --index-info`).
-- **Gate (`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r249-gate`, log `hidden_files/evidence/2026-11-22/journey-deepening-r249-gate.log`): [TO BE FILLED AFTER GATE RUN]**
+- **Gate (`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r249-gate`, log `hidden_files/evidence/2026-11-22/journey-deepening-r249-gate.log`, run on tip `96f638c8a`): 339 passed, 5 failed in 854s. Failures (all standing set, 0 attributable to this run): measurement-proof staleness pair (`test-measurement-proof-update.js`, `test-measurement-workflow.js`), phone-frame stale receipt (`test-phone-frame-proof.js`), 2× deed-attainment 120s timeouts (`test-living-garden-deed-attainment.js`, `test-one-person-army-deed-attainment.js`). This run added no src/data/index.html changes (evidence + driver/analyzer/tests only), so none of the 5 can come from it. Note: the gate lane was held by the succession r266 adoption's gate (338/6 in 1085s) until 10:14Z; this gate launched only after it finished, serialized. HEAD has since moved past the gated tip on evidence-only landings (r266 gate record `e56ea1383`, sim-crossvoice-a rebases `1417fb148`); the gate covered this run's merge commit `efd5f4273`.**
 
 ## Verdicts
 
