@@ -176,6 +176,23 @@ fixture arm's judged legs except the `anchorCommit` line. The four
 fixture JSONs were refreshed in place (1 line each) and are committed
 with this arm. The fixture GO stands on the current base.
 
+**Second rebase (master moved again during this arm).** While the band
+ran, Loop B landed sim-searvoice-a on master (tip `9882eeccd`) — the
+sibling arm that fixed the bow-and-arrow narration gap this arm's
+fixture evidence filed. The branch rebased onto `9882eeccd` clean
+(2/2, no conflicts) before merging, and all proofs were re-run there:
+proof 12/12, selftest 17/17, fixture four legs + compare → GO, all
+bars true, judged numbers identical (arm 2 shots, ctl 0, vKill/11).
+The refreshed fixture transcripts now read as a gun: "raises the
+Searcaster", "fires wide — the discharge scorches the dirt beside the
+sky. (cell spent)", "lowers the Searcaster", dry gun "the trigger
+clicks on nothing" (`arrowLine` true → false). The narration finding
+from the fixture evidence is fixed on master by the sibling arm, not
+by this arm — noted here so the record is straight. The band corpus
+was run on 4266e6cce; the rebase touched no band input except the
+volley narration (no volleys occurred in the band), and the fixture
+re-verification on 9882eeccd confirms the mechanism identically.
+
 ## 6. Instrument notes and deviations
 
 - **Pre-flight (NOT judged):** proof test 12/12, analyzer selftest
@@ -305,4 +322,7 @@ with this arm. The fixture GO stands on the current base.
   --before ...-before.json.gz --after ...-after.json.gz --out
   evidence/2026-11-22/killloot16-a-panel` → review_required, 0 delta.
 - **Fixture re-verification:** four legs + `--compare` on 4266e6cce →
-  GO (see §5).
+  GO (see §5); then rebased onto `9882eeccd` (master moved — Loop B
+  landed sim-searvoice-a) and re-ran proof 12/12, selftest 17/17,
+  fixture four legs + `--compare` → GO, identical judged numbers, new
+  gun narration ("raises the Searcaster", "cell spent").
