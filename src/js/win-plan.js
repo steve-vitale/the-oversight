@@ -1045,17 +1045,22 @@
         return true;
       } catch (e) { return false; }
     },
-    // DEPARTURE LAUNCH BEAT (sim-departbeat-b): the single launch
-    // hook for BOTH departure paths — the re-seed beat AND the
-    // ordinary wave-4+ beat. Called by winPlanDepart's launchParty
-    // and vbrainExecuteDepart's party_launch branch AFTER the
-    // expedition has actually started — never on a hold, never on a
-    // failed launch. The re-seed beat speaks first: if it fires,
+    // DEPARTURE LAUNCH BEAT (sim-departbeat-b, LAUNCHVOICE r268):
+    // the single launch hook for BOTH departure paths — the re-seed
+    // beat AND the ordinary beat. Called by winPlanDepart's
+    // launchParty and vbrainExecuteDepart's party_launch branch AFTER
+    // the expedition has actually started — never on a hold, never on
+    // a failed launch. The re-seed beat speaks first: if it fires,
     // the launch already has its beat, so the ordinary beat is
     // skipped and the dedup stamp is set (a second call for the
     // same launch stays silent even though the re-seed stamp is
-    // gone). Otherwise the ordinary beat fires only for a wave-4+
-    // plan (needWave >= 4), only while DEPARTBEAT is on
+    // gone). Otherwise the ordinary beat fires for EVERY real
+    // departure — LAUNCHVOICE (r268): the wave-4+ gate is gone, so a
+    // below-wave-4 or targetless launch speaks its one line too (the
+    // r265 panel proved the hunt is mechanically alive but
+    // conversationally silent: 57 departures, 0 beats). The beat
+    // line itself is wave-agnostic and handles a null target, so no
+    // wording change is needed. Only while DEPARTBEAT is on
     // (default-ON; DEPARTBEAT=0 silences it), and only once per
     // launch: plan.departBeatDay / plan.departBeatTarget are
     // stamped BEFORE speaking, so a re-entrant call the same day
@@ -1080,7 +1085,6 @@
           return true;
         }
         if (!departbeatOn()) return false;
-        if ((plan.needWave | 0) < 4) return false;
         if (plan.departBeatDay === day && plan.departBeatTarget === target) return false;
         plan.departBeatDay = day;
         plan.departBeatTarget = target;

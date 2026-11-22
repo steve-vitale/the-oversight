@@ -947,6 +947,17 @@
         if (favor && (favor.state === 'fulfilled' || favor.state === 'thanked' ||
                       favor.state === 'broken' || favor.state === 'acknowledged' ||
                       favor.state === 'moot' || favor.state === 'declined')) {
+          // R268 STRANDED-CLOSE (journey-establishment r268 2026-11-22):
+          // a settled favor is NOT closed for ending purposes when it
+          // still holds a live unreturned run that can be ended — the
+          // r265 BEARER-END action is ready (dead bearer, at home) but
+          // this early return offered no verb at all, so the run
+          // stranded 9 dawns on a 'moot' favor (seed 101972 Casey) with
+          // the driver re-attempting a sit that could never press
+          // cancel. Offer ONLY the end verb; no commit, no work.
+          const endOnly = this.convoFavorActionMenu(vid, favor, false)
+            .filter(o => o && o.id === 'dlg:favor_cancel');
+          if (endOnly.length) return endOnly;
           return [];
         }
         if (favor) {
@@ -2928,6 +2939,22 @@
       // picker's weight-0 rule should already prevent this, but the menu
       // must not offer help for a need that died between pick and menu).
       if (w && w.id === 'ask_favor' && (w.stage || 0) === 0 && c && !(c.pendingQ || c.reactiveQ || c.genericQ)) {
+        // R268 STRANDED-CLOSE (journey-establishment r268 2026-11-22):
+        // a favor with a live unreturned run that can be ended surfaces
+        // its end verb HERE — stranded sits live at stage 0 (the opener
+        // never attaches a moot favor to the want, so the favor menu
+        // never builds), and without it the run can never be closed
+        // from a sitting (seed 101972 Casey: 9 dawns, the ending action
+        // ready every dawn, the menu never offering cancel). The end
+        // verb does not depend on a live need: the run is open and
+        // endable whether or not the NPC still needs help.
+        const favor0 = (c.want && c.want.favor) || this.convoGetFavor(vid);
+        let endOnly = [];
+        try {
+          if (favor0) endOnly = this.convoFavorActionMenu(vid, favor0, false)
+            .filter(o => o && o.id === 'dlg:favor_cancel')
+            .map(o => ({ id: o.id, label: (o.labels && o.labels[0]) || o.id, temper: o.temper || 'neutral' }));
+        } catch (e) { endOnly = []; }
         let need = null;
         try { need = (typeof this.convoFindFavorNeed === 'function') ? this.convoFindFavorNeed(vid) : null; } catch (e) { need = null; }
         if (need) {
@@ -2935,8 +2962,9 @@
           const label = (typeof this.convoPickCycle === 'function')
             ? (this.convoPickCycle(vid, 'wantmenu:ask_favor:0:dlg:help', labels) || labels[0])
             : labels[0];
-          return [{ id: 'dlg:help', label, temper: 'kind' }];
+          return [{ id: 'dlg:help', label, temper: 'kind' }].concat(endOnly);
         }
+        if (endOnly.length) return endOnly;
       }
       if (!w || !w.def || (w.stage || 0) === 0 || (w.stage || 0) >= 3) return [];
       if (c.pendingQ || c.reactiveQ || c.genericQ) return [];

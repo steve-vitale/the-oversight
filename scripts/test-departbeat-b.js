@@ -1,14 +1,20 @@
 // test-departbeat-b.js — proof test, arm sim-departbeat-b.
-// Proves the ordinary wave-4+ departure beat: when a holder walks
-// out on a wave-4+ plan with their party, the fire speaks one line
-// at the launch — "Amina sets out with Diana after Herald — the
-// fire marks the trail." — naming the holder, the party, and the
-// target. The 16-seed profilegate confirm band showed ZERO
-// launch-mention vetSays lines: ordinary launches were silent
-// (the re-seed launch speaks, finding #2632, but ordinary ones
-// never did). The holds, by contrast, ARE voiced
-// (villager-brain.js:736/:768) — this beat is the launch half of
-// that same silence.
+// Proves the ordinary departure beat: when a holder walks out on a
+// plan with their party, the fire speaks one line at the launch —
+// "Amina sets out with Diana after Herald — the fire marks the
+// trail." — naming the holder, the party, and the target. The
+// 16-seed profilegate confirm band showed ZERO launch-mention
+// vetSays lines: ordinary launches were silent (the re-seed launch
+// speaks, finding #2632, but ordinary ones never did). The holds,
+// by contrast, ARE voiced (villager-brain.js:736/:768) — this beat
+// is the launch half of that same silence.
+// LAUNCHVOICE (journey-establishment r268, 2026-11-22): the beat
+// originally gated on needWave >= 4, so below-wave-4 launches stayed
+// silent — the r265 panel proved the hunt is mechanically alive but
+// conversationally silent (57 departures, 0 beats). The gate is
+// removed: EVERY real departure speaks once. §A and §D D1 below pin
+// the new behavior (design changed on purpose — green-list rule:
+// update the test in the same commit and say so).
 //   §A code pins (read-only greps).
 //   §B staged fixture — the ordinary wave-4 shape: holder Amina,
 //       wave-4 Herald plan, companion Diana, both armed + armored
@@ -19,10 +25,11 @@
 //   §C OLD-CODE CONTROL: the same fixture against the pre-change
 //       win-plan.js (git show of the branch base tip) must launch
 //       with NO beat line (fail on old, pass on new).
-//   §D negative cases: non-wave-4 launch silent; flag off silent;
-//       re-seed launch speaks its own beat once, no double-beat;
-//       same-day second launch silent (dedup stamp); next-day
-//       launch speaks again; no-target launch drops the clause.
+//   §D negative cases: flag off silent; re-seed launch speaks its
+//       own beat once, no double-beat; same-day second launch silent
+//       (dedup stamp); next-day launch speaks again; no-target launch
+//       drops the clause. (D1, formerly "non-wave-4 launch silent",
+//       now pins the LAUNCHVOICE change: a wave-3 launch speaks.)
 // Usage: node scripts/test-departbeat-b.js
 //        node scripts/test-departbeat-b.js --old-code <win-plan.js path>
 //        (child mode: runs only the §B1 launch fixture against the
@@ -206,8 +213,8 @@ if (OLD_CODE_PATH) {
   check('§A winPlanDepartLaunchBeat speaks the re-seed beat first and returns (exactly one beat per launch)',
     hookBody != null && hookBody.indexOf('reseedSpoke') !== -1 &&
     hookBody.indexOf("if (reseedSpoke) {") !== -1, null);
-  check('§A hook gates the ordinary beat on needWave >= 4',
-    hookBody != null && hookBody.indexOf('(plan.needWave | 0) < 4') !== -1, null);
+  check('§A hook does NOT gate the ordinary beat on needWave (LAUNCHVOICE r268: every real departure speaks once — the wave-4+ gate was removed on purpose)',
+    hookBody != null && hookBody.indexOf('(plan.needWave | 0) < 4') === -1 && hookBody.indexOf('needWave') === -1, null);
   check('§A hook is default-ON (departbeatOn, DEPARTBEAT=0 silences) and reads the plan without creating it (no winPlanOf call inside)',
     hookBody != null && hookBody.indexOf('departbeatOn()') !== -1 && hookBody.indexOf('winPlanOf') === -1, null);
   check('§A hook stamps day+target BEFORE speaking (no double-fire on a re-entrant say)',
@@ -346,13 +353,16 @@ if (OLD_CODE_PATH) {
 
 // ---- §D NEGATIVE CASES ----
 (function sectionD() {
-  // D1: non-wave-4 launch — a wave-3 Spool plan launches, silently.
+  // D1: non-wave-4 launch — a wave-3 Spool plan launches, and
+  // LAUNCHVOICE (r268) means it SPEAKS the ordinary beat once (the
+  // old pin "wave-3 launch is silent" was the pre-fix behavior).
   armEnv();
   const f = beatCtx({ target: 'spool', needWave: 3, seen: { spool: 130 } });
   const res = Game.winPlanDepart.call(f.ctx, 'amina_diallo', 5, 5, false);
-  check('§D D1 wave-3 launch is silent (launch, stage hunt, no beat line)',
+  check('§D D1 wave-3 launch speaks the ordinary beat once (LAUNCHVOICE r268: launch, stage hunt, one beat line)',
     res === 'launch' && f.plan.stage === 'hunt' && f.plan.target === 'spool' &&
-    departBeatLines(f.says).length === 0 && f.says.length === 0,
+    departBeatLines(f.says).length === 1 && f.says.length === 1 &&
+    f.says[0] === 'Amina sets out with Diana after Spool — the fire marks the trail.',
     JSON.stringify({ res: res, target: f.plan.target, says: f.says }));
   disarmEnv();
 
