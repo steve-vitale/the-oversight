@@ -2,8 +2,8 @@
 
 - Arm: sim-crossvoice-a (NARRATION FIX), Loop A run fleshout-20261122T0815Z, arm 1 of 1.
 - Base: worktree HEAD `e67224635` (Loop A 0215Z adoption round record);
-  local master has not moved during this arm — no rebase was needed.
-  Branch `sim-crossvoice-a`.
+  local master moved twice during this arm — rebased onto `4681e740f`,
+  then onto `efd5f4273` (see §7). Branch `sim-crossvoice-a`.
 - Prereg: `evidence/2026-11-22/sim-crossvoice-a-prereg.md` (committed
   `79ceb43eb`, frozen ~09:10 UTC 2026-11-22, before any judged run).
 - Instrument commit: `79ceb43eb` (prereg +
@@ -348,6 +348,29 @@ from staged fights). No band run.
   identical assertions; refreshed JSONs differ from the pre-rebase
   ones only in `anchorCommit` (now `04e153abe`, the branch tip at
   re-run time — 1 line each).
+- **Second rebase at landing (master moved again):** after that
+  rebase, local master moved again to `efd5f4273` (3 commits:
+  journey succession r266 ×2 + journey-deepening r249,
+  evidence-only + driver/analyzer/tests; none touches any of this
+  arm's files — `git diff --name-only 4681e740f efd5f4273` shows no
+  fieldFights.js, crossvoice, searvoice, or killlootfixture path),
+  so the branch was rebased again onto `efd5f4273`. The stop-at-pick
+  quirk struck a second time, again on the 3rd pick (the evidence
+  commit `04e153abe` — "Could not execute the todo command",
+  rescheduled); verified the pick unapplied via `git diff
+  04e153abe -- evidence/2026-11-22/` (non-empty, 881,319 lines)
+  with the worktree clean, then `git rebase --continue` — all 4
+  commits replayed clean, each exactly once. New hashes: instrument
+  `90126ee07` (was `ba1fb1e92`), fix `fb23cb9e1` (was `63d90d857`),
+  evidence `807ef3489` (was `04e153abe`), rebase note `891b474cd`
+  (was `3c859c5b0`). The replayed fix patch is byte-identical to
+  the original (diff of the two patches, excluding hash headers,
+  empty). **Proofs re-run after the second rebase** (same
+  commands): proof test 12/12, selftest 17/17,
+  `test-crossvoice-a.js` → GO, S1–S6 pass, exit 0, identical
+  assertions (bow lines observed in use: "nocks an arrow", "lowers
+  the bow"); refreshed JSONs differ only in `anchorCommit` (now
+  `891b474cd`, the branch tip at re-run time — 1 line each).
 - **Green-list scan:** no test pins the old bow lines for a
   crossbow/sling holder (see §4).
 
