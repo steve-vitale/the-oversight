@@ -1,0 +1,1571 @@
+{
+  "arm": "launchfield-refreeze-b",
+  "run": "launchfield-refreeze-b",
+  "band": {
+    "dir": "perseed-launchfield-refreeze-b-107383-107390",
+    "files": 8,
+    "seeds": [
+      107383,
+      107384,
+      107385,
+      107386,
+      107387,
+      107388,
+      107389,
+      107390
+    ],
+    "errors": 0,
+    "substrateBadFiles": [],
+    "instancesOpened": 7,
+    "byBucket": {
+      "launched": 3,
+      "target-killed": 1,
+      "selected-blocked": 1,
+      "bid-not-selected": 0,
+      "plan-churned-before-dawn": 2,
+      "candidate-not-bid": 0,
+      "unknown": 0
+    },
+    "byFunnel": {
+      "launched-killed": 0,
+      "launched-fought-no-kill": 1,
+      "launched-no-meeting": 2,
+      "target-killed": 1,
+      "selected-blocked": 1,
+      "bid-not-selected": 0,
+      "plan-churned-before-dawn": 2,
+      "candidate-not-bid": 0,
+      "unknown": 0
+    },
+    "notBidInstances": 0,
+    "churnInstances": 2,
+    "churnCloseKinds": {
+      "holder-died": 2
+    },
+    "scoredNotBidDawns": 0,
+    "assessedNotBidDays": 0,
+    "dawnDays": 0,
+    "middayOnlyDays": 0,
+    "assessedRows": 0,
+    "middayRows": 0,
+    "zeroRowNotBidDays": 0,
+    "unknownZeroRowDays": 0,
+    "instanceDays": 0,
+    "scoredReasons": {},
+    "assessedDayReasons": {},
+    "zeroRowReasons": {},
+    "churnZeroRowReasons": {
+      "holder-dead": 2,
+      "seed-day": 1,
+      "holder-off-haven": 1
+    },
+    "scoredDawnsMismatch": 0,
+    "unknown": 0,
+    "hU": 0,
+    "hE": 0,
+    "hS": 0,
+    "hTally": {},
+    "hDays": [],
+    "mechanism": "UNTESTED",
+    "holderStateRows": 864,
+    "holderGateRows": 22,
+    "poolEligDist": {
+      "0": 0,
+      "1": 0,
+      "2": 0,
+      "3+": 0
+    },
+    "poolFirstFails": {},
+    "memberProfiles": {
+      "homebody": 25,
+      "forager": 45,
+      "wanderer": 29,
+      "explorer": 1
+    },
+    "memberProfilesByAway": {
+      "home:homebody": 22,
+      "home:forager": 25,
+      "away:wanderer": 25,
+      "away:forager": 20,
+      "away:homebody": 3,
+      "home:wanderer": 4,
+      "home:explorer": 1
+    },
+    "holderProfiles": {
+      "forager": 17
+    },
+    "sPartsTotal": 16,
+    "sScored": 0,
+    "sExplained": 16,
+    "sUnexplained": 0,
+    "sSeedDayParts": 3,
+    "sWhyNot": {
+      "dead": 4,
+      "away": 9,
+      "seed-day": 3
+    },
+    "sUnexplainedParts": [],
+    "countedLaunches": 3,
+    "launchRows": [
+      {
+        "seed": 107383,
+        "day": 78,
+        "vid": "mara_vasquez",
+        "target": "herald",
+        "targetWave": 4,
+        "targetWaveLive": 4,
+        "counted": true,
+        "source": "brain",
+        "winPlanAction": "party_launch",
+        "stage": "hunt",
+        "partySize": 4,
+        "party": [
+          "diana_osei",
+          "chantal_mukendi",
+          "gen_x0hank1"
+        ],
+        "startCall": true,
+        "copyLink": null
+      },
+      {
+        "seed": 107383,
+        "day": 84,
+        "vid": "gen_x0hank1",
+        "target": "herald",
+        "targetWave": null,
+        "targetWaveLive": 4,
+        "counted": false,
+        "source": "brain",
+        "winPlanAction": "party_launch",
+        "stage": "hunt",
+        "partySize": 2,
+        "party": [
+          "diana_osei"
+        ],
+        "startCall": true,
+        "copyLink": {
+          "day": 78,
+          "holder": "mara_vasquez",
+          "source": "brain"
+        }
+      },
+      {
+        "seed": 107384,
+        "day": 139,
+        "vid": "dmitri_sokolov",
+        "target": "reunion",
+        "targetWave": 4,
+        "targetWaveLive": 4,
+        "counted": true,
+        "source": "brain",
+        "winPlanAction": "party_launch",
+        "stage": "hunt",
+        "partySize": 4,
+        "party": [
+          "ruby_callaghan",
+          "nikos_papadopoulos",
+          "priya_nair"
+        ],
+        "startCall": true,
+        "copyLink": null
+      },
+      {
+        "seed": 107384,
+        "day": 143,
+        "vid": "dmitri_sokolov",
+        "target": "reunion",
+        "targetWave": 4,
+        "targetWaveLive": 4,
+        "counted": true,
+        "source": "brain",
+        "winPlanAction": "party_launch",
+        "stage": "hunt",
+        "partySize": 4,
+        "party": [
+          "ruby_callaghan",
+          "gen_oknm8i5",
+          "dale_hoffman"
+        ],
+        "startCall": true,
+        "copyLink": null
+      }
+    ],
+    "wave4TargetLaunches": 4,
+    "uncountedLaunches": 1,
+    "launchNoStartCall": 0,
+    "uncountedNoCopyLink": 0,
+    "firstFights": 1,
+    "repeatTargetGroups": [
+      {
+        "seed": 107384,
+        "vid": "dmitri_sokolov",
+        "target": "reunion",
+        "launches": [
+          {
+            "day": 139,
+            "counted": true,
+            "partySize": 4
+          },
+          {
+            "day": 143,
+            "counted": true,
+            "partySize": 4
+          }
+        ],
+        "meetingsInWindow": 0,
+        "firstFightDay": null,
+        "track": [
+          {
+            "day": 139,
+            "stage": "hunt",
+            "holderNode": {
+              "nx": 5,
+              "ny": 5
+            },
+            "holderExped": true,
+            "lastKnownTile": {
+              "nx": 5,
+              "ny": 5
+            },
+            "lastKnownSource": "sighting",
+            "targetNearDist": 1,
+            "targetNearCount": 1,
+            "targetAliveCount": 4
+          },
+          {
+            "day": 140,
+            "stage": "hunt",
+            "holderNode": {
+              "nx": 5,
+              "ny": 5
+            },
+            "holderExped": true,
+            "lastKnownTile": {
+              "nx": 5,
+              "ny": 5
+            },
+            "lastKnownSource": "sighting",
+            "targetNearDist": 2,
+            "targetNearCount": 1,
+            "targetAliveCount": 4
+          },
+          {
+            "day": 141,
+            "stage": "hunt",
+            "holderNode": {
+              "nx": 4,
+              "ny": 4
+            },
+            "holderExped": false,
+            "lastKnownTile": {
+              "nx": 5,
+              "ny": 5
+            },
+            "lastKnownSource": "sighting",
+            "targetNearDist": 1,
+            "targetNearCount": 2,
+            "targetAliveCount": 4
+          },
+          {
+            "day": 142,
+            "stage": "hunt",
+            "holderNode": {
+              "nx": 4,
+              "ny": 5
+            },
+            "holderExped": false,
+            "lastKnownTile": {
+              "nx": 5,
+              "ny": 5
+            },
+            "lastKnownSource": "sighting",
+            "targetNearDist": 2,
+            "targetNearCount": 2,
+            "targetAliveCount": 4
+          },
+          {
+            "day": 143,
+            "stage": "hunt",
+            "holderNode": {
+              "nx": 5,
+              "ny": 5
+            },
+            "holderExped": true,
+            "lastKnownTile": {
+              "nx": 5,
+              "ny": 5
+            },
+            "lastKnownSource": "sighting",
+            "targetNearDist": 2,
+            "targetNearCount": 2,
+            "targetAliveCount": 4
+          },
+          {
+            "day": 144,
+            "stage": "hunt",
+            "holderNode": {
+              "nx": 5,
+              "ny": 5
+            },
+            "holderExped": true,
+            "lastKnownTile": {
+              "nx": 5,
+              "ny": 5
+            },
+            "lastKnownSource": "sighting",
+            "targetNearDist": 1,
+            "targetNearCount": 2,
+            "targetAliveCount": 4
+          }
+        ]
+      }
+    ],
+    "wall": {
+      "wins": 0,
+      "nationalRank": 0,
+      "nationalStanding": 2,
+      "table": 0,
+      "wave4": 8,
+      "wave5": 2,
+      "medianDays": 135.5,
+      "survived": 1,
+      "deaths": 734,
+      "starvation": 3,
+      "standing199": 4
+    },
+    "perSeed": [
+      {
+        "seed": 107383,
+        "gameDays": 132,
+        "endReason": "village-lost",
+        "standing": 250,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 5,
+        "substrateBad": [],
+        "instrumentErrors": 0,
+        "funnel": {
+          "launched-killed": 0,
+          "launched-fought-no-kill": 1,
+          "launched-no-meeting": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "funnelSub": {
+          "launched-fought-no-kill:vDie:1,vFlee:2": 1
+        },
+        "instancesOpened": 1,
+        "byBucket": {
+          "launched": 1,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "launched:companion:diana_osei:mid-day part-1": 1
+        },
+        "notBid": [],
+        "churn": [],
+        "holderStateRows": 529,
+        "holderGateRows": 18,
+        "poolAgg": {
+          "dawns": 0,
+          "eligDist": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3+": 0
+          },
+          "firstFails": {},
+          "rankedPickNull": 0,
+          "holderProfiles": {
+            "forager": 12
+          },
+          "memberProfiles": {
+            "homebody": 24,
+            "forager": 27,
+            "wanderer": 20
+          },
+          "memberProfilesByAway": {
+            "home:homebody": 22,
+            "home:forager": 16,
+            "away:wanderer": 18,
+            "away:forager": 11,
+            "away:homebody": 2,
+            "home:wanderer": 2
+          }
+        },
+        "countedLaunches": 1,
+        "launchRows": [
+          {
+            "day": 78,
+            "vid": "mara_vasquez",
+            "target": "herald",
+            "targetWave": 4,
+            "targetWaveLive": 4,
+            "counted": true,
+            "source": "brain",
+            "winPlanAction": "party_launch",
+            "stage": "hunt",
+            "partySize": 4,
+            "party": [
+              "diana_osei",
+              "chantal_mukendi",
+              "gen_x0hank1"
+            ],
+            "startCall": true,
+            "copyLink": null
+          },
+          {
+            "day": 84,
+            "vid": "gen_x0hank1",
+            "target": "herald",
+            "targetWave": null,
+            "targetWaveLive": 4,
+            "counted": false,
+            "source": "brain",
+            "winPlanAction": "party_launch",
+            "stage": "hunt",
+            "partySize": 2,
+            "party": [
+              "diana_osei"
+            ],
+            "startCall": true,
+            "copyLink": {
+              "day": 78,
+              "holder": "mara_vasquez",
+              "source": "brain"
+            }
+          }
+        ],
+        "firstFights": [
+          {
+            "launchDay": 78,
+            "launchVid": "mara_vasquez",
+            "target": "herald",
+            "fightDay": 78,
+            "fightVid": "chantal_mukendi",
+            "origin": "world-tick",
+            "outcome": "vFlee",
+            "mDealt": 69
+          }
+        ],
+        "repeatTarget": [],
+        "deaths": 116,
+        "starvation": 0,
+        "nationalStanding": true,
+        "nationalRank": false,
+        "standing199": false
+      },
+      {
+        "seed": 107384,
+        "gameDays": 144,
+        "endReason": "village-lost",
+        "standing": 150,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "substrateBad": [],
+        "instrumentErrors": 0,
+        "funnel": {
+          "launched-killed": 0,
+          "launched-fought-no-kill": 0,
+          "launched-no-meeting": 1,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "funnelSub": {
+          "launched-no-meeting:window:139-144": 1
+        },
+        "instancesOpened": 1,
+        "byBucket": {
+          "launched": 1,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "launched:companion:ruby_callaghan:dawn": 1
+        },
+        "notBid": [],
+        "churn": [],
+        "holderStateRows": 275,
+        "holderGateRows": 3,
+        "poolAgg": {
+          "dawns": 0,
+          "eligDist": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3+": 0
+          },
+          "firstFails": {},
+          "rankedPickNull": 0,
+          "holderProfiles": {
+            "forager": 3
+          },
+          "memberProfiles": {
+            "wanderer": 6,
+            "forager": 12
+          },
+          "memberProfilesByAway": {
+            "away:wanderer": 4,
+            "home:forager": 6,
+            "away:forager": 6,
+            "home:wanderer": 2
+          }
+        },
+        "countedLaunches": 2,
+        "launchRows": [
+          {
+            "day": 139,
+            "vid": "dmitri_sokolov",
+            "target": "reunion",
+            "targetWave": 4,
+            "targetWaveLive": 4,
+            "counted": true,
+            "source": "brain",
+            "winPlanAction": "party_launch",
+            "stage": "hunt",
+            "partySize": 4,
+            "party": [
+              "ruby_callaghan",
+              "nikos_papadopoulos",
+              "priya_nair"
+            ],
+            "startCall": true,
+            "copyLink": null
+          },
+          {
+            "day": 143,
+            "vid": "dmitri_sokolov",
+            "target": "reunion",
+            "targetWave": 4,
+            "targetWaveLive": 4,
+            "counted": true,
+            "source": "brain",
+            "winPlanAction": "party_launch",
+            "stage": "hunt",
+            "partySize": 4,
+            "party": [
+              "ruby_callaghan",
+              "gen_oknm8i5",
+              "dale_hoffman"
+            ],
+            "startCall": true,
+            "copyLink": null
+          }
+        ],
+        "firstFights": [],
+        "repeatTarget": [
+          {
+            "vid": "dmitri_sokolov",
+            "target": "reunion",
+            "launches": [
+              {
+                "day": 139,
+                "counted": true,
+                "partySize": 4
+              },
+              {
+                "day": 143,
+                "counted": true,
+                "partySize": 4
+              }
+            ],
+            "meetingsInWindow": 0,
+            "firstFightDay": null,
+            "track": [
+              {
+                "day": 139,
+                "stage": "hunt",
+                "holderNode": {
+                  "nx": 5,
+                  "ny": 5
+                },
+                "holderExped": true,
+                "lastKnownTile": {
+                  "nx": 5,
+                  "ny": 5
+                },
+                "lastKnownSource": "sighting",
+                "targetNearDist": 1,
+                "targetNearCount": 1,
+                "targetAliveCount": 4
+              },
+              {
+                "day": 140,
+                "stage": "hunt",
+                "holderNode": {
+                  "nx": 5,
+                  "ny": 5
+                },
+                "holderExped": true,
+                "lastKnownTile": {
+                  "nx": 5,
+                  "ny": 5
+                },
+                "lastKnownSource": "sighting",
+                "targetNearDist": 2,
+                "targetNearCount": 1,
+                "targetAliveCount": 4
+              },
+              {
+                "day": 141,
+                "stage": "hunt",
+                "holderNode": {
+                  "nx": 4,
+                  "ny": 4
+                },
+                "holderExped": false,
+                "lastKnownTile": {
+                  "nx": 5,
+                  "ny": 5
+                },
+                "lastKnownSource": "sighting",
+                "targetNearDist": 1,
+                "targetNearCount": 2,
+                "targetAliveCount": 4
+              },
+              {
+                "day": 142,
+                "stage": "hunt",
+                "holderNode": {
+                  "nx": 4,
+                  "ny": 5
+                },
+                "holderExped": false,
+                "lastKnownTile": {
+                  "nx": 5,
+                  "ny": 5
+                },
+                "lastKnownSource": "sighting",
+                "targetNearDist": 2,
+                "targetNearCount": 2,
+                "targetAliveCount": 4
+              },
+              {
+                "day": 143,
+                "stage": "hunt",
+                "holderNode": {
+                  "nx": 5,
+                  "ny": 5
+                },
+                "holderExped": true,
+                "lastKnownTile": {
+                  "nx": 5,
+                  "ny": 5
+                },
+                "lastKnownSource": "sighting",
+                "targetNearDist": 2,
+                "targetNearCount": 2,
+                "targetAliveCount": 4
+              },
+              {
+                "day": 144,
+                "stage": "hunt",
+                "holderNode": {
+                  "nx": 5,
+                  "ny": 5
+                },
+                "holderExped": true,
+                "lastKnownTile": {
+                  "nx": 5,
+                  "ny": 5
+                },
+                "lastKnownSource": "sighting",
+                "targetNearDist": 1,
+                "targetNearCount": 2,
+                "targetAliveCount": 4
+              }
+            ]
+          }
+        ],
+        "deaths": 64,
+        "starvation": 0,
+        "nationalStanding": false,
+        "nationalRank": false,
+        "standing199": false
+      },
+      {
+        "seed": 107385,
+        "gameDays": 148,
+        "endReason": "survived",
+        "standing": 600,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 5,
+        "substrateBad": [],
+        "instrumentErrors": 0,
+        "funnel": {
+          "launched-killed": 0,
+          "launched-fought-no-kill": 0,
+          "launched-no-meeting": 1,
+          "target-killed": 1,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 2,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "funnelSub": {
+          "launched-no-meeting:window:60-111": 1,
+          "plan-churned-before-dawn:holder-died": 2,
+          "target-killed:day:82": 1
+        },
+        "instancesOpened": 4,
+        "byBucket": {
+          "launched": 1,
+          "target-killed": 1,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 2,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "launched:companion:gen_6qd05qe:dawn": 1,
+          "plan-churned-before-dawn:holder-died": 2,
+          "target-killed:day:82": 1
+        },
+        "notBid": [],
+        "churn": [
+          {
+            "vid": "devon_okafor",
+            "target": "network_note",
+            "seedDay": 69,
+            "closeDay": 69,
+            "closeKind": "holder-died",
+            "closing": {
+              "kind": "death-row",
+              "day": 69,
+              "cause": "thirst"
+            },
+            "scoredDawns": 0,
+            "assessedDays": 0,
+            "assessed": [],
+            "assessedTally": {},
+            "zeroRowDays": 1,
+            "zeroRow": [
+              {
+                "day": 69,
+                "reason": "holder-dead",
+                "census": {
+                  "stage": "party",
+                  "target": "network_note",
+                  "holderAlive": true,
+                  "holderExped": false,
+                  "holderNode": {
+                    "nx": 7,
+                    "ny": 1
+                  },
+                  "holderSick": false,
+                  "holderHealth": 20
+                },
+                "memberAway": null
+              }
+            ],
+            "zeroRowTally": {
+              "holder-dead": 1
+            },
+            "instanceDays": 1,
+            "unknown": 0,
+            "hDays": [],
+            "hTally": {},
+            "hU": 0,
+            "hE": 0,
+            "hS": 0,
+            "sParts": [
+              {
+                "day": 69,
+                "part": 0,
+                "scored": false,
+                "whyNot": "dead"
+              },
+              {
+                "day": 69,
+                "part": 1,
+                "scored": false,
+                "whyNot": "dead"
+              },
+              {
+                "day": 69,
+                "part": 2,
+                "scored": false,
+                "whyNot": "dead"
+              },
+              {
+                "day": 69,
+                "part": 3,
+                "scored": false,
+                "whyNot": "away"
+              }
+            ],
+            "sTally": {
+              "dead": 3,
+              "away": 1
+            },
+            "sPartsTotal": 4,
+            "sScored": 0,
+            "sExplained": 4,
+            "sUnexplained": 0,
+            "sSeedDayParts": 0
+          },
+          {
+            "vid": "visjoin_107",
+            "target": "timeslot",
+            "seedDay": 111,
+            "closeDay": 113,
+            "closeKind": "holder-died",
+            "closing": {
+              "kind": "death-row",
+              "day": 113,
+              "cause": "monster"
+            },
+            "scoredDawns": 0,
+            "assessedDays": 0,
+            "assessed": [],
+            "assessedTally": {},
+            "zeroRowDays": 3,
+            "zeroRow": [
+              {
+                "day": 111,
+                "reason": "seed-day",
+                "census": {
+                  "stage": "party",
+                  "target": "timeslot",
+                  "holderAlive": true,
+                  "holderExped": false,
+                  "holderNode": {
+                    "nx": 0,
+                    "ny": 0
+                  },
+                  "holderSick": false,
+                  "holderHealth": 18
+                },
+                "memberAway": null
+              },
+              {
+                "day": 112,
+                "reason": "holder-off-haven",
+                "census": {
+                  "stage": "party",
+                  "target": "timeslot",
+                  "holderAlive": true,
+                  "holderExped": false,
+                  "holderNode": {
+                    "nx": 1,
+                    "ny": 1
+                  },
+                  "holderSick": false,
+                  "holderHealth": 16
+                },
+                "memberAway": null
+              },
+              {
+                "day": 113,
+                "reason": "holder-dead",
+                "census": null,
+                "memberAway": null
+              }
+            ],
+            "zeroRowTally": {
+              "seed-day": 1,
+              "holder-off-haven": 1,
+              "holder-dead": 1
+            },
+            "instanceDays": 3,
+            "unknown": 0,
+            "hDays": [],
+            "hTally": {},
+            "hU": 0,
+            "hE": 0,
+            "hS": 0,
+            "sParts": [
+              {
+                "day": 111,
+                "part": 0,
+                "scored": false,
+                "whyNot": "seed-day"
+              },
+              {
+                "day": 111,
+                "part": 1,
+                "scored": false,
+                "whyNot": "seed-day"
+              },
+              {
+                "day": 111,
+                "part": 2,
+                "scored": false,
+                "whyNot": "seed-day"
+              },
+              {
+                "day": 111,
+                "part": 3,
+                "scored": false,
+                "whyNot": "away"
+              },
+              {
+                "day": 112,
+                "part": 0,
+                "scored": false,
+                "whyNot": "away"
+              },
+              {
+                "day": 112,
+                "part": 1,
+                "scored": false,
+                "whyNot": "away"
+              },
+              {
+                "day": 112,
+                "part": 2,
+                "scored": false,
+                "whyNot": "away"
+              },
+              {
+                "day": 112,
+                "part": 3,
+                "scored": false,
+                "whyNot": "away"
+              },
+              {
+                "day": 113,
+                "part": 0,
+                "scored": false,
+                "whyNot": "away"
+              },
+              {
+                "day": 113,
+                "part": 1,
+                "scored": false,
+                "whyNot": "away"
+              },
+              {
+                "day": 113,
+                "part": 2,
+                "scored": false,
+                "whyNot": "away"
+              },
+              {
+                "day": 113,
+                "part": 3,
+                "scored": false,
+                "whyNot": "dead"
+              }
+            ],
+            "sTally": {
+              "seed-day": 3,
+              "away": 8,
+              "dead": 1
+            },
+            "sPartsTotal": 12,
+            "sScored": 0,
+            "sExplained": 12,
+            "sUnexplained": 0,
+            "sSeedDayParts": 3
+          }
+        ],
+        "holderStateRows": 51,
+        "holderGateRows": 0,
+        "poolAgg": {
+          "dawns": 0,
+          "eligDist": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3+": 0
+          },
+          "firstFails": {},
+          "rankedPickNull": 0,
+          "holderProfiles": {
+            "forager": 1
+          },
+          "memberProfiles": {
+            "homebody": 1,
+            "forager": 3,
+            "wanderer": 1
+          },
+          "memberProfilesByAway": {
+            "away:homebody": 1,
+            "away:forager": 2,
+            "home:forager": 1,
+            "away:wanderer": 1
+          }
+        },
+        "countedLaunches": 0,
+        "launchRows": [],
+        "firstFights": [],
+        "repeatTarget": [],
+        "deaths": 118,
+        "starvation": 0,
+        "nationalStanding": true,
+        "nationalRank": false,
+        "standing199": false
+      },
+      {
+        "seed": 107386,
+        "gameDays": 103,
+        "endReason": "village-lost",
+        "standing": 190,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "substrateBad": [],
+        "instrumentErrors": 0,
+        "funnel": {
+          "launched-killed": 0,
+          "launched-fought-no-kill": 0,
+          "launched-no-meeting": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "funnelSub": {},
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "notBid": [],
+        "churn": [],
+        "holderStateRows": 0,
+        "holderGateRows": 0,
+        "poolAgg": {
+          "dawns": 0,
+          "eligDist": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3+": 0
+          },
+          "firstFails": {},
+          "rankedPickNull": 0,
+          "holderProfiles": {},
+          "memberProfiles": {},
+          "memberProfilesByAway": {}
+        },
+        "countedLaunches": 0,
+        "launchRows": [],
+        "firstFights": [],
+        "repeatTarget": [],
+        "deaths": 81,
+        "starvation": 0,
+        "nationalStanding": false,
+        "nationalRank": false,
+        "standing199": false
+      },
+      {
+        "seed": 107387,
+        "gameDays": 85,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "substrateBad": [],
+        "instrumentErrors": 0,
+        "funnel": {
+          "launched-killed": 0,
+          "launched-fought-no-kill": 0,
+          "launched-no-meeting": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "funnelSub": {},
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "notBid": [],
+        "churn": [],
+        "holderStateRows": 0,
+        "holderGateRows": 0,
+        "poolAgg": {
+          "dawns": 0,
+          "eligDist": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3+": 0
+          },
+          "firstFails": {},
+          "rankedPickNull": 0,
+          "holderProfiles": {},
+          "memberProfiles": {},
+          "memberProfilesByAway": {}
+        },
+        "countedLaunches": 0,
+        "launchRows": [],
+        "firstFights": [],
+        "repeatTarget": [],
+        "deaths": 70,
+        "starvation": 0,
+        "nationalStanding": false,
+        "nationalRank": false,
+        "standing199": true
+      },
+      {
+        "seed": 107388,
+        "gameDays": 151,
+        "endReason": "survived",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "substrateBad": [],
+        "instrumentErrors": 0,
+        "funnel": {
+          "launched-killed": 0,
+          "launched-fought-no-kill": 0,
+          "launched-no-meeting": 0,
+          "target-killed": 0,
+          "selected-blocked": 1,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "funnelSub": {
+          "selected-blocked:danger-gate": 1
+        },
+        "instancesOpened": 1,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 1,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {
+          "selected-blocked:danger-gate": 1
+        },
+        "notBid": [],
+        "churn": [],
+        "holderStateRows": 9,
+        "holderGateRows": 1,
+        "poolAgg": {
+          "dawns": 0,
+          "eligDist": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3+": 0
+          },
+          "firstFails": {},
+          "rankedPickNull": 0,
+          "holderProfiles": {
+            "forager": 1
+          },
+          "memberProfiles": {
+            "forager": 3,
+            "wanderer": 2,
+            "explorer": 1
+          },
+          "memberProfilesByAway": {
+            "home:forager": 2,
+            "away:wanderer": 2,
+            "away:forager": 1,
+            "home:explorer": 1
+          }
+        },
+        "countedLaunches": 0,
+        "launchRows": [],
+        "firstFights": [],
+        "repeatTarget": [],
+        "deaths": 77,
+        "starvation": 0,
+        "nationalStanding": false,
+        "nationalRank": false,
+        "standing199": true
+      },
+      {
+        "seed": 107389,
+        "gameDays": 68,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "substrateBad": [],
+        "instrumentErrors": 0,
+        "funnel": {
+          "launched-killed": 0,
+          "launched-fought-no-kill": 0,
+          "launched-no-meeting": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "funnelSub": {},
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "notBid": [],
+        "churn": [],
+        "holderStateRows": 0,
+        "holderGateRows": 0,
+        "poolAgg": {
+          "dawns": 0,
+          "eligDist": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3+": 0
+          },
+          "firstFails": {},
+          "rankedPickNull": 0,
+          "holderProfiles": {},
+          "memberProfiles": {},
+          "memberProfilesByAway": {}
+        },
+        "countedLaunches": 0,
+        "launchRows": [],
+        "firstFights": [],
+        "repeatTarget": [],
+        "deaths": 64,
+        "starvation": 3,
+        "nationalStanding": false,
+        "nationalRank": false,
+        "standing199": true
+      },
+      {
+        "seed": 107390,
+        "gameDays": 139,
+        "endReason": "village-lost",
+        "standing": 199,
+        "scaleRank": "regional",
+        "won": false,
+        "maxWave": 4,
+        "substrateBad": [],
+        "instrumentErrors": 0,
+        "funnel": {
+          "launched-killed": 0,
+          "launched-fought-no-kill": 0,
+          "launched-no-meeting": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "funnelSub": {},
+        "instancesOpened": 0,
+        "byBucket": {
+          "launched": 0,
+          "target-killed": 0,
+          "selected-blocked": 0,
+          "bid-not-selected": 0,
+          "plan-churned-before-dawn": 0,
+          "candidate-not-bid": 0,
+          "unknown": 0
+        },
+        "bySub": {},
+        "notBid": [],
+        "churn": [],
+        "holderStateRows": 0,
+        "holderGateRows": 0,
+        "poolAgg": {
+          "dawns": 0,
+          "eligDist": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3+": 0
+          },
+          "firstFails": {},
+          "rankedPickNull": 0,
+          "holderProfiles": {},
+          "memberProfiles": {},
+          "memberProfilesByAway": {}
+        },
+        "countedLaunches": 0,
+        "launchRows": [],
+        "firstFights": [],
+        "repeatTarget": [],
+        "deaths": 144,
+        "starvation": 0,
+        "nationalStanding": false,
+        "nationalRank": false,
+        "standing199": true
+      }
+    ]
+  },
+  "repro": {
+    "dir": "perseed-strikeband4-b-106241-106248",
+    "files": 8,
+    "unknownDays": [
+      [
+        106241,
+        "visjoin_91",
+        "algorithm",
+        97
+      ],
+      [
+        106241,
+        "visjoin_91",
+        "algorithm",
+        103
+      ],
+      [
+        106243,
+        "visjoin_116",
+        "influencer",
+        122
+      ],
+      [
+        106246,
+        "visjoin_125",
+        "strike",
+        129
+      ],
+      [
+        106246,
+        "visjoin_125",
+        "strike",
+        131
+      ],
+      [
+        106246,
+        "visjoin_125",
+        "strike",
+        135
+      ],
+      [
+        106246,
+        "visjoin_96",
+        "editor",
+        146
+      ],
+      [
+        106247,
+        "david_kim",
+        "eulogy",
+        72
+      ],
+      [
+        106247,
+        "fatima_hassan",
+        "reunion",
+        98
+      ],
+      [
+        106247,
+        "app_mgpspki2526",
+        "spoiler",
+        127
+      ]
+    ],
+    "expected": [
+      [
+        106241,
+        "visjoin_91",
+        "algorithm",
+        97
+      ],
+      [
+        106241,
+        "visjoin_91",
+        "algorithm",
+        103
+      ],
+      [
+        106243,
+        "visjoin_116",
+        "influencer",
+        122
+      ],
+      [
+        106246,
+        "visjoin_125",
+        "strike",
+        129
+      ],
+      [
+        106246,
+        "visjoin_125",
+        "strike",
+        131
+      ],
+      [
+        106246,
+        "visjoin_125",
+        "strike",
+        135
+      ],
+      [
+        106246,
+        "visjoin_96",
+        "editor",
+        146
+      ],
+      [
+        106247,
+        "david_kim",
+        "eulogy",
+        72
+      ],
+      [
+        106247,
+        "fatima_hassan",
+        "reunion",
+        98
+      ],
+      [
+        106247,
+        "app_mgpspki2526",
+        "spoiler",
+        127
+      ]
+    ],
+    "exact": true,
+    "holderStateRows": 0,
+    "holderStateRowsOk": true,
+    "bandUnknown": 10
+  },
+  "bars": {
+    "completeness": {
+      "pass": true,
+      "unknown": 0,
+      "scoredMismatch": 0,
+      "hU": 0,
+      "hE": 0,
+      "hS": 0,
+      "hTally": {},
+      "mechanism": "UNTESTED",
+      "sParts": 16,
+      "sScored": 0,
+      "sExplained": 16,
+      "sUnexplained": 0,
+      "sWhyNot": {
+        "dead": 4,
+        "away": 9,
+        "seed-day": 3
+      },
+      "sSeedDayParts": 3
+    },
+    "reproduction": {
+      "pass": true,
+      "exact": true,
+      "holderStateRows": 0,
+      "holderStateRowsOk": true,
+      "gotDays": 10,
+      "wantDays": 10
+    },
+    "instrument": {
+      "pass": true,
+      "files": 8,
+      "errors": 0,
+      "substrateBadFiles": 0,
+      "holderStateRows": 864,
+      "holderGateRows": 22
+    }
+  },
+  "legacyBars": {
+    "completeness": {
+      "pass": true,
+      "unknown": 0,
+      "scoredMismatch": 0,
+      "hU": 0,
+      "hE": 0,
+      "hS": 0,
+      "hTally": {},
+      "mechanism": "UNTESTED"
+    },
+    "reproduction": {
+      "pass": true,
+      "exact": true,
+      "holderStateRows": 0,
+      "holderStateRowsOk": true,
+      "gotDays": 10,
+      "wantDays": 10
+    },
+    "bindingGate": {
+      "pass": false,
+      "gate": null,
+      "count": 0,
+      "assessedDays": 0
+    },
+    "launchSanity": {
+      "pass": true,
+      "noStartCall": 0,
+      "noCopyLink": 0,
+      "wave4TargetLaunches": 4,
+      "uncounted": 1
+    },
+    "instrument": {
+      "pass": true,
+      "files": 8,
+      "errors": 0,
+      "substrateBadFiles": 0,
+      "holderStateRows": 864,
+      "holderGateRows": 22,
+      "got": {
+        "instances": 7,
+        "candidateNotBid": 0,
+        "churned": 2,
+        "wave4TargetLaunches": 4,
+        "uncountedLaunches": 1,
+        "scoredNotBidDawns": 0,
+        "instanceDays": 0,
+        "assessedDays": 0,
+        "dawnDays": 0,
+        "middayOnlyDays": 0,
+        "assessedRows": 0,
+        "middayRows": 0,
+        "zeroRowDays": 0,
+        "unknownZeroRowDays": 0
+      }
+    }
+  },
+  "verdict": "DIAG-GO"
+}
