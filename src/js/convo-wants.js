@@ -1110,7 +1110,9 @@
             return `"You said you'd help with ${favor.short}. It's still open — but that promise is dead."`;
           }
           if (c.want) c.want._favorSettle = 'acknowledged';
-          return `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`;
+          // r250: name HOW the need resolved (see convoFavorResolvedWithoutYou)
+          // — never a flat "It's done now" the day after "the need isn't [dead]".
+          return `"You said you'd help with ${favor.short}. ...${this.convoFavorResolvedWithoutYou(favor)} Forget it."`;
         }
         // Legacy / no favor state — the old generic lines (defensive).
         // The debt is a PROMISE, not a deed — the fiction must not claim the
@@ -1155,9 +1157,11 @@
                 `"${cap} — still open. The promise died, not the need."`,
               ]);
             }
+            // r250: name HOW the need resolved (see convoFavorResolvedWithoutYou).
+            const _res = this.convoFavorResolvedWithoutYou(favor);
             return this.convoPickCycle(vid, 'repay:stale:' + (favor.kind || 'favor'), [
-              `"About ${sh} — I keep turning it over. It's done now, but I haven't forgotten it."`,
-              `"${cap} — it's done now. I keep turning it over anyway."`,
+              `"About ${sh} — I keep turning it over. ${_res}"`,
+              `"${cap} — ${_res} I keep turning it over anyway."`,
             ]);
           }
           if (favor.state === 'promised' && open && open.favorId === favor.id) {
@@ -1232,10 +1236,12 @@
               `"About ${favor.short} — still open. The promise died, not the need."`,
             ]) || `"You said you'd help with ${favor.short}. It's still open — but that promise is dead."`;
           }
+          // r250: name HOW the need resolved (see convoFavorResolvedWithoutYou).
+          const _res = this.convoFavorResolvedWithoutYou(favor);
           return this.convoPickCycle(vid, 'repay:help:broken:' + (favor.kind || 'favor'), [
-            `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`,
-            `"About ${favor.short} — it's done. I haven't forgotten, but I'm not asking again."`,
-          ]) || `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`;
+            `"You said you'd help with ${favor.short}. ...${_res} Forget it."`,
+            `"About ${favor.short} — ${_res} I'm not asking again."`,
+          ]) || `"You said you'd help with ${favor.short}. ...${_res} Forget it."`;
         }
         // False-settlement guard (r240): an acknowledged favor whose need
         // has returned (re-wounded after a legitimate settle) is not
@@ -2551,6 +2557,29 @@
       } catch (e) { return true; }
     },
 
+    // convoFavorResolvedWithoutYou: HOW a broken promise's need resolved,
+    // for the dead-need lines below. The r240 guard fixed the live-need
+    // case ("don't call a live need done"); the dead-need case still
+    // collapsed "need met" and "promise settled" into one flat "It's done
+    // now. Forget it." — one day after the same NPC insisted the need was
+    // still live (journey-scale r250, seed 106261: d128 "About the creek
+    // water run — still open. That promise is dead, but the need isn't."
+    // -> d129 "It's done now. Forget it."; the cistern was dry d128 and
+    // water arrived overnight). The engine knows whether the outing
+    // completed or the need simply passed; name that. The promise stays
+    // broken — callers still record the 'acknowledged' settle as before
+    // (the NEED is gone, the PROMISE stays broken).
+    convoFavorResolvedWithoutYou(favor) {
+      if (!favor) return "It's handled now, not by you.";
+      try {
+        if ((favor.kind === 'water_haul' && favor.waterRun && favor.waterRun.returned) ||
+            (favor.kind === 'forage_help' && favor.forageRun && favor.forageRun.returned)) {
+          return 'The run got done without you.';
+        }
+      } catch (e) {}
+      return "It's handled now, not by you.";
+    },
+
     // convoFavorFollowup: the NPC remembers the prior ask. The follow-up
     // names it — never resets it, never re-asks verbatim.
     convoFavorFollowup(vid, favor) {
@@ -2577,7 +2606,8 @@
           return `"You said you'd help with ${favor.short}. It's still open — but that promise is dead."`;
         }
         if (c && c.want) c.want._favorSettle = 'acknowledged';
-        return `"You said you'd help with ${favor.short}. ...It's done now. Forget it."`;
+        // r250: name HOW the need resolved (see convoFavorResolvedWithoutYou).
+        return `"You said you'd help with ${favor.short}. ...${this.convoFavorResolvedWithoutYou(favor)} Forget it."`;
       }
       if (favor.state === 'asked') {
         if (!this.convoFavorNeedLive(favor)) {
