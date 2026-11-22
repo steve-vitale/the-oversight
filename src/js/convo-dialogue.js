@@ -440,6 +440,20 @@
         // farm on a dead button. After two dead reacts in a row the menu
         // stops offering it (convo-beats.js reads c.reactDryCount); a landed
         // beat resets the count (see convoThreadBeat).
+        // DRY-COUNT WASHOUT (journey-deepening r269 2026-11-22): convoThreadBeat
+        // resets reactDryCount to 0 as soon as it FINDS a beat — before this
+        // handler checks whether the ledger BLOCKS that beat (DRY3). A
+        // found-but-blocked beat therefore washed the dead streak to 0 and
+        // the filler below re-raised it to 1, so the count could never reach
+        // 2 while blockable beats kept being found: react stayed offered
+        // forever and the 4-line dead-react pool cycled verbatim on the 5th
+        // press (Henry, seed 105123 day 60, r269 panel — the r246 exhaustion
+        // gate never fired). The just_company engageBeat is a CONSTANT line,
+        // so after it is spoken once every react press finds it, blocks it,
+        // and washes the count. Snapshot the count; a blocked beat restores
+        // it so the streak counts CONSECUTIVE dead reacts. A landed beat
+        // keeps the reset (it returns above).
+        const dryCountBefore = c.reactDryCount || 0;
         const beat = (!dry && Math.random() < 0.6) ? this.convoThreadBeat(vid) : null;
         if (beat) {
           const composed = this.convoComposeDlg(vid, beat, choiceId);
@@ -465,6 +479,10 @@
             c.threadDryFor = null;
             return { line: composed, choices: this.convoChoices(vid), ended: false, transcript: c.transcript.slice() };
           }
+          // Blocked beat (DRY3): the finder-side reset in convoThreadBeat
+          // must not wash the dead streak — restore the pre-attempt count
+          // so the increment below counts this press as consecutive-dead.
+          c.reactDryCount = dryCountBefore;
         }
         c.reactDryCount = (c.reactDryCount || 0) + 1;
         // REBUILD 2026-10-11: the hardcoded "Anyway." looped VERBATIM —
