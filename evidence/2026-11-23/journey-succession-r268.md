@@ -382,3 +382,39 @@ The 6 failures, all attributed, 0 attributable to this run:
 No new failure. The gate is the standing set (2 staleness + 1
 phone-frame + 3 load-flake timeouts, all re-proven green
 standalone) and nothing else. 0 attributable.
+
+### Gate re-run on the re-based tip (master moved during the gate)
+
+While the gate above ran, master moved (`fdd90bb48`, the 1230Z
+adoption landing sim-doorstage-b: GO), so the ff-only merge failed
+and the branch was rebased onto `fdd90bb48` (clean, no overlap with
+this run's files). The full proof battery was re-run green on the
+new tip (see `journey-succession-r268-rebased-proofs-fdd90bb48.log`),
+and the gate was re-run on the new tip (HEAD `5c4ad91ed`):
+**334 passed, 10 failed in 1488s** (`evidence/2026-11-23/
+journey-succession-r268-gate-2.log`, start 16:43:37Z, end 17:08:25Z).
+The extra 4 failures vs the first gate are load: a sibling gate ran
+concurrently for part of this run (two check.js at once), under load
+averages 18–21.
+
+The 10, all attributed, 0 attributable:
+
+- test-measurement-proof-update.js + test-measurement-workflow.js:
+  the staleness pair, same standing cause as above.
+- test-phone-frame-proof.js: the stale receipt, same standing cause.
+- Six 120s timeouts, all re-run standalone, serialized, on the new
+  tip — all green: living-garden 8/8, occupation-panels 25/25,
+  one-person-army 7/7, trust-observer-neutrality 6/6, synergy-stall
+  EXIT=0, capable-bot 40/40. (`...-gate-standalone-2.log`.)
+  Confirmed load flakes.
+- test-measurement-cache-flags.js (exit 1, 81.5s): 0/4 in gate 2,
+  but it PASSED in gate 1 on the tip with this run's fix, and the
+  only delta between the tips is the doorstage-b landing (evidence
+  + driver + test — it touches no balance-panel, SIMOPT, or cache
+  code). Standalone on the new tip: 3/4, then 4/4, then 4/4 on
+  three consecutive runs. The test spawns balance-panel.js with a
+  30s timeout per CLI configuration — a load-sensitive flake, not a
+  defect. 0 attributable.
+
+Final gate verdict: 334/10, standing set + load flakes only,
+0 attributable. The branch is mergeable.
