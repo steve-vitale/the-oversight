@@ -7,12 +7,17 @@
 // §6: PRIMARY wave-4+ departure attempts (armed >= ctl + 4) AND at
 // least one control-STUCK staged plan actually departs on the armed
 // leg; GUARDRAILS starvation + median survival + total deaths; plus
-// the det-gate with a SHAPE-AGNOSTIC bound (first extra depart call
-// on the armed leg, or first day any recorded event stream differs)
+// the det-gate with a SHAPE-AGNOSTIC, BID-INCLUSIVE bound (first
+// extra depart call on the armed leg, first non-skipped safety
+// check, or first party_launch bid divergence — whichever is
+// earliest — or first day any recorded event stream differs)
 // and anchor checks that actually compare the recorded anchorCommit
 // / brainSha / winplanSha fields against expected values (a missing
 // expectation FAILS the check — never the vacuous checked:false the
-// 2115Z analyzer returned).
+// 2115Z analyzer returned). The bid-inclusive bound is the
+// sim-departsafe-rejudge-a correction (prereg §2): a deferred
+// part-3 bid is the lever's first observable effect a day before
+// the depart call it produces.
 // Also emits the DIAG tables from the control leg alone
 // (--diag-only): choke rate by holder occupation and plan shape,
 // and the sub-choke breakdown (no companion at dawn / companions
@@ -76,7 +81,8 @@ function median(xs) {
 // streams carried over unchanged.
 const DET_STREAMS = ['departCalls', 'scorePicks', 'v4departs', 'planSeeds', 'v4fights',
   'volleyEvents', 'prizeEvents', 'grantEvents', 'contestEvents', 'deaths',
-  'planCensus', 'dawnPool', 'needWaveCopies', 'departBeats', 'reseedBeats', 'beatLines'];
+  'planCensus', 'dawnPool', 'needWaveCopies', 'departBeats', 'reseedBeats', 'beatLines',
+  'departSafeCalls'];
 
 // ---- Order-insensitive comparison (sim-detgate-order-a) ----
 // The det-gate compares the two legs' recorded streams before the
@@ -252,7 +258,17 @@ function unionFindGroups(sets) {
 function canonicalMultisets(raw) {
   const canonRows = {};
   for (const stream of DET_STREAMS) {
-    canonRows[stream] = (raw[stream] || []).map(function (r) { return canonicalizeRow(stream, r); });
+    canonRows[stream] = (raw[stream] || []).filter(function (r) {
+      // DEPARTSAFE (sim-departsafe-a): a SKIPPED safety call
+      // returns before any gear-up, stats bump, or member judgment
+      // — it has zero state effect, so it is invisible to the
+      // det-gate (the same way the gate is blind to party order,
+      // a recording artifact). Only non-skipped rows can diverge
+      // the legs. Without this filter the arm leg "diverges" on
+      // the first wave-3 departure (day 5-11 on the pilot band)
+      // merely by recording that the check ran and skipped.
+      return !(stream === 'departSafeCalls' && r && r.skipped);
+    }).map(function (r) { return canonicalizeRow(stream, r); });
   }
   // (d) Party-level plan-target multiset. A departure party persists
   // across the expedition: the plan targets set at departure (with
@@ -369,6 +385,72 @@ function firstExtraDepartDay(ctlRow, armRow) {
   return first;
 }
 
+// DEPARTSAFE (sim-departsafe-a): earliest day the armed leg records
+// a NON-SKIPPED departSafeCheck call — the safety bar's first state
+// effect (gear-up runs before the member judgment, so even a passing
+// check can move state). Skipped rows (non-wave-4+ plans) touch
+// nothing and do not count. Null when the stream is absent or has
+// no non-skipped row — the det-gate bound then falls back to the
+// re-judge rule (ctl-vs-lift, old corpora).
+function firstSafetyDay(armRow) {
+  let first = null;
+  for (const r of (((armRow || {}).raw || {}).departSafeCalls || [])) {
+    if (r.skipped) continue;
+    if (first == null || (r.day | 0) < first) first = (r.day | 0);
+  }
+  return first;
+}
+
+// DEPARTSAFE-REJUDGE (sim-departsafe-rejudge-a): earliest day the
+// armed leg records a party_launch BID for a staged wave-4+ plan
+// that the control leg does not record for the same holder that
+// day — the lever's first effect when the first bid is a deferred
+// part-3 bid (sim-departsafe-a seed 107611: bid day 64, first extra
+// depart call day 65). The bid IS the lever acting: the door admits
+// a forager companion for the staged plan, so the dawn scorer picks
+// party_launch where the control picks party_wait. A bid counts
+// only when its wave-4+ plan is proven from the depart call it
+// produces: the same-day brain depart call for a non-deferred bid,
+// the next-day call for a deferred bid ('party_launch:no-tick-exact'
+// has no tick left to execute, so the departure lands the next day).
+// The window is tight on purpose — a wider window could attribute
+// a wave-3 bid to a wave-4+ plan staged the next day. The same-day
+// census row cannot prove the plan: it is an end-of-day snapshot and
+// a same-day launch CONSUMES the plan before the census (107601
+// day 79: zoltan bids party_launch part 0 for eater/needWave-4,
+// launches part 1, and the day-79 census row shows stage 'gear',
+// target null). A bid with no wave-4+ depart call on its execution
+// day is NOT counted (conservative: a missed bid can only cause a
+// false NO-GO, never a false GO — the bound falls back to
+// firstExtra/firstSafety). Null when no day satisfies all three
+// conditions. The bid cannot precede the first divergence (a bid
+// difference IS a scorePicks difference), so adding it to the bound
+// can never mask an unexplained earlier divergence.
+function firstBidDivergenceDay(ctlRow, armRow) {
+  const ctlBids = {};
+  for (const r of (((ctlRow || {}).raw || {}).scorePicks || [])) {
+    if (r.winPlanAction === 'party_launch') ctlBids[r.vid + '|' + (r.day | 0)] = true;
+  }
+  const armW4CallDays = {};
+  for (const r of (((armRow || {}).raw || {}).departCalls || [])) {
+    if (r.source !== 'brain') continue;
+    if (!isW4Plan(r.planTarget, r.planNeedWave)) continue;
+    if (!armW4CallDays[r.vid]) armW4CallDays[r.vid] = {};
+    armW4CallDays[r.vid][r.day | 0] = true;
+  }
+  let first = null;
+  for (const r of (((armRow || {}).raw || {}).scorePicks || [])) {
+    if (r.winPlanAction !== 'party_launch') continue;
+    if (ctlBids[r.vid + '|' + (r.day | 0)]) continue;
+    // Execution day: the bid's own day, or the next day when the
+    // bid is a deferred part-3 bid.
+    const callDay = (r.deferred === 'party_launch:no-tick-exact') ? (r.day | 0) + 1 : (r.day | 0);
+    if (!((armW4CallDays[r.vid] || {})[callDay])) continue;
+    if (first == null || (r.day | 0) < first) first = (r.day | 0);
+  }
+  return first;
+}
+
 function isReleaseRow(r) {
   return !!r && r.source === 'brain' && STAGED.indexOf(r.planStage) !== -1 &&
     isW4Plan(r.planTarget, r.planNeedWave) &&
@@ -393,6 +475,12 @@ function analyzeSeed(out) {
     if (isReleaseRow(r) && (firstReleaseDay == null || r.day < firstReleaseDay)) firstReleaseDay = r.day;
   }
   const ctlReleaseRows = brainCalls.filter(isReleaseRow).length;
+  // DEPARTSAFE (sim-departsafe-a): safety-bar call census.
+  const safetyRows = (out.departSafeCalls || []).slice();
+  const safetyCalls = safetyRows.filter(function (r) { return !r.skipped; });
+  const safetyHolds = safetyCalls.filter(function (r) { return !r.ok; });
+  const safetyPasses = safetyCalls.filter(function (r) { return r.ok; });
+  const firstSafety = firstSafetyDay({ raw: out });
   // ---- Choke census: staged-plan days from planCensus ----
   // A staged-plan day is a census row for a living, at-Haven,
   // not-on-expedition holder of a staged wave-4+ plan OR a
@@ -519,6 +607,9 @@ function analyzeSeed(out) {
     wpAttempts: wpAttempts.length,
     wpCalls: wpCalls.length, brainCalls: brainCalls.length,
     firstReleaseDay: firstReleaseDay, ctlReleaseRows: ctlReleaseRows,
+    safetyCalls: safetyCalls.length, safetyHolds: safetyHolds.length,
+    safetyPasses: safetyPasses.length, safetySkips: safetyRows.length - safetyCalls.length,
+    firstSafetyDay: firstSafety,
     launchDetail: launchDetail,
     stagedDays: stagedDays, chokeDays: chokeDays,
     chokeRate: stagedDays ? chokeDays / stagedDays : null,
@@ -542,15 +633,37 @@ function loadLeg(dir, mode, seeds) {
 
 function detGateForSeed(ctlRow, armRow) {
   const firstExtra = firstExtraDepartDay(ctlRow, armRow);
+  const firstSafety = firstSafetyDay(armRow);
+  const firstBid = firstBidDivergenceDay(ctlRow, armRow);
   const cCanon = canonicalMultisets(ctlRow.raw);
   const aCanon = canonicalMultisets(armRow.raw);
   const firstDiv = firstDivergenceDayFromCanon(cCanon, aCanon);
-  const bound = (firstExtra == null) ? firstDiv
-    : (firstDiv == null) ? firstExtra : Math.min(firstExtra, firstDiv);
+  // DEPARTSAFE (sim-departsafe-a) + DEPARTSAFE-REJUDGE
+  // (sim-departsafe-rejudge-a): the bound is the earliest
+  // lever-attributable effect day — the first extra depart call OR
+  // the first non-skipped safety check OR the first party_launch
+  // bid divergence, whichever is earliest. The bid is the third
+  // source because a deferred part-3 bid is the lever's first
+  // observable effect a day before the depart call it produces
+  // (sim-departsafe-a seed 107611: bid 64, call 65, safety 66).
+  // The safety check's gear-up is itself a state effect, so a
+  // gear-up divergence before the first extra depart call must
+  // not fail the gate. When the arm leg records no lever effect
+  // at all (old corpora, or the lift leg with no safety calls) the
+  // bound falls back to the first divergence day. Attribution: the
+  // first divergence must BE one of the lever-effect days — a
+  // divergence before any lever effect, or with no lever effect
+  // at all, still fails.
+  const effectDays = [firstExtra, firstSafety, firstBid].filter(function (d) { return d != null; });
+  const bound = (effectDays.length === 0) ? firstDiv : Math.min.apply(null, effectDays);
   const detail = { seed: ctlRow.seed, bound: bound,
-    firstExtraDepartDay: firstExtra, firstDivergenceDay: firstDiv, mismatches: [] };
+    firstExtraDepartDay: firstExtra, firstSafetyDay: firstSafety, firstBidDivergenceDay: firstBid,
+    firstDivergenceDay: firstDiv, mismatches: [] };
   if (ctlRow.ctlReleaseRows !== 0) {
     detail.mismatches.push('ctl leg recorded ' + ctlRow.ctlReleaseRows + ' first-release rows (must be 0)');
+  }
+  if ((ctlRow.raw.departSafeCalls || []).length !== 0) {
+    detail.mismatches.push('ctl leg recorded ' + ctlRow.raw.departSafeCalls.length + ' departSafeCalls rows (must be 0)');
   }
   // Pre-bound streams identical (verified independently of the bound
   // computation: canonical per-day multisets for days < bound).
@@ -568,11 +681,14 @@ function detGateForSeed(ctlRow, armRow) {
     }
   }
   // Attribution: the first divergence must BE the lever's first
-  // extra depart call. A stream diverging before any extra depart
-  // call, or diverging with no extra depart call at all, fails.
-  if (firstDiv != null && (firstExtra == null || firstDiv !== firstExtra)) {
-    detail.mismatches.push('first divergence day ' + firstDiv + ' is not the first extra depart call day ' +
-      (firstExtra == null ? '(none)' : String(firstExtra)));
+  // extra depart call, its first safety effect, or its first
+  // party_launch bid divergence. A stream diverging before any
+  // lever effect, or diverging with no lever effect at all, fails.
+  if (firstDiv != null && firstDiv !== firstExtra && firstDiv !== firstSafety && firstDiv !== firstBid) {
+    detail.mismatches.push('first divergence day ' + firstDiv + ' is not a lever-effect day (first extra depart ' +
+      (firstExtra == null ? '(none)' : String(firstExtra)) + ', first safety effect ' +
+      (firstSafety == null ? '(none)' : String(firstSafety)) + ', first bid divergence ' +
+      (firstBid == null ? '(none)' : String(firstBid)) + ')');
   }
   detail.pass = detail.mismatches.length === 0;
   return detail;
@@ -801,7 +917,7 @@ function selftest() {
       corpseTakeEvents: [], killLootEvents: [], volleyEvents: [],
       v4departs: [], v4fights: [], planSeeds: [], planCensus: [],
       needWaveCopies: [], departBeats: [], reseedBeats: [], beatLines: [],
-      departCalls: [], scorePicks: [], dawnPool: [],
+      departCalls: [], scorePicks: [], dawnPool: [], departSafeCalls: [],
       sayWrap: true }, o || {});
   }
   function censusRow(day, vid, attrs) {
@@ -951,6 +1067,165 @@ function selftest() {
     v8.bars.detGate === false && v8.det[0].firstExtraDepartDay == null);
   // 9. Anchors: supplied + matching -> pass; missing -> FAIL (never
   // vacuous checked:false); mismatched -> fail.
+  // 10. DEPARTSAFE bound (sim-departsafe-a): a non-skipped safety
+  // call on day 40 is a lever effect, so the bound is 40 even
+  // though the first extra depart call is day 90 — the gate
+  // passes, and the staging isolates the bound rule (the safety
+  // row is the only day-40 difference).
+  function safetyCall(day, vid, o) {
+    return Object.assign({ day: day, part: 0, members: [vid, 'diana'], needWave: 4, target: 'congregation',
+      ok: false, skipped: false, fails: [{ vid: vid, reasons: ['hp<70'] }], checked: [vid, 'diana'] }, o || {});
+  }
+  const ctlLeg10 = legRows('ctl', [
+    { departCalls: [attemptCall(10, 'alice')], planCensus: [censusRow(10, 'alice')] },
+  ]);
+  const armLeg10 = legRows('arm', [
+    { departCalls: [attemptCall(10, 'alice'), call(90, 'alice', { commitWinPlanAction: null, result: 'normal' })],
+      planCensus: [censusRow(10, 'alice')], departSafeCalls: [safetyCall(40, 'alice')] },
+  ]);
+  const vs10 = analyze(ctlLeg10, armLeg10, {});
+  check('safety-extended bound: first safety day 40 is the bound, gate passes',
+    vs10.bars.detGate === true && vs10.det[0].firstSafetyDay === 40 && vs10.det[0].bound === 40 &&
+    vs10.det[0].firstExtraDepartDay === 90 && vs10.det[0].firstDivergenceDay === 40);
+  check('safety census counts the hold', analyzeSeed(seedOut({ departSafeCalls: [safetyCall(40, 'alice'), safetyCall(41, 'alice', { ok: true, fails: [] }), safetyCall(42, 'alice', { skipped: true })] })).safetyHolds === 1 &&
+    analyzeSeed(seedOut({ departSafeCalls: [safetyCall(40, 'alice'), safetyCall(41, 'alice', { ok: true, fails: [] }), safetyCall(42, 'alice', { skipped: true })] })).safetyPasses === 1 &&
+    analyzeSeed(seedOut({ departSafeCalls: [safetyCall(40, 'alice'), safetyCall(41, 'alice', { ok: true, fails: [] }), safetyCall(42, 'alice', { skipped: true })] })).safetySkips === 1);
+  // 11. A stream diverging BEFORE the first safety effect still
+  // fails the gate (attribution, not just equality).
+  const armLeg11 = legRows('arm', [
+    { departCalls: [attemptCall(10, 'alice')], planCensus: [censusRow(10, 'alice')],
+      deaths: [deathRow(20)], departSafeCalls: [safetyCall(40, 'alice')] },
+  ]);
+  const vs11 = analyze(ctlLeg10, armLeg11, {});
+  check('det-gate fails when a stream diverges before the first safety effect',
+    vs11.bars.detGate === false && vs11.det[0].firstDivergenceDay === 20 && vs11.det[0].firstSafetyDay === 40);
+  // 12. The ctl leg must record ZERO safety calls (old code has no
+  // hook); a ctl safety row fails the gate even when the streams
+  // are otherwise identical.
+  const ctlLeg12 = legRows('ctl', [
+    { departCalls: [attemptCall(10, 'alice')], planCensus: [censusRow(10, 'alice')], departSafeCalls: [safetyCall(40, 'alice')] },
+  ]);
+  const armLeg12 = legRows('arm', [
+    { departCalls: [attemptCall(10, 'alice')], planCensus: [censusRow(10, 'alice')], departSafeCalls: [safetyCall(40, 'alice')] },
+  ]);
+  const vs12 = analyze(ctlLeg12, armLeg12, {});
+  check('det-gate fails when the ctl leg records safety calls',
+    vs12.bars.detGate === false && vs12.det[0].mismatches.some(function (m) { return m.indexOf('departSafeCalls') !== -1; }));
+  // 12b. DEPARTSAFE (sim-departsafe-a): SKIPPED safety calls are
+  // invisible to the gate — an arm leg whose only safety rows are
+  // skips (non-wave-4+ departures) passes, with no safety effect
+  // and no divergence. (Pilot band: seeds 107602-107604/107606-
+  // 107608 diverged on day 5-11 on skipped rows alone.)
+  const armLeg12b = legRows('arm', [
+    { departCalls: [attemptCall(10, 'alice')], planCensus: [censusRow(10, 'alice')],
+      departSafeCalls: [safetyCall(5, 'alice', { skipped: true }), safetyCall(6, 'alice', { skipped: true })] },
+  ]);
+  const v12b = analyze(ctlLeg10, armLeg12b, {});
+  check('det-gate passes when the arm leg records only skipped safety calls',
+    v12b.bars.detGate === true && v12b.det[0].firstSafetyDay == null && v12b.det[0].firstDivergenceDay == null);
+  // 12c. A skipped row does not MASK a real divergence: skipped
+  // rows day 5-6 plus a death day 20 still fails, on day 20.
+  const armLeg12c = legRows('arm', [
+    { departCalls: [attemptCall(10, 'alice')], planCensus: [censusRow(10, 'alice')],
+      deaths: [deathRow(20)], departSafeCalls: [safetyCall(5, 'alice', { skipped: true })] },
+  ]);
+  const v12c = analyze(ctlLeg10, armLeg12c, {});
+  check('skipped safety rows do not mask a real divergence',
+    v12c.bars.detGate === false && v12c.det[0].firstDivergenceDay === 20);
+  // 13. Bid-inclusive bound (sim-departsafe-rejudge-a §2): the
+  // first party_launch BID for a staged wave-4+ plan is a lever
+  // effect day, so the bound is the earliest of first extra depart
+  // call / first safety effect / first bid divergence.
+  function bidRow(day, vid, o) {
+    return Object.assign({ day: day, part: 0, vid: vid, pickKind: 'EXPEDITION',
+      winPlanAction: 'party_launch', override: 'win_plan:party_launch', deferred: null,
+      commitKind: 'EXPEDITION', commitWinPlanAction: 'party_launch', commitDay: day }, o || {});
+  }
+  function waitBid(day, vid, o) {
+    return Object.assign({ day: day, part: 3, vid: vid, pickKind: 'HAVEN_CHORE',
+      winPlanAction: 'party_wait', override: 'win_plan:party_wait', deferred: null,
+      commitKind: 'HAVEN_CHORE', commitWinPlanAction: 'party_wait', commitDay: day }, o || {});
+  }
+  // 13a. The 107611 shape: deferred part-3 bid day 64, extra
+  // depart call day 65, first safety effect day 66 — the bound
+  // is 64 (the bid) and the gate passes.
+  const ctlLeg13a = legRows('ctl', [
+    { departCalls: [attemptCall(10, 'alice')], planCensus: [censusRow(10, 'alice')],
+      scorePicks: [waitBid(64, 'desmond')] },
+  ]);
+  const armLeg13a = legRows('arm', [
+    { departCalls: [attemptCall(10, 'alice'),
+        call(65, 'desmond', { planTarget: 'eulogy', part: 2, result: 'normal',
+          commitWinPlanAction: null, commitKind: null })],
+      planCensus: [censusRow(10, 'alice')],
+      scorePicks: [bidRow(64, 'desmond', { part: 3, deferred: 'party_launch:no-tick-exact',
+        commitKind: null, commitWinPlanAction: null, commitDay: null })],
+      departSafeCalls: [safetyCall(66, 'desmond')] },
+  ]);
+  const v13a = analyze(ctlLeg13a, armLeg13a, {});
+  check('bid-inclusive bound: deferred bid day 64 is the bound (107611 shape), gate passes',
+    v13a.bars.detGate === true && v13a.det[0].firstBidDivergenceDay === 64 &&
+    v13a.det[0].bound === 64 && v13a.det[0].firstExtraDepartDay === 65 &&
+    v13a.det[0].firstSafetyDay === 66 && v13a.det[0].firstDivergenceDay === 64);
+  // 13b. Same-day bid: bid day = call day = bound, gate passes.
+  const ctlLeg13b = legRows('ctl', [
+    { departCalls: [attemptCall(10, 'alice')], planCensus: [censusRow(10, 'alice')],
+      scorePicks: [waitBid(79, 'zoltan')] },
+  ]);
+  const armLeg13b = legRows('arm', [
+    { departCalls: [attemptCall(10, 'alice'), call(79, 'zoltan', { planTarget: 'eater' })],
+      planCensus: [censusRow(10, 'alice')], scorePicks: [bidRow(79, 'zoltan')] },
+  ]);
+  const v13b = analyze(ctlLeg13b, armLeg13b, {});
+  check('bid-inclusive bound: same-day bid day 79 is the bound, gate passes',
+    v13b.bars.detGate === true && v13b.det[0].firstBidDivergenceDay === 79 &&
+    v13b.det[0].bound === 79 && v13b.det[0].firstExtraDepartDay === 79 &&
+    v13b.det[0].firstDivergenceDay === 79);
+  // 13c. A bid for a NON-wave-4+ plan does NOT count: the bid day
+  // 30 is ignored, the bound stays at the first extra depart call
+  // (90), and the day-20 divergence still fails the gate.
+  const ctlLeg13c = legRows('ctl', [
+    { departCalls: [attemptCall(10, 'alice')], planCensus: [censusRow(10, 'alice')] },
+  ]);
+  const armLeg13c = legRows('arm', [
+    { departCalls: [attemptCall(10, 'alice'),
+        call(30, 'bob', { planTarget: 'deer', planNeedWave: 3 }),
+        call(90, 'alice', { commitWinPlanAction: null, result: 'normal' })],
+      planCensus: [censusRow(10, 'alice')], deaths: [deathRow(20)],
+      scorePicks: [bidRow(30, 'bob')] },
+  ]);
+  const v13c = analyze(ctlLeg13c, armLeg13c, {});
+  check('bid-inclusive bound: non-wave-4+ bid does not count, pre-bid divergence fails',
+    v13c.bars.detGate === false && v13c.det[0].firstBidDivergenceDay == null &&
+    v13c.det[0].firstDivergenceDay === 20 && v13c.det[0].firstExtraDepartDay === 90);
+  // 13d. A divergence BEFORE the first bid still fails the gate
+  // (the bid does not mask it).
+  const armLeg13d = legRows('arm', [
+    { departCalls: [attemptCall(10, 'alice'),
+        call(65, 'desmond', { planTarget: 'eulogy', part: 2, result: 'normal',
+          commitWinPlanAction: null, commitKind: null })],
+      planCensus: [censusRow(10, 'alice')], deaths: [deathRow(20)],
+      scorePicks: [bidRow(64, 'desmond', { part: 3, deferred: 'party_launch:no-tick-exact',
+        commitKind: null, commitWinPlanAction: null, commitDay: null })] },
+  ]);
+  const v13d = analyze(ctlLeg13a, armLeg13d, {});
+  check('bid-inclusive bound: divergence before the first bid still fails',
+    v13d.bars.detGate === false && v13d.det[0].firstBidDivergenceDay === 64 &&
+    v13d.det[0].firstDivergenceDay === 20 && v13d.det[0].bound === 64);
+  // 13e. A bid with NO wave-4+ depart call on its execution day
+  // does NOT count (the tight window): no lever-effect day exists,
+  // so the day-20 divergence fails the gate.
+  const armLeg13e = legRows('arm', [
+    { departCalls: [attemptCall(10, 'alice')], planCensus: [censusRow(10, 'alice')],
+      deaths: [deathRow(20)],
+      scorePicks: [bidRow(64, 'desmond', { part: 3, deferred: 'party_launch:no-tick-exact',
+        commitKind: null, commitWinPlanAction: null, commitDay: null })] },
+  ]);
+  const v13e = analyze(ctlLeg13a, armLeg13e, {});
+  check('bid-inclusive bound: bid with no wave-4+ call on its execution day does not count',
+    v13e.bars.detGate === false && v13e.det[0].firstBidDivergenceDay == null &&
+    v13e.det[0].firstDivergenceDay === 20);
+  // 13. Anchors: supplied + matching -> pass; missing -> FAIL (never
   const anchorOk = { ctlAnchor: 'abc', armAnchor: 'abc', ctlBrain: 'br1', armBrain: 'br1',
     ctlWinplan: 'wp1', armWinplan: 'wp1' };
   const v9 = analyze(ctlLeg3, armLeg3, anchorOk);
@@ -1195,4 +1470,6 @@ module.exports = { analyze: analyze, analyzeSeed: analyzeSeed, selftest: selftes
   isW4Plan: isW4Plan, isStagedW4: isStagedW4, isTargetlessHunt: isTargetlessHunt,
   isReleaseRow: isReleaseRow, isStarvationDeath: isStarvationDeath, median: median, W4P_SET: W4P_SET,
   firstExtraDepartDay: firstExtraDepartDay, firstDivergenceDay: firstDivergenceDay,
+  firstSafetyDay: firstSafetyDay, firstBidDivergenceDay: firstBidDivergenceDay,
+  firstSafetyDay: firstSafetyDay,
   canonicalMultisets: canonicalMultisets, canonicalizeRow: canonicalizeRow };

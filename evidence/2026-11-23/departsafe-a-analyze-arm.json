@@ -1,0 +1,4836 @@
+{
+  "verdict": "NO-GO",
+  "zeroAttempt": false,
+  "seeds": [
+    107601,
+    107602,
+    107603,
+    107604,
+    107605,
+    107606,
+    107607,
+    107608,
+    107609,
+    107610,
+    107611,
+    107612,
+    107613,
+    107614,
+    107615,
+    107616
+  ],
+  "ctl": {
+    "attempts": 22,
+    "launches": 14,
+    "starvDeaths": 5,
+    "medianSurvival": 93.5,
+    "instrumentErrors": 0,
+    "wall": {
+      "wins": 12,
+      "national": 0,
+      "wave5": 3,
+      "wave4": 16,
+      "medianSurvival": 93.5,
+      "maxSurvival": 104,
+      "villagesLost": 4
+    },
+    "totalDeaths": 1234,
+    "meanDeaths": 77.125,
+    "choke": {
+      "staged": 749,
+      "choke": 386,
+      "byOcc": {
+        "dentist": {
+          "staged": 3,
+          "choke": 3
+        },
+        "rancher": {
+          "staged": 19,
+          "choke": 13
+        },
+        "forager": {
+          "staged": 14,
+          "choke": 11
+        },
+        "er_nurse": {
+          "staged": 13,
+          "choke": 9
+        },
+        "glazier": {
+          "staged": 15,
+          "choke": 6
+        },
+        "mushroom_grower": {
+          "staged": 15,
+          "choke": 15
+        },
+        "aquarium_keeper": {
+          "staged": 3,
+          "choke": 3
+        },
+        "appliance_repair": {
+          "staged": 3,
+          "choke": 3
+        },
+        "butcher": {
+          "staged": 65,
+          "choke": 49
+        },
+        "programmer": {
+          "staged": 85,
+          "choke": 68
+        },
+        "roofer": {
+          "staged": 17,
+          "choke": 1
+        },
+        "lawyer": {
+          "staged": 13,
+          "choke": 1
+        },
+        "musician": {
+          "staged": 6,
+          "choke": 1
+        },
+        "hunting_guide": {
+          "staged": 37,
+          "choke": 1
+        },
+        "farmer": {
+          "staged": 64,
+          "choke": 13
+        },
+        "interpreter": {
+          "staged": 33,
+          "choke": 26
+        },
+        "trail_crew": {
+          "staged": 47,
+          "choke": 20
+        },
+        "exterminator": {
+          "staged": 13,
+          "choke": 3
+        },
+        "veterinarian": {
+          "staged": 3,
+          "choke": 2
+        },
+        "bike_messenger": {
+          "staged": 18,
+          "choke": 9
+        },
+        "physical_therapist": {
+          "staged": 1,
+          "choke": 1
+        },
+        "librarian": {
+          "staged": 10,
+          "choke": 8
+        },
+        "police_officer": {
+          "staged": 15,
+          "choke": 12
+        },
+        "sailor": {
+          "staged": 2,
+          "choke": 2
+        },
+        "barber": {
+          "staged": 14,
+          "choke": 4
+        },
+        "welder": {
+          "staged": 53,
+          "choke": 16
+        },
+        "baker": {
+          "staged": 8,
+          "choke": 3
+        },
+        "chimney_sweep": {
+          "staged": 20,
+          "choke": 3
+        },
+        "lifeguard": {
+          "staged": 20,
+          "choke": 6
+        },
+        "electrician": {
+          "staged": 2,
+          "choke": 2
+        },
+        "midwife": {
+          "staged": 32,
+          "choke": 30
+        },
+        "fishing_guide": {
+          "staged": 13,
+          "choke": 7
+        },
+        "taxi_driver": {
+          "staged": 6,
+          "choke": 4
+        },
+        "sign_painter": {
+          "staged": 5,
+          "choke": 5
+        },
+        "night_security_guard": {
+          "staged": 8,
+          "choke": 1
+        },
+        "fisherman": {
+          "staged": 11,
+          "choke": 9
+        },
+        "pilot": {
+          "staged": 1,
+          "choke": 1
+        },
+        "dry_cleaner": {
+          "staged": 15,
+          "choke": 5
+        },
+        "pharmacist": {
+          "staged": 8,
+          "choke": 4
+        },
+        "firefighter": {
+          "staged": 14,
+          "choke": 3
+        },
+        "vintner": {
+          "staged": 5,
+          "choke": 3
+        }
+      },
+      "byShape": {
+        "targetless-hunt": {
+          "staged": 688,
+          "choke": 329
+        },
+        "targeted-w4": {
+          "staged": 61,
+          "choke": 57
+        }
+      },
+      "byProfile": {
+        "wanderer": {
+          "staged": 604,
+          "choke": 308
+        },
+        "homebody": {
+          "staged": 15,
+          "choke": 15
+        },
+        "forager": {
+          "staged": 31,
+          "choke": 29
+        },
+        "explorer": {
+          "staged": 99,
+          "choke": 34
+        }
+      },
+      "subChoke": {
+        "commit-written-no-depart": 94,
+        "commit-written-no-depart|elig>0": 77,
+        "commit-written-no-depart|elig=0": 17,
+        "bid-lost:WATER": 5,
+        "bid-lost:WATER|elig>0": 3,
+        "bid-lost:VISIT": 7,
+        "bid-lost:VISIT|elig>0": 4,
+        "bid-lost:WATER|elig=0": 2,
+        "bid-lost:assign_standing": 9,
+        "bid-lost:assign_standing|elig>0": 3,
+        "party-wait-no-companion": 24,
+        "party-wait-no-companion|elig=0": 22,
+        "never-scored": 218,
+        "never-scored|elig=0": 132,
+        "bid-lost:assign_standing|elig=0": 6,
+        "never-scored|elig>0": 86,
+        "bid-lost:VISIT|elig=0": 3,
+        "bid-lost:duty_top_score": 19,
+        "bid-lost:duty_top_score|elig>0": 10,
+        "party-wait-no-companion|elig>0": 2,
+        "bid-lost:duty_top_score|elig=0": 9,
+        "bid-lost:FORAGE": 1,
+        "bid-lost:FORAGE|elig=0": 1,
+        "bid-lost:HAVEN_CHORE": 7,
+        "bid-lost:HAVEN_CHORE|elig=0": 2,
+        "bid-lost:HAVEN_CHORE|elig>0": 5,
+        "bid-lost:SEEK": 1,
+        "bid-lost:SEEK|elig=0": 1,
+        "bid-lost:EXPLORE": 1,
+        "bid-lost:EXPLORE|elig=0": 1
+      },
+      "chokeRate": 0.5153538050734312
+    },
+    "stuck": [],
+    "perSeed": [
+      {
+        "seed": 107601,
+        "gameDays": 95,
+        "attempts": 4,
+        "launches": 4,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 114,
+        "stagedDays": 49,
+        "chokeDays": 41,
+        "chokeRate": 0.8367346938775511,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107602,
+        "gameDays": 76,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 4,
+        "deaths": 51,
+        "stagedDays": 121,
+        "chokeDays": 61,
+        "chokeRate": 0.5041322314049587,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107603,
+        "gameDays": 95,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 69,
+        "stagedDays": 12,
+        "chokeDays": 4,
+        "chokeRate": 0.3333333333333333,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107604,
+        "gameDays": 95,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 83,
+        "stagedDays": 136,
+        "chokeDays": 38,
+        "chokeRate": 0.27941176470588236,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107605,
+        "gameDays": 76,
+        "attempts": 17,
+        "launches": 9,
+        "holds": 4,
+        "normals": 4,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 133,
+        "stagedDays": 41,
+        "chokeDays": 37,
+        "chokeRate": 0.9024390243902439,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107606,
+        "gameDays": 93,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 80,
+        "stagedDays": 136,
+        "chokeDays": 86,
+        "chokeRate": 0.6323529411764706,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107607,
+        "gameDays": 90,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 1,
+        "deaths": 59,
+        "stagedDays": 63,
+        "chokeDays": 12,
+        "chokeRate": 0.19047619047619047,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107608,
+        "gameDays": 94,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 71,
+        "stagedDays": 17,
+        "chokeDays": 5,
+        "chokeRate": 0.29411764705882354,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107609,
+        "gameDays": 90,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 58,
+        "stagedDays": 4,
+        "chokeDays": 4,
+        "chokeRate": 1,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107610,
+        "gameDays": 104,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 75,
+        "stagedDays": 18,
+        "chokeDays": 8,
+        "chokeRate": 0.4444444444444444,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107611,
+        "gameDays": 69,
+        "attempts": 1,
+        "launches": 1,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 60,
+        "stagedDays": 18,
+        "chokeDays": 11,
+        "chokeRate": 0.6111111111111112,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107612,
+        "gameDays": 92,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 63,
+        "stagedDays": 20,
+        "chokeDays": 15,
+        "chokeRate": 0.75,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107613,
+        "gameDays": 96,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 102,
+        "stagedDays": 14,
+        "chokeDays": 8,
+        "chokeRate": 0.5714285714285714,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107614,
+        "gameDays": 90,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 78,
+        "stagedDays": 58,
+        "chokeDays": 42,
+        "chokeRate": 0.7241379310344828,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107615,
+        "gameDays": 96,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 61,
+        "stagedDays": 21,
+        "chokeDays": 7,
+        "chokeRate": 0.3333333333333333,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107616,
+        "gameDays": 97,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 77,
+        "stagedDays": 21,
+        "chokeDays": 7,
+        "chokeRate": 0.3333333333333333,
+        "firstReleaseDay": null,
+        "errors": 0
+      }
+    ]
+  },
+  "arm": {
+    "attempts": 83,
+    "launches": 33,
+    "starvDeaths": 5,
+    "medianSurvival": 94,
+    "instrumentErrors": 0,
+    "wall": {
+      "wins": 13,
+      "national": 0,
+      "wave5": 3,
+      "wave4": 16,
+      "medianSurvival": 94,
+      "maxSurvival": 104,
+      "villagesLost": 3
+    },
+    "totalDeaths": 1292,
+    "meanDeaths": 80.75,
+    "choke": {
+      "staged": 774,
+      "choke": 385,
+      "byOcc": {
+        "dentist": {
+          "staged": 3,
+          "choke": 3
+        },
+        "rancher": {
+          "staged": 19,
+          "choke": 13
+        },
+        "forager": {
+          "staged": 26,
+          "choke": 14
+        },
+        "er_nurse": {
+          "staged": 17,
+          "choke": 8
+        },
+        "glazier": {
+          "staged": 15,
+          "choke": 6
+        },
+        "mushroom_grower": {
+          "staged": 2,
+          "choke": 2
+        },
+        "aquarium_keeper": {
+          "staged": 4,
+          "choke": 1
+        },
+        "butcher": {
+          "staged": 65,
+          "choke": 49
+        },
+        "programmer": {
+          "staged": 81,
+          "choke": 64
+        },
+        "roofer": {
+          "staged": 17,
+          "choke": 1
+        },
+        "lawyer": {
+          "staged": 13,
+          "choke": 1
+        },
+        "musician": {
+          "staged": 6,
+          "choke": 1
+        },
+        "hunting_guide": {
+          "staged": 37,
+          "choke": 1
+        },
+        "farmer": {
+          "staged": 64,
+          "choke": 13
+        },
+        "interpreter": {
+          "staged": 34,
+          "choke": 27
+        },
+        "trail_crew": {
+          "staged": 39,
+          "choke": 12
+        },
+        "exterminator": {
+          "staged": 13,
+          "choke": 3
+        },
+        "veterinarian": {
+          "staged": 25,
+          "choke": 23
+        },
+        "bike_messenger": {
+          "staged": 27,
+          "choke": 17
+        },
+        "baker": {
+          "staged": 16,
+          "choke": 11
+        },
+        "librarian": {
+          "staged": 3,
+          "choke": 1
+        },
+        "welder": {
+          "staged": 54,
+          "choke": 17
+        },
+        "paramedic": {
+          "staged": 2,
+          "choke": 1
+        },
+        "mortician": {
+          "staged": 11,
+          "choke": 5
+        },
+        "barber": {
+          "staged": 14,
+          "choke": 4
+        },
+        "chimney_sweep": {
+          "staged": 20,
+          "choke": 3
+        },
+        "lifeguard": {
+          "staged": 20,
+          "choke": 6
+        },
+        "electrician": {
+          "staged": 2,
+          "choke": 2
+        },
+        "midwife": {
+          "staged": 32,
+          "choke": 30
+        },
+        "fishing_guide": {
+          "staged": 13,
+          "choke": 7
+        },
+        "taxi_driver": {
+          "staged": 6,
+          "choke": 4
+        },
+        "sign_painter": {
+          "staged": 4,
+          "choke": 4
+        },
+        "night_security_guard": {
+          "staged": 8,
+          "choke": 1
+        },
+        "police_officer": {
+          "staged": 8,
+          "choke": 5
+        },
+        "fisherman": {
+          "staged": 11,
+          "choke": 9
+        },
+        "pilot": {
+          "staged": 1,
+          "choke": 1
+        },
+        "dry_cleaner": {
+          "staged": 15,
+          "choke": 5
+        },
+        "pharmacist": {
+          "staged": 8,
+          "choke": 4
+        },
+        "firefighter": {
+          "staged": 14,
+          "choke": 3
+        },
+        "vintner": {
+          "staged": 5,
+          "choke": 3
+        }
+      },
+      "byShape": {
+        "targetless-hunt": {
+          "staged": 691,
+          "choke": 329
+        },
+        "targeted-w4": {
+          "staged": 83,
+          "choke": 56
+        }
+      },
+      "byProfile": {
+        "wanderer": {
+          "staged": 647,
+          "choke": 338
+        },
+        "homebody": {
+          "staged": 14,
+          "choke": 8
+        },
+        "forager": {
+          "staged": 22,
+          "choke": 13
+        },
+        "explorer": {
+          "staged": 91,
+          "choke": 26
+        }
+      },
+      "subChoke": {
+        "commit-written-no-depart": 111,
+        "commit-written-no-depart|elig>0": 91,
+        "commit-written-no-depart|elig=0": 20,
+        "bid-lost:WATER": 4,
+        "bid-lost:WATER|elig>0": 3,
+        "bid-lost:VISIT": 7,
+        "bid-lost:VISIT|elig>0": 4,
+        "bid-lost:WATER|elig=0": 1,
+        "bid-lost:assign_standing": 3,
+        "bid-lost:assign_standing|elig>0": 3,
+        "never-scored": 228,
+        "never-scored|elig>0": 92,
+        "party-wait-no-companion": 6,
+        "party-wait-no-companion|elig>0": 5,
+        "never-scored|elig=0": 136,
+        "bid-lost:VISIT|elig=0": 3,
+        "bid-lost:duty_top_score": 16,
+        "bid-lost:duty_top_score|elig>0": 10,
+        "commit-written-part3-deferred": 2,
+        "commit-written-part3-deferred|elig>0": 1,
+        "party-wait-no-companion|elig=0": 1,
+        "commit-written-part3-deferred|elig=0": 1,
+        "bid-lost:duty_top_score|elig=0": 6,
+        "bid-lost:HAVEN_CHORE": 6,
+        "bid-lost:HAVEN_CHORE|elig>0": 5,
+        "bid-lost:SEEK": 1,
+        "bid-lost:SEEK|elig=0": 1,
+        "bid-lost:EXPLORE": 1,
+        "bid-lost:EXPLORE|elig=0": 1,
+        "bid-lost:HAVEN_CHORE|elig=0": 1
+      },
+      "chokeRate": 0.4974160206718346
+    },
+    "perSeed": [
+      {
+        "seed": 107601,
+        "gameDays": 94,
+        "attempts": 23,
+        "launches": 6,
+        "holds": 16,
+        "normals": 1,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 107,
+        "stagedDays": 38,
+        "chokeDays": 22,
+        "chokeRate": 0.5789473684210527,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107602,
+        "gameDays": 76,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 4,
+        "deaths": 51,
+        "stagedDays": 121,
+        "chokeDays": 61,
+        "chokeRate": 0.5041322314049587,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107603,
+        "gameDays": 95,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 69,
+        "stagedDays": 12,
+        "chokeDays": 4,
+        "chokeRate": 0.3333333333333333,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107604,
+        "gameDays": 95,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 83,
+        "stagedDays": 136,
+        "chokeDays": 38,
+        "chokeRate": 0.27941176470588236,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107605,
+        "gameDays": 103,
+        "attempts": 58,
+        "launches": 26,
+        "holds": 28,
+        "normals": 4,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 200,
+        "stagedDays": 82,
+        "chokeDays": 60,
+        "chokeRate": 0.7317073170731707,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107606,
+        "gameDays": 93,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 80,
+        "stagedDays": 136,
+        "chokeDays": 86,
+        "chokeRate": 0.6323529411764706,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107607,
+        "gameDays": 90,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 1,
+        "deaths": 59,
+        "stagedDays": 63,
+        "chokeDays": 12,
+        "chokeRate": 0.19047619047619047,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107608,
+        "gameDays": 94,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 71,
+        "stagedDays": 17,
+        "chokeDays": 5,
+        "chokeRate": 0.29411764705882354,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107609,
+        "gameDays": 90,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 58,
+        "stagedDays": 4,
+        "chokeDays": 4,
+        "chokeRate": 1,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107610,
+        "gameDays": 104,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 75,
+        "stagedDays": 18,
+        "chokeDays": 8,
+        "chokeRate": 0.4444444444444444,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107611,
+        "gameDays": 67,
+        "attempts": 2,
+        "launches": 1,
+        "holds": 0,
+        "normals": 1,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 58,
+        "stagedDays": 13,
+        "chokeDays": 6,
+        "chokeRate": 0.46153846153846156,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107612,
+        "gameDays": 92,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 63,
+        "stagedDays": 20,
+        "chokeDays": 15,
+        "chokeRate": 0.75,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107613,
+        "gameDays": 96,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 102,
+        "stagedDays": 14,
+        "chokeDays": 8,
+        "chokeRate": 0.5714285714285714,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107614,
+        "gameDays": 90,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 78,
+        "stagedDays": 58,
+        "chokeDays": 42,
+        "chokeRate": 0.7241379310344828,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107615,
+        "gameDays": 96,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 61,
+        "stagedDays": 21,
+        "chokeDays": 7,
+        "chokeRate": 0.3333333333333333,
+        "firstReleaseDay": null,
+        "errors": 0
+      },
+      {
+        "seed": 107616,
+        "gameDays": 97,
+        "attempts": 0,
+        "launches": 0,
+        "holds": 0,
+        "normals": 0,
+        "wpAttempts": 0,
+        "starvDeaths": 0,
+        "deaths": 77,
+        "stagedDays": 21,
+        "chokeDays": 7,
+        "chokeRate": 0.3333333333333333,
+        "firstReleaseDay": null,
+        "errors": 0
+      }
+    ]
+  },
+  "stuckDeparted": [],
+  "ctlStuckCount": 0,
+  "deathsPerExtraLaunch": 3.0526315789473686,
+  "starvExcess": [
+    {
+      "seed": 107601,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107602,
+      "ctl": 4,
+      "arm": 4,
+      "excess": 0
+    },
+    {
+      "seed": 107603,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107604,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107605,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107606,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107607,
+      "ctl": 1,
+      "arm": 1,
+      "excess": 0
+    },
+    {
+      "seed": 107608,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107609,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107610,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107611,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107612,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107613,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107614,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107615,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    },
+    {
+      "seed": 107616,
+      "ctl": 0,
+      "arm": 0,
+      "excess": 0
+    }
+  ],
+  "maxStarvExcess": 0,
+  "det": [
+    {
+      "seed": 107601,
+      "bound": 79,
+      "firstExtraDepartDay": 79,
+      "firstSafetyDay": 79,
+      "firstDivergenceDay": 79,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107602,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107603,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107604,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107605,
+      "bound": 37,
+      "firstExtraDepartDay": 37,
+      "firstSafetyDay": 37,
+      "firstDivergenceDay": 37,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107606,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107607,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107608,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107609,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107610,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107611,
+      "bound": 65,
+      "firstExtraDepartDay": 65,
+      "firstSafetyDay": 66,
+      "firstDivergenceDay": 64,
+      "mismatches": [
+        "scorePicks: pre-bound rows differ on day 64",
+        "contestEvents: pre-bound rows differ on day 64",
+        "first divergence day 64 is not a lever-effect day (first extra depart 65, first safety effect 66)"
+      ],
+      "pass": false
+    },
+    {
+      "seed": 107612,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107613,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107614,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107615,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    },
+    {
+      "seed": 107616,
+      "bound": null,
+      "firstExtraDepartDay": null,
+      "firstSafetyDay": null,
+      "firstDivergenceDay": null,
+      "mismatches": [],
+      "pass": true
+    }
+  ],
+  "detPass": false,
+  "anchorChecks": [
+    {
+      "label": "ctl anchorCommit",
+      "checked": true,
+      "pass": true,
+      "badSeeds": []
+    },
+    {
+      "label": "arm anchorCommit",
+      "checked": true,
+      "pass": true,
+      "badSeeds": []
+    },
+    {
+      "label": "ctl villager-brain.js",
+      "checked": true,
+      "pass": true,
+      "badSeeds": []
+    },
+    {
+      "label": "arm villager-brain.js",
+      "checked": true,
+      "pass": true,
+      "badSeeds": []
+    },
+    {
+      "label": "ctl win-plan.js",
+      "checked": true,
+      "pass": true,
+      "badSeeds": []
+    },
+    {
+      "label": "arm win-plan.js",
+      "checked": true,
+      "pass": true,
+      "badSeeds": []
+    }
+  ],
+  "bars": {
+    "instrument": true,
+    "detGate": false,
+    "anchor": true,
+    "primaryAttempts": true,
+    "primaryStuckDeparts": false,
+    "starvTotal": true,
+    "starvPerSeed": true,
+    "survival": true,
+    "totalDeaths": true
+  },
+  "ctlLaunchDetail": [
+    {
+      "seed": 107601,
+      "day": 81,
+      "part": 1,
+      "vid": "zoltan_nagy",
+      "source": "brain",
+      "target": "eater",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "homebody",
+      "occupation": "mushroom_grower",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107601,
+      "day": 86,
+      "part": 1,
+      "vid": "lena_ruiz",
+      "source": "brain",
+      "target": "eater",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "er_nurse",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107601,
+      "day": 91,
+      "part": 0,
+      "vid": "dmitri_sokolov",
+      "source": "brain",
+      "target": "eater",
+      "needWave": 4,
+      "stage": "table",
+      "profile": "forager",
+      "occupation": "appliance_repair",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107601,
+      "day": 91,
+      "part": 0,
+      "vid": "lena_ruiz",
+      "source": "brain",
+      "target": "eater",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "forager",
+      "occupation": "er_nurse",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 39,
+      "part": 0,
+      "vid": "ethan_hunt",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "explorer",
+      "occupation": "trail_crew",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 43,
+      "part": 1,
+      "vid": "wanjiru_kamau",
+      "source": "brain",
+      "target": null,
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "forager",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 47,
+      "part": 1,
+      "vid": "oliver_moore",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "veterinarian",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 47,
+      "part": 2,
+      "vid": "somchai_prasert",
+      "source": "brain",
+      "target": null,
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "bike_messenger",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 50,
+      "part": 1,
+      "vid": "app_mgpsphvu505",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "police_officer",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 52,
+      "part": 2,
+      "vid": "somchai_prasert",
+      "source": "brain",
+      "target": null,
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "bike_messenger",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 55,
+      "part": 0,
+      "vid": "ruth_goldstein",
+      "source": "brain",
+      "target": "influencer",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "forager",
+      "occupation": "librarian",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 57,
+      "part": 1,
+      "vid": "somchai_prasert",
+      "source": "brain",
+      "target": null,
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "bike_messenger",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 62,
+      "part": 1,
+      "vid": "somchai_prasert",
+      "source": "brain",
+      "target": null,
+      "needWave": 4,
+      "stage": "party",
+      "profile": "wanderer",
+      "occupation": "bike_messenger",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107611,
+      "day": 66,
+      "part": 0,
+      "vid": "desmond_clarke",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "wanderer",
+      "occupation": "sign_painter",
+      "commitWinPlanAction": "party_launch"
+    }
+  ],
+  "armLaunchDetail": [
+    {
+      "seed": 107601,
+      "day": 79,
+      "part": 1,
+      "vid": "zoltan_nagy",
+      "source": "brain",
+      "target": "eater",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "homebody",
+      "occupation": "mushroom_grower",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107601,
+      "day": 83,
+      "part": 0,
+      "vid": "zoltan_nagy",
+      "source": "brain",
+      "target": "herald",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "homebody",
+      "occupation": "mushroom_grower",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107601,
+      "day": 84,
+      "part": 0,
+      "vid": "lena_ruiz",
+      "source": "brain",
+      "target": "eater",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "forager",
+      "occupation": "er_nurse",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107601,
+      "day": 87,
+      "part": 1,
+      "vid": "gen_94kh1g8",
+      "source": "brain",
+      "target": "herald",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "dispatcher_911",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107601,
+      "day": 90,
+      "part": 0,
+      "vid": "lena_ruiz",
+      "source": "brain",
+      "target": "eater",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "er_nurse",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107601,
+      "day": 90,
+      "part": 1,
+      "vid": "gen_94kh1g8",
+      "source": "brain",
+      "target": "herald",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "dispatcher_911",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 37,
+      "part": 1,
+      "vid": "ethan_hunt",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "explorer",
+      "occupation": "trail_crew",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 41,
+      "part": 1,
+      "vid": "benoit_lambert",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "baker",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 44,
+      "part": 0,
+      "vid": "benoit_lambert",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "baker",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 45,
+      "part": 0,
+      "vid": "ruth_goldstein",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "librarian",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 47,
+      "part": 0,
+      "vid": "somchai_prasert",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "bike_messenger",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 47,
+      "part": 0,
+      "vid": "benoit_lambert",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "baker",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 48,
+      "part": 1,
+      "vid": "nikolai_volkov",
+      "source": "brain",
+      "target": "focus_group",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "welder",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 49,
+      "part": 1,
+      "vid": "ruth_goldstein",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "librarian",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 51,
+      "part": 1,
+      "vid": "wanjiru_kamau",
+      "source": "brain",
+      "target": null,
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "forager",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 52,
+      "part": 0,
+      "vid": "oliver_moore",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "veterinarian",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 52,
+      "part": 1,
+      "vid": "benoit_lambert",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "baker",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 54,
+      "part": 0,
+      "vid": "daniyar_askarov",
+      "source": "brain",
+      "target": "focus_group",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "paramedic",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 56,
+      "part": 1,
+      "vid": "daniyar_askarov",
+      "source": "brain",
+      "target": "focus_group",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "paramedic",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 57,
+      "part": 1,
+      "vid": "daniyar_askarov",
+      "source": "brain",
+      "target": "focus_group",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "forager",
+      "occupation": "paramedic",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 60,
+      "part": 1,
+      "vid": "wanjiru_kamau",
+      "source": "brain",
+      "target": "focus_group",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "forager",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 61,
+      "part": 1,
+      "vid": "oliver_moore",
+      "source": "brain",
+      "target": "focus_group",
+      "needWave": 4,
+      "stage": "table",
+      "profile": "wanderer",
+      "occupation": "veterinarian",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 62,
+      "part": 1,
+      "vid": "somchai_prasert",
+      "source": "brain",
+      "target": "focus_group",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "bike_messenger",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 65,
+      "part": 0,
+      "vid": "ethan_hunt",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "explorer",
+      "occupation": "trail_crew",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 68,
+      "part": 0,
+      "vid": "somchai_prasert",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "bike_messenger",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 71,
+      "part": 0,
+      "vid": "oliver_moore",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "wanderer",
+      "occupation": "veterinarian",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 75,
+      "part": 0,
+      "vid": "ursula_weber",
+      "source": "brain",
+      "target": "influencer",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "homebody",
+      "occupation": "mortician",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 76,
+      "part": 1,
+      "vid": "oliver_moore",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "veterinarian",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 81,
+      "part": 2,
+      "vid": "oliver_moore",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "wanderer",
+      "occupation": "veterinarian",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 85,
+      "part": 1,
+      "vid": "somchai_prasert",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "bike_messenger",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 90,
+      "part": 0,
+      "vid": "somchai_prasert",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "hunt",
+      "profile": "wanderer",
+      "occupation": "bike_messenger",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107605,
+      "day": 95,
+      "part": 1,
+      "vid": "somchai_prasert",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "wanderer",
+      "occupation": "bike_messenger",
+      "commitWinPlanAction": "party_launch"
+    },
+    {
+      "seed": 107611,
+      "day": 66,
+      "part": 0,
+      "vid": "desmond_clarke",
+      "source": "brain",
+      "target": "eulogy",
+      "needWave": 4,
+      "stage": "party",
+      "profile": "wanderer",
+      "occupation": "sign_painter",
+      "commitWinPlanAction": "party_launch"
+    }
+  ],
+  "kindStrings": {
+    "monster/villager combat": 1022,
+    "monster/expedition": 1013,
+    "villager/monster": 57,
+    "monster/combat": 250,
+    "villager/the wild": 68,
+    "villager/thirst": 10,
+    "villager/sickness": 26,
+    "villager/starvation": 10,
+    "villager/a wound that wouldn't close": 16,
+    "person/ambush": 16,
+    "villager/the arena": 2,
+    "villager/The Heckler": 2,
+    "villager/Headlight Harry": 2,
+    "villager/The Reunion": 3,
+    "villager/The Congregation": 2,
+    "villager/The Strike": 1,
+    "villager/contest": 1,
+    "villager/the night": 2,
+    "villager/The Static Kite": 2,
+    "villager/a stranger": 8,
+    "villager/Big Ugly": 2,
+    "villager/dehydration": 6,
+    "villager/Old Stare": 2,
+    "villager/Gavel": 2,
+    "villager/The Eater": 1
+  },
+  "armBeatLines": [
+    {
+      "seed": 107601,
+      "day": 9,
+      "text": "📺 SYSTEM: \"Hector sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Brianna sets out with Tuva — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Jorge sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Hector sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 14,
+      "text": "📺 SYSTEM: \"Brianna sets out with Tuva — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 15,
+      "text": "📺 SYSTEM: \"Jorge sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 16,
+      "text": "📺 SYSTEM: \"Hector sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 17,
+      "text": "📺 SYSTEM: \"Brianna sets out with Tuva — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 18,
+      "text": "📺 SYSTEM: \"Shynar sets out with Jorge — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Hector sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 21,
+      "text": "📺 SYSTEM: \"Brianna sets out with Tuva — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 21,
+      "text": "📺 SYSTEM: \"Jorge sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 24,
+      "text": "📺 SYSTEM: \"Hector sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 27,
+      "text": "📺 SYSTEM: \"Jorge sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 27,
+      "text": "📺 SYSTEM: \"Tuva sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Hector sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 32,
+      "text": "📺 SYSTEM: \"Jorge sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 35,
+      "text": "📺 SYSTEM: \"Tuva sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 36,
+      "text": "📺 SYSTEM: \"Jorge sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 37,
+      "text": "📺 SYSTEM: \"Tuva sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 40,
+      "text": "📺 SYSTEM: \"Tuva sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 42,
+      "text": "📺 SYSTEM: \"Hector sets out with Jorge — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 45,
+      "text": "📺 SYSTEM: \"Tuva sets out with Hector — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 45,
+      "text": "📺 SYSTEM: \"Jorge sets out with Tuva — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Jorge sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 48,
+      "text": "📺 SYSTEM: \"Tuva sets out with Hector — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 52,
+      "text": "📺 SYSTEM: \"Jorge sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 55,
+      "text": "📺 SYSTEM: \"Tuva sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 61,
+      "text": "📺 SYSTEM: \"Tuva sets out with Jorge — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 63,
+      "text": "📺 SYSTEM: \"Jorge sets out with Maya after Ugly-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 68,
+      "text": "📺 SYSTEM: \"Jorge sets out with Maya after Ugly-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 79,
+      "text": "📺 SYSTEM: \"Lena sets out with Sanne after The Eater — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 83,
+      "text": "📺 SYSTEM: \"Dmitri sets out with Ruben and Nikos after The Herald — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 84,
+      "text": "📺 SYSTEM: \"Lena sets out with Maya after The Eater — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 87,
+      "text": "📺 SYSTEM: \"Ruben sets out with Dmitri, Rosa and Dale after The Herald — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 90,
+      "text": "📺 SYSTEM: \"Lena sets out with Maya and Nikos after The Eater — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 90,
+      "text": "📺 SYSTEM: \"Ruben sets out with Dmitri and Dale after The Herald — the fire marks the trail.\""
+    },
+    {
+      "seed": 107602,
+      "day": 5,
+      "text": "A person, maybe 30s, with freckles sets out with Rafael — the fire marks the trail."
+    },
+    {
+      "seed": 107602,
+      "day": 6,
+      "text": "Arlo sets out with Devon — the fire marks the trail."
+    },
+    {
+      "seed": 107602,
+      "day": 9,
+      "text": "📺 SYSTEM: \"Jorge sets out with Felix — the fire marks the trail.\""
+    },
+    {
+      "seed": 107602,
+      "day": 12,
+      "text": "📺 SYSTEM: \"Jorge sets out with Felix — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 7,
+      "text": "Maya sets out with A person, maybe 30s — the fire marks the trail."
+    },
+    {
+      "seed": 107603,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Stanley sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 14,
+      "text": "📺 SYSTEM: \"Maya sets out with Stanley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 17,
+      "text": "📺 SYSTEM: \"Stanley sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 25,
+      "text": "📺 SYSTEM: \"Maya sets out with Stanley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 27,
+      "text": "📺 SYSTEM: \"Stanley sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 37,
+      "text": "📺 SYSTEM: \"Stanley sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 41,
+      "text": "📺 SYSTEM: \"Stanley sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Stanley sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Bao sets out with Sam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Theo sets out with Sam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 49,
+      "text": "📺 SYSTEM: \"Theo sets out with Sam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 53,
+      "text": "📺 SYSTEM: \"Sam sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 56,
+      "text": "📺 SYSTEM: \"Theo sets out with Sara — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 61,
+      "text": "📺 SYSTEM: \"Ethan sets out with Sara — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 64,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 67,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 70,
+      "text": "📺 SYSTEM: \"Theo sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 74,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 77,
+      "text": "📺 SYSTEM: \"Theo sets out with Sara — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 80,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 84,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 89,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 95,
+      "text": "📺 SYSTEM: \"Theo sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 95,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan after Gavel — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 6,
+      "text": "A man, maybe 40s, with a long braid sets out with A woman, maybe 30s — the fire marks the trail."
+    },
+    {
+      "seed": 107605,
+      "day": 6,
+      "text": "Ethan sets out with Layla — the fire marks the trail."
+    },
+    {
+      "seed": 107605,
+      "day": 8,
+      "text": "📺 SYSTEM: \"Somchai sets out with Luna — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 13,
+      "text": "📺 SYSTEM: \"Ethan sets out with Khrystyna — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 15,
+      "text": "📺 SYSTEM: \"Luna sets out with Somchai — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 15,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 17,
+      "text": "📺 SYSTEM: \"Khrystyna sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 18,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 19,
+      "text": "📺 SYSTEM: \"Luna sets out with Somchai — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 21,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 22,
+      "text": "📺 SYSTEM: \"Khrystyna sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 23,
+      "text": "📺 SYSTEM: \"Somchai sets out with Luna — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 25,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 27,
+      "text": "📺 SYSTEM: \"Khrystyna sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 31,
+      "text": "📺 SYSTEM: \"Ethan sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 31,
+      "text": "📺 SYSTEM: \"Somchai sets out with Oliver — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 34,
+      "text": "📺 SYSTEM: \"Oliver sets out with Somchai — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 36,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 36,
+      "text": "📺 SYSTEM: \"Somchai sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 37,
+      "text": "📺 SYSTEM: \"Ethan sets out with Nikolai and Benoit after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 41,
+      "text": "📺 SYSTEM: \"Somchai sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 41,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 41,
+      "text": "📺 SYSTEM: \"Benoit sets out with Nikolai and Ruth after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 44,
+      "text": "📺 SYSTEM: \"Benoit sets out with Norbert, Oliver and Somchai after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 45,
+      "text": "📺 SYSTEM: \"Ruth sets out with Ethan after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Somchai sets out with Wanjiru, Oliver and Norbert after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Benoit sets out with Wanjiru, Oliver and Somchai after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 48,
+      "text": "📺 SYSTEM: \"Nikolai sets out with Ethan and Daniyar after The Focus Group — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 49,
+      "text": "📺 SYSTEM: \"Ruth sets out with Norbert after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 51,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Somchai and Daniyar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 52,
+      "text": "📺 SYSTEM: \"Oliver sets out with Ethan and Wanjiru after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 52,
+      "text": "📺 SYSTEM: \"Benoit sets out with Daniyar after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 54,
+      "text": "📺 SYSTEM: \"Daniyar sets out with Ruth and Somchai after The Focus Group — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 56,
+      "text": "📺 SYSTEM: \"Daniyar sets out with Ethan, Oliver and Wanjiru after The Focus Group — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 57,
+      "text": "📺 SYSTEM: \"Daniyar sets out with Ruth, Somchai and Benoit after The Focus Group — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 60,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Daniyar after The Focus Group — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 61,
+      "text": "📺 SYSTEM: \"Oliver sets out with Ethan and Daniyar after The Focus Group — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 62,
+      "text": "📺 SYSTEM: \"Somchai sets out with Benoit and Ruth after The Focus Group — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 65,
+      "text": "📺 SYSTEM: \"Ethan sets out with Wanjiru, Oliver and Somchai after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 68,
+      "text": "📺 SYSTEM: \"Somchai sets out with Benoit after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 71,
+      "text": "📺 SYSTEM: \"Oliver sets out with Greta, Somchai and Benoit after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 75,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Jie after Big Loud — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 76,
+      "text": "📺 SYSTEM: \"Oliver sets out with Benoit and Somchai after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 81,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru and Somchai after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 85,
+      "text": "📺 SYSTEM: \"Somchai sets out with Wanjiru after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 90,
+      "text": "📺 SYSTEM: \"Somchai sets out with Wanjiru after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 95,
+      "text": "📺 SYSTEM: \"Somchai sets out with Wanjiru after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 100,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Somchai after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 102,
+      "text": "📺 SYSTEM: \"Somchai sets out with Wanjiru after Big Ugly — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 5,
+      "text": "A person, maybe 20s, with thick glasses sets out with A woman, maybe 30s — the fire marks the trail."
+    },
+    {
+      "seed": 107606,
+      "day": 6,
+      "text": "George sets out with A man, maybe 40s, with a gap-toothed grin — the fire marks the trail."
+    },
+    {
+      "seed": 107606,
+      "day": 8,
+      "text": "📺 SYSTEM: \"Paisley sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 13,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 16,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Paisley sets out with George — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with George — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 24,
+      "text": "📺 SYSTEM: \"Brooklyn sets out with Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 24,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 25,
+      "text": "📺 SYSTEM: \"George sets out with Paisley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 32,
+      "text": "📺 SYSTEM: \"Brooklyn sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 32,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 36,
+      "text": "📺 SYSTEM: \"Liam sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 41,
+      "text": "📺 SYSTEM: \"Paisley sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 44,
+      "text": "📺 SYSTEM: \"Paisley sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 46,
+      "text": "📺 SYSTEM: \"Paisley sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 49,
+      "text": "📺 SYSTEM: \"Paisley sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 55,
+      "text": "📺 SYSTEM: \"Liam sets out with Paisley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 60,
+      "text": "📺 SYSTEM: \"Victor sets out with Liam after The Terms of Service — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 64,
+      "text": "📺 SYSTEM: \"Liam sets out with Paisley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 68,
+      "text": "📺 SYSTEM: \"Victor sets out with Paisley after The Terms of Service — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 71,
+      "text": "📺 SYSTEM: \"Liam sets out with Paisley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 76,
+      "text": "📺 SYSTEM: \"Victor sets out with Paisley after Big Ugly — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 78,
+      "text": "📺 SYSTEM: \"Paisley sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 78,
+      "text": "📺 SYSTEM: \"Victor sets out with Paisley after Big Ugly — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 81,
+      "text": "📺 SYSTEM: \"Liam sets out with Paisley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 88,
+      "text": "📺 SYSTEM: \"Victor sets out with Liam after Big Ugly — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 91,
+      "text": "📺 SYSTEM: \"Victor sets out with Liam after Big Ugly — the fire marks the trail.\""
+    },
+    {
+      "seed": 107607,
+      "day": 6,
+      "text": "A person, maybe 30s sets out with Mateo — the fire marks the trail."
+    },
+    {
+      "seed": 107608,
+      "day": 11,
+      "text": "📺 SYSTEM: \"José sets out with Marcus — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Ruby sets out with José — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 16,
+      "text": "📺 SYSTEM: \"Marcus sets out with Ruby — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 21,
+      "text": "📺 SYSTEM: \"Ruby sets out with Marcus — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 27,
+      "text": "📺 SYSTEM: \"Ruby sets out with Marcus — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 32,
+      "text": "📺 SYSTEM: \"Marcus sets out with Ruby — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 35,
+      "text": "📺 SYSTEM: \"Marcus sets out with Ruby — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 40,
+      "text": "📺 SYSTEM: \"Marcus sets out with Ruby — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 42,
+      "text": "📺 SYSTEM: \"Ruby sets out with Marcus — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Ruby sets out with Marcus — the fire marks the trail.\""
+    },
+    {
+      "seed": 107609,
+      "day": 6,
+      "text": "Jorge sets out with Felicia — the fire marks the trail."
+    },
+    {
+      "seed": 107609,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Jorge sets out with Felicia — the fire marks the trail.\""
+    },
+    {
+      "seed": 107609,
+      "day": 16,
+      "text": "📺 SYSTEM: \"Felicia sets out with Jorge — the fire marks the trail.\""
+    },
+    {
+      "seed": 107609,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Felicia sets out with Jorge — the fire marks the trail.\""
+    },
+    {
+      "seed": 107609,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Zinhle sets out with Jorge after Spool — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Amelia sets out with Kwame — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Harleen sets out with Amelia — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 16,
+      "text": "📺 SYSTEM: \"Harleen sets out with Amelia — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Kwame sets out with Amelia — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 25,
+      "text": "📺 SYSTEM: \"Amelia sets out with Kwame — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 35,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 40,
+      "text": "📺 SYSTEM: \"Amelia sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 40,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 43,
+      "text": "📺 SYSTEM: \"Amelia sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 46,
+      "text": "📺 SYSTEM: \"Ines sets out with Kwame after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Amelia sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 51,
+      "text": "📺 SYSTEM: \"Amelia sets out with Kwame — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 51,
+      "text": "📺 SYSTEM: \"Ines sets out with Harleen after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 56,
+      "text": "📺 SYSTEM: \"Ines sets out with Amelia after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 57,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 59,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 62,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 62,
+      "text": "📺 SYSTEM: \"Ines sets out with Harleen after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 66,
+      "text": "📺 SYSTEM: \"Harleen sets out with Kwame — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 70,
+      "text": "📺 SYSTEM: \"Ines sets out with Kwame after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 73,
+      "text": "📺 SYSTEM: \"Ines sets out with Harleen after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 78,
+      "text": "📺 SYSTEM: \"Ines sets out with Harleen after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 83,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 86,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen after Big-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 93,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen after Big-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 93,
+      "text": "📺 SYSTEM: \"Ines sets out with Kwame after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 100,
+      "text": "📺 SYSTEM: \"Ines sets out with Harleen after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 9,
+      "text": "📺 SYSTEM: \"Ethan sets out with Eric — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 14,
+      "text": "📺 SYSTEM: \"Eric sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 18,
+      "text": "📺 SYSTEM: \"Catalina sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 21,
+      "text": "📺 SYSTEM: \"Eric sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 26,
+      "text": "📺 SYSTEM: \"Eric sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 33,
+      "text": "📺 SYSTEM: \"Eric sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 37,
+      "text": "📺 SYSTEM: \"Eric sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 40,
+      "text": "📺 SYSTEM: \"Eric sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 66,
+      "text": "📺 SYSTEM: \"Desmond sets out with Nadia, Devon and Tashi after Big-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 7,
+      "text": "A man, maybe 30s sets out with A man, maybe 60s — the fire marks the trail."
+    },
+    {
+      "seed": 107612,
+      "day": 8,
+      "text": "📺 SYSTEM: \"Liam sets out with Lucas — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Lucas sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 14,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 17,
+      "text": "📺 SYSTEM: \"Carlos sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 22,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 26,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 31,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 35,
+      "text": "📺 SYSTEM: \"Carlos sets out with Lucas — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 39,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 39,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 43,
+      "text": "📺 SYSTEM: \"Nasreen sets out with Carlos after The Redactor — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 45,
+      "text": "📺 SYSTEM: \"Nasreen sets out with Liam after The Redactor — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Nasreen sets out with Liam after The Redactor — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 48,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 54,
+      "text": "📺 SYSTEM: \"Liam sets out with Lucas — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 57,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 60,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 65,
+      "text": "📺 SYSTEM: \"Carlos sets out with Lucas — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 68,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos after The Loud Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 73,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 73,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos after The Loud Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 77,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 81,
+      "text": "📺 SYSTEM: \"Lucas sets out with Liam after The Loud Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 87,
+      "text": "📺 SYSTEM: \"Carlos sets out with Lucas after Loud-Bane — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 92,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos after The Loud Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 6,
+      "text": "Catalina sets out with Divya — the fire marks the trail."
+    },
+    {
+      "seed": 107613,
+      "day": 6,
+      "text": "Carlos sets out with Divya — the fire marks the trail."
+    },
+    {
+      "seed": 107613,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Ruby sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 13,
+      "text": "📺 SYSTEM: \"Ruby sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 15,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 25,
+      "text": "📺 SYSTEM: \"Ruby sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 25,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 29,
+      "text": "📺 SYSTEM: \"Carlos sets out with Ruby — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 30,
+      "text": "📺 SYSTEM: \"Catalina sets out with Divya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 33,
+      "text": "📺 SYSTEM: \"Ruby sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 34,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 37,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 38,
+      "text": "📺 SYSTEM: \"Ruby sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 42,
+      "text": "📺 SYSTEM: \"Divya sets out with Ruby — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 44,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 46,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 48,
+      "text": "📺 SYSTEM: \"Divya sets out with Carlos after The Ugly Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 52,
+      "text": "📺 SYSTEM: \"Carlos sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 56,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina after The Ugly Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 60,
+      "text": "📺 SYSTEM: \"Carlos sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 60,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina after The Ugly Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 65,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina after The Ugly Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 70,
+      "text": "📺 SYSTEM: \"Divya sets out with Carlos after The Ugly Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 74,
+      "text": "📺 SYSTEM: \"Carlos sets out with Divya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 79,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 84,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos after Gavel — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 90,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos after Gavel — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 96,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos after Gavel — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 5,
+      "text": "Somchai sets out with Yesenia — the fire marks the trail."
+    },
+    {
+      "seed": 107614,
+      "day": 7,
+      "text": "Gloria sets out with A person, maybe 20s — the fire marks the trail."
+    },
+    {
+      "seed": 107614,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Luz sets out with Yesenia — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Somchai sets out with Gloria — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 14,
+      "text": "📺 SYSTEM: \"Luz sets out with Henrique — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 16,
+      "text": "📺 SYSTEM: \"Gloria sets out with Somchai — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 19,
+      "text": "📺 SYSTEM: \"Gloria sets out with Somchai — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 23,
+      "text": "📺 SYSTEM: \"Gloria sets out with Henrique — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 23,
+      "text": "📺 SYSTEM: \"Somchai sets out with Gloria — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Henrique sets out with Luz — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Somchai sets out with Luz — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 33,
+      "text": "📺 SYSTEM: \"Luz sets out with Henrique — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 36,
+      "text": "📺 SYSTEM: \"Luz sets out with Henrique — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 39,
+      "text": "📺 SYSTEM: \"Luz sets out with Henrique — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 42,
+      "text": "📺 SYSTEM: \"Henrique sets out with Luz — the fire marks the trail.\""
+    },
+    {
+      "seed": 107615,
+      "day": 7,
+      "text": "Ghali sets out with A person, maybe 40s, with a limp — the fire marks the trail."
+    },
+    {
+      "seed": 107615,
+      "day": 14,
+      "text": "📺 SYSTEM: \"Tamika sets out with Ghali — the fire marks the trail.\""
+    },
+    {
+      "seed": 107615,
+      "day": 22,
+      "text": "📺 SYSTEM: \"Ghali sets out with Tamika — the fire marks the trail.\""
+    },
+    {
+      "seed": 107615,
+      "day": 25,
+      "text": "📺 SYSTEM: \"Ghali sets out with Tamika — the fire marks the trail.\""
+    },
+    {
+      "seed": 107615,
+      "day": 33,
+      "text": "📺 SYSTEM: \"Tamika sets out with Ghali — the fire marks the trail.\""
+    },
+    {
+      "seed": 107615,
+      "day": 35,
+      "text": "📺 SYSTEM: \"Ghali sets out with Tamika — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 6,
+      "text": "A woman, maybe 30s, with a shaved head sets out with A person, maybe 60s — the fire marks the trail."
+    },
+    {
+      "seed": 107616,
+      "day": 6,
+      "text": "A man, maybe 50s sets out with A woman, maybe 30s, with a shaved head — the fire marks the trail."
+    },
+    {
+      "seed": 107616,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Niamh sets out with Denise — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 15,
+      "text": "📺 SYSTEM: \"Aki sets out with Denise — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Denise sets out with Aki — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 24,
+      "text": "📺 SYSTEM: \"Aki sets out with Denise — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 27,
+      "text": "📺 SYSTEM: \"Niamh sets out with Aki — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 31,
+      "text": "📺 SYSTEM: \"Denise sets out with Aki — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 33,
+      "text": "📺 SYSTEM: \"Denise sets out with Aki — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 37,
+      "text": "📺 SYSTEM: \"Denise sets out with Aki — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 40,
+      "text": "📺 SYSTEM: \"Niamh sets out with Aki — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 44,
+      "text": "📺 SYSTEM: \"Niamh sets out with Denise — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 48,
+      "text": "📺 SYSTEM: \"Denise sets out with Niamh — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 53,
+      "text": "📺 SYSTEM: \"Denise sets out after Loud-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 59,
+      "text": "📺 SYSTEM: \"Denise sets out with Niamh after Loud-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 63,
+      "text": "📺 SYSTEM: \"Denise sets out with Niamh after Loud-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 67,
+      "text": "📺 SYSTEM: \"Denise sets out with Niamh after Loud-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 73,
+      "text": "📺 SYSTEM: \"Niamh sets out with Denise after Gavel — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 77,
+      "text": "📺 SYSTEM: \"Denise sets out with Niamh after Loud-Eyes — the fire marks the trail.\""
+    }
+  ],
+  "ctlBeatLines": [
+    {
+      "seed": 107601,
+      "day": 9,
+      "text": "📺 SYSTEM: \"Hector sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Brianna sets out with Tuva — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Jorge sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Hector sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 14,
+      "text": "📺 SYSTEM: \"Brianna sets out with Tuva — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 15,
+      "text": "📺 SYSTEM: \"Jorge sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 16,
+      "text": "📺 SYSTEM: \"Hector sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 17,
+      "text": "📺 SYSTEM: \"Brianna sets out with Tuva — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 18,
+      "text": "📺 SYSTEM: \"Shynar sets out with Jorge — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Hector sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 21,
+      "text": "📺 SYSTEM: \"Brianna sets out with Tuva — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 21,
+      "text": "📺 SYSTEM: \"Jorge sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 24,
+      "text": "📺 SYSTEM: \"Hector sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 27,
+      "text": "📺 SYSTEM: \"Jorge sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 27,
+      "text": "📺 SYSTEM: \"Tuva sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Hector sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 32,
+      "text": "📺 SYSTEM: \"Jorge sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 35,
+      "text": "📺 SYSTEM: \"Tuva sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 36,
+      "text": "📺 SYSTEM: \"Jorge sets out with Shynar — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 37,
+      "text": "📺 SYSTEM: \"Tuva sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 40,
+      "text": "📺 SYSTEM: \"Tuva sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 42,
+      "text": "📺 SYSTEM: \"Hector sets out with Jorge — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 45,
+      "text": "📺 SYSTEM: \"Tuva sets out with Hector — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 45,
+      "text": "📺 SYSTEM: \"Jorge sets out with Tuva — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Jorge sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 48,
+      "text": "📺 SYSTEM: \"Tuva sets out with Hector — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 52,
+      "text": "📺 SYSTEM: \"Jorge sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 55,
+      "text": "📺 SYSTEM: \"Tuva sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 61,
+      "text": "📺 SYSTEM: \"Tuva sets out with Jorge — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 63,
+      "text": "📺 SYSTEM: \"Jorge sets out with Maya after Ugly-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 68,
+      "text": "📺 SYSTEM: \"Jorge sets out with Maya after Ugly-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 81,
+      "text": "📺 SYSTEM: \"Maya sets out with Nikos and Lena after The Eater — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 86,
+      "text": "📺 SYSTEM: \"Lena sets out with Maya, Nikos and Dmitri after The Eater — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 91,
+      "text": "📺 SYSTEM: \"Dmitri sets out with Quinn, Ruben and Nikos after The Eater — the fire marks the trail.\""
+    },
+    {
+      "seed": 107601,
+      "day": 91,
+      "text": "📺 SYSTEM: \"Lena sets out with Quinn, Dmitri and Ruben after The Eater — the fire marks the trail.\""
+    },
+    {
+      "seed": 107602,
+      "day": 5,
+      "text": "A person, maybe 30s, with freckles sets out with Rafael — the fire marks the trail."
+    },
+    {
+      "seed": 107602,
+      "day": 6,
+      "text": "Arlo sets out with Devon — the fire marks the trail."
+    },
+    {
+      "seed": 107602,
+      "day": 9,
+      "text": "📺 SYSTEM: \"Jorge sets out with Felix — the fire marks the trail.\""
+    },
+    {
+      "seed": 107602,
+      "day": 12,
+      "text": "📺 SYSTEM: \"Jorge sets out with Felix — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 7,
+      "text": "Maya sets out with A person, maybe 30s — the fire marks the trail."
+    },
+    {
+      "seed": 107603,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Stanley sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 14,
+      "text": "📺 SYSTEM: \"Maya sets out with Stanley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 17,
+      "text": "📺 SYSTEM: \"Stanley sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 25,
+      "text": "📺 SYSTEM: \"Maya sets out with Stanley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 27,
+      "text": "📺 SYSTEM: \"Stanley sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 37,
+      "text": "📺 SYSTEM: \"Stanley sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 41,
+      "text": "📺 SYSTEM: \"Stanley sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107603,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Stanley sets out with Maya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Bao sets out with Sam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Theo sets out with Sam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 49,
+      "text": "📺 SYSTEM: \"Theo sets out with Sam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 53,
+      "text": "📺 SYSTEM: \"Sam sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 56,
+      "text": "📺 SYSTEM: \"Theo sets out with Sara — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 61,
+      "text": "📺 SYSTEM: \"Ethan sets out with Sara — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 64,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 67,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 70,
+      "text": "📺 SYSTEM: \"Theo sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 74,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 77,
+      "text": "📺 SYSTEM: \"Theo sets out with Sara — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 80,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 84,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 89,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 95,
+      "text": "📺 SYSTEM: \"Theo sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107604,
+      "day": 95,
+      "text": "📺 SYSTEM: \"Sara sets out with Ethan after Gavel — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 6,
+      "text": "A man, maybe 40s, with a long braid sets out with A woman, maybe 30s — the fire marks the trail."
+    },
+    {
+      "seed": 107605,
+      "day": 6,
+      "text": "Ethan sets out with Layla — the fire marks the trail."
+    },
+    {
+      "seed": 107605,
+      "day": 8,
+      "text": "📺 SYSTEM: \"Somchai sets out with Luna — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 13,
+      "text": "📺 SYSTEM: \"Ethan sets out with Khrystyna — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 15,
+      "text": "📺 SYSTEM: \"Luna sets out with Somchai — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 15,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 17,
+      "text": "📺 SYSTEM: \"Khrystyna sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 18,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 19,
+      "text": "📺 SYSTEM: \"Luna sets out with Somchai — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 21,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 22,
+      "text": "📺 SYSTEM: \"Khrystyna sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 23,
+      "text": "📺 SYSTEM: \"Somchai sets out with Luna — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 25,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 27,
+      "text": "📺 SYSTEM: \"Khrystyna sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 31,
+      "text": "📺 SYSTEM: \"Ethan sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 31,
+      "text": "📺 SYSTEM: \"Somchai sets out with Oliver — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 34,
+      "text": "📺 SYSTEM: \"Oliver sets out with Somchai — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 36,
+      "text": "📺 SYSTEM: \"Oliver sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 36,
+      "text": "📺 SYSTEM: \"Somchai sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 39,
+      "text": "📺 SYSTEM: \"Ethan sets out with Wanjiru, Oliver and Nikolai after The Eulogy — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 43,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Somchai, Karas and Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Oliver sets out with Ethan and José after The Ugly Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Somchai sets out with Wanjiru and Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 50,
+      "text": "📺 SYSTEM: \"José sets out with Ruth after The Ugly Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 52,
+      "text": "📺 SYSTEM: \"Somchai sets out with Ethan, Wanjiru and Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 55,
+      "text": "📺 SYSTEM: \"Ruth sets out with Fabrice and Greta after The Influencer — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 57,
+      "text": "📺 SYSTEM: \"Somchai sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107605,
+      "day": 62,
+      "text": "📺 SYSTEM: \"Somchai sets out with Wanjiru and José — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 5,
+      "text": "A person, maybe 20s, with thick glasses sets out with A woman, maybe 30s — the fire marks the trail."
+    },
+    {
+      "seed": 107606,
+      "day": 6,
+      "text": "George sets out with A man, maybe 40s, with a gap-toothed grin — the fire marks the trail."
+    },
+    {
+      "seed": 107606,
+      "day": 8,
+      "text": "📺 SYSTEM: \"Paisley sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 13,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 16,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Paisley sets out with George — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with George — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 24,
+      "text": "📺 SYSTEM: \"Brooklyn sets out with Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 24,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Benoit — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 25,
+      "text": "📺 SYSTEM: \"George sets out with Paisley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 32,
+      "text": "📺 SYSTEM: \"Brooklyn sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 32,
+      "text": "📺 SYSTEM: \"Wanjiru sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 36,
+      "text": "📺 SYSTEM: \"Liam sets out with Wanjiru — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 41,
+      "text": "📺 SYSTEM: \"Paisley sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 44,
+      "text": "📺 SYSTEM: \"Paisley sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 46,
+      "text": "📺 SYSTEM: \"Paisley sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 49,
+      "text": "📺 SYSTEM: \"Paisley sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 55,
+      "text": "📺 SYSTEM: \"Liam sets out with Paisley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 60,
+      "text": "📺 SYSTEM: \"Victor sets out with Liam after The Terms of Service — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 64,
+      "text": "📺 SYSTEM: \"Liam sets out with Paisley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 68,
+      "text": "📺 SYSTEM: \"Victor sets out with Paisley after The Terms of Service — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 71,
+      "text": "📺 SYSTEM: \"Liam sets out with Paisley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 76,
+      "text": "📺 SYSTEM: \"Victor sets out with Paisley after Big Ugly — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 78,
+      "text": "📺 SYSTEM: \"Paisley sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 78,
+      "text": "📺 SYSTEM: \"Victor sets out with Paisley after Big Ugly — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 81,
+      "text": "📺 SYSTEM: \"Liam sets out with Paisley — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 88,
+      "text": "📺 SYSTEM: \"Victor sets out with Liam after Big Ugly — the fire marks the trail.\""
+    },
+    {
+      "seed": 107606,
+      "day": 91,
+      "text": "📺 SYSTEM: \"Victor sets out with Liam after Big Ugly — the fire marks the trail.\""
+    },
+    {
+      "seed": 107607,
+      "day": 6,
+      "text": "A person, maybe 30s sets out with Mateo — the fire marks the trail."
+    },
+    {
+      "seed": 107608,
+      "day": 11,
+      "text": "📺 SYSTEM: \"José sets out with Marcus — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Ruby sets out with José — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 16,
+      "text": "📺 SYSTEM: \"Marcus sets out with Ruby — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 21,
+      "text": "📺 SYSTEM: \"Ruby sets out with Marcus — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 27,
+      "text": "📺 SYSTEM: \"Ruby sets out with Marcus — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 32,
+      "text": "📺 SYSTEM: \"Marcus sets out with Ruby — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 35,
+      "text": "📺 SYSTEM: \"Marcus sets out with Ruby — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 40,
+      "text": "📺 SYSTEM: \"Marcus sets out with Ruby — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 42,
+      "text": "📺 SYSTEM: \"Ruby sets out with Marcus — the fire marks the trail.\""
+    },
+    {
+      "seed": 107608,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Ruby sets out with Marcus — the fire marks the trail.\""
+    },
+    {
+      "seed": 107609,
+      "day": 6,
+      "text": "Jorge sets out with Felicia — the fire marks the trail."
+    },
+    {
+      "seed": 107609,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Jorge sets out with Felicia — the fire marks the trail.\""
+    },
+    {
+      "seed": 107609,
+      "day": 16,
+      "text": "📺 SYSTEM: \"Felicia sets out with Jorge — the fire marks the trail.\""
+    },
+    {
+      "seed": 107609,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Felicia sets out with Jorge — the fire marks the trail.\""
+    },
+    {
+      "seed": 107609,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Zinhle sets out with Jorge after Spool — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Amelia sets out with Kwame — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Harleen sets out with Amelia — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 16,
+      "text": "📺 SYSTEM: \"Harleen sets out with Amelia — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Kwame sets out with Amelia — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 25,
+      "text": "📺 SYSTEM: \"Amelia sets out with Kwame — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 35,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 40,
+      "text": "📺 SYSTEM: \"Amelia sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 40,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 43,
+      "text": "📺 SYSTEM: \"Amelia sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 46,
+      "text": "📺 SYSTEM: \"Ines sets out with Kwame after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Amelia sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 51,
+      "text": "📺 SYSTEM: \"Amelia sets out with Kwame — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 51,
+      "text": "📺 SYSTEM: \"Ines sets out with Harleen after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 56,
+      "text": "📺 SYSTEM: \"Ines sets out with Amelia after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 57,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 59,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 62,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 62,
+      "text": "📺 SYSTEM: \"Ines sets out with Harleen after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 66,
+      "text": "📺 SYSTEM: \"Harleen sets out with Kwame — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 70,
+      "text": "📺 SYSTEM: \"Ines sets out with Kwame after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 73,
+      "text": "📺 SYSTEM: \"Ines sets out with Harleen after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 78,
+      "text": "📺 SYSTEM: \"Ines sets out with Harleen after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 83,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 86,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen after Big-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 93,
+      "text": "📺 SYSTEM: \"Kwame sets out with Harleen after Big-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 93,
+      "text": "📺 SYSTEM: \"Ines sets out with Kwame after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107610,
+      "day": 100,
+      "text": "📺 SYSTEM: \"Ines sets out with Harleen after Big Big — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 9,
+      "text": "📺 SYSTEM: \"Ethan sets out with Eric — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 14,
+      "text": "📺 SYSTEM: \"Eric sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 18,
+      "text": "📺 SYSTEM: \"Catalina sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 21,
+      "text": "📺 SYSTEM: \"Eric sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 26,
+      "text": "📺 SYSTEM: \"Eric sets out with Ethan — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 33,
+      "text": "📺 SYSTEM: \"Eric sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 37,
+      "text": "📺 SYSTEM: \"Eric sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 40,
+      "text": "📺 SYSTEM: \"Eric sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107611,
+      "day": 66,
+      "text": "📺 SYSTEM: \"Desmond sets out with Nadia, Aroha and Ava after Big-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 7,
+      "text": "A man, maybe 30s sets out with A man, maybe 60s — the fire marks the trail."
+    },
+    {
+      "seed": 107612,
+      "day": 8,
+      "text": "📺 SYSTEM: \"Liam sets out with Lucas — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Lucas sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 14,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 17,
+      "text": "📺 SYSTEM: \"Carlos sets out with Liam — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 22,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 26,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 31,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 35,
+      "text": "📺 SYSTEM: \"Carlos sets out with Lucas — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 39,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 39,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 43,
+      "text": "📺 SYSTEM: \"Nasreen sets out with Carlos after The Redactor — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 45,
+      "text": "📺 SYSTEM: \"Nasreen sets out with Liam after The Redactor — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 47,
+      "text": "📺 SYSTEM: \"Nasreen sets out with Liam after The Redactor — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 48,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 54,
+      "text": "📺 SYSTEM: \"Liam sets out with Lucas — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 57,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 60,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 65,
+      "text": "📺 SYSTEM: \"Carlos sets out with Lucas — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 68,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos after The Loud Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 73,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 73,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos after The Loud Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 77,
+      "text": "📺 SYSTEM: \"Liam sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 81,
+      "text": "📺 SYSTEM: \"Lucas sets out with Liam after The Loud Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 87,
+      "text": "📺 SYSTEM: \"Carlos sets out with Lucas after Loud-Bane — the fire marks the trail.\""
+    },
+    {
+      "seed": 107612,
+      "day": 92,
+      "text": "📺 SYSTEM: \"Lucas sets out with Carlos after The Loud Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 6,
+      "text": "Catalina sets out with Divya — the fire marks the trail."
+    },
+    {
+      "seed": 107613,
+      "day": 6,
+      "text": "Carlos sets out with Divya — the fire marks the trail."
+    },
+    {
+      "seed": 107613,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Ruby sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 13,
+      "text": "📺 SYSTEM: \"Ruby sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 15,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 25,
+      "text": "📺 SYSTEM: \"Ruby sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 25,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 29,
+      "text": "📺 SYSTEM: \"Carlos sets out with Ruby — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 30,
+      "text": "📺 SYSTEM: \"Catalina sets out with Divya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 33,
+      "text": "📺 SYSTEM: \"Ruby sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 34,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 37,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 38,
+      "text": "📺 SYSTEM: \"Ruby sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 42,
+      "text": "📺 SYSTEM: \"Divya sets out with Ruby — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 44,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 46,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 48,
+      "text": "📺 SYSTEM: \"Divya sets out with Carlos after The Ugly Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 52,
+      "text": "📺 SYSTEM: \"Carlos sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 56,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina after The Ugly Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 60,
+      "text": "📺 SYSTEM: \"Carlos sets out with Catalina — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 60,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina after The Ugly Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 65,
+      "text": "📺 SYSTEM: \"Divya sets out with Catalina after The Ugly Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 70,
+      "text": "📺 SYSTEM: \"Divya sets out with Carlos after The Ugly Beast — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 74,
+      "text": "📺 SYSTEM: \"Carlos sets out with Divya — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 79,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 84,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos after Gavel — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 90,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos after Gavel — the fire marks the trail.\""
+    },
+    {
+      "seed": 107613,
+      "day": 96,
+      "text": "📺 SYSTEM: \"Catalina sets out with Carlos after Gavel — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 5,
+      "text": "Somchai sets out with Yesenia — the fire marks the trail."
+    },
+    {
+      "seed": 107614,
+      "day": 7,
+      "text": "Gloria sets out with A person, maybe 20s — the fire marks the trail."
+    },
+    {
+      "seed": 107614,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Luz sets out with Yesenia — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 11,
+      "text": "📺 SYSTEM: \"Somchai sets out with Gloria — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 14,
+      "text": "📺 SYSTEM: \"Luz sets out with Henrique — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 16,
+      "text": "📺 SYSTEM: \"Gloria sets out with Somchai — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 19,
+      "text": "📺 SYSTEM: \"Gloria sets out with Somchai — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 23,
+      "text": "📺 SYSTEM: \"Gloria sets out with Henrique — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 23,
+      "text": "📺 SYSTEM: \"Somchai sets out with Gloria — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Henrique sets out with Luz — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 28,
+      "text": "📺 SYSTEM: \"Somchai sets out with Luz — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 33,
+      "text": "📺 SYSTEM: \"Luz sets out with Henrique — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 36,
+      "text": "📺 SYSTEM: \"Luz sets out with Henrique — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 39,
+      "text": "📺 SYSTEM: \"Luz sets out with Henrique — the fire marks the trail.\""
+    },
+    {
+      "seed": 107614,
+      "day": 42,
+      "text": "📺 SYSTEM: \"Henrique sets out with Luz — the fire marks the trail.\""
+    },
+    {
+      "seed": 107615,
+      "day": 7,
+      "text": "Ghali sets out with A person, maybe 40s, with a limp — the fire marks the trail."
+    },
+    {
+      "seed": 107615,
+      "day": 14,
+      "text": "📺 SYSTEM: \"Tamika sets out with Ghali — the fire marks the trail.\""
+    },
+    {
+      "seed": 107615,
+      "day": 22,
+      "text": "📺 SYSTEM: \"Ghali sets out with Tamika — the fire marks the trail.\""
+    },
+    {
+      "seed": 107615,
+      "day": 25,
+      "text": "📺 SYSTEM: \"Ghali sets out with Tamika — the fire marks the trail.\""
+    },
+    {
+      "seed": 107615,
+      "day": 33,
+      "text": "📺 SYSTEM: \"Tamika sets out with Ghali — the fire marks the trail.\""
+    },
+    {
+      "seed": 107615,
+      "day": 35,
+      "text": "📺 SYSTEM: \"Ghali sets out with Tamika — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 6,
+      "text": "A woman, maybe 30s, with a shaved head sets out with A person, maybe 60s — the fire marks the trail."
+    },
+    {
+      "seed": 107616,
+      "day": 6,
+      "text": "A man, maybe 50s sets out with A woman, maybe 30s, with a shaved head — the fire marks the trail."
+    },
+    {
+      "seed": 107616,
+      "day": 10,
+      "text": "📺 SYSTEM: \"Niamh sets out with Denise — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 15,
+      "text": "📺 SYSTEM: \"Aki sets out with Denise — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 20,
+      "text": "📺 SYSTEM: \"Denise sets out with Aki — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 24,
+      "text": "📺 SYSTEM: \"Aki sets out with Denise — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 27,
+      "text": "📺 SYSTEM: \"Niamh sets out with Aki — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 31,
+      "text": "📺 SYSTEM: \"Denise sets out with Aki — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 33,
+      "text": "📺 SYSTEM: \"Denise sets out with Aki — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 37,
+      "text": "📺 SYSTEM: \"Denise sets out with Aki — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 40,
+      "text": "📺 SYSTEM: \"Niamh sets out with Aki — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 44,
+      "text": "📺 SYSTEM: \"Niamh sets out with Denise — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 48,
+      "text": "📺 SYSTEM: \"Denise sets out with Niamh — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 53,
+      "text": "📺 SYSTEM: \"Denise sets out after Loud-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 59,
+      "text": "📺 SYSTEM: \"Denise sets out with Niamh after Loud-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 63,
+      "text": "📺 SYSTEM: \"Denise sets out with Niamh after Loud-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 67,
+      "text": "📺 SYSTEM: \"Denise sets out with Niamh after Loud-Eyes — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 73,
+      "text": "📺 SYSTEM: \"Niamh sets out with Denise after Gavel — the fire marks the trail.\""
+    },
+    {
+      "seed": 107616,
+      "day": 77,
+      "text": "📺 SYSTEM: \"Denise sets out with Niamh after Loud-Eyes — the fire marks the trail.\""
+    }
+  ]
+}
