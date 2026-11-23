@@ -1,0 +1,165 @@
+{
+  "seeds": [
+    109101,
+    109102,
+    109103,
+    109104,
+    109105,
+    109106,
+    109107,
+    109108
+  ],
+  "anchor": "adfccecc3086f8665897309caef33639517fbf46",
+  "legs": {
+    "control": {
+      "n": 8,
+      "scored": 5,
+      "unscored": [
+        {
+          "seed": 109104,
+          "reason": "dead"
+        },
+        {
+          "seed": 109106,
+          "reason": "dead"
+        },
+        {
+          "seed": 109108,
+          "reason": "dead"
+        }
+      ],
+      "poolDoorLeaderDeaths": 0,
+      "poolDeathRows": [],
+      "wave4KillsDownstream": 37,
+      "wave4KillsTotal": 38,
+      "wave5KillsTotal": 14,
+      "starvationDeaths": 1,
+      "villageDeaths": 896,
+      "medianSurvival": 90,
+      "survivals": [
+        90,
+        90,
+        91,
+        91,
+        90,
+        90,
+        152,
+        59
+      ],
+      "leaderAliveAtEnd": 2,
+      "stagedDoorLeaderDeaths": 0,
+      "projFires": 0,
+      "hpgateFires": 12,
+      "leaderhpgateFires": 0,
+      "won": 6,
+      "national": 7,
+      "table": 2,
+      "entered": 6,
+      "wave4Unlocks": 8,
+      "wave5Unlocks": 8,
+      "d5Errors": [],
+      "d6Errors": []
+    },
+    "armed": {
+      "n": 8,
+      "scored": 5,
+      "unscored": [
+        {
+          "seed": 109104,
+          "reason": "dead"
+        },
+        {
+          "seed": 109106,
+          "reason": "dead"
+        },
+        {
+          "seed": 109108,
+          "reason": "dead"
+        }
+      ],
+      "poolDoorLeaderDeaths": 0,
+      "poolDeathRows": [],
+      "wave4KillsDownstream": 14,
+      "wave4KillsTotal": 14,
+      "wave5KillsTotal": 1,
+      "starvationDeaths": 6,
+      "villageDeaths": 774,
+      "medianSurvival": 90,
+      "survivals": [
+        90,
+        92,
+        90,
+        91,
+        76,
+        90,
+        93,
+        70
+      ],
+      "leaderAliveAtEnd": 2,
+      "stagedDoorLeaderDeaths": 0,
+      "projFires": 29,
+      "hpgateFires": 1,
+      "leaderhpgateFires": 0,
+      "won": 6,
+      "national": 6,
+      "table": 2,
+      "entered": 6,
+      "wave4Unlocks": 8,
+      "wave5Unlocks": 6,
+      "d5Errors": [],
+      "d6Errors": []
+    }
+  },
+  "bars": {
+    "supply": {
+      "need": 6,
+      "controlScored": 5,
+      "armedScored": 5,
+      "pass": false
+    },
+    "H1a": {
+      "control": 0,
+      "armed": 0,
+      "delta": 0,
+      "need": "armed <= control - 1",
+      "pass": false
+    },
+    "H1b": {
+      "control": 37,
+      "armed": 14,
+      "delta": -23,
+      "need": "armed >= control - 1",
+      "pass": false
+    },
+    "D5": {
+      "controlErrors": [],
+      "armedErrors": [],
+      "pass": true
+    },
+    "D6": {
+      "controlErrors": [],
+      "armedErrors": [],
+      "pass": true
+    },
+    "guardStarvation": {
+      "control": 1,
+      "armed": 6,
+      "need": "armed <= control + 2",
+      "pass": false
+    },
+    "guardVillageDeaths": {
+      "control": 896,
+      "armed": 774,
+      "need": "armed <= control + 2",
+      "pass": true
+    },
+    "guardSurvival": {
+      "controlMedian": 90,
+      "armedMedian": 90,
+      "need": "armed median >= 0.8x control",
+      "pass": true
+    }
+  },
+  "verdict": "DIAG-NO-GO",
+  "kind": "SUPPLY-THIN"
+}

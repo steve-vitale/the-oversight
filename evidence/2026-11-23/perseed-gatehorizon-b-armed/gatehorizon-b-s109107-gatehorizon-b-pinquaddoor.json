@@ -1,0 +1,1513 @@
+{
+  "seed": 109107,
+  "arm": "gatehorizon-b",
+  "run": "gatehorizon-b",
+  "mode": "gatehorizon-b",
+  "leg": "armed",
+  "anchorCommit": "adfccecc3086f8665897309caef33639517fbf46",
+  "slotPresent": true,
+  "pinPresent": true,
+  "senseexpedPresent": true,
+  "projPresent": true,
+  "logPresent": true,
+  "allyslot3Flag": "1",
+  "pinquadFlag": "1",
+  "dmgpinFlag": "1",
+  "doorflee2Flag": "1",
+  "hypofloorFlag": "1",
+  "hpgateFlag": "1",
+  "leaderhpgateFlag": null,
+  "leaderprojFlag": "1",
+  "senseexpedFlag": "1",
+  "policySha": "4c4d1535d76c8327d40e746ede8f09d97ee26d7451b6daabb401d409e05443ff",
+  "basePolicySha": "1884c8852d38170e0e99078a279e867496e27605fdcadbd3c2a42c07a54d4bb0",
+  "policy": "capable",
+  "policyExecuted": true,
+  "hpgateFires": 0,
+  "leaderhpgateFires": 0,
+  "leaderprojFires": 1,
+  "gateAvoidNotes": [],
+  "gateAvoidLog": [
+    {
+      "day": 51,
+      "vid": "gen_ztg1dkh",
+      "mid": "algorithm",
+      "kind": "proj",
+      "name": "Mariah",
+      "hp": 75,
+      "projHp2": 25,
+      "note": "gave algorithm room — Mariah is too hurt to lead a door (projected 75 HP, 25 HP in two rounds)"
+    }
+  ],
+  "v4encounters": [
+    {
+      "day": 54,
+      "vid": "meera_reddy",
+      "mid": "eater",
+      "wave": 4,
+      "mHpStart": null,
+      "vKill": true,
+      "mHpStartRec": 1083,
+      "leaderEntryHp": 100,
+      "alliesN": 3,
+      "allyVids": [
+        "gen_ztg1dkh",
+        "theo_lindqvist",
+        "visjoin_37"
+      ],
+      "allyFromStart": true,
+      "gate": null,
+      "outcome": "vKill",
+      "rounds": 5,
+      "vTaken": 22,
+      "mDealt": 1144,
+      "calledHelp": true,
+      "allyVid": "gen_ztg1dkh",
+      "ally2Vid": "theo_lindqvist",
+      "ally3Vid": "visjoin_37",
+      "ally3Dealt": 282,
+      "fleeHpFrac": null,
+      "intent": "engage",
+      "shoutRound": null,
+      "shout2Round": null,
+      "shout3Round": null,
+      "pinned": true,
+      "pinnedAllies": [
+        "gen_ztg1dkh",
+        "theo_lindqvist",
+        "visjoin_37"
+      ],
+      "fleeWise": false,
+      "fleeLearn": false,
+      "trickBefore": false,
+      "trickAfter": false,
+      "lines": [],
+      "log": [
+        "Meera walks straight into The Eater. No avoiding it.",
+        "Meera sees The Eater coming and nocks an arrow — the fight opens at range (2 shots).",
+        "  loosed — it takes The Eater for 17 (1066 left).",
+        "  loosed — it takes The Eater for 13 (1053 left).",
+        "Meera lowers the bow — The Eater is on them now. (2/2 hit)",
+        "Theo is already at the door too — charges in with Meera!",
+        "Anucha is already at the door too — charges in with Meera!",
+        "Mariah is already at the door — charges in with Meera!",
+        "R1: Meera goes still. Breath slows. The world narrows to the target. (Take Aim — next shot 2.5x)",
+        "The pinned quad fights as one — every strike lands with the unit's weight behind it. (Coordinated strikes x2)",
+        "R1: Mariah strikes for 64 (pinned x2) (989 left)",
+        "R1: Theo strikes for 56 (pinned x2) (933 left)",
+        "R1: Anucha strikes for 72 (x1.3) (pinned x2) (861 left)",
+        "Meera's gear absorbs 74.",
+        "R1: Smack-Rush hits Meera for 11 (89 left)",
+        "R2: Meera strikes for 156 (aimed 2.5x) (pinned quad x2) (705 left)",
+        "R2: Mariah strikes for 60 (pinned x2) (645 left)",
+        "R2: Theo strikes for 60 (pinned x2) (585 left)",
+        "R2: Anucha strikes for 68 (x1.3) (pinned x2) (517 left)",
+        "Meera's gear absorbs 70.",
+        "R2: Smack-Rush hits Meera for 11 (78 left)",
+        "Meera holds the door — the fight is theirs on the numbers they can see, and the quad is not leaving it. (Door hold)",
+        "Theo's gear absorbs 61.",
+        "R3: Smack-Rush hits Theo for 14 (86 left)",
+        "R3: Meera strikes for 60 (pinned quad x2) (457 left)",
+        "R3: Mariah strikes for 64 (pinned x2) (393 left)",
+        "R3: Theo strikes for 62 (pinned x2) (331 left)",
+        "R3: Anucha strikes for 72 (x1.3) (pinned x2) (259 left)",
+        "Mariah's gear absorbs 91.",
+        "R4: Smack-Rush hits Mariah for 23 (58 left)",
+        "R4: Meera strikes for 64 (pinned quad x2) (195 left)",
+        "R4: Mariah strikes for 62 (pinned x2) (133 left)",
+        "R4: Theo strikes for 62 (pinned x2) (71 left)",
+        "R4: Anucha strikes for 70 (x1.3) (pinned x2) (1 left)",
+        "Meera holds — The Eater is two blows from falling, and they are still strong enough to finish it. (Committed finish, two-blow)",
+        "Anucha's gear absorbs 70.",
+        "R5: Smack-Rush hits Anucha for 16 (84 left)",
+        "R5: Meera strikes for 62 (pinned quad x2) (0 left)",
+        "The lead falls — the pack's coordination shatters. The rest scatter or die."
+      ],
+      "origin": "expedition",
+      "staged": false,
+      "leaderDied": false,
+      "doorHold": 1,
+      "everHopeless": true,
+      "roundsDetail": [
+        {
+          "round": 1,
+          "vHpStart": 100,
+          "mHpStart": 1053,
+          "allyHpStart": 81,
+          "ally2HpStart": 100,
+          "ally3HpStart": 100,
+          "vHpEnd": 89,
+          "mHpEnd": 861,
+          "allyHpEnd": 81,
+          "ally2HpEnd": 100,
+          "ally3HpEnd": 100,
+          "mHpTotalEnd": 861,
+          "dealt": 192,
+          "taken": 11,
+          "allyDealt": 192,
+          "allyTaken": 0,
+          "ally2Dealt": 56,
+          "ally2Taken": 0,
+          "ally3Dealt": 72,
+          "ally3Taken": 0,
+          "abilities": [
+            "patient_aim"
+          ],
+          "tricks": []
+        },
+        {
+          "round": 2,
+          "vHpStart": 89,
+          "mHpStart": 861,
+          "allyHpStart": 81,
+          "ally2HpStart": 100,
+          "ally3HpStart": 100,
+          "vHpEnd": 78,
+          "mHpEnd": 517,
+          "allyHpEnd": 81,
+          "ally2HpEnd": 100,
+          "ally3HpEnd": 100,
+          "mHpTotalEnd": 517,
+          "dealt": 344,
+          "taken": 11,
+          "allyDealt": 188,
+          "allyTaken": 0,
+          "ally2Dealt": 60,
+          "ally2Taken": 0,
+          "ally3Dealt": 68,
+          "ally3Taken": 0,
+          "abilities": [],
+          "tricks": []
+        },
+        {
+          "round": 3,
+          "vHpStart": 78,
+          "mHpStart": 517,
+          "allyHpStart": 81,
+          "ally2HpStart": 100,
+          "ally3HpStart": 100,
+          "vHpEnd": 78,
+          "mHpEnd": 259,
+          "allyHpEnd": 81,
+          "ally2HpEnd": 86,
+          "ally3HpEnd": 100,
+          "mHpTotalEnd": 259,
+          "dealt": 258,
+          "taken": 0,
+          "allyDealt": 198,
+          "allyTaken": 0,
+          "ally2Dealt": 62,
+          "ally2Taken": 14,
+          "ally3Dealt": 72,
+          "ally3Taken": 0,
+          "abilities": [],
+          "tricks": []
+        },
+        {
+          "round": 4,
+          "vHpStart": 78,
+          "mHpStart": 259,
+          "allyHpStart": 81,
+          "ally2HpStart": 86,
+          "ally3HpStart": 100,
+          "vHpEnd": 78,
+          "mHpEnd": 1,
+          "allyHpEnd": 58,
+          "ally2HpEnd": 86,
+          "ally3HpEnd": 100,
+          "mHpTotalEnd": 1,
+          "dealt": 258,
+          "taken": 0,
+          "allyDealt": 194,
+          "allyTaken": 23,
+          "ally2Dealt": 62,
+          "ally2Taken": 0,
+          "ally3Dealt": 70,
+          "ally3Taken": 0,
+          "abilities": [],
+          "tricks": []
+        },
+        {
+          "round": 5,
+          "vHpStart": 78,
+          "mHpStart": 1,
+          "allyHpStart": 58,
+          "ally2HpStart": 86,
+          "ally3HpStart": 100,
+          "vHpEnd": 78,
+          "mHpEnd": 0,
+          "allyHpEnd": 58,
+          "ally2HpEnd": 86,
+          "ally3HpEnd": 84,
+          "mHpTotalEnd": 0,
+          "dealt": 62,
+          "taken": 0,
+          "allyDealt": 0,
+          "allyTaken": 0,
+          "ally2Dealt": 0,
+          "ally2Taken": 0,
+          "ally3Dealt": 0,
+          "ally3Taken": 16,
+          "abilities": [],
+          "tricks": []
+        }
+      ],
+      "roundTotals": [
+        {
+          "round": 1,
+          "mDealt": 222,
+          "vTaken": 11,
+          "allyDealt": 192
+        },
+        {
+          "round": 2,
+          "mDealt": 566,
+          "vTaken": 22,
+          "allyDealt": 380
+        },
+        {
+          "round": 3,
+          "mDealt": 824,
+          "vTaken": 22,
+          "allyDealt": 578
+        },
+        {
+          "round": 4,
+          "mDealt": 1082,
+          "vTaken": 22,
+          "allyDealt": 772
+        }
+      ],
+      "actionKinds": [
+        "aim",
+        "strike",
+        "strike",
+        "strike",
+        "strike"
+      ],
+      "strikesThrown": 4,
+      "rageFired": false,
+      "flPreRoundDealt": 30,
+      "allyDealt": 772,
+      "ally2Dealt": 240
+    },
+    {
+      "day": 66,
+      "vid": "gen_ztg1dkh",
+      "mid": "algorithm",
+      "wave": 4,
+      "mHpStart": 1052,
+      "vKill": false,
+      "mHpStartRec": 1052,
+      "leaderEntryHp": 88,
+      "alliesN": 2,
+      "allyVids": [
+        "visjoin_37",
+        "gen_3xn3wd4"
+      ],
+      "allyFromStart": false,
+      "gate": null,
+      "outcome": "vFlee",
+      "rounds": 5,
+      "vTaken": 50,
+      "mDealt": 292,
+      "calledHelp": true,
+      "allyVid": "visjoin_37",
+      "ally2Vid": "gen_3xn3wd4",
+      "ally3Vid": null,
+      "ally3Dealt": 0,
+      "fleeHpFrac": 0.38,
+      "intent": "engage",
+      "shoutRound": 2,
+      "shout2Round": 3,
+      "shout3Round": null,
+      "pinned": false,
+      "pinnedAllies": [],
+      "fleeWise": false,
+      "fleeLearn": false,
+      "trickBefore": false,
+      "trickAfter": false,
+      "lines": [],
+      "log": [
+        "Mariah walks straight into The Algorithm. No avoiding it.",
+        "Mariah has Crude bow but no arrows — the string stays drawn, useless.",
+        "Mariah's gear absorbs 42.",
+        "R1: Recommended For You hits Mariah for 11 (77 left)",
+        "R1: Mariah strikes for 28 (1024 left)",
+        "R2: Mariah strikes for 32 (992 left)",
+        "Mariah's gear absorbs 42.",
+        "R2: Engagement hits Mariah for 10 (67 left)",
+        "Mariah is losing — shouts for help! Anucha charges in!",
+        "Mariah draws its eye — \"Me. I'm the problem.\" The beast turns.",
+        "Mariah's gear absorbs 50.",
+        "R3: Engagement hits Mariah for 12 (55 left)",
+        "R3: Mariah strikes for 28 (964 left)",
+        "R3: Anucha strikes for 29 (935 left)",
+        "Mariah is still losing — shouts again! Cesar charges in!",
+        "Mariah's gear absorbs 39.",
+        "R4: Recommended For You hits Mariah for 10 (45 left)",
+        "R4: Mariah strikes for 32 (903 left)",
+        "R4: Anucha strikes for 26 (877 left)",
+        "R4: Cesar strikes for 31 (846 left)",
+        "Mariah looks at Anucha standing with them — and does not run. For them. (Rally)",
+        "R5: Mariah strikes for 29 (817 left)",
+        "R5: Anucha strikes for 25 (792 left)",
+        "R5: Cesar strikes for 32 (760 left)",
+        "Mariah's gear absorbs 29.",
+        "R5: Recommended For You hits Mariah for 7 (38 left)",
+        "Mariah sees how this ends — and runs while running still works."
+      ],
+      "origin": "expedition",
+      "staged": false,
+      "leaderDied": false,
+      "doorHold": 0,
+      "everHopeless": true,
+      "roundsDetail": [
+        {
+          "round": 1,
+          "vHpStart": 88,
+          "mHpStart": 1052,
+          "allyHpStart": null,
+          "ally2HpStart": null,
+          "ally3HpStart": null,
+          "vHpEnd": 77,
+          "mHpEnd": 1024,
+          "allyHpEnd": null,
+          "ally2HpEnd": null,
+          "ally3HpEnd": null,
+          "mHpTotalEnd": 1024,
+          "dealt": 28,
+          "taken": 11,
+          "allyDealt": 0,
+          "allyTaken": 0,
+          "ally2Dealt": 0,
+          "ally2Taken": 0,
+          "ally3Dealt": 0,
+          "ally3Taken": 0,
+          "abilities": [],
+          "tricks": []
+        },
+        {
+          "round": 2,
+          "vHpStart": 77,
+          "mHpStart": 1024,
+          "allyHpStart": null,
+          "ally2HpStart": null,
+          "ally3HpStart": null,
+          "vHpEnd": 67,
+          "mHpEnd": 992,
+          "allyHpEnd": null,
+          "ally2HpEnd": null,
+          "ally3HpEnd": null,
+          "mHpTotalEnd": 992,
+          "dealt": 32,
+          "taken": 10,
+          "allyDealt": 0,
+          "allyTaken": 0,
+          "ally2Dealt": 0,
+          "ally2Taken": 0,
+          "ally3Dealt": 0,
+          "ally3Taken": 0,
+          "abilities": [],
+          "tricks": []
+        },
+        {
+          "round": 3,
+          "vHpStart": 67,
+          "mHpStart": 992,
+          "allyHpStart": 92,
+          "ally2HpStart": null,
+          "ally3HpStart": null,
+          "vHpEnd": 55,
+          "mHpEnd": 935,
+          "allyHpEnd": 92,
+          "ally2HpEnd": null,
+          "ally3HpEnd": null,
+          "mHpTotalEnd": 935,
+          "dealt": 57,
+          "taken": 12,
+          "allyDealt": 29,
+          "allyTaken": 0,
+          "ally2Dealt": 0,
+          "ally2Taken": 0,
+          "ally3Dealt": 0,
+          "ally3Taken": 0,
+          "abilities": [
+            "draw_fire"
+          ],
+          "tricks": []
+        },
+        {
+          "round": 4,
+          "vHpStart": 55,
+          "mHpStart": 935,
+          "allyHpStart": 92,
+          "ally2HpStart": 97,
+          "ally3HpStart": null,
+          "vHpEnd": 45,
+          "mHpEnd": 846,
+          "allyHpEnd": 92,
+          "ally2HpEnd": 97,
+          "ally3HpEnd": null,
+          "mHpTotalEnd": 846,
+          "dealt": 89,
+          "taken": 10,
+          "allyDealt": 57,
+          "allyTaken": 0,
+          "ally2Dealt": 31,
+          "ally2Taken": 0,
+          "ally3Dealt": 0,
+          "ally3Taken": 0,
+          "abilities": [],
+          "tricks": []
+        },
+        {
+          "round": 5,
+          "vHpStart": 45,
+          "mHpStart": 846,
+          "allyHpStart": 92,
+          "ally2HpStart": 97,
+          "ally3HpStart": null,
+          "vHpEnd": 38,
+          "mHpEnd": 760,
+          "allyHpEnd": 92,
+          "ally2HpEnd": 97,
+          "ally3HpEnd": null,
+          "mHpTotalEnd": 760,
+          "dealt": 86,
+          "taken": 7,
+          "allyDealt": 57,
+          "allyTaken": 0,
+          "ally2Dealt": 32,
+          "ally2Taken": 0,
+          "ally3Dealt": 0,
+          "ally3Taken": 0,
+          "abilities": [],
+          "tricks": []
+        }
+      ],
+      "roundTotals": [
+        {
+          "round": 1,
+          "mDealt": 28,
+          "vTaken": 11,
+          "allyDealt": 0
+        },
+        {
+          "round": 2,
+          "mDealt": 60,
+          "vTaken": 21,
+          "allyDealt": 0
+        },
+        {
+          "round": 3,
+          "mDealt": 117,
+          "vTaken": 33,
+          "allyDealt": 29
+        },
+        {
+          "round": 4,
+          "mDealt": 206,
+          "vTaken": 43,
+          "allyDealt": 86
+        },
+        {
+          "round": 5,
+          "mDealt": 292,
+          "vTaken": 50,
+          "allyDealt": 143
+        }
+      ],
+      "actionKinds": [
+        "strike",
+        "strike",
+        "strike",
+        "strike",
+        "strike"
+      ],
+      "strikesThrown": 5,
+      "rageFired": false,
+      "flPreRoundDealt": 0,
+      "allyDealt": 143,
+      "ally2Dealt": 63
+    },
+    {
+      "day": 89,
+      "vid": "gen_ztg1dkh",
+      "mid": "cancellation",
+      "wave": 5,
+      "mHpStart": 1652,
+      "vKill": false,
+      "mHpStartRec": 1652,
+      "leaderEntryHp": 77,
+      "alliesN": 2,
+      "allyVids": [
+        "theo_lindqvist",
+        "ingrid_vik"
+      ],
+      "allyFromStart": false,
+      "gate": null,
+      "outcome": "vDie",
+      "rounds": 5,
+      "vTaken": 79,
+      "mDealt": 575,
+      "calledHelp": true,
+      "allyVid": "theo_lindqvist",
+      "ally2Vid": "ingrid_vik",
+      "ally3Vid": null,
+      "ally3Dealt": 0,
+      "fleeHpFrac": null,
+      "intent": "engage",
+      "shoutRound": 2,
+      "shout2Round": 3,
+      "shout3Round": null,
+      "pinned": false,
+      "pinnedAllies": [],
+      "fleeWise": false,
+      "fleeLearn": false,
+      "trickBefore": false,
+      "trickAfter": false,
+      "lines": [],
+      "log": [
+        "Mariah walks straight into The Cancellation. No avoiding it.",
+        "Mariah sees The Cancellation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Cancellation for 14 (1638 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "Mariah lowers the bow — The Cancellation is on them now. (1/3 hit)",
+        "R1: Mariah's eyes go red. Next 3 strikes hit twice as hard. (Rage) [Mariah — Gardener of the Living Garden]",
+        "R1: the stamp descends over Mariah (1/3). Red ink.",
+        "Mariah's gear absorbs 67.",
+        "R1: Blooded — the village knows where the Producers bleed. (Strikes hit 1.5× as hard; their blows land at 0.75× strength.)",
+        "R1: Under Review hits Mariah for 20 (57 left)",
+        "R2: Mariah strikes for 93 (x2.0) (1545 left)",
+        "R2: the stamp descends over Mariah (2/3). Red ink.",
+        "Mariah's gear absorbs 58.",
+        "R2: Under Review hits Mariah for 17 (40 left)",
+        "Mariah is losing — shouts for help! Theo charges in!",
+        "R3: Mariah strikes for 174 (HAYMAKER x2) (x2.0) (1371 left)",
+        "R3: Theo strikes for 47 (1324 left)",
+        "R3: the stamp descends over Mariah (3/3). Red ink.",
+        "Mariah draws its eye — \"Me. I'm the problem.\" The beast turns.",
+        "Mariah's gear absorbs 56.",
+        "R3: Pilot Season hits Mariah for 17 (23 left)",
+        "Mariah is still losing — shouts again! Ingrid charges in!",
+        "R4: Mariah strikes for 87 (x2.0) (1237 left)",
+        "R4: Theo strikes for 45 (1192 left)",
+        "R4: Ingrid strikes for 15 (1177 left)",
+        "R4: THE STAMP FALLS on Mariah — their best tricks: UNDER REVIEW. (Their hits -30% from here.)",
+        "Mariah's gear absorbs 37.",
+        "R4: Pilot Season hits Mariah for 11 (12 left)",
+        "Mariah looks at Theo standing with them — and does not run. For them. (Rally)",
+        "R5: Mariah strikes for 33 (under review — un-taught) (1144 left)",
+        "R5: Theo strikes for 47 (1097 left)",
+        "R5: Ingrid strikes for 20 (1077 left)",
+        "Mariah's gear absorbs 48.",
+        "R5: Pilot Season hits Mariah for 14 (0 left)"
+      ],
+      "origin": "expedition",
+      "staged": false,
+      "leaderDied": false,
+      "doorHold": 0,
+      "everHopeless": true,
+      "roundsDetail": [
+        {
+          "round": 1,
+          "vHpStart": 77,
+          "mHpStart": 1638,
+          "allyHpStart": null,
+          "ally2HpStart": null,
+          "ally3HpStart": null,
+          "vHpEnd": 57,
+          "mHpEnd": 1638,
+          "allyHpEnd": null,
+          "ally2HpEnd": null,
+          "ally3HpEnd": null,
+          "mHpTotalEnd": 1638,
+          "dealt": 0,
+          "taken": 20,
+          "allyDealt": 0,
+          "allyTaken": 0,
+          "ally2Dealt": 0,
+          "ally2Taken": 0,
+          "ally3Dealt": 0,
+          "ally3Taken": 0,
+          "abilities": [],
+          "tricks": []
+        },
+        {
+          "round": 2,
+          "vHpStart": 57,
+          "mHpStart": 1638,
+          "allyHpStart": null,
+          "ally2HpStart": null,
+          "ally3HpStart": null,
+          "vHpEnd": 40,
+          "mHpEnd": 1545,
+          "allyHpEnd": null,
+          "ally2HpEnd": null,
+          "ally3HpEnd": null,
+          "mHpTotalEnd": 1545,
+          "dealt": 93,
+          "taken": 17,
+          "allyDealt": 0,
+          "allyTaken": 0,
+          "ally2Dealt": 0,
+          "ally2Taken": 0,
+          "ally3Dealt": 0,
+          "ally3Taken": 0,
+          "abilities": [],
+          "tricks": []
+        },
+        {
+          "round": 3,
+          "vHpStart": 40,
+          "mHpStart": 1545,
+          "allyHpStart": 74,
+          "ally2HpStart": null,
+          "ally3HpStart": null,
+          "vHpEnd": 23,
+          "mHpEnd": 1324,
+          "allyHpEnd": 74,
+          "ally2HpEnd": null,
+          "ally3HpEnd": null,
+          "mHpTotalEnd": 1324,
+          "dealt": 221,
+          "taken": 17,
+          "allyDealt": 47,
+          "allyTaken": 0,
+          "ally2Dealt": 0,
+          "ally2Taken": 0,
+          "ally3Dealt": 0,
+          "ally3Taken": 0,
+          "abilities": [
+            "haymaker",
+            "draw_fire"
+          ],
+          "tricks": []
+        },
+        {
+          "round": 4,
+          "vHpStart": 23,
+          "mHpStart": 1324,
+          "allyHpStart": 74,
+          "ally2HpStart": 79,
+          "ally3HpStart": null,
+          "vHpEnd": 12,
+          "mHpEnd": 1177,
+          "allyHpEnd": 74,
+          "ally2HpEnd": 79,
+          "ally3HpEnd": null,
+          "mHpTotalEnd": 1177,
+          "dealt": 147,
+          "taken": 11,
+          "allyDealt": 60,
+          "allyTaken": 0,
+          "ally2Dealt": 15,
+          "ally2Taken": 0,
+          "ally3Dealt": 0,
+          "ally3Taken": 0,
+          "abilities": [],
+          "tricks": []
+        },
+        {
+          "round": 5,
+          "vHpStart": 12,
+          "mHpStart": 1177,
+          "allyHpStart": 74,
+          "ally2HpStart": 79,
+          "ally3HpStart": null,
+          "vHpEnd": 0,
+          "mHpEnd": 1077,
+          "allyHpEnd": 74,
+          "ally2HpEnd": 79,
+          "ally3HpEnd": null,
+          "mHpTotalEnd": 1077,
+          "dealt": 100,
+          "taken": 14,
+          "allyDealt": 67,
+          "allyTaken": 0,
+          "ally2Dealt": 20,
+          "ally2Taken": 0,
+          "ally3Dealt": 0,
+          "ally3Taken": 0,
+          "abilities": [],
+          "tricks": []
+        }
+      ],
+      "roundTotals": [
+        {
+          "round": 1,
+          "mDealt": 14,
+          "vTaken": 20,
+          "allyDealt": 0
+        },
+        {
+          "round": 2,
+          "mDealt": 107,
+          "vTaken": 37,
+          "allyDealt": 0
+        },
+        {
+          "round": 3,
+          "mDealt": 328,
+          "vTaken": 54,
+          "allyDealt": 47
+        },
+        {
+          "round": 4,
+          "mDealt": 475,
+          "vTaken": 65,
+          "allyDealt": 107
+        }
+      ],
+      "actionKinds": [
+        "ability",
+        "strike",
+        "strike",
+        "strike",
+        "strike"
+      ],
+      "strikesThrown": 4,
+      "rageFired": true,
+      "flPreRoundDealt": 14,
+      "allyDealt": 174,
+      "ally2Dealt": 35
+    }
+  ],
+  "instrumentErrors": [],
+  "stagedDoor": {
+    "door": 7,
+    "mid": "algorithm",
+    "wave": 4,
+    "leaderHp": 75,
+    "projHp2": 25,
+    "band": "collapse2-boundary",
+    "stagingDay": 51,
+    "leaderVid": "gen_ztg1dkh",
+    "party": [
+      "gen_ztg1dkh",
+      "theo_lindqvist",
+      "meera_reddy",
+      "visjoin_37"
+    ],
+    "replacements": [],
+    "measuredArmorP": [
+      30,
+      30,
+      30,
+      30
+    ],
+    "measuredArmorPAtDoor": [
+      37,
+      39,
+      59,
+      39
+    ],
+    "gearAtDoor": [
+      {
+        "armed": true,
+        "armored": true,
+        "armorP": 37,
+        "weaponB": 30
+      },
+      {
+        "armed": true,
+        "armored": true,
+        "armorP": 39,
+        "weaponB": 15
+      },
+      {
+        "armed": true,
+        "armored": true,
+        "armorP": 59,
+        "weaponB": 30
+      },
+      {
+        "armed": true,
+        "armored": true,
+        "armorP": 39,
+        "weaponB": 12
+      }
+    ],
+    "calls": 1,
+    "evades": 0,
+    "fought": false,
+    "fired": true,
+    "outcome": null,
+    "rounds": null,
+    "mDealt": null,
+    "leaderDied": false,
+    "returnedHome": false
+  },
+  "scored": true,
+  "unscoredReason": null,
+  "wave4KillsTotal": 4,
+  "wave4KillsDownstream": 4,
+  "wave5KillsTotal": 0,
+  "leaderAliveAtEnd": false,
+  "starvationDeaths": 0,
+  "won": true,
+  "scaleRank": "global",
+  "gameDays": 93,
+  "endReason": "over-other",
+  "deaths": [
+    {
+      "day": 6,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 6,
+      "kind": "person",
+      "who": "ruth_goldstein",
+      "cause": "ambush",
+      "player": false
+    },
+    {
+      "day": 8,
+      "kind": "monster",
+      "who": "rut_king",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "speedbump_turtle",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "anaconda_empress",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "living_wire",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 9,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 11,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 12,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 13,
+      "kind": "monster",
+      "who": "bulldozer",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 14,
+      "kind": "monster",
+      "who": "drumbelly_tanuki",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 16,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 17,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 18,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 19,
+      "kind": "monster",
+      "who": "belltoad",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 19,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "nightlight_catfish",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 20,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 21,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 25,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 28,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 31,
+      "kind": "monster",
+      "who": "terms_of_service",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "monster",
+      "who": "mirror_stag",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "person",
+      "who": "gen_8oifoyl",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "monster",
+      "who": "paparazzo",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 33,
+      "kind": "monster",
+      "who": "moderator",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 34,
+      "kind": "villager",
+      "who": "gen_pnny44c",
+      "cause": "a wound that wouldn't close",
+      "player": false
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "dustboar",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "focus_group_eye",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "focus_group_eye",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "focus_group_eye",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "focus_group",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 36,
+      "kind": "monster",
+      "who": "voice_mimic_radio",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 49,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 49,
+      "kind": "monster",
+      "who": "chorus_line",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 49,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 49,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 51,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 52,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 53,
+      "kind": "monster",
+      "who": "statickite",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 54,
+      "kind": "monster",
+      "who": "eater",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 54,
+      "kind": "monster",
+      "who": "redactor",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 54,
+      "kind": "monster",
+      "who": "white_noise_heron",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 55,
+      "kind": "monster",
+      "who": "hummice",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 56,
+      "kind": "monster",
+      "who": "lockpick_raccoon",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 58,
+      "kind": "monster",
+      "who": "cliffhanger",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 59,
+      "kind": "monster",
+      "who": "landlord",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 59,
+      "kind": "monster",
+      "who": "mirrormoth",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 62,
+      "kind": "monster",
+      "who": "ducks_in_a_row",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 62,
+      "kind": "monster",
+      "who": "sunbasker",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 63,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "villager combat",
+      "player": false
+    },
+    {
+      "day": 63,
+      "kind": "monster",
+      "who": "glasswing",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 65,
+      "kind": "monster",
+      "who": "nevermore",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 68,
+      "kind": "monster",
+      "who": "hushwolf",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 69,
+      "kind": "monster",
+      "who": "murkcap",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 70,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 71,
+      "kind": "monster",
+      "who": "alien_tick",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 71,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 72,
+      "kind": "monster",
+      "who": "bulldozer",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 73,
+      "kind": "monster",
+      "who": "reunion",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 73,
+      "kind": "monster",
+      "who": "reunion",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 73,
+      "kind": "monster",
+      "who": "reunion",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 73,
+      "kind": "monster",
+      "who": "ad_break",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 74,
+      "kind": "monster",
+      "who": "warranty_caller",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 75,
+      "kind": "monster",
+      "who": "spool",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 79,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 80,
+      "kind": "villager",
+      "who": "ursula_weber",
+      "cause": "contest",
+      "player": false
+    },
+    {
+      "day": 80,
+      "kind": "monster",
+      "who": "chorus_line",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 80,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 83,
+      "kind": "monster",
+      "who": "heckler",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 83,
+      "kind": "monster",
+      "who": "nightcourt",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 85,
+      "kind": "monster",
+      "who": "focus_group",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 87,
+      "kind": "monster",
+      "who": "bright_idea",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 87,
+      "kind": "monster",
+      "who": "sanjun",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 88,
+      "kind": "monster",
+      "who": "buffering",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 88,
+      "kind": "monster",
+      "who": "callback",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 89,
+      "kind": "villager",
+      "who": "gen_ztg1dkh",
+      "cause": "The Cancellation",
+      "player": false
+    },
+    {
+      "day": 89,
+      "kind": "monster",
+      "who": "buffering",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 90,
+      "kind": "monster",
+      "who": "sweeps_week",
+      "cause": "expedition",
+      "player": false
+    },
+    {
+      "day": 91,
+      "kind": "monster",
+      "who": "giant_mosquito",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 92,
+      "kind": "monster",
+      "who": "reunion",
+      "cause": "combat",
+      "player": false
+    },
+    {
+      "day": 92,
+      "kind": "villager",
+      "who": "gen_caxlmka",
+      "cause": "the wild",
+      "player": true
+    }
+  ],
+  "maxWaveUnlocked": 5,
+  "pacing": {
+    "totalDeliberate": 490,
+    "meanDeliberatePerDay": 5.3,
+    "totalDriver": 30,
+    "totalInternal": 52,
+    "chunks": 10
+  },
+  "tableWaiting": false,
+  "tableEntered": true,
+  "horizonDays": 150,
+  "chunkDays": 10,
+  "stageCapDay": 120
+}
