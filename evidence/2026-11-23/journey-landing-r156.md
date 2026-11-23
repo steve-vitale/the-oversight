@@ -485,3 +485,20 @@ record: monsterKills 415 (baseline 411), villagerDeaths 9 (baseline 10),
 starvationDeaths 0. The monsterKills +89% rise that r155 explained as
 activity (not lethality) has leveled: 411 → 415 on the same activity
 base (partyFights 424 → 441).
+
+## Gate
+
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r156-gate`
+on the rebased tip (`4cd566b21`, on master `7ade8d3bf`): **339 passed,
+5 failed in 691s** (log `hidden_files/journey-landing-r156-gate.log`).
+The 5 failures are exactly the standing 5, none attributable to this
+run's change (a 14-line menu-routing fix + evidence + tooling):
+phone-frame stale receipt (`test-phone-frame-proof.js`), two 120s
+deed-attainment timeouts (`test-living-garden-deed-attainment.js`,
+`test-one-person-army-deed-attainment.js`), measurement-proof staleness
+pair (`test-measurement-proof-update.js`,
+`test-measurement-workflow.js` — failing identically on r155's
+evidence-only run and on r151/r152, i.e. pre-existing staleness, not
+newly caused by this change). Gate verdict: PASS on the standing-5
+basis. Proof test re-run on the rebased tip before the gate: 23/23
+(`scripts/test-landing-r156-commit-menu-20261123.js`).
