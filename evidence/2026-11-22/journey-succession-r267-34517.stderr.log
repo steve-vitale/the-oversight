@@ -1,0 +1,44 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Emma","t":92},{"id":"Olivia","t":92},{"id":"Devon","t":91},{"id":"Dwayne","t":90}], roster=12
+INH readable=true scripted=true deadItems=9 distinct=9 transferred=1 vanished=0 keptPlants=12 inheritedPlants=4 keptSkills=7 inheritedSkills=15 succTrustPre=90 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","echo_location","translator","dowsing"] post=["green_whisper","echo_location","translator","dowsing"]
+DEATH d41 (the expedition, scripted): Gloria -> Dwayne | passed=true lin=true mo=true trust=62 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=5 vanished=0 of 9 distinct dead-bearer items
+  CONVO d+3 with Zuri (refused=false)
+  CONVO d+3 with Ethan (refused=false)
+  STRANGER-PROBE d+3 with Somchai (trust=29 refused=false)
+  BOND-CONVO d+3 with Sophia (depth=0 v=24 refused=false)
+  CONVO d+7 with Zuri (refused=false)
+  CONVO d+7 with Ethan (refused=false)
+  CONVO d+14 with Zuri (refused=false)
+  CONVO d+14 with Ethan (refused=false)
+  BOND-CONVO d+14 with Sophia (depth=0 v=24 refused=false)
+  CONVO d+30 with Mai (refused=false)
+  CONVO d+30 with Ethan (refused=false)
+  CONVO d+45 with Ethan (refused=false)
+  CONVO d+45 with Emma (refused=false)
+  CONVO d+53 with Mai (refused=false)
+  CONVO d+53 with Ethan (refused=false)
+  CONVO d+64 with Mai (refused=false)
+  CONVO d+64 with Devon (refused=false)
+  WIT-SIT [post] d+65: Ethan sits for witnessed Olivia (sitSeq=1, freshPersonN=1, latelyDead=Olivia, witnessed=true, witnessServed=none) refused=false
+  WIT-SIT [post] d+68: Emma sits for witnessed Ethan (sitSeq=1, freshPersonN=2, latelyDead=Ethan, witnessed=true, witnessServed=none) refused=false
+  NEWCOMER-PROBE d+70 with Scott (arrived d+70, trust=40 refused=false)
+
+FUNERAL: deathBeat=9 recover=1 vouch=1 (eligible=8) echo=4 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=70 violations=0 noMealDays=21 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":60,"offerLines":26,"codexPlantsDelta":47,"codexSkillsDelta":12,"codexAbilitiesDelta":11,"xpDelta":84,"any":true} pantry 56525->4539
+TRUST-DIALS: office 62->90 (+28, climb) | villageMean 79.5->75.4 (-4.1, fall) | ge60 8->4 | movers>=5: [{"id":"Raj","from":51,"to":75,"delta":24},{"id":"Mai","from":76,"to":98,"delta":22},{"id":"Emma","from":100,"to":92,"delta":-8}]
+DEED-LEDGER: calls=32 summary={"teachPlant":{"calls":21,"ok":21,"deltaSum":0,"deltaN":21,"positive":0,"meanDelta":0},"donateToPantry":{"calls":2,"ok":2,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":9,"ok":9,"deltaSum":12,"deltaN":9,"positive":4,"meanDelta":1.33}}
+
+IDENTITY TRIPS: raw=3 grief-excluded=2
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=111 alive=6 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=32) trustVerdict={"readable":true,"officeMantle":62,"officeLast":90,"officeDelta":28,"officeClass":"climb","villageMantle":79.5,"villageLast":75.4,"villageDelta":-4.1,"villageClass":"fall","villageGe60Mantle":8,"villageGe60Last":4,"movers":[{"id":"Raj","from":51,"to":75,"delta":24},{"id":"Mai","from":76,"to":98,"delta":22},{"id":"Emma","from":100,"to":92,"delta":-8}]}
+E6/CALLCHECK: e6={"callMoves":8,"withCensus":8,"chainHandoffs":2,"trustMoves":6} callCheck={"dailyMoveDays":8,"callMoveDays":8,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=8 (v2=8, excludedLoot=0))
+E7/R47: e7={"trustMoves":6,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":4,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":5,"neither":1},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":8,"v2Say":4,"v2Delta":4,"arcExcluded":3,"teleWeek2":7,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":8}

@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d10: Kieran -> Bohdan, topTrust=[{"id":"Lucas","t":64},{"id":"Greta","t":52},{"id":"Fernando","t":46},{"id":"Tashi","t":43}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=6 inheritedPlants=0 keptSkills=2 inheritedSkills=0 succTrustPre=64 succTrustPost=34
+PARITY readable=true equal=true inherited=[] pre=["beast_calm"] post=["beast_calm"]
+DEATH d8 (organic (phase A)): Kieran -> Bohdan | passed=true lin=true mo=true trust=34 vouchers=1
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Lucas (refused=false)
+  CONVO d+3 with Greta (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Mateo (refused=false)
+  CONVO d+7 with Lucas (refused=false)
+  CONVO d+14 with Lucas (refused=false)
+  CONVO d+14 with Greta (refused=false)
+  BOND-CONVO d+14 with Fernando (depth=0 v=6 refused=false)
+  NEWCOMER-PROBE d+28 with Bakhyt (arrived d+28, trust=40 refused=false)
+  CONVO d+30 with Greta (refused=false)
+  CONVO d+30 with Zoltan (refused=false)
+  CONVO d+45 with Greta (refused=false)
+  CONVO d+45 with Till (refused=false)
+  CONVO d+53 with Greta (refused=false)
+  CONVO d+53 with Till (refused=false)
+  CONVO d+64 with Greta (refused=false)
+  CONVO d+64 with Till (refused=false)
+
+FUNERAL: deathBeat=8 recover=1 vouch=0 (eligible=1) echo=1 organicBurial={"respects":false,"bury":false} halfRation=5
+
+MEAL-GATE: audited=70 violations=0 noMealDays=22 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=72 signals={"levelUp":true,"systemVoice":85,"offerLines":37,"codexPlantsDelta":40,"codexSkillsDelta":23,"codexAbilitiesDelta":17,"xpDelta":53,"any":true} pantry 20500->39888
+TRUST-DIALS: office 34->92 (+58, climb) | villageMean 38.8->89.4 (+50.6, climb) | ge60 1->8 | movers>=5: [{"id":"Raj","from":25,"to":89,"delta":64},{"id":"Zoltan","from":31,"to":92,"delta":61},{"id":"Till","from":35,"to":88,"delta":53},{"id":"Tashi","from":43,"to":80,"delta":37}]
+DEED-LEDGER: calls=39 summary={"teachPlant":{"calls":13,"ok":13,"deltaSum":0,"deltaN":13,"positive":0,"meanDelta":0},"giveFood":{"calls":17,"ok":17,"deltaSum":68,"deltaN":17,"positive":7,"meanDelta":4},"donateToPantry":{"calls":9,"ok":9,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=false m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=80 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=72
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+72) t2=true(deedCalls=39) trustVerdict={"readable":true,"officeMantle":34,"officeLast":92,"officeDelta":58,"officeClass":"climb","villageMantle":38.8,"villageLast":89.4,"villageDelta":50.6,"villageClass":"climb","villageGe60Mantle":1,"villageGe60Last":8,"movers":[{"id":"Raj","from":25,"to":89,"delta":64},{"id":"Zoltan","from":31,"to":92,"delta":61},{"id":"Till","from":35,"to":88,"delta":53},{"id":"Tashi","from":43,"to":80,"delta":37}]}
+E6/CALLCHECK: e6={"callMoves":5,"withCensus":5,"chainHandoffs":4,"trustMoves":1} callCheck={"dailyMoveDays":5,"callMoveDays":5,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=2, excludedLoot=0))
+E7/R47: e7={"trustMoves":1,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":1,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":2,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":5}

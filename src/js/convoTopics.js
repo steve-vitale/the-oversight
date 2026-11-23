@@ -199,20 +199,51 @@
       const c = this.convoGet(vid);
       const gen = this['t2gen_' + topic];
       const cands = gen ? gen.call(this, vid) : [];
-      let line = this.t2pick(vid, 't2:' + topic, cands);
-      if (!line) {
+      let picked = this.t2pick(vid, 't2:' + topic, cands);
+      if (!picked) {
         const cg = (this.data.characterGen || {}).convo || {};
         return this.convoPickCycle(vid, 'exh', cg.exhausted || ['"I\'ve told you everything I know about that."']);
       }
-      line = this.t2fill(line, this.vpOf(vid), vid);
+      let line = this.t2fill(picked, this.vpOf(vid), vid);
       // Change acknowledgment: the same question, a different run.
       c.t2snap = c.t2snap || {};
       const now = this.t2clock(vid);
       const prev = c.t2snap[topic];
       c.t2snap[topic] = now;
-      if (prev && prev !== now) line = this.t2fill(this.t2changeLine(), this.vpOf(vid), vid) + ' ' + line;
+      let ack = '';
+      if (prev && prev !== now) ack = this.t2fill(this.t2changeLine(), this.vpOf(vid), vid) + ' ';
+      // FILL-AWARE RETRY (journey-succession r267 2026-11-22): the pick
+      // above chose a TEMPLATE and t2fill baked the name in after it —
+      // convoPick's run-ledger preference compares the unfilled
+      // template against a ledger of filled lines, so it cannot see
+      // that the filled line is run-blocked and sayLine will dry it
+      // (r266: alive:event:mourning, Asep/Ursula — the mourning answer
+      // picked, blocked at emission, deflected to "...Sorry, lost my
+      // train of thought."). When the composed line would block, try
+      // the other candidates from the same pool, filled, and take the
+      // first that would NOT block — a real person with a blocked line
+      // picks a different line, not a deflection (same shape as the
+      // r19 hard-mode opener fall-through). The replacement is recorded
+      // in c.said['t2:'+topic] so the per-villager dedupe sees the line
+      // actually served. If NO candidate passes, the original line
+      // returns unchanged — the last-resort pool-exhaustion gap dries
+      // exactly as before (documented, not papered over). The ack is
+      // kept across the retry: a blocked ack chunk blocks every
+      // alternate too, so the retry correctly no-ops there.
+      let composed = ack + line;
+      if (typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, composed)) {
+        for (const cand of cands) {
+          if (cand === picked) continue;
+          let alt = null;
+          try { alt = this.t2fill(cand, this.vpOf(vid), vid); } catch (e) { alt = null; }
+          if (alt && !this.convoWouldBlock(vid, ack + alt)) {
+            try { (c.said['t2:' + topic] = c.said['t2:' + topic] || []).push(cand); } catch (e) {}
+            line = alt; composed = ack + alt; break;
+          }
+        }
+      }
       c.thread = topic; c.depth = 1;
-      return line;
+      return composed;
     },
     topic2HasMore(vid) {
       const c = this.convoGet(vid);

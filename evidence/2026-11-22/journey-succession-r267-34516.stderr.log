@@ -1,0 +1,41 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Hector","t":91},{"id":"Patcharaporn","t":91},{"id":"Omar","t":91},{"id":"Frank","t":90}], roster=12
+INH readable=true scripted=true deadItems=11 distinct=11 transferred=3 vanished=1 keptPlants=18 inheritedPlants=3 keptSkills=5 inheritedSkills=8 succTrustPre=89 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","lucky_rock","bloodhound","trophy_room"] post=["beast_calm","lucky_rock","bloodhound","trophy_room"]
+DEATH d41 (the expedition, scripted): Joyce -> Mario | passed=true lin=true mo=true trust=62 vouchers=10
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=7 vanished=1 of 11 distinct dead-bearer items
+  CONVO d+3 with Hector (refused=false)
+  CONVO d+3 with Emma (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Patcharaporn (depth=1 v=30 refused=false)
+  CONVO d+7 with Omar (refused=false)
+  CONVO d+7 with Aria (refused=false)
+  CONVO d+14 with Omar (refused=false)
+  CONVO d+14 with Aria (refused=false)
+  BOND-CONVO d+14 with Patcharaporn (depth=1 v=30 refused=false)
+  CONVO d+30 with Omar (refused=false)
+  CONVO d+30 with Aria (refused=false)
+  CONVO d+45 with Sigrun (refused=false)
+  CONVO d+45 with Omar (refused=false)
+  CONVO d+53 with Sigrun (refused=false)
+  CONVO d+53 with Aria (refused=false)
+  CONVO d+64 with Omar (refused=false)
+  CONVO d+64 with Fatima (refused=false)
+
+FUNERAL: deathBeat=9 recover=1 vouch=1 (eligible=10) echo=5 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=70 violations=0 noMealDays=4 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":56,"offerLines":27,"codexPlantsDelta":31,"codexSkillsDelta":8,"codexAbilitiesDelta":6,"xpDelta":97,"any":true} pantry 64672->7794
+TRUST-DIALS: office 62->46 (-16, fall) | villageMean 88.8->92 (+3.2, climb) | ge60 10->7 | movers>=5: [{"id":"Fatima","from":66,"to":92,"delta":26},{"id":"Omar","from":91,"to":96,"delta":5},{"id":"Yara","from":86,"to":91,"delta":5},{"id":"Emma","from":100,"to":92,"delta":-8}]
+DEED-LEDGER: calls=19 summary={"teachPlant":{"calls":6,"ok":6,"deltaSum":0,"deltaN":6,"positive":0,"meanDelta":0},"giveFood":{"calls":13,"ok":13,"deltaSum":28,"deltaN":13,"positive":9,"meanDelta":2.15}}
+
+IDENTITY TRIPS: raw=4 grief-excluded=3
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=111 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=19) trustVerdict={"readable":true,"officeMantle":62,"officeLast":46,"officeDelta":-16,"officeClass":"fall","villageMantle":88.8,"villageLast":92,"villageDelta":3.2,"villageClass":"climb","villageGe60Mantle":10,"villageGe60Last":7,"movers":[{"id":"Fatima","from":66,"to":92,"delta":26},{"id":"Omar","from":91,"to":96,"delta":5},{"id":"Yara","from":86,"to":91,"delta":5},{"id":"Emma","from":100,"to":92,"delta":-8}]}
+E6/CALLCHECK: e6={"callMoves":2,"withCensus":2,"chainHandoffs":0,"trustMoves":2} callCheck={"dailyMoveDays":2,"callMoveDays":2,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=6, excludedLoot=0))
+E7/R47: e7={"trustMoves":2,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":6,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":2}

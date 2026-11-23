@@ -1,0 +1,41 @@
+  WIT-SIT [pre] d16: Monique sits for witnessed Liam (sitSeq=1, freshPersonN=1, latelyDead=Liam, witnessed=true, witnessServed=none) refused=false
+
+ORGANIC DEATH d30: Brendan -> Nicole, topTrust=[{"id":"Shanice","t":100},{"id":"Priya","t":100},{"id":"Monique","t":95},{"id":"Nicole","t":66}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=14 inheritedPlants=0 keptSkills=7 inheritedSkills=0 succTrustPre=90 succTrustPost=66
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","lucky_rock"] post=["beast_calm","lucky_rock"]
+DEATH d30 (organic (phase A)): Brendan -> Nicole | passed=true lin=true mo=true trust=66 vouchers=5
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Shanice (refused=false)
+  CONVO d+3 with Priya (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Nathan (depth=1 v=42 refused=false)
+  CONVO d+7 with Shanice (refused=false)
+  CONVO d+7 with Monique (refused=false)
+  CONVO d+14 with Shanice (refused=false)
+  CONVO d+14 with Monique (refused=false)
+  BOND-CONVO d+14 with Nathan (depth=1 v=42 refused=false)
+  CONVO d+30 with Monique (refused=false)
+  CONVO d+30 with Terrence (refused=false)
+  CONVO d+45 with Terrence (refused=false)
+  CONVO d+45 with Monique (refused=false)
+  CONVO d+53 with Terrence (refused=false)
+  CONVO d+53 with Monique (refused=false)
+  CONVO d+64 with Terrence (refused=false)
+  CONVO d+64 with Monique (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=5) echo=3 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=70 violations=0 noMealDays=10 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":52,"offerLines":70,"codexPlantsDelta":27,"codexSkillsDelta":16,"codexAbilitiesDelta":10,"xpDelta":209,"any":true} pantry 81490->10610
+TRUST-DIALS: office 66->68 (+2, flat) | villageMean 65.6->97.1 (+31.5, climb) | ge60 5->8 | movers>=5: [{"id":"Meera","from":18,"to":100,"delta":82},{"id":"Nathan","from":49,"to":100,"delta":51},{"id":"Samin","from":48,"to":95,"delta":47},{"id":"Onni","from":55,"to":100,"delta":45},{"id":"Terrence","from":60,"to":100,"delta":40},{"id":"Ava","from":65,"to":93,"delta":28},{"id":"Monique","from":95,"to":100,"delta":5},{"id":"Priya","from":100,"to":89,"delta":-11}]
+DEED-LEDGER: calls=81 summary={"teachPlant":{"calls":8,"ok":8,"deltaSum":0,"deltaN":8,"positive":0,"meanDelta":0},"giveFood":{"calls":55,"ok":55,"deltaSum":74,"deltaN":55,"positive":36,"meanDelta":1.35},"donateToPantry":{"calls":18,"ok":18,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=6 grief-excluded=4
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=2, say=1)) m4=true m5=manual | endDay=100 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=81) trustVerdict={"readable":true,"officeMantle":66,"officeLast":68,"officeDelta":2,"officeClass":"flat","villageMantle":65.6,"villageLast":97.1,"villageDelta":31.5,"villageClass":"climb","villageGe60Mantle":5,"villageGe60Last":8,"movers":[{"id":"Meera","from":18,"to":100,"delta":82},{"id":"Nathan","from":49,"to":100,"delta":51},{"id":"Samin","from":48,"to":95,"delta":47},{"id":"Onni","from":55,"to":100,"delta":45},{"id":"Terrence","from":60,"to":100,"delta":40},{"id":"Ava","from":65,"to":93,"delta":28},{"id":"Monique","from":95,"to":100,"delta":5},{"id":"Priya","from":100,"to":89,"delta":-11}]}
+E6/CALLCHECK: e6={"callMoves":14,"withCensus":14,"chainHandoffs":1,"trustMoves":13} callCheck={"dailyMoveDays":14,"callMoveDays":13,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=10 (v2=10, excludedLoot=0))
+E7/R47: e7={"trustMoves":13,"soloOffice":5,"soloOfficeDeltas":[2,1,2,1,2],"soloBearerDeltaExact":[2,1,2,1,2],"singleMoverBearer":5,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":2,"both":11,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":10,"v2Say":8,"v2Delta":7,"arcExcluded":3,"teleWeek2":11,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":14}

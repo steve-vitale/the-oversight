@@ -1,0 +1,41 @@
+  WIT-SIT [pre] d7: Brayden sits for witnessed A (sitSeq=1, freshPersonN=1, latelyDead=the woman in her 30s, with a nervous tic, witnessed=true, witnessServed=the woman in her 30s, with a nervous tic) refused=false
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Brayden","t":99},{"id":"Mia","t":95},{"id":"Raul","t":90},{"id":"Gerald","t":90}], roster=10
+INH readable=true scripted=true deadItems=10 distinct=10 transferred=0 vanished=3 keptPlants=23 inheritedPlants=0 keptSkills=5 inheritedSkills=12 succTrustPre=99 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","scream_cheese"] post=["beast_calm","scream_cheese"]
+DEATH d41 (the expedition, scripted): Marcus -> Brayden | passed=true lin=true mo=true trust=62 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=2 vanished=3 of 10 distinct dead-bearer items
+  CONVO d+3 with Gerald (refused=false)
+  CONVO d+3 with Raul (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Gerald (refused=false)
+  CONVO d+7 with Raul (refused=false)
+  CONVO d+14 with Gerald (refused=false)
+  CONVO d+14 with Raul (refused=false)
+  NEWCOMER-PROBE d+29 with Chon (arrived d+29, trust=37 refused=false)
+  CONVO d+30 with Gerald (refused=false)
+  CONVO d+30 with Mia (refused=false)
+  CONVO d+45 with Chon (refused=false)
+  CONVO d+45 with Raul (refused=false)
+  CONVO d+53 with Yerkebulan (refused=false)
+  CONVO d+53 with Raul (refused=false)
+  CONVO d+64 with Hanane (refused=false)
+  CONVO d+64 with Gerald (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=8) echo=3 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=70 violations=0 noMealDays=34 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":50,"offerLines":36,"codexPlantsDelta":48,"codexSkillsDelta":14,"codexAbilitiesDelta":5,"xpDelta":7,"any":true} pantry 138677->4498
+TRUST-DIALS: office 62->43 (-19, fall) | villageMean 79.6->44 (-35.6, fall) | ge60 8->0 | movers>=5: [{"id":"Gerald","from":100,"to":44,"delta":-56}]
+DEED-LEDGER: calls=21 summary={"teachPlant":{"calls":3,"ok":3,"deltaSum":0,"deltaN":3,"positive":0,"meanDelta":0},"giveFood":{"calls":12,"ok":12,"deltaSum":95,"deltaN":12,"positive":12,"meanDelta":7.92},"donateToPantry":{"calls":6,"ok":6,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=110 alive=2 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+31,d+69) t2=true(deedCalls=21) trustVerdict={"readable":true,"officeMantle":62,"officeLast":43,"officeDelta":-19,"officeClass":"fall","villageMantle":79.6,"villageLast":44,"villageDelta":-35.6,"villageClass":"fall","villageGe60Mantle":8,"villageGe60Last":0,"movers":[{"id":"Gerald","from":100,"to":44,"delta":-56}]}
+E6/CALLCHECK: e6={"callMoves":11,"withCensus":11,"chainHandoffs":6,"trustMoves":5} callCheck={"dailyMoveDays":11,"callMoveDays":10,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=5, excludedLoot=1))
+E7/R47: e7={"trustMoves":5,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":1,"both":3,"neither":1},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":5,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":71,"moves":11}

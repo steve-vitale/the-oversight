@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d37: Skylar -> Chester, topTrust=[{"id":"Angelo","t":90},{"id":"Greta","t":89},{"id":"Arthur","t":72},{"id":"Meihua","t":62}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=21 inheritedPlants=0 keptSkills=8 inheritedSkills=0 succTrustPre=90 succTrustPost=56
+PARITY readable=true equal=true inherited=[] pre=["the_touch","war_cry","dowsing","battlefield_grace","green_thumb","rage"] post=["the_touch","war_cry","dowsing","battlefield_grace","green_thumb","rage"]
+DEATH d37 (organic (phase A)): Skylar -> Chester | passed=true lin=true mo=true trust=56 vouchers=5
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Angelo (refused=false)
+  CONVO d+3 with Greta (refused=false)
+  STRANGER-PROBE d+3 with Fatima (trust=47 refused=false)
+  CONVO d+7 with Angelo (refused=false)
+  CONVO d+7 with Greta (refused=false)
+  CONVO d+14 with Angelo (refused=false)
+  CONVO d+14 with Meihua (refused=false)
+  CONVO d+30 with Angelo (refused=false)
+  CONVO d+30 with Meihua (refused=false)
+  CONVO d+45 with Angelo (refused=false)
+  CONVO d+45 with Greta (refused=false)
+  CONVO d+53 with Arthur (refused=false)
+  CONVO d+53 with Fatima (refused=false)
+  NEWCOMER-PROBE d+60 with Diana (arrived d+60, trust=32 refused=false)
+  CONVO d+64 with Arthur (refused=false)
+  CONVO d+64 with Fatima (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=5) echo=3 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=0 noMealDays=14 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":49,"offerLines":39,"codexPlantsDelta":19,"codexSkillsDelta":24,"codexAbilitiesDelta":8,"xpDelta":-34,"any":true} pantry 68618->569
+TRUST-DIALS: office 56->89 (+33, climb) | villageMean 57.9->90.5 (+32.6, climb) | ge60 5->4 | movers>=5: [{"id":"Petra","from":35,"to":90,"delta":55},{"id":"Fatima","from":46,"to":90,"delta":44},{"id":"Meihua","from":62,"to":92,"delta":30},{"id":"Yuki","from":62,"to":90,"delta":28}]
+DEED-LEDGER: calls=27 summary={"donateToPantry":{"calls":19,"ok":19,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":8,"ok":8,"deltaSum":9,"deltaN":8,"positive":7,"meanDelta":1.13}}
+
+IDENTITY TRIPS: raw=7 grief-excluded=4
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=107 alive=5 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=27) trustVerdict={"readable":true,"officeMantle":56,"officeLast":89,"officeDelta":33,"officeClass":"climb","villageMantle":57.9,"villageLast":90.5,"villageDelta":32.6,"villageClass":"climb","villageGe60Mantle":5,"villageGe60Last":4,"movers":[{"id":"Petra","from":35,"to":90,"delta":55},{"id":"Fatima","from":46,"to":90,"delta":44},{"id":"Meihua","from":62,"to":92,"delta":30},{"id":"Yuki","from":62,"to":90,"delta":28}]}
+E6/CALLCHECK: e6={"callMoves":18,"withCensus":18,"chainHandoffs":2,"trustMoves":16} callCheck={"dailyMoveDays":18,"callMoveDays":16,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":16,"soloOffice":3,"soloOfficeDeltas":[2,1,2],"soloBearerDeltaExact":[2,1,2],"singleMoverBearer":7,"singleMoverOther":2,"eventClass":{"event-only":1,"deed-only":4,"both":11,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":5,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":18}

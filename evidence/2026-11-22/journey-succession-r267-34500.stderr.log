@@ -1,0 +1,38 @@
+
+PRE-DEATH d40: bearer <redacted>, topTrust=[{"id":"Evdokia","t":91},{"id":"Dylan","t":90},{"id":"Gertrude","t":90},{"id":"Miguel","t":90}], roster=11
+INH readable=true scripted=true deadItems=16 distinct=16 transferred=1 vanished=3 keptPlants=20 inheritedPlants=3 keptSkills=7 inheritedSkills=10 succTrustPre=90 succTrustPost=56
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location","dowsing","green_whisper","rage","water_breathing"] post=["beast_calm","echo_location","dowsing","green_whisper","rage","water_breathing"]
+DEATH d40 (the expedition, scripted): Lauren -> Dylan | passed=true lin=true mo=true trust=56 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=1 vanished=3 of 16 distinct dead-bearer items
+  CONVO d+3 with Desmond (refused=false)
+  CONVO d+3 with Evdokia (refused=false)
+  STRANGER-PROBE d+3 with Aroha (trust=33 refused=false)
+  BOND-CONVO d+3 with Natalie (depth=1 v=40 refused=false)
+  CONVO d+7 with Desmond (refused=false)
+  CONVO d+7 with Evdokia (refused=false)
+  CONVO d+14 with Desmond (refused=false)
+  CONVO d+14 with Evdokia (refused=false)
+  BOND-CONVO d+14 with Natalie (depth=1 v=40 refused=false)
+  CONVO d+30 with Elena (refused=false)
+  CONVO d+30 with Gertrude (refused=false)
+  NEWCOMER-PROBE d+37 with Aria (arrived d+37, trust=33 refused=false)
+  CONVO d+45 with Natalie (refused=false)
+  CONVO d+45 with Sari (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=7) echo=5 organicBurial={"respects":false,"bury":false} halfRation=10
+
+MEAL-GATE: audited=46 violations=0 noMealDays=6 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=47 signals={"levelUp":true,"systemVoice":35,"offerLines":17,"codexPlantsDelta":28,"codexSkillsDelta":14,"codexAbilitiesDelta":4,"xpDelta":-84,"any":true} pantry 86832->0
+TRUST-DIALS: office 56->79 (+23, climb) | villageMean 76.8->79.1 (+2.3, flat) | ge60 7->6 | movers>=5: [{"id":"Leo","from":57,"to":88,"delta":31},{"id":"Aroha","from":16,"to":36,"delta":20},{"id":"Sanne","from":66,"to":80,"delta":14},{"id":"Natalie","from":89,"to":83,"delta":-6}]
+DEED-LEDGER: calls=62 summary={"teachPlant":{"calls":24,"ok":24,"deltaSum":0,"deltaN":24,"positive":0,"meanDelta":0},"giveFood":{"calls":27,"ok":27,"deltaSum":61,"deltaN":27,"positive":26,"meanDelta":2.26},"donateToPantry":{"calls":11,"ok":11,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=87 alive=5 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=47
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=62) trustVerdict={"readable":true,"officeMantle":56,"officeLast":79,"officeDelta":23,"officeClass":"climb","villageMantle":76.8,"villageLast":79.1,"villageDelta":2.3,"villageClass":"flat","villageGe60Mantle":7,"villageGe60Last":6,"movers":[{"id":"Leo","from":57,"to":88,"delta":31},{"id":"Aroha","from":16,"to":36,"delta":20},{"id":"Sanne","from":66,"to":80,"delta":14},{"id":"Natalie","from":89,"to":83,"delta":-6}]}
+E6/CALLCHECK: e6={"callMoves":15,"withCensus":15,"chainHandoffs":5,"trustMoves":10} callCheck={"dailyMoveDays":15,"callMoveDays":14,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=7 (v2=7, excludedLoot=0))
+E7/R47: e7={"trustMoves":10,"soloOffice":3,"soloOfficeDeltas":[2,1,2],"soloBearerDeltaExact":[2,1,2],"singleMoverBearer":3,"singleMoverOther":2,"eventClass":{"event-only":0,"deed-only":3,"both":7,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":7,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":47,"moves":15}
