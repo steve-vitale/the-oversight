@@ -1,0 +1,64 @@
+=== M1 start 09:07:46Z ===
+PASS §8b control from-start: no third-ally damage (ally3Dealt 0)
+  [control from-start] outcome=vDie rounds=15 mDealt=246 allyDealt=158
+test-allyslot3-b: 18 passed, 0 failed
+GREEN M1 test-allyslot3-b: 18 passed, 0 failed
+=== M2 start 09:07:54Z ===
+analyze-pinquaddoor-b selftest: 26 passed, 0 failed
+PASS §1 analyzer selftest passes (26/26 incl. pin census + armed driver smoke + wide secondaries)
+test-pinquaddoor-b: 35 passed, 0 failed
+GREEN M2 test-pinquaddoor-b: 35 passed, 0 failed
+=== M2w start 09:09:07Z ===
+PASS §2 wide driver smoke: seed + flags self-describe (seed 106501, pinquadFlag 1, arm pinquaddoor-b)
+PASS §2 analyzer reads the wide smoke corpus (exit 0, S1–S4 lines printed)
+test-pinquaddoor-wide-b: 16 passed, 0 failed
+GREEN M2w test-pinquaddoor-wide-b: 16 passed, 0 failed
+=== M3 start 09:10:16Z ===
+PASS §4 driver smoke: corpus file written, dmgpinFlag 1 + pinquadFlag 1 + slotPresent true
+PASS §4 driver smoke: 0 instrument errors
+test-dmgpin-b: 29 passed, 0 failed
+GREEN M3 test-dmgpin-b: 29 passed, 0 failed
+=== M3d start 09:12:14Z ===
+PASS §6 damage gate re-runs green (test-dmgpin-b.js 29/29)
+PASS §6 downedtwice regression re-runs green (test-downedtwice-b.js, exit 0)
+test-doorflee2-b: 49 passed, 0 failed
+GREEN M3d test-doorflee2-b: 49 passed, 0 failed
+=== M3e start 09:16:08Z ===
+  [§2 natural] fights=6 with a down=3
+
+25 passed, 0 failed
+GREEN M3e 25 passed, 0 failed
+=== M3f start 09:16:32Z ===
+PASS §6 damage gate re-runs green (test-dmgpin-b.js 29/29)
+PASS §6 downedtwice regression re-runs green (test-downedtwice-b.js, exit 0)
+test-hypofloor-b: 48 passed, 0 failed
+GREEN M3f test-hypofloor-b: 48 passed, 0 failed
+=== M3g start 09:20:02Z ===
+SKIP M1 (already GREEN)
+SKIP M2 (already GREEN)
+SKIP M2w (already GREEN)
+SKIP M3 (already GREEN)
+SKIP M3d (already GREEN)
+SKIP M3e (already GREEN)
+SKIP M3f (already GREEN)
+=== M3g start 09:24:52Z ===
+PASS §7 damage gate re-runs green (test-dmgpin-b.js 29/29)
+PASS §7 downedtwice regression re-runs green (test-downedtwice-b.js, exit 0)
+test-hpgate-b: 43 passed, 0 failed
+GREEN M3g test-hpgate-b: 43 passed, 0 failed
+=== M3h start 09:27:55Z ===
+PASS §8 whole-party gate re-runs green (test-hpgate-b.js 43/43)
+PASS §8 floor gate re-runs green (test-hypofloor-b.js 48/48)
+test-leaderhpgate-b: 50 passed, 0 failed
+GREEN M3h test-leaderhpgate-b: 50 passed, 0 failed
+=== M3i start 09:39:18Z ===
+PASS §8 whole-party gate re-runs green (test-hpgate-b.js 43/43)
+PASS §8 leader gate re-runs green (test-leaderhpgate-b.js 50/50)
+test-leaderproj-b: 55 passed, 0 failed
+GREEN M3i test-leaderproj-b: 55 passed, 0 failed
+=== M3j start 09:49:39Z ===
+PASS §7 whole-party gate re-runs green (test-hpgate-b.js 43/43)
+PASS §7 projection gate re-runs green (test-leaderproj-b.js 55/55)
+test-gateavoid-b: 36 passed, 0 failed
+GREEN M3j test-gateavoid-b: 36 passed, 0 failed
+=== battery done 10:14:13Z ===
