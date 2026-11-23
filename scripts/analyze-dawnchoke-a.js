@@ -1,12 +1,18 @@
 // analyze-dawnchoke-a.js — LEVER analyzer, arm sim-dawnchoke-a
+// (re-judge sim-dawnchoke-rejudge-a: same lever, corrected det-gate
+// bound + total-deaths guardrail — see
+// evidence/2026-11-22/sim-dawnchoke-rejudge-a-prereg.md §4).
 // Reads the dawnchoke-driver-a.js corpora (two legs: ctl on old code,
-// arm on new code) and judges the frozen bars in the sim-dawnchoke-a
-// prereg §6: PRIMARY wave-4+ departure attempts (armed >= ctl + 4)
-// AND at least one control-STUCK staged plan actually departs on
-// the armed leg; GUARDRAILS starvation + median survival; plus the
-// det-gate (bound: first arm-leg release row — a depart call for a
-// forager/homebody-profile holder with a staged wave-4+ plan and no
-// party_launch commit today) and the zero-attempt rule.
+// arm on new code) and judges the frozen bars in the re-judge prereg
+// §6: PRIMARY wave-4+ departure attempts (armed >= ctl + 4) AND at
+// least one control-STUCK staged plan actually departs on the armed
+// leg; GUARDRAILS starvation + median survival + total deaths; plus
+// the det-gate with a SHAPE-AGNOSTIC bound (first extra depart call
+// on the armed leg, or first day any recorded event stream differs)
+// and anchor checks that actually compare the recorded anchorCommit
+// / brainSha / winplanSha fields against expected values (a missing
+// expectation FAILS the check — never the vacuous checked:false the
+// 2115Z analyzer returned).
 // Also emits the DIAG tables from the control leg alone
 // (--diag-only): choke rate by holder occupation and plan shape,
 // and the sub-choke breakdown (no companion at dawn / companions
@@ -14,7 +20,8 @@
 // commit written but tick skipped otherwise).
 // Usage:
 //   node scripts/analyze-dawnchoke-a.js --ctl <ctl-dir> --arm <arm-dir> --out <file>
-//     [--seeds 107423,...] [--ctl-brain <sha> --arm-brain <sha>]
+//     [--seeds 107423,...] [--ctl-anchor <sha> --arm-anchor <sha>]
+//     [--ctl-brain <sha> --arm-brain <sha> --ctl-winplan <sha> --arm-winplan <sha>]
 //   node scripts/analyze-dawnchoke-a.js --diag-only --ctl <ctl-dir> [--seeds ...]
 //   node scripts/analyze-dawnchoke-a.js --selftest
 'use strict';
@@ -55,12 +62,64 @@ function median(xs) {
 
 // Streams compared by the det-gate: every recorded event row with a
 // day, on both legs, must be identical before the armed leg's first
-// release row on that seed. departCalls / scorePicks / planCensus /
+// lever-attributable effect. departCalls / scorePicks / planCensus /
 // dawnPool are the choke instrument; the rest are the needwave
 // streams carried over unchanged.
 const DET_STREAMS = ['departCalls', 'scorePicks', 'v4departs', 'planSeeds', 'v4fights',
   'volleyEvents', 'prizeEvents', 'grantEvents', 'contestEvents', 'deaths',
   'planCensus', 'dawnPool', 'needWaveCopies', 'departBeats', 'reseedBeats', 'beatLines'];
+
+// Per-day row multiset for one stream: day -> sorted JSON strings.
+// Order-insensitive: two legs recording the same rows in a different
+// order are identical.
+function streamDayMultisets(rows) {
+  const byDay = {};
+  for (const r of (rows || [])) {
+    const d = (r && r.day != null) ? (r.day | 0) : 0;
+    if (!byDay[d]) byDay[d] = [];
+    byDay[d].push(JSON.stringify(r));
+  }
+  for (const d of Object.keys(byDay)) byDay[d].sort();
+  return byDay;
+}
+
+// Earliest day on which any DET_STREAM's per-day row multiset
+// differs between the legs (null when the legs are identical on all
+// recorded streams).
+function firstDivergenceDay(ctlRow, armRow) {
+  let first = null;
+  for (const stream of DET_STREAMS) {
+    const c = streamDayMultisets(ctlRow.raw[stream]);
+    const a = streamDayMultisets(armRow.raw[stream]);
+    const days = {};
+    for (const d of Object.keys(c)) days[d] = true;
+    for (const d of Object.keys(a)) days[d] = true;
+    for (const d of Object.keys(days).map(Number).sort(function (x, y) { return x - y; })) {
+      if (JSON.stringify(c[d] || []) !== JSON.stringify(a[d] || [])) {
+        if (first == null || d < first) first = d;
+        break; // earliest differing day for this stream; other streams may be earlier
+      }
+    }
+  }
+  return first;
+}
+
+// Earliest day the armed leg records a brain-path depart call
+// (wave-4+ plan) for a (vid, day) with NO control-leg brain depart
+// call for that vid that day — the lever's first extra depart call
+// (null when the armed leg adds no depart call anywhere).
+function firstExtraDepartDay(ctlRow, armRow) {
+  const ctlKeys = {};
+  for (const r of (ctlRow.raw.departCalls || [])) {
+    if (r.source === 'brain' && isW4Plan(r.planTarget, r.planNeedWave)) ctlKeys[r.vid + '|' + (r.day | 0)] = true;
+  }
+  let first = null;
+  for (const r of (armRow.raw.departCalls || [])) {
+    if (r.source !== 'brain' || !isW4Plan(r.planTarget, r.planNeedWave)) continue;
+    if (!ctlKeys[r.vid + '|' + (r.day | 0)] && (first == null || (r.day | 0) < first)) first = (r.day | 0);
+  }
+  return first;
+}
 
 function isReleaseRow(r) {
   return !!r && r.source === 'brain' && STAGED.indexOf(r.planStage) !== -1 &&
@@ -234,17 +293,36 @@ function loadLeg(dir, mode, seeds) {
 }
 
 function detGateForSeed(ctlRow, armRow) {
-  const bound = armRow.firstReleaseDay;
-  const detail = { seed: ctlRow.seed, bound: bound, mismatches: [] };
+  const firstExtra = firstExtraDepartDay(ctlRow, armRow);
+  const firstDiv = firstDivergenceDay(ctlRow, armRow);
+  const bound = (firstExtra == null) ? firstDiv
+    : (firstDiv == null) ? firstExtra : Math.min(firstExtra, firstDiv);
+  const detail = { seed: ctlRow.seed, bound: bound,
+    firstExtraDepartDay: firstExtra, firstDivergenceDay: firstDiv, mismatches: [] };
   if (ctlRow.ctlReleaseRows !== 0) {
     detail.mismatches.push('ctl leg recorded ' + ctlRow.ctlReleaseRows + ' first-release rows (must be 0)');
   }
+  // Pre-bound streams identical (verified independently of the bound
+  // computation: per-day multisets for days < bound).
   for (const stream of DET_STREAMS) {
-    const cRows = (ctlRow.raw[stream] || []).filter(function (r) { return bound == null || (r.day | 0) < bound; });
-    const aRows = (armRow.raw[stream] || []).filter(function (r) { return bound == null || (r.day | 0) < bound; });
-    if (JSON.stringify(cRows) !== JSON.stringify(aRows)) {
-      detail.mismatches.push(stream + ': pre-bound rows differ (' + cRows.length + ' ctl vs ' + aRows.length + ' arm)');
+    const c = streamDayMultisets(ctlRow.raw[stream]);
+    const a = streamDayMultisets(armRow.raw[stream]);
+    const days = {};
+    for (const d of Object.keys(c)) if (bound == null || (+d) < bound) days[d] = true;
+    for (const d of Object.keys(a)) if (bound == null || (+d) < bound) days[d] = true;
+    for (const d of Object.keys(days)) {
+      if (JSON.stringify(c[d] || []) !== JSON.stringify(a[d] || [])) {
+        detail.mismatches.push(stream + ': pre-bound rows differ on day ' + d);
+        break;
+      }
     }
+  }
+  // Attribution: the first divergence must BE the lever's first
+  // extra depart call. A stream diverging before any extra depart
+  // call, or diverging with no extra depart call at all, fails.
+  if (firstDiv != null && (firstExtra == null || firstDiv !== firstExtra)) {
+    detail.mismatches.push('first divergence day ' + firstDiv + ' is not the first extra depart call day ' +
+      (firstExtra == null ? '(none)' : String(firstExtra)));
   }
   detail.pass = detail.mismatches.length === 0;
   return detail;
@@ -264,18 +342,33 @@ function analyze(ctlRows, armRows, opts) {
   const armMed = median(armRows.map(function (r) { return r.gameDays; }));
   const ctlErr = sum(ctlRows, function (r) { return r.errors; });
   const armErr = sum(armRows, function (r) { return r.errors; });
-  // Anchor check: when the expected shas are supplied, each leg's
-  // files must carry them; otherwise the leg side is unverified.
+  // Anchor check: every expected value is compared against EVERY
+  // per-seed file's recorded field. A MISSING expectation is a
+  // FAILED check (checked: true, pass: false) — never the vacuous
+  // checked:false the 2115Z analyzer returned. anchorCommit is
+  // compared on its first 12 chars (a full or short sha both work);
+  // file-content shas are compared exactly.
   const anchorChecks = [];
-  function checkSha(rows, field, expected, label) {
-    if (expected == null) { anchorChecks.push({ label: label, checked: false }); return; }
-    const bad = rows.filter(function (r) { return r[field] !== expected; });
+  function checkAnchor(rows, field, expected, label, prefix) {
+    if (expected == null) {
+      anchorChecks.push({ label: label, checked: true, pass: false, reason: 'expected value not supplied' });
+      return;
+    }
+    const bad = rows.filter(function (r) {
+      const v = r[field];
+      if (v == null) return true;
+      return prefix ? String(v).slice(0, 12) !== String(expected).slice(0, 12) : v !== expected;
+    });
     anchorChecks.push({ label: label, checked: true,
       pass: bad.length === 0, badSeeds: bad.map(function (r) { return r.seed; }) });
   }
-  checkSha(ctlRows, 'brainSha', opts.ctlBrain, 'ctl villager-brain.js');
-  checkSha(armRows, 'brainSha', opts.armBrain, 'arm villager-brain.js');
-  const anchorPass = anchorChecks.every(function (c) { return !c.checked || c.pass; });
+  checkAnchor(ctlRows, 'anchorCommit', opts.ctlAnchor, 'ctl anchorCommit', true);
+  checkAnchor(armRows, 'anchorCommit', opts.armAnchor, 'arm anchorCommit', true);
+  checkAnchor(ctlRows, 'brainSha', opts.ctlBrain, 'ctl villager-brain.js', false);
+  checkAnchor(armRows, 'brainSha', opts.armBrain, 'arm villager-brain.js', false);
+  checkAnchor(ctlRows, 'winplanSha', opts.ctlWinplan, 'ctl win-plan.js', false);
+  checkAnchor(armRows, 'winplanSha', opts.armWinplan, 'arm win-plan.js', false);
+  const anchorPass = anchorChecks.every(function (c) { return c.checked && c.pass; });
   // Per-seed starvation excess (arm minus ctl).
   const starvExcess = [];
   for (let i = 0; i < ctlRows.length; i++) {
@@ -310,6 +403,12 @@ function analyze(ctlRows, armRows, opts) {
       maxSurvival: Math.max.apply(null, rows.map(function (r) { return r.gameDays; })),
       villagesLost: sum(rows, function (r) { return r.villageLost ? 1 : 0 }) };
   };
+  const ctlDeaths = sum(ctlRows, function (r) { return r.deaths; });
+  const armDeaths = sum(armRows, function (r) { return r.deaths; });
+  const ctlMeanDeaths = ctlRows.length ? ctlDeaths / ctlRows.length : null;
+  const armMeanDeaths = armRows.length ? armDeaths / armRows.length : null;
+  const deathsPerExtraLaunch = (armLaunches > ctlLaunches)
+    ? (armDeaths - ctlDeaths) / (armLaunches - ctlLaunches) : null;
   const bars = {};
   bars.instrument = (ctlErr === 0 && armErr === 0);
   bars.detGate = detPass;
@@ -320,10 +419,16 @@ function analyze(ctlRows, armRows, opts) {
   bars.starvTotal = (armStarv <= ctlStarv + 2);
   bars.starvPerSeed = (maxExcess <= 2);
   bars.survival = (ctlMed != null && armMed != null) && (armMed >= 0.8 * ctlMed);
+  // Total-deaths guardrail (re-judge bar 8): armed mean total
+  // village deaths per run <= control mean + 5. The 2115Z panel
+  // showed +10.75/run, so this bar is a real test.
+  bars.totalDeaths = (ctlMeanDeaths != null && armMeanDeaths != null) &&
+    (armMeanDeaths <= ctlMeanDeaths + 5);
   let verdict = 'NO-GO';
   if (zeroAttempt) verdict = 'INCONCLUSIVE';
   else if (bars.instrument && bars.detGate && bars.anchor && bars.primaryAttempts &&
-    bars.primaryStuckDeparts && bars.starvTotal && bars.starvPerSeed && bars.survival) verdict = 'GO';
+    bars.primaryStuckDeparts && bars.starvTotal && bars.starvPerSeed && bars.survival &&
+    bars.totalDeaths) verdict = 'GO';
   // Choke totals (control leg, the DIAG).
   function chokeTotals(rows) {
     const tot = { staged: 0, choke: 0, byOcc: {}, byShape: {}, byProfile: {}, subChoke: {} };
@@ -354,6 +459,7 @@ function analyze(ctlRows, armRows, opts) {
     ctl: { attempts: ctlAttempts, launches: ctlLaunches,
       starvDeaths: ctlStarv, medianSurvival: ctlMed,
       instrumentErrors: ctlErr, wall: wall(ctlRows),
+      totalDeaths: ctlDeaths, meanDeaths: ctlMeanDeaths,
       choke: ctlChoke,
       stuck: ctlRows.reduce(function (a, r) { return a.concat((r.stuck || []).map(function (s) { return { seed: r.seed, vid: s.vid, stagedDays: s.stagedDays, spanDays: s.spanDays, firstDay: s.firstDay, lastDay: s.lastDay }; })); }, []),
       perSeed: ctlRows.map(function (r) { return { seed: r.seed, gameDays: r.gameDays,
@@ -364,6 +470,7 @@ function analyze(ctlRows, armRows, opts) {
     arm: { attempts: armAttempts, launches: armLaunches,
       starvDeaths: armStarv, medianSurvival: armMed,
       instrumentErrors: armErr, wall: wall(armRows),
+      totalDeaths: armDeaths, meanDeaths: armMeanDeaths,
       choke: armChoke,
       perSeed: armRows.map(function (r) { return { seed: r.seed, gameDays: r.gameDays,
         attempts: r.attempts, launches: r.launchesN, holds: r.holds, normals: r.normals,
@@ -372,6 +479,7 @@ function analyze(ctlRows, armRows, opts) {
         firstReleaseDay: r.firstReleaseDay, errors: r.errors }; }) },
     stuckDeparted: stuckDeparted,
     ctlStuckCount: Object.keys(ctlStuckKeys).length,
+    deathsPerExtraLaunch: deathsPerExtraLaunch,
     starvExcess: starvExcess, maxStarvExcess: maxExcess,
     det: det, detPass: detPass, anchorChecks: anchorChecks,
     bars: bars,
@@ -541,16 +649,15 @@ function selftest() {
     { departCalls: [attemptCall(10, 'alice'), attemptCall(11, 'alice'), attemptCall(12, 'alice')],
       planCensus: [censusRow(10, 'alice')] },
   ]);
-  // NOTE: the staged arm legs have firstReleaseDay null (no forager
-  // release rows with a null commit), so the det-gate compares the
-  // full streams, which differ on departCalls; the det-gate is
-  // therefore expected to FAIL here. The staged verdict test
-  // isolates the bar logic.
+  // NOTE: under the shape-agnostic bound (re-judge prereg §4a) the
+  // staged arm legs' first divergence IS their first extra depart
+  // call (day 11), so the det-gate PASSES here — the staged verdict
+  // test now isolates the stuck-plan bar instead.
   const v = analyze(ctlLeg, armLeg, {});
   check('staged attempts arm 10 vs ctl 2', v.arm.attempts === 10 && v.ctl.attempts === 2);
   check('staged primaryAttempts passes', v.bars.primaryAttempts === true);
-  check('staged det-gate fails as designed (streams differ pre-bound)', v.bars.detGate === false);
-  check('staged verdict NO-GO via det-gate', v.verdict === 'NO-GO');
+  check('staged det-gate passes under shape-agnostic bound (first divergence == first extra depart)', v.bars.detGate === true);
+  check('staged verdict NO-GO via stuck bar (no control-stuck plans)', v.verdict === 'NO-GO' && v.bars.primaryStuckDeparts === false);
   // A passing det-gate REQUIRES the arm's pre-bound streams to equal
   // ctl's AND ctl release rows to be 0: the bound must be before any
   // divergence. Build that case: arm legs identical to ctl legs
@@ -572,6 +679,53 @@ function selftest() {
   const v0 = analyze(legRows('ctl', [{ departCalls: [attemptCall(10, 'alice')] }]),
     legRows('arm', [{ departCalls: [attemptCall(10, 'alice')] }]), {});
   check('zero-attempt rule INCONCLUSIVE', v0.verdict === 'INCONCLUSIVE');
+  // 7. Shape-agnostic bound: a stream diverging BEFORE any extra
+  // depart call fails the det-gate (attribution, not just equality).
+  function deathRow(day) { return { day: day, kind: 'starved', cause: 'hunger' }; }
+  const ctlLeg7 = legRows('ctl', [
+    { departCalls: [attemptCall(10, 'alice')], planCensus: [censusRow(10, 'alice')] },
+  ]);
+  const armLeg7 = legRows('arm', [
+    { departCalls: [attemptCall(10, 'alice'), call(90, 'alice', { commitWinPlanAction: null, result: 'normal' })],
+      planCensus: [censusRow(10, 'alice')], deaths: [deathRow(20)] },
+  ]);
+  const v7 = analyze(ctlLeg7, armLeg7, {});
+  check('det-gate fails when a stream diverges before the first extra depart call',
+    v7.bars.detGate === false && v7.det[0].firstDivergenceDay === 20 && v7.det[0].firstExtraDepartDay === 90);
+  // 8. Divergence with NO extra depart call at all also fails.
+  const armLeg8 = legRows('arm', [
+    { departCalls: [attemptCall(10, 'alice')], planCensus: [censusRow(10, 'alice')], deaths: [deathRow(20)] },
+  ]);
+  const v8 = analyze(ctlLeg7, armLeg8, {});
+  check('det-gate fails when streams diverge with no extra depart call',
+    v8.bars.detGate === false && v8.det[0].firstExtraDepartDay == null);
+  // 9. Anchors: supplied + matching -> pass; missing -> FAIL (never
+  // vacuous checked:false); mismatched -> fail.
+  const anchorOk = { ctlAnchor: 'abc', armAnchor: 'abc', ctlBrain: 'br1', armBrain: 'br1',
+    ctlWinplan: 'wp1', armWinplan: 'wp1' };
+  const v9 = analyze(ctlLeg3, armLeg3, anchorOk);
+  check('anchor checks pass when expected values match', v9.bars.anchor === true &&
+    v9.anchorChecks.every(function (c) { return c.checked === true && c.pass === true; }));
+  const v9b = analyze(ctlLeg3, armLeg3, {});
+  check('anchor checks FAIL when expectations are missing (no vacuous checked:false)',
+    v9b.bars.anchor === false &&
+    v9b.anchorChecks.every(function (c) { return c.checked === true && c.pass === false; }));
+  const v9c = analyze(ctlLeg3, armLeg3, Object.assign({}, anchorOk, { armBrain: 'WRONG' }));
+  check('anchor checks fail on a mismatched sha', v9c.bars.anchor === false);
+  // 10. Total-deaths guardrail (re-judge bar 8): armed mean <= ctl
+  // mean + 5 passes; +6 fails. Deaths-per-extra-launch diagnostic.
+  function deathLeg(mode, n) {
+    const arr = [];
+    for (let i = 0; i < n; i++) arr.push(deathRow(5));
+    return legRows(mode, [{ departCalls: [attemptCall(10, 'alice')], deaths: arr }]);
+  }
+  const v10 = analyze(deathLeg('ctl', 10), deathLeg('arm', 14), anchorOk);
+  check('total-deaths bar passes at +4 mean', v10.bars.totalDeaths === true &&
+    v10.ctl.meanDeaths === 10 && v10.arm.meanDeaths === 14);
+  const v10b = analyze(deathLeg('ctl', 10), deathLeg('arm', 16), anchorOk);
+  check('total-deaths bar fails at +6 mean', v10b.bars.totalDeaths === false);
+  const v10c = analyze(deathLeg('ctl', 10), deathLeg('arm', 14), anchorOk);
+  check('deaths-per-extra-launch is null when launches do not rise', v10c.deathsPerExtraLaunch == null);
   console.log('dawnchoke analyzer selftest: ' + pass + ' pass, ' + fail + ' fail');
   return fail === 0;
 }
@@ -608,6 +762,8 @@ if (require.main === module) (async function () {
   const armRows = loadLeg(armDir, 'arm', seeds);
   const result = analyze(ctlRows, armRows, {
     ctlBrain: arg('ctl-brain', null), armBrain: arg('arm-brain', null),
+    ctlWinplan: arg('ctl-winplan', null), armWinplan: arg('arm-winplan', null),
+    ctlAnchor: arg('ctl-anchor', null), armAnchor: arg('arm-anchor', null),
   });
   fs.writeFileSync(outFile, JSON.stringify(result, null, 2) + '\n');
   console.log(JSON.stringify({ verdict: result.verdict, zeroAttempt: result.zeroAttempt,
@@ -617,11 +773,14 @@ if (require.main === module) (async function () {
     ctlChokeRate: result.ctl.choke.chokeRate, armChokeRate: result.arm.choke.chokeRate,
     ctlStarv: result.ctl.starvDeaths, armStarv: result.arm.starvDeaths,
     maxStarvExcess: result.maxStarvExcess,
+    ctlMeanDeaths: result.ctl.meanDeaths, armMeanDeaths: result.arm.meanDeaths,
+    deathsPerExtraLaunch: result.deathsPerExtraLaunch,
     ctlMedian: result.ctl.medianSurvival, armMedian: result.arm.medianSurvival,
-    detPass: result.detPass, bars: result.bars, out: outFile }, null, 2));
+    detPass: result.detPass, anchorChecks: result.anchorChecks, bars: result.bars, out: outFile }, null, 2));
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 
 module.exports = { analyze: analyze, analyzeSeed: analyzeSeed, selftest: selftest,
   detGateForSeed: detGateForSeed, diagOnly: diagOnly,
   isW4Plan: isW4Plan, isStagedW4: isStagedW4, isTargetlessHunt: isTargetlessHunt,
-  isReleaseRow: isReleaseRow, isStarvationDeath: isStarvationDeath, median: median, W4P_SET: W4P_SET };
+  isReleaseRow: isReleaseRow, isStarvationDeath: isStarvationDeath, median: median, W4P_SET: W4P_SET,
+  firstExtraDepartDay: firstExtraDepartDay, firstDivergenceDay: firstDivergenceDay };
