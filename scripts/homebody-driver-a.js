@@ -982,7 +982,7 @@ if (require.main === module) (async function () {
   if (process.env.FLEEREPAIR2 !== '1') { console.error('HOMEBODY STOP: FLEEREPAIR2=1 required (substrate).'); process.exit(2); }
   if (process.env.FIGHTALLY2 !== '1') { console.error('HOMEBODY STOP: FIGHTALLY2=1 required (substrate).'); process.exit(2); }
   if (!SEEDS.length) { console.error('HOMEBODY STOP: SEEDS required.'); process.exit(2); }
-  const outDir = path.join(REPO, 'evidence', '2026-11-22', OUTDIR);
+  const outDir = path.join(REPO, 'evidence', process.env.EVIDENCE_DATE || '2026-11-22', OUTDIR);
   fs.mkdirSync(outDir, { recursive: true });
   for (const seed of SEEDS) {
     const file = path.join(outDir, 'homebody-a-s' + seed + '-' + RUN + '-' + MODE + '.json');

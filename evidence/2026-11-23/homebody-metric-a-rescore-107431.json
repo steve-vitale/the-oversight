@@ -1,0 +1,95 @@
+{
+  "verdict": "GO",
+  "zeroLaunch": false,
+  "poolEmpty": false,
+  "seeds": [
+    107431,
+    107432,
+    107433,
+    107434,
+    107435,
+    107436,
+    107437,
+    107438,
+    107439,
+    107440,
+    107441,
+    107442,
+    107443,
+    107444,
+    107445,
+    107446
+  ],
+  "pool": 2,
+  "share": 1,
+  "partyConversions": 2,
+  "soloOnlyConversions": 0,
+  "holdOnlyTriples": 0,
+  "poolTriples": [
+    {
+      "seed": 107431,
+      "oldHolder": "raj_patel",
+      "target": "reunion",
+      "cases": 1,
+      "launches": 1,
+      "partyLaunches": 1,
+      "soloLaunches": 0,
+      "holds": 0,
+      "partySizes": [
+        2
+      ]
+    },
+    {
+      "seed": 107437,
+      "oldHolder": "visjoin_136",
+      "target": "eulogy",
+      "cases": 1,
+      "launches": 1,
+      "partyLaunches": 1,
+      "soloLaunches": 0,
+      "holds": 0,
+      "partySizes": [
+        1
+      ]
+    }
+  ],
+  "poolCtl": 2,
+  "poolCtlTriples": [
+    {
+      "seed": 107431,
+      "holder": "raj_patel",
+      "target": "reunion"
+    },
+    {
+      "seed": 107437,
+      "holder": "visjoin_136",
+      "target": "eulogy"
+    }
+  ],
+  "ctlLaunches": 51,
+  "armLaunches": 56,
+  "launchDelta": 5,
+  "ctlDeaths": {
+    "total": 1677,
+    "starv": 7
+  },
+  "armDeaths": {
+    "total": 1665,
+    "starv": 6
+  },
+  "totalDeathsCap": 1845,
+  "ctlMedianSurvival": 150.5,
+  "armMedianSurvival": 151,
+  "instrumentErrors": 0,
+  "detPass": true,
+  "analyzerChecked": true,
+  "analyzerMismatch": null,
+  "bars": {
+    "instrument": true,
+    "detGate": true,
+    "share": true,
+    "partyConversions": true,
+    "totalDeaths": true,
+    "survival": true
+  }
+}
