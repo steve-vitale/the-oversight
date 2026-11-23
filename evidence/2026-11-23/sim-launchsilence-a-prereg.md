@@ -312,3 +312,13 @@ definition (a v4departs 'launch' row for a wave-4+ plan) is unchanged
 says. New selftest fixtures 16–19 + proof-test band seeds 900008–
 900009 pin both pilot shapes. Proof test re-run green 50/50 on the
 fixed driver before the v2 pilot.
+
+## Re-freeze correction (coordinator, run fleshout-20261123T1115Z)
+
+After the arm was rebased onto master 7ade8d3bf, FROZEN_BASE was
+re-frozen from fdd7042b8 to 34dc4dbc9a013e6163c32c662195d33ebbff383f
+and the control sweep + replays re-recorded on the new head. Game
+code is byte-identical between the two bases (zero src/js diff
+fdd7042b8..7ade8d3bf); the re-recorded corpus reproduces the original
+analysis exactly on every judged field, and the proof is green 50/50
+on the rebased tree. The frozen bars are unchanged.

@@ -260,3 +260,26 @@ silence lives now.
   documented, not filled: why the companion pool reads eligible 0 on
   muster days (pool composition vs muster timing); what turns a wave-4
   meeting into a plan target.
+
+## 10. Coordinator re-freeze addendum (run fleshout-20261123T1115Z)
+
+The worker's branch was rebased onto master 7ade8d3bf (Loop B's 0230Z
+adoption landed mid-run: gateavoid + launchfield-horizonfix evidence,
+zero src/js changes). The rebase moved HEAD off the frozen base
+fdd7042b8, so the proof's two anchor legs failed (48/50) by design —
+the driver refuses to run unless HEAD is the frozen base ("rebase +
+re-freeze first"). Re-freeze, per the driver's own prescription:
+FROZEN_BASE updated to the rebased head
+34dc4dbc9a013e6163c32c662195d33ebbff383f; the 16-seed control sweep and
+both 2-seed replays were re-recorded on the new head; the analyzer was
+re-run. The re-recorded corpus reproduces the original EXACTLY: every
+judged analysis field identical (seeds 16, launches 50, launching 10,
+non-launching 6, classified 6, unclassified 0, stageCounts
+no-plan-created 3 / plan-never-ignites 3, wall wins 0 / national 0 /
+table 0 / wave5 9 / wave4 16 / median 150 / lost 6 / deaths 1594);
+per-seed files differ only in the two anchor lines. The regenerated
+analysis.json is byte-identical to the worker's committed version
+(the analyzer's absolute `dir` path was normalized back to the
+relative form the worker used). Proof re-run green 50/50 on the
+rebased tree. No verdict changes; the DIAG-GO stands on the
+re-recorded corpus.
