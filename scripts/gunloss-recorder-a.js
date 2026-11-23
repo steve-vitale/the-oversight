@@ -136,9 +136,11 @@ function gunlossGearSnap(Game, vid) {
 // head entry onto the scholar, so the cells leave the inventory for
 // the head slot — invisible to any census that counts inventory only
 // (which is exactly how the cellcheck scholar census missed them).
-// An equipped entry carries no units field, so each equipped cell
-// slot counts as 1 unit — a 2-cell stack worn as a hat collapses to
-// 1 (the second cell is destroyed by the transfer; see evidence).
+// A worn entry CAN carry units since the mantle fix (ff17699c7) and
+// the scholar equip fix (sim-wornstack-equip-a, #2707) — a 2-cell
+// stack worn as a hat is 2 cells, not 1 — so cellsEq counts the
+// worn entry's units, not one per slot (the old per-slot count
+// under-read a worn stack by (units-1) and reported a phantom loss).
 function gunlossScholarSnap(Game) {
   const snap = { cells: 0, cellsInv: 0, cellsEq: 0, gunInv: 0, gunEq: null, gunEqSlots: [], equipped: {}, items: [] };
   try {
@@ -153,7 +155,7 @@ function gunlossScholarSnap(Game) {
     // is never missed.
     if (!snap.gunEq && snap.equipped.weapon) snap.gunEq = snap.equipped.weapon;
     for (const k of Object.keys(snap.equipped)) {
-      if (snap.equipped[k] === 'fusion_cell') snap.cellsEq += 1;
+      if (snap.equipped[k] === 'fusion_cell') snap.cellsEq += gunlossUnits((s.equipped || {})[k]);
       if (snap.equipped[k] === 'searcaster') snap.gunEqSlots.push(k);
     }
     snap.cells = snap.cellsInv + snap.cellsEq;

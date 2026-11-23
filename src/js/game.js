@@ -14016,6 +14016,15 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         }
       } catch (e) {}
       this.state.scholar.equipped[slot] = { itemId: def.id, name: def.name, ..._hints,
+        // WORN-STACK (sim-wornstack-equip-a, finding #2707): the worn
+        // entry used to drop the stack's units — equipping a 2-unit
+        // stack seated a units-less copy, so the second unit was
+        // destroyed the moment it was worn (same collapse the mantle
+        // fix #2698 closed on succession). Carry the source stack's
+        // units when it holds more than one, the same >1 rule
+        // mantleBecome and toScholarItem use (#807). A single unit
+        // stays bare, as every other worn copy in the codebase.
+        ...(((item.units || 1) > 1) ? { units: item.units } : {}),
         ...(item.bonded ? { bonded: true, bond: item.bond || 0, bondOffered: item.bondOffered || [], enhancements: item.enhancements || [] } : {}),
         // ALIEN LOOT (Steve 2026-10-06): the knowledge-gate flag travels with
         // the weapon — first swing is the learning moment (tbPlayerStrike).
@@ -14027,7 +14036,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       if (_displaced && _displaced.itemId) {
         const _dd = this.data.items.find(i => i.id === _displaced.itemId) || {};
         this.state.scholar.inventory.push({ itemId: _displaced.itemId,
-          name: _displaced.name || _dd.name || _displaced.itemId, units: 1, kcalEach: 0, kg: 0.5,
+          name: _displaced.name || _dd.name || _displaced.itemId, units: (_displaced.units || 1), kcalEach: 0, kg: 0.5,
           ...(_displaced.bonded ? { bonded: true, bond: _displaced.bond || 0,
             bondOffered: _displaced.bondOffered || [], enhancements: _displaced.enhancements || [] } : {}),
           ...(_displaced.alienLoot ? { alienLoot: true, alienEffectHidden: _displaced.alienEffectHidden } : {}) });
@@ -14061,8 +14070,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
     unequip(slot) {
       const eq = (this.state.scholar.equipped || {})[slot];
       if (!eq) return null;
-      // back to inventory
-      this.state.scholar.inventory.push({ itemId: eq.itemId, name: eq.name, units: 1, kcalEach: 0, kg: 0.5,
+      // back to inventory — WORN-STACK (sim-wornstack-equip-a, finding
+      // #2707): the push used to hardcode units:1, so a worn stack
+      // collapsed on the way home even after equip() learned to carry
+      // it. Restore the worn entry's own units (bare entries read as 1,
+      // as before — accessory-worn single units come home whole).
+      this.state.scholar.inventory.push({ itemId: eq.itemId, name: eq.name, units: (eq.units || 1), kcalEach: 0, kg: 0.5,
         ...(eq.bonded ? { bonded: true, bond: eq.bond || 0, bondOffered: eq.bondOffered || [], enhancements: eq.enhancements || [] } : {}),
         // ALIEN LOOT (Steve 2026-10-06): the knowledge-gate flag comes home
         // with the weapon, revealed or not.

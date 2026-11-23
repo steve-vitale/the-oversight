@@ -178,24 +178,28 @@ async function main() {
   const postScholar = gunlossScholarSnap(Game);
   check('mantle: gun lands in scholar.equipped.ranged', postScholar.gunEq === 'searcaster',
     'gunEq=' + postScholar.gunEq + ' equipped=' + JSON.stringify(postScholar.equipped));
-  check('mantle: 1 cell lands worn as scholar.equipped.head (the hat)',
-    postScholar.equipped.head === 'fusion_cell' && postScholar.cellsEq === 1,
+  // WORN-STACK (sim-wornstack-equip-a, #2707): these four used to assert
+  // the collapse — 1 worn cell, 1 total, scholar +1, net loss 1 cell.
+  // The mantle fix (ff17699c7) preserved the stack and the recorder
+  // now counts worn units, so the honest readings are 2 / 2 / +2 / 0.
+  check('mantle: 2 cells land worn as scholar.equipped.head (the hat)',
+    postScholar.equipped.head === 'fusion_cell' && postScholar.cellsEq === 2,
     'equipped=' + JSON.stringify(postScholar.equipped) + ' cellsEq=' + postScholar.cellsEq);
   check('mantle: scholar inventory holds no cells (they left the pack for slots)',
     postScholar.cellsInv === 0, 'cellsInv=' + postScholar.cellsInv + ' items=' + JSON.stringify(postScholar.items));
-  check('mantle: scholar cells total is 1 (2-stack collapsed to one worn unit)',
-    postScholar.cells === 1, 'cells=' + postScholar.cells);
+  check('mantle: scholar cells total is 2 (the worn stack survives whole)',
+    postScholar.cells === 2, 'cells=' + postScholar.cells);
   const postHolder = gunlossGearSnap(Game, vid2);
   check('mantle: villager record wiped (gun 0, cells 0)', postHolder.gun === 0 && postHolder.cells === 0,
     JSON.stringify({ gun: postHolder.gun, cells: postHolder.cells }));
   const mantEvs = events2.filter(function (e) { return e.kind === 'wrap' && e.fn === 'mantleBecome'; });
-  check('mantle wrap records the transfer (person -1/-2, scholar +1/+1)',
+  check('mantle wrap records the transfer (person -1/-2, scholar +1/+2)',
     mantEvs.length >= 1 && mantEvs.some(function (e) {
-      return e.delta.gun === -1 && e.delta.cells === -2 && e.delta.scholarGun === 1 && e.delta.scholarCells === 1;
+      return e.delta.gun === -1 && e.delta.cells === -2 && e.delta.scholarGun === 1 && e.delta.scholarCells === 2;
     }), JSON.stringify(mantEvs.map(function (e) { return e.delta; })));
   const mantPieces = mantEvs.length ? lossPieces(mantEvs[mantEvs.length - 1]) : null;
-  check('analyzer: mantle net loss is 0 guns, 1 cell (the collapsed unit)',
-    !!mantPieces && mantPieces.gun === 0 && mantPieces.cells === 1, JSON.stringify(mantPieces));
+  check('analyzer: mantle net loss is 0 guns, 0 cells (the stack survives)',
+    !!mantPieces && mantPieces.gun === 0 && mantPieces.cells === 0, JSON.stringify(mantPieces));
   const mantPack = mantEvs.length ? packPieces(mantEvs[mantEvs.length - 1]) : null;
   check('analyzer: mantle empties the pack of gun + 2 cells (pack pieces 1/2)',
     !!mantPack && mantPack.gun === 1 && mantPack.cells === 2, JSON.stringify(mantPack));
