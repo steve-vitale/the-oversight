@@ -423,12 +423,38 @@ only one where hunger is a live question at the horizon.
 
 ## Gate
 
-(TODO — filled after the gate run.)
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r155-gate`
+on the rebased tip (`78b6c54c4`, on master `3fd09decc`): **339 passed,
+5 failed in 758s** (log `hidden_files/journey-landing-r155-gate.log`).
+The 5 failures are exactly the standing 5, none attributable to this
+evidence-only commit (no src/js change): phone-frame stale receipt
+(`test-phone-frame-proof.js`), two 120s deed-attainment timeouts
+(`test-living-garden-deed-attainment.js`,
+`test-one-person-army-deed-attainment.js`), measurement-proof
+staleness pair (`test-measurement-proof-update.js`,
+`test-measurement-workflow.js`). Gate verdict: PASS on the standing-5
+basis. No re-run needed (no load flakiness in the failures — the two
+timeouts are the standing 120s deed-attainment timeouts).
 
 ## Telemetry
 
-(TODO — filled after the telemetry check.)
+`node scripts/telemetry-check.js --baseline
+hidden_files/telemetry-baselines/landing-split.json --current
+'.../landing-r155-after/journey-landing-r62-census-*.json' --metrics
+systemDay,villagerDeaths,monsterKills,folTelemetry.fires,starvAutopsies`:
+**one LOUD line — monsterKills 217 → 411 (+89%). Investigated
+same-run, EXPLAINED, not a bug:** kills-per-party-fight is unchanged
+at 0.97 (r154: 286 kills / 296 fights; r155: 411 / 424) — villages
+fight MORE (departures 78→106, partyFights 296→424, holders 28→36)
+on the r268 PLANWAKE regime, and villagerDeaths (10 vs baseline 9)
+stayed quiet. Trend 217 (r135/r136) → 286 (r154) → 411 (r155) tracks
+activity, not lethality. Baseline re-pinned to (82/10/411/16/0) with
+the explanation recorded in its `_note`. All other metrics quiet.
 
 ## Closeout
 
-(TODO — filled at closeout: merge commit, rotation, lock.)
+Merged locally, pending ship. Commit `78b6c54c4` (rebased onto
+master `3fd09decc`, sim-homebody-rejudge-a) merged ff-only into
+master; worktree released and removed; rotation `0→1`; lock deleted;
+hbloop killed. No version bump, no push, no live verification — the
+ship loop owns those.
