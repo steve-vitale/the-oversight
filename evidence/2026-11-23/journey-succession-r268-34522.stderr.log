@@ -1,0 +1,43 @@
+
+PRE-DEATH d42: bearer <redacted>, topTrust=[{"id":"Cameron","t":90},{"id":"Yanina","t":90},{"id":"Aria","t":90},{"id":"Mateo","t":90}], roster=11
+INH readable=true scripted=true deadItems=11 distinct=11 transferred=2 vanished=1 keptPlants=21 inheritedPlants=4 keptSkills=6 inheritedSkills=14 succTrustPre=90 succTrustPost=59
+PARITY readable=true equal=true inherited=[] pre=["the_touch","dowsing","green_whisper","echo_location","war_cry"] post=["the_touch","dowsing","green_whisper","echo_location","war_cry"]
+DEATH d42 (the expedition, scripted): Dylan -> Cameron | passed=true lin=true mo=true trust=59 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=6 vanished=1 of 11 distinct dead-bearer items
+  CONVO d+3 with Yanina (refused=false)
+  CONVO d+3 with Mateo (refused=false)
+  STRANGER-PROBE d+3 with Somchai (trust=25 refused=false)
+  BOND-CONVO d+3 with Esteban (depth=0 v=18 refused=false)
+  CONVO d+7 with Yanina (refused=false)
+  CONVO d+7 with Ruth (refused=false)
+  CONVO d+14 with Ruth (refused=false)
+  CONVO d+14 with Yanina (refused=false)
+  BOND-CONVO d+14 with Esteban (depth=0 v=18 refused=false)
+  WIT-SIT [post] d+18: Yanina sits for witnessed Somchai (sitSeq=1, freshPersonN=1, latelyDead=Somchai, witnessed=true, witnessServed=none) refused=false
+  CONVO d+30 with Aria (refused=false)
+  CONVO d+30 with Ruth (refused=false)
+  NEWCOMER-PROBE d+38 with Emma (arrived d+38, trust=38 refused=false)
+  CONVO d+45 with Mateo (refused=false)
+  CONVO d+45 with Ruth (refused=false)
+  CONVO d+53 with Mateo (refused=false)
+  CONVO d+53 with Emma (refused=false)
+  CONVO d+64 with Emma (refused=false)
+  CONVO d+64 with Ruth (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=7) echo=2 organicBurial={"respects":false,"bury":false} halfRation=11
+
+MEAL-GATE: audited=70 violations=0 noMealDays=17 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":61,"offerLines":77,"codexPlantsDelta":48,"codexSkillsDelta":21,"codexAbilitiesDelta":12,"xpDelta":-44,"any":true} pantry 9500->27868
+TRUST-DIALS: office 59->100 (+41, climb) | villageMean 63.6->73.5 (+9.9, climb) | ge60 7->5 | movers>=5: [{"id":"Tashi","from":63,"to":90,"delta":27},{"id":"Chloe","from":65,"to":91,"delta":26}]
+DEED-LEDGER: calls=29 summary={"teachPlant":{"calls":6,"ok":6,"deltaSum":0,"deltaN":6,"positive":0,"meanDelta":0},"donateToPantry":{"calls":12,"ok":12,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":11,"ok":11,"deltaSum":22,"deltaN":11,"positive":10,"meanDelta":2}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=112 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=29) trustVerdict={"readable":true,"officeMantle":59,"officeLast":100,"officeDelta":41,"officeClass":"climb","villageMantle":63.6,"villageLast":73.5,"villageDelta":9.9,"villageClass":"climb","villageGe60Mantle":7,"villageGe60Last":5,"movers":[{"id":"Tashi","from":63,"to":90,"delta":27},{"id":"Chloe","from":65,"to":91,"delta":26}]}
+E6/CALLCHECK: e6={"callMoves":12,"withCensus":12,"chainHandoffs":4,"trustMoves":8} callCheck={"dailyMoveDays":12,"callMoveDays":11,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=4, excludedLoot=1))
+E7/R47: e7={"trustMoves":8,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":6,"neither":1},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":4,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":12}

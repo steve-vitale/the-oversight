@@ -1,0 +1,41 @@
+
+ORGANIC DEATH d34: Kurt -> Esperanza, topTrust=[{"id":"Bao","t":100},{"id":"Purificacion","t":71},{"id":"Nino","t":71},{"id":"Ruby","t":64}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=14 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=90 succTrustPost=59
+PARITY readable=true equal=true inherited=[] pre=["night_eyes","lucky_rock","bird_whisperer","trophy_room"] post=["night_eyes","lucky_rock","bird_whisperer","trophy_room"]
+DEATH d34 (organic (phase A)): Kurt -> Esperanza | passed=true lin=true mo=true trust=59 vouchers=4
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Bao (refused=false)
+  CONVO d+3 with Purificacion (refused=false)
+  STRANGER-PROBE d+3 with Jovan (trust=55 refused=false)
+  BOND-CONVO d+3 with Brian (depth=0 v=16 refused=false)
+  CONVO d+7 with Bao (refused=false)
+  CONVO d+7 with Purificacion (refused=false)
+  CONVO d+14 with Bao (refused=false)
+  CONVO d+14 with Purificacion (refused=false)
+  BOND-CONVO d+14 with Brian (depth=0 v=16 refused=false)
+  CONVO d+30 with Purificacion (refused=false)
+  CONVO d+30 with Nino (refused=false)
+  NEWCOMER-PROBE d+30 with Paolina (arrived d+30, trust=33 refused=false)
+  CONVO d+45 with Bao (refused=false)
+  CONVO d+45 with Purificacion (refused=false)
+  CONVO d+53 with Bao (refused=false)
+  CONVO d+53 with Purificacion (refused=false)
+  CONVO d+64 with Bao (refused=false)
+  CONVO d+64 with Purificacion (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=4) echo=1 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=0 noMealDays=3 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":52,"offerLines":40,"codexPlantsDelta":31,"codexSkillsDelta":11,"codexAbilitiesDelta":10,"xpDelta":216,"any":true} pantry 42555->7400
+TRUST-DIALS: office 59->78 (+19, climb) | villageMean 59.1->93.9 (+34.8, climb) | ge60 4->8 | movers>=5: [{"id":"Jovan","from":54,"to":100,"delta":46},{"id":"Brian","from":48,"to":90,"delta":42},{"id":"Ruby","from":64,"to":100,"delta":36},{"id":"Purificacion","from":71,"to":99,"delta":28},{"id":"Nino","from":71,"to":90,"delta":19}]
+DEED-LEDGER: calls=33 summary={"giveFood":{"calls":31,"ok":31,"deltaSum":116,"deltaN":31,"positive":24,"meanDelta":3.74},"donateToPantry":{"calls":2,"ok":2,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=104 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=33) trustVerdict={"readable":true,"officeMantle":59,"officeLast":78,"officeDelta":19,"officeClass":"climb","villageMantle":59.1,"villageLast":93.9,"villageDelta":34.8,"villageClass":"climb","villageGe60Mantle":4,"villageGe60Last":8,"movers":[{"id":"Jovan","from":54,"to":100,"delta":46},{"id":"Brian","from":48,"to":90,"delta":42},{"id":"Ruby","from":64,"to":100,"delta":36},{"id":"Purificacion","from":71,"to":99,"delta":28},{"id":"Nino","from":71,"to":90,"delta":19}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":1,"trustMoves":5} callCheck={"dailyMoveDays":6,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=2, excludedLoot=0))
+E7/R47: e7={"trustMoves":5,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":3,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":4,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":2,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":6}

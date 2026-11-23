@@ -1,0 +1,40 @@
+
+PRE-DEATH d40: bearer <redacted>, topTrust=[{"id":"Chen","t":91},{"id":"Lillian","t":90},{"id":"Fatima","t":90},{"id":"Wakjira","t":88}], roster=11
+INH readable=true scripted=true deadItems=15 distinct=15 transferred=2 vanished=1 keptPlants=19 inheritedPlants=1 keptSkills=4 inheritedSkills=5 succTrustPre=91 succTrustPost=57
+PARITY readable=true equal=true inherited=[] pre=["night_eyes","lucky_rock"] post=["night_eyes","lucky_rock"]
+DEATH d40 (the expedition, scripted): Marisol -> Chen | passed=true lin=true mo=true trust=57 vouchers=4
+  BURIAL d+4: corpse found=true respects=true bury=true
+  INH d+4: transferred=2 vanished=1 of 15 distinct dead-bearer items
+  CONVO d+3 with Wakjira (refused=false)
+  CONVO d+3 with Lillian (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Wakjira (refused=false)
+  CONVO d+7 with Lillian (refused=false)
+  CONVO d+14 with Lillian (refused=false)
+  CONVO d+14 with Fatima (refused=false)
+  CONVO d+30 with Lillian (refused=false)
+  CONVO d+30 with Raj (refused=false)
+  CONVO d+45 with Lillian (refused=false)
+  CONVO d+45 with Raj (refused=false)
+  CONVO d+53 with Lillian (refused=false)
+  CONVO d+53 with Raj (refused=false)
+  CONVO d+64 with Ingrid (refused=false)
+  CONVO d+64 with Raj (refused=false)
+  NEWCOMER-PROBE d+70 with Mukhtar (arrived d+70, trust=40 refused=false)
+
+FUNERAL: deathBeat=3 recover=1 vouch=1 (eligible=4) echo=6 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=70 violations=0 noMealDays=3 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":49,"offerLines":16,"codexPlantsDelta":19,"codexSkillsDelta":19,"codexAbilitiesDelta":10,"xpDelta":20,"any":true} pantry 49695->5940
+TRUST-DIALS: office 57->92 (+35, climb) | villageMean 62.8->90.4 (+27.6, climb) | ge60 4->5 | movers>=5: [{"id":"Brian","from":28,"to":92,"delta":64},{"id":"Ivy","from":51,"to":94,"delta":43},{"id":"Vasyl","from":43,"to":85,"delta":42},{"id":"Bridget","from":56,"to":91,"delta":35}]
+DEED-LEDGER: calls=64 summary={"teachPlant":{"calls":21,"ok":21,"deltaSum":0,"deltaN":21,"positive":0,"meanDelta":0},"giveFood":{"calls":16,"ok":16,"deltaSum":29,"deltaN":16,"positive":10,"meanDelta":1.81},"donateToPantry":{"calls":27,"ok":27,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=6 (convo=6, say=0)) m4=true m5=manual | endDay=110 alive=6 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=64) trustVerdict={"readable":true,"officeMantle":57,"officeLast":92,"officeDelta":35,"officeClass":"climb","villageMantle":62.8,"villageLast":90.4,"villageDelta":27.6,"villageClass":"climb","villageGe60Mantle":4,"villageGe60Last":5,"movers":[{"id":"Brian","from":28,"to":92,"delta":64},{"id":"Ivy","from":51,"to":94,"delta":43},{"id":"Vasyl","from":43,"to":85,"delta":42},{"id":"Bridget","from":56,"to":91,"delta":35}]}
+E6/CALLCHECK: e6={"callMoves":9,"withCensus":9,"chainHandoffs":3,"trustMoves":6} callCheck={"dailyMoveDays":9,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=8 (v2=8, excludedLoot=0))
+E7/R47: e7={"trustMoves":6,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":2,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":6,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":6,"v2":8,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":9}

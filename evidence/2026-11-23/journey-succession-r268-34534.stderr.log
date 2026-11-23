@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d22: Dorothy -> DeAndre, topTrust=[{"id":"Maya","t":81},{"id":"Addison","t":69},{"id":"Finn","t":59},{"id":"Hassan","t":55}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=22 inheritedPlants=0 keptSkills=6 inheritedSkills=0 succTrustPre=82 succTrustPost=52
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","green_thumb"] post=["green_whisper","green_thumb"]
+DEATH d21 (organic (phase A)): Dorothy -> DeAndre | passed=true lin=true mo=true trust=52 vouchers=2
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Maya (refused=false)
+  CONVO d+3 with Finn (refused=false)
+  STRANGER-PROBE d+3 with Owen (trust=40 refused=false)
+  BOND-CONVO d+3 with Addison (depth=1 v=32 refused=false)
+  CONVO d+7 with Finn (refused=false)
+  CONVO d+7 with Addison (refused=false)
+  CONVO d+14 with Finn (refused=false)
+  CONVO d+14 with Addison (refused=false)
+  CONVO d+30 with Finn (refused=false)
+  CONVO d+30 with Addison (refused=false)
+  CONVO d+45 with Finn (refused=false)
+  CONVO d+45 with Sam (refused=false)
+  CONVO d+53 with Finn (refused=false)
+  CONVO d+53 with Addison (refused=false)
+  NEWCOMER-PROBE d+58 with Carlos (arrived d+58, trust=27 refused=false)
+  CONVO d+64 with Nadia (refused=false)
+  CONVO d+64 with Akif (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=2) echo=0 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=0 noMealDays=3 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":68,"offerLines":28,"codexPlantsDelta":44,"codexSkillsDelta":25,"codexAbilitiesDelta":15,"xpDelta":122,"any":true} pantry 22596->13928
+TRUST-DIALS: office 52->96 (+44, climb) | villageMean 54.2->86.1 (+31.9, climb) | ge60 2->9 | movers>=5: [{"id":"Akif","from":46,"to":97,"delta":51},{"id":"Nora","from":45,"to":90,"delta":45},{"id":"Hassan","from":55,"to":92,"delta":37},{"id":"Nadia","from":53,"to":90,"delta":37},{"id":"Addison","from":69,"to":91,"delta":22}]
+DEED-LEDGER: calls=44 summary={"teachPlant":{"calls":22,"ok":22,"deltaSum":0,"deltaN":22,"positive":0,"meanDelta":0},"giveFood":{"calls":13,"ok":13,"deltaSum":42,"deltaN":13,"positive":10,"meanDelta":3.23},"donateToPantry":{"calls":9,"ok":9,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=92 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+8,d+14,d+31,d+71) t2=true(deedCalls=44) trustVerdict={"readable":true,"officeMantle":52,"officeLast":96,"officeDelta":44,"officeClass":"climb","villageMantle":54.2,"villageLast":86.1,"villageDelta":31.9,"villageClass":"climb","villageGe60Mantle":2,"villageGe60Last":9,"movers":[{"id":"Akif","from":46,"to":97,"delta":51},{"id":"Nora","from":45,"to":90,"delta":45},{"id":"Hassan","from":55,"to":92,"delta":37},{"id":"Nadia","from":53,"to":90,"delta":37},{"id":"Addison","from":69,"to":91,"delta":22}]}
+E6/CALLCHECK: e6={"callMoves":7,"withCensus":7,"chainHandoffs":4,"trustMoves":3} callCheck={"dailyMoveDays":6,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=2, excludedLoot=1))
+E7/R47: e7={"trustMoves":3,"soloOffice":1,"soloOfficeDeltas":[2],"soloBearerDeltaExact":[2],"singleMoverBearer":1,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":2,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":6}

@@ -1,0 +1,38 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Grace","t":90},{"id":"Luke","t":90},{"id":"Morgan","t":89},{"id":"Sanne","t":81}], roster=11
+INH readable=true scripted=true deadItems=9 distinct=9 transferred=3 vanished=1 keptPlants=21 inheritedPlants=3 keptSkills=5 inheritedSkills=4 succTrustPre=89 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","lucky_rock","bloodhound","trophy_room","rage"] post=["beast_calm","lucky_rock","bloodhound","trophy_room","rage"]
+DEATH d41 (the expedition, scripted): Aidan -> Morgan | passed=true lin=true mo=true trust=62 vouchers=8
+  BURIAL d+4: corpse found=true respects=true bury=true
+  INH d+4: transferred=2 vanished=3 of 9 distinct dead-bearer items
+  CONVO d+3 with Grace (refused=false)
+  CONVO d+3 with Luke (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Grace (refused=false)
+  CONVO d+7 with Luke (refused=false)
+  CONVO d+14 with Nina (refused=false)
+  CONVO d+14 with Naran (refused=false)
+  BOND-CONVO d+14 with Luke (depth=1 v=30 refused=false)
+  NEWCOMER-PROBE d+15 with Rosa (arrived d+15, trust=24 refused=false)
+  CONVO d+30 with Luke (refused=false)
+  CONVO d+30 with Tariq (refused=false)
+  CONVO d+45 with Tariq (refused=false)
+  CONVO d+45 with Nina (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=2 (eligible=8) echo=0 organicBurial={"respects":false,"bury":false} halfRation=8
+
+MEAL-GATE: audited=53 violations=1 noMealDays=8 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+  VIOLATION d+46: Thilo trust=89 kcal=1210 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=52 signals={"levelUp":true,"systemVoice":31,"offerLines":17,"codexPlantsDelta":30,"codexSkillsDelta":14,"codexAbilitiesDelta":11,"xpDelta":42,"any":true} pantry 47660->0
+TRUST-DIALS: office 62->90 (+28, climb) | villageMean 73.1->82.9 (+9.8, climb) | ge60 8->7 | movers>=5: [{"id":"Thilo","from":15,"to":61,"delta":46},{"id":"Ella","from":66,"to":90,"delta":24},{"id":"Nina","from":77,"to":90,"delta":13},{"id":"Tariq","from":79,"to":90,"delta":11},{"id":"Naran","from":81,"to":90,"delta":9}]
+DEED-LEDGER: calls=30 summary={"teachPlant":{"calls":15,"ok":15,"deltaSum":0,"deltaN":15,"positive":0,"meanDelta":0},"donateToPantry":{"calls":5,"ok":5,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":10,"ok":10,"deltaSum":18,"deltaN":10,"positive":10,"meanDelta":1.8}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=93 alive=7 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=false dayAdv=52
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=30) trustVerdict={"readable":true,"officeMantle":62,"officeLast":90,"officeDelta":28,"officeClass":"climb","villageMantle":73.1,"villageLast":82.9,"villageDelta":9.8,"villageClass":"climb","villageGe60Mantle":8,"villageGe60Last":7,"movers":[{"id":"Thilo","from":15,"to":61,"delta":46},{"id":"Ella","from":66,"to":90,"delta":24},{"id":"Nina","from":77,"to":90,"delta":13},{"id":"Tariq","from":79,"to":90,"delta":11},{"id":"Naran","from":81,"to":90,"delta":9}]}
+E6/CALLCHECK: e6={"callMoves":9,"withCensus":9,"chainHandoffs":6,"trustMoves":3} callCheck={"dailyMoveDays":9,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=2, excludedLoot=1))
+E7/R47: e7={"trustMoves":3,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":2,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":54,"moves":9}

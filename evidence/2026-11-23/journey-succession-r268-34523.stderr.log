@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d36: Duc -> Leomarys, topTrust=[{"id":"Alejandra","t":100},{"id":"Ruth","t":93},{"id":"Jada","t":91},{"id":"Rebecca","t":90}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=18 inheritedPlants=0 keptSkills=8 inheritedSkills=0 succTrustPre=90 succTrustPost=59
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","lucky_rock","echo_location","beard_moss","war_cry"] post=["green_whisper","lucky_rock","echo_location","beard_moss","war_cry"]
+DEATH d36 (organic (phase A)): Duc -> Leomarys | passed=true lin=true mo=true trust=59 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Alejandra (refused=false)
+  CONVO d+3 with Jada (refused=false)
+  STRANGER-PROBE d+3 with Rebecca (trust=90 refused=false)
+  CONVO d+7 with Alejandra (refused=false)
+  CONVO d+7 with Jada (refused=false)
+  CONVO d+14 with Alejandra (refused=false)
+  CONVO d+14 with Jada (refused=false)
+  CONVO d+30 with Jada (refused=false)
+  CONVO d+30 with Ruth (refused=false)
+  NEWCOMER-PROBE d+36 with Benjawan (arrived d+36, trust=28 refused=false)
+  CONVO d+45 with Thabo (refused=false)
+  CONVO d+45 with Brian (refused=false)
+  CONVO d+53 with Jada (refused=false)
+  CONVO d+53 with Rebecca (refused=false)
+  CONVO d+64 with Brian (refused=false)
+  CONVO d+64 with Rebecca (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=7) echo=7 organicBurial={"respects":false,"bury":false} halfRation=9
+
+MEAL-GATE: audited=70 violations=0 noMealDays=9 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":62,"offerLines":37,"codexPlantsDelta":32,"codexSkillsDelta":12,"codexAbilitiesDelta":14,"xpDelta":138,"any":true} pantry 107362->46870
+TRUST-DIALS: office 59->94 (+35, climb) | villageMean 77.9->67.6 (-10.3, fall) | ge60 7->5 | movers>=5: [{"id":"Thabo","from":59,"to":90,"delta":31},{"id":"Brian","from":71,"to":90,"delta":19},{"id":"Nora","from":45,"to":60,"delta":15},{"id":"Stan","from":76,"to":83,"delta":7}]
+DEED-LEDGER: calls=47 summary={"giveFood":{"calls":19,"ok":19,"deltaSum":34,"deltaN":19,"positive":18,"meanDelta":1.79},"donateToPantry":{"calls":27,"ok":27,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"teachPlant":{"calls":1,"ok":1,"deltaSum":0,"deltaN":1,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=7 (convo=7, say=0)) m4=true m5=manual | endDay=106 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=47) trustVerdict={"readable":true,"officeMantle":59,"officeLast":94,"officeDelta":35,"officeClass":"climb","villageMantle":77.9,"villageLast":67.6,"villageDelta":-10.3,"villageClass":"fall","villageGe60Mantle":7,"villageGe60Last":5,"movers":[{"id":"Thabo","from":59,"to":90,"delta":31},{"id":"Brian","from":71,"to":90,"delta":19},{"id":"Nora","from":45,"to":60,"delta":15},{"id":"Stan","from":76,"to":83,"delta":7}]}
+E6/CALLCHECK: e6={"callMoves":17,"withCensus":17,"chainHandoffs":3,"trustMoves":14} callCheck={"dailyMoveDays":17,"callMoveDays":14,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=9 (v2=10, excludedLoot=1))
+E7/R47: e7={"trustMoves":14,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":3,"singleMoverOther":3,"eventClass":{"event-only":0,"deed-only":4,"both":10,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":7,"v2":10,"v2Say":3,"v2Delta":3,"arcExcluded":3,"teleWeek2":6,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":17}

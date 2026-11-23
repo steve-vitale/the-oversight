@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d41: Cormac -> Hannah, topTrust=[{"id":"Nino","t":91},{"id":"Jamie","t":90},{"id":"Niamh","t":90},{"id":"Dieter","t":90}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=17 inheritedPlants=0 keptSkills=5 inheritedSkills=0 succTrustPre=86 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach","green_thumb","purify","dowsing"] post=["iron_stomach","green_thumb","purify","dowsing"]
+DEATH d41 (organic (phase A)): Cormac -> Hannah | passed=true lin=true mo=true trust=62 vouchers=9
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Nino (refused=false)
+  CONVO d+3 with Dieter (refused=false)
+  STRANGER-PROBE d+3 with Hassan (trust=90 refused=false)
+  BOND-CONVO d+3 with Sofia (depth=0 v=16 refused=false)
+  CONVO d+7 with Nino (refused=false)
+  CONVO d+7 with Niamh (refused=false)
+  CONVO d+14 with Nino (refused=false)
+  CONVO d+14 with Jamie (refused=false)
+  BOND-CONVO d+14 with Sofia (depth=0 v=16 refused=false)
+  CONVO d+30 with Nino (refused=false)
+  CONVO d+30 with Jamie (refused=false)
+  CONVO d+45 with Desmond (refused=false)
+  CONVO d+45 with Jamie (refused=false)
+  CONVO d+53 with Desmond (refused=false)
+  CONVO d+53 with Jamie (refused=false)
+  CONVO d+64 with Desmond (refused=false)
+  CONVO d+64 with Jamie (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=9) echo=4 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":34,"offerLines":30,"codexPlantsDelta":23,"codexSkillsDelta":14,"codexAbilitiesDelta":5,"xpDelta":-11,"any":true} pantry 19862->18064
+TRUST-DIALS: office 62->83 (+21, climb) | villageMean 84.4->89.3 (+4.9, climb) | ge60 9->8 | movers>=5: [{"id":"Desmond","from":65,"to":100,"delta":35},{"id":"Mmesoma","from":76,"to":90,"delta":14},{"id":"Sofia","from":82,"to":74,"delta":-8}]
+DEED-LEDGER: calls=0 summary={}
+
+IDENTITY TRIPS: raw=3 grief-excluded=2
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=111 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=false(deedCalls=0) trustVerdict={"readable":true,"officeMantle":62,"officeLast":83,"officeDelta":21,"officeClass":"climb","villageMantle":84.4,"villageLast":89.3,"villageDelta":4.9,"villageClass":"climb","villageGe60Mantle":9,"villageGe60Last":8,"movers":[{"id":"Desmond","from":65,"to":100,"delta":35},{"id":"Mmesoma","from":76,"to":90,"delta":14},{"id":"Sofia","from":82,"to":74,"delta":-8}]}
+E6/CALLCHECK: e6={"callMoves":2,"withCensus":2,"chainHandoffs":1,"trustMoves":1} callCheck={"dailyMoveDays":2,"callMoveDays":2,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":1,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":1,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":5,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":2}

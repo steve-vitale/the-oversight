@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d27: Tanya -> Hannah, topTrust=[{"id":"Erich","t":90},{"id":"Monique","t":90},{"id":"Mario","t":89},{"id":"Lingling","t":88}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=16 inheritedPlants=0 keptSkills=4 inheritedSkills=0 succTrustPre=90 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","beard_moss","green_thumb"] post=["green_whisper","beard_moss","green_thumb"]
+DEATH d27 (organic (phase A)): Tanya -> Hannah | passed=true lin=true mo=true trust=62 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Erich (refused=false)
+  CONVO d+3 with Monique (refused=false)
+  STRANGER-PROBE d+3 with Mario (trust=90 refused=false)
+  CONVO d+7 with Erich (refused=false)
+  CONVO d+7 with Monique (refused=false)
+  CONVO d+14 with Monique (refused=false)
+  CONVO d+14 with Mario (refused=false)
+  BOND-CONVO d+14 with Erich (depth=0 v=12 refused=false)
+  CONVO d+30 with Lingling (refused=false)
+  CONVO d+30 with Hugo (refused=false)
+  NEWCOMER-PROBE d+36 with Torill (arrived d+36, trust=28 refused=false)
+  CONVO d+45 with Lingling (refused=false)
+  CONVO d+45 with Erich (refused=false)
+  CONVO d+53 with Lingling (refused=false)
+  CONVO d+53 with Dale (refused=false)
+  CONVO d+64 with Lingling (refused=false)
+  CONVO d+64 with Erich (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=7) echo=3 organicBurial={"respects":false,"bury":false} halfRation=5
+
+MEAL-GATE: audited=70 violations=0 noMealDays=9 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":85,"offerLines":52,"codexPlantsDelta":35,"codexSkillsDelta":33,"codexAbilitiesDelta":16,"xpDelta":97,"any":true} pantry 38892->5345
+TRUST-DIALS: office 62->100 (+38, climb) | villageMean 69.8->80.1 (+10.3, climb) | ge60 7->8 | movers>=5: [{"id":"Yara","from":45,"to":90,"delta":45},{"id":"Dale","from":46,"to":90,"delta":44},{"id":"Pavel","from":68,"to":90,"delta":22},{"id":"Sanne","from":79,"to":90,"delta":11}]
+DEED-LEDGER: calls=6 summary={"teachPlant":{"calls":4,"ok":4,"deltaSum":0,"deltaN":4,"positive":0,"meanDelta":0},"giveFood":{"calls":2,"ok":2,"deltaSum":9,"deltaN":2,"positive":2,"meanDelta":4.5}}
+
+IDENTITY TRIPS: raw=2 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=97 alive=11 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=6) trustVerdict={"readable":true,"officeMantle":62,"officeLast":100,"officeDelta":38,"officeClass":"climb","villageMantle":69.8,"villageLast":80.1,"villageDelta":10.3,"villageClass":"climb","villageGe60Mantle":7,"villageGe60Last":8,"movers":[{"id":"Yara","from":45,"to":90,"delta":45},{"id":"Dale","from":46,"to":90,"delta":44},{"id":"Pavel","from":68,"to":90,"delta":22},{"id":"Sanne","from":79,"to":90,"delta":11}]}
+E6/CALLCHECK: e6={"callMoves":5,"withCensus":5,"chainHandoffs":3,"trustMoves":2} callCheck={"dailyMoveDays":5,"callMoveDays":4,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":2,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":5}

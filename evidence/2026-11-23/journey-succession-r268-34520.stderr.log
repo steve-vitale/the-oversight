@@ -1,0 +1,38 @@
+
+ORGANIC DEATH d11: Javier -> Nolan, topTrust=[{"id":"Henry","t":65},{"id":"Leo","t":48},{"id":"Caleb","t":41},{"id":"Nolan","t":38}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=9 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=58 succTrustPost=38
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach"] post=["iron_stomach"]
+DEATH d11 (organic (phase A)): Javier -> Nolan | passed=true lin=true mo=true trust=38 vouchers=1
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Henry (refused=false)
+  CONVO d+3 with Leo (refused=false)
+  STRANGER-PROBE d+3 with Smita (trust=32 refused=false)
+  CONVO d+7 with Henry (refused=false)
+  CONVO d+7 with Leo (refused=false)
+  CONVO d+14 with Henry (refused=false)
+  CONVO d+14 with Leo (refused=false)
+  CONVO d+30 with Henry (refused=false)
+  CONVO d+30 with Tamika (refused=false)
+  CONVO d+45 with Tamika (refused=false)
+  CONVO d+45 with Henry (refused=false)
+  CONVO d+53 with Jorge (refused=false)
+  CONVO d+53 with Tamika (refused=false)
+  CONVO d+64 with Jorge (refused=false)
+  CONVO d+64 with Tamika (refused=false)
+
+FUNERAL: deathBeat=8 recover=1 vouch=1 (eligible=1) echo=1 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":107,"offerLines":44,"codexPlantsDelta":30,"codexSkillsDelta":25,"codexAbilitiesDelta":22,"xpDelta":261,"any":true} pantry 28301->6879
+TRUST-DIALS: office 38->83 (+45, climb) | villageMean 31.6->90.1 (+58.5, climb) | ge60 1->7 | movers>=5: [{"id":"Jorge","from":18,"to":100,"delta":82},{"id":"Tamika","from":19,"to":94,"delta":75},{"id":"Ruth","from":21,"to":90,"delta":69},{"id":"Nina","from":27,"to":90,"delta":63},{"id":"Cordula","from":28,"to":90,"delta":62},{"id":"Lena","from":19,"to":77,"delta":58},{"id":"Caleb","from":41,"to":90,"delta":49}]
+DEED-LEDGER: calls=74 summary={"teachPlant":{"calls":53,"ok":53,"deltaSum":0,"deltaN":53,"positive":0,"meanDelta":0},"giveFood":{"calls":18,"ok":18,"deltaSum":62,"deltaN":18,"positive":18,"meanDelta":3.44},"donateToPantry":{"calls":3,"ok":3,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=80 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+69) t2=true(deedCalls=74) trustVerdict={"readable":true,"officeMantle":38,"officeLast":83,"officeDelta":45,"officeClass":"climb","villageMantle":31.6,"villageLast":90.1,"villageDelta":58.5,"villageClass":"climb","villageGe60Mantle":1,"villageGe60Last":7,"movers":[{"id":"Jorge","from":18,"to":100,"delta":82},{"id":"Tamika","from":19,"to":94,"delta":75},{"id":"Ruth","from":21,"to":90,"delta":69},{"id":"Nina","from":27,"to":90,"delta":63},{"id":"Cordula","from":28,"to":90,"delta":62},{"id":"Lena","from":19,"to":77,"delta":58},{"id":"Caleb","from":41,"to":90,"delta":49}]}
+E6/CALLCHECK: e6={"callMoves":8,"withCensus":8,"chainHandoffs":2,"trustMoves":6} callCheck={"dailyMoveDays":8,"callMoveDays":7,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=2, excludedLoot=0))
+E7/R47: e7={"trustMoves":6,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":4,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":2,"both":4,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":2,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":8}

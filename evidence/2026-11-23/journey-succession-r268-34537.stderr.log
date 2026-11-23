@@ -1,0 +1,41 @@
+
+ORGANIC DEATH d13: Harold -> Leo, topTrust=[{"id":"Ethan","t":54},{"id":"Paisley","t":44},{"id":"Onni","t":35},{"id":"Owen","t":32}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=7 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=71 succTrustPost=16
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d12 (organic (phase A)): Harold -> Leo | passed=true lin=true mo=true trust=16 vouchers=0
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Ethan (refused=false)
+  CONVO d+3 with Paisley (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Onni (depth=1 v=36 refused=false)
+  CONVO d+7 with Paisley (refused=false)
+  CONVO d+7 with Ethan (refused=false)
+  CONVO d+14 with Paisley (refused=false)
+  CONVO d+14 with Ethan (refused=false)
+  BOND-CONVO d+14 with Onni (depth=1 v=36 refused=false)
+  CONVO d+30 with Ethan (refused=false)
+  CONVO d+30 with Owen (refused=false)
+  CONVO d+45 with Owen (refused=false)
+  CONVO d+45 with Anna (refused=false)
+  NEWCOMER-PROBE d+47 with Yara (arrived d+47, trust=29 refused=false)
+  CONVO d+53 with Tashi (refused=false)
+  CONVO d+53 with Anna (refused=false)
+  CONVO d+64 with Tashi (refused=false)
+  CONVO d+64 with Sanne (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=0 (eligible=0) echo=3 organicBurial={"respects":false,"bury":false} halfRation=7
+
+MEAL-GATE: audited=70 violations=0 noMealDays=4 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":94,"offerLines":34,"codexPlantsDelta":48,"codexSkillsDelta":23,"codexAbilitiesDelta":18,"xpDelta":34,"any":true} pantry 20000->3950
+TRUST-DIALS: office 16->75 (+59, climb) | villageMean 34.3->74.3 (+40, climb) | ge60 0->2 | movers>=5: [{"id":"Sigrun","from":31,"to":75,"delta":44},{"id":"Anna","from":31,"to":58,"delta":27}]
+DEED-LEDGER: calls=69 summary={"teachPlant":{"calls":15,"ok":15,"deltaSum":0,"deltaN":15,"positive":0,"meanDelta":0},"giveFood":{"calls":16,"ok":16,"deltaSum":42,"deltaN":16,"positive":15,"meanDelta":2.63},"donateToPantry":{"calls":38,"ok":38,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a="n/a (none eligible)" m2b=false m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=82 alive=4 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=69) trustVerdict={"readable":true,"officeMantle":16,"officeLast":75,"officeDelta":59,"officeClass":"climb","villageMantle":34.3,"villageLast":74.3,"villageDelta":40,"villageClass":"climb","villageGe60Mantle":0,"villageGe60Last":2,"movers":[{"id":"Sigrun","from":31,"to":75,"delta":44},{"id":"Anna","from":31,"to":58,"delta":27}]}
+E6/CALLCHECK: e6={"callMoves":29,"withCensus":29,"chainHandoffs":6,"trustMoves":23} callCheck={"dailyMoveDays":29,"callMoveDays":28,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":23,"soloOffice":5,"soloOfficeDeltas":[1,1,2,2,1],"soloBearerDeltaExact":[1,1,2,2,1],"singleMoverBearer":4,"singleMoverOther":3,"eventClass":{"event-only":1,"deed-only":3,"both":19,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":71,"moves":29}

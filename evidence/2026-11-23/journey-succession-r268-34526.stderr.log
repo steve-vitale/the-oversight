@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d24: Malik -> Frieda, topTrust=[{"id":"Mateo","t":100},{"id":"Kwame","t":90},{"id":"Ella","t":81},{"id":"Yao","t":59}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=17 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=90 succTrustPost=58
+PARITY readable=true equal=true inherited=[] pre=["green_whisper"] post=["green_whisper"]
+DEATH d23 (organic (phase A)): Malik -> Frieda | passed=true lin=true mo=true trust=58 vouchers=3
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Kwame (refused=false)
+  CONVO d+3 with Ella (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Kwame (refused=false)
+  CONVO d+7 with Ella (refused=false)
+  CONVO d+14 with Ella (refused=false)
+  CONVO d+14 with Kwame (refused=false)
+  CONVO d+30 with Ella (refused=false)
+  CONVO d+30 with Aibek (refused=false)
+  NEWCOMER-PROBE d+39 with Cristina (arrived d+39, trust=35 refused=false)
+  CONVO d+45 with Ella (refused=false)
+  CONVO d+45 with Kwame (refused=false)
+  CONVO d+53 with Ella (refused=false)
+  CONVO d+53 with Kwame (refused=false)
+  CONVO d+64 with Yao (refused=false)
+  CONVO d+64 with Kwame (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=3) echo=5 organicBurial={"respects":false,"bury":false} halfRation=2
+
+MEAL-GATE: audited=70 violations=0 noMealDays=1 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":71,"offerLines":46,"codexPlantsDelta":28,"codexSkillsDelta":17,"codexAbilitiesDelta":13,"xpDelta":143,"any":true} pantry 29915->9730
+TRUST-DIALS: office 58->88 (+30, climb) | villageMean 64.3->72.6 (+8.3, climb) | ge60 3->5 | movers>=5: [{"id":"Ethan","from":49,"to":90,"delta":41},{"id":"Yao","from":59,"to":90,"delta":31},{"id":"Benoit","from":54,"to":84,"delta":30},{"id":"Fatima","from":37,"to":49,"delta":12},{"id":"Ella","from":81,"to":90,"delta":9}]
+DEED-LEDGER: calls=30 summary={"teachPlant":{"calls":6,"ok":6,"deltaSum":0,"deltaN":6,"positive":0,"meanDelta":0},"giveFood":{"calls":15,"ok":15,"deltaSum":51,"deltaN":15,"positive":15,"meanDelta":3.4},"donateToPantry":{"calls":9,"ok":9,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=94 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+8,d+14,d+30,d+71) t2=true(deedCalls=30) trustVerdict={"readable":true,"officeMantle":58,"officeLast":88,"officeDelta":30,"officeClass":"climb","villageMantle":64.3,"villageLast":72.6,"villageDelta":8.3,"villageClass":"climb","villageGe60Mantle":3,"villageGe60Last":5,"movers":[{"id":"Ethan","from":49,"to":90,"delta":41},{"id":"Yao","from":59,"to":90,"delta":31},{"id":"Benoit","from":54,"to":84,"delta":30},{"id":"Fatima","from":37,"to":49,"delta":12},{"id":"Ella","from":81,"to":90,"delta":9}]}
+E6/CALLCHECK: e6={"callMoves":9,"withCensus":9,"chainHandoffs":2,"trustMoves":7} callCheck={"dailyMoveDays":9,"callMoveDays":8,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=6, excludedLoot=0))
+E7/R47: e7={"trustMoves":7,"soloOffice":3,"soloOfficeDeltas":[2,1,1],"soloBearerDeltaExact":[2,1,1],"singleMoverBearer":0,"singleMoverOther":2,"eventClass":{"event-only":0,"deed-only":1,"both":6,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":6,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":9}

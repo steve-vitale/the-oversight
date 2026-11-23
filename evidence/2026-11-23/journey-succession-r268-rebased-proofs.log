@@ -1,0 +1,211 @@
+=== r268 table-dry (NEW) ===
+PASS table-exhaustion: roster has >= 2 villagers — roster=11
+PASS table-exhaustion: lately event is table/waiting — {"kind":"table","phase":"waiting","seat":"none"}
+PASS table-exhaustion: table waiting pool is the 2 lines — pool=2
+PASS table-exhaustion: pool holds both known table lines — ["\"They say the table's coming. For us. I keep thinking about what we'd even bring to it.\"","\"Have you felt it? Like the air before a storm, but — bigger. Something's on its way.\""]
+PASS table-exhaustion: poisoned both table lines
+PASS table-exhaustion: convo opened — refused=false
+PASS table-exhaustion: reply is NOT a dry line — "Good question." "Have you felt it? Like the air before a storm, but — bigger. Something's on its way."
+PASS table-exhaustion: reply IS a table line (content served) — "Good question." "Have you felt it? Like the air before a storm, but — bigger. Something's on its way."
+PASS table-exhaustion: reply carries a thinking preamble (stage-2 prefix) — "Good question." "Have you felt it? Like the air before a storm, but — bigger. Something's on its way."
+PASS table-exhaustion: NO dry line anywhere in the transcript — dry line present in transcript
+PASS control: roster has >= 2 villagers — roster=11
+PASS control: lately event is table/waiting — {"kind":"table","phase":"waiting","seat":"none"}
+PASS control: table waiting pool is the 2 lines — pool=2
+PASS control: pool holds both known table lines — ["\"They say the table's coming. For us. I keep thinking about what we'd even bring to it.\"","\"Have you felt it? Like the air before a storm, but — bigger. Something's on its way.\""]
+PASS control: convo opened — refused=false
+PASS control: reply is NOT a dry line — "Have you felt it? Like the air before a storm, but — bigger. Something's on its way."
+PASS control: reply IS a table line — "Have you felt it? Like the air before a storm, but — bigger. Something's on its way."
+PASS control: reply is plain (no preamble on an unblocked path) — "Have you felt it? Like the air before a storm, but — bigger. Something's on its way."
+PASS control: NO dry line anywhere in the transcript — dry line present in transcript
+PASS mourning-all-blocked: roster has >= 2 villagers — roster=11
+PASS mourning-all-blocked: lately event is named mourning for Vikram — {"kind":"mourning","name":"Vikram","names":["Vikram"],"sickDeath":false,"deadId":"gen_3dnmnp3","witnesses":[]}
+PASS mourning-all-blocked: mourning pool is the 5 generics — pool=5
+PASS mourning-all-blocked: poisoned all 5 filled generics
+PASS mourning-all-blocked: convo opened — refused=false
+PASS mourning-all-blocked: reply is the dry line (carve-out holds, as on base) — "...Sorry, lost my train of thought."
+PASS mourning-all-blocked: no preamble-prefixed mourning line served — "...Sorry, lost my train of thought."
+PASS mourning-all-blocked: no wrong-dead line served — "...Sorry, lost my train of thought."
+
+ALL GREEN
+EXIT=0
+=== r262 escalator-cap ===
+req 1 return: As I said — You need to be right next to them, same side of the Haven door, to h
+req 2 return: Like I said — Move next to them, on the same side of the Haven door, to help.
+req 3 return: Still the same thing — Stand beside them first — same side of the Haven door — t
+req 4 return: I've told you three times now — Get to their side of the Haven door and stand ne
+req 5 return: We're going in circles — You need to be right next to them, same side of the Hav
+req 6 return: "Right. Done. Don't look so relieved."
+req 7 return: [object Object]
+req 8 return: We're going in circles — Get to their side of the Haven door and stand next to t
+transcript door lines: 8
+  t1: As I said — You need to be right next to them, same side of the Haven door, to help.
+  t2: Like I said — Move next to them, on the same side of the Haven door, to help.
+  t3: Still the same thing — Stand beside them first — same side of the Haven door — then help.
+  t4: I've told you three times now — Get to their side of the Haven door and stand next to them — then you can help
+  t5: We're going in circles — You need to be right next to them, same side of the Haven door, to help. Ask me somet
+  t6: We're going in circles — Move next to them, on the same side of the Haven door, to help. Ask me something else
+  t7: We're going in circles — Stand beside them first — same side of the Haven door — then help. Ask me something e
+  t8: We're going in circles — Get to their side of the Haven door and stand next to them — then you can help. Ask m
+spent[dlg:favor_requirements] after 8 presses: true
+RESULT: GREEN — favor-requirements escalator caps at "circles" instead of cycling back to "three times now"
+EXIT=0
+=== r254 multiwit ===
+PASS multiwit-fires: roster has >= 7 villagers to stage deaths from — roster=11
+PASS multiwit-fires: event resolves to multi-name mourning naming both dead — {"kind":"mourning","name":"Reagan","names":["the person in their 60s, with a slouched posture","Reagan"]}
+PASS multiwit-fires: >=1 witness opener in 7 sittings — wit openers=1 templates=opener:wit-there
+PASS multiwit-fires: every witness opener names the latest dead (Reagan) — "I was there when Reagan fell. I keep seeing it when I blink, and blinking doesn
+PASS multiwit-fires: no served line leaks a literal {mname}
+PASS multiwit-fires: no exhausted line served while variants remain — opener:multi-lost,next:fire-smaller,part:habit-for,opener:multi-gone,opener:wit-there,opener:world-continues,opener:multi-lost,unknown:"Same story, different day. The ending hasn't changed.",unknown:"We keep circling the same ground. Let's land somewhere else
+PASS multiwit-silent: roster has >= 7 villagers to stage deaths from — roster=11
+PASS multiwit-silent: event resolves to multi-name mourning naming both dead — {"kind":"mourning","name":"Natalie","names":["the person in their 60s, with a wiry build","Natalie"]}
+PASS multiwit-silent: 0 witness openers when the speaker witnessed neither death — wit hits=0 
+PASS multiwit-silent: no served line leaks a literal {mname}
+PASS multiwit-silent: no exhausted line served while variants remain — opener:multi-lost,next:fire-smaller,part:pick-up-share,opener:world-continues,opener:multi-gone,unknown:"I don't have more words for it. Some things just are.",unknown:"Everything I know about that fits in a thimble. You've seen,unknown:"I could keep talking, but I'd just be repeating myself with,unknown:"I've said all I know. The rest is just guessing."
+PASS multiwit-wrongdead: roster has >= 7 villagers to stage deaths from — roster=11
+PASS multiwit-wrongdead: event resolves to multi-name mourning naming both dead — {"kind":"mourning","name":"Otto","names":["the woman in her 60s","Otto"]}
+PASS multiwit-wrongdead: 0 witness openers when the speaker witnessed only the earlier death — wit hits=0 
+PASS multiwit-wrongdead: no served line leaks a literal {mname}
+PASS multiwit-wrongdead: no exhausted line served while variants remain — opener:multi-lost,next:bury-grieve,part:remember-them,opener:multi-gone,opener:multi-lost,unknown:"I've wrung that topic dry. It squeaked.",unknown:"That's the whole of it. The director's cut adds nothing.",unknown:"Ask me again in a few days. Maybe I'll have a better answer,unknown:"Let's file that under 'discussed' and move on with our live
+PASS multiwit-names-latest: roster has >= 7 villagers to stage deaths from — roster=11
+PASS multiwit-names-latest: event resolves to multi-name mourning naming both dead — {"kind":"mourning","name":"Jamal","names":["the person in their 40s, with a crooked nose","Jamal"]}
+PASS multiwit-names-latest: >=1 witness opener in 7 sittings — wit openers=2 templates=opener:wit-saw,opener:wit-there
+PASS multiwit-names-latest: no witness opener names the earlier dead (Bao) — "I saw Jamal go down. I did what I could. It wasn't enough, and I carry that now | "I was there when Jamal fell. I keep seeing it when I blink, and blinking doesn'
+PASS multiwit-names-latest: every witness opener names the latest dead (Jamal) — "I saw Jamal go down. I did what I could. It wasn't enough, and I carry that now | "I was there when Jamal fell. I keep seeing it when I blink, and blinking doesn'
+PASS multiwit-names-latest: no served line leaks a literal {mname}
+PASS multiwit-names-latest: no exhausted line served while variants remain — opener:multi-lost,next:fire-smaller,part:pick-up-share,opener:multi-lost,opener:wit-saw,opener:wit-there,opener:world-continues,unknown:"Same story, different day. The ending hasn't changed.",unknown:"I'm talked out on that topic. It's not you. It's the topic.
+
+ALL GREEN
+EXIT=0
+=== r232 relationship-mourning ===
+PASS bond-fires: roster has >= 7 villagers to stage deaths from — roster=11
+PASS bond-fires: staged bond reads back close — {"v":30,"depth":1,"day":40,"dayGain":0}
+PASS bond-fires: event resolves to named mourning for Leroy — {"kind":"mourning","name":"Leroy"}
+PASS bond-fires: cope pool holds the bond variant — "I {habitI}. It doesn't bring anyone back. It just keeps my hands from shaking."
+"I keep turning over the last thing {mn
+PASS bond-fires: next pool holds the bond variant
+PASS bond-fires: part pool holds the bond variant
+PASS bond-fires: >=1 bond opener in 7 sittings — bond openers=2 templates=opener:bond-knew,opener:bond-person
+PASS bond-fires: bond follow-up servings recorded — bond follow-ups=0 templates=none
+PASS bond-fires: no exhausted line served while variants remain — opener:bond-knew,next:bury-grieve,part:habit-for,opener:bond-person,opener:expect-fire,opener:burnt-piece,opener:world-continues,opener:owed-favor,unknown:"I've said all I know. The rest is just guessing."
+PASS bond-fires: no served line leaks a literal {mname}
+PASS bond-fires: every served opener names its dead — opener:bond-knew,opener:bond-person,opener:expect-fire,opener:burnt-piece,opener:world-continues,opener:owed-favor
+PASS bond-silent: roster has >= 7 villagers to stage deaths from — roster=11
+PASS bond-silent: event resolves to named mourning for Bill — {"kind":"mourning","name":"Bill"}
+PASS bond-silent: cope pool holds NO bond variant
+PASS bond-silent: next pool holds NO bond variant
+PASS bond-silent: part pool holds NO bond variant
+PASS bond-silent: 0 bond-variant servings in 7 sittings — bond hits=0 
+PASS bond-silent: no served line leaks a literal {mname}
+PASS bond-silent: every served opener names its dead — opener:dreamed,opener:world-continues,opener:expect-fire,opener:burnt-piece
+PASS veteran-fires: roster has >= 7 villagers to stage deaths from — roster=11
+PASS veteran-fires: event resolves to named mourning for Stephen — {"kind":"mourning","name":"Stephen"}
+PASS veteran-fires: >=1 veteran opener in 7 sittings — vet openers=2 templates=opener:vet-club,opener:vet-treeline
+PASS veteran-fires: no served line leaks a literal {mname}
+PASS veteran-silent: roster has >= 7 villagers to stage deaths from — roster=11
+PASS veteran-silent: event resolves to named mourning for Carl — {"kind":"mourning","name":"Carl"}
+PASS veteran-silent: 0 veteran openers when only the speaker is a veteran — vet hits=0 
+PASS veteran-silent: no served line leaks a literal {mname}
+PASS witness-fires: roster has >= 7 villagers to stage deaths from — roster=11
+PASS witness-fires: event resolves to named mourning for Emma — {"kind":"mourning","name":"Emma"}
+PASS witness-fires: >=1 witness opener in 7 sittings — wit openers=2 templates=opener:wit-saw,opener:wit-there
+PASS witness-fires: no served line leaks a literal {mname}
+PASS witness-silent: roster has >= 7 villagers to stage deaths from — roster=11
+PASS witness-silent: event resolves to named mourning for Fiona — {"kind":"mourning","name":"Fiona"}
+PASS witness-silent: 0 witness openers when the speaker did not witness — wit hits=0 
+PASS witness-silent: no served line leaks a literal {mname}
+PASS name-correct: roster has >= 7 villagers to stage deaths from — roster=11
+PASS name-correct: A's opener names the dead (Rosa) — "Since Rosa died... I keep expecting to see Rosa at the fire. Stupid."
+PASS name-correct: B's opener names the dead (Rosa) — "Rosa is gone and the world just... continues. That's the part I can't stand."
+PASS name-correct: no literal {mname} in any served line
+PASS name-correct: stranger speaker B serves 0 bond variants in one sitting — B bond hits=0 
+PASS name-correct: bonded speaker A may serve a bond variant (recorded, not asserted) — A bond hits=1 cope:bond-habit
+
+ALL GREEN
+EXIT=0
+=== r225 F5 harness ===
+
+1. Ledger-blocked settled favor — re-ask speaks a fresh variant (Farid d105)
+  ok   prior sitting poisoned the singleton
+  ok   prior sitting poisoned the need line
+  ok   opened a sitting
+  ok   the singleton IS run-blocked for this villager
+  ok   the need line IS run-blocked for this villager
+  ok   the turn ran
+  ok   the turn speaks a handled variant
+  ok   the turn does NOT speak the poisoned singleton
+  ok   the turn does NOT dry
+
+2. Settled favor asked twice in one sitting — variants differ, no deflection
+  ok   prior sitting poisoned the need line (guard rung blocked)
+  ok   opened a sitting
+  ok   turn 1 ran
+  ok   turn 1 speaks a handled variant
+  ok   turn 1 does NOT dry
+  ok   turn 2 ran
+  ok   turn 2 speaks a handled variant
+  ok   turn 2 does NOT dry
+  ok   turn 2 differs from turn 1 (variants cycle)
+
+3. Settled favor asked once, fresh — speaks a handled variant (good flow)
+  ok   opened a sitting
+  ok   the turn ran
+  ok   the turn speaks a handled variant
+  ok   the turn does NOT dry
+
+journey-endgame-r225-f5-settled-favor: 22 passed, 0 failed, 0 todo (phase 0)
+EXIT=0
+=== r258 selfwit ===
+PASS selfwit-excluded: roster has >= 3 villagers — roster=11
+PASS selfwit-excluded: precondition — bystander is in witnesses(6) — witnesses=["gen_924g2zy","gen_rh9inc9"]
+PASS selfwit-excluded: precondition — target is in witnesses(6) (the raw list sees the victim) — witnesses=["gen_924g2zy","gen_rh9inc9"]
+PASS selfwit-excluded: a killed outcome rolled within 60 plots — tries=9
+PASS selfwit-excluded: a corpse was registered for the target — cause=ambush
+PASS selfwit-excluded: corpse cause is ambush — cause=ambush
+PASS selfwit-excluded: the victim is NOT in their own corpse's witnesses — witnesses=["gen_rh9inc9"]
+PASS selfwit-excluded: the nearby bystander IS still in the corpse's witnesses — witnesses=["gen_rh9inc9"]
+PASS selfwit-far: roster has >= 3 villagers — roster=11
+PASS selfwit-far: precondition — bystander is in witnesses(6) — witnesses=["gen_x4xp8i0"]
+PASS selfwit-far: precondition — far target is NOT in witnesses(6) — witnesses=["gen_x4xp8i0"]
+PASS selfwit-far: a killed outcome rolled within 60 plots — tries=1
+PASS selfwit-far: a corpse was registered for the target — cause=ambush
+PASS selfwit-far: corpse cause is ambush — cause=ambush
+PASS selfwit-far: the victim is NOT in their own corpse's witnesses — witnesses=["gen_x4xp8i0"]
+PASS selfwit-far: the nearby bystander IS still in the corpse's witnesses — witnesses=["gen_x4xp8i0"]
+
+ALL GREEN
+EXIT=0
+=== r267 mourning-dry ===
+PASS collision: roster has >= 2 villagers — roster=11
+PASS collision: lately event is named mourning for Gilberto — {"kind":"mourning","name":"Gilberto","names":["Gilberto"],"sickDeath":false,"deadId":"gen_ioilx6p","witnesses":[]}
+PASS collision: mourning pool is the 5 generics — pool=5
+PASS collision: burnt-piece template present in pool
+PASS collision: clean filled line names the dead — "Gilberto always took the burnt piece. Said someone had to. I take it now."
+PASS collision: poisoned 4 filled templates
+PASS collision: convo opened — refused=false
+PASS collision: reply is NOT a dry line — "Gilberto always took the burnt piece. Said someone had to. I take it now."
+PASS collision: reply IS the clean burnt-piece line — "Gilberto always took the burnt piece. Said someone had to. I take it now."
+PASS collision: reply names the dead — "Gilberto always took the burnt piece. Said someone had to. I take it now."
+PASS collision: NO dry line anywhere in the transcript — dry line present in transcript
+PASS control: roster has >= 2 villagers — roster=11
+PASS control: lately event is named mourning for Alfredo — {"kind":"mourning","name":"Alfredo","names":["Alfredo"],"sickDeath":false,"deadId":"gen_j4f7cmt","witnesses":[]}
+PASS control: mourning pool is the 5 generics — pool=5
+PASS control: burnt-piece template present in pool
+PASS control: clean filled line names the dead — "Alfredo always took the burnt piece. Said someone had to. I take it now."
+PASS control: convo opened — refused=false
+PASS control: reply is NOT a dry line — "Since Alfredo died... I keep expecting to see Alfredo at the fire. Stupid."
+PASS control: reply names the dead — "Since Alfredo died... I keep expecting to see Alfredo at the fire. Stupid."
+PASS control: NO dry line anywhere in the transcript — dry line present in transcript
+PASS all-blocked: roster has >= 2 villagers — roster=11
+PASS all-blocked: lately event is named mourning for Dwayne — {"kind":"mourning","name":"Dwayne","names":["Dwayne"],"sickDeath":false,"deadId":"gen_s8mfmaw","witnesses":[]}
+PASS all-blocked: mourning pool is the 5 generics — pool=5
+PASS all-blocked: burnt-piece template present in pool
+PASS all-blocked: clean filled line names the dead — "Dwayne always took the burnt piece. Said someone had to. I take it now."
+PASS all-blocked: poisoned 5 filled templates
+PASS all-blocked: convo opened — refused=false
+PASS all-blocked: reply is the dry line (last-resort gap, as on base) — "...Sorry, lost my train of thought."
+PASS all-blocked: no wrong-dead line served — "...Sorry, lost my train of thought."
+
+ALL GREEN
+EXIT=0
+=== ALL REBASED PROOFS DONE ===
