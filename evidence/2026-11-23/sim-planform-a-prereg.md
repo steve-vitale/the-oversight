@@ -338,3 +338,67 @@ is the sibling arm's area. This arm's area is plan creation/seeding:
 `winPlanSeedFromFight`, the plan store, `winPlanCommitDeadTarget`'s
 plan reads. If a hook is needed in a file the sibling owns, STOP and
 report it to the coordinator instead of editing it.
+
+## 14. CORRECTION — re-freeze (2026-11-23 ~15:30 UTC, before the proof test, before any judged run)
+
+FROZEN_BASE was re-frozen from `43ebee38cae79a7ba12d149dd8b8dc15b619c8c5`
+(the master HEAD at branch time, §2.3) to
+`969839c833599f23e286d1a6a528e21de89ec9fd` (the prereg commit — the
+prereg was committed before the instrument was built, so the anchor
+follows the prereg commit, per the launchsilence precedent of
+anchoring on the last committed state before the runs). Zero src/js
+diff between the two bases (`git diff 43ebee38..969839c83 -- src/` is
+empty — the prereg commit adds only this file), so the game code the
+corpus runs on is identical; this is a re-anchor, not a re-record.
+The frozen bars are unchanged. The driver literal and the proof
+test's FROZEN_BASE===HEAD check read the new anchor.
+
+## 15. CLARIFICATION — A1 for wave-3 meetings (2026-11-23 ~15:30 UTC, before the proof test, before any judged run)
+
+§5 rule A1 freezes `seeded` as "a seed call set target = mid with
+needWave >= 4". That reading is exact for the judged wave-4 set
+(and for wave-5: needWave 5). For wave-3 meetings the same rule
+must read needWave == the monster's wave (a wave-3 seed sets
+needWave 3 — the >= 4 reading would call every wave-3 seed a
+bounce, which is false: the call did seed a wave-3 plan). The
+analyzer implements the == reading; on the judged wave-4 set the
+two readings coincide (needWave == 4 ⟺ needWave >= 4 given the seed
+sets needWave = mdef.wave). No bar threshold changed; the wave-3
+profile comparison rests on the == reading.
+
+## 16. AMENDMENT — B6 implements the frozen tile test (2026-11-23 ~17:00 UTC, adoption, before any judgment committed)
+
+The pilot analyzer run (8 seeds 107633–107640) returned 197 wave-4
+meetings, 187 classified (94.9%, bar 1 passes), 10 unclassified —
+all the same shape: world-tick `vFlee`, monster tile (4,4) ==
+Haven tile (4,4), `lingering=false`, `optsRaid=false`, caller
+`resolveWildMonsterEncounter`. The analyzer's B6 gated on
+`meeting.lingering`; the frozen §5 B6 gates on the TILE
+(monsterTile == havenTile). The analyzer deviated from the frozen
+rule — and the lingering test can never fire at all: a lingering
+fight is origin `aid` (the `aidFight` caller frame), so B2 fires
+first; the pilot's B6 count was 0 on all 197 meetings.
+
+A replay probe on seed 107633 (copied driver + `resolveWildMonsterEncounter`
+wrap, /tmp/probe-107633.log, corpus identical to the pilot's except
+caller-frame strings) proved the mechanism: for the d60
+app_mgpspjjq4/audit fight the encounter opts carry `raid:true`
+(seed suppressed by `!opts.raid`, correctly) while the fieldFight
+opts the driver reads carry no raid flag at all
+(`resolveWildMonsterEncounter` passes only allies/allyVids to
+`fieldFight`) — so the driver's `optsRaid` field reads false on
+every raid, and the tile is the only correct raid signal in the
+recorded row. All 23 unclassified meetings on the pilot band
+(W3 7 + W4 10 + W5 6) are world-tick `vFlee` on the Haven tile.
+
+Correction: the analyzer's B6 now implements the frozen §5 tile
+test (`atHavenTile`, already computed and previously unused). The
+B6 fixtures in the analyzer selftest and the proof test's synthetic
+band now set `lingering:false` with the monster on the Haven tile,
+pinning that the tile decides. The frozen bars are unchanged; the
+pilot corpus is unchanged (no re-record); the judgment below is
+made on the corrected analyzer over the same frozen corpus. The
+driver's `optsRaid` field stays as recorded (a latent instrument
+defect: it reads the fieldFight opts, which never carry the raid
+flag) — noted in metric review, not fixed here because the frozen
+B6 does not use it.
