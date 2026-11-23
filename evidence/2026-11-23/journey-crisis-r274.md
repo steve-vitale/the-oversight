@@ -292,10 +292,15 @@ against the standing set (r264: 332/12, 0 attributable), then merge
 
 - Worktree: `~/workspace/worktrees/journey2-crisis`, branch
   `journey2-crisis`, base `70120c554`. Committed below (safe-commit);
-  NOT merged. Lock `hidden_files/playtest-loop-2.lock` still held
-  (run_id `playtest-loop-2-20261123T1100Z`) — DO NOT delete until the
-  merge lands; the lock protects the unmerged worktree from the next
-  Lane B run.
+  NOT merged. **MASTER MOVED during this run:** Lane A r273 landed
+  (`cc5fc220a`, `db2e9a3df`) + ship version bump (`fdd7042b8`) — the
+  finisher MUST rebase `journey2-crisis` onto `fdd7042b8` and re-run
+  both proof tests before merging (ff-only will fail on the stale
+  base). The 3 new commits touch NONE of this run's files, so the
+  rebase should be clean. Lock `hidden_files/playtest-loop-2.lock`
+  still held (run_id `playtest-loop-2-20261123T1100Z`) — DO NOT
+  delete until the merge lands; the lock protects the unmerged
+  worktree from the next Lane B run.
 - Finisher steps, in order: (1) re-verify worktree state + heartbeat;
   (2) gate (see above); (3) `git merge --ff-only journey2-crisis`
   in the main tree (rebase + re-run proofs first if master moved);
