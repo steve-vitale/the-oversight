@@ -51,6 +51,7 @@ const SPEARGATE_ON = process.env.SPEARGATE === '1';
 const GUNRATE_ON = process.env.GUNRATE === '1';
 const CELLGATE_ON = process.env.CELLGATE === '1';
 const KILLBUNDLE_ON = process.env.KILLBUNDLE === '1';
+const STAGE_SEAR_ON = process.env.STAGE_SEAR === '1';
 const LEND_ON = process.env.LEND === '1';
 let GUNRATE_PRESENT = false;
 try {
@@ -118,6 +119,24 @@ function writeRobust(filePath, data) {
   }
 }
 
+// STAGE_SEAR (sim-killbundle-b): stage one armed arrival per seed —
+// the first villagerKillLoot call's roll is forced to 'searcaster'
+// (the natural roll is discarded), then rollAlienLoot is restored
+// in a finally. Once-only per wrapper instance (one per seed, created
+// in oneRun). Env-gated, arm-only; the natural loot stream is untouched
+// after the first call. Exported for the arm proof test.
+function stageFirstKillLoot(orig) {
+  let forced = false;
+  return function (vid, mdef) {
+    if (forced) return orig.apply(this, arguments);
+    forced = true;
+    const origRoll = this.rollAlienLoot;
+    try {
+      this.rollAlienLoot = function () { return 'searcaster'; };
+      return orig.apply(this, arguments);
+    } finally { this.rollAlienLoot = origRoll; }
+  };
+}
 function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; } catch (e) { return 0; } }
 function itemIdOf(e) {
   if (!e) return null;
@@ -363,12 +382,15 @@ async function oneRun(seed) {
     };
   });
   // Kill-loot drops: pre/post snapshot diff sees the bundle (it bypasses
-  // alienLootGrant, so the grant wrap alone cannot see it).
+  // alienLootGrant, so the grant wrap alone cannot see it). STAGE_SEAR
+  // (sim-killbundle-b) routes the first call per seed through the staged
+  // forcer so the seed carries exactly one guaranteed armed arrival.
   wrapGame('villagerKillLoot', function (orig) {
+    const inner = STAGE_SEAR_ON ? stageFirstKillLoot(orig) : orig;
     return function (vid, mdef) {
       let before = null;
       try { before = snapshotGunCells(this); } catch (e) {}
-      const dropId = orig.apply(this, arguments);
+      const dropId = inner.apply(this, arguments);
       try {
         let after = null, gains = [];
         try { after = snapshotGunCells(this); gains = diffGunCells(before, after); } catch (e) {}
@@ -458,6 +480,7 @@ async function oneRun(seed) {
     gunrateOn: GUNRATE_ON, gunratePresent: GUNRATE_PRESENT,
     cellgateOn: CELLGATE_ON, cellgatePresent: CELLGATE_PRESENT,
     killbundleOn: KILLBUNDLE_ON, killbundlePresent: KILLBUNDLE_PRESENT,
+    stageSearOn: STAGE_SEAR_ON,
     lendOn: LEND_ON, lendPresent: LEND_PRESENT,
     senseexpedOn: SENSEEXPED_ON, senseexpedPresent: SENSE_PRESENT,
     bowopenOn: BOWOPEN_ON, fightally2On: FIGHTALLY2_ON, speargateOn: SPEARGATE_ON,
@@ -485,6 +508,7 @@ if (require.main === module) (async function () {
   if (!GUNRATE_ON) { console.error('KILLLOOTBUNDLE STOP: GUNRATE=1 required (substrate).'); process.exit(2); }
   if (!CELLGATE_ON) { console.error('KILLLOOTBUNDLE STOP: CELLGATE=1 required (substrate).'); process.exit(2); }
   if (MODE === 'arm' && !KILLBUNDLE_ON) { console.error('KILLLOOTBUNDLE STOP: arm leg requires KILLBUNDLE=1.'); process.exit(2); }
+  if (STAGE_SEAR_ON && (MODE !== 'arm' || !KILLBUNDLE_ON)) { console.error('KILLLOOTBUNDLE STOP: STAGE_SEAR=1 requires MODE=arm + KILLBUNDLE=1.'); process.exit(2); }
   if (MODE === 'ctl' && KILLBUNDLE_ON) { console.error('KILLLOOTBUNDLE STOP: ctl leg requires KILLBUNDLE unset.'); process.exit(2); }
   if (LEND_ON) { console.error('KILLLOOTBUNDLE STOP: LEND must be unset.'); process.exit(2); }
   if (process.env.PRESENCE === '1') { console.error('KILLLOOTBUNDLE STOP: PRESENCE must be unset.'); process.exit(2); }
@@ -523,6 +547,7 @@ if (require.main === module) (async function () {
       days: out.days, endReason: out.endReason, won: out.won,
       maxWave: out.maxWave, standing: out.standing, scaleRank: out.scaleRank,
       deaths: out.deaths.length,
+      stageSearOn: out.stageSearOn,
       contests: out.contestEvents ? out.contestEvents.length : 0,
       prizeRolls: out.prizeEvents ? out.prizeEvents.length : 0,
       searGrants: searGrants,
@@ -539,6 +564,7 @@ if (require.main === module) (async function () {
 })().catch(function (e) { console.error(e.stack); process.exitCode = 1; });
 
 module.exports = { oneRun: oneRun, gunLocationsOf: gunLocationsOf,
+  stageFirstKillLoot: stageFirstKillLoot,
   classifyGrantCaller: classifyGrantCaller,
   grantRecipientOf: grantRecipientOf, firstCallerFrame: firstCallerFrame,
   snapshotGunCells: snapshotGunCells, diffGunCells: diffGunCells,
