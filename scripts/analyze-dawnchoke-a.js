@@ -24,6 +24,15 @@
 //     [--ctl-brain <sha> --arm-brain <sha> --ctl-winplan <sha> --arm-winplan <sha>]
 //   node scripts/analyze-dawnchoke-a.js --diag-only --ctl <ctl-dir> [--seeds ...]
 //   node scripts/analyze-dawnchoke-a.js --selftest
+// Det-gate comparison is ORDER-INSENSITIVE (sim-detgate-order-a):
+// party/member arrays are deep-sorted, companion/companion2/
+// companion3 are treated as a set, beat-text name lists are sorted,
+// and the plan targets of a departure party's members are compared
+// as a multiset over the party (villager-brain.js vbrainExecuteDepart
+// copies the leader's target to companions 2 and 3 but NOT to
+// companion 1, so which member keeps a null target is a function of
+// party position). See canonicalMultisets below. A difference that
+// survives canonicalization is a real divergence.
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -69,39 +78,278 @@ const DET_STREAMS = ['departCalls', 'scorePicks', 'v4departs', 'planSeeds', 'v4f
   'volleyEvents', 'prizeEvents', 'grantEvents', 'contestEvents', 'deaths',
   'planCensus', 'dawnPool', 'needWaveCopies', 'departBeats', 'reseedBeats', 'beatLines'];
 
-// Per-day row multiset for one stream: day -> sorted JSON strings.
-// Order-insensitive: two legs recording the same rows in a different
-// order are identical.
-function streamDayMultisets(rows) {
-  const byDay = {};
-  for (const r of (rows || [])) {
-    const d = (r && r.day != null) ? (r.day | 0) : 0;
-    if (!byDay[d]) byDay[d] = [];
-    byDay[d].push(JSON.stringify(r));
+// ---- Order-insensitive comparison (sim-detgate-order-a) ----
+// The det-gate compares the two legs' recorded streams before the
+// bound. Party order is a recording artifact, not a state
+// difference: widening the companion pool re-orders findCompanion's
+// candidates, so a departure that happens on BOTH legs is recorded
+// with its members in a different order — and the order propagates
+// into scalar fields (villager-brain.js vbrainExecuteDepart copies
+// the leader's plan target to companions 2 and 3 but NOT to
+// companion 1, so WHICH member keeps a null target is a function of
+// party position). The canonicalization below makes the comparison
+// blind to party order while preserving every order-free fact:
+//   (a) all within-row arrays are deep-sorted (object keys sorted
+//       too, so JSON.stringify is deterministic);
+//   (b) companion/companion2/companion3 are treated as a set;
+//   (c) the "sets out with A, B and C" name list in beatLines is
+//       sorted (the split is deterministic, so a companion named by
+//       a generated physical description — which contains commas —
+//       still canonicalizes);
+//   (d) the plan targets of a departure party's members are
+//       compared as a MULTISET over the party (sorted targets
+//       assigned to sorted member vids). A party persists across
+//       the expedition, so the groups are built per day from every
+//       source that records party membership (v4departs, planCensus
+//       plan.party, v4fights lead + planParty + allies), not just
+//       on the departure day; the gate is "party plan" (a party
+//       list, or the post-departure 'hunt' stage where no list is
+//       recorded).
+// A difference that survives canonicalization is a real divergence.
+// Canonicalization applies ONLY to the det-gate divergence check;
+// all metric counting reads the raw rows.
+// Boundaries (frozen, sim-detgate-order-a prereg §4): a target
+// difference that CHANGES the party's target multiset still
+// diverges; a plan-target difference for a villager who is NOT a
+// member of a departure that day still diverges; a difference in
+// any other field still diverges.
+function canonValue(v) {
+  if (Array.isArray(v)) {
+    const arr = v.map(canonValue);
+    arr.sort(function (a, b) {
+      const sa = JSON.stringify(a), sb = JSON.stringify(b);
+      return sa < sb ? -1 : sa > sb ? 1 : 0;
+    });
+    return arr;
   }
-  for (const d of Object.keys(byDay)) byDay[d].sort();
-  return byDay;
+  if (v && typeof v === 'object') {
+    const o = {};
+    for (const k of Object.keys(v).sort()) o[k] = canonValue(v[k]);
+    return o;
+  }
+  return v;
+}
+function targetCompare(a, b) {
+  if (a == null && b == null) return 0;
+  if (a == null) return -1;
+  if (b == null) return 1;
+  const sa = String(a), sb = String(b);
+  return sa < sb ? -1 : sa > sb ? 1 : 0;
+}
+function canonicalizeRow(stream, row) {
+  const r = canonValue(row || {});
+  // (b) Companion triple as a set.
+  if (r.companion !== undefined || r.companion2 !== undefined || r.companion3 !== undefined) {
+    const vals = [r.companion, r.companion2, r.companion3].filter(function (x) { return x != null; });
+    vals.sort();
+    r.companion = vals.length > 0 ? vals[0] : null;
+    r.companion2 = vals.length > 1 ? vals[1] : null;
+    r.companion3 = vals.length > 2 ? vals[2] : null;
+  }
+  // (c) Beat-text name order.
+  if (stream === 'beatLines' && typeof r.text === 'string') {
+    const m = r.text.match(/sets out with (.+?) after /);
+    if (m) {
+      const parts = m[1].split(/,\s*|\s+and\s+/).filter(function (x) { return x !== ''; });
+      parts.sort();
+      let rejoined;
+      if (parts.length <= 1) rejoined = parts.join('');
+      else rejoined = parts.slice(0, -1).join(', ') + ' and ' + parts[parts.length - 1];
+      const prefix = 'sets out with ';
+      r.text = r.text.slice(0, m.index + prefix.length) + rejoined +
+        r.text.slice(m.index + prefix.length + m[1].length);
+    }
+  }
+  return r;
+}
+// Visit every {holderVid, plan} pair in a canonicalized row.
+function forEachPlan(stream, row, fn) {
+  if (stream === 'planCensus') {
+    if (row.attrs && row.attrs.plan) fn(row.vid, row.attrs.plan);
+  } else if (stream === 'planSeeds') {
+    if (row.before) fn(row.vid, row.before);
+    if (row.after) fn(row.vid, row.after);
+  } else if (stream === 'v4fights') {
+    if (row.lead && row.lead.plan) fn(row.lead.vid, row.lead.plan);
+    for (const a of (row.allies || [])) if (a && a.plan) fn(a.vid, a.plan);
+  } else if (stream === 'v4departs') {
+    for (const m of (row.members || [])) if (m && m.plan) fn(m.vid, m.plan);
+  }
+}
+// A party plan: the plan carries a party list, or is in the
+// post-departure 'hunt' stage (planSeeds snapshots carry no party
+// list, so stage is the only signal there).
+function isPartyPlan(plan) {
+  return !!plan && (((plan.party && plan.party.length) || plan.stage === 'hunt'));
+}
+// A party member's plan target on a day, from the leg's own
+// snapshots (priority: planCensus, v4departs members, v4fights
+// lead/allies, planSeeds after/before). Returns undefined when no
+// party-plan snapshot exists for the member that day; null is a
+// FOUND value (the member's plan genuinely has no target). The
+// census is taken at end of day (driver policy.daily finally), so a
+// census plan is the current party plan, not a pre-departure one.
+function memberTarget(canonRows, day, vid) {
+  for (const r of (canonRows.planCensus || [])) {
+    if ((r.day | 0) === day && r.vid === vid && r.attrs && isPartyPlan(r.attrs.plan)) {
+      return r.attrs.plan.target != null ? r.attrs.plan.target : null;
+    }
+  }
+  for (const r of (canonRows.v4departs || [])) {
+    if ((r.day | 0) !== day) continue;
+    for (const m of (r.members || [])) {
+      if (m && m.vid === vid && m.plan) {
+        return m.plan.target != null ? m.plan.target : null;
+      }
+    }
+  }
+  for (const r of (canonRows.v4fights || [])) {
+    if ((r.day | 0) !== day) continue;
+    if (r.lead && r.lead.vid === vid && r.lead.plan) {
+      return r.lead.plan.target != null ? r.lead.plan.target : null;
+    }
+    for (const a of (r.allies || [])) {
+      if (a && a.vid === vid && a.plan) {
+        return a.plan.target != null ? a.plan.target : null;
+      }
+    }
+  }
+  for (const r of (canonRows.planSeeds || [])) {
+    if ((r.day | 0) !== day || r.vid !== vid) continue;
+    if (r.after && r.after.stage === 'hunt') {
+      return r.after.target != null ? r.after.target : null;
+    }
+    if (r.before && r.before.stage === 'hunt') {
+      return r.before.target != null ? r.before.target : null;
+    }
+  }
+  return undefined;
+}
+function unionFindGroups(sets) {
+  const parent = {};
+  function find(x) {
+    while (parent[x] !== x) { parent[x] = parent[parent[x]]; x = parent[x]; }
+    return x;
+  }
+  function union(a, b) {
+    const ra = find(a), rb = find(b);
+    if (ra !== rb) parent[ra] = rb;
+  }
+  for (const s of sets) for (const m of s) if (!(m in parent)) parent[m] = m;
+  for (const s of sets) for (let i = 1; i < s.length; i++) union(s[0], s[i]);
+  const groups = {};
+  for (const m of Object.keys(parent)) {
+    const r = find(m);
+    if (!groups[r]) groups[r] = [];
+    groups[r].push(m);
+  }
+  return Object.keys(groups).map(function (k) { return groups[k].sort(); });
+}
+// Per-stream per-day row multisets, canonicalized (order-insensitive
+// per §4): day -> sorted canonical JSON strings. Two legs recording
+// the same departure with its members in a different order are
+// identical here.
+function canonicalMultisets(raw) {
+  const canonRows = {};
+  for (const stream of DET_STREAMS) {
+    canonRows[stream] = (raw[stream] || []).map(function (r) { return canonicalizeRow(stream, r); });
+  }
+  // (d) Party-level plan-target multiset. A departure party persists
+  // across the expedition: the plan targets set at departure (with
+  // the companion-1 asymmetry) are still carried when the same party
+  // fights again the next day, so the multiset is tracked per party
+  // per day, not just on the departure day. Groups are built per day
+  // from every source that records party membership — v4departs
+  // (leader + party), planCensus (a member's plan.party, non-empty),
+  // v4fights (lead + planParty + allies) — and overlapping sets are
+  // merged (a villager belongs to at most one party a day).
+  const setsByDay = {};
+  function addSet(day, members) {
+    const clean = (members || []).filter(function (x) { return x != null; });
+    if (clean.length < 2) return; // a party needs at least leader + 1
+    if (!setsByDay[day]) setsByDay[day] = [];
+    setsByDay[day].push(clean);
+  }
+  for (const r of (canonRows.v4departs || [])) addSet(r.day | 0, [r.vid].concat(r.party || []));
+  for (const r of (canonRows.planCensus || [])) {
+    const p = r.attrs && r.attrs.plan;
+    if (p && p.party && p.party.length) addSet(r.day | 0, [r.vid].concat(p.party));
+  }
+  for (const r of (canonRows.v4fights || [])) {
+    const members = [r.vid].concat(r.planParty || []);
+    for (const a of (r.allies || [])) if (a && a.vid) members.push(a.vid);
+    if (r.lead && r.lead.vid) members.push(r.lead.vid);
+    addSet(r.day | 0, members);
+  }
+  const groupsByDay = {};
+  for (const day of Object.keys(setsByDay)) groupsByDay[day] = unionFindGroups(setsByDay[day]);
+  const assignment = {}; // "day|vid" -> canonical target
+  for (const day of Object.keys(groupsByDay)) {
+    for (const members of groupsByDay[day]) {
+      const found = {};
+      for (const m of members) {
+        const t = memberTarget(canonRows, +day, m);
+        if (t !== undefined) found[m] = t;
+      }
+      const withTargets = Object.keys(found).sort();
+      if (!withTargets.length) continue;
+      const targets = withTargets.map(function (m) { return found[m]; }).sort(targetCompare);
+      for (let i = 0; i < withTargets.length; i++) {
+        const key = day + '|' + withTargets[i];
+        if (!(key in assignment)) assignment[key] = targets[i];
+      }
+    }
+  }
+  // Apply the assignment to every party-plan occurrence for group
+  // members that day.
+  for (const stream of ['planCensus', 'planSeeds', 'v4fights', 'v4departs']) {
+    for (const r of (canonRows[stream] || [])) {
+      const day = (r.day | 0);
+      forEachPlan(stream, r, function (vid, plan) {
+        const key = day + '|' + vid;
+        if ((key in assignment) && isPartyPlan(plan)) plan.target = assignment[key];
+      });
+    }
+  }
+  const out = {};
+  for (const stream of DET_STREAMS) {
+    const byDay = {};
+    for (const r of (canonRows[stream] || [])) {
+      const d = (r && r.day != null) ? (r.day | 0) : 0;
+      if (!byDay[d]) byDay[d] = [];
+      // Re-canonicalize here, not just in step 1: the step-4 target
+      // reassignment changes plan objects inside member/ally arrays,
+      // so an array sorted before the reassignment can sit in a
+      // different order than the same set sorted after it. Sorting
+      // the final values makes the order deterministic across legs.
+      byDay[d].push(JSON.stringify(canonValue(r)));
+    }
+    for (const d of Object.keys(byDay)) byDay[d].sort();
+    out[stream] = byDay;
+  }
+  return out;
 }
 
-// Earliest day on which any DET_STREAM's per-day row multiset
-// differs between the legs (null when the legs are identical on all
-// recorded streams).
-function firstDivergenceDay(ctlRow, armRow) {
+// Earliest day on which any DET_STREAM's canonical per-day row
+// multiset differs between the legs (null when the legs are
+// identical on all recorded streams, up to party order).
+function firstDivergenceDayFromCanon(c, a) {
   let first = null;
   for (const stream of DET_STREAMS) {
-    const c = streamDayMultisets(ctlRow.raw[stream]);
-    const a = streamDayMultisets(armRow.raw[stream]);
     const days = {};
-    for (const d of Object.keys(c)) days[d] = true;
-    for (const d of Object.keys(a)) days[d] = true;
+    for (const d of Object.keys(c[stream] || {})) days[d] = true;
+    for (const d of Object.keys(a[stream] || {})) days[d] = true;
     for (const d of Object.keys(days).map(Number).sort(function (x, y) { return x - y; })) {
-      if (JSON.stringify(c[d] || []) !== JSON.stringify(a[d] || [])) {
+      if (JSON.stringify(c[stream][d] || []) !== JSON.stringify(a[stream][d] || [])) {
         if (first == null || d < first) first = d;
         break; // earliest differing day for this stream; other streams may be earlier
       }
     }
   }
   return first;
+}
+function firstDivergenceDay(ctlRow, armRow) {
+  return firstDivergenceDayFromCanon(canonicalMultisets(ctlRow.raw), canonicalMultisets(armRow.raw));
 }
 
 // Earliest day the armed leg records a brain-path depart call
@@ -294,7 +542,9 @@ function loadLeg(dir, mode, seeds) {
 
 function detGateForSeed(ctlRow, armRow) {
   const firstExtra = firstExtraDepartDay(ctlRow, armRow);
-  const firstDiv = firstDivergenceDay(ctlRow, armRow);
+  const cCanon = canonicalMultisets(ctlRow.raw);
+  const aCanon = canonicalMultisets(armRow.raw);
+  const firstDiv = firstDivergenceDayFromCanon(cCanon, aCanon);
   const bound = (firstExtra == null) ? firstDiv
     : (firstDiv == null) ? firstExtra : Math.min(firstExtra, firstDiv);
   const detail = { seed: ctlRow.seed, bound: bound,
@@ -303,10 +553,10 @@ function detGateForSeed(ctlRow, armRow) {
     detail.mismatches.push('ctl leg recorded ' + ctlRow.ctlReleaseRows + ' first-release rows (must be 0)');
   }
   // Pre-bound streams identical (verified independently of the bound
-  // computation: per-day multisets for days < bound).
+  // computation: canonical per-day multisets for days < bound).
   for (const stream of DET_STREAMS) {
-    const c = streamDayMultisets(ctlRow.raw[stream]);
-    const a = streamDayMultisets(armRow.raw[stream]);
+    const c = cCanon[stream];
+    const a = aCanon[stream];
     const days = {};
     for (const d of Object.keys(c)) if (bound == null || (+d) < bound) days[d] = true;
     for (const d of Object.keys(a)) if (bound == null || (+d) < bound) days[d] = true;
@@ -726,6 +976,167 @@ function selftest() {
   check('total-deaths bar fails at +6 mean', v10b.bars.totalDeaths === false);
   const v10c = analyze(deathLeg('ctl', 10), deathLeg('arm', 14), anchorOk);
   check('deaths-per-extra-launch is null when launches do not rise', v10c.deathsPerExtraLaunch == null);
+  // 11. Order-insensitive det-gate (sim-detgate-order-a §4):
+  // party/member/companion order, beat-text name order, and the
+  // party plan-target multiset are NOT divergences; a multiset-
+  // changing target difference and a non-party target difference ARE.
+  function huntPlan(target, party) {
+    return { stage: 'hunt', target: target, needWave: 4, party: (party || []).slice() };
+  }
+  function departRow(day, vid, party, targetByVid) {
+    const members = [vid].concat(party).map(function (m) {
+      return { vid: m, plan: { stage: 'hunt',
+        target: (targetByVid && targetByVid[m] !== undefined) ? targetByVid[m] : 'herald',
+        needWave: 4, party: [] } };
+    });
+    return { day: day, vid: vid, source: 'brain', result: 'launch',
+      winPlanAction: 'party_launch',
+      companion: party[0] || null, companion2: party[1] || null, companion3: party[2] || null,
+      stage: 'hunt', target: 'herald', needWave: 4,
+      party: party.slice(), partySize: party.length + 1, members: members };
+  }
+  function departRowNoPlans(day, vid, party) {
+    return { day: day, vid: vid, source: 'brain', result: 'launch',
+      winPlanAction: 'party_launch',
+      companion: party[0] || null, companion2: party[1] || null, companion3: party[2] || null,
+      stage: 'hunt', target: 'herald', needWave: 4,
+      party: party.slice(), partySize: party.length + 1,
+      members: [vid].concat(party).map(function (m) { return { vid: m }; }) };
+  }
+  function seedRow(day, vid, target) {
+    return { day: day, vid: vid, mid: 'herald', wave: 4, outcome: 'fled', seeded: true,
+      before: { stage: 'hunt', target: target, needWave: 4 },
+      after: { stage: 'hunt', target: target, needWave: 4 } };
+  }
+  function pairVerdict(ctlSpec, armSpec) {
+    return analyze([legRows('ctl', [ctlSpec])[0]], [legRows('arm', [armSpec])[0]], {});
+  }
+  function extraCall() { return call(90, 'alice', { commitWinPlanAction: null, result: 'normal' }); }
+  // A. Party / member / companion order only.
+  const vA = pairVerdict(
+    { departCalls: [attemptCall(10, 'alice')],
+      v4departs: [departRow(10, 'alice', ['bob', 'carol'], { alice: 'herald', bob: 'herald', carol: 'herald' })],
+      planCensus: [
+        censusRow(10, 'alice', { plan: huntPlan('herald', ['bob', 'carol']) }),
+        censusRow(10, 'bob', { plan: huntPlan('herald', ['alice', 'carol']) }),
+        censusRow(10, 'carol', { plan: huntPlan('herald', ['alice', 'bob']) }) ] },
+    { departCalls: [attemptCall(10, 'alice'), extraCall()],
+      v4departs: [departRow(10, 'alice', ['carol', 'bob'], { alice: 'herald', bob: 'herald', carol: 'herald' })],
+      planCensus: [
+        censusRow(10, 'alice', { plan: huntPlan('herald', ['carol', 'bob']) }),
+        censusRow(10, 'bob', { plan: huntPlan('herald', ['alice', 'carol']) }),
+        censusRow(10, 'carol', { plan: huntPlan('herald', ['alice', 'bob']) }) ] });
+  check('order-insensitive: party/member/companion order is not a divergence',
+    vA.bars.detGate === true && vA.det[0].firstDivergenceDay === 90 && vA.det[0].firstExtraDepartDay === 90);
+  // B. Party plan-target multiset swap (companion-1 keeps null).
+  const vB = pairVerdict(
+    { departCalls: [attemptCall(10, 'alice')],
+      v4departs: [departRow(10, 'alice', ['bob', 'carol'], { alice: 'herald', bob: null, carol: 'herald' })],
+      planCensus: [
+        censusRow(10, 'alice', { plan: huntPlan('herald', ['bob', 'carol']) }),
+        censusRow(10, 'bob', { plan: huntPlan(null, ['alice', 'carol']) }),
+        censusRow(10, 'carol', { plan: huntPlan('herald', ['alice', 'bob']) }) ] },
+    { departCalls: [attemptCall(10, 'alice'), extraCall()],
+      v4departs: [departRow(10, 'alice', ['carol', 'bob'], { alice: 'herald', bob: 'herald', carol: null })],
+      planCensus: [
+        censusRow(10, 'alice', { plan: huntPlan('herald', ['carol', 'bob']) }),
+        censusRow(10, 'bob', { plan: huntPlan('herald', ['alice', 'carol']) }),
+        censusRow(10, 'carol', { plan: huntPlan(null, ['alice', 'bob']) }) ] });
+  check('order-insensitive: party plan-target multiset swap is not a divergence',
+    vB.bars.detGate === true && vB.det[0].firstDivergenceDay === 90);
+  // C. Beat-text name order.
+  const vC = pairVerdict(
+    { departCalls: [attemptCall(10, 'alice')],
+      beatLines: [{ day: 10, text: '📺 SYSTEM: "Yara sets out with Ofelia, Thabo and Vasyl after The Herald — the fire marks the trail."' }] },
+    { departCalls: [attemptCall(10, 'alice'), extraCall()],
+      beatLines: [{ day: 10, text: '📺 SYSTEM: "Yara sets out with Thabo, Ofelia and Vasyl after The Herald — the fire marks the trail."' }] });
+  check('order-insensitive: beat-text name order is not a divergence',
+    vC.bars.detGate === true && vC.det[0].firstDivergenceDay === 90);
+  // D. departBeats launched order.
+  const vD = pairVerdict(
+    { departCalls: [attemptCall(10, 'alice')],
+      departBeats: [{ day: 10, vid: 'alice', launched: ['bob', 'carol'], target: 'herald', needWave: 4, ret: true, reseedSpoke: false, ordinarySpoke: true }] },
+    { departCalls: [attemptCall(10, 'alice'), extraCall()],
+      departBeats: [{ day: 10, vid: 'alice', launched: ['carol', 'bob'], target: 'herald', needWave: 4, ret: true, reseedSpoke: false, ordinarySpoke: true }] });
+  check('order-insensitive: departBeats launched order is not a divergence',
+    vD.bars.detGate === true && vD.det[0].firstDivergenceDay === 90);
+  // E. Multiset-changing target difference still diverges.
+  const vE = pairVerdict(
+    { departCalls: [attemptCall(10, 'alice')],
+      v4departs: [departRow(10, 'alice', ['bob', 'carol'], { alice: 'herald', bob: null, carol: 'herald' })],
+      planCensus: [
+        censusRow(10, 'alice', { plan: huntPlan('herald', ['bob', 'carol']) }),
+        censusRow(10, 'bob', { plan: huntPlan(null, ['alice', 'carol']) }),
+        censusRow(10, 'carol', { plan: huntPlan('herald', ['alice', 'bob']) }) ] },
+    { departCalls: [attemptCall(10, 'alice'), extraCall()],
+      v4departs: [departRow(10, 'alice', ['bob', 'carol'], { alice: 'herald', bob: 'eulogy', carol: 'herald' })],
+      planCensus: [
+        censusRow(10, 'alice', { plan: huntPlan('herald', ['bob', 'carol']) }),
+        censusRow(10, 'bob', { plan: huntPlan('eulogy', ['alice', 'carol']) }),
+        censusRow(10, 'carol', { plan: huntPlan('herald', ['alice', 'bob']) }) ] });
+  check('order-insensitive: multiset-changing target difference still diverges',
+    vE.bars.detGate === false && vE.det[0].firstDivergenceDay === 10 && vE.det[0].firstExtraDepartDay === 90);
+  // F. Non-party plan-target difference still diverges.
+  const vF = pairVerdict(
+    { departCalls: [attemptCall(10, 'alice')],
+      planCensus: [censusRow(10, 'dave', { plan: huntPlan(null, []) })] },
+    { departCalls: [attemptCall(10, 'alice'), extraCall()],
+      planCensus: [censusRow(10, 'dave', { plan: huntPlan('herald', []) })] });
+  check('order-insensitive: non-party plan-target difference still diverges',
+    vF.bars.detGate === false && vF.det[0].firstDivergenceDay === 10);
+  // G. planSeeds before/after target swap (no census rows: the
+  // collection falls through to the planSeeds snapshots).
+  const vG = pairVerdict(
+    { departCalls: [attemptCall(10, 'alice')],
+      v4departs: [departRowNoPlans(10, 'alice', ['bob', 'carol'])],
+      planSeeds: [seedRow(10, 'bob', null), seedRow(10, 'carol', 'herald')] },
+    { departCalls: [attemptCall(10, 'alice'), extraCall()],
+      v4departs: [departRowNoPlans(10, 'alice', ['carol', 'bob'])],
+      planSeeds: [seedRow(10, 'bob', 'herald'), seedRow(10, 'carol', null)] });
+  check('order-insensitive: planSeeds target swap is not a divergence',
+    vG.bars.detGate === true && vG.det[0].firstDivergenceDay === 90);
+  // H. The party persists: the same party fights again the NEXT day
+  // with the same swapped targets (seed 107423 d99 -> d100). The
+  // multiset is tracked per party per day, not just on the
+  // departure day.
+  function fightRow(day, vid, targetByVid, party) {
+    function planFor(m) {
+      const others = party.filter(function (x) { return x !== m; });
+      return { stage: 'hunt',
+        target: (targetByVid && targetByVid[m] !== undefined) ? targetByVid[m] : 'herald',
+        needWave: 4, party: others };
+    }
+    const allies = party.slice(1);
+    return { day: day, vid: vid, mid: 'herald', wave: 4, alliesN: allies.length,
+      allyVids: allies.slice(), allyFromStart: false, outcome: 'vFlee', rounds: 3,
+      vTaken: 66, mDealt: 30, calledHelp: true, allyVid: 'bob', volley: null,
+      planParty: party.slice(1),
+      lead: { vid: vid, plan: planFor(vid) },
+      allies: allies.map(function (m) { return { vid: m, plan: planFor(m) }; }) };
+  }
+  const vH = pairVerdict(
+    { departCalls: [attemptCall(10, 'alice')],
+      v4departs: [departRow(10, 'alice', ['bob', 'carol'], { alice: 'herald', bob: null, carol: 'herald' })],
+      planCensus: [
+        censusRow(10, 'alice', { plan: huntPlan('herald', ['bob', 'carol']) }),
+        censusRow(10, 'bob', { plan: huntPlan(null, ['alice', 'carol']) }),
+        censusRow(10, 'carol', { plan: huntPlan('herald', ['alice', 'bob']) }),
+        censusRow(11, 'alice', { plan: huntPlan('herald', ['bob', 'carol']) }),
+        censusRow(11, 'bob', { plan: huntPlan(null, ['alice', 'carol']) }),
+        censusRow(11, 'carol', { plan: huntPlan('herald', ['alice', 'bob']) }) ],
+      v4fights: [fightRow(11, 'alice', { alice: 'herald', bob: null, carol: 'herald' }, ['alice', 'bob', 'carol'])] },
+    { departCalls: [attemptCall(10, 'alice'), extraCall()],
+      v4departs: [departRow(10, 'alice', ['carol', 'bob'], { alice: 'herald', bob: 'herald', carol: null })],
+      planCensus: [
+        censusRow(10, 'alice', { plan: huntPlan('herald', ['carol', 'bob']) }),
+        censusRow(10, 'bob', { plan: huntPlan('herald', ['alice', 'carol']) }),
+        censusRow(10, 'carol', { plan: huntPlan(null, ['alice', 'bob']) }),
+        censusRow(11, 'alice', { plan: huntPlan('herald', ['carol', 'bob']) }),
+        censusRow(11, 'bob', { plan: huntPlan('herald', ['alice', 'carol']) }),
+        censusRow(11, 'carol', { plan: huntPlan(null, ['alice', 'bob']) }) ],
+      v4fights: [fightRow(11, 'alice', { alice: 'herald', bob: 'herald', carol: null }, ['alice', 'carol', 'bob'])] });
+  check('order-insensitive: next-day fight of the same party is not a divergence',
+    vH.bars.detGate === true && vH.det[0].firstDivergenceDay === 90);
   console.log('dawnchoke analyzer selftest: ' + pass + ' pass, ' + fail + ' fail');
   return fail === 0;
 }
@@ -783,4 +1194,5 @@ module.exports = { analyze: analyze, analyzeSeed: analyzeSeed, selftest: selftes
   detGateForSeed: detGateForSeed, diagOnly: diagOnly,
   isW4Plan: isW4Plan, isStagedW4: isStagedW4, isTargetlessHunt: isTargetlessHunt,
   isReleaseRow: isReleaseRow, isStarvationDeath: isStarvationDeath, median: median, W4P_SET: W4P_SET,
-  firstExtraDepartDay: firstExtraDepartDay, firstDivergenceDay: firstDivergenceDay };
+  firstExtraDepartDay: firstExtraDepartDay, firstDivergenceDay: firstDivergenceDay,
+  canonicalMultisets: canonicalMultisets, canonicalizeRow: canonicalizeRow };
