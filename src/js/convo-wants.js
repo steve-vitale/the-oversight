@@ -1092,10 +1092,21 @@
         const open = this.openFavorObligation(vid);
         if (favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
           if (c.want) c.want.favor = favor;
+          // GONE-BEARER (journey-deepening r272): the run's bearer is a
+          // previous scholar who is dead or roster-gone. The successor is
+          // not a companion (forageFavorOpening/waterFavorOpening return
+          // null) so the fallback below would claim the trip can still be
+          // finished — false: the bearer block bars the successor from
+          // working it. Name the gone bearer and point at the r265
+          // BEARER-END close at Haven instead.
+          const gone = this.convoRunGoneBearerName(favor.waterRun);
+          if (gone) return `"That haul belonged to ${gone}, who's gone. The water's lost with them — we can close the books at Haven."`;
           return this.waterFavorOpening(vid)?.line || '"We still have a creek trip to finish."';
         }
         if (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned) {
           if (c.want) c.want.favor = favor;
+          const gone = this.convoRunGoneBearerName(favor.forageRun);
+          if (gone) return `"That outing belonged to ${gone}, who's gone. The haul's lost with them — we can close the books at Haven."`;
           return this.forageFavorOpening(vid)?.line || '"We still have the outing to finish."';
         }
         // Obligation still open — a reminder naming the task, not a new ask.
@@ -1195,6 +1206,17 @@
         const c = this.convoGet(vid);
         const favor = (c.want && c.want.favor) || this.convoGetFavor(vid);
         if (favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
+          // GONE-BEARER (journey-deepening r272 — see convoRunGoneBearerName):
+          // the run belonged to a previous scholar who is dead or
+          // roster-gone. The successor cannot work the haul (the bearer
+          // block), so "finish the haul" is false as spoken. Name the
+          // gone bearer and point at the r265 BEARER-END close at Haven.
+          const gone = this.convoRunGoneBearerName(favor.waterRun);
+          if (gone) return this.convoPickCycle(vid, 'repay:help:water:gonebearer', [
+            `"That haul belonged to ${gone}, who's gone. The water's lost with them — we can close the books at Haven."`,
+            `"${gone}'s creek trip died with them. Nothing to haul home — the books are all that's left, and they close at Haven."`,
+            `"About the water — that was ${gone}'s trip, and ${gone}'s gone. We close it at Haven, not out here."`,
+          ]) || `"That haul belonged to ${gone}, who's gone. The water's lost with them — we can close the books at Haven."`;
           return this.convoPickCycle(vid, 'repay:help:water', [
             '"Get home with me. We still have to unload the water."',
             '"The buckets aren\'t empty. That\'s the help — finish the haul."',
@@ -1202,6 +1224,12 @@
           ]) || '"We still need to get home and unload what we have."';
         }
         if (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned) {
+          const gone = this.convoRunGoneBearerName(favor.forageRun);
+          if (gone) return this.convoPickCycle(vid, 'repay:help:forage:gonebearer', [
+            `"That outing belonged to ${gone}, who's gone. The haul's lost with them — we can close the books at Haven."`,
+            `"${gone}'s outing died with them. Nothing to carry home — the books are all that's left, and they close at Haven."`,
+            `"About the outing — that was ${gone}'s trip, and ${gone}'s gone. We close it at Haven, not out here."`,
+          ]) || `"That outing belonged to ${gone}, who's gone. The haul's lost with them — we can close the books at Haven."`;
           return this.convoPickCycle(vid, 'repay:help:forage', [
             '"Get home with me. We still have to unload what we hauled."',
             '"The packs aren\'t empty. That\'s the help — finish the outing."',
@@ -2365,6 +2393,40 @@
         }
         return false;
       } catch (e) { console.warn('moot-close', e); return false; }
+    },
+
+    // convoRunGoneBearerName: the r265 BEARER-END mirror for dialogue.
+    // The first name of a joint run's bearer when that bearer is a
+    // previous scholar who is dead or roster-gone — null otherwise. The
+    // check mirrors the BEARER-END branch in favor-forage.js /
+    // favor-water.js exactly (dead, missing person, or off-roster). A
+    // LIVING previous bearer still owns their outing, so only the gone
+    // case names them; the bearer === current scholar case is the live
+    // run and returns null. Used by the repay opener + engageBeat so a
+    // dead bearer's outing is never urged as finishable (journey-
+    // deepening r272: seed 105138 Nikos d67, "finish the outing" for a
+    // bearer dead since d62).
+    convoRunGoneBearerName(run) {
+      try {
+        if (!run || !run.bearer || String(run.bearer) === String(this.villagerId)) return null;
+        const bp = (() => { try { return this.getPerson(run.bearer); } catch (e) { return null; } })();
+        const gone = !bp || !!bp.dead || !((this.state.village || {}).roster || []).includes(run.bearer);
+        if (!gone) return null;
+        // The bearer's first name. Prefer the person's own name field:
+        // displayName is knowledge-gated and returns a description ("A
+        // man, maybe 60s") for someone the scholar never met, whose
+        // first word ("A") would read as a name. A previous scholar is
+        // always known to the village, so the name is the honest form.
+        try {
+          const nm = (bp && bp.name) || '';
+          if (nm && !/^(A|An|The)\s/.test(nm)) { const f = nm.split(' ')[0]; if (f) return f; }
+        } catch (e) {}
+        try {
+          const d = (this.displayName(run.bearer) || '');
+          if (d && !/^(A|An|The)\s/.test(d)) { const f = d.split(' ')[0]; if (f) return f; }
+        } catch (e) {}
+        return 'Your predecessor';
+      } catch (e) { return null; }
     },
 
     // openFavorObligation: the tracked promise for a favor, if open.
