@@ -101,7 +101,7 @@ Five of eight villages are still standing at day 140, and the one that reached n
 
 ## Gate
 
-`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r251-gate` on the rebased tip, run detached from a script file (never concurrent with another gate; the 1630Z resume and the 2115Z finisher were checked first — no gate running): **GATE RESULT PENDING — filled in at gate time below.**
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r251-gate` on the rebased tip `aa3ad2b5e`, run detached from a script file (serialized — the 2115Z gate finished 23:52–~00:05Z and the 1630Z gate 00:05–~00:21Z before mine started 00:22Z): **339 passed, 5 failed in 643s, exit 1. 0 attributable.** The 5 failures are the documented standing set, identical to the 2115Z and 1630Z rounds' gates (both 339/5): measurement-proof staleness pair (`test-measurement-proof-update.js`, `test-measurement-workflow.js` — retained neutrality proof vs current Game/controller/harness inputs), phone-frame stale receipt (`test-phone-frame-proof.js`), and two 120s deed-attainment timeouts (`test-living-garden-deed-attainment.js`, `test-one-person-army-deed-attainment.js` — under load; a second gate, `jest-cache-r267-gate`, started at 00:33Z while mine ran). This closeout touches no game code (evidence + driver/analyzer/test scripts only), so no failure can be attributed to it. Gate log: goal hidden_files/evidence/2026-11-22/journey-scale-r251-gate.log.
 
 ## Telemetry
 
@@ -123,6 +123,6 @@ Five of eight villages are still standing at day 140, and the one that reached n
 
 ## Closeout
 
-- Rebased onto current master `c0bf92fca` (ship bump on top of crisis r264) clean; proofs re-run on the rebased tip (analyzer test 153/153); gate GATE RESULT PENDING; merged ff-only into master; worktree released, branch `journey-scale` deleted.
+- Rebased onto current master `1860dc26e` (1630Z round record) clean; proofs re-run on the rebased tip (analyzer test 153/153); gate 339/5, 0 attributable (standing set only); merged ff-only into master; worktree released, branch `journey-scale` deleted.
 - Rotation-a 3→0, read back. Telemetry: LOUD lines explained as regime artifact; baseline NOT rolled.
-- Lock: NOT deleted by this finisher — the lock file now belongs to the live 17:45 CST occurrence (`playtest-a-20261122T2345Z`), not this run. Deleting it would kill a live run's guard. The r251 lock is gone (superseded), not deleted by me.
+- Lock: NOT deleted by this finisher — the lock file now belongs to no live run: the r251 lock was stale-lock-recovered by the 17:45 CST occurrence (`playtest-a-20261122T2345Z`), which then failed worktree registration on the still-registered `journey-scale` slug and deleted its lock on failure. At closeout no `playtest-loop.lock` exists. Nothing to delete; the next Lane A occurrence will register cleanly once the worktree is released.
