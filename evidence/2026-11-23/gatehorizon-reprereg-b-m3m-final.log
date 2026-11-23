@@ -1,0 +1,48 @@
+PASS §0 LEADERPROJ gate code present (villager-agency.js)
+PASS §0 GATEAVOID durable log present (gateAvoids + proj entry)
+PASS §0 pin present (pinQuadParty + pinnedQuadAllies + PINQUAD)
+PASS §0 capable policy sha frozen (4c4d1535d76c)
+PASS §0 spec freezes 12 pool doors (doorstage rows, no dead1)
+PASS §0 driver + analyzer exist
+PASS §1 determinism probe 1 exits 0
+PASS §1 determinism probe 2 exits 0
+PASS §1 same 10+10 chunks twice reach an identical end state
+PASS §2 control staged door exits 0
+PASS §2 control leg FIGHTS the staged door (fought, rounds >= 1)
+PASS §2 control staged row carries leader entry HP 40
+PASS §2 control at-door gear: all four armed + armored (door-10 fix)
+PASS §2 control issued kit reads P 30 on all four
+PASS §2 armed staged door exits 0
+PASS §2 armed leg REFUSES the staged door (fired, no fight)
+PASS §2 armed proj log entry reads hp 40, projHp2 -10
+PASS §3 fresh load yields a stageable quad
+PASS §3 all four launch
+PASS §3 pack-staged quad is armed + armored at the door
+PASS §3 pre-check detects a stripped member (not armored)
+PASS §3c replacement probe exits 0
+PASS §3c a failed launch is replaced from spares
+PASS §3c the staged party still fights as four
+PASS §3b relaxed probe exits 0
+PASS §3b ranging pool is empty after killing ranging villagers
+PASS §3b a quad still stages from the widened pool
+PASS §3b the staged party is fully widened (widenedN 4)
+PASS §4 smoke oneSeed exits 0
+PASS §4 corpus carries the frozen anchor + policy shas
+PASS §4 corpus carries the substrate flags (all 1)
+PASS §4 corpus counters are numbers, notes/log are arrays, slot+pin present
+PASS §4 corpus carries the horizon extras
+PASS §4 corpus carries the boundary log (stagingChecks array)
+PASS §4 every wave-4+ row carries leaderDiedLog + scholarLed booleans
+PASS §4 unscored reason is exact (never the old conflated dead)
+PASS §4 smoke ran the requested 30-day horizon
+PASS §5 analyzer selftest green (20/20)
+PASS §6 base gate leaderproj 55/55
+PASS §6 base gate gateavoid 36/36
+PASS §7 committed gatehorizon-b corpora are present (8 + 8)
+PASS §7 old control: synchronous flag reads 0 pool deaths (the defect)
+PASS §7 old armed: synchronous flag reads 0 pool deaths (the defect)
+PASS §7 old control: deaths-log rule reads 9 pool deaths
+PASS §7 old armed: deaths-log rule reads 4 pool deaths
+PASS §7 all 13 attributed deaths are unpinned (the gate never saw them)
+PASS §7 exactly 4 vDie rows are excluded, all with non-monster same-day causes
+47 passed, 0 failed
