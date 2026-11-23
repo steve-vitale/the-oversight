@@ -242,6 +242,60 @@
           }
         }
       }
+      // STAGE-2 PREFIXED RETRY (journey-succession r268 2026-11-23):
+      // when every bare alternate is blocked too, the pool is exhausted
+      // inside the run-ledger window (r267: the 2-candidate
+      // alive:event:table waiting pool dried on its third serving —
+      // both lines served plain 15 days earlier, the asker new, no
+      // ack). Try each candidate again with a fresh PREFIX as its
+      // first chunk: sayLine blocks on the first chunk only, so a
+      // fresh prefix lets the content through. Prefixes are honest
+      // delivery, never history claims — the generic thinking
+      // preambles from convoAckLines() ('Good question.', 'Huh. Let
+      // me think about that.', ...), which claim nothing about the
+      // past. The change-ack variants are NOT used here: all three
+      // claim a prior ask, which would be false history for a
+      // first-time asker like Lokman. The prefix REPLACES the
+      // change-ack when one is present (a re-ask whose ack chunk is
+      // itself blocked). The picked line is tried first — the
+      // villager says what they meant to say, led in differently —
+      // then the other candidates, as in stage 1. MOURNING
+      // CARVE-OUT: stage 2 does not engage when the lately event
+      // is mourning — a preamble-prefixed re-serve of a
+      // name-parameterized mourning template still matches the same
+      // MOURN-TEMPLATE shape (the analyzer matches content
+      // regardless of a leading prefix chunk), so it would trade a
+      // DRY fail for a MOURN-TEMPLATE fail. For mourning, total
+      // exhaustion stays a dry — the filed last-resort gap. If NO
+      // prefixed candidate passes, the original line returns
+      // unchanged.
+      if (typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, composed)) {
+        let isMourning = false;
+        try {
+          if (topic === 'lately' && typeof this.t2LatelyEvent === 'function') {
+            const ev0 = this.t2LatelyEvent(vid);
+            isMourning = !!(ev0 && ev0.kind === 'mourning');
+          }
+        } catch (e) {}
+        if (!isMourning) {
+          const PREAMBLES = ['Good question.', 'Huh. Let me think about that.', 'You want to know about that? Okay.', 'Me? Okay.'];
+          const ordered = [picked].concat(cands.filter(cd => cd !== picked));
+          let served = false;
+          for (const cand of ordered) {
+            if (served) break;
+            let alt = null;
+            try { alt = this.t2fill(cand, this.vpOf(vid), vid); } catch (e) { alt = null; }
+            if (!alt) continue;
+            for (const pre of PREAMBLES) {
+              const preComposed = '"' + pre + '" ' + alt;
+              if (!this.convoWouldBlock(vid, preComposed)) {
+                try { if (cand !== picked) (c.said['t2:' + topic] = c.said['t2:' + topic] || []).push(cand); } catch (e) {}
+                line = alt; composed = preComposed; served = true; break;
+              }
+            }
+          }
+        }
+      }
       c.thread = topic; c.depth = 1;
       return composed;
     },
