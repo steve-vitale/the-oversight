@@ -126,9 +126,15 @@ async function main() {
   check('the sitting accepted exactly 4 heed picks (want resolved, menu closed)', heeds === 4,
     `heeds=${heeds}`);
   check('zero silent turns — every heed was spoken', silent === 0, `silent=${silent}`);
-  check('heeds 1-3 are the 3 distinct ack lines',
-    heeds >= 3 && ACK.includes(spoken[0]) && ACK.includes(spoken[1]) && ACK.includes(spoken[2]) &&
-    new Set(spoken.slice(0, 3)).size === 3,
+  // R150 UPDATE (2026-11-23, r274): the r150 fix changed heed 1 on
+  // purpose — the first heed now states the warning via
+  // convoWantWarning instead of answering with a generic ack line.
+  // Heeds 2-3 are the ack fallbacks (the warning is already delivered,
+  // so the handler skips the warning call). The deepen arc (heed 4)
+  // is unchanged.
+  check('heed 1 states the warning (r150), heeds 2-3 are distinct ack lines',
+    heeds >= 3 && !ACK.includes(spoken[0]) && ACK.includes(spoken[1]) && ACK.includes(spoken[2]) &&
+    spoken[1] !== spoken[2],
     `spoken[0..2]=${JSON.stringify(spoken.slice(0, 3).map(s => s.slice(0, 40)))}`);
   check('heed 4 is a deepen line, not one of the 3 ack lines',
     heeds >= 4 && !ACK.includes(spoken[3]),
