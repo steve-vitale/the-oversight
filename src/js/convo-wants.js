@@ -2995,7 +2995,20 @@
       const want = c.want;
       if ((want.stage || 0) >= 3) return;
       if (kind === 'engage') {
-        if ((want.stage || 0) < 2) want.stage = 2;
+        if ((want.stage || 0) < 2) {
+          want.stage = 2;
+          // R156 (journey-landing r156): the want owns the conversation
+          // once it engages — the thread becomes 'want'. Before, an ask
+          // stated via engageBeat on a pre-empted opener (grief thread)
+          // left the thread on the opener's topic, so convoWantMenu's
+          // thread-coherence gate suppressed the commit menu for the whole
+          // sitting (r155 seed 1370: asked twice, never offered commit;
+          // the beat menu also dropped dlg:more on the no-followup grief
+          // thread, so there was no path to the want at all). The guarded
+          // callers already engage only on want/small threads, so the only
+          // behavioral change is for pre-empted openers — the defect.
+          c.thread = 'want';
+        }
       } else if (kind === 'deflect') {
         want.stage = 3;
         want.resolution = 'deflected';
