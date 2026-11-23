@@ -205,7 +205,8 @@ deflections for verbatim repeats and fight the MOURN-TEMPLATE bar).
 
 Proof test `scripts/test-journey-succession-r267-mourning-dry.js` —
 **29 PASS, 0 FAIL, ALL GREEN** (re-run by the finisher on the
-worktree tip AND on the rebased tip `93b7f628d` at closeout):
+worktree tip, on the first rebased tip `93b7f628d`, and again on the
+merged tip `0b3993e80` at closeout — green every time):
 collision serves the clean 'burnt-piece' line with no dry anywhere in
 the transcript; control serves honestly with no change to unblocked
 paths; all-blocked dries exactly as on base with no wrong-dead line
@@ -276,8 +277,9 @@ FIRST-bearer new bonds 4 vs pre-existing 15.
 
 ## WILD CHECK
 
-Five carried proofs re-run GREEN on the rebased tip `93b7f628d` at
-closeout: r262 escalator-cap GREEN, r254 multiwit ALL GREEN, r232
+Five carried proofs re-run GREEN on the first rebased tip `93b7f628d`
+and again on the merged tip `0b3993e80` at closeout: r262
+escalator-cap GREEN, r254 multiwit ALL GREEN, r232
 relationship-mourning ALL GREEN, r225 F5 harness 22 passed / 0 failed,
 r258 selfwit ALL GREEN. No F4a/F4b/F4c/F5/F6/C3c/F2/C3d
 regression observed in the panel transcripts. C3d: 0 erasures in the
@@ -390,12 +392,38 @@ saw someone die can now say so in the wild, once, honestly.
 
 ## Gate
 
-TBD — filled at closeout after the serialized gate on the merged tip
-(r266 baseline: measurement-proof staleness pair, phone-frame stale
-receipt, deed-attainment 120s timeouts, occupation-panels load flake;
-any NEW failure stops the run).
+Serialized adoption gate on the merged tip `0b3993e80`:
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r267-gate`
+— **338 passed, 6 failed in 665s**, log
+`evidence/2026-11-22/journey-succession-r267-gate.log`. The gate ran
+behind the Lane A scale r251 gate (serialized; the r251 gate ran
+00:22–00:33Z, ours 00:33:32–00:44:37Z). The 6 failures are all standing
+pre-existing families or flap artifacts, **0 attributable to this run**:
 
-## Closeout
+- test-measurement-proof-update.js — "Proof source inputs are not
+  current" (measurement-proof staleness, first of the pair).
+- test-measurement-workflow.js — exit 1 (staleness pair, second).
+- test-living-garden-deed-attainment.js — 120.2s timeout
+  (deed-attainment 120s timeouts under load).
+- test-one-person-army-deed-attainment.js — 120.2s timeout (same
+  family).
+- test-phone-frame-proof.js — stale receipt (phone-frame stale receipt
+  family).
+- test-deathcleanup-instrument-20261117.js — `EPERM: operation not
+  permitted, write` at writeSeed: the write flap (window 10, onset
+  00:44:40Z per the flap watcher) started mid-gate and refused the
+  test's seed-file write. Re-run standalone by the finisher after
+  writes cleared: **PASS, exit 0**. Flap artifact, not a code failure.
 
-TBD — filled at closeout (rebase, merge commit, rotation-b 7→4,
-worktree release, lock delete).
+vs r266's baseline gate (338/6): the same count, a different sixth —
+test-measurement-cache-flags.js passed this time; the flap's EPERM
+took its place. No failure touches any file this run changed (the
+only src change is the `topic2Ask` retry in `src/js/convoTopics.js`,
+proven by the r267 proof test + five carried proofs, all GREEN on the
+merged tip). Occupation-panels (85s, slow but passed) did not fail.
+
+Closeout: merged `0b3993e80` (two commits: the panel+fix
+`970fc5524`, the note proof re-runs `0b3993e80`). Rotation-b 7→4
+(verified by read-back). Worktree release and lock delete (last)
+follow at closeout; the finisher's report carries the closeout
+record.
