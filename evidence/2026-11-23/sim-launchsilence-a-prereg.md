@@ -339,3 +339,22 @@ re-freeze #2 attempt (FROZEN_BASE 96cbe6887) by the 1115Z coordinator
 died mid-re-record at the occurrence timeout (1/16 seeds re-recorded,
 the rest deleted on disk); it was discarded with the tree restore and
 never committed.
+
+## Re-freeze correction #4 (adoption coordinator, run fleshout-20261123T1315Z)
+
+After the arm was rebased onto master a6cb127cc (Loop B merged
+sim-killarrive-b GO), FROZEN_BASE was re-frozen from b602eb83b to
+5ca1333859c6c8bd5d716e721d86e025098126b7 and the control sweep +
+replays re-recorded on the new head. The killarrive landing has zero
+src/js diff vs ae4d4c277, so the game code is byte-identical and the
+re-record is a re-anchor formality; it reproduces the original
+analysis exactly on every judged field (diff empty), the analyzer
+--diff matches 2/2 overlapping replay seeds, and the proof is green
+50/50 on the rebased tree. The frozen bars are unchanged. A first
+#4 attempt failed silently (all driver legs exit 0, zero files):
+the adoption coordinator's string surgery on the driver truncated
+the file to its first 104 lines (a `find` miss silently resolved to
+the end of file); caught by the zero-line logs, the driver was
+restored from HEAD and re-edited with exact-string replacement plus
+a line-count assertion. No corpus was harmed — the failed legs wrote
+nothing.

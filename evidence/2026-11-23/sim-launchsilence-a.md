@@ -301,3 +301,19 @@ seeds; analyzer selftest 20/20; proof re-run green 50/50 on the
 rebased tree. No verdict changes; the DIAG-GO stands on the
 re-recorded corpus. The re-freeze onto a6cb127cc follows as #4 (zero
 src/js diff, re-anchor + re-record per the same prescription).
+
+## 12. Adoption re-freeze #4 (run fleshout-20261123T1315Z)
+
+The arm was rebased onto a6cb127cc (Loop B merged sim-killarrive-b
+GO, zero src/js diff vs ae4d4c277) and re-frozen: FROZEN_BASE
+5ca1333859c6c8bd5d716e721d86e025098126b7, 16-seed control corpus + both
+2-seed replays re-recorded on the new head. The regenerated
+analysis.json is byte-identical to the worker's committed version;
+analyzer --diff matches 2/2 overlapping replay seeds; analyzer
+selftest 20/20; proof re-run green 50/50 on the rebased tree. No
+verdict changes; the DIAG-GO stands. One process note: the first #4
+re-record attempt failed silently (all driver legs exit 0, zero
+files) because a string edit truncated the driver to its first 104
+lines; caught by the zero-line logs, the driver was restored from
+HEAD and re-edited with exact-string replacement plus a line-count
+assertion. Nothing was committed from the failed attempt.
