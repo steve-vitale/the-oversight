@@ -169,11 +169,13 @@ balanced-panel compare to run — M5 is not applicable, not passed.
 
 - Arm 1 branch `sim-gateavoid-doorrich-b` rebased onto `fdd7042b8`
   (the shipped tip), smoke re-run green on the new tip (M3j 36/36,
-  M3k 11/11, gateavoid selftest 39/39), ff-merged [MERGE TIP],
+  M3k 11/11, gateavoid selftest 39/39), ff-merged 68bb6d719,
   worktree released, branch deleted.
 - Arm 2 commit `39e1a8ec1` was already on master at adoption start; no
   rebase or re-merge was needed for it.
-- Tracker: winnability-chain axis updated [TRACKER — filled at closeout].
+- Tracker: winnability-chain axis updated (Latest review for run
+  fleshout-loop-b-20261123T0230Z appended; tracker 2,893,609 →
+  2,898,161 bytes, verified non-empty and intact before appending).
 - Claim `hidden_files/lever-claims/fleshout-loop-b-20261123T0230Z.json`
   retired to `.DEAD`; lock `fleshout-loop-b.lock` deleted LAST after
   same-call per-line verification that it still held
@@ -182,7 +184,8 @@ balanced-panel compare to run — M5 is not applicable, not passed.
   staged-as-deleted) — repaired via
   `git ls-tree -r HEAD -- <paths> | git update-index --add --index-info`,
   verified status empty + diff HEAD empty + hash-object match.
-- Main tree clean at closeout [VERIFY — filled at closeout].
+- Main tree clean at closeout (git status --short empty in the main
+  tree, verified after the merge, before worktree release).
 
 ## Findings / open threads
 
