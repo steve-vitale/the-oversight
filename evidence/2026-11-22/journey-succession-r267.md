@@ -205,7 +205,7 @@ deflections for verbatim repeats and fight the MOURN-TEMPLATE bar).
 
 Proof test `scripts/test-journey-succession-r267-mourning-dry.js` —
 **29 PASS, 0 FAIL, ALL GREEN** (re-run by the finisher on the
-worktree tip; re-run again on the rebased tip at closeout, see Gate):
+worktree tip AND on the rebased tip `93b7f628d` at closeout):
 collision serves the clean 'burnt-piece' line with no dry anywhere in
 the transcript; control serves honestly with no change to unblocked
 paths; all-blocked dries exactly as on base with no wrong-dead line
@@ -276,9 +276,10 @@ FIRST-bearer new bonds 4 vs pre-existing 15.
 
 ## WILD CHECK
 
-Five carried proofs re-run on the rebased tip at closeout (see Gate):
-r262 escalator-cap, r254 multiwit, r232 relationship-mourning, r225 F5
-harness (22/22), r258 selfwit. No F4a/F4b/F4c/F5/F6/C3c/F2/C3d
+Five carried proofs re-run GREEN on the rebased tip `93b7f628d` at
+closeout: r262 escalator-cap GREEN, r254 multiwit ALL GREEN, r232
+relationship-mourning ALL GREEN, r225 F5 harness 22 passed / 0 failed,
+r258 selfwit ALL GREEN. No F4a/F4b/F4c/F5/F6/C3c/F2/C3d
 regression observed in the panel transcripts. C3d: 0 erasures in the
 transcripts read (the recap opener engages; the "still on what you
 miss most" shape is intact in the sittings read). F5 WILD EXERCISE: 0
