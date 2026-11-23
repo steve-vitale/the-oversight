@@ -182,6 +182,28 @@
           vv.deathSeen[opts.villagerId] = (this.state.scholar || {}).day || 0;
         } catch (e) {}
       }
+      // DEAD IS DEAD (journey-endgame r275, 2026-11-23): a combat death
+      // reached registerDeath without ever marking the villager record —
+      // only removeVillager('killed'/'ambushed') set rec.dead, and neither
+      // tbDamage's hostile branch (betrayer killed in the fight) nor
+      // tbVillagerFalls (villager fallen to a monster) marks it. Readers
+      // of vpOf(vid).dead — the alien-contact release guard (2026-10-09),
+      // isMember(), party skips — kept reading a corpse as alive, so a
+      // dead alien contact kept whispering dream warnings the day after
+      // dying (r275 pilot, seed 107583: Rosa died d90, spoke d91).
+      // registerDeath is THE death hook; the mark belongs here, once,
+      // for every death path. Mirrors the betrayal lookup
+      // (data.villagers, then background_survivors), plus rosterChars,
+      // which vpOf falls back to — mark whichever record vpOf returns.
+      try {
+        if ((opts.kind === 'person' || opts.kind === 'villager') && opts.villagerId) {
+          var _dr = ((this.data || {}).villagers || []).find(function (x) { return x.id === opts.villagerId; })
+            || ((this.data || {}).background_survivors || []).find(function (x) { return x.id === opts.villagerId; });
+          if (_dr) _dr.dead = true;
+          var _rc = ((((this.state || {}).village) || {}).rosterChars || {})[opts.villagerId];
+          if (_rc && _rc !== _dr) _rc.dead = true;
+        }
+      } catch (e) { console.warn('[corpses] dead-mark', e); }
       // AUDIO (Steve 2026-10-12): a person's death is a moment — the knock.
       // Fires once per death (guarded above). Monster deaths already voice
       // at the kill site (monsterDown/deathAudio); this is for people.

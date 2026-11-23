@@ -1309,7 +1309,16 @@
   }
 
   // ---------------- after a hit lands ----------------
-  function postHit(game, t, landed, label, sourceKey, wasAlive) {
+  // godBefore: the god this fighter held BEFORE the blow landed. A death
+  // marks the villager record dead inside registerDeath (r275: a combat
+  // death must read dead — "vpOf(vid).dead must not lie about a corpse"),
+  // and holderGod() rightly returns null for a dead record. So a
+  // death-triggered effect (the Voice collapse below) must NOT re-derive
+  // the god after the blow — it would read null for the just-died holder
+  // and the collapse would never fire. The wrapper captures the god
+  // pre-damage and passes it in; when it is null (holder held no god)
+  // we fall back to the live derivation, which agrees.
+  function postHit(game, t, landed, label, sourceKey, wasAlive, godBefore) {
     const f = game.tbfight;
     if (!f || !t) return;
     const g = GV(f);
@@ -1320,7 +1329,7 @@
     }
     if (landed > 0 && isFoeF(t) && src && isOurs(src)) g.firstBlow = true;
     if (!isOurs(t)) return;
-    const tg = fighterGod(t);
+    const tg = godBefore || fighterGod(t);
     // PARTY (One-Person Army): allies see you bleed and fight harder.
     if (tg === 'one_person_army' && t.alive && !g.rallied[t.key]) {
       const P = godPlay('one_person_army');
@@ -1549,6 +1558,11 @@
     try { d = preHit(this, t, dmg, sourceLabel, sourceKey, opts); } catch (e) { warn('preHit', e); d = dmg; }
     if (d && typeof d === 'object') return d.done;
     const wasAlive = !!(t && t.alive);
+    // Capture the target's god BEFORE the blow: a killing blow marks the
+    // record dead inside registerDeath, after which holderGod() returns
+    // null — postHit's death-triggered effects need the god as it stood
+    // while the fighter lived (see postHit's godBefore note).
+    const godBefore = wasAlive ? fighterGod(t) : null;
     let beam = false;
     try { beam = isBeam(sourceLabel, sourceKey ? this.tbFighter(sourceKey) : null); } catch (e) { warn('beam', e); }
     const prevBeam = this._gvBeamHit;
@@ -1556,7 +1570,7 @@
     let landed;
     try { landed = _td.call(this, targetKey, d, sourceLabel, sourceKey, opts); }
     finally { this._gvBeamHit = prevBeam; }
-    try { postHit(this, t, landed || 0, sourceLabel, sourceKey, wasAlive); } catch (e) { warn('postHit', e); }
+    try { postHit(this, t, landed || 0, sourceLabel, sourceKey, wasAlive, godBefore); } catch (e) { warn('postHit', e); }
     return landed;
   };
 

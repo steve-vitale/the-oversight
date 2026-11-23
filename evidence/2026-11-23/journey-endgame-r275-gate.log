@@ -1,0 +1,345 @@
+check.js: 344 scripts, 4 parallel (quick)
+...........................................F.......................................F....................F........F............FF..FFF......F.F....F......F..F...............F.F....F..F.FF....F.................................................F..........F.F........................................FF...........F......F..................FF..F.F....
+
+  FAIL scripts/godpath/test-comfort-arc.js (exit null, 120.2s)
+      ok stale dlg:empathize has no conversation payout or exchange
+      ok stale dlg:stay has no conversation payout or exchange
+      comfort-stale: 3 passed, 0 failed
+      ok stale opener at stage2 pays no trust or exchange
+      comfort-opening-replay: 1 passed, 0 failed
+      ok leaving before engagement does not complete comfort
+      comfort-early-leave: 1 passed, 0 failed
+      ok existing four stays still resolve comfort
+      ok resolved stay retires generic empathy too
+      comfort-stay: 2 passed, 0 failed
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-god-support-player.js (exit 1, 47.9s)
+        ok   actual player turn entry expires both rally flags in three own turns
+        ok   expired rally restores ordinary damage
+        FAIL actual NPC Voice death stuns the player for a full action and clears rally
+        FAIL the existing fellow NPC death weakness remains
+        FAIL player turn entry consumes the stun and requests exactly one skip
+        ok   the following player turn restores choice and movement
+        FAIL real scheduler passes the lost turn and returns control on the next round — {"playerEntries":1,"current":"p","acted":false}
+        ok   a fled player is not stunned by Voice collapse
+        ok   canonical self alias cannot impose its own ally collapse on the player
+      
+      god-support-player: 23 passed, 4 failed, 0 todo (phase 0)
+      failing: actual NPC Voice death stuns the player for a full action and clears rally | the existing fellow NPC death weakness remains | player turn entry consumes the stun and requests exactly one skip
+
+  FAIL scripts/godpath/test-living-garden-deed-attainment.js (exit null, 120.2s)
+      seed 7...
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-main67-founding-pour-honesty.js (exit null, 150.5s)
+      [check.js] TIMEOUT after 120s
+      ### SEED 99
+        PASS founding council staged (got covenant)
+        PASS council answered: pool
+        FOUNDING LINE: 🌾 The shared granary is founded: Emberhold, Stonebridge, Thornfield were called to pour 2,000 kcal each — 6,000 kcal came in, under no one's roof and everyone's. Some fires poured sh
+        PASS shortfall said aloud
+        PASS shortfall path does not assert full pours ("each pour X" absent)
+        PASS shortfall path states the rate asked and the true total ("were called to pour X each")
+        PASS pool grew by the true poured total (haven 2000 + 2 rich fires, got 6000)
+        PASS shortfall link: trust +6 then -2 = 49 (got 49)
+      
+      ALL GREEN
+
+  FAIL scripts/godpath/test-market-deed.js (exit null, 120.2s)
+        ok   trading with yourself cannot earn a personal accomplishment
+        ok   stale dead resident stock cannot invent a living exchange
+        ok   real river barter delivers useful goods at its existing price
+        ok   actual communal payment is recorded separately from personal food
+        ok   underfunded river trade refuses without consuming any partial stores or time
+        ok   expired river offer transfers no food and grants no deed
+        ok   explicit actual load restores the immutable person receipt
+        ok   legacy counters and saves do not backfill old exchanges
+        ok   succession cannot borrow a predecessor-only transaction
+        ok   a real NPC seller keeps their own accomplishment through succession
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-measurement-driver.js (exit 1, 55.5s)
+      ok   explicit region reaches the actual newly started expedition
+        ok   explicit origin reaches the actual expedition home origin
+        ok   driver setup does not choose the idle controller opening
+        ok   configuration support is declared for external collectors
+        FAIL a separate actual startup rejects an unplayable region
+        ok   importing the seed-list module does not start a simulation
+      
+      measurement driver configuration: 5 passed, 1 failed, 0 todo (phase 0)
+      failing: a separate actual startup rejects an unplayable region
+
+  FAIL scripts/godpath/test-measurement-cache-flags.js (exit 1, 93.5s)
+      FAIL both actual CLI configurations complete valid neutral panels
+        FAIL two flags create four independent observer-on/off cache entries
+        FAIL cache identities retain each actual SIMOPT value
+        FAIL repeating the same setting reuses its two verified cases
+      
+      measurement cache flag isolation: 0 passed, 4 failed, 0 todo (phase 0)
+      failing: both actual CLI configurations complete valid neutral panels | two flags create four independent observer-on/off cache entries | cache identities retain each actual SIMOPT value | repeating t
+
+  FAIL scripts/godpath/test-measurement-workflow.js (exit 1, 9.4s)
+      ok   metric IDs are unique and every contract declares units, direction and tolerance
+        ok   sampling and confirmation settings remain valid
+        ok   retained real panel matches its proof digest
+        FAIL retained neutrality proof covers the current Game/controller/harness inputs
+        ok   proof declares every collector and contract input rather than silently omitting one
+        ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+        ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+        ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+        ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+      
+      measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+      failing: retained neutrality proof covers the current Game/controller/harness inputs
+
+  FAIL scripts/godpath/test-measurement-proof-update.js (exit 1, 27.1s)
+      Error: Proof source inputs are not current
+          at Object.validate (/home/hatch/workspace/worktrees/journey2-endgame/scripts/balance-proof-update.js:8:76)
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-endgame/scripts/godpath/test-measurement-proof-update.js:4:40)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+          at node:internal/main/run_main_module:33:47
+      
+      Node.js v24.22.1
+
+  FAIL scripts/godpath/test-occupation-cohorts.js (exit null, 120.1s)
+      ok   real shared-harness process: played
+        ok   real shared-harness process: npc-only
+        ok   real shared-harness process: absent
+        ok   real shared-harness process: default
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-occupation-panels.js (exit null, 120.2s)
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-one-person-army-deed-attainment.js (exit null, 120.2s)
+      seed 7...
+      seed 42...
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-phone-frame-proof.js (exit 1, 37.2s)
+      ok   both actual target phone sizes are retained
+        FAIL every retained browser input matches current source — index.html,src/data/alienPlayers.json,src/data/build-notes.json,src/data/foreignSpeech.json,src/data/regions.json,src/data/statusEffects.js
+        FAIL all current boot inputs are covered
+        ok   receipt identity declares portable text normalization
+        ok   retained receipt hash 736
+        FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+      
+      Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+      failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+
+  FAIL scripts/godpath/test-phase-shawl.js (exit null, 120.4s)
+        ok   real player poison tick phases without curing or freezing duration
+        ok   carried shawl cannot avoid a real poison tick
+        ok   real lockjaw tick and spasm phase separately
+        ok   real heatstroke still drains hydration while its HP tick phases
+        ok   real NPC fighter bleed phases using its own equipped gear
+        ok   monster status cannot borrow another persons shawl
+        ok   actual endDay routes both metabolic hits through equipped protection
+        ok   actual first corpse stack phases illness and still transfers loot with trauma
+        ok   another stack from the same corpse cannot reroll first-touch illness
+        ok   carried shawl leaves actual corpse illness damage intact
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-shepherd-deed.js (exit null, 120.1s)
+        ok   zero-health doctor cannot supply camp care
+        ok   rounds cannot resurrect a zero-health patient
+        ok   a field camp cannot borrow Haven hands while Haven keeps its own care
+        ok   a present Haven doctor treats residents while the bearer travels
+        ok   offscreen Haven rescue fulfills for the actual surviving NPC doctor
+        ok   a lone injured doctor keeps self care without earning another-person rounds
+        ok   a present field doctor cannot heal a patient left at Haven
+        ok   actual field-party doctor and patient can receive attributed care
+        ok   player competence can care for their actual field companion
+        ok   being outdoors without a camp cannot mint camp care
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-solo-campaign-endings.js (exit null, 120.1s)
+      ok   a recovered community retains the previously established loss
+        ok   unknown population reads cannot become measured survival
+        ok   actual engine community loss survives unknown observation coverage
+        ok   a malformed or missing current history is an observer error
+        ok   old village-dead records retain explicit historical-rule coverage
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-survival-parity.js (exit null, 120.4s)
+        ok   Continue and a new battle cannot refresh the spent NPC use
+        ok   Molt destroys worn copies while preserving actual unworn spares
+        ok   actual named sickness caller refuses death without a spite ration
+        ok   an authoritative lethal field outcome cannot receive a second world rescue
+        ok   healthy and unknown bodies cannot spend canonical survival resources
+        ok   echoed bodies cannot borrow canonical personal passives
+        ok   hopeless sealed fight records Molt before the later real death
+        ok   later arena death reaches actual person health and roster
+      
+      survival-parity: 44 passed, 0 failed, 0 todo (phase 0)
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-time-save-crashes.js (exit null, 120.2s)
+      Recovered precore-request day2
+      Recovered postcore-request day2
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-time-save-failures.js (exit null, 120.3s)
+      Time-save failure throw-before passed
+      Time-save failure throw-after passed
+      Time-save failure quota passed
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-time-save-settlement.js (exit null, 120.2s)
+      {"kind":"endDay","checks":11,"writes":1,"day":3}
+      {"kind":"advancePart","checks":11,"writes":1,"day":3}
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/godpath/test-trust-observer-neutrality.js (exit 1, 68.6s)
+      Error
+          at /home/hatch/workspace/worktrees/journey2-endgame/scripts/godpath/test-trust-observer-neutrality.js:16:265
+          at Array.map (<anonymous>)
+          at /home/hatch/workspace/worktrees/journey2-endgame/scripts/godpath/test-trust-observer-neutrality.js:16:27
+          at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-endgame/scripts/godpath/test-trust-observer-neutrality.js:22:3)
+          at Module._compile (node:internal/modules/cjs/loader:1929:14)
+          at Object..js (node:internal/modules/cjs/loader:2060:10)
+          at Module.load (node:internal/modules/cjs/loader:1651:32)
+          at Module._load (node:internal/modules/cjs/loader:1443:12)
+          at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+          at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+  FAIL scripts/test-synergy-stall.js (exit null, 120.2s)
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-tablerecon-20261013.js (exit null, 120.3s)
+        PASS nationalFirstDay from table rows
+        PASS waitingDay latched
+        PASS lesser met at exact thresholds
+        PASS full met at exact thresholds
+        PASS zero-state lesser gap names all 8 rungs
+        PASS zero-state full gap includes w4/w5
+        PASS wave-3 ledger points max across rows
+        PASS say capture records table beat
+        PASS registerDeath records structured death
+        PASS registerDeath pass-through preserves double-death guard
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-throttlefeast-20261014.js (exit null, 120.3s)
+      R1: throttle-off wrap honesty
+        PASS pristine prodThrottleEngaged is a function
+        PASS lean pantry: gate disengaged (false)
+        PASS fixture pantry is >4 fresh days (14.5)
+        PASS RED-probe: pristine gate ENGAGES on stocked pantry (true)
+        PASS OFF wrap neutralizes the gate (false)
+      R2: oneRun feast-road measurement (OFF arm, 20d)
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-capable-bot-20261014.js (exit null, 120.3s)
+        ok   paid feast actually grants the buff
+        ok   capable faces the actual feast draw
+        ok   real capable combat earns the food deed at first use
+        ok   earned food deed persists through combat settlement
+        ok   combat spends devotion only on actual use
+        ok   food chain has no policy errors
+        ok   online reactor refuses the otherwise armed grant honestly
+        ok   reactor refusal invents neither feast buff nor food deed
+      
+      short sims: 2 seeds x 40 days
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-ability-lanes-20261014.js (exit null, 120.3s)
+        ok   loud_chewer: trust builds 10% faster
+        ok   loud_chewer: monsters still hear you 2x
+      
+      grant paths teach skills
+        ok   practice deed haymaker teaches the skill, no slot
+        ok   trial deed peacemaker teaches mediate
+        ok   treat aid quest teaches wound_care
+        ok   chooseAbility on a skill-lane id teaches, never slots
+      
+      save migration
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-first-ability-magic-20261014.js (exit null, 120.2s)
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-table-endings-20261014.js (exit null, 120.1s)
+        ok   the same class reads differently on the dark side (moral changes the option)
+        ok   playing it moves the path meter by its data (dark +4) and records the play
+        ok   a class with no bespoke beat still gets an option in its own name
+        ok   a god unlocks its verb as the option
+        ok   the titan finale feeds the beat (apocalypse line in the prompt)
+        ok   odds: god level (+2) and the slain apocalypse (+1) add to the default gain (+2)
+        ok   defiant x brawler (dark): the collector's hands
+        ok   the build option fails if the room is not yours yet (stake: audience 3 < 4) -> downgrade, never a wipe
+      
+      4. Every path losable and winnable, for every fixture key
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-succession-grief-20261017.js (exit null, 120.1s)
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-killbeat.js (exit null, 120.3s)
+        ok   seed 2: scholar-finished fight runs
+        ok   seed 2: companion-finished fight runs
+        ok   seed 2: wave-3 companion veteran beat fires
+        ok   seed 2: veteran beat byte-identical to its template
+        ok   seed 3: scholar-finished fight runs
+        ok   seed 3: companion-finished fight runs
+        ok   seed 3: wave-3 companion veteran beat fires
+        ok   seed 3: veteran beat byte-identical to its template
+        ok   seed 4: scholar-finished fight runs
+        ok   seed 4: companion-finished fight runs
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-person-trust-20261108.js (exit null, 120.1s)
+      PASS unset personTrustOf is 0
+      PASS bondAdd accepts visit
+      PASS A trusts B after visit
+      PASS B trusts A after visit
+      PASS bondAdd does not write village.trust[a/b]
+      PASS bonds gate closed at empty map
+      PASS bonds gate opens at 40
+      PASS bondDriveLive present
+      PASS warmth window live at v=20 regardless of empty person map
+      PASS bonds gate still closed with empty person map
+      
+      [check.js] TIMEOUT after 120s
+
+  FAIL scripts/test-believed-pantry-perception.js (exit null, 120.1s)
+      == forced stale (no away) ==
+        PASS stale: not fromLive
+        PASS stale: food_security baseline
+        PASS stale: favor skips live empty
+      == failing control: strip filter → away uses live ==
+        PASS control: food_security heats on live empty
+        PASS control: favor sees forage_help
+        PASS control: FORAGE weight urgent
+        PASS control restored: food_security baseline again
+      == pre-registered errand-mix panel (absDelta ≤ 0.08) ==
+      
+      [check.js] TIMEOUT after 120s
+
+  slowest: scripts/godpath/test-main67-founding-pour-honesty.js 150s, scripts/godpath/test-survival-parity.js 120s, scripts/godpath/test-phase-shawl.js 120s
+
+check.js: 312 passed, 32 failed in 3825s
+GATE_EXIT=1
