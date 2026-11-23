@@ -94,13 +94,15 @@ function planIsWave4p(Game, plan) {
   return !!(plan.target && W4P_SET.has(plan.target));
 }
 
-const FROZEN_BASE = '34dc4dbc9a013e6163c32c662195d33ebbff383f';
-// RE-FROZEN 2026-11-23 by the run coordinator after rebasing the arm
-// onto master 7ade8d3bf: game code is byte-identical between the old
-// frozen base fdd7042b8 and 7ade8d3bf (zero src/js diff), and the
-// 16-seed control corpus + replays below were re-recorded on this
-// head; the analysis reproduced exactly (see the re-freeze addendum
-// in evidence/2026-11-23/sim-launchsilence-a.md).
+const FROZEN_BASE = 'b602eb83be07da1575fe2c73d8c9fc799d43ca1c';
+// RE-FROZEN #3 2026-11-23 by the adoption coordinator after rebasing
+// onto master ae4d4c277 (journey-crisis r274 changed src/js/comms.js
+// +18, so the corpus was re-recorded on the new game code, not just
+// re-anchored); see the re-freeze addendum in
+// evidence/2026-11-23/sim-launchsilence-a.md. First re-freeze was
+// 34dc4dbc9 (base fdd7042b8 -> master 7ade8d3bf, zero src/js diff);
+// re-freeze #2 (FROZEN_BASE 96cbe6887) died mid-re-record at the
+// 1115Z occurrence timeout and was discarded with the tree restore.
 let ANCHOR_HEAD = 'unknown';
 try { ANCHOR_HEAD = execSync('git rev-parse HEAD', { cwd: REPO }).toString().trim(); } catch (e) {}
 const ANCHOR = FROZEN_BASE;

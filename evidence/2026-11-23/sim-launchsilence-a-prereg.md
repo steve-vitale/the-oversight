@@ -322,3 +322,20 @@ code is byte-identical between the two bases (zero src/js diff
 fdd7042b8..7ade8d3bf); the re-recorded corpus reproduces the original
 analysis exactly on every judged field, and the proof is green 50/50
 on the rebased tree. The frozen bars are unchanged.
+
+## Re-freeze correction #3 (adoption coordinator, run fleshout-20261123T1315Z)
+
+After the arm was rebased onto master ae4d4c277 (journey-crisis
+r274), FROZEN_BASE was re-frozen from 34dc4dbc9 to
+b602eb83be07da1575fe2c73d8c9fc799d43ca1c and the control sweep +
+replays re-recorded on the new head. The r274 landing changed
+src/js/comms.js (+18, aidAllyDown dedup / flee edge) — a live
+game-code change, so this re-freeze re-recorded rather than
+re-anchored. The re-recorded corpus reproduces the original analysis
+exactly on every judged field (diff empty), the analyzer --diff
+matches 2/2 overlapping replay seeds, and the proof is green 50/50
+on the rebased tree. The frozen bars are unchanged. A prior
+re-freeze #2 attempt (FROZEN_BASE 96cbe6887) by the 1115Z coordinator
+died mid-re-record at the occurrence timeout (1/16 seeds re-recorded,
+the rest deleted on disk); it was discarded with the tree restore and
+never committed.

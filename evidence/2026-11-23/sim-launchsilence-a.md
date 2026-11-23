@@ -283,3 +283,21 @@ analysis.json is byte-identical to the worker's committed version
 relative form the worker used). Proof re-run green 50/50 on the
 rebased tree. No verdict changes; the DIAG-GO stands on the
 re-recorded corpus.
+
+## 11. Adoption re-freeze #3 (run fleshout-20261123T1315Z)
+
+Master moved twice during the adoption (journey-crisis r274
+ae4d4c277, then Loop B's killarrive-b a6cb127cc). The arm was rebased
+onto ae4d4c277 and re-frozen: FROZEN_BASE
+b602eb83be07da1575fe2c73d8c9fc799d43ca1c, 16-seed control corpus + both
+2-seed replays re-recorded on the new head. r274's src/js/comms.js
+(+18) did not perturb any trajectory on this band: the regenerated
+analysis.json is byte-identical to the worker's committed version
+(seeds 16, launches 50, launching 10, non-launching 6, classified 6,
+unclassified 0, stageCounts no-plan-created 3 / plan-never-ignites 3,
+wall wins 0 / national 0 / table 0 / wave5 9 / wave4 16 / median 150 /
+lost 6 / deaths 1594); analyzer --diff matches 2/2 overlapping replay
+seeds; analyzer selftest 20/20; proof re-run green 50/50 on the
+rebased tree. No verdict changes; the DIAG-GO stands on the
+re-recorded corpus. The re-freeze onto a6cb127cc follows as #4 (zero
+src/js diff, re-anchor + re-record per the same prescription).
