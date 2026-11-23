@@ -4340,6 +4340,35 @@
       return this.fillTalkLine(l, vp);
     },
 
+    // convoLiveBeat (journey-social r268 2026-11-23): the thread's next
+    // beat that can actually be SPOKEN right now — convoThreadBeat
+    // unless the returned line is ledger-blocked, in which case null.
+    // A blocked beat spoken through sayLine dries to "...Sorry, lost my
+    // train of thought." (r266: David Kim 45815 d82, resume pick "We
+    // never finished — that debt." re-served the thread's last beat while
+    // it was still inside the 48-entry run-ledger window). The r19
+    // opener fall-through pattern: callers fall through to their own
+    // graceful line (generic resume, exhausted pool, follow-up
+    // fallback) instead of drying. State hygiene: a discarded draw
+    // restores c.depth / c.reactDryCount, so the thread is exactly as
+    // if the beat was never drawn.
+    convoLiveBeat(vid) {
+      if (typeof this.convoThreadBeat !== 'function') return null;
+      const c = this.convoGet(vid);
+      const depth0 = c ? (c.depth || 0) : 0;
+      const dry0 = c ? (c.reactDryCount || 0) : 0;
+      let beat = null;
+      try { beat = this.convoThreadBeat(vid); } catch (e) { beat = null; }
+      if (!beat) return null;
+      try {
+        if (typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, beat)) {
+          if (c) { c.depth = depth0; c.reactDryCount = dry0; }
+          return null;
+        }
+      } catch (e) { /* a predicate failure never blocks a live beat */ }
+      return beat;
+    },
+
     // convoVillageLine(vid): the current "how's the village" line, generated
     // from live village state with temperament-specific idle fallback.
     // Extracted (journey-landing r42 2026-10-23) from convoAskTopic so the
@@ -7177,7 +7206,9 @@
           } catch (e) {}
           c.thread = akey; c.depth = 1;
           this.resolveConsequence(vid, { trust: 1, temper: 'kind', name: 'alive:thread' });
-          const beat = (typeof this.convoThreadBeat === 'function') ? this.convoThreadBeat(vid) : null;
+          // r268: convoLiveBeat — a ledger-blocked beat falls through to
+          // the generic resume line below instead of drying.
+          const beat = (typeof this.convoLiveBeat === 'function') ? this.convoLiveBeat(vid) : null;
           // HEED-ENGAGE (journey-landing r131 2026-11-13): resuming the
           // 'want' thread speaks the want's engageBeat — the player picked
           // up the warning thread by name ("We never finished — that
@@ -7550,7 +7581,9 @@
           done('"..."', null);
         }
       } else if (choiceId === 'more') {
-        const beat = this.convoThreadBeat(vid);
+        // r268: convoLiveBeat — a ledger-blocked beat falls through to the
+        // exhausted pool below instead of drying.
+        const beat = (typeof this.convoLiveBeat === 'function') ? this.convoLiveBeat(vid) : null;
         // NULL-LINE GUARD (journey-establishment r16 2026-10-18): when the
         // thread is dry AND the exhausted pool is fully ledger-blocked,
         // convoPickCycle returns null and the turn spoke a literal
@@ -7594,7 +7627,8 @@
               led.open = (led.open || []).filter(x => !x || x.tid !== tid);
             } catch (e) {}
             if (tid) { c.thread = tid; c.depth = Math.max(c.depth || 0, 1); }
-            const beat = (typeof this.convoThreadBeat === 'function') ? this.convoThreadBeat(vid) : null;
+            // r268: convoLiveBeat — same fall-through as alive:thread.
+            const beat = (typeof this.convoLiveBeat === 'function') ? this.convoLiveBeat(vid) : null;
             const predT = (o && typeof this.inheritedName === 'function') ? this.inheritedName(o) : null;
             resp = beat || (predT
               ? `"About ${label} — that was ${predT}'s thread. We never did get back to that."`
@@ -7684,7 +7718,9 @@
         c.followUsed[ftopic] = c.followUsed[ftopic] || [];
         if (c.followUsed[ftopic].indexOf(fi) === -1) c.followUsed[ftopic].push(fi);
         const flabel = (TOPIC_FOLLOWUPS[ftopic] || [])[fi] || '"Tell me more."';
-        const fbeat = this.convoThreadBeat(vid);
+        // r268: convoLiveBeat — a ledger-blocked beat falls through to the
+        // follow-up fallback below instead of drying.
+        const fbeat = (typeof this.convoLiveBeat === 'function') ? this.convoLiveBeat(vid) : null;
         if (fbeat) {
           done(fbeat, flabel);
         } else {
