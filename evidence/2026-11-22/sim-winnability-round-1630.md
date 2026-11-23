@@ -57,7 +57,7 @@ Leaderproj armed + control corpora (n=8 each) against the scale-wall baseline (`
 
 ## Closeout
 
-- Merged `fb0794a44` (leaderproj) + `6714e8416` (rejudge); round record this file (committed as [RECORD-COMMIT], merged ff-only onto `57645efb9`).
+- Merged `fb0794a44` (leaderproj) + `6714e8416` (rejudge); round record this file, merged ff-only onto `57645efb9` (see git log for the tip).
 - Round gate 339/5 in 712s, 0 attributable (see above). Telemetry: 3 LOUD regime lines on both legs, baseline NOT rolled. Tracker appended (winnability-chain stays converging). Findings: lines 2695/2696 updated, #2619 stays OPEN.
 - Claim retired to `.DEAD`; lock deleted LAST with same-call per-line run_id verification.
-- Worktrees released done-merged (sim-leaderproj-b, sim-launchfield-rejudge-b, sim-winnability-round-1630), branches deleted. Reaper sweep at closeout: [REAPER-RESULT]. Main tree clean.
+- Worktrees released done-merged (sim-leaderproj-b, sim-launchfield-rejudge-b, sim-winnability-round-1630), branches deleted. Reaper sweep at closeout: nothing removed (exit 0; 9 LOUD lines, all dirty trees correctly left alone — held/live work incl. this adoption's three worktrees, all fresh-heartbeat). Main tree clean.
