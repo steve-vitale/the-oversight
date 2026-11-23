@@ -315,8 +315,39 @@ function v2Fight(Game, ctx) {
         const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
         if (px === 0 || px === 8 || py === 0 || py === 8) pushThrough();
         if (Game.tbfight && !Game.tbfight.over && Game.tbIsPlayerTurn()) {
-          const tx = px <= 4 ? 0 : 8;
-          try { Game.tbPlayerMove(tx, py); } catch (e) {}
+          // NEAREST-AFFORDABLE-EDGE (journey-crisis r274, FIX 2 for the
+          // r264 FIGHT-STALL NO-GO): the old flee aimed at the west/east
+          // edge at the current row (0,py)/(8,py) and the move failed on
+          // COST — "Too far" on 236/237 calls on the probe's stall days,
+          // because a slowed fighter (moveLeft 1-3) cannot afford a
+          // 4-5 step path while a 1-step edge sits open (probe seed
+          // 14601: d26 south 1 step, d103 south 1 step, d144 north
+          // 1 step). Aim at the cheapest edge tile whose path COST
+          // (tbTerrainCost summed over the found path) fits this turn's
+          // moveLeft, considering all four edges; only then push through.
+          // If no edge tile is affordable this turn, fall back to the old
+          // target (it will fail honestly, and the fight is reported as a
+          // stall — the bar is not gamed by skipping the attempt).
+          const gmax = (typeof Game.tbGridMax === 'function') ? Game.tbGridMax() : 8;
+          const q = Game.tbFighter('p');
+          const mv = q ? (q.moveLeft || 0) : 0;
+          let best = null, bestCost = Infinity;
+          try {
+            const cands = [];
+            for (let x = 0; x <= gmax; x++) { cands.push([x, 0]); cands.push([x, gmax]); }
+            for (let y = 1; y < gmax; y++) { cands.push([0, y]); cands.push([gmax, y]); }
+            for (const [tx, ty] of cands) {
+              if (tx === px && ty === py) continue;
+              let path = null;
+              try { path = Game.findPath(px, py, tx, ty); } catch (e) {}
+              if (!path || !path.length) continue;
+              let cost = 0;
+              try { for (const [cx, cy] of path) cost += (typeof Game.tbTerrainCost === 'function' ? Game.tbTerrainCost(cx, cy) : 1); } catch (e) { cost = path.length; }
+              if (cost <= mv && cost < bestCost) { best = [tx, ty]; bestCost = cost; }
+            }
+          } catch (e) {}
+          if (best) { try { Game.tbPlayerMove(best[0], best[1]); } catch (e) {} }
+          else { const tx = px <= 4 ? 0 : gmax; try { Game.tbPlayerMove(tx, py); } catch (e) {} }
           pushThrough();
         }
         ctx.fled = (ctx.fled || 0) + 1;

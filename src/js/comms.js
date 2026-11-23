@@ -723,7 +723,25 @@
     },
 
     // aidAllyDown: their blood on our doorstep. Called by fieldFight.
+    // DOWNEDTWICE (journey-crisis r274, FIX 1 for the r264 regression of
+    // #2634): aidFight can be entered twice for the same fall in one tick
+    // (two call sites / two tick passes), and the #2634 live->0 guard only
+    // covers one fieldFight call — so the fall landed twice (trust -12,
+    // 2,000 kcal forgiven, the goes-down block twice). Guard HERE, per
+    // ally+day: a fallen ally is dragged clear and does not fall twice in
+    // one day. The seen-map resets when the day changes, so it never
+    // grows past one day's falls. Returns false when deduped.
     aidAllyDown(villageId, face, allyName) {
+      var day = 0;
+      try { day = _day(this); } catch (e) {}
+      var who = (allyName || face || 'Their fighter');
+      var key = String(villageId) + '|' + who + '|d' + day;
+      try {
+        var seen = this.state._aidAllyDownSeen;
+        if (!seen || seen.day !== day) { seen = this.state._aidAllyDownSeen = { day: day, keys: {} }; }
+        if (seen.keys[key]) return false;
+        seen.keys[key] = 1;
+      } catch (e) {}
       var link = null;
       try { link = this.linkWith(villageId); } catch (e) {}
       var vn = _vname(this, villageId);
