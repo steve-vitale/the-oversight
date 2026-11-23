@@ -8,9 +8,18 @@
 // anchor pinned to the frozen base literal) + §5 D1/D2 at 30d on 107439 under the
 // full substrate (repeatability + recorder neutrality) + §6 anchor
 // (static strings §1 + live values §4 — the anchor-label lesson
-// from the sibling arm, now proof-caught).
+// from the sibling arm, now proof-caught) + §7 re-judge (the amended
+// analyzer re-reads the frozen pilot + confirm corpora — no legs
+// re-run, no driver use) + §7b old-code-fails control (the 86e5bd38e
+// analyzer on the same confirm corpus must still fail).
 // No new sims before §4; §4/§5 are live proof runs on the screening
 // seed only (the judged leg runs the frozen band after this test).
+// HORIZONFIX (sim-launchfield-horizonfix-b): this test amends the
+// horizon-b proof for the clause extension — §1 +2, §2 selftest now
+// 86 checks (§H5 + §H6), §7 +7, §7b +4 = 66 checks; 66/66 on the
+// frozen base, 64/66 expected on a rebased worktree (the 2 §1
+// freeze-time checks fail BY DESIGN after any rebase — see the
+// 0030Z adoption record; record them, do NOT "fix" them).
 // Usage: node scripts/test-launchfield-horizon-b.js
 'use strict';
 const fs = require('fs');
@@ -68,6 +77,18 @@ const FROZEN_BASE12 = '4e805681a050';
     text.indexOf('AMENDMENT 1') !== -1 && text.indexOf('Leg S part-level fallback rules') !== -1);
   check('§1 prereg records the anchor pin (FROZEN BASE literal, not run-time merge-base)',
     text.indexOf('ANCHOR PIN') !== -1 && text.indexOf('4e805681a050') !== -1);
+  // HORIZONFIX (sim-launchfield-horizonfix-b prereg, frozen): the
+  // fix prereg freezes option (a) — the clause extension — and the
+  // analyzer carries the shared zero-row predicate.
+  const fixPrereg = path.join(REPO, 'evidence', '2026-11-23', 'sim-launchfield-horizonfix-b-prereg.md');
+  check('§1 horizonfix prereg exists and freezes option (a) clause extension (not the sampler fix)',
+    fs.existsSync(fixPrereg) && (function () { const t = fs.readFileSync(fixPrereg, 'utf8');
+      return t.indexOf('Chosen: (a) CLAUSE EXTENSION') !== -1 && t.indexOf('zeroRowFinalDayInfo') !== -1 &&
+        t.indexOf('Rejected: (b) SAMPLER FIX') !== -1; })());
+  check('§1 analyzer carries the zero-row final-day predicate + hs-horizon-truncated reason',
+    (function () { const a = fs.readFileSync(path.join(REPO, 'scripts', 'analyze-launchfield-horizon-b.js'), 'utf8');
+      return a.indexOf('function zeroRowFinalDayInfo') !== -1 && a.indexOf('hs-horizon-truncated') !== -1 &&
+        a.indexOf('hsRowsByDay') !== -1 && a.indexOf('hHorizonTruncated') !== -1; })());
   check('§1 src/ clean at proof time', (git('status --short -- src/js') || '') === '', git('status --short -- src/js'));
   // ANCHOR PIN (sim-launchfield-horizon-b prereg, §6 fix): the arm's frozen
   // base is the literal 4e805681a050, and the branch is anchored at it
@@ -123,7 +144,7 @@ const FROZEN_BASE12 = '4e805681a050';
 })();
 
 // ---- §2 ANALYZER SELFTEST ----
-check('§2 analyzer selftest green (71 checks incl. §F H fixtures + §G Leg R + §H Leg S + §H4 field-encounter)', AH.selftest() === true);
+check('§2 analyzer selftest green (86 checks incl. §F H fixtures + §G Leg R + §H Leg S + §H4 field-encounter + §H5 horizon + §H6 horizonfix)', AH.selftest() === true);
 
 // ---- §3 FIXTURE END-TO-END (seedOf applies H + Leg S) ----
 (function () {
@@ -216,6 +237,83 @@ check('§2 analyzer selftest green (71 checks incl. §F H fixtures + §G Leg R +
     hits.length === 2 &&
     hits.some(function (h) { return h.seed === 107305 && h.vid === 'devon_okafor' && h.target === 'reunion' && h.day === 150 && h.part === 3 && h.enc && h.enc.mid === 'suburb' && h.enc.outcome === 'vFlee'; }) &&
     hits.some(function (h) { return h.seed === 107305 && h.vid === 'benoit_lambert' && h.target === 'eulogy' && h.day === 150 && h.part === 3 && h.enc && h.enc.mid === 'suburb' && h.enc.outcome === 'vFlee'; }), hits);
+})();
+
+// ---- §7 RE-JUDGE (horizonfix): the amended analyzer re-reads the
+// frozen pilot + confirm corpora — no legs re-run, no driver use.
+// This is the observable-effect proof: the clause firing (4 parts,
+// 1 instance-day) on seed 107447, and the pilot re-judging
+// unchanged. Runs at load time (pure reads).
+(function () {
+  const pilot = AH.bandOf('evidence/2026-11-23/perseed-launchfield-horizon-b-107439-107446');
+  const confirm = AH.bandOf('evidence/2026-11-23/perseed-launchfield-horizon-b-107447-107454');
+  const repro = AH.reproduceOldBand();
+  const pj = AH.judge(pilot, repro);
+  const cj = AH.judge(confirm, repro);
+  check('§7 re-judge: pilot band re-judges unchanged (DIAG-GO, unknown 0, unexplained 0, horizonTruncated 0)',
+    pj.verdict === 'DIAG-GO' && pilot.unknown === 0 && pilot.sUnexplained === 0 &&
+    pilot.sHorizonTruncated === 0 && (pilot.hHorizonTruncated || 0) === 0,
+    { verdict: pj.verdict, unknown: pilot.unknown, sUnexplained: pilot.sUnexplained });
+  check('§7 re-judge: confirm band is DIAG-GO under the amended clause',
+    cj.verdict === 'DIAG-GO', cj.bars.completeness);
+  check('§7 re-judge: confirm completeness 0 unknown + 0 unexplained parts',
+    confirm.unknown === 0 && confirm.sUnexplained === 0,
+    { unknown: confirm.unknown, sUnexplained: confirm.sUnexplained });
+  check('§7 re-judge: confirm horizon-truncated parts are exactly the 4 d150 parts of 107447',
+    confirm.sHorizonTruncated === 4 && (confirm.horizonTruncatedParts || []).length === 4 &&
+    confirm.horizonTruncatedParts.every(function (p) { return p.seed === 107447 && p.vid === 'visjoin_134' && p.target === 'editor' && p.day === 150; }),
+    confirm.horizonTruncatedParts);
+  check('§7 re-judge: exactly 1 horizon-truncated instance-day, recorded per instance-day',
+    (confirm.hHorizonTruncated || 0) === 1 && (confirm.horizonTruncatedDays || []).length === 1 &&
+    confirm.horizonTruncatedDays[0].seed === 107447 && confirm.horizonTruncatedDays[0].vid === 'visjoin_134' &&
+    confirm.horizonTruncatedDays[0].target === 'editor' && confirm.horizonTruncatedDays[0].day === 150,
+    confirm.horizonTruncatedDays);
+  check('§7 re-judge: hTally carries hs-horizon-truncated 1 and hs-no-rows 0',
+    (confirm.hTally || {})['hs-horizon-truncated'] === 1 && ((confirm.hTally || {})['hs-no-rows'] || 0) === 0,
+    confirm.hTally);
+  check('§7 re-judge: Leg R still reproduces the 10 launcheng unknown days exactly',
+    repro.exact === true && repro.unknownDays.length === 10, repro);
+})();
+
+// ---- §7b OLD-CODE-FAILS CONTROL ----
+// The unamended analyzer (commit 86e5bd38e, the merged horizon-b
+// tip) is extracted to a temp file under scripts/ (its requires
+// resolve relative to the worktree), required, and run over the
+// same confirm corpus. It must STILL report the failure the new
+// clause closes (unknown 1, 4 unexplained parts, 0 truncated) —
+// i.e. the §7 assertions above FAIL against old code. The temp
+// file is deleted in a finally; its absence is asserted. The
+// write is flap-retried like the §6b shim (fixed path, overwrite,
+// never delete-then-create).
+(function () {
+  const oldPath = path.join(REPO, 'scripts', '.launchfield-horizon-old-analyzer.js');
+  let setupOk = false, setupErr = '';
+  for (let i = 0; i < 24 && !setupOk; i++) {
+    try {
+      const src = execSync('git show 86e5bd38e:scripts/analyze-launchfield-horizon-b.js', { cwd: REPO, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+      fs.writeFileSync(oldPath, src);
+      const back = fs.readFileSync(oldPath, 'utf8');
+      setupOk = fs.existsSync(oldPath) && back.indexOf('zeroRowFinalDayInfo') === -1 &&
+        back.indexOf('hs-horizon-truncated') === -1 && back.indexOf('hHorizonTruncated') === -1;
+    } catch (e) { setupErr = String((e && e.message) || e).slice(0, 120); }
+    if (!setupOk && i < 23) { try { execSync('sleep 5', { cwd: REPO }); } catch (e) {} }
+  }
+  check('§7b old-code control setup: 86e5bd38e analyzer extracted (flap-retried, no horizonfix predicate)', setupOk, setupErr);
+  if (!setupOk) return;
+  try {
+    delete require.cache[require.resolve(oldPath)];
+    const OLD = require(oldPath);
+    const oldConfirm = OLD.bandOf('evidence/2026-11-23/perseed-launchfield-horizon-b-107447-107454');
+    check('§7b old-code control: unamended analyzer still reports the confirm band unknown 1',
+      oldConfirm.unknown === 1, { unknown: oldConfirm.unknown });
+    check('§7b old-code control: unamended analyzer still reports 4 unexplained parts, 0 truncated',
+      oldConfirm.sUnexplained === 4 && (oldConfirm.sHorizonTruncated || 0) === 0,
+      { sUnexplained: oldConfirm.sUnexplained, sHorizonTruncated: oldConfirm.sHorizonTruncated });
+  } finally {
+    try { fs.unlinkSync(oldPath); } catch (e) {}
+  }
+  check('§7b old-code control: temp old-analyzer file removed (worktree clean)',
+    !fs.existsSync(oldPath));
 })();
 
 // ---- §4 RECORDER: live 150d shape run (screening seed 107439) ----

@@ -12,6 +12,17 @@
 // expectation to the FROZEN BASE (the launchstate §6 proof compared
 // the recorded anchor against the same run-time merge-base computation
 // that produced it — a tautology; see the driver header).)
+// HORIZONFIX EXTENSION (sim-launchfield-horizonfix-b prereg, frozen):
+// the confirm band failed by one instance-day (107447 visjoin_134 /
+// editor, d150 p0-3, all no-rows) on a final day with ZERO holder-
+// state rows village-wide, so the frozen clause could not fire.
+// The extension reclassifies a final-day instance-day with zero
+// holder-state rows village-wide as horizon-truncated — at BOTH
+// levels (Taxonomy H day reason hs-horizon-truncated, Leg S parts
+// 0-3) — PROVIDED the vid has a holder-state row on day-1 and no
+// death record on/before the final day. The firing is counted per
+// instance-day (hHorizonTruncated / horizonTruncatedDays). The
+// original p3-only rule is unchanged.
 // Legs, all frozen in evidence/2026-11-23/sim-launchfield-horizon-b-prereg.md
 // (+ AMENDMENT 1, Leg S fallback rules, + the field-encounter
 // fallback frozen in this arm's prereg):
@@ -375,11 +386,17 @@ const WHEN_ORDER = { 'part-start': 0, 'tick-entry': 1, 'tick-exit': 2 };
 const HS_SKIP_REASONS = ['hs-engaged-skip', 'hs-away-skip', 'hs-off-haven-skip', 'hs-expedition-skip'];
 function buildHsCtx(j) {
   const hsByVidDay = {};
+  // HORIZONFIX (sim-launchfield-horizonfix-b prereg, frozen):
+  // village-wide holder-state row counts per day — the extension's
+  // guard (2) needs to know the sampler wrote zero rows for ANY
+  // vid on the final day, not just for this holder.
+  const hsRowsByDay = {};
   for (const r of (j.holderState || [])) {
     if (!r || !r.vid || r.day == null) continue;
     if (!hsByVidDay[r.vid]) hsByVidDay[r.vid] = {};
     if (!hsByVidDay[r.vid][r.day]) hsByVidDay[r.vid][r.day] = [];
     hsByVidDay[r.vid][r.day].push(r);
+    hsRowsByDay[r.day] = (hsRowsByDay[r.day] || 0) + 1;
   }
   for (const vid of Object.keys(hsByVidDay)) for (const d of Object.keys(hsByVidDay[vid])) {
     hsByVidDay[vid][d].sort(function (a, b) {
@@ -413,7 +430,7 @@ function buildHsCtx(j) {
       encounterRowsByVidDay[v][e.day | 0].push(e);
     }
   }
-  return { hsByVidDay: hsByVidDay, gateByVidDay: gateByVidDay,
+  return { hsByVidDay: hsByVidDay, hsRowsByDay: hsRowsByDay, gateByVidDay: gateByVidDay,
     encountersByVidDay: encountersByVidDay,
     encounterRowsByVidDay: encounterRowsByVidDay,
     holderStateRows: (j.holderState || []).length,
@@ -430,6 +447,34 @@ function lastPickDayBefore(j, vid, target, day) {
   }
   return best;
 }
+// HORIZONFIX EXTENSION (sim-launchfield-horizonfix-b prereg,
+// frozen): zeroRowFinalDayInfo(j, vid, day, hsCtx) — the shared
+// predicate for the zero-row final day. Returns
+// { finalDay, vidRowsPrevDay } iff ALL of: (1) day IS the run's
+// final day (j.gameDays || j.days, NOT the literal 150); (2) zero
+// holder-state rows village-wide that day (any vid, any part /
+// target / when); (3) >= 1 holder-state row for the vid on day-1
+// (the sampler was actively sampling this holder the day before
+// the halt); (4) no death record for the vid with day <= finalDay
+// (a dead holder's missing rows are death, not truncation).
+// Returns null otherwise. The day-level and part-level clauses
+// both call this one predicate, so the two levels cannot drift.
+function zeroRowFinalDayInfo(j, vid, day, hsCtx) {
+  const finalDay = j.gameDays || j.days || 0;
+  if (!finalDay || day !== finalDay) return null;
+  if (((hsCtx.hsRowsByDay || {})[day] || 0) !== 0) return null;
+  const prevRows = ((hsCtx.hsByVidDay[vid] || {})[day - 1]) || [];
+  if (!prevRows.length) return null;
+  const deathDay = (j.deaths || []).reduce(function (best, d) {
+    if (d && d.kind === 'villager' && d.who === vid) {
+      const dd = d.day | 0;
+      if (best == null || dd < best) return dd;
+    }
+    return best;
+  }, null);
+  if (deathDay != null && deathDay <= finalDay) return null;
+  return { finalDay: finalDay, vidRowsPrevDay: prevRows.length };
+}
 function classifyUnknownDayH(day, inst, j, hsCtx) {
   const vid = inst.vid;
   const allRows = ((hsCtx.hsByVidDay[vid] || {})[day]) || [];
@@ -437,8 +482,19 @@ function classifyUnknownDayH(day, inst, j, hsCtx) {
   const otherTargetRows = allRows.length - dayRows.length;
   const gates = (((hsCtx.gateByVidDay[vid] || {})[day]) || [])
     .filter(function (g) { return g.target === inst.target; });
-  if (!dayRows.length && !gates.length)
+  if (!dayRows.length && !gates.length) {
+    // HORIZONFIX EXTENSION (sim-launchfield-horizonfix-b prereg,
+    // frozen): the whole final day was never sampled — the
+    // sampler halted with the sim — so the day is horizon-
+    // truncated, not a recorder gap. Fires only in the exact
+    // hs-no-rows branch (no rows, no gates); a day where other
+    // vids have rows stays hs-no-rows (the village WAS sampled).
+    const zr = zeroRowFinalDayInfo(j, vid, day, hsCtx);
+    if (zr) return { reason: 'hs-horizon-truncated',
+      trace: { parts: [], otherTargetRows: otherTargetRows, finalDay: zr.finalDay,
+        villageRowsThatDay: 0, vidRowsPrevDay: zr.vidRowsPrevDay } };
     return { reason: 'hs-no-rows', trace: { parts: [], otherTargetRows: otherTargetRows } };
+  }
   if (gates.length)
     return { reason: 'hs-gate-pick',
       trace: { gates: gates.map(function (g) { return { part: g.part, kind: g.kind, gate: g.gate }; }), parts: [] } };
@@ -759,9 +815,16 @@ function substrateOf(j) {
 // day reclassifies horizon-truncated — the sim halts before the
 // final part is sampled, so the part is unobserved, not
 // mis-recorded. A final-part no-rows part with NO row that day
-// stays no-rows. The clause runs AFTER perPartWhyNot, so it never
-// reclassifies a scored, field-encounter, or otherwise explained
-// part, and never fires on a non-final part.
+// stays no-rows — UNLESS the whole final day was never sampled
+// (HORIZONFIX EXTENSION, sim-launchfield-horizonfix-b prereg,
+// frozen: zero holder-state rows village-wide that day, vid
+// sampled the day before, vid alive — see zeroRowFinalDayInfo —
+// in which case a no-rows part at ANY part 0-3 of the final day
+// reclassifies horizon-truncated, at both the day level
+// (hs-horizon-truncated) and the part level). The clause runs
+// AFTER perPartWhyNot, so it never reclassifies a scored,
+// field-encounter, or otherwise explained part, and never fires
+// on a non-final part.
 const S_UNEXPLAINED = { 'no-rows': true, 'refresh-unexplained': true };
 function perPartWhyNot(day, part, inst, j, hsCtx) {
   const vid = inst.vid;
@@ -867,6 +930,19 @@ function applyPerPartLedger(j, inst, enriched, hsCtx) {
       if (!got.scored && got.whyNot === 'no-rows' && d === finalDay && p === 3) {
         const dayRows = ((hsCtx.hsByVidDay[inst.vid] || {})[d]) || [];
         if (dayRows.length) got = { scored: false, whyNot: 'horizon-truncated' };
+      }
+      // HORIZONFIX EXTENSION (sim-launchfield-horizonfix-b prereg,
+      // frozen): the whole final day was never sampled — the
+      // sampler halted with the sim — so a no-rows part at ANY
+      // part 0-3 of the final day reclassifies horizon-truncated,
+      // PROVIDED the shared predicate holds (village-wide zero
+      // rows that day, vid sampled the day before, vid alive).
+      // Runs after perPartWhyNot like the original clause, so a
+      // scored / field-encounter / otherwise explained part is
+      // never reclassified. Cannot double-fire with the p3 rule
+      // above: that one needs rows that day, this one needs zero.
+      if (!got.scored && got.whyNot === 'no-rows' && d === finalDay) {
+        if (zeroRowFinalDayInfo(j, inst.vid, d, hsCtx)) got = { scored: false, whyNot: 'horizon-truncated' };
       }
       if (got.whyNot === 'seed-day') sSeedDayParts++;
       if (got.whyNot === 'horizon-truncated') sHorizonTruncated++;
@@ -1010,13 +1086,25 @@ function bandOf(dir) {
   // B' count) so U is visible beside it.
   const hTally = {};
   const hDays = [];
-  let hU = 0, hE = 0, hS = 0;
+  // HORIZONFIX (sim-launchfield-horizonfix-b prereg, frozen): the
+  // extension's firings, counted per instance-day (the task's
+  // "recorded per instance-day" requirement) — the hDays entries
+  // already carry hReason hs-horizon-truncated; this list makes
+  // the firings explicit beside the part-level list.
+  const horizonTruncatedDays = [];
+  let hU = 0, hE = 0, hS = 0, hHorizonTruncated = 0;
   for (const s of perSeed) {
     for (const inst of s.notBid.concat(s.churn)) {
       hU += (inst.hU || 0); hE += (inst.hE || 0); hS += (inst.hS || 0);
       for (const k of Object.keys(inst.hTally || {})) hTally[k] = (hTally[k] || 0) + (inst.hTally[k] | 0);
-      for (const hd of (inst.hDays || [])) hDays.push({ seed: s.seed, vid: inst.vid, target: inst.target,
-        day: hd.day, bReason: hd.bReason, hReason: hd.hReason, trace: hd.trace });
+      for (const hd of (inst.hDays || [])) {
+        hDays.push({ seed: s.seed, vid: inst.vid, target: inst.target,
+          day: hd.day, bReason: hd.bReason, hReason: hd.hReason, trace: hd.trace });
+        if (hd.hReason === 'hs-horizon-truncated') {
+          hHorizonTruncated++;
+          horizonTruncatedDays.push({ seed: s.seed, vid: inst.vid, target: inst.target, day: hd.day });
+        }
+      }
     }
   }
   // Mechanism check (prereg, frozen): CONFIRMED iff S >= 1;
@@ -1092,6 +1180,7 @@ function bandOf(dir) {
     scoredDawnsMismatch: scoredMismatch,
     unknown: unknown,
     hU: hU, hE: hE, hS: hS, hTally: hTally, hDays: hDays, mechanism: mechanism,
+    hHorizonTruncated: hHorizonTruncated, horizonTruncatedDays: horizonTruncatedDays,
     holderStateRows: sum(function (s) { return s.holderStateRows || 0; }),
     holderGateRows: sum(function (s) { return s.holderGateRows || 0; }),
     poolEligDist: poolEligDist, poolFirstFails: poolFirstFails,
@@ -1170,6 +1259,8 @@ function judge(band, repro) {
       unknown: band.unknown, scoredMismatch: band.scoredDawnsMismatch,
       hU: band.hU, hE: band.hE, hS: band.hS, hTally: band.hTally,
       mechanism: band.mechanism,
+      hHorizonTruncated: band.hHorizonTruncated || 0,
+      horizonTruncatedDays: band.horizonTruncatedDays || [],
       sParts: band.sPartsTotal || 0, sScored: band.sScored || 0,
       sExplained: band.sExplained || 0, sUnexplained: band.sUnexplained || 0,
       sWhyNot: band.sWhyNot || {}, sSeedDayParts: band.sSeedDayParts || 0,
@@ -1212,7 +1303,8 @@ function main() {
   console.log('assessedDayReasons=' + JSON.stringify(band.assessedDayReasons));
   console.log('zeroRowReasons=' + JSON.stringify(band.zeroRowReasons) +
     ' churnZeroRowReasons=' + JSON.stringify(band.churnZeroRowReasons));
-  console.log('hTally=' + JSON.stringify(band.hTally) + ' mechanism=' + band.mechanism);
+  console.log('hTally=' + JSON.stringify(band.hTally) + ' mechanism=' + band.mechanism +
+    ' horizonTruncatedDays=' + JSON.stringify(band.horizonTruncatedDays || []));
   console.log('holderStateRows=' + band.holderStateRows + ' holderGateRows=' + band.holderGateRows);
   console.log('repro: exact=' + repro.exact + ' gotDays=' + repro.unknownDays.length +
     ' wantDays=' + REPRODUCTION.length + ' holderStateRows=' + repro.holderStateRows);
@@ -1851,6 +1943,206 @@ function selftest() {
       check('§H Leg S LAUNCHFIELD: vid as encounter ally classifies field-encounter (same map as day level)',
         got.whyNot === 'field-encounter' && got.enc && got.enc.mid === 'suburb', got);
     })();
+    // H5 HORIZON (original p3 clause — sim-launchfield-horizon-b
+    // prereg; the clause was never directly fixture-tested before
+    // this arm: it never fired on either band). Final day 12.
+    // H5a positive: rows at p0-2, p3 no-row, vid rows that day.
+    (function () {
+      const doc = { seed: 999010, gameDays: 12, deaths: [], daily: [],
+        dawnbidCensus: [11, 12].map(function (d) { return { day: d, vid: 'h1' }; }), v4seeds: [],
+        dawnbidScores: [], holderGatePicks: [], v4encounters: [],
+        holderState: [0, 1, 2, 3].map(function (p) {
+          return hsRow(11, p, 'tick-entry', choreObj(2));
+        }).concat([0, 1, 2].map(function (p) {
+          return hsRow(12, p, 'tick-entry', choreObj(2));
+        })) };
+      const hsCtx = buildHsCtx(doc);
+      const inst = { vid: 'h1', target: 'algorithm', seedDay: 11, closeDay: 12 };
+      const enriched = applyPerPartLedger(doc, inst, {}, hsCtx);
+      const p3 = enriched.sParts.filter(function (sp) { return sp.day === 12 && sp.part === 3; })[0];
+      check('§H HORIZON: final-part no-rows with vid rows that day reclassifies horizon-truncated',
+        enriched.sHorizonTruncated === 1 && enriched.sUnexplained === 0 &&
+        p3 && p3.whyNot === 'horizon-truncated', enriched.sTally);
+    })();
+    // H5b negative: no rows for the vid that day, BUT other vids
+    // have rows that day (the village WAS sampled) — stays no-rows.
+    (function () {
+      const doc = { seed: 999011, gameDays: 12, deaths: [], daily: [],
+        dawnbidCensus: [11, 12].map(function (d) { return { day: d, vid: 'h1' }; }), v4seeds: [],
+        dawnbidScores: [], holderGatePicks: [], v4encounters: [],
+        holderState: [0, 1, 2, 3].map(function (p) {
+          return hsRow(11, p, 'tick-entry', choreObj(2));
+        }).concat([0, 1, 2].map(function (p) {
+          return hsRow(12, p, 'tick-entry', choreObj(2), { vid: 'h2' });
+        })) };
+      const hsCtx = buildHsCtx(doc);
+      const inst = { vid: 'h1', target: 'algorithm', seedDay: 11, closeDay: 12 };
+      const enriched = applyPerPartLedger(doc, inst, {}, hsCtx);
+      check('§H HORIZON negative: no vid rows that day but other vids sampled stays no-rows (unexplained)',
+        enriched.sUnexplained === 4 && enriched.sHorizonTruncated === 0, enriched.sTally);
+    })();
+    // H5c negative: a no-rows part on a NON-final day stays no-rows.
+    (function () {
+      const doc = { seed: 999012, gameDays: 12, deaths: [], daily: [],
+        dawnbidCensus: [10, 11, 12].map(function (d) { return { day: d, vid: 'h1' }; }), v4seeds: [],
+        dawnbidScores: [], holderGatePicks: [], v4encounters: [],
+        holderState: [0, 1, 2].map(function (p) {
+          return hsRow(11, p, 'tick-entry', choreObj(2));
+        }).concat([0, 1, 2, 3].map(function (p) {
+          return hsRow(12, p, 'tick-entry', choreObj(2));
+        })) };
+      const hsCtx = buildHsCtx(doc);
+      const inst = { vid: 'h1', target: 'algorithm', seedDay: 10, closeDay: 12 };
+      const enriched = applyPerPartLedger(doc, inst, {}, hsCtx);
+      const bad = enriched.sParts.filter(function (sp) { return !sp.scored && sp.whyNot === 'no-rows'; });
+      check('§H HORIZON negative: non-final-day no-rows part stays no-rows (unexplained)',
+        enriched.sUnexplained === 1 && bad.length === 1 && bad[0].day === 11 && bad[0].part === 3, enriched.sTally);
+    })();
+    // H5d negative: a final-part refresh-unexplained (a row exists
+    // — the part was observed, the commit was stale) stays
+    // unexplained; the clause only reclassifies no-rows.
+    (function () {
+      const doc = { seed: 999013, gameDays: 12, deaths: [], daily: [],
+        dawnbidCensus: [11, 12].map(function (d) { return { day: d, vid: 'h1' }; }), v4seeds: [],
+        dawnbidScores: [], holderGatePicks: [], v4encounters: [],
+        holderState: [0, 1, 2, 3].map(function (p) {
+          return hsRow(11, p, 'tick-entry', choreObj(2));
+        }).concat([0, 1, 2].map(function (p) {
+          return hsRow(12, p, 'tick-entry', choreObj(2));
+        })).concat([hsRow(12, 3, 'tick-entry', doneObj(),
+          { commit: { day: 11, part: 0, kind: 'HAVEN_CHORE', winPlanAction: 'party_wait' } })]) };
+      const hsCtx = buildHsCtx(doc);
+      const inst = { vid: 'h1', target: 'algorithm', seedDay: 11, closeDay: 12 };
+      const enriched = applyPerPartLedger(doc, inst, {}, hsCtx);
+      check('§H HORIZON negative: final-part refresh-unexplained stays unexplained (clause is no-rows only)',
+        enriched.sUnexplained === 1 && enriched.sTally['refresh-unexplained'] === 1 &&
+        enriched.sHorizonTruncated === 0, enriched.sTally);
+    })();
+    // H5e order: the field-encounter fallback fires BEFORE the
+    // horizon clause, so a final part with an encounter + Haven
+    // rows elsewhere classifies field-encounter, not truncated.
+    (function () {
+      const doc = { seed: 999014, gameDays: 12, deaths: [], daily: [],
+        dawnbidCensus: [11, 12].map(function (d) { return { day: d, vid: 'h1' }; }), v4seeds: [],
+        dawnbidScores: [], holderGatePicks: [],
+        v4encounters: [{ day: 12, vid: 'h1', mid: 'suburb', wave: 4,
+          outcome: 'vFlee', origin: 'aid', rounds: 1 }],
+        holderState: [0, 1, 2, 3].map(function (p) {
+          return hsRow(11, p, 'tick-entry', choreObj(2));
+        }).concat([0, 1, 2].map(function (p) {
+          return hsRow(12, p, 'tick-entry', choreObj(2));
+        })) };
+      const hsCtx = buildHsCtx(doc);
+      const inst = { vid: 'h1', target: 'algorithm', seedDay: 11, closeDay: 12 };
+      const enriched = applyPerPartLedger(doc, inst, {}, hsCtx);
+      check('§H HORIZON order: field-encounter wins over the horizon clause at the final part',
+        enriched.sTally['field-encounter'] === 1 && enriched.sHorizonTruncated === 0 &&
+        enriched.sUnexplained === 0, enriched.sTally);
+    })();
+    // H6 HORIZONFIX EXTENSION (sim-launchfield-horizonfix-b prereg,
+    // frozen): the whole final day was never sampled. Final day 12.
+    // H6a positive — the 107447 shape: zero holder-state rows
+    // village-wide on the final day, vid rows the day before, vid
+    // alive, census row on the final day.
+    (function () {
+      const doc = { seed: 999015, gameDays: 12, deaths: [], daily: [],
+        dawnbidCensus: [10, 11, 12].map(function (d) { return { day: d, vid: 'h1' }; }), v4seeds: [],
+        dawnbidScores: [], holderGatePicks: [], v4encounters: [],
+        holderState: [0, 1, 2, 3].map(function (p) {
+          return hsRow(11, p, 'tick-entry', choreObj(2));
+        }) };
+      const hsCtx = buildHsCtx(doc);
+      const inst = { vid: 'h1', target: 'algorithm', seedDay: 10, closeDay: 12 };
+      const enriched = applyPerPartLedger(doc, inst, {}, hsCtx);
+      check('§H HORIZONFIX: zero-row final day reclassifies all 4 parts horizon-truncated (Leg S)',
+        enriched.sHorizonTruncated === 4 && enriched.sUnexplained === 0 &&
+        enriched.sPartsTotal === 12, enriched.sTally);
+      const got = classifyUnknownDayH(12, inst, doc, hsCtx);
+      check('§H HORIZONFIX: zero-row final day is hs-horizon-truncated at the day level',
+        got.reason === 'hs-horizon-truncated' && got.trace.finalDay === 12 &&
+        got.trace.villageRowsThatDay === 0 && got.trace.vidRowsPrevDay === 4, got);
+      const enrichedH = applyHolderState(doc, inst,
+        { zeroRow: [{ day: 12, reason: 'unknown-no-signal' }], unknown: 1 }, hsCtx);
+      check('§H HORIZONFIX: the zero-row final day is explained by H (unknown 0 after H)',
+        enrichedH.unknown === 0 && enrichedH.hE === 1 && enrichedH.hU === 1 &&
+        enrichedH.hTally['hs-horizon-truncated'] === 1, enrichedH);
+    })();
+    // H6b negative: the vid has NO rows on the day before the
+    // final day (last row day 10) — stays no-rows at both levels.
+    (function () {
+      const doc = { seed: 999016, gameDays: 12, deaths: [], daily: [],
+        dawnbidCensus: [10, 11, 12].map(function (d) { return { day: d, vid: 'h1' }; }), v4seeds: [],
+        dawnbidScores: [], holderGatePicks: [], v4encounters: [],
+        holderState: [0, 1, 2, 3].map(function (p) {
+          return hsRow(10, p, 'tick-entry', choreObj(2));
+        }) };
+      const hsCtx = buildHsCtx(doc);
+      const inst = { vid: 'h1', target: 'algorithm', seedDay: 10, closeDay: 12 };
+      const enriched = applyPerPartLedger(doc, inst, {}, hsCtx);
+      check('§H HORIZONFIX negative: no vid rows the day before stays no-rows (Leg S)',
+        enriched.sUnexplained === 8 && enriched.sHorizonTruncated === 0, enriched.sTally);
+      const got = classifyUnknownDayH(12, inst, doc, hsCtx);
+      check('§H HORIZONFIX negative: no vid rows the day before stays hs-no-rows (day level)',
+        got.reason === 'hs-no-rows', got);
+    })();
+    // H6c negative: other vids have rows on the final day — the
+    // village WAS sampled — day-level stays hs-no-rows.
+    (function () {
+      const doc = { seed: 999017, gameDays: 12, deaths: [], daily: [],
+        dawnbidCensus: [11, 12].map(function (d) { return { day: d, vid: 'h1' }; }), v4seeds: [],
+        dawnbidScores: [], holderGatePicks: [], v4encounters: [],
+        holderState: [0, 1, 2, 3].map(function (p) {
+          return hsRow(11, p, 'tick-entry', choreObj(2));
+        }).concat([0, 1, 2].map(function (p) {
+          return hsRow(12, p, 'tick-entry', choreObj(2), { vid: 'h2' });
+        })) };
+      const hsCtx = buildHsCtx(doc);
+      const got = classifyUnknownDayH(12, { vid: 'h1', target: 'algorithm', seedDay: 11 }, doc, hsCtx);
+      check('§H HORIZONFIX negative: other vids sampled on the final day stays hs-no-rows',
+        got.reason === 'hs-no-rows', got);
+    })();
+    // H6d negative: zero rows village-wide on a NON-final day
+    // stays no-rows at both levels — the clause keys on the final
+    // day only.
+    (function () {
+      const doc = { seed: 999018, gameDays: 12, deaths: [], daily: [],
+        dawnbidCensus: [10, 11, 12].map(function (d) { return { day: d, vid: 'h1' }; }), v4seeds: [],
+        dawnbidScores: [], holderGatePicks: [], v4encounters: [],
+        holderState: [0, 1, 2, 3].map(function (p) {
+          return hsRow(10, p, 'tick-entry', choreObj(2));
+        }).concat([0, 1, 2, 3].map(function (p) {
+          return hsRow(12, p, 'tick-entry', choreObj(2));
+        })) };
+      const hsCtx = buildHsCtx(doc);
+      const inst = { vid: 'h1', target: 'algorithm', seedDay: 10, closeDay: 12 };
+      const enriched = applyPerPartLedger(doc, inst, {}, hsCtx);
+      check('§H HORIZONFIX negative: zero-row NON-final day stays no-rows (Leg S)',
+        enriched.sUnexplained === 4 && enriched.sHorizonTruncated === 0, enriched.sTally);
+      const got = classifyUnknownDayH(11, inst, doc, hsCtx);
+      check('§H HORIZONFIX negative: zero-row NON-final day stays hs-no-rows (day level)',
+        got.reason === 'hs-no-rows', got);
+    })();
+    // H6e negative: the vid DIED on the final day — the parts
+    // classify dead (the death fallback fires before no-rows),
+    // and the day level stays hs-no-rows (death guard).
+    (function () {
+      const doc = { seed: 999019, gameDays: 12,
+        deaths: [{ day: 12, kind: 'villager', who: 'h1', cause: 'test' }], daily: [],
+        dawnbidCensus: [10, 11, 12].map(function (d) { return { day: d, vid: 'h1' }; }), v4seeds: [],
+        dawnbidScores: [], holderGatePicks: [], v4encounters: [],
+        holderState: [0, 1, 2, 3].map(function (p) {
+          return hsRow(11, p, 'tick-entry', choreObj(2));
+        }) };
+      const hsCtx = buildHsCtx(doc);
+      const inst = { vid: 'h1', target: 'algorithm', seedDay: 10, closeDay: 12 };
+      const enriched = applyPerPartLedger(doc, inst, {}, hsCtx);
+      check('§H HORIZONFIX negative: vid died on the final day classifies dead, never truncated (Leg S)',
+        enriched.sTally.dead === 4 && enriched.sHorizonTruncated === 0 &&
+        enriched.sUnexplained === 0, enriched.sTally);
+      const got = classifyUnknownDayH(12, inst, doc, hsCtx);
+      check('§H HORIZONFIX negative: vid died on the final day stays hs-no-rows (day level)',
+        got.reason === 'hs-no-rows', got);
+    })();
   })();
   console.log('analyze-launchfield-horizon-b selftest: ' + passed + ' passed, ' + failed + ' failed');
   return failed === 0;
@@ -1871,6 +2163,7 @@ module.exports = { bandOf: bandOf, judge: judge, seedOf: seedOf, scoredDawnReaso
   repeatTargetGroups: repeatTargetGroups, buildCtx: buildCtx, selftest: selftest,
   buildHsCtx: buildHsCtx, lastPickDayBefore: lastPickDayBefore,
   classifyUnknownDayH: classifyUnknownDayH, applyHolderState: applyHolderState,
+  zeroRowFinalDayInfo: zeroRowFinalDayInfo,
   reproduceOldBand: reproduceOldBand,
   perPartWhyNot: perPartWhyNot, applyPerPartLedger: applyPerPartLedger,
   EXPECTED: EXPECTED, REPRODUCTION: REPRODUCTION };
