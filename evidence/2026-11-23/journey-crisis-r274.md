@@ -279,14 +279,26 @@ by this run's fixes.
    (618 → 28). The next round should pre-register it as the
    secondary metric for the three residual levers.
 
-## Gate — PENDING (finisher)
+## Gate — PASS on the standing-5 basis (finisher #2, 1300Z)
 
-The panel ran long (6 seeds + 2 analyzers, ~13 min under load); the
-run hour ends ~12:00Z with the gate (~900s) + merge still to do. The
-finisher/adoption run takes: `node scripts/check.js --quick
---cacheDirectory=/tmp/jest-cache-r274-gate` in the worktree, adjudicate
-against the standing set (r264: 332/12, 0 attributable), then merge
-(ff-only), release, rotation 6→7, lock deletion. See Closeout.
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r274-gate`
+in the worktree on the rebased tip (`13793c1a5`, on master `c60b3c4e5`):
+**337 passed, 7 failed in 1040s** (log
+`hidden_files/journey-crisis-r274-gate.log`). The 7 failures: the
+standing 5 exactly — phone-frame stale receipt
+(`test-phone-frame-proof.js`), two 120s deed-attainment timeouts
+(`test-living-garden-deed-attainment.js`,
+`test-one-person-army-deed-attainment.js`), measurement-proof staleness
+pair (`test-measurement-proof-update.js`,
+`test-measurement-workflow.js`, failing identically on r156/r155/r151,
+pre-existing staleness) — plus 2 extra 120s TIMEOUTs under load
+(`test-trust-observer-neutrality.js`, `test-capable-bot-20261014.js`),
+both re-run standalone GREEN after the gate (6/0 and 40/0; log
+`hidden_files/journey-crisis-r274-timeout-reruns.log`). 0 failures
+attributable to this run's changes (comms.js dedup, oracleV2.js flee);
+neither file appears in the gate log. Gate verdict: PASS.
+Proofs re-run on the rebased tip before the gate: DOWNEDTWICE 19/19,
+FIGHT-STALL nearest-edge 8/8, r264 stuck-trace 16/16.
 
 ## Closeout — PENDING (finisher handoff)
 
@@ -313,3 +325,30 @@ against the standing set (r264: 332/12, 0 attributable), then merge
   defendedFights`); (8) append to `~/memory/2026-11-23.md` and the
   goal tracking entry if not already done.
 - Do NOT bump, push, or verify live — the ship loop owns those.
+
+## Finisher #2 — 1300Z occurrence (this run)
+
+The 1100Z occurrence timed out before the gate; finisher #1 (chat agent
+47860c77, spawned ~11:50Z) paused before the rebase after ~3 min and
+completed with closeout unfinished. This 1300Z occurrence adopted the
+closeout instead of playing a fresh leg (rotation still read 6; the
+`journey2-crisis` slug/branch/lock were still held by r274, so a fresh
+run would have collided). Overlap guard at 12:55Z: lock held
+`playtest-loop-2-20261123T1100Z` (2h old); registry heartbeat 24 min
+stale — but the staleness was a registry-lock jam (hbloop log: "registry
+lock held > 120s" at 12:36/12:43/12:50Z, Lane A registration holding it),
+not a live coordinator: the occurrence had timed out, finisher #1 was
+done, no live r274 coordinator processes. Lock NOT deleted (it protects
+the unmerged branch); this run finishes the closeout it guards.
+
+- Rebase: first pass wrongly onto `origin/master` (`fdd7042b8`, stale —
+  local master is ahead, pending ship); re-did onto local master
+  `c60b3c4e5`, clean, both commits replayed exactly once (new tip
+  `13793c1a5` → this gate-section commit). No file overlap between
+  r274's 9 files and the 8 commits since base `70120c554`.
+- Proofs re-run on the rebased tip: DOWNEDTWICE 19/19, FIGHT-STALL
+  nearest-edge 8/8, r264 stuck-trace 16/16 (all GREEN).
+- Gate: see Gate section above (337/7, standing-5 PASS).
+- Merge: ff-only into master `c60b3c4e5` (tip recorded in the memory
+  note); release/reap; rotation-b 6→7; telemetry check; lock deleted
+  LAST. No push, no bump, no live verification — ship loop owns those.
