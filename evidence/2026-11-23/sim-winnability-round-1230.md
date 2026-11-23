@@ -200,12 +200,11 @@ evidence only):
 - Merged `fdd90bb48` (doorstage-b); this record committed from
   the adoption worktree and merged ff-only onto master (see the
   tracker entry for the record commit hash); killarrive-b merged
-  by the timed-out run (`a6cb127cc`). The doorstage merge has since SHIPPED in batch
-  `16de94e71-20261123-172503` (version bump `6d8478d00`), which
-  also carried Loop A's 1415Z planform (DIAG-GO) and muster
-  (pilot DIAG-NO-GO) arms — the ship ran while this adoption was
-  gating; live verification of the batch is the ship job's, not
-  this adoption's. Claim retired to .DEAD; the B lock now holds
+  by the timed-out run (`a6cb127cc`). The doorstage merge was
+  version-bumped locally in batch `16de94e71-20261123-172503`
+  (version bump `6d8478d00`), but the ship loop's 17:43Z push was
+  BLOCKED (dirty tree) — the merge is on local master, pending
+  ship, not live; the next ship run re-bumps and ships. Claim retired to .DEAD; the B lock now holds
   the 1430Z run (taken by stale-lock recovery at 14:34:34Z, with
   this adoption named as the 1230Z closeout owner) and was left
   alone. Worktrees released; main tree clean.
