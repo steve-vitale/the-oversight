@@ -132,11 +132,19 @@ Five of eight villages are still standing at day 140, and the one that reached n
 
 ## Gate
 
-PENDING — to be filled when the gate runs on the committed tip.
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r273-gate` on the rebased tip `cc5fc220a` (base `70120c554`): **339 passed, 5 failed in 687s, exit 1. 0 attributable.** The 5 are the same standing set as r251's first gate (also 339/5):
+
+1. `scripts/godpath/test-measurement-proof-update.js` — "Proof source inputs are not current" (balance-proof-update validator; the retained proof's inputs changed under it).
+2. `scripts/godpath/test-measurement-workflow.js` — "retained neutrality proof covers the current Game/controller/harness inputs" (8/1).
+3. `scripts/godpath/test-phone-frame-proof.js` — retained browser inputs vs current source (index.html et al.) + "Phone receipt source is stale or missing: index.html" (3/3).
+4. `scripts/godpath/test-living-garden-deed-attainment.js` — 120s check.js cap timeout.
+5. `scripts/godpath/test-one-person-army-deed-attainment.js` — 120s check.js cap timeout (same timeout in r251's gate).
+
+All three proof failures are staleness drift from the intervening landings (fleshout adoption + social-life r268 changed Game/controller/index.html inputs under retained proofs) — not from this run, which touches no src/js, no index.html, no godpath files (4 new r273 scripts + 2 evidence notes only). The two timeouts are slow seed-loop tests, not logic failures: the garden test re-ran **green standalone** (8/0, ~143s, exit 0). The army test's first standalone re-run died empty (exit 1, 0 lines) **inside an active write-flap window** (flap-watch 11:05–11:10Z: A=FAIL@write, B=FAIL update-ref, node-fsync-rename EPERM) — a flap artifact, not a test verdict. **Re-run in the clear: exit 0 (green).** The same flap window also killed a fruitless-proof re-run mid-flight (4/6 — the replay corpus landed only 3 files); re-run in the clear: **10/10 green**. Flap window 11:05–11:10Z (~5 min); the heartbeat failed twice inside it (10:55:03Z → 11:10:31Z) and was re-landed by retry — no staleness threshold was breached. Gate adjudication complete: **339/5, 0 attributable.**
 
 ## Telemetry
 
-PENDING — to be run after the gate, before closeout.
+`node scripts/telemetry-check.js --baseline scale-wall.json --current 'journey-scale-r273-b-*.json' --metrics national,table,wins,exiled`: **3 LOUD lines** (national 12→0, table 16→0, wins 16→0; n=126 files). **Explained, not a deviation** — identical to r251: the baseline's own `_regime` note says not to compare readiness substrates against it; wins are structurally ~0 there and the check fires a spurious LOUD. This panel is a readiness substrate (control policy, wins 0/8 by design). **Baseline NOT rolled.**
 
 ## Metric review
 
@@ -156,4 +164,8 @@ PENDING — to be run after the gate, before closeout.
 
 ## Closeout
 
-PENDING — to be filled after the gate, merge, release, and telemetry.
+- Panel commit `766eb26f4` (base `9c458f55a`) rebased onto local master `70120c554` (fleshout adoption + social-life r268 landed first) → tip `cc5fc220a`; proof tests re-run green on the rebased tip (analyzer 159/159, fruitless 10/10). Gate on `cc5fc220a`: 339/5, 0 attributable (see Gate). Gate-section commit (this note + a one-line house-rule fix: the new fruitless helper's empty catch now logs via console.error) → merged `--ff-only` into local master; worktree released; main tree verified clean (the one pre-existing untracked fleshout round-record file, `evidence/2026-11-23/sim-scale-onramp-round-0815.md`, still present — another run's work, untouched).
+- Telemetry: 3 LOUD lines, explained regime artifact; baseline NOT rolled.
+- Lock `playtest-loop-20261123T1007Z` deleted at closeout (same-call read + delete, run_id match).
+- Flap window 11:05–11:10Z (~5 min) struck the gate-adjudication re-runs and two heartbeats; nothing lost; the fruitless proof and the army re-run both went green in the clear.
+- Rotation-a 3→0, read back. Merged locally, pending ship — no version tag; the ship job reports the tag when it goes live.

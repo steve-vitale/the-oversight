@@ -521,7 +521,7 @@ function noteFruitlessMarch(G, t, row) {
   if (row.pending) { _marchFruitless[t.tid] = 0; return; }
   _marchFruitless[t.tid] = (_marchFruitless[t.tid] | 0) + 1;
   if (_marchFruitless[t.tid] >= 7) {
-    try { if (typeof G.titanStandDown === 'function') G.titanStandDown(t.tid); } catch (e) {}
+    try { if (typeof G.titanStandDown === 'function') G.titanStandDown(t.tid); } catch (e) { console.error('r273 fruitless-standdown: titanStandDown failed for ' + t.tid + ': ' + (e && e.message)); }
     _fruitlessStanddown[t.tid] = gday();
     _marchFruitless[t.tid] = 0;
     row.held = 'fruitless-standdown';
