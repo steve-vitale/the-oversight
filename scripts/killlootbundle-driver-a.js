@@ -14,6 +14,8 @@
 //       with shots > 0 is a fired gun.
 //     alienLootGrant — grant events with caller taxonomy (attribution).
 //     _corpseTakeStack — scholar corpse takes (kill-loot gun recovery).
+//     villagerRearmFromCorpse — villager corpse-take re-arms (sim-rearm-b;
+//       REARM_CELLS=1; empty on the control leg by construction).
 //     fireContest — contests fired (denominator).
 //   Daily census: FULL gun-location census (gunLocationsOf, copied from
 //   the grantrate driver) — total guns + holder count + cells per
@@ -60,6 +62,7 @@ const CELLGATE_FLOOR = (function () {
 })();
 const KILLBUNDLE_ON = process.env.KILLBUNDLE === '1';
 const STAGE_SEAR_ON = process.env.STAGE_SEAR === '1';
+const REARM_ON = process.env.REARM_CELLS === '1';
 const LEND_ON = process.env.LEND === '1';
 let GUNRATE_PRESENT = false;
 try {
@@ -78,6 +81,16 @@ try {
   const gameSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'game.js'), 'utf8');
   const m = gameSrc.match(/villagerKillLoot\(vid, mdef\) \{([\s\S]*?)\n    \},/);
   KILLBUNDLE_PRESENT = !!(m && /KILLBUNDLE/.test(m[1]) && /fusion_cell/.test(m[1]));
+} catch (e) {}
+// REARM (sim-rearm-b): corpse-transfer re-arm path (corpses.js
+// villagerRearmFromCorpse + witness take + Haven sweep), env-gated
+// REARM_CELLS=1. The armed leg runs with it on; the control leg runs
+// with it unset (same MODE=arm, same staged seeds).
+let REARM_PRESENT = false;
+try {
+  const corpsesSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'corpses.js'), 'utf8');
+  REARM_PRESENT = /REARM_CELLS/.test(corpsesSrc) && /villagerRearmFromCorpse/.test(corpsesSrc)
+    && /villagerRearmWitnessTake/.test(corpsesSrc) && /villagerRearmHavenSweep/.test(corpsesSrc);
 } catch (e) {}
 let LEND_PRESENT = false;
 try {
@@ -267,7 +280,7 @@ function gunLocationsOf(Game) {
       for (const c of (corpses || [])) {
         if (!c) continue;
         const n = countItemIn(c.items, 'searcaster');
-        if (n > 0) locations.push({ loc: 'corpse', cid: c.id || null, cvid: c.villagerId || null, kind: c.kind || null, buried: !!c.buried, count: n });
+        if (n > 0) locations.push({ loc: 'corpse', cid: c.id || null, cvid: c.villagerId || null, kind: c.kind || null, buried: !!c.buried, count: n, cells: countItemIn(c.items, 'fusion_cell') });
       }
     } catch (e) {}
   } catch (e) {}
@@ -326,6 +339,7 @@ async function oneRun(seed) {
   const corpseTakeEvents = [];
   const killLootEvents = [];
   const volleyEvents = [];
+  const rearmTakeEvents = [];
   const gunLocRows = [];
   let lastSnapDay = -1;
   let prizeSeq = 0;
@@ -443,6 +457,28 @@ async function oneRun(seed) {
       return ret;
     };
   });
+  // REARM (sim-rearm-b): villager corpse-take transfers. The game method
+  // returns the take record (or null); the wrap records it verbatim so
+  // the analyzer can attribute re-arms and second-life volleys. On the
+  // control leg (REARM unset) the method exists but returns null on
+  // every call — the wrap still installs, and rearmTakeEvents stays
+  // empty, which the arm test asserts.
+  wrapGame('villagerRearmFromCorpse', function (orig) {
+    return function (c, takerVid) {
+      const ret = orig.apply(this, arguments);
+      try {
+        if (ret) {
+          rearmTakeEvents.push({ day: gday(Game),
+            taker: ret.taker || takerVid || null,
+            corpseVid: ret.corpseVid || (c && c.villagerId) || null,
+            corpseId: ret.corpseId || (c && c.id) || null,
+            kind: ret.kind || null, gun: !!ret.gun, cells: ret.cells || 0,
+            channel: ret.channel || 'direct' });
+        }
+      } catch (e) { errors.push('rearm-take-log: ' + String(e.message).slice(0, 80)); }
+      return ret;
+    };
+  });
 
   await setupGame(Game);
   const wrapped = Object.assign({}, policy, {
@@ -490,6 +526,7 @@ async function oneRun(seed) {
     cellgateFloor: CELLGATE_FLOOR,
     killbundleOn: KILLBUNDLE_ON, killbundlePresent: KILLBUNDLE_PRESENT,
     stageSearOn: STAGE_SEAR_ON,
+    rearmOn: REARM_ON, rearmPresent: REARM_PRESENT,
     lendOn: LEND_ON, lendPresent: LEND_PRESENT,
     senseexpedOn: SENSEEXPED_ON, senseexpedPresent: SENSE_PRESENT,
     bowopenOn: BOWOPEN_ON, fightally2On: FIGHTALLY2_ON, speargateOn: SPEARGATE_ON,
@@ -508,6 +545,7 @@ async function oneRun(seed) {
     prizeEvents: prizeEvents,
     grantEvents: grantEvents, corpseTakeEvents: corpseTakeEvents,
     killLootEvents: killLootEvents, volleyEvents: volleyEvents,
+    rearmTakeEvents: rearmTakeEvents,
   };
   return out;
 }
@@ -525,6 +563,7 @@ if (require.main === module) (async function () {
   if (!GUNRATE_PRESENT) { console.error('KILLLOOTBUNDLE STOP: the GUNRATE lever code must be present.'); process.exit(2); }
   if (!CELLGATE_PRESENT) { console.error('KILLLOOTBUNDLE STOP: the CELLGATE gate code must be present.'); process.exit(2); }
   if (!KILLBUNDLE_PRESENT) { console.error('KILLLOOTBUNDLE STOP: the KILLBUNDLE lever code (game.js villagerKillLoot) must be present.'); process.exit(2); }
+  if (REARM_ON && !REARM_PRESENT) { console.error('KILLLOOTBUNDLE STOP: REARM_CELLS=1 requires the REARM lever code (corpses.js villagerRearmFromCorpse).'); process.exit(2); }
   if (!LEND_PRESENT) { console.error('KILLLOOTBUNDLE STOP: the LEND lever code must be present.'); process.exit(2); }
   if (!SENSE_PRESENT) { console.error('KILLLOOTBUNDLE STOP: the SENSEEXPED sense code must be present.'); process.exit(2); }
   if (!SENSEEXPED_ON) { console.error('KILLLOOTBUNDLE STOP: SENSEEXPED=1 required (substrate).'); process.exit(2); }
@@ -554,6 +593,7 @@ if (require.main === module) (async function () {
     console.log(JSON.stringify({
       seed: out.seed, mode: out.mode, anchor: (out.anchorCommit || '').slice(0, 12),
       gameSha: out.gameSha, killbundleOn: out.killbundleOn, killbundlePresent: out.killbundlePresent,
+      rearmOn: out.rearmOn, rearmPresent: out.rearmPresent,
       days: out.days, endReason: out.endReason, won: out.won,
       maxWave: out.maxWave, standing: out.standing, scaleRank: out.scaleRank,
       deaths: out.deaths.length,
@@ -566,6 +606,7 @@ if (require.main === module) (async function () {
       klSearcaster: klSear, klBundled: klBundled,
       searVolleys: searVolleys,
       corpseTakes: out.corpseTakeEvents ? out.corpseTakeEvents.length : 0,
+      rearmTakes: out.rearmTakeEvents ? out.rearmTakeEvents.length : 0,
       gunLocRows: out.v4gunLoc ? out.v4gunLoc.length : 0,
       gunTotalEnd: out.v4gunLoc && out.v4gunLoc.length ? out.v4gunLoc[out.v4gunLoc.length - 1].total : null,
       errors: out.instrumentErrors.length,

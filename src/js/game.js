@@ -34406,6 +34406,10 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // 2026-10-12): overnight recovery of the dead bearer's body — grave
       // dug by the fire, burial left to the successor. See recoverBearer.
       try { this.recoverBearer && this.recoverBearer(); } catch (e) {}
+      // REARM (sim-rearm-b, finding #2717): villagers at Haven take
+      // fusion cells (and the gun) from a dead holder's corpse at the
+      // fire — the same-tile channel, env-gated inside the sweep.
+      try { this.villagerRearmHavenSweep && this.villagerRearmHavenSweep(); } catch (e) {}
       // VILLAGE NAMING: the argument continues. Late proposers chime in, and
       // the village converges on a name for each unnamed beast.
       try {

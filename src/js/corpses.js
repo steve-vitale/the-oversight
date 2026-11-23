@@ -323,10 +323,14 @@
           this.fireCrisis('first-grave', { name: nm });
         }
       } catch (e) {}
+      // REARM (sim-rearm-b, finding #2717): a witness who needs the cells
+      // takes them from the fresh corpse — the dead holder's gun gets a
+      // second life instead of rotting on an unburied body. Perception-
+      // gated: only witnesses (never a roster scan). Env-gated inside
+      // villagerRearmWitnessTake.
+      try { this.villagerRearmWitnessTake && this.villagerRearmWitnessTake(corpse); } catch (e) {}
       return corpse;
     },
-
-    // possessions: what the dead carried. Monsters/animals: generic pools.
     // Sapient dead: their own non-sentimental gear (sentimentals die with them).
     generatePossessions(opts) {
       opts = opts || {};
@@ -1027,6 +1031,233 @@
         return true;
       }
       return false;
+    },
+
+    // ---------- re-arm (sim-rearm-b) ----------
+    //
+    // Finding #2717: NO RE-ARM PATH EXISTS FOR SEARCASTERS. Both staged
+    // holders who fired spent both cells in one volley and never gained
+    // another cell by any route; the gun is a two-shot weapon for its
+    // whole life. The only second life observed is the scholar taking a
+    // gun/cell from a holder's corpse (2 of 17 arrivals).
+    //
+    // Design call (coordinator's, Steve can overrule): CORPSE TRANSFER.
+    // When a searcaster holder dies holding fusion cells, another
+    // villager can take the cells (and the gun, if they hold none) from
+    // the corpse — the smallest extension of an observed mechanic; no
+    // new system. Villagers never loot corpses at all today (every
+    // corpseTakeItem/lootCorpse path is scholar-only); this is the first
+    // villager corpse-take, and it is deliberately narrow:
+    //   - PERCEPTION-GATED (local_perception_first): the taker must have
+    //     actually perceived the corpse — a fight witness at the death
+    //     (villagerRearmWitnessTake), or a villager sharing the Haven
+    //     tile with a corpse at the fire (villagerRearmHavenSweep).
+    //     Never a roster scan for dead holders.
+    //   - NEED-GATED: the taker must need what they take — a dry holder
+    //     (searcaster, 0 cells) takes cells only ('rearm'); a villager
+    //     holding no searcaster takes gun + cells ('second-life'). A
+    //     holder already carrying cells takes nothing.
+    //   - CELLS-GATED: no cells on the corpse, no take. A dry gun alone
+    //     is not a second life.
+    //   - ENV-GATED: REARM_CELLS=1 (node sims only). Default off; the
+    //     control leg (REARM unset) is byte-identical in behavior.
+    //   - NO RNG: candidate order is witness / Haven order, dry holders
+    //     before the gun-less; the take draws nothing from the RNG
+    //     stream, so the armed leg diverges from control only at the
+    //     first take.
+    //   - SUPPLY NOTE: generatePossessions writes one units:1 entry per
+    //     gear id, so a corpse carries at most 1 fusion cell even when
+    //     the holder died with 2 (the scholar's 1-cell takes in
+    //     killbundle-b §7 are the same collapse). A re-armed holder
+    //     therefore gets 1 cell — enough for a 1-shot volley at wave 4+.
+    //     Fixing the collapse is a separate arm; this one measures the
+    //     transfer with the supply the corpse actually holds.
+    //   - WEIGHT: the take is voiced (say) and teled ('rearm_take') but
+    //     carries no villager trauma ledger — villagers have none, and
+    //     inventing one is out of scope. The line names the dead, which
+    //     is the weight-carrying part for now. Recorded, not hidden.
+
+    _rearmCellsOn() {
+      try { return typeof process !== 'undefined' && process.env && process.env.REARM_CELLS === '1'; } catch (e) { return false; }
+    },
+
+    _rearmCellCount(person) {
+      let n = 0;
+      try {
+        for (const e of (person.items || [])) {
+          if (!e) continue;
+          const id = (typeof e === 'string') ? e : (e.itemId || e.id);
+          if (id === 'fusion_cell' || e.material === 'fusion_cell') n += (typeof e === 'string') ? 1 : (e.units == null ? 1 : e.units);
+        }
+      } catch (e) {}
+      return n;
+    },
+
+    _rearmHasGun(person) {
+      try {
+        for (const e of (person.items || [])) {
+          if (!e) continue;
+          const id = (typeof e === 'string') ? e : (e.itemId || e.id);
+          if (id === 'searcaster') return true;
+        }
+        const eq = (person.equipped || {}).ranged || null;
+        if (eq && (eq.itemId || eq.id) === 'searcaster') return true;
+      } catch (e) {}
+      return false;
+    },
+
+    // _rearmCorpseCells(c): fusion-cell units still on the corpse, or 0.
+    _rearmCorpseCells(c) {
+      let n = 0;
+      try {
+        for (const it of (c.items || [])) {
+          if (!it || (it.units == null ? 1 : it.units) <= 0) continue;
+          const id = (typeof it === 'string') ? it : (it.itemId || it.id);
+          if (id === 'fusion_cell' || it.material === 'fusion_cell') n += (typeof it === 'string') ? 1 : (it.units == null ? 1 : it.units);
+        }
+      } catch (e) {}
+      return n;
+    },
+
+    // villagerRearmFromCorpse(c, takerVid, channel): the transfer itself. One
+    // taker, one corpse, one call. Returns the take record, or null
+    // when nothing moves (gated, no cells, no need, no gun to give).
+    villagerRearmFromCorpse(c, takerVid, channel) {
+      if (!c || c.buried || !takerVid) return null;
+      if (!this._rearmCellsOn()) return null;
+      if (takerVid === this.villagerId) return null; // the scholar has their own corpse-take
+      if (takerVid === c.villagerId) return null; // the dead don't take from themselves
+      let taker = null;
+      try { taker = this.getPerson ? this.getPerson(takerVid) : null; } catch (e) {}
+      if (!taker || taker.dead) return null;
+      const cellUnits = this._rearmCorpseCells(c);
+      if (cellUnits <= 0) return null; // no cells, no re-arm
+      const takerCells = this._rearmCellCount(taker);
+      const takerHasGun = this._rearmHasGun(taker);
+      let kind = null;
+      if (takerHasGun && takerCells === 0) kind = 'rearm'; // dry holder: cells only
+      else if (!takerHasGun) kind = 'second-life'; // gun-less: gun + cells
+      else return null; // already armed: holds a gun with cells
+      const items = c.items || [];
+      let tookGun = false, tookCells = 0;
+      // Move the gun first (second-life only). The corpse entry is
+      // spliced out; the taker gains it in kill-loot shape (the bare
+      // 'searcaster' string), so villagerGearUp seats it.
+      if (kind === 'second-life') {
+        for (let i = 0; i < items.length; i++) {
+          const it = items[i];
+          if (!it || (it.units == null ? 1 : it.units) <= 0) continue;
+          const id = (typeof it === 'string') ? it : (it.itemId || it.id);
+          if (id === 'searcaster') {
+            items.splice(i, 1);
+            taker.items = taker.items || [];
+            taker.items.push('searcaster');
+            tookGun = true;
+            break;
+          }
+        }
+        if (!tookGun) return null; // gun promised but not on the corpse: no partial take
+      }
+      // Move the cells — all of them; the dead don't need them. Merge
+      // into the taker's existing cell stack when one is there (a
+      // gun-less taker can already hold stray cells).
+      for (let i = 0; i < items.length; i++) {
+        const it = items[i];
+        if (!it || (it.units == null ? 1 : it.units) <= 0) continue;
+        const id = (typeof it === 'string') ? it : (it.itemId || it.id);
+        if (id === 'fusion_cell' || it.material === 'fusion_cell') {
+          tookCells = (typeof it === 'string') ? 1 : (it.units == null ? 1 : it.units);
+          it.units = 0;
+          taker.items = taker.items || [];
+          let merged = false;
+          for (const e of taker.items) {
+            if (e && typeof e !== 'string' && (e.itemId || e.id) === 'fusion_cell') {
+              e.units = (e.units == null ? 1 : e.units) + tookCells;
+              merged = true;
+              break;
+            }
+          }
+          if (!merged) taker.items.push({ itemId: 'fusion_cell', name: 'Fusion cell', units: tookCells, kg: 0.4 });
+          break;
+        }
+      }
+      if (tookCells <= 0) return null; // cells vanished between the check and the move: no take
+      // Seat the gun: the volley reads the equipped slot, and a gun
+      // that only sits in items never fires. The game's own re-equip
+      // path (villagerGearUp, acquire=false) — no new wiring.
+      try { if (tookGun && this.villagerGearUp) this.villagerGearUp(takerVid, false); } catch (e) {}
+      if (!items.some(function (x) { return x && (x.units == null ? 1 : x.units) > 0; })) c.looted = true;
+      // Voice: the village notices the gun changing hands, honestly.
+      try {
+        const tName = this.displayName ? this.displayName(takerVid) : takerVid;
+        const dName = c.villagerId && this.displayName ? this.displayName(c.villagerId) : (c.name || 'them');
+        if (kind === 'rearm') {
+          this.say(`${tName} takes the fusion cells from ${dName}'s body — the gun will speak again. Their hands know what they did.`);
+        } else {
+          this.say(`${tName} lifts ${dName}'s Searcaster from the body, and the fusion cells with it. The gun has a new holder.`);
+        }
+      } catch (e) {}
+      try { this.tele('rearm_take', { taker: takerVid, corpseVid: c.villagerId || null, corpseId: c.id || null, kind: kind, gun: tookGun, cells: tookCells, channel: channel || 'direct' }); } catch (e) {}
+      return { taker: takerVid, corpseVid: c.villagerId || null, corpseId: c.id || null, kind: kind, gun: tookGun, cells: tookCells, channel: channel || 'direct', day: ((this.state || {}).scholar || {}).day || 0 };
+    },
+
+    // _rearmTryCandidates(c, candidateVids, channel): two passes over one
+    // candidate list, witness/Haven order, no RNG — dry holders first
+    // (they can fire the gun they already hold), then the gun-less.
+    // Returns the first take record, or null.
+    _rearmTryCandidates(c, candidateVids, channel) {
+      for (let pass = 0; pass < 2; pass++) {
+        for (const wid of (candidateVids || [])) {
+          if (!wid || wid === this.villagerId || wid === c.villagerId) continue;
+          let p = null;
+          try { p = this.getPerson ? this.getPerson(wid) : null; } catch (e) {}
+          if (!p || p.dead) continue;
+          const hasGun = this._rearmHasGun(p), cells = this._rearmCellCount(p);
+          if (pass === 0 && !(hasGun && cells === 0)) continue;
+          if (pass === 1 && hasGun) continue;
+          const rec = this.villagerRearmFromCorpse(c, wid, channel);
+          if (rec) return rec;
+        }
+      }
+      return null;
+    },
+
+    // villagerRearmWitnessTake(corpse): the death-time channel. Called
+    // from registerDeath after the corpse is built: the people who saw
+    // the holder die are standing right there, and the gun is in reach.
+    villagerRearmWitnessTake(corpse) {
+      if (!this._rearmCellsOn() || !corpse || corpse.buried) return null;
+      if (!this.corpseIsPerson(corpse)) return null;
+      if (this._rearmCorpseCells(corpse) <= 0) return null;
+      const witnesses = (corpse.witnesses || []).slice();
+      if (!witnesses.length) return null;
+      return this._rearmTryCandidates(corpse, witnesses, 'witness');
+    },
+
+    // villagerRearmHavenSweep(): the same-tile channel, once a day from
+    // endDay (beside recoverBearer). Corpses at the Haven node with
+    // cells on them; takers are the living people at Haven
+    // (campPeopleIds('haven') — the tile's population, never a roster
+    // scan). One take per corpse per day; a taker takes from at most
+    // one corpse per sweep.
+    villagerRearmHavenSweep() {
+      if (!this._rearmCellsOn()) return [];
+      const v = this.state.village || {};
+      const hx = (v.px != null ? v.px : 4), hy = (v.py != null ? v.py : 4);
+      let takers = [];
+      try { takers = this.campPeopleIds ? this.campPeopleIds('haven') : []; } catch (e) { takers = []; }
+      takers = (takers || []).filter(function (id) { return !!id; });
+      const took = new Set();
+      const out = [];
+      for (const c of (this.corpses() || [])) {
+        if (!c || c.buried || !this.corpseIsPerson(c)) continue;
+        if (!c.node || c.node.x !== hx || c.node.y !== hy) continue;
+        if (this._rearmCorpseCells(c) <= 0) continue;
+        const fresh = takers.filter(function (id) { return !took.has(id); });
+        const rec = this._rearmTryCandidates(c, fresh, 'haven');
+        if (rec) { took.add(rec.taker); out.push(rec); }
+      }
+      return out;
     },
   };
 
