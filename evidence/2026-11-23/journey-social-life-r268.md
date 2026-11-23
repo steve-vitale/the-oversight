@@ -99,3 +99,12 @@ No canonical baseline exists for the current metric set (`telemetry-baselines/so
 - **Not yet done at run-note time:** `check.js --quick` gate; closeout (merge, release, rotation-b 5→6, lock delete, hbloop kill, memory note, tracking entry). If the occurrence cap hits first, adoption picks these up: the work is committed and the evidence is landed.
 - **Do NOT touch `src/js` in the worktree while any panel re-run is in flight** (the driver loads the game from disk per seed).
 - Next-run owed items (from this run + r266): (1) F5 seed-lifetime design (seed survives sittings until settlement, or settlement-triggered re-ask); (2) teach-frame rotation survival through the agency-ask path (prove with a two-teachings-one-sitting test); (3) hunger-plea body variety + mood-beat 'up:warm' pool widening; (4) TRAIL press availability (`performForageTalk` pool/conditions); (5) outing 0-attempts investigation; (6) npcGoal/goal-branch flip; (7) M4 template-frame normalization decision in the prereg.
+
+## Gate (finisher, 2026-11-23)
+
+`node scripts/check.js --quick` on the rebased tip (master `80e7da0bc`, branch tip `5a71f6cd3`), run 09:47–10:12Z, **334 passed, 10 failed in 1485s — 0 attributable**:
+- Standing set (4): measurement-proof staleness pair (`test-measurement-proof-update.js`, `test-measurement-workflow.js` — "Proof source inputs are not current"); `test-measurement-cache-flags.js`; `test-phone-frame-proof.js` (phone receipt stale).
+- Load timeouts (6, all 120s check.js timeouts, each passed its early assertions): `test-living-garden-deed-attainment.js`, `test-one-person-army-deed-attainment.js`, `test-occupation-panels.js`, `test-trust-observer-neutrality.js`, `test-synergy-stall.js`, `test-capable-bot-20261014.js`.
+- All 6 timeouts re-ran green standalone (log `journey-social-life-r268-timeout-reruns.log`): living-garden 231s, one-person-army 172s, occupation-panels 39s, trust-observer-neutrality 51s, synergy-stall 33s, capable-bot 45s — all exit 0.
+- Gate log: `evidence/2026-11-23/journey-social-life-r268-gate.log`. (First gate launch was killed by a sibling check.js already running; second launch killed by the 09:23Z VM restart; third launch completed. A VM restart also killed the original heartbeat loop pid 25438 — restarted as pid 2002, beat verified.)
+- Arm B proof test re-run on the rebased tip: `scripts/test-journey-social-life-r268-resume-fallthrough-20261123.js` 36/36 GREEN (see rebase step below).
