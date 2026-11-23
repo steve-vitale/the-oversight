@@ -104,11 +104,28 @@ Four of eight villages are still standing at day 140, and none of them got anywh
 
 ## Gate
 
-(TODO — fill after gate run.)
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-r276-gate` on the rebased tip `ea04dd01f` (base `04717109b`, the endgame r275 landing): **335 passed, 9 failed in 1481s, exit 1. 0 attributable.** The 9, classified:
+
+**Standing set (3, exit 1 — retained-proof staleness, fail standalone too on this base per the endgame r275 gate):**
+1. `scripts/godpath/test-measurement-proof-update.js` — "Proof source inputs are not current" (balance-proof-update validator).
+2. `scripts/godpath/test-measurement-workflow.js` — "retained neutrality proof covers the current Game/controller/harness inputs" (8/1).
+3. `scripts/godpath/test-phone-frame-proof.js` — retained browser inputs vs current source (index.html et al.) + "Phone receipt source is stale or missing: index.html" (3/3).
+
+**Standing slow-test timeouts (2, exit null at the 120s check.js cap):**
+4. `scripts/godpath/test-living-garden-deed-attainment.js` — 120s timeout; slow by construction (16 seeded campaign sims), fails identically in 8+ earlier gates on master without this change (endgame r275 gate: passed at 900s standalone).
+5. `scripts/godpath/test-one-person-army-deed-attainment.js` — 120s timeout; same class (r273: re-ran green standalone in the clear).
+
+**Load/flap flakes (4 — all confirmed by standalone re-runs, none attributable):**
+6. `scripts/godpath/test-measurement-cache-flags.js` — 4 sub-failures in the gate; standalone re-run **exit 0 (4 passed, 0 failed)**.
+7. `scripts/godpath/test-trust-observer-neutrality.js` — 120s timeout in the gate; standalone re-run **exit 0 (6 passed, 0 failed)**.
+8. `scripts/godpath/test-occupation-panels.js` — 120s timeout in the gate; standalone re-run 6 passed, 1 failed ("real CLI workflow completed") with an **explicit EPERM write** in the log (`balance-panel.js:328 writeFileSync`, flap signature) — a flap artifact, not a test verdict. Re-run in the clear: **exit 0 (25 passed, 0 failed)**.
+9. `scripts/test-capable-bot-20261014.js` — 120s timeout in the gate; standalone re-run exit 1 with an **empty log** during an active write-flap window (fresh-file writes EPERM in /tmp and home at 22:15Z) — a flap artifact, not a test verdict. Re-run in the clear: **exit 0 (40 passed, 0 failed)**.
+
+This run touches no src/js, no index.html, no godpath files, no data files (3 new r276 scripts + 2 evidence notes only), so no gate failure can be attributed to it by construction — and the re-run evidence above confirms the classification. The gate ran 1481s (r273: 687s) under a machine restart mid-run (~21:39Z) and load 10–15; the four flake failures track that load, not this change. A write-flap window was active at 22:15Z during the standalone re-runs (fresh writes EPERM in /tmp and home; the flap-watch is tracking it).
 
 ## Telemetry
 
-(TODO — fill after telemetry check.)
+`node scripts/telemetry-check.js --baseline scale-wall.json --current 'journey-scale-r276-b-*.json' --metrics national,table,wins,exiled`: **3 LOUD lines** (national 12→0, table 16→0, wins 16→0; n=126 files). **Explained, not a deviation** — identical to r273 and r251: the baseline's own `_regime` note says not to compare readiness substrates against it; wins are structurally ~0 there and the check fires a spurious LOUD. This panel is a readiness substrate (control policy, wins 0/8 by design). **Baseline NOT rolled.**
 
 ## Metric review
 
@@ -131,4 +148,8 @@ Four of eight villages are still standing at day 140, and none of them got anywh
 
 ## Closeout
 
-(TODO — fill at closeout.)
+- Panel commit `36399de10` (base `53ae1c2de`) rebased onto local master `04717109b` (Lane B endgame r275 landed first — dead-whisper fix + Voice-collapse fix-the-fix; no conflicts, patch replayed exactly once) → tip `ea04dd01f`; proof test re-run green on the rebased tip (analyzer 159/159). Gate on `ea04dd01f`: 335/9, 0 attributable (see Gate). Gate-section commit (this note, gate + telemetry + closeout sections filled) → merged `--ff-only` into local master; worktree released; main tree verified clean (the one pre-existing untracked fleshout round-record file, `evidence/2026-11-23/sim-scale-onramp-round-2015.md`, still present — another run's work, untouched).
+- Telemetry: 3 LOUD lines, explained regime artifact; baseline NOT rolled.
+- Lock `playtest-loop-20261123T2043Z` deleted at closeout (same-call read + delete, run_id match).
+- Flap window ~22:15–22:32Z (~17 min) struck the standalone gate re-runs (occupation-panels EPERM, capable-bot empty log); both re-ran green in the clear. Machine restart ~21:39Z killed the first heartbeat loop mid-run (registry heartbeat went ~19 min stale max — the flesh-out register held the registry lock 21:51–22:05Z; heartbeat re-landed 22:05:44Z by manual retry, no lock deletion by any loop in the window). A second heartbeat loop (setsid, pid 7862) kept the heartbeat fresh after the restart.
+- Rotation-a 3→0, read back. Merged locally, pending ship — no version tag; the ship job reports the tag when it goes live.
