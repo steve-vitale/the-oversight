@@ -775,7 +775,25 @@
         try {
           var _hgNm = '';
           try { _hgNm = this.displayName(_hpGate.id); } catch (e) { _hgNm = 'Someone'; }
-          if (st.exped[vid]) st.exped[vid].encounters.push('gave ' + (m.id || 'it') + ' room — ' + _hgNm + ' is too hurt to hold a door (' + _hpGate.hp + ' HP)');
+          var _hgNote = 'gave ' + (m.id || 'it') + ' room — ' + _hgNm + ' is too hurt to hold a door (' + _hpGate.hp + ' HP)';
+          if (st.exped[vid]) st.exped[vid].encounters.push(_hgNote);
+          // GATEAVOID (sim-gateavoid-b, finding #2695): the durable
+          // gate-avoid log. The expedition note above is deleted
+          // with the expedition record when the leader comes home
+          // (expeditionReturn) or dies (expedDeath), so the
+          // end-of-run census cannot attribute a single fire from
+          // it — the leaderproj NO-GO (METRIC-BROKEN) saw 9 fires
+          // as 1 note. The log entry is written HERE, at fire
+          // time, onto the agency state (which survives return
+          // and death), with the day + monster + kind so the
+          // census can match it to the door it refused. The
+          // array is created lazily, ONLY inside a gate-fire
+          // block: with all gates off the key never exists and
+          // the game is byte-identical. No RNG is drawn.
+          var _hgDay = 0;
+          try { _hgDay = (this.state.scholar && this.state.scholar.day) || 0; } catch (e) { _hgDay = 0; }
+          var _hgLog = st.gateAvoids || (st.gateAvoids = []);
+          _hgLog.push({ day: _hgDay, vid: vid, mid: m.id || null, kind: 'hold', name: _hgNm, hp: _hpGate.hp, projHp2: null, note: _hgNote });
         } catch (e) {}
         return;
       }
@@ -820,7 +838,16 @@
         try {
           var _lhNm = '';
           try { _lhNm = this.displayName(_lhGate.id); } catch (e) { _lhNm = 'Someone'; }
-          if (st.exped[vid]) st.exped[vid].encounters.push('gave ' + (m.id || 'it') + ' room — ' + _lhNm + ' is too hurt to lead a door (' + _lhGate.hp + ' HP)');
+          var _lhNote = 'gave ' + (m.id || 'it') + ' room — ' + _lhNm + ' is too hurt to lead a door (' + _lhGate.hp + ' HP)';
+          if (st.exped[vid]) st.exped[vid].encounters.push(_lhNote);
+          // GATEAVOID (sim-gateavoid-b, finding #2695): the durable
+          // gate-avoid log — same shape as the HPGATE block above
+          // (kind 'lead'); written at fire time onto the agency
+          // state, which survives expeditionReturn and expedDeath.
+          var _lhDay = 0;
+          try { _lhDay = (this.state.scholar && this.state.scholar.day) || 0; } catch (e) { _lhDay = 0; }
+          var _lhLog = st.gateAvoids || (st.gateAvoids = []);
+          _lhLog.push({ day: _lhDay, vid: vid, mid: m.id || null, kind: 'lead', name: _lhNm, hp: _lhGate.hp, projHp2: null, note: _lhNote });
         } catch (e) {}
         return;
       }
@@ -865,7 +892,17 @@
         try {
           var _lpNm = '';
           try { _lpNm = this.displayName(_lpGate.id); } catch (e) { _lpNm = 'Someone'; }
-          if (st.exped[vid]) st.exped[vid].encounters.push('gave ' + (m.id || 'it') + ' room — ' + _lpNm + ' is too hurt to lead a door (projected ' + _lpGate.hp + ' HP, ' + _lpGate.proj + ' HP in two rounds)');
+          var _lpNote = 'gave ' + (m.id || 'it') + ' room — ' + _lpNm + ' is too hurt to lead a door (projected ' + _lpGate.hp + ' HP, ' + _lpGate.proj + ' HP in two rounds)';
+          if (st.exped[vid]) st.exped[vid].encounters.push(_lpNote);
+          // GATEAVOID (sim-gateavoid-b, finding #2695): the durable
+          // gate-avoid log — same shape as the floor gates above
+          // (kind 'proj', projHp2 carries the two-round forecast);
+          // written at fire time onto the agency state, which
+          // survives expeditionReturn and expedDeath.
+          var _lpDay = 0;
+          try { _lpDay = (this.state.scholar && this.state.scholar.day) || 0; } catch (e) { _lpDay = 0; }
+          var _lpLog = st.gateAvoids || (st.gateAvoids = []);
+          _lpLog.push({ day: _lpDay, vid: vid, mid: m.id || null, kind: 'proj', name: _lpNm, hp: _lpGate.hp, projHp2: _lpGate.proj, note: _lpNote });
         } catch (e) {}
         return;
       }

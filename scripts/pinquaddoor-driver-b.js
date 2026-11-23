@@ -71,6 +71,11 @@
 // whether the leader was projected-dead after one/two rounds of
 // focused wave-4 damage). Pure reads only; no other driver
 // behavior changes.
+// GATEAVOID (sim-gateavoid-b, finding #2695): the corpus stamp
+// gains gateAvoidLog (the durable log, stamped verbatim from
+// st.gateAvoids) alongside the parsed gateAvoidNotes. The legs-log
+// line gains the log length. Pure reads only; no other driver
+// behavior changes.
 // LEADERPROJ (sim-leaderproj-b, finding #2619): the corpus stamp
 // gains leaderprojFlag + leaderprojFires (same shape as the other
 // gates) and the gate-avoid-notes regex also parses the projection
@@ -1368,10 +1373,26 @@ async function oneRun(seed) {
     }
   } catch (e) { leaderhpgateFires = 0; leaderprojFires = 0; }
 
+// GATEAVOID (sim-gateavoid-b, finding #2695): the durable
+// gate-avoid log (st.gateAvoids, appended at fire time by the
+// three gates — see villager-agency.js), stamped verbatim on the
+// corpus file as gateAvoidLog. The parsed gateAvoidNotes above
+// are kept for backward compatibility, but they undercount: the
+// notes live on expedition records that expeditionReturn deletes,
+// so the end-of-run note census saw 9 fires as 1 note on the
+// leaderproj band. The log survives return and death; the
+// analyzer attributes avoided doors from it (seed+day+monster).
+// Pure read at end of run.
+  let gateAvoidLog = [];
+  try {
+    const _ag3 = Game.agencyState ? Game.agencyState() : null;
+    gateAvoidLog = ((_ag3 && _ag3.gateAvoids) || []).slice();
+  } catch (e) { gateAvoidLog = []; }
+
   const out = {
     seed: seed, arm: 'pinquaddoor-b', run: RUN, mode: MODE, leg: MODE,
     anchorCommit: ANCHOR, standingMarker: STANDING_MARKER,
-    brainSha: BRAIN_SHA, carryPresent: CARRY_PRESENT, bumpPresent: BUMP_PRESENT, slotPresent: SLOT_PRESENT, pinPresent: PIN_PRESENT, senseexpedPresent: SENSE_PRESENT, allyslot3Flag: process.env.ALLYSLOT3 || null, pinquadFlag: process.env.PINQUAD || null, dmgpinFlag: process.env.DMGPIN || null, doorflee2Flag: process.env.DOORFLEE2 || null, hypofloorFlag: process.env.HYPOFLOOR || null, hpgateFlag: process.env.HPGATE || null, hpgateFires: hpgateFires, leaderhpgateFlag: process.env.LEADERHPGATE || null, leaderhpgateFires: leaderhpgateFires, leaderprojFlag: process.env.LEADERPROJ || null, leaderprojFires: leaderprojFires, gateAvoidNotes: gateAvoidNotes, senseexpedFlag: process.env.SENSEEXPED || null,
+    brainSha: BRAIN_SHA, carryPresent: CARRY_PRESENT, bumpPresent: BUMP_PRESENT, slotPresent: SLOT_PRESENT, pinPresent: PIN_PRESENT, senseexpedPresent: SENSE_PRESENT, allyslot3Flag: process.env.ALLYSLOT3 || null, pinquadFlag: process.env.PINQUAD || null, dmgpinFlag: process.env.DMGPIN || null, doorflee2Flag: process.env.DOORFLEE2 || null, hypofloorFlag: process.env.HYPOFLOOR || null, hpgateFlag: process.env.HPGATE || null, hpgateFires: hpgateFires, leaderhpgateFlag: process.env.LEADERHPGATE || null, leaderhpgateFires: leaderhpgateFires, leaderprojFlag: process.env.LEADERPROJ || null, leaderprojFires: leaderprojFires, gateAvoidNotes: gateAvoidNotes, gateAvoidLog: gateAvoidLog, senseexpedFlag: process.env.SENSEEXPED || null,
     recorderOn: RECORDER_ON,
     policySha: POLICY_SHA, policy: 'competent',
     days: result.days, gameDays: (st.scholar && st.scholar.day) || 0,
@@ -1445,7 +1466,7 @@ if (!SEEDS.length) { console.error('PINQUADDOOR STOP: SEEDS required.'); process
     writeRobust(file, JSON.stringify(out, null, 2) + '\n');
     console.log(JSON.stringify({
       seed: out.seed, mode: out.mode, anchor: (out.anchorCommit || '').slice(0, 12),
-      brainSha: out.brainSha, carryPresent: out.carryPresent, bumpPresent: out.bumpPresent, slotPresent: out.slotPresent, pinPresent: out.pinPresent, pinquadFlag: out.pinquadFlag, dmgpinFlag: out.dmgpinFlag, doorflee2Flag: out.doorflee2Flag, hypofloorFlag: out.hypofloorFlag, hpgateFlag: out.hpgateFlag, hpgateFires: out.hpgateFires, leaderhpgateFlag: out.leaderhpgateFlag, leaderhpgateFires: out.leaderhpgateFires, leaderprojFlag: out.leaderprojFlag, leaderprojFires: out.leaderprojFires, gateAvoidNotes: out.gateAvoidNotes.length, senseexpedPresent: out.senseexpedPresent, allyslot3Flag: out.allyslot3Flag, pinquadFlag: out.pinquadFlag, senseexpedFlag: out.senseexpedFlag,
+      brainSha: out.brainSha, carryPresent: out.carryPresent, bumpPresent: out.bumpPresent, slotPresent: out.slotPresent, pinPresent: out.pinPresent, pinquadFlag: out.pinquadFlag, dmgpinFlag: out.dmgpinFlag, doorflee2Flag: out.doorflee2Flag, hypofloorFlag: out.hypofloorFlag, hpgateFlag: out.hpgateFlag, hpgateFires: out.hpgateFires, leaderhpgateFlag: out.leaderhpgateFlag, leaderhpgateFires: out.leaderhpgateFires, leaderprojFlag: out.leaderprojFlag, leaderprojFires: out.leaderprojFires, gateAvoidNotes: out.gateAvoidNotes.length, gateAvoidLog: out.gateAvoidLog.length, senseexpedPresent: out.senseexpedPresent, allyslot3Flag: out.allyslot3Flag, pinquadFlag: out.pinquadFlag, senseexpedFlag: out.senseexpedFlag,
       policySha: out.policySha, standingMarker: out.standingMarker,
       recorderOn: out.recorderOn,
       days: out.days, endReason: out.endReason, won: out.won,
