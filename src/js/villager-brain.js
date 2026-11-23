@@ -1244,7 +1244,20 @@
         this.startExpedition(vid, hx, hy, announce, opts);
         try {
           var a2 = this.agencyState ? this.agencyState() : null;
-          if (!a2 || !a2.exped[vid]) return 'hold';
+          if (!a2 || !a2.exped[vid]) {
+            // HOMEBODY HANDOFF (sim-homebody-a, findings #2498/#2568):
+            // a range-0 holder's wave-4+ plan moves to a walkable
+            // companion who leads the party out; the homebody never
+            // walks (finding #1409). If no walker can depart, the
+            // hold stands.
+            try {
+              if (typeof this.winPlanHomebodyHandoff === 'function') {
+                var _hb = this.winPlanHomebodyHandoff(vid, hx, hy, announce, opts, c, false);
+                if (_hb === 'launch') return 'launch';
+              }
+            } catch (e2) {}
+            return 'hold';
+          }
         } catch (e) {}
         this.startExpedition(c.companion, hx, hy, false, opts);
         // COMPANIONGUARD (sim-companionguard-b): verify the companion

@@ -16,6 +16,7 @@
 //   - winPlanCommitDeadTarget(vid)
 //   - winPlanReseedLaunchBeat(vid)
 //   - winPlanDepartLaunchBeat(vid, launched)
+//   - winPlanHomebodyHandoff(vid, hx, hy, announce, opts, c, fill)
 //   - winPlanBondsTick(hx, hy)
 //   - winPlanMusterTick(hx, hy)
 // rules:
@@ -1200,6 +1201,135 @@
         return plan;
       } catch (e) { return null; }
     },
+    // HOMEBODY HANDOFF (sim-homebody-a, findings #2498/#2568):
+    // a range-0 holder's wave-4+ plan moves to a walkable companion
+    // at depart time. The holder's startExpedition already failed
+    // (no expedition record); this runs instead of returning 'hold'.
+    // The plan object moves under the new leader's key and the old
+    // holder's entry is deleted — they can re-seed a plan from a
+    // lived fight. The homebody is NEVER offered a hunt and never
+    // walks (finding #1409, steve-call): the plan moves, the person
+    // stays home. The new leader is the first companion on the
+    // commit who actually departs (startExpedition is the honest
+    // judge — sick / hurt / medic-duty / companion-guard all return
+    // early with no record); the remaining companions follow on the
+    // same shared target. Wave-4+ plans only (needWave >= 4, or the
+    // target is a wave-4+ species): a range-0 holder with a wave-3
+    // or targetless plan keeps holding. `fill` (winPlanDepart path
+    // only): the second seat is filled after the transfer, since
+    // that path picks companions after the holder launches; the
+    // brain path carries its dawn-picked companions and never
+    // fills. Returns 'launch' (the party departed under a new
+    // leader), 'hold' (no walker could depart — the plan stays),
+    // or 'skip' (not a handoff case: no plan, not wave-4+, or the
+    // holder can walk). One say() line on a launch, naming the
+    // transfer; the departure beat follows with the new leader.
+    // Non-creating read first: stateOf() would materialize the
+    // winPlan store and ignite the plan system in a village where
+    // it sleeps (see winPlanOnVillagerDeath).
+    winPlanHomebodyHandoff(vid, hx, hy, announce, opts, c, fill) {
+      var departed = false;
+      try {
+        var vv = this.state && this.state.village;
+        if (!vv || !vv.winPlan || !vv.winPlan[vid]) return 'skip';
+        var plan = vv.winPlan[vid];
+        var wave = (plan.needWave | 0) || 0;
+        if (wave < 4) {
+          var tw = null;
+          try { tw = plan.target ? monsterWaveOf(this, plan.target) : null; } catch (e) {}
+          if ((tw | 0) < 4) return 'skip';
+        }
+        var maxD = -1;
+        try { maxD = this.npcMaxDist ? this.npcMaxDist(vid) : -1; } catch (e) {}
+        if (maxD < 0 || maxD >= 1) return 'skip';
+        var self = this;
+        var cands = [];
+        try {
+          var list = [c && c.companion, c && c.companion2, c && c.companion3];
+          for (var i = 0; i < list.length; i++) {
+            var cid = list[i];
+            if (!cid || cid === vid || cands.indexOf(cid) !== -1) continue;
+            try { if (!alive(self, cid)) continue; } catch (e2) { continue; }
+            try { if (!atHaven(self, cid, hx, hy)) continue; } catch (e2) { continue; }
+            try {
+              var a = self.agencyState ? self.agencyState() : null;
+              if (a && a.exped && a.exped[cid]) continue;
+            } catch (e2) {}
+            var cd = -1;
+            try { cd = self.npcMaxDist ? self.npcMaxDist(cid) : -1; } catch (e2) {}
+            if (cd < 1) continue;
+            cands.push(cid);
+          }
+        } catch (e) {}
+        if (!cands.length) return 'hold';
+        var leader = null;
+        for (var j = 0; j < cands.length; j++) {
+          try { self.startExpedition(cands[j], hx, hy, announce, opts); } catch (e2) {}
+          try {
+            var aj = self.agencyState ? self.agencyState() : null;
+            if (aj && aj.exped && aj.exped[cands[j]]) { leader = cands[j]; break; }
+          } catch (e2) {}
+        }
+        if (!leader) return 'hold';
+        departed = true;
+        // Transfer the plan: the object survives under the new
+        // leader; the old holder holds nothing.
+        try { vv.winPlan[leader] = plan; delete vv.winPlan[vid]; } catch (e2) {}
+        var others = [];
+        for (var k = 0; k < cands.length; k++) if (cands[k] !== leader) others.push(cands[k]);
+        // FILL (winPlanDepart path only): the second seat, picked
+        // after the transfer with the new leader as holder — the
+        // same pick the holder's launch would have made.
+        if (fill) {
+          try {
+            if (vetreengageOn() && typeof self.winPlanSecondCompanion === 'function') {
+              var c2 = self.winPlanSecondCompanion(leader, hx, hy, null);
+              if (c2 && others.indexOf(c2) === -1) others.push(c2);
+            }
+          } catch (e2) {}
+        }
+        var launched = [];
+        for (var m = 0; m < others.length; m++) {
+          try { self.startExpedition(others[m], hx, hy, false, opts); } catch (e2) {}
+          try {
+            var am = self.agencyState ? self.agencyState() : null;
+            if (am && am.exped && am.exped[others[m]]) launched.push(others[m]);
+          } catch (e2) {}
+        }
+        plan.stage = 'hunt';
+        plan.party = launched.slice();
+        try {
+          for (var n = 0; n < launched.length; n++) {
+            var selfId = launched[n];
+            var cp = self.winPlanOf ? self.winPlanOf(selfId) : null;
+            if (cp) {
+              cp.stage = 'hunt';
+              cp.party = [leader].concat(launched.filter(function (x) { return x !== selfId; }));
+              cp.target = plan.target; cp.node = plan.node;
+              if (plan.needWave != null) cp.needWave = plan.needWave;
+            }
+          }
+        } catch (e2) {}
+        if (launched.length > 1) {
+          try { var _pt = (typeof self.winPlanStats === 'function') ? self.winPlanStats() : null; if (_pt) _pt.partyTrios = (_pt.partyTrios || 0) + 1; } catch (e2) {}
+        }
+        bump(self, 'partyDepartures');
+        bump(self, 'homebodyHandoffs');
+        try {
+          var hn = null, ln = null;
+          try { hn = (typeof self.disp === 'function' ? self.disp(vid) : (self.displayName ? self.displayName(vid) : null)); } catch (e2) {}
+          try { ln = (typeof self.disp === 'function' ? self.disp(leader) : (self.displayName ? self.displayName(leader) : null)); } catch (e2) {}
+          if (!hn) hn = 'Someone';
+          if (!ln) ln = 'Someone';
+          if (typeof self.say === 'function') self.say(hn + ' never leaves Haven — ' + ln + ' takes the plan and leads the party.');
+        } catch (e2) {}
+        try {
+          if (typeof self.winPlanDepartLaunchBeat === 'function') self.winPlanDepartLaunchBeat(leader, launched);
+          else if (typeof self.winPlanReseedLaunchBeat === 'function') self.winPlanReseedLaunchBeat(leader);
+        } catch (e2) {}
+        return 'launch';
+      } catch (e) { return departed ? 'launch' : 'hold'; }
+    },
     // Departure gate for agencyTick. Returns 'hold' (stay today),
     // 'launch' (already departed with a party — skip the chance roll),
     // or 'normal' (no plan, or the plan imposes nothing today).
@@ -1243,7 +1373,20 @@
           self.startExpedition(vid, hx, hy, playerAtHaven, { tx: tx, ty: ty, duration: dur });
           try {
             var a = self.agencyState ? self.agencyState() : null;
-            if (a && !a.exped[vid]) return false;
+            if (a && !a.exped[vid]) {
+              // HOMEBODY HANDOFF (sim-homebody-a): a range-0 holder's
+              // wave-4+ plan moves to the picked companion, who leads;
+              // the second seat is filled after the transfer (it was
+              // picked after the holder launched). If no walker can
+              // depart, the launch fails as before.
+              try {
+                if (typeof self.winPlanHomebodyHandoff === 'function') {
+                  var _hb2 = self.winPlanHomebodyHandoff(vid, hx, hy, playerAtHaven, { tx: tx, ty: ty, duration: dur }, { companion: cid, companion2: null, companion3: null }, true);
+                  if (_hb2 === 'launch') return true;
+                }
+              } catch (e2) {}
+              return false;
+            }
           } catch (e) {}
           bump(self, 'partyInvites');
           self.startExpedition(cid, hx, hy, false, { tx: tx, ty: ty, duration: dur });
