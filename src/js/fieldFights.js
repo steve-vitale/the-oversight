@@ -1035,10 +1035,19 @@
           // are untouched; a cell-less gun still says "no fusion cells"
           // (that line lives in the _shots < 1 branch below, which is
           // why the hold needs cells to save).
+          // CELLGATE_FLOOR (sim-cellgate-floor-b, finding line 2716):
+          // CELLGATE_FLOOR=N moves the hold's wave floor (default 4 =
+          // current behavior when unset; N clamped to 1..5, anything
+          // else falls back to 4). CELLGATE=1 is still required — the
+          // floor alone never gates anything. The hold line names the
+          // live floor, so a wave-3 hold under floor 3 reads "below
+          // wave 3". No default flip in this arm: unset means floor 4.
+          var _cgFloor = 4;
+          try { var _cgF = parseInt(process.env.CELLGATE_FLOOR, 10); if (_cgF >= 1 && _cgF <= 5) _cgFloor = _cgF; } catch (e2) {}
           var _cgHold = false;
-          try { _cgHold = (typeof process !== 'undefined' && process.env && process.env.CELLGATE === '1') && _rwId === 'searcaster' && wave < 4 && _ammoN > 0; } catch (e2) {}
+          try { _cgHold = (typeof process !== 'undefined' && process.env && process.env.CELLGATE === '1') && _rwId === 'searcaster' && wave < _cgFloor && _ammoN > 0; } catch (e2) {}
           if (_cgHold) {
-            rec.log.push(vName + ' holds the Searcaster — the beast is below wave 4, and the cells are saved for harder prey.');
+            rec.log.push(vName + ' holds the Searcaster — the beast is below wave ' + _cgFloor + ', and the cells are saved for harder prey.');
             rec.volley = { shots: 0, hits: 0, dmg: 0, ammoLeft: _ammoN };
           } else if (_shots < 1) {
             // #2593 (sim-speargate-a): name the weapon's ACTUAL ammo —

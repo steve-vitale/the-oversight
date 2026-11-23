@@ -50,6 +50,14 @@ const FIGHTALLY2_ON = process.env.FIGHTALLY2 === '1';
 const SPEARGATE_ON = process.env.SPEARGATE === '1';
 const GUNRATE_ON = process.env.GUNRATE === '1';
 const CELLGATE_ON = process.env.CELLGATE === '1';
+// CELLGATE_FLOOR (sim-cellgate-floor-b): the CELLGATE wave floor
+// recorded per seed file (same parse rule as fieldFights.js:
+// integer 1..5, anything else falls back to 4 = current behavior).
+// Recorded, never a game change — fieldFights.js reads the env
+// itself at volley time.
+const CELLGATE_FLOOR = (function () {
+  try { const f = parseInt(process.env.CELLGATE_FLOOR, 10); return (f >= 1 && f <= 5) ? f : 4; } catch (e) { return 4; }
+})();
 const KILLBUNDLE_ON = process.env.KILLBUNDLE === '1';
 const STAGE_SEAR_ON = process.env.STAGE_SEAR === '1';
 const LEND_ON = process.env.LEND === '1';
@@ -479,6 +487,7 @@ async function oneRun(seed) {
     anchorCommit: ANCHOR, gameSha: GAME_SHA,
     gunrateOn: GUNRATE_ON, gunratePresent: GUNRATE_PRESENT,
     cellgateOn: CELLGATE_ON, cellgatePresent: CELLGATE_PRESENT,
+    cellgateFloor: CELLGATE_FLOOR,
     killbundleOn: KILLBUNDLE_ON, killbundlePresent: KILLBUNDLE_PRESENT,
     stageSearOn: STAGE_SEAR_ON,
     lendOn: LEND_ON, lendPresent: LEND_PRESENT,
@@ -507,6 +516,7 @@ if (require.main === module) (async function () {
   if (MODE !== 'ctl' && MODE !== 'arm') { console.error('KILLLOOTBUNDLE STOP: MODE must be ctl|arm, got ' + JSON.stringify(MODE)); process.exit(2); }
   if (!GUNRATE_ON) { console.error('KILLLOOTBUNDLE STOP: GUNRATE=1 required (substrate).'); process.exit(2); }
   if (!CELLGATE_ON) { console.error('KILLLOOTBUNDLE STOP: CELLGATE=1 required (substrate).'); process.exit(2); }
+  if (process.env.CELLGATE_FLOOR !== undefined && process.env.CELLGATE_FLOOR !== '' && !(parseInt(process.env.CELLGATE_FLOOR, 10) >= 1 && parseInt(process.env.CELLGATE_FLOOR, 10) <= 5)) { console.error('KILLLOOTBUNDLE STOP: CELLGATE_FLOOR must be an integer 1..5 when set (got ' + JSON.stringify(process.env.CELLGATE_FLOOR) + '); an invalid floor would silently fall back to 4.'); process.exit(2); }
   if (MODE === 'arm' && !KILLBUNDLE_ON) { console.error('KILLLOOTBUNDLE STOP: arm leg requires KILLBUNDLE=1.'); process.exit(2); }
   if (STAGE_SEAR_ON && (MODE !== 'arm' || !KILLBUNDLE_ON)) { console.error('KILLLOOTBUNDLE STOP: STAGE_SEAR=1 requires MODE=arm + KILLBUNDLE=1.'); process.exit(2); }
   if (MODE === 'ctl' && KILLBUNDLE_ON) { console.error('KILLLOOTBUNDLE STOP: ctl leg requires KILLBUNDLE unset.'); process.exit(2); }
@@ -548,6 +558,7 @@ if (require.main === module) (async function () {
       maxWave: out.maxWave, standing: out.standing, scaleRank: out.scaleRank,
       deaths: out.deaths.length,
       stageSearOn: out.stageSearOn,
+      cellgateFloor: out.cellgateFloor,
       contests: out.contestEvents ? out.contestEvents.length : 0,
       prizeRolls: out.prizeEvents ? out.prizeEvents.length : 0,
       searGrants: searGrants,
