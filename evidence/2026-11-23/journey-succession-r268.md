@@ -344,5 +344,41 @@ instrument, not the game.
 
 ## Gate
 
-[TO FILL after the check.js --quick gate on the merged tip — pass count,
-attributed failures, standalone re-runs.]
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest2`
+in the worktree on the rebased tip (HEAD `c84b0d188`), run via
+`/tmp/r268-gate.sh` (detached, after a first gate run was killed at
+~335/344 by a runtime restart of the exec service — the detached
+re-run is the complete record). **338 passed, 6 failed in 1154s.**
+Gate start 16:09:25Z, end 16:28:41Z. (`evidence/2026-11-23/
+journey-succession-r268-gate.log`.)
+
+The 6 failures, all attributed, 0 attributable to this run:
+
+- `scripts/godpath/test-measurement-proof-update.js` (exit 1, 3.7s)
+  — "Proof source inputs are not current": the measurement-proof
+  staleness pair, standing family (the fix changes Game inputs;
+  the retained neutrality proof refresh is rounds 11+12, owed
+  since r192, not this run's job).
+- `scripts/godpath/test-measurement-workflow.js` (exit 1, 4.0s) —
+  "retained neutrality proof covers the current Game/controller/
+  harness inputs" FAIL: the other half of the staleness pair.
+  Same standing cause.
+- `scripts/godpath/test-phone-frame-proof.js` (exit 1, 4.7s) —
+  retained receipt hash 736; stale inputs (index.html,
+  alienPlayers.json, build-notes.json, foreignSpeech.json,
+  regions.json, statusEffects.js): the phone-frame stale receipt,
+  standing family. This run touches no phone-frame input.
+- `scripts/godpath/test-living-garden-deed-attainment.js` (exit
+  null, 120.1s), `test-one-person-army-deed-attainment.js` (exit
+  null, 120.1s), `test-trust-observer-neutrality.js` (exit null,
+  120.1s) — all three are 120s timeouts under load (load average
+  18–21 during the gate). Re-run standalone, serialized, on the
+  same tip: living-garden 8 passed / 0 failed, one-person-army 7
+  passed / 0 failed, trust-observer-neutrality 6 passed / 0 failed
+  — all EXIT=0. (`evidence/2026-11-23/
+  journey-succession-r268-gate-standalone.log`.) Confirmed load
+  flakes, not defects.
+
+No new failure. The gate is the standing set (2 staleness + 1
+phone-frame + 3 load-flake timeouts, all re-proven green
+standalone) and nothing else. 0 attributable.
