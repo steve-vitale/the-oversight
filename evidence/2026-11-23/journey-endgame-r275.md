@@ -293,9 +293,11 @@ on the worktree tip (base `b24528ae7` + fix): **312 passed, 32 failed in 3825s**
 godverbs fix.** The rebase delta (b24528ae7..53ae1c2de, deepening r275
 tooling + departsafe re-judge + musterask corpora) touches no `src/` file,
 no green-list/check.js input, and none of this run's files, so the gate
-stands for the rebased tip per the 2115Z precedent; the proof test +
-god-support-player are re-run on the rebased tip after rebase and the
-result recorded here.
+stands for the rebased tip per the 2115Z precedent. Rebased onto
+`53ae1c2de` (both commits replayed exactly once, patch byte-identical:
+prereg `fbe87d09b`→`84157f2be`, fix `fdbe87768`→`9456a8e2c`); on the
+rebased tip the proof test is **ALL PASS** (A/B/C) and god-support-player
+**27/0**, re-verified before merge.
 
 ## Commits (this run)
 
@@ -303,10 +305,12 @@ result recorded here.
   fresh band 107582-107589)" — prereg + tooling (already landed on the
   branch before the pilot).
 - Fix + fix-the-fix + proof test + panel evidence + run note + gate logs:
-  to be committed via the worktree's own `safe-commit.sh` after the gate
-  (see gate section) — `src/js/corpses.js` (registerDeath dead-mark),
+  committed as `fdbe87768`, rebased onto `53ae1c2de` as `9456a8e2c`
+  (patch byte-identical) — `src/js/corpses.js` (registerDeath dead-mark),
   `src/js/godverbs.js` (godBefore capture for postHit), proof test
   `scripts/test-apcontact-dead-whisper-r275.js`, evidence
   `journey-endgame-r275.md` + pilot/analyzer logs + `perseed-endgame-r275/`
-  + gate logs. Proof test + god-support-player re-run on the rebased tip
-  after rebase; results recorded in the gate section above.
+  + gate logs. Proof test (ALL PASS) + god-support-player (27/0)
+  re-run on the rebased tip before merge; results in the gate section.
+- This note's gate-section rebase paragraph: recorded in a follow-up
+  commit after the rebase + re-runs.
