@@ -31,7 +31,7 @@
 'use strict';
 const fs = require('fs'), path = require('path');
 const { summarizeBondProposed, tallyOffered, summarizeCounters, tallyRecap, tallyReoffers, tallyDroppedThreads, tallyNarrDup, tallyConfessions, tallyVendetta, tallyRecapEmpty, tallyDoorReq, maxDoorServes, tallyThreeTimes, proposalsPerVillageDay, splitM4Flags, stripM4RepeatPrefix, stripM4DiscourseOpener } = require('./journey-social-r226-helpers');
-const DIR = path.join(__dirname, '..', 'evidence', '2026-11-22');
+const DIR = path.join(__dirname, '..', 'evidence', '2026-11-23');
 const files = fs.readdirSync(DIR).filter(f => /^journey-social-life-r268-\d+\.json$/.test(f)).sort();
 if (!files.length) { console.error('no r268 per-seed JSONs in ' + DIR); process.exit(1); }
 const seeds = files.map(f => JSON.parse(fs.readFileSync(path.join(DIR, f), 'utf8')));
