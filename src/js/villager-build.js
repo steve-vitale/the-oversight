@@ -645,8 +645,18 @@
           if (!e || !e.itemId) continue;
           const i = pool.findIndex(it => idOfItem(it) === e.itemId);
           if (i < 0) continue;
+          const srcIt = pool[i];
           pool.splice(i, 1);
           s.equipped[sl] = Object.assign({}, e);
+          // WORN-STACK (sim-wornstack-a, finding #2698): the worn copy
+          // used to drop the stack's units — a 2-cell stack worn as one
+          // accessory collapsed to 1 on succession (the pool object
+          // holding units:2 was spliced out, the copy had none). Carry
+          // the source stack's units when it holds more than one, the
+          // same rule toScholarItem uses for the pack (#807). A single
+          // unit stays bare, as every other worn copy in the codebase.
+          const srcUnits = (srcIt && srcIt.units) || e.units || 1;
+          if (srcUnits > 1) s.equipped[sl].units = srcUnits;
         }
         // GAP-W4-NARR #807: the old map collapsed every item object
         // to its id and rebuilt units:1/kcalEach:0 — a 6-strip dried-meat
