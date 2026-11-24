@@ -248,22 +248,36 @@ Watch notes (not fails, for the build arm):
 
 ## 8. Gate and telemetry
 
-**Gate:** [PENDING — not yet run at note time; see §12.]
+**Gate:** `node scripts/check.js --quick` in the worktree — **339 passed,
+5 failed in 802s, 0 attributable.** The 5 failures are exactly the r277
+standing set, re-confirmed individually: phone-frame-proof (boot-input
+freshness — index.html receipt stale vs current source), the
+measurement-proof-update / measurement-workflow proof-freshness pair
+(neutrality proof does not cover current Game/controller/harness
+inputs), living-garden + one-person-army deed-attainment 120s timeouts.
+No conversation/convo test failed; the 4 load-flaky failures from r277
+passed this time (339 vs 335 passed). Gate adjudicated GO.
 
 **Telemetry check:** run against the r274+r277 pooled baseline —
 **QUIET (8 files, 4 metrics, no large deviations)**. Per the prereg's
 roll condition (all four means within ±30% of pooled — deaths +21%,
 popAlive +5%, pantry +22%, starvation 0), the baseline IS rolled
 forward to r274+r277+r280 pooled, 24 seeds: **deaths 1172, popAlive
-223, pantryKcal 899,383, starvationDeaths 0**. **ROLL BLOCKED at note
-time by the write flap:** the backup `cp` and the `git update-ref`
-probe both failed 10:46–10:48Z (`Operation not permitted`); the
-baseline file itself is INTACT at the r277 values (731/146/558,421/0)
-and the failed backup was left 0 bytes
-(`establishment.json.20261124-pre-r280.bak` — must be re-created, not
-trusted, when the flap clears). The roll is owed to the closeout, not
-re-scored: the check already ran quiet and the roll values are frozen
-above.
+223, pantryKcal 899,383, starvationDeaths 0**. The roll was BLOCKED at
+first by the write flap (backup `cp` + `git update-ref` probe failed
+10:46–10:48Z) and completed at 10:57Z once writes cleared; the baseline
+file was intact throughout and the failed backup was re-created and
+verified (`establishment.json.20261124-pre-r280.bak`, byte-identical).
+
+**Sums-vs-means artifact (read before the next run's check):** re-running
+the check against the NEW 24-seed pooled baseline flags LOUD lines
+(popAlive −65%, pantryKcal −62%) — that is the tool comparing SUMS: an
+8-file panel against a 24-file baseline always reads ~−67% on count
+metrics. It is NOT a deviation. The Q4 verdict stands on per-seed
+MEANS (r280 vs pooled: +21%/+5%/+22%, inside ±30%). The r277 re-seed
+note records the same artifact (8-vs-16). Until the tool compares
+means, judge the roll on means and expect LOUD sums lines after every
+pooled re-seed.
 
 ## 9. Metric review (§14)
 
@@ -299,6 +313,13 @@ above.
    home" story now has two shapes (away-for-days, out-and-back-same-day)
    and the second is ordinary risk, not a defect shape. No revision;
    the watch stays at causes + last-dawn locations.
+6. **Telemetry-check compares SUMS, the roll is judged on MEANS.**
+   After any pooled re-seed the next check flags LOUD sums lines
+   (8-file panel vs 24-file baseline). The Q4 bar is per-seed means and
+   stays the judge; the tool needs a means mode before the next pooled
+   roll, or the LOUD lines must be annotated as the known artifact (see
+   §8). No metric revision — the bar itself is right, the instrument
+   needs the mode.
 
 ## 10. Reachable / fun / winnable
 
@@ -348,8 +369,8 @@ above.
 - Fix + proof test + driver/analyzer + evidence + this note committed
   via safe-commit in the worktree; [GATE PENDING — see below.]
 - **Merged locally, pending ship** — no version tag; the ship loop owns
-  bumps/pushes/live verification. [STATUS AT NOTE TIME: NOT YET MERGED
-  — gate + merge + rotation + release owed; see §13.]
+  bumps/pushes/live verification. [STATUS AT NOTE-COMMIT TIME: gate GO,
+  merge + rotation + release owed; see §13.]
 - **Owed, not in this run's scope:** the cancel-verb menu-priority fix
   is LANDED here (§2) — the r277 build-arm item is closed. Still open:
   F5 floor (build arm), trio gap, wave-4 kill A/B, family 7 UNMEASURED,
@@ -364,6 +385,9 @@ above.
   (this file). Telemetry check QUIET; baseline roll BLOCKED by flap
   (values frozen in §8: deaths 1172, popAlive 223, pantryKcal 899,383,
   starvationDeaths 0, 24 seeds).
-- Gate: [PENDING]
-- Commit: [PENDING]
-- Merge / rotation / release / lock: [PENDING]
+- Gate: GO — 339 passed, 5 failed, 0 attributable (standing set,
+  re-confirmed individually; §8).
+- Commit: 91a58af4c (fix + proof + driver/analyzer + note) + this
+  note addendum (gate result + telemetry sums artifact).
+- Merge / rotation / release / lock: [PENDING at note-commit time —
+  see the run's final record.]
