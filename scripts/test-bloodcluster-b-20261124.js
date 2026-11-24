@@ -32,7 +32,7 @@ function seedOut(over) {
     endUnlockedWave: 5, peakBeforeEndCall: 5, peakAfterEndCall: 5, endCallMovedPeak: false,
     endState: { scholarId: 'scholar1', roster: [], exiles: [] },
     daily: [], killEvents: [], deathEvents: [], feastEvents: [], standingLines: [],
-    releaseLines: [], saySample: [], fieldFights: [], tbStarts: [],
+    releaseLines: [], saySample: [], fieldFights: [], tbStarts: [], tbKillCtx: [],
     wrapCounts: {}, instrumentErrors: [] }, over || {});
 }
 function kill(day, by, mid, wave, via, entryAdded) {
@@ -50,9 +50,16 @@ function ff(day, vid, mid, wave, over) {
     vHpLeft: 60, mHpLeft: 0, packCount: 1, everWinning: true, everHopeless: false,
     minHpFrac: 0.6, fleeHopeless: null, fleeHpFrac: null }, over || {});
 }
-function tbs(day, mid, wave, partySize, joiners) {
-  return { day: day, mid: mid, wave: wave, partySize: partySize, scholarPresent: true,
-    villagerJoiners: joiners || [], monsterCount: 1 };
+function tbs(day, mid, wave, partySize, joiners, over) {
+  return Object.assign({ day: day, mid: mid, wave: wave, fightId: 'f' + day + mid, rebuilt: true,
+    scholarId: 'scholar1', partySize: partySize, scholarPresent: true,
+    villagerJoiners: joiners || [], fighterKinds: ['player'].concat((joiners || []).map(function () { return 'villager'; })),
+    monsterCount: 1 }, over || {});
+}
+function ctx(day, mid, by, via, over) {
+  return Object.assign({ seq: 0, day: day, fn: 'recordWaveKill', mid: mid, wave: 4,
+    by: by, via: via, inTbFight: true, fightId: 'f' + day + mid, tbOver: false, tbResult: 'won',
+    partySize: 1, scholarPresent: true, villagerFighters: [], monsterIds: [mid] }, over || {});
 }
 
 // A full 8-killer door seed exercising every mechanism class.
@@ -73,12 +80,20 @@ function classFixture() {
     ff(57, 'solo_f', 'influencer', 4),
     ff(60, 'start_f', 'strike', 4, { allyFromStart: true, allyVid: 'helper_a', allyJoined: ['helper_a'], partySize: 2, partySizeRec: 2, alliesAvailable: 1, allyVidsAtEntry: ['helper_a'], allyDealt: 300 }),
     ff(65, 'shout_f', 'audit', 4, { calledHelp: true, allyVid: 'helper_b', allyJoined: ['helper_b'], partySize: 2, partySizeRec: 2, alliesAvailable: 1, allyDealt: 200 }),
+    // The contest kill resolved through a field fight: the row is
+    // consumed by the contest branch, the class stays contest.
+    ff(85, 'contest_f', 'congregation', 4),
     ff(95, 'alive_f', 'eater', 4),
   ];
   const tbsList = [
     tbs(70, 'eulogy', 4, 1, []),
     tbs(75, 'algorithm', 4, 3, ['comp_f', 'helper_a']),
     tbs(80, 'reunion', 4, 3, ['comp_f', 'helper_a']),
+  ];
+  const ctxList = [
+    ctx(70, 'eulogy', 'scholar1', 'player', { partySize: 1, villagerFighters: [] }),
+    ctx(75, 'algorithm', 'scholar1', 'player', { partySize: 3, villagerFighters: ['comp_f', 'helper_a'] }),
+    ctx(80, 'reunion', 'comp_f', 'companion', { partySize: 3, villagerFighters: ['comp_f', 'helper_a'] }),
   ];
   const daily = [];
   for (let d = 1; d <= 150; d++) {
@@ -94,7 +109,7 @@ function classFixture() {
     return death(100 + i, v, 'the wild');
   });
   return seedOut({ daily: daily, killEvents: kills, deathEvents: deaths,
-    fieldFights: fields, tbStarts: tbsList,
+    fieldFights: fields, tbStarts: tbsList, tbKillCtx: ctxList,
     endState: { scholarId: 'scholar1', roster: vids.slice(), exiles: [] } });
 }
 
@@ -121,7 +136,7 @@ ok('mechanism classes: all channels classified, bare known-channel kill UNCLASSI
   assert.strictEqual(s.unlinkedKills[0].by, 'bare_f');
   assert.deepStrictEqual(s.unlinkedFieldKills, []);
   assert.deepStrictEqual(s.unlinkedTbKills, []);
-  assert.strictEqual(s.w4Contacts, 4 + 3, '4 field + 3 TB contacts');
+  assert.strictEqual(s.w4Contacts, 5 + 3, '5 field + 3 TB contacts');
   assert.strictEqual(s.w4Kills, 9);
 });
 
@@ -146,6 +161,45 @@ ok('duplicate choke-point call links to the same fight, not a second kill', func
   assert.strictEqual(s.unlinkedKills.length, 1, 'still only the bare kill unlinked');
   const wa = s.bloodings.find(function (b) { return b.vid === 'wa9'; });
   assert.strictEqual(wa.cls, 'field-solo');
+});
+
+ok('refused startCombat rows are not contacts; tb-direct kill classifies from settle-time ctx', function () {
+  const f = classFixture();
+  // A refused suburb start (fight live — stale tbfight, same id as
+  // the day-75 fight) must not count as a contact.
+  f.tbStarts.push(tbs(76, 'suburb', 4, 1, [], { fightId: 'f75algorithm', rebuilt: false, scholarPresent: false, monsterCount: 0, fighterKinds: ['villager'] }));
+  // A TB kill from a fight with NO startCombat row (direct builder /
+  // restored fight): ctx fightId matches nothing, class still lands.
+  f.killEvents.push(kill(100, 'direct_f', 'herald', 4, 'companion'));
+  f.tbKillCtx.push(ctx(100, 'herald', 'direct_f', 'companion', { fightId: 'fdirect-no-row', partySize: 2, villagerFighters: ['direct_f'] }));
+  f.daily.forEach(function (d) {
+    if (d.day >= 100) {
+      d.roster.push('direct_f');
+      d.logW4.push({ d: 100, mid: 'herald', w: 4, by: 'direct_f', via: 'companion' });
+    }
+  });
+  f.deathEvents.push(death(110, 'direct_f', 'monster'));
+  const s = AN.summarizeSeed(f);
+  assert.strictEqual(s.refusedTbStarts.length, 1, 'the refused row is flagged');
+  assert.strictEqual(s.w4TbContacts, 3, 'refused row excluded from TB contacts');
+  assert.strictEqual(s.w4Contacts, 5 + 3, 'contacts unchanged by the refused row');
+  const df = s.bloodings.find(function (b) { return b.vid === 'direct_f'; });
+  assert.strictEqual(df.cls, 'tb-companion');
+  assert.strictEqual(df.detail.builder, 'direct/other');
+  assert.strictEqual(df.detail.party, 2);
+  assert.deepStrictEqual(s.unlinkedTbKills, []);
+  assert.strictEqual(s.unlinkedKills.length, 1, 'still only the bare kill unlinked');
+});
+
+ok('succession does not break TB linkage: kill links by settle-time ctx, not end-of-run scholar', function () {
+  const f = classFixture();
+  // The scholar at the end is someone else entirely; the day-70
+  // kill was still the scholar's, and the ctx proves it.
+  f.endState.scholarId = 'someone_else_entirely';
+  const s = AN.summarizeSeed(f);
+  const sch = s.bloodings.find(function (b) { return b.vid === 'scholar1'; });
+  assert.strictEqual(sch.cls, 'tb-scholar-solo');
+  assert.strictEqual(s.unlinkedKills.length, 1, 'only the bare kill unlinked');
 });
 
 ok('joiner origin: visjoin/app blooders, days join-to-blood from roster first-seen', function () {
@@ -184,6 +238,11 @@ ok('contrast + dominant: party family wins when its ratio leads and covers the d
     return Object.assign({}, r, { allyVid: null, ally2Vid: null, ally3Vid: null, allyJoined: [], partySize: 1, partySizeRec: 1, calledHelp: false, allyFromStart: false, allyDealt: 0 });
   });
   non.tbStarts = [tbs(70, 'eulogy', 4, 1, []), tbs(75, 'algorithm', 4, 1, []), tbs(80, 'reunion', 4, 1, [])];
+  // Settle-time ctx is the party source of truth for TB kills — the
+  // non-door ctx parties must go solo too, not just the start rows.
+  non.tbKillCtx = non.tbKillCtx.map(function (c) {
+    return Object.assign({}, c, { partySize: 1, villagerFighters: [] });
+  });
   // The companion kill can no longer match a TB start (no joiners) — it
   // becomes unlinked, so drop it from the non-door kills to keep the
   // contrast about party, not linkage.
@@ -248,11 +307,15 @@ ok('NO-DOMINANT: identical door/non-door rates name nothing', function () {
       daily: inst.t.daily, killEvents: inst.t.killEvents, feastEvents: inst.t.feastEvents,
       deathEvents: inst.t.deathEvents, standingLines: inst.t.standingLines,
       releaseLines: inst.t.releaseLines, saySample: inst.t.saySample,
-      fieldFights: inst.t.fieldFights, tbStarts: inst.t.tbStarts,
+      fieldFights: inst.t.fieldFights, tbStarts: inst.t.tbStarts, tbKillCtx: inst.t.tbKillCtx,
       wrapCounts: inst.t.wrapCounts, instrumentErrors: inst.t.instrumentErrors });
     assert.strictEqual(live.killerCount, 1);
     assert.strictEqual(live.bloodings[0].cls, 'UNCLASSIFIED', 'bare kill with no fight record is unclassified');
     assert.strictEqual(live.unlinkedKills.length, 1);
+    // Settle-time ctx: one row for the kill call, no TB fight live.
+    assert.strictEqual(inst.t.tbKillCtx.length, 1, 'one settle-time ctx row per kill call');
+    assert.strictEqual(inst.t.tbKillCtx[0].inTbFight, false, 'no TB fight live at the bare kill');
+    assert.strictEqual(inst.t.tbKillCtx[0].fightId, null);
     assert.strictEqual(inst.t.instrumentErrors.length, 0, 'no instrument errors');
     pass++;
     console.log('ok ' + pass + ' - live harness smoke: fieldFight row + bare wave-4 kill UNCLASSIFIED, 0 instrument errors');

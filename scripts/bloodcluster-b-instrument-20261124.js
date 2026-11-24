@@ -35,6 +35,20 @@ function install(Game) {
   const t = base.t;
   t.fieldFights = [];
   t.tbStarts = [];
+  // Settle-time TB context: one row per recordWaveKill /
+  // recordPyrrhicKill call, captured while the live tbfight is
+  // still the fight that produced the kill (tbEnd calls
+  // recordWaveKill BEFORE clearing tbfight). This is the ONLY
+  // reliable TB linkage: startCombat is not the only TB entry
+  // (direct tbfight builders exist), startCombat REFUSES while a
+  // fight is live (stale tbfight — see tbStarts 'rebuilt'), and
+  // the scholar's villager id changes on succession, so an
+  // end-of-run scholar id cannot identify the killer's fight.
+  // Field kills (via wild/agency/...) carry a tbCtx only when a
+  // TB fight happens to be live; the analyzer uses tbCtx ONLY for
+  // via player/companion kills.
+  t.tbKillCtx = [];
+  let tbCtxSeq = 0;
   const orig = {};
   function err(where, e) { try { t.instrumentErrors.push(where + ': ' + String((e && e.message) || e).slice(0, 100)); } catch (e2) {} }
 
@@ -79,29 +93,69 @@ function install(Game) {
 
   // --- TB fights: entry party only (startCombat builds the fight
   // synchronously and stores it in Game.tbfight; the fight then
-  // resolves over later policy steps) ---
+  // resolves over later policy steps). A call made while a fight
+  // is live is REFUSED (startCombat returns early, "Already in a
+  // fight") — the tbfight it leaves behind is STALE, so the row is
+  // flagged rebuilt=false by comparing tbfight.id before/after and
+  // must NOT count as a contact. scholarId is the scholar AT ENTRY
+  // (succession changes it constantly — 13 distinct scholar ids on
+  // seed 109310 alone — so an end-of-run id cannot identify a
+  // killer's fight). ---
   if (typeof Game.startCombat === 'function') {
     orig.startCombat = Game.startCombat;
     Game.startCombat = function (monsterId) {
+      const beforeId = (Game.tbfight && Game.tbfight.id) || null;
       let r;
       try { r = orig.startCombat.apply(this, arguments); } catch (e) { throw e; }
       try {
         const mid = monsterId || Game.pendingMonsterId || null;
         const tf = Game.tbfight || null;
+        const afterId = (tf && tf.id) || null;
         const fighters = (tf && Array.isArray(tf.fighters)) ? tf.fighters : [];
         const villagers = fighters.filter(function (f) { return f && (f.kind === 'villager' || f.kind === 'ally') && f.villagerId; })
           .map(function (f) { return f.villagerId; });
         t.tbStarts.push({
           day: dayOf(Game), mid: mid, wave: waveOf(Game, mid),
+          fightId: afterId, rebuilt: afterId !== beforeId,
+          scholarId: Game.villagerId || null,
           partySize: 1 + villagers.length,
           scholarPresent: fighters.some(function (f) { return f && f.kind === 'player'; }),
           villagerJoiners: villagers,
+          fighterKinds: fighters.map(function (f) { return (f && f.kind) || null; }),
           monsterCount: fighters.filter(function (f) { return f && f.kind === 'monster'; }).length,
         });
       } catch (e) { err('startCombat-row', e); }
       return r;
     };
   } else { err('install.startCombat', new Error('not a function')); }
+
+  // --- settle-time TB context on every kill call (see above) ---
+  function wrapKillCtx(fnName) {
+    if (typeof Game[fnName] !== 'function') { err('install.' + fnName, new Error('not a function')); return; }
+    orig[fnName] = Game[fnName];
+    Game[fnName] = function (monsterId, killerVid, via, detail) {
+      try {
+        const tf = Game.tbfight || null;
+        const fighters = (tf && Array.isArray(tf.fighters)) ? tf.fighters : [];
+        const vFighters = fighters.filter(function (f) { return f && (f.kind === 'villager' || f.kind === 'ally' || f.kind === 'player') && (f.villagerId || f.kind === 'player'); });
+        t.tbKillCtx.push({
+          seq: tbCtxSeq++, day: dayOf(Game), fn: fnName,
+          mid: monsterId || null, wave: waveOf(Game, monsterId),
+          by: (killerVid == null ? null : killerVid), via: via || 'unknown',
+          inTbFight: !!tf, fightId: (tf && tf.id) || null,
+          tbOver: tf ? !!tf.over : null,
+          tbResult: (tf && tf.result) || null,
+          partySize: tf ? vFighters.length : null,
+          scholarPresent: fighters.some(function (f) { return f && f.kind === 'player'; }),
+          villagerFighters: vFighters.filter(function (f) { return f.kind !== 'player'; }).map(function (f) { return f.villagerId; }),
+          monsterIds: fighters.filter(function (f) { return f && f.kind === 'monster' && f.mdef; }).map(function (f) { return f.mdef.id; }),
+        });
+      } catch (e) { err(fnName + '-ctx', e); }
+      return orig[fnName].apply(this, arguments);
+    };
+  }
+  wrapKillCtx('recordWaveKill');
+  wrapKillCtx('recordPyrrhicKill');
 
   function uninstall() {
     Object.keys(orig).forEach(function (n) { try { Game[n] = orig[n]; } catch (e) {} });

@@ -18,6 +18,16 @@
 // party >= 2 at the kill; C = share of door bloodings via the field
 // channel (damage/staying is a field-fight property); D = share of
 // door bloodings with an ally-join at the kill OR a joiner blooder.
+// PREREG AMENDMENT #1 (pilot smoke leg, instrument fix — bars
+// unchanged): TB linkage moved from startCombat-row matching to
+// settle-time context (tbKillCtx): startCombat is not the only TB
+// entry, it REFUSES while a fight is live (stale tbfight), and the
+// scholar's villager id changes on succession. TB party size is
+// the SETTLE-TIME party (fighters standing at the kill); entry
+// party is kept alongside. TB contacts count REBUILT starts only.
+// The v1 pilot corpus (RUN bloodcluster-b, 8 seeds) is the smoke
+// leg that proved the defect (7/20 bloodings unlinked); the judged
+// legs run under RUN bloodcluster-b-v2 with the fixed instrument.
 // Usage: const AN = require('./bloodcluster-b-analyze-20261124');
 //   const s = AN.summarizeSeed(perSeedJson);
 //   const all = AN.summarizeAll([perSeedJson, ...]);
@@ -54,7 +64,15 @@ function summarizeSeed(out) {
   s.fieldFights = field.length;
   s.tbStarts = tb.length;
   s.fieldW4 = field.filter(function (f) { return f && (f.wave | 0) >= 4; });
-  s.tbW4 = tb.filter(function (t) { return t && (t.wave | 0) >= 4; });
+  // TB contacts count REBUILT starts only. A startCombat call made
+  // while a fight is live is REFUSED (tbfight.id unchanged) — it
+  // builds no fight and is not a contact; the v1 pilot counted 32
+  // such phantom rows on 109312 alone. Refused rows are kept and
+  // reported, never silently dropped.
+  s.tbW4All = tb.filter(function (t) { return t && (t.wave | 0) >= 4; });
+  s.tbW4 = s.tbW4All.filter(function (t) { return t.rebuilt !== false; });
+  s.refusedTbStarts = s.tbW4All.filter(function (t) { return t.rebuilt === false; });
+  s.refusedTbStartsAll = tb.filter(function (t) { return t && t.rebuilt === false; });
   s.fieldW3 = field.filter(function (f) { return f && (f.wave | 0) === 3; });
   s.fieldUnknownWave = field.filter(function (f) { return f && (f.wave == null); });
   s.tbUnknownWave = tb.filter(function (t) { return t && (t.wave == null); });
@@ -87,10 +105,34 @@ function summarizeSeed(out) {
   s.w3KillsPerContact = share(w3Kills, w3Contacts);
 
   // --- linkage: killEvents -> fights (FIFO, call order) ---
+  // Field kills link to field rows (same day+mid+leader, vKill).
+  // TB kills (via player/companion) link via the SETTLE-TIME
+  // context (tbKillCtx, captured inside tbEnd while the live
+  // tbfight is still the fight that produced the kill): the ctx
+  // row's fightId is matched to a rebuilt startCombat row, or the
+  // kill is 'tb-direct' (fight built by another builder or
+  // restored from save — still a real TB fight with a real party,
+  // classified from the ctx party). Contest kills consume their
+  // field row when the contest resolved through fieldFight, but
+  // classify as contest — the via names the channel.
   const kills = (out.killEvents || []).filter(function (k) { return k && (k.wave | 0) >= 4 && k.by != null; });
   const fieldKills = s.fieldW4.filter(function (f) { return f.outcome === 'vKill'; });
   const fieldUsed = new Set();
-  const tbUsed = new Set();
+  const ctxByKey = {};
+  for (const c of (out.tbKillCtx || [])) {
+    if (!c) continue;
+    const key = (c.day | 0) + '|' + c.mid + '|' + String(c.by) + '|' + (c.via || 'unknown') + '|' + (c.fn || '');
+    (ctxByKey[key] = ctxByKey[key] || []).push(c);
+  }
+  function ctxMatch(k) {
+    const q = ctxByKey[(k.day | 0) + '|' + k.mid + '|' + String(k.by) + '|' + (k.via || 'unknown') + '|' + (k.fn || '')];
+    return (q && q.length) ? q.shift() : null;
+  }
+  function startRowForFightId(fid) {
+    if (fid == null) return null;
+    for (const t of s.tbW4) { if (t.fightId === fid) return t; }
+    return null;
+  }
   s.linkedKills = [];
   s.unlinkedKills = [];
   s.linkedDuplicates = [];
@@ -105,36 +147,39 @@ function summarizeSeed(out) {
     }
     return null;
   }
-  function tbMatch(k) {
-    for (let i = 0; i < s.tbW4.length; i++) {
-      if (tbUsed.has(i)) continue;
-      const t = s.tbW4[i];
-      if ((t.day | 0) === (k.day | 0) && t.mid === k.mid) {
-        const scholarId = (out.endState && out.endState.scholarId) || null;
-        const isScholar = String(k.by) === String(scholarId);
-        const isJoiner = (t.villagerJoiners || []).some(function (v) { return String(v) === String(k.by); });
-        if ((k.via === 'player' && isScholar) || (k.via === 'companion' && isJoiner)) {
-          tbUsed.add(i);
-          return { kind: 'tb', row: t };
-        }
-      }
-    }
-    return null;
-  }
   // Pass 1: entryAdded kills (the counted kills) link to fights.
   const matchedByKey = {};
   for (const k of kills) {
     if (!k.entryAdded) continue;
-    const m = fieldMatch(k) || tbMatch(k);
-    const rec = { day: k.day | 0, mid: k.mid, wave: k.wave | 0, by: String(k.by), via: k.via || 'unknown', fn: k.fn || null, match: m ? m.kind : null, row: m ? m.row : null };
-    if (m) {
-      matchedByKey[(k.day | 0) + '|' + k.mid + '|' + String(k.by)] = m;
-      s.linkedKills.push(rec);
-    } else if (k.via === 'contest') {
+    const rec = { day: k.day | 0, mid: k.mid, wave: k.wave | 0, by: String(k.by), via: k.via || 'unknown', fn: k.fn || null, match: null, row: null, ctx: null };
+    if (k.via === 'contest') {
+      const fm = fieldMatch(k);
       rec.match = 'contest';
+      rec.row = fm ? fm.row : null;
       s.linkedKills.push(rec);
+      matchedByKey[(k.day | 0) + '|' + k.mid + '|' + String(k.by)] = { kind: 'contest', row: rec.row };
+    } else if (k.via === 'player' || k.via === 'companion') {
+      const ctx = ctxMatch(k);
+      if (ctx && ctx.inTbFight) {
+        rec.ctx = ctx;
+        const startRow = startRowForFightId(ctx.fightId);
+        rec.match = startRow ? 'tb' : 'tb-direct';
+        rec.row = startRow;
+        s.linkedKills.push(rec);
+        matchedByKey[(k.day | 0) + '|' + k.mid + '|' + String(k.by)] = { kind: rec.match, row: startRow, ctx: ctx };
+      } else {
+        s.unlinkedKills.push(rec);
+      }
     } else {
-      s.unlinkedKills.push(rec);
+      const m = fieldMatch(k);
+      if (m) {
+        rec.match = 'field';
+        rec.row = m.row;
+        s.linkedKills.push(rec);
+        matchedByKey[(k.day | 0) + '|' + k.mid + '|' + String(k.by)] = m;
+      } else {
+        s.unlinkedKills.push(rec);
+      }
     }
   }
   // Pass 2: duplicate (entryAdded=false) choke-point calls link to
@@ -147,14 +192,24 @@ function summarizeSeed(out) {
     if (k.entryAdded) continue;
     const key = (k.day | 0) + '|' + k.mid + '|' + String(k.by);
     if (matchedByKey[key]) {
-      s.linkedDuplicates.push({ day: k.day | 0, mid: k.mid, by: String(k.by), via: k.via || 'unknown', match: matchedByKey[key].kind });
+      const m = matchedByKey[key];
+      s.linkedDuplicates.push({ day: k.day | 0, mid: k.mid, by: String(k.by), via: k.via || 'unknown', match: m.kind });
+    } else if (k.via === 'player' || k.via === 'companion') {
+      const ctx = ctxMatch(k);
+      if (ctx && ctx.inTbFight) {
+        const startRow = startRowForFightId(ctx.fightId);
+        matchedByKey[key] = { kind: startRow ? 'tb' : 'tb-direct', row: startRow, ctx: ctx };
+        s.linkedDuplicates.push({ day: k.day | 0, mid: k.mid, by: String(k.by), via: k.via || 'unknown', match: matchedByKey[key].kind });
+      } else {
+        s.unlinkedKills.push({ day: k.day | 0, mid: k.mid, wave: k.wave | 0, by: String(k.by), via: k.via || 'unknown', fn: k.fn || null, match: null, row: null, ctx: null, duplicateNoTwin: true });
+      }
     } else {
-      const m = fieldMatch(k) || tbMatch(k);
+      const m = fieldMatch(k);
       if (m) {
         matchedByKey[key] = m;
-        s.linkedDuplicates.push({ day: k.day | 0, mid: k.mid, by: String(k.by), via: k.via || 'unknown', match: m.kind });
+        s.linkedDuplicates.push({ day: k.day | 0, mid: k.mid, by: String(k.by), via: k.via || 'unknown', match: 'field' });
       } else {
-        s.unlinkedKills.push({ day: k.day | 0, mid: k.mid, wave: k.wave | 0, by: String(k.by), via: k.via || 'unknown', fn: k.fn || null, match: null, row: null, duplicateNoTwin: true });
+        s.unlinkedKills.push({ day: k.day | 0, mid: k.mid, wave: k.wave | 0, by: String(k.by), via: k.via || 'unknown', fn: k.fn || null, match: null, row: null, ctx: null, duplicateNoTwin: true });
       }
     }
   }
@@ -176,8 +231,13 @@ function summarizeSeed(out) {
   // TB kills with no TB start at all (alien-duel direct builds carry
   // wave null and cannot produce wave kills, so any such kill is an
   // instrument error, not an explained path).
-  s.unlinkedTbKills = s.linkedKills.filter(function (r) {
-    return (r.via === 'player' || r.via === 'companion') && r.match !== 'tb' && r.match !== 'field';
+  // TB kills with no settle-time fight at all (the prereg bar-4
+  // error case — alien-duel direct builds carry wave null and
+  // cannot produce wave kills, so any such kill is an error).
+  // tb-direct kills (fight with no startCombat row) are LINKED,
+  // not unlinked — they sit in linkedKills with match 'tb-direct'.
+  s.unlinkedTbKills = s.unlinkedKills.filter(function (r) {
+    return (r.via === 'player' || r.via === 'companion');
   });
 
   // --- joiner origin: first roster appearance per vid ---
@@ -209,12 +269,21 @@ function summarizeSeed(out) {
         else if (f.calledHelp) cls = 'field-party-shout';
         else cls = 'field-party-unexplained';
         detail = { party: party, rounds: f.rounds, mDealt: f.mDealt, allyDealt: f.allyDealt, vTaken: f.vTaken, outcome: f.outcome, intent: f.intent, intentWhy: f.intentWhy, allyFromStart: !!f.allyFromStart, calledHelp: !!f.calledHelp, allyJoined: (f.allyJoined || []).slice() };
-      } else if (rec && rec.match === 'tb' && rec.row) {
-        const t = rec.row;
+      } else if (rec && (rec.match === 'tb' || rec.match === 'tb-direct') && rec.ctx) {
+        // TB party size is the SETTLE-TIME party (prereg amendment
+        // #1, pilot smoke leg): the fighters standing when the kill
+        // landed, including mid-fight joiners — entry party can
+        // understate it, and the fight may not have a startCombat
+        // row at all (tb-direct). Entry party is kept alongside.
+        const t = rec.ctx;
+        const party = (t.partySize == null ? (rec.row ? (rec.row.partySize | 0) : null) : (t.partySize | 0));
         if (rec.via === 'companion') cls = 'tb-companion';
-        else if ((t.partySize | 0) <= 1) cls = 'tb-scholar-solo';
+        else if (party != null && party <= 1) cls = 'tb-scholar-solo';
         else cls = 'tb-scholar-party';
-        detail = { party: t.partySize | 0, joiners: (t.villagerJoiners || []).slice() };
+        detail = { party: party, entryParty: rec.row ? (rec.row.partySize | 0) : null,
+          joiners: (t.villagerFighters || []).slice(), fightId: t.fightId || null,
+          builder: rec.match === 'tb' ? 'startCombat' : 'direct/other',
+          partyAnomaly: (rec.via === 'companion' && party != null && party <= 1) };
       } else if (rec && rec.match === 'contest') {
         cls = 'contest';
       } else if (rec && rec.match == null && FIELD_VIAS.indexOf(rec.via) < 0 && rec.via !== 'player' && rec.via !== 'companion' && rec.via !== 'contest') {
@@ -265,6 +334,7 @@ function summarizeSeed(out) {
     const ps = [];
     for (const r of killRecs) {
       if (r.match === 'field' && r.row) ps.push(1 + (r.row.allyJoined || []).length);
+      else if ((r.match === 'tb' || r.match === 'tb-direct') && r.ctx && r.ctx.partySize != null) ps.push(r.ctx.partySize | 0);
       else if (r.match === 'tb' && r.row) ps.push(r.row.partySize | 0);
     }
     return ps;
@@ -334,7 +404,7 @@ function summarizeAll(seeds) {
   // B — party formation.
   c.party2PlusAtKills = contrast('party>=2 share at w4+ kills', pool(door, function (s) { return { num: s.killsParty2Plus, den: s.killsWithPartySize }; }), pool(non, function (s) { return { num: s.killsParty2Plus, den: s.killsWithPartySize }; }));
   c.party2PlusAtContacts = contrast('party>=2 share at w4+ contacts', pool(door, function (s) { return { num: s.contactsParty2Plus, den: s.w4FieldContacts }; }), pool(non, function (s) { return { num: s.contactsParty2Plus, den: s.w4FieldContacts }; }));
-  c.meanPartyAtKills = contrast('mean party at w4+ kills', poolMean(door, function (s) { return s.linkedKills.filter(function (r) { return r.match === 'field' || r.match === 'tb'; }).map(function (r) { return r.match === 'field' ? 1 + (r.row.allyJoined || []).length : (r.row.partySize | 0); }); }), poolMean(non, function (s) { return s.linkedKills.filter(function (r) { return r.match === 'field' || r.match === 'tb'; }).map(function (r) { return r.match === 'field' ? 1 + (r.row.allyJoined || []).length : (r.row.partySize | 0); }); }));
+  c.meanPartyAtKills = contrast('mean party at w4+ kills', poolMean(door, function (s) { return s.linkedKills.filter(function (r) { return r.match === 'field' || r.match === 'tb' || r.match === 'tb-direct'; }).map(function (r) { return r.match === 'field' ? 1 + (r.row.allyJoined || []).length : ((r.ctx && r.ctx.partySize != null) ? (r.ctx.partySize | 0) : (r.row.partySize | 0)); }); }), poolMean(non, function (s) { return s.linkedKills.filter(function (r) { return r.match === 'field' || r.match === 'tb' || r.match === 'tb-direct'; }).map(function (r) { return r.match === 'field' ? 1 + (r.row.allyJoined || []).length : ((r.ctx && r.ctx.partySize != null) ? (r.ctx.partySize | 0) : (r.row.partySize | 0)); }); }));
   // C — field-fight damage/staying.
   c.vFleeShare = contrast('vFlee share (w4+ field contacts)', pool(door, function (s) { return { num: s.fieldVFlee, den: s.w4FieldContacts }; }), pool(non, function (s) { return { num: s.fieldVFlee, den: s.w4FieldContacts }; }));
   const doorStay = c.vFleeShare.door == null ? null : 1 - c.vFleeShare.door;
@@ -388,6 +458,8 @@ function summarizeAll(seeds) {
     unlinkedKills: per.reduce(function (a, s) { return a + s.unlinkedKills.length; }, 0),
     unlinkedFieldKills: per.reduce(function (a, s) { return a + s.unlinkedFieldKills.length; }, 0),
     unlinkedTbKills: per.reduce(function (a, s) { return a + s.unlinkedTbKills.length; }, 0),
+    tbDirectKills: per.reduce(function (a, s) { return a + s.linkedKills.filter(function (r) { return r.match === 'tb-direct'; }).length; }, 0),
+    refusedTbStarts: per.reduce(function (a, s) { return a + s.refusedTbStarts.length; }, 0),
     meanBloodGapDoor: mean(door.reduce(function (a, s) { return a.concat(s.bloodGaps); }, [])),
     meanBloodGapNonDoor: mean(non.reduce(function (a, s) { return a.concat(s.bloodGaps); }, [])),
     perSeed: per,

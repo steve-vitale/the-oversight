@@ -91,7 +91,7 @@ async function oneRun(seed) {
     endState: endState,
     daily: t.daily, killEvents: t.killEvents, deathEvents: t.deathEvents,
     feastEvents: t.feastEvents, standingLines: t.standingLines, releaseLines: t.releaseLines, saySample: t.saySample,
-    fieldFights: t.fieldFights, tbStarts: t.tbStarts,
+    fieldFights: t.fieldFights, tbStarts: t.tbStarts, tbKillCtx: t.tbKillCtx,
     wrapCounts: t.wrapCounts,
     instrumentErrors: t.instrumentErrors.concat(errors),
   };
