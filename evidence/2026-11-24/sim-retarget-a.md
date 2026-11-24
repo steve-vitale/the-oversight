@@ -286,5 +286,11 @@ tracker write).
 
 ## 11. Branch head
 
-Branch `sim-retarget-a`, head: (recorded at commit time — see the
-evidence commit message; the prereg commit is `75b19b20`).
+Branch `sim-retarget-a`, head:
+`9f98a4dc7b1320c3f947f6b0789e6f01f42a6cfd` (evidence commit; the
+prereg commit is
+`75b19b2046b3734ccd9ea4a5ec1abc0ff3180acd`). The head contains zero
+src change — the lever is reverted; the commit is the record
+(evidence + instrument + pilot corpora) only. Ready to merge,
+pending coordinator (the coordinator owns the merge; nothing
+pushes from here).
