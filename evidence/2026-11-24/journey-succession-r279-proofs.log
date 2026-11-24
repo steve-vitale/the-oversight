@@ -1,0 +1,43 @@
+=== proofs on tip 612872ae2 08:07:01Z ===
+--- test-journey-succession-r262-escalator-cap-20261121.js ---
+  t7: We're going in circles — Stand beside them first — same side of the Haven door — then help. Ask me something e
+  t8: We're going in circles — Get to their side of the Haven door and stand next to them — then you can help. Ask m
+spent[dlg:favor_requirements] after 8 presses: true
+RESULT: GREEN — favor-requirements escalator caps at "circles" instead of cycling back to "three times now"
+EXIT=0
+--- test-journey-succession-r254-multiwit-20261120.js ---
+PASS multiwit-names-latest: no served line leaks a literal {mname}
+PASS multiwit-names-latest: no exhausted line served while variants remain — opener:multi-lost,next:fire-smaller,part:pick-up-share,opener:multi-lost,opener:wit-saw,opener:wit-there,opener:world-continues,unknown:"Same story, different day. The ending hasn't changed.",unknown:"I'm talked out on that topic. It's not you. It's the topic.
+
+ALL GREEN
+EXIT=0
+--- test-journey-succession-r232-relationship-mourning-20261117.js ---
+PASS name-correct: stranger speaker B serves 0 bond variants in one sitting — B bond hits=0 
+PASS name-correct: bonded speaker A may serve a bond variant (recorded, not asserted) — A bond hits=1 cope:bond-habit
+
+ALL GREEN
+EXIT=0
+--- test-journey-endgame-r225-f5-settled-favor-20261116.js ---
+  ok   the turn speaks a handled variant
+  ok   the turn does NOT dry
+
+journey-endgame-r225-f5-settled-favor: 22 passed, 0 failed, 0 todo (phase 0)
+EXIT=0
+--- test-journey-succession-r258-selfwit-20261120.js ---
+PASS selfwit-far: the victim is NOT in their own corpse's witnesses — witnesses=["gen_x4xp8i0"]
+PASS selfwit-far: the nearby bystander IS still in the corpse's witnesses — witnesses=["gen_x4xp8i0"]
+
+ALL GREEN
+EXIT=0
+--- test-journey-succession-r267-mourning-dry.js ---
+PASS all-blocked: reply is the dry line (last-resort gap, as on base) — "...Sorry, lost my train of thought."
+PASS all-blocked: no wrong-dead line served — "...Sorry, lost my train of thought."
+
+ALL GREEN
+EXIT=0
+--- test-journey-succession-r268-table-dry.js ---
+PASS mourning-all-blocked: no preamble-prefixed mourning line served — "...Sorry, lost my train of thought."
+PASS mourning-all-blocked: no wrong-dead line served — "...Sorry, lost my train of thought."
+
+ALL GREEN
+EXIT=0

@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d24: Antonio -> Vy, topTrust=[{"id":"Ruby","t":100},{"id":"Greta","t":92},{"id":"Milagros","t":90},{"id":"Vy","t":78}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=22 inheritedPlants=0 keptSkills=7 inheritedSkills=0 succTrustPre=90 succTrustPost=78
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","scream_cheese"] post=["green_whisper","scream_cheese"]
+DEATH d23 (organic (phase A)): Antonio -> Vy | passed=true lin=true mo=true trust=78 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Ruby (refused=false)
+  CONVO d+3 with Greta (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Greta (refused=false)
+  CONVO d+7 with Debbie (refused=false)
+  CONVO d+14 with Debbie (refused=false)
+  CONVO d+14 with Greta (refused=false)
+  CONVO d+30 with Debbie (refused=false)
+  CONVO d+30 with Greta (refused=false)
+  CONVO d+45 with Milagros (refused=false)
+  CONVO d+45 with Stan (refused=false)
+  NEWCOMER-PROBE d+45 with Sofia (arrived d+45, trust=40 refused=false)
+  CONVO d+53 with Omar (refused=false)
+  CONVO d+53 with Sigrun (refused=false)
+  CONVO d+64 with Milagros (refused=false)
+  CONVO d+64 with Stan (refused=false)
+
+FUNERAL: deathBeat=12 recover=1 vouch=1 (eligible=7) echo=4 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=70 violations=0 noMealDays=7 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":67,"offerLines":30,"codexPlantsDelta":21,"codexSkillsDelta":23,"codexAbilitiesDelta":15,"xpDelta":5,"any":true} pantry 77100->57256
+TRUST-DIALS: office 78->96 (+18, climb) | villageMean 69.4->91.7 (+22.3, climb) | ge60 7->6 | movers>=5: [{"id":"Sigrun","from":30,"to":90,"delta":60},{"id":"Omar","from":35,"to":91,"delta":56},{"id":"Stan","from":63,"to":93,"delta":30},{"id":"Nora","from":64,"to":86,"delta":22},{"id":"Milagros","from":90,"to":97,"delta":7}]
+DEED-LEDGER: calls=94 summary={"teachPlant":{"calls":12,"ok":12,"deltaSum":0,"deltaN":12,"positive":0,"meanDelta":0},"donateToPantry":{"calls":68,"ok":68,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":14,"ok":14,"deltaSum":32,"deltaN":14,"positive":14,"meanDelta":2.29}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=94 alive=7 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+71) t2=true(deedCalls=94) trustVerdict={"readable":true,"officeMantle":78,"officeLast":96,"officeDelta":18,"officeClass":"climb","villageMantle":69.4,"villageLast":91.7,"villageDelta":22.3,"villageClass":"climb","villageGe60Mantle":7,"villageGe60Last":6,"movers":[{"id":"Sigrun","from":30,"to":90,"delta":60},{"id":"Omar","from":35,"to":91,"delta":56},{"id":"Stan","from":63,"to":93,"delta":30},{"id":"Nora","from":64,"to":86,"delta":22},{"id":"Milagros","from":90,"to":97,"delta":7}]}
+E6/CALLCHECK: e6={"callMoves":30,"withCensus":30,"chainHandoffs":4,"trustMoves":26} callCheck={"dailyMoveDays":30,"callMoveDays":30,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":26,"soloOffice":11,"soloOfficeDeltas":[1,2,1,2,1,1,1,1,1,2,1],"soloBearerDeltaExact":[1,2,1,2,1,1,1,1,1,2,1],"singleMoverBearer":1,"singleMoverOther":6,"eventClass":{"event-only":0,"deed-only":6,"both":20,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":5,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":30}

@@ -1,0 +1,40 @@
+  WIT-SIT [pre] d9: Diego sits for witnessed Wei (sitSeq=1, freshPersonN=1, latelyDead=Wei, witnessed=true, witnessServed=none) refused=false
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Vivian","t":88},{"id":"Hassan","t":76},{"id":"Nikolai","t":72},{"id":"David","t":38}], roster=7
+INH readable=true scripted=true deadItems=26 distinct=23 transferred=2 vanished=3 keptPlants=16 inheritedPlants=4 keptSkills=9 inheritedSkills=11 succTrustPre=88 succTrustPost=51
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","beard_moss","echo_location"] post=["green_whisper","beard_moss","echo_location"]
+DEATH d41 (the expedition, scripted): Ethel -> Vivian | passed=true lin=true mo=true trust=51 vouchers=2
+  BURIAL d+4: corpse found=true respects=true bury=true
+  INH d+4: transferred=17 vanished=4 of 23 distinct dead-bearer items
+  CONVO d+3 with Nino (refused=false)
+  CONVO d+3 with Elijah (refused=false)
+  NEWCOMER-PROBE d+4 with Kurt (arrived d+4, trust=40 refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with David (depth=0 v=16 refused=false)
+  CONVO d+7 with Elijah (refused=false)
+  CONVO d+7 with David (refused=false)
+  CONVO d+14 with Aroha (refused=false)
+  CONVO d+14 with Kurt (refused=false)
+  BOND-CONVO d+14 with David (depth=0 v=16 refused=false)
+  CONVO d+30 with Kurt (refused=false)
+  CONVO d+30 with David (refused=false)
+
+FUNERAL: deathBeat=10 recover=3 vouch=3 (eligible=2) echo=0 organicBurial={"respects":false,"bury":false} halfRation=3
+
+MEAL-GATE: audited=41 violations=3 noMealDays=3 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+  VIOLATION d+36: David trust=68 kcal=100 halfVoice=true
+  VIOLATION d+36: David trust=68 kcal=100 halfVoice=true
+  VIOLATION d+39: David trust=68 kcal=0 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=41 signals={"levelUp":true,"systemVoice":24,"offerLines":17,"codexPlantsDelta":23,"codexSkillsDelta":9,"codexAbilitiesDelta":6,"xpDelta":-1,"any":true} pantry 20900->0
+TRUST-DIALS: office 51->44 (-7, fall) | villageMean 47.8->91 (+43.2, climb) | ge60 2->4 | movers>=5: [{"id":"Elijah","from":14,"to":91,"delta":77},{"id":"David","from":39,"to":91,"delta":52}]
+DEED-LEDGER: calls=4 summary={"giveFood":{"calls":4,"ok":4,"deltaSum":12,"deltaN":4,"positive":3,"meanDelta":3}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=82 alive=1 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=false dayAdv=41
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=4) trustVerdict={"readable":true,"officeMantle":51,"officeLast":44,"officeDelta":-7,"officeClass":"fall","villageMantle":47.8,"villageLast":91,"villageDelta":43.2,"villageClass":"climb","villageGe60Mantle":2,"villageGe60Last":4,"movers":[{"id":"Elijah","from":14,"to":91,"delta":77},{"id":"David","from":39,"to":91,"delta":52}]}
+E6/CALLCHECK: e6={"callMoves":5,"withCensus":5,"chainHandoffs":3,"trustMoves":2} callCheck={"dailyMoveDays":5,"callMoveDays":5,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E7/R47: e7={"trustMoves":2,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":5,"known":5,"unknown":0} e3={"dailyDays":42,"moves":5}

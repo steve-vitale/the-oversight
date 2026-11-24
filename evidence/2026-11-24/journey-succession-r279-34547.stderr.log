@@ -1,0 +1,40 @@
+  WIT-SIT [pre] d14: Arlo sits for witnessed Galym (sitSeq=1, freshPersonN=1, latelyDead=none, witnessed=false, witnessServed=none) refused=false
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Arlo","t":93},{"id":"Carlos","t":90},{"id":"Fredrik","t":90},{"id":"Wanjiru","t":90}], roster=11
+INH readable=true scripted=true deadItems=12 distinct=12 transferred=1 vanished=2 keptPlants=20 inheritedPlants=4 keptSkills=6 inheritedSkills=10 succTrustPre=90 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["bloodhound","lucky_rock","night_eyes","trophy_room"] post=["bloodhound","lucky_rock","night_eyes","trophy_room"]
+DEATH d41 (the expedition, scripted): Aubrey -> Carlos | passed=true lin=true mo=true trust=62 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=8 vanished=2 of 12 distinct dead-bearer items
+  CONVO d+3 with Fredrik (refused=false)
+  CONVO d+3 with Arlo (refused=false)
+  STRANGER-PROBE d+3 with Wanjiru (trust=90 refused=false)
+  CONVO d+7 with Arlo (refused=false)
+  CONVO d+7 with Fredrik (refused=false)
+  CONVO d+14 with Arlo (refused=false)
+  CONVO d+14 with Fredrik (refused=false)
+  CONVO d+30 with Arlo (refused=false)
+  CONVO d+30 with Fredrik (refused=false)
+  CONVO d+45 with Naran (refused=false)
+  CONVO d+45 with Arlo (refused=false)
+  CONVO d+53 with Naran (refused=false)
+  CONVO d+53 with Arlo (refused=false)
+  CONVO d+64 with Naran (refused=false)
+  CONVO d+64 with Benoit (refused=false)
+
+FUNERAL: deathBeat=7 recover=1 vouch=1 (eligible=7) echo=0 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":48,"offerLines":60,"codexPlantsDelta":19,"codexSkillsDelta":11,"codexAbilitiesDelta":4,"xpDelta":95,"any":true} pantry 16167->17453
+TRUST-DIALS: office 62->65 (+3, climb) | villageMean 73.6->81 (+7.4, climb) | ge60 7->8 | movers>=5: [{"id":"Brian","from":41,"to":90,"delta":49},{"id":"Ivy","from":73,"to":90,"delta":17},{"id":"Tashi","from":84,"to":90,"delta":6},{"id":"Naran","from":86,"to":91,"delta":5},{"id":"Fredrik","from":100,"to":90,"delta":-10}]
+DEED-LEDGER: calls=0 summary={}
+
+IDENTITY TRIPS: raw=4 grief-excluded=3
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=111 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=false(deedCalls=0) trustVerdict={"readable":true,"officeMantle":62,"officeLast":65,"officeDelta":3,"officeClass":"climb","villageMantle":73.6,"villageLast":81,"villageDelta":7.4,"villageClass":"climb","villageGe60Mantle":7,"villageGe60Last":8,"movers":[{"id":"Brian","from":41,"to":90,"delta":49},{"id":"Ivy","from":73,"to":90,"delta":17},{"id":"Tashi","from":84,"to":90,"delta":6},{"id":"Naran","from":86,"to":91,"delta":5},{"id":"Fredrik","from":100,"to":90,"delta":-10}]}
+E6/CALLCHECK: e6={"callMoves":3,"withCensus":3,"chainHandoffs":0,"trustMoves":3} callCheck={"dailyMoveDays":3,"callMoveDays":3,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E7/R47: e7={"trustMoves":3,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":1,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":3}

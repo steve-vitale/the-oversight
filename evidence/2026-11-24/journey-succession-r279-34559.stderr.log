@@ -1,0 +1,41 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Francesca","t":90},{"id":"Rahul","t":90},{"id":"Christian","t":90},{"id":"Lucie","t":90}], roster=10
+INH readable=true scripted=true deadItems=25 distinct=21 transferred=2 vanished=2 keptPlants=22 inheritedPlants=0 keptSkills=5 inheritedSkills=12 succTrustPre=90 succTrustPost=59
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach","green_whisper","rage"] post=["iron_stomach","green_whisper","rage"]
+DEATH d41 (the expedition, scripted): Shannon -> Christian | passed=true lin=true mo=true trust=59 vouchers=6
+  BURIAL d+4: corpse found=true respects=true bury=true
+  INH d+4: transferred=16 vanished=2 of 21 distinct dead-bearer items
+  CONVO d+3 with Rahul (refused=false)
+  CONVO d+3 with Lucie (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Francesca (refused=false)
+  CONVO d+7 with Rahul (refused=false)
+  CONVO d+14 with Lucie (refused=false)
+  CONVO d+14 with Rahul (refused=false)
+  BOND-CONVO d+14 with Francesca (depth=0 v=20 refused=false)
+  NEWCOMER-PROBE: Tashi already bonded on arrival day — no convo driven
+  CONVO d+30 with Rahul (refused=false)
+  CONVO d+30 with Priya (refused=false)
+  CONVO d+45 with Rahul (refused=false)
+  CONVO d+45 with Priya (refused=false)
+  CONVO d+53 with Rahul (refused=false)
+  CONVO d+53 with Priya (refused=false)
+  CONVO d+64 with Priya (refused=false)
+  CONVO d+64 with Rahul (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=6) echo=2 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=0 noMealDays=6 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":39,"offerLines":26,"codexPlantsDelta":39,"codexSkillsDelta":10,"codexAbilitiesDelta":6,"xpDelta":95,"any":true} pantry 16067->9092
+TRUST-DIALS: office 59->76 (+17, climb) | villageMean 69.3->79 (+9.7, climb) | ge60 6->5 | movers>=5: [{"id":"Olivia","from":33,"to":51,"delta":18},{"id":"Priya","from":73,"to":87,"delta":14},{"id":"Nikolai","from":42,"to":55,"delta":13}]
+DEED-LEDGER: calls=20 summary={"giveFood":{"calls":19,"ok":19,"deltaSum":56,"deltaN":19,"positive":19,"meanDelta":2.95},"donateToPantry":{"calls":1,"ok":1,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=111 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=20) trustVerdict={"readable":true,"officeMantle":59,"officeLast":76,"officeDelta":17,"officeClass":"climb","villageMantle":69.3,"villageLast":79,"villageDelta":9.7,"villageClass":"climb","villageGe60Mantle":6,"villageGe60Last":5,"movers":[{"id":"Olivia","from":33,"to":51,"delta":18},{"id":"Priya","from":73,"to":87,"delta":14},{"id":"Nikolai","from":42,"to":55,"delta":13}]}
+E6/CALLCHECK: e6={"callMoves":7,"withCensus":7,"chainHandoffs":3,"trustMoves":4} callCheck={"dailyMoveDays":7,"callMoveDays":7,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=4, excludedLoot=1))
+E7/R47: e7={"trustMoves":4,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":4,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":4,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":7}

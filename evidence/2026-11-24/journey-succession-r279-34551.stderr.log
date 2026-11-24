@@ -1,0 +1,43 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Mateo","t":97},{"id":"Carlos","t":91},{"id":"Jalen","t":91},{"id":"Brianna","t":90}], roster=11
+INH readable=true scripted=true deadItems=10 distinct=10 transferred=3 vanished=1 keptPlants=19 inheritedPlants=4 keptSkills=6 inheritedSkills=7 succTrustPre=90 succTrustPost=60
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location","lucky_rock"] post=["beast_calm","echo_location","lucky_rock"]
+DEATH d41 (the expedition, scripted): Paul -> Brianna | passed=true lin=true mo=true trust=60 vouchers=6
+  BURIAL d+4: corpse found=true respects=true bury=true
+  INH d+4: transferred=3 vanished=1 of 10 distinct dead-bearer items
+  CONVO d+3 with Mateo (refused=false)
+  CONVO d+3 with Carlos (refused=false)
+  STRANGER-PROBE d+3 with Fatima (trust=28 refused=false)
+  BOND-CONVO d+3 with Helen (depth=1 v=46 refused=false)
+  CONVO d+7 with Mateo (refused=false)
+  CONVO d+7 with Carlos (refused=false)
+  CONVO d+14 with Mateo (refused=false)
+  CONVO d+14 with Carlos (refused=false)
+  BOND-CONVO d+14 with Helen (depth=1 v=46 refused=false)
+  WIT-SIT [post] d+17: Carlos died witnessed (Mateo,Brianna) but no living witness to sit — recorded, not driven
+  CONVO d+30 with Jalen (refused=false)
+  CONVO d+30 with Tom (refused=false)
+  NEWCOMER-PROBE d+31 with Oliver (arrived d+31, trust=34 refused=false)
+  CONVO d+45 with Jesse (refused=false)
+  CONVO d+45 with Oliver (refused=false)
+  CONVO d+53 with Oliver (refused=false)
+  CONVO d+53 with Helen (refused=false)
+  CONVO d+64 with Oliver (refused=false)
+  CONVO d+64 with Helen (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=6) echo=5 organicBurial={"respects":false,"bury":false} halfRation=10
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":35,"offerLines":18,"codexPlantsDelta":21,"codexSkillsDelta":18,"codexAbilitiesDelta":7,"xpDelta":82,"any":true} pantry 130348->56351
+TRUST-DIALS: office 60->91 (+31, climb) | villageMean 71.4->71.7 (+0.3, flat) | ge60 6->5 | movers>=5: [{"id":"Nathan","from":48,"to":90,"delta":42},{"id":"Jesse","from":68,"to":90,"delta":22}]
+DEED-LEDGER: calls=63 summary={"giveFood":{"calls":44,"ok":44,"deltaSum":96,"deltaN":44,"positive":43,"meanDelta":2.18},"donateToPantry":{"calls":19,"ok":19,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=111 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+8,d+14,d+31,d+70) t2=true(deedCalls=63) trustVerdict={"readable":true,"officeMantle":60,"officeLast":91,"officeDelta":31,"officeClass":"climb","villageMantle":71.4,"villageLast":71.7,"villageDelta":0.3,"villageClass":"flat","villageGe60Mantle":6,"villageGe60Last":5,"movers":[{"id":"Nathan","from":48,"to":90,"delta":42},{"id":"Jesse","from":68,"to":90,"delta":22}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":1,"trustMoves":5} callCheck={"dailyMoveDays":6,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=6, excludedLoot=0))
+E7/R47: e7={"trustMoves":5,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":1,"singleMoverOther":2,"eventClass":{"event-only":0,"deed-only":1,"both":4,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":6,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":6}
