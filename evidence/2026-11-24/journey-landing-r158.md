@@ -281,4 +281,16 @@ same as r156/r157's proof tests); it was run standalone red→green
 
 ## Closeout
 
-[TO FILL — commit, rebase, merge, release, rotation, lock.]
+- Commit 1: `5f2e5477d` (6 files, contests.js +22, proof test, driver,
+  analyzers, prereg, run note). Safe-commit index clobber struck (5
+  new files showed D); repaired via ls-tree -r + update-index
+  --index-info; status clean, all hashes match HEAD.
+- Master moved during the run (sibling sim-retarget-a merged to
+  `a77a5a749`); rebased cleanly (1/1, no conflicts) to `223af1090`;
+  proof test re-run green 14/14 on the rebased tip. Remote origin/master
+  (`e5dd61e96`, batch ship) is an ancestor of the local tip — no
+  divergence, no revert risk.
+- Gate 339/5 (standing-5, 0 attributable), merged via
+  `git merge --ff-only journey-landing` from the main tree; worktree
+  released + removed; rotation 0→1; lock deleted (run_id verified in
+  the same call); hbloop killed. Merged locally, pending ship.
