@@ -167,4 +167,5 @@ per the brief.
 
 ## Commits (branch sim-instrument-a)
 
-- (to follow — instrument fixes + proof test + evidence, one commit)
+- `ea8e5cf51` — instrument fixes + proof test + evidence, one commit
+  (this arm; merged locally, pending ship — the coordinator's call).
