@@ -353,3 +353,38 @@ absence is a design fact, not an omission.
 - The heartbeat may fail on a registry lock held > 120s (the
   census arm hit this ~07:47Z); retry, do not treat a failed
   heartbeat as a run failure.
+
+## Amendment A1 — custody exits are not transfers (detector correction, 2026-11-24)
+
+**What happened.** The frozen detector counted any day-boundary holdings
+loss with no gainer as a transfer candidate (`kind: 'vanished'`), which
+classified as `unclassified` and failed bar 3. Two such moves appeared on
+the replay band: s107751 d151 (ruth_goldstein) and s107756 d44
+(gen_stv6af5). Live kit-dump probes (patched driver copy in /tmp, same
+substrate, deterministic replay) proved BOTH are custody EXITS, not
+transfers: the gun left the counted universe while the holder lived — a
+worn-only gun is dropped when `autoEquip` re-seats the slot (evidence
+§7). No living person received either gun.
+
+**Change (instrument only, zero src/js).** The analyzer (v2) names custody
+exits separately from transfers: `destroyed` (loser alive, no gainer, no
+corpse gun), `death-pack` (gun on the loser's corpse), `unexplained-exit`
+(liveness cannot be established from the row). Bar 3 now reads: **0
+unclassified transfers AND 0 unexplained exits**. The frozen transfer
+taxonomy (succession / gear-gift / gear-day-diff / lend / lend-return) is
+unchanged; the exit classes are additive. Selftest gains F13–F15 (destroyed
+scholar gun, ruth double-succession pattern, unknown-liveness exit).
+
+**Why this is a correction, not a re-judge.** The prereg's own definition
+of a transfer (§5) is "a loaded gun moves between living people". A
+destruction moves the gun to no one. The detector over-counted by treating
+every holdings loss as a transfer candidate. The two exits are named with
+mechanism proof, not waved through.
+
+**Wanjiru day correction.** The census read Wanjiru's move as d124 (the
+day the double row appeared). The witness replay (same substrate, current
+code) reproduces the trajectory through d123 byte-for-byte and shows the
+succession is d125: gen_q49jzk0 dies (arena, `player:true`) d124 and
+gen_wrbs9h9 becomes the scholar; gen_wrbs9h9 dies (`player:true`) d125
+and Wanjiru becomes the scholar. The gun never moved; she did. Wanjiru is
+classified succession, replay-proven, day d125.
