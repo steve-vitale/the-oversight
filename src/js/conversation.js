@@ -6195,6 +6195,20 @@
       // NOD-LOOP (journey-landing r132 2026-11-14): per-conversation repeat
       // tracking for nv: react gestures — reset here like windingDown.
       c.nvLastGesture = null; c.nvSameStreak = 0; c.nvRepeatThin = false;
+      // WARN-DELIVERED (journey-establishment r277 2026-11-24): per-sitting
+      // reset. The r150 fix promises the NPC "states the warning on the
+      // first heed, once per sitting" — but _warnDelivered lives on the
+      // per-villager persistent conversation object and was set in two
+      // places and reset in NONE, so it latched forever after the first
+      // delivery and every later sitting's first heed fell back to the
+      // generic ack pool (r277 panel: Ursula 109014 d36, Naran 109015 d26
+      // + d42 — a fresh warn_you want answered with "Promise me that.
+      // Please." and no danger named, while unserved warning variants
+      // remained). Reset here so each sitting's first heed states the
+      // warning again; within a sitting the details/heed guard is
+      // untouched (no double-delivery), and _heedCount is deliberately
+      // NOT reset — the deepen arc counts heeds per villager.
+      c._warnDelivered = false;
       // MOOD (convo-mood.js): every conversation starts at a temperature
       // derived from the relationship as it stands and who they are right
       // now — never stored, re-derived fresh each time (Steve 2026-10-06).
