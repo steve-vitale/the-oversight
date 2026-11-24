@@ -1,0 +1,1588 @@
+{
+  "verdict": "NO-GO",
+  "kind": "THIN-POOL",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": false,
+      "detail": "engaged launched-party meetings (pair-inclusive, present): arm 3 (floor 10); ctl 3"
+    },
+    {
+      "id": "kill-share",
+      "pass": true,
+      "detail": "arm kill share 0.333 (1/3, wins 1, mFlee 0, vDie 1, vFlee 1) vs ctl 0.333 (1/3) (bar arm>=0.25)"
+    },
+    {
+      "id": "damage-per-round",
+      "pass": false,
+      "detail": "arm mean damage/round 40.6 vs ctl 40.6 (bar arm>=70; winning shape ~111, typical ~40-60)"
+    },
+    {
+      "id": "cost-community-loss",
+      "pass": true,
+      "detail": "community loss arm 3/8 vs ctl 4/8 (bar arm share <= ctl share + 0.125, i.e. at most 5 villages)"
+    },
+    {
+      "id": "cost-starvation",
+      "pass": true,
+      "detail": "starvation totals arm 6 vs ctl 10; villager arm 5 vs ctl 9 (bar arm<=ctl+2 both)"
+    },
+    {
+      "id": "cost-median",
+      "pass": true,
+      "detail": "median survival arm 150d vs ctl 127d (bar arm>=0.8x ctl)"
+    },
+    {
+      "id": "mechanism-volley-fired",
+      "pass": true,
+      "detail": "volley fired on 2/3 arm meetings (share 0.67, mean volley dmg 49.0, ranged-at-entry 0.67) — mechanism check, not a verdict bar"
+    },
+    {
+      "id": "mechanism-ammo-at-entry",
+      "pass": false,
+      "detail": "ammo at entry (ALL wave-4+ encounters): arm 17/38 (rate 0.447) vs ctl 13/30 (rate 0.433) (bar arm>=0.70); ammo-capable-only arm 17/23 (0.739); by-origin arm {\"expedition\":[7,5],\"world-tick\":[19,8],\"aid\":[12,4]} — mechanism bar, binding"
+    }
+  ],
+  "ctl": {
+    "dir": "evidence/2026-11-24/perseed-ammosupply-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "meetings": 0,
+    "wins": 0,
+    "kills": 0,
+    "losses": 0,
+    "vDie": 0,
+    "vFlee": 0,
+    "mFlee": 0,
+    "winShare": null,
+    "killShare": null,
+    "funnel": {
+      "encounters": 11,
+      "joined": 11,
+      "unjoined": 0,
+      "noLaunchPlan": 0,
+      "pairLaunch": 11,
+      "partyAbsent": 0,
+      "evadeExcluded": 0
+    },
+    "byOutcome": {},
+    "gateXOutcome": {},
+    "gateAvoidShare": null,
+    "gateNullShare": null,
+    "gateSeekShare": null,
+    "lossGateNull": 0,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {},
+    "dmgShareMean": null,
+    "dmgShareByOutcome": {},
+    "roundsMean": null,
+    "vTakenMean": null,
+    "dmgPerRoundMean": null,
+    "volleyFired": 0,
+    "volleyFireShare": null,
+    "volleyDmgMean": null,
+    "rangedAtEntry": 0,
+    "rangedAtEntryShare": null,
+    "bowOpen": {
+      "alreadyHad": 90,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 0,
+      "craftedFail": 0,
+      "noSource": 104
+    },
+    "bowOpenStagedVids": 38,
+    "starvation": 10,
+    "starvationVillager": 9,
+    "medianDays": 127,
+    "communityLost": 4,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 6,
+    "wave5": 1,
+    "scaleRanks": {
+      "regional": 5,
+      "village": 3
+    },
+    "ammoAtEntryAll": {
+      "encounters": 58,
+      "ranged": 30,
+      "withAmmo": 13,
+      "rate": 0.43333333333333335,
+      "ammoCapable": 18,
+      "ammoCapableWith": 13,
+      "ammoCapableRate": 0.7222222222222222,
+      "byOrigin": {
+        "expedition": [
+          7,
+          5
+        ],
+        "world-tick": [
+          11,
+          4
+        ],
+        "aid": [
+          12,
+          4
+        ]
+      },
+      "byWeapon": {
+        "bow": [
+          8,
+          7
+        ],
+        "searcaster": [
+          1,
+          0
+        ],
+        "crossbow": [
+          6,
+          3
+        ],
+        "fire_hardened_spear": [
+          3,
+          0
+        ],
+        "sling": [
+          2,
+          2
+        ],
+        "hunting_spear": [
+          9,
+          0
+        ],
+        "crude_bow": [
+          1,
+          1
+        ]
+      },
+      "errors": 0
+    },
+    "ammosupplyOn": {
+      "false": 8
+    },
+    "ammoSupply": {
+      "alreadyArmed": 0,
+      "supplied": 0,
+      "craftFail": 0,
+      "noMats": 0,
+      "noRecipe": 0
+    },
+    "ammoSupplyVids": 0
+  },
+  "arm": {
+    "dir": "evidence/2026-11-24/perseed-ammosupply-a-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "meetings": 0,
+    "wins": 0,
+    "kills": 0,
+    "losses": 0,
+    "vDie": 0,
+    "vFlee": 0,
+    "mFlee": 0,
+    "winShare": null,
+    "killShare": null,
+    "funnel": {
+      "encounters": 11,
+      "joined": 11,
+      "unjoined": 0,
+      "noLaunchPlan": 0,
+      "pairLaunch": 11,
+      "partyAbsent": 0,
+      "evadeExcluded": 0
+    },
+    "byOutcome": {},
+    "gateXOutcome": {},
+    "gateAvoidShare": null,
+    "gateNullShare": null,
+    "gateSeekShare": null,
+    "lossGateNull": 0,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {},
+    "dmgShareMean": null,
+    "dmgShareByOutcome": {},
+    "roundsMean": null,
+    "vTakenMean": null,
+    "dmgPerRoundMean": null,
+    "volleyFired": 0,
+    "volleyFireShare": null,
+    "volleyDmgMean": null,
+    "rangedAtEntry": 0,
+    "rangedAtEntryShare": null,
+    "bowOpen": {
+      "alreadyHad": 97,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 0,
+      "craftedFail": 0,
+      "noSource": 110
+    },
+    "bowOpenStagedVids": 38,
+    "starvation": 6,
+    "starvationVillager": 5,
+    "medianDays": 150,
+    "communityLost": 3,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 7,
+    "wave5": 1,
+    "scaleRanks": {
+      "regional": 6,
+      "village": 2
+    },
+    "ammoAtEntryAll": {
+      "encounters": 66,
+      "ranged": 38,
+      "withAmmo": 17,
+      "rate": 0.4473684210526316,
+      "ammoCapable": 23,
+      "ammoCapableWith": 17,
+      "ammoCapableRate": 0.7391304347826086,
+      "byOrigin": {
+        "expedition": [
+          7,
+          5
+        ],
+        "world-tick": [
+          19,
+          8
+        ],
+        "aid": [
+          12,
+          4
+        ]
+      },
+      "byWeapon": {
+        "bow": [
+          9,
+          8
+        ],
+        "searcaster": [
+          1,
+          0
+        ],
+        "crossbow": [
+          10,
+          6
+        ],
+        "fire_hardened_spear": [
+          3,
+          0
+        ],
+        "sling": [
+          2,
+          2
+        ],
+        "hunting_spear": [
+          12,
+          0
+        ],
+        "crude_bow": [
+          1,
+          1
+        ]
+      },
+      "errors": 0
+    },
+    "ammosupplyOn": {
+      "true": 8
+    },
+    "ammoSupply": {
+      "alreadyArmed": 85,
+      "supplied": 0,
+      "craftFail": 5,
+      "noMats": 3,
+      "noRecipe": 4
+    },
+    "ammoSupplyVids": 16
+  },
+  "ctlPair": {
+    "dir": "evidence/2026-11-24/perseed-ammosupply-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "meetings": 3,
+    "wins": 1,
+    "kills": 1,
+    "losses": 2,
+    "vDie": 1,
+    "vFlee": 1,
+    "mFlee": 0,
+    "winShare": 0.3333333333333333,
+    "killShare": 0.3333333333333333,
+    "funnel": {
+      "encounters": 11,
+      "joined": 11,
+      "unjoined": 0,
+      "noLaunchPlan": 0,
+      "pairLaunch": 0,
+      "partyAbsent": 1,
+      "evadeExcluded": 7
+    },
+    "byOutcome": {
+      "vKill": {
+        "n": 1,
+        "rounds": [
+          12
+        ],
+        "dmgShare": [],
+        "vTaken": [
+          64
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          27
+        ],
+        "meanArmorP": [
+          33.666666666666664
+        ],
+        "mHpStart": [],
+        "abilitiesPerMember": [
+          1.3333333333333333
+        ],
+        "fighterDmgShare": [
+          0.8109756097560976
+        ],
+        "parsedStrikeTotal": [
+          164
+        ],
+        "dmgPerRound": [
+          86.33333333333333
+        ],
+        "volleyDmg": [
+          67
+        ],
+        "dmgPerRoundMean": 86.33333333333333,
+        "volleyDmgMean": 67,
+        "roundsMean": 12,
+        "vTakenMean": 64,
+        "partySizeMean": 3,
+        "minArmorPMean": 27,
+        "meanArmorPMean": 33.666666666666664,
+        "mHpStartMean": null,
+        "abilitiesPerMemberMean": 1.3333333333333333,
+        "fighterDmgShareMean": 0.8109756097560976,
+        "parsedStrikeTotalMean": 164
+      },
+      "vDie": {
+        "n": 1,
+        "rounds": [
+          1
+        ],
+        "dmgShare": [
+          0
+        ],
+        "vTaken": [
+          30
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          7
+        ],
+        "meanArmorP": [
+          11
+        ],
+        "mHpStart": [
+          1374
+        ],
+        "abilitiesPerMember": [
+          2.3333333333333335
+        ],
+        "fighterDmgShare": [],
+        "parsedStrikeTotal": [
+          0
+        ],
+        "dmgPerRound": [
+          0
+        ],
+        "volleyDmg": [],
+        "dmgPerRoundMean": 0,
+        "volleyDmgMean": null,
+        "roundsMean": 1,
+        "vTakenMean": 30,
+        "partySizeMean": 3,
+        "minArmorPMean": 7,
+        "meanArmorPMean": 11,
+        "mHpStartMean": 1374,
+        "abilitiesPerMemberMean": 2.3333333333333335,
+        "fighterDmgShareMean": null,
+        "parsedStrikeTotalMean": 0
+      },
+      "vFlee": {
+        "n": 1,
+        "rounds": [
+          2
+        ],
+        "dmgShare": [
+          0.05415713196033562
+        ],
+        "vTaken": [
+          70
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          11
+        ],
+        "meanArmorP": [
+          30.666666666666668
+        ],
+        "mHpStart": [
+          1311
+        ],
+        "abilitiesPerMember": [
+          0.6666666666666666
+        ],
+        "fighterDmgShare": [
+          1
+        ],
+        "parsedStrikeTotal": [
+          40
+        ],
+        "dmgPerRound": [
+          35.5
+        ],
+        "volleyDmg": [
+          31
+        ],
+        "dmgPerRoundMean": 35.5,
+        "volleyDmgMean": 31,
+        "roundsMean": 2,
+        "vTakenMean": 70,
+        "partySizeMean": 3,
+        "minArmorPMean": 11,
+        "meanArmorPMean": 30.666666666666668,
+        "mHpStartMean": 1311,
+        "abilitiesPerMemberMean": 0.6666666666666666,
+        "fighterDmgShareMean": 1,
+        "parsedStrikeTotalMean": 40
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vKill": 1,
+        "vDie": 1,
+        "vFlee": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 1,
+    "gateSeekShare": 0,
+    "lossGateNull": 2,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {
+      "eulogy": {
+        "win": 1,
+        "loss": 0
+      },
+      "reunion": {
+        "win": 0,
+        "loss": 2
+      }
+    },
+    "dmgShareMean": 0.02707856598016781,
+    "dmgShareByOutcome": {
+      "vKill": null,
+      "vDie": 0,
+      "vFlee": 0.05415713196033562
+    },
+    "roundsMean": 5,
+    "vTakenMean": 54.666666666666664,
+    "dmgPerRoundMean": 40.61111111111111,
+    "volleyFired": 2,
+    "volleyFireShare": 0.6666666666666666,
+    "volleyDmgMean": 49,
+    "rangedAtEntry": 2,
+    "rangedAtEntryShare": 0.6666666666666666,
+    "bowOpen": {
+      "alreadyHad": 90,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 0,
+      "craftedFail": 0,
+      "noSource": 104
+    },
+    "bowOpenStagedVids": 38,
+    "starvation": 10,
+    "starvationVillager": 9,
+    "medianDays": 127,
+    "communityLost": 4,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 6,
+    "wave5": 1,
+    "scaleRanks": {
+      "regional": 5,
+      "village": 3
+    },
+    "ammoAtEntryAll": {
+      "encounters": 58,
+      "ranged": 30,
+      "withAmmo": 13,
+      "rate": 0.43333333333333335,
+      "ammoCapable": 18,
+      "ammoCapableWith": 13,
+      "ammoCapableRate": 0.7222222222222222,
+      "byOrigin": {
+        "expedition": [
+          7,
+          5
+        ],
+        "world-tick": [
+          11,
+          4
+        ],
+        "aid": [
+          12,
+          4
+        ]
+      },
+      "byWeapon": {
+        "bow": [
+          8,
+          7
+        ],
+        "searcaster": [
+          1,
+          0
+        ],
+        "crossbow": [
+          6,
+          3
+        ],
+        "fire_hardened_spear": [
+          3,
+          0
+        ],
+        "sling": [
+          2,
+          2
+        ],
+        "hunting_spear": [
+          9,
+          0
+        ],
+        "crude_bow": [
+          1,
+          1
+        ]
+      },
+      "errors": 0
+    },
+    "ammosupplyOn": {
+      "false": 8
+    },
+    "ammoSupply": {
+      "alreadyArmed": 0,
+      "supplied": 0,
+      "craftFail": 0,
+      "noMats": 0,
+      "noRecipe": 0
+    },
+    "ammoSupplyVids": 0
+  },
+  "armPair": {
+    "dir": "evidence/2026-11-24/perseed-ammosupply-a-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "meetings": 3,
+    "wins": 1,
+    "kills": 1,
+    "losses": 2,
+    "vDie": 1,
+    "vFlee": 1,
+    "mFlee": 0,
+    "winShare": 0.3333333333333333,
+    "killShare": 0.3333333333333333,
+    "funnel": {
+      "encounters": 11,
+      "joined": 11,
+      "unjoined": 0,
+      "noLaunchPlan": 0,
+      "pairLaunch": 0,
+      "partyAbsent": 1,
+      "evadeExcluded": 7
+    },
+    "byOutcome": {
+      "vKill": {
+        "n": 1,
+        "rounds": [
+          12
+        ],
+        "dmgShare": [],
+        "vTaken": [
+          64
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          27
+        ],
+        "meanArmorP": [
+          33.666666666666664
+        ],
+        "mHpStart": [],
+        "abilitiesPerMember": [
+          1.3333333333333333
+        ],
+        "fighterDmgShare": [
+          0.8109756097560976
+        ],
+        "parsedStrikeTotal": [
+          164
+        ],
+        "dmgPerRound": [
+          86.33333333333333
+        ],
+        "volleyDmg": [
+          67
+        ],
+        "dmgPerRoundMean": 86.33333333333333,
+        "volleyDmgMean": 67,
+        "roundsMean": 12,
+        "vTakenMean": 64,
+        "partySizeMean": 3,
+        "minArmorPMean": 27,
+        "meanArmorPMean": 33.666666666666664,
+        "mHpStartMean": null,
+        "abilitiesPerMemberMean": 1.3333333333333333,
+        "fighterDmgShareMean": 0.8109756097560976,
+        "parsedStrikeTotalMean": 164
+      },
+      "vDie": {
+        "n": 1,
+        "rounds": [
+          1
+        ],
+        "dmgShare": [
+          0
+        ],
+        "vTaken": [
+          30
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          7
+        ],
+        "meanArmorP": [
+          11
+        ],
+        "mHpStart": [
+          1374
+        ],
+        "abilitiesPerMember": [
+          2.3333333333333335
+        ],
+        "fighterDmgShare": [],
+        "parsedStrikeTotal": [
+          0
+        ],
+        "dmgPerRound": [
+          0
+        ],
+        "volleyDmg": [],
+        "dmgPerRoundMean": 0,
+        "volleyDmgMean": null,
+        "roundsMean": 1,
+        "vTakenMean": 30,
+        "partySizeMean": 3,
+        "minArmorPMean": 7,
+        "meanArmorPMean": 11,
+        "mHpStartMean": 1374,
+        "abilitiesPerMemberMean": 2.3333333333333335,
+        "fighterDmgShareMean": null,
+        "parsedStrikeTotalMean": 0
+      },
+      "vFlee": {
+        "n": 1,
+        "rounds": [
+          2
+        ],
+        "dmgShare": [
+          0.05415713196033562
+        ],
+        "vTaken": [
+          70
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          11
+        ],
+        "meanArmorP": [
+          30.666666666666668
+        ],
+        "mHpStart": [
+          1311
+        ],
+        "abilitiesPerMember": [
+          0.6666666666666666
+        ],
+        "fighterDmgShare": [
+          1
+        ],
+        "parsedStrikeTotal": [
+          40
+        ],
+        "dmgPerRound": [
+          35.5
+        ],
+        "volleyDmg": [
+          31
+        ],
+        "dmgPerRoundMean": 35.5,
+        "volleyDmgMean": 31,
+        "roundsMean": 2,
+        "vTakenMean": 70,
+        "partySizeMean": 3,
+        "minArmorPMean": 11,
+        "meanArmorPMean": 30.666666666666668,
+        "mHpStartMean": 1311,
+        "abilitiesPerMemberMean": 0.6666666666666666,
+        "fighterDmgShareMean": 1,
+        "parsedStrikeTotalMean": 40
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vKill": 1,
+        "vDie": 1,
+        "vFlee": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 1,
+    "gateSeekShare": 0,
+    "lossGateNull": 2,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {
+      "eulogy": {
+        "win": 1,
+        "loss": 0
+      },
+      "reunion": {
+        "win": 0,
+        "loss": 2
+      }
+    },
+    "dmgShareMean": 0.02707856598016781,
+    "dmgShareByOutcome": {
+      "vKill": null,
+      "vDie": 0,
+      "vFlee": 0.05415713196033562
+    },
+    "roundsMean": 5,
+    "vTakenMean": 54.666666666666664,
+    "dmgPerRoundMean": 40.61111111111111,
+    "volleyFired": 2,
+    "volleyFireShare": 0.6666666666666666,
+    "volleyDmgMean": 49,
+    "rangedAtEntry": 2,
+    "rangedAtEntryShare": 0.6666666666666666,
+    "bowOpen": {
+      "alreadyHad": 97,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 0,
+      "craftedFail": 0,
+      "noSource": 110
+    },
+    "bowOpenStagedVids": 38,
+    "starvation": 6,
+    "starvationVillager": 5,
+    "medianDays": 150,
+    "communityLost": 3,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 7,
+    "wave5": 1,
+    "scaleRanks": {
+      "regional": 6,
+      "village": 2
+    },
+    "ammoAtEntryAll": {
+      "encounters": 66,
+      "ranged": 38,
+      "withAmmo": 17,
+      "rate": 0.4473684210526316,
+      "ammoCapable": 23,
+      "ammoCapableWith": 17,
+      "ammoCapableRate": 0.7391304347826086,
+      "byOrigin": {
+        "expedition": [
+          7,
+          5
+        ],
+        "world-tick": [
+          19,
+          8
+        ],
+        "aid": [
+          12,
+          4
+        ]
+      },
+      "byWeapon": {
+        "bow": [
+          9,
+          8
+        ],
+        "searcaster": [
+          1,
+          0
+        ],
+        "crossbow": [
+          10,
+          6
+        ],
+        "fire_hardened_spear": [
+          3,
+          0
+        ],
+        "sling": [
+          2,
+          2
+        ],
+        "hunting_spear": [
+          12,
+          0
+        ],
+        "crude_bow": [
+          1,
+          1
+        ]
+      },
+      "errors": 0
+    },
+    "ammosupplyOn": {
+      "true": 8
+    },
+    "ammoSupply": {
+      "alreadyArmed": 85,
+      "supplied": 0,
+      "craftFail": 5,
+      "noMats": 3,
+      "noRecipe": 4
+    },
+    "ammoSupplyVids": 16
+  },
+  "ctlAll": {
+    "dir": "evidence/2026-11-24/perseed-ammosupply-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "ammosupplyOn": {
+      "false": 8
+    },
+    "encounters": 58,
+    "ranged": 30,
+    "withAmmo": 13,
+    "rate": 0.43333333333333335,
+    "ammoCapable": 18,
+    "ammoCapableWith": 13,
+    "ammoCapableRate": 0.7222222222222222,
+    "byOrigin": {
+      "expedition": [
+        7,
+        5
+      ],
+      "world-tick": [
+        11,
+        4
+      ],
+      "aid": [
+        12,
+        4
+      ]
+    },
+    "byWeapon": {
+      "bow": [
+        8,
+        7
+      ],
+      "searcaster": [
+        1,
+        0
+      ],
+      "crossbow": [
+        6,
+        3
+      ],
+      "fire_hardened_spear": [
+        3,
+        0
+      ],
+      "sling": [
+        2,
+        2
+      ],
+      "hunting_spear": [
+        9,
+        0
+      ],
+      "crude_bow": [
+        1,
+        1
+      ]
+    },
+    "ammoSupply": {
+      "alreadyArmed": 0,
+      "supplied": 0,
+      "craftFail": 0,
+      "noMats": 0,
+      "noRecipe": 0
+    },
+    "ammoSupplyVids": 0
+  },
+  "armAll": {
+    "dir": "evidence/2026-11-24/perseed-ammosupply-a-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "ammosupplyOn": {
+      "true": 8
+    },
+    "encounters": 66,
+    "ranged": 38,
+    "withAmmo": 17,
+    "rate": 0.4473684210526316,
+    "ammoCapable": 23,
+    "ammoCapableWith": 17,
+    "ammoCapableRate": 0.7391304347826086,
+    "byOrigin": {
+      "expedition": [
+        7,
+        5
+      ],
+      "world-tick": [
+        19,
+        8
+      ],
+      "aid": [
+        12,
+        4
+      ]
+    },
+    "byWeapon": {
+      "bow": [
+        9,
+        8
+      ],
+      "searcaster": [
+        1,
+        0
+      ],
+      "crossbow": [
+        10,
+        6
+      ],
+      "fire_hardened_spear": [
+        3,
+        0
+      ],
+      "sling": [
+        2,
+        2
+      ],
+      "hunting_spear": [
+        12,
+        0
+      ],
+      "crude_bow": [
+        1,
+        1
+      ]
+    },
+    "ammoSupply": {
+      "alreadyArmed": 85,
+      "supplied": 0,
+      "craftFail": 5,
+      "noMats": 3,
+      "noRecipe": 4
+    },
+    "ammoSupplyVids": 16
+  },
+  "ctlMeetings": [],
+  "armMeetings": [],
+  "ctlPairMeetings": [
+    {
+      "seed": 110401,
+      "day": 94,
+      "vid": "mateo_alvarez",
+      "mid": "eulogy",
+      "mHpStart": null,
+      "outcome": "vKill",
+      "win": true,
+      "rounds": 12,
+      "vTaken": 64,
+      "mDealt": 1036,
+      "dmgShare": null,
+      "dmgPerRound": 86.33333333333333,
+      "volley": {
+        "shots": 4,
+        "hits": 4,
+        "dmg": 67
+      },
+      "rangedId": "bow",
+      "ammoAtEntry": 5,
+      "planParty": [
+        "catalina_reyes"
+      ],
+      "allyVids": [
+        "catalina_reyes",
+        "hassan_ali"
+      ],
+      "joiners": [
+        "catalina_reyes",
+        "hassan_ali"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "mateo_alvarez": {
+          "armed": true,
+          "armored": true,
+          "armorP": 47
+        },
+        "catalina_reyes": {
+          "armed": true,
+          "armored": true,
+          "armorP": 27
+        },
+        "hassan_ali": {
+          "armed": true,
+          "armored": true,
+          "armorP": 27
+        }
+      },
+      "minArmorP": 27,
+      "meanArmorP": 33.666666666666664,
+      "parsedStrikeTotal": 164,
+      "parsedAttributed": 164,
+      "dmgByVid": {
+        "mateo_alvarez": 133,
+        "catalina_reyes": 31
+      },
+      "fighterDmgShare": 0.8109756097560976,
+      "abilitiesPerMember": 1.3333333333333333,
+      "memberAbilities": {
+        "mateo_alvarez": [],
+        "catalina_reyes": [],
+        "hassan_ali": [
+          "beast_calm",
+          "green_whisper",
+          "green_thumb",
+          "rage"
+        ]
+      },
+      "abilityTokens": [
+        "Take Aim"
+      ],
+      "log": [
+        "Mateo walks straight into The Eulogy. No avoiding it.",
+        "Mateo sees The Eulogy coming and nocks an arrow — the fight opens at range (4 shots).",
+        "  loosed — it takes The Eulogy for 19 (1013 left).",
+        "  loosed — it takes The Eulogy for 16 (997 left).",
+        "  loosed — it takes The Eulogy for 16 (981 left).",
+        "  loosed — it takes The Eulogy for 16 (965 left).",
+        "Mateo lowers the bow — The Eulogy is on them now. (4/4 hit)",
+        "R1: Mateo goes still. Breath slows. The world narrows to the target. (Take Aim — next shot 2.5x)",
+        "Mateo's gear absorbs 35.",
+        "R1: Epitaph hits Mateo for 6 (94 left)",
+        "R2: Mateo strikes for 60 (aimed 2.5x) (x1.3) (905 left)",
+        "Mateo's gear absorbs 46.",
+        "R2: Epitaph hits Mateo for 8 (86 left)",
+        "Mateo is losing — shouts for help! Catalina charges in!",
+        "R3: Mateo strikes for 45 (HAYMAKER x2) (x1.3) (860 left)",
+        "R3: Catalina strikes for 31 (829 left)",
+        "Mateo's gear absorbs 47.",
+        "R3: Final Chapter hits Mateo for 8 (78 left)",
+        "Mateo is still losing — shouts again! Hassan charges in!",
+        "R4: Mateo strikes for 28 (x1.3) (801 left)"
+      ]
+    },
+    {
+      "seed": 110402,
+      "day": 58,
+      "vid": "gen_byoiscv",
+      "mid": "reunion",
+      "mHpStart": 1374,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 1,
+      "vTaken": 30,
+      "mDealt": 0,
+      "dmgShare": 0,
+      "dmgPerRound": 0,
+      "volley": null,
+      "rangedId": null,
+      "ammoAtEntry": 0,
+      "planParty": [
+        "hannah_kim"
+      ],
+      "allyVids": [
+        "hannah_kim",
+        "hassan_ali"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_byoiscv": {
+          "armed": true,
+          "armored": true,
+          "armorP": 16
+        },
+        "hannah_kim": {
+          "armed": true,
+          "armored": true,
+          "armorP": 7
+        },
+        "hassan_ali": {
+          "armed": true,
+          "armored": true,
+          "armorP": 10
+        }
+      },
+      "minArmorP": 7,
+      "meanArmorP": 11,
+      "parsedStrikeTotal": 0,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": null,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "gen_byoiscv": [
+          "beast_calm",
+          "lucky_rock",
+          "bloodhound"
+        ],
+        "hannah_kim": [
+          "beast_calm",
+          "bird_whisperer"
+        ],
+        "hassan_ali": [
+          "the_touch",
+          "green_whisper"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Ananya walks straight into The Reunion. No avoiding it.",
+        "Ananya's gear absorbs 43.",
+        "R1: Your Move hits Ananya for 30 (0 left)"
+      ]
+    },
+    {
+      "seed": 110405,
+      "day": 46,
+      "vid": "wanjiru_kamau",
+      "mid": "reunion",
+      "mHpStart": 1311,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 70,
+      "mDealt": 71,
+      "dmgShare": 0.05415713196033562,
+      "dmgPerRound": 35.5,
+      "volley": {
+        "shots": 2,
+        "hits": 2,
+        "dmg": 31
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 5,
+      "planParty": [
+        "gen_0u2wci2"
+      ],
+      "allyVids": [
+        "gen_0u2wci2",
+        "nikos_papadopoulos"
+      ],
+      "joiners": [
+        "gen_0u2wci2"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "wanjiru_kamau": {
+          "armed": true,
+          "armored": true,
+          "armorP": 11
+        },
+        "gen_0u2wci2": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "nikos_papadopoulos": {
+          "armed": true,
+          "armored": true,
+          "armorP": 64
+        }
+      },
+      "minArmorP": 11,
+      "meanArmorP": 30.666666666666668,
+      "parsedStrikeTotal": 40,
+      "parsedAttributed": 40,
+      "dmgByVid": {
+        "wanjiru_kamau": 40
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 0.6666666666666666,
+      "memberAbilities": {
+        "wanjiru_kamau": [],
+        "gen_0u2wci2": [
+          "night_eyes",
+          "lucky_rock"
+        ],
+        "nikos_papadopoulos": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Wanjiru walks straight into The Reunion. No avoiding it.",
+        "Wanjiru sees The Reunion coming and nocks an arrow — the fight opens at range (2 shots).",
+        "  loosed — it takes The Reunion for 15 (1296 left).",
+        "  loosed — it takes The Reunion for 16 (1280 left).",
+        "Wanjiru lowers the bow — The Reunion is on them now. (2/2 hit)",
+        "Wanjiru's gear absorbs 31.",
+        "R1: Your Move hits Wanjiru for 30 (61 left)",
+        "R1: Wanjiru strikes for 20 (1260 left)",
+        "Wanjiru's gear absorbs 40.",
+        "R2: Your Move hits Wanjiru for 40 (21 left)",
+        "R2: Wanjiru strikes for 20 (1240 left)",
+        "Wanjiru is losing — shouts for help! Duc charges in!",
+        "Duc answered Wanjiru's shout, but Wanjiru is past holding — they run while running still works."
+      ]
+    }
+  ],
+  "armPairMeetings": [
+    {
+      "seed": 110401,
+      "day": 94,
+      "vid": "mateo_alvarez",
+      "mid": "eulogy",
+      "mHpStart": null,
+      "outcome": "vKill",
+      "win": true,
+      "rounds": 12,
+      "vTaken": 64,
+      "mDealt": 1036,
+      "dmgShare": null,
+      "dmgPerRound": 86.33333333333333,
+      "volley": {
+        "shots": 4,
+        "hits": 4,
+        "dmg": 67
+      },
+      "rangedId": "bow",
+      "ammoAtEntry": 5,
+      "planParty": [
+        "catalina_reyes"
+      ],
+      "allyVids": [
+        "catalina_reyes",
+        "hassan_ali"
+      ],
+      "joiners": [
+        "catalina_reyes",
+        "hassan_ali"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "mateo_alvarez": {
+          "armed": true,
+          "armored": true,
+          "armorP": 47
+        },
+        "catalina_reyes": {
+          "armed": true,
+          "armored": true,
+          "armorP": 27
+        },
+        "hassan_ali": {
+          "armed": true,
+          "armored": true,
+          "armorP": 27
+        }
+      },
+      "minArmorP": 27,
+      "meanArmorP": 33.666666666666664,
+      "parsedStrikeTotal": 164,
+      "parsedAttributed": 164,
+      "dmgByVid": {
+        "mateo_alvarez": 133,
+        "catalina_reyes": 31
+      },
+      "fighterDmgShare": 0.8109756097560976,
+      "abilitiesPerMember": 1.3333333333333333,
+      "memberAbilities": {
+        "mateo_alvarez": [],
+        "catalina_reyes": [],
+        "hassan_ali": [
+          "beast_calm",
+          "green_whisper",
+          "green_thumb",
+          "rage"
+        ]
+      },
+      "abilityTokens": [
+        "Take Aim"
+      ],
+      "log": [
+        "Mateo walks straight into The Eulogy. No avoiding it.",
+        "Mateo sees The Eulogy coming and nocks an arrow — the fight opens at range (4 shots).",
+        "  loosed — it takes The Eulogy for 19 (1013 left).",
+        "  loosed — it takes The Eulogy for 16 (997 left).",
+        "  loosed — it takes The Eulogy for 16 (981 left).",
+        "  loosed — it takes The Eulogy for 16 (965 left).",
+        "Mateo lowers the bow — The Eulogy is on them now. (4/4 hit)",
+        "R1: Mateo goes still. Breath slows. The world narrows to the target. (Take Aim — next shot 2.5x)",
+        "Mateo's gear absorbs 35.",
+        "R1: Epitaph hits Mateo for 6 (94 left)",
+        "R2: Mateo strikes for 60 (aimed 2.5x) (x1.3) (905 left)",
+        "Mateo's gear absorbs 46.",
+        "R2: Epitaph hits Mateo for 8 (86 left)",
+        "Mateo is losing — shouts for help! Catalina charges in!",
+        "R3: Mateo strikes for 45 (HAYMAKER x2) (x1.3) (860 left)",
+        "R3: Catalina strikes for 31 (829 left)",
+        "Mateo's gear absorbs 47.",
+        "R3: Final Chapter hits Mateo for 8 (78 left)",
+        "Mateo is still losing — shouts again! Hassan charges in!",
+        "R4: Mateo strikes for 28 (x1.3) (801 left)"
+      ]
+    },
+    {
+      "seed": 110402,
+      "day": 58,
+      "vid": "gen_byoiscv",
+      "mid": "reunion",
+      "mHpStart": 1374,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 1,
+      "vTaken": 30,
+      "mDealt": 0,
+      "dmgShare": 0,
+      "dmgPerRound": 0,
+      "volley": null,
+      "rangedId": null,
+      "ammoAtEntry": 0,
+      "planParty": [
+        "hannah_kim"
+      ],
+      "allyVids": [
+        "hannah_kim",
+        "hassan_ali"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_byoiscv": {
+          "armed": true,
+          "armored": true,
+          "armorP": 16
+        },
+        "hannah_kim": {
+          "armed": true,
+          "armored": true,
+          "armorP": 7
+        },
+        "hassan_ali": {
+          "armed": true,
+          "armored": true,
+          "armorP": 10
+        }
+      },
+      "minArmorP": 7,
+      "meanArmorP": 11,
+      "parsedStrikeTotal": 0,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": null,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "gen_byoiscv": [
+          "beast_calm",
+          "lucky_rock",
+          "bloodhound"
+        ],
+        "hannah_kim": [
+          "beast_calm",
+          "bird_whisperer"
+        ],
+        "hassan_ali": [
+          "the_touch",
+          "green_whisper"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Ananya walks straight into The Reunion. No avoiding it.",
+        "Ananya's gear absorbs 43.",
+        "R1: Your Move hits Ananya for 30 (0 left)"
+      ]
+    },
+    {
+      "seed": 110405,
+      "day": 46,
+      "vid": "wanjiru_kamau",
+      "mid": "reunion",
+      "mHpStart": 1311,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 70,
+      "mDealt": 71,
+      "dmgShare": 0.05415713196033562,
+      "dmgPerRound": 35.5,
+      "volley": {
+        "shots": 2,
+        "hits": 2,
+        "dmg": 31
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 5,
+      "planParty": [
+        "gen_0u2wci2"
+      ],
+      "allyVids": [
+        "gen_0u2wci2",
+        "nikos_papadopoulos"
+      ],
+      "joiners": [
+        "gen_0u2wci2"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "wanjiru_kamau": {
+          "armed": true,
+          "armored": true,
+          "armorP": 11
+        },
+        "gen_0u2wci2": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "nikos_papadopoulos": {
+          "armed": true,
+          "armored": true,
+          "armorP": 64
+        }
+      },
+      "minArmorP": 11,
+      "meanArmorP": 30.666666666666668,
+      "parsedStrikeTotal": 40,
+      "parsedAttributed": 40,
+      "dmgByVid": {
+        "wanjiru_kamau": 40
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 0.6666666666666666,
+      "memberAbilities": {
+        "wanjiru_kamau": [],
+        "gen_0u2wci2": [
+          "night_eyes",
+          "lucky_rock"
+        ],
+        "nikos_papadopoulos": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Wanjiru walks straight into The Reunion. No avoiding it.",
+        "Wanjiru sees The Reunion coming and nocks an arrow — the fight opens at range (2 shots).",
+        "  loosed — it takes The Reunion for 15 (1296 left).",
+        "  loosed — it takes The Reunion for 16 (1280 left).",
+        "Wanjiru lowers the bow — The Reunion is on them now. (2/2 hit)",
+        "Wanjiru's gear absorbs 31.",
+        "R1: Your Move hits Wanjiru for 30 (61 left)",
+        "R1: Wanjiru strikes for 20 (1260 left)",
+        "Wanjiru's gear absorbs 40.",
+        "R2: Your Move hits Wanjiru for 40 (21 left)",
+        "R2: Wanjiru strikes for 20 (1240 left)",
+        "Wanjiru is losing — shouts for help! Duc charges in!",
+        "Duc answered Wanjiru's shout, but Wanjiru is past holding — they run while running still works."
+      ]
+    }
+  ]
+}
