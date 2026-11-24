@@ -340,7 +340,12 @@ judge, and the panel moves no verdict here.
   - `b9e0dd65e` sim-accordanswer-b prereg (before any judged sim)
   - `fd1ab09e3` sim-accordanswer-b instruments: accord recorder
     + driver + analyzer + panel builder + proof 15/15 (zero src/js)
-  - (corpus + evidence commits follow)
+  - `3f0f79302` sim-accordanswer-b corpus: 16 per-seed JSONs
+    (8 ctl + 8 arm) + balanced panel compare (review_required)
+  - `615229755` sim-accordanswer-b evidence: DIAG-GO
+  - `0b377a865` sim-accordanswer-b fix: panel builder read must
+    not decode gzip as utf8 (gunzipSync got mangled text)
+  - Branch head: `0b377a865` (this commit records the head).
 - Files: prereg + evidence in
   `evidence/2026-11-24/sim-accordanswer-b*.md`; per-seed JSON
   in `evidence/2026-11-24/perseed-accordanswer-b/` (16 files,
