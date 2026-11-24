@@ -654,6 +654,13 @@
         var key = nx + ',' + ny;
         a.stats[vid].nodes[key] = true;
       }
+      // REARM-WITNESS (sim-rearm-witness-b): standing on this node, the
+      // walker sees what's here — a wild corpse holding a loaded gun is
+      // a take, through the shared transfer (REARM_CELLS=1, channel
+      // 'expedition'). Once per leg, on the node they stand on whether
+      // they moved this leg or were already at the target. The step
+      // itself is a pure node-match scan, no RNG.
+      try { if (this.villagerRearmExpeditionStep) this.villagerRearmExpeditionStep(vid, nx, ny); } catch (e) {}
       var dist = Math.abs(nx - hx) + Math.abs(ny - hy);
       // XP accrues just for being out there and paying attention
       var mult = st.potential[vid] ? 2 : 1;

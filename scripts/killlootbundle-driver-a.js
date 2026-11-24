@@ -86,11 +86,16 @@ try {
 // villagerRearmFromCorpse + witness take + Haven sweep), env-gated
 // REARM_CELLS=1. The armed leg runs with it on; the control leg runs
 // with it unset (same MODE=arm, same staged seeds).
+// REARM-WITNESS (sim-rearm-witness-b): the expedition channel
+// (villagerRearmExpeditionStep) is part of the same gate — REARM_ON
+// without it is a STOP, so a missing channel can never silently
+// read as zero takes.
 let REARM_PRESENT = false;
 try {
   const corpsesSrc = fs.readFileSync(path.join(REPO, 'src', 'js', 'corpses.js'), 'utf8');
   REARM_PRESENT = /REARM_CELLS/.test(corpsesSrc) && /villagerRearmFromCorpse/.test(corpsesSrc)
-    && /villagerRearmWitnessTake/.test(corpsesSrc) && /villagerRearmHavenSweep/.test(corpsesSrc);
+    && /villagerRearmWitnessTake/.test(corpsesSrc) && /villagerRearmHavenSweep/.test(corpsesSrc)
+    && /villagerRearmExpeditionStep/.test(corpsesSrc);
 } catch (e) {}
 let LEND_PRESENT = false;
 try {
@@ -340,6 +345,7 @@ async function oneRun(seed) {
   const killLootEvents = [];
   const volleyEvents = [];
   const rearmTakeEvents = [];
+  const supplyCorpseRows = [];
   const gunLocRows = [];
   let lastSnapDay = -1;
   let prizeSeq = 0;
@@ -479,6 +485,28 @@ async function oneRun(seed) {
       return ret;
     };
   });
+  // REARM-WITNESS (sim-rearm-witness-b): the wild-supply denominator.
+  // registerDeath runs exactly once per death; the wrap records a
+  // person-corpse's node + cells at registration (pure read +
+  // driver-local write) so the analyzer can tell a wild supply death
+  // (corpse on a non-Haven node) from a Haven one. Rows are recorded
+  // on both legs (the gate is in the game code, not the wrap).
+  wrapGame('registerDeath', function (orig) {
+    return function (opts) {
+      const ret = orig.apply(this, arguments);
+      try {
+        if (ret && (ret.kind === 'person' || ret.kind === 'villager' || !!ret.villagerId)) {
+          const cells = countItemIn(ret.items, 'fusion_cell');
+          if (cells > 0 && ret.node) {
+            supplyCorpseRows.push({ day: gday(Game),
+              corpseVid: ret.villagerId || null, corpseId: ret.id || null,
+              node: { x: ret.node.x, y: ret.node.y }, cells: cells });
+          }
+        }
+      } catch (e) { errors.push('supply-corpse-log: ' + String(e.message).slice(0, 80)); }
+      return ret;
+    };
+  });
 
   await setupGame(Game);
   const wrapped = Object.assign({}, policy, {
@@ -505,6 +533,9 @@ async function oneRun(seed) {
 
   const st = Game.state || {};
   let scaleRank = null, unlocked = null;
+  // REARM-WITNESS (sim-rearm-witness-b): the Haven node, recorded per
+  // seed so the analyzer can split wild vs Haven supply deaths.
+  const havenNode = { x: (((st.village || {}).px != null) ? st.village.px : 4), y: (((st.village || {}).py != null) ? st.village.py : 4) };
   try { scaleRank = Game.scaleRank ? Game.scaleRank() : null; } catch (e) { errors.push('scaleRank: ' + String(e.message).slice(0, 80)); }
   try { unlocked = Game.unlockedWave ? Game.unlockedWave() : null; } catch (e) { errors.push('unlockedWave: ' + String(e.message).slice(0, 80)); }
   let standing = null;
@@ -546,6 +577,7 @@ async function oneRun(seed) {
     grantEvents: grantEvents, corpseTakeEvents: corpseTakeEvents,
     killLootEvents: killLootEvents, volleyEvents: volleyEvents,
     rearmTakeEvents: rearmTakeEvents,
+    supplyCorpseRows: supplyCorpseRows, havenNode: havenNode,
   };
   return out;
 }

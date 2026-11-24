@@ -1737,6 +1737,12 @@
       // MAP MEMORY (villager-mapmem 2026-10-13): they notice what's on the
       // node they're standing on — fresh corpses become remembered sites.
       try { if (this.mapmemNoticeNode) this.mapmemNoticeNode(rid, nx, ny); } catch (e) {}
+      // REARM-WITNESS (sim-rearm-witness-b): the same perception moment —
+      // a wild corpse holding a loaded gun is a take for the walker
+      // themself (shared transfer, REARM_CELLS=1, channel 'expedition').
+      // Agency expeditions return early above, so this hook never
+      // double-fires with the expeditionLeg hook.
+      try { if (this.villagerRearmExpeditionStep) this.villagerRearmExpeditionStep(rid, nx, ny); } catch (e) {}
       // co-location: run into someone out here. Sometimes the village hears.
       try {
         var others = this.npcsOnNode(nx, ny).filter(function (id) {

@@ -1259,6 +1259,45 @@
       }
       return out;
     },
+
+    // villagerRearmExpeditionStep(vid, nx, ny): the wild-corpse channel
+    // (sim-rearm-witness-b, finding #2717 thread #1). Called when a
+    // villager steps onto a node while away on expedition / objective
+    // travel — from expeditionLeg (agency expeditions) and objAwayStep
+    // (objective walkers), right beside mapmemNoticeNode, which is the
+    // same perception moment ("they see what's on the node they're
+    // standing on"). The walker themself is the only candidate: they
+    // must be standing on the corpse's node — never a roster scan,
+    // never a remembered site, never a rumor. Wild nodes only: a corpse
+    // on the Haven node belongs to the daily Haven sweep, and the
+    // channels stay attributable (every 'expedition' take is a wild
+    // corpse, by construction). One take per step, through the shared
+    // transfer (need/cells/env gates, voice, telemetry, channel
+    // 'expedition'). No RNG: the scan is corpse-list order, and the
+    // take draws nothing — the armed leg diverges from control only at
+    // the first take. No stage gate, by consistency with the Haven
+    // sweep: a gun on a months-old skeleton is still a gun.
+    villagerRearmExpeditionStep(vid, nx, ny) {
+      if (!this._rearmCellsOn() || !vid || vid === this.villagerId) return null;
+      if (nx == null || ny == null) return null;
+      let p = null;
+      try { p = this.getPerson ? this.getPerson(vid) : null; } catch (e) {}
+      if (!p || p.dead) return null;
+      // Already armed (gun + cells): nothing to gain — skip the scan.
+      try { if (this._rearmHasGun(p) && this._rearmCellCount(p) > 0) return null; } catch (e) {}
+      const v = this.state.village || {};
+      const hx = (v.px != null ? v.px : 4), hy = (v.py != null ? v.py : 4);
+      if (nx === hx && ny === hy) return null; // Haven node: the sweep owns it
+      for (const c of (this.corpses() || [])) {
+        if (!c || c.buried || !c.node) continue;
+        if (c.node.x !== nx || c.node.y !== ny) continue;
+        if (!this.corpseIsPerson(c)) continue;
+        if (this._rearmCorpseCells(c) <= 0) continue;
+        const rec = this.villagerRearmFromCorpse(c, vid, 'expedition');
+        if (rec) return rec;
+      }
+      return null;
+    },
   };
 
   Object.assign(G, methods);

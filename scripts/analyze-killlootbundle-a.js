@@ -73,6 +73,17 @@ function analyzeSeed(c) {
   });
   const secondLifeTakers = {};
   rearmTakes.forEach(function (e) { if (e.kind === 'second-life') secondLifeTakers[e.taker] = true; });
+  // REARM-WITNESS (sim-rearm-witness-b): expedition-channel takes +
+  // volleys by expedition takers. The expedition take is the same
+  // transfer through a different perception moment (a walker standing
+  // on the wild death node), so it is split out by channel, not
+  // re-defined.
+  const expeditionTakes = rearmTakes.filter(function (e) { return (e.channel || null) === 'expedition'; });
+  const expeditionTakers = {};
+  expeditionTakes.forEach(function (e) { expeditionTakers[e.taker] = Math.min(expeditionTakers[e.taker] == null ? 1e9 : expeditionTakers[e.taker], e.day || 0); });
+  const expeditionRearmVolleys = volleys.filter(function (e) {
+    return expeditionTakers[e.vid] != null && (e.day || 0) >= expeditionTakers[e.vid];
+  });
   // Supply: staged (kill-loot) holders who DIED HOLDING CELLS — the
   // re-arm opportunities. A holder dies holding cells unless their
   // last sear-volley before death left ammoLeft 0 with no later cell
@@ -84,15 +95,29 @@ function analyzeSeed(c) {
     (klVolleysByVid[e.vid] = klVolleysByVid[e.vid] || []).push(e);
   });
   let supplyDeaths = 0;
+  const supplyVids = [];
   Object.keys(klHolders).forEach(function (vid) {
     if (deathsByVid[vid] == null) return; // survived: no corpse, no opportunity
     const deathDay = deathsByVid[vid];
     const vs = (klVolleysByVid[vid] || []).filter(function (e) { return (e.day || 0) <= deathDay; });
-    if (!vs.length) { supplyDeaths++; return; }
+    if (!vs.length) { supplyDeaths++; supplyVids.push(vid); return; }
     const last = vs[vs.length - 1];
-    if ((last.ammoLeft == null ? 1 : last.ammoLeft) > 0) { supplyDeaths++; return; }
+    if ((last.ammoLeft == null ? 1 : last.ammoLeft) > 0) { supplyDeaths++; supplyVids.push(vid); return; }
     const regained = rearmTakes.some(function (e) { return e.taker === vid && (e.day || 0) > (last.day || 0) && (e.day || 0) <= deathDay; });
-    if (regained) supplyDeaths++;
+    if (regained) { supplyDeaths++; supplyVids.push(vid); }
+  });
+  // Wild supply (REARM-WITNESS): supply deaths whose corpse row is on
+  // a non-Haven node (driver supplyCorpseRows + havenNode). A supply
+  // death with no row (or no havenNode on the file) is NOT counted as
+  // wild — it is unknown, never guessed.
+  const havenNode = c.havenNode || null;
+  const rowsByVid = {};
+  (c.supplyCorpseRows || []).forEach(function (r) { if (r && r.corpseVid) rowsByVid[r.corpseVid] = r; });
+  let wildSupplyDeaths = 0;
+  supplyVids.forEach(function (vid) {
+    const row = rowsByVid[vid];
+    if (!row || !row.node || !havenNode) return;
+    if (row.node.x !== havenNode.x || row.node.y !== havenNode.y) wildSupplyDeaths++;
   });
   // Scholar-path context (killbundle-b §5: 2 of 17 arrivals): scholar
   // takes of a gun/cell from a kill-loot holder's corpse.
@@ -129,6 +154,11 @@ function analyzeSeed(c) {
     secondLifeHolders: Object.keys(secondLifeTakers),
     rearmVolleys: rearmVolleys.length,
     rearmVolleyDays: rearmVolleys.map(function (e) { return { day: e.day, vid: e.vid, shots: e.shots, hits: e.hits, dmg: e.dmg }; }),
+    expeditionRearmEvents: expeditionTakes.length,
+    expeditionTakeDays: expeditionTakes.map(function (e) { return { day: e.day, taker: e.taker, corpseVid: e.corpseVid, kind: e.kind, gun: e.gun, cells: e.cells, channel: e.channel || null }; }),
+    expeditionRearmVolleys: expeditionRearmVolleys.length,
+    expeditionRearmVolleyDays: expeditionRearmVolleys.map(function (e) { return { day: e.day, vid: e.vid, shots: e.shots, hits: e.hits, dmg: e.dmg }; }),
+    wildSupplyDeaths: wildSupplyDeaths,
     supplyDeaths: supplyDeaths,
     scholarTakes: scholarTakes.length,
     scholarTakeDays: scholarTakes.map(function (e) { return { day: e.day, itemId: e.itemId, corpseVid: e.corpseVid }; }),
@@ -158,6 +188,9 @@ function analyzeLeg(corpora) {
     rearmCellTakes: sum('rearmCellTakes'),
     secondLifeTakes: sum('secondLifeTakes'),
     rearmVolleys: sum('rearmVolleys'),
+    expeditionRearmEvents: sum('expeditionRearmEvents'),
+    expeditionRearmVolleys: sum('expeditionRearmVolleys'),
+    wildSupplyDeaths: sum('wildSupplyDeaths'),
     supplyDeaths: sum('supplyDeaths'),
     scholarTakes: sum('scholarTakes'),
   };
@@ -230,6 +263,55 @@ function judgeRearmCompare(ctl, arm) {
   const verdict = bars.supply.inconclusive ? 'INCONCLUSIVE'
     : (bars.instrument.pass && bars.controlClean.pass && bars.rearmEvents.pass
       && bars.secondLifeVolley.pass && bars.guardrails.pass ? 'GO' : 'NO-GO');
+  return { bars: bars, verdict: verdict };
+}
+// REARM-WITNESS judge (sim-rearm-witness-b, frozen in its prereg): the
+// wild-corpse expedition channel GOes only when a walker takes gun +
+// cells from a wild corpse AND the re-armed gun actually fires again.
+// Same strictness as the rearm-b judge, same structure; the bars count
+// the 'expedition' channel only (Haven/witness takes on the armed leg
+// are the rearm-b mechanism, already judged — they neither pass nor
+// fail this arm). Control must be clean on ALL channels (REARM unset
+// ⇒ zero takes). Supply-thin (no staged holder died holding cells on
+// the armed leg) is INCONCLUSIVE, not a miss.
+function judgeRearmWitnessCompare(ctl, arm) {
+  const bars = {};
+  bars.instrument = {
+    pass: (ctl.instrumentErrors || 0) === 0 && (arm.instrumentErrors || 0) === 0,
+    detail: 'errors ctl=' + (ctl.instrumentErrors || 0) + ' arm=' + (arm.instrumentErrors || 0),
+  };
+  bars.bundleIntact = {
+    pass: (ctl.klBundled === ctl.klArrivals && ctl.klDry === 0
+      && arm.klBundled === arm.klArrivals && arm.klDry === 0),
+    detail: 'ctl bundled=' + (ctl.klBundled || 0) + '/' + (ctl.klArrivals || 0) + ' dry=' + (ctl.klDry || 0)
+      + '; arm bundled=' + (arm.klBundled || 0) + '/' + (arm.klArrivals || 0) + ' dry=' + (arm.klDry || 0),
+  };
+  bars.controlClean = {
+    pass: (ctl.rearmEvents || 0) === 0,
+    detail: 'ctl rearmEvents=' + (ctl.rearmEvents || 0) + ' (must be 0: REARM unset)',
+  };
+  bars.supply = {
+    pass: (arm.supplyDeaths || 0) >= 1,
+    detail: 'arm supplyDeaths=' + (arm.supplyDeaths || 0) + ' (wild ' + (arm.wildSupplyDeaths || 0) + ')',
+    inconclusive: (arm.supplyDeaths || 0) === 0,
+  };
+  bars.expeditionTakes = {
+    pass: (arm.expeditionRearmEvents || 0) >= 2,
+    detail: 'arm expeditionRearmEvents=' + (arm.expeditionRearmEvents || 0) + ' (wild supply ' + (arm.wildSupplyDeaths || 0) + ')',
+  };
+  bars.expeditionVolley = {
+    pass: (arm.expeditionRearmVolleys || 0) >= 1,
+    detail: 'arm expeditionRearmVolleys=' + (arm.expeditionRearmVolleys || 0) + ' (volleys by an expedition taker on/after the take day)',
+  };
+  const starvDelta = arm.starvDeaths - ctl.starvDeaths;
+  const medDelta = (arm.medianSurvival || 0) - (ctl.medianSurvival || 0);
+  bars.guardrails = {
+    pass: starvDelta <= 2 && medDelta >= -20,
+    detail: 'starvDeaths ctl=' + ctl.starvDeaths + ' arm=' + arm.starvDeaths + ' (delta ' + starvDelta + '); medianSurvival ctl=' + ctl.medianSurvival + ' arm=' + arm.medianSurvival + ' (delta ' + medDelta + ')',
+  };
+  const verdict = bars.supply.inconclusive ? 'INCONCLUSIVE'
+    : (bars.instrument.pass && bars.bundleIntact.pass && bars.controlClean.pass
+      && bars.expeditionTakes.pass && bars.expeditionVolley.pass && bars.guardrails.pass ? 'GO' : 'NO-GO');
   return { bars: bars, verdict: verdict };
 }
 function selftest() {
@@ -330,6 +412,55 @@ function selftest() {
   c9.rearmTakeEvents = [];
   const s9 = analyzeSeed(c9);
   check('rearm: fired-dry holder is not supply', s9.supplyDeaths === 0);
+  // REARM-WITNESS (sim-rearm-witness-b): a staged holder dies holding
+  // cells on a WILD node; a walker takes gun + cells on expedition and
+  // fires at wave 4+ the next day.
+  const c10 = JSON.parse(JSON.stringify(c5));
+  c10.mode = 'arm'; c10.rearmOn = true; c10.rearmPresent = true;
+  c10.killLootEvents = [{ day: 71, vid: 'amina', dropId: 'searcaster', gains: [{ holder: 'amina', gunsGained: 1, cellsGained: 2, cellsAfter: 2 }] }];
+  c10.volleyEvents = [{ day: 90, vid: 'bob', rwId: 'searcaster', shots: 1, hits: 1, dmg: 33, ammoLeft: 0, wave: 4 }];
+  c10.rearmTakeEvents = [{ day: 85, taker: 'bob', corpseVid: 'amina', corpseId: 'corpse_85_x', kind: 'second-life', gun: true, cells: 1, channel: 'expedition' }];
+  c10.deaths = [{ day: 85, who: 'amina', cause: 'monster' }];
+  c10.supplyCorpseRows = [{ day: 85, corpseVid: 'amina', node: { x: 1, y: 1 }, cells: 1 }];
+  c10.havenNode = { x: 4, y: 4 };
+  const s10 = analyzeSeed(c10);
+  check('witness: expeditionRearmEvents 1', s10.expeditionRearmEvents === 1);
+  check('witness: expeditionRearmVolleys 1 (taker fires after the take)', s10.expeditionRearmVolleys === 1);
+  check('witness: wildSupplyDeaths 1 (corpse on a wild node)', s10.wildSupplyDeaths === 1);
+  check('witness: supplyDeaths 1', s10.supplyDeaths === 1);
+  check('witness: rearmEvents counts the expedition take too', s10.rearmEvents === 1);
+  // Witness control leg: same death, REARM unset, no takes.
+  const c11 = JSON.parse(JSON.stringify(c10));
+  c11.rearmOn = false; c11.rearmTakeEvents = []; c11.volleyEvents = [];
+  const s11 = analyzeSeed(c11);
+  check('witness ctl: expeditionRearmEvents 0', s11.expeditionRearmEvents === 0);
+  check('witness ctl: wildSupplyDeaths still 1', s11.wildSupplyDeaths === 1);
+  // Witness compare: two expedition takes + volleys across two seeds -> GO.
+  const c10b = JSON.parse(JSON.stringify(c10));
+  c10b.seed = 2;
+  const cmpW = judgeRearmWitnessCompare(analyzeLeg([c11]), analyzeLeg([c10, c10b]));
+  check('witness compare: GO (2 expedition takes, volleys)', cmpW.verdict === 'GO');
+  // Witness takes with no volley on either seed: NO-GO (the path fires,
+  // the gun never speaks).
+  const c12 = JSON.parse(JSON.stringify(c10));
+  c12.volleyEvents = [];
+  const c12b = JSON.parse(JSON.stringify(c12));
+  c12b.seed = 3;
+  const cmpW2 = judgeRearmWitnessCompare(analyzeLeg([c11]), analyzeLeg([c12, c12b]));
+  check('witness compare: takes-without-volley NO-GO', cmpW2.verdict === 'NO-GO');
+  // Haven-node corpse is supply but NOT wild supply.
+  const c13 = JSON.parse(JSON.stringify(c10));
+  c13.supplyCorpseRows = [{ day: 85, corpseVid: 'amina', node: { x: 4, y: 4 }, cells: 1 }];
+  const s13 = analyzeSeed(c13);
+  check('witness: Haven-node corpse is not wild supply', s13.wildSupplyDeaths === 0 && s13.supplyDeaths === 1);
+  // A supply death with no corpse row is unknown, never guessed wild.
+  const c14 = JSON.parse(JSON.stringify(c10));
+  c14.supplyCorpseRows = [];
+  const s14 = analyzeSeed(c14);
+  check('witness: row-less supply death is not wild', s14.wildSupplyDeaths === 0 && s14.supplyDeaths === 1);
+  // One expedition take is below the frozen bar of 2 -> NO-GO.
+  const cmpW3 = judgeRearmWitnessCompare(analyzeLeg([c11]), analyzeLeg([c10]));
+  check('witness compare: single take below bar NO-GO', cmpW3.verdict === 'NO-GO');
   console.log('SELFTEST: ' + pass + ' passed, ' + fail + ' failed');
   return fail === 0;
 }
@@ -338,6 +469,18 @@ if (require.main === module) {
 const args = process.argv.slice(2);
 if (args.indexOf('--selftest') !== -1) {
   process.exit(selftest() ? 0 : 1);
+} else if (args.indexOf('--rearm-witness-compare') !== -1) {
+  const i = args.indexOf('--rearm-witness-compare');
+  const dirA = args[i + 1], dirB = args[i + 2];
+  if (!dirA || !dirB) { console.error('usage: --rearm-witness-compare <ctlDir> <armDir> [--out <file>]'); process.exit(2); }
+  const ctl = analyzeLeg(loadDir(dirA));
+  const arm = analyzeLeg(loadDir(dirB));
+  const cmp = judgeRearmWitnessCompare(ctl, arm);
+  const out = { ctl: ctl, arm: arm, verdict: cmp.verdict, bars: cmp.bars };
+  const oi = args.indexOf('--out');
+  if (oi !== -1 && args[oi + 1]) fs.writeFileSync(args[oi + 1], JSON.stringify(out, null, 2) + '\n');
+  console.log(JSON.stringify({ verdict: cmp.verdict, ctl: { supplyDeaths: ctl.supplyDeaths, wildSupplyDeaths: ctl.wildSupplyDeaths, rearmEvents: ctl.rearmEvents, expeditionRearmEvents: ctl.expeditionRearmEvents, expeditionRearmVolleys: ctl.expeditionRearmVolleys, starvDeaths: ctl.starvDeaths, medianSurvival: ctl.medianSurvival }, arm: { supplyDeaths: arm.supplyDeaths, wildSupplyDeaths: arm.wildSupplyDeaths, rearmEvents: arm.rearmEvents, expeditionRearmEvents: arm.expeditionRearmEvents, expeditionRearmVolleys: arm.expeditionRearmVolleys, starvDeaths: arm.starvDeaths, medianSurvival: arm.medianSurvival }, bars: cmp.bars }, null, 2));
+  process.exit(cmp.verdict === 'GO' || cmp.verdict === 'INCONCLUSIVE' ? 0 : 1);
 } else if (args.indexOf('--rearm-compare') !== -1) {
   const i = args.indexOf('--rearm-compare');
   const dirA = args[i + 1], dirB = args[i + 2];
@@ -375,4 +518,4 @@ if (args.indexOf('--selftest') !== -1) {
 }
 }
 
-module.exports = { analyzeSeed: analyzeSeed, analyzeLeg: analyzeLeg, judgeCompare: judgeCompare, judgeRearmCompare: judgeRearmCompare, judgeLeg: judgeLeg, median: median, selftest: selftest };
+module.exports = { analyzeSeed: analyzeSeed, analyzeLeg: analyzeLeg, judgeCompare: judgeCompare, judgeRearmCompare: judgeRearmCompare, judgeRearmWitnessCompare: judgeRearmWitnessCompare, judgeLeg: judgeLeg, median: median, selftest: selftest };
