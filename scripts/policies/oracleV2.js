@@ -310,43 +310,173 @@ function v2Fight(Game, ctx) {
       } catch (e) {}
       return false;
     };
+    // CHEAPEST-EDGE (journey-crisis r278, shared by the flee + the
+    // sealed-pocket gate): scan every edge tile once per (position,
+    // moveLeft) and return the cheapest AFFORDABLE tile + path and the
+    // cheapest tile + path overall. Cost is tbTerrainCost summed over
+    // the findPath path — the same accounting tbPlayerMove enforces
+    // ("Too far" when the path costs more than moveLeft), so affordable
+    // here means the move succeeds. The result is memoized per
+    // (position, moveLeft) so the flee and the gate share one scan.
+    let _ceKey = null, _ceVal = null;
+    const cheapestEdge = () => {
+      try {
+        const q = Game.tbFighter('p');
+        const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
+        const mv = q ? (q.moveLeft || 0) : 0;
+        const gmax = (typeof Game.tbGridMax === 'function') ? Game.tbGridMax() : 8;
+        const key = px + ',' + py + ',' + mv + ',' + gmax;
+        if (_ceVal && _ceKey === key) return _ceVal;
+        let best = null, bestCost = Infinity, bestPath = null;
+        let cheapest = null, cheapestCost = Infinity, cheapestPath = null;
+        const cands = [];
+        for (let x = 0; x <= gmax; x++) { cands.push([x, 0]); cands.push([x, gmax]); }
+        for (let y = 1; y < gmax; y++) { cands.push([0, y]); cands.push([gmax, y]); }
+        for (const [tx, ty] of cands) {
+          if (tx === px && ty === py) continue;
+          let path = null;
+          try { path = Game.findPath(px, py, tx, ty); } catch (e) {}
+          if (!path || !path.length) continue;
+          let cost = 0;
+          try { for (const [cx, cy] of path) cost += (typeof Game.tbTerrainCost === 'function' ? Game.tbTerrainCost(cx, cy) : 1); } catch (e) { cost = path.length; }
+          if (cost < cheapestCost) { cheapest = [tx, ty]; cheapestCost = cost; cheapestPath = path; }
+          if (cost <= mv && cost < bestCost) { best = [tx, ty]; bestCost = cost; bestPath = path; }
+        }
+        const out = { best, bestCost, bestPath, cheapest, cheapestCost, cheapestPath };
+        _ceKey = key; _ceVal = out;
+        return out;
+      } catch (e) {
+        return { best: null, bestCost: Infinity, bestPath: null, cheapest: null, cheapestCost: Infinity, cheapestPath: null };
+      }
+    };
+    // SEALED-BARRIER (journey-crisis r278, FIX 2): the game's own sealed
+    // condition — tbBarrierExit holds the barrier when the fight is an
+    // arena contest or forbids fleeing (state.arenaContest || f.noFlee;
+    // game.js tbBarrierExit). When sealed, the flee's push-through is
+    // consumed without ending the fight: the policy must close and fight
+    // instead of burning turns on the barrier.
+    const barrierSealed = () => {
+      try { return !!(((Game.state || {}).arenaContest) || (f && f.noFlee)); } catch (e) { return false; }
+    };
+    // SEALED-POCKET (journey-crisis r278, FIX 1): no affordable edge tile
+    // AND a live monster in weapon range — the flee cannot disengage and
+    // the strike is right there. The player already on an edge can push
+    // through, so that is not a sealed pocket; an arena is FIX 2's case,
+    // not this one.
+    const pocketSealedFight = () => {
+      try {
+        if (barrierSealed()) return false;
+        const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
+        const gmax = (typeof Game.tbGridMax === 'function') ? Game.tbGridMax() : 8;
+        if (px === 0 || px === gmax || py === 0 || py === gmax) return false;
+        if (cheapestEdge().best) return false;
+        const w = (Game.equippedWeapon && Game.equippedWeapon()) || { range: 1 };
+        const range = w.range || 1;
+        for (const m of monstersOf(f)) {
+          const d = Math.max(Math.abs((m.mx != null ? m.mx : 4) - px), Math.abs((m.my != null ? m.my : 4) - py));
+          if (d <= range) return true;
+        }
+        return false;
+      } catch (e) { return false; }
+    };
+    // FLEE-BLOCKED (journey-crisis r278, FIX 1+2): the flee must not fire
+    // when it cannot disengage — sealed arena, or sealed pocket with a
+    // monster in range. Records the block (why + which seal) so the
+    // panel can see it; the caller falls through to the strike/close
+    // code instead of fleeing.
+    const fleeBlocked = (why) => {
+      let reason = null;
+      try {
+        if (barrierSealed()) reason = 'arena';
+        else if (pocketSealedFight()) reason = 'pocket';
+      } catch (e) { reason = null; }
+      if (!reason) return false;
+      ctx.fledBlocked = (ctx.fledBlocked || 0) + 1;
+      ctx['fledBlocked_' + why] = (ctx['fledBlocked_' + why] || 0) + 1;
+      ctx['fledBlocked_' + reason] = (ctx['fledBlocked_' + reason] || 0) + 1;
+      try { traceStuck(Game, ctx, 'flee-blocked', ctx._closeStuckKey, why + ':' + reason); } catch (e) {}
+      return true;
+    };
+    // STEP-ALONG (journey-crisis r278, shared by FIX 3 + the FIX 2
+    // alt-close): walk a findPath path as far as this turn's moveLeft
+    // allows (tbPlayerMove's own cost accounting: tbTerrainCost summed
+    // over the path's steps). Returns the tile moved to, or null when
+    // even the first step is unaffordable. The position check is the
+    // ground truth — a "Too far" or blocked move reports null.
+    const stepAlong = (path) => {
+      try {
+        if (!path || !path.length) return null;
+        const q = Game.tbFighter('p');
+        const mv = q ? (q.moveLeft || 0) : 0;
+        const px0 = p.mx != null ? p.mx : 4, py0 = p.my != null ? p.my : 4;
+        let acc = 0, step = null;
+        for (const [cx, cy] of path) {
+          if (cx === px0 && cy === py0) continue;
+          let c = 1;
+          try { c = (typeof Game.tbTerrainCost === 'function' ? Game.tbTerrainCost(cx, cy) : 1); } catch (e) {}
+          if (acc + c > mv) break;
+          acc += c; step = [cx, cy];
+        }
+        if (!step) return null;
+        try { Game.tbPlayerMove(step[0], step[1]); } catch (e) { return null; }
+        const q2 = Game.tbFighter('p');
+        if (q2 && (q2.mx !== px0 || q2.my !== py0)) return step;
+        return null;
+      } catch (e) { return null; }
+    };
+    // ALT-CLOSE (journey-crisis r278, FIX 2): the first-choice adjacent
+    // tile is unpathable — try the target's other adjacent tiles
+    // nearest-first and step along the first reachable path. Returns
+    // true when the player moved. Only called when the flee is blocked
+    // (sealed arena), so the normal close path is untouched.
+    const altClose = (tgt) => {
+      try {
+        const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
+        const tmx = tgt.mx != null ? tgt.mx : 4, tmy = tgt.my != null ? tgt.my : 4;
+        const gmax = (typeof Game.tbGridMax === 'function') ? Game.tbGridMax() : 8;
+        const occupied = new Set(
+          f.fighters.filter(x => x.alive && x.key !== 'p').map(x => x.mx + ',' + x.my));
+        const cands = [];
+        for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+          if (!dx && !dy) continue;
+          const cx = tmx + dx, cy = tmy + dy;
+          if (cx < 0 || cx > gmax || cy < 0 || cy > gmax) continue;
+          if (occupied.has(cx + ',' + cy)) continue;
+          cands.push([cx, cy, Math.max(Math.abs(cx - px), Math.abs(cy - py))]);
+        }
+        cands.sort((a, b) => a[2] - b[2]);
+        for (const [cx, cy] of cands) {
+          let path = null;
+          try { path = Game.findPath(px, py, cx, cy); } catch (e) {}
+          if (!path || !path.length) continue;
+          const stepped = stepAlong(path);
+          if (stepped) { ctx.altCloses = (ctx.altCloses || 0) + 1; return true; }
+        }
+        return false;
+      } catch (e) { return false; }
+    };
     const flee = (why) => {
       try {
         const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
         if (px === 0 || px === 8 || py === 0 || py === 8) pushThrough();
         if (Game.tbfight && !Game.tbfight.over && Game.tbIsPlayerTurn()) {
           // NEAREST-AFFORDABLE-EDGE (journey-crisis r274, FIX 2 for the
-          // r264 FIGHT-STALL NO-GO): the old flee aimed at the west/east
-          // edge at the current row (0,py)/(8,py) and the move failed on
-          // COST — "Too far" on 236/237 calls on the probe's stall days,
-          // because a slowed fighter (moveLeft 1-3) cannot afford a
-          // 4-5 step path while a 1-step edge sits open (probe seed
-          // 14601: d26 south 1 step, d103 south 1 step, d144 north
-          // 1 step). Aim at the cheapest edge tile whose path COST
-          // (tbTerrainCost summed over the found path) fits this turn's
-          // moveLeft, considering all four edges; only then push through.
-          // If no edge tile is affordable this turn, fall back to the old
-          // target (it will fail honestly, and the fight is reported as a
-          // stall — the bar is not gamed by skipping the attempt).
+          // r264 FIGHT-STALL NO-GO): aim at the cheapest edge tile whose
+          // path COST fits this turn's moveLeft, over all four edges.
+          // PARTIAL-PROGRESS (journey-crisis r278, FIX 3): when no edge
+          // tile is affordable, walk as far along the cheapest edge's
+          // path as moveLeft allows instead of failing in place against
+          // the old target — the fighter walks toward the exit turn by
+          // turn. Only when no step at all is affordable does the flee
+          // fall back to the old target (it fails honestly, and the
+          // fight is reported as a stall — the bar is not gamed).
           const gmax = (typeof Game.tbGridMax === 'function') ? Game.tbGridMax() : 8;
-          const q = Game.tbFighter('p');
-          const mv = q ? (q.moveLeft || 0) : 0;
-          let best = null, bestCost = Infinity;
-          try {
-            const cands = [];
-            for (let x = 0; x <= gmax; x++) { cands.push([x, 0]); cands.push([x, gmax]); }
-            for (let y = 1; y < gmax; y++) { cands.push([0, y]); cands.push([gmax, y]); }
-            for (const [tx, ty] of cands) {
-              if (tx === px && ty === py) continue;
-              let path = null;
-              try { path = Game.findPath(px, py, tx, ty); } catch (e) {}
-              if (!path || !path.length) continue;
-              let cost = 0;
-              try { for (const [cx, cy] of path) cost += (typeof Game.tbTerrainCost === 'function' ? Game.tbTerrainCost(cx, cy) : 1); } catch (e) { cost = path.length; }
-              if (cost <= mv && cost < bestCost) { best = [tx, ty]; bestCost = cost; }
-            }
-          } catch (e) {}
-          if (best) { try { Game.tbPlayerMove(best[0], best[1]); } catch (e) {} }
+          const ce = cheapestEdge();
+          if (ce.best) { try { Game.tbPlayerMove(ce.best[0], ce.best[1]); } catch (e) {} }
+          else if (ce.cheapestPath && ce.cheapestPath.length > 1) {
+            const stepped = stepAlong(ce.cheapestPath);
+            if (!stepped) { const tx = px <= 4 ? 0 : gmax; try { Game.tbPlayerMove(tx, py); } catch (e) {} }
+          }
           else { const tx = px <= 4 ? 0 : gmax; try { Game.tbPlayerMove(tx, py); } catch (e) {} }
           pushThrough();
         }
@@ -384,7 +514,9 @@ function v2Fight(Game, ctx) {
       const a = assessFight(Game, f);
       ctx._assess = a;
       ctx.assessments = (ctx.assessments || 0) + 1;
-      if (hpPct < 0.3) return flee('neardeath');
+      // r278 FIX 1+2: a flee that cannot disengage is blocked — the
+      // policy falls through to the strike/close code instead.
+      if (hpPct < 0.3 && !fleeBlocked('neardeath')) return flee('neardeath');
       // SURGE OVERRIDE (v2): when the surge is armed and this fight is
       // favored, take it for real — skip the deed gates for one fight so
       // the honest burn has fuel to spend.
@@ -393,12 +525,23 @@ function v2Fight(Game, ctx) {
         ctx._surgeFightPending = false;
         ctx.v2SurgeFights = (ctx.v2SurgeFights || 0) + 1;
       } else if (!deedValue(Game, f)) {
-        return flee('nodeed');
+        if (!fleeBlocked('nodeed')) return flee('nodeed');
       }
-      if (!a.favored) { ctx.fledOutmatched = (ctx.fledOutmatched || 0) + 1; return flee('outmatched'); }
-      ctx.engagedFavored = (ctx.engagedFavored || 0) + 1;
+      if (!a.favored) {
+        if (fleeBlocked('outmatched')) {
+          // Sealed: fight instead. Not an outmatched flee — the counter
+          // only counts flees that actually fire (below), and the
+          // engagement counter only counts favored fights, so neither
+          // increments here; the strike code below runs instead.
+        } else {
+          ctx.fledOutmatched = (ctx.fledOutmatched || 0) + 1;
+          return flee('outmatched');
+        }
+      } else {
+        ctx.engagedFavored = (ctx.engagedFavored || 0) + 1;
+      }
     }
-    if (hpPct < 0.3) return flee('neardeath');
+    if (hpPct < 0.3 && !fleeBlocked('neardeath')) return flee('neardeath');
     // Target: known-counter monster first, else weakest.
     const alive = monstersOf(f).slice().sort((a, b) => {
       let ka = 0, kb = 0;
@@ -450,7 +593,20 @@ function v2Fight(Game, ctx) {
         if (!_moved && _d1 > (w.range || 1)) {
           ctx._closeStuck = (ctx._closeStuck || 0) + 1;
           traceStuck(Game, ctx, 'inc', ctx._closeStuckKey);
-          if (ctx._closeStuck >= 3) { traceStuck(Game, ctx, 'flee', ctx._closeStuckKey); return flee('unreachable'); }
+          if (ctx._closeStuck >= 3) {
+            traceStuck(Game, ctx, 'flee', ctx._closeStuckKey);
+            if (!fleeBlocked('unreachable')) return flee('unreachable');
+            // r278 FIX 2: in a sealed arena the flee cannot disengage,
+            // so close instead — try the target's other adjacent tiles
+            // and step along the first reachable path. A successful step
+            // resets the stuck counter; a wholly unpathable ring leaves
+            // the counter up and the turn ends (the monster must come
+            // to the player).
+            if (altClose(tgt)) {
+              traceStuck(Game, ctx, 'reset', ctx._closeStuckKey, 'altclose');
+              ctx._closeStuck = 0;
+            }
+          }
         } else {
           if (ctx._closeStuck) traceStuck(Game, ctx, 'reset', ctx._closeStuckKey, _moved ? 'moved' : 'inrange');
           ctx._closeStuck = 0;

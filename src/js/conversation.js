@@ -2841,7 +2841,16 @@
               stay_close: 'that night together', snare_mend: 'that snare mending',
             };
             const labelMatches = !!(fav && fav.kind && favorLabels[fav.kind] === lc.label);
-            if (fav && (sitFav || labelMatches) &&
+            // DEBT-LABEL ANCHOR (journey-crisis r278): a repay sitting
+            // labels the favor's debt 'that debt', not the favor's kind
+            // label — and a resume-pre-empted sitting never carries
+            // c.want.favor at all (r274 wild case, seed 14603 d84 Raul:
+            // broken water_haul, recap "Still on that debt", closer
+            // still declared it settled). The 'that debt' label IS the
+            // favor's debt label, so it anchors on the ledger favor the
+            // same way a kind-label match does.
+            const debtLabel = lc.label === 'that debt';
+            if (fav && (sitFav || labelMatches || debtLabel) &&
                 !(fav.state === 'fulfilled' || fav.state === 'thanked')) {
               L.lastClosed = null; return null;
             }
