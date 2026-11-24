@@ -1,0 +1,840 @@
+{
+  "arm": "launchdiag-a-1b-census",
+  "bands": [
+    {
+      "band": "gunloss",
+      "rearm": false,
+      "files": 1,
+      "takes": {
+        "scholar": 50,
+        "villager": 0,
+        "total": 50,
+        "unclassified": 0
+      },
+      "gunCellTakes": [],
+      "rearmTakes": [],
+      "rearmByChannel": {},
+      "instrumentErrors": 0,
+      "wall": {
+        "seeds": 1,
+        "wins": 0,
+        "national": 0,
+        "wave5": 0,
+        "wave4": 1,
+        "medianSurvival": 145,
+        "maxSurvival": 145,
+        "villagesLost": 1,
+        "totalDeaths": 90
+      },
+      "crossCheck": {
+        "filesMatch": true,
+        "takesMatch": true,
+        "scholarMatch": true,
+        "villagerMatch": true,
+        "gunCellMatch": true,
+        "rearmMatch": true,
+        "expected": {
+          "files": 1,
+          "takes": 50,
+          "scholar": 50,
+          "villager": 0,
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        "observed": {
+          "files": 1,
+          "takes": 50,
+          "scholar": 50,
+          "villager": 0,
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        "allMatch": true
+      },
+      "perSeed": [
+        {
+          "file": "gunloss-a-s107369-gunloss-a-diag.json",
+          "seed": 107369,
+          "takes": {
+            "scholar": 50,
+            "villager": 0,
+            "total": 50
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        }
+      ]
+    },
+    {
+      "band": "corpsecap",
+      "rearm": false,
+      "files": 8,
+      "takes": {
+        "scholar": 405,
+        "villager": 0,
+        "total": 405,
+        "unclassified": 0
+      },
+      "gunCellTakes": [
+        {
+          "seed": 107275,
+          "day": 66,
+          "itemId": "fusion_cell",
+          "corpseId": "corpse_66_vhdhxe",
+          "corpseVid": "katarina_novak",
+          "corpseKind": "person",
+          "toKind": "scholar"
+        },
+        {
+          "seed": 107275,
+          "day": 113,
+          "itemId": "searcaster",
+          "corpseId": "corpse_113_rk6ebd",
+          "corpseVid": "giulia_bianchi",
+          "corpseKind": "person",
+          "toKind": "scholar"
+        },
+        {
+          "seed": 107275,
+          "day": 113,
+          "itemId": "fusion_cell",
+          "corpseId": "corpse_113_rk6ebd",
+          "corpseVid": "giulia_bianchi",
+          "corpseKind": "person",
+          "toKind": "scholar"
+        }
+      ],
+      "rearmTakes": [],
+      "rearmByChannel": {},
+      "instrumentErrors": 0,
+      "wall": {
+        "seeds": 8,
+        "wins": 0,
+        "national": 0,
+        "wave5": 3,
+        "wave4": 8,
+        "medianSurvival": 150,
+        "maxSurvival": 150,
+        "villagesLost": 2,
+        "totalDeaths": 622
+      },
+      "crossCheck": {
+        "filesMatch": true,
+        "takesMatch": true,
+        "scholarMatch": true,
+        "villagerMatch": true,
+        "gunCellMatch": true,
+        "rearmMatch": true,
+        "expected": {
+          "files": 8,
+          "takes": 405,
+          "scholar": 405,
+          "villager": 0,
+          "gunCellTakes": 3,
+          "rearmTakes": 0
+        },
+        "observed": {
+          "files": 8,
+          "takes": 405,
+          "scholar": 405,
+          "villager": 0,
+          "gunCellTakes": 3,
+          "rearmTakes": 0
+        },
+        "allMatch": true
+      },
+      "perSeed": [
+        {
+          "file": "corpsecap-a-s107271-corpsecap-a-diag.json",
+          "seed": 107271,
+          "takes": {
+            "scholar": 33,
+            "villager": 0,
+            "total": 33
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "corpsecap-a-s107272-corpsecap-a-diag.json",
+          "seed": 107272,
+          "takes": {
+            "scholar": 88,
+            "villager": 0,
+            "total": 88
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "corpsecap-a-s107273-corpsecap-a-diag.json",
+          "seed": 107273,
+          "takes": {
+            "scholar": 108,
+            "villager": 0,
+            "total": 108
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "corpsecap-a-s107274-corpsecap-a-diag.json",
+          "seed": 107274,
+          "takes": {
+            "scholar": 31,
+            "villager": 0,
+            "total": 31
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "corpsecap-a-s107275-corpsecap-a-diag.json",
+          "seed": 107275,
+          "takes": {
+            "scholar": 53,
+            "villager": 0,
+            "total": 53
+          },
+          "gunCellTakes": 3,
+          "rearmTakes": 0
+        },
+        {
+          "file": "corpsecap-a-s107276-corpsecap-a-diag.json",
+          "seed": 107276,
+          "takes": {
+            "scholar": 34,
+            "villager": 0,
+            "total": 34
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "corpsecap-a-s107277-corpsecap-a-diag.json",
+          "seed": 107277,
+          "takes": {
+            "scholar": 26,
+            "villager": 0,
+            "total": 26
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "corpsecap-a-s107278-corpsecap-a-diag.json",
+          "seed": 107278,
+          "takes": {
+            "scholar": 32,
+            "villager": 0,
+            "total": 32
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        }
+      ]
+    },
+    {
+      "band": "rearm-ctl",
+      "rearm": false,
+      "files": 16,
+      "takes": {
+        "scholar": 956,
+        "villager": 0,
+        "total": 956,
+        "unclassified": 0
+      },
+      "gunCellTakes": [
+        {
+          "seed": 107539,
+          "day": 61,
+          "itemId": "searcaster",
+          "corpseId": "corpse_57_yws32w",
+          "corpseVid": null,
+          "corpseKind": "non-person",
+          "toKind": "scholar"
+        },
+        {
+          "seed": 107545,
+          "day": 78,
+          "itemId": "searcaster",
+          "corpseId": "corpse_77_l7wx6m",
+          "corpseVid": "elena_petrova",
+          "corpseKind": "person",
+          "toKind": "scholar"
+        },
+        {
+          "seed": 107545,
+          "day": 78,
+          "itemId": "fusion_cell",
+          "corpseId": "corpse_77_l7wx6m",
+          "corpseVid": "elena_petrova",
+          "corpseKind": "person",
+          "toKind": "scholar"
+        },
+        {
+          "seed": 107547,
+          "day": 116,
+          "itemId": "fusion_cell",
+          "corpseId": "corpse_116_qktyy9",
+          "corpseVid": "yuki_mori",
+          "corpseKind": "person",
+          "toKind": "scholar"
+        }
+      ],
+      "rearmTakes": [],
+      "rearmByChannel": {},
+      "instrumentErrors": 0,
+      "wall": {
+        "seeds": 16,
+        "wins": 0,
+        "national": 0,
+        "wave5": 11,
+        "wave4": 16,
+        "medianSurvival": 150,
+        "maxSurvival": 150,
+        "villagesLost": 8,
+        "totalDeaths": 1581
+      },
+      "crossCheck": {
+        "filesMatch": true,
+        "takesMatch": true,
+        "scholarMatch": true,
+        "villagerMatch": true,
+        "gunCellMatch": true,
+        "rearmMatch": true,
+        "expected": {
+          "files": 16,
+          "takes": 956,
+          "scholar": 956,
+          "villager": 0,
+          "gunCellTakes": 4,
+          "rearmTakes": 0
+        },
+        "observed": {
+          "files": 16,
+          "takes": 956,
+          "scholar": 956,
+          "villager": 0,
+          "gunCellTakes": 4,
+          "rearmTakes": 0
+        },
+        "allMatch": true
+      },
+      "perSeed": [
+        {
+          "file": "killlootbundle-a-s107533-killlootbundle-a-arm.json",
+          "seed": 107533,
+          "takes": {
+            "scholar": 2,
+            "villager": 0,
+            "total": 2
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107534-killlootbundle-a-arm.json",
+          "seed": 107534,
+          "takes": {
+            "scholar": 25,
+            "villager": 0,
+            "total": 25
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107535-killlootbundle-a-arm.json",
+          "seed": 107535,
+          "takes": {
+            "scholar": 63,
+            "villager": 0,
+            "total": 63
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107536-killlootbundle-a-arm.json",
+          "seed": 107536,
+          "takes": {
+            "scholar": 123,
+            "villager": 0,
+            "total": 123
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107537-killlootbundle-a-arm.json",
+          "seed": 107537,
+          "takes": {
+            "scholar": 113,
+            "villager": 0,
+            "total": 113
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107538-killlootbundle-a-arm.json",
+          "seed": 107538,
+          "takes": {
+            "scholar": 51,
+            "villager": 0,
+            "total": 51
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107539-killlootbundle-a-arm.json",
+          "seed": 107539,
+          "takes": {
+            "scholar": 49,
+            "villager": 0,
+            "total": 49
+          },
+          "gunCellTakes": 1,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107540-killlootbundle-a-arm.json",
+          "seed": 107540,
+          "takes": {
+            "scholar": 28,
+            "villager": 0,
+            "total": 28
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107541-killlootbundle-a-arm.json",
+          "seed": 107541,
+          "takes": {
+            "scholar": 48,
+            "villager": 0,
+            "total": 48
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107542-killlootbundle-a-arm.json",
+          "seed": 107542,
+          "takes": {
+            "scholar": 28,
+            "villager": 0,
+            "total": 28
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107543-killlootbundle-a-arm.json",
+          "seed": 107543,
+          "takes": {
+            "scholar": 65,
+            "villager": 0,
+            "total": 65
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107544-killlootbundle-a-arm.json",
+          "seed": 107544,
+          "takes": {
+            "scholar": 41,
+            "villager": 0,
+            "total": 41
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107545-killlootbundle-a-arm.json",
+          "seed": 107545,
+          "takes": {
+            "scholar": 89,
+            "villager": 0,
+            "total": 89
+          },
+          "gunCellTakes": 2,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107546-killlootbundle-a-arm.json",
+          "seed": 107546,
+          "takes": {
+            "scholar": 87,
+            "villager": 0,
+            "total": 87
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107547-killlootbundle-a-arm.json",
+          "seed": 107547,
+          "takes": {
+            "scholar": 79,
+            "villager": 0,
+            "total": 79
+          },
+          "gunCellTakes": 1,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107548-killlootbundle-a-arm.json",
+          "seed": 107548,
+          "takes": {
+            "scholar": 65,
+            "villager": 0,
+            "total": 65
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        }
+      ]
+    },
+    {
+      "band": "rearm-arm",
+      "rearm": true,
+      "files": 16,
+      "takes": {
+        "scholar": 965,
+        "villager": 0,
+        "total": 965,
+        "unclassified": 0
+      },
+      "gunCellTakes": [
+        {
+          "seed": 107539,
+          "day": 61,
+          "itemId": "searcaster",
+          "corpseId": "corpse_57_yws32w",
+          "corpseVid": null,
+          "corpseKind": "non-person",
+          "toKind": "scholar"
+        },
+        {
+          "seed": 107545,
+          "day": 78,
+          "itemId": "searcaster",
+          "corpseId": "corpse_77_l7wx6m",
+          "corpseVid": "elena_petrova",
+          "corpseKind": "person",
+          "toKind": "scholar"
+        },
+        {
+          "seed": 107545,
+          "day": 78,
+          "itemId": "fusion_cell",
+          "corpseId": "corpse_77_l7wx6m",
+          "corpseVid": "elena_petrova",
+          "corpseKind": "person",
+          "toKind": "scholar"
+        },
+        {
+          "seed": 107547,
+          "day": 116,
+          "itemId": "fusion_cell",
+          "corpseId": "corpse_116_qktyy9",
+          "corpseVid": "yuki_mori",
+          "corpseKind": "person",
+          "toKind": "scholar"
+        }
+      ],
+      "rearmTakes": [
+        {
+          "seed": 107535,
+          "day": 114,
+          "taker": "olivia_bennett",
+          "corpseVid": "adaeze_nwosu",
+          "corpseId": "corpse_114_eegctm",
+          "kind": "second-life",
+          "gun": true,
+          "cells": 2,
+          "channel": "haven"
+        },
+        {
+          "seed": 107542,
+          "day": 116,
+          "taker": "sigrun_eiriksdottir",
+          "corpseVid": "emma_larsen",
+          "corpseId": "corpse_115_d0ousz",
+          "kind": "second-life",
+          "gun": true,
+          "cells": 2,
+          "channel": "haven"
+        },
+        {
+          "seed": 107543,
+          "day": 136,
+          "taker": "gen_b4uk4mq",
+          "corpseVid": "oliver_moore",
+          "corpseId": "corpse_136_2kwoan",
+          "kind": "second-life",
+          "gun": true,
+          "cells": 2,
+          "channel": "haven"
+        },
+        {
+          "seed": 107548,
+          "day": 100,
+          "taker": "amina_diallo",
+          "corpseVid": "olivia_bennett",
+          "corpseId": "corpse_99_2qg8z6",
+          "kind": "second-life",
+          "gun": true,
+          "cells": 2,
+          "channel": "haven"
+        }
+      ],
+      "rearmByChannel": {
+        "haven": 4
+      },
+      "instrumentErrors": 0,
+      "wall": {
+        "seeds": 16,
+        "wins": 0,
+        "national": 0,
+        "wave5": 11,
+        "wave4": 16,
+        "medianSurvival": 150,
+        "maxSurvival": 150,
+        "villagesLost": 8,
+        "totalDeaths": 1574
+      },
+      "crossCheck": {
+        "filesMatch": true,
+        "takesMatch": true,
+        "scholarMatch": true,
+        "villagerMatch": true,
+        "gunCellMatch": true,
+        "rearmMatch": true,
+        "expected": {
+          "files": 16,
+          "takes": 965,
+          "scholar": 965,
+          "villager": 0,
+          "gunCellTakes": 4,
+          "rearmTakes": 4
+        },
+        "observed": {
+          "files": 16,
+          "takes": 965,
+          "scholar": 965,
+          "villager": 0,
+          "gunCellTakes": 4,
+          "rearmTakes": 4
+        },
+        "allMatch": true
+      },
+      "perSeed": [
+        {
+          "file": "killlootbundle-a-s107533-killlootbundle-a-arm.json",
+          "seed": 107533,
+          "takes": {
+            "scholar": 2,
+            "villager": 0,
+            "total": 2
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107534-killlootbundle-a-arm.json",
+          "seed": 107534,
+          "takes": {
+            "scholar": 25,
+            "villager": 0,
+            "total": 25
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107535-killlootbundle-a-arm.json",
+          "seed": 107535,
+          "takes": {
+            "scholar": 56,
+            "villager": 0,
+            "total": 56
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 1
+        },
+        {
+          "file": "killlootbundle-a-s107536-killlootbundle-a-arm.json",
+          "seed": 107536,
+          "takes": {
+            "scholar": 123,
+            "villager": 0,
+            "total": 123
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107537-killlootbundle-a-arm.json",
+          "seed": 107537,
+          "takes": {
+            "scholar": 113,
+            "villager": 0,
+            "total": 113
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107538-killlootbundle-a-arm.json",
+          "seed": 107538,
+          "takes": {
+            "scholar": 51,
+            "villager": 0,
+            "total": 51
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107539-killlootbundle-a-arm.json",
+          "seed": 107539,
+          "takes": {
+            "scholar": 49,
+            "villager": 0,
+            "total": 49
+          },
+          "gunCellTakes": 1,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107540-killlootbundle-a-arm.json",
+          "seed": 107540,
+          "takes": {
+            "scholar": 28,
+            "villager": 0,
+            "total": 28
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107541-killlootbundle-a-arm.json",
+          "seed": 107541,
+          "takes": {
+            "scholar": 48,
+            "villager": 0,
+            "total": 48
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107542-killlootbundle-a-arm.json",
+          "seed": 107542,
+          "takes": {
+            "scholar": 43,
+            "villager": 0,
+            "total": 43
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 1
+        },
+        {
+          "file": "killlootbundle-a-s107543-killlootbundle-a-arm.json",
+          "seed": 107543,
+          "takes": {
+            "scholar": 66,
+            "villager": 0,
+            "total": 66
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 1
+        },
+        {
+          "file": "killlootbundle-a-s107544-killlootbundle-a-arm.json",
+          "seed": 107544,
+          "takes": {
+            "scholar": 41,
+            "villager": 0,
+            "total": 41
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107545-killlootbundle-a-arm.json",
+          "seed": 107545,
+          "takes": {
+            "scholar": 89,
+            "villager": 0,
+            "total": 89
+          },
+          "gunCellTakes": 2,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107546-killlootbundle-a-arm.json",
+          "seed": 107546,
+          "takes": {
+            "scholar": 87,
+            "villager": 0,
+            "total": 87
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107547-killlootbundle-a-arm.json",
+          "seed": 107547,
+          "takes": {
+            "scholar": 79,
+            "villager": 0,
+            "total": 79
+          },
+          "gunCellTakes": 1,
+          "rearmTakes": 0
+        },
+        {
+          "file": "killlootbundle-a-s107548-killlootbundle-a-arm.json",
+          "seed": 107548,
+          "takes": {
+            "scholar": 65,
+            "villager": 0,
+            "total": 65
+          },
+          "gunCellTakes": 0,
+          "rearmTakes": 1
+        }
+      ]
+    }
+  ],
+  "emma": {
+    "seed": 107539,
+    "corpseId": "corpse_86_z6zl89",
+    "deathDay": 86,
+    "deathCause": "the wild",
+    "deathPlayer": true,
+    "lastDay": 149,
+    "gun": 1,
+    "cells": 0,
+    "buried": false,
+    "cvid": "emma_larsen",
+    "pass": true
+  },
+  "totals": {
+    "takes": 2376,
+    "scholar": 2376,
+    "villager": 0,
+    "unclassified": 0,
+    "gunCellTakes": 11,
+    "rearmTakes": 4,
+    "instrumentErrors": 0
+  },
+  "crossCheckAll": true
+}
