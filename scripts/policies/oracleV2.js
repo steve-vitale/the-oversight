@@ -455,10 +455,110 @@ function v2Fight(Game, ctx) {
         return false;
       } catch (e) { return false; }
     };
+    // WAIT-TURN (journey-crisis r287, L1+L2): end the turn with NO move
+    // attempt and NO flee — a wait is not a flee, so ctx.fled is untouched.
+    // Recorded (waitedEdge / waitedClose + a stuckTrace entry) so the panel
+    // can see it. The turn ends; the monster acts; the next turn the range
+    // check runs first, so a monster that closed in gets struck instead.
+    const waitTurn = (why) => {
+      try {
+        ctx['waited_' + why] = (ctx['waited_' + why] || 0) + 1;
+        try { traceStuck(Game, ctx, 'wait-' + why, ctx._closeStuckKey, why); } catch (e) {}
+      } catch (e) {}
+      endTurn();
+      return true;
+    };
+    // STEP-TO-OTHER-EDGE (journey-crisis r287, L1): the outward push from
+    // this edge tile failed (world edge / far-side blockage). The far side
+    // is per WORLD node, not per grid tile — every push in the SAME
+    // direction from any tile of this edge goes to the same world node and
+    // fails the same way. Step to the nearest edge tile whose outward
+    // direction DIFFERS and whose world neighbor exists (map.px/py bounds;
+    // an unknown map is treated as crossable), affordable within moveLeft.
+    // Returns the tile stepped to, or null.
+    const stepToOtherEdge = (failedDirs) => {
+      try {
+        const q = Game.tbFighter('p');
+        const mv = q ? (q.moveLeft || 0) : 0;
+        if (mv <= 0) return null;
+        const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
+        const gmax = (typeof Game.tbGridMax === 'function') ? Game.tbGridMax() : 8;
+        let mapPx = null, mapPy = null;
+        try { mapPx = Game.map ? Game.map.px : null; mapPy = Game.map ? Game.map.py : null; } catch (e) {}
+        const crossable = (dir) => {
+          if (dir === 'w') return mapPx == null || mapPx > 0;
+          if (dir === 'e') return mapPx == null || mapPx < 8;
+          if (dir === 'n') return mapPy == null || mapPy > 0;
+          if (dir === 's') return mapPy == null || mapPy < 8;
+          return true;
+        };
+        const cands = [];
+        for (let x = 0; x <= gmax; x++) { cands.push([x, 0, 'n']); cands.push([x, gmax, 's']); }
+        for (let y = 1; y < gmax; y++) { cands.push([0, y, 'w']); cands.push([gmax, y, 'e']); }
+        let bestTile = null, bestPath = null, bestCost = Infinity;
+        for (const [tx, ty, dir] of cands) {
+          if (tx === px && ty === py) continue;
+          if (failedDirs.indexOf(dir) >= 0) continue;
+          if (!crossable(dir)) continue;
+          let path = null;
+          try { path = Game.findPath(px, py, tx, ty); } catch (e) {}
+          if (!path || !path.length) continue;
+          let cost = 0;
+          try { for (const [cx, cy] of path) cost += (typeof Game.tbTerrainCost === 'function' ? Game.tbTerrainCost(cx, cy) : 1); } catch (e) { cost = path.length; }
+          if (cost <= mv && cost < bestCost) { bestCost = cost; bestTile = [tx, ty]; bestPath = path; }
+        }
+        if (!bestTile) return null;
+        return stepAlong(bestPath);
+      } catch (e) { return null; }
+    };
     const flee = (why) => {
       try {
-        const px = p.mx != null ? p.mx : 4, py = p.my != null ? p.my : 4;
-        if (px === 0 || px === 8 || py === 0 || py === 8) pushThrough();
+        const gmax = (typeof Game.tbGridMax === 'function') ? Game.tbGridMax() : 8;
+        const q0 = Game.tbFighter('p');
+        const px = q0 ? (q0.mx != null ? q0.mx : 4) : 4, py = q0 ? (q0.my != null ? q0.my : 4) : 4;
+        const onEdge = (px === 0 || px === gmax || py === 0 || py === gmax);
+        // EDGE-EXIT (journey-crisis r287, L1): the player already stands on
+        // an edge tile. The push is the exit — try it first. tbBarrierExit
+        // returns true for a CONSUMED attempt (sealed / world edge /
+        // blockage) as well as a real exit, so the fight state, not the
+        // return value, decides whether the fight ended. If the push
+        // failed, never path to the player's own tile (the r278 stall:
+        // cheapest path length 1, flee falls to the old target — its own
+        // tile — and fails 100+ times a day). With no movement left,
+        // wait; with movement, step to a different edge and try its push.
+        if (onEdge) {
+          pushThrough();
+          if (!Game.tbfight || Game.tbfight.over) {
+            ctx.fled = (ctx.fled || 0) + 1;
+            ctx['fled_' + why] = (ctx['fled_' + why] || 0) + 1;
+            endTurn();
+            return true;
+          }
+          const failedDirs = [];
+          if (px === 0) failedDirs.push('w');
+          if (px === gmax) failedDirs.push('e');
+          if (py === 0) failedDirs.push('n');
+          if (py === gmax) failedDirs.push('s');
+          const mv = q0 ? (q0.moveLeft || 0) : 0;
+          if (mv <= 0) return waitTurn('edge');
+          const stepped = stepToOtherEdge(failedDirs);
+          if (!stepped) return waitTurn('edge');
+          pushThrough();
+          if (!Game.tbfight || Game.tbfight.over) {
+            ctx.fled = (ctx.fled || 0) + 1;
+            ctx['fled_' + why] = (ctx['fled_' + why] || 0) + 1;
+            endTurn();
+            return true;
+          }
+          // Stepped to a new edge but its push also failed: the turn's
+          // movement is spent on a real search, not a failed own-tile
+          // move. Fall through to the fled count below (a flee was
+          // attempted, honestly) — no further move this turn.
+          ctx.fled = (ctx.fled || 0) + 1;
+          ctx['fled_' + why] = (ctx['fled_' + why] || 0) + 1;
+          endTurn();
+          return true;
+        }
         if (Game.tbfight && !Game.tbfight.over && Game.tbIsPlayerTurn()) {
           // NEAREST-AFFORDABLE-EDGE (journey-crisis r274, FIX 2 for the
           // r264 FIGHT-STALL NO-GO): aim at the cheapest edge tile whose
@@ -467,17 +567,18 @@ function v2Fight(Game, ctx) {
           // tile is affordable, walk as far along the cheapest edge's
           // path as moveLeft allows instead of failing in place against
           // the old target — the fighter walks toward the exit turn by
-          // turn. Only when no step at all is affordable does the flee
-          // fall back to the old target (it fails honestly, and the
-          // fight is reported as a stall — the bar is not gamed).
-          const gmax = (typeof Game.tbGridMax === 'function') ? Game.tbGridMax() : 8;
+          // turn. NO-OWN-TILE (journey-crisis r287, L1): when no step at
+          // all is affordable — or no path exists — the flee WAITS
+          // instead of falling back to the old target (its own tile when
+          // the player stands on it, or an unreachable tile). A wait is
+          // recorded, never counted as a flee.
           const ce = cheapestEdge();
           if (ce.best) { try { Game.tbPlayerMove(ce.best[0], ce.best[1]); } catch (e) {} }
           else if (ce.cheapestPath && ce.cheapestPath.length > 1) {
             const stepped = stepAlong(ce.cheapestPath);
-            if (!stepped) { const tx = px <= 4 ? 0 : gmax; try { Game.tbPlayerMove(tx, py); } catch (e) {} }
+            if (!stepped) return waitTurn('edge');
           }
-          else { const tx = px <= 4 ? 0 : gmax; try { Game.tbPlayerMove(tx, py); } catch (e) {} }
+          else { return waitTurn('edge'); }
           pushThrough();
         }
         ctx.fled = (ctx.fled || 0) + 1;
@@ -495,7 +596,7 @@ function v2Fight(Game, ctx) {
       // the same monster on the same day keeps the count (spool-replay /
       // influencer churn, r262). A new monster set or a new day restarts it.
       const _sk = stuckKey(Game, f);
-      if (ctx._closeStuckKey !== _sk) { ctx._closeStuck = 0; ctx._closeStuckKey = _sk; }
+      if (ctx._closeStuckKey !== _sk) { ctx._closeStuck = 0; ctx._fleeFailedGeo = null; ctx._closeStuckKey = _sk; }
       // STUCK-TRACE (journey-crisis r264, record-only): log the fight-start
       // key + counter so the panel can see whether the key churns inside a
       // stall day or holds while the counter resets elsewhere.
@@ -572,6 +673,21 @@ function v2Fight(Game, ctx) {
           const dd = Math.max(Math.abs(cx - px), Math.abs(cy - py));
           if (dd < bd) { bd = dd; bx = cx; by = cy; }
         }
+        // NO-REPEAT-GEOMETRY (journey-crisis r287, L2): the close and the
+        // flee have both already failed at THIS geometry (same player tile,
+        // same monster tile) — retrying the same failed close against
+        // unchanged ground is what burned 100+ calls a day on the r278
+        // stall days. Wait instead: the monster acts, and if it moves (or
+        // the player moves) the geometry changes and the close is tried
+        // again. The wait is recorded; the strike path still runs first
+        // on any turn the monster comes in range.
+        try {
+          const _fg = ctx._fleeFailedGeo;
+          if (_fg && _fg.px === px && _fg.py === py && _fg.tmx === tmx && _fg.tmy === tmy) {
+            ctx._turnN = (ctx._turnN || 0) + 1;
+            return waitTurn('close');
+          }
+        } catch (e) {}
         // UNREACHABLE-FLEE (journey-crisis r262): the radio-mimic stall
         // (r261 panel seed 14584 d27) — the target sits across unpathable
         // ground, findPath fails every turn, and the policy retried the
@@ -595,7 +711,17 @@ function v2Fight(Game, ctx) {
           traceStuck(Game, ctx, 'inc', ctx._closeStuckKey);
           if (ctx._closeStuck >= 3) {
             traceStuck(Game, ctx, 'flee', ctx._closeStuckKey);
-            if (!fleeBlocked('unreachable')) return flee('unreachable');
+            if (!fleeBlocked('unreachable')) {
+              // L2: a flee at this geometry already failed once (the stuck
+              // counter survived the last flee — it resets only on a move,
+              // a strike, or an alt-close) — record the geometry so the
+              // next turn waits instead of re-fleeing. The FIRST flee at a
+              // geometry is the probe and is never gated.
+              try {
+                if ((ctx._closeStuck || 0) > 3) ctx._fleeFailedGeo = { px: px, py: py, tmx: tmx, tmy: tmy };
+              } catch (e) {}
+              return flee('unreachable');
+            }
             // r278 FIX 2: in a sealed arena the flee cannot disengage,
             // so close instead — try the target's other adjacent tiles
             // and step along the first reachable path. A successful step
@@ -605,11 +731,13 @@ function v2Fight(Game, ctx) {
             if (altClose(tgt)) {
               traceStuck(Game, ctx, 'reset', ctx._closeStuckKey, 'altclose');
               ctx._closeStuck = 0;
+              ctx._fleeFailedGeo = null;
             }
           }
         } else {
           if (ctx._closeStuck) traceStuck(Game, ctx, 'reset', ctx._closeStuckKey, _moved ? 'moved' : 'inrange');
           ctx._closeStuck = 0;
+          ctx._fleeFailedGeo = null;
         }
         endTurn();
         ctx._turnN = (ctx._turnN || 0) + 1;
@@ -623,6 +751,7 @@ function v2Fight(Game, ctx) {
     if (abilKey && fire(Game, ctx, abilKey, tgt.key)) {
       if (ctx._closeStuck) traceStuck(Game, ctx, 'reset', ctx._closeStuckKey, 'ability');
       ctx._closeStuck = 0;
+      ctx._fleeFailedGeo = null;
       ctx._turnN = turnN + 1;
       endTurn();
       return true;
@@ -630,6 +759,7 @@ function v2Fight(Game, ctx) {
     try { Game.tbPlayerStrike(tgt.key); ctx.struck = (ctx.struck || 0) + 1; } catch (e) {}
     if (ctx._closeStuck) traceStuck(Game, ctx, 'reset', ctx._closeStuckKey, 'strike');
     ctx._closeStuck = 0;
+    ctx._fleeFailedGeo = null;
     ctx._turnN = turnN + 1;
     endTurn();
     return true;
