@@ -191,6 +191,8 @@
       'up:warm': [
         'Something eases in their shoulders. They\'re really talking to you now.',
         'A warmth settles over the conversation — they lean in a little.',
+        'Their hands stop fidgeting. Whatever they were holding back, they\'re letting it out now.',
+        'A laugh escapes them — short, surprised, real. The guard drops a notch.',
       ],
       'up:friendly': [
         'They relax, a fraction. This is going well.',

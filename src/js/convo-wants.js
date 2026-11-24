@@ -128,17 +128,19 @@
           `I haven't eaten right in days.`,
           `It's been ${sev >= 2 ? 'too long' : 'days'} since a real meal.`,
           `My stomach's been empty so long I've stopped feeling it, and that's worse.`,
+          `My ribs have started showing through my shirt.`,
         ];
         const whyTails = [
           `I can't pull my weight like this. Anything you can spare, I'll make it stretch.`,
           `I'm slowing down — stupid, clumsy. Help me get back on my feet.`,
           `I need food before I can't work at all.`,
+          `Even a handful of anything would get me through the day.`,
         ];
         let whyIndex = (hh >>> 1) % whyBits.length;
-        let whyLine = '"' + whyBits[whyIndex] + ' ' + whyTails[(hh >>> 5) % 3] + '"';
+        let whyLine = '"' + whyBits[whyIndex] + ' ' + whyTails[(hh >>> 5) % whyTails.length] + '"';
         if (previous && previous.kind === 'food_share' && previous.whyLine === whyLine) {
           whyIndex = (whyIndex + 1) % whyBits.length;
-          whyLine = '"' + whyBits[whyIndex] + ' ' + whyTails[(hh >>> 5) % 3] + '"';
+          whyLine = '"' + whyBits[whyIndex] + ' ' + whyTails[(hh >>> 5) % whyTails.length] + '"';
         }
         return {
           task: `share food with ${ctx.name} \u2014 they're ${hungerWord}`,

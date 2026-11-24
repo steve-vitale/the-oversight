@@ -1649,11 +1649,13 @@
     // the transcript line for a plant lesson was ONE fixed frame ("This
     // one — X. Leaf, stem, smell..."), so a teach-heavy sitting repeated
     // it verbatim with only the plant swapped (panel: 7x in one sitting).
-    // Four frames now, picked by FRAME-INDEX rotation on the villager's
-    // convo state: convoPick dedupes by TEXT, which can never see a frame
+    // Eight frames now (r283: the 4-frame pool cycled inside one sitting
+    // — Ines taught 11 plants, frames 0 x3, 1 x3, 2 x2, 3 x3 — so the
+    // pool widened instead of the rotation being repaired), picked by
+    // FRAME-INDEX rotation on the villager's convo state: convoPick dedupes by TEXT, which can never see a frame
     // repeat (the plant differs each time), so the used frame indices are
     // tracked instead — an unused frame is picked at random, and the pool
-    // resets only once all four have been used. One sitting never repeats
+    // resets only once all eight have been used. One sitting never repeats
     // a frame until the pool cycles. The plant name stays in every frame
     // — the lesson stays specific. Falls back to the original frame when
     // the convo state is unavailable. (The narration line, teachPlantLine
@@ -1666,6 +1668,10 @@
         `"${plant} — crush the leaf, smell it, taste the stem. That's how you know it."`,
         `"This one is ${plant}. Look at the leaf, feel the stem, breathe it in. It'll stick."`,
         `"${plant}. Remember the leaf, the stem, the smell — that's the whole of it."`,
+        `"See how ${plant} grows — low, where the damp holds. That's the first thing to learn about it."`,
+        `"${plant} — the root's the honest part. Dig a little and you'll know it anywhere."`,
+        `"${plant}. Crush it between your fingers first — the smell tells you before the taste does."`,
+        `"This is ${plant}. The leaf tells you the season, the stem tells you the ground. Learn both."`,
       ];
       let used = null;
       try {
@@ -1684,10 +1690,12 @@
     // the transcript line for a place lesson was ONE fixed frame ("<place>
     // — I'll show you on the map sometime. It's real."), so a sitting with
     // two place lessons repeated it verbatim with only the place swapped
-    // (r130: Brooklyn d45, 2x in one sitting). Four frames now, picked by
-    // FRAME-INDEX rotation on the villager's convo state — the same shape
+    // (r130: Brooklyn d45, 2x in one sitting). Eight frames now (r283:
+    // same pool-cycling cause as the plant pool — the 4-frame pool cycled
+    // inside teach-heavy sittings), picked by FRAME-INDEX rotation on the
+    // villager's convo state — the same shape
     // as convoTeachPlantLine (r125): an unused frame is picked at random,
-    // and the pool resets only once all four have been used. One sitting
+    // and the pool resets only once all eight have been used. One sitting
     // never repeats a frame until the pool cycles. The place name stays in
     // every frame — the lesson stays specific. The four wordings are the
     // ones the r129/r130 analyzer already normalizes (PLACE_FRAME_PATTERNS).
@@ -1701,6 +1709,10 @@
         `"${place} — I'll mark it on your map when we're back. It's real, I've stood there."`,
         `"${place} — walk it with me sometime and you'll know the ground. It's real."`,
         `"${place} — remember the shape of it. It's real, and it's worth knowing."`,
+        `"${place} — I know it by the sound of it, the way the wind moves through. You'll hear it too."`,
+        `"When you reach ${place}, look for the high ground first. That's how you find your way back."`,
+        `"${place} — it's a half-day's walk when your legs are fresh, longer when they're not. Pace yourself."`,
+        `"I stood at ${place} in the rain once. It's real — wet, cold, and worth the walk."`,
       ];
       let used = null;
       try {

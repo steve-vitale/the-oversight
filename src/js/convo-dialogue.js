@@ -877,11 +877,41 @@
           if (warned) {
             line = warned;
           } else {
-            line = this.convoPickCycle(vid, 'dlg:heed:lines', [
+            // HEED-GENERIC POOL (journey-social-life r283, Arm B): the
+            // 3-line pool dried in the wild (r277 panel, seed 45846: the
+            // picked line was run-ledger-blocked and sayLine dry-replaced
+            // it with "...Sorry, lost my train of thought."). Six lines
+            // now, originals first; each candidate is pre-checked with
+            // convoWouldBlock and the first unblocked one speaks (r19
+            // opener / r193 closer pattern — the rotation still walks
+            // via convoPickCycle, so variety across sittings is kept).
+            // If ALL generic lines are blocked, fall back to
+            // convoWantWarning — a fresh warning variant,
+            // rotation-guarded, never the just-delivered line since the
+            // cursor advanced past it — instead of the dry line. Last
+            // resort is pool[0], which sayLine dries honestly only when
+            // every variant in both pools is blocked at once.
+            const heedPool = [
               '"Good. I mean it — watch yourself out there."',
               '"Promise me that. Please."',
               '"Thank you. I needed to hear you say it."',
-            ]) || '"Good. I mean it — watch yourself out there."';
+              '"Good. That\'s all I wanted — someone out there who comes back."',
+              '"Alright. I\'ll stop hovering. Just — come back, yes?"',
+              '"Good. The fire\'s warmer with you beside it, that\'s all."',
+            ];
+            line = null;
+            for (let hi = 0; hi < heedPool.length; hi++) {
+              let cand = null;
+              try { cand = this.convoPickCycle(vid, 'dlg:heed:lines', heedPool); } catch (e) { cand = null; }
+              if (!cand) break;
+              try { if (typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, cand)) continue; } catch (e) {}
+              line = cand;
+              break;
+            }
+            if (!line) {
+              try { if (typeof this.convoWantWarning === 'function') line = this.convoWantWarning(vid); } catch (e) { line = null; }
+            }
+            if (!line) line = heedPool[0];
           }
           const said = this.sayLine(vid, line, { tag: 'warning', fallback: () => this.convoSelfRepeatLine(vid) });
           if (warned && said) c._warnDelivered = true;
