@@ -604,7 +604,43 @@ already-on-edge trap) — but the bar is the bar. Next levers named
 above (edge-tile exit, close give-up, disengage, recap/closer
 agreement).
 
-## Gate — PENDING (this finisher, on the rebased tip)
+## Gate — 339 passed, 5 failed in 679s, 0 attributable
 
-## Closeout — PENDING
+On the rebased tip `0ebfffe1b` (base master `88d63d9fc`):
+`node scripts/check.js --quick --cacheDirectory=/tmp/jest-cache-playtest2`.
+Log: goal `hidden_files/check-quick-r278-rebased.log`.
+
+Failures (all 5 adjudicated, 0 attributable):
+1. `test-measurement-proof-update.js` — "Proof source inputs are not
+   current" (balance-proof manifest vs retained panel).
+2. `test-measurement-workflow.js` — "retained neutrality proof covers
+   the current Game/controller/harness inputs" (same manifest
+   comparison).
+3. `test-phone-frame-proof.js` — retained browser inputs stale:
+   index.html, alienPlayers.json, build-notes.json, foreignSpeech.json,
+   regions.json, statusEffects.js.
+4. `test-living-garden-deed-attainment.js` — TIMEOUT after 120s.
+5. `test-one-person-army-deed-attainment.js` — TIMEOUT after 120s.
+
+Attribution (verified, not assumed): the retained panel's recorded
+hashes match NEITHER base NOR tip — conversation.js recorded
+`30bcf3c3…` vs base `73081e4e…` vs tip `e7d5b1ff…`; oracleV2.js
+recorded `919da88a…` vs base `4e488e8c…` vs tip `5454f682…`. The
+proof was already stale on master (manifest 534 keys vs panel 532
+sources — the comparison fails on base regardless of this run), so
+failures 1–2 are pre-existing. Failure 3's stale inputs are files
+this run never touched. Failures 4–5 are load timeouts (load 6–7,
+4 parallel; the r277 gate had 9 failures under its load).
+
+Proofs re-run on the rebased tip: fight-levers 15/15, debt-closer
+PASS, r264 stucktrace 16/16, r274 nearest-edge 8/8, r274
+aidallydown 19/19, r263 settled-closer PASS; check-wired
+conversation.js 0 unwired, oracleV2.js 23 unwired (same pre-existing
+count as the 0200Z run).
+
+Telemetry: quiet on both panels (`defendedFights`, 6 after + 3 fresh
+files, no large deviations). Baseline NOT rolled forward — no LOUD
+lines, nothing to investigate.
+
+## Closeout — PENDING (merge + release + rotation in the main session; recorded in the memory log)
 
