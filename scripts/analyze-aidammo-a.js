@@ -581,8 +581,8 @@ function judgeDiag(pair, ammo, ledger) {
   const noSourceDelivers = nonStartingUnits < 10 && (mechRate == null || mechRate < 0.70);
   bars.push({ id: 'dominant-source-or-no-delivery', pass: domOk || noSourceDelivers,
     detail: 'dominant source at entry: ' + (ledger.dominantSource || 'none') + ' share ' + (domShare == null ? 'n/a' : domShare.toFixed(3)) +
-      ' (bar >= 0.50) OR no-source-delivers: non-starting-kit units at entry ' + nonStartingUnits + ' (< 10) AND ammo-at-entry ' +
-      (mechRate == null ? 'n/a' : mechRate.toFixed(3)) + ' (< 0.70) => ' + (noSourceDelivers ? 'PROVEN' : 'not proven') });
+      ' (bar >= 0.50) OR no-source-delivers: non-starting-kit units at entry ' + nonStartingUnits + ' (needs < 10) AND ammo-at-entry ' +
+      (mechRate == null ? 'n/a' : mechRate.toFixed(3)) + ' (needs < 0.70) => ' + (noSourceDelivers ? 'PROVEN' : 'not proven') });
   let verdict = 'DIAG-NO-GO';
   let kind = '';
   if (!poolOk) { verdict = 'DIAG-NO-GO'; kind = 'THIN-POOL'; }
