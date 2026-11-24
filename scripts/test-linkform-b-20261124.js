@@ -215,6 +215,12 @@ ok('provenance ladder-reward: metaProgression caller + stage 2->3 cross, zero pr
   assert.strictEqual(c.firstLinkProvenanceDetail.ladderCross, true);
 });
 
+ok('provenance ladder-reward: stage crosses the DAY BEFORE the link (beat grants next morning)', function () {
+  const c = AN.classifySeed(mkOut({ firstLinkDay: 20, ladderCrossDay: 19, linkEvents: LADDER_LINK_EV }));
+  assert.strictEqual(c.firstLinkProvenance, 'ladder-reward');
+  assert.strictEqual(c.firstLinkProvenanceDetail.ladderCross, true);
+});
+
 ok('provenance raise: formed proposeLink call for the target -> raise', function () {
   const c = AN.classifySeed(mkOut({ firstLinkDay: 20,
     linkEvents: [{ day: 20, target: 'village_0', targetName: 'Emberhold',

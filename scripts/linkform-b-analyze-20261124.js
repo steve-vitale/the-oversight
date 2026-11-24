@@ -79,10 +79,17 @@ function firstLinkProvenance(out, firstLink) {
   });
   const daily = out.daily || [];
   const rowOnDay = daily.filter(function (d) { return d.day === day; })[0] || null;
-  const rowBefore = daily.filter(function (d) { return d.day < day; }).slice(-1)[0] || null;
   const stageOnDay = rowOnDay && rowOnDay.ladder ? (rowOnDay.ladder.stage | 0) : null;
-  const stageBefore = rowBefore && rowBefore.ladder ? (rowBefore.ladder.stage | 0) : null;
-  const ladderCross = (stageBefore != null && stageOnDay != null && stageBefore < 3 && stageOnDay === 3);
+  // The reward rides the ladderStageBeat, which fires the morning
+  // AFTER the rung completes: on the pilot band the stage-3
+  // crossing lands on the link day (2 seeds) or the day before it
+  // (5 seeds). A crossing within one day before the link confirms
+  // the ladder grant; a larger gap leaves it unconfirmed.
+  let firstStage3Day = null;
+  daily.forEach(function (d) {
+    if (d.ladder && (d.ladder.stage | 0) >= 3 && firstStage3Day == null) firstStage3Day = d.day;
+  });
+  const ladderCross = (stageOnDay === 3 && firstStage3Day != null && (day - firstStage3Day) <= 1);
   const caller = linkEv ? (linkEv.caller || null) : null;
   const callerIsLadder = !!(caller && caller.indexOf('metaProgression') !== -1);
   if (proposeFormed.length || acceptForTarget.length) {
