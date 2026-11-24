@@ -651,8 +651,10 @@
   // drops the "after ..." clause rather than inventing one.
   // Fires ONLY from winPlanDepartLaunchBeat, which gates on
   // needWave >= 4 and stamps the day+target BEFORE speaking, so at
-  // most one beat per launch. Fiction only: say() consumes no RNG
-  // and writes only the narration log. Total by construction.
+  // most one beat per launch. The beat speaks (say() consumes no RNG)
+  // and — DEPARTTEACH (sim-departteach-a) — teaches each companion's
+  // name through the overheard channel (revealName 'overheard',
+  // knownNames only); the narration log is no longer the only write.
   function departLaunchBeat(self, vid, launched, target) {
     try {
       if (!self || typeof self.say !== 'function') return;
@@ -680,6 +682,28 @@
       var line = cname + ' sets out' + withClause + afterClause + ' — the fire marks the trail.';
       if (self.state && self.state.systemArrived) self.say('📺 SYSTEM: "' + line + '"');
       else self.say(line);
+      // DEPARTTEACH (sim-departteach-a): the scholar hears each
+      // companion named by true first name in the beat — teach that
+      // name through the overheard channel. revealName writes
+      // knownNames only (the name, no stats/trust/goals), and is a
+      // no-op post-System or when the name is already known, so the
+      // teach can only fire in the pre-System window. The holder is
+      // named by the beat too but is NOT taught here (frozen scope:
+      // companions only); the scholar's own vid is never a
+      // companion. The typeof guard keeps fixture ctxs without
+      // revealName speaking.
+      var partyVids = [];
+      for (var j = 0; j < list.length; j++) {
+        if (!list[j] || list[j] === vid) continue;
+        partyVids.push(list[j]);
+      }
+      if (self && typeof self.revealName === 'function') {
+        for (var k = 0; k < partyVids.length; k++) {
+          var tVid = partyVids[k];
+          if (!tVid || tVid === vid || tVid === self.villagerId) continue;
+          try { self.revealName(tVid, 'overheard'); } catch (e) {}
+        }
+      }
     } catch (e) {}
   }
 
