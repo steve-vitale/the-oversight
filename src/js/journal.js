@@ -1228,7 +1228,11 @@
     if (r) {
       const vp = (this.data.villagers || []).find(x => x.id === vid)
         /* unified: hydrated seeds are in villagers */ || {};
-      const first = (vp.name || 'Someone').split(' ')[0];
+      // CALLEDNAME (sim-calledname-a, 2026-11-24): record what the
+      // scholar actually heard — the use-name when one exists. The old
+      // read of vp.name journaled the true name ("Ashley") while the
+      // drift line says "Ash".
+      const first = (typeof this.npcName === 'function' ? this.npcName(vid) : (vp.name || 'Someone').split(' ')[0]);
       const howText = how === 'overheard' ? 'overheard by the fire' : how === 'gesture' ? 'exchanged in gestures' : 'they told me';
       this.journalLearn(vid, 'name', first, { how: howText });
     }

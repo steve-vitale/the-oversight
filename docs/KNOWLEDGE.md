@@ -25,6 +25,21 @@ that teaches, identifies, or gates on knowledge.
 - **Names are earned**: `identifyPlant` is the one path for plant naming;
   monsters are named by village agreement (`villageName`) or System arrival —
   never by true name on first encounter.
+- **Overheard names are earned too** (2026-11-24, sim-calledname-a): a name
+  spoken in the scholar's hearing teaches it. Two `overheard` callers feed
+  the one channel `revealName(vid, 'overheard')` (game.js): the departure
+  beat (`departLaunchBeat`, win-plan.js — every companion named in the
+  beat) and overheard fireside chat (game.js). Introductions (`intro`)
+  and gestures (`gesture`) teach through the same function
+  (conversation.js, game.js). All of them write the one store,
+  `village.knownNames`, which `nameKnown` / `canShow('npc', vid, 'name')`
+  read; the System's arrival bypasses it at the display layer
+  (`displayName` shows every name once arrived) and makes `revealName`
+  a no-op. Scope is the NAME only: mechanics stays gated on
+  `goalsKnown` / `systemArrived` (`canShow('npc', vid, 'mechanics')`),
+  and the spoken name is the use-name (`npcName`) when one exists, else
+  the true name — so the drift line, the beat line, and the journal's
+  name entry all say the same name.
 - **Wrongness is real**: lessons can be false (`wrongAs`, deliberate or
   honest); handling/tasting/trading truth yourself clears it. The codex is
   honest about disagreement.

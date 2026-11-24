@@ -17798,12 +17798,14 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       const village = this.state.village;
       village.knownNames = village.knownNames || {};
       if (village.knownNames[vid] || this.state.systemArrived) return false;
-      const v = (typeof this.getPerson === 'function' ? this.getPerson(vid) : null)
-        || (this.data.villagers || []).find(x => x.id === vid)
-        /* unified: getPerson */;
-      // NAMELESS (blitz-fightres 2026-10-13): v.name may be missing on old
-      // saves — guard the split (was: "Cannot read properties of undefined").
-      const first = (v && v.name) ? String(v.name).split(' ')[0] : 'Someone';
+      // CALLEDNAME (sim-calledname-a, 2026-11-24): speak the use-name
+      // (npcName) when one exists — the village already calls her Ash,
+      // so the drift line must not speak the true name Ashley. npcName
+      // prefers the bestowed calledName, falls back to the true name,
+      // then 'Someone', so the NAMELESS guard behavior (old saves
+      // without a name) is preserved. The old read of v.name here is
+      // what made the beat say "Ash" and the drift line "Ashley".
+      const first = this.npcName(vid);
       village.knownNames[vid] = true;
       if (how === 'intro') this.say(`"${first}," they say, touching their chest. "I'm ${first}." You'll remember that.`);
       else if (how === 'overheard') this.say(`A name drifts over from the fire: ${first}. That's the ${this.descriptorBase(vid)} — now they have a name.`);
