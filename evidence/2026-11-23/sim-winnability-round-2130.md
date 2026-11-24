@@ -241,3 +241,43 @@ sibling loop A).
 
 Merged df7aedb98 (gatehorizon) + 185a3528b (cellgate) + d3fcf060a (rearm)
 + this record; merged locally, pending ship. Claim deleted; lock deleted.
+
+## Gate — check.js --quick on the shipped tip f5d2c3caa
+
+Ran 2026-11-23T23:59:30Z–2026-11-24T00:16:29Z: **339 passed, 5 failed in 1018s.
+0 attributable.** Log: goal `hidden_files/check-quick-2130-gate.log`;
+standalone re-runs: goal `hidden_files/check-quick-2130-reruns.log`.
+
+- `test-measurement-proof-update.js` (exit 1, 2.9s) — standing staleness
+  ("Proof source inputs are not current"); fails identically standalone
+  (exit 1, 4s). Proof re-sign rounds 11/12/22 still owed.
+- `test-measurement-workflow.js` (exit 1, 2.5s) — standing staleness
+  ("retained neutrality proof covers the current Game/controller/harness
+  inputs"); fails identically standalone (exit 1, 4s).
+- `test-phone-frame-proof.js` (exit 1, 6.3s) — standing staleness (stale
+  receipt: index.html); fails identically standalone (exit 1, 6s).
+- `test-living-garden-deed-attainment.js` (TIMEOUT 120.1s) — load / slow
+  test; passes standalone in 445s (exit 0).
+- `test-one-person-army-deed-attainment.js` (TIMEOUT 120.0s) — load / slow
+  test; passes standalone in 395s (exit 0).
+
+`measurement-cache-flags` PASSED this run (its 0/4 at the 2015Z adoption was
+a load artifact, consistent with that adoption's adjudication).
+
+Attribution: none of the three arm commits touches `src/js` (0 files each)
+or `scripts/godpath/` (0 files each), and their new test files are not in
+the green list — no gate failure can be theirs by construction.
+
+Ship-status correction: the "merged locally, pending ship" line above is
+stale — the batch shipped as version bump `f5d2c3caa` ("Version bump
+3df28e069-20261123-234935") at 23:49Z, before this gate ran. This gate ran
+on the shipped tip.
+
+History: the first gate finisher was blocked by flap windows 19
+(23:28–23:30Z, ~2m) and 20 (23:36–23:49Z, ~13m); its launch died at birth
+on refused writes. A VM replacement ~00:26Z killed the standalone re-run
+script mid living-garden; the two unfinished re-runs were re-run once from
+scratch (part 2, 00:27:41–00:41:41Z). A sibling gate (journey2-social r277)
+ran concurrently from 00:34Z. The 1830Z claim stays retired (.DEAD); the
+`fleshout-loop-b.lock` now holds the live 2322Z run
+(`fleshout-loop-b-20261123T2322Z`, claimed 23:24:12Z) — left alone.
