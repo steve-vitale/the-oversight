@@ -312,6 +312,11 @@ attributable to r284. Log:
 
 - Run note written: evidence/2026-11-24/journey-landing-r284.md (this file).
 - Telemetry check: quiet (see above).
-- Gate: [PENDING]
-- Commit: [PENDING]
+- Gate: 336 passed, 8 failed in 1244s — standing 5 (pre-existing) + 3
+  load flakes, all three re-run green standalone (cache-flags 4/4,
+  trust-observer-neutrality 6/6, capable-bot 40/40). 0 attributable.
+- Commit: `10e88df1` (4 files). Safe-commit index clobber struck after
+  the commit (4 files staged-deleted in the main index, commit
+  correct); repaired with `git ls-tree -r HEAD | git update-index
+  --add --index-info` — status empty, `git diff HEAD` empty, 0 deleted.
 - Merge / rotation / release / lock: [PENDING]
