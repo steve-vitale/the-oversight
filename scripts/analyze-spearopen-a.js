@@ -95,7 +95,7 @@ function ammoCapable(rid, defs) {
   const w = ((defs[rid] || {}).weapon) || null;
   return !!(w && w.ammo);
 }
-const DRY_RE = /but no (arrows|stones|bolts|fusion cells)/i;
+const DRY_RE = /but no (?:\w+ )?(arrows|stones|bolts|fusion cells)/i; // "but no crossbow bolts" carries the weapon word first
 function dryLineOf(log) {
   for (const ln of (log || [])) {
     const m = DRY_RE.exec(String(ln));
@@ -378,15 +378,18 @@ function selftest() {
       // fight, so no opening was possible (counted evaded, never
       // unattributed, excluded from the opening denominators)
       { day: 28, vid: 'h1', mid: 'eulogy', wave: 4, origin: 'expedition', outcome: 'evade', rounds: 0, mDealt: 0, rangedId: 'bow', ammoAtEntry: 5, volley: null, allyKit: [], log: ['Holly saw The Eulogy in time and gave it room.'] },
+      // crossbow blocked, empty quiver, dry line narrated ("no crossbow bolts" — weapon word first)
+      { day: 29, vid: 'h1', mid: 'audit', wave: 4, origin: 'aid', outcome: 'vFlee', rounds: 2, mDealt: 22, rangedId: 'crossbow', ammoAtEntry: 0, volley: { shots: 0, hits: 0, dmg: 0, ammoLeft: 0 }, allyKit: [], log: ['Holly has Crossbow but no crossbow bolts — the crank clicks on nothing.'] },
     ],
   });
   fs.writeFileSync(path.join(dir, 's1.json'), JSON.stringify(seed));
   const st = spearStats(dir);
-  check('encounters 9, rangedAll 8, engaged ranged 7 (evade + no-kit excluded)', st.encounters === 9 && st.rangedAll === 8 && st.ranged === 7, JSON.stringify({ e: st.encounters, ra: st.rangedAll, r: st.ranged }));
+  check('encounters 10, rangedAll 9, engaged ranged 8 (evade + no-kit excluded)', st.encounters === 10 && st.rangedAll === 9 && st.ranged === 8, JSON.stringify({ e: st.encounters, ra: st.rangedAll, r: st.ranged }));
   check('evaded 1 (the bow evade), evadedSpear 0', st.evaded === 1 && st.evadedSpear === 0, JSON.stringify({ e: st.evaded, s: st.evadedSpear }));
   check('bow evaded count 1, bow entries still 3 engaged', st.volleyDmgByClass.bow.evaded === 1 && st.volleyDmgByClass.bow.entries === 3, JSON.stringify(st.volleyDmgByClass.bow));
-  check('spear carriers 2 of 7 ranged (share 0.286)', st.spearCarriers === 2 && Math.abs(st.spearShare - 2 / 7) < 1e-9, JSON.stringify({ s: st.spearCarriers, sh: st.spearShare }));
-  check('attribution 6/7 (the null-volley bow is unattributed)', st.attributionComplete === 6 && Math.abs(st.attributionCompleteness - 6 / 7) < 1e-9, JSON.stringify({ a: st.attributionComplete, c: st.attributionCompleteness }));
+  check('crossbow dry line found despite the weapon word ("no crossbow bolts")', st.volleyDmgByClass.crossbow.dryLines === 1 && st.volleyDmgByClass.crossbow.blocked === 1, JSON.stringify(st.volleyDmgByClass.crossbow));
+  check('spear carriers 2 of 8 ranged (share 0.25)', st.spearCarriers === 2 && Math.abs(st.spearShare - 2 / 8) < 1e-9, JSON.stringify({ s: st.spearCarriers, sh: st.spearShare }));
+  check('attribution 7/8 (the null-volley bow is unattributed)', st.attributionComplete === 7 && Math.abs(st.attributionCompleteness - 7 / 8) < 1e-9, JSON.stringify({ a: st.attributionComplete, c: st.attributionCompleteness }));
   check('spear volley fire rate 0/2', st.spearFired === 0 && st.spearVolleyFireRate === 0, JSON.stringify({ f: st.spearFired, r: st.spearVolleyFireRate }));
   check('spear ammo-gate share 2/2 (both spears lack ammo def, 0 held)', st.spearAmmoGate === 2 && Math.abs(st.spearAmmoGateShare - 1) < 1e-9, JSON.stringify({ g: st.spearAmmoGate, s: st.spearAmmoGateShare }));
   check('bow volley dmg 34 total; sling 18', st.volleyDmgByClass.bow.dmg === 34 && st.volleyDmgByClass.sling.dmg === 18, JSON.stringify(st.volleyDmgByClass));
