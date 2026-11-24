@@ -4448,6 +4448,25 @@
           s2.equipped = s2.equipped || {};
           // modern slots (the legacy .weapon slot is read by nothing live)
           const wslot = (globalThis.Scattering.equipment && globalThis.Scattering.equipment.isRangedWeapon(def)) ? 'ranged' : 'melee';
+          // WORN-ONLY RETURN (sim-worngun-reseat-b, finding: a worn-only gun
+          // is destroyed by the next re-seat): the slot's current occupant
+          // may live ONLY in equipped — mantleBecome seats the successor's
+          // worn gun with no inventory entry behind it, and the scholar's
+          // worn items are not in the pack by convention. Overwriting the
+          // slot here used to delete that piece outright (s107756 d44,
+          // s107751 d151: a searcaster vanished when a hunting_spear was
+          // granted). The displaced piece goes back to the pack, the same
+          // #806 honest-accounting return Game.equip performs — units and
+          // bonded/alienLoot flags travel with it.
+          const _displaced = s2.equipped[wslot] || null;
+          if (_displaced && _displaced.itemId) {
+            const _dd = (this.data.items || []).find(i => i.id === _displaced.itemId) || {};
+            s2.inventory.push({ itemId: _displaced.itemId,
+              name: _displaced.name || _dd.name || _displaced.itemId, units: (_displaced.units || 1), kcalEach: 0, kg: 0.5,
+              ...(_displaced.bonded ? { bonded: true, bond: _displaced.bond || 0,
+                bondOffered: _displaced.bondOffered || [], enhancements: _displaced.enhancements || [] } : {}),
+              ...(_displaced.alienLoot ? { alienLoot: true, alienEffectHidden: _displaced.alienEffectHidden } : {}) });
+          }
           s2.equipped[wslot] = { itemId: def.id, name: def.name };
           // GEAR DISCOVERY (Steve 2026-10-09; backlog #698, 2026-10-20):
           // equipping teaches the recipe L1 — same canonical hook as the
