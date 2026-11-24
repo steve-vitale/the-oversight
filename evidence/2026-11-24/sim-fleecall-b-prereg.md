@@ -16,7 +16,7 @@ at 21:11Z).
 > (`scripts/analyze-fleecall-b.js`, 27,646 B) and proof test
 > (`scripts/test-fleecall-b.js`, 13,385 B) were NOT preserved and must
 > be re-derived from this prereg on landing. Commit order on landing:
-> prereg first (fill in its commit hash here), then instrument, then
+> prereg first (this commit: 65fe2264273aeac9987b61fa0a8fc0cef9cb3898), then instrument, then
 > evidence.
 
 ## Question
