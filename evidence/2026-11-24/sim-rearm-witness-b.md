@@ -1,6 +1,6 @@
 # sim-rearm-witness-b — wild-corpse expedition witness-channel re-arm (PARTIAL PILOT)
 
-**Status: INCONCLUSIVE on the frozen bars (partial pilot, 9/16 seeds). Pilot NOT complete — 7 seeds re-running detached. No GO / NO-GO is licensed by the prereg.**
+**Status: NO-GO on the frozen bars (full pilot, 16/16 seeds — see §11). The partial-pilot INCONCLUSIVE verdict in §6 is superseded; the pilot completed after this file was first written.**
 
 - Run: fleshout-loop-b-20261124T0230Z, axis winnability-chain, arm sim-rearm-witness-b.
 - Adoption of the dead run fleshout-loop-b-20261123T2322Z (its worker did nothing).
@@ -84,15 +84,44 @@ No wins in either leg. maxWave 4 everywhere; standing 199 (regional) everywhere;
 
 - Prereg: `evidence/2026-11-24/sim-rearm-witness-b-prereg.md`
 - Evidence (this file): `evidence/2026-11-24/sim-rearm-witness-b.md`
-- Pilot corpora (9 files): `evidence/2026-11-21/perseed-rearm-witness-b-ctl/` (5), `evidence/2026-11-21/perseed-rearm-witness-b-arm/` (4)
-- Analyses: `evidence/2026-11-24/rearm-witness-b-pilot-ctl-analysis.json`, `rearm-witness-b-pilot-arm-analysis.json`, `rearm-witness-b-pilot-rearm-compare.json`
+- Pilot corpora (16 files, complete): `evidence/2026-11-21/perseed-rearm-witness-b-ctl/` (8), `evidence/2026-11-21/perseed-rearm-witness-b-arm/` (8)
+- Analyses: `evidence/2026-11-24/rearm-witness-b-pilot-*-analysis.json` + `rearm-witness-b-pilot-rearm-compare.json` (partial 9-seed, superseded) and `rearm-witness-b-full-*-analysis.json` + `rearm-witness-b-full-rearm-compare.json` (full 16-seed)
 - Leg logs: `evidence/2026-11-24/rearm-witness-b-legs-pilot-ctl-1.log`, `ctl-1b.log`, `ctl-2.log`, `arm-1.log`, `arm-2.log`, `ctl-3.log`, `arm-3.log` (last two: the relaunched finish-up, running at commit time)
 - Mechanism + instrument: commit `2298a7311` (8 files, 1104 insertions)
 
-## 10. What remains
+## 11. FULL PILOT — complete 16-seed verdict (added ~04:40Z, supersedes §6)
 
-1. Wait for the 2 detached finish-up processes (pids 16978/16979) — 7 seeds. Do NOT relaunch: if they die, check the logs first (OOM suspected; run fewer parallel drivers next time).
-2. Re-run the analyzer + compare on the full 16-seed corpora; apply the frozen pilot continue rule (8+8, supply ≥ 1, expedition takes ≥ 1).
-3. If pilot continues: remaining confirm is nil — the pilot IS the staged band (16 seeds); go straight to the full analysis (analyzer per leg, compare, tier tally, panel build, per-seed staged table, sense-test, scale-wall numbers) and write the full evidence verdict (GO/NO-GO/INCONCLUSIVE) as a follow-up section or a new evidence file.
-4. If the full pilot shows supply ≥ 1 with 0 expedition takes → NO-GO, kill the arm, no confirm spend beyond the pilot.
-5. Closeout: convergence tracker update (this axis only), claim/lock deletion per coordinator, memory run note.
+The two detached finish-up processes (pids 16978/16979) completed all 7 remaining seeds. The pilot corpora are now complete: **8 seeds/leg, 16 total** (ctl 107734–107741, arm 107734–107741). Analyzer `--rearm-witness-compare` on the full corpora:
+
+| metric | ctl (8) | arm (8) |
+|---|---|---|
+| supplyDeaths / wild | 1 / 1 | 1 / 1 |
+| rearmEvents (all channels) | 0 | **3** (2 expedition + 1 haven) |
+| expeditionRearmEvents | 0 | **2** |
+| expeditionRearmVolleys | 0 | **0** |
+| starvDeaths | 1 | 1 |
+| median survival (gameDays) | 145.5 | 142 |
+
+Per-seed (analyzer days / end / maxWave / standing): ctl 107734 102 lost w4 199; 107735 150 survived w4 199; 107736 150 survived w4 199; 107737 149 survived w5 350; 107738 132 lost w4 199; 107739 99 lost w4 199; 107740 151 survived w4 199 (the starvation death); 107741 142 survived w5 515. Arm is identical except 107735 150 survived (haven take day 122), 107737 150 survived w5 430 (expedition take day 73), 107741 134 lost w5 485 (expedition take day 97). (Note: the analyzer judges survival on `gameDays`; the raw per-seed `days` field reads up to 8 days higher — s107741 ctl 150, arm 144. Same field rearm-b used; the guardrail delta is unaffected.)
+
+**The two expedition takes (sense-test):**
+- Seed 107737, day 73: `ella_johnson` took gun + 2 cells from `sam_wilson`'s corpse — second-life, channel expedition. Village survived 150d, reached wave 5, standing 430. Ella held a loaded gun for **77 days** and never fired a volley.
+- Seed 107741, day 97: `wanjiru_kamau` took gun + 2 cells from `diana_osei`'s corpse — second-life, expedition. Diana died day 97 "a stranger"; Wanjiru died day 130 of sickness, **33 days** with the gun, never fired. (In the ctl leg Wanjiru died day 109 in the wild — the gun bought her 21 days, not a fight.)
+- Both takes were second-life (gun-less villagers gaining a gun). Both wild corpses that existed in the arm leg were taken by the expedition channel (2/2 conversion of wild supply); the Haven corpse went to the Haven channel. **The channel works — every wild gun-corpse was witnessed and taken. The guns then sat unused.** The binding constraint moved downstream: takers don't fight.
+
+**Bar-by-bar (frozen prereg §7, full pilot):** 1 instrument PASS (errors 0/0); 2 bundle intact PASS (8/8, dry 0); 3 expedition takes PASS (2 ≥ 2); 4 expedition volley **FAIL** (0 < 1); 5 control clean PASS (ctl rearmEvents 0); 6 supply PASS (1 ≥ 1); 7 guardrails PASS (starv delta 0, survival delta −3.5); 8 balanced panel **NOT RUN** — the panel builder expects the 16-seed confirm band (107734–107749); the pilot is 8 seeds and the verdict below makes a confirm moot.
+
+**Verdict: NO-GO.** Frozen rule: NO-GO = supply ≥ 1 AND (3 or 4 fails). Supply is 1 and bar 4 fails. The channel converts wild corpses into armed villagers but produces zero wave-4 fire — the take does not become a volley. Metric binding (§14) forbids re-scoring: the volley bar was set knowing the base rate (~23% at N=2 takes), and the miss stands. The mechanism stays in the code under its env gate (default OFF) for any future arm that attacks the downstream problem (holders who take guns but never fight); this arm is killed — no confirm spend (seeds 107742–107749 stay unused).
+
+**Wall numbers (full pilot):** wins 0/0, national 0/0, wave5 2/8 both legs, wave4 8/8, village-lost ctl 3 / arm 4. The arm leg lost one more village than ctl (s107741: arm lost day 134, ctl survived) and median survival fell 3.5 days — within guardrails, but no benefit anywhere.
+
+**Metric review (full pilot):** all metrics are the frozen prereg §7 metrics, judged by `--rearm-witness-compare` (verdict field: NO-GO). No metric was re-scored or swapped. Two instrument notes: (a) the analyzer's `supplyDeaths` counts only *staged* holders — the second expedition take (diana_osei, a second-generation holder) is invisible to bar 6, so the channel's true wild conversion was 2 corpses against a counted supply of 1; (b) the analyzer's `days` is `gameDays`, which reads up to 8 days below the raw per-seed `days` field — consistent across legs and identical to rearm-b's usage.
+
+**Files added in this update:** full analyses `rearm-witness-b-full-ctl-analysis.json`, `rearm-witness-b-full-arm-analysis.json`, `rearm-witness-b-full-rearm-compare.json`; per-seed files ctl s107740/s107741, arm s107737/s107740/s107741 (5 new; 16 total in the corpora). Panel builder run failed as expected on the 8-seed pilot (`missing per-seed file ... s107742 ...`) — bar 8 unrun, recorded above.
+
+## 10. What remains (closeout only — the pilot is complete and judged)
+
+1. Convergence tracker update (this axis only — re-read immediately before updating).
+2. Claim/lock deletion per coordinator; heartbeat retry (04:32Z attempt timed out unconfirmed).
+3. Memory run note update (the 04:32Z note says INCONCLUSIVE partial — the verdict is now NO-GO full pilot).
+4. The mechanism stays in the code under its env gate (default OFF); no revert is needed. Seeds 107742–107749 remain unused. No confirm spend.
