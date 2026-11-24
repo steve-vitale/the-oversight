@@ -1,10 +1,16 @@
-// tbrefuse-b-analyze-20261124.js — refused-TB-start fate analysis
-// (arm sim-tbrefuse-b). Reuses the bloodcluster analyzer VERBATIM as
+// tbrefuse-b-analyze-20261124.js — non-building-TB-start analysis
+// (arm sim-tbrefuse-b). V2 (Amendment #1): the judged rows are ALL
+// non-building startCombat calls, split by callKind
+// (guard-refusal / titan-refusal / instant-resolve /
+// noop-unexplained). Reuses the bloodcluster analyzer VERBATIM as
 // the base (kill linkage, door verification, contacts) and ADDS the
-// refusal classification: fate counts, caller counts, visibility
-// verdicts, episodes per live fight, wait-to-re-engagement, and kill
-// attribution (delayed vs not-killed-in-window) per the frozen
-// prereg (evidence/2026-11-24/sim-tbrefuse-b-prereg.md).
+// classification: call-kind counts, fate counts, visibility
+// verdicts (lines fired during the call), episodes per live fight,
+// wait-to-re-engagement, and kill attribution (delayed vs
+// not-killed-in-window, with opening-round kills reported
+// separately — they died in the opening, they were not delayed by
+// a refusal) per the frozen prereg (evidence/2026-11-24/
+// sim-tbrefuse-b-prereg.md, Amendment #1).
 // Usage:
 //   const AN = require('./tbrefuse-b-analyze-20261124');
 //   const s = AN.summarizeSeed(perSeedJson);
@@ -41,16 +47,54 @@ function summarizeSeed(out) {
   const ctx = (out.tbKillCtx || []).slice();
   s.refusals = refusals;
   s.refusalCount = refusals.length;
+  s.callKindCounts = counts(refusals, function (r) { return (r && r.callKind) || 'UNCLASSIFIED'; });
   s.fateCounts = counts(refusals, function (r) { return (r && r.fate) || 'UNCLASSIFIED'; });
-  s.unclassifiedRefusals = refusals.filter(function (r) { return !r || !r.fate || r.fate === 'gone-untracked'; });
+  // Bar 1 (Amendment #1): 0 unclassified = every row has a fate
+  // AND a known call kind (noop-unexplained and gone-untracked
+  // both fail).
+  s.unclassifiedRefusals = refusals.filter(function (r) {
+    return !r || !r.fate || r.fate === 'gone-untracked' || !r.callKind || r.callKind === 'noop-unexplained';
+  });
   s.callerCounts = counts(refusals, function (r) { return (r && r.caller) || 'caller-unknown'; });
   s.callerUnknown = refusals.filter(function (r) { return !r || !r.caller || r.caller === 'caller-unknown' || !r.callerFrame; });
-  s.noVisibility = refusals.filter(function (r) { return !r || typeof r.sayFired !== 'boolean'; });
+  // Bar 3 (Amendment #1): every row carries linesDuringCall
+  // (empty array = silent, a verdict — not missing data).
+  s.noVisibility = refusals.filter(function (r) { return !r || !Array.isArray(r.linesDuringCall); });
+  s.silentRows = refusals.filter(function (r) { return r && Array.isArray(r.linesDuringCall) && r.linesDuringCall.length === 0; });
+  s.lineRows = refusals.filter(function (r) { return r && Array.isArray(r.linesDuringCall) && r.linesDuringCall.length > 0; });
   s.sayFiredCount = refusals.filter(function (r) { return r && r.sayFired; }).length;
   s.silentCount = refusals.filter(function (r) { return r && r.sayFired === false; }).length;
   s.refusalSayCount = (out.refusalSayCount | 0);
   s.sayFiringsSum = refusals.reduce(function (a, r) { return a + ((r && r.sayFirings) | 0); }, 0);
   s.sayCountMismatch = s.refusalSayCount - s.sayFiringsSum;
+  // Titan line: fires once per titan per day (game dedups speech).
+  // Per (mid, day) group of titan-refusals, exactly one row should
+  // carry titanLineFired=true.
+  s.titanRows = refusals.filter(function (r) { return r && r.callKind === 'titan-refusal'; });
+  s.titanLineRows = s.titanRows.filter(function (r) { return r && r.titanLineFired; });
+  s.titanCountsByMid = counts(s.titanRows, function (r) { return (r && r.mid) || 'unknown'; });
+  const titanGroups = {};
+  for (const r of s.titanRows) {
+    const k = (r.mid || '?') + '@' + (r.day | 0);
+    (titanGroups[k] = titanGroups[k] || []).push(r);
+  }
+  s.titanLineDedupViolations = Object.keys(titanGroups).filter(function (k) {
+    return titanGroups[k].filter(function (r) { return r.titanLineFired; }).length !== 1;
+  }).length;
+  // Instant-resolve cross-checks: each instant row must link to
+  // exactly one tbEnd fired during its call, and its fate must
+  // agree with tbKillCtx for that fight.
+  s.instantRows = refusals.filter(function (r) { return r && r.callKind === 'instant-resolve'; });
+  s.instantNoEnd = s.instantRows.filter(function (r) {
+    return !r.endedFightId || !tbEnds.some(function (e) { return e && e.fightId === r.endedFightId && e.duringStartCombat; });
+  });
+  s.endsDuringStartCount = tbEnds.filter(function (e) { return e && e.duringStartCombat; }).length;
+  s.endsDuringStartMismatch = s.endsDuringStartCount - s.instantRows.length;
+  s.instantKilledMismatch = s.instantRows.filter(function (r) {
+    const killed = r.endedFightId ? ctx.some(function (c) { return c && c.fightId === r.endedFightId; }) : false;
+    return (r.fate === 'killed-in-opening') !== killed;
+  });
+  s.openingKilledRows = s.instantRows.filter(function (r) { return r && r.fate === 'killed-in-opening'; }).length;
   // Distinct refused monsters: first refusal per tagged world-monster
   // instance (repeatOf links repeats); pending-refusals have no
   // identity and count individually.
@@ -59,10 +103,12 @@ function summarizeSeed(out) {
   s.pendingRefusals = refusals.filter(function (r) { return r && !r.hasWorldMonster; }).length;
   s.refusalsW4Plus = refusals.filter(function (r) { return r && (r.wave | 0) >= 4; }).length;
   s.refusalsW4PlusShare = s.refusalCount ? s.refusalsW4Plus / s.refusalCount : null;
-  // Episodes: refusals blocked by one live fight id.
+  // Episodes: refusals blocked by one live fight id (guard rows
+  // only — titan/instant rows have no live fight to block them).
   const epMap = {};
   for (const r of refusals) {
-    const k = (r && r.liveFightId) || 'no-live-fight';
+    if (!r || !r.liveFightId) continue;
+    const k = r.liveFightId;
     (epMap[k] = epMap[k] || []).push(r);
   }
   s.episodes = Object.keys(epMap).map(function (k) {
@@ -133,12 +179,13 @@ function summarizeSeed(out) {
   s.delayedKilledCount = killedRoots.size + fieldKilledRoots.size;
   s.delayedRows = refusals.filter(function (r) { return r && (r.fate === 're-engaged-tb' || r.fate === 'killed-field'); }).length;
   s.notKilledByFate = {};
-  for (const f of ['removed-vanished', 'removed-fled-across', 'still-waiting-at-end', 'pending-unresolved-at-end']) {
+  for (const f of ['removed-vanished', 'removed-fled-across', 'still-waiting-at-end', 'pending-unresolved-at-end', 'fled-in-opening', 'lost-in-opening', 'instant-other']) {
     s.notKilledByFate[f] = s.fateCounts[f] || 0;
   }
   // Cross-check vs the bloodcluster base: rebuilt-false tbStarts
-  // rows should match this instrument's refusal count exactly
-  // (same band/policy/horizon, same guard).
+  // rows should match this instrument's non-building-start count
+  // exactly (same band/policy/horizon — every non-building start
+  // is a rebuilt-false row and vice versa, modulo throws).
   const bcRefused = (base.refusedTbStartsAll || []).length;
   s.bloodclusterRefusedCount = bcRefused;
   s.refusalCountMismatch = s.refusalCount - bcRefused;
@@ -152,15 +199,28 @@ function summarizeAll(seeds) {
   const all = base;
   all.arm = 'tbrefuse-b';
   all.refusalCount = per.reduce(function (a, s) { return a + s.refusalCount; }, 0);
+  all.callKindCounts = {};
   all.fateCounts = {};
   all.callerCounts = {};
+  all.titanCountsByMid = {};
   for (const s of per) {
+    for (const k of Object.keys(s.callKindCounts)) all.callKindCounts[k] = (all.callKindCounts[k] || 0) + (s.callKindCounts[k] || 0);
     for (const k of Object.keys(s.fateCounts)) all.fateCounts[k] = (all.fateCounts[k] || 0) + (s.fateCounts[k] || 0);
     for (const k of Object.keys(s.callerCounts)) all.callerCounts[k] = (all.callerCounts[k] || 0) + (s.callerCounts[k] || 0);
+    for (const k of Object.keys(s.titanCountsByMid)) all.titanCountsByMid[k] = (all.titanCountsByMid[k] || 0) + (s.titanCountsByMid[k] || 0);
   }
   all.unclassifiedRefusals = per.reduce(function (a, s) { return a + s.unclassifiedRefusals.length; }, 0);
   all.callerUnknown = per.reduce(function (a, s) { return a + s.callerUnknown.length; }, 0);
   all.noVisibility = per.reduce(function (a, s) { return a + s.noVisibility.length; }, 0);
+  all.silentRows = per.reduce(function (a, s) { return a + s.silentRows.length; }, 0);
+  all.lineRows = per.reduce(function (a, s) { return a + s.lineRows.length; }, 0);
+  all.titanLineRows = per.reduce(function (a, s) { return a + s.titanLineRows.length; }, 0);
+  all.titanLineDedupViolations = per.reduce(function (a, s) { return a + s.titanLineDedupViolations; }, 0);
+  all.instantRows = per.reduce(function (a, s) { return a + s.instantRows.length; }, 0);
+  all.instantNoEnd = per.reduce(function (a, s) { return a + s.instantNoEnd.length; }, 0);
+  all.endsDuringStartMismatch = per.reduce(function (a, s) { return a + s.endsDuringStartMismatch; }, 0);
+  all.instantKilledMismatch = per.reduce(function (a, s) { return a + s.instantKilledMismatch.length; }, 0);
+  all.openingKilledRows = per.reduce(function (a, s) { return a + s.openingKilledRows; }, 0);
   all.sayFiredCount = per.reduce(function (a, s) { return a + s.sayFiredCount; }, 0);
   all.silentCount = per.reduce(function (a, s) { return a + s.silentCount; }, 0);
   all.refusalSayCount = per.reduce(function (a, s) { return a + s.refusalSayCount; }, 0);

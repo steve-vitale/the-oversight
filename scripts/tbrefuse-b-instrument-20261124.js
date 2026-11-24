@@ -1,26 +1,38 @@
-// tbrefuse-b-instrument-20261124.js — refused-TB-start fate tracer
-// (arm sim-tbrefuse-b). Scripts only, zero src/js.
+// tbrefuse-b-instrument-20261124.js — non-building-TB-start tracer
+// (arm sim-tbrefuse-b). Scripts only, zero src/js. V2 (Amendment #1):
+// the pilot proved the judged phenomenon is NOT guard refusals
+// (0 on 8 seeds) but ALL non-building startCombat calls —
+// guard-refusal, titan-refusal (titans.js no-solo-titans hard
+// gate), instant-resolve (fight built + ended in the opening
+// turns inside the call), and noop-unexplained (fail-closed).
 // Reuses the bloodcluster instrument VERBATIM as the base (daily
 // snapshots, killEvents, deathEvents, fieldFights, tbStarts with the
-// rebuilt flag, tbKillCtx) and ADDS refusal tracing on top:
-//   - startCombat: every call while a TB fight is live is a
-//     REFUSAL (game.js:36043-36047 — the guard says the line and
-//     returns, touching nothing). The row records the caller (live
-//     stack, first game frame), the live fight's id + monster, the
-//     refused monster id (monsterId || pendingMonsterId), the
-//     player-tile world monster object (TAGGED by object identity
-//     so its later fate is tracked, not guessed by species id),
-//     and whether the refusal line fired during the call.
+// rebuilt flag, tbKillCtx) and ADDS no-op tracing on top:
+//   - startCombat: EVERY call that returns without building a
+//     fight is a row (callKind assigned from tbEnd-during-call /
+//     titan line / live fight before). The row records the caller
+//     (live stack, first game frame), the live fight's id +
+//     monster (guard rows), the refused monster id (monsterId ||
+//     pendingMonsterId), the player-tile world monster object
+//     (TAGGED by object identity so its later fate is tracked,
+//     not guessed by species id — guard/titan/noop rows only;
+//     instant-resolve rows get their fate at the call from the
+//     ended fight), the verbatim lines fired during the call,
+//     and the return value.
 //   - removeWorldMonster: resolves a tagged monster's fate on
 //     removal (vanished / fled-across); removals inside a
-//     successful startCombat resolve as re-engaged-tb.
+//     successful startCombat resolve as re-engaged-tb; removals
+//     inside an instant-resolve resolve with the opening outcome.
 //   - fieldFight: a tagged monster object killed here resolves
 //     as killed-field.
-//   - tbEnd: fight-end records, so refusal episodes link to the
-//     live fight that blocked them and wait times are measurable.
+//   - tbEnd: fight-end records WITH monster ids, so refusal
+//     episodes link to the live fight that blocked them and wait
+//     times are measurable; ends fired during a startCombat call
+//     are stashed for the call's row (instant-resolve linkage).
 //   - say/sysSay: a ring buffer of the last 8 lines + capture of
 //     every 'Already in a fight' firing, linked to the refusal
-//     call it fired during.
+//     call it fired during; every line fired during a
+//     startCombat call is attached to that call's row.
 //   - snapshot sweep: open refusals are checked once per day
 //     (tagged monster still in worldMonsters()? on the player
 //     tile? pending still live?) and resolved at end of run by
@@ -89,7 +101,15 @@ function install(Game) {
   const openNoMon = {}; // refusal seq -> mid (no world monster, no pending)
   let inStartCombat = false;
   let pendingRemovals = []; // {seqs, day} stashed during a startCombat call
+  let endsDuringCall = []; // {fightId, result, monsterIds, day} stashed during a startCombat call
+  let callLines = []; // {via, line} fired during the current startCombat call
   let sayRing = [];      // last 8 {day, via, line}
+  function isTitanMid(mid) {
+    try {
+      const td = (Game.data && Game.data.titans) || {};
+      return !!mid && mid.charAt(0) !== '_' && !!td[mid];
+    } catch (e) { return false; }
+  }
   function err(where, e) { try { t.instrumentErrors.push(where + ': ' + String((e && e.message) || e).slice(0, 100)); } catch (e2) {} }
 
   function resolveRefusal(row, fate, detail) {
@@ -112,6 +132,10 @@ function install(Game) {
         if (typeof arg === 'string') {
           sayRing.push({ day: dayOf(Game), via: fnName, line: String(arg).slice(0, 300) });
           if (sayRing.length > 8) sayRing.shift();
+          if (inStartCombat) {
+            callLines.push({ via: fnName, line: String(arg).slice(0, 300) });
+            if (callLines.length > 8) callLines.shift();
+          }
           if (arg.indexOf('Already in a fight') >= 0) {
             t.refusalSayCount += 1;
             t.refusalSayLines.push({ day: dayOf(Game), via: fnName, seq: null, line: String(arg).slice(0, 300) });
@@ -147,6 +171,8 @@ function install(Game) {
       const sayBefore = t.refusalSayCount;
       inStartCombat = true;
       pendingRemovals = [];
+      endsDuringCall = [];
+      callLines = [];
       let r;
       try { r = orig.startCombat.apply(this, arguments); } catch (e) { inStartCombat = false; throw e; }
       inStartCombat = false;
@@ -154,11 +180,35 @@ function install(Game) {
         const afterTf = Game.tbfight || null;
         const afterId = (afterTf && afterTf.id) || null;
         const rebuilt = afterId !== beforeId;
-        if (beforeLive && !rebuilt) {
-          // REFUSED — the guard fired (or the call returned without
-          // building). Tag the world monster by object identity.
+        if (!rebuilt) {
+          // NON-BUILDING START (v2, Amendment #1): guard refusal,
+          // titan refusal, instant-resolve, or unexplained no-op.
+          // callKind, in order: a tbEnd fired during the call =
+          // instant-resolve; the guard line fired = guard-refusal
+          // (the guard always says its line, so a silent live-fight
+          // call cannot be the guard); the titan line fired =
+          // titan-refusal; a titan mid = titan-refusal (the gate
+          // fired silently — its line dedups to once per day, and
+          // a ready muster would have built instead); a live fight
+          // before = guard-refusal (defensive); else
+          // noop-unexplained (fail-closed, bar 1). The line is the
+          // distinguisher, not beforeLive: the titan wrapper sits
+          // OUTSIDE the guard, so a titan call during a live fight
+          // hits the titan gate first, never the guard.
+          const sayDelta = t.refusalSayCount - sayBefore;
+          const guardLine = sayDelta > 0;
+          const titanLine = callLines.some(function (l) { return l.line.indexOf('does not notice you') >= 0; });
+          let callKind;
+          let ended = null;
+          if (endsDuringCall.length > 0) { callKind = 'instant-resolve'; ended = endsDuringCall[0]; }
+          else if (guardLine) callKind = 'guard-refusal';
+          else if (titanLine) callKind = 'titan-refusal';
+          else if (isTitanMid(mid)) callKind = 'titan-refusal';
+          else if (beforeLive) callKind = 'guard-refusal';
+          else callKind = 'noop-unexplained';
           const row = {
             seq: seq, day: dayOf(Game), mid: mid, wave: waveOf(Game, mid),
+            callKind: callKind, isTitan: isTitanMid(mid), titanLineFired: titanLine,
             caller: cls, callerFrame: frames[0] || null,
             liveFightId: beforeId, liveMonsterMid: liveMonsterMid, liveRound: liveRound,
             pendingMonsterId: pendingId,
@@ -168,14 +218,18 @@ function install(Game) {
             worldMonsterHp: tileMon ? (tileMon.hp | 0) : null,
             worldMonsterVeteran: tileMon ? !!tileMon.veteran : null,
             worldMonsterStance: tileMon ? (tileMon.stance || null) : null,
+            returnValue: (r && r.id) ? r.id : (r == null ? null : 'non-fight'),
             sayFired: false, sayFirings: 0,
+            linesDuringCall: callLines.slice(),
             contextLines: sayRing.slice(),
+            endedFightId: ended ? ended.fightId : null,
+            endedResult: ended ? ended.result : null,
+            endedMonsterIds: ended ? ended.monsterIds : null,
             fate: null, fateDay: null, fateDetail: null,
           };
-          // The say line fires DURING orig.startCombat, before this
-          // row exists — attach it by exact delta: refusal lines
-          // fired between call entry and return belong to this call.
-          const sayDelta = t.refusalSayCount - sayBefore;
+          // The guard say line fires DURING orig.startCombat, before
+          // this row exists — attach it by exact delta (sayDelta was
+          // computed above, before callKind was assigned).
           if (sayDelta > 0) {
             row.sayFired = true; row.sayFirings = sayDelta;
             for (let i = t.refusalSayLines.length - sayDelta; i < t.refusalSayLines.length; i++) {
@@ -183,7 +237,27 @@ function install(Game) {
             }
           }
           t.refusals.push(row);
-          if (tileMon && mid && tileMon.id === mid) {
+          if (callKind === 'instant-resolve') {
+            // Fate AT the call, from the ended fight. The monster
+            // was already lifted out of the world by the start, so
+            // it is NOT tagged/tracked — its story in this fight
+            // ended in the opening turns. Monsters lifted in by
+            // this same call (stashed tags from removeWorldMonster)
+            // share the opening outcome.
+            let fate = null, detail = null;
+            const killed = (t.tbKillCtx || []).some(function (c) { return c && c.fightId === ended.fightId; });
+            if (killed) { fate = 'killed-in-opening'; detail = 'kill in tbKillCtx for fight ' + ended.fightId; }
+            else if (ended.result === 'routed' || ended.result === 'fled' || ended.result === 'calmed') { fate = 'fled-in-opening'; detail = 'fight ' + ended.fightId + ' ended ' + ended.result + ' in opening turns'; }
+            else if (ended.result === 'lost') { fate = 'lost-in-opening'; detail = 'fight ' + ended.fightId + ' ended lost in opening turns'; }
+            else { fate = 'instant-other'; detail = 'fight ' + ended.fightId + ' ended ' + ended.result + ' in opening turns'; }
+            row.fate = fate; row.fateDay = dayOf(Game); row.fateDetail = detail;
+            for (const pr of pendingRemovals) {
+              for (const s of pr.seqs) {
+                const orow = t.refusals[s];
+                if (orow && !orow.fate) resolveRefusal(orow, fate, 'lifted into instant-resolve fight ' + ended.fightId + ' (' + detail + ')');
+              }
+            }
+          } else if (tileMon && mid && tileMon.id === mid) {
             try {
               const prevTags = tileMon.__tbrefuse || [];
               row.repeatOf = prevTags.length ? prevTags[prevTags.length - 1] : null;
@@ -197,6 +271,8 @@ function install(Game) {
             openNoMon[seq] = mid;
           }
           seq += 1;
+          pendingRemovals = [];
+          endsDuringCall = [];
         } else if (rebuilt) {
           // SUCCESSFUL start — resolve refusals whose tagged
           // monster was lifted in (stashed by the
@@ -240,8 +316,7 @@ function install(Game) {
               }
             }
           }
-        } else {
-          pendingRemovals = [];
+          endsDuringCall = [];
         }
       } catch (e) { err('startCombat-row', e); }
       return r;
@@ -308,15 +383,25 @@ function install(Game) {
     };
   } else { err('install.fieldFight', new Error('not a function')); }
 
-  // --- tbEnd: fight-end records ---
+  // --- tbEnd: fight-end records (with monster ids; ends fired
+  // during a startCombat call are stashed for that call's row) ---
   if (typeof Game.tbEnd === 'function') {
     orig.tbEnd = Game.tbEnd;
     Game.tbEnd = function (result) {
-      let fid = null;
-      try { fid = (Game.tbfight && Game.tbfight.id) || null; } catch (e) {}
+      let fid = null, mids = null;
+      try {
+        fid = (Game.tbfight && Game.tbfight.id) || null;
+        mids = ((Game.tbfight && Array.isArray(Game.tbfight.fighters)) ? Game.tbfight.fighters : [])
+          .filter(function (f) { return f && f.kind === 'monster'; })
+          .map(function (f) { return (f.mdef && f.mdef.id) || f.monsterId || null; })
+          .filter(Boolean);
+      } catch (e) {}
+      try {
+        if (inStartCombat) endsDuringCall.push({ fightId: fid, result: result || null, monsterIds: mids, day: dayOf(Game) });
+      } catch (e) { err('tbEnd-stash', e); }
       let r;
       try { r = orig.tbEnd.apply(this, arguments); } catch (e) { throw e; }
-      try { t.tbEnds.push({ day: dayOf(Game), fightId: fid, result: result || null }); } catch (e) { err('tbEnd-row', e); }
+      try { t.tbEnds.push({ day: dayOf(Game), fightId: fid, result: result || null, monsterIds: mids, duringStartCombat: inStartCombat }); } catch (e) { err('tbEnd-row', e); }
       return r;
     };
   } else { err('install.tbEnd', new Error('not a function')); }

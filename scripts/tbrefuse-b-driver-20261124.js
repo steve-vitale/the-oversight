@@ -1,5 +1,7 @@
-// tbrefuse-b-driver-20261124.js — refused-TB-start fate tracer
-// driver (arm sim-tbrefuse-b). Reuses the bloodcluster driver shape
+// tbrefuse-b-driver-20261124.js — non-building-TB-start tracer
+// driver (arm sim-tbrefuse-b). V2 (Amendment #1): judged RUN is
+// `tbrefuse-b-v2` (pass RUN=tbrefuse-b-v2); the pilot RUN
+// `tbrefuse-b` is smoke-only. Reuses the bloodcluster driver shape
 // VERBATIM (competent policy, death-aware horizon, sequential seeds
 // in one process via the shared harness) under the tbrefuse
 // instrument (bloodcluster base + refusal tracing). Per-seed JSON
@@ -114,9 +116,14 @@ async function oneRun(seed) {
       killers: s.killerCount, unclassified: s.unclassifiedBloodings.length,
       w4Contacts: s.w4Contacts, w4Kills: s.w4Kills,
       unlinkedKills: s.unlinkedKills.length,
-      refusals: s.refusalCount, unclassifiedRefusals: s.unclassifiedRefusals.length,
+      refusals: s.refusalCount, callKinds: s.callKindCounts,
+      unclassifiedRefusals: s.unclassifiedRefusals.length,
       callerUnknown: s.callerUnknown.length, noVisibility: s.noVisibility.length,
       sayCountMismatch: s.sayCountMismatch,
+      titanDedupViolations: s.titanLineDedupViolations,
+      instantNoEnd: s.instantNoEnd.length, endsDuringStartMismatch: s.endsDuringStartMismatch,
+      instantKilledMismatch: s.instantKilledMismatch.length,
+      openingKilledRows: s.openingKilledRows,
       errors: out.instrumentErrors.length, file: path.relative(REPO, file),
     }));
   }

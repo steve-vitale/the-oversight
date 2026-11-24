@@ -1,14 +1,23 @@
-// test-tbrefuse-b-20261124.js — proof test for the refused-TB-start
-// fate tracer + analyzer (arm sim-tbrefuse-b).
-// Fixture-based (fate counts, caller taxonomy, visibility verdicts,
-// episodes, wait times, kill attribution, bloodcluster cross-check,
-// scale-wall aggregation) plus one live harness smoke: a staged
-// refusal is recorded with caller + say line, re-engages after the
-// live fight ends, and a second refused monster removed from the
-// world resolves as removed-vanished — 0 instrument errors. No repo
-// writes. The determinism replay leg (bar 5) runs as a separate
-// driver step, not in this proof test — a 150-day seed is too slow
-// for a check script.
+// test-tbrefuse-b-20261124.js — proof test for the non-building-
+// TB-start tracer + analyzer (arm sim-tbrefuse-b). V2 (Amendment
+// #1): callKind taxonomy (guard / titan / instant-resolve /
+// noop-unexplained), lines fired during the call, instant-resolve
+// fate + tbEnd linkage, titan-line dedup.
+// Fixture-based (fate counts, call-kind counts, caller taxonomy,
+// visibility verdicts, episodes, wait times, kill attribution,
+// bloodcluster cross-check, scale-wall aggregation) plus one live
+// harness smoke: a staged guard refusal is recorded with caller +
+// say line, re-engages after the live fight ends, a second refused
+// monster removed from the world resolves as removed-vanished, and
+// a staged titan call (herald, no muster) records a titan-refusal
+// with the titan line — 0 instrument errors. No repo writes. The
+// determinism replay leg (bar 5) runs as a separate driver step,
+// not in this proof test — a 150-day seed is too slow for a check
+// script. The instant-resolve live path is proven by fixture +
+// the judged band's own linkage cross-checks (instantNoEnd,
+// endsDuringStartMismatch, instantKilledMismatch), not staged
+// here — staging a deterministic opening-round kill is not
+// feasible in a check script.
 // Usage: node scripts/test-tbrefuse-b-20261124.js
 'use strict';
 const path = require('path');
@@ -31,12 +40,16 @@ function seedOut(over) {
 }
 function refusal(seq, day, mid, wave, over) {
   return Object.assign({ seq: seq, day: day, mid: mid, wave: wave,
+    callKind: 'guard-refusal', isTitan: false, titanLineFired: false,
     caller: 'monsterTurn', callerFrame: 'at Game.monsterTurn (/src/js/game.js:24871:11)',
     liveFightId: 'f-live', liveMonsterMid: 'editor', liveRound: 2,
     pendingMonsterId: null, hasWorldMonster: true, worldMonsterId: mid,
     worldMonsterOnTile: true, worldMonsterHp: 40, worldMonsterVeteran: false,
-    worldMonsterStance: 'hungry', sayFired: true, sayFirings: 1,
+    worldMonsterStance: 'hungry', returnValue: 'f-live',
+    sayFired: true, sayFirings: 1,
+    linesDuringCall: [{ via: 'say', line: 'Already in a fight — finish this one first. (startCombat refused: a fight is live.)' }],
     contextLines: [], repeatOf: null,
+    endedFightId: null, endedResult: null, endedMonsterIds: null,
     fate: 're-engaged-tb', fateDay: day, fateDetail: 'lifted by startCombat',
     reengagedFightId: 'f-re' }, over || {});
 }
@@ -70,50 +83,110 @@ function refusalsFixture() {
     refusal(7, 120, 'strike', 4, { liveFightId: 'f-live7', liveMonsterMid: 'buffering',
       hasWorldMonster: false, worldMonsterId: null, pendingMonsterId: 'strike',
       fate: 'pending-unresolved-at-end', fateDay: 150, fateDetail: 'never consumed nor cleared' }),
+    // V2 rows: one titan-refusal (line fired once that day) and two
+    // instant-resolves (won with a kill; routed with no kill).
+    refusal(8, 130, 'herald', 4, { callKind: 'titan-refusal', isTitan: true, titanLineFired: true,
+      liveFightId: null, liveMonsterMid: null, liveRound: null, returnValue: null,
+      sayFired: false, sayFirings: 0,
+      linesDuringCall: [{ via: 'say', line: '⛔ The Herald does not notice you the way prey notices a hunter. It notices you the way weather notices a field. You cannot face this alone — sound the call, muster 20 allied blades (you have 0). This is not courage. This is arithmetic.' }],
+      fate: 'still-waiting-at-end', fateDay: 150, fateDetail: 'tagged monster still tracked at end of run' }),
+    refusal(9, 140, 'suburb', 4, { callKind: 'instant-resolve',
+      liveFightId: null, liveMonsterMid: null, liveRound: null, returnValue: null,
+      sayFired: false, sayFirings: 0, linesDuringCall: [],
+      endedFightId: 'f-open', endedResult: 'won', endedMonsterIds: ['suburb'],
+      fate: 'killed-in-opening', fateDay: 140, fateDetail: 'kill in tbKillCtx for fight f-open' }),
+    refusal(10, 141, 'audit', 4, { callKind: 'instant-resolve',
+      liveFightId: null, liveMonsterMid: null, liveRound: null, returnValue: null,
+      sayFired: false, sayFirings: 0, linesDuringCall: [],
+      endedFightId: 'f-open2', endedResult: 'routed', endedMonsterIds: ['audit'],
+      fate: 'fled-in-opening', fateDay: 141, fateDetail: 'fight f-open2 ended routed in opening turns' }),
   ];
   const tbsList = rows.map(function (r) { return tbs(r.day, r.mid, r.wave, false); });
   tbsList.push(tbs(50, 'editor', 4, true, { fightId: 'f-live' }));
   const ends = [
     { day: 50, fightId: 'f-live', result: 'fled' },
     { day: 50, fightId: 'f-re', result: 'won' },
+    { day: 140, fightId: 'f-open', result: 'won', monsterIds: ['suburb'], duringStartCombat: true },
+    { day: 141, fightId: 'f-open2', result: 'routed', monsterIds: ['audit'], duringStartCombat: true },
   ];
-  const ctxList = [ctx(50, 'herald', 'scholar1', 'player')];
+  const ctxList = [ctx(50, 'herald', 'scholar1', 'player'),
+    ctx(140, 'suburb', 'mara_vasquez', 'companion', { fightId: 'f-open' })];
   return seedOut({ refusals: rows, tbStarts: tbsList, tbEnds: ends, tbKillCtx: ctxList,
     refusalSayCount: 1 + 3 + 1 + 1 + 1 + 1 + 1 + 1 });
 }
 
-ok('fate counts: every frozen fate class present once, 0 unclassified', function () {
+ok('fate counts: every frozen fate class present, 0 unclassified', function () {
   const s = AN.summarizeSeed(refusalsFixture());
-  assert.strictEqual(s.refusalCount, 8);
+  assert.strictEqual(s.refusalCount, 11);
   assert.deepStrictEqual(s.unclassifiedRefusals, []);
   assert.strictEqual(s.fateCounts['re-engaged-tb'], 2);
   assert.strictEqual(s.fateCounts['killed-field'], 1);
   assert.strictEqual(s.fateCounts['removed-vanished'], 1);
   assert.strictEqual(s.fateCounts['removed-fled-across'], 1);
-  assert.strictEqual(s.fateCounts['still-waiting-at-end'], 1);
+  assert.strictEqual(s.fateCounts['still-waiting-at-end'], 2, 'guard row + titan row');
   assert.strictEqual(s.fateCounts['pending-resolved'], 1);
   assert.strictEqual(s.fateCounts['pending-unresolved-at-end'], 1);
-  assert.strictEqual(s.distinctWorldMonsters, 5, 'herald counted once, its repeat linked');
+  assert.strictEqual(s.fateCounts['killed-in-opening'], 1);
+  assert.strictEqual(s.fateCounts['fled-in-opening'], 1);
+  assert.strictEqual(s.distinctWorldMonsters, 8, 'herald counted once, its repeat linked');
   assert.strictEqual(s.repeatRefusals, 1);
   assert.strictEqual(s.pendingRefusals, 2);
-  assert.strictEqual(s.refusalsW4Plus, 8);
+  assert.strictEqual(s.refusalsW4Plus, 11);
+});
+
+ok('callKind counts: guard / titan / instant split; titan line dedups once per day; instant ends link', function () {
+  const s = AN.summarizeSeed(refusalsFixture());
+  assert.deepStrictEqual(s.callKindCounts, { 'guard-refusal': 8, 'titan-refusal': 1, 'instant-resolve': 2 });
+  assert.strictEqual(s.titanRows.length, 1);
+  assert.strictEqual(s.titanLineRows.length, 1);
+  assert.deepStrictEqual(s.titanCountsByMid, { herald: 1 });
+  assert.strictEqual(s.titanLineDedupViolations, 0, 'one titan line firing for the one herald day');
+  assert.strictEqual(s.instantRows.length, 2);
+  assert.deepStrictEqual(s.instantNoEnd, []);
+  assert.strictEqual(s.endsDuringStartCount, 2);
+  assert.strictEqual(s.endsDuringStartMismatch, 0, 'every end-during-call belongs to an instant row');
+  assert.deepStrictEqual(s.instantKilledMismatch, []);
+  assert.strictEqual(s.openingKilledRows, 1, 'suburb died in the opening; audit fled');
+});
+
+ok('visibility: every row carries linesDuringCall; empty means silent, not missing', function () {
+  const s = AN.summarizeSeed(refusalsFixture());
+  assert.strictEqual(s.noVisibility.length, 0);
+  assert.strictEqual(s.silentRows.length, 2, 'the two instant rows said nothing during the call');
+  assert.strictEqual(s.lineRows.length, 9, '8 guard lines + 1 titan line');
+  const titan = s.refusals.find(function (r) { return r.callKind === 'titan-refusal'; });
+  assert.ok(titan.linesDuringCall[0].line.indexOf('does not notice you') >= 0);
+});
+
+ok('noop-unexplained counts as unclassified (bar 1, fail-closed)', function () {
+  const f = refusalsFixture();
+  f.refusals.push(refusal(11, 150, 'glasswing', 1, { callKind: 'noop-unexplained',
+    liveFightId: null, liveMonsterMid: null, liveRound: null, returnValue: null,
+    sayFired: false, sayFirings: 0, linesDuringCall: [],
+    fate: 'still-waiting-at-end', fateDay: 150, fateDetail: 'tagged monster still tracked at end of run' }));
+  f.tbStarts.push(tbs(150, 'glasswing', 1, false));
+  const s = AN.summarizeSeed(f);
+  assert.strictEqual(s.refusalCount, 12);
+  assert.strictEqual(s.unclassifiedRefusals.length, 1);
+  assert.strictEqual(s.unclassifiedRefusals[0].seq, 11);
+  assert.strictEqual(s.callKindCounts['noop-unexplained'], 1);
 });
 
 ok('gone-untracked counts as unclassified; caller-unknown and silent rows flagged', function () {
   const f = refusalsFixture();
-  f.refusals.push(refusal(8, 130, 'eater', 4, { liveFightId: 'f-live8',
+  f.refusals.push(refusal(11, 130, 'eater', 4, { liveFightId: 'f-live8',
     fate: 'gone-untracked', fateDay: 131, fateDetail: 'left worldMonsters() untracked' }));
-  f.refusals.push(refusal(9, 131, 'eater', 4, { liveFightId: 'f-live8', caller: 'caller-unknown',
-    callerFrame: null, sayFired: false, sayFirings: 0, fate: 're-engaged-tb', fateDay: 131 }));
+  f.refusals.push(refusal(12, 131, 'eater', 4, { liveFightId: 'f-live8', caller: 'caller-unknown',
+    callerFrame: null, sayFired: false, sayFirings: 0, linesDuringCall: [], fate: 're-engaged-tb', fateDay: 131 }));
   f.tbStarts.push(tbs(130, 'eater', 4, false), tbs(131, 'eater', 4, false));
   const s = AN.summarizeSeed(f);
-  assert.strictEqual(s.refusalCount, 10);
+  assert.strictEqual(s.refusalCount, 13);
   assert.strictEqual(s.unclassifiedRefusals.length, 1);
-  assert.strictEqual(s.unclassifiedRefusals[0].seq, 8);
+  assert.strictEqual(s.unclassifiedRefusals[0].seq, 11);
   assert.strictEqual(s.callerUnknown.length, 1);
-  assert.strictEqual(s.callerUnknown[0].seq, 9);
-  assert.strictEqual(s.silentCount, 1, 'the unknown-caller row is the silent one');
-  assert.strictEqual(s.sayFiredCount, 9);
+  assert.strictEqual(s.callerUnknown[0].seq, 12);
+  assert.strictEqual(s.sayFiredCount, 9, '8 guard rows + the pushed gone-untracked row fired the guard line');
+  assert.strictEqual(s.silentRows.length, 3, '2 instant rows + the unknown-caller row said nothing during the call');
 });
 
 ok('say-line cross-check: per-row firings sum to the recorded line count', function () {
@@ -148,15 +221,17 @@ ok('kill attribution: re-engaged fight that kills counts as delayed-killed', fun
   assert.strictEqual(s.delayedCount, 2, '2 distinct monsters delayed (herald + suburb)');
   assert.strictEqual(s.delayedRows, 3, '3 refusal rows delayed');
   assert.strictEqual(s.delayedKilledCount, 2, '1 TB kill + 1 field kill');
+  assert.strictEqual(s.openingKilledRows, 1, 'the instant suburb kill is opening, not delayed');
   assert.deepStrictEqual(s.notKilledByFate, {
     'removed-vanished': 1, 'removed-fled-across': 1,
-    'still-waiting-at-end': 1, 'pending-unresolved-at-end': 1,
+    'still-waiting-at-end': 2, 'pending-unresolved-at-end': 1,
+    'fled-in-opening': 1, 'lost-in-opening': 0, 'instant-other': 0,
   });
 });
 
-ok('bloodcluster cross-check: rebuilt-false tbStarts rows match refusal count', function () {
+ok('bloodcluster cross-check: rebuilt-false tbStarts rows match non-building-start count', function () {
   const s = AN.summarizeSeed(refusalsFixture());
-  assert.strictEqual(s.bloodclusterRefusedCount, 8);
+  assert.strictEqual(s.bloodclusterRefusedCount, 11);
   assert.strictEqual(s.refusalCountMismatch, 0);
   const bad = refusalsFixture();
   bad.tbStarts.splice(0, 1); // drop one refused row from the base instrument's count
@@ -171,8 +246,10 @@ ok('scale-wall aggregation across seeds', function () {
   b.daily = [{ day: 60, w5faced: 1 }];
   b.days = 150;
   const all = AN.summarizeAll([a, b]);
-  assert.strictEqual(all.refusalCount, 16);
+  assert.strictEqual(all.refusalCount, 22);
   assert.strictEqual(all.unclassifiedRefusals, 0);
+  assert.deepStrictEqual(all.callKindCounts, { 'guard-refusal': 16, 'titan-refusal': 2, 'instant-resolve': 4 });
+  assert.strictEqual(all.openingKilledRows, 2);
   assert.strictEqual(all.wins, 1);
   assert.strictEqual(all.national, 1);
   assert.strictEqual(all.w5Unlocked, 2);
@@ -219,10 +296,13 @@ ok('callerClass: stack frames map to the frozen caller set', function () {
     assert.strictEqual(inst.t.refusals.length, 1, 'one refusal recorded');
     const row = inst.t.refusals[0];
     assert.strictEqual(row.mid, monB.id);
+    assert.strictEqual(row.callKind, 'guard-refusal');
     assert.strictEqual(row.liveFightId, liveId);
     assert.strictEqual(row.fate, null, 'fate open until the monster resolves');
     assert.strictEqual(row.sayFired, true, 'the refusal line fired during the call');
     assert.strictEqual(row.sayFirings, 1, 'exactly one line for one refused call');
+    assert.strictEqual(row.linesDuringCall.length, 1, 'one line fired during the call');
+    assert.ok(row.linesDuringCall[0].line.indexOf('Already in a fight') >= 0);
     assert.strictEqual(inst.t.refusalSayCount, sayBefore + 1);
     assert.ok(Array.isArray(monB.__tbrefuse) && monB.__tbrefuse[0] === 0, 'monster B tagged by object identity');
     // End the live fight, then face B: the refusal resolves as re-engaged.
@@ -243,7 +323,23 @@ ok('callerClass: stack frames map to the frozen caller set', function () {
     Game.removeWorldMonster(monC);
     assert.strictEqual(rowC.fate, 'removed-vanished', 'removed monster resolves as vanished');
     assert.strictEqual(rowC.fateDetail, 'other', 'no lostSight / fearful markers on a fresh spawn');
-    // Bloodcluster cross-check on the live rows: 2 rebuilt-false tbStarts.
+    // A titan call with no muster: the hard gate refuses BEFORE the
+    // guard (the titan wrapper sits outside it), even with fight B
+    // live — the titan line, not the guard line, is what fires.
+    const rTitan = Game.startCombat('herald');
+    assert.strictEqual(rTitan, null, 'titan gate returns null without a muster');
+    assert.ok(Game.tbfight && !Game.tbfight.over, 'fight B still live after the titan refusal');
+    assert.strictEqual(inst.t.refusals.length, 3, 'titan refusal recorded');
+    const rowT = inst.t.refusals[2];
+    assert.strictEqual(rowT.callKind, 'titan-refusal', 'titan line, not guard line, decides the kind');
+    assert.strictEqual(rowT.mid, 'herald');
+    assert.strictEqual(rowT.isTitan, true);
+    assert.strictEqual(rowT.titanLineFired, true, 'the titan line fired during the call');
+    assert.ok(rowT.linesDuringCall.some(function (l) { return l.line.indexOf('does not notice you') >= 0; }));
+    assert.strictEqual(rowT.fate, null, 'titan-refused monster fate open until it resolves');
+    // Bloodcluster cross-check on the live rows: 3 rebuilt-false tbStarts.
+    inst.finalize();
+    assert.strictEqual(rowT.fate, 'pending-unresolved-at-end', 'staged herald had no world monster to tag');
     const bc = AN.summarizeSeed({ seed: 109312, run: 'smoke', days: 1, gameDays: 1,
       endReason: 'smoke', won: false, scaleRank: 'village', maxWave: 1, endUnlockedWave: 1,
       peakBeforeEndCall: null, peakAfterEndCall: null, endCallMovedPeak: false,
@@ -255,12 +351,13 @@ ok('callerClass: stack frames map to the frozen caller set', function () {
       refusals: inst.t.refusals, tbEnds: inst.t.tbEnds,
       refusalSayLines: inst.t.refusalSayLines, refusalSayCount: inst.t.refusalSayCount,
       wrapCounts: inst.t.wrapCounts, instrumentErrors: inst.t.instrumentErrors });
-    assert.strictEqual(bc.refusalCount, 2);
+    assert.strictEqual(bc.refusalCount, 3);
     assert.strictEqual(bc.refusalCountMismatch, 0, 'tbStarts rebuilt-false rows match refusal rows live');
+    assert.deepStrictEqual(bc.callKindCounts, { 'guard-refusal': 2, 'titan-refusal': 1 });
     assert.strictEqual(bc.unclassifiedRefusals.length, 0);
     assert.strictEqual(inst.t.instrumentErrors.length, 0, 'no instrument errors');
     pass++;
-    console.log('ok ' + pass + ' - live harness smoke: refusal recorded + say line + re-engage + vanished, 0 instrument errors');
+    console.log('ok ' + pass + ' - live harness smoke: guard refusal + say line + re-engage + vanished + titan refusal, 0 instrument errors');
   } finally {
     try { inst.uninstall(); } catch (e) {}
   }
