@@ -241,6 +241,32 @@ survival, max survival, villages lost, total deaths — per leg
   107601–107616, Loop B live 109309–109324, journey-deepening
   109401–109403 — none overlaps 109411–109426.
 
+## 13. CORRECTION — neutrality leg (2026-11-24 ~02:00 UTC, before any judged run)
+
+§6's flag-neutrality leg as written ("the same 2 seeds run as
+MODE=arm with PLANRETARGET unset reproduce the MODE=ctl corpus game
+outcomes exactly") cannot run: the driver's own CLI guard refuses
+MODE=arm unless PLANRETARGET=1 and refuses MODE=ctl when it is set
+(prereg §4.4) — the combination the leg names is un-runnable by
+design. The neutrality proof therefore moves to the level where the
+flag is actually read:
+
+- UNIT (proof test §1, U0 + U8a): in one live game, the same
+  hunt-plan seed call with PLANRETARGET unset returns the plan
+  unchanged, speaks nothing, and bumps nothing — for the upward,
+  sideways, downward, and suburb shapes alike. The retarget branch
+  is dead when the flag is off and the hunt-lock early return is
+  byte-identical to the old code, so flag-off IS the old behavior.
+- RUN (proof test §3, D2): recorder-off replays reproduce the
+  recorder-independent game outcomes exactly (days, partyDepartures,
+  maxWave, standing, deaths, killCalls), proving the instrument
+  itself does not move the game.
+
+The determinism leg stands as written (a replay of 2 pilot seeds on
+the arm leg reproduces the retarget count AND w4kills exactly). No
+bar threshold changed; the frozen bars are judged on the pilot and
+confirm legs as frozen in §6.
+
 ## 12. Code-grounded seed-call map (frozen — read from the code on this base, not invented)
 
 `winPlanSeedFromFight(vid, mdef, outcome)` (src/js/win-plan.js)
