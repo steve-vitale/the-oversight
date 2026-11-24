@@ -298,7 +298,43 @@ function tallyVendetta(armEvents) {
   return { total: evs.length, directed, unordered, maxDirected, maxUnordered, topDirected: top(directed), topUnordered: top(unordered), pairsGte4 };
 }
 
-module.exports = { aggregateNightlyNews, summarizeBondProposed, tallyOffered, summarizeCounters, tallyRecap, mapTranscriptEntry, tallyReoffers, tallyDroppedThreads, tallyNarrDup, tallyConfessions, tallyVendetta, tallyRecapEmpty, tallyDoorReq, maxDoorServes, tallyThreeTimes, proposalsPerVillageDay, classifyM4Flag, splitM4Flags, stripM4RepeatPrefix, stripM4DiscourseOpener };
+// pickConversationChoice(choices, opts) — r277 Arm A (driver commit fix).
+// The journey driver's sitting pick priority, extracted verbatim so a proof
+// test can pin it: bye on the NPC's exit signal → answer their question
+// (gq:) → engage the ask (dlg:help / dlg:details / want:) → COMMIT to a
+// joint outing when offered (dlg:commit, forage_help / water_haul only —
+// the outing kinds the dawn arms can keep; other favors keep the old
+// behavior) → topical small talk (how/feeling/...) → first non-leave
+// choice → leave.
+// The commit rule is the fix: the old driver had no commit rule, so in the
+// standard favor menu [favor_requirements, commit, ...] its fallback took
+// favor_requirements (first, never spent) forever — 198 offers, 0 presses
+// on the r277 probe seed 45829 — and no outing was ever promised (r268:
+// 0 attempts). The game refuses unkeepable commits itself (away guard,
+// open-commitment guard), so an offered commit on an outing favor is a
+// keepable promise. opts: { lastNPCText, favorKind }.
+function pickConversationChoice(choices, opts) {
+  opts = opts || {};
+  const list = (choices || []).filter(x => x && x.id);
+  if (!list.length) return null;
+  const idOf = x => String(x.id || '');
+  const EXIT_SIGNAL = /duty calls|good pause|should get back|should be going|i should|let me get back|time to go|see you|good talking/i;
+  const byeFirst = opts.lastNPCText && EXIT_SIGNAL.test(String(opts.lastNPCText));
+  let pick = null;
+  if (byeFirst) pick = list.find(x => /^(leave|bye|goodbye)/.test(idOf(x)));
+  if (!pick) pick = list.find(x => /^gq:/.test(idOf(x)));
+  if (!pick) pick = list.find(x => /^(dlg:help|dlg:details|want:)/.test(idOf(x)));
+  // r277 Arm A: commit to a joint outing when offered.
+  if (!pick && (opts.favorKind === 'forage_help' || opts.favorKind === 'water_haul')) {
+    pick = list.find(x => idOf(x) === 'dlg:commit');
+  }
+  if (!pick) pick = list.find(x => /how|feeling|holding|news|day|worried|afraid|hungry|sick|village|everyone/i.test(String(x.text || '')));
+  if (!pick) pick = list.find(x => !/^(leave|bye|goodbye)/.test(idOf(x)));
+  if (!pick) pick = list.find(x => /^(leave|bye|goodbye)/.test(idOf(x)));
+  return pick || null;
+}
+
+module.exports = { aggregateNightlyNews, summarizeBondProposed, tallyOffered, summarizeCounters, tallyRecap, mapTranscriptEntry, tallyReoffers, tallyDroppedThreads, tallyNarrDup, tallyConfessions, tallyVendetta, tallyRecapEmpty, tallyDoorReq, maxDoorServes, tallyThreeTimes, proposalsPerVillageDay, classifyM4Flag, splitM4Flags, stripM4RepeatPrefix, stripM4DiscourseOpener, pickConversationChoice };
 
 // r195 (M11) RECAP-EMPTY TALLY: count M4 near-dup flags carrying the
 // empty-thread recap core "We were just talking. Nothing important."
