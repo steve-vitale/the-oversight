@@ -386,7 +386,8 @@ Arm A proof test re-run on the final tip by the finisher:
   proof test + driver + analyzer + prereg + panel JSONs + analyzer
   log + this run note: `d59a98064`]. No `src/js` changes this run
   (driver-side fix only). [commit 2 — gate log + gate re-run log +
-  Gate section of this note: hash filled at merge].
+  Gate section of this note: `287ee67f4` after the rebase onto
+  `2b2239237` (was `f53a6f172` pre-rebase)].
 - Panel JSONs: `evidence/2026-11-23/journey-social-life-r277-45845.json`
   … `-45848.json` (+ probe `-45829.json`, EXCLUDED from the panel:
   the analyzer globs `journey-social-life-r277-\d+.json`, so the
@@ -427,4 +428,18 @@ Arm A proof test re-run on the final tip by the finisher:
   reaper margin ~4h (until ~03:16Z); closeout finished well inside
   it. Release step retried against the same jam; if it fails, the
   tree is clean, merged, and safe to reap once the lock clears.
+- Rebase at merge time: master had moved to `2b2239237`
+  (flesh-out 2130Z adoption gate-section note, evidence-only) while
+  the gate re-runs were in flight, so the ff-only merge refused.
+  Rebased `journey2-social` onto `2b2239237`; the rebase quirk
+  struck once on pick 1 (phantom "local changes would be
+  overwritten" on `scripts/journey-social-r226-helpers.js`, tree
+  clean, pick verified unapplied via `git diff`, `rebase
+  --continue` sailed through both picks). New tip `287ee67f4`.
+  All 8 standing proofs re-run on the rebased tip, all green:
+  M4-split 49/49, F5 50/50, F6 49/49, TRAILTALK 30/30,
+  repay-fallback 36/36, gossip-dry 9/9, resume-fallthrough 36/36,
+  driver-commit 9/9. The gate (run on the `f5d2c3caa` tip) carries:
+  the rebase replays the same two commits onto an evidence-only
+  master move, with no src change in either direction.
 - Rotation-b 5 → 6 written at closeout; next Lane B leg is crisis.
