@@ -95,6 +95,7 @@ Fresh r275-analyzer run on the on-disk 2026-11-23 corpus vs the committed `journ
 - Driver/analyzer/tests: worktree `scripts/` (committed below).
 
 ## Closeout
-- Commits (worktree, safe-commit): Q6 staged driver + evidence + run note + gate log (see git log).
+- Commits (worktree, safe-commit): Q6 staged driver + evidence + run note (3c6b4acf6); closeout record (this section).
+- Master moved during the run (sim-cellgate-holdout-b, sim-rearm-witness-b, journey-crisis r278 + batch ship bump, new tip 97a1dcbdc); the branch was rebased onto it (no conflicts — the new master does not touch the r278 files; it changes corpses.js/conversation.js/villager-agency.js/villager-objectives.js/build.js), proof tests re-run green on the rebased tip (mootclose-stage 28/28, analyzer 113/113, march 11/11, muster 41/41, away-nfloor 12/12, mootclose-r269 36/36, gonebearer-r272 35/35, warnheed-r277 16/16), then merged --ff-only. The panel verdicts stand on the base they ran on (88d63d9fc).
 - Merge `--ff-only journey-deepening` in main tree; release worktree; reap; verify main tree clean.
 - Rotation `2→3` with read-back. Lock deleted. "Merged locally, pending ship" — no version tag.
