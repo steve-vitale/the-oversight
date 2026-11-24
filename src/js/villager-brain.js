@@ -675,6 +675,117 @@
       return f || s;
     } catch (e) { return String(name || ''); }
   }
+  // holdName(self, vid): the name a HOLD LINE speaks for a villager —
+  // the departname-a beatName convention (src/js/win-plan.js), mirrored
+  // here because beatName is module-private there: the true first name
+  // (npcName — prefers a bestowed calledName), then disp/displayName,
+  // then 'Someone'. Never a stranger descriptor, never undefined.
+  function holdName(self, vid) {
+    try {
+      if (self && typeof self.npcName === 'function') {
+        var n = self.npcName(vid);
+        if (n) return n;
+      }
+    } catch (e) {}
+    try {
+      if (self && typeof self.disp === 'function') {
+        var d = self.disp(vid);
+        if (d) return d;
+      } else if (self && typeof self.displayName === 'function') {
+        var dn = self.displayName(vid);
+        if (dn) return dn;
+      }
+    } catch (e) {}
+    return 'Someone';
+  }
+  // holdBlockKind(self, vid): WHY a holder's startExpedition did not
+  // produce an expedition record — pure reads only, mirroring
+  // startExpedition's gate order (hurt, then sick, then range-0).
+  // villagerHealCheck itself is NEVER re-called here: it consumes
+  // medicine, heals, and speaks, so re-running it would double-apply.
+  // The hurt predicate is re-read from health[vid] < 70: the check
+  // blocks exactly when HP < 70 and no medicine/healer was at hand,
+  // and heals (returning false) whenever it does not block — so a
+  // holder still under 70 here was blocked hurt. Known corner: a
+  // holder healed part-way (still < 70) who is ALSO sick reads as
+  // hurt, though the sick gate is what stopped them — both are health
+  // reasons about the same person, never a kit/health confusion; the
+  // band audit counts it if it ever fires. 'unknown' is the honest
+  // residual (medic duty is exempt for directed launches and
+  // already-out is excluded by the brain's early return, so it should
+  // not fire; the band audit counts it if it ever does).
+  function holdBlockKind(self, vid) {
+    try {
+      var hp = 100;
+      try { var h = (self.state && self.state.village && self.state.village.health) ? self.state.village.health[vid] : undefined; hp = (h !== undefined ? h : 100); } catch (e2) {}
+      if ((hp | 0) < 70) return 'hurt';
+      var sick = false;
+      try { sick = !!((self.state && self.state.village && self.state.village.sick) || {})[vid]; } catch (e2) {}
+      if (sick) return 'sick';
+      var maxD = -1;
+      try { maxD = self.npcMaxDist ? self.npcMaxDist(vid) : -1; } catch (e2) {}
+      if (maxD >= 0 && maxD < 1) return 'range0';
+    } catch (e) {}
+    return 'unknown';
+  }
+  // HOLD VOICE (sim-holdspeak-a, finding #2713): a held departure
+  // speaks — once per (holder, day), never per tick — naming the
+  // holder by true first name and the REAL hold reason. Fiction only:
+  // say() consumes no RNG; the only state written is the dedup map,
+  // read by nothing but this check (same pattern as homebodySaid /
+  // holderSaid). Every line ends with "— the party waits.", the
+  // capture token the dawnchoke driver's HOLD_BEAT_RE reads. Kinds
+  // are the hold code's own causes (see the prereg): kit (gear_hold),
+  // companion (party_wait), veteran (veteran_guard), no-trail
+  // (expired-plan held), sick / hurt / range0 (execute-fail blocks),
+  // unknown (residual — expected never). The safety-check reasons
+  // (unarmed / unarmored / armorP / sick / hp<70 / range0 /
+  // party-too-small) are NOT on master — the held departsafe lever —
+  // but the kinds here cover the same families, so a future landing
+  // wires its fails into this helper at its own 'hold' return.
+  // Dedup is per (holder, day), not once-per-pair-forever: a hold is
+  // a daily fact ("waits another day"), and a once-ever dedup would
+  // re-silence a party held for weeks, while un-deduped 3-ticks-a-day
+  // voicing would spam.
+  function holdVoice(self, vid, hx, hy, kind) {
+    try {
+      if (!self || typeof self.say !== 'function') return;
+      var br = ensure(self);
+      if (!br) return;
+      var day = dayOf(self);
+      if (!br.holdSaid) br.holdSaid = {};
+      var key = String(vid) + '>' + day;
+      if (br.holdSaid[key]) return;
+      br.holdSaid[key] = day;
+      var name = holdName(self, vid);
+      var line = null;
+      if (kind === 'kit') {
+        var g = null;
+        try { g = gearRead(self, vid); } catch (e) {}
+        if (g && g.armed && !g.armored) line = name + ' still has no armor — the party waits.';
+        else if (g && !g.armed && g.armored) line = name + ' still has no weapon — the party waits.';
+        else line = name + ' has no weapon and no armor yet — the party waits.';
+      } else if (kind === 'companion') {
+        var comp = null;
+        try { comp = findCompanion(self, vid, hx, hy); } catch (e) {}
+        if (comp) line = name + ' is still waiting on a companion — the party waits.';
+        else line = name + ' has no one to walk out with — the party waits.';
+      } else if (kind === 'veteran') {
+        line = name + ' has the kills for the table, but no one to walk out with yet — the party waits.';
+      } else if (kind === 'no-trail') {
+        line = name + ' still has no trail to follow — the party waits.';
+      } else if (kind === 'sick') {
+        line = name + ' is sick, and no one who can walk will take the plan — the party waits.';
+      } else if (kind === 'hurt') {
+        line = name + ' is still hurt, and no one who can walk will take the plan — the party waits.';
+      } else if (kind === 'range0') {
+        line = name + ' never leaves Haven, and no one who can walk will take the plan — the party waits.';
+      } else {
+        line = name + ' couldn\'t get out today, and no one could take the plan — the party waits.';
+      }
+      try { self.say(line); } catch (e) {}
+    } catch (e) {}
+  }
   function writeCommit(self, vid, chosen, entry) {
     var br = ensure(self);
     if (!br) return;
@@ -1202,6 +1313,10 @@
       var c = this.vbrainCommit(vid);
       if (!c || c.day !== dayOf(this)) return 'normal';
       if (c.winPlanAction === 'gear_hold' || c.winPlanAction === 'veteran_guard' || c.winPlanAction === 'party_wait') {
+        // HOLDSPEAK (sim-holdspeak-a, finding #2713): the hold speaks —
+        // the reason is the commit's own action (kit / companion /
+        // veteran), voiced once per (holder, day) by holdVoice.
+        try { holdVoice(this, vid, hx, hy, c.winPlanAction === 'gear_hold' ? 'kit' : (c.winPlanAction === 'veteran_guard' ? 'veteran' : 'companion')); } catch (e) {}
         return 'hold';
       }
       if (c.kind !== 'EXPEDITION') return 'normal';
@@ -1222,7 +1337,11 @@
         var _rs = null;
         try { _rs = (typeof this.winPlanCommitDeadTarget === 'function') ? this.winPlanCommitDeadTarget(vid) : null; } catch (e) {}
         if (_rs === 'expired') return 'normal';
-        if (_rs === 'held') return 'hold';
+        // HOLDSPEAK (sim-holdspeak-a, finding #2713): the expired-plan
+        // hold speaks — the expiry beat already spoke once, but the
+        // plan keeps re-bidding daily while no trail arrives; the
+        // hold line names the missing trail, once per (holder, day).
+        if (_rs === 'held') { try { holdVoice(this, vid, hx, hy, 'no-trail'); } catch (e) {} return 'hold'; }
         // Mirror winPlanDepart's shared-target party launch, owned by the
         // dawn commitment rather than a midday re-decide.
         var tx = null, ty = null, dur = 0;
@@ -1256,6 +1375,12 @@
                 if (_hb === 'launch') return 'launch';
               }
             } catch (e2) {}
+            // HOLDSPEAK (sim-holdspeak-a, finding #2713): the holder
+            // could not walk out and no walking companion could take
+            // the plan — the hold speaks its real block (sick / hurt
+            // / cannot-walk, read purely by holdBlockKind; the heal
+            // check is never re-called), once per (holder, day).
+            try { holdVoice(this, vid, hx, hy, holdBlockKind(this, vid)); } catch (e2) {}
             return 'hold';
           }
         } catch (e) {}
