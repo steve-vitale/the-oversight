@@ -246,10 +246,15 @@ no >= 10-day run, the median does not rise, and no sim outcome moves.
   `holdrepeat-fix-a-confirm-analysis.json` (holdspeak analyzer,
   confirm after-leg vs frozen holdspeak confirm-before — B2
   adjudicated N/A per Amendment 2).
-- Finding #2744 updated in hidden_files/sim-findings.md with the fix
-  (append "[FIXED 2026-11-24 (Loop A arm sim-holdrepeat-fix-a, verdict
-  ..., evidence/2026-11-24/sim-holdrepeat-fix-a.md, branch
-  sim-holdrepeat-fix-a @ <hash>)]").
+- Finding #2744 updated in hidden_files/sim-findings.md (status
+  [open] → [fixed]) with: "[FIXED 2026-11-24 (Loop A arm
+  sim-holdrepeat-fix-a, verdict GO,
+  evidence/2026-11-24/sim-holdrepeat-fix-a.md, branch
+  sim-holdrepeat-fix-a @ c7767fcee)]". Numbering note: the brief's
+  "#2743" and the file's "#2744" are the finding's LINE NUMBER in
+  sim-findings.md, not a finding ID — the line shifted by one between
+  the brief and this arm (a line was added above it). The prereg §7
+  note is corrected here, not rewritten (the prereg is frozen).
 
 ## 10. Metric review
 
