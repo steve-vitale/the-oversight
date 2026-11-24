@@ -10,6 +10,9 @@
 // BOWOPEN (not SPEARGATE), SPEARGATE=1 is required on BOTH legs (the
 // fixed gate ground), and the bowOpenByVid export is kept (bowopen §12
 // instrumentation gap: per-vid staging outcomes with item ids).
+// sim-instrument-a adds explicit per-seed spearSeen/spearPassed (the
+// gate-replication counters, blank #4: null when staging never ran,
+// so the ctl leg is unobserved rather than zero).
 //   Legs differ ONLY by ENV: ctl = BOWOPEN unset, arm = BOWOPEN=1.
 //      BOTH legs run SPEARGATE=1 + SENSEEXPED=1 (substrate — the gate
 //      fix is the fixed ground; the sense fix is the landed SENSEEXPED
@@ -1243,6 +1246,22 @@ async function oneRun(seed) {
     // section's denominators, read from live state at run end.
     bowOpen: (st.village && st.village.bowOpen) ? JSON.parse(JSON.stringify(st.village.bowOpen)) : null,
     bowOpenStagedVids: (st.village && st.village.bowOpenByVid) ? Object.keys(st.village.bowOpenByVid).length : 0,
+    // SPEARGATE gate-replication counters (sim-instrument-a, blank
+    // #4): the per-departure spear-gate seen/passed counts for this
+    // seed, read from the live village.bowOpen counters the game
+    // code maintains inside villagerStageBow (src/js/game.js).
+    // spearSeen = departures whose equipped ranged entry is a spear
+    // (a melee weapon sitting in the ranged slot, carrying no ammo);
+    // spearPassed = of those, the ones the gate passes over to the
+    // sources (SPEARGATE on only — the gate read uses volleyWeaponOf
+    // when on, rangedWeaponOf when off). One villagerStageBow call
+    // = one departure gear-up. When staging never ran (BOWOPEN off
+    // — the ctl leg), village.bowOpen is absent and both counters
+    // are null (unobserved), never 0: a zero would claim the gate
+    // saw nobody, which is unmeasured. When staging ran, a missing
+    // key means zero seen (the game bumps the key only on sighting).
+    spearSeen: (st.village && st.village.bowOpen) ? (st.village.bowOpen.spearSeen | 0) : null,
+    spearPassed: (st.village && st.village.bowOpen) ? (st.village.bowOpen.spearPassed | 0) : null,
     // SPEARGATE: the per-vid staging map (bowopen §12 gap) — {vid: {day, source, itemId}}
     // so alreadyHad-with-a-spear can be cross-checked by item id.
     bowOpenByVid: (st.village && st.village.bowOpenByVid) ? JSON.parse(JSON.stringify(st.village.bowOpenByVid)) : null,
@@ -1319,6 +1338,7 @@ if (require.main === module) (async function () {
       speargatePresent: out.speargatePresent, speargateOn: out.speargateOn,
       senseexpedOn: out.senseexpedOn, fightally2On: out.fightally2On,
       bowopenOn: out.bowopenOn,
+      spearSeen: out.spearSeen, spearPassed: out.spearPassed,
       policySha: out.policySha, standingMarker: out.standingMarker,
       recorderOn: out.recorderOn,
       days: out.days, endReason: out.endReason, won: out.won,

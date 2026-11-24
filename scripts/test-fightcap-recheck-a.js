@@ -14,7 +14,7 @@
 //     the published fightcap-a numbers exactly — arm pair-inclusive
 //     22 meetings / 4 wins / 2 kills / 18 losses (vDie 3, vFlee 15),
 //     ctl pair-inclusive 4 meetings / 0 wins / 0 kills, trio+ arm
-//     3 meetings / 0 wins, verdict DIAG-GO kind THIN-POOL. If the
+//     3 meetings / 0 wins, verdict DIAG-THIN kind THIN-POOL. If the
 //     instrument drifts, this fails first.
 //   §C DRIVER SMOKE (subprocess): the ported driver runs one
 //     control seed (30d) and one arm seed (1d) cleanly under the
@@ -101,8 +101,8 @@ function runDriver(envExtra, timeoutMs) {
   check('§B Nov 18 corpora: trio+ ctl 0 meetings',
     ctl.meetings === 0, { meetings: ctl.meetings });
   const j = A.judge(ctl, arm);
-  check('§B Nov 18 corpora: judge verdict DIAG-GO kind THIN-POOL',
-    j && j.verdict === 'DIAG-GO' && j.kind === 'THIN-POOL', j);
+  check('§B Nov 18 corpora: judge verdict DIAG-THIN kind THIN-POOL',
+    j && j.verdict === 'DIAG-THIN' && j.kind === 'THIN-POOL', j);
 })();
 
 (function sectionC() {

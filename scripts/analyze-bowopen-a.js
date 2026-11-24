@@ -27,6 +27,20 @@
 // damage, ranged-at-entry share, and staging by source — these
 // explain the verdict, never re-score it.
 //
+// SPEARGATE gate replication (sim-instrument-a, blank #4): each
+// corpus file carries the driver's explicit per-seed spearSeen /
+// spearPassed (see the driver header for the definitions: a
+// departure that reaches the spear gate vs one the gate lets
+// through). The analyzer aggregates them per leg into spearSeen /
+// spearPassed / spearPassRate. A leg is KNOWN only when EVERY valid
+// file carries the counters; any leg with a file missing them
+// reports unknown (null, spearCountersKnown false) — never a partial
+// sum, never 0, never a faked 1.0. Pre-instrument corpora
+// (bowopen-recheck, written before the driver emitted the fields)
+// therefore report unknown on both legs. The counters explain the
+// gate-replication check; they are not a verdict bar, and the
+// bowopen-recheck NO-GO stands as judged.
+//
 // Per-meeting decomposition (meetingsDetail): party size/composition,
 // each member's gear (armed/armored/armorP from the gate row), monster
 // kind + HP (mHpStart), damage dealt (mDealt — PLUS per-fighter strike
@@ -107,6 +121,11 @@ function legStats(dir, opts) {
     volleyDmgMean: null, rangedAtEntry: 0, rangedAtEntryShare: null,
     bowOpen: { alreadyHad: 0, fromStash: 0, fromArmory: 0, crafted: 0, craftedFail: 0, noSource: 0 },
     bowOpenStagedVids: 0,
+    // SPEARGATE gate replication (sim-instrument-a): per-leg
+    // spearSeen/spearPassed + pass rate. Null/unknown until the
+    // end-of-leg rule below finds every valid file carrying them.
+    spearSeen: null, spearPassed: null, spearPassRate: null,
+    spearCountersKnown: false, spearFiles: 0,
     // population funnel (diagnostic: where meetings fall out)
     funnel: { encounters: 0, joined: 0, unjoined: 0, noLaunchPlan: 0, pairLaunch: 0,
       partyAbsent: 0, evadeExcluded: 0 },
@@ -123,6 +142,7 @@ function legStats(dir, opts) {
   const dmgShares = [], roundsAll = [], vTakenAll = [];
   const dmgPerRoundAll = [], volleyDmgs = [];
   let gateAvoid = 0, gateNull = 0, gateSeek = 0;
+  let spearSeenSum = 0, spearPassedSum = 0, spearFiles = 0;
   for (const f of files) {
     let d;
     try { d = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); } catch (e) { st.errors++; continue; }
@@ -136,6 +156,18 @@ function legStats(dir, opts) {
     if (d.bowOpen) {
       for (const k of Object.keys(st.bowOpen)) st.bowOpen[k] += (d.bowOpen[k] | 0);
       st.bowOpenStagedVids += (d.bowOpenStagedVids | 0);
+    }
+    // SPEARGATE gate replication: the driver's explicit per-seed
+    // fields ONLY (never the legacy bowOpen object — pre-instrument
+    // corpora predate the fields and must read unknown even where
+    // the game-code telemetry inside bowOpen incidentally carries
+    // the same counts). A file counts toward the leg total only
+    // when BOTH fields are finite numbers.
+    if (typeof d.spearSeen === 'number' && Number.isFinite(d.spearSeen) &&
+        typeof d.spearPassed === 'number' && Number.isFinite(d.spearPassed)) {
+      spearSeenSum += d.spearSeen;
+      spearPassedSum += d.spearPassed;
+      spearFiles++;
     }
     st.days.push(d.days != null ? d.days : (d.gameDays != null ? d.gameDays : 0));
     if ((RANK_ORDER[d.scaleRank] || 0) >= 2) st.national++;
@@ -314,6 +346,18 @@ function legStats(dir, opts) {
   st.volleyFireShare = st.meetings ? st.volleyFired / st.meetings : null;
   st.volleyDmgMean = mean(volleyDmgs);
   st.rangedAtEntryShare = st.meetings ? st.rangedAtEntry / st.meetings : null;
+  // SPEARGATE gate replication: known only when EVERY valid file
+  // carried the counters. Otherwise the leg total stays unknown
+  // (null) — a partial sum would undercount, and a 0 would claim
+  // the gate saw nobody. A known leg with zero seen has rate null
+  // (0/0 is undefined), which is distinct from unknown.
+  st.spearFiles = spearFiles;
+  if (st.valid > 0 && spearFiles === st.valid) {
+    st.spearSeen = spearSeenSum;
+    st.spearPassed = spearPassedSum;
+    st.spearPassRate = spearSeenSum ? spearPassedSum / spearSeenSum : null;
+    st.spearCountersKnown = true;
+  }
   st.gateAvoidShare = st.meetings ? gateAvoid / st.meetings : null;
   st.gateNullShare = st.meetings ? gateNull / st.meetings : null;
   st.gateSeekShare = st.meetings ? gateSeek / st.meetings : null;
@@ -386,6 +430,7 @@ function summarize(st) {
     'roundsMean', 'vTakenMean',
     'dmgPerRoundMean', 'volleyFired', 'volleyFireShare', 'volleyDmgMean',
     'rangedAtEntry', 'rangedAtEntryShare', 'bowOpen', 'bowOpenStagedVids',
+    'spearSeen', 'spearPassed', 'spearPassRate', 'spearCountersKnown', 'spearFiles',
     'starvation', 'starvationVillager', 'medianDays', 'communityLost',
     'national', 'seedWins', 'wave4', 'wave5', 'scaleRanks']) o[k] = st[k];
   return o;
@@ -466,6 +511,37 @@ function selftest() {
   check('no-volley meeting carries null volley + null ranged', st.meetingsDetail[2].volley === null && st.meetingsDetail[2].rangedId === null, JSON.stringify(st.meetingsDetail[2]));
   check('bowOpen counters aggregate from the corpus', st.bowOpen.crafted === 3 && st.bowOpen.noSource === 4 && st.bowOpen.alreadyHad === 2 && st.bowOpenStagedVids === 5, JSON.stringify(st.bowOpen));
   check('bowopenOn flag recorded', st.bowopenOn['true'] === 1, JSON.stringify(st.bowopenOn));
+  // SPEARGATE gate replication (sim-instrument-a): the analyzer
+  // reads the driver's explicit per-seed fields only. The fixture
+  // seed above carries no such fields, so it reads unknown.
+  check('spear counters unknown on a corpus without the driver fields (never 0, never a faked rate)',
+    st.spearSeen === null && st.spearPassed === null && st.spearPassRate === null && st.spearCountersKnown === false && st.spearFiles === 0,
+    JSON.stringify({ seen: st.spearSeen, passed: st.spearPassed, rate: st.spearPassRate, known: st.spearCountersKnown, files: st.spearFiles }));
+  const tmp2 = fs.mkdtempSync(path.join(os.tmpdir(), 'fc-bowopen-spear-'));
+  const withDir = path.join(tmp2, 'with');
+  fs.mkdirSync(withDir);
+  fs.writeFileSync(path.join(withDir, 's1.json'), JSON.stringify(mkSeed({ spearSeen: 6, spearPassed: 6 })));
+  fs.writeFileSync(path.join(withDir, 's2.json'), JSON.stringify(mkSeed({ seed: 2, spearSeen: 4, spearPassed: 3 })));
+  const stWith = legStats(withDir);
+  check('spear counters aggregate across files (spearSeen 10, spearPassed 9, rate 0.9, known)',
+    stWith.spearSeen === 10 && stWith.spearPassed === 9 && Math.abs(stWith.spearPassRate - 0.9) < 1e-9 && stWith.spearCountersKnown === true && stWith.spearFiles === 2,
+    JSON.stringify({ seen: stWith.spearSeen, passed: stWith.spearPassed, rate: stWith.spearPassRate, known: stWith.spearCountersKnown, files: stWith.spearFiles }));
+  const mixedDir = path.join(tmp2, 'mixed');
+  fs.mkdirSync(mixedDir);
+  fs.writeFileSync(path.join(mixedDir, 's1.json'), JSON.stringify(mkSeed({ spearSeen: 6, spearPassed: 6 })));
+  fs.writeFileSync(path.join(mixedDir, 's2.json'), JSON.stringify(mkSeed({ seed: 2 })));
+  const stMixed = legStats(mixedDir);
+  check('spear counters unknown on a mixed leg (no partial sum)',
+    stMixed.spearSeen === null && stMixed.spearPassed === null && stMixed.spearPassRate === null && stMixed.spearCountersKnown === false && stMixed.spearFiles === 1,
+    JSON.stringify({ seen: stMixed.spearSeen, passed: stMixed.spearPassed, rate: stMixed.spearPassRate, known: stMixed.spearCountersKnown, files: stMixed.spearFiles }));
+  const zeroDir = path.join(tmp2, 'zero');
+  fs.mkdirSync(zeroDir);
+  fs.writeFileSync(path.join(zeroDir, 's1.json'), JSON.stringify(mkSeed({ spearSeen: 0, spearPassed: 0 })));
+  const stZero = legStats(zeroDir);
+  check('spear counters known-zero is distinct from unknown (seen 0, passed 0, rate null, known)',
+    stZero.spearSeen === 0 && stZero.spearPassed === 0 && stZero.spearPassRate === null && stZero.spearCountersKnown === true && stZero.spearFiles === 1,
+    JSON.stringify({ seen: stZero.spearSeen, passed: stZero.spearPassed, rate: stZero.spearPassRate, known: stZero.spearCountersKnown, files: stZero.spearFiles }));
+  try { fs.rmSync(tmp2, { recursive: true, force: true }); } catch (e) {}
   try { fs.rmSync(tmp, { recursive: true, force: true }); } catch (e) {}
   // Judge shapes (pair-inclusive primary: kill share >= 0.25 AND
   // damage/round >= 70; bars: 0 pool, 1 kill, 2 dmg/round, 3 community,

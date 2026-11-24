@@ -324,7 +324,11 @@ function judge(ctl, arm) {
     detail: 'median survival arm ' + arm.medianDays + 'd vs ctl ' + ctl.medianDays + 'd (bar arm>=0.8x ctl)' });
   let verdict = 'NO-GO';
   let kind = '';
-  if (!poolOk) { verdict = 'DIAG-GO'; kind = 'THIN-POOL'; }
+  // THIN POOL (sim-instrument-a, blank #3): the verdict is DIAG-THIN,
+  // deliberately NOT DIAG-GO — the frozen prereg ladder requires
+  // pair-inclusive n >= 10 for DIAG-GO, so a thin-pool verdict that
+  // reads DIAG-GO misleads a reader into thinking the bar passed.
+  if (!poolOk) { verdict = 'DIAG-THIN'; kind = 'THIN-POOL'; }
   else if (bars.every(function (b) { return b.pass; })) { verdict = 'GO'; kind = ''; }
   return { verdict: verdict, kind: kind, bars: bars };
 }
@@ -413,7 +417,7 @@ function selftest() {
   j = judge(mk({}), mk({ winShare: 0.4, wins: 4, kills: 2, mFlee: 2, vDie: 4, vFlee: 4 }));
   check('judge NO-GO when win share under 0.50', j.verdict === 'NO-GO' && !j.bars[1].pass, JSON.stringify(j.bars));
   j = judge(mk({}), mk({ meetings: 7, wins: 6, winShare: 6 / 7 }));
-  check('judge DIAG-GO (thin pool) when below floor', j.verdict === 'DIAG-GO' && j.kind === 'THIN-POOL', JSON.stringify(j));
+  check('judge DIAG-THIN (thin pool) when below floor', j.verdict === 'DIAG-THIN' && j.kind === 'THIN-POOL', JSON.stringify(j));
   j = judge(mk({ communityLost: 1 }), mk({ communityLost: 3 }));
   check('judge NO-GO when community loss breaches ctl+0.125', j.verdict === 'NO-GO' && !j.bars[2].pass, JSON.stringify(j.bars));
   j = judge(mk({ communityLost: 1 }), mk({ communityLost: 2 }));
