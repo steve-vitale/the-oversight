@@ -97,7 +97,7 @@ function main() {
   fs.writeFileSync(beforePath, zlib.gzipSync(JSON.stringify(buildPanel(beforeRows)) + '\n'));
   fs.writeFileSync(afterPath, zlib.gzipSync(JSON.stringify(buildPanel(afterRows)) + '\n'));
   const score = require('./lib/balance-scorecard');
-  const read = function (f) { return JSON.parse(zlib.gunzipSync(fs.readFileSync(f, 'utf8'))); };
+  const read = function (f) { return JSON.parse(zlib.gunzipSync(fs.readFileSync(f))); };
   const report = score.comparePanels(read(beforePath), read(afterPath));
   fs.writeFileSync(OUT_PREFIX + '.json', JSON.stringify(report, null, 2) + '\n');
   fs.writeFileSync(OUT_PREFIX + '.md', score.markdown(report));
