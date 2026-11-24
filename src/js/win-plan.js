@@ -495,11 +495,48 @@
     } catch (e) { return null; }
   }
 
+  // beatName(self, vid): the name a FIRESIDE BEAT speaks for a
+  // villager — the true first name (npcName), never the
+  // knowledge-gated displayName. A departure beat is the village's
+  // own voice announcing its own people setting out together: the
+  // holder chose these companions by name at dawn, and the fire
+  // names them as the village knows them. displayName is the
+  // SCHOLAR's knowledge gate ("A person, maybe 40s, with deep-set
+  // eyes" for someone the scholar hasn't met yet) — routing a
+  // village-voice line through it rendered a companion as a label
+  // instead of a person (sim-departname-a: seed 107423 d7, "Sean
+  // sets out with A person, maybe 40s, with deep-set eyes"). The
+  // homebody-handoff line shares the defect (same resolution, same
+  // voice). npcName prefers a bestowed calledName and falls back to
+  // 'Someone' for a nameless record, so the helper inherits both.
+  // Falls back to disp (fixture ctxs that stub it) then
+  // displayName, then 'Someone' — total by construction, never
+  // throws, never renders 'undefined'.
+  function beatName(self, vid) {
+    try {
+      if (self && typeof self.npcName === 'function') {
+        var n = self.npcName(vid);
+        if (n) return n;
+      }
+    } catch (e) {}
+    try {
+      if (self && typeof self.disp === 'function') {
+        var d = self.disp(vid);
+        if (d) return d;
+      } else if (self && typeof self.displayName === 'function') {
+        var dn = self.displayName(vid);
+        if (dn) return dn;
+      }
+    } catch (e) {}
+    return 'Someone';
+  }
+
   // reseedBeat(self, vid, oldType, newType): the FIRESIDE BEAT for a
   // DEAD-TARGET re-seed (sim-reseed-b, finding #2626) — one
   // deterministic line when a plan's target is re-seeded at commit
   // (Steve's no-silent-actions law: the retarget must be heard, not
-  // silent). Names the holder (disp convention) and both types
+  // silent). Names the holder (beatName convention — the true name,
+  // never the stranger descriptor) and both types
   // (monsterNoun — the knowledge-gated name, never the raw id).
   // Deterministic wording, no Math.random. Contains "put down"
   // contiguously so the recorder's SAY_RE filter keeps it in the
@@ -515,9 +552,7 @@
   function reseedBeat(self, vid, oldType, newType) {
     try {
       if (!self || typeof self.say !== 'function') return;
-      var cname = null;
-      try { cname = (typeof self.disp === 'function' ? self.disp(vid) : (self.displayName ? self.displayName(vid) : null)); } catch (e) {}
-      if (!cname) cname = 'Someone';
+      var cname = beatName(self, vid);
       var oname = null, nname = null;
       try { oname = self.monsterNoun ? self.monsterNoun(oldType) : null; } catch (e) {}
       try { nname = self.monsterNoun ? self.monsterNoun(newType) : null; } catch (e) {}
@@ -549,9 +584,7 @@
   function expiryBeat(self, vid, oldType) {
     try {
       if (!self || typeof self.say !== 'function') return;
-      var cname = null;
-      try { cname = (typeof self.disp === 'function' ? self.disp(vid) : (self.displayName ? self.displayName(vid) : null)); } catch (e) {}
-      if (!cname) cname = 'Someone';
+      var cname = beatName(self, vid);
       var oname = null;
       try { oname = self.monsterNoun ? self.monsterNoun(oldType) : null; } catch (e) {}
       if (!oname) oname = oldType || 'something';
@@ -589,9 +622,7 @@
   function reseedLaunchBeat(self, vid, newType) {
     try {
       if (!self || typeof self.say !== 'function') return;
-      var cname = null;
-      try { cname = (typeof self.disp === 'function' ? self.disp(vid) : (self.displayName ? self.displayName(vid) : null)); } catch (e) {}
-      if (!cname) cname = 'Someone';
+      var cname = beatName(self, vid);
       var nname = null;
       try { nname = self.monsterNoun ? self.monsterNoun(newType) : null; } catch (e) {}
       if (!nname) nname = newType || 'something';
@@ -625,15 +656,12 @@
   function departLaunchBeat(self, vid, launched, target) {
     try {
       if (!self || typeof self.say !== 'function') return;
-      var cname = null;
-      try { cname = (typeof self.disp === 'function' ? self.disp(vid) : (self.displayName ? self.displayName(vid) : null)); } catch (e) {}
-      if (!cname) cname = 'Someone';
+      var cname = beatName(self, vid);
       var party = [];
       var list = launched || [];
       for (var i = 0; i < list.length; i++) {
         if (!list[i] || list[i] === vid) continue;
-        var pname = null;
-        try { pname = (typeof self.disp === 'function' ? self.disp(list[i]) : (self.displayName ? self.displayName(list[i]) : null)); } catch (e) {}
+        var pname = beatName(self, list[i]);
         if (pname) party.push(pname);
       }
       var withClause = '';
@@ -1316,11 +1344,8 @@
         bump(self, 'partyDepartures');
         bump(self, 'homebodyHandoffs');
         try {
-          var hn = null, ln = null;
-          try { hn = (typeof self.disp === 'function' ? self.disp(vid) : (self.displayName ? self.displayName(vid) : null)); } catch (e2) {}
-          try { ln = (typeof self.disp === 'function' ? self.disp(leader) : (self.displayName ? self.displayName(leader) : null)); } catch (e2) {}
-          if (!hn) hn = 'Someone';
-          if (!ln) ln = 'Someone';
+          var hn = beatName(self, vid);
+          var ln = beatName(self, leader);
           if (typeof self.say === 'function') self.say(hn + ' never leaves Haven — ' + ln + ' takes the plan and leads the party.');
         } catch (e2) {}
         try {
