@@ -24,6 +24,11 @@
 //     40-hex commit — recorded, NOT pinned to a commit: the
 //     fightcap-b §C pin broke on rebase). Smoke corpora are deleted
 //     by the test afterwards, so the worktree stays clean.
+//   §D ZERO-DMG CLASSIFIER (in-process): the classifier assigns
+//     every engaged meeting a class (strike-fight /
+//     contradict-counterplay / died-before-strike /
+//     other-zero-damage / unclassified) and fully classifies the
+//     Nov 18 arm pair (20 strike, 2 other-zero-damage).
 // Usage: node scripts/test-fightcap-recheck-a.js
 // Exit 0 = all checks pass.
 'use strict';
@@ -131,6 +136,28 @@ function runDriver(envExtra, timeoutMs) {
     }
     try { fs.rmSync(dir, { recursive: true, force: true }); } catch (e) {}
   }
+})();
+
+(function sectionD() {
+  const Z = require(path.join(REPO, 'scripts', 'analyze-zerodmg-recheck-a.js'));
+  const base = { seed: 110101, day: 50, vid: 'v1', mid: 'eulogy', outcome: 'vFlee', rounds: 5, mDealt: 100, log: ['R1: A strikes for 30'] };
+  check('§D zero-dmg: strike-fight when mDealt > 0',
+    Z.classifyMeeting(base).cls === 'strike-fight');
+  check('§D zero-dmg: contradict-counterplay on 0 dealt + contradict line',
+    Z.classifyMeeting(Object.assign({}, base, { mDealt: 0, outcome: 'mFlee', log: ['R1: Tashi contradicts the narration'] })).cls === 'contradict-counterplay');
+  check('§D zero-dmg: died-before-strike on 0 dealt + vDie + no strike line',
+    Z.classifyMeeting(Object.assign({}, base, { mDealt: 0, outcome: 'vDie', rounds: 2, log: ["R1: Thong's eyes go red. Next 3 strikes hit twice as hard. (Rage)"] })).cls === 'died-before-strike');
+  check('§D zero-dmg: other-zero-damage on 0 dealt with neither marker',
+    Z.classifyMeeting(Object.assign({}, base, { mDealt: 0, outcome: 'vFlee', log: ['R1: A walks straight in.'] })).cls === 'other-zero-damage');
+  check('§D zero-dmg: unclassified when mDealt null',
+    Z.classifyMeeting(Object.assign({}, base, { mDealt: null })).cls === 'unclassified');
+  const nov18 = path.join(REPO, 'evidence', '2026-11-18', 'fightcap-a-analysis.json');
+  if (!fs.existsSync(nov18)) { console.log('SKIP §D Nov 18 analysis check: analysis file not present'); return; }
+  const analysis = JSON.parse(fs.readFileSync(nov18, 'utf8'));
+  const armPair = Z.classify(analysis.armPairMeetings || []);
+  check('§D zero-dmg: Nov 18 arm pair fully classified (20 strike, 2 other-zero-damage, 0 unclassified)',
+    armPair.total === 22 && armPair.counts['strike-fight'] === 20 && armPair.counts['other-zero-damage'] === 2 &&
+    armPair.fullyClassified === true, armPair.counts);
 })();
 
 console.log('test-fightcap-recheck-a: ' + passed + ' passed, ' + failed + ' failed');
