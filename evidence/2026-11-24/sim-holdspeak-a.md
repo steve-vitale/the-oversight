@@ -342,6 +342,19 @@ found:
   - Note: `check.js --only holdspeak` matches 0 scripts — the new proof
     test is not on the check.js list (green-list selection, not a glob);
     its gate record is the direct 30/30 run above.
+  - **Adoption re-check on the rebased tip** (master `1ca394089`,
+    `node scripts/check.js --quick`, 980s): **337 passed, 7 failed** — all
+    7 are a subset of the 9 above, same signatures, no new failures:
+    test-measurement-proof-update, test-measurement-workflow,
+    test-phone-frame-proof (deterministic), test-measurement-cache-flags
+    (71s under the parallel check), and 3 load timeouts (living-garden,
+    occupation-panels, one-person-army; solo-campaign-endings and
+    trust-observer-neutrality passed this run). The three deterministic
+    failures were re-proven pre-existing on plain master: all three exit 1
+    on a `git archive master` extraction with no arm code present
+    (proof-update, workflow, phone-frame). test-measurement-cache-flags
+    passes 4/4 alone on the rebased tip — load artifact, as adjudicated.
+    B4 stands as adjudicated PASS on the rebased tip.
 
 **Verdict: GO (pilot)**, subject to B4's check result and the §9 confirm —
 **confirmed by the adoption worker: confirm GO on 16 fresh seeds (§9),
