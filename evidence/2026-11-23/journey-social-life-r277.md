@@ -322,7 +322,39 @@ rolled** (ad-hoc /tmp artifact, not committed):
 
 ## Gate
 
-[TO FILL — `node scripts/check.js --quick` on the rebased tip.]
+`node scripts/check.js --quick` on the rebased tip (branch tip
+`d59a98064`, base master `f5d2c3caa` — the batch-ship tip, so no
+rebase was needed at closeout), run 00:34–00:53Z by the 0000Z
+adoption, **328 passed, 16 failed in 1133s — 0 attributable**
+(log `evidence/2026-11-23/journey-social-life-r277-gate.log`).
+
+Standalone serialized re-runs on the same tip (log
+`evidence/2026-11-23/journey-social-life-r277-gate-rerun.log`,
+01:10–01:16Z, by the 0100Z finisher): **13/16 PASS** (exit 0) —
+all 7 flap-EPERM failures, all 3 120s load timeouts (living-garden
+206s, one-person-army 146s, capable-bot 45s), occupation-panels,
+measurement-cache-flags, and `test-foodpower-20261014.js`. The
+foodpower failure in the gate was the ontology validator reading a
+worktree `docs/ONTOLOGY.md` the write flap had truncated to 0 bytes
+mid-gate (00:46:28Z); restored from HEAD (`git checkout HEAD --
+docs/ONTOLOGY.md`, 354,686 bytes) before the re-runs.
+
+Remaining 3 are the standing set, identical to r268's finisher
+gate: the measurement-proof staleness pair
+(`test-measurement-proof-update.js`,
+`test-measurement-workflow.js` — "Proof source inputs are not
+current" / retained neutrality proof does not cover current
+inputs) and `test-phone-frame-proof.js` (phone receipt stale vs
+current source). All three key off src/js, src/data and index.html
+inputs that r277 never touched — the r277 commit touches 0 src/
+files (scripts/ + evidence/ only) — so they are pre-existing
+master staleness, not this run. The balance-proof / phone-frame
+refresh is owed by whoever next lands src changes, not by this
+driver-only run.
+
+Arm A proof test re-run on the final tip by the finisher:
+`scripts/test-journey-social-life-r277-driver-commit-20261123.js`
+**9/9 PASS**.
 
 ## Metric review (for the NEXT run, §14 — bars never re-scored)
 
@@ -352,8 +384,9 @@ rolled** (ad-hoc /tmp artifact, not committed):
 
 - Commits on `journey2-social`: [commit 1 — Arm A helper +
   proof test + driver + analyzer + prereg + panel JSONs + analyzer
-  log + this run note; hash filled after the gate commit below].
-  No `src/js` changes this run (driver-side fix only).
+  log + this run note: `d59a98064`]. No `src/js` changes this run
+  (driver-side fix only). [commit 2 — gate log + gate re-run log +
+  Gate section of this note: hash filled at merge].
 - Panel JSONs: `evidence/2026-11-23/journey-social-life-r277-45845.json`
   … `-45848.json` (+ probe `-45829.json`, EXCLUDED from the panel:
   the analyzer globs `journey-social-life-r277-\d+.json`, so the
@@ -372,3 +405,26 @@ rolled** (ad-hoc /tmp artifact, not committed):
   `unexpected-action:?` probe; (5) TRAIL new lines; (6) npcGoal /
   goal-branch flip (r268 filing, untouched); (7) hunger-plea body
   variety + mood-beat pool widening (content arms, after rotation).
+
+## Finisher (0100Z occurrence, `playtest-loop-2-20261124T0100Z`)
+
+- The 0000Z adoption ran the gate (00:34–00:53Z) but timed out
+  before filling the Gate section or committing the logs. This
+  occurrence adopted the adoption: liveness check at ~01:00Z — no
+  node/check.js process, no live `oversight-playtest-loop-2`
+  subagent, last file write 00:53:05Z (the completed gate log),
+  run hour ended 01:00Z. The 0000Z run is DEAD; lock
+  `playtest-loop-2-20261124T0000Z` held for closeout, deleted last.
+- Recovered flap damage: worktree `docs/ONTOLOGY.md` truncated to 0
+  bytes mid-gate (00:46:28Z); restored from HEAD, 354,686 bytes.
+  No other worktree changes were uncommitted.
+- Gate adjudicated 13/16 pass standalone (see Gate section above);
+  0 attributable. Arm A proof re-run 9/9 on the final tip.
+- Registry heartbeat could NOT be re-established: `REGISTRY.lock`
+  still jammed (heartbeat attempt 01:11Z failed "registry lock held
+  > 120s"; holder is Loop A's `sim-launchdiag-a` registration,
+  pid 15888 — do NOT kill it). Last registry heartbeat 23:16:34Z;
+  reaper margin ~4h (until ~03:16Z); closeout finished well inside
+  it. Release step retried against the same jam; if it fails, the
+  tree is clean, merged, and safe to reap once the lock clears.
+- Rotation-b 5 → 6 written at closeout; next Lane B leg is crisis.

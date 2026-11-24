@@ -1,0 +1,2860 @@
+r277 gate standalone re-runs, started 2026-11-24T01:10:01Z, tip d59a98064
+=== scripts/godpath/test-human-combat-parity.js ===
+  ok   monster plus remote party reinforcements: actualHealth
+  ok   monster plus remote party reinforcements: noZeroHealthEntrant
+  ok   monster plus remote party reinforcements: equipment
+  ok   monster plus remote party reinforcements: uniquePositions
+  ok   monster plus remote party reinforcements: lawfulPositions
+  ok   monster plus remote party reinforcements: damageApplied
+  ok   monster plus remote party reinforcements: woundsPersist
+  ok   ordinary nearby monster allies: actualHealth
+  ok   ordinary nearby monster allies: noZeroHealthEntrant
+  ok   ordinary nearby monster allies: equipment
+  ok   ordinary nearby monster allies: uniquePositions
+  ok   ordinary nearby monster allies: lawfulPositions
+  ok   ordinary nearby monster allies: damageApplied
+  ok   ordinary nearby monster allies: woundsPersist
+  ok   alien-person encounter allies: actualHealth
+  ok   alien-person encounter allies: noZeroHealthEntrant
+  ok   alien-person encounter allies: equipment
+  ok   alien-person encounter allies: uniquePositions
+  ok   alien-person encounter allies: lawfulPositions
+  ok   alien-person encounter allies: damageApplied
+  ok   alien-person encounter allies: woundsPersist
+  ok   betrayal hostile and loyal party: actualHealth
+  ok   betrayal hostile and loyal party: noZeroHealthEntrant
+  ok   betrayal hostile and loyal party: equipment
+  ok   betrayal hostile and loyal party: uniquePositions
+  ok   betrayal hostile and loyal party: lawfulPositions
+  ok   betrayal hostile and loyal party: damageApplied
+  ok   betrayal hostile and loyal party: woundsPersist
+  ok   uprising attackers and defenders: actualHealth
+  ok   uprising attackers and defenders: noZeroHealthEntrant
+  ok   uprising attackers and defenders: equipment
+  ok   uprising attackers and defenders: uniquePositions
+  ok   uprising attackers and defenders: lawfulPositions
+  ok   uprising attackers and defenders: damageApplied
+  ok   uprising attackers and defenders: woundsPersist
+  ok   Haven coalition injection into actual combat: actualHealth
+  ok   Haven coalition injection into actual combat: noZeroHealthEntrant
+  ok   Haven coalition injection into actual combat: equipment
+  ok   Haven coalition injection into actual combat: uniquePositions
+  ok   Haven coalition injection into actual combat: lawfulPositions
+  ok   Haven coalition injection into actual combat: damageApplied
+  ok   Haven coalition injection into actual combat: woundsPersist
+  ok   factory preserves fractional persistent health
+  ok   zero-health people cannot enter
+  ok   dead-marked roster people cannot re-enter at positive HP
+  ok   unknown roster entries cannot manufacture human fighters
+  ok   only absent health defaults to100
+  ok   the bearer cannot also enter as an NPC
+  ok   actual fled fight re-entry retains the wound
+  ok   terminal sync retains healing and fled people
+  ok   old saved betrayal wounds are honored
+  ok   yield saves healed HP without a stale second cap
+  ok   yield re-entry uses the same persistent body
+  ok   real local-hostile worn armor absorbs actual keyed damage
+  ok   real hostile strike delivers its worn weapon half-bonus
+  ok   actual mid-fight save/load retains human HP and gear
+  ok   actual entrants leave door tiles clear
+  ok   placement respects every occupied tile of a large body
+  ok   a full9-grid does not inject a wall/overlap fallback
+  ok   actual12-grid injection can use extended legal cells
+  ok   nearby/party/coalition enrollment remains one person
+  ok   injected people are in turn order exactly once
+  ok   foreign coalition HP and outfitting retain authored values
+  ok   foreign wounds update own home and muster without touching Haven
+  ok   foreign re-entry retains wounds rather than resetting to100
+  ok   wound persistence runs after real Lifeline prevention
+  ok   actual death persists zero and removes the person
+  ok   a fallen person cannot re-enter
+  ok   real succession cannot be overwritten by a stale NPC fighter
+
+human combat parity: 69 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 01:10:15Z
+=== scripts/godpath/test-living-garden-deed-attainment.js ===
+seed 7...
+seed 42...
+seed 99...
+seed 1234...
+seed 555...
+seed 777...
+seed 2026...
+seed 31337...
+seed 1...
+seed 2...
+seed 3...
+seed 4...
+seed 5...
+seed 6...
+seed 8...
+seed 9...
+  ok   authored harvest_fed deed is present (7d / 400 kcal)
+  ok   wiring: armed deed blocks synergy proxies on every screening seed
+  ok   failing control: removing the deed opens synergy proxies (would fail if unwired)
+  ok   prepared 2-neighbor tagged streak attains Living Garden on every seed
+  ok   roster scale: fully tagged pantry still completes at baseline-like 9 neighbors
+  ok   hardness: anonymous or under-floor tagged kcal breaks the streak after a clean day
+  ok   natural lean: short production horizon does not complete harvest_fed on this bank
+  ok   natural lean: max streak stays below the authored 7-day gate
+
+living-garden-deed-attainment: 8 passed, 0 failed, 0 todo (phase 0)
+@@LIVING_GARDEN_ATTAIN@@PANEL
+{
+  "panel": "living-garden-deed-attainment",
+  "date": "2026-11-08",
+  "seeds": [
+    7,
+    42,
+    99,
+    1234,
+    555,
+    777,
+    2026,
+    31337,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "summary": {
+    "seeds": [
+      7,
+      42,
+      99,
+      1234,
+      555,
+      777,
+      2026,
+      31337,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9
+    ],
+    "errors": [],
+    "wiringPass": "16/16",
+    "preparedPass": "16/16",
+    "rosterScaleComplete": {
+      "2": {
+        "complete": 16,
+        "of": 16
+      },
+      "4": {
+        "complete": 16,
+        "of": 16
+      },
+      "8": {
+        "complete": 16,
+        "of": 16
+      },
+      "9": {
+        "complete": 16,
+        "of": 16
+      }
+    },
+    "dilutionBreaks": "16/16",
+    "natural": {
+      "complete": 0,
+      "ascended": 0,
+      "maxStreakMax": 0,
+      "maxStreakMean": 0,
+      "of": 16
+    },
+    "authored": {
+      "event": "harvest_fed",
+      "days": 7,
+      "minKcal": 400
+    }
+  },
+  "sampleWiring": {
+    "armedBlocksSynergyProxy": true,
+    "removalControlOpensSynergy": true,
+    "failingControlWouldFailIfUnwired": true,
+    "restoredBlocksAgain": true
+  },
+  "sampleDilution": {
+    "neighbors": 9,
+    "dailyNeighborFloorKcal": 3600,
+    "afterFull": {
+      "pending": true,
+      "streak": 1
+    },
+    "afterAnonymous": {
+      "pending": false,
+      "streak": 0,
+      "complete": false
+    },
+    "afterShort": {
+      "pending": false,
+      "streak": 0,
+      "complete": false
+    }
+  },
+  "sampleNatural": {
+    "horizon": 21,
+    "livingNeighbors": 11,
+    "maxStreak": 0,
+    "pendingDays": 0,
+    "complete": false,
+    "ascended": false
+  },
+  "rows": [
+    {
+      "seed": 7,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 42,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 99,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 1234,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 555,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 777,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 2026,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 31337,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 1,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 2,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 3,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 4,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 5,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 6,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 8,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    },
+    {
+      "seed": 9,
+      "authored": {
+        "event": "harvest_fed",
+        "days": 7,
+        "minKcal": 400
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "prepared": {
+        "neighbors": 2,
+        "complete": true,
+        "streakBook": 7,
+        "ascended": true
+      },
+      "rosterScale": {
+        "2": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 800
+        },
+        "4": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 1600
+        },
+        "8": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3200
+        },
+        "9": {
+          "complete": true,
+          "maxStreak": 7,
+          "brokeAt": null,
+          "minKcalDemandPerDay": 3600
+        }
+      },
+      "dilution": {
+        "neighbors": 9,
+        "dailyNeighborFloorKcal": 3600,
+        "afterFull": {
+          "pending": true,
+          "streak": 1
+        },
+        "afterAnonymous": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        },
+        "afterShort": {
+          "pending": false,
+          "streak": 0,
+          "complete": false
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "livingNeighbors": 11,
+        "maxStreak": 0,
+        "pendingDays": 0,
+        "complete": false,
+        "ascended": false
+      }
+    }
+  ]
+}
+EXIT=0 01:13:41Z
+=== scripts/godpath/test-measurement-flags.js ===
+  ok   actual harness SIMOPT changes cannot escape cache identity
+  ok   same source with different SIMOPT has different recorded inputs
+  ok   unset source-declared flags remain explicit unknown/default inputs
+  ok   future direct, quoted, wrapper and declared legacy knobs are retained
+  ok   unrelated host environment is not copied into evidence
+
+measurement source flags: 5 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 01:13:45Z
+=== scripts/godpath/test-measurement-source-text.js ===
+  ok   CRLF source text has canonical line breaks for existing parsers
+  ok   binary source reads preserve exact bytes
+  ok   normalization never changes the source file
+  ok   non-source text is unchanged
+
+portable source fixtures: 4 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 01:13:45Z
+=== scripts/godpath/test-measurement-proof-update.js ===
+/home/hatch/workspace/worktrees/journey2-social/scripts/balance-proof-update.js:8
+ if(JSON.stringify(B.manifest(root))!==JSON.stringify(panel.sources))throw Error('Proof source inputs are not current');
+                                                                     ^
+
+Error: Proof source inputs are not current
+    at Object.validate (/home/hatch/workspace/worktrees/journey2-social/scripts/balance-proof-update.js:8:76)
+    at Object.<anonymous> (/home/hatch/workspace/worktrees/journey2-social/scripts/godpath/test-measurement-proof-update.js:4:40)
+    at Module._compile (node:internal/modules/cjs/loader:1929:14)
+    at Object..js (node:internal/modules/cjs/loader:2060:10)
+    at Module.load (node:internal/modules/cjs/loader:1651:32)
+    at Module._load (node:internal/modules/cjs/loader:1443:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v24.22.1
+EXIT=1 01:13:46Z
+=== scripts/godpath/test-measurement-workflow.js ===
+  ok   metric IDs are unique and every contract declares units, direction and tolerance
+  ok   sampling and confirmation settings remain valid
+  ok   retained real panel matches its proof digest
+  FAIL retained neutrality proof covers the current Game/controller/harness inputs
+  ok   proof declares every collector and contract input rather than silently omitting one
+  ok   collector and contract have a current proof (see SIMULATING.md: Maintaining measurement)
+  ok   every retained real observation emits exactly the contracted metrics, with explicit unknowns
+  ok   all retained policy cohorts have passing sampled observer neutrality and stable sources
+  ok   retained NPC proof has eligible actor/day evidence and a reproducible class denominator
+
+measurement-workflow: 8 passed, 1 failed, 0 todo (phase 0)
+failing: retained neutrality proof covers the current Game/controller/harness inputs
+EXIT=1 01:13:47Z
+=== scripts/godpath/test-occupation-panels.js ===
+  ok   real CLI retains one actual campaign and both absent offers
+  ok   played bearer retains the actual non-first occupation card
+  ok   campaign neutrality and deterministic exclusions are separate
+  ok   excluded jobs contain no synthetic loss, usage or exposure
+  ok   unchanged settings reuse only their six exact on/off cases
+  ok   changed shared cohort observer invalidates every cached case
+  ok   occupation option changes cache identity and actual selected jobs
+  ok   complete played/excluded accounting validates the real panel
+  ok   only the one matched played campaign enters metrics
+  ok   feature coverage uses played runs, with explicit excluded offers
+  ok   all-excluded cohorts cannot become wins or confirmation-sized
+  ok   all-excluded cohorts do not become dead features or NPC exposure
+  ok   64 requested seeds cannot certify one eligible campaign
+  ok   an unsampled absent-offer attempt cannot silently disappear
+  ok   rejects missing attempt
+  ok   rejects duplicate case
+  ok   rejects wrong starting bearer
+  ok   rejects invented excluded loss
+  ok   rejects tampered selection receipt
+  ok   rejects failed excluded-selection proof beside passing campaign proof
+  ok   rejects failed campaign proof beside a passing proof
+  ok   rejects selection proof posing as campaign neutrality
+  ok   rejects campaign proof posing as excluded selection
+  ok   different occupation cohorts cannot be compared as one lever
+  ok   changed offer availability remains visible rather than a fake defeat
+
+occupation panels: 25 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 01:14:19Z
+=== scripts/godpath/test-measurement-cache-flags.js ===
+  ok   both actual CLI configurations complete valid neutral panels
+  ok   two flags create four independent observer-on/off cache entries
+  ok   cache identities retain each actual SIMOPT value
+  ok   repeating the same setting reuses its two verified cases
+
+measurement cache flag isolation: 4 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 01:14:33Z
+=== scripts/godpath/test-phone-frame-proof.js ===
+  ok   both actual target phone sizes are retained
+  FAIL every retained browser input matches current source — index.html,src/data/alienPlayers.json,src/data/build-notes.json,src/data/foreignSpeech.json,src/data/regions.json,src/data/statusEffects.json,src/data/table-endings.json,src/js/abilityActions.js,src/js/alienPlayers.js,src/js/app.js,src/js/betrayal.js,src/js/bond-initiation.js,src/js/build.js,src/js/comms.js,src/js/contests.js,src/js/conversation.js,src/js/convo-beats.js,src/js/convo-dialogue.js,src/js/convo-mood.js,src/js/convo-scene.js,src/js/convo-wants.js,src/js/convoTopics.js,src/js/corpses.js,src/js/equipment.js,src/js/favor-forage.js,src/js/favor-outing.js,src/js/favor-water.js,src/js/feastBuff.js,src/js/fieldFights.js,src/js/finale-campaign.js,src/js/food.js,src/js/game.js,src/js/godpath.js,src/js/godverbs.js,src/js/havenGrowth.js,src/js/hierarchy.js,src/js/ladder.js,src/js/ledger.js,src/js/metaProgression.js,src/js/overtime.js,src/js/party-formal.js,src/js/party-wiring.js,src/js/party.js,src/js/partyTactics.js,src/js/progression.js,src/js/safetynets.js,src/js/sigW3c.js,src/js/sigW4.js,src/js/standing.js,src/js/statusEffects.js,src/js/storage.js,src/js/table.js,src/js/titans.js,src/js/truth.js,src/js/villageAgency.js,src/js/villager-agency.js,src/js/villager-brain.js,src/js/villager-build.js,src/js/villager-objectives.js,src/js/win-plan.js
+  FAIL all current boot inputs are covered
+  ok   receipt identity declares portable text normalization
+  ok   retained receipt hash 736
+  FAIL current phone evidence is required; follow MOBILE-PLAYTEST.md — Phone receipt source is stale or missing: index.html
+
+Phone frame proof: 3 passed, 3 failed, 0 todo (phase 0)
+failing: every retained browser input matches current source | all current boot inputs are covered | current phone evidence is required; follow MOBILE-PLAYTEST.md
+EXIT=1 01:14:34Z
+=== scripts/godpath/test-prepared-runner-custody.js ===
+  ok   unchanged selected suite accepts one isolated passing process
+  ok   proof pins collector, contract, shared kit and orchestrator sources
+  ok   changing a collector dependency rejects otherwise passing child output
+  ok   source drift never erases the actual child result or selection
+
+prepared proof custody: 4 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 01:14:37Z
+=== scripts/godpath/test-proof-text-identity.js ===
+  ok   fixture really has different checkout bytes
+  ok   observer fingerprints agree across LF and CRLF
+  ok   contract fingerprints agree across LF and CRLF
+  ok   scoring and collection share the same contract identity
+  ok   real observer edits still invalidate identity
+  ok   normalization helper edits also invalidate observer identity
+  ok   a contract edit still invalidates identity
+  ok   retained receipt fingerprints agree across checkouts
+  ok   receipt tampering still changes the fingerprint
+
+portable proof text identity: 9 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 01:14:37Z
+=== scripts/godpath/test-one-person-army-deed-attainment.js ===
+seed 7...
+seed 42...
+seed 99...
+seed 1234...
+seed 555...
+seed 777...
+seed 2026...
+seed 31337...
+seed 1...
+seed 2...
+seed 3...
+seed 4...
+seed 5...
+seed 6...
+seed 8...
+seed 9...
+  ok   authored outmatched_kill deed is present on brawler / one_person_army
+  ok   wiring: armed deed blocks synergy proxies on every screening seed
+  ok   failing control: removing the deed opens synergy proxies (would fail if unwired)
+  ok   failing control: stripping finishApexHunt earns no outmatched_kill
+  ok   prepared juggernaut bloodied solo attains One-Person Army on every seed
+  ok   hardness: weaker body, unbloodied kill, and helper each void the deed
+  ok   natural juggernaut lean: short horizon does not complete outmatched_kill on this bank
+
+one-person-army-deed-attainment: 7 passed, 0 failed, 0 todo (phase 0)
+@@ONE_PERSON_ARMY_ATTAIN@@PANEL
+{
+  "panel": "one-person-army-deed-attainment",
+  "date": "2026-11-08",
+  "seeds": [
+    7,
+    42,
+    99,
+    1234,
+    555,
+    777,
+    2026,
+    31337,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9
+  ],
+  "summary": {
+    "seeds": [
+      7,
+      42,
+      99,
+      1234,
+      555,
+      777,
+      2026,
+      31337,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      9
+    ],
+    "errors": [],
+    "wiringPass": "16/16",
+    "finishHookPass": "16/16",
+    "preparedPass": "16/16",
+    "hardnessPass": "16/16",
+    "natural": {
+      "complete": 0,
+      "ascended": 0,
+      "observed": 0,
+      "of": 16
+    },
+    "authored": {
+      "event": "outmatched_kill",
+      "afterDawn": false,
+      "path": "brawler",
+      "subclassLean": "juggernaut"
+    }
+  },
+  "sampleWiring": {
+    "armedBlocksSynergyProxy": true,
+    "removalControlOpensSynergy": true,
+    "failingControlWouldFailIfUnwired": true,
+    "restoredBlocksAgain": true
+  },
+  "samplePrepared": {
+    "openingOk": true,
+    "wound": 12,
+    "complete": true,
+    "scene": "tactical",
+    "ascended": true,
+    "className": "juggernaut"
+  },
+  "sampleHardness": {
+    "weakerBodyVoids": true,
+    "unbloodiedVoids": true,
+    "helperVoids": true,
+    "detail": {
+      "weakerBody": {
+        "complete": false,
+        "observed": false
+      },
+      "unbloodied": {
+        "complete": false,
+        "observed": false
+      },
+      "helper": {
+        "complete": false,
+        "observed": false
+      }
+    }
+  },
+  "sampleNatural": {
+    "horizon": 21,
+    "classAtStart": "juggernaut",
+    "classAtEnd": "juggernaut",
+    "fightsInterrupted": 0,
+    "observed": false,
+    "complete": false,
+    "ascended": false,
+    "book": false
+  },
+  "rows": [
+    {
+      "seed": 7,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 42,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 99,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 1234,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 555,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 777,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 2026,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 31337,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 1,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 2,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 3,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 4,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 5,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 6,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 8,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    },
+    {
+      "seed": 9,
+      "authored": {
+        "event": "outmatched_kill",
+        "afterDawn": false,
+        "path": "brawler",
+        "subclassLean": "juggernaut"
+      },
+      "wiring": {
+        "armedBlocksSynergyProxy": true,
+        "removalControlOpensSynergy": true,
+        "failingControlWouldFailIfUnwired": true,
+        "restoredBlocksAgain": true
+      },
+      "finishHookControl": {
+        "wound": 12,
+        "hooked": 1,
+        "complete": false,
+        "book": false,
+        "stripsDeed": true
+      },
+      "prepared": {
+        "openingOk": true,
+        "wound": 12,
+        "complete": true,
+        "scene": "tactical",
+        "ascended": true,
+        "className": "juggernaut"
+      },
+      "hardness": {
+        "weakerBodyVoids": true,
+        "unbloodiedVoids": true,
+        "helperVoids": true,
+        "detail": {
+          "weakerBody": {
+            "complete": false,
+            "observed": false
+          },
+          "unbloodied": {
+            "complete": false,
+            "observed": false
+          },
+          "helper": {
+            "complete": false,
+            "observed": false
+          }
+        }
+      },
+      "naturalLean": {
+        "horizon": 21,
+        "classAtStart": "juggernaut",
+        "classAtEnd": "juggernaut",
+        "fightsInterrupted": 0,
+        "observed": false,
+        "complete": false,
+        "ascended": false,
+        "book": false
+      }
+    }
+  ]
+}
+EXIT=0 01:16:03Z
+=== scripts/godpath/test-telemetry-check-recorder.js ===
+  ok   recorder-corpus input is refused, not LOUD
+  ok   refusal names the override flag
+  ok   override flag lets the compare proceed (no refusal exit)
+  ok   update-baseline bypasses the refusal and writes
+  ok   rolling a baseline preserves underscore metadata
+  ok   ordinary run files still compare (no refusal)
+  ok   single recorder file is refused
+  ok   mixed input does not trigger the guard
+
+telemetry-check recorder guard: 8 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 01:16:05Z
+=== scripts/test-foodpower-20261014.js ===
+(GREEN mode)
+(a) ability kcal costs
+(b) useAbility burns kcal, narrates
+(c) hunger gate
+(d) overcharge
+(e) village food tiers gate villager casts
+(f) ability buttons show costs + overcharge
+(g) ontology validator
+
+30 passed, 0 failed
+EXIT=0 01:16:09Z
+=== scripts/test-sw-audio-cache-20261012.js ===
+PASS release script refreshes assets after stamping
+PASS actual install caches every generated URL
+PASS current index scripts retain exact query keys
+PASS live JSON inventory is cached
+PASS every JSON cache key matches the runtime build
+PASS retired data and audio binaries are not installed
+PASS cache includes exact current shared regional renderer URL
+PASS actual activation claims clients and retires old cache
+PASS offline script ./src/js/engine/state.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/engine/modifiers.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/engine/calories.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/engine/day.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/engine/forage.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/engine/combat.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/audio-registry.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/text.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/game.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/encounters.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/conversation.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/convo-mood.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/convoTopics.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/naming-rite.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/convo-wants.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/convo-dialogue.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/convo-beats.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/convo-scene.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/voice-piper.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/voice-system.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/examine.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/equipment.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/journal.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/party.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/favor-water.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/favor-forage.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/favor-outing.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/party-formal.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/truth.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/galactic-cast.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/contests.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/broadcast.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/contestEngine.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/alienPlayers.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/storage.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/perceive.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/carexplore.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/justice.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/food.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/betrayal.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/corpses.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/corruption.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/lifeseed.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/spawn-knack.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/trial-deeds.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/practice-deeds.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/tracks.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/villager-build.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/progression.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/waveLedger.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/standing.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/ladder.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/feastBuff.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/ledger.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/exposure.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/abilityActions.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/buildarounds.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/foodPower.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/monsterBehaviors.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/partyTactics.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/sigW3a.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/statusEffects.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/sigW3b.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/metaProgression.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/sigW3c.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/sigW4.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/sigW5.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/villager-agency.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/win-plan.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/npc-triggers.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/fieldFights.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/party-wiring.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/party-bond.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/villager-objectives.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/villager-goals.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/villager-brain.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/bond-initiation.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/villager-mapmem.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/codex-people.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/fallen-memorial.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/graves.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/membership.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/gardenCultivation.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/havenGrowth.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/shelter.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/hierarchy.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/scaleDiscovery.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/comms.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/table.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/pods.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/titans.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/finale-campaign.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/godhood.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/pantheon.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/records.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/table-feared.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/table-indispensable.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/table-beloved.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/table-witness.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/table-assimilated.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/table-defiant.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/relay-ext.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/relay-dialogue.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/table-relay.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/safetynets.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/villageAgency.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/memdepth.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/overtime.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/network-campaign.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/debug-scenarios.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/keepsakes.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/skill-teaching.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/person-trust.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/companion-score.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/world.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/nomad.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/nomad-wild.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/nomad-scenes.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/nomad-drive.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/temperature.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/godpath.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/godverbs.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/endingKey.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/telemetry-hooks.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/finishLog.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/feel.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/build.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/whereAreWe.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/drama.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/move-anim.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/presentation.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/sprites.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/tile-scenes.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/regional-audio.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/favor-company.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/timeSettlement.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/app.js?v=3df28e069-20261123-234935
+PASS offline script ./src/js/feel-audio.js?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/abilities.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/alienPlayers.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/animals.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/arrivalText.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/background_survivors.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/biomes.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/books.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/build-notes.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/cell_defs.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/characterGen.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/climates.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/contests.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/cooking.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/events.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/evolutions.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/favor-rules.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/feast-surge.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/foreignSpeech.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/gardening.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/godpaths.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/items.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/justiceVoice.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/knowledge.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/ladder-capstones.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/lifeseeds.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/locations.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/monsterBehaviors.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/monsters.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/nameCultures.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/originPicker.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/pellet-boost.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/plants.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/presentation.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/recipes.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/regions.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/relicEnhancements.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/reward-economy.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/schemas.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/statusEffects.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/synergies.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/table-beats.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/table-endings.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/titans.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/tracks.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/villagers.json?v=3df28e069-20261123-234935
+PASS offline JSON ./src/data/wave-ledger.json?v=3df28e069-20261123-234935
+PASS offline entry document resolves
+PASS offline exact versioned stylesheet resolves
+PASS all installed boot requests avoid the stopped network
+PASS offline navigation uses actual cached index fallback
+PASS wrong build query cannot silently serve a cached old script
+PASS wrong build JSON cannot silently use another build cache
+PASS collector rejects a missing real boot dependency
+OFFLINE_ASSET_RESULT {"checks":199,"urls":192,"scripts":138,"data":46,"networkCallsBeforeOffline":0,"version":"3df28e069-20261123-234935"}
+offline asset proof green: 199 checks
+  ok   fetch handler registered
+  ok   mp3 by content-type cached for offline
+  ok   mp3 response still returned to player
+  ok   audio-dir URL cached even as json (manifest)
+  ok   game.js NOT runtime-cached
+  ok   failed audio NOT cached
+  ok   playback survives cache failure
+
+==== 7/7 checks passed ====
+EXIT=0 01:16:10Z
+=== scripts/test-capable-bot-20261014.js ===
+
+1. real flee exits the fight
+  ok   flee decided
+  ok   pushed through the barrier
+  ok   fight exited (not just walked to the edge)
+  ok   left the node havenward
+  ok   no policy errors
+
+2. abilities fire in combat through useAbility
+  ok   capAbilityUses > 0
+  ok   ability_used telemetry > 0
+  ok   hunger gate respected (no use at kcal 300)
+
+3. choices are scored, not option 0
+  ok   offer scoring: synergy leg echo_location beats game_sense
+  ok   upkeep took the synergy leg (not card 0)
+  ok   Table seat taken when tablePreview().ready
+  ok   Table seat NOT taken before day 90 (ready=false)
+  ok   trial by combat scored below every other beat
+  ok   path scored by earned strength, not position
+
+4. a conversation is held (real turns), target by need
+  ok   held at least one conversation
+  ok   real exchanges taken (deepTurns > 0)
+
+5. competent.beastStrikeTarget steps within moveLeft
+  ok   moved
+  ok   destination within this turn's 3 squares (was 5 away: "Too far" no-op)
+
+6. no fight left live at bedtime (sleep would refuse: a lost game day)
+  ok   fight resolved by the end of daily
+
+7. capable food chain and the reactor tradeoff
+  ok   fixture holds a real unchanneled keepsake
+  ok   lesson and mastered gifts arm devotion without setting deed flags
+  ok   pre-reactor chain has no reactor
+  ok   real donation clears the policy contribution bar
+  ok   capable upkeep actually hosts a feast
+  ok   feast spends its reported real pantry calories
+  ok   paid feast actually grants the buff
+  ok   capable faces the actual feast draw
+  ok   real capable combat earns the food deed at first use
+  ok   earned food deed persists through combat settlement
+  ok   combat spends devotion only on actual use
+  ok   food chain has no policy errors
+  ok   online reactor refuses the otherwise armed grant honestly
+  ok   reactor refusal invents neither feast buff nor food deed
+
+short sims: 2 seeds x 40 days
+  ok   seed 42: qualified observed feast plans receive an actual host attempt
+  ok   seed 42: host attempts return a real feast or explicit refusal
+  INFO original campaign seed=42 foodDeeds=true grants=[{"day":27,"granted":true}]
+  INFO seed 1234: feast opportunity unobserved; keep the natural food-deed coverage watch
+  INFO original campaign seed=1234 foodDeeds=true grants=[]
+  ok   runs completed
+  ok   game days keep pace with loop days (no fight left live at sleep)
+  INFO original two-seed food-deed count=2; capability required by controlled real-combat proof above
+  ok   contest choices taken by scoring
+  ok   conversations held in-sim
+  ok   no policy-side errors
+
+test-capable-bot-20261014: 40 passed, 0 failed, 0 todo (phase 0)
+EXIT=0 01:16:41Z
+DONE 2026-11-24T01:16:41Z
