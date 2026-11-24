@@ -4838,6 +4838,15 @@
       return this._contestEnd(ac, 'won', true);
     }
     if (result === 'lost') {
+      // CONTEST-END TELEMETRY (landing r158 — same class as _contestDie):
+      // an arena loss ends the contest; the ledger must hear about it.
+      // Held by a player-bearing phoenix link, the fire holds the death, so
+      // it is not a death yet — outcome 'lost', mirroring the death-ledger
+      // block below; otherwise 'died'.
+      try {
+        const _held = this.state.phoenixLink && this.state.phoenixLink.bearerIsPlayer !== false;
+        this.tele('contest_end', { id: (ac && ac.contestId) || '?', outcome: _held ? 'lost' : 'died' });
+      } catch (e) {}
       // tbEnd already ran playerDeath — the death is processed. Close the
       // show without re-killing: death line, then done.
       this.sysSay(`📺 ${contest.name} — the beast.`);
@@ -5482,6 +5491,15 @@
     const _dieKey = ac.participant || 'player';
     if (ac._dieLanded[_dieKey]) return { done: true, outcome: 'died' };
     ac._dieLanded[_dieKey] = true;
+    // CONTEST-END TELEMETRY (landing r158 — r155 defect): a death ends the
+    // contest, so the ledger must hear about it. _contestEnd is the only
+    // terminal that emitted contest_end; a duel that killed its scholar
+    // (r155 seed 1364: Tanya d27) left the ledger entry open forever
+    // (endDay null, outcome null) and its open span swallowed later deaths
+    // into the wrong contest. Same shape as _contestEnd's tele; placed
+    // after the _dieLanded guard so a re-entrant death emits nothing twice.
+    // _contestRefuse and the arena-lost branch carry the same line.
+    try { this.tele('contest_end', { id: (ac && ac.contestId) || '?', outcome: 'died' }); } catch (e) {}
     ac.phase = 'done';
     // DEATH LEDGER (contest-fear 2026-10-11): the village remembers what
     // each contest has killed — the participate/refuse screen reads it back
@@ -5573,6 +5591,10 @@
   G._contestRefuse = function(ac) {
     // Refusal is a sequence, not a skip (Steve 2026-10-05)
     const contest = this._cxScaledContest(ac);
+    // CONTEST-END TELEMETRY (landing r158 — same class as _contestDie):
+    // a refusal ends the contest; the ledger must hear about it, or the
+    // entry stays open (endDay null) and swallows later deaths into its span.
+    try { this.tele('contest_end', { id: (ac && ac.contestId) || '?', outcome: 'refused' }); } catch (e) {}
     this.sysSay(`📺 You refuse ${contest.name}.`);
     this.sysSay(`📺 The System pauses. Refusal is... content. The cameras stay on.`);
     this.sysSay(`📺 "NOTED," says the System. "THE AUDIENCE WILL REMEMBER THE COWARDICE. OR THE PRINCIPLE. WE HAVEN'T DECIDED."`);
