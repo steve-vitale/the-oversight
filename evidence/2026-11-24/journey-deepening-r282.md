@@ -90,4 +90,8 @@ Eight villages, seven alive at day 100. They are small (2–11 people left) and 
 - Run note (this file): worktree `evidence/2026-11-24/journey-deepening-r282.md`.
 
 ## Closeout
-- PENDING — commits, merge, rotation, lock deletion, telemetry verdict.
+- Commits (worktree, safe-commit): tooling + evidence + run note (`8eb2eb0ca`, rebased to `8e1d909ce`); closeout record (this section).
+- Safe-commit clobber struck on the first commit (all 7 files staged-deleted in the main index, worktree files byte-identical to HEAD); repaired with `git ls-tree HEAD -- <files> | git update-index --add --index-info`, verified status empty + diff HEAD empty. Commit verified correct (`git show --stat`).
+- Master moved during the run (Loop B 1030Z round record + bloodcluster arms, new tip `3ec1f1572`); branch rebased onto it cleanly (no conflicts, no stop-at-pick quirk), proof tests re-run green on the rebased tip (analyzer 113/113, march 11/11, muster 41/41, mootclose-r269 36, gonebearer-lines-r272 35, warnheed-reset-r277 16, mootclose-stage 28/28). The panel verdicts stand on the base they ran on (`c329b477d`).
+- Merge `--ff-only journey-deepening` in main tree; release worktree; reap; verify main tree clean.
+- Rotation `2→3` with read-back. Lock deleted. "Merged locally, pending ship" — no version tag.
