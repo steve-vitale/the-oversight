@@ -341,8 +341,9 @@ Documented, not fixed here:
   (proof staleness proven at base) or load timeouts (§4).
 
 **Overall verdict: GO.** The fix is verified on the repro, clean
-across the band, and reads as people. Branch head after commit:
-[TO FILL — commit hash]. Merged locally, pending ship (the
+across the band, and reads as people. Branch head:
+`5b85bdce9` (fix + proof test + analyzer + corpora + analysis +
+this evidence; prereg `235edd273`). Merged locally, pending ship (the
 coordinator merges; no push, no version bump, no live check by
 this arm).
 
