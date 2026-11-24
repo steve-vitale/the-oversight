@@ -5116,7 +5116,17 @@
       const silent=full.filter(ch=>ch.id==='silence' || ch.id==='nv:listen').slice(0,1);
       const navigation=full.filter(ch=>['leave','subject','dlg:subject'].includes(ch.id));
       const content=full.filter(ch=>!silent.includes(ch) && !navigation.includes(ch));
-      const rank=ch=>/^(betrayal:|confront:|agency:|nv:accept|nv:decline)/.test(ch.id)?0:
+      // R280 MENU-PRIORITY (journey-establishment r280 2026-11-24): a
+      // stranded run's cancel verb (dlg:favor_cancel, BEARER-END /
+      // end-without-partner) is the run's only honest end — it sorts ahead
+      // of even the betrayal-case flood (rank -1), so a real player sees
+      // it on page 1 instead of after 7 pages of cases (r277: 54–56
+      // options, 3 dawns lost). A healthy live run's early end is not
+      // urgent and keeps its default rank (4) — only the gone-owner shape
+      // promotes (see convoFavorEndUrgent in convo-wants.js).
+      const favorEndUrgent = (() => { try { return typeof this.convoFavorEndUrgent === 'function' && this.convoFavorEndUrgent(vid); } catch (e) { return false; } })();
+      const rank=ch=>(ch.id==='dlg:favor_cancel'&&favorEndUrgent)?-1:
+        /^(betrayal:|confront:|agency:|nv:accept|nv:decline)/.test(ch.id)?0:
         /^(alive:|dlg:commit|dlg:cant|dlg:help|dlg:heed|dlg:stay)/.test(ch.id)?1:
         /^(ask:goal$|offer_help$)/.test(ch.id)?2:
         // R54 OTHERS RANK (journey-social r53 funnel fix): 'ask:others'

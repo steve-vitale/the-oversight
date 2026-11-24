@@ -2585,6 +2585,43 @@
       return { ready: true, action: 'care', label: 'Tend them now (about half an hour)', reason: 'Spend about half an hour providing basic care. No magic or medical ability is required; this is not an instant cure.' };
     },
 
+    // R280 MENU-PRIORITY (journey-establishment r280 2026-11-24): is this
+    // sitting's favor cancel the run's ONLY honest end? A joint forage /
+    // water run whose bearer <redacted> dead or roster-gone (BEARER-END, r265)
+    // — or, for forage, whose partner is gone while the scholar is the
+    // bearer <redacted> r81) — can never be closed by its owner again; the
+    // successor may only end it at Haven through dlg:favor_cancel. On the
+    // r277 panel that verb sat buried under 54–56 betrayal-case options
+    // for 3 dawns while the run stranded. A healthy live run's early end
+    // is NOT urgent — its owner can still close it — so it stays ranked
+    // last. Mirrors the ready branches in favor-forage.js /
+    // favor-water.js (same gone checks; no home check here — the menu only
+    // offers the cancel when ready, and ready already requires Haven).
+    convoFavorEndUrgent(vid) {
+      try {
+        const c = this.convoGet(vid);
+        const favor = (c && c.want && c.want.favor) || this.convoGetFavor(vid);
+        if (!favor) return false;
+        const v = this.state.village || {};
+        const gone = id => { try { const p = this.getPerson(id); return !p || !!p.dead || !((v.roster || []).includes(id)); } catch (e) { return true; } };
+        if (favor.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned) {
+          const r = favor.forageRun;
+          if (r.bearer !== this.villagerId) return gone(r.bearer);
+          // Scholar is the bearer: the r81 end-without-partner shape.
+          try {
+            const partner = this.getPerson(vid);
+            return !(v.roster || []).includes(vid) || !partner || !!partner.dead || !!v.away?.[vid];
+          } catch (e) { return false; }
+        }
+        if (favor.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
+          const r = favor.waterRun;
+          if (r.bearer === this.villagerId) return false; // water has no r81 mirror: a gone partner blocks ending outright
+          return gone(r.bearer);
+        }
+        return false;
+      } catch (e) { return false; }
+    },
+
     convoFavorActionMenu(vid, favor, canPromise) {
       const status = this.convoFavorAction(vid, favor), out = [];
       if (status.ready) out.push({ id: 'dlg:favor_action', labels: [status.label], temper: 'kind' });
