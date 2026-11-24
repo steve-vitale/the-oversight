@@ -473,6 +473,13 @@ function diffNeedWaves(before, after, holderVid) {
   return rows;
 }
 const DEPART_BEAT_RE = /sets out .* — the fire marks the trail\./;
+// HOLDSPEAK (sim-holdspeak-a, finding #2713): the hold-line capture
+// token — every hold line ends with this closer, parallel to the
+// departure beat's "— the fire marks the trail.". HOLD_NAME_RE reads
+// the leading first name off a hold line (lines always start with the
+// holder's true first name).
+const HOLD_BEAT_RE = /— the party waits\./;
+const HOLD_NAME_RE = /^[A-ZÀ-ÖØ-Þ][A-Za-zÀ-öø-ÿ'’\-]*/;
 
 async function oneRun(seed) {
   const policy = competent;
@@ -494,6 +501,12 @@ async function oneRun(seed) {
   const departBeats = [];
   const reseedBeats = [];
   const beatLines = [];
+  const holdLines = [];
+  // HOLDSPEAK: startExpedition(holder) calls during the current depart
+  // call, for the H2/H3 split (see the vbrainExecuteDepart wrap).
+  let sexpWatchVid = null;
+  let sexpHolderCalls = 0;
+  let sexpWrapOk = false;
   // DAWNCHOKE rows.
   const departCalls = [];
   const scorePicks = [];
@@ -687,6 +700,17 @@ async function oneRun(seed) {
       return ret;
     };
   });
+  // HOLDSPEAK: count startExpedition(holder) calls per depart call, so
+  // a party_launch 'hold' classifies as execute-fail (H3, called) vs
+  // dead-target held (H2, never called). Only the holder's own vid
+  // counts — the handoff's companion calls must not move the class.
+  wrapGame('startExpedition', function (orig) {
+    sexpWrapOk = true;
+    return function (vid) {
+      try { if (vid != null && sexpWatchVid != null && vid === sexpWatchVid) sexpHolderCalls++; } catch (e) {}
+      return orig.apply(this, arguments);
+    };
+  });
   wrapGame('vbrainExecuteDepart', function (orig) {
     return function (vid, hx, hy, playerAtHaven) {
       let commit = null;
@@ -696,7 +720,37 @@ async function oneRun(seed) {
       try { const _p0 = planOfGame(this, vid); dcPre = _p0 ? { stage: _p0.stage || null, target: _p0.target || null, needWave: (_p0.needWave != null ? (_p0.needWave | 0) : null) } : null; } catch (e) {}
       let nwBefore = null;
       try { nwBefore = snapshotNeedWaves(this); } catch (e) {}
+      sexpWatchVid = vid; sexpHolderCalls = 0;
       const ret = orig.apply(this, arguments);
+      sexpWatchVid = null;
+      // HOLDSPEAK: classify a 'hold' verdict by its real cause, from
+      // the commit + what the depart call actually did — no game-code
+      // re-reads with side effects. H1 from the commit action; H2 vs
+      // H3 by whether the holder's startExpedition ran; H3 sub-cause
+      // from pure reads, mirroring startExpedition's gate order
+      // (hurt, then sick, then range-0). holderName is the true first
+      // name at call time (npcName), the join key for holdLines.
+      let holdCause = null, holderName = null;
+      try {
+        if (ret === 'hold') {
+          const act = commit ? (commit.winPlanAction || null) : null;
+          if (act === 'gear_hold' || act === 'party_wait' || act === 'veteran_guard') holdCause = act;
+          else if (act === 'party_launch') {
+            if (!sexpWrapOk) holdCause = 'execute:unclassified';
+            else if (sexpHolderCalls > 0) {
+              let hp = 100, sick = false, maxD = -1;
+              try { const h = ((this.state.village.health || {})[vid]); hp = (h !== undefined ? h : 100); } catch (e) {}
+              try { sick = !!((this.state.village.sick || {})[vid]); } catch (e) {}
+              try { maxD = this.npcMaxDist ? this.npcMaxDist(vid) : -1; } catch (e) {}
+              if (hp < 70) holdCause = 'execute:hurt';
+              else if (sick) holdCause = 'execute:sick';
+              else if (maxD >= 0 && maxD < 1) holdCause = 'execute:range0';
+              else holdCause = 'execute:unknown';
+            } else holdCause = 'expired:no-trail';
+          } else holdCause = 'other';
+          try { holderName = (typeof this.npcName === 'function') ? this.npcName(vid) : null; } catch (e) {}
+        }
+      } catch (e) { errors.push('holdcause-log: ' + String(e.message).slice(0, 80)); }
       try {
         let prof = null, occ = null;
         try { prof = this.npcRangeProfile ? this.npcRangeProfile(vid) : null; } catch (e) {}
@@ -704,7 +758,7 @@ async function oneRun(seed) {
         departCalls.push({ day: gday(Game), part: (Game.dayPart | 0), vid: vid || null, source: 'brain',
           commitWinPlanAction: commit ? (commit.winPlanAction || null) : null,
           commitKind: commit ? (commit.kind || null) : null,
-          result: ret || null,
+          result: ret || null, holdCause: holdCause, holderName: holderName,
           planStage: dcPre ? dcPre.stage : null, planTarget: dcPre ? dcPre.target : null,
           planNeedWave: dcPre ? dcPre.needWave : null, profile: prof, occupation: occ });
       } catch (e) { errors.push('departcall-log: ' + String(e.message).slice(0, 80)); }
@@ -783,6 +837,11 @@ async function oneRun(seed) {
         try {
           const line = String(arguments[0] == null ? '' : arguments[0]);
           if (DEPART_BEAT_RE.test(line)) beatLines.push({ day: gday(Game), text: line });
+          if (HOLD_BEAT_RE.test(line)) {
+            let nm = null;
+            try { const m = HOLD_NAME_RE.exec(line); nm = m ? m[0] : null; } catch (e) {}
+            holdLines.push({ day: gday(Game), name: nm, text: line });
+          }
         } catch (e) {}
         return ret;
       };
@@ -971,7 +1030,7 @@ async function oneRun(seed) {
     v4departs: v4departs, v4fights: v4fights, planSeeds: planSeeds,
     planCensus: planCensus,
     needWaveCopies: needWaveCopies, departBeats: departBeats,
-    reseedBeats: reseedBeats, beatLines: beatLines, sayWrap: sayWrap,
+    reseedBeats: reseedBeats, beatLines: beatLines, holdLines: holdLines, sayWrap: sayWrap,
     departCalls: departCalls, scorePicks: scorePicks, dawnPool: dawnPool,
   };
   return out;
@@ -1043,6 +1102,9 @@ if (require.main === module) (async function () {
       departBeats: out.departBeats ? out.departBeats.length : 0,
       ordinaryBeats: (out.departBeats || []).filter(function (b) { return b.ordinarySpoke; }).length,
       beatLines: out.beatLines ? out.beatLines.length : 0, sayWrap: !!out.sayWrap,
+      holdLines: out.holdLines ? out.holdLines.length : 0,
+      holdCalls: (out.departCalls || []).filter(function (r) { return r.result === 'hold'; }).length,
+      holdCauses: (function () { const c = {}; (out.departCalls || []).forEach(function (r) { if (r.result === 'hold') c[r.holdCause || 'null'] = (c[r.holdCause || 'null'] || 0) + 1; }); return c; })(),
       winplanSha: out.winplanSha, brainSha: out.brainSha,
       errors: out.instrumentErrors.length,
       file: path.relative(REPO, file),
