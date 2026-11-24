@@ -477,3 +477,66 @@ conversation/favor area:
    staleness (pair).
 
 No new failure. Gate: PASS with the standing 5.
+
+## Adoption closeout — Lane A 2345Z occurrence (playtest-loop-a-20261124T0105Z)
+
+**Adopted the timed-out r157 run.** The r157 run timed out ~00:41Z at its
+post-commit rebase; its worktree (`journey-landing`, branch
+`journey-landing`, commit `e7e3130ea`) survived unmerged, rotation-a
+still 0, lock already absent (main-session check). This occurrence
+adopted it per the r157 timeout note's direction.
+
+**Stale-run verification (before touching anything):** registry heartbeat
+for `journey-landing` was `2026-11-24T00:27:42Z` — 40+ min stale at
+adoption start, no live coordinator (the r157 run's 2h timeout had
+killed it). No playtest lock existed; created
+`playtest-loop-a-20261124T0105Z` (01:07:34Z). Pre-flight: main tree
+clean (tracked status empty + zero untracked — the 0215Z round record
+that blocked the 23:45 run is now committed as `8a032676f`), disk 48%,
+`git fetch origin` shows origin/master = local master at adoption start.
+
+**Machine restart ~01:31Z (uptime 1 min):** killed the second rebase
+attempt mid-flight. Verified no effect: worktree HEAD still
+`e7e3130ea`, no rebase state, rebase log empty (the attempt never got
+past the slow index phase). Heartbeat loop restarted detached after the
+restart (pid 1755, 5-min cadence); writes probed OK throughout the
+adoption — no flap window active during adoption work (window 22 had
+cleared ~00:49Z).
+
+**Rebase blocker — stale index.lock:** three rebase attempts failed
+identically at `could not detach HEAD` with `Unable to create
+'.../.git/worktrees/journey-landing/index.lock': File exists`. Root
+cause: a stale `index.lock` dated **00:28Z**, left by the r157 run
+itself when it died mid-operation. Verified no live git process held
+it (no git process in the worktree; the lock predates the restart by
+an hour), removed it per git's own recovery instruction, and the
+rebase then succeeded on the first try.
+
+**Master moved during the adoption:** Lane B's journey-social r277
+finisher landed 3 commits (`2b2239237`, `aa0e9ec6e`, `287ee67f4`,
+`f0398bba6`) between the fetch and the rebase. Rebased onto the new
+tip `f0398bba6` (not the stale `f5d2c3caa`). Overlap check: the r277
+delta touches 15 files (journey-social evidence/scripts only) — zero
+overlap with the r157 files. Rebase replayed the single pick cleanly:
+`5d3004abd` on `f0398bba6`. Fidelity verified: `git diff e7e3130ea
+5d3004abd -- <all six r157 files>` is empty — byte-identical content.
+
+**Proofs re-run on the rebased tip (independent verification, not the
+run's word):** r157 proof test 28/28, r156 proof test 23/23, panel
+corpus 152 files in `landing-r157-after/` — all match the run note.
+
+**Gate on the rebased tip:** `node scripts/check.js --quick
+--cacheDirectory=/tmp/jest-cache-r157-adopt-gate`, **339 passed, 5
+failed in 614s** — the exact standing-5 from r157's gate (same test
+names, same causes): phone-frame-proof (stale receipt), living-garden
++ one-person-army deed-attainment (both TIMEOUT 120s in-gate, both
+**green standalone, exit 0** — load artifacts, re-verified this run),
+measurement-proof-update + measurement-workflow (staleness pair).
+**0 attributable to the r157 fix** (the fix touches only
+`src/js/convo-wants.js`; no failing test is in the conversation/favor
+area). Gate: PASS.
+
+**Closeout:** merged `journey-landing` ff-only into master, worktree
+released + branch deleted, rotation-a advanced 0→1, lock deleted in
+the same call as its read (run_id matched). Merged locally, pending
+ship. No version bump, no push — the ship loop owns those.
