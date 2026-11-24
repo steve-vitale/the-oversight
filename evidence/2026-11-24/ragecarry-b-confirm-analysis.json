@@ -1,0 +1,4610 @@
+{
+  "verdict": "NO-GO",
+  "kind": "",
+  "bars": [
+    {
+      "id": "pool-floor-pair",
+      "pass": true,
+      "detail": "engaged launched-party meetings (pair-inclusive, present): ctl 13 (floor 10); arm 12"
+    },
+    {
+      "id": "kill-share",
+      "pass": false,
+      "detail": "arm pair kill share 0.000 (0/12) vs ctl 0.077 (1/13) (bar arm>=0.25)"
+    },
+    {
+      "id": "damage-per-round",
+      "pass": false,
+      "detail": "arm pair mean damage/round 51.3 vs ctl 47.8 (bar arm>=70)"
+    },
+    {
+      "id": "cost-community-loss",
+      "pass": true,
+      "detail": "community loss arm 7/12 vs ctl 7/12 (bar arm share <= ctl share + 0.125)"
+    },
+    {
+      "id": "cost-starvation",
+      "pass": true,
+      "detail": "starvation totals arm 4 vs ctl 3; villager arm 2 vs ctl 2 (bar arm<=ctl+2 both)"
+    },
+    {
+      "id": "cost-median",
+      "pass": true,
+      "detail": "median survival arm 148d vs ctl 130.5d (bar arm>=0.8x ctl)"
+    },
+    {
+      "id": "instrument-errors",
+      "pass": true,
+      "detail": "instrument errors arm 0 / ctl 0 (bar 0)"
+    },
+    {
+      "id": "mechanism-rage-family",
+      "pass": true,
+      "detail": "Rage-family fires (carrier OR real Rage, engine-side) on arm pair meetings: 10/12 = 0.83 (bar >=0.50 — below this the pilot measures a null, not a capability result)"
+    },
+    {
+      "id": "carrier-fires-ctl-zero",
+      "pass": true,
+      "detail": "carrier-rage meetings on the control leg (flags off — the carrier cannot fire there): ctl 0 (bar 0; any ctl fire is an instrument failure)"
+    }
+  ],
+  "carrierRageArm": [
+    {
+      "seed": 107903,
+      "day": 41,
+      "vid": "elif_demir",
+      "mid": "eater",
+      "outcome": "vFlee",
+      "rounds": 8,
+      "mDealt": 623,
+      "carrierRageHeld": true
+    },
+    {
+      "seed": 107903,
+      "day": 124,
+      "vid": "ruby_callaghan",
+      "mid": "reunion",
+      "outcome": "vFlee",
+      "rounds": 8,
+      "mDealt": 531,
+      "carrierRageHeld": true
+    },
+    {
+      "seed": 107904,
+      "day": 124,
+      "vid": "app_mgpspki5423",
+      "mid": "reunion",
+      "outcome": "vDie",
+      "rounds": 4,
+      "mDealt": 91,
+      "carrierRageHeld": true
+    },
+    {
+      "seed": 107905,
+      "day": 119,
+      "vid": "stan_kowalski",
+      "mid": "eulogy",
+      "outcome": "vFlee",
+      "rounds": 4,
+      "mDealt": 419,
+      "carrierRageHeld": true
+    },
+    {
+      "seed": 107905,
+      "day": 121,
+      "vid": "stan_kowalski",
+      "mid": "eater",
+      "outcome": "vFlee",
+      "rounds": 2,
+      "mDealt": 192,
+      "carrierRageHeld": true
+    },
+    {
+      "seed": 107910,
+      "day": 77,
+      "vid": "gen_3udg2xv",
+      "mid": "eulogy",
+      "outcome": "vFlee",
+      "rounds": 4,
+      "mDealt": 261,
+      "carrierRageHeld": true
+    },
+    {
+      "seed": 107912,
+      "day": 103,
+      "vid": "app_mgpsphr5150",
+      "mid": "eulogy",
+      "outcome": "vFlee",
+      "rounds": 4,
+      "mDealt": 168,
+      "carrierRageHeld": true
+    }
+  ],
+  "carrierRageCtl": [],
+  "rageFamilyArm": [
+    {
+      "seed": 107903,
+      "day": 36,
+      "vid": "gen_blfbnl1",
+      "mid": "suburb",
+      "outcome": "vDie",
+      "rounds": 4,
+      "mDealt": 136,
+      "carrier": false,
+      "realRage": true,
+      "carrierRageHeld": false
+    },
+    {
+      "seed": 107903,
+      "day": 39,
+      "vid": "rafael_torres",
+      "mid": "congregation",
+      "outcome": "vFlee",
+      "rounds": 1,
+      "mDealt": 54,
+      "carrier": false,
+      "realRage": true,
+      "carrierRageHeld": false
+    },
+    {
+      "seed": 107903,
+      "day": 41,
+      "vid": "elif_demir",
+      "mid": "eater",
+      "outcome": "vFlee",
+      "rounds": 8,
+      "mDealt": 623,
+      "carrier": true,
+      "realRage": true,
+      "carrierRageHeld": true
+    },
+    {
+      "seed": 107903,
+      "day": 124,
+      "vid": "ruby_callaghan",
+      "mid": "reunion",
+      "outcome": "vFlee",
+      "rounds": 8,
+      "mDealt": 531,
+      "carrier": true,
+      "realRage": true,
+      "carrierRageHeld": true
+    },
+    {
+      "seed": 107904,
+      "day": 124,
+      "vid": "app_mgpspki5423",
+      "mid": "reunion",
+      "outcome": "vDie",
+      "rounds": 4,
+      "mDealt": 91,
+      "carrier": true,
+      "realRage": true,
+      "carrierRageHeld": true
+    },
+    {
+      "seed": 107905,
+      "day": 47,
+      "vid": "ethan_hunt",
+      "mid": "eater",
+      "outcome": "vFlee",
+      "rounds": 9,
+      "mDealt": 364,
+      "carrier": false,
+      "realRage": true,
+      "carrierRageHeld": false
+    },
+    {
+      "seed": 107905,
+      "day": 119,
+      "vid": "stan_kowalski",
+      "mid": "eulogy",
+      "outcome": "vFlee",
+      "rounds": 4,
+      "mDealt": 419,
+      "carrier": true,
+      "realRage": true,
+      "carrierRageHeld": true
+    },
+    {
+      "seed": 107905,
+      "day": 121,
+      "vid": "stan_kowalski",
+      "mid": "eater",
+      "outcome": "vFlee",
+      "rounds": 2,
+      "mDealt": 192,
+      "carrier": true,
+      "realRage": true,
+      "carrierRageHeld": true
+    },
+    {
+      "seed": 107910,
+      "day": 77,
+      "vid": "gen_3udg2xv",
+      "mid": "eulogy",
+      "outcome": "vFlee",
+      "rounds": 4,
+      "mDealt": 261,
+      "carrier": true,
+      "realRage": true,
+      "carrierRageHeld": true
+    },
+    {
+      "seed": 107912,
+      "day": 103,
+      "vid": "app_mgpsphr5150",
+      "mid": "eulogy",
+      "outcome": "vFlee",
+      "rounds": 4,
+      "mDealt": 168,
+      "carrier": true,
+      "realRage": true,
+      "carrierRageHeld": true
+    }
+  ],
+  "rageFamilyRate": 0.8333333333333334,
+  "armDmgPerRound": 51.28703703703704,
+  "ctlDmgPerRound": 47.810439560439555,
+  "stagingArm": [
+    {
+      "seed": 107901,
+      "encounters": 24,
+      "held": 2,
+      "fired": 0,
+      "realRage": 0
+    },
+    {
+      "seed": 107902,
+      "encounters": 11,
+      "held": 1,
+      "fired": 0,
+      "realRage": 0
+    },
+    {
+      "seed": 107903,
+      "encounters": 10,
+      "held": 6,
+      "fired": 3,
+      "realRage": 5
+    },
+    {
+      "seed": 107904,
+      "encounters": 15,
+      "held": 1,
+      "fired": 1,
+      "realRage": 1
+    },
+    {
+      "seed": 107905,
+      "encounters": 25,
+      "held": 4,
+      "fired": 3,
+      "realRage": 4
+    },
+    {
+      "seed": 107906,
+      "encounters": 0,
+      "held": 0,
+      "fired": 0,
+      "realRage": 0
+    },
+    {
+      "seed": 107907,
+      "encounters": 12,
+      "held": 0,
+      "fired": 0,
+      "realRage": 0
+    },
+    {
+      "seed": 107908,
+      "encounters": 7,
+      "held": 0,
+      "fired": 0,
+      "realRage": 0
+    },
+    {
+      "seed": 107909,
+      "encounters": 24,
+      "held": 0,
+      "fired": 0,
+      "realRage": 0
+    },
+    {
+      "seed": 107910,
+      "encounters": 17,
+      "held": 2,
+      "fired": 1,
+      "realRage": 1
+    },
+    {
+      "seed": 107911,
+      "encounters": 11,
+      "held": 2,
+      "fired": 1,
+      "realRage": 2
+    },
+    {
+      "seed": 107912,
+      "encounters": 31,
+      "held": 1,
+      "fired": 1,
+      "realRage": 1
+    }
+  ],
+  "ctl": {
+    "dir": "evidence/2026-11-24/perseed-ragecarry-b-confirm-ctl",
+    "n": 12,
+    "valid": 12,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {
+      "true": 12
+    },
+    "meetings": 7,
+    "wins": 1,
+    "kills": 1,
+    "losses": 6,
+    "vDie": 0,
+    "vFlee": 6,
+    "mFlee": 0,
+    "winShare": 0.14285714285714285,
+    "killShare": 0.14285714285714285,
+    "funnel": {
+      "encounters": 37,
+      "joined": 37,
+      "unjoined": 0,
+      "noLaunchPlan": 3,
+      "pairLaunch": 21,
+      "partyAbsent": 1,
+      "evadeExcluded": 5
+    },
+    "byOutcome": {
+      "vKill": {
+        "n": 1,
+        "rounds": [
+          8
+        ],
+        "dmgShare": [],
+        "vTaken": [
+          41
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          17
+        ],
+        "meanArmorP": [
+          33
+        ],
+        "mHpStart": [],
+        "abilitiesPerMember": [
+          0.6666666666666666
+        ],
+        "fighterDmgShare": [
+          0.906832298136646
+        ],
+        "parsedStrikeTotal": [
+          805
+        ],
+        "roundsMean": 8,
+        "vTakenMean": 41,
+        "partySizeMean": 3,
+        "minArmorPMean": 17,
+        "meanArmorPMean": 33,
+        "mHpStartMean": null,
+        "abilitiesPerMemberMean": 0.6666666666666666,
+        "fighterDmgShareMean": 0.906832298136646,
+        "parsedStrikeTotalMean": 805
+      },
+      "vFlee": {
+        "n": 6,
+        "rounds": [
+          4,
+          7,
+          4,
+          10,
+          4,
+          4
+        ],
+        "dmgShare": [
+          0.21601489757914338,
+          0.3191023535851122,
+          0.25,
+          0.39054470709146966,
+          0.16729750189250567,
+          0.07506053268765134
+        ],
+        "vTaken": [
+          73,
+          74,
+          47,
+          79,
+          12,
+          29
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          22,
+          32,
+          34,
+          17,
+          37,
+          37
+        ],
+        "meanArmorP": [
+          39.666666666666664,
+          40.333333333333336,
+          47,
+          38.666666666666664,
+          55,
+          55
+        ],
+        "mHpStart": [
+          1074,
+          1827,
+          1252,
+          973,
+          1321,
+          1239
+        ],
+        "abilitiesPerMember": [
+          0.6666666666666666,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "fighterDmgShare": [
+          0.6381909547738693,
+          0.7662337662337663,
+          0.6198083067092651,
+          0.8852459016393442,
+          0.6302083333333334,
+          0.3870967741935484
+        ],
+        "parsedStrikeTotal": [
+          199,
+          154,
+          313,
+          61,
+          192,
+          93
+        ],
+        "roundsMean": 5.5,
+        "vTakenMean": 52.333333333333336,
+        "partySizeMean": 3,
+        "minArmorPMean": 29.833333333333332,
+        "meanArmorPMean": 45.944444444444436,
+        "mHpStartMean": 1281,
+        "abilitiesPerMemberMean": 0.38888888888888884,
+        "fighterDmgShareMean": 0.6544640061471878,
+        "parsedStrikeTotalMean": 168.66666666666666
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vKill": 1,
+        "vFlee": 6
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 1,
+    "gateSeekShare": 0,
+    "lossGateNull": 6,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {
+      "algorithm": {
+        "win": 1,
+        "loss": 0
+      },
+      "network_note": {
+        "win": 0,
+        "loss": 2
+      },
+      "editor": {
+        "win": 0,
+        "loss": 1
+      },
+      "eater": {
+        "win": 0,
+        "loss": 1
+      },
+      "rerun": {
+        "win": 0,
+        "loss": 1
+      },
+      "reunion": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.236336665472647,
+    "dmgShareByOutcome": {
+      "vKill": null,
+      "vFlee": 0.236336665472647
+    },
+    "roundsMean": 5.857142857142857,
+    "vTakenMean": 50.714285714285715,
+    "starvation": 3,
+    "starvationVillager": 2,
+    "medianDays": 130.5,
+    "communityLost": 7,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 12,
+    "wave5": 4,
+    "scaleRanks": {
+      "regional": 11,
+      "village": 1
+    }
+  },
+  "arm": {
+    "dir": "evidence/2026-11-24/perseed-ragecarry-b-confirm-arm",
+    "n": 12,
+    "valid": 12,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {
+      "true": 12
+    },
+    "meetings": 4,
+    "wins": 0,
+    "kills": 0,
+    "losses": 4,
+    "vDie": 1,
+    "vFlee": 3,
+    "mFlee": 0,
+    "winShare": 0,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 37,
+      "joined": 37,
+      "unjoined": 0,
+      "noLaunchPlan": 4,
+      "pairLaunch": 27,
+      "partyAbsent": 0,
+      "evadeExcluded": 2
+    },
+    "byOutcome": {
+      "vDie": {
+        "n": 1,
+        "rounds": [
+          4
+        ],
+        "dmgShare": [
+          0.07109375
+        ],
+        "vTaken": [
+          66
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          21
+        ],
+        "meanArmorP": [
+          37
+        ],
+        "mHpStart": [
+          1280
+        ],
+        "abilitiesPerMember": [
+          1
+        ],
+        "fighterDmgShare": [
+          0
+        ],
+        "parsedStrikeTotal": [
+          91
+        ],
+        "roundsMean": 4,
+        "vTakenMean": 66,
+        "partySizeMean": 3,
+        "minArmorPMean": 21,
+        "meanArmorPMean": 37,
+        "mHpStartMean": 1280,
+        "abilitiesPerMemberMean": 1,
+        "fighterDmgShareMean": 0,
+        "parsedStrikeTotalMean": 91
+      },
+      "vFlee": {
+        "n": 3,
+        "rounds": [
+          4,
+          2,
+          4
+        ],
+        "dmgShare": [
+          0.4236602628918099,
+          0.1708185053380783,
+          0.17834394904458598
+        ],
+        "vTaken": [
+          42,
+          20,
+          35
+        ],
+        "partySize": [
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          17,
+          17,
+          17
+        ],
+        "meanArmorP": [
+          32,
+          32,
+          21.666666666666668
+        ],
+        "mHpStart": [
+          989,
+          1124,
+          942
+        ],
+        "abilitiesPerMember": [
+          0,
+          0.6666666666666666,
+          0
+        ],
+        "fighterDmgShare": [
+          0.7468879668049793,
+          1,
+          0.86
+        ],
+        "parsedStrikeTotal": [
+          241,
+          175,
+          100
+        ],
+        "roundsMean": 3.3333333333333335,
+        "vTakenMean": 32.333333333333336,
+        "partySizeMean": 3,
+        "minArmorPMean": 17,
+        "meanArmorPMean": 28.555555555555557,
+        "mHpStartMean": 1018.3333333333334,
+        "abilitiesPerMemberMean": 0.2222222222222222,
+        "fighterDmgShareMean": 0.8689626556016598,
+        "parsedStrikeTotalMean": 172
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vDie": 1,
+        "vFlee": 3
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 1,
+    "gateSeekShare": 0,
+    "lossGateNull": 4,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {
+      "reunion": {
+        "win": 0,
+        "loss": 1
+      },
+      "eulogy": {
+        "win": 0,
+        "loss": 2
+      },
+      "eater": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.21097911681861853,
+    "dmgShareByOutcome": {
+      "vDie": 0.07109375,
+      "vFlee": 0.25760757242482474
+    },
+    "roundsMean": 3.5,
+    "vTakenMean": 40.75,
+    "starvation": 4,
+    "starvationVillager": 2,
+    "medianDays": 148,
+    "communityLost": 7,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 12,
+    "wave5": 2,
+    "scaleRanks": {
+      "regional": 11,
+      "village": 1
+    }
+  },
+  "ctlPair": {
+    "dir": "evidence/2026-11-24/perseed-ragecarry-b-confirm-ctl",
+    "n": 12,
+    "valid": 12,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {
+      "true": 12
+    },
+    "meetings": 13,
+    "wins": 1,
+    "kills": 1,
+    "losses": 12,
+    "vDie": 1,
+    "vFlee": 11,
+    "mFlee": 0,
+    "winShare": 0.07692307692307693,
+    "killShare": 0.07692307692307693,
+    "funnel": {
+      "encounters": 37,
+      "joined": 37,
+      "unjoined": 0,
+      "noLaunchPlan": 3,
+      "pairLaunch": 0,
+      "partyAbsent": 5,
+      "evadeExcluded": 16
+    },
+    "byOutcome": {
+      "vDie": {
+        "n": 1,
+        "rounds": [
+          4
+        ],
+        "dmgShare": [
+          0.08571428571428572
+        ],
+        "vTaken": [
+          78
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          24
+        ],
+        "meanArmorP": [
+          35.333333333333336
+        ],
+        "mHpStart": [
+          1225
+        ],
+        "abilitiesPerMember": [
+          0
+        ],
+        "fighterDmgShare": [
+          0
+        ],
+        "parsedStrikeTotal": [
+          105
+        ],
+        "roundsMean": 4,
+        "vTakenMean": 78,
+        "partySizeMean": 3,
+        "minArmorPMean": 24,
+        "meanArmorPMean": 35.333333333333336,
+        "mHpStartMean": 1225,
+        "abilitiesPerMemberMean": 0,
+        "fighterDmgShareMean": 0,
+        "parsedStrikeTotalMean": 105
+      },
+      "vKill": {
+        "n": 1,
+        "rounds": [
+          8
+        ],
+        "dmgShare": [],
+        "vTaken": [
+          41
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          17
+        ],
+        "meanArmorP": [
+          33
+        ],
+        "mHpStart": [],
+        "abilitiesPerMember": [
+          0.6666666666666666
+        ],
+        "fighterDmgShare": [
+          0.906832298136646
+        ],
+        "parsedStrikeTotal": [
+          805
+        ],
+        "roundsMean": 8,
+        "vTakenMean": 41,
+        "partySizeMean": 3,
+        "minArmorPMean": 17,
+        "meanArmorPMean": 33,
+        "mHpStartMean": null,
+        "abilitiesPerMemberMean": 0.6666666666666666,
+        "fighterDmgShareMean": 0.906832298136646,
+        "parsedStrikeTotalMean": 805
+      },
+      "vFlee": {
+        "n": 11,
+        "rounds": [
+          4,
+          7,
+          4,
+          10,
+          4,
+          4,
+          2,
+          8,
+          4,
+          2,
+          4
+        ],
+        "dmgShare": [
+          0.21601489757914338,
+          0.3191023535851122,
+          0.25,
+          0.39054470709146966,
+          0.16729750189250567,
+          0.07506053268765134,
+          0.01881467544684854,
+          0.1711281070745698,
+          0.08865814696485623,
+          0.013513513513513514,
+          0.11340996168582375
+        ],
+        "vTaken": [
+          73,
+          74,
+          47,
+          79,
+          12,
+          29,
+          54,
+          112,
+          72,
+          58,
+          50
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          22,
+          32,
+          34,
+          17,
+          37,
+          37,
+          7,
+          7,
+          17,
+          9,
+          14
+        ],
+        "meanArmorP": [
+          39.666666666666664,
+          40.333333333333336,
+          47,
+          38.666666666666664,
+          55,
+          55,
+          28.333333333333332,
+          28.333333333333332,
+          24.333333333333332,
+          19,
+          25
+        ],
+        "mHpStart": [
+          1074,
+          1827,
+          1252,
+          973,
+          1321,
+          1239,
+          1063,
+          1046,
+          1252,
+          962,
+          1305
+        ],
+        "abilitiesPerMember": [
+          0.6666666666666666,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333,
+          2.3333333333333335,
+          2.3333333333333335,
+          5,
+          3.6666666666666665,
+          3
+        ],
+        "fighterDmgShare": [
+          0.6381909547738693,
+          0.7662337662337663,
+          0.6198083067092651,
+          0.8852459016393442,
+          0.6302083333333334,
+          0.3870967741935484,
+          1,
+          1,
+          0.5405405405405406,
+          1,
+          0.6891891891891891
+        ],
+        "parsedStrikeTotal": [
+          199,
+          154,
+          313,
+          61,
+          192,
+          93,
+          20,
+          33,
+          111,
+          13,
+          148
+        ],
+        "roundsMean": 4.818181818181818,
+        "vTakenMean": 60,
+        "partySizeMean": 3,
+        "minArmorPMean": 21.181818181818183,
+        "meanArmorPMean": 36.424242424242415,
+        "mHpStartMean": 1210.3636363636363,
+        "abilitiesPerMemberMean": 1.6969696969696968,
+        "fighterDmgShareMean": 0.7415012515102597,
+        "parsedStrikeTotalMean": 121.54545454545455
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vDie": 1,
+        "vKill": 1,
+        "vFlee": 10
+      },
+      "seek": {
+        "vFlee": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 0.9230769230769231,
+    "gateSeekShare": 0.07692307692307693,
+    "lossGateNull": 11,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 1,
+    "monsterByOutcome": {
+      "reunion": {
+        "win": 0,
+        "loss": 3
+      },
+      "algorithm": {
+        "win": 1,
+        "loss": 0
+      },
+      "network_note": {
+        "win": 0,
+        "loss": 2
+      },
+      "editor": {
+        "win": 0,
+        "loss": 1
+      },
+      "eater": {
+        "win": 0,
+        "loss": 1
+      },
+      "rerun": {
+        "win": 0,
+        "loss": 1
+      },
+      "strike": {
+        "win": 0,
+        "loss": 1
+      },
+      "influencer": {
+        "win": 0,
+        "loss": 1
+      },
+      "congregation": {
+        "win": 0,
+        "loss": 1
+      },
+      "suburb": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.15910489026964833,
+    "dmgShareByOutcome": {
+      "vDie": 0.08571428571428572,
+      "vKill": null,
+      "vFlee": 0.16577676341104491
+    },
+    "roundsMean": 5,
+    "vTakenMean": 59.92307692307692,
+    "starvation": 3,
+    "starvationVillager": 2,
+    "medianDays": 130.5,
+    "communityLost": 7,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 12,
+    "wave5": 4,
+    "scaleRanks": {
+      "regional": 11,
+      "village": 1
+    }
+  },
+  "armPair": {
+    "dir": "evidence/2026-11-24/perseed-ragecarry-b-confirm-arm",
+    "n": 12,
+    "valid": 12,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {
+      "true": 12
+    },
+    "meetings": 12,
+    "wins": 0,
+    "kills": 0,
+    "losses": 12,
+    "vDie": 4,
+    "vFlee": 8,
+    "mFlee": 0,
+    "winShare": 0,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 37,
+      "joined": 37,
+      "unjoined": 0,
+      "noLaunchPlan": 4,
+      "pairLaunch": 0,
+      "partyAbsent": 2,
+      "evadeExcluded": 19
+    },
+    "byOutcome": {
+      "vDie": {
+        "n": 4,
+        "rounds": [
+          1,
+          4,
+          4,
+          2
+        ],
+        "dmgShare": [
+          0,
+          0.09072715143428953,
+          0.07109375,
+          0.018154311649016642
+        ],
+        "vTaken": [
+          14,
+          93,
+          66,
+          91
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          7,
+          7,
+          21,
+          7
+        ],
+        "meanArmorP": [
+          15.333333333333334,
+          12,
+          37,
+          14.666666666666666
+        ],
+        "mHpStart": [
+          1347,
+          1499,
+          1280,
+          1322
+        ],
+        "abilitiesPerMember": [
+          2.6666666666666665,
+          2,
+          1,
+          4.333333333333333
+        ],
+        "fighterDmgShare": [
+          0,
+          0,
+          0
+        ],
+        "parsedStrikeTotal": [
+          0,
+          136,
+          91,
+          24
+        ],
+        "roundsMean": 2.75,
+        "vTakenMean": 66,
+        "partySizeMean": 3,
+        "minArmorPMean": 10.5,
+        "meanArmorPMean": 19.750000000000004,
+        "mHpStartMean": 1362,
+        "abilitiesPerMemberMean": 2.5,
+        "fighterDmgShareMean": 0,
+        "parsedStrikeTotalMean": 62.75
+      },
+      "vFlee": {
+        "n": 8,
+        "rounds": [
+          1,
+          8,
+          8,
+          9,
+          4,
+          2,
+          4,
+          4
+        ],
+        "dmgShare": [
+          0.05079962370649106,
+          0.624248496993988,
+          0.4248,
+          0.356513222331048,
+          0.4236602628918099,
+          0.1708185053380783,
+          0.261,
+          0.17834394904458598
+        ],
+        "vTaken": [
+          25,
+          74,
+          67,
+          73,
+          42,
+          20,
+          65,
+          35
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          12,
+          17,
+          22,
+          5,
+          17,
+          17,
+          17,
+          17
+        ],
+        "meanArmorP": [
+          29.666666666666668,
+          28,
+          44,
+          20.333333333333332,
+          32,
+          32,
+          20.333333333333332,
+          21.666666666666668
+        ],
+        "mHpStart": [
+          1063,
+          998,
+          1250,
+          1021,
+          989,
+          1124,
+          1000,
+          942
+        ],
+        "abilitiesPerMember": [
+          0.3333333333333333,
+          1.6666666666666667,
+          2.3333333333333335,
+          3,
+          0,
+          0.6666666666666666,
+          5.333333333333333,
+          0
+        ],
+        "fighterDmgShare": [
+          1,
+          0.5126050420168067,
+          0.5515463917525774,
+          0.7710280373831776,
+          0.7468879668049793,
+          1,
+          0.6015325670498084,
+          0.86
+        ],
+        "parsedStrikeTotal": [
+          54,
+          238,
+          194,
+          214,
+          241,
+          175,
+          261,
+          100
+        ],
+        "roundsMean": 5,
+        "vTakenMean": 50.125,
+        "partySizeMean": 3,
+        "minArmorPMean": 15.5,
+        "meanArmorPMean": 28.5,
+        "mHpStartMean": 1048.375,
+        "abilitiesPerMemberMean": 1.6666666666666665,
+        "fighterDmgShareMean": 0.7554500006259187,
+        "parsedStrikeTotalMean": 184.625
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vDie": 4,
+        "vFlee": 8
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 1,
+    "gateSeekShare": 0,
+    "lossGateNull": 12,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {
+      "suburb": {
+        "win": 0,
+        "loss": 2
+      },
+      "congregation": {
+        "win": 0,
+        "loss": 1
+      },
+      "eater": {
+        "win": 0,
+        "loss": 3
+      },
+      "reunion": {
+        "win": 0,
+        "loss": 3
+      },
+      "eulogy": {
+        "win": 0,
+        "loss": 3
+      }
+    },
+    "dmgShareMean": 0.2225132727824423,
+    "dmgShareByOutcome": {
+      "vDie": 0.04499380327082654,
+      "vFlee": 0.31127300753825016
+    },
+    "roundsMean": 4.25,
+    "vTakenMean": 55.416666666666664,
+    "starvation": 4,
+    "starvationVillager": 2,
+    "medianDays": 148,
+    "communityLost": 7,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 12,
+    "wave5": 2,
+    "scaleRanks": {
+      "regional": 11,
+      "village": 1
+    }
+  },
+  "ctlMeetings": [
+    {
+      "seed": 107901,
+      "day": 96,
+      "vid": "valeria_quispe",
+      "mid": "algorithm",
+      "mHpStart": null,
+      "outcome": "vKill",
+      "win": true,
+      "rounds": 8,
+      "vTaken": 41,
+      "mDealt": 1245,
+      "dmgShare": null,
+      "planParty": [
+        "olivia_bennett",
+        "desmond_clarke",
+        "hassan_ali"
+      ],
+      "allyVids": [
+        "desmond_clarke",
+        "hassan_ali"
+      ],
+      "joiners": [
+        "desmond_clarke",
+        "hassan_ali"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "valeria_quispe": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        },
+        "desmond_clarke": {
+          "armed": true,
+          "armored": true,
+          "armorP": 45
+        },
+        "hassan_ali": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 33,
+      "parsedStrikeTotal": 805,
+      "parsedAttributed": 805,
+      "dmgByVid": {
+        "valeria_quispe": 730,
+        "desmond_clarke": 52,
+        "hassan_ali": 23
+      },
+      "fighterDmgShare": 0.906832298136646,
+      "abilitiesPerMember": 0.6666666666666666,
+      "memberAbilities": {
+        "valeria_quispe": [],
+        "desmond_clarke": [],
+        "hassan_ali": [
+          "beast_calm",
+          "lucky_rock"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Valeria walks straight into The Algorithm. No avoiding it.",
+        "Valeria has Apex Bow but no arrows — the string stays drawn, useless.",
+        "Valeria's gear absorbs 42.",
+        "R1: Engagement hits Valeria for 10 (88 left)",
+        "R1: Valeria strikes for 150 (stalker's opening +4) (x1.3) (962 left)",
+        "R2: Valeria strikes for 144 (x1.3) (818 left)",
+        "Valeria's gear absorbs 46.",
+        "R2: Engagement hits Valeria for 11 (77 left)",
+        "Valeria is losing — shouts for help! Desmond charges in!",
+        "R3: Valeria strikes for 145 (x1.3) (673 left)",
+        "R3: Desmond strikes for 26 (x1.3) (647 left)",
+        "Valeria's gear absorbs 43.",
+        "R3: Recommended For You hits Valeria for 11 (66 left)",
+        "Valeria is still losing — shouts again! Hassan charges in!",
+        "R4: Valeria strikes for 145 (x1.3) (502 left)",
+        "R4: Desmond strikes for 26 (x1.3) (476 left)",
+        "R4: Hassan strikes for 23 (x1.3) (453 left)",
+        "Desmond's gear absorbs 44.",
+        "R4: Recommended For You hits Desmond for 9 (73 left)",
+        "R5: Valeria strikes for 146 (blood trail +2) (x1.2) (307 left)"
+      ]
+    },
+    {
+      "seed": 107901,
+      "day": 113,
+      "vid": "hassan_ali",
+      "mid": "network_note",
+      "mHpStart": 1074,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 73,
+      "mDealt": 232,
+      "dmgShare": 0.21601489757914338,
+      "planParty": [
+        "catalina_reyes",
+        "olivia_bennett",
+        "app_mgpspk103"
+      ],
+      "allyVids": [
+        "app_mgpspk103",
+        "catalina_reyes"
+      ],
+      "joiners": [
+        "app_mgpspk103",
+        "catalina_reyes"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "hassan_ali": {
+          "armed": true,
+          "armored": true,
+          "armorP": 22
+        },
+        "app_mgpspk103": {
+          "armed": true,
+          "armored": true,
+          "armorP": 42
+        },
+        "catalina_reyes": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        }
+      },
+      "minArmorP": 22,
+      "meanArmorP": 39.666666666666664,
+      "parsedStrikeTotal": 199,
+      "parsedAttributed": 199,
+      "dmgByVid": {
+        "hassan_ali": 127,
+        "app_mgpspk103": 72
+      },
+      "fighterDmgShare": 0.6381909547738693,
+      "abilitiesPerMember": 0.6666666666666666,
+      "memberAbilities": {
+        "hassan_ali": [
+          "beast_calm",
+          "lucky_rock"
+        ],
+        "app_mgpspk103": [],
+        "catalina_reyes": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Hassan walks straight into The Network Note. No avoiding it.",
+        "Hassan has Bow but no arrows — the string stays drawn, useless.",
+        "R1: Blooded — the village knows where the Producers bleed. (Strikes hit 1.5× as hard; their blows land at 0.75× strength.)",
+        "R1: Hassan strikes for 35 (stalker's opening +4) (1039 left)",
+        "R1: the memo underlines something about Hassan. (It lands next round.)",
+        "Hassan's gear absorbs 42.",
+        "R1: Just Fix It hits Hassan for 16 (69 left)",
+        "R2: Hassan strikes for 29 (1010 left)",
+        "R2: NOTE: \"THE WOLF SHOULD HAVE LASERS NOW\" — and then it does. (+25%.)",
+        "Hassan's gear absorbs 52.",
+        "R2: Just Fix It hits Hassan for 20 (49 left)",
+        "Hassan is losing — shouts for help! Vitória charges in!",
+        "R3: Hassan strikes for 33 (977 left)",
+        "R3: Vitória strikes for 39 (938 left)",
+        "R3: the memo underlines something about Hassan. (It lands next round.)",
+        "Hassan's gear absorbs 46.",
+        "R3: Just Fix It hits Hassan for 17 (32 left)",
+        "Hassan is still losing — shouts again! Catalina charges in!",
+        "R4: Hassan strikes for 30 (908 left)",
+        "R4: Vitória strikes for 33 (875 left)"
+      ]
+    },
+    {
+      "seed": 107901,
+      "day": 123,
+      "vid": "catalina_reyes",
+      "mid": "editor",
+      "mHpStart": 1827,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 7,
+      "vTaken": 74,
+      "mDealt": 583,
+      "dmgShare": 0.3191023535851122,
+      "planParty": [
+        "olivia_bennett",
+        "ines_duarte"
+      ],
+      "allyVids": [
+        "ines_duarte",
+        "olivia_bennett"
+      ],
+      "joiners": [
+        "ines_duarte",
+        "olivia_bennett"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "catalina_reyes": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "ines_duarte": {
+          "armed": true,
+          "armored": true,
+          "armorP": 34
+        },
+        "olivia_bennett": {
+          "armed": true,
+          "armored": true,
+          "armorP": 32
+        }
+      },
+      "minArmorP": 32,
+      "meanArmorP": 40.333333333333336,
+      "parsedStrikeTotal": 154,
+      "parsedAttributed": 154,
+      "dmgByVid": {
+        "catalina_reyes": 118,
+        "ines_duarte": 36
+      },
+      "fighterDmgShare": 0.7662337662337663,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "catalina_reyes": [],
+        "ines_duarte": [
+          "beast_calm"
+        ],
+        "olivia_bennett": []
+      },
+      "abilityTokens": [
+        "Take Aim"
+      ],
+      "log": [
+        "Catalina walks straight into The Editor. No avoiding it.",
+        "Catalina sees The Editor coming and cranks a bolt into place — the fight opens at range (3 shots).",
+        "  loosed — the bolt takes The Editor for 22 (1805 left).",
+        "  loosed — the bolt takes The Editor for 20 (1785 left).",
+        "  loosed — the bolt takes The Editor for 20 (1765 left).",
+        "Catalina lowers the Crossbow — The Editor is on them now. (3/3 hit)",
+        "R1: Catalina goes still. Breath slows. The world narrows to the target. (Take Aim — next shot 2.5x)",
+        "R1: the editor's scissors snip — measuring Catalina.",
+        "Catalina's gear absorbs 48.",
+        "R1: Blooded — the village knows where the Producers bleed. (Strikes hit 1.5× as hard; their blows land at 0.75× strength.)",
+        "R1: Trim hits Catalina for 11 (89 left)",
+        "R2: Catalina strikes for 80 (aimed 2.5x) (1685 left)",
+        "R2: the film strips show Catalina's swing, next. (A round to do something about it.)",
+        "Catalina's gear absorbs 82.",
+        "R2: Cut hits Catalina for 20 (69 left)",
+        "Catalina is losing — shouts for help! Ines charges in!",
+        "R3: Catalina strikes for 38 (1647 left)",
+        "R3: Ines strikes for 36 (1611 left)",
+        "R3: the scissors poise — Catalina's swing is measured for the cut.",
+        "Catalina's gear absorbs 56."
+      ]
+    },
+    {
+      "seed": 107901,
+      "day": 140,
+      "vid": "ines_duarte",
+      "mid": "network_note",
+      "mHpStart": 1252,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 47,
+      "mDealt": 313,
+      "dmgShare": 0.25,
+      "planParty": [
+        "app_mgpspk103",
+        "catalina_reyes",
+        "devon_okafor"
+      ],
+      "allyVids": [
+        "app_mgpspk103",
+        "catalina_reyes"
+      ],
+      "joiners": [
+        "app_mgpspk103",
+        "catalina_reyes"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "ines_duarte": {
+          "armed": true,
+          "armored": true,
+          "armorP": 34
+        },
+        "app_mgpspk103": {
+          "armed": true,
+          "armored": true,
+          "armorP": 52
+        },
+        "catalina_reyes": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        }
+      },
+      "minArmorP": 34,
+      "meanArmorP": 47,
+      "parsedStrikeTotal": 313,
+      "parsedAttributed": 313,
+      "dmgByVid": {
+        "ines_duarte": 194,
+        "app_mgpspk103": 74,
+        "catalina_reyes": 45
+      },
+      "fighterDmgShare": 0.6198083067092651,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "ines_duarte": [
+          "beast_calm"
+        ],
+        "app_mgpspk103": [],
+        "catalina_reyes": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Ines walks straight into Loud-Eyes. No avoiding it.",
+        "R1: Blooded — the village knows where the Producers bleed. (Strikes hit 1.5× as hard; their blows land at 0.75× strength.)",
+        "R1: Ines strikes for 50 (x1.3) (1202 left)",
+        "R1: the memo underlines something about Ines. (It lands next round.)",
+        "Ines's gear absorbs 40.",
+        "R1: Per My Last Email hits Ines for 10 (84 left)",
+        "R2: Ines strikes for 44 (x1.3) (1158 left)",
+        "R2: NOTE: \"THE WOLF SHOULD HAVE LASERS NOW\" — and then it does. (+25%.)",
+        "Ines's gear absorbs 67.",
+        "R2: Just Fix It hits Ines for 17 (67 left)",
+        "Ines is losing — shouts for help! Vitória charges in!",
+        "R3: Ines strikes for 50 (x1.3) (1108 left)",
+        "R3: Vitória strikes for 35 (1073 left)",
+        "R3: the memo underlines something about Ines. (It lands next round.)",
+        "Ines's gear absorbs 42.",
+        "R3: Just Fix It hits Ines for 10 (57 left)",
+        "Ines is still losing — shouts again! Catalina charges in!",
+        "R4: Ines strikes for 50 (x1.3) (1023 left)",
+        "R4: Vitória strikes for 39 (984 left)",
+        "R4: Catalina strikes for 45 (x1.3) (939 left)"
+      ]
+    },
+    {
+      "seed": 107902,
+      "day": 138,
+      "vid": "nikolai_volkov",
+      "mid": "eater",
+      "mHpStart": 973,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 10,
+      "vTaken": 79,
+      "mDealt": 380,
+      "dmgShare": 0.39054470709146966,
+      "planParty": [
+        "app_mgpsphse198",
+        "jorge_silva",
+        "gen_q5atzwl"
+      ],
+      "allyVids": [
+        "app_mgpsphse198",
+        "gen_q5atzwl"
+      ],
+      "joiners": [
+        "app_mgpsphse198",
+        "gen_q5atzwl"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "nikolai_volkov": {
+          "armed": true,
+          "armored": true,
+          "armorP": 62
+        },
+        "app_mgpsphse198": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "gen_q5atzwl": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 38.666666666666664,
+      "parsedStrikeTotal": 61,
+      "parsedAttributed": 61,
+      "dmgByVid": {
+        "nikolai_volkov": 54,
+        "app_mgpsphse198": 7
+      },
+      "fighterDmgShare": 0.8852459016393442,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "nikolai_volkov": [],
+        "app_mgpsphse198": [],
+        "gen_q5atzwl": [
+          "the_touch"
+        ]
+      },
+      "abilityTokens": [
+        "Take Aim"
+      ],
+      "log": [
+        "Nikolai walks straight into The Ugly Beast. No avoiding it.",
+        "Nikolai sees The Ugly Beast coming and whirls the Sling — the fight opens at range (2 shots).",
+        "  loosed — the stone takes The Ugly Beast for 12 (961 left).",
+        "  loosed — the stone takes The Ugly Beast for 10 (951 left).",
+        "Nikolai lowers the Sling — The Ugly Beast is on them now. (2/2 hit)",
+        "Nikolai's gear absorbs 41.",
+        "R1: Gorge hits Nikolai for 6 (94 left)",
+        "R1: Nikolai goes still. Breath slows. The world narrows to the target. (Take Aim — next shot 2.5x)",
+        "Nikolai's gear absorbs 66.",
+        "R2: Gorge hits Nikolai for 10 (84 left)",
+        "R2: Nikolai strikes for 30 (aimed 2.5x) (921 left)",
+        "Nikolai is losing — shouts for help! Emmanuel charges in!",
+        "Nikolai's gear absorbs 68.",
+        "R3: Gorge hits Nikolai for 10 (74 left)",
+        "R3: Nikolai strikes for 11 (910 left)",
+        "R3: Emmanuel strikes for 7 (903 left)",
+        "Nikolai is still losing — shouts again! Mekonnen charges in!",
+        "Nikolai's gear absorbs 74.",
+        "R4: Smack-Rush hits Nikolai for 11 (63 left)",
+        "R4: Nikolai strikes for 13 (890 left)"
+      ]
+    },
+    {
+      "seed": 107902,
+      "day": 139,
+      "vid": "jorge_silva",
+      "mid": "rerun",
+      "mHpStart": 1321,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 12,
+      "mDealt": 221,
+      "dmgShare": 0.16729750189250567,
+      "planParty": [
+        "nikolai_volkov",
+        "gen_q5atzwl"
+      ],
+      "allyVids": [
+        "gen_q5atzwl",
+        "nikolai_volkov"
+      ],
+      "joiners": [
+        "gen_q5atzwl",
+        "nikolai_volkov"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "jorge_silva": {
+          "armed": true,
+          "armored": true,
+          "armorP": 66
+        },
+        "gen_q5atzwl": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        },
+        "nikolai_volkov": {
+          "armed": true,
+          "armored": true,
+          "armorP": 62
+        }
+      },
+      "minArmorP": 37,
+      "meanArmorP": 55,
+      "parsedStrikeTotal": 192,
+      "parsedAttributed": 192,
+      "dmgByVid": {
+        "jorge_silva": 121,
+        "gen_q5atzwl": 71
+      },
+      "fighterDmgShare": 0.6302083333333334,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "jorge_silva": [],
+        "gen_q5atzwl": [
+          "the_touch"
+        ],
+        "nikolai_volkov": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Jorge walks straight into The Rerun. No avoiding it.",
+        "Jorge has Bow but no arrows — the string stays drawn, useless.",
+        "R1: the clapperboard holds — take 12, 4 rounds to the rewind.",
+        "Jorge's gear absorbs 44.",
+        "R1: Blooded — the village knows where the Producers bleed. (Strikes hit 1.5× as hard; their blows land at 0.75× strength.)",
+        "R1: Notes Session hits Jorge for 6 (41 left)",
+        "R1: Jorge strikes for 32 (1289 left)",
+        "R2: Jorge strikes for 27 (1262 left)",
+        "R2: the clapperboard holds — take 12, 3 rounds to the rewind.",
+        "Jorge's gear absorbs 46.",
+        "R2: Notes Session hits Jorge for 6 (35 left)",
+        "Jorge is losing — shouts for help! Mekonnen charges in!",
+        "R3: Jorge strikes for 30 (1232 left)",
+        "R3: Mekonnen strikes for 33 (1199 left)",
+        "R3: the clapperboard holds — take 12, 2 rounds to the rewind.",
+        "Mekonnen's gear absorbs 42.",
+        "R3: Cold Open hits Mekonnen for 10 (19 left)",
+        "Jorge is still losing — shouts again! Nikolai charges in!",
+        "R4: Jorge strikes for 32 (1167 left)",
+        "R4: Mekonnen strikes for 38 (1129 left)"
+      ]
+    },
+    {
+      "seed": 107902,
+      "day": 149,
+      "vid": "chantal_mukendi",
+      "mid": "reunion",
+      "mHpStart": 1239,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 29,
+      "mDealt": 93,
+      "dmgShare": 0.07506053268765134,
+      "planParty": [
+        "jorge_silva",
+        "nikolai_volkov",
+        "gen_akw4v8q"
+      ],
+      "allyVids": [
+        "jorge_silva",
+        "gen_akw4v8q"
+      ],
+      "joiners": [
+        "jorge_silva",
+        "gen_akw4v8q"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "chantal_mukendi": {
+          "armed": true,
+          "armored": true,
+          "armorP": 62
+        },
+        "jorge_silva": {
+          "armed": true,
+          "armored": true,
+          "armorP": 66
+        },
+        "gen_akw4v8q": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        }
+      },
+      "minArmorP": 37,
+      "meanArmorP": 55,
+      "parsedStrikeTotal": 93,
+      "parsedAttributed": 93,
+      "dmgByVid": {
+        "chantal_mukendi": 36,
+        "jorge_silva": 42,
+        "gen_akw4v8q": 15
+      },
+      "fighterDmgShare": 0.3870967741935484,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "chantal_mukendi": [],
+        "jorge_silva": [],
+        "gen_akw4v8q": [
+          "night_eyes"
+        ]
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Chantal walks straight into Big-Eyes. No avoiding it.",
+        "Chantal's gear absorbs 52.",
+        "R1: Your Move hits Chantal for 9 (34 left)",
+        "R1: Chantal stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Chantal's gear absorbs 54.",
+        "R2: Your Move hits Chantal for 10 (44 left)",
+        "R2: Chantal strikes for 12 (1227 left)",
+        "Chantal is losing — shouts for help! Jorge charges in!",
+        "Jorge's gear absorbs 69.",
+        "R3: Your Move hits Jorge for 11 (67 left)",
+        "R3: Chantal strikes for 11 (1216 left)",
+        "R3: Jorge strikes for 21 (1195 left)",
+        "Chantal is still losing — shouts again! Alberto charges in!",
+        "R4: Chantal strikes for 13 (1182 left)",
+        "R4: Jorge strikes for 21 (1161 left)",
+        "R4: Alberto strikes for 15 (1146 left)",
+        "Chantal's gear absorbs 58.",
+        "R4: Your Move hits Chantal for 10 (34 left)",
+        "Chantal sees how this ends — and runs while running still works."
+      ]
+    }
+  ],
+  "armMeetings": [
+    {
+      "seed": 107904,
+      "day": 124,
+      "vid": "app_mgpspki5423",
+      "mid": "reunion",
+      "mHpStart": 1280,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 66,
+      "mDealt": 91,
+      "dmgShare": 0.07109375,
+      "planParty": [
+        "chen_wei",
+        "aroha_ngata",
+        "nadia_khoury"
+      ],
+      "allyVids": [
+        "aroha_ngata",
+        "chen_wei"
+      ],
+      "joiners": [
+        "aroha_ngata",
+        "chen_wei"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "app_mgpspki5423": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "aroha_ngata": {
+          "armed": true,
+          "armored": true,
+          "armorP": 51
+        },
+        "chen_wei": {
+          "armed": true,
+          "armored": true,
+          "armorP": 39
+        }
+      },
+      "minArmorP": 21,
+      "meanArmorP": 37,
+      "parsedStrikeTotal": 91,
+      "parsedAttributed": 17,
+      "dmgByVid": {
+        "aroha_ngata": 17
+      },
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 1,
+      "memberAbilities": {
+        "app_mgpspki5423": [],
+        "aroha_ngata": [
+          "the_touch",
+          "scream_cheese"
+        ],
+        "chen_wei": [
+          "beast_calm"
+        ]
+      },
+      "abilityTokens": [
+        "field medicine",
+        "Rage"
+      ],
+      "log": [
+        "Amel walks straight into The Loud Thing. No avoiding it.",
+        "R1: Amel stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Amel's gear absorbs 41.",
+        "R1: Your Move hits Amel for 21 (40 left)",
+        "Amel's gear absorbs 43.",
+        "R2: Your Move hits Amel for 22 (18 left)",
+        "R2: Amel's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "R2: Amel strikes for 26 (x2.0) (1254 left)",
+        "R2: Amel strikes for 24 (x2.0) (1230 left)",
+        "Amel is losing — shouts for help! Aroha charges in!",
+        "Aroha's gear absorbs 63.",
+        "R3: Your Move hits Aroha for 14 (36 left)",
+        "R3: Amel strikes for 24 (x2.0) (1206 left)",
+        "R3: Aroha strikes for 17 (1189 left)",
+        "Amel is still losing — shouts again! Wei charges in!",
+        "Amel's gear absorbs 45.",
+        "R4: Your Move hits Amel for 23 (0 left)"
+      ]
+    },
+    {
+      "seed": 107905,
+      "day": 119,
+      "vid": "stan_kowalski",
+      "mid": "eulogy",
+      "mHpStart": 989,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 42,
+      "mDealt": 419,
+      "dmgShare": 0.4236602628918099,
+      "planParty": [
+        "chantal_mukendi",
+        "visjoin_114"
+      ],
+      "allyVids": [
+        "chantal_mukendi",
+        "visjoin_114"
+      ],
+      "joiners": [
+        "chantal_mukendi",
+        "visjoin_114"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "stan_kowalski": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "chantal_mukendi": {
+          "armed": true,
+          "armored": true,
+          "armorP": 58
+        },
+        "visjoin_114": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 32,
+      "parsedStrikeTotal": 241,
+      "parsedAttributed": 241,
+      "dmgByVid": {
+        "stan_kowalski": 180,
+        "chantal_mukendi": 61
+      },
+      "fighterDmgShare": 0.7468879668049793,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "stan_kowalski": [],
+        "chantal_mukendi": [],
+        "visjoin_114": []
+      },
+      "abilityTokens": [
+        "Tripwire",
+        "Rage"
+      ],
+      "log": [
+        "Stan walks straight into The Big Thing. No avoiding it.",
+        "Stan sees The Big Thing coming and nocks an arrow — the fight opens at range (4 shots).",
+        "  loosed — it takes The Big Thing for 19 (970 left).",
+        "  loosed — it takes The Big Thing for 15 (955 left).",
+        "  loosed — it takes The Big Thing for 18 (937 left).",
+        "  loosed — it takes The Big Thing for 19 (918 left).",
+        "Stan lowers the bow — The Big Thing is on them now. (4/4 hit)",
+        "Stan had strung a wire at ankle height before it closed — the first rush will eat dirt. (Tripwire)",
+        "R1: The Big Thing hesitates — Stan bought a breath.",
+        "R1: Stan's eyes go red. Next 3 strikes hit twice as hard. (Rage) [Stan — Stalker of the Apex Predator]",
+        "R1: Stan strikes for 50 (x2.0) (868 left)",
+        "R1: Stan strikes for 42 (x2.0) (826 left)",
+        "R1: Stan strikes for 44 (x2.0) (782 left)",
+        "R2: Stan strikes for 22 (760 left)",
+        "Stan's gear absorbs 31.",
+        "R2: Epitaph hits Stan for 13 (57 left)",
+        "Stan is losing — shouts for help! Chantal charges in!",
+        "R3: Stan strikes for 22 (738 left)",
+        "R3: Chantal strikes for 61 (677 left)",
+        "Stan's gear absorbs 39."
+      ]
+    },
+    {
+      "seed": 107905,
+      "day": 121,
+      "vid": "stan_kowalski",
+      "mid": "eater",
+      "mHpStart": 1124,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 20,
+      "mDealt": 192,
+      "dmgShare": 0.1708185053380783,
+      "planParty": [
+        "chantal_mukendi",
+        "visjoin_114"
+      ],
+      "allyVids": [
+        "chantal_mukendi",
+        "visjoin_114"
+      ],
+      "joiners": [
+        "chantal_mukendi"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "stan_kowalski": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "chantal_mukendi": {
+          "armed": true,
+          "armored": true,
+          "armorP": 58
+        },
+        "visjoin_114": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 32,
+      "parsedStrikeTotal": 175,
+      "parsedAttributed": 175,
+      "dmgByVid": {
+        "stan_kowalski": 175
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 0.6666666666666666,
+      "memberAbilities": {
+        "stan_kowalski": [],
+        "chantal_mukendi": [],
+        "visjoin_114": [
+          "bloodhound",
+          "echo_location"
+        ]
+      },
+      "abilityTokens": [
+        "Tripwire",
+        "Rage"
+      ],
+      "log": [
+        "Stan walks straight into The Eater. No avoiding it.",
+        "Stan sees The Eater coming and nocks an arrow — the fight opens at range (1 shot).",
+        "  loosed — it takes The Eater for 17 (1107 left).",
+        "Stan lowers the bow — The Eater is on them now. (1/1 hit)",
+        "Stan had strung a wire at ankle height before it closed — the first rush will eat dirt. (Tripwire)",
+        "R1: The Eater hesitates — Stan bought a breath.",
+        "R1: Stan's eyes go red. Next 3 strikes hit twice as hard. (Rage) [Stan — Stalker of the Apex Predator]",
+        "R1: Stan strikes for 52 (stalker's opening +4) (x2.0) (1055 left)",
+        "R1: Stan strikes for 50 (stalker's opening +4) (x2.0) (1005 left)",
+        "R1: Stan strikes for 50 (stalker's opening +4) (x2.0) (955 left)",
+        "Stan's gear absorbs 45.",
+        "R2: Gorge hits Stan for 20 (4 left)",
+        "R2: Stan strikes for 23 (932 left)",
+        "Stan is losing — shouts for help! Chantal charges in!",
+        "Chantal answered Stan's shout, but Stan is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107912,
+      "day": 103,
+      "vid": "app_mgpsphr5150",
+      "mid": "eulogy",
+      "mHpStart": 942,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 35,
+      "mDealt": 168,
+      "dmgShare": 0.17834394904458598,
+      "planParty": [
+        "mia_andersson",
+        "miguel_santos"
+      ],
+      "allyVids": [
+        "mia_andersson",
+        "miguel_santos"
+      ],
+      "joiners": [
+        "mia_andersson",
+        "miguel_santos"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "app_mgpsphr5150": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "mia_andersson": {
+          "armed": true,
+          "armored": true,
+          "armorP": 19
+        },
+        "miguel_santos": {
+          "armed": true,
+          "armored": true,
+          "armorP": 29
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 21.666666666666668,
+      "parsedStrikeTotal": 100,
+      "parsedAttributed": 100,
+      "dmgByVid": {
+        "app_mgpsphr5150": 86,
+        "mia_andersson": 14
+      },
+      "fighterDmgShare": 0.86,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "app_mgpsphr5150": [],
+        "mia_andersson": [],
+        "miguel_santos": []
+      },
+      "abilityTokens": [
+        "Rage"
+      ],
+      "log": [
+        "David walks straight into Ugly-Eyes. No avoiding it.",
+        "David sees Ugly-Eyes coming and whirls the Sling — the fight opens at range (4 shots).",
+        "  loosed — the stone takes Ugly-Eyes for 12 (930 left).",
+        "  loosed wide — the stone skips away into the dirt. (spent)",
+        "  loosed — the stone takes Ugly-Eyes for 8 (922 left).",
+        "  loosed — the stone takes Ugly-Eyes for 8 (914 left).",
+        "David lowers the Sling — Ugly-Eyes is on them now. (3/4 hit)",
+        "R1: David's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "R1: David strikes for 30 (x2.0) (884 left)",
+        "R1: David strikes for 22 (x2.0) (862 left)",
+        "David's gear absorbs 38.",
+        "R1: Final Chapter hits David for 19 (50 left)",
+        "R2: David strikes for 22 (x2.0) (840 left)",
+        "David's gear absorbs 32.",
+        "R2: Epitaph hits David for 16 (34 left)",
+        "David is losing — shouts for help! Mia charges in!",
+        "R3: David strikes for 12 (828 left)",
+        "R3: Mia strikes for 14 (814 left)",
+        "Mia's gear absorbs 38.",
+        "R3: Final Chapter hits Mia for 17 (49 left)"
+      ]
+    }
+  ],
+  "ctlPairMeetings": [
+    {
+      "seed": 107901,
+      "day": 93,
+      "vid": "rafael_torres",
+      "mid": "reunion",
+      "mHpStart": 1225,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 78,
+      "mDealt": 105,
+      "dmgShare": 0.08571428571428572,
+      "planParty": [
+        "desmond_clarke"
+      ],
+      "allyVids": [
+        "desmond_clarke",
+        "valeria_quispe"
+      ],
+      "joiners": [
+        "desmond_clarke",
+        "valeria_quispe"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "rafael_torres": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        },
+        "desmond_clarke": {
+          "armed": true,
+          "armored": true,
+          "armorP": 45
+        },
+        "valeria_quispe": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        }
+      },
+      "minArmorP": 24,
+      "meanArmorP": 35.333333333333336,
+      "parsedStrikeTotal": 105,
+      "parsedAttributed": 21,
+      "dmgByVid": {
+        "desmond_clarke": 21
+      },
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "rafael_torres": [],
+        "desmond_clarke": [],
+        "valeria_quispe": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Rafael walks straight into The Reunion. No avoiding it.",
+        "Rafael's gear absorbs 43.",
+        "R1: Your Move hits Rafael for 19 (59 left)",
+        "R1: Rafael strikes for 29 (1196 left)",
+        "R2: Rafael strikes for 26 (1170 left)",
+        "Rafael's gear absorbs 43.",
+        "R2: Your Move hits Rafael for 19 (40 left)",
+        "Rafael is losing — shouts for help! Desmond charges in!",
+        "Rafael's gear absorbs 42.",
+        "R3: Your Move hits Rafael for 19 (21 left)",
+        "R3: Rafael strikes for 29 (1141 left)",
+        "R3: Desmond strikes for 21 (x1.3) (1120 left)",
+        "Rafael is still losing — shouts again! Valeria charges in!",
+        "Rafael's gear absorbs 46.",
+        "R4: Your Move hits Rafael for 21 (0 left)"
+      ]
+    },
+    {
+      "seed": 107901,
+      "day": 96,
+      "vid": "valeria_quispe",
+      "mid": "algorithm",
+      "mHpStart": null,
+      "outcome": "vKill",
+      "win": true,
+      "rounds": 8,
+      "vTaken": 41,
+      "mDealt": 1245,
+      "dmgShare": null,
+      "planParty": [
+        "olivia_bennett",
+        "desmond_clarke",
+        "hassan_ali"
+      ],
+      "allyVids": [
+        "desmond_clarke",
+        "hassan_ali"
+      ],
+      "joiners": [
+        "desmond_clarke",
+        "hassan_ali"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "valeria_quispe": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        },
+        "desmond_clarke": {
+          "armed": true,
+          "armored": true,
+          "armorP": 45
+        },
+        "hassan_ali": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 33,
+      "parsedStrikeTotal": 805,
+      "parsedAttributed": 805,
+      "dmgByVid": {
+        "valeria_quispe": 730,
+        "desmond_clarke": 52,
+        "hassan_ali": 23
+      },
+      "fighterDmgShare": 0.906832298136646,
+      "abilitiesPerMember": 0.6666666666666666,
+      "memberAbilities": {
+        "valeria_quispe": [],
+        "desmond_clarke": [],
+        "hassan_ali": [
+          "beast_calm",
+          "lucky_rock"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Valeria walks straight into The Algorithm. No avoiding it.",
+        "Valeria has Apex Bow but no arrows — the string stays drawn, useless.",
+        "Valeria's gear absorbs 42.",
+        "R1: Engagement hits Valeria for 10 (88 left)",
+        "R1: Valeria strikes for 150 (stalker's opening +4) (x1.3) (962 left)",
+        "R2: Valeria strikes for 144 (x1.3) (818 left)",
+        "Valeria's gear absorbs 46.",
+        "R2: Engagement hits Valeria for 11 (77 left)",
+        "Valeria is losing — shouts for help! Desmond charges in!",
+        "R3: Valeria strikes for 145 (x1.3) (673 left)",
+        "R3: Desmond strikes for 26 (x1.3) (647 left)",
+        "Valeria's gear absorbs 43.",
+        "R3: Recommended For You hits Valeria for 11 (66 left)",
+        "Valeria is still losing — shouts again! Hassan charges in!",
+        "R4: Valeria strikes for 145 (x1.3) (502 left)",
+        "R4: Desmond strikes for 26 (x1.3) (476 left)",
+        "R4: Hassan strikes for 23 (x1.3) (453 left)",
+        "Desmond's gear absorbs 44.",
+        "R4: Recommended For You hits Desmond for 9 (73 left)",
+        "R5: Valeria strikes for 146 (blood trail +2) (x1.2) (307 left)"
+      ]
+    },
+    {
+      "seed": 107901,
+      "day": 113,
+      "vid": "hassan_ali",
+      "mid": "network_note",
+      "mHpStart": 1074,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 73,
+      "mDealt": 232,
+      "dmgShare": 0.21601489757914338,
+      "planParty": [
+        "catalina_reyes",
+        "olivia_bennett",
+        "app_mgpspk103"
+      ],
+      "allyVids": [
+        "app_mgpspk103",
+        "catalina_reyes"
+      ],
+      "joiners": [
+        "app_mgpspk103",
+        "catalina_reyes"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "hassan_ali": {
+          "armed": true,
+          "armored": true,
+          "armorP": 22
+        },
+        "app_mgpspk103": {
+          "armed": true,
+          "armored": true,
+          "armorP": 42
+        },
+        "catalina_reyes": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        }
+      },
+      "minArmorP": 22,
+      "meanArmorP": 39.666666666666664,
+      "parsedStrikeTotal": 199,
+      "parsedAttributed": 199,
+      "dmgByVid": {
+        "hassan_ali": 127,
+        "app_mgpspk103": 72
+      },
+      "fighterDmgShare": 0.6381909547738693,
+      "abilitiesPerMember": 0.6666666666666666,
+      "memberAbilities": {
+        "hassan_ali": [
+          "beast_calm",
+          "lucky_rock"
+        ],
+        "app_mgpspk103": [],
+        "catalina_reyes": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Hassan walks straight into The Network Note. No avoiding it.",
+        "Hassan has Bow but no arrows — the string stays drawn, useless.",
+        "R1: Blooded — the village knows where the Producers bleed. (Strikes hit 1.5× as hard; their blows land at 0.75× strength.)",
+        "R1: Hassan strikes for 35 (stalker's opening +4) (1039 left)",
+        "R1: the memo underlines something about Hassan. (It lands next round.)",
+        "Hassan's gear absorbs 42.",
+        "R1: Just Fix It hits Hassan for 16 (69 left)",
+        "R2: Hassan strikes for 29 (1010 left)",
+        "R2: NOTE: \"THE WOLF SHOULD HAVE LASERS NOW\" — and then it does. (+25%.)",
+        "Hassan's gear absorbs 52.",
+        "R2: Just Fix It hits Hassan for 20 (49 left)",
+        "Hassan is losing — shouts for help! Vitória charges in!",
+        "R3: Hassan strikes for 33 (977 left)",
+        "R3: Vitória strikes for 39 (938 left)",
+        "R3: the memo underlines something about Hassan. (It lands next round.)",
+        "Hassan's gear absorbs 46.",
+        "R3: Just Fix It hits Hassan for 17 (32 left)",
+        "Hassan is still losing — shouts again! Catalina charges in!",
+        "R4: Hassan strikes for 30 (908 left)",
+        "R4: Vitória strikes for 33 (875 left)"
+      ]
+    },
+    {
+      "seed": 107901,
+      "day": 123,
+      "vid": "catalina_reyes",
+      "mid": "editor",
+      "mHpStart": 1827,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 7,
+      "vTaken": 74,
+      "mDealt": 583,
+      "dmgShare": 0.3191023535851122,
+      "planParty": [
+        "olivia_bennett",
+        "ines_duarte"
+      ],
+      "allyVids": [
+        "ines_duarte",
+        "olivia_bennett"
+      ],
+      "joiners": [
+        "ines_duarte",
+        "olivia_bennett"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "catalina_reyes": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "ines_duarte": {
+          "armed": true,
+          "armored": true,
+          "armorP": 34
+        },
+        "olivia_bennett": {
+          "armed": true,
+          "armored": true,
+          "armorP": 32
+        }
+      },
+      "minArmorP": 32,
+      "meanArmorP": 40.333333333333336,
+      "parsedStrikeTotal": 154,
+      "parsedAttributed": 154,
+      "dmgByVid": {
+        "catalina_reyes": 118,
+        "ines_duarte": 36
+      },
+      "fighterDmgShare": 0.7662337662337663,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "catalina_reyes": [],
+        "ines_duarte": [
+          "beast_calm"
+        ],
+        "olivia_bennett": []
+      },
+      "abilityTokens": [
+        "Take Aim"
+      ],
+      "log": [
+        "Catalina walks straight into The Editor. No avoiding it.",
+        "Catalina sees The Editor coming and cranks a bolt into place — the fight opens at range (3 shots).",
+        "  loosed — the bolt takes The Editor for 22 (1805 left).",
+        "  loosed — the bolt takes The Editor for 20 (1785 left).",
+        "  loosed — the bolt takes The Editor for 20 (1765 left).",
+        "Catalina lowers the Crossbow — The Editor is on them now. (3/3 hit)",
+        "R1: Catalina goes still. Breath slows. The world narrows to the target. (Take Aim — next shot 2.5x)",
+        "R1: the editor's scissors snip — measuring Catalina.",
+        "Catalina's gear absorbs 48.",
+        "R1: Blooded — the village knows where the Producers bleed. (Strikes hit 1.5× as hard; their blows land at 0.75× strength.)",
+        "R1: Trim hits Catalina for 11 (89 left)",
+        "R2: Catalina strikes for 80 (aimed 2.5x) (1685 left)",
+        "R2: the film strips show Catalina's swing, next. (A round to do something about it.)",
+        "Catalina's gear absorbs 82.",
+        "R2: Cut hits Catalina for 20 (69 left)",
+        "Catalina is losing — shouts for help! Ines charges in!",
+        "R3: Catalina strikes for 38 (1647 left)",
+        "R3: Ines strikes for 36 (1611 left)",
+        "R3: the scissors poise — Catalina's swing is measured for the cut.",
+        "Catalina's gear absorbs 56."
+      ]
+    },
+    {
+      "seed": 107901,
+      "day": 140,
+      "vid": "ines_duarte",
+      "mid": "network_note",
+      "mHpStart": 1252,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 47,
+      "mDealt": 313,
+      "dmgShare": 0.25,
+      "planParty": [
+        "app_mgpspk103",
+        "catalina_reyes",
+        "devon_okafor"
+      ],
+      "allyVids": [
+        "app_mgpspk103",
+        "catalina_reyes"
+      ],
+      "joiners": [
+        "app_mgpspk103",
+        "catalina_reyes"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "ines_duarte": {
+          "armed": true,
+          "armored": true,
+          "armorP": 34
+        },
+        "app_mgpspk103": {
+          "armed": true,
+          "armored": true,
+          "armorP": 52
+        },
+        "catalina_reyes": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        }
+      },
+      "minArmorP": 34,
+      "meanArmorP": 47,
+      "parsedStrikeTotal": 313,
+      "parsedAttributed": 313,
+      "dmgByVid": {
+        "ines_duarte": 194,
+        "app_mgpspk103": 74,
+        "catalina_reyes": 45
+      },
+      "fighterDmgShare": 0.6198083067092651,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "ines_duarte": [
+          "beast_calm"
+        ],
+        "app_mgpspk103": [],
+        "catalina_reyes": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Ines walks straight into Loud-Eyes. No avoiding it.",
+        "R1: Blooded — the village knows where the Producers bleed. (Strikes hit 1.5× as hard; their blows land at 0.75× strength.)",
+        "R1: Ines strikes for 50 (x1.3) (1202 left)",
+        "R1: the memo underlines something about Ines. (It lands next round.)",
+        "Ines's gear absorbs 40.",
+        "R1: Per My Last Email hits Ines for 10 (84 left)",
+        "R2: Ines strikes for 44 (x1.3) (1158 left)",
+        "R2: NOTE: \"THE WOLF SHOULD HAVE LASERS NOW\" — and then it does. (+25%.)",
+        "Ines's gear absorbs 67.",
+        "R2: Just Fix It hits Ines for 17 (67 left)",
+        "Ines is losing — shouts for help! Vitória charges in!",
+        "R3: Ines strikes for 50 (x1.3) (1108 left)",
+        "R3: Vitória strikes for 35 (1073 left)",
+        "R3: the memo underlines something about Ines. (It lands next round.)",
+        "Ines's gear absorbs 42.",
+        "R3: Just Fix It hits Ines for 10 (57 left)",
+        "Ines is still losing — shouts again! Catalina charges in!",
+        "R4: Ines strikes for 50 (x1.3) (1023 left)",
+        "R4: Vitória strikes for 39 (984 left)",
+        "R4: Catalina strikes for 45 (x1.3) (939 left)"
+      ]
+    },
+    {
+      "seed": 107902,
+      "day": 138,
+      "vid": "nikolai_volkov",
+      "mid": "eater",
+      "mHpStart": 973,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 10,
+      "vTaken": 79,
+      "mDealt": 380,
+      "dmgShare": 0.39054470709146966,
+      "planParty": [
+        "app_mgpsphse198",
+        "jorge_silva",
+        "gen_q5atzwl"
+      ],
+      "allyVids": [
+        "app_mgpsphse198",
+        "gen_q5atzwl"
+      ],
+      "joiners": [
+        "app_mgpsphse198",
+        "gen_q5atzwl"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "nikolai_volkov": {
+          "armed": true,
+          "armored": true,
+          "armorP": 62
+        },
+        "app_mgpsphse198": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "gen_q5atzwl": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 38.666666666666664,
+      "parsedStrikeTotal": 61,
+      "parsedAttributed": 61,
+      "dmgByVid": {
+        "nikolai_volkov": 54,
+        "app_mgpsphse198": 7
+      },
+      "fighterDmgShare": 0.8852459016393442,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "nikolai_volkov": [],
+        "app_mgpsphse198": [],
+        "gen_q5atzwl": [
+          "the_touch"
+        ]
+      },
+      "abilityTokens": [
+        "Take Aim"
+      ],
+      "log": [
+        "Nikolai walks straight into The Ugly Beast. No avoiding it.",
+        "Nikolai sees The Ugly Beast coming and whirls the Sling — the fight opens at range (2 shots).",
+        "  loosed — the stone takes The Ugly Beast for 12 (961 left).",
+        "  loosed — the stone takes The Ugly Beast for 10 (951 left).",
+        "Nikolai lowers the Sling — The Ugly Beast is on them now. (2/2 hit)",
+        "Nikolai's gear absorbs 41.",
+        "R1: Gorge hits Nikolai for 6 (94 left)",
+        "R1: Nikolai goes still. Breath slows. The world narrows to the target. (Take Aim — next shot 2.5x)",
+        "Nikolai's gear absorbs 66.",
+        "R2: Gorge hits Nikolai for 10 (84 left)",
+        "R2: Nikolai strikes for 30 (aimed 2.5x) (921 left)",
+        "Nikolai is losing — shouts for help! Emmanuel charges in!",
+        "Nikolai's gear absorbs 68.",
+        "R3: Gorge hits Nikolai for 10 (74 left)",
+        "R3: Nikolai strikes for 11 (910 left)",
+        "R3: Emmanuel strikes for 7 (903 left)",
+        "Nikolai is still losing — shouts again! Mekonnen charges in!",
+        "Nikolai's gear absorbs 74.",
+        "R4: Smack-Rush hits Nikolai for 11 (63 left)",
+        "R4: Nikolai strikes for 13 (890 left)"
+      ]
+    },
+    {
+      "seed": 107902,
+      "day": 139,
+      "vid": "jorge_silva",
+      "mid": "rerun",
+      "mHpStart": 1321,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 12,
+      "mDealt": 221,
+      "dmgShare": 0.16729750189250567,
+      "planParty": [
+        "nikolai_volkov",
+        "gen_q5atzwl"
+      ],
+      "allyVids": [
+        "gen_q5atzwl",
+        "nikolai_volkov"
+      ],
+      "joiners": [
+        "gen_q5atzwl",
+        "nikolai_volkov"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "jorge_silva": {
+          "armed": true,
+          "armored": true,
+          "armorP": 66
+        },
+        "gen_q5atzwl": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        },
+        "nikolai_volkov": {
+          "armed": true,
+          "armored": true,
+          "armorP": 62
+        }
+      },
+      "minArmorP": 37,
+      "meanArmorP": 55,
+      "parsedStrikeTotal": 192,
+      "parsedAttributed": 192,
+      "dmgByVid": {
+        "jorge_silva": 121,
+        "gen_q5atzwl": 71
+      },
+      "fighterDmgShare": 0.6302083333333334,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "jorge_silva": [],
+        "gen_q5atzwl": [
+          "the_touch"
+        ],
+        "nikolai_volkov": []
+      },
+      "abilityTokens": [],
+      "log": [
+        "Jorge walks straight into The Rerun. No avoiding it.",
+        "Jorge has Bow but no arrows — the string stays drawn, useless.",
+        "R1: the clapperboard holds — take 12, 4 rounds to the rewind.",
+        "Jorge's gear absorbs 44.",
+        "R1: Blooded — the village knows where the Producers bleed. (Strikes hit 1.5× as hard; their blows land at 0.75× strength.)",
+        "R1: Notes Session hits Jorge for 6 (41 left)",
+        "R1: Jorge strikes for 32 (1289 left)",
+        "R2: Jorge strikes for 27 (1262 left)",
+        "R2: the clapperboard holds — take 12, 3 rounds to the rewind.",
+        "Jorge's gear absorbs 46.",
+        "R2: Notes Session hits Jorge for 6 (35 left)",
+        "Jorge is losing — shouts for help! Mekonnen charges in!",
+        "R3: Jorge strikes for 30 (1232 left)",
+        "R3: Mekonnen strikes for 33 (1199 left)",
+        "R3: the clapperboard holds — take 12, 2 rounds to the rewind.",
+        "Mekonnen's gear absorbs 42.",
+        "R3: Cold Open hits Mekonnen for 10 (19 left)",
+        "Jorge is still losing — shouts again! Nikolai charges in!",
+        "R4: Jorge strikes for 32 (1167 left)",
+        "R4: Mekonnen strikes for 38 (1129 left)"
+      ]
+    },
+    {
+      "seed": 107902,
+      "day": 149,
+      "vid": "chantal_mukendi",
+      "mid": "reunion",
+      "mHpStart": 1239,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 29,
+      "mDealt": 93,
+      "dmgShare": 0.07506053268765134,
+      "planParty": [
+        "jorge_silva",
+        "nikolai_volkov",
+        "gen_akw4v8q"
+      ],
+      "allyVids": [
+        "jorge_silva",
+        "gen_akw4v8q"
+      ],
+      "joiners": [
+        "jorge_silva",
+        "gen_akw4v8q"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "chantal_mukendi": {
+          "armed": true,
+          "armored": true,
+          "armorP": 62
+        },
+        "jorge_silva": {
+          "armed": true,
+          "armored": true,
+          "armorP": 66
+        },
+        "gen_akw4v8q": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        }
+      },
+      "minArmorP": 37,
+      "meanArmorP": 55,
+      "parsedStrikeTotal": 93,
+      "parsedAttributed": 93,
+      "dmgByVid": {
+        "chantal_mukendi": 36,
+        "jorge_silva": 42,
+        "gen_akw4v8q": 15
+      },
+      "fighterDmgShare": 0.3870967741935484,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "chantal_mukendi": [],
+        "jorge_silva": [],
+        "gen_akw4v8q": [
+          "night_eyes"
+        ]
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Chantal walks straight into Big-Eyes. No avoiding it.",
+        "Chantal's gear absorbs 52.",
+        "R1: Your Move hits Chantal for 9 (34 left)",
+        "R1: Chantal stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Chantal's gear absorbs 54.",
+        "R2: Your Move hits Chantal for 10 (44 left)",
+        "R2: Chantal strikes for 12 (1227 left)",
+        "Chantal is losing — shouts for help! Jorge charges in!",
+        "Jorge's gear absorbs 69.",
+        "R3: Your Move hits Jorge for 11 (67 left)",
+        "R3: Chantal strikes for 11 (1216 left)",
+        "R3: Jorge strikes for 21 (1195 left)",
+        "Chantal is still losing — shouts again! Alberto charges in!",
+        "R4: Chantal strikes for 13 (1182 left)",
+        "R4: Jorge strikes for 21 (1161 left)",
+        "R4: Alberto strikes for 15 (1146 left)",
+        "Chantal's gear absorbs 58.",
+        "R4: Your Move hits Chantal for 10 (34 left)",
+        "Chantal sees how this ends — and runs while running still works."
+      ]
+    },
+    {
+      "seed": 107904,
+      "day": 133,
+      "vid": "rafael_torres",
+      "mid": "strike",
+      "mHpStart": 1063,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 54,
+      "mDealt": 20,
+      "dmgShare": 0.01881467544684854,
+      "planParty": [
+        "rosa_mendez"
+      ],
+      "allyVids": [
+        "rosa_mendez",
+        "aroha_ngata"
+      ],
+      "joiners": [
+        "rosa_mendez"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "rafael_torres": {
+          "armed": true,
+          "armored": true,
+          "armorP": 7
+        },
+        "rosa_mendez": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "aroha_ngata": {
+          "armed": true,
+          "armored": true,
+          "armorP": 61
+        }
+      },
+      "minArmorP": 7,
+      "meanArmorP": 28.333333333333332,
+      "parsedStrikeTotal": 20,
+      "parsedAttributed": 20,
+      "dmgByVid": {
+        "rafael_torres": 20
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "rafael_torres": [],
+        "rosa_mendez": [
+          "green_whisper",
+          "beard_moss",
+          "pyrokinesis",
+          "harvest_table",
+          "loud_chewer"
+        ],
+        "aroha_ngata": [
+          "the_touch",
+          "scream_cheese"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Rafael walks straight into The Strike. No avoiding it.",
+        "R1: Rafael strikes for 9 (1054 left)",
+        "Rafael's gear absorbs 14.",
+        "R1: Slowdown hits Rafael for 18 (52 left)",
+        "R2: Rafael strikes for 11 (1043 left)",
+        "Rafael's gear absorbs 28.",
+        "R2: Walkout hits Rafael for 36 (16 left)",
+        "Rafael is losing — shouts for help! Rosa charges in!",
+        "Rosa answered Rafael's shout, but Rafael is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107904,
+      "day": 139,
+      "vid": "rosa_mendez",
+      "mid": "influencer",
+      "mHpStart": 1046,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 8,
+      "vTaken": 112,
+      "mDealt": 179,
+      "dmgShare": 0.1711281070745698,
+      "planParty": [
+        "rafael_torres"
+      ],
+      "allyVids": [
+        "aroha_ngata",
+        "rafael_torres"
+      ],
+      "joiners": [
+        "aroha_ngata",
+        "rafael_torres"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "rosa_mendez": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "aroha_ngata": {
+          "armed": true,
+          "armored": true,
+          "armorP": 61
+        },
+        "rafael_torres": {
+          "armed": true,
+          "armored": true,
+          "armorP": 7
+        }
+      },
+      "minArmorP": 7,
+      "meanArmorP": 28.333333333333332,
+      "parsedStrikeTotal": 33,
+      "parsedAttributed": 33,
+      "dmgByVid": {
+        "rosa_mendez": 33
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "rosa_mendez": [
+          "green_whisper",
+          "beard_moss",
+          "pyrokinesis",
+          "harvest_table",
+          "loud_chewer"
+        ],
+        "aroha_ngata": [
+          "the_touch",
+          "scream_cheese"
+        ],
+        "rafael_torres": []
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Rosa sees Ugly-Eyes coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed — it takes Ugly-Eyes for 31 (1015 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "Rosa lowers the bow — Ugly-Eyes is on them now. (1/3 hit)",
+        "Rosa's gear absorbs 30.",
+        "R1: Ratio hits Rosa for 14 (79 left)",
+        "R1: Rosa strikes for 33 (982 left)",
+        "R2: Rosa ignores the ring light and hunts the followers — a phone clatters, a fan-creature drops. (1 down.)",
+        "Rosa's gear absorbs 29.",
+        "R2: Ratio hits Rosa for 13 (66 left)",
+        "Rosa holds the line — working the trick, not the damage race.",
+        "Rosa's gear absorbs 35.",
+        "R3: Ratio hits Rosa for 16 (50 left)",
+        "R3: Rosa stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Rosa holds the line — working the trick, not the damage race.",
+        "R4: Rosa ignores the ring light and hunts the followers — a phone clatters, a fan-creature drops. (2 down.)",
+        "Rosa's gear absorbs 32.",
+        "R4: Ratio hits Rosa for 15 (55 left)",
+        "Rosa holds the line — working the trick, not the damage race."
+      ]
+    },
+    {
+      "seed": 107911,
+      "day": 71,
+      "vid": "gen_27meaxv",
+      "mid": "reunion",
+      "mHpStart": 1252,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 72,
+      "mDealt": 111,
+      "dmgShare": 0.08865814696485623,
+      "planParty": [
+        "maya_singh"
+      ],
+      "allyVids": [
+        "maya_singh",
+        "hassan_ali"
+      ],
+      "joiners": [
+        "maya_singh",
+        "hassan_ali"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_27meaxv": {
+          "armed": true,
+          "armored": true,
+          "armorP": 32
+        },
+        "maya_singh": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        },
+        "hassan_ali": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 24.333333333333332,
+      "parsedStrikeTotal": 111,
+      "parsedAttributed": 111,
+      "dmgByVid": {
+        "gen_27meaxv": 60,
+        "maya_singh": 27,
+        "hassan_ali": 24
+      },
+      "fighterDmgShare": 0.5405405405405406,
+      "abilitiesPerMember": 5,
+      "memberAbilities": {
+        "gen_27meaxv": [
+          "green_whisper",
+          "green_thumb",
+          "rage",
+          "scream_cheese"
+        ],
+        "maya_singh": [
+          "green_whisper",
+          "green_thumb",
+          "rage",
+          "beard_moss",
+          "cornucopia",
+          "rain_dancer"
+        ],
+        "hassan_ali": [
+          "beast_calm",
+          "green_whisper",
+          "green_thumb",
+          "rage",
+          "rain_dancer"
+        ]
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Ursula walks straight into Big Ugly. No avoiding it.",
+        "Ursula has Crude bow but no arrows — the string stays drawn, useless.",
+        "R1: Ursula strikes for 24 (stalker's opening +4) (1228 left)",
+        "Ursula's gear absorbs 51.",
+        "R1: Your Move hits Ursula for 18 (68 left)",
+        "R2: Ursula strikes for 16 (1212 left)",
+        "Ursula's gear absorbs 49.",
+        "R2: Your Move hits Ursula for 17 (51 left)",
+        "Ursula is losing — shouts for help! Maya charges in!",
+        "R3: Ursula stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Maya strikes for 14 (1198 left)",
+        "Ursula's gear absorbs 49.",
+        "R3: Your Move hits Ursula for 17 (54 left)",
+        "Ursula is still losing — shouts again! Hassan charges in!",
+        "R4: Ursula strikes for 20 (1178 left)",
+        "R4: Maya strikes for 13 (1165 left)",
+        "R4: Hassan strikes for 24 (1141 left)",
+        "Ursula's gear absorbs 60.",
+        "R4: Your Move hits Ursula for 20 (34 left)",
+        "Ursula sees how this ends — and runs while running still works."
+      ]
+    },
+    {
+      "seed": 107911,
+      "day": 81,
+      "vid": "desmond_clarke",
+      "mid": "congregation",
+      "mHpStart": 962,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 58,
+      "mDealt": 13,
+      "dmgShare": 0.013513513513513514,
+      "planParty": [
+        "maya_singh"
+      ],
+      "allyVids": [
+        "maya_singh",
+        "hassan_ali"
+      ],
+      "joiners": [
+        "maya_singh"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "desmond_clarke": {
+          "armed": true,
+          "armored": true,
+          "armorP": 9
+        },
+        "maya_singh": {
+          "armed": true,
+          "armored": true,
+          "armorP": 31
+        },
+        "hassan_ali": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 9,
+      "meanArmorP": 19,
+      "parsedStrikeTotal": 13,
+      "parsedAttributed": 13,
+      "dmgByVid": {
+        "desmond_clarke": 13
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 3.6666666666666665,
+      "memberAbilities": {
+        "desmond_clarke": [],
+        "maya_singh": [
+          "green_whisper",
+          "green_thumb",
+          "rage",
+          "beard_moss",
+          "cornucopia",
+          "rain_dancer"
+        ],
+        "hassan_ali": [
+          "beast_calm",
+          "green_whisper",
+          "green_thumb",
+          "rage",
+          "rain_dancer"
+        ]
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Desmond walks straight into The Congregation. No avoiding it.",
+        "R1: Desmond stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Desmond's gear absorbs 32.",
+        "R1: Absolution hits Desmond for 30 (29 left)",
+        "R2: Desmond strikes for 13 (x1.3) (949 left)",
+        "Desmond's gear absorbs 29.",
+        "R2: Absolution hits Desmond for 28 (1 left)",
+        "Desmond is losing — shouts for help! Maya charges in!",
+        "Maya answered Desmond's shout, but Desmond is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107911,
+      "day": 88,
+      "vid": "hassan_ali",
+      "mid": "suburb",
+      "mHpStart": 1305,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 50,
+      "mDealt": 148,
+      "dmgShare": 0.11340996168582375,
+      "planParty": [
+        "desmond_clarke"
+      ],
+      "allyVids": [
+        "desmond_clarke",
+        "farid_ahmed"
+      ],
+      "joiners": [
+        "desmond_clarke",
+        "farid_ahmed"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "hassan_ali": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "desmond_clarke": {
+          "armed": true,
+          "armored": true,
+          "armorP": 14
+        },
+        "farid_ahmed": {
+          "armed": true,
+          "armored": true,
+          "armorP": 44
+        }
+      },
+      "minArmorP": 14,
+      "meanArmorP": 25,
+      "parsedStrikeTotal": 148,
+      "parsedAttributed": 148,
+      "dmgByVid": {
+        "hassan_ali": 102,
+        "desmond_clarke": 21,
+        "farid_ahmed": 25
+      },
+      "fighterDmgShare": 0.6891891891891891,
+      "abilitiesPerMember": 3,
+      "memberAbilities": {
+        "hassan_ali": [
+          "beast_calm",
+          "green_whisper",
+          "green_thumb",
+          "rage",
+          "rain_dancer"
+        ],
+        "desmond_clarke": [],
+        "farid_ahmed": [
+          "green_whisper",
+          "beard_moss",
+          "green_thumb",
+          "cornucopia"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Hassan walks straight into The Suburb. No avoiding it.",
+        "R1: Hassan strikes for 29 (stalker's opening +4) (1276 left)",
+        "Hassan's gear absorbs 35.",
+        "R1: Property Tax hits Hassan for 16 (47 left)",
+        "R2: Hassan strikes for 26 (1250 left)",
+        "Hassan's gear absorbs 24.",
+        "R2: HOA Fine hits Hassan for 11 (36 left)",
+        "Hassan is losing — shouts for help! Desmond charges in!",
+        "R3: Hassan strikes for 23 (1227 left)",
+        "R3: Desmond strikes for 12 (1215 left)",
+        "Hassan draws its eye — \"Me. I'm the problem.\" The beast turns.",
+        "Hassan's gear absorbs 22.",
+        "R3: HOA Fine hits Hassan for 10 (26 left)",
+        "Hassan is still losing — shouts again! Farid charges in!",
+        "R4: Hassan strikes for 24 (1191 left)",
+        "R4: Desmond strikes for 9 (1182 left)",
+        "R4: Farid strikes for 25 (1157 left)",
+        "Hassan's gear absorbs 30.",
+        "R4: Property Tax hits Hassan for 13 (13 left)",
+        "Hassan sees how this ends — and runs while running still works."
+      ]
+    }
+  ],
+  "armPairMeetings": [
+    {
+      "seed": 107902,
+      "day": 66,
+      "vid": "gen_akw4v8q",
+      "mid": "suburb",
+      "mHpStart": 1347,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 1,
+      "vTaken": 14,
+      "mDealt": 0,
+      "dmgShare": 0,
+      "planParty": [
+        "gen_gxb5wg5"
+      ],
+      "allyVids": [
+        "gen_gxb5wg5",
+        "gen_sbgqf3z"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_akw4v8q": {
+          "armed": true,
+          "armored": true,
+          "armorP": 7
+        },
+        "gen_gxb5wg5": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "gen_sbgqf3z": {
+          "armed": true,
+          "armored": true,
+          "armorP": 22
+        }
+      },
+      "minArmorP": 7,
+      "meanArmorP": 15.333333333333334,
+      "parsedStrikeTotal": 0,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": null,
+      "abilitiesPerMember": 2.6666666666666665,
+      "memberAbilities": {
+        "gen_akw4v8q": [
+          "night_eyes",
+          "lucky_rock"
+        ],
+        "gen_gxb5wg5": [
+          "night_eyes",
+          "lucky_rock",
+          "fusion_reactor"
+        ],
+        "gen_sbgqf3z": [
+          "green_whisper",
+          "beard_moss",
+          "green_thumb"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Alberto walks straight into The Suburb. No avoiding it.",
+        "Alberto has Sling but no stones — the pouch hangs empty.",
+        "Alberto's gear absorbs 14.",
+        "R1: HOA Fine hits Alberto for 14 (0 left)"
+      ]
+    },
+    {
+      "seed": 107903,
+      "day": 36,
+      "vid": "gen_blfbnl1",
+      "mid": "suburb",
+      "mHpStart": 1499,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 93,
+      "mDealt": 136,
+      "dmgShare": 0.09072715143428953,
+      "planParty": [
+        "rafael_torres"
+      ],
+      "allyVids": [
+        "rafael_torres",
+        "gen_zfoge0g"
+      ],
+      "joiners": [
+        "rafael_torres",
+        "gen_zfoge0g"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_blfbnl1": {
+          "armed": true,
+          "armored": true,
+          "armorP": 7
+        },
+        "rafael_torres": {
+          "armed": true,
+          "armored": true,
+          "armorP": 12
+        },
+        "gen_zfoge0g": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 7,
+      "meanArmorP": 12,
+      "parsedStrikeTotal": 136,
+      "parsedAttributed": 50,
+      "dmgByVid": {
+        "rafael_torres": 19,
+        "gen_zfoge0g": 31
+      },
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 2,
+      "memberAbilities": {
+        "gen_blfbnl1": [
+          "the_touch",
+          "rage",
+          "echo_location"
+        ],
+        "rafael_torres": [],
+        "gen_zfoge0g": [
+          "beast_calm",
+          "bird_whisperer",
+          "lucky_rock"
+        ]
+      },
+      "abilityTokens": [
+        "Rage",
+        "field medicine"
+      ],
+      "log": [
+        "Veronika walks straight into The Suburb. No avoiding it.",
+        "R1: Veronika's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "R1: Veronika strikes for 25 (x2.5) (1474 left)",
+        "R1: Veronika strikes for 25 (x2.5) (1449 left)",
+        "Veronika's gear absorbs 17.",
+        "R1: Property Tax hits Veronika for 19 (47 left)",
+        "R2: Veronika stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Veronika's gear absorbs 23.",
+        "R2: Property Tax hits Veronika for 25 (42 left)",
+        "Veronika is losing — shouts for help! Rafael charges in!",
+        "R3: Veronika strikes for 25 (x2.5) (1424 left)",
+        "R3: Rafael strikes for 8 (1416 left)",
+        "Veronika's gear absorbs 25.",
+        "R3: Property Tax hits Veronika for 26 (16 left)",
+        "Veronika is still losing — shouts again! Carlos charges in!",
+        "R4: Veronika strikes for 11 (x1.2) (1405 left)",
+        "R4: Rafael strikes for 11 (1394 left)",
+        "R4: Carlos strikes for 31 (x1.3) (1363 left)",
+        "Veronika's gear absorbs 22.",
+        "R4: Property Tax hits Veronika for 23 (0 left)"
+      ]
+    },
+    {
+      "seed": 107903,
+      "day": 39,
+      "vid": "rafael_torres",
+      "mid": "congregation",
+      "mHpStart": 1063,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 1,
+      "vTaken": 25,
+      "mDealt": 54,
+      "dmgShare": 0.05079962370649106,
+      "planParty": [
+        "ruby_callaghan"
+      ],
+      "allyVids": [
+        "ruby_callaghan",
+        "gen_d7zlzvl"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "rafael_torres": {
+          "armed": true,
+          "armored": true,
+          "armorP": 12
+        },
+        "ruby_callaghan": {
+          "armed": true,
+          "armored": true,
+          "armorP": 55
+        },
+        "gen_d7zlzvl": {
+          "armed": true,
+          "armored": true,
+          "armorP": 22
+        }
+      },
+      "minArmorP": 12,
+      "meanArmorP": 29.666666666666668,
+      "parsedStrikeTotal": 54,
+      "parsedAttributed": 54,
+      "dmgByVid": {
+        "rafael_torres": 54
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 0.3333333333333333,
+      "memberAbilities": {
+        "rafael_torres": [],
+        "ruby_callaghan": [],
+        "gen_d7zlzvl": [
+          "beast_calm"
+        ]
+      },
+      "abilityTokens": [
+        "Rage"
+      ],
+      "log": [
+        "Rafael walks straight into The Congregation. No avoiding it.",
+        "Rafael's gear absorbs 36.",
+        "R1: Absolution hits Rafael for 25 (6 left)",
+        "R1: Rafael's eyes go red. Next 3 strikes hit twice as hard. (Rage) [Rafael — Stalker of the Apex Predator]",
+        "R1: Rafael strikes for 26 (stalker's opening +4) (x2.0) (1037 left)",
+        "R1: Rafael strikes for 28 (stalker's opening +4) (x2.0) (1009 left)",
+        "Rafael is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107903,
+      "day": 41,
+      "vid": "elif_demir",
+      "mid": "eater",
+      "mHpStart": 998,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 8,
+      "vTaken": 74,
+      "mDealt": 623,
+      "dmgShare": 0.624248496993988,
+      "planParty": [
+        "gen_zfoge0g"
+      ],
+      "allyVids": [
+        "gen_zfoge0g",
+        "gen_d7zlzvl"
+      ],
+      "joiners": [
+        "gen_zfoge0g",
+        "gen_d7zlzvl"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "elif_demir": {
+          "armed": true,
+          "armored": true,
+          "armorP": 45
+        },
+        "gen_zfoge0g": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "gen_d7zlzvl": {
+          "armed": true,
+          "armored": true,
+          "armorP": 22
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 28,
+      "parsedStrikeTotal": 238,
+      "parsedAttributed": 238,
+      "dmgByVid": {
+        "elif_demir": 122,
+        "gen_zfoge0g": 68,
+        "gen_d7zlzvl": 48
+      },
+      "fighterDmgShare": 0.5126050420168067,
+      "abilitiesPerMember": 1.6666666666666667,
+      "memberAbilities": {
+        "elif_demir": [
+          "iron_stomach"
+        ],
+        "gen_zfoge0g": [
+          "beast_calm",
+          "bird_whisperer",
+          "lucky_rock"
+        ],
+        "gen_d7zlzvl": [
+          "beast_calm"
+        ]
+      },
+      "abilityTokens": [
+        "Rage",
+        "field medicine"
+      ],
+      "log": [
+        "Elif walks straight into The Eater. No avoiding it.",
+        "Elif's gear absorbs 41.",
+        "R1: Gorge hits Elif for 8 (72 left)",
+        "R1: Elif's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "R1: Elif strikes for 30 (x2.5) (968 left)",
+        "R1: Elif strikes for 35 (x2.5) (933 left)",
+        "Elif's gear absorbs 51.",
+        "R2: Gorge hits Elif for 11 (61 left)",
+        "R2: Elif strikes for 38 (x2.5) (895 left)",
+        "Elif is losing — shouts for help! Carlos charges in!",
+        "Elif's gear absorbs 66.",
+        "R3: Smack-Rush hits Elif for 14 (47 left)",
+        "R3: Elif stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Carlos strikes for 34 (x1.3) (861 left)",
+        "Elif is still losing — shouts again! Miriam charges in!",
+        "Carlos's gear absorbs 51.",
+        "R4: Gorge hits Carlos for 27 (73 left)",
+        "R4: Elif strikes for 19 (x1.3) (842 left)",
+        "R4: Carlos strikes for 34 (x1.3) (808 left)",
+        "R4: Miriam strikes for 48 (x1.3) (760 left)"
+      ]
+    },
+    {
+      "seed": 107903,
+      "day": 124,
+      "vid": "ruby_callaghan",
+      "mid": "reunion",
+      "mHpStart": 1250,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 8,
+      "vTaken": 67,
+      "mDealt": 531,
+      "dmgShare": 0.4248,
+      "planParty": [
+        "elif_demir"
+      ],
+      "allyVids": [
+        "elif_demir",
+        "gen_d7zlzvl"
+      ],
+      "joiners": [
+        "elif_demir",
+        "gen_d7zlzvl"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "ruby_callaghan": {
+          "armed": true,
+          "armored": true,
+          "armorP": 65
+        },
+        "elif_demir": {
+          "armed": true,
+          "armored": true,
+          "armorP": 45
+        },
+        "gen_d7zlzvl": {
+          "armed": true,
+          "armored": true,
+          "armorP": 22
+        }
+      },
+      "minArmorP": 22,
+      "meanArmorP": 44,
+      "parsedStrikeTotal": 194,
+      "parsedAttributed": 194,
+      "dmgByVid": {
+        "ruby_callaghan": 107,
+        "elif_demir": 28,
+        "gen_d7zlzvl": 59
+      },
+      "fighterDmgShare": 0.5515463917525774,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "ruby_callaghan": [],
+        "elif_demir": [
+          "iron_stomach",
+          "lucky_rock",
+          "green_whisper",
+          "bloodhound",
+          "trophy_room",
+          "bird_whisperer"
+        ],
+        "gen_d7zlzvl": [
+          "beast_calm"
+        ]
+      },
+      "abilityTokens": [
+        "Rage",
+        "field medicine"
+      ],
+      "log": [
+        "Ruby walks straight into The Reunion. No avoiding it.",
+        "R1: Ruby's eyes go red. Next 3 strikes hit twice as hard. (Rage) [Ruby — Stalker of the Apex Predator]",
+        "R1: Ruby strikes for 33 (x2.5) (1217 left)",
+        "R1: Ruby strikes for 30 (x2.5) (1187 left)",
+        "Ruby's gear absorbs 60.",
+        "R1: Your Move hits Ruby for 10 (62 left)",
+        "Ruby's gear absorbs 56.",
+        "R2: Your Move hits Ruby for 9 (53 left)",
+        "R2: Ruby stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Ruby is losing — shouts for help! Elif charges in!",
+        "R3: Ruby strikes for 33 (x2.5) (1154 left)",
+        "R3: Elif strikes for 14 (1140 left)",
+        "Ruby's gear absorbs 63.",
+        "R3: Your Move hits Ruby for 11 (62 left)",
+        "Ruby is still losing — shouts again! Miriam charges in!",
+        "R4: Ruby strikes for 11 (mirrored — worn thin) (x1.2) (1129 left)",
+        "R4: Elif strikes for 14 (1115 left)",
+        "R4: Miriam strikes for 59 (1056 left)",
+        "Ruby's gear absorbs 51.",
+        "R4: Your Move hits Ruby for 9 (53 left)"
+      ]
+    },
+    {
+      "seed": 107904,
+      "day": 124,
+      "vid": "app_mgpspki5423",
+      "mid": "reunion",
+      "mHpStart": 1280,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 66,
+      "mDealt": 91,
+      "dmgShare": 0.07109375,
+      "planParty": [
+        "chen_wei",
+        "aroha_ngata",
+        "nadia_khoury"
+      ],
+      "allyVids": [
+        "aroha_ngata",
+        "chen_wei"
+      ],
+      "joiners": [
+        "aroha_ngata",
+        "chen_wei"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "app_mgpspki5423": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "aroha_ngata": {
+          "armed": true,
+          "armored": true,
+          "armorP": 51
+        },
+        "chen_wei": {
+          "armed": true,
+          "armored": true,
+          "armorP": 39
+        }
+      },
+      "minArmorP": 21,
+      "meanArmorP": 37,
+      "parsedStrikeTotal": 91,
+      "parsedAttributed": 17,
+      "dmgByVid": {
+        "aroha_ngata": 17
+      },
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 1,
+      "memberAbilities": {
+        "app_mgpspki5423": [],
+        "aroha_ngata": [
+          "the_touch",
+          "scream_cheese"
+        ],
+        "chen_wei": [
+          "beast_calm"
+        ]
+      },
+      "abilityTokens": [
+        "field medicine",
+        "Rage"
+      ],
+      "log": [
+        "Amel walks straight into The Loud Thing. No avoiding it.",
+        "R1: Amel stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Amel's gear absorbs 41.",
+        "R1: Your Move hits Amel for 21 (40 left)",
+        "Amel's gear absorbs 43.",
+        "R2: Your Move hits Amel for 22 (18 left)",
+        "R2: Amel's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "R2: Amel strikes for 26 (x2.0) (1254 left)",
+        "R2: Amel strikes for 24 (x2.0) (1230 left)",
+        "Amel is losing — shouts for help! Aroha charges in!",
+        "Aroha's gear absorbs 63.",
+        "R3: Your Move hits Aroha for 14 (36 left)",
+        "R3: Amel strikes for 24 (x2.0) (1206 left)",
+        "R3: Aroha strikes for 17 (1189 left)",
+        "Amel is still losing — shouts again! Wei charges in!",
+        "Amel's gear absorbs 45.",
+        "R4: Your Move hits Amel for 23 (0 left)"
+      ]
+    },
+    {
+      "seed": 107905,
+      "day": 47,
+      "vid": "ethan_hunt",
+      "mid": "eater",
+      "mHpStart": 1021,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 9,
+      "vTaken": 73,
+      "mDealt": 364,
+      "dmgShare": 0.356513222331048,
+      "planParty": [
+        "gen_wz5crub"
+      ],
+      "allyVids": [
+        "gen_wz5crub",
+        "gen_0eb9njr"
+      ],
+      "joiners": [
+        "gen_wz5crub",
+        "gen_0eb9njr"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "ethan_hunt": {
+          "armed": true,
+          "armored": true,
+          "armorP": 34
+        },
+        "gen_wz5crub": {
+          "armed": true,
+          "armored": true,
+          "armorP": 5
+        },
+        "gen_0eb9njr": {
+          "armed": true,
+          "armored": true,
+          "armorP": 22
+        }
+      },
+      "minArmorP": 5,
+      "meanArmorP": 20.333333333333332,
+      "parsedStrikeTotal": 214,
+      "parsedAttributed": 214,
+      "dmgByVid": {
+        "ethan_hunt": 165,
+        "gen_wz5crub": 27,
+        "gen_0eb9njr": 22
+      },
+      "fighterDmgShare": 0.7710280373831776,
+      "abilitiesPerMember": 3,
+      "memberAbilities": {
+        "ethan_hunt": [
+          "bloodhound",
+          "echo_location",
+          "rage"
+        ],
+        "gen_wz5crub": [
+          "green_whisper",
+          "beard_moss",
+          "green_thumb"
+        ],
+        "gen_0eb9njr": [
+          "beast_calm",
+          "echo_location",
+          "green_whisper"
+        ]
+      },
+      "abilityTokens": [
+        "Rage"
+      ],
+      "log": [
+        "Ethan walks straight into The Eater. No avoiding it.",
+        "Ethan's gear absorbs 42.",
+        "R1: Gorge hits Ethan for 11 (83 left)",
+        "R1: Ethan's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "R1: Ethan strikes for 45 (stalker's opening +4) (x2.5) (976 left)",
+        "R1: Ethan strikes for 43 (stalker's opening +4) (x2.5) (933 left)",
+        "R2: Ethan strikes for 38 (x2.5) (895 left)",
+        "Ethan's gear absorbs 60.",
+        "R2: Smack-Rush hits Ethan for 16 (67 left)",
+        "Ethan is losing — shouts for help! Antonio charges in!",
+        "Antonio's gear absorbs 29.",
+        "R3: Gorge hits Antonio for 54 (14 left)",
+        "R3: Ethan strikes for 19 (x1.3) (876 left)",
+        "R3: Antonio strikes for 14 (862 left)",
+        "Ethan is still losing — shouts again! Raj charges in!",
+        "R4: Ethan strikes for 20 (x1.3) (842 left)",
+        "R4: Antonio strikes for 13 (829 left)",
+        "R4: Raj strikes for 22 (807 left)",
+        "Antonio's gear absorbs 38.",
+        "R4: Smack-Rush hits Antonio for 71 (0 left)"
+      ]
+    },
+    {
+      "seed": 107905,
+      "day": 119,
+      "vid": "stan_kowalski",
+      "mid": "eulogy",
+      "mHpStart": 989,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 42,
+      "mDealt": 419,
+      "dmgShare": 0.4236602628918099,
+      "planParty": [
+        "chantal_mukendi",
+        "visjoin_114"
+      ],
+      "allyVids": [
+        "chantal_mukendi",
+        "visjoin_114"
+      ],
+      "joiners": [
+        "chantal_mukendi",
+        "visjoin_114"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "stan_kowalski": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "chantal_mukendi": {
+          "armed": true,
+          "armored": true,
+          "armorP": 58
+        },
+        "visjoin_114": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 32,
+      "parsedStrikeTotal": 241,
+      "parsedAttributed": 241,
+      "dmgByVid": {
+        "stan_kowalski": 180,
+        "chantal_mukendi": 61
+      },
+      "fighterDmgShare": 0.7468879668049793,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "stan_kowalski": [],
+        "chantal_mukendi": [],
+        "visjoin_114": []
+      },
+      "abilityTokens": [
+        "Tripwire",
+        "Rage"
+      ],
+      "log": [
+        "Stan walks straight into The Big Thing. No avoiding it.",
+        "Stan sees The Big Thing coming and nocks an arrow — the fight opens at range (4 shots).",
+        "  loosed — it takes The Big Thing for 19 (970 left).",
+        "  loosed — it takes The Big Thing for 15 (955 left).",
+        "  loosed — it takes The Big Thing for 18 (937 left).",
+        "  loosed — it takes The Big Thing for 19 (918 left).",
+        "Stan lowers the bow — The Big Thing is on them now. (4/4 hit)",
+        "Stan had strung a wire at ankle height before it closed — the first rush will eat dirt. (Tripwire)",
+        "R1: The Big Thing hesitates — Stan bought a breath.",
+        "R1: Stan's eyes go red. Next 3 strikes hit twice as hard. (Rage) [Stan — Stalker of the Apex Predator]",
+        "R1: Stan strikes for 50 (x2.0) (868 left)",
+        "R1: Stan strikes for 42 (x2.0) (826 left)",
+        "R1: Stan strikes for 44 (x2.0) (782 left)",
+        "R2: Stan strikes for 22 (760 left)",
+        "Stan's gear absorbs 31.",
+        "R2: Epitaph hits Stan for 13 (57 left)",
+        "Stan is losing — shouts for help! Chantal charges in!",
+        "R3: Stan strikes for 22 (738 left)",
+        "R3: Chantal strikes for 61 (677 left)",
+        "Stan's gear absorbs 39."
+      ]
+    },
+    {
+      "seed": 107905,
+      "day": 121,
+      "vid": "stan_kowalski",
+      "mid": "eater",
+      "mHpStart": 1124,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 20,
+      "mDealt": 192,
+      "dmgShare": 0.1708185053380783,
+      "planParty": [
+        "chantal_mukendi",
+        "visjoin_114"
+      ],
+      "allyVids": [
+        "chantal_mukendi",
+        "visjoin_114"
+      ],
+      "joiners": [
+        "chantal_mukendi"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "stan_kowalski": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "chantal_mukendi": {
+          "armed": true,
+          "armored": true,
+          "armorP": 58
+        },
+        "visjoin_114": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 32,
+      "parsedStrikeTotal": 175,
+      "parsedAttributed": 175,
+      "dmgByVid": {
+        "stan_kowalski": 175
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 0.6666666666666666,
+      "memberAbilities": {
+        "stan_kowalski": [],
+        "chantal_mukendi": [],
+        "visjoin_114": [
+          "bloodhound",
+          "echo_location"
+        ]
+      },
+      "abilityTokens": [
+        "Tripwire",
+        "Rage"
+      ],
+      "log": [
+        "Stan walks straight into The Eater. No avoiding it.",
+        "Stan sees The Eater coming and nocks an arrow — the fight opens at range (1 shot).",
+        "  loosed — it takes The Eater for 17 (1107 left).",
+        "Stan lowers the bow — The Eater is on them now. (1/1 hit)",
+        "Stan had strung a wire at ankle height before it closed — the first rush will eat dirt. (Tripwire)",
+        "R1: The Eater hesitates — Stan bought a breath.",
+        "R1: Stan's eyes go red. Next 3 strikes hit twice as hard. (Rage) [Stan — Stalker of the Apex Predator]",
+        "R1: Stan strikes for 52 (stalker's opening +4) (x2.0) (1055 left)",
+        "R1: Stan strikes for 50 (stalker's opening +4) (x2.0) (1005 left)",
+        "R1: Stan strikes for 50 (stalker's opening +4) (x2.0) (955 left)",
+        "Stan's gear absorbs 45.",
+        "R2: Gorge hits Stan for 20 (4 left)",
+        "R2: Stan strikes for 23 (932 left)",
+        "Stan is losing — shouts for help! Chantal charges in!",
+        "Chantal answered Stan's shout, but Stan is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 107910,
+      "day": 77,
+      "vid": "gen_3udg2xv",
+      "mid": "eulogy",
+      "mHpStart": 1000,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 65,
+      "mDealt": 261,
+      "dmgShare": 0.261,
+      "planParty": [
+        "gen_yzxcnda"
+      ],
+      "allyVids": [
+        "gen_afq0m55",
+        "gen_yzxcnda"
+      ],
+      "joiners": [
+        "gen_afq0m55",
+        "gen_yzxcnda"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_3udg2xv": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "gen_afq0m55": {
+          "armed": true,
+          "armored": true,
+          "armorP": 22
+        },
+        "gen_yzxcnda": {
+          "armed": true,
+          "armored": true,
+          "armorP": 22
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 20.333333333333332,
+      "parsedStrikeTotal": 261,
+      "parsedAttributed": 261,
+      "dmgByVid": {
+        "gen_3udg2xv": 157,
+        "gen_afq0m55": 91,
+        "gen_yzxcnda": 13
+      },
+      "fighterDmgShare": 0.6015325670498084,
+      "abilitiesPerMember": 5.333333333333333,
+      "memberAbilities": {
+        "gen_3udg2xv": [
+          "beast_calm",
+          "echo_location",
+          "lucky_rock",
+          "trophy_room",
+          "night_eyes"
+        ],
+        "gen_afq0m55": [
+          "bloodhound",
+          "night_eyes",
+          "lucky_rock",
+          "trophy_room",
+          "rage",
+          "bird_whisperer"
+        ],
+        "gen_yzxcnda": [
+          "iron_stomach",
+          "echo_location",
+          "rage",
+          "dowsing",
+          "green_whisper"
+        ]
+      },
+      "abilityTokens": [
+        "Rage"
+      ],
+      "log": [
+        "Gilberto walks straight into The Eulogy. No avoiding it.",
+        "R1: Gilberto's eyes go red. Next 3 strikes hit twice as hard. (Rage) [Gilberto — Stalker of the Apex Predator]",
+        "R1: Gilberto strikes for 40 (x2.5) (960 left)",
+        "R1: Gilberto strikes for 40 (x2.5) (920 left)",
+        "Gilberto's gear absorbs 39.",
+        "R1: Final Chapter hits Gilberto for 20 (67 left)",
+        "R2: Gilberto strikes for 38 (x2.5) (882 left)",
+        "Gilberto's gear absorbs 47.",
+        "R2: Final Chapter hits Gilberto for 23 (44 left)",
+        "Gilberto is losing — shouts for help! Isabella charges in!",
+        "R3: Gilberto strikes for 19 (x1.3) (863 left)",
+        "R3: Isabella strikes for 48 (x1.3) (815 left)",
+        "Gilberto's gear absorbs 45.",
+        "R3: Final Chapter hits Gilberto for 22 (22 left)",
+        "Gilberto is still losing — shouts again! Emilly charges in!",
+        "R4: Gilberto strikes for 20 (x1.3) (795 left)",
+        "R4: Isabella strikes for 43 (x1.3) (752 left)",
+        "R4: Emilly strikes for 13 (739 left)",
+        "Emilly's gear absorbs 45.",
+        "R4: Final Chapter hits Emilly for 18 (77 left)"
+      ]
+    },
+    {
+      "seed": 107911,
+      "day": 64,
+      "vid": "gen_ixx8ugt",
+      "mid": "reunion",
+      "mHpStart": 1322,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 91,
+      "mDealt": 24,
+      "dmgShare": 0.018154311649016642,
+      "planParty": [
+        "maya_singh"
+      ],
+      "allyVids": [
+        "maya_singh",
+        "hassan_ali"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_ixx8ugt": {
+          "armed": true,
+          "armored": true,
+          "armorP": 7
+        },
+        "maya_singh": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        },
+        "hassan_ali": {
+          "armed": true,
+          "armored": true,
+          "armorP": 13
+        }
+      },
+      "minArmorP": 7,
+      "meanArmorP": 14.666666666666666,
+      "parsedStrikeTotal": 24,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 4.333333333333333,
+      "memberAbilities": {
+        "gen_ixx8ugt": [
+          "iron_stomach",
+          "green_thumb",
+          "rage",
+          "lucky_rock"
+        ],
+        "maya_singh": [
+          "green_whisper",
+          "green_thumb",
+          "rage",
+          "beard_moss",
+          "cornucopia",
+          "rain_dancer"
+        ],
+        "hassan_ali": [
+          "beast_calm",
+          "green_whisper",
+          "green_thumb"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Wren walks straight into The Reunion. No avoiding it.",
+        "R1: Wren strikes for 11 (1311 left)",
+        "Wren's gear absorbs 27.",
+        "R1: Your Move hits Wren for 43 (38 left)",
+        "R2: Wren strikes for 13 (1298 left)",
+        "Wren's gear absorbs 30.",
+        "R2: Your Move hits Wren for 48 (0 left)"
+      ]
+    },
+    {
+      "seed": 107912,
+      "day": 103,
+      "vid": "app_mgpsphr5150",
+      "mid": "eulogy",
+      "mHpStart": 942,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 35,
+      "mDealt": 168,
+      "dmgShare": 0.17834394904458598,
+      "planParty": [
+        "mia_andersson",
+        "miguel_santos"
+      ],
+      "allyVids": [
+        "mia_andersson",
+        "miguel_santos"
+      ],
+      "joiners": [
+        "mia_andersson",
+        "miguel_santos"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "app_mgpsphr5150": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "mia_andersson": {
+          "armed": true,
+          "armored": true,
+          "armorP": 19
+        },
+        "miguel_santos": {
+          "armed": true,
+          "armored": true,
+          "armorP": 29
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 21.666666666666668,
+      "parsedStrikeTotal": 100,
+      "parsedAttributed": 100,
+      "dmgByVid": {
+        "app_mgpsphr5150": 86,
+        "mia_andersson": 14
+      },
+      "fighterDmgShare": 0.86,
+      "abilitiesPerMember": 0,
+      "memberAbilities": {
+        "app_mgpsphr5150": [],
+        "mia_andersson": [],
+        "miguel_santos": []
+      },
+      "abilityTokens": [
+        "Rage"
+      ],
+      "log": [
+        "David walks straight into Ugly-Eyes. No avoiding it.",
+        "David sees Ugly-Eyes coming and whirls the Sling — the fight opens at range (4 shots).",
+        "  loosed — the stone takes Ugly-Eyes for 12 (930 left).",
+        "  loosed wide — the stone skips away into the dirt. (spent)",
+        "  loosed — the stone takes Ugly-Eyes for 8 (922 left).",
+        "  loosed — the stone takes Ugly-Eyes for 8 (914 left).",
+        "David lowers the Sling — Ugly-Eyes is on them now. (3/4 hit)",
+        "R1: David's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "R1: David strikes for 30 (x2.0) (884 left)",
+        "R1: David strikes for 22 (x2.0) (862 left)",
+        "David's gear absorbs 38.",
+        "R1: Final Chapter hits David for 19 (50 left)",
+        "R2: David strikes for 22 (x2.0) (840 left)",
+        "David's gear absorbs 32.",
+        "R2: Epitaph hits David for 16 (34 left)",
+        "David is losing — shouts for help! Mia charges in!",
+        "R3: David strikes for 12 (828 left)",
+        "R3: Mia strikes for 14 (814 left)",
+        "Mia's gear absorbs 38.",
+        "R3: Final Chapter hits Mia for 17 (49 left)"
+      ]
+    }
+  ]
+}
