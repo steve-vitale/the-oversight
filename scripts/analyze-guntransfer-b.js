@@ -5,6 +5,14 @@
 // Acquisitions (grant / kill-loot / prize / rearm / corpse-take) are NOT
 // transfers and must never classify as one (prereg bar 4). Reuses the
 // gunholder census analyzer for the holder-day reproduction (bar 2).
+// AMENDMENT A1 (prereg §3, detector correction): a gun LEAVING the counted
+// universe with no living gainer is a custody EXIT, not a transfer —
+// 'destroyed' when the loser is alive with no gainer and no corpse gun
+// (mechanism proven by probe: a worn-only gun is dropped when autoEquip
+// re-seats the slot — evidence §7), 'death-pack' when the gun sits on the
+// loser's corpse, 'unexplained-exit' when liveness cannot be established.
+// Exits are reported separately and never counted as transfers; the bar-3
+// rule becomes 0 unclassified transfers AND 0 unexplained exits.
 //   node scripts/analyze-guntransfer-b.js --selftest
 //   node scripts/analyze-guntransfer-b.js --dir <corpus-dir> [--out <file>]
 //   node scripts/analyze-guntransfer-b.js --fixture <file>
@@ -56,6 +64,7 @@ function detectTransfers(c) {
   const rows = (c.v4gunLoc || []).slice().sort(function (a, b) { return a.day - b.day; });
   const moves = []; // detected holdings changes needing classification
   const notes = [];
+  const exits = []; // custody exits (gun leaves the living, no gainer) — NOT transfers (A1)
   // Acquisition gains to remove from the transfer pool (gun appears with
   // no loser): grant / kill-loot / prize / rearm / corpse-take.
   // Scholar gains are keyed by the LATER row's scholarVid (the scholar
@@ -139,7 +148,22 @@ function detectTransfers(c) {
       if (!ga.guns) gainers.shift();
     }
     losers.forEach(function (lo) {
-      moves.push({ seed: c.seed, day: d1, fromDay: d0, loser: lo.vid, gainer: null, guns: lo.guns, kind: 'vanished' });
+      // AMENDMENT A1: a leftover loser is a custody EXIT, not a transfer —
+      // no living gainer took the gun. Name it by what the corpus shows.
+      const corpseGun = (r1.locations || []).some(function (l) { return l.loc === 'corpse' && l.cvid === lo.vid && (l.count || 0) > 0; });
+      if (corpseGun) {
+        notes.push({ seed: c.seed, day: d1, kind: 'death-pack', vid: lo.vid, guns: lo.guns });
+        return;
+      }
+      const flag = (r1.personFlags || {})[lo.vid];
+      const alive = flag ? !flag.dead : null;
+      if (alive === true) {
+        exits.push({ seed: c.seed, day: d1, fromDay: d0, loser: lo.vid, guns: lo.guns, kind: 'destroyed',
+          detail: 'loser alive, no living gainer, no corpse gun — gun left the counted universe (worn-only autoEquip re-seat, evidence §7)' });
+      } else {
+        exits.push({ seed: c.seed, day: d1, fromDay: d0, loser: lo.vid, guns: lo.guns, kind: 'unexplained-exit',
+          detail: 'loser liveness unknown on the later row (not in personFlags) — cannot name the exit' });
+      }
     });
     gainers.forEach(function (ga) {
       moves.push({ seed: c.seed, day: d1, fromDay: d0, loser: null, gainer: ga.vid, guns: ga.guns, kind: 'appeared' });
@@ -157,7 +181,7 @@ function detectTransfers(c) {
       }
     }
   }
-  return { moves: moves, notes: notes };
+  return { moves: moves, notes: notes, exits: exits };
 }
 
 function classifyMove(c, m) {
@@ -210,6 +234,9 @@ function analyzeSeed(c) {
     maxWave: c.maxWave, unlockedWave: c.unlockedWave, standing: c.standing,
     transfers: transfers, unclassified: unclassified.length,
     misclassified: misclassified.length, notes: det.notes,
+    exits: det.exits,
+    unexplainedExits: det.exits.filter(function (e) { return e.kind === 'unexplained-exit'; }).length,
+    destroyedExits: det.exits.filter(function (e) { return e.kind === 'destroyed'; }).length,
     successionEvents: (c.successionEvents || []).length,
     gearGiftEvents: (c.gearGiftEvents || []).length,
     gearGiftSear: (c.gearGiftEvents || []).filter(function (e) { return e.item === 'searcaster'; }).length,
@@ -225,6 +252,7 @@ function analyzeSeed(c) {
 function analyzeLeg(seeds) {
   const leg = { seeds: seeds.length, files: seeds.length,
     transfers: [], unclassified: 0, misclassified: 0, notes: [],
+    exits: [], unexplainedExits: 0, destroyedExits: 0,
     successionEvents: 0, gearGiftEvents: 0, gearGiftSear: 0,
     lendCalls: 0, lendFired: 0, lendReturns: 0, gearDayDiffs: 0,
     censusHolderDays: 0, censusUnclassified: 0, censusHolders: 0,
@@ -245,6 +273,9 @@ function analyzeLeg(seeds) {
     leg.unclassified += a.unclassified;
     leg.misclassified += a.misclassified;
     leg.notes.push.apply(leg.notes, a.notes);
+    leg.exits.push.apply(leg.exits, a.exits || []);
+    leg.unexplainedExits += a.unexplainedExits || 0;
+    leg.destroyedExits += a.destroyedExits || 0;
     leg.successionEvents += a.successionEvents;
     leg.gearGiftEvents += a.gearGiftEvents;
     leg.gearGiftSear += a.gearGiftSear;
@@ -291,8 +322,10 @@ function judgeLeg(leg) {
       '/' + leg.seeds + ' klBundled=' + leg.klBundled + ' klDry=' + leg.klDry };
   bars.reproduction = { pass: leg.censusHolderDays === 989 && leg.censusUnclassified === 0,
     detail: 'holderDays=' + leg.censusHolderDays + ' (census: 989) censusUnclassified=' + leg.censusUnclassified };
-  bars.classification = { pass: leg.unclassified === 0,
-    detail: 'transfers=' + leg.transfers.length + ' unclassified=' + leg.unclassified };
+  bars.classification = { pass: leg.unclassified === 0 && (leg.unexplainedExits || 0) === 0,
+    detail: 'transfers=' + leg.transfers.length + ' unclassified=' + leg.unclassified +
+      ' exits=' + (leg.exits || []).length + ' destroyed=' + (leg.destroyedExits || 0) +
+      ' unexplainedExits=' + (leg.unexplainedExits || 0) };
   bars.noMisclass = { pass: leg.misclassified === 0 && leg.lendFired === 0,
     detail: 'misclassified=' + leg.misclassified + ' lendFired=' + leg.lendFired + ' lendCalls=' + leg.lendCalls };
   bars.wall = { pass: true,
@@ -485,6 +518,60 @@ function selftest() {
     const j = judgeLeg(leg);
     check('F12 judge DIAG-GO on clean leg', j.verdict === 'DIAG-GO', j.verdict + ' ' + JSON.stringify(j.bars));
   })();
+  // F13: destroyed scholar gun (s107756 d44 pattern, AMENDMENT A1) —
+  // the scholar holds the gun worn-only, a better ranged weapon arrives,
+  // autoEquip re-seats the slot and the gun leaves the counted universe
+  // with no gainer and no corpse. 0 transfers, 1 destroyed exit.
+  (function () {
+    const r0 = row(43, 'gen_stv', [{ loc: 'scholar-equipped', vid: '__scholar__', slot: 'ranged', count: 1 }]);
+    const r1 = row(44, 'gen_stv', []);
+    r0.personFlags = { gen_stv: { dead: false, onRoster: true } };
+    r1.personFlags = { gen_stv: { dead: false, onRoster: true } };
+    const c = fixtureSeed({ v4gunLoc: [r0, r1] });
+    const a = analyzeSeed(c);
+    check('F13 destroyed gun is not a transfer', a.transfers.length === 0, 'got ' + JSON.stringify(a.transfers));
+    check('F13 destroyed exit recorded', a.exits.length === 1 && a.exits[0].kind === 'destroyed' && a.exits[0].loser === 'gen_stv', JSON.stringify(a.exits));
+    check('F13 no unexplained exits', a.unexplainedExits === 0, 'unexplainedExits=' + a.unexplainedExits);
+    check('F13 no unclassified', a.unclassified === 0, 'unclassified=' + a.unclassified);
+  })();
+  // F14: ruth double-succession pattern (s107751 d151) — a succession
+  // whose new scholar holds NO gun (gun destroyed in the same day's
+  // re-seat) is a succession-no-gun note plus a destroyed exit, not a
+  // transfer and not unclassified.
+  (function () {
+    const r0 = row(150, 'adaeze', [{ loc: 'equipped', vid: 'ruth', count: 1, cells: 1 }]);
+    const r1 = row(151, 'ruth', [{ loc: 'corpse', cid: 'c9', cvid: 'gen_cc', kind: 'villager', buried: false, count: 1, cells: 0 }]);
+    r0.personFlags = { ruth: { dead: false, onRoster: true }, gen_cc: { dead: false, onRoster: true }, adaeze: { dead: false, onRoster: true } };
+    r1.personFlags = { ruth: { dead: false, onRoster: true }, gen_cc: { dead: true, onRoster: false }, adaeze: { dead: true, onRoster: false } };
+    const c = fixtureSeed({
+      v4gunLoc: [r0, r1],
+      deaths: [
+        { day: 150, kind: 'villager', who: 'adaeze', cause: 'the wild', player: true },
+        { day: 151, kind: 'villager', who: 'gen_cc', cause: 'the wild', player: true },
+      ],
+      successionEvents: [
+        { day: 150, cause: 'the wild', oldId: 'adaeze', newId: 'gen_cc', changed: true },
+        { day: 151, cause: 'the wild', oldId: 'gen_cc', newId: 'ruth', changed: true },
+      ],
+    });
+    const a = analyzeSeed(c);
+    check('F14 ruth pattern is not a transfer', a.transfers.length === 0, 'got ' + JSON.stringify(a.transfers));
+    check('F14 ruth destroyed exit recorded', a.exits.length === 1 && a.exits[0].kind === 'destroyed' && a.exits[0].loser === 'ruth', JSON.stringify(a.exits));
+    check('F14 no unclassified', a.unclassified === 0, 'unclassified=' + a.unclassified);
+  })();
+  // F15: loser with unknown liveness stays an unexplained exit (the
+  // detector refuses to call it destroyed without evidence).
+  (function () {
+    const r0 = row(50, 'sch', [{ loc: 'equipped', vid: 'ghost', count: 1, cells: 2 }]);
+    const r1 = row(51, 'sch', []);
+    r0.personFlags = {};
+    r1.personFlags = {};
+    const c = fixtureSeed({ v4gunLoc: [r0, r1] });
+    const a = analyzeSeed(c);
+    check('F15 unknown liveness is not a transfer', a.transfers.length === 0, 'got ' + JSON.stringify(a.transfers));
+    check('F15 unexplained exit recorded', a.exits.length === 1 && a.exits[0].kind === 'unexplained-exit', JSON.stringify(a.exits));
+    check('F15 unexplained counted', a.unexplainedExits === 1, 'unexplainedExits=' + a.unexplainedExits);
+  })();
   console.log('guntransfer-analyzer selftest: ' + pass + ' passed, ' + fail + ' failed');
   return fail === 0;
 }
@@ -497,7 +584,7 @@ if (require.main === module) {
   if (args[0] === '--fixture' && args[1]) {
     const c = JSON.parse(fs.readFileSync(args[1], 'utf8'));
     const a = analyzeSeed(c);
-    console.log(JSON.stringify({ seed: a.seed, transfers: a.transfers, notes: a.notes, unclassified: a.unclassified }, null, 2));
+    console.log(JSON.stringify({ seed: a.seed, transfers: a.transfers, exits: a.exits, notes: a.notes, unclassified: a.unclassified, unexplainedExits: a.unexplainedExits }, null, 2));
     process.exit(0);
   }
   const di = args.indexOf('--dir');
@@ -513,6 +600,7 @@ if (require.main === module) {
     if (oi !== -1 && args[oi + 1]) fs.writeFileSync(args[oi + 1], JSON.stringify(out, null, 2) + '\n');
     console.log(JSON.stringify({ verdict: j.verdict, bars: j.bars,
       seeds: leg.seeds, transfers: leg.transfers.length, unclassified: leg.unclassified,
+      exits: leg.exits.length, destroyedExits: leg.destroyedExits, unexplainedExits: leg.unexplainedExits,
       misclassified: leg.misclassified, censusHolderDays: leg.censusHolderDays,
       successions: leg.successionEvents, gearGiftsSear: leg.gearGiftSear,
       lendCalls: leg.lendCalls, lendFired: leg.lendFired,

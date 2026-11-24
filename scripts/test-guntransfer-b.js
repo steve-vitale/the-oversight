@@ -13,7 +13,7 @@
 //       shared anchor, policySha matches competent.js, 0 instrument
 //       errors, 8 staged arrivals bundled, holder-days == 989 (census
 //       reproduction), every transfer classified, 0 unclassified,
-//       lendFired == 0, zero src/js diffs.
+//       0 unexplained custody exits, lendFired == 0, zero src/js diffs.
 // Reads only; never writes into the repo (live mode runs the harness
 // in-memory only).
 'use strict';
@@ -82,6 +82,9 @@ function validateCorpus(dir) {
   transfers = leg.transfers.length;
   unclassified = leg.unclassified;
   misclassified = leg.misclassified;
+  const exits = (leg.exits || []).length;
+  const destroyedExits = leg.destroyedExits || 0;
+  const unexplainedExits = leg.unexplainedExits || 0;
   const known = KNOWN.map(function (k) {
     const hit = leg.transfers.filter(function (t) {
       return t.seed === k.seed && t.day === k.day && t.cls === k.cls
@@ -98,12 +101,13 @@ function validateCorpus(dir) {
   return {
     files: files.length, seeds: seeds, policySha: policySha,
     anchors: anchors, missingAnchor: missingAnchor,
-    policyShaMismatches: policyShaMismatches, instrumentErrors: errors,
+    policyShaMismatches: policyMismatches, instrumentErrors: errors,
     wrongMode: wrongMode, bundleOff: bundleOff, stageWrong: stageWrong,
     rearmWrong: rearmWrong, rearmPresentOff: rearmPresentOff,
     klArrivals: klArrivals, klBundled: klBundled, klDry: klArrivals - klBundled,
     holderDays: holderDays, transfers: transfers, unclassified: unclassified,
     misclassified: misclassified, lendFired: lendFired,
+    exits: exits, destroyedExits: destroyedExits, unexplainedExits: unexplainedExits,
     successionEvents: successionEvents, gearGiftSear: gearGiftSear,
     known: known, verdict: leg ? analyzer.judgeLeg(leg).verdict : null,
     srcJsDiff: srcJsDiff,
@@ -399,7 +403,7 @@ async function main() {
     const okFlags = v.wrongMode === 0 && v.bundleOff === 0 && v.stageWrong === 0 && v.rearmWrong === 0 && v.rearmPresentOff === 0;
     const okBundle = v.klArrivals === BAND_N && v.klBundled === v.klArrivals && v.klDry === 0;
     const okRepro = v.holderDays === CENSUS_HOLDER_DAYS;
-    const okClass = v.unclassified === 0 && v.misclassified === 0;
+    const okClass = v.unclassified === 0 && v.misclassified === 0 && v.unexplainedExits === 0;
     const okLend = v.lendFired === 0;
     const okKnown = v.known.every(function (k) { return k.found; });
     const okSrc = v.srcJsDiff === '';
@@ -410,6 +414,7 @@ async function main() {
       klArrivals: v.klArrivals, klBundled: v.klBundled, klDry: v.klDry,
       holderDays: v.holderDays, censusHolderDays: CENSUS_HOLDER_DAYS,
       transfers: v.transfers, unclassified: v.unclassified, misclassified: v.misclassified,
+      exits: v.exits, destroyedExits: v.destroyedExits, unexplainedExits: v.unexplainedExits,
       lendFired: v.lendFired, successionEvents: v.successionEvents, gearGiftSear: v.gearGiftSear,
       known: v.known.map(function (k) { return { seed: k.known.seed, day: k.known.day, cls: k.known.cls, found: k.found }; }),
       verdict: v.verdict, srcJsDiffEmpty: okSrc,
