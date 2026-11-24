@@ -74,12 +74,19 @@ Eight villages, seven alive at day 140. They are small (2–10 people left) and 
 
 ## Gate
 
-[GATE PENDING — see closeout record below.]
+`node scripts/check.js --quick` on the rebased tip (`a501b734b`, base `500d65ea7`): **339 passed, 5 failed in 871s** — exactly the standing set, 0 attributable to this run (this run changed no `src/js` and no harness inputs):
+- `test-phone-frame-proof.js` — stale phone receipt (sibling `src/data` changes since the receipt was refreshed; 3 sub-failures).
+- `test-one-person-army-deed-attainment.js` — 120s timeout (load flake).
+- `test-living-garden-deed-attainment.js` — 120s timeout (load flake; in the slowest list at 120s).
+- Two measurement-proof files — "retained neutrality proof covers the current Game/controller/harness inputs" (stale neutrality proof; sibling Game/controller/harness changes during the run). Confirmed by targeted re-run `node scripts/check.js --quick --only measurement`: 5 passed, 2 failed, both the same stale-proof failure.
 
 ## Closeout record (filled as the closeout proceeds)
 
 - Run note written: evidence/2026-11-24/journey-scale-r283.md (this file).
-- Telemetry check: [PENDING]
-- Gate: [PENDING]
-- Commit: [PENDING]
+- Telemetry check: `node scripts/telemetry-check.js --baseline ~/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/telemetry-baselines/scale.json --current '<goal>/hidden_files/evidence/2026-11-24/journey-scale-r283-b-trust-*.json' --metrics fightsTotal,fightsByWave.4,maxGameDay` → 1 LOUD line: `maxGameDay swung 151%: baseline 468 -> current 1175 (n=9 files)`. Verdict: r251-regime artifact — the baseline sums an old-regime file set (panel-only sum is 1034 days over 8 seeds; the 9-file run also includes the unscored probe); fightsTotal 183 vs 241 and fightsByWave.4 76 vs 178 did not flag. Baseline NOT rolled — same classification as r279's 3 LOUD lines.
+- Gate: 339 passed, 5 failed in 871s (standing set, 0 attributable) — see Gate section above.
+- Proof test on rebased tip: 178/178 (`scripts/test-journey-scale-r283-analyzer-20261124.js`); analyzer reproduces the saved log byte-identically on the rebased tip.
+- Base movement: master advanced 11 commits during the run (`ef0872bfc` → `500d65ea7`: sim-calledname-a, sim-holdrepeat-fix-a, succession r280, sim-waitseat-a NO-GO, sim-scale-onramp-round-1215). The panel is judged on the preregistered base `ef0872bfc`; the branch was rebased onto `500d65ea7` (`a501b734b`) and the proof test re-run green. No panel re-run (the rebase only adds sibling commits).
+- Write-flap window ~15:05–15:27Z: the proof test's first post-rebase run failed with EPERM on fixture writes (flap, not a rebase breakage); probes confirmed fresh-file writes refused and the registry write refused; the machine was replaced ~15:26Z (uptime 1 min), which killed the hbloop — re-established 15:28Z with setsid/nohup and the heartbeat restored (15:28:06Z). Flap cleared on the new machine; nothing lost.
+- Commit: `622a24b5b` (5 files) → rebased to `a501b734b` on `500d65ea7`; index clobber struck after safe-commit and was repaired (ls-tree pipe + update-index; status/diff clean, hash-object matches).
 - Merge / rotation / release / lock: [PENDING]
