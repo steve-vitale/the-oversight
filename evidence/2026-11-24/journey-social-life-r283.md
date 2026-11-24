@@ -322,3 +322,85 @@ timeout set from r277's gate log.
   (9810670a0 at run start — re-check before merging); ff-merge;
   release; rotation 5 → 6; delete lock. No bump, no push, no live
   verification — the ship loop owns those.
+
+## Adoption 1800Z (playtest-loop2-20261124T1800Z) — closeout
+
+- Stale-lock recovery: lock `playtest-loop2-20261124T1700Z` (created
+  17:06:55Z) held by the dead 11:00 CST adoption. Registry heartbeat
+  for `journey2-social` was 17:25:22Z — 33 min stale at check
+  (~17:58Z). Liveness check (AGENTS.md stale-lock lesson): no
+  process with cwd in journey2-social, no sim node process (only
+  Lane A's journey-establishment-r285), no live agent owned by
+  oversight-playtest-loop-2; last file write 17:34Z (gate.log, 24
+  min quiet). The 1700Z run is DEAD. Lock deleted in the same call
+  that verified its run_id; new lock
+  `playtest-loop2-20261124T1800Z` written 17:59:36Z.
+- Rebase: branch rebased onto master `fb5dd00a0` cleanly (no
+  conflicts, no stop-at-pick quirk), new HEAD `dd6e0a4f1`. Master
+  had moved from 8616c6b2f (fightcap/bowopen evidence + scale-onramp
+  closeout — evidence only).
+- Proofs re-run on the rebased tip: variety-pools 33/33, heed-dry
+  33/33.
+- Gate: `node scripts/check.js --quick
+  --cacheDirectory=/tmp/jest-cache-playtest2` on the rebased tip,
+  18:02–18:22Z, **335 passed, 9 failed** (1183s). Tail capture in
+  `journey-social-life-r283-gate-1800z.log` (piped through `tail
+  -60`; the first 3 FAIL blocks scrolled above the capture — all 9
+  are identified below via --only subsets + standalone re-runs).
+  The 1700Z run's partial gate log
+  (`journey-social-life-r283-gate.log`, 220 bytes, killed mid-run)
+  is committed alongside as the record of the interrupted attempt.
+- Gate adjudication — all 9 identified, none attributable to this
+  branch:
+  1. test-measurement-cache-flags.js — gate 0/4; standalone 4/4
+     (18s); passes in the measurement subset (38s). Load artifact.
+  2. test-phone-frame-proof.js — 3 failed; failing inputs are
+     index.html + src/data files last touched by ship-loop version
+     bumps (430fab777 etc.); this branch touches none of them.
+     STANDING staleness; refresh needs the MOBILE-PLAYTEST.md
+     browser recipe (fresh receipts 390x736/390x844) — owed to a
+     phone-frame run, not this adoption.
+  3. test-occupation-panels.js — gate TIMEOUT 120s; standalone
+     25/25. Load flake.
+  4. test-one-person-army-deed-attainment.js — gate TIMEOUT 120s;
+     standalone EXIT 0. Load flake.
+  5. test-trust-observer-neutrality.js — gate TIMEOUT 120s;
+     standalone 6/6. Load flake.
+  6. test-capable-bot-20261014.js — gate TIMEOUT 120s; standalone
+     40/40. Load flake.
+  7. test-living-garden-deed-attainment.js — gate TIMEOUT
+     (reproduced in the deed --only subset); standalone EXIT 0.
+     Load flake.
+  8. test-measurement-workflow.js — DETERMINISTIC: "retained
+     neutrality proof covers the current Game/controller/harness
+     inputs". STANDING — the same staleness pair failed on the
+     scale r283 gate (339/5), which ran without this branch.
+     Refresh via scripts/balance-proof-update.js is owed as
+     maintenance (panel re-observation; does not fit this
+     adoption window).
+  9. test-measurement-proof-update.js — DETERMINISTIC: "Proof
+     source inputs are not current" (balance-proof-update.js:8).
+     Same standing pair as #8; same disposition.
+  Subsets: measurement 5/2, balance 4/0, deed 14/2 (both
+  timeouts). All 7 load flakes verified green standalone
+  serialized (r277 precedent). Merge proceeds on the established
+  standing-set standard (scale r283 landed at 339/5 with the same
+  set). The balance-proof / phone-frame refreshes the 1600Z note
+  called for are recorded here as WHY NOT: both are standing
+  pre-branch staleness, and both refreshes are maintenance runs
+  (panel re-observation / browser receipts), not adoption work.
+- Telemetry: `telemetry-check.js` vs canonical `social.json`, 8
+  LOUD lines — all "newly appeared: baseline 0 -> current N".
+  EXPLAINED, not a bug: social.json carries an older metric set
+  (l3.bonds, l3.deepBonds, l3.mootsConvened, ...) that the r283
+  panel JSONs don't emit; the r283 note's ad-hoc comparison vs
+  the r277 panel was quiet. Baseline NOT rolled (a metric-set
+  migration is a deliberate act, not a mid-adoption overwrite).
+- Reaper: exit 0, nothing removed; 11 LOUD dirty trees never
+  auto-removed (incl. journey2-social — this run's own untracked
+  gate log — and Lane A's live journey-establishment). Active
+  11/16.
+- Heartbeat: fresh 18:00:41Z, refreshed 18:05:15Z; later attempts
+  jammed (registry lock held by live sibling sim-ammosupply-a
+  registration — do NOT kill; retry later). Reaper margin to
+  ~19:29Z.
