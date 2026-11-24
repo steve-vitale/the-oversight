@@ -141,6 +141,6 @@ arm); (2) waiting on seat-unready bands (blank #5, sim-waitseat-a);
 (sim-calledname-a); (4) holdrepeat fix #2743. winnability-chain stays
 converging (untouched; sibling loop B).
 
-Merged e2233b33 (arm files) + [ROUND-RECORD-COMMIT]; merged locally,
+Merged e2233b33 (arm files) + d3a52af8 (record); merged locally,
 pending ship. Claim deleted; lock deleted. Evidence: evidence/2026-11-24/sim-gateavoid-b8-a.md,
 evidence/2026-11-24/sim-holdrepeat-a.md, this record.
