@@ -371,6 +371,43 @@ says `unrecorded` rather than guessing.
 - (1b) update to tracker blank #3 (Omar's corpse thread): same
   handling.
 
+## AMENDMENT 1 — dawn cause underneath an EOD label on D+1 (written
+2026-11-24 ~03:10 UTC, BEFORE any judged run, per §7-style
+discipline — no evidence file exists yet, no day is judged)
+
+An exploratory analyzer run over the frozen corpora (output in
+/tmp only, nothing committed, nothing judged) surfaced one D+1 day
+whose re-derived cause is the OLD EOD label, not a dawn cause:
+s107624 d121 henry_zhang — `never-asked:holder-not-scored`
+(subcause `holder-not-at-haven`). The musterask classifier returns
+the EOD label first and never runs the dawn classifier when any EOD
+sub-cause fires (`classifyNeverScored`, analyze-musterask-a.js:452:
+`subcause !== 'unknown'` returns the EOD cause directly).
+
+The dawn streams name the mechanism underneath, and the musterask
+evidence proved EOD state is a bad proxy for dawn state (65/82 direct
+contradictions). Probe (read-only, before this amendment): henry's
+d121 dawnState row shows `away: true`, purpose guard sinceDay 121,
+node (5,3), objective GUARD/out — and the dawn classifier run
+underneath returns `never-asked:holder-away-at-dawn` ("away AT DAWN
+(purpose guard, sinceDay 121) — objTick skips the dawn re-pick for
+away villagers"). He came back mid-day (part-3 trace: node (4,4),
+idle/done, pick EAT, feedRan false) — the day's silence is a guard
+duty at dawn, not a body gate, and not a pool fact.
+
+**Amended §2 rule:** when the re-derived D+1 cause is the EOD
+`never-asked:holder-not-scored`, run the dawn classifier
+(`classifyNeverScoredDawn`) underneath it on the same holder-day
+(with the record's subcause set to `unknown` for the call — the dawn
+classifier reads only day/vid/stage/target + the dawn streams, never
+the subcause). If it names a dawn cause (2b–2j), classify by that
+dawn cause (`wall-other-dawn-cause`, or `wall-early-return-again`
+if 2h) and record the EOD label alongside as `eodCause`. If the dawn
+classifier names nothing, the day stays `unclassified`. This changes
+no already-judged day (none is judged yet) and no other §2 row: the
+first-match order is unchanged for every other case. The §3 bar-1
+threshold (≥ 13/14) is unchanged.
+
 ## 14. Files (planned)
 
 - Prereg (this file): `evidence/2026-11-24/sim-launchdiag-a-prereg.md`

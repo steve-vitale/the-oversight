@@ -1,0 +1,336 @@
+{
+  "arm": "launchdiag-a-1a",
+  "dir": "/home/hatch/workspace/worktrees/sim-launchdiag-a/evidence/2026-11-23/perseed-musterask-a-ctl",
+  "frozenAnalysis": "evidence/2026-11-23/musterask-a-analysis.json",
+  "judgedSet": 14,
+  "judged": [
+    {
+      "seed": 107617,
+      "day": 109,
+      "vid": "visjoin_84",
+      "stage": "party",
+      "target": "congregation",
+      "kinds": [
+        "EAT@p1",
+        "EAT@p3"
+      ],
+      "refreshRefused": false,
+      "nextDay": 110,
+      "cls": "delay-scored-next-day",
+      "side": "DELAY",
+      "detail": "scored d110 visjoin_84: muster row part 0 ask party_wait — the ask happened the next day",
+      "proof": {
+        "musterDay": 110,
+        "part": 0,
+        "askKind": "party_wait"
+      },
+      "firstScoredWithin3d": 110
+    },
+    {
+      "seed": 107617,
+      "day": 136,
+      "vid": "visjoin_130",
+      "stage": "party",
+      "target": "herald",
+      "kinds": [
+        "SEEK@p0"
+      ],
+      "refreshRefused": true,
+      "nextDay": 137,
+      "cls": "delay-scored-next-day",
+      "side": "DELAY",
+      "detail": "scored d137 visjoin_130: muster row part 0 ask party_wait — the ask happened the next day",
+      "proof": {
+        "musterDay": 137,
+        "part": 0,
+        "askKind": "party_wait"
+      },
+      "firstScoredWithin3d": 137
+    },
+    {
+      "seed": 107620,
+      "day": 141,
+      "vid": "visjoin_135",
+      "stage": "party",
+      "target": "eulogy",
+      "kinds": [
+        "SEEK@p1",
+        "EAT@p3"
+      ],
+      "refreshRefused": false,
+      "nextDay": 142,
+      "cls": "delay-scored-next-day",
+      "side": "DELAY",
+      "detail": "scored d142 visjoin_135: muster row part 1 ask party_wait — the ask happened the next day",
+      "proof": {
+        "musterDay": 142,
+        "part": 1,
+        "askKind": "party_wait"
+      },
+      "firstScoredWithin3d": 142
+    },
+    {
+      "seed": 107620,
+      "day": 144,
+      "vid": "visjoin_135",
+      "stage": "party",
+      "target": "eulogy",
+      "kinds": [
+        "EAT@p2"
+      ],
+      "refreshRefused": false,
+      "nextDay": 145,
+      "cls": "wall-other-dawn-cause",
+      "side": "WALL",
+      "detail": "never scored d145 visjoin_135: never-asked:holder-away-at-dawn — never scored d145 visjoin_135: away AT DAWN (purpose guard, sinceDay 145) — objTick skips the dawn re-pick for away villagers",
+      "proof": {
+        "cause": "never-asked:holder-away-at-dawn",
+        "detail": "never scored d145 visjoin_135: away AT DAWN (purpose guard, sinceDay 145) — objTick skips the dawn re-pick for away villagers"
+      },
+      "firstScoredWithin3d": 146
+    },
+    {
+      "seed": 107622,
+      "day": 120,
+      "vid": "james_okonkwo",
+      "stage": "standing",
+      "target": "reunion",
+      "kinds": [
+        "EAT@p0",
+        "EAT@p3"
+      ],
+      "refreshRefused": false,
+      "nextDay": 121,
+      "cls": "delay-scored-next-day",
+      "side": "DELAY",
+      "detail": "scored d121 james_okonkwo: muster row part 0 ask no-candidate — the ask happened the next day",
+      "proof": {
+        "musterDay": 121,
+        "part": 0,
+        "askKind": "no-candidate"
+      },
+      "firstScoredWithin3d": 121
+    },
+    {
+      "seed": 107623,
+      "day": 124,
+      "vid": "daniyar_askarov",
+      "stage": "party",
+      "target": "herald",
+      "kinds": [
+        "EAT@p1",
+        "EAT@p3"
+      ],
+      "refreshRefused": true,
+      "nextDay": 125,
+      "cls": "delay-scored-next-day",
+      "side": "DELAY",
+      "detail": "scored d125 daniyar_askarov: muster row part 0 ask party_wait — the ask happened the next day",
+      "proof": {
+        "musterDay": 125,
+        "part": 0,
+        "askKind": "party_wait"
+      },
+      "firstScoredWithin3d": 125
+    },
+    {
+      "seed": 107623,
+      "day": 126,
+      "vid": "daniyar_askarov",
+      "stage": "party",
+      "target": "herald",
+      "kinds": [
+        "EAT@p1"
+      ],
+      "refreshRefused": false,
+      "nextDay": 127,
+      "cls": "delay-scored-next-day",
+      "side": "DELAY",
+      "detail": "scored d127 daniyar_askarov: muster row part 0 ask party_wait — the ask happened the next day",
+      "proof": {
+        "musterDay": 127,
+        "part": 0,
+        "askKind": "party_wait"
+      },
+      "firstScoredWithin3d": 127
+    },
+    {
+      "seed": 107624,
+      "day": 74,
+      "vid": "sofia_chen",
+      "stage": "hunt",
+      "target": "congregation",
+      "kinds": [
+        "EAT@p2",
+        "EAT@p3"
+      ],
+      "refreshRefused": false,
+      "nextDay": 75,
+      "cls": "delay-scored-next-day",
+      "side": "DELAY",
+      "detail": "scored d75 sofia_chen: muster row part 0 ask party_launch — the ask happened the next day",
+      "proof": {
+        "musterDay": 75,
+        "part": 0,
+        "askKind": "party_launch"
+      },
+      "firstScoredWithin3d": 75
+    },
+    {
+      "seed": 107624,
+      "day": 74,
+      "vid": "tashi_sherpa",
+      "stage": "hunt",
+      "target": "congregation",
+      "kinds": [
+        "EAT@p2",
+        "EAT@p3"
+      ],
+      "refreshRefused": false,
+      "nextDay": 75,
+      "cls": "delay-scored-next-day",
+      "side": "DELAY",
+      "detail": "scored d75 tashi_sherpa: muster row part 1 ask party_launch — the ask happened the next day",
+      "proof": {
+        "musterDay": 75,
+        "part": 1,
+        "askKind": "party_launch"
+      },
+      "firstScoredWithin3d": 75
+    },
+    {
+      "seed": 107624,
+      "day": 79,
+      "vid": "gen_o96e0k3",
+      "stage": "hunt",
+      "target": "congregation",
+      "kinds": [
+        "EAT@p1",
+        "EAT@p2"
+      ],
+      "refreshRefused": false,
+      "nextDay": 80,
+      "cls": "delay-scored-next-day",
+      "side": "DELAY",
+      "detail": "scored d80 gen_o96e0k3: muster row part 0 ask party_launch — the ask happened the next day",
+      "proof": {
+        "musterDay": 80,
+        "part": 0,
+        "askKind": "party_launch"
+      },
+      "firstScoredWithin3d": 80
+    },
+    {
+      "seed": 107624,
+      "day": 116,
+      "vid": "meera_reddy",
+      "stage": "hunt",
+      "target": "congregation",
+      "kinds": [
+        "EAT@p2",
+        "EAT@p3"
+      ],
+      "refreshRefused": false,
+      "nextDay": 117,
+      "cls": "wall-early-return-again",
+      "side": "WALL",
+      "detail": "never scored d117 meera_reddy: pick-early-return AGAIN — never scored d117 meera_reddy: pick ran but early-returned (EAT@p1, EAT@p2, EAT@p3) before the line-660 feed — no feed, no score",
+      "proof": {
+        "cause": "never-asked:pick-early-return",
+        "detail": "never scored d117 meera_reddy: pick ran but early-returned (EAT@p1, EAT@p2, EAT@p3) before the line-660 feed — no feed, no score"
+      },
+      "firstScoredWithin3d": 118
+    },
+    {
+      "seed": 107624,
+      "day": 116,
+      "vid": "sofia_chen",
+      "stage": "hunt",
+      "target": "congregation",
+      "kinds": [
+        "EAT@p2"
+      ],
+      "refreshRefused": false,
+      "nextDay": 117,
+      "cls": "delay-scored-next-day",
+      "side": "DELAY",
+      "detail": "scored d117 sofia_chen: muster row part 0 ask party_launch — the ask happened the next day",
+      "proof": {
+        "musterDay": 117,
+        "part": 0,
+        "askKind": "party_launch"
+      },
+      "firstScoredWithin3d": 117
+    },
+    {
+      "seed": 107624,
+      "day": 117,
+      "vid": "meera_reddy",
+      "stage": "hunt",
+      "target": "congregation",
+      "kinds": [
+        "EAT@p1",
+        "EAT@p2",
+        "EAT@p3"
+      ],
+      "refreshRefused": false,
+      "nextDay": 118,
+      "cls": "delay-scored-next-day",
+      "side": "DELAY",
+      "detail": "scored d118 meera_reddy: muster row part 0 ask no-candidate — the ask happened the next day",
+      "proof": {
+        "musterDay": 118,
+        "part": 0,
+        "askKind": "no-candidate"
+      },
+      "firstScoredWithin3d": 118
+    },
+    {
+      "seed": 107624,
+      "day": 120,
+      "vid": "henry_zhang",
+      "stage": "hunt",
+      "target": "congregation",
+      "kinds": [
+        "EAT@p2"
+      ],
+      "refreshRefused": false,
+      "nextDay": 121,
+      "cls": "wall-other-dawn-cause",
+      "side": "WALL",
+      "detail": "never scored d121 henry_zhang: never-asked:holder-away-at-dawn (under EOD label holder-not-scored) — never scored d121 henry_zhang: away AT DAWN (purpose guard, sinceDay 121) — objTick skips the dawn re-pick for away villagers",
+      "proof": {
+        "cause": "never-asked:holder-away-at-dawn",
+        "detail": "never scored d121 henry_zhang: away AT DAWN (purpose guard, sinceDay 121) — objTick skips the dawn re-pick for away villagers",
+        "eodCause": "never-asked:holder-not-scored"
+      },
+      "firstScoredWithin3d": 122
+    }
+  ],
+  "classCounts": {
+    "delay-scored-next-day": 11,
+    "wall-other-dawn-cause": 2,
+    "wall-early-return-again": 1
+  },
+  "delay": 11,
+  "wall": 3,
+  "unclassified": 0,
+  "crossCheck": {
+    "seedsCompared": 8,
+    "neverScoredMatch": 8,
+    "neverScoredMismatch": [],
+    "wallMatch": true
+  },
+  "wallNumbers": {
+    "wins": 0,
+    "national": 0,
+    "table": 0,
+    "wave5": 3,
+    "wave4": 8,
+    "medianSurvival": 150,
+    "maxSurvival": 150,
+    "villagesLost": 2,
+    "totalDeaths": 778
+  },
+  "instrumentErrors": 0
+}
