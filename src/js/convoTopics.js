@@ -194,6 +194,29 @@
     },
 
     // ---------- ask / depth ----------
+    // MOURN-SHAPE MEMORY (journey-succession r280 2026-11-24): the
+    // village remembers which mourning SHAPE was already served for each
+    // dead person, so a second sitting about the same dead steers to a
+    // different shape. Keyed by deadId (the corpse/lineage villager id),
+    // values are the UNFILLED template strings (the shape, not the
+    // name-baked line — the analyzer matches shapes, so the memory must
+    // too). Lives on state.village so it survives across sittings and
+    // speakers, unlike the per-villager c.said dedupe. Single-name
+    // mourning only; the multi-name and nameless pools carry no deadId.
+    mournShapesFor(deadId) {
+      const v = this.state.village || {};
+      v.mournShapesServed = v.mournShapesServed || {};
+      return (v.mournShapesServed[deadId] = v.mournShapesServed[deadId] || []);
+    },
+    mournShapeServed(deadId, template) {
+      try { return this.mournShapesFor(deadId).indexOf(template) !== -1; } catch (e) { return false; }
+    },
+    mournShapeRecord(deadId, template) {
+      try {
+        const arr = this.mournShapesFor(deadId);
+        if (arr.indexOf(template) === -1) arr.push(template);
+      } catch (e) {}
+    },
     topic2Ask(vid, topic) {
       // Open a generated topic. convoAskTopic already pushed askedTopics.
       const c = this.convoGet(vid);
@@ -231,14 +254,39 @@
       // kept across the retry: a blocked ack chunk blocks every
       // alternate too, so the retry correctly no-ops there.
       let composed = ack + line;
-      if (typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, composed)) {
+      // MOURN-SHAPE STEER (journey-succession r280 2026-11-24): the
+      // stage-1 retry also fires when the picked mourning template was
+      // already served for THIS dead person — the r279 repeats (d+3 ->
+      // d+8, different speakers, same shape, same dead) happened exactly
+      // because the run ledger had evicted the first sitting's line over
+      // the 5-day gap and villageLineFresh counts a 5-day difference as
+      // FRESH, so nothing steered the second sitting away. The retry
+      // skips candidates already recorded for this dead person, like
+      // ledger-blocked ones; the first candidate neither blocked nor
+      // already-served wins. If NO candidate passes, the original pick
+      // returns unchanged (the last-resort gap, documented, not papered
+      // over). The mourning event is resolved once here and reused by
+      // the stage-2 carve-out below.
+      let mournEv = null, mournDeadId = null, finalTemplate = picked;
+      try {
+        if (topic === 'lately' && typeof this.t2LatelyEvent === 'function') {
+          const ev0 = this.t2LatelyEvent(vid);
+          if (ev0 && ev0.kind === 'mourning') {
+            mournEv = ev0;
+            if (ev0.deadId) mournDeadId = ev0.deadId;
+          }
+        }
+      } catch (e) {}
+      const mournShapeBlocked = (cand) => !!(mournDeadId && typeof this.mournShapeServed === 'function' && this.mournShapeServed(mournDeadId, cand));
+      if (typeof this.convoWouldBlock === 'function' && (this.convoWouldBlock(vid, composed) || mournShapeBlocked(picked))) {
         for (const cand of cands) {
           if (cand === picked) continue;
+          if (mournShapeBlocked(cand)) continue;
           let alt = null;
           try { alt = this.t2fill(cand, this.vpOf(vid), vid); } catch (e) { alt = null; }
           if (alt && !this.convoWouldBlock(vid, ack + alt)) {
             try { (c.said['t2:' + topic] = c.said['t2:' + topic] || []).push(cand); } catch (e) {}
-            line = alt; composed = ack + alt; break;
+            line = alt; composed = ack + alt; finalTemplate = cand; break;
           }
         }
       }
@@ -270,13 +318,9 @@
       // prefixed candidate passes, the original line returns
       // unchanged.
       if (typeof this.convoWouldBlock === 'function' && this.convoWouldBlock(vid, composed)) {
-        let isMourning = false;
-        try {
-          if (topic === 'lately' && typeof this.t2LatelyEvent === 'function') {
-            const ev0 = this.t2LatelyEvent(vid);
-            isMourning = !!(ev0 && ev0.kind === 'mourning');
-          }
-        } catch (e) {}
+        // MOURNING CARVE-OUT (r268; the event was resolved above in the
+        // stage-1 block, so this reuses mournEv instead of re-reading it).
+        let isMourning = !!mournEv;
         if (!isMourning) {
           const PREAMBLES = ['Good question.', 'Huh. Let me think about that.', 'You want to know about that? Okay.', 'Me? Okay.'];
           const ordered = [picked].concat(cands.filter(cd => cd !== picked));
@@ -290,11 +334,21 @@
               const preComposed = '"' + pre + '" ' + alt;
               if (!this.convoWouldBlock(vid, preComposed)) {
                 try { if (cand !== picked) (c.said['t2:' + topic] = c.said['t2:' + topic] || []).push(cand); } catch (e) {}
-                line = alt; composed = preComposed; served = true; break;
+                line = alt; composed = preComposed; finalTemplate = cand; served = true; break;
               }
             }
           }
         }
+      }
+      // MOURN-SHAPE RECORD (r280): the final template is decided — record
+      // it for this dead person so the next sitting about them steers
+      // away from it. Only single-name mourning with a deadId records;
+      // the record is idempotent (a re-record of an already-served shape
+      // is a no-op), so the last-resort path (no candidate passed, the
+      // original pick returns unchanged) records the same shape again
+      // without harm.
+      if (mournDeadId && finalTemplate) {
+        try { this.mournShapeRecord(mournDeadId, finalTemplate); } catch (e) {}
       }
       c.thread = topic; c.depth = 1;
       return composed;

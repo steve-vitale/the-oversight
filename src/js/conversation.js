@@ -993,6 +993,17 @@
       // machinery's filler loop). The per-sitting ledger still applies, so
       // true same-conversation repeats keep the honest "I just said" path.
       const structural = !!(opts && opts.structural);
+      // STAGE DIRECTION (journey-succession r280 2026-11-24): a beat that
+      // is narration about how the person is TODAY — the drift note ("Gus
+      // has an edge today — something curdled.") — is not a line the
+      // person "says" twice. It bypasses the repeat ledger the same way
+      // structural grammar does: exempt from the self/run blocks and
+      // never fed into the run ledger (r279: the identical sentence
+      // re-crossing in a later sitting run-blocked and dried). It IS
+      // still fed into the per-sitting ledgers (saidLines /
+      // saidLinesConvo), so a stage direction never repeats inside one
+      // sitting.
+      const stageDirection = !!(opts && opts.stageDirection);
       // PER-SITTING SELF-BLOCK (journey-social r24 2026-10-18): the old
       // check read the flat c.saidLines, which persists across sittings —
       // so a goodbye / silence / subject-change line said three days ago
@@ -1006,8 +1017,8 @@
       // repeating a favorite line across sittings is a person, not a
       // parrot bug — the run ledger still stops same-day cross-villager
       // parroting, and the per-pool picker still spaces repeats.
-      const selfBlocked = !diegeticAct && !structural && (c.saidLinesConvo || []).indexOf(key) !== -1;
-      const runBlocked = !diegeticAct && !structural && !selfBlocked && runLedger.indexOf(key) !== -1;
+      const selfBlocked = !diegeticAct && !structural && !stageDirection && (c.saidLinesConvo || []).indexOf(key) !== -1;
+      const runBlocked = !diegeticAct && !structural && !stageDirection && !selfBlocked && runLedger.indexOf(key) !== -1;
       // THIS-SITTING vs OLDER (journey-social r16 2026-10-15): saidLines is
       // never reset between sittings (endConvo/startConvo leave it — the
       // pools rely on the persistence), so "self-blocked" conflates "said
@@ -1081,7 +1092,7 @@
         c.saidLines.push(key);
         c.saidLinesConvo = c.saidLinesConvo || [];
         c.saidLinesConvo.push(key);
-        if (!structural) {
+        if (!structural && !stageDirection) {
           runLedger.push(key);
           // WINDOW, not run-history (journey-social 2026-10-11): the ledger is
           // a backstop against ADJACENT parroting (defect 7: "Lena and David
@@ -6502,8 +6513,12 @@
       try {
         const dn = this.convoDriftNote(vid);
         if (dn) {
-          if (openerOwnsReply || inviteBeat) c.heldBeats.push({ text: dn });
-          else this.sayLine(vid, dn);
+          // STAGE DIRECTION (r280): the drift note is narration about how
+          // the person is today, not a line they "say" twice — it travels
+          // with stageDirection: true so the repeat ledger never blocks it
+          // (r279 dry hit) and the held-beats path carries the marker too.
+          if (openerOwnsReply || inviteBeat) c.heldBeats.push({ text: dn, stageDirection: true });
+          else this.sayLine(vid, dn, { stageDirection: true });
         }
       } catch (e) {}
       // BOND ENTRY BEAT (journey-social r22 2026-10-18): sedimented
@@ -6939,8 +6954,12 @@
             : hb.linkraise ? { tag: 'linkraise', linkBeat: true }
             : hb.traderIntro ? { tag: 'offer', topic: 'trade' }
             : hb.moodBeat ? { structural: true, foreign: hb.foreign }
+            // STAGE DIRECTION (r280): a held drift note passes through
+            // the continuer with its marker intact — the goon never
+            // substitutes a stage direction for a thread beat.
+            : hb.stageDirection ? { stageDirection: true, foreign: hb.foreign }
             : { foreign: hb.foreign };
-          const goonExempt = !!(goonOpts.structural || goonOpts.inviteBeat);
+          const goonExempt = !!(goonOpts.structural || goonOpts.inviteBeat || goonOpts.stageDirection);
           if (!goonExempt && typeof this.convoWouldBlock === 'function' &&
               this.convoWouldBlock(vid, goonText)) {
             let alt = null;
