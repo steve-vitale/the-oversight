@@ -39,10 +39,17 @@ const contractDigest = crypto.createHash('sha256')
 const contract = require('./balance-metrics.json');
 
 const RUN_PREFIX = argvVal('--run', 'holdspeak-a'); // 'holdspeak-a' (pilot) or 'holdspeak-a-confirm'
+// sim-holdrepeat-fix-a: both legs ran MODE=ctl, so the after files end
+// '-ctl', not '-arm'; --after-mode overrides the after leg's mode
+// suffix (default 'arm', unchanged). --policy/--origin relabel the
+// pseudo-policy for a reusing arm (defaults keep holdspeak-a).
+const AFTER_MODE = argvVal('--after-mode', 'arm');
+const POLICY = argvVal('--policy', 'holdspeak-a');
+const ORIGIN = argvVal('--origin', 'sim-holdspeak-a');
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : null)
   || (argvVal('--seeds', null) ? argvVal('--seeds', '').split(',').map(function (s) { return parseInt(s.trim(), 10); }) : null)
   || [109409, 109410, 109411, 109412, 109413, 109414, 109415, 109416];
-const POLICIES = ['holdspeak-a']; // pseudo-policy: case identity is the seed (paired design)
+const POLICIES = [POLICY]; // pseudo-policy: case identity is the seed (paired design)
 const DAYS = 150;
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
@@ -77,13 +84,13 @@ function buildPanel(rows) {
     sources: {},
     options: {
       days: DAYS, policies: POLICIES, seeds: SEEDS, region: null,
-      origin: 'sim-holdspeak-a',
+      origin: ORIGIN,
       flags: {},
       nodeVersion: process.version,
     },
     rows: rows.map(function (x) {
       return {
-        row: { policy: 'holdspeak-a', seed: x.seed, corpus: x.run },
+        row: { policy: POLICY, seed: x.seed, corpus: x.run },
         metrics: metricsFor(x.r),
         warnings: [], observerErrors: [], gear: { errors: [] },
       };
@@ -97,7 +104,7 @@ function buildPanel(rows) {
 
 function main() {
   const beforeRows = load(BEFORE_DIR, RUN_PREFIX + '-before', 'before', 'ctl');
-  const afterRows = load(AFTER_DIR, RUN_PREFIX + '-after', 'after', 'arm');
+  const afterRows = load(AFTER_DIR, RUN_PREFIX + '-after', 'after', AFTER_MODE);
   const beforePath = OUT_PREFIX + '-before.json.gz';
   const afterPath = OUT_PREFIX + '-after.json.gz';
   fs.writeFileSync(beforePath, zlib.gzipSync(JSON.stringify(buildPanel(beforeRows)) + '\n'));

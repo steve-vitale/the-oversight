@@ -19,6 +19,15 @@ const DIRS = [
   path.join(REPO, 'evidence', '2026-11-22', 'perseed-holdspeak-a-after'),
   path.join(REPO, 'evidence', '2026-11-22', 'perseed-holdspeak-a-confirm-after'),
 ];
+// --dirs <dir1,dir2> overrides DIRS (sim-holdrepeat-fix-a: judge the
+// re-measured corpora on the fixed code). Default behavior and the
+// selftest are unchanged: they still read the frozen holdspeak
+// after-leg corpora and reproduce Eamon 31x / Elif 21x.
+function dirsFromArgs(args) {
+  const i = args.indexOf('--dirs');
+  if (i !== -1 && args[i + 1]) return args[i + 1].split(',').map(function (d) { return path.resolve(d); });
+  return DIRS;
+}
 
 function maxConsecutive(days) {
   if (!days.length) return 0;
@@ -66,10 +75,11 @@ function analyzeFile(file) {
   return { file: path.basename(file), seed: corpus.seed, rows: rows.length, groups: out, holders: holders };
 }
 
-function analyzeAll() {
+function analyzeAll(dirs) {
+  const useDirs = dirs || DIRS;
   const perSeed = [];
   let totalRows = 0, unparsed = 0;
-  for (const dir of DIRS) {
+  for (const dir of useDirs) {
     const files = fs.readdirSync(dir).filter(function (f) { return f.endsWith('.json'); }).sort();
     for (const f of files) {
       const a = analyzeFile(path.join(dir, f));
@@ -157,7 +167,8 @@ function selftest() {
 function main() {
   const args = process.argv.slice(2);
   if (args.indexOf('--selftest') !== -1) { selftest(); return; }
-  const result = analyzeAll();
+  const dirs = dirsFromArgs(args);
+  const result = analyzeAll(dirs);
   const oi = args.indexOf('--out');
   const out = oi !== -1 && args[oi + 1] ? args[oi + 1] : path.join(REPO, 'evidence', '2026-11-24', 'holdrepeat-a-analysis.json');
   fs.writeFileSync(out, JSON.stringify(result, null, 2) + '\n');

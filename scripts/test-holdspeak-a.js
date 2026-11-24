@@ -203,14 +203,16 @@ check('A4 no Math.random in the hold voice helpers',
   !/function holdVoice[\s\S]{0,3000}?Math\.random/.test(SRC) &&
   !/function holdName[\s\S]{0,1500}?Math\.random/.test(SRC) &&
   !/function holdBlockKind[\s\S]{0,1500}?Math\.random/.test(SRC));
-check('A5 every hold line template ends with the capture closer',
-  (SRC.match(/— the party waits\./g) || []).length >= 9);
+check('A5 every hold line ends with the capture closer (shared assembly + 3 wear asides)',
+  (SRC.match(/— the party waits\./g) || []).length >= 1 &&
+  /var line = name \+ core \+ wear \+ ' — the party waits\.'/.test(SRC) &&
+  /another day gone/.test(SRC) && /the wait wearing thin/.test(SRC) && /so many days now/.test(SRC));
 check('A6 hold code never re-calls villagerHealCheck',
   SRC.indexOf('villagerHealCheck(') === -1);
 check('A7 dedup key is per (holder, day)',
   /holdSaid\[.*vid.*day/.test(SRC) || /String\(vid\) \+ '>' \+ day/.test(SRC));
-check('A8 hold lines are say() fiction only — no state writes outside the dedup map',
-  /br\.holdSaid\[key\] = day/.test(SRC));
+check('A8 hold lines are say() fiction only — state writes are the dedup map + the hold streak map only (sim-holdrepeat-fix-a)',
+  /br\.holdSaid\[key\] = day/.test(SRC) && /br\.holdStreak\[String\(vid\)\] = st/.test(SRC));
 
 // ---------- §B — staged fixtures through the real vbrainExecuteDepart ----------
 // B1 gear_hold, holder with neither weapon nor armor.
@@ -302,8 +304,9 @@ check('A8 hold lines are say() fiction only — no state writes outside the dedu
   fx.ctx.state.scholar.day = 41;
   fx.ctx.state.village.vbrain.commit.mara_voss.day = 41;
   const r4 = depart(fx);
-  check('B12b the next day speaks again', r4 === 'hold' && fx.says.length === 2 &&
-    fx.says[1] === 'Mara has no one to walk out with — the party waits.', { says: fx.says });
+  check('B12b the next day speaks again, in band-1 wording (day-count bands, sim-holdrepeat-fix-a)',
+    r4 === 'hold' && fx.says.length === 2 &&
+    fx.says[1] === 'Mara has no one to walk out with — another day gone — the party waits.', { says: fx.says });
 })();
 // B13 pre-System naming: the scholar knows nobody, yet the line names
 // the holder by true first name — never a stranger descriptor.

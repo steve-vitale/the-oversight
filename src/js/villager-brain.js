@@ -747,6 +747,20 @@
   // a daily fact ("waits another day"), and a once-ever dedup would
   // re-silence a party held for weeks, while un-deduped 3-ticks-a-day
   // voicing would spam.
+  // DAY-COUNT BANDS (sim-holdrepeat-fix-a, finding #2744): the same
+  // line 31x was a stuck record (Eamon, seed 109430: 31 repeats, 13
+  // consecutive days, 1 distinct text). The wording now varies by how
+  // long the CURRENT consecutive hold has lasted — band 0 day 1
+  // (fresh, the original line verbatim), band 1 days 2–3, band 2 days
+  // 4–6, band 3 day 7+. The wear is a short aside before the closer;
+  // the reason clause is identical in every band (each kind's reason
+  // token is preserved verbatim, so the holdspeak analyzer's
+  // lineFamily still classifies), and every line still ends with
+  // "— the party waits.". The streak is derived only from voiced hold
+  // days (no RNG): it increments when the holder speaks on day last+1
+  // and resets to 1 after any broken hold, so replays reproduce and a
+  // fresh hold speaks fresh again. Wording only — who holds and why
+  // never sees the streak.
   function holdVoice(self, vid, hx, hy, kind) {
     try {
       if (!self || typeof self.say !== 'function') return;
@@ -757,32 +771,40 @@
       var key = String(vid) + '>' + day;
       if (br.holdSaid[key]) return;
       br.holdSaid[key] = day;
+      if (!br.holdStreak) br.holdStreak = {};
+      var st = br.holdStreak[String(vid)] || { last: -1, n: 0 };
+      if (st.last === day - 1) st.n = st.n + 1; else st.n = 1;
+      st.last = day;
+      br.holdStreak[String(vid)] = st;
+      var band = st.n <= 1 ? 0 : (st.n <= 3 ? 1 : (st.n <= 6 ? 2 : 3));
       var name = holdName(self, vid);
-      var line = null;
+      var core = null;
       if (kind === 'kit') {
         var g = null;
         try { g = gearRead(self, vid); } catch (e) {}
-        if (g && g.armed && !g.armored) line = name + ' still has no armor — the party waits.';
-        else if (g && !g.armed && g.armored) line = name + ' still has no weapon — the party waits.';
-        else line = name + ' has no weapon and no armor yet — the party waits.';
+        if (g && g.armed && !g.armored) core = ' still has no armor';
+        else if (g && !g.armed && g.armored) core = ' still has no weapon';
+        else core = ' has no weapon and no armor yet';
       } else if (kind === 'companion') {
         var comp = null;
         try { comp = findCompanion(self, vid, hx, hy); } catch (e) {}
-        if (comp) line = name + ' is still waiting on a companion — the party waits.';
-        else line = name + ' has no one to walk out with — the party waits.';
+        if (comp) core = ' is still waiting on a companion';
+        else core = ' has no one to walk out with';
       } else if (kind === 'veteran') {
-        line = name + ' has the kills for the table, but no one to walk out with yet — the party waits.';
+        core = ' has the kills for the table, but no one to walk out with yet';
       } else if (kind === 'no-trail') {
-        line = name + ' still has no trail to follow — the party waits.';
+        core = ' still has no trail to follow';
       } else if (kind === 'sick') {
-        line = name + ' is sick, and no one who can walk will take the plan — the party waits.';
+        core = ' is sick, and no one who can walk will take the plan';
       } else if (kind === 'hurt') {
-        line = name + ' is still hurt, and no one who can walk will take the plan — the party waits.';
+        core = ' is still hurt, and no one who can walk will take the plan';
       } else if (kind === 'range0') {
-        line = name + ' never leaves Haven, and no one who can walk will take the plan — the party waits.';
+        core = ' never leaves Haven, and no one who can walk will take the plan';
       } else {
-        line = name + ' couldn\'t get out today, and no one could take the plan — the party waits.';
+        core = ' couldn\'t get out today, and no one could take the plan';
       }
+      var wear = band === 1 ? ' — another day gone' : (band === 2 ? ' — the wait wearing thin' : (band === 3 ? ' — so many days now' : ''));
+      var line = name + core + wear + ' — the party waits.';
       try { self.say(line); } catch (e) {}
     } catch (e) {}
   }
