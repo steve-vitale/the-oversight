@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Somad","t":92},{"id":"Ellie","t":90},{"id":"Paolo","t":90},{"id":"Sigrun","t":90}], roster=10
+INH readable=true scripted=true deadItems=12 distinct=12 transferred=3 vanished=2 keptPlants=21 inheritedPlants=3 keptSkills=3 inheritedSkills=4 succTrustPre=90 succTrustPost=53
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","echo_location"] post=["green_whisper","echo_location"]
+DEATH d41 (the expedition, scripted): Helga -> Ellie | passed=true lin=true mo=true trust=53 vouchers=5
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=3 vanished=2 of 12 distinct dead-bearer items
+  CONVO d+3 with Somad (refused=false)
+  CONVO d+3 with Paolo (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Somad (refused=false)
+  CONVO d+7 with Paolo (refused=false)
+  CONVO d+14 with Paolo (refused=false)
+  CONVO d+14 with Somad (refused=false)
+  CONVO d+30 with Somad (refused=false)
+  CONVO d+30 with Paolo (refused=false)
+  CONVO d+45 with Paolo (refused=false)
+  CONVO d+45 with Somad (refused=false)
+  CONVO d+53 with Paolo (refused=false)
+  CONVO d+53 with Somad (refused=false)
+  NEWCOMER-PROBE d+60 with Desmond (arrived d+60, trust=27 refused=false)
+  CONVO d+64 with Somad (refused=false)
+  CONVO d+64 with Sigrun (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=5) echo=4 organicBurial={"respects":false,"bury":false} halfRation=5
+
+MEAL-GATE: audited=70 violations=0 noMealDays=3 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":48,"offerLines":34,"codexPlantsDelta":19,"codexSkillsDelta":13,"codexAbilitiesDelta":13,"xpDelta":93,"any":true} pantry 29630->52603
+TRUST-DIALS: office 53->85 (+32, climb) | villageMean 73.8->72.9 (-0.9, flat) | ge60 5->6 | movers>=5: [{"id":"Onni","from":53,"to":94,"delta":41},{"id":"Yara","from":53,"to":91,"delta":38},{"id":"David","from":59,"to":90,"delta":31},{"id":"Sigrun","from":90,"to":98,"delta":8},{"id":"Somad","from":92,"to":98,"delta":6}]
+DEED-LEDGER: calls=82 summary={"giveFood":{"calls":51,"ok":51,"deltaSum":57,"deltaN":51,"positive":32,"meanDelta":1.12},"donateToPantry":{"calls":30,"ok":30,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"teachPlant":{"calls":1,"ok":1,"deltaSum":0,"deltaN":1,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=111 alive=10 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=82) trustVerdict={"readable":true,"officeMantle":53,"officeLast":85,"officeDelta":32,"officeClass":"climb","villageMantle":73.8,"villageLast":72.9,"villageDelta":-0.9,"villageClass":"flat","villageGe60Mantle":5,"villageGe60Last":6,"movers":[{"id":"Onni","from":53,"to":94,"delta":41},{"id":"Yara","from":53,"to":91,"delta":38},{"id":"David","from":59,"to":90,"delta":31},{"id":"Sigrun","from":90,"to":98,"delta":8},{"id":"Somad","from":92,"to":98,"delta":6}]}
+E6/CALLCHECK: e6={"callMoves":20,"withCensus":20,"chainHandoffs":2,"trustMoves":18} callCheck={"dailyMoveDays":20,"callMoveDays":20,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":18,"soloOffice":4,"soloOfficeDeltas":[2,1,1,2],"soloBearerDeltaExact":[2,1,1,2],"singleMoverBearer":6,"singleMoverOther":5,"eventClass":{"event-only":0,"deed-only":4,"both":14,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":5,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":20}

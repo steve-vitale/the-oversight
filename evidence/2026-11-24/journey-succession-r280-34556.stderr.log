@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d16: Carmine -> Elijah, topTrust=[{"id":"Francois","t":74},{"id":"Leo","t":73},{"id":"Omar","t":59},{"id":"Marcus","t":57}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=9 inheritedPlants=0 keptSkills=4 inheritedSkills=0 succTrustPre=90 succTrustPost=54
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","echo_location"] post=["green_whisper","echo_location"]
+DEATH d16 (organic (phase A)): Carmine -> Elijah | passed=true lin=true mo=true trust=54 vouchers=2
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Francois (refused=false)
+  CONVO d+3 with Leo (refused=false)
+  STRANGER-PROBE d+3 with Mandla (trust=29 refused=false)
+  CONVO d+7 with Francois (refused=false)
+  CONVO d+7 with Leo (refused=false)
+  CONVO d+14 with Francois (refused=false)
+  CONVO d+14 with Leo (refused=false)
+  CONVO d+30 with Francois (refused=false)
+  CONVO d+30 with Leo (refused=false)
+  WIT-SIT [post] d+32: Francois sits for witnessed Mandla (sitSeq=1, freshPersonN=3, latelyDead=Elijah, witnessed=false, witnessServed=none) refused=false
+  NEWCOMER-PROBE d+36 with Shintaro (arrived d+36, trust=31 refused=false)
+  CONVO d+45 with Omar (refused=false)
+  CONVO d+45 with Francois (refused=false)
+  CONVO d+53 with Francois (refused=false)
+  CONVO d+53 with Leo (refused=false)
+  CONVO d+64 with Tom (refused=false)
+  CONVO d+64 with Lena (refused=false)
+
+FUNERAL: deathBeat=10 recover=1 vouch=1 (eligible=2) echo=4 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":83,"offerLines":36,"codexPlantsDelta":31,"codexSkillsDelta":17,"codexAbilitiesDelta":16,"xpDelta":46,"any":true} pantry 10350->16728
+TRUST-DIALS: office 54->93 (+39, climb) | villageMean 45.2->73.8 (+28.6, climb) | ge60 2->7 | movers>=5: [{"id":"Tom","from":32,"to":90,"delta":58},{"id":"Lena","from":51,"to":90,"delta":39},{"id":"Omar","from":59,"to":90,"delta":31},{"id":"Leo","from":73,"to":91,"delta":18},{"id":"Caleb","from":12,"to":4,"delta":-8}]
+DEED-LEDGER: calls=31 summary={"giveFood":{"calls":16,"ok":16,"deltaSum":23,"deltaN":16,"positive":16,"meanDelta":1.44},"donateToPantry":{"calls":15,"ok":15,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=4 (convo=4, say=0)) m4=true m5=manual | endDay=86 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=31) trustVerdict={"readable":true,"officeMantle":54,"officeLast":93,"officeDelta":39,"officeClass":"climb","villageMantle":45.2,"villageLast":73.8,"villageDelta":28.6,"villageClass":"climb","villageGe60Mantle":2,"villageGe60Last":7,"movers":[{"id":"Tom","from":32,"to":90,"delta":58},{"id":"Lena","from":51,"to":90,"delta":39},{"id":"Omar","from":59,"to":90,"delta":31},{"id":"Leo","from":73,"to":91,"delta":18},{"id":"Caleb","from":12,"to":4,"delta":-8}]}
+E6/CALLCHECK: e6={"callMoves":12,"withCensus":12,"chainHandoffs":2,"trustMoves":10} callCheck={"dailyMoveDays":10,"callMoveDays":11,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":10,"soloOffice":2,"soloOfficeDeltas":[1,2],"soloBearerDeltaExact":[1,2],"singleMoverBearer":3,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":3,"both":7,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":4,"v2":5,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":10}

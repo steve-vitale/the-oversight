@@ -1,0 +1,42 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Wyatt","t":90},{"id":"Imani","t":90},{"id":"Worlasi","t":90},{"id":"Nadia","t":90}], roster=12
+INH readable=true scripted=true deadItems=10 distinct=10 transferred=1 vanished=1 keptPlants=17 inheritedPlants=4 keptSkills=5 inheritedSkills=17 succTrustPre=90 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach","echo_location","war_cry","dowsing"] post=["iron_stomach","echo_location","war_cry","dowsing"]
+DEATH d41 (the expedition, scripted): Shanice -> Worlasi | passed=true lin=true mo=true trust=62 vouchers=8
+  WIT-SIT [post] d+1: Wyatt died witnessed (Worlasi) but no living witness to sit — recorded, not driven
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=0 vanished=2 of 10 distinct dead-bearer items
+  CONVO d+3 with Imani (refused=false)
+  CONVO d+3 with Nadia (refused=false)
+  STRANGER-PROBE d+3 with Meera (trust=72 refused=false)
+  BOND-CONVO d+3 with Saul (depth=0 v=12 refused=false)
+  CONVO d+7 with Imani (refused=false)
+  CONVO d+7 with Nadia (refused=false)
+  CONVO d+14 with Saul (refused=false)
+  CONVO d+14 with Imani (refused=false)
+  CONVO d+30 with Nikos (refused=false)
+  CONVO d+30 with Imani (refused=false)
+  NEWCOMER-PROBE d+39 with Tariq (arrived d+39, trust=31 refused=false)
+  CONVO d+45 with Elijah (refused=false)
+  CONVO d+45 with Sanne (refused=false)
+  CONVO d+53 with Elijah (refused=false)
+  CONVO d+53 with Sanne (refused=false)
+  CONVO d+64 with Sanne (refused=false)
+  CONVO d+64 with Elijah (refused=false)
+
+FUNERAL: deathBeat=9 recover=2 vouch=2 (eligible=8) echo=0 organicBurial={"respects":false,"bury":false} halfRation=8
+
+MEAL-GATE: audited=70 violations=0 noMealDays=7 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":42,"offerLines":19,"codexPlantsDelta":38,"codexSkillsDelta":19,"codexAbilitiesDelta":7,"xpDelta":-56,"any":true} pantry 22038->7947
+TRUST-DIALS: office 62->90 (+28, climb) | villageMean 78.3->84 (+5.7, climb) | ge60 8->5 | movers>=5: [{"id":"Meera","from":65,"to":88,"delta":23},{"id":"Sanne","from":72,"to":92,"delta":20}]
+DEED-LEDGER: calls=5 summary={"giveFood":{"calls":5,"ok":5,"deltaSum":13,"deltaN":5,"positive":4,"meanDelta":2.6}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=111 alive=6 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+31,d+70) t2=true(deedCalls=5) trustVerdict={"readable":true,"officeMantle":62,"officeLast":90,"officeDelta":28,"officeClass":"climb","villageMantle":78.3,"villageLast":84,"villageDelta":5.7,"villageClass":"climb","villageGe60Mantle":8,"villageGe60Last":5,"movers":[{"id":"Meera","from":65,"to":88,"delta":23},{"id":"Sanne","from":72,"to":92,"delta":20}]}
+E6/CALLCHECK: e6={"callMoves":11,"withCensus":11,"chainHandoffs":6,"trustMoves":5} callCheck={"dailyMoveDays":10,"callMoveDays":11,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E7/R47: e7={"trustMoves":5,"soloOffice":3,"soloOfficeDeltas":[1,1,1],"soloBearerDeltaExact":[1,1,1],"singleMoverBearer":0,"singleMoverOther":2,"eventClass":{"event-only":0,"deed-only":0,"both":4,"neither":1},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":71,"moves":10}

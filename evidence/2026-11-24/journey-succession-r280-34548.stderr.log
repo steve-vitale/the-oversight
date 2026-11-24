@@ -1,0 +1,42 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Aaron","t":90},{"id":"Fernando","t":90},{"id":"Enrique","t":90},{"id":"Petra","t":90}], roster=11
+INH readable=true scripted=true deadItems=10 distinct=10 transferred=3 vanished=1 keptPlants=19 inheritedPlants=3 keptSkills=16 inheritedSkills=7 succTrustPre=90 succTrustPost=61
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","rage","echo_location","dowsing","adrenaline_control"] post=["beast_calm","rage","echo_location","dowsing","adrenaline_control"]
+DEATH d41 (the expedition, scripted): Kofi -> Aaron | passed=true lin=true mo=true trust=61 vouchers=9
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=3 vanished=1 of 10 distinct dead-bearer items
+  CONVO d+3 with Fernando (refused=false)
+  CONVO d+3 with Maya (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Enrique (depth=0 v=14 refused=false)
+  CONVO d+7 with Patricia (refused=false)
+  CONVO d+7 with Maya (refused=false)
+  CONVO d+14 with Mateo (refused=false)
+  CONVO d+14 with Maya (refused=false)
+  BOND-CONVO d+14 with Enrique (depth=1 v=28 refused=false)
+  NEWCOMER-PROBE d+19 with Catalina (arrived d+19, trust=34 refused=false)
+  CONVO d+30 with Enrique (refused=false)
+  CONVO d+30 with Mateo (refused=false)
+  CONVO d+45 with Farid (refused=false)
+  CONVO d+45 with Mateo (refused=false)
+  CONVO d+53 with Farid (refused=false)
+  CONVO d+53 with Mateo (refused=false)
+  CONVO d+64 with Farid (refused=false)
+  CONVO d+64 with Mateo (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=9) echo=2 organicBurial={"respects":false,"bury":false} halfRation=5
+
+MEAL-GATE: audited=70 violations=0 noMealDays=10 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":55,"offerLines":60,"codexPlantsDelta":44,"codexSkillsDelta":17,"codexAbilitiesDelta":10,"xpDelta":115,"any":true} pantry 93813->35738
+TRUST-DIALS: office 61->99 (+38, climb) | villageMean 86.9->74.1 (-12.8, fall) | ge60 9->4 | movers>=5: [{"id":"Mateo","from":72,"to":98,"delta":26},{"id":"Farid","from":79,"to":98,"delta":19},{"id":"Ava","from":82,"to":93,"delta":11},{"id":"Maya","from":100,"to":93,"delta":-7}]
+DEED-LEDGER: calls=51 summary={"teachPlant":{"calls":2,"ok":2,"deltaSum":0,"deltaN":2,"positive":0,"meanDelta":0},"giveFood":{"calls":44,"ok":44,"deltaSum":66,"deltaN":44,"positive":26,"meanDelta":1.5},"donateToPantry":{"calls":5,"ok":5,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=111 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+31,d+70) t2=true(deedCalls=51) trustVerdict={"readable":true,"officeMantle":61,"officeLast":99,"officeDelta":38,"officeClass":"climb","villageMantle":86.9,"villageLast":74.1,"villageDelta":-12.8,"villageClass":"fall","villageGe60Mantle":9,"villageGe60Last":4,"movers":[{"id":"Mateo","from":72,"to":98,"delta":26},{"id":"Farid","from":79,"to":98,"delta":19},{"id":"Ava","from":82,"to":93,"delta":11},{"id":"Maya","from":100,"to":93,"delta":-7}]}
+E6/CALLCHECK: e6={"callMoves":13,"withCensus":13,"chainHandoffs":5,"trustMoves":8} callCheck={"dailyMoveDays":12,"callMoveDays":12,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":8,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":2,"singleMoverOther":3,"eventClass":{"event-only":0,"deed-only":1,"both":7,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":3,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":5,"known":5,"unknown":0} e3={"dailyDays":71,"moves":12}

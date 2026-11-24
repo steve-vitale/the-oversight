@@ -1,0 +1,42 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Domingo","t":91},{"id":"Anjali","t":90},{"id":"Albertine","t":90},{"id":"Olivia","t":90}], roster=11
+INH readable=true scripted=true deadItems=10 distinct=10 transferred=1 vanished=1 keptPlants=20 inheritedPlants=0 keptSkills=5 inheritedSkills=14 succTrustPre=91 succTrustPost=60
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","echo_location","rage","beard_moss","green_thumb","cornucopia"] post=["green_whisper","echo_location","rage","beard_moss","green_thumb","cornucopia"]
+DEATH d41 (the expedition, scripted): Addison -> Domingo | passed=true lin=true mo=true trust=60 vouchers=8
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=2 vanished=1 of 10 distinct dead-bearer items
+  CONVO d+3 with Aki (refused=false)
+  CONVO d+3 with Albertine (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Moldir (depth=2 v=50 refused=false)
+  CONVO d+7 with Aki (refused=false)
+  CONVO d+7 with Anjali (refused=false)
+  CONVO d+14 with Ruby (refused=false)
+  CONVO d+14 with Anjali (refused=false)
+  BOND-CONVO d+14 with Moldir (depth=0 v=6 refused=false)
+  CONVO d+30 with Ruby (refused=false)
+  CONVO d+30 with Anjali (refused=false)
+  CONVO d+45 with Ruby (refused=false)
+  CONVO d+45 with Anjali (refused=false)
+  CONVO d+53 with Ruby (refused=false)
+  CONVO d+53 with Anjali (refused=false)
+  CONVO d+64 with Ruby (refused=false)
+  CONVO d+64 with Moldir (refused=false)
+  NEWCOMER-PROBE d+66 with Tariq (arrived d+66, trust=26 refused=false)
+
+FUNERAL: deathBeat=12 recover=1 vouch=1 (eligible=8) echo=1 organicBurial={"respects":false,"bury":false} halfRation=8
+
+MEAL-GATE: audited=70 violations=0 noMealDays=6 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":46,"offerLines":38,"codexPlantsDelta":45,"codexSkillsDelta":15,"codexAbilitiesDelta":6,"xpDelta":15,"any":true} pantry 127305->5097
+TRUST-DIALS: office 60->94 (+34, climb) | villageMean 80.9->66 (-14.9, fall) | ge60 8->4 | movers>=5: [{"id":"Moldir","from":74,"to":97,"delta":23},{"id":"Ruth","from":75,"to":90,"delta":15},{"id":"Ines","from":41,"to":47,"delta":6}]
+DEED-LEDGER: calls=47 summary={"giveFood":{"calls":13,"ok":13,"deltaSum":11,"deltaN":13,"positive":11,"meanDelta":0.85},"donateToPantry":{"calls":34,"ok":34,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=110 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+8,d+15,d+30,d+69) t2=true(deedCalls=47) trustVerdict={"readable":true,"officeMantle":60,"officeLast":94,"officeDelta":34,"officeClass":"climb","villageMantle":80.9,"villageLast":66,"villageDelta":-14.9,"villageClass":"fall","villageGe60Mantle":8,"villageGe60Last":4,"movers":[{"id":"Moldir","from":74,"to":97,"delta":23},{"id":"Ruth","from":75,"to":90,"delta":15},{"id":"Ines","from":41,"to":47,"delta":6}]}
+E6/CALLCHECK: e6={"callMoves":17,"withCensus":17,"chainHandoffs":4,"trustMoves":13} callCheck={"dailyMoveDays":17,"callMoveDays":17,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=2 (v2=3, excludedLoot=1))
+E7/R47: e7={"trustMoves":13,"soloOffice":12,"soloOfficeDeltas":[1,1,1,1,1,1,1,1,1,1,1,1],"soloBearerDeltaExact":[1,1,1,1,1,1,1,1,1,1,1,1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":3,"both":10,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":3,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":4,"known":4,"unknown":0} e3={"dailyDays":71,"moves":17}

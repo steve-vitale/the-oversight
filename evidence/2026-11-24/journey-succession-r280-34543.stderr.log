@@ -1,0 +1,38 @@
+
+ORGANIC DEATH d39: Luke -> Frieda, topTrust=[{"id":"Nathan","t":98},{"id":"Meera","t":90},{"id":"Onufriy","t":90},{"id":"Brian","t":75}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=19 inheritedPlants=0 keptSkills=3 inheritedSkills=0 succTrustPre=89 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["bloodhound","lucky_rock","bird_whisperer","trophy_room"] post=["bloodhound","lucky_rock","bird_whisperer","trophy_room"]
+DEATH d39 (organic (phase A)): Luke -> Frieda | passed=true lin=true mo=true trust=62 vouchers=6
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Meera (refused=false)
+  CONVO d+3 with Onufriy (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Meera (refused=false)
+  CONVO d+7 with Onufriy (refused=false)
+  CONVO d+14 with Meera (refused=false)
+  CONVO d+14 with Onufriy (refused=false)
+  CONVO d+30 with Meera (refused=false)
+  CONVO d+30 with Elijah (refused=false)
+  CONVO d+45 with Meera (refused=false)
+  CONVO d+45 with Elijah (refused=false)
+  CONVO d+53 with Meera (refused=false)
+  CONVO d+53 with Elijah (refused=false)
+  CONVO d+64 with Meera (refused=false)
+  CONVO d+64 with Elijah (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=6) echo=1 organicBurial={"respects":false,"bury":false} halfRation=3
+
+MEAL-GATE: audited=70 violations=0 noMealDays=4 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":42,"offerLines":36,"codexPlantsDelta":8,"codexSkillsDelta":10,"codexAbilitiesDelta":3,"xpDelta":95,"any":true} pantry 11738->5468
+TRUST-DIALS: office 62->56 (-6, fall) | villageMean 71.8->92.1 (+20.3, climb) | ge60 6->7 | movers>=5: [{"id":"Maya","from":37,"to":90,"delta":53},{"id":"Elijah","from":58,"to":93,"delta":35},{"id":"Ursula","from":61,"to":91,"delta":30},{"id":"Ella","from":65,"to":94,"delta":29},{"id":"Brian","from":75,"to":90,"delta":15},{"id":"Meera","from":90,"to":97,"delta":7}]
+DEED-LEDGER: calls=12 summary={"giveFood":{"calls":9,"ok":9,"deltaSum":36,"deltaN":9,"positive":9,"meanDelta":4},"teachPlant":{"calls":3,"ok":3,"deltaSum":0,"deltaN":3,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=1 (convo=1, say=0)) m4=true m5=manual | endDay=109 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=12) trustVerdict={"readable":true,"officeMantle":62,"officeLast":56,"officeDelta":-6,"officeClass":"fall","villageMantle":71.8,"villageLast":92.1,"villageDelta":20.3,"villageClass":"climb","villageGe60Mantle":6,"villageGe60Last":7,"movers":[{"id":"Maya","from":37,"to":90,"delta":53},{"id":"Elijah","from":58,"to":93,"delta":35},{"id":"Ursula","from":61,"to":91,"delta":30},{"id":"Ella","from":65,"to":94,"delta":29},{"id":"Brian","from":75,"to":90,"delta":15},{"id":"Meera","from":90,"to":97,"delta":7}]}
+E6/CALLCHECK: e6={"callMoves":3,"withCensus":3,"chainHandoffs":0,"trustMoves":3} callCheck={"dailyMoveDays":3,"callMoveDays":3,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=3, excludedLoot=0))
+E7/R47: e7={"trustMoves":3,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":0,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":1,"v2":3,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":0,"known":0,"unknown":0} e3={"dailyDays":71,"moves":3}
