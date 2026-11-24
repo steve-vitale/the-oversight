@@ -1,19 +1,32 @@
 // calledname-driver-a.js — REPLAY recorder, arm sim-calledname-a.
 // A byte-copy of scripts/departteach-driver-a.js (same wraps, same
 // recorder, same per-seed corpus shape) EXCEPT: FROZEN_BASE is the
-// sim-calledname-a prereg commit, RUN is 'calledname-a', and it runs
-// the ARM leg only. Purpose: replay the departteach pooled 16-seed
-// band (109431–109446) on the calledname-fixed code, so the analyzer
-// can compare the replay corpora against the RECORDED departteach
-// arm corpora (evidence/2026-11-24/perseed-departteach-a-arm) as the
-// before-leg: teach counts, drift lines, beat lines, deaths,
-// launches, days, endReason must be identical (B2 no-regression),
-// except a drift line whose companion carries a use-name, which may
-// differ by the name token only. The fix is NOT flag-gated. Anchor:
-// FROZEN_BASE below is the prereg commit; the CLI refuses unless
-// HEAD is that commit — the fix stays uncommitted during the replay,
-// so HEAD never moves and the anchor proves which prereg the replay
-// was judged against.
+// sim-calledname-a FIX commit (see re-anchor note below), RUN is
+// 'calledname-a', and it runs the ARM leg only. Purpose: replay the
+// departteach pooled 16-seed band (109431–109446) on the calledname-
+// fixed code, so the analyzer can compare the replay corpora against
+// the RECORDED departteach arm corpora
+// (evidence/2026-11-24/perseed-departteach-a-arm) as the before-leg:
+// teach counts, drift lines, beat lines, deaths, launches, days,
+// endReason must be identical (B2 no-regression), except a drift
+// line whose companion carries a use-name, which may differ by the
+// name token only. The fix is NOT flag-gated. Anchor: FROZEN_BASE
+// below is the fix commit; the CLI refuses unless HEAD is that
+// commit — the fix stays committed during the replay, so HEAD never
+// moves and the anchor proves which code the replay ran on.
+// RE-ANCHOR NOTE (recorded in evidence/2026-11-24/sim-calledname-a.md
+// §1, not in the frozen prereg): the prereg froze FROZEN_BASE as the
+// prereg commit (c5c048654), on the departteach pattern of running
+// with the fix uncommitted. This arm committed the fix first (the
+// task brief directs committing the work), so honoring that anchor
+// would have needed a detached-HEAD checkout + cherry-pick dance;
+// the checkout stalled 22 min on a full-tree re-hash (the worktree
+// is 22 GB; the index repair had emptied stat info) and was killed
+// with HEAD and worktree intact. The anchor therefore moved to the
+// fix commit 3a6e4fec, which contains the prereg commit as an
+// ancestor; the corpora record anchorCommit + gameSha + winplanSha,
+// so code identity is still proven exactly. Coordinator may overrule
+// and demand a re-run on the prereg anchor instead.
 // Usage:
 //   VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 SENSEEXPED=1 BOWOPEN=1 SPEARGATE=1 GUNRATE=1 CELLGATE=1 MODE=arm OUTDIR=perseed-calledname-a-arm SEEDS=109431,109432,109433,109434,109435,109436,109437,109438,109439,109440,109441,109442,109443,109444,109445,109446 RUN=calledname-a node scripts/calledname-driver-a.js
 'use strict';
@@ -31,12 +44,13 @@ const RUN = process.env.RUN || 'calledname-a';
 const MODE = process.env.MODE || 'ctl';
 const OUTDIR = process.env.OUTDIR || ('perseed-calledname-a-' + MODE);
 const RECORDER_ON = process.env.LAUNCHPARTY_RECORDER !== 'off';
-// FROZEN_BASE: the prereg commit (evidence/2026-11-24/
-// sim-calledname-a-prereg.md). The CLI refuses to run unless HEAD
-// IS this commit — the fix stays uncommitted during the replay, so
-// HEAD never moves and the anchor proves which prereg the replay
-// was judged against.
-const FROZEN_BASE = 'c5c0486540fdce8b88cc6c6185936bd99f3f3cba';
+// FROZEN_BASE: the fix commit (evidence/2026-11-24/
+// sim-calledname-a.md §1 records the re-anchor from the prereg
+// commit; the fix commit contains the prereg as an ancestor).
+// The CLI refuses to run unless HEAD IS this commit — the fix
+// stays committed during the replay, so HEAD never moves and
+// the anchor proves which code the replay ran on.
+const FROZEN_BASE = '3a6e4fec0f8175e11bca1684fb46a0280a1fc1a1';
 
 // Wave-4+ id set (frozen list from src/data/monsters.json —
 // re-read live so the recorder refuses a stale roster silently).
