@@ -22,9 +22,12 @@
 // Usage: node scripts/build-fightcap-panels-a.js [--out evidence/2026-11-18/fightcap-a-panel]
 //   [--before evidence/2026-11-18/perseed-fightcap-a-ctl] [--after evidence/2026-11-18/perseed-fightcap-a-arm]
 //   [--seeds 104501,104502,...,104508]
-//   Reads <dir>/launchparty-sense-a-s<seed>-fightcap-a-<mode>.json per leg.
-//   (The driver hardcodes its filename prefix 'launchparty-sense-a';
-//   RUN=fightcap-a lands in the middle segment.)
+//   [--prefix launchparty-sense-a] [--run fightcap-a] [--policy fightcap-a] [--origin sim-fightcap-a]
+//   Reads <dir>/<prefix>-s<seed>-<run>-<mode>.json per leg.
+//   (The driver hardcodes its filename prefix; RUN lands in the middle
+//   segment. Defaults are the fightcap-a values; the fightcap-recheck-a
+//   port passes --prefix fightcap-recheck-a --run fightcap-recheck-a
+//   --policy fightcap-recheck-a --origin sim-fightcap-recheck-a.)
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -51,14 +54,18 @@ const contract = require('./balance-metrics.json');
 const SEEDS = (process.env.SEEDS ? process.env.SEEDS.split(',').map(function (s) { return parseInt(s.trim(), 10); }) : null)
   || (argvVal('--seeds', null) ? argvVal('--seeds', '').split(',').map(function (s) { return parseInt(s.trim(), 10); }) : null)
   || [104501, 104502, 104503, 104504, 104505, 104506, 104507, 104508];
-const POLICIES = ['fightcap-a']; // pseudo-policy: case identity is the seed (paired design)
+const PREFIX = argvVal('--prefix', 'launchparty-sense-a');
+const RUN = argvVal('--run', 'fightcap-a');
+const POLICY = argvVal('--policy', 'fightcap-a');
+const ORIGIN = argvVal('--origin', 'sim-fightcap-a');
+const POLICIES = [POLICY]; // pseudo-policy: case identity is the seed (paired design)
 const DAYS = 150;
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
 function load(dir, leg, mode) {
   const rows = [];
   for (const seed of SEEDS) {
-    const fp = path.join(dir, 'launchparty-sense-a-s' + seed + '-fightcap-a-' + mode + '.json');
+    const fp = path.join(dir, PREFIX + '-s' + seed + '-' + RUN + '-' + mode + '.json');
     if (!fs.existsSync(fp)) throw new Error('missing per-seed file: ' + fp);
     rows.push({ seed: seed, run: leg, r: JSON.parse(fs.readFileSync(fp, 'utf8')) });
   }
@@ -86,13 +93,13 @@ function buildPanel(rows) {
     sources: {},
     options: {
       days: DAYS, policies: POLICIES, seeds: SEEDS, region: null,
-      origin: 'sim-fightcap-a',
+      origin: ORIGIN,
       flags: {},
       nodeVersion: process.version,
     },
     rows: rows.map(function (x) {
       return {
-        row: { policy: 'fightcap-a', seed: x.seed, corpus: x.run },
+        row: { policy: POLICY, seed: x.seed, corpus: x.run },
         metrics: metricsFor(x.r),
         warnings: [], observerErrors: [], gear: { errors: [] },
       };
@@ -105,8 +112,8 @@ function buildPanel(rows) {
 }
 
 function main() {
-  const beforeRows = load(BEFORE_DIR, 'fightcap-a-ctl', 'ctl');
-  const afterRows = load(AFTER_DIR, 'fightcap-a-arm', 'arm');
+  const beforeRows = load(BEFORE_DIR, RUN + '-ctl', 'ctl');
+  const afterRows = load(AFTER_DIR, RUN + '-arm', 'arm');
   const beforePath = OUT_PREFIX + '-before.json.gz';
   const afterPath = OUT_PREFIX + '-after.json.gz';
   fs.writeFileSync(beforePath, zlib.gzipSync(JSON.stringify(buildPanel(beforeRows)) + '\n'));

@@ -1,0 +1,2448 @@
+{
+  "verdict": "DIAG-GO",
+  "kind": "THIN-POOL",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": false,
+      "detail": "engaged launched-party meetings (trio+, present): arm 5 (floor 10); ctl 1"
+    },
+    {
+      "id": "win-share",
+      "pass": false,
+      "detail": "arm win share 0.000 (0/5, kills 0, mFlee 0, vDie 1, vFlee 4) vs ctl 0.000 (0/1) (bar arm>=0.50)"
+    },
+    {
+      "id": "cost-community-loss",
+      "pass": false,
+      "detail": "community loss arm 6/8 vs ctl 2/8 (bar arm share <= ctl share + 0.125, i.e. at most 3 villages)"
+    },
+    {
+      "id": "cost-starvation",
+      "pass": true,
+      "detail": "starvation totals arm 3 vs ctl 1; villager arm 2 vs ctl 1 (bar arm<=ctl+2 both)"
+    },
+    {
+      "id": "cost-median",
+      "pass": true,
+      "detail": "median survival arm 136d vs ctl 150d (bar arm>=0.8x ctl)"
+    }
+  ],
+  "ctl": {
+    "dir": "evidence/2026-11-24/perseed-fightcap-recheck-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {},
+    "meetings": 1,
+    "wins": 0,
+    "kills": 0,
+    "losses": 1,
+    "vDie": 0,
+    "vFlee": 1,
+    "mFlee": 0,
+    "winShare": 0,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 42,
+      "joined": 42,
+      "unjoined": 0,
+      "noLaunchPlan": 0,
+      "pairLaunch": 27,
+      "partyAbsent": 14,
+      "evadeExcluded": 0
+    },
+    "byOutcome": {
+      "vFlee": {
+        "n": 1,
+        "rounds": [
+          6
+        ],
+        "dmgShare": [
+          0.2332089552238806
+        ],
+        "vTaken": [
+          65
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          5
+        ],
+        "meanArmorP": [
+          20.333333333333332
+        ],
+        "mHpStart": [
+          1072
+        ],
+        "abilitiesPerMember": [
+          1
+        ],
+        "fighterDmgShare": [
+          0.6896551724137931
+        ],
+        "parsedStrikeTotal": [
+          87
+        ],
+        "roundsMean": 6,
+        "vTakenMean": 65,
+        "partySizeMean": 3,
+        "minArmorPMean": 5,
+        "meanArmorPMean": 20.333333333333332,
+        "mHpStartMean": 1072,
+        "abilitiesPerMemberMean": 1,
+        "fighterDmgShareMean": 0.6896551724137931,
+        "parsedStrikeTotalMean": 87
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vFlee": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 1,
+    "gateSeekShare": 0,
+    "lossGateNull": 1,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {
+      "congregation": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.2332089552238806,
+    "dmgShareByOutcome": {
+      "vFlee": 0.2332089552238806
+    },
+    "roundsMean": 6,
+    "vTakenMean": 65,
+    "starvation": 1,
+    "starvationVillager": 1,
+    "medianDays": 150,
+    "communityLost": 2,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 4,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "arm": {
+    "dir": "evidence/2026-11-24/perseed-fightcap-recheck-a-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {},
+    "meetings": 5,
+    "wins": 0,
+    "kills": 0,
+    "losses": 5,
+    "vDie": 1,
+    "vFlee": 4,
+    "mFlee": 0,
+    "winShare": 0,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 27,
+      "joined": 27,
+      "unjoined": 0,
+      "noLaunchPlan": 2,
+      "pairLaunch": 13,
+      "partyAbsent": 0,
+      "evadeExcluded": 7
+    },
+    "byOutcome": {
+      "vFlee": {
+        "n": 4,
+        "rounds": [
+          4,
+          13,
+          5,
+          4
+        ],
+        "dmgShare": [
+          0.25908221797323133,
+          0.7006610009442871,
+          0.18846153846153846,
+          0.156195462478185
+        ],
+        "vTaken": [
+          71,
+          69,
+          27,
+          58
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          17,
+          17,
+          17,
+          39
+        ],
+        "meanArmorP": [
+          30.666666666666668,
+          26.666666666666668,
+          48.666666666666664,
+          56
+        ],
+        "mHpStart": [
+          1046,
+          1059,
+          1040,
+          1146
+        ],
+        "abilitiesPerMember": [
+          3.6666666666666665,
+          2.3333333333333335,
+          2.3333333333333335,
+          2.3333333333333335
+        ],
+        "fighterDmgShare": [
+          0.6883720930232559,
+          0.6196319018404908,
+          0.4142857142857143,
+          0.6724137931034483
+        ],
+        "parsedStrikeTotal": [
+          215,
+          163,
+          140,
+          58
+        ],
+        "roundsMean": 6.5,
+        "vTakenMean": 56.25,
+        "partySizeMean": 3,
+        "minArmorPMean": 22.5,
+        "meanArmorPMean": 40.5,
+        "mHpStartMean": 1072.75,
+        "abilitiesPerMemberMean": 2.666666666666667,
+        "fighterDmgShareMean": 0.5986758755632273,
+        "parsedStrikeTotalMean": 144
+      },
+      "vDie": {
+        "n": 1,
+        "rounds": [
+          7
+        ],
+        "dmgShare": [
+          0.11028315946348734
+        ],
+        "vTaken": [
+          96
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          27
+        ],
+        "meanArmorP": [
+          38.333333333333336
+        ],
+        "mHpStart": [
+          1342
+        ],
+        "abilitiesPerMember": [
+          1.6666666666666667
+        ],
+        "fighterDmgShare": [
+          0
+        ],
+        "parsedStrikeTotal": [
+          120
+        ],
+        "roundsMean": 7,
+        "vTakenMean": 96,
+        "partySizeMean": 3,
+        "minArmorPMean": 27,
+        "meanArmorPMean": 38.333333333333336,
+        "mHpStartMean": 1342,
+        "abilitiesPerMemberMean": 1.6666666666666667,
+        "fighterDmgShareMean": 0,
+        "parsedStrikeTotalMean": 120
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vFlee": 4
+      },
+      "seek": {
+        "vDie": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 0.8,
+    "gateSeekShare": 0.2,
+    "lossGateNull": 4,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 1,
+    "monsterByOutcome": {
+      "congregation": {
+        "win": 0,
+        "loss": 1
+      },
+      "algorithm": {
+        "win": 0,
+        "loss": 2
+      },
+      "strike": {
+        "win": 0,
+        "loss": 1
+      },
+      "reunion": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.28293667586414584,
+    "dmgShareByOutcome": {
+      "vFlee": 0.32610005496431044,
+      "vDie": 0.11028315946348734
+    },
+    "roundsMean": 6.6,
+    "vTakenMean": 64.2,
+    "starvation": 3,
+    "starvationVillager": 2,
+    "medianDays": 136,
+    "communityLost": 6,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 1,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "ctlPair": {
+    "dir": "evidence/2026-11-24/perseed-fightcap-recheck-a-ctl",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {},
+    "meetings": 3,
+    "wins": 0,
+    "kills": 0,
+    "losses": 3,
+    "vDie": 0,
+    "vFlee": 3,
+    "mFlee": 0,
+    "winShare": 0,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 42,
+      "joined": 42,
+      "unjoined": 0,
+      "noLaunchPlan": 0,
+      "pairLaunch": 0,
+      "partyAbsent": 33,
+      "evadeExcluded": 6
+    },
+    "byOutcome": {
+      "vFlee": {
+        "n": 3,
+        "rounds": [
+          6,
+          6,
+          4
+        ],
+        "dmgShare": [
+          0.5476694915254238,
+          0.2332089552238806,
+          0.1035653650254669
+        ],
+        "vTaken": [
+          75,
+          65,
+          38
+        ],
+        "partySize": [
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          18,
+          5,
+          19
+        ],
+        "meanArmorP": [
+          22,
+          20.333333333333332,
+          35.333333333333336
+        ],
+        "mHpStart": [
+          944,
+          1072,
+          1178
+        ],
+        "abilitiesPerMember": [
+          2,
+          1,
+          2.3333333333333335
+        ],
+        "fighterDmgShare": [
+          0.8159509202453987,
+          0.6896551724137931,
+          0.6065573770491803
+        ],
+        "parsedStrikeTotal": [
+          163,
+          87,
+          122
+        ],
+        "roundsMean": 5.333333333333333,
+        "vTakenMean": 59.333333333333336,
+        "partySizeMean": 3,
+        "minArmorPMean": 14,
+        "meanArmorPMean": 25.888888888888886,
+        "mHpStartMean": 1064.6666666666667,
+        "abilitiesPerMemberMean": 1.777777777777778,
+        "fighterDmgShareMean": 0.7040544899027908,
+        "parsedStrikeTotalMean": 124
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vFlee": 3
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 1,
+    "gateSeekShare": 0,
+    "lossGateNull": 3,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {
+      "eulogy": {
+        "win": 0,
+        "loss": 1
+      },
+      "congregation": {
+        "win": 0,
+        "loss": 1
+      },
+      "strike": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.29481460392492376,
+    "dmgShareByOutcome": {
+      "vFlee": 0.29481460392492376
+    },
+    "roundsMean": 5.333333333333333,
+    "vTakenMean": 59.333333333333336,
+    "starvation": 1,
+    "starvationVillager": 1,
+    "medianDays": 150,
+    "communityLost": 2,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 4,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "armPair": {
+    "dir": "evidence/2026-11-24/perseed-fightcap-recheck-a-arm",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {},
+    "meetings": 9,
+    "wins": 0,
+    "kills": 0,
+    "losses": 9,
+    "vDie": 2,
+    "vFlee": 7,
+    "mFlee": 0,
+    "winShare": 0,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 27,
+      "joined": 27,
+      "unjoined": 0,
+      "noLaunchPlan": 2,
+      "pairLaunch": 0,
+      "partyAbsent": 0,
+      "evadeExcluded": 16
+    },
+    "byOutcome": {
+      "vDie": {
+        "n": 2,
+        "rounds": [
+          2,
+          7
+        ],
+        "dmgShare": [
+          0.022650056625141562,
+          0.11028315946348734
+        ],
+        "vTaken": [
+          63,
+          96
+        ],
+        "partySize": [
+          3,
+          3
+        ],
+        "minArmorP": [
+          5,
+          27
+        ],
+        "meanArmorP": [
+          11.333333333333334,
+          38.333333333333336
+        ],
+        "mHpStart": [
+          883,
+          1342
+        ],
+        "abilitiesPerMember": [
+          3,
+          1.6666666666666667
+        ],
+        "fighterDmgShare": [
+          0,
+          0
+        ],
+        "parsedStrikeTotal": [
+          20,
+          120
+        ],
+        "roundsMean": 4.5,
+        "vTakenMean": 79.5,
+        "partySizeMean": 3,
+        "minArmorPMean": 16,
+        "meanArmorPMean": 24.833333333333336,
+        "mHpStartMean": 1112.5,
+        "abilitiesPerMemberMean": 2.3333333333333335,
+        "fighterDmgShareMean": 0,
+        "parsedStrikeTotalMean": 70
+      },
+      "vFlee": {
+        "n": 7,
+        "rounds": [
+          3,
+          4,
+          4,
+          13,
+          5,
+          4,
+          2
+        ],
+        "dmgShare": [
+          0.0570902394106814,
+          0.1763157894736842,
+          0.25908221797323133,
+          0.7006610009442871,
+          0.18846153846153846,
+          0.156195462478185,
+          0.06899724011039558
+        ],
+        "vTaken": [
+          78,
+          54,
+          71,
+          69,
+          27,
+          58,
+          53
+        ],
+        "partySize": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "minArmorP": [
+          12,
+          12,
+          17,
+          17,
+          17,
+          39,
+          15
+        ],
+        "meanArmorP": [
+          15.333333333333334,
+          18.666666666666668,
+          30.666666666666668,
+          26.666666666666668,
+          48.666666666666664,
+          56,
+          22.333333333333332
+        ],
+        "mHpStart": [
+          1086,
+          1140,
+          1046,
+          1059,
+          1040,
+          1146,
+          1087
+        ],
+        "abilitiesPerMember": [
+          3,
+          2.3333333333333335,
+          3.6666666666666665,
+          2.3333333333333335,
+          2.3333333333333335,
+          2.3333333333333335,
+          2
+        ],
+        "fighterDmgShare": [
+          0.6290322580645161,
+          0.9353233830845771,
+          0.6883720930232559,
+          0.6196319018404908,
+          0.4142857142857143,
+          0.6724137931034483,
+          1
+        ],
+        "parsedStrikeTotal": [
+          62,
+          201,
+          215,
+          163,
+          140,
+          58,
+          22
+        ],
+        "roundsMean": 5,
+        "vTakenMean": 58.57142857142857,
+        "partySizeMean": 3,
+        "minArmorPMean": 18.428571428571427,
+        "meanArmorPMean": 31.190476190476193,
+        "mHpStartMean": 1086.2857142857142,
+        "abilitiesPerMemberMean": 2.5714285714285716,
+        "fighterDmgShareMean": 0.7084370204860004,
+        "parsedStrikeTotalMean": 123
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vDie": 1,
+        "vFlee": 7
+      },
+      "seek": {
+        "vDie": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 0.8888888888888888,
+    "gateSeekShare": 0.1111111111111111,
+    "lossGateNull": 8,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 1,
+    "monsterByOutcome": {
+      "influencer": {
+        "win": 0,
+        "loss": 1
+      },
+      "congregation": {
+        "win": 0,
+        "loss": 3
+      },
+      "strike": {
+        "win": 0,
+        "loss": 2
+      },
+      "algorithm": {
+        "win": 0,
+        "loss": 2
+      },
+      "reunion": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.19330407832673688,
+    "dmgShareByOutcome": {
+      "vDie": 0.06646660804431445,
+      "vFlee": 0.22954335555028613
+    },
+    "roundsMean": 4.888888888888889,
+    "vTakenMean": 63.22222222222222,
+    "starvation": 3,
+    "starvationVillager": 2,
+    "medianDays": 136,
+    "communityLost": 6,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 8,
+    "wave5": 1,
+    "scaleRanks": {
+      "regional": 8
+    }
+  },
+  "ctlMeetings": [
+    {
+      "seed": 110107,
+      "day": 49,
+      "vid": "james_okonkwo",
+      "mid": "congregation",
+      "mHpStart": 1072,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 6,
+      "vTaken": 65,
+      "mDealt": 250,
+      "dmgShare": 0.2332089552238806,
+      "planParty": [
+        "gen_5rfxvpn",
+        "gen_bqesy8u",
+        "gen_s1hqd4w"
+      ],
+      "allyVids": [
+        "gen_s1hqd4w",
+        "gen_bqesy8u"
+      ],
+      "joiners": [
+        "gen_s1hqd4w",
+        "gen_bqesy8u"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "james_okonkwo": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        },
+        "gen_s1hqd4w": {
+          "armed": true,
+          "armored": true,
+          "armorP": 5
+        },
+        "gen_bqesy8u": {
+          "armed": true,
+          "armored": true,
+          "armorP": 32
+        }
+      },
+      "minArmorP": 5,
+      "meanArmorP": 20.333333333333332,
+      "parsedStrikeTotal": 87,
+      "parsedAttributed": 87,
+      "dmgByVid": {
+        "james_okonkwo": 60,
+        "gen_s1hqd4w": 27
+      },
+      "fighterDmgShare": 0.6896551724137931,
+      "abilitiesPerMember": 1,
+      "memberAbilities": {
+        "james_okonkwo": [],
+        "gen_s1hqd4w": [
+          "green_whisper"
+        ],
+        "gen_bqesy8u": [
+          "the_touch",
+          "lucky_rock"
+        ]
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "James walks straight into The Congregation. No avoiding it.",
+        "James sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Congregation for 18 (1054 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "James lowers the bow — The Congregation is on them now. (1/3 hit)",
+        "R1: James strikes for 18 (1036 left)",
+        "James's gear absorbs 43.",
+        "R1: Absolution hits James for 16 (74 left)",
+        "R2: James strikes for 21 (1015 left)",
+        "James's gear absorbs 49.",
+        "R2: Absolution hits James for 17 (57 left)",
+        "James is losing — shouts for help! Nancy charges in!",
+        "R3: James stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Nancy strikes for 13 (1002 left)",
+        "Nancy's gear absorbs 21.",
+        "R3: Absolution hits Nancy for 36 (47 left)",
+        "James is still losing — shouts again! Felix charges in!",
+        "R4: James strikes for 21 (981 left)",
+        "R4: Nancy strikes for 14 (967 left)"
+      ]
+    }
+  ],
+  "armMeetings": [
+    {
+      "seed": 110104,
+      "day": 68,
+      "vid": "priya_nair",
+      "mid": "congregation",
+      "mHpStart": 1046,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 71,
+      "mDealt": 271,
+      "dmgShare": 0.25908221797323133,
+      "planParty": [
+        "oliver_moore",
+        "owen_smith",
+        "vasyl_shevchenko"
+      ],
+      "allyVids": [
+        "oliver_moore",
+        "owen_smith"
+      ],
+      "joiners": [
+        "oliver_moore",
+        "owen_smith"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "priya_nair": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "oliver_moore": {
+          "armed": true,
+          "armored": true,
+          "armorP": 54
+        },
+        "owen_smith": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 30.666666666666668,
+      "parsedStrikeTotal": 215,
+      "parsedAttributed": 215,
+      "dmgByVid": {
+        "priya_nair": 148,
+        "oliver_moore": 67
+      },
+      "fighterDmgShare": 0.6883720930232559,
+      "abilitiesPerMember": 3.6666666666666665,
+      "memberAbilities": {
+        "priya_nair": [
+          "green_whisper"
+        ],
+        "oliver_moore": [
+          "iron_stomach",
+          "purify",
+          "dowsing",
+          "fusion_reactor",
+          "cold_blooded"
+        ],
+        "owen_smith": [
+          "bloodhound",
+          "echo_location",
+          "rage",
+          "dowsing",
+          "water_breathing"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Priya walks straight into The Congregation. No avoiding it.",
+        "Priya sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed — it takes The Congregation for 13 (1033 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Congregation for 14 (1019 left).",
+        "Priya lowers the bow — The Congregation is on them now. (2/3 hit)",
+        "R1: Priya strikes for 35 (x1.3) (984 left)",
+        "Priya's gear absorbs 37.",
+        "R1: Absolution hits Priya for 15 (78 left)",
+        "R2: Priya strikes for 38 (x1.3) (946 left)",
+        "Priya's gear absorbs 49.",
+        "R2: Absolution hits Priya for 20 (58 left)",
+        "Priya is losing — shouts for help! Oliver charges in!",
+        "R3: Priya strikes for 40 (x1.3) (906 left)",
+        "R3: Oliver strikes for 33 (x1.3) (873 left)",
+        "Priya's gear absorbs 45.",
+        "R3: Absolution hits Priya for 19 (39 left)",
+        "Priya is still losing — shouts again! Owen charges in!",
+        "R4: Priya strikes for 35 (x1.3) (838 left)",
+        "R4: Oliver strikes for 34 (x1.3) (804 left)"
+      ]
+    },
+    {
+      "seed": 110105,
+      "day": 81,
+      "vid": "elif_demir",
+      "mid": "algorithm",
+      "mHpStart": 1059,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 13,
+      "vTaken": 69,
+      "mDealt": 742,
+      "dmgShare": 0.7006610009442871,
+      "planParty": [
+        "theo_lindqvist",
+        "gen_bjm0gzr",
+        "gen_4iqy3e0"
+      ],
+      "allyVids": [
+        "gen_4iqy3e0",
+        "gen_bjm0gzr"
+      ],
+      "joiners": [
+        "gen_4iqy3e0",
+        "gen_bjm0gzr"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "elif_demir": {
+          "armed": true,
+          "armored": true,
+          "armorP": 46
+        },
+        "gen_4iqy3e0": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "gen_bjm0gzr": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 26.666666666666668,
+      "parsedStrikeTotal": 163,
+      "parsedAttributed": 163,
+      "dmgByVid": {
+        "elif_demir": 101,
+        "gen_4iqy3e0": 38,
+        "gen_bjm0gzr": 24
+      },
+      "fighterDmgShare": 0.6196319018404908,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "elif_demir": [
+          "green_whisper"
+        ],
+        "gen_4iqy3e0": [
+          "green_whisper"
+        ],
+        "gen_bjm0gzr": [
+          "green_whisper",
+          "war_cry",
+          "echo_location",
+          "pyrokinesis",
+          "green_thumb"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Elif walks straight into The Algorithm. No avoiding it.",
+        "Elif sees The Algorithm coming and nocks an arrow — the fight opens at range (2 shots).",
+        "  loosed — it takes The Algorithm for 17 (1042 left).",
+        "  loosed — it takes The Algorithm for 19 (1023 left).",
+        "Elif lowers the bow — The Algorithm is on them now. (2/2 hit)",
+        "R1: Elif strikes for 26 (x1.2) (997 left)",
+        "Elif's gear absorbs 33.",
+        "R1: Recommended For You hits Elif for 7 (82 left)",
+        "Elif's gear absorbs 30.",
+        "R2: Recommended For You hits Elif for 6 (76 left)",
+        "R2: Elif strikes for 24 (x1.3) (973 left)",
+        "Elif is losing — shouts for help! Marta charges in!",
+        "Elif's gear absorbs 52.",
+        "R3: Engagement hits Elif for 11 (65 left)",
+        "R3: Elif strikes for 25 (x1.3) (948 left)",
+        "R3: Marta strikes for 19 (x1.3) (929 left)",
+        "Elif is still losing — shouts again! Taha charges in!",
+        "R4: Elif strikes for 26 (x1.2) (903 left)",
+        "R4: Marta strikes for 19 (x1.3) (884 left)",
+        "R4: Taha strikes for 24 (x1.3) (860 left)"
+      ]
+    },
+    {
+      "seed": 110105,
+      "day": 88,
+      "vid": "elif_demir",
+      "mid": "algorithm",
+      "mHpStart": 1040,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 5,
+      "vTaken": 27,
+      "mDealt": 196,
+      "dmgShare": 0.18846153846153846,
+      "planParty": [
+        "ingrid_vik",
+        "gen_bjm0gzr",
+        "theo_lindqvist"
+      ],
+      "allyVids": [
+        "gen_bjm0gzr",
+        "ingrid_vik"
+      ],
+      "joiners": [
+        "gen_bjm0gzr",
+        "ingrid_vik"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "elif_demir": {
+          "armed": true,
+          "armored": true,
+          "armorP": 46
+        },
+        "gen_bjm0gzr": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "ingrid_vik": {
+          "armed": true,
+          "armored": true,
+          "armorP": 83
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 48.666666666666664,
+      "parsedStrikeTotal": 140,
+      "parsedAttributed": 93,
+      "dmgByVid": {
+        "elif_demir": 58,
+        "ingrid_vik": 35
+      },
+      "fighterDmgShare": 0.4142857142857143,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "elif_demir": [
+          "green_whisper"
+        ],
+        "gen_bjm0gzr": [
+          "green_whisper",
+          "war_cry",
+          "echo_location",
+          "pyrokinesis",
+          "green_thumb"
+        ],
+        "ingrid_vik": [
+          "the_touch"
+        ]
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Elif walks straight into The Algorithm. No avoiding it.",
+        "Elif sees The Algorithm coming and nocks an arrow — the fight opens at range (2 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "Elif lowers the bow — The Algorithm is on them now. (0/2 hit)",
+        "R1: Elif stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Elif's gear absorbs 53.",
+        "R1: Engagement hits Elif for 11 (61 left)",
+        "Elif's gear absorbs 46.",
+        "R2: Recommended For You hits Elif for 9 (52 left)",
+        "R2: Elif strikes for 19 (1021 left)",
+        "Elif is losing — shouts for help! Taha charges in!",
+        "Taha's gear absorbs 29.",
+        "R3: Recommended For You hits Taha for 15 (14 left)",
+        "R3: Elif strikes for 21 (1000 left)",
+        "R3: Taha strikes for 24 (x1.3) (976 left)",
+        "Elif is still losing — shouts again! Ingrid charges in!",
+        "R4: Elif strikes for 18 (958 left)",
+        "R4: Taha strikes for 23 (x1.3) (935 left)",
+        "R4: Ingrid strikes for 35 (x1.3) (900 left)"
+      ]
+    },
+    {
+      "seed": 110105,
+      "day": 90,
+      "vid": "lucas_brown",
+      "mid": "strike",
+      "mHpStart": 1146,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 58,
+      "mDealt": 179,
+      "dmgShare": 0.156195462478185,
+      "planParty": [
+        "elif_demir",
+        "theo_lindqvist",
+        "ingrid_vik"
+      ],
+      "allyVids": [
+        "elif_demir",
+        "ingrid_vik"
+      ],
+      "joiners": [
+        "elif_demir",
+        "ingrid_vik"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "lucas_brown": {
+          "armed": true,
+          "armored": true,
+          "armorP": 39
+        },
+        "elif_demir": {
+          "armed": true,
+          "armored": true,
+          "armorP": 46
+        },
+        "ingrid_vik": {
+          "armed": true,
+          "armored": true,
+          "armorP": 83
+        }
+      },
+      "minArmorP": 39,
+      "meanArmorP": 56,
+      "parsedStrikeTotal": 58,
+      "parsedAttributed": 58,
+      "dmgByVid": {
+        "lucas_brown": 39,
+        "elif_demir": 19
+      },
+      "fighterDmgShare": 0.6724137931034483,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "lucas_brown": [
+          "beast_calm"
+        ],
+        "elif_demir": [
+          "green_whisper",
+          "echo_location"
+        ],
+        "ingrid_vik": [
+          "the_touch",
+          "war_cry",
+          "echo_location",
+          "purify"
+        ]
+      },
+      "abilityTokens": [
+        "Walk In",
+        "Peacemaker"
+      ],
+      "log": [
+        "Lucas walks straight into The Strike. No avoiding it.",
+        "Lucas sees The Strike coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed — it takes The Strike for 17 (1129 left).",
+        "  loosed — it takes The Strike for 18 (1111 left).",
+        "  loosed — it takes The Strike for 19 (1092 left).",
+        "Lucas lowers the bow — The Strike is on them now. (3/3 hit)",
+        "R1: Lucas walks in open-handed — and it goes wrong. It doesn't want peace. They're exposed, off-balance. (Walk In — failed)",
+        "  still off-balance from the failed parley, Lucas takes it worse. (Peacemaker — exposed)",
+        "Lucas's gear absorbs 79.",
+        "R1: Walkout hits Lucas for 19 (72 left)",
+        "R2: Lucas strikes for 21 (1071 left)",
+        "Lucas's gear absorbs 68.",
+        "R2: Walkout hits Lucas for 16 (56 left)",
+        "Lucas is losing — shouts for help! Elif charges in!",
+        "R3: Lucas strikes for 18 (1053 left)",
+        "R3: Elif strikes for 19 (1034 left)",
+        "Lucas steps into the blow meant for Elif. Not them.",
+        "Lucas's gear absorbs 27.",
+        "R3: Slowdown hits Lucas for 7 (49 left)",
+        "Lucas is still losing — shouts again! Ingrid charges in!"
+      ]
+    },
+    {
+      "seed": 110105,
+      "day": 92,
+      "vid": "theo_lindqvist",
+      "mid": "reunion",
+      "mHpStart": 1342,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 7,
+      "vTaken": 96,
+      "mDealt": 148,
+      "dmgShare": 0.11028315946348734,
+      "planParty": [
+        "gen_4iqy3e0",
+        "elif_demir",
+        "ingrid_vik"
+      ],
+      "allyVids": [
+        "elif_demir",
+        "gen_4iqy3e0"
+      ],
+      "joiners": [
+        "elif_demir"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 42
+        },
+        "elif_demir": {
+          "armed": true,
+          "armored": true,
+          "armorP": 46
+        },
+        "gen_4iqy3e0": {
+          "armed": true,
+          "armored": true,
+          "armorP": 27
+        },
+        "ingrid_vik": {
+          "armed": true,
+          "armored": true,
+          "armorP": 83
+        }
+      },
+      "minArmorP": 27,
+      "meanArmorP": 38.333333333333336,
+      "parsedStrikeTotal": 120,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 1.6666666666666667,
+      "memberAbilities": {
+        "theo_lindqvist": [],
+        "elif_demir": [
+          "green_whisper",
+          "echo_location"
+        ],
+        "gen_4iqy3e0": [
+          "green_whisper",
+          "green_thumb",
+          "pyrokinesis"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Theo sees Loud-Eyes coming and nocks an arrow — the fight opens at range (2 shots).",
+        "  loosed — it takes Loud-Eyes for 15 (1327 left).",
+        "  loosed — it takes Loud-Eyes for 13 (1314 left).",
+        "Theo lowers the bow — Loud-Eyes is on them now. (2/2 hit)",
+        "R1: Theo strikes for 34 (stalker's opening +4) (x1.3) (1280 left)",
+        "Theo's gear absorbs 58.",
+        "R1: Your Move hits Theo for 15 (79 left)",
+        "R2: Theo strikes for 30 (x1.3) (1250 left)",
+        "Theo's gear absorbs 52.",
+        "R2: Your Move hits Theo for 13 (66 left)",
+        "Theo holds the line — they know how this one is fought, and have not had their turn to prove it.",
+        "R3: Theo does something they have never done — stands on one foot and recites a poem mid-fight. The Reunion falters; it has nothing to wear. (Novelty.)",
+        "Theo's gear absorbs 49.",
+        "R3: Your Move hits Theo for 13 (53 left)",
+        "Theo holds the line — working the trick, not the damage race.",
+        "R4: Theo strikes for 30 (x1.3) (1220 left)",
+        "Theo's gear absorbs 56.",
+        "R4: Your Move hits Theo for 14 (39 left)",
+        "Theo holds the line — working the trick, not the damage race.",
+        "R5: Theo strikes for 26 (x1.2) (1194 left)"
+      ]
+    }
+  ],
+  "ctlPairMeetings": [
+    {
+      "seed": 110105,
+      "day": 55,
+      "vid": "gen_uxqdrs9",
+      "mid": "eulogy",
+      "mHpStart": 944,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 6,
+      "vTaken": 75,
+      "mDealt": 517,
+      "dmgShare": 0.5476694915254238,
+      "planParty": [
+        "ethan_hunt"
+      ],
+      "allyVids": [
+        "theo_lindqvist",
+        "ethan_hunt"
+      ],
+      "joiners": [
+        "theo_lindqvist",
+        "ethan_hunt"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_uxqdrs9": {
+          "armed": true,
+          "armored": true,
+          "armorP": 18
+        },
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        },
+        "ethan_hunt": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        }
+      },
+      "minArmorP": 18,
+      "meanArmorP": 22,
+      "parsedStrikeTotal": 163,
+      "parsedAttributed": 163,
+      "dmgByVid": {
+        "gen_uxqdrs9": 133,
+        "theo_lindqvist": 30
+      },
+      "fighterDmgShare": 0.8159509202453987,
+      "abilitiesPerMember": 2,
+      "memberAbilities": {
+        "gen_uxqdrs9": [
+          "the_touch",
+          "echo_location",
+          "green_whisper"
+        ],
+        "theo_lindqvist": [],
+        "ethan_hunt": [
+          "beast_calm",
+          "echo_location",
+          "dowsing"
+        ]
+      },
+      "abilityTokens": [
+        "Rage",
+        "field medicine"
+      ],
+      "log": [
+        "Booker walks straight into The Eulogy. No avoiding it.",
+        "Booker sees The Eulogy coming and whirls the Phase sling — the fight opens at range (4 shots).",
+        "  loosed wide — the stone skips away into the dirt. (spent)",
+        "  loosed — the stone takes The Eulogy for 24 (920 left).",
+        "  loosed — the stone takes The Eulogy for 23 (897 left).",
+        "  loosed — the stone takes The Eulogy for 24 (873 left).",
+        "Booker lowers the Phase sling — The Eulogy is on them now. (3/4 hit)",
+        "R1: Booker's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "Booker's gear absorbs 34.",
+        "R1: Final Chapter hits Booker for 16 (71 left)",
+        "R2: Booker strikes for 63 (x2.5) (810 left)",
+        "Booker's gear absorbs 41.",
+        "R2: Final Chapter hits Booker for 20 (51 left)",
+        "Booker is losing — shouts for help! Theo charges in!",
+        "R3: Booker stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Theo strikes for 30 (x1.3) (780 left)",
+        "Booker's gear absorbs 44.",
+        "R3: Final Chapter hits Booker for 21 (50 left)",
+        "Booker is still losing — shouts again! Ethan charges in!",
+        "R4: Booker strikes for 70 (x2.5) (710 left)"
+      ]
+    },
+    {
+      "seed": 110107,
+      "day": 49,
+      "vid": "james_okonkwo",
+      "mid": "congregation",
+      "mHpStart": 1072,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 6,
+      "vTaken": 65,
+      "mDealt": 250,
+      "dmgShare": 0.2332089552238806,
+      "planParty": [
+        "gen_5rfxvpn",
+        "gen_bqesy8u",
+        "gen_s1hqd4w"
+      ],
+      "allyVids": [
+        "gen_s1hqd4w",
+        "gen_bqesy8u"
+      ],
+      "joiners": [
+        "gen_s1hqd4w",
+        "gen_bqesy8u"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "james_okonkwo": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        },
+        "gen_s1hqd4w": {
+          "armed": true,
+          "armored": true,
+          "armorP": 5
+        },
+        "gen_bqesy8u": {
+          "armed": true,
+          "armored": true,
+          "armorP": 32
+        }
+      },
+      "minArmorP": 5,
+      "meanArmorP": 20.333333333333332,
+      "parsedStrikeTotal": 87,
+      "parsedAttributed": 87,
+      "dmgByVid": {
+        "james_okonkwo": 60,
+        "gen_s1hqd4w": 27
+      },
+      "fighterDmgShare": 0.6896551724137931,
+      "abilitiesPerMember": 1,
+      "memberAbilities": {
+        "james_okonkwo": [],
+        "gen_s1hqd4w": [
+          "green_whisper"
+        ],
+        "gen_bqesy8u": [
+          "the_touch",
+          "lucky_rock"
+        ]
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "James walks straight into The Congregation. No avoiding it.",
+        "James sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Congregation for 18 (1054 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "James lowers the bow — The Congregation is on them now. (1/3 hit)",
+        "R1: James strikes for 18 (1036 left)",
+        "James's gear absorbs 43.",
+        "R1: Absolution hits James for 16 (74 left)",
+        "R2: James strikes for 21 (1015 left)",
+        "James's gear absorbs 49.",
+        "R2: Absolution hits James for 17 (57 left)",
+        "James is losing — shouts for help! Nancy charges in!",
+        "R3: James stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Nancy strikes for 13 (1002 left)",
+        "Nancy's gear absorbs 21.",
+        "R3: Absolution hits Nancy for 36 (47 left)",
+        "James is still losing — shouts again! Felix charges in!",
+        "R4: James strikes for 21 (981 left)",
+        "R4: Nancy strikes for 14 (967 left)"
+      ]
+    },
+    {
+      "seed": 110108,
+      "day": 135,
+      "vid": "thabo_maseko",
+      "mid": "strike",
+      "mHpStart": 1178,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 38,
+      "mDealt": 122,
+      "dmgShare": 0.1035653650254669,
+      "planParty": [
+        "hannah_kim"
+      ],
+      "allyVids": [
+        "jesse_cortez",
+        "hannah_kim"
+      ],
+      "joiners": [
+        "jesse_cortez",
+        "hannah_kim"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "thabo_maseko": {
+          "armed": true,
+          "armored": true,
+          "armorP": 42
+        },
+        "jesse_cortez": {
+          "armed": true,
+          "armored": true,
+          "armorP": 45
+        },
+        "hannah_kim": {
+          "armed": true,
+          "armored": true,
+          "armorP": 19
+        }
+      },
+      "minArmorP": 19,
+      "meanArmorP": 35.333333333333336,
+      "parsedStrikeTotal": 122,
+      "parsedAttributed": 122,
+      "dmgByVid": {
+        "thabo_maseko": 74,
+        "jesse_cortez": 25,
+        "hannah_kim": 23
+      },
+      "fighterDmgShare": 0.6065573770491803,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "thabo_maseko": [
+          "green_whisper",
+          "green_thumb",
+          "loud_chewer",
+          "cornucopia"
+        ],
+        "jesse_cortez": [
+          "iron_stomach",
+          "green_whisper"
+        ],
+        "hannah_kim": [
+          "beast_calm"
+        ]
+      },
+      "abilityTokens": [
+        "Rage"
+      ],
+      "log": [
+        "Thabo walks straight into The Loud Beast. No avoiding it.",
+        "R1: Thabo's eyes go red. Next 3 strikes hit twice as hard. (Rage) [Thabo — Gardener of the Living Garden]",
+        "Thabo's gear absorbs 53.",
+        "R1: Walkout hits Thabo for 12 (51 left)",
+        "R2: Thabo strikes for 22 (x2.0) (1156 left)",
+        "Thabo's gear absorbs 64.",
+        "R2: Walkout hits Thabo for 14 (37 left)",
+        "Thabo is losing — shouts for help! Jesse charges in!",
+        "R3: Thabo strikes for 28 (x2.0) (1128 left)",
+        "R3: Jesse strikes for 13 (1115 left)",
+        "Thabo's gear absorbs 55.",
+        "R3: Walkout hits Thabo for 12 (25 left)",
+        "Thabo is still losing — shouts again! Hannah charges in!",
+        "R4: Thabo strikes for 24 (x2.0) (1091 left)",
+        "R4: Jesse strikes for 12 (1079 left)",
+        "R4: Hannah strikes for 23 (1056 left)",
+        "Hannah's gear absorbs 46.",
+        "R4: Walkout hits Hannah for 23 (5 left)",
+        "Thabo sees how this ends — and runs while running still works."
+      ]
+    }
+  ],
+  "armPairMeetings": [
+    {
+      "seed": 110104,
+      "day": 47,
+      "vid": "gen_r8jof6k",
+      "mid": "influencer",
+      "mHpStart": 883,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 63,
+      "mDealt": 20,
+      "dmgShare": 0.022650056625141562,
+      "planParty": [
+        "gen_00yaw31"
+      ],
+      "allyVids": [
+        "gen_00yaw31",
+        "gen_vsflsox"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_r8jof6k": {
+          "armed": true,
+          "armored": true,
+          "armorP": 5
+        },
+        "gen_00yaw31": {
+          "armed": true,
+          "armored": true,
+          "armorP": 12
+        },
+        "gen_vsflsox": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 5,
+      "meanArmorP": 11.333333333333334,
+      "parsedStrikeTotal": 20,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 3,
+      "memberAbilities": {
+        "gen_r8jof6k": [
+          "beast_calm",
+          "lucky_rock",
+          "night_eyes"
+        ],
+        "gen_00yaw31": [
+          "green_whisper",
+          "scream_cheese"
+        ],
+        "gen_vsflsox": [
+          "night_eyes",
+          "lucky_rock",
+          "trophy_room",
+          "bird_whisperer"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Simone walks straight into The Influencer. No avoiding it.",
+        "Simone has Bow but no arrows — the string stays drawn, useless.",
+        "Simone's gear absorbs 17.",
+        "R1: Ratio hits Simone for 26 (15 left)",
+        "R1: Simone strikes for 20 (863 left)",
+        "Simone's gear absorbs 23.",
+        "R2: Ratio hits Simone for 37 (0 left)"
+      ]
+    },
+    {
+      "seed": 110104,
+      "day": 53,
+      "vid": "gen_00yaw31",
+      "mid": "congregation",
+      "mHpStart": 1086,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 3,
+      "vTaken": 78,
+      "mDealt": 62,
+      "dmgShare": 0.0570902394106814,
+      "planParty": [
+        "owen_smith"
+      ],
+      "allyVids": [
+        "owen_smith",
+        "gen_vsflsox"
+      ],
+      "joiners": [
+        "owen_smith",
+        "gen_vsflsox"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_00yaw31": {
+          "armed": true,
+          "armored": true,
+          "armorP": 12
+        },
+        "owen_smith": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "gen_vsflsox": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 12,
+      "meanArmorP": 15.333333333333334,
+      "parsedStrikeTotal": 62,
+      "parsedAttributed": 62,
+      "dmgByVid": {
+        "gen_00yaw31": 39,
+        "owen_smith": 23
+      },
+      "fighterDmgShare": 0.6290322580645161,
+      "abilitiesPerMember": 3,
+      "memberAbilities": {
+        "gen_00yaw31": [
+          "green_whisper",
+          "scream_cheese"
+        ],
+        "owen_smith": [
+          "bloodhound",
+          "echo_location",
+          "rage"
+        ],
+        "gen_vsflsox": [
+          "night_eyes",
+          "lucky_rock",
+          "trophy_room",
+          "bird_whisperer"
+        ]
+      },
+      "abilityTokens": [
+        "Scream Cheese"
+      ],
+      "log": [
+        "Connor walks straight into The Congregation. No avoiding it.",
+        "R1: Connor strikes for 13 (1073 left)",
+        "Connor's gear absorbs 39.",
+        "R1: Absolution hits Connor for 28 (62 left)",
+        "R2: Connor strikes for 13 (1060 left)",
+        "Connor's gear absorbs 30.",
+        "R2: Absolution hits Connor for 22 (40 left)",
+        "Connor is losing — shouts for help! Owen charges in!",
+        "R3: Connor strikes for 13 (1047 left)",
+        "R3: Owen strikes for 23 (1024 left)",
+        "Connor's gear absorbs 40.",
+        "R3: Absolution hits Connor for 28 (12 left)",
+        "Connor is still losing — shouts again! Keisha charges in!",
+        "Connor SCREAMS — the milk is cheese now! The Congregation reels, dizzy. (Scream Cheese)",
+        "Owen answered Connor's shout, but Connor is past holding — they run while running still works."
+      ]
+    },
+    {
+      "seed": 110104,
+      "day": 56,
+      "vid": "owen_smith",
+      "mid": "strike",
+      "mHpStart": 1140,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 54,
+      "mDealt": 201,
+      "dmgShare": 0.1763157894736842,
+      "planParty": [
+        "gen_00yaw31"
+      ],
+      "allyVids": [
+        "gen_00yaw31",
+        "gen_n8cvww6"
+      ],
+      "joiners": [
+        "gen_00yaw31",
+        "gen_n8cvww6"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "owen_smith": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "gen_00yaw31": {
+          "armed": true,
+          "armored": true,
+          "armorP": 12
+        },
+        "gen_n8cvww6": {
+          "armed": true,
+          "armored": true,
+          "armorP": 27
+        }
+      },
+      "minArmorP": 12,
+      "meanArmorP": 18.666666666666668,
+      "parsedStrikeTotal": 201,
+      "parsedAttributed": 201,
+      "dmgByVid": {
+        "owen_smith": 188,
+        "gen_n8cvww6": 13
+      },
+      "fighterDmgShare": 0.9353233830845771,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "owen_smith": [
+          "bloodhound",
+          "echo_location",
+          "rage"
+        ],
+        "gen_00yaw31": [
+          "green_whisper",
+          "scream_cheese"
+        ],
+        "gen_n8cvww6": [
+          "the_touch",
+          "purify"
+        ]
+      },
+      "abilityTokens": [
+        "Rage"
+      ],
+      "log": [
+        "Owen walks straight into The Strike. No avoiding it.",
+        "Owen's gear absorbs 52.",
+        "R1: Walkout hits Owen for 28 (46 left)",
+        "R1: Owen's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "R2: Owen strikes for 60 (x2.5) (1080 left)",
+        "Owen's gear absorbs 49.",
+        "R2: Walkout hits Owen for 26 (20 left)",
+        "Owen is losing — shouts for help! Connor charges in!",
+        "Connor's gear absorbs 20.",
+        "R3: Slowdown hits Connor for 15 (0 left)",
+        "Connor goes down!",
+        "R3: Owen strikes for 63 (x2.5) (1017 left)",
+        "Owen is still losing — shouts again! Antônio charges in!",
+        "Antônio's gear absorbs 58.",
+        "R4: Walkout hits Antônio for 20 (75 left)",
+        "R4: Owen strikes for 65 (x2.5) (952 left)",
+        "R4: Antônio strikes for 13 (x1.3) (939 left)",
+        "Owen sees how this ends — and runs while running still works."
+      ]
+    },
+    {
+      "seed": 110104,
+      "day": 68,
+      "vid": "priya_nair",
+      "mid": "congregation",
+      "mHpStart": 1046,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 71,
+      "mDealt": 271,
+      "dmgShare": 0.25908221797323133,
+      "planParty": [
+        "oliver_moore",
+        "owen_smith",
+        "vasyl_shevchenko"
+      ],
+      "allyVids": [
+        "oliver_moore",
+        "owen_smith"
+      ],
+      "joiners": [
+        "oliver_moore",
+        "owen_smith"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "priya_nair": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "oliver_moore": {
+          "armed": true,
+          "armored": true,
+          "armorP": 54
+        },
+        "owen_smith": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 30.666666666666668,
+      "parsedStrikeTotal": 215,
+      "parsedAttributed": 215,
+      "dmgByVid": {
+        "priya_nair": 148,
+        "oliver_moore": 67
+      },
+      "fighterDmgShare": 0.6883720930232559,
+      "abilitiesPerMember": 3.6666666666666665,
+      "memberAbilities": {
+        "priya_nair": [
+          "green_whisper"
+        ],
+        "oliver_moore": [
+          "iron_stomach",
+          "purify",
+          "dowsing",
+          "fusion_reactor",
+          "cold_blooded"
+        ],
+        "owen_smith": [
+          "bloodhound",
+          "echo_location",
+          "rage",
+          "dowsing",
+          "water_breathing"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Priya walks straight into The Congregation. No avoiding it.",
+        "Priya sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed — it takes The Congregation for 13 (1033 left).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed — it takes The Congregation for 14 (1019 left).",
+        "Priya lowers the bow — The Congregation is on them now. (2/3 hit)",
+        "R1: Priya strikes for 35 (x1.3) (984 left)",
+        "Priya's gear absorbs 37.",
+        "R1: Absolution hits Priya for 15 (78 left)",
+        "R2: Priya strikes for 38 (x1.3) (946 left)",
+        "Priya's gear absorbs 49.",
+        "R2: Absolution hits Priya for 20 (58 left)",
+        "Priya is losing — shouts for help! Oliver charges in!",
+        "R3: Priya strikes for 40 (x1.3) (906 left)",
+        "R3: Oliver strikes for 33 (x1.3) (873 left)",
+        "Priya's gear absorbs 45.",
+        "R3: Absolution hits Priya for 19 (39 left)",
+        "Priya is still losing — shouts again! Owen charges in!",
+        "R4: Priya strikes for 35 (x1.3) (838 left)",
+        "R4: Oliver strikes for 34 (x1.3) (804 left)"
+      ]
+    },
+    {
+      "seed": 110105,
+      "day": 81,
+      "vid": "elif_demir",
+      "mid": "algorithm",
+      "mHpStart": 1059,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 13,
+      "vTaken": 69,
+      "mDealt": 742,
+      "dmgShare": 0.7006610009442871,
+      "planParty": [
+        "theo_lindqvist",
+        "gen_bjm0gzr",
+        "gen_4iqy3e0"
+      ],
+      "allyVids": [
+        "gen_4iqy3e0",
+        "gen_bjm0gzr"
+      ],
+      "joiners": [
+        "gen_4iqy3e0",
+        "gen_bjm0gzr"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "elif_demir": {
+          "armed": true,
+          "armored": true,
+          "armorP": 46
+        },
+        "gen_4iqy3e0": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "gen_bjm0gzr": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 26.666666666666668,
+      "parsedStrikeTotal": 163,
+      "parsedAttributed": 163,
+      "dmgByVid": {
+        "elif_demir": 101,
+        "gen_4iqy3e0": 38,
+        "gen_bjm0gzr": 24
+      },
+      "fighterDmgShare": 0.6196319018404908,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "elif_demir": [
+          "green_whisper"
+        ],
+        "gen_4iqy3e0": [
+          "green_whisper"
+        ],
+        "gen_bjm0gzr": [
+          "green_whisper",
+          "war_cry",
+          "echo_location",
+          "pyrokinesis",
+          "green_thumb"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Elif walks straight into The Algorithm. No avoiding it.",
+        "Elif sees The Algorithm coming and nocks an arrow — the fight opens at range (2 shots).",
+        "  loosed — it takes The Algorithm for 17 (1042 left).",
+        "  loosed — it takes The Algorithm for 19 (1023 left).",
+        "Elif lowers the bow — The Algorithm is on them now. (2/2 hit)",
+        "R1: Elif strikes for 26 (x1.2) (997 left)",
+        "Elif's gear absorbs 33.",
+        "R1: Recommended For You hits Elif for 7 (82 left)",
+        "Elif's gear absorbs 30.",
+        "R2: Recommended For You hits Elif for 6 (76 left)",
+        "R2: Elif strikes for 24 (x1.3) (973 left)",
+        "Elif is losing — shouts for help! Marta charges in!",
+        "Elif's gear absorbs 52.",
+        "R3: Engagement hits Elif for 11 (65 left)",
+        "R3: Elif strikes for 25 (x1.3) (948 left)",
+        "R3: Marta strikes for 19 (x1.3) (929 left)",
+        "Elif is still losing — shouts again! Taha charges in!",
+        "R4: Elif strikes for 26 (x1.2) (903 left)",
+        "R4: Marta strikes for 19 (x1.3) (884 left)",
+        "R4: Taha strikes for 24 (x1.3) (860 left)"
+      ]
+    },
+    {
+      "seed": 110105,
+      "day": 88,
+      "vid": "elif_demir",
+      "mid": "algorithm",
+      "mHpStart": 1040,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 5,
+      "vTaken": 27,
+      "mDealt": 196,
+      "dmgShare": 0.18846153846153846,
+      "planParty": [
+        "ingrid_vik",
+        "gen_bjm0gzr",
+        "theo_lindqvist"
+      ],
+      "allyVids": [
+        "gen_bjm0gzr",
+        "ingrid_vik"
+      ],
+      "joiners": [
+        "gen_bjm0gzr",
+        "ingrid_vik"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "elif_demir": {
+          "armed": true,
+          "armored": true,
+          "armorP": 46
+        },
+        "gen_bjm0gzr": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "ingrid_vik": {
+          "armed": true,
+          "armored": true,
+          "armorP": 83
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 48.666666666666664,
+      "parsedStrikeTotal": 140,
+      "parsedAttributed": 93,
+      "dmgByVid": {
+        "elif_demir": 58,
+        "ingrid_vik": 35
+      },
+      "fighterDmgShare": 0.4142857142857143,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "elif_demir": [
+          "green_whisper"
+        ],
+        "gen_bjm0gzr": [
+          "green_whisper",
+          "war_cry",
+          "echo_location",
+          "pyrokinesis",
+          "green_thumb"
+        ],
+        "ingrid_vik": [
+          "the_touch"
+        ]
+      },
+      "abilityTokens": [
+        "field medicine"
+      ],
+      "log": [
+        "Elif walks straight into The Algorithm. No avoiding it.",
+        "Elif sees The Algorithm coming and nocks an arrow — the fight opens at range (2 shots).",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "  loosed wide — the arrow buries itself in the dirt. (spent)",
+        "Elif lowers the bow — The Algorithm is on them now. (0/2 hit)",
+        "R1: Elif stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "Elif's gear absorbs 53.",
+        "R1: Engagement hits Elif for 11 (61 left)",
+        "Elif's gear absorbs 46.",
+        "R2: Recommended For You hits Elif for 9 (52 left)",
+        "R2: Elif strikes for 19 (1021 left)",
+        "Elif is losing — shouts for help! Taha charges in!",
+        "Taha's gear absorbs 29.",
+        "R3: Recommended For You hits Taha for 15 (14 left)",
+        "R3: Elif strikes for 21 (1000 left)",
+        "R3: Taha strikes for 24 (x1.3) (976 left)",
+        "Elif is still losing — shouts again! Ingrid charges in!",
+        "R4: Elif strikes for 18 (958 left)",
+        "R4: Taha strikes for 23 (x1.3) (935 left)",
+        "R4: Ingrid strikes for 35 (x1.3) (900 left)"
+      ]
+    },
+    {
+      "seed": 110105,
+      "day": 90,
+      "vid": "lucas_brown",
+      "mid": "strike",
+      "mHpStart": 1146,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 58,
+      "mDealt": 179,
+      "dmgShare": 0.156195462478185,
+      "planParty": [
+        "elif_demir",
+        "theo_lindqvist",
+        "ingrid_vik"
+      ],
+      "allyVids": [
+        "elif_demir",
+        "ingrid_vik"
+      ],
+      "joiners": [
+        "elif_demir",
+        "ingrid_vik"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "lucas_brown": {
+          "armed": true,
+          "armored": true,
+          "armorP": 39
+        },
+        "elif_demir": {
+          "armed": true,
+          "armored": true,
+          "armorP": 46
+        },
+        "ingrid_vik": {
+          "armed": true,
+          "armored": true,
+          "armorP": 83
+        }
+      },
+      "minArmorP": 39,
+      "meanArmorP": 56,
+      "parsedStrikeTotal": 58,
+      "parsedAttributed": 58,
+      "dmgByVid": {
+        "lucas_brown": 39,
+        "elif_demir": 19
+      },
+      "fighterDmgShare": 0.6724137931034483,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "lucas_brown": [
+          "beast_calm"
+        ],
+        "elif_demir": [
+          "green_whisper",
+          "echo_location"
+        ],
+        "ingrid_vik": [
+          "the_touch",
+          "war_cry",
+          "echo_location",
+          "purify"
+        ]
+      },
+      "abilityTokens": [
+        "Walk In",
+        "Peacemaker"
+      ],
+      "log": [
+        "Lucas walks straight into The Strike. No avoiding it.",
+        "Lucas sees The Strike coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed — it takes The Strike for 17 (1129 left).",
+        "  loosed — it takes The Strike for 18 (1111 left).",
+        "  loosed — it takes The Strike for 19 (1092 left).",
+        "Lucas lowers the bow — The Strike is on them now. (3/3 hit)",
+        "R1: Lucas walks in open-handed — and it goes wrong. It doesn't want peace. They're exposed, off-balance. (Walk In — failed)",
+        "  still off-balance from the failed parley, Lucas takes it worse. (Peacemaker — exposed)",
+        "Lucas's gear absorbs 79.",
+        "R1: Walkout hits Lucas for 19 (72 left)",
+        "R2: Lucas strikes for 21 (1071 left)",
+        "Lucas's gear absorbs 68.",
+        "R2: Walkout hits Lucas for 16 (56 left)",
+        "Lucas is losing — shouts for help! Elif charges in!",
+        "R3: Lucas strikes for 18 (1053 left)",
+        "R3: Elif strikes for 19 (1034 left)",
+        "Lucas steps into the blow meant for Elif. Not them.",
+        "Lucas's gear absorbs 27.",
+        "R3: Slowdown hits Lucas for 7 (49 left)",
+        "Lucas is still losing — shouts again! Ingrid charges in!"
+      ]
+    },
+    {
+      "seed": 110105,
+      "day": 92,
+      "vid": "theo_lindqvist",
+      "mid": "reunion",
+      "mHpStart": 1342,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 7,
+      "vTaken": 96,
+      "mDealt": 148,
+      "dmgShare": 0.11028315946348734,
+      "planParty": [
+        "gen_4iqy3e0",
+        "elif_demir",
+        "ingrid_vik"
+      ],
+      "allyVids": [
+        "elif_demir",
+        "gen_4iqy3e0"
+      ],
+      "joiners": [
+        "elif_demir"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "seek",
+        "reason": "seek",
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "theo_lindqvist": {
+          "armed": true,
+          "armored": true,
+          "armorP": 42
+        },
+        "elif_demir": {
+          "armed": true,
+          "armored": true,
+          "armorP": 46
+        },
+        "gen_4iqy3e0": {
+          "armed": true,
+          "armored": true,
+          "armorP": 27
+        },
+        "ingrid_vik": {
+          "armed": true,
+          "armored": true,
+          "armorP": 83
+        }
+      },
+      "minArmorP": 27,
+      "meanArmorP": 38.333333333333336,
+      "parsedStrikeTotal": 120,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 1.6666666666666667,
+      "memberAbilities": {
+        "theo_lindqvist": [],
+        "elif_demir": [
+          "green_whisper",
+          "echo_location"
+        ],
+        "gen_4iqy3e0": [
+          "green_whisper",
+          "green_thumb",
+          "pyrokinesis"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Theo sees Loud-Eyes coming and nocks an arrow — the fight opens at range (2 shots).",
+        "  loosed — it takes Loud-Eyes for 15 (1327 left).",
+        "  loosed — it takes Loud-Eyes for 13 (1314 left).",
+        "Theo lowers the bow — Loud-Eyes is on them now. (2/2 hit)",
+        "R1: Theo strikes for 34 (stalker's opening +4) (x1.3) (1280 left)",
+        "Theo's gear absorbs 58.",
+        "R1: Your Move hits Theo for 15 (79 left)",
+        "R2: Theo strikes for 30 (x1.3) (1250 left)",
+        "Theo's gear absorbs 52.",
+        "R2: Your Move hits Theo for 13 (66 left)",
+        "Theo holds the line — they know how this one is fought, and have not had their turn to prove it.",
+        "R3: Theo does something they have never done — stands on one foot and recites a poem mid-fight. The Reunion falters; it has nothing to wear. (Novelty.)",
+        "Theo's gear absorbs 49.",
+        "R3: Your Move hits Theo for 13 (53 left)",
+        "Theo holds the line — working the trick, not the damage race.",
+        "R4: Theo strikes for 30 (x1.3) (1220 left)",
+        "Theo's gear absorbs 56.",
+        "R4: Your Move hits Theo for 14 (39 left)",
+        "Theo holds the line — working the trick, not the damage race.",
+        "R5: Theo strikes for 26 (x1.2) (1194 left)"
+      ]
+    },
+    {
+      "seed": 110106,
+      "day": 53,
+      "vid": "gen_hkx6t87",
+      "mid": "congregation",
+      "mHpStart": 1087,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 2,
+      "vTaken": 53,
+      "mDealt": 75,
+      "dmgShare": 0.06899724011039558,
+      "planParty": [
+        "jovan_milic"
+      ],
+      "allyVids": [
+        "jovan_milic",
+        "gen_dbkxtwh"
+      ],
+      "joiners": [
+        "jovan_milic"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_hkx6t87": {
+          "armed": true,
+          "armored": true,
+          "armorP": 15
+        },
+        "jovan_milic": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        },
+        "gen_dbkxtwh": {
+          "armed": true,
+          "armored": true,
+          "armorP": 15
+        }
+      },
+      "minArmorP": 15,
+      "meanArmorP": 22.333333333333332,
+      "parsedStrikeTotal": 22,
+      "parsedAttributed": 22,
+      "dmgByVid": {
+        "gen_hkx6t87": 22
+      },
+      "fighterDmgShare": 1,
+      "abilitiesPerMember": 2,
+      "memberAbilities": {
+        "gen_hkx6t87": [
+          "beast_calm"
+        ],
+        "jovan_milic": [
+          "green_whisper",
+          "green_thumb"
+        ],
+        "gen_dbkxtwh": [
+          "bloodhound",
+          "lucky_rock",
+          "beast_calm"
+        ]
+      },
+      "abilityTokens": [
+        "Walk In",
+        "Peacemaker",
+        "Scream Cheese"
+      ],
+      "log": [
+        "Matilda walks straight into The Congregation. No avoiding it.",
+        "Matilda sees The Congregation coming and nocks an arrow — the fight opens at range (3 shots).",
+        "  loosed — it takes The Congregation for 18 (1069 left).",
+        "  loosed — it takes The Congregation for 19 (1050 left).",
+        "  loosed — it takes The Congregation for 16 (1034 left).",
+        "Matilda lowers the bow — The Congregation is on them now. (3/3 hit)",
+        "R1: Matilda walks in open-handed — and it goes wrong. It doesn't want peace. They're exposed, off-balance. (Walk In — failed)",
+        "  still off-balance from the failed parley, Matilda takes it worse. (Peacemaker — exposed)",
+        "Matilda's gear absorbs 55.",
+        "R1: Absolution hits Matilda for 31 (42 left)",
+        "R2: Matilda strikes for 22 (1012 left)",
+        "Matilda's gear absorbs 38.",
+        "R2: Absolution hits Matilda for 22 (20 left)",
+        "Matilda is losing — shouts for help! Jovan charges in!",
+        "Matilda SCREAMS — the milk is cheese now! The Congregation reels, dizzy. (Scream Cheese)",
+        "Jovan answered Matilda's shout, but Matilda is past holding — they run while running still works."
+      ]
+    }
+  ]
+}
