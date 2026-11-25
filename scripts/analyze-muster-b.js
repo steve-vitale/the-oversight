@@ -61,7 +61,7 @@ function summarizeArm(pair) {
   s.readyEver = !!(best && best.gate >= 10);
   s.traceDays = (rec.dailyTrace || []).length;
   s.attemptCount = rec.attemptCount || 0;
-  const heraldAttempts = (rec.attempts || []).filter(function (a) { return a.mid === 'herald'; });
+  const heraldAttempts = (rec.attempts || []); // driver already filters to herald-only
   s.heraldAttempts = heraldAttempts.length;
   s.heraldFought = heraldAttempts.filter(function (a) { return a.cls === 'FOUGHT'; }).length;
   s.heraldRefused = heraldAttempts.filter(function (a) { return a.cls === 'REFUSED'; }).length;
@@ -118,6 +118,12 @@ function main() {
   const ctl = ctlRecs.map(summarizeControl);
   const heraldSeeds = arm.filter(function (s) { return s.heraldMeeting; });
   const calledHerald = heraldSeeds.filter(function (s) { return s.callCount > 0; });
+  // Control-leg herald seeds (titanmuster): 109317, 109318, 109319,
+  // 109320, 109321, 109325. The sounding leg meets heralds on more
+  // seeds (the march itself brings the scholar to the lair), so B2 is
+  // reported on BOTH denominators.
+  const CTL_HERALD = [109317, 109318, 109319, 109320, 109321, 109325];
+  const calledCtlHerald = arm.filter(function (s) { return CTL_HERALD.indexOf(s.seed) >= 0 && s.callCount > 0; });
   const reached = arm.filter(function (s) { return s.readyEver; });
   const out = {
     arm: 'muster-b', prereg: 'evidence/2026-11-24/sim-muster-b-prereg.md',
@@ -136,6 +142,7 @@ function main() {
       heraldMeetingSeeds: heraldSeeds.map(function (s) { return s.seed; }),
       calledSeeds: calledHerald.map(function (s) { return s.seed; }),
       calledHeraldCount: calledHerald.length,
+      calledCtlHeraldCount: calledCtlHerald.length,
       totalSoundings: arm.reduce(function (t, s) { return t + s.callCount; }, 0),
       reachedSeeds: reached.map(function (s) { return s.seed; }),
       reachedCount: reached.length,
@@ -169,7 +176,7 @@ function main() {
   };
   out.barsDetail = {
     B1: 'seeds=' + arm.length + '/16, errorSeeds=' + b.instrumentErrorSeeds.length,
-    B2: 'called ' + b.calledHeraldCount + '/6 herald seeds (need >=3)',
+    B2: 'called ' + b.calledHeraldCount + '/' + heraldSeeds.length + ' sounding-leg herald seeds; ' + b.calledCtlHeraldCount + '/6 control herald seeds (need >=3)',
     B3: 'reached(>=10) ' + b.reachedCount + '/16 seeds, ' + b.reachedHeraldCount + '/6 herald seeds',
     B4: 'medianGameDays=' + b.medianGameDays + ' (need >=120), villageLost=' + b.villageLost + '/16 (need <=7), starvationDeaths=' + b.starvationDeaths + ' (need <=20)',
   };

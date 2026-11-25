@@ -5,7 +5,7 @@
 // retry against that same (now empty) path is refused again. The fix:
 // write to a fresh temp sibling name on every attempt and rename into
 // place only after the bytes are down. A failed attempt unlinks its
-// 0-byte temp, so no poisoned path survives. Retries 30 x 10s, then
+// 0-byte temp, so no poisoned path survives. Retries 60 x 10s, then
 // throws (never silent).
 'use strict';
 const fs = require('fs');
@@ -16,7 +16,7 @@ function writeFileFlapSafe(file, content) {
   const dir = path.dirname(file);
   const base = path.basename(file);
   let last = null;
-  for (let attempt = 1; attempt <= 30; attempt++) {
+  for (let attempt = 1; attempt <= 60; attempt++) {
     const tmp = path.join(dir, '.' + base + '.tmp-' + process.pid + '-' + attempt);
     try {
       fs.writeFileSync(tmp, content);
@@ -28,8 +28,8 @@ function writeFileFlapSafe(file, content) {
       last = e;
       try { fs.unlinkSync(tmp); } catch (e2) {}
       if (!/EPERM|EACCES|short write/.test(String((e && e.code) || e.message || e))) throw e;
-      if (attempt < 30) {
-        try { console.error('muster-b-write: ' + file + ' attempt ' + attempt + '/30 failed (' + String((e && e.code) || e.message).slice(0, 60) + '), retry in 10s'); } catch (e3) {}
+      if (attempt < 60) {
+        try { console.error('muster-b-write: ' + file + ' attempt ' + attempt + '/60 failed (' + String((e && e.code) || e.message).slice(0, 60) + '), retry in 10s'); } catch (e3) {}
         try { execSync('sleep 10'); } catch (e4) {}
       }
     }

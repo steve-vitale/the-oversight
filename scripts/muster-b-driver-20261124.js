@@ -303,7 +303,7 @@ async function oneRun(seed) {
     dailyTrace: dailyTrace, traceDays: dailyTrace.map(function (r) { return r.day; }),
     maxGateRow: maxGateRow,
     attemptGateSnaps: attemptGateSnaps,
-    attempts: (ht.attempts || []).filter(function (a) { return a.mid === 'herald'; }).map(function (a) { return { day: a.day, cls: a.cls, reason: a.reason || null, caller: a.caller || null, muster: a.muster || null }; }),
+    attempts: (ht.attempts || []).filter(function (a) { return a.mid === 'herald'; }).map(function (a) { return { day: a.day, mid: a.mid, cls: a.cls, reason: a.reason || null, caller: a.caller || null, muster: a.muster || null }; }),
     attemptCount: (ht.attempts || []).filter(function (a) { return a.mid === 'herald'; }).length,
     deaths: ((result.samples || {}).deaths || []).length,
     daily: t.daily, killEvents: t.killEvents, deathEvents: t.deathEvents,

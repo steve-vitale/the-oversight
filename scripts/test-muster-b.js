@@ -82,7 +82,7 @@ check('analyzer maxHave reads the refusal have census', function () {
 // (4) Driver smoke: one seed, 5 days, scratch OUTDIR under the
 // worktree. Proves the full harness path (policy load, instrument
 // install, runDays) without touching the judged corpus. The driver's
-// own write retry (30 x 10s) absorbs write-flap flicker.
+// own write retry (60 x 10s) absorbs write-flap flicker.
 check('driver smoke run writes a well-formed per-seed file', function () {
   const outDir = path.join(REPO, '.tmp-muster-b-test', 'smoke');
   // Start clean: a probe or an earlier run may have left the file, and
