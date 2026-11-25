@@ -760,9 +760,22 @@ function classifyEmpty(dir) {
       }
       const successes = homeDutySuccess[vid] || 0;
       const ammoId = ammoIdFor(fe.rangedId);
+      // (c-scholar): the fighter was the scholar on EVERY carrier day in
+      // the window, per the driver's snapshot-time isScholar flag — never
+      // the end-of-run scholarId (succession changes Game.villagerId
+      // mid-run, so the run-end id mislabels villagers who became the
+      // scholar AFTER their window; e.g. 110702 brian_otieno attempted 6
+      // home-duty crafts as a villager, then succeeded to the seat after
+      // day 95 — the run-end id called him scholar-excluded, his gate
+      // rows say no-materials). A fighter who was scholar for their whole
+      // life has no gate rows at all and reads as (c0) — stated, not
+      // faked: per-day scholar identity is not in the corpus beyond the
+      // snapshot flag.
+      const scholarDays = rows.filter(function (x) { return x.row.isScholar; }).length;
+      const scholarAll = rows.length > 0 && scholarDays === rows.length;
       let cause = null;
       if (ammoId === 'stone' || ammoId === 'fusion_cell') cause = '(c1) no-craftable-weapon';
-      else if (vid === d.scholarId) cause = '(c-scholar) scholar-excluded';
+      else if (scholarAll) cause = '(c-scholar) scholar-excluded';
       else if (b.carrierDays === 0) cause = '(c0) never-home-carrier';
       else if (villageBatches === 0 && b.homeShortDays >= 1) cause = '(e) village-never-crafts';
       else if (b.carrierDays >= 5 && b.awayDays / b.carrierDays >= 0.75) cause = '(b) rarely-home';
@@ -1071,8 +1084,8 @@ function selftest() {
       finalProv: {} },
     craftGate: { recipes: { arrow: { materials: { stick: 2, stone: 1, fiber: 1 }, makesUnits: 5 }, bolt: { materials: { stick: 2, stone: 1 }, makesUnits: 5 } },
       days: [
-        gateDay(1, { stick: 0, stone: 0, fiber: 0 }, [gateRow('h2', { home: false }), gateRow('h4', { combinedSufficient: false }), gateRow('h7', { rangedId: 'crossbow', ammoId: 'bolt', combinedSufficient: true, ownSufficient: true }), gateRow('h8', { combinedSufficient: true, ownSufficient: true, attempted: true }), gateRow('h11', { cooldownActive: true })]),
-        gateDay(2, { stick: 0, stone: 0, fiber: 0 }, [gateRow('h2', { home: false }), gateRow('h4', { combinedSufficient: false }), gateRow('h7', { rangedId: 'crossbow', ammoId: 'bolt', combinedSufficient: true, ownSufficient: true }), gateRow('h8', { combinedSufficient: true, ownSufficient: true, attempted: true })]),
+        gateDay(1, { stick: 0, stone: 0, fiber: 0 }, [gateRow('h2', { home: false }), gateRow('h4', { combinedSufficient: false }), gateRow('h5', { isScholar: true, dutyHome: false, combinedSufficient: false }), gateRow('h7', { rangedId: 'crossbow', ammoId: 'bolt', combinedSufficient: true, ownSufficient: true }), gateRow('h8', { combinedSufficient: true, ownSufficient: true, attempted: true }), gateRow('h11', { cooldownActive: true })]),
+        gateDay(2, { stick: 0, stone: 0, fiber: 0 }, [gateRow('h2', { home: false }), gateRow('h4', { combinedSufficient: false }), gateRow('h5', { isScholar: true, dutyHome: false, combinedSufficient: false }), gateRow('h7', { rangedId: 'crossbow', ammoId: 'bolt', combinedSufficient: true, ownSufficient: true }), gateRow('h8', { combinedSufficient: true, ownSufficient: true, attempted: true })]),
         gateDay(3, { stick: 3, stone: 2, fiber: 2 }, [gateRow('h2', { home: false }), gateRow('h4', { combinedSufficient: false }), gateRow('h9', { home: false })]),
         gateDay(4, { stick: 3, stone: 2, fiber: 2 }, [gateRow('h2', { home: false }), gateRow('h4', { combinedSufficient: false }), gateRow('h9', { home: false })]),
         gateDay(5, { stick: 3, stone: 2, fiber: 2 }, [gateRow('h2', { home: false }), gateRow('h4', { combinedSufficient: false }), gateRow('h9', { home: false })]),
@@ -1130,19 +1143,19 @@ function selftest() {
   check('pile zero days 3 per material (the two empty-pile days + seed 12)',
     G.pileZeroDays.stick === 3 && G.pileZeroDays.stone === 3 && G.pileZeroDays.fiber === 3,
     JSON.stringify(G.pileZeroDays));
-  check('carrier rows 22, home share 12/22, distinct carriers 7',
-    G.carrierRows === 22 && Math.abs(G.homeShare - 12 / 22) < 1e-9 && G.distinctCarriers === 7,
+  check('carrier rows 24, home share 14/24, distinct carriers 8',
+    G.carrierRows === 24 && Math.abs(G.homeShare - 14 / 24) < 1e-9 && G.distinctCarriers === 8,
     JSON.stringify({ r: G.carrierRows, h: G.homeShare, d: G.distinctCarriers }));
-  check('buckets away 10 / stocked 0 / cooldown 1 / no-materials 6 / eligible 5',
+  check('buckets away 10 / stocked 0 / cooldown 1 / no-materials 8 / eligible 5',
     G.buckets.away === 10 && G.buckets.stocked === 0 && G.buckets.cooldown === 1 &&
-    G.buckets['no-materials'] === 6 && G.buckets.eligible === 5,
+    G.buckets['no-materials'] === 8 && G.buckets.eligible === 5,
     JSON.stringify(G.buckets));
   check('attempts 2, made batches 0, eligible mismatch 3 (h7 x2 + h2 day 6)',
     G.attempts === 2 && G.madeBatches === 0 && G.eligibleMismatch === 3,
     JSON.stringify({ a: G.attempts, m: G.madeBatches, mm: G.eligibleMismatch }));
-  check('no-cooldown home-short population 11, pile-sufficient 0/11, own-sufficient 5/11',
-    G.noCdHomeShort === 11 && G.pileSufNoCd === 0 && G.ownSufNoCd === 5 &&
-    Math.abs(G.pileSufRateNoCd - 0) < 1e-9 && Math.abs(G.ownSufRateNoCd - 5 / 11) < 1e-9,
+  check('no-cooldown home-short population 13, pile-sufficient 0/13, own-sufficient 5/13',
+    G.noCdHomeShort === 13 && G.pileSufNoCd === 0 && G.ownSufNoCd === 5 &&
+    Math.abs(G.pileSufRateNoCd - 0) < 1e-9 && Math.abs(G.ownSufRateNoCd - 5 / 13) < 1e-9,
     JSON.stringify({ n: G.noCdHomeShort, p: G.pileSufNoCd, o: G.ownSufNoCd }));
   check('home-duty counters aggregate (batches 3, calls 60)',
     G.homeDutyBatches === 3 && G.homeDutyCalls === 60,
@@ -1150,6 +1163,39 @@ function selftest() {
   check('recipes present both seeds, nothing missing',
     G.recipesPresent.arrow === 2 && G.recipesPresent.bolt === 2 && G.recipesMissing.length === 0,
     JSON.stringify({ p: G.recipesPresent, m: G.recipesMissing }));
+
+  // ---- (c-scholar) uses the snapshot-time flag, never the run-end id ----
+  // m1 was scholar one day and villager the next (mixed rows) — the duty
+  // could serve them as a villager, so they fall through to (a).
+  // m2 was scholar on every carrier day — (c-scholar). This is the
+  // 110702 brian_otieno correction: the run-end scholarId mislabeled a
+  // villager who succeeded to the seat after their window.
+  const dir3 = path.join(tmp, 'scholar');
+  fs.mkdirSync(dir3);
+  const g13 = mkSeed({ seed: 13, scholarId: 'scholar1',
+    v4encounters: [
+      { day: 20, vid: 'm1', mid: 'audit', wave: 4, origin: 'expedition', allyVids: [], outcome: 'vFlee', rounds: 2, mDealt: 60, mHpStart: 1100, vTaken: 70, rangedId: 'bow', ammoAtEntry: 0, ammoProv: [], alliesAmmo: [], volley: null, log: [] },
+      { day: 21, vid: 'm2', mid: 'eulogy', wave: 4, origin: 'aid', allyVids: [], outcome: 'vFlee', rounds: 2, mDealt: 50, mHpStart: 1200, vTaken: 90, rangedId: 'bow', ammoAtEntry: 0, ammoProv: [], alliesAmmo: [], volley: null, log: [] },
+    ],
+    ammoLedger: { events: [], other: [], unattributedSpend: [], transfers: [], spends: [],
+      counters: { homeDutyBatches: 2, homeDutyCalls: 10, departureCalls: 0, departureCraftAttempts: 0, departureCraftOk: 0, departureStones: 0, departureStashMoved: 0, lootDrops: 0, lootAmmoDrops: 0 },
+      finalProv: {} },
+    craftGate: { recipes: { arrow: { materials: { stick: 2, stone: 1, fiber: 1 }, makesUnits: 5 }, bolt: { materials: { stick: 2, stone: 1 }, makesUnits: 5 } },
+      days: [
+        gateDay(1, { stick: 0, stone: 0, fiber: 0 }, [gateRow('m1', { isScholar: true, dutyHome: false, combinedSufficient: false }), gateRow('m2', { isScholar: true, dutyHome: false, combinedSufficient: false })]),
+        gateDay(2, { stick: 0, stone: 0, fiber: 0 }, [gateRow('m1', { isScholar: false, combinedSufficient: false }), gateRow('m2', { isScholar: true, dutyHome: false, combinedSufficient: false })]),
+      ] },
+  });
+  fs.writeFileSync(path.join(dir3, 'g13.json'), JSON.stringify(g13));
+  const C3 = classifyEmpty(dir3);
+  check('(c-scholar) fires only when EVERY carrier day was a scholar day (m2), mixed m1 falls to (a)',
+    C3.neverReceived === 2 && C3.byCause['(c-scholar) scholar-excluded'] === 1 && C3.byCause['(a) no-materials'] === 1 && C3.residual === 0,
+    JSON.stringify(C3.byCause));
+  const m1 = C3.detail.find(function (x) { return x.vid === 'm1'; });
+  const m2 = C3.detail.find(function (x) { return x.vid === 'm2'; });
+  check('mixed-scholar detail: m1 (a), m2 (c-scholar)',
+    m1 && m1.cause === '(a) no-materials' && m2 && m2.cause === '(c-scholar) scholar-excluded',
+    JSON.stringify([m1 && m1.cause, m2 && m2.cause]));
 
   // ---- judgeDiagGate shapes ----
   const cleanInstr = { errors: 0, selftestPass: true, proofPass: true };
