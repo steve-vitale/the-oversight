@@ -1,0 +1,6678 @@
+{
+  "verdict": "DIAG-GO",
+  "kind": "CLASSIFIED",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": true,
+      "detail": "never-received empty fighters: 20 (floor 10)"
+    },
+    {
+      "id": "classification-completeness",
+      "pass": true,
+      "detail": "named-cause fighters / never-received: 1.000 (20/20; residual 0) (bar >= 0.90)"
+    },
+    {
+      "id": "instrument",
+      "pass": true,
+      "detail": "instrument errors: 0 (bar 0); analyzer selftest: PASS; proof test: PASS (all three required)"
+    }
+  ],
+  "aidammoVerdict": "DIAG-NO-GO",
+  "aidammoKind": "THIN-POOL",
+  "aidammoBars": [
+    {
+      "id": "pool-floor",
+      "pass": false,
+      "detail": "pair-inclusive engaged wave-4+ meetings: 4 (floor 10)"
+    },
+    {
+      "id": "mechanism-ammo-at-entry",
+      "pass": true,
+      "detail": "ammo-at-entry (all origins, lead+allies): 0.293 (65/222 ranged-at-entry fighters; by origin aid 34/100, expedition 9/45, world-tick 22/77) vs bar 0.70 — RE-MEASURE, reported not judged (the DIAG measures the bar, it does not pass/fail on it)"
+    },
+    {
+      "id": "attribution-completeness",
+      "pass": true,
+      "detail": "known-source units at entry / total units at entry: 1.000 (336/336 units; unknown 0) (bar >= 0.90)"
+    },
+    {
+      "id": "dominant-source-or-no-delivery",
+      "pass": true,
+      "detail": "dominant source at entry: home-duty share 0.935 (bar >= 0.50) OR no-source-delivers: non-starting-kit units at entry 336 (needs < 10) AND ammo-at-entry 0.293 (needs < 0.70) => not proven"
+    }
+  ],
+  "mechanismRate": 0.2927927927927928,
+  "dominantSource": "home-duty",
+  "dominantShare": 0.9345238095238095,
+  "nonStartingUnitsAtEntry": 336,
+  "noSourceDelivers": false,
+  "pair": {
+    "dir": "evidence/2026-11-24/perseed-homecraft-gate-a",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "meetings": 4,
+    "wins": 1,
+    "kills": 0,
+    "losses": 3,
+    "vDie": 1,
+    "vFlee": 2,
+    "mFlee": 1,
+    "winShare": 0.25,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 18,
+      "joined": 18,
+      "unjoined": 0,
+      "noLaunchPlan": 1,
+      "pairLaunch": 0,
+      "partyAbsent": 1,
+      "evadeExcluded": 12
+    },
+    "byOutcome": {
+      "vDie": {
+        "n": 1,
+        "rounds": [
+          3
+        ],
+        "dmgShare": [
+          0.009900990099009901
+        ],
+        "vTaken": [
+          92
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          17
+        ],
+        "meanArmorP": [
+          27.666666666666668
+        ],
+        "mHpStart": [
+          1313
+        ],
+        "abilitiesPerMember": [
+          2.6666666666666665
+        ],
+        "fighterDmgShare": [
+          0
+        ],
+        "parsedStrikeTotal": [
+          13
+        ],
+        "dmgPerRound": [
+          4.333333333333333
+        ],
+        "volleyDmg": [],
+        "dmgPerRoundMean": 4.333333333333333,
+        "volleyDmgMean": null,
+        "roundsMean": 3,
+        "vTakenMean": 92,
+        "partySizeMean": 3,
+        "minArmorPMean": 17,
+        "meanArmorPMean": 27.666666666666668,
+        "mHpStartMean": 1313,
+        "abilitiesPerMemberMean": 2.6666666666666665,
+        "fighterDmgShareMean": 0,
+        "parsedStrikeTotalMean": 13
+      },
+      "vFlee": {
+        "n": 2,
+        "rounds": [
+          4,
+          4
+        ],
+        "dmgShare": [
+          0.24633991088478677,
+          0.10410557184750734
+        ],
+        "vTaken": [
+          38,
+          69
+        ],
+        "partySize": [
+          3,
+          3
+        ],
+        "minArmorP": [
+          21,
+          21
+        ],
+        "meanArmorP": [
+          26.333333333333332,
+          33.333333333333336
+        ],
+        "mHpStart": [
+          1571,
+          1364
+        ],
+        "abilitiesPerMember": [
+          2.3333333333333335,
+          1
+        ],
+        "fighterDmgShare": [
+          0.751937984496124,
+          0.5633802816901409
+        ],
+        "parsedStrikeTotal": [
+          387,
+          142
+        ],
+        "dmgPerRound": [
+          96.75,
+          35.5
+        ],
+        "volleyDmg": [
+          0,
+          0
+        ],
+        "dmgPerRoundMean": 66.125,
+        "volleyDmgMean": 0,
+        "roundsMean": 4,
+        "vTakenMean": 53.5,
+        "partySizeMean": 3,
+        "minArmorPMean": 21,
+        "meanArmorPMean": 29.833333333333336,
+        "mHpStartMean": 1467.5,
+        "abilitiesPerMemberMean": 1.6666666666666667,
+        "fighterDmgShareMean": 0.6576591330931325,
+        "parsedStrikeTotalMean": 264.5
+      },
+      "mFlee": {
+        "n": 1,
+        "rounds": [
+          1
+        ],
+        "dmgShare": [
+          0
+        ],
+        "vTaken": [
+          0
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          36
+        ],
+        "meanArmorP": [
+          36.666666666666664
+        ],
+        "mHpStart": [
+          1072
+        ],
+        "abilitiesPerMember": [
+          3.3333333333333335
+        ],
+        "fighterDmgShare": [],
+        "parsedStrikeTotal": [
+          0
+        ],
+        "dmgPerRound": [
+          0
+        ],
+        "volleyDmg": [],
+        "dmgPerRoundMean": 0,
+        "volleyDmgMean": null,
+        "roundsMean": 1,
+        "vTakenMean": 0,
+        "partySizeMean": 3,
+        "minArmorPMean": 36,
+        "meanArmorPMean": 36.666666666666664,
+        "mHpStartMean": 1072,
+        "abilitiesPerMemberMean": 3.3333333333333335,
+        "fighterDmgShareMean": null,
+        "parsedStrikeTotalMean": 0
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vDie": 1,
+        "vFlee": 2,
+        "mFlee": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 1,
+    "gateSeekShare": 0,
+    "lossGateNull": 3,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {
+      "reunion": {
+        "win": 0,
+        "loss": 2
+      },
+      "spoiler": {
+        "win": 0,
+        "loss": 1
+      },
+      "eulogy": {
+        "win": 1,
+        "loss": 0
+      }
+    },
+    "dmgShareMean": 0.090086618207826,
+    "dmgShareByOutcome": {
+      "vDie": 0.009900990099009901,
+      "vFlee": 0.17522274136614704,
+      "mFlee": 0
+    },
+    "roundsMean": 3,
+    "vTakenMean": 49.75,
+    "dmgPerRoundMean": 34.14583333333333,
+    "volleyFired": 0,
+    "volleyFireShare": 0,
+    "volleyDmgMean": 0,
+    "rangedAtEntry": 3,
+    "rangedAtEntryShare": 0.75,
+    "bowOpen": {
+      "alreadyHad": 149,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 3,
+      "craftedFail": 6,
+      "noSource": 139
+    },
+    "bowOpenStagedVids": 43,
+    "spearSeen": 42,
+    "spearPassed": 42,
+    "spearPassRate": 1,
+    "spearCountersKnown": true,
+    "spearFiles": 8,
+    "starvation": 7,
+    "starvationVillager": 7,
+    "medianDays": 150,
+    "communityLost": 3,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 7,
+    "wave5": 5,
+    "scaleRanks": {
+      "regional": 7,
+      "village": 1
+    }
+  },
+  "trio": {
+    "dir": "evidence/2026-11-24/perseed-homecraft-gate-a",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "launchpartyOn": {},
+    "fightally2On": {
+      "true": 8
+    },
+    "bowopenOn": {
+      "true": 8
+    },
+    "meetings": 1,
+    "wins": 0,
+    "kills": 0,
+    "losses": 1,
+    "vDie": 0,
+    "vFlee": 1,
+    "mFlee": 0,
+    "winShare": 0,
+    "killShare": 0,
+    "funnel": {
+      "encounters": 18,
+      "joined": 18,
+      "unjoined": 0,
+      "noLaunchPlan": 1,
+      "pairLaunch": 15,
+      "partyAbsent": 0,
+      "evadeExcluded": 1
+    },
+    "byOutcome": {
+      "vFlee": {
+        "n": 1,
+        "rounds": [
+          4
+        ],
+        "dmgShare": [
+          0.24633991088478677
+        ],
+        "vTaken": [
+          38
+        ],
+        "partySize": [
+          3
+        ],
+        "minArmorP": [
+          21
+        ],
+        "meanArmorP": [
+          26.333333333333332
+        ],
+        "mHpStart": [
+          1571
+        ],
+        "abilitiesPerMember": [
+          2.3333333333333335
+        ],
+        "fighterDmgShare": [
+          0.751937984496124
+        ],
+        "parsedStrikeTotal": [
+          387
+        ],
+        "dmgPerRound": [
+          96.75
+        ],
+        "volleyDmg": [
+          0
+        ],
+        "dmgPerRoundMean": 96.75,
+        "volleyDmgMean": 0,
+        "roundsMean": 4,
+        "vTakenMean": 38,
+        "partySizeMean": 3,
+        "minArmorPMean": 21,
+        "meanArmorPMean": 26.333333333333332,
+        "mHpStartMean": 1571,
+        "abilitiesPerMemberMean": 2.3333333333333335,
+        "fighterDmgShareMean": 0.751937984496124,
+        "parsedStrikeTotalMean": 387
+      }
+    },
+    "gateXOutcome": {
+      "null": {
+        "vFlee": 1
+      }
+    },
+    "gateAvoidShare": 0,
+    "gateNullShare": 1,
+    "gateSeekShare": 0,
+    "lossGateNull": 1,
+    "lossGateAvoid": 0,
+    "lossGateSeek": 0,
+    "monsterByOutcome": {
+      "spoiler": {
+        "win": 0,
+        "loss": 1
+      }
+    },
+    "dmgShareMean": 0.24633991088478677,
+    "dmgShareByOutcome": {
+      "vFlee": 0.24633991088478677
+    },
+    "roundsMean": 4,
+    "vTakenMean": 38,
+    "dmgPerRoundMean": 96.75,
+    "volleyFired": 0,
+    "volleyFireShare": 0,
+    "volleyDmgMean": 0,
+    "rangedAtEntry": 1,
+    "rangedAtEntryShare": 1,
+    "bowOpen": {
+      "alreadyHad": 149,
+      "fromStash": 0,
+      "fromArmory": 0,
+      "crafted": 3,
+      "craftedFail": 6,
+      "noSource": 139
+    },
+    "bowOpenStagedVids": 43,
+    "spearSeen": 42,
+    "spearPassed": 42,
+    "spearPassRate": 1,
+    "spearCountersKnown": true,
+    "spearFiles": 8,
+    "starvation": 7,
+    "starvationVillager": 7,
+    "medianDays": 150,
+    "communityLost": 3,
+    "national": 0,
+    "seedWins": 0,
+    "wave4": 7,
+    "wave5": 5,
+    "scaleRanks": {
+      "regional": 7,
+      "village": 1
+    }
+  },
+  "ammo": {
+    "dir": "evidence/2026-11-24/perseed-homecraft-gate-a",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "fighters": 294,
+    "ranged": 222,
+    "withAmmo": 65,
+    "rate": 0.2927927927927928,
+    "capableFighters": 197,
+    "capableWithAmmo": 65,
+    "capableRate": 0.3299492385786802,
+    "spearFighters": 25,
+    "byOrigin": {
+      "expedition": {
+        "fighters": 54,
+        "ranged": 45,
+        "withAmmo": 9,
+        "rate": 0.2
+      },
+      "world-tick": {
+        "fighters": 99,
+        "ranged": 77,
+        "withAmmo": 22,
+        "rate": 0.2857142857142857
+      },
+      "aid": {
+        "fighters": 141,
+        "ranged": 100,
+        "withAmmo": 34,
+        "rate": 0.34
+      }
+    },
+    "unitsAtEntry": 336,
+    "unitsAtEntryBySource": {
+      "home-duty": 314,
+      "departure-pile-stones": 22
+    },
+    "unitsAtEntryByOrigin": {
+      "expedition": 53,
+      "world-tick": 118,
+      "aid": 165
+    }
+  },
+  "ledger": {
+    "dir": "evidence/2026-11-24/perseed-homecraft-gate-a",
+    "n": 0,
+    "valid": 8,
+    "errors": 0,
+    "ledgerFiles": 8,
+    "batchesBySource": {
+      "home-duty": 45,
+      "departure-pile-stones": 18,
+      "departure-craft": 12,
+      "starting-kit": 2
+    },
+    "unitsBySource": {
+      "home-duty": 225,
+      "departure-pile-stones": 62,
+      "departure-craft": 60,
+      "starting-kit": 2
+    },
+    "otherEvents": 0,
+    "otherUnits": 0,
+    "unattributedSpend": 0,
+    "unattributedSpendUnits": 0,
+    "transfers": 0,
+    "spends": 112,
+    "spendUnits": 235,
+    "counters": {
+      "homeDutyBatches": 45,
+      "homeDutyCalls": 1019,
+      "departureCalls": 297,
+      "departureCraftAttempts": 21,
+      "departureCraftOk": 12,
+      "departureStones": 62,
+      "departureStashMoved": 0,
+      "lootDrops": 60,
+      "lootAmmoDrops": 0
+    },
+    "meetingsByVid": {
+      "gen_vkshbz3": [
+        {
+          "day": 48,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 48,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "jorge_silva": [
+        {
+          "day": 48,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 48,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        }
+      ],
+      "oliver_moore": [
+        {
+          "day": 48,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 7
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 48,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 7
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 77,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 80,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 81,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 82,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 83,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 83,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 83,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 84,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 92,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 92,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 107,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 119,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 119,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 121,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        }
+      ],
+      "nina_petrova": [
+        {
+          "day": 77,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 81,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 83,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "nathan_lee": [
+        {
+          "day": 77,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 80,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 81,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 82,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 83,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 83,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 83,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 84,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 92,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 92,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 107,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "meera_reddy": [
+        {
+          "day": 80,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 82,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 83,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "app_mgpspjz8176": [
+        {
+          "day": 83,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "app_mgpspjyh473": [
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "visjoin_90": [
+        {
+          "day": 92,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 92,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "visjoin_104": [
+        {
+          "day": 107,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "visjoin_117": [
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "ella_johnson": [
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 126,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 126,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 127,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 141,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 147,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "visjoin_114": [
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 126,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 126,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 127,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 141,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 141,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 147,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 148,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "omar_farouk": [
+        {
+          "day": 125,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 126,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 126,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 127,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 141,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 141,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 147,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 148,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        }
+      ],
+      "visjoin_134": [
+        {
+          "day": 141,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 148,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "gen_081twa2": [
+        {
+          "day": 49,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 55,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "maya_singh": [
+        {
+          "day": 49,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 52,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 55,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "gen_pqpcgcz": [
+        {
+          "day": 49,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "gen_jv4kbwc": [
+        {
+          "day": 52,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "gen_ae5mcuz": [
+        {
+          "day": 52,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 83,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 87,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 87,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 87,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 91,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 91,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 118,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 118,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 122,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "adaeze_nwosu": [
+        {
+          "day": 55,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "dale_hoffman": [
+        {
+          "day": 83,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 87,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 87,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 91,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 118,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 118,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 122,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "brian_otieno": [
+        {
+          "day": 83,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 87,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 87,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 87,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 91,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 91,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 130,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 132,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "rosa_mendez": [
+        {
+          "day": 87,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 91,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 118,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 118,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "elijah_scott": [
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 98,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "lena_ruiz": [
+        {
+          "day": 122,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        },
+        {
+          "day": 124,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        },
+        {
+          "day": 125,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        }
+      ],
+      "tom_baker": [
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "visjoin_77": [
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "aroha_ngata": [
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "nora_wilson": [
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 84,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "ruby_callaghan": [
+        {
+          "day": 44,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "gen_vfjucfs": [
+        {
+          "day": 44,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 1
+            }
+          ],
+          "ammoAtEntry": 1
+        }
+      ],
+      "jesse_cortez": [
+        {
+          "day": 44,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 112,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 114,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 147,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 147,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 147,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "priya_nair": [
+        {
+          "day": 48,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 112,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 137,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 147,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 147,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 147,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "gen_ri5nrm6": [
+        {
+          "day": 48,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "gen_sl7ru3k": [
+        {
+          "day": 48,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "carlos_diaz": [
+        {
+          "day": 112,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 114,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 137,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "ursula_weber": [
+        {
+          "day": 114,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "visjoin_111": [
+        {
+          "day": 114,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 127,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 127,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "gen_whqnffw": [
+        {
+          "day": 114,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 127,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 127,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 137,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "dmitri_sokolov": [
+        {
+          "day": 114,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 127,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 127,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "visjoin_129": [
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "visjoin_145": [
+        {
+          "day": 147,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 147,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 147,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "app_mgpspjv3425": [
+        {
+          "day": 113,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "sigrun_eiriksdottir": [
+        {
+          "day": 113,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "grace_obi": [
+        {
+          "day": 113,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 115,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 116,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 143,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 143,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        }
+      ],
+      "visjoin_113": [
+        {
+          "day": 115,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "amina_diallo": [
+        {
+          "day": 115,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 116,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "app_mgpspjuc960": [
+        {
+          "day": 116,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        }
+      ],
+      "visjoin_118": [
+        {
+          "day": 143,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 143,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "nikolai_volkov": [
+        {
+          "day": 143,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "visjoin_132": [
+        {
+          "day": 143,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "wanjiru_kamau": [
+        {
+          "day": 52,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 56,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 130,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 132,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 146,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 148,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 148,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 143,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 146,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 148,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "gen_1cl32za": [
+        {
+          "day": 52,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 56,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 58,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 130,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 132,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "ines_duarte": [
+        {
+          "day": 52,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 58,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "gen_u2rv2t8": [
+        {
+          "day": 56,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 58,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "gen_xf91g6d": [
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 146,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 148,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 148,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "app_mgpspht5120": [
+        {
+          "day": 146,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 148,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 148,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "nadia_khoury": [
+        {
+          "day": 98,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 107,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        }
+      ],
+      "gen_q08rk94": [
+        {
+          "day": 98,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 107,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 116,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 118,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 122,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 123,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 123,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 123,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 142,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 142,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 143,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 146,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 148,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        }
+      ],
+      "naran_tumen": [
+        {
+          "day": 107,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 122,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 123,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 123,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 123,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "app_mgpsphqv595": [
+        {
+          "day": 116,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 118,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "gen_fl8lpca": [
+        {
+          "day": 116,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "thabo_maseko": [
+        {
+          "day": 118,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 122,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 123,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 123,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 123,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "vasyl_shevchenko": [
+        {
+          "day": 124,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 124,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 124,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        }
+      ],
+      "miguel_santos": [
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "fatima_hassan": [
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 143,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 146,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 148,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ]
+    },
+    "deliveredBatchesBySource": {
+      "home-duty": 22,
+      "departure-pile-stones": 8
+    },
+    "deliveredUnitsBySource": {
+      "home-duty": 110,
+      "departure-pile-stones": 26
+    },
+    "unitsAtEntryBySource": {
+      "home-duty": 314,
+      "departure-pile-stones": 22
+    },
+    "attributionCompleteness": 1,
+    "dominantSource": "home-duty",
+    "dominantShare": 0.9345238095238095,
+    "ammo": {
+      "dir": "evidence/2026-11-24/perseed-homecraft-gate-a",
+      "n": 8,
+      "valid": 8,
+      "errors": 0,
+      "fighters": 294,
+      "ranged": 222,
+      "withAmmo": 65,
+      "rate": 0.2927927927927928,
+      "capableFighters": 197,
+      "capableWithAmmo": 65,
+      "capableRate": 0.3299492385786802,
+      "spearFighters": 25,
+      "byOrigin": {
+        "expedition": {
+          "fighters": 54,
+          "ranged": 45,
+          "withAmmo": 9,
+          "rate": 0.2
+        },
+        "world-tick": {
+          "fighters": 99,
+          "ranged": 77,
+          "withAmmo": 22,
+          "rate": 0.2857142857142857
+        },
+        "aid": {
+          "fighters": 141,
+          "ranged": 100,
+          "withAmmo": 34,
+          "rate": 0.34
+        }
+      },
+      "unitsAtEntry": 336,
+      "unitsAtEntryBySource": {
+        "home-duty": 314,
+        "departure-pile-stones": 22
+      },
+      "unitsAtEntryByOrigin": {
+        "expedition": 53,
+        "world-tick": 118,
+        "aid": 165
+      }
+    }
+  },
+  "gate": {
+    "dir": "evidence/2026-11-24/perseed-homecraft-gate-a",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "gateFiles": 8,
+    "recipesPresent": {
+      "arrow": 8,
+      "bolt": 8
+    },
+    "recipesMissing": [],
+    "pile": {
+      "stick": [
+        0,
+        1,
+        1,
+        3,
+        3,
+        5,
+        9,
+        10,
+        11,
+        13,
+        14,
+        14,
+        14,
+        17,
+        22,
+        23,
+        29,
+        37,
+        45,
+        45,
+        52,
+        59,
+        65,
+        72,
+        78,
+        82,
+        90,
+        94,
+        102,
+        110,
+        116,
+        123,
+        132,
+        140,
+        148,
+        149,
+        155,
+        163,
+        167,
+        174,
+        183,
+        187,
+        196,
+        202,
+        208,
+        213,
+        215,
+        217,
+        222,
+        226,
+        232,
+        232,
+        232,
+        232,
+        232,
+        232,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        230,
+        228,
+        228,
+        228,
+        228,
+        228,
+        228,
+        228,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        226,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        224,
+        222,
+        222,
+        222,
+        222,
+        216,
+        216,
+        216,
+        216,
+        216,
+        216,
+        216,
+        216,
+        216,
+        216,
+        216,
+        216,
+        214,
+        0,
+        2,
+        2,
+        6,
+        5,
+        8,
+        11,
+        12,
+        18,
+        20,
+        19,
+        17,
+        17,
+        15,
+        16,
+        16,
+        18,
+        16,
+        14,
+        14,
+        14,
+        18,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        16,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        21,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        19,
+        0,
+        1,
+        1,
+        2,
+        4,
+        1,
+        2,
+        1,
+        4,
+        5,
+        5,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        0,
+        4,
+        4,
+        6,
+        4,
+        6,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        0,
+        0,
+        0,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        0,
+        4,
+        2,
+        9,
+        9,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        5,
+        5,
+        5,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        0,
+        4,
+        2,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        0,
+        3,
+        1,
+        6,
+        6,
+        6,
+        7,
+        7,
+        7,
+        7,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        5,
+        8,
+        8,
+        11,
+        11,
+        11,
+        11,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        6,
+        6,
+        5,
+        6,
+        6,
+        4,
+        5,
+        6,
+        5,
+        5,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        6,
+        5,
+        6,
+        6,
+        5,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "stone": [
+        0,
+        2,
+        3,
+        4,
+        4,
+        0,
+        2,
+        2,
+        2,
+        4,
+        6,
+        6,
+        2,
+        6,
+        10,
+        13,
+        17,
+        26,
+        34,
+        40,
+        48,
+        56,
+        67,
+        78,
+        89,
+        102,
+        116,
+        127,
+        142,
+        156,
+        169,
+        182,
+        195,
+        209,
+        222,
+        229,
+        242,
+        256,
+        267,
+        281,
+        296,
+        307,
+        320,
+        332,
+        344,
+        354,
+        362,
+        371,
+        383,
+        392,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        401,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        400,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        399,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        398,
+        391,
+        391,
+        391,
+        391,
+        386,
+        386,
+        386,
+        386,
+        386,
+        386,
+        386,
+        386,
+        386,
+        386,
+        388,
+        393,
+        394,
+        0,
+        0,
+        0,
+        2,
+        1,
+        4,
+        7,
+        8,
+        12,
+        15,
+        18,
+        19,
+        25,
+        29,
+        33,
+        36,
+        42,
+        45,
+        46,
+        49,
+        51,
+        57,
+        62,
+        66,
+        70,
+        75,
+        79,
+        87,
+        91,
+        98,
+        103,
+        105,
+        108,
+        113,
+        117,
+        120,
+        125,
+        135,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        134,
+        136,
+        136,
+        136,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        138,
+        0,
+        2,
+        2,
+        4,
+        8,
+        11,
+        14,
+        17,
+        20,
+        22,
+        30,
+        40,
+        43,
+        49,
+        53,
+        62,
+        76,
+        86,
+        95,
+        100,
+        113,
+        123,
+        125,
+        138,
+        149,
+        157,
+        165,
+        177,
+        187,
+        196,
+        210,
+        225,
+        227,
+        232,
+        235,
+        241,
+        243,
+        243,
+        243,
+        243,
+        243,
+        243,
+        243,
+        243,
+        243,
+        243,
+        242,
+        242,
+        242,
+        242,
+        242,
+        242,
+        242,
+        245,
+        250,
+        252,
+        252,
+        253,
+        255,
+        256,
+        257,
+        257,
+        257,
+        257,
+        257,
+        257,
+        257,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        0,
+        1,
+        1,
+        5,
+        4,
+        9,
+        14,
+        19,
+        27,
+        34,
+        42,
+        49,
+        57,
+        70,
+        79,
+        88,
+        103,
+        118,
+        129,
+        146,
+        161,
+        182,
+        199,
+        221,
+        239,
+        257,
+        275,
+        297,
+        316,
+        332,
+        352,
+        367,
+        388,
+        405,
+        427,
+        449,
+        456,
+        461,
+        463,
+        466,
+        474,
+        474,
+        478,
+        483,
+        488,
+        494,
+        500,
+        502,
+        505,
+        508,
+        508,
+        511,
+        515,
+        515,
+        516,
+        519,
+        519,
+        522,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        527,
+        528,
+        529,
+        529,
+        529,
+        529,
+        529,
+        530,
+        532,
+        532,
+        533,
+        533,
+        534,
+        534,
+        536,
+        538,
+        538,
+        538,
+        539,
+        539,
+        540,
+        541,
+        541,
+        544,
+        545,
+        545,
+        546,
+        546,
+        547,
+        550,
+        550,
+        553,
+        556,
+        556,
+        556,
+        559,
+        559,
+        559,
+        560,
+        560,
+        560,
+        560,
+        560,
+        560,
+        560,
+        560,
+        560,
+        560,
+        560,
+        560,
+        560,
+        560,
+        0,
+        2,
+        1,
+        3,
+        5,
+        11,
+        15,
+        18,
+        21,
+        25,
+        30,
+        36,
+        44,
+        56,
+        64,
+        73,
+        83,
+        97,
+        106,
+        115,
+        123,
+        134,
+        147,
+        148,
+        148,
+        151,
+        151,
+        154,
+        157,
+        158,
+        158,
+        161,
+        161,
+        161,
+        161,
+        0,
+        2,
+        2,
+        4,
+        7,
+        10,
+        14,
+        19,
+        23,
+        30,
+        38,
+        45,
+        52,
+        60,
+        69,
+        80,
+        84,
+        86,
+        91,
+        102,
+        112,
+        121,
+        126,
+        138,
+        153,
+        165,
+        182,
+        186,
+        193,
+        196,
+        202,
+        206,
+        208,
+        212,
+        213,
+        217,
+        218,
+        220,
+        220,
+        221,
+        224,
+        224,
+        225,
+        228,
+        228,
+        231,
+        232,
+        235,
+        237,
+        239,
+        242,
+        245,
+        248,
+        248,
+        249,
+        251,
+        251,
+        252,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        256,
+        255,
+        255,
+        255,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        254,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        253,
+        0,
+        1,
+        0,
+        2,
+        5,
+        8,
+        10,
+        13,
+        16,
+        21,
+        27,
+        32,
+        37,
+        44,
+        47,
+        53,
+        60,
+        69,
+        80,
+        96,
+        106,
+        125,
+        143,
+        159,
+        178,
+        195,
+        213,
+        223,
+        241,
+        256,
+        271,
+        288,
+        302,
+        317,
+        333,
+        348,
+        362,
+        377,
+        394,
+        407,
+        428,
+        437,
+        455,
+        473,
+        491,
+        503,
+        522,
+        540,
+        556,
+        571,
+        571,
+        571,
+        571,
+        571,
+        571,
+        571,
+        571,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        567,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        564,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        563,
+        564,
+        564,
+        564,
+        0,
+        2,
+        2,
+        4,
+        7,
+        5,
+        8,
+        15,
+        22,
+        29,
+        30,
+        39,
+        49,
+        58,
+        66,
+        68,
+        76,
+        88,
+        95,
+        104,
+        118,
+        129,
+        141,
+        153,
+        170,
+        183,
+        195,
+        211,
+        225,
+        241,
+        258,
+        270,
+        284,
+        295,
+        309,
+        321,
+        332,
+        345,
+        358,
+        374,
+        385,
+        388,
+        390,
+        393,
+        394,
+        396,
+        399,
+        401,
+        406,
+        408,
+        411,
+        416,
+        419,
+        421,
+        423,
+        429,
+        430,
+        433,
+        433,
+        433,
+        435,
+        435,
+        439,
+        440,
+        440,
+        445,
+        447,
+        447,
+        447,
+        451,
+        452,
+        454,
+        454,
+        454,
+        454,
+        454,
+        458,
+        461,
+        461,
+        461,
+        461,
+        461,
+        461,
+        461,
+        461,
+        461,
+        461,
+        461,
+        461,
+        461,
+        461,
+        461,
+        461,
+        461,
+        460,
+        460,
+        459,
+        459,
+        459,
+        459,
+        459,
+        459,
+        458,
+        458,
+        458,
+        458,
+        458,
+        457,
+        457,
+        457,
+        458,
+        458,
+        460,
+        459,
+        460,
+        462,
+        461,
+        461,
+        461,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460,
+        460
+      ],
+      "fiber": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        4,
+        4,
+        4,
+        6,
+        7,
+        7,
+        6,
+        9,
+        9,
+        9,
+        10,
+        11,
+        13,
+        13,
+        14,
+        15,
+        16,
+        16,
+        19,
+        19,
+        20,
+        20,
+        21,
+        22,
+        22,
+        24,
+        25,
+        27,
+        28,
+        26,
+        27,
+        28,
+        29,
+        29,
+        31,
+        31,
+        32,
+        32,
+        33,
+        34,
+        34,
+        34,
+        35,
+        37,
+        37,
+        37,
+        37,
+        37,
+        37,
+        37,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        35,
+        35,
+        35,
+        35,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32,
+        31,
+        0,
+        2,
+        2,
+        3,
+        0,
+        0,
+        1,
+        0,
+        2,
+        2,
+        2,
+        1,
+        1,
+        0,
+        1,
+        1,
+        2,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        2,
+        3,
+        3,
+        4,
+        5,
+        4,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        2,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        3,
+        3,
+        6,
+        6,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        7,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        10,
+        12,
+        12,
+        13,
+        13,
+        13,
+        13,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        12,
+        12,
+        12,
+        13,
+        13,
+        12,
+        13,
+        13,
+        12,
+        12,
+        12,
+        12,
+        12,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        10,
+        11,
+        11,
+        11,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ]
+    },
+    "pileDays": 1019,
+    "pileDaysBelowArrowNeed": 488,
+    "pileZeroDays": {
+      "stick": 10,
+      "stone": 12,
+      "fiber": 482
+    },
+    "pileMedian": {
+      "stick": 7,
+      "stone": 256,
+      "fiber": 1
+    },
+    "carrierRows": 3191,
+    "carrierHomeRows": 2170,
+    "distinctCarriers": 53,
+    "buckets": {
+      "away": 1021,
+      "stocked": 619,
+      "cooldown": 114,
+      "no-materials": 1339,
+      "eligible": 98
+    },
+    "noCdHomeShort": 1437,
+    "pileSufNoCd": 98,
+    "ownSufNoCd": 0,
+    "attempts": 84,
+    "madeBatches": 45,
+    "eligibleMismatch": 14,
+    "homeDutyBatches": 45,
+    "homeDutyCalls": 1019,
+    "homeShare": 0.6800376057662175,
+    "pileSufRateNoCd": 0.06819763395963814,
+    "ownSufRateNoCd": 0,
+    "noMatsRateNoCd": 0.9318023660403618
+  },
+  "classification": {
+    "dir": "evidence/2026-11-24/perseed-homecraft-gate-a",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "emptyInstances": 132,
+    "emptyFighters": 27,
+    "received": 7,
+    "neverReceived": 20,
+    "altNeverReceived": 20,
+    "neverWithStartingKit": 0,
+    "byCause": {
+      "(c3) attempted-all-failed": 2,
+      "(c1) no-craftable-weapon": 5,
+      "(a) no-materials": 12,
+      "(b) rarely-home": 1
+    },
+    "residual": 0,
+    "classificationCompleteness": 1,
+    "detail": [
+      {
+        "seed": 110701,
+        "vid": "visjoin_104",
+        "firstEmptyDay": 107,
+        "rangedId": "crossbow",
+        "ammoId": "bolt",
+        "origin": "world-tick",
+        "mid": "influencer",
+        "cause": "(c3) attempted-all-failed",
+        "buckets": {
+          "carrierDays": 3,
+          "awayDays": 2,
+          "homeShortDays": 1,
+          "noMatsDays": 0,
+          "cooldownDays": 0,
+          "eligibleDays": 1,
+          "stockedDays": 0,
+          "attempts": 1
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 18,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110701,
+        "vid": "visjoin_117",
+        "firstEmptyDay": 119,
+        "rangedId": "sling",
+        "ammoId": "stone",
+        "origin": "aid",
+        "mid": "influencer",
+        "cause": "(c1) no-craftable-weapon",
+        "buckets": {
+          "carrierDays": 0,
+          "awayDays": 0,
+          "homeShortDays": 0,
+          "noMatsDays": 0,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 18,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110701,
+        "vid": "ella_johnson",
+        "firstEmptyDay": 119,
+        "rangedId": "sling",
+        "ammoId": "stone",
+        "origin": "aid",
+        "mid": "influencer",
+        "cause": "(c1) no-craftable-weapon",
+        "buckets": {
+          "carrierDays": 0,
+          "awayDays": 0,
+          "homeShortDays": 0,
+          "noMatsDays": 0,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 18,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110702,
+        "vid": "gen_081twa2",
+        "firstEmptyDay": 49,
+        "rangedId": "bow",
+        "ammoId": "arrow",
+        "origin": "expedition",
+        "mid": "eater",
+        "cause": "(a) no-materials",
+        "buckets": {
+          "carrierDays": 12,
+          "awayDays": 5,
+          "homeShortDays": 7,
+          "noMatsDays": 4,
+          "cooldownDays": 2,
+          "eligibleDays": 1,
+          "stockedDays": 0,
+          "attempts": 1
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 3,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110702,
+        "vid": "gen_ae5mcuz",
+        "firstEmptyDay": 52,
+        "rangedId": "sling",
+        "ammoId": "stone",
+        "origin": "expedition",
+        "mid": "reunion",
+        "cause": "(c1) no-craftable-weapon",
+        "buckets": {
+          "carrierDays": 0,
+          "awayDays": 0,
+          "homeShortDays": 0,
+          "noMatsDays": 0,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 3,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110702,
+        "vid": "dale_hoffman",
+        "firstEmptyDay": 83,
+        "rangedId": "sling",
+        "ammoId": "stone",
+        "origin": "world-tick",
+        "mid": "suburb",
+        "cause": "(c1) no-craftable-weapon",
+        "buckets": {
+          "carrierDays": 0,
+          "awayDays": 0,
+          "homeShortDays": 0,
+          "noMatsDays": 0,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 3,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110702,
+        "vid": "brian_otieno",
+        "firstEmptyDay": 83,
+        "rangedId": "bow",
+        "ammoId": "arrow",
+        "origin": "world-tick",
+        "mid": "suburb",
+        "cause": "(a) no-materials",
+        "buckets": {
+          "carrierDays": 83,
+          "awayDays": 27,
+          "homeShortDays": 56,
+          "noMatsDays": 42,
+          "cooldownDays": 8,
+          "eligibleDays": 6,
+          "stockedDays": 0,
+          "attempts": 6
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 3,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110702,
+        "vid": "rosa_mendez",
+        "firstEmptyDay": 87,
+        "rangedId": "crude_bow",
+        "ammoId": "arrow",
+        "origin": "aid",
+        "mid": "herald",
+        "cause": "(b) rarely-home",
+        "buckets": {
+          "carrierDays": 6,
+          "awayDays": 5,
+          "homeShortDays": 1,
+          "noMatsDays": 1,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 3,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110702,
+        "vid": "elijah_scott",
+        "firstEmptyDay": 120,
+        "rangedId": "crude_bow",
+        "ammoId": "arrow",
+        "origin": "world-tick",
+        "mid": "finale_crew",
+        "cause": "(a) no-materials",
+        "buckets": {
+          "carrierDays": 13,
+          "awayDays": 5,
+          "homeShortDays": 8,
+          "noMatsDays": 8,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 3,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110704,
+        "vid": "jesse_cortez",
+        "firstEmptyDay": 44,
+        "rangedId": "bow",
+        "ammoId": "arrow",
+        "origin": "expedition",
+        "mid": "eater",
+        "cause": "(a) no-materials",
+        "buckets": {
+          "carrierDays": 44,
+          "awayDays": 17,
+          "homeShortDays": 27,
+          "noMatsDays": 25,
+          "cooldownDays": 1,
+          "eligibleDays": 1,
+          "stockedDays": 0,
+          "attempts": 1
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 2,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110704,
+        "vid": "gen_ri5nrm6",
+        "firstEmptyDay": 48,
+        "rangedId": "crude_bow",
+        "ammoId": "arrow",
+        "origin": "world-tick",
+        "mid": "suburb",
+        "cause": "(a) no-materials",
+        "buckets": {
+          "carrierDays": 30,
+          "awayDays": 6,
+          "homeShortDays": 24,
+          "noMatsDays": 24,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 2,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110704,
+        "vid": "carlos_diaz",
+        "firstEmptyDay": 112,
+        "rangedId": "crude_bow",
+        "ammoId": "arrow",
+        "origin": "world-tick",
+        "mid": "herald",
+        "cause": "(a) no-materials",
+        "buckets": {
+          "carrierDays": 16,
+          "awayDays": 2,
+          "homeShortDays": 14,
+          "noMatsDays": 14,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 2,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110704,
+        "vid": "ursula_weber",
+        "firstEmptyDay": 114,
+        "rangedId": "bow",
+        "ammoId": "arrow",
+        "origin": "world-tick",
+        "mid": "eulogy",
+        "cause": "(a) no-materials",
+        "buckets": {
+          "carrierDays": 69,
+          "awayDays": 0,
+          "homeShortDays": 69,
+          "noMatsDays": 69,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 2,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110704,
+        "vid": "gen_whqnffw",
+        "firstEmptyDay": 114,
+        "rangedId": "crude_bow",
+        "ammoId": "arrow",
+        "origin": "world-tick",
+        "mid": "eulogy",
+        "cause": "(a) no-materials",
+        "buckets": {
+          "carrierDays": 114,
+          "awayDays": 21,
+          "homeShortDays": 93,
+          "noMatsDays": 93,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 2,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110704,
+        "vid": "dmitri_sokolov",
+        "firstEmptyDay": 114,
+        "rangedId": "crude_bow",
+        "ammoId": "arrow",
+        "origin": "world-tick",
+        "mid": "eulogy",
+        "cause": "(a) no-materials",
+        "buckets": {
+          "carrierDays": 88,
+          "awayDays": 26,
+          "homeShortDays": 62,
+          "noMatsDays": 62,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 2,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110704,
+        "vid": "visjoin_145",
+        "firstEmptyDay": 147,
+        "rangedId": "crude_bow",
+        "ammoId": "arrow",
+        "origin": "expedition",
+        "mid": "audit",
+        "cause": "(a) no-materials",
+        "buckets": {
+          "carrierDays": 1,
+          "awayDays": 0,
+          "homeShortDays": 1,
+          "noMatsDays": 1,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 2,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110706,
+        "vid": "visjoin_118",
+        "firstEmptyDay": 143,
+        "rangedId": "sling",
+        "ammoId": "stone",
+        "origin": "world-tick",
+        "mid": "herald",
+        "cause": "(c1) no-craftable-weapon",
+        "buckets": {
+          "carrierDays": 0,
+          "awayDays": 0,
+          "homeShortDays": 0,
+          "noMatsDays": 0,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 6,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110707,
+        "vid": "wanjiru_kamau",
+        "firstEmptyDay": 52,
+        "rangedId": "crude_bow",
+        "ammoId": "arrow",
+        "origin": "expedition",
+        "mid": "reunion",
+        "cause": "(a) no-materials",
+        "buckets": {
+          "carrierDays": 52,
+          "awayDays": 38,
+          "homeShortDays": 14,
+          "noMatsDays": 13,
+          "cooldownDays": 0,
+          "eligibleDays": 1,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 1,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110707,
+        "vid": "gen_xf91g6d",
+        "firstEmptyDay": 125,
+        "rangedId": "crude_bow",
+        "ammoId": "arrow",
+        "origin": "expedition",
+        "mid": "eulogy",
+        "cause": "(a) no-materials",
+        "buckets": {
+          "carrierDays": 83,
+          "awayDays": 0,
+          "homeShortDays": 83,
+          "noMatsDays": 83,
+          "cooldownDays": 0,
+          "eligibleDays": 0,
+          "stockedDays": 0,
+          "attempts": 0
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 1,
+        "receivedAlt": false
+      },
+      {
+        "seed": 110708,
+        "vid": "elijah_scott",
+        "firstEmptyDay": 98,
+        "rangedId": "crude_bow",
+        "ammoId": "arrow",
+        "origin": "world-tick",
+        "mid": "eulogy",
+        "cause": "(c3) attempted-all-failed",
+        "buckets": {
+          "carrierDays": 3,
+          "awayDays": 1,
+          "homeShortDays": 2,
+          "noMatsDays": 0,
+          "cooldownDays": 1,
+          "eligibleDays": 1,
+          "stockedDays": 0,
+          "attempts": 1
+        },
+        "successes": 0,
+        "villageHomeDutyBatches": 6,
+        "receivedAlt": false
+      }
+    ],
+    "receivedDetail": [
+      {
+        "seed": 110701,
+        "vid": "nina_petrova",
+        "firstEmptyDay": 83,
+        "rangedId": "crossbow",
+        "origin": "aid",
+        "mid": "strike",
+        "cause": "(d) spent-before-fight"
+      },
+      {
+        "seed": 110701,
+        "vid": "visjoin_114",
+        "firstEmptyDay": 119,
+        "rangedId": "sling",
+        "origin": "aid",
+        "mid": "influencer",
+        "cause": "(d) spent-before-fight"
+      },
+      {
+        "seed": 110702,
+        "vid": "maya_singh",
+        "firstEmptyDay": 49,
+        "rangedId": "crude_bow",
+        "origin": "expedition",
+        "mid": "eater",
+        "cause": "(d) spent-before-fight"
+      },
+      {
+        "seed": 110704,
+        "vid": "priya_nair",
+        "firstEmptyDay": 48,
+        "rangedId": "bow",
+        "origin": "world-tick",
+        "mid": "suburb",
+        "cause": "(d) spent-before-fight"
+      },
+      {
+        "seed": 110707,
+        "vid": "ines_duarte",
+        "firstEmptyDay": 52,
+        "rangedId": "crude_bow",
+        "origin": "expedition",
+        "mid": "reunion",
+        "cause": "(d) spent-before-fight"
+      },
+      {
+        "seed": 110707,
+        "vid": "gen_u2rv2t8",
+        "firstEmptyDay": 121,
+        "rangedId": "apex_bow",
+        "origin": "expedition",
+        "mid": "eulogy",
+        "cause": "(d) spent-before-fight"
+      },
+      {
+        "seed": 110708,
+        "vid": "gen_q08rk94",
+        "firstEmptyDay": 116,
+        "rangedId": "crude_bow",
+        "origin": "aid",
+        "mid": "herald",
+        "cause": "(d) spent-before-fight"
+      }
+    ]
+  },
+  "gateHashes": {
+    "110701": "f7fbbe77aaca0a45a8904a435520450773ce09e001025434fbc078786b85c976",
+    "110702": "22350a615cb17bcf2b9e4a14d344cf428ec6df410eb510637a7ae28f182c2f71",
+    "110703": "c6606d8084aba9f2a58a899d2fd66abc51b993b67238d4b0ad5c31227a4885bc",
+    "110704": "6df967d9573ef9eda3c234a3f4c4c82a0186ee335be5cb948981117123ddf995",
+    "110705": "95b7e3eb6e98fcb63d169b55d86a462b618bd14a4d2a5d038436152c61a2ca4b",
+    "110706": "09b83933b01168338d468cc78802b7df6baf2397155fa773af7a86d813dea7c2",
+    "110707": "bde83c64366dae8475747121f322aef42561d0703df2d073e842374ab21d89be",
+    "110708": "d7edc962758f51053320ae8b9f3d171885c7a60efcae63ef4cd975e2fd071a06"
+  },
+  "pairMeetings": [
+    {
+      "seed": 110702,
+      "day": 52,
+      "vid": "gen_jv4kbwc",
+      "mid": "reunion",
+      "mHpStart": 1313,
+      "outcome": "vDie",
+      "win": false,
+      "rounds": 3,
+      "vTaken": 92,
+      "mDealt": 13,
+      "dmgShare": 0.009900990099009901,
+      "dmgPerRound": 4.333333333333333,
+      "volley": null,
+      "rangedId": null,
+      "ammoAtEntry": 0,
+      "planParty": [
+        "maya_singh"
+      ],
+      "allyVids": [
+        "maya_singh",
+        "gen_ae5mcuz"
+      ],
+      "joiners": [
+        "maya_singh"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_jv4kbwc": {
+          "armed": true,
+          "armored": true,
+          "armorP": 17
+        },
+        "maya_singh": {
+          "armed": true,
+          "armored": true,
+          "armorP": 24
+        },
+        "gen_ae5mcuz": {
+          "armed": true,
+          "armored": true,
+          "armorP": 42
+        }
+      },
+      "minArmorP": 17,
+      "meanArmorP": 27.666666666666668,
+      "parsedStrikeTotal": 13,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": 0,
+      "abilitiesPerMember": 2.6666666666666665,
+      "memberAbilities": {
+        "gen_jv4kbwc": [
+          "green_whisper",
+          "lucky_rock"
+        ],
+        "maya_singh": [
+          "green_whisper",
+          "green_thumb",
+          "rage",
+          "beard_moss"
+        ],
+        "gen_ae5mcuz": [
+          "beast_calm",
+          "scream_cheese"
+        ]
+      },
+      "abilityTokens": [
+        "Walk In",
+        "Peacemaker"
+      ],
+      "log": [
+        "Jada walks straight into The Reunion. No avoiding it.",
+        "R1: Jada walks in open-handed — and it goes wrong. It doesn't want peace. They're exposed, off-balance. (Walk In — failed)",
+        "  still off-balance from the failed parley, Jada takes it worse. (Peacemaker — exposed)",
+        "Jada's gear absorbs 60.",
+        "R1: Your Move hits Jada for 39 (46 left)",
+        "Jada's gear absorbs 41.",
+        "R2: Your Move hits Jada for 26 (20 left)",
+        "R2: Jada strikes for 13 (x1.3) (1300 left)",
+        "Jada is losing — shouts for help! Maya charges in!",
+        "Jada steps into the blow meant for Maya. Not them.",
+        "Jada's gear absorbs 43.",
+        "R3: Your Move hits Jada for 27 (0 left)"
+      ]
+    },
+    {
+      "seed": 110704,
+      "day": 137,
+      "vid": "gen_whqnffw",
+      "mid": "spoiler",
+      "mHpStart": 1571,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 38,
+      "mDealt": 387,
+      "dmgShare": 0.24633991088478677,
+      "dmgPerRound": 96.75,
+      "volley": {
+        "shots": 0,
+        "hits": 0,
+        "dmg": 0
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 0,
+      "planParty": [
+        "visjoin_129",
+        "carlos_diaz",
+        "priya_nair"
+      ],
+      "allyVids": [
+        "carlos_diaz",
+        "priya_nair"
+      ],
+      "joiners": [
+        "carlos_diaz",
+        "priya_nair"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_whqnffw": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        },
+        "carlos_diaz": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "priya_nair": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        }
+      },
+      "minArmorP": 21,
+      "meanArmorP": 26.333333333333332,
+      "parsedStrikeTotal": 387,
+      "parsedAttributed": 387,
+      "dmgByVid": {
+        "gen_whqnffw": 291,
+        "carlos_diaz": 57,
+        "priya_nair": 39
+      },
+      "fighterDmgShare": 0.751937984496124,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "gen_whqnffw": [
+          "night_eyes",
+          "rage",
+          "turncoat"
+        ],
+        "carlos_diaz": [
+          "bloodhound",
+          "fusion_reactor",
+          "echo_location"
+        ],
+        "priya_nair": [
+          "beast_calm"
+        ]
+      },
+      "abilityTokens": [
+        "Rage"
+      ],
+      "log": [
+        "Rahul walks straight into The Spoiler. No avoiding it.",
+        "Rahul has Crude bow but no arrows — the string stays drawn, useless.",
+        "R1: Rahul's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "R1: \"IN THREE ROUNDS, RAHUL WILL BLEED.\" The poster changes.",
+        "Rahul's gear absorbs 65.",
+        "R1: Blooded — the village knows where the Producers bleed. (Strikes hit 1.5× as hard; their blows land at 0.75× strength.)",
+        "R1: Leaked Ending hits Rahul for 18 (74 left)",
+        "R2: Rahul strikes for 96 (x2.0) (1475 left)",
+        "Rahul's gear absorbs 72.",
+        "R2: Leaked Ending hits Rahul for 20 (54 left)",
+        "Rahul is losing — shouts for help! Carlos charges in!",
+        "R3: Rahul strikes for 102 (x2.0) (1373 left)",
+        "R3: Carlos strikes for 30 (1343 left)",
+        "Carlos's gear absorbs 52.",
+        "R3: Leaked Ending hits Carlos for 25 (60 left)",
+        "Rahul is still losing — shouts again! Priya charges in!",
+        "R4: Rahul strikes for 93 (x2.0) (1250 left)",
+        "R4: Carlos strikes for 27 (1223 left)",
+        "R4: Priya strikes for 39 (1184 left)",
+        "R4: the announced thing happened — the voiceover grows LOUDER (weight 1)."
+      ]
+    },
+    {
+      "seed": 110707,
+      "day": 52,
+      "vid": "wanjiru_kamau",
+      "mid": "reunion",
+      "mHpStart": 1364,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 69,
+      "mDealt": 142,
+      "dmgShare": 0.10410557184750734,
+      "dmgPerRound": 35.5,
+      "volley": {
+        "shots": 0,
+        "hits": 0,
+        "dmg": 0
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 0,
+      "planParty": [
+        "gen_1cl32za"
+      ],
+      "allyVids": [
+        "gen_1cl32za",
+        "ines_duarte"
+      ],
+      "joiners": [
+        "gen_1cl32za",
+        "ines_duarte"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "wanjiru_kamau": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "gen_1cl32za": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        },
+        "ines_duarte": {
+          "armed": true,
+          "armored": true,
+          "armorP": 42
+        }
+      },
+      "minArmorP": 21,
+      "meanArmorP": 33.333333333333336,
+      "parsedStrikeTotal": 142,
+      "parsedAttributed": 142,
+      "dmgByVid": {
+        "wanjiru_kamau": 80,
+        "gen_1cl32za": 47,
+        "ines_duarte": 15
+      },
+      "fighterDmgShare": 0.5633802816901409,
+      "abilitiesPerMember": 1,
+      "memberAbilities": {
+        "wanjiru_kamau": [],
+        "gen_1cl32za": [
+          "the_touch",
+          "echo_location"
+        ],
+        "ines_duarte": [
+          "green_whisper"
+        ]
+      },
+      "abilityTokens": [
+        "Rage",
+        "field medicine"
+      ],
+      "log": [
+        "Wanjiru walks straight into The Reunion. No avoiding it.",
+        "Wanjiru has Crude bow but no arrows — the string stays drawn, useless.",
+        "R1: Wanjiru's eyes go red. Next 3 strikes hit twice as hard. (Rage) [Wanjiru — Stalker of the Apex Predator]",
+        "Wanjiru's gear absorbs 44.",
+        "R1: Your Move hits Wanjiru for 23 (60 left)",
+        "R2: Wanjiru strikes for 40 (x2.0) (1324 left)",
+        "Wanjiru's gear absorbs 43.",
+        "R2: Your Move hits Wanjiru for 23 (37 left)",
+        "Wanjiru is losing — shouts for help! Lorena charges in!",
+        "R3: Wanjiru stops mid-fight and binds the wound — field medicine, +20 HP.",
+        "R3: Lorena strikes for 22 (1302 left)",
+        "Wanjiru's gear absorbs 44.",
+        "R3: Your Move hits Wanjiru for 23 (34 left)",
+        "Wanjiru is still losing — shouts again! Ines charges in!",
+        "Ines's gear absorbs 53.",
+        "R4: Your Move hits Ines for 14 (65 left)",
+        "R4: Wanjiru strikes for 40 (x2.0) (1262 left)",
+        "R4: Lorena strikes for 25 (1237 left)",
+        "R4: Ines strikes for 15 (1222 left)",
+        "Wanjiru sees how this ends — and runs while running still works."
+      ]
+    },
+    {
+      "seed": 110707,
+      "day": 125,
+      "vid": "gen_1cl32za",
+      "mid": "eulogy",
+      "mHpStart": 1072,
+      "outcome": "mFlee",
+      "win": true,
+      "rounds": 1,
+      "vTaken": 0,
+      "mDealt": 0,
+      "dmgShare": 0,
+      "dmgPerRound": 0,
+      "volley": null,
+      "rangedId": "hunting_spear",
+      "ammoAtEntry": 0,
+      "planParty": [
+        "wanjiru_kamau"
+      ],
+      "allyVids": [
+        "wanjiru_kamau",
+        "gen_xf91g6d"
+      ],
+      "joiners": [],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_1cl32za": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        },
+        "wanjiru_kamau": {
+          "armed": true,
+          "armored": true,
+          "armorP": 36
+        },
+        "gen_xf91g6d": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        }
+      },
+      "minArmorP": 36,
+      "meanArmorP": 36.666666666666664,
+      "parsedStrikeTotal": 0,
+      "parsedAttributed": 0,
+      "dmgByVid": {},
+      "fighterDmgShare": null,
+      "abilitiesPerMember": 3.3333333333333335,
+      "memberAbilities": {
+        "gen_1cl32za": [
+          "the_touch",
+          "echo_location",
+          "green_whisper",
+          "war_cry",
+          "dowsing",
+          "water_breathing"
+        ],
+        "wanjiru_kamau": [],
+        "gen_xf91g6d": [
+          "green_whisper",
+          "rage",
+          "beard_moss",
+          "pyrokinesis"
+        ]
+      },
+      "abilityTokens": [],
+      "log": [
+        "Lorena walks straight into The Loud Beast. No avoiding it.",
+        "R1: Lorena walks in open-handed, talking — low, steady, unafraid. And impossibly, it listens. It stands down. (Peacemaker: Walk In)"
+      ]
+    }
+  ],
+  "trioMeetings": [
+    {
+      "seed": 110704,
+      "day": 137,
+      "vid": "gen_whqnffw",
+      "mid": "spoiler",
+      "mHpStart": 1571,
+      "outcome": "vFlee",
+      "win": false,
+      "rounds": 4,
+      "vTaken": 38,
+      "mDealt": 387,
+      "dmgShare": 0.24633991088478677,
+      "dmgPerRound": 96.75,
+      "volley": {
+        "shots": 0,
+        "hits": 0,
+        "dmg": 0
+      },
+      "rangedId": "crude_bow",
+      "ammoAtEntry": 0,
+      "planParty": [
+        "visjoin_129",
+        "carlos_diaz",
+        "priya_nair"
+      ],
+      "allyVids": [
+        "carlos_diaz",
+        "priya_nair"
+      ],
+      "joiners": [
+        "carlos_diaz",
+        "priya_nair"
+      ],
+      "partySize": 3,
+      "gate": {
+        "result": "null",
+        "reason": null,
+        "allArmed": true,
+        "allArmored": true
+      },
+      "gear": {
+        "gen_whqnffw": {
+          "armed": true,
+          "armored": true,
+          "armorP": 37
+        },
+        "carlos_diaz": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        },
+        "priya_nair": {
+          "armed": true,
+          "armored": true,
+          "armorP": 21
+        }
+      },
+      "minArmorP": 21,
+      "meanArmorP": 26.333333333333332,
+      "parsedStrikeTotal": 387,
+      "parsedAttributed": 387,
+      "dmgByVid": {
+        "gen_whqnffw": 291,
+        "carlos_diaz": 57,
+        "priya_nair": 39
+      },
+      "fighterDmgShare": 0.751937984496124,
+      "abilitiesPerMember": 2.3333333333333335,
+      "memberAbilities": {
+        "gen_whqnffw": [
+          "night_eyes",
+          "rage",
+          "turncoat"
+        ],
+        "carlos_diaz": [
+          "bloodhound",
+          "fusion_reactor",
+          "echo_location"
+        ],
+        "priya_nair": [
+          "beast_calm"
+        ]
+      },
+      "abilityTokens": [
+        "Rage"
+      ],
+      "log": [
+        "Rahul walks straight into The Spoiler. No avoiding it.",
+        "Rahul has Crude bow but no arrows — the string stays drawn, useless.",
+        "R1: Rahul's eyes go red. Next 3 strikes hit twice as hard. (Rage)",
+        "R1: \"IN THREE ROUNDS, RAHUL WILL BLEED.\" The poster changes.",
+        "Rahul's gear absorbs 65.",
+        "R1: Blooded — the village knows where the Producers bleed. (Strikes hit 1.5× as hard; their blows land at 0.75× strength.)",
+        "R1: Leaked Ending hits Rahul for 18 (74 left)",
+        "R2: Rahul strikes for 96 (x2.0) (1475 left)",
+        "Rahul's gear absorbs 72.",
+        "R2: Leaked Ending hits Rahul for 20 (54 left)",
+        "Rahul is losing — shouts for help! Carlos charges in!",
+        "R3: Rahul strikes for 102 (x2.0) (1373 left)",
+        "R3: Carlos strikes for 30 (1343 left)",
+        "Carlos's gear absorbs 52.",
+        "R3: Leaked Ending hits Carlos for 25 (60 left)",
+        "Rahul is still losing — shouts again! Priya charges in!",
+        "R4: Rahul strikes for 93 (x2.0) (1250 left)",
+        "R4: Carlos strikes for 27 (1223 left)",
+        "R4: Priya strikes for 39 (1184 left)",
+        "R4: the announced thing happened — the voiceover grows LOUDER (weight 1)."
+      ]
+    }
+  ]
+}
