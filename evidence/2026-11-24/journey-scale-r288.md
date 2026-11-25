@@ -79,14 +79,20 @@ Eight villages, five alive at day 140. They are small (3–7 people left) and ti
 
 ## Gate
 
-PENDING — `node scripts/check.js --quick` on the tip, after commit.
+`node scripts/check.js --quick` on the tip (`546a06ca5`, base `d1d61f517`): **339 passed, 5 failed in 801s** — exactly the standing set, 0 attributable to this run (this run changed no `src/js` and no harness inputs):
+- `test-phone-frame-proof.js` — stale phone receipt (sibling `src/data` changes since the receipt was refreshed; 3 sub-failures).
+- `test-one-person-army-deed-attainment.js` — 120s timeout (load flake).
+- `test-living-garden-deed-attainment.js` — 120s timeout (load flake).
+- Two measurement-proof files — "retained neutrality proof covers the current Game/controller/harness inputs" (stale neutrality proof; sibling Game/controller/harness changes during the run). The proof refresh is owed to the base-delta arm owners (same pair as r283's gate; maintenance refresh via balance-proof-update still owed).
 
 ## Closeout record (filled as the closeout proceeds)
 
 - Run note written: evidence/2026-11-24/journey-scale-r288.md (this file).
 - Prereg written: evidence/2026-11-24/journey-scale-r288-prereg.md.
 - Driver/analyzer/proof cloned from r283: `scripts/journey-scale-r288-20261125.js`, `scripts/analyze-journey-scale-r288-20261125.js`, `scripts/test-journey-scale-r288-analyzer-20261125.js` (0 leftover r283/old-seed references; proof 178/178 before the panel).
-- Telemetry check: PENDING.
-- Gate: PENDING.
-- Commit: PENDING.
+- Telemetry check: `node scripts/telemetry-check.js --baseline ~/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/telemetry-baselines/scale.json --current '<goal>/hidden_files/evidence/2026-11-24/journey-scale-r288-b-trust-*.json' --metrics fightsTotal,fightsByWave.4,maxGameDay` → 1 LOUD line: `maxGameDay swung 123%: baseline 468 -> current 1043 (n=8 files)`. Verdict: r251-regime artifact — the baseline sums an old-regime file set (panel sum is 1043 days over 8 seeds, matching the analyzer's lived-days total); fightsTotal and fightsByWave.4 did not flag. Baseline NOT rolled — same classification as r283's 1 LOUD line.
+- Gate: 339 passed, 5 failed in 801s (standing set, 0 attributable) — see Gate section above.
+- Proof test on the tip: 178/178 (`scripts/test-journey-scale-r288-analyzer-20261125.js`); analyzer reproduces the saved log on the tip.
+- Base movement: master did NOT move during the run (still `d1d61f517` at merge; origin/master `b48b195db` — local master 1 ahead, unpushed, ship loop owns pushes). No rebase needed.
+- Commit: `546a06ca5` (5 files) + closeout addendum (this note's Gate/Telemetry sections). Index clobber struck after safe-commit and was repaired (ls-tree pipe + update-index; status/diff clean, hash-object matches).
 - Merge / rotation / release / lock: PENDING.
