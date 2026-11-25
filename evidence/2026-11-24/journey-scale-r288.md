@@ -85,6 +85,8 @@ Eight villages, five alive at day 140. They are small (3–7 people left) and ti
 - `test-living-garden-deed-attainment.js` — 120s timeout (load flake).
 - Two measurement-proof files — "retained neutrality proof covers the current Game/controller/harness inputs" (stale neutrality proof; sibling Game/controller/harness changes during the run). The proof refresh is owed to the base-delta arm owners (same pair as r283's gate; maintenance refresh via balance-proof-update still owed).
 
+**Re-run on the rebased tip** (`2b2982af0`, base `149a59984`): **338 passed, 6 failed in 867s** — the same 5 standing failures PLUS `test-capable-bot-20261014.js` (120s timeout, load flake — it also timed out in r286's gate under load). Adjudication: capable-bot re-run standalone serialized passes **40/40 in 79s** — a load flake, not a regression. 0 failures attributable to this run on either gate run.
+
 ## Closeout record (filled as the closeout proceeds)
 
 - Run note written: evidence/2026-11-24/journey-scale-r288.md (this file).
@@ -93,6 +95,6 @@ Eight villages, five alive at day 140. They are small (3–7 people left) and ti
 - Telemetry check: `node scripts/telemetry-check.js --baseline ~/workspace/goals/the-scattering-roguelite-survival-game/hidden_files/telemetry-baselines/scale.json --current '<goal>/hidden_files/evidence/2026-11-24/journey-scale-r288-b-trust-*.json' --metrics fightsTotal,fightsByWave.4,maxGameDay` → 1 LOUD line: `maxGameDay swung 123%: baseline 468 -> current 1043 (n=8 files)`. Verdict: r251-regime artifact — the baseline sums an old-regime file set (panel sum is 1043 days over 8 seeds, matching the analyzer's lived-days total); fightsTotal and fightsByWave.4 did not flag. Baseline NOT rolled — same classification as r283's 1 LOUD line.
 - Gate: 339 passed, 5 failed in 801s (standing set, 0 attributable) — see Gate section above.
 - Proof test on the tip: 178/178 (`scripts/test-journey-scale-r288-analyzer-20261125.js`); analyzer reproduces the saved log on the tip.
-- Base movement: master did NOT move during the run (still `d1d61f517` at merge; origin/master `b48b195db` — local master 1 ahead, unpushed, ship loop owns pushes). No rebase needed.
-- Commit: `546a06ca5` (5 files) + closeout addendum (this note's Gate/Telemetry sections). Index clobber struck after safe-commit and was repaired (ls-tree pipe + update-index; status/diff clean, hash-object matches).
+- Base movement: master moved DURING the gate (flesh-out loop landed wilddeath-b + fleeguard-b, 8 commits, `d1d61f517` → `149a59984`, including `src/js/fieldFights.js` +65 fleeguard live-numbers guard, default OFF). The branch was rebased onto `149a59984` (clean, no conflicts, no quirk: `546a06ca5` → `11b885faf`, `8c093f3c5` → `2b2982af0`); proof test re-green 178/178 on the rebased tip and the analyzer reproduces the saved log byte-identically. The gate was re-run on the rebased tip (see Gate section). No panel re-run (the rebase adds sibling commits only; the fleeguard guard is default-off and the panel ran without it).
+- Commit: `546a06ca5` (5 files) + closeout addendum `8c093f3c5` (this note's Gate/Telemetry sections), both rebased onto `149a59984`. Index clobber struck after both safe-commits and was repaired (ls-tree pipe + update-index; status/diff clean, hash-object matches).
 - Merge / rotation / release / lock: PENDING.
