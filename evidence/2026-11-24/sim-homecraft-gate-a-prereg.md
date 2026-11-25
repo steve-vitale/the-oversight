@@ -284,3 +284,15 @@ the food ladder only and says nothing about arrow/bolt craft.
   worktree and the block is reported loudly with exact recovery commands
   — the freeze is the file on disk with its pre-pilot timestamp, and the
   commit follows when the flap clears. Probe before every material write.
+
+## §9. Correction (pre-pilot, 2026-11-25 ~00:45 UTC — before any judged sim)
+
+- Bucket order clarification (§1c): the per-carrier-day bucket follows the
+  code's gate order in `villagerAmmoCraftDay` — cooldown is gate 2,
+  already-stocked is gate 5 — so a day where a carrier is BOTH stocked
+  (≥5 carried) AND in cooldown counts as `cooldown`, not `stocked`.
+  `stockedDays` in the detail rows therefore means home + carried ≥ 5 +
+  not in cooldown. This changes no verdict bar and no cause rule
+  (stockedDays feeds no rule; home-short days are unaffected — a stocked
+  day is never home-short under either order). Found by the proof test
+  (a freshly crafted carrier reads stocked + cooldown the same day).
