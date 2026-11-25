@@ -335,7 +335,15 @@ Not a lever: (b) rarely-home (1/20) and (c3) bad luck (2/20) are too small to ch
   uptime ~3h) the probe passes. The 2315Z run timed out before committing its
   evidence; this adoption recovers that work — nothing was re-run except the
   determinism re-check, which is a verification read, not a new sim.
-- **Rebase:** (to be filled by the adoption worker after the rebase — see §13.)
+- **Rebase:** adoption worker rebased the branch onto current master tip
+  `4e81a9e94` (journey-crisis r287 run note; master had moved 16 commits past the
+  branch base `ebc163fe8` — version bump, journey-deepening r286, wilddeath-b,
+  fleeguard-b, partyassemble-b, journey-scale r288, journey-crisis r287 — and moved
+  once more, r287 landing, during the adoption itself). Rebase clean, 4/4 picks, no
+  conflicts, no stops. New branch tip `742da708f`. On the rebased tip: analyzer
+  selftest 57/57, proof test 29/29, analyzer re-run over the pilot corpus still
+  DIAG-GO and deep-equal to the committed analysis JSON. Zero src/js overlap with
+  the master delta, as expected.
 
 ## §13. Adoption closeout
 
@@ -349,3 +357,12 @@ Not a lever: (b) rarely-home (1/20) and (c3) bad luck (2/20) are too small to ch
   `perseed-homecraft-gate-a/` (8 per-seed JSONs), `perseed-homecraft-gate-a-rerun/`
   (seed 110701 determinism replay) — all committed by this adoption.
 - Rebase onto current master tip + proof re-run: pending (below).
+- Rebase outcome (adoption, 2026-11-25 ~02:45 UTC): rebased cleanly onto master tip
+  `4e81a9e94` (journey-crisis r287). New branch tip `742da708f` (adoption commit);
+  full rebased tip list: `742da708f` (adoption corpus + analysis + evidence),
+  `f569480c8` (analyzer fix), `619ea65c8` (instruments), `f94a5e19d` (prereg).
+  On the rebased tip: analyzer selftest 57/57, proof test 29/29, analyzer re-run
+  DIAG-GO deep-equal to the committed analysis JSON. Worktree clean
+  (`git status --short` empty, `git diff HEAD` empty). **Ready: merged locally,
+  pending ship** — coordinator merges via --ff-only; no push, no bump, no live
+  verification by this worker.
