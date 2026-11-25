@@ -1608,6 +1608,27 @@
           doorFlee2Quad = _df2Pin.length === 3 && allyVid === _df2Pin[0] && ally2Vid === _df2Pin[1] && ally3Vid === _df2Pin[2];
         }
       } catch (e) { doorflee2On = false; doorFlee2Quad = false; }
+      // FLEEGUARD (sim-fleeguard-b, finding #2602): the live-numbers
+      // guard on the hopeless read, generalized from the DOORFLEE2
+      // door hold to every wild wave-4+ fight. The hopeless read
+      // judges the fight as if the leader wore protection 4 — on the
+      // measured band leads wear protection 27–37, so the imagined
+      // damage runs ~3x the real damage and a party that is winning
+      // on live numbers reads as hopeless and runs (sharpest case:
+      // monster 0.8 rounds from death, lead 5.7 rounds from dropping,
+      // still fled). The guard re-reads the SAME race on live
+      // numbers below, only while the P4 read actually said hopeless.
+      // Wave-gated >= 4 (the measured band; wave 1–3 balance never
+      // touched). Env-gated, OFF by default: in the browser `process`
+      // is undefined, so the flag is never on there; with it unset
+      // the hold below is unreachable and no new RNG is drawn
+      // (off-mode is byte-identical). It does NOT replace DOORFLEE2:
+      // a pinned door quad that DOORFLEE2 already held has hopeless
+      // false by the time this block runs, so the two never stack.
+      var fleeguardOn = false;
+      try {
+        fleeguardOn = (typeof process !== 'undefined' && process.env && process.env.FLEEGUARD === '1') && mdef && ((mdef.wave | 0) >= 4);
+      } catch (e) { fleeguardOn = false; }
       // HYPOFLOOR (sim-hypofloor-b, finding #2619): floor each
       // fighter's hypothetical HP at 0 in the P4 morale pool, on the
       // same terms as DOORFLEE2 — only a FULL pinned trio that
@@ -2931,6 +2952,50 @@
                 rec.log.push(vName + ' holds the door — the fight is theirs on the numbers they can see, and the quad is not leaving it. (Door hold)');
               }
               rec.doorHold = (rec.doorHold | 0) + 1;
+              hopeless = false;
+              winning = true;
+              rec.everWinning = true;
+              fleeAt = 0.05;
+            }
+          }
+        }
+        // FLEEGUARD (sim-fleeguard-b, finding #2602): the live-numbers
+        // guard on the hopeless read, generalized from the DOORFLEE2
+        // door hold to every wild wave-4+ fight. The hopeless read
+        // above judges the fight as if everyone's armor were
+        // protection 4 — where the party wears tier armor the
+        // imagined damage runs ~3x the real damage, so a party that
+        // is actually winning (monster 1–3 rounds from death, the
+        // leader healthy on live numbers) reads as hopeless and runs.
+        // The hold re-reads the SAME race on live numbers — live
+        // party HP left against live damage taken per round, same 1.1
+        // winning margin — and only while the P4 read actually said
+        // hopeless. The guard is LEADER-SURVIVAL-ONLY (the DOORFLEE2
+        // lesson): the leader's live HP must exceed their incoming
+        // rate times the rounds left to kill (vHp > leaderRate *
+        // rtk) — the leader must plausibly survive the whole
+        // remaining fight, not just the next round. The hold never
+        // touches the bravery floor ("past holding"), learn-first
+        // withdrawal, death, signature exits, or sealed arenas. A
+        // party losing on live numbers flees exactly as before. No
+        // RNG is drawn; off-mode (FLEEGUARD unset) never reaches
+        // this block.
+        if (fleeguardOn && !opts.noFlee && rec.intent !== 'learn' && hopeless && round >= 2 && members[0].hp > 0) {
+          var _fgLead = null;
+          for (var _fgj = 0; _fgj < members.length; _fgj++) { if (members[_fgj].hp > 0) { _fgLead = members[_fgj]; break; } }
+          if (_fgLead) {
+            var _fgEntry = vHpStart + Math.max(0, allyEntryHp) + Math.max(0, ally2EntryHp) + Math.max(0, ally3EntryHp);
+            var _fgLive = Math.max(0, vHp) + Math.max(0, allyHp) + Math.max(0, ally2Hp) + Math.max(0, ally3Hp);
+            var _fgTakenRate = Math.max(0, _fgEntry - _fgLive) / round;
+            var _fgRtk = _fgLead.hp / Math.max(1, rec.mDealt / round);
+            var _fgRtd = _fgTakenRate > 0 ? _fgLive / _fgTakenRate : Infinity;
+            var _fgLeaderRate = Math.max(0, vHpStart - vHp) / round;
+            if (_fgRtk <= _fgRtd * 1.1 && vHp > _fgLeaderRate * _fgRtk) {
+              if (!rec.fleeguardHoldLogged) {
+                rec.fleeguardHoldLogged = true;
+                rec.log.push(vName + ' holds — the numbers they can see say this fight is theirs, and they are not leaving it. (Live-numbers guard)');
+              }
+              rec.fleeguardHold = (rec.fleeguardHold | 0) + 1;
               hopeless = false;
               winning = true;
               rec.everWinning = true;
