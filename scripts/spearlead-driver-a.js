@@ -1067,6 +1067,11 @@ async function oneRun(seed) {
   const v4gates = [];
   const v4seeds = [];
   const v4departs = [];
+  // ---- DAWNBID CAPTURE ----
+  const dawnbidScores = [];
+  const dawnbidDeparts = [];
+  const dawnbidCensus = [];
+  const dawnbidStarts = [];
   // ---- SPEARLEAD LEDGERS (prereg §4) ----
   const spearDeparts = [];
   const allStarts = [];
@@ -1077,11 +1082,6 @@ async function oneRun(seed) {
   const spearL = { spearDeparts: spearDeparts, allStarts: allStarts, expFights: expFights,
     spearTrack: spearTrack, v4departs: v4departs, dawnbidDeparts: dawnbidDeparts,
     v4encounters: v4encounters, v4gates: v4gates, open: {} };
-  // ---- DAWNBID CAPTURE ----
-  const dawnbidScores = [];
-  const dawnbidDeparts = [];
-  const dawnbidCensus = [];
-  const dawnbidStarts = [];
   // ---- LAUNCHPARTY: skip-reason rows ----
   const launchdefSkips = [];
   // ---- COMPANIONPOOL CAPTURE ----
