@@ -74,8 +74,14 @@ Eight villages, six alive at day 100. They are small (2–11 people left) and ti
 - Q4: the variety pools fire in the wild (Lucas heed-2 line differs from r278's identical sitting); heed resolves (heed-dry fix holds). The hold-voice / departure-beat / calledname / mourn-shape watches are unmeasured in this corpus — instrument gap, filed here; the driver needs a hold-voice + beat-text instrument before the next conversation-heavy base lands.
 - Q6: the joint revert attributes the movement to the base delta as a whole. The per-arm bisect is owed to the arm owners; this run declares it honestly rather than guessing which arm moved which seed.
 
-## Gate / telemetry
-- (to be filled at closeout — gate running after this commit)
+## Gate / telemetry (filled at adoption closeout, run playtest-20261124T2347Z)
+- Gate ran on the r286 checkout (base 6297eb21c): `node scripts/check.js --quick` → **332 passed, 12 failed in 1423s** (log: `journey-deepening-r286-check.log`).
+- 8 timeouts (120s, exit null): living-garden-deed-attainment, occupation-panels, one-person-army-deed-attainment, trust-observer-neutrality, synergy-stall, throttlefeast-20261014, capable-bot-20261014, table-endings-20261014 — load timeouts under a 12+ load average, not assertion failures. Standalone re-runs: living-garden genuinely >300s; occupation-panels green; the rest incomplete at the run's timeout.
+- 4 real failures (exit 1): measurement-proof-update, measurement-workflow (retained neutrality proof stale), measurement-cache-flags, phone-frame-proof (stale phone receipt / boot-input mismatch) — all stale retained proofs vs the base-delta src changes, pre-existing on the base, not caused by this commit (tooling + note only, no src change).
+- src/ diff base 6297eb21c → master b48b195db: only `src/js/build.js` 1 line (ship version bump). The gate result carries to the rebased tree.
+- Proof tests re-verified GREEN on the rebased tree (dd50d5914): analyzer 113/113, march 11/11, muster 41/41.
+- **Gate adjudication: ADJUDICATED — no failure attributable to this commit.** The 4 stale-proof failures are owed to the base-delta arm owners (proof refresh after their src changes); the 8 timeouts are load. Landing approved: tooling + evidence only.
+- Telemetry check: see Closeout (run after merge; baseline deepening.json).
 
 ## Evidence
 - Prereg, driver/panel logs, analyzer log, per-seed JSONs, 113 transcripts: goal hidden_files `evidence/2026-11-24/`.
@@ -84,5 +90,8 @@ Eight villages, six alive at day 100. They are small (2–11 people left) and ti
 - Driver/analyzer/tests: worktree `scripts/` (committed below).
 - Run note (this file): worktree `evidence/2026-11-24/journey-deepening-r286.md`.
 
-## Closeout
-- (to be filled at closeout)
+## Closeout (adoption, run playtest-20261124T2347Z, Lane A)
+- The 2100Z occurrence timed out before closeout (gate unadjudicated, unmerged). This run adopted the stranded work per the loop-closeout rule: no live worker (last write 22:22Z, heartbeat 23:21Z stale, no panel/check processes, VM rebooted ~23:30Z); no lock file present at 23:43Z; worktree `journey-deepening` intact at 158c4cc7a, clean.
+- Adoption: heartbeat landed 23:58:44Z (registry lock contended by two sibling registrations for ~10 min; retried until it landed, read back verified). Rebased 158c4cc7a → dd50d5914 onto master b48b195db (clean, no quirk; base already in master). Proof tests re-green on the rebased tree (113/113 + 11/11 + 41/41). Gate adjudicated above.
+- Write flap: window ~39 active at run start (new-file EPERM in hidden_files, worktrees, /tmp; heartbeat atomic write refused; one probe file left 0 bytes by the truncate-first signature, removed). Cleared ~23:52Z (4/4 probes OK); all git writes done after the clear, probed first.
+- Merge: `git merge --ff-only journey-deepening` in the main tree (merge commit recorded in the 2026-11-24 memory log). Worktree released + removed, branch deleted, reaper swept, main tree verified clean. Rotation 2→3 written with read-back. Telemetry check run (see memory log); lock deleted at closeout.
