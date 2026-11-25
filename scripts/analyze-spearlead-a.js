@@ -141,6 +141,18 @@ function assignDepartures(deps, closeBySeq, endDay, fights, avoids) {
   const leadOf = {}, compSpearOf = {}, compAnyOf = {}, avoidOf = {};
   let windowMissLead = 0, windowMissComp = 0, windowMissAvoid = 0;
   let noDepLead = 0, noDepComp = 0, noDepAvoid = 0;
+  // Companion misses are counted ONCE per (fight, ally) pair: a
+  // spear ally sits in BOTH allyVids and allySpearVids, so the two
+  // loops share one counted set (a double-count here inflated the
+  // pilot's windowMissComp 15 vs 4 real pairs).
+  const compCounted = {};
+  function compMiss(f, avid) {
+    const k = f.seq + ':' + avid;
+    if (compCounted[k]) return;
+    compCounted[k] = true;
+    if (hasDeparture(avid)) windowMissComp++;
+    else noDepComp++;
+  }
   for (const f of (fights || [])) {
     const lead = containing(f.vid, f.day);
     if (lead) leadOf[f.seq] = lead.seq;
@@ -149,14 +161,12 @@ function assignDepartures(deps, closeBySeq, endDay, fights, avoids) {
     for (const avid of (f.allyVids || [])) {
       const c = containing(avid, f.day);
       if (c) compAnyOf[f.seq + ':' + avid] = c.seq;
-      else if (hasDeparture(avid)) windowMissComp++;
-      else noDepComp++;
+      else compMiss(f, avid);
     }
     for (const avid of (f.allySpearVids || [])) {
       const c = containing(avid, f.day);
       if (c) compSpearOf[f.seq + ':' + avid] = c.seq;
-      else if (hasDeparture(avid)) windowMissComp++;
-      else noDepComp++;
+      else compMiss(f, avid);
     }
   }
   for (let i = 0; i < (avoids || []).length; i++) {
@@ -492,6 +502,14 @@ function selftest() {
   check('the h9-led fight is a no-departure lead (h9 departed with a bow), not a miss',
     st.noDepLead === 1 && st.noDepComp === 0 && st.noDepAvoid === 0,
     JSON.stringify({ l: st.noDepLead, c: st.noDepComp, a: st.noDepAvoid }));
+  check('companion misses are counted once per (fight, ally) pair, never twice',
+    assignDepartures(
+      [dep(1, 10, 'z', {})],
+      { 1: { day: 20, outcome: 'returned' } }, 150,
+      [fight(1, 12, 'h', { wave: 4, allyVids: ['z'], allySpearVids: ['z'] }),
+       fight(2, 25, 'h', { wave: 4, allyVids: ['z'], allySpearVids: ['z'] })],
+      []).windowMissComp === 1,
+    'the day-25 fight is outside z\'s window and must count exactly once, not twice');
   // Judge shapes.
   function mk(o) {
     return Object.assign({ departures: 12, bucketSum: 12, completeness: 1, buckets: { 'lead-w4-with-spear': 0, unattributed: 0 }, leadW4WithSpear: 0, errors: 0, valid: 8, n: 8, windowMissLead: 0, windowMissComp: 0, windowMissAvoid: 0 }, o);
