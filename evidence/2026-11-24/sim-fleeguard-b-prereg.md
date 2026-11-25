@@ -88,9 +88,10 @@ the identical seeds.
 - **Flee variant:** the fleecall classification from the terminal
   log line (`hopeless` / `floor` / `learn` / `committed-floor`),
   cross-checked against the engine's own `rec.fleeHopeless` flag
-  (recorded per row by the driver; a mismatch between the
-  log-derived variant and the engine flag on a fled meeting is a
-  parse error, not a silent pass).
+  (recorded per row by the driver) — ONE-DIRECTIONAL (see
+  CORRECTION below): a `hopeless` variant requires
+  `fleeHopeless == true`; a `floor` variant carries no constraint
+  on the flag.
 - **Hopeless-flee count:** fled meetings classified `hopeless`.
 - **Floor-flee count:** fled meetings classified `floor` (must NOT
   move — the guard never touches the floor).
@@ -181,3 +182,19 @@ is the instrument, the bars above are the judge.
   one; floor flee untouched; wave gate; off-mode byte-identical).
 - Panel builder: `scripts/build-fleeguard-b-panels-20261124.js`
   (accordanswer pattern; compare via `balance-panel.js`).
+
+## CORRECTION 2026-11-24 (before any judged sim ran)
+
+The flee-variant cross-check as first written was wrong in one
+direction, and the staged exploration caught it before the pilot:
+the floor branch (`fieldFights.js`, the `(vHp / vHpMax) <
+fleeAt` block) sets `rec.fleeHopeless = hopeless` — whatever the
+hopeless read was that round — so a floor flee ("past holding")
+can legitimately carry `fleeHopeless == true`. Observed in
+staging: algorithm/60/false flees on the floor line at 0.20 HP
+with `fleeHopeless == true`, `fleeLines == 0`. The cross-check is
+therefore ONE-DIRECTIONAL: `hopeless` variant ⟹
+`fleeHopeless == true` (a hopeless-branch flee always sets it);
+`floor` variant ⟹ no constraint on the flag. The frozen bars
+are unchanged — only this instrument definition is corrected,
+and no judged number exists yet to re-score.
