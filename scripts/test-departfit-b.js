@@ -213,5 +213,255 @@ check('T5 real corpus present and self-consistent', function () {
   assert.ok(res.ctl.launches >= 10, 'ctl launches ' + res.ctl.launches);
 });
 
+// ---------- T6+ — the departure-fitness check itself ----------
+// Load the real villager-brain.js the way test-holdspeak-a.js does:
+// stub Scattering.equipment first, then require; Game is
+// globalThis.Scattering.Game.
+globalThis.Scattering = {
+  Game: {},
+  equipment: {
+    armorOf: function (person) { return (person && person._armorP) || 0; },
+    weaponBonusOf: function (person) { return (person && person._weaponB) || 0; },
+    volleyWeaponOf: function (person, defs) {
+      const eq = (person && person.equipped) || {};
+      const w = eq.ranged || null;
+      if (!w) return null;
+      const d = (defs || []).find(function (x) { return x.id === (w.itemId || w.id); });
+      if (!d || !d.weapon || !d.weapon.ammo) return null;
+      return w;
+    },
+  },
+};
+const BRAIN = require(path.join(__dirname, '..', 'src', 'js', 'villager-brain.js'));
+const Game = globalThis.Scattering.Game;
+
+const HOLD_BEAT_RE = /— the party waits\./;
+function seedRng(seed) {
+  let s = (seed | 0) || 1;
+  Math.random = function () {
+    s = (Math.imul(s, 1103515245) + 12345) | 0;
+    return ((s >>> 0) % 10000) / 10000;
+  };
+}
+
+const FIT_DEFS = [
+  { id: 'sling', name: 'Sling', weapon: { type: 'ranged', bonus: 6, ammo: 'stone' } },
+  { id: 'stone', name: 'Stone', class: 'ammo' },
+  { id: 'spear', name: 'Spear', weapon: { type: 'melee', bonus: 12 } },
+  { id: 'bow', name: 'Bow', weapon: { type: 'ranged', bonus: 20, ammo: 'arrow' } },
+  { id: 'arrow', name: 'Arrow', class: 'ammo' },
+  { id: 'vest', name: 'Vest', armor: { protection: 10 } },
+];
+
+function fitPeople(opts) {
+  const o = opts || {};
+  const people = {
+    mara_voss: { id: 'mara_voss', name: 'Mara Voss', dead: false, _armorP: 0, _weaponB: 20,
+      health: (o.maraHp != null ? o.maraHp : 100),
+      equipped: { ranged: { itemId: 'bow' } },
+      items: [{ itemId: 'bow', units: 1 }] },
+    desmond_okafor: { id: 'desmond_okafor', name: 'Desmond Okafor', dead: false, _armorP: 10, _weaponB: 12,
+      health: 100, equipped: { melee: { itemId: 'spear' } },
+      items: [{ itemId: 'spear', units: 1 }] },
+    bare_bones: { id: 'bare_bones', name: 'Bare Bones', dead: false, _armorP: 0, _weaponB: 0,
+      health: 100, equipped: {}, items: [] },
+  };
+  if (o.spearRanged) {
+    // A spear in the ranged slot: melee, no ammo — not a volley carrier.
+    people.mara_voss.equipped = { ranged: { itemId: 'spear' } };
+    people.mara_voss.items = [{ itemId: 'spear', units: 1 }];
+    people.mara_voss._weaponB = 12;
+  }
+  if (o.maraLoaded) people.mara_voss.items.push({ itemId: 'arrow', units: 5 });
+  return people;
+}
+
+// Fixture ctx for the check (direct calls) and the full depart path.
+// pocketLoads: the stubbed villagerPocketAmmo loads ammo (adds arrows);
+// gearUpArms: the stubbed villagerGearUp arms the member (spear).
+function fitCtx(opts) {
+  const o = opts || {};
+  const people = fitPeople(o);
+  const holder = o.holder || 'mara_voss';
+  const says = [];
+  const exped = {};
+  const calls = { gearUp: [], stageBow: [], pocketAmmo: [] };
+  const plan = { stage: 'party', target: 'eater', needWave: 4,
+    node: { nx: 6, ny: 5 }, party: [], reseedExpiryDay: null };
+  const commit = Object.assign({ day: 40, kind: 'EXPEDITION',
+    winPlanAction: 'party_launch', companion: 'desmond_okafor' }, o.commit || {});
+  const ctx = {
+    state: { scholar: { day: 40, id: '__scholar__' },
+      village: { roster: Object.keys(people), trust: {}, health: {}, sick: {},
+        winPlan: {}, vbrain: null, away: {}, departFit: null } },
+    data: { items: FIT_DEFS },
+    dayPart: 1,
+    villagerId: '__scholar__',
+    says: says,
+    exped: exped,
+    calls: calls,
+    say: function (line) { says.push(String(line)); },
+    getPerson: function (vid) { return people[vid] || null; },
+    vpOf: function (vid) { return people[vid] || null; },
+    npcName: function (vid) {
+      const p = people[vid];
+      return p && p.name ? String(p.name).split(' ')[0] : 'Someone';
+    },
+    displayName: function (vid) { return this.npcName(vid); },
+    nameKnown: function () { return true; },
+    npcMaxDist: function () { return 3; },
+    npcRangeProfile: function () { return 'wanderer'; },
+    npcNode: function () { return { nx: 5, ny: 5 }; },
+    agencyState: function () { return { exped: exped }; },
+    isEngaged: function () { return false; },
+    vbrainCommit: Game.vbrainCommit,
+    // The check is a Game method; the executor calls it on `this`
+    // (the game in production, this fixture ctx in the test).
+    winPlanDepartFitness: Game.winPlanDepartFitness,
+    winPlanOf: function () { return plan; },
+    winPlanCommitDeadTarget: function () { return null; },
+    winPlanHomebodyHandoff: function () { return 'hold'; },
+    winPlanStats: function () { return {}; },
+    winPlanDepartLaunchBeat: function () { return true; },
+    winPlanReseedLaunchBeat: function () { return false; },
+    villagerGearUp: function (vid) {
+      calls.gearUp.push(vid);
+      if (o.gearUpArms) {
+        const p = people[vid];
+        if (p && !p.items.some(function (e) { return (e.itemId || e.id) === 'spear'; })) {
+          p.items.push({ itemId: 'spear', units: 1 });
+          p._weaponB = 12;
+          p.equipped.melee = { itemId: 'spear' };
+        }
+      }
+    },
+    villagerStageBow: function (vid) { calls.stageBow.push(vid); },
+    villagerPocketAmmo: function (vid) {
+      calls.pocketAmmo.push(vid);
+      if (o.pocketLoads) {
+        const p = people[vid];
+        if (!p) return { pocketed: 0, ammoId: 'arrow' };
+        p.items.push({ itemId: 'arrow', units: 5 });
+        return { pocketed: 5, ammoId: 'arrow' };
+      }
+      return { pocketed: 0, ammoId: 'arrow' };
+    },
+    startExpedition: function (vid) { exped[vid] = { tx: 6, ty: 5 }; },
+    stashState: function () { return { weapons: [], materials: {} }; },
+  };
+  ctx.state.village.health[holder] = (o.hp != null ? o.hp : 100);
+  ctx.state.village.winPlan[holder] = plan;
+  ctx.state.village.vbrain = { commit: {}, perception: {}, logs: [],
+    stats: { picks: 0, gates: 0, expeditions: 0, winPlan: 0 } };
+  ctx.state.village.vbrain.commit[holder] = commit;
+  return { ctx: ctx, holder: holder, says: says, exped: exped, calls: calls, people: people, plan: plan };
+}
+
+// T6: dry carrier loads via the check's pocket attempt and passes.
+check('T6 check loads a dry carrier and passes', function () {
+  const fx = fitCtx({ pocketLoads: true });
+  const res = Game.winPlanDepartFitness.call(fx.ctx, 'mara_voss', ['mara_voss', 'desmond_okafor']);
+  assert.strictEqual(res.ok, true);
+  assert.strictEqual(res.fails.length, 0);
+  assert.strictEqual(res.loaded, 1);
+  assert.strictEqual(res.checked, 2);
+  assert.deepStrictEqual(fx.calls.pocketAmmo, ['mara_voss']);
+  assert.strictEqual(fx.ctx.state.village.departFit.checked, 1);
+  assert.strictEqual(fx.ctx.state.village.departFit.loadedByCheck, 1);
+  assert.strictEqual(fx.ctx.state.village.departFit.heldNoAmmo || 0, 0);
+});
+
+// T7: no ammo anywhere — the load attempt finds nothing, the check fails.
+check('T7 check fails no-ammo when nothing loads', function () {
+  const fx = fitCtx({ pocketLoads: false });
+  const res = Game.winPlanDepartFitness.call(fx.ctx, 'mara_voss', ['mara_voss', 'desmond_okafor']);
+  assert.strictEqual(res.ok, false);
+  assert.strictEqual(res.fails.length, 1);
+  assert.strictEqual(res.fails[0].vid, 'mara_voss');
+  assert.strictEqual(res.fails[0].reason, 'no-ammo');
+  assert.strictEqual(res.fails[0].ammo, 'arrow');
+  assert.strictEqual(res.holdKind, 'no-ammo');
+  assert.strictEqual(fx.ctx.state.village.departFit.heldNoAmmo, 1);
+});
+
+// T8: a spear in the ranged slot is not a volley carrier — no ammo
+// needed, no pocket attempt, passes.
+check('T8 spear carrier needs no ammo', function () {
+  const fx = fitCtx({ pocketLoads: false, spearRanged: true });
+  const res = Game.winPlanDepartFitness.call(fx.ctx, 'mara_voss', ['mara_voss', 'desmond_okafor']);
+  assert.strictEqual(res.ok, true);
+  assert.deepStrictEqual(fx.calls.pocketAmmo, []);
+});
+
+// T9: HP never gates — a 10 HP carrier with a loaded bow passes, and
+// a 10 HP dry carrier that loads passes too.
+check('T9 HP never gates the check', function () {
+  const fx1 = fitCtx({ pocketLoads: false, maraLoaded: true, maraHp: 10 });
+  const r1 = Game.winPlanDepartFitness.call(fx1.ctx, 'mara_voss', ['mara_voss', 'desmond_okafor']);
+  assert.strictEqual(r1.ok, true);
+  const fx2 = fitCtx({ pocketLoads: true, maraHp: 10 });
+  const r2 = Game.winPlanDepartFitness.call(fx2.ctx, 'mara_voss', ['mara_voss', 'desmond_okafor']);
+  assert.strictEqual(r2.ok, true);
+  assert.strictEqual(r2.loaded, 1);
+});
+
+// T10: unarmed member gears up; still unarmed fails as 'unarmed' with
+// holdKind 'kit' — and a gear-up that arms passes.
+check('T10 unarmed fails kit, gear-up that arms passes', function () {
+  const fx = fitCtx({ pocketLoads: false, gearUpArms: false });
+  const res = Game.winPlanDepartFitness.call(fx.ctx, 'mara_voss', ['bare_bones', 'desmond_okafor']);
+  assert.strictEqual(res.ok, false);
+  assert.strictEqual(res.fails[0].reason, 'unarmed');
+  assert.strictEqual(res.holdKind, 'kit');
+  assert.deepStrictEqual(fx.calls.gearUp, ['bare_bones']);
+  assert.strictEqual(fx.ctx.state.village.departFit.heldUnarmed, 1);
+  const fx2 = fitCtx({ pocketLoads: false, gearUpArms: true });
+  const res2 = Game.winPlanDepartFitness.call(fx2.ctx, 'mara_voss', ['bare_bones', 'desmond_okafor']);
+  assert.strictEqual(res2.ok, true);
+});
+
+// T11: the player manages their own kit — read-only, never loaded,
+// never failed.
+check('T11 player holder is read-only', function () {
+  const fx = fitCtx({ pocketLoads: false });
+  const res = Game.winPlanDepartFitness.call(fx.ctx, '__scholar__', ['__scholar__']);
+  assert.strictEqual(res.ok, true);
+  assert.deepStrictEqual(fx.calls.pocketAmmo, []);
+  assert.deepStrictEqual(fx.calls.gearUp, []);
+});
+
+// T12: at most one pocketAmmo call per member per departure.
+check('T12 one pocket attempt per member at most', function () {
+  const fx = fitCtx({ pocketLoads: true });
+  Game.winPlanDepartFitness.call(fx.ctx, 'mara_voss', ['mara_voss', 'mara_voss', 'desmond_okafor']);
+  assert.deepStrictEqual(fx.calls.pocketAmmo, ['mara_voss']);
+});
+
+// T13: full depart path — dry bow, nothing to load: 'hold', nobody
+// walks out, one voiced line ending with the holdspeak closer.
+check('T13 full depart holds dry with a voiced line', function () {
+  const fx = fitCtx({ pocketLoads: false });
+  seedRng(42);
+  const ret = Game.vbrainExecuteDepart.call(fx.ctx, 'mara_voss', 5, 5, false);
+  assert.strictEqual(ret, 'hold');
+  assert.deepStrictEqual(Object.keys(fx.exped), []);
+  assert.strictEqual(fx.says.length, 1);
+  assert.ok(HOLD_BEAT_RE.test(fx.says[0]), fx.says[0]);
+  assert.ok(/quiver/.test(fx.says[0]), fx.says[0]);
+  assert.ok(/^Mara/.test(fx.says[0]), fx.says[0]);
+});
+
+// T14: full depart path — the load succeeds: 'launch', holder and
+// companion walk out, no hold line.
+check('T14 full depart launches when loaded', function () {
+  const fx = fitCtx({ pocketLoads: true });
+  seedRng(42);
+  const ret = Game.vbrainExecuteDepart.call(fx.ctx, 'mara_voss', 5, 5, false);
+  assert.strictEqual(ret, 'launch');
+  assert.ok(fx.exped.mara_voss, 'holder out');
+  assert.ok(fx.exped.desmond_okafor, 'companion out');
+  assert.strictEqual(fx.says.filter(function (l) { return HOLD_BEAT_RE.test(l); }).length, 0);
+});
+
 console.log(pass + '/' + (pass + fail) + ' PASS');
 if (fail) process.exit(1);

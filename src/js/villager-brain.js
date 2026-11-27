@@ -12,6 +12,7 @@
 //   - vbrainLastLog(vid)
 //   - vbrainLogs()
 //   - vbrainExecuteDepart(vid, hx, hy, announce)
+//   - winPlanDepartFitness(vid, members)
 //   - vbrainOwnsDawn()
 //   - dutyFeedCands(vid)
 //   - assignFeedCand(vid)
@@ -19,6 +20,7 @@
 //   - vbrain_one_dawn_entry: every dawn lead pick (gate or lottery) is recorded through this module so one log explains the choice (code: vbrainScorePick, vbrainLogGate)
 //   - vbrain_legacy_weights: phase 1 keeps existing additive candidate weights and the weighted lottery; it does NOT ship the product-of-curves formula from VILLAGER-BRAIN.md (code: vbrainScorePick)
 //   - vbrain_feeders_not_deciders: goals bias, win-plan stage intents, EXPEDITION, bond/link social ads, and duty ads from believed needs feed candidates here; agency chance-rolls and win-plan re-decides stop owning the day when this module is loaded (code: vbrainFeedExtras, vbrainExecuteDepart)
+//   - vbrain_departure_fitness: a win-plan party launch checks arm + ammo before anyone walks out — a ranged carrier with no ammo tries to load first, and a carrier still dry holds the launch, voiced (code: winPlanDepartFitness, vbrainExecuteDepart)
 //   - vbrain_bond_candidates: PROPOSE_BOND / RAISE_LINK from bondFeedCands enter the dawn extras list so the initiator's scorer weighs them; warmth gate and npcInviteDecision stay in bond-initiation (code: vbrainFeedExtras, VILLAGER-BRAIN Phase 4)
 //   - vbrain_duty_candidates: unassigned villagers get DUTY ads from believed village needs (objResourceBelief → forage/cook/water) and combat/social/explore opportunity (heard danger → patrol, known prey/pantry → hunt, teachable knowledge → teach, unmapped haven ring → scout); player/convo assignTask stays a binding commitment — assigned people get no competing duty ads (code: dutyFeedCands, vbrainFeedExtras, VILLAGER-BRAIN Phase 6)
 //   - vbrain_duty_pick: when a DUTY extra is top-scoring vs the core lottery pick, it becomes the dawn commitment (duty_top_score); align maps forage/water/cook/hunt/patrol/teach/scout to real objectives — never calls assignTask (code: vbrainScorePick, vbrainAlignObjective, VILLAGER-BRAIN Phase 6)
@@ -123,6 +125,61 @@
       }
     } catch (e) {}
     return { armed: !!(weaponB > 0 || carriesWeapon), armored: armorP > 0 };
+  }
+  // DEPARTFIT AMMO READ (sim-departfit-b, 2026-11-27): the ammo need
+  // of a person's volley weapon, and the ammo they carry for it.
+  // departFitAmmoNeed: the ammo item id of the equipped volley weapon
+  // (equipment.volleyWeaponOf — the def must carry weapon.ammo; a
+  // spear in the ranged slot needs no ammo and returns null), with a
+  // slot-def fallback when the equipment helper is absent. Pure read.
+  // departFitCountAmmo: units of that ammo in the person's own items
+  // (entryId or material match, one count per entry — the launchfit
+  // countAmmo convention). Carried ammo only: stashed/pantry ammo
+  // cannot fire a volley.
+  function departFitAmmoNeed(self, person) {
+    try {
+      var S = (_g.Scattering) || {};
+      var eq = S.equipment || null;
+      var items = self.data ? self.data.items : [];
+      var w = null;
+      if (eq && eq.volleyWeaponOf) w = eq.volleyWeaponOf(person, items);
+      if (!w) {
+        var r = (person.equipped || {}).ranged || null;
+        if (r) {
+          var rid = r.itemId || r.id;
+          for (var j = 0; j < items.length; j++) {
+            if (items[j] && items[j].id === rid) {
+              if (items[j].weapon && items[j].weapon.ammo) w = r;
+              break;
+            }
+          }
+        }
+      }
+      if (!w) return null;
+      var wid = w.itemId || w.id;
+      for (var k = 0; k < items.length; k++) {
+        if (items[k] && items[k].id === wid) {
+          var dd = items[k];
+          return (dd.weapon && dd.weapon.ammo) || null;
+        }
+      }
+    } catch (e) {}
+    return null;
+  }
+  function departFitCountAmmo(self, person, ammoId) {
+    var n = 0;
+    try {
+      var items = person.items || [];
+      for (var i = 0; i < items.length; i++) {
+        var e = items[i];
+        if (!e) continue;
+        if (typeof e === 'string') { if (e === ammoId) n += 1; continue; }
+        var id = e.itemId || e.id || null;
+        if (id === ammoId) n += (e.units || 1);
+        else if (e.material === ammoId) n += (e.units || 1);
+      }
+    } catch (e2) {}
+    return n;
   }
   // PROFILEGATE4 env gate (sim-profilegate-b, findings #2638/#2605):
   // the scoped profile-gate relaxation is OFF unless the process env
@@ -794,6 +851,8 @@
         core = ' has the kills for the table, but no one to walk out with yet';
       } else if (kind === 'no-trail') {
         core = ' still has no trail to follow';
+      } else if (kind === 'no-ammo') {
+        core = ' will not send out a bow with an empty quiver — there is nothing left to load it with';
       } else if (kind === 'sick') {
         core = ' is sick, and no one who can walk will take the plan';
       } else if (kind === 'hurt') {
@@ -1330,6 +1389,91 @@
       if (c.vgoal) { o.goal = c.vgoal; o.goalLine = c.vgoalLine || null; }
       return o;
     },
+    // DEPARTURE FITNESS (sim-departfit-b, 2026-11-27): arm + load
+    // before launch, ammo-first. At departure, verify each launch
+    // member is armed AND each ranged carrier carries ammo > 0. A
+    // ranged carrier with 0 ammo first tries to load from the village
+    // (villagerPocketAmmo: own stash -> communal pile -> one craft
+    // attempt, the existing loader); an unarmed member first tries to
+    // gear up (villagerGearUp + villagerStageBow, the departure order
+    // startExpedition uses). Still unarmed, or still an unloaded
+    // ranged carrier, fails the member. NO HP GATE: HP is not the
+    // target (launchfit: median departure HP 85, the <=20 HP Alberto
+    // tail 1.2%) — a hurt carrier with a loaded bow passes, a healthy
+    // carrier with a dry bow fails. The player (vid === villagerId)
+    // manages their own kit through the UI: read-only here, never
+    // loaded and never failed by this check. Returns { ok, fails:
+    // [{vid, reason}], loaded, checked, holdKind } where holdKind is
+    // 'no-ammo' when any fail is an unloaded bow, else 'kit'.
+    // Telemetry: village.departFit { checked, loadedByCheck,
+    // heldNoAmmo, heldUnarmed } + departFitByVid[vid] (last outcome).
+    // The check itself draws no new RNG; the loaders draw exactly as
+    // they do today at departure. At most one villagerPocketAmmo call
+    // per member per departure (startExpedition still calls it
+    // afterwards — a top-up no-op when loaded to cap, a second craft
+    // attempt only when the check's craft failed and materials for
+    // another batch remain; the driver counts ammo_craft events).
+    winPlanDepartFitness: function (vid, members) {
+      var self = this;
+      var out = { ok: true, fails: [], loaded: 0, checked: 0, holdKind: 'no-ammo' };
+      try {
+        var v = (self.state && self.state.village) || {};
+        v.departFit = v.departFit || {};
+        var df = v.departFit;
+        df.checked = (df.checked || 0) + 1;
+        var list = (members && members.slice) ? members.slice() : [];
+        if (!list.length) list = [vid];
+        var seen = {};
+        var fails = [];
+        var loadedByCheck = 0;
+        for (var i = 0; i < list.length; i++) {
+          var mid = list[i];
+          if (!mid || seen[mid]) continue;
+          seen[mid] = true;
+          out.checked++;
+          if (mid === self.villagerId) continue;
+          var person = null;
+          try { person = self.getPerson ? self.getPerson(mid) : (self.vpOf ? self.vpOf(mid) : null); } catch (e) {}
+          if (!person || person.dead) continue;
+          var g0 = null;
+          try { g0 = gearRead(self, mid); } catch (e) {}
+          if (g0 && !g0.armed) {
+            try { if (self.villagerGearUp) self.villagerGearUp(mid, true); } catch (e) {}
+            try { if (self.villagerStageBow) self.villagerStageBow(mid); } catch (e) {}
+            try { g0 = gearRead(self, mid); } catch (e) {}
+          }
+          if (g0 && !g0.armed) { fails.push({ vid: mid, reason: 'unarmed' }); continue; }
+          var need = null;
+          try { need = departFitAmmoNeed(self, person); } catch (e) {}
+          if (need) {
+            var before = departFitCountAmmo(self, person, need);
+            if (before <= 0) {
+              try { if (self.villagerPocketAmmo) self.villagerPocketAmmo(mid); } catch (e) {}
+              var after = departFitCountAmmo(self, person, need);
+              if (after > before) loadedByCheck++;
+              if (after <= 0) { fails.push({ vid: mid, reason: 'no-ammo', ammo: need }); continue; }
+            }
+            out.loaded++;
+          }
+        }
+        out.fails = fails;
+        out.ok = fails.length === 0;
+        var anyAmmo = false;
+        for (var f = 0; f < fails.length; f++) if (fails[f].reason === 'no-ammo') anyAmmo = true;
+        out.holdKind = anyAmmo ? 'no-ammo' : 'kit';
+        df.loadedByCheck = (df.loadedByCheck || 0) + loadedByCheck;
+        if (!out.ok) {
+          if (anyAmmo) df.heldNoAmmo = (df.heldNoAmmo || 0) + 1;
+          else df.heldUnarmed = (df.heldUnarmed || 0) + 1;
+        }
+        v.departFitByVid = v.departFitByVid || {};
+        var day = 0;
+        try { day = ((self.state || {}).scholar || {}).day || 0; } catch (e) {}
+        v.departFitByVid[vid] = { day: day, ok: out.ok, fails: fails,
+          loaded: out.loaded, checked: out.checked, holdKind: out.holdKind };
+      } catch (e) {}
+      return out;
+    },
     // Agency-tick executor: honor today's dawn commitment. No new strategy.
     vbrainExecuteDepart: function (vid, hx, hy, announce) {
       var c = this.vbrainCommit(vid);
@@ -1364,6 +1508,28 @@
         // plan keeps re-bidding daily while no trail arrives; the
         // hold line names the missing trail, once per (holder, day).
         if (_rs === 'held') { try { holdVoice(this, vid, hx, hy, 'no-trail'); } catch (e) {} return 'hold'; }
+        // DEPARTURE FITNESS (sim-departfit-b, 2026-11-27): arm + load
+        // before launch, ammo-first. The party_launch departure is the
+        // win-plan fight launch — verify the holder + companions are
+        // armed and every ranged carrier carries ammo before anyone
+        // walks out. A carrier still dry after the load attempt holds
+        // the whole launch (voiced, once per holder-day); the plan
+        // stands and the dawn bid retries tomorrow. Companion2/3
+        // join the check exactly when the launch code below would
+        // launch them (VETREENGAGE / PARTYSIZE4). No HP gate.
+        var _dfMembers = [vid];
+        if (c.companion) _dfMembers.push(c.companion);
+        var _dfVre = false, _dfPs4 = false;
+        try { _dfVre = (typeof process !== 'undefined' && process.env && process.env.VETREENGAGE === '1'); } catch (e2) {}
+        try { _dfPs4 = (typeof process !== 'undefined' && process.env && process.env.PARTYSIZE4 === '1'); } catch (e2) {}
+        if (_dfVre && c.companion2) _dfMembers.push(c.companion2);
+        if (_dfPs4 && c.companion3) _dfMembers.push(c.companion3);
+        var _df = null;
+        try { _df = (typeof this.winPlanDepartFitness === 'function') ? this.winPlanDepartFitness(vid, _dfMembers) : null; } catch (e) {}
+        if (_df && !_df.ok) {
+          try { holdVoice(this, vid, hx, hy, _df.holdKind || 'no-ammo'); } catch (e) {}
+          return 'hold';
+        }
         // Mirror winPlanDepart's shared-target party launch, owned by the
         // dawn commitment rather than a midday re-decide.
         var tx = null, ty = null, dur = 0;
