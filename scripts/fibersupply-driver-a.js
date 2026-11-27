@@ -39,19 +39,20 @@
 // reverted arms are not in this tree), speargatePresent,
 // speargateOn, bowopenPresent, bowopenOn, senseexpedOn so each file
 // self-describes which code+flags it ran under.
-// Legs: ctl = the judged leg; rep = an identical-code re-run on the
-// same seeds (the §15 compare is a determinism/reproducibility
-// compare, NOT a before/after judgment — a diag changes no game
-// code, so there is no before/after pair). main() asserts the MODE
-// label matches the flags and stops otherwise — a leg/flag mismatch
-// is a loud stop, never a silent mislabel.
+// Legs: ctl = the judged leg; the determinism check is a one-seed
+// re-run (RUN=fibersupply-a-rerun, same env, seed 111701) compared by
+// the analyzer's --rerun fiber hash, NOT a second full leg — a diag
+// changes no game code, so there is no before/after pair. main()
+// asserts the MODE label matches the flags and stops otherwise — a
+// leg/flag mismatch is a loud stop, never a silent mislabel.
 // Policy: competent verbatim (scripts/policies/competent.js), 150d
-// death-aware. Pilot band 107091-107098 (FRESH — see prereg for the
-// freshness check, including the 7 corpus files that mention 107091
-// as digit-substrings, never as a seed).
+// death-aware. Pilot band 111701-111708 (FRESH — see prereg
+// evidence/2026-11-27/sim-fibersupply-a-prereg.md §4 for the
+// freshness check). Re-run of the 2026-11-21 arm (band 107091-107098)
+// with the home-craft wrap added (see installFiberWraps below).
 // Usage:
-//   VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 SENSEEXPED=1 BOWOPEN=1 SPEARGATE=1 MODE=ctl OUTDIR=perseed-fibersupply-a-ctl SEEDS=107091,107092 RUN=fibersupply-a node scripts/fibersupply-driver-a.js
-//   VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 SENSEEXPED=1 BOWOPEN=1 SPEARGATE=1 MODE=rep OUTDIR=perseed-fibersupply-a-rep SEEDS=107091,107092 RUN=fibersupply-a node scripts/fibersupply-driver-a.js
+//   VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 SENSEEXPED=1 BOWOPEN=1 SPEARGATE=1 MODE=ctl EVIDENCE_DATE=2026-11-27 OUTDIR=perseed-fibersupply-a SEEDS=111701,111702 RUN=fibersupply-a node scripts/fibersupply-driver-a.js
+//   VETREENGAGE=1 PARTYSIZE4=1 FLEEREPAIR2=1 FIGHTALLY2=1 SENSEEXPED=1 BOWOPEN=1 SPEARGATE=1 MODE=ctl EVIDENCE_DATE=2026-11-27 OUTDIR=perseed-fibersupply-a-rerun SEEDS=111701 RUN=fibersupply-a-rerun node scripts/fibersupply-driver-a.js
 'use strict';
 const path = require('path');
 const fs = require('fs');
@@ -701,6 +702,40 @@ function installFiberWraps(Game, ctx, errors) {
       return ret;
     };
   });
+  // NEW (2026-11-27 re-run): the HOME arrow-craft wrap. The Nov 21
+  // instrument was wrap-blind here — its 155 home-craft fiber was
+  // inferred from the stash ledger, not attributed. villagerAmmoCraftDay
+  // runs once a day and iterates home villagers internally, so one row
+  // per duty call: pile delta + the attempt count (vids whose
+  // arrowCraftCd became today — the duty sets it exactly when it
+  // attempts; a materials-skip sets no cooldown). Same pattern as the
+  // weapon/armor craft-day wraps: original called exactly once, no RNG.
+  wrapMethod('villagerAmmoCraftDay', function (orig) {
+    return function () {
+      try { ctx.craftDayCalls.home = (ctx.craftDayCalls.home || 0) + 1; } catch (e) {}
+      let before = null, preCd = null;
+      try { before = pileMats(Game); } catch (e) { before = null; }
+      try { preCd = JSON.parse(JSON.stringify((((Game.state || {}).village || {}).arrowCraftCd) || {})); } catch (e) { preCd = null; }
+      const ret = orig.apply(this, arguments);
+      try {
+        const after = pileMats(Game);
+        const d = fiberDelta(before, after);
+        let attempts = 0;
+        try {
+          const day = gday(Game);
+          const cdNow = (((Game.state || {}).village || {}).arrowCraftCd) || {};
+          for (const vid of Object.keys(cdNow)) if (cdNow[vid] === day && (!preCd || preCd[vid] !== day)) attempts++;
+        } catch (e) {}
+        if ((d.fiber | 0) !== 0 || attempts > 0) {
+          ctx.fiberEvents.push({ kind: 'homeCraft', day: gday(Game), vid: null, task: null,
+            dFiber: d.fiber | 0, dStick: d.stick | 0, dStone: d.stone | 0,
+            attempts: attempts, batches: (ret | 0),
+            pileBefore: before, pileAfter: after });
+        }
+      } catch (e) { errors.push('fiber-homecraft-log: ' + String(e.message).slice(0, 80)); }
+      return ret;
+    };
+  });
   wrapMethod('craft', function (orig) {
     return function (recipeId) {
       let pfBefore = null, persBefore = null, usesFiber = false;
@@ -992,7 +1027,7 @@ async function oneRun(seed) {
   const fiberStashLog = [];
   const fiberCtx = { fiberCensus: fiberCensus, fiberEvents: fiberEvents,
     fiberCrafts: fiberCrafts, fiberSays: fiberSays, fiberStashLog: fiberStashLog,
-    craftDayCalls: { weapon: 0, armor: 0 } };
+    craftDayCalls: { weapon: 0, armor: 0, home: 0 } };
   // ---- LAUNCHSURVIVE TRACKER (sim-launchsurvive-a) ----
   // One row per live wave-4 plan holder per day (recorded in the
   // daily snapshot block alongside dawnbidCensus). LAUNCHSURVIVE=1
@@ -1879,7 +1914,7 @@ if (require.main === module) (async function () {
   if (process.env.FLEEREPAIR2 !== '1') { console.error('FIBERSUPPLY STOP: FLEEREPAIR2=1 required (substrate) for every mode.'); process.exit(2); }
   if (process.env.FIGHTALLY2 !== '1') { console.error('FIBERSUPPLY STOP: FIGHTALLY2=1 required (substrate, both legs — the second seat must be able to join the fight).'); process.exit(2); }
   if (!SEEDS.length) { console.error('FIBERSUPPLY STOP: SEEDS required.'); process.exit(2); }
-  const outDir = path.join(REPO, 'evidence', '2026-11-21', OUTDIR);
+  const outDir = path.join(REPO, 'evidence', process.env.EVIDENCE_DATE || '2026-11-27', OUTDIR);
   fs.mkdirSync(outDir, { recursive: true });
   for (const seed of SEEDS) {
     const file = path.join(outDir, 'fibersupply-a-s' + seed + '-' + RUN + '-' + MODE + '.json');

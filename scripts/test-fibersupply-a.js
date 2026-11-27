@@ -16,7 +16,10 @@
 //   (d) a scholar craft('arrow') spends PERSONAL fiber and leaves
 //       pile fiber unchanged (the two fiber economies never meet);
 //   (e) a stashLog fiber line is captured by the ledger wrap;
-//   (f) a say-line mentioning fiber is captured (sense-test feed).
+//   (f) a say-line mentioning fiber is captured (sense-test feed);
+//   (g) NEW (2026-11-27 re-run): a home-duty craft call that spends
+//       pile fiber is recorded as a `homeCraft` event with the exact
+//       pile delta and the attempt count from the cooldown diff.
 //
 // Usage: node scripts/test-fibersupply-a.js
 // Exit 0 = all checks pass. Exit 1 = a failure (listed).
@@ -81,7 +84,7 @@ async function main() {
   const EQ = (globalThis.Scattering || {}).equipment;
 
   // Install the fiber instrument on this live village.
-  const ctx = { fiberCensus: [], fiberEvents: [], fiberCrafts: [], fiberSays: [], fiberStashLog: [], craftDayCalls: { weapon: 0, armor: 0 } };
+  const ctx = { fiberCensus: [], fiberEvents: [], fiberCrafts: [], fiberSays: [], fiberStashLog: [], craftDayCalls: { weapon: 0, armor: 0, home: 0 } };
   const wrapErrors = [];
   const installed = FIBER.installFiberWraps(G, ctx, wrapErrors);
   check('installFiberWraps installs without errors', wrapErrors.length === 0, wrapErrors.join(' | '));
@@ -248,6 +251,39 @@ async function main() {
   check('M7 craft-day calls run without throwing', !wThrew && !aThrew);
   check('M7 no fiber event rows from the craft days (no fiber recipes)', ctx.fiberEvents.length === evBefore7, JSON.stringify(ctx.fiberEvents.slice(evBefore7)));
   check('M7 wrap errors stayed empty', wrapErrors.length === 0, wrapErrors.join(' | '));
+
+  // ---- M8 (homeCraft wrap: the home-duty sink, attributed directly) ----
+  console.log('\n=== M8: villagerAmmoCraftDay spending pile fiber is a homeCraft row ===');
+  check('M8 villagerAmmoCraftDay callable', typeof G.villagerAmmoCraftDay === 'function');
+  resetVillager(learner);
+  const s2 = serveBow(0.01);
+  const rangedId2 = (function () { const e = (person(learner).equipped || {}).ranged; return e ? (e.itemId || e.id || null) : null; })();
+  console.log('served: staged=' + s2.staged + ' ranged=' + rangedId2);
+  check('M8 staging served a crude bow (prerequisite)', s2.staged === true && rangedId2 === 'crude_bow', JSON.stringify(s2) + ' ranged=' + rangedId2);
+  let carriedBefore = 0;
+  for (const e of (person(learner).items || [])) { const eid = (typeof e === 'string') ? e : (e && (e.itemId || e.id || e.material)); if (eid === 'arrow') carriedBefore += (typeof e === 'string') ? 1 : (e.units || 1); }
+  check('M8 the carrier starts with 0 arrows', carriedBefore === 0, 'carried=' + carriedBefore);
+  setPile({ stick: 2, stone: 1, fiber: 1 });
+  const evBefore8 = ctx.fiberEvents.length;
+  const fBefore8 = pileFiber();
+  let made8 = null;
+  const origRandom8 = Math.random;
+  try { Math.random = function () { return 0.01; }; made8 = G.villagerAmmoCraftDay(); }
+  finally { Math.random = origRandom8; }
+  const fAfter8 = pileFiber();
+  console.log('homeCraft: batches=' + made8 + ' pileFiber ' + fBefore8 + ' -> ' + fAfter8);
+  check('M8 the home-duty call made exactly 1 batch', made8 === 1, 'made=' + made8);
+  check('M8 pile fiber dropped by exactly 1 on the home craft', fAfter8 === fBefore8 - 1, fBefore8 + ' -> ' + fAfter8);
+  const homeRows = ctx.fiberEvents.slice(evBefore8).filter(function (r) { return r.kind === 'homeCraft'; });
+  check('M8 a homeCraft ledger row was recorded', homeRows.length === 1, JSON.stringify(ctx.fiberEvents.slice(evBefore8)));
+  check('M8 homeCraft row dFiber is exactly -1', homeRows[0] && homeRows[0].dFiber === -1, JSON.stringify(homeRows[0]));
+  check('M8 homeCraft row carries pile before/after', homeRows[0] && homeRows[0].pileBefore.fiber === 1 && homeRows[0].pileAfter.fiber === 0, JSON.stringify(homeRows[0]));
+  check('M8 homeCraft row counts >= 1 attempt', homeRows[0] && (homeRows[0].attempts | 0) >= 1, JSON.stringify(homeRows[0]));
+  check('M8 homeCraft row counts 1 batch', homeRows[0] && homeRows[0].batches === 1, JSON.stringify(homeRows[0]));
+  let carried8 = 0;
+  for (const e of (person(learner).items || [])) { const eid = (typeof e === 'string') ? e : (e && (e.itemId || e.id || e.material)); if (eid === 'arrow') carried8 += (typeof e === 'string') ? 1 : (e.units || 1); }
+  check('M8 the carrier holds 5 arrows after the home craft', carried8 === 5, 'carried=' + carried8);
+  check('M8 wrap errors stayed empty', wrapErrors.length === 0, wrapErrors.join(' | '));
 
   installed.uninstall();
   console.log('\nFIBERSUPPLY ' + (failed ? 'FAIL ' + failed + ': ' + fails.join('; ') : 'PASS ' + passed + '/' + passed));

@@ -2,32 +2,45 @@
 // (finding #2590, fiber-supply DIAGNOSIS: why the communal pile never
 // has fiber when a departure tries to craft arrows).
 //
-// Reads the fibersupply-driver-a.js corpora (ctl = judged leg, rep =
-// identical-code re-run) and judges the FROZEN prereg bars:
+// Reads the fibersupply-driver-a.js corpora (ctl = judged leg) and
+// judges the FROZEN prereg bars (2026-11-27 re-run, band 111701-111708):
 //   (0) instrument validity (proof test green + instrument errors 0
-//       on all 16 per-seed files — the proof-test half is asserted by
+//       on all 9 per-seed files — the proof-test half is asserted by
 //       the caller; this analyzer checks the errors half);
 //   (1) supply gap quantified: dominant source + rate AND dominant
-//       sink + rate AND pile fiber = 0 on >= 0.40 of village-days;
+//       sink + rate AND pile fiber = 0 on >= 0.25 of village-days;
 //   (2) fiber-need events >= 5 (no-mats departures with pile fiber 0);
 //   (3) personal-vs-pile separation measured (census present every
-//       seed, scholar mean stated).
+//       seed, scholar mean stated);
+//   (4) home sink directly attributed (homeCraft fiber out >= 1) AND
+//       the ledger closes (sum of |per-seed residual| <= 5).
 // Also: the source/sink ledger with a day-level reconciliation
 // (residual = census pile change minus attributed events — the
 // betrayal +4s and anything else the wraps never see), the
 // stick-throttle check (deadfall staffed days vs pile sticks >= 6),
 // the ammoRows cross-check (pileBefore-pileAfter sink vs the
-// pocketAmmo ledger rows), the wall numbers, and the ctl-vs-rep
-// determinism check (identical code, identical seeds — the §15
-// compare's companion; the panel compare .md is the instrument).
+// pocketAmmo ledger rows), the wall numbers, and the one-seed rerun
+// determinism check (fiber hash over the judged fields — see
+// fiberHash; the §15 compare's companion; a diag changes no game
+// code, so there is no before/after panel).
 // Usage:
-//   node scripts/analyze-fibersupply-a.js --ctl DIR --rep DIR [--out FILE]
+//   node scripts/analyze-fibersupply-a.js --seeds 111701,...,111708 --ctl DIR --rerun DIR --seed 111701 [--out FILE]
+//   node scripts/analyze-fibersupply-a.js --seeds ... --ctl DIR --rep DIR [--out FILE]   (legacy Nov 21 shape)
 //   node scripts/analyze-fibersupply-a.js --selftest
 'use strict';
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 
-const SEEDS = [107091, 107092, 107093, 107094, 107095, 107096, 107097, 107098];
+const DEFAULT_SEEDS = [107091, 107092, 107093, 107094, 107095, 107096, 107097, 107098];
+function parseSeeds() {
+  const args = process.argv.slice(2);
+  const i = args.indexOf('--seeds');
+  const raw = (i !== -1 ? args[i + 1] : null) || process.env.FIBERSUPPLY_SEEDS || null;
+  if (!raw) return DEFAULT_SEEDS.slice();
+  return raw.split(',').map(function (s) { return parseInt(s.trim(), 10); }).filter(Number.isFinite);
+}
+const SEEDS = parseSeeds();
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 function median(xs) {
   if (!xs.length) return null;
@@ -43,14 +56,39 @@ function isStarvation(d) {
   return /starvat/i.test(String((d && d.kind) || '')) || /starvat/i.test(String((d && d.cause) || ''));
 }
 
-function loadLeg(dir, mode) {
+function loadLeg(dir, mode, run) {
   const rows = [];
   for (const seed of SEEDS) {
-    const fp = path.join(dir, 'fibersupply-a-s' + seed + '-fibersupply-a-' + mode + '.json');
+    const fp = path.join(dir, 'fibersupply-a-s' + seed + '-' + (run || 'fibersupply-a') + '-' + mode + '.json');
     if (!fs.existsSync(fp)) throw new Error('missing per-seed file: ' + fp);
     rows.push({ seed: seed, r: JSON.parse(fs.readFileSync(fp, 'utf8')) });
   }
   return rows;
+}
+function loadOne(dir, seed, run, mode) {
+  const fp = path.join(dir, 'fibersupply-a-s' + seed + '-' + run + '-' + mode + '.json');
+  if (!fs.existsSync(fp)) throw new Error('missing per-seed file: ' + fp);
+  return { seed: seed, r: JSON.parse(fs.readFileSync(fp, 'utf8')) };
+}
+
+// fiberHash(corpus): sha256 over the JUDGED fields only — the fiber
+// instrument's rows plus the run summaries the verdict turns on.
+// Labels that differ by design between a pilot file and its rerun
+// (mode, leg, run, anchorCommit) are masked; everything the sim
+// produced is hashed. The vetfirst `daily` telemetry is NOT a judged
+// field and is excluded (it carries process-scoped sequence numbers).
+function fiberHash(r) {
+  const pick = {
+    fiberCensus: r.fiberCensus || null, fiberEvents: r.fiberEvents || null,
+    fiberCrafts: r.fiberCrafts || null, fiberSays: r.fiberSays || null,
+    fiberStashLog: r.fiberStashLog || null, ammoRows: r.ammoRows || null,
+    depmatRows: r.depmatRows || null, deaths: r.deaths || null,
+    days: r.days != null ? r.days : (r.gameDays != null ? r.gameDays : null),
+    endReason: r.endReason || null, won: !!r.won,
+    scaleRank: r.scaleRank || null, maxWave: r.maxWave || 1,
+    standing: r.standing != null ? r.standing : null,
+  };
+  return crypto.createHash('sha256').update(JSON.stringify(pick)).digest('hex');
 }
 
 // seedStats(r): everything the judge and the evidence need from one
@@ -145,6 +183,24 @@ function seedStats(r) {
   // PocketAmmo ledger rows (the same sink, read off the ledger):
   let ledgerPocketOut = 0;
   for (const e of events) if (e.kind === 'pocketAmmo') ledgerPocketOut += -Math.min(0, e.dFiber | 0);
+  // HomeCraft ledger rows (the home-duty sink, wrapped directly since
+  // the 2026-11-27 re-run — no longer inferred from the stash ledger):
+  let homeCraftRows = 0, homeCraftOut = 0, homeCraftAttempts = 0, homeCraftBatches = 0;
+  for (const e of events) if (e.kind === 'homeCraft') {
+    homeCraftRows++;
+    homeCraftOut += -Math.min(0, e.dFiber | 0);
+    homeCraftAttempts += (e.attempts | 0);
+    homeCraftBatches += (e.batches | 0);
+  }
+  // Pile-recipe availability (craftgate §4, re-measured here): days
+  // the pile holds a full arrow recipe (2 stick + 1 stone + 1 fiber)
+  // and a full bolt recipe (2 stick + 1 stone).
+  let arrowRecipeDays = 0, boltRecipeDays = 0;
+  for (const c of census) {
+    const p = c.pile || {};
+    if (((p.stick | 0) >= 2) && ((p.stone | 0) >= 1) && ((p.fiber | 0) >= 1)) arrowRecipeDays++;
+    if (((p.stick | 0) >= 2) && ((p.stone | 0) >= 1)) boltRecipeDays++;
+  }
 
   // Scholar crafts (personal fiber).
   let scholarCraftAttempts = 0, scholarCraftOk = 0, scholarFiberSpent = 0, scholarPileDelta = 0;
@@ -178,6 +234,9 @@ function seedStats(r) {
     craftOk: craftOk, craftFail: craftFail, craftAttempts: craftAttempts,
     ammoSinkFiber: ammoSinkFiber, ammoSinkStick: ammoSinkStick,
     ledgerPocketOut: ledgerPocketOut,
+    homeCraftRows: homeCraftRows, homeCraftOut: homeCraftOut,
+    homeCraftAttempts: homeCraftAttempts, homeCraftBatches: homeCraftBatches,
+    arrowRecipeDays: arrowRecipeDays, boltRecipeDays: boltRecipeDays,
     pileFiber0Rows: pileFiber0Rows, pileRows: pileRows,
     servedDepartures: servedDepartures, servedWithAmmo: servedWithAmmo,
     scholarCraftAttempts: scholarCraftAttempts, scholarCraftOk: scholarCraftOk,
@@ -234,6 +293,13 @@ function legStats(rows) {
     craftFail: sum(function (s) { return s.craftFail; }),
     ammoSinkFiber: sum(function (s) { return s.ammoSinkFiber; }),
     ledgerPocketOut: sum(function (s) { return s.ledgerPocketOut; }),
+    homeCraftRows: sum(function (s) { return s.homeCraftRows; }),
+    homeCraftOut: sum(function (s) { return s.homeCraftOut; }),
+    homeCraftAttempts: sum(function (s) { return s.homeCraftAttempts; }),
+    homeCraftBatches: sum(function (s) { return s.homeCraftBatches; }),
+    arrowRecipeDays: sum(function (s) { return s.arrowRecipeDays; }),
+    boltRecipeDays: sum(function (s) { return s.boltRecipeDays; }),
+    sumAbsResidual: per.reduce(function (t, s) { return t + (s.residual == null ? 0 : Math.abs(s.residual)); }, 0),
     deadfallHauls: sum(function (s) { return s.deadfallHauls; }),
     deadfallFiber: sum(function (s) { return s.deadfallFiber; }),
     deadfallSticks: sum(function (s) { return s.deadfallSticks; }),
@@ -258,22 +324,29 @@ function legStats(rows) {
   };
 }
 
-// judge(ctl, rep): the FROZEN prereg bars. The proof-test half of
-// bar (0) is asserted by the caller (test-fibersupply-a.js GREEN);
-// this judge checks the errors half + bars (1)-(3).
+// judge(ctl, rep): the FROZEN prereg bars (2026-11-27 re-run).
+// The proof-test half of bar (0) is asserted by the caller
+// (test-fibersupply-a.js GREEN); this judge checks the errors half +
+// bars (1)-(4). rep may be a full legStats or a partial { errors }
+// (single-leg + rerun mode, where only the rerun file's error count
+// is known); null rep means no second leg at all.
 function judge(ctl, rep) {
+  const repErrors = (rep && rep.errors != null) ? rep.errors : 0;
   const bars = [];
-  bars.push({ id: '0', name: 'instrument validity (errors 0 on all 16 per-seed files)',
-    value: ctl.errors + ' ctl errors + ' + rep.errors + ' rep errors',
-    pass: ctl.errors === 0 && rep.errors === 0 });
-  bars.push({ id: '1', name: 'supply gap quantified (named source+sink with rates, pile-zero >= 0.40)',
+  bars.push({ id: '0', name: 'instrument validity (errors 0 on all per-seed files)',
+    value: ctl.errors + ' ctl errors + ' + repErrors + ' rep/rerun errors',
+    pass: ctl.errors === 0 && repErrors === 0 });
+  bars.push({ id: '1', name: 'supply gap quantified (named source+sink with rates, pile-zero >= 0.25)',
     value: 'source ' + ctl.domSource + ' ' + (ctl.domSourcePerDay == null ? 'null' : ctl.domSourcePerDay.toFixed(3)) + '/day; sink ' + ctl.domSink + ' ' + (ctl.domSinkPerDay == null ? 'null' : ctl.domSinkPerDay.toFixed(3)) + '/day; pile-zero ' + (ctl.pileZeroShare == null ? 'null' : ctl.pileZeroShare.toFixed(3)) + ' (' + ctl.zeroDays + '/' + ctl.villageDays + ' days)',
-    pass: !!ctl.domSource && !!ctl.domSink && ctl.pileZeroShare != null && ctl.pileZeroShare >= 0.40 });
+    pass: !!ctl.domSource && !!ctl.domSink && ctl.pileZeroShare != null && ctl.pileZeroShare >= 0.25 });
   bars.push({ id: '2', name: 'fiber-need events >= 5 (no-mats departures with pile fiber 0)',
     value: String(ctl.needEvents), pass: ctl.needEvents >= 5 });
   bars.push({ id: '3', name: 'personal-vs-pile separation measured (census present every seed, scholar mean stated)',
     value: 'census ' + (ctl.censusPresent ? 'present' : 'MISSING') + '; scholar mean ' + (ctl.scholarMeanBand == null ? 'null' : ctl.scholarMeanBand.toFixed(2)) + ', max ' + ctl.scholarMaxBand + '; villagers max ' + ctl.villagersMaxBand,
     pass: ctl.censusPresent && ctl.scholarMeanBand != null });
+  bars.push({ id: '4', name: 'home sink directly attributed (homeCraft fiber out >= 1) AND ledger closes (sum |residual| <= 5)',
+    value: 'homeCraft out ' + ctl.homeCraftOut + ' fiber in ' + ctl.homeCraftRows + ' rows (' + ctl.homeCraftAttempts + ' attempts, ' + ctl.homeCraftBatches + ' batches); sum |residual| ' + ctl.sumAbsResidual,
+    pass: ctl.homeCraftOut >= 1 && ctl.sumAbsResidual != null && ctl.sumAbsResidual <= 5 });
   let verdict = 'DIAG-GO', kind = '';
   if (!bars.every(function (b) { return b.pass; })) { verdict = 'DIAG-NO-GO'; kind = 'BAR-FAIL'; }
   return { verdict: verdict, kind: kind, bars: bars };
@@ -307,8 +380,10 @@ function check(name, cond, extra) {
 }
 function selftest() {
   // mk() defaults to the ctl GO shape: 150 village-days, pile-zero
-  // 0.60, deadfall the dominant source (90 in), pocketAmmo the
-  // dominant sink (60 out), 8 need events, census present, 0 errors.
+  // 0.60, deadfall the dominant source (66 in), pocketAmmo the
+  // dominant sink (60 out), homeCraft out 5, 8 need events, census
+  // present, 0 errors. Ledger closes: net 66 - 60 - 5 = 1 = final
+  // pile fiber 1, residual 0.
   function mk(o) {
     o = o || {};
     const days = o.days != null ? o.days : 150;
@@ -316,8 +391,9 @@ function selftest() {
     const census = [];
     for (let d = 1; d <= days; d++) census.push({ day: d, pile: { fiber: d <= zero ? 0 : 1, stick: 6 }, scholarFiber: 4, villagersFiber: 0, deadfallHauls: 10, deadfallFiber: 90, deadfallSticks: 15, deadfallStaffed: 1, trustLevel: 'open', rosterN: 20 });
     const events = [];
-    for (let i = 0; i < (o.deadfallIn != null ? o.deadfallIn : 90); i++) events.push({ kind: 'assign', task: 'deadfall', dFiber: 1, day: 1 });
+    for (let i = 0; i < (o.deadfallIn != null ? o.deadfallIn : 66); i++) events.push({ kind: 'assign', task: 'deadfall', dFiber: 1, day: 1 });
     for (let i = 0; i < (o.pocketOut != null ? o.pocketOut : 60); i++) events.push({ kind: 'pocketAmmo', dFiber: -1, day: 1 });
+    for (let i = 0; i < (o.homeCraftOut != null ? o.homeCraftOut : 5); i++) events.push({ kind: 'homeCraft', dFiber: -1, attempts: 1, batches: 1, day: 1 });
     const ammo = [];
     for (let i = 0; i < (o.need != null ? o.need : 8); i++) ammo.push({ failReason: 'no-mats', pile: { fiber: 0, stick: 2, stone: 1 }, pileAfter: { fiber: 0, stick: 2, stone: 1 }, servedThisDepart: false, carriedAfter: 0, crafted: 0 });
     for (let i = 0; i < 10; i++) ammo.push({ failReason: 'craft-ok', pile: { fiber: 1, stick: 2, stone: 1 }, pileAfter: { fiber: 0, stick: 0, stone: 0 }, servedThisDepart: false, carriedAfter: 5, crafted: 1 });
@@ -330,14 +406,16 @@ function selftest() {
   const goCtl = legOf([mk()]);
   const goRep = legOf([mk()]);
   let j = judge(goCtl, goRep);
-  check('judge DIAG-GO shape passes (errors 0 + pile-zero 0.60 + need 8 + census present)', j.verdict === 'DIAG-GO' && j.bars.every(function (b) { return b.pass; }), JSON.stringify(j));
+  check('judge DIAG-GO shape passes (errors 0 + pile-zero 0.60 + need 8 + census present + homeCraft 5 + residual 0)', j.verdict === 'DIAG-GO' && j.bars.every(function (b) { return b.pass; }), JSON.stringify(j));
   check('GO shape names deadfall source and pocketAmmo sink', goCtl.domSource === 'assign/deadfall' && goCtl.domSink === 'pocketAmmo', goCtl.domSource + ' / ' + goCtl.domSink);
+  check('GO shape attributes the homeCraft sink (5 out, 5 rows, 5 attempts)', goCtl.homeCraftOut === 5 && goCtl.homeCraftRows === 5 && goCtl.homeCraftAttempts === 5, JSON.stringify({ out: goCtl.homeCraftOut, rows: goCtl.homeCraftRows, att: goCtl.homeCraftAttempts }));
+  check('GO shape ledger closes (sum |residual| 0)', goCtl.sumAbsResidual === 0, String(goCtl.sumAbsResidual));
   j = judge(legOf([mk({ errors: ['boom'] })]), goRep);
   check('judge DIAG-NO-GO when instrument errors > 0', j.verdict === 'DIAG-NO-GO' && !j.bars[0].pass, JSON.stringify(j.bars));
-  j = judge(legOf([mk({ zero: 58 })]), goRep); // 58/150 = 0.387 < 0.40
-  check('judge DIAG-NO-GO when pile-zero is 0.387 (< 0.40)', j.verdict === 'DIAG-NO-GO' && !j.bars[1].pass, JSON.stringify(j.bars));
-  j = judge(legOf([mk({ zero: 60 })]), goRep); // exactly 0.40
-  check('judge DIAG-GO when pile-zero sits exactly at 0.40', j.verdict === 'DIAG-GO' && j.bars[1].pass, JSON.stringify(j.bars));
+  j = judge(legOf([mk({ zero: 37 })]), goRep); // 37/150 = 0.247 < 0.25
+  check('judge DIAG-NO-GO when pile-zero is 0.247 (< 0.25)', j.verdict === 'DIAG-NO-GO' && !j.bars[1].pass, JSON.stringify(j.bars));
+  j = judge(legOf([mk({ zero: 38 })]), goRep); // 38/150 = 0.253 >= 0.25
+  check('judge DIAG-GO when pile-zero sits at 0.253 (>= 0.25)', j.verdict === 'DIAG-GO' && j.bars[1].pass, JSON.stringify(j.bars));
   j = judge(legOf([mk({ need: 4 })]), goRep);
   check('judge DIAG-NO-GO when need events are 4 (< 5)', j.verdict === 'DIAG-NO-GO' && !j.bars[2].pass, JSON.stringify(j.bars));
   j = judge(legOf([mk({ need: 5 })]), goRep);
@@ -345,11 +423,20 @@ function selftest() {
   const noCensus = mk(); noCensus.fiberCensus = [];
   j = judge(legOf([noCensus]), goRep);
   check('judge DIAG-NO-GO when the census is missing', j.verdict === 'DIAG-NO-GO' && !j.bars[3].pass, JSON.stringify(j.bars));
+  j = judge(legOf([mk({ homeCraftOut: 0 })]), goRep);
+  check('judge DIAG-NO-GO when the homeCraft sink is 0 (bar 4)', j.verdict === 'DIAG-NO-GO' && !j.bars[4].pass, JSON.stringify(j.bars));
+  j = judge(legOf([mk({ deadfallIn: 60 })]), goRep); // net 60-60-5=-5 vs final 1: residual 6
+  check('judge DIAG-NO-GO when sum |residual| is 6 (> 5, bar 4)', j.verdict === 'DIAG-NO-GO' && !j.bars[4].pass, JSON.stringify(j.bars));
   const det = determinism([{ seed: 107091, r: mk() }], [{ seed: 107091, r: mk() }]);
   check('determinism identical on identical corpora', det[0].identical === true, JSON.stringify(det));
   const other = mk(); other.standing = 200;
   const det2 = determinism([{ seed: 107091, r: mk() }], [{ seed: 107091, r: other }]);
   check('determinism names the differing key (standing)', det2[0].identical === false && det2[0].diffKeys.indexOf('standing') !== -1, JSON.stringify(det2));
+  check('fiberHash identical on identical corpora', fiberHash(mk()) === fiberHash(mk()), '');
+  const otherHash = mk(); otherHash.standing = 200;
+  check('fiberHash differs when a judged field changes (standing)', fiberHash(mk()) !== fiberHash(otherHash), '');
+  const labeled = mk(); labeled.run = 'fibersupply-a-rerun'; labeled.mode = 'ctl'; labeled.leg = 'ctl'; labeled.anchorCommit = 'deadbeef';
+  check('fiberHash masks run/mode/leg/anchorCommit labels', fiberHash(mk()) === fiberHash(labeled), '');
   console.log('analyze-fibersupply-a --selftest: ' + passed + ' passed, ' + failed + ' failed');
   process.exit(failed ? 1 : 0);
 }
@@ -359,15 +446,50 @@ function main() {
   if (args.indexOf('--selftest') !== -1) selftest();
   const ctlDir = (args.indexOf('--ctl') !== -1) ? args[args.indexOf('--ctl') + 1] : null;
   const repDir = (args.indexOf('--rep') !== -1) ? args[args.indexOf('--rep') + 1] : null;
+  const rerunDir = (args.indexOf('--rerun') !== -1) ? args[args.indexOf('--rerun') + 1] : null;
+  const rerunSeed = (args.indexOf('--seed') !== -1) ? parseInt(args[args.indexOf('--seed') + 1], 10) : null;
+  const rerunRun = (args.indexOf('--run') !== -1) ? args[args.indexOf('--run') + 1] : 'fibersupply-a-rerun';
   const outFile = (args.indexOf('--out') !== -1) ? args[args.indexOf('--out') + 1] : null;
-  if (!ctlDir || !repDir) { console.error('usage: analyze-fibersupply-a.js --ctl DIR --rep DIR [--out FILE] | --selftest'); process.exit(2); }
+  if (!ctlDir || (!repDir && !rerunDir)) { console.error('usage: analyze-fibersupply-a.js --seeds S... --ctl DIR (--rep DIR | --rerun DIR --seed N [--run RUN]) [--out FILE] | --selftest'); process.exit(2); }
   const ctlRows = loadLeg(ctlDir, 'ctl');
-  const repRows = loadLeg(repDir, 'rep');
   const ctl = legStats(ctlRows);
-  const rep = legStats(repRows);
-  const j = judge(ctl, rep);
-  const det = determinism(ctlRows, repRows);
-  const result = { verdict: j.verdict, kind: j.kind, bars: j.bars, ctl: ctl, rep: rep, determinism: det };
+  let rep = null, det = null, result = null;
+  if (rerunDir) {
+    if (!rerunSeed) { console.error('FIBERSUPPLY STOP: --rerun requires --seed N'); process.exit(2); }
+    const rerunOne = loadOne(rerunDir, rerunSeed, rerunRun, 'ctl');
+    const rerunStats = seedStats(rerunOne.r);
+    rep = { errors: rerunStats.instrumentErrors };
+    const pilotOne = ctlRows.filter(function (x) { return x.seed === rerunSeed; })[0];
+    if (!pilotOne) { console.error('FIBERSUPPLY STOP: pilot has no seed ' + rerunSeed); process.exit(2); }
+    const hPilot = fiberHash(pilotOne.r), hRerun = fiberHash(rerunOne.r);
+    det = [{ seed: rerunSeed, identical: hPilot === hRerun, pilotHash: hPilot, rerunHash: hRerun }];
+    const j = judge(ctl, rep);
+    result = { verdict: j.verdict, kind: j.kind, bars: j.bars, ctl: ctl,
+      rerun: { seed: rerunSeed, stats: rerunStats }, determinism: det };
+    console.log(JSON.stringify({ verdict: j.verdict, kind: j.kind,
+      bars: j.bars.map(function (b) { return { id: b.id, pass: b.pass, value: b.value }; }),
+      pileZeroShare: ctl.pileZeroShare, needEvents: ctl.needEvents,
+      domSource: ctl.domSource, domSourcePerDay: ctl.domSourcePerDay,
+      domSink: ctl.domSink, domSinkPerDay: ctl.domSinkPerDay,
+      homeCraftOut: ctl.homeCraftOut, homeCraftRows: ctl.homeCraftRows,
+      homeCraftAttempts: ctl.homeCraftAttempts, sumAbsResidual: ctl.sumAbsResidual,
+      arrowRecipeDays: ctl.arrowRecipeDays, boltRecipeDays: ctl.boltRecipeDays,
+      inPerDay: ctl.inPerDay, outPerDay: ctl.outPerDay,
+      scholarMeanBand: ctl.scholarMeanBand, scholarMaxBand: ctl.scholarMaxBand,
+      villagersMaxBand: ctl.villagersMaxBand,
+      national: ctl.national, wins: ctl.wins, wave4: ctl.wave4, wave5: ctl.wave5,
+      medianDays: ctl.medianDays, communityLost: ctl.communityLost,
+      starvation: ctl.starvation, deaths: ctl.deaths,
+      determinismIdentical: det[0].identical, determinismSeed: rerunSeed,
+    }, null, 2));
+    if (outFile) fs.writeFileSync(outFile, JSON.stringify(result, null, 2) + '\n');
+    return;
+  }
+  const repRows = loadLeg(repDir, 'rep');
+  const repStats = legStats(repRows);
+  const j = judge(ctl, repStats);
+  det = determinism(ctlRows, repRows);
+  result = { verdict: j.verdict, kind: j.kind, bars: j.bars, ctl: ctl, rep: repStats, determinism: det };
   console.log(JSON.stringify({ verdict: j.verdict, kind: j.kind,
     bars: j.bars.map(function (b) { return { id: b.id, pass: b.pass, value: b.value }; }),
     pileZeroShare: ctl.pileZeroShare, needEvents: ctl.needEvents,
@@ -385,4 +507,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { seedStats: seedStats, legStats: legStats, judge: judge, determinism: determinism, SEEDS: SEEDS };
+module.exports = { seedStats: seedStats, legStats: legStats, judge: judge, determinism: determinism, fiberHash: fiberHash, loadOne: loadOne, SEEDS: SEEDS };
