@@ -122,14 +122,18 @@ function spearShare(kit) {
   if (kit.meleeClass === 'spear') s += (kit.meleeBonus || 0) / 2;
   return s / kit.wb;
 }
-// meleeShare / rangedShare: the fold-in halves (used for the
-// melee-vs-ranged split of weapon-strike damage).
+// meleeShare / rangedShare: the fold-in halves for the NON-SPEAR
+// weapon in each slot. A spear's half belongs to spearShare, never
+// here — a spear in the melee slot must not be counted in both the
+// spear share AND the melee share (that double-counts its half).
 function meleeShare(kit) {
   if (!kit || !(kit.wb > 0)) return 0;
+  if (kit.meleeClass === 'spear') return 0;
   return (kit.meleeBonus || 0) / 2 / kit.wb;
 }
 function rangedShare(kit) {
   if (!kit || !(kit.wb > 0)) return 0;
+  if (kit.rangedClass === 'spear') return 0;
   return (kit.rangedBonus || 0) / 2 / kit.wb;
 }
 
@@ -275,6 +279,7 @@ function spearDmgStats(dir) {
     perStrikeByMix: {},
     // Attribution (fold-in shares, prereg §1).
     spearAttrDmg: 0, meleeAttrDmg: 0, rangedAttrDmg: 0,
+    attributedTotal: 0, roundingResidue: 0,
     volleyDmg: 0, contactDmg: 0, ambushDmg: 0, extraDmg: 0,
     spearShare: null,
     // Per-fight spear dpr (the kill-line question).
@@ -406,6 +411,7 @@ function spearDmgStats(dir) {
         else if (leadKit.rangedClass === 'bow' || leadKit.rangedClass === 'crossbow' ||
                  leadKit.rangedClass === 'sling' || leadKit.rangedClass === 'searcaster' ||
                  leadKit.rangedClass === 'other-ranged') fightRangedAttr += volDmg;
+        else if (leadKit.meleeClass === 'spear') fightSpearAttr += volDmg;
         else fightMeleeAttr += volDmg;
       }
       // Contact finish: by instrument.
@@ -482,6 +488,12 @@ function spearDmgStats(dir) {
       median: median(xs), min: Math.min.apply(null, xs), max: Math.max.apply(null, xs) };
   }
   st.spearShare = st.mDealtTotal ? st.spearAttrDmg / st.mDealtTotal : null;
+  // The three fold-in shares sum to ≤ 1 per fighter (wb rounds
+  // the half-sum up, so a little damage is always unattributed
+  // to any weapon — the fold-in rounding residue, reported here,
+  // never silently folded into a weapon's share).
+  st.attributedTotal = st.spearAttrDmg + st.meleeAttrDmg + st.rangedAttrDmg;
+  st.roundingResidue = st.mDealtTotal - st.attributedTotal - st.extraDmg;
   st.spearDprMean = mean(st.spearDprPerFight.filter(function (r) { return r.spearFight; }).map(function (r) { return r.spearDpr; }));
   st.spearDprMax = st.spearDprPerFight.length ? Math.max.apply(null, st.spearDprPerFight.map(function (r) { return r.spearDpr; })) : null;
   st.partyDprMean = mean(st.spearDprPerFight.map(function (r) { return r.partyDpr; }));
@@ -654,6 +666,17 @@ function selftest() {
   check('spear+melee share: hunting_spear 30 + machete 35, wb 33 → 15/33',
     Math.abs(spearShare(kit('x', 'X', 'machete', 35, 'hunting_spear', 30, 33)) - 15 / 33) < 1e-9,
     String(spearShare(kit('x', 'X', 'machete', 35, 'hunting_spear', 30, 33))));
+  // Melee-slot spear (the Ricardo/Soledad/Pavel shape): the spear's
+  // melee half belongs to the spear share ONLY — meleeShare is 0,
+  // so the three shares sum to ≤ 1 and nothing double-counts.
+  const meleeSpearKit = kit('y', 'Y', 'hunting_spear', 30, 'crude_bow', 18, 24);
+  check('melee-slot spear: spear share is the melee half (15/24), melee share is 0, ranged share is the bow half (9/24)',
+    Math.abs(spearShare(meleeSpearKit) - 15 / 24) < 1e-9 &&
+    meleeShare(meleeSpearKit) === 0 &&
+    Math.abs(rangedShare(meleeSpearKit) - 9 / 24) < 1e-9,
+    JSON.stringify({ s: spearShare(meleeSpearKit), m: meleeShare(meleeSpearKit), r: rangedShare(meleeSpearKit) }));
+  check('melee-slot spear shares sum to exactly 1.0 (15+9)/24',
+    Math.abs(spearShare(meleeSpearKit) + meleeShare(meleeSpearKit) + rangedShare(meleeSpearKit) - 1) < 1e-9, '');
   check('unarmed share is 0', spearShare(kit('u', 'U', null, 0, null, 0, 0)) === 0, '');
   check('mix classes: spear-only / spear+melee / bow+melee / other-melee-only / unarmed',
     fighterMix(row1.leadKit) === 'spear-only' &&
@@ -697,6 +720,9 @@ function selftest() {
     st.residual === 0, 'residual ' + st.residual);
   check('stats spear share: spear attr (96 strikes + 21 ambush, all spear) / 167 ≈ 0.70',
     Math.abs(st.spearShare - 117 / 167) < 1e-9, 'share ' + st.spearShare);
+  check('stats attribution does not double-count: attributed + extra ≤ mDealt, residue is the fold-in rounding (1.25 × 8 = 10)',
+    Math.abs(st.roundingResidue - 10) < 1e-9 && st.attributedTotal + st.extraDmg <= st.mDealtTotal,
+    JSON.stringify({ attr: st.attributedTotal, extra: st.extraDmg, residue: st.roundingResidue, total: st.mDealtTotal }));
   check('stats spear dpr per fight: 117/3 = 39.0',
     st.spearDprMean === 39, 'mean ' + st.spearDprMean);
   check('stats per-strike spear-only mean: (50+46)/2 = 48',
