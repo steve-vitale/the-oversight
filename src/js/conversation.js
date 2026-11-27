@@ -5122,6 +5122,41 @@
         choices = (choices || []).filter(ch => ch && !resumePivot.test(ch.id));
       }
       const full=(choices || []).filter(ch=>ch && ch.id && ch.id!=='menu:more' && !seen.has(ch.id) && seen.add(ch.id));
+      // R286 BEARER-END ANY-WANT (journey-establishment r286 2026-11-27):
+      // the r280 rank only promotes a cancel that is already in the menu —
+      // but the favor menu (convoFavorActionMenu) is built only when the
+      // sitting opens on the favor want. On the r286 panel (seed 109054)
+      // Lena's bearer-ended run stayed open 24 dawns because every
+      // sitting opened on another want (grief, warning, news, comfort)
+      // and the cancel was never offered at all — the run's only honest
+      // end was luck-of-the-draw on the opener. When the urgent shape
+      // holds (convoFavorEndUrgent) AND the ending is actually ready at
+      // Haven (the same forage/waterFavorAction ready gate the favor menu
+      // uses), the cancel joins the menu from any sitting with that
+      // villager; the r280 rank below puts it first. Never offered while
+      // a question, trade, hawk, ambush or closing owns the menu — those
+      // answers still own their sitting — and never when the ending
+      // isn't ready (an event in progress, away from Haven), when
+      // pressing it would only refuse. The handler resolves the favor
+      // via convoGetFavor (convo-dialogue.js), so the verb works from a
+      // non-favor want; a healthy live run is untouched (urgent false).
+      try {
+        if (typeof this.convoFavorEndUrgent === 'function' && this.convoFavorEndUrgent(vid) &&
+            !full.some(ch => ch.id === 'dlg:favor_cancel') &&
+            !c.pendingQ && !c.reactiveQ && !c.genericQ && !c.pendingTrade && !c.pendingHawk &&
+            c.thread !== 'ambush' && c.thread !== 'nonverbal' && !c.windingDown && c.spokenBeat?.tag !== 'closing') {
+          const favor = (typeof this.convoGetFavor === 'function') ? this.convoGetFavor(vid) : null;
+          let cancelChoice = null;
+          if (favor?.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned &&
+              typeof this.forageFavorAction === 'function' && this.forageFavorAction(vid, favor, true).ready) {
+            cancelChoice = { id: 'dlg:favor_cancel', label: 'End outing and unload what we have (break unfinished promise)', temper: 'neutral' };
+          } else if (favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned &&
+              typeof this.waterFavorAction === 'function' && this.waterFavorAction(vid, favor, true).ready) {
+            cancelChoice = { id: 'dlg:favor_cancel', label: 'End trip and unload what we have (break unfinished promise)', temper: 'neutral' };
+          }
+          if (cancelChoice) full.push(cancelChoice);
+        }
+      } catch (e) {}
       c.offeredReplies = Object.fromEntries(full.map(ch => [ch.id, ch.label]));
       if (full.some(ch=>/^(ans:|gq:)/.test(ch.id))) { c.menuPage=0;c.menuPages=1;return full; }
       const silent=full.filter(ch=>ch.id==='silence' || ch.id==='nv:listen').slice(0,1);
@@ -5135,6 +5170,10 @@
       // options, 3 dawns lost). A healthy live run's early end is not
       // urgent and keeps its default rank (4) — only the gone-owner shape
       // promotes (see convoFavorEndUrgent in convo-wants.js).
+      // R286: the rank also fronts the cancel on a SMALL menu (the
+      // early return below skips the sort — a grief sitting is 6–7
+      // choices on one page, and the injected cancel would otherwise
+      // land last, after silence).
       const favorEndUrgent = (() => { try { return typeof this.convoFavorEndUrgent === 'function' && this.convoFavorEndUrgent(vid); } catch (e) { return false; } })();
       const rank=ch=>(ch.id==='dlg:favor_cancel'&&favorEndUrgent)?-1:
         /^(betrayal:|confront:|agency:|nv:accept|nv:decline)/.test(ch.id)?0:
@@ -5145,7 +5184,9 @@
         // menu paged to page 2+ almost always (~32% of r53 menu-problem
         // turns). It pages with the other social verbs now.
         /^(teach|trade|hawker|invite_party|dlg:invite|skill_learn:|skill_teach:|ask:gossip$|ask:spread_rumor$|ask:others$)/.test(ch.id)?3:4;
-      if(content.length+navigation.length<=7){c.menuPage=0;c.menuPages=1;return full;}
+      if(content.length+navigation.length<=7){c.menuPage=0;c.menuPages=1;
+        if (favorEndUrgent) { const ci = full.findIndex(ch => ch.id === 'dlg:favor_cancel'); if (ci > 0) { const moved = full.splice(ci, 1)[0]; full.unshift(moved); } }
+        return full;}
       content.sort((a,b)=>rank(a)-rank(b));
       const size=Math.max(1,7-navigation.length-1),pages=Math.ceil(content.length/size);
       const page=Number.isSafeInteger(c.menuPage)&&c.menuPage>=0?c.menuPage%pages:0;
