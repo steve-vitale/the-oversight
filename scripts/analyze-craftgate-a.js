@@ -51,27 +51,32 @@ const NEEDING_STATES = { away: true, cooldown: true, 'no-materials': true, 'atte
 
 // emptyFighterPool(dir): the distinct empty-quivered fighters at
 // wave-4+ entry (any origin, evades included; lead + allies), and the
-// never-supplied subset. "Received" = a ledger production event for
-// the vid with an ammo id they needed at an empty meeting (primary:
-// any source incl. starting-kit; variant: excluding starting-kit).
+// never-supplied subset. Fighters are keyed by (seed, vid): vid is a
+// NAME-based id (luis_fernandez, giulia_bianchi, ...) and the same name
+// recurs across villages — keying by vid alone merges different people
+// and undercounts the pool (11 name collisions on this band). "Received"
+// = a ledger production event in THE SAME SEED for the vid with an ammo
+// id they needed at an empty meeting (primary: any source incl.
+// starting-kit; variant: excluding starting-kit).
 function emptyFighterPool(dir) {
   const seeds = readSeeds(dir);
   const st = { dir: dir, files: seeds.length, valid: seeds.length,
     emptyRows: 0, distinctEmpty: 0, neverSupplied: 0, neverSuppliedNoKit: 0,
     supplied: 0, repeatEmpties: 0, emptyByVid: {}, neverSuppliedVids: [],
     suppliedVids: [], meetingsByVid: {} };
-  const emptyByVid = {}; // vid -> {meetings, ammoIds:Set, seeds:Set}
-  const receivedByVid = {}; // vid -> {ammoId -> true} from production events
+  const emptyByVid = {}; // seed|vid -> {meetings, ammoIds:Set, seeds:Set}
+  const receivedByVid = {}; // seed|vid -> {ammoId -> true} from production events
   const receivedNoKitByVid = {};
   for (const d of seeds) {
     const led = d.ammoLedger || {};
     for (const ev of (led.events || [])) {
       if (ev.kind !== 'production') continue;
-      if (!receivedByVid[ev.vid]) receivedByVid[ev.vid] = {};
-      receivedByVid[ev.vid][ev.ammoId] = true;
+      const k = d.seed + '|' + ev.vid;
+      if (!receivedByVid[k]) receivedByVid[k] = {};
+      receivedByVid[k][ev.ammoId] = true;
       if (ev.source !== 'starting-kit') {
-        if (!receivedNoKitByVid[ev.vid]) receivedNoKitByVid[ev.vid] = {};
-        receivedNoKitByVid[ev.vid][ev.ammoId] = true;
+        if (!receivedNoKitByVid[k]) receivedNoKitByVid[k] = {};
+        receivedNoKitByVid[k][ev.ammoId] = true;
       }
     }
     for (const r of (d.v4encounters || [])) {
@@ -81,12 +86,13 @@ function emptyFighterPool(dir) {
         if (!isAmmoCapable(rangedId)) return; // spears never count
         if ((ammoAtEntry | 0) > 0) return;
         st.emptyRows++;
-        if (!emptyByVid[vid]) emptyByVid[vid] = { meetings: 0, ammoIds: {}, seeds: {} };
-        emptyByVid[vid].meetings++;
-        if (ammoId) emptyByVid[vid].ammoIds[ammoId] = true;
-        emptyByVid[vid].seeds[d.seed] = true;
-        if (!st.meetingsByVid[vid]) st.meetingsByVid[vid] = [];
-        st.meetingsByVid[vid].push({ seed: d.seed, day: r.day, mid: r.mid, origin: r.origin || null, rangedId: rangedId, ammoId: ammoId || null });
+        const k = d.seed + '|' + vid;
+        if (!emptyByVid[k]) emptyByVid[k] = { meetings: 0, ammoIds: {}, seeds: {}, vid: vid, seed: d.seed };
+        emptyByVid[k].meetings++;
+        if (ammoId) emptyByVid[k].ammoIds[ammoId] = true;
+        emptyByVid[k].seeds[d.seed] = true;
+        if (!st.meetingsByVid[k]) st.meetingsByVid[k] = [];
+        st.meetingsByVid[k].push({ seed: d.seed, day: r.day, mid: r.mid, origin: r.origin || null, rangedId: rangedId, ammoId: ammoId || null });
       };
       // The lead's needed ammo id is resolved after the loop from
       // the gate rows (nearest gate row at or before the meeting,
@@ -106,11 +112,12 @@ function emptyFighterPool(dir) {
       gateByVidDay[k].push(g);
     }
   }
-  for (const vid of Object.keys(emptyByVid)) {
-    const info = emptyByVid[vid];
+  for (const k of Object.keys(emptyByVid)) {
+    const info = emptyByVid[k];
+    const vid = info.vid;
     const needed = Object.keys(info.ammoIds);
     // Fill from gate rows: the ammo id the fighter's weapon needed.
-    for (const m of (st.meetingsByVid[vid] || [])) {
+    for (const m of (st.meetingsByVid[k] || [])) {
       const rows = gateByVidDay[m.seed + '|' + vid] || [];
       let best = null;
       for (const g of rows) {
@@ -123,22 +130,22 @@ function emptyFighterPool(dir) {
     // in the gate rows — e.g. never home as a carrier), fall back to
     // "any ammo id": received = any production event at all.
     const got = (ids.length === 0)
-      ? !!receivedByVid[vid]
-      : ids.some(function (id) { return !!(receivedByVid[vid] || {})[id]; });
+      ? !!receivedByVid[k]
+      : ids.some(function (id) { return !!(receivedByVid[k] || {})[id]; });
     const gotNoKit = (ids.length === 0)
-      ? !!receivedNoKitByVid[vid]
-      : ids.some(function (id) { return !!(receivedNoKitByVid[vid] || {})[id]; });
+      ? !!receivedNoKitByVid[k]
+      : ids.some(function (id) { return !!(receivedNoKitByVid[k] || {})[id]; });
     info.neededAmmoIds = ids;
     info.received = got;
     info.receivedNoKit = gotNoKit;
     if (got) st.supplied++;
-    else { st.neverSupplied++; st.neverSuppliedVids.push(vid); }
+    else { st.neverSupplied++; st.neverSuppliedVids.push(k); }
     if (!gotNoKit) st.neverSuppliedNoKit++;
     if (info.meetings > 1) st.repeatEmpties++;
   }
   st.distinctEmpty = Object.keys(emptyByVid).length;
   st.emptyByVid = emptyByVid;
-  st.suppliedVids = Object.keys(emptyByVid).filter(function (v) { return emptyByVid[v].received; });
+  st.suppliedVids = Object.keys(emptyByVid).filter(function (k) { return emptyByVid[k].received; });
   return st;
 }
 
@@ -166,9 +173,11 @@ function gateDecomposition(dir, pool) {
     observedNeeding: 0, unobservedShortDays: 0, coverage: null,
     duplicateGateRows: 0, noWeaponRows: 0, notCraftableRows: 0 };
   const neverSet = new Set(pool.neverSuppliedVids || []);
-  // Per-fighter day maps: vid -> {day -> cause} (first gate row wins
-  // per vid-day; later rows same day are duplicates, counted).
-  const fighterDays = {}; // vid -> {day: {cause, state, sub}}
+  // Per-fighter day maps: seed|vid -> {day -> cause} (first gate row
+  // wins per vid-day; later rows same day are duplicates, counted).
+  // Keyed by seed|vid: names repeat across villages (see
+  // emptyFighterPool) — a bare vid would merge different people.
+  const fighterDays = {}; // seed|vid -> {day: {cause, state, sub}}
   const attemptIdx = {}; // seed|vid|day -> attempt row
   for (const d of seeds) {
     st.dutyCalls += (d.dutyCalls | 0);
@@ -195,9 +204,10 @@ function gateDecomposition(dir, pool) {
       if (g.state === 'no-weapon') st.noWeaponRows++;
       if (g.state === 'not-craftable') st.notCraftableRows++;
       if (!NEEDING_STATES[g.state]) continue;
-      if (!neverSet.has(g.vid)) continue;
-      if (!fighterDays[g.vid]) fighterDays[g.vid] = {};
-      if (fighterDays[g.vid][g.day]) { st.duplicateGateRows++; continue; }
+      const fk = d.seed + '|' + g.vid;
+      if (!neverSet.has(fk)) continue;
+      if (!fighterDays[fk]) fighterDays[fk] = {};
+      if (fighterDays[fk][g.day]) { st.duplicateGateRows++; continue; }
       // Cause for this needing-day.
       let cause = g.cause, sub = null;
       if (g.state === 'attempt-eligible') {
@@ -222,7 +232,7 @@ function gateDecomposition(dir, pool) {
         else if (pileShort) st.noMaterialsSplit.pileShort++;
         else if (ownShort) st.noMaterialsSplit.ownShort++;
       }
-      fighterDays[g.vid][g.day] = { cause: cause, state: g.state, sub: sub };
+      fighterDays[fk][g.day] = { cause: cause, state: g.state, sub: sub };
     }
     // Duty-missing days: pileDaily rows on days with no gate rows at
     // all — the census `short` count is unobserved needing-days.
@@ -233,8 +243,8 @@ function gateDecomposition(dir, pool) {
     }
     st.dutyDays += Object.keys(gateDaysByDay).length;
   }
-  for (const vid of Object.keys(fighterDays)) {
-    const days = fighterDays[vid];
+  for (const fk of Object.keys(fighterDays)) {
+    const days = fighterDays[fk];
     const byCause = {};
     for (const day of Object.keys(days)) {
       const c = days[day].cause;
@@ -250,7 +260,9 @@ function gateDecomposition(dir, pool) {
       if (n > bestN) { bestN = n; best = c; }
     }
     const tied = CAUSE_ORDER.filter(function (c) { return (byCause[c] || 0) === bestN; }).length;
-    st.fighters[vid] = { needingDays: Object.keys(days).length, byCause: byCause,
+    const parts = fk.split('|');
+    st.fighters[fk] = { seed: parseInt(parts[0], 10), vid: parts.slice(1).join('|'),
+      needingDays: Object.keys(days).length, byCause: byCause,
       primaryCause: bestN > 0 ? best : null, tied: tied > 1 };
     if (!best || bestN <= 0) { st.unassigned++; st.unassignedVids.push(vid); }
     else {
@@ -260,11 +272,13 @@ function gateDecomposition(dir, pool) {
   }
   // Never-supplied fighters with NO needing-day rows at all are
   // unassigned (the instrument never observed them needing).
-  for (const vid of (pool.neverSuppliedVids || [])) {
-    if (!st.fighters[vid]) {
-      st.fighters[vid] = { needingDays: 0, byCause: {}, primaryCause: null, tied: false };
+  for (const fk of (pool.neverSuppliedVids || [])) {
+    if (!st.fighters[fk]) {
+      const parts = fk.split('|');
+      st.fighters[fk] = { seed: parseInt(parts[0], 10), vid: parts.slice(1).join('|'),
+        needingDays: 0, byCause: {}, primaryCause: null, tied: false };
       st.unassigned++;
-      st.unassignedVids.push(vid);
+      st.unassignedVids.push(fk);
     }
   }
   st.observedNeeding = st.needingDays;
@@ -447,24 +461,45 @@ function selftest() {
     ],
   });
   fs.writeFileSync(path.join(dir, 's2.json'), JSON.stringify(seed2));
+  // Seed 3: NAMESAKE — vid 'h2' again, a different person in a
+  // different village. This h2 RECEIVED a home-duty batch and entered
+  // empty once (spent it). The pool must NOT merge them: seed1|h2
+  // stays never-supplied, seed3|h2 is supplied, distinct = 4.
+  const seed3 = mkSeed({ seed: 3, dutyCalls: 150,
+    v4encounters: [
+      { day: 40, vid: 'h2', mid: 'audit', wave: 4, origin: 'expedition', allyVids: [], outcome: 'vFlee', rounds: 2, mDealt: 71, mHpStart: 1311, vTaken: 70, rangedId: 'bow', ammoAtEntry: 0, ammoProv: [], alliesAmmo: [], volley: null, log: [] },
+    ],
+    ammoLedger: { events: [
+      { seq: 1, day: 9, kind: 'production', vid: 'h2', ammoId: 'arrow', units: 5, source: 'home-duty', loc: 'carried' },
+    ], other: [], unattributedSpend: [], transfers: [], spends: [],
+      counters: { homeDutyBatches: 1, homeDutyCalls: 150, departureCalls: 0, departureCraftAttempts: 0, departureCraftOk: 0, departureStones: 0, departureStashMoved: 0, lootDrops: 0, lootAmmoDrops: 0 },
+      finalProv: {} },
+    gateDays: [], attempts: [], pileDaily: [],
+  });
+  fs.writeFileSync(path.join(dir, 's3.json'), JSON.stringify(seed3));
 
   // ---- emptyFighterPool ----
   const pool = emptyFighterPool(dir);
-  check('pool: 4 empty rows (h2 x2, h3, h5; spear h4 excluded)', pool.emptyRows === 4, 'got ' + pool.emptyRows);
-  check('pool: 3 distinct empty fighters', pool.distinctEmpty === 3, 'got ' + pool.distinctEmpty);
-  check('pool: h1 supplied (5 arrows, home-duty), not in the pool', pool.suppliedVids.indexOf('h1') === -1 && pool.emptyByVid.h1 === undefined);
-  check('pool: never-supplied 3 (h2, h3, h5)', pool.neverSupplied === 3, 'got ' + pool.neverSupplied);
-  check('pool: repeat empties 1 (h2 twice)', pool.repeatEmpties === 1, 'got ' + pool.repeatEmpties);
+  check('pool: 5 empty rows (h2 x2, h3, h5, seed3-h2; spear h4 excluded)', pool.emptyRows === 5, 'got ' + pool.emptyRows);
+  check('pool: 4 distinct empty fighters (seed|vid — namesakes split)', pool.distinctEmpty === 4, 'got ' + pool.distinctEmpty);
+  check('pool: h1 supplied (5 arrows, home-duty), not in the pool', pool.suppliedVids.indexOf('1|h1') === -1 && pool.emptyByVid['1|h1'] === undefined);
+  check('pool: never-supplied 3 (seed1 h2, h3, h5)', pool.neverSupplied === 3, 'got ' + pool.neverSupplied);
+  check('pool: namesake seed3|h2 is supplied (its own home-duty batch), not merged into seed1|h2',
+    pool.suppliedVids.indexOf('3|h2') !== -1 && pool.neverSuppliedVids.indexOf('1|h2') !== -1 && pool.neverSuppliedVids.indexOf('3|h2') === -1,
+    JSON.stringify({ supplied: pool.suppliedVids, never: pool.neverSuppliedVids }));
+  check('pool: repeat empties 1 (seed1 h2 twice)', pool.repeatEmpties === 1, 'got ' + pool.repeatEmpties);
 
   // ---- gateDecomposition ----
   const gate = gateDecomposition(dir, pool);
   check('decomp: 10 needing-days (h2 4 + h3 4 + h5 2)', gate.needingDays === 10, 'got ' + gate.needingDays);
-  check('decomp: h2 primary carrier-absent (3 away vs 1 no-materials)',
-    gate.fighters.h2 && gate.fighters.h2.primaryCause === 'carrier-absent', JSON.stringify(gate.fighters.h2));
-  check('decomp: h3 tie 2/2 breaks to pile-materials-absent (order)',
-    gate.fighters.h3 && gate.fighters.h3.primaryCause === 'pile-materials-absent' && gate.fighters.h3.tied === true, JSON.stringify(gate.fighters.h3));
-  check('decomp: h5 primary other (attempt-failed x2)',
-    gate.fighters.h5 && gate.fighters.h5.primaryCause === 'other', JSON.stringify(gate.fighters.h5));
+  check('decomp: seed1|h2 primary carrier-absent (3 away vs 1 no-materials)',
+    gate.fighters['1|h2'] && gate.fighters['1|h2'].primaryCause === 'carrier-absent', JSON.stringify(gate.fighters['1|h2']));
+  check('decomp: seed1|h3 tie 2/2 breaks to pile-materials-absent (order)',
+    gate.fighters['1|h3'] && gate.fighters['1|h3'].primaryCause === 'pile-materials-absent' && gate.fighters['1|h3'].tied === true, JSON.stringify(gate.fighters['1|h3']));
+  check('decomp: seed2|h5 primary other (attempt-failed x2)',
+    gate.fighters['2|h5'] && gate.fighters['2|h5'].primaryCause === 'other', JSON.stringify(gate.fighters['2|h5']));
+  check('decomp: namesake seed3|h2 gets no decomposition rows (supplied, not in neverSet)',
+    gate.fighters['3|h2'] === undefined, JSON.stringify(Object.keys(gate.fighters)));
   check('decomp: primary-cause counts 1/1/1',
     gate.primaryCauseCounts['carrier-absent'] === 1 && gate.primaryCauseCounts['pile-materials-absent'] === 1 && gate.primaryCauseCounts.other === 1,
     JSON.stringify(gate.primaryCauseCounts));

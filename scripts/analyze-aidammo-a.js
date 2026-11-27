@@ -508,8 +508,12 @@ function ledgerStats(dir) {
       if ((r.wave | 0) < 4) continue;
       const addMeeting = function (vid, prov, ammoAtEntry) {
         if (!vid) return;
-        if (!st.meetingsByVid[vid]) st.meetingsByVid[vid] = [];
-        st.meetingsByVid[vid].push({ day: r.day, sources: (prov || []).slice(), ammoAtEntry: ammoAtEntry | 0 });
+        // Keyed by seed|vid: vid is a NAME-based id and recurs across
+        // villages — a bare vid would match a batch in one seed to a
+        // meeting in another (11 name collisions on the craftgate band).
+        const k = d.seed + '|' + vid;
+        if (!st.meetingsByVid[k]) st.meetingsByVid[k] = [];
+        st.meetingsByVid[k].push({ day: r.day, sources: (prov || []).slice(), ammoAtEntry: ammoAtEntry | 0 });
       };
       addMeeting(r.vid, r.ammoProv || [], r.ammoAtEntry | 0);
       for (const a of (r.alliesAmmo || [])) addMeeting(a.vid, a.prov || [], a.ammoAtEntry | 0);
@@ -518,7 +522,7 @@ function ledgerStats(dir) {
     // same vid with source-matching units at entry.
     for (const ev of (led.events || [])) {
       if (ev.kind !== 'production') continue;
-      const meets = st.meetingsByVid[ev.vid] || [];
+      const meets = st.meetingsByVid[d.seed + '|' + ev.vid] || [];
       let delivered = false;
       for (const m of meets) {
         if (m.day < ev.day) continue;
@@ -664,6 +668,18 @@ function selftest() {
       finalProv: {} },
   });
   fs.writeFileSync(path.join(dir, 's2.json'), JSON.stringify(seed2));
+  // Seed 3: NAMESAKE — vid 'h1' again, a different person in a
+  // different village. This h1 made a home-duty batch but NEVER met a
+  // wave-4 monster. Delivery must NOT match seed 3's batch to seed 1's
+  // h1 meeting (same name, different village).
+  const seed3 = mkSeed({ seed: 3, v4encounters: [],
+    ammoLedger: { events: [
+      { seq: 1, day: 5, kind: 'production', vid: 'h1', ammoId: 'arrow', units: 5, source: 'home-duty', loc: 'carried' },
+    ], other: [], unattributedSpend: [], transfers: [], spends: [],
+      counters: { homeDutyBatches: 1, homeDutyCalls: 3, departureCalls: 0, departureCraftAttempts: 0, departureCraftOk: 0, departureStones: 0, departureStashMoved: 0, lootDrops: 0, lootAmmoDrops: 0 },
+      finalProv: {} },
+  });
+  fs.writeFileSync(path.join(dir, 's3.json'), JSON.stringify(seed3));
 
   // ---- ammoAtEntryAll ----
   const a = ammoAtEntryAll(dir);
@@ -688,20 +704,22 @@ function selftest() {
 
   // ---- ledgerStats ----
   const L = ledgerStats(dir);
-  check('batches by source: starting-kit 2, home-duty 1, departure-craft 1',
-    L.batchesBySource['starting-kit'] === 2 && L.batchesBySource['home-duty'] === 1 && L.batchesBySource['departure-craft'] === 1,
+  check('batches by source: starting-kit 2, home-duty 2, departure-craft 1',
+    L.batchesBySource['starting-kit'] === 2 && L.batchesBySource['home-duty'] === 2 && L.batchesBySource['departure-craft'] === 1,
     JSON.stringify(L.batchesBySource));
-  check('units by source: starting-kit 4, home-duty 5, departure-craft 5',
-    L.unitsBySource['starting-kit'] === 4 && L.unitsBySource['home-duty'] === 5 && L.unitsBySource['departure-craft'] === 5,
+  check('units by source: starting-kit 4, home-duty 10, departure-craft 5',
+    L.unitsBySource['starting-kit'] === 4 && L.unitsBySource['home-duty'] === 10 && L.unitsBySource['departure-craft'] === 5,
     JSON.stringify(L.unitsBySource));
-  check('counters aggregate (homeDutyBatches 1, departureCraftOk 1)',
-    L.counters.homeDutyBatches === 1 && L.counters.departureCraftOk === 1 && L.counters.departureCraftAttempts === 1,
+  check('counters aggregate (homeDutyBatches 2, departureCraftOk 1)',
+    L.counters.homeDutyBatches === 2 && L.counters.departureCraftOk === 1 && L.counters.departureCraftAttempts === 1,
     JSON.stringify(L.counters));
   check('attribution completeness 7/11 = 0.636', Math.abs(L.attributionCompleteness - 7 / 11) < 1e-9, 'got ' + L.attributionCompleteness);
   check('dominant source starting-kit share 4/7',
     L.dominantSource === 'starting-kit' && Math.abs(L.dominantShare - 4 / 7) < 1e-9,
     JSON.stringify({ s: L.dominantSource, sh: L.dominantShare }));
   check('delivery: home-duty batch delivered (h1 met wave-4 with home-duty units)',
+    L.deliveredBatchesBySource['home-duty'] === 1, JSON.stringify(L.deliveredBatchesBySource));
+  check('delivery: namesake seed-3 h1 batch NOT delivered (no meeting in its own seed)',
     L.deliveredBatchesBySource['home-duty'] === 1, JSON.stringify(L.deliveredBatchesBySource));
   check('delivery: departure-craft batch NOT delivered (h2 met with 0 bolts)',
     (L.deliveredBatchesBySource['departure-craft'] || 0) === 0, JSON.stringify(L.deliveredBatchesBySource));
