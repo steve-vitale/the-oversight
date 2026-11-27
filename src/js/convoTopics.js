@@ -592,30 +592,10 @@
         if (_mu) musterEv = { kind: 'muster', self: true, threat: _mu.threat };
       } catch (e) { musterEv = null; }
       try {
-        // NAMING DEBATE (dialogue rethink, Steve 2026-10-07): a live village
-        // naming debate is the talk of the fire — it surfaces here with the
-        // proposals the NPC actually heard. Names stay knowledge-gated: the
-        // descriptor until the village agrees, never the true name.
-        // YIELDS to a severe outbreak (r8): the debate doesn't outshout the
-        // sick row. YIELDS to ANY weirdness (r16): an alien transformation
-        // is unprecedented body horror happening to someone you know —
-        // "what is happening to us" outshouts "what do we call that thing."
-        // Unlike mundane sickness (familiar, and the want system carries it
-        // as sick_help), a transformation has no other conversational
-        // outlet; the debate resumes when the transformation passes.
-        // YIELDS to the table (r11): the System's summons outranks the
-        // naming argument.
-        // YIELDS to a fresh show (r17): a televised grab outshouts the
-        // naming argument — the cameras took people yesterday.
-        if (typeof this.monsterNamingActive === 'function' && this.monsterNamingActive() &&
-            !(outbreak && outbreak.severe) && !weirdness && !tableEv && !showEv) {
-          const entries = this.state.codex.monsters || {};
-          const mid = Object.keys(entries).find(k => {
-            const e = entries[k];
-            return e && e.namingKicked && !e.villageName;
-          });
-          if (mid) return { kind: 'naming', mid };
-        }
+        // FRESH GRIEF FIRST (journey-succession r291 2026-11-27): this
+        // block used to sit BELOW the naming debate, so a live debate
+        // displaced mourning whenever the village grieved. The dead are
+        // named first; the debate resumes when grief passes.
         if ((v.grief || 0) > 0) {
           // CORPSE STORE (journey crisis r4 2026-10-12): corpses live in
           // state.corpses (corpses.js), never village.corpses — the old read
@@ -745,6 +725,37 @@
             }
           }
         } catch (e) {}
+        // NAMING DEBATE (dialogue rethink, Steve 2026-10-07): a live village
+        // naming debate is the talk of the fire — it surfaces here with the
+        // proposals the NPC actually heard. Names stay knowledge-gated: the
+        // descriptor until the village agrees, never the true name.
+        // YIELDS to a severe outbreak (r8): the debate doesn't outshout the
+        // sick row. YIELDS to ANY weirdness (r16): an alien transformation
+        // is unprecedented body horror happening to someone you know —
+        // "what is happening to us" outshouts "what do we call that thing."
+        // Unlike mundane sickness (familiar, and the want system carries it
+        // as sick_help), a transformation has no other conversational
+        // outlet; the debate resumes when the transformation passes.
+        // YIELDS to the table (r11): the System's summons outranks the
+        // naming argument.
+        // YIELDS to a fresh show (r17): a televised grab outshouts the
+        // naming argument — the cameras took people yesterday.
+        // YIELDS to fresh grief (journey-succession r291 2026-11-27):
+        // the dead are named first — a naming debate never outshouts
+        // mourning. The grief block now sits above this check (r291
+        // panel: 3/3 staged witness sittings served 'naming', 0 named
+        // the dead). The debate resumes when grief passes.
+        // YIELDS to the mantle (r291): a dead bearer inside the 10-day
+        // tail is mourned before the debate resumes.
+        if (typeof this.monsterNamingActive === 'function' && this.monsterNamingActive() &&
+            !(outbreak && outbreak.severe) && !weirdness && !tableEv && !showEv) {
+          const entries = this.state.codex.monsters || {};
+          const mid = Object.keys(entries).find(k => {
+            const e = entries[k];
+            return e && e.namingKicked && !e.villageName;
+          });
+          if (mid) return { kind: 'naming', mid };
+        }
         // DEFENSE MEMORY (journey crisis r6 2026-10-13): a villager who bled
         // at the treeline defending the haven talks about it — their own
         // night, in their own words. A naming debate doesn't outrank your
