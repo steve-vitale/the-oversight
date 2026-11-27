@@ -88,3 +88,11 @@ twice in one day (2026-10-09).
   (no canon doc covered ability-action refusals or pantry ledger
   accounting). Still-open items live in the doc's §8, including the
   pantry-lift conversation line (Steve-call).
+- 2026-11-27: docs/MONSTER-WAVES.md §"Death causes in wild fights"
+  (sim-samelabel-b) — one lost field fight stamps the scholar "the
+  wild" (place, tbFightDeathCause) and the companions "combat"
+  (manner, tbDamage); both true, neither a bug; the scholar label
+  stays because the standing.js shortfall voice and the
+  arenalabel-b arena/wild split read it. Census rule: join
+  same-fight deaths by day + fight, never by cause string alone.
+  Pinned by scripts/test-samelabel-b-20261127.js.

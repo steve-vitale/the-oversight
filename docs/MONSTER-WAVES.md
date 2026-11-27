@@ -224,6 +224,57 @@ as any death — "unkillable means unkillable." `maybeCheatDeath()` is the
 single death choke point; no bypass exists. A random villager burns in the
 ash-death; the villager pool is the cap.
 
+### Death causes in wild fights — one fight, two labels (2026-11-27)
+
+In ONE lost field fight, the scholar and the companions die under
+different cause strings, and both strings are true. The example:
+Sam Wilson, seed 109448, day 88 — four people vs three wave-4
+Reunions; Sam dies "the wild" while Olivia Bennett and Caleb Jones
+die "combat" in the same fight (evidence/2026-11-24/
+sim-wilddeath-b.md; corpus row
+evidence/2026-11-24/perseed-wilddeath-b/
+wilddeath-b-s109448-wilddeath-b.json, deathEvents day 88).
+
+- The scholar's label is PLACE. `tbEnd('lost')` calls
+  `playerDeath(tbFightDeathCause(f))` (game.js:48334,
+  game.js:47978). `tbFightDeathCause` is origin-labeled BY DESIGN
+  (sim-arenalabel-b 2026-10-28): a proven wild fight — at least
+  one monster fighter, no hostile fighter, none of the
+  arena/betrayal/table-trial/coalition flags — reads 'the wild'.
+  The label is what lets succession sweeps split arena deaths
+  out from wild losses, and it is what the wave-5 shortfall voice
+  reads (standing.js: the voice names scholars "dead in the wild"
+  from `village.scholarDeaths`, filtered on 'the wild' / 'the
+  expedition'). It must stay 'the wild': relabeling the scholar
+  'combat' would silence that voice — the scholarDeaths rows
+  carry no place field to repair it with — and destroy the
+  arena/wild split.
+- The companion's label is MANNER. A villager/ally fighter who
+  falls mid-fight dies through `tbDamage` (game.js:40131, death
+  branch game.js:40928/40938) → `registerDeath({kind:'person',
+  cause:'combat'})`. The call site has no fight-origin
+  information; 'combat' is the generic "fell in a fought fight"
+  label, the same string an arena companion gets. It is true:
+  the companion did die in combat.
+- Two more person-death labels that are NOT this fight: a
+  villager dying of monster wounds outside the scholar's fight
+  reads 'monster' (`hurtVillager`, game.js:8588); a villager
+  dying on expedition reads the killer's DISPLAY NAME
+  (`expedDeath`, villager-agency.js — e.g. 'The Eater').
+
+The census rule, so no future census re-learns this: NEVER read
+the cause string alone. 'The wild' on a scholar death IS a lost
+played field fight, never exposure or a road accident; 'combat'
+on a companion in the same fight is the SAME event, not a
+second one. Join same-fight deaths by day + fight (the player
+flag + the live `tbfight` / `tbFightId`), never by cause.
+Pinned by `scripts/test-samelabel-b-20261127.js`, which stages
+the Sam shape through the real paths and asserts scholar
+'the wild' + companions 'combat' + one day + one fight. Any
+future relabel of either pipeline fails there first, loudly,
+on purpose — the decision then is FIX-vs-NOTE again, not a
+silent re-score (see evidence/2026-11-27/sim-samelabel-b.md).
+
 ## Wave 6+: The Long Night (SCAFFOLD — Steve 2026-10-17)
 
 Steve: wave 6 was the plan for the Easter-egg long-survival challenge and
