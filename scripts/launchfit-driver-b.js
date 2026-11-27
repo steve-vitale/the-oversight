@@ -52,7 +52,7 @@ for (const seed of SEEDS) {
 function gday(Game) { try { return ((Game.state || {}).scholar || {}).day || 0; } catch (e) { return 0; } }
 
 async function oneRun(seed) {
-  const policy = competent();
+  const policy = competent; // policy object (not a factory)
   const { Game } = await loadGame({ seed: seed, mode: 'launchfit-b', fullTelemetry: false });
   const errors = [];
   await setupGame(Game);
