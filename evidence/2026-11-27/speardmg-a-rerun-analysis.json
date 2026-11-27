@@ -1,0 +1,517 @@
+{
+  "verdict": "DIAG-NO-GO",
+  "kind": "THIN-POOL",
+  "bars": [
+    {
+      "name": "pool floor (fought expedition w4+ fights ≥ 8)",
+      "bar": 8,
+      "measured": 7,
+      "pass": false
+    },
+    {
+      "name": "spear-fight floor (fights with ≥1 spear fighter ≥ 5)",
+      "bar": 5,
+      "measured": 3,
+      "pass": false
+    },
+    {
+      "name": "strike-parse coverage ≥ 0.95",
+      "bar": 0.95,
+      "measured": 1,
+      "pass": true
+    },
+    {
+      "name": "reconciliation residual ≤ 0.05",
+      "bar": 0.05,
+      "measured": 0,
+      "pass": true
+    },
+    {
+      "name": "instrument errors 0",
+      "bar": 0,
+      "measured": 0,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "fights": 7,
+    "spearFights": 3,
+    "spearLedFights": 2,
+    "spearCompanionFights": 1,
+    "coverage": 1,
+    "residual": 0,
+    "errors": 0,
+    "spearShare": 0.03422279535760341,
+    "spearDprMean": 1.4,
+    "spearDprMax": 4.1,
+    "partyDprMean": 20,
+    "vKills": 0,
+    "spearLedVKills": 0,
+    "perStrikeByMix": {
+      "crossbow+melee": {
+        "n": 5,
+        "mean": 22.6,
+        "median": 23,
+        "min": 21,
+        "max": 24
+      },
+      "bow+melee": {
+        "n": 6,
+        "mean": 48.3,
+        "median": 48.5,
+        "min": 21,
+        "max": 76
+      },
+      "spear-melee-slot": {
+        "n": 2,
+        "mean": 23,
+        "median": 23,
+        "min": 22,
+        "max": 24
+      },
+      "other-melee-only": {
+        "n": 5,
+        "mean": 18,
+        "median": 18,
+        "min": 14,
+        "max": 24
+      }
+    },
+    "wall": {
+      "national": 0,
+      "table": null,
+      "wins": 0,
+      "wave4Unlocked": 1,
+      "wave5Unlocked": 1,
+      "medianSurvival": 150,
+      "communityLost": 0,
+      "scaleRanks": {
+        "regional": 1
+      },
+      "deaths": 109,
+      "deathKinds": {
+        "monster": 80,
+        "villager": 29
+      },
+      "starvation": 1,
+      "survivals": [
+        150
+      ]
+    }
+  },
+  "stats": {
+    "dir": "evidence/2026-11-27/perseed-speardmg-a-rerun",
+    "n": 1,
+    "valid": 1,
+    "errors": 0,
+    "seeds": [
+      {
+        "seed": 111801,
+        "days": 150,
+        "endReason": "survived",
+        "won": false,
+        "maxWave": 5,
+        "standing": 550,
+        "scaleRank": "regional",
+        "spearSeen": 4,
+        "spearPassed": 4,
+        "fights": 7,
+        "spearFights": 3,
+        "errors": 0
+      }
+    ],
+    "fights": 7,
+    "spearFights": 3,
+    "spearLedFights": 2,
+    "spearCompanionFights": 1,
+    "fightsDetail": [
+      {
+        "seed": 111801,
+        "day": 81,
+        "mid": "strike",
+        "vid": "rafael_torres",
+        "spearLed": false,
+        "spearFight": true,
+        "rounds": 5,
+        "outcome": "vFlee",
+        "mHpStart": 1024,
+        "mDealt": 424,
+        "spearAttrDmg": 20.3,
+        "spearDpr": 4.1,
+        "partyDpr": 84.8,
+        "spearStrikes": 2,
+        "spearStrikeDmg": 46,
+        "unparsedDmg": 0,
+        "unknownDmgLines": 0,
+        "nameCollision": false,
+        "gearUpChanged": false
+      },
+      {
+        "seed": 111801,
+        "day": 102,
+        "mid": "suburb",
+        "vid": "gen_q18fjac",
+        "spearLed": true,
+        "spearFight": true,
+        "rounds": 1,
+        "outcome": "vFlee",
+        "mHpStart": 1400,
+        "mDealt": 13,
+        "spearAttrDmg": 0,
+        "spearDpr": 0,
+        "partyDpr": 13,
+        "spearStrikes": 0,
+        "spearStrikeDmg": 0,
+        "unparsedDmg": 0,
+        "unknownDmgLines": 0,
+        "nameCollision": false,
+        "gearUpChanged": false
+      },
+      {
+        "seed": 111801,
+        "day": 110,
+        "mid": "network_note",
+        "vid": "gen_q18fjac",
+        "spearLed": true,
+        "spearFight": true,
+        "rounds": 1,
+        "outcome": "mFlee",
+        "mHpStart": 1203,
+        "mDealt": 0,
+        "spearAttrDmg": 0,
+        "spearDpr": 0,
+        "partyDpr": 0,
+        "spearStrikes": 0,
+        "spearStrikeDmg": 0,
+        "unparsedDmg": 0,
+        "unknownDmgLines": 0,
+        "nameCollision": false,
+        "gearUpChanged": false
+      },
+      {
+        "seed": 111801,
+        "day": 122,
+        "mid": "rerun",
+        "vid": "app_mgpspknf782",
+        "spearLed": false,
+        "spearFight": false,
+        "rounds": 3,
+        "outcome": "vFlee",
+        "mHpStart": 1277,
+        "mDealt": 38,
+        "spearAttrDmg": 0,
+        "spearDpr": 0,
+        "partyDpr": 12.7,
+        "spearStrikes": 0,
+        "spearStrikeDmg": 0,
+        "unparsedDmg": 0,
+        "unknownDmgLines": 0,
+        "nameCollision": false,
+        "gearUpChanged": false
+      },
+      {
+        "seed": 111801,
+        "day": 124,
+        "mid": "suburb",
+        "vid": "nina_petrova",
+        "spearLed": false,
+        "spearFight": false,
+        "rounds": 1,
+        "outcome": "vFlee",
+        "mHpStart": 1448,
+        "mDealt": 0,
+        "spearAttrDmg": 0,
+        "spearDpr": 0,
+        "partyDpr": 0,
+        "spearStrikes": 0,
+        "spearStrikeDmg": 0,
+        "unparsedDmg": 0,
+        "unknownDmgLines": 0,
+        "nameCollision": false,
+        "gearUpChanged": false
+      },
+      {
+        "seed": 111801,
+        "day": 129,
+        "mid": "eater",
+        "vid": "nina_petrova",
+        "spearLed": false,
+        "spearFight": false,
+        "rounds": 4,
+        "outcome": "vFlee",
+        "mHpStart": 962,
+        "mDealt": 118,
+        "spearAttrDmg": 0,
+        "spearDpr": 0,
+        "partyDpr": 29.5,
+        "spearStrikes": 0,
+        "spearStrikeDmg": 0,
+        "unparsedDmg": 0,
+        "unknownDmgLines": 0,
+        "nameCollision": false,
+        "gearUpChanged": false
+      },
+      {
+        "seed": 111801,
+        "day": 134,
+        "mid": "eulogy",
+        "vid": "app_mgpspknf782",
+        "spearLed": false,
+        "spearFight": false,
+        "rounds": 3,
+        "outcome": "mFlee",
+        "mHpStart": 994,
+        "mDealt": 0,
+        "spearAttrDmg": 0,
+        "spearDpr": 0,
+        "partyDpr": 0,
+        "spearStrikes": 0,
+        "spearStrikeDmg": 0,
+        "unparsedDmg": 0,
+        "unknownDmgLines": 0,
+        "nameCollision": false,
+        "gearUpChanged": false
+      }
+    ],
+    "strikeLines": 18,
+    "coveredStrikeLines": 18,
+    "coverage": 1,
+    "mDealtTotal": 593,
+    "parsedTotal": 593,
+    "unparsedTotal": 0,
+    "residual": 0,
+    "fieldMismatches": {
+      "volley": 0,
+      "contact": 0,
+      "ambush": 0
+    },
+    "unknownDmgLines": 0,
+    "gearUpChanged": 0,
+    "nameCollisionFights": 0,
+    "perStrikeByMix": {
+      "crossbow+melee": {
+        "n": 5,
+        "mean": 22.6,
+        "median": 23,
+        "min": 21,
+        "max": 24
+      },
+      "bow+melee": {
+        "n": 6,
+        "mean": 48.3,
+        "median": 48.5,
+        "min": 21,
+        "max": 76
+      },
+      "spear-melee-slot": {
+        "n": 2,
+        "mean": 23,
+        "median": 23,
+        "min": 22,
+        "max": 24
+      },
+      "other-melee-only": {
+        "n": 5,
+        "mean": 18,
+        "median": 18,
+        "min": 14,
+        "max": 24
+      }
+    },
+    "spearAttrDmg": 20.294117647058822,
+    "meleeAttrDmg": 327.133589087809,
+    "rangedAttrDmg": 240.22915601023016,
+    "attributedTotal": 587.656862745098,
+    "roundingResidue": 5.34313725490199,
+    "volleyDmg": 54,
+    "contactDmg": 0,
+    "ambushDmg": 0,
+    "extraDmg": 0,
+    "spearShare": 0.03422279535760341,
+    "spearDprPerFight": [
+      {
+        "seed": 111801,
+        "day": 81,
+        "mid": "strike",
+        "vid": "rafael_torres",
+        "spearLed": false,
+        "spearFight": true,
+        "rounds": 5,
+        "mHpStart": 1024,
+        "spearAttrDmg": 20.3,
+        "spearDpr": 4.1,
+        "partyDpr": 84.8,
+        "outcome": "vFlee"
+      },
+      {
+        "seed": 111801,
+        "day": 102,
+        "mid": "suburb",
+        "vid": "gen_q18fjac",
+        "spearLed": true,
+        "spearFight": true,
+        "rounds": 1,
+        "mHpStart": 1400,
+        "spearAttrDmg": 0,
+        "spearDpr": 0,
+        "partyDpr": 13,
+        "outcome": "vFlee"
+      },
+      {
+        "seed": 111801,
+        "day": 110,
+        "mid": "network_note",
+        "vid": "gen_q18fjac",
+        "spearLed": true,
+        "spearFight": true,
+        "rounds": 1,
+        "mHpStart": 1203,
+        "spearAttrDmg": 0,
+        "spearDpr": 0,
+        "partyDpr": 0,
+        "outcome": "mFlee"
+      },
+      {
+        "seed": 111801,
+        "day": 122,
+        "mid": "rerun",
+        "vid": "app_mgpspknf782",
+        "spearLed": false,
+        "spearFight": false,
+        "rounds": 3,
+        "mHpStart": 1277,
+        "spearAttrDmg": 0,
+        "spearDpr": 0,
+        "partyDpr": 12.7,
+        "outcome": "vFlee"
+      },
+      {
+        "seed": 111801,
+        "day": 124,
+        "mid": "suburb",
+        "vid": "nina_petrova",
+        "spearLed": false,
+        "spearFight": false,
+        "rounds": 1,
+        "mHpStart": 1448,
+        "spearAttrDmg": 0,
+        "spearDpr": 0,
+        "partyDpr": 0,
+        "outcome": "vFlee"
+      },
+      {
+        "seed": 111801,
+        "day": 129,
+        "mid": "eater",
+        "vid": "nina_petrova",
+        "spearLed": false,
+        "spearFight": false,
+        "rounds": 4,
+        "mHpStart": 962,
+        "spearAttrDmg": 0,
+        "spearDpr": 0,
+        "partyDpr": 29.5,
+        "outcome": "vFlee"
+      },
+      {
+        "seed": 111801,
+        "day": 134,
+        "mid": "eulogy",
+        "vid": "app_mgpspknf782",
+        "spearLed": false,
+        "spearFight": false,
+        "rounds": 3,
+        "mHpStart": 994,
+        "spearAttrDmg": 0,
+        "spearDpr": 0,
+        "partyDpr": 0,
+        "outcome": "mFlee"
+      }
+    ],
+    "spearDprMean": 1.4,
+    "spearDprMax": 4.1,
+    "partyDprMean": 20,
+    "vKills": 0,
+    "spearLedVKills": 0,
+    "vKillSpearShares": [],
+    "contactFinish": {
+      "attempted": 0,
+      "kills": 0,
+      "byInstrument": {}
+    },
+    "spearLeadVolleyNonNull": 2,
+    "spearLeadVolleyRows": [
+      {
+        "seed": 111801,
+        "day": 102,
+        "mid": "suburb",
+        "volley": {
+          "shots": 2,
+          "hits": 1,
+          "dmg": 13,
+          "ammoLeft": 0
+        }
+      },
+      {
+        "seed": 111801,
+        "day": 110,
+        "mid": "network_note",
+        "volley": {
+          "shots": 0,
+          "hits": 0,
+          "dmg": 0,
+          "ammoLeft": 0
+        }
+      }
+    ],
+    "spearStrikesPerFight": [
+      2,
+      0,
+      0
+    ],
+    "spearStrikesByTier": {
+      "fire_hardened_spear": {
+        "fighters": 1,
+        "strikes": 2,
+        "dmg": 46
+      },
+      "hunting_spear": {
+        "fighters": 2,
+        "strikes": 0,
+        "dmg": 0
+      }
+    },
+    "spearSeen": 4,
+    "spearPassed": 4,
+    "ledgerDepartures": 4,
+    "reconciliation": [
+      {
+        "seed": 111801,
+        "ledger": 4,
+        "spearSeen": 4,
+        "match": true
+      }
+    ],
+    "wall": {
+      "national": 0,
+      "table": null,
+      "wins": 0,
+      "wave4Unlocked": 1,
+      "wave5Unlocked": 1,
+      "medianSurvival": 150,
+      "communityLost": 0,
+      "scaleRanks": {
+        "regional": 1
+      },
+      "deaths": 109,
+      "deathKinds": {
+        "monster": 80,
+        "villager": 29
+      },
+      "starvation": 1,
+      "survivals": [
+        150
+      ]
+    }
+  }
+}
