@@ -1,0 +1,5102 @@
+{
+  "verdict": "DIAG-NO-GO",
+  "kind": "UNASSIGNED",
+  "bars": [
+    {
+      "id": "pool-floor",
+      "pass": true,
+      "detail": "distinct empty-quivered fighters at wave-4+ entry: 18 (77 empty rows; never-supplied 8) (floor 10)"
+    },
+    {
+      "id": "attribution-completeness",
+      "pass": true,
+      "detail": "known-source units at entry / total units at entry: 1.000 (bar >= 0.90)"
+    },
+    {
+      "id": "gate-coverage",
+      "pass": true,
+      "detail": "needing-days with a gate row / all needing-days: 0.978 (136 observed + 3 unobserved short-days on duty-missing days; duty ran 1107 days, 1147 calls) (bar >= 0.90)"
+    },
+    {
+      "id": "decomposition-complete",
+      "pass": false,
+      "detail": "never-supplied fighters without a primary cause: 3 (110803|ruth_goldstein, 110804|giulia_bianchi, 110804|elif_demir) (bar 0)"
+    },
+    {
+      "id": "mechanism-ammo-at-entry",
+      "pass": true,
+      "detail": "ammo-at-entry (all origins, lead+allies): 0.607 vs bar 0.70 — RE-MEASURE, reported not judged (the DIAG measures the bar, it does not pass/fail on it)"
+    }
+  ],
+  "mechanismRate": 0.6066481994459834,
+  "ammo": {
+    "dir": "evidence/2026-11-27/perseed-craftgate-a",
+    "n": 8,
+    "valid": 8,
+    "errors": 0,
+    "fighters": 476,
+    "ranged": 361,
+    "withAmmo": 219,
+    "rate": 0.6066481994459834,
+    "capableFighters": 296,
+    "capableWithAmmo": 219,
+    "capableRate": 0.7398648648648649,
+    "spearFighters": 65,
+    "byOrigin": {
+      "expedition": {
+        "fighters": 237,
+        "ranged": 162,
+        "withAmmo": 97,
+        "rate": 0.5987654320987654
+      },
+      "world-tick": {
+        "fighters": 104,
+        "ranged": 85,
+        "withAmmo": 55,
+        "rate": 0.6470588235294118
+      },
+      "aid": {
+        "fighters": 135,
+        "ranged": 114,
+        "withAmmo": 67,
+        "rate": 0.5877192982456141
+      }
+    },
+    "unitsAtEntry": 1091,
+    "unitsAtEntryBySource": {
+      "home-duty": 778,
+      "departure-pile-stones": 76,
+      "departure-craft": 237
+    },
+    "unitsAtEntryByOrigin": {
+      "expedition": 504,
+      "world-tick": 237,
+      "aid": 350
+    }
+  },
+  "ledger": {
+    "dir": "evidence/2026-11-27/perseed-craftgate-a",
+    "n": 0,
+    "valid": 8,
+    "errors": 0,
+    "ledgerFiles": 8,
+    "batchesBySource": {
+      "home-duty": 105,
+      "departure-craft": 21,
+      "departure-pile-stones": 23,
+      "starting-kit": 2,
+      "other": 1
+    },
+    "unitsBySource": {
+      "home-duty": 525,
+      "departure-craft": 105,
+      "departure-pile-stones": 94,
+      "starting-kit": 2,
+      "other": 1
+    },
+    "otherEvents": 1,
+    "otherUnits": 1,
+    "unattributedSpend": 1,
+    "unattributedSpendUnits": 1,
+    "transfers": 0,
+    "spends": 254,
+    "spendUnits": 582,
+    "counters": {
+      "homeDutyBatches": 105,
+      "homeDutyCalls": 1147,
+      "departureCalls": 398,
+      "departureCraftAttempts": 30,
+      "departureCraftOk": 21,
+      "departureStones": 94,
+      "departureStashMoved": 0,
+      "lootDrops": 74,
+      "lootAmmoDrops": 0
+    },
+    "meetingsByVid": {
+      "110801|gen_9ful3a9": [
+        {
+          "day": 61,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 1
+            }
+          ],
+          "ammoAtEntry": 1
+        }
+      ],
+      "110801|liam_davis": [
+        {
+          "day": 61,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110801|nina_petrova": [
+        {
+          "day": 61,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 131,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 132,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 132,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 132,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110801|lena_ruiz": [
+        {
+          "day": 100,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 123,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 127,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110801|gen_athye1q": [
+        {
+          "day": 100,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 101,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        }
+      ],
+      "110801|gen_5a30w9e": [
+        {
+          "day": 100,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 101,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 118,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 123,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 127,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 131,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110801|aria_thompson": [
+        {
+          "day": 101,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 118,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 123,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 125,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110801|elijah_scott": [
+        {
+          "day": 118,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 121,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 121,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 132,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        }
+      ],
+      "110801|leo_martin": [
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 127,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 132,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110801|app_mgpspkoh863": [
+        {
+          "day": 131,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 132,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        }
+      ],
+      "110801|app_mgpspk11230": [
+        {
+          "day": 132,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 132,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110801|luis_fernandez": [
+        {
+          "day": 132,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110802|gen_k13zvf2": [
+        {
+          "day": 46,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 50,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 54,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 63,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 9
+        },
+        {
+          "day": 75,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 85,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 93,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 101,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 107,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 107,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 107,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 109,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 110,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        },
+        {
+          "day": 112,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        },
+        {
+          "day": 114,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 9
+        },
+        {
+          "day": 120,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 3
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 123,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 126,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 127,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 127,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 128,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 128,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 130,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 131,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 131,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 131,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 136,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 137,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 137,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        }
+      ],
+      "110802|nikos_papadopoulos": [
+        {
+          "day": 46,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 50,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 51,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 63,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 92,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 92,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 94,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        },
+        {
+          "day": 99,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 101,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 101,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 102,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 106,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 107,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 126,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 128,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        }
+      ],
+      "110802|gen_fod0lom": [
+        {
+          "day": 46,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 51,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 53,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 63,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 67,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 70,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 75,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 76,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 77,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 80,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 80,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 85,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 92,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 93,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 94,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 94,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 107,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 107,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 107,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 108,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 108,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 109,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 110,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110802|maya_singh": [
+        {
+          "day": 50,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 54,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 67,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 76,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 77,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 80,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 80,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 92,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 92,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 94,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 99,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 101,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 101,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 102,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 106,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 107,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 112,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 126,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 126,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 128,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 130,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 131,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 145,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 146,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 146,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 146,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 1
+            }
+          ],
+          "ammoAtEntry": 1
+        },
+        {
+          "day": 149,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 1
+            }
+          ],
+          "ammoAtEntry": 1
+        },
+        {
+          "day": 149,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 150,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110802|gen_zz5jh1j": [
+        {
+          "day": 51,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 53,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 114,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 119,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 122,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 126,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 126,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 136,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 144,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 145,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 145,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 145,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 146,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 146,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 146,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 149,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 149,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 150,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110802|gen_7h9np1e": [
+        {
+          "day": 53,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 67,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 70,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 76,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 77,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 80,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 2
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 80,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 2
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 93,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 94,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        },
+        {
+          "day": 99,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 101,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 102,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 108,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        },
+        {
+          "day": 108,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 110,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 112,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 114,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 114,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 119,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 122,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 126,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 126,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 131,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 131,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        }
+      ],
+      "110802|gen_g4kndoy": [
+        {
+          "day": 54,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 75,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 120,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 1
+            }
+          ],
+          "ammoAtEntry": 1
+        },
+        {
+          "day": 123,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 127,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 127,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 128,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 128,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 130,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 131,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 131,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 131,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 136,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 137,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 137,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 142,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 144,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 145,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        }
+      ],
+      "110802|nadia_khoury": [
+        {
+          "day": 70,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 92,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 94,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 109,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 123,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 127,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 137,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 146,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 149,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 150,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110802|greta_hansen": [
+        {
+          "day": 85,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 106,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 108,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 108,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 114,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 114,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110802|rosa_mendez": [
+        {
+          "day": 107,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 120,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 122,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 7
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 126,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        },
+        {
+          "day": 127,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 137,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 144,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 145,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 145,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 146,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        }
+      ],
+      "110802|app_mgpsphrq271": [
+        {
+          "day": 145,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110802|sam_wilson": [
+        {
+          "day": 145,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 149,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110802|luis_fernandez": [
+        {
+          "day": 146,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110803|sigrun_eiriksdottir": [
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 129,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 138,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 9
+            }
+          ],
+          "ammoAtEntry": 9
+        },
+        {
+          "day": 142,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 6
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 147,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 7
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 149,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        }
+      ],
+      "110803|ruth_goldstein": [
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 120,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 129,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 130,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110803|petra_novak": [
+        {
+          "day": 120,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 120,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 121,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 129,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 138,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 141,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 142,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 144,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 145,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 146,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 147,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 147,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 149,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        }
+      ],
+      "110803|catalina_reyes": [
+        {
+          "day": 121,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 130,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 141,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 144,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 145,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 146,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 147,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110803|aria_thompson": [
+        {
+          "day": 130,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 138,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 141,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 142,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 144,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 145,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 146,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 147,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        }
+      ],
+      "110803|gen_tnwfbl2": [
+        {
+          "day": 147,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 1
+            }
+          ],
+          "ammoAtEntry": 1
+        }
+      ],
+      "110803|gen_aybqefl": [
+        {
+          "day": 149,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110804|brian_otieno": [
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 130,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 138,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 138,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 141,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 141,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 142,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 143,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 144,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 145,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 145,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110804|giulia_bianchi": [
+        {
+          "day": 124,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 130,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110804|david_kim": [
+        {
+          "day": 124,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 130,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 138,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 138,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 139,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 139,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 140,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 141,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 141,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 142,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 143,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 144,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 145,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 145,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        }
+      ],
+      "110804|raj_patel": [
+        {
+          "day": 138,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 138,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 139,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 139,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 140,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 141,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 141,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 142,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 143,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 144,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 145,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 145,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        }
+      ],
+      "110804|app_mgpsplbk103": [
+        {
+          "day": 139,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110804|elif_demir": [
+        {
+          "day": 139,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 140,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110805|visjoin_62": [
+        {
+          "day": 65,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 65,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110805|sanne_bakker": [
+        {
+          "day": 65,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 65,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110805|giulia_bianchi": [
+        {
+          "day": 65,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 65,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110807|gen_rbpstc3": [
+        {
+          "day": 34,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 48,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110807|greta_hansen": [
+        {
+          "day": 34,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 43,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 68,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 75,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 75,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 77,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 77,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 77,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 78,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 78,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110807|gen_h4nr71v": [
+        {
+          "day": 34,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 43,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 67,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 78,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 85,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 86,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 86,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 86,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 89,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 89,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 94,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 106,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 106,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 118,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 122,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 123,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 126,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 130,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 131,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 131,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 132,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 132,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 134,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 134,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 135,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 135,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 135,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        }
+      ],
+      "110807|gen_lo43nb5": [
+        {
+          "day": 36,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 36,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 37,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110807|diana_osei": [
+        {
+          "day": 36,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 36,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 37,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 67,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 68,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 75,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 75,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 77,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 77,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 77,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 77,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 78,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 78,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110807|nina_petrova": [
+        {
+          "day": 36,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 36,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 43,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 47,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 48,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110807|ruby_callaghan": [
+        {
+          "day": 37,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 47,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 48,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110807|naran_tumen": [
+        {
+          "day": 67,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 68,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 77,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 77,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 78,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 86,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 7
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 86,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 94,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 9
+            }
+          ],
+          "ammoAtEntry": 9
+        },
+        {
+          "day": 106,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 106,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        },
+        {
+          "day": 114,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        }
+      ],
+      "110807|gen_c9c3pha": [
+        {
+          "day": 75,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            },
+            {
+              "source": "home-duty",
+              "units": 1
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 77,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        },
+        {
+          "day": 78,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 9
+        },
+        {
+          "day": 85,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 9
+        },
+        {
+          "day": 86,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 9
+        },
+        {
+          "day": 86,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 9
+        },
+        {
+          "day": 86,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 9
+        },
+        {
+          "day": 89,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 9
+        },
+        {
+          "day": 89,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 9
+        }
+      ],
+      "110807|app_mgpspj8c570": [
+        {
+          "day": 75,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 77,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 78,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 78,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        }
+      ],
+      "110807|app_mgpsphvq805": [
+        {
+          "day": 77,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 85,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 1
+            }
+          ],
+          "ammoAtEntry": 1
+        },
+        {
+          "day": 86,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110807|brian_otieno": [
+        {
+          "day": 89,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 89,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 106,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 114,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        },
+        {
+          "day": 116,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 4
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 9
+        },
+        {
+          "day": 118,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        }
+      ],
+      "110807|elijah_scott": [
+        {
+          "day": 94,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 106,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 116,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 122,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 8
+            }
+          ],
+          "ammoAtEntry": 8
+        },
+        {
+          "day": 123,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 7
+            }
+          ],
+          "ammoAtEntry": 7
+        },
+        {
+          "day": 126,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 7
+            }
+          ],
+          "ammoAtEntry": 7
+        }
+      ],
+      "110807|visjoin_106": [
+        {
+          "day": 114,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 116,
+          "sources": [
+            {
+              "source": "departure-craft",
+              "units": 1
+            },
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 6
+        },
+        {
+          "day": 118,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        }
+      ],
+      "110807|visjoin_113": [
+        {
+          "day": 114,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110807|visjoin_120": [
+        {
+          "day": 122,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 123,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 126,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 130,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 1
+            }
+          ],
+          "ammoAtEntry": 1
+        },
+        {
+          "day": 131,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 131,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 132,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 132,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 134,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 134,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 135,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 135,
+          "sources": [
+            {
+              "source": "home-duty",
+              "units": 3
+            }
+          ],
+          "ammoAtEntry": 3
+        },
+        {
+          "day": 135,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110808|jovan_milic": [
+        {
+          "day": 50,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 54,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 58,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 59,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 61,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 80,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110808|gen_9rsw5fw": [
+        {
+          "day": 50,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 5
+            }
+          ],
+          "ammoAtEntry": 5
+        },
+        {
+          "day": 54,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 55,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 2
+            }
+          ],
+          "ammoAtEntry": 2
+        },
+        {
+          "day": 58,
+          "sources": [
+            {
+              "source": "departure-pile-stones",
+              "units": 4
+            }
+          ],
+          "ammoAtEntry": 4
+        }
+      ],
+      "110808|yara_haddad": [
+        {
+          "day": 50,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110808|gen_axeqloi": [
+        {
+          "day": 54,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 59,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 133,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 135,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110808|gen_yezilk9": [
+        {
+          "day": 55,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 61,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110808|quinn_murphy": [
+        {
+          "day": 55,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 61,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 80,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110808|gen_y7xyced": [
+        {
+          "day": 58,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 59,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 80,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110808|thabo_maseko": [
+        {
+          "day": 133,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 135,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ],
+      "110808|stan_kowalski": [
+        {
+          "day": 133,
+          "sources": [],
+          "ammoAtEntry": 0
+        },
+        {
+          "day": 135,
+          "sources": [],
+          "ammoAtEntry": 0
+        }
+      ]
+    },
+    "deliveredBatchesBySource": {
+      "home-duty": 63,
+      "departure-pile-stones": 18,
+      "departure-craft": 15
+    },
+    "deliveredUnitsBySource": {
+      "home-duty": 315,
+      "departure-pile-stones": 72,
+      "departure-craft": 75
+    },
+    "unitsAtEntryBySource": {
+      "home-duty": 778,
+      "departure-pile-stones": 76,
+      "departure-craft": 237
+    },
+    "attributionCompleteness": 1,
+    "dominantSource": "home-duty",
+    "dominantShare": 0.7131072410632447,
+    "ammo": {
+      "dir": "evidence/2026-11-27/perseed-craftgate-a",
+      "n": 8,
+      "valid": 8,
+      "errors": 0,
+      "fighters": 476,
+      "ranged": 361,
+      "withAmmo": 219,
+      "rate": 0.6066481994459834,
+      "capableFighters": 296,
+      "capableWithAmmo": 219,
+      "capableRate": 0.7398648648648649,
+      "spearFighters": 65,
+      "byOrigin": {
+        "expedition": {
+          "fighters": 237,
+          "ranged": 162,
+          "withAmmo": 97,
+          "rate": 0.5987654320987654
+        },
+        "world-tick": {
+          "fighters": 104,
+          "ranged": 85,
+          "withAmmo": 55,
+          "rate": 0.6470588235294118
+        },
+        "aid": {
+          "fighters": 135,
+          "ranged": 114,
+          "withAmmo": 67,
+          "rate": 0.5877192982456141
+        }
+      },
+      "unitsAtEntry": 1091,
+      "unitsAtEntryBySource": {
+        "home-duty": 778,
+        "departure-pile-stones": 76,
+        "departure-craft": 237
+      },
+      "unitsAtEntryByOrigin": {
+        "expedition": 504,
+        "world-tick": 237,
+        "aid": 350
+      }
+    }
+  },
+  "pool": {
+    "dir": "evidence/2026-11-27/perseed-craftgate-a",
+    "files": 8,
+    "valid": 8,
+    "emptyRows": 77,
+    "distinctEmpty": 18,
+    "neverSupplied": 8,
+    "neverSuppliedNoKit": 8,
+    "supplied": 10,
+    "repeatEmpties": 15,
+    "emptyByVid": {
+      "110801|nina_petrova": {
+        "meetings": 5,
+        "ammoIds": {
+          "arrow": true
+        },
+        "seeds": {
+          "110801": true
+        },
+        "vid": "nina_petrova",
+        "seed": 110801,
+        "neededAmmoIds": [
+          "arrow"
+        ],
+        "received": true,
+        "receivedNoKit": true
+      },
+      "110801|lena_ruiz": {
+        "meetings": 7,
+        "ammoIds": {
+          "arrow": true
+        },
+        "seeds": {
+          "110801": true
+        },
+        "vid": "lena_ruiz",
+        "seed": 110801,
+        "neededAmmoIds": [
+          "arrow"
+        ],
+        "received": false,
+        "receivedNoKit": false
+      },
+      "110801|gen_5a30w9e": {
+        "meetings": 13,
+        "ammoIds": {
+          "arrow": true
+        },
+        "seeds": {
+          "110801": true
+        },
+        "vid": "gen_5a30w9e",
+        "seed": 110801,
+        "neededAmmoIds": [
+          "arrow"
+        ],
+        "received": true,
+        "receivedNoKit": true
+      },
+      "110801|app_mgpspkoh863": {
+        "meetings": 1,
+        "ammoIds": {},
+        "seeds": {
+          "110801": true
+        },
+        "vid": "app_mgpspkoh863",
+        "seed": 110801,
+        "neededAmmoIds": [],
+        "received": true,
+        "receivedNoKit": true
+      },
+      "110802|gen_7h9np1e": {
+        "meetings": 5,
+        "ammoIds": {
+          "arrow": true
+        },
+        "seeds": {
+          "110802": true
+        },
+        "vid": "gen_7h9np1e",
+        "seed": 110802,
+        "neededAmmoIds": [
+          "arrow"
+        ],
+        "received": true,
+        "receivedNoKit": true
+      },
+      "110802|luis_fernandez": {
+        "meetings": 1,
+        "ammoIds": {
+          "arrow": true
+        },
+        "seeds": {
+          "110802": true
+        },
+        "vid": "luis_fernandez",
+        "seed": 110802,
+        "neededAmmoIds": [
+          "arrow"
+        ],
+        "received": false,
+        "receivedNoKit": false
+      },
+      "110802|maya_singh": {
+        "meetings": 2,
+        "ammoIds": {
+          "arrow": true
+        },
+        "seeds": {
+          "110802": true
+        },
+        "vid": "maya_singh",
+        "seed": 110802,
+        "neededAmmoIds": [
+          "arrow"
+        ],
+        "received": true,
+        "receivedNoKit": true
+      },
+      "110803|sigrun_eiriksdottir": {
+        "meetings": 2,
+        "ammoIds": {
+          "bolt": true
+        },
+        "seeds": {
+          "110803": true
+        },
+        "vid": "sigrun_eiriksdottir",
+        "seed": 110803,
+        "neededAmmoIds": [
+          "bolt"
+        ],
+        "received": true,
+        "receivedNoKit": true
+      },
+      "110803|ruth_goldstein": {
+        "meetings": 5,
+        "ammoIds": {
+          "stone": true
+        },
+        "seeds": {
+          "110803": true
+        },
+        "vid": "ruth_goldstein",
+        "seed": 110803,
+        "neededAmmoIds": [
+          "stone"
+        ],
+        "received": false,
+        "receivedNoKit": false
+      },
+      "110803|catalina_reyes": {
+        "meetings": 5,
+        "ammoIds": {
+          "arrow": true
+        },
+        "seeds": {
+          "110803": true
+        },
+        "vid": "catalina_reyes",
+        "seed": 110803,
+        "neededAmmoIds": [
+          "arrow"
+        ],
+        "received": false,
+        "receivedNoKit": false
+      },
+      "110803|gen_aybqefl": {
+        "meetings": 1,
+        "ammoIds": {
+          "arrow": true
+        },
+        "seeds": {
+          "110803": true
+        },
+        "vid": "gen_aybqefl",
+        "seed": 110803,
+        "neededAmmoIds": [
+          "arrow"
+        ],
+        "received": false,
+        "receivedNoKit": false
+      },
+      "110804|brian_otieno": {
+        "meetings": 11,
+        "ammoIds": {
+          "arrow": true
+        },
+        "seeds": {
+          "110804": true
+        },
+        "vid": "brian_otieno",
+        "seed": 110804,
+        "neededAmmoIds": [
+          "arrow"
+        ],
+        "received": false,
+        "receivedNoKit": false
+      },
+      "110804|giulia_bianchi": {
+        "meetings": 2,
+        "ammoIds": {
+          "fusion_cell": true
+        },
+        "seeds": {
+          "110804": true
+        },
+        "vid": "giulia_bianchi",
+        "seed": 110804,
+        "neededAmmoIds": [
+          "fusion_cell"
+        ],
+        "received": false,
+        "receivedNoKit": false
+      },
+      "110804|elif_demir": {
+        "meetings": 2,
+        "ammoIds": {},
+        "seeds": {
+          "110804": true
+        },
+        "vid": "elif_demir",
+        "seed": 110804,
+        "neededAmmoIds": [],
+        "received": false,
+        "receivedNoKit": false
+      },
+      "110805|sanne_bakker": {
+        "meetings": 2,
+        "ammoIds": {
+          "arrow": true
+        },
+        "seeds": {
+          "110805": true
+        },
+        "vid": "sanne_bakker",
+        "seed": 110805,
+        "neededAmmoIds": [
+          "arrow"
+        ],
+        "received": true,
+        "receivedNoKit": true
+      },
+      "110807|naran_tumen": {
+        "meetings": 2,
+        "ammoIds": {
+          "arrow": true
+        },
+        "seeds": {
+          "110807": true
+        },
+        "vid": "naran_tumen",
+        "seed": 110807,
+        "neededAmmoIds": [
+          "arrow"
+        ],
+        "received": true,
+        "receivedNoKit": true
+      },
+      "110807|app_mgpsphvq805": {
+        "meetings": 2,
+        "ammoIds": {},
+        "seeds": {
+          "110807": true
+        },
+        "vid": "app_mgpsphvq805",
+        "seed": 110807,
+        "neededAmmoIds": [],
+        "received": true,
+        "receivedNoKit": true
+      },
+      "110807|visjoin_120": {
+        "meetings": 9,
+        "ammoIds": {
+          "arrow": true
+        },
+        "seeds": {
+          "110807": true
+        },
+        "vid": "visjoin_120",
+        "seed": 110807,
+        "neededAmmoIds": [
+          "arrow"
+        ],
+        "received": true,
+        "receivedNoKit": true
+      }
+    },
+    "neverSuppliedVids": [
+      "110801|lena_ruiz",
+      "110802|luis_fernandez",
+      "110803|ruth_goldstein",
+      "110803|catalina_reyes",
+      "110803|gen_aybqefl",
+      "110804|brian_otieno",
+      "110804|giulia_bianchi",
+      "110804|elif_demir"
+    ],
+    "suppliedVids": [
+      "110801|nina_petrova",
+      "110801|gen_5a30w9e",
+      "110801|app_mgpspkoh863",
+      "110802|gen_7h9np1e",
+      "110802|maya_singh",
+      "110803|sigrun_eiriksdottir",
+      "110805|sanne_bakker",
+      "110807|naran_tumen",
+      "110807|app_mgpsphvq805",
+      "110807|visjoin_120"
+    ],
+    "meetingsByVid": {
+      "110801|nina_petrova": [
+        {
+          "seed": 110801,
+          "day": 61,
+          "mid": "influencer",
+          "origin": "expedition",
+          "rangedId": "crude_bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 131,
+          "mid": "eulogy",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 132,
+          "mid": "algorithm",
+          "origin": "expedition",
+          "rangedId": "crude_bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 132,
+          "mid": "eulogy",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 132,
+          "mid": "eulogy",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": "arrow"
+        }
+      ],
+      "110801|lena_ruiz": [
+        {
+          "seed": 110801,
+          "day": 100,
+          "mid": "herald",
+          "origin": "world-tick",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110801,
+          "day": 123,
+          "mid": "reunion",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110801,
+          "day": 124,
+          "mid": "reunion",
+          "origin": "world-tick",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110801,
+          "day": 125,
+          "mid": "algorithm",
+          "origin": "expedition",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 125,
+          "mid": "algorithm",
+          "origin": "expedition",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110801,
+          "day": 125,
+          "mid": "reunion",
+          "origin": "expedition",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 127,
+          "mid": "eulogy",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": null
+        }
+      ],
+      "110801|gen_5a30w9e": [
+        {
+          "seed": 110801,
+          "day": 100,
+          "mid": "herald",
+          "origin": "world-tick",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 101,
+          "mid": "herald",
+          "origin": "world-tick",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 118,
+          "mid": "reunion",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 121,
+          "mid": "reunion",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 121,
+          "mid": "reunion",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 123,
+          "mid": "reunion",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 124,
+          "mid": "reunion",
+          "origin": "world-tick",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 124,
+          "mid": "reunion",
+          "origin": "world-tick",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 125,
+          "mid": "algorithm",
+          "origin": "expedition",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110801,
+          "day": 125,
+          "mid": "algorithm",
+          "origin": "expedition",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 125,
+          "mid": "reunion",
+          "origin": "expedition",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 127,
+          "mid": "eulogy",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110801,
+          "day": 131,
+          "mid": "eulogy",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": "arrow"
+        }
+      ],
+      "110801|app_mgpspkoh863": [
+        {
+          "seed": 110801,
+          "day": 131,
+          "mid": "eulogy",
+          "origin": "aid",
+          "rangedId": "sling",
+          "ammoId": null
+        }
+      ],
+      "110802|gen_7h9np1e": [
+        {
+          "seed": 110802,
+          "day": 67,
+          "mid": "algorithm",
+          "origin": "expedition",
+          "rangedId": "starfall_bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110802,
+          "day": 70,
+          "mid": "suburb",
+          "origin": "expedition",
+          "rangedId": "starfall_bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110802,
+          "day": 108,
+          "mid": "algorithm",
+          "origin": "expedition",
+          "rangedId": "starfall_bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110802,
+          "day": 126,
+          "mid": "strike",
+          "origin": "expedition",
+          "rangedId": "starfall_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110802,
+          "day": 126,
+          "mid": "eulogy",
+          "origin": "expedition",
+          "rangedId": "starfall_bow",
+          "ammoId": "arrow"
+        }
+      ],
+      "110802|luis_fernandez": [
+        {
+          "seed": 110802,
+          "day": 146,
+          "mid": "timeslot",
+          "origin": "expedition",
+          "rangedId": "bow",
+          "ammoId": null
+        }
+      ],
+      "110802|maya_singh": [
+        {
+          "seed": 110802,
+          "day": 149,
+          "mid": "eater",
+          "origin": "expedition",
+          "rangedId": "crude_bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110802,
+          "day": 150,
+          "mid": "network_note",
+          "origin": "expedition",
+          "rangedId": "crude_bow",
+          "ammoId": "arrow"
+        }
+      ],
+      "110803|sigrun_eiriksdottir": [
+        {
+          "seed": 110803,
+          "day": 120,
+          "mid": "herald",
+          "origin": "world-tick",
+          "rangedId": "crossbow",
+          "ammoId": null
+        },
+        {
+          "seed": 110803,
+          "day": 120,
+          "mid": "herald",
+          "origin": "world-tick",
+          "rangedId": "crossbow",
+          "ammoId": null
+        }
+      ],
+      "110803|ruth_goldstein": [
+        {
+          "seed": 110803,
+          "day": 120,
+          "mid": "herald",
+          "origin": "world-tick",
+          "rangedId": "sling",
+          "ammoId": "stone"
+        },
+        {
+          "seed": 110803,
+          "day": 120,
+          "mid": "herald",
+          "origin": "world-tick",
+          "rangedId": "sling",
+          "ammoId": "stone"
+        },
+        {
+          "seed": 110803,
+          "day": 121,
+          "mid": "herald",
+          "origin": "world-tick",
+          "rangedId": "sling",
+          "ammoId": "stone"
+        },
+        {
+          "seed": 110803,
+          "day": 129,
+          "mid": "algorithm",
+          "origin": "world-tick",
+          "rangedId": "sling",
+          "ammoId": "stone"
+        },
+        {
+          "seed": 110803,
+          "day": 130,
+          "mid": "algorithm",
+          "origin": "world-tick",
+          "rangedId": "sling",
+          "ammoId": "stone"
+        }
+      ],
+      "110803|catalina_reyes": [
+        {
+          "seed": 110803,
+          "day": 141,
+          "mid": "algorithm",
+          "origin": "world-tick",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110803,
+          "day": 144,
+          "mid": "algorithm",
+          "origin": "world-tick",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110803,
+          "day": 145,
+          "mid": "influencer",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110803,
+          "day": 146,
+          "mid": "influencer",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110803,
+          "day": 147,
+          "mid": "algorithm",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        }
+      ],
+      "110803|gen_aybqefl": [
+        {
+          "seed": 110803,
+          "day": 149,
+          "mid": "suburb",
+          "origin": "world-tick",
+          "rangedId": "crude_bow",
+          "ammoId": "arrow"
+        }
+      ],
+      "110804|brian_otieno": [
+        {
+          "seed": 110804,
+          "day": 124,
+          "mid": "influencer",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110804,
+          "day": 130,
+          "mid": "influencer",
+          "origin": "world-tick",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110804,
+          "day": 138,
+          "mid": "eater",
+          "origin": "world-tick",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110804,
+          "day": 138,
+          "mid": "eater",
+          "origin": "world-tick",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110804,
+          "day": 141,
+          "mid": "suburb",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110804,
+          "day": 141,
+          "mid": "herald",
+          "origin": "world-tick",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110804,
+          "day": 142,
+          "mid": "eater",
+          "origin": "world-tick",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110804,
+          "day": 143,
+          "mid": "suburb",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110804,
+          "day": 144,
+          "mid": "suburb",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110804,
+          "day": 145,
+          "mid": "suburb",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110804,
+          "day": 145,
+          "mid": "eater",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": null
+        }
+      ],
+      "110804|giulia_bianchi": [
+        {
+          "seed": 110804,
+          "day": 124,
+          "mid": "influencer",
+          "origin": "aid",
+          "rangedId": "searcaster",
+          "ammoId": "fusion_cell"
+        },
+        {
+          "seed": 110804,
+          "day": 130,
+          "mid": "influencer",
+          "origin": "world-tick",
+          "rangedId": "searcaster",
+          "ammoId": "fusion_cell"
+        }
+      ],
+      "110804|elif_demir": [
+        {
+          "seed": 110804,
+          "day": 139,
+          "mid": "herald",
+          "origin": "world-tick",
+          "rangedId": "sling",
+          "ammoId": null
+        },
+        {
+          "seed": 110804,
+          "day": 140,
+          "mid": "eater",
+          "origin": "world-tick",
+          "rangedId": "sling",
+          "ammoId": null
+        }
+      ],
+      "110805|sanne_bakker": [
+        {
+          "seed": 110805,
+          "day": 65,
+          "mid": "eulogy",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": "arrow"
+        },
+        {
+          "seed": 110805,
+          "day": 65,
+          "mid": "eulogy",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": "arrow"
+        }
+      ],
+      "110807|naran_tumen": [
+        {
+          "seed": 110807,
+          "day": 67,
+          "mid": "eater",
+          "origin": "world-tick",
+          "rangedId": "bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110807,
+          "day": 77,
+          "mid": "herald",
+          "origin": "aid",
+          "rangedId": "bow",
+          "ammoId": null
+        }
+      ],
+      "110807|app_mgpsphvq805": [
+        {
+          "seed": 110807,
+          "day": 77,
+          "mid": "eater",
+          "origin": "aid",
+          "rangedId": "sling",
+          "ammoId": null
+        },
+        {
+          "seed": 110807,
+          "day": 86,
+          "mid": "herald",
+          "origin": "aid",
+          "rangedId": "sling",
+          "ammoId": null
+        }
+      ],
+      "110807|visjoin_120": [
+        {
+          "seed": 110807,
+          "day": 122,
+          "mid": "eulogy",
+          "origin": "world-tick",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110807,
+          "day": 123,
+          "mid": "network_note",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110807,
+          "day": 131,
+          "mid": "eater",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110807,
+          "day": 131,
+          "mid": "cancellation",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110807,
+          "day": 132,
+          "mid": "cancellation",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110807,
+          "day": 132,
+          "mid": "eater",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110807,
+          "day": 134,
+          "mid": "editor",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110807,
+          "day": 134,
+          "mid": "cancellation",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        },
+        {
+          "seed": 110807,
+          "day": 135,
+          "mid": "editor",
+          "origin": "aid",
+          "rangedId": "crude_bow",
+          "ammoId": null
+        }
+      ]
+    }
+  },
+  "gate": {
+    "dir": "evidence/2026-11-27/perseed-craftgate-a",
+    "files": 8,
+    "needingDays": 136,
+    "needingDaysByCause": {
+      "pile-materials-absent": 96,
+      "carrier-absent": 40
+    },
+    "needingDaysByState": {
+      "no-materials": 96,
+      "away": 40
+    },
+    "fighters": {
+      "110801|lena_ruiz": {
+        "seed": 110801,
+        "vid": "lena_ruiz",
+        "needingDays": 28,
+        "byCause": {
+          "pile-materials-absent": 17,
+          "carrier-absent": 11
+        },
+        "primaryCause": "pile-materials-absent",
+        "tied": false
+      },
+      "110802|luis_fernandez": {
+        "seed": 110802,
+        "vid": "luis_fernandez",
+        "needingDays": 7,
+        "byCause": {
+          "pile-materials-absent": 2,
+          "carrier-absent": 5
+        },
+        "primaryCause": "carrier-absent",
+        "tied": false
+      },
+      "110803|gen_aybqefl": {
+        "seed": 110803,
+        "vid": "gen_aybqefl",
+        "needingDays": 59,
+        "byCause": {
+          "pile-materials-absent": 45,
+          "carrier-absent": 14
+        },
+        "primaryCause": "pile-materials-absent",
+        "tied": false
+      },
+      "110803|catalina_reyes": {
+        "seed": 110803,
+        "vid": "catalina_reyes",
+        "needingDays": 16,
+        "byCause": {
+          "pile-materials-absent": 12,
+          "carrier-absent": 4
+        },
+        "primaryCause": "pile-materials-absent",
+        "tied": false
+      },
+      "110804|brian_otieno": {
+        "seed": 110804,
+        "vid": "brian_otieno",
+        "needingDays": 26,
+        "byCause": {
+          "pile-materials-absent": 20,
+          "carrier-absent": 6
+        },
+        "primaryCause": "pile-materials-absent",
+        "tied": false
+      },
+      "110803|ruth_goldstein": {
+        "seed": 110803,
+        "vid": "ruth_goldstein",
+        "needingDays": 0,
+        "byCause": {},
+        "primaryCause": null,
+        "tied": false
+      },
+      "110804|giulia_bianchi": {
+        "seed": 110804,
+        "vid": "giulia_bianchi",
+        "needingDays": 0,
+        "byCause": {},
+        "primaryCause": null,
+        "tied": false
+      },
+      "110804|elif_demir": {
+        "seed": 110804,
+        "vid": "elif_demir",
+        "needingDays": 0,
+        "byCause": {},
+        "primaryCause": null,
+        "tied": false
+      }
+    },
+    "unassigned": 3,
+    "unassignedVids": [
+      "110803|ruth_goldstein",
+      "110804|giulia_bianchi",
+      "110804|elif_demir"
+    ],
+    "primaryCauseCounts": {
+      "pile-materials-absent": 4,
+      "carrier-absent": 1
+    },
+    "primaryCauseDays": {
+      "pile-materials-absent": 94,
+      "carrier-absent": 5
+    },
+    "subOther": {
+      "attempt-failed": 0,
+      "eligible-no-attempt": 0,
+      "attempt-success-anomaly": 0,
+      "no-recipe": 0,
+      "no-weapon": 0,
+      "not-craftable": 0
+    },
+    "noMaterialsSplit": {
+      "pileShort": 0,
+      "ownShort": 0,
+      "bothShort": 96
+    },
+    "shortfallMats": {
+      "fiber": 96
+    },
+    "attemptsLinked": 0,
+    "attemptsBlind": 88,
+    "attemptsBlindOk": 30,
+    "attemptsLearned": 89,
+    "attemptsLearnedOk": 75,
+    "attemptsTotal": 177,
+    "attemptsOk": 105,
+    "autoEquipGapRows": 0,
+    "autoEquipGapVids": {},
+    "notAwayNotHavenRows": 0,
+    "dutyCalls": 1147,
+    "dutyDays": 1107,
+    "pileDays": 1147,
+    "observedNeeding": 136,
+    "unobservedShortDays": 3,
+    "coverage": 0.9784172661870504,
+    "duplicateGateRows": 0,
+    "noWeaponRows": 0,
+    "notCraftableRows": 0
+  },
+  "pile": {
+    "files": 8,
+    "days": 1147,
+    "arrowRecipeDays": 743,
+    "boltRecipeDays": 1115,
+    "arrowRecipeShare": 0.6477768090671316,
+    "boltRecipeShare": 0.972101133391456,
+    "meanPile": {
+      "stick": 46.36006974716652,
+      "stone": 250.7079337401918,
+      "fiber": 9.40976460331299
+    },
+    "meanCandidates": 3.128160418482999,
+    "meanAtHome": 1.4455100261551874,
+    "meanShort": 1.3748910200523103,
+    "meanMatsOk": 0.07585004359197908,
+    "meanNoMaterials": 0.4455100261551874,
+    "meanCooldown": 0.06364428945074106,
+    "meanAttemptEligible": 0.07585004359197908,
+    "perSeed": [
+      {
+        "seed": 110801,
+        "days": 132,
+        "arrowRecipeShare": 0.23484848484848486,
+        "boltRecipeShare": 0.9621212121212122,
+        "meanCandidates": 5.325757575757576,
+        "homeDutyBatches": 16,
+        "homeDutyCalls": 132
+      },
+      {
+        "seed": 110802,
+        "days": 150,
+        "arrowRecipeShare": 0.88,
+        "boltRecipeShare": 0.9933333333333333,
+        "meanCandidates": 2.7133333333333334,
+        "homeDutyBatches": 15,
+        "homeDutyCalls": 150
+      },
+      {
+        "seed": 110803,
+        "days": 150,
+        "arrowRecipeShare": 0.36666666666666664,
+        "boltRecipeShare": 0.9666666666666667,
+        "meanCandidates": 5.233333333333333,
+        "homeDutyBatches": 20,
+        "homeDutyCalls": 149
+      },
+      {
+        "seed": 110804,
+        "days": 150,
+        "arrowRecipeShare": 0.42,
+        "boltRecipeShare": 0.9733333333333334,
+        "meanCandidates": 4.12,
+        "homeDutyBatches": 5,
+        "homeDutyCalls": 150
+      },
+      {
+        "seed": 110805,
+        "days": 115,
+        "arrowRecipeShare": 0.22608695652173913,
+        "boltRecipeShare": 0.9739130434782609,
+        "meanCandidates": 0.9391304347826087,
+        "homeDutyBatches": 3,
+        "homeDutyCalls": 115
+      },
+      {
+        "seed": 110806,
+        "days": 150,
+        "arrowRecipeShare": 0.9533333333333334,
+        "boltRecipeShare": 0.9533333333333334,
+        "meanCandidates": 2.64,
+        "homeDutyBatches": 13,
+        "homeDutyCalls": 150
+      },
+      {
+        "seed": 110807,
+        "days": 150,
+        "arrowRecipeShare": 0.9733333333333334,
+        "boltRecipeShare": 0.9733333333333334,
+        "meanCandidates": 2.8066666666666666,
+        "homeDutyBatches": 26,
+        "homeDutyCalls": 151
+      },
+      {
+        "seed": 110808,
+        "days": 150,
+        "arrowRecipeShare": 0.98,
+        "boltRecipeShare": 0.98,
+        "meanCandidates": 1,
+        "homeDutyBatches": 7,
+        "homeDutyCalls": 150
+      }
+    ]
+  }
+}
