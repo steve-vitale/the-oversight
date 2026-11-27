@@ -171,11 +171,29 @@ function summarizeAll(seeds) {
   const days = per.map(function (s) { return s.wall.endDay; }).sort(function (a, b) { return a - b; });
   const medianSurvival = days.length ? days[Math.floor(days.length / 2)] : null;
   const censored = per.filter(function (s) { return s.wall.survived; }).length;
+  const heraldRefusalsWithLaterContact = per.reduce(function (a, s) { return a + s.heraldRefusalsWithLaterContact; }, 0);
+  const heraldRefusalsNeverAgain = per.reduce(function (a, s) { return a + s.heraldRefusalsNeverAgain; }, 0);
+  const heraldUnannotated = per.reduce(function (a, s) { return a + s.heraldUnannotated; }, 0);
+  // Frozen decision table (prereg §4 item 1) applied BAND-wide: the
+  // audibility bar is ">= 20 herald startCombat calls observed
+  // band-wide", and the verdict is read off the pooled counts. (The
+  // per-seed heraldVerdict on summarizeSeed is a per-seed note only;
+  // THIS is the judged verdict.)
+  let heraldVerdict;
+  if (heraldCalls < 20) heraldVerdict = 'SILENT';
+  else if (heraldGenuine >= 1) heraldVerdict = 'ENTRY WORKS';
+  else if (heraldRefusedNoLive > 0 || heraldRefusalsNeverAgain > 0) heraldVerdict = 'DEFECT NAMED';
+  else heraldVerdict = 'NOISE';
+  const heraldDiagGo = heraldUnannotated === 0 && heraldCalls >= 20 && heraldVerdict !== 'SILENT';
   return {
     seeds: per.length,
     heraldCalls: heraldCalls, heraldGenuine: heraldGenuine,
     heraldRefusedLive: heraldRefusedLive, heraldRefusedNoLive: heraldRefusedNoLive,
     heraldField: heraldField,
+    heraldUnannotated: heraldUnannotated,
+    heraldRefusalsWithLaterContact: heraldRefusalsWithLaterContact,
+    heraldRefusalsNeverAgain: heraldRefusalsNeverAgain,
+    heraldVerdict: heraldVerdict, heraldDiagGo: heraldDiagGo,
     heraldVerdicts: per.map(function (s) { return { seed: s.seed, calls: s.heraldCalls, genuine: s.heraldGenuine, verdict: s.heraldVerdict }; }),
     wall: { wins: wins, national: national, table: table,
       w4Unlock: w4Unlock, w5Unlock: w5Unlock, w5Faced: w5Faced,
