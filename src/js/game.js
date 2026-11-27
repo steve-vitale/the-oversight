@@ -40186,6 +40186,12 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
         } catch (e) { console.warn('[blooded] TB incoming', e); }
       }
       const quiet = !!(opts && opts.quiet);
+      // EULOGY DOOM BYPASS (sim-reunionwild2-b 2026-11-27): the narrated
+      // ending kills "as narrated" — it bypasses armor by design, so the
+      // armor blocks below (and their absorb lines + Retribution credit)
+      // must not run on it. Only the doom call in sigEulogyHook sets
+      // bypassArmor; every other caller keeps honest armor.
+      const bypassArmor = !!(opts && opts.bypassArmor);
       // WALKOUT (union_rep): untargetable while walked out. Break the strike
       // by outlasting it — or don't let it organize in the first place.
       if (t.kind === 'monster' && (t.walkout || 0) > 0) {
@@ -40522,7 +40528,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
           this.say('The blow startles it — gold flares back across its scales as it scrambles for the sunlight.');
         }
       }
-      if (t.kind === 'player' && typeof this.armorBonus === 'function') {
+      if (t.kind === 'player' && typeof this.armorBonus === 'function' && !bypassArmor) {
         const prot = this.armorBonus();
         // HONESTY (break-it combat r6 2026-10-09): the old line stated
         // Math.min(dmg, prot) — the RAW incoming number — but union-rep
@@ -40561,7 +40567,7 @@ this.journalNote && this.journalNote('village', 'person', `${tname} taught me ${
       // block — state the post-modifier absorbed number, not the raw input.
       // ALLIES (2026-10-13): titan-outfitted forces carry real varmor —
       // "what it bought is real" — so kind 'ally' absorbs here too.
-      if ((t.kind === 'villager' || t.kind === 'ally' || (t.kind === 'hostile' && t.villagerId && !t.alienPid)) && (t.varmor || 0) > 0) {
+      if ((t.kind === 'villager' || t.kind === 'ally' || (t.kind === 'hostile' && t.villagerId && !t.alienPid)) && (t.varmor || 0) > 0 && !bypassArmor) {
         const prot = t.varmor;
         // ARMOR (Steve 2026-10-09; retuned sim-survivaltime-b 2026-11-06):
         // same diminishing-returns curve as the player block, via the
