@@ -1,0 +1,150 @@
+{
+  "seeds": [
+    111101,
+    111102,
+    111103,
+    111104,
+    111105,
+    111106,
+    111107,
+    111108
+  ],
+  "departs": 232,
+  "launches": 220,
+  "holds": 12,
+  "stamped": 232,
+  "coverage": 1,
+  "bars": {
+    "B1": {
+      "threshold": "coverage >= 0.80",
+      "value": 1,
+      "pass": true,
+      "detail": "232/232 departures stamped complete"
+    },
+    "B2": {
+      "threshold": ">= 10 launches stamped with full distributions",
+      "value": 220,
+      "pass": true,
+      "detail": "220 launches, 489 launch members"
+    },
+    "B3": {
+      "threshold": "verdict stated with numbers",
+      "value": null,
+      "pass": true,
+      "detail": "see verdict below"
+    },
+    "B4": {
+      "threshold": "0 instrument errors; determinism byte-identical on re-run",
+      "value": 0,
+      "pass": true,
+      "detail": []
+    }
+  },
+  "verdict": "DIAG-GO",
+  "launchArmedShare": {
+    "n": 220,
+    "median": 1,
+    "q1": 1,
+    "q3": 1,
+    "min": 0.5,
+    "max": 1,
+    "zeroArmed": 0
+  },
+  "launchHp": {
+    "n": 489,
+    "median": 85,
+    "q1": 71,
+    "q3": 98,
+    "min": 10,
+    "max": 100,
+    "shareLt50": 0.1083844580777096,
+    "shareLt25": 0.018404907975460124,
+    "lt50": 53,
+    "lt25": 9
+  },
+  "holderHp": {
+    "n": 220,
+    "median": 84,
+    "q1": 70.75,
+    "q3": 100,
+    "min": 10,
+    "max": 100
+  },
+  "volley": {
+    "carriers": 245,
+    "loaded": 140,
+    "loadedShare": 0.5714285714285714,
+    "ammoMedian": 2,
+    "ammoZero": 105
+  },
+  "albertoLike": [
+    {
+      "seed": 111101,
+      "day": 47,
+      "vid": "gen_5h3nf9y",
+      "name": "Shaun Mokgatle",
+      "hp": 10,
+      "melee": "machete",
+      "ranged": "starfall_bow",
+      "ammoN": 0,
+      "loaded": false
+    },
+    {
+      "seed": 111103,
+      "day": 17,
+      "vid": "rafael_torres",
+      "name": "Rafael Torres",
+      "hp": 19,
+      "melee": "stone_knife",
+      "ranged": null,
+      "ammoN": 0,
+      "loaded": null
+    },
+    {
+      "seed": 111103,
+      "day": 20,
+      "vid": "gen_osrhld6",
+      "name": "Germaine Makuala",
+      "hp": 15,
+      "melee": "trailblazer_machete",
+      "ranged": null,
+      "ammoN": 0,
+      "loaded": null
+    },
+    {
+      "seed": 111103,
+      "day": 20,
+      "vid": "rafael_torres",
+      "name": "Rafael Torres",
+      "hp": 10,
+      "melee": "stone_knife",
+      "ranged": null,
+      "ammoN": 0,
+      "loaded": null
+    },
+    {
+      "seed": 111105,
+      "day": 65,
+      "vid": "jorge_silva",
+      "name": "Jorge Silva",
+      "hp": 14,
+      "melee": "hardlight_knife",
+      "ranged": "sling",
+      "ammoN": 4,
+      "loaded": true
+    },
+    {
+      "seed": 111106,
+      "day": 57,
+      "vid": "gen_w08s5ej",
+      "name": "Yaritza Bastidas",
+      "hp": 20,
+      "melee": "fire_hardened_spear",
+      "ranged": null,
+      "ammoN": 0,
+      "loaded": null
+    }
+  ],
+  "instrumentErrors": 0,
+  "errorDetail": []
+}
