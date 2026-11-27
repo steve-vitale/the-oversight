@@ -1,0 +1,117 @@
+{
+  "verdict": "NO-GO",
+  "kind": "PRIMARY",
+  "bars": [
+    {
+      "id": "pool-floor-both-legs",
+      "pass": true,
+      "detail": "pair-inclusive pool ctl 13, arm 11 (floor 10 each)"
+    },
+    {
+      "id": "primary-kill-share",
+      "pass": false,
+      "detail": "kill share ctl 0.0% (0/13) vs arm 0.0% (0/11) (delta 0.0pp; bar arm kills >= 2 AND delta >= 5pp)"
+    },
+    {
+      "id": "cost-starvation",
+      "pass": true,
+      "detail": "starvation totals arm 1 vs ctl 6; villager arm 1 vs ctl 4 (bar arm<=ctl+2 both)"
+    },
+    {
+      "id": "cost-median-survival",
+      "pass": true,
+      "detail": "median survival arm 141.5d vs ctl 148d (bar arm>=0.8x ctl)"
+    },
+    {
+      "id": "instrument-errors",
+      "pass": true,
+      "detail": "instrument errors ctl 0, arm 0 (bar 0)"
+    }
+  ],
+  "ctl": {
+    "pool": 13,
+    "killShare": 0,
+    "kills": 0,
+    "medianDpr": 42.77777777777778,
+    "leadRank": {
+      "meetings": 13,
+      "quantified": 13,
+      "quantifiedShare": 1,
+      "worstArmedN": 7,
+      "worstArmedShare": 0.5384615384615384,
+      "medianLeadWb": 8,
+      "medianBestWb": 18,
+      "medianGap": 5,
+      "medianLeadRank": 2,
+      "rankDist": {
+        "1": 6,
+        "2": 1,
+        "3": 6
+      }
+    },
+    "swap": {
+      "brainLaunches": 204,
+      "swappedN": 0,
+      "swapShare": 0,
+      "medianLeadWbGain": null
+    },
+    "starvation": 6,
+    "starvationVillager": 4,
+    "medianDays": 148,
+    "wall": {
+      "national": 0,
+      "seedWins": 0,
+      "wave4": 8,
+      "wave5": 4,
+      "medianDays": 148,
+      "communityLost": 4,
+      "n": 8,
+      "scaleRanks": {
+        "regional": 8
+      }
+    }
+  },
+  "arm": {
+    "pool": 11,
+    "killShare": 0,
+    "kills": 0,
+    "medianDpr": 53.833333333333336,
+    "leadRank": {
+      "meetings": 11,
+      "quantified": 11,
+      "quantifiedShare": 1,
+      "worstArmedN": 4,
+      "worstArmedShare": 0.36363636363636365,
+      "medianLeadWb": 17,
+      "medianBestWb": 20,
+      "medianGap": 11,
+      "medianLeadRank": 2,
+      "rankDist": {
+        "1": 4,
+        "2": 3,
+        "3": 4
+      }
+    },
+    "swap": {
+      "brainLaunches": 231,
+      "swappedN": 111,
+      "swapShare": 0.4805194805194805,
+      "medianLeadWbGain": 10
+    },
+    "starvation": 1,
+    "starvationVillager": 1,
+    "medianDays": 141.5,
+    "wall": {
+      "national": 0,
+      "seedWins": 0,
+      "wave4": 8,
+      "wave5": 3,
+      "medianDays": 141.5,
+      "communityLost": 4,
+      "n": 8,
+      "scaleRanks": {
+        "regional": 8
+      }
+    }
+  }
+}
