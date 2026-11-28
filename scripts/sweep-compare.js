@@ -96,6 +96,11 @@ try { const pr = require('./policies/competent-patchrot-b'); POLICY_REGISTRY['co
 // change to existing entries (the variant stays default-OFF behind
 // CHEAPTEND_A=1; see scripts/policies/cheaptend-a.js).
 try { const ct = require('./policies/cheaptend-a'); POLICY_REGISTRY['cheaptend-a'] = ct.cheaptendA; } catch (e) {}
+// sitpolicy instrument (sim-sitpolicy-a, 2026-11-28, Loop A scale-onramp):
+// the competent + sitting policy, registered so the balanced panel
+// (§15) can build its column. Additive; zero behavior change to existing
+// entries (the variant stays default-OFF: nothing loads it unless named).
+try { const sp = require('./policies/competent-sit'); POLICY_REGISTRY['competent-sit'] = sp.competentSit; } catch (e) {}
 const RANK_ORDER = { village: 0, regional: 1, national: 2, global: 3 };
 
 function stdSnapshot(Game) {
