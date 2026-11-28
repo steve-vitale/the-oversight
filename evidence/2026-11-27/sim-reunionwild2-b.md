@@ -281,10 +281,47 @@ thing that keeps walking into your village.
 
 ## Rebase
 
-*To be filled after the rebase onto current master tip (see coordinator
-handoff): pre-rebase HEAD `7ddd7e607`; proof test 11/11 pass pre-rebase
-(re-run by the continuation worker). Post-rebase proof + `check.js
---quick` results recorded here if they differ from the pre-rebase run.*
+- Pre-rebase HEAD `7ddd7e607`; evidence committed as `4907783ed`.
+  (The safe-commit index clobber struck on that commit — staged deletion
+  of the new file with the worktree copy byte-identical to HEAD; repaired
+  with the documented `ls-tree | update-index --add --index-info` pipe,
+  verified `git status` empty + `git diff HEAD` empty. Commit itself was
+  always correct.)
+- Rebasing onto current master tip `bf21c02bb` (batch ship version bump)
+  completed cleanly, no conflicts; 7 commits replayed; new HEAD
+  **`28f2fad19`**. The Eulogy fix survived the rebase verbatim
+  (`bypassArmor` present in `src/js/sigW4.js:568,570` and
+  `src/js/game.js:40193-40194,40531,40570`).
+- Proof test post-rebase: `node scripts/test-reunionwild2-b.js` **11/11
+  PASS**, identical to the pre-rebase run.
+- `node scripts/check.js --quick` post-rebase: **337 passed, 7 failed**
+  in 1109s (first post-rebase run 1216s, same 7 failures; re-run to a
+  file to capture the full list). The 7, all characterized, none
+  attributable to this arm:
+  - `test-measurement-proof-update.js` (exit 1) — retained proof stale
+    vs current inputs; known pre-existing failure on the tip
+    (sim-samelabel-b, 2026-11-27).
+  - `test-measurement-workflow.js` (exit 1) — "retained neutrality
+    proof covers the current Game/controller/harness inputs"; same
+    known pre-existing failure, reproduced directly.
+  - `test-phone-frame-proof.js` (exit 1) — "Phone receipt source is
+    stale"; same known pre-existing failure, reproduced directly.
+  - `test-measurement-cache-flags.js` (exit 1 in the suite, 66.7s) —
+    **passes standalone** (4 passed, 0 failed, 45s) on this branch:
+    a parallel-load flake inside check.js (4 parallel workers), not a
+    regression.
+  - `test-living-garden-deed-attainment.js`, `test-occupation-panels.js`,
+    `test-one-person-army-deed-attainment.js` (120s timeouts each) —
+    slow deed/occupation sims timing out under parallel load; the first
+    two are the same timeouts the samelabel-b run reported under load.
+  - Arm-adjacent suites run directly, all green:
+    `test-bypass-20261106.js` 39/0, `test-combat-narration.js` 5/0,
+    `test-phase-shawl.js` 92/0, `test-reunionwild2-b.js` 11/11.
+- On the prereg §4 item 3 GO bar's "check.js --quick green" leg: the
+  tip is not green (the three stale retained proofs above), and this
+  arm adds no new failure — the leg is met in the no-new-failure
+  sense, not as a fully-green suite. A proof-refresh arm (already an
+  open finding) owns the stale proofs; no action for this arm.
 
 ## Files
 
