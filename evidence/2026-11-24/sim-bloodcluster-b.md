@@ -150,27 +150,37 @@ starts only. The v2 corpus, judged under the fixed instrument:
 
 | Seed | Door | Days | End | W4 contacts | W4 kills | Bloodings | W5 unlock | W5 faced | W5 kills |
 |---|---|---|---|---|---|---|---|---|---|
-| 109310 | – | 150 | survived | 30 | 1 | 1 | – | – | 0 |
+| 109310 | – | 150 | survived | 31 | 1 | 1 | – | – | 0 |
 | 109311 | D | 150 | survived | 34 | 5 | 4 | yes | yes | 0 |
-| 109312 | D | 150 | survived | 61 | 10 | 8 | yes | yes | 2 |
-| 109313 | D | 97 | village-lost | 40 | 5 | 4 | yes | yes | 1 |
-| 109314 | D | 150 | survived | 32 | 4 | 2 | yes | – | 0 |
-| 109315 | – | 96 | village-lost | 7 | 0 | 0 | – | – | 0 |
+| 109312 | D | 150 | survived | 68 | 10 | 8 | yes | yes | 2 |
+| 109313 | D | 97 | village-lost | 28 | 5 | 4 | yes | yes | 1 |
+| 109314 | D | 150 | survived | 37 | 4 | 2 | yes | – | 0 |
+| 109315 | – | 96 | village-lost | 4 | 0 | 0 | – | – | 0 |
 | 109316 | – | 49 | village-lost | 0 | 0 | 0 | – | – | 0 |
 | 109317 | – | 150 | survived | 9 | 1 | 1 | – | – | 0 |
-| 109318 | – | 150 | survived | 17 | 3 | 2 | – | – | 0 |
-| 109319 | – | 150 | survived | 12 | 1 | 1 | – | – | 0 |
+| 109318 | – | 150 | survived | 6 | 3 | 2 | – | – | 0 |
+| 109319 | – | 150 | survived | 6 | 1 | 1 | – | – | 0 |
 | 109320 | – | 150 | survived | 13 | 2 | 2 | – | – | 0 |
 | 109321 | – | 122 | village-lost | 36 | 4 | 3 | – | – | 0 |
 | 109322 | – | 150 | survived | 19 | 3 | 2 | – | – | 0 |
-| 109323 | – | 68 | village-lost | 6 | 0 | 0 | – | – | 0 |
-| 109324 | – | 150 | survived | 2 | 0 | 0 | – | – | 0 |
-| 109325 | – | 150 | survived | 12 | 2 | 1 | – | – | 0 |
+| 109323 | – | 68 | village-lost | 3 | 0 | 0 | – | – | 0 |
+| 109324 | – | 150 | survived | 1 | 0 | 0 | – | – | 0 |
+| 109325 | – | 150 | survived | 5 | 2 | 1 | – | – | 0 |
 
 Band totals: 300 wave-4+ contacts (167 door / 133 non-door), 41
 deduped wave-4+ kills (24 / 17), 31 bloodings (18 / 13). Door
 villages alive from wave-4 unlock: 382 days; non-door: 957 days.
-109312 alone carries 61 contacts and 10 kills — a fifth of the
+
+> CORRECTION 2026-11-27 (Loop B arm sim-reunionwild2-b, run
+> fleshout-loop-b-20261127T2130Z, evidence/2026-11-27/sim-reunionwild2-b.md
+> §Item 2): the W4 contacts column above did not reproduce from the raw
+> per-seed JSONs on 10 of 16 seeds; the column now shows the recomputed
+> values (fieldFight wave>=4 excluding alreadyDead + genuine TB starts
+> wave>=4, v2 judged JSONs only). Pooled totals are unchanged and still
+> reproduce exactly (300 contacts; door 167 / non-door 133), and every
+> other column in this table reproduces exactly. The pooled decomposition
+> and all downstream verdicts are unaffected.
+109312 alone carries 68 contacts and 10 kills — over a fifth of the
 band's contacts on one seed. 109321 is the busiest non-door seed
 (36 contacts, 4 kills) and still bloods only 3 times, 50 days
 apart at the end.
