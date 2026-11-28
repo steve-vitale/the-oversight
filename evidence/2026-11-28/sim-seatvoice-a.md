@@ -18,7 +18,10 @@ death-aware.
 (8 per-seed JSONs + summary.json).
 **Analysis JSON:** `evidence/2026-11-28/seatvoice-analysis.json`
 (analyzer --json: verdict + wall + per-seed rows).
-**Commits on branch:** (filled at landing).
+**Commits on branch:** 2ce9ce352 (arm: fix + proof test + analyzer +
+evidence + corpus, pre-rebase hash); 8ea0b727e (same commit rebased
+onto local master 6dc7304ae, proof re-green 52/52); plus the
+closeout-note commit below.
 
 ## Verdict: GO
 
@@ -339,5 +342,15 @@ hidden_files/telemetry-baselines/scale-wall.json --current
   the wall — the corpus diff proves it — so there is nothing
   to investigate and nothing to roll.
 
-Closeout (this run): [to be completed at landing — heartbeat
-retry outcome, commit hashes, merge result].
+Closeout (this run): arm commit 2ce9ce352 (safe-commit clobber
+struck — 14 files staged-deleted in the worktree index after the
+commit; repaired with `git ls-tree -r HEAD | git update-index
+--add --index-info`, verified `git status` empty + `git diff HEAD`
+empty; the commit itself was always correct). First rebase
+attempt failed to detach HEAD on transient contention (retried
+clean); rebased onto local master 6dc7304ae as 8ea0b727e (sibling
+sim-winflee-b commits only, convoTopics.js — no overlap with
+table.js); proof re-green 52/52 on the rebased commit. Merged to
+local master via --ff-only; worktree released and removed. No
+push, no version bump, no live verification — the ship loop owns
+those. "Merged locally, pending ship."
