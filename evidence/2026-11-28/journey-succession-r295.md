@@ -192,4 +192,31 @@ numbers — EXPLAINED, baseline NOT rolled:
 
 ## Closeout state (for the next Lane B run)
 
-<!-- FILLED AT CLOSEOUT -->
+- Branch `journey2-7` at `abaf752c7` (6 commits ahead of master
+  `d2c726f65`, 0 behind): fix `7310ab491` + tooling `318e91e33` +
+  notes/corpus `2400072ba`/`ea6797679` + chunk C `6f342b0d7` +
+  r295 evidence `abaf752c7`. Rebase clean, post-rebase proofs 4/4 +
+  11/11 + 3/3, check.js --quick 338/6 with gate GREEN (3 timeouts
+  pass standalone on the rebased tip; 3 staleness fail identically
+  on master — pre-existing, carried). Merge decision: MERGE.
+  Merge + release + rotation-b 7 → 4 + lock deletion are the next
+  steps of THIS run, recorded in `~/memory/2026-11-28.md` (this
+  section was written pre-merge so it cannot repeat r294's
+  already-merged claim).
+- NEXT BLANKS (filed, leg 7, for a future succession run — from
+  r294, unchanged): (1) witness variant vs betrayal-case capture —
+  does fresh grief outrank an open case, and should the first
+  mourning serving of a witnessed death be the witness line? Needs
+  its own prereg + panel. (2) Smiling closers after grief ("Good
+  talk", "Come back anytime") — retire whenever grief is live.
+  (3) Mourning-template repetition — each mourning villager their
+  own sentence. (4) NPCs re-raising their own wants when the player
+  changes subject. (5) "What did you see out there?" answered with
+  what they saw, not a plant lesson. (6) WITNESS-CENSUS wording fix.
+  (7) NEW from this run: the 3 carried staleness proofs fail on
+  master itself — the retained measurement/phone-frame proofs are
+  stale against current master and need a refresh (balance-proof
+  refresh + phone-frame receipt refresh) by whoever owns those
+  proofs; r294's "clears on rebase" expectation is disproved.
+- Next run plays leg 4 (endgame) per rotation-b, after this run's
+  merge advances it 7 → 4.
