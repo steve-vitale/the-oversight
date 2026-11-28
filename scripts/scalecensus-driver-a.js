@@ -231,7 +231,16 @@ async function runOne(seed) {
     waitingDays: days.filter(d => d.tableWaiting).length,
     gateErrors, errors,
     markers: {
-      announceDay: markerDay(/TABLE IS SET/),
+      // announceDay matches the GALACTIC announce only (the pale-light
+      // line, ◈-prefixed). The bare /TABLE IS SET/ also matches the
+      // Harvest Table ability shout ("THE TABLE IS SET. THE VILLAGE
+      // IS ONE ANIMAL...") — on seed 113101 that fired day 39 and
+      // mis-marked the announce 51 days early. Corrected 2026-11-28
+      // after the pilot; the pilot corpus rows keep the old marker
+      // and the evidence file reports the corrected days (pale-light
+      // line + tableAnnounced flag agree: day 90 on the 6 survivors,
+      // never on the 2 that died before 90).
+      announceDay: markerDay(/◈ THE TABLE IS SET/),
       pelletDay: markerDay(/never be hungry again/i),
       nationProdDay: markerDay(/FINALES need a NATION/i),
       arcIVDay: markerDay(/ARC IV/),
