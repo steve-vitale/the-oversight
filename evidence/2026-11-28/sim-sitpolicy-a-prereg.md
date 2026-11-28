@@ -295,3 +295,49 @@ NOT made by this arm. No default flips.
   they claimed, any metric that proved wrong, and the
   revision proposed for the NEXT run. A miss is NO-GO,
   never re-scored.]
+
+## §7. Correction — expectations §5.5/§5.6 (2026-11-28 ~09:45 UTC, BEFORE any judged sim; bars and rules unchanged)
+
+The proof test's live runs falsified the §5.5 expectation
+("the feast bundle may never be bought") before any judged
+sim ran, and the correction is recorded here rather than
+silently re-wording §5:
+
+- The bundle DOES get bought on fat seeds: the buy-out
+  fired day 1 on both live proof seeds (pantry 47,250 ≥
+  16,000; bundleStage 0 on 113601, stage 1 on 113301), and
+  the feast_embassy delivered day 28 (113601) / day 12
+  (113301), the day the ladder reached stage 3.
+- Mechanism (read from code, not invented):
+  `_ladderFeastBundleDone()` (src/js/ladder.js:255) accepts
+  ANY feast-log entry with `bundle: true`, regardless of
+  bundleStage — an early buy-out banks the deed. The +4
+  ladder bonus is per-distinct-stage; the DEED readiness is
+  stage-agnostic on the bundle. Whether that is intended is
+  filed as an open design question in sim-findings.md
+  (steve-call), not changed by this arm.
+- Consequence for the design: paired trajectories diverge
+  from day 1 wherever the bundle fires. Verified on 113301:
+  the sit run's day-2 pantry reads 34,140 vs the competent-
+  verbatim before leg's 41,630 (the 8,000-kcal buy-out, less
+  drift) — the -8,000 kcal state change reshuffles the run
+  from the first dawn, and the sit village then lives a
+  quiet fat life (waves 18/4/2/0/0, pantry 77,922, never
+  lesser) while its verbatim twin fights its way to lesser
+  on day 38 (waves 26/15/8/8/4). The leg-2 pairing property
+  (non-delivery seeds byte-identical) does NOT transfer to
+  this arm: the bundle verb fires on day 1, the delivery
+  verb fired on day 83+ on leg 2.
+- The before/after is therefore a POLICY comparison judged
+  on the frozen band counts (§1) plus the §15 panel — NOT a
+  paired-trajectory proof. Per-seed before/after diffs will
+  show large swings that are mostly reshuffle; the verdict
+  rests on the band aggregates (seated/delivered counts)
+  and the panel, never on a single seed's swing. If the
+  pilot band shows sit villages systematically fighting
+  less, that is a finding for the metric review, not
+  attributable to the buy-out from one seed.
+- No bar changes. No rule changes. The buy-out rule stays
+  as frozen in §2 (buy whenever bundle-blocked + pantry ≥
+  16,000) — the day-1 buy is the frozen rule working as
+  written on a fat starting pantry.
