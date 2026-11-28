@@ -170,6 +170,36 @@
     // The delivery also OPENS the mercy window: tableActive() holds from
     // delivery (see the sanctity clause there), so no raid or roaming
     // monster can kill villagers between the delivery and the seat.
+    // _capstoneSeatLine(): the delivery announcement's seat clause
+    // (sim-seatvoice-a, 2026-11-28). "The seat is open" is only true
+    // when the deed gate (deedGateReady() — the full seat's deed half:
+    // waves, contests, crises, stage, food deed, national scale) is
+    // actually met at delivery time; on the leg-2 band both deliveries
+    // fired with the gate still closed on scale, and the old
+    // unconditional line lied. Otherwise the line says what is true:
+    // this deed is done, and the seat still waits on the deeds.
+    // VOICING ONLY — no gate, price, or behavior changes; the Table
+    // is never gated on godhood. Fail-closed: an unreadable gate reads
+    // as closed, never as open.
+    _capstoneSeatLine() {
+      try {
+        const g = (typeof this.deedGateReady === 'function') ? this.deedGateReady() : null;
+        if (g && g.ok) return 'The seat is open.';
+      } catch (e) {}
+      return 'The deed is done — the seat still waits on the deeds.';
+    },
+    // _capstoneMercyLine(): the mercy-window line, shared by all three
+    // delivery branches (sim-seatvoice-a, 2026-11-28). The old line
+    // promised "Nothing out there can take this from you" while raids
+    // kept taking food after delivery (15 post-delivery raid lines on
+    // leg-2 seed 113302, all "Nobody's dead"). The mercy window holds
+    // lives, not food (tableActive() suspends killing pressure from
+    // delivery to the seat; the pantry is still raided). The kept half
+    // ("the world holds its breath") stays; the promise now names
+    // exactly what is safe. VOICING ONLY.
+    _capstoneMercyLine() {
+      return '◈ THE TABLE — between now and the seat, the world holds its breath. The wild can still take your food — but it cannot take your people.';
+    },
     ladderDeliverCapstone(kind) { // wired-exempt: leg-3 Haven entry point (app.js panelHaven calls it; the delivery action lives there)
       try {
         if (this.over) return { ok: false, kind, reason: 'over' };
@@ -215,8 +245,8 @@
           pg.ladderCapstone = kind;
           pg.ladderCapstoneDay = day;
           pg.ladderCapstoneDetail = { veterans: seen.slice(), names: names.slice() };
-          this.say(`◈ THE TRIBUTE — ${names.join(' and ')} walk out of Haven in the table's service, two fighters the galaxy asked for by name. The village is smaller tonight. The seat is open.`);
-          this.say('◈ THE TABLE — between now and the seat, the world holds its breath. Nothing out there can take this from you.');
+          this.say(`◈ THE TRIBUTE — ${names.join(' and ')} walk out of Haven in the table's service, two fighters the galaxy asked for by name. The village is smaller tonight. ${this._capstoneSeatLine()}`);
+          this.say(this._capstoneMercyLine());
           try { this.save(); } catch (e) {}
           return { ok: true, kind, veterans: seen.slice(), names: names.slice(), day };
         }
@@ -229,8 +259,8 @@
           pg.ladderCapstone = kind;
           pg.ladderCapstoneDay = day;
           pg.ladderCapstoneDetail = link ? { link: (link.subordinate || link.b || link.a || null) } : {};
-          this.say('◈ THE CHARTER — the seal is set. Haven trades as a nation now, and the table has the charter on its ring. The seat is open.');
-          this.say('◈ THE TABLE — between now and the seat, the world holds its breath. Nothing out there can take this from you.');
+          this.say(`◈ THE CHARTER — the seal is set. Haven trades as a nation now, and the table has the charter on its ring. ${this._capstoneSeatLine()}`);
+          this.say(this._capstoneMercyLine());
           try { this.save(); } catch (e) {}
           return { ok: true, kind, day, link: (pg.ladderCapstoneDetail && pg.ladderCapstoneDetail.link) || null };
         }
@@ -243,8 +273,8 @@
           pg.ladderCapstone = kind;
           pg.ladderCapstoneDay = day;
           pg.ladderCapstoneDetail = { bundleDay };
-          this.say('◈ THE EMBASSY — the table is set, the bundle is served, and the galaxy ate from it. The seat is open.');
-          this.say('◈ THE TABLE — between now and the seat, the world holds its breath. Nothing out there can take this from you.');
+          this.say(`◈ THE EMBASSY — the table is set, the bundle is served, and the galaxy ate from it. ${this._capstoneSeatLine()}`);
+          this.say(this._capstoneMercyLine());
           try { this.save(); } catch (e) {}
           return { ok: true, kind, day, bundleDay };
         }
