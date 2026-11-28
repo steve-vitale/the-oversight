@@ -133,6 +133,17 @@ function arrivalRounds(f) {
 // earlier version of this function read r.mDealt and summed 0 —
 // caught by the proof test on all three seeds.) Null when
 // roundsDetail is absent.
+// NOTE the semantics, learned on the judged corpus (40/141 fights
+// first flagged): a roundsDetail entry records the round's
+// STRIKE-PHASE delta only. Damage dealt BEFORE round 1 — the
+// opening volley, the ambush opening strike, and the contact
+// finish against a monster already below its break line — lands
+// in rec.flPreRoundDealt and never appears in any roundsDetail
+// entry. All three channels are lead-only. The corrected identity
+// is rdSum + preRound == mDealt and rdLead + preRound == leadDealt.
+// preRound is recovered from the log parse when the row predates
+// the flPreRoundDealt field; the per-round agreement itself is
+// still checked against the engine's own roundsDetail.
 function roundsDetailSums(f) {
   const rd = f.roundsDetail;
   if (!Array.isArray(rd) || !rd.length) return null;
@@ -177,24 +188,15 @@ function classifyFight(f) {
   if (dealt.ally1 < 0) problems.push('negative-ally1-dealt');
   if ((f.mDealt | 0) < (f.allyDealt | 0)) problems.push('allyDealt-exceeds-mDealt');
   if (arr.checks.length) problems.push.apply(problems, arr.checks);
-  // Reconciliation: roundsDetail sums must equal the row tallies.
-  let rdResidual = null;
-  if (rd) {
-    rdResidual = Math.abs(rd.lead - dealt.lead) + Math.abs(rd.ally1 - dealt.ally1) +
-      Math.abs(rd.ally2 - dealt.ally2) + Math.abs(rd.ally3 - dealt.ally3) +
-      Math.abs(rd.sum - (f.mDealt | 0));
-    if (rdResidual !== 0) problems.push('roundsDetail-residual:' + rdResidual);
-  } else {
-    problems.push('roundsDetail-missing');
-  }
-  // Log strike parse: the proven speardmg parser (strike / echo /
-  // extra / ambush / contact / volley), fed a synthetic row built
-  // from this row's names. Volley / contact / ambush are attributed
-  // to the lead by the parser (lead-only channels), so they join
-  // the lead's parsed total here. Any unattributed strike line,
-  // unknown damage line, or per-seat mismatch is a problem.
+  // Log strike parse (first — its pre-round terms feed the
+  // roundsDetail check below): the proven speardmg parser (strike /
+  // echo / extra / ambush / contact / volley), fed a synthetic row
+  // built from this row's names. Volley / contact / ambush are
+  // attributed to the lead by the parser (lead-only channels), so
+  // they join the lead's parsed total here. Any unattributed strike
+  // line, unknown damage line, or per-seat mismatch is a problem.
   const names = [f.leadName, (f.allyNames || {}).ally1, (f.allyNames || {}).ally2, (f.allyNames || {}).ally3].filter(Boolean);
-  let logResidual = null, logParsed = 0, logUnattributed = 0;
+  let logResidual = null, logParsed = 0, logUnattributed = 0, preRound = null;
   if (names.length === new Set(names).size && names.every(function (n) { return n !== 'Someone'; })) {
     const kits = [{ vid: f.vid, name: f.leadName }];
     if (f.allyVid) kits.push({ vid: f.allyVid, name: (f.allyNames || {}).ally1 });
@@ -216,11 +218,29 @@ function classifyFight(f) {
     logResidual = Math.abs(parsed.unparsedDmg) +
       Math.abs(seatParsed.lead - dealt.lead) + Math.abs(seatParsed.ally1 - dealt.ally1) +
       Math.abs(seatParsed.ally2 - dealt.ally2) + Math.abs(seatParsed.ally3 - dealt.ally3);
+    // Pre-round damage (lead-only): prefer the engine's own
+    // rec.flPreRoundDealt when the row carries it; otherwise
+    // recover it from the log parse (volley + ambush + contact).
+    preRound = (f.flPreRoundDealt != null) ? (f.flPreRoundDealt | 0)
+      : ((parsed.volleyParsed | 0) + (parsed.ambushParsed | 0) + (parsed.contactParsed | 0));
     if (logUnattributed > 0) problems.push('log-unattributed-strikes:' + logUnattributed);
     if (parsed.unknownDmgLines.length > 0) problems.push('log-unknown-dmg-lines:' + parsed.unknownDmgLines.length);
     if (logResidual !== 0) problems.push('log-residual:' + logResidual);
   } else {
     problems.push('name-collision');
+  }
+  // Reconciliation: roundsDetail sums must equal the row tallies
+  // once pre-round damage is added back (see roundsDetailSums
+  // note: roundsDetail records strike-phase deltas only).
+  let rdResidual = null;
+  if (rd) {
+    const pre = (preRound == null) ? 0 : preRound;
+    rdResidual = Math.abs((rd.lead + pre) - dealt.lead) + Math.abs(rd.ally1 - dealt.ally1) +
+      Math.abs(rd.ally2 - dealt.ally2) + Math.abs(rd.ally3 - dealt.ally3) +
+      Math.abs((rd.sum + pre) - (f.mDealt | 0));
+    if (rdResidual !== 0) problems.push('roundsDetail-residual:' + rdResidual);
+  } else {
+    problems.push('roundsDetail-missing');
   }
   const seatsPresent = 1 + (f.allyVid ? 1 : 0) + (f.ally2Vid ? 1 : 0) + (f.ally3Vid ? 1 : 0);
   const partySizeAtStart = 1 +
@@ -447,6 +467,20 @@ function selftest() {
   check('f1 rdResidual 0', c1 && c1.rdResidual === 0, String(c1 && c1.rdResidual));
   check('f1 logResidual 0', c1 && c1.logResidual === 0, String(c1 && c1.logResidual));
   check('f1 classified (no problems)', c1 && !c1.unclassified, JSON.stringify(c1 && c1.problems));
+  // Fixture fight 6: pre-round damage — the lead closes in on a
+  // monster already below its break line (contact finish, 14,
+  // lead-only) BEFORE round 1. It is in mDealt / leadDealt and in
+  // the log, but in NO roundsDetail entry. The corrected identity
+  // (rdSum + preRound == mDealt) must reconcile to 0; the old
+  // uncorrected identity flagged this shape on 40/141 judged fights.
+  const f6 = JSON.parse(JSON.stringify(f1));
+  f6.day = 61; f6.mDealt = 214; f6.leadDealt = 164;
+  f6.log = ['Mateo closes in and strikes with the hunting_spear for 14 (1186 left) — but The Audit holds its ground, wounded, and still coming. (Committed)'].concat(f1.log);
+  const c6 = classifyFight(f6);
+  check('f6 pre-round contact reconciles (rdResidual 0)', c6 && c6.rdResidual === 0, String(c6 && c6.rdResidual));
+  check('f6 logResidual 0', c6 && c6.logResidual === 0, String(c6 && c6.logResidual));
+  check('f6 classified (no problems)', c6 && !c6.unclassified, JSON.stringify(c6 && c6.problems));
+  check('f6 dealt lead 164 / ally1 50', c6 && c6.dealt.lead === 164 && c6.dealt.ally1 === 50, JSON.stringify(c6 && c6.dealt));
 
   // Fixture fight 2: ally joins via 1st shout on round 3; a 4th
   // companion EXISTS on the expedition (3 companions) but the sense

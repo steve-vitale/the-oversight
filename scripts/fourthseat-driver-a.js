@@ -363,6 +363,13 @@ function installFourthseatRecorder(Game, L, errors) {
             outcome: rec.outcome || null, rounds: rec.rounds | 0,
             mHpStart: recov.mHpStart, vKill: !!recov.vKill, noContact: !!recov.noContact,
             mDealt: mDealt, vTaken: rec.vTaken | 0,
+            // rec.flPreRoundDealt (fieldFights.js:1728): damage dealt
+            // BEFORE round 1 — opening volley, ambush opening strike,
+            // contact finish vs a monster already below its break
+            // line. Lead-only. The analyzer prefers this engine number
+            // and falls back to the log-derived pre-round total for
+            // rows that predate the field (the 112201–112208 corpus).
+            flPreRoundDealt: (rec.flPreRoundDealt != null ? rec.flPreRoundDealt : null),
             leadDealt: mDealt - allyDealt,
             allyDealt: allyDealt, ally2Dealt: ally2Dealt, ally3Dealt: ally3Dealt,
             ally1Dealt: allyDealt - ally2Dealt - ally3Dealt,
