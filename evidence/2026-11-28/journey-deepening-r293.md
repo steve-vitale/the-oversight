@@ -217,16 +217,30 @@ still sat open for a month.
   `scripts/journey-deepening-r278-mootclose-stage.js` (no `test-`
   prefix). Name corrected here; the r278 staged proof (28/28) stands
   as the standing proof.
-- `check.js --quick` was NOT run this adoption: the run already died
-  once at ~30 min, so the commit came first. The full gate is deferred
-  to the next run; the forked proof tests above are the relevant
-  suites for this run's tooling and they are green.
+- `check.js --quick` on the rebased tip `5248fad6e`: 337 passed,
+  7 failed in 1209s. All 7 triaged, none caused by this run:
+  3 timeouts (living-garden, one-person-army, occupation-panels) pass
+  standalone on the rebased tip (RC=0; occupation-panels 25/25);
+  3 staleness (measurement-proof-update, measurement-workflow,
+  phone-frame-proof) fail identically on master `6dc7304ae`;
+  measurement-cache-flags passes standalone in the worktree (4/4)
+  and on master (4/4) — a gate-parallelism/load flake. Gate verdict:
+  GREEN modulo known pre-existing + flakes (same call as r295).
 
 ## Closeout
 - Committed on branch `journey-deepening` (driver, analyzer, 3 proof
-  tests, this note) via safe-commit; rebased onto master
-  `fb12ee7db`; proof tests re-green after rebase; merged --ff-only to
-  local master. Merged locally, pending ship. No push, no bump, no
-  live verification (ship loop owns those).
-- Rotation advanced 2→3 (next run: leg 3 scale). Worktree released,
-  branch deleted, lock deleted. Main tree clean.
+  tests, this note) via safe-commit as `93ccf6ad1`; safe-commit index
+  clobber struck (6 files staged-deleted in the worktree index after a
+  correct commit) — repaired via ls-tree -r + update-index --index-info,
+  verified status/diff clean. Rebasing took ~31 min: a 07:13Z machine
+  restart killed the first attempt mid-flight, a stale index.lock from
+  the killed attempt blocked the retry until removed, and the rebase
+  then ground through a full index re-hash (the `git read-tree HEAD`
+  resync after the private-index commit clears stat info). Rebased onto
+  master `6dc7304ae` as `5248fad6e`; proof tests re-green on the rebased
+  tip; gate triaged green (see above). This note was corrected (gate +
+  closeout paragraphs) before the merge. The merge, rotation advance,
+  tree release, and lock deletion are recorded in the run's memory-log
+  entry for 2026-11-28 and the final report, not here.
+- Merged locally, pending ship. No push, no bump, no live verification
+  (ship loop owns those).
