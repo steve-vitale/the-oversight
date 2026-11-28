@@ -65,7 +65,7 @@ What actually fired on the band: direct proposes were rare (4 calls, 4 accepted,
 | the wild | 31 | 45 |
 | monster | 22 | 24 |
 | a stranger | 3 | 9 |
-| the arena | 8→5 | 8 |
+| the arena | 5 | 8 |
 | sickness | 4 | 6 |
 | starvation | 4 | 6 |
 | a wound that wouldn't close | 5 | 5 |
@@ -73,7 +73,7 @@ What actually fired on the band: direct proposes were rare (4 calls, 4 accepted,
 | contest | 2 | 2 |
 | thirst | 1 | 3 |
 | dehydration | 0 | 2 |
-| other named (Gavel, Ugly-Eyes, Ad Break, The Strike, The Callback, the night, Old Big, Loud-Eyes, Buffering, The Paparazzo) | 8 | 7 |
+| other named (Gavel, Ugly-Eyes, Ad Break, The Strike, The Callback, the night, Old Big, Loud-Eyes, Buffering, The Paparazzo) | 6 | 7 |
 
 Deaths per 100 game-days rose: panel 9.54 → 11.20 (see §8). The armed leg's extra deaths are field deaths — the wild, monsters, strangers — not starvation. The villages live longer in the dangerous late game and die in it.
 
