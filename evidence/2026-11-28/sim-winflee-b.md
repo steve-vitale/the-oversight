@@ -328,6 +328,26 @@ winning. That last one is worth roughly one fight in nine.
 
 ## §10. What happens next
 
+## Post-rebase note (2026-11-28 ~07:10 UTC, after judging)
+
+Loop A landed on master while this arm ran (adoption
+`bcf06e019`: fleefloor NO-GO + capstoneready legs 1+2 DIAG-GO
+merged, plus journey-succession r291–r295). The branch was
+rebased onto `bcf06e019` — clean, no conflicts. New hashes:
+instruments `f4c64033b`, prereg `80ef3f45b`, results
+`0e0a6272e` (was `35997bd6f` / `0b5814014` / `f7969a34f`).
+The only `src/js/` change in the landing is
+`src/js/convoTopics.js` (mourning above the naming debate) —
+no touch to field fights, flee logic, damage, policies, the
+harness, or any instrument dependency — so the judged sims,
+run at anchor `0b5814014`, still describe current master for
+this question. Proofs re-run green on the new base
+(`test-winflee-b.js` 24/24, field selftest 27, TB selftest 8),
+and the FIELD analysis reproduces byte-identically (vFlee 9,
+winnable 1, share 0.111). Corpus `anchorCommit` fields still
+read `0b58140142dd` (the pre-rebase prereg hash) — that is the
+anchor the sims actually ran at, not a stale pointer.
+
 STAGED per the prereg: this DIAG judges the flee call only. No
 build lands from this arm. The follow-up is a flee-rule guard
 build in a later run — a guard that holds a party in when the
