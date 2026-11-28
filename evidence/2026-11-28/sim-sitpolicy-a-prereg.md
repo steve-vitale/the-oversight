@@ -289,12 +289,17 @@ NOT made by this arm. No default flips.
    the game** (scalecensus §5.5) — the before leg is the
    control for exactly that confound.
 
-## §6. Metric review (filled at closeout)
+## §6. Metric review (filled at closeout, 2026-11-28 ~10:30 UTC)
 
-- [to be filled: whether the frozen bars measured what
-  they claimed, any metric that proved wrong, and the
-  revision proposed for the NEXT run. A miss is NO-GO,
-  never re-scored.]
+- Verdict NO-GO SEATED: seated 3/8 < 4/8. The bars measured what
+  they claimed. Full review in evidence/2026-11-28/sim-sitpolicy-a.md
+  §8: the delivered bar (≥2/8) was too easy (feast delivers 8/8 once
+  the day-1 bundle is bought); the seated bar conflates reaching the
+  lesser rung with sitting once there (policy 3/3 on sitting, band 3/8
+  on reaching). Next run should split the bar (lesser-reached ≥6/8 AND
+  seated-given-lesser ≥3/4) and set the delivery bar per-kind. The
+  3/8 wins are a headline secondary, not a rescue — the miss stands,
+  never re-scored.
 
 ## §7. Correction — expectations §5.5/§5.6 (2026-11-28 ~09:45 UTC, BEFORE any judged sim; bars and rules unchanged)
 
