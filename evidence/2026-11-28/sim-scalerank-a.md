@@ -390,6 +390,19 @@ cause.
   113201–113208 in its own worktree — different band, no
   shared files, no shared corpus; this arm's trees, files,
   and corpus were not touched, and B's were not touched.
+  **CORRECTION (post-rebase, 2026-11-28 ~04:50 UTC):** the
+  sibling actually runs the SAME band, 113301–113308 — its
+  prereg (c0a0bde46) froze 04:06:26 UTC, twenty minutes
+  AFTER this arm's prereg (03:46:43 UTC), independently
+  choosing the same next block. At this arm's freeze the
+  band was fresh by every check available (no evidence .md
+  named it; the sibling's prereg lived only on its
+  unmerged branch). Parallel runs, different instruments
+  (capstone readiness vs scale-rank inputs), no shared
+  files, no shared corpus, and this arm never read the
+  sibling's corpus — the frozen bars are unaffected, but
+  the two bands are the same block, not different blocks
+  as the prereg §4 assumed.
 - **Telemetry deviation check:** NOT run by this worker —
   coordinator step (loop body §10). The corpus glob for
   it is `evidence/2026-11-28/perseed-scalerank-a-arm/*.json`
