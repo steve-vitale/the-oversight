@@ -78,14 +78,14 @@ function metricsFor(r) {
   return m;
 }
 
-function buildPanel(rows) {
+function buildPanel(rows, seeds) {
   return {
     schemaVersion: 1,
     observerDigest: 'winflee-b-instrument-v1',
     contractDigest: contractDigest,
     sources: {},
     options: {
-      days: DAYS, policies: POLICIES, seeds: SEEDS, region: null,
+      days: DAYS, policies: POLICIES, seeds: seeds, region: null,
       origin: 'sim-winflee-b',
       flags: {},
       nodeVersion: process.version,
@@ -99,7 +99,7 @@ function buildPanel(rows) {
     }),
     validity: {
       sourcesStable: true,
-      neutrality: POLICIES.map(function (p) { return { policy: p, seed: SEEDS[0], match: true, warnings: 0 }; }),
+      neutrality: POLICIES.map(function (p) { return { policy: p, seed: seeds[0], match: true, warnings: 0 }; }),
     },
   };
 }
@@ -112,8 +112,8 @@ function main() {
   const afterRows = load(AFTER_DIR, 'winflee-b-fresh', AFTER_PREFIX, AFTER_SEEDS);
   const beforePath = OUT_PREFIX + '-before.json.gz';
   const afterPath = OUT_PREFIX + '-after.json.gz';
-  fs.writeFileSync(beforePath, zlib.gzipSync(JSON.stringify(buildPanel(beforeRows)) + '\n'));
-  fs.writeFileSync(afterPath, zlib.gzipSync(JSON.stringify(buildPanel(afterRows)) + '\n'));
+  fs.writeFileSync(beforePath, zlib.gzipSync(JSON.stringify(buildPanel(beforeRows, SEEDS)) + '\n'));
+  fs.writeFileSync(afterPath, zlib.gzipSync(JSON.stringify(buildPanel(afterRows, AFTER_SEEDS)) + '\n'));
   console.log('wrote ' + beforePath + ' + ' + afterPath);
   console.log('compare with: node scripts/balance-panel.js compare --before ' + beforePath + ' --after ' + afterPath + ' --out ' + OUT_PREFIX);
 }
