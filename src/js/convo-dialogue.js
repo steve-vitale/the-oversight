@@ -171,6 +171,30 @@
         const status = this.convoFavorAction(vid, favor);
         c.transcript.push({ who: 'you', text: c.offeredReplies?.[choiceId] || 'Check the request' });
         let result = dlg === 'favor_action' ? this.convoPerformFavor(vid, favor) : { ok: false, line: status.reason };
+        // R287 BEARER-END REQUIREMENTS (journey-deepening r287 2026-11-27):
+        // the requirements line is computed WITHOUT the ending flag, so for
+        // a bearer-ended run it says "That outing belonged to the previous
+        // bearer. It is not your promise." in the same menu where
+        // dlg:favor_cancel is offered to end exactly that outing (seed
+        // 109603: Salih d80 asked why, got "not your promise", left, and
+        // the run stranded 44 dawns). When the ending branch is ready AND
+        // the favor is bearer-ended urgent (the r286 gate, mirrored
+        // exactly), answer with the ending's reason instead — the ending
+        // IS available, via the cancel. The urgency check keeps healthy
+        // runs untouched: a healthy run at Haven with no haul yet also
+        // has its ending ready, but its "nothing to bring home yet" line
+        // stays. Display-only: convoFavorAction itself stays non-ending
+        // (its ready=true would offer dlg:favor_action, whose performer
+        // runs without the ending flag and would fail).
+        if (dlg === 'favor_requirements' && favor && !status.ready) {
+          try {
+            const urgent = typeof this.convoFavorEndUrgent === 'function' && this.convoFavorEndUrgent(vid);
+            let endStatus = null;
+            if (urgent && favor.kind === 'forage_help' && favor.forageRun && !favor.forageRun.returned && typeof this.forageFavorAction === 'function') endStatus = this.forageFavorAction(vid, favor, true);
+            else if (urgent && favor.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned && typeof this.waterFavorAction === 'function') endStatus = this.waterFavorAction(vid, favor, true);
+            if (endStatus && endStatus.ready) result = { ok: false, line: endStatus.reason };
+          } catch (e) { console.warn('favor_requirements bearer-end read failed', e && e.message); }
+        }
         const promise = this.state.village.promises?.[vid];
         if (dlg === 'favor_cancel' && favor?.kind === 'water_haul' && favor.waterRun && !favor.waterRun.returned) {
           result = this.performWaterFavor(vid, favor, true);
