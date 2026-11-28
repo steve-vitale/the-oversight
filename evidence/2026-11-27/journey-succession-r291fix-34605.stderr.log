@@ -1,0 +1,45 @@
+  WIT-SIT [pre] d8: Mwirigi sits for witnessed Devon (sitSeq=1, freshPersonN=1, latelyDead=Devon, latelyKind=mourning, witnessed=true, witnessServed=none) refused=false
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Otto","t":90},{"id":"Sandra","t":90},{"id":"Dale","t":90},{"id":"Carlos","t":90}], roster=11
+INH readable=true scripted=true deadItems=11 distinct=11 transferred=2 vanished=1 keptPlants=18 inheritedPlants=5 keptSkills=5 inheritedSkills=14 succTrustPre=89 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["night_eyes","lucky_rock"] post=["night_eyes","lucky_rock"]
+DEATH d41 (the expedition, scripted): Larry -> Teresa | passed=true lin=true mo=true trust=62 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=7 vanished=1 of 11 distinct dead-bearer items
+  CONVO d+3 with Dale (refused=false)
+  CONVO d+3 with Otto (refused=false)
+  STRANGER-PROBE d+3 with Owen (trust=85 refused=false)
+  BOND-CONVO d+3 with Sandra (depth=2 v=64 refused=false)
+  CONVO d+7 with Sandra (refused=false)
+  CONVO d+7 with Otto (refused=false)
+  CONVO d+14 with Sandra (refused=false)
+  CONVO d+14 with Otto (refused=false)
+  CONVO d+30 with Sandra (refused=false)
+  CONVO d+30 with Matheus (refused=false)
+  NEWCOMER-PROBE d+37 with Thabo (arrived d+37, trust=30 refused=false)
+  CONVO d+45 with Mwirigi (refused=false)
+  CONVO d+45 with Ivy (refused=false)
+  CONVO d+53 with Ivy (refused=false)
+  CONVO d+53 with Thabo (refused=false)
+  CONVO d+64 with Mwirigi (refused=false)
+  CONVO d+64 with Yuki (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=7) echo=3 organicBurial={"respects":false,"bury":false} halfRation=6
+
+MEAL-GATE: audited=70 violations=3 noMealDays=10 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+  VIOLATION d+41: Sandra trust=87 kcal=1342 halfVoice=true
+  VIOLATION d+61: Ivy trust=91 kcal=1671 halfVoice=true
+  VIOLATION d+61: Ivy trust=91 kcal=1671 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":60,"offerLines":37,"codexPlantsDelta":33,"codexSkillsDelta":15,"codexAbilitiesDelta":11,"xpDelta":38,"any":true} pantry 9348->2200
+TRUST-DIALS: office 62->91 (+29, climb) | villageMean 75.8->85.3 (+9.5, climb) | ge60 7->5 | movers>=5: [{"id":"Matheus","from":57,"to":90,"delta":33},{"id":"Mwirigi","from":61,"to":94,"delta":33},{"id":"Yuki","from":71,"to":94,"delta":23}]
+DEED-LEDGER: calls=15 summary={"giveFood":{"calls":15,"ok":15,"deltaSum":38,"deltaN":15,"positive":10,"meanDelta":2.53}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=111 alive=7 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=false dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=15) trustVerdict={"readable":true,"officeMantle":62,"officeLast":91,"officeDelta":29,"officeClass":"climb","villageMantle":75.8,"villageLast":85.3,"villageDelta":9.5,"villageClass":"climb","villageGe60Mantle":7,"villageGe60Last":5,"movers":[{"id":"Matheus","from":57,"to":90,"delta":33},{"id":"Mwirigi","from":61,"to":94,"delta":33},{"id":"Yuki","from":71,"to":94,"delta":23}]}
+E6/CALLCHECK: e6={"callMoves":5,"withCensus":5,"chainHandoffs":3,"trustMoves":2} callCheck={"dailyMoveDays":5,"callMoveDays":5,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=4 (v2=4, excludedLoot=0))
+E7/R47: e7={"trustMoves":2,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":4,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":5}

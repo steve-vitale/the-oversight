@@ -1,0 +1,38 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Hazel","t":91},{"id":"Moshe","t":91},{"id":"Ursula","t":91},{"id":"Wanjiru","t":91}], roster=10
+INH readable=true scripted=true deadItems=13 distinct=13 transferred=4 vanished=1 keptPlants=19 inheritedPlants=3 keptSkills=4 inheritedSkills=11 succTrustPre=91 succTrustPost=62
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","bird_whisperer","green_whisper","echo_location"] post=["beast_calm","bird_whisperer","green_whisper","echo_location"]
+DEATH d41 (the expedition, scripted): Mateo -> Moshe | passed=true lin=true mo=true trust=62 vouchers=5
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=10 vanished=1 of 13 distinct dead-bearer items
+  CONVO d+3 with Yosina (refused=false)
+  CONVO d+3 with Wanjiru (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Yosina (refused=false)
+  CONVO d+7 with Wanjiru (refused=false)
+  CONVO d+14 with Hazel (refused=false)
+  CONVO d+14 with Ursula (refused=false)
+  NEWCOMER-PROBE d+15 with Vasyl (arrived d+15, trust=22 refused=false)
+  CONVO d+30 with Hazel (refused=false)
+  CONVO d+30 with Ursula (refused=false)
+  CONVO d+45 with Ursula (refused=false)
+  CONVO d+45 with Luis (refused=false)
+  CONVO d+53 with Luis (refused=false)
+  CONVO d+53 with Leon (refused=false)
+
+FUNERAL: deathBeat=6 recover=1 vouch=1 (eligible=5) echo=0 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=55 violations=0 noMealDays=19 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=55 signals={"levelUp":true,"systemVoice":50,"offerLines":45,"codexPlantsDelta":27,"codexSkillsDelta":33,"codexAbilitiesDelta":12,"xpDelta":23,"any":true} pantry 40401->0
+TRUST-DIALS: office 62->90 (+28, climb) | villageMean 77->88.3 (+11.3, climb) | ge60 5->7 | movers>=5: [{"id":"Dale","from":49,"to":94,"delta":45},{"id":"Luis","from":59,"to":95,"delta":36},{"id":"Boris","from":72,"to":83,"delta":11},{"id":"Hazel","from":91,"to":97,"delta":6}]
+DEED-LEDGER: calls=5 summary={"teachPlant":{"calls":2,"ok":2,"deltaSum":0,"deltaN":2,"positive":0,"meanDelta":0},"giveFood":{"calls":3,"ok":3,"deltaSum":16,"deltaN":3,"positive":3,"meanDelta":5.33}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=96 alive=9 over=true
+anomalies: 0
+S-METRICS: s1=false s2=true s3=true s4=false s5=true dayAdv=55
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30) t2=true(deedCalls=5) trustVerdict={"readable":true,"officeMantle":62,"officeLast":90,"officeDelta":28,"officeClass":"climb","villageMantle":77,"villageLast":88.3,"villageDelta":11.3,"villageClass":"climb","villageGe60Mantle":5,"villageGe60Last":7,"movers":[{"id":"Dale","from":49,"to":94,"delta":45},{"id":"Luis","from":59,"to":95,"delta":36},{"id":"Boris","from":72,"to":83,"delta":11},{"id":"Hazel","from":91,"to":97,"delta":6}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":5,"trustMoves":1} callCheck={"dailyMoveDays":6,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=2, excludedLoot=1))
+E7/R47: e7={"trustMoves":1,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":0,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":1,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":2,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":5,"known":5,"unknown":0} e3={"dailyDays":56,"moves":6}

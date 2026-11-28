@@ -1,0 +1,40 @@
+
+PRE-DEATH d40: bearer <redacted>, topTrust=[{"id":"Pablo","t":92},{"id":"Marcus","t":91},{"id":"Chloe","t":90},{"id":"Terry","t":90}], roster=9
+INH readable=true scripted=true deadItems=20 distinct=18 transferred=3 vanished=3 keptPlants=23 inheritedPlants=1 keptSkills=3 inheritedSkills=11 succTrustPre=92 succTrustPost=58
+PARITY readable=true equal=true inherited=[] pre=["beast_calm"] post=["beast_calm"]
+DEATH d40 (the expedition, scripted): Simone -> Pablo | passed=true lin=true mo=true trust=58 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=3 vanished=3 of 18 distinct dead-bearer items
+  CONVO d+3 with Marcus (refused=false)
+  CONVO d+3 with Chloe (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Marcus (refused=false)
+  CONVO d+7 with Chloe (refused=false)
+  CONVO d+14 with Marcus (refused=false)
+  CONVO d+14 with Chloe (refused=false)
+  CONVO d+30 with Marcus (refused=false)
+  CONVO d+30 with Chloe (refused=false)
+  CONVO d+45 with Chloe (refused=false)
+  CONVO d+45 with Ines (refused=false)
+  NEWCOMER-PROBE d+46 with Tamara (arrived d+46, trust=40 refused=false)
+  CONVO d+53 with Ines (refused=false)
+  CONVO d+53 with Terry (refused=false)
+  CONVO d+64 with Ines (refused=false)
+  CONVO d+64 with Chloe (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=7) echo=5 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=0 noMealDays=10 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":42,"offerLines":46,"codexPlantsDelta":29,"codexSkillsDelta":21,"codexAbilitiesDelta":12,"xpDelta":106,"any":true} pantry 55957->10920
+TRUST-DIALS: office 58->87 (+29, climb) | villageMean 84.1->93.6 (+9.5, climb) | ge60 7->5 | movers>=5: [{"id":"Caleb","from":72,"to":91,"delta":19},{"id":"Ines","from":90,"to":98,"delta":8},{"id":"Chloe","from":90,"to":96,"delta":6}]
+DEED-LEDGER: calls=59 summary={"teachPlant":{"calls":40,"ok":40,"deltaSum":0,"deltaN":40,"positive":0,"meanDelta":0},"giveFood":{"calls":18,"ok":18,"deltaSum":62,"deltaN":18,"positive":18,"meanDelta":3.44},"donateToPantry":{"calls":1,"ok":1,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=111 alive=6 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+71) t2=true(deedCalls=59) trustVerdict={"readable":true,"officeMantle":58,"officeLast":87,"officeDelta":29,"officeClass":"climb","villageMantle":84.1,"villageLast":93.6,"villageDelta":9.5,"villageClass":"climb","villageGe60Mantle":7,"villageGe60Last":5,"movers":[{"id":"Caleb","from":72,"to":91,"delta":19},{"id":"Ines","from":90,"to":98,"delta":8},{"id":"Chloe","from":90,"to":96,"delta":6}]}
+E6/CALLCHECK: e6={"callMoves":4,"withCensus":4,"chainHandoffs":2,"trustMoves":2} callCheck={"dailyMoveDays":4,"callMoveDays":4,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=6, excludedLoot=0))
+E7/R47: e7={"trustMoves":2,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":0,"both":2,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":6,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":4}

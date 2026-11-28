@@ -1,0 +1,42 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Rahul","t":94},{"id":"Ernesto","t":93},{"id":"Deirdre","t":90},{"id":"Gladys","t":90}], roster=12
+INH readable=true scripted=true deadItems=9 distinct=8 transferred=2 vanished=4 keptPlants=22 inheritedPlants=1 keptSkills=4 inheritedSkills=10 succTrustPre=94 succTrustPost=68
+PARITY readable=true equal=true inherited=[] pre=["night_eyes","lucky_rock","bloodhound","trophy_room"] post=["night_eyes","lucky_rock","bloodhound","trophy_room"]
+DEATH d41 (the expedition, scripted): Willow -> Rahul | passed=true lin=true mo=true trust=68 vouchers=9
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=2 vanished=4 of 8 distinct dead-bearer items
+  CONVO d+3 with Ernesto (refused=false)
+  CONVO d+3 with Deirdre (refused=false)
+  STRANGER-PROBE d+3 with Nikos (trust=33 refused=false)
+  BOND-CONVO d+3 with Brian (depth=1 v=38 refused=false)
+  CONVO d+7 with Ernesto (refused=false)
+  CONVO d+7 with Deirdre (refused=false)
+  CONVO d+14 with Ernesto (refused=false)
+  CONVO d+14 with Deirdre (refused=false)
+  BOND-CONVO d+14 with Vasyl (depth=1 v=26 refused=false)
+  CONVO d+30 with Oliver (refused=false)
+  CONVO d+30 with Brian (refused=false)
+  CONVO d+45 with Vasyl (refused=false)
+  CONVO d+45 with Catarina (refused=false)
+  NEWCOMER-PROBE d+46 with Indira (arrived d+46, trust=32 refused=false)
+  CONVO d+53 with Jesse (refused=false)
+  CONVO d+53 with Vasyl (refused=false)
+  CONVO d+64 with Greta (refused=false)
+  CONVO d+64 with Catarina (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=9) echo=6 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=70 violations=0 noMealDays=8 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":46,"offerLines":26,"codexPlantsDelta":32,"codexSkillsDelta":18,"codexAbilitiesDelta":10,"xpDelta":-22,"any":true} pantry 15950->26075
+TRUST-DIALS: office 68->86 (+18, climb) | villageMean 80.8->83.6 (+2.8, flat) | ge60 9->8 | movers>=5: [{"id":"Vasyl","from":70,"to":91,"delta":21}]
+DEED-LEDGER: calls=32 summary={"giveFood":{"calls":30,"ok":30,"deltaSum":84,"deltaN":30,"positive":29,"meanDelta":2.8},"teachPlant":{"calls":2,"ok":2,"deltaSum":0,"deltaN":2,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=6 (convo=6, say=0)) m4=true m5=manual | endDay=110 alive=9 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+31,d+69) t2=true(deedCalls=32) trustVerdict={"readable":true,"officeMantle":68,"officeLast":86,"officeDelta":18,"officeClass":"climb","villageMantle":80.8,"villageLast":83.6,"villageDelta":2.8,"villageClass":"flat","villageGe60Mantle":9,"villageGe60Last":8,"movers":[{"id":"Vasyl","from":70,"to":91,"delta":21}]}
+E6/CALLCHECK: e6={"callMoves":9,"withCensus":9,"chainHandoffs":3,"trustMoves":6} callCheck={"dailyMoveDays":9,"callMoveDays":8,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=7 (v2=7, excludedLoot=0))
+E7/R47: e7={"trustMoves":6,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":0,"singleMoverOther":1,"eventClass":{"event-only":1,"deed-only":0,"both":4,"neither":1},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":6,"v2":7,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":3,"known":3,"unknown":0} e3={"dailyDays":71,"moves":9}

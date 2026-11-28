@@ -1,0 +1,41 @@
+
+ORGANIC DEATH d36: Elias -> Minh, topTrust=[{"id":"Dzigbordi","t":100},{"id":"Nathan","t":90},{"id":"Aidan","t":90},{"id":"Jesse","t":90}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=13 inheritedPlants=0 keptSkills=6 inheritedSkills=0 succTrustPre=90 succTrustPost=64
+PARITY readable=true equal=true inherited=[] pre=["iron_stomach","fusion_reactor","lucky_rock","cold_blooded","feast_engine"] post=["iron_stomach","fusion_reactor","lucky_rock","cold_blooded","feast_engine"]
+DEATH d36 (organic (phase A)): Elias -> Minh | passed=true lin=true mo=true trust=64 vouchers=7
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Dzigbordi (refused=false)
+  CONVO d+3 with Nathan (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Aidan (depth=1 v=40 refused=false)
+  CONVO d+7 with Dzigbordi (refused=false)
+  CONVO d+7 with Nathan (refused=false)
+  CONVO d+14 with Dzigbordi (refused=false)
+  CONVO d+14 with Nathan (refused=false)
+  BOND-CONVO d+14 with Aidan (depth=1 v=40 refused=false)
+  CONVO d+30 with Dzigbordi (refused=false)
+  CONVO d+30 with Nathan (refused=false)
+  WIT-SIT [post] d+36: Dzigbordi died witnessed (Minh) but no living witness to sit — recorded, not driven
+  CONVO d+45 with Nathan (refused=false)
+  CONVO d+45 with Dale (refused=false)
+  CONVO d+53 with Nathan (refused=false)
+  CONVO d+53 with Dale (refused=false)
+  CONVO d+64 with Dale (refused=false)
+  CONVO d+64 with Nathan (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=7) echo=3 organicBurial={"respects":false,"bury":false} halfRation=4
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":54,"offerLines":16,"codexPlantsDelta":26,"codexSkillsDelta":20,"codexAbilitiesDelta":7,"xpDelta":5,"any":true} pantry 9300->9565
+TRUST-DIALS: office 64->94 (+30, climb) | villageMean 73.1->77.9 (+4.8, climb) | ge60 7->6 | movers>=5: [{"id":"Sigrun","from":53,"to":90,"delta":37},{"id":"Apua","from":34,"to":61,"delta":27},{"id":"Petra","from":73,"to":90,"delta":17},{"id":"Ruth","from":80,"to":91,"delta":11},{"id":"Dale","from":87,"to":92,"delta":5}]
+DEED-LEDGER: calls=32 summary={"giveFood":{"calls":13,"ok":13,"deltaSum":32,"deltaN":13,"positive":8,"meanDelta":2.46},"donateToPantry":{"calls":11,"ok":11,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"teachPlant":{"calls":8,"ok":8,"deltaSum":0,"deltaN":8,"positive":0,"meanDelta":0}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=3 (convo=3, say=0)) m4=true m5=manual | endDay=107 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+8,d+14,d+30,d+71) t2=true(deedCalls=32) trustVerdict={"readable":true,"officeMantle":64,"officeLast":94,"officeDelta":30,"officeClass":"climb","villageMantle":73.1,"villageLast":77.9,"villageDelta":4.8,"villageClass":"climb","villageGe60Mantle":7,"villageGe60Last":6,"movers":[{"id":"Sigrun","from":53,"to":90,"delta":37},{"id":"Apua","from":34,"to":61,"delta":27},{"id":"Petra","from":73,"to":90,"delta":17},{"id":"Ruth","from":80,"to":91,"delta":11},{"id":"Dale","from":87,"to":92,"delta":5}]}
+E6/CALLCHECK: e6={"callMoves":10,"withCensus":10,"chainHandoffs":2,"trustMoves":8} callCheck={"dailyMoveDays":10,"callMoveDays":9,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=5 (v2=5, excludedLoot=0))
+E7/R47: e7={"trustMoves":8,"soloOffice":7,"soloOfficeDeltas":[1,1,1,2,1,1,1],"soloBearerDeltaExact":[1,1,1,2,1,1,1],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":0,"deed-only":2,"both":6,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":3,"v2":5,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":10}

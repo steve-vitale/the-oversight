@@ -1,0 +1,40 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Aaron","t":90},{"id":"Zoltan","t":90},{"id":"Ruby","t":86},{"id":"James","t":77}], roster=10
+INH readable=true scripted=true deadItems=15 distinct=15 transferred=2 vanished=3 keptPlants=19 inheritedPlants=3 keptSkills=5 inheritedSkills=8 succTrustPre=86 succTrustPost=61
+PARITY readable=true equal=true inherited=[] pre=["green_whisper","green_thumb","beard_moss","cornucopia"] post=["green_whisper","green_thumb","beard_moss","cornucopia"]
+DEATH d41 (the expedition, scripted): Alfredo -> Ruby | passed=true lin=true mo=true trust=61 vouchers=4
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=11 vanished=3 of 15 distinct dead-bearer items
+  CONVO d+3 with Aaron (refused=false)
+  CONVO d+3 with Zoltan (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Aaron (refused=false)
+  CONVO d+7 with Zoltan (refused=false)
+  CONVO d+14 with James (refused=false)
+  CONVO d+14 with Zoltan (refused=false)
+  BOND-CONVO d+14 with Lautaro (depth=2 v=62 refused=false)
+  CONVO d+30 with James (refused=false)
+  CONVO d+30 with Zoltan (refused=false)
+  CONVO d+45 with James (refused=false)
+  CONVO d+45 with Zoltan (refused=false)
+  CONVO d+53 with James (refused=false)
+  CONVO d+53 with Zoltan (refused=false)
+  CONVO d+64 with James (refused=false)
+  CONVO d+64 with Zoltan (refused=false)
+
+FUNERAL: deathBeat=5 recover=1 vouch=1 (eligible=4) echo=7 organicBurial={"respects":false,"bury":false} halfRation=1
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":56,"offerLines":16,"codexPlantsDelta":17,"codexSkillsDelta":16,"codexAbilitiesDelta":6,"xpDelta":-6,"any":true} pantry 14773->51371
+TRUST-DIALS: office 61->91 (+30, climb) | villageMean 64.5->89.7 (+25.2, climb) | ge60 4->7 | movers>=5: [{"id":"Lautaro","from":37,"to":90,"delta":53},{"id":"Ivy","from":51,"to":91,"delta":40},{"id":"Oliver","from":50,"to":90,"delta":40},{"id":"Lucas","from":47,"to":77,"delta":30},{"id":"Quinn","from":71,"to":90,"delta":19},{"id":"James","from":79,"to":95,"delta":16},{"id":"Zoltan","from":90,"to":95,"delta":5}]
+DEED-LEDGER: calls=13 summary={"giveFood":{"calls":2,"ok":2,"deltaSum":6,"deltaN":2,"positive":2,"meanDelta":3},"donateToPantry":{"calls":11,"ok":11,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=7 (convo=7, say=0)) m4=true m5=manual | endDay=111 alive=8 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+70) t2=true(deedCalls=13) trustVerdict={"readable":true,"officeMantle":61,"officeLast":91,"officeDelta":30,"officeClass":"climb","villageMantle":64.5,"villageLast":89.7,"villageDelta":25.2,"villageClass":"climb","villageGe60Mantle":4,"villageGe60Last":7,"movers":[{"id":"Lautaro","from":37,"to":90,"delta":53},{"id":"Ivy","from":51,"to":91,"delta":40},{"id":"Oliver","from":50,"to":90,"delta":40},{"id":"Lucas","from":47,"to":77,"delta":30},{"id":"Quinn","from":71,"to":90,"delta":19},{"id":"James","from":79,"to":95,"delta":16},{"id":"Zoltan","from":90,"to":95,"delta":5}]}
+E6/CALLCHECK: e6={"callMoves":8,"withCensus":8,"chainHandoffs":1,"trustMoves":7} callCheck={"dailyMoveDays":8,"callMoveDays":8,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=8 (v2=9, excludedLoot=1))
+E7/R47: e7={"trustMoves":7,"soloOffice":4,"soloOfficeDeltas":[1,2,2,2],"soloBearerDeltaExact":[1,2,2,2],"singleMoverBearer":0,"singleMoverOther":2,"eventClass":{"event-only":0,"deed-only":1,"both":6,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":7,"v2":9,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":1,"known":1,"unknown":0} e3={"dailyDays":71,"moves":8}

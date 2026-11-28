@@ -1,0 +1,43 @@
+  WIT-SIT [pre] d8: Elif sits for witnessed A (sitSeq=1, freshPersonN=1, latelyDead=none, latelyKind=naming, witnessed=false, witnessServed=none) refused=false
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Piper","t":90},{"id":"Dongmei","t":90},{"id":"Michelle","t":89},{"id":"Ishrat","t":70}], roster=9
+INH readable=true scripted=true deadItems=21 distinct=20 transferred=1 vanished=4 keptPlants=15 inheritedPlants=4 keptSkills=8 inheritedSkills=11 succTrustPre=89 succTrustPost=52
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","war_cry","bird_whisperer","green_whisper","bloodhound"] post=["beast_calm","war_cry","bird_whisperer","green_whisper","bloodhound"]
+DEATH d41 (the expedition, scripted): Darnell -> Michelle | passed=true lin=true mo=true trust=52 vouchers=3
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=15 vanished=4 of 20 distinct dead-bearer items
+  CONVO d+3 with Piper (refused=false)
+  CONVO d+3 with Dongmei (refused=false)
+  STRANGER-PROBE d+3 with Mateo (trust=20 refused=false)
+  BOND-CONVO d+3 with Ishrat (depth=1 v=40 refused=false)
+  CONVO d+7 with Piper (refused=false)
+  CONVO d+7 with Ishrat (refused=false)
+  CONVO d+14 with Dongmei (refused=false)
+  CONVO d+14 with Piper (refused=false)
+  BOND-CONVO d+14 with Ishrat (depth=1 v=40 refused=false)
+  NEWCOMER-PROBE d+16 with Nathan (arrived d+16, trust=27 refused=false)
+  CONVO d+30 with Ishrat (refused=false)
+  CONVO d+30 with Ursula (refused=false)
+  CONVO d+45 with Ishrat (refused=false)
+  CONVO d+45 with Ursula (refused=false)
+  CONVO d+53 with Ishrat (refused=false)
+  CONVO d+53 with Ursula (refused=false)
+  CONVO d+64 with Ishrat (refused=false)
+  CONVO d+64 with Ursula (refused=false)
+
+FUNERAL: deathBeat=8 recover=1 vouch=1 (eligible=3) echo=2 organicBurial={"respects":false,"bury":false} halfRation=10
+
+MEAL-GATE: audited=70 violations=0 noMealDays=0 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=71 signals={"levelUp":true,"systemVoice":63,"offerLines":67,"codexPlantsDelta":40,"codexSkillsDelta":20,"codexAbilitiesDelta":7,"xpDelta":182,"any":true} pantry 19343->14085
+TRUST-DIALS: office 52->89 (+37, climb) | villageMean 54.3->65.5 (+11.2, climb) | ge60 3->4 | movers>=5: [{"id":"Ursula","from":26,"to":83,"delta":57},{"id":"Ishrat","from":71,"to":88,"delta":17},{"id":"Chloe","from":44,"to":53,"delta":9}]
+DEED-LEDGER: calls=14 summary={"teachPlant":{"calls":2,"ok":2,"deltaSum":0,"deltaN":2,"positive":0,"meanDelta":0},"donateToPantry":{"calls":4,"ok":4,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":8,"ok":8,"deltaSum":28,"deltaN":8,"positive":8,"meanDelta":3.5}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=2 (convo=2, say=0)) m4=true m5=manual | endDay=112 alive=7 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=71
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+71) t2=true(deedCalls=14) trustVerdict={"readable":true,"officeMantle":52,"officeLast":89,"officeDelta":37,"officeClass":"climb","villageMantle":54.3,"villageLast":65.5,"villageDelta":11.2,"villageClass":"climb","villageGe60Mantle":3,"villageGe60Last":4,"movers":[{"id":"Ursula","from":26,"to":83,"delta":57},{"id":"Ishrat","from":71,"to":88,"delta":17},{"id":"Chloe","from":44,"to":53,"delta":9}]}
+E6/CALLCHECK: e6={"callMoves":6,"withCensus":6,"chainHandoffs":2,"trustMoves":4} callCheck={"dailyMoveDays":6,"callMoveDays":6,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=3 (v2=4, excludedLoot=1))
+E7/R47: e7={"trustMoves":4,"soloOffice":0,"soloOfficeDeltas":[],"soloBearerDeltaExact":[],"singleMoverBearer":1,"singleMoverOther":0,"eventClass":{"event-only":1,"deed-only":0,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":2,"v2":4,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":2,"known":2,"unknown":0} e3={"dailyDays":71,"moves":6}

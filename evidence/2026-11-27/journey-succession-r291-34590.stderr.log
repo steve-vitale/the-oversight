@@ -1,0 +1,44 @@
+
+PRE-DEATH d41: bearer <redacted>, topTrust=[{"id":"Jaxon","t":90},{"id":"Samar","t":90},{"id":"Catalina","t":90},{"id":"Carlos","t":87}], roster=7
+INH readable=true scripted=true deadItems=30 distinct=29 transferred=2 vanished=3 keptPlants=15 inheritedPlants=2 keptSkills=7 inheritedSkills=7 succTrustPre=90 succTrustPost=60
+PARITY readable=true equal=true inherited=[] pre=["night_eyes","echo_location","rage","dowsing","green_whisper"] post=["night_eyes","echo_location","rage","dowsing","green_whisper"]
+DEATH d41 (the expedition, scripted): Nathan -> Catalina | passed=true lin=true mo=true trust=60 vouchers=3
+  BURIAL d+3: corpse found=true respects=true bury=true
+  INH d+3: transferred=2 vanished=3 of 29 distinct dead-bearer items
+  CONVO d+3 with Carlos (refused=false)
+  CONVO d+3 with Jaxon (refused=false)
+  NEWCOMER-PROBE d+3 with Emmett (arrived d+3, trust=23 refused=false)
+  STRANGER-PROBE d+3 with Aria (trust=22 refused=false)
+  BOND-CONVO d+3 with Samar (depth=1 v=29 refused=false)
+  CONVO d+7 with Carlos (refused=false)
+  CONVO d+7 with Jaxon (refused=false)
+  CONVO d+14 with Carlos (refused=false)
+  CONVO d+14 with Jaxon (refused=false)
+  BOND-CONVO d+14 with Samar (depth=1 v=29 refused=false)
+  CONVO d+30 with Samar (refused=false)
+  CONVO d+30 with Emmett (refused=false)
+  CONVO d+45 with Samar (refused=false)
+  CONVO d+45 with Ivy (refused=false)
+  CONVO d+53 with Kwadwo (refused=false)
+  CONVO d+53 with Elif (refused=false)
+  CONVO d+64 with Kwadwo (refused=false)
+  CONVO d+64 with Elif (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=3) echo=7 organicBurial={"respects":false,"bury":false} halfRation=10
+
+MEAL-GATE: audited=70 violations=1 noMealDays=7 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+  VIOLATION d+55: Ivy trust=82 kcal=0 halfVoice=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":45,"offerLines":23,"codexPlantsDelta":37,"codexSkillsDelta":22,"codexAbilitiesDelta":11,"xpDelta":-105,"any":true} pantry 80735->0
+TRUST-DIALS: office 60->70 (+10, climb) | villageMean 68.8->18 (-50.8, fall) | ge60 3->0 | movers>=5: [{"id":"Aria","from":11,"to":18,"delta":7}]
+DEED-LEDGER: calls=65 summary={"donateToPantry":{"calls":34,"ok":34,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":31,"ok":31,"deltaSum":58,"deltaN":31,"positive":31,"meanDelta":1.87}}
+
+IDENTITY TRIPS: raw=1 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=7 (convo=7, say=0)) m4=true m5=manual | endDay=111 alive=2 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=false dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+70) t2=true(deedCalls=65) trustVerdict={"readable":true,"officeMantle":60,"officeLast":70,"officeDelta":10,"officeClass":"climb","villageMantle":68.8,"villageLast":18,"villageDelta":-50.8,"villageClass":"fall","villageGe60Mantle":3,"villageGe60Last":0,"movers":[{"id":"Aria","from":11,"to":18,"delta":7}]}
+E6/CALLCHECK: e6={"callMoves":18,"withCensus":18,"chainHandoffs":6,"trustMoves":12} callCheck={"dailyMoveDays":18,"callMoveDays":17,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=8 (v2=8, excludedLoot=0))
+E7/R47: e7={"trustMoves":12,"soloOffice":5,"soloOfficeDeltas":[1,2,1,1,2],"soloBearerDeltaExact":[1,2,1,1,2],"singleMoverBearer":0,"singleMoverOther":4,"eventClass":{"event-only":1,"deed-only":4,"both":7,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":7,"v2":8,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":71,"moves":18}
+PILOT-34590-EXIT:0

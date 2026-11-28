@@ -1,0 +1,40 @@
+
+ORGANIC DEATH d35: Paola -> Eamon, topTrust=[{"id":"Sara","t":74},{"id":"Maya","t":49},{"id":"Sari","t":48},{"id":"Eamon","t":47}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=17 inheritedPlants=0 keptSkills=8 inheritedSkills=0 succTrustPre=90 succTrustPost=47
+PARITY readable=true equal=true inherited=[] pre=["beast_calm","echo_location","dowsing"] post=["beast_calm","echo_location","dowsing"]
+DEATH d35 (organic (phase A)): Paola -> Eamon | passed=true lin=true mo=true trust=47 vouchers=1
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Sara (refused=false)
+  CONVO d+3 with Maya (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  BOND-CONVO d+3 with Nikos (depth=0 v=14 refused=false)
+  CONVO d+7 with Sara (refused=false)
+  CONVO d+7 with Maya (refused=false)
+  NEWCOMER-PROBE d+7 with Elif (arrived d+7, trust=23 refused=false)
+  CONVO d+14 with Maya (refused=false)
+  CONVO d+14 with Sari (refused=false)
+  CONVO d+30 with Sari (refused=false)
+  CONVO d+30 with Elif (refused=false)
+  CONVO d+45 with Sari (refused=false)
+  CONVO d+45 with Elif (refused=false)
+  CONVO d+53 with Elif (refused=false)
+  CONVO d+53 with Sari (refused=false)
+  CONVO d+64 with Adaeze (refused=false)
+  CONVO d+64 with Yuki (refused=false)
+
+FUNERAL: deathBeat=4 recover=1 vouch=1 (eligible=1) echo=0 organicBurial={"respects":false,"bury":false} halfRation=11
+
+MEAL-GATE: audited=70 violations=0 noMealDays=5 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=69 signals={"levelUp":true,"systemVoice":53,"offerLines":53,"codexPlantsDelta":34,"codexSkillsDelta":24,"codexAbilitiesDelta":12,"xpDelta":-26,"any":true} pantry 17600->25902
+TRUST-DIALS: office 47->69 (+22, climb) | villageMean 46->58.7 (+12.7, climb) | ge60 1->1 | movers>=5: [{"id":"Nikos","from":30,"to":91,"delta":61}]
+DEED-LEDGER: calls=21 summary={"giveFood":{"calls":17,"ok":17,"deltaSum":33,"deltaN":17,"positive":17,"meanDelta":1.94},"teachPlant":{"calls":3,"ok":3,"deltaSum":0,"deltaN":3,"positive":0,"meanDelta":0},"donateToPantry":{"calls":1,"ok":1,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=false(echoMentions=0 (convo=0, say=0)) m4=true m5=manual | endDay=104 alive=4 over=false
+anomalies: 0
+S-METRICS: s1=true s2=true s3=true s4=true s5=true dayAdv=69
+T-METRICS: t1=true(panels=d+0,d+7,d+14,d+30,d+69) t2=true(deedCalls=21) trustVerdict={"readable":true,"officeMantle":47,"officeLast":69,"officeDelta":22,"officeClass":"climb","villageMantle":46,"villageLast":58.7,"villageDelta":12.7,"villageClass":"climb","villageGe60Mantle":1,"villageGe60Last":1,"movers":[{"id":"Nikos","from":30,"to":91,"delta":61}]}
+E6/CALLCHECK: e6={"callMoves":11,"withCensus":11,"chainHandoffs":6,"trustMoves":5} callCheck={"dailyMoveDays":11,"callMoveDays":11,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=false(echoV2b=1 (v2=1, excludedLoot=0))
+E7/R47: e7={"trustMoves":5,"soloOffice":1,"soloOfficeDeltas":[1],"soloBearerDeltaExact":[1],"singleMoverBearer":1,"singleMoverOther":1,"eventClass":{"event-only":0,"deed-only":2,"both":3,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":0,"v2":1,"v2Say":1,"v2Delta":1,"arcExcluded":3,"teleWeek2":4,"collision":[]} e2={"chainN":6,"known":6,"unknown":0} e3={"dailyDays":71,"moves":11}

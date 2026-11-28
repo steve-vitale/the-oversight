@@ -1,0 +1,39 @@
+
+ORGANIC DEATH d18: Jorge -> Oliver, topTrust=[{"id":"Adjeley","t":70},{"id":"Robin","t":65},{"id":"Katarina","t":61},{"id":"Oliver","t":58}]
+INH readable=true scripted=false deadItems=0 distinct=0 transferred=0 vanished=0 keptPlants=12 inheritedPlants=0 keptSkills=7 inheritedSkills=0 succTrustPre=90 succTrustPost=58
+PARITY readable=true equal=false inherited=["green_thumb"] pre=["green_whisper","beard_moss","rage"] post=["green_whisper","beard_moss","rage","green_thumb"]
+DEATH d18 (organic (phase A)): Jorge -> Oliver | passed=true lin=true mo=true trust=58 vouchers=3
+  BURIAL d+3: corpse found=true respects=true bury=true
+  CONVO d+3 with Robin (refused=false)
+  CONVO d+3 with Adjeley (refused=false)
+  STRANGER-PROBE d+3: no unbonded living villager
+  CONVO d+7 with Robin (refused=false)
+  CONVO d+7 with Adjeley (refused=false)
+  CONVO d+14 with Robin (refused=false)
+  CONVO d+14 with Claire (refused=false)
+  CONVO d+30 with Gagandeep (refused=false)
+  CONVO d+30 with Sanne (refused=false)
+  NEWCOMER-PROBE d+40 with Emma (arrived d+40, trust=38 refused=false)
+  CONVO d+45 with Robin (refused=false)
+  CONVO d+45 with Maya (refused=false)
+  CONVO d+53 with Gagandeep (refused=false)
+  CONVO d+53 with Nathan (refused=false)
+  CONVO d+64 with Gagandeep (refused=false)
+  CONVO d+64 with Mia (refused=false)
+
+FUNERAL: deathBeat=7 recover=1 vouch=1 (eligible=3) echo=5 organicBurial={"respects":false,"bury":false} halfRation=7
+
+MEAL-GATE: audited=70 violations=0 noMealDays=7 newBodyGatedDays=0 (voiced=0)
+MEAL-GATE-V2 (meal line only): violations=0 mg2v2=true
+SUCCESSOR-LIFE: dayAdv=70 signals={"levelUp":true,"systemVoice":102,"offerLines":56,"codexPlantsDelta":34,"codexSkillsDelta":16,"codexAbilitiesDelta":13,"xpDelta":-3,"any":true} pantry 17700->8400
+TRUST-DIALS: office 58->79 (+21, climb) | villageMean 50->62.7 (+12.7, climb) | ge60 3->2 | movers>=5: [{"id":"Mia","from":26,"to":73,"delta":47},{"id":"Gagandeep","from":50,"to":91,"delta":41}]
+DEED-LEDGER: calls=10 summary={"teachPlant":{"calls":1,"ok":1,"deltaSum":0,"deltaN":1,"positive":0,"meanDelta":0},"donateToPantry":{"calls":5,"ok":5,"deltaSum":0,"deltaN":0,"positive":0,"meanDelta":null},"giveFood":{"calls":4,"ok":4,"deltaSum":12,"deltaN":4,"positive":4,"meanDelta":3}}
+
+IDENTITY TRIPS: raw=0 grief-excluded=0
+METRICS: m1=true m2a=true m2b=true m3=true(echoMentions=5 (convo=5, say=0)) m4=true m5=manual | endDay=88 alive=4 over=false
+anomalies: 0
+S-METRICS: s1=true s2=false s3=true s4=true s5=true dayAdv=70
+T-METRICS: t1=true(panels=d+0,d+7,d+15,d+30,d+70) t2=true(deedCalls=10) trustVerdict={"readable":true,"officeMantle":58,"officeLast":79,"officeDelta":21,"officeClass":"climb","villageMantle":50,"villageLast":62.7,"villageDelta":12.7,"villageClass":"climb","villageGe60Mantle":3,"villageGe60Last":2,"movers":[{"id":"Mia","from":26,"to":73,"delta":47},{"id":"Gagandeep","from":50,"to":91,"delta":41}]}
+E6/CALLCHECK: e6={"callMoves":15,"withCensus":15,"chainHandoffs":5,"trustMoves":10} callCheck={"dailyMoveDays":15,"callMoveDays":13,"convoWindowDays":0,"convoCoveredDays":[],"missingDays":[],"ok":true} m3v2b=true(echoV2b=6 (v2=7, excludedLoot=1))
+E7/R47: e7={"trustMoves":10,"soloOffice":2,"soloOfficeDeltas":[1,1],"soloBearerDeltaExact":[1,1],"singleMoverBearer":2,"singleMoverOther":1,"eventClass":{"event-only":1,"deed-only":0,"both":9,"neither":0},"bearerDeltaExactMissing":0}
+E-METRICS: e1={"old":5,"v2":7,"v2Say":2,"v2Delta":2,"arcExcluded":3,"teleWeek2":5,"collision":[]} e2={"chainN":5,"known":5,"unknown":0} e3={"dailyDays":71,"moves":15}
