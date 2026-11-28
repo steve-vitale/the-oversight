@@ -61,8 +61,17 @@ in code and is read/called, never re-implemented:
   delivery and the seat). Charter/feast deliveries record
   the deed with no payment.
 - The new policy (`scripts/policies/competent-capstonedeliver-a.js`)
-  is competent verbatim PLUS one verb, in `daily()` after
-  `competent.daily()`: if `ladderCapstoneDelivered()` is
+  is competent verbatim PLUS one verb, in `daily()` at the START
+  — BEFORE `competent.daily()` runs the day's trips (dawn, at
+  Haven — the honest mirror of the Haven-panel action, which a
+  player can only take from Haven; the delivery function itself
+  carries no location guard, so the policy places the call where
+  the player would make it). The placement matters for the
+  prediction: leg 1's readiness was snapshotted at the top of
+  each day, so the verb must be attempted on the same dawn read
+  — attempted after the day's fights, a veteran could die first
+  and the delivery would refuse for a purely artefactual reason.
+  The verb attempt: if `ladderCapstoneDelivered()` is
   null AND the tribute snapshot reads deliverable
   (ready AND payable ≥ 2 — the same `deliverableOf` rule
   leg 1's driver uses, re-read live through
