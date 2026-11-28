@@ -1,0 +1,1055 @@
+{
+ "verdict": {
+  "verdict": "DIAG-GO",
+  "go": true,
+  "pool": {
+   "aliveDay80": 8,
+   "of": 8,
+   "floor": 6,
+   "pass": true
+  },
+  "coverage": {
+   "complete": 1169,
+   "total": 1169,
+   "ratio": 1,
+   "pass": true
+  },
+  "reconciliation": {
+   "mismatches": 0,
+   "pass": true
+  },
+  "instrument": {
+   "errors": 0,
+   "pass": true
+  },
+  "delivery": {
+   "pass": true,
+   "predicted": {
+    "113302": 83,
+    "113305": 140
+   },
+   "hits": [
+    113302,
+    113305
+   ],
+   "misses": [],
+   "extraAttempts": [],
+   "halfPayments": []
+  },
+  "sniff": {
+   "tableWaitingAny": true,
+   "regionalAny": true,
+   "readinessLive": true,
+   "readinessKinds": {
+    "military_tribute": true,
+    "trade_charter": true,
+    "feast_embassy": true
+   },
+   "deliveryAny": true,
+   "pass": true
+  }
+ },
+ "wall": {
+  "seeds": 8,
+  "wins": 0,
+  "national": 0,
+  "regional": 8,
+  "table": 8,
+  "seated": 0,
+  "entered": 0,
+  "medianSurvival": 150,
+  "medianFirstNationalDay": null,
+  "anyReadySeeds": 4,
+  "anyDeliverableSeeds": 2,
+  "deliveredSeeds": 2,
+  "deliveryAttempts": 2,
+  "deliveryOkSeeds": [
+   113302,
+   113305
+  ],
+  "deliveryOkDays": [
+   {
+    "seed": 113302,
+    "day": 83
+   },
+   {
+    "seed": 113305,
+    "day": 140
+   }
+  ],
+  "paymentVerifiedSeeds": [
+   113302,
+   113305
+  ],
+  "perKind": {
+   "military_tribute": {
+    "seedsEverReady": 4,
+    "seedsEverDeliverable": 2,
+    "totalReadyDays": 30,
+    "totalDeliverableDays": 2,
+    "totalReadyButNotDeliverableDays": 28,
+    "firstReadyDays": [
+     94,
+     83,
+     103,
+     117
+    ],
+    "firstDeliverableDays": [
+     83,
+     140
+    ]
+   },
+   "trade_charter": {
+    "seedsEverReady": 0,
+    "seedsEverDeliverable": 0,
+    "totalReadyDays": 0,
+    "totalDeliverableDays": 0,
+    "totalReadyButNotDeliverableDays": 0,
+    "firstReadyDays": [],
+    "firstDeliverableDays": []
+   },
+   "feast_embassy": {
+    "seedsEverReady": 0,
+    "seedsEverDeliverable": 0,
+    "totalReadyDays": 0,
+    "totalDeliverableDays": 0,
+    "totalReadyButNotDeliverableDays": 0,
+    "firstReadyDays": [],
+    "firstDeliverableDays": []
+   }
+  },
+  "deathCauseShares": null
+ },
+ "perSeed": [
+  {
+   "seed": 113301,
+   "days": 150,
+   "gameDays": 151,
+   "endReason": "survived",
+   "won": false,
+   "maxRank": "regional",
+   "finalRank": "regional",
+   "table": true,
+   "entered": false,
+   "arcMax": 4,
+   "aliveDay80": true,
+   "finalSeat": "lesser",
+   "finalGateOk": false,
+   "finalLadderPeak": 3,
+   "finalDelivered": null,
+   "deliveryAttempts": [],
+   "deliveryOkDays": [],
+   "paymentVerified": null,
+   "anyReady": true,
+   "anyDeliverable": false,
+   "perKind": {
+    "military_tribute": {
+     "firstReadyDay": 94,
+     "readyDays": 13,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 13,
+     "dominantBlocker": {
+      "reason": "veterans-short",
+      "days": 138,
+      "counts": {
+       "veterans-short": 138,
+       "ready": 13
+      }
+     },
+     "endReady": false,
+     "endReason": "veterans-short",
+     "endEntry": {
+      "kind": "military_tribute",
+      "ready": false,
+      "reason": "veterans-short",
+      "veterans": 0,
+      "payable": 0,
+      "need": 2,
+      "deliverable": false
+     }
+    },
+    "trade_charter": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-sealed-charter",
+      "days": 151,
+      "counts": {
+       "no-sealed-charter": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "no-sealed-charter",
+     "endEntry": {
+      "kind": "trade_charter",
+      "ready": false,
+      "reason": "no-sealed-charter",
+      "charteredLinks": 0,
+      "scale": "regional",
+      "deliverable": false
+     }
+    },
+    "feast_embassy": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-bundle-feast",
+      "days": 151,
+      "counts": {
+       "no-bundle-feast": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "no-bundle-feast",
+     "endEntry": {
+      "kind": "feast_embassy",
+      "ready": false,
+      "reason": "no-bundle-feast",
+      "stage": 3,
+      "needStage": 3,
+      "bundle": false,
+      "deliverable": false
+     }
+    }
+   },
+   "firstRegionalDay": 38,
+   "firstNationalDay": null,
+   "firstWaitingDay": 38,
+   "firstEnteredDay": null,
+   "waitingDays": 114,
+   "overtimeEnd": 2,
+   "popEnd": 9,
+   "gateErrors": 0,
+   "readinessErrors": 0,
+   "firesideCount": 21,
+   "tableLinesCount": 58,
+   "reconciliation": []
+  },
+  {
+   "seed": 113302,
+   "days": 150,
+   "gameDays": 151,
+   "endReason": "survived",
+   "won": false,
+   "maxRank": "regional",
+   "finalRank": "regional",
+   "table": true,
+   "entered": false,
+   "arcMax": 4,
+   "aliveDay80": true,
+   "finalSeat": "lesser",
+   "finalGateOk": false,
+   "finalLadderPeak": 3,
+   "finalDelivered": "military_tribute",
+   "deliveryAttempts": [
+    {
+     "day": 83,
+     "kind": "military_tribute",
+     "ok": true,
+     "reason": "delivered",
+     "veterans": [
+      "gen_qlqi10k",
+      "gen_i4hji4s"
+     ],
+     "names": [
+      "Avery",
+      "DeAndre"
+     ]
+    }
+   ],
+   "deliveryOkDays": [
+    83
+   ],
+   "paymentVerified": true,
+   "anyReady": true,
+   "anyDeliverable": true,
+   "perKind": {
+    "military_tribute": {
+     "firstReadyDay": 83,
+     "readyDays": 1,
+     "firstDeliverableDay": 83,
+     "deliverableDays": 1,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "veterans-short",
+      "days": 82,
+      "counts": {
+       "veterans-short": 82,
+       "ready": 1,
+       "delivered": 68
+      }
+     },
+     "endReady": false,
+     "endReason": "delivered",
+     "endEntry": {
+      "kind": "military_tribute",
+      "ready": false,
+      "reason": "delivered",
+      "delivered": "military_tribute",
+      "veterans": null,
+      "payable": null,
+      "need": null,
+      "deliverable": false
+     }
+    },
+    "trade_charter": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-sealed-charter",
+      "days": 83,
+      "counts": {
+       "no-sealed-charter": 83,
+       "delivered": 68
+      }
+     },
+     "endReady": false,
+     "endReason": "delivered",
+     "endEntry": {
+      "kind": "trade_charter",
+      "ready": false,
+      "reason": "delivered",
+      "delivered": "military_tribute",
+      "charteredLinks": null,
+      "scale": null,
+      "deliverable": false
+     }
+    },
+    "feast_embassy": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-bundle-feast",
+      "days": 83,
+      "counts": {
+       "no-bundle-feast": 83,
+       "delivered": 68
+      }
+     },
+     "endReady": false,
+     "endReason": "delivered",
+     "endEntry": {
+      "kind": "feast_embassy",
+      "ready": false,
+      "reason": "delivered",
+      "delivered": "military_tribute",
+      "stage": null,
+      "needStage": null,
+      "bundle": null,
+      "deliverable": false
+     }
+    }
+   },
+   "firstRegionalDay": 55,
+   "firstNationalDay": null,
+   "firstWaitingDay": 55,
+   "firstEnteredDay": null,
+   "waitingDays": 97,
+   "overtimeEnd": 2,
+   "popEnd": 9,
+   "gateErrors": 0,
+   "readinessErrors": 0,
+   "firesideCount": 17,
+   "tableLinesCount": 62,
+   "reconciliation": []
+  },
+  {
+   "seed": 113303,
+   "days": 150,
+   "gameDays": 151,
+   "endReason": "survived",
+   "won": false,
+   "maxRank": "regional",
+   "finalRank": "regional",
+   "table": true,
+   "entered": false,
+   "arcMax": 4,
+   "aliveDay80": true,
+   "finalSeat": "lesser",
+   "finalGateOk": false,
+   "finalLadderPeak": 3,
+   "finalDelivered": null,
+   "deliveryAttempts": [],
+   "deliveryOkDays": [],
+   "paymentVerified": null,
+   "anyReady": false,
+   "anyDeliverable": false,
+   "perKind": {
+    "military_tribute": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "veterans-short",
+      "days": 151,
+      "counts": {
+       "veterans-short": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "veterans-short",
+     "endEntry": {
+      "kind": "military_tribute",
+      "ready": false,
+      "reason": "veterans-short",
+      "veterans": 0,
+      "payable": 0,
+      "need": 2,
+      "deliverable": false
+     }
+    },
+    "trade_charter": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-sealed-charter",
+      "days": 151,
+      "counts": {
+       "no-sealed-charter": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "no-sealed-charter",
+     "endEntry": {
+      "kind": "trade_charter",
+      "ready": false,
+      "reason": "no-sealed-charter",
+      "charteredLinks": 0,
+      "scale": "regional",
+      "deliverable": false
+     }
+    },
+    "feast_embassy": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-bundle-feast",
+      "days": 151,
+      "counts": {
+       "no-bundle-feast": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "no-bundle-feast",
+     "endEntry": {
+      "kind": "feast_embassy",
+      "ready": false,
+      "reason": "no-bundle-feast",
+      "stage": 3,
+      "needStage": 3,
+      "bundle": false,
+      "deliverable": false
+     }
+    }
+   },
+   "firstRegionalDay": 48,
+   "firstNationalDay": null,
+   "firstWaitingDay": 48,
+   "firstEnteredDay": null,
+   "waitingDays": 104,
+   "overtimeEnd": 2,
+   "popEnd": 5,
+   "gateErrors": 0,
+   "readinessErrors": 0,
+   "firesideCount": 14,
+   "tableLinesCount": 54,
+   "reconciliation": []
+  },
+  {
+   "seed": 113304,
+   "days": 150,
+   "gameDays": 150,
+   "endReason": "survived",
+   "won": false,
+   "maxRank": "regional",
+   "finalRank": "regional",
+   "table": true,
+   "entered": false,
+   "arcMax": 4,
+   "aliveDay80": true,
+   "finalSeat": "lesser",
+   "finalGateOk": false,
+   "finalLadderPeak": 3,
+   "finalDelivered": null,
+   "deliveryAttempts": [],
+   "deliveryOkDays": [],
+   "paymentVerified": null,
+   "anyReady": true,
+   "anyDeliverable": false,
+   "perKind": {
+    "military_tribute": {
+     "firstReadyDay": 103,
+     "readyDays": 9,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 9,
+     "dominantBlocker": {
+      "reason": "veterans-short",
+      "days": 142,
+      "counts": {
+       "veterans-short": 142,
+       "ready": 9
+      }
+     },
+     "endReady": false,
+     "endReason": "veterans-short",
+     "endEntry": {
+      "kind": "military_tribute",
+      "ready": false,
+      "reason": "veterans-short",
+      "veterans": 0,
+      "payable": 0,
+      "need": 2,
+      "deliverable": false
+     }
+    },
+    "trade_charter": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-sealed-charter",
+      "days": 151,
+      "counts": {
+       "no-sealed-charter": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "no-sealed-charter",
+     "endEntry": {
+      "kind": "trade_charter",
+      "ready": false,
+      "reason": "no-sealed-charter",
+      "charteredLinks": 0,
+      "scale": "regional",
+      "deliverable": false
+     }
+    },
+    "feast_embassy": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-bundle-feast",
+      "days": 151,
+      "counts": {
+       "no-bundle-feast": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "no-bundle-feast",
+     "endEntry": {
+      "kind": "feast_embassy",
+      "ready": false,
+      "reason": "no-bundle-feast",
+      "stage": 3,
+      "needStage": 3,
+      "bundle": false,
+      "deliverable": false
+     }
+    }
+   },
+   "firstRegionalDay": 42,
+   "firstNationalDay": null,
+   "firstWaitingDay": 42,
+   "firstEnteredDay": null,
+   "waitingDays": 110,
+   "overtimeEnd": 2,
+   "popEnd": 5,
+   "gateErrors": 0,
+   "readinessErrors": 0,
+   "firesideCount": 15,
+   "tableLinesCount": 71,
+   "reconciliation": []
+  },
+  {
+   "seed": 113305,
+   "days": 150,
+   "gameDays": 150,
+   "endReason": "survived",
+   "won": false,
+   "maxRank": "regional",
+   "finalRank": "regional",
+   "table": true,
+   "entered": false,
+   "arcMax": 4,
+   "aliveDay80": true,
+   "finalSeat": "lesser",
+   "finalGateOk": false,
+   "finalLadderPeak": 3,
+   "finalDelivered": "military_tribute",
+   "deliveryAttempts": [
+    {
+     "day": 140,
+     "kind": "military_tribute",
+     "ok": true,
+     "reason": "delivered",
+     "veterans": [
+      "mara_vasquez",
+      "xavier_dubois"
+     ],
+     "names": [
+      "Mara",
+      "Xavier"
+     ]
+    }
+   ],
+   "deliveryOkDays": [
+    140
+   ],
+   "paymentVerified": true,
+   "anyReady": true,
+   "anyDeliverable": true,
+   "perKind": {
+    "military_tribute": {
+     "firstReadyDay": 117,
+     "readyDays": 7,
+     "firstDeliverableDay": 140,
+     "deliverableDays": 1,
+     "readyButNotDeliverableDays": 6,
+     "dominantBlocker": {
+      "reason": "veterans-short",
+      "days": 134,
+      "counts": {
+       "veterans-short": 134,
+       "ready": 7,
+       "delivered": 10
+      }
+     },
+     "endReady": false,
+     "endReason": "delivered",
+     "endEntry": {
+      "kind": "military_tribute",
+      "ready": false,
+      "reason": "delivered",
+      "delivered": "military_tribute",
+      "veterans": null,
+      "payable": null,
+      "need": null,
+      "deliverable": false
+     }
+    },
+    "trade_charter": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-sealed-charter",
+      "days": 141,
+      "counts": {
+       "no-sealed-charter": 141,
+       "delivered": 10
+      }
+     },
+     "endReady": false,
+     "endReason": "delivered",
+     "endEntry": {
+      "kind": "trade_charter",
+      "ready": false,
+      "reason": "delivered",
+      "delivered": "military_tribute",
+      "charteredLinks": null,
+      "scale": null,
+      "deliverable": false
+     }
+    },
+    "feast_embassy": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-bundle-feast",
+      "days": 141,
+      "counts": {
+       "no-bundle-feast": 141,
+       "delivered": 10
+      }
+     },
+     "endReady": false,
+     "endReason": "delivered",
+     "endEntry": {
+      "kind": "feast_embassy",
+      "ready": false,
+      "reason": "delivered",
+      "delivered": "military_tribute",
+      "stage": null,
+      "needStage": null,
+      "bundle": null,
+      "deliverable": false
+     }
+    }
+   },
+   "firstRegionalDay": 72,
+   "firstNationalDay": null,
+   "firstWaitingDay": 72,
+   "firstEnteredDay": null,
+   "waitingDays": 80,
+   "overtimeEnd": 2,
+   "popEnd": 7,
+   "gateErrors": 0,
+   "readinessErrors": 0,
+   "firesideCount": 14,
+   "tableLinesCount": 26,
+   "reconciliation": []
+  },
+  {
+   "seed": 113306,
+   "days": 111,
+   "gameDays": 111,
+   "endReason": "village-lost",
+   "won": false,
+   "maxRank": "regional",
+   "finalRank": "regional",
+   "table": true,
+   "entered": false,
+   "arcMax": 4,
+   "aliveDay80": true,
+   "finalSeat": "lesser",
+   "finalGateOk": false,
+   "finalLadderPeak": 3,
+   "finalDelivered": null,
+   "deliveryAttempts": [],
+   "deliveryOkDays": [],
+   "paymentVerified": null,
+   "anyReady": false,
+   "anyDeliverable": false,
+   "perKind": {
+    "military_tribute": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "veterans-short",
+      "days": 112,
+      "counts": {
+       "veterans-short": 112
+      }
+     },
+     "endReady": false,
+     "endReason": "veterans-short",
+     "endEntry": {
+      "kind": "military_tribute",
+      "ready": false,
+      "reason": "veterans-short",
+      "veterans": 1,
+      "payable": 0,
+      "need": 2,
+      "deliverable": false
+     }
+    },
+    "trade_charter": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-sealed-charter",
+      "days": 112,
+      "counts": {
+       "no-sealed-charter": 112
+      }
+     },
+     "endReady": false,
+     "endReason": "no-sealed-charter",
+     "endEntry": {
+      "kind": "trade_charter",
+      "ready": false,
+      "reason": "no-sealed-charter",
+      "charteredLinks": 0,
+      "scale": "regional",
+      "deliverable": false
+     }
+    },
+    "feast_embassy": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-bundle-feast",
+      "days": 112,
+      "counts": {
+       "no-bundle-feast": 112
+      }
+     },
+     "endReady": false,
+     "endReason": "no-bundle-feast",
+     "endEntry": {
+      "kind": "feast_embassy",
+      "ready": false,
+      "reason": "no-bundle-feast",
+      "stage": 3,
+      "needStage": 3,
+      "bundle": false,
+      "deliverable": false
+     }
+    }
+   },
+   "firstRegionalDay": 52,
+   "firstNationalDay": null,
+   "firstWaitingDay": 52,
+   "firstEnteredDay": null,
+   "waitingDays": 61,
+   "overtimeEnd": 1,
+   "popEnd": 6,
+   "gateErrors": 0,
+   "readinessErrors": 0,
+   "firesideCount": 14,
+   "tableLinesCount": 29,
+   "reconciliation": []
+  },
+  {
+   "seed": 113307,
+   "days": 150,
+   "gameDays": 151,
+   "endReason": "survived",
+   "won": false,
+   "maxRank": "regional",
+   "finalRank": "regional",
+   "table": true,
+   "entered": false,
+   "arcMax": 4,
+   "aliveDay80": true,
+   "finalSeat": "lesser",
+   "finalGateOk": false,
+   "finalLadderPeak": 3,
+   "finalDelivered": null,
+   "deliveryAttempts": [],
+   "deliveryOkDays": [],
+   "paymentVerified": null,
+   "anyReady": false,
+   "anyDeliverable": false,
+   "perKind": {
+    "military_tribute": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "veterans-short",
+      "days": 151,
+      "counts": {
+       "veterans-short": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "veterans-short",
+     "endEntry": {
+      "kind": "military_tribute",
+      "ready": false,
+      "reason": "veterans-short",
+      "veterans": 0,
+      "payable": 0,
+      "need": 2,
+      "deliverable": false
+     }
+    },
+    "trade_charter": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-sealed-charter",
+      "days": 151,
+      "counts": {
+       "no-sealed-charter": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "no-sealed-charter",
+     "endEntry": {
+      "kind": "trade_charter",
+      "ready": false,
+      "reason": "no-sealed-charter",
+      "charteredLinks": 0,
+      "scale": "regional",
+      "deliverable": false
+     }
+    },
+    "feast_embassy": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-bundle-feast",
+      "days": 151,
+      "counts": {
+       "no-bundle-feast": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "no-bundle-feast",
+     "endEntry": {
+      "kind": "feast_embassy",
+      "ready": false,
+      "reason": "no-bundle-feast",
+      "stage": 3,
+      "needStage": 3,
+      "bundle": false,
+      "deliverable": false
+     }
+    }
+   },
+   "firstRegionalDay": 42,
+   "firstNationalDay": null,
+   "firstWaitingDay": 42,
+   "firstEnteredDay": null,
+   "waitingDays": 110,
+   "overtimeEnd": 3,
+   "popEnd": 2,
+   "gateErrors": 0,
+   "readinessErrors": 0,
+   "firesideCount": 19,
+   "tableLinesCount": 82,
+   "reconciliation": []
+  },
+  {
+   "seed": 113308,
+   "days": 150,
+   "gameDays": 151,
+   "endReason": "survived",
+   "won": false,
+   "maxRank": "regional",
+   "finalRank": "regional",
+   "table": true,
+   "entered": false,
+   "arcMax": 4,
+   "aliveDay80": true,
+   "finalSeat": "lesser",
+   "finalGateOk": false,
+   "finalLadderPeak": 3,
+   "finalDelivered": null,
+   "deliveryAttempts": [],
+   "deliveryOkDays": [],
+   "paymentVerified": null,
+   "anyReady": false,
+   "anyDeliverable": false,
+   "perKind": {
+    "military_tribute": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "veterans-short",
+      "days": 151,
+      "counts": {
+       "veterans-short": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "veterans-short",
+     "endEntry": {
+      "kind": "military_tribute",
+      "ready": false,
+      "reason": "veterans-short",
+      "veterans": 1,
+      "payable": 0,
+      "need": 2,
+      "deliverable": false
+     }
+    },
+    "trade_charter": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-sealed-charter",
+      "days": 151,
+      "counts": {
+       "no-sealed-charter": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "no-sealed-charter",
+     "endEntry": {
+      "kind": "trade_charter",
+      "ready": false,
+      "reason": "no-sealed-charter",
+      "charteredLinks": 0,
+      "scale": "regional",
+      "deliverable": false
+     }
+    },
+    "feast_embassy": {
+     "firstReadyDay": null,
+     "readyDays": 0,
+     "firstDeliverableDay": null,
+     "deliverableDays": 0,
+     "readyButNotDeliverableDays": 0,
+     "dominantBlocker": {
+      "reason": "no-bundle-feast",
+      "days": 151,
+      "counts": {
+       "no-bundle-feast": 151
+      }
+     },
+     "endReady": false,
+     "endReason": "no-bundle-feast",
+     "endEntry": {
+      "kind": "feast_embassy",
+      "ready": false,
+      "reason": "no-bundle-feast",
+      "stage": 3,
+      "needStage": 3,
+      "bundle": false,
+      "deliverable": false
+     }
+    }
+   },
+   "firstRegionalDay": 41,
+   "firstNationalDay": null,
+   "firstWaitingDay": 46,
+   "firstEnteredDay": null,
+   "waitingDays": 106,
+   "overtimeEnd": 2,
+   "popEnd": 8,
+   "gateErrors": 0,
+   "readinessErrors": 0,
+   "firesideCount": 16,
+   "tableLinesCount": 11,
+   "reconciliation": []
+  }
+ ]
+}
