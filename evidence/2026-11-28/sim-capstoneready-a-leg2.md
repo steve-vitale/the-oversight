@@ -23,11 +23,12 @@ death-aware.
 (8 per-seed JSONs + summary.json).
 **Analysis JSON:** `evidence/2026-11-28/capstoneready2-analysis.json`
 (analyzer --json: verdict + wall + per-seed rows).
-**Commits on branch:** c0a0bde46 (leg-1 prereg); 0348efa90 (leg-1
-instruments); 0da5575d6 (leg-1 evidence + corpus, DIAG-GO);
-3e726d8ec + e1a1fa5cb (leg-2 prereg amendment + dawn-placement
-correction); this run (leg-2 instruments + evidence + corpus —
-see §9).
+**Commits on branch (post-rebase onto 2b25d4be0):** d5b750054
+(leg-1 prereg); b8c1279d8 (leg-1 instruments); 199f515fb (leg-1
+evidence + corpus, DIAG-GO); 8689c9dfe + 0fe2c8e08 (leg-2 prereg
+amendment + dawn-placement correction); 03cc694c2 (leg-2
+instruments + evidence + corpus — this run; pre-rebase hash
+a11086480).
 
 ## Verdict: DIAG-GO
 
@@ -445,8 +446,9 @@ hidden_files/telemetry-baselines/scale-wall.json --current
 
 Closeout (this run): leg-2 instruments committed with the
 evidence + corpus; rebased onto the current master tip
-before landing (proof re-green after the rebase); merged
-to local master via --ff-only; worktree left clean
-(committed work only). No push, no version bump, no live
-verification — the ship loop owns those. "Merged locally,
-pending ship."
+2b25d4be0 before landing (proof re-green 32/32 after the
+rebase; evidence header hashes updated to post-rebase values
+in a follow-up commit); merged to local master via --ff-only;
+worktree left clean (committed work only). No push, no version
+bump, no live verification — the ship loop owns those. "Merged
+locally, pending ship."
