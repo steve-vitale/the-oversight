@@ -23,12 +23,13 @@ death-aware.
 (8 per-seed JSONs + summary.json).
 **Analysis JSON:** `evidence/2026-11-28/capstoneready2-analysis.json`
 (analyzer --json: verdict + wall + per-seed rows).
-**Commits on branch (post-rebase onto 2b25d4be0):** d5b750054
-(leg-1 prereg); b8c1279d8 (leg-1 instruments); 199f515fb (leg-1
-evidence + corpus, DIAG-GO); 8689c9dfe + 0fe2c8e08 (leg-2 prereg
-amendment + dawn-placement correction); 03cc694c2 (leg-2
-instruments + evidence + corpus — this run; pre-rebase hash
-a11086480).
+**Commits on branch (post-rebase onto local master fb4b4dcc8,
+which carries the sibling sim-fleefloor-a merge):** c6bdc2cf1
+(leg-1 prereg); a348e53ff (leg-1 instruments); 18e52d302 (leg-1
+evidence + corpus, DIAG-GO); f5cb80fff + 64e1cffac (leg-2 prereg
+amendment + dawn-placement correction); 4a9f291c9 (leg-2
+instruments + evidence + corpus — this run; pre-rebase hashes
+a11086480, then 03cc694c2).
 
 ## Verdict: DIAG-GO
 
@@ -445,9 +446,11 @@ hidden_files/telemetry-baselines/scale-wall.json --current
   wall — no regression.
 
 Closeout (this run): leg-2 instruments committed with the
-evidence + corpus; rebased onto the current master tip
-2b25d4be0 before landing (proof re-green 32/32 after the
-rebase; evidence header hashes updated to post-rebase values
+evidence + corpus; rebased twice before landing — first onto
+origin/master 2b25d4be0 (proof re-green 32/32), then onto
+local master fb4b4dcc8, which had moved ahead with the
+sibling sim-fleefloor-a merge (proof re-green 32/32 again;
+evidence header hashes updated to final post-rebase values
 in a follow-up commit); merged to local master via --ff-only;
 worktree left clean (committed work only). No push, no version
 bump, no live verification — the ship loop owns those. "Merged
