@@ -177,12 +177,17 @@ re-analysis changes canon. No game code touched — instruments + evidence only.
   `git ls-tree HEAD -r -- <paths> | git update-index --add --index-info` and
   verified `git status --short` empty + `git diff HEAD` empty. Expect it on
   the evidence commit too.
-- `node scripts/check.js --quick`: started 23:48 UTC, still running through the
-  green list at evidence time (~23:59 UTC, load avg ~7 — the box is heavily
-  loaded and the suite runs much slower than its usual seconds); no failure
-  observed in any test that completed, but no final green result in hand at
-  commit time. This arm touches no game code (new proof script + evidence +
-  re-analysis JSON only) and its three direct proofs are green
-  (selftest 30/30, instrument proof 38/38, re-run proof 23/23); the
-  coordinator can re-run the quick check at merge time.
+- `node scripts/check.js --quick`: **337 passed, 7 failed in 1066s** (finished
+  ~00:06 UTC 2026-11-28, after the evidence was first committed — this line
+  amended to record the result). The visible failures are 120s timeouts in
+  godpath deed-attainment / observer-neutrality tests
+  (test-one-person-army-deed-attainment.js, test-trust-observer-neutrality.js,
+  test-living-garden-deed-attainment.js — the three slowest, each exactly
+  120s), i.e. slowness under the heavy load at run time, not assertion
+  failures; the full failure list was not captured (output was tailed). This
+  arm touches no game code (new proof script + evidence + re-analysis JSON
+  only; the new proof script is not on the green list), so these timeouts
+  are unrelated to this arm's change — but the quick check did NOT come back
+  fully green, and the coordinator should confirm the 7 failures are the
+  known load-timeout shape at merge time.
 - No jest run on this arm (no game code touched; analyzer + proof are plain node scripts).
